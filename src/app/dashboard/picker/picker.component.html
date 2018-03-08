@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row  align-items-center justify-content-between">
+      <div class="col-11 col-sm-12 page-title">
+        <h3>Pickers</h3>
+        <p>Creatively crafted Dashboard for your needs</p>
+      </div>
+      <div class="col text-right ">
+        <div class="btn-group pull-right">
+          <button class="btn btn-success btn-round " data-toggle="modal" data-target="#themepicker" ><span class="text">Customize</span> <i class="fa fa-cogs ml-2"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-16 col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title">ngx-color-picker </h6>
+          </div>
+          <div class="card-body">            
+        	<input class="form-control " [(colorPicker)]="color" [style.background]="color">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-16 col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title">ngx-bootstrap Date pickers</h6>
+          </div>
+          <div class="card-body">
+          <input type="text"
+           class="form-control"
+           [minDate]="minDate"
+           [maxDate]="maxDate"           
+           bsDatepicker [(bsValue)]="bsValue">
+            <br>
+            <select
+			      class="custom-select form-control "
+			      [(ngModel)]="colorTheme" (ngModelChange)="applyTheme(dp);">
+			      <option value="theme-default">default</option>
+			      <option value="theme-green">green</option>
+			      <option value="theme-blue">blue</option>
+			      <option value="theme-dark-blue">dark-blue</option>
+			      <option value="theme-red">red</option>
+			      <option value="theme-orange">orange</option>
+			    </select>
+            <br>
+            <div class="input-group date">
+  				    <input type="text" class="form-control" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
+			        <div class="input-group-btn">
+			          <button class="btn btn-success" (click)="dp.show() ">Open</button>
+			        </div>        
+		     </div>
+            <br>
+           
+            <div class="input-daterange" id="range">
+            	<input class="form-control" bsDaterangepicker [(ngModel)]="bsRangeValue">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+</div>
+</div>

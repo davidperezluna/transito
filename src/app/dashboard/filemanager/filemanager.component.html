@@ -1,0 +1,193 @@
+<div class="container">
+    <div class="row  align-items-center justify-content-between">
+      <div class="col-11 col-sm-12 page-title">
+        <h3>File Manager</h3>
+        <p>Creatively crafted Dashboard for your needs</p>
+      </div>
+      <div class="col text-right ">
+        <div class="btn-group pull-right">
+          <button class="btn btn-success btn-round " data-toggle="modal" data-target="#themepicker" ><span class="text">Customize</span> <i class="fa fa-cogs ml-2"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-16">
+        <div class="card full-screen-container filemenu_wrapper">
+          <div class="card-header">
+                <ul class="nav nav-pills card-header-pills pull-left">
+                    <li class="nav-item hidden-lg-up">
+                    <button class="btn btn-link icon-header m-0 mr-2 pull-right filemenu_btn"><span class="fa fa-bars"></span></button>
+                    </li>
+                </ul>
+                <h6 class="card-title pull-left mr-2">File Manager</h6>
+                <form class="form-inline ml-2  pull-left  hidden-md-down">
+                    <input class="form-control " type="text" placeholder="Search item...">
+                    <button class="btn btn-link icon-header " type="submit"><span class="fa fa-search"></span></button>
+                </form>
+                <ul class="nav nav-pills card-header-pills pull-right">
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-link btn-round" id="randomizeData"><i class="fa fa-refresh"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-link btn-round fullscreen-btn"><i class="fa fa-arrows-alt"></i></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-link btn-round" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-chevron-down"></i></button>
+                        <div class="dropdown-menu"> 
+                            <a class="dropdown-item" href="#">Download</a> 
+                            <a class="dropdown-item" href="#">Share</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Remove</a> 
+                        </div>
+                  </li>
+                </ul>
+          </div>
+          <div class="card-body p-0">
+              <div class="row m-0">
+                    <div class="col-md-6 col-lg-4 br-1 p-2 filemenu ">
+                        <div id="html1">
+                          <ul  data-jstree='{ "opened" : true }'>
+                            <li data-jstree='{"icon":"fa fa-desktop text-white"}' >My Computer
+                              <ul>
+                                <li>Drive C: </li>
+                                <li>Drive D: </li>
+                                <li>Drive E: </li>
+                                <li>Drive F: </li>
+                              </ul>
+                            </li> <li data-jstree='{"icon":"fa fa-star text-warning"}' >My Favorite
+                              <ul>
+                                <li>Child node 1</li>
+                                <li><a href="#">Child node 2</a></li>
+                              </ul>
+                            </li>
+                            <li data-jstree='{"icon":"fa fa-leaf text-success"}'>Root node 1
+                              <ul>
+                                <li>Child node 1
+                                    <ul>
+                                        <li data-jstree='{ "selected" : true }'>Child node 1.1</li>
+                                        <li>Child node 1.2</li>
+                                        <li>Child node 1.3</li>
+                                        <li>Child node 1.4</li>
+                                        <li>Child node 1.5</li>
+                                        <li><a href="#">Child node 1.6</a></li>
+                                      </ul>  
+                                </li>
+                                <li>Child node 2</li>
+                                <li>Child node 3</li>
+                                <li>Child node 4</li>
+                                <li>Child node 5</li>
+                                <li><a href="#">Child node 6</a></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                  <div class="col-md-16 col-lg-12  p-2">
+                        <div class="list-unstyled member-list row">
+                          <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column bg-danger text-white "> <span class="message_userpic"><i class="fa fa-file-pdf-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.pdf</h6>
+                                25.5mb | <button class="btn btn-link text-white btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column bg-success text-white"> <span class="message_userpic"><i class="fa fa-file-excel-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.xls</h6>
+                                25.5mb | <button class="btn btn-link text-white btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column text-white bg-primary"> <span class="message_userpic "><i class="fa fa-file-word-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.doc</h6>
+                                25.5mb | <button class="btn btn-link text-white btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column bg-warning text-white"> <span class="message_userpic"><i class="fa fa-file-powerpoint-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.pptx</h6>
+                                25.5mb | <button class="btn btn-link text-white btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column  "> <span class="message_userpic text-danger"><i class="fa fa-file-pdf-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.pdf</h6>
+                                25.5mb | <button class="btn btn-link btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column "> <span class="message_userpic text-success"><i class="fa fa-file-excel-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.xls</h6>
+                                25.5mb | <button class="btn btn-link btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column"> <span class="message_userpic text-info "><i class="fa fa-file-word-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.doc</h6>
+                                25.5mb | <button class="btn btn-link btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column"> <span class="message_userpic  text-warning"><i class="fa fa-file-powerpoint-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.pptx</h6>
+                                25.5mb | <button class="btn btn-link btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                          </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column "> <span class="message_userpic"><i class="fa fa-file-code-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.cs</h6>
+                                25.5mb | <button class="btn btn-link btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                          </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column "> <span class="message_userpic"><i class="fa fa-file-video-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.mp4</h6>
+                                25.5mb | <button class="btn btn-link btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                          </div>
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column "> <span class="message_userpic"><i class="fa fa-file-audio-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.avi</h6>
+                                25.5mb | <button class="btn btn-link btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        <div class="col-lg-4 col-sm-8 col-xs-16 ">
+                            <div class="media flex-column "> <span class="message_userpic"><i class="fa fa-file-image-o"></i></span>
+                              <div class="media-body">
+                                <h6 class="mt-0 mb-1">My_Document_2.png</h6>
+                                25.5mb | <button class="btn btn-link btn-sm"><i class="fa fa-download m-0"></i> Save</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>                        
+                  </div>
+              </div>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>

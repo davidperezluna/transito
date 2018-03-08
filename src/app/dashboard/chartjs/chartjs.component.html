@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row  align-items-center justify-content-between">
+      <div class="col-11 col-sm-12 page-title">
+        <h3>Chart js Charts</h3>
+        <p>Creatively crafted Dashboard for your needs</p>
+      </div>
+      <div class="col text-right ">
+        <div class="btn-group pull-right">
+          <button class="btn btn-success btn-round " data-toggle="modal" data-target="#themepicker" ><span class="text">Customize</span> <i class="fa fa-cogs ml-2"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title  pull-left">Production <small>Chart js Chart </small></h5>
+          </div>
+          <div class="card-body">
+            <canvas baseChart height="125" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"  [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title  pull-left">Bar <small>Chart js Chart </small></h5>
+          </div>
+          <div class="card-body">
+            <div style="display: block">
+    		<canvas baseChart height="125" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+    		</canvas></div>
+          </div>
+          <div class="card-footer"> </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title  pull-left">Production <small>Chart js Chart </small></h5>
+          </div>
+          <div class="card-body">
+            <div style="display: block">
+  				<canvas baseChart [datasets]="radarChartData" [labels]="radarChartLabels" [options]="radarChartOptions"  [chartType]="radarChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"> </canvas></div>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title  pull-left">Bar <small>Chart js Chart </small></h5>
+          </div>
+          <div class="card-body">
+            <div style="display: block">
+  				<canvas baseChart  [data]="polarAreaChartData"  [labels]="polarAreaChartLabels" [options]="polarAreaChartOptions"   [legend]="polarAreaLegend" [chartType]="polarAreaChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+  				</canvas></div>
+          </div>
+          <div class="card-footer"> </div>
+        </div>
+      </div>
+    </div>
+  </div>
