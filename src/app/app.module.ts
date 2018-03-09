@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+
+//empieza la carga de modulos de front end 
+import { ParametrizacionModule } from './frontend/parametrizacion/parametrizacion.module';
+
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -12,7 +16,7 @@ import { Comingsoon1Module } from './comingsoon1/comingsoon1.module';
 import { Comingsoon2Module } from './comingsoon2/comingsoon2.module';
 import { Comingsoon3Module } from './comingsoon3/comingsoon3.module';
 
-import { LoginModule } from './login/login.module';
+import { LoginModule } from './frontend/login/login.module';
 import { Login2Module } from './login2/login2.module';
 import { Login3Module } from './login3/login3.module';
 import { Login4Module } from './login4/login4.module';
@@ -84,7 +88,9 @@ import { Lock6Module } from './lock6/lock6.module';
     Lock3Module,
     Lock4Module,
     Lock5Module,
-    Lock6Module
+    Lock6Module,
+    // empieza la carga de los modulos del front end
+    ParametrizacionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

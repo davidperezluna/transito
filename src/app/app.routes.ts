@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 
-import { LoginRoutes } from './login/login.routes';
+// empieza la carga del front end
+import { ParametrizacionRoutes } from './frontend/parametrizacion/parametrizacion.routes';
+
+import { LoginRoutes } from './frontend/login/login.routes';
 import { Login2Routes } from './login2/login2.routes';
 import { Login3Routes } from './login3/login3.routes';
 import { Login4Routes } from './login4/login4.routes';
@@ -33,7 +36,7 @@ import { Lock4Routes } from './lock4/lock4.routes';
 import { Lock5Routes } from './lock5/lock5.routes';
 import { Lock6Routes } from './lock6/lock6.routes';
 
-import { LoginComponent } from './login/index';
+import { LoginComponent } from './frontend/login/index';
 
 export const routes: Routes = [
   ...LoginRoutes,
@@ -42,7 +45,7 @@ export const routes: Routes = [
   ...Login4Routes,
   ...Login5Routes,
   ...Login6Routes,
-  ...DashboardRoutes,
+  ...DashboardRoutes, 
   ...Comingsoon1Routes,
   ...Comingsoon2Routes,
   ...Comingsoon3Routes,
@@ -64,8 +67,11 @@ export const routes: Routes = [
   ...Lock4Routes,
   ...Lock5Routes,
   ...Lock6Routes,
-  {
-    path: '**',
-    component: LoginComponent
-   }
+  //empieza la carga del front end 
+  ...ParametrizacionRoutes,
+
+  // {
+  //   path: '**',
+  //   component: LoginComponent
+  //  }
 ];
