@@ -19,6 +19,7 @@
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'dashboard')}"> <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('dashboard')">Parametrizacion<i class="fa fa-angle-down "></i></a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item"><a class="nav-link" routerLink="vehiculo"  [ngClass]="{'active' : ( addActive === 'vehiculo')}" (click)="addActiveMenu('vehiculo')"><i class="fa fa-dashboard"></i> vehiculo</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="marca"  [ngClass]="{'active' : ( addActive === 'marca')}" (click)="addActiveMenu('marca')"><i class="fa fa-dashboard"></i> marca</a></li>
       </ul>
       <!-- /.nav-second-level --> 
     </li>

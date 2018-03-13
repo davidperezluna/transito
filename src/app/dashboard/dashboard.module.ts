@@ -5,6 +5,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { HomeModule } from './home/home.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
+import { MarcaModule } from './marca/marca.module';
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -20,9 +21,11 @@ import {RightsidebarComponent} from '../shared/index';
       Ng2BootstrapModule.forRoot(),
       HomeModule,
       VehiculoModule,
+      MarcaModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
-    exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent]
+    exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
+    
 })
 
 export class DashboardModule { }

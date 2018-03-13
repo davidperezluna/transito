@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-sm-16">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">formulario para el ingreso de una nueva marca</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <div class="form-group row">
+                    <div class="col-lg-8 col-md-8">
+                        <label>Nombre*</label>
+                        <input class="form-control" [(ngModel)]="marca.nombre" name="nombre" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                        <label>CodigoMt*</label>
+                        <input class="form-control" [(ngModel)]="marca.codigoMt" name='codigoMt' placeholder="" type="text">
+                    </div>
+                    </div>
+                </div>    
+        </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>
