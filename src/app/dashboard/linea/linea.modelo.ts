@@ -3,6 +3,6 @@ export class Linea{
 		public id:number,
 		public nombre:string,
 		public codigoMt:number,
-		public marcaId:any,
+		public marcaId:number,
 	){}
 }

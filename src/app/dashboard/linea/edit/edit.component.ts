@@ -14,8 +14,9 @@ export class EditComponent implements OnInit{
 @Input() linea:any = null;
 public errorMessage;
 public respuesta;
+public formReady = false;
 public marcas: Array<any>
-public lineaR: Linea;
+public marcaSelected: Array<any>; // ng-select [(ngModel)]
 
 constructor(
   private _lineaService: LineaService,
@@ -24,11 +25,16 @@ constructor(
   ){}
 
   ngOnInit(){
-    this.lineaR = new Linea(1,'hola',5,[1]);
-    console.log(this.lineaR);
+    
+
+    console.log(this.marcaSelected);
     this._marcaService.getMarcaSelect().subscribe(
         response => {
           this.marcas = response;
+          setTimeout(() => {
+            this.marcaSelected = [this.linea.marca.id];
+            this.formReady = true;
+          },10);
         }, 
         error => {
           this.errorMessage = <any>error;
@@ -39,6 +45,7 @@ constructor(
           }
         }
       );
+    
   }
 
   onCancelar(){
@@ -46,7 +53,7 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-
+    this.linea.marcaId = this.marcaSelected;
 		this._lineaService.editLinea(this.linea,token).subscribe(
 			response => {
         this.respuesta = response;

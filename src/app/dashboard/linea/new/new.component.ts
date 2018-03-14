@@ -2,6 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {Linea} from '../linea.modelo';
 import {LineaService} from '../../../services/linea.service';
 import {LoginService} from '../../../services/login.service';
+import {MarcaService} from '../../../services/marca.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -13,14 +14,30 @@ export class NewComponent implements OnInit {
 public linea: Linea;
 public errorMessage;
 public respuesta;
+public marcas:any;
 
 constructor(
   private _LineaService: LineaService,
   private _loginService: LoginService,
+  private _marcaService: MarcaService,
   ){}
 
   ngOnInit() {
     this.linea = new Linea(null,null,null,null);
+
+    this._marcaService.getMarcaSelect().subscribe(
+        response => {
+          this.marcas = response;
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
   }
   onCancelar(){
     this.ready.emit(true);

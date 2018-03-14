@@ -10,18 +10,18 @@
                         <div class="form-group row">
                             <div class="col-lg-4 col-md-4">
                                 <label>Nombre*</label>
-                                <input class="form-control" [(ngModel)]="lineaR.nombre" name="nombre" placeholder="" type="text" required>
+                                <input class="form-control" [(ngModel)]="linea.nombre" name="nombre" placeholder="" type="text" required>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <label>CodigoMt*</label>
-                                <input class="form-control" [(ngModel)]="lineaR.codigoMt" name='codigoMt' placeholder="" type="text" required>
+                                <input class="form-control" [(ngModel)]="linea.codigoMt" name='codigoMt' placeholder="" type="text" required>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <label>Marca*</label>
                                 <ng-select
                                     [multiple]="false"
                                     [options]="marcas"
-                                    [(ngModel)]="lineaR.marcaId"
+                                    [(ngModel)]="marcaSelected"
                                     required
                                     name="marcaId">
                                 </ng-select>
