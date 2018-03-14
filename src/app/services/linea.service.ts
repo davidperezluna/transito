@@ -4,26 +4,28 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class MarcaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/marca";
+export class LineaService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/linea";
 	public identity;
 	public token;
 
-	constructor(private _http: Http){} 
+	constructor(private _http: Http){}
 
-	getMarca(){
+	getLinea(){
+		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(marca,token){
-		let json = JSON.stringify(marca);
+	register(linea,token){
+		
+		let json = JSON.stringify(linea);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteMarca(token,id){
+	deleteLinea(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -31,7 +33,7 @@ export class MarcaService {
 							  .map(res => res.json());
 	}
 
-	showMarca(token,id){
+	showLinea(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -40,9 +42,9 @@ export class MarcaService {
 
 	}
 
-	editMarca(marca,token){
+	editLinea(linea,token){
 
-		let json = JSON.stringify(marca);
+		let json = JSON.stringify(linea);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -50,7 +52,15 @@ export class MarcaService {
 
 	}
 
-	getMarcaSelect(){
-		return this._http.get(this.url+"/select").map(res => res.json());
+	getLineasMar(marca,token){
+
+		let json = JSON.stringify(marca);
+		let params = "json="+json+"&authorization="+token;
+		console.log(params);
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 			return this._http.post(this.url+"/lin/mar", params, {headers: headers})
+							  .map(res => res.json());
+
 	}
+	
 }

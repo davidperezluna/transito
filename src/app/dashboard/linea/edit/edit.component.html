@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-sm-16">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">formulario para el editar una linea</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <form  #lineaForm="ngForm">
+                        <div class="form-group row">
+                            <div class="col-lg-4 col-md-4">
+                                <label>Nombre*</label>
+                                <input class="form-control" [(ngModel)]="lineaR.nombre" name="nombre" placeholder="" type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>CodigoMt*</label>
+                                <input class="form-control" [(ngModel)]="lineaR.codigoMt" name='codigoMt' placeholder="" type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Marca*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="marcas"
+                                    [(ngModel)]="lineaR.marcaId"
+                                    required
+                                    name="marcaId">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </form>    
+                </div>   
+                <!-- <ng-select
+                    [multiple]="false"
+                    [options]="tipoIdentificacion"
+                    [(ngModel)]="linea.codigoMt"
+                    required
+                    name="codigoMt">
+                </ng-select>  -->
+        </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" [disabled]="lineaForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>

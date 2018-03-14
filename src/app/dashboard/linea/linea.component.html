@@ -21,19 +21,21 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Nombre</th>
-                  <th>Código Mt</th>
-                  <th>Acciones</th>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>marca</th>
+                    <th>Código Mt</th>
+                    <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let marca of marcas; let i = index">
-                  <td >{{marca.id}}</td>
-                  <td >{{marca.nombre}}</td>
-                  <td >{{marca.codigoMt}}</td>
-                  <td><button (click)="editMarca(marca)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteMarca(marca.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
+                <tr class="odd" *ngFor="let linea of lineas; let i = index">
+                  <td >{{linea.id}}</td>
+                  <td >{{linea.nombre}}</td>
+                  <td >{{linea.marca.nombre}}</td>
+                  <td >{{linea.codigoMt}}</td>
+                  <td><button (click)="editLinea(linea)" class="btn btn-outline-info" type="button">Editar</button> 
+                    <button (click)="deleteLinea(linea.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>
@@ -42,6 +44,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [marca]="marca" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [linea]="linea" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
