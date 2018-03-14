@@ -34,7 +34,7 @@ constructor(
           setTimeout(() => {
             this.marcaSelected = [this.linea.marca.id];
             this.formReady = true;
-          },10);
+          });
         }, 
         error => {
           this.errorMessage = <any>error;
