@@ -14,9 +14,10 @@ import {FooterComponent} from '../shared/index';
 import {RightsidebarComponent} from '../shared/index';
 
 
+
 @NgModule({
     imports: [
-        CommonModule,
+      CommonModule,
       RouterModule,
       Ng2BootstrapModule.forRoot(),
       HomeModule,

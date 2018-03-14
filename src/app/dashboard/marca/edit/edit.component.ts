@@ -13,11 +13,19 @@ export class EditComponent {
 @Input() marca:any = null;
 public errorMessage;
 public respuesta;
+// public tipoIdentificacion: Array<any>
 
 constructor(
   private _MarcaService: MarcaService,
   private _loginService: LoginService,
-  ){}
+  ){
+  //   this.tipoIdentificacion = [
+  //     {value: 'CC', label: 'Cédula de ciudadanía'},
+  //     {value: 'TE', label: 'Tarjeta de extranjería'},
+  //     {value: 'CE', label: 'Cédula de extranjería'},
+  //     {value: 'P', label: 'Pasaporte'},
+  // ];
+  }
 
   onCancelar(){
     this.ready.emit(true);

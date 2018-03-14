@@ -16,7 +16,14 @@
                         <input class="form-control" [(ngModel)]="marca.codigoMt" name='codigoMt' placeholder="" type="text">
                     </div>
                     </div>
-                </div>    
+                </div>   
+                <!-- <ng-select
+                    [multiple]="false"
+                    [options]="tipoIdentificacion"
+                    [(ngModel)]="marca.codigoMt"
+                    required
+                    name="codigoMt">
+                </ng-select>  -->
         </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
