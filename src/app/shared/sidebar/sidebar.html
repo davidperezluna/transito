@@ -18,10 +18,11 @@
     <li class="title-nav " ><a class="active nav-link" routerLink="home" [ngClass]="{'active' : ( addActive === 'home')}" (click)="addActiveMenu('home')">HOME</a></li>
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'dashboard')}"> <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('dashboard')">Parametrizacion<i class="fa fa-angle-down "></i></a>
       <ul class="nav flex-column nav-second-level ">
-        <li class="nav-item"><a class="nav-link" routerLink="vehiculo"  [ngClass]="{'active' : ( addActive === 'vehiculo')}" (click)="addActiveMenu('vehiculo')"><i class="fa fa-dashboard"></i> vehiculo</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="marca"  [ngClass]="{'active' : ( addActive === 'marca')}" (click)="addActiveMenu('marca')"><i class="fa fa-dashboard"></i> marca</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="linea"  [ngClass]="{'active' : ( addActive === 'linea')}" (click)="addActiveMenu('linea')"><i class="fa fa-dashboard"></i> linea</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="banco"  [ngClass]="{'active' : ( addActive === 'banco')}" (click)="addActiveMenu('banco')"><i class="fa fa-dashboard"></i> banco</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="vehiculo"  [ngClass]="{'active' : ( addActive === 'vehiculo')}" (click)="addActiveMenu('vehiculo')"><i class="fa fa-angle-right"></i> vehiculo</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="marca"  [ngClass]="{'active' : ( addActive === 'marca')}" (click)="addActiveMenu('marca')"><i class="fa fa-angle-right"></i> Marca</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="linea"  [ngClass]="{'active' : ( addActive === 'linea')}" (click)="addActiveMenu('linea')"><i class="fa fa-angle-right"></i> Linea</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="banco"  [ngClass]="{'active' : ( addActive === 'banco')}" (click)="addActiveMenu('banco')"><i class="fa fa-angle-right"></i> Banco</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="clase"  [ngClass]="{'active' : ( addActive === 'clase')}" (click)="addActiveMenu('clase')"><i class="fa fa-angle-right"></i> Clase</a></li>
       </ul>
       <!-- /.nav-second-level --> 
     </li>

@@ -5,6 +5,7 @@ import { VehiculoRoutes } from './vehiculo/vehiculo.routes';
 import { MarcaRoutes } from './marca/marca.routes';
 import { LineaRoutes } from './linea/linea.routes';
 import { BancoRoutes } from './banco/banco.routes';
+import { ClaseRoutes } from './clase/clase.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -17,6 +18,7 @@ export const DashboardRoutes: Route[] = [
         ...MarcaRoutes,
         ...LineaRoutes,
         ...BancoRoutes,
+        ...ClaseRoutes,
         
       ]
     }
