@@ -7,6 +7,7 @@ import { HomeModule } from './home/home.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
 import { MarcaModule } from './marca/marca.module';
 import { LineaModule } from './linea/linea.module';
+import { BancoModule } from './banco/banco.module';
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -25,6 +26,7 @@ import {RightsidebarComponent} from '../shared/index';
       VehiculoModule,
       MarcaModule,
       LineaModule,
+      BancoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
