@@ -9,6 +9,7 @@ import { MarcaModule } from './marca/marca.module';
 import { LineaModule } from './linea/linea.module';
 import { BancoModule } from './banco/banco.module';
 import { ClaseModule } from './clase/clase.module';
+import { ColorModule } from './color/color.module';
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -29,6 +30,7 @@ import {RightsidebarComponent} from '../shared/index';
       LineaModule,
       BancoModule,
       ClaseModule,
+      ColorModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
