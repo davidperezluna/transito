@@ -13,6 +13,7 @@ import { ColorModule } from './color/color.module';
 import { CombustibleModule } from './combustible/combustible.module';
 import { ConsumibleModule } from './consumible/consumible.module';
 import { DepartamentoModule } from './departamento/departamento.module';
+import { ModalidadModule } from './modalidad/modalidad.module';
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -34,6 +35,7 @@ import {RightsidebarComponent} from '../shared/index';
       BancoModule,
       ClaseModule,
       ColorModule,
+      ModalidadModule,
       DepartamentoModule,
       CombustibleModule,
       ConsumibleModule,
