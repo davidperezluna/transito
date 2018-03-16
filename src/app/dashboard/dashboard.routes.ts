@@ -9,6 +9,7 @@ import { ClaseRoutes } from './clase/clase.routes';
 import { ColorRoutes } from './color/color.routes';
 import { DepartamentoRoutes } from './departamento/departamento.routes';
 import { CombustibleRoutes } from './combustible/combustible.routes';
+import { ModalidadRoutes } from './modalidad/modalidad.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -25,6 +26,7 @@ export const DashboardRoutes: Route[] = [
         ...ColorRoutes,
         ...DepartamentoRoutes,
         ...CombustibleRoutes,
+        ...ModalidadRoutes,
         
       ]
     }
