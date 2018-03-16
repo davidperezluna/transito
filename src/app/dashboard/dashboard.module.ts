@@ -10,6 +10,7 @@ import { LineaModule } from './linea/linea.module';
 import { BancoModule } from './banco/banco.module';
 import { ClaseModule } from './clase/clase.module';
 import { ColorModule } from './color/color.module';
+import { DepartamentoModule } from './departamento/departamento.module';
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -31,6 +32,7 @@ import {RightsidebarComponent} from '../shared/index';
       BancoModule,
       ClaseModule,
       ColorModule,
+      DepartamentoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

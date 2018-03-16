@@ -1,0 +1,47 @@
+<div class="container" >
+  <div  class="row align-items-center justify-content-between">
+    <div class="col-11 col-sm-12 page-title">
+      <h3>Departamento</h3>
+      <p>aquí podrás visualizar los departamentos inscritos e inscribir nuevos</p>
+    </div>
+    <div class="col text-right ">
+      <div class="btn-group pull-right">
+        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+      </div>
+    </div>
+    
+  </div>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-sm-16">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Departamentos <small>Registrados</small></h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Codigo Dian</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let departamento of departamentos; let i = index">
+                  <td >{{departamento.id}}</td>
+                  <td >{{departamento.nombre}}</td>
+                  <td >{{departamento.codigoDian}}</td>
+                  <td><button (click)="editDepartamento(departamento)" class="btn btn-outline-info" type="button">Editar</button> 
+                    <button (click)="deleteDepartamento(departamento.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [departamento]="departamento" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>
