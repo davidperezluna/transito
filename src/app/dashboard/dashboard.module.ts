@@ -11,6 +11,7 @@ import { BancoModule } from './banco/banco.module';
 import { ClaseModule } from './clase/clase.module';
 import { ColorModule } from './color/color.module';
 import { CombustibleModule } from './combustible/combustible.module';
+import { ConsumibleModule } from './consumible/consumible.module';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { DashboardComponent } from './dashboard.component';
 
@@ -35,6 +36,7 @@ import {RightsidebarComponent} from '../shared/index';
       ColorModule,
       DepartamentoModule,
       CombustibleModule,
+      ConsumibleModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

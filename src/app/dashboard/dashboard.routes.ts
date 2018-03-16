@@ -9,6 +9,7 @@ import { ClaseRoutes } from './clase/clase.routes';
 import { ColorRoutes } from './color/color.routes';
 import { DepartamentoRoutes } from './departamento/departamento.routes';
 import { CombustibleRoutes } from './combustible/combustible.routes';
+import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -18,13 +19,14 @@ export const DashboardRoutes: Route[] = [
       children: [
         ...HomeRoutes,
         ...VehiculoRoutes,
-        ...MarcaRoutes,
+        ...MarcaRoutes, 
         ...LineaRoutes,
         ...BancoRoutes,
         ...ClaseRoutes,
         ...ColorRoutes,
         ...DepartamentoRoutes,
         ...CombustibleRoutes,
+        ...ConsumibleRoutes,
         
       ]
     }
