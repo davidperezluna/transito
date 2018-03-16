@@ -16,4 +16,4 @@ import { EditComponent } from './edit/edit.component';
     providers:[CombustibleService]
 })
 
-export class ColorModule { }
+export class CombustibleModule { }
