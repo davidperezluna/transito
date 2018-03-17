@@ -1,34 +1,40 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Linea} from '../linea.modelo';
-import {LineaService} from '../../../services/linea.service';
+import {Municipio} from '../municipio.modelo';
+import {MunicipioService} from '../../../services/municipio.service';
+import {DepartamentoService} from '../../../services/departamento.service';
 import {LoginService} from '../../../services/login.service';
-import {MarcaService} from '../../../services/marca.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-edit',
+  templateUrl: './edit.component.html'
 })
-export class NewComponent implements OnInit {
+export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-public linea: Linea;
+@Input() municipio:any = null;
 public errorMessage;
 public respuesta;
-public marcas:any;
-public marcaSelected:any;
+public formReady = false;
+public departamentos: Array<any>
+public departamentoSelected: Array<any>; // ng-select [(ngModel)]
 
 constructor(
-  private _LineaService: LineaService,
+  private _municipioService: MunicipioService,
   private _loginService: LoginService,
-  private _marcaService: MarcaService,
+  private _departamentoService: DepartamentoService,
   ){}
 
-  ngOnInit() {
-    this.linea = new Linea(null,null,null,null);
+  ngOnInit(){
+    
 
-    this._marcaService.getMarcaSelect().subscribe(
+    console.log(this.departamentoSelected);
+    this._departamentoService.getDepartamentoSelect().subscribe(
         response => {
-          this.marcas = response;
+          this.departamentos = response;
+          setTimeout(() => {
+            this.departamentoSelected = [this.municipio.departamento.id];
+            this.formReady = true;
+          });
         }, 
         error => {
           this.errorMessage = <any>error;
@@ -39,15 +45,16 @@ constructor(
           }
         }
       );
+    
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.linea.marcaId = this.marcaSelected;
-    console.log(this.linea);
-		this._LineaService.register(this.linea,token).subscribe(
+    this.municipio.departamentoId = this.departamentoSelected;
+		this._municipioService.editMunicipio(this.municipio,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -55,15 +62,8 @@ constructor(
           this.ready.emit(true);
           swal({
             title: 'Echo!',
-            text: 'El registro se ha registrado con exito',
+            text: 'El registro se ha modificado con exito',
             type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El codigo '+ this.linea.codigoMt +' ya se encuentra registrado',
-            type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }

@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class DepartamentoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/departamento";
+export class MunicipioService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/municipio";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getDepartamento(){
+	getMunicipio(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(departamento,token){
+	register(municipio,token){
 		
-		let json = JSON.stringify(departamento);
+		let json = JSON.stringify(municipio);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteDepartamento(token,id){
+	deleteMunicipio(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class DepartamentoService {
 							  .map(res => res.json());
 	}
 
-	showDepartamento(token,id){
+	showMunicipio(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,19 +42,26 @@ export class DepartamentoService {
 
 	}
 
-	editDepartamento(departamento,token){
+	editMunicipio(municipio,token){
 
-		let json = JSON.stringify(departamento);
+		let json = JSON.stringify(municipio);
 		let params = "json="+json+"&authorization="+token;
+		console.log(params);
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
 
 	}
 
-	getDepartamentoSelect(){
-		
-		return this._http.get(this.url+"/select").map(res => res.json());
+	getMunicipiosDep(departamento,token){
+
+		let json = JSON.stringify(departamento);
+		let params = "json="+json+"&authorization="+token;
+		console.log(params);
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 			return this._http.post(this.url+"/mun/dep", params, {headers: headers})
+							  .map(res => res.json());
+
 	}
 	
 }

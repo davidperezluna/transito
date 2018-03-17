@@ -1,8 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Linea} from '../linea.modelo';
-import {LineaService} from '../../../services/linea.service';
+import {Municipio} from '../municipio.modelo';
+import {MunicipioService} from '../../../services/municipio.service';
 import {LoginService} from '../../../services/login.service';
-import {MarcaService} from '../../../services/marca.service';
+import {DepartamentoService} from '../../../services/departamento.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -11,24 +11,24 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public linea: Linea;
+public municipio: Municipio;
 public errorMessage;
 public respuesta;
-public marcas:any;
-public marcaSelected:any;
+public departamentos:any;
+public departamentoSelected:any;
 
 constructor(
-  private _LineaService: LineaService,
+  private _MunicipioService: MunicipioService,
   private _loginService: LoginService,
-  private _marcaService: MarcaService,
+  private _marcaService: DepartamentoService,
   ){}
 
   ngOnInit() {
-    this.linea = new Linea(null,null,null,null);
+    this.municipio = new Municipio(null,null,null,null);
 
-    this._marcaService.getMarcaSelect().subscribe(
+    this._marcaService.getDepartamentoSelect().subscribe(
         response => {
-          this.marcas = response;
+          this.departamentos = response;
         }, 
         error => {
           this.errorMessage = <any>error;
@@ -45,9 +45,10 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.linea.marcaId = this.marcaSelected;
-    console.log(this.linea);
-		this._LineaService.register(this.linea,token).subscribe(
+    this.municipio.departamentoId = this.departamentoSelected;
+    
+    console.log(this.municipio);
+		this._MunicipioService.register(this.municipio,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -62,7 +63,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El codigo '+ this.linea.codigoMt +' ya se encuentra registrado',
+            text: 'El municipio '+ this.municipio.nombre +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
