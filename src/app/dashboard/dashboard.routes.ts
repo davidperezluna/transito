@@ -12,6 +12,8 @@ import { CombustibleRoutes } from './combustible/combustible.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { ModalidadRoutes } from './modalidad/modalidad.routes';
 import { MunicipioRoutes } from './municipio/municipio.routes';
+import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
+import { ServicioRoutes } from './servicio/servicio.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -31,6 +33,8 @@ export const DashboardRoutes: Route[] = [
         ...ConsumibleRoutes,
         ...ModalidadRoutes,
         ...MunicipioRoutes,
+        ...OrganismoTransitoRoutes,
+        ...ServicioRoutes,
         
       ]
     }

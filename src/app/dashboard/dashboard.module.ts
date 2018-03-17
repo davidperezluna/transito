@@ -15,6 +15,8 @@ import { ConsumibleModule } from './consumible/consumible.module';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { ModalidadModule } from './modalidad/modalidad.module';
 import { MunicipioModule } from './municipio/municipio.module';
+import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
+import { ServicioModule } from './servicio/servicio.module';
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -41,6 +43,8 @@ import {RightsidebarComponent} from '../shared/index';
       CombustibleModule,
       ConsumibleModule,
       MunicipioModule,
+      OrganismoTransitoModule,
+      ServicioModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
