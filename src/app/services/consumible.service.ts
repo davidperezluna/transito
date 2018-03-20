@@ -51,5 +51,9 @@ export class ConsumibleService {
 							  .map(res => res.json());
 
 	}
+	getConsumibleSelect(){
+		
+		return this._http.get(this.url+"/select").map(res => res.json());
+	}
 	
 }

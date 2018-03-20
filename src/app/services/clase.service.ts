@@ -51,5 +51,10 @@ export class ClaseService {
 							  .map(res => res.json());
 
 	}
+
+	getClaseSelect(){
+		
+		return this._http.get(this.url+"/select").map(res => res.json());
+	}
 	
 }

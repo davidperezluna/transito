@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class OrganismoTransitoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/organismotransito";
+export class AlmacenService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/almacen";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getOrganismoTransito(){
+	getAlmacen(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(organismoTransito,token){
+	register(almacen,token){
 		
-		let json = JSON.stringify(organismoTransito);
+		let json = JSON.stringify(almacen);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteOrganismoTransito(token,id){
+	deleteAlmacen(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class OrganismoTransitoService {
 							  .map(res => res.json());
 	}
 
-	showOrganismoTransito(token,id){
+	showAlmacen(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,19 +42,14 @@ export class OrganismoTransitoService {
 
 	}
 
-	editOrganismoTransito(organismoTransito,token){
+	editAlmacen(almacen,token){
 
-		let json = JSON.stringify(organismoTransito);
+		let json = JSON.stringify(almacen);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
 
-	}
-
-	getOrganismoTransitoSelect(){
-		
-		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	
 }
