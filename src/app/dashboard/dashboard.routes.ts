@@ -14,6 +14,7 @@ import { ModalidadRoutes } from './modalidad/modalidad.routes';
 import { MunicipioRoutes } from './municipio/municipio.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { ServicioRoutes } from './servicio/servicio.routes';
+import { ModuloRoutes } from './modulo/modulo.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -35,6 +36,7 @@ export const DashboardRoutes: Route[] = [
         ...MunicipioRoutes,
         ...OrganismoTransitoRoutes,
         ...ServicioRoutes,
+        ...ModuloRoutes,
         
       ]
     }
