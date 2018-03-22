@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class BancoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/banco";
+export class CuentaService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/cuenta";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getBanco(){
+	getCuenta(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(banco,token){
+	register(cuenta,token){
 		
-		let json = JSON.stringify(banco);
+		let json = JSON.stringify(cuenta);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteBanco(token,id){
+	deleteCuenta(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class BancoService {
 							  .map(res => res.json());
 	}
 
-	showBanco(token,id){
+	showCuenta(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,18 +42,14 @@ export class BancoService {
 
 	}
 
-	editBanco(banco,token){
+	editCuenta(cuenta,token){
 
-		let json = JSON.stringify(banco);
+		let json = JSON.stringify(cuenta);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
 
-	}
-
-	getBancoSelect(){
-		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	
 }

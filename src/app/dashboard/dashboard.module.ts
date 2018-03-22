@@ -19,7 +19,11 @@ import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.m
 import { ServicioModule } from './servicio/servicio.module';
 import { ModuloModule } from './modulo/modulo.module';
 import { AlmacenModule } from './almacen/almacen.module';
+
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
+
+import { CuentaModule } from './cuenta/cuenta.module';
+
 import { DashboardComponent } from './dashboard.component';
 
 import {TopNavComponent} from '../shared/index';
@@ -51,6 +55,7 @@ import {RightsidebarComponent} from '../shared/index';
       ModuloModule,
       AlmacenModule,
       CiudadanoModule,
+      CuentaModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

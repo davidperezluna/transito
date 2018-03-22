@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-sm-16">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">formulario para el ingreso de una nueva cuenta</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <div class="form-group row">
+                    <div class="col-lg-4 col-md-4">
+                        <label>Nombre*</label>
+                        <input class="form-control" [(ngModel)]="cuenta.nombre" name="nombre" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <label>Codigo Dian*</label>
+                        <input class="form-control" [(ngModel)]="cuenta.codigoDian" name='codigoDian' placeholder="" type="text">
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                                <label>Banco*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="bacos"
+                                    [(ngModel)]="bancoSelected"
+                                    required
+                                    name="bancoId">
+                                </ng-select>
+                            </div>
+                    </div>
+                </div>    
+        </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>
