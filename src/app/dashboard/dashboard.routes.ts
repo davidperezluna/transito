@@ -16,6 +16,7 @@ import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.r
 import { ServicioRoutes } from './servicio/servicio.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
+import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -39,6 +40,7 @@ export const DashboardRoutes: Route[] = [
         ...ServicioRoutes,
         ...ModuloRoutes,
         ...AlmacenRoutes,
+        ...CiudadanoRoutes,
         
       ]
     }
