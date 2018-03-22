@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {VehiculoService} from '../../services/vehiculo.service';
 import {LoginService} from '../../services/login.service';
+import {Vehiculo} from './vehiculo.modelo';
 declare var $: any;
 
 @Component({
@@ -15,6 +16,8 @@ export class VehiculoComponent implements OnInit {
 	public formNew = false;
   public formIndex = true;
   public table:any; 
+  public formEdit= false;
+  public vehiculo: Vehiculo;
 
   constructor(
 		private _VehiculoService: VehiculoService,
@@ -26,6 +29,8 @@ export class VehiculoComponent implements OnInit {
 		this._VehiculoService.getVehiculo().subscribe(
 				response => {
           this.vehiculos = response.data;
+    console.log(this.vehiculos);
+          
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -63,11 +68,17 @@ export class VehiculoComponent implements OnInit {
   }
 
   ready(isCreado:any){
-    if(isCreado) {
-      this.formNew = false;
-      this.formIndex = true;
-      this.ngOnInit();
-    }
-}
+      if(isCreado) {
+        this.formNew = false;
+        this.formIndex = true;
+        this.ngOnInit();
+      }
+  }
+
+  editVehiculo(vehiculo:any){
+    this.vehiculo = vehiculo;
+    this.formEdit = true;
+    this.formIndex = false;
+  }
 
 }

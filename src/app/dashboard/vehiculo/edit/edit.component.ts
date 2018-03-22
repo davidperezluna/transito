@@ -13,12 +13,12 @@ import {VehiculoService} from '../../../services/vehiculo.service';
 import {OrganismoTransitoService} from '../../../services/organismoTransito.service';
 import swal from 'sweetalert2';
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-edit',
+  templateUrl: './edit.component.html'
 })
-export class NewComponent implements OnInit {
+export class EditComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public vehiculo: Vehiculo;
+@Input() vehiculo:any = null;
 public municipios:any;
 public errorMessage:any;
 public habilitar:any;
@@ -54,7 +54,6 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this._lineaService.getLineaSelect().subscribe(
       response => {
         this.lineas = response;

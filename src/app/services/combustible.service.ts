@@ -51,5 +51,10 @@ export class CombustibleService {
 							  .map(res => res.json());
 
 	}
+
+	getCombustibleSelect(){
+		
+		return this._http.get(this.url+"/select").map(res => res.json());
+	}
 	
 }

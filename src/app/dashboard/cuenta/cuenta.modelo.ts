@@ -5,4 +5,4 @@ export class Cuenta{
 		public numero:number,
 		public observacion:string
 	){}
-}
+} 

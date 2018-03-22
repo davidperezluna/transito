@@ -63,5 +63,10 @@ export class MunicipioService {
 							  .map(res => res.json());
 
 	}
+
+	getMunicipioSelect(){
+		
+		return this._http.get(this.url+"/select").map(res => res.json());
+	}
 	
 }

@@ -23,7 +23,12 @@ export class Vehiculo{
 		public vin:number,
 		public numeroPasajeros:number,
 		public pignorado:number,
-		public cancelado:number
+		public cancelado:number,
+		
+		public tipoVehiculo:string,
+		public radioAccion:string,
+		public modalidadTransporte:string,
+		public transportePasajeros:string,
 		
 	){}
 }

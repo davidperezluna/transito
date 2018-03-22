@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class LineaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/linea";
+export class CarroceriaService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/carroceria";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getLinea(){
+	getCarroceria(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(linea,token){
+	register(carroceria,token){
 		
-		let json = JSON.stringify(linea);
+		let json = JSON.stringify(carroceria);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteLinea(token,id){
+	deleteCarroceria(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class LineaService {
 							  .map(res => res.json());
 	}
 
-	showLinea(token,id){
+	showCarroceria(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,9 +42,9 @@ export class LineaService {
 
 	}
 
-	editLinea(linea,token){
+	editCarroceria(carroceria,token){
 
-		let json = JSON.stringify(linea);
+		let json = JSON.stringify(carroceria);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,19 +52,17 @@ export class LineaService {
 
 	}
 
-	getLineasMar(marca,token){
+	getCarroceriasClase(calseId,token){
 
-		let json = JSON.stringify(marca);
-		let params = "json="+json+"&authorization="+token;
-		console.log(params);
+
+		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/lin/mar", params, {headers: headers})
+ 			return this._http.post(this.url+"/clase/"+calseId, params, {headers: headers})
 							  .map(res => res.json());
 
-	}
-
-	getLineaSelect(){
-		
+    }
+    
+    getCarroceriaSelect(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	
