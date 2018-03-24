@@ -26,6 +26,20 @@ export class CuentaComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
 		this._CuentaService.getCuenta().subscribe(
 				response => {
           this.cuentas = response.data;

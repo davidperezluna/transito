@@ -15,12 +15,9 @@ import { MunicipioRoutes } from './municipio/municipio.routes';
 import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { ServicioRoutes } from './servicio/servicio.routes';
-
-import { ModuloRoutes } from './modulo/modulo.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
-
-
+import { ModuloRoutes } from './modulo/modulo.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -42,14 +39,11 @@ export const DashboardRoutes: Route[] = [
         ...MunicipioRoutes,
         ...OrganismoTransitoRoutes,
         ...ServicioRoutes,
-
+        ...CiudadanoRoutes,
+        ...CuentaRoutes,
         ...ModuloRoutes,
         ...AlmacenRoutes,
-        ...CiudadanoRoutes,
 
-        ...CuentaRoutes,
-
-        
       ]
     }
 ];

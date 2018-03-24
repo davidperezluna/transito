@@ -34,6 +34,20 @@ constructor(
   ){}
 
   ngOnInit(){
+     swal({
+      title: 'Cargando Formulario!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      timer: 2000,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
     console.log(this.ciudadano);
 
     this._municipioService.getMunicipioSelect().subscribe(

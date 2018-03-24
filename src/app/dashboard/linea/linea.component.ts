@@ -26,6 +26,20 @@ export class LineaComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
 		this._LineaService.getLinea().subscribe(
 				response => {
           this.lineas = response.data;

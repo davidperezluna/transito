@@ -26,6 +26,20 @@ export class CiudadanoComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
 		this._CiudadanoService.getCiudadano().subscribe(
 				response => {
           this.ciudadanos = response.data;
@@ -117,7 +131,6 @@ export class CiudadanoComponent implements OnInit {
 
   editCiudadano(ciudadano:any){
     this.ciudadano = ciudadano;
-    console.log(ciudadano);
     this.formEdit = true;
     this.formIndex = false;
   }

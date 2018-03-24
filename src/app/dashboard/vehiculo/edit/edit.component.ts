@@ -13,12 +13,12 @@ import {VehiculoService} from '../../../services/vehiculo.service';
 import {OrganismoTransitoService} from '../../../services/organismoTransito.service';
 import swal from 'sweetalert2';
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-edit',
+  templateUrl: './edit.component.html'
 })
-export class NewComponent implements OnInit {
+export class EditComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public vehiculo: Vehiculo;
+@Input() vehiculo:any = null;
 public municipios:any;
 public errorMessage:any;
 public habilitar:any;
@@ -54,10 +54,27 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  
+    swal({
+      title: 'Cargando Formulario!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      timer: 3000,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
     this._lineaService.getLineaSelect().subscribe(
       response => {
         this.lineas = response;
+        setTimeout(() => {
+            this.lineaSelected = [this.vehiculo.linea.id];
+        });
       }, 
       error => { 
         this.errorMessage = <any>error;
@@ -71,6 +88,9 @@ constructor(
     this._MunicipioService.getMunicipioSelect().subscribe(
       response => {
         this.municipios = response;
+        setTimeout(() => {
+            this.municipioSelected = [this.vehiculo.municipio.id];
+        });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -84,6 +104,9 @@ constructor(
     this._OrganismoTransitoService.getOrganismoTransitoSelect().subscribe(
       response => {
         this.organismosTransito = response;
+        setTimeout(() => {
+            this.organismoTransitoSelected = [this.vehiculo.organismoTransito.id];
+        });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -97,6 +120,9 @@ constructor(
     this._ClaseService.getClaseSelect().subscribe(
       response => {
         this.clases = response;
+        setTimeout(() => {
+            this.claseSelected = [this.vehiculo.clase.id];
+        });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -110,6 +136,9 @@ constructor(
     this._CarroceriaService.getCarroceriaSelect().subscribe(
       response => {
         this.carrocerias = response;
+        setTimeout(() => {
+            this.carroceriaSelected = [this.vehiculo.carroceria.id];
+        });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -123,6 +152,9 @@ constructor(
     this._ServicioService.getServicioSelect().subscribe(
       response => {
         this.servicios = response;
+        setTimeout(() => {
+            this.servicioSelected = [this.vehiculo.servicio.id];
+        });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -136,6 +168,9 @@ constructor(
     this._ColorService.getColorSelect().subscribe(
       response => {
         this.colores = response;
+        setTimeout(() => {
+            this.colorSelected = [this.vehiculo.color.id];
+        });
       },  
       error => {
         this.errorMessage = <any>error;
@@ -149,6 +184,9 @@ constructor(
     this._CombustibleService.getCombustibleSelect().subscribe(
       response => {
         this.combustibles = response;
+        setTimeout(() => {
+            this.combustibleSelected = [this.vehiculo.combustible.id];
+        });
       },  
       error => {
         this.errorMessage = <any>error;
@@ -162,8 +200,9 @@ constructor(
   }
 
   onCancelar(){
-      this.ready.emit(true);
+    this.ready.emit(true);
   }
+
   onEnviar(){
 
     this.vehiculo.municipioId = this.municipioSelected;

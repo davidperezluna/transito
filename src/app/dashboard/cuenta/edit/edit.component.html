@@ -9,15 +9,15 @@
                     <form  #lineaForm="ngForm">
                         <div class="form-group row">
                             <div class="col-lg-4 col-md-4">
-                                <label>Nombre*</label>
-                                <input class="form-control" [(ngModel)]="cuenta.nombre" name="nombre" placeholder="" type="text" required>
+                                <label>Numero*</label>
+                                <input class="form-control" [(ngModel)]="cuenta.numero" name="numero" placeholder="" type="text" required>
                             </div>
                             <div class="col-lg-4 col-md-4">
-                                <label>Codigo Dian*</label>
-                                <input class="form-control" [(ngModel)]="cuenta.codigoDian" name='codigoDian' placeholder="" type="text">
+                                <label>Observación*</label>
+                                <input class="form-control" [(ngModel)]="cuenta.observacion" name='observacion' placeholder="" type="textArea">
                             </div>
                             <div class="col-lg-4 col-md-4">
-                                <label>Departamento*</label>
+                                <label>Banco*</label>
                                 <ng-select
                                     [multiple]="false"
                                     [options]="bancos"

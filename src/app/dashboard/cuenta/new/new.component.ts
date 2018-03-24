@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {Cuenta} from '../cuenta.modelo';
 import {CuentaService} from '../../../services/cuenta.service';
 import {LoginService} from '../../../services/login.service';
-import {DepartamentoService} from '../../../services/departamento.service';
+import {BancoService} from '../../../services/banco.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -14,21 +14,22 @@ export class NewComponent implements OnInit {
 public cuenta: Cuenta;
 public errorMessage;
 public respuesta;
-public departamentos:any;
+public bancos:any;
 public bancoSelected:any;
 
 constructor(
   private _CuentaService: CuentaService,
   private _loginService: LoginService,
-  private _marcaService: DepartamentoService,
+  private _bancoService: BancoService,
   ){}
 
   ngOnInit() {
     this.cuenta = new Cuenta(null,null,null,null);
 
-    this._marcaService.getDepartamentoSelect().subscribe(
+    this._bancoService.getBancoSelect().subscribe(
         response => {
-          this.departamentos = response;
+          this.bancos = response;
+          console.log(this.bancos);
         }, 
         error => {
           this.errorMessage = <any>error;

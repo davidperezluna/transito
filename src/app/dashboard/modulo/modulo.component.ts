@@ -25,6 +25,20 @@ export class ModuloComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
 		this._ModuloService.getModulo().subscribe(
 				response => {
           this.modulos = response.data;
