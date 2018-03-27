@@ -13,6 +13,7 @@ export class ComparendoComponent implements OnInit {
   public comparendo: Comparendo;
   public txt:any[];
   public errorMessage:any;
+  public valido= true;
 
   constructor(
 		private _ComparendoService: ComparendoService,
@@ -32,14 +33,14 @@ export class ComparendoComponent implements OnInit {
       cancelButtonText: 'SETRA DENAR'
     }).then((result) => {
       if (result.value) {
-        this.ngAbrirInput(true);
+        this.ngAbrirInput(1);
       }else if (result.dismiss === swal.DismissReason.cancel) {
-        this.ngAbrirInput(false);
+        this.ngAbrirInput(0);
       }
     })
   }
 
-  async ngAbrirInput(polca:boolean){
+  async ngAbrirInput(polca:any){
     const {value: files} = await swal({
       title: 'Seleccione el atchivo .txt',
       input: 'file',
@@ -58,8 +59,36 @@ export class ComparendoComponent implements OnInit {
         let allTextLines = txt.split(/\r\n|\n/);
         for (let i = 0; i < allTextLines.length; i++) {
           let data = allTextLines[i].split(',');
-          if (data.length < 16) {
-            swal('Formato de archivo no valido');
+          if (data.length < 17) {
+              this.valido = false;
+          }else{
+            if (data[0] != '') {
+              this.txt.push(data);
+            }
+          }
+        }
+        
+        if (this.valido) {
+          let token = this._loginService.getToken();
+          this._ComparendoService.setComparendoArchivo(this.txt,polca,token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                swal('Archivo cargado con exito')
+                console.log(response);
+              }
+            }, 
+            error => {
+              this.errorMessage = <any>error;
+      
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+        }else{
+          this.valido = true; 
+          swal('Formato de archivo no valido');
             swal({
               title: 'Error',
               text: "Formato de archivo no valido!",
@@ -73,29 +102,7 @@ export class ComparendoComponent implements OnInit {
                 this.ngOnInit();
               }
             })
-          }else{
-            if (data[0] != '') {
-              this.txt.push(data);
-            }
-          }
-        }
-        let token = this._loginService.getToken();
-        this._ComparendoService.setComparendoArchivo(this.txt,polca,token).subscribe(
-          response => {
-            if (response.status == 'success') {
-              swal('Archivo cargado con exito')
-              console.log(response);
-            }
-          }, 
-          error => {
-            this.errorMessage = <any>error;
-    
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        );
+        }    
       }
 
 
