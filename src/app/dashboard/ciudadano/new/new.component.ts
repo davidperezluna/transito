@@ -69,11 +69,32 @@ constructor(
     this.ciudadano.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.ciudadano.municipioNacimientoId = this.municipioNacimientoSelected;
     this.ciudadano.municipioResidenciaId = this.municipioResidenciaSelected;
-    
-    
-    console.log(this.ciudadano);
-		this._CiudadanoService.register(this.ciudadano,token).subscribe(
-			response => {
+
+    var html = 'Se va a registrar el usuario:<br>'+
+               'Primer Nombre: <b>'+this.ciudadano.primerNombre+'</b><br>'+
+               'Segundo Nombre: <b>'+this.ciudadano.segundoNombre+'</b><br>'+
+               'Tipo Identificacion: <b>'+this.ciudadano.tipoIdentificacionId+'</b><br>'+
+               'Identificacion: <b>'+this.ciudadano.numeroIdentificacion+'</b><br>'+
+               'Direccion: <b>'+this.ciudadano.direccion+'</b><br>'+
+               'Telefono: <b>'+this.ciudadano.telefono+'</b><br>';
+
+   swal({
+      title: 'Creacion de persona natural',
+      type: 'warning',
+      html:html,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Crear!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+      '<i class="fa fa-thumbs-down"></i> No crear',
+      cancelButtonAriaLabel: 'Thumbs down',
+    }).then((result) => {
+        if (result.value) {
+         console.log(this.ciudadano);
+    this._CiudadanoService.register(this.ciudadano,token).subscribe(
+      response => {
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
@@ -87,21 +108,30 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El ciudadano '+  +' ya se encuentra registrado',
+            text: 'El ciudadano ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
-			error => {
-					this.errorMessage = <any>error;
+      error => {
+          this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
 
-		}); 
+    }); 
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === swal.DismissReason.cancel
+        ) {
+          
+        }
+      })
+    
+    
   }
 
 }
