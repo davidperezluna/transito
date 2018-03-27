@@ -2,32 +2,67 @@
     <div class="col-sm-16">
         <div class="card">
         <div class="card-body">
-            <h5 class="m-0">formulario para el ingreso de una nueva cuenta</h5>
+            <h5 class="m-0">Seleccione un agente de transito y una sede operativa</h5>
             <hr> 
             <div class="row justify-content-center">
-                <div class="col-md-10 ">
-                    <div class="form-group row">
-                    <div class="col-lg-4 col-md-4">
-                        <label>Numero*</label>
-                        <input class="form-control" [(ngModel)]="cuenta.numero" name="numero" placeholder="" type="text" required>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <label>Observación*</label>
-                        <input class="form-control" [(ngModel)]="cuenta.observacion" name='observacion' placeholder="" type="textArea">
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                                <label>Banco*</label>
+                    <div class="col-md-10 ">
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-md-6">
+                                <label>Agente de transito*</label>
                                 <ng-select
                                     [multiple]="false"
-                                    [options]="bancos"
-                                    [(ngModel)]="bancoSelected"
+                                    [options]="agentesTransito"
+                                    [(ngModel)]="agenteTransitoSelected"
+                                    (ngModelChange)="changedAgenteTransito($event)"
                                     required
                                     name="bancoId">
                                 </ng-select>
                             </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Sede*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="sedesOperativas"
+                                    [(ngModel)]="sedeOperativaSelected"
+                                    (ngModelChange)="changedSedeOperativa($event)"
+                                    required
+                                    name="bancoId">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <label>Numero de Comparendo*</label>
+                                <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text">
+                            </div>
+                        </div>
+                    </div>  
+                <div class="card-footer">
+                    <button (click)="onValidarNumeroOrden()" class="btn btn-outline-primary pull-right" type="button">Validar</button>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div *ngIf='validado' class="card">
+        <div class="card-body">
+            <h5 class="m-0">formulario para el ingreso de una nuevo comparendo (validado)</h5>
+            <hr>
+            <h6 *ngIf='agenteTransitoReady' class="m-0">Agente de transito: <strong> {{ agenteTransito.data.ciudadano.primerNombre }} {{ agenteTransito.data.ciudadano.primerApellido }}</strong></h6>
+            <h6 *ngIf='sedeOperativaReady' class="m-0">Sede operativa: <strong> {{ sedeOperativa.data.nombre }}</strong></h6>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <p class="text-center">Lugar de Infraccion</p>
+                    <div class="form-group">
+                        <!-- <div class="col-lg-4 col-md-4">
+                            <label>Rango Inicio*</label>
+                            <input class="form-control" [(ngModel)]="almacen.rangoInicio" name="rangoInicio" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Rango Inicio*</label>
+                            <input class="form-control" [(ngModel)]="almacen.rangoInicio" name="rangoInicio" placeholder="" type="text" required>
+                        </div> -->
                     </div>
                 </div>    
-        </div>
+            </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
                 <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
