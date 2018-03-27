@@ -52,9 +52,12 @@ export class ComparendoService {
 
 	}
 
-	getComparendoSelect(){
-		
-		return this._http.get(this.url+"/select").map(res => res.json());
+	setComparendoArchivo(comparendos,polca,token){
+		let json = JSON.stringify(comparendos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 			return this._http.post(this.url+"/"+polca+"/archivo", params, {headers: headers})
+							  .map(res => res.json());
 	}
 	
 }

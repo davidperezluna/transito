@@ -11,7 +11,8 @@ declare var $: any;
 })
 export class ComparendoComponent implements OnInit {
   public comparendo: Comparendo;
-  public txt:any[]= [];
+  public txt:any[];
+  public errorMessage:any;
 
   constructor(
 		private _ComparendoService: ComparendoService,
@@ -20,7 +21,7 @@ export class ComparendoComponent implements OnInit {
 
     
     
-    ngOnInit() {	
+    ngOnInit() {
     swal({
       title: '¿Cual es la fuente del archivo?',
       type: 'info',
@@ -40,7 +41,7 @@ export class ComparendoComponent implements OnInit {
 
   async ngAbrirInput(polca:boolean){
     const {value: files} = await swal({
-      title: 'Select image',
+      title: 'Seleccione el atchivo .txt',
       input: 'file',
       inputAttributes: {
         'accept': 'txt/*',
@@ -49,7 +50,7 @@ export class ComparendoComponent implements OnInit {
     })
 
     if (files) {
-      this.txt=[]; 
+      this.txt=[];	
       let reader: FileReader = new FileReader();
       reader.readAsBinaryString(files);
       reader.onload = (e) => {
@@ -78,9 +79,26 @@ export class ComparendoComponent implements OnInit {
             }
           }
         }
+        let token = this._loginService.getToken();
+        this._ComparendoService.setComparendoArchivo(this.txt,polca,token).subscribe(
+          response => {
+            if (response.status == 'success') {
+              swal('Archivo cargado con exito')
+              console.log(response);
+            }
+          }, 
+          error => {
+            this.errorMessage = <any>error;
+    
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
       }
-      swal('Archivo cargado con exito')
-      console.log(this.txt);
+
+
     }
 
   }   
