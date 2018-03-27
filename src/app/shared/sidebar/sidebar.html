@@ -33,12 +33,8 @@
         <li class="nav-item"><a class="nav-link" routerLink="servicio"  [ngClass]="{'active' : ( addActive === 'servicio')}" (click)="addActiveMenu('servicio')"><i class="fa fa-angle-right"></i> Servicio</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="modulo"  [ngClass]="{'active' : ( addActive === 'modulo')}" (click)="addActiveMenu('modulo')"><i class="fa fa-angle-right"></i> Modulo</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="almacen"  [ngClass]="{'active' : ( addActive === 'almacen')}" (click)="addActiveMenu('almacen')"><i class="fa fa-angle-right"></i> Almacen</a></li>
-
         <li class="nav-item"><a class="nav-link" routerLink="ciudadano"  [ngClass]="{'active' : ( addActive === 'ciudadano')}" (click)="addActiveMenu('ciudadano')"><i class="fa fa-angle-right"></i> Ciudadano</a></li>
-
         <li class="nav-item"><a class="nav-link" routerLink="cuenta"  [ngClass]="{'active' : ( addActive === 'cuenta')}" (click)="addActiveMenu('cuenta')"><i class="fa fa-angle-right"></i> Cuenta</a></li>
-
-
       </ul>
       <!-- /.nav-second-level --> 
     </li>
@@ -48,6 +44,21 @@
       </ul>
       <!-- /.nav-second-level --> 
     </li>
+    <li class="nav-item"  [ngClass]="{'active' : showMenu === 'multilevel' }"> 
+    	<a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('multilevel')">RPCCC<i class="fa fa-angle-down "></i></a>
+      <ul class="nav flex-column nav-second-level">
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'thirdlevel' }">
+	      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('thirdlevel')">Ordenes comparendos <i class="fa fa-angle-down "></i></a>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item"><a class="nav-link" routerLink="comparendo">Cargar archivo plano</a> </li>
+            <li class="nav-item"><a class="nav-link" href="javascript:void(0)">Diligenciar comparendo</a> </li>
+          </ul>
+          <!-- /.nav-third-level --> 
+        </li>
+      </ul>
+      <!-- /.nav-second-level --> 
+    </li>
+
   </ul>  
 </div>
 

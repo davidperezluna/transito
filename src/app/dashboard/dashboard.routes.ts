@@ -16,6 +16,7 @@ import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
+import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
 import { DashboardComponent } from './index';
@@ -43,6 +44,7 @@ export const DashboardRoutes: Route[] = [
         ...CuentaRoutes,
         ...ModuloRoutes,
         ...AlmacenRoutes,
+        ...ComparendoRoutes,
 
       ]
     }
