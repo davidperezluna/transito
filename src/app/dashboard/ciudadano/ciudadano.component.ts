@@ -60,8 +60,8 @@ export class CiudadanoComponent implements OnInit {
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
+      responsive: false,
+      pageLength: 6,
       sPaginationType: 'full_numbers',
       oLanguage: {
            oPaginate: {

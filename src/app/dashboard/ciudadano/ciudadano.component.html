@@ -16,8 +16,9 @@
           <div class="card-header">
             <h5 class="card-title">Ciudadanos <small></small></h5>
           </div>
-          <div class="card-body">
-            <table class="table " id="dataTables-example">
+          <div class="card-body responsive">
+          	<div class="table-responsive">
+            <table class="table" id="dataTables-example">
               <thead>
                 <tr>
                     <th>Id</th>
@@ -25,11 +26,11 @@
                     <th>Municipio Residencia</th>
                     <th>Tipo Identificacion</th>
                     <th>Identificacion</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Direccion</th>
+                    <th>Primer Nombre</th>
+                    <th>Segundo Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
                     <th>Telefono</th>
-                    <th>Correo</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -40,16 +41,17 @@
                   <td >{{ciudadano.municipioResidencia.nombre}}</td>
                   <td >{{ciudadano.tipoIdentificacion.nombre}}</td>
                   <td >{{ciudadano.numeroIdentificacion}}</td>
-                  <td >{{ciudadano.nombres}}</td>
-                  <td >{{ciudadano.apellidos}}</td>
-                  <td >{{ciudadano.direccion}}</td>
+                  <td >{{ciudadano.primerNombre}}</td>
+                  <td >{{ciudadano.segundoNombre}}</td>
+                  <td >{{ciudadano.primerApellido}}</td>
+                  <td >{{ciudadano.segundoApellido}}</td>
                   <td >{{ciudadano.telefono}}</td>
-                  <td >{{ciudadano.correo}}</td>
                   <td><button (click)="editCiudadano(ciudadano)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteCiudadano(ciudadano.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>
+            </div>
             <!-- /.table-responsive --> 
           </div>
         </div>
