@@ -7,18 +7,7 @@
             <div class="row justify-content-center">
                     <div class="col-md-10 ">
                         <div class="form-group row">
-                            <div class="col-lg-6 col-md-6">
-                                <label>Agente de transito*</label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="agentesTransito"
-                                    [(ngModel)]="agenteTransitoSelected"
-                                    (ngModelChange)="changedAgenteTransito($event)"
-                                    required
-                                    name="bancoId">
-                                </ng-select>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
+                            <div class="col-lg-12 col-md-12">
                                 <label>Sede*</label>
                                 <ng-select
                                     [multiple]="false"
@@ -32,6 +21,17 @@
                             <div class="col-lg-12 col-md-12">
                                 <label>Numero de Comparendo*</label>
                                 <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Agente de transito*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="agentesTransito"
+                                    [(ngModel)]="agenteTransitoSelected"
+                                    (ngModelChange)="changedAgenteTransito($event)"
+                                    required
+                                    name="bancoId">
+                                </ng-select>
                             </div>
                         </div>
                     </div>  

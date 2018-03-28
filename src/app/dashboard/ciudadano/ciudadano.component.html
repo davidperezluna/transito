@@ -22,30 +22,22 @@
               <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Municipio Nacimiento</th>
-                    <th>Municipio Residencia</th>
-                    <th>Tipo Identificacion</th>
                     <th>Identificacion</th>
-                    <th>Primer Nombre</th>
-                    <th>Segundo Nombre</th>
-                    <th>Primer Apellido</th>
-                    <th>Segundo Apellido</th>
-                    <th>Telefono</th>
+                    <th>Ciudadano</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let ciudadano of ciudadanos; let i = index">
-                  <td >{{ciudadano.id}}</td>
-                  <td >{{ciudadano.municipioNacimiento.nombre}}</td>
-                  <td >{{ciudadano.municipioResidencia.nombre}}</td>
-                  <td >{{ciudadano.tipoIdentificacion.nombre}}</td>
-                  <td >{{ciudadano.numeroIdentificacion}}</td>
-                  <td >{{ciudadano.primerNombre}}</td>
-                  <td >{{ciudadano.segundoNombre}}</td>
-                  <td >{{ciudadano.primerApellido}}</td>
-                  <td >{{ciudadano.segundoApellido}}</td>
-                  <td >{{ciudadano.telefono}}</td>
+                  <td>{{ ciudadano.id }}</td>
+                  <td>
+                    {{ ciudadano.tipoIdentificacion.nombre }}
+                    <br>
+                    {{ ciudadano.numeroIdentificacion }}
+                  </td>
+                  <td>
+                    {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido }}
+                  </td>
                   <td><button (click)="editCiudadano(ciudadano)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
                     <button (click)="deleteCiudadano(ciudadano.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
                 </tr>
