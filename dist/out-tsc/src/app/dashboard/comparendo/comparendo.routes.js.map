@@ -1,1 +1,0 @@
-{"version":3,"file":"comparendo.routes.js","sourceRoot":"","sources":["../../../../../../src/app/dashboard/comparendo/comparendo.routes.ts"],"names":[],"mappings":";;AACA,iCAA8C;AAC9C,iCAAuC;AAE1B,QAAA,gBAAgB,GAAY;IACrC;QACE,IAAI,EAAE,YAAY;QAClB,SAAS,EAAE,2BAAmB;KAC/B;IAED;QACE,IAAI,EAAE,gBAAgB;QACtB,SAAS,EAAE,oBAAY;KACxB;CACJ,CAAC"}
