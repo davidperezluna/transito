@@ -24,6 +24,7 @@ public sedeOperativa:any;
 public agenteTransitoReady = false;
 public sedeOperativaReady = false;
 public validado = false;
+public comparendoExistente = false;
 
 constructor(
   private _ComparendoService: ComparendoService,
@@ -124,6 +125,7 @@ constructor(
   }
 
   changedSedeOperativa(e){
+    this.validado = false;
     if (e) {
      let token = this._loginService.getToken();
      this._sedeOperativaService.showSedeOperativa(token,e).subscribe(
@@ -146,7 +148,28 @@ constructor(
   }
 
   onValidarNumeroOrden(){
-    this.validado = true;
+    let token = this._loginService.getToken();
+    this._ComparendoService.serchComparendo(this.comparendo,token).subscribe(
+      response => {
+        this.respuesta = response;
+        console.log(this.respuesta);
+        if(this.respuesta.status == 'success'){
+          this.validado = true;
+          this.comparendoExistente = false;
+        }else{
+          this.comparendoExistente = true;
+        }
+      error => {
+          this.errorMessage = <any>error;
+
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición"); 
+          }
+        }
+
+    }); 
+    
   }
 
 }

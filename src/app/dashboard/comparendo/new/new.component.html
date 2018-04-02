@@ -6,19 +6,8 @@
             <hr> 
             <div class="row justify-content-center">
                     <div class="col-md-10 ">
-                        <div class="form-group row">
-                            <div class="col-lg-6 col-md-6">
-                                <label>Agente de transito*</label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="agentesTransito"
-                                    [(ngModel)]="agenteTransitoSelected"
-                                    (ngModelChange)="changedAgenteTransito($event)"
-                                    required
-                                    name="bancoId">
-                                </ng-select>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
+                        <div class="form-group row">                    
+                            <div class="col-lg-12 col-md-12">
                                 <label>Sede*</label>
                                 <ng-select
                                     [multiple]="false"
@@ -33,6 +22,17 @@
                                 <label>Numero de Comparendo*</label>
                                 <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text">
                             </div>
+                            <div class="col-lg-12 col-md-12">
+                                <label>Agente de transito*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="agentesTransito"
+                                    [(ngModel)]="agenteTransitoSelected"
+                                    (ngModelChange)="changedAgenteTransito($event)"
+                                    required
+                                    name="bancoId">
+                                </ng-select>
+                            </div>
                         </div>
                     </div>  
                 <div class="card-footer">
@@ -41,6 +41,10 @@
             </div>
         </div>
     </div>
+<div *ngIf='comparendoExistente'  class="alert alert-danger">
+  <strong>Error!</strong> el numero de orden {{ comparendo.numeroOrden }} ya se encuentra registrado.
+</div>
+
     <div *ngIf='validado' class="card">
         <div class="card-body">
             <h5 class="m-0">formulario para el ingreso de una nuevo comparendo (validado)</h5>
@@ -49,17 +53,28 @@
             <h6 *ngIf='sedeOperativaReady' class="m-0">Sede operativa: <strong> {{ sedeOperativa.data.nombre }}</strong></h6>
             <hr> 
             <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <p class="text-center">Lugar de Infraccion</p>
-                    <div class="form-group">
-                        <!-- <div class="col-lg-4 col-md-4">
-                            <label>Rango Inicio*</label>
-                            <input class="form-control" [(ngModel)]="almacen.rangoInicio" name="rangoInicio" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <label>Rango Inicio*</label>
-                            <input class="form-control" [(ngModel)]="almacen.rangoInicio" name="rangoInicio" placeholder="" type="text" required>
-                        </div> -->
+                <div class="col-md-10">
+                    <h5 class="text-center">Lugar de Infraccion</h5>
+                    <div class="form-group row">
+                            <div class="col-lg-4 col-md-4">
+                                <label>Direccion*</label>
+                                <input class="form-control" [(ngModel)]="comparendo.direccion" name="direccion" placeholder="" type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                    <label>Lugar de la infraccion(ciudad)*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="agentesTransito"
+                                        [(ngModel)]="agenteTransitoSelected"
+                                        (ngModelChange)="changedAgenteTransito($event)"
+                                        required
+                                        name="bancoId">
+                                    </ng-select>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Localidad*</label>
+                                <input class="form-control" [(ngModel)]="comparendo.barrio" name="barrio" placeholder="" type="text" required>
+                            </div>
                     </div>
                 </div>    
             </div>
