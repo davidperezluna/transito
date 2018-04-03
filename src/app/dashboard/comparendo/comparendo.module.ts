@@ -5,6 +5,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import {ComparendoService} from '../../services/comparendo.service';
 import {SedeOperativaService} from '../../services/sedeOperativa.service';
 import {AgenteTransitoService} from '../../services/agenteTransito.service';
+import {CiudadanoVehiculoService} from '../../services/ciudadanoVehiculo.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -15,7 +16,7 @@ import {SelectModule} from 'angular2-select';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [ComparendoComponent,NewComponent,EditComponent],
     exports: [ComparendoComponent, NewComponent,EditComponent],
-    providers:[AgenteTransitoService,ComparendoService,SedeOperativaService]
+    providers:[AgenteTransitoService,ComparendoService,SedeOperativaService,CiudadanoVehiculoService]
 })
 
 export class ComparendoModule { }

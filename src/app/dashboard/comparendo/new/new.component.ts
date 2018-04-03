@@ -210,6 +210,20 @@ constructor(
 
 
   onKeyPlaca(){
+  swal({
+    title: 'Cargando Datos del Vehiculo!',
+    text: 'Solo tardara unos segundos por favor espere.',
+    timer: 2500,
+    onOpen: () => {
+      swal.showLoading()
+    }
+  }).then((result) => {
+    if (
+      // Read more about handling dismissals
+      result.dismiss === swal.DismissReason.timer
+    ) {
+    }
+  })
   this.vehiculoNoEncontrado = false;
   let token = this._loginService.getToken();
   this._vechiculoService.showVehiculoPlaca(token,this.placa).subscribe(
@@ -219,6 +233,7 @@ constructor(
         this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculo.id).subscribe(
             response => {
               this.ciudadanosVehiculo = response.data;
+              console.log(this.ciudadanosVehiculo);
             error => {
                 this.errorMessage = <any>error;
                 if(this.errorMessage != null){
@@ -245,6 +260,20 @@ constructor(
   }
 
   onKeyIdentificacion(){
+    swal({
+    title: 'Cargando Datos del Ciudadano!',
+    text: 'Solo tardara unos segundos por favor espere.',
+    timer: 1000,
+    onOpen: () => {
+      swal.showLoading()
+    }
+  }).then((result) => {
+    if (
+      // Read more about handling dismissals
+      result.dismiss === swal.DismissReason.timer
+    ) {
+    }
+  })
     this.ciudadanoNoEncontrado = false;
     let token = this._loginService.getToken();
     this._ciudadanoService.showCiudadanoCedula(token,this.identificacion).subscribe(

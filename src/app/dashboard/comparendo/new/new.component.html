@@ -153,7 +153,24 @@
                     </div>
                     <hr>
                     <h5 class="">Propietarios</h5>
-                                            
+                        <table  class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Identificación</th>
+                                    <th>Correo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                    <td *ngIf="ciudadanoVehiculo.ciudadano">{{ciudadanoVehiculo.ciudadano?.primerNombre}}</td>
+                                    <td *ngIf="ciudadanoVehiculo.ciudadano">{{ciudadanoVehiculo.ciudadano?.primerApellido}}</td>
+                                    <td *ngIf="ciudadanoVehiculo.ciudadano">{{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}</td>
+                                    <td *ngIf="ciudadanoVehiculo.ciudadano">{{ciudadanoVehiculo.ciudadano?.correo}}</td>
+                                </tr>
+                            </tbody> 
+                        </table>                    
                     <hr>
                 </div>    
             </div>
