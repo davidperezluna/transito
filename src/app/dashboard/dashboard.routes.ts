@@ -18,6 +18,7 @@ import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
+import { CarroceriaRoutes } from './carroceria/carroceria.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
 import { DashboardComponent } from './index';
 
@@ -45,6 +46,7 @@ export const DashboardRoutes: Route[] = [
         ...ModuloRoutes,
         ...AlmacenRoutes,
         ...ComparendoRoutes,
+        ...CarroceriaRoutes,
 
       ]
     }

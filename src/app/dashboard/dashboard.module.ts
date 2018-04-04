@@ -22,6 +22,7 @@ import { AlmacenModule } from './almacen/almacen.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
 
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
+import { CarroceriaModule } from './carroceria/carroceria.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 
@@ -57,6 +58,7 @@ import {RightsidebarComponent} from '../shared/index';
       AlmacenModule,
       CiudadanoModule,
       CuentaModule,
+      CarroceriaModule,
       ComparendoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
