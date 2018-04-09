@@ -17,9 +17,14 @@ import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.r
 import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
+import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
+import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
+import { GeneroRoutes } from './genero/genero.routes';
+import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
+import { TramiteRoutes } from './tramite/tramite.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -29,10 +34,10 @@ export const DashboardRoutes: Route[] = [
       children: [
         ...HomeRoutes,
         ...VehiculoRoutes,
-        ...MarcaRoutes, 
+        ...MarcaRoutes,
         ...LineaRoutes,
         ...BancoRoutes,
-        ...ClaseRoutes, 
+        ...ClaseRoutes,
         ...ColorRoutes,
         ...DepartamentoRoutes,
         ...CombustibleRoutes,
@@ -42,12 +47,16 @@ export const DashboardRoutes: Route[] = [
         ...OrganismoTransitoRoutes,
         ...ServicioRoutes,
         ...CiudadanoRoutes,
+        ...TipoIdentificacionRoutes,
+        ...GeneroRoutes,
+        ...GrupoSanguineoRoutes,
         ...CuentaRoutes,
         ...ModuloRoutes,
+        ...TramiteRoutes,
         ...AlmacenRoutes,
         ...ComparendoRoutes,
+        ...InfraccionRoutes,
         ...CarroceriaRoutes,
-
       ]
     }
 ];

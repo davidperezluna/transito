@@ -18,10 +18,15 @@ import { MunicipioModule } from './municipio/municipio.module';
 import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
 import { ServicioModule } from './servicio/servicio.module';
 import { ModuloModule } from './modulo/modulo.module';
+import { TramiteModule } from './tramite/tramite.module';
 import { AlmacenModule } from './almacen/almacen.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
+import { InfraccionModule } from './infraccion/infraccion.module';
 
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
+import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
+import { GeneroModule } from './genero/genero.module';
+import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
 import { CarroceriaModule } from './carroceria/carroceria.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
@@ -55,15 +60,19 @@ import {RightsidebarComponent} from '../shared/index';
       OrganismoTransitoModule,
       ServicioModule,
       ModuloModule,
+      TramiteModule,
       AlmacenModule,
       CiudadanoModule,
+      TipoIdentificacionModule,
+      GeneroModule,
+      GrupoSanguineoModule,
       CuentaModule,
       CarroceriaModule,
       ComparendoModule,
+      InfraccionModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
-    
 })
 
 export class DashboardModule { }

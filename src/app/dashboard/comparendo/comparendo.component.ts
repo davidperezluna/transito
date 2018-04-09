@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {ComparendoService} from '../../services/comparendo.service';
-import {LoginService} from '../../services/login.service';
-import {Comparendo} from './comparendo.modelo';
+import { ComparendoService } from '../../services/comparendo.service';
+import { LoginService } from '../../services/login.service';
+import { Comparendo } from './comparendo.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -20,8 +20,6 @@ export class ComparendoComponent implements OnInit {
 		private _loginService: LoginService,
     ){}
 
-    
-    
     ngOnInit() {
     swal({
       title: '¿Cual es la fuente del archivo?',
