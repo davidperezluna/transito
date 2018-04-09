@@ -2,12 +2,12 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {Comparendo} from '../comparendo.modelo';
 import {ComparendoService} from '../../../services/comparendo.service';
 import {LoginService} from '../../../services/login.service';
-import {AgenteTransitoService} from '../../../services/agenteTransito.service';
-import {SedeOperativaService} from '../../../services/sedeOperativa.service';
-import {MunicipioService} from '../../../services/municipio.service';
-import {VehiculoService} from '../../../services/vehiculo.service';
-import {CiudadanoService} from '../../../services/ciudadano.service';
-import {CiudadanoVehiculoService} from '../../../services/ciudadanoVehiculo.service';
+import { AgenteTransitoService } from '../../../services/agenteTransito.service';
+import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { MunicipioService } from '../../../services/municipio.service';
+import { VehiculoService } from '../../../services/vehiculo.service';
+import { CiudadanoService } from '../../../services/ciudadano.service';
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -57,7 +57,7 @@ constructor(
    this.identificacion = {
      'numeroIdentificacion' : this.identificacion,
    }; 
-    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._agenteTransitoService.getAgenteTransitoSelect().subscribe(
         response => {
@@ -114,7 +114,7 @@ constructor(
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
-            title: 'Echo!',
+            title: 'Pefecto!',
             text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'

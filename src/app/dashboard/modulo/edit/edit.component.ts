@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Modulo} from '../modulo.modelo';
-import {ModuloService} from '../../../services/modulo.service';
-import {LoginService} from '../../../services/login.service';
+import { Modulo } from '../modulo.modelo';
+import { ModuloService } from '../../../services/modulo.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -35,7 +35,7 @@ constructor(
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
-            title: 'Echo!',
+            title: 'Pefecto!',
             text: 'El registro se ha modificado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'

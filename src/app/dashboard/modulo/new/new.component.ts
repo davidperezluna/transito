@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.modulo = new Modulo(null,null,null);
+    this.modulo = new Modulo(null,null,null,null);
   }
   onCancelar(){
     this.ready.emit(true);
@@ -35,7 +35,7 @@ constructor(
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
-            title: 'Echo!',
+            title: 'Pefecto!',
             text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'
