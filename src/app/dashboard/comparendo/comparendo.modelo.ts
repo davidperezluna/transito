@@ -16,9 +16,12 @@ export class Comparendo{
 		public tarjetaOperacionInfractor:number,
 		public fuga:string,
 		public accidente:string,
+		public inmovilizacion:string,
 		public polca:string,
 		public fechaNotificacion:string,
 		public gradoAlchoholemia:string,
 		public retencionLicencia:string,
+		public fotomulta:string,
+		public descripcion:string,
 	){}
 } 

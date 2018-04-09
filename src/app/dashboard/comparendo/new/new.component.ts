@@ -60,7 +60,7 @@ constructor(
    this.identificacion = {
      'numeroIdentificacion' : this.identificacion,
    }; 
-    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.inmovilizacion = new Inmovilizacion(null,null,null,null,null,null,null,null);
 
     this._agenteTransitoService.getAgenteTransitoSelect().subscribe(

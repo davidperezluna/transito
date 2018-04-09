@@ -202,21 +202,21 @@
                     <div class="form-group row">
                         <label class="custom-control custom-checkbox" for="option1">
                             <!-- <input checked="" class="custom-control-input" id="option1" type="checkbox"> -->
-                            <input (click)="clickOnmovilizacion()" class="custom-control-input" id="option1" type="checkbox">
+                            <input (click)="clickOnmovilizacion()" [(ngModel)]="comparendo.inmovilizacion" class="custom-control-input" id="option1" type="checkbox">
                             <span class="custom-control-indicator"></span> 
                             <span class="custom-control-description">Inmovilización</span>
                         </label>
                         <label class="custom-control custom-checkbox" for="option2">
-                            <input class="custom-control-input" id="option2" type="checkbox">
+                            <input class="custom-control-input"  [(ngModel)]="comparendo.accidente" id="option2" type="checkbox">
                             <span class="custom-control-indicator"></span> 
-                            <span class="custom-control-description">Aceite</span>
+                            <span class="custom-control-description" >Accidente</span>
                         </label>
                         <label class="custom-control custom-checkbox" for="option3">
-                            <input class="custom-control-input" id="option3" type="checkbox">
+                            <input class="custom-control-input" [(ngModel)]="comparendo.fuga" id="option3" type="checkbox">
                             <span class="custom-control-indicator"></span> 
                             <span class="custom-control-description">Fuga</span>
                         </label>
-                        <label class="custom-control custom-checkbox" for="option4">
+                        <label class="custom-control custom-checkbox" [(ngModel)]="comparendo.retencionLicencia"  for="option4">
                             <input class="custom-control-input" id="option4" type="checkbox">
                             <span class="custom-control-indicator"></span> 
                             <span class="custom-control-description">Retención de licencia</span>
@@ -224,22 +224,77 @@
                     </div>
                     <div class="col-md-10" *ngIf='inmovilizacionForm'>
                         <div class="row ">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-4 col-md-4">
                                 <div class="form-group ">
-                                    <label>First Name</label>
-                                    <input class="form-control" placeholder="" type="text">
+                                    <label>Numero patio</label>
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroPatio"  placeholder="" type="text">
                                 </div>
                             </div>
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-6 col-md-6">
                                 <div class="form-group ">
-                                    <label>Last Name</label>
-                                    <input class="form-control" placeholder="" type="text">
+                                    <label>Numero Grua</label>
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroGrua" placeholder="" type="text">
+                                </div> 
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group ">
+                                    <label>Fecha ingreso</label>
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.fechaIngreso" placeholder="" type="date">
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="form-group ">
+                                    <label>Numero Consecutivo</label>
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroConsecutivo"  placeholder="" type="text">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group ">
+                                    <label>Direccion Patio</label>
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.direccionPatio" placeholder="" type="text">
+                                </div> 
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group ">
+                                    <label>Placa Grua</label>
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.placaGrua"  placeholder="" type="text">
                                 </div>
                             </div>
                         </div>
                     </div>    
+                    <h5 class="">Datos de infracción</h5>
+                    <hr>
+
+                    <div class="row ">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group ">
+                                <label>Fotomulta</label>
+                                <input class="form-control" [(ngModel)]="comparendo.fotomulta"  placeholder="" type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group ">
+                                <label>Fecha notificación</label>
+                                <input class="form-control" [(ngModel)]="comparendo.fechaNotificacion" placeholder="" type="text">
+                            </div> 
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group ">
+                                <label>Grado Alcoholemia <span class="ai-lab"></span></label>
+                                <input class="form-control" [(ngModel)]="comparendo.gradoAlchoholemia" placeholder="" type="text">
+                            </div> 
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="form-group ">
+                                <label>Descripción <span class="ai-lab"></span></label>
+                                <input class="form-control" [(ngModel)]="comparendo.descripcion" placeholder="" type="textArea">
+                            </div> 
+                        </div>
+                    </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer col-lg-16 col-md-16">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
                 <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    
