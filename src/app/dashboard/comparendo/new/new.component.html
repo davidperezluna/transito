@@ -164,15 +164,80 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
-                                    <td *ngIf="ciudadanoVehiculo.ciudadano">{{ciudadanoVehiculo.ciudadano?.primerNombre}}</td>
-                                    <td *ngIf="ciudadanoVehiculo.ciudadano">{{ciudadanoVehiculo.ciudadano?.primerApellido}}</td>
-                                    <td *ngIf="ciudadanoVehiculo.ciudadano">{{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}</td>
-                                    <td *ngIf="ciudadanoVehiculo.ciudadano">{{ciudadanoVehiculo.ciudadano?.correo}}</td>
+                                    <td>{{ciudadanoVehiculo.ciudadano?.primerNombre}}</td>
+                                    <td>{{ciudadanoVehiculo.ciudadano?.primerApellido}}</td>
+                                    <td>{{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}</td>
+                                    <td>{{ciudadanoVehiculo.ciudadano?.correo}}</td>
                                 </tr>
                             </tbody> 
-                        </table>                    
+                        </table>
+                        <h5 class="">Empresas</h5>
+                        <table  class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nit</th>
+                                    <th>Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let empresaVehiculo of ciudadanosVehiculo; let i = index">
+                                    <td>{{empresaVehiculo.empresa?.nit}}</td>
+                                    <td>{{empresaVehiculo.empresa?.nombre}}</td>
+                                </tr>
+                            </tbody> 
+                        </table>                     
                     <hr>
-                </div>    
+                    <div class="form-group row">
+                        <div class="col-lg-8 col-md-8">
+                            <label>Observación Agente*</label> 
+                            <input class="form-control" [(ngModel)]="comparendo.observacionesAgente" id="cedula" name="placa" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Observación Digitador*</label> 
+                            <input class="form-control" [(ngModel)]="comparendo.observacionesDigitador" id="cedula" name="placa" placeholder="" type="text" required>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="form-group row">
+                        <label class="custom-control custom-checkbox" for="option1">
+                            <!-- <input checked="" class="custom-control-input" id="option1" type="checkbox"> -->
+                            <input (click)="clickOnmovilizacion()" class="custom-control-input" id="option1" type="checkbox">
+                            <span class="custom-control-indicator"></span> 
+                            <span class="custom-control-description">Inmovilización</span>
+                        </label>
+                        <label class="custom-control custom-checkbox" for="option2">
+                            <input class="custom-control-input" id="option2" type="checkbox">
+                            <span class="custom-control-indicator"></span> 
+                            <span class="custom-control-description">Aceite</span>
+                        </label>
+                        <label class="custom-control custom-checkbox" for="option3">
+                            <input class="custom-control-input" id="option3" type="checkbox">
+                            <span class="custom-control-indicator"></span> 
+                            <span class="custom-control-description">Fuga</span>
+                        </label>
+                        <label class="custom-control custom-checkbox" for="option4">
+                            <input class="custom-control-input" id="option4" type="checkbox">
+                            <span class="custom-control-indicator"></span> 
+                            <span class="custom-control-description">Retención de licencia</span>
+                        </label>
+                    </div>
+                    <div class="col-md-10" *ngIf='inmovilizacionForm'>
+                        <div class="row ">
+                            <div class="col-lg-8 col-md-8">
+                                <div class="form-group ">
+                                    <label>First Name</label>
+                                    <input class="form-control" placeholder="" type="text">
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <div class="form-group ">
+                                    <label>Last Name</label>
+                                    <input class="form-control" placeholder="" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
             </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>

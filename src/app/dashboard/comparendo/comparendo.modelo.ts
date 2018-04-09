@@ -11,6 +11,7 @@ export class Comparendo{
 		public lugarInfraccion:string,
 		public barrioInfraccion:string,
 		public observacionesAgente:string,
+		public observacionesDigitador:string,
 		public tipoInfractor:string,
 		public tarjetaOperacionInfractor:number,
 		public fuga:string,
@@ -18,5 +19,6 @@ export class Comparendo{
 		public polca:string,
 		public fechaNotificacion:string,
 		public gradoAlchoholemia:string,
+		public retencionLicencia:string,
 	){}
 } 

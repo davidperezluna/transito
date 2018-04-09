@@ -215,9 +215,9 @@ constructor(
     this.vehiculo.organismoTransitoId = this.organismoTransitoSelected;
     console.log(this.vehiculo);  
     let token = this._loginService.getToken();
-    this._VehiculoService.register(this.vehiculo,token).subscribe(
+    this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
 			response => {
-        this.respuesta = response;
+        this.respuesta = response; 
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);

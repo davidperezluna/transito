@@ -1,5 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {Comparendo} from '../comparendo.modelo';
+import {Inmovilizacion} from '../inmovilizacion.modelo';
 import {ComparendoService} from '../../../services/comparendo.service';
 import {LoginService} from '../../../services/login.service';
 import {AgenteTransitoService} from '../../../services/agenteTransito.service';
@@ -17,6 +18,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public comparendo: Comparendo;
+public inmovilizacion: Inmovilizacion;
 public errorMessage;
 public respuesta;
 public agentesTransito:any;
@@ -38,6 +40,7 @@ public ciudadano:any;
 public ciudadanosVehiculo:any;
 public vehiculoNoEncontrado=false;
 public ciudadanoNoEncontrado=false;
+public inmovilizacionForm=false;
 
 constructor(
   private _ComparendoService: ComparendoService,
@@ -57,7 +60,8 @@ constructor(
    this.identificacion = {
      'numeroIdentificacion' : this.identificacion,
    }; 
-    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.inmovilizacion = new Inmovilizacion(null,null,null,null,null,null,null,null);
 
     this._agenteTransitoService.getAgenteTransitoSelect().subscribe(
         response => {
@@ -234,7 +238,7 @@ constructor(
             response => {
               this.ciudadanosVehiculo = response.data;
               console.log(this.ciudadanosVehiculo);
-            error => {
+            error => { 
                 this.errorMessage = <any>error;
                 if(this.errorMessage != null){
                   console.log(this.errorMessage);
@@ -259,6 +263,13 @@ constructor(
     
   }
 
+  clickOnmovilizacion(){
+    if (this.inmovilizacionForm) {
+      this.inmovilizacionForm = false;
+    }else{
+      this.inmovilizacionForm = true;
+    }
+  }
   onKeyIdentificacion(){
     swal({
     title: 'Cargando Datos del Ciudadano!',

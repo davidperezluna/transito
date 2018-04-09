@@ -59,7 +59,7 @@ export class ComparendoComponent implements OnInit {
         let allTextLines = txt.split(/\r\n|\n/);
         for (let i = 0; i < allTextLines.length; i++) {
           let data = allTextLines[i].split(',');
-          if (data.length < 17) {
+          if (data.length < 19) {
               this.valido = false;
           }else{
             if (data[0] != '') {
