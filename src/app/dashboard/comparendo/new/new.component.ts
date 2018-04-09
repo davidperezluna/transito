@@ -36,6 +36,7 @@ public comparendoExistente = false;
 public placa:any;
 public identificacion:any;
 public vehiculo:any;
+public municipioId:any;
 public ciudadano:any;
 public ciudadanosVehiculo:any;
 public vehiculoNoEncontrado=false;
@@ -109,6 +110,9 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.comparendo.agenteTransitoId = this.agenteTransitoSelected;
+    this.comparendo.municipioId = this.municipioSelected;
+    this.comparendo.vehiculoId = this.vehiculo.id;
+    this.comparendo.ciudadanoId = this.ciudadano.id;
     
     console.log(this.comparendo);
 		this._ComparendoService.register(this.comparendo,token).subscribe(
@@ -118,7 +122,7 @@ constructor(
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
-            title: 'Echo!',
+            title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'

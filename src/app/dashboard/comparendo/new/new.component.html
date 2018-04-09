@@ -60,7 +60,7 @@
                     <div class="form-group row">
                             <div class="col-lg-4 col-md-4">
                                 <label>Dirección*</label>
-                                <input class="form-control" [(ngModel)]="comparendo.direccion" name="direccion" placeholder="" type="text" required>
+                                <input class="form-control" [(ngModel)]="comparendo.lugarInfraccion" name="lugarInfraccion" placeholder="" type="text" required>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                     <label>Lugar de la infracción(ciudad)*</label>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <label>Localidad*</label>
-                                <input class="form-control" [(ngModel)]="comparendo.barrio" name="barrio" placeholder="" type="text" required>
+                                <input class="form-control" [(ngModel)]="comparendo.barrioInfraccion" name="barrioInfraccion" placeholder="" type="text" required>
                             </div>
                     </div>
                     <h5 class="">Datos del Vehículo</h5>
@@ -190,11 +190,11 @@
                     <div class="form-group row">
                         <div class="col-lg-8 col-md-8">
                             <label>Observación Agente*</label> 
-                            <input class="form-control" [(ngModel)]="comparendo.observacionesAgente" id="cedula" name="placa" placeholder="" type="text" required>
+                            <input class="form-control" [(ngModel)]="comparendo.observacionesAgente" id="cedula" name="observacionesAgente" placeholder="" type="text" required>
                         </div>
                         <div class="col-lg-8 col-md-8">
                             <label>Observación Digitador*</label> 
-                            <input class="form-control" [(ngModel)]="comparendo.observacionesDigitador" id="cedula" name="placa" placeholder="" type="text" required>
+                            <input class="form-control" [(ngModel)]="comparendo.observacionesDigitador" id="cedula" name="observacionesDigitador" placeholder="" type="text" required>
                         </div>
                         <br>
                         <br>
@@ -202,22 +202,22 @@
                     <div class="form-group row">
                         <label class="custom-control custom-checkbox" for="option1">
                             <!-- <input checked="" class="custom-control-input" id="option1" type="checkbox"> -->
-                            <input (click)="clickOnmovilizacion()" [(ngModel)]="comparendo.inmovilizacion" class="custom-control-input" id="option1" type="checkbox">
+                            <input (click)="clickOnmovilizacion()" [(ngModel)]="comparendo.inmovilizacion" name="inmovilizacion" class="custom-control-input" id="option1" type="checkbox">
                             <span class="custom-control-indicator"></span> 
                             <span class="custom-control-description">Inmovilización</span>
                         </label>
                         <label class="custom-control custom-checkbox" for="option2">
-                            <input class="custom-control-input"  [(ngModel)]="comparendo.accidente" id="option2" type="checkbox">
+                            <input class="custom-control-input"  [(ngModel)]="comparendo.accidente" name="accidente" id="option2" type="checkbox">
                             <span class="custom-control-indicator"></span> 
                             <span class="custom-control-description" >Accidente</span>
                         </label>
                         <label class="custom-control custom-checkbox" for="option3">
-                            <input class="custom-control-input" [(ngModel)]="comparendo.fuga" id="option3" type="checkbox">
+                            <input class="custom-control-input" [(ngModel)]="comparendo.fuga" name="fuga" id="option3" type="checkbox">
                             <span class="custom-control-indicator"></span> 
                             <span class="custom-control-description">Fuga</span>
                         </label>
-                        <label class="custom-control custom-checkbox" [(ngModel)]="comparendo.retencionLicencia"  for="option4">
-                            <input class="custom-control-input" id="option4" type="checkbox">
+                        <label class="custom-control custom-checkbox"  for="option4">
+                            <input class="custom-control-input" [(ngModel)]="comparendo.retencionLicencia"  name="retencionLicencia" id="option4" type="checkbox">
                             <span class="custom-control-indicator"></span> 
                             <span class="custom-control-description">Retención de licencia</span>
                         </label>
@@ -227,19 +227,19 @@
                             <div class="col-lg-4 col-md-4">
                                 <div class="form-group ">
                                     <label>Numero patio</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroPatio"  placeholder="" type="text">
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroPatio" name="numeroPatio"  placeholder="" type="text">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group ">
                                     <label>Numero Grua</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroGrua" placeholder="" type="text">
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroGrua" name="numeroGrua" placeholder="" type="text">
                                 </div> 
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group ">
                                     <label>Fecha ingreso</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.fechaIngreso" placeholder="" type="date">
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.fechaIngreso" name="fechaIngreso" placeholder="" type="date">
                                 </div> 
                             </div>
                         </div>
@@ -247,19 +247,19 @@
                             <div class="col-lg-4 col-md-4">
                                 <div class="form-group ">
                                     <label>Numero Consecutivo</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroConsecutivo"  placeholder="" type="text">
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroConsecutivo" name="numeroConsecutivo" placeholder="" type="text">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group ">
                                     <label>Direccion Patio</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.direccionPatio" placeholder="" type="text">
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.direccionPatio" name="direccionPatio" placeholder="" type="text">
                                 </div> 
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group ">
                                     <label>Placa Grua</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.placaGrua"  placeholder="" type="text">
+                                    <input class="form-control" [(ngModel)]="inmovilizacion.placaGrua" name="placaGrua"  placeholder="" type="text">
                                 </div>
                             </div>
                         </div>
@@ -271,28 +271,28 @@
                         <div class="col-lg-4 col-md-4">
                             <div class="form-group ">
                                 <label>Fotomulta</label>
-                                <select class="form-control" [(ngModel)]="comparendo.fotomulta">
+                                <select class="form-control" [(ngModel)]="comparendo.fotomulta" name="fotomulta">
                                     <option value="1">Aplica</option>
                                     <option value="0">No plica</option>
-                                  </select>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group ">
                                 <label>Fecha notificación</label>
-                                <input class="form-control" [(ngModel)]="comparendo.fechaNotificacion" placeholder="" type="text">
+                                <input class="form-control" [(ngModel)]="comparendo.fechaNotificacion" name="fechaNotificacion" placeholder="" type="date">
                             </div> 
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group ">
                                 <label>Grado Alcoholemia <span class="ai-lab"></span></label>
-                                <input class="form-control" [(ngModel)]="comparendo.gradoAlchoholemia" placeholder="" type="text">
+                                <input class="form-control" [(ngModel)]="comparendo.gradoAlchoholemia" name="gradoAlchoholemia" placeholder="" type="text">
                             </div> 
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="form-group ">
                                 <label>Descripción <span class="ai-lab"></span></label>
-                                <input class="form-control" [(ngModel)]="comparendo.descripcion" placeholder="" type="textArea">
+                                <input class="form-control" [(ngModel)]="comparendo.descripcion" name="descripcion" placeholder="" type="textArea">
                             </div> 
                         </div>
                     </div>
