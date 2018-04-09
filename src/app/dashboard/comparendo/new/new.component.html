@@ -271,7 +271,10 @@
                         <div class="col-lg-4 col-md-4">
                             <div class="form-group ">
                                 <label>Fotomulta</label>
-                                <input class="form-control" [(ngModel)]="comparendo.fotomulta"  placeholder="" type="text">
+                                <select class="form-control" [(ngModel)]="comparendo.fotomulta">
+                                    <option value="1">Aplica</option>
+                                    <option value="0">No plica</option>
+                                  </select>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
