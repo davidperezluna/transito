@@ -9,13 +9,14 @@ import {MunicipioService} from '../../../services/municipio.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
 import {CiudadanoService} from '../../../services/ciudadano.service';
 import {CiudadanoVehiculoService} from '../../../services/ciudadanoVehiculo.service';
+import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new',
   templateUrl: './new.component.html'
 })
-export class NewComponent implements OnInit {
+export class NewComponent implements OnInit { 
 @Output() ready = new EventEmitter<any>();
 public comparendo: Comparendo;
 public inmovilizacion: Inmovilizacion;
@@ -41,8 +42,11 @@ public ciudadano:any;
 public ciudadanosVehiculo:any;
 public vehiculoNoEncontrado=false;
 public ciudadanoNoEncontrado=false;
+public formCiudadano=false;
 public inmovilizacionForm=false;
-
+public tipoIdentificacionSelected:any;
+public tiposIdentificacion:any;
+public municipioNacimientoSelected:any;
 constructor(
   private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
@@ -52,6 +56,7 @@ constructor(
   private _vechiculoService: VehiculoService,
   private _ciudadanoService: CiudadanoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
+  private _tipoIdentificacionService: TipoIdentificacionService,
   ){}
 
   ngOnInit() {
@@ -289,6 +294,7 @@ constructor(
     ) {
     }
   })
+    this.formCiudadano = true;
     this.ciudadanoNoEncontrado = false;
     let token = this._loginService.getToken();
     this._ciudadanoService.showCiudadanoCedula(token,this.identificacion).subscribe(
@@ -296,6 +302,31 @@ constructor(
         if (response.status == "success") {
         this.ciudadano = response.data;
         }else{
+          this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+            response => {
+              this.tiposIdentificacion = response;
+            }, 
+            error => {
+              this.errorMessage = <any>error;
+    
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+          this._municipioService.getMunicipioSelect().subscribe(
+            response => {
+              this.municipios = response;
+            }, 
+            error => {
+              this.errorMessage = <any>error;
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
         this.ciudadanoNoEncontrado = true;
         this.ciudadano = false;
         }

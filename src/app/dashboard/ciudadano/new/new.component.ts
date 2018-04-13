@@ -9,10 +9,10 @@ import { MunicipioService } from '../../../services/municipio.service';
 import swal from 'sweetalert2';
  
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-ciudadano',
   templateUrl: './new.component.html'
 })
-export class NewComponent implements OnInit {
+export class NewCiudadanoComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public ciudadano: Ciudadano;
 public errorMessage;
@@ -21,7 +21,7 @@ public tiposIdentificacion:any;
 public generos:any;
 public gruposSanguineos:any;
 public municipios:any;
-public tipoIdentificacionSelected:any;
+public tipoIdentificacionSelected:any; 
 public generoSelected:any;
 public grupoSanguineoSelected:any;
 public municipioResidenciaSelected:any;

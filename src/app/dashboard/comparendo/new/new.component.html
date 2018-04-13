@@ -1,177 +1,278 @@
 <div class="row">
-    <div class="col-sm-16">
+    <div class="col-sm-16 container">
+            
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">Seleccione un agente de transito y una sede operativa</h5>
-            <br>
-            <div class="row justify-content-center">
-                    <div class="col-md-10 ">
-                        <div class="form-group row">                    
-                            <div class="col-lg-12 col-md-12">
-                                <label>Sede*</label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="sedesOperativas"
-                                    [(ngModel)]="sedeOperativaSelected"
-                                    (ngModelChange)="changedSedeOperativa($event)"
-                                    required
-                                    name="bancoId">
-                                </ng-select>
-                            </div>
-                            <div class="col-lg-12 col-md-12">
-                                <label>Numero de Comparendo*</label>
-                                <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text">
-                            </div>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <label>Agente de transito*</label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="agentesTransito"
-                                    [(ngModel)]="agenteTransitoSelected"
-                                    (ngModelChange)="changedAgenteTransito($event)"
-                                    required
-                                    name="bancoId">
-                                </ng-select>
-                            </div>
-                        </div>
-                    </div>  
-                <div class="card-footer">
-                    <button (click)="onValidarNumeroOrden()" class="btn btn-outline-primary pull-right" type="button">Validar</button>
-                </div>  
-            </div>
-        </div>
-    </div>
-<div *ngIf='comparendoExistente'  class="alert alert-danger">
-  <strong>Error!</strong> el numero de orden {{ comparendo.numeroOrden }} ya se encuentra registrado.
-</div>
-
-    <div *ngIf='validado' class="card">
-        <div class="card-body">
-            <h5 class="m-0">formulario para el ingreso de una nuevo comparendo (validado)</h5>
-            <h6 *ngIf='agenteTransitoReady' class="m-0">Agente de transito: <strong> {{ agenteTransito.data.ciudadano.primerNombre }} {{ agenteTransito.data.ciudadano.primerApellido }}</strong></h6>
-            <h6 *ngIf='sedeOperativaReady' class="m-0">Sede operativa: <strong> {{ sedeOperativa.data.nombre }}</strong></h6>
-            <br>
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <h5 class="">Lugar de Infracción</h5>
-                    <hr>                
-                    <div class="form-group row">
-                            <div class="col-lg-4 col-md-4">
-                                <label>Dirección*</label>
-                                <input class="form-control" [(ngModel)]="comparendo.lugarInfraccion" name="lugarInfraccion" placeholder="" type="text" required>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                    <label>Lugar de la infracción(ciudad)*</label>
+            <div class="card-body">
+                <h5 class="m-0">Seleccione un agente de transito y una sede operativa</h5>
+                <br>
+                <div class="row justify-content-center">
+                    <form #comparendoForm="ngForm">
+                            <div class="form-group row">                    
+                                <div class="col-lg-16 col-md-16">
+                                    <label>Sede*</label>
                                     <ng-select
                                         [multiple]="false"
-                                        [options]="municipios"
-                                        [(ngModel)]="municipioSelected"
+                                        [options]="sedesOperativas"
+                                        [(ngModel)]="sedeOperativaSelected"
+                                        (ngModelChange)="changedSedeOperativa($event)"
                                         required
                                         name="bancoId">
                                     </ng-select>
+                                </div>
+                                <div class="col-lg-16 col-md-16">
+                                    <label>Numero de Comparendo*</label>
+                                    <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text" required>
+                                </div>
+
+                                <div class="col-lg-16 col-md-16">
+
+                                    <label>Agente de transito*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="agentesTransito"
+                                        [(ngModel)]="agenteTransitoSelected"
+                                        (ngModelChange)="changedAgenteTransito($event)"
+                                        required
+                                        name="agenteId">
+                                    </ng-select>
+                                </div>
                             </div>
-                            <div class="col-lg-4 col-md-4">
-                                <label>Localidad*</label>
-                                <input class="form-control" [(ngModel)]="comparendo.barrioInfraccion" name="barrioInfraccion" placeholder="" type="text" required>
+                        <button (click)="onValidarNumeroOrden()" [disabled]="comparendoForm.invalid" class="btn btn-outline-primary pull-right" type="button">Validar</button>
+                    </form>     
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf='comparendoExistente'  class="alert alert-danger">
+            <strong>Error!</strong> el numero de orden {{ comparendo.numeroOrden }} ya se encuentra registrado.
+        </div>
+
+        <div class="row  align-items-center justify-content-between" *ngIf='validado'>
+            <div class="col-11 col-sm-12 page-title">
+                <h3>formulario para el ingreso de una nuevo comparendo (validado)</h3>
+                <p>Agente de transito: <strong> {{ agenteTransito.data.ciudadano.primerNombre }} {{ agenteTransito.data.ciudadano.primerApellido }}</strong></p>
+                <p>Sede operativa: <strong> {{ sedeOperativa.data.nombre }}</strong></p>
+            </div>
+            <form #comparendoDiligenciadoForm="ngForm" class="col-md-16">
+                <div class="card">
+                    <div class="card-header align-items-start justify-content-between flex">
+                        <div class="list-unstyled comment-list">
+                            <div class="media"> 
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">Lugar de infracción</h6>
+                                    por favor ingrese los datos de la infracción
+                                </div>
                             </div>
+                        </div>
                     </div>
-                    <h5 class="">Datos del Vehículo</h5>
-                    <hr>
-                    <div *ngIf='vehiculoNoEncontrado'  class="alert alert-danger">
-                      <strong>!</strong> el vehículo con placa <b>{{ placa.placa }}</b> no se encuentra en la base de datos.
+                    <div class="card-body">
+                        <div class="form-group row">
+                                <div class="col-lg-16 col-md-16">
+                                    <label>Dirección*</label>
+                                    <input class="form-control" [(ngModel)]="comparendo.lugarInfraccion" name="lugarInfraccion" placeholder="" type="text" required>
+                                </div>
+                                <div class="col-lg-8 col-md-8">
+                                        <label>Lugar de la infracción(ciudad)*</label>
+                                        <ng-select
+                                            [multiple]="false"
+                                            [options]="municipios"
+                                            [(ngModel)]="municipioSelected"
+                                            required
+                                            name="bancoId">
+                                        </ng-select>
+                                </div>
+                                <div class="col-lg-8 col-md-8">
+                                    <label>Localidad*</label>
+                                    <input class="form-control" [(ngModel)]="comparendo.barrioInfraccion" name="barrioInfraccion" placeholder="" type="text" required>
+                                </div>
+                        </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-lg-4 col-md-4">
+                </div>
+
+                <div class="card">
+                    <div class="card-header align-items-start justify-content-between flex">
+                        <div class="list-unstyled comment-list">
+                            <div class="media"> 
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">Datos del vehículo</h6>
+                                    por favor ingrese la placa del vehículo  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row col-lg-16 col-md-16">
                             <label>Placa*</label> 
                             <input class="form-control" [(ngModel)]="placa.placa" (blur)="onKeyPlaca()" id="placa" name="placa" placeholder="" type="text" required>
                         </div>
-                        <div *ngIf='vehiculo' class="col-lg-4 col-md-4">
-                            <label>Matriculado en*</label>
-                            <input class="form-control" [(ngModel)]="vehiculo.municipio.nombre" name="municipio" placeholder="" type="text" required disabled="disabled">
+                        <div *ngIf='vehiculoNoEncontrado'  class="alert alert-danger">
+                            <strong>!</strong> el vehículo con placa <b>{{ placa.placa }}</b> no se encuentra en la base de datos.
                         </div>
-                        <div *ngIf='vehiculo' class="col-lg-4 col-md-4">
-                            <label>Tipo Vehículo*</label>
-                            <input class="form-control" [(ngModel)]="vehiculo.tipoVehiculo" name="tipoVehiculo" placeholder="" type="text" required disabled="disabled">
-                        </div>
-                        <div *ngIf='vehiculo' class="col-lg-4 col-md-4">
-                            <label>Tipo Servicio*</label>
-                            <input class="form-control" [(ngModel)]="vehiculo.servicio.nombre" name="servicio.nombre" placeholder="" type="text" required disabled="disabled">
-                        </div>
-                        <div *ngIf='vehiculo' class="col-lg-4 col-md-4">
-                            <label>Radio Acción*</label>
-                            <input class="form-control" [(ngModel)]="vehiculo.radioAccion" name="radioAccion" placeholder="" type="text" required disabled="disabled">
-                        </div>
-                        <div *ngIf='vehiculo' class="col-lg-4 col-md-4">
-                            <label>Modalidad Transporte*</label>
-                            <input class="form-control" [(ngModel)]="vehiculo.modalidadTransporte" name="modalidadTransporte" placeholder="" type="text" required disabled="disabled">
-                        </div>
-                        <div *ngIf='vehiculo' class="col-lg-4 col-md-4">
-                            <label>Tipo Transporte*</label>
-                            <input class="form-control" [(ngModel)]="vehiculo.transportePasajeros" name="transportePasajeros" placeholder="" type="text" required disabled="disabled">
+                        <div class="form-group row" *ngIf='vehiculo'>
+                            <div  class="col-lg-5 col-md-5">
+                                <label>Matriculado en</label>
+                                <input class="form-control" [(ngModel)]="vehiculo.municipio.nombre" name="municipio" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Tipo Vehículo</label>
+                                <input class="form-control" [(ngModel)]="vehiculo.tipoVehiculo" name="tipoVehiculo" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <label>Tipo Servicio</label>
+                                <input class="form-control" [(ngModel)]="vehiculo.servicio.nombre" name="servicio.nombre" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <label>Radio Acción</label>
+                                <input class="form-control" [(ngModel)]="vehiculo.radioAccion" name="radioAccion" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Modalidad Transporte</label>
+                                <input class="form-control" [(ngModel)]="vehiculo.modalidadTransporte" name="modalidadTransporte" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <label>Tipo Transporte</label>
+                                <input class="form-control" [(ngModel)]="vehiculo.transportePasajeros" name="transportePasajeros" placeholder="" type="text" disabled="disabled">
+                            </div>
                         </div>
                     </div>
-                    <h5 class="">Datos del Infractor</h5>
-                    <hr>
-                    <div *ngIf='ciudadanoNoEncontrado'  class="alert alert-danger">
-                      <strong>!</strong> el ciudadano con cedula <b>{{ identificacion.numeroIdentificacion }}</b> no se encuentra en la base de datos.
+                </div>
+
+                <div class="card">
+                    <div class="card-header align-items-start justify-content-between flex">
+                        <div class="list-unstyled comment-list">
+                            <div class="media"> 
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">Datos del Infractor</h6>
+                                    por favor ingrese el numero de documento 
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-lg-4 col-md-4">
+                    <div class="card-body">
+                        <div class="form-group row col-lg-16 col-md-16">
                             <label>Nip Infractor*</label> 
                             <input class="form-control" [(ngModel)]="identificacion.numeroIdentificacion" (blur)="onKeyIdentificacion()" id="cedula" name="placa" placeholder="" type="text" required>
                         </div>
-                        <div *ngIf='ciudadano' class="col-lg-4 col-md-4">
-                            <label>Tipo Identificación</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.tipoIdentificacion.nombre" name="tipoIdentificacion.nombre" placeholder="" type="text" required disabled="disabled">
+                        <div class="alert alert-danger" *ngIf="ciudadanoNoEncontrado">
+                            <strong>!</strong> el ciudadano con cedula <b>{{ identificacion.numeroIdentificacion }}</b> no se encuentra en la base de datos.
                         </div>
-                        <div *ngIf='ciudadano' class="col-lg-4 col-md-4">
-                            <label>Primer Nombre*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.primerNombre" name="primerNombre" placeholder="" type="text" required disabled="disabled">
+                        <div class="form-group row" *ngIf='ciudadanoNoEncontrado'> 
+                            <div class="col-lg-4 col-md-4">
+                                <label>Tipo Identificación</label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="departamentoId"></ng-select>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Primer Nombre</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.primerNombre" name="primerNombre" placeholder="" type="text">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Primer Apellido</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.primerApellido" name="primerApellido" placeholder="" type="text">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Dirección</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text">
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <label>Correo</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" placeholder="" type="text">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Teléfono</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefono" name="telefono" placeholder="" type="text">
+                            </div>
+                            <div class="col-lg-6 col-md-5">
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="municipios"
+                                    [(ngModel)]="municipioNacimientoSelected"
+                                    required
+                                    name="departamentoId">
+                                </ng-select>
+                            </div>
+                            <div class="cotainer col-lg-16">
+                                <button (click)="onEnviarInfractor()" class="btn btn-success pull-right">Enviar</button>
+                            </div>
                         </div>
-                        <div *ngIf='ciudadano' class="col-lg-4 col-md-4">
-                            <label>Primer Apellido*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.primerApellido" name="primerApellido" placeholder="" type="text" required disabled="disabled">
-                        </div>
-                        <div *ngIf='ciudadano' class="col-lg-4 col-md-4">
-                            <label>Dirección</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text" required disabled="disabled">
-                        </div>
-                        <div *ngIf='ciudadano' class="col-lg-4 col-md-4">
-                            <label>Correo</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" placeholder="" type="text" required disabled="disabled">
-                        </div>
-                        <div *ngIf='ciudadano' class="col-lg-4 col-md-4">
-                            <label>Teléfono</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.telefono" name="telefono" placeholder="" type="text" required disabled="disabled">
-                        </div>
-                        <div *ngIf='ciudadano' class="col-lg-4 col-md-4">
-                            <label>Ciudad</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.municipioNacimiento.nombre" name="municipioNacimiento.nombre" placeholder="" type="text" required disabled="disabled">
+                        <div class="form-group row" *ngIf='ciudadano'> 
+                            <div class="col-lg-4 col-md-4">
+                                <label>Tipo Identificación</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.tipoIdentificacion.nombre" name="tipoIdentificacion.nombre" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Primer Nombre</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.primerNombre" name="primerNombre" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Primer Apellido</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.primerApellido" name="primerApellido" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Dirección</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <label>Correo</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Teléfono</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefono" name="telefono" placeholder="" type="text" disabled="disabled">
+                            </div>
+                            <div class="col-lg-5 col-md-5">
+                                <label>Ciudad</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.municipioNacimiento.nombre" name="municipioNacimiento.nombre" placeholder="" type="text" disabled="disabled">
+                            </div>
                         </div>
                     </div>
-                    <hr>
-                    <h5 class="">Propietarios</h5>
-                        <table  class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Identificación</th>
-                                    <th>Correo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
-                                    <td>{{ciudadanoVehiculo.ciudadano?.primerNombre}}</td>
-                                    <td>{{ciudadanoVehiculo.ciudadano?.primerApellido}}</td>
-                                    <td>{{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}</td>
-                                    <td>{{ciudadanoVehiculo.ciudadano?.correo}}</td>
-                                </tr>
-                            </tbody> 
-                        </table>
-                        <h5 class="">Empresas</h5>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header align-items-start justify-content-between flex">
+                        <div class="list-unstyled comment-list">
+                            <div class="media"> 
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">Propietarios</h6>
+                                    listado de los propietarios para el vehículo
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table  class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Identificación</th>
+                                        <th>Correo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                        <td>{{ciudadanoVehiculo.ciudadano?.primerNombre}}</td>
+                                        <td>{{ciudadanoVehiculo.ciudadano?.primerApellido}}</td>
+                                        <td>{{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}</td>
+                                        <td>{{ciudadanoVehiculo.ciudadano?.correo}}</td>
+                                    </tr>
+                                </tbody> 
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header align-items-start justify-content-between flex">
+                        <div class="list-unstyled comment-list">
+                            <div class="media"> 
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">Empresas</h6>
+                                    listado de las empresas propietarias para el vehículo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
                         <table  class="table table-bordered">
                             <thead>
                                 <tr>
@@ -185,122 +286,149 @@
                                     <td>{{empresaVehiculo.empresa?.nombre}}</td>
                                 </tr>
                             </tbody> 
-                        </table>                     
-                    <hr>
-                    <div class="form-group row">
-                        <div class="col-lg-8 col-md-8">
-                            <label>Observación Agente*</label> 
-                            <input class="form-control" [(ngModel)]="comparendo.observacionesAgente" id="cedula" name="observacionesAgente" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-lg-8 col-md-8">
-                            <label>Observación Digitador*</label> 
-                            <input class="form-control" [(ngModel)]="comparendo.observacionesDigitador" id="cedula" name="observacionesDigitador" placeholder="" type="text" required>
-                        </div>
-                        <br>
-                        <br>
+                        </table>
                     </div>
-                    <div class="form-group row">
-                        <label class="custom-control custom-checkbox" for="option1">
-                            <!-- <input checked="" class="custom-control-input" id="option1" type="checkbox"> -->
-                            <input (click)="clickOnmovilizacion()" [(ngModel)]="comparendo.inmovilizacion" name="inmovilizacion" class="custom-control-input" id="option1" type="checkbox">
-                            <span class="custom-control-indicator"></span> 
-                            <span class="custom-control-description">Inmovilización</span>
-                        </label>
-                        <label class="custom-control custom-checkbox" for="option2">
-                            <input class="custom-control-input"  [(ngModel)]="comparendo.accidente" name="accidente" id="option2" type="checkbox">
-                            <span class="custom-control-indicator"></span> 
-                            <span class="custom-control-description" >Accidente</span>
-                        </label>
-                        <label class="custom-control custom-checkbox" for="option3">
-                            <input class="custom-control-input" [(ngModel)]="comparendo.fuga" name="fuga" id="option3" type="checkbox">
-                            <span class="custom-control-indicator"></span> 
-                            <span class="custom-control-description">Fuga</span>
-                        </label>
-                        <label class="custom-control custom-checkbox"  for="option4">
-                            <input class="custom-control-input" [(ngModel)]="comparendo.retencionLicencia"  name="retencionLicencia" id="option4" type="checkbox">
-                            <span class="custom-control-indicator"></span> 
-                            <span class="custom-control-description">Retención de licencia</span>
-                        </label>
-                    </div>
-                    <div class="col-md-10" *ngIf='inmovilizacionForm'>
-                        <div class="row ">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group ">
-                                    <label>Numero patio</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroPatio" name="numeroPatio"  placeholder="" type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group ">
-                                    <label>Numero Grua</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroGrua" name="numeroGrua" placeholder="" type="text">
-                                </div> 
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group ">
-                                    <label>Fecha ingreso</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.fechaIngreso" name="fechaIngreso" placeholder="" type="date">
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group ">
-                                    <label>Numero Consecutivo</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroConsecutivo" name="numeroConsecutivo" placeholder="" type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group ">
-                                    <label>Direccion Patio</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.direccionPatio" name="direccionPatio" placeholder="" type="text">
-                                </div> 
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="form-group ">
-                                    <label>Placa Grua</label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.placaGrua" name="placaGrua"  placeholder="" type="text">
-                                </div>
-                            </div>
-                        </div>
-                    </div>    
-                    <h5 class="">Datos de infracción</h5>
-                    <hr>
+                </div>
 
-                    <div class="row ">
-                        <div class="col-lg-4 col-md-4">
-                            <div class="form-group ">
-                                <label>Fotomulta</label>
-                                <select class="form-control" [(ngModel)]="comparendo.fotomulta" name="fotomulta">
-                                    <option value="1">Aplica</option>
-                                    <option value="0">No plica</option>
-                                </select>
+                <div class="card">
+                    <div class="card-header align-items-start justify-content-between flex">
+                        <div class="list-unstyled comment-list">
+                            <div class="media"> 
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">Observaciones</h6>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="form-group ">
-                                <label>Fecha notificación</label>
-                                <input class="form-control" [(ngModel)]="comparendo.fechaNotificacion" name="fechaNotificacion" placeholder="" type="date">
-                            </div> 
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-lg-8 col-md-8">
+                                <label>Observación Agente</label> 
+                                <textarea class="form-control" [(ngModel)]="comparendo.observacionesAgente" id="cedula" name="observacionesAgente" placeholder="" type="textArea"></textarea>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <label>Observación Digitador</label> 
+                                <textarea class="form-control" [(ngModel)]="comparendo.observacionesDigitador" id="cedula" name="observacionesDigitador" placeholder="" type="textArea"></textarea>
+                            </div>
+                            <br>
+                            <br>
+                        </div> 
+                        <div class="form-group row col-lg-16 col-md-16">
+                            <label class="custom-control custom-checkbox col-lg-4 col-md-4"  for="option1">
+                                <!-- <input checked="" class="custom-control-input" id="option1" type="checkbox"> -->
+                                <input (click)="clickOnmovilizacion()" [(ngModel)]="comparendo.inmovilizacion" name="inmovilizacion" class="custom-control-input" id="option1" type="checkbox">
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">Inmovilización</span>
+                            </label>
+                            <label class="custom-control custom-checkbox col-lg-4 col-md-4"  for="option2">
+                                <input class="custom-control-input"  [(ngModel)]="comparendo.accidente" name="accidente" id="option2" type="checkbox">
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description" >Accidente</span>
+                            </label>
+                            <label class="custom-control custom-checkbox col-lg-4 col-md-4"  for="option3">
+                                <input class="custom-control-input" [(ngModel)]="comparendo.fuga" name="fuga" id="option3" type="checkbox">
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">Fuga</span>
+                            </label>
+                            <label class="custom-control custom-checkbox col-lg-3 col-md-3"   for="option4">
+                                <input class="custom-control-input" [(ngModel)]="comparendo.retencionLicencia"  name="retencionLicencia" id="option4" type="checkbox">
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">Retención de licencia</span>
+                            </label>
                         </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="form-group ">
-                                <label>Grado Alcoholemia <span class="ai-lab"></span></label>
-                                <input class="form-control" [(ngModel)]="comparendo.gradoAlchoholemia" name="gradoAlchoholemia" placeholder="" type="text">
-                            </div> 
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="form-group ">
-                                <label>Descripción <span class="ai-lab"></span></label>
-                                <input class="form-control" [(ngModel)]="comparendo.descripcion" name="descripcion" placeholder="" type="textArea">
-                            </div> 
+                        <div class="col-md-16" *ngIf='inmovilizacionForm'>
+                            <div class="row ">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group ">
+                                        <label>Numero patio*</label>
+                                        <input class="form-control" [(ngModel)]="inmovilizacion.numeroPatio" name="numeroPatio" required  placeholder="" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group ">
+                                        <label>Numero Grua*</label>
+                                        <input class="form-control" [(ngModel)]="inmovilizacion.numeroGrua" name="numeroGrua" required placeholder="" type="text">
+                                    </div> 
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group ">
+                                        <label>Fecha ingreso*</label>
+                                        <input class="form-control" [(ngModel)]="inmovilizacion.fechaIngreso" name="fechaIngreso" required placeholder="" type="date">
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group ">
+                                        <label>Numero Consecutivo*</label>
+                                        <input class="form-control" [(ngModel)]="inmovilizacion.numeroConsecutivo" name="numeroConsecutivo" required placeholder="" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group ">
+                                        <label>Direccion Patio*</label>
+                                        <input class="form-control" [(ngModel)]="inmovilizacion.direccionPatio" name="direccionPatio" required placeholder="" type="text">
+                                    </div> 
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group ">
+                                        <label>Placa Grua*</label>
+                                        <input class="form-control" [(ngModel)]="inmovilizacion.placaGrua" name="placaGrua" required  placeholder="" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header align-items-start justify-content-between flex">
+                        <div class="list-unstyled comment-list">
+                            <div class="media"> 
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">Datos de infracción</h6>
+                                    rellene los campos para finalizar
+                                </div>
+                            </div>
                         </div>
                     </div>
-            </div>
-            <div class="card-footer col-lg-16 col-md-16">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
-            </div>    
+                    <div class="card-body">
+                        <div class="row ">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="form-group ">
+                                    <label>Fotomulta*</label>
+                                    <select class="form-control" [(ngModel)]="comparendo.fotomulta" name="fotomulta" required>
+                                        <option value="1">Aplica</option>
+                                        <option value="0">No plica</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group ">
+                                    <label>Fecha notificación</label>
+                                    <input class="form-control" [(ngModel)]="comparendo.fechaNotificacion" name="fechaNotificacion" placeholder="" type="date">
+                                </div> 
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group ">
+                                    <label>Grado Alcoholemia <span class="ai-lab"></span></label>
+                                    <input class="form-control" [(ngModel)]="comparendo.gradoAlchoholemia" name="gradoAlchoholemia" placeholder="" type="text">
+                                </div> 
+                            </div>
+                            <div class="col-lg-16 col-md-16">
+                                <div class="form-group ">
+                                    <label>Descripción <span class="ai-lab"></span></label>
+                                    <textarea class="form-control" [(ngModel)]="comparendo.descripcion" name="descripcion" placeholder="" type="textArea"></textarea>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer col-lg-16 col-md-16">
+                        <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                        <button (click)="onEnviar()" [disabled]="comparendoDiligenciadoForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -25,6 +25,7 @@ import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
 import { TramiteRoutes } from './tramite/tramite.routes';
+import { FacturaRoutes } from './factura/factura.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -57,6 +58,7 @@ export const DashboardRoutes: Route[] = [
         ...ComparendoRoutes,
         ...InfraccionRoutes,
         ...CarroceriaRoutes,
+        ...FacturaRoutes,
       ]
     }
 ];

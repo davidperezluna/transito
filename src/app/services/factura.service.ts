@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class CiudadanoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/ciudadano";
+export class FacturaService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/factura";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getCiudadano(){
+	getFactura(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(ciudadano,token){
+	register(factura,token){
 		
-		let json = JSON.stringify(ciudadano);
+		let json = JSON.stringify(factura);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteCiudadano(token,id){
+	deleteFactura(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class CiudadanoService {
 							  .map(res => res.json());
 	}
 
-	showCiudadano(token,id){
+	showFactura(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,9 +42,9 @@ export class CiudadanoService {
 
 	}
 
-	editCiudadano(ciudadano,token){
+	editFactura(factura,token){
 
-		let json = JSON.stringify(ciudadano);
+		let json = JSON.stringify(factura);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,16 +52,7 @@ export class CiudadanoService {
 
 	}
 
-	showCiudadanoCedula(token,ciudadano){
-		
-		let json = JSON.stringify(ciudadano);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/cedula", params, {headers: headers})
-							  .map(res => res.json());
-
-	}
-	getCiudadanoSelect(){
+	getFacturaSelect(){
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}

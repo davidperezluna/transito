@@ -14,10 +14,12 @@ import { LoginModule } from './login/login.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent
   ],
+  exports: [],
   imports: [
     BrowserModule,
     FormsModule,

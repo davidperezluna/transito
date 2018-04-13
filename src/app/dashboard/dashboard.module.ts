@@ -28,6 +28,7 @@ import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacio
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
 import { CarroceriaModule } from './carroceria/carroceria.module';
+import { FacturaModule } from './factura/factura.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 
@@ -37,6 +38,8 @@ import {TopNavComponent} from '../shared/index';
 import {SidebarComponent} from '../shared/index';
 import {FooterComponent} from '../shared/index';
 import {RightsidebarComponent} from '../shared/index';
+
+
 
 
 
@@ -70,9 +73,11 @@ import {RightsidebarComponent} from '../shared/index';
       CarroceriaModule,
       ComparendoModule,
       InfraccionModule,
+      FacturaModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
+    providers:[]
 })
 
 export class DashboardModule { }

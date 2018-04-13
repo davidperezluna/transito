@@ -1,29 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {CiudadanoService} from '../../services/ciudadano.service';
+import {FacturaService} from '../../services/factura.service';
 import {LoginService} from '../../services/login.service';
-import {Ciudadano} from './ciudadano.modelo';
-import {NewCiudadanoComponent} from './new/new.component';
+import {Factura} from './factura.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './ciudadano.component.html',
-  providers: [NewCiudadanoComponent],
+  templateUrl: './factura.component.html'
 })
-export class CiudadanoComponent implements OnInit {
+export class FacturaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public ciudadanos;
+	public facturas;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public ciudadano: Ciudadano;
+  public factura: Factura;
 
   constructor(
-		private _CiudadanoService: CiudadanoService,
+		private _FacturaService: FacturaService,
 		private _loginService: LoginService,
     ){}
     
@@ -42,10 +40,9 @@ export class CiudadanoComponent implements OnInit {
       ) {
       }
     })
-		this._CiudadanoService.getCiudadano().subscribe(
+		this._FacturaService.getFactura().subscribe(
 				response => {
-          this.ciudadanos = response.data;
-          console.log(this.ciudadanos);
+          this.facturas = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -62,8 +59,8 @@ export class CiudadanoComponent implements OnInit {
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
-      responsive: false,
-      pageLength: 6,
+      responsive: true,
+      pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
            oPaginate: {
@@ -90,7 +87,7 @@ export class CiudadanoComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteCiudadano(id:any){
+  deleteFactura(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -104,7 +101,7 @@ export class CiudadanoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CiudadanoService.deleteCiudadano(token,id).subscribe(
+        this._FacturaService.deleteFactura(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -131,8 +128,8 @@ export class CiudadanoComponent implements OnInit {
     })
   }
 
-  editCiudadano(ciudadano:any){
-    this.ciudadano = ciudadano;
+  editFactura(factura:any){
+    this.factura = factura;
     this.formEdit = true;
     this.formIndex = false;
   }

@@ -59,5 +59,10 @@ export class VehiculoService {
 							  .map(res => res.json());
 
 	}
+
+	getvehiculoSelect(){
+		
+		return this._http.get(this.url+"/select").map(res => res.json());
+	}
 	
 }

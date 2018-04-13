@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-sm-16">
+        <form #facturaForm="ngForm">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">formulario para el ingreso de una nueva municipio</h5>
+                <hr> 
+                <div class="row justify-content-center">
+                    <div class="col-md-10 ">
+                        <div class="form-group row">
+                        <div class="col-lg-8 col-md-8">
+                            <label>Numero*</label>
+                            <input class="form-control" [(ngModel)]="factura.numero" name="numero" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Fecha creación*</label>
+                            <input class="form-control" [(ngModel)]="factura.fechaCreacion" name='fechaCreacion' placeholder="" type="date">
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Observación*</label>
+                            <textarea class="form-control" [(ngModel)]="factura.observacion" name='observacion' placeholder="" type="date"></textarea>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Vehículo*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="vehiculos"
+                                [(ngModel)]="vehiculoSelected"
+                                required
+                                name="vehiculoId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Solicitante*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="ciudadanos"
+                                [(ngModel)]="solicitanteSelected"
+                                required
+                                name="solocitanteId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>apoderado*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="ciudadanos"
+                                [(ngModel)]="apoderadoSelected"
+                                required
+                                name="apoderadoId">
+                            </ng-select>
+                        </div>
+                        </div>
+                    </div>    
+            </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" [disabled]="facturaForm.invalid" type="button" >Enviar</button>
+                </div>    
+            </div>
+        </div>
+    </form>
+</div>
