@@ -1,29 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CiudadanoService } from '../../services/ciudadano.service';
+import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { LoginService } from '../../services/login.service';
-import { Ciudadano } from './ciudadano.modelo';
-import { NewCiudadanoComponent } from './new/new.component';
+import { TramiteSolicitud } from './tramiteSolicitud.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './ciudadano.component.html',
-  providers: [NewCiudadanoComponent],
+  templateUrl: './tramiteSolicitud.component.html'
 })
-export class CiudadanoComponent implements OnInit {
+export class TramiteSolicitudComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public ciudadanos;
+	public tramitesSolicitud;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table:any; 
-  public ciudadano: Ciudadano;
+  public table: any;
+  public tramiteSolicitud: TramiteSolicitud;
 
   constructor(
-		private _CiudadanoService: CiudadanoService,
+    private _TramiteSolicitudService: TramiteSolicitudService,
 		private _loginService: LoginService,
     ){}
     
@@ -42,17 +40,15 @@ export class CiudadanoComponent implements OnInit {
       ) {
       }
     })
-		this._CiudadanoService.getCiudadano().subscribe(
+    this._TramiteSolicitudService.getTramiteSolicitud().subscribe(
 				response => {
-          this.ciudadanos = response.data;
-          console.log(this.ciudadanos);
-          let timeoutId = setTimeout(() => {  
+          this.tramitesSolicitud = response.data;
+          let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
-				}, 
+				},
 				error => {
 					this.errorMessage = <any>error;
-
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
@@ -62,8 +58,8 @@ export class CiudadanoComponent implements OnInit {
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
-      responsive: false,
-      pageLength: 6,
+      responsive: true,
+      pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
            oPaginate: {
@@ -82,16 +78,15 @@ export class CiudadanoComponent implements OnInit {
     this.table.destroy();
   }
 
-  ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
+  ready(isCreado: any){
+    if(isCreado) {
+      this.formNew = false;
+      this.formEdit = false;
+      this.formIndex = true;
+      this.ngOnInit();
+    }
   }
-  deleteCiudadano(id:any){
-
+  deleteTramiteSolicitud(id: any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -104,7 +99,7 @@ export class CiudadanoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CiudadanoService.deleteCiudadano(token,id).subscribe(
+        this._TramiteSolicitudService.deleteTramiteSolicitud(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -125,16 +120,13 @@ export class CiudadanoComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }
 
-  editCiudadano(ciudadano:any){
-    this.ciudadano = ciudadano;
+  editTramiteSolicitud(tramiteSolicitud: any){
+    this.tramiteSolicitud = tramiteSolicitud;
     this.formEdit = true;
     this.formIndex = false;
   }
-
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {FacturaService} from '../../services/factura.service';
-import {LoginService} from '../../services/login.service';
-import {Factura} from './factura.modelo';
+import { FacturaService } from '../../services/factura.service';
+import { TramiteFacturaService } from '../../services/tramiteFactura.service';
+import { LoginService } from '../../services/login.service';
+import { Factura } from './factura.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -22,8 +23,9 @@ export class FacturaComponent implements OnInit {
 
   constructor(
 		private _FacturaService: FacturaService,
-		private _loginService: LoginService,
-    ){}
+		private _TramiteFacturaService: TramiteFacturaService,
+    private _loginService: LoginService,
+  ){}
     
   ngOnInit() {
     swal({
@@ -57,6 +59,7 @@ export class FacturaComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -73,6 +76,7 @@ export class FacturaComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -88,7 +92,6 @@ export class FacturaComponent implements OnInit {
       }
   }
   deleteFactura(id:any){
-
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -122,8 +125,6 @@ export class FacturaComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }
@@ -133,5 +134,4 @@ export class FacturaComponent implements OnInit {
     this.formEdit = true;
     this.formIndex = false;
   }
-
 }

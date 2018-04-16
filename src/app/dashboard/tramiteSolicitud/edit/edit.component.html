@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">Editar solicitud de tramite</h5>
+                <hr> 
+                <div class="row justify-content-center">
+                    <form #tramiteSolicitudForm="ngForm">
+                        <div class="form-group row">
+                            <div class="col-xs-16 col-lg-16">
+                                <label>Observación</label>
+                                <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación" required></textarea>
+                            </div>
+                            <div class="col-xs-16 col-lg-16">
+                                <label>Documentación</label>
+                                <input class="form-control" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" type="checkbox" required />
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <label>Vehículo*</label>
+                                <ng-select [multiple]="false" [options]="vehiculos" [(ngModel)]="vehiculoSelected" required name="vehiculoId">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <label>Tramite*</label>
+                                <ng-select [multiple]="false" [options]="tramitesFactura" [(ngModel)]="tramiteFacturaSelected" required name="tramiteFacturaId">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="tramiteSolicitudForm.invalid" class="btn btn-outline-primary" type="button">
+                        <i class="fa fa-floppy-o"></i>
+                        Enviar
+                    </button>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>

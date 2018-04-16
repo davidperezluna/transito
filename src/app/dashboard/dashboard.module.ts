@@ -29,6 +29,8 @@ import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
 import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
+import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
+import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 
@@ -74,6 +76,8 @@ import {RightsidebarComponent} from '../shared/index';
       ComparendoModule,
       InfraccionModule,
       FacturaModule,
+      TramiteFacturaModule,
+      TramiteSolicitudModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

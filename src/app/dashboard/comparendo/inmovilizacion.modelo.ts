@@ -8,6 +8,5 @@ export class Inmovilizacion{
 		public direccionPatio:string,
 		public placaGrua:string,
 		public fechaIngreso:string,
-		
 	){}
 } 

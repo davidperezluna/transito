@@ -1,9 +1,10 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Factura} from '../factura.modelo';
-import {FacturaService} from '../../../services/factura.service';
-import {LoginService} from '../../../services/login.service';
-import {VehiculoService} from '../../../services/vehiculo.service';
-import {CiudadanoService} from '../../../services/ciudadano.service';
+import { Factura } from '../factura.modelo';
+import { FacturaService } from '../../../services/factura.service';
+import { LoginService } from '../../../services/login.service';
+import { VehiculoService } from '../../../services/vehiculo.service';
+import { CiudadanoService } from '../../../services/ciudadano.service';
+import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -15,23 +16,26 @@ export class NewComponent implements OnInit {
 public factura: Factura;
 public errorMessage;
 public respuesta;
-public vehiculos:any;
-public ciudadanos:any;
-public vehiculoSelected:any;
-public solicitanteSelected:any;
-public apoderadoSelected:any;
+public vehiculos: any;
+public ciudadanos: any;
+public sedesOperativas: any;
+public vehiculoSelected: any;
+public solicitanteSelected: any;
+public apoderadoSelected: any;
+public sedeOperativaSelected: any;
 
 constructor(
   private _FacturaService: FacturaService,
-  private _Ciudadano: CiudadanoService,
+  private _CiudadanoService: CiudadanoService,
   private _loginService: LoginService,
-  private _vehiculoService: VehiculoService,
+  private _VehiculoService: VehiculoService,
+  private _SedeOperativaService: SedeOperativaService,
   ){}
 
   ngOnInit() {
-    this.factura = new Factura(null,null,null,null,null,null,null);
+    this.factura = new Factura(null, null, null, null, null, null, null, null, null);
 
-    this._vehiculoService.getvehiculoSelect().subscribe(
+    this._VehiculoService.getVehiculoSelect().subscribe(
         response => {
           this.vehiculos = response;
         }, 
@@ -40,23 +44,38 @@ constructor(
 
           if(this.errorMessage != null){
             console.log(this.errorMessage);
-            alert("Error en la petición");
+            alert('Error en la petición');
           }
         }
       );
-    this._Ciudadano.getCiudadanoSelect().subscribe(
-        response => {
-          this.ciudadanos = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
 
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+    this._CiudadanoService.getCiudadanoSelect().subscribe(
+      response => {
+        this.ciudadanos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
-      );
+      }
+    );
+
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+      response => {
+        this.sedesOperativas = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
   onCancelar(){
     this.ready.emit(true);
@@ -66,6 +85,7 @@ constructor(
     this.factura.vehiculoId = this.vehiculoSelected;
     this.factura.solicitanteId = this.solicitanteSelected;
     this.factura.apoderadoId = this.apoderadoSelected;
+    this.factura.sedeOperativaId = this.sedeOperativaSelected;
     
     console.log(this.factura);
 		this._FacturaService.register(this.factura,token).subscribe(
@@ -90,14 +110,11 @@ constructor(
         }
 			error => {
 					this.errorMessage = <any>error;
-
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
 					}
 				}
-
-		}); 
+		});
   }
-
 }

@@ -43,27 +43,19 @@ export class CiudadanoService {
 	}
 
 	editCiudadano(ciudadano,token){
-
 		let json = JSON.stringify(ciudadano);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/edit", params, {headers: headers})
-							  .map(res => res.json());
-
+ 			return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
 	showCiudadanoCedula(token,ciudadano){
-		
 		let json = JSON.stringify(ciudadano);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/cedula", params, {headers: headers})
-							  .map(res => res.json());
-
+ 			return this._http.post(this.url+"/cedula", params, {headers: headers}).map(res => res.json());
 	}
 	getCiudadanoSelect(){
-		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
-	
 }

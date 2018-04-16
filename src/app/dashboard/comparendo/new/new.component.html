@@ -49,9 +49,9 @@
 
         <div class="row  align-items-center justify-content-between" *ngIf='validado'>
             <div class="col-11 col-sm-12 page-title">
-                <h3>formulario para el ingreso de una nuevo comparendo (validado)</h3>
-                <p>Agente de transito: <strong> {{ agenteTransito.data.ciudadano.primerNombre }} {{ agenteTransito.data.ciudadano.primerApellido }}</strong></p>
-                <p>Sede operativa: <strong> {{ sedeOperativa.data.nombre }}</strong></p>
+                <h3>Nuevo comparendo</h3>
+                <p class="text-right">Agente de transito: <strong> {{ agenteTransito.data.ciudadano.primerNombre }} {{ agenteTransito.data.ciudadano.primerApellido }}</strong></p>
+                <p class="text-right">Sede operativa: <strong> {{ sedeOperativa.data.nombre }}</strong></p>
             </div>
             <form #comparendoDiligenciadoForm="ngForm" class="col-md-16">
                 <div class="card">

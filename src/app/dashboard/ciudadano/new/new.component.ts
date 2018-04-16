@@ -17,15 +17,15 @@ export class NewCiudadanoComponent implements OnInit {
 public ciudadano: Ciudadano;
 public errorMessage;
 public respuesta;
-public tiposIdentificacion:any;
-public generos:any;
-public gruposSanguineos:any;
-public municipios:any;
-public tipoIdentificacionSelected:any; 
-public generoSelected:any;
-public grupoSanguineoSelected:any;
-public municipioResidenciaSelected:any;
-public municipioNacimientoSelected:any;
+public tiposIdentificacion: any;
+public generos: any;
+public gruposSanguineos: any;
+public municipios: any;
+public tipoIdentificacionSelected: any;
+public generoSelected: any;
+public grupoSanguineoSelected: any;
+public municipioResidenciaSelected: any;
+public municipioNacimientoSelected: any;
 
 
 constructor(
@@ -35,8 +35,7 @@ constructor(
   private _generoService: GeneroService,
   private _grupoSanguineoService: GrupoSanguineoService,
   private _municipioService: MunicipioService,
- 
-  ){}
+){}
 
   ngOnInit() {
     this.ciudadano = new Ciudadano(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
@@ -44,13 +43,13 @@ constructor(
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
         response => {
           this.tiposIdentificacion = response;
-        }, 
+        },
         error => {
           this.errorMessage = <any>error;
 
           if(this.errorMessage != null){
             console.log(this.errorMessage);
-            alert("Error en la petición");
+            alert('Error en la petición');
           }
         }
       );
@@ -63,7 +62,7 @@ constructor(
         this.errorMessage = <any>error;
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
-          alert("Error en la petición");
+          alert('Error en la petición');
         }
       }
     );
@@ -77,7 +76,7 @@ constructor(
 
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
-          alert("Error en la petición");
+          alert('Error en la petición');
         }
       }
     );
@@ -90,7 +89,7 @@ constructor(
           this.errorMessage = <any>error;
           if(this.errorMessage != null){
             console.log(this.errorMessage);
-            alert("Error en la petición");
+            alert('Error en la petición');
           }
         }
       );
@@ -152,23 +151,19 @@ constructor(
         }
       error => {
           this.errorMessage = <any>error;
-
           if(this.errorMessage != null){
             console.log(this.errorMessage);
-            alert("Error en la petición");
+            alert('Error en la petición');
           }
         }
-
     }); 
         } else if (
           // Read more about handling dismissals
           result.dismiss === swal.DismissReason.cancel
         ) {
-          
+
         }
       })
-    
-    
   }
 
 }

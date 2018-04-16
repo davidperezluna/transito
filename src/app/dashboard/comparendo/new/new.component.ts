@@ -1,14 +1,14 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Comparendo} from '../comparendo.modelo';
-import {Inmovilizacion} from '../inmovilizacion.modelo';
-import {ComparendoService} from '../../../services/comparendo.service';
-import {LoginService} from '../../../services/login.service';
-import {AgenteTransitoService} from '../../../services/agenteTransito.service';
-import {SedeOperativaService} from '../../../services/sedeOperativa.service';
-import {MunicipioService} from '../../../services/municipio.service';
-import {VehiculoService} from '../../../services/vehiculo.service';
-import {CiudadanoService} from '../../../services/ciudadano.service';
-import {CiudadanoVehiculoService} from '../../../services/ciudadanoVehiculo.service';
+import { Comparendo } from '../comparendo.modelo';
+import { Inmovilizacion } from '../inmovilizacion.modelo';
+import { ComparendoService } from '../../../services/comparendo.service';
+import { LoginService } from '../../../services/login.service';
+import { AgenteTransitoService } from '../../../services/agenteTransito.service';
+import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { MunicipioService } from '../../../services/municipio.service';
+import { VehiculoService } from '../../../services/vehiculo.service';
+import { CiudadanoService } from '../../../services/ciudadano.service';
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import swal from 'sweetalert2';
 
@@ -16,37 +16,38 @@ import swal from 'sweetalert2';
   selector: 'app-new',
   templateUrl: './new.component.html'
 })
-export class NewComponent implements OnInit { 
+export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public comparendo: Comparendo;
 public inmovilizacion: Inmovilizacion;
 public errorMessage;
 public respuesta;
-public agentesTransito:any;
-public sedesOperativas:any;
-public municipios:any;
-public agenteTransitoSelected:any;
-public municipioSelected:any;
-public sedeOperativaSelected:any;
-public agenteTransito:any;
-public sedeOperativa:any;
+public agentesTransito: any;
+public sedesOperativas: any;
+public municipios: any;
+public agenteTransitoSelected: any;
+public municipioSelected: any;
+public sedeOperativaSelected: any;
+public agenteTransito: any;
+public sedeOperativa: any;
 public agenteTransitoReady = false;
 public sedeOperativaReady = false;
 public validado = false;
 public comparendoExistente = false;
-public placa:any;
-public identificacion:any;
-public vehiculo:any;
-public municipioId:any;
-public ciudadano:any;
-public ciudadanosVehiculo:any;
-public vehiculoNoEncontrado=false;
-public ciudadanoNoEncontrado=false;
-public formCiudadano=false;
-public inmovilizacionForm=false;
-public tipoIdentificacionSelected:any;
-public tiposIdentificacion:any;
-public municipioNacimientoSelected:any;
+public placa: any;
+public identificacion: any;
+public vehiculo: any;
+public municipioId: any;
+public ciudadano: any;
+public ciudadanosVehiculo: any;
+public vehiculoNoEncontrado = false;
+public ciudadanoNoEncontrado = false;
+public formCiudadano = false;
+public inmovilizacionForm = false;
+public tipoIdentificacionSelected: any;
+public tiposIdentificacion: any;
+public municipioNacimientoSelected: any;
+
 constructor(
   private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
