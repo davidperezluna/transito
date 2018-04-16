@@ -6,7 +6,8 @@
       </div>
       <div class="col text-right ">
         <div class="btn-group pull-right">
-          <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+          <button (click)="onNew()" *ngIf='formIndex' class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+          <button (click)="onNewTramite()" *ngIf='formShow' class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Tramite</span> <i class="ti-save ml-2"></i></button>
         </div>
       </div>
       
@@ -46,7 +47,7 @@
                           <button (click)="deleteFactura(factura.id)"  class="btn btn-outline-danger" type="button" title="Eiminar">
                             <i class="fa fa-trash"></i>
                           </button>
-                          <button (click)="getTramiteFactura(factura.id)" class="btn btn-outline-info" type="button" title="Tramites">
+                          <button (click)="getTramiteFactura(factura)" class="btn btn-outline-info" type="button" title="Tramites">
                             <i class="fa fa-tasks"></i>
                           </button>
                       </div>
@@ -61,4 +62,5 @@
       </div>
       <app-edit *ngIf='formEdit' [factura]="factura" (ready)="ready($event)"></app-edit>
       <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+      <factura-show *ngIf='formShow' [factura]="factura" (ready)="ready($event)"></factura-show>
   </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { LoginService } from '../../services/login.service';
+import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -8,16 +8,16 @@ declare var $: any;
     selector: 'app-index',
     templateUrl: './tramiteSolicitud.component.html'
 })
-export class TramiteSolicitudComponent implements OnInit {
+export class CambioColorComponent implements OnInit {
     public errorMessage;
-    public id;
+    public id; 
     public respuesta;
     public tramitesSolicitud;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
     public table: any;
-    public tramiteSolicitud: TramiteSolicitud;
+    // public tramiteSolicitud: TramiteSolicitud;
 
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
@@ -124,7 +124,7 @@ export class TramiteSolicitudComponent implements OnInit {
     }
 
     editTramiteSolicitud(tramiteSolicitud: any) {
-        this.tramiteSolicitud = tramiteSolicitud;
+        // this.tramiteSolicitud = tramiteSolicitud;
         this.formEdit = true;
         this.formIndex = false;
     }

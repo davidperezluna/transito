@@ -17,6 +17,7 @@ export class FacturaComponent implements OnInit {
 	public facturas;
 	public formNew = false;
 	public formEdit = false;
+	public formShow = false;
   public formIndex = true;
   public table:any; 
   public factura: Factura;
@@ -88,9 +89,21 @@ export class FacturaComponent implements OnInit {
         this.formNew = false;
         this.formEdit = false;
         this.formIndex = true;
+        this.formShow = false;
         this.ngOnInit();
       }
   }
+
+  readyShow(isCreado:any){
+    if(isCreado) {
+      this.formNew = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.formIndex = true;
+      this.ngOnInit();
+    }
+}
+
   deleteFactura(id:any){
     swal({
       title: '¿Estás seguro?',
@@ -132,6 +145,11 @@ export class FacturaComponent implements OnInit {
   editFactura(factura:any){
     this.factura = factura;
     this.formEdit = true;
+    this.formIndex = false;
+  }
+  getTramiteFactura(factura:any){
+    this.factura = factura;
+    this.formShow = true;
     this.formIndex = false;
   }
 }
