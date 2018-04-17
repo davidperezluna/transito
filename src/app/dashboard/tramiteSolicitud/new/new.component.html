@@ -57,8 +57,9 @@
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-10"><!-- .col -->
-        <app-duplicado-placa *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
-        <app-cambio-placa *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-placa>
-        <app-cambio-color *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
+        <app-duplicado-placa *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
+        <app-duplicado-licencia *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-licencia>
+        <app-cambio-placa *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-placa>
+        <app-cambio-color *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
     </div><!-- /.col -->
 </div><!-- /.row -->
