@@ -2,6 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { TramiteSolicitud } from '../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -23,12 +24,14 @@ export class NewComponent implements OnInit {
   public isPagada = false;
   public mensaje = '';
   public isError = false;
+  public ciudadanosVehiculo;
 
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
   private _loginService: LoginService,
   private _tramiteFacturaService: TramiteFacturaService,
   private _facturaService: FacturaService,
+  private _ciudadanoVehiculoService: CiudadanoVehiculoService,
 ){}
 
   ngOnInit() {
@@ -99,6 +102,7 @@ constructor(
         response => {
           if (response.status == 'success') {
             this.factura = response.data;
+
             if (this.factura.estado) {
               this.isError = false;
               this._tramiteFacturaService.getTramiteFacturaSelect(this.factura.numero).subscribe(
@@ -114,6 +118,19 @@ constructor(
                   }
                 }
               );
+
+              this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.factura.vehiculo.id).subscribe(
+                response => {
+                  this.ciudadanosVehiculo = response.data;
+                  console.log(this.ciudadanosVehiculo);
+                error => { 
+                    this.errorMessage = <any>error;
+                    if(this.errorMessage != null){
+                      console.log(this.errorMessage);
+                      alert("Error en la petición"); 
+                    }
+                  }
+              });
             }else{
               this.factura = false;
               this.isError = true;

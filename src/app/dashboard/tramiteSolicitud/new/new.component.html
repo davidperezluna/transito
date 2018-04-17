@@ -41,6 +41,26 @@
                             </ng-select>
                         </div>
                     </div>
+                    <table  class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Solicitante</th>
+                                <th>Check</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                <td>
+                                    <strong>Nombre: </strong>
+                                    {{ciudadanoVehiculo.ciudadano?.primerNombre}} {{ciudadanoVehiculo.ciudadano?.primerApellido}}
+                                    <br>
+                                    <strong>Identificación: </strong>
+                                    {{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody> 
+                    </table> 
                 </div>
                 <div class="card-footer">
                     <button (click)="onCancelar()" class="btn btn-secondary">
@@ -50,6 +70,7 @@
                 </div>    
             </div>
         </div>
+
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-10"><!-- .col -->
