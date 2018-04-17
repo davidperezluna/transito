@@ -31,7 +31,7 @@ export class TramiteFacturaService {
 	showTramiteFactura(token, id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url + "/show/" + id, params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url + "/" + id + '/show', params, {headers: headers}).map(res => res.json());
 	}
 
 	editTramiteFactura(tramiteFactura, token){
@@ -42,9 +42,6 @@ export class TramiteFacturaService {
 	}
 
 	getTramiteFacturaSelect(idFactura){
-		console.log("asssssssssssssss");
-		console.log(idFactura);
-
 		return this._http.get(this.url + "/"+idFactura+"/select").map(res => res.json());
 	}
 }
