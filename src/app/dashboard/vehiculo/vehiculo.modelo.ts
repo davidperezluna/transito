@@ -8,7 +8,7 @@ export class Vehiculo{
 		public colorId:number,
 		public combustibleId:number,
 		public carroceriaId:number,
-		public organismoTransitoId:number,
+		public sedeOperativaId:number,
 		public placa:string,
 		public numeroFactura:string,
 		public fechaFactura:string,

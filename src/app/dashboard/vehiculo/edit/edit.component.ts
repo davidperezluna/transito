@@ -10,7 +10,7 @@ import {ServicioService} from '../../../services/servicio.service';
 import {ColorService} from '../../../services/color.service';
 import {CombustibleService} from '../../../services/combustible.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
-import {OrganismoTransitoService} from '../../../services/organismoTransito.service';
+import {SedeOperativaService} from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-edit',
@@ -34,10 +34,10 @@ public claseSelected:any;
 public carroceriaSelected:any;
 public servicioSelected:any;
 public colorSelected:any;
-public organismoTransitoSelected:any;
+public sedeOperativaSelected:any;
 public combustibleSelected:any;
 public respuesta:any;
-public organismosTransito:any;
+public sedesOperativas:any;
 
 constructor(
   private _departamentoService: DepartamentoService,
@@ -50,7 +50,7 @@ constructor(
   private _ColorService: ColorService,
   private _CombustibleService: CombustibleService,
   private _VehiculoService: VehiculoService,
-  private _OrganismoTransitoService: OrganismoTransitoService,
+  private _SedeOperativaService: SedeOperativaService,
   ){}
 
   ngOnInit() {
@@ -101,11 +101,11 @@ constructor(
         }
       }
     );
-    this._OrganismoTransitoService.getOrganismoTransitoSelect().subscribe(
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
-        this.organismosTransito = response;
+        this.sedesOperativas = response;
         setTimeout(() => {
-            this.organismoTransitoSelected = [this.vehiculo.organismoTransito.id];
+            this.sedeOperativaSelected = [this.vehiculo.sedeOperativa.id];
         });
       }, 
       error => {
@@ -212,7 +212,7 @@ constructor(
     this.vehiculo.servicioId = this.servicioSelected;
     this.vehiculo.colorId = this.colorSelected;
     this.vehiculo.combustibleId = this.combustibleSelected;
-    this.vehiculo.organismoTransitoId = this.organismoTransitoSelected;
+    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     console.log(this.vehiculo);  
     let token = this._loginService.getToken();
     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
