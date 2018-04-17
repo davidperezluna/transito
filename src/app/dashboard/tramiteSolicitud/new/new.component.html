@@ -61,7 +61,8 @@
         <app-duplicado-licencia *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-licencia>
         <app-cambio-placa *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-placa>
         <app-cambio-color *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
-        <app-cambio-motor *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
+        <app-cambio-motor *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
         <app-regrabar-motor *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-regrabar-motor>
+        <app-rematricula *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-rematricula>
     </div><!-- /.col -->
 </div><!-- /.row -->

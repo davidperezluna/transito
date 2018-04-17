@@ -93,7 +93,7 @@ export class NewRegrabarMotorComponent implements OnInit {
                 }
             });
     }
-    
+
     enviarTramite() {
         this.datos.tipoRegrabacion = this.tipoRegrabacionSelected;
         this.datos.motivo = this.motivoSelected;

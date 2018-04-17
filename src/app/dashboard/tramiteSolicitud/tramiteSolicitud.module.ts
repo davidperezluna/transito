@@ -11,6 +11,7 @@ import { NewCambioColorComponent } from './rna/tramiteCambioColor/new.cambioColo
 import { NewCambioPlacaComponent } from './rna/tramiteCambioPlaca/new.cambioPlaca.component';
 import { NewCambioMotorComponent } from './rna/tramiteCambioMotor/new.cambioMotor.component';
 import { NewRegrabarMotorComponent } from './rna/tramiteRegrabarMotor/new.regrabarMotor.component';
+import { NewRematriculaComponent } from './rna/tramiteRematricula/new.rematricula.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 
@@ -26,7 +27,8 @@ import { SelectModule } from 'angular2-select';
         NewCambioColorComponent,
         NewCambioPlacaComponent,
         NewCambioMotorComponent,
-        NewRegrabarMotorComponent
+        NewRegrabarMotorComponent,
+        NewRematriculaComponent
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -37,7 +39,8 @@ import { SelectModule } from 'angular2-select';
         NewCambioColorComponent,
         NewCambioPlacaComponent,
         NewCambioMotorComponent,
-        NewRegrabarMotorComponent
+        NewRegrabarMotorComponent,
+        NewRematriculaComponent
     ],
     providers:[TramiteSolicitudService]
 })
