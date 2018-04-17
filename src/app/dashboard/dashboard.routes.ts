@@ -65,6 +65,7 @@ export const DashboardRoutes: Route[] = [
         ...TramiteFacturaRoutes,
         ...TramiteSolicitudRoutes,
         ...SustratoRoutes,
+        
       ]
     }
 ];
