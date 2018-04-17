@@ -28,6 +28,7 @@ import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
+import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -63,6 +64,7 @@ export const DashboardRoutes: Route[] = [
         ...FacturaRoutes,
         ...TramiteFacturaRoutes,
         ...TramiteSolicitudRoutes,
+        ...SustratoRoutes,
       ]
     }
 ];
