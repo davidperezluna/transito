@@ -45,59 +45,78 @@
     <div class="col-md-10 col-lg-12">
         <h2 class="text-center">Tramites</h2>
         <div class="table-responsive">
-            <table class="table table-striped">
+
+            <div class="" *ngIf="!tramitesFacturaReady && cargar">
+                <div class=" load-wrapper2">
+                    <div class="sk-wandering-cubes">
+                        <div class="sk-cube sk-cube1"></div>
+                        <div class="sk-cube sk-cube2"></div>
+                        </div>
+                </div>    
+            </div>
+
+            <div class="card text-center" *ngIf="tramitesFactura == '' && tramitesFacturaReady">
+                <div class="card-header">Inscripción </div>
+                <div class="card-body">
+                    <h4 class="card-title text-white">No tiene tramites asociados a esta factura </h4>
+                    <p class="card-text">Ingrese los tramites que desea realizar con este numero de factura.</p>
+                    <button type="button" class="btn btn-primary" (click)="onNuevoTramite()"> Ingresar </button>
+                </div>
+                <div class="card-footer text-muted"> Numero factura {{factura.numero}} </div>
+            </div>
+
+            <div class="card" *ngIf='nuevoTramite'>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Nombre</th>
+                                <th>Modulo</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let tramite of tramites; let i = index">
+                                <td >
+                                    <label class="custom-control custom-checkbox" for="{{tramite.id}}">
+                                        <input type="checkbox" [(ngModel)]="tramite.state" value="{{tramite.id}}" class="custom-control-input"  id="{{tramite.id}}">
+                                        <span class="custom-control-indicator"></span> 
+                                    </label><br>
+                                </td> 
+                                <td>{{tramite.nombre}}</td>
+                                <td>{{tramite.modulo?.nombre}}</td>
+                                <td>{{tramite.valor}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>    
+                <div class="card-footer">
+                    <button class="btn btn-secondary">Cancelar</button>
+                    <button class="btn btn-success pull-right" (click)="onEnviar()">Aceptar</button>
+                </div>
+            </div>
+
+            <table class="table table-striped" *ngIf="tramitesFactura != '' && tramitesFacturaReady">
             <thead>
                 <tr>
-                <td><strong>Item</strong></td>
-                <td class="text-center"><strong>Price</strong></td>
-                <td class="text-center"><strong>Quantity</strong></td>
-                <td class="text-right"><strong>Totals</strong></td>
+                    <td><strong>Nombre</strong></td>
+                    <th>Modulo</th>
+                    <th>Valor</th>
                 </tr>
             </thead>
             <tbody>
                 
-                <tr>
-                <td><b>Lorem Ipsum is simply dummy text</b><br>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots</td>
-                <td class="text-center">$10.99</td>
-                <td class="text-center">1</td>
-                <td class="text-right">$10.99</td>
-                </tr>
-                <tr>
-                <td><b>Lorem Ipsum is simply dummy text</b><br>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots</td>
-                <td class="text-center">$20.00</td>
-                <td class="text-center">3</td>
-                <td class="text-right">$60.00</td>
-                </tr>
-                <tr>
-                <td><b>Lorem Ipsum is simply dummy text</b><br>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots</td>
-                <td class="text-center">$600.00</td>
-                <td class="text-center">1</td>
-                <td class="text-right">$600.00</td>
-                </tr>
-                <tr>
-                <td class="thick-line"></td>
-                <td class="thick-line"></td>
-                <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                <td class="thick-line text-right">$670.99</td>
-                </tr>
-                <tr>
-                <td class="no-line"></td>
-                <td class="no-line"></td>
-                <td class="no-line text-center"><strong>Shipping</strong></td>
-                <td class="no-line text-right">$15</td>
-                </tr>
-                <tr>
-                <td class="no-line"></td>
-                <td class="no-line"></td>
-                <td class="no-line text-center"><strong>Total</strong></td>
-                <td class="no-line text-right"><strong>$685.99</strong></td>
+                <tr *ngFor="let tramiteFactura of tramitesFactura; let i = index">
+                    <td>{{tramiteFactura.tramite.nombre}} </td>
+                    <td>{{tramiteFactura.tramite.modulo?.nombre}}</td>
+                    <td>{{tramiteFactura.tramite.valor}}</td>
                 </tr>
             </tbody>
             </table>
         </div>
         </div>
 </div>
+
+
 

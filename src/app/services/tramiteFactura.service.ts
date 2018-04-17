@@ -11,8 +11,8 @@ export class TramiteFacturaService {
 
 	constructor(private _http: Http){}
 
-	getTramiteFactura(){
-		return this._http.get(this.url + "/").map(res => res.json());
+	getTramiteFactura(idFactura){
+		return this._http.get(this.url +"/"+idFactura+"/index").map(res => res.json());
 	}
 
 	register(tramiteFactura, token){
