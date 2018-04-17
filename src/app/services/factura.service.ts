@@ -42,6 +42,14 @@ export class FacturaService {
 
 	}
 
+	showFacturaByNumero(token, numeroFactura) {
+		console.log(numeroFactura);
+		let json = JSON.stringify(numeroFactura);
+		let params = 'json=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/show/numero', params, { headers: headers }).map(res => res.json());
+	}
+
 	editFactura(factura,token){
 
 		let json = JSON.stringify(factura);

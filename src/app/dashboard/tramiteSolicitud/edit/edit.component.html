@@ -16,12 +16,7 @@
                                 <input class="form-control" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" type="checkbox" required />
                             </div>
                             <div class="col-lg-8 col-md-8">
-                                <label>Vehículo*</label>
-                                <ng-select [multiple]="false" [options]="vehiculos" [(ngModel)]="vehiculoSelected" required name="vehiculoId">
-                                </ng-select>
-                            </div>
-                            <div class="col-lg-8 col-md-8">
-                                <label>Tramite*</label>
+                                <label>Tramite <span class="text-danger">*</span></label>
                                 <ng-select [multiple]="false" [options]="tramitesFactura" [(ngModel)]="tramiteFacturaSelected" required name="tramiteFacturaId">
                                 </ng-select>
                             </div>

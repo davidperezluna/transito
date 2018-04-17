@@ -1,21 +1,41 @@
-<div class="row">
+<div class="row"><!-- .row -->
     <div class="col-xs-12 col-lg-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="m-0">Nueva solicitud de tramite</h5>
+        <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required />
+        <button (click)="onKeyValidateFactura()" class="btn btn-secondary">
+            <i class="fa fa-search"></i>
+            Buscar
+        </button>
+    </div>
+</div><!-- .row -->
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-6"><!-- .col -->
+        <div *ngIf='!factura' class="alert alert-danger">
+            <strong>!</strong> La factura con número
+            <b>{{ numeroFactura.numeroFactura }}</b> no se encuentra en la base de datos.
+        </div>
+        <div class="card" *ngIf='factura'>
+            <div *ngIf='!isPagada' class="alert alert-danger">
+                <strong>!</strong> La factura con número
+                <b>{{ numeroFactura.numeroFactura }}</b> esta pendiente de pago.
+            </div>
+            <div class="card-body" *ngIf='isPagada'>
+                <h5 class="m-0">
+                    Nueva solicitud de tramite
+                    <br>
+                    <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </h5>
                 <hr> 
                 <div class="row justify-content-center">
                     <div class="form-group row">
-                        <div class="col-lg-8 col-md-8">
-                            <label>Vehículo <span class="text-danger">*</span></label>
-                            <ng-select [multiple]="false" 
-                            [options]="vehiculos" 
-                            [(ngModel)]="vehiculoSelected" 
-                            required 
-                            name="vehiculoId">
-                            </ng-select>
+                        <div class="col-xs-16 col-lg-4">
+                            <label>Documentación</label>
+                            <input class="form-control" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" type="checkbox" required />
                         </div>
-                        <div class="col-lg-8 col-md-8">
+                        <div class="col-xs-16 col-lg-16" *ngIf="!tramiteSolicitud.documentacion">
+                            <label>Observación</label>
+                            <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación" required></textarea>
+                        </div>
+                        <div class="col-lg-16 col-md-16">
                             <label>Tramite <span class="text-danger">*</span></label>
                             <ng-select [multiple]="false" 
                             [options]="tramitesFactura" 
@@ -24,14 +44,6 @@
                             name="tramiteFacturaId">
                             </ng-select>
                         </div>
-                        <div class="col-xs-16 col-lg-4">
-                            <label>Documentación</label>
-                            <input class="form-control" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" type="checkbox" required />
-                        </div>
-                        <div class="col-xs-16 col-lg-16">
-                            <label>Observación</label>
-                            <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación" required></textarea>
-                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -39,12 +51,14 @@
                         <i class="fa fa-times"></i>
                         Cancel
                     </button>
-                    <button (click)="onEnviar()" class="btn btn-outline-primary" type="button">
-                        <i class="fa fa-floppy-o"></i>
-                        Enviar
-                    </button>
                 </div>    
             </div>
         </div>
-    </div>
-</div>
+    </div><!-- /.col -->
+
+    <div class="col-xs-12 col-lg-10"><!-- .col -->
+        <app-duplicado-placa *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
+        <app-cambio-placa *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-placa>
+        <app-cambio-color *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
+    </div><!-- /.col -->
+</div><!-- /.row -->

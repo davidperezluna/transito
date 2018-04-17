@@ -42,9 +42,6 @@ import {FooterComponent} from '../shared/index';
 import {RightsidebarComponent} from '../shared/index';
 
 
-
-
-
 @NgModule({
     imports: [
       CommonModule,

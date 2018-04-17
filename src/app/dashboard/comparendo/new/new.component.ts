@@ -237,7 +237,8 @@ constructor(
       result.dismiss === swal.DismissReason.timer
     ) {
     }
-  })
+  });
+  
   this.vehiculoNoEncontrado = false;
   let token = this._loginService.getToken();
   this._vechiculoService.showVehiculoPlaca(token,this.placa).subscribe(

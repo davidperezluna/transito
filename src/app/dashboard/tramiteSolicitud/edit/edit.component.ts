@@ -2,7 +2,6 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { TramiteSolicitud } from '../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -17,15 +16,12 @@ export class EditComponent implements OnInit{
   public respuesta;
   public formReady = false;
   public tramitesFactura: any;
-  public vehiculos: any;
   public tramiteFacturaSelected: any;
-  public vehiculoSelected: any;
 
 constructor(
   private _tramiteSolicitudService: TramiteSolicitudService,
   private _loginService: LoginService,
   private _tramiteFacturaService: TramiteFacturaService,
-  private _vehiculoService: VehiculoService,
   ){}
 
   ngOnInit(){ console.log(this.tramiteSolicitud);
@@ -36,19 +32,6 @@ constructor(
       error => {
         this.errorMessage = <any>error;
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._vehiculoService.getVehiculoSelect().subscribe(
-      response => {
-        this.vehiculos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
