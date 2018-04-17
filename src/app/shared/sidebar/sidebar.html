@@ -154,6 +154,11 @@
             <i class="fa fa-angle-right"></i> Inventario de Sustratos
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="gestionTransportePublico" [ngClass]="{'active' : ( addActive === 'gestionTransportePublico')}" (click)="addActiveMenu('gestionTransportePublico')">
+            <i class="fa fa-angle-right"></i> Gestión Transporte Público
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level -->
     </li>

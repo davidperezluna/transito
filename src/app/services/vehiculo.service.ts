@@ -63,5 +63,15 @@ export class VehiculoService {
 	getVehiculoSelect(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
+
+
+	filterByParameters(gestionTransportePublico,token){
+		
+		let json = JSON.stringify(gestionTransportePublico);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/fin/by/parameters", params, {headers: headers})
+							  .map(res => res.json());
+	}
 	
 }

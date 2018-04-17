@@ -34,6 +34,7 @@ import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.modu
 import { SustratoModule } from './sustrato/sustrato.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
+import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -77,6 +78,7 @@ import {RightsidebarComponent} from '../shared/index';
       TramiteFacturaModule,
       TramiteSolicitudModule,
       SustratoModule,
+      GestionTransportePublicoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
