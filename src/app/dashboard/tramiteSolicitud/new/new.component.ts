@@ -25,7 +25,7 @@ export class NewComponent implements OnInit {
   public tramiteSelected: any;
   public mensaje = '';
   public isError = false;
-  public ciudadanosVehiculo;
+  public ciudadanosVehiculo=false;
 
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
@@ -36,7 +36,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null);
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null);
     this.numeroFactura = {
       'numeroFactura': this.numeroFactura,
     };
@@ -153,6 +153,7 @@ constructor(
         });
   }
   changedTramiteFactura(e){
+    console.log(this.tramiteSolicitud);
     let token = this._loginService.getToken();
     this._tramiteFacturaService.showTramiteFactura(token,e).subscribe(
       response => {

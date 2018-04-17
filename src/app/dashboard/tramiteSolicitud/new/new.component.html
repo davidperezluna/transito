@@ -43,7 +43,7 @@
                         name="tramiteFacturaId">
                         </ng-select>
                     </div>
-                    <table  class="table table-bordered">
+                    <table class="table table-bordered" *ngIf="ciudadanosVehiculo">
                         <thead>
                             <tr>
                                 <th>Solicitante</th>
@@ -59,7 +59,13 @@
                                     <strong>Identificación: </strong>
                                     {{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}
                                 </td>
-                                <td></td>
+                                <td> 
+                                    <label class="custom-control custom-radio" for="3option3">
+                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.ciudadano.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" >
+                                        <span class="custom-control-indicator"></span> 
+                                        <span class="custom-control-description">Solicitante</span>
+                                    </label>
+                                </td>
                             </tr>
                         </tbody> 
                     </table> 
