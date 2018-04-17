@@ -2,7 +2,7 @@
   <div  class="row align-items-center justify-content-between">
     <div class="col-11 col-sm-12 page-title">
       <h3>Módulo de Configuración</h3>
-      <p>Infracciones</p> 
+      <p>Sustratoes</p> 
     </div>
     <div class="col text-right ">
       <div class="btn-group pull-right">
@@ -21,22 +21,28 @@
               <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Codigo</th>
+                    <th>Sustrato</th>
                     <th>Descripción</th>
+                    <th>Grupo de tramites</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let infraccion of infracciones; let i = index">
-                  <td >{{infraccion.id}}</td>
-                  <td >{{infraccion.codigo}}</td>
-                  <td >{{infraccion.descripcion}}</td>
+                <tr class="odd" *ngFor="let sustrato of sustratos; let i = index">
+                  <td >{{sustrato.id}}</td>
+                  <td >
+                    <strong>Consecutivo: </strong>{{sustrato.consecutivo}}
+                    <br>
+                    <strong>Estado: </strong>{{sustrato.estado}}
+                  </td>
+                  <td >{{sustrato.sedeOperativa.nombre}}</td>
+                  <td >{{sustrato.modulo.nombre}}</td>
                   <td>
-                    <button (click)="editInfraccion(infraccion)" class="btn btn-outline-info" type="button">
+                    <button (click)="editSustrato(sustrato)" class="btn btn-outline-info" type="button">
                       <i class="fa fa-pencil"></i>
                       Editar
                     </button> 
-                    <button (click)="deleteInfraccion(infraccion.id)"  class="btn btn-outline-danger" type="button">
+                    <button (click)="deleteSustrato(sustrato.id)"  class="btn btn-outline-danger" type="button">
                       <i class="fa fa-trash"></i>
                       Eliminar
                     </button> 
@@ -49,6 +55,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [infraccion]="infraccion" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [sustrato]="sustrato" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

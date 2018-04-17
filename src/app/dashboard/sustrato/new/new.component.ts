@@ -20,6 +20,7 @@ export class NewComponent implements OnInit {
   public modulos: any;
   public moduloSelected: any;
   public estadoList: string[];
+  public estadoSelected: any;
 
 constructor(
   private _SustratoService: SustratoService,
@@ -65,6 +66,7 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
+    this.sustrato.estado = this.estadoSelected;
     this.sustrato.sedeOperativaId = this.sedeOperativaSelected;
     this.sustrato.moduloId = this.moduloSelected;
 

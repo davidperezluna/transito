@@ -149,6 +149,11 @@
             <i class="fa fa-angle-right"></i> Solicitud de tramite
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="sustrato" [ngClass]="{'active' : ( addActive === 'sustrato')}" (click)="addActiveMenu('sustrato')">
+            <i class="fa fa-angle-right"></i> Inventario de Sustratos
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level -->
     </li>
