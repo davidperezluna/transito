@@ -29,7 +29,6 @@ export class TramiteSolicitudComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
@@ -45,6 +44,7 @@ export class TramiteSolicitudComponent implements OnInit {
           this.tramitesSolicitud = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
+            swal.close();
           }, 100);
 				},
 				error => {
