@@ -1,0 +1,84 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-16 col-lg-16">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Cambio de Motor
+                </h5>
+                <small>Todos los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="form-group row">
+                        <div class="col-xs-16 col-lg-8">
+                            <label>Tipo de Ingreso
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" name="tipoIngresoSelected" [(ngModel)]="tipoIngresoSelected" required>
+                                <option *ngFor="let tipoIngreso of tipoIngresoList" [value]="tipoIngreso"> {{tipoIngreso}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Número de motor *</label>
+                            <input class="form-control" [(ngModel)]="numeroMotor" name="numeroMotor" type="text" required />
+                        </div>
+
+                        <div class="col-lg-16 col-md-16" id="tipo-ingreso-nuevo" *ngIf="tipoIngresoSelected == 'Nuevo'">
+                            <div class="col-lg-8 col-md-8">
+                                <label>Número de aceptación *</label>
+                                <input class="form-control" [(ngModel)]="numeroAceptacion" name="numeroAceptacion" type="text" required />
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <label>Número de factura *</label>
+                                <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-16 col-md-16" id="tipo-ingreso-usado" *ngIf="tipoIngresoSelected == 'Usado'">
+                            <div class="col-lg-8 col-md-8">
+                                <label>Tipo identificación *</label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-16 col-lg-8">
+                                <label>Número identificación</label>
+                                <input class="form-control" [(ngModel)]="numeroIdentificacion" name="numeroIdentificacion" type="text" required />
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <label>Número de cto. compra venta *</label>
+                                <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Fecha *</label>
+                            <input class="form-control" [(ngModel)]="fecha" name="fecha" type="date" required />
+                        </div>
+                        <div class="col-xs-16 col-lg-16">
+                            <label>Número RUNT</label>
+                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                        <div class="col-xs-16 col-lg-16">
+                            <label>Documentación</label>
+                            <textarea class="form-control" [(ngModel)]="documentacion" name="documentacion"></textarea>
+                        </div>
+                        <div class="col-xs-16 col-lg-16">
+                            <label>Entregada</label>
+                            <input class="form-control" [(ngModel)]="entregada" name="entregada" type="checkbox" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button (click)="enviarTramite()" type="submit" class="btn btn-primary form-control">
+                        <i class="fa fa-floppy-o"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

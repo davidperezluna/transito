@@ -44,7 +44,7 @@ export class ColorComponent implements OnInit {
           this.colors = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
-          }, 100);
+          }, 100); 
 				}, 
 				error => {
 					this.errorMessage = <any>error;

@@ -32,7 +32,6 @@ export class FacturaComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
@@ -48,6 +47,7 @@ export class FacturaComponent implements OnInit {
           this.facturas = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
+            swal.close();
           }, 100);
 				}, 
 				error => {

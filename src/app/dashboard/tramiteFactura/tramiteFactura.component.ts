@@ -40,21 +40,21 @@ export class TramiteFacturaComponent implements OnInit {
       ) {
       }
     })
-    this._TramiteFacturaService.getTramiteFactura().subscribe(
-      response => {
-        this.tramitesFactura = response.data;
-        let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
-        }, 100);
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    // this._TramiteFacturaService.getTramiteFactura().subscribe(
+    //   response => {
+    //     this.tramitesFactura = response.data;
+    //     let timeoutId = setTimeout(() => {
+    //       this.iniciarTabla();
+    //     }, 100);
+    //   },
+    //   error => {
+    //     this.errorMessage = <any>error;
+    //     if (this.errorMessage != null) {
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
   }
   iniciarTabla() {
     $('#dataTables-example').DataTable({

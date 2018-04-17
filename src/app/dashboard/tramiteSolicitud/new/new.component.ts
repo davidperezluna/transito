@@ -33,19 +33,7 @@ constructor(
     this.numeroFactura = {
       'numeroFactura': this.numeroFactura,
     };
-    this._tramiteFacturaService.getTramiteFacturaSelect().subscribe(
-      response => {
-        this.tramitesFactura = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
+    
   }
   onCancelar(){
     this.ready.emit(true);
@@ -104,25 +92,38 @@ constructor(
     });
 
     let token = this._loginService.getToken();
-    this._facturaService.showFacturaByNumero(token, this.numeroFactura).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.factura = response.data;
-          if (this.factura.estado) {
-            this.isPagada = true;
+        this._facturaService.showFacturaByNumero(token, this.numeroFactura).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.factura = response.data;
+            if (this.factura.estado) {
+              this.isPagada = true;
+              this._tramiteFacturaService.getTramiteFacturaSelect(this.numeroFactura.numeroFactura).subscribe(
+                response => {
+                  this.tramitesFactura = response;
+                },
+                error => {
+                  this.errorMessage = <any>error;
+          
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                  }
+                }
+              );
+            }
+          } else {
+            this.factura = false;
           }
-        } else {
-          this.factura = false;
-        }
-        console.log(this.factura);
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
+          console.log(this.factura);
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
           }
-        }
-      });
+        });
   }
 
   readyTramite(datos:any){

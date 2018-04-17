@@ -33,7 +33,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.factura = new Factura(null, null, null, null, null, null, null, null, null);
+    this.factura = new Factura(null, null, null, null, null, null, null, null, null,null);
 
     this._VehiculoService.getVehiculoSelect().subscribe(
         response => {
