@@ -31,6 +31,7 @@ import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
+import { SustratoModule } from './sustrato/sustrato.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 
@@ -75,6 +76,7 @@ import {RightsidebarComponent} from '../shared/index';
       FacturaModule,
       TramiteFacturaModule,
       TramiteSolicitudModule,
+      SustratoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
