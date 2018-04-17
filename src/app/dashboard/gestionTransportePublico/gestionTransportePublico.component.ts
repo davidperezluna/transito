@@ -30,7 +30,7 @@ export class GestionTransportePublicoComponent implements OnInit {
     ){}
     
   ngOnInit() {
-    this.gestionTransportePublico = new GestionTransportePublico(0,0,0);
+    this.gestionTransportePublico = new GestionTransportePublico(null,null,null);
 
     swal({
       title: 'Cargando Tabla!',
@@ -109,7 +109,7 @@ export class GestionTransportePublicoComponent implements OnInit {
   }
 
   onEnviar(){
-    console.log(this.gestionTransportePublico);
+    
     this.table.destroy();
 
    let token = this._loginService.getToken();

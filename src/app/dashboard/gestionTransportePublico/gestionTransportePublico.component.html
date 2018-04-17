@@ -68,28 +68,17 @@
               <thead>
                 <tr>
                   <th>Placa </th>
-                  <th>Motor</th>
-                  <th>Modelo</th>
-                  <th>Marca</th>
-                  <th>linea</th> 
-                  <th>valor</th>
-                  <th>chasis</th>
-                  <th>Acciones</th>
+                  <th>Servicio</th>
+                  <th>Clase</th>
+                  <th>Color</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let vehiculo of vehiculos; let i = index">
                   <td>{{vehiculo.placa}}</td>
-                  <td>{{vehiculo.motor}}</td>
-                  <td>{{vehiculo.modelo}}</td>
-                  <td>{{vehiculo.linea.marca.nombre}}</td>
-                  <td>{{vehiculo.linea.nombre}}</td>
-                  <td>{{vehiculo.valor}}</td>
-                  <td>{{vehiculo.chasis}}</td>
-                  <td>
-                    <button (click)="editVehiculo(vehiculo)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteVehiculo(vehiculo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
-                  </td>
+                  <td>{{vehiculo.servicio.nombre}}</td>
+                  <td>{{vehiculo.clase.nombre}}</td>
+                  <td>{{vehiculo.color.nombre}}</td>
                 </tr>
               </tbody>
             </table> 
