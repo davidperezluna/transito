@@ -22,6 +22,7 @@ export class NewComponent implements OnInit {
   public numeroFactura: any;
   public factura: any;
   public isPagada = false;
+  public tramiteSelected: any;
   public mensaje = '';
   public isError = false;
   public ciudadanosVehiculo;
@@ -151,7 +152,26 @@ constructor(
           }
         });
   }
+  changedTramiteFactura(e){
+    let token = this._loginService.getToken();
+    this._tramiteFacturaService.showTramiteFactura(token,e).subscribe(
+      response => {
+        this.respuesta = response;
+        this.tramiteSelected = this.respuesta.data.id;
+        console.log(this.respuesta.data.id);
+        
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
 
+      }); 
+
+
+  }
   readyTramite(datos:any){
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
     this.tramiteSolicitud.datos=datos;

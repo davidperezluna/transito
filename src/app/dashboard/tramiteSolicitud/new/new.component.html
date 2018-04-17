@@ -9,7 +9,7 @@
     </div>
 </div><!-- .row -->
 <div class="row"><!-- .row -->
-    <div class="col-xs-12 col-lg-6"><!-- .col -->
+    <div class="col-xs-16 col-lg-8"><!-- .col -->
         <div *ngIf="isError" class="alert alert-danger">
             <strong>!</strong> {{mensaje}}
         </div>
@@ -21,25 +21,27 @@
                     <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 </h5>
                 <hr> 
-                <div class="row justify-content-center">
-                    <div class="form-group row">
-                        <div class="col-xs-16 col-lg-4">
-                            <label>Documentación</label>
-                            <input class="form-control" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" type="checkbox" required />
-                        </div>
-                        <div class="col-xs-16 col-lg-16" *ngIf="!tramiteSolicitud.documentacion">
-                            <label>Observación</label>
-                            <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación" required></textarea>
-                        </div>
-                        <div class="col-lg-16 col-md-16">
-                            <label>Tramite <span class="text-danger">*</span></label>
-                            <ng-select [multiple]="false" 
-                            [options]="tramitesFactura" 
-                            [(ngModel)]="tramiteFacturaSelected" 
-                            required 
-                            name="tramiteFacturaId">
-                            </ng-select>
-                        </div>
+                <div class="row container">
+                    <div class="col-lg-16 col-md-16 form-group">
+                        <label class="custom-control custom-checkbox" for="2c-option1">
+                            <input type="checkbox" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" class="custom-control-input"  id="2c-option1" checked>
+                            <span class="custom-control-indicator"></span> 
+                            <span class="custom-control-description">Documentación</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-16 col-lg-16 form-group" *ngIf="!tramiteSolicitud.documentacion">
+                        <label>Observación</label>
+                        <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación" required></textarea>
+                    </div>
+                    <div class="col-lg-16 col-md-16 form-group">
+                        <label>Tramite <span class="text-danger">*</span></label>
+                        <ng-select [multiple]="false" 
+                        [options]="tramitesFactura" 
+                        [(ngModel)]="tramiteFacturaSelected" 
+                        (ngModelChange)="changedTramiteFactura($event)"
+                        required 
+                        name="tramiteFacturaId">
+                        </ng-select>
                     </div>
                     <table  class="table table-bordered">
                         <thead>
@@ -62,24 +64,24 @@
                         </tbody> 
                     </table> 
                 </div>
-                <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-secondary">
-                        <i class="fa fa-times"></i>
-                        Cancel
-                    </button>
-                </div>    
             </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">
+                    <i class="fa fa-times"></i>
+                    Cancel
+                </button>
+            </div>    
         </div>
 
     </div><!-- /.col -->
 
-    <div class="col-xs-12 col-lg-10"><!-- .col -->
-        <app-duplicado-placa *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
-        <app-duplicado-licencia *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-licencia>
-        <app-cambio-placa *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-placa>
-        <app-cambio-color *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
-        <app-cambio-motor *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
-        <app-regrabar-motor *ngIf="tramiteFacturaSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-regrabar-motor>
-        <app-rematricula *ngIf="tramiteFacturaSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-rematricula>
+    <div class="col-xs-16 col-lg-8"><!-- .col -->
+        <app-duplicado-placa *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
+        <app-duplicado-licencia *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-licencia>
+        <app-cambio-placa *ngIf="tramiteSelected == 16" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-placa>
+        <app-cambio-color *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
+        <app-cambio-motor *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
+        <app-regrabar-motor *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-regrabar-motor>
+        <app-rematricula *ngIf="tramiteSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-rematricula>
     </div><!-- /.col -->
 </div><!-- /.row -->
