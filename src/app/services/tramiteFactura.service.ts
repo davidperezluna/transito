@@ -41,7 +41,7 @@ export class TramiteFacturaService {
  		return this._http.post(this.url + "/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getTramiteFacturaSelect(){
-		return this._http.get(this.url + "/select").map(res => res.json());
+	getTramiteFacturaSelect(idFactura){
+		return this._http.get(this.url + "/"+idFactura+"/select").map(res => res.json());
 	}
 }

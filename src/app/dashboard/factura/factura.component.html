@@ -1,5 +1,5 @@
 <div class="container" >
-    <div  class="row align-items-center justify-content-between">
+    <div  class="row align-items-center justify-content-between" *ngIf='!formShow'>
       <div class="col-11 col-sm-12 page-title">
         <h3>Módulo de Configuración</h3>
         <p>Factura</p> 
@@ -10,7 +10,6 @@
           <button (click)="onNewTramite()" *ngIf='formShow' class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Tramite</span> <i class="ti-save ml-2"></i></button>
         </div>
       </div>
-      
     </div>
     <div class="row" *ngIf='formIndex'>
       <div class="col-sm-16">

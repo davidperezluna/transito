@@ -52,7 +52,6 @@ constructor(
     this._TramiteFacturaService.getTramiteFactura(this.factura.id).subscribe(
       response => {
         this.tramitesFactura = response.data;
-        console.log(this.tramitesFactura);
         this.tramitesFacturaReady=true;
         this.cargar=true;
       }, 
@@ -69,6 +68,13 @@ constructor(
   
   onCancelar(){
     this.readyShow.emit(true);
+  }
+  onTramiteSelect(valor:any,eve: any){
+    if (eve.target.checked) {
+      this.factura.valorBruto = parseInt(this.factura.valorBruto) + parseInt(valor);
+    }else{
+      this.factura.valorBruto = parseInt(this.factura.valorBruto) - parseInt(valor);
+    }
   }
   onNuevoTramite(){
     this.tramitesFacturaReady = false;
@@ -91,6 +97,10 @@ constructor(
       }
     );
   }
+  onCancelarNuevo(){
+    this.nuevoTramite=false;
+    this.tramitesFacturaReady=true;
+  }
   onEnviar(){
   let tramitesFacturas = {
     'tramites': [],
@@ -110,10 +120,8 @@ constructor(
           this._TramiteFacturaService.getTramiteFactura(this.factura.id).subscribe(
             response => {
               this.tramitesFactura = response.data;
-              console.log(this.tramitesFactura);
               this.nuevoTramite=false;
               this.tramitesFacturaReady=true;
-              console.log(this.tramitesFactura);
             }, 
             error => {
               this.errorMessage = <any>error;

@@ -25,19 +25,19 @@ constructor(
   ){}
 
   ngOnInit(){ console.log(this.tramiteSolicitud);
-    this._tramiteFacturaService.getTramiteFacturaSelect().subscribe(
-      response => {
-        this.tramitesFactura = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
+    // this._tramiteFacturaService.getTramiteFacturaSelect().subscribe(
+    //   response => {
+    //     this.tramitesFactura = response;
+    //   },
+    //   error => {
+    //     this.errorMessage = <any>error;
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
+    //     if (this.errorMessage != null) {
+    //       console.log(this.errorMessage);
+    //       alert('Error en la petición');
+    //     }
+    //   }
+    // );
   }
 
   onCancelar(){ this.ready.emit(true); }

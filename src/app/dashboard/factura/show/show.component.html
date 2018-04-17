@@ -1,5 +1,16 @@
-<div class="container row">
+<div  class="row align-items-center justify-content-between">
+    <div class="col-11 col-sm-12 page-title">
+        <h3>Módulo de Configuración</h3>
+        <p>Factura</p> 
+    </div>
+    <div class="col text-right ">
+        <div class="btn-group pull-right">
+        <button (click)="onNuevoTramite()" class="btn btn-outline-success  btn-round"><span class="text">Tramite</span> <i class="ti-save ml-2"></i></button>
+        </div>
+    </div>
+</div>
 
+<div class="container row">
     <div class="col-md-6 col-lg-4">
         <div class="card">
             <div class="card-header align-items-start justify-content-between flex">
@@ -34,7 +45,7 @@
                  </table>
                 <hr>
                 <div class="page_subtitles">Total</div>
-                <h2 class="text-info">{{factura.valorNeto}}</h2>
+                <h2 class="text-info">{{factura.valorBruto}}</h2>
                 <div class="card-footer">
                     <button (click)="onCancelar()" class="btn btn-outline-secondary" type="button">Cancelar</button>
                 </div>
@@ -80,7 +91,7 @@
                             <tr class="odd" *ngFor="let tramite of tramites; let i = index">
                                 <td >
                                     <label class="custom-control custom-checkbox" for="{{tramite.id}}">
-                                        <input type="checkbox" [(ngModel)]="tramite.state" value="{{tramite.id}}" class="custom-control-input"  id="{{tramite.id}}">
+                                        <input type="checkbox" [(ngModel)]="tramite.state" value="{{tramite.id}}" (change)="onTramiteSelect(tramite.valor,$event)"  class="custom-control-input"  id="{{tramite.id}}">
                                         <span class="custom-control-indicator"></span> 
                                     </label><br>
                                 </td> 
@@ -92,7 +103,7 @@
                     </table>
                 </div>    
                 <div class="card-footer">
-                    <button class="btn btn-secondary">Cancelar</button>
+                    <button class="btn btn-secondary" (click)="onCancelarNuevo()">Cancelar</button>
                     <button class="btn btn-success pull-right" (click)="onEnviar()">Aceptar</button>
                 </div>
             </div>
