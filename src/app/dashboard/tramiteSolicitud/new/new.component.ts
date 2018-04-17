@@ -5,6 +5,7 @@ import { TramiteFacturaService } from '../../../services/tramiteFactura.service'
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+import { Factura } from 'app/dashboard/factura/factura.modelo';
 
 @Component({
   selector: 'app-new',
@@ -20,6 +21,8 @@ export class NewComponent implements OnInit {
   public numeroFactura: any;
   public factura: any;
   public isPagada = false;
+  public mensaje = '';
+  public isError = false;
 
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
@@ -97,23 +100,29 @@ constructor(
           if (response.status == 'success') {
             this.factura = response.data;
             if (this.factura.estado) {
-              this.isPagada = true;
-              this._tramiteFacturaService.getTramiteFacturaSelect(this.numeroFactura.numeroFactura).subscribe(
+              this.isError = false;
+              this._tramiteFacturaService.getTramiteFacturaSelect(this.factura.numero).subscribe(
                 response => {
                   this.tramitesFactura = response;
                 },
                 error => {
                   this.errorMessage = <any>error;
-          
+                  
                   if (this.errorMessage != null) {
                     console.log(this.errorMessage);
                     alert('Error en la petición');
                   }
                 }
               );
+            }else{
+              this.factura = false;
+              this.isError = true;
+              this.mensaje = 'La factura no se encuentra pagada';
             }
           } else {
             this.factura = false;
+            this.mensaje = 'Factura no se encuentra registrada en la base de datos';
+            this.isError = true;
           }
           console.log(this.factura);
           error => {

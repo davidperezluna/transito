@@ -1,24 +1,20 @@
 <div class="row"><!-- .row -->
     <div class="col-xs-12 col-lg-6">
-        <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required />
-        <button (click)="onKeyValidateFactura()" class="btn btn-secondary">
-            <i class="fa fa-search"></i>
-            Buscar
-        </button>
+        <div class="input-group">
+                <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required />
+            <span class="input-group-btn">
+                <button (click)="onKeyValidateFactura()" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
     </div>
 </div><!-- .row -->
 <div class="row"><!-- .row -->
     <div class="col-xs-12 col-lg-6"><!-- .col -->
-        <div *ngIf='!factura' class="alert alert-danger">
-            <strong>!</strong> La factura con número
-            <b>{{ numeroFactura.numeroFactura }}</b> no se encuentra en la base de datos.
+        <div *ngIf="isError" class="alert alert-danger">
+            <strong>!</strong> {{mensaje}}
         </div>
         <div class="card" *ngIf='factura'>
-            <div *ngIf='!isPagada' class="alert alert-danger">
-                <strong>!</strong> La factura con número
-                <b>{{ numeroFactura.numeroFactura }}</b> esta pendiente de pago.
-            </div>
-            <div class="card-body" *ngIf='isPagada'>
+            <div class="card-body">
                 <h5 class="m-0">
                     Nueva solicitud de tramite
                     <br>

@@ -42,6 +42,9 @@ export class TramiteFacturaService {
 	}
 
 	getTramiteFacturaSelect(idFactura){
+		console.log("asssssssssssssss");
+		console.log(idFactura);
+
 		return this._http.get(this.url + "/"+idFactura+"/select").map(res => res.json());
 	}
 }
