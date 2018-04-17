@@ -7,6 +7,7 @@ import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service
 import { NewComponent } from './new/new.component';
 import { NewCambioColorComponent } from './rna/tramiteCambioColor/new.cambioColor.component';
 import { NewDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/new.duplicadoPlaca.component';
+import { NewDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/new.duplicadoLicencia.component';
 import { NewCambioPlacaComponent } from './rna/tramiteCambioPlaca/new.cambioPlaca.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
@@ -20,6 +21,7 @@ import { SelectModule } from 'angular2-select';
         EditComponent,
         NewCambioColorComponent,
         NewDuplicadoPlacaComponent,
+        NewDuplicadoLicenciaComponent,
         NewCambioPlacaComponent
     ],
     exports: [
@@ -28,6 +30,7 @@ import { SelectModule } from 'angular2-select';
         EditComponent,
         NewCambioColorComponent,
         NewDuplicadoPlacaComponent,
+        NewDuplicadoLicenciaComponent,
         NewCambioPlacaComponent
     ],
     providers:[TramiteSolicitudService]

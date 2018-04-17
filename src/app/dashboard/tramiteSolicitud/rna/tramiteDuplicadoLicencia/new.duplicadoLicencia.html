@@ -1,0 +1,50 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-16 col-lg-16">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Duplicado de placa
+                </h5>
+                <small>Todos los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="form-group row">
+                        <div class="col-lg-8 col-md-8">
+                            <label>Sustrato*</label>
+                            <ng-select 
+                            [multiple]="false" 
+                            [options]="sustratos" 
+                            [(ngModel)]="sustratoSelected" 
+                            required 
+                            name="sustratoId">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-16 col-lg-16">
+                            <label>Número RUNT</label>
+                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                        <div class="col-xs-16 col-lg-16">
+                            <label>Documentación</label>
+                            <textarea class="form-control" [(ngModel)]="documentacion" name="documentacion"></textarea>
+                        </div>
+                        <div class="col-xs-16 col-lg-16">
+                            <label>Entregada</label>
+                            <input class="form-control" [(ngModel)]="entregada" name="entregada" type="checkbox" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button (click)="enviarTramite()" type="submit" class="btn btn-primary form-control">
+                        <i class="fa fa-floppy-o"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
