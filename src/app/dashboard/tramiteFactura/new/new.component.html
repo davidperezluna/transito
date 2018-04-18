@@ -5,28 +5,7 @@
                 <h5 class="m-0">Nueva Infraccion</h5>
                 <hr> 
                 <div class="row justify-content-center">
-                    <div class="form-group row">
-                        <div class="col-xs-16 col-lg-16">
-                            <label>Codigo*</label>
-                            <input class="form-control" [(ngModel)]="infraccion.codigo" name="codigo" placeholder="Codigo" type="text" required />
-                        </div>
-                        <div class="col-xs-16 col-lg-16">
-                            <label>Descripcion*</label>
-                            <textarea class="form-control" [(ngModel)]="infraccion.descripcion" name="descripcion" placeholder="Descripción" required></textarea>
-                        </div>
-                        <div class="col-xs-16 col-lg-16">
-                            <label>Valor <small>(SMLV)</small>*</label>
-                            <input class="form-control" [(ngModel)]="infraccion.valor" name="valor" placeholder="Valor" type="number" required />
-                        </div>
-                        <div class="col-xs-16 col-lg-8">
-                            <label>Inmovilización*</label>
-                            <input class="form-control" [(ngModel)]="infraccion.inmovilizacion" name="inmovilizacion" type="checkbox" />
-                        </div>
-                        <div class="col-xs-16 col-lg-8">
-                            <label>Suspensión de licencia*</label>
-                            <input class="form-control" [(ngModel)]="infraccion.suspensionLicencia" name="suspensionLicencia" type="checkbox" />
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="card-footer">
                     <button (click)="onCancelar()" class="btn btn-secondary">
