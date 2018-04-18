@@ -183,7 +183,6 @@ constructor(
         this.respuesta = response;
         console.log(this.respuesta);
         if (this.respuesta.status == 'success') {
-          this.ready.emit(true);
           swal({
             title: 'Pefecto!',
             text: 'El registro se ha registrado con exito',
