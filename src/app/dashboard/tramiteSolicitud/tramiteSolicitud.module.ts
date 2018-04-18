@@ -12,8 +12,10 @@ import { NewCambioPlacaComponent } from './rna/tramiteCambioPlaca/new.cambioPlac
 import { NewCambioMotorComponent } from './rna/tramiteCambioMotor/new.cambioMotor.component';
 import { NewRegrabarMotorComponent } from './rna/tramiteRegrabarMotor/new.regrabarMotor.component';
 import { NewRematriculaComponent } from './rna/tramiteRematricula/new.rematricula.component';
+import { NewVehiculoComponent } from './vehiculoNew/vehiculoNew.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
+
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { SelectModule } from 'angular2-select';
         NewCambioPlacaComponent,
         NewCambioMotorComponent,
         NewRegrabarMotorComponent,
-        NewRematriculaComponent
+        NewRematriculaComponent,
+        NewVehiculoComponent
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -40,7 +43,8 @@ import { SelectModule } from 'angular2-select';
         NewCambioPlacaComponent,
         NewCambioMotorComponent,
         NewRegrabarMotorComponent,
-        NewRematriculaComponent
+        NewRematriculaComponent,
+        NewVehiculoComponent
     ],
     providers:[TramiteSolicitudService]
 })

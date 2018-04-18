@@ -7,6 +7,7 @@ import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { Factura } from 'app/dashboard/factura/factura.modelo';
+import { error } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-new',
@@ -27,6 +28,9 @@ export class NewComponent implements OnInit {
   public isError = false;
   public ciudadanosVehiculo=false;
   public ciudadano=false;
+  public tipoError=200;
+  public error=false;
+  public msj=false;
 
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
@@ -87,7 +91,6 @@ constructor(
     swal({
       title: 'Buscando Factura!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 2500,
       onOpen: () => {
         swal.showLoading();
       }
@@ -102,6 +105,7 @@ constructor(
     let token = this._loginService.getToken();
         this._facturaService.showFacturaByNumero(token, this.numeroFactura).subscribe(
         response => {
+          swal.close();
           if (response.status == 'success') {
             this.factura = response.data;
 
@@ -120,8 +124,6 @@ constructor(
                   }
                 }
               );
-
-              
             }else{
               this.factura = false;
               this.isError = true;
@@ -163,13 +165,20 @@ constructor(
 
 
   }
+  readyVehiculo(){
+    this.tramiteSelected = false;
+    this.tipoError = 200;
+    this.error = false;
+  }
   onKeyValidateVehiculo(){
     let token = this._loginService.getToken();
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
       response => {
         this.ciudadanosVehiculo = response.data;
         if (response.status == 'error' ) {
-            alert(response.msj);
+           this.msj= response.msj;
+           this.error = true;
+           this.tipoError = response.code;
         }else{
           response.data.forEach(element => {
             if (element.ciudadano) {
@@ -221,6 +230,10 @@ constructor(
         }
 
       }); 
+  }
+
+  onKeyNuevoVehiculo(){
+    this.tramiteSelected = 'nuevoVehiculo';
   }
 
 }

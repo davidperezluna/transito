@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-xs-12 col-lg-6">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body ">
                 <h5 class="m-0">Nueva Infraccion</h5>
                 <hr> 
-                <div class="row justify-content-center">
+                <div class="row justify-content-center container">
                     <div class="form-group row">
                         <div class="col-xs-16 col-lg-16">
                             <label>Estado
@@ -17,15 +17,21 @@
                             </select>
                         </div>
                         <div class="col-xs-16 col-lg-8">
-                            <label>Desde *</label>
+                            <label>Desde 
+                                <span class="text-danger">*</span>
+                            </label>
                             <input class="form-control" [(ngModel)]="sustrato.desde" name="desde" type="number" required />
                         </div>
                         <div class="col-xs-16 col-lg-8">
-                            <label>Hasta *</label>
+                            <label>Hasta
+                                <span class="text-danger">*</span>
+                            </label>
                             <input class="form-control" [(ngModel)]="sustrato.hasta" name="hasta" type="number" required />
                         </div>
                         <div class="col-lg-8 col-md-8">
-                            <label>Sede Operativa *</label>
+                            <label>Sede Operativa 
+                                    <span class="text-danger">*</span>
+                            </label>
                             <ng-select 
                             [multiple]="false" 
                             [options]="sedesOperativas" 
@@ -46,17 +52,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-secondary">
-                        <i class="fa fa-times"></i>
-                        Cancel
-                    </button>
-                    <button (click)="onEnviar()" class="btn btn-outline-primary" type="button">
-                        <i class="fa fa-floppy-o"></i>
-                        Enviar
-                    </button>
-                </div>    
             </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">
+                    <i class="fa fa-times"></i>
+                    Cancel
+                </button>
+                <button (click)="onEnviar()" class="btn btn-outline-primary" type="button">
+                    <i class="fa fa-floppy-o"></i>
+                    Enviar
+                </button>
+            </div>    
         </div>
     </div>
 </div>

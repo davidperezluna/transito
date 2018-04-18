@@ -1,18 +1,21 @@
 <div class="row"><!-- .row -->
     <div class="col-xs-12 col-lg-8">
-        <div class="input-group">
+        <div class="input-group" [ngClass]="{'has-danger' : isError}">
                 <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required />
             <span class="input-group-btn">
-                <button (click)="onKeyValidateFactura()" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                <button (click)="onKeyValidateFactura()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
             </span>
+        </div>
+        <div class="has-danger" *ngIf="isError" >
+            <div class="form-control-feedback has-danger has-error">{{mensaje}}</div>
         </div>
     </div>
 </div><!-- .row -->
 <div class="row"><!-- .row -->
     <div class="col-xs-16 col-lg-8"><!-- .col -->
-        <div *ngIf="isError" class="alert alert-danger">
+        <!-- <div *ngIf="isError" class="alert alert-danger">
             <strong>!</strong> {{ mensaje }}
-        </div>
+        </div> -->
         <div class="card" *ngIf='factura'>
             <div class="card-body">
                 <h5 class="m-0">
@@ -22,15 +25,21 @@
                 </h5>
                 <hr> 
                 <form #tramiteSolicitudForm="ngForm" class="row">
-                    <div class="col-xs-16 col-lg-16 form-group">
-                        <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
+                    <div class="col-xs-16 col-lg-16">
+                        <div class="input-group" [ngClass]="{'has-danger' : error}">
+                            <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
                             <span class="input-group-btn">
-                                <button (click)="onKeyValidateVehiculo()" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                <button *ngIf="tipoError=='200'" (click)="onKeyValidateVehiculo()" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                <button *ngIf="tipoError=='401'" (click)="onKeyNuevoVehiculo()" class="btn btn-default btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button>
                             </span>
                         </div>
+                        <div class="has-danger" *ngIf="error" >
+                            <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+                        </div>
                     </div>
+                    <br>
                     <div class="col-lg-16 col-md-16 form-group">
+                            <br>    
                         <label class="custom-control custom-checkbox" for="2c-option1">
                             <input type="checkbox" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" class="custom-control-input"  id="2c-option1" checked>
                             <span class="custom-control-indicator"></span> 
@@ -126,5 +135,6 @@
         <app-cambio-motor *ngIf="tramiteSelected == 36" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
         <app-regrabar-motor *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-regrabar-motor>
         <app-rematricula *ngIf="tramiteSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-rematricula>
+        <app-new-vehiculo *ngIf="tramiteSelected == 'nuevoVehiculo'" (readyVehiculo)="readyVehiculo($event)"></app-new-vehiculo>
     </div><!-- /.col -->
 </div><!-- /.row -->

@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Vehiculo} from '../vehiculo.modelo';
+import {Vehiculo} from '../../vehiculo/vehiculo.modelo';
 import {DepartamentoService} from "../../../services/departamento.service";
 import {LoginService} from '../../../services/login.service';
 import {MunicipioService} from '../../../services/municipio.service';
@@ -14,10 +14,10 @@ import {SedeOperativaService} from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-new-vehiculo',
-  templateUrl: './new.component.html'
+  templateUrl: './vehiculoNew.component.html'
 })
 export class NewVehiculoComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
+@Output() readyVehiculo = new EventEmitter<any>();
 public vehiculo: Vehiculo;
 public municipios:any;
 public errorMessage:any;
@@ -162,7 +162,7 @@ constructor(
   }
 
   onCancelar(){
-      this.ready.emit(true);
+      this.readyVehiculo.emit(true);
   }
   onEnviar(){
 
@@ -181,7 +181,7 @@ constructor(
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+          this.readyVehiculo.emit(true);
           swal({
             title: 'Pefecto!',
             text: 'El registro se ha registrado con exito',
