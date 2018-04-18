@@ -11,7 +11,7 @@
 <div class="row"><!-- .row -->
     <div class="col-xs-16 col-lg-8"><!-- .col -->
         <div *ngIf="isError" class="alert alert-danger">
-            <strong>!</strong> {{mensaje}}
+            <strong>!</strong> {{ mensaje }}
         </div>
         <div class="card" *ngIf='factura'>
             <div class="card-body">
@@ -21,7 +21,11 @@
                     <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 </h5>
                 <hr> 
-                <div class="row container">
+                <form #tramiteSolicitudForm="ngForm" class="row">
+                    <div class="col-xs-16 col-lg-16 form-group" *ngIf="!tramiteSolicitud.documentacion">
+                        <label>Placa</label>
+                        <p>{{ factura.vehiculo.placa }}</p>
+                    </div>
                     <div class="col-lg-16 col-md-16 form-group">
                         <label class="custom-control custom-checkbox" for="2c-option1">
                             <input type="checkbox" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" class="custom-control-input"  id="2c-option1" checked>
@@ -31,16 +35,13 @@
                     </div>
                     <div class="col-xs-16 col-lg-16 form-group" *ngIf="!tramiteSolicitud.documentacion">
                         <label>Observación</label>
-                        <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación" required></textarea>
+                        <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación"></textarea>
                     </div>
                     <div class="col-lg-16 col-md-16 form-group">
-                        <label>Tramite <span class="text-danger">*</span></label>
-                        <ng-select [multiple]="false" 
-                        [options]="tramitesFactura" 
-                        [(ngModel)]="tramiteFacturaSelected" 
-                        (ngModelChange)="changedTramiteFactura($event)"
-                        required 
-                        name="tramiteFacturaId">
+                        <label>Tramite
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tramitesFactura" [(ngModel)]="tramiteFacturaSelected" name="tramiteFacturaId" required>
                         </ng-select>
                     </div>
                     <table class="table table-bordered" *ngIf="ciudadanosVehiculo">
@@ -61,7 +62,7 @@
                                 </td>
                                 <td> 
                                     <label class="custom-control custom-radio" for="3option3">
-                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.ciudadano.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" >
+                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.ciudadano.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" required >
                                         <span class="custom-control-indicator"></span> 
                                         <span class="custom-control-description">Solicitante</span>
                                     </label>
@@ -69,12 +70,16 @@
                             </tr>
                         </tbody> 
                     </table> 
-                </div>
+                </form>
             </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">
                     <i class="fa fa-times"></i>
                     Cancel
+                </button>
+                <button (click)="changedTramiteFactura(tramiteFacturaSelected)" class="btn btn-primary" [disabled]="tramiteSolicitudForm.invalid">
+                    <i class="fa fa-cog"></i>
+                    Tramitar
                 </button>
             </div>    
         </div>
@@ -82,11 +87,11 @@
     </div><!-- /.col -->
 
     <div class="col-xs-16 col-lg-8"><!-- .col -->
-        <app-duplicado-placa *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
-        <app-duplicado-licencia *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-licencia>
+        <app-duplicado-placa *ngIf="tramiteSelected == 5" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
+        <app-duplicado-licencia *ngIf="tramiteSelected == 7" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-licencia>
         <app-cambio-placa *ngIf="tramiteSelected == 16" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-placa>
-        <app-cambio-color *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
-        <app-cambio-motor *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
+        <app-cambio-color *ngIf="tramiteSelected == 24" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
+        <app-cambio-motor *ngIf="tramiteSelected == 36" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
         <app-regrabar-motor *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-regrabar-motor>
         <app-rematricula *ngIf="tramiteSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-rematricula>
     </div><!-- /.col -->
