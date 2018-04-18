@@ -33,21 +33,8 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.factura = new Factura(null, null, null, null, null, null, null, null, null,null);
+    this.factura = new Factura(null, null, null, null, null, null, null, null, null);
 
-    this._VehiculoService.getVehiculoSelect().subscribe(
-        response => {
-          this.vehiculos = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      );
 
     this._CiudadanoService.getCiudadanoSelect().subscribe(
       response => {
@@ -82,7 +69,6 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.factura.vehiculoId = this.vehiculoSelected;
     this.factura.solicitanteId = this.solicitanteSelected;
     this.factura.apoderadoId = this.apoderadoSelected;
     this.factura.sedeOperativaId = this.sedeOperativaSelected;

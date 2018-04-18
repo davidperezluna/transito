@@ -26,6 +26,7 @@ export class NewComponent implements OnInit {
   public mensaje = '';
   public isError = false;
   public ciudadanosVehiculo=false;
+  public ciudadano=false;
 
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
@@ -36,7 +37,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null);
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null);
     this.numeroFactura = {
       'numeroFactura': this.numeroFactura,
     };
@@ -120,18 +121,7 @@ constructor(
                 }
               );
 
-              this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.factura.vehiculo.id).subscribe(
-                response => {
-                  this.ciudadanosVehiculo = response.data;
-                  console.log(this.ciudadanosVehiculo);
-                error => { 
-                    this.errorMessage = <any>error;
-                    if(this.errorMessage != null){
-                      console.log(this.errorMessage);
-                      alert("Error en la petición"); 
-                    }
-                  }
-              });
+              
             }else{
               this.factura = false;
               this.isError = true;
@@ -172,6 +162,31 @@ constructor(
       }); 
 
 
+  }
+  onKeyValidateVehiculo(){
+    let token = this._loginService.getToken();
+    this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
+      response => {
+        this.ciudadanosVehiculo = response.data;
+        if (response.status == 'error' ) {
+            alert(response.msj);
+        }else{
+          response.data.forEach(element => {
+            if (element.ciudadano) {
+              this.ciudadano = true;
+            }else{
+              this.ciudadano = false;
+            }
+          });
+        }
+      error => { 
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición"); 
+          }
+        }
+    });
   }
   readyTramite(datos:any){
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;

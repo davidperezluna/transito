@@ -1,5 +1,5 @@
 <div class="row"><!-- .row -->
-    <div class="col-xs-12 col-lg-6">
+    <div class="col-xs-12 col-lg-8">
         <div class="input-group">
                 <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required />
             <span class="input-group-btn">
@@ -22,9 +22,13 @@
                 </h5>
                 <hr> 
                 <form #tramiteSolicitudForm="ngForm" class="row">
-                    <div class="col-xs-16 col-lg-16 form-group" *ngIf="!tramiteSolicitud.documentacion">
-                        <label>Placa</label>
-                        <p>{{ factura.vehiculo.placa }}</p>
+                    <div class="col-xs-16 col-lg-16 form-group">
+                        <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
+                            <span class="input-group-btn">
+                                <button (click)="onKeyValidateVehiculo()" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
                     </div>
                     <div class="col-lg-16 col-md-16 form-group">
                         <label class="custom-control custom-checkbox" for="2c-option1">
@@ -44,36 +48,60 @@
                         <ng-select [multiple]="false" [options]="tramitesFactura" [(ngModel)]="tramiteFacturaSelected" name="tramiteFacturaId" required>
                         </ng-select>
                     </div>
-                    <table class="table table-bordered" *ngIf="ciudadanosVehiculo">
-                        <thead>
-                            <tr>
-                                <th>Solicitante</th>
-                                <th>Check</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
-                                <td>
-                                    <strong>Nombre: </strong>
-                                    {{ciudadanoVehiculo.ciudadano?.primerNombre}} {{ciudadanoVehiculo.ciudadano?.primerApellido}}
-                                    <br>
-                                    <strong>Identificación: </strong>
-                                    {{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}
-                                </td>
-                                <td> 
-                                    <label class="custom-control custom-radio" for="3option3">
-<<<<<<< HEAD
-                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" >
-=======
-                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.ciudadano.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" required >
->>>>>>> origin/master
-                                        <span class="custom-control-indicator"></span> 
-                                        <span class="custom-control-description">Solicitante</span>
-                                    </label>
-                                </td>
-                            </tr>
-                        </tbody> 
-                    </table> 
+                    <div class="col-lg-16 col-md-16 form-group">
+                        <table class="table table-bordered" *ngIf="ciudadano">
+                            <thead>
+                                <tr>
+                                    <th>Solicitante Ciudadano</th>
+                                    <th>Check</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                    <td>
+                                        <strong>Nombre: </strong>
+                                        {{ciudadanoVehiculo.ciudadano?.primerNombre}} {{ciudadanoVehiculo.ciudadano?.primerApellido}}
+                                        <br>
+                                        <strong>Identificación: </strong>
+                                        {{ciudadanoVehiculo.ciudadano?.numeroIdentificacion}}
+                                    </td>
+                                    <td> 
+                                        <label class="custom-control custom-radio" for="3option3">
+                                            <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" required >
+                                            <span class="custom-control-indicator"></span> 
+                                            <span class="custom-control-description">Solicitante</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody> 
+                        </table> 
+                        <table class="table table-bordered" *ngIf="!ciudadano">
+                            <thead>
+                                <tr>
+                                    <th>Solicitante Empresa</th>
+                                    <th>Check</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                    <td>
+                                        <strong>Nit: </strong>
+                                        {{ciudadanoVehiculo.empresa?.nit}}
+                                        <br>
+                                        <strong>Nombre: </strong>
+                                        {{ciudadanoVehiculo.empresa?.nombre}}
+                                    </td>
+                                    <td> 
+                                        <label class="custom-control custom-radio" for="3option3">
+                                            <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" required >
+                                            <span class="custom-control-indicator"></span> 
+                                            <span class="custom-control-description">Solicitante</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody> 
+                        </table> 
+                    </div>
                 </form>
             </div>
             <div class="card-footer">
