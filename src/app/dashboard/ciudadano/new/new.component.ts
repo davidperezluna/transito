@@ -57,6 +57,7 @@ constructor(
     this._generoService.getGeneroSelect().subscribe(
       response => {
         this.generos = response;
+        console.log(this.generos);
       },
       error => {
         this.errorMessage = <any>error;
@@ -99,20 +100,20 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.ciudadano.tipoIdentificacionId = this.tipoIdentificacionSelected;
+    this.ciudadano.tipoIdentificacionUsuarioId = this.tipoIdentificacionSelected;
     this.ciudadano.generoId = this.generoSelected;
     this.ciudadano.grupoSanguineoId = this.grupoSanguineoSelected;
     this.ciudadano.municipioNacimientoId = this.municipioNacimientoSelected;
     this.ciudadano.municipioResidenciaId = this.municipioResidenciaSelected;
 
     var html = 'Se va a registrar el usuario:<br>'+
-               'Primer Nombre: <b>'+this.ciudadano.primerNombre+'</b><br>'+
-               'Tipo Identificacion: <b>'+this.ciudadano.tipoIdentificacionId+'</b><br>'+
-               'Identificacion: <b>'+this.ciudadano.numeroIdentificacion+'</b><br>'+
+               'Primer Nombre: <b>'+this.ciudadano.primerNombreUsuario+'</b><br>'+
+               'Tipo Identificacion: <b>'+this.ciudadano.tipoIdentificacionUsuarioId+'</b><br>'+
+               'Identificacion: <b>'+this.ciudadano.numeroIdentificacionUsuario+'</b><br>'+
                'Genero: <b>'+this.ciudadano.generoId+'</b><br>'+
                'Grupo Sanguineo: <b>'+this.ciudadano.grupoSanguineoId+'</b><br>'+
                'Direccion: <b>'+this.ciudadano.direccion+'</b><br>'+
-               'Telefono: <b>'+this.ciudadano.telefono+'</b><br>';
+               'Telefono: <b>'+this.ciudadano.telefonoUsuario+'</b><br>';
 
    swal({
       title: 'Creacion de persona natural',

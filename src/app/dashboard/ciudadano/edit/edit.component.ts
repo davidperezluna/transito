@@ -59,6 +59,13 @@ constructor(
       }
     })
     console.log(this.ciudadano);
+    this.ciudadano.numeroIdentificacionUsuario = this.ciudadano.usuario.identificacion;
+    this.ciudadano.primerNombreUsuario = this.ciudadano.usuario.primerNombre;
+    this.ciudadano.segundoNombreUsuario = this.ciudadano.usuario.segundoNombre;
+    this.ciudadano.primerApellidoUsuario = this.ciudadano.usuario.primerApellido;
+    this.ciudadano.segundoApellidoUsuario = this.ciudadano.usuario.segundoApellido;
+    this.ciudadano.telefonoUsuario = this.ciudadano.usuario.telefono;
+    this.ciudadano.correoUsuario = this.ciudadano.usuario.correo;
 
     this._municipioService.getMunicipioSelect().subscribe(
         response => {
@@ -83,7 +90,7 @@ constructor(
         response => {
           this.tiposIdentificacion = response;
           setTimeout(() => {
-            this.tipoIdentificacionSelected = [this.ciudadano.tipoIdentificacion.id];
+            this.tipoIdentificacionSelected = [this.ciudadano.usuario.tipoIdentificacion.id];
             this.formReady = true;
           });
         }, 
@@ -142,7 +149,7 @@ constructor(
     let token = this._loginService.getToken();
     this.ciudadano.municipioResidenciaId = this.municipioResidenciaSelected;
     this.ciudadano.municipioNacimientoId = this.municipioNacimientoSelected;
-    this.ciudadano.tipoIdentificacionId = this.tipoIdentificacionSelected;
+    this.ciudadano.tipoIdentificacionUsuarioId = this.tipoIdentificacionSelected;
     this.ciudadano.generoId = this.generoSelected;
     this.ciudadano.grupoSanguineoId = this.grupoSanguineoSelected;
     console.log(this.ciudadano);

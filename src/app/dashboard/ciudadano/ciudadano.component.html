@@ -31,12 +31,12 @@
                 <tr class="odd" *ngFor="let ciudadano of ciudadanos; let i = index">
                   <td>{{ ciudadano.id }}</td>
                   <td>
-                    {{ ciudadano.tipoIdentificacion.nombre }}
+                    {{ ciudadano.usuario.tipoIdentificacion.nombre }}
                     <br>
-                    {{ ciudadano.numeroIdentificacion }}
+                    {{ ciudadano.usuario.identificacion }}
                   </td>
                   <td>
-                    {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido }}
+                    {{ ciudadano.usuario.primerNombre }} {{ ciudadano.usuario.segundoNombre }} {{ ciudadano.usuario.primerApellido }} {{ ciudadano.usuario.segundoApellido }}
                   </td>
                   <td><button (click)="editCiudadano(ciudadano)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
                     <button (click)="deleteCiudadano(ciudadano.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
