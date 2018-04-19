@@ -8,6 +8,7 @@ import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { Factura } from 'app/dashboard/factura/factura.modelo';
 import { error } from 'selenium-webdriver';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-new',
@@ -19,6 +20,7 @@ export class NewComponent implements OnInit {
   public errorMessage;
   public respuesta;
   public tramitesFactura: any;
+  public tramitesFacturas: any;
   public tramiteFacturaSelected: any;
   public numeroFactura: any;
   public factura: any;
@@ -31,6 +33,7 @@ export class NewComponent implements OnInit {
   public tipoError=200;
   public error=false;
   public msj=false;
+  public tramitePreasignacion=false;
 
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
@@ -111,19 +114,7 @@ constructor(
 
             if (this.factura.estado) {
               this.isError = false;
-              this._tramiteFacturaService.getTramiteFacturaSelect(this.factura.numero).subscribe(
-                response => {
-                  this.tramitesFactura = response;
-                },
-                error => {
-                  this.errorMessage = <any>error;
-                  
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                  }
-                }
-              );
+              
             }else{
               this.factura = false;
               this.isError = true;
@@ -167,35 +158,71 @@ constructor(
   }
   readyVehiculo(){
     this.tramiteSelected = false;
-    this.tipoError = 200;
     this.error = false;
   }
   onKeyValidateVehiculo(){
     let token = this._loginService.getToken();
-    this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
+    this._tramiteFacturaService.getTramiteFacturaSelect(this.factura.numero).subscribe(
       response => {
-        this.ciudadanosVehiculo = response.data;
-        if (response.status == 'error' ) {
-           this.msj= response.msj;
-           this.error = true;
-           this.tipoError = response.code;
-        }else{
-          response.data.forEach(element => {
-            if (element.ciudadano) {
-              this.ciudadano = true;
-            }else{
-              this.ciudadano = false;
-            }
+         this.tramitesFacturas = response;
+          this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
+            response => {
+              this.ciudadanosVehiculo = response.data;
+              if (response.status == 'error' ) {
+                this.msj= response.msj;
+                this.error = true;
+                this.tipoError = response.code;
+                if (this.tipoError = 401) {
+                  this.tramitesFacturas.forEach(tramiteFactura => {
+                    if (tramiteFactura.tramiteId == '56') {
+                       this.tramitePreasignacion = tramiteFactura.value
+                       console.log(tramiteFactura.value);
+                    }
+                  });
+                  if (this.tramitePreasignacion) {
+                      let arrayPreasignacion = [
+                        {value: this.tramitePreasignacion, label: 'PREASIGNACION VEHICULO'},
+                      ];
+                      this.tramitesFactura = arrayPreasignacion;
+                  }else{
+                    swal({
+                      title: 'Factura!',
+                      text: 'el tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado',
+                      type: 'error',
+                      confirmButtonText: 'Aceptar'
+                    })
+                  }
+                }
+              }else{
+                this.error = false;
+                this.tramitesFactura = this.tramitesFacturas;
+                response.data.forEach(element => {
+                  if (element.ciudadano) {
+                    this.ciudadano = true;
+                  }else{
+                    this.ciudadano = false;
+                  }
+                });
+              }
+            error => { 
+                this.errorMessage = <any>error;
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición"); 
+                }
+              }
           });
+      },
+      error => {
+        this.errorMessage = <any>error;
+        
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
-      error => { 
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición"); 
-          }
-        }
-    });
+      }
+    );
+    
   }
   readyTramite(datos:any){
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
@@ -213,6 +240,9 @@ constructor(
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
+          this.tramiteSolicitud.vehiculoId = null;
+          this.tramiteSelected = false;
+          this.error = false;
         } else {
           swal({
             title: 'Error!',

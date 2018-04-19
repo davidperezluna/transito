@@ -17,7 +17,7 @@ import swal from 'sweetalert2';
   templateUrl: './vehiculoNew.component.html'
 })
 export class NewVehiculoComponent implements OnInit {
-@Output() readyVehiculo = new EventEmitter<any>();
+@Output() readyTramite = new EventEmitter<any>();
 public vehiculo: Vehiculo;
 public municipios:any;
 public errorMessage:any;
@@ -38,6 +38,9 @@ public sedeOperativaSelected:any;
 public combustibleSelected:any;
 public respuesta:any;
 public sedesOperativas:any;
+public datos = {
+  'numeroMotor': null,
+};
 
 constructor(
   private _departamentoService: DepartamentoService,
@@ -162,7 +165,7 @@ constructor(
   }
 
   onCancelar(){
-      this.readyVehiculo.emit(true);
+      this.readyTramite.emit(true);
   }
   onEnviar(){
 
@@ -181,13 +184,8 @@ constructor(
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.readyVehiculo.emit(true);
-          swal({
-            title: 'Pefecto!',
-            text: 'El registro se ha registrado con exito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
+          this.datos.numeroMotor = this.vehiculo.motor;
+          this.readyTramite.emit(this.datos);
         }else{
           swal({
             title: 'Error!',
@@ -207,10 +205,4 @@ constructor(
 
 		}); 
   }
-
-  // changedDepartamento(e){
-  //   let token = this._loginService.getToken();
-  //   alert(e);
-  //   }
-
 }
