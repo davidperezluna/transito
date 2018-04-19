@@ -29,8 +29,8 @@
                         <div class="input-group" [ngClass]="{'has-danger' : error}">
                             <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
                             <span class="input-group-btn">
-                                <button *ngIf="tipoError=='200'" (click)="onKeyValidateVehiculo()" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                                <button *ngIf="tipoError=='401'" (click)="onKeyNuevoVehiculo()" class="btn btn-default btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button>
+                                <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : error}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                <!-- <button *ngIf="tipoError=='401'" (click)="onKeyNuevoVehiculo()" class="btn btn-default btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button> -->
                             </span>
                         </div>
                         <div class="has-danger" *ngIf="error" >
@@ -130,11 +130,11 @@
     <div class="col-xs-16 col-lg-8"><!-- .col -->
         <app-duplicado-placa *ngIf="tramiteSelected == 5" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
         <app-duplicado-licencia *ngIf="tramiteSelected == 7" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-licencia>
-        <app-cambio-placa *ngIf="tramiteSelected == 16" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-placa>
+        <app-cambio-placa *ngIf="tramiteSelected == 16"  (readyTramite)="readyTramite($event)"></app-cambio-placa>
         <app-cambio-color *ngIf="tramiteSelected == 24" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
         <app-cambio-motor *ngIf="tramiteSelected == 36" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
         <app-regrabar-motor *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-regrabar-motor>
         <app-rematricula *ngIf="tramiteSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-rematricula>
-        <app-new-vehiculo *ngIf="tramiteSelected == 'nuevoVehiculo'" (readyVehiculo)="readyVehiculo($event)"></app-new-vehiculo>
+        <app-new-vehiculo *ngIf="tramiteSelected == 56" (readyTramite)="readyTramite($event)"></app-new-vehiculo>
     </div><!-- /.col -->
 </div><!-- /.row -->

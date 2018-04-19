@@ -11,7 +11,7 @@ export class TramiteSolicitudService {
 	constructor(private _http: Http) { }
 
 	getTramiteSolicitud() {
-		return this._http.get(this.url + '/').map(res => res.json());
+		return this._http.get(this.url + '/index').map(res => res.json());
 	}
 
 	register(tramiteSolicitud, token) {
