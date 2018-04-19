@@ -54,15 +54,12 @@ constructor(
     this.ready.emit(true);
   }
   onEnviar(){
-    console.log(this.tramiteFacturaSelected);
     let token = this._loginService.getToken();
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
 
-    console.log(this.tramiteSolicitud);
 		this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
