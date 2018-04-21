@@ -10,7 +10,7 @@
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center container">
                     <div class="form-group row">
                         <div class="col-xs-16 col-lg-16">
                             <label>Tipo de Cambio
@@ -30,17 +30,27 @@
                             <input class="form-control" [(ngModel)]="nuevaPlaca" name="nuevaPlaca" type="text" required />
                         </div>
                         <div class="col-xs-16 col-lg-16">
-                            <label>Presenta Documentación</label>
-                            <input class="form-control" [(ngModel)]="documentacion" name="documentacion" type="checkbox" />
+                            <br>
+                            <label class="custom-control custom-checkbox" for="documentacion">
+                                <input type="checkbox"  [(ngModel)]="documentacion" name="documentacion" class="custom-control-input"  id="documentacion" required>
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">Presenta Documentación</span>
+                            </label>
+                        </div>
+                        <div class="col-xs-16 col-lg-16" *ngIf='tramite.sustrato'>
+                            <br>
+                            <label class="custom-control custom-checkbox" for="sustrato" >
+                                <input type="checkbox"  [(ngModel)]="datos.sustrato" name="sustrato" class="custom-control-input"  id="sustrato" required>
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">sustrato</span>
+                            </label>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button (click)="enviarTramite()" type="submit" class="btn btn-primary form-control">
-                        <i class="fa fa-floppy-o"></i>
-                        Enviar
-                    </button>
-                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
             </div>
         </div>
     </div>

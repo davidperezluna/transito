@@ -10,7 +10,7 @@
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center container">
                     <div class="form-group row">
                         <div class="col-xs-16 col-lg-8">
                             <label>Tipo de Ingreso
@@ -26,7 +26,7 @@
                             <input class="form-control" [(ngModel)]="numeroMotor" name="numeroMotor" type="text" required />
                         </div>
 
-                        <div class="col-lg-16 col-md-16" id="tipo-ingreso-nuevo" *ngIf="tipoIngresoSelected == 'Nuevo'">
+                        <div class="col-lg-16 col-md-16 row" id="tipo-ingreso-nuevo" *ngIf="tipoIngresoSelected == 'Nuevo'">
                             <div class="col-lg-8 col-md-8">
                                 <label>Número de aceptación *</label>
                                 <input class="form-control" [(ngModel)]="numeroAceptacion" name="numeroAceptacion" type="text" required />
@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-16 col-md-16" id="tipo-ingreso-usado" *ngIf="tipoIngresoSelected == 'Usado'">
+                        <div class="col-lg-16 col-md-16 row" id="tipo-ingreso-usado" *ngIf="tipoIngresoSelected == 'Usado'">
                             <div class="col-lg-8 col-md-8">
                                 <label>Tipo identificación *</label>
                                 <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
@@ -47,12 +47,12 @@
                                 <label>Número identificación</label>
                                 <input class="form-control" [(ngModel)]="numeroIdentificacion" name="numeroIdentificacion" type="text" required />
                             </div>
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-16 col-md-16">
                                 <label>Número de cto. compra venta *</label>
                                 <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
                             </div>
                         </div>
-                        <div class="col-lg-8 col-md-8">
+                        <div class="col-lg-16 col-md-16">
                             <label>Fecha *</label>
                             <input class="form-control" [(ngModel)]="fecha" name="fecha" type="date" required />
                         </div>
@@ -65,20 +65,30 @@
                             <textarea class="form-control" [(ngModel)]="documentacion" name="documentacion"></textarea>
                         </div>
                         <div class="col-xs-16 col-lg-16">
-                            <label>Entregada</label>
-                            <input class="form-control" [(ngModel)]="entregada" name="entregada" type="checkbox" required />
+                            <br>
+                            <label class="custom-control custom-checkbox" for="entregada">
+                                <input type="checkbox"  [(ngModel)]="entregada" name="entregada" class="custom-control-input"  id="entregada" required>
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">Entregada</span>
+                            </label>
+                        </div>
+                        <div class="col-xs-16 col-lg-16" *ngIf='tramite.sustrato'>
+                            <br>
+                            <label class="custom-control custom-checkbox" for="sustrato" >
+                                <input type="checkbox"  [(ngModel)]="datos.sustrato" name="sustrato" class="custom-control-input"  id="sustrato" required>
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">sustrato</span>
+                            </label>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <button (click)="enviarTramite()" type="submit" class="btn btn-primary form-control">
-                        <i class="fa fa-floppy-o"></i>
-                        Enviar
-                    </button>
-                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
             </div>
         </div>
     </div>
-    <!-- /.col -->
+    <!-- /.col --> 
 </div>
 <!-- /.row -->

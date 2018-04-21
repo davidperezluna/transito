@@ -34,6 +34,8 @@ export class NewComponent implements OnInit {
   public error=false;
   public msj=false;
   public tramitePreasignacion=false;
+  public tramiteMatriculaInicial=false;
+  public tramite=false;
 
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
@@ -140,7 +142,7 @@ constructor(
         this.respuesta = response;
         this.tramiteSelected = this.respuesta.data.id;
         console.log(this.respuesta.data.id);
-        
+        this.tramite = this.respuesta.data;
         error => {
           this.errorMessage = <any>error;
           if (this.errorMessage != null) {
@@ -153,10 +155,7 @@ constructor(
 
 
   }
-  readyVehiculo(){
-    this.tramiteSelected = false;
-    this.error = false;
-  }
+  
   onKeyValidateVehiculo(){
     let token = this._loginService.getToken();
     this._tramiteFacturaService.getTramiteFacturaSelect(this.factura.numero).subscribe(
@@ -169,14 +168,21 @@ constructor(
                 this.msj= response.msj;
                 this.error = true;
                 this.tipoError = response.code;
-                if (this.tipoError = 401) {
+                if (this.tipoError == 401) {
+                  console.log(this.tipoError);
                   this.tramitesFacturas.forEach(tramiteFactura => {
                     if (tramiteFactura.tramiteId == '56') {
-                       this.tramitePreasignacion = tramiteFactura.value
-                       console.log(tramiteFactura.value);
+                      this.tramitePreasignacion = tramiteFactura.value;
+                      console.log(tramiteFactura.value);
                     }
                   });
                   if (this.tramitePreasignacion) {
+                      swal({
+                        title: 'Factura!',
+                        text: 'primero tramita PREREASIGNACIÓN VEHICULO',
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                      })
                       let arrayPreasignacion = [
                         {value: this.tramitePreasignacion, label: 'PREASIGNACION VEHICULO'},
                       ];
@@ -184,7 +190,33 @@ constructor(
                   }else{
                     swal({
                       title: 'Factura!',
-                      text: 'el tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado',
+                      text: 'el tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado o ya fu tramitado para el ingreso de este nuevo vehículo',
+                      type: 'error',
+                      confirmButtonText: 'Aceptar'
+                    })
+                  }
+                }else{
+                  this.tramitesFacturas.forEach(tramiteFactura => {
+                    if (tramiteFactura.tramiteId == '1') {
+                      this.tramiteMatriculaInicial = tramiteFactura.value;
+                      console.log(this.tramiteMatriculaInicial);
+                    }
+                  });
+                  if (this.tramiteMatriculaInicial) {
+                    swal({
+                      title: 'Factura!',
+                      text: 'primero tramita MATRICULA INICIAL',
+                      type: 'success',
+                      confirmButtonText: 'Aceptar'
+                    })
+                    let arrayPreasignacion = [
+                      {value: this.tramiteMatriculaInicial, label: 'MATRICULA INICIAL'},
+                    ];
+                    this.tramitesFactura = arrayPreasignacion;
+                  }else{
+                    swal({
+                      title: 'Factura!',
+                      text: 'el tramite MATRICULA INICIAL no se encuentra facturado o ya fue tramitado para la asignación de propietarios',
                       type: 'error',
                       confirmButtonText: 'Aceptar'
                     })
@@ -221,7 +253,7 @@ constructor(
     );
     
   }
-  readyTramite(datos:any){
+  readyTramite(datos:any,ready:boolean){
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
     this.tramiteSolicitud.datos=datos;
     console.log(this.tramiteSolicitud);
@@ -259,8 +291,9 @@ constructor(
       }); 
   }
 
-  onKeyNuevoVehiculo(){
-    this.tramiteSelected = 'nuevoVehiculo';
+  cancelarTramite(){
+    this.tramiteSelected = false;
+    this.error = false;
   }
 
 }

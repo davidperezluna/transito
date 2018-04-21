@@ -128,13 +128,13 @@
     </div><!-- /.col -->
 
     <div class="col-xs-16 col-lg-8"><!-- .col -->
-        <app-duplicado-placa *ngIf="tramiteSelected == 5" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-placa>
-        <app-duplicado-licencia *ngIf="tramiteSelected == 7" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-duplicado-licencia>
-        <app-cambio-placa *ngIf="tramiteSelected == 16"  (readyTramite)="readyTramite($event)"></app-cambio-placa>
-        <app-cambio-color *ngIf="tramiteSelected == 24" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-color>
-        <app-cambio-motor *ngIf="tramiteSelected == 36" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-cambio-motor>
-        <app-regrabar-motor *ngIf="tramiteSelected == 2" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-regrabar-motor>
-        <app-rematricula *ngIf="tramiteSelected == 1" [tramiteSolicitud]="tramiteSolicitud" (readyTramite)="readyTramite($event)"></app-rematricula>
-        <app-new-vehiculo *ngIf="tramiteSelected == 56" (readyTramite)="readyTramite($event)"></app-new-vehiculo>
+        <app-duplicado-placa *ngIf="tramiteSelected == 5" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-duplicado-placa>
+        <app-duplicado-licencia *ngIf="tramiteSelected == 7" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-duplicado-licencia>
+        <app-cambio-placa *ngIf="tramiteSelected == 16"  [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-placa>
+        <app-cambio-color *ngIf="tramiteSelected == 24" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-color>
+        <app-cambio-motor *ngIf="tramiteSelected == 36" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-motor>
+        <app-regrabar-motor *ngIf="tramiteSelected == 2" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-regrabar-motor>
+        <app-rematricula *ngIf="tramiteSelected == 1" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-rematricula>
+        <app-new-vehiculo *ngIf="tramiteSelected == 56" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-new-vehiculo>
     </div><!-- /.col -->
 </div><!-- /.row -->

@@ -18,6 +18,7 @@ import swal from 'sweetalert2';
 })
 export class NewVehiculoComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
+@Output() cancelarTramite = new EventEmitter<any>();
 public vehiculo: Vehiculo;
 public municipios:any;
 public errorMessage:any;
@@ -165,8 +166,8 @@ constructor(
   }
 
   onCancelar(){
-      this.readyTramite.emit(true);
-  }
+    this.cancelarTramite.emit(true);
+}
   onEnviar(){
 
     this.vehiculo.municipioId = this.municipioSelected;
@@ -205,4 +206,5 @@ constructor(
 
 		}); 
   }
+  
 }

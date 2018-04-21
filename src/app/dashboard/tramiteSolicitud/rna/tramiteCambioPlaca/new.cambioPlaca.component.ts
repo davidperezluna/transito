@@ -10,6 +10,8 @@ import swal from 'sweetalert2';
 })
 export class NewCambioPlacaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
+    @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() tramite: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -23,6 +25,7 @@ export class NewCambioPlacaComponent implements OnInit {
         'numeroRunt': null,
         'nuevaPlaca': null,
         'documentacion': null,
+        'sustrato': null,
     };
 
     constructor(
@@ -40,6 +43,9 @@ export class NewCambioPlacaComponent implements OnInit {
         this.datos.nuevaPlaca = this.nuevaPlaca;
         this.datos.documentacion = this.documentacion;
         this.readyTramite.emit(this.datos);
+    }
+    onCancelar(){
+        this.cancelarTramite.emit(true);
     }
 
 }

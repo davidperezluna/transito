@@ -13,7 +13,8 @@ import swal from 'sweetalert2';
 })
 export class NewCambioColorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
-    @Input() tramiteSolicitud: any = null;
+    @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() tramite: any = null;
     public errorMessage;
     public respuesta;
     public colores: any;
@@ -21,7 +22,8 @@ export class NewCambioColorComponent implements OnInit {
     public colorSelected: any;
     public datos = {
         'newData': null,
-        'oldData': null
+        'oldData': null,
+        'sustrato': null,
     };
 
     constructor(
@@ -32,7 +34,6 @@ export class NewCambioColorComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.tramiteSolicitud);
         this._ColorService.getColorSelect().subscribe(
             response => {
                 this.colores = response;
@@ -49,41 +50,13 @@ export class NewCambioColorComponent implements OnInit {
 
     }
     
-    onEnviar() {
-        let token = this._loginService.getToken();
-
-        console.log(this.tramiteSolicitud);
-        this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
-            response => {
-                this.respuesta = response;
-                console.log(this.respuesta);
-                if (this.respuesta.status == 'success') {
-                    swal({
-                        title: 'Pefecto!',
-                        text: 'El registro se ha registrado con exito',
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                    })
-                } else {
-                    swal({
-                        title: 'Error!',
-                        text: 'El tramiteSolicitud ' + +' ya se encuentra registrada',
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    })
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            });
-    }
+   
     enviarTramite(){
         this.datos.newData = this.colorSelected;
         this.readyTramite.emit(this.datos);
+    }
+    onCancelar(){
+        this.cancelarTramite.emit(true);
     }
 
 }
