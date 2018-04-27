@@ -303,6 +303,7 @@ constructor(
       response => {
         if (response.status == "success") {
         this.ciudadano = response.data;
+        console.log(this.ciudadano);
         }else{
           this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
             response => {
