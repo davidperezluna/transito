@@ -1,5 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { TramiteSolicitud } from '../tramiteSolicitud.modelo';
+import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
@@ -17,6 +18,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public tramiteSolicitud: TramiteSolicitud;
+  public vehiculo: Vehiculo;
   public errorMessage;
   public respuesta;
   public tramitesFactura: any;
@@ -46,6 +48,7 @@ constructor(
 ){}
 
   ngOnInit() {
+    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null);
     this.numeroFactura = {
       'numeroFactura': this.numeroFactura,
@@ -164,16 +167,15 @@ constructor(
           this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
             response => {
               this.ciudadanosVehiculo = response.data;
+              this.vehiculo = response.data[0].vehiculo;
               if (response.status == 'error' ) {
                 this.msj= response.msj;
                 this.error = true;
                 this.tipoError = response.code;
                 if (this.tipoError == 401) {
-                  console.log(this.tipoError);
                   this.tramitesFacturas.forEach(tramiteFactura => {
                     if (tramiteFactura.tramiteId == '56') {
                       this.tramitePreasignacion = tramiteFactura.value;
-                      console.log(tramiteFactura.value);
                     }
                   });
                   if (this.tramitePreasignacion) {
@@ -199,7 +201,6 @@ constructor(
                   this.tramitesFacturas.forEach(tramiteFactura => {
                     if (tramiteFactura.tramiteId == '1') {
                       this.tramiteMatriculaInicial = tramiteFactura.value;
-                      console.log(this.tramiteMatriculaInicial);
                     }
                   });
                   if (this.tramiteMatriculaInicial) {

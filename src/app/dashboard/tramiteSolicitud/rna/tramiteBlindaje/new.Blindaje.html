@@ -1,0 +1,70 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-16 col-lg-16">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Blindaje y desblindaje
+                </h5>
+                <small>Todos los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="row justify-content-center container">
+                    <div class="form-group row">
+                        <!-- <div class="col-xs-16 col-lg-8">
+                            <label>Tipo regrabación
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" name="tipoRegrabacionSelected" [(ngModel)]="tipoRegrabacionSelected" required>
+                                <option *ngFor="let tipoRegrabacion of tipoRegrabacionList" [value]="tipoRegrabacion"> {{ tipoRegrabacion }}
+                                </option>
+                            </select>
+                        </div> -->
+                        <div class="col-xs-16 col-lg-8">
+                            <label>Tipo blindaje
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" name="tipoblindajeblindajeSelected" [(ngModel)]="datos.tipoBlindaje" required>
+                                <option *ngFor="let tipoBlindaje of tipoBlindajeList" [value]="tipoBlindaje"> {{tipoBlindaje}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-xs-16 col-lg-8">
+                            <label>Nivel blindaje
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" name="nivelblindajeSelected" [(ngModel)]="datos.nivelBlindaje" required>
+                                <option *ngFor="let nivelBlindaje of nivelBlindajeList" [value]="nivelBlindaje"> {{nivelBlindaje}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-xs-16 col-lg-8">
+                            <label> Empresa Blindadora</label>
+                            <input class="form-control" [(ngModel)]="datos.empresaBlindadora" name="empresaBlindadora" type="text" required />
+                        </div>
+                        <div class="col-xs-16 col-lg-8">
+                            <label>Número RUNT</label>
+                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                        
+                        <div class="col-xs-16 col-lg-16" *ngIf='tramite.sustrato'>
+                            <br>
+                            <label class="custom-control custom-checkbox" for="sustrato" >
+                                <input type="checkbox"  [(ngModel)]="datos.sustrato" name="sustrato" class="custom-control-input"  id="sustrato" required>
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">sustrato</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

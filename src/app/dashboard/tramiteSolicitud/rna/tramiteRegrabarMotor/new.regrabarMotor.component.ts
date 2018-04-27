@@ -2,6 +2,8 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
+
 
 import swal from 'sweetalert2';
 
@@ -13,6 +15,7 @@ export class NewRegrabarMotorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramite: any = null;
+    @Input() vehiculo: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -40,10 +43,11 @@ export class NewRegrabarMotorComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _SustratoService: SustratoService,
+        private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() {
-        this.tipoRegrabacionList = ['Serie', 'Chasis', 'Motor', 'VIN'];
+        // this.tipoRegrabacionList = ['Serie', 'Chasis', 'Motor', 'VIN'];
         this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
 
         this._SustratoService.getSustratoSelect().subscribe(
@@ -62,14 +66,40 @@ export class NewRegrabarMotorComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.datos.tipoRegrabacion = this.tipoRegrabacionSelected;
-        this.datos.motivo = this.motivoSelected;
-        this.datos.nuevoNumero = this.nuevoNumero;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.documentacion = this.documentacion;
-        this.datos.sustrato = this.sustratoSelected;
-        this.datos.entregada = this.entregada;
-        this.readyTramite.emit(this.datos);
+        // this.datos.tipoRegrabacion = this.tipoRegrabacionSelected;
+        
+
+        this.vehiculo.servicioId = this.vehiculo.servicio.id    
+        this.vehiculo.municipioId = this.vehiculo.municipio.id   
+        this.vehiculo.lineaId = this.vehiculo.linea.id   
+        this.vehiculo.colorId = this.vehiculo.color.id   
+        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
+        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
+        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
+        this.vehiculo.claseId = this.vehiculo.clase.id   
+        this.vehiculo.servicioId = this.vehiculo.servicio.id 
+        let token = this._loginService.getToken();
+        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+        response => {
+            this.respuesta = response; 
+            if(this.respuesta.status == 'success'){
+                this.datos.motivo = this.motivoSelected;
+                this.datos.nuevoNumero = this.nuevoNumero;
+                this.datos.numeroRunt = this.numeroRunt;
+                this.datos.documentacion = this.documentacion;
+                this.datos.sustrato = this.sustratoSelected;
+                this.datos.entregada = this.entregada;
+                this.readyTramite.emit(this.datos);
+            }
+            error => {
+                    this.errorMessage = <any>error;
+
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+        });
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
