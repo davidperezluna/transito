@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class DepartamentoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/departamento";
+	public url = "http://192.169.218.194/~sednarino/transito/backend/web/departamento";
 	public identity;
 	public token;
 

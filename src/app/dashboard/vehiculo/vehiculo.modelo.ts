@@ -24,7 +24,6 @@ export class Vehiculo{
 		public numeroPasajeros:number,
 		public pignorado:number,
 		public cancelado:number,
-		
 		public tipoVehiculo:string,
 		public radioAccion:string,
 		public modalidadTransporte:string,

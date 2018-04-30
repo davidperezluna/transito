@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TramiteSolicitudService {
-	public url = 'http://localhost/GitHub/colossus-sit/web/app_dev.php/tramitesolicitud';
+	public url = 'http://192.169.218.194/~sednarino/transito/backend/web/tramitesolicitud';
 	public identity;
 	public token;
 

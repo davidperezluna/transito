@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class TramiteService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/tramite";
+	public url = "http://192.169.218.194/~sednarino/transito/backend/web/tramite";
 	public identity;
 	public token;
 

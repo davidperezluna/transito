@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class GrupoSanguineoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/gruposanguineo";
+	public url = "http://192.169.218.194/~sednarino/transito/backend/web/gruposanguineo";
 	public identity;
 	public token;
 

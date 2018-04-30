@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class InfraccionService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/infraccion";
+	public url = "http://192.169.218.194/~sednarino/transito/backend/web/infraccion";
 	public identity;
 	public token;
 
