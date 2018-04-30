@@ -48,7 +48,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null);
     this.numeroFactura = {
       'numeroFactura': this.numeroFactura,
@@ -167,7 +167,6 @@ constructor(
           this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
             response => {
               this.ciudadanosVehiculo = response.data;
-              this.vehiculo = response.data[0].vehiculo;
               if (response.status == 'error' ) {
                 this.msj= response.msj;
                 this.error = true;
@@ -224,6 +223,7 @@ constructor(
                   }
                 }
               }else{
+                this.vehiculo = response.data[0].vehiculo;
                 this.error = false;
                 this.tramitesFactura = this.tramitesFacturas;
                 response.data.forEach(element => {
