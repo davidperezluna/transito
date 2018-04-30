@@ -18,6 +18,7 @@ import { NewRegrabarSerieComponent } from './rna/tramiteRegrabarSerie/new.regrab
 import { NewRegrabarChasisComponent } from './rna/tramiteRegrabarChasis/new.regrabarChasis.component';
 import { NewRegrabarVinComponent } from './rna/tramiteRegrabarVin/new.regrabarVin.component';
 import { NewRematriculaComponent } from './rna/tramiteRematricula/new.rematricula.component';
+import { NewCambioSedeOperativaComponent } from './rna/tramiteCambioSedeOperativa/new.cambioSedeOperativa.component';
 import { NewBlindajeComponent } from './rna/tramiteBlindaje/new.blindaje.component';
 import { NewVehiculoComponent } from './vehiculoNew/vehiculoNew.component';
 import { EditComponent } from './edit/edit.component';
@@ -45,7 +46,8 @@ import { SelectModule } from 'angular2-select';
         NewRegrabarSerieComponent,
         NewRegrabarChasisComponent,
         NewRegrabarVinComponent,
-        NewBlindajeComponent
+        NewBlindajeComponent,
+        NewCambioSedeOperativaComponent
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -65,7 +67,8 @@ import { SelectModule } from 'angular2-select';
         NewRegrabarSerieComponent,
         NewRegrabarChasisComponent,
         NewRegrabarVinComponent,
-        NewBlindajeComponent
+        NewBlindajeComponent,
+        NewCambioSedeOperativaComponent
     ],
     providers:[TramiteSolicitudService]
 })

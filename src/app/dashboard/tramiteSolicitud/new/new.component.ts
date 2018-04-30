@@ -257,6 +257,7 @@ constructor(
   readyTramite(datos:any,ready:boolean){
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
     this.tramiteSolicitud.datos=datos;
+    this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
     console.log(this.tramiteSolicitud);
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(

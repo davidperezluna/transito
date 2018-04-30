@@ -1,0 +1,38 @@
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-16 col-lg-16"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Traslado de cuenta
+                </h5>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="row justify-content-center container">
+                    <div class="form-group row col-xs-16 col-lg-16">
+                        <label>Sedes operativas <span class="text-danger">*</span></label>
+                        <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected" required name="sedeOperativaId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-16 col-lg-16" *ngIf='tramite.sustrato'>
+                        <br>
+                        <label class="custom-control custom-checkbox" for="sustrato" >
+                            <input type="checkbox"  [(ngModel)]="datos.sustrato" name="sustrato" class="custom-control-input"  id="sustrato" required>
+                            <span class="custom-control-indicator"></span> 
+                            <span class="custom-control-description">sustrato</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-16 col-lg-16">
+                        <label>Número RUNT</label>
+                        <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->

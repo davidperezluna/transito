@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class LineaService {
-	public url = "http://192.169.218.194/~sednarino/transito/backend/web/linea";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/linea";
 	public identity;
 	public token;
 

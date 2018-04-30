@@ -143,6 +143,7 @@
         <app-cambio-carroceria *ngIf="tramiteSelected == 32" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-carroceria>
         <app-cambio-servicio *ngIf="tramiteSelected == 6" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-servicio>
         <app-blindaje *ngIf="tramiteSelected == 26" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-blindaje>
+        <app-cambio-sedeOperativa *ngIf="tramiteSelected == 3" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-sedeOperativa>
         
     </div><!-- /.col -->
 </div><!-- /.row -->
