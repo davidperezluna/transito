@@ -52,13 +52,11 @@ export class LineaService {
 
 	}
 
-	getLineasMar(marca,token){
+	getLineasMar(marcaId,token){
 
-		let json = JSON.stringify(marca);
-		let params = "json="+json+"&authorization="+token;
-		console.log(params);
+		let params = "&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/lin/mar", params, {headers: headers})
+ 			return this._http.post(this.url+"/lin/mar/"+marcaId, {headers: headers})
 							  .map(res => res.json());
 
 	}
