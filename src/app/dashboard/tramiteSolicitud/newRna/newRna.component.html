@@ -128,22 +128,22 @@
     </div><!-- /.col -->
 
     <div class="col-xs-16 col-lg-8"><!-- .col -->
-        <appRna-duplicado-placa *ngIf="tramiteSelected == 21" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-duplicado-placa>
-        <appRna-duplicado-licencia *ngIf="tramiteSelected == 12" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-duplicado-licencia>
-        <appRna-cambio-placa *ngIf="tramiteSelected == 16"  [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-placa>
-        <appRna-cambio-color *ngIf="tramiteSelected == 5" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-color>
-        <appRna-cambio-motor *ngIf="tramiteSelected == 24" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-motor>
-        <appRna-regrabar-motor *ngIf="tramiteSelected == 7" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-regrabar-motor>
-        <appRna-regrabar-chasis *ngIf="tramiteSelected == 8" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-regrabar-chasis>
-        <appRna-regrabar-serie *ngIf="tramiteSelected == 9" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-regrabar-serie>
-        <appRna-regrabar-vin *ngIf="tramiteSelected == 57" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-regrabar-vin>
-        <appRna-rematricula *ngIf="tramiteSelected == 1" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-rematricula>
+        <appRna-duplicado-placa *ngIf="tramiteSelected == 21" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
+        <appRna-duplicado-licencia *ngIf="tramiteSelected == 12" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
+        <appRna-cambio-placa *ngIf="tramiteSelected == 16"  [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-placa>
+        <appRna-cambio-color *ngIf="tramiteSelected == 5" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-color>
+        <appRna-cambio-motor *ngIf="tramiteSelected == 24" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
+        <appRna-regrabar-motor *ngIf="tramiteSelected == 7" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-motor>
+        <appRna-regrabar-chasis *ngIf="tramiteSelected == 8" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-chasis>
+        <appRna-regrabar-serie *ngIf="tramiteSelected == 9" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-serie>
+        <appRna-regrabar-vin *ngIf="tramiteSelected == 57" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
+        <appRna-rematricula *ngIf="tramiteSelected == 1" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
         <appRna-new-preregistro *ngIf="tramiteSelected == 56" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-new-preregistro>
-        <appRna-cambio-combustible *ngIf="tramiteSelected == 31" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-combustible>
-        <appRna-cambio-carroceria *ngIf="tramiteSelected == 32" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-carroceria>
-        <appRna-cambio-servicio *ngIf="tramiteSelected == 6" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-servicio>
+        <appRna-cambio-combustible *ngIf="tramiteSelected == 31" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-combustible>
+        <appRna-cambio-carroceria *ngIf="tramiteSelected == 32" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-carroceria>
+        <appRna-cambio-servicio *ngIf="tramiteSelected == 6" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-servicio>
         <appRna-blindaje *ngIf="tramiteSelected == 26" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
-        <appRna-cambio-sedeOperativa *ngIf="tramiteSelected == 3" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-cambio-sedeOperativa>
+        <appRna-cambio-sedeOperativa *ngIf="tramiteSelected == 3" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-sedeOperativa>
         
     </div><!-- /.col -->
-</div><!-- /.row -->
+</div><!-- /.row  -->

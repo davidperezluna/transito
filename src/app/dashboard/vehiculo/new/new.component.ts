@@ -10,6 +10,7 @@ import {ServicioService} from '../../../services/servicio.service';
 import {ColorService} from '../../../services/color.service';
 import {CombustibleService} from '../../../services/combustible.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
+import {MarcaService} from '../../../services/marca.service';
 import {SedeOperativaService} from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 @Component({
@@ -27,11 +28,13 @@ public clases:any;
 public carrocerias:any;
 public servicios:any;
 public colores:any;
+public marcas:any;
 public combustibles:any;
 public municipioSelected:any;
 public lineaSelected:any;
 public claseSelected:any;
 public carroceriaSelected:any;
+public marcaSelected:any;
 public servicioSelected:any;
 public colorSelected:any;
 public sedeOperativaSelected:any;
@@ -43,6 +46,7 @@ constructor(
   private _departamentoService: DepartamentoService,
   private _loginService: LoginService,
   private _MunicipioService: MunicipioService,
+  private _MarcaService: MarcaService,
   private _lineaService: LineaService,
   private _ClaseService: ClaseService,
   private _CarroceriaService: CarroceriaService,
@@ -54,10 +58,24 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this._lineaService.getLineaSelect().subscribe(
       response => {
         this.lineas = response;
+      }, 
+      error => { 
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._MarcaService.getMarcaSelect().subscribe(
+      response => {
+        this.marcas = response;
       }, 
       error => { 
         this.errorMessage = <any>error;
@@ -174,6 +192,7 @@ constructor(
     this.vehiculo.colorId = this.colorSelected;
     this.vehiculo.combustibleId = this.combustibleSelected;
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
+    this.vehiculo.marcaId = this.marcaSelected;
     console.log(this.vehiculo);  
     let token = this._loginService.getToken();
     this._VehiculoService.register(this.vehiculo,token).subscribe(

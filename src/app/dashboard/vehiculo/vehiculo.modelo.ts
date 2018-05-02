@@ -5,6 +5,7 @@ export class Vehiculo{
 		public municipioId:number,
 		public lineaId:number,
 		public servicioId:number,
+		public marcaId:number,
 		public colorId:number,
 		public combustibleId:number,
 		public carroceriaId:number,
