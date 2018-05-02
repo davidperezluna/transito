@@ -48,7 +48,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null);
     this.numeroFactura = {
       'numeroFactura': this.numeroFactura,

@@ -77,7 +77,6 @@ export class NewRnaRegrabarChasisComponent implements OnInit {
         this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
         this.vehiculo.claseId = this.vehiculo.clase.id   
         this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.marcaId = this.vehiculo.marca.id
 
         this.vehiculo.chasis = this.nuevoNumero
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(

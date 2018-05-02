@@ -78,7 +78,6 @@ export class NewRnaRegrabarSerieComponent implements OnInit {
         this.vehiculo.claseId = this.vehiculo.clase.id   
         this.vehiculo.servicioId = this.vehiculo.servicio.id 
         this.vehiculo.serie = this.nuevoNumero
-        this.vehiculo.marcaId = this.vehiculo.marca.id
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
         response => {
             this.respuesta = response; 
