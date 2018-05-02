@@ -3,25 +3,25 @@ import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ServicioService } from '../../../../services/servicio.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
+import { ColorService } from '../../../../services/color.service';
+import {VehiculoService} from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-cambio-servicio',
-    templateUrl: './new.cambioServicio.html'
+    selector: 'appRna-cambio-color',
+    templateUrl: './newRna.cambioColor.html'
 })
-export class NewCambioServicioComponent implements OnInit {
+export class NewRnaCambioColorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
-    @Input() vehiculo: any = null;
     @Input() tramite: any = null;
+    @Input() vehiculo: any = null;
     public errorMessage;
     public respuesta;
-    public servicios: any;
+    public colores: any;
     public tramiteFacturaSelected: any;
-    public servicioSelected: any;
+    public colorSelected: any;
     public datos = {
         'newData': null,
         'oldData': null,
@@ -29,17 +29,17 @@ export class NewCambioServicioComponent implements OnInit {
     };
 
     constructor(
-        private _ServicioService: ServicioService,
+        private _ColorService: ColorService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
+        private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() {
-        this.vehiculo.servicioId = 4;
-        this._ServicioService.getServicioSelect().subscribe(
+        this._ColorService.getColorSelect().subscribe(
             response => {
-                this.servicios = response;
+                this.colores = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -55,16 +55,14 @@ export class NewCambioServicioComponent implements OnInit {
     
    
     enviarTramite(){
-        
         let token = this._loginService.getToken();
 
-        this._ServicioService.showServicio(token,this.servicioSelected).subscribe(
-            servicio => {
-                    this.vehiculo.servicioId = this.servicioSelected    
+        this._ColorService.showColor(token,this.colorSelected).subscribe(
+            color => {
+                    this.vehiculo.combustibleId = this.vehiculo.combustible.id    
                     this.vehiculo.municipioId = this.vehiculo.municipio.id   
                     this.vehiculo.lineaId = this.vehiculo.linea.id   
-                    this.vehiculo.colorId = this.vehiculo.color.id   
-                    this.vehiculo.combustibleId = this.vehiculo.combustible.id   
+                    this.vehiculo.colorId = this.colorSelected   
                     this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
                     this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
                     this.vehiculo.claseId = this.vehiculo.clase.id   
@@ -73,8 +71,8 @@ export class NewCambioServicioComponent implements OnInit {
                     response => {
                         this.respuesta = response; 
                         if(this.respuesta.status == 'success'){
-                            this.datos.newData = servicio.data.nombre;
-                            this.datos.oldData = this.vehiculo.servicio.nombre;
+                            this.datos.newData = color.data.nombre;
+                            this.datos.oldData = this.vehiculo.color.nombre;
                             this.readyTramite.emit(this.datos);
                         }
                         error => {
@@ -95,6 +93,9 @@ export class NewCambioServicioComponent implements OnInit {
                         }
                     }
             });
+
+        this.datos.newData = this.colorSelected;
+        this.readyTramite.emit(this.datos);
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

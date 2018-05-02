@@ -13,9 +13,9 @@ import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html'
+  templateUrl: './newRna.component.html'
 })
-export class NewComponent implements OnInit {
+export class NewRnaComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public tramiteSolicitud: TramiteSolicitud;
   public vehiculo: Vehiculo;

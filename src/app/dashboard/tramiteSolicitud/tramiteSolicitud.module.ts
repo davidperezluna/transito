@@ -4,23 +4,23 @@ import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 
-import { NewComponent } from './new/new.component';
-import { NewDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/new.duplicadoPlaca.component';
-import { NewDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/new.duplicadoLicencia.component';
-import { NewCambioColorComponent } from './rna/tramiteCambioColor/new.cambioColor.component';
-import { NewCambioCombustibleComponent } from './rna/tramiteCambioCombustible/new.cambioCombustible.component';
-import { NewCambioServicioComponent } from './rna/tramiteCambioServicio/new.cambioServicio.component';
-import { NewCambioCarroceriaComponent } from './rna/tramiteCambioCarroceria/new.cambioCarroceria.component';
-import { NewCambioPlacaComponent } from './rna/tramiteCambioPlaca/new.cambioPlaca.component';
-import { NewCambioMotorComponent } from './rna/tramiteCambioMotor/new.cambioMotor.component';
-import { NewRegrabarMotorComponent } from './rna/tramiteRegrabarMotor/new.regrabarMotor.component';
-import { NewRegrabarSerieComponent } from './rna/tramiteRegrabarSerie/new.regrabarSerie.component';
-import { NewRegrabarChasisComponent } from './rna/tramiteRegrabarChasis/new.regrabarChasis.component';
-import { NewRegrabarVinComponent } from './rna/tramiteRegrabarVin/new.regrabarVin.component';
-import { NewRematriculaComponent } from './rna/tramiteRematricula/new.rematricula.component';
-import { NewCambioSedeOperativaComponent } from './rna/tramiteCambioSedeOperativa/new.cambioSedeOperativa.component';
-import { NewBlindajeComponent } from './rna/tramiteBlindaje/new.blindaje.component';
-import { NewVehiculoComponent } from './vehiculoNew/vehiculoNew.component';
+import { NewRnaComponent } from './newRna/newRna.component';
+import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
+import { NewRnaDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/newRna.duplicadoLicencia.component';
+import { NewRnaCambioColorComponent } from './rna/tramiteCambioColor/newRna.cambioColor.component'; 
+import { NewRnaCambioCombustibleComponent } from './rna/tramiteCambioCombustible/newRna.cambioCombustible.component';
+import { NewRnaCambioServicioComponent } from './rna/tramiteCambioServicio/newRna.cambioServicio.component';
+import { NewRnaCambioCarroceriaComponent } from './rna/tramiteCambioCarroceria/newRna.cambioCarroceria.component';
+import { NewRnaCambioPlacaComponent } from './rna/tramiteCambioPlaca/newRna.cambioPlaca.component';
+import { NewRnaCambioMotorComponent } from './rna/tramiteCambioMotor/newRna.cambioMotor.component';
+import { NewRnaRegrabarMotorComponent } from './rna/tramiteRegrabarMotor/newRna.regrabarMotor.component';
+import { NewRnaRegrabarSerieComponent } from './rna/tramiteRegrabarSerie/newRna.regrabarSerie.component';
+import { NewRnaRegrabarChasisComponent } from './rna/tramiteRegrabarChasis/newRna.regrabarChasis.component';
+import { NewRnaRegrabarVinComponent } from './rna/tramiteRegrabarVin/newRna.regrabarVin.component'; 
+import { NewRnaRematriculaComponent } from './rna/tramiteRematricula/newRna.rematricula.component';
+import { NewRnaCambioSedeOperativaComponent } from './rna/tramiteCambioSedeOperativa/newRna.cambioSedeOperativa.component';
+import { NewRnaBlindajeComponent } from './rna/tramiteBlindaje/newRna.blindaje.component';
+import { NewRnaPreregistroComponent } from './rna/tramitePreregistro/newRna.preregistro.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 
@@ -30,45 +30,46 @@ import { SelectModule } from 'angular2-select';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [
         TramiteSolicitudComponent,
-        NewComponent,
+        NewRnaComponent,
         EditComponent,
-        NewDuplicadoPlacaComponent,
-        NewDuplicadoLicenciaComponent,
-        NewCambioColorComponent,
-        NewCambioPlacaComponent,
-        NewCambioMotorComponent,
-        NewRegrabarMotorComponent,
-        NewRematriculaComponent,
-        NewVehiculoComponent,
-        NewCambioCombustibleComponent,
-        NewCambioCarroceriaComponent,
-        NewCambioServicioComponent,
-        NewRegrabarSerieComponent,
-        NewRegrabarChasisComponent,
-        NewRegrabarVinComponent,
-        NewBlindajeComponent,
-        NewCambioSedeOperativaComponent
+        NewRnaDuplicadoPlacaComponent,
+        NewRnaDuplicadoLicenciaComponent,
+        NewRnaCambioColorComponent,
+        NewRnaCambioPlacaComponent,
+        NewRnaCambioMotorComponent,
+        NewRnaRegrabarMotorComponent,
+        NewRnaRematriculaComponent,
+        NewRnaPreregistroComponent,
+        NewRnaCambioCombustibleComponent,
+        NewRnaCambioCarroceriaComponent,
+        NewRnaCambioServicioComponent,
+        NewRnaRegrabarSerieComponent,
+        NewRnaRegrabarChasisComponent,
+        NewRnaRegrabarVinComponent,
+        NewRnaBlindajeComponent,
+        NewRnaCambioSedeOperativaComponent
     ],
     exports: [
         TramiteSolicitudComponent,
-        NewComponent,
+        NewRnaComponent,
         EditComponent,
-        NewDuplicadoPlacaComponent,
-        NewDuplicadoLicenciaComponent,
-        NewCambioColorComponent,
-        NewCambioPlacaComponent,
-        NewCambioMotorComponent,
-        NewRegrabarMotorComponent,
-        NewRematriculaComponent,
-        NewVehiculoComponent,
-        NewCambioCombustibleComponent,
-        NewCambioCarroceriaComponent,
-        NewCambioServicioComponent,
-        NewRegrabarSerieComponent,
-        NewRegrabarChasisComponent,
-        NewRegrabarVinComponent,
-        NewBlindajeComponent,
-        NewCambioSedeOperativaComponent
+        NewRnaDuplicadoPlacaComponent,
+        NewRnaDuplicadoLicenciaComponent,
+        NewRnaCambioColorComponent,
+        NewRnaCambioPlacaComponent,
+        NewRnaCambioMotorComponent,
+        NewRnaRegrabarMotorComponent,
+        NewRnaRematriculaComponent,
+        NewRnaPreregistroComponent,
+        NewRnaCambioCombustibleComponent,
+        NewRnaCambioCarroceriaComponent,
+        NewRnaCambioCarroceriaComponent,
+        NewRnaCambioServicioComponent,
+        NewRnaRegrabarSerieComponent,
+        NewRnaRegrabarChasisComponent,
+        NewRnaRegrabarVinComponent,
+        NewRnaBlindajeComponent,
+        NewRnaCambioSedeOperativaComponent
     ],
     providers:[TramiteSolicitudService]
 })

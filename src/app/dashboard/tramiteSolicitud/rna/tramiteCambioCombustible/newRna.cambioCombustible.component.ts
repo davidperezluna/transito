@@ -9,10 +9,10 @@ import {VehiculoService} from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-cambio-combustible',
-    templateUrl: './new.cambioCombustible.html'
+    selector: 'appRna-cambio-combustible',
+    templateUrl: './newRna.cambioCombustible.html'
 })
-export class NewCambioCombustibleComponent implements OnInit {
+export class NewRnaCambioCombustibleComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;

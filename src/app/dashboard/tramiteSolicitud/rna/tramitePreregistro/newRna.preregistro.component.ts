@@ -1,22 +1,22 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Vehiculo} from '../../vehiculo/vehiculo.modelo';
-import {DepartamentoService} from "../../../services/departamento.service";
-import {LoginService} from '../../../services/login.service';
-import {MunicipioService} from '../../../services/municipio.service';
-import {LineaService} from '../../../services/linea.service';
-import {ClaseService} from '../../../services/clase.service';
-import {CarroceriaService} from '../../../services/carroceria.service';
-import {ServicioService} from '../../../services/servicio.service';
-import {ColorService} from '../../../services/color.service';
-import {CombustibleService} from '../../../services/combustible.service';
-import {VehiculoService} from '../../../services/vehiculo.service';
-import {SedeOperativaService} from '../../../services/sedeOperativa.service';
+import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
+import {DepartamentoService} from "../../../../services/departamento.service";
+import {LoginService} from '../../../../services/login.service';
+import {MunicipioService} from '../../../../services/municipio.service';
+import {LineaService} from '../../../../services/linea.service';
+import {ClaseService} from '../../../../services/clase.service';
+import {CarroceriaService} from '../../../../services/carroceria.service';
+import {ServicioService} from '../../../../services/servicio.service';
+import {ColorService} from '../../../../services/color.service';
+import {CombustibleService} from '../../../../services/combustible.service';
+import {VehiculoService} from '../../../../services/vehiculo.service';
+import {SedeOperativaService} from '../../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 @Component({
-  selector: 'app-new-vehiculo',
-  templateUrl: './vehiculoNew.component.html'
+  selector: 'appRna-new-preregistro',
+  templateUrl: './newRna.preregistro.component.html'
 })
-export class NewVehiculoComponent implements OnInit {
+export class NewRnaPreregistroComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Output() cancelarTramite = new EventEmitter<any>();
 public vehiculo: Vehiculo;

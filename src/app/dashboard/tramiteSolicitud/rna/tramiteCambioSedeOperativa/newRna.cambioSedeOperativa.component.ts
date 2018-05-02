@@ -3,43 +3,44 @@ import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { CarroceriaService } from '../../../../services/carroceria.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
+import { SedeOperativaService } from '../../../../services/sedeOperativa.service';
+import {VehiculoService} from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-cambio-carroceria',
-    templateUrl: './new.cambioCarroceria.html'
+    selector: 'appRna-cambio-sedeOperativa',
+    templateUrl: './newRna.cambioSedeOperativa.html'
 })
-export class NewCambioCarroceriaComponent implements OnInit {
+export class NewRnaCambioSedeOperativaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramite: any = null;
     public errorMessage;
     public respuesta;
-    public carrocerias: any;
+    public sedesOperativas: any;
     public tramiteFacturaSelected: any;
-    public carroceriaSelected: any;
+    public sedeOperativaSelected: any;
     public datos = {
         'newData': null,
         'oldData': null,
+        'numeroRunt': null,
         'sustrato': null,
     };
 
     constructor(
-        private _CarroceriaService: CarroceriaService,
+        private _SedeOperativaService: SedeOperativaService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() {
-        this.vehiculo.carroceriaId = 4;
-        this._CarroceriaService.getCarroceriaSelect().subscribe(
+        this.vehiculo.sedeOperativaId = 4;
+        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
             response => {
-                this.carrocerias = response;
+                this.sedesOperativas = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -58,23 +59,22 @@ export class NewCambioCarroceriaComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        this._CarroceriaService.showCarroceria(token,this.carroceriaSelected).subscribe(
-            carroceria => {
-                    this.vehiculo.carroceriaId = this.carroceriaSelected    
+        this._SedeOperativaService.showSedeOperativa(token,this.sedeOperativaSelected).subscribe(
+            sedeOperativa => {
+                    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected    
                     this.vehiculo.municipioId = this.vehiculo.municipio.id   
                     this.vehiculo.lineaId = this.vehiculo.linea.id   
                     this.vehiculo.colorId = this.vehiculo.color.id   
-                    this.vehiculo.combustibleId = this.vehiculo.combustible.id   
                     this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-                    this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
+                    this.vehiculo.combustibleId = this.vehiculo.combustible.id   
                     this.vehiculo.claseId = this.vehiculo.clase.id   
                     this.vehiculo.servicioId = this.vehiculo.servicio.id 
                     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
                     response => {
                         this.respuesta = response; 
                         if(this.respuesta.status == 'success'){
-                            this.datos.newData = carroceria.data.nombre;
-                            this.datos.oldData = this.vehiculo.carroceria.nombre;
+                            this.datos.newData = sedeOperativa.data.nombre;
+                            this.datos.oldData = this.vehiculo.sedeOperativa.nombre;
                             this.readyTramite.emit(this.datos);
                         }
                         error => {

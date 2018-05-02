@@ -1,47 +1,53 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-cambio-placa',
-    templateUrl: './new.cambioPlaca.html'
+    selector: 'appRna-duplicado-placa',
+    templateUrl: './newRna.duplicadoPlaca.html'
 })
-export class NewCambioPlacaComponent implements OnInit {
+export class NewRnaDuplicadoPlacaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramite: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
-    public tipoCambioList: string[];
-    public tipoCambioSelected: any;
+    public motivoList: string[];
+    public motivoSelected: any;
+    public cantidad: any;
     public numeroRunt: any;
-    public nuevaPlaca: any;
     public documentacion: any;
+    public entregada = false;
     public datos = {
-        'tipoCambio': null,
+        'motivo': null,
+        'cantidad': null,
         'numeroRunt': null,
-        'nuevaPlaca': null,
         'documentacion': null,
+        'entregada': null,
         'sustrato': null,
     };
 
     constructor(
+        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
     ) { }
 
     ngOnInit() {
-        this.tipoCambioList = ['Antiguo', 'Clasico', 'Normal'];
+        this.motivoList = ['Destrucción', 'Deterioro', 'Hurto', 'Pérdida'];
     }
-    
+
+   
     enviarTramite() {
-        this.datos.tipoCambio = this.tipoCambioSelected;
+        this.datos.motivo = this.motivoSelected;
+        this.datos.cantidad = this.cantidad;
         this.datos.numeroRunt = this.numeroRunt;
-        this.datos.nuevaPlaca = this.nuevaPlaca;
         this.datos.documentacion = this.documentacion;
+        this.datos.entregada = this.entregada;
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

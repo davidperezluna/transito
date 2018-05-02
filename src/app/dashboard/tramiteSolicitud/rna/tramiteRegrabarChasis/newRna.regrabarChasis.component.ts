@@ -7,10 +7,10 @@ import { VehiculoService } from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-regrabar-chasis',
-    templateUrl: './new.regrabarChasis.html'
+    selector: 'appRna-regrabar-chasis',
+    templateUrl: './newRna.regrabarChasis.html'
 })
-export class NewRegrabarChasisComponent implements OnInit {
+export class NewRnaRegrabarChasisComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramite: any = null;

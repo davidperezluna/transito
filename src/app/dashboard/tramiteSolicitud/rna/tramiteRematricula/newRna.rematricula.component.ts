@@ -1,16 +1,17 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { SustratoService } from '../../../../services/sustrato.service';
+import { MunicipioService } from '../../../../services/municipio.service';
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-cambio-motor',
-    templateUrl: './new.cambioMotor.html'
+    selector: 'appRna-rematricula',
+    templateUrl: './newRna.rematricula.html'
 })
-export class NewCambioMotorComponent implements OnInit {
+export class NewRnaRematriculaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramite: any = null;
@@ -19,30 +20,32 @@ export class NewCambioMotorComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public sustratos: any;
     public sustratoSelected: any;
-    public tiposIdentificacion: any;
-    public tipoIdentificacionSelected: any;
-    public tipoIngresoList: string[];
-    public tipoIngresoSelected: any;
-    public numeroMotor: any;
-    public numeroAceptacion: any;
-    public numeroFactura: any;
+    public entidadList: string[];
+    public entidadSelected: any;
     public numeroRunt: any;
-    public fecha: any;
-    public tipoIdentificacion: any;
-    public numeroIdentificacion: any;
-    public documentacion: any;
-    public entregada = false;
+    public numeroActa: any;
+    public fechaActa: any;
+    public municipios: any;
+    public municipioActaSelected: any;
+    public municipioEntregaSelected: any;
+    public fechaEntrega: any;
+    public tiposIdentificacion: any;
+    public tipoIdentificacionEntregaSelected: any;
+    public numeroIdentificacionEntrega: any;
+    public nombreEntrega: any;
+    public estado: any;
     public datos = {
-        'tipoIngreso': null,
-        'numeroMotor': null,
-        'numeroAceptacion': null,
-        'numeroFactura': null,
-        'fecha': null,
-        'tipoIdentificacion': null,
-        'numeroIdentificacion': null,
+        'entidad': null,
+        'numeroActa': null,
+        'fechaActa': null,
+        'municipioActa': null,
         'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
+        'fechaEntrega': null,
+        'municipioEntrega': null,
+        'tipoIdentificacionEntrega': null,
+        'numeroIdentificacionEntrega': null,
+        'nombreEntrega': null,
+        'estado': null,
         'sustrato': null,
     };
 
@@ -50,15 +53,30 @@ export class NewCambioMotorComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _SustratoService: SustratoService,
+        private _MunicipioService: MunicipioService,
         private _TipoIdentificacionService: TipoIdentificacionService,
     ) { }
 
     ngOnInit() {
-        this.tipoIngresoList = ['Nuevo', 'Usado'];
+        this.entidadList = ['Fiscalía,', 'SIJIN', 'DIJIN'];
 
         this._SustratoService.getSustratoSelect().subscribe(
             response => {
                 this.sustratos = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+
+        this._MunicipioService.getMunicipioSelect().subscribe(
+            response => {
+                this.municipios = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -85,19 +103,22 @@ export class NewCambioMotorComponent implements OnInit {
         );
     }
 
+    
     enviarTramite() {
-        this.datos.tipoIngreso = this.tipoIngresoSelected;
-        this.datos.numeroMotor = this.numeroMotor;
-        this.datos.numeroAceptacion = this.numeroAceptacion;
-        this.datos.numeroFactura = this.numeroFactura;
-        this.datos.fecha = this.fecha;
-        this.datos.tipoIdentificacion = this.tipoIdentificacionSelected;
-        this.datos.numeroIdentificacion = this.numeroIdentificacion;
         this.datos.numeroRunt = this.numeroRunt;
-        this.datos.documentacion = this.documentacion;
-        this.datos.entregada = this.entregada;
+        this.datos.entidad = this.entidadSelected;
+        this.datos.numeroActa = this.numeroActa;
+        this.datos.fechaActa = this.fechaActa;
+        this.datos.municipioActa = this.municipioActaSelected;
+        this.datos.municipioEntrega = this.municipioEntregaSelected;
+        this.datos.fechaEntrega = this.fechaEntrega;
+        this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
+        this.datos.numeroIdentificacionEntrega = this.numeroIdentificacionEntrega;
+        this.datos.nombreEntrega = this.nombreEntrega;
+        this.datos.estado = this.estado;
         this.readyTramite.emit(this.datos);
     }
+
     onCancelar(){
         this.cancelarTramite.emit(true);
     }

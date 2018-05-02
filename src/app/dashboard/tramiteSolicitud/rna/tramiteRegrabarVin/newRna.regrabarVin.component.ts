@@ -4,14 +4,13 @@ import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
-
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-regrabar-motor',
-    templateUrl: './new.regrabarMotor.html'
+    selector: 'appRna-regrabar-vin',
+    templateUrl: './newRna.regrabarVin.html'
 })
-export class NewRegrabarMotorComponent implements OnInit {
+export class NewRnaRegrabarVinComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramite: any = null;
@@ -47,7 +46,7 @@ export class NewRegrabarMotorComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // this.tipoRegrabacionList = ['Serie', 'Chasis', 'Motor', 'VIN'];
+        // this.tipoRegrabacionList = ['Vin', 'Vin', 'Vin', 'VIN'];
         this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
 
         this._SustratoService.getSustratoSelect().subscribe(
@@ -67,7 +66,7 @@ export class NewRegrabarMotorComponent implements OnInit {
 
     enviarTramite() {
         // this.datos.tipoRegrabacion = this.tipoRegrabacionSelected;
-        
+        let token = this._loginService.getToken();
 
         this.vehiculo.servicioId = this.vehiculo.servicio.id    
         this.vehiculo.municipioId = this.vehiculo.municipio.id   
@@ -78,7 +77,7 @@ export class NewRegrabarMotorComponent implements OnInit {
         this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
         this.vehiculo.claseId = this.vehiculo.clase.id   
         this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        let token = this._loginService.getToken();
+        this.vehiculo.vin = this.nuevoNumero
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
         response => {
             this.respuesta = response; 
