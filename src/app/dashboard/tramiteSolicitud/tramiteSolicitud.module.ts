@@ -21,6 +21,7 @@ import { NewRnaRegrabarVinComponent } from './rna/tramiteRegrabarVin/newRna.regr
 import { NewRnaRematriculaComponent } from './rna/tramiteRematricula/newRna.rematricula.component';
 import { NewRnaCambioSedeOperativaComponent } from './rna/tramiteCambioSedeOperativa/newRna.cambioSedeOperativa.component';
 import { NewRnaCancelacionMatriculaComponent } from './rna/tramiteCancelacionMatricula/newRna.cancelacionMatricula.component';
+import { NewRnaCertificadoTradicionComponent } from './rna/tramiteCertificadoTradicion/newRna.certificadoTradicion.component';
 import { NewRnaBlindajeComponent } from './rna/tramiteBlindaje/newRna.blindaje.component';
 import { NewRnaPreregistroComponent } from './rna/tramitePreregistro/newRna.preregistro.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
@@ -52,6 +53,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaBlindajeComponent,
         NewRnaCambioSedeOperativaComponent,
         NewRnaCancelacionMatriculaComponent,
+        NewRnaCertificadoTradicionComponent,
         NewRnaTraspasoComponent
     ],
     exports: [
@@ -76,6 +78,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaBlindajeComponent,
         NewRnaCambioSedeOperativaComponent,
         NewRnaCancelacionMatriculaComponent,
+        NewRnaCertificadoTradicionComponent,
         NewRnaTraspasoComponent
     ],
     providers:[TramiteSolicitudService,EmpresaService]
