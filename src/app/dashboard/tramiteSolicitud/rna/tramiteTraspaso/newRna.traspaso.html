@@ -6,7 +6,7 @@
                 <h5 class="m-0">
                     Traspaso
                 </h5>
-                <small>Para agregar un comprador haga click en el botón Agregar <b class="text-danger">*</b> son obligatorios</small>
+                <small>Para agregar un comprador haga click en el botón Agregar </small>
                 <hr>
                 <div class="row justify-content-center container">
                     <div class="form-group row col-xs-16 col-lg-16">
@@ -16,29 +16,109 @@
                     </div>
 
                     <div class="col-xs-16 col-lg-16 row" *ngIf="tipoPropiedadSelected == 2">
+                        <div class="col-xs-16 col-lg-16">
+                            <br>
+                            <label class="custom-control custom-checkbox" for="sustrato" >
+                                <input type="checkbox"  [(ngModel)]="datos.solidario" name="sustrato" class="custom-control-input"  id="sustrato" required>
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">solidario</span>
+                            </label>
+                        </div>
+
                         <div class="col-xs-8 col-lg-8">
                             <label>Tipo de identificación <span class="text-danger">*</span></label>
-                            <ng-select [multiple]="false" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
+                            <ng-select [multiple]="false" (ngModelChange)="changedtipoIdentificacion($event)" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
                             </ng-select>
                         </div>
+                       
                         <div class="col-xs-8 col-lg-8" *ngIf="tipoIdentificacionSelected != 4">
                             <label>Identificación</label>
-                            <div [class.input-group]="ciudadanoEncontrado === 1" class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-sdanger]="ciudadanoEncontrado === 3">
+                            <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
                                 <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
                                 <span class="input-group-btn">
                                     <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                         </div>
+                        <hr>
+                        <br>
                         <div class="col-xs-8 col-lg-8" *ngIf="tipoIdentificacionSelected == 4">
                             <label>NIT</label>
-                            <div [class.input-group]="empresaEncontrada === 1" [class.has-success]="empresaEncontrada === 2" [class.has-sdanger]="empresaEncontrada === 3">
+                            <div  class="input-group" [class.has-success]="empresaEncontrada === 2" [class.has-danger]="empresaEncontrada === 3">
                                 <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
                                 <span class="input-group-btn">
                                     <button (click)="onKeyEmpresa()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2" [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-xs-16 col-lg-16 row">
+                        <hr>
+                        <br>
+                    </div>
+                    <div class="container row" *ngIf="ciudadanoEncontrado === 3">
+                        <p class="container" style="color:#ff6262">
+                            No se encontró la persona <button (click)="goCiudadano()" class="btn btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button>
+                        </p>
+                    </div>
+                    <div class="container row" *ngIf="empresaEncontrada === 3">
+                        <p class="container" style="color:#ff6262">
+                            No se encontró la empresa <button (click)="goEmpresa()" class="btn btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button>
+                        </p>
+                    </div>
+                    <div class="container row" *ngIf="empresaEncontrada === 2">
+                        <h5 class="container">
+                            Resultados de búsqueda
+                        </h5>
+                        <table class="table " id="dataTables-example">
+                            <tbody>
+                                <tr class="odd">
+                                    <td>NIT</td>
+                                    <td class="center"><p style="color: white;">{{empresa.nit}}</p></td>
+                                    <td>Nombre</td>
+                                    <td class="center"><p style="color: white;">{{empresa.nombre}}</p></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>Tipo empresa</td>
+                                    <td class="center"><p style="color: white;">{{empresa.tipoEmpresa.nombre}}</p></td>
+                                    <td>Municipio</td>
+                                    <td class="center"><p style="color: white;">{{empresa.municipio.nombre}}</p></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>Dirección</td>
+                                    <td class="center"><p style="color: white;">{{empresa.direccion}}</p></td>
+                                    <td>Persona</td>
+                                    <td class="center"><p style="color: white;">{{empresa.ciudadano.usuario.primerNombre}}</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container row" *ngIf="ciudadanoEncontrado === 2">
+                        <h5 class="container">
+                            Resultados de búsqueda
+                        </h5>
+                        <table class="table " id="dataTables-example">
+                            <tbody>
+                                <tr class="odd">
+                                    <td>Tipo de identificación</td>
+                                    <td class="center"><p style="color: white;">{{ciudadano.tipoIdentificacion.nombre}}</p></td>
+                                    <td>Numero de identificación</td>
+                                    <td class="center"><p style="color: white;">{{ciudadano.identificacion}}</p></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>Primer nombre</td>
+                                    <td class="center"><p style="color: white;">{{ciudadano.primerNombre}}</p></td>
+                                    <td>Segundo nombre</td>
+                                    <td class="center"><p style="color: white;">{{ciudadano.segundoNombre}}</p></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>Primer apellido</td>
+                                    <td class="center"><p style="color: white;">{{ciudadano.primerApellido}}</p></td>
+                                    <td>Segundo apellido</td>
+                                    <td class="center"><p style="color: white;">{{ciudadano.segundoApellido}}</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     
                     <div class="col-xs-16 col-lg-16" *ngIf='tramite.sustrato'>

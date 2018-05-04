@@ -6,6 +6,8 @@ import { LoginService } from '../../../../services/login.service';
 import { ColorService } from '../../../../services/color.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { Router } from "@angular/router";
+import { EmpresaService } from "../../../../services/empresa.service";
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 
 import swal from 'sweetalert2';
@@ -25,11 +27,12 @@ export class NewRnaTraspasoComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public tipoPropiedadSelected:any;
     public ciudadano:any;
+    public empresa:any;
     public identificacion:any;
     public ciudadanoEncontrado=1;
     public empresaEncontrada=1;
     public nit:any;
-    public tipoIdentificacionSelected=[1];
+    public tipoIdentificacionSelected=null;
     public tipoPropiedades= [
         {'value':1,'label':"Leasing"},
         {'value':2,'label':"Propio"}
@@ -38,6 +41,7 @@ export class NewRnaTraspasoComponent implements OnInit {
     public datos = {
         'newData': null,
         'oldData': null,
+        'solidario': null,
         'sustrato': null,
     };
 
@@ -49,6 +53,8 @@ export class NewRnaTraspasoComponent implements OnInit {
         private _VehiculoService: VehiculoService,
         private _tipoIdentificacionService: TipoIdentificacionService,
         private _CiudadanoService: CiudadanoService,
+        private router: Router,
+        private _EmpresaService: EmpresaService,
     ) { }
 
     ngOnInit() {
@@ -144,5 +150,45 @@ export class NewRnaTraspasoComponent implements OnInit {
                 }
         }); 
     }
+
+    onKeyEmpresa(){
+        let token = this._loginService.getToken();
+        let nit = {
+			'nit' : this.nit,
+        };
+        this._EmpresaService.showNit(token,nit).subscribe(
+            response => {
+                this.respuesta = response; 
+                if(this.respuesta.status == 'success'){
+                    this.empresa = this.respuesta.data;
+                    console.log(this.empresa);
+                    this.empresaEncontrada= 2;
+            }else{
+                this.empresaEncontrada=3;
+            }
+            error => {
+                    this.errorMessage = <any>error;
+                
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+        }); 
+    }
+
+
+    goCiudadano(){
+        this.router.navigate(['/dashboard/ciudadano']);
+    }
+    goEmpresa(){
+        this.router.navigate(['/dashboard/empresa']);
+    }
+
+    changedtipoIdentificacion(e){
+        this.ciudadanoEncontrado = 1;
+        this.empresaEncontrada = 1;
+    }
+
 
 }

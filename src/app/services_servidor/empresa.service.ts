@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class EmpresaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/empresa";
+	public url = "http://192.169.218.194/~sednarino/transito/backend/web/empresa";
 	public identity;
 	public token;
 
@@ -43,13 +43,13 @@ export class EmpresaService {
 	}
 
 	showNit(token,nit){
-
+		
 		let json = JSON.stringify(nit);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show/nit", params, {headers: headers})
-		.map(res => res.json())					  
- 
+							  .map(res => res.json());
+
 	}
 
 	editEmpresa(empresa,token){

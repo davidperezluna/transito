@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
+import { EmpresaService } from '../../services/empresa.service';
 
 import { NewRnaComponent } from './newRna/newRna.component';
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
@@ -77,7 +78,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaCancelacionMatriculaComponent,
         NewRnaTraspasoComponent
     ],
-    providers:[TramiteSolicitudService]
+    providers:[TramiteSolicitudService,EmpresaService]
 })
 
 export class TramiteSolicitudModule { }
