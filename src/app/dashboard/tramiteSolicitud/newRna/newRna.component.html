@@ -26,17 +26,50 @@
                 <hr> 
                 <form #tramiteSolicitudForm="ngForm" class="row">
                     <div class="col-xs-16 col-lg-16">
-                        <div class="input-group" [ngClass]="{'has-danger' : error}">
+                        <div class="input-group" [ngClass]="{'has-danger' : error,'has-success': vehiculoSuccess}">
                             <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
                             <span class="input-group-btn">
-                                <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : error}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : error}" [ngClass]="{'btn-success' : vehiculoSuccess}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                 <!-- <button *ngIf="tipoError=='401'" (click)="onKeyNuevoVehiculo()" class="btn btn-default btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button> -->
                             </span>
                         </div>
                         <div class="has-danger" *ngIf="error" >
                             <div class="form-control-feedback has-danger has-error">{{msj}}</div>
                         </div>
+                        <div class="has-success" *ngIf="vehiculoSuccess" >
+                            <div class="form-control-feedback has-danger has-success">{{msj}}</div>
+                            <br>
+                        </div>
                     </div>
+                    <br>
+                        <div class="col-xs-16 col-lg-16" *ngIf="vehiculoSuccess">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Placa</th>
+                                        <th>Motor</th>
+                                        <th>Servicio</th>
+                                        <th>Tipo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                        <td>
+                                           {{vehiculo.placa}}
+                                        </td>
+                                        <td> 
+                                            {{vehiculo.motor}}
+                                        </td>
+                                        <td> 
+                                            {{vehiculo.servicio.nombre}}
+                                        </td>
+                                        <td> 
+                                            {{vehiculo.tipoVehiculo}}
+                                        </td>
+                                    </tr>
+                                </tbody> 
+                            </table> 
+                        </div>
                     <br>
                     <div class="col-lg-16 col-md-16 form-group">
                             <br>    
@@ -50,13 +83,7 @@
                         <label>Observación</label>
                         <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación"></textarea>
                     </div>
-                    <div class="col-lg-16 col-md-16 form-group">
-                        <label>Tramite
-                            <span class="text-danger">*</span>
-                        </label>
-                        <ng-select [multiple]="false" [options]="tramitesFactura" [(ngModel)]="tramiteFacturaSelected" name="tramiteFacturaId" required>
-                        </ng-select>
-                    </div>
+                    
                     <div class="col-lg-16 col-md-16 form-group">
                         <table class="table table-bordered" *ngIf="ciudadano">
                             <thead>
@@ -111,6 +138,13 @@
                             </tbody> 
                         </table> 
                     </div>
+                    <div class="col-lg-16 col-md-16 form-group">
+                        <label>Tramite
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tramitesFactura" [(ngModel)]="tramiteFacturaSelected" name="tramiteFacturaId" required>
+                        </ng-select>
+                    </div>
                 </form>
             </div>
             <div class="card-footer">
@@ -145,6 +179,7 @@
         <appRna-blindaje *ngIf="tramiteSelected == 26" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
         <appRna-cambio-sedeOperativa *ngIf="tramiteSelected == 3" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-sedeOperativa>
         <appRna-cancelacionMatricula *ngIf="tramiteSelected == 15" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cancelacionMatricula>
+        <appRna-traspaso  [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso>
         
-    </div><!-- /.col -->
+    </div><!-- /  .col -->
 </div><!-- /.row -->

@@ -32,9 +32,10 @@ export class NewRnaComponent implements OnInit {
   public isError = false;
   public ciudadanosVehiculo=false;
   public ciudadano=false;
+  public vehiculoSuccess=false;
   public tipoError=200;
   public error=false;
-  public msj=false;
+  public msj='';
   public tramitePreasignacion=false;
   public tramiteMatriculaInicial=false;
   public tramite=false;
@@ -168,6 +169,7 @@ constructor(
             response => {
               this.ciudadanosVehiculo = response.data;
               if (response.status == 'error' ) {
+                this.vehiculoSuccess=false;
                 this.msj= response.msj;
                 this.error = true;
                 this.tipoError = response.code;
@@ -223,6 +225,8 @@ constructor(
                   }
                 }
               }else{
+                this.vehiculoSuccess = true;
+                this.msj ='vehiculo encontrado';
                 this.vehiculo = response.data[0].vehiculo;
                 this.error = false;
                 this.tramitesFactura = this.tramitesFacturas;

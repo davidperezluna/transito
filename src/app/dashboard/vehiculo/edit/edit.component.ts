@@ -11,6 +11,7 @@ import {ColorService} from '../../../services/color.service';
 import {CombustibleService} from '../../../services/combustible.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
 import {SedeOperativaService} from '../../../services/sedeOperativa.service';
+import {MarcaService} from '../../../services/marca.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-edit',
@@ -27,6 +28,7 @@ public clases:any;
 public carrocerias:any;
 public servicios:any;
 public colores:any;
+public marcas:any;
 public combustibles:any;
 public municipioSelected:any;
 public lineaSelected:any;
@@ -35,6 +37,7 @@ public carroceriaSelected:any;
 public servicioSelected:any;
 public colorSelected:any;
 public sedeOperativaSelected:any;
+public marcaSelected:any;
 public combustibleSelected:any;
 public respuesta:any;
 public sedesOperativas:any;
@@ -47,6 +50,7 @@ constructor(
   private _ClaseService: ClaseService,
   private _CarroceriaService: CarroceriaService,
   private _ServicioService: ServicioService,
+  private _MarcaService: MarcaService,
   private _ColorService: ColorService,
   private _CombustibleService: CombustibleService,
   private _VehiculoService: VehiculoService,
@@ -69,11 +73,28 @@ constructor(
       ) {
       }
     })
+    
     this._lineaService.getLineaSelect().subscribe(
       response => {
         this.lineas = response;
         setTimeout(() => {
             this.lineaSelected = [this.vehiculo.linea.id];
+            this._MarcaService.getMarcaSelect().subscribe(
+              response => {
+                this.marcas = response;
+                setTimeout(() => {
+                    this.marcaSelected = [this.vehiculo.linea.marca.id];
+                })
+              }, 
+              error => { 
+                this.errorMessage = <any>error;
+        
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
         });
       }, 
       error => { 
@@ -247,9 +268,28 @@ constructor(
 		}); 
   }
 
-  // changedDepartamento(e){
-  //   let token = this._loginService.getToken();
-  //   alert(e);
-  //   }
+  changedDepartamento(e){
+    if (this.marcaSelected) {
+      let token = this._loginService.getToken()
+        this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+          response => {
+            console.log(response.data[0]);
+            if (response.data[0] != null) {
+              this.lineas = response.data;
+            }else{
+              this.lineas = [];
+            }
+          }, 
+          error => { 
+            this.errorMessage = <any>error;
+    
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+    }
+    }
 
 }

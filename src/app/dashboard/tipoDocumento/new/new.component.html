@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-16">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">Nuevo Tipo Documento</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <div class="form-group row">
+                        <div class="col-lg-4 col-md-4">
+                            <label>Nombre Tipo*</label>
+                            <input class="form-control" [(ngModel)]="tipoDocumento.rangoInicio" name="rangoInicio" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Dias Duracion Tramite*</label>
+                            <input class="form-control" [(ngModel)]="tipoDocumento.rangoFin" name="rangoFin" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Codigo Documento*</label>
+                            <input class="form-control" [(ngModel)]="tipoDocumento.lote" name="lote" placeholder="" type="text" required>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>
