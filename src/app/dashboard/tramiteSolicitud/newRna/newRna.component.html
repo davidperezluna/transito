@@ -179,7 +179,7 @@
         <appRna-blindaje *ngIf="tramiteSelected == 26" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
         <appRna-cambio-sedeOperativa *ngIf="tramiteSelected == 3" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-sedeOperativa>
         <appRna-cancelacionMatricula *ngIf="tramiteSelected == 15" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cancelacionMatricula>
-        <appRna-traspaso  [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso>
+        <appRna-traspaso *ngIf="tramiteSelected == 2" [vehiculo] = "vehiculo" [tramite]="tramite" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso>
         
     </div><!-- /  .col -->
 </div><!-- /.row -->
