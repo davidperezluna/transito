@@ -92,6 +92,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="container">
+                            <button (click)="btnNewEmpresa()" class="btn btn-primary pull-right">Agregar</button>
+                        </div>
                     </div>
                     <div class="container row" *ngIf="ciudadanoEncontrado === 2">
                         <h5 class="container">
@@ -119,6 +122,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="container">
+                            <button (click)="btnNewCiudadano()" class="btn btn-primary pull-right">Agregar</button>
+                        </div>
                     </div>
                     
                     <div class="col-xs-16 col-lg-16" *ngIf='tramite.sustrato'>

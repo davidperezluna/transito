@@ -39,7 +39,8 @@ export class NewRnaTraspasoComponent implements OnInit {
     ];
     public tipoIdentificaciones= [ ];
     public datos = {
-        'newData': null,
+        'propietariosEmpresas': [],
+        'propietariosCiudadanos': [],
         'oldData': null,
         'solidario': null,
         'sustrato': null,
