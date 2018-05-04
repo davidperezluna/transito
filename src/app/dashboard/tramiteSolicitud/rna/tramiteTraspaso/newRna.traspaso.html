@@ -51,21 +51,46 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="col-xs-16 col-lg-16 row">
+                            <hr>
+                            <br>
+                        </div>
+                        <div class="container row" *ngIf="ciudadanoEncontrado === 3">
+                            <p class="container" style="color:#ff6262">
+                                No se encontró la persona <button (click)="goCiudadano()" class="btn btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button>
+                            </p>
+                        </div>
+                        <div class="container row" *ngIf="empresaEncontrada === 3">
+                            <p class="container" style="color:#ff6262">
+                                No se encontró la empresa <button (click)="goEmpresa()" class="btn btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button>
+                            </p>
+                        </div>
+                        <div class="container"  *ngIf="listaPropietariosCiudadanos">
+                            <br>
+                            <table class="table " id="dataTables-example">
+                                <br>
+                                <thead>
+                                    <tr>
+                                        <th>Solicitante</th>
+                                        <th>Permiso tramite</th>
+                                        <th>Apoderado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let ciudadanos of datos.propietariosCiudadanos; let i = index">
+                                        <td class="center"><p style="color: white;">{{ciudadanos.identificacion}}<br>{{ciudadanos.nombre}}</p></td>
+                                        <td class="center" *ngIf="ciudadanos.permisoTramite"><p style="color: white;" >Si</p></td>
+                                        <td class="center" *ngIf="!ciudadanos.permisoTramite"><p style="color: white;" >No</p></td>
+                                        <td class="center"><p style="color: white;">Apoderado</p></td>
+                                        <td class="center"><button class="btn btn-danger">Eliminar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
-                    <div class="col-xs-16 col-lg-16 row">
-                        <hr>
-                        <br>
-                    </div>
-                    <div class="container row" *ngIf="ciudadanoEncontrado === 3">
-                        <p class="container" style="color:#ff6262">
-                            No se encontró la persona <button (click)="goCiudadano()" class="btn btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button>
-                        </p>
-                    </div>
-                    <div class="container row" *ngIf="empresaEncontrada === 3">
-                        <p class="container" style="color:#ff6262">
-                            No se encontró la empresa <button (click)="goEmpresa()" class="btn btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button>
-                        </p>
-                    </div>
+                    
                     <div class="container row" *ngIf="empresaEncontrada === 2">
                         <h5 class="container">
                             Resultados de búsqueda
@@ -92,6 +117,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="container">
+                            <button (click)="btnNewEmpresa()" class="btn btn-primary pull-right">Agregar</button>
+                            <button class="btn btn-secondary">Cancel</button>
+                        </div>
                     </div>
                     <div class="container row" *ngIf="ciudadanoEncontrado === 2">
                         <h5 class="container">
@@ -119,6 +148,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="container">
+                            <button (click)="btnNewCiudadano()" class="btn btn-primary pull-right">Agregar</button>
+                            <button (click)="btnCancelarCiudadano()" class="btn btn-secondary">Cancel</button>
+                        </div>
                     </div>
                     
                     <div class="col-xs-16 col-lg-16" *ngIf='tramite.sustrato'>

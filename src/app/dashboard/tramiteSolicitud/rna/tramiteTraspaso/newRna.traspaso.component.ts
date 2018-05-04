@@ -33,15 +33,17 @@ export class NewRnaTraspasoComponent implements OnInit {
     public empresaEncontrada=1;
     public nit:any;
     public tipoIdentificacionSelected=null;
+    public listaPropietariosCiudadanos=true;
     public tipoPropiedades= [
         {'value':1,'label':"Leasing"},
         {'value':2,'label':"Propio"}
     ];
     public tipoIdentificaciones= [ ];
     public datos = {
-        'newData': null,
+        'propietariosEmpresas': [],
+        'propietariosCiudadanos': [],
         'oldData': null,
-        'solidario': null,
+        'solidario': false,
         'sustrato': null,
     };
 
@@ -185,9 +187,26 @@ export class NewRnaTraspasoComponent implements OnInit {
         this.router.navigate(['/dashboard/empresa']);
     }
 
+    btnNewCiudadano(){
+       
+            this.datos.propietariosCiudadanos.push(
+                {'identificacion':this.ciudadano.identificacion,
+                'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
+                'permisoTramite':this.datos.solidario
+                }   
+            );
+            this.ciudadanoEncontrado=1;
+            console.log(this.datos.propietariosCiudadanos);
+    }
+
     changedtipoIdentificacion(e){
         this.ciudadanoEncontrado = 1;
         this.empresaEncontrada = 1;
+    }
+
+    btnCancelarCiudadano(){
+        this.listaPropietariosCiudadanos = true
+        this.ciudadanoEncontrado = 1
     }
 
 
