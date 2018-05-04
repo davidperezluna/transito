@@ -10,8 +10,12 @@
                         <div class="form-group row">
                             <div class="col-lg-8 col-md-8">
                                 <label>Número*</label>
-                                <input class="form-control" [(ngModel)]="factura.numero" name="numero" placeholder="" type="text" required>
+                                <input class="form-control" [(ngModel)]="factura.numero" name="numero" placeholder="" type="number" required>
                             </div>
+                            <div class="col-lg-8 col-md-8">
+                                    <label>Licencia trancito*</label>
+                                    <input class="form-control" [(ngModel)]="factura.numeroLicenciaTrancito" name="numeroLicenciaTrancito" placeholder="" type="number" required>
+                                </div>
                             <div class="col-lg-4 col-md-4">
                                 <label>Fecha creación*</label>
                                 <input class="form-control" [(ngModel)]="factura.fechaCreacion" name='fechaCreacion' placeholder="" type="date">
@@ -30,26 +34,7 @@
                                     name="sedeOperativaId">
                                 </ng-select>
                             </div>
-                            <div class="col-lg-8 col-md-8">
-                                <label>Solicitante*</label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="ciudadanos"
-                                    [(ngModel)]="solicitanteSelected"
-                                    required
-                                    name="solocitanteId">
-                                </ng-select>
-                            </div>
-                            <div class="col-lg-8 col-md-8">
-                                <label>apoderado*</label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="ciudadanos"
-                                    [(ngModel)]="apoderadoSelected"
-                                    required
-                                    name="apoderadoId">
-                                </ng-select>
-                            </div>
+                            
                             <div class="col-lg-16 col-md-16">
                                 <label>Observación</label>
                                 <textarea class="form-control" [(ngModel)]="factura.observacion" name='observacion' placeholder="" type="date"></textarea>

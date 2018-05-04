@@ -33,7 +33,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.factura = new Factura(null, null, null, null, null, null, null, null, null);
+    this.factura = new Factura(null, null, null, null, null, null, null, null);
 
 
     this._CiudadanoService.getCiudadanoSelect().subscribe(
@@ -69,9 +69,7 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.factura.solicitanteId = this.solicitanteSelected;
-    this.factura.apoderadoId = this.apoderadoSelected;
-    this.factura.sedeOperativaId = this.sedeOperativaSelected;
+      this.factura.sedeOperativaId = this.sedeOperativaSelected;
     
     console.log(this.factura);
 		this._FacturaService.register(this.factura,token).subscribe(

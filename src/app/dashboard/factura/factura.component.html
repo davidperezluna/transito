@@ -22,8 +22,8 @@
                 <thead>
                   <tr>
                       <th>Id</th>
-                      <th>Solicitante</th>
-                      <th>Apoderado</th>
+                      
+                      <th>Licencia transito</th>
                       <th>Fecha Creación</th>
                       <th>Número</th>
                       <th>Acciones</th>
@@ -32,8 +32,8 @@
                 <tbody>
                   <tr class="odd" *ngFor="let factura of facturas; let i = index">
                     <td>{{factura.id}}</td>
-                    <td>{{factura.solicitante.primerNombre}} {{factura.solicitante.primerApellido}}</td>
-                    <td>{{factura.apoderado.primerNombre}} {{factura.apoderado.primerApellido}}</td>
+                    <td>{{factura.numeroLicenciatrancito}}</td>
+                   
                     <td>{{factura.fechaCreacion | date:'shortDate'}}</td>
                     <td>{{factura.numero}}</td>
                     <td>
