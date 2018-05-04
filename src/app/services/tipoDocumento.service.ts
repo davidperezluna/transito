@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class TipoDocumentoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/tipoDocumento";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/tipodocumento";
 	public identity;
 	public token;
 

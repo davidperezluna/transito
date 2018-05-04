@@ -3,6 +3,6 @@ export class TipoDocumento{
 		public id:number,
 		public nombreTipo:string,
 		public diasDuracionTramite:string,
-		public $codigoDocumento:string
+		public codigoDocumento:string
 	){}
 }

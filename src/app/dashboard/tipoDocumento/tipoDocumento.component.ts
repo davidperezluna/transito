@@ -43,6 +43,7 @@ export class TipoDocumentoComponent implements OnInit {
 		this._TipoDocumentoService.getTipoDocumento().subscribe(
 				response => {
           this.tipoDocumentos = response.data;
+          console.log(this.tipoDocumentos);
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);

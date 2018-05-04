@@ -24,6 +24,7 @@
                     <th>Nombre</th>
                     <th>Dias duracion Tramite</th>
                     <th>Codigo Documento</th>
+                    <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -33,8 +34,8 @@
                   <td >{{tipoDocumento.diasDuracionTramite}}</td>
                   <td >{{tipoDocumento.codigoDocumento}}</td>
                   
-                  <td><button (click)="editAlmacen(tipoDocumento)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteAlmacen(tipoDocumento.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
+                  <td><button (click)="editTipoDocumento(tipoDocumento)" class="btn btn-outline-info" type="button">Editar</button> 
+                    <button (click)="deleteTipoDocumento(tipoDocumento.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>
