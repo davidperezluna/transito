@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-sm-16">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">formulario para el ingreso de una nuevo Documento </h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <div class="form-group row">
+                        <div class="col-lg-8 col-md-8">
+                            <label>Nombres Peticionario*</label>
+                            <input class="form-control" [(ngModel)]="peticionario.nombrePeticionario" name="nombrePeticionario" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Identificacion Peticionario*</label>
+                            <input class="form-control" [(ngModel)]="peticionario.identificacionPeticionario" name="identificacionPeticionario" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Direccion Peticionario*</label>
+                            <input class="form-control" [(ngModel)]="peticionario.direccionPeticionario" name="direccionPeticionario" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Telefono Peticionario*</label>
+                            <input class="form-control" [(ngModel)]="peticionario.telefonoPeticionarrio" name="telefonoPeticionarrio" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Correo Electronico*</label>
+                            <input class="form-control" [(ngModel)]="peticionario.correoElectronico" name="correoElectronico" placeholder="" type="email" required>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Numero Oficio*</label>
+                            <input class="form-control" [(ngModel)]="peticionario.numeroOficio" name="numeroOficio" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <label>Tipo Peticionario*</label>
+                            <input class="form-control" [(ngModel)]="peticionario.tipoPeticionario" name="tipoPeticionario" placeholder="" type="text" required>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>
