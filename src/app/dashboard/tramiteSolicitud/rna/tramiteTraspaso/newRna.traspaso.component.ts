@@ -208,6 +208,10 @@ export class NewRnaTraspasoComponent implements OnInit {
         this.listaPropietariosCiudadanos = true
         this.ciudadanoEncontrado = 1
     }
+    btnCancelarVehiculo(){
+        this.listaPropietariosCiudadanos = true
+        this.ciudadanoEncontrado = 1
+    }
 
 
 }
