@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {VehiculoService} from '../../services/vehiculo.service';
 import {LoginService} from '../../services/login.service';
 import {Vehiculo} from './vehiculo.modelo';
+import { NewVehiculoComponent } from './new/new.component';
 declare var $: any;
 import swal from 'sweetalert2';
 

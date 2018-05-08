@@ -35,42 +35,6 @@ constructor(
 
   ngOnInit(){
     
-    this._CiudadanoService.getCiudadanoSelect().subscribe(
-      response => {
-        this.ciudadanos = response;
-        setTimeout(() => {
-          this.solicitanteSelected = [this.factura.solicitante.id];
-          this.apoderadoSelected = [this.factura.apoderado.id];
-          this.formReady = true;
-        });
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._VehiculoService.getVehiculoSelect().subscribe(
-        response => {
-          this.vehiculos = response;
-          setTimeout(() => {
-            this.vehiculoSelected = [this.factura.vehiculo.id];
-            this.formReady = true;
-          });
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      );
     
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
@@ -96,9 +60,7 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.factura.vehiculoId = this.vehiculoSelected;
-    this.factura.solicitanteId = this.solicitanteSelected;
-    this.factura.apoderadoId = this.apoderadoSelected;
+    this.factura.sedeOperativaId = this.sedeOperativaSelected;
 		this._FacturaService.editFactura(this.factura,token).subscribe(
 			response => {
         this.respuesta = response;

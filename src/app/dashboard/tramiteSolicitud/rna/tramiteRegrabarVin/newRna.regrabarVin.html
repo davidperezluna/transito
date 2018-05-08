@@ -66,6 +66,7 @@
                     </div>
                 </div>
             </div>
+            <app-new-rna-ciudadano (ready)="ready($event)"></app-new-rna-ciudadano>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
                 <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>

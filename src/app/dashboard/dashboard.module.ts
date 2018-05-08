@@ -84,7 +84,7 @@ import {RightsidebarComponent} from '../shared/index';
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
-    providers:[]
+    providers:[],
 })
 
 export class DashboardModule { }

@@ -36,20 +36,6 @@ constructor(
     this.factura = new Factura(null, null, null, null, null, null, null, null);
 
 
-    this._CiudadanoService.getCiudadanoSelect().subscribe(
-      response => {
-        this.ciudadanos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
         this.sedesOperativas = response;
@@ -71,7 +57,6 @@ constructor(
     let token = this._loginService.getToken();
       this.factura.sedeOperativaId = this.sedeOperativaSelected;
     
-    console.log(this.factura);
 		this._FacturaService.register(this.factura,token).subscribe(
 			response => {
         this.respuesta = response;

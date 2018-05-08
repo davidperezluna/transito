@@ -32,7 +32,7 @@
                                 <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : error}" [ngClass]="{'btn-success' : vehiculoSuccess}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                 <!-- <button *ngIf="tipoError=='401'" (click)="onKeyNuevoVehiculo()" class="btn btn-default btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button> -->
                             </span>
-                        </div>
+                        </div> 
                         <div class="has-danger" *ngIf="error" >
                             <div class="form-control-feedback has-danger has-error">{{msj}}</div>
                         </div>

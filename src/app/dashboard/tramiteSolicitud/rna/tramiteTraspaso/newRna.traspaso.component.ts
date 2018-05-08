@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
@@ -10,11 +10,14 @@ import { Router } from "@angular/router";
 import { EmpresaService } from "../../../../services/empresa.service";
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 
+
+
 import swal from 'sweetalert2';
+
 
 @Component({
     selector: 'appRna-traspaso',
-    templateUrl: './newRna.traspaso.html'
+    templateUrl: './newRna.traspaso.html',
 })
 export class NewRnaTraspasoComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
@@ -33,7 +36,11 @@ export class NewRnaTraspasoComponent implements OnInit {
     public empresaEncontrada=1;
     public nit:any;
     public tipoIdentificacionSelected=null;
-    public listaPropietariosCiudadanos=true;
+    public listaPropietariosCiudadanos=false;
+    public listaPropietariosEmpresas=false;
+    public ciudadanoNew = false;
+    public ciudadanoSelected:any;
+    public apoderado = 'false';
     public tipoPropiedades= [
         {'value':1,'label':"Leasing"},
         {'value':2,'label':"Propio"}
@@ -123,6 +130,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         }); 
         
     }
+
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
@@ -137,10 +145,11 @@ export class NewRnaTraspasoComponent implements OnInit {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
                     this.ciudadano = this.respuesta.data;
-                    console.log(this.ciudadano);
                     this.ciudadanoEncontrado= 2;
+                    this.ciudadanoNew = false;
             }else{
                 this.ciudadanoEncontrado=3;
+                this.ciudadanoNew = true;
             }
             error => {
                     this.errorMessage = <any>error;
@@ -163,7 +172,6 @@ export class NewRnaTraspasoComponent implements OnInit {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
                     this.empresa = this.respuesta.data;
-                    console.log(this.empresa);
                     this.empresaEncontrada= 2;
             }else{
                 this.empresaEncontrada=3;
@@ -180,9 +188,6 @@ export class NewRnaTraspasoComponent implements OnInit {
     }
 
 
-    goCiudadano(){
-        this.router.navigate(['/dashboard/ciudadano']);
-    }
     goEmpresa(){
         this.router.navigate(['/dashboard/empresa']);
     }
@@ -196,7 +201,17 @@ export class NewRnaTraspasoComponent implements OnInit {
                 }   
             );
             this.ciudadanoEncontrado=1;
-            console.log(this.datos.propietariosCiudadanos);
+            this.listaPropietariosCiudadanos=true;
+    }
+    btnNewEmpresa(){
+        this.datos.propietariosEmpresas.push(
+            {'nit':this.empresa.nit,
+            'nombre':this.empresa.nombre,
+            'permisoTramite':this.datos.solidario
+            }   
+        );
+        this.empresaEncontrada=1;
+        this.listaPropietariosEmpresas=true;
     }
 
     changedtipoIdentificacion(e){
@@ -205,12 +220,44 @@ export class NewRnaTraspasoComponent implements OnInit {
     }
 
     btnCancelarCiudadano(){
-        this.listaPropietariosCiudadanos = true
         this.ciudadanoEncontrado = 1
     }
-    btnCancelarVehiculo(){
-        this.listaPropietariosCiudadanos = true
-        this.ciudadanoEncontrado = 1
+    btnCancelarEmpresa(){
+        this.empresaEncontrada = 1
+    }
+
+    delete(ciudadano:any): void {
+        this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== ciudadano);
+        if (this.datos.propietariosCiudadanos.length === 0) {
+            this.listaPropietariosCiudadanos = false;
+        }
+    }
+    deleteEmpresa(empresa:any): void {
+        this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== empresa);
+        if (this.datos.propietariosEmpresas.length === 0) {
+            this.listaPropietariosEmpresas = false;
+        }
+    }
+
+    ready(isCreado:any){
+        if(isCreado) {
+            console.log(isCreado);
+          this.onKeyCiudadano();
+        }else{
+           this.ciudadanoNew = false; 
+        }
+    }
+    
+    agregarApoderadoCiudadano(ciudadano:any){
+        this.apoderado = 'ciudadano';
+        this.ciudadanoSelected = this.datos.propietariosCiudadanos.filter(h => h == ciudadano);
+        console.log(this.ciudadanoSelected[0]);
+    }
+
+    onCancelarApoderado(){
+        this.apoderado = 'false'
+        this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
+        console.log(this.tipoIdentificacionSelected);
     }
 
 

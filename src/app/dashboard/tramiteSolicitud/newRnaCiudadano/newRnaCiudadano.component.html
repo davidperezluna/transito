@@ -1,15 +1,14 @@
 <div class="row ">
-    <div class="col-xs-16 col-lg-10 ">
+    <div class="container">
         <div class="card">
         <div class="card-body ">
             <h5 class="m-0">Nueva persona natural</h5>
             <hr> 
-            <form #ciudadanoForm="ngForm" class="container">
             <div class="row justify-content-center container">
                 <div class="form-group row">
                     <div class="col-xs-16 col-lg-8">
                         <label>Tipo Identificacion*</label>
-                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacionId">
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="departamentoId">
                         </ng-select>
                     </div>
                     <div class="col-xs-16 col-lg-8">
@@ -18,7 +17,7 @@
                             required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
-                        <label>Fecha Expedición Documento*</label>
+                        <label>Fecha Expedición Documento</label>
                         <input class="form-control" [(ngModel)]="ciudadano.fechaExpedicionDocumento" name="fechaExpedicionDocumento" placeholder=""
                             type="date" required>
                     </div>
@@ -37,16 +36,16 @@
                         <input class="form-control" [(ngModel)]="ciudadano.primerNombreUsuario" name="primerNombre" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
-                        <label>Segundo Nombre</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.segundoNombreUsuario" name="segundoNombre" placeholder="" type="text">
+                        <label>Segundo Nombre*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.segundoNombreUsuario" name="segundoNombre" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
                         <label>Primer Apellido*</label>
                         <input class="form-control" [(ngModel)]="ciudadano.primerApellidoUsuario" name="primerApellido" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
-                        <label>Segundo Apellido</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.segundoApellidoUsuario" name="segundoApellido" placeholder="" type="text">
+                        <label>Segundo Apellido*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.segundoApellidoUsuario" name="segundoApellido" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
                         <label>Grupo Sanguineo*</label>
@@ -75,37 +74,30 @@
                     </div>
                     <div class="col-xs-16 col-lg-8">
                         <label>Edad*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.edad" name="edad" placeholder="" type="number" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.edad" name="edad" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
                         <label>Telefono*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefono" placeholder="" type="number" required>
+                        <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefono" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
-                        <label>Direccion Residencia*</label>
+                        <label>Direccion Residencia</label>
                         <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
                         <label>Direccion Trabajo</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" placeholder="" type="text">
+                        <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-16 col-lg-8">
-                        <label>Correo*</label>
+                        <label>Correo</label>
                         <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correo" placeholder="" type="email" required>
                     </div>
                 </div>   
         </div>
-        </form>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary" type="button" [disabled]="ciudadanoForm.invalid">
-                    <i class="fa fa-floppy-o"></i>
-                    Enviar
-                </button>
-            </div>    
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" class="btn btn-success pull-right">Registrar</button>
+            </div>   
         </div>
     </div>
 </div>
