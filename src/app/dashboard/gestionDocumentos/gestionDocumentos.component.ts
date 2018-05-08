@@ -26,19 +26,25 @@ export class GestionDocumentosComponent implements OnInit {
     
   ngOnInit() {
     swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
+      title: '<i>Para Tener En Cuenta</i>',
+      type: 'info',
+      html:
+        '<p>-DERECHO DE PETICIÓN EN INTERÉS GENERAL Y PARTICULAR </p>'+
+        '<P style="text-align:justify;"> PARTICULAR: El que tiene toda persona para presentar solicitudes respetuosas ante las autoridades consagrado en el articulo'+ 
+        '23 de la constitucion política como derecho fundamental. Termino de respuesta 15 días</P>'+
+        '<P style="text-align:justify;"> DERECHO DE PETICIÓN DE INFORMACIÓN: Petición para que el funcionario de a conocer como ha actuado en un caso determinado o permita el '+ 
+        'examen de los documentos públicos o expida copia de los mismos. Termino para Resolver 10 días </P>',
+        
+      showCloseButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> OK!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+      '<i class="fa fa-thumbs-down"></i>',
+      cancelButtonAriaLabel: 'Thumbs down',
     })
+    
 		this._PeticionarioService.getPeticionario().subscribe(
 				response => {
           this.peticionarios = response.data;

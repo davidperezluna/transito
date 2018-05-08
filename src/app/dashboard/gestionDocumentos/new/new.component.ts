@@ -13,6 +13,8 @@ export class NewComponent implements OnInit {
 public peticionario: GestionDocumentos;
 public errorMessage;
 public respuesta;
+public tipoPersona:any;
+public tipoEntidad:any;
 
 constructor(
   private _PeticionarioService: PeticionarioService,
@@ -27,6 +29,8 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
+    console.log(this.tipoPersona);
+    
 
 		this._PeticionarioService.register(this.peticionario,token).subscribe(
 			response => {

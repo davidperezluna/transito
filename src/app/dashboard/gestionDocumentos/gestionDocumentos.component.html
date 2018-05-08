@@ -22,14 +22,22 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Identificacion Peticionario</th>
+                  <th>Nombres</th>
+                  <th>Identificacion</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  <th>Numero Oficio</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let peticionario of peticionarios; let i = index">
                   <td >{{peticionario.id}}</td>
+                  <td >{{peticionario.nombrePeticionario}}</td>
                   <td >{{peticionario.identificacionPeticionario}}</td>
+                  <td >{{peticionario.direccionPeticionario}}</td>
+                  <td >{{peticionario.telefonoPeticionario}}</td>
+                  <td >{{peticionario.numeroOficio}}</td>
                   <td><button (click)="editGestionDocumentos(peticionario)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteGestionDocumentos(peticionario.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
                 </tr>

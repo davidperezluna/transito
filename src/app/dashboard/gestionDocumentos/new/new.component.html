@@ -1,42 +1,38 @@
 <div class="row">
-    <div class="col-sm-16">
+    <div class="col-sm-16 col-lg-8">
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">formulario para el ingreso de una nuevo Documento </h5>
-            <hr> 
-            <div class="row justify-content-center">
-                <div class="col-md-10 ">
-                    <div class="form-group row">
-                        <div class="col-lg-8 col-md-8">
-                            <label>Nombres Peticionario*</label>
-                            <input class="form-control" [(ngModel)]="peticionario.nombrePeticionario" name="nombrePeticionario" placeholder="" type="text" required>
+            <div class="card-body">
+                <h5 class="m-0">Registro de Documento</h5>
+                <hr> 
+                <div class="row justify-content-center container">
+                    <div class="col-md-16">
+                        <div class="form-group row">
+                            <label class="custom-control custom-radio">
+                              <input id="radioPersona" name="tipo-registro" [(ngModel)]="tipoPersona" type="radio" value="1"  class="custom-control-input">
+                              <span class="custom-control-indicator"></span> <span class="custom-control-description">Persona</span> </label>
+                            <label class="custom-control custom-radio">
+                              <input id="radioEntidad" name="tipo-registro" [(ngModel)]="tipoPersona" value = "2"  type="radio" class="custom-control-input">
+                              <span class="custom-control-indicator"></span> <span class="custom-control-description">Entidad</span> </label>
                         </div>
-                        <div class="col-lg-8 col-md-8">
-                            <label>Identificacion Peticionario*</label>
-                            <input class="form-control" [(ngModel)]="peticionario.identificacionPeticionario" name="identificacionPeticionario" placeholder="" type="text" required>
+                        <div class="col-md-16">
+                        <div class="form-group row" *ngIf='tipoPersona == 1'>
+                           <div  class="col-lg-5 col-md-5">
+                                <label>Numero de Cedula</label>
+                                <input class="form-control" [(ngModel)]="peticionario.identificacionPeticionario" name="identificacionPeticionario" placeholder="Numero Cedula" type="text">
+                            </div>
                         </div>
-                        <div class="col-lg-8 col-md-8">
-                            <label>Direccion Peticionario*</label>
-                            <input class="form-control" [(ngModel)]="peticionario.direccionPeticionario" name="direccionPeticionario" placeholder="" type="text" required>
+                        <div class="form-group row" *ngIf='tipoPersona == 2'>
+                           <div  class="col-lg-5 col-md-5">
+                                <label>Nombre Entidad</label>
+                                <input class="form-control" [(ngModel)]="peticionario.identificacionPeticionario" name="identificacionPeticionario" placeholder="Nombre Entidad" type="text">
+                            </div>
+                            <div  class="col-lg-5 col-md-5">
+                                <label>Numero Oficio</label>
+                                <input class="form-control" [(ngModel)]="peticionario.identificacionPeticionario" name="identificacionPeticionario" placeholder="Nombre Entidad" type="text">
+                            </div>
                         </div>
-                        <div class="col-lg-8 col-md-8">
-                            <label>Telefono Peticionario*</label>
-                            <input class="form-control" [(ngModel)]="peticionario.telefonoPeticionarrio" name="telefonoPeticionarrio" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-lg-8 col-md-8">
-                            <label>Correo Electronico*</label>
-                            <input class="form-control" [(ngModel)]="peticionario.correoElectronico" name="correoElectronico" placeholder="" type="email" required>
-                        </div>
-                        <div class="col-lg-8 col-md-8">
-                            <label>Numero Oficio*</label>
-                            <input class="form-control" [(ngModel)]="peticionario.numeroOficio" name="numeroOficio" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-lg-8 col-md-8">
-                            <label>Tipo Peticionario*</label>
-                            <input class="form-control" [(ngModel)]="peticionario.tipoPeticionario" name="tipoPeticionario" placeholder="" type="text" required>
-                        </div>
-                    </div>
-                </div>    
+                    </div>    
+                </div>
             </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
