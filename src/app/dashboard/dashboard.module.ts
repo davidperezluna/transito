@@ -31,6 +31,7 @@ import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
+import { EmpresaModule } from './empresa/empresa.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TipoDocumentoModule } from './tipoDocumento/tipoDocumento.module';
 import { GestionDocumentosModule } from './gestionDocumentos/gestionDocumentos.module';
@@ -83,6 +84,7 @@ import {RightsidebarComponent} from '../shared/index';
       TipoDocumentoModule,
       GestionTransportePublicoModule,
       GestionDocumentosModule,
+      EmpresaModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
