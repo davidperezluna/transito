@@ -21,7 +21,7 @@ import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
 import { GeneroRoutes } from './genero/genero.routes';
-import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
+//import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
 import { TramiteRoutes } from './tramite/tramite.routes';
@@ -31,6 +31,8 @@ import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.rout
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { TipoDocumentoRoutes } from './tipoDocumento/tipoDocumento.routes';
+import { GestionDocumentosRoutes } from './gestionDocumentos/gestionDocumentos.routes';
+import { EmpresaRoutes } from './empresa/empresa.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -55,7 +57,7 @@ export const DashboardRoutes: Route[] = [
         ...CiudadanoRoutes,
         ...TipoIdentificacionRoutes,
         ...GeneroRoutes,
-        ...GrupoSanguineoRoutes,
+        
         ...CuentaRoutes,
         ...ModuloRoutes,
         ...TramiteRoutes,
@@ -69,6 +71,8 @@ export const DashboardRoutes: Route[] = [
         ...SustratoRoutes,
         ...GestionTransportePublicoRoutes,
         ...TipoDocumentoRoutes,
+        ...EmpresaRoutes,
+        ...GestionDocumentosRoutes,
         
       ]
     }

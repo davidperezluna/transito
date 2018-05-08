@@ -30,14 +30,9 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     public documentacion: any;
     public entregada = false;
     public datos = {
-        'motivoCancelacion': null,
-        'entidadJudicial': null,
-        'numeroOficio': null, 
-        'declaracion':null,  
-        'fechaDeclaracion':null,
-        'ipat':null,
-        'fechaEchos':null,
-        'recuperarMotor':null,         
+        'nroRunt': null,
+        'tipoCertificadoTradicion': null,
+        'observacion': null,                  
         'sustrato': null
     };
 
@@ -68,32 +63,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.cancelado=true
-        let token = this._loginService.getToken();
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.readyTramite.emit(this.datos);
-            }
-            error => {
-                    this.errorMessage = <any>error;
-
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-        });
+        this.readyTramite.emit(this.datos);
 
 
     }
