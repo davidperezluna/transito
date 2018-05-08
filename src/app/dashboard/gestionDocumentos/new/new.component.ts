@@ -1,6 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {GestionDocumentos} from '../gestionDocumentos.modelo';
+import {RegistroDocumento} from '../registroDocumento.modelo';
 import {PeticionarioService} from '../../../services/peticionario.service';
+import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,51 +12,60 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public peticionario: GestionDocumentos;
+public peticionario: GestionDocumentos; 
+public registroDocumento: RegistroDocumento;
 public errorMessage;
 public respuesta;
-public tipoPersona:any;
-public tipoEntidad:any;
+public documentoEncontrado = false;
+public crearDocumento = false;
+public peticionarios:any;
+public tiposIdentificacion:any;
 
 constructor(
   private _PeticionarioService: PeticionarioService,
   private _loginService: LoginService,
+  private _tipoIdentificacionService: TipoIdentificacionService,
   ){}
 
   ngOnInit() {
     this.peticionario = new GestionDocumentos(null,null,null,null,null,null,null,null);
+    this.registroDocumento = new RegistroDocumento(null,null,null,null,null,null,null,null,null,null);
+
+    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        response => {
+          this.tiposIdentificacion = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      );
   }
   onCancelar(){
     this.ready.emit(true);
   }
-  onEnviar(){
-    let token = this._loginService.getToken();
-    console.log(this.tipoPersona);
-    
+  onBuscarRegistros(){
 
-		this._PeticionarioService.register(this.peticionario,token).subscribe(
+    console.log(this.peticionario);
+    let token = this._loginService.getToken();
+		this._PeticionarioService.buscarPeticionario(this.peticionario,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Pefecto!',
-            text: 'El registro se ha registrado con exito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
+           this.documentoEncontrado = true;
+           this.crearDocumento = false;
+           this.peticionarios = response.data;
+           console.log(this.peticionarios);
         }else{
-          swal({
-            title: 'Error!',
-            text: 'El gestionDocumentos '+ this.peticionario.nombrePeticionario +' ya se encuentra registrado',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
+          this.documentoEncontrado = false;
+          this.crearDocumento = true;
         }
 			error => {
 					this.errorMessage = <any>error;
-
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
@@ -62,6 +73,19 @@ constructor(
 				}
 
 		}); 
+  }
+
+  onCancelarRegistroDocumento(){
+    this.crearDocumento = false;
+  }
+
+  onCancelarBusqudaRegistros(){
+    this.documentoEncontrado = false;
+  }
+
+  oncrearNuevoRegistro(){
+    this.documentoEncontrado = false;
+    this.crearDocumento = true;
   }
 
 }
