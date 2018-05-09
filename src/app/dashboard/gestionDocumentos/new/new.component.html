@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-16 col-lg-8">
+    <div class="col-sm-16 col-lg-6">
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">Registro de Documento</h5>
@@ -8,36 +8,105 @@
                     <div class="col-md-16">
                         <div class="form-group row">
                             <label class="custom-control custom-radio">
-                              <input id="radioPersona" name="tipo-registro" [(ngModel)]="tipoPersona" type="radio" value="1"  class="custom-control-input">
+                              <input id="radioPersona" name="tipo-registro" [(ngModel)]="peticionario.tipoPeticionario" type="radio" value="Persona"  class="custom-control-input">
                               <span class="custom-control-indicator"></span> <span class="custom-control-description">Persona</span> </label>
                             <label class="custom-control custom-radio">
-                              <input id="radioEntidad" name="tipo-registro" [(ngModel)]="tipoPersona" value = "2"  type="radio" class="custom-control-input">
+                              <input id="radioEntidad" name="tipo-registro" [(ngModel)]="peticionario.tipoPeticionario" value = "Entidad"  type="radio" class="custom-control-input">
                               <span class="custom-control-indicator"></span> <span class="custom-control-description">Entidad</span> </label>
                         </div>
                         <div class="col-md-16">
-                        <div class="form-group row" *ngIf='tipoPersona == 1'>
-                           <div  class="col-lg-5 col-md-5">
+                        <div class="form-group row" *ngIf='peticionario.tipoPeticionario == "Persona"'>
+                           <div  class="col-lg-16 col-md-16">
                                 <label>Numero de Cedula</label>
                                 <input class="form-control" [(ngModel)]="peticionario.identificacionPeticionario" name="identificacionPeticionario" placeholder="Numero Cedula" type="text">
                             </div>
                         </div>
-                        <div class="form-group row" *ngIf='tipoPersona == 2'>
-                           <div  class="col-lg-5 col-md-5">
-                                <label>Nombre Entidad</label>
-                                <input class="form-control" [(ngModel)]="peticionario.identificacionPeticionario" name="identificacionPeticionario" placeholder="Nombre Entidad" type="text">
+                            <div class="form-group row" *ngIf='peticionario.tipoPeticionario == "Entidad"'>
+                               <div  class="col-lg-8 col-md-8">
+                                    <label>Nombre Entidad</label>
+                                    <input class="form-control" [(ngModel)]="peticionario.nombrePeticionario" name="nombrePeticionario" placeholder="Nombre Entidad" type="text">
+                                </div>
+                                <div  class="col-lg-8 col-md-8">
+                                    <label>Numero Oficio</label>
+                                    <input class="form-control" [(ngModel)]="peticionario.numeroOficio" name="numeroOficio" placeholder="Nombre Entidad" type="text">
+                                </div>
                             </div>
-                            <div  class="col-lg-5 col-md-5">
-                                <label>Numero Oficio</label>
-                                <input class="form-control" [(ngModel)]="peticionario.identificacionPeticionario" name="identificacionPeticionario" placeholder="Nombre Entidad" type="text">
-                            </div>
-                        </div>
-                    </div>    
+                        </div>    
+                    </div>
                 </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onBuscarRegistros()" class="btn btn-outline-primary pull-right" type="button">Buscar Registros</button>
+                </div>    
             </div>
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
-            </div>    
+        </div>
+    </div>
+    <div class="col-sm-16 col-lg-10" *ngIf='documentoEncontrado'>
+        <div class="card">
+            <div class="card-body container">
+                <h5>Registros Encontrado</h5>
+                <br>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Nombres</th>
+                      <th>Identificacion</th>
+                      <th>Direccion</th>
+                      <th>Telefono</th>
+                      <th>Numero Oficio</th>
+                      <th>Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="odd" *ngFor="let peticionario of peticionarios; let i = index">
+                      <td >{{peticionario.nombrePeticionario}}</td>
+                      <td >{{peticionario.identificacionPeticionario}}</td>
+                      <td >{{peticionario.direccionPeticionario}}</td>
+                      <td >{{peticionario.telefonoPeticionario}}</td>
+                      <td >{{peticionario.numeroOficio}}</td>
+                      <td class="center"><span class="status success">Active</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="card-footer">
+                    <button (click)="onCancelarBusqudaRegistros()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="oncrearNuevoRegistro()" class="btn btn-outline-primary pull-right" type="button">Crear NUevo Registro</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+     <div class="col-sm-16 col-lg-10" *ngIf='crearDocumento'>
+        <div class="card">
+            <div class="card-body container">
+                <h5>Registrar Nuevo Documento</h5>
+                <br>
+                <div class="form-group row">
+                    <div  class="col-lg-8 col-md-8">
+                        <label>Radicacion N°</label>
+                        <input class="form-control" [(ngModel)]="registroDocumento.codigoRadicado" name="codigoRadicado"  type="text">
+                    </div>
+                    <div  class="col-lg-8 col-md-8">
+                        <label>Folios</label>
+                        <input class="form-control" [(ngModel)]="registroDocumento.numeroFolios" name="numeroFolios"  type="number">
+                    </div>
+                    <div  class="col-lg-8 col-md-8">
+                        <label>Fecha y Hora</label>
+                        <input class="form-control" [(ngModel)]="registroDocumento.tiempoRadicacion" name="tiempoRadicacion"  type="datetime-local">
+                    </div>
+                    <div class="col-lg-8 col-md-8">
+                        <label>Tipo Identificacion*</label>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacionId">
+                        </ng-select>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button (click)="onCancelarRegistroDocumento()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onBuscarRegistros()" class="btn btn-outline-primary pull-right" type="button">Buscar Registros</button>
+                </div>    
+            </div>
         </div>
     </div>
 </div>
+
+   
