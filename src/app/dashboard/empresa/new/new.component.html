@@ -2,20 +2,11 @@
     <div class="col-xs-16 col-lg-10 ">
         <div class="card">
         <div class="card-body ">
-            <h5 class="m-0">Nueva persona natural</h5>
+            <h5 class="m-0">Nueva persona jurídica</h5>
             <hr> 
             <div class="row justify-content-center container">
                 <div class="form-group row">
-                    <div class="col-xs-16 col-lg-8">
-                        <label>Municipio*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="municipios"
-                            [(ngModel)]="municipioSelected"
-                            required 
-                            name="municipioId">
-                        </ng-select>
-                    </div>
+                    <!-- Seleccion de tipo de empresa -->
                     <div class="col-xs-16 col-lg-8">
                             <label>Tipo de empresa*</label>
                             <ng-select
@@ -26,6 +17,38 @@
                                 name="tipoEmpresaId">
                             </ng-select>
                     </div>
+                    <!-- fin de seleccion -->
+                    <!-- nombre empresa -->
+                    <div class="col-xs-16 col-lg-8">
+                            <label>Nombre de la empresa*</label>
+                            <input class="form-control" [(ngModel)]="empresa.nombre" name="nombre" placeholder="" type="text" required>
+                    </div>
+                    <!-- fin nombre -->
+                    <!-- numero NIT -->
+                    <div class="col-xs-16 col-lg-8">
+                            <label>Numero de NIT*</label>
+                            <input class="form-control" [(ngModel)]="empresa.nit" name="nit" placeholder="" type="text" required>
+                    </div>
+                    <!-- fin nit -->
+                    <!-- direccion -->
+                    <div class="col-xs-16 col-lg-8">
+                            <label>Direccion de la empresa</label>
+                            <input class="form-control" [(ngModel)]="empresa.direccion" name="direccion" placeholder="" type="text" required>
+                        </div>
+                    <!-- fin direccion -->
+                    <!-- seleccion municipio -->
+                    <div class="col-xs-16 col-lg-8">
+                        <label>Municipio*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="municipios"
+                            [(ngModel)]="municipioSelected"
+                            required 
+                            name="municipioId">
+                        </ng-select>
+                    </div>
+                    <!-- fin municipio -->
+                    <!-- seleccion Usuario -->
                     <div class="col-xs-16 col-lg-8">
                         <label>Ciudadano*</label>
                         <ng-select
@@ -35,30 +58,36 @@
                             required 
                             name="ciudadanoId">
                         </ng-select>
-                    </div>    
-
-
-
+                    </div>
+                    <!-- fin usuario -->
+                    <!-- telefono -->
                     <div class="col-xs-16 col-lg-8">
-                            <label>Nombre de la empresa*</label>
-                            <input class="form-control" [(ngModel)]="empresa.nombre" name="nombre" placeholder="" type="text" required>
+                            <label>Telefono*</label>
+                            <input class="form-control" [(ngModel)]="empresa.telefono" name="telefono" placeholder="" type="number"
+                                required>
+                        </div>
+                    <!-- fin telefono -->
+                    <div class="col-xs-16 col-lg-8">
+                            <label>Correo</label>
+                            <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correo" placeholder="" type="email" required>
                     </div>
 
 
 
 
+                    
 
 
-                    <div class="col-xs-16 col-lg-8">
+
+
+
+
+                    <!-- <div class="col-xs-16 col-lg-8">
                         <label>Tipo Identificacion*</label>
                         <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="departamentoId">
                         </ng-select>
                     </div>
-                    <div class="col-xs-16 col-lg-8">
-                        <label>Identificacion*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion" placeholder="" type="number"
-                            required>
-                    </div>
+                   
                     <div class="col-xs-16 col-lg-8">
                         <label>Fecha Expedición Documento</label>
                         <input class="form-control" [(ngModel)]="ciudadano.fechaExpedicionDocumento" name="fechaExpedicionDocumento" placeholder=""
@@ -113,10 +142,7 @@
                         <label>Telefono*</label>
                         <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefono" placeholder="" type="text" required>
                     </div>
-                    <div class="col-xs-16 col-lg-8">
-                        <label>Direccion Residencia</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text" required>
-                    </div>
+                    
                     <div class="col-xs-16 col-lg-8">
                         <label>Direccion Trabajo</label>
                         <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" placeholder="" type="text" required>
@@ -124,7 +150,7 @@
                     <div class="col-xs-16 col-lg-8">
                         <label>Correo</label>
                         <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correo" placeholder="" type="email" required>
-                    </div>
+                    </div> -->
                 </div>   
         </div>
             <div class="card-footer">

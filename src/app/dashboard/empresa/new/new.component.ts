@@ -4,8 +4,8 @@ import { EmpresaService } from '../../../services/empresa.service';
 import { LoginService } from '../../../services/login.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
-// import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
-import { GrupoSanguineoService } from '../../../services/grupoSanguineo.service';
+import { CiudadanoService } from '../../../services/ciudadano.service';
+// import { UsuarioService } from '../../../services/usario.service';
 import swal from 'sweetalert2';
  
 @Component({
@@ -33,7 +33,7 @@ constructor(
   private _loginService: LoginService,
   private _municipioService: MunicipioService,
   private _tipoEmpresaService: TipoEmpresaService,
-  private _grupoSanguineoService: GrupoSanguineoService,
+  private _ciudadanoService: CiudadanoService,
 ){}
 
   ngOnInit() {
@@ -66,19 +66,19 @@ constructor(
     );
 
 
-    this._grupoSanguineoService.getGrupoSanguineoSelect().subscribe(
-      response => {
-        this.gruposSanguineos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
+    // this._grupoSanguineoService.getGrupoSanguineoSelect().subscribe(
+    //   response => {
+    //     this.gruposSanguineos = response;
+    //   },
+    //   error => {
+    //     this.errorMessage = <any>error;
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
+    //     if (this.errorMessage != null) {
+    //       console.log(this.errorMessage);
+    //       alert('Error en la petición');
+    //     }
+    //   }
+    // );
 
    
   }

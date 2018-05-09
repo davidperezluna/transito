@@ -6,7 +6,7 @@
     </div>
     <div class="col text-right ">
       <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevooooo</span> <i class="ti-save ml-2"></i></button>
       </div>
     </div>
   </div>
@@ -14,7 +14,7 @@
     <div class="col-sm-16">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Personas Naturales <small></small></h5>
+            <h5 class="card-title">Personas jurídica <small></small></h5>
           </div>
           <div class="card-body responsive">
           	<div class="table-responsive">
@@ -22,33 +22,55 @@
               <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Identificacion</th>
-                    <th>Ciudadano</th>
-                    <th>Acciones</th>
+                    <th>Nombre</th>
+                    <th>Tipo de empresa</th>
+                    <th>Municipio</th>
+                    <th>Propietario</th>
+                    <th>NIT</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Correo</th>                    
+                    <th>Acciones</th>                    
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let ciudadano of ciudadanos; let i = index">
-                  <td>{{ ciudadano.id }}</td>
+                <tr class="odd" *ngFor="let empresa of empresas; let i = index">
+                  <td>{{ empresa.id }}</td>
                   <td>
-                    {{ ciudadano.usuario.tipoIdentificacion.nombre }}
-                    <br>
-                    {{ ciudadano.usuario.identificacion }}
+                    {{ empresa.nombre }}
+                  </td>
+                  <td>  
+                    {{ empresa.tipoEmpresa.nombre }}                  
                   </td>
                   <td>
-                    {{ ciudadano.usuario.primerNombre }} {{ ciudadano.usuario.segundoNombre }} {{ ciudadano.usuario.primerApellido }} {{ ciudadano.usuario.segundoApellido }}
+                    {{ empresa.municipio.nombre }}
+                  </td>                  
+                  <td>
+                    {{ empresa.ciudadano.usuario.primerNombre }} {{ empresa.ciudadano.usuario.segundoNombre }} {{ empresa.ciudadano.usuario.primerApellido }} {{ empresa.ciudadano.usuario.segundoApellido }}
                   </td>
-                  <td><button (click)="editCiudadano(ciudadano)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
-                    <button (click)="deleteCiudadano(ciudadano.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
+                  <td>
+                      {{ empresa.nit }}
+                  </td>
+                  <td>
+                      {{ empresa.telefono }}
+                  </td>
+                  <td>
+                      {{ empresa.direccion }}
+                  </td>
+                  <td>
+                      {{ empresa.correo }}
+                  </td>
+                  <td><button (click)="editCiudadano(empresa)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
+                    <button (click)="deleteCiudadano(empresa.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>
             </div>
-            <!-- /.table-responsive --> 
+            <!-- /.table-responsive  -->
           </div>
         </div>
       </div>
     </div>
-    <!-- <app-edit *ngIf='formEdit' [ciudadano]="ciudadano" (ready)="ready($event)"></app-edit>
-    <app-new-ciudadano *ngIf='formNew' (ready)="ready($event)"></app-new-ciudadano> -->
+    <app-edit *ngIf='formEdit' [empresa]="empresa" (ready)="ready($event)"></app-edit>
+    <app-new-empresa *ngIf='formNew' (ready)="ready($event)"></app-new-empresa>
 </div>
