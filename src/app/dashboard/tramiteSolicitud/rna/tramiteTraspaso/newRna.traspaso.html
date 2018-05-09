@@ -80,7 +80,12 @@
                                             <td class="center" *ngIf="ciudadano.permisoTramite"><p style="color: white;" >Si</p></td>
                                             <td class="center" *ngIf="!ciudadano.permisoTramite"><p style="color: white;" >No</p></td>
                                             <td class="center"><p style="color: white;">{{ciudadano.identificacion}}<br>{{ciudadano.nombre}}</p></td>
-                                            <td class="center"><button (click)="agregarApoderadoCiudadano(ciudadano)" class="btn btn-primary pull-right">Agregar</button></td>
+                                            <td class="center" *ngIf="ciudadano.identificacionApoderado">
+                                                <p style="color: white;">{{ciudadano.identificacionApoderado}}<br>{{ciudadano.nombreApoderado}}</p>
+                                            </td>
+                                            <td class="center" *ngIf="!ciudadano.identificacionApoderado">
+                                                <button (click)="agregarApoderadoCiudadano(ciudadano)" class="btn btn-primary pull-right">Agregar</button>
+                                            </td>
                                             <td class="center"><button (click)="delete(ciudadano)" class="btn btn-danger">Eliminar</button></td>
                                         </tr>
                                     </tbody>
@@ -105,13 +110,17 @@
                                             <td class="center" *ngIf="empresa.permisoTramite"><p style="color: white;" >Si</p></td>
                                             <td class="center" *ngIf="!empresa.permisoTramite"><p style="color: white;" >No</p></td>
                                             <td class="center"><p style="color: white;">{{empresa.nit}}<br>{{empresa.nombre}}</p></td>
-                                            <td class="center"><button class="btn btn-primary pull-right">Agregar</button></td>
+                                            <td class="center" *ngIf="empresa.identificacionApoderado">
+                                                <p style="color: white;">{{empresa.identificacionApoderado}}<br>{{empresa.nombreApoderado}}</p>
+                                            </td>
+                                            <td class="center" *ngIf="!empresa.identificacionApoderado">
+                                                <button (click)="agregarApoderadoEmpresa(empresa)" class="btn btn-primary pull-right">Agregar</button>
+                                            </td>
                                             <td class="center"><button (click)="deleteEmpresa(empresa)" class="btn btn-danger">Eliminar</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-    
     
                         </div>
 
@@ -183,7 +192,16 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="col-xs-16 col-lg-16">
+                                <br>
+                                <label class="custom-control custom-checkbox" for="propietarioPresente" >
+                                    <input type="checkbox"  [(ngModel)]="propietarioPresente" name="propietarioPresente" class="custom-control-input"  id="propietarioPresente" required>
+                                    <span class="custom-control-indicator"></span> 
+                                    <span class="custom-control-description">Propietario presente</span>
+                                </label>
+                            </div>   
                             <div class="container">
+                                <br>
                                 <button (click)="btnNewCiudadano()" class="btn btn-primary pull-right">Agregar</button>
                                 <button (click)="btnCancelarCiudadano()" class="btn btn-secondary">Cancel</button>
                             </div>
@@ -204,11 +222,65 @@
                     </div>
 
                     <!-- agregar apoderado ciudadano -->
-                    <div class="container">
-                        <div class="col-xs-16 col-lg-16 row" *ngIf="apoderado == 'ciudadano'">
-                            <h6>Apoderado</h6>
-                            <p>{{ciudadanoSelected[0]['nombre']}}</p>
+                    <div class="container" *ngIf="apoderado == 'ciudadano' || apoderado == 'empresa'">
+                        <div class="col-xs-16 col-lg-16 form-group" >
+                            <h5 class="m-0">
+                                Apoderado
+                            </h5>
+                            <small *ngIf="apoderado == 'ciudadano'">{{ciudadanoSelected[0]['nombre']}}</small>
+                            <small *ngIf="apoderado == 'empresa'">{{empresaSelected[0]['nombre']}}</small>
+                        </div>
+                        <div class="col-xs-16 col-lg-16 form-group" >
+                            <label>Identificación</label>
+                            <div  class="input-group" [class.has-success]="apoderadoEncontrado === 2" [class.has-danger]="apoderadoEncontrado === 3">
+                                <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onKeyApoderado()" [class.btn-default]="apoderadoEncontrado === 1" [class.btn-success]="apoderadoEncontrado === 2" [class.btn-danger]="apoderadoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                            <div class="has-danger" *ngIf="apoderadoEncontrado === 3">
+                                <div class="form-control-feedback has-danger has-error">No se encontró el apoderado</div>
+                            </div>
+                            
+                        </div>
+
+                        <!--si existe el apoderado -->
+                        <div class="container form-group" *ngIf="apoderadoEncontrado === 2">
+                            <div class="col-xs-16 col-lg-16 form-group">
+                                <hr>
+                                <br>
+                            </div>
+                            <h5 class="container">
+                                Resultados de búsqueda
+                            </h5>
+                            <table class="table " id="dataTables-example">
+                                <tbody>
+                                    <tr class="odd">
+                                        <td>Tipo de identificación</td>
+                                        <td class="center"><p style="color: white;">{{apoderadoSelected.tipoIdentificacion.nombre}}</p></td>
+                                        <td>Numero de identificación</td>
+                                        <td class="center"><p style="color: white;">{{apoderadoSelected.identificacion}}</p></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Primer nombre</td>
+                                        <td class="center"><p style="color: white;">{{apoderadoSelected.primerNombre}}</p></td>
+                                        <td>Segundo nombre</td>
+                                        <td class="center"><p style="color: white;">{{apoderadoSelected.segundoNombre}}</p></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Primer apellido</td>
+                                        <td class="center"><p style="color: white;">{{apoderadoSelected.primerApellido}}</p></td>
+                                        <td>Segundo apellido</td>
+                                        <td class="center"><p style="color: white;">{{apoderadoSelected.segundoApellido}}</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                        
+                        <div class="card-footer">
                             <button class="btn btn-secondary" (click)="onCancelarApoderado()">Atrás</button>
+                            <button (click)="btnNewApoderado()" class="btn btn-primary pull-right">Agregar</button>
                         </div>
                     </div>
 

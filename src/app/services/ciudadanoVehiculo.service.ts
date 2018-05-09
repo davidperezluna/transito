@@ -16,17 +16,14 @@ export class CiudadanoVehiculoService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(ciudadanoVehiculo,token,tramiteId,datosT,casosVariantesT){
+	register(token,datosT,tipoTraspaso){
 		
-		let json = JSON.stringify(ciudadanoVehiculo);
-		let datos = JSON.stringify(datosT);
-		let casosVariantes = JSON.stringify(casosVariantesT);
-		let params = "json="+json+"&authorization="+token+"&datos="+datos+"&casosVariantes="+casosVariantes;
-		console.log(params);
+		let json = JSON.stringify(datosT);
+		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new/"+tramiteId, params, {headers: headers})
+		return this._http.post(this.url+"/new/"+tipoTraspaso, params, {headers: headers})
 							  .map(res => res.json());
-
+ 
 	}
 
 	registerPropietario(ciudadanoVehiculo,token){
