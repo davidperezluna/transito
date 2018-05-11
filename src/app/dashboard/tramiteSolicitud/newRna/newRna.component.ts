@@ -139,7 +139,6 @@ constructor(
         });
   }
   changedTramiteFactura(e){
-    console.log(this.tramiteSolicitud);
     let token = this._loginService.getToken();
     this._tramiteFacturaService.showTramiteFactura(token,e).subscribe(
       response => {
@@ -258,11 +257,10 @@ constructor(
     );
     
   }
-  readyTramite(datos:any,ready:boolean){
+  readyTramite(datos:any){
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
-    console.log(this.tramiteSolicitud);
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {

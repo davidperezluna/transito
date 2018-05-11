@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-sm-16">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">formulario para editar valor del tramite</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <form  #precioForm="ngForm">
+                        <div class="form-group row">
+                            <div class="col-lg-4 col-md-4">
+                                <label>Año*</label>
+                                <input class="form-control" [(ngModel)]="tramitePrecio.ano" name="ano" placeholder="" type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Valor*</label>
+                                <input class="form-control" [(ngModel)]="tramitePrecio.valor" name='valor' placeholder="" type="text">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Tipo*</label>
+                                <input class="form-control" [(ngModel)]="tramitePrecio.tipo" name='tipo' placeholder="" type="text">
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Tramite*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="tramites"
+                                    [(ngModel)]="tramiteSelected"
+                                    required
+                                    name="tramiteId">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </form>    
+                </div>   
+                       </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" [disabled]="precioForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>

@@ -39,6 +39,10 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="tramitePrecio"  [ngClass]="{'active' : ( addActive === 'tramitePrecio')}" (click)="addActiveMenu('tramitePrecio')"><i class="fa fa-angle-right"></i> Precios tramites
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="clase"  [ngClass]="{'active' : ( addActive === 'clase')}" (click)="addActiveMenu('clase')"><i class="fa fa-angle-right"></i> Clase
           </a>
         </li>

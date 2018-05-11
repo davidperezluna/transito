@@ -34,6 +34,7 @@ import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.modu
 import { EmpresaModule } from './empresa/empresa.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TipoDocumentoModule } from './tipoDocumento/tipoDocumento.module';
+import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 import { GestionDocumentosModule } from './gestionDocumentos/gestionDocumentos.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
@@ -84,7 +85,8 @@ import {RightsidebarComponent} from '../shared/index';
       TipoDocumentoModule,
       GestionTransportePublicoModule,
       GestionDocumentosModule,
-      EmpresaModule
+      EmpresaModule,
+      TramitePrecioModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
