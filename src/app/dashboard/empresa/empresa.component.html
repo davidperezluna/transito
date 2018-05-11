@@ -23,9 +23,8 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
-                    <th>Tipo de empresa</th>
-                    <th>Municipio</th>
-                    <th>Propietario</th>
+                    <th>Tipo de sociedad</th>
+                    <th>Municipio</th>                    
                     <th>NIT</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>
@@ -40,13 +39,10 @@
                     {{ empresa.nombre }}
                   </td>
                   <td>  
-                    {{ empresa.tipoEmpresa.nombre }}                  
+                    {{ empresa.tipoSocidad.nombre }}                  
                   </td>
                   <td>
                     {{ empresa.municipio.nombre }}
-                  </td>                  
-                  <td>
-                    {{ empresa.ciudadano.usuario.primerNombre }} {{ empresa.ciudadano.usuario.segundoNombre }} {{ empresa.ciudadano.usuario.primerApellido }} {{ empresa.ciudadano.usuario.segundoApellido }}
                   </td>
                   <td>
                       {{ empresa.nit }}
@@ -60,8 +56,8 @@
                   <td>
                       {{ empresa.correo }}
                   </td>
-                  <td><button (click)="editCiudadano(empresa)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
-                    <button (click)="deleteCiudadano(empresa.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
+                  <td><button (click)="editEmpresa(empresa)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
+                    <button (click)="deleteEmpresa(empresa.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>
