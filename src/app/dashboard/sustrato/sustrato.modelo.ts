@@ -5,6 +5,7 @@ export class Sustrato{
 		public desde: number,
 		public hasta: number,
 		public sedeOperativaId: number,
-		public moduloId: number
+		public moduloId: number,
+		public claseId: number
 	){}
 }

@@ -4,6 +4,7 @@ import { SustratoService } from '../../../services/sustrato.service';
 import { LoginService } from '../../../services/login.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { ModuloService } from '../../../services/modulo.service';
+import { ClaseService } from '../../../services/clase.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -19,6 +20,8 @@ export class NewComponent implements OnInit {
   public sedeOperativaSelected: any;
   public modulos: any;
   public moduloSelected: any;
+  public clases: any;
+  public claseSelected: any;
   public estadoList: string[];
   public estadoSelected: any;
 
@@ -27,10 +30,11 @@ constructor(
   private _loginService: LoginService,
   private _SedeOperativaService: SedeOperativaService,
   private _ModuloService: ModuloService,
+  private _ClaseService: ClaseService,
   ){}
 
   ngOnInit() {
-    this.sustrato = new Sustrato(null, null, null, null, null, null);
+    this.sustrato = new Sustrato(null, null, null, null, null, null, null);
     this.estadoList = ['Utilizado', 'Disponible', 'Dañado por impresión.'];
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
@@ -60,6 +64,20 @@ constructor(
         }
       }
     );
+
+    this._ClaseService.getClaseSelect().subscribe(
+      response => {
+        this.clases = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
   onCancelar(){
     this.ready.emit(true);
@@ -69,6 +87,7 @@ constructor(
     this.sustrato.estado = this.estadoSelected;
     this.sustrato.sedeOperativaId = this.sedeOperativaSelected;
     this.sustrato.moduloId = this.moduloSelected;
+    this.sustrato.claseId = this.claseSelected;
 
     console.log(this.sustrato);
 		this._SustratoService.register(this.sustrato,token).subscribe(

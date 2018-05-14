@@ -3,7 +3,7 @@ export class TramitePrecio{
 		public id:number,
 		public tramiteId:number,
 		public valor:string,
-		public ano:string,
+		public anio:string,
 		public tipo:string,
 	){}
 }

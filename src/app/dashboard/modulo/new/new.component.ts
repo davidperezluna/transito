@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.modulo = new Modulo(null,null,null,null);
+    this.modulo = new Modulo(null, null, null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);

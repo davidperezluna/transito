@@ -1,8 +1,8 @@
 <div class="container" >
   <div  class="row align-items-center justify-content-between">
     <div class="col-11 col-sm-12 page-title">
-      <h3>Municipios</h3>
-      <p>aquí podrás visualizar los municipios inscritos e inscribir nuevos</p> 
+      <h3>Módulo de Configuración</h3>
+      <p>Historial de precios para tramites</p> 
     </div>
     <div class="col text-right ">
       <div class="btn-group pull-right">
@@ -32,7 +32,7 @@
                 <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
                   <td >{{tramitePrecio.id}}</td>
                   <td >{{tramitePrecio.valor}}</td>
-                  <td >{{tramitePrecio.ano}}</td>
+                  <td >{{tramitePrecio.anio}}</td>
                   <td >{{tramitePrecio.tramite.nombre}}</td>
                   <td><button (click)="editTramitePrecio(tramitePrecio)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteTramitePrecio(tramitePrecio.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
