@@ -51,6 +51,11 @@
                             </ng-select>
                         </div>
                         <div class="col-xs-16 col-lg-8">
+                            <label>Fecha Nacimiento*</label>
+                            <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" placeholder=""
+                                type="date" required>
+                        </div>
+                        <div class="col-xs-16 col-lg-8">
                             <label>Municipio Nacimiento*</label>
                             <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioNacimientoSelected" required name="departamentoId">
                             </ng-select>
