@@ -13,7 +13,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './newRna.component.html'
+  templateUrl: './newRnma.component.html'
 })
 export class NewRnaComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
