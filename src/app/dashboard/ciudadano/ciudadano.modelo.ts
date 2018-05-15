@@ -17,6 +17,7 @@ export class Ciudadano{
 		public direccionTrabajo: string,
 		public sexo: string,
 		public fechaExpedicionDocumento: string,
+		public fechaNacimiento: string,
 		public edad: number,
 	){}
 }

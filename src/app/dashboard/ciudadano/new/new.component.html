@@ -54,13 +54,40 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-16 col-lg-8">
+                        <label>Fecha Nacimiento*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" placeholder=""
+                            type="date" required>
+                    </div>
+                    <div class="col-xs-16 col-lg-5">
+                        <label>Pais Nacimiento*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="paises"
+                            [(ngModel)]="paisNacimientoSelected"
+                            (ngModelChange)="changedPaisNacimiento($event)"
+                            required
+                            name="paisId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-16 col-lg-6" >
+                        <label>Departamento Nacimiento*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="departamentosNacimiento"
+                            [(ngModel)]="departamentoNacimientoSelected"
+                            (ngModelChange)="changedDepartamentoNacimiento($event)"
+                            required
+                            name="departamentoId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-16 col-lg-5" >
                         <label>Municipio Nacimiento*</label>
                         <ng-select
                             [multiple]="false"
-                            [options]="municipios"
+                            [options]="municipiosNacimiento"
                             [(ngModel)]="municipioNacimientoSelected"
                             required
-                            name="departamentoId">
+                            name="municipioId">
                         </ng-select>
                     </div>
                     <div class="col-xs-16 col-lg-8">

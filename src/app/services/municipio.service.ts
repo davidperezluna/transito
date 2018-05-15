@@ -68,5 +68,11 @@ export class MunicipioService {
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
+
+	getMunicipioPorDepartamentoSelect(id){
+		
+		return this._http.get(this.url+"/"+id+"/select/municipios/por/departamento").map(res => res.json());
+	}
+
 	
 }
