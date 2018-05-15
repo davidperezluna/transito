@@ -181,11 +181,7 @@ constructor(
                   if (this.tramitePreasignacion) {
                       swal({
                         title: 'Atención!',
-<<<<<<< HEAD
-                        text: 'primero tramita PREREASIGNACIÓN VEHICULO',
-=======
                         text: 'Primero debe tramitar PREREASIGNACIÓN VEHICULO',
->>>>>>> 7ec393b1d0af51ca624d55a8e5f16138ee81d8c9
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                       })
@@ -196,11 +192,7 @@ constructor(
                   }else{
                     swal({
                       title: 'Atención!',
-<<<<<<< HEAD
-                      text: 'el tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado o ya fu tramitado para el ingreso de este nuevo vehículo',
-=======
                       text: 'El tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado o ya fue tramitado para el ingreso de este nuevo vehículo',
->>>>>>> 7ec393b1d0af51ca624d55a8e5f16138ee81d8c9
                       type: 'error',
                       confirmButtonText: 'Aceptar'
                     })
@@ -214,11 +206,7 @@ constructor(
                   if (this.tramiteMatriculaInicial) {
                     swal({
                       title: 'Atención!',
-<<<<<<< HEAD
-                      text: 'primero tramita MATRICULA INICIAL',
-=======
                       text: 'Primero debe tramitar MATRICULA INICIAL',
->>>>>>> 7ec393b1d0af51ca624d55a8e5f16138ee81d8c9
                       type: 'success',
                       confirmButtonText: 'Aceptar'
                     })
@@ -229,11 +217,7 @@ constructor(
                   }else{
                     swal({
                       title: 'Atención!',
-<<<<<<< HEAD
-                      text: 'el tramite MATRICULA INICIAL no se encuentra facturado o ya fue tramitado para la asignación de propietarios',
-=======
                       text: 'El tramite MATRICULA INICIAL no se encuentra facturado o ya fue tramitado para la asignación de propietarios',
->>>>>>> 7ec393b1d0af51ca624d55a8e5f16138ee81d8c9
                       type: 'error',
                       confirmButtonText: 'Aceptar'
                     })
