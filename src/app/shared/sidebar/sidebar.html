@@ -117,7 +117,6 @@
           <a class="nav-link" routerLink="tipoDocumento"  [ngClass]="{'active' : ( addActive === 'tipoDocumento')}" (click)="addActiveMenu('tipoDocumento')"><i class="fa fa-angle-right"></i>Tipos Documento
           </a>
         </li>
-
       </ul>
       <!-- /.nav-second-level --> 
     </li>
@@ -170,6 +169,27 @@
       </ul>
       <!-- /.nav-second-level -->
     </li>
+
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnma')}">
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnma')">
+        RNMA
+        <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-second-level ">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="vehiculo" [ngClass]="{'active' : ( addActive === 'vehiculo')}" (click)="addActiveMenu('vehiculo')">
+            <i class="fa fa-angle-right"></i> Pre-registro
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tramiteSolicitud" [ngClass]="{'active' : ( addActive === 'tramiteSolicitud')}" (click)="addActiveMenu('tramiteSolicitud')">
+            <i class="fa fa-angle-right"></i> Solicitud de tramite
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav-second-level -->
+    </li>
+    
     <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-rpccc' }"> 
     	<a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-rpccc')">
         RPCCC<i class="fa fa-angle-down "></i>
