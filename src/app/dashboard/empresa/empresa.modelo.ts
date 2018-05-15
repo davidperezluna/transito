@@ -10,6 +10,7 @@ export class Empresa{
 		public empresaPrestadora: boolean,
 		public certificadoExistencial: string,
 		public tipoSociedadId: number,
+		public tipoIdentificacionId: number,
 		public municipioId: number,
 		public ciudadanoId: number,
 		public telefono: number,
