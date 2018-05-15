@@ -29,12 +29,11 @@ export class GestionDocumentosComponent implements OnInit {
       title: '<i>Para Tener En Cuenta</i>',
       type: 'info',
       html:
-        '<p>-DERECHO DE PETICIÓN EN INTERÉS GENERAL Y PARTICULAR </p>'+
-        '<P style="text-align:justify;"> PARTICULAR: El que tiene toda persona para presentar solicitudes respetuosas ante las autoridades consagrado en el articulo'+ 
-        '23 de la constitucion política como derecho fundamental. Termino de respuesta 15 días</P>'+
-        '<P style="text-align:justify;"> DERECHO DE PETICIÓN DE INFORMACIÓN: Petición para que el funcionario de a conocer como ha actuado en un caso determinado o permita el '+ 
-        'examen de los documentos públicos o expida copia de los mismos. Termino para Resolver 10 días </P>',
-        
+        '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN EN INTERÉS GENERAL Y PARTICULAR:</b>'+
+        ' El que tiene toda persona para presentar solicitudes respetuosas ante las autoridades consagrado en el articulo'+
+        '23 de la constitucion política como derecho fundamental. Termino de respuesta 15 días</p>'+
+        '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN DE INFORMACIÓN:</b> Petición para que el funcionario de a conocer como ha actuado en un caso determinado o permita el '+
+        'examen de los documentos públicos o expida copia de los mismos. Termino para Resolver 10 días </p>',
       showCloseButton: true,
       focusConfirm: false,
       confirmButtonText:
