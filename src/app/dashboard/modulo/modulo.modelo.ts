@@ -3,6 +3,7 @@ export class Modulo{
 		public id:number,
 		public nombre:string,
 		public abreviatura:string,
+		public siglaSustrato:string,
 		public descripcion:string
 	){}
 }

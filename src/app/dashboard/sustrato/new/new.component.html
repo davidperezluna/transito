@@ -28,7 +28,7 @@
                             </label>
                             <input class="form-control" [(ngModel)]="sustrato.hasta" name="hasta" type="number" required />
                         </div>
-                        <div class="col-lg-8 col-md-8">
+                        <div class="col-lg-16 col-md-16">
                             <label>Sede Operativa 
                                     <span class="text-danger">*</span>
                             </label>
@@ -40,14 +40,19 @@
                             name="sedeOperativaId">
                             </ng-select>
                         </div>
-                        <div class="col-lg-8 col-md-8">
-                            <label>Grupo de tramites *</label>
+                        <div class="col-lg-16 col-md-16">
+                            <label>Grupo de tramites <span class="text-danger">*</span></label>
                             <ng-select 
                             [multiple]="false" 
                             [options]="modulos" 
                             [(ngModel)]="moduloSelected" 
                             required 
                             name="moduloId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-16 col-md-16">
+                            <label>Clase vehiculo</label>
+                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" required name="claseId">
                             </ng-select>
                         </div>
                     </div>

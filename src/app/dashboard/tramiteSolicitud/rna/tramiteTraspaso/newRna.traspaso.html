@@ -16,16 +16,26 @@
                     </div>
 
                     <!-- tipo prioridad propio -->
-                    <div class="container" *ngIf="tipoPropiedadSelected == 2 && apoderado == 'false'">
+                    <div class="container" *ngIf="tipoPropiedadSelected == 2 && apoderado == 'false' || tipoPropiedadSelected == 1">
+
+
                         <!--Buscardor Identificador/Nit -->
                         <div class="col-xs-16 col-lg-16 row" >
-                            <div class="col-xs-16 col-lg-16">
+                            <!--Cuando es de tipo propio -->
+                            <div class="col-xs-16 col-lg-16" *ngIf="tipoPropiedadSelected == 2">
                                 <br>
                                 <label class="custom-control custom-checkbox" for="sustrato" >
                                     <input type="checkbox"  [(ngModel)]="datos.solidario" name="sustrato" class="custom-control-input"  id="sustrato" required>
                                     <span class="custom-control-indicator"></span> 
                                     <span class="custom-control-description">solidario</span>
                                 </label>
+                            </div>
+                            <!-- cuando es de tipo leasing -->
+                            <div class="col-xs-16 col-lg-16" *ngIf="tipoPropiedadSelected == 1 && propietario">
+                                <h6>Propietario</h6>
+                            </div>
+                            <div class="col-xs-16 col-lg-16" *ngIf="tipoPropiedadSelected == 1 && propietario == false">
+                                <h6>Locatario</h6>
                             </div>
     
                             <div class="col-xs-8 col-lg-8">
@@ -77,8 +87,13 @@
                                     </thead>
                                     <tbody>
                                         <tr class="odd" *ngFor="let ciudadano of datos.propietariosCiudadanos; let i = index">
-                                            <td class="center" *ngIf="ciudadano.permisoTramite"><p style="color: white;" >Si</p></td>
-                                            <td class="center" *ngIf="!ciudadano.permisoTramite"><p style="color: white;" >No</p></td>
+
+                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==2"><p style="color: white;" >Si</p></td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==2"><p style="color: white;" >No</p></td>
+                                           
+                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==1"><p style="color: white;" >Propietario</p></td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==1"><p style="color: white;" >Locatario</p></td>
+
                                             <td class="center"><p style="color: white;">{{ciudadano.identificacion}}<br>{{ciudadano.nombre}}</p></td>
                                             <td class="center" *ngIf="ciudadano.identificacionApoderado">
                                                 <p style="color: white;">{{ciudadano.identificacionApoderado}}<br>{{ciudadano.nombreApoderado}}</p>
@@ -107,8 +122,11 @@
                                     </thead>
                                     <tbody>
                                         <tr class="odd" *ngFor="let empresa of datos.propietariosEmpresas; let i = index">
-                                            <td class="center" *ngIf="empresa.permisoTramite"><p style="color: white;" >Si</p></td>
-                                            <td class="center" *ngIf="!empresa.permisoTramite"><p style="color: white;" >No</p></td>
+                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==2"><p style="color: white;" >Si</p></td>
+                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==2"><p style="color: white;" >No</p></td>
+
+                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==1"><p style="color: white;" >Propietario</p></td>
+                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==1"><p style="color: white;" >Locatario</p></td>
                                             <td class="center"><p style="color: white;">{{empresa.nit}}<br>{{empresa.nombre}}</p></td>
                                             <td class="center" *ngIf="empresa.identificacionApoderado">
                                                 <p style="color: white;">{{empresa.identificacionApoderado}}<br>{{empresa.nombreApoderado}}</p>
@@ -221,7 +239,7 @@
                         </div>
                     </div>
 
-                    <!-- agregar apoderado ciudadano -->
+                    <!-- agregar apoderado -->
                     <div class="container" *ngIf="apoderado == 'ciudadano' || apoderado == 'empresa'">
                         <div class="col-xs-16 col-lg-16 form-group" >
                             <h5 class="m-0">
@@ -283,7 +301,6 @@
                             <button (click)="btnNewApoderado()" class="btn btn-primary pull-right">Agregar</button>
                         </div>
                     </div>
-
 
                 </div>
             </div>

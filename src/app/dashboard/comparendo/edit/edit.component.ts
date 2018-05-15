@@ -61,7 +61,7 @@ constructor(
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
-            title: 'Pefecto!',
+            title: 'Perfecto!',
             text: 'El registro se ha modificado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'

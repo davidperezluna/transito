@@ -22,7 +22,6 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
-                    <th>Valor</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -30,7 +29,6 @@
                 <tr class="odd" *ngFor="let tramite of tramites; let i = index">
                   <td >{{tramite.id}}</td>
                   <td >{{tramite.nombre}}</td>
-                  <td >{{tramite.valor}}</td>
                   <td>
                     <button (click)="editTramite(tramite)" class="btn btn-outline-info" type="button">
                       <i class="fa fa-pencil"></i>

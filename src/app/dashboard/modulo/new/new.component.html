@@ -9,12 +9,16 @@
                     <div class="col-md-12 ">
                         <div class="form-group row">
                             <div class="col-xs-16 col-lg-16">
-                                <label>Nombre*</label>
+                                <label>Nombre <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="modulo.nombre" name="nombre" placeholder="" type="text" required>
                             </div>
                             <div class="col-xs-16 col-lg-16">
-                                <label>Abreviatura*</label>
+                                <label>Abreviatura <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="modulo.abreviatura" name="abreviatura" placeholder="" type="text" required>
+                            </div>
+                            <div class="col-xs-16 col-lg-16">
+                                <label>Sigla sustrato <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="modulo.siglaSustrato" name="siglaSustrato" placeholder="" type="text" required>
                             </div>
                             <div class="col-xs-16 col-lg-16">
                                 <label>Descripción</label>

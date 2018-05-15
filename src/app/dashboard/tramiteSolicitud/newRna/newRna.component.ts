@@ -69,7 +69,7 @@ constructor(
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
-            title: 'Pefecto!',
+            title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'
@@ -139,7 +139,6 @@ constructor(
         });
   }
   changedTramiteFactura(e){
-    console.log(this.tramiteSolicitud);
     let token = this._loginService.getToken();
     this._tramiteFacturaService.showTramiteFactura(token,e).subscribe(
       response => {
@@ -258,11 +257,10 @@ constructor(
     );
     
   }
-  readyTramite(datos:any,ready:boolean){
+  readyTramite(datos:any){
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
-    console.log(this.tramiteSolicitud);
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
@@ -270,7 +268,7 @@ constructor(
         console.log(this.respuesta);
         if (this.respuesta.status == 'success') {
           swal({
-            title: 'Pefecto!',
+            title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'

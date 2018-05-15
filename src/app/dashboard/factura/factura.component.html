@@ -22,9 +22,6 @@
                 <thead>
                   <tr>
                       <th>Id</th>
-                      
-                      <th>Licencia transito</th>
-                      <th>Fecha Creación</th>
                       <th>Número</th>
                       <th>Acciones</th>
                   </tr>
@@ -32,16 +29,13 @@
                 <tbody>
                   <tr class="odd" *ngFor="let factura of facturas; let i = index">
                     <td>{{factura.id}}</td>
-                    <td>{{factura.numeroLicenciaTrancito}}</td>
-                   
-                    <td>{{factura.fechaCreacion | date:'shortDate'}}</td>
                     <td>{{factura.numero}}</td>
                     <td>
                       <div class="btn-group">
                           <button (click)="editFactura(factura)" class="btn btn-outline-info" type="button" title="Editar">
                             <i class="fa fa-pencil"></i>
                           </button>
-                          <button (click)="deleteFactura(factura.id)"  class="btn btn-outline-danger" type="button" title="Eiminar">
+                          <button (click)="deleteFactura(factura.id)"  class="btn btn-outline-danger" type="button" title="Eliminar">
                             <i class="fa fa-trash"></i>
                           </button>
                           <button (click)="getTramiteFactura(factura)" class="btn btn-outline-info" type="button" title="Tramites">

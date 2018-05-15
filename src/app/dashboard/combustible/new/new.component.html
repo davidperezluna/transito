@@ -4,7 +4,7 @@
         <div class="card-body">
             <h5 class="m-0">formulario para el ingreso de un nuevo combustible</h5>
             <hr> 
-            <form #combustibleForm="ngForm">
+            <form #formNew="ngForm">
                 <div class="row justify-content-center">
                     <div class="col-md-12 ">
                         <div class="form-group row">
@@ -19,11 +19,11 @@
                         </div> 
                     </div>  
                 </div>
-            </form>     
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" [disabled]="combustibleForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
-            </div>    
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                </div>
+            </form>    
         </div>
     </div>
 </div>

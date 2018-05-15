@@ -36,7 +36,7 @@ constructor(
           this.ready.emit(true);
           
           swal({
-            title: 'Pefecto!',
+            title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'

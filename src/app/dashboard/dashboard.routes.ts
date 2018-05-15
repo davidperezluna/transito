@@ -7,11 +7,12 @@ import { LineaRoutes } from './linea/linea.routes';
 import { BancoRoutes } from './banco/banco.routes';
 import { ClaseRoutes } from './clase/clase.routes';
 import { ColorRoutes } from './color/color.routes';
-import { DepartamentoRoutes } from './departamento/departamento.routes';
 import { CombustibleRoutes } from './combustible/combustible.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { ModalidadRoutes } from './modalidad/modalidad.routes';
+import { DepartamentoRoutes } from './departamento/departamento.routes';
 import { MunicipioRoutes } from './municipio/municipio.routes';
+import { PaisRoutes } from './pais/pais.routes';
 import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { ServicioRoutes } from './servicio/servicio.routes';
@@ -21,7 +22,7 @@ import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
 import { GeneroRoutes } from './genero/genero.routes';
-//import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
+import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
 import { TramiteRoutes } from './tramite/tramite.routes';
@@ -33,6 +34,7 @@ import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gesti
 import { TipoDocumentoRoutes } from './tipoDocumento/tipoDocumento.routes';
 import { GestionDocumentosRoutes } from './gestionDocumentos/gestionDocumentos.routes';
 import { EmpresaRoutes } from './empresa/empresa.routes';
+import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -47,17 +49,18 @@ export const DashboardRoutes: Route[] = [
         ...BancoRoutes,
         ...ClaseRoutes,
         ...ColorRoutes,
-        ...DepartamentoRoutes,
         ...CombustibleRoutes,
         ...ConsumibleRoutes,
         ...ModalidadRoutes,
+        ...PaisRoutes,
+        ...DepartamentoRoutes,
         ...MunicipioRoutes,
         ...OrganismoTransitoRoutes,
         ...ServicioRoutes,
         ...CiudadanoRoutes,
         ...TipoIdentificacionRoutes,
         ...GeneroRoutes,
-        
+        ...GrupoSanguineoRoutes,
         ...CuentaRoutes,
         ...ModuloRoutes,
         ...TramiteRoutes,
@@ -73,7 +76,6 @@ export const DashboardRoutes: Route[] = [
         ...TipoDocumentoRoutes,
         ...EmpresaRoutes,
         ...GestionDocumentosRoutes,
-        
-      ]
+        ...TramitePrecioRoutes,      ]
     }
 ];

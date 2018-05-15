@@ -7,6 +7,7 @@ import { MunicipioService } from '../../../services/municipio.service';
 import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
+import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 
 import swal from 'sweetalert2';
  
@@ -24,9 +25,11 @@ public ciudadanos: any;
 public generos: any;
 public tiposEmpresa: any;
 public tiposSociedad: any;
+public tiposIdentificacion: any;
 public municipioSelected: any;
 public ciudadanoSelected: any;
 public tipoSociedadSelected: any;
+public tipoIdentificacionSelected: any;
 public municipioResidenciaSelected: any;
 public municipioNacimientoSelected: any;
 // los que vienen desde el base de datos
@@ -36,11 +39,12 @@ constructor(
   private _municipioService: MunicipioService,
   private _tipoEmpresaService: TipoEmpresaService,
   private _tipoSociedadService: TipoSociedadService,
+  private _tipoIdentificacionService: TipoIdentificacionService,
   private _ciudadanoService: CiudadanoService,
 ){}
 
   ngOnInit() {
-    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._tipoSociedadService.getTipoSociedadSelect().subscribe(
       response => {
@@ -49,6 +53,19 @@ constructor(
       error => {
         this.errorMessage = <any>error;
         if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+      response => {
+        this.tiposIdentificacion = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -104,6 +121,7 @@ constructor(
     let token = this._loginService.getToken();
     this.empresa.municipioId = this.municipioSelected;
     this.empresa.tipoSociedadId = this.tipoSociedadSelected;
+    this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.empresa.ciudadanoId = this.ciudadanoSelected;
 
     this._EmpresaService.register(this.empresa,token).subscribe(
@@ -113,7 +131,7 @@ constructor(
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
-            title: 'Pefecto!',
+            title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'
