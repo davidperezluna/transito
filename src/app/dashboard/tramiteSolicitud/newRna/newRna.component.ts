@@ -180,7 +180,7 @@ constructor(
                   });
                   if (this.tramitePreasignacion) {
                       swal({
-                        title: 'Factura!',
+                        title: 'Atención!',
                         text: 'primero tramita PREREASIGNACIÓN VEHICULO',
                         type: 'success',
                         confirmButtonText: 'Aceptar'
@@ -191,7 +191,7 @@ constructor(
                       this.tramitesFactura = arrayPreasignacion;
                   }else{
                     swal({
-                      title: 'Factura!',
+                      title: 'Atención!',
                       text: 'el tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado o ya fu tramitado para el ingreso de este nuevo vehículo',
                       type: 'error',
                       confirmButtonText: 'Aceptar'
@@ -205,7 +205,7 @@ constructor(
                   });
                   if (this.tramiteMatriculaInicial) {
                     swal({
-                      title: 'Factura!',
+                      title: 'Atención!',
                       text: 'primero tramita MATRICULA INICIAL',
                       type: 'success',
                       confirmButtonText: 'Aceptar'
@@ -216,7 +216,7 @@ constructor(
                     this.tramitesFactura = arrayPreasignacion;
                   }else{
                     swal({
-                      title: 'Factura!',
+                      title: 'Atención!',
                       text: 'el tramite MATRICULA INICIAL no se encuentra facturado o ya fue tramitado para la asignación de propietarios',
                       type: 'error',
                       confirmButtonText: 'Aceptar'
