@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Banco} from '../banco.modelo';
-import {BancoService} from '../../../services/banco.service';
-import {LoginService} from '../../../services/login.service';
+import { Pais } from '../pais.modelo';
+import { PaisService } from '../../../services/pais.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -10,25 +10,25 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public banco: Banco;
+public pais: Pais;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _BancoService: BancoService,
+  private _PaisService: PaisService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.banco = new Banco(null,null);
+    this.pais = new Pais(null, null);
   }
   onCancelar(){
     this.ready.emit(true);
   }
   onEnviar(){
     let token = this._loginService.getToken();
-
-		this._BancoService.register(this.banco,token).subscribe(
+    console.log(this.pais);
+		this._PaisService.register(this.pais,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -43,14 +43,13 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El banco '+ this.banco.nombre +' ya se encuentra registrado',
+            text: 'El pais '+  +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
 			error => {
 					this.errorMessage = <any>error;
-
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");

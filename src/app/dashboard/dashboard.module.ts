@@ -12,8 +12,9 @@ import { ClaseModule } from './clase/clase.module';
 import { ColorModule } from './color/color.module';
 import { CombustibleModule } from './combustible/combustible.module';
 import { ConsumibleModule } from './consumible/consumible.module';
-import { DepartamentoModule } from './departamento/departamento.module';
 import { ModalidadModule } from './modalidad/modalidad.module';
+import { PaisModule } from './pais/pais.module';
+import { DepartamentoModule } from './departamento/departamento.module';
 import { MunicipioModule } from './municipio/municipio.module';
 import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
 import { ServicioModule } from './servicio/servicio.module';
@@ -61,6 +62,7 @@ import {RightsidebarComponent} from '../shared/index';
       ClaseModule,
       ColorModule,
       ModalidadModule,
+      PaisModule,
       DepartamentoModule,
       CombustibleModule,
       ConsumibleModule,

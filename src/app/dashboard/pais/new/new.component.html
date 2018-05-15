@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">Nuevo Pais</h5>
+                <hr>
+                <form #formNew="ngForm">
+                    <div class="row justify-content-center">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre*</label>
+                                <input class="form-control" [(ngModel)]="pais.nombre" name="nombre" placeholder="Nombre" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                    </div>
+                </form>    
+            </div>
+        </div>
+    </div>
+</div>

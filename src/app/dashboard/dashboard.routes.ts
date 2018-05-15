@@ -7,11 +7,12 @@ import { LineaRoutes } from './linea/linea.routes';
 import { BancoRoutes } from './banco/banco.routes';
 import { ClaseRoutes } from './clase/clase.routes';
 import { ColorRoutes } from './color/color.routes';
-import { DepartamentoRoutes } from './departamento/departamento.routes';
 import { CombustibleRoutes } from './combustible/combustible.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { ModalidadRoutes } from './modalidad/modalidad.routes';
+import { DepartamentoRoutes } from './departamento/departamento.routes';
 import { MunicipioRoutes } from './municipio/municipio.routes';
+import { PaisRoutes } from './pais/pais.routes';
 import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { ServicioRoutes } from './servicio/servicio.routes';
@@ -48,10 +49,11 @@ export const DashboardRoutes: Route[] = [
         ...BancoRoutes,
         ...ClaseRoutes,
         ...ColorRoutes,
-        ...DepartamentoRoutes,
         ...CombustibleRoutes,
         ...ConsumibleRoutes,
         ...ModalidadRoutes,
+        ...PaisRoutes,
+        ...DepartamentoRoutes,
         ...MunicipioRoutes,
         ...OrganismoTransitoRoutes,
         ...ServicioRoutes,
