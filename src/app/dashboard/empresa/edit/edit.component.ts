@@ -6,6 +6,7 @@ import { MunicipioService } from '../../../services/municipio.service';
 import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
+import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 
 import swal from 'sweetalert2';
 
@@ -25,24 +26,26 @@ public formReady = false;
 public tipoEmpresa: Array<any>
 public tipoEmpresaSelected: Array<any>; // ng-select [(ngModel)]
 
-public ciudadano: Array<any>
+public ciudadanos: Array<any>
 public ciudadanoSelected: Array<any>; // ng-select [(ngModel)]
 
-public tipoSociedad: Array<any>
+public tiposSociedad: Array<any>
 public tipoSociedadSelected: Array<any>; // ng-select [(ngModel)]
 
 public municipios: Array<any>
-public municipioNacimientoSelected: Array<any>; // ng-select [(ngModel)]
-public municipioResidenciaSelected: Array<any>; // ng-select [(ngModel)]
+public municipioSelected: Array<any>; // ng-select [(ngModel)]
 
+public tiposIdentificacion: Array<any>
+public tipoIdentificacionSelected: Array<any>; // ng-select [(ngModel)]
 
 constructor(
-  private _EmpresaService: EmpresaService,
+  private _empresaService: EmpresaService,
   private _loginService: LoginService,
   private _municipioService: MunicipioService,
   private _tipoEmpresaService: TipoEmpresaService,
   private _tipoSociedadService: TipoSociedadService,
   private _ciudadanoService: CiudadanoService,
+  private _tipoIdentificacionService: TipoIdentificacionService,
 
   ){}
 
@@ -61,27 +64,16 @@ constructor(
       ) {
       }
     })
-    console.log(this.empresa);
-    // this.empresa.nombre = this.empresa.nombre;
-    // this.empresa.sigla = this.empresa.usuario.primerNombre;
-    // this.empresa.segundoNombreUsuario = this.empresa.usuario.segundoNombre;
-    // this.empresa.primerApellidoUsuario = this.empresa.usuario.primerApellido;
-    // this.empresa.segundoApellidoUsuario = this.empresa.usuario.segundoApellido;
-    // this.empresa.telefonoUsuario = this.empresa.usuario.telefono;
-    // this.empresa.correoUsuario = this.empresa.usuario.correo;
-
-
+    console.log(this.empresa);    
 
     this._municipioService.getMunicipioSelect().subscribe(
         response => {
           this.municipios = response;
           setTimeout(() => {
-            this.municipioNacimientoSelected = [this.empresa.municipioNacimiento.id];
-            this.municipioResidenciaSelected = [this.empresa.municipioResidencia.id];
+            this.municipioSelected = [this.empresa.municipio.id];
+            // this.municipioResidenciaSelected = [this.empresa.municipioResidencia.id];
           });
         }, 
-
-
         error => {
           this.errorMessage = <any>error;
 
@@ -91,9 +83,11 @@ constructor(
           }
         }
       );
+
+      
     this._tipoSociedadService.getTipoSociedadSelect().subscribe(
         response => {
-          this.tipoSociedad = response;
+          this.tiposSociedad = response;
           setTimeout(() => {
             this.tipoSociedadSelected = [this.empresa.tipoSociedad.id];
             this.formReady = true;
@@ -109,9 +103,27 @@ constructor(
         }
       );
 
+    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+      response => {
+        this.tiposIdentificacion = response;
+        setTimeout(() => {
+          this.tipoIdentificacionSelected = [this.empresa.tipoIdentificacion.id];
+          this.formReady = true;
+        });
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+          }
+        }
+      );
+
     this._ciudadanoService.getCiudadanoSelect().subscribe(
       response => {
-        this.ciudadano = response;
+        this.ciudadanos = response;
         setTimeout(() => {
           this.ciudadanoSelected = [this.empresa.ciudadano.id];
           this.formReady = true;
@@ -127,23 +139,6 @@ constructor(
       }
     );
 
-    this._grupoSanguineoService.getGrupoSanguineoSelect().subscribe(
-      response => {
-        this.gruposSanguineos = response;
-        setTimeout(() => {
-          this.grupoSanguineoSelected = [this.empresa.grupoSanguineo.id];
-          this.formReady = true;
-        });
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
   }
 
   onCancelar(){
@@ -152,11 +147,11 @@ constructor(
   onEnviar(){
 
     let token = this._loginService.getToken();
-    this.empresa.municipioResidenciaId = this.municipioResidenciaSelected;
-    this.empresa.municipioNacimientoId = this.municipioNacimientoSelected;
-    this.empresa.tipoIdentificacionUsuarioId = this.tipoIdentificacionSelected;
-    this.empresa.generoId = this.generoSelected;
-    this.empresa.grupoSanguineoId = this.grupoSanguineoSelected;
+    this.empresa.municipioId = this.municipioSelected;    
+    this.empresa.tipoSociedadId = this.tipoSociedadSelected;
+    this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
+    this.empresa.ciudadanoId = this.ciudadanoSelected;
+       
     console.log(this.empresa);
 		this._empresaService.editEmpresa(this.empresa,token).subscribe(
 			response => {
