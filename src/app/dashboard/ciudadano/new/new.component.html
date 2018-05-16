@@ -90,11 +90,33 @@
                             name="municipioId">
                         </ng-select>
                     </div>
-                    <div class="col-xs-16 col-lg-8">
+                    <div class="col-xs-16 col-lg-5">
+                        <label>Pais Residencia*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="paises"
+                            [(ngModel)]="paisResidenciaSelected"
+                            (ngModelChange)="changedPaisResidencia($event)"
+                            required
+                            name="paisId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-16 col-lg-6" >
+                        <label>Departamento Residencia*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="departamentosResidencia"
+                            [(ngModel)]="departamentoResidenciaSelected"
+                            (ngModelChange)="changedDepartamentoResidencia($event)"
+                            required
+                            name="departamentoId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-16 col-lg-5">
                         <label>Municipio Residencia*</label>
                         <ng-select
                             [multiple]="false"
-                            [options]="municipios"
+                            [options]="municipiosResidencia"
                             [(ngModel)]="municipioResidenciaSelected"
                             required
                             name="departamentoId">

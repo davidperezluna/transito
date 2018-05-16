@@ -6,6 +6,8 @@ import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.
 import { GeneroService } from '../../../services/genero.service';
 import { GrupoSanguineoService } from '../../../services/grupoSanguineo.service';
 import { MunicipioService } from '../../../services/municipio.service';
+import { DepartamentoService } from '../../../services/departamento.service';
+import { PaisService } from '../../../services/pais.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -28,9 +30,22 @@ public generoSelected: Array<any>; // ng-select [(ngModel)]
 public gruposSanguineos: Array<any>
 public grupoSanguineoSelected: Array<any>; // ng-select [(ngModel)]
 
-public municipios: Array<any>
-public municipioNacimientoSelected: Array<any>; // ng-select [(ngModel)]
-public municipioResidenciaSelected: Array<any>; // ng-select [(ngModel)]
+
+public paises: Array<any>;
+public paisNacimientoSelected: Array<any>;
+public paisResidenciaSelected: Array<any>;
+
+public departamentosNacimiento: Array<any>;
+public departamentoNacimientoSelected:Array<any>;
+
+public departamentosResidencia: Array<any>;
+public departamentoResidenciaSelected:Array<any>;
+
+public municipiosNacimiento: Array<any>;
+public municipioNacimientoSelected: Array<any>;
+
+public municipiosResidencia: Array<any>;
+public municipioResidenciaSelected: Array<any>;
 
 
 constructor(
@@ -40,6 +55,8 @@ constructor(
   private _generoService: GeneroService,
   private _grupoSanguineoService: GrupoSanguineoService,
   private _municipioService: MunicipioService,
+  private _departamentoService: DepartamentoService,
+  private _paisService: PaisService,
 
   ){}
 
@@ -58,6 +75,8 @@ constructor(
       ) {
       }
     })
+
+
     console.log(this.ciudadano);
     this.ciudadano.numeroIdentificacionUsuario = this.ciudadano.usuario.identificacion;
     this.ciudadano.primerNombreUsuario = this.ciudadano.usuario.primerNombre;
@@ -67,25 +86,91 @@ constructor(
     this.ciudadano.telefonoUsuario = this.ciudadano.usuario.telefono;
     this.ciudadano.correoUsuario = this.ciudadano.usuario.correo;
 
-    this._municipioService.getMunicipioSelect().subscribe(
+    this._departamentoService.getDepartamentoPorPaisSelect(this.ciudadano.municipioNacimiento.departamento.pais.id).subscribe(
+      response => {
+        this.departamentosNacimiento = response;
+        setTimeout(() => {
+          this.departamentoNacimientoSelected = [this.ciudadano.municipioNacimiento.departamento.id];
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+     this._departamentoService.getDepartamentoPorPaisSelect(this.ciudadano.municipioResidencia.departamento.pais.id).subscribe(
+      response => {
+        this.departamentosResidencia = response;
+        setTimeout(() => {
+          this.departamentoResidenciaSelected = [this.ciudadano.municipioResidencia.departamento.id];
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+     this._municipioService.getMunicipioPorDepartamentoSelect(this.ciudadano.municipioNacimiento.departamento.id).subscribe(
         response => {
-          this.municipios = response;
+          this.municipiosNacimiento = response;
           setTimeout(() => {
             this.municipioNacimientoSelected = [this.ciudadano.municipioNacimiento.id];
-            this.municipioResidenciaSelected = [this.ciudadano.municipioResidencia.id];
           });
-        }, 
-
-
+        },
         error => {
           this.errorMessage = <any>error;
-
-          if(this.errorMessage != null){
+          if (this.errorMessage != null) {
             console.log(this.errorMessage);
-            alert("Error en la petición");
+            alert('Error en la petición');
           }
         }
       );
+     this._municipioService.getMunicipioPorDepartamentoSelect(this.ciudadano.municipioResidencia.departamento.id).subscribe(
+        response => {
+          this.municipiosResidencia = response;
+          setTimeout(() => {
+            this.municipioResidenciaSelected = [this.ciudadano.municipioResidencia.id];
+          });
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      );
+
+   
+    this._paisService.getPaisSelect().subscribe(
+      response => {
+        this.paises = response;
+        setTimeout(() => {
+          this.paisNacimientoSelected = [this.ciudadano.municipioNacimiento.departamento.pais.id];
+          this.municipioNacimientoSelected = [this.ciudadano.municipioNacimiento.id];
+          this.paisResidenciaSelected = [this.ciudadano.municipioResidencia.departamento.pais.id];
+          this.departamentoResidenciaSelected = [this.ciudadano.municipioResidencia.departamento.id];
+          this.municipioResidenciaSelected = [this.ciudadano.municipioResidencia.id];
+        });
+        console.log(this.departamentoNacimientoSelected);
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+    
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
         response => {
           this.tiposIdentificacion = response;
@@ -176,6 +261,80 @@ constructor(
 				}
 
 		}); 
+  }
+
+
+   changedPaisNacimiento(id){
+  if (id) {
+    this.paisNacimientoSelected = id;
+    this._departamentoService.getDepartamentoPorPaisSelect(this.paisNacimientoSelected).subscribe(
+      response => {
+        this.departamentosNacimiento = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+  }
+
+  }
+
+  changedDepartamentoNacimiento(id){
+    if (id) {
+      this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoNacimientoSelected).subscribe(
+        response => {
+          this.municipiosNacimiento = response;
+
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      );
+    }
+  
+  }
+
+  changedPaisResidencia(id){
+    if (id) {
+      this._departamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
+        response => {
+          this.departamentosResidencia = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      );
+    }
+  }
+
+  changedDepartamentoResidencia(id){
+    if (id) {
+      this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoResidenciaSelected).subscribe(
+        response => {
+          this.municipiosResidencia = response;
+
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            alert('Error en la petición');
+          }
+        }
+      );
+    }
+  
   }
 
 }
