@@ -21,20 +21,23 @@ public errorMessage;
 public respuesta;
 public tiposIdentificacion: any;
 public generos: any;
-public paises: any;
 public gruposSanguineos: any;
-public municipios: any;
-public departamentosNacimiento: any;
 public tipoIdentificacionSelected: any;
 public generoSelected: any;
 public grupoSanguineoSelected: any;
-public municipioResidenciaSelected: any;
+
+public paises: any;
 public paisNacimientoSelected: any;
-public selectDepartamentosNacimiento = false;
 public municipiosNacimiento: any;
+public departamentosNacimiento: any;
 public departamentoNacimientoSelected:any;
-public selectMunicipiosNacimiento = false;
 public municipioNacimientoSelected: any;
+public paisResidenciaSelected: any;
+public departamentosResidencia: any;
+public departamentoResidenciaSelected:any;
+public municipiosResidencia: any;
+public municipioResidenciaSelected: any;
+
 
 
 constructor(
@@ -104,19 +107,6 @@ constructor(
         }
       }
     );
-
-    this._municipioService.getMunicipioSelect().subscribe(
-        response => {
-          this.municipios = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      );
   }
   onCancelar(){
     this.ready.emit(true);
@@ -196,7 +186,6 @@ constructor(
     this._departamentoService.getDepartamentoPorPaisSelect(this.paisNacimientoSelected).subscribe(
       response => {
         this.departamentosNacimiento = response;
-        this.selectDepartamentosNacimiento = true;
         console.log(this.departamentosNacimiento);
       },
       error => {
@@ -216,8 +205,45 @@ constructor(
       this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoNacimientoSelected).subscribe(
         response => {
           this.municipiosNacimiento = response;
-          this.selectMunicipiosNacimiento = true;
           console.log(this.municipiosNacimiento);
+
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      );
+    }
+  
+  }
+
+  changedPaisResidencia(id){
+    if (id) {
+      this._departamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
+        response => {
+          this.departamentosResidencia = response;
+          console.log(this.departamentosResidencia);
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      );
+    }
+  }
+
+  changedDepartamentoResidencia(id){
+    if (id) {
+      this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoResidenciaSelected).subscribe(
+        response => {
+          this.municipiosResidencia = response;
+          console.log(this.municipiosResidencia);
 
         },
         error => {
