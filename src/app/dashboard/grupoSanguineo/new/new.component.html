@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h5 class="m-0">Nuevo Grupo Sanguineo</h5>
                 <hr>
-                <form #grupoSanguineoForm="ngForm">
+                <form #newForm="ngForm">
                     <div class="row justify-content-center">
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-12">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-footer">
                         <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                        <button (click)="onEnviar()" [disabled]="grupoSanguineoForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                        <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
                     </div>  
                 </form>  
             </div>

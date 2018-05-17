@@ -3,28 +3,30 @@
         <div class="card">
         <div class="card-body">
             <h5 class="m-0">Nuevo Tipo Documento</h5>
-            <hr> 
-            <div class="row justify-content-center">
-                <div class="col-md-10 ">
-                    <div class="form-group row">
-                        <div class="col-lg-4 col-md-4">
-                            <label>Nombre Tipo*</label>
-                            <input class="form-control" [(ngModel)]="tipoDocumento.nombreTipo" name="nombreTipo" placeholder="" type="text" required>
+            <hr>
+            <form #newForm="ngForm"> 
+                <div class="row justify-content-center">
+                    <div class="col-md-10 ">
+                        <div class="form-group row">
+                            <div class="col-lg-4 col-md-4">
+                                <label>Nombre Tipo*</label>
+                                <input class="form-control" [(ngModel)]="tipoDocumento.nombreTipo" name="nombreTipo" placeholder="" type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Dias Duracion Tramite*</label>
+                                <input class="form-control" [(ngModel)]="tipoDocumento.diasDuracionTramite" name="diasDuracionTramite" placeholder="" type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Codigo Documento*</label>
+                                <input class="form-control" [(ngModel)]="tipoDocumento.codigoDocumento" name="codigoDocumento" placeholder="" type="text" required>
+                            </div>
                         </div>
-                        <div class="col-lg-4 col-md-4">
-                            <label>Dias Duracion Tramite*</label>
-                            <input class="form-control" [(ngModel)]="tipoDocumento.diasDuracionTramite" name="diasDuracionTramite" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <label>Codigo Documento*</label>
-                            <input class="form-control" [(ngModel)]="tipoDocumento.codigoDocumento" name="codigoDocumento" placeholder="" type="text" required>
-                        </div>
-                    </div>
-                </div>    
-            </div>
+                    </div>    
+                </div>
+            </form>  
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onEnviar()"  [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    
         </div>
     </div>
