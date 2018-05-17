@@ -4,7 +4,7 @@
         <div class="card-body">
             <h5 class="m-0">formulario para el ingreso de una nueva marca</h5>
             <hr>
-            <form #marcaForm="ngForm">
+            <form #newForm="ngForm">
                 <div class="row justify-content-center">
                     <div class="col-md-10 ">
                         <div class="form-group row">
@@ -13,8 +13,8 @@
                             <input class="form-control" [(ngModel)]="marca.nombre" name="nombre" placeholder="" type="text" required>
                         </div>
                         <div class="col-lg-8 col-md-8">
-                            <label>Codigo Mt</label>
-                            <input class="form-control" [(ngModel)]="marca.codigoMt" name='codigoMt' placeholder="" type="text">
+                            <label>Codigo Mt*</label>
+                            <input class="form-control" [(ngModel)]="marca.codigoMt" name='codigoMt' placeholder="" type="text" requerid>
                         </div>
                         </div>
                     </div>    
@@ -22,7 +22,7 @@
             </form>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" [disabled]="marcaForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    
         </div>
     </div>

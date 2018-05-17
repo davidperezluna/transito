@@ -3,7 +3,8 @@
         <div class="card">
         <div class="card-body">
             <h5 class="m-0">formulario para el ingreso de una nuevo banco</h5>
-            <hr> 
+            <hr>
+            <form #formNew="ngForm"> 
             <div class="row justify-content-center">
                 <div class="col-md-10 ">
                     <div class="form-group row">
@@ -14,9 +15,10 @@
                     </div>
                 </div>    
             </div>
+            </form>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    
         </div>
     </div>

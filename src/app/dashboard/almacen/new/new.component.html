@@ -4,68 +4,70 @@
         <div class="card-body">
             <h5 class="m-0">Nuevo almacen</h5>
             <hr> 
-            <div class="row justify-content-center">
-                <div class="col-md-10 ">
-                    <div class="form-group row">
-                    <div class="col-lg-4 col-md-4">
-                        <label>Servicio*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="servicios"
-                            [(ngModel)]="servicioSelected"
-                            required
-                            name="departamentoId">
-                        </ng-select>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <label>Organismo de Transito*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="organismosTransito"
-                            [(ngModel)]="organismoTransitoSelected"
-                            required
-                            name="departamentoId">
-                        </ng-select>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <label>consumible*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="consumibles"
-                            [(ngModel)]="consumibleSelected"
-                            required
-                            name="departamentoId">
-                        </ng-select>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <label>Clase*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="clases"
-                            [(ngModel)]="claseSelected"
-                            required
-                            name="departamentoId">
-                        </ng-select>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <label>Rango Inicio*</label>
-                        <input class="form-control" [(ngModel)]="almacen.rangoInicio" name="rangoInicio" placeholder="" type="text" required>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <label>Rango Fin*</label>
-                        <input class="form-control" [(ngModel)]="almacen.rangoFin" name="rangoFin" placeholder="" type="text" required>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <label>Lote*</label>
-                        <input class="form-control" [(ngModel)]="almacen.lote" name="lote" placeholder="" type="text" required>
-                    </div>
-                    
-                    </div>
-                </div>    
-            </div>
+            <form #newForm="ngForm">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 ">
+                        <div class="form-group row">
+                        <div class="col-lg-4 col-md-4">
+                            <label>Servicio*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="servicios"
+                                [(ngModel)]="servicioSelected"
+                                required
+                                name="departamentoId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Organismo de Transito*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="organismosTransito"
+                                [(ngModel)]="organismoTransitoSelected"
+                                required
+                                name="departamentoId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>consumible*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="consumibles"
+                                [(ngModel)]="consumibleSelected"
+                                required
+                                name="departamentoId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Clase*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="clases"
+                                [(ngModel)]="claseSelected"
+                                required
+                                name="departamentoId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Rango Inicio*</label>
+                            <input class="form-control" [(ngModel)]="almacen.rangoInicio" name="rangoInicio" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Rango Fin*</label>
+                            <input class="form-control" [(ngModel)]="almacen.rangoFin" name="rangoFin" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Lote*</label>
+                            <input class="form-control" [(ngModel)]="almacen.lote" name="lote" placeholder="" type="text" required>
+                        </div>
+                        
+                        </div>
+                    </div>    
+                </div>
+            </form>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    
         </div>
     </div>
