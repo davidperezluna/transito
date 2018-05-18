@@ -4,19 +4,21 @@
         <div class="card-body">
             <h5 class="m-0">formulario para el ingreso de un nuevo organismo transito</h5>
             <hr> 
-            <div class="row justify-content-center">
-                <div class="col-md-10 ">
-                    <div class="form-group row">
-                    <div class="col-lg-8 col-md-8">
-                        <label>Nombre*</label>
-                        <input class="form-control" [(ngModel)]="organismoTransito.nombre" name="nombre" placeholder="" type="text" required>
-                    </div>
-                    </div>
-                </div>    
-        </div>
+            <form #formNew="ngForm">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 ">
+                        <div class="form-group row">
+                        <div class="col-lg-8 col-md-8">
+                            <label>Nombre*</label>
+                            <input class="form-control" [(ngModel)]="organismoTransito.nombre" name="nombre" placeholder="" type="text" required>
+                        </div>
+                        </div>
+                    </div>    
+                </div>
+            </form>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    
         </div>
     </div>

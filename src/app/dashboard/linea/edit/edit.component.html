@@ -6,7 +6,7 @@
             <hr> 
             <div class="row justify-content-center">
                 <div class="col-md-10 ">
-                    <form  #lineaForm="ngForm">
+                    <form  #editForm="ngForm">
                         <div class="form-group row">
                             <div class="col-lg-4 col-md-4">
                                 <label>Nombre*</label>
@@ -39,7 +39,7 @@
         </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" [disabled]="lineaForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onEnviar()" [disabled]="editForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    
         </div>
     </div>
