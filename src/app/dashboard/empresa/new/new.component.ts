@@ -154,4 +154,10 @@ constructor(
     }); 
   }
 
+  onNewSucursal(){
+    this.formNew = true;
+    this.formIndexSucursal = false;
+    this.tableSucursal.destroy();
+  }
+
 }

@@ -33,6 +33,7 @@ import { FacturaModule } from './factura/factura.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { EmpresaModule } from './empresa/empresa.module';
+import { SucursalModule } from './empresa/sucursal/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TipoDocumentoModule } from './tipoDocumento/tipoDocumento.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
@@ -88,6 +89,7 @@ import {RightsidebarComponent} from '../shared/index';
       GestionTransportePublicoModule,
       GestionDocumentosModule,
       EmpresaModule,
+      SucursalModule,
       TramitePrecioModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

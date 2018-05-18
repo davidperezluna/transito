@@ -34,6 +34,7 @@ import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gesti
 import { TipoDocumentoRoutes } from './tipoDocumento/tipoDocumento.routes';
 import { GestionDocumentosRoutes } from './gestionDocumentos/gestionDocumentos.routes';
 import { EmpresaRoutes } from './empresa/empresa.routes';
+import { SucursalRoutes } from './sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { DashboardComponent } from './index';
 
@@ -75,6 +76,7 @@ export const DashboardRoutes: Route[] = [
         ...GestionTransportePublicoRoutes,
         ...TipoDocumentoRoutes,
         ...EmpresaRoutes,
+        ...SucursalRoutes,
         ...GestionDocumentosRoutes,
         ...TramitePrecioRoutes,      ]
     }
