@@ -8,19 +8,28 @@
                 <div class="col-md-10 ">
                     <form  #precioForm="ngForm">
                         <div class="form-group row">
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-8 col-md-8">
                                 <label>Año*</label>
-                                <input class="form-control" [(ngModel)]="tramitePrecio.anio" name="anio" placeholder="" type="text" required>
+                                <input class="form-control" [(ngModel)]="tramitePrecio.anio" name="anio" placeholder="" type="number" required>
                             </div>
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-8 col-md-8">
                                 <label>Valor*</label>
-                                <input class="form-control" [(ngModel)]="tramitePrecio.valor" name='valor' placeholder="" type="text">
+                                <input class="form-control" [(ngModel)]="tramitePrecio.valor" name='valor' placeholder="" type="number">
                             </div>
-                            <div class="col-lg-4 col-md-4">
-                                <label>Tipo*</label>
-                                <input class="form-control" [(ngModel)]="tramitePrecio.tipo" name='tipo' placeholder="" type="text">
+                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-8 col-md-8">
+                                <label>Tipo vehículo*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="vehiculoTipos"
+                                    [(ngModel)]="vehiculoTipoSelected"
+                                    required
+                                    name="vehiculoTipoId">
+                                </ng-select>
                             </div>
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-8 col-md-8">
                                 <label>Tramite*</label>
                                 <ng-select
                                     [multiple]="false"
@@ -31,12 +40,22 @@
                                 </ng-select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-lg-8 col-md-8">
+                                <label>SMLDV*</label>
+                                <input class="form-control" [(ngModel)]="tramitePrecio.smldv" name="smldv" placeholder="" type="number" required>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <label>Valor estampillas*</label>
+                                <input class="form-control" [(ngModel)]="tramitePrecio.valorEstampilla" name="valorEstampilla" placeholder="" type="number" required>
+                            </div>
+                        </div>
                     </form> 
                 </div>    
         </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" [disabled]="precioForm.invalid" type="button">Enviar</button>
             </div>    
         </div>
     </div>

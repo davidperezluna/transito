@@ -1,0 +1,101 @@
+<div class="row">
+        <div class="col-xs-16 col-lg-16">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="m-0">Ingrese el valor del salario mínimo legal vigente </h5>
+                    <hr>
+                    <form #formNewSmlmv="ngForm">
+                        <div class="row container">
+                            <div class="form-group row container">
+                                <div class="col-xs-5 col-lg-4">
+                                    <label>Año*</label>
+                                    <input class="form-control" [(ngModel)]="parametro.anio" name="anio" placeholder="Año" type="text" required>
+                                </div>
+                                <div class="col-xs-5 col-lg-4">
+                                    <label>Valor*</label>
+                                    <input class="form-control" [(ngModel)]="parametro.valor" name="valor" placeholder="Valor" type="text" required>
+                                </div>
+                                <div class="col-xs-5 col-lg-4">
+                                    <label>Incremento*</label>
+                                    <input class="form-control" [(ngModel)]="parametro.porcentaje" name="porcentaje" placeholder="Incremento" type="text" required>
+                                </div>
+                                <div class="col-xs-5 col-lg-4">
+                                    <button class="btn btn-outline-info" (click)="newConcepto()" style="margin-top: 27px;" [disabled]="formNewSmlmv.invalid" type="button">Concepto</button>
+                                    <button class="btn btn-outline-info" (click)="calcular()" style="margin-top: 27px;" [disabled]="formNewSmlmv.invalid" type="button">Calcular</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form> 
+                    <div class="container col-lg-5">
+                        <h6>Conceptos</h6>
+                        <table class="table" id="dataTables-example1" *ngIf="tablaConceptos" class="col-lg-5">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Valor</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let concepto of conceptos; let i = index">
+                                <td >{{concepto.nombre}}</td>
+                                <td >{{concepto.valor}}</td>
+                                <td class="center"><button (click)="deleteConcepto(concepto)" class="btn btn-danger">Eliminar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> 
+
+                    <div class="row container" *ngIf="conceptoForm">
+                        <div class="col-xs-5 col-lg-4">
+                            <label>Nombre*</label>
+                            <input class="form-control" [(ngModel)]="concepto.nombre" name="nombre" placeholder="Nombre" type="text" required>
+                        </div>
+                        <div class="col-xs-5 col-lg-4">
+                            <label>Valor*</label>
+                            <input class="form-control" [(ngModel)]="concepto.valor" name="valor" placeholder="Valor" type="text" required>
+                        </div>
+                        <div class="col-xs-5 col-lg-4">
+                            <button class="btn btn-secondary"  (click)="cancelarConcepto()" style="margin-top: 27px;">Cancel</button>
+                            <button class="btn btn-outline-info" (click)="guardarConcepto()" style="margin-top: 27px;" type="button">Guardar</button>
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card" *ngIf="calcularForm">
+                <div class="card-body">
+                    <h5 class="m-0">Tramites </h5>
+                    <hr>
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Año</th>
+                                <th>Tipo</th>
+                                <th>Tramite</th>
+                                <th>SMLDV</th>
+                                <th>Valor Estampillas</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecios; let i = index">
+                            <td >{{tramitePrecio[0]}}</td>
+                            <td >{{tramitePrecio[1]}}</td>
+                            <td >{{tramitePrecio[2]}}</td>
+                            <td >{{tramitePrecio[3]}}</td>
+                            <td >{{tramitePrecio[5]}}</td>
+                            <td >{{tramitePrecio[4]}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>

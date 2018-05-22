@@ -13,7 +13,6 @@ import swal from 'sweetalert2';
 export class NewRnaRegrabarVinComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
-    @Input() tramite: any = null;
     @Input() vehiculo: any = null;
     public errorMessage;
     public respuesta;

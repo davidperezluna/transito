@@ -38,7 +38,7 @@ export class FacturaComponent implements OnInit {
     }).then((result) => {
       if (
         // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
+        result.dismiss === swal.DismissReason.timer 
       ) {
       }
     })
