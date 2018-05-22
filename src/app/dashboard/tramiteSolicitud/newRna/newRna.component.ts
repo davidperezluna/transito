@@ -98,7 +98,7 @@ constructor(
 
   onKeyValidateFactura() {
     swal({
-      title: 'Buscando Factura!',
+      title: 'Buscando Atención!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading();
@@ -207,8 +207,8 @@ constructor(
                   });
                   if (this.tramitePreasignacion) {
                       swal({
-                        title: 'Factura!',
-                        text: 'primero tramita PREREASIGNACIÓN VEHICULO',
+                        title: 'Atención!',
+                        text: 'Primero debe tramitar PREREASIGNACIÓN VEHICULO',
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                       })
@@ -218,8 +218,8 @@ constructor(
                       this.tramitesFactura = arrayPreasignacion;
                   }else{
                     swal({
-                      title: 'Factura!',
-                      text: 'el tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado o ya fu tramitado para el ingreso de este nuevo vehículo',
+                      title: 'Atención!',
+                      text: 'El tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado o ya fue tramitado para el ingreso de este nuevo vehículo',
                       type: 'error',
                       confirmButtonText: 'Aceptar'
                     })
@@ -232,8 +232,8 @@ constructor(
                   });
                   if (this.tramiteMatriculaInicial) {
                     swal({
-                      title: 'Factura!',
-                      text: 'primero tramita MATRICULA INICIAL',
+                      title: 'Atención!',
+                      text: 'Primero debe tramitar MATRICULA INICIAL',
                       type: 'success',
                       confirmButtonText: 'Aceptar'
                     })
@@ -243,8 +243,8 @@ constructor(
                     this.tramitesFactura = arrayPreasignacion;
                   }else{
                     swal({
-                      title: 'Factura!',
-                      text: 'el tramite MATRICULA INICIAL no se encuentra facturado o ya fue tramitado para la asignación de propietarios',
+                      title: 'Atención!',
+                      text: 'El tramite MATRICULA INICIAL no se encuentra facturado o ya fue tramitado para la asignación de propietarios',
                       type: 'error',
                       confirmButtonText: 'Aceptar'
                     })

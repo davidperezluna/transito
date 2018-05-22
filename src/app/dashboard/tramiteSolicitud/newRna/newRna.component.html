@@ -1,70 +1,139 @@
-<div class="row"><!-- .row -->
-    <div class="col-xs-12 col-lg-8">
-        <div class="input-group" [ngClass]="{'has-danger' : isError}">
+<hr>
+    <div class="row"><!-- .row -->
+        <div class="col-xs-12 col-lg-8">
+            <div class="input-group" [ngClass]="{'has-danger' : isError}">
                 <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required />
-            <span class="input-group-btn">
-                <button (click)="onKeyValidateFactura()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-            </span>
+                <span class="input-group-btn">
+                    <button (click)="onKeyValidateFactura()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+            <div class="has-danger" *ngIf="isError" >
+                <div class="form-control-feedback has-danger has-error">{{mensaje}}</div>
+            </div>
         </div>
-        <div class="has-danger" *ngIf="isError" >
-            <div class="form-control-feedback has-danger has-error">{{mensaje}}</div>
-        </div>
-    </div>
-</div><!-- .row -->
-<div class="row"><!-- .row -->
-    <div class="col-xs-16 col-lg-8"><!-- .col -->
-        <!-- <div *ngIf="isError" class="alert alert-danger">
-            <strong>!</strong> {{ mensaje }}
-        </div> -->
-        <div class="card" *ngIf='factura'>
-            <div class="card-body">
-                <h5 class="m-0">
-                    Nueva solicitud de tramite
-                    <br>
-                    <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                </h5>
-                <hr> 
-                <form #tramiteSolicitudForm="ngForm" class="row">
-                    <div class="col-xs-16 col-lg-16">
-                        <div class="input-group" [ngClass]="{'has-danger' : error,'has-success': vehiculoSuccess}">
-                            <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
-                            <span class="input-group-btn">
-                                <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : error}" [ngClass]="{'btn-success' : vehiculoSuccess}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                                <!-- <button *ngIf="tipoError=='401'" (click)="onKeyNuevoVehiculo()" class="btn btn-default btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button> -->
-                            </span>
-                        </div> 
-                        <div class="has-danger" *ngIf="error" >
-                            <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+    </div><!-- .row -->
+    <div class="row"><!-- .row -->
+        <div class="col-xs-16 col-lg-8"><!-- .col -->
+            <!-- <div *ngIf="isError" class="alert alert-danger">
+                <strong>!</strong> {{ mensaje }}
+            </div> -->
+            <div class="card" *ngIf='factura'>
+                <div class="card-body">
+                    <h5 class="m-0">
+                        Nueva solicitud de tramite
+                        <br>
+                        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                    </h5>
+                    <hr> 
+                    <form #tramiteSolicitudForm="ngForm" class="row">
+                        <div class="col-xs-16 col-lg-16">
+                            <div class="input-group" [ngClass]="{'has-danger' : error,'has-success': vehiculoSuccess}">
+                                <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : error}" [ngClass]="{'btn-success' : vehiculoSuccess}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                    <!-- <button *ngIf="tipoError=='401'" (click)="onKeyNuevoVehiculo()" class="btn btn-default btn-danger" ngxclipboard="" type="button"><i class="fa fa-plus"></i></button> -->
+                                </span>
+                            </div> 
+                            <div class="has-danger" *ngIf="error" >
+                                <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+                            </div>
+                            <div class="has-success" *ngIf="vehiculoSuccess" >
+                                <div class="form-control-feedback has-danger has-success">{{msj}}</div>
+                                <br>
+                            </div>
                         </div>
-                        <div class="has-success" *ngIf="vehiculoSuccess" >
-                            <div class="form-control-feedback has-danger has-success">{{msj}}</div>
-                            <br>
+                        <br>
+                            <div class="col-xs-16 col-lg-16" *ngIf="vehiculoSuccess">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Placa</th>
+                                            <th>Motor</th>
+                                            <th>Servicio</th>
+                                            <th>Tipo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                            <td>
+                                            {{vehiculo.placa}}
+                                            </td>
+                                            <td> 
+                                                {{vehiculo.motor}}
+                                            </td>
+                                            <td> 
+                                                {{vehiculo.servicio.nombre}}
+                                            </td>
+                                            <td> 
+                                                {{vehiculo.tipoVehiculo}}
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                                </table> 
+                            </div>
+                        <br>
+                        <div class="col-lg-16 col-md-16 form-group">
+                                <br>    
+                            <label class="custom-control custom-checkbox" for="2c-option1">
+                                <input type="checkbox" [(ngModel)]="tramiteSolicitud.documentacion" name="documentacion" class="custom-control-input"  id="2c-option1" checked>
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">Documentación</span>
+                            </label>
                         </div>
-                    </div>
-                    <br>
-                        <div class="col-xs-16 col-lg-16" *ngIf="vehiculoSuccess">
-                            <table class="table table-bordered">
+                        <div class="col-xs-16 col-lg-16 form-group" *ngIf="!tramiteSolicitud.documentacion">
+                            <label>Observación</label>
+                            <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" name="observacion" placeholder="Observación"></textarea>
+                        </div>
+                        
+                        <div class="col-lg-16 col-md-16 form-group">
+                            <table class="table table-bordered" *ngIf="ciudadano">
                                 <thead>
                                     <tr>
-                                        <th>Placa</th>
-                                        <th>Motor</th>
-                                        <th>Servicio</th>
-                                        <th>Tipo</th>
+                                        <th>Solicitante Ciudadano</th>
+                                        <th>Check</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
                                         <td>
-                                           {{vehiculo.placa}}
+                                            <strong>Nombre: </strong>
+                                            {{ciudadanoVehiculo.ciudadano?.usuario.primerNombre}} {{ciudadanoVehiculo.ciudadano?.usuario.primerApellido}}
+                                            <br>
+                                            <strong>Identificación: </strong>
+                                            {{ciudadanoVehiculo.ciudadano?.usuario.identificacion}}
                                         </td>
                                         <td> 
-                                            {{vehiculo.motor}}
+                                            <label class="custom-control custom-radio" for="3option3">
+                                                <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" required >
+                                                <span class="custom-control-indicator"></span> 
+                                                <span class="custom-control-description">Solicitante</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody> 
+                            </table> 
+                            <table class="table table-bordered" *ngIf="!ciudadano">
+                                <thead>
+                                    <tr>
+                                        <th>Solicitante Empresa</th>
+                                        <th>Check</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                        <td>
+                                            <strong>Nit: </strong>
+                                            {{ciudadanoVehiculo.empresa?.nit}}
+                                            <br>
+                                            <strong>Nombre: </strong>
+                                            {{ciudadanoVehiculo.empresa?.nombre}}
                                         </td>
                                         <td> 
-                                            {{vehiculo.servicio.nombre}}
-                                        </td>
-                                        <td> 
-                                            {{vehiculo.tipoVehiculo}}
+                                            <label class="custom-control custom-radio" for="3option3">
+                                                <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" class="custom-control-input"  name="radio3" id="3option3" required >
+                                                <span class="custom-control-indicator"></span> 
+                                                <span class="custom-control-description">Solicitante</span>
+                                            </label>
                                         </td>
                                     </tr>
                                 </tbody> 
@@ -164,7 +233,7 @@
             </div>     
         </div>
 
-    </div><!-- /.col -->
+        </div><!-- /.col -->
 
     <div class="col-xs-16 col-lg-8"><!-- .col -->
         <appRna-duplicado-placa *ngIf="tramiteSelected == 21" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
