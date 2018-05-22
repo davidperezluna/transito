@@ -7,6 +7,7 @@
     <div class="col text-right ">
       <div class="btn-group pull-right">
         <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+        <button (click)="onNewSmlmv()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">SMLMV</span> <i class="ti-save ml-2"></i></button>
       </div>
     </div>
     
@@ -22,18 +23,24 @@
               <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Valor</th>
                     <th>Año</th>
                     <th>Tipo</th>
                     <th>Tramite</th>
+                    <th>SMLDV</th>
+                    <th>Valor estampillas</th>
+                    <th>Valor</th>
+                    <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
                   <td >{{tramitePrecio.id}}</td>
-                  <td >{{tramitePrecio.valor}}</td>
                   <td >{{tramitePrecio.anio}}</td>
+                  <td >{{tramitePrecio.tipoVehiculo.nombre}}</td>
                   <td >{{tramitePrecio.tramite.nombre}}</td>
+                  <td >{{tramitePrecio.smldv}}</td>
+                  <td >{{tramitePrecio.valorEstampilla}}</td>
+                  <td >{{tramitePrecio.valor}}</td>
                   <td><button (click)="editTramitePrecio(tramitePrecio)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteTramitePrecio(tramitePrecio.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
                 </tr>
@@ -46,4 +53,5 @@
     </div>
     <app-edit *ngIf='formEdit' [tramitePrecio]="tramitePrecio" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-new-smlmv *ngIf='formSmlmv' [tramitePrecios]="tramitePrecios" (ready)="ready($event)"></app-new-smlmv>
 </div>

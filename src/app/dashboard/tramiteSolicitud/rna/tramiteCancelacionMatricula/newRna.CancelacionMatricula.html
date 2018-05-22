@@ -10,7 +10,7 @@
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <form #cancelacionMatriculaForm="ngForm" class="container">
+                <form #cancelacionMatriculaForm="ngForm" class="container"> 
                 <div class="row justify-content-center container">
                     <div #forma1 class="form-group row"> 
                         <!-- lista de motivos -->
@@ -80,14 +80,7 @@
                         </div>            
                         <!--fin 5-->
                         <!--nunca borrar siempre ira en las todas las paginas -->                      
-                        <div class="col-xs-16 col-lg-16" *ngIf='tramite.sustrato'>
-                            <br>
-                            <label class="custom-control custom-checkbox" for="sustrato" >
-                                <input type="checkbox"  [(ngModel)]="datos.sustrato" name="sustrato" class="custom-control-input"  id="sustrato" required>
-                                <span class="custom-control-indicator"></span> 
-                                <span class="custom-control-description">sustrato</span>
-                            </label>
-                        </div>
+                        
                         <!--no borrar jamas jaja-->                 
                     </div>
                 </div>
@@ -98,7 +91,7 @@
                 <button (click)="enviarTramite()" class="btn btn-success pull-right"  [disabled]="cancelacionMatriculaForm.invalid" >Enviar</button>
             </div>
         </div>
-    </div>
+    </div> 
     <!-- /.col -->
 </div>
 <!-- /.row -->

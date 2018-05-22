@@ -47,7 +47,6 @@ export class VehiculoComponent implements OnInit {
 		this._VehiculoService.getVehiculo().subscribe(
 				response => {
           this.vehiculos = response.data;
-    console.log(this.vehiculos);
           
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();

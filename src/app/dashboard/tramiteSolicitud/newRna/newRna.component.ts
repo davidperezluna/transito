@@ -39,6 +39,9 @@ export class NewRnaComponent implements OnInit {
   public tramitePreasignacion=false;
   public tramiteMatriculaInicial=false;
   public tramite=false;
+  public sustrato=false;
+  
+  public cantidadSustrato = 1;
 
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
@@ -160,12 +163,35 @@ constructor(
   }
   
   onKeyValidateVehiculo(){
+    swal({
+      title: 'Buscando Vehiculo Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
     let token = this._loginService.getToken();
     this._tramiteFacturaService.getTramiteFacturaSelect(this.factura.numero).subscribe(
       response => {
          this.tramitesFacturas = response;
+
+         this.tramitesFacturas.forEach(tramiteFactura => {
+            if (tramiteFactura.tramite.sustrato) {
+              this.sustrato = true;
+              if(tramiteFactura.tramiteId == '12'){
+                this.cantidadSustrato = tramiteFactura.cantidad;
+              }
+            }
+          });
           this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
             response => {
+              swal.close();
               this.ciudadanosVehiculo = response.data;
               if (response.status == 'error' ) {
                 this.vehiculoSuccess=false;
@@ -177,6 +203,7 @@ constructor(
                     if (tramiteFactura.tramiteId == '56') {
                       this.tramitePreasignacion = tramiteFactura.value;
                     }
+                    
                   });
                   if (this.tramitePreasignacion) {
                       swal({

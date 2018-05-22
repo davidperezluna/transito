@@ -1,0 +1,93 @@
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-16 col-lg-16"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Asignar Sustrato
+                </h5>
+                <hr>
+                <div class="row justify-content-center container">
+                    <form #sustratoForm="ngForm" class="container"> 
+                        <div class="col-xs-16 col-lg-16">
+                            <label>Sustratos*</label>
+                            <ng-select [multiple]="false" [options]="sustratos" [(ngModel)]="sustratoSelected" required name="sustratoId">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-16 col-lg-16">
+                            <br>
+                            <label class="custom-control custom-checkbox" for="facturaSustrato" >
+                                <input type="checkbox" [(ngModel)]="estadoImpresion" name="estadoImpresion" class="custom-control-input"  id="facturaSustrato">
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">Impresión exitosa</span>
+                            </label>
+                        </div>
+                        <div class="col-xs-16 col-lg-16" *ngIf="estadoImpresion == true">
+                            <br>
+                            <label class="custom-control custom-checkbox" for="entregadao" >
+                                <input type="checkbox" [(ngModel)]="tarjetaEntregada" name="tarjetaEntregada" class="custom-control-input"  id="entregadao">
+                                <span class="custom-control-indicator"></span> 
+                                <span class="custom-control-description">Entregada</span>
+                            </label>
+                        </div>
+                        <!--tipo identificacion ciudadano -->
+                        <div class="col-xs-16 col-lg-16" *ngIf="tarjetaEntregada">
+                            <label>Identificación</label>
+                            <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
+                                <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                            <div class="has-danger" *ngIf="ciudadanoEncontrado === 3">
+                                <div class="form-control-feedback has-danger has-error">No se encontró la persona</div>
+                            </div>
+                        </div> 
+
+                        <!--si existe un ciudadano -->
+                        <div class="container row" *ngIf="ciudadanoEncontrado === 2 && tarjetaEntregada">
+                                <div class="col-xs-16 col-lg-16 row">
+                                    <hr>
+                                    <br>
+                                </div>
+                                <h5 class="container">
+                                    Resultados de búsqueda
+                                </h5>
+                                <table class="table " id="dataTables-example">
+                                    <tbody>
+                                        <tr class="odd">
+                                            <td>Tipo de identificación</td>
+                                            <td class="center"><p style="color: white;">{{ciudadano.tipoIdentificacion.nombre}}</p></td>
+                                            <td>Numero de identificación</td>
+                                            <td class="center"><p style="color: white;">{{ciudadano.identificacion}}</p></td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td>Primer nombre</td>
+                                            <td class="center"><p style="color: white;">{{ciudadano.primerNombre}}</p></td>
+                                            <td>Segundo nombre</td>
+                                            <td class="center"><p style="color: white;">{{ciudadano.segundoNombre}}</p></td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td>Primer apellido</td>
+                                            <td class="center"><p style="color: white;">{{ciudadano.primerApellido}}</p></td>
+                                            <td>Segundo apellido</td>
+                                            <td class="center"><p style="color: white;">{{ciudadano.segundoApellido}}</p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        <div class="col-xs-16 col-lg-16" *ngIf="estadoImpresion == false">
+                            <label>Descripción </label>
+                            <textarea class="form-control" placeholder="ingrese la descripción para anular el sustrato" [(ngModel)]="facturaSustrato.descripcion" required name="descripcion"></textarea>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="container">
+                <button (click)="enviarTramite()"  [disabled]="sustratoForm.invalid" class="btn btn-success pull-right">Aceptar</button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->

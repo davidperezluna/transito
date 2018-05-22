@@ -16,7 +16,6 @@ export class NewRnaCambioCombustibleComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() tramite: any = null;
     public errorMessage;
     public respuesta;
     public combustibles: any;

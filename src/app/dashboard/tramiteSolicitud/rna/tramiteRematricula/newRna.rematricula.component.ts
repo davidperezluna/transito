@@ -14,7 +14,6 @@ import swal from 'sweetalert2';
 export class NewRnaRematriculaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
-    @Input() tramite: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
