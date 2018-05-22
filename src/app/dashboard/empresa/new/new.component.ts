@@ -8,6 +8,7 @@ import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { SucursalService } from '../../../services/sucursal.service';
 
 import swal from 'sweetalert2';
  
@@ -19,6 +20,7 @@ export class NewEmpresaComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public empresa: Empresa;
 public errorMessage;
+public btnVisible=false;
 public respuesta;
 public municipios: any;
 public ciudadanos: any;
@@ -32,6 +34,8 @@ public tipoSociedadSelected: any;
 public tipoIdentificacionSelected: any;
 public municipioResidenciaSelected: any;
 public municipioNacimientoSelected: any;
+public formNewSucursal = false;
+public formIndexSucursal = true;
 // los que vienen desde el base de datos
 constructor(
   private _EmpresaService: EmpresaService,
@@ -154,10 +158,20 @@ constructor(
     }); 
   }
 
-  onNewSucursal(){
-    this.formNew = true;
-    this.formIndexSucursal = false;
-    this.tableSucursal.destroy();
+  readySucursal(){
+    this.formNewSucursal = false;
+    
   }
 
+  onNewSucursal(){
+    this.formNewSucursal = true;
+    this.btnVisible=true;
+    this.formIndexSucursal = false;
+    // this.table.destroy();
+  }
+  cancelarNewFormulario()
+{
+  this.btnVisible=false;
+  this.formNewSucursal=false
+}
 }

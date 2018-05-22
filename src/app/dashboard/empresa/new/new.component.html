@@ -4,7 +4,7 @@
             <div class="card-body ">
                 <h5 class="m-0">Nueva persona jurídica</h5>
                 <hr>
-                <form #formNew="ngForm">
+                <form  #formNew="ngForm">
                     <div class="row justify-content-center container">
                         <div class="form-group row">
                             <!-- informacion  especifica de la nueva empresa-->
@@ -137,9 +137,12 @@
                                 <button (click)="onNewSucursal()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Sucursal</span> <i class="ti-save ml-2"></i></button>
                               </div>
                             <div *ngIf ="formNewSucursal">
-                                <app-new-sucursal></app-new-sucursal>
+                                <app-new-sucursal (readySucursal)="readySucursal($event)" ></app-new-sucursal>
                             </div>
-                            
+
+                            <!-- <div class="btn-group pull-right">
+                                <button *ngIf="btnVisible" class="btn btn-primary" (click)="cancelarNewFormulario()">CancelAr</button>
+                            </div> -->
 
                             <!-- FIN SUCURSAL -->
                         </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Sucursal } from '../sucursal.modelo';
+import { Sucursal } from '../new/sucursal.modelo';
 import { SucursalService } from '../../../../services/sucursal.service';
 import { LoginService } from '../../../../services/login.service';
 import { DepartamentoService } from '../../../../services/departamento.service';
@@ -12,15 +12,17 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 export class NewSucursalComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
+@Output() readySucursal = new EventEmitter<any>();
 public sucursal: Sucursal;
 public errorMessage;
 public respuesta;
-
+public cerrarFormulario=true;
 public municipios: any;
-
-
 public municipioSelected: any;
+
+public btnVisible=false;
+public formNewSucursal = false;
+public formIndexSucursal = true;
 
 // los que vienen desde el base de datos
 constructor(
@@ -52,8 +54,12 @@ constructor(
 
    
   }
+
+  
+  
   onCancelar(){
-    this.ready.emit(true);
+    this.readySucursal.emit(true);
+   
   }
   // enviar a guarda
   onEnviar(){
@@ -66,7 +72,7 @@ constructor(
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+          this.readySucursal.emit(true);
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
@@ -90,5 +96,18 @@ constructor(
         }
     }); 
   }
+  // final del enviar
+
+  onNewSucursal(){
+    this.formNewSucursal = true;
+    this.btnVisible=true;
+    this.formIndexSucursal = false;
+    // this.table.destroy();
+  }
+  cancelarNewFormulario1()
+{
+  this.btnVisible=false;
+  this.formNewSucursal=false
+}
 
 }
