@@ -57,6 +57,12 @@ export class DepartamentoService {
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 
+
+	getDepartamentoPorPaisSelect(id){
+		
+		return this._http.get(this.url+"/"+id+"/select/departamentos/por/pais").map(res => res.json());
+	}
+
 	
 	
 }

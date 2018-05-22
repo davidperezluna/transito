@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class MunicipioService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/municipio";
+export class SucursalService {
+	public url = "http://192.169.218.194/~sednarino/transito/backend/web/sucursal";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getMunicipio(){
+	getSucursal(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(municipio,token){
+	register(sucursal,token){
 		
-		let json = JSON.stringify(municipio);
+		let json = JSON.stringify(sucursal);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteMunicipio(token,id){
+	deleteSucursal(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class MunicipioService {
 							  .map(res => res.json());
 	}
 
-	showMunicipio(token,id){
+	showSucursal(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,37 +42,24 @@ export class MunicipioService {
 
 	}
 
-	editMunicipio(municipio,token){
+	showNit(token,nit){
 
-		let json = JSON.stringify(municipio);
+		let json = JSON.stringify(nit);
 		let params = "json="+json+"&authorization="+token;
-		console.log(params);
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/show/nit", params, {headers: headers})
+		.map(res => res.json())					  
+ 
+	}
+
+	editSucursal(sucursal,token){
+
+		let json = JSON.stringify(sucursal);
+		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
 
 	}
-
-	getMunicipiosDep(departamento,token){
-
-		let json = JSON.stringify(departamento);
-		let params = "json="+json+"&authorization="+token;
-		console.log(params);
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/mun/dep", params, {headers: headers})
-							  .map(res => res.json());
-
-	}
-
-	getMunicipioSelect(){
-		
-		return this._http.get(this.url+"/select").map(res => res.json());
-	}
-
-	getMunicipioPorDepartamentoSelect(id){
-		
-		return this._http.get(this.url+"/"+id+"/select/municipios/por/departamento").map(res => res.json());
-	}
-
 	
 }

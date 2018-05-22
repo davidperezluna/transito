@@ -6,7 +6,7 @@ export class Empresa{
 		public nit: string,
 		public dv: number,
 		public capitalPagado: string,
-		public patrimonioLiquido: string,
+		public capitalLiquido: string,
 		public empresaPrestadora: boolean,
 		public certificadoExistencial: string,
 		public tipoSociedadId: number,
@@ -17,6 +17,8 @@ export class Empresa{
 		public direccion: string,
 		public correo: string,
 		public direccionTrabajo: string,
+		public nroRegistroMercantil: string,
 		public estado: number,
+		public fechaVencimientoRegistroMercantil:string,
 	){}
 }

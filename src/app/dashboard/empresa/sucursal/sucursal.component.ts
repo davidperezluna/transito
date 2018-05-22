@@ -1,52 +1,51 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PeticionarioService } from '../../services/peticionario.service';
-import {LoginService} from '../../services/login.service';
+import { SucursalService } from '../../services/sucursal.service';
+import { LoginService } from '../../services/login.service';
+import { Sucursal } from './sucursal.modelo';
+// import { NewSucursalComponent } from './new/new.component';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './gestionDocumentos.component.html'
+  templateUrl: './sucursal.component.html',
+  // providers: [NewSucursalComponent],
 })
-export class GestionDocumentosComponent implements OnInit {
+export class SucursalComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public peticionarios;
+	public sucursals;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public gestionDocumentos:any; 
+  public sucursal: Sucursal;
 
   constructor(
-		private _PeticionarioService: PeticionarioService,
+		private _SucursalService: SucursalService,
 		private _loginService: LoginService,
     ){}
     
   ngOnInit() {
     swal({
-      title: '<i>Para Tener En Cuenta</i>',
-      type: 'info',
-      html:
-        '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN EN INTERÉS GENERAL Y PARTICULAR:</b>'+
-        ' El que tiene toda persona para presentar solicitudes respetuosas ante las autoridades consagrado en el articulo'+
-        '23 de la constitucion política como derecho fundamental. Termino de respuesta 15 días</p>'+
-        '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN DE INFORMACIÓN:</b> Petición para que el funcionario de a conocer como ha actuado en un caso determinado o permita el '+
-        'examen de los documentos públicos o expida copia de los mismos. Termino para Resolver 10 días </p>',
-      showCloseButton: true,
-      focusConfirm: false,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> OK!',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-      '<i class="fa fa-thumbs-down"></i>',
-      cancelButtonAriaLabel: 'Thumbs down',
+      title: 'Cargando Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
     })
-    
-		this._PeticionarioService.getPeticionario().subscribe(
+		this._SucursalService.getSucursal().subscribe(
 				response => {
-          this.peticionarios = response.data;
+          this.sucursals = response.data;
+          console.log(this.sucursals);
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -63,8 +62,8 @@ export class GestionDocumentosComponent implements OnInit {
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
+      responsive: false,
+      pageLength: 6,
       sPaginationType: 'full_numbers',
       oLanguage: {
            oPaginate: {
@@ -91,7 +90,7 @@ export class GestionDocumentosComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteGestionDocumentos(id:any){
+  deleteSucursal(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -105,7 +104,7 @@ export class GestionDocumentosComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._PeticionarioService.deletePeticionario(token,id).subscribe(
+        this._SucursalService.deleteSucursal(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -132,8 +131,8 @@ export class GestionDocumentosComponent implements OnInit {
     })
   }
 
-  editGestionDocumentos(gestionDocumentos:any){
-    this.gestionDocumentos = gestionDocumentos;
+  editSucursal(sucursal:any){
+    this.sucursal = sucursal;
     this.formEdit = true;
     this.formIndex = false;
   }

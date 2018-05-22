@@ -43,6 +43,6 @@ export class PaisService {
 	}
 
 	getPaisSelect(){
-		return this._http.get(this.url+"/select").map(res => res.json());
+		return this._http.get(this.url+"/select/pais").map(res => res.json());
 	}
 }

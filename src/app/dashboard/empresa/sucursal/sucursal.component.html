@@ -2,7 +2,7 @@
   <div  class="row align-items-center justify-content-between">
     <div class="col-11 col-sm-12 page-title">
       <h3>Módulo RNC</h3>
-      <p>Inscripción de persona jurídica</p> 
+      <p>Agregar sucursal de persona jurídica</p> 
     </div>
     <div class="col text-right ">
       <div class="btn-group pull-right">
@@ -14,7 +14,7 @@
     <div class="col-sm-16">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Personas jurídica <small></small></h5>
+            <h5 class="card-title">Sucursal personas jurídica <small></small></h5>
           </div>
           <div class="card-body responsive">
           	<div class="table-responsive">
@@ -23,9 +23,9 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
-                    <th>Tipo de sociedad</th>
+                    <th>Sigla</th>
                     <th>Municipio</th>                    
-                    <th>NIT</th>
+                    <th>Direccion</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>
                     <th>Correo</th>                    
@@ -33,31 +33,31 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let empresa of empresas; let i = index">
-                  <td>{{ empresa.id }}</td>
+                <tr class="odd" *ngFor="let sucursal of sucursals; let i = index">
+                  <td>{{ sucursal.id }}</td>
                   <td>
-                    {{ empresa.nombre }}
+                    {{ sucursal.nombre }}
                   </td>
                   <td>  
-                    {{ empresa.tipoSociedad.nombre }}                  
+                    {{ sucursal.tipoSociedad.nombre }}                  
                   </td>
                   <td>
-                    {{ empresa.municipio.nombre }}
+                    {{ sucursal.municipio.nombre }}
                   </td>
                   <td>
-                      {{ empresa.nit }}
+                      {{ sucursal.nit }}
                   </td>
                   <td>
-                      {{ empresa.telefono }}
+                      {{ sucursal.telefono }}
                   </td>
                   <td>
-                      {{ empresa.direccion }}
+                      {{ sucursal.direccion }}
                   </td>
                   <td>
-                      {{ empresa.correo }}
+                      {{ sucursal.correo }}
                   </td>
-                  <td><button (click)="editEmpresa(empresa)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
-                    <button (click)="deleteEmpresa(empresa.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
+                  <td><button (click)="editEmpresa(sucursal)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
+                    <button (click)="deleteEmpresa(sucursal.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>
@@ -67,6 +67,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [empresa]="empresa" (ready)="ready($event)"></app-edit>
-    <app-new-empresa *ngIf='formNew' (ready)="ready($event)"></app-new-empresa>
+    <app-edit *ngIf='formEdit' [sucursal]="sucursal" (ready)="ready($event)"></app-edit>
+    <app-new-sucursal *ngIf='formNew' (ready)="ready($event)"></app-new-sucursal>
 </div>

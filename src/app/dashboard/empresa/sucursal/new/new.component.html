@@ -4,7 +4,7 @@
             <div class="card-body ">
                 <h5 class="m-0">Nueva persona jurídica</h5>
                 <hr>
-                <form #formNew="ngForm">
+                <form #formNewSucursal="ngForm">
                     <div class="row justify-content-center container">
                         <div class="form-group row">
                             <!-- informacion  especifica de la nueva empresa-->
@@ -133,14 +133,7 @@
                             <!-- FIN REPRESENTANTE -->
                             <!-- SUCURSAL  -->
                             <h5 class="col-xs-16 col-lg-16">Agregar sucursal</h5>
-                            <div class="btn-group pull-right">
-                                <button (click)="onNewSucursal()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Sucursal</span> <i class="ti-save ml-2"></i></button>
-                              </div>
-                            <div *ngIf ="formNewSucursal">
-                                <app-new-sucursal></app-new-sucursal>
-                            </div>
-                            
-
+                            <button>Sucursal</button>
                             <!-- FIN SUCURSAL -->
                         </div>
                     </div>
@@ -149,7 +142,7 @@
                             <i class="fa fa-times"></i>
                             Cancelar
                         </button>
-                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary" type="button">
+                        <button (click)="onEnviar()" [disabled]="formNewSucursal.invalid" class="btn btn-outline-primary" type="button">
                             <i class="fa fa-floppy-o"></i>
                             Enviar
                         </button>

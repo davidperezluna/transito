@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EmpresaComponent } from './empresa.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import {EmpresaService} from '../../services/empresa.service';
+
 import {TipoEmpresaService} from '../../services/tipoEmpresa.service';
 import {TipoSociedadService} from '../../services/tipoSociedad.service';
 import {MunicipioService} from '../../services/municipio.service';
