@@ -6,16 +6,28 @@
             <hr> 
             <div class="row justify-content-center">
                 <div class="col-md-10 ">
-                    <div class="form-group row">
-                    <div class="col-lg-8 col-md-8">
-                        <label>Nombre*</label>
-                        <input class="form-control" [(ngModel)]="clase.nombre" name="nombre" placeholder="" type="text" required>
-                    </div>
-                     <div class="col-lg-8 col-md-8">
-                        <label>Codigo MT*</label>
-                        <input class="form-control" [(ngModel)]="clase.codigoMt" name="codigoMt" placeholder="" type="text" required>
-                    </div>
-                    </div>
+                    <div class="container">
+                        <div class="form-group row">
+                        <div class="col-lg-5 col-md-5">
+                            <label>Nombre*</label>
+                            <input class="form-control" [(ngModel)]="clase.nombre" name="nombre" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Codigo MT*</label>
+                            <input class="form-control" [(ngModel)]="clase.codigoMt" name="codigoMt" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-5 col-md-5">
+                            <label>Modulo*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="modulos"
+                                [(ngModel)]="moduloSelected"
+                                required
+                                name="moduloId">
+                            </ng-select>
+                        </div>
+                        </div>
+                    </div> 
                 </div>   
         </div>
             <div class="card-footer">

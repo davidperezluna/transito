@@ -45,4 +45,8 @@ export class TramiteService {
 	getTramiteSelect() {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
-}
+
+	getTramitePorModuloSelect(id){
+		return this._http.get(this.url+"/"+id+"/select/tramites/por/modulo").map(res => res.json());
+	}
+} 

@@ -112,11 +112,11 @@ constructor(
       if (tramitePrecio.anio == this.parametro.anio) {
         this.array = [
           tramitePrecio.anio,
-          tramitePrecio.tipoVehiculo.nombre,
+          tramitePrecio.clase.nombre,
           tramitePrecio.tramite.nombre,
           tramitePrecio.smldv,
           valor,
-          tramitePrecio.valorEstampilla,
+          tramitePrecio.modulo.nombre,
           tramitePrecio.id,
         ]
         this.tramitesPrecios.push(this.array);

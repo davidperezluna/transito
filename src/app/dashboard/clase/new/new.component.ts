@@ -2,6 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {Clase} from '../clase.modelo';
 import {ClaseService} from '../../../services/clase.service';
 import {LoginService} from '../../../services/login.service';
+import {ModuloService} from '../../../services/modulo.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -13,20 +14,39 @@ export class NewComponent implements OnInit {
 public clase: Clase;
 public errorMessage;
 public respuesta;
+public modulos:any;
+public moduloSelected:any;
 
 constructor(
   private _ClaseService: ClaseService,
   private _loginService: LoginService,
+  private _moduloService: ModuloService,
   ){}
 
   ngOnInit() {
-    this.clase = new Clase(null,null,null);
+    this.clase = new Clase(null,null,null,null);
+
+    this._moduloService.getModuloSelect().subscribe(
+      response => {
+        this.modulos = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error; 
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
   }
   onCancelar(){
     this.ready.emit(true);
   }
   onEnviar(){
     let token = this._loginService.getToken();
+    this.clase.moduloId = this.moduloSelected;
 
 		this._ClaseService.register(this.clase,token).subscribe(
 			response => {

@@ -23,6 +23,7 @@
                 <tr>
                   <th>Id</th>
                   <th>Nombre</th>
+                  <th>Modulo</th>
                   <th>Codigo Mt</th>
                   <th>Acciones</th>
                 </tr>
@@ -31,6 +32,7 @@
                 <tr class="odd" *ngFor="let clase of clases; let i = index">
                   <td >{{clase.id}}</td>
                   <td >{{clase.nombre}}</td>
+                  <td >{{clase.modulo?.nombre}}</td>
                   <td >{{clase.codigoMt}}</td>
                   <td><button (click)="editClase(clase)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteClase(clase.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
