@@ -22,7 +22,7 @@ public modulos:any;
 public tramiteSelected:any;
 public moduloSelected:any;
 public vehiculoTipoSelected:any;
-public claseSelected:any;
+public claseSelected=null;
 
 constructor(
   private _TramitePrecioService: TramitePrecioService,
@@ -33,6 +33,7 @@ constructor(
   ){}
 
   ngOnInit() {
+    this.claseSelected=null;
     this.tramitePrecio = new TramitePrecio(null,null,null,null,null,null,null);
 
     this._moduloService.getModuloSelect().subscribe(
@@ -58,9 +59,12 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.tramitePrecio.tramiteId = this.tramiteSelected;
-    this.tramitePrecio.claseId = this.claseSelected;
+
+    if (this.claseSelected) {
+      this.tramitePrecio.claseId = this.claseSelected;
+    }
+    console.log(this.claseSelected);
     this.tramitePrecio.moduloId = this.moduloSelected;
-    
 		this._TramitePrecioService.register(this.tramitePrecio,token).subscribe(
 			response => {
         this.respuesta = response;

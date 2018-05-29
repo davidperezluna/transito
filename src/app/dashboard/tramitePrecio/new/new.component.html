@@ -26,16 +26,6 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-lg-8 col-md-8">
-                                <label>Clase*</label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="clases"
-                                    [(ngModel)]="claseSelected"
-                                    required
-                                    name="claseId">
-                                </ng-select>
-                            </div>
-                            <div class="col-lg-8 col-md-8">
                                 <label>Tramite*</label>
                                 <ng-select
                                     [multiple]="false"
@@ -43,6 +33,15 @@
                                     [(ngModel)]="tramiteSelected"
                                     required
                                     name="tramiteId">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <label>Clase*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="clases"
+                                    [(ngModel)]="claseSelected"
+                                    name="claseId">
                                 </ng-select>
                             </div>
                         </div>

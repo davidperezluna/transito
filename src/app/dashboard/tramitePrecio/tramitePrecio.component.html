@@ -36,7 +36,7 @@
                 <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
                   <td >{{tramitePrecio.id}}</td>
                   <td >{{tramitePrecio.anio}}</td>
-                  <td >{{tramitePrecio.clase.nombre}}</td>
+                  <td >{{tramitePrecio.clase?.nombre}}</td>
                   <td >{{tramitePrecio.tramite.nombre}}</td>
                   <td >{{tramitePrecio.smldv}}</td>
                   <td >{{tramitePrecio.modulo.nombre}}</td>

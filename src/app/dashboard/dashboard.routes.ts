@@ -32,6 +32,7 @@ import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.rout
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { TipoDocumentoRoutes } from './tipoDocumento/tipoDocumento.routes';
+import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
 import { GestionDocumentosRoutes } from './gestionDocumentos/gestionDocumentos.routes';
 import { EmpresaRoutes } from './empresa/empresa.routes';
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
@@ -79,6 +80,7 @@ export const DashboardRoutes: Route[] = [
         ...EmpresaRoutes,
         // ...SucursalRoutes,
         ...GestionDocumentosRoutes,
-        ...TramitePrecioRoutes,      ]
+        ...TramitePrecioRoutes, 
+        ...ConceptoParametroRoutes     ]
     }
 ];

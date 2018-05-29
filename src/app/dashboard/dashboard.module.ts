@@ -10,6 +10,7 @@ import { LineaModule } from './linea/linea.module';
 import { BancoModule } from './banco/banco.module';
 import { ClaseModule } from './clase/clase.module';
 import { ColorModule } from './color/color.module';
+import { ConpetoParametroModule } from './conceptoParametro/conceptoParametro.module';
 import { CombustibleModule } from './combustible/combustible.module';
 import { ConsumibleModule } from './consumible/consumible.module';
 import { ModalidadModule } from './modalidad/modalidad.module';
@@ -51,7 +52,8 @@ import {RightsidebarComponent} from '../shared/index';
 
 
 @NgModule({
-    imports: [
+  imports: [
+      ConpetoParametroModule,
       CommonModule,
       RouterModule,
       Ng2BootstrapModule.forRoot(),
@@ -90,7 +92,7 @@ import {RightsidebarComponent} from '../shared/index';
       GestionDocumentosModule,
       EmpresaModule,
       // SucursalModule,
-      TramitePrecioModule
+      TramitePrecioModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
