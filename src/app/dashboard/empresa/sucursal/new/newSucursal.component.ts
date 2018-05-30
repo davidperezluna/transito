@@ -1,5 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { Sucursal } from '../new/sucursal.modelo';
+// import { Empresa } from '../new/empresa.modelo';
+
 import { SucursalService } from '../../../../services/sucursal.service';
 import { LoginService } from '../../../../services/login.service';
 import { DepartamentoService } from '../../../../services/departamento.service';
@@ -13,12 +15,16 @@ import swal from 'sweetalert2';
 })
 export class NewSucursalComponent implements OnInit {
 @Output() readySucursal = new EventEmitter<any>();
+@Input() empresa:any = null;
 public sucursal: Sucursal;
 public errorMessage;
 public respuesta;
 public cerrarFormulario=true;
 public municipios: any;
 public municipioSelected: any;
+
+
+
 
 public btnVisible=false;
 public formNewSucursal = false;
@@ -33,9 +39,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.sucursal = new Sucursal(null,null,null,null,null,null,null,null,null,null);
-
-   
+    this.sucursal = new Sucursal(null,null,null,null,null,null,null,null,null,null,null);
 
     this._municipioService.getMunicipioSelect().subscribe(
       response => {
@@ -48,24 +52,23 @@ constructor(
           alert('Error en la petición');
         }
       }
-    );
-
-    
-
-   
-  }
-
-  
-  
+    );   
+  } 
+  // la función cancelar
   onCancelar(){
     this.readySucursal.emit(true);
    
   }
   // enviar a guarda
   onEnviar(){
-    let token = this._loginService.getToken();
+
     this.sucursal.municipioId = this.municipioSelected;
+    this.sucursal.empresaId = this.empresa.id;
     
+    // let token = this._loginService.getToken();
+
+
+  let token = this._loginService.getToken();
 
     this._SucursalService.register(this.sucursal,token).subscribe(
       response => {

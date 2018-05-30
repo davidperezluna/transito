@@ -69,6 +69,7 @@ constructor(
   onCancelar(){
     this.readyShow.emit(true);
   }
+  
   onTramiteSelect(valor:any,eve: any){
     if (eve.target.checked) {
       this.factura.valorBruto = parseInt(this.factura.valorBruto) + parseInt(valor);

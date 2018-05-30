@@ -143,8 +143,8 @@ constructor(
   }
   changedTramiteFactura(e){
     let token = this._loginService.getToken();
-    this._tramiteFacturaService.showTramiteFactura(token,e).subscribe(
-      response => {
+    this._tramiteFacturaService.showTramiteFactura(token,e).subscribe(response => 
+      {
         this.respuesta = response;
         this.tramiteSelected = this.respuesta.data.id;
         console.log(this.respuesta.data.id);
@@ -156,7 +156,6 @@ constructor(
             alert("Error en la petición");
           }
         }
-
       }); 
 
 

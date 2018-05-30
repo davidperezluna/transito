@@ -211,7 +211,12 @@
                         <label>Tramite
                             <span class="text-danger">*</span>
                         </label>
-                        <ng-select [multiple]="false" [options]="tramitesFactura" [(ngModel)]="tramiteFacturaSelected" name="tramiteFacturaId" required>
+                        <ng-select 
+                        [multiple]="false" 
+                        [options]="tramitesFactura" 
+                        [(ngModel)]="tramiteFacturaSelected" 
+                        name="tramiteFacturaId" 
+                        required>
                         </ng-select>
                     </div>
                     <!--si hay numero de sustrato -->

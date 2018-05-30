@@ -36,6 +36,8 @@ public municipioResidenciaSelected: any;
 public municipioNacimientoSelected: any;
 public formNewSucursal = false;
 public formIndexSucursal = true;
+public tablaSucursal = false;
+public sucursales:any[]= [];
 // los que vienen desde el base de datos
 constructor(
   private _EmpresaService: EmpresaService,
@@ -128,7 +130,12 @@ constructor(
     this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.empresa.ciudadanoId = this.ciudadanoSelected;
 
-    this._EmpresaService.register(this.empresa,token).subscribe(
+    let datos = {
+      'empresa': this.empresa,
+      'sucursales': this.sucursales
+  };
+
+    this._EmpresaService.register(datos,token).subscribe(
       response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -158,15 +165,34 @@ constructor(
     }); 
   }
 
-  readySucursal(){
+  readySucursal(sucursal:any){
+
+    this.sucursales.push
+    (
+      {
+        'nombre': sucursal.nombre,
+        'sigla': sucursal.sigla,
+        'celular': sucursal.celular,
+        'direccion': sucursal.direccion,
+        'telefono': sucursal.telefono,
+        'correo': sucursal.correo,
+        'fax': sucursal.fax,
+        'municipioId': sucursal.municipioId,
+      
+      }
+    );
+
+    this.tablaSucursal=true;
     this.formNewSucursal = false;
+
+    console.log(this.sucursales);
     
   }
 
   onNewSucursal(){
     this.formNewSucursal = true;
     this.btnVisible=true;
-    this.formIndexSucursal = false;
+    // this.formIndexSucursal = false;
     // this.table.destroy();
   }
   cancelarNewFormulario()
@@ -174,4 +200,16 @@ constructor(
   this.btnVisible=false;
   this.formNewSucursal=false
 }
+
+  deleteSucursal(sucursal:any)
+  {
+    this.sucursales =  this.sucursales.filter(h => h !== sucursal);
+
+    if (this.sucursales.length === 0) {
+      this.tablaSucursal=false;
+    }
+  }
+
+ 
+
 }

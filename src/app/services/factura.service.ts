@@ -12,7 +12,6 @@ export class FacturaService {
 	constructor(private _http: Http){}
 
 	getFactura(){
-		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 

@@ -10,6 +10,7 @@ export class Sucursal{
 		public correo: string,
 		public fax: number,
 		public estado: number,
+		public empresaId: number,
 		
 				
 	){}

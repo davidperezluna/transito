@@ -19,6 +19,7 @@ export class EmpresaComponent implements OnInit {
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
+  public formShow = false;
   public table:any; 
   public empresa: Empresa;
 
@@ -87,6 +88,7 @@ export class EmpresaComponent implements OnInit {
         this.formNew = false;
         this.formEdit = false;
         this.formIndex = true;
+        this.formShow = false;
         this.ngOnInit();
       }
   }
@@ -125,8 +127,6 @@ export class EmpresaComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }
@@ -135,6 +135,16 @@ export class EmpresaComponent implements OnInit {
     this.empresa = empresa;
     this.formEdit = true;
     this.formIndex = false;
+  }
+
+  getSucursal(empresa:any){
+    this.empresa = empresa;
+    this.formShow = true;
+    this.formIndex = false;
+  }
+
+  onNewSucursal(){
+    
   }
 
 }
