@@ -1,8 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Clase} from '../clase.modelo';
-import {ClaseService} from '../../../services/clase.service';
+import {ConceptoParametro} from '../conceptoParametro.modelo';
+import {ConceptoParametroService} from '../../../services/conceptoParametro.service';
 import {LoginService} from '../../../services/login.service';
-import {ModuloService} from '../../../services/modulo.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -11,49 +10,31 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public clase: Clase;
+public conceptoParametro: ConceptoParametro;
 public errorMessage;
 public respuesta;
-public modulos:any;
-public moduloSelected:any;
 
 constructor(
-  private _ClaseService: ClaseService,
+  private _ConceptoParametroService: ConceptoParametroService,
   private _loginService: LoginService,
-  private _moduloService: ModuloService,
   ){}
 
   ngOnInit() {
-    this.clase = new Clase(null,null,null,null);
-
-    this._moduloService.getModuloSelect().subscribe(
-      response => {
-        this.modulos = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error; 
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
+    this.conceptoParametro = new ConceptoParametro(null,null,null);
   }
   onCancelar(){
     this.ready.emit(true);
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.clase.moduloId = this.moduloSelected;
 
-		this._ClaseService.register(this.clase,token).subscribe(
+		this._ConceptoParametroService.register(this.conceptoParametro,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
+          
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
@@ -63,7 +44,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El clase '+ this.clase.nombre +' ya se encuentra registrado',
+            text: 'El conceptoParametro '+ this.conceptoParametro.nombre +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

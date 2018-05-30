@@ -108,17 +108,30 @@ constructor(
     }
     
     this.tramitePrecios.forEach(tramitePrecio => {
-      let valor = parseFloat((((parseInt(this.parametro.valor) / 30) * tramitePrecio.smldv * parseFloat(this.parametro.porcentaje)) + this.valorConcepto + tramitePrecio.valorEstampilla )).toFixed(2);
+      let valor = ((parseInt(this.parametro.valor) / 30) * tramitePrecio.smldv * parseFloat(this.parametro.porcentaje) + this.valorConcepto ).toFixed(2);
+     
       if (tramitePrecio.anio == this.parametro.anio) {
-        this.array = [
-          tramitePrecio.anio,
-          tramitePrecio.tipoVehiculo.nombre,
-          tramitePrecio.tramite.nombre,
-          tramitePrecio.smldv,
-          valor,
-          tramitePrecio.valorEstampilla,
-          tramitePrecio.id,
-        ]
+        if (tramitePrecio.clase) {
+          this.array = [
+            tramitePrecio.anio,
+            tramitePrecio.clase.nombre,
+            tramitePrecio.tramite.nombre,
+            tramitePrecio.smldv,
+            valor,
+            tramitePrecio.modulo.nombre,
+            tramitePrecio.id,
+          ]
+        }else{
+          this.array = [
+            tramitePrecio.anio,
+            null,
+            tramitePrecio.tramite.nombre,
+            tramitePrecio.smldv,
+            valor,
+            tramitePrecio.modulo.nombre,
+            tramitePrecio.id,
+          ]
+        }
         this.tramitesPrecios.push(this.array);
       }
     });

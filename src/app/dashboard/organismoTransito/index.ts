@@ -1,5 +1,5 @@
 /**
 *  This barrel file provides the export for the lazy loaded HomeComponent.
 */
-export * from './organismotransito.component';
-export * from './organismotransito.routes';
+export * from './organismoTransito.component';
+export * from './organismoTransito.routes';

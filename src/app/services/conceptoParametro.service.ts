@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class ClaseService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/clase";
+export class ConceptoParametroService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/conceptoparametro";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getClase(){
+	getConceptoParametro(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(clase,token){
+	register(conceptoParametro,token){
 		
-		let json = JSON.stringify(clase);
+		let json = JSON.stringify(conceptoParametro);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteClase(token,id){
+	deleteConceptoParametro(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class ClaseService {
 							  .map(res => res.json());
 	}
 
-	showClase(token,id){
+	showConceptoParametro(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,9 +42,9 @@ export class ClaseService {
 
 	}
 
-	editClase(clase,token){
+	editConceptoParametro(conceptoParametro,token){
 
-		let json = JSON.stringify(clase);
+		let json = JSON.stringify(conceptoParametro);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,13 +52,9 @@ export class ClaseService {
 
 	}
 
-	getClaseSelect(){
+	getConceptoParametroSelect(){
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
-	}
-
-	getClasePorModuloSelect(id){
-		return this._http.get(this.url+"/"+id+"/select/clases/por/modulo").map(res => res.json());
 	}
 	
 }

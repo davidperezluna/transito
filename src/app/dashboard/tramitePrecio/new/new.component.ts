@@ -3,7 +3,8 @@ import {TramitePrecio} from '../tramitePrecio.modelo';
 import {TramitePrecioService} from '../../../services/tramitePrecio.service';
 import {LoginService} from '../../../services/login.service';
 import {TramiteService} from '../../../services/tramite.service';
-import {TipoVehiculoService} from '../../../services/tipoVehiculo.service';
+import {ModuloService} from '../../../services/modulo.service';
+import {ClaseService} from '../../../services/clase.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -16,47 +17,41 @@ public tramitePrecio: TramitePrecio;
 public errorMessage;
 public respuesta;
 public tramites:any;
-public vehiculoTipos:any;
+public clases:any;
+public modulos:any;
 public tramiteSelected:any;
+public moduloSelected:any;
 public vehiculoTipoSelected:any;
+public claseSelected=null;
 
 constructor(
   private _TramitePrecioService: TramitePrecioService,
   private _loginService: LoginService,
   private _tramiteService: TramiteService,
-  private _tipoVehiculoService: TipoVehiculoService,
+  private _claseService: ClaseService,
+  private _moduloService: ModuloService,
   ){}
 
   ngOnInit() {
+    this.claseSelected=null;
     this.tramitePrecio = new TramitePrecio(null,null,null,null,null,null,null);
 
-    this._tramiteService.getTramiteSelect().subscribe(
-        response => {
-          this.tramites = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
+    this._moduloService.getModuloSelect().subscribe(
+      response => {
+        this.modulos = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
         }
-      );
+      }
+    );
 
-    this._tipoVehiculoService.getTipoVehiculoSelect().subscribe(
-        response => {
-          this.vehiculoTipos = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
 
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
+   
   }
   onCancelar(){
     this.ready.emit(true);
@@ -64,13 +59,15 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.tramitePrecio.tramiteId = this.tramiteSelected;
-    this.tramitePrecio.tipoVehiculoId = this.vehiculoTipoSelected;
-    
-    console.log(this.tramitePrecio);
+
+    if (this.claseSelected) {
+      this.tramitePrecio.claseId = this.claseSelected;
+    }
+    console.log(this.claseSelected);
+    this.tramitePrecio.moduloId = this.moduloSelected;
 		this._TramitePrecioService.register(this.tramitePrecio,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
@@ -97,6 +94,39 @@ constructor(
 				}
 
 		}); 
+  }
+
+  changedModulo(e){
+
+    if (e) {
+      this._tramiteService.getTramitePorModuloSelect(this.moduloSelected).subscribe(
+        response => {
+          this.tramites = response;
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._claseService.getClasePorModuloSelect(this.moduloSelected).subscribe(
+          response => { 
+            this.clases = response;
+          }, 
+          error => {
+            this.errorMessage = <any>error;
+  
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+    }
+
   }
 
 }

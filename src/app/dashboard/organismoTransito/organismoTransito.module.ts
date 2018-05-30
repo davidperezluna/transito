@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrganismoTransitoComponent } from './organismotransito.component';
+import { OrganismoTransitoComponent } from './organismoTransito.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import {OrganismoTransitoService} from '../../services/organismoTransito.service';
 
