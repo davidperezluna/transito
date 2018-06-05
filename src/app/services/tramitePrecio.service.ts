@@ -25,7 +25,7 @@ export class TramitePrecioService {
 	deleteTramitePrecio(token, id) {
 		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/delete", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/" + id + "/delete/tramite/precio", params, { headers: headers }).map(res => res.json());
 	}
 
 	showTramitePrecio(token, id) {

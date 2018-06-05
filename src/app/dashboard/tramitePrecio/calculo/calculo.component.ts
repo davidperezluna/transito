@@ -1,5 +1,4 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Parametro } from './parametro.modelo';
 import { ParametroService } from '../../../services/parametro.service';
 import { LoginService } from '../../../services/login.service';
 import {ConceptoParametroService} from '../../../services/conceptoParametro.service';
@@ -10,13 +9,12 @@ import {TramitePrecioService} from '../../../services/tramitePrecio.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-new-smlmv',
-  templateUrl: './smlmv.component.html'
+  selector: 'app-new-calculo',
+  templateUrl: './calculo.component.html'
 })
-export class NewSmlmvComponent implements OnInit {
+export class CalculoComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() tramitePrecios:any = null;
-public parametro: Parametro;
 public errorMessage;
 public respuesta;
 public table:any; 
@@ -31,7 +29,6 @@ public tramitesPrecios:any[]= [];
 public conceptoParametroTramites:any[]= [];
 public conceptos:any;
 
-  itemStringsLeft: any[] = [];
   itemStringsRight: any[] = [];  
 
 constructor(
@@ -45,7 +42,6 @@ constructor(
   
 
   ngOnInit() {
-    this.parametro = new Parametro(null,null,null,null,null);
 
     this._ConceptoParametroTramiteService.getConceptoParametroTramite().subscribe(
       response => {
@@ -83,7 +79,13 @@ constructor(
       response => {
         this.tramitePrecios = response.data;
         this.tramitePrecios.forEach(tramitePrecio => {
-        this.itemStringsLeft.push(tramitePrecio.nombre);
+        let array = {
+          'anio':tramitePrecio.anio,
+          'nombre':tramitePrecio.nombre,
+          'valor':tramitePrecio.valor,
+          'valorNuevo':tramitePrecio.valor,
+        }  
+        this.tramitesPrecios.push(array);
         });
         this.listado = true;
       }, 
@@ -120,39 +122,41 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-      let datos = {
-          'trmites': this.itemStringsRight,
-          'concepto': this.conceptoSelected
-      };
-		this._ConceptoParametroTramiteService.register(datos,token).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.table.destroy();
-          this.ngOnInit();
-          swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El parametro '+  +' ya se encuentra registrado',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
 
-		}); 
+    console.log(this.tramitesPrecios);
+    //   let datos = {
+    //       'trmites': this.itemStringsRight,
+    //       'concepto': this.conceptoSelected
+    //   };
+		// this._ConceptoParametroTramiteService.register(datos,token).subscribe(
+		// 	response => {
+    //     this.respuesta = response;
+    //     if(this.respuesta.status == 'success'){
+    //       this.table.destroy();
+    //       this.ngOnInit();
+    //       swal({
+    //         title: 'Perfecto!',
+    //         text: 'El registro se ha registrado con exito',
+    //         type: 'success',
+    //         confirmButtonText: 'Aceptar'
+    //       })
+    //     }else{
+    //       swal({
+    //         title: 'Error!',
+    //         text: 'El parametro '+  +' ya se encuentra registrado',
+    //         type: 'error',
+    //         confirmButtonText: 'Aceptar'
+    //       })
+    //     }
+		// 	error => {
+		// 			this.errorMessage = <any>error;
+		// 			if(this.errorMessage != null){
+		// 				console.log(this.errorMessage);
+		// 				alert("Error en la petición");
+		// 			}
+		// 		}
+
+		// }); 
   }
   newConcepto(){
     this.conceptoForm = true;
@@ -196,7 +200,6 @@ constructor(
               }
             }
           );
-
         
       }
     })

@@ -6,6 +6,5 @@ export class TramitePrecio{
 		public claseId:number,
 		public valor:string,
 		public anio:string,
-		public smldv:string,
 	){}
 }

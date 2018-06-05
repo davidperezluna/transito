@@ -6,8 +6,9 @@
     </div>
     <div class="col text-right ">
       <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-        <button (click)="onNewSmlmv()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">SMLMV</span> <i class="ti-save ml-2"></i></button>
+        <button (click)="onNew()" class="btn btn-outline-success  btn-round " style="margin-right: 10px;" data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+        <button (click)="onNewSmlmv()" class="btn btn-outline-success  btn-round " style="margin-right: 10px;" data-target="#themepicker" data-toggle="modal"><span class="text">Conceptos</span> <i class="ti-save ml-2"></i></button>
+        <button (click)="onNewCalculo()" class="btn btn-outline-success  btn-round " style="margin-right: 10px;" data-target="#themepicker" data-toggle="modal"><span class="text">Calcular</span> <i class="ti-save ml-2"></i></button>
       </div>
     </div>
     
@@ -24,9 +25,8 @@
                 <tr>
                     <th>Id</th>
                     <th>Año</th>
-                    <th>Clase</th>
+                    <th>Nombre</th>
                     <th>Tramite</th>
-                    <th>SMLDV</th>
                     <th>Modulo</th>
                     <th>Valor</th>
                     <th>Acciones</th>
@@ -36,9 +36,8 @@
                 <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
                   <td >{{tramitePrecio.id}}</td>
                   <td >{{tramitePrecio.anio}}</td>
-                  <td >{{tramitePrecio.clase?.nombre}}</td>
+                  <td >{{tramitePrecio.nombre}}</td>
                   <td >{{tramitePrecio.tramite.nombre}}</td>
-                  <td >{{tramitePrecio.smldv}}</td>
                   <td >{{tramitePrecio.modulo.nombre}}</td>
                   <td >{{tramitePrecio.valor}}</td>
                   <td><button (click)="editTramitePrecio(tramitePrecio)" class="btn btn-outline-info" type="button">Editar</button> 
@@ -54,4 +53,5 @@
     <app-edit *ngIf='formEdit' [tramitePrecio]="tramitePrecio" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
     <app-new-smlmv *ngIf='formSmlmv' [tramitePrecios]="tramitePrecios" (ready)="ready($event)"></app-new-smlmv>
+    <app-new-calculo *ngIf='formCalculo' [tramitePrecios]="tramitePrecios" (ready)="ready($event)"></app-new-calculo>
 </div>

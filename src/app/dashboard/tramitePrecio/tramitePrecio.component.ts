@@ -18,6 +18,7 @@ export class TramitePrecioComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public formSmlmv = false;
+  public formCalculo = false;
   public table:any; 
   public tramitePrecio: TramitePrecio;
 
@@ -44,7 +45,6 @@ export class TramitePrecioComponent implements OnInit {
 		this._TramitePrecioService.getTramitePrecio().subscribe(
 				response => {
           this.tramitePrecios = response.data;
-          console.log(this.tramitePrecios);
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -78,6 +78,7 @@ export class TramitePrecioComponent implements OnInit {
   onNew(){
     this.formNew = true;
     this.formIndex = false;
+    this.formSmlmv = false;
     this.table.destroy();
   }
 
@@ -140,7 +141,17 @@ export class TramitePrecioComponent implements OnInit {
   onNewSmlmv(){
     this.formEdit = false;
     this.formIndex = false;
+    this.formNew = false;
+    this.formCalculo =false;
     this.formSmlmv = true;
+  }
+
+  onNewCalculo(){
+    this.formEdit = false;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formSmlmv = false;
+    this.formCalculo = true;
   }
 
 }

@@ -2,100 +2,108 @@
         <div class="col-xs-16 col-lg-16">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="m-0">Ingrese el valor del salario mínimo legal vigente </h5>
+                    <h5 class="m-0">Conceptos </h5>
                     <hr>
-                    <form #formNewSmlmv="ngForm">
-                        <div class="row container">
-                            <div class="form-group row container">
-                                <div class="col-xs-5 col-lg-4">
-                                    <label>Año*</label>
-                                    <input class="form-control" [(ngModel)]="parametro.anio" name="anio" placeholder="Año" type="text" required>
-                                </div>
-                                <div class="col-xs-5 col-lg-4">
-                                    <label>Valor*</label>
-                                    <input class="form-control" [(ngModel)]="parametro.valor" name="valor" placeholder="Valor" type="text" required>
-                                </div>
-                                <div class="col-xs-5 col-lg-4">
-                                    <label>Incremento*</label>
-                                    <input class="form-control" [(ngModel)]="parametro.porcentaje" name="porcentaje" placeholder="Incremento" type="text" required>
-                                </div>
-                                <div class="col-xs-5 col-lg-4">
-                                    <button class="btn btn-outline-info" (click)="newConcepto()" style="margin-top: 27px;" [disabled]="formNewSmlmv.invalid" type="button">Concepto</button>
-                                    <button class="btn btn-outline-info" (click)="calcular()" style="margin-top: 27px;" [disabled]="formNewSmlmv.invalid" type="button">Calcular</button>
+                    <form #formNewSmlmv="ngForm" *ngIf="listado">
+                        <div class="col-lg-16 col-md-16">
+                            <label>Conceptos*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="conceptos"
+                                [(ngModel)]="conceptoSelected"
+                                required
+                                name="conceptoId">
+                            </ng-select>
+                        </div>
+                        <div class="row" id="multi">
+                            <div class="col-sm-8 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Tramites</h6>
+                                    </div>
+                                    <div class="card-body">  
+                                        <div class="list-group">
+                                            <bs-sortable
+                                                [(ngModel)]="itemStringsLeft"
+                                                itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active"
+                                                placeholderItem="tramites vigentes"
+                                                placeholderClass="placeholderStyle"
+                                                wrapperClass="sortable-wrapper"
+                                                name="tramites"
+                                            ></bs-sortable>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-sm-8 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                            <h6 class="card-title">Agregar</h6>
+                                    </div>
+                                    <div class="card-body">  
+                                        <div class="list-group">
+                                            <bs-sortable
+                                                [(ngModel)]="itemStringsRight"
+                                                itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active"
+                                                placeholderItem="Arrastre sus tramites"
+                                                placeholderClass="sortable-item"
+                                                wrapperClass="sortable-wrapper"
+                                                name="tramitesAgregados"
+                                            ></bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
                     </form> 
-                    <div class="container col-lg-5">
-                        <h6>Conceptos</h6>
-                        <table class="table" id="dataTables-example1" *ngIf="tablaConceptos" class="col-lg-5">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Valor</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let concepto of conceptos; let i = index">
-                                <td >{{concepto.nombre}}</td>
-                                <td >{{concepto.valor}}</td>
-                                <td class="center"><button (click)="deleteConcepto(concepto)" class="btn btn-danger">Eliminar</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> 
-
-                    <div class="row container" *ngIf="conceptoForm">
-                        <div class="col-xs-5 col-lg-4">
-                            <label>Nombre*</label>
-                            <input class="form-control" [(ngModel)]="concepto.nombre" name="nombre" placeholder="Nombre" type="text" required>
+                    <div class=" load-wrapper2" *ngIf="!listado">
+                        <div class="sk-wave">
+                            <div class="sk-rect sk-rect1"></div>
+                            <div class="sk-rect sk-rect2"></div>
+                            <div class="sk-rect sk-rect3"></div>
+                            <div class="sk-rect sk-rect4"></div>
+                            <div class="sk-rect sk-rect5"></div>
                         </div>
-                        <div class="col-xs-5 col-lg-4">
-                            <label>Valor*</label>
-                            <input class="form-control" [(ngModel)]="concepto.valor" name="valor" placeholder="Valor" type="text" required>
-                        </div>
-                        <div class="col-xs-5 col-lg-4">
-                            <button class="btn btn-secondary"  (click)="cancelarConcepto()" style="margin-top: 27px;">Cancel</button>
-                            <button class="btn btn-outline-info" (click)="guardarConcepto()" style="margin-top: 27px;" type="button">Guardar</button>
-                        </div>
-                        
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="card" *ngIf="calcularForm">
-                <div class="card-body">
-                    <h5 class="m-0">Tramites </h5>
-                    <hr>
-                    <table class="table " id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>Año</th>
-                                <th>Clase</th>
-                                <th>Tramite</th>
-                                <th>SMLDV</th>
-                                <th>Modulo</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecios; let i = index">
-                            <td >{{tramitePrecio[0]}}</td>
-                            <td >{{tramitePrecio[1]}}</td>
-                            <td >{{tramitePrecio[2]}}</td>
-                            <td >{{tramitePrecio[3]}}</td>
-                            <td >{{tramitePrecio[5]}}</td>
-                            <td >{{tramitePrecio[4]}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    </div>    
+                   
                 </div>
                 <div class="card-footer">
                     <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
                     <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
                 </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="m-0">Conceptos </h5>
+                    <br>
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Valor</th>
+                                <th>Tramite nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let conceptoParametroTramite of conceptoParametroTramites; let i = index">
+                                <td>{{conceptoParametroTramite.conceptoParametro.nombre}}</td>
+                                <td>{{conceptoParametroTramite.conceptoParametro.valor}}</td>
+                                <td>{{conceptoParametroTramite.tramitePrecio.nombre}}</td>
+                                <td>
+                                    <button (click)="delete(conceptoParametroTramite.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                </div> -->
             </div>
         </div>
     </div>

@@ -4,21 +4,21 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class ConceptoParametroService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/conceptoparametro";
+export class ConceptoParametroTramiteService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/conceptoparametrotramite";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getConceptoParametro(){
+	getConceptoParametroTramite(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(conceptoParametro,token){
+	register(ConceptoParametroTramiteService,token){
 		
-		let json = JSON.stringify(conceptoParametro);
+		let json = JSON.stringify(ConceptoParametroTramiteService);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
@@ -42,9 +42,9 @@ export class ConceptoParametroService {
 
 	}
 
-	editConceptoParametro(conceptoParametro,token){
+	editConceptoParametro(ConceptoParametroTramiteService,token){
 
-		let json = JSON.stringify(conceptoParametro);
+		let json = JSON.stringify(ConceptoParametroTramiteService);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
