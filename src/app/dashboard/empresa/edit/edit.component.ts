@@ -5,8 +5,10 @@ import { LoginService } from '../../../services/login.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
+// import { UsuarioService } from '../../../services/usuario.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { RepresentanteEmpresaService } from '../../../services/representanteEmpresa.service';
 
 import swal from 'sweetalert2';
 
@@ -21,6 +23,9 @@ export class EditComponent implements OnInit{
 public errorMessage;
 public respuesta;
 public formReady = false;
+public formListaRepresentantes = true;
+public formNewRepresentante = true;
+
 // para editar los que vienen de otra tabla
 
 public tipoEmpresa: Array<any>
@@ -38,6 +43,9 @@ public municipioSelected: Array<any>; // ng-select [(ngModel)]
 public tiposIdentificacion: Array<any>
 public tipoIdentificacionSelected: Array<any>; // ng-select [(ngModel)]
 
+// public representantes: Array<any>
+// public representanteEmpresaSelected: Array<any>; // ng-select [(ngModel)]
+
 constructor(
   private _empresaService: EmpresaService,
   private _loginService: LoginService,
@@ -46,6 +54,7 @@ constructor(
   private _tipoSociedadService: TipoSociedadService,
   private _ciudadanoService: CiudadanoService,
   private _tipoIdentificacionService: TipoIdentificacionService,
+  // private _representanteEmpresaService: RepresentanteEmpresaService,
 
   ){}
 
@@ -64,7 +73,18 @@ constructor(
       ) {
       }
     })
-    console.log(this.empresa);    
+    console.log(this.empresa);  
+    
+    // this._representanteEmpresaService.getRepresentanteEmpresa().subscribe(
+    //   response => {
+    //     if(response.status == "success"){
+    //    this.representantes=response.data;
+    //    this.formListaRepresentantes = true;
+    //     }else{
+    //       this.formNewRepresentante = true;
+    //     }
+    //   }, 
+    // );
 
     this._municipioService.getMunicipioSelect().subscribe(
         response => {
@@ -178,4 +198,7 @@ constructor(
 		}); 
   }
 
+  agregarRepresentante(){
+    alert("aqui esta");
+  }
 }

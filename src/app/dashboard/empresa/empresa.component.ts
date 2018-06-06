@@ -80,6 +80,7 @@ export class EmpresaComponent implements OnInit {
   onNew(){
     this.formNew = true;
     this.formIndex = false;
+    this.formEdit = false;
     this.table.destroy();
   }
 
