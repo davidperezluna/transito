@@ -234,6 +234,7 @@ constructor(
   }
 
   onCalculo(){
+    this.tramitesPreciosTotal =[];
     this.tramitesPrecios.forEach(tramitePrecio => {
       let valorTotal = parseInt(tramitePrecio.valorNuevo) + this.valorConcepto;
       let array = {
