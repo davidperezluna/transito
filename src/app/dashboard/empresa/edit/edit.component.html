@@ -179,13 +179,16 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Fecha</th>
-                                <th>Acción</th>
+                                <!-- <th>Acción</th> -->
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{empresa.nombre}}</td>
+                                <td>{{empresa.ciudadano.usuario.primerNombre}}</td>
+                                <!-- <td><input class="form-control"  name="nuevafecha" type="date"  /></td> -->
+                                <th >{{empresa.fechaVencimientoRegistroMercantil}}</th>
+                                <!-- <th><button   class="btn btn-outline-danger btn-xs" type="button">Eliminar</button></th> -->
                             </tr>
                         </tbody>
                     </table>
@@ -196,12 +199,24 @@
             <div class="card" *ngIf ='formNewRepresentante' >
                 <div class="card-body">
                     <!-- <table class="table " > -->
-                        <!-- <thead> -->
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <th><ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId"></ng-select></th>
+                                <td><input class="form-control"  name="nuevafecha" type="date"  /></td>
+                                <td><button (click)="onCancelar()" class="btn btn-outline-success"><i class="fa fa-plus"></i></button></td> 
+                                </tr>
+                            </tbody>
                             
-                            <th><ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId"></ng-select></th>
-                            <td><button (click)="onCancelar()" class="btn btn-outline-success"><i class="fa fa-plus"></i></button></td> 
                             
-                        <!-- </thead> -->
+                        
                     <!-- </table> -->
                 </div>
             </div>
