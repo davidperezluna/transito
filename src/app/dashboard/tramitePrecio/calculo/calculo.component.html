@@ -11,6 +11,8 @@
                                 <th>Nombre</th>
                                 <th>Valor</th>
                                 <th>Nuevo valor</th>
+                                <th>Valor Conceptos</th>
+                                <th>Valor total</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -20,6 +22,8 @@
                                 <td>{{tramitePrecio.nombre}}</td>
                                 <td>{{tramitePrecio.valor}}</td>
                                 <td><input class="form-control" [(ngModel)]="tramitePrecio.valorNuevo" name="valorNuevo" placeholder="" type="number" required></td>
+                                <td>{{tramitePrecio.valorConcepto}}</td>
+                                <td>{{tramitePrecio.valorTotal}}</td>
                                 <td>
                                     <button (click)="delete(tramitePrecio.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> 
                                 </td>
@@ -41,7 +45,8 @@
                 </div>
                 <div class="card-footer">
                     <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                    <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                    <button (click)="onEnviar()" class="btn btn-outline-success pull-right" type="button">Enviar</button>
+                    <button (click)="onCalculo()" class="btn btn-outline-primary pull-right" type="button">Calcular</button>
                 </div>
             </div>
 

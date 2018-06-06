@@ -87,6 +87,7 @@ export class TramitePrecioComponent implements OnInit {
         this.formNew = false;
         this.formEdit = false;
         this.formSmlmv = false;
+        this.formCalculo = false;
         this.formIndex = true;
         this.ngOnInit();
       }

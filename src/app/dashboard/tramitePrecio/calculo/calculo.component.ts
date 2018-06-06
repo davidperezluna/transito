@@ -24,8 +24,10 @@ public calcularForm = false;
 public conceptoForm = false; 
 public tablaConceptos = false; 
 public listado = false; 
+public valorCOncepto:any; 
 public array: string[];
 public tramitesPrecios:any[]= [];
+public tramitesPreciosTotal:any[]= [];
 public conceptoParametroTramites:any[]= [];
 public conceptos:any;
 
@@ -42,6 +44,8 @@ constructor(
   
 
   ngOnInit() {
+
+   
 
     this._ConceptoParametroTramiteService.getConceptoParametroTramite().subscribe(
       response => {
@@ -79,13 +83,37 @@ constructor(
       response => {
         this.tramitePrecios = response.data;
         this.tramitePrecios.forEach(tramitePrecio => {
-        let array = {
-          'anio':tramitePrecio.anio,
-          'nombre':tramitePrecio.nombre,
-          'valor':tramitePrecio.valor,
-          'valorNuevo':tramitePrecio.valor,
-        }  
-        this.tramitesPrecios.push(array);
+          
+          let token = this._loginService.getToken();
+          this._ConceptoParametroService.showConceptoParametroTramitePrecio(token,tramitePrecio.id).subscribe(
+            response => {
+              this.conceptos = response.data;
+              this.valorConcepto =0;
+              this.conceptos.forEach(concepto => {
+              this.valorConcepto = this.valorConcepto + concepto.conceptoParametro.valor;
+                
+              });
+              // let valorTotal = parseInt(tramitePrecio.valor) + this.valorConcepto;
+                let array = {
+                  'anio':tramitePrecio.anio,
+                  'nombre':tramitePrecio.nombre,
+                  'valor':tramitePrecio.valor,
+                  'valorNuevo':tramitePrecio.valor,
+                  'valorConcepto':this.valorConcepto,
+                  'valorTotal':0,
+                }  
+                this.tramitesPrecios.push(array);
+                console.log(this.tramitesPrecios); 
+            }, 
+            error => {
+              this.errorMessage = <any>error;
+              
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
         });
         this.listado = true;
       }, 
@@ -203,6 +231,27 @@ constructor(
         
       }
     })
+  }
+
+  onCalculo(){
+    this.tramitesPrecios.forEach(tramitePrecio => {
+      let valorTotal = parseInt(tramitePrecio.valorNuevo) + this.valorConcepto;
+      let array = {
+        'anio':tramitePrecio.anio,
+        'nombre':tramitePrecio.nombre,
+        'valor':tramitePrecio.valor,
+        'valorNuevo':tramitePrecio.valorNuevo,
+        'valorConcepto':this.valorConcepto,
+        'valorTotal':valorTotal,
+      }  
+      this.tramitesPreciosTotal.push(array);
+    });
+    this.tramitesPrecios = [];
+    this.tramitesPrecios = this.tramitesPreciosTotal;
+    this.table.destroy();
+    let timeoutId = setTimeout(() => {  
+      this.iniciarTabla();
+    }, 100);
   }
 
 }
