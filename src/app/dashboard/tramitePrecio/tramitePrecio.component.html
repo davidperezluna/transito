@@ -24,22 +24,24 @@
               <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Año</th>
+                    <th>Fecha inicio</th>
                     <th>Nombre</th>
                     <th>Tramite</th>
                     <th>Modulo</th>
                     <th>Valor</th>
+                    <th>Valor total</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
                   <td >{{tramitePrecio.id}}</td>
-                  <td >{{tramitePrecio.anio}}</td>
+                  <td >{{tramitePrecio.fechaInicio}}</td>
                   <td >{{tramitePrecio.nombre}}</td>
                   <td >{{tramitePrecio.tramite.nombre}}</td>
                   <td >{{tramitePrecio.modulo.nombre}}</td>
                   <td >{{tramitePrecio.valor}}</td>
+                  <td >{{tramitePrecio.valorTotal}}</td>
                   <td><button (click)="editTramitePrecio(tramitePrecio)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteTramitePrecio(tramitePrecio.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
                 </tr>

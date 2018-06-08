@@ -34,7 +34,7 @@ constructor(
 
   ngOnInit() {
     this.claseSelected=null;
-    this.tramitePrecio = new TramitePrecio(null,null,null,null,null,null);
+    this.tramitePrecio = new TramitePrecio(null,null,null,null,null,null,null,null);
 
     this._moduloService.getModuloSelect().subscribe(
       response => {

@@ -5,6 +5,8 @@ export class TramitePrecio{
 		public moduloId:number,
 		public claseId:number,
 		public valor:string,
-		public anio:string,
+		public fechaInicio:string,
+		public valorTotal:string,
+		public activo:string,
 	){}
 }

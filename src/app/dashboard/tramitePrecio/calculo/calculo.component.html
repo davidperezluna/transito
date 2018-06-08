@@ -7,9 +7,9 @@
                     <table class="table " id="dataTables-example"  *ngIf="listado">
                         <thead>
                             <tr>
-                                <th>Año</th>
                                 <th>Nombre</th>
                                 <th>Valor</th>
+                                <th>Fecha Inicio</th>
                                 <th>Nuevo valor</th>
                                 <th>Valor Conceptos</th>
                                 <th>Valor total</th>
@@ -18,9 +18,12 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecios; let i = index">
-                                <td>{{tramitePrecio.anio}}</td>
                                 <td>{{tramitePrecio.nombre}}</td>
                                 <td>{{tramitePrecio.valor}}</td>
+                                <td>
+                                    <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicio" name="fechaInicio" placeholder=""
+                                    type="date" required>
+                                </td>
                                 <td><input class="form-control" [(ngModel)]="tramitePrecio.valorNuevo" name="valorNuevo" placeholder="" type="number" required></td>
                                 <td>{{tramitePrecio.valorConcepto}}</td>
                                 <td>{{tramitePrecio.valorTotal}}</td>

@@ -50,9 +50,7 @@ constructor(
     this._ConceptoParametroTramiteService.getConceptoParametroTramite().subscribe(
       response => {
         this.conceptoParametroTramites = response.data;
-        let timeoutId = setTimeout(() => {  
-          this.iniciarTabla();
-        }, 100);
+        
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -95,7 +93,7 @@ constructor(
               });
               // let valorTotal = parseInt(tramitePrecio.valor) + this.valorConcepto;
                 let array = {
-                  'anio':tramitePrecio.anio,
+                  'fechaInicio':tramitePrecio.fechaInicio,
                   'nombre':tramitePrecio.nombre,
                   'valor':tramitePrecio.valor,
                   'valorNuevo':tramitePrecio.valor,
@@ -103,7 +101,6 @@ constructor(
                   'valorTotal':0,
                 }  
                 this.tramitesPrecios.push(array);
-                console.log(this.tramitesPrecios); 
             }, 
             error => {
               this.errorMessage = <any>error;
@@ -116,6 +113,9 @@ constructor(
           );
         });
         this.listado = true;
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+        }, 2000);
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -152,39 +152,38 @@ constructor(
     let token = this._loginService.getToken();
 
     console.log(this.tramitesPrecios);
-    //   let datos = {
-    //       'trmites': this.itemStringsRight,
-    //       'concepto': this.conceptoSelected
-    //   };
-		// this._ConceptoParametroTramiteService.register(datos,token).subscribe(
-		// 	response => {
-    //     this.respuesta = response;
-    //     if(this.respuesta.status == 'success'){
-    //       this.table.destroy();
-    //       this.ngOnInit();
-    //       swal({
-    //         title: 'Perfecto!',
-    //         text: 'El registro se ha registrado con exito',
-    //         type: 'success',
-    //         confirmButtonText: 'Aceptar'
-    //       })
-    //     }else{
-    //       swal({
-    //         title: 'Error!',
-    //         text: 'El parametro '+  +' ya se encuentra registrado',
-    //         type: 'error',
-    //         confirmButtonText: 'Aceptar'
-    //       })
-    //     }
-		// 	error => {
-		// 			this.errorMessage = <any>error;
-		// 			if(this.errorMessage != null){
-		// 				console.log(this.errorMessage);
-		// 				alert("Error en la petición");
-		// 			}
-		// 		}
 
-		// }); 
+    
+		this._TramitePrecioService.registerCalculo(this.tramitesPrecios,token).subscribe(
+			response => {
+        this.respuesta = response;
+        if(this.respuesta.status == 'success'){
+          this.table.destroy();
+          this.tramitesPrecios = [];
+          this.ngOnInit();
+          swal({
+            title: 'Perfecto!',
+            text: 'El registro se ha guardado con exito',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        }else{
+          swal({
+            title: 'Error!',
+            text: 'Algo mal',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+			error => {
+					this.errorMessage = <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+
+		}); 
   }
   newConcepto(){
     this.conceptoForm = true;
@@ -238,7 +237,7 @@ constructor(
     this.tramitesPrecios.forEach(tramitePrecio => {
       let valorTotal = parseInt(tramitePrecio.valorNuevo) + this.valorConcepto;
       let array = {
-        'anio':tramitePrecio.anio,
+        'fechaInicio':tramitePrecio.fechaInicio,
         'nombre':tramitePrecio.nombre,
         'valor':tramitePrecio.valor,
         'valorNuevo':tramitePrecio.valorNuevo,
