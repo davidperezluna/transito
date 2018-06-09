@@ -12,13 +12,14 @@ import { NewEmpresaComponent } from './new/new.component';
 import { ShowComponent } from './show/show.component';
 import { EditComponent } from './edit/edit.component';
 import {SelectModule} from 'angular2-select';
+import { RepresentanteEmpresaService } from '../../services/representanteEmpresa.service';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [EmpresaComponent,NewEmpresaComponent,EditComponent,NewSucursalComponent,ShowComponent],
     exports: [EmpresaComponent, NewEmpresaComponent,EditComponent,NewSucursalComponent,ShowComponent],
-    providers:[EmpresaService,TipoEmpresaService,TipoSociedadService, SucursalService]
+    providers:[EmpresaService,TipoEmpresaService,TipoSociedadService, SucursalService,RepresentanteEmpresaService]
 })
 
 export class EmpresaModule { }

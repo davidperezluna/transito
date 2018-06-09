@@ -23,8 +23,11 @@ export class EditComponent implements OnInit{
 public errorMessage;
 public respuesta;
 public formReady = false;
-public formListaRepresentantes = true;
+public formListaRepresentanteVigente = false;
+public formListaRepresentantes = false;
 public formNewRepresentante = true;
+public representantes;
+public representanteVigente;
 
 // para editar los que vienen de otra tabla
 
@@ -44,7 +47,7 @@ public tiposIdentificacion: Array<any>
 public tipoIdentificacionSelected: Array<any>; // ng-select [(ngModel)]
 
 // public representantes: Array<any>
-// public representanteEmpresaSelected: Array<any>; // ng-select [(ngModel)]
+public representanteEmpresaSelected: Array<any>; // ng-select [(ngModel)]
 
 constructor(
   private _empresaService: EmpresaService,
@@ -54,7 +57,7 @@ constructor(
   private _tipoSociedadService: TipoSociedadService,
   private _ciudadanoService: CiudadanoService,
   private _tipoIdentificacionService: TipoIdentificacionService,
-  // private _representanteEmpresaService: RepresentanteEmpresaService,
+  private _representanteEmpresaService: RepresentanteEmpresaService,
 
   ){}
 
@@ -73,25 +76,41 @@ constructor(
       ) {
       }
     })
-    console.log(this.empresa);  
+ 
+    let token = this._loginService.getToken();
+    this._representanteEmpresaService.showRepresentanteEmpresa(this.empresa.id,token).subscribe(
+      response => {
+        if(response.status == "success"){
+
+       this.representantes=response.representantes;
+       this.representanteVigente=response.representanteVigente;
+       this.formListaRepresentanteVigente = true;
+       
+
+       if (this.representantes.length!=0) {
+         this.formListaRepresentantes=true;
+         console.log(this.representantes.length);
+       }
+       
+
+
+       
+
+        }else{
+       this.formListaRepresentanteVigente = false;
+       this.formNewRepresentante = true;
+        }
+      }, 
+    );
     
-    // this._representanteEmpresaService.getRepresentanteEmpresa().subscribe(
-    //   response => {
-    //     if(response.status == "success"){
-    //    this.representantes=response.data;
-    //    this.formListaRepresentantes = true;
-    //     }else{
-    //       this.formNewRepresentante = true;
-    //     }
-    //   }, 
-    // );
+    
 
     this._municipioService.getMunicipioSelect().subscribe(
         response => {
           this.municipios = response;
           setTimeout(() => {
             this.municipioSelected = [this.empresa.municipio.id];
-            // this.municipioResidenciaSelected = [this.empresa.municipioResidencia.id];
+            
           });
         }, 
         error => {

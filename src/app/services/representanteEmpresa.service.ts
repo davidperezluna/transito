@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class RepresentanteEmpresaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/representanteEmpresa";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/representanteempresa";
 	public identity;
 	public token;
 
@@ -32,11 +32,12 @@ export class RepresentanteEmpresaService {
 							  .map(res => res.json());
 	}
 
-	showRepresentanteEmpresa(token,id){
-		
+	showRepresentanteEmpresa(empresaId,token){
+		console.log(empresaId);
+
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
+		return this._http.post(this.url+'/'+empresaId+"/show", params, {headers: headers})
 							  .map(res => res.json());
 
 	}
@@ -59,6 +60,11 @@ export class RepresentanteEmpresaService {
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
 
+	}
+
+	getRepresentanteEmpresaSelect(){
+		
+		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	
 }
