@@ -63,6 +63,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     }
 
     enviarTramite() {
+        this.datos.tramiteFactura =58;
         this.readyTramite.emit(this.datos);
 
 

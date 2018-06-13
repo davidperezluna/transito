@@ -46,6 +46,7 @@ export class NewRnaRematriculaComponent implements OnInit {
         'nombreEntrega': null,
         'estado': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -115,6 +116,7 @@ export class NewRnaRematriculaComponent implements OnInit {
         this.datos.numeroIdentificacionEntrega = this.numeroIdentificacionEntrega;
         this.datos.nombreEntrega = this.nombreEntrega;
         this.datos.estado = this.estado;
+        this.datos.tramiteFactura = 1;
         this.readyTramite.emit(this.datos);
     }
 

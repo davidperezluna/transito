@@ -44,6 +44,7 @@ public respuesta:any;
 public sedesOperativas:any;
 public datos = {
   'numeroMotor': null,
+  'tramiteFactura': null,
 };
 
 constructor(
@@ -203,6 +204,7 @@ constructor(
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.datos.numeroMotor = this.vehiculo.motor;
+          this.datos.tramiteFactura =12;
           this.readyTramite.emit(this.datos);
         }else{
           swal({

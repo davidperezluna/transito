@@ -78,6 +78,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         this.vehiculo.claseId = this.vehiculo.clase.id   
         this.vehiculo.servicioId = this.vehiculo.servicio.id 
         this.vehiculo.cancelado=true
+        this.datos.tramiteFactura =15;
         let token = this._loginService.getToken();
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
         response => {

@@ -74,6 +74,7 @@ export class NewRnaCambioCombustibleComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = combustible.data.nombre;
                             this.datos.oldData = this.vehiculo.combustible.nombre;
+                            this.datos.tramiteFactura =31;
                             this.readyTramite.emit(this.datos);
                         }
                         error => {

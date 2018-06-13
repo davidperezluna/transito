@@ -64,6 +64,7 @@ export class NewRnaBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
+       this.datos.tramiteFactura =26;
        this.readyTramite.emit(this.datos);
     }
     onCancelar(){
