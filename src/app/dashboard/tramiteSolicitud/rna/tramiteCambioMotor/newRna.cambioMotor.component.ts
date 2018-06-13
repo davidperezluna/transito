@@ -43,6 +43,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(

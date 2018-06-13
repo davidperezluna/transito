@@ -26,6 +26,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
         'oldData': null,
         'numeroRunt': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(

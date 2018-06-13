@@ -22,9 +22,9 @@ export class NewRnaComponent implements OnInit {
   public errorMessage;
   public respuesta;
   public tramitesFactura: any;
-  public tramitesFacturas: any;
   public tramiteFacturaSelected: any;
-  public numeroFactura: any;
+  public facturaSelected: any;
+  public facturas: any;
   public factura: any;
   public isPagada = false;
   public tramiteSelected: any;
@@ -54,9 +54,7 @@ constructor(
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null);
-    this.numeroFactura = {
-      'numeroFactura': this.numeroFactura,
-    };
+    
     
   }
   onCancelar(){
@@ -96,74 +94,25 @@ constructor(
 		});
   }
 
-  onKeyValidateFactura() {
-    swal({
-      title: 'Buscando Atención!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading();
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
+  changedFactura(id){
+    this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
+    response => {
+      this.factura = response[0].factura;
+      this.tramitesFactura = response;
+      
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
       }
     });
-
-    let token = this._loginService.getToken();
-        this._facturaService.showFacturaByNumero(token, this.numeroFactura).subscribe(
-        response => {
-          swal.close();
-          if (response.status == 'success') {
-            this.factura = response.data;
-
-            if (this.factura.estado) {
-              this.isError = false;
-              
-            }else{
-              this.factura = false;
-              this.isError = true;
-              this.mensaje = 'La factura no se encuentra pagada';
-            }
-          } else {
-            this.factura = false;
-            this.mensaje = 'Factura no se encuentra registrada en la base de datos';
-            this.isError = true;
-          }
-          console.log(this.factura);
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        });
-  }
-  changedTramiteFactura(e){
-    let token = this._loginService.getToken();
-    this._tramiteFacturaService.showTramiteFactura(token,e).subscribe(response => 
-      {
-        this.respuesta = response;
-        this.tramiteSelected = this.respuesta.data.id;
-        console.log(this.respuesta.data.id);
-        this.tramite = this.respuesta.data;
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }); 
-
-
   }
   
   onKeyValidateVehiculo(){
     swal({
-      title: 'Buscando Vehiculo Tabla!',
+      title: 'Buscando Vehiculo!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
@@ -176,115 +125,67 @@ constructor(
       }
     })
     let token = this._loginService.getToken();
-    this._tramiteFacturaService.getTramiteFacturaSelect(this.factura.numero).subscribe(
-      response => {
-         this.tramitesFacturas = response;
 
-         this.tramitesFacturas.forEach(tramiteFactura => {
-            if (tramiteFactura.tramite.sustrato) {
-              this.sustrato = true;
-              if(tramiteFactura.tramiteId == '12'){
-                this.cantidadSustrato = tramiteFactura.cantidad;
+    this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
+      response => {
+        
+        this.ciudadanosVehiculo = response.data;
+        if (response.status == 'error' ) {
+          this.vehiculoSuccess=false;
+          this.msj= response.msj;
+          this.error = true;
+          this.tipoError = response.code; 
+        }else{
+          this.vehiculo = response.data[0].vehiculo;
+          // se busca las faturas si el vehiculo fue encontrado
+          let dato = {
+            'vehiculo': this.vehiculo.id,
+          };
+
+          this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
+          response => {
+            if (response.status == 'success') {
+                this.facturas = response.data;
+                this.vehiculoSuccess = true;
+                this.msj ='vehiculo encontrado';
+                this.error = false;
+                this.isError = false;
+                swal.close();
+            } else {
+              this.facturas = false;
+              this.mensaje = 'Factura no se encuentra registrada en la base de datos';
+              this.isError = true;
+              swal.close();
+            }
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
               }
             }
           });
-          this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
-            response => {
-              swal.close();
-              this.ciudadanosVehiculo = response.data;
-              if (response.status == 'error' ) {
-                this.vehiculoSuccess=false;
-                this.msj= response.msj;
-                this.error = true;
-                this.tipoError = response.code;
-                if (this.tipoError == 401) {
-                  this.tramitesFacturas.forEach(tramiteFactura => {
-                    if (tramiteFactura.tramiteId == '56') {
-                      this.tramitePreasignacion = tramiteFactura.value;
-                    }
-                    
-                  });
-                  if (this.tramitePreasignacion) {
-                      swal({
-                        title: 'Atención!',
-                        text: 'Primero debe tramitar PREREASIGNACIÓN VEHICULO',
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                      })
-                      let arrayPreasignacion = [
-                        {value: this.tramitePreasignacion, label: 'PREASIGNACION VEHICULO'},
-                      ];
-                      this.tramitesFactura = arrayPreasignacion;
-                  }else{
-                    swal({
-                      title: 'Atención!',
-                      text: 'El tramite PREREASIGNACIÓN VEHICULO no se encuentra facturado o ya fue tramitado para el ingreso de este nuevo vehículo',
-                      type: 'error',
-                      confirmButtonText: 'Aceptar'
-                    })
-                  }
-                }else{
-                  this.tramitesFacturas.forEach(tramiteFactura => {
-                    if (tramiteFactura.tramiteId == '1') {
-                      this.tramiteMatriculaInicial = tramiteFactura.value;
-                    }
-                  });
-                  if (this.tramiteMatriculaInicial) {
-                    swal({
-                      title: 'Atención!',
-                      text: 'Primero debe tramitar MATRICULA INICIAL',
-                      type: 'success',
-                      confirmButtonText: 'Aceptar'
-                    })
-                    let arrayPreasignacion = [
-                      {value: this.tramiteMatriculaInicial, label: 'MATRICULA INICIAL'},
-                    ];
-                    this.tramitesFactura = arrayPreasignacion;
-                  }else{
-                    swal({
-                      title: 'Atención!',
-                      text: 'El tramite MATRICULA INICIAL no se encuentra facturado o ya fue tramitado para la asignación de propietarios',
-                      type: 'error',
-                      confirmButtonText: 'Aceptar'
-                    })
-                  }
-                }
-              }else{
-                this.vehiculoSuccess = true;
-                this.msj ='vehiculo encontrado';
-                this.vehiculo = response.data[0].vehiculo;
-                this.error = false;
-                this.tramitesFactura = this.tramitesFacturas;
-                response.data.forEach(element => {
-                  if (element.ciudadano) {
-                    this.ciudadano = true;
-                  }else{
-                    this.ciudadano = false;
-                  }
-                });
-              }
-            error => { 
-                this.errorMessage = <any>error;
-                if(this.errorMessage != null){
-                  console.log(this.errorMessage);
-                  alert("Error en la petición"); 
-                }
-              }
+
+          
+          response.data.forEach(element => {
+            if (element.ciudadano) {
+              this.ciudadano = true;
+            }else{
+              this.ciudadano = false;
+            }
           });
-      },
-      error => {
-        this.errorMessage = <any>error;
-        
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
         }
-      }
-    );
-    
+      error => { 
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición"); 
+          }
+        }
+    });
   }
   readyTramite(datos:any){
-    this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
+    this.tramiteSolicitud.tramiteFacturaId = datos.tramiteFactura;
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
     let token = this._loginService.getToken();

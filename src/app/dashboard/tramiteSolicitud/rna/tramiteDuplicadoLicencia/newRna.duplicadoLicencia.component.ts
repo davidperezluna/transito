@@ -24,7 +24,8 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         'sustrato': null,
         'numeroRunt': null,
         'documentacion': null,
-        'entregada': null
+        'entregada': null,
+        'tramiteFactura': null,
     };
 
     constructor(

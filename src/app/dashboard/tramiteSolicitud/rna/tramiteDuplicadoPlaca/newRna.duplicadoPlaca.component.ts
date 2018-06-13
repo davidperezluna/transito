@@ -28,6 +28,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(

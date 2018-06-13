@@ -62,7 +62,7 @@
                         <label>Pais Nacimiento*</label>
                         <ng-select
                             [multiple]="false"
-                            [options]="paises"
+                            [options]="paises" 
                             [(ngModel)]="paisNacimientoSelected"
                             (ngModelChange)="changedPaisNacimiento($event)"
                             required

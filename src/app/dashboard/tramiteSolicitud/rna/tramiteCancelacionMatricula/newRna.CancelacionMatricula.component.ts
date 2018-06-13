@@ -37,7 +37,8 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         'ipat':null,
         'fechaEchos':null,
         'recuperarMotor':null,         
-        'sustrato': null
+        'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(

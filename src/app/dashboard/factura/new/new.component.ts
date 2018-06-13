@@ -8,7 +8,7 @@ import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new-factura',
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
@@ -33,7 +33,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.factura = new Factura(null, null, null, null, null, null, null, null);
+    this.factura = new Factura(null,null, null, null, null, null, null, null, null);
 
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(

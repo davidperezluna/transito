@@ -25,6 +25,7 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         'nuevaPlaca': null,
         'documentacion': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
