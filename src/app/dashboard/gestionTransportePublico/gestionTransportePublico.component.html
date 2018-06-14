@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-sm-16">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">Gestion de Vehiculos <small>Servicio Publico</small></h5>
@@ -15,7 +15,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-10 ">
                     <div class="form-group row">
-                      <div class="col-lg-5 col-md-5">
+                      <div class="col-lg-6 col-md-5">
                         <label>Estado*</label>
                             <select [(ngModel)]="gestionTransportePublico.estado" name="estado" class="form-control">
                               <option value=0>Ninguno</option>
@@ -23,7 +23,7 @@
                               <option value=2>Cancelado</option>
                             </select>
                       </div>
-                      <div class="col-lg-5 col-md-5">
+                      <div class="col-lg-6 col-md-5">
                         <label>Sede*</label>
                           <ng-select
                                 [multiple]="false"
@@ -33,7 +33,7 @@
                                 name="claseId">
                           </ng-select>
                       </div>
-                      <div class="col-lg-5 col-md-5">
+                      <div class="col-lg-6 col-md-5">
                         <label>Clase*</label>
                           <ng-select
                               [multiple]="false"
@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-16">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">Vehículos <small>Registrados</small></h5>

@@ -1,6 +1,6 @@
 
 <div class="row"><!-- .row -->
-    <div class="col-xs-16 col-lg-16"><!-- .col -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
@@ -9,12 +9,12 @@
                 <hr>
                 <div class="row justify-content-center container">
                     <form #sustratoForm="ngForm" class="container"> 
-                        <div class="col-xs-16 col-lg-16">
+                        <div class="col-xs-12 col-lg-12">
                             <label>Sustratos*</label>
                             <ng-select [multiple]="false" [options]="sustratos" [(ngModel)]="sustratoSelected" required name="sustratoId">
                             </ng-select>
                         </div>
-                        <div class="col-xs-16 col-lg-16">
+                        <div class="col-xs-12 col-lg-12">
                             <br>
                             <label class="custom-control custom-checkbox" for="facturaSustrato" >
                                 <input type="checkbox" [(ngModel)]="estadoImpresion" name="estadoImpresion" class="custom-control-input"  id="facturaSustrato">
@@ -22,7 +22,7 @@
                                 <span class="custom-control-description">Impresión exitosa</span>
                             </label>
                         </div>
-                        <div class="col-xs-16 col-lg-16" *ngIf="estadoImpresion == true">
+                        <div class="col-xs-12 col-lg-12" *ngIf="estadoImpresion == true">
                             <br>
                             <label class="custom-control custom-checkbox" for="entregadao" >
                                 <input type="checkbox" [(ngModel)]="tarjetaEntregada" name="tarjetaEntregada" class="custom-control-input"  id="entregadao">
@@ -31,7 +31,7 @@
                             </label>
                         </div>
                         <!--tipo identificacion ciudadano -->
-                        <div class="col-xs-16 col-lg-16" *ngIf="tarjetaEntregada">
+                        <div class="col-xs-12 col-lg-12" *ngIf="tarjetaEntregada">
                             <label>Identificación</label>
                             <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
                                 <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
@@ -46,7 +46,7 @@
 
                         <!--si existe un ciudadano -->
                         <div class="container row" *ngIf="ciudadanoEncontrado === 2 && tarjetaEntregada">
-                                <div class="col-xs-16 col-lg-16 row">
+                                <div class="col-xs-12 col-lg-12 row">
                                     <hr>
                                     <br>
                                 </div>
@@ -77,7 +77,7 @@
                                 </table>
                             </div>
 
-                        <div class="col-xs-16 col-lg-16" *ngIf="estadoImpresion == false">
+                        <div class="col-xs-12 col-lg-12" *ngIf="estadoImpresion == false">
                             <label>Descripción </label>
                             <textarea class="form-control" placeholder="ingrese la descripción para anular el sustrato" [(ngModel)]="facturaSustrato.descripcion" required name="descripcion"></textarea>
                         </div>
