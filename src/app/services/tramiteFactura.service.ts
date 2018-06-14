@@ -44,4 +44,8 @@ export class TramiteFacturaService {
 	getTramiteFacturaSelect(idFactura){
 		return this._http.get(this.url + "/"+idFactura+"/select").map(res => res.json());
 	}
+
+	getTramiteShowFactura(idFactura){
+		return this._http.get(this.url + "/"+idFactura+"/show/factura").map(res => res.json());
+	}
 }

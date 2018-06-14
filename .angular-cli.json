@@ -31,7 +31,7 @@
 		"assets/vendors/weather-icons-master/css/weather-icons.min.css",
 		"assets/vendors/weather-icons-master/css/weather-icons-wind.min.css",
 		"assets/vendors/themify-icons/themify-icons.css",
-		"assets/scss/dark_blue_adminux.scss"
+		"assets/scss/light_adminux.scss"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

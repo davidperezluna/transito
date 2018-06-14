@@ -25,6 +25,7 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         'nuevaPlaca': null,
         'documentacion': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -41,6 +42,7 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.nuevaPlaca = this.nuevaPlaca;
         this.datos.documentacion = this.documentacion;
+        this.datos.tramiteFactura =16;
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

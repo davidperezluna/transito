@@ -26,6 +26,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
         'oldData': null,
         'numeroRunt': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -68,6 +69,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
                     this.vehiculo.combustibleId = this.vehiculo.combustible.id   
                     this.vehiculo.claseId = this.vehiculo.clase.id   
                     this.vehiculo.servicioId = this.vehiculo.servicio.id 
+                    this.datos.tramiteFactura =3;
                     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
                     response => {
                         this.respuesta = response; 

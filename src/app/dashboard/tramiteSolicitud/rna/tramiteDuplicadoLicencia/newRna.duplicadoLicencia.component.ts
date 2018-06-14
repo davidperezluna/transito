@@ -24,7 +24,8 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         'sustrato': null,
         'numeroRunt': null,
         'documentacion': null,
-        'entregada': null
+        'entregada': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -56,6 +57,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
+        this.datos.tramiteFactura =12;
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

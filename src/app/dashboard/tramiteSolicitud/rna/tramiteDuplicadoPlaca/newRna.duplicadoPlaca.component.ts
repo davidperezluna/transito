@@ -28,6 +28,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -47,6 +48,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
+        this.datos.tramiteFactura =16;
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

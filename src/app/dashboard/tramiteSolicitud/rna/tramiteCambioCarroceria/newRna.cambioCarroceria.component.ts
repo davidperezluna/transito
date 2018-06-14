@@ -25,6 +25,7 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
         'newData': null,
         'oldData': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -74,6 +75,7 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = carroceria.data.nombre;
                             this.datos.oldData = this.vehiculo.carroceria.nombre;
+                            this.datos.tramiteFactura =32;
                             this.readyTramite.emit(this.datos);
                         }
                         error => {

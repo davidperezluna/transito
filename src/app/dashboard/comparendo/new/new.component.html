@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-16 container">
+    <div class="col-md-12 container">
             
         <div class="card">
             <div class="card-body">
@@ -8,7 +8,7 @@
                 <div class="row justify-content-center">
                     <form #comparendoForm="ngForm">
                             <div class="form-group row">                    
-                                <div class="col-lg-16 col-md-16">
+                                <div class="col-lg-12 col-md-16">
                                     <label>Sede*</label>
                                     <ng-select
                                         [multiple]="false"
@@ -19,12 +19,12 @@
                                         name="bancoId">
                                     </ng-select>
                                 </div>
-                                <div class="col-lg-16 col-md-16">
+                                <div class="col-lg-12 col-md-16">
                                     <label>Numero de Comparendo*</label>
                                     <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text" required>
                                 </div>
 
-                                <div class="col-lg-16 col-md-16">
+                                <div class="col-lg-12 col-md-16">
 
                                     <label>Agente de transito*</label>
                                     <ng-select
@@ -48,7 +48,7 @@
         </div>
 
         <div class="row  align-items-center justify-content-between" *ngIf='validado'>
-            <div class="col-xs-16 col-lg-16 page-title">
+            <div class="col-xs-12 col-lg-12 page-title">
                 <h3>Nuevo comparendo</h3>
                 <p >Agente de transito: <strong> {{ agenteTransito.data.ciudadano.primerNombre }} {{ agenteTransito.data.ciudadano.primerApellido }}</strong></p>
                 <p >Sede operativa: <strong> {{ sedeOperativa.data.nombre }}</strong></p>
@@ -67,11 +67,11 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                                <div class="col-lg-16 col-md-16">
+                                <div class="col-lg-12 col-md-16">
                                     <label>Dirección*</label>
                                     <input class="form-control" [(ngModel)]="comparendo.lugarInfraccion" name="lugarInfraccion" placeholder="" type="text" required>
                                 </div>
-                                <div class="col-lg-8 col-md-8">
+                                <div class="col-lg-6 col-md-6">
                                         <label>Lugar de la infracción(ciudad)*</label>
                                         <ng-select
                                             [multiple]="false"
@@ -81,7 +81,7 @@
                                             name="bancoId">
                                         </ng-select>
                                 </div>
-                                <div class="col-lg-8 col-md-8">
+                                <div class="col-lg-6 col-md-6">
                                     <label>Localidad*</label>
                                     <input class="form-control" [(ngModel)]="comparendo.barrioInfraccion" name="barrioInfraccion" placeholder="" type="text" required>
                                 </div>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group row col-lg-16 col-md-16">
+                        <div class="form-group row col-lg-12 col-md-16">
                             <label>Placa*</label> 
                             <input class="form-control" [(ngModel)]="placa.placa" (blur)="onKeyPlaca()" id="placa" name="placa" placeholder="" type="text" required>
                         </div>
@@ -109,7 +109,7 @@
                             <strong>!</strong> el vehículo con placa <b>{{ placa.placa }}</b> no se encuentra en la base de datos.
                         </div>
                         <div class="form-group row" *ngIf='vehiculo'>
-                            <div  class="col-lg-5 col-md-5">
+                            <div  class="col-lg-6 col-md-5">
                                 <label>Matriculado en</label>
                                 <input class="form-control" [(ngModel)]="vehiculo.municipio.nombre" name="municipio" placeholder="" type="text" disabled="disabled">
                             </div>
@@ -117,11 +117,11 @@
                                 <label>Tipo Vehículo</label>
                                 <input class="form-control" [(ngModel)]="vehiculo.tipoVehiculo" name="tipoVehiculo" placeholder="" type="text" disabled="disabled">
                             </div>
-                            <div class="col-lg-5 col-md-5">
+                            <div class="col-lg-6 col-md-5">
                                 <label>Tipo Servicio</label>
                                 <input class="form-control" [(ngModel)]="vehiculo.servicio.nombre" name="servicio.nombre" placeholder="" type="text" disabled="disabled">
                             </div>
-                            <div class="col-lg-5 col-md-5">
+                            <div class="col-lg-6 col-md-5">
                                 <label>Radio Acción</label>
                                 <input class="form-control" [(ngModel)]="vehiculo.radioAccion" name="radioAccion" placeholder="" type="text" disabled="disabled">
                             </div>
@@ -129,7 +129,7 @@
                                 <label>Modalidad Transporte</label>
                                 <input class="form-control" [(ngModel)]="vehiculo.modalidadTransporte" name="modalidadTransporte" placeholder="" type="text" disabled="disabled">
                             </div>
-                            <div class="col-lg-5 col-md-5">
+                            <div class="col-lg-6 col-md-5">
                                 <label>Tipo Transporte</label>
                                 <input class="form-control" [(ngModel)]="vehiculo.transportePasajeros" name="transportePasajeros" placeholder="" type="text" disabled="disabled">
                             </div>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group row col-lg-16 col-md-16">
+                        <div class="form-group row col-lg-12 col-md-16">
                             <label>Nip Infractor*</label> 
                             <input class="form-control" [(ngModel)]="identificacion.numeroIdentificacion" (blur)="onKeyIdentificacion()" id="cedula" name="placa" placeholder="" type="text" required>
                         </div>
@@ -173,7 +173,7 @@
                                 <label>Dirección</label>
                                 <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text">
                             </div>
-                            <div class="col-lg-5 col-md-5">
+                            <div class="col-lg-6 col-md-5">
                                 <label>Correo</label>
                                 <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" placeholder="" type="text">
                             </div>
@@ -190,7 +190,7 @@
                                     name="departamentoId">
                                 </ng-select>
                             </div>
-                            <div class="cotainer col-lg-16">
+                            <div class="cotainer col-lg-12">
                                 <button (click)="onEnviarInfractor()" class="btn btn-success pull-right">Enviar</button>
                             </div>
                         </div>
@@ -211,7 +211,7 @@
                                 <label>Dirección</label>
                                 <input class="form-control" [(ngModel)]="ciudadano.ciudadano.direccion" name="direccion" placeholder="" type="text" disabled="disabled">
                             </div>
-                            <div class="col-lg-5 col-md-5">
+                            <div class="col-lg-6 col-md-5">
                                 <label>Correo</label>
                                 <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" placeholder="" type="text" disabled="disabled">
                             </div>
@@ -219,7 +219,7 @@
                                 <label>Teléfono</label>
                                 <input class="form-control" [(ngModel)]="ciudadano.telefono" name="telefono" placeholder="" type="text" disabled="disabled">
                             </div>
-                            <div class="col-lg-5 col-md-5">
+                            <div class="col-lg-6 col-md-5">
                                 <label>Ciudad</label>
                                 <input class="form-control" [(ngModel)]="ciudadano.ciudadano.municipioResidencia.nombre" name="municipioNacimiento.nombre" placeholder="" type="text" disabled="disabled">
                             </div>
@@ -302,18 +302,18 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-6 col-md-6">
                                 <label>Observación Agente</label> 
                                 <textarea class="form-control" [(ngModel)]="comparendo.observacionesAgente" id="cedula" name="observacionesAgente" placeholder="" type="textArea"></textarea>
                             </div>
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-6 col-md-6">
                                 <label>Observación Digitador</label> 
                                 <textarea class="form-control" [(ngModel)]="comparendo.observacionesDigitador" id="cedula" name="observacionesDigitador" placeholder="" type="textArea"></textarea>
                             </div>
                             <br>
                             <br>
                         </div> 
-                        <div class="form-group row col-lg-16 col-md-16">
+                        <div class="form-group row col-lg-12 col-md-16">
                             <label class="custom-control custom-checkbox col-lg-4 col-md-4"  for="option1">
                                 <!-- <input checked="" class="custom-control-input" id="option1" type="checkbox"> -->
                                 <input (click)="clickOnmovilizacion()" [(ngModel)]="comparendo.inmovilizacion" name="inmovilizacion" class="custom-control-input" id="option1" type="checkbox">
@@ -415,7 +415,7 @@
                                     <input class="form-control" [(ngModel)]="comparendo.gradoAlchoholemia" name="gradoAlchoholemia" placeholder="" type="text">
                                 </div> 
                             </div>
-                            <div class="col-lg-16 col-md-16">
+                            <div class="col-lg-12 col-md-16">
                                 <div class="form-group ">
                                     <label>Descripción <span class="ai-lab"></span></label>
                                     <textarea class="form-control" [(ngModel)]="comparendo.descripcion" name="descripcion" placeholder="" type="textArea"></textarea>
@@ -423,7 +423,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer col-lg-16 col-md-16">
+                    <div class="card-footer col-lg-12 col-md-16">
                         <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
                         <button (click)="onEnviar()" [disabled]="comparendoDiligenciadoForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
                     </div>

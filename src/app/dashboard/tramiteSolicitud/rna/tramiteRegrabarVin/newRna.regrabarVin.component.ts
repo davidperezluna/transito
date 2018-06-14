@@ -34,7 +34,8 @@ export class NewRnaRegrabarVinComponent implements OnInit {
         'numeroRunt': null,
         'documentacion': null,
         'entregada': null,
-        'sustrato': null
+        'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -87,6 +88,7 @@ export class NewRnaRegrabarVinComponent implements OnInit {
                 this.datos.documentacion = this.documentacion;
                 this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
+                this.datos.tramiteFactura = 57;
                 this.readyTramite.emit(this.datos);
             }
             error => {

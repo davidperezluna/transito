@@ -32,7 +32,8 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         'nroRunt': null,
         'tipoCertificadoTradicion': null,
         'observacion': null,                  
-        'sustrato': null
+        'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -62,6 +63,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     }
 
     enviarTramite() {
+        this.datos.tramiteFactura =58;
         this.readyTramite.emit(this.datos);
 
 

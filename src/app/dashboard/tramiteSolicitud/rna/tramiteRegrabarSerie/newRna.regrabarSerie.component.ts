@@ -34,7 +34,8 @@ export class NewRnaRegrabarSerieComponent implements OnInit {
         'numeroRunt': null,
         'documentacion': null,
         'entregada': null,
-        'sustrato': null
+        'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(

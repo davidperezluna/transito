@@ -25,6 +25,7 @@ export class NewRnaCambioColorComponent implements OnInit {
         'newData': null,
         'oldData': null,
         'sustrato': null,
+        'tramiteFactura': null,
     };
 
     constructor(
@@ -34,7 +35,7 @@ export class NewRnaCambioColorComponent implements OnInit {
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
     ) { }
-
+ 
     ngOnInit() {
         this._ColorService.getColorSelect().subscribe(
             response => {
@@ -72,6 +73,7 @@ export class NewRnaCambioColorComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = color.data.nombre;
                             this.datos.oldData = this.vehiculo.color.nombre;
+                            this.datos.tramiteFactura =2;
                             this.readyTramite.emit(this.datos);
                         }
                         error => {
@@ -92,9 +94,6 @@ export class NewRnaCambioColorComponent implements OnInit {
                         }
                     }
             });
-
-        this.datos.newData = this.colorSelected;
-        this.readyTramite.emit(this.datos);
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
