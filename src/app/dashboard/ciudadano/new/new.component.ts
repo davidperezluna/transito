@@ -142,7 +142,6 @@ constructor(
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
         if (result.value) {
-         console.log(this.ciudadano);
     this._CiudadanoService.register(this.ciudadano,token).subscribe(
       response => {
         this.respuesta = response;
@@ -256,6 +255,10 @@ constructor(
       );
     }
   
+  }
+  isCiudadano() {
+    console.log(this.ciudadano.numeroIdentificacionUsuario);
+    console.log(this.tipoIdentificacionSelected);
   }
 
 }

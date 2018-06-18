@@ -14,8 +14,8 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Identificacion*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion" placeholder="" type="number"
-                            required>
+                        <input class="form-control" (blur)="isCiudadano()" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion" placeholder="" type="number"
+                         required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha Expedición Documento*</label>
