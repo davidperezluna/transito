@@ -4,12 +4,14 @@ import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+import { CiudadanoService } from '../../../services/ciudadano.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { Factura } from 'app/dashboard/factura/factura.modelo';
 import { error } from 'selenium-webdriver';
 import { forEach } from '@angular/router/src/utils/collection';
+import { Response } from '@angular/http/src/static_response';
 
 @Component({
   selector: 'app-new',
@@ -31,15 +33,18 @@ export class NewRnaComponent implements OnInit {
   public mensaje = '';
   public isError = false;
   public ciudadanosVehiculo=false;
-  public ciudadano=false;
+  public isCiudadano=false;
+  public ciudadano: any;
   public vehiculoSuccess=false;
   public tipoError=200;
   public error=false;
   public msj='';
+  public tramites='';
   public tramitePreasignacion=false;
   public tramiteMatriculaInicial=false;
   public tramite=false;
   public sustrato=false;
+  public isTramites:boolean=true;
   
   public cantidadSustrato = 1;
 
@@ -49,6 +54,7 @@ constructor(
   private _tramiteFacturaService: TramiteFacturaService,
   private _facturaService: FacturaService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
+  private _ciudadanoService: CiudadanoService,
 ){}
 
   ngOnInit() {
@@ -97,8 +103,19 @@ constructor(
   changedFactura(id){
     this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
     response => {
+      let active = true;
       this.factura = response[0].factura;
       this.tramitesFactura = response;
+      console.log(this.tramitesFactura);
+      this.tramitesFactura.forEach(tramiteFactura => {
+        if (tramiteFactura.realizado == 0) {
+          active = false;
+        }
+      });
+
+      if (active) {
+        this.isTramites = false;
+      }
       
       error => {
         this.errorMessage = <any>error;
@@ -169,9 +186,9 @@ constructor(
           
           response.data.forEach(element => {
             if (element.ciudadano) {
-              this.ciudadano = true;
+              this.isCiudadano = true;
             }else{
-              this.ciudadano = false;
+              this.isCiudadano = false;
             }
           });
         }
@@ -185,7 +202,11 @@ constructor(
     });
   }
   readyTramite(datos:any){
-    this.tramiteSolicitud.tramiteFacturaId = datos.tramiteFactura;
+    this.tramitesFactura.forEach(tramiteFactura => {
+      if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {
+        this.tramiteSolicitud.tramiteFacturaId = tramiteFactura.id;
+      }
+    });
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
     let token = this._loginService.getToken();
@@ -200,9 +221,8 @@ constructor(
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
-          this.tramiteSolicitud.vehiculoId = null;
-          this.tramiteSelected = false;
           this.error = false;
+          this.changedFactura(this.factura.id)
         } else {
           swal({
             title: 'Error!',
@@ -218,13 +238,68 @@ constructor(
             alert("Error en la petición");
           }
         }
-
       }); 
   }
 
   cancelarTramite(){
     this.tramiteSelected = false;
     this.error = false;
+  }
+
+  finalizarSolicitud(){
+
+    this.tramitesFactura.forEach(tramiteFactura => {
+      this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>' 
+    });
+    let token = this._loginService.getToken();
+
+    console.log(this.tramiteSolicitud.solicitanteId);
+
+    this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
+      response =>{
+        if (response.status == 'success') {
+          this.ciudadano = response.data.ciudadano;
+          console.log(response.data);
+          var html = 'Se va a enviar la siguiente solicitud:<br>'+
+                    'Factura: <b>'+this.factura.numero+'</b><br>'+
+                    'Vehiculo: <b>'+this.vehiculo.placa+'</b><br>'+
+                    'Solicitante: <b>'+this.ciudadano.usuario.identificacion+'</b><hr>'+
+                    'Tramites:<br>'+
+                    this.tramites  
+          swal({
+            title: 'Resumen',
+            type: 'warning',
+            html:html,
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Aceptar!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+            '<i class="fa fa-thumbs-down"></i> Cancelar',
+            cancelButtonAriaLabel: 'Thumbs down',
+          }).then((result) => {
+            if (result.value) {
+
+              } else if (
+              // Read more about handling dismissals
+              result.dismiss === swal.DismissReason.cancel
+            ) {
+    
+            }
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+
+          
   }
 
 }
