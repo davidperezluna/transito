@@ -122,36 +122,22 @@
                             <br>
                             <!-- fin datos direccion -->
                             <!-- DATOS REPRESENTANTE  -->
-                            <h5 class="col-xs-12 col-lg-12">Datos representante</h5>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Ciudadano
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId">
-                                </ng-select>
-                                <input class="form-control" [(ngModel)]="empresa.fechaInicial" name="fechaInicial" type="date" />
+                            <h5 class="col-xs-16 col-lg-16">Datos representante</h5>
+                            
+                            <div class="col-xs-16 col-lg-8">
+                                <label>Ciudadano<span class="text-danger">*</span></label>
+                                <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId"></ng-select>
                             </div>
+                            <div class="col-xs-16 col-lg-8">
+                                <label>Fecha de inicio<span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.fechaInicial" name="fechaInicial" type="date" />
+                            </div>                            
                             <!-- FIN REPRESENTANTE -->
-                            <!-- SUCURSAL  -->
-
-                            
-                            
-                            <!-- <div *ngIf ="formNewSucursal">
-                                <app-new-sucursal (readySucursal)="readySucursal($event)" ></app-new-sucursal>
-                            </div> -->
-
-                            <!-- FIN SUCURSAL -->
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button (click)="onCancelar()" class="btn btn-secondary">
-                            <i class="fa fa-times"></i>
-                            Cancelar
-                        </button>
-                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary" type="button">
-                            <i class="fa fa-floppy-o"></i>
-                            Enviar
-                        </button>
+                        <button (click)="onCancelar()" class="btn btn-secondary"><i class="fa fa-times"></i>Cancelar</button>
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary" type="button"><i class="fa fa-floppy-o"></i>Enviar</button>
                     </div>
                 </form>    
             </div>

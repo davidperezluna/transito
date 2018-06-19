@@ -1,20 +1,27 @@
 <div class="container" >
   <div  *ngIf='!formShow' class="row align-items-center justify-content-between">
-    <div class="col-11 col-sm-12 page-title">
+    <!-- <div class="col-11 col-sm-12 page-title">
       <h3>Módulo RNC</h3>
       <p>Inscripción de persona jurídica</p> 
-    </div>
-    <div class="col text-right ">
+    </div> -->
+    <!-- <div class="col text-right ">
       <div class="btn-group pull-right">
         <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
       </div>
-    </div>
+    </div> -->
+    <br>
   </div>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Personas jurídica <small></small></h5>
+              <h5>
+                <b>Módulo RNC</b>
+                <small>Inscripción de persona jurídica</small>
+                <div class="btn-group pull-right">
+                  <button (click)="onNew()" class="btn btn-outline-success  btn-round pull-right " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+                </div>
+              </h5>
           </div>
           <div class="card-body responsive">
           	<div class="table-responsive">

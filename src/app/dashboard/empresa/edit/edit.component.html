@@ -153,75 +153,63 @@
                     <!-- fin formulario -->
                 </div>                   
             </div>
-            
             <!-- form 1 botones -->
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-outline-secondary">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
-                <button (click)="onEnviar()" [disabled]="empresaForm.invalid" class="btn btn-outline-primary pull-right" type="button">
-                    <i class="fa fa-floppy-o"></i>
-                    Enviar
-                </button>
+                <button (click)="onCancelar()" class="btn btn-outline-secondary"><i class="fa fa-times"></i>Cancelar</button>
+                <button (click)="onEnviar()" [disabled]="empresaForm.invalid" class="btn btn-outline-primary" type="button"><i class="fa fa-floppy-o"></i>Enviar</button>
             </div>    
             <!-- fin -->
         </div>
         </div>
     </div>
     <div class="col-md-7 " >
-        <div class="table-responsive">
-            <div class="card" *ngIf='formListaRepresentanteVigente' >
-                <h4 class="text-center">Representante</h4>
-                <div class="card-body">
-                    <table class="table " >
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Fecha</th>
-                                <!-- <th>Acción</th> -->
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{representanteVigente.ciudadano?.usuario.primerNombre + " "+representanteVigente.ciudadano?.usuario.segundoNombre 
-                                    + " "+representanteVigente.ciudadano?.usuario.primerApellido + " "+representanteVigente.ciudadano?.usuario.segundoApellido}}</td>
-                                <th >{{representanteVigente.fechaInicial}}</th>
-                            </tr>
-                        </tbody>
-                    </table>
+
+        <div class="card" *ngIf='formListaRepresentanteVigente'><br>
+            <h5 class="text-center">Representante actual</h5>
+            <div class="card-body">
+                <table class="table " >
+                    <thead>
+                        <tr>
+                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <!-- <th>Acción</th> -->
+                        <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>{{representanteVigente.ciudadano?.usuario.primerNombre + " "+representanteVigente.ciudadano?.usuario.segundoNombre 
+                            + " "+representanteVigente.ciudadano?.usuario.primerApellido + " "+representanteVigente.ciudadano?.usuario.segundoApellido}}</td>
+                        <th >{{representanteVigente.fechaInicial}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+        <div class="card" *ngIf ='formNewRepresentante' ><br>
+            <h5 class="text-center">Nuevo representante</h5>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-5">
+                        <label>Nombre</label>
+                        <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId"></ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-5">
+                        <label>Fecha</label>
+                        <input class="form-control" [(ngModel)]="empresa.fechaFinal"  name="nuevafecha" type="date"  />
+                    </div>
+                    <div class="col-xs-12 col-lg-2">
+                        <button (click)="nuevoRepresentante()"  class="btn btn-outline-success " type="button"><i class="ti-save ml-2"></i></button>
+                    </div>                            
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
-            <div class="card" *ngIf ='formNewRepresentante' >
-                <div class="card-body">
-                    <!-- <table class="table " > -->
-                            <thead>
-                                <tr>
-                                <th>Nombre</th>
-                                <th>Fecha</th>
-                                <th></th>  
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <th><ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId"></ng-select></th>
-                                <td><input class="form-control"  name="nuevafecha" type="date"  /></td>
-                                <td><button (click)="onCancelar()" class="btn btn-outline-success"><i class="fa fa-plus"></i></button></td> 
-                                </tr>
-                            </tbody>
-                            
-                            
-                        
-                    <!-- </table> -->
-                </div>
-            </div>
-        </div>
+
         <div class="table-responsive" *ngIf ='formNewRepresentante'>
-            <div class="card" *ngIf='formListaRepresentantes' >
-                <h4 class="text-center">Lista histórica</h4>
+            <div class="card" *ngIf='formListaRepresentantes' ><br>
+                <h5 class="text-center">Lista histórica</h5>
                 <div class="card-body">
                     <table class="table " >
                         <thead>
@@ -234,12 +222,10 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let representante of representantes; let i = index">
-                                <td>{{representante.ciudadano.usuario.primerNombre}}</td>
+                                <td>{{representanteVigente.ciudadano?.usuario.primerNombre + " "+representanteVigente.ciudadano?.usuario.segundoNombre 
+                                        + " "+representanteVigente.ciudadano?.usuario.primerApellido + " "+representanteVigente.ciudadano?.usuario.segundoApellido}}</td>
                                 <td>{{representante.fechaInicial}}</td>
                                 <td>{{representante.fechaFinal}}</td>
-                                <!-- <td><input class="form-control"  name="nuevafecha" type="date"  /></td> -->
-                                <!-- <th >{{empresa.fechaVencimientoRegistroMercantil}}</th> -->
-                                <!-- <th><button   class="btn btn-outline-danger btn-xs" type="button">Eliminar</button></th> -->
                             </tr>
                         </tbody>
                     </table>
@@ -247,5 +233,4 @@
             </div>
         </div>
     </div> 
-    
 </div>

@@ -91,11 +91,6 @@ constructor(
          this.formListaRepresentantes=true;
          console.log(this.representantes.length);
        }
-       
-
-
-       
-
         }else{
        this.formListaRepresentanteVigente = false;
        this.formNewRepresentante = true;
@@ -191,7 +186,8 @@ constructor(
     this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.empresa.ciudadanoId = this.ciudadanoSelected;
        
-    console.log(this.empresa);
+    // console.log(this.empresa.tipoIdentificacionId);
+    
 		this._empresaService.editEmpresa(this.empresa,token).subscribe(
 			response => {
         this.respuesta = response;
@@ -214,10 +210,43 @@ constructor(
 					}
 				}
 
+    }); 
+
+    
+
+    
+  }
+  nuevoRepresentante(){
+    let token = this._loginService.getToken();
+    let datos ={
+      'empresa':this.empresa,
+      'ciudadanoId':this.ciudadanoSelected,
+      'fechaFinal': this.empresa.fechaFinal,
+    }
+    this._representanteEmpresaService.register(datos,token).subscribe(
+			response => {
+        this.respuesta = response;
+        console.log(this.respuesta);
+        if(this.respuesta.status == 'success'){
+          this.ready.emit(true);
+          swal({
+            title: 'Perfecto!',
+            text: 'El registro se ha modificado con exito',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+			error => {
+					this.errorMessage = <any>error;
+
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+
 		}); 
+
   }
 
-  agregarRepresentante(){
-    alert("aqui esta");
-  }
 }
