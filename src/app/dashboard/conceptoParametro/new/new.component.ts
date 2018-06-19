@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.conceptoParametro = new ConceptoParametro(null,null,null);
+    this.conceptoParametro = new ConceptoParametro(null,null,null,null);
   }
   onCancelar(){
     this.ready.emit(true);
@@ -31,7 +31,6 @@ constructor(
 		this._ConceptoParametroService.register(this.conceptoParametro,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           

@@ -21,6 +21,7 @@ export class TramitePrecioComponent implements OnInit {
   public formCalculo = false;
   public table:any; 
   public tramitePrecio: TramitePrecio;
+  public tramiteProximo: TramitePrecio;
 
   constructor(
 		private _TramitePrecioService: TramitePrecioService,
@@ -42,6 +43,7 @@ export class TramitePrecioComponent implements OnInit {
       ) {
       }
     })
+
 		this._TramitePrecioService.getTramitePrecio().subscribe(
 				response => {
           this.tramitePrecios = response.data;
@@ -58,6 +60,26 @@ export class TramitePrecioComponent implements OnInit {
 					}
 				}
       );
+
+      // this._TramiteProximo.getTramitePrecio().subscribe(
+			// 	response => {
+      //     this.tramitePrecios = response.data;
+      //     let timeoutId = setTimeout(() => {  
+      //       this.iniciarTabla();
+      //     }, 100);
+			// 	}, 
+			// 	error => {
+			// 		this.errorMessage = <any>error;
+
+			// 		if(this.errorMessage != null){
+			// 			console.log(this.errorMessage);
+			// 			alert("Error en la petición");
+			// 		}
+			// 	}
+      // );
+
+
+
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({

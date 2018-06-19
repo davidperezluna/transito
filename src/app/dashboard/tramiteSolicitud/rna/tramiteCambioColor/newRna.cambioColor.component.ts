@@ -73,7 +73,7 @@ export class NewRnaCambioColorComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = color.data.nombre;
                             this.datos.oldData = this.vehiculo.color.nombre;
-                            this.datos.tramiteFactura =2;
+                            this.datos.tramiteFactura =5;
                             this.readyTramite.emit(this.datos);
                         }
                         error => {

@@ -9,13 +9,15 @@
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
                         <label>Tipo Identificacion*</label>
-                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacionId" required>
+                        <ng-select (ngModelChange)="changedTipoId($event)" [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacionId" required>
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Identificacion*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion" placeholder="" type="number"
-                            required>
+                        <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
+                            <input class="form-control" (blur)="isCiudadano()" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion" placeholder="" type="number"
+                            [disabled]="tipoId" required>
+                        </div> 
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha Expedición Documento*</label>
