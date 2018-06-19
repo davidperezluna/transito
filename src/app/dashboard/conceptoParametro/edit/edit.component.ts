@@ -5,10 +5,10 @@ import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-concepto',
   templateUrl: './edit.component.html'
 })
-export class EditComponent {
+export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() conceptoParametro:any = null;
 public errorMessage;
@@ -19,9 +19,13 @@ constructor(
   private _ConceptoParametroService: ConceptoParametroService,
   private _loginService: LoginService,
   ){
-
+       
   }
 
+  ngOnInit() {
+    console.log(this.conceptoParametro.valor);
+  }
+  
   onCancelar(){
     this.ready.emit(true);
   }
@@ -31,7 +35,6 @@ constructor(
 		this._ConceptoParametroService.editConceptoParametro(this.conceptoParametro,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({

@@ -36,6 +36,9 @@ public paisResidenciaSelected: any;
 public departamentosResidencia: any;
 public departamentoResidenciaSelected:any;
 public municipiosResidencia: any;
+public isError: any;
+public isExist:boolean=false;
+public tipoId:boolean=true;
 public municipioResidenciaSelected: any;
 
 
@@ -257,8 +260,37 @@ constructor(
   
   }
   isCiudadano() {
-    console.log(this.ciudadano.numeroIdentificacionUsuario);
     console.log(this.tipoIdentificacionSelected);
+    let token = this._loginService.getToken();
+    let datos = {
+      'identificacion':this.ciudadano.numeroIdentificacionUsuario,
+      'tipoIdentificacion': this.tipoIdentificacionSelected,
+    }
+    
+    this._CiudadanoService.isCiudadano(datos,token).subscribe(
+      response => {
+        this.respuesta = response;
+        if(this.respuesta.status == 'error'){
+          //identificacion encontrada
+          this.isError = true;
+          this.isExist = false;
+          
+        }else{
+          this.isExist = true;
+          this.isError = false;
+        }
+      error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+    });
+  }
+
+  changedTipoId(){
+    this.tipoId= false;
   }
 
 }

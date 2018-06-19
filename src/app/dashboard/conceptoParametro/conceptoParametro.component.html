@@ -24,6 +24,7 @@
                   <th>Id</th>
                   <th>Nombre</th>
                   <th>Valor</th>
+                  <th>Cuenta</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -32,6 +33,7 @@
                   <td >{{concepto.id}}</td>
                   <td >{{concepto.nombre}}</td>
                   <td >{{concepto.valor}}</td>
+                  <td >{{concepto.Cuenta}}</td>
                   <td><button (click)="editConceptoParametro(concepto)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteConceptoParametro(concepto.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
                 </tr>
@@ -42,6 +44,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [conceptoParametro]="conceptoParametro" (ready)="ready($event)"></app-edit>
+    <app-edit-concepto *ngIf='formEdit' [conceptoParametro]="conceptoParametro" (ready)="ready($event)"></app-edit-concepto>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
