@@ -1,9 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {GestionDocumentos} from '../gestionDocumentos.modelo';
-import {RegistroDocumento} from '../registroDocumento.modelo';
-import {PeticionarioService} from '../../../services/peticionario.service';
+import { PeticionarioService } from '../../../services/peticionario.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import {LoginService} from '../../../services/login.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -13,7 +12,6 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public peticionario: GestionDocumentos; 
-public registroDocumento: RegistroDocumento;
 public errorMessage;
 public respuesta;
 public documentoEncontrado = false;
@@ -28,8 +26,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.peticionario = new GestionDocumentos(null,null,null,null,null,null,null,null);
-    this.registroDocumento = new RegistroDocumento(null,null,null,null,null,null,null,null,null,null);
+    this.peticionario = new GestionDocumentos(null,null,null,null,null,null,null,null,null);
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
         response => {

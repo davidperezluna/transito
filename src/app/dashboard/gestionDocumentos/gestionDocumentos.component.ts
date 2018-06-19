@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PeticionarioService } from '../../services/peticionario.service';
-import {LoginService} from '../../services/login.service';
+import { GestionDocumentos } from './gestionDocumentos.modelo';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -12,12 +13,14 @@ export class GestionDocumentosComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public peticionarios;
+  public peticionarios;
+  public peticionario: GestionDocumentos;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = true;
   public table:any; 
   public gestionDocumentos:any; 
+  public documentoEncontrado = false;
+  public crearDocumento = false;
 
   constructor(
 		private _PeticionarioService: PeticionarioService,
@@ -42,25 +45,11 @@ export class GestionDocumentosComponent implements OnInit {
       cancelButtonText:
       '<i class="fa fa-thumbs-down"></i>',
       cancelButtonAriaLabel: 'Thumbs down',
-    })
-    
-		this._PeticionarioService.getPeticionario().subscribe(
-				response => {
-          this.peticionarios = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+    this.peticionario = new GestionDocumentos(null,null,null,null,null,null,null,null,null);
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -79,7 +68,6 @@ export class GestionDocumentosComponent implements OnInit {
   }
   onNew(){
     this.formNew = true;
-    this.formIndex = false;
     this.table.destroy();
   }
 
@@ -87,7 +75,6 @@ export class GestionDocumentosComponent implements OnInit {
       if(isCreado) {
         this.formNew = false;
         this.formEdit = false;
-        this.formIndex = true;
         this.ngOnInit();
       }
   }
@@ -135,7 +122,62 @@ export class GestionDocumentosComponent implements OnInit {
   editGestionDocumentos(gestionDocumentos:any){
     this.gestionDocumentos = gestionDocumentos;
     this.formEdit = true;
-    this.formIndex = false;
   }
 
+  onBuscarRegistros(){
+    let datos = {
+      'tipo' : this.peticionario.tipo,
+      'identificacion' : this.peticionario.identificacion,
+      'entidad' : this.peticionario.nombreEntidad,
+      'numeroOficio' : this.peticionario.numeroOficio
+    }
+    let token = this._loginService.getToken();
+		this._PeticionarioService.buscarPeticionario(datos,token).subscribe(
+			response => {
+        this.respuesta = response;
+        if(this.respuesta.status == 'success'){
+           this.documentoEncontrado = true;
+           this.crearDocumento = false;
+           this.peticionarios = response.data;
+
+          swal({
+            title: 'Perfecto',
+            text: "¡Documento encontrado!",
+            type: 'info',
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> OK!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+            '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down',
+          });
+        }else{
+          this.documentoEncontrado = false;
+          this.crearDocumento = true;
+          swal({
+            title: 'Alerta',
+            text: "¡No existe el documento!",
+            type: 'warning',
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> OK!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+            '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down',
+          });
+        }
+			error => {
+					this.errorMessage = <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+
+		}); 
+  }
 }

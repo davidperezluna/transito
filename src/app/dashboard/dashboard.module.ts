@@ -27,6 +27,7 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
+import { TipoCorrespondenciaModule } from './tipoCorrespondencia/tipoCorrespondencia.module';
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
 import { CarroceriaModule } from './carroceria/carroceria.module';
@@ -77,6 +78,7 @@ import {RightsidebarComponent} from '../shared/index';
       AlmacenModule,
       CiudadanoModule,
       TipoIdentificacionModule,
+      TipoCorrespondenciaModule,
       GeneroModule,
       GrupoSanguineoModule,
       CuentaModule,

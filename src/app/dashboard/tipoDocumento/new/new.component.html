@@ -1,33 +1,47 @@
+<hr>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-lg-4">
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">Nuevo Tipo Documento</h5>
-            <hr>
-            <form #newForm="ngForm"> 
-                <div class="row justify-content-center">
-                    <div class="col-md-10 ">
-                        <div class="form-group row">
-                            <div class="col-lg-4 col-md-4">
-                                <label>Nombre Tipo*</label>
-                                <input class="form-control" [(ngModel)]="tipoDocumento.nombreTipo" name="nombreTipo" placeholder="" type="text" required>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <label>Dias Duracion Tramite*</label>
-                                <input class="form-control" [(ngModel)]="tipoDocumento.diasDuracionTramite" name="diasDuracionTramite" placeholder="" type="text" required>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <label>Codigo Documento*</label>
-                                <input class="form-control" [(ngModel)]="tipoDocumento.codigoDocumento" name="codigoDocumento" placeholder="" type="text" required>
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo tipo de correspondencia</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Codigo <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="tipoDocumento.codigo" name="codigo" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="tipoDocumento.nombre" name="nombre" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Dias vigencia <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="tipoDocumento.diasVigencia" name="diasVigencia" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input [(ngModel)]="tipoDocumento.editable" name="editable" type="checkbox" class="custom-control-input" id="checkbox" checked="">
+                                <label class="custom-control-label" for="checkbox">Días editables</label>
                             </div>
                         </div>
-                    </div>    
-                </div>
-            </form>  
+                    </div>
+                </form>
+            </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()"  [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
-            </div>    
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
