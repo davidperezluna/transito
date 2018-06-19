@@ -52,6 +52,49 @@
         </div>
       </div>
     </div>
+
+
+    <div class="row" *ngIf='formIndex'>
+      <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">Proximos valores<small> de tramites a habilitarse</small></h5>
+            </div>
+            <div class="card-body">
+              <table class="table " id="dataTables-example">
+                <thead>
+                  <tr>
+                      
+                      <th>Nombre</th>
+                      <th>Fecha inicio</th>
+                      <th>Tramite</th>
+                      <th>Modulo</th>
+                      <!-- <th>Valor</th> -->
+                      
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
+                   
+                    <td >{{tramitePrecio.nombre}}</td>
+                    <td >{{tramitePrecio.fechaInicio}}</td>
+                    <td >{{tramitePrecio.tramite.nombre}}</td>
+                    <td >{{tramitePrecio.modulo.nombre}}</td>
+                    <!-- <td >{{tramitePrecio.valor}}</td>
+                    <td >{{tramitePrecio.valorTotal}}</td> -->
+                    
+                </tbody>
+              </table>
+              <!-- /.table-responsive --> 
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
     <app-edit *ngIf='formEdit' [tramitePrecio]="tramitePrecio" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
     <app-new-smlmv *ngIf='formSmlmv' [tramitePrecios]="tramitePrecios" (ready)="ready($event)"></app-new-smlmv>

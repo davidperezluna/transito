@@ -78,28 +78,26 @@ constructor(
     })
  
     let token = this._loginService.getToken();
+
     this._representanteEmpresaService.showRepresentanteEmpresa(this.empresa.id,token).subscribe(
       response => {
         if(response.status == "success"){
 
-       this.representantes=response.representantes;
-       this.representanteVigente=response.representanteVigente;
-       this.formListaRepresentanteVigente = true;
+          this.representantes=response.representantes;
+          this.representanteVigente=response.representanteVigente;
+          this.formListaRepresentanteVigente = true;
        
-
-       if (this.representantes.length!=0) {
-         this.formListaRepresentantes=true;
-         console.log(this.representantes.length);
-       }
+          if (this.representantes.length!=0) {
+            this.formListaRepresentantes=true;
+            console.log(this.representantes.length);
+          }
         }else{
-       this.formListaRepresentanteVigente = false;
-       this.formNewRepresentante = true;
+          this.formListaRepresentanteVigente = false;
+          this.formNewRepresentante = true;
         }
       }, 
     );
     
-    
-
     this._municipioService.getMunicipioSelect().subscribe(
         response => {
           this.municipios = response;
@@ -193,7 +191,6 @@ constructor(
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha modificado con exito',
@@ -212,9 +209,6 @@ constructor(
 
     }); 
 
-    
-
-    
   }
   nuevoRepresentante(){
     let token = this._loginService.getToken();
@@ -228,7 +222,7 @@ constructor(
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+          this.ngOnInit();
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha modificado con exito',
