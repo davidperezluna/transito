@@ -1,8 +1,9 @@
 export class TipoDocumento{
 	constructor(
-		public id:number,
-		public nombreTipo:string,
-		public diasDuracionTramite:string,
-		public codigoDocumento:string
+		public id: number,
+		public nombre: string,
+		public diasVigencia: string,
+		public codigo: string,
+		public editable: boolean
 	){}
 }

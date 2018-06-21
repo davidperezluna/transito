@@ -21,6 +21,7 @@ import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
+import { TipoCorrespondenciaRoutes } from './tipoCorrespondencia/tipoCorrespondencia.routes';
 import { GeneroRoutes } from './genero/genero.routes';
 import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
@@ -61,6 +62,7 @@ export const DashboardRoutes: Route[] = [
         ...ServicioRoutes,
         ...CiudadanoRoutes,
         ...TipoIdentificacionRoutes,
+        ...TipoCorrespondenciaRoutes,
         ...GeneroRoutes,
         ...GrupoSanguineoRoutes,
         ...CuentaRoutes,

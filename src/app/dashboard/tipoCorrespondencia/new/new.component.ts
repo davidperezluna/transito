@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {TipoDocumento} from '../tipoDocumento.modelo';
-import {TipoDocumentoService} from '../../../services/tipoDocumento.service';
-import {LoginService} from '../../../services/login.service';
+import { TipoCorrespondencia } from '../tipoCorrespondencia.modelo';
+import { TipoCorrespondenciaService } from '../../../services/tipoCorrespondencia.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -10,35 +10,26 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public tipoDocumento: TipoDocumento;
+public tipoCorrespondencia: TipoCorrespondencia;
 public errorMessage;
 public respuesta;
-public servicios:any;
-public organismosTransito:any;
-public consumibles:any;
-public clases:any;
-public departamentoSelected:any;
-public servicioSelected:any;
-public organismoTransitoSelected:any;
-public consumibleSelected:any;
-public claseSelected:any;
 
 constructor(
-  private _TipoDocumentoService: TipoDocumentoService,
+  private _TipoCorrespondenciaService: TipoCorrespondenciaService,
   private _loginService: LoginService,
-
   ){}
 
   ngOnInit() {
-    this.tipoDocumento = new TipoDocumento(null,null,null,null,null);
+    this.tipoCorrespondencia = new TipoCorrespondencia(null,null);
   }
   onCancelar(){
     this.ready.emit(true);
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    console.log(this.tipoDocumento);
-		this._TipoDocumentoService.register(this.tipoDocumento,token).subscribe(
+    
+    console.log(this.tipoCorrespondencia);
+		this._TipoCorrespondenciaService.register(this.tipoCorrespondencia,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -53,14 +44,13 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El tipoDocumento '+  +' ya se encuentra registrado',
+            text: 'El tipoCorrespondencia '+  +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
 			error => {
 					this.errorMessage = <any>error;
-
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
