@@ -58,7 +58,7 @@
       <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="card-title">Proximos valores<small> de tramites a habilitarse</small></h5>
+              <h5 class="card-title">Próximos conceptos a habilitarse <small> valor</small></h5>
             </div>
             <div class="card-body">
               <table class="table " id="dataTables-example">
@@ -69,19 +69,16 @@
                       <th>Fecha inicio</th>
                       <th>Tramite</th>
                       <th>Modulo</th>
-                      <!-- <th>Valor</th> -->
                       
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
+                  <tr class="odd" *ngFor="let tramitePrecioProximo of tramiteProximo; let i = index">
                    
-                    <td >{{tramitePrecio.nombre}}</td>
-                    <td >{{tramitePrecio.fechaInicio}}</td>
-                    <td >{{tramitePrecio.tramite.nombre}}</td>
-                    <td >{{tramitePrecio.modulo.nombre}}</td>
-                    <!-- <td >{{tramitePrecio.valor}}</td>
-                    <td >{{tramitePrecio.valorTotal}}</td> -->
+                    <td >{{tramitePrecioProximo.nombre}}</td>
+                    <td >{{tramitePrecioProximo.fechaInicio}}</td>
+                    <td >{{tramitePrecioProximo.tramite.nombre}}</td>
+                    <td >{{tramitePrecioProximo.modulo.nombre}}</td>
                     
                 </tbody>
               </table>

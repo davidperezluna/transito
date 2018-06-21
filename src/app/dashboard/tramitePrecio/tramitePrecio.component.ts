@@ -4,6 +4,8 @@ import {LoginService} from '../../services/login.service';
 import {TramitePrecio} from './tramitePrecio.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
+// declare var fechaActual: any;
+
 
 @Component({
   selector: 'app-index',
@@ -14,6 +16,8 @@ export class TramitePrecioComponent implements OnInit {
 	public id;
 	public respuesta;
 	public tramitePrecios;
+	public tramiteProximo;
+	public compa;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
@@ -21,7 +25,7 @@ export class TramitePrecioComponent implements OnInit {
   public formCalculo = false;
   public table:any; 
   public tramitePrecio: TramitePrecio;
-  public tramiteProximo: TramitePrecio;
+  public fechaActual ;
 
   constructor(
 		private _TramitePrecioService: TramitePrecioService,
@@ -46,7 +50,19 @@ export class TramitePrecioComponent implements OnInit {
 
 		this._TramitePrecioService.getTramitePrecio().subscribe(
 				response => {
-          this.tramitePrecios = response.data;
+          this.tramitePrecios = response.tramitePreciosActivo;
+          this.tramiteProximo = response.tramiteProximo;
+          this.compa = response.compa;
+          this.fechaActual = new Date();
+
+          
+
+          console.log(this.tramitePrecios);
+          console.log(this.tramiteProximo);
+          console.log(this.fechaActual);
+          // console.log(this.compa.clase);
+          
+     
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -61,22 +77,7 @@ export class TramitePrecioComponent implements OnInit {
 				}
       );
 
-      // this._TramiteProximo.getTramitePrecio().subscribe(
-			// 	response => {
-      //     this.tramitePrecios = response.data;
-      //     let timeoutId = setTimeout(() => {  
-      //       this.iniciarTabla();
-      //     }, 100);
-			// 	}, 
-			// 	error => {
-			// 		this.errorMessage = <any>error;
-
-			// 		if(this.errorMessage != null){
-			// 			console.log(this.errorMessage);
-			// 			alert("Error en la petición");
-			// 		}
-			// 	}
-      // );
+      
 
 
 
