@@ -60,7 +60,7 @@ export class MarcaComponent implements OnInit {
     // Setup - add a text input to each footer cell
     $('#dataTables-example thead th').each( function () {
       var title = $(this).text();
-      $(this).html( '<input type="text" placeholder="'+title+'" />' );
+      $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
     } );
 
     $('#dataTables-example').DataTable({
