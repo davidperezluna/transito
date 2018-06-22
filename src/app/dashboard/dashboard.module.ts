@@ -27,7 +27,7 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
-import { TipoCorrespondenciaModule } from './tipoCorrespondencia/tipoCorrespondencia.module';
+import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
 import { CarroceriaModule } from './carroceria/carroceria.module';
@@ -37,9 +37,8 @@ import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.modu
 import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
-import { TipoDocumentoModule } from './tipoDocumento/tipoDocumento.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
-import { GestionDocumentosModule } from './gestionDocumentos/gestionDocumentos.module';
+import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
@@ -78,7 +77,8 @@ import {RightsidebarComponent} from '../shared/index';
       AlmacenModule,
       CiudadanoModule,
       TipoIdentificacionModule,
-      TipoCorrespondenciaModule,
+      MgdTipoCorrespondenciaModule,
+      MgdRegistroModule,
       GeneroModule,
       GrupoSanguineoModule,
       CuentaModule,
@@ -89,9 +89,7 @@ import {RightsidebarComponent} from '../shared/index';
       TramiteFacturaModule,
       TramiteSolicitudModule,
       SustratoModule,
-      TipoDocumentoModule,
       GestionTransportePublicoModule,
-      GestionDocumentosModule,
       EmpresaModule,
       // SucursalModule,
       TramitePrecioModule,

@@ -1,0 +1,213 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-uppercase">Registro de documento</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr> 
+                <form #formNewRegistro="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>No. de Radicado <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="documento.numeroRadicado" name="numeroRadicado" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>No. de folios <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="documento.folios" name="folios" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Fecha y Hora</label>
+                            <input class="form-control" type="text" readonly value="{{ date|date:('dd/MM/yyyy HH:mm:ss a') }}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Identificacion <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacionId" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Identificación <b class="text-danger">*</b></label>
+                            <input class="form-control" (blur)="onBuscarPeticionario()" [(ngModel)]="peticionario.identificacion" name="identificacion" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer Nombre <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="peticionario.primerNombre" name="primerNombre" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo Nombre</label>
+                            <input class="form-control" [(ngModel)]="peticionario.segundoNombre" name="segundoNombre" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer Apellido <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="peticionario.primerApellido" name="primerApellido" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo Apellido</label>
+                            <input class="form-control" [(ngModel)]="peticionario.segundoApellido" name="segundoApellido" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Entidad</label>
+                            <input class="form-control" [(ngModel)]="peticionario.entidadNombre" name="entidadNombre" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Cargo</label>
+                            <input class="form-control" [(ngModel)]="peticionario.entidadCargo" name="entidadCargo" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Dirección <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="peticionario.direccion" name="direccion" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Telefono <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="peticionario.telefono" name="telefono" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Correo</label>
+                            <input class="form-control" [(ngModel)]="peticionario.correoElectronico" name="correoElectronico" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Correspondencia <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" (ngModelChange)="changedTipoCorrespondencia($event)" [options]="tiposCorrespondencia" [(ngModel)]="tipoCorrespondeciaSelected" name="tiposCorrespondenciaId" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Asunto y Concepto <b class="text-danger">*</b></label>
+                            <textarea class="form-control" [(ngModel)]="documento.descripcion" name="descripcion" rows="6"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Adjuntar documento <b class="text-danger">*</b></label>
+                            <input class="form-control" type="file">
+                        </div>
+                    </div>
+                    <hr>
+                    <h5>Llego por correo certificado</h5>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-3">
+                            <div class="custom-control custom-radio">
+                                <input name="correoCertificadoLlegada" [(ngModel)]="documento.correoCertificadoLlegada" value="Si" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio1">Si</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <div class="custom-control custom-radio">
+                                <input name="correoCertificadoLlegada" [(ngModel)]="documento.correoCertificadoLlegada" value="No" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" checked>
+                                <label class="custom-control-label" for="customRadio2">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf='documento.correoCertificadoLlegada == "Si"'>
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>Empresa Transportadora</label>
+                            <input class="form-control" [(ngModel)]="documento.nombreTransportadoraLlegada" name="nombreTransportadoraLlegada" type="text">
+                        </div>
+                        <div  class="col-xs-12 col-lg-3">
+                            <label>Fecha llegada</label>
+                            <input class="form-control" [(ngModel)]="documento.fechaLlegada" name="fechaLlegada" type="date">
+                        </div>
+                        <div  class="col-xs-12 col-lg-3">
+                            <label>numeroGuiaLlegada</label>
+                            <input class="form-control" [(ngModel)]="documento.numeroGuiaLlegada" name="numeroGuiaLlegada" type="text">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancel
+                </button>
+                <button (click)="onCrearRegistro()" [disabled]="formNewRegistro.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf='prohibicion'>
+    <div class="col-xs-12 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-uppercase">Registro de prohibición</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <form #formNewProhibicion="ngForm">
+                    <div class="form-group row">
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>No. Oficio</label>
+                            <input class="form-control" [(ngModel)]="medidaCautelar.numeroOficio" name="numeroOficio" type="text">
+                        </div>
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>Quien Ordena</label>
+                            <input class="form-control" [(ngModel)]="medidaCautelar.quienOrdena" name="quienOrdena" type="text">
+                        </div>
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>Fecha Inicio</label>
+                            <input class="form-control" [(ngModel)]="medidaCautelar.fechaInicio" name="fechaInicio" type="date">
+                        </div>
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>Fecha Fin</label>
+                            <input class="form-control" [(ngModel)]="medidaCautelar.fechaFin" name="fechaFin" type="date">
+                        </div>
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>Identificación Implicado</label>
+                            <input class="form-control" [(ngModel)]="medidaCautelar.identificacionImplicado" name="identificacionImplicado" type="text">
+                        </div>
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>Delito</label>
+                            <input class="form-control" [(ngModel)]="medidaCautelar.delito" name="delito" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <button (click)="onCrearProhibicion()" [disabled]="formNewProhibicion.invalid"  class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                        </button>
+                    </div>
+                </form>
+                    
+
+                    <div class="form-group row">
+                        <div  class="col-xs-12 col-lg-4">
+                            <label>Lugar</label>
+                            <input class="form-control" [(ngModel)]="medidaCautelar.numeroOficio" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Clase Vehiculo <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="claseId" required>
+                            </ng-select>
+                        </div>
+                        <div  class="col-xs-12 col-lg-4">
+                            <label>Placa</label>
+                            <input class="form-control" [(ngModel)]="medidaCautelar.delito" type="text" required>
+                        </div>
+                    </div>
+                
+
+                <div class="form-group row">
+                    <button (click)="onCrearProhibicion()" [disabled]="formNewProhibicion.invalid"  class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

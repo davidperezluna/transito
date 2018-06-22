@@ -21,7 +21,7 @@ import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
-import { TipoCorrespondenciaRoutes } from './tipoCorrespondencia/tipoCorrespondencia.routes';
+import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
 import { GeneroRoutes } from './genero/genero.routes';
 import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
@@ -32,9 +32,8 @@ import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
-import { TipoDocumentoRoutes } from './tipoDocumento/tipoDocumento.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
-import { GestionDocumentosRoutes } from './gestionDocumentos/gestionDocumentos.routes';
+import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { EmpresaRoutes } from './empresa/empresa.routes';
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
@@ -62,7 +61,8 @@ export const DashboardRoutes: Route[] = [
         ...ServicioRoutes,
         ...CiudadanoRoutes,
         ...TipoIdentificacionRoutes,
-        ...TipoCorrespondenciaRoutes,
+        ...MgdTipoCorrespondenciaRoutes,
+        ...MgdRegistroRoutes,
         ...GeneroRoutes,
         ...GrupoSanguineoRoutes,
         ...CuentaRoutes,
@@ -77,11 +77,8 @@ export const DashboardRoutes: Route[] = [
         ...TramiteSolicitudRoutes,
         ...SustratoRoutes,
         ...GestionTransportePublicoRoutes,
-        ...TipoDocumentoRoutes,
-
         ...EmpresaRoutes,
         // ...SucursalRoutes,
-        ...GestionDocumentosRoutes,
         ...TramitePrecioRoutes, 
         ...ConceptoParametroRoutes     ]
     }

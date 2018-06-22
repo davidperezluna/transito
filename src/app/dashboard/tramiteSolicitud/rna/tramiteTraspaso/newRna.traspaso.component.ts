@@ -110,7 +110,6 @@ export class NewRnaTraspasoComponent implements OnInit {
 
     }
     
-   
     enviarTramite(){
         this.datos.vehiculo = this.vehiculo.placa;
         this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;

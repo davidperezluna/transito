@@ -259,6 +259,7 @@ constructor(
     }
   
   }
+  
   isCiudadano() {
     console.log(this.tipoIdentificacionSelected);
     let token = this._loginService.getToken();
@@ -290,7 +291,7 @@ constructor(
   }
 
   changedTipoId(){
-    this.tipoId= false;
+    this.tipoId = false;
   }
 
 }
