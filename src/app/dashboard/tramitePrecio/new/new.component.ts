@@ -99,7 +99,7 @@ constructor(
           //   }
           // });
 
-          alert ("estas aqui la fecha es mayor");
+          // alert ("estas aqui la fecha es mayor");
 
 
           console.log(this.claseSelected);
