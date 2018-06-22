@@ -34,7 +34,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.sustrato = new Sustrato(null, null, null, null, null, null, null);
+    this.sustrato = new Sustrato(null, null, null, null, null, null,null,null,null,null,null,null);
     this.estadoList = ['Utilizado', 'Disponible', 'Dañado por impresión.'];
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(

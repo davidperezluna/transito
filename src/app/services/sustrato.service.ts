@@ -33,6 +33,12 @@ export class SustratoService {
 		return this._http.post(this.url + '/show/' + id, params, { headers: headers }).map(res => res.json());
 	}
 
+	showNombreSustrato(token, consecutivo) {
+		let params = 'authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/show/consecutivo/' + consecutivo, params, { headers: headers }).map(res => res.json());
+	}
+
 	editSustrato(tramiteSolicitud, token) {
 		let json = JSON.stringify(tramiteSolicitud);
 		let params = 'json=' + json + '&authorization=' + token;

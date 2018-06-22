@@ -12,7 +12,6 @@ export class EmpresaService {
 	constructor(private _http: Http){}
 
 	getEmpresa(){
-		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 

@@ -25,6 +25,8 @@ export class ConceptoParametroTramiteService {
 							  .map(res => res.json());
 	}
 
+	
+
 	deleteConceptoParametro(token,id){
 
 		let params = "authorization="+token;

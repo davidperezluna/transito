@@ -17,7 +17,6 @@ export class TipoDocumentoService {
 	}
 
 	register(tipoDocumento,token){
-		
 		let json = JSON.stringify(tipoDocumento);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -26,7 +25,6 @@ export class TipoDocumentoService {
 	}
 
 	deleteTipoDocumento(token,id){
-
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
@@ -34,7 +32,6 @@ export class TipoDocumentoService {
 	}
 
 	showTipoDocumento(token,id){
-		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
@@ -43,7 +40,6 @@ export class TipoDocumentoService {
 	}
 
 	editTipoDocumento(tipoDocumento,token){
-
 		let json = JSON.stringify(tipoDocumento);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

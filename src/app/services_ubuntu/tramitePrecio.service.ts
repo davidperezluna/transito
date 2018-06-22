@@ -22,6 +22,15 @@ export class TramitePrecioService {
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(res => res.json());
 	}
 
+	registerCalculo(tramitesPrecios,token){
+		
+		let json = JSON.stringify(tramitesPrecios);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/new/tramites/precios", params, {headers: headers})
+							  .map(res => res.json());
+	}
+
 	deleteTramitePrecio(token, id) {
 		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
