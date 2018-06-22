@@ -6,6 +6,7 @@ import {ConceptoParametroTramiteService} from '../../../services/conceptoParameT
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 import {TramitePrecioService} from '../../../services/tramitePrecio.service';
+import { log } from 'util';
 declare var $: any;
 
 @Component({
@@ -81,6 +82,7 @@ constructor(
       response => {
         this.tramitePrecios = response.data;
         this.tramitePrecios.forEach(tramitePrecio => {
+          // console.log(tramitePrecio);
           
           let token = this._loginService.getToken();
           this._ConceptoParametroService.showConceptoParametroTramitePrecio(token,tramitePrecio.id).subscribe(

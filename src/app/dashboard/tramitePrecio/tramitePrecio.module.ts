@@ -5,6 +5,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import {TramitePrecioService} from '../../services/tramitePrecio.service';
 import {TipoVehiculoService} from '../../services/tipoVehiculo.service';
 import {ParametroService} from '../../services/parametro.service';
+
 import {ConceptoParametroTramiteService} from '../../services/conceptoParameTrotramite.service';
 
 import { NewComponent } from './new/new.component';

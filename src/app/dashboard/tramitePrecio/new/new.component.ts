@@ -6,6 +6,7 @@ import {TramiteService} from '../../../services/tramite.service';
 import {ModuloService} from '../../../services/modulo.service';
 import {ClaseService} from '../../../services/clase.service';
 import swal from 'sweetalert2';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-new',
@@ -16,13 +17,17 @@ export class NewComponent implements OnInit {
 public tramitePrecio: TramitePrecio;
 public errorMessage;
 public respuesta;
+public tramitesPrecios:any;
 public tramites:any;
 public clases:any;
 public modulos:any;
 public tramiteSelected:any;
+public date:any;
 public moduloSelected:any;
 public vehiculoTipoSelected:any;
 public claseSelected=null;
+public fechaActual:any;
+public fechaInicio:any;
 
 constructor(
   private _TramitePrecioService: TramitePrecioService,
@@ -33,12 +38,26 @@ constructor(
   ){}
 
   ngOnInit() {
+
+    // nuevooooooooooooooooooooooooooooooooooooo.......................
+
+    this._TramitePrecioService.getTramitePrecio().subscribe(
+      response => {
+        this.tramitesPrecios = response.tramitePreciosActivo;
+      }, 
+    );
+      // finnnnnnnnn..........................................................
+
+
     this.claseSelected=null;
+    // console.log(this.tramitePrecio);
     this.tramitePrecio = new TramitePrecio(null,null,null,null,null,null,null,null);
+    this.date = new Date();
 
     this._moduloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
+        
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -49,6 +68,8 @@ constructor(
         }
       }
     );
+
+    
 
 
    
@@ -63,37 +84,68 @@ constructor(
     if (this.claseSelected) {
       this.tramitePrecio.claseId = this.claseSelected;
     }
-    console.log(this.claseSelected);
-    this.tramitePrecio.moduloId = this.moduloSelected;
-		this._TramitePrecioService.register(this.tramitePrecio,token).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
+        console.log(this.tramitePrecio.fechaInicio);
+        this.fechaInicio = new Date(this.tramitePrecio.fechaInicio);
+        console.log(this.fechaInicio);
+        console.log(this.date);
+        // console.log(this.tramitePrecio.tramiteId);
+        // console.log(this.tramitePrecio);
+       
+        if (this.date < this.fechaInicio) {
+          // let nombre = 
+          // this.tramitesPrecios.forEach(tramitePrecio => {
+          //   if (tramitePrecio.nombre==) {
+              
+          //   }
+          // });
+
+          alert ("estas aqui la fecha es mayor");
+
+
+          console.log(this.claseSelected);
+          this.tramitePrecio.moduloId = this.moduloSelected;
+          this._TramitePrecioService.register(this.tramitePrecio,token).subscribe(
+            response => {
+              this.respuesta = response;
+              if(this.respuesta.status == 'success'){
+                this.ready.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: 'El registro se ha registrado con exito',
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: 'El tramitePrecio ya se encuentra registrado',
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+            error => {
+                this.errorMessage = <any>error;
+      
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+      
+          }); 
+
+
+
         }else{
           swal({
-            title: 'Error!',
-            text: 'El tramitePrecio ya se encuentra registrado',
-            type: 'error',
+            title: 'Verificar!',
+            text: 'La fecha de inicio tiene que ser mayor a la fecha actual.',
+            type: 'warning',
             confirmButtonText: 'Aceptar'
           })
         }
-			error => {
-					this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
+   
   }
 
   changedModulo(e){
