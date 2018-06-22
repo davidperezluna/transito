@@ -57,6 +57,12 @@ export class MarcaComponent implements OnInit {
       );
   }
   iniciarTabla(){
+    // Setup - add a text input to each footer cell
+    $('#dataTables-example thead th').each( function () {
+      var title = $(this).text();
+      $(this).html( '<input type="text" placeholder="'+title+'" />' );
+    } );
+
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -69,8 +75,20 @@ export class MarcaComponent implements OnInit {
            sLast: '>>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
+    this.table = $('#dataTables-example').DataTable();
+    // Apply the search
+    this.table.columns().every( function () {
+      var that = this;
+
+      $('input', this.header() ).on('keyup change', function () {
+          if ( that.search() !== this.value ) {
+              that
+                  .search( this.value )
+                  .draw();
+          }
+      } );
+    });
   }
   onNew(){
     this.formNew = true;
