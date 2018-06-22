@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class SucursalService {
-	public url = "http://190.146.7.242/colossus-sit/web/app.php/empresa/sucursal";
+	public url = "http://190.146.7.242/colossus-sit/web/app.php/sucursal";
 	public identity;
 	public token;
 
@@ -60,6 +60,11 @@ export class SucursalService {
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
 
+	}
+
+	getSucursalEmpresa(id){
+		
+		return this._http.get(this.url+"/"+id+"/sucursales/por/empresa").map(res => res.json());
 	}
 	
 }

@@ -12,7 +12,6 @@ export class FacturaService {
 	constructor(private _http: Http){}
 
 	getFactura(){
-		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
@@ -42,12 +41,19 @@ export class FacturaService {
 
 	}
 
-	showFacturaByNumero(token, numeroFactura) {
-		console.log(numeroFactura);
-		let json = JSON.stringify(numeroFactura);
+	showFacturaById(token, id) {
+		let json = JSON.stringify(id);
 		let params = 'json=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + '/show/numero', params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + '/show/id', params, { headers: headers }).map(res => res.json());
+	}
+
+	
+	showFacturaByVehiculo(token, vehiculo) {
+		let json = JSON.stringify(vehiculo);
+		let params = 'json=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/show/factura/vehiculo', params, { headers: headers }).map(res => res.json());
 	}
 
 	editFactura(factura,token){

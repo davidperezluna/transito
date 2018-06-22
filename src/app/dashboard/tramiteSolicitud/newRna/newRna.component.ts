@@ -101,15 +101,19 @@ constructor(
   }
 
   changedFactura(id){
+
     this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
     response => {
       let active = true;
       this.factura = response[0].factura;
       this.tramitesFactura = response;
-      console.log(this.tramitesFactura);
       this.tramitesFactura.forEach(tramiteFactura => {
         if (tramiteFactura.realizado == 0) {
           active = false;
+        }
+        console.log(tramiteFactura.tramitePrecio);
+        if (tramiteFactura.tramitePrecio.tramite.sustrato) {
+          this.sustrato = true;
         }
       });
 
@@ -170,7 +174,7 @@ constructor(
                 swal.close();
             } else {
               this.facturas = false;
-              this.mensaje = 'Factura no se encuentra registrada en la base de datos';
+              this.mensaje = 'No hay faturas para el vehiculo';
               this.isError = true;
               swal.close();
             }
@@ -247,19 +251,16 @@ constructor(
   }
 
   finalizarSolicitud(){
-
+    this.tramites='';
     this.tramitesFactura.forEach(tramiteFactura => {
       this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>' 
     });
     let token = this._loginService.getToken();
 
-    console.log(this.tramiteSolicitud.solicitanteId);
-
     this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
       response =>{
         if (response.status == 'success') {
           this.ciudadano = response.data.ciudadano;
-          console.log(response.data);
           var html = 'Se va a enviar la siguiente solicitud:<br>'+
                     'Factura: <b>'+this.factura.numero+'</b><br>'+
                     'Vehiculo: <b>'+this.vehiculo.placa+'</b><br>'+
@@ -280,7 +281,22 @@ constructor(
             cancelButtonAriaLabel: 'Thumbs down',
           }).then((result) => {
             if (result.value) {
+              console.log(this.factura);
+              this.factura.estado = 'Finalizada';
+              this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
+              this._facturaService.editFactura(this.factura,token).subscribe(
+                response => {
+                  
 
+                  
+                  error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                });
               } else if (
               // Read more about handling dismissals
               result.dismiss === swal.DismissReason.cancel
