@@ -110,8 +110,10 @@ constructor(
       this.tramitesFactura.forEach(tramiteFactura => {
         if (tramiteFactura.realizado == 0) {
           active = false;
+        }else{
+          //consultar tramite solicitud con el id de tramite factura
+          //hacer un push array para extraer todas las solicitudes en estado realizado
         }
-        console.log(tramiteFactura.tramitePrecio);
         if (tramiteFactura.tramitePrecio.tramite.sustrato) {
           this.sustrato = true;
         }
@@ -132,6 +134,8 @@ constructor(
   }
   
   onKeyValidateVehiculo(){
+    this.msj = '';
+    this.mensaje = '';
     swal({
       title: 'Buscando Vehiculo!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -154,9 +158,12 @@ constructor(
         if (response.status == 'error' ) {
           this.vehiculoSuccess=false;
           this.msj= response.msj;
+          this.isError = true;
           this.error = true;
           this.tipoError = response.code; 
+          swal.close();
         }else{
+          swal.close();
           this.vehiculo = response.data[0].vehiculo;
           // se busca las faturas si el vehiculo fue encontrado
           let dato = {
@@ -164,7 +171,8 @@ constructor(
           };
 
           this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
-          response => {
+            response => {
+              
             if (response.status == 'success') {
                 this.facturas = response.data;
                 this.vehiculoSuccess = true;

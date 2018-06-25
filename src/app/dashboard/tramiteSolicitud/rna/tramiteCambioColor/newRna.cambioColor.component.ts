@@ -16,11 +16,13 @@ export class NewRnaCambioColorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() tramitesFactura: any = null;
     public errorMessage;
     public respuesta;
     public colores: any;
     public tramiteFacturaSelected: any;
     public colorSelected: any;
+    public tramiteRealizado: any;
     public datos = {
         'newData': null,
         'oldData': null,
@@ -37,6 +39,30 @@ export class NewRnaCambioColorComponent implements OnInit {
     ) { }
  
     ngOnInit() {
+        this.tramitesFactura.forEach(tramiteFactura => {
+            if (tramiteFactura.realizado == 1) {
+                if (tramiteFactura.tramitePrecio.tramite.id == 5) {
+                    this.tramiteRealizado = tramiteFactura;
+                    console.log(this.tramiteRealizado);
+                }
+            }
+        });
+        //consultar tramite solicitud con tramiterealizado.id
+
+        // this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura().subscribe(
+        //     response => {
+        //         this.colores = response;
+        //     },
+        //     error => {
+        //         this.errorMessage = <any>error;
+
+        //         if (this.errorMessage != null) {
+        //             console.log(this.errorMessage);
+        //             alert('Error en la petición');
+        //         }
+        //     }
+        // );
+
         this._ColorService.getColorSelect().subscribe(
             response => {
                 this.colores = response;

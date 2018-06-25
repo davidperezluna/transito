@@ -152,10 +152,6 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-
-    console.log(this.tramitesPrecios);
-
-    
 		this._TramitePrecioService.registerCalculo(this.tramitesPrecios,token).subscribe(
 			response => {
         this.respuesta = response;
