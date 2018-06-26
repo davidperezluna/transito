@@ -28,6 +28,7 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
 import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
+import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
 import { CarroceriaModule } from './carroceria/carroceria.module';
@@ -79,6 +80,7 @@ import {RightsidebarComponent} from '../shared/index';
       TipoIdentificacionModule,
       MgdTipoCorrespondenciaModule,
       MgdRegistroModule,
+      MparqCostoTrayectoModule,
       GeneroModule,
       GrupoSanguineoModule,
       CuentaModule,

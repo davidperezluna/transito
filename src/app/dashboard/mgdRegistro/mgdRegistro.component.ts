@@ -18,8 +18,10 @@ export class MgdRegistroComponent implements OnInit {
   public peticionario: MgdRegistro;
 	public formNew = false;
   public formEdit = false;
+  public formShow = false;
   public formSearch = true;
-  public table:any; 
+  public table:any;
+  public documento:any;
   public mgdRegistros:any;
 
   constructor(
@@ -67,8 +69,12 @@ export class MgdRegistroComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
+    this.formSearch = false;
+    this.formShow = false;
+    this.documentos = null;
     this.table.destroy();
   }
 
@@ -76,12 +82,24 @@ export class MgdRegistroComponent implements OnInit {
       if(isCreado) {
         this.formNew = false;
         this.formEdit = false;
+        this.formShow = false;
         this.formSearch = true;
         this.ngOnInit();
       }
   }
-  deleteGestionDocumentos(id:any){
 
+  readyDocument(documento:any){
+    this.documento = documento;
+    if(this.documento) {
+      this.formNew = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.formSearch = true;
+      this.ngOnInit();
+    }
+  }
+
+  deleteGestionDocumentos(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -142,9 +160,11 @@ export class MgdRegistroComponent implements OnInit {
            this.formSearch = true;
            this.documentos = response.data;
 
+           this.iniciarTabla();
+
           swal({
             title: 'Perfecto',
-            text: "¡Documento encontrado!",
+            text: "¡Documentos encontrados!",
             type: 'info',
             showCloseButton: true,
             focusConfirm: false,

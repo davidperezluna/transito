@@ -1,11 +1,10 @@
 <div class="row">
     <div class="col-xs-12 col-lg-8">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="text-uppercase">Registro de documento</h5>
-                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <hr> 
-                <form #formNewRegistro="ngForm">
+        <form #formNewRegistro="ngForm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-uppercase">Registro de documento</h5>
+                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>No. de Radicado <b class="text-danger">*</b></label>
@@ -81,8 +80,16 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>Tipo Correspondencia <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" (ngModelChange)="changedTipoCorrespondencia($event)" [options]="tiposCorrespondencia" [(ngModel)]="tipoCorrespondeciaSelected" name="tiposCorrespondenciaId" required>
+                            <ng-select [multiple]="false" (ngModelChange)="changedTipoCorrespondencia($event)" [options]="tiposCorrespondencia" [(ngModel)]="tipoCorrespondenciaSelected" name="tipoCorrespondenciaId" required>
                             </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-3" *ngIf='editable'>
+                            <label>Vigencia (Días) <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="documento.vigencia" name="vigencia" type="text" required>
+                        </div>
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>No. Oficio <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="documento.numeroOficio" name="medidaCautelarNumeroOficio" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Asunto y Concepto <b class="text-danger">*</b></label>
@@ -90,7 +97,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Adjuntar documento <b class="text-danger">*</b></label>
-                            <input class="form-control" type="file">
+                            <input class="form-control" type="file" (change)="onFileChange($event)">
                         </div>
                     </div>
                     <hr>
@@ -124,90 +131,118 @@
                             <input class="form-control" [(ngModel)]="documento.numeroGuiaLlegada" name="numeroGuiaLlegada" type="text">
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancel
-                </button>
-                <button (click)="onCrearRegistro()" [disabled]="formNewRegistro.invalid" class="btn btn-primary" type="button">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row" *ngIf='prohibicion'>
-    <div class="col-xs-12 col-lg-8">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="text-uppercase">Registro de prohibición</h5>
-                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <hr>
-                <form #formNewProhibicion="ngForm">
-                    <div class="form-group row">
-                        <div  class="col-xs-12 col-lg-6">
-                            <label>No. Oficio</label>
-                            <input class="form-control" [(ngModel)]="medidaCautelar.numeroOficio" name="numeroOficio" type="text">
+            <!-- Formulario medida cautelar -->
+            <div class="row" *ngIf='prohibicion'>
+                <div class="col-xs-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-uppercase">Medida Cautelar</h5>
+                            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                            <hr>
+                            <div class="form-group row">
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>No. Oficio <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.numeroOficio" name="medidaCautelarnumeroOficio" type="text" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Quien Ordena <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.quienOrdena" name="quienOrdena" type="text" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Fecha Inicio <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.fechaInicio" name="fechaInicio" type="date" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Fecha Fin <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.fechaFin" name="fechaFin" type="date" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Identificación Implicado <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.identificacionImplicado" name="identificacionImplicado" type="text" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Delito <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.delito" name="delito" type="text" required>
+                                </div>
+                            </div>
                         </div>
-                        <div  class="col-xs-12 col-lg-6">
-                            <label>Quien Ordena</label>
-                            <input class="form-control" [(ngModel)]="medidaCautelar.quienOrdena" name="quienOrdena" type="text">
-                        </div>
-                        <div  class="col-xs-12 col-lg-6">
-                            <label>Fecha Inicio</label>
-                            <input class="form-control" [(ngModel)]="medidaCautelar.fechaInicio" name="fechaInicio" type="date">
-                        </div>
-                        <div  class="col-xs-12 col-lg-6">
-                            <label>Fecha Fin</label>
-                            <input class="form-control" [(ngModel)]="medidaCautelar.fechaFin" name="fechaFin" type="date">
-                        </div>
-                        <div  class="col-xs-12 col-lg-6">
-                            <label>Identificación Implicado</label>
-                            <input class="form-control" [(ngModel)]="medidaCautelar.identificacionImplicado" name="identificacionImplicado" type="text">
-                        </div>
-                        <div  class="col-xs-12 col-lg-6">
-                            <label>Delito</label>
-                            <input class="form-control" [(ngModel)]="medidaCautelar.delito" name="delito" type="text">
+                        <div class="card-footer">
+                            <button (click)="onCrearProhibicion()" class="btn btn-primary pull-right" type="button">
+                            <i class="fa fa-save"></i>
+                            </button>
                         </div>
                     </div>
-
-                    <div class="form-group row">
-                        <button (click)="onCrearProhibicion()" [disabled]="formNewProhibicion.invalid"  class="btn btn-primary" type="button">
+                </div>
+            </div>
+            <!-- /Formulario medida cautelar -->
+                    
+            <!-- Formulario vehiculo -->
+            <div class="row" *ngIf='datosRegistro.medidaCautelar.length > 0'>
+                <div class="col-xs-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-uppercase">Vehiculo</h5>
+                            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                            <hr>
+                            <div class="form-group row">
+                                <div  class="col-xs-12 col-lg-3">
+                                    <label>Lugar <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="vehiculo.lugar" name="lugar" type="text">
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Clase Vehiculo <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="claseId">
+                                    </ng-select>
+                                </div>
+                                <div  class="col-xs-12 col-lg-3">
+                                    <label>Placa</label>
+                                    <input class="form-control text-uppercase" [(ngModel)]="vehiculo.placa" name="placa" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="onCrearVehiculo()" class="btn btn-primary pull-right" type="button">
+                            <i class="fa fa-save"></i>
+                            </button>
+                        </div>
+                        <div class="form-group row" *ngIf='datosRegistro.vehiculo.length > 0'>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Lugar</th>
+                                        <th>Clase</th>
+                                        <th>placa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let vehiculo of datosRegistro.vehiculo; let i = index">
+                                        <td >{{vehiculo.lugar}}</td>
+                                        <td >{{vehiculo.claseId}}</td>
+                                        <td >{{vehiculo.placa}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Formulario medida cautelar -->  
+            <div class="form-group row">
+                <div  class="col-xs-12 col-lg-12">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onCrearRegistro()" [disabled]="formNewRegistro.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
-                        </button>
-                    </div>
-                </form>
-                    
-
-                    <div class="form-group row">
-                        <div  class="col-xs-12 col-lg-4">
-                            <label>Lugar</label>
-                            <input class="form-control" [(ngModel)]="medidaCautelar.numeroOficio" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Clase Vehiculo <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="claseId" required>
-                            </ng-select>
-                        </div>
-                        <div  class="col-xs-12 col-lg-4">
-                            <label>Placa</label>
-                            <input class="form-control" [(ngModel)]="medidaCautelar.delito" type="text" required>
-                        </div>
-                    </div>
-                
-
-                <div class="form-group row">
-                    <button (click)="onCrearProhibicion()" [disabled]="formNewProhibicion.invalid"  class="btn btn-primary" type="button">
-                    <i class="fa fa-save"></i>
-                    Enviar
                     </button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
+

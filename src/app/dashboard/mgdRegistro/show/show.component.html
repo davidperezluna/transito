@@ -1,0 +1,84 @@
+<div class="row">
+        <div class="col-xs-12 col-lg-8">
+            <form #formReparto="ngForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-uppercase">Reparto de documento</h5>
+                        <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-3">
+                                <label>No. de Radicado <b class="text-danger">*</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>No. de folios <b class="text-danger">*</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Fecha</label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Hora</label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Peticionario: <b class="text-danger">*</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Cedula o Nit: <b class="text-danger">*</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Entidad: <b class="text-danger">*</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Dirección: <b class="text-danger">*</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Teléfono: <b class="text-danger">*</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Correo: <b class="text-danger">*</b></label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Tipo de Correspondencia <b class="text-danger">*</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Asunto y Concepto <b class="text-danger">*</b></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones <b class="text-danger">*</b></label>
+                                <textarea class="form-control" [(ngModel)]="observaciones" name="observaciones" rows="6"></textarea>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Asignar a <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="usuarios" [(ngModel)]="usuarioSelected" name="usuarioId" required>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div  class="col-xs-12 col-lg-12">
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancel
+                        </button>
+                        <button (click)="onCrearReparto()" [disabled]="formReparto.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    

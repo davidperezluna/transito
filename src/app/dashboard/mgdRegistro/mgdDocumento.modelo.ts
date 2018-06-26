@@ -9,6 +9,7 @@ export class MgdDocumento{
 		public nombreTransportadoraLlegada: string,
 		public fechaLlegada: string,
 		public numeroGuiaLlegada: string,
+		public vigencia: number,
 		public tipoCorrespondenciaId: number,
         public sedeOperativaId: number,
 		public usuarioId: number
