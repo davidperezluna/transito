@@ -78,18 +78,20 @@ constructor(
     })
  
     let token = this._loginService.getToken();
-
     this._representanteEmpresaService.showRepresentanteEmpresa(this.empresa.id,token).subscribe(
       response => {
         if(response.status == "success"){
-
-          this.representantes=response.representantes;
+          
           this.representanteVigente=response.representanteVigente;
+          this.representantes=response.representantes;
           this.formListaRepresentanteVigente = true;
+          
+          // console.log(this.representantes);
        
           if (this.representantes.length!=0) {
+
             this.formListaRepresentantes=true;
-            console.log(this.representantes.length);
+            // console.log(this.representantes.length);
           }
         }else{
           this.formListaRepresentanteVigente = false;

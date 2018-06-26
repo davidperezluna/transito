@@ -21,24 +21,23 @@
                                 <button (click)="onKeyValidateSustrato()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                             </span>
                         </div>
-
                         <div class="container" *ngIf="isExist">
+
+
                             <div class="col-xs-12 col-lg-12">
                                 <br>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="estadoImpresion" name="estadoImpresion" class="custom-control-input" id="customCheck1" checked="">
-                                    <label class="custom-control-label" for="customCheck1">Impresión exitosa</label>
+                                <div class="custom-control " >
+                                    <label>Licencia de transito</label>
+                                    <!-- <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.valor" name="valor" required> -->
+                                    <input class="form-control"  type="text" [(ngModel)]="licenciaTransito" name="licenciaTransito" id="" placeholder=" Digite licencia de transito " required>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-lg-12" *ngIf="estadoImpresion == false">
-                                <label>Descripción </label>
-                                <textarea class="form-control" placeholder="ingrese la descripción para anular el sustrato" [(ngModel)]="sustrato.descripcion" required name="descripcion"></textarea>
-                            </div>
-                            <div class="col-xs-12 col-lg-12" *ngIf="estadoImpresion == true">
+                            
+                            <div class="col-xs-12 col-lg-12" >
                                 <br> 
-                                <div class="custom-control custom-checkbox">
+                                <div class="custom-control custom-checkbox"  >
                                     <input [(ngModel)]="tarjetaEntregada" name="tarjetaEntregada" type="checkbox" class="custom-control-input" id="customCheck2" checked="">
-                                    <label class="custom-control-label" for="customCheck2">Entregada</label>
+                                    <label class="custom-control-label" >Entregada</label>
                                 </div>
                             </div>
                             <!--tipo identificacion ciudadano -->

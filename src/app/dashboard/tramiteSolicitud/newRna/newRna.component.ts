@@ -105,7 +105,23 @@ constructor(
     this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
     response => {
       let active = true;
-      this.factura = response[0].factura;
+      let token = this._loginService.getToken();
+      this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
+        responseCiudadano =>{
+          if (responseCiudadano.status == 'success') {
+            this.ciudadano = responseCiudadano.data.ciudadano;
+            this.factura = response[0].factura;
+
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
       this.tramitesFactura = response;
       this.tramitesFactura.forEach(tramiteFactura => {
         if (tramiteFactura.realizado == 0) {
@@ -184,6 +200,8 @@ constructor(
               this.facturas = false;
               this.mensaje = 'No hay faturas para el vehiculo';
               this.isError = true;
+              this.vehiculoSuccess=false;
+              this.factura=false;
               swal.close();
             }
             error => {
@@ -221,6 +239,7 @@ constructor(
     });
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
+
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
@@ -265,10 +284,6 @@ constructor(
     });
     let token = this._loginService.getToken();
 
-    this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
-      response =>{
-        if (response.status == 'success') {
-          this.ciudadano = response.data.ciudadano;
           var html = 'Se va a enviar la siguiente solicitud:<br>'+
                     'Factura: <b>'+this.factura.numero+'</b><br>'+
                     'Vehiculo: <b>'+this.vehiculo.placa+'</b><br>'+
@@ -294,9 +309,6 @@ constructor(
               this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
               this._facturaService.editFactura(this.factura,token).subscribe(
                 response => {
-                  
-
-                  
                   error => {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
@@ -312,16 +324,6 @@ constructor(
     
             }
           })
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );
 
           
   }
