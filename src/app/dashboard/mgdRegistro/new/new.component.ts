@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,ViewChild,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MgdPeticionario } from '../mgdPeticionario.modelo';
 import { MgdDocumento } from '../mgdDocumento.modelo';
 import { MgdMedidaCautelar } from '../mgdMedidaCautelar.modelo';
@@ -16,12 +16,14 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
+@ViewChild('fileInput') fileInput;
 public peticionario: MgdPeticionario;
 public documento: MgdDocumento;
 public medidaCautelar: MgdMedidaCautelar;
 public vehiculo: MgdVehiculo;
 public errorMessage;
 public respuesta;
+public editable = false;
 public documentoEncontrado = false;
 public crearDocumento = false;
 public peticionarios: any;
@@ -30,9 +32,11 @@ public tipoIdentificacionSelected: any;
 public tiposCorrespondencia: any;
 public tipoCorrespondenciaSelected: any;
 public clases: any;
+public claseSelected: any;
 public date: any;
+public file: any;
 public prohibicion: any;
-public datos = {
+public datosRegistro = {
   'peticionario': [],
   'documento': [],
   'medidaCautelar': [],
@@ -49,8 +53,9 @@ constructor(
 
   ngOnInit() {
     this.peticionario = new MgdPeticionario(null, null, null, null, null, null, null, null, null, null, null, null);
-    this.documento = new MgdDocumento(null, null, null, null, null, null, null, null, null, null, null, null);
+    this.documento = new MgdDocumento(null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.medidaCautelar = new MgdMedidaCautelar(null, null, null, null, null, null, null, null);
+    this.vehiculo = new MgdVehiculo(null, null, null, null);
     this.prohibicion = false;
     this.date = new Date();
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
@@ -127,7 +132,7 @@ constructor(
   }
 
   onCrearRegistro(){
-    this.datos.peticionario.push({
+    this.datosRegistro.peticionario.push({
       'primerNombre':this.peticionario.primerNombre,
       'segundoNombre':this.peticionario.segundoNombre,
       'primerApellido':this.peticionario.primerApellido,
@@ -141,7 +146,7 @@ constructor(
       'tipoIdentificacionId':this.tipoIdentificacionSelected
     });
 
-    this.datos.documento.push({
+    this.datosRegistro.documento.push({
       'numeroRadicado':this.documento.numeroRadicado,
       'folios':this.documento.folios,
       'numeroOficio':this.documento.numeroOficio,
@@ -150,18 +155,88 @@ constructor(
       'nombreTransportadoraLlegada':this.documento.nombreTransportadoraLlegada,
       'fechaLlegada':this.documento.fechaLlegada,
       'numeroGuiaLlegada':this.documento.numeroGuiaLlegada,
+      'vigencia':this.documento.vigencia,
       'tipoCorrespondenciaId':this.tipoCorrespondenciaSelected
     });
+
+    let token = this._loginService.getToken();
+
+		this._PeticionarioService.register(this.file, this.datosRegistro, token).subscribe(
+			response => {
+        this.respuesta = response;
+        console.log(this.respuesta);
+        if(this.respuesta.status == 'success'){
+          this.ready.emit(true);
+          swal({
+            title: 'Perfecto!',
+            text: 'El registro se ha registrado con exito',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        }else{
+          swal({
+            title: 'Error!',
+            text: this.respuesta.msg,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+			error => {
+					this.errorMessage = <any>error;
+
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+
+		});
   }
 
   onCrearProhibicion(){
-    this.datos.medidaCautelar.push({
+    this.datosRegistro.medidaCautelar.push({
       'numeroOficio':this.medidaCautelar.numeroOficio,
       'quienOrdena':this.medidaCautelar.quienOrdena,
       'fechaInicio':this.medidaCautelar.fechaInicio,
       'fechaFin':this.medidaCautelar.fechaFin,
       'identificacionImplicado':this.medidaCautelar.identificacionImplicado,
       'delito':this.medidaCautelar.delito
+    });
+
+    swal({
+      title: 'Perfecto',
+      text: "¡Medida cautelar registrada, ingrese al menos un vehiculo!",
+      type: 'info',
+      showCloseButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> OK!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+      '<i class="fa fa-thumbs-down"></i>',
+      cancelButtonAriaLabel: 'Thumbs down',
+    });
+  }
+
+  onCrearVehiculo(){
+    this.datosRegistro.vehiculo.push({
+      'lugar':this.vehiculo.lugar,
+      'placa':this.vehiculo.placa,
+      'claseId':this.claseSelected
+    });
+
+    swal({
+      title: 'Perfecto',
+      text: "¡Vehiculo resgistrado!",
+      type: 'info',
+      showCloseButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> OK!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+      '<i class="fa fa-thumbs-down"></i>',
+      cancelButtonAriaLabel: 'Thumbs down',
     });
   }
 
@@ -172,8 +247,10 @@ constructor(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          console.log(response.data.prohibicion);
           this.prohibicion = response.data.prohibicion;
+          console.log(this.prohibicion);
+          this.editable = response.data.editable;
+          this.documento.vigencia = response.data.diasVigencia;
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -187,4 +264,12 @@ constructor(
     }
   }
 
+  onFileChange(event) {
+    if(event.target.files.length > 0) {
+      const fileSelected: File = event.target.files[0];
+      
+      this.file = new FormData();
+      this.file.append('file', fileSelected);
+    }
+  }
 }

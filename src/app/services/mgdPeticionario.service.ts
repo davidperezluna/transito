@@ -15,16 +15,19 @@ export class MgdPeticionarioService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(peticionario,token){
-		let json = JSON.stringify(peticionario);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+	register(formData, datos, token){
+		let json = JSON.stringify(datos);
+		formData.append('data', json);
+		formData.append('authorization', token);
+		//let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/new", formData).map(res => res.json());
+		/*let json = JSON.stringify(datos);
+		let params = "json="+json+"&"+formData+"&authorization="+token;
 		return this._http.post(this.url+"/new", params, {headers: headers})
-							  .map(res => res.json());
+							  .map(res => res.json());*/
 	}
 
 	deletePeticionario(token,id){
-
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
@@ -41,7 +44,6 @@ export class MgdPeticionarioService {
 	}
 
 	editPeticionario(peticionario,token){
-
 		let json = JSON.stringify(peticionario);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -57,5 +59,12 @@ export class MgdPeticionarioService {
 		return this._http.post(this.url+"/search", params, {headers: headers})
 							  .map(res => res.json());
 	}
-		
+	
+	upload(formData){
+		//let json = JSON.stringify(peticionario);
+		//let params = "json="+json+"&authorization="+token;
+		//let params = "formData="+formData;
+		let headers = new Headers({'Content-Type':undefined});
+		return this._http.post(this.url+"/upload", formData).map(res => res.json());
+	}
 }

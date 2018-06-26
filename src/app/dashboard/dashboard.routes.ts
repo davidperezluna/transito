@@ -22,6 +22,7 @@ import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
 import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
+import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
 import { GeneroRoutes } from './genero/genero.routes';
 import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
@@ -63,6 +64,7 @@ export const DashboardRoutes: Route[] = [
         ...TipoIdentificacionRoutes,
         ...MgdTipoCorrespondenciaRoutes,
         ...MgdRegistroRoutes,
+        ...MparqCostoTrayectoRoutes,
         ...GeneroRoutes,
         ...GrupoSanguineoRoutes,
         ...CuentaRoutes,

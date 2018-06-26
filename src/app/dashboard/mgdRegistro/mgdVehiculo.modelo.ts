@@ -3,6 +3,6 @@ export class MgdVehiculo{
 		public id:number,
 		public lugar: string,
 		public placa: string,
-		public tipoVehiculoId: number
+		public claseId: number
 	){}
 }

@@ -4,27 +4,27 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class CarroceriaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/carroceria";
+export class UsuarioService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/usuario";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getCarroceria(){
+	getUsuarios(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(carroceria,token){
+	register(usuario,token){
 		
-		let json = JSON.stringify(carroceria);
+		let json = JSON.stringify(usuario);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteCarroceria(token,id){
+	deleteUsuario(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -32,7 +32,7 @@ export class CarroceriaService {
 							  .map(res => res.json());
 	}
 
-	showCarroceria(token,id){
+	showUsuario(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -41,9 +41,9 @@ export class CarroceriaService {
 
 	}
 
-	editCarroceria(carroceria,token){
+	editUsuario(usuario,token){
 
-		let json = JSON.stringify(carroceria);
+		let json = JSON.stringify(usuario);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -51,7 +51,7 @@ export class CarroceriaService {
 
 	}
 
-	getCarroceriasClase(calseId,token){
+	getUsuariosClase(calseId,token){
 
 
 		let params = "authorization="+token;
@@ -61,7 +61,7 @@ export class CarroceriaService {
 
     }
     
-    getCarroceriaSelect(){
+    getUsuarioSelect(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	

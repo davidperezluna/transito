@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="text-uppercase">Buscar Registros</h5>
+                    <h5 class="text-uppercase">Registro de documento</h5>
                     <small></small>
                     <hr>
                     <form #formSearch="ngForm">
@@ -54,38 +54,40 @@
     
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 
-    <div class="row">
-        <div class="col-xs-12 col-lg-12" *ngIf='documentoEncontrado'>
+    <div class="row" *ngIf='documentos'>
+        <div class="col-xs-12 col-lg-12">
+            <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-primary" type="button">
+                    <i class="fa fa-plus"></i>
+                    Registrar documento
+                </button>
+            </div>
             <div class="card">
                 <div class="card-body container">
-                    <h5>Registros Encontrado</h5>
+                    <h5>Registros Encontrados</h5>
                     <br>
-                    <table class="table table-striped">
-                    <thead>
-                        <tr>
-                        <th>Nombres</th>
-                        <th>Identificacion</th>
-                        <th>Direccion</th>
-                        <th>Telefono</th>
-                        <th>Numero Oficio</th>
-                        <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="odd" *ngFor="let peticionario of peticionarios; let i = index">
-                        <td >{{peticionario.nombre}}</td>
-                        <td >{{peticionario.identificacion}}</td>
-                        <td >{{peticionario.direccion}}</td>
-                        <td >{{peticionario.telefono}}</td>
-                        <td >{{peticionario.numeroOficio}}</td>
-                        <td class="center"><span class="status success">Active</span></td>
-                        </tr>
-                    </tbody>
-                    </table>
-                    <div class="card-footer">
-                        <button (click)="onCancelarBusqudaRegistros()" class="btn btn-secondary">Cancel</button>
-                        <button (click)="oncrearNuevoRegistro()" class="btn btn-outline-primary pull-right" type="button">Crear NUevo Registro</button>
-                    </div>    
+                    <table class="table" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Nombres y Apellidos</th>
+                                <th>Tipo Correspondencia</th>
+                                <th>No. Radicado</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let documento of documentos; let i = index">
+                                <td >{{ documento.peticionario.primerNombre }} {{ documento.peticionario.primerApellido }}</td>
+                                <td >{{ documento.tipoCorrespondencia.nombre }}</td>
+                                <td >
+                                    <a href="http://localhost/GitHub/colossus-sit/web/docs/{{ documento.url }}" target="_blank">
+                                        {{ documento.numeroRadicado }}
+                                    </a>
+                                </td>
+                                <td >{{ documento.asignado }}</td>
+                            </tr>
+                        </tbody>
+                    </table> 
                 </div>
             </div>
         </div>

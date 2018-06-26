@@ -4,27 +4,26 @@ import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class CarroceriaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/carroceria";
+export class MparqCostoTrayectoService {
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mparqcostotrayecto";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getCarroceria(){
+	getCostoTrayecto(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(carroceria,token){
+	register(tipoCorrespondencia,token){ 
 		
-		let json = JSON.stringify(carroceria);
+		let json = JSON.stringify(tipoCorrespondencia);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteCarroceria(token,id){
+	deleteCostoTrayecto(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -32,37 +31,22 @@ export class CarroceriaService {
 							  .map(res => res.json());
 	}
 
-	showCarroceria(token,id){
-		
+	showCostoTrayecto(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
+		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
 							  .map(res => res.json());
-
 	}
 
-	editCarroceria(carroceria,token){
-
-		let json = JSON.stringify(carroceria);
+	// tslint:disable-next-line:one-line
+	editCostoTrayecto(tipoCorrespondencia,token){
+		let json = JSON.stringify(tipoCorrespondencia);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/edit", params, {headers: headers})
-							  .map(res => res.json());
-
+ 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getCarroceriasClase(calseId,token){
-
-
-		let params = "authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/clase/"+calseId, params, {headers: headers})
-							  .map(res => res.json());
-
-    }
-    
-    getCarroceriaSelect(){
+	getCostoTrayectoSelect(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
-	
 }
