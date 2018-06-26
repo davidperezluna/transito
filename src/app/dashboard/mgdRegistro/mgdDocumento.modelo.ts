@@ -5,7 +5,7 @@ export class MgdDocumento{
 		public folios: number,
 		public numeroOficio: string,
 		public descripcion: string,
-		public correoCertificadoLlegada: boolean,
+		public correoCertificadoLlegada: string,
 		public nombreTransportadoraLlegada: string,
 		public fechaLlegada: string,
 		public numeroGuiaLlegada: string,
