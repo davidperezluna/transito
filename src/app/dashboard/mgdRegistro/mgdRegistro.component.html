@@ -52,7 +52,9 @@
         </div>
     </div>
     
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-new *ngIf='formNew' (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-new>
+
+    <app-show *ngIf='documento' [documento]="documento" (ready)="ready($event)"></app-show>
 
     <div class="row" *ngIf='documentos'>
         <div class="col-xs-12 col-lg-12">

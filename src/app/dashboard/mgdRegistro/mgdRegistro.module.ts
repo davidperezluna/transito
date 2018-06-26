@@ -7,13 +7,14 @@ import { MgdDocumentoService } from '../../services/mgdDocumento.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
+import { ShowComponent } from './show/show.component';
 import {SelectModule} from 'angular2-select';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [MgdRegistroComponent,NewComponent,EditComponent],
-    exports: [MgdRegistroComponent, NewComponent,EditComponent],
+    declarations: [MgdRegistroComponent,NewComponent,EditComponent,ShowComponent],
+    exports: [MgdRegistroComponent, NewComponent,EditComponent,ShowComponent],
     providers:[MgdPeticionarioService,MgdDocumentoService]
 })
 

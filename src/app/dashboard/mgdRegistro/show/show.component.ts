@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -7,18 +7,19 @@ import swal from 'sweetalert2';
   selector: 'app-show',
   templateUrl: './show.component.html'
 })
-export class NewComponent implements OnInit {
+export class ShowComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@ViewChild('fileInput') fileInput;
+@Input() documento: any = null;
 public errorMessage;
 public respuesta;
 public usuarios: any;
 public usuarioSelected: any;
 public observaciones: any;
 public datos = {
-    'usuarioId': null,
-    'observaciones': null
-  };
+  'usuarioId': null,
+  'observaciones': null,
+  'documentoId': this.documento.id
+};
 
 constructor(
     private _UsuarioService: UsuarioService,
@@ -26,6 +27,7 @@ constructor(
   ){}
 
   ngOnInit() {
+    console.log(this.documento.id);
     this._UsuarioService.getUsuarioSelect().subscribe(
       response => {
         this.usuarios = response;

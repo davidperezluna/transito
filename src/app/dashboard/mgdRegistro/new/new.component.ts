@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MgdPeticionario } from '../mgdPeticionario.modelo';
 import { MgdDocumento } from '../mgdDocumento.modelo';
 import { MgdMedidaCautelar } from '../mgdMedidaCautelar.modelo';
@@ -16,7 +16,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@ViewChild('fileInput') fileInput;
+@Output() readyDocument = new EventEmitter<any>();
 public peticionario: MgdPeticionario;
 public documento: MgdDocumento;
 public medidaCautelar: MgdMedidaCautelar;
@@ -115,7 +115,6 @@ constructor(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          console.log(response.data.identificacion);
           this.peticionario.primerNombre = response.data.primerNombre;
           this.peticionario.segundoNombre = response.data.segundoNombre;
           this.peticionario.primerApellido = response.data.primerApellido;
@@ -166,7 +165,7 @@ constructor(
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+          this.readyDocument.emit(this.respuesta.data);
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
