@@ -62,7 +62,6 @@ constructor(
     this._generoService.getGeneroSelect().subscribe(
       response => {
         this.generos = response;
-        console.log(this.generos);
       },
       error => {
         this.errorMessage = <any>error;

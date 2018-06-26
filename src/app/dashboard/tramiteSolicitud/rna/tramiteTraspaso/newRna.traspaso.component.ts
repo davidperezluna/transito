@@ -92,22 +92,6 @@ export class NewRnaTraspasoComponent implements OnInit {
             }
           );
         
-        this._ColorService.getColorSelect().subscribe(
-            response => {
-                this.colores = response;
-                console.log(this.colores);
-                console.log(this.tipoPropiedades);
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-
     }
     
     enviarTramite(){

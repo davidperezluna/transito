@@ -23,18 +23,8 @@
                         </div>
 
                         <div class="container" *ngIf="isExist">
-                            <div class="col-xs-12 col-lg-12">
-                                <br>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="estadoImpresion" name="estadoImpresion" class="custom-control-input" id="customCheck1" checked="">
-                                    <label class="custom-control-label" for="customCheck1">Impresión exitosa</label>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-12" *ngIf="estadoImpresion == false">
-                                <label>Descripción </label>
-                                <textarea class="form-control" placeholder="ingrese la descripción para anular el sustrato" [(ngModel)]="sustrato.descripcion" required name="descripcion"></textarea>
-                            </div>
-                            <div class="col-xs-12 col-lg-12" *ngIf="estadoImpresion == true">
+                            
+                            <div class="col-xs-12 col-lg-12" >
                                 <br> 
                                 <div class="custom-control custom-checkbox">
                                     <input [(ngModel)]="tarjetaEntregada" name="tarjetaEntregada" type="checkbox" class="custom-control-input" id="customCheck2" checked="">
@@ -42,7 +32,7 @@
                                 </div>
                             </div>
                             <!--tipo identificacion ciudadano -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="tarjetaEntregada && estadoImpresion">
+                            <div class="col-xs-12 col-lg-12" *ngIf="tarjetaEntregada">
                                 <label>Identificación</label>
                                 <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
                                     <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="sustrato.ciudadanoId" name="identificacion" required />
