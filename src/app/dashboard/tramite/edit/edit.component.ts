@@ -18,6 +18,8 @@ public formReady = false;
 public modulos: Array<any>
 public moduloSelected: Array<any>; // ng-select [(ngModel)]
 
+
+
 constructor(
   private _tramiteService: TramiteService,
   private _loginService: LoginService,

@@ -290,7 +290,7 @@ constructor(
     });
   }
 
-  changedTipoId(){
+  changedTipoId(event){
     this.tipoId = false;
   }
 

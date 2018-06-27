@@ -16,7 +16,7 @@ export class NewRnaRegrabarVinComponent implements OnInit {
     @Input() vehiculo: any = null;
     public errorMessage;
     public respuesta;
-    public tramiteFacturaSelected: any;
+    public tramiteFacturaSelected: any; 
     public sustratos: any;
     public sustratoSelected: any;
     public tipoRegrabacionList: string[];
@@ -62,6 +62,10 @@ export class NewRnaRegrabarVinComponent implements OnInit {
                 }
             }
         );
+    }
+
+    ready(e:any){
+
     }
 
     enviarTramite() {

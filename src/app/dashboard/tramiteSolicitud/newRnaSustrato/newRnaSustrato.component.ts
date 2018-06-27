@@ -6,8 +6,11 @@ import { SustratoService } from '../../../services/sustrato.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { Sustrato } from '../../sustrato/sustrato.modelo';
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+
 
 import swal from 'sweetalert2';
+import { log } from 'util';
 
 @Component({
     selector: 'appRna-sustrato',
@@ -17,12 +20,14 @@ export class NewRnaSustratoComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
+    @Input() ciudadanoPropietario: any = null;
     public errorMessage;
     public respuesta;
     public sustratos: any;
     public sustratoSelected: any;
     public colorSelected: any;
     public identificacion: any;
+    public licenciaTransito: any;
     public ciudadano:any;
     public estadoImpresion=true;
     public tarjetaEntregada=true;
@@ -31,6 +36,11 @@ export class NewRnaSustratoComponent implements OnInit {
     public isExist = false;
     public ciudadanoEncontrado=1;
     public sustrato: Sustrato;
+    public datos = {
+        'cedula': 0,
+        'licenciaTransito': "",
+        'vehiculoId': ""
+      }
     
 
     constructor(
@@ -40,12 +50,16 @@ export class NewRnaSustratoComponent implements OnInit {
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
         private _CiudadanoService: CiudadanoService,
+        private _CiudadanoVehiculoService: CiudadanoVehiculoService,
     ) {
         this.sustrato = new Sustrato( null, null, null, null, null, null ,null,null,null,null,null,null);
         
      } 
 
     ngOnInit() {
+        // console.log("hola mundo");
+        // console.log("jaja"+ +this.ciudadanoPropietario);
+
         
     }
 
@@ -54,40 +68,60 @@ export class NewRnaSustratoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.sustrato.ciudadanoId,
         };
-        this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
-            response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.ciudadano = this.respuesta.data;
-                    this.ciudadanoEncontrado= 2;
-                    this.ciudadanoNew = false;
-            }else{
-                this.ciudadanoEncontrado=3;
-                this.ciudadanoNew = true;
-            }
-            error => {
-                    this.errorMessage = <any>error;
+        console.log(this.tarjetaEntregada);
+        
+        // this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+        //     response => {
+        //         this.respuesta = response; 
+        //         if(this.respuesta.status == 'success'){
+        //             this.ciudadano = this.respuesta.data;
+        //             this.ciudadanoEncontrado= 2;
+        //             this.ciudadanoNew = false;
+        //     }else{
+        //         this.ciudadanoEncontrado=3;
+        //         this.ciudadanoNew = true;
+        //     }
+        //     error => {
+        //             this.errorMessage = <any>error;
                 
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-        }); 
+        //             if(this.errorMessage != null){
+        //                 console.log(this.errorMessage);
+        //                 alert("Error en la petición");
+        //             }
+        //         }
+        // }); 
     }
    
     enviarTramite(){
-        this.sustrato.impresion = this.estadoImpresion;
-        this.sustrato.entregado = this.tarjetaEntregada;
-        this.sustrato.facturaId = this.factura.id;
-
-        if (this.sustrato.impresion) {
-           this.sustrato.estado = 'Utilizado'     
-        }else{
-           this.sustrato.estado = 'Dañado'    
-        }
-
         let token = this._loginService.getToken();
+        
+        console.log(this.factura);
+
+        this.datos.licenciaTransito = this.licenciaTransito;
+        this.datos.cedula  = this.ciudadanoPropietario.usuario.identificacion;
+        this.datos.vehiculoId  = this.factura.vehiculo.id;
+
+        
+
+
+
+        // this.sustrato.impresion = this.licenciato;
+        
+        // this.sustrato.entregado = this.tarjetaEntregada;
+        // this.sustrato.facturaId = this.factura.id;
+        
+
+        
+        
+
+        // if (this.sustrato.impresion) {
+        //    this.sustrato.estado = 'Utilizado' 
+        // }else{
+        //    this.sustrato.estado = 'Dañado'    
+        // }
+
+        // console.log(this.identificacion);
+        
         this._SustratoService.editSustrato(this.sustrato,token).subscribe(
             response => {
                 if (response.status == 'success') {

@@ -134,8 +134,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                    <td>{{representanteVigente.ciudadano?.usuario.primerNombre + " "+representanteVigente.ciudadano?.usuario.segundoNombre 
-                        + " "+representanteVigente.ciudadano?.usuario.primerApellido + " "+representanteVigente.ciudadano?.usuario.segundoApellido}}</td>
+                    <td>{{representanteVigente.ciudadano?.usuario.primerNombre + " "+representanteVigente.ciudadano?.usuario.primerApellido }}</td>
                     <th >{{representanteVigente.fechaInicial}}</th>
                     </tr>
                 </tbody>
@@ -152,7 +151,7 @@
                         <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId" [disabled]="formNewRepresentante.invalid" required></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-5">
-                        <label>Fecha</label>
+                        <label>Fecha de inicio</label>
                         <input class="form-control" [(ngModel)]="empresa.fechaFinal" [disabled]="formNewRepresentante.invalid" name="nuevafecha" type="date" required />
                     </div>
                     <div class="col-xs-12 col-lg-2">
@@ -178,8 +177,8 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let representante of representantes; let i = index">
-                                <td>{{representanteVigente.ciudadano?.usuario.primerNombre + " "+representanteVigente.ciudadano?.usuario.segundoNombre 
-                                        + " "+representanteVigente.ciudadano?.usuario.primerApellido + " "+representanteVigente.ciudadano?.usuario.segundoApellido}}</td>
+                                <td>{{representante.ciudadano.usuario.primerNombre+" "+representante.ciudadano?.usuario.segundoNombre 
+                                    +" "+representante.ciudadano?.usuario.primerApellido +" "+representante.ciudadano?.usuario.segundoApellido }}</td>
                                 <td>{{representante.fechaInicial}}</td>
                                 <td>{{representante.fechaFinal}}</td>
                             </tr>
