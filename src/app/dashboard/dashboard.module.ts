@@ -27,7 +27,6 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
-import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
@@ -40,6 +39,8 @@ import { EmpresaModule } from './empresa/empresa.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
+import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
+import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
@@ -78,8 +79,9 @@ import {RightsidebarComponent} from '../shared/index';
       AlmacenModule,
       CiudadanoModule,
       TipoIdentificacionModule,
-      MgdTipoCorrespondenciaModule,
       MgdRegistroModule,
+      MgdDocumentoModule,
+      MgdTipoCorrespondenciaModule,
       MparqCostoTrayectoModule,
       GeneroModule,
       GrupoSanguineoModule,

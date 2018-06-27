@@ -1,11 +1,13 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { UsuarioService } from '../../../services/usuario.service';
+import { MgdDocumentoService } from '../../../services/mgdDocumento.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-show',
-  templateUrl: './show.component.html'
+  templateUrl: './show.component.html',
+  providers: [UsuarioService],
 })
 export class ShowComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
@@ -15,19 +17,21 @@ public respuesta;
 public usuarios: any;
 public usuarioSelected: any;
 public observaciones: any;
+public date: any;
 public datos = {
   'usuarioId': null,
   'observaciones': null,
-  'documentoId': this.documento.id
+  'documentoId': null
 };
 
 constructor(
-    private _UsuarioService: UsuarioService,
+  private _DocumentoService: MgdDocumentoService,
+  private _UsuarioService: UsuarioService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    console.log(this.documento.id);
+    this.date = new Date();
     this._UsuarioService.getUsuarioSelect().subscribe(
       response => {
         this.usuarios = response;
@@ -50,18 +54,18 @@ constructor(
   onCrearReparto(){
     this.datos.usuarioId = this.usuarioSelected;
     this.datos.observaciones = this.observaciones;
+    this.datos.documentoId = this.documento.id;
 
     let token = this._loginService.getToken();
 
-		this._UsuarioService.register(this.datos, token).subscribe(
+		this._DocumentoService.assign(this.datos, token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: this.respuesta.msj,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

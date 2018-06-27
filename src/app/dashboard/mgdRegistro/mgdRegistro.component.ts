@@ -93,9 +93,9 @@ export class MgdRegistroComponent implements OnInit {
     if(this.documento) {
       this.formNew = false;
       this.formEdit = false;
-      this.formShow = false;
-      this.formSearch = true;
-      this.ngOnInit();
+      this.formShow = true;
+      this.formSearch = false;
+      //this.ngOnInit();
     }
   }
 

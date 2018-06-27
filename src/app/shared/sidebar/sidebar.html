@@ -297,7 +297,13 @@
             <i class="fa fa-angle-right"></i> 
             Registrar documento
           </a>
-        </li> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mgdDocumento"  [ngClass]="{'active' : ( addActive === 'mgdDocumento')}" (click)="addActiveMenu('mgdDocumento')">
+            <i class="fa fa-angle-right"></i> 
+            Buscar documento
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level --> 
     </li>

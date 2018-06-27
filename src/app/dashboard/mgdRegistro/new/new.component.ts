@@ -163,12 +163,11 @@ constructor(
 		this._PeticionarioService.register(this.file, this.datosRegistro, token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.readyDocument.emit(this.respuesta.data);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: 'Documento radicado',
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

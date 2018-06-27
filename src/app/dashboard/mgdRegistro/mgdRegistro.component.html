@@ -54,17 +54,19 @@
     
     <app-new *ngIf='formNew' (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-new>
 
-    <app-show *ngIf='documento' [documento]="documento" (ready)="ready($event)"></app-show>
+    <app-show *ngIf='formShow' [documento]="documento" (readyDocument)="readyDocument($event)"></app-show>
 
     <div class="row" *ngIf='documentos'>
         <div class="col-xs-12 col-lg-12">
-            <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-primary" type="button">
-                    <i class="fa fa-plus"></i>
-                    Registrar documento
-                </button>
-            </div>
             <div class="card">
+                <div class="card-header">
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew()" class="btn btn-primary" type="button">
+                            <i class="fa fa-plus"></i>
+                            Registrar documento
+                        </button>
+                    </div>
+                </div>
                 <div class="card-body container">
                     <h5>Registros Encontrados</h5>
                     <br>
@@ -86,7 +88,9 @@
                                         {{ documento.numeroRadicado }}
                                     </a>
                                 </td>
-                                <td >{{ documento.asignado }}</td>
+                                <td >
+                                    {{ documento.estado }}
+                                </td>
                             </tr>
                         </tbody>
                     </table> 

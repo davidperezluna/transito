@@ -59,12 +59,4 @@ export class MgdPeticionarioService {
 		return this._http.post(this.url+"/search", params, {headers: headers})
 							  .map(res => res.json());
 	}
-	
-	upload(formData){
-		//let json = JSON.stringify(peticionario);
-		//let params = "json="+json+"&authorization="+token;
-		//let params = "formData="+formData;
-		let headers = new Headers({'Content-Type':undefined});
-		return this._http.post(this.url+"/upload", formData).map(res => res.json());
-	}
 }

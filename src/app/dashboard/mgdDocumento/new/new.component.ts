@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MgdTipoCorrespondencia } from '../mgdTipoCorrespondencia.modelo';
-import { MgdTipoCorrespondenciaService } from '../../../services/mgdTipoCorrespondencia.service';
+import { MgdDocumento } from '../mgdDocumento.modelo';
+import { MgdDocumentoService } from '../../../services/mgdDocumento.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,27 +10,24 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public tipoCorrespondencia: MgdTipoCorrespondencia;
+public documento: MgdDocumento;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _TipoCorrespondenciaService: MgdTipoCorrespondenciaService,
+  private _DocumentoService: MgdDocumentoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.tipoCorrespondencia = new MgdTipoCorrespondencia(null, null, null, null, null);
+    this.documento = new MgdDocumento(null, null, null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);
   }
-  
   onEnviar(){
     let token = this._loginService.getToken();
-    
-    console.log(this.tipoCorrespondencia);
-		this._TipoCorrespondenciaService.register(this.tipoCorrespondencia,token).subscribe(
+		this._DocumentoService.register(this.documento,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -45,7 +42,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El tipoCorrespondencia '+  +' ya se encuentra registrado',
+            text: 'El documento '+  +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

@@ -1,36 +1,32 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MgdTipoCorrespondencia } from '../mgdTipoCorrespondencia.modelo';
 import { MgdTipoCorrespondenciaService } from '../../../services/mgdTipoCorrespondencia.service';
-import { LoginService } from '../../../services/login.service';
+import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-edit',
+  templateUrl: './edit.component.html'
 })
-export class NewComponent implements OnInit {
+export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-public tipoCorrespondencia: MgdTipoCorrespondencia;
+@Input() tipoCorrespondencia:any = null;
 public errorMessage;
 public respuesta;
+public formReady = false;
 
 constructor(
-  private _TipoCorrespondenciaService: MgdTipoCorrespondenciaService,
+  private _tipoCorrespondenciaService: MgdTipoCorrespondenciaService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit() {
-    this.tipoCorrespondencia = new MgdTipoCorrespondencia(null, null, null, null, null);
-  }
-  onCancelar(){
-    this.ready.emit(true);
-  }
-  
+  ngOnInit(){ console.log(this.tipoCorrespondencia);  }
+
+  onCancelar(){ this.ready.emit(true); }
+
   onEnviar(){
     let token = this._loginService.getToken();
-    
-    console.log(this.tipoCorrespondencia);
-		this._TipoCorrespondenciaService.register(this.tipoCorrespondencia,token).subscribe(
+		this._tipoCorrespondenciaService.editTipoCorrespondencia(this.tipoCorrespondencia,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -38,20 +34,14 @@ constructor(
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: 'El registro se ha modificado con exito',
             type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El tipoCorrespondencia '+  +' ya se encuentra registrado',
-            type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
 			error => {
 					this.errorMessage = <any>error;
+
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
