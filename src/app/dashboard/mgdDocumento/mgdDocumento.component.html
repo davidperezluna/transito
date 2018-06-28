@@ -43,5 +43,7 @@
         </div>
       </div>
     </div>
-    <app-show *ngIf='formShow' [documento]="documento" (ready)="ready($event)"></app-show>
+    <app-new *ngIf='formNew' [documento]="documento" (ready)="ready($event)" (readyPrint)="readyPrint($event)"></app-new>
+    <app-show *ngIf='formShow' [documento]="documento" (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-show>
+    <app-print *ngIf='formPrint' [documento]="documento" (ready)="ready($event)"></app-print>
 </div>

@@ -1,33 +1,20 @@
 <hr>
 <div class="row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo tipo de correspondencia</h5>
+                <h5 class="text-uppercase">Respuesta de Documento</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="tipoCorrespondencia.nombre" name="nombre" type="text" required />
+                            <label>No. Oficio <b>{{ documento.numeroOficio }}</b></label>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Dias vigencia <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="tipoCorrespondencia.diasVigencia" name="diasVigencia" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <div class="custom-control custom-checkbox">
-                                <input [(ngModel)]="tipoCorrespondencia.editable" name="editable" type="checkbox" class="custom-control-input" id="checkbox-editable" checked="">
-                                <label class="custom-control-label" for="checkbox-editable">Días editables</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <div class="custom-control custom-checkbox">
-                                <input [(ngModel)]="tipoCorrespondencia.prohibion" name="prohibion" type="checkbox" class="custom-control-input" id="checkbox-prohibicion">
-                                <label class="custom-control-label" for="checkbox-prohibicion">Prohibicion</label>
-                            </div>
+                            <label>Respuesta <strong class="text-danger">*</strong></label>
+                            <textarea class="form-control" rows="5" [(ngModel)]="descripcion" name="descripcion" required></textarea>
                         </div>
                     </div>
                 </form>

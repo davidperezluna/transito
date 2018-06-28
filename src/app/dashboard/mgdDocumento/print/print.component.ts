@@ -4,21 +4,30 @@ import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-print',
+  templateUrl: './print.component.html',
 })
-export class NewComponent implements OnInit {
+export class PrintComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@Output() readyPrint = new EventEmitter<any>();
 @Input() documento: any = null;
 public errorMessage;
 public respuesta;
-public descripcion:any;
+public date: any;
+public correoCertificadoEnvio: any;
+public nombreTransportadoraEnvio: any;
+public fechaEnvio: any;
+public numeroGuia: any;
+public numeroCarpeta: any;
+public medioEnvio: any;
 public datos = {
-  'descripcion': null,
+  'correoCertificadoEnvio': null,
+  'nombreTransportadoraEnvio': null,
+  'fechaEnvio': null,
+  'numeroGuia': null,
+  'numeroCarpeta': null,
+  'medioEnvio': null,
   'documentoId': null,
 };
-
 
 constructor(
   private _DocumentoService: MgdDocumentoService,
@@ -26,6 +35,7 @@ constructor(
   ){}
 
   ngOnInit() {
+    this.date = new Date();
   }
 
   onCancelar(){
@@ -33,15 +43,21 @@ constructor(
   }
 
   onEnviar(){
-    this.datos.descripcion = this.descripcion;
+    this.datos.correoCertificadoEnvio = this.correoCertificadoEnvio;
+    this.datos.nombreTransportadoraEnvio = this.nombreTransportadoraEnvio;
+    this.datos.fechaEnvio = this.fechaEnvio;
+    this.datos.numeroGuia = this.numeroGuia;
+    this.datos.numeroCarpeta = this.numeroCarpeta;
+    this.datos.medioEnvio = this.medioEnvio;
     this.datos.documentoId = this.documento.id;
 
     let token = this._loginService.getToken();
-		this._DocumentoService.response(this.datos,token).subscribe(
+
+		this._DocumentoService.print(this.datos, token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.readyPrint.emit(this.respuesta.data);
+          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: this.respuesta.msj,
@@ -51,20 +67,20 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El documento ya se encuentra registrado',
+            text: this.respuesta.msg,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
 			error => {
 					this.errorMessage = <any>error;
+
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
 					}
 				}
 
-		}); 
+		});
   }
-
 }

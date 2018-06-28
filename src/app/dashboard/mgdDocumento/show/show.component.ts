@@ -9,17 +9,18 @@ import swal from 'sweetalert2';
 })
 export class ShowComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
+@Output() readyDocument = new EventEmitter<any>();
 @Input() documento: any = null;
 public errorMessage;
 public respuesta;
 public date: any;
 public observaciones: any;
-  public aceptada: any;
-  public datos = {
-    'observaciones': null,
-    'aceptada': null,
-    'documentoId': null,
-  };
+public aceptada: any;
+public datos = {
+  'observaciones': null,
+  'aceptada': null,
+  'documentoId': null,
+};
 
 constructor(
   private _DocumentoService: MgdDocumentoService,
@@ -45,7 +46,11 @@ constructor(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+          if(this.respuesta.data.aceptada){
+            this.readyDocument.emit(this.respuesta.data);
+          }else{
+            this.ready.emit(this.respuesta.data);
+          }
           swal({
             title: 'Perfecto!',
             text: this.respuesta.msj,

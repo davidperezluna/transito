@@ -16,8 +16,9 @@ export class MgdDocumentoComponent implements OnInit {
 	public documentos;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = true;
+  public formPrint = false;
   public formShow = false;
+  public formIndex = true;
   public table:any; 
   public documento: MgdDocumento;
 
@@ -84,19 +85,45 @@ export class MgdDocumentoComponent implements OnInit {
   onShow(documento: any){
     this.documento = documento;
     this.formShow = true;
+    this.formPrint = false;
     this.formIndex = false;
     this.table.destroy();
   }
 
   ready(isCreado:any){
+    console.log('cumento');
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
       this.formShow = false;
+      this.formPrint = false;
       this.formIndex = true;
       this.ngOnInit();
     }
   }
+
+  readyDocument(documento:any){
+    this.documento = documento;
+    if(this.documento) {
+      this.formNew = true;
+      this.formPrint = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.ngOnInit();
+    }
+  }
+
+  readyPrint(documento:any){
+    this.documento = documento;
+    if(this.documento) {
+      this.formPrint = true;
+      this.formNew = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.ngOnInit();
+    }
+  }
+
   delete(id:any){
     swal({
       title: '¿Estás seguro?',
