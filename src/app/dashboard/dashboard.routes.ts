@@ -41,6 +41,7 @@ import { EmpresaRoutes } from './empresa/empresa.routes';
 import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasignacionPlaca.routes';
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
+import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -88,6 +89,7 @@ export const DashboardRoutes: Route[] = [
         ...RnaPreasignacionPlacaRoutes,
         // ...SucursalRoutes,
         ...TramitePrecioRoutes, 
+        ...CfgPlacaRoutes, 
         ...ConceptoParametroRoutes     ]
     }
 ];
