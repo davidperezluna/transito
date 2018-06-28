@@ -38,6 +38,7 @@ import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
 import { EmpresaRoutes } from './empresa/empresa.routes';
+import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasignacionPlaca.routes';
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { DashboardComponent } from './index';
@@ -84,6 +85,7 @@ export const DashboardRoutes: Route[] = [
         ...SustratoRoutes,
         ...GestionTransportePublicoRoutes,
         ...EmpresaRoutes,
+        ...RnaPreasignacionPlacaRoutes,
         // ...SucursalRoutes,
         ...TramitePrecioRoutes, 
         ...ConceptoParametroRoutes     ]

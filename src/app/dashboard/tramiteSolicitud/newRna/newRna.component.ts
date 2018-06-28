@@ -68,6 +68,7 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
+    
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
 
 		this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
@@ -278,11 +279,12 @@ constructor(
   }
 
   finalizarSolicitud(){
+    
+    let token = this._loginService.getToken();
     this.tramites='';
     this.tramitesFactura.forEach(tramiteFactura => {
       this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>' 
     });
-    let token = this._loginService.getToken();
 
           var html = 'Se va a enviar la siguiente solicitud:<br>'+
                     'Factura: <b>'+this.factura.numero+'</b><br>'+

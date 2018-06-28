@@ -164,9 +164,9 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index"> 
-                            <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.id}}" role="tab">{{tramiteFactura.tramitePrecio.nombre}}</a> 
-                            <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a> 
-                        </li>
+                            <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.id}}" role="tab">{{tramiteFactura.tramitePrecio.nombre}}<i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i></a> 
+                            <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
+                        </li>  
 
                         <li class="nav-item" *ngIf='sustrato'>  
                             <a class="nav-link " data-toggle="tab" href="#sustrato"  role="tab">Sustrato </a> 
@@ -196,9 +196,9 @@
                             <appRna-cambio-placa (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-placa>
                         </div>
 
-                        <div class="tab-pane" id="5" role="tabpanel"> 
+                        <!-- <div class="tab-pane" id="5" role="tabpanel"> 
                             <appRna-cambio-color [vehiculo] = "vehiculo" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-color>
-                        </div>
+                        </div> -->
 
                         <div class="tab-pane" id="24" role="tabpanel"> 
                             <appRna-cambio-motor *ngIf="tramiteSelected == 24" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
