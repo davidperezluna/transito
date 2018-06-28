@@ -1,27 +1,29 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MgdTipoCorrespondenciaService } from '../../services/mgdTipoCorrespondencia.service';
+import { MgdDocumentoService } from '../../services/mgdDocumento.service';
 import {LoginService} from '../../services/login.service';
-import { MgdTipoCorrespondencia } from './mgdTipoCorrespondencia.modelo';
+import { MgdDocumento } from './mgdDocumento.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './mgdTipoCorrespondencia.component.html'
+  templateUrl: './mgdDocumento.component.html'
 })
-export class MgdTipoCorrespondenciaComponent implements OnInit {
+export class MgdDocumentoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public tiposCorrespondencia;
+	public documentos;
 	public formNew = false;
 	public formEdit = false;
+  public formPrint = false;
+  public formShow = false;
   public formIndex = true;
   public table:any; 
-  public tipoCorrespondencia: MgdTipoCorrespondencia;
+  public documento: MgdDocumento;
 
   constructor(
-    private _TipoCorrespondenciaService: MgdTipoCorrespondenciaService,
+    private _DocumentoService: MgdDocumentoService,
 		private _loginService: LoginService,
     ){}
     
@@ -40,9 +42,9 @@ export class MgdTipoCorrespondenciaComponent implements OnInit {
       ) {
       }
     })
-    this._TipoCorrespondenciaService.getTipoCorrespondencia().subscribe(
+    this._DocumentoService.getDocumento().subscribe(
 				response => {
-          this.tiposCorrespondencia = response.data;
+          this.documentos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -73,22 +75,56 @@ export class MgdTipoCorrespondenciaComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
-  
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
     this.table.destroy();
   }
 
+  onShow(documento: any){
+    this.documento = documento;
+    this.formShow = true;
+    this.formPrint = false;
+    this.formIndex = false;
+    this.table.destroy();
+  }
+
   ready(isCreado:any){
+    console.log('cumento');
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
+      this.formShow = false;
+      this.formPrint = false;
       this.formIndex = true;
       this.ngOnInit();
     }
   }
-  deleteTipoCorrespondencia(id:any){
+
+  readyDocument(documento:any){
+    this.documento = documento;
+    if(this.documento) {
+      this.formNew = true;
+      this.formPrint = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.ngOnInit();
+    }
+  }
+
+  readyPrint(documento:any){
+    this.documento = documento;
+    if(this.documento) {
+      this.formPrint = true;
+      this.formNew = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.ngOnInit();
+    }
+  }
+
+  delete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -101,7 +137,7 @@ export class MgdTipoCorrespondenciaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TipoCorrespondenciaService.deleteTipoCorrespondencia(token,id).subscribe(
+        this._DocumentoService.deleteDocumento(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -128,8 +164,8 @@ export class MgdTipoCorrespondenciaComponent implements OnInit {
     })
   }
 
-  editTipoCorrespondencia(tipoCorrespondencia:any){
-    this.tipoCorrespondencia = tipoCorrespondencia;
+  edit(documento:any){
+    this.documento = documento;
     this.formEdit = true;
     this.formIndex = false;
   }

@@ -57,9 +57,6 @@ export class NewRnaSustratoComponent implements OnInit {
      } 
 
     ngOnInit() {
-        // console.log("hola mundo");
-        // console.log("jaja"+ +this.ciudadanoPropietario);
-
         
     }
 
@@ -70,49 +67,44 @@ export class NewRnaSustratoComponent implements OnInit {
         };
         console.log(this.tarjetaEntregada);
         
-        // this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
-        //     response => {
-        //         this.respuesta = response; 
-        //         if(this.respuesta.status == 'success'){
-        //             this.ciudadano = this.respuesta.data;
-        //             this.ciudadanoEncontrado= 2;
-        //             this.ciudadanoNew = false;
-        //     }else{
-        //         this.ciudadanoEncontrado=3;
-        //         this.ciudadanoNew = true;
-        //     }
-        //     error => {
-        //             this.errorMessage = <any>error;
+        this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+            response => {
+                this.respuesta = response; 
+                if(this.respuesta.status == 'success'){
+                    this.ciudadano = this.respuesta.data;
+                    this.ciudadanoEncontrado= 2;
+                    this.ciudadanoNew = false;
+            }else{
+                this.ciudadanoEncontrado=3;
+                this.ciudadanoNew = true;
+            }
+            error => {
+                    this.errorMessage = <any>error;
                 
-        //             if(this.errorMessage != null){
-        //                 console.log(this.errorMessage);
-        //                 alert("Error en la petición");
-        //             }
-        //         }
-        // }); 
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+        }); 
     }
    
     enviarTramite(){
         let token = this._loginService.getToken();
         
         console.log(this.factura);
+        console.log(this.datos);
 
         this.datos.licenciaTransito = this.licenciaTransito;
         this.datos.cedula  = this.ciudadanoPropietario.usuario.identificacion;
         this.datos.vehiculoId  = this.factura.vehiculo.id;
 
-        
-
-
-
         // this.sustrato.impresion = this.licenciato;
         
-        // this.sustrato.entregado = this.tarjetaEntregada;
-        // this.sustrato.facturaId = this.factura.id;
-        
+        this.sustrato.entregado = this.tarjetaEntregada;
+        this.sustrato.facturaId = this.factura.id;
 
-        
-        
+        // this.ciudadanoPropietario.licenciaTransito = this.datos.vehiculoId;
 
         // if (this.sustrato.impresion) {
         //    this.sustrato.estado = 'Utilizado' 
@@ -121,6 +113,34 @@ export class NewRnaSustratoComponent implements OnInit {
         // }
 
         // console.log(this.identificacion);
+
+        this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(
+            
+            response => {
+                
+                this.respuesta = response;
+                console.log(this.respuesta);
+                if(this.respuesta.status == 'success'){
+                  swal({
+                    title: 'Perfecto!',
+                    text: 'El registro se ha modificado con exito',
+                    type: 'success',
+                    confirmButtonText: 'Aceptar'
+                  })
+                }
+                error => {
+                        this.errorMessage = <any>error;
+    
+                        if(this.errorMessage != null){
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+        
+            }
+            
+        );
+        console.log(this.licenciaTransito);
         
         this._SustratoService.editSustrato(this.sustrato,token).subscribe(
             response => {
@@ -142,9 +162,7 @@ export class NewRnaSustratoComponent implements OnInit {
                 }
             }
         );
-
         console.log(this.sustrato);
-
     }
 
     onCancelar(){

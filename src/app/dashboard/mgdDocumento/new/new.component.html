@@ -1,0 +1,36 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Respuesta de Documento</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>No. Oficio <b>{{ documento.numeroOficio }}</b></label>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Respuesta <strong class="text-danger">*</strong></label>
+                            <textarea class="form-control" rows="5" [(ngModel)]="descripcion" name="descripcion" required></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

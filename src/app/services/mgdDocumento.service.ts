@@ -57,5 +57,36 @@ export class MgdDocumentoService {
 		return this._http.post(this.url+"/search", params, {headers: headers})
 							  .map(res => res.json());
 	}
-		
+
+	assign(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/assign", params, {headers: headers})
+							  .map(res => res.json());
+	}
+	
+	process(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/process", params, {headers: headers})
+							  .map(res => res.json());
+	}
+
+	response(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/response", params, {headers: headers})
+							  .map(res => res.json());
+	}
+
+	print(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/print", params, {headers: headers})
+							  .map(res => res.json());
+	}
 }

@@ -1,0 +1,84 @@
+<div class="row">
+        <div class="col-xs-12 col-lg-8">
+            <form #formPrint="ngForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-uppercase">Reparto de documento</h5>
+                        <small>Los campos con <b>*</b> son obligatorios</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>No. de Oficio <b>{{ numeroOficio }}</b></label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-3">
+                                <p>San Juan de Pasto.</p>
+                                <br>
+                                <p class="text-justify">{{ respuesta }}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-4 offset-lg-4">
+                                <label>Almacenado en carpeta No:</label>
+                                <input class="form-control" [(ngModel)]="numeroCarpeta" name="numeroCarpeta" type="text" required>
+                            </div>
+                        </div>
+                        <hr>
+                        <h5>Se envia por correo certificado</h5>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-3">
+                                <div class="custom-control custom-radio">
+                                    <input name="correoCertificadoEnvio" [(ngModel)]="correoCertificadoEnvio" value="true" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <div class="custom-control custom-radio">
+                                    <input name="correoCertificadoEnvio" [(ngModel)]="correoCertificadoEnvio" value="false" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" checked>
+                                    <label class="custom-control-label" for="customRadio2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf='correoCertificadoEnvio == "true"'>
+                            <div  class="col-xs-12 col-lg-6">
+                                <label>Empresa Transportadora</label>
+                                <input class="form-control" [(ngModel)]="nombreTransportadoraEnvio" name="nombreTransportadoraEnvio" type="text">
+                            </div>
+                            <div  class="col-xs-12 col-lg-3">
+                                <label>Fecha Envio</label>
+                                <input class="form-control" [(ngModel)]="fechaEnvio" name="fechaEnvio" type="date">
+                            </div>
+                            <div  class="col-xs-12 col-lg-3">
+                                <label>Numero de Guía</label>
+                                <input class="form-control" [(ngModel)]="numeroGuia" name="numeroGuia" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Medio envío:</label>
+                                <input class="form-control" [(ngModel)]="medioEnvio" name="medioEnvio" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div  class="col-xs-12 col-lg-12">
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancel
+                        </button>
+                        <button (click)="onEnviar()" [disabled]="formPrint.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    

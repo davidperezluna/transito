@@ -1,0 +1,49 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <b class="text-uppercase">Gestión Documental</b>
+              <br>
+              <small>Documentos</small>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Peticionario</th>
+                    <th>Tipo correspondencia</th>
+                    <th>Radicado No.</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let documento of documentos; let i = index">
+                  <td >{{ documento.id }}</td>
+                  <td >{{ documento.peticionario.primerNombre }}</td>
+                  <td >{{ documento.tipoCorrespondencia.nombre }}</td>
+                  <td >{{ documento.numeroRadicado }}</td>
+                  <td >{{ documento.estado }}</td>
+                  <td>
+                    <button (click)="onShow(documento)" class="btn btn-xs btn-info" type="button">
+                      <i class="fa fa-edit"></i>
+                      Diligenciar
+                    </button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-new *ngIf='formNew' [documento]="documento" (ready)="ready($event)" (readyPrint)="readyPrint($event)"></app-new>
+    <app-show *ngIf='formShow' [documento]="documento" (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-show>
+    <app-print *ngIf='formPrint' [documento]="documento" (ready)="ready($event)"></app-print>
+</div>

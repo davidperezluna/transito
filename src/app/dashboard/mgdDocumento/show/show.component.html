@@ -54,14 +54,24 @@
                         </div>
 
                         <div class="form-group row">
+                            <div class="col-xs-12 col-lg-3">
+                                <div class="custom-control custom-radio">
+                                    <input name="correoCertificadoLlegada" [(ngModel)]="aceptada" value="true" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio1">Aceptar</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <div class="custom-control custom-radio">
+                                    <input name="correoCertificadoLlegada" [(ngModel)]="aceptada" value="false" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" >
+                                    <label class="custom-control-label" for="customRadio2">Rechazar</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="col-xs-12 col-lg-12">
                                 <label>Observaciones</label>
                                 <textarea class="form-control" [(ngModel)]="observaciones" name="observaciones" rows="6"></textarea>
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Asignar a</label>
-                                <ng-select [multiple]="false" [options]="usuarios" [(ngModel)]="usuarioSelected" name="usuarioId" required>
-                                </ng-select>
                             </div>
                         </div>
                     </div>

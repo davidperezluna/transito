@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MgdTipoCorrespondencia } from '../mgdTipoCorrespondencia.modelo';
-import { MgdTipoCorrespondenciaService } from '../../../services/mgdTipoCorrespondencia.service';
+import { MgdDocumentoService } from '../../../services/mgdDocumento.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,42 +9,49 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public tipoCorrespondencia: MgdTipoCorrespondencia;
+@Output() readyPrint = new EventEmitter<any>();
+@Input() documento: any = null;
 public errorMessage;
 public respuesta;
+public descripcion:any;
+public datos = {
+  'descripcion': null,
+  'documentoId': null,
+};
+
 
 constructor(
-  private _TipoCorrespondenciaService: MgdTipoCorrespondenciaService,
+  private _DocumentoService: MgdDocumentoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.tipoCorrespondencia = new MgdTipoCorrespondencia(null, null, null, null, null);
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
-  
+
   onEnviar(){
+    this.datos.descripcion = this.descripcion;
+    this.datos.documentoId = this.documento.id;
+
     let token = this._loginService.getToken();
-    
-    console.log(this.tipoCorrespondencia);
-		this._TipoCorrespondenciaService.register(this.tipoCorrespondencia,token).subscribe(
+		this._DocumentoService.response(this.datos,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+          this.readyPrint.emit(this.respuesta.data);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: this.respuesta.msj,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: 'El tipoCorrespondencia '+  +' ya se encuentra registrado',
+            text: 'El documento ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

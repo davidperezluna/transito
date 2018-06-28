@@ -6,7 +6,7 @@ import { MgdTipoCorrespondenciaService } from '../../services/mgdTipoCorresponde
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
-import {SelectModule} from 'angular2-select';
+import { SelectModule } from 'angular2-select';
 
 
 @NgModule({

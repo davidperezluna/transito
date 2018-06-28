@@ -1,64 +1,79 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MgdTipoCorrespondencia } from '../mgdTipoCorrespondencia.modelo';
-import { MgdTipoCorrespondenciaService } from '../../../services/mgdTipoCorrespondencia.service';
+import { MgdDocumentoService } from '../../../services/mgdDocumento.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-show',
+  templateUrl: './show.component.html',
 })
-export class NewComponent implements OnInit {
+export class ShowComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public tipoCorrespondencia: MgdTipoCorrespondencia;
+@Output() readyDocument = new EventEmitter<any>();
+@Input() documento: any = null;
 public errorMessage;
 public respuesta;
+public date: any;
+public observaciones: any;
+public aceptada: any;
+public datos = {
+  'observaciones': null,
+  'aceptada': null,
+  'documentoId': null,
+};
 
 constructor(
-  private _TipoCorrespondenciaService: MgdTipoCorrespondenciaService,
+  private _DocumentoService: MgdDocumentoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.tipoCorrespondencia = new MgdTipoCorrespondencia(null, null, null, null, null);
+    this.date = new Date();
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
-  
-  onEnviar(){
+
+  onCrearReparto(){
+    this.datos.observaciones = this.observaciones;
+    this.datos.aceptada = this.aceptada;
+    this.datos.documentoId = this.documento.id;
+
     let token = this._loginService.getToken();
-    
-    console.log(this.tipoCorrespondencia);
-		this._TipoCorrespondenciaService.register(this.tipoCorrespondencia,token).subscribe(
+
+		this._DocumentoService.process(this.datos, token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
+          if(this.respuesta.data.aceptada){
+            this.readyDocument.emit(this.respuesta.data);
+          }else{
+            this.ready.emit(this.respuesta.data);
+          }
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: this.respuesta.msj,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: 'El tipoCorrespondencia '+  +' ya se encuentra registrado',
+            text: this.respuesta.msg,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
 			error => {
 					this.errorMessage = <any>error;
+
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
 					}
 				}
 
-		}); 
+		});
   }
-
 }

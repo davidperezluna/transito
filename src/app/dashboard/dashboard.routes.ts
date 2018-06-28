@@ -21,6 +21,8 @@ import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
+import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
+import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
 import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
 import { GeneroRoutes } from './genero/genero.routes';
@@ -34,7 +36,6 @@ import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.rout
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
-import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { EmpresaRoutes } from './empresa/empresa.routes';
 import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasignacionPlaca.routes';
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
@@ -63,8 +64,9 @@ export const DashboardRoutes: Route[] = [
         ...ServicioRoutes,
         ...CiudadanoRoutes,
         ...TipoIdentificacionRoutes,
-        ...MgdTipoCorrespondenciaRoutes,
         ...MgdRegistroRoutes,
+        ...MgdDocumentoRoutes,
+        ...MgdTipoCorrespondenciaRoutes,
         ...MparqCostoTrayectoRoutes,
         ...GeneroRoutes,
         ...GrupoSanguineoRoutes,
