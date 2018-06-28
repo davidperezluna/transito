@@ -1,29 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MgdDocumentoService } from '../../services/mgdDocumento.service';
+import { MflInfraccionCategoriaService } from '../../services/mflInfraccionCategoria.service';
 import { LoginService } from '../../services/login.service';
-import { MgdDocumento } from './mgdDocumento.modelo';
+import { MflInfraccionCategoria } from './mflInfraccionCategoria.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './mgdDocumento.component.html'
+  templateUrl: './mflInfraccionCategoria.component.html'
 })
-export class MgdDocumentoComponent implements OnInit {
+export class MflInfraccionCategoriaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public documentos;
+	public infraccionCategorias;
 	public formNew = false;
 	public formEdit = false;
-  public formPrint = false;
-  public formShow = false;
   public formIndex = true;
   public table:any; 
-  public documento: MgdDocumento;
+  public infraccionCategoria: MflInfraccionCategoria;
 
   constructor(
-    private _DocumentoService: MgdDocumentoService,
+    private _InfraccionCategoriaService: MflInfraccionCategoriaService,
 		private _loginService: LoginService,
     ){}
     
@@ -42,9 +40,9 @@ export class MgdDocumentoComponent implements OnInit {
       ) {
       }
     })
-    this._DocumentoService.getDocumento().subscribe(
+    this._InfraccionCategoriaService.index().subscribe(
 				response => {
-          this.documentos = response.data;
+          this.infraccionCategorias = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -75,56 +73,22 @@ export class MgdDocumentoComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
-
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;
     this.table.destroy();
   }
 
-  onShow(documento: any){
-    this.documento = documento;
-    this.formShow = true;
-    this.formPrint = false;
-    this.formIndex = false;
-    this.table.destroy();
-  }
-
   ready(isCreado:any){
-    console.log('cumento');
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formShow = false;
-      this.formPrint = false;
       this.formIndex = true;
       this.ngOnInit();
     }
   }
-
-  readyDocument(documento:any){
-    this.documento = documento;
-    if(this.documento) {
-      this.formNew = true;
-      this.formPrint = false;
-      this.formEdit = false;
-      this.formShow = false;
-      this.ngOnInit();
-    }
-  }
-
-  readyPrint(documento:any){
-    this.documento = documento;
-    if(this.documento) {
-      this.formPrint = true;
-      this.formNew = false;
-      this.formEdit = false;
-      this.formShow = false;
-      this.ngOnInit();
-    }
-  }
-
-  delete(id:any){
+  deleteInfraccionCategoria(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -137,7 +101,7 @@ export class MgdDocumentoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._DocumentoService.deleteDocumento(token,id).subscribe(
+        this._InfraccionCategoriaService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -164,8 +128,8 @@ export class MgdDocumentoComponent implements OnInit {
     })
   }
 
-  edit(documento:any){
-    this.documento = documento;
+  editInfraccionCategoria(infraccionCategoria:any){
+    this.infraccionCategoria = infraccionCategoria;
     this.formEdit = true;
     this.formIndex = false;
   }

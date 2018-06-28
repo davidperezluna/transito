@@ -115,6 +115,23 @@
       </ul>
 
       <ul class="nav flex-column nav-second-level">
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'menu_mfl' }">
+          <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('menu_mfl')">
+            Financiero y Liquidaciones <i class="fa fa-angle-right"></i>
+          </a>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="mflInfraccionCategoria"  [ngClass]="{'active' : ( addActive === 'mflInfraccionCategoria')}" (click)="addActiveMenu('mflInfraccionCategoria')">
+                <i class="fa fa-angle-right"></i>
+                Infracción Categoria
+              </a>
+            </li>
+          </ul>
+          <!-- /.nav-third-level --> 
+        </li>
+      </ul>
+
+      <ul class="nav flex-column nav-second-level">
         <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">
             Gestión Documental <i class="fa fa-angle-right"></i>

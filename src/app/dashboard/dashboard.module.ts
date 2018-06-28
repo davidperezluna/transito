@@ -41,6 +41,7 @@ import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
 import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
 import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
+import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
@@ -82,6 +83,7 @@ import {RightsidebarComponent} from '../shared/index';
       MgdRegistroModule,
       MgdDocumentoModule,
       MgdTipoCorrespondenciaModule,
+      MflInfraccionCategoriaModule,
       MparqCostoTrayectoModule,
       GeneroModule,
       GrupoSanguineoModule,
