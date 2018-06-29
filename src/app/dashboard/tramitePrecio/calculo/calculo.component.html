@@ -25,7 +25,7 @@
                                     type="date" required>
                                 </td>
                                 <td><input class="form-control" [(ngModel)]="tramitePrecio.valorNuevo" name="valorNuevo" placeholder="" type="number" required></td>
-                                <td>{{tramitePrecio.valorConcepto}}</td>
+                                <td tooltip content="{{tramitePrecio.conceptos}}">{{tramitePrecio.valorConcepto}}</td>
                                 <td>{{tramitePrecio.valorTotal}}</td>
                                 <td>
                                     <button (click)="delete(tramitePrecio.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> 

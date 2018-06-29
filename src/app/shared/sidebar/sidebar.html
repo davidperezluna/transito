@@ -34,6 +34,11 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" routerLink="cfgplaca" [ngClass]="{'active' : ( addActive === 'cfgplaca')}" (click)="addActiveMenu('cfgplaca')">
+                <i class="fa fa-angle-right"></i> Placa
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" routerLink="linea"  [ngClass]="{'active' : ( addActive === 'linea')}" (click)="addActiveMenu('linea')"><i class="fa fa-angle-right"></i> Linea
               </a>
             </li>

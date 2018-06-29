@@ -20,7 +20,7 @@ import swal from 'sweetalert2';
     selector: 'appRna-matricula-inicial',
     templateUrl: './newRna.matriculaInicial.html',
 })
-export class NewRnaMatricualaInicualComponent implements OnInit {
+export class NewRnaMatricualaInicialComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;

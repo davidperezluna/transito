@@ -19,6 +19,7 @@ export class CalculoComponent implements OnInit {
 public errorMessage;
 public respuesta;
 public table:any; 
+public textoConceptos:string=''; 
 public conceptoSelected:any; 
 public valorConcepto:number = 0; 
 public calcularForm = false; 
@@ -89,9 +90,13 @@ constructor(
             response => {
               this.conceptos = response.data;
               this.valorConcepto =0;
+              this.textoConceptos ="";
+             
               this.conceptos.forEach(concepto => {
+              this.textoConceptos=this.textoConceptos.concat(concepto.conceptoParametro.nombre+'<br>');// variable que lleva la lista de el tooltips
+              console.log(this.textoConceptos);
               this.valorConcepto = this.valorConcepto + concepto.conceptoParametro.valor;
-                
+             
               });
               // let valorTotal = parseInt(tramitePrecio.valor) + this.valorConcepto;
                 let array = {
@@ -99,10 +104,12 @@ constructor(
                   'nombre':tramitePrecio.nombre,
                   'valor':tramitePrecio.valor,
                   'valorNuevo':tramitePrecio.valor,
-                  'valorConcepto':this.valorConcepto,
+                  'valorConcepto':this.valorConcepto,// 
+                  'conceptos':this.textoConceptos,// 
                   'valorTotal':0,
                 }  
                 this.tramitesPrecios.push(array);
+
             }, 
             error => {
               this.errorMessage = <any>error;
@@ -114,6 +121,8 @@ constructor(
             }
           );
         });
+        console.log( this.tramitesPrecios);
+        
         this.listado = true;
         let timeoutId = setTimeout(() => {  
           this.iniciarTabla();

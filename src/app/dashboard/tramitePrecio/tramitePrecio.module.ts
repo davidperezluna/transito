@@ -14,10 +14,12 @@ import { CalculoComponent } from './calculo/calculo.component';
 import { EditComponent } from './edit/edit.component';
 import {SelectModule} from 'angular2-select';
 import { SortableModule } from 'ngx-bootstrap/sortable';
+import {ToolTipModule} from 'angular2-tooltip';
+
 
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule,SortableModule.forRoot()],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule,SortableModule.forRoot(),ToolTipModule],
     declarations: [TramitePrecioComponent,NewComponent,EditComponent,NewSmlmvComponent,CalculoComponent],
     exports: [TramitePrecioComponent, NewComponent,EditComponent,NewSmlmvComponent,CalculoComponent],
     providers:[TramitePrecioService,TipoVehiculoService,ParametroService,ConceptoParametroTramiteService]

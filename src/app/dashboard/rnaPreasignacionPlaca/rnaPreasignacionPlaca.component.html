@@ -11,14 +11,15 @@
             <h5 class="card-title">Vehículo <small>Preasignación</small></h5>
           </div>
           <div class="card-body">
-            <div class="col-xs-12 col-lg-6">
-              <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
-                  <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
-                  <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" required />
-                  <span class="input-group-btn">
-                      <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                  </span>
-
+            <div class="row"><!-- .row -->
+              <div class="col-xs-12 col-lg-6">
+                  <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
+                    <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
+                    <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" required />
+                    <span class="input-group-btn">
+                        <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                  </div>
                   <div class="has-danger" *ngIf="isError" >
                     <div class="form-control-feedback has-danger has-error">{{msj}}</div>
                   </div>

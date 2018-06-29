@@ -159,14 +159,16 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
           swal.close();
         }
         if(response.code == 401){
-          this.msj = 'vehiculo no se encuentra en la abse de datos';
+          this.msj = 'vehiculo no se encuentra en la base de datos';
           this.isError = true;
           this.isExist = false;
+          swal.close();
         }
         if(response.code == 400){
           this.msj = 'vehiculo encontrado';
           this.isError = false;
           this.isExist = true;
+          swal.close();
         }
 
       error => { 
