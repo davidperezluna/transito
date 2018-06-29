@@ -28,6 +28,8 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
 import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
+import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
+
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
@@ -102,6 +104,7 @@ import {RightsidebarComponent} from '../shared/index';
       SustratoModule,
       GestionTransportePublicoModule,
       EmpresaModule,
+      cfgFestivoModule,
       // SucursalModule,
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,

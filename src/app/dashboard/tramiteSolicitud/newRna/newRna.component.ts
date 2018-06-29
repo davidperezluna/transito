@@ -34,6 +34,7 @@ export class NewRnaComponent implements OnInit {
   public isError = false;
   public ciudadanosVehiculo=false;
   public isCiudadano=false;
+  public isEmpresa=false;
   public ciudadano: any;
   public vehiculoSuccess=false;
   public tipoError=200;
@@ -45,6 +46,7 @@ export class NewRnaComponent implements OnInit {
   public tramite=false;
   public sustrato=false;
   public isTramites:boolean=true;
+  public isMatricula:boolean=false;
   
   public cantidadSustrato = 1;
 
@@ -105,24 +107,26 @@ constructor(
 
     this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
     response => {
+      this.factura = response[0].factura;
       let active = true;
       let token = this._loginService.getToken();
-      this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
-        responseCiudadano =>{
-          if (responseCiudadano.status == 'success') {
-            this.ciudadano = responseCiudadano.data.ciudadano;
-            this.factura = response[0].factura;
-
-          }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
+      if (this.isMatricula == false) {
+        this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
+          responseCiudadano =>{
+            if (responseCiudadano.status == 'success') {
+              this.ciudadano = responseCiudadano.data.ciudadano;
+  
+            }
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
             }
           }
-        }
-      );
+        );
+      }
       this.tramitesFactura = response;
       this.tramitesFactura.forEach(tramiteFactura => {
         if (tramiteFactura.realizado == 0) {
@@ -173,12 +177,47 @@ constructor(
         
         this.ciudadanosVehiculo = response.data;
         if (response.status == 'error' ) {
-          this.vehiculoSuccess=false;
-          this.msj= response.msj;
-          this.isError = true;
-          this.error = true;
-          this.tipoError = response.code; 
-          swal.close();
+          this.isCiudadano = false;
+          if(response.code ==401){
+            this.vehiculoSuccess=false;
+            this.msj= response.msj;
+            this.isError = true;
+            this.error = true;
+            this.tipoError = response.code; 
+            swal.close();
+          }else{
+            this.vehiculo = response.data;
+            let dato = {
+              'vehiculo': this.vehiculo.id,
+            }; 
+            this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
+              response => {
+                
+              if (response.status == 'success') {
+                  this.facturas = response.data;
+                  this.vehiculoSuccess=true;
+                  this.isMatricula = true;
+                  this.msj ='vehiculo encontrado';
+                  this.error = false;
+                  this.isError = false;
+                  swal.close();
+              } else {
+                this.facturas = false;
+                this.mensaje = 'No hay faturas para el vehiculo';
+                this.isError = true;
+                this.vehiculoSuccess=false;
+                this.factura=false;
+                swal.close();
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            });
+          }
         }else{
           swal.close();
           this.vehiculo = response.data[0].vehiculo;
@@ -218,8 +257,9 @@ constructor(
           response.data.forEach(element => {
             if (element.ciudadano) {
               this.isCiudadano = true;
-            }else{
-              this.isCiudadano = false;
+            }
+            if(element.empresa){
+              this.isEmpresa = true;
             }
           });
         }
