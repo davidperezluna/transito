@@ -45,7 +45,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                        <tr>
                                             <td>
                                             {{vehiculo.placa}}
                                             </td>
@@ -79,7 +79,7 @@
         </div>
 
         <div class="col-lg-6 col-md-6 form-group" *ngIf="vehiculoSuccess">
-            <div class="container col-xs-12 col-lg-6" *ngIf="vehiculoSuccess">
+            <div class="container col-xs-12 col-lg-6">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -108,7 +108,7 @@
                                             </tr>
                                         </tbody> 
                                     </table> 
-                                    <table class="table table-bordered" *ngIf="!isCiudadano">
+                                    <table class="table table-bordered" *ngIf="isEmpresa">
                                         <thead>
                                             <tr>
                                                 <th>Solicitante Empresa</th>
@@ -149,6 +149,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-body" *ngIf="isMatricula">
+                                <div class="col-xs-12 col-lg-12" >
+                                    <div class="container">
+                                        <label>Facturas
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <ng-select 
+                                        [multiple]="false" 
+                                        [options]="facturas" 
+                                        (ngModelChange)="changedFactura($event)"
+                                        [(ngModel)]="facturaSelected" 
+                                        name="facturaId" 
+                                        required>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>        
                         </div>
                     </div>
                 </div>
@@ -220,8 +237,12 @@
                             <appRna-regrabar-vin [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
                         </div>
 
-                        <div class="tab-pane" id="1" role="tabpanel"> 
+                        <!-- <div class="tab-pane" id="1" role="tabpanel"> 
                             <appRna-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
+                        </div> -->
+
+                        <div class="tab-pane" id="1" role="tabpanel"> 
+                            <appRna-matricula-inicial  [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-matricula-inicial>
                         </div>
 
                         <div class="tab-pane" id="31" role="tabpanel"> 

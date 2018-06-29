@@ -128,7 +128,7 @@ export class MflInfraccionCategoriaComponent implements OnInit {
     })
   }
 
-  editInfraccionCategoria(infraccionCategoria:any){
+  onEdit(infraccionCategoria:any){
     this.infraccionCategoria = infraccionCategoria;
     this.formEdit = true;
     this.formIndex = false;

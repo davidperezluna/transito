@@ -21,11 +21,23 @@ import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
+
+import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
+import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
+import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
+
 import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
 import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
+
+import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
+
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
+
+import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
+import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
+
 import { GeneroRoutes } from './genero/genero.routes';
 import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
@@ -66,11 +78,17 @@ export const DashboardRoutes: Route[] = [
         ...ServicioRoutes,
         ...CiudadanoRoutes,
         ...TipoIdentificacionRoutes,
-        ...MgdRegistroRoutes,
+        ...CfgAuditoriaRoutes,
+        ...CfgSmlmvRoutes,
+        ...cfgFestivoRoutes,      
         ...MgdDocumentoRoutes,
+        ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,
+        ...MflInfraccionRoutes,
         ...MflInfraccionCategoriaRoutes,
         ...MparqCostoTrayectoRoutes,
+        ...MpersonalFuncionarioRoutes,
+        ...MpersonalTipoContratoRoutes,
         ...GeneroRoutes,
         ...GrupoSanguineoRoutes,
         ...CuentaRoutes,

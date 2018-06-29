@@ -45,7 +45,6 @@ export class CiudadanoComponent implements OnInit {
 		this._CiudadanoService.getCiudadano().subscribe(
 				response => {
           this.ciudadanos = response.data;
-          console.log(this.ciudadanos);
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);

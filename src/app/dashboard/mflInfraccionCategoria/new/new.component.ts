@@ -33,7 +33,6 @@ constructor(
 		this._InfraccionCategoriaService.register(this.infraccionCategoria,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({

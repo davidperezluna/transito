@@ -34,11 +34,11 @@
                   <td >{{ infraccionCategoria.descripcion }}</td>
                   <td >{{ infraccionCategoria.smldv }}</td>
                   <td>
-                    <button (click)="edit(infraccionCategoria)" class="btn btn-xs btn-info" type="button">
+                    <button (click)="onEdit(infraccionCategoria)" class="btn btn-xs btn-info" type="button">
                       <i class="fa fa-edit"></i>
                       Editar
                     </button> 
-                    <button (click)="delete(infraccionCategoria.id)"  class="btn btn-xs btn-danger" type="button">
+                    <button (click)="onDelete(infraccionCategoria.id)"  class="btn btn-xs btn-danger" type="button">
                       <i class="fa fa-trash"></i>
                       Eliminar
                     </button> 

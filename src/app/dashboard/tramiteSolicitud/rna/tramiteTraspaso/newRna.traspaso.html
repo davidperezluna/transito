@@ -88,15 +88,15 @@
                                     <tbody>
                                         <tr class="odd" *ngFor="let ciudadano of datos.propietariosCiudadanos; let i = index">
 
-                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==2"><p style="color: white;" >Si</p></td>
-                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==2"><p style="color: white;" >No</p></td>
+                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==2"><p >Si</p></td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==2"><p >No</p></td>
                                            
-                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==1"><p style="color: white;" >Propietario</p></td>
-                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==1"><p style="color: white;" >Locatario</p></td>
+                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==1"><p >Propietario</p></td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==1"><p >Locatario</p></td>
 
-                                            <td class="center"><p style="color: white;">{{ciudadano.identificacion}}<br>{{ciudadano.nombre}}</p></td>
+                                            <td class="center"><p>{{ciudadano.identificacion}}<br>{{ciudadano.nombre}}</p></td>
                                             <td class="center" *ngIf="ciudadano.identificacionApoderado">
-                                                <p style="color: white;">{{ciudadano.identificacionApoderado}}<br>{{ciudadano.nombreApoderado}}</p>
+                                                <p>{{ciudadano.identificacionApoderado}}<br>{{ciudadano.nombreApoderado}}</p>
                                             </td>
                                             <td class="center" *ngIf="!ciudadano.identificacionApoderado">
                                                 <button (click)="agregarApoderadoCiudadano(ciudadano)" class="btn btn-primary pull-right">Agregar</button>
@@ -122,14 +122,14 @@
                                     </thead>
                                     <tbody>
                                         <tr class="odd" *ngFor="let empresa of datos.propietariosEmpresas; let i = index">
-                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==2"><p style="color: white;" >Si</p></td>
-                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==2"><p style="color: white;" >No</p></td>
+                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==2"><p >Si</p></td>
+                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==2"><p >No</p></td>
 
-                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==1"><p style="color: white;" >Propietario</p></td>
-                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==1"><p style="color: white;" >Locatario</p></td>
-                                            <td class="center"><p style="color: white;">{{empresa.nit}}<br>{{empresa.nombre}}</p></td>
+                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==1"><p >Propietario</p></td>
+                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==1"><p >Locatario</p></td>
+                                            <td class="center"><p>{{empresa.nit}}<br>{{empresa.nombre}}</p></td>
                                             <td class="center" *ngIf="empresa.identificacionApoderado">
-                                                <p style="color: white;">{{empresa.identificacionApoderado}}<br>{{empresa.nombreApoderado}}</p>
+                                                <p>{{empresa.identificacionApoderado}}<br>{{empresa.nombreApoderado}}</p>
                                             </td>
                                             <td class="center" *ngIf="!empresa.identificacionApoderado">
                                                 <button (click)="agregarApoderadoEmpresa(empresa)" class="btn btn-primary pull-right">Agregar</button>
@@ -155,21 +155,21 @@
                                 <tbody>
                                     <tr class="odd">
                                         <td>NIT</td>
-                                        <td class="center"><p style="color: white;">{{empresa.nit}}</p></td>
+                                        <td class="center"><p>{{empresa.nit}}</p></td>
                                         <td>Nombre</td>
-                                        <td class="center"><p style="color: white;">{{empresa.nombre}}</p></td>
+                                        <td class="center"><p>{{empresa.nombre}}</p></td>
                                     </tr>
                                     <tr class="odd">
                                         <td>Tipo empresa</td>
-                                        <td class="center"><p style="color: white;">{{empresa.nombre}}</p></td>
+                                        <td class="center"><p>{{empresa.nombre}}</p></td>
                                         <td>Municipio</td>
-                                        <td class="center"><p style="color: white;">{{empresa.municipio.nombre}}</p></td>
+                                        <td class="center"><p>{{empresa.municipio.nombre}}</p></td>
                                     </tr>
                                     <tr class="odd">
                                         <td>Dirección</td>
-                                        <td class="center"><p style="color: white;">{{empresa.direccion}}</p></td>
+                                        <td class="center"><p>{{empresa.direccion}}</p></td>
                                         <td>Persona</td>
-                                        <td class="center"><p style="color: white;">{{empresa.ciudadano.usuario.primerNombre}}</p></td>
+                                        <td class="center"><p>{{empresa.ciudadano.usuario.primerNombre}}</p></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -192,21 +192,21 @@
                                 <tbody>
                                     <tr class="odd">
                                         <td>Tipo de identificación</td>
-                                        <td class="center"><p style="color: white;">{{ciudadano.tipoIdentificacion.nombre}}</p></td>
+                                        <td class="center"><p>{{ciudadano.tipoIdentificacion.nombre}}</p></td>
                                         <td>Numero de identificación</td>
-                                        <td class="center"><p style="color: white;">{{ciudadano.identificacion}}</p></td>
+                                        <td class="center"><p>{{ciudadano.identificacion}}</p></td>
                                     </tr>
                                     <tr class="odd">
                                         <td>Primer nombre</td>
-                                        <td class="center"><p style="color: white;">{{ciudadano.primerNombre}}</p></td>
+                                        <td class="center"><p>{{ciudadano.primerNombre}}</p></td>
                                         <td>Segundo nombre</td>
-                                        <td class="center"><p style="color: white;">{{ciudadano.segundoNombre}}</p></td>
+                                        <td class="center"><p>{{ciudadano.segundoNombre}}</p></td>
                                     </tr>
                                     <tr class="odd">
                                         <td>Primer apellido</td>
-                                        <td class="center"><p style="color: white;">{{ciudadano.primerApellido}}</p></td>
+                                        <td class="center"><p>{{ciudadano.primerApellido}}</p></td>
                                         <td>Segundo apellido</td>
-                                        <td class="center"><p style="color: white;">{{ciudadano.segundoApellido}}</p></td>
+                                        <td class="center"><p>{{ciudadano.segundoApellido}}</p></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -267,21 +267,21 @@
                                 <tbody>
                                     <tr class="odd">
                                         <td>Tipo de identificación</td>
-                                        <td class="center"><p style="color: white;">{{apoderadoSelected.tipoIdentificacion.nombre}}</p></td>
+                                        <td class="center"><p>{{apoderadoSelected.tipoIdentificacion.nombre}}</p></td>
                                         <td>Numero de identificación</td>
-                                        <td class="center"><p style="color: white;">{{apoderadoSelected.identificacion}}</p></td>
+                                        <td class="center"><p>{{apoderadoSelected.identificacion}}</p></td>
                                     </tr>
                                     <tr class="odd">
                                         <td>Primer nombre</td>
-                                        <td class="center"><p style="color: white;">{{apoderadoSelected.primerNombre}}</p></td>
+                                        <td class="center"><p>{{apoderadoSelected.primerNombre}}</p></td>
                                         <td>Segundo nombre</td>
-                                        <td class="center"><p style="color: white;">{{apoderadoSelected.segundoNombre}}</p></td>
+                                        <td class="center"><p>{{apoderadoSelected.segundoNombre}}</p></td>
                                     </tr>
                                     <tr class="odd">
                                         <td>Primer apellido</td>
-                                        <td class="center"><p style="color: white;">{{apoderadoSelected.primerApellido}}</p></td>
+                                        <td class="center"><p>{{apoderadoSelected.primerApellido}}</p></td>
                                         <td>Segundo apellido</td>
-                                        <td class="center"><p style="color: white;">{{apoderadoSelected.segundoApellido}}</p></td>
+                                        <td class="center"><p>{{apoderadoSelected.segundoApellido}}</p></td>
                                     </tr>
                                 </tbody>
                             </table>
