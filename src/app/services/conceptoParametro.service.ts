@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ConceptoParametroService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/conceptoparametro";
+	public url = "http://190.146.7.242/colossus-sit/web/app.php/conceptoparametro";
 	public identity;
 	public token;
 

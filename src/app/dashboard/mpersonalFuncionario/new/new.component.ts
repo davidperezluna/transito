@@ -38,7 +38,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.funcionario = new MpersonalFuncionario(null, null, null, null, null, null, null, null, null, null, null);
+    this.funcionario = new MpersonalFuncionario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     
     this._TipoContratoService.select().subscribe(
       response => {
@@ -88,12 +88,15 @@ constructor(
   
   onEnviar(){
     let token = this._loginService.getToken();
+
+    this.funcionario.sedeOperativaId = this.sedeOperativaSelected;
+    this.funcionario.tipoContratoId = this.tipoContratoSelected;
+    this.funcionario.identificacion = this.identificacion;
     
-    console.log(this.funcionario);
 		this._FuncionarioService.register(this.funcionario,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
+        
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({

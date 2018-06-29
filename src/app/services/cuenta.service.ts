@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class CuentaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/cuenta";
+	public url = "http://190.146.7.242/colossus-sit/web/app.php/cuenta";
 	public identity;
 	public token;
 
