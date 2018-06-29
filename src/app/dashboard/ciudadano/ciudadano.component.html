@@ -1,49 +1,55 @@
 <div class="container" >
-  <div  class="row align-items-center justify-content-between">
-    <div class="col-11 col-sm-12 page-title">
-      <h3>Módulo RNC</h3>
-      <p>Inscripción de persona natural</p> 
-    </div>
-    <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-      </div>
-    </div>
-  </div>
+  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Personas Naturales <small></small></h5>
+            <h5 class="card-title">
+              <b class="text-uppercase">Módulo RNC</b>
+              <br>
+              <small>Inscripción de persona natural</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
           </div>
-          <div class="card-body responsive">
-          	<div class="table-responsive">
-            <table class="table" id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Identificacion</th>
-                    <th>Ciudadano</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd" *ngFor="let ciudadano of ciudadanos; let i = index">
-                  <td>{{ ciudadano.id }}</td>
-                  <td>
-                    {{ ciudadano.usuario.tipoIdentificacion.nombre }}
-                    <br>
-                    {{ ciudadano.usuario.identificacion }}
-                  </td>
-                  <td>
-                    {{ ciudadano.usuario.primerNombre }} {{ ciudadano.usuario.segundoNombre }} {{ ciudadano.usuario.primerApellido }} {{ ciudadano.usuario.segundoApellido }}
-                  </td>
-                  <td><button (click)="editCiudadano(ciudadano)" class="btn btn-outline-info btn-xs" type="button">Editar</button> 
-                    <button (click)="deleteCiudadano(ciudadano.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar  </button> </td>
-                </tr>
-              </tbody>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+                <thead>
+                  <tr>
+                      <th>Id</th>
+                      <th>Identificacion</th>
+                      <th>Ciudadano</th>
+                      <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd" *ngFor="let ciudadano of ciudadanos; let i = index">
+                    <td>{{ ciudadano.id }}</td>
+                    <td>
+                      {{ ciudadano.usuario.tipoIdentificacion.nombre }}
+                      <br>
+                      {{ ciudadano.usuario.identificacion }}
+                    </td>
+                    <td>
+                      {{ ciudadano.usuario.primerNombre }} {{ ciudadano.usuario.segundoNombre }} {{ ciudadano.usuario.primerApellido }} {{ ciudadano.usuario.segundoApellido }}
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button (click)="editCiudadano(ciudadano)" class="btn btn-outline-info btn-xs" type="button">
+                          Editar
+                        </button> 
+                        <button (click)="deleteCiudadano(ciudadano.id)"  class="btn btn-outline-danger btn-xs" type="button">
+                          Eliminar
+                        </button> 
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
             </table>
-            </div>
             <!-- /.table-responsive --> 
           </div>
         </div>

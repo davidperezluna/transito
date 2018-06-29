@@ -1,29 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CiudadanoService } from '../../services/ciudadano.service';
+import { MpersonalTipoContratoService } from '../../services/mpersonalTipoContrato.service';
 import { LoginService } from '../../services/login.service';
-import { Ciudadano } from './ciudadano.modelo';
-import { NewCiudadanoComponent } from './new/new.component';
+import { MpersonalTipoContrato } from './mpersonalTipoContrato.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './ciudadano.component.html',
-  providers: [NewCiudadanoComponent],
+  templateUrl: './mpersonalTipoContrato.component.html'
 })
-export class CiudadanoComponent implements OnInit {
+export class MpersonalTipoContratoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public ciudadanos;
+	public tiposContrato;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public ciudadano: Ciudadano;
+  public tipoContrato: MpersonalTipoContrato;
 
   constructor(
-		private _CiudadanoService: CiudadanoService,
+    private _TipoContratoService: MpersonalTipoContratoService,
 		private _loginService: LoginService,
     ){}
     
@@ -42,9 +40,9 @@ export class CiudadanoComponent implements OnInit {
       ) {
       }
     })
-		this._CiudadanoService.getCiudadano().subscribe(
+    this._TipoContratoService.index().subscribe(
 				response => {
-          this.ciudadanos = response.data;
+          this.tiposContrato = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -61,8 +59,8 @@ export class CiudadanoComponent implements OnInit {
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
-      responsive: false,
-      pageLength: 6,
+      responsive: true,
+      pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
            oPaginate: {
@@ -75,6 +73,7 @@ export class CiudadanoComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -82,15 +81,14 @@ export class CiudadanoComponent implements OnInit {
   }
 
   ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
+    if(isCreado) {
+      this.formNew = false;
+      this.formEdit = false;
+      this.formIndex = true;
+      this.ngOnInit();
+    }
   }
-  deleteCiudadano(id:any){
-
+  delete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -103,7 +101,7 @@ export class CiudadanoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CiudadanoService.deleteCiudadano(token,id).subscribe(
+        this._TipoContratoService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -130,10 +128,9 @@ export class CiudadanoComponent implements OnInit {
     })
   }
 
-  editCiudadano(ciudadano:any){
-    this.ciudadano = ciudadano;
+  edit(tipoContrato:any){
+    this.tipoContrato = tipoContrato;
     this.formEdit = true;
     this.formIndex = false;
   }
-
 }

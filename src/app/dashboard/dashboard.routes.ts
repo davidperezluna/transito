@@ -26,6 +26,10 @@ import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
 import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
+
+import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
+import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
+
 import { GeneroRoutes } from './genero/genero.routes';
 import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { CarroceriaRoutes } from './carroceria/carroceria.routes';
@@ -70,6 +74,8 @@ export const DashboardRoutes: Route[] = [
         ...MgdTipoCorrespondenciaRoutes,
         ...MflInfraccionCategoriaRoutes,
         ...MparqCostoTrayectoRoutes,
+        ...MpersonalFuncionarioRoutes,
+        ...MpersonalTipoContratoRoutes,
         ...GeneroRoutes,
         ...GrupoSanguineoRoutes,
         ...CuentaRoutes,

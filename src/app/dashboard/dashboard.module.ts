@@ -42,6 +42,8 @@ import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
 import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
+import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
+import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
@@ -86,6 +88,8 @@ import {RightsidebarComponent} from '../shared/index';
       MflInfraccionCategoriaModule,
       MgdRegistroModule,
       MparqCostoTrayectoModule,
+      MpersonalFuncionarioModule,
+      MpersonalTipoContratoModule,
       GeneroModule,
       GrupoSanguineoModule,
       CuentaModule,

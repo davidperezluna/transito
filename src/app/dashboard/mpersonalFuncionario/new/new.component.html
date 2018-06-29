@@ -1,0 +1,95 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Registro de personal</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo identificación <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacion" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Identificación <strong class="text-danger">*</strong></label>
+                            <input class="form-control" (blur)="onSearch()" [(ngModel)]="identificacion" name="identificacion" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer nombre <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="primerNombre" name="primerNombre" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo nombre <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="segundoNombre" name="segundoNombre" type="text" />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer apellido </label>
+                            <input class="form-control" [(ngModel)]="primerApellido" name="primerApellido" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo apellido </label>
+                            <input class="form-control" [(ngModel)]="segundoApellido" name="segundoApellido" type="text" />
+                        </div>
+                    </div>
+                        
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Contrato <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="tipoContratoSelected" required name="tiposContrato" required>
+                            </ng-select>
+                        </div>
+                        
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Acta de posesion </label>
+                            <input class="form-control" [(ngModel)]="actaPosesion" name="actaPosesion" type="text" />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Resolución </label>
+                            <input class="form-control" [(ngModel)]="resolucion" name="resolucion" type="text" />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Fecha inicio </label>
+                            <input class="form-control" [(ngModel)]="fechaInicio" name="fechaInicio" type="date" />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Fecha fin </label>
+                            <input class="form-control" [(ngModel)]="fechaFin" name="fechaFin" type="date" />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Numero de placa </label>
+                            <input class="form-control" [(ngModel)]="numeroPlaca" name="numeroPlaca" type="text" />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Sede operativa <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected" name="sedesOperativas" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Cargo </label>
+                            <input class="form-control" [(ngModel)]="cargo" name="cargo" type="text" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
