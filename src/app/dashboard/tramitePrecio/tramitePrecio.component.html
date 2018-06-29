@@ -18,6 +18,11 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">Precios <small>Registrados</small></h5>
+
+            <span tooltip content=''> </span>
+            <h5 tooltip content="tramitePrecio.id<br>sajdkjasjfdkjdsakfjkdsafkds<br>jfkdjskfjdkslfkdjskfjñdklsjfkldjsñfkljñdskjfkdsjfjdskfjdksj <br> hjahahajkajaj5465465">hola</h5>
+
+
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -38,7 +43,9 @@
                   <td >{{tramitePrecio.id}}</td>
                   <td >{{tramitePrecio.fechaInicio}}</td>
                   <td >{{tramitePrecio.nombre}}</td>
-                  <td >{{tramitePrecio.tramite.nombre}}</td>
+                  <td placement="top" ngbTooltip="Tooltip on top" data-toggle="ngbTooltip"   title="holaMundo" data-html="true">{{tramitePrecio.tramite.nombre}}
+                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="holaMundo" data-placement="right"  data-original-title="Tooltip on right">Right</button>
+                  </td>
                   <td >{{tramitePrecio.modulo.nombre}}</td>
                   <td >{{tramitePrecio.valor}}</td>
                   <td >{{tramitePrecio.valorTotal}}</td>
