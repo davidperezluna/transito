@@ -1,34 +1,39 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { LoggerService } from "../logger/services/logger.service";
 
 @Injectable()
 export class MflInfraccionCategoriaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mflinfraccioncategoria";
+	public url = "http://localhost/GitHub/colossus-sit/web/mflinfraccioncategoria";
 	public identity;
 	public token;
 
-	constructor(private _http: Http){}
+	constructor(
+		private _http: Http,
+		private _loogerService: LoggerService
+	){}
 
 	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(infraccionCategoria,token){ 
-		
+	register(infraccionCategoria,token){
 		let json = JSON.stringify(infraccionCategoria);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(
+			res => res.json(),
+			this._loogerService.registerLog(token,'INSERT',json,this.url)
+		);
 	}
 
 	delete(token,id){
-
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers}).map(
+			res => res.json()
+		);
 	}
 
 	show(token,id){
@@ -38,12 +43,14 @@ export class MflInfraccionCategoriaService {
 							  .map(res => res.json());
 	}
 
-	// tslint:disable-next-line:one-line
 	edit(infraccionCategoria,token){
 		let json = JSON.stringify(infraccionCategoria);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
+ 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(
+			 res => res.json(),
+			 this._loogerService.registerLog(token,'UPDATE',json,this.url)
+		);
 	}
 
 	select(){

@@ -7,7 +7,7 @@
             <h5 class="card-title">
               <b class="text-uppercase">Configuración</b>
               <br>
-              <small>Categorias de Infracción</small>
+              <small>Infracciones</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                   <i class="fa fa-plus"></i>
@@ -21,24 +21,26 @@
               <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Codigo</th>
                     <th>Nombre</th>
+                    <th>Categoria</th>
                     <th>Descripción</th>
-                    <th>SMLDV</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let infraccionCategoria of infraccionCategorias; let i = index">
-                  <td >{{ infraccionCategoria.id }}</td>
-                  <td >{{ infraccionCategoria.nombre }}</td>
-                  <td >{{ infraccionCategoria.descripcion }}</td>
-                  <td >{{ infraccionCategoria.smldv }}</td>
+                <tr class="odd" *ngFor="let infraccion of infracciones; let i = index">
+                  <td >{{ infraccion.id }}</td>
+                  <td >{{ infraccion.codigo }}</td>
+                  <td >{{ infraccion.nombre }}</td>
+                  <td >{{ infraccion.infraccionCategoria.nombre }}</td>
+                  <td >{{ infraccion.descripcion }}</td>
                   <td>
-                    <button (click)="onEdit(infraccionCategoria)" class="btn btn-xs btn-info" type="button">
+                    <button (click)="onEdit(infraccion)" class="btn btn-xs btn-info" type="button">
                       <i class="fa fa-edit"></i>
                       Editar
                     </button> 
-                    <button (click)="onDelete(infraccionCategoria.id)"  class="btn btn-xs btn-danger" type="button">
+                    <button (click)="onDelete(infraccion.id)"  class="btn btn-xs btn-danger" type="button">
                       <i class="fa fa-trash"></i>
                       Eliminar
                     </button> 
@@ -51,6 +53,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [infraccionCategoria]="infraccionCategoria" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [infraccion]="infraccion" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

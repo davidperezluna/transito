@@ -1,27 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MflInfraccionCategoriaService } from '../../services/mflInfraccionCategoria.service';
+import { CfgSmlmvService } from '../../services/cfgSmlmv.service';
 import { LoginService } from '../../services/login.service';
-import { MflInfraccionCategoria } from './mflInfraccionCategoria.modelo';
+import { CfgSmlmv } from './cfgSmlmv.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './mflInfraccionCategoria.component.html'
+  templateUrl: './cfgSmlmv.component.html'
 })
-export class MflInfraccionCategoriaComponent implements OnInit {
+export class CfgSmlmvComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public infraccionCategorias;
+	public smlmvs;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public infraccionCategoria: MflInfraccionCategoria;
+  public smlmv: CfgSmlmv;
 
   constructor(
-    private _InfraccionCategoriaService: MflInfraccionCategoriaService,
+    private _InfraccionCategoriaService: CfgSmlmvService,
 		private _loginService: LoginService,
     ){}
     
@@ -42,7 +42,7 @@ export class MflInfraccionCategoriaComponent implements OnInit {
     })
     this._InfraccionCategoriaService.index().subscribe(
 				response => {
-          this.infraccionCategorias = response.data;
+          this.smlmvs = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -128,8 +128,8 @@ export class MflInfraccionCategoriaComponent implements OnInit {
     })
   }
 
-  onEdit(infraccionCategoria:any){
-    this.infraccionCategoria = infraccionCategoria;
+  onEdit(smlmv:any){
+    this.smlmv = smlmv;
     this.formEdit = true;
     this.formIndex = false;
   }

@@ -1,5 +1,4 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MflInfraccionCategoria } from '../mflInfraccionCategoria.modelo';
 import { MflInfraccionCategoriaService } from '../../../services/mflInfraccionCategoria.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';

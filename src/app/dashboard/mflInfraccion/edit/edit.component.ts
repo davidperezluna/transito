@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { cfgFestivo } from '../cfgFestivo.modelo';
-import { cfgFestivoService } from '../../../services/cfgFestivo.service';
+import { MflInfraccionService } from '../../../services/mflInfraccion.service';
+import { MflInfraccionCategoriaService } from '../../../services/mflInfraccionCategoria.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,23 +10,40 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() cfgFestivo:any = null;
+@Input() infraccion:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
+public infraccionCategorias: any;
+public infraccionCategoriaSelected: any;
 
 constructor(
-  private _festivoService: cfgFestivoService,
+  private _InfraccionService: MflInfraccionService,
+  private _InfraccionCategoriaService: MflInfraccionCategoriaService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){  }
+  ngOnInit(){
+    this._InfraccionCategoriaService.select().subscribe(
+      response => {
+        this.infraccionCategorias = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._festivoService.editFestivo(this.cfgFestivo,token).subscribe(
+		this._InfraccionService.edit(this.infraccion,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -34,7 +51,7 @@ constructor(
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con éxito.',
+            text: 'El registro se ha modificado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
@@ -44,7 +61,7 @@ constructor(
 
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
-						alert("Error en la petición.");
+						alert("Error en la petición");
 					}
 				}
 

@@ -1,27 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MflInfraccionCategoriaService } from '../../services/mflInfraccionCategoria.service';
-import { LoginService } from '../../services/login.service';
-import { MflInfraccionCategoria } from './mflInfraccionCategoria.modelo';
+import { CfgAuditoriaService } from '../../services/cfgAuditoria.service';
+import {LoginService} from '../../services/login.service';
+import { CfgAuditoria } from './cfgAuditoria.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './mflInfraccionCategoria.component.html'
+  templateUrl: './cfgAuditoria.component.html'
 })
-export class MflInfraccionCategoriaComponent implements OnInit {
+export class CfgAuditoriaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public infraccionCategorias;
+	public auditorias;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public infraccionCategoria: MflInfraccionCategoria;
+  public auditoria: CfgAuditoria;
 
   constructor(
-    private _InfraccionCategoriaService: MflInfraccionCategoriaService,
+    private _AuditoriaService: CfgAuditoriaService,
 		private _loginService: LoginService,
     ){}
     
@@ -40,9 +40,9 @@ export class MflInfraccionCategoriaComponent implements OnInit {
       ) {
       }
     })
-    this._InfraccionCategoriaService.index().subscribe(
+    this._AuditoriaService.index().subscribe(
 				response => {
-          this.infraccionCategorias = response.data;
+          this.auditorias = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -60,7 +60,7 @@ export class MflInfraccionCategoriaComponent implements OnInit {
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
-      pageLength: 8,
+      pageLength: 10,
       sPaginationType: 'full_numbers',
       oLanguage: {
            oPaginate: {
@@ -88,7 +88,7 @@ export class MflInfraccionCategoriaComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteInfraccionCategoria(id:any){
+  delete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -101,7 +101,7 @@ export class MflInfraccionCategoriaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._InfraccionCategoriaService.delete(token,id).subscribe(
+        this._AuditoriaService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -128,8 +128,8 @@ export class MflInfraccionCategoriaComponent implements OnInit {
     })
   }
 
-  onEdit(infraccionCategoria:any){
-    this.infraccionCategoria = infraccionCategoria;
+  edit(auditoria:any){
+    this.auditoria = auditoria;
     this.formEdit = true;
     this.formIndex = false;
   }

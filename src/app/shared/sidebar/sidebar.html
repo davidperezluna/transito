@@ -131,6 +131,12 @@
                 Infracción Categoria
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="mflInfraccion"  [ngClass]="{'active' : ( addActive === 'mflInfraccion')}" (click)="addActiveMenu('mflInfraccion')">
+                <i class="fa fa-angle-right"></i>
+                Infracciones
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level --> 
         </li>
@@ -156,13 +162,25 @@
       <ul class="nav flex-column nav-second-level">
         <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'cfg_festivo' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_festivo')">
-            Otras Gestiones <i class="fa fa-angle-right"></i>
+            General <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgAuditoria"  [ngClass]="{'active' : ( addActive === 'cfgAuditoria')}" (click)="addActiveMenu('cfgAuditoria')">
+                <i class="fa fa-angle-right"></i>
+                Auditoria
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgFestivo"  [ngClass]="{'active' : ( addActive === 'cfgFestivo')}" (click)="addActiveMenu('cfgFestivo')">
                 <i class="fa fa-angle-right"></i>
                 Festivos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgSmlmv"  [ngClass]="{'active' : ( addActive === 'cfgSmlmv')}" (click)="addActiveMenu('cfgSmlmv')">
+                <i class="fa fa-angle-right"></i>
+                SMLMV
               </a>
             </li>
           </ul>

@@ -1,61 +1,48 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import { LoggerService } from "../logger/services/logger.service";
+import  {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class BancoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/banco";
+export class CfgAuditoriaService {
+	public url = "http://localhost/GitHub/colossus-sit/web/cfgauditoria";
 	public identity;
 	public token;
 
-	constructor(
-		private _http: Http,
-		private _loogerService: LoggerService
-	){}
+	constructor(private _http: Http){}
 
-	getBanco(){
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(banco,token){
-		let json = JSON.stringify(banco);
+	register(auditoria,token){ 
+		
+		let json = JSON.stringify(auditoria);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers}).map(
-			res => res.json(),
-			this._loogerService.registerLog(token,'INSERT',json,this.url)
-		);
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteBanco(token,id){
+	delete(token,id){
+
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showBanco(token,id){
-		
+	show(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
+		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
 							  .map(res => res.json());
-
 	}
 
-	editBanco(banco,token){
-
-		let json = JSON.stringify(banco);
+	// tslint:disable-next-line:one-line
+	edit(auditoria,token){
+		let json = JSON.stringify(auditoria);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/edit", params, {headers: headers})
-							  .map(res => res.json());
-
+ 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
-
-	getBancoSelect(){
-		return this._http.get(this.url+"/select").map(res => res.json());
-	}
-	
 }

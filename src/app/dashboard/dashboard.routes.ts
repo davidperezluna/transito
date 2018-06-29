@@ -21,10 +21,18 @@ import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
+
+import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
+import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
+import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
+
 import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
 import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
+
+import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
+
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
 
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
@@ -46,7 +54,6 @@ import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasign
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { DashboardComponent } from './index';
-import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
 
 export const DashboardRoutes: Route[] = [
     {
@@ -70,9 +77,13 @@ export const DashboardRoutes: Route[] = [
         ...ServicioRoutes,
         ...CiudadanoRoutes,
         ...TipoIdentificacionRoutes,
-        ...MgdRegistroRoutes,
+        ...CfgAuditoriaRoutes,
+        ...CfgSmlmvRoutes,
+        ...cfgFestivoRoutes,      
         ...MgdDocumentoRoutes,
+        ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,
+        ...MflInfraccionRoutes,
         ...MflInfraccionCategoriaRoutes,
         ...MparqCostoTrayectoRoutes,
         ...MpersonalFuncionarioRoutes,
@@ -95,7 +106,7 @@ export const DashboardRoutes: Route[] = [
         ...RnaPreasignacionPlacaRoutes,
         // ...SucursalRoutes,
         ...TramitePrecioRoutes, 
-        ...ConceptoParametroRoutes,
-        ...cfgFestivoRoutes      ]
+        ...ConceptoParametroRoutes
+        ]
     }
 ];

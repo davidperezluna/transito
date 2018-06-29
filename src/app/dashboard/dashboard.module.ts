@@ -28,6 +28,9 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
 import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
+
+import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
+import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
@@ -43,7 +46,10 @@ import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
 import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
+
+import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
+
 import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
 import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
@@ -85,8 +91,12 @@ import {RightsidebarComponent} from '../shared/index';
       AlmacenModule,
       CiudadanoModule,
       TipoIdentificacionModule,
+      CfgAuditoriaModule,
+      CfgSmlmvModule,
+      cfgFestivoModule,
       MgdDocumentoModule,
       MgdTipoCorrespondenciaModule,
+      MflInfraccionModule,
       MflInfraccionCategoriaModule,
       MgdRegistroModule,
       MparqCostoTrayectoModule,
@@ -104,7 +114,6 @@ import {RightsidebarComponent} from '../shared/index';
       SustratoModule,
       GestionTransportePublicoModule,
       EmpresaModule,
-      cfgFestivoModule,
       // SucursalModule,
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,

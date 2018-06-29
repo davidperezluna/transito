@@ -1,0 +1,47 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <b class="text-uppercase">Configuración</b>
+              <br>
+              <small>Auditorias</small>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Url</th>
+                    <th>Fecha</th>
+                    <th>Datos</th>
+                    <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let auditoria of auditorias; let i = index">
+                  <td >{{ auditoria.id }}</td>
+                  <td >{{ auditoria.url }}</td>
+                  <td >{{ auditoria.fecha }}</td>
+                  <td >{{ auditoria.datos }}</td>
+                  <td >{{ auditoria.accion }}</td>
+                  <td>
+                    <button (click)="edit(auditoria)" class="btn btn-xs btn-info" type="button">
+                      <i class="fa fa-edit"></i>
+                      Editar
+                    </button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [auditoria]="auditoria" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

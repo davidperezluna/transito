@@ -42,30 +42,53 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>Tipo Contrato <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="tipoContratoSelected" required name="tiposContrato" required>
+                            <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="tipoContratoSelected" name="tiposContrato" required>
                             </ng-select>
                         </div>
-                        
+                    </div>
+
+                    <div class="form-group row" *ngIf='tipoContratoSelected == 1'>
                         <div class="col-xs-12 col-lg-6">
                             <label>Acta de posesion </label>
-                            <input class="form-control" [(ngModel)]="actaPosesion" name="actaPosesion" type="text" />
+                            <input class="form-control" [(ngModel)]="actaPosesion" name="actaPosesion" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Resolución </label>
-                            <input class="form-control" [(ngModel)]="resolucion" name="resolucion" type="text" />
+                            <input class="form-control" [(ngModel)]="resolucion" name="resolucion" type="text" required />
                         </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf='tipoContratoSelected == 2'>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha inicio </label>
+                                <input class="form-control" [(ngModel)]="fechaInicio" name="fechaInicio" type="date" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha fin </label>
+                                <input class="form-control" [(ngModel)]="fechaFin" name="fechaFin" type="date" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Numero de contrato </label>
+                                <input class="form-control" [(ngModel)]="numeroContrato" name="numeroContrato" type="text" required />
+                            </div>
+                        </div>
+
+                    <div class="form-group row" *ngIf='tipoContratoSelected == 3'>
                         <div class="col-xs-12 col-lg-6">
                             <label>Fecha inicio </label>
-                            <input class="form-control" [(ngModel)]="fechaInicio" name="fechaInicio" type="date" />
+                            <input class="form-control" [(ngModel)]="fechaInicio" name="fechaInicio" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Fecha fin </label>
-                            <input class="form-control" [(ngModel)]="fechaFin" name="fechaFin" type="date" />
+                            <input class="form-control" [(ngModel)]="fechaFin" name="fechaFin" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Numero de placa </label>
-                            <input class="form-control" [(ngModel)]="numeroPlaca" name="numeroPlaca" type="text" />
+                            <input class="form-control" [(ngModel)]="numeroPlaca" name="numeroPlaca" type="text" required />
                         </div>
+                    </div>
+
+                    <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>Sede operativa <strong class="text-danger">*</strong></label>
                             <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected" name="sedesOperativas" required>
@@ -73,7 +96,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Cargo </label>
-                            <input class="form-control" [(ngModel)]="cargo" name="cargo" type="text" />
+                            <input class="form-control" [(ngModel)]="cargo" name="cargo" type="text" required />
                         </div>
                     </div>
                 </form>
