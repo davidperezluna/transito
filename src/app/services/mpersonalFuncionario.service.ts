@@ -1,15 +1,18 @@
 import  {Injectable} from "@angular/core";
-import  {Http, Response,Headers} from "@angular/http";
+import  {Http, Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { LoggerService } from "../logger/services/logger.service";
 
 @Injectable()
 export class MpersonalFuncionarioService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mpersonalfuncionario";
+	public url = "http://190.146.7.242/colossus-sit/web/app.php/mpersonalfuncionario";
 	public identity;
 	public token;
 
-	constructor(private _http: Http){}
+	constructor(
+		private _http: Http,
+		private _loogerService: LoggerService
+	){}
 
 	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
@@ -19,7 +22,10 @@ export class MpersonalFuncionarioService {
 		let json = JSON.stringify(funcionario);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(
+			res => res.json(),
+			this._loogerService.registerLog(token,'INSERT',json,this.url)
+		);
 	}
 
 	delete(token,id){
@@ -40,7 +46,10 @@ export class MpersonalFuncionarioService {
 		let json = JSON.stringify(funcionario);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
+ 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(
+			res => res.json(),
+			this._loogerService.registerLog(token,'UPDATE',json,this.url)
+		);
 	}
 
 	select(){

@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class ComparendoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/comparendo";
+	public url = "http://190.146.7.242/colossus-sit/web/app.php/comparendo";
 	public identity;
 	public token;
 

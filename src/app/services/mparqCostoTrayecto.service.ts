@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class MparqCostoTrayectoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mparqcostotrayecto";
+	public url = "http://190.146.7.242/colossus-sit/web/app.php/mparqcostotrayecto";
 	public identity;
 	public token;
 
