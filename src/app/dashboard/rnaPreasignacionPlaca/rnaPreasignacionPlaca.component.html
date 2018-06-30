@@ -12,7 +12,7 @@
           </div>
           <div class="card-body">
             <div class="row"><!-- .row -->
-              <div class="col-xs-12 col-lg-6">
+              <div class="col-xs-12 col-lg-12">
                   <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
                     <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
                     <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" required />
@@ -21,12 +21,109 @@
                     </span>
                   </div>
                   <div class="has-danger" *ngIf="isError" >
-                    <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+                    <div class="form-control-feedback has-danger has-error">{{msj}}</div><br>
                   </div>
 
                   <div class="has-success" *ngIf="isExist" >
-                      <div class="form-control-feedback has-danger has-success">{{msj}}</div>
-                      <br>
+                    <div class="form-control-feedback has-danger has-success">{{msj}}</div><br>
+                    <!-- tabla de detalles del vehiculo sin placa -->
+                    <div class="col-xs-12 col-lg-12" >
+                      <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>
+                      <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                                <th><b>Nro.Factura</b></th>
+                                <th><b>Servicio</b></th>
+                                <th><b>Clases de vehículo</b></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td>
+                                {{vehiculo.numeroFactura}}
+                                </td>
+                                <td> 
+                                    {{vehiculo.servicio.nombre}}
+                                </td>
+                                <td> 
+                                    {{vehiculo.clase.nombre}}
+                                </td>
+                            </tr>
+                          </tbody> 
+                          <thead>
+                            <tr>
+                              <th><b>Nro.Motor</b></th>
+                              <th><b>Nro.Chasis</b></th>
+                              <th><b>Nro.Serie</b></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td>
+                                {{vehiculo.motor}}
+                                </td>
+                                <td> 
+                                    {{vehiculo.chasis}}
+                                </td>
+                                <td> 
+                                    {{vehiculo.serie}}
+                                </td>
+                            </tr>
+                          </tbody> 
+                          <thead>
+                            <tr>
+                              <th><b>Nro.VIN</b></th>
+                              <th><b>Nro.Factura compra venta</b></th>
+                              <th><b>Fecha compra venta</b></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td>
+                                {{vehiculo.vin}}
+                                </td>
+                                <td> 
+                                    {{vehiculo.numeroFactura}}
+                                </td>
+                                <td> 
+                                    {{vehiculo.fechaFactura}}
+                                </td>
+                            </tr>
+                          </tbody> 
+                      </table>
+                    </div><!-- fin detalles del vehiculo -->
+
+                    <!-- tabla de detalles del vehiculo sin placa -->
+                    <div class="col-xs-6 col-lg-6" >
+                      <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>
+                      <table class="table table-bordered">
+                          
+                          
+                        <div class="col-xs-6 col-lg-6">
+                          <label>sede <span class="text-danger">*</span></label><br>
+                          <input />
+                          <!-- <ng-select [multiple]="false"  required name="ciudadanoId"></ng-select> -->
+                      </div>
+                         
+                          
+                      </table> 
+                    </div><!-- fin detalles del vehiculo -->
+
+                    <div class="col-xs-6 col-lg-6" >
+                      <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>
+                      <table class="table table-bordered">
+                          
+                          
+                        <div class="col-xs-6 col-lg-6">
+                          <label>sede <span class="text-danger">*</span></label><br>
+                          <input />
+                          <!-- <ng-select [multiple]="false"  required name="ciudadanoId"></ng-select> -->
+                      </div>
+                         
+                          
+                      </table> 
+                    </div><!-- fin detalles del vehiculo -->
+
                   </div>
               </div>
             </div>
@@ -34,5 +131,6 @@
         </div>
       </div>
     </div>
+    
     
 </div>

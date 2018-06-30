@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import {ColorService} from '../../services/color.service';
 import {LoginService} from '../../services/login.service';
 import {Vehiculo} from '../vehiculo/vehiculo.modelo';
@@ -11,6 +11,8 @@ declare var $: any;
   templateUrl: './rnaPreasignacionPlaca.component.html'
 })
 export class RnaPreasignacionPlacaComponent implements OnInit {
+  // @Output() ready = new EventEmitter<any>();
+  @Input() ciudadanoVehiculo:any = null;
   public errorMessage;
   public vehiculo: Vehiculo;
 	public id;
@@ -152,10 +154,12 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
 
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
       response => {
+        console.log(response.data);
         if (response.code == 200 ) {
           this.msj = 'vehiculo ya tiene placa asignada';
           this.isError = true;
           this.isExist = false;
+          
           swal.close();
         }
         if(response.code == 401){
@@ -168,6 +172,8 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
           this.msj = 'vehiculo encontrado';
           this.isError = false;
           this.isExist = true;
+          this.vehiculo=response.data;
+          
           swal.close();
         }
 
