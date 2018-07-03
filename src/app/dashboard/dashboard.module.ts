@@ -40,6 +40,7 @@ import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
+import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
@@ -119,6 +120,7 @@ import {RightsidebarComponent} from '../shared/index';
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,
       CfgPlacaModule,
+      MsvTalonarioModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
