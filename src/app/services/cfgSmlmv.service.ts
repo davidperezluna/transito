@@ -5,7 +5,7 @@ import { LoggerService } from "../logger/services/logger.service";
 
 @Injectable()
 export class CfgSmlmvService {
-	public url = "http://localhost/GitHub/colossus-sit/web/cfgsmlmv";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/cfgsmlmv";
 	public identity;
 	public token;
 

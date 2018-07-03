@@ -15,9 +15,9 @@ export class MparqCostoTrayectoService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(tipoCorrespondencia,token){ 
+	register(costoTrayecto,token){ 
 		
-		let json = JSON.stringify(tipoCorrespondencia);
+		let json = JSON.stringify(costoTrayecto);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
@@ -39,8 +39,8 @@ export class MparqCostoTrayectoService {
 	}
 
 	// tslint:disable-next-line:one-line
-	editCostoTrayecto(tipoCorrespondencia,token){
-		let json = JSON.stringify(tipoCorrespondencia);
+	editCostoTrayecto(costoTrayecto,token){
+		let json = JSON.stringify(costoTrayecto);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());

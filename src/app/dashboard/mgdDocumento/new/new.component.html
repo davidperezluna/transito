@@ -21,7 +21,7 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" class="btn btn-default">
+                    <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
                         <i class="fa fa-times"></i>
                         Cancel
                     </button>

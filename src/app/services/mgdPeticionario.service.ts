@@ -19,6 +19,8 @@ export class MgdPeticionarioService {
 		let json = JSON.stringify(datos);
 		formData.append('data', json);
 		formData.append('authorization', token);
+
+		console.log(formData);
 		//let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", formData).map(res => res.json());
 		/*let json = JSON.stringify(datos);

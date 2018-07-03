@@ -5,7 +5,7 @@ import { LoggerService } from "../logger/services/logger.service";
 
 @Injectable()
 export class MflInfraccionCategoriaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/mflinfraccioncategoria";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mflinfraccioncategoria";
 	public identity;
 	public token;
 

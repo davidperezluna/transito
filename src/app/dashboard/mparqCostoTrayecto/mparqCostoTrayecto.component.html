@@ -34,11 +34,11 @@
                   <td >{{ costoTrayecto.destino }}</td>
                   <td >{{ costoTrayecto.costo }}</td>
                   <td>
-                    <button (click)="editCostoTrayecto(costoTrayecto)" class="btn btn-xs btn-info" type="button">
+                    <button (click)="edit(costoTrayecto)" class="btn btn-xs btn-info" type="button">
                       <i class="fa fa-edit"></i>
                       Editar
                     </button> 
-                    <button (click)="deleteCostoTrayecto(costoTrayecto.id)"  class="btn btn-xs btn-danger" type="button">
+                    <button (click)="delete(costoTrayecto.id)"  class="btn btn-xs btn-danger" type="button">
                       <i class="fa fa-trash"></i>
                       Eliminar
                     </button> 

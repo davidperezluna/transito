@@ -9,7 +9,13 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-3">
-                                <label>No. de Radicado <b>{{ documento.numeroRadicado }}</b></label>
+                                <label>No. de Radicado 
+                                    <b>
+                                        <a href="http://localhost/GitHub/colossus-sit/web/docs/{{ documento.url }}" target="_blank">
+                                            {{ documento.numeroRadicado }}
+                                        </a>
+                                    </b>
+                                </label>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>No. de folios <b>{{ documento.folios }}</b></label>
@@ -47,7 +53,7 @@
                             <div class="col-xs-12 col-lg-12">
                                 <label>Tipo de Correspondencia: <b>{{ documento.tipoCorrespondencia.nombre }}</b></label>
                             </div>
-                            <div class="col-xs-12 col-lg-3">
+                            <div class="col-xs-12 col-lg-12">
                                 <label>Asunto y Concepto:</label>
                                 <p class="text-justify"><b>{{ documento.descripcion }}</b></p>
                             </div>
@@ -68,11 +74,11 @@
                 </div>
                 <div class="form-group row">
                     <div  class="col-xs-12 col-lg-12">
-                        <button (click)="onCancelar()" class="btn btn-default">
+                        <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
                             <i class="fa fa-times"></i>
                             Cancel
                         </button>
-                        <button (click)="onCrearReparto()" [disabled]="formReparto.invalid" class="btn btn-primary" type="button">
+                        <button (click)="onCrearReparto()" (ready)="ready($event)"  [disabled]="formReparto.invalid" class="btn btn-primary" type="button">
                             <i class="fa fa-save"></i>
                             Enviar
                         </button>

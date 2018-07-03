@@ -5,7 +5,7 @@ export class Factura{
 		public vehiculoId: number,
 		public sedeOperativaId: number,
 		public fechaCreacion: string,
-		public numero: number,
+		public numero: string,
 		public valorBruto: string,
 		public observacion: string,
 		public estado: boolean

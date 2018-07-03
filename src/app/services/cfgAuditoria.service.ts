@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class CfgAuditoriaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/cfgauditoria";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/cfgauditoria";
 	public identity;
 	public token;
 

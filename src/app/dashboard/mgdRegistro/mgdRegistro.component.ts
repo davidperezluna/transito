@@ -3,6 +3,7 @@ import { MgdPeticionarioService } from '../../services/mgdPeticionario.service';
 import { MgdDocumentoService } from '../../services/mgdDocumento.service';
 import { MgdRegistro } from './mgdRegistro.modelo';
 import { LoginService } from '../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -23,6 +24,7 @@ export class MgdRegistroComponent implements OnInit {
   public table:any;
   public documento:any;
   public mgdRegistros:any;
+  public docsUrl = environment.docsUrl;
 
   constructor(
     private _PeticionarioService: MgdPeticionarioService,
