@@ -1,0 +1,98 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nueva Evaluación</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Número <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="msvEvaluacion.numero" name="numero" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Parametro</label>
+                            <input class="form-control" [(ngModel)]="msvEvaluacion.parametro" name="parametro" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Item</label>
+                            <input class="form-control" [(ngModel)]="msvEvaluacion.item" name="item" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Variable</label>
+                            <input class="form-control" [(ngModel)]="msvEvaluacion.variable" name="variable" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Criterio</label>
+                            <input class="form-control" [(ngModel)]="msvEvaluacion.criterio" name="criterio" type="text" required />
+                        </div>
+                        <div class="form-group row">
+                                <div class="col-xs-12 col-lg-3">
+                                    <label>Aplica</label>
+                                    <div class="custom-control custom-radio">
+                                        <input name="aplica" [(ngModel)]="msvEvaluacion.aplica" value="true" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio1">Si</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-3">
+                                    <div class="custom-control custom-radio">
+                                        <input name="aplica" [(ngModel)]="msvEvaluacion.aplica" value="false" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" >
+                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xs-12 col-lg-3">
+                                    <label>Evidencia</label>
+                                    <div class="custom-control custom-radio">
+                                        <input name="evidencia" [(ngModel)]="msvEvaluacion.evidencia" value="true" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio1">Si</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-3">
+                                    <div class="custom-control custom-radio">
+                                        <input name="evidencia" [(ngModel)]="msvEvaluacion.evidencia" value="false" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" >
+                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-3">
+                                        <label>Responde</label>
+                                        <div class="custom-control custom-radio">
+                                            <input name="responde" [(ngModel)]="msvEvaluacion.responde" value="true" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Si</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-3">
+                                        <div class="custom-control custom-radio">
+                                            <input name="aplica" [(ngModel)]="msvEvaluacion.aplica" value="false" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" >
+                                            <label class="custom-control-label" for="customRadio2">No</label>
+                                        </div>
+                                    </div>
+                            </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Observación</label>
+                            <input class="form-control" [(ngModel)]="msvEvaluacion.observacion" name="observacion" type="text" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

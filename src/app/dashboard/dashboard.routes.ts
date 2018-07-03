@@ -80,7 +80,7 @@ export const DashboardRoutes: Route[] = [
         ...TipoIdentificacionRoutes,
         ...CfgAuditoriaRoutes,
         ...CfgSmlmvRoutes,
-        ...cfgFestivoRoutes,      
+        ...cfgFestivoRoutes,    
         ...MgdDocumentoRoutes,
         ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,
