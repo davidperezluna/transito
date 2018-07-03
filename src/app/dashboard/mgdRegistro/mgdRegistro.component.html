@@ -54,7 +54,7 @@
     
     <app-new *ngIf='formNew' (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-new>
 
-    <app-show *ngIf='formShow' [documento]="documento" (readyDocument)="readyDocument($event)"></app-show>
+    <app-show *ngIf='formShow' [documento]="documento" (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-show>
 
     <div class="row" *ngIf='documentos'>
         <div class="col-xs-12 col-lg-12">
@@ -84,7 +84,7 @@
                                 <td >{{ documento.peticionario.primerNombre }} {{ documento.peticionario.primerApellido }}</td>
                                 <td >{{ documento.tipoCorrespondencia.nombre }}</td>
                                 <td >
-                                    <a href="http://localhost/GitHub/colossus-sit/web/docs/{{ documento.url }}" target="_blank">
+                                    <a href="{{docsUrl}}{{ documento.url }}" target="_blank">
                                         {{ documento.numeroRadicado }}
                                     </a>
                                 </td>

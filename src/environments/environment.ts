@@ -6,4 +6,5 @@
 export const environment = {
   production: false,
   apiUrl : 'http://localhost/GitHub/colossus-sit/web/app_dev.php/',
+  docsUrl : 'http://localhost/GitHub/colossus-sit/web/docs/',
 };

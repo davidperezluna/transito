@@ -62,13 +62,14 @@ constructor(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: this.respuesta.msj,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          }).then((result) => {
+            this.ready.emit(true);
+          });
         }else{
           swal({
             title: 'Error!',

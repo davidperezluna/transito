@@ -22,6 +22,14 @@
                         </div>
 
                         <div class="form-group row">
+                            <p class="text-center">
+                                <a href="{{ apiUrl }}/{{ documento.id }}/pdf" target="_blank">
+                                    <i class="fa fa-file"></i>
+                                    Generar documento
+                                </a>
+                            </p>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-xs-12 col-lg-4 offset-lg-4">
                                 <label>Almacenado en carpeta No:</label>
                                 <input class="form-control" [(ngModel)]="numeroCarpeta" name="numeroCarpeta" type="text" required>

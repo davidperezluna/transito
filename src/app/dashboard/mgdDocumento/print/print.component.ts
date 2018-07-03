@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MgdDocumentoService } from '../../../services/mgdDocumento.service';
 import { LoginService } from '../../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
@@ -10,6 +11,7 @@ import swal from 'sweetalert2';
 export class PrintComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() documento: any = null;
+public apiUrl = environment.apiUrl + 'mgddocumento';
 public errorMessage;
 public respuesta;
 public date: any;

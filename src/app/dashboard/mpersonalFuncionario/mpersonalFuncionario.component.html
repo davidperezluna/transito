@@ -37,11 +37,11 @@
                   </form>
               </div>
               <div class="card-footer">
-                  <button (click)="search()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                  <button (click)="search()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-search"></i>
                     Buscar
                   </button>
-                  <button (click)="onNew()" class="btn btn-info" type="button">
+                  <button (click)="onNew()" (ready)="ready($event)" class="btn btn-info" type="button">
                     <i class="fa fa-plus"></i>
                     Nuevo
                     </button>
@@ -49,6 +49,52 @@
           </div>
       </div>
   </div>
-  <app-edit *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit>
-  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <b class="text-uppercase">Funcionarios</b>
+              <br>
+              <small>Registrados</small>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Identificación</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let funcionario of funcionarios; let i = index">
+                  <td >{{ funcionario.id }}</td>
+                  <td >{{ funcionario.ciudadano.usuario.primerNombre }}</td>
+                  <td >{{ funcionario.ciudadano.usuario.identificacion }}</td>
+                  <td>
+                    <button (click)="edit(funcionario)" class="btn btn-xs btn-info" type="button">
+                      <i class="fa fa-edit"></i>
+                      Editar
+                    </button> 
+                    <button (click)="delete(funcionario.id)"  class="btn btn-xs btn-danger" type="button">
+                      <i class="fa fa-trash"></i>
+                      Eliminar
+                    </button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-edit *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

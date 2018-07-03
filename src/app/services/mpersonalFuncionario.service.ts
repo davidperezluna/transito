@@ -5,7 +5,7 @@ import { LoggerService } from "../logger/services/logger.service";
 
 @Injectable()
 export class MpersonalFuncionarioService {
-	public url = "http://190.146.7.242/colossus-sit/web/app.php/mpersonalfuncionario";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mpersonalfuncionario";
 	public identity;
 	public token;
 
@@ -21,6 +21,7 @@ export class MpersonalFuncionarioService {
 	register(funcionario,token){
 		let json = JSON.stringify(funcionario);
 		let params = "json="+json+"&authorization="+token;
+		console.log(params);
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(
 			res => res.json(),
@@ -54,6 +55,10 @@ export class MpersonalFuncionarioService {
 
 	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
+	}
+
+	selectAgentes(){
+		return this._http.get(this.url+"/select/agentes").map(res => res.json());
 	}
 
 	search(datos,token){

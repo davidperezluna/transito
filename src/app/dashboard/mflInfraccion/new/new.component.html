@@ -11,15 +11,25 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="infraccionCategoria.nombre" name="nombre" type="text" required />
+                            <input class="form-control" [(ngModel)]="infraccion.nombre" name="nombre" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Código <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="infraccion.codigo" name="smldv" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Descripción <strong class="text-danger">*</strong></label>
-                            <textarea class="form-control" [(ngModel)]="infraccionCategoria.descripcion" rows='4' name="descripcion" required ></textarea>
+                            <textarea class="form-control" [(ngModel)]="infraccion.descripcion" rows='4' name="descripcion" required ></textarea>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>SMLDV <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="infraccionCategoria.smldv" name="smldv" type="text" required />
+                            <label>Categoria</label>
+                            <ng-select 
+                                [multiple]="false" 
+                                [options]="categorias" 
+                                [(ngModel)]="categoriaSelected" 
+                                required 
+                                name="categoriaId">
+                            </ng-select>
                         </div>
                     </div>
                 </form>

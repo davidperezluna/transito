@@ -14,7 +14,9 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public funcionario: MpersonalFuncionario;
-public identificacion: any;
+public formConfirm = false;
+public formPdf = false;
+public pdf: any;
 public primerNombre: any;
 public segundoNombre: any;
 public primerApellido: any;
@@ -27,7 +29,7 @@ public tipoNombramientoSelected: any;
 public sedesOperativas: any;
 public sedeOperativaSelected: any;
 public errorMessage;
-public respuesta;
+public respuesta: any = null;
 
 constructor(
   private _FuncionarioService: MpersonalFuncionarioService,
@@ -39,7 +41,7 @@ constructor(
 
   ngOnInit() {
     this.funcionario = new MpersonalFuncionario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    
+
     this._TipoContratoService.select().subscribe(
       response => {
         this.tiposContrato = response;
@@ -82,52 +84,104 @@ constructor(
       }
     );
   }
+  
   onCancelar(){
     this.ready.emit(true);
+  }
+
+  onCancelarConfirm(){
+    this.formConfirm = false;
   }
   
   onEnviar(){
     let token = this._loginService.getToken();
-
+    
     this.funcionario.sedeOperativaId = this.sedeOperativaSelected;
     this.funcionario.tipoContratoId = this.tipoContratoSelected;
-    this.funcionario.identificacion = this.identificacion;
-    
-		this._FuncionarioService.register(this.funcionario,token).subscribe(
-			response => {
-        this.respuesta = response;
-        
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El funcionario '+  +' ya se encuentra registrado',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
 
-		}); 
+    if(this.funcionario.activo == 'true'){
+      this._FuncionarioService.register(this.funcionario,token).subscribe(
+        response => {
+          this.respuesta = response;
+          this.formConfirm = false;
+          this.formPdf = true;
+          
+          if(this.respuesta.status == 'success'){
+            this.ready.emit(true);
+            swal({
+              title: 'Perfecto!',
+              text: 'El registro se ha registrado con exito',
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }else{
+            swal({
+              title: 'Error!',
+              text: 'El funcionario ya se encuentra registrado',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+        error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+    }else{
+      this.formConfirm = true;
+      this.formPdf = false;
+    }
   }
+
+  onConfirm(){
+    let token = this._loginService.getToken();
+    
+    if(this.funcionario.inhabilidad == 'true'){
+      this._FuncionarioService.register(this.funcionario,token).subscribe(
+        response => {
+          this.respuesta = response;
+          this.formConfirm = false;
+          this.formPdf = true;
+          
+          if(this.respuesta.status == 'success'){
+            this.ready.emit(true);
+            swal({
+              title: 'Perfecto!',
+              text: 'El registro se ha registrado con exito',
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }else{
+            swal({
+              title: 'Error!',
+              text: 'El funcionario ya se encuentra registrado',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+        error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+    }else{
+      this.formConfirm = false;
+      this.formPdf = false;
+    }
+  }
+
+  
 
   onSearch() {
     let token = this._loginService.getToken();
     let datos = {
-      'identificacion':this.identificacion
+      'identificacion':this.funcionario.identificacion
     }
     
     this._FuncionarioService.searchCiudadano(datos,token).subscribe(

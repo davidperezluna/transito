@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class MunicipioService {
-	public url = "http://190.146.7.242/colossus-sit/web/app.php/municipio";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/municipio";
 	public identity;
 	public token;
 

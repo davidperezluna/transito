@@ -106,11 +106,11 @@ export class MpersonalFuncionarioComponent implements OnInit {
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formIndex = true;
+      this.formSearch = true;
       this.ngOnInit();
     }
   }
-
+  
   search(){
     this.datos.nombre = this.nombre;
     this.datos.identificacion = this.identificacion;
@@ -123,9 +123,9 @@ export class MpersonalFuncionarioComponent implements OnInit {
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-           this.funcionarios = response.data;
-
-           this.iniciarTabla();
+          this.funcionarios = response.data;
+          this.iniciarTabla();
+          this.formIndex = true;
 
           swal({
             title: 'Perfecto',
@@ -157,7 +157,6 @@ export class MpersonalFuncionarioComponent implements OnInit {
             if (result.value) {
               this.formNew = true;
               this.formSearch = false;
-              this.formIndex = false;
             }
           });
         }
@@ -215,6 +214,6 @@ export class MpersonalFuncionarioComponent implements OnInit {
   edit(funcionario:any){
     this.funcionario = funcionario;
     this.formEdit = true;
-    this.formIndex = false;
+    this.formSearch = false;
   }
 }

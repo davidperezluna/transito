@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class TramitePrecioService {
-	public url = "http://190.146.7.242/colossus-sit/web/app.php/tramiteprecio";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/tramiteprecio";
 	public identity;
 	public token;
 

@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class SustratoService {
-	public url = 'http://190.146.7.242/colossus-sit/web/app.php/sustrato';
+	public url = 'http://localhost/GitHub/colossus-sit/web/app_dev.php/sustrato';
 	public identity;
 	public token;
 
