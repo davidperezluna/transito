@@ -330,18 +330,15 @@ export class NewRnaTraspasoComponent implements OnInit {
     agregarApoderadoCiudadano(ciudadano:any){
         this.apoderado = 'ciudadano';
         this.ciudadanoSelected = this.datos.propietariosCiudadanos.filter(h => h == ciudadano);
-        console.log(this.ciudadanoSelected[0]);
     }
 
     agregarApoderadoEmpresa(empresa:any){
         this.apoderado = 'empresa';
         this.empresaSelected = this.datos.propietariosEmpresas.filter(h => h == empresa);
-        console.log(this.empresaSelected[0]);
     }
     onCancelarApoderado(){
         this.apoderado = 'false'
         this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-        console.log(this.tipoIdentificacionSelected);
     }
 
 

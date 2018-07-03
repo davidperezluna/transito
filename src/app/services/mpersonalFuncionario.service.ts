@@ -68,6 +68,13 @@ export class MpersonalFuncionarioService {
  		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
 	}
 
+	searchActivo(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 		return this._http.post(this.url+"/search/activo", params, {headers: headers}).map(res => res.json());
+	}
+
 	searchCiudadano(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
