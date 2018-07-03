@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class MgdPeticionarioService {
-	public url = "http://190.146.7.242/colossus-sit/web/app.php/mgdpeticionario";
+	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mgdpeticionario";
 	public identity;
 	public token;
 
@@ -19,6 +19,8 @@ export class MgdPeticionarioService {
 		let json = JSON.stringify(datos);
 		formData.append('data', json);
 		formData.append('authorization', token);
+
+		console.log(formData);
 		//let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", formData).map(res => res.json());
 		/*let json = JSON.stringify(datos);

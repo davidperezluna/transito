@@ -28,7 +28,6 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    console.log(this.costoTrayecto);
 		this.CostoTrayectoService.register(this.costoTrayecto,token).subscribe(
 			response => {
         this.respuesta = response;

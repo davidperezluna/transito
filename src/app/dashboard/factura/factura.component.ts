@@ -42,6 +42,12 @@ export class FacturaComponent implements OnInit {
       ) {
       }
     })
+    
+
+    let identity = this._loginService.getIdentity();
+    console.log(identity);
+
+
 		this._FacturaService.getFactura().subscribe(
 				response => {
           this.facturas = response.data;

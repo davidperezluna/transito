@@ -1,0 +1,78 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nueva entrada</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Fecha ingreso <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="inmovilizacion.fechaIngreso" name="fechaIngreso" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Hora ingreso <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="inmovilizacion.hora" name="hora" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>No. comparendo <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="comparendo" name="comparendo" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Placa <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="placa" name="placa" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>No. inventario <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="inventario" name="inventario" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Código grua <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="grua" name="grua" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Hora <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="hora" name="hora" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Lugar <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="lugar" name="lugar" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Quien realizo comparendo <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="agentes" [(ngModel)]="agenteSelected" name="agentes" required>
+                                </ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

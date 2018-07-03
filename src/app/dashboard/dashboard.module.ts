@@ -34,6 +34,10 @@ import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
+import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
+import { MparqGruaCiudadanoModule } from './mparqGruaCiudadano/mparqGruaCiudadano.module';
+import { MparqInmovilizacionModule } from './mparqInmovilizacion/mparqInmovilizacion.module';
+
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
 import { CarroceriaModule } from './carroceria/carroceria.module';
@@ -45,6 +49,7 @@ import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
+
 import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
 import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
 
@@ -53,6 +58,9 @@ import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfrac
 
 import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
 import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
+import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
+
+
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
@@ -101,8 +109,12 @@ import {RightsidebarComponent} from '../shared/index';
       MflInfraccionCategoriaModule,
       MgdRegistroModule,
       MparqCostoTrayectoModule,
+      MparqGruaModule,
+      MparqGruaCiudadanoModule,
+      MparqInmovilizacionModule,
       MpersonalFuncionarioModule,
       MpersonalTipoContratoModule,
+      MpersonalTalonarioModule,
       GeneroModule,
       GrupoSanguineoModule,
       CuentaModule,
