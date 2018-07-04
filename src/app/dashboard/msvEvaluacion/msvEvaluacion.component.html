@@ -16,7 +16,7 @@
                     <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
                     <input type="text" class="form-control" placeholder="NIT,Nombre empresa." [(ngModel)]="nit" name="nit" required />
                     <span class="input-group-btn">
-                        <button (click)="onKeyValidateEvaluacion()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                        <button (click)="onKeyValidateEvaluacion()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" type="button"><i class="fa fa-search"></i></button>
                     </span>
                   </div>
                   <div class="has-danger" *ngIf="isError" >
@@ -31,9 +31,10 @@
                       <table class="table table-bordered">
                           <thead>
                             <tr>
-                                <th><b>Nro.Factura</b></th>
-                                <th><b>Servicio</b></th>
-                                <th><b>Clases de vehículo</b></th>
+                                <th><b>Fecha de recepción</b></th>
+                                <th><b>Fecha de devolución</b></th>
+                                <th><b>Fecha de otorgamiento</b></th>
+                                <th><b>Funcionario que revisa</b></th>
                             </tr>
                           </thead>
                           <tbody>
