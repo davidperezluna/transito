@@ -358,9 +358,9 @@
               </a>
               <ul class="nav flex-column nav-third-level">
                 <li class="nav-item">
-                  <a class="nav-link" routerLink="mparqInmovilizacion"  [ngClass]="{'active' : ( addActive === 'mparqInmovilizacion')}" (click)="addActiveMenu('mparqInmovilizacion')">
+                  <a class="nav-link" routerLink="mparqEntrada"  [ngClass]="{'active' : ( addActive === 'mparqEntrada')}" (click)="addActiveMenu('mparqEntrada')">
                     <i class="fa fa-angle-right"></i>
-                    Inmovilizaciones
+                    Entradas
                   </a>
                 </li>
               </ul>
@@ -386,6 +386,12 @@
             <a class="nav-link" routerLink="mpersonalTalonario"  [ngClass]="{'active' : ( addActive === 'mpersonalTalonario')}" (click)="addActiveMenu('mpersonalTalonario')">
               <i class="fa fa-angle-right"></i> 
               Talonarios comparendos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="mpersonalAsignacion"  [ngClass]="{'active' : ( addActive === 'mpersonalAsignacion')}" (click)="addActiveMenu('mpersonalAsignacion')">
+              <i class="fa fa-angle-right"></i> 
+              Gestión de rangos
             </a>
           </li>
         </ul>

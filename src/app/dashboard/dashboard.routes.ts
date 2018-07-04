@@ -36,11 +36,12 @@ import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfrac
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
 import { MparqGruaRoutes } from './mparqGrua/mparqGrua.routes';
 import { MparqGruaCiudadanoRoutes } from './mparqGruaCiudadano/mparqGruaCiudadano.routes';
-import { MparqInmovilizacionRoutes } from './mparqInmovilizacion/mparqInmovilizacion.routes';
+import { MparqEntradaRoutes } from './mparqEntrada/mparqEntrada.routes';
 
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
 import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
 import { MpersonalTalonarioRoutes } from './mpersonalTalonario/mpersonalTalonario.routes';
+import { MpersonalAsignacionRoutes } from './mpersonalAsignacion/mpersonalAsignacion.routes';
 
 import { GeneroRoutes } from './genero/genero.routes';
 import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
@@ -92,11 +93,12 @@ export const DashboardRoutes: Route[] = [
         ...MflInfraccionCategoriaRoutes,
         ...MparqCostoTrayectoRoutes,
         ...MparqGruaRoutes,
-        ...MparqInmovilizacionRoutes,
+        ...MparqEntradaRoutes,
         ...MparqGruaCiudadanoRoutes,
         ...MpersonalFuncionarioRoutes,
         ...MpersonalTipoContratoRoutes,
         ...MpersonalTalonarioRoutes,
+        ...MpersonalAsignacionRoutes,
         ...GeneroRoutes,
         ...GrupoSanguineoRoutes,
         ...CuentaRoutes,

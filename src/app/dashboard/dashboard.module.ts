@@ -36,7 +36,7 @@ import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
 import { MparqGruaCiudadanoModule } from './mparqGruaCiudadano/mparqGruaCiudadano.module';
-import { MparqInmovilizacionModule } from './mparqInmovilizacion/mparqInmovilizacion.module';
+import { MparqEntradaModule } from './mparqEntrada/mparqEntrada.module';
 
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
@@ -59,6 +59,7 @@ import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfrac
 import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
 import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
+import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
 
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
@@ -111,10 +112,11 @@ import {RightsidebarComponent} from '../shared/index';
       MparqCostoTrayectoModule,
       MparqGruaModule,
       MparqGruaCiudadanoModule,
-      MparqInmovilizacionModule,
+      MparqEntradaModule,
       MpersonalFuncionarioModule,
       MpersonalTipoContratoModule,
       MpersonalTalonarioModule,
+      MpersonalAsignacionModule,
       GeneroModule,
       GrupoSanguineoModule,
       CuentaModule,

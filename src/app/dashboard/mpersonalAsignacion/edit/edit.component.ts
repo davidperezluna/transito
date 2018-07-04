@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MpersonalTalonarioService } from '../../../services/mpersonalTalonario.service';
+import { MpersonalAsignacionService } from '../../../services/mpersonalAsignacion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,23 +9,23 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() talonario:any = null;
+@Input() asignacion:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
 
 constructor(
-  private _talonarioService: MpersonalTalonarioService,
+  private _AsignacionService: MpersonalAsignacionService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.talonario);  }
+  ngOnInit(){ console.log(this.asignacion);  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._talonarioService.edit(this.talonario,token).subscribe(
+		this._AsignacionService.edit(this.asignacion,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

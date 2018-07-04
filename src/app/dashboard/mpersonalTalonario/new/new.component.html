@@ -43,9 +43,13 @@
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-info" type="button">
-                <i class="fa fa-plus"></i>
-                Guardar
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+                <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Guardar
                 </button>
             </div>
         </div>

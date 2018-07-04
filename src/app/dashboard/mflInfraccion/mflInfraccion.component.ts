@@ -13,7 +13,7 @@ export class MflInfraccionComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public infraccions;
+	public infracciones;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
@@ -40,9 +40,10 @@ export class MflInfraccionComponent implements OnInit {
       ) {
       }
     })
+
     this._InfraccionService.index().subscribe(
 				response => {
-          this.infraccions = response.data;
+          this.infracciones = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);

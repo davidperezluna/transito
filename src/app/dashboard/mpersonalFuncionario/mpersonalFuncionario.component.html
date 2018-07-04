@@ -68,23 +68,32 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Identificación</th>
+                    <th>Tipo</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let funcionario of funcionarios; let i = index">
                   <td >{{ funcionario.id }}</td>
-                  <td >{{ funcionario.ciudadano.usuario.primerNombre }}</td>
+                  <td >
+                    {{ funcionario.ciudadano.usuario.primerNombre }}
+                    {{ funcionario.ciudadano.usuario.primerApellido }}
+                  </td>
                   <td >{{ funcionario.ciudadano.usuario.identificacion }}</td>
+                  <td >{{ funcionario.tipoContrato.nombre }}</td>
                   <td>
                     <button (click)="edit(funcionario)" class="btn btn-xs btn-info" type="button">
                       <i class="fa fa-edit"></i>
                       Editar
                     </button> 
+                    <button (click)="onTime(funcionario)" (ready)="ready($event)"  class="btn btn-xs btn-primary" type="button">
+                      <i class="fa fa-clock-o"></i>
+                      Horarios
+                    </button>
                     <button (click)="delete(funcionario.id)"  class="btn btn-xs btn-danger" type="button">
                       <i class="fa fa-trash"></i>
                       Eliminar
-                    </button> 
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -97,4 +106,5 @@
 
     <app-edit *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-time *ngIf='formTime' [funcionario]="funcionario" (ready)="ready($event)"></app-time>
 </div>

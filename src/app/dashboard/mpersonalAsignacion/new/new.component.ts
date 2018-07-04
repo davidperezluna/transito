@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public comparendo: MpersonalAsignacion;
+public asignacion: MpersonalAsignacion;
 public funcionarios: any;
 public funcionarioSelected: any;
 public errorMessage;
@@ -24,7 +24,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.comparendo = new MpersonalAsignacion(null, null, null);
+    this.asignacion = new MpersonalAsignacion(null, null, null);
 
     this._FuncionarioService.select().subscribe(
       response => {
@@ -48,9 +48,9 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    this.comparendo.funcionarioId = this.funcionarioSelected;
+    this.asignacion.funcionarioId = this.funcionarioSelected;
 
-    this._AsignacionService.register(this.comparendo,token).subscribe(
+    this._AsignacionService.register(this.asignacion,token).subscribe(
       response => {
         this.respuesta = response;
         
@@ -65,7 +65,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El comparendo ya se encuentra registrado',
+            text: 'El asignacion ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

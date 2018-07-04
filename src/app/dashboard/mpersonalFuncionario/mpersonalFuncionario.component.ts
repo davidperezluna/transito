@@ -20,6 +20,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
 	public formNew = false;
 	public formEdit = false;
 	public formIndex = false;
+	public formTime = false;
   public formSearch = true;
   public table: any = null;
   public funcionario: MpersonalFuncionario;
@@ -75,26 +76,20 @@ export class MpersonalFuncionarioComponent implements OnInit {
       }
     );
   }
-
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
-        }
-      }
-   });
-   this.table = $('#dataTables-example').DataTable();
-  }
   
   onNew(){
     this.formNew = true;
+    this.formSearch = false;
+    this.formTime = false;
+    this.formIndex = false;
+    if(this.table){
+      this.table.destroy();
+    }
+  }
+  onTime(funcionario:any){
+    this.funcionario = funcionario;
+    this.formTime = true;
+    this.formNew = false;
     this.formSearch = false;
     this.formIndex = false;
     if(this.table){
@@ -106,6 +101,8 @@ export class MpersonalFuncionarioComponent implements OnInit {
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
+      this.formTime = false;
+      this.formIndex = false;
       this.formSearch = true;
       this.ngOnInit();
     }
@@ -169,6 +166,23 @@ export class MpersonalFuncionarioComponent implements OnInit {
 				}
 
 		}); 
+  }
+
+  iniciarTabla(){
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+           oPaginate: {
+           sFirst: '<<',
+           sPrevious: '<',
+           sNext: '>',
+           sLast: '>>'
+        }
+      }
+   });
+   this.table = $('#dataTables-example').DataTable();
   }
 
   delete(id:any){

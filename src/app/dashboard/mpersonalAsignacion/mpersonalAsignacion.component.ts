@@ -16,12 +16,14 @@ export class MpersonalAsignacionComponent implements OnInit {
 	public asignaciones;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = true;
-  public table:any; 
+  public formIndex = false;
+  public formSearch = true;
+  public table: any;
+  public parametro: any;
   public asignacion: MpersonalAsignacion;
 
   constructor(
-    private _PersonalComparendoService: MpersonalAsignacionService,
+    private _AsignacionService: MpersonalAsignacionService,
 		private _loginService: LoginService,
     ){}
     
@@ -39,23 +41,7 @@ export class MpersonalAsignacionComponent implements OnInit {
         result.dismiss === swal.DismissReason.timer
       ) {
       }
-    })
-    this._PersonalComparendoService.index().subscribe(
-				response => {
-          this.asignaciones = response.data;
-          let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+    });
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -73,6 +59,7 @@ export class MpersonalAsignacionComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -101,7 +88,7 @@ export class MpersonalAsignacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._PersonalComparendoService.delete(token,id).subscribe(
+        this._AsignacionService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -126,6 +113,60 @@ export class MpersonalAsignacionComponent implements OnInit {
         
       }
     })
+  }
+
+  onSearch(){   
+    let token = this._loginService.getToken();
+		this._AsignacionService.search(this.parametro,token).subscribe(
+			response => {
+        this.respuesta = response;
+        if(this.respuesta.status == 'success'){
+          this.asignaciones = response.data;
+          this.iniciarTabla();
+          this.formIndex = true;
+
+          swal({
+            title: 'Perfecto',
+            text: "¡Asignacions encontrados!",
+            type: 'info',
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> OK!',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+            '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down',
+          });
+        }else{
+          swal({
+            title: 'Alerta',
+            text: "¡No existen funcionarios, por favor registrelo y vuelva vincularse!",
+            type: 'warning',
+            showCancelButton: true,
+            focusConfirm: true,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Registrar',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+            '<i class="fa fa-thumbs-down"></i> Cancelar',
+            cancelButtonAriaLabel: 'Thumbs down',
+          }).then((result) => {
+            if (result.value) {
+              this.formNew = true;
+              this.formSearch = false;
+            }
+          });
+        }
+			error => {
+					this.errorMessage = <any>error;
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+
+		}); 
   }
 
   edit(asignacion:any){

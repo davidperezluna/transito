@@ -21,7 +21,6 @@ export class MpersonalTalonarioService {
 	register(talonario,token){
 		let json = JSON.stringify(talonario);
 		let params = "json="+json+"&authorization="+token;
-		console.log(params);
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(
 			res => res.json(),
