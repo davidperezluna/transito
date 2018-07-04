@@ -131,6 +131,8 @@ constructor(
           this.sedeOperativa = this.respuesta.data.sedeOperativa;
           this.funcionario= true;
           this.factura.numero = datePiper.transform(this.date,'hmss');
+          this.factura.fechaCreacion = datePiper.transform(this.date,'yyyy-MM-dd');
+          this.factura.sedeOperativaId = this.sedeOperativa.id;
           swal.close();
         }
       error => {
@@ -162,14 +164,18 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
       this.factura.sedeOperativaId = this.tipoRecaudoSelected;
+      let datos = {
+        'factura':this.factura,
+        'tramitesValor': this.tramitesValor,
+      }
     
-		this._FacturaService.register(this.factura,token).subscribe(
+		this._FacturaService.register(datos,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
@@ -209,6 +215,7 @@ constructor(
         this.respuesta = response;
         if(this.respuesta.status == 'error'){
           this.ciudadano = this.respuesta.datos;
+          this.factura.ciudadanoId = this.ciudadano.id;
           this.isExistCiudadano = true;
           this.isErrorCiudadano = false;
           
@@ -251,7 +258,7 @@ constructor(
           this.isErrorVehiculo = false;
           this.isExistVehiculo = true;
           this.vehiculo=response.data[0].vehiculo;
-          console.log(this.vehiculo);
+          this.factura.vehiculoId = this.vehiculo.id;
           swal.close();
         }
         if(response.code == 401){
@@ -296,13 +303,14 @@ constructor(
     this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
       response => {
         this.tramitePrecio = response.data;
+        this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
         this.tramitesValor.push(
           {
             'nombre':this.tramitePrecio.nombre,
             'valor':this.tramitePrecio.valorTotal
           }
         )
-        console.log(this.tramitesValor);
+        console.log(this.factura);
 
       }, 
       error => {
@@ -314,15 +322,12 @@ constructor(
         }
       }
     );
-  //   this.tramitesValor.push(
-  //     {
-  //     'nombre':this.tramitePrecioSelected[0].nombre,
-  //     'permisoTramite':this.ciudadanoSelected[0].permisoTramite,
-  //     'propietarioPresente':this.ciudadanoSelected[0].propietarioPresente,
-  //     'identificacionApoderado':this.apoderadoSelected.identificacion,
-  //     'nombreApoderado':this.apoderadoSelected.primerNombre+" "+this.apoderadoSelected.segundoNombre,
-  //     }   
-  // )
+  }
+  deleteTramiteValor(tramiteValor){
+    this.factura.valorBruto = this.factura.valorBruto - parseInt(tramiteValor.valor);
+    this.tramitesValor =  this.tramitesValor.filter(h => h !== tramiteValor);
+    console.log(this.factura); 
+    
   }
 
 }
