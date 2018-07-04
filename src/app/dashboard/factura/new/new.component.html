@@ -16,11 +16,11 @@
                     </thead>
                     <tbody>
                       <tr class="odd">
-                        <td>{{date| date: 'dd/MM/yyyy'}}</td>
+                        <td>{{date| date: 'yyyy-MM-dd'}}</td>
                         <td>{{date| date: 'h:m:ss'}}</td>
                         <td>{{sedeOperativa.nombre}}</td> 
                         <td>{{factura.numero}}</td>
-                        <td>{{date| date: 'dd/MM/yyyy'}}</td>
+                        <td>{{date| date: 'yyyy-MM-dd'}}</td>
                       </tr>
                     </tbody>
                 </table>
@@ -201,30 +201,31 @@
                     <br><br>
                 </div>
 
-                <!-- <div class="row justify-content-center">
-                    <div class="col-md-10 ">
-                        <div class="form-group row">
-                            <div class="col-lg-12 col-md-16">
-                                <label>Sede Operativa*</label>
-                                <ng-select 
-                                    [multiple]="false" 
-                                    [options]="sedesOperativas" 
-                                    [(ngModel)]="sedeOperativaSelected" 
-                                    required 
-                                    name="sedeOperativaId">
-                                </ng-select>
-                            </div>
-                            
-                            <div class="col-lg-12 col-md-16">
-                                <label>Observación</label>
-                                <textarea class="form-control" [(ngModel)]="factura.observacion" name='observacion' placeholder="" type="date"></textarea>
-                            </div>
-                        </div>
-                    </div>    
-                </div> -->
+
+                <div class="col-xs-12 col-lg-12">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>nombre</th>
+                                <th>Valor</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let tramiteValor of tramitesValor; let i = index">
+                                <td>{{tramiteValor.nombre}}</td>
+                                <td>{{tramiteValor.valor}}</td>
+                                <td>
+                                    <button (click)="deleteTramiteValor(tramiteValor)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
                 <div class="card-footer">
                     <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                    <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" [disabled]="facturaForm.invalid" type="button" >Enviar</button>
+                    <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button" >Enviar</button>
                 </div>    
             </div>
         </div>
