@@ -25,6 +25,9 @@ import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacio
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
+import {  msvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
+import {  msvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
+import {  msvRevisionRoutes } from './msvRevision/msvRevision.routes';
 
 import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
@@ -59,6 +62,7 @@ import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasign
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
+import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -85,7 +89,10 @@ export const DashboardRoutes: Route[] = [
         ...TipoIdentificacionRoutes,
         ...CfgAuditoriaRoutes,
         ...CfgSmlmvRoutes,
-        ...cfgFestivoRoutes,      
+        ...cfgFestivoRoutes,    
+        ...msvCaracterizacion,
+        ...msvEvaluacionRoutes,
+        ...msvRevisionRoutes,
         ...MgdDocumentoRoutes,
         ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,
@@ -117,7 +124,8 @@ export const DashboardRoutes: Route[] = [
         ...RnaPreasignacionPlacaRoutes,
         // ...SucursalRoutes,
         ...TramitePrecioRoutes, 
-        ...CfgPlacaRoutes, 
+        ...CfgPlacaRoutes,
+        ...MsvTalonarioRoutes, 
         ...ConceptoParametroRoutes     ]
     }
 ];

@@ -56,5 +56,9 @@ export class TramitePrecioService {
 	getTramitePrecioSelect() {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
+
+	getTramitePrecioPorModuloSelect(moduloId) {
+		return this._http.get(this.url + "/select/modulo/"+moduloId).map(res => res.json());
+	}
 	
 }

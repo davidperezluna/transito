@@ -32,6 +32,9 @@ import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCo
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
+import { msvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
+import { msvRevisionModule } from './msvRevision/msvRevision.module';
+import { msvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
 
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
@@ -44,6 +47,7 @@ import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
+import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
@@ -104,6 +108,9 @@ import {RightsidebarComponent} from '../shared/index';
       CfgAuditoriaModule,
       CfgSmlmvModule,
       cfgFestivoModule,
+      msvEvaluacionModule,
+      msvRevisionModule,
+      msvCaracterizacionModule,
       MgdDocumentoModule,
       MgdTipoCorrespondenciaModule,
       MflInfraccionModule,
@@ -133,6 +140,7 @@ import {RightsidebarComponent} from '../shared/index';
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,
       CfgPlacaModule,
+      MsvTalonarioModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

@@ -42,6 +42,11 @@ export class FacturaComponent implements OnInit {
       ) {
       }
     })
+    
+
+    
+
+
 		this._FacturaService.getFactura().subscribe(
 				response => {
           this.facturas = response.data;
