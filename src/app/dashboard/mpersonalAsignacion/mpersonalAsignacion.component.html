@@ -1,75 +1,79 @@
 <div class="container" >
     <hr>
-    <div class="row" *ngIf='formSearch'>
-      <div class="col-md-12 col-lg-8 offset-lg-2">
-          <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">
-                        <b class="text-uppercase">Gestión de rangos - Comparendos</b>
-                        <br>
-                        <small>Buscar agente</small>
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <form>     
-                        <div class="form-group row">
-                            <div  class="col-xs-12 col-lg-4">
-                                <label>Parametro de búsqueda</label>
-                                <input class="form-control" [(ngModel)]="parametro" placeholder="Nombre, Apellido o No. de placa" name="parametro" type="text">
+    <div *ngIf='formSearch'>
+        <div class="row">
+            <div class="col-md-12 col-lg-8 offset-lg-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <b class="text-uppercase">Gestión de rangos - Comparendos</b>
+                            <br>
+                            <small>Buscar agente</small>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form>     
+                            <div class="form-group row">
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Parametro de búsqueda</label>
+                                    <input class="form-control" [(ngModel)]="parametro" placeholder="Nombre, Apellido o No. de placa" name="parametro" type="text">
+                                </div>
                             </div>
-                        </div>
-                        
-                    </form>
+                            
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-search"></i>
+                            Buscar
+                        </button>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
-                        <i class="fa fa-search"></i>
-                        Buscar
-                    </button>
-                </div>
-          </div>
-      </div>
-    </div>
+            </div>
+        </div>
 
-    <hr>
-    <div class="row" *ngIf='formIndex'>
-      <div class="col-md-12 col-lg-8 offset-lg-2">
-          <div class="card">
-                <div class="card-body">
-                    <table class="table " id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Sede operativa</th>
-                                <th>Estado</th>
-                                <th>Consecutivo</th>
-                                <th>Acciones</th>
+        <hr>
+        <div class="row" *ngIf='funcionarios?.length > 0'>
+            <div class="col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table " id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Funcionario</th>
+                                    <th>Identificación</th>
+                                    <th>No. placa</th>
+                                    <th>Sede operativa</th>
+                                    <th>Seleccionar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd" *ngFor="let funcionario of funcionarios; let i = index">
+                                <td>{{ funcionario.id }}</td>
+                                <td>
+                                    {{ funcionario.ciudadano.usuario.primerNombre }}
+                                    {{ funcionario.ciudadano.usuario.segundoNombre }}
+                                    {{ funcionario.ciudadano.usuario.primerApellido }}
+                                    {{ funcionario.ciudadano.usuario.segundoApellido }}
+                                </td>
+                                <td>{{ funcionario.ciudadano.usuario.identificacion }}</td>
+                                <td>{{ funcionario.numeroPlaca }}</td>
+                                <td>{{ funcionario.sedeOperativa.nombre }}</td>
+                                <td>
+                                    <button (click)="onShow(funcionario)"  class="btn btn-xs btn-primary" type="button" data-toggle="tooltip" data-placement="top" title="A Tooltip on the right">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="odd" *ngFor="let asignacion of asignaciones; let i = index">
-                            <td >{{ asignacion.id }}</td>
-                            <td >{{ asignacion.sedeOperativa.nombre }}</td>
-                            <td >{{ asignacion.estado }}</td>
-                            <td >{{ asignacion.consecutivo }}</td>
-                            <td>
-                                <button (click)="edit(asignacion)" class="btn btn-xs btn-info" type="button">
-                                    <i class="fa fa-edit"></i>
-                                    Editar
-                                </button> 
-                                <button (click)="delete(asignacion.id)"  class="btn btn-xs btn-danger" type="button">
-                                    <i class="fa fa-trash"></i>
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <!-- /.table-responsive --> 
+                            </tbody>
+                        </table>
+                        <!-- /.table-responsive --> 
+                    </div>
                 </div>
-          </div>
-      </div>
+            </div>
+        </div>
     </div>
-    <app-edit *ngIf='formEdit' [asignacion]="asignacion" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-new *ngIf='formNew' [funcionario]="funcionario" (ready)="ready($event)"></app-new>
+    <app-show *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)" (readyNew)="readyNew($event)"></app-show>
 </div>

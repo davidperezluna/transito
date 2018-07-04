@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Editar tipo de correspondencia</h5>
+                <h5 class="text-uppercase">Editar infraccion</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -11,15 +11,25 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="infraccionCategoria.nombre" name="nombre" type="text" required />
+                            <input class="form-control" [(ngModel)]="infraccion.nombre" name="nombre" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Código <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="infraccion.codigo" name="smldv" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Descripción <strong class="text-danger">*</strong></label>
-                            <textarea class="form-control" [(ngModel)]="infraccionCategoria.descripcion" rows='4' name="descripcion" required ></textarea>
+                            <textarea class="form-control" [(ngModel)]="infraccion.descripcion" rows='4' name="descripcion" required ></textarea>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>SMLDV <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="infraccionCategoria.smldv" name="smldv" type="numeric" required />
+                            <label>Categoria</label>
+                            <ng-select 
+                                [multiple]="false" 
+                                [options]="infraccionCategorias" 
+                                [(ngModel)]="infraccionCategoriaSelected" 
+                                required 
+                                name="infraccionCategorias">
+                            </ng-select>
                         </div>
                     </div>
                 </form>

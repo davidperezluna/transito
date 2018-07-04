@@ -22,7 +22,6 @@ export class MpersonalAsignacionService {
 	register(asignacion,token){
 		let json = JSON.stringify(asignacion);
 		let params = "json="+json+"&authorization="+token;
-		console.log(params);
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(
 			res => res.json(),
@@ -58,10 +57,17 @@ export class MpersonalAsignacionService {
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 
-	search(datos,token){
+	searchFuncionarioAgente(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/search/ciudadano", params, {headers: headers}).map(res => res.json());
+ 		return this._http.post(this.url+"/search/funcionario/agente", params, {headers: headers}).map(res => res.json());
+	}
+
+	recordByFuncionario(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MpersonalAsignacionService } from '../../services/mpersonalAsignacion.service';
 import { MpersonalAsignacion } from './mpersonalAsignacion.modelo';
 import { LoginService } from '../../services/login.service';
@@ -13,13 +13,17 @@ export class MpersonalAsignacionComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public asignaciones;
+	public funcionarios;
+	public funcionario: any;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = false;
+  public formShow = false;
   public formSearch = true;
   public table: any;
   public parametro: any;
+  public datos = {
+    'parametro' : null
+  }
   public asignacion: MpersonalAsignacion;
 
   constructor(
@@ -42,7 +46,10 @@ export class MpersonalAsignacionComponent implements OnInit {
       ) {
       }
     });
+
+    $('[data-toggle="tooltip"]').tooltip();
   }
+  
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -60,9 +67,11 @@ export class MpersonalAsignacionComponent implements OnInit {
    this.table = $('#dataTables-example').DataTable();
   }
 
-  onNew(){
-    this.formNew = true;
-    this.formIndex = false;
+  onShow(funcionario: any){
+    this.funcionario = funcionario;
+    this.formNew = false;
+    this.formSearch = false;
+    this.formShow = true;
     this.table.destroy();
   }
 
@@ -70,9 +79,19 @@ export class MpersonalAsignacionComponent implements OnInit {
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formIndex = true;
+      this.formShow = false;
+      this.formSearch = true;
       this.ngOnInit();
     }
+  }
+
+  readyNew(funcionario:any){
+    this.funcionario = funcionario;
+    this.formNew = true;
+    this.formEdit = false;
+    this.formShow = false;
+    this.formSearch = false;
+    this.ngOnInit();
   }
 
   delete(id:any){
@@ -117,17 +136,19 @@ export class MpersonalAsignacionComponent implements OnInit {
 
   onSearch(){   
     let token = this._loginService.getToken();
-		this._AsignacionService.search(this.parametro,token).subscribe(
+    
+    this.datos.parametro = this.parametro;
+
+		this._AsignacionService.searchFuncionarioAgente(this.datos,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.asignaciones = response.data;
+          this.funcionarios = response.data;
           this.iniciarTabla();
-          this.formIndex = true;
 
           swal({
             title: 'Perfecto',
-            text: "¡Asignacions encontrados!",
+            text: response.msj,
             type: 'info',
             showCloseButton: true,
             focusConfirm: false,
@@ -140,22 +161,10 @@ export class MpersonalAsignacionComponent implements OnInit {
           });
         }else{
           swal({
-            title: 'Alerta',
-            text: "¡No existen funcionarios, por favor registrelo y vuelva vincularse!",
-            type: 'warning',
-            showCancelButton: true,
-            focusConfirm: true,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Registrar',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i> Cancelar',
-            cancelButtonAriaLabel: 'Thumbs down',
-          }).then((result) => {
-            if (result.value) {
-              this.formNew = true;
-              this.formSearch = false;
-            }
+            title: 'Atención',
+            text: response.msj,
+            type:'warning',
+            confirmButtonColor: '#15d4be',
           });
         }
 			error => {
@@ -167,11 +176,5 @@ export class MpersonalAsignacionComponent implements OnInit {
 				}
 
 		}); 
-  }
-
-  edit(asignacion:any){
-    this.asignacion = asignacion;
-    this.formEdit = true;
-    this.formIndex = false;
   }
 }

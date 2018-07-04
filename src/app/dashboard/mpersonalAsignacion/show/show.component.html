@@ -1,0 +1,51 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    Historico de comparendos asignados
+                    <div class="btn-group pull-right">
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancel
+                        </button>
+                        <button (click)="onNew(funcionario)" class="btn btn-primary" type="button">
+                            <i class="fa fa-plus"></i>
+                            Nuevo
+                        </button>
+                    </div>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="btn-group" *ngIf='comparendos?.length > 0'>
+                    <a href="{{ apiUrl }}/planilla/{{ funcionario.id }}/pdf" class="btn btn-success" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>
+                        Imprimir Planilla
+                    </a>
+                </div>
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>No. comparendo</th>
+                            <th>Fecha asignación</th>
+                            <th>Estado</th>
+                            <th>Sede operativa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ comparendo.consecutivo }}</td>
+                        <td>{{ comparendo.fechaAsignacion }}</td>
+                        <td>{{ comparendo.estado }}</td>
+                        <td>{{ comparendo.sedeOperativa.nombre }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive --> 
+            </div>
+        </div>
+    </div>
+</div>

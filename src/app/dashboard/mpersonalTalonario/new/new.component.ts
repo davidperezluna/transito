@@ -3,7 +3,7 @@ import { MpersonalTalonario } from '../mpersonalTalonario.modelo';
 import { MpersonalTalonarioService } from '../../../services/mpersonalTalonario.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { LoginService } from '../../../services/login.service';
-import swal from 'sweetalert2';
+import swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-new',
