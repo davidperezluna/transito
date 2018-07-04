@@ -1,13 +1,13 @@
 export class Factura{
 	constructor(
 		public id: number,
-		public numeroLicenciaTrancito: string,
 		public vehiculoId: number,
 		public sedeOperativaId: number,
+		public ciudadanoId: number,
 		public fechaCreacion: string,
+		public fechaVencimiento: string,
 		public numero: string,
-		public valorBruto: string,
-		public observacion: string,
+		public valorBruto: number,
 		public estado: boolean
 	){}
 }
