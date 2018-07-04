@@ -253,6 +253,7 @@ constructor(
 
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
       response => {
+        
         if (response.code == 200 ) {
           this.msj = 'vehiculo encontrado';
           this.isErrorVehiculo = false;
@@ -262,6 +263,7 @@ constructor(
           swal.close();
         }
         if(response.code == 401){
+          console.log(response);
           this.msj = 'vehiculo no se encuentra en la base de datos';
           this.isErrorVehiculo = true;
           this.isExistVehiculo = false;

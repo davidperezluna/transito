@@ -1,11 +1,12 @@
 export class MparqEntrada{
 	constructor(
-		public fechaIngreso: string,
 		public numeroInventario: number,
-		public hora: string,
-		public gruaId: number,
-		public comparendoId: number,
-		public costoTrayectoId: number,
+		public numeroPlaca: number,
+		public numeroGrua: number,
+		public numeroComparendo: number,
+		public horaInmovilizacion: string,
+		public lugarInmovilizacion: string,
+		public funcionarioId: number,
 		public id:number
 	){}
 }
