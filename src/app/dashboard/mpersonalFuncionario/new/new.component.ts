@@ -182,7 +182,7 @@ constructor(
     let token = this._loginService.getToken();
     let datos = {
       'identificacion':this.funcionario.identificacion
-    }
+    } 
     
     this._FuncionarioService.searchCiudadano(datos,token).subscribe(
       response => {

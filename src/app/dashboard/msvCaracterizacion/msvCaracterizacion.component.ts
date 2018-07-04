@@ -1,58 +1,50 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FacturaService } from '../../services/factura.service';
-import { TramiteFacturaService } from '../../services/tramiteFactura.service';
-import { LoginService } from '../../services/login.service';
-import { Factura } from './factura.modelo';
+import { cfgFestivoService } from '../../services/cfgFestivo.service';
+import {LoginService} from '../../services/login.service';
+import { cfgFestivo } from './msvCaracterizacion.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './factura.component.html'
+  templateUrl: './cfgFestivo.component.html'
 })
-export class FacturaComponent implements OnInit {
+export class cfgFestivoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public facturas;
+	public cfgFestivos;
 	public formNew = false;
 	public formEdit = false;
-	public formShow = false;
   public formIndex = true;
   public table:any; 
-  public factura: Factura;
+  public cfgFestivo: cfgFestivo;
 
   constructor(
-		private _FacturaService: FacturaService,
-		private _TramiteFacturaService: TramiteFacturaService,
-    private _loginService: LoginService,
-  ){}
+    private _FestivoService: cfgFestivoService,
+		private _loginService: LoginService,
+    ){}
     
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
     }).then((result) => {
       if (
         // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer 
+        result.dismiss === swal.DismissReason.timer
       ) {
       }
     })
-    
-
-    
-
-
-		this._FacturaService.getFactura().subscribe(
+    this._FestivoService.getFestivo().subscribe(
 				response => {
-          this.facturas = response.data;
+          this.cfgFestivos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
-            swal.close();
           }, 100);
 				}, 
 				error => {
@@ -65,7 +57,6 @@ export class FacturaComponent implements OnInit {
 				}
       );
   }
-
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -82,7 +73,7 @@ export class FacturaComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
-
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -90,26 +81,14 @@ export class FacturaComponent implements OnInit {
   }
 
   ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formIndex = true;
-        this.formShow = false;
-        this.ngOnInit();
-      }
-  }
-
-  readyShow(isCreado:any){
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formShow = false;
       this.formIndex = true;
       this.ngOnInit();
     }
-}
-
-  deleteFactura(id:any){
+  }
+  deletecfgFestivo(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -122,7 +101,7 @@ export class FacturaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._FacturaService.deleteFactura(token,id).subscribe(
+        this._FestivoService.deleteFestivo(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -143,18 +122,15 @@ export class FacturaComponent implements OnInit {
               }
             }
           );
+
+        
       }
     })
   }
 
-  editFactura(factura:any){
-    this.factura = factura;
+  editcfgFestivo(cfgFestivo:any){
+    this.cfgFestivo = cfgFestivo;
     this.formEdit = true;
-    this.formIndex = false;
-  }
-  getTramiteFactura(factura:any){
-    this.factura = factura;
-    this.formShow = true;
     this.formIndex = false;
   }
 }
