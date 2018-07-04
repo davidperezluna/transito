@@ -2,7 +2,10 @@ import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import {ColorService} from '../../services/color.service';
 import {LoginService} from '../../services/login.service';
 import {Vehiculo} from '../vehiculo/vehiculo.modelo';
+import { VehiculoService } from '../../services/vehiculo.service';
 import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.service';
+import {SedeOperativaService} from '../../services/sedeOperativa.service';
+import {CfgPlacaService} from '../../services/cfgPlaca.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -15,6 +18,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   @Input() ciudadanoVehiculo:any = null;
   public errorMessage;
   public vehiculo: Vehiculo;
+  public vehicul: any;
 	public id;
 	public respuesta;
 	public formNew = false;
@@ -24,12 +28,23 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   public isError:any; 
   public isExist:any; 
   public msj:any; 
+  public placas:any; 
   public vehiculoCriterio:any; 
+  public sedeOperativaSelected:any;
+  public sedesOperativas:any;
+  public sedeOperativa:any;
+
+  public cfgPlacaSelected:any;
+  public cfgPlacas:any;
+  public cfgPlaca:any;
 
   constructor(
+    private _vehiculoService: VehiculoService,
 		private _ColorService: ColorService,
     private _loginService: LoginService,
     private _ciudadanoVehiculoService: CiudadanoVehiculoService,
+    private _SedeOperativaService: SedeOperativaService,
+    private _CfgPlacaService: CfgPlacaService,
     ){}
     
   ngOnInit() {
@@ -63,6 +78,8 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
 					}
 				}
       );
+      
+
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -154,7 +171,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
 
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
       response => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.code == 200 ) {
           this.msj = 'vehiculo ya tiene placa asignada';
           this.isError = true;
@@ -185,7 +202,79 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
           }
         }
     });
+    // cargar el select de sede operatiba 
+    
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+      response => {
+        this.sedesOperativas = response;
+        console.log(this.sedesOperativas);
+        
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    // fin sede
+  }
+  changedSedeOperativa(e){
+
+    let token = this._loginService.getToken();
+    if (e) {
+      this._CfgPlacaService.getCfgPlacaPorSedeOperativa(token,this.sedeOperativaSelected).subscribe(
+        response => {
+          this.cfgPlacas = response;
+          console.log(this.placas);
+          
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      
+    }
+
   }
 
+  onEnviar(){
+    
+    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
+    this.vehiculo.placa = this.cfgPlacaSelected;
+    console.log(this.vehiculo);
+    let token = this._loginService.getToken();
+
+    this._vehiculoService.asignacionPlaca(this.vehiculo,token).subscribe(
+			response => {
+        this.respuesta = response;
+        console.log(this.respuesta);
+        if(this.respuesta.status == 'success'){
+          swal({
+            title: 'Perfecto!',
+            text: 'El registro se ha modificado con exito',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+			error => {
+					this.errorMessage = <any>error;
+
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+
+    }); 
+
+  }
 
 }
