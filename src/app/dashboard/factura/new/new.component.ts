@@ -133,7 +133,6 @@ constructor(
           this.factura.numero = datePiper.transform(this.date,'hmss');
           this.factura.fechaCreacion = datePiper.transform(this.date,'yyyy-MM-dd');
           this.factura.sedeOperativaId = this.sedeOperativa.id;
-          console.log(this.sedeOperativa);
           swal.close();
         }
       error => {
@@ -167,7 +166,6 @@ constructor(
   }
 
   onEnviar(){
-    alert(1);
     let token = this._loginService.getToken();
       this.factura.sedeOperativaId = this.tipoRecaudoSelected;
       let datos = {
