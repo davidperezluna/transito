@@ -1,7 +1,6 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { MpersonalAsignacion } from '../mpersonalAsignacion.modelo';
 import { MpersonalAsignacionService } from '../../../services/mpersonalAsignacion.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -11,34 +10,20 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
+@Input() funcionario:any = null;
 public asignacion: MpersonalAsignacion;
-public funcionarios: any;
-public funcionarioSelected: any;
+public sedesOperativas: any;
+public sedeOperativaSelected: any;
 public errorMessage;
 public respuesta: any = null;
 
 constructor(
   private _AsignacionService: MpersonalAsignacionService,
-  private _FuncionarioService: MpersonalFuncionarioService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.asignacion = new MpersonalAsignacion(null, null, null);
-
-    this._FuncionarioService.select().subscribe(
-      response => {
-        this.funcionarios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
+    this.asignacion = new MpersonalAsignacion(null, null, null, null, null, null, null);
   }
   
   onCancelar(){
@@ -48,7 +33,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    this.asignacion.funcionarioId = this.funcionarioSelected;
+    this.asignacion.funcionarioId = this.funcionario.id;
 
     this._AsignacionService.register(this.asignacion,token).subscribe(
       response => {

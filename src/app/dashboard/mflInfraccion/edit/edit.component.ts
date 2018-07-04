@@ -27,6 +27,9 @@ constructor(
     this._InfraccionCategoriaService.select().subscribe(
       response => {
         this.infraccionCategorias = response;
+        setTimeout(() => {
+          this.infraccionCategoriaSelected = [this.infraccion.categoria.id];
+        });
       },
       error => {
         this.errorMessage = <any>error;
@@ -43,6 +46,9 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
+
+    this.infraccion.infraccionCategoriaId = this.infraccionCategoriaSelected;
+
 		this._InfraccionService.edit(this.infraccion,token).subscribe(
 			response => {
         this.respuesta = response;
