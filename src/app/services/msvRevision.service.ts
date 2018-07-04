@@ -5,26 +5,26 @@ import  {Observable} from "rxjs/Observable";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class msvCaracterizacionService {
-	private url = environment.apiUrl + 'msvcaracterizacion';
+export class msvRevisionService {
+	private url = environment.apiUrl + 'msvrevision';
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getCaracterizacion(){
+	getRevision(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(caracterizacion,token){ 
+	register(revision,token){ 
 		
-		let json = JSON.stringify(caracterizacion);
+		let json = JSON.stringify(revision);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteCaracterizacion(token,id){
+	deleteRevision(token,id){
 
 		let json = JSON.stringify(id);
 		let params = "json="+json+"&authorization="+token;
@@ -33,7 +33,7 @@ export class msvCaracterizacionService {
 							  .map(res => res.json());
 	}
 
-	showCaracterizacion(token,id){
+	showRevision(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
@@ -41,14 +41,14 @@ export class msvCaracterizacionService {
 	}
 
 	// tslint:disable-next-line:one-line
-	editCaracterizacion(caracterizacion,token){
-		let json = JSON.stringify(caracterizacion);
+	editRevision(revision,token){
+		let json = JSON.stringify(revision);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getCaracterizacionSelect(){
+	getRevisionSelect(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 }

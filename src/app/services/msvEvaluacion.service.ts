@@ -2,10 +2,11 @@ import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class msvEvaluacionService {
-	public url = "http://190.146.7.242/colossus-sit/web/app.php/msvEvaluacion";
+	private url = environment.apiUrl + 'msvevaluacion';
 	public identity;
 	public token;
 

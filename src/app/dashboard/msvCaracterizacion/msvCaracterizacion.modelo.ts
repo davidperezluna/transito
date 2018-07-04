@@ -1,4 +1,4 @@
-export class msvEvaluacion{
+export class msvCaracterizacion{
 	constructor(
 		public id:number,
 		public numero: string,

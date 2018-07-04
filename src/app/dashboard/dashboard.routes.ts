@@ -25,6 +25,9 @@ import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacio
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
+import {  msvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
+import {  msvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
+import {  msvRevisionRoutes } from './msvRevision/msvRevision.routes';
 
 import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
@@ -85,6 +88,9 @@ export const DashboardRoutes: Route[] = [
         ...CfgAuditoriaRoutes,
         ...CfgSmlmvRoutes,
         ...cfgFestivoRoutes,    
+        ...msvCaracterizacion,
+        ...msvEvaluacionRoutes,
+        ...msvRevisionRoutes,
         ...MgdDocumentoRoutes,
         ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,

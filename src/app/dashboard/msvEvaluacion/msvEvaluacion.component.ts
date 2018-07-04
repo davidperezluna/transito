@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { msvEvaluacionService } from '../../services/msvEvaluacion.service';
+import { EmpresaService } from '../../services/empresa.service';
 import {LoginService} from '../../services/login.service';
 import { msvEvaluacion } from './msvEvaluacion.modelo';
 import swal from 'sweetalert2';
@@ -17,11 +18,17 @@ export class msvEvaluacionComponent implements OnInit {
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table:any; 
+  public table:any;
+  public isError:any; 
+  public isExist:any; 
+  public msj:any; 
+  public nit:any; 
+  public empresa:any;
   public msvEvaluacion: msvEvaluacion;
 
   constructor(
     private _EvaluacionService: msvEvaluacionService,
+    private _EmpresaService: EmpresaService,
 		private _loginService: LoginService,
     ){}
     
@@ -126,6 +133,57 @@ export class msvEvaluacionComponent implements OnInit {
         
       }
     })
+  }
+
+  onKeyValidateEvaluacion(){
+    swal({
+      title: 'Buscando Empresa!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
+    let token = this._loginService.getToken();
+
+    this._EmpresaService.showNitNombre(token,this.nit).subscribe(
+      response => {
+        console.log(response.data);
+        if (response.code == 200 ) {
+          this.msj = response.msj;
+          this.isError = false;
+          this.isExist = true;
+          this.empresa=response.data;
+          
+          swal.close();
+        }
+        if(response.code == 401){
+          this.msj = response.msj;
+          this.isError = true;
+          this.isExist = false;
+          swal.close();
+        }
+        if(response.code == 400){
+          this.msj = response.msj;
+          this.isError = true;
+          this.isExist = false;
+          
+          swal.close();
+        }
+
+      error => { 
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición"); 
+          }
+        }
+    });
   }
 
   editmsvEvaluacion(msvEvaluacion:any){

@@ -1,27 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { msvCaracterizacionService } from '../../services/msvCaracterizacion.service';
+import { msvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
-import { msvCaracterizacion } from './msvCaracterizacion.modelo';
+import { msvRevision } from './msvRevision.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './msvCaracterizacion.component.html'
+  templateUrl: './msvRevision.component.html'
 })
-export class msvCaracterizacionComponent implements OnInit {
+export class msvRevisionComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public msvCaracterizaciones;
+	public msvRevisiones;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public msvCaracterizacion: msvCaracterizacion;
+  public msvRevision: msvRevision;
 
   constructor(
-    private _CaracterizacionService: msvCaracterizacionService,
+    private _RevisionService: msvRevisionService,
 		private _loginService: LoginService,
     ){}
     
@@ -40,9 +40,9 @@ export class msvCaracterizacionComponent implements OnInit {
       ) {
       }
     })
-    this._CaracterizacionService.getCaracterizacion().subscribe(
+    this._RevisionService.getRevision().subscribe(
 				response => {
-          this.msvCaracterizaciones = response.data;
+          this.msvRevisiones = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -88,7 +88,7 @@ export class msvCaracterizacionComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deletemsvCaracterizaciones(id:any){
+  deletemsvRevision(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -101,7 +101,7 @@ export class msvCaracterizacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CaracterizacionService.deleteCaracterizacion(token,id).subscribe(
+        this._RevisionService.deleteRevision(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -128,8 +128,8 @@ export class msvCaracterizacionComponent implements OnInit {
     })
   }
 
-  editmsvCaracterizacion(msvCaracterizacion:any){
-    this.msvCaracterizacion = msvCaracterizacion;
+  editmsvRevision(msvRevision:any){
+    this.msvRevision = msvRevision;
     this.formEdit = true;
     this.formIndex = false;
   }

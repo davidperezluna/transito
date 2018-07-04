@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvCaracterizacion } from '../msvCaracterizacion.modelo';
-import { msvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
+import { msvRevision } from '../msvRevision.modelo';
+import { msvRevisionService } from '../../../services/msvRevision.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,13 +10,13 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() msvCaracterizacion:any = null;
+@Input() msvRevision:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
 
 constructor(
-  private _caracterizacionService: msvCaracterizacionService,
+  private _revisionService: msvRevisionService,
   private _loginService: LoginService,
   ){}
 
@@ -26,7 +26,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._caracterizacionService.editCaracterizacion(this.msvCaracterizacion,token).subscribe(
+		this._revisionService.editRevision(this.msvRevision,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

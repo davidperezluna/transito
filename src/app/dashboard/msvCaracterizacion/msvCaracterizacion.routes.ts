@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { cfgFestivoComponent } from './cfgFestivo.component';
+import { msvCaracterizacionComponent } from './msvCaracterizacion.component';
 
-export const cfgFestivoRoutes: Route[] = [
+export const msvCaracterizacion: Route[] = [
     {
-      path: 'cfgFestivo',
-      component: cfgFestivoComponent
+      path: 'msvCaracterizacion',
+      component: msvCaracterizacionComponent
     }
 ];
  
