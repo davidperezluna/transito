@@ -62,7 +62,9 @@ import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasign
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
+import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
+//import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from './index';
 
 export const DashboardRoutes: Route[] = [
@@ -125,7 +127,9 @@ export const DashboardRoutes: Route[] = [
         // ...SucursalRoutes,
         ...TramitePrecioRoutes, 
         ...CfgPlacaRoutes,
+        ...CfgSedeOperativaRoutes,
         ...MsvTalonarioRoutes, 
+        //...MsvTCAsignacionRoutes, 
         ...ConceptoParametroRoutes     ]
     }
 ];

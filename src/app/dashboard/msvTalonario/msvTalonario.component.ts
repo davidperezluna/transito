@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './msvTalonario.component.html'
 })
 export class MsvTalonarioComponent implements OnInit {
-  @Output() ready = new EventEmitter<any>();
+ // @Output() ready = new EventEmitter<any>();
   public errorMessage;
   public id;
   public respuesta;
@@ -69,7 +69,7 @@ export class MsvTalonarioComponent implements OnInit {
         }
       }
     );
-    /*this._msvTalonarioService.getMsvTalonario().subscribe(
+    this._msvTalonarioService.getMsvTalonario().subscribe(
       response => {
         if (response) {
 
@@ -88,7 +88,7 @@ export class MsvTalonarioComponent implements OnInit {
           alert("Error en la petición");
         }
       }
-    );*/
+    );
   }
   iniciarTabla() {
     $('#dataTables-example').DataTable({
@@ -107,13 +107,14 @@ export class MsvTalonarioComponent implements OnInit {
     this.table = $('#dataTables-example').DataTable();
   }
   onNew() {
-    this.formNew = false;
+    this.formNew = true;
     this.formN = false;
     this.formIndex = false;
     if (this.table) {
       this.table.destroy();
     }
   }
+  
 
   myFunc() {
     console.log("asd");
@@ -136,15 +137,15 @@ export class MsvTalonarioComponent implements OnInit {
 
   }
 
-  /*ready(isCreado: any) {
+  ready(isCreado: any) {
     if (isCreado) {
       this.formNew = false;
       this.formN = false;
       this.formEdit = false;
-      this.formIndex = false;
+      this.formIndex = true;
       this.ngOnInit();
     }
-  }*/
+  }
   deleteMsvTalonario(id: any) {
 
     swal({
@@ -187,13 +188,16 @@ export class MsvTalonarioComponent implements OnInit {
   }
 
   editMsvTalonario(msvTalonario: any) {
+    console.log(msvTalonario);
+    
     this.msvTalonario = msvTalonario;
+
     this.formEdit = true;
     this.formIndex = false;
   }
 
 
-  onEnviar() {
+ /* onEnviar() {
     let token = this._loginService.getToken();
     this.msvTalonario.rangoini = this.msvTalonario.rangoini;
     this.msvTalonario.rangofin = this.msvTalonario.rangofin;
@@ -225,7 +229,7 @@ export class MsvTalonarioComponent implements OnInit {
         }
 
       });
-  }
+  }*/
 
 
   changedSedeOperativa(e) {
@@ -265,7 +269,7 @@ export class MsvTalonarioComponent implements OnInit {
             console.log(this.msvTalonario);
           }
           else if (response.status=="vacio") {
-            this.msvTalonario = new MsvTalonario(0,0,0,"",0,0);
+            this.msvTalonario = new MsvTalonario(0,0,0,"","",0);
           }
         },
         error => {

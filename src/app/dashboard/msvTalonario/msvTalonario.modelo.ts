@@ -4,7 +4,7 @@ export class MsvTalonario{
 		public rangofin:number,
 		public total:number,
 		public nResolucion:string,
-		public fechaAsignacion:number,
+		public fechaAsignacion: string,
 		public sedeOperativaId:number
 	){}
 }

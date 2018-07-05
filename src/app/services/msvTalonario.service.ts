@@ -26,10 +26,9 @@ export class MsvTalonarioService {
 	}
 
 	deleteMsvTalonario(token, id) {
-		let json = JSON.stringify(id);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/delete", params, { headers: headers })
+		return this._http.post(this.url + "/" + id + "/delete", params, { headers: headers })
 			.map(res => res.json());
 	}
 
