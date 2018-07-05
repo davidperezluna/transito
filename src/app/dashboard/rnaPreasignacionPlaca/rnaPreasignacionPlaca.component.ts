@@ -147,8 +147,6 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }
@@ -171,7 +169,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
 
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
       response => {
-        // console.log(response.data);
+        console.log(response.data);
         if (response.code == 200 ) {
           this.msj = 'vehiculo ya tiene placa asignada';
           this.isError = true;
@@ -249,17 +247,27 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
     
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     this.vehiculo.placa = this.cfgPlacaSelected;
-    console.log(this.vehiculo);
+    console.log(this.vehiculo.placa);
+    
+    // console.log(this.vehiculo);
     let token = this._loginService.getToken();
 
     this._vehiculoService.asignacionPlaca(this.vehiculo,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
+        
         if(this.respuesta.status == 'success'){
+
+          var html = 'El vehiculo con:<br> numero de chasis:  <b>'+this.vehiculo.chasis+
+                     '</b><br>numero de motor:  <b>'+this.vehiculo.motor+
+                     '</b><br>numero de serie:  <b>'+this.vehiculo.serie+
+                     '</b><br>fue asignada La placa:<br><b><h2>'+this.vehiculo.placa+
+                     '</h2></b>con exitosamente durante 60 días';
+ 
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            html: html,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
@@ -275,6 +283,13 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
 
     }); 
 
+  }
+
+  onCancelar(){
+    this.isError = false;
+    this.isExist = false;
+    this.ngOnInit();
+    
   }
 
 }

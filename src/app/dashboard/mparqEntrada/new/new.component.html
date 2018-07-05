@@ -11,44 +11,46 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>Fecha ingreso <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inmovilizacion.fechaIngreso" name="fechaIngreso" type="text" required />
+                            <br>
+                            <b>{{ date|date:('dd/MM/yyyy') }}</b>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Hora ingreso <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inmovilizacion.hora" name="hora" type="text" required />
+                            <br>
+                            <b>{{ date|date:('HH:mm:ss a') }}</b>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>No. comparendo <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="comparendo" name="comparendo" type="text" required />
+                            <input class="form-control" [(ngModel)]="entrada.numeroComparendo" name="numeroComparendo" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Placa <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="placa" name="placa" type="text" required />
+                            <input class="form-control" [(ngModel)]="entrada.numeroPlaca" name="numeroPlaca" type="text" required />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>No. inventario <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="inventario" name="inventario" type="text" required />
+                            <input class="form-control" [(ngModel)]="entrada.numeroInventario" name="numeroInventario" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Código grua <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="grua" name="grua" type="text" required />
+                            <input class="form-control" [(ngModel)]="entrada.numeroGrua" name="numeroGrua" type="text" required />
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Hora <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="hora" name="hora" type="text" required />
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Hora inmovilizacion <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="entrada.horaInmovilizacion" name="horaInmovilizacion" type="time" required />
                         </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Lugar <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="lugar" name="lugar" type="text" required />
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Lugar inmovilizacion <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="entrada.lugarInmovilizacion" name="lugarInmovilizacion" type="text" required />
                         </div>
                     </div>
 
