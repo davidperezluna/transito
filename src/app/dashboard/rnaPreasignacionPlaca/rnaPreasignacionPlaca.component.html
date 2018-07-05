@@ -40,10 +40,10 @@
                                   {{vehiculo.numeroFactura}}
                                   </td>
                                   <td> 
-                                      {{vehiculo.servicio.nombre}}
+                                  {{vehiculo.servicio.nombre}}
                                   </td>
                                   <td> 
-                                      {{vehiculo.clase.nombre}}
+                                  {{vehiculo.clase.nombre}}
                                   </td>
                               </tr>
                             </tbody> 
@@ -120,28 +120,6 @@
                         <div class="btn-group">
                             <button (click)="onCancelar()" class="btn btn-outline-secondary" type="button">Cancelar</button>
                             <button (click)="onEnviar()"  class="btn btn-outline-primary" type="button"><i class="fa fa-floppy-o"></i>Enviar</button>
-                        </div>
-
-                        <div class="col-xs-6 col-lg-6" >
-                          <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>
-                          <table class="table table-bordered">
-                            <div class="col-xs-6 col-lg-6">
-                              <label>sede <span class="text-danger">*</span></label><br>
-                              <input />
-                              <!-- <ng-select [multiple]="false"  required name="ciudadanoId"></ng-select> -->
-                            </div>
-                          </table> 
-                        </div><!-- fin detalles del vehiculo -->
-
-                        <div class="col-xs-6 col-lg-6" >
-                          <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>
-                          <table class="table table-bordered">
-                            <div class="col-xs-6 col-lg-6">
-                              <label>sede <span class="text-danger">*</span></label><br>
-                              <input />
-                              <!-- <ng-select [multiple]="false"  required name="ciudadanoId"></ng-select> -->
-                            </div>
-                          </table>
                         </div>
 
                     </div>

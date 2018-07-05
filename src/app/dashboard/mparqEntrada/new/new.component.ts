@@ -14,6 +14,7 @@ export class NewComponent implements OnInit {
 public entrada: MparqEntrada;
 public agentes: any;
 public agenteSelected: any;
+public date: any;
 public errorMessage;
 public respuesta;
 
@@ -24,7 +25,9 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.entrada = new MparqEntrada(null, null, null, null, null, null, null);
+    this.entrada = new MparqEntrada(null, null, null, null, null, null, null, null);
+    this.date = new Date();
+    
 
     this._FuncionarioService.selectAgentes().subscribe(
       response => {
@@ -45,6 +48,8 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
+
+    this.entrada.funcionarioId = this.agenteSelected;
     
 		this._EntradaService.register(this.entrada,token).subscribe(
 			response => {
