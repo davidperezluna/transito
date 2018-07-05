@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.msvRevision = new msvRevision(null, null, null, null, null, null);
+    this.msvRevision = new msvRevision(null, null, null, null, null, null,null,null,null,null);
   }
   onCancelar(){
     this.ready.emit(true);

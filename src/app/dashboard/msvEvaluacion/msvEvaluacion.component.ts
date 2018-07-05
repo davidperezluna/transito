@@ -4,7 +4,10 @@ import { EmpresaService } from '../../services/empresa.service';
 import { msvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
 import { msvEvaluacion } from './msvEvaluacion.modelo';
+import { Empresa } from '../empresa/empresa.modelo';
 import swal from 'sweetalert2';
+import { forEach } from '@angular/router/src/utils/collection';
+import { msvRevision } from '../msvRevision/msvRevision.modelo';
 declare var $: any;
 
 @Component({
@@ -13,7 +16,7 @@ declare var $: any;
 })
 export class msvEvaluacionComponent implements OnInit {
   public errorMessage;
-	public id;
+  public id;
 	public respuesta;
 	public msvEvaluaciones;
 	public formNew = false;
@@ -23,9 +26,11 @@ export class msvEvaluacionComponent implements OnInit {
   public isError:any; 
   public isExist:any; 
   public msj:any; 
+  public parametro:any; 
   public nit:any; 
-  public empresa:any;
-  public revision:any;
+  public empresas:any;
+  public miEmpresa:Empresa;
+  public revisiones:msvRevision;
   public msvEvaluacion: msvEvaluacion;
 
   constructor(
@@ -66,6 +71,8 @@ export class msvEvaluacionComponent implements OnInit {
 					}
 				}
       );
+
+     // this.empresas = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -153,15 +160,43 @@ export class msvEvaluacionComponent implements OnInit {
       }
     })
     let token = this._loginService.getToken();
+    let dato = {'parametro':this.parametro}
 
-    this._EmpresaService.showNitNombre(token,this.nit).subscribe(
+    this._EmpresaService.showNitOrNombre(token,dato).subscribe(
       response => {
-        console.log(response.data);
+        //console.log(response.data);
         if (response.code == 200 ) {
           this.msj = response.msj;
           this.isError = false;
+          this.empresas=response.data;
+          for(let miEmpresa of this.empresas){
+            console.log(miEmpresa);         
+            this._RevisionService.showRevision(token, miEmpresa.id).subscribe(
+              response => {
+                //console.log(response.data);
+                if (response.code == 200 ) {
+                  this.msj = response.msj;
+                  this.isError = false;
+                  this.revisiones=response.data;
+                  console.log(this.revisiones);
+                  
+                  this.isExist = true;
+        
+                  swal.close();
+        
+                }
+        
+              error => { 
+                  this.errorMessage = <any>error;
+                  if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición"); 
+                  }
+                }
+            });   
+          }
+          
           this.isExist = true;
-          this.empresa=response.data;
           
           swal.close();
         }
@@ -187,6 +222,8 @@ export class msvEvaluacionComponent implements OnInit {
           }
         }
     });
+    //let $empresaid = 
+
   }
 
   onKeyValidateRevision(){
@@ -204,15 +241,16 @@ export class msvEvaluacionComponent implements OnInit {
       }
     })
     let token = this._loginService.getToken();
+    let dato = {'parametro':this.parametro}
 
-    this._RevisionService.showRevision(token,this.nit).subscribe(
+    this._RevisionService.showRevision(token,this.parametro).subscribe(
       response => {
         console.log(response.data);
         if (response.code == 200 ) {
           this.msj = response.msj;
           this.isError = false;
           this.isExist = true;
-          this.revision=response.data;
+          this.revisiones=response.data;
           
           swal.close();
         }
