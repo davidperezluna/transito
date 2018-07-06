@@ -163,6 +163,7 @@ constructor(
           }
         }
     }); 
+    console.log(datos);    
   }
 
   readySucursal(sucursal:any){
