@@ -3,6 +3,6 @@ export class Municipio{
 		public id:number,
 		public departamentoId:number,
 		public nombre:string,
-		public codigoDian:number
+		public codigoDane:number
 	){}
 }

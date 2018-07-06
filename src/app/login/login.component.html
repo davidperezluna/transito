@@ -25,11 +25,13 @@
 		  <span class="custom-control-indicator"></span>
 		  <span class="custom-control-description"> Remember Me</span>
 		</label>
-		<br>
+    <br>
+    <div class="container">
       <button (click)="onSubmit()" [disabled]="loginForm.invalid" class="btn btn-primary">
         Ingresar
       </button>
-      <br>
+    </div>
+    <br>
       <a routerLink="/forgotpassword" class="btn btn-link mt-2 ">Forgot password?</a>
     </form>
     <p class="mt-3">Dont have account yet? <a routerLink="/signup" class="text-white">Signup here</a>!</p>
