@@ -60,6 +60,10 @@ export class MpersonalFuncionarioService {
 		return this._http.get(this.url+"/select/agentes").map(res => res.json());
 	}
 
+	selectContratistas(){
+		return this._http.get(this.url+"/select/contratistas").map(res => res.json());
+	}
+
 	search(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
