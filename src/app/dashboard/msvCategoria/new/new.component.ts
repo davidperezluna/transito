@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvEvaluacion } from '../msvEvaluacion.modelo';
-import { msvEvaluacionService } from '../../../services/msvEvaluacion.service';
+import { msvCategoria } from '../msvCategoria.modelo';
+import { msvCategoriaService } from '../../../services/msvCategoria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public msvEvaluacion: msvEvaluacion;
+public msvCategoria: msvCategoria;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _msvEvaluacionService: msvEvaluacionService,
+  private _msvCategoriaService: msvCategoriaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.msvEvaluacion = new msvEvaluacion(null, null, null, null, null, null, null, null, null, null, null);
+    this.msvCategoria = new msvCategoria(null, null, null, null, null, null, null, null, null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);
@@ -29,8 +29,8 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    console.log(this.msvEvaluacion);
-		this._msvEvaluacionService.register(this.msvEvaluacion,token).subscribe(
+    console.log(this.msvCategoria);
+		this._msvCategoriaService.register(this.msvCategoria,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
