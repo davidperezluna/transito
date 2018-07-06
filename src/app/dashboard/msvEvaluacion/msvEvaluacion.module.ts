@@ -8,12 +8,13 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 import { NewEmpresaComponent } from './newEmpresa/newEmpresa.component';
+import { NewRevisionComponent } from './newRevision/newRevision.component';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [msvEvaluacionComponent,NewComponent,EditComponent,NewEmpresaComponent],
-    exports: [msvEvaluacionComponent, NewComponent,EditComponent,NewEmpresaComponent],
+    declarations: [msvEvaluacionComponent,NewComponent,EditComponent,NewEmpresaComponent,NewRevisionComponent],
+    exports: [msvEvaluacionComponent, NewComponent,EditComponent,NewEmpresaComponent,NewRevisionComponent],
     providers:[msvEvaluacionComponent,msvRevisionService,msvEvaluacionService]
 })
 

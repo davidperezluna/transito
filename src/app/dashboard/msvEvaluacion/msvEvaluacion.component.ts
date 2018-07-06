@@ -22,6 +22,10 @@ export class msvEvaluacionComponent implements OnInit {
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
+  public newEmpresa = false;
+  public revisionNew:boolean = false;
+  public habilitarBotonRev:boolean = false;
+  public revisionMensaje:boolean = false;
   public table:any;
   public isError:any; 
   public isExist:any; 
@@ -30,7 +34,7 @@ export class msvEvaluacionComponent implements OnInit {
   public nit:any; 
   public empresas:any;
   public miEmpresa:Empresa;
-  public revisiones:msvRevision;
+  public revisiones:any = false;
   public msvEvaluacion: msvEvaluacion;
 
   constructor(
@@ -92,8 +96,7 @@ export class msvEvaluacionComponent implements OnInit {
   }
   
   onNew(){
-    this.formNew = true;
-    this.formIndex = false;
+    this.newEmpresa = true;
     this.table.destroy();
   }
 
@@ -102,6 +105,7 @@ export class msvEvaluacionComponent implements OnInit {
       this.formNew = false;
       this.formEdit = false;
       this.formIndex = true;
+      this.newEmpresa = false;
       this.ngOnInit();
     }
   }
@@ -146,6 +150,7 @@ export class msvEvaluacionComponent implements OnInit {
   }
 
   onKeyValidateEvaluacion(){
+    this.revisiones =[];
     swal({
       title: 'Buscando Empresa!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -159,8 +164,12 @@ export class msvEvaluacionComponent implements OnInit {
       ) {
       }
     })
+    
+    this.revisionMensaje = false;
+    this.revisionNew = false;
     let token = this._loginService.getToken();
     let dato = {'parametro':this.parametro}
+    console.log(dato);
 
     this._EmpresaService.showNitOrNombre(token,dato).subscribe(
       response => {
@@ -169,23 +178,25 @@ export class msvEvaluacionComponent implements OnInit {
           this.msj = response.msj;
           this.isError = false;
           this.empresas=response.data;
+          if(this.empresas){
+            this.habilitarBotonRev = true;
+          }
           for(let miEmpresa of this.empresas){
-            console.log(miEmpresa);         
+            //console.log(miEmpresa);         
             this._RevisionService.showRevision(token, miEmpresa.id).subscribe(
               response => {
-                //console.log(response.data);
                 if (response.code == 200 ) {
                   this.msj = response.msj;
                   this.isError = false;
-                  this.revisiones=response.data;
-                  console.log(this.revisiones);
-                  
+                  this.revisiones=response.data;                 
                   this.isExist = true;
-        
-                  swal.close();
-        
+                  swal.close();        
                 }
-        
+                //si no existe revision coloca en true la variable para mostrar mensaje
+                if(this.revisiones == false){
+                this.revisionMensaje = true;
+                console.log("Hola");
+                 }        
               error => { 
                   this.errorMessage = <any>error;
                   if(this.errorMessage != null){
@@ -193,7 +204,7 @@ export class msvEvaluacionComponent implements OnInit {
                     alert("Error en la petición"); 
                   }
                 }
-            });   
+            }); 
           }
           
           this.isExist = true;
@@ -267,7 +278,6 @@ export class msvEvaluacionComponent implements OnInit {
           
           swal.close();
         }
-
       error => { 
           this.errorMessage = <any>error;
           if(this.errorMessage != null){
@@ -276,6 +286,10 @@ export class msvEvaluacionComponent implements OnInit {
           }
         }
     });
+  }
+
+  onNewRevision(){
+    this.revisionNew = true;
   }
 
   editmsvEvaluacion(msvEvaluacion:any){
