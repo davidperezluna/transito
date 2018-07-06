@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { MsvTalonarioService } from '../../../services/msvTalonario.service';
+import { CfgPlacaService } from '../../../services/cfgPlaca.service';
 import { LoginService } from '../../../services/login.service';
-import { ClaseService } from '../../../services/clase.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { MsvTalonarioService } from '../../../services/msvTalonario.service';
 import swal from 'sweetalert2';
+import { MsvTalonario } from '../msvTalonario.modelo';
 
 
 @Component({
@@ -12,20 +13,23 @@ import swal from 'sweetalert2';
 })
 export class EditComponent {
   @Output() ready = new EventEmitter<any>();
-  @Input() msvTalonario: any = null;
+  @Input() talonario: any = null;
   public errorMessage;
   public respuesta;
-  public clases: any;
-  public claseSelected: any;
   public sedesOperativas: any;
+  public sedeOperativaSuccess = false;
+  public talonarioReady = false;
   public sedeOperativaSelected: any;
+  public validado = false;
+  public sedeOperativaReady = false;
+  public sedeOperativa: any;
   // public tipoIdentificacion: Array<any>
 
   constructor(
-    private _MsvTalonarioService: MsvTalonarioService,
+    private _CfgPlacaService: CfgPlacaService,
     private _loginService: LoginService,
-    private _claseService: ClaseService,
     private _sedeOperativaService: SedeOperativaService,
+    private _msvTalonarioService: MsvTalonarioService,
   ) {
     //   this.tipoIdentificacion = [
     //     {value: 'CC', label: 'Cédula de ciudadanía'},
@@ -37,11 +41,12 @@ export class EditComponent {
 
   ngOnInit() {
 
-    this._claseService.getClaseSelect().subscribe(
+
+    this._sedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
-        this.clases = response;
+        this.sedesOperativas = response;
         setTimeout(() => {
-          this.claseSelected = [this.msvTalonario.clase.id];
+          this.sedeOperativaSelected = [this.talonario.sedeOperativa.id];
         });
       },
       error => {
@@ -53,18 +58,17 @@ export class EditComponent {
         }
       }
     );
-
   }
 
 
   onCancelar() {
     this.ready.emit(true);
   }
+
   onEnviar() {
     let token = this._loginService.getToken();
-    this.msvTalonario.claseId = this.claseSelected;
-    this.msvTalonario.sedeOperativaId = this.sedeOperativaSelected;
-    this._MsvTalonarioService.editMsvTalonario(this.msvTalonario, token).subscribe(
+    this.talonario.sedeOperativaId = this.sedeOperativaSelected;
+    this._msvTalonarioService.register(this.talonario, token).subscribe(
       response => {
         //console.log(response);
         this.respuesta = response;
@@ -88,6 +92,75 @@ export class EditComponent {
         }
 
       });
+  }
+
+  calcularTotal() {
+    let ini, fin, total;
+    ini = 0;
+    fin = 0;
+    total = 0;
+    ini = this.talonario.rangoini;
+    fin = this.talonario.rangofin;
+    total = (fin - ini) + 1;
+    console.log(total);
+    if (total < 0) {
+      total = 0;
+
+    }
+    this.talonario.total = total;
+
+  }
+
+  changedSedeOperativa(e) {
+
+    this.validado = false;
+    if (e) {
+      let token = this._loginService.getToken();
+      this._sedeOperativaService.showSedeOperativa(token, e).subscribe(
+        response => {
+          this.sedeOperativa = response;
+          this.sedeOperativaReady = true;
+          //          this.msvTalonario.rangoini = this.sedeOperativa.data.
+          //this.comparendo.numeroOrden = this.sedeOperativa.data.codigoDivipo;
+          console.log(this.sedeOperativa);
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
+      this._msvTalonarioService.showMsvTalonarioPorSedeOperativa(token, e).subscribe(
+        response => {
+          this.sedeOperativaSuccess = true;
+          if (response.status == "success") {
+
+            this.talonario = response.data;
+
+            this.talonarioReady = true;
+            this.talonario.fechaAsignacion = this.talonario.fechaAsignacion;
+
+            //this.comparendo.numeroOrden = this.sedeOperativa.data.codigoDivipo;
+            console.log(this.talonario);
+          }
+          else if (response.status == "vacio") {
+            this.talonario = new MsvTalonario(0, 0, 0, "", "", 0);
+          }
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
   }
 
 }

@@ -1,8 +1,74 @@
+<div class="container">
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Configuración</b>
+            <br>
+            <small>Talonarios</small>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Sede Operativa</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Total</th>
+                <th>Fecha Asignación</th>
+                <th>N° Resolución</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let msvTalonario of msvTalonarios; let i = index">
+                <td>{{msvTalonario.id}}</td>
+                <td>{{msvTalonario.sedeOperativa?.nombre}}</td>
+                <td>{{msvTalonario.rangoini}}</td>
+                <td>{{msvTalonario.rangofin}}</td>
+                <td>{{msvTalonario.total}}</td>
+                <td>{{msvTalonario.fechaAsignacion}}</td>
+                <td>{{msvTalonario.nResolucion}}</td>
+                <td>
+                  <button (click)="editMsvTalonario(msvTalonario)" class="btn btn-xs btn-info" type="button">Editar
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button (click)="deleteMsvTalonario(msvTalonario.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-edit *ngIf='formEdit' [talonario]="msvTalonario" (ready)="ready($event)"></app-edit>
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>
+
+
+
+
+<!--
 <br>
 <br>
         <div class="card">
           <div class="card-header">
-            <h5 class="m-0">Seleccione una sede operativa</h5>
+            <h5 class="m-0 justify-content-center">Seleccione una sede operativa</h5>
             <br>
             <div class="row justify-content-center">
               <form #comparendoForm="ngForm">
@@ -18,7 +84,7 @@
                     <label>Numero de Comparendo*</label>
                     <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text" required>
                   </div>-->
-        
+<!--        
                   <div class="col-lg-12 col-md-16" *ngIf="sedeOperativaSuccess">
                     <hr>
                     <div class="row">
@@ -99,12 +165,12 @@
 
 
 
-
+<!--
 
     <div class="row">
       <!-- .row -->
     
-    
+    <!--
 
    
     </div>

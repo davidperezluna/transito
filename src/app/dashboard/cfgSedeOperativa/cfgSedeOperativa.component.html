@@ -7,7 +7,7 @@
           <h5 class="card-title">
             <b class="text-uppercase">Configuración</b>
             <br>
-            <small>Placas</small>
+            <small>Sedes Operativas</small>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                 <i class="fa fa-plus"></i>
@@ -21,25 +21,23 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Numero</th>
-                <th>Estado</th>
-                <th>Clase</th>
-                <th>Sede Operativa</th>
+                <th>Nombre</th>
+                <th>Codigo Divipo</th>
+                <th>Municipio</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let cfgPlaca of cfgPlacas; let i = index">
-                <td>{{cfgPlaca.id}}</td>
-                <td>{{cfgPlaca.numero}}</td>
-                <td>{{cfgPlaca.estado}}</td>
-                <td>{{cfgPlaca.clase?.nombre}}</td>
-                <td>{{cfgPlaca.sedeOperativa?.nombre}}</td>
+              <tr class="odd" *ngFor="let sedeOperativa of cfgSedesOperativas; let i = index">
+                <td>{{sedeOperativa.id}}</td>
+                <td>{{sedeOperativa.nombre}}</td>
+                <td>{{sedeOperativa.codigoDivipo}}</td>
+                <td>{{sedeOperativa.municipio?.nombre}}</td>
                 <td>
-                  <button (click)="editCfgPlaca(cfgPlaca)" class="btn btn-xs btn-info" type="button">Editar
+                  <button (click)="editSedeOperativa(sedeOperativa)" class="btn btn-xs btn-info" type="button">Editar
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button (click)="deleteCfgPlaca(cfgPlaca.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                  <button (click)="deleteSedeOperativa(sedeOperativa.id)" class="btn btn-xs btn-danger" type="button">Eliminar
                     <i class="fa fa-trash"></i>
                   </button>
 
@@ -53,6 +51,6 @@
       </div>
     </div>
   </div>
-  <app-edit *ngIf='formEdit' [cfgPlaca]="cfgPlaca" (ready)="ready($event)"></app-edit>
+  <app-edit *ngIf='formEdit' [cfgSedeOperativa]="cfgSedeOperativa" (ready)="ready($event)"></app-edit>
   <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
