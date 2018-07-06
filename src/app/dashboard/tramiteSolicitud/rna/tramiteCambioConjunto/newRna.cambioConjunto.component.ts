@@ -9,10 +9,10 @@ import {VehiculoService} from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-transformacion',
-    templateUrl: './newRna.transformacion.html'
+    selector: 'appRna-cambioConjunto',
+    templateUrl: './newRna.cambioConjunto.html'
 })
-export class NewRnaTransformacionComponent implements OnInit {
+export class NewRnaCambioConjuntoComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
@@ -20,11 +20,13 @@ export class NewRnaTransformacionComponent implements OnInit {
     public respuesta;
     public tipoPotenciacionSelect: any;
     public nuevoModelo: any;
+    public descricion: any;
     public datos = {
         'newData': null,
         'oldData': null,
         'tipoPotenciacion': null,
         'tramiteFactura': null,
+        'descricion': null,
     };
     public tiposPotenciacion = [
         {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
@@ -62,8 +64,9 @@ export class NewRnaTransformacionComponent implements OnInit {
             if(this.respuesta.status == 'success'){
                 this.datos.newData = this.nuevoModelo;
                 this.datos.oldData = this.vehiculo.modelo;
-                this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
-                this.datos.tramiteFactura =10;
+                this.datos.tipoPotenciacion = this.descricion;
+                this.datos.descricion = this.tipoPotenciacionSelect;
+                this.datos.tramiteFactura =58;
                 this.readyTramite.emit(this.datos);
             }
             error => {

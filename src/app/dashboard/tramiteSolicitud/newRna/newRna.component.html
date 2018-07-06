@@ -47,7 +47,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                            {{vehiculo.placa}}
+                                            {{vehiculo.cfgPlaca?.numero}}
                                             </td>
                                             <td> 
                                                 {{vehiculo.motor}}
@@ -205,6 +205,10 @@
 
                         <div class="tab-pane" id="10" role="tabpanel"> 
                             <appRna-transformacion [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
+                        </div>
+
+                        <div class="tab-pane" id="58" role="tabpanel"> 
+                            <appRna-cambioConjunto [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambioConjunto>
                         </div>
 
                         <div class="tab-pane" id="21" role="tabpanel"> 
