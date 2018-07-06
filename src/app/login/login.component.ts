@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import {LoginService} from '../services/login.service';
+import swal from 'sweetalert2';
 /**
 *  This class represents the lazy loaded LoginComponent.
 */
@@ -34,7 +35,19 @@ export class LoginComponent implements OnInit {
       this.login = false;
     }
     onSubmit(){
-		console.log(this.user);
+			swal({
+				title: 'Comprobando Datos!',
+				text: 'Tardara solo unos segundos por favor espere.',
+				onOpen: () => {
+					swal.showLoading()
+				}
+			}).then((result) => {
+				if (
+					// Read more about handling dismissals
+					result.dismiss === swal.DismissReason.timer 
+				) {
+				}
+			})
 		this._loginService.signup(this.user).subscribe(
 				response =>{
 
@@ -51,11 +64,13 @@ export class LoginComponent implements OnInit {
 									response => { 
 										let token = response;
 										this.token = token;
+										swal.close();
 
 										if(this.token.length <= 0){
 											alert("Error en el servidor");
 										}else{
 											if(!this.token.status){
+												swal.close();
 												localStorage.setItem('token', token);
 												//console.log(localStorage.getItem('token'));
                         // REDIRECCION
@@ -76,7 +91,8 @@ export class LoginComponent implements OnInit {
 
 						}else{
               this.login = true;
-              this.user.password ='';
+							this.user.password ='';
+							swal.close();
               }
 					}
 
