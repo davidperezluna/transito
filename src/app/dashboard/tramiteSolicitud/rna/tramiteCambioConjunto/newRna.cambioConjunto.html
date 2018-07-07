@@ -4,19 +4,18 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
-                    Transformaciones
+                    Cambio de Conjunto
                 </h5>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <div class="row justify-content-center container">
-                    <div class="form-group row col-xs-12 col-lg-12">
-                        <label>Tipo Potenciación <span class="text-danger">*</span></label>
-                        <ng-select [multiple]="false" [options]="tiposPotenciacion" [(ngModel)]="tipoPotenciacionSelect" required name="tipoPotenciacion">
-                        </ng-select>
-                    </div>
                     <div class="col-xs-12 col-lg-12">
                         <label>Nueva Modelo<span class="text-danger">*</span></label>
                         <input class="form-control" [(ngModel)]="nuevoModelo" name="nuevoModelo" type="text" required />
+                    </div>
+                    <div class="form-group row col-xs-12 col-lg-12">
+                        <label>Descripción <span class="text-danger">*</span></label>
+                        <textarea name="" [(ngModel)]="descricion" class="form-control" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>
             </div>
