@@ -26,7 +26,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._CategoriaService.editRevision(this.msvCategoria,token).subscribe(
+		this._CategoriaService.editCategoria(this.msvCategoria,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

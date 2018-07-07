@@ -28,6 +28,7 @@ import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
 import {  msvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
 import {  msvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import {  msvRevisionRoutes } from './msvRevision/msvRevision.routes';
+import {  msvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
 
 import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
@@ -95,6 +96,7 @@ export const DashboardRoutes: Route[] = [
         ...msvCaracterizacion,
         ...msvEvaluacionRoutes,
         ...msvRevisionRoutes,
+        ...msvCategoriaRoutes,
         ...MgdDocumentoRoutes,
         ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,

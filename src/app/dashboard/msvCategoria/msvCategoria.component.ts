@@ -1,12 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { msvCategoriaService } from '../../services/msvCategoria.service';
-import { EmpresaService } from '../../services/empresa.service';
 import { msvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
 import { msvCategoria } from './msvCategoria.modelo';
 import swal from 'sweetalert2';
-import { forEach } from '@angular/router/src/utils/collection';
-import { msvRevision } from '../msvRevision/msvRevision.modelo';
 declare var $: any;
 
 @Component({
@@ -37,7 +34,6 @@ export class msvCategoriaComponent implements OnInit {
 
   constructor(
     private _CategoriaService: msvCategoriaService,
-    private _RevisionService: msvRevisionService,
 		private _loginService: LoginService,
     ){}
     
@@ -56,7 +52,7 @@ export class msvCategoriaComponent implements OnInit {
       ) {
       }
     })
-    this._CategoriaService.getRevision().subscribe(
+    this._CategoriaService.getCategoria().subscribe(
 				response => {
           this.msvCategorias = response.data;
           let timeoutId = setTimeout(() => {  
@@ -117,7 +113,7 @@ export class msvCategoriaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CategoriaService.deleteRevision(token,id).subscribe(
+        this._CategoriaService.deleteCategoria(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

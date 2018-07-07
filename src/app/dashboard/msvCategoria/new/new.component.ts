@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.msvCategoria = new msvCategoria(null, null, null, null, null, null, null, null, null, null, null);
+    this.msvCategoria = new msvCategoria(null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);

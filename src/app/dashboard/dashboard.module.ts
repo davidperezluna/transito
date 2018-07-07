@@ -35,6 +35,7 @@ import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { msvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { msvRevisionModule } from './msvRevision/msvRevision.module';
 import { msvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
+import { msvCategoriaModule } from './msvCategoria/msvCategoria.module';
 
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
@@ -115,6 +116,7 @@ import {RightsidebarComponent} from '../shared/index';
       msvEvaluacionModule,
       msvRevisionModule,
       msvCaracterizacionModule,
+      msvCategoriaModule,
       MgdDocumentoModule,
       MgdTipoCorrespondenciaModule,
       MflInfraccionModule,
