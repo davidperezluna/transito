@@ -165,11 +165,12 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
       ) {
       }
     })
+
     let token = this._loginService.getToken();
 
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
       response => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.code == 200 ) {
           this.msj = 'vehiculo ya tiene placa asignada';
           this.isError = true;
@@ -188,6 +189,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
           this.isError = false;
           this.isExist = true;
           this.vehiculo=response.data;
+          console.log(this.vehiculo);
           
           swal.close();
         }
@@ -222,11 +224,13 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   changedSedeOperativa(e){
 
     let token = this._loginService.getToken();
+    
     if (e) {
       this._CfgPlacaService.getCfgPlacaPorSedeOperativa(token,this.sedeOperativaSelected).subscribe(
         response => {
           this.cfgPlacas = response;
-          console.log(this.placas);
+          console.log(this._CfgPlacaService);
+          
           
         }, 
         error => {
@@ -247,16 +251,13 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
     
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     this.vehiculo.placa = this.cfgPlacaSelected;
-    console.log(this.vehiculo.placa);
     
-    // console.log(this.vehiculo);
     let token = this._loginService.getToken();
 
     this._vehiculoService.asignacionPlaca(this.vehiculo,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
-        
+         
         if(this.respuesta.status == 'success'){
 
           var html = 'El vehiculo con:<br> numero de chasis:  <b>'+this.vehiculo.chasis+

@@ -1,0 +1,62 @@
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Radicado de cuenta
+                </h5>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="row justify-content container">
+                    <div class="form-group  col-xs-12 col-lg-3">
+                        <label>Organismo de transito de que proviene <span class="text-danger">*</span></label>
+                       
+                    </div>
+                    <div class="form-group  col-xs-12 col-lg-9">
+                        <ng-select [multiple]="false" [options]="colores" [(ngModel)]="colorSelected" required name="colorId">
+                        </ng-select>
+                       
+                        <hr>
+                    </div>
+                    
+                    
+                    <!-- <div class="row"> --><hr>
+                        <div class="form-group col-xs-12 col-lg-6">
+                            <hr>
+                            <label>Tipo documento empresa afiliadora <span class="text-danger">*</span></label>
+                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicioId">Tipo documento empresa afiliadora 
+                            </ng-select>
+                        </div>
+                        <div class="form-group col-xs-12 col-lg-6">
+                            <label>Nro. Documento<span class="text-danger">*</span></label>
+                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicioId">
+                            </ng-select>
+                        </div>
+                    <!-- </div> -->
+                    
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Fecha de ingreso</label>
+                        <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Nro. guiá de llegada</label>
+                        <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Empresa de envió</label>
+                        <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Nro. RUT</label>
+                        <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->

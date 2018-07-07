@@ -1,0 +1,292 @@
+<br>
+<br>
+    <div class="row"><!-- .row -->
+        <div class="col-xs-12 col-lg-6">
+            <div class="input-group" [ngClass]="{'has-danger' : isError}">
+                <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
+                <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
+                <span class="input-group-btn">
+                    <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div> 
+
+            <div class="has-danger" *ngIf="error" >
+                <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+            </div>
+            <div class="has-success" *ngIf="vehiculoSuccess" >
+                <div class="form-control-feedback has-danger has-success">{{msj}}</div>
+                <br>
+            </div>
+
+            <div class="has-danger" *ngIf="isError" >
+                <div class="form-control-feedback has-danger has-error">{{mensaje}}</div>
+            </div>
+        </div>
+    </div><!-- .row -->
+    <div class="row"><!-- .row -->
+             
+             
+        <div class="container col-xs-12 col-lg-6" *ngIf="vehiculoSuccess">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Vehiculo <small>Encontrado</small></h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-xs-12 col-lg-12" >
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Placa</th>
+                                            <th>Motor</th>
+                                            <th>Servicio</th>
+                                            <th>Tipo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                            {{vehiculo.cfgPlaca?.numero}}
+                                            </td>
+                                            <td> 
+                                                {{vehiculo.motor}}
+                                            </td>
+                                            <td> 
+                                                {{vehiculo.servicio.nombre}}
+                                            </td>
+                                            <td> 
+                                                {{vehiculo.tipoVehiculo}}
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                                </table> 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="onCancelar()" class="btn btn-secondary">
+                                <i class="fa fa-times"></i>
+                                Cancel
+                            </button>
+                            <button class="btn btn-success pull-right" (click)="finalizarSolicitud()" [disabled]="isTramites">
+                                <i class="fa fa-save"></i>
+                                Enviar
+                            </button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 form-group" *ngIf="vehiculoSuccess">
+            <div class="container col-xs-12 col-lg-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Propietario <small>Vehiculo</small></h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-xs-12 col-lg-12" >
+                                    <table class="table table-bordered" *ngIf="isCiudadano">
+                                        <tbody>
+                                            <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                                <td>
+                                                    <strong>Nombre: </strong>
+                                                    {{ciudadanoVehiculo.ciudadano?.usuario.primerNombre}} {{ciudadanoVehiculo.ciudadano?.usuario.primerApellido}}
+                                                </td>
+                                                <td>
+                                                     <strong>Identificación: </strong>
+                                                    {{ciudadanoVehiculo.ciudadano?.usuario.identificacion}}
+                                                </td>
+                                                <td> 
+                                                    <div class="custom-control custom-radio">
+                                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+                                                        <label class="custom-control-label" for="customRadio1">Solicitante</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody> 
+                                    </table> 
+                                    <table class="table table-bordered" *ngIf="isEmpresa">
+                                        <thead>
+                                            <tr>
+                                                <th>Solicitante Empresa</th>
+                                                <th>Check</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                                <td>
+                                                    <strong>Nit: </strong>
+                                                    {{ciudadanoVehiculo.empresa?.nit}}
+                                                    <br>
+                                                    <strong>Nombre: </strong>
+                                                    {{ciudadanoVehiculo.empresa?.nombre}}
+                                                </td>
+                                                <td> 
+                                                    <label class="custom-control custom-radio" for="3option3">
+                                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" required >
+                                                        <span class="custom-control-indicator"></span> 
+                                                        <span class="custom-control-description">Solicitante</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </tbody> 
+                                    </table> 
+                                    <div class="container" *ngIf="tramiteSolicitud.solicitanteId">
+                                        <label>Facturas
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <ng-select 
+                                        [multiple]="false" 
+                                        [options]="facturas" 
+                                        (ngModelChange)="changedFactura($event)"
+                                        [(ngModel)]="facturaSelected" 
+                                        name="facturaId" 
+                                        required>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body" *ngIf="isMatricula">
+                                <div class="col-xs-12 col-lg-12" >
+                                    <div class="container">
+                                        <label>Facturas
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <ng-select 
+                                        [multiple]="false" 
+                                        [options]="facturas" 
+                                        (ngModelChange)="changedFactura($event)"
+                                        [(ngModel)]="facturaSelected" 
+                                        name="facturaId" 
+                                        required>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" *ngIf="factura">
+            <div class="card col-md-12 col-md-16">
+                <div class="card-header">
+                    <h6 class="card-title">Tramites</h6>
+                </div>
+                <div class="card-body"> 
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index"> 
+                            <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.id}}" role="tab">{{tramiteFactura.tramitePrecio.nombre}}<i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i></a> 
+                            <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
+                        </li>  
+
+                        <li class="nav-item" *ngIf='sustrato'>  
+                            <a class="nav-link " data-toggle="tab" href="#sustrato"  role="tab">Sustrato </a> 
+                        </li>
+                    </ul>
+                    
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane" id="realizado" role="tabpanel"> 
+                            <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
+                        </div>
+                        <div class="tab-pane" id="sustrato" role="tabpanel"> 
+                            <appRnma-sustrato [factura] = "factura"  [ciudadanoPropietario] = "ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-sustrato>
+                        </div>
+
+                        <div class="tab-pane" id="2" role="tabpanel"> 
+                            <appRnma-traspaso [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-traspaso>
+                        </div>
+
+                        <div class="tab-pane" id="10" role="tabpanel"> 
+                            <appRnma-transformacion [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-transformacion>
+                        </div>
+
+                        <div class="tab-pane" id="58" role="tabpanel"> 
+                            <appRnma-cambioConjunto [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambioConjunto>
+                        </div>
+
+                        <div class="tab-pane" id="21" role="tabpanel"> 
+                            <appRnma-duplicado-placa  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-duplicado-placa>
+                        </div>
+
+                        <div class="tab-pane" id="12" role="tabpanel"> 
+                            <appRnma-duplicado-licencia (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-duplicado-licencia>
+                        </div>
+
+                        <div class="tab-pane" id="16" role="tabpanel"> 
+                            <appRnma-cambio-placa (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-placa>
+                        </div>
+
+                        <!-- <div class="tab-pane" id="5" role="tabpanel"> 
+                            <appRnma-cambio-color [vehiculo] = "vehiculo" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-color>
+                        </div> -->
+
+                        <div class="tab-pane" id="24" role="tabpanel"> 
+                            <appRnma-cambio-motor *ngIf="tramiteSelected == 24" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-motor>
+                        </div>
+
+                        <div class="tab-pane" id="7" role="tabpanel"> 
+                            <appRnma-regrabar-motor [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-regrabar-motor>
+                        </div>
+
+                        <div class="tab-pane" id="8" role="tabpanel"> 
+                            <appRnma-regrabar-chasis [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-regrabar-chasis>
+                        </div>
+
+                        <div class="tab-pane" id="9" role="tabpanel"> 
+                            <appRnma-regrabar-serie [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-regrabar-serie>
+                        </div>
+
+                        <div class="tab-pane" id="57" role="tabpanel"> 
+                            <appRnma-regrabar-vin [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-regrabar-vin>
+                        </div>
+
+                        <!-- <div class="tab-pane" id="1" role="tabpanel"> 
+                            <appRnma-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-rematricula>
+                        </div> -->
+
+                        <div class="tab-pane" id="1" role="tabpanel"> 
+                            <appRnma-matricula-inicial  [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-matricula-inicial>
+                        </div>
+
+                        <div class="tab-pane" id="31" role="tabpanel"> 
+                            <appRnma-cambio-combustible [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-combustible>
+                        </div>
+
+                        <div class="tab-pane" id="32" role="tabpanel"> 
+                            <appRnma-cambio-carroceria [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-carroceria>
+                        </div>
+
+                        <div class="tab-pane" id="6" role="tabpanel"> 
+                            <appRnma-cambio-servicio [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-servicio>
+                        </div>
+
+                        <div class="tab-pane" id="26" role="tabpanel"> 
+                            <appRnma-blindaje [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-blindaje>
+                        </div>
+
+                        <div class="tab-pane" id="3" role="tabpanel"> 
+                           <appRnma-cambio-sedeOperativa [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-sedeOperativa>
+                        </div>
+
+                        <div class="tab-pane" id="15" role="tabpanel"> 
+                            <appRnma-cancelacionMatricula  [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cancelacionMatricula>
+                        </div>
+
+                        <div class="tab-pane" id="58" role="tabpanel"> 
+                             <appRnma-certificadoTradicion [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-certificadoTradicion>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  
+</div><!-- /.row -->

@@ -1,5 +1,5 @@
 <hr>
-<div class="row">
+<div class="row" >
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
@@ -11,19 +11,37 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha recepción <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="msvRevision.fecha_recepcion" name="fechar" type="date" required />
+                            <input class="form-control" [(ngModel)]="msvRevision.fechaRecepcion" name="fechar" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha devolución</label>
-                            <input class="form-control" [(ngModel)]="msvRevision.fecha_devolucion" name="fechad" type="date" required />
+                            <input class="form-control" [(ngModel)]="msvRevision.fechaDevolucion" name="fechad" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha otorgamiento</label>
-                            <input class="form-control" [(ngModel)]="msvRevision.fecha_otorgamiento" name="fechao" type="date" required />
+                            <input class="form-control" [(ngModel)]="msvRevision.fechaOtorgamiento" name="fechao" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Funcionario</label>
-                            <input class="form-control" [(ngModel)]="msvRevision.funcionario" name="funcionario" type="text" required />
+                            <label>Empresa</label>
+                            <ng-select [multiple]="false" [options]="empresas" [(ngModel)]="empresaSelected" name="empresas" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Persona Contacto</label>
+                            <input class="form-control" [(ngModel)]="msvRevision.personaContacto" name="personac" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Cargo del contacto</label>
+                            <input class="form-control" [(ngModel)]="msvRevision.cargo" name="cargo" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Correo del contacto</label>
+                            <input class="form-control" [(ngModel)]="msvRevision.correo" name="correo" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Funcionario que revisa</label>
+                            <ng-select [multiple]="false" [options]="contratistas" [(ngModel)]="contratistaSelected" name="contratistas" required>
+                            </ng-select>
                         </div>
                     </div>
                 </form>

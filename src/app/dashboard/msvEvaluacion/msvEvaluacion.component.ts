@@ -106,6 +106,7 @@ export class msvEvaluacionComponent implements OnInit {
       this.formEdit = false;
       this.formIndex = true;
       this.newEmpresa = false;
+      this.revisionNew = false;
       this.ngOnInit();
     }
   }

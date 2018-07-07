@@ -20,7 +20,7 @@ import { MunicipioModule } from './municipio/municipio.module';
 import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
 import { ServicioModule } from './servicio/servicio.module';
 import { ModuloModule } from './modulo/modulo.module';
-import { TramiteModule } from './tramite/tramite.module';
+import { TramiteModule } from './tramite/tramite.module'; 
 import { AlmacenModule } from './almacen/almacen.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
@@ -35,6 +35,7 @@ import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { msvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { msvRevisionModule } from './msvRevision/msvRevision.module';
 import { msvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
+import { msvCategoriaModule } from './msvCategoria/msvCategoria.module';
 
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
@@ -53,6 +54,7 @@ import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
 import { MsvTCAsignacionModule } from './msvTCAsignacion/msvTCAsignacion.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
+import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
@@ -115,6 +117,7 @@ import {RightsidebarComponent} from '../shared/index';
       msvEvaluacionModule,
       msvRevisionModule,
       msvCaracterizacionModule,
+      msvCategoriaModule,
       MgdDocumentoModule,
       MgdTipoCorrespondenciaModule,
       MflInfraccionModule,
@@ -137,6 +140,7 @@ import {RightsidebarComponent} from '../shared/index';
       FacturaModule,
       TramiteFacturaModule,
       TramiteSolicitudModule,
+      TramiteSolicitudRnmaModule,
       SustratoModule,
       GestionTransportePublicoModule,
       EmpresaModule,
