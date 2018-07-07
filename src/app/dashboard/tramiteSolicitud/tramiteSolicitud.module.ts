@@ -94,7 +94,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
         NewRnaTransformacionComponent,
-        NewRnaCambioConjuntoComponent
+        NewRnaCambioConjuntoComponent 
     ],
     providers:[TramiteSolicitudService,EmpresaService]
 })
