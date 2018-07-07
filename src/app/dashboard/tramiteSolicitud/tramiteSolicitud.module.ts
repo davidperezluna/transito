@@ -4,6 +4,7 @@ import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { EmpresaService } from '../../services/empresa.service';
+import { AlertaService } from '../../services/alerta.service';
 
 import { NewRnaComponent } from './newRna/newRna.component';
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
@@ -27,6 +28,7 @@ import { NewRnaPreregistroComponent } from './rna/tramitePreregistro/newRna.prer
 import { NewRnaCiudadanoComponent } from './newRnaCiudadano/newRnaCiudadano.component';
 import { NewRnaSustratoComponent } from './newRnaSustrato/newRnaSustrato.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
+import { NewRnaTramiteInscripcionAlertaPrendaComponent } from './rna/tramiteInscripcionAlertaPrenda/newRna.inscripcionAlertaPrenda.component';
 import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/newRna.matriculaInicial.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
@@ -58,6 +60,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaCancelacionMatriculaComponent,
         NewRnaCertificadoTradicionComponent,
         NewRnaTraspasoComponent,
+        NewRnaTramiteInscripcionAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
@@ -86,11 +89,12 @@ import { SelectModule } from 'angular2-select';
         NewRnaCancelacionMatriculaComponent,
         NewRnaCertificadoTradicionComponent,
         NewRnaTraspasoComponent,
+        NewRnaTramiteInscripcionAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
     ],
-    providers:[TramiteSolicitudService,EmpresaService]
+    providers:[TramiteSolicitudService,EmpresaService,AlertaService]
 })
 
 export class TramiteSolicitudModule { }

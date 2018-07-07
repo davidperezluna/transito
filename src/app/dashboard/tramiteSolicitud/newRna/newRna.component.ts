@@ -110,6 +110,8 @@ constructor(
       this.factura = response[0].factura;
       let active = true;
       let token = this._loginService.getToken();
+      console.log(response);
+      
       if (this.isMatricula == false) {
         this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
           responseCiudadano =>{
