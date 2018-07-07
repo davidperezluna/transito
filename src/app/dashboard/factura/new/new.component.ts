@@ -262,6 +262,14 @@ constructor(
           this.factura.vehiculoId = this.vehiculo.id;
           swal.close();
         }
+        if (response.code == 400 ) {
+          this.msj = 'vehiculo encontrado';
+          this.isErrorVehiculo = false;
+          this.isExistVehiculo = true;
+          this.vehiculo=response.data;
+          this.factura.vehiculoId = this.vehiculo.id;
+          swal.close();
+        }
         if(response.code == 401){
           console.log(response);
           this.msj = 'vehiculo no se encuentra en la base de datos';

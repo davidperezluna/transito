@@ -13,12 +13,12 @@ export class MparqEntradaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public inmovilizaciones;
+	public entradas;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public inmovilizacion: MparqEntrada;
+  public entrada: MparqEntrada;
 
   constructor(
     private _EntradaService: MparqEntradaService,
@@ -40,9 +40,10 @@ export class MparqEntradaComponent implements OnInit {
       ) {
       }
     })
+
     this._EntradaService.index().subscribe(
 				response => {
-          this.inmovilizaciones = response.data;
+          this.entradas = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
@@ -127,8 +128,8 @@ export class MparqEntradaComponent implements OnInit {
     })
   }
 
-  edit(inmovilizacion:any){
-    this.inmovilizacion = inmovilizacion;
+  edit(entrada:any){
+    this.entrada = entrada;
     this.formEdit = true;
     this.formIndex = false;
   }

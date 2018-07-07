@@ -387,53 +387,36 @@
                 <i class="fa fa-angle-right"></i> 
                 Factura
               </a>
-          </li>
-          <ul class="nav flex-column nav-second-level">
-            <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'menu-fnlq' }">
-              <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('menu-fnlq')">
-                Parqueadero <i class="fa fa-angle-right"></i>
-              </a>
-              <ul class="nav flex-column nav-third-level">
-                <li class="nav-item">
-                  <a class="nav-link" routerLink="mparqEntrada"  [ngClass]="{'active' : ( addActive === 'mparqEntrada')}" (click)="addActiveMenu('mparqEntrada')">
-                    <i class="fa fa-angle-right"></i>
-                    Entradas
-                  </a>
-                </li>
-              </ul>
-              <!-- /.nav-third-level --> 
-            </li>
-          </ul>
-        </ul>
+          </li>        </ul>
         <!-- /.nav-second-level --> 
       </li>
 
-      <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-personal' }"> 
-        <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-personal')">
-          Modulo Personal<i class="fa fa-angle-down "></i>
-        </a>
-        <ul class="nav flex-column nav-second-level">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="mpersonalFuncionario"  [ngClass]="{'active' : ( addActive === 'mpersonalFuncionario')}" (click)="addActiveMenu('mpersonalFuncionario')">
-              <i class="fa fa-angle-right"></i> 
-              Hoja de vida
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="mpersonalTalonario"  [ngClass]="{'active' : ( addActive === 'mpersonalTalonario')}" (click)="addActiveMenu('mpersonalTalonario')">
-              <i class="fa fa-angle-right"></i> 
-              Talonarios comparendos
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="mpersonalAsignacion"  [ngClass]="{'active' : ( addActive === 'mpersonalAsignacion')}" (click)="addActiveMenu('mpersonalAsignacion')">
-              <i class="fa fa-angle-right"></i> 
-              Gestión de rangos
-            </a>
-          </li>
-        </ul>
-        <!-- /.nav-second-level --> 
-      </li>
+    <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-personal' }"> 
+      <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-personal')">
+        Modulo Personal<i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-second-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mpersonalFuncionario"  [ngClass]="{'active' : ( addActive === 'mpersonalFuncionario')}" (click)="addActiveMenu('mpersonalFuncionario')">
+            <i class="fa fa-angle-right"></i> 
+            Hoja de vida
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mpersonalTalonario"  [ngClass]="{'active' : ( addActive === 'mpersonalTalonario')}" (click)="addActiveMenu('mpersonalTalonario')">
+            <i class="fa fa-angle-right"></i> 
+            Talonarios comparendos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mpersonalAsignacion"  [ngClass]="{'active' : ( addActive === 'mpersonalAsignacion')}" (click)="addActiveMenu('mpersonalAsignacion')">
+            <i class="fa fa-angle-right"></i> 
+            Gestión de rangos
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav-second-level --> 
+    </li>
 
     <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-gestion-documental' }"> 
       <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-gestion-documental')">
@@ -450,6 +433,21 @@
           <a class="nav-link" routerLink="mgdDocumento"  [ngClass]="{'active' : ( addActive === 'mgdDocumento')}" (click)="addActiveMenu('mgdDocumento')">
             <i class="fa fa-angle-right"></i> 
             Buscar documento
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav-second-level --> 
+    </li>
+
+    <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-parqueadero' }"> 
+      <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-parqueadero')">
+        Parqueadero<i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-second-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mparqEntrada"  [ngClass]="{'active' : ( addActive === 'mparqEntrada')}" (click)="addActiveMenu('mparqEntrada')">
+            <i class="fa fa-angle-right"></i>
+            Entradas
           </a>
         </li>
       </ul>
