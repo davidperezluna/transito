@@ -28,6 +28,8 @@ import { NewRnaCiudadanoComponent } from './newRnaCiudadano/newRnaCiudadano.comp
 import { NewRnaSustratoComponent } from './newRnaSustrato/newRnaSustrato.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
 import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/newRna.matriculaInicial.component';
+import { NewRnaRadicadoCuentaComponent } from './rna/tramiteRadicadoCuenta/newRna.radicadoCuenta.component'; 
+
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 
@@ -61,6 +63,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaCiudadanoComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
+        NewRnaRadicadoCuentaComponent,
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -89,6 +92,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaCiudadanoComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
+        NewRnaRadicadoCuentaComponent,
     ],
     providers:[TramiteSolicitudService,EmpresaService]
 })

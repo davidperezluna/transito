@@ -201,6 +201,9 @@
                         <div class="tab-pane" id="2" role="tabpanel"> 
                             <appRna-traspaso [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso>
                         </div>
+                        <div class="tab-pane" id="4" role="tabpanel"> 
+                            <appRna-radicado-cuenta [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-radicado-cuenta>
+                        </div>
                         <div class="tab-pane" id="21" role="tabpanel"> 
                             <appRna-duplicado-placa  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
                         </div>

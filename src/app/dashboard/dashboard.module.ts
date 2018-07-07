@@ -20,7 +20,7 @@ import { MunicipioModule } from './municipio/municipio.module';
 import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
 import { ServicioModule } from './servicio/servicio.module';
 import { ModuloModule } from './modulo/modulo.module';
-import { TramiteModule } from './tramite/tramite.module';
+import { TramiteModule } from './tramite/tramite.module'; 
 import { AlmacenModule } from './almacen/almacen.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
