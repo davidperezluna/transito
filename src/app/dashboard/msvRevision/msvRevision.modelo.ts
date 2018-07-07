@@ -1,14 +1,14 @@
 export class msvRevision{
 	constructor(
 		public id:number,
-		public fecha_recepcion: string,
-		public fecha_devolucion: string,
-		public fecha_otorgamiento: string,
+		public fechaRecepcion: string,
+		public fechaDevolucion: string,
+		public fechaOtorgamiento: string,
 		public estado: boolean,
 		public empresaId: number,
 		public personaContacto: string,
 		public cargo: string,
-		public funcionario: string,
+		public funcionarioId: string,
 		public correo: string
 
 	){}

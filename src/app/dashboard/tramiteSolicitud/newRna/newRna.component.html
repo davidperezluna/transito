@@ -47,7 +47,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                            {{vehiculo.placa}}
+                                            {{vehiculo.cfgPlaca?.numero}}
                                             </td>
                                             <td> 
                                                 {{vehiculo.motor}}
@@ -198,12 +198,25 @@
                         <div class="tab-pane" id="sustrato" role="tabpanel"> 
                             <appRna-sustrato [factura] = "factura"  [ciudadanoPropietario] = "ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-sustrato>
                         </div>
+
                         <div class="tab-pane" id="2" role="tabpanel"> 
                             <appRna-traspaso [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso>
                         </div>
+<<<<<<< HEAD
                         <div class="tab-pane" id="4" role="tabpanel"> 
                             <appRna-radicado-cuenta [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-radicado-cuenta>
                         </div>
+=======
+
+                        <div class="tab-pane" id="10" role="tabpanel"> 
+                            <appRna-transformacion [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
+                        </div>
+
+                        <div class="tab-pane" id="58" role="tabpanel"> 
+                            <appRna-cambioConjunto [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambioConjunto>
+                        </div>
+
+>>>>>>> 9d4e44cc044ed00432a46c5d2534a017ec42b355
                         <div class="tab-pane" id="21" role="tabpanel"> 
                             <appRna-duplicado-placa  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
                         </div>
