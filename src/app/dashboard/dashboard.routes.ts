@@ -55,6 +55,7 @@ import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
+import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
@@ -122,6 +123,7 @@ export const DashboardRoutes: Route[] = [
         ...FacturaRoutes,
         ...TramiteFacturaRoutes,
         ...TramiteSolicitudRoutes,
+        ...TramiteSolicitudRnmaRoutes,
         ...SustratoRoutes,
         ...GestionTransportePublicoRoutes,
         ...EmpresaRoutes,

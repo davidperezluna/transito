@@ -54,6 +54,7 @@ import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
 import { MsvTCAsignacionModule } from './msvTCAsignacion/msvTCAsignacion.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
+import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
@@ -139,6 +140,7 @@ import {RightsidebarComponent} from '../shared/index';
       FacturaModule,
       TramiteFacturaModule,
       TramiteSolicitudModule,
+      TramiteSolicitudRnmaModule,
       SustratoModule,
       GestionTransportePublicoModule,
       EmpresaModule,
