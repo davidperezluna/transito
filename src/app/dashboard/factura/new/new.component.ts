@@ -118,13 +118,10 @@ constructor(
     let identity = this._loginService.getIdentity();
 
     this.factura = new Factura(null,null, null, null, null, null, null, null, null);
-
-    let datos = {
-      'identificacion':identity.Ciudadano
-    } 
+  
     var datePiper = new DatePipe(this.date);
     let token = this._loginService.getToken();
-    this._FuncionarioService.searchActivo(datos,token).subscribe(
+    this._FuncionarioService.searchLogin(identity,token).subscribe(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

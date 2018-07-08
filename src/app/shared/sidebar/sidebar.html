@@ -450,6 +450,12 @@
             Entradas
           </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="mparqSalida"  [ngClass]="{'active' : ( addActive === 'mparqSalida')}" (click)="addActiveMenu('mparqSalida')">
+              <i class="fa fa-angle-right"></i>
+              Salidas
+            </a>
+          </li>
       </ul>
       <!-- /.nav-second-level --> 
     </li>
