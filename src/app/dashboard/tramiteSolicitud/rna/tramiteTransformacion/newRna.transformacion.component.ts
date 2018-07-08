@@ -18,14 +18,19 @@ export class NewRnaTransformacionComponent implements OnInit {
     @Input() vehiculo: any = null;
     public errorMessage;
     public respuesta;
-    public combustibles: any;
+    public tipoPotenciacionSelect: any;
     public nuevoModelo: any;
     public datos = {
         'newData': null,
         'oldData': null,
-        'sustrato': null,
+        'tipoPotenciacion': null,
         'tramiteFactura': null,
     };
+    public tiposPotenciacion = [
+        {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
+        {'value': 'Reparacion de motor y cambio de conjunto', 'label': 'Reparación de motor y cambio de conjunto'},
+        {'value': 'Reparacion de motor', 'label': 'Reparación de motor'},
+    ];
 
     constructor(
         private _CombustibleService: CombustibleService,
@@ -35,16 +40,15 @@ export class NewRnaTransformacionComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.vehiculo.combustibleId = 4;
-        
 
     }
     
     enviarTramite(){
         
         let token = this._loginService.getToken();
-
+        console.log(this.vehiculo);
         this.vehiculo.modelo = this.nuevoModelo    
+        this.vehiculo.placa = this.vehiculo.cfgPlaca.numero    
         this.vehiculo.municipioId = this.vehiculo.municipio.id   
         this.vehiculo.lineaId = this.vehiculo.linea.id   
         this.vehiculo.colorId = this.vehiculo.color.id   
@@ -58,7 +62,8 @@ export class NewRnaTransformacionComponent implements OnInit {
             if(this.respuesta.status == 'success'){
                 this.datos.newData = this.nuevoModelo;
                 this.datos.oldData = this.vehiculo.modelo;
-                this.datos.tramiteFactura =31;
+                this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
+                this.datos.tramiteFactura =10;
                 this.readyTramite.emit(this.datos);
             }
             error => {

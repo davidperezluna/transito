@@ -1,0 +1,56 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Certificado de Tradición 
+                </h5>
+                <small>Todos los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <form #certificadoTradicionForm="ngForm" class="container">
+                <div class="row justify-content-center container">
+                    <div #forma1 class="form-group row"> 
+                         <!--caja de texto-->
+                         <div class="col-xs-12 col-lg-6" >
+                                <label> Nro. de solicitud RUNT
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.nroRunt" name="nroRunt" type="text" required />
+                            </div>
+                            <!--fin caja -->                         
+                        <!-- lista de motivos -->
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo de certificado 
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control"  [(ngModel)]="datos.tipoCertificadoTradicion" name="tipoCertificadoTradicion" required>
+                                <option value="Certificado de tradición sin historial">Certificado de tradición sin historial</option>
+                                <option value="Certificado de tradición con historial">Certificado de tradición con historial</option>                                
+                            </select>
+                        </div>
+                        <!--fin lista-->                                         
+                        <!--caja observacion-->
+                        <div class="col-xs-12 col-lg-12 form-group" >
+                                <label>Observación certificado de tradición</label>
+                                <textarea class="form-control" [(ngModel)]="datos.observacion" name="observacion" placeholder="Observación"></textarea>
+                            </div>                        
+                        <!--fin observacion-->                        
+                        <!--nunca borrar siempre ira en las todas las paginas -->                      
+                        
+                        <!--fin no borrar jamas jajajajajajajaja-->                 
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right"  [disabled]="certificadoTradicionForm.invalid" >Enviar</button>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

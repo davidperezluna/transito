@@ -28,6 +28,7 @@ import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
 import {  msvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
 import {  msvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import {  msvRevisionRoutes } from './msvRevision/msvRevision.routes';
+import {  msvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
 
 import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
@@ -54,6 +55,7 @@ import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
+import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
@@ -95,6 +97,7 @@ export const DashboardRoutes: Route[] = [
         ...msvCaracterizacion,
         ...msvEvaluacionRoutes,
         ...msvRevisionRoutes,
+        ...msvCategoriaRoutes,
         ...MgdDocumentoRoutes,
         ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,
@@ -120,6 +123,7 @@ export const DashboardRoutes: Route[] = [
         ...FacturaRoutes,
         ...TramiteFacturaRoutes,
         ...TramiteSolicitudRoutes,
+        ...TramiteSolicitudRnmaRoutes,
         ...SustratoRoutes,
         ...GestionTransportePublicoRoutes,
         ...EmpresaRoutes,
