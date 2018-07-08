@@ -30,13 +30,10 @@ import { NewRnaSustratoComponent } from './newRnaSustrato/newRnaSustrato.compone
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
 import { NewRnaTramiteInscripcionAlertaPrendaComponent } from './rna/tramiteInscripcionAlertaPrenda/newRna.inscripcionAlertaPrenda.component';
 import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/newRna.matriculaInicial.component';
-<<<<<<< HEAD
 import { NewRnaRadicadoCuentaComponent } from './rna/tramiteRadicadoCuenta/newRna.radicadoCuenta.component'; 
 
-=======
 import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRna.transformacion.component';
 import { NewRnaCambioConjuntoComponent } from './rna/tramiteCambioConjunto/newRna.cambioConjunto.component';
->>>>>>> 9d4e44cc044ed00432a46c5d2534a017ec42b355
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 
@@ -71,12 +68,9 @@ import { SelectModule } from 'angular2-select';
         NewRnaCiudadanoComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
-<<<<<<< HEAD
         NewRnaRadicadoCuentaComponent,
-=======
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent
->>>>>>> 9d4e44cc044ed00432a46c5d2534a017ec42b355
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -106,12 +100,9 @@ import { SelectModule } from 'angular2-select';
         NewRnaCiudadanoComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
-<<<<<<< HEAD
         NewRnaRadicadoCuentaComponent,
-=======
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent 
->>>>>>> 9d4e44cc044ed00432a46c5d2534a017ec42b355
     ],
     providers:[TramiteSolicitudService,EmpresaService,AlertaService]
 })

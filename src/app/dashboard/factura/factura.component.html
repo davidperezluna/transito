@@ -1,21 +1,18 @@
 <div class="container" >
-    <div  class="row align-items-center justify-content-between" *ngIf='!formShow'>
-      <div class="col-11 col-sm-12 page-title">
-        <h3>Módulo de Configuración</h3>
-        <p>Factura</p> 
-      </div>
-      <div class="col text-right ">
-        <div class="btn-group pull-right">
-          <button (click)="onNew()" *ngIf='formIndex' class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-          <button (click)="onNewTramite()" *ngIf='formShow' class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Tramite</span> <i class="ti-save ml-2"></i></button>
-        </div>
-      </div>
-    </div>
+    <hr>
     <div class="row" *ngIf='formIndex'>
       <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="card-title">Listados de registros encontrados</h5>
+              <h5 class="card-title" *ngIf='!formShow'>
+                  Módulo de Financiera y Liquidaciones
+                  <br>
+                  <small>Facturas</small>
+                  <div class="btn-group pull-right">
+                    <button (click)="onNew()" *ngIf='formIndex' class="btn btn-success btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+                    <button (click)="onNewTramite()" *ngIf='formShow' class="btn btn-success btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Tramite</span> <i class="ti-save ml-2"></i></button>
+                  </div>
+              </h5>
             </div>
             <div class="card-body">
               <table class="table " id="dataTables-example">
@@ -23,6 +20,7 @@
                   <tr>
                       <th>Id</th>
                       <th>Número</th>
+                      <th>Fecha Creación</th>
                       <th>Acciones</th>
                   </tr>
                 </thead>
@@ -30,17 +28,20 @@
                   <tr class="odd" *ngFor="let factura of facturas; let i = index">
                     <td>{{factura.id}}</td>
                     <td>{{factura.numero}}</td>
+                    <td>{{ factura.fechaCreacion }}</td>
                     <td>
                       <div class="btn-group">
-                          <button (click)="editFactura(factura)" class="btn btn-outline-info" type="button" title="Editar">
+                          <button (click)="editFactura(factura)" class="btn btn-info" type="button" title="Editar">
                             <i class="fa fa-pencil"></i>
                           </button>
-                          <button (click)="deleteFactura(factura.id)"  class="btn btn-outline-danger" type="button" title="Eliminar">
+                          <button (click)="deleteFactura(factura.id)"  class="btn btn-danger" type="button" title="Eliminar">
                             <i class="fa fa-trash"></i>
                           </button>
-                          <button (click)="getTramiteFactura(factura)" class="btn btn-outline-info" type="button" title="Tramites">
-                            <i class="fa fa-tasks"></i>
-                          </button>
+                          <!--
+                            <button (click)="getTramiteFactura(factura)" class="btn btn-info" type="button" title="Tramites">
+                              <i class="fa fa-tasks"></i>
+                            </button>
+                          -->
                       </div>
                     </td>
                   </tr>

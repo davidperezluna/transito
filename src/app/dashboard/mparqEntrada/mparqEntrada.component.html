@@ -36,9 +36,9 @@
                   <td>{{ entrada.comparendo.vehiculo.placa }}</td>
                   <td>
                     <span *ngIf="!entrada.salida" class="alert alert-dismissible alert-danger">
-                      Pendiente Salida
+                      Pendiente autorización
                     </span>
-                    <span *ngIf="entrada.salida">
+                    <span *ngIf="entrada.fechaSalida">
                       {{ entrada.fechaSalida}}
                     </span>
                   </td>
