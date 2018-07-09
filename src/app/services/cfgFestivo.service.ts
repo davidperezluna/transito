@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
+import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class cfgFestivoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/cfgFestivo";
+	private url = environment.apiUrl + "cfgFestivo";
 	public identity;
 	public token;
 

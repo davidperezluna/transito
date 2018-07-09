@@ -3,7 +3,7 @@ import { Comparendo } from '../comparendo.modelo';
 import { Inmovilizacion } from '../inmovilizacion.modelo';
 import { ComparendoService } from '../../../services/comparendo.service';
 import { LoginService } from '../../../services/login.service';
-import { AgenteTransitoService } from '../../../services/agenteTransito.service';
+import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
@@ -25,12 +25,12 @@ public respuesta;
 public agentesTransito: any;
 public sedesOperativas: any;
 public municipios: any;
-public agenteTransitoSelected: any;
+public funcionarioSelected: any;
 public municipioSelected: any;
 public sedeOperativaSelected: any;
-public agenteTransito: any;
+public funcionario: any;
 public sedeOperativa: any;
-public agenteTransitoReady = false;
+public funcionarioReady = false;
 public sedeOperativaReady = false;
 public validado = false;
 public comparendoExistente = false;
@@ -51,7 +51,7 @@ public municipioNacimientoSelected: any;
 constructor(
   private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
-  private _agenteTransitoService: AgenteTransitoService,
+  private _mpersonalFuncionarioService: MpersonalFuncionarioService,
   private _sedeOperativaService: SedeOperativaService,
   private _municipioService: MunicipioService,
   private _vechiculoService: VehiculoService,
@@ -70,7 +70,7 @@ constructor(
     this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.inmovilizacion = new Inmovilizacion(null,null,null,null,null,null,null,null);
 
-    this._agenteTransitoService.getAgenteTransitoSelect().subscribe(
+    this._mpersonalFuncionarioService.selectAgentes().subscribe(
         response => {
           this.agentesTransito = response;
         }, 
@@ -115,7 +115,7 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.comparendo.agenteTransitoId = this.agenteTransitoSelected;
+    this.comparendo.funcionarioId = this.funcionarioSelected;
     this.comparendo.municipioId = this.municipioSelected;
     this.comparendo.vehiculoId = this.vehiculo.id;
     this.comparendo.ciudadanoId = this.ciudadano.id;
@@ -153,14 +153,14 @@ constructor(
 		}); 
   }
 
-  changedAgenteTransito(e){
+  changedMpersonalFuncionario(e){
     if (e) {
      let token = this._loginService.getToken();
-     this._agenteTransitoService.showAgenteTransito(token,e).subscribe(
+     /*this._mpersonalFuncionarioService.showMpersonalFuncionario(token,e).subscribe(
         response => {
-          this.agenteTransito = response;
-          this.agenteTransitoReady = true;
-          console.log(this.agenteTransito);
+          this.mpersonalFuncionario = response;
+          this.funcionarioReady = true;
+          console.log(this.mpersonalFuncionario);
         }, 
         error => {
           this.errorMessage = <any>error;
@@ -170,7 +170,7 @@ constructor(
             alert("Error en la petición");
           }
         }
-      );
+      );*/
     }
   }
 

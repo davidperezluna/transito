@@ -1,3 +1,4 @@
+<hr>
 <div class="row">
     <div class="col-md-12">
         <form #facturaForm="ngForm">
@@ -224,8 +225,16 @@
                 </div>
                 <br>
                 <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                    <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button" >Enviar</button>
+                    <div class="btn-group">
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                        <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                    </div>
                 </div>    
             </div>
         </div>

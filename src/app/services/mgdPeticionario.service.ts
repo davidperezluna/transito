@@ -2,10 +2,11 @@ import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
 import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class MgdPeticionarioService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mgdpeticionario";
+	private url = environment.apiUrl + "mgdpeticionario";
 	public identity;
 	public token;
 

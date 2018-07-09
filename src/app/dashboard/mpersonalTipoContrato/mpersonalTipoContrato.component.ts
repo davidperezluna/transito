@@ -39,7 +39,8 @@ export class MpersonalTipoContratoComponent implements OnInit {
         result.dismiss === swal.DismissReason.timer
       ) {
       }
-    })
+    });
+    
     this._TipoContratoService.index().subscribe(
 				response => {
           this.tiposContrato = response.data;

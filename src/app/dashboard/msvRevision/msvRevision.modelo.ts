@@ -1,4 +1,4 @@
-export class msvRevision{
+export class MsvRevision{
 	constructor(
 		public id:number,
 		public fechaRecepcion: string,

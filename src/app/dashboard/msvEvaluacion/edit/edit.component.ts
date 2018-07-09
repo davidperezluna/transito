@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvEvaluacion } from '../msvEvaluacion.modelo';
-import { msvEvaluacionService } from '../../../services/msvEvaluacion.service';
+import { MsvEvaluacionService } from '../../../services/msvEvaluacion.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -16,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _evaluacionService: msvEvaluacionService,
+  private _evaluacionService: MsvEvaluacionService,
   private _loginService: LoginService,
   ){}
 

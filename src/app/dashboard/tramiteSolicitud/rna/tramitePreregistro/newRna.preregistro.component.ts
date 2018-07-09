@@ -13,6 +13,8 @@ import {VehiculoService} from '../../../../services/vehiculo.service';
 import {SedeOperativaService} from '../../../../services/sedeOperativa.service';
 import {MarcaService} from '../../../../services/marca.service';
 import swal from 'sweetalert2';
+declare var $: any;
+
 @Component({
   selector: 'appRna-new-preregistro',
   templateUrl: './newRna.preregistro.component.html'
@@ -20,7 +22,11 @@ import swal from 'sweetalert2';
 export class NewRnaPreregistroComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Output() cancelarTramite = new EventEmitter<any>();
+public formIndex = true;
+public formNew = false;
+public table:any; 
 public vehiculo: Vehiculo;
+public vehiculos;
 public municipios:any;
 public errorMessage:any;
 public habilitar:any;
@@ -64,114 +70,14 @@ constructor(
 
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this._lineaService.getLineaSelect().subscribe(
+    
+    this._VehiculoService.indexRna().subscribe(
       response => {
-        this.lineas = response;
+        this.vehiculos = response.data;
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+        }, 100);
       }, 
-      error => { 
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._MarcaService.getMarcaSelect().subscribe(
-      response => {
-        this.marcas = response;
-      }, 
-      error => { 
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._MunicipioService.getMunicipioSelect().subscribe(
-      response => {
-        this.municipios = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-      response => {
-        this.sedesOperativas = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ClaseService.getClaseSelect().subscribe(
-      response => {
-        this.clases = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._CarroceriaService.getCarroceriaSelect().subscribe(
-      response => {
-        this.carrocerias = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ServicioService.getServicioSelect().subscribe(
-      response => {
-        this.servicios = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ColorService.getColorSelect().subscribe(
-      response => {
-        this.colores = response;
-      },  
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._CombustibleService.getCombustibleSelect().subscribe(
-      response => {
-        this.combustibles = response;
-      },  
       error => {
         this.errorMessage = <any>error;
 
@@ -187,7 +93,6 @@ constructor(
     this.cancelarTramite.emit(true);
 }
   onEnviar(){
-
     this.vehiculo.municipioId = this.municipioSelected;
     this.vehiculo.lineaId = this.lineaSelected;
     this.vehiculo.claseId = this.claseSelected;
@@ -224,6 +129,155 @@ constructor(
 				}
 
 		}); 
+  }
+
+  iniciarTabla(){
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+           oPaginate: {
+           sFirst: '<<',
+           sPrevious: '<',
+           sNext: '>',
+           sLast: '>>'
+        }
+      }
+   });
+   this.table = $('#dataTables-example').DataTable();
+  }
+
+  onNew(){
+    this._lineaService.getLineaSelect().subscribe(
+      response => {
+        this.lineas = response;
+      }, 
+      error => { 
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._MarcaService.getMarcaSelect().subscribe(
+      response => {
+        this.marcas = response;
+      }, 
+      error => { 
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._MunicipioService.getMunicipioSelect().subscribe(
+      response => {
+        this.municipios = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+      response => {
+        this.sedesOperativas = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._ClaseService.getClaseSelect().subscribe(
+      response => {
+        this.clases = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._CarroceriaService.getCarroceriaSelect().subscribe(
+      response => {
+        this.carrocerias = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._ServicioService.getServicioSelect().subscribe(
+      response => {
+        this.servicios = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._ColorService.getColorSelect().subscribe(
+      response => {
+        this.colores = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._CombustibleService.getCombustibleSelect().subscribe(
+      response => {
+        this.combustibles = response;
+      },  
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this.formNew = true;
+    this.formIndex = false;
+    this.table.destroy();
   }
 
   changedDepartamento(e){

@@ -1,4 +1,56 @@
-<div class="row">
+<div class="row" *ngIf="formIndex">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <b class="text-uppercase">Módulo RNA</b>
+                    <br>
+                    <small>Pre-registro</small>
+                    <div class="btn-group pull-right">
+                    <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                        <i class="fa fa-plus"></i>
+                        <span class="text">Nuevo</span>
+                    </button>
+                    </div>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                        <th>Placa </th>
+                        <th>Motor</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>linea</th> 
+                        <th>valor</th>
+                        <th>chasis</th>
+                        <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let vehiculo of vehiculos; let i = index">
+                        <td>{{vehiculo.placa}}</td>
+                        <td>{{vehiculo.motor}}</td>
+                        <td>{{vehiculo.modelo}}</td>
+                        <td>{{vehiculo.linea.marca.nombre}}</td>
+                        <td>{{vehiculo.linea.nombre}}</td>
+                        <td>{{vehiculo.valor}}</td>
+                        <td>{{vehiculo.chasis}}</td>
+                        <td>
+                            <button (click)="editVehiculo(vehiculo)" class="btn btn-outline-info" type="button">Editar</button> 
+                            <button (click)="deleteVehiculo(vehiculo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                        </td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <!-- /.table-responsive --> 
+            </div>  
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="formNew">
     <div class="col-md-12">
         <div class="card">
         <div class="card-body">

@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvCaracterizacion } from '../msvCaracterizacion.modelo';
-import { msvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
+import { MsvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -16,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _caracterizacionService: msvCaracterizacionService,
+  private _CaracterizacionService: MsvCaracterizacionService,
   private _loginService: LoginService,
   ){}
 
@@ -26,7 +25,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._caracterizacionService.editCaracterizacion(this.msvCaracterizacion,token).subscribe(
+		this._CaracterizacionService.editCaracterizacion(this.msvCaracterizacion,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

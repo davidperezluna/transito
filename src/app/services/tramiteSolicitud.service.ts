@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { environment } from 'environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TramiteSolicitudService {
-	public url = 'http://localhost/GitHub/colossus-sit/web/app_dev.php/tramitesolicitud';
+	private url = environment.apiUrl + "tramitesolicitud";
 	public identity;
 	public token;
 

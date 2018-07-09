@@ -1,0 +1,108 @@
+<div class="row ">
+    <div class="container">
+        <div class="card">
+        <div class="card-body ">
+            <h5 class="m-0">Nueva persona natural</h5>
+            <hr> 
+            <div class="row justify-content-center container">
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Tipo Identificacion*</label>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="departamentoId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Identificacion*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion" placeholder="" type="number"
+                            required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Fecha Expedición Documento</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.fechaExpedicionDocumento" name="fechaExpedicionDocumento" placeholder=""
+                            type="date" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Genero*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="generos"
+                            [(ngModel)]="generoSelected"
+                            required
+                            name="generoId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Primer Nombre*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.primerNombreUsuario" name="primerNombre" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Segundo Nombre*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.segundoNombreUsuario" name="segundoNombre" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Primer Apellido*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.primerApellidoUsuario" name="primerApellido" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Segundo Apellido*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.segundoApellidoUsuario" name="segundoApellido" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Grupo Sanguineo*</label>
+                        <ng-select [multiple]="false" [options]="gruposSanguineos" [(ngModel)]="grupoSanguineoSelected" required name="grupoSanguineoId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Fecha Nacimiento*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" placeholder=""
+                            type="date" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Municipio Nacimiento*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="municipios"
+                            [(ngModel)]="municipioNacimientoSelected"
+                            required
+                            name="departamentoId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Municipio Residencia*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="municipios"
+                            [(ngModel)]="municipioResidenciaSelected"
+                            required
+                            name="departamentoId">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Edad*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.edad" name="edad" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Telefono*</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefono" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Direccion Residencia</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Direccion Trabajo</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Correo</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correo" placeholder="" type="email" required>
+                    </div>
+                </div>   
+        </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" class="btn btn-success pull-right">Registrar</button>
+            </div>   
+        </div>
+    </div>
+</div>

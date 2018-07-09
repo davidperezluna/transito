@@ -1,20 +1,19 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { msvEvaluacionService } from '../../services/msvEvaluacion.service';
+import { MsvEvaluacionService } from '../../services/msvEvaluacion.service';
 import { EmpresaService } from '../../services/empresa.service';
-import { msvRevisionService } from '../../services/msvRevision.service';
+import { MsvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
-import { msvEvaluacion } from './msvEvaluacion.modelo';
+import { MsvEvaluacion } from './msvEvaluacion.modelo';
 import { Empresa } from '../empresa/empresa.modelo';
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
-import { msvRevision } from '../msvRevision/msvRevision.modelo';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
   templateUrl: './msvEvaluacion.component.html'
 })
-export class msvEvaluacionComponent implements OnInit {
+export class MsvEvaluacionComponent implements OnInit {
   public errorMessage;
   public id;
 	public respuesta;
@@ -35,12 +34,12 @@ export class msvEvaluacionComponent implements OnInit {
   public empresas:any;
   public miEmpresa:Empresa;
   public revisiones:any = false;
-  public msvEvaluacion: msvEvaluacion;
+  public msvEvaluacion: MsvEvaluacion;
 
   constructor(
-    private _EvaluacionService: msvEvaluacionService,
+    private _EvaluacionService: MsvEvaluacionService,
     private _EmpresaService: EmpresaService,
-    private _RevisionService: msvRevisionService,
+    private _RevisionService: MsvRevisionService,
 		private _loginService: LoginService,
     ){}
     

@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvCategoria } from '../msvCategoria.modelo';
-import { msvCategoriaService } from '../../../services/msvCategoria.service';
+import { MsvCategoriaService } from '../../../services/msvCategoria.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -16,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _CategoriaService: msvCategoriaService,
+  private _CategoriaService: MsvCategoriaService,
   private _loginService: LoginService,
   ){}
 

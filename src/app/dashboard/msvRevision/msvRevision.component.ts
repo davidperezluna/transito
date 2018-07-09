@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { msvRevisionService } from '../../services/msvRevision.service';
+import { MsvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
-import { msvRevision } from './msvRevision.modelo';
+import { MsvRevision } from './msvRevision.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -9,7 +9,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './msvRevision.component.html'
 })
-export class msvRevisionComponent implements OnInit {
+export class MsvRevisionComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -18,10 +18,10 @@ export class msvRevisionComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public msvRevision: msvRevision;
+  public msvRevision: MsvRevision;
 
   constructor(
-    private _RevisionService: msvRevisionService,
+    private _RevisionService: MsvRevisionService,
 		private _loginService: LoginService,
     ){}
     

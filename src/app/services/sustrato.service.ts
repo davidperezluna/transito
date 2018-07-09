@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { environment } from 'environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class SustratoService {
-	public url = 'http://localhost/GitHub/colossus-sit/web/app_dev.php/sustrato';
+	private url = environment.apiUrl + "sustrato";
 	public identity;
 	public token;
 

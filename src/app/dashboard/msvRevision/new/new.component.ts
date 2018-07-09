@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvRevision } from '../msvRevision.modelo';
-import { msvRevisionService } from '../../../services/msvRevision.service';
+import { MsvRevision } from '../msvRevision.modelo';
+import { MsvRevisionService } from '../../../services/msvRevision.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public msvRevision: msvRevision;
+public msvRevision: MsvRevision;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _msvRevisionService: msvRevisionService,
+  private _MsvRevisionService: MsvRevisionService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.msvRevision = new msvRevision(null, null, null, null, null, null,null,null,null,null);
+    this.msvRevision = new MsvRevision(null, null, null, null, null, null,null,null,null,null);
   }
   onCancelar(){
     this.ready.emit(true);
@@ -30,7 +30,7 @@ constructor(
     let token = this._loginService.getToken();
     
     console.log(this.msvRevision);
-		this._msvRevisionService.register(this.msvRevision,token).subscribe(
+		this._MsvRevisionService.register(this.msvRevision,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

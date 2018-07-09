@@ -63,23 +63,21 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
       }
     })
 		this._ColorService.getColor().subscribe(
-				response => {
-          // this.colors = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100); 
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+      response => {
+        // this.colors = response.data;
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+        }, 100); 
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
-      
-
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -97,6 +95,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -135,8 +134,8 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
+                  this.respuesta = response;
+                  this.ready(true);
               }, 
             error => {
               this.errorMessage = <any>error;
@@ -248,7 +247,6 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   }
 
   onEnviar(){
-    
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     this.vehiculo.placa = this.cfgPlacaSelected;
     
@@ -271,7 +269,11 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
             html: html,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          }).then((result) => {
+            if (result.value) {
+              this.onCancelar();
+            }
+          });          
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -290,7 +292,6 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
     this.isError = false;
     this.isExist = false;
     this.ngOnInit();
-    
   }
 
 }

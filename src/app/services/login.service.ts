@@ -1,7 +1,7 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class LoginService {
@@ -18,7 +18,6 @@ export class LoginService {
 
 		return this._http.post(this.url+"/login", params, {headers: headers})
 							  .map(res => res.json());
-
 	}
 
 	register(user_to_register){

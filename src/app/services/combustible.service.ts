@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class CombustibleService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/combustible";
+	private url = environment.apiUrl + "combustible";
 	public identity;
 	public token;
 

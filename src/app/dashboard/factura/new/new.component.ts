@@ -118,13 +118,10 @@ constructor(
     let identity = this._loginService.getIdentity();
 
     this.factura = new Factura(null,null, null, null, null, null, null, null, null);
-
-    let datos = {
-      'identificacion':identity.Ciudadano
-    } 
+  
     var datePiper = new DatePipe(this.date);
     let token = this._loginService.getToken();
-    this._FuncionarioService.searchActivo(datos,token).subscribe(
+    this._FuncionarioService.searchLogin(identity,token).subscribe(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
@@ -259,6 +256,14 @@ constructor(
           this.isErrorVehiculo = false;
           this.isExistVehiculo = true;
           this.vehiculo=response.data[0].vehiculo;
+          this.factura.vehiculoId = this.vehiculo.id;
+          swal.close();
+        }
+        if (response.code == 400 ) {
+          this.msj = 'vehiculo encontrado';
+          this.isErrorVehiculo = false;
+          this.isExistVehiculo = true;
+          this.vehiculo=response.data;
           this.factura.vehiculoId = this.vehiculo.id;
           swal.close();
         }

@@ -2,10 +2,11 @@ import  {Injectable} from "@angular/core";
 import  {Http, Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
 import { LoggerService } from "../logger/services/logger.service";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class MpersonalFuncionarioService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mpersonalfuncionario";
+	private url = environment.apiUrl + "mpersonalfuncionario";
 	public identity;
 	public token;
 
@@ -71,11 +72,11 @@ export class MpersonalFuncionarioService {
  		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
 	}
 
-	searchActivo(datos,token){
+	searchLogin(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/search/activo", params, {headers: headers}).map(res => res.json());
+ 		return this._http.post(this.url+"/search/login", params, {headers: headers}).map(res => res.json());
 	}
 
 	searchCiudadano(datos,token){

@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class TipoIdentificacionService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/tipoidentificacion";
+	private url = environment.apiUrl + "tipoidentificacion";
 	public identity;
 	public token;
 
