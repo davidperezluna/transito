@@ -9,47 +9,50 @@
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <div class="row justify-content container">
-                    <div class="form-group  col-xs-12 col-lg-3">
-                        <label>Organismo de transito de que proviene <span class="text-danger">*</span></label>
-                       
-                    </div>
-                    <div class="form-group  col-xs-12 col-lg-9">
-                        <ng-select [multiple]="false" [options]="colores" [(ngModel)]="colorSelected" required name="colorId">
+                    <div class="center col-lg-8">
+                        <label>Organismo de transito de que proviene*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="municipios"
+                            [(ngModel)]="municipioSelected"
+                            required
+                            name="municipioId">
                         </ng-select>
-                       
                         <hr>
                     </div>
-                    
-                    
-                    <!-- <div class="row"> --><hr>
-                        <div class="form-group col-xs-12 col-lg-6">
-                            <hr>
-                            <label>Tipo documento empresa afiliadora <span class="text-danger">*</span></label>
-                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicioId">Tipo documento empresa afiliadora 
-                            </ng-select>
-                        </div>
-                        <div class="form-group col-xs-12 col-lg-6">
-                            <label>Nro. Documento<span class="text-danger">*</span></label>
-                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicioId">
-                            </ng-select>
-                        </div>
-                    <!-- </div> -->
-                    
-                    <div class="col-xs-12 col-lg-6">
+                    <!-- solo cuando sea publico -->
+                     <!-- <div class="row col-lg-12" *ngIf='transportePublico'>  -->
+                    <div class="form-group col-xs-12 col-lg-6"  >
+                        <label>Tipo documento empresa afiliadora <span class="text-danger">*</span></label>
+                        <ng-select 
+                            [multiple]="false" 
+                            [options]="tiposIdentificacion" 
+                            [(ngModel)]="tipoIdentificacionSelected" 
+                            required 
+                            name="tipoIdentificacionId">
+                        </ng-select>
+                    </div>
+                    <div class="form-group col-xs-12 col-lg-6">
+                        <label>Nro. Documento<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="numeroDocumento"  name="numeroDocumento" type="text" required />
+                    </div>
+                    <!-- </div>  -->
+                    <!-- fin solo publico -->
+                    <div class="col-xs-12 col-lg-3">
                         <label>Fecha de ingreso</label>
-                        <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                        <input class="form-control" [(ngModel)]="fechaIngreso" name="fechaIngreso" type="date" required />
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-3">
                         <label>Nro. guiá de llegada</label>
-                        <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                        <input class="form-control" [(ngModel)]="guiaLlegada" name="guiaLlegada" type="text" required />
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-3">
                         <label>Empresa de envió</label>
-                        <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                        <input class="form-control" [(ngModel)]="empresaEnvio" name="empresaEnvio" type="text" required />
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-3">
                         <label>Nro. RUT</label>
-                        <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                        <input class="form-control" [(ngModel)]="rut" name="rut" type="text" required />
                     </div>
                 </div>
             </div>
