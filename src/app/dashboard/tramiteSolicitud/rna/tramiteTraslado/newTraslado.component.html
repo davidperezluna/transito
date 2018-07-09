@@ -10,25 +10,25 @@
             <form #formNew="ngForm">
                <div class="form-group row">
                   <div class="col-xs-12 col-lg-12">
-                     <label>Organismo Transito Destino</label>  
-                     <ng-select [multiple]="false" [options]="organismos" [(ngModel)]="organismoTransitoSelected" name="organismos" required>
+                     <label>Sede Operativa Destino</label>  
+                     <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="sedeOperativaSelected" name="sedes" required>
                      </ng-select>
                   </div>
                   <div class="col-xs-12 col-lg-12">
                      <label>Fecha salida<strong class="text-danger">*</strong></label>
-                     <input class="form-control" [(ngModel)]="TramiteTraslado.fechaSalida" name="fechaSaida" type="date" required />
+                     <input class="form-control" [(ngModel)]="datos.fechaSalida" name="fechaSalida" type="date" required />
                   </div>
                   <div class="col-xs-12 col-lg-12">
                      <label>Número Guía</label>
-                     <input class="form-control" [(ngModel)]="TramiteTraslado.numeroGuia" name="numeroGuia" type="text" required />
+                     <input class="form-control" [(ngModel)]="datos.numeroGuia" name="numeroGuia" type="text" required />
                   </div>
                   <div class="col-xs-12 col-lg-12">
                      <label>Nombre empresa</label>
-                     <input class="form-control" [(ngModel)]="TramiteTraslado.nombreEmpresa" name="nombreEmpresa" type="text" required />
+                     <input class="form-control" [(ngModel)]="datos.nombreEmpresa" name="nombreEmpresa" type="text" required />
                   </div>
                   <div class="col-xs-12 col-lg-12">
                      <label>Número RUNT</label>
-                     <input class="form-control" [(ngModel)]="TramiteTraslado.numeroGuia" name="numeroGuia" type="text" required />
+                     <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                   </div>
                </div>
             </form>

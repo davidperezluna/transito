@@ -3,6 +3,7 @@ import { LoginService } from '../../../../services/login.service';
 import { SedeOperativaService } from '../../../../services/sedeOperativa.service';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.service';
+import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2';
 
@@ -18,15 +19,15 @@ export class NewTrasladoComponent implements OnInit {
 public sedeOperativaSelected: any;
 public sedes: any;
 public tramiteFacturaSelected: any;
-public tramiteRealizado: any;
+public tramiteRealizado: any = false;
 public errorMessage;
 public respuesta;
 public datos = {
   'sedeOperarivaIdNew': null,
   'sedeOperarivaIdOld': null,
+  'fechaSalida': null,
   'numeroRunt': null,
   'numeroGuia': null,
-  'fechaSalida': null,
   'nombreEmpresa': null,
   'tramiteFactura': null,
 };
@@ -35,6 +36,7 @@ constructor(
   private _loginService: LoginService,
   private _TramiteSolicitudService: TramiteSolicitudService,
   private _TramiteTrasladoService: TramiteTrasladoService,
+  private _tramiteFacturaService: TramiteFacturaService,
   private _VehiculoService: VehiculoService,
   private _SedeOperativaService: SedeOperativaService
   ){}
@@ -67,7 +69,8 @@ constructor(
   });
   //consultar tramite solicitud con tramiterealizado.id
   let token = this._loginService.getToken();
-  this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
+  if(this.tramiteRealizado != false ){
+    this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
       response => {
           this.datos = response.data.datos
           console.log(response.data.datos);
@@ -82,6 +85,7 @@ constructor(
       }
   );
   }
+  }
   onCancelar(){
     this.ready.emit(true);
   }
@@ -89,16 +93,9 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    this.sedes.sedeOperativaId = this.sedeOperativaSelected
-    this.vehiculo.combustibleId = this.vehiculo.combustible.id    
-    this.vehiculo.municipioId = this.vehiculo.municipio.id   
-    this.vehiculo.lineaId = this.vehiculo.linea.id   
-    this.vehiculo.colorId = this.vehiculo.color.id   
-    this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-    this.vehiculo.claseId = this.vehiculo.clase.id   
-    this.vehiculo.servicioId = this.vehiculo.servicio.id 
+    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected
     
-    this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+    this._VehiculoService.editSedeOperativaVehiculo(this.vehiculo,token).subscribe(
       response => {
           this.respuesta = response; 
           if(this.respuesta.status == 'success'){

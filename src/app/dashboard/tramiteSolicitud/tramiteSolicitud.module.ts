@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
-import { EmpresaService } from '../../services/empresa.service';
 import { AlertaService } from '../../services/alerta.service';
 
 import { NewRnaComponent } from './newRna/newRna.component';
@@ -38,6 +36,7 @@ import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRn
 import { NewRnaCambioConjuntoComponent } from './rna/tramiteCambioConjunto/newRna.cambioConjunto.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
+import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
 
 
 
@@ -108,7 +107,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaCambioConjuntoComponent,
         NewTrasladoComponent
     ],
-    providers:[TramiteSolicitudService,EmpresaService,AlertaService,TramiteTrasladoService]
+    providers:[TramiteSolicitudService,AlertaService,TramiteTrasladoService]
 })
 
 export class TramiteSolicitudModule { }

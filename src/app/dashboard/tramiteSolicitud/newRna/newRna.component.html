@@ -280,7 +280,7 @@
                         </div>
 
                         <div class="tab-pane" id="3" role="tabpanel"> 
-                           <app-new-traslado (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-new-traslado>
+                           <app-new-traslado [vehiculo] = "vehiculo" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-new-traslado>
                         </div>
 
                         <div class="tab-pane" id="15" role="tabpanel"> 
