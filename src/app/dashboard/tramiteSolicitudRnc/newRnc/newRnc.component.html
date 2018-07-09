@@ -1,0 +1,104 @@
+<hr>
+    <div class="row"><!-- .row -->
+        <div class="container col-xs-12 col-lg-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Módulo RNC <small>Consultar pago</small></h5>
+                        </div>
+                        <div class="card-body">
+                            <form #formPay="ngForm"> 
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Número de factura <strong class="text-danger">*</strong></label>
+                                        <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="onCancelar()" class="btn btn-secondary">
+                                <i class="fa fa-times"></i>
+                                Cancel
+                            </button>
+                            <button class="btn btn-success pull-right" (click)="onSearchFactura()" [disabled]="formPay()">
+                                <i class="fa fa-search"></i>
+                                Consultar
+                            </button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 form-group" *ngIf="factura">
+            <div class="container col-xs-12 col-lg-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Solicitante</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-xs-12 col-lg-12" >
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Nombre: </strong>
+                                                    {{solicitante.primerNombre}} {{solicitante.primerApellido}}
+                                                </td>
+                                                <td>
+                                                     <strong>Identificación: </strong>
+                                                    {{solicitante.identificacion}}
+                                                </td>
+                                            </tr>
+                                        </tbody> 
+                                    </table> 
+                                </div>
+                            </div>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" *ngIf="factura">
+            <div class="card col-md-12 col-md-16">
+                <div class="card-header">
+                    <h6 class="card-title">Tramites</h6>
+                </div>
+                <div class="card-body"> 
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index"> 
+                            <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.id}}" role="tab">{{tramiteFactura.tramitePrecio.nombre}}<i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i></a> 
+                            <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
+                        </li>  
+
+                        <li class="nav-item" *ngIf='sustrato'>  
+                            <a class="nav-link " data-toggle="tab" href="#sustrato"  role="tab">Sustrato </a> 
+                        </li>
+                    </ul>
+                    
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane" id="realizado" role="tabpanel"> 
+                            <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
+                        </div>
+
+                        <div class="tab-pane" id="sustrato" role="tabpanel"> 
+                            <appRna-sustrato [factura] = "factura"  [ciudadanoPropietario] = "ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-sustrato>
+                        </div>
+
+                        <div class="tab-pane" id="2" role="tabpanel"> 
+                            <appRna-traspaso [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+  
+</div><!-- /.row -->

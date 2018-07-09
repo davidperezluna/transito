@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { msvCategoriaService } from '../../services/msvCategoria.service';
-import { msvRevisionService } from '../../services/msvRevision.service';
-import {LoginService} from '../../services/login.service';
-import { msvCategoria } from './msvCategoria.modelo';
+import { MsvCategoriaService } from '../../services/msvCategoria.service';
+import { LoginService } from '../../services/login.service';
+import { MsvCategoria } from './msvCategoria.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -10,7 +9,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './msvCategoria.component.html'
 })
-export class msvCategoriaComponent implements OnInit {
+export class MsvCategoriaComponent implements OnInit {
   public errorMessage;
   public id;
 	public respuesta;
@@ -30,10 +29,10 @@ export class msvCategoriaComponent implements OnInit {
   public nit:any; 
   public empresas:any;
   public revisiones:any = false;
-  public msvCategoria: msvCategoria;
+  public msvCategoria: MsvCategoria;
 
   constructor(
-    private _CategoriaService: msvCategoriaService,
+    private _CategoriaService: MsvCategoriaService,
 		private _loginService: LoginService,
     ){}
     

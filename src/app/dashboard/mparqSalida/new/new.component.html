@@ -3,19 +3,19 @@
     <div class="col-xs-12 col-lg-6 offset-lg-3">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nueva entrada</h5>
+                <h5 class="text-uppercase">Nueva salida</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
-                            <label>Fecha ingreso <strong class="text-danger">*</strong></label>
+                            <label>Fecha salida <strong class="text-danger">*</strong></label>
                             <br>
                             <b>{{ date|date:('dd/MM/yyyy') }}</b>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Hora ingreso <strong class="text-danger">*</strong></label>
+                            <label>Hora salida <strong class="text-danger">*</strong></label>
                             <br>
                             <b>{{ date|date:('HH:mm:ss a') }}</b>
                         </div>
@@ -24,41 +24,37 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>No. comparendo <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="entrada.numeroComparendo" name="numeroComparendo" type="text" required />
+                            <input class="form-control" [(ngModel)]="salida.numeroComparendo" name="numeroComparendo" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Placa <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="entrada.numeroPlaca" name="numeroPlaca" type="text" required />
+                            <label>Salida <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="salida.numeroSalida" name="numeroSalida" type="text" required />
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Placa <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="salida.numeroPlaca" name="numeroPlaca" type="text" required />
+                        </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>No. inventario <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="entrada.numeroInventario" name="numeroInventario" type="text" required />
+                            <input class="form-control" (blur)="onBuscarEntrada()" [(ngModel)]="salida.numeroInventario" name="numeroInventario" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Código grua <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="salida.numeroGrua" name="numeroGrua" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Valor grua <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="salida.valorGrua" name="valorGrua" type="numeric" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Código grua <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="entrada.numeroGrua" name="numeroGrua" type="text" required />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Hora inmovilizacion <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="entrada.horaInmovilizacion" name="horaInmovilizacion" type="time" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-8">
-                            <label>Lugar inmovilizacion <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="entrada.lugarInmovilizacion" name="lugarInmovilizacion" type="text" required />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Quien realizo comparendo <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="agentes" [(ngModel)]="agenteSelected" name="agentes" required>
-                                </ng-select>
+                            <label>Valor parqueadero <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="salida.valorParqueadero" name="valorParqueadero" type="numeric" required />
                         </div>
                     </div>
                 </form>

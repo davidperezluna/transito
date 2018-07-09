@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MparqEntradaService } from '../../../services/mparqEntrada.service';
+import { MparqEntradaSalidaService } from '../../../services/mparqEntradaSalida.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _EntradaService: MparqEntradaService,
+  private _EntradaService: MparqEntradaSalidaService,
   private _loginService: LoginService,
   ){}
 

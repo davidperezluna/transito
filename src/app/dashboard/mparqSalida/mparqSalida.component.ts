@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MparqSalidaService } from '../../services/mparqSalida.service';
+import { MparqEntradaSalidaService } from '../../services/mparqEntradaSalida.service';
 import {LoginService} from '../../services/login.service';
 import { MparqSalida } from './mparqSalida.modelo';
 import swal from 'sweetalert2';
@@ -21,7 +21,7 @@ export class MparqSalidaComponent implements OnInit {
   public entrada: MparqSalida;
 
   constructor(
-    private _SalidaService: MparqSalidaService,
+    private _SalidaService: MparqEntradaSalidaService,
 		private _loginService: LoginService,
     ){}
     

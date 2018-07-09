@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvRevision } from '../../msvRevision/msvRevision.modelo';
-import { msvRevisionService } from '../../../services/msvRevision.service';
+import { MsvRevision } from '../../msvRevision/msvRevision.modelo';
+import { MsvRevisionService } from '../../../services/msvRevision.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { LoginService } from '../../../services/login.service';
@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 })
 export class NewRevisionComponent implements OnInit {
 @Output() ready = new EventEmitter<any>( );
-public msvRevision: msvRevision;
+public msvRevision: MsvRevision;
 public contratistas: any;
 public contratistaSelected: any;
 public empresas: any;
@@ -22,14 +22,14 @@ public respuesta;
 public formNew = false;
 
 constructor(
-  private _msvRevisionService: msvRevisionService,
+  private _MsvRevisionService: MsvRevisionService,
   private _MsvPersonalFuncionarioService: MpersonalFuncionarioService,
   private _EmpresaService: EmpresaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.msvRevision = new msvRevision(null, null, null, null, null, null,null,null,null,null);
+    this.msvRevision = new MsvRevision(null, null, null, null, null, null,null,null,null,null);
 
 
     this._MsvPersonalFuncionarioService.selectContratistas().subscribe(
@@ -72,7 +72,7 @@ constructor(
     this.msvRevision.funcionarioId = this.contratistaSelected;
     this.msvRevision.empresaId = this.empresaSelected;
     
-		this._msvRevisionService.register(this.msvRevision,token).subscribe(
+		this._MsvRevisionService.register(this.msvRevision,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

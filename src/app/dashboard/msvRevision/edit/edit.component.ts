@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvRevision } from '../msvRevision.modelo';
-import { msvRevisionService } from '../../../services/msvRevision.service';
+import { MsvRevisionService } from '../../../services/msvRevision.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -16,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _revisionService: msvRevisionService,
+  private _revisionService: MsvRevisionService,
   private _loginService: LoginService,
   ){}
 

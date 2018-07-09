@@ -1,11 +1,11 @@
 import  {Injectable} from '@angular/core';
 import  {Http, Response,Headers} from '@angular/http';
+import { environment } from 'environments/environment';
 import  'rxjs/add/operator/map';
-import  {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class SedeOperativaService {
-	public url = 'http://localhost/GitHub/colossus-sit/web/app_dev.php/sedeoperativa';
+	private url = environment.apiUrl + "sedeoperativa";
 	public identity;
 	public token;
 

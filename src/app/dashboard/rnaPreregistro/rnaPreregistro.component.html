@@ -1,0 +1,65 @@
+<div class="container">
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Vehículos <small>Registrados</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>Placa </th>
+                  <th>Motor</th>
+                  <th>Modelo</th>
+                  <th>Marca</th>
+                  <th>linea</th> 
+                  <th>valor</th>
+                  <th>chasis</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let vehiculo of vehiculos; let i = index">
+                  <td>
+                    <span *ngIf="vehiculo.placa">
+                      {{ vehiculo.placa.numero }}
+                    </span>
+                    <span *ngIf="!vehiculo.placa">
+                      Sin Asignar
+                    </span>
+                  </td>
+                  <td>{{vehiculo.motor}}</td>
+                  <td>{{vehiculo.modelo}}</td>
+                  <td>
+                    <span *ngIf="vehiculo.linea">
+                        {{vehiculo.linea.marca.nombre}}
+                    </span>
+                  </td>
+                  <td>
+                    <span *ngIf="vehiculo.linea">
+                        {{vehiculo.linea.nombre}}
+                    </span>
+                  </td>
+                  <td>{{vehiculo.valor}}</td>
+                  <td>{{vehiculo.chasis}}</td>
+                  <td>
+                    <button (click)="editVehiculo(vehiculo)" class="btn btn-info" type="button">Editar</button> 
+                    <button (click)="deleteVehiculo(vehiculo.id)"  class="btn btn-danger" type="button">Eliminar</button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table> 
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [vehiculo]="vehiculo" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

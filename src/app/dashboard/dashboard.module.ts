@@ -32,15 +32,19 @@ import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCo
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
-import { msvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
-import { msvRevisionModule } from './msvRevision/msvRevision.module';
-import { msvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
-import { msvCategoriaModule } from './msvCategoria/msvCategoria.module';
+
+import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
+import { MsvRevisionModule } from './msvRevision/msvRevision.module';
+import { MsvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
+import { MsvCategoriaModule } from './msvCategoria/msvCategoria.module';
+import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
+import { MsvAsignacionModule } from './msvAsignacion/msvAsignacion.module';
 
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
 import { MparqGruaCiudadanoModule } from './mparqGruaCiudadano/mparqGruaCiudadano.module';
 import { MparqEntradaModule } from './mparqEntrada/mparqEntrada.module';
+import { MparqSalidaModule } from './mparqSalida/mparqSalida.module';
 
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
@@ -50,10 +54,8 @@ import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 
-import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
-import { MsvTCAsignacionModule } from './msvTCAsignacion/msvTCAsignacion.module';
-
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
+import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
@@ -73,6 +75,7 @@ import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsigna
 
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
+import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
@@ -114,10 +117,10 @@ import {RightsidebarComponent} from '../shared/index';
       CfgAuditoriaModule,
       CfgSmlmvModule,
       cfgFestivoModule,
-      msvEvaluacionModule,
-      msvRevisionModule,
-      msvCaracterizacionModule,
-      msvCategoriaModule,
+      MsvEvaluacionModule,
+      MsvRevisionModule,
+      MsvCaracterizacionModule,
+      MsvCategoriaModule,
       MgdDocumentoModule,
       MgdTipoCorrespondenciaModule,
       MflInfraccionModule,
@@ -127,6 +130,7 @@ import {RightsidebarComponent} from '../shared/index';
       MparqGruaModule,
       MparqGruaCiudadanoModule,
       MparqEntradaModule,
+      MparqSalidaModule,
       MpersonalFuncionarioModule,
       MpersonalTipoContratoModule,
       MpersonalTalonarioModule,
@@ -140,6 +144,7 @@ import {RightsidebarComponent} from '../shared/index';
       FacturaModule,
       TramiteFacturaModule,
       TramiteSolicitudModule,
+      TramiteSolicitudRncModule,
       TramiteSolicitudRnmaModule,
       SustratoModule,
       GestionTransportePublicoModule,
@@ -147,6 +152,7 @@ import {RightsidebarComponent} from '../shared/index';
       // SucursalModule,
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,
+      RnaPreregistroModule,
       CfgPlacaModule,
       CfgSedeOperativaModule,
       MsvTalonarioModule,

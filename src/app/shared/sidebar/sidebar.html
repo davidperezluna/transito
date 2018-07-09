@@ -292,6 +292,11 @@
             Ins. Persona Juridica
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tramiteSolicitudRnc" [ngClass]="{'active' : ( addActive === 'tramiteSolicitudRnc')}" (click)="addActiveMenu('tramiteSolicitudRnc')">
+            <i class="fa fa-angle-right"></i> Solicitud de tramite
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level --> 
     </li>
@@ -302,7 +307,7 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
-          <a class="nav-link" routerLink="vehiculo" [ngClass]="{'active' : ( addActive === 'vehiculo')}" (click)="addActiveMenu('vehiculo')">
+          <a class="nav-link" routerLink="rnaPreregistro" [ngClass]="{'active' : ( addActive === 'rnaPreregistro')}" (click)="addActiveMenu('rnaPreregistro')">
             <i class="fa fa-angle-right"></i> Pre-registro
           </a>
         </li>

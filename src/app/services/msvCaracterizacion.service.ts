@@ -5,7 +5,7 @@ import  {Observable} from "rxjs/Observable";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class msvCaracterizacionService {
+export class MsvCaracterizacionService {
 	private url = environment.apiUrl + 'msvcaracterizacion';
 	public identity;
 	public token;

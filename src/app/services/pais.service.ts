@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class PaisService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/pais";
+	private url = environment.apiUrl + "pais";
 	public identity;
 	public token;
 
@@ -42,7 +42,7 @@ export class PaisService {
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getPaisSelect(){
-		return this._http.get(this.url+"/select/pais").map(res => res.json());
+	select(){
+		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 }

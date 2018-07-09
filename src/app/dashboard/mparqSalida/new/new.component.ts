@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MparqSalida } from '../mparqSalida.modelo';
-import { MparqSalidaService } from '../../../services/mparqSalida.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { MparqEntradaSalidaService } from '../../../services/mparqEntradaSalida.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -11,47 +11,29 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public entrada: MparqSalida;
-public agentes: any;
-public agenteSelected: any;
+public salida: MparqSalida;
 public date: any;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _SalidaService: MparqSalidaService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _MparqEntradaSalidaService: MparqEntradaSalidaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.entrada = new MparqSalida(null, null, null, null, null, null, null, null);
+    this.salida = new MparqSalida(null, null, null, null, null, null, null, null);
     this.date = new Date();
-    
-
-    this._FuncionarioService.selectAgentes().subscribe(
-      response => {
-        this.agentes = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
 
-    this.entrada.funcionarioId = this.agenteSelected;
-    
-		this._SalidaService.register(this.entrada,token).subscribe(
+		this._MparqEntradaSalidaService.register(this.salida,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -66,7 +48,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El entrada '+  +' ya se encuentra registrado',
+            text: 'El salida '+  +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -78,8 +60,30 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
 		}); 
+  }
+
+  onBuscarEntrada() {
+    let token = this._loginService.getToken();
+    let datos = {
+      'numeroInventario':this.salida.numeroInventario
+    }
+    
+    this._MparqEntradaSalidaService.searchByInventario(datos,token).subscribe(
+      response => {
+        this.respuesta = response;
+        if(this.respuesta.status == 'success'){
+          this.salida.numeroPlaca = response.data.vehiculo.placa;
+          this.salida.numeroGrua = response.data.grua.numeroGrua;
+        }
+      error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+    });
   }
 
 }

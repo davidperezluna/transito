@@ -25,10 +25,10 @@ import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacio
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
-import {  msvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
-import {  msvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
-import {  msvRevisionRoutes } from './msvRevision/msvRevision.routes';
-import {  msvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
+import { MsvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
+import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
+import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
+import { MsvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
 
 import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
@@ -41,6 +41,7 @@ import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayect
 import { MparqGruaRoutes } from './mparqGrua/mparqGrua.routes';
 import { MparqGruaCiudadanoRoutes } from './mparqGruaCiudadano/mparqGruaCiudadano.routes';
 import { MparqEntradaRoutes } from './mparqEntrada/mparqEntrada.routes';
+import { MparqSalidaRoutes } from './mparqSalida/mparqSalida.routes';
 
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
 import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
@@ -54,13 +55,19 @@ import { ModuloRoutes } from './modulo/modulo.routes';
 import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
+
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
+import { TramiteSolicitudRncRoutes } from './tramiteSolicitudRnc/tramiteSolicitudRnc.routes';
 import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
+
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
 import { EmpresaRoutes } from './empresa/empresa.routes';
+
 import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasignacionPlaca.routes';
+import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
+
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
@@ -94,10 +101,10 @@ export const DashboardRoutes: Route[] = [
         ...CfgAuditoriaRoutes,
         ...CfgSmlmvRoutes,
         ...cfgFestivoRoutes,    
-        ...msvCaracterizacion,
-        ...msvEvaluacionRoutes,
-        ...msvRevisionRoutes,
-        ...msvCategoriaRoutes,
+        ...MsvCaracterizacion,
+        ...MsvEvaluacionRoutes,
+        ...MsvRevisionRoutes,
+        ...MsvCategoriaRoutes,
         ...MgdDocumentoRoutes,
         ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,
@@ -106,6 +113,7 @@ export const DashboardRoutes: Route[] = [
         ...MparqCostoTrayectoRoutes,
         ...MparqGruaRoutes,
         ...MparqEntradaRoutes,
+        ...MparqSalidaRoutes,
         ...MparqGruaCiudadanoRoutes,
         ...MpersonalFuncionarioRoutes,
         ...MpersonalTipoContratoRoutes,
@@ -123,11 +131,13 @@ export const DashboardRoutes: Route[] = [
         ...FacturaRoutes,
         ...TramiteFacturaRoutes,
         ...TramiteSolicitudRoutes,
+        ...TramiteSolicitudRncRoutes,
         ...TramiteSolicitudRnmaRoutes,
         ...SustratoRoutes,
         ...GestionTransportePublicoRoutes,
         ...EmpresaRoutes,
         ...RnaPreasignacionPlacaRoutes,
+        ...RnaPreregistroRoutes,
         // ...SucursalRoutes,
         ...TramitePrecioRoutes, 
         ...CfgPlacaRoutes,

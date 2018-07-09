@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class FacturaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/factura";
+	private url = environment.apiUrl + "factura";
 	public identity;
 	public token;
 
@@ -48,7 +48,6 @@ export class FacturaService {
 		return this._http.post(this.url + '/show/id', params, { headers: headers }).map(res => res.json());
 	}
 
-	
 	showFacturaByVehiculo(token, vehiculo) {
 		let json = JSON.stringify(vehiculo);
 		let params = 'json=' + json + '&authorization=' + token;
@@ -67,8 +66,14 @@ export class FacturaService {
 	}
 
 	getFacturaSelect(){
-		
 		return this._http.get(this.url+"/select").map(res => res.json());
+	}
+
+	searchByNumero(token, datos) {
+		let json = JSON.stringify(datos);
+		let params = 'json=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/search/numero', params, { headers: headers }).map(res => res.json());
 	}
 	
 }

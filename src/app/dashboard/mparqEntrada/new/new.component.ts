@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MparqEntrada } from '../mparqEntrada.modelo';
-import { MparqEntradaService } from '../../../services/mparqEntrada.service';
+import { MparqEntradaSalidaService } from '../../../services/mparqEntradaSalida.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -19,7 +19,7 @@ public errorMessage;
 public respuesta;
 
 constructor(
-  private _EntradaService: MparqEntradaService,
+  private _EntradaService: MparqEntradaSalidaService,
   private _FuncionarioService: MpersonalFuncionarioService,
   private _loginService: LoginService,
   ){}

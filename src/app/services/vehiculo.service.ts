@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class VehiculoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/vehiculo";
+	private url = environment.apiUrl + "vehiculo";
 	public identity;
 	public token;
 
@@ -13,6 +13,10 @@ export class VehiculoService {
 
 	getVehiculo(){
 		return this._http.get(this.url+"/").map(res => res.json());
+	}
+
+	indexRna(){
+		return this._http.get(this.url+"/rna").map(res => res.json());
 	}
 
 	register(vehiculo,token){

@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class CuentaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/cuenta";
+	private url = environment.apiUrl + "cuenta";
 	public identity;
 	public token;
 

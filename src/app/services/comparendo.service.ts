@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class ComparendoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/comparendo";
+	private url = environment.apiUrl + "comparendo";
 	public identity;
 	public token;
 

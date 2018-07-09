@@ -1,11 +1,5 @@
 export class Comparendo{
 	constructor(
-		public id:number,
-		public municipioId:number,
-		public vehiculoId:number,
-		public ciudadanoId:number,
-		public agenteTransitoId:number,
-		public segimientoEntregaId:number,
 		public numeroOrden:string,
 		public fechaDiligenciamiento:string,
 		public lugarInfraccion:string,
@@ -23,5 +17,11 @@ export class Comparendo{
 		public retencionLicencia:string,
 		public fotomulta:string,
 		public descripcion:string,
+		public id:number,
+		public municipioId:number,
+		public vehiculoId:number,
+		public ciudadanoId:number,
+		public funcionarioId:number,
+		public segimientoEntregaId:number
 	){}
 } 
