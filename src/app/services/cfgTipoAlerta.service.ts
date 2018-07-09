@@ -4,8 +4,8 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class AlertaService {
-	private url = environment.apiUrl + "alerta";
+export class CfgTipoAlertaService {
+	private url = environment.apiUrl + "cfgtipoalerta";
 	public identity;
 	public token;
 

@@ -4,7 +4,7 @@ import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { EmpresaService } from '../../services/empresa.service';
-import { AlertaService } from '../../services/alerta.service';
+import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 
 import { NewRnaComponent } from './newRna/newRna.component';
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
@@ -104,7 +104,7 @@ import { SelectModule } from 'angular2-select';
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent 
     ],
-    providers:[TramiteSolicitudService,EmpresaService,AlertaService]
+    providers: [TramiteSolicitudService, EmpresaService, CfgTipoAlertaService]
 })
 
 export class TramiteSolicitudModule { }
