@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
+<<<<<<< HEAD
 import { AlertaService } from '../../services/alerta.service';
+=======
+import { EmpresaService } from '../../services/empresa.service';
+import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
+>>>>>>> 8e4c4a62698c9d4308047c26adb2ea5c9542a8c4
 
 import { NewRnaComponent } from './newRna/newRna.component';
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
@@ -107,7 +112,11 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaCambioConjuntoComponent,
         NewTrasladoComponent
     ],
+<<<<<<< HEAD
     providers:[TramiteSolicitudService,AlertaService,TramiteTrasladoService]
+=======
+    providers: [TramiteSolicitudService, EmpresaService, CfgTipoAlertaService]
+>>>>>>> 8e4c4a62698c9d4308047c26adb2ea5c9542a8c4
 })
 
 export class TramiteSolicitudModule { }
