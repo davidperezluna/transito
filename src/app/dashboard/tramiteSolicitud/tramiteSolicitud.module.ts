@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
+import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
 import { EmpresaService } from '../../services/empresa.service';
 import { AlertaService } from '../../services/alerta.service';
 
@@ -28,6 +29,7 @@ import { NewRnaPreregistroComponent } from './rna/tramitePreregistro/newRna.prer
 import { NewRnaCiudadanoComponent } from './newRnaCiudadano/newRnaCiudadano.component';
 import { NewRnaSustratoComponent } from './newRnaSustrato/newRnaSustrato.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
+import { NewTrasladoComponent } from './rna/tramiteTraslado/newTraslado.component';
 import { NewRnaTramiteInscripcionAlertaPrendaComponent } from './rna/tramiteInscripcionAlertaPrenda/newRna.inscripcionAlertaPrenda.component';
 import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/newRna.matriculaInicial.component';
 import { NewRnaRadicadoCuentaComponent } from './rna/tramiteRadicadoCuenta/newRna.radicadoCuenta.component'; 
@@ -70,7 +72,8 @@ import { SelectModule } from 'angular2-select';
         NewRnaMatricualaInicialComponent,
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
-        NewRnaCambioConjuntoComponent
+        NewRnaCambioConjuntoComponent,
+        NewTrasladoComponent
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -102,9 +105,10 @@ import { SelectModule } from 'angular2-select';
         NewRnaMatricualaInicialComponent,
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
-        NewRnaCambioConjuntoComponent 
+        NewRnaCambioConjuntoComponent,
+        NewTrasladoComponent
     ],
-    providers:[TramiteSolicitudService,EmpresaService,AlertaService]
+    providers:[TramiteSolicitudService,EmpresaService,AlertaService,TramiteTrasladoService]
 })
 
 export class TramiteSolicitudModule { }
