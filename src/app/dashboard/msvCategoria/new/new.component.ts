@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvCategoria } from '../msvCategoria.modelo'; 
-import { msvCategoriaService } from '../../../services/msvCategoria.service';
+import { MsvCategoria } from '../msvCategoria.modelo';
+import { MsvCategoriaService } from '../../../services/msvCategoria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public msvCategoria: msvCategoria;
+public msvCategoria: MsvCategoria;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _msvCategoriaService: msvCategoriaService,
+  private _msvCategoriaService: MsvCategoriaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.msvCategoria = new msvCategoria(null, null, null);
+    this.msvCategoria = new MsvCategoria(null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);

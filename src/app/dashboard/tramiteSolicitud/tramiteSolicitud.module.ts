@@ -5,6 +5,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { EmpresaService } from '../../services/empresa.service';
 import { DefaultService } from '../../services/default.service';
+import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 
 import { NewRnaComponent } from './newRna/newRna.component';
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
@@ -28,11 +29,16 @@ import { NewRnaPreregistroComponent } from './rna/tramitePreregistro/newRna.prer
 import { NewRnaCiudadanoComponent } from './newRnaCiudadano/newRnaCiudadano.component';
 import { NewRnaSustratoComponent } from './newRnaSustrato/newRnaSustrato.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
+import { NewTrasladoComponent } from './rna/tramiteTraslado/newTraslado.component';
+import { NewRnaTramiteInscripcionAlertaPrendaComponent } from './rna/tramiteInscripcionAlertaPrenda/newRna.inscripcionAlertaPrenda.component';
 import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/newRna.matriculaInicial.component';
+import { NewRnaRadicadoCuentaComponent } from './rna/tramiteRadicadoCuenta/newRna.radicadoCuenta.component'; 
+
 import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRna.transformacion.component';
 import { NewRnaCambioConjuntoComponent } from './rna/tramiteCambioConjunto/newRna.cambioConjunto.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
+import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
 
 
 
@@ -61,11 +67,14 @@ import { SelectModule } from 'angular2-select';
         NewRnaCancelacionMatriculaComponent,
         NewRnaCertificadoTradicionComponent,
         NewRnaTraspasoComponent,
+        NewRnaTramiteInscripcionAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
+        NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
-        NewRnaCambioConjuntoComponent
+        NewRnaCambioConjuntoComponent,
+        NewTrasladoComponent
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -91,13 +100,16 @@ import { SelectModule } from 'angular2-select';
         NewRnaCancelacionMatriculaComponent,
         NewRnaCertificadoTradicionComponent,
         NewRnaTraspasoComponent,
+        NewRnaTramiteInscripcionAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
+        NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
-        NewRnaCambioConjuntoComponent 
+        NewRnaCambioConjuntoComponent,
+        NewTrasladoComponent
     ],
-    providers:[TramiteSolicitudService,EmpresaService,DefaultService]
+    providers:[TramiteSolicitudService,CfgTipoAlertaService,TramiteTrasladoService,EmpresaService,DefaultService]
 })
 
 export class TramiteSolicitudModule { }
