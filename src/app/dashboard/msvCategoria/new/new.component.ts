@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvCategoria } from '../msvCategoria.modelo';
+import { msvCategoria } from '../msvCategoria.modelo'; 
 import { msvCategoriaService } from '../../../services/msvCategoria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';

@@ -193,7 +193,7 @@ export class NewRnaSustratoComponent implements OnInit {
         );
     }
     ready(){
-        this.ciudadanoEncontrado === 3;
+        this.ciudadanoEncontrado = 3;
     }
 
 }

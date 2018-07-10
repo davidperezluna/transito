@@ -36,12 +36,12 @@
                                 <br> 
                                 <div class="custom-control custom-checkbox"  >
                                     <input [(ngModel)]="tarjetaEntregada" name="tarjetaEntregada" type="checkbox" class="custom-control-input" id="customCheck2" checked="">
-                                    <label class="custom-control-label" >Entregada</label>
+                                    <label class="custom-control-label" for="customCheck2">Entregada</label>
                                 </div>
                             </div>
                             <!--tipo identificacion ciudadano -->
                             <div class="col-xs-12 col-lg-12" *ngIf="tarjetaEntregada">
-                                <label>Identificaciónnnnnn</label>
+                                <label>Identificación</label>
                                 <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
                                     <input type="number" class="form-control" placeholder="Digite identificación" [(ngModel)]="sustrato.ciudadanoId" name="identificacion" required />
                                     <span class="input-group-btn">
