@@ -1,16 +1,5 @@
 <div class="container" >
-  <div  *ngIf='!formShow' class="row align-items-center justify-content-between">
-    <!-- <div class="col-11 col-sm-12 page-title">
-      <h3>Módulo RNC</h3>
-      <p>Inscripción de persona jurídica</p> 
-    </div> -->
-    <!-- <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-      </div>
-    </div> -->
-    <br>
-  </div>
+  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
@@ -19,7 +8,7 @@
                 <b>Módulo RNC</b>
                 <small>Inscripción de persona jurídica</small>
                 <div class="btn-group pull-right">
-                  <button (click)="onNew()" class="btn btn-outline-success  btn-round pull-right " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+                  <button (click)="onNew()" class="btn btn-success btn-round" data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
                 </div>
               </h5>
           </div>
@@ -64,9 +53,17 @@
                       {{ empresa.correo }}
                   </td>
                   <td>
-                    <button (click)="editEmpresa(empresa)"       class="btn btn-outline-info btn-xs" type="button">Editar</button> 
-                    <button (click)="deleteEmpresa(empresa.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar</button>
-                    <button (click)="getSucursal(empresa)" class="btn btn-outline-info" type="button" title="Tramites">Sucursal</button>
+                    <div class="btn-group">
+                      <button (click)="editEmpresa(empresa)" class="btn btn-info btn-xs" type="button">
+                        Editar
+                      </button> 
+                      <button (click)="deleteEmpresa(empresa.id)" class="btn btn-danger btn-xs" type="button">
+                        Eliminar
+                      </button>
+                      <button (click)="getSucursal(empresa)" class="btn btn-info" type="button" title="Tramites">
+                        Sucursal
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </tbody>

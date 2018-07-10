@@ -9,10 +9,10 @@ import { MunicipioService } from '../../../services/municipio.service';
 import swal from 'sweetalert2';
  
 @Component({
-  selector: 'app-new-rna-ciudadano',
-  templateUrl: './newRnaCiudadano.component.html'
+  selector: 'app-new-rnc-ciudadano',
+  templateUrl: './newRncCiudadano.component.html'
 })
-export class NewRnaCiudadanoComponent implements OnInit {
+export class NewRncCiudadanoComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() identificacion:any = null;
 @Input() tipoIdentificacion:any = null;

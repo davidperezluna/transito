@@ -52,8 +52,6 @@ constructor(
 
   ngOnInit() {
     this.tramiteSolicitud = new TramiteSolicitudRnc(null, null, null, null, null,null,null);
-
-    console.log(this.solicitante);
   }
 
   onCancelar(){
@@ -65,7 +63,8 @@ constructor(
     this._FacturaService.searchByNumero(token, {'numeroFactura':this.numeroFactura}).subscribe(
       response => {          
         if(response.status == 'success'){
-          this.factura = response;
+          this.factura = response.data;
+          
           swal({
             title: 'Perfecto',
             text: "¡Factura pagada!",
@@ -75,7 +74,7 @@ constructor(
           this._TramiteFacturaService.getTramiteShowFactura(this.factura.id).subscribe(
             response => {
               let active = true;
-              this.tramitesFactura = response;
+              this.tramitesFactura = response;              
               this.tramitesFactura.forEach(tramiteFactura => {
                 if (tramiteFactura.realizado == 0) {
                   active = false;
@@ -196,8 +195,7 @@ constructor(
     this.error = false;
   }
 
-  /*finalizarSolicitud(){
-    
+  finalizarSolicitud(){
     let token = this._loginService.getToken();
     this.tramites='';
     this.tramitesFactura.forEach(tramiteFactura => {
@@ -242,6 +240,6 @@ constructor(
 
       }
     });     
-  }*/
+  }
 
 }

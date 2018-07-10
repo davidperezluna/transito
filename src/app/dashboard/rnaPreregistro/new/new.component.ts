@@ -66,7 +66,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     
     this._MarcaService.getMarcaSelect().subscribe(
@@ -220,7 +220,7 @@ constructor(
     this.vehiculo.radioAccionId = this.radioAccionSelected;
     this.vehiculo.modalidadTransporteId = this.modalidadTransporteSelected;
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
-    console.log(this.vehiculo);  
+
     let token = this._loginService.getToken();
     this._RnaPreregistroService.register(this.vehiculo,token).subscribe(
 			response => {

@@ -46,7 +46,6 @@ export class EmpresaComponent implements OnInit {
 		this._EmpresaService.getEmpresa().subscribe(
 				response => {
           this.empresas = response.data;
-          console.log(this.empresas);
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);

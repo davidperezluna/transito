@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudRncComponent } from './tramiteSolicitudRnc.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudRncService } from '../../services/tramiteSolicitudRnc.service';
-import { EmpresaService } from '../../services/empresa.service';
-import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
+
+import { NewRncSustratoComponent } from './newRncSustrato/newRncSustrato.component';
+import { NewRncCiudadanoComponent } from './newRncCiudadano/newRncCiudadano.component';
+import { NewRncExpedicionLicenciaComponent } from './rnc/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
 
 import { NewRncComponent } from './newRnc/newRnc.component';
 import { EditComponent } from './edit/edit.component';
@@ -15,14 +17,20 @@ import { SelectModule } from 'angular2-select';
     declarations: [
         TramiteSolicitudRncComponent,
         NewRncComponent,
-        EditComponent
+        EditComponent,
+        NewRncSustratoComponent,
+        NewRncCiudadanoComponent,
+        NewRncExpedicionLicenciaComponent
     ],
     exports: [
         TramiteSolicitudRncComponent,
         NewRncComponent,
-        EditComponent
+        EditComponent,
+        NewRncSustratoComponent,
+        NewRncCiudadanoComponent,
+        NewRncExpedicionLicenciaComponent
     ],
-    providers: [TramiteSolicitudRncService, EmpresaService, CfgTipoAlertaService]
+    providers: [TramiteSolicitudRncService]
 })
 
 export class TramiteSolicitudRncModule { }
