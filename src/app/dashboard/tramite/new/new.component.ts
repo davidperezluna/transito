@@ -24,7 +24,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.tramite = new Tramite(null,null,null,null,null,null,null);
+    this.tramite = new Tramite(null,null,null,null);
 
     this._moduloService.getModuloSelect().subscribe(
       response => {

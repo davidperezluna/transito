@@ -3,7 +3,7 @@ import { FacturaComponent } from './index';
 
 export const FacturaRoutes: Route[] = [
     {
-      path: 'factura',
+      path: 'factura/:tipo',
       component: FacturaComponent
     }
 ];

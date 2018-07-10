@@ -1,34 +1,30 @@
 <hr>
     <div class="row"><!-- .row -->
-        <div class="container col-xs-12 col-lg-6">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Módulo RNC <small>Consultar pago</small></h5>
-                        </div>
-                        <div class="card-body">
-                            <form #formPay="ngForm"> 
-                                <div class="form-group row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <label>Número de factura <strong class="text-danger">*</strong></label>
-                                        <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <button (click)="onCancelar()" class="btn btn-secondary">
-                                <i class="fa fa-times"></i>
-                                Cancel
-                            </button>
-                            <button class="btn btn-success pull-right" (click)="onSearchFactura()" [disabled]="formPay()">
-                                <i class="fa fa-search"></i>
-                                Consultar
-                            </button>
-                        </div> 
-                    </div>
+        <div class="col-xs-12 col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Módulo RNC <small>Consultar pago</small></h5>
                 </div>
+                <div class="card-body">
+                    <form #formPay="ngForm"> 
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Número de factura <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" (click)="onSearchFactura()" [disabled]="formPay.invalid">
+                        <i class="fa fa-search"></i>
+                        Consultar
+                    </button>
+                </div> 
             </div>
         </div>
 
@@ -47,11 +43,11 @@
                                             <tr>
                                                 <td>
                                                     <strong>Nombre: </strong>
-                                                    {{solicitante.primerNombre}} {{solicitante.primerApellido}}
+                                                    {{ solicitante.primerNombre }} {{ solicitante.primerApellido }}
                                                 </td>
                                                 <td>
                                                      <strong>Identificación: </strong>
-                                                    {{solicitante.identificacion}}
+                                                    {{ solicitante.identificacion }}
                                                 </td>
                                             </tr>
                                         </tbody> 
