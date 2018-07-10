@@ -71,7 +71,7 @@ constructor(
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
-    this._VehiculoService.indexRna().subscribe(
+    this._VehiculoService.getVehiculo().subscribe(
       response => {
         this.vehiculos = response.data;
         let timeoutId = setTimeout(() => {  

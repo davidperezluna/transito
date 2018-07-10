@@ -12,7 +12,7 @@ export class RnaPreregistroService {
 	constructor(private _http: Http){}
 
 	index(){
-		return this._http.get(this.url+"/rna").map(res => res.json());
+		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
 	register(vehiculo,token){

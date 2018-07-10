@@ -30,7 +30,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     public motivoSelected: any;
     public nuevoNumero: any;
     public numeroRunt: any;
-    public certificadoEntregada: any;
+    public certificadoEntregado: any;
     public documentacion: any;
     public ciudadanoId: any;
     public entregada = false;
@@ -40,6 +40,8 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     public datos = {
         'nroRunt': null,
         'observacion': null,                  
+        'certificadoEntregada': null,
+        'entregado': null,
         'tramiteFactura': null,
     };
 
@@ -78,6 +80,10 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         // this.datos.tramiteFactura =58;
         // this.readyTramite.emit(this.datos);
 
+        this.datos.tramiteFactura =59;
+        this.datos.certificadoEntregada = this.certificadoEntregado;
+        this.datos.entregado = this.ciudadanoId;
+        this.readyTramite.emit(this.datos);
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
