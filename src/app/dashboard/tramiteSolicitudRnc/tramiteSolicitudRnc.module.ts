@@ -7,6 +7,7 @@ import { TramiteSolicitudRncService } from '../../services/tramiteSolicitudRnc.s
 import { NewRncSustratoComponent } from './newRncSustrato/newRncSustrato.component';
 import { NewRncCiudadanoComponent } from './newRncCiudadano/newRncCiudadano.component';
 import { NewRncExpedicionLicenciaComponent } from './rnc/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
+import { NewRncDuplicadoLicenciaComponent } from './rnc/tramiteDuplicadoLicencia/newRncDuplicadoLicencia.component';
 
 import { NewRncComponent } from './newRnc/newRnc.component';
 import { EditComponent } from './edit/edit.component';
@@ -20,7 +21,8 @@ import { SelectModule } from 'angular2-select';
         EditComponent,
         NewRncSustratoComponent,
         NewRncCiudadanoComponent,
-        NewRncExpedicionLicenciaComponent
+        NewRncExpedicionLicenciaComponent,
+        NewRncDuplicadoLicenciaComponent
     ],
     exports: [
         TramiteSolicitudRncComponent,
@@ -28,7 +30,8 @@ import { SelectModule } from 'angular2-select';
         EditComponent,
         NewRncSustratoComponent,
         NewRncCiudadanoComponent,
-        NewRncExpedicionLicenciaComponent
+        NewRncExpedicionLicenciaComponent,
+        NewRncDuplicadoLicenciaComponent
     ],
     providers: [TramiteSolicitudRncService]
 })
