@@ -2,9 +2,10 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
+import {LoginService} from '../../../../services/login.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
+import {MunicipioService} from '../../../../services/municipio.service';
+import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 
 import swal from 'sweetalert2';
 import { Factura } from '../../../factura/factura.modelo';
@@ -21,108 +22,86 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
     @Input() tramitesFactura: any = null;
     public errorMessage;
     public respuesta;
-    public colores: any;
     public tramiteFacturaSelected: any;
-    public colorSelected: any;
     public tramiteRealizado: any;
+    public numeroDocumento: any;
+    public fechaIngreso: any;
+    public guiaLlegada: any;
+    public empresaEnvio: any;
+    public rut: any;
+    public municipios:any;
+    public municipio:any;
+    public municipioSelected:any;
+    public tiposIdentificacion: any;
+    public tipoIdentificacion: any;
+    public tipoIdentificacionSelected:any;
     public datos = {
-        'newData': null,
-        'oldData': null,
-        'sustrato': null,
+        'municipioSelected': null,
+        'tipoIdentificacionSelected': null,
+        'numeroDocumento': null,
+        'fechaIngreso': null,
+        'guiaLlegada': null,
+        'empresaEnvio': null,
+        'rut': null,
         'tramiteFactura': null,
     };
 
     constructor(
-        private _ColorService: ColorService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
+        private _MunicipioService: MunicipioService,
+        private _tipoIdentificacionService: TipoIdentificacionService,
     ) { }
  
     ngOnInit() {
-        // this.tramitesFactura.forEach(tramiteFactura => {
-        //     if (tramiteFactura.realizado == 1) {
-        //         if (tramiteFactura.tramitePrecio.tramite.id == 5) {
-        //             this.tramiteRealizado = tramiteFactura;
-        //             console.log(this.tramiteRealizado);
-        //         }
-        //     }
-        // });
-        //consultar tramite solicitud con tramiterealizado.id
-        let token = this._loginService.getToken();
-        // this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
-        //     response => {
-        //         this.datos = response.data.datos
-        //         console.log(response.data.datos);
-        //     },
-        //     error => {
-        //         this.errorMessage = <any>error;
-
-        //         if (this.errorMessage != null) {
-        //             console.log(this.errorMessage);
-        //             alert('Error en la petición');
-        //         }
-        //     }
-        // );
-
-        this._ColorService.getColorSelect().subscribe(
+        
+         let token = this._loginService.getToken();
+       
+        this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
-                this.colores = response;
+              this.municipios = response;
+            }, 
+            error => {
+              this.errorMessage = <any>error;
+      
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+          this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+            response => {
+              this.tiposIdentificacion = response;
             },
             error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
             }
-        );
+          );
 
     }
     
    
-    enviarTramite(){
+    enviarTramite(){     
         let token = this._loginService.getToken();
+        this.datos.municipioSelected = this.municipioSelected;
+        this.datos.tipoIdentificacionSelected = this.tipoIdentificacionSelected;
+        this.datos.numeroDocumento = this.numeroDocumento;
+        this.datos.fechaIngreso = this.fechaIngreso;
+        this.datos.guiaLlegada = this.guiaLlegada;
+        this.datos.empresaEnvio = this.empresaEnvio;
+        this.datos.rut = this.rut;
+        this.datos.tramiteFactura = 4;
+        console.log(this.datos);
+        this.readyTramite.emit(this.datos);
 
-        this._ColorService.showColor(token,this.colorSelected).subscribe(
-            color => {
-                    this.vehiculo.combustibleId = this.vehiculo.combustible.id    
-                    this.vehiculo.municipioId = this.vehiculo.municipio.id   
-                    this.vehiculo.lineaId = this.vehiculo.linea.id   
-                    this.vehiculo.colorId = this.colorSelected   
-                    this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-                    this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-                    this.vehiculo.claseId = this.vehiculo.clase.id   
-                    this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-                    response => {
-                        this.respuesta = response; 
-                        if(this.respuesta.status == 'success'){
-                            this.datos.newData = color.data.nombre;
-                            this.datos.oldData = this.vehiculo.color.nombre;
-                            this.datos.tramiteFactura =5;
-                            this.readyTramite.emit(this.datos);
-                        }
-                        error => {
-                                this.errorMessage = <any>error;
-
-                                if(this.errorMessage != null){
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
-                            }
-                    }); 
-                error => {
-                        this.errorMessage = <any>error;
-    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-            });
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
