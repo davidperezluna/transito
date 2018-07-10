@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
+import { TramiteSolicitud } from '../../tramiteSolicitudRnma.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import {LoginService} from '../../../../services/login.service';
@@ -11,10 +11,10 @@ import swal from 'sweetalert2';
 import { Factura } from '../../../factura/factura.modelo';
 
 @Component({
-    selector: 'appRna-radicado-cuenta',
-    templateUrl: './newRna.radicadoCuenta.html'
+    selector: 'appRnma-radicado-cuenta',
+    templateUrl: './newRnma.radicadoCuenta.html'
 })
-export class NewRnaRadicadoCuentaComponent implements OnInit {
+export class NewRnmaRadicadoCuentaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
