@@ -62,7 +62,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         let datos = {
             'dato1':'k'
         }
-        this._DefaultService.pdfLicenciaTransito(token,datos).subscribe(
+        this._DefaultService.pdfLicenciaTransito(token,datos).subscribe( 
             response => {
                 // this.respuesta = response; 
                 
