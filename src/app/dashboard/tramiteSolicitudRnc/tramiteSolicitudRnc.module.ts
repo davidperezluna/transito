@@ -26,7 +26,11 @@ import { SelectModule } from 'angular2-select';
         NewRncSustratoComponent,
         NewRncCiudadanoComponent,
         NewRncExpedicionLicenciaComponent,
-        NewRncDuplicadoLicenciaComponent
+        NewRncDuplicadoLicenciaComponent,
+        NewRncExpedicionLicenciaCambioDocumentoComponent,
+        NewRncRecategorizacionLicenciaAbajoComponent,
+        NewRncRecategorizacionLicenciaArribaComponent,
+        NewRncRefrendacionLicenciaComponent
     ],
     exports: [
         TramiteSolicitudRncComponent,
@@ -35,7 +39,11 @@ import { SelectModule } from 'angular2-select';
         NewRncSustratoComponent,
         NewRncCiudadanoComponent,
         NewRncExpedicionLicenciaComponent,
-        NewRncDuplicadoLicenciaComponent
+        NewRncDuplicadoLicenciaComponent,
+        NewRncExpedicionLicenciaCambioDocumentoComponent,
+        NewRncRecategorizacionLicenciaAbajoComponent,
+        NewRncRecategorizacionLicenciaArribaComponent,
+        NewRncRefrendacionLicenciaComponent
     ],
     providers: [TramiteSolicitudRncService]
 })
