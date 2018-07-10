@@ -1,28 +1,28 @@
 <div class="container" >
-  <div  class="row align-items-center justify-content-between">
-    <div class="col-11 col-sm-12 page-title">
-      <h3>Módulo de Configuración</h3>
-      <p>Historial de precios para tramites</p> 
-    </div>
-    <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " style="margin-right: 10px;" data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-        <button (click)="onNewSmlmv()" class="btn btn-outline-success  btn-round " style="margin-right: 10px;" data-target="#themepicker" data-toggle="modal"><span class="text">Conceptos</span> <i class="ti-save ml-2"></i></button>
-        <button (click)="onNewCalculo()" class="btn btn-outline-success  btn-round " style="margin-right: 10px;" data-target="#themepicker" data-toggle="modal"><span class="text">Calcular</span> <i class="ti-save ml-2"></i></button>
-      </div>
-    </div>
-    
-  </div>
+  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Precios <small>Registrados</small></h5>
-
-            <span tooltip content=''> </span>
-            <h5 tooltip content="tramitePrecio.id<br>sajdkjasjfdkjdsakfjkdsafkds<br>jfkdjskfjdkslfkdjskfjñdklsjfkldjsñfkljñdskjfkdsjfjdskfjdksj <br> hjahahajkajaj5465465">hola</h5>
-
-
+            <h5 class="card-title">
+              <b class="text-uppercase">Módulo de Configuración</b>
+              <br>
+              <small>Historial de precios para tramites</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-success btn-round" data-target="#themepicker" data-toggle="modal">
+                  <span class="text">Nuevo</span> 
+                  <i class="fa fa-save"></i>
+                </button>
+                <button (click)="onNewSmlmv()" class="btn btn-info btn-round" data-target="#themepicker" data-toggle="modal">
+                  <span class="text">Conceptos</span> 
+                  <i class="fa fa-th-list"></i>
+                </button>
+                <button (click)="onNewCalculo()" class="btn btn-primary btn-round" data-target="#themepicker" data-toggle="modal">
+                  <span class="text">Calcular</span> 
+                  <i class="fa fa-calculator"></i>
+                </button>
+              </div>
+            </h5>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -46,11 +46,11 @@
                   <td placement="top" ngbTooltip="Tooltip on top" data-toggle="ngbTooltip"   title="holaMundo" data-html="true">{{tramitePrecio.tramite.nombre}}
                     <!-- <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="holaMundo" data-placement="right"  data-original-title="Tooltip on right">Right</button> -->
                   </td>
-                  <td >{{tramitePrecio.modulo.nombre}}</td>
+                  <td >{{tramitePrecio.modulo.abreviatura}}</td>
                   <td >{{tramitePrecio.valor}}</td>
                   <td >{{tramitePrecio.valorTotal}}</td>
-                  <td><button (click)="editTramitePrecio(tramitePrecio)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteTramitePrecio(tramitePrecio.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
+                  <td><button (click)="editTramitePrecio(tramitePrecio)" class="btn btn-info" type="button">Editar</button> 
+                    <button (click)="deleteTramitePrecio(tramitePrecio.id)"  class="btn btn-danger" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>

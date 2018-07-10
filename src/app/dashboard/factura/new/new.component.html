@@ -87,9 +87,8 @@
                     </table>
                 </div>
 
-                <div class="col-xs-12 col-lg-12">
+                <div class="col-xs-12 col-lg-12" *ngIf="tipo != 'RNC'">
                     <div class="input-group" [ngClass]="{'has-danger' : isErrorVehiculo,'has-success': isExistVehiculo}">
-                        <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
                         <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" required />
                         <span class="input-group-btn">
                             <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isErrorVehiculo}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
@@ -174,7 +173,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf='isExistVehiculo'>
+                <div class="col-xs-12 col-lg-12" *ngIf="isExistVehiculo || tipo == 'RNC'">
                     <label>Modulo*</label>
                     <ng-select
                         [multiple]="false"
@@ -187,7 +186,7 @@
                     <br><br>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf='isExistVehiculo'>
+                <div class="col-xs-12 col-lg-12" *ngIf="isExistVehiculo || tipo == 'RNC'">
                     <label>Tramites*</label>
                     <ng-select
                         [multiple]="false"

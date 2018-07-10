@@ -53,6 +53,6 @@
         </div>
       </div>
       <app-edit *ngIf='formEdit' [factura]="factura" (ready)="ready($event)"></app-edit>
-      <app-new-factura *ngIf='formNew' (ready)="ready($event)"></app-new-factura>
+      <app-new-factura *ngIf='formNew'[tipo]="tipo" (ready)="ready($event)"></app-new-factura>
       <factura-show *ngIf='formShow' [factura]="factura" (readyShow)="readyShow($event)"></factura-show>
   </div>

@@ -1,60 +1,49 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { LoginService } from '../../../services/login.service';
 import { SustratoService } from '../../../services/sustrato.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
-import { Sustrato } from '../../sustrato/sustrato.modelo';
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 
 
 import swal from 'sweetalert2';
 import { log } from 'util';
 
 @Component({
-    selector: 'appRna-sustrato',
-    templateUrl: './newRnaSustrato.html'
+    selector: 'appRnc-sustrato',
+    templateUrl: './newRncSustrato.html'
 })
-export class NewRnaSustratoComponent implements OnInit {
+export class NewRncSustratoComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
-    @Input() ciudadanoPropietario: any = null;
+    @Input() solicitante: any = null;
     public errorMessage;
     public respuesta;
+    public sustrato: any;
     public sustratos: any;
     public sustratoSelected: any;
-    public colorSelected: any;
-    public identificacion: any;
-    public licenciaTransito: any;
-    public ciudadano:any;
+    public usuario:any;
     public estadoImpresion=true;
     public tarjetaEntregada=true;
     public ciudadanoNew = false;
     public isError = false;
     public isExist = false;
     public ciudadanoEncontrado=1;
-    public sustrato: Sustrato;
     public datos = {
-        'cedula': 0,
-        'licenciaTransito': "",
-        'vehiculoId': ""
-      }
+        'solicitante': null,
+        'cedula': null,
+        'licenciaConduccion': null,
+        'entregada': null,
+        'sustrato': null,
+        'solicitanteId': null,
+        'vehiculoId': null,
+        'facturaId': null,
+    }
     
-
     constructor(
         private _SustratoService: SustratoService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
         private _CiudadanoService: CiudadanoService,
-        private _CiudadanoVehiculoService: CiudadanoVehiculoService,
-    ) {
-        this.sustrato = new Sustrato( null, null, null, null, null, null ,null,null,null,null,null,null);
-        
-     } 
+    ) { } 
 
     ngOnInit() {
         
@@ -62,16 +51,14 @@ export class NewRnaSustratoComponent implements OnInit {
 
     onKeyCiudadano(){
         let token = this._loginService.getToken();
-        let identificacion = {
-			'numeroIdentificacion' : this.sustrato.ciudadanoId,
-        };
-        console.log(this.tarjetaEntregada);
         
-        this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+        this._CiudadanoService.showCiudadanoCedula(token,{ 'numeroIdentificacion' : this.datos.cedula }).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
-                    this.ciudadano = this.respuesta.data;
+                    this.usuario = this.respuesta.data;
+                    this.datos.solicitante = this.usuario.primerNombre+' '+this.usuario.primerApellido
+                    this.datos.solicitanteId = this.usuario.ciudadano.id
                     this.ciudadanoEncontrado= 2;
                     this.ciudadanoNew = false;
             }else{
@@ -79,32 +66,21 @@ export class NewRnaSustratoComponent implements OnInit {
                 this.ciudadanoNew = true;
             }
             error => {
-                    this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
+                this.errorMessage = <any>error;
+            
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
                 }
+            }
         }); 
     }
    
     enviarTramite(){
         let token = this._loginService.getToken();
         
-        console.log(this.factura);
-        console.log(this.datos);
-
-        this.datos.licenciaTransito = this.licenciaTransito;
-        this.datos.cedula  = this.ciudadanoPropietario.usuario.identificacion;
-        this.datos.vehiculoId  = this.factura.vehiculo.id;
-
-        // this.sustrato.impresion = this.licenciato;
-        
-        this.sustrato.entregado = this.tarjetaEntregada;
-        this.sustrato.facturaId = this.factura.id;
-
-        // this.ciudadanoPropietario.licenciaTransito = this.datos.vehiculoId;
+        this.datos.entregada = this.tarjetaEntregada;
+        this.datos.facturaId = this.factura.id;
 
         // if (this.sustrato.impresion) {
         //    this.sustrato.estado = 'Utilizado' 
@@ -114,12 +90,9 @@ export class NewRnaSustratoComponent implements OnInit {
 
         // console.log(this.identificacion);
 
-        this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(
-            
+        this._CiudadanoService.editLicenciaConduccion(this.datos,token).subscribe(
             response => {
-                
                 this.respuesta = response;
-                console.log(this.respuesta);
                 if(this.respuesta.status == 'success'){
                   swal({
                     title: 'Perfecto!',
@@ -129,22 +102,20 @@ export class NewRnaSustratoComponent implements OnInit {
                   })
                 }
                 error => {
-                        this.errorMessage = <any>error;
-    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
+                    this.errorMessage = <any>error;
+
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
-        
+                }
             }
-            
         );
-        console.log(this.licenciaTransito);
         
-        this._SustratoService.editSustrato(this.sustrato,token).subscribe(
+        this._SustratoService.editEstado(this.sustrato,token).subscribe(
             response => {
                 if (response.status == 'success') {
+                    console.log(response);
                     swal({
                         title: 'Perfecto!',
                         text: 'El registro se ha registrado con exito',
@@ -162,7 +133,6 @@ export class NewRnaSustratoComponent implements OnInit {
                 }
             }
         );
-        console.log(this.sustrato);
     }
 
     onCancelar(){
@@ -171,7 +141,7 @@ export class NewRnaSustratoComponent implements OnInit {
 
     onKeyValidateSustrato(){
         let token = this._loginService.getToken();
-        this._SustratoService.showNombreSustrato(token,this.sustrato.consecutivo).subscribe(
+        this._SustratoService.showNombreSustrato(token,this.datos.sustrato).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.sustrato = response.data;
@@ -192,6 +162,7 @@ export class NewRnaSustratoComponent implements OnInit {
             }
         );
     }
+
     ready(){
         this.ciudadanoEncontrado === 3;
     }

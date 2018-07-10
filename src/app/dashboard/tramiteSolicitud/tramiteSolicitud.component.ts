@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { LoginService } from '../../services/login.service';
 import { TramiteSolicitud } from './tramiteSolicitud.modelo';
@@ -10,6 +11,7 @@ declare var $: any;
   templateUrl: './tramiteSolicitud.component.html'
 })
 export class TramiteSolicitudComponent implements OnInit {
+  public tipo: any;
   public errorMessage;
 	public id;
 	public respuesta;
@@ -22,10 +24,15 @@ export class TramiteSolicitudComponent implements OnInit {
 
   constructor(
     private _TramiteSolicitudService: TramiteSolicitudService,
+    private _route: ActivatedRoute,
 		private _loginService: LoginService,
     ){}
     
   ngOnInit() {
+    this._route.params.subscribe(params =>{
+      this.tipo = +params["tipo"];
+    });
+    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',

@@ -264,7 +264,6 @@
           <a class="nav-link" routerLink="ciudadano"  [ngClass]="{'active' : ( addActive === 'ciudadano')}" (click)="addActiveMenu('ciudadano')"><i class="fa fa-angle-right"></i> Ciudadano
           </a>
         </li>
-        
         <li class="nav-item">
           <a class="nav-link" routerLink="tramite" [ngClass]="{'active' : ( addActive === 'tramite')}" (click)="addActiveMenu('tramite')">
             <i class="fa fa-angle-right"></i> Tramite
@@ -290,6 +289,12 @@
           <a class="nav-link" routerLink="empresa" [ngClass]="{'active' : ( addActive === 'empresa')}" (click)="addActiveMenu('empresa')">
             <i class="fa fa-angle-right"></i> 
             Ins. Persona Juridica
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['factura/', 'RNC']"  [ngClass]="{'active' : ( addActive === 'factura')}" (click)="addActiveMenu('factura')">
+            <i class="fa fa-angle-right"></i>
+            Factura
           </a>
         </li>
         <li class="nav-item">
@@ -371,21 +376,6 @@
       </ul>
       <!-- /.nav-second-level --> 
     </li>
-
-
-    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-fnlq')}"> 
-        <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-fnlq')">
-          Financiero y Liquidaciones<i class="fa fa-angle-down "></i>
-        </a>
-        <ul class="nav flex-column nav-second-level ">
-          <li class="nav-item">
-              <a class="nav-link" routerLink="factura"  [ngClass]="{'active' : ( addActive === 'factura')}" (click)="addActiveMenu('factura')">
-                <i class="fa fa-angle-right"></i> 
-                Factura
-              </a>
-          </li>        </ul>
-        <!-- /.nav-second-level --> 
-      </li>
 
     <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-personal' }"> 
       <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-personal')">

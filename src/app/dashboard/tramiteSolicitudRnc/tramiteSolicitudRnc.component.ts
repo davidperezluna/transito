@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TramiteSolicitudRncService } from '../../services/tramiteSolicitudRnc.service';
 import { TipoIdentificacionService } from '../../services/tipoIdentificacion.service';
 import { CiudadanoService } from '../../services/ciudadano.service';
@@ -117,15 +117,15 @@ export class TramiteSolicitudRncComponent implements OnInit {
     this._CiudadanoService.showCiudadanoCedula(token, {'numeroIdentificacion':this.identificacion}).subscribe(
       response => {          
         if(response.status == 'success'){
-          this.solicitante = response;
+          this.solicitante = response.data;
           this.formNew = true;
           this.formEdit = false;
           this.formIndex = false;
           this.formSearch = false;
           swal({
-            title: 'Perfecto',
-            text: "¡Solicitante encontrado!",
             type: 'info',
+            title: 'Perfecto',
+            text: "¡Solicitante encontrado!"
           });
         }else{
           this.formNew = false;
@@ -133,9 +133,9 @@ export class TramiteSolicitudRncComponent implements OnInit {
           this.formIndex = false;
           this.formSearch = true;
           swal({
-            title: 'Alerta',
-            text: "¡Solicitante no encontrado!",
             type: 'warning',
+            title: 'Alerta',
+            text: "¡Solicitante no encontrado!"
           });
         }
       },

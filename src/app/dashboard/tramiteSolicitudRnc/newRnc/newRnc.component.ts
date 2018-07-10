@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { TramiteSolicitudRnc } from '../tramiteSolicitudRnc.modelo';
-import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 import { TramiteSolicitudRncService } from '../../../services/tramiteSolicitudRnc.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
@@ -21,7 +20,6 @@ export class NewRncComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() solicitante: any = null;
   public tramiteSolicitud: TramiteSolicitudRnc;
-  public vehiculo: Vehiculo;
   public errorMessage;
   public respuesta;
   public tramitesFactura: any;
@@ -53,7 +51,6 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitudRnc(null, null, null, null, null,null,null);
   }
 
@@ -63,10 +60,11 @@ constructor(
 
   onSearchFactura(){
     let token = this._loginService.getToken();
-    this._FacturaService.searchByNumero(token, {'numero':this.numeroFactura}).subscribe(
+    this._FacturaService.searchByNumero(token, {'numeroFactura':this.numeroFactura}).subscribe(
       response => {          
         if(response.status == 'success'){
-          this.factura = response;
+          this.factura = response.data;
+          
           swal({
             title: 'Perfecto',
             text: "¡Factura pagada!",
@@ -76,7 +74,7 @@ constructor(
           this._TramiteFacturaService.getTramiteShowFactura(this.factura.id).subscribe(
             response => {
               let active = true;
-              this.tramitesFactura = response;
+              this.tramitesFactura = response;              
               this.tramitesFactura.forEach(tramiteFactura => {
                 if (tramiteFactura.realizado == 0) {
                   active = false;
@@ -160,7 +158,6 @@ constructor(
       }
     });
     this.tramiteSolicitud.datos=datos;
-    this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
 
     let token = this._loginService.getToken();
     this._TramiteSolicitudRncService.register(this.tramiteSolicitud, token).subscribe(
@@ -199,7 +196,6 @@ constructor(
   }
 
   finalizarSolicitud(){
-    
     let token = this._loginService.getToken();
     this.tramites='';
     this.tramitesFactura.forEach(tramiteFactura => {
@@ -208,7 +204,6 @@ constructor(
 
     var html = 'Se va a enviar la siguiente solicitud:<br>'+
               'Factura: <b>'+this.factura.numero+'</b><br>'+
-              'Vehiculo: <b>'+this.vehiculo.placa+'</b><br>'+
               'Solicitante: <b>'+this.solicitante.usuario.identificacion+'</b><hr>'+
               'Tramites:<br>'+
               this.tramites  
@@ -226,7 +221,6 @@ constructor(
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
       if (result.value) {
-        console.log(this.factura);
         this.factura.estado = 'Finalizada';
         this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
         this._FacturaService.editFactura(this.factura,token).subscribe(
@@ -245,9 +239,7 @@ constructor(
       ) {
 
       }
-    })
-
-          
+    });     
   }
 
 }

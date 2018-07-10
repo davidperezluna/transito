@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { FacturaService } from '../../services/factura.service';
 import { TramiteFacturaService } from '../../services/tramiteFactura.service';
 import { LoginService } from '../../services/login.service';
@@ -11,6 +12,8 @@ declare var $: any;
   templateUrl: './factura.component.html'
 })
 export class FacturaComponent implements OnInit {
+  public tipo: any;
+  public sub: any;
   public errorMessage;
 	public id;
 	public respuesta;
@@ -24,11 +27,16 @@ export class FacturaComponent implements OnInit {
 
   constructor(
 		private _FacturaService: FacturaService,
-		private _TramiteFacturaService: TramiteFacturaService,
+    private _TramiteFacturaService: TramiteFacturaService,
+    private _route: ActivatedRoute,
     private _loginService: LoginService,
   ){}
     
   ngOnInit() {
+    this.sub = this._route.params.subscribe(params => {
+      this.tipo = params['tipo'];
+    });
+    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',

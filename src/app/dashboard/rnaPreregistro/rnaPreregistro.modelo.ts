@@ -26,7 +26,5 @@ export class RnaPreregistro{
 		public numeroPasajeros:number,
 		public pignorado:number,
 		public cancelado:number,
-		public tipoVehiculo:string,
-		public transportePasajeros:string,
 	){}
 }

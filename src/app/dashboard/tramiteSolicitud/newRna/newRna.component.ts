@@ -104,7 +104,6 @@ constructor(
   }
 
   changedFactura(id){
-
     this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
     response => {
       this.factura = response[0].factura;

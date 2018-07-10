@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { Factura } from '../factura.modelo';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
@@ -9,8 +9,8 @@ import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { MflTipoRecaudoService } from '../../../services/mflTipoRecaudo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
-import {ModuloService} from '../../../services/modulo.service';
-import {TramitePrecioService} from '../../../services/tramitePrecio.service';
+import { ModuloService } from '../../../services/modulo.service';
+import { TramitePrecioService } from '../../../services/tramitePrecio.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
@@ -22,6 +22,7 @@ import swal from 'sweetalert2';
 
 export class NewComponent  implements OnInit {
 @Output() ready = new EventEmitter<any>();
+@Input() tipo:any = null;
 public factura: Factura;
 public errorMessage;
 public respuesta;
@@ -69,8 +70,7 @@ constructor(
   private _moduloService: ModuloService,
   ){}
 
-  ngOnInit() {
-
+  ngOnInit() {   
     this._moduloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
