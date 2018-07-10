@@ -27,7 +27,7 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-
+    
 		this._ColorService.register(this.color,token).subscribe(
 			response => {
         this.respuesta = response;

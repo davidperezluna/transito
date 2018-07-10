@@ -67,16 +67,13 @@ constructor(
           alert("Error en la petición");
         }
       }
-    );
-
-    
-
-
-   
+    ); 
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
     this.tramitePrecio.tramiteId = this.tramiteSelected;
@@ -108,7 +105,7 @@ constructor(
             response => {
               this.respuesta = response;
               if(this.respuesta.status == 'success'){
-                this.ready.emit(true);
+                //this.ready.emit(true);
                 swal({
                   title: 'Perfecto!',
                   text: 'El registro se ha registrado con exito',

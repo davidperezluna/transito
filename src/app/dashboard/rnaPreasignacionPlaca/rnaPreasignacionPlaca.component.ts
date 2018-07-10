@@ -63,23 +63,21 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
       }
     })
 		this._ColorService.getColor().subscribe(
-				response => {
-          // this.colors = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100); 
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+      response => {
+        // this.colors = response.data;
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+        }, 100); 
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
-      
-
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -97,6 +95,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -135,8 +134,8 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
+                  this.respuesta = response;
+                  this.ready(true);
               }, 
             error => {
               this.errorMessage = <any>error;
@@ -165,11 +164,12 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
       ) {
       }
     })
+
     let token = this._loginService.getToken();
 
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
       response => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.code == 200 ) {
           this.msj = 'vehiculo ya tiene placa asignada';
           this.isError = true;
@@ -188,6 +188,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
           this.isError = false;
           this.isExist = true;
           this.vehiculo=response.data;
+          console.log(this.vehiculo);
           
           swal.close();
         }
@@ -222,11 +223,13 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   changedSedeOperativa(e){
 
     let token = this._loginService.getToken();
+    
     if (e) {
       this._CfgPlacaService.getCfgPlacaPorSedeOperativa(token,this.sedeOperativaSelected).subscribe(
         response => {
           this.cfgPlacas = response;
-          console.log(this.placas);
+          console.log(this._CfgPlacaService);
+          
           
         }, 
         error => {
@@ -244,19 +247,15 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   }
 
   onEnviar(){
-    
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     this.vehiculo.placa = this.cfgPlacaSelected;
-    console.log(this.vehiculo.placa);
     
-    // console.log(this.vehiculo);
     let token = this._loginService.getToken();
 
     this._vehiculoService.asignacionPlaca(this.vehiculo,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
-        
+         
         if(this.respuesta.status == 'success'){
 
           var html = 'El vehiculo con:<br> numero de chasis:  <b>'+this.vehiculo.chasis+
@@ -270,7 +269,11 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
             html: html,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          }).then((result) => {
+            if (result.value) {
+              this.onCancelar();
+            }
+          });          
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -289,7 +292,6 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
     this.isError = false;
     this.isExist = false;
     this.ngOnInit();
-    
   }
 
 }

@@ -1,12 +1,12 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class MparqCostoTrayectoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mparqcostotrayecto";
-	public identity;
+	private url = environment.apiUrl + "mparqcostotrayecto";
+	public identity; 
 	public token;
 
 	constructor(private _http: Http){}

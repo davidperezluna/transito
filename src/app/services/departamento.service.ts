@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class DepartamentoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/departamento";
+	private url = environment.apiUrl + "departamento";
 	public identity;
 	public token;
 

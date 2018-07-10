@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { msvCaracterizacionComponent } from './msvCaracterizacion.component';
+import { MsvCaracterizacionComponent } from './msvCaracterizacion.component';
 
-export const msvCaracterizacion: Route[] = [
+export const MsvCaracterizacion: Route[] = [
     {
       path: 'msvCaracterizacion',
-      component: msvCaracterizacionComponent
+      component: MsvCaracterizacionComponent
     }
 ];
  

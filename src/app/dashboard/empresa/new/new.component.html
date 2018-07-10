@@ -82,8 +82,7 @@
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Nro. Registro mercantil
-                                </label>
+                                <label>Nro. Registro mercantil </label>
                                 <input class="form-control" [(ngModel)]="empresa.nroRegistroMercantil" name="nroRegistroMercantil" placeholder="" type="text" required>
                             </div>
                             <!-- fin ubicacion -->
@@ -100,15 +99,15 @@
                             <h5 class="col-xs-12 col-lg-12">Datos dirección </h5>
                             <!-- datos dirección -->
                             <div class="col-xs-12 col-lg-4">
-                                <label>Dirección*</label>
+                                <label>Dirección <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="empresa.direccion" name="direccion" placeholder="" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Telefono</label>
+                                <label>Telefono <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="empresa.telefono" name="telefono" placeholder="" type="number" min="0" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Celular</label>
+                                <label>Celular <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="empresa.celular" name="celular" placeholder="" type="number" min="0" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
@@ -116,7 +115,7 @@
                                 <input class="form-control" [(ngModel)]="empresa.fax" name="fax" placeholder="" type="email" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Correo electrónico</label>
+                                <label>Correo electrónico <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="empresa.correo" name="correo" placeholder="" type="email" required>
                             </div>                            
                             <br><br><hr>
@@ -136,9 +135,14 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button (click)="onCancelar()" class="btn btn-outline-secondary">Cancelar</button>
-                        <!-- <button (click)="onCancelar()" class="btn btn-secondary"><i class="fa fa-floppy-o"></i>Cancelar</button> -->
-                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary" type="button">Enviar</button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-floppy-o"></i>
+                            Enviar
+                        </button>
                     </div>
                 </form>    
             </div>

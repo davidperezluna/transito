@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers } from "@angular/http";
 import "rxjs/add/operator/map";
-import { Observable } from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class TramiteService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/tramite";
+	private url = environment.apiUrl + "tramite";
 	public identity;
 	public token;
 

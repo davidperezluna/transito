@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
         <div class="card-body">
-            <h5 class="m-0">formulario para editar una persona natural</h5>
+            <h5 class="m-0">Editar una persona natural</h5>
             <hr> 
             <div class="row justify-content-center">
                 <form #ciudadanoForm="ngForm">
@@ -143,11 +143,11 @@
                 </div>    
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">
+                <button (click)="onCancelar()" class="btn btn-default">
                     <i class="fa fa-times"></i>
                     Cancelar
                 </button>
-                <button (click)="onEnviar()" [disabled]="ciudadanoForm.invalid" class="btn btn-outline-primary pull-right" type="button">
+                <button (click)="onEnviar()" [disabled]="ciudadanoForm.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-floppy-o"></i>
                     Enviar
                 </button>

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { environment } from 'environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class SustratoService {
-	public url = 'http://localhost/GitHub/colossus-sit/web/app_dev.php/sustrato';
+	private url = environment.apiUrl + "sustrato";
 	public identity;
 	public token;
 
@@ -44,6 +45,13 @@ export class SustratoService {
 		let params = 'json=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + '/edit', params, { headers: headers }).map(res => res.json());
+	}
+
+	editEstado(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = 'json=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/edit/estado', params, { headers: headers }).map(res => res.json());
 	}
 
 	getSustratoSelect() {

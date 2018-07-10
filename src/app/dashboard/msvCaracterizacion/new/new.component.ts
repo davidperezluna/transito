@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { msvCaracterizacion } from '../msvCaracterizacion.modelo';
-import { msvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
+import { MsvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public errorMessage;
 public respuesta;
 
 constructor(
-  private _msvCaracterizacionService: msvCaracterizacionService,
+  private _MsvCaracterizacionService: MsvCaracterizacionService,
   private _loginService: LoginService,
   ){}
 
@@ -30,7 +30,7 @@ constructor(
     let token = this._loginService.getToken();
     
     console.log(this.msvCaracterizacion);
-		this._msvCaracterizacionService.register(this.msvCaracterizacion,token).subscribe(
+		this._MsvCaracterizacionService.register(this.msvCaracterizacion,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

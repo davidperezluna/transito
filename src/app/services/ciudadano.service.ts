@@ -1,11 +1,11 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class CiudadanoService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/ciudadano";
+	private url = environment.apiUrl + "ciudadano";
 	public identity;
 	public token;
 
@@ -34,12 +34,10 @@ export class CiudadanoService {
 	}
 
 	showCiudadano(token,id){
-		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
 							  .map(res => res.json());
-
 	}
 
 	editCiudadano(ciudadano,token){
@@ -66,5 +64,12 @@ export class CiudadanoService {
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/isCiudadano/tipoIde/Ide", params, {headers: headers})
 							  .map(res => res.json());
+	}
+
+	editLicenciaConduccion(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 			return this._http.post(this.url+"/edit/licencia/conduccion", params, {headers: headers}).map(res => res.json());
 	}
 }

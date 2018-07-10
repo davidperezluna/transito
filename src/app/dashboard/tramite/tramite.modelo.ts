@@ -3,9 +3,6 @@ export class Tramite{
 		public id:number,
 		public moduloId: number,
 		public nombre:string,
-		public valor:number,
-		public redondeo:boolean,
-		public unidad:number,
-		public afectacion:boolean
+		public sustrato:boolean
 	){}
 }

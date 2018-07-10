@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers } from "@angular/http";
+import { environment } from 'environments/environment';
 import "rxjs/add/operator/map";
-import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class CfgPlacaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/cfgplaca";
+	private url = environment.apiUrl + "cfgplaca";
 	public identity;
 	public token;
 

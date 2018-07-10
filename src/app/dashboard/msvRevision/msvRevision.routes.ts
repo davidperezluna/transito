@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { msvRevisionComponent } from './msvRevision.component';
+import { MsvRevisionComponent } from './msvRevision.component';
 
-export const msvRevisionRoutes: Route[] = [
+export const MsvRevisionRoutes: Route[] = [
     {
       path: 'msvRevision',
-      component: msvRevisionComponent
+      component: MsvRevisionComponent
     }
 ];
  

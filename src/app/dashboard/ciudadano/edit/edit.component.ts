@@ -150,7 +150,7 @@ constructor(
       );
 
    
-    this._paisService.getPaisSelect().subscribe(
+    this._paisService.select().subscribe(
       response => {
         this.paises = response;
         setTimeout(() => {

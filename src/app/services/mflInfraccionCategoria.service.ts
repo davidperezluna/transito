@@ -2,10 +2,11 @@ import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
 import { LoggerService } from "../logger/services/logger.service";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class MflInfraccionCategoriaService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php/mflinfraccioncategoria";
+	private url = environment.apiUrl + "mflinfraccioncategoria";
 	public identity;
 	public token;
 

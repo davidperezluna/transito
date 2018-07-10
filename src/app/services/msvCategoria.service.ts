@@ -1,11 +1,10 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
-import  {Observable} from "rxjs/Observable";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class msvCategoriaService {
+export class MsvCategoriaService {
 	private url = environment.apiUrl + 'msvrevision';
 	public identity;
 	public token;

@@ -1,0 +1,203 @@
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Nueva Alerta
+                </h5>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="row justify-content-center container">
+                    <div class="form-group row col-xs-12 col-lg-12">
+                        <label>Alertas disponibles <span class="text-danger">*</span></label>
+                        <ng-select [multiple]="false" [options]="cfgTiposAlerta" [(ngModel)]="cfgTipoAlertaSelected" placeholder="Seleccione una alerta" required name="alertaId">
+                        </ng-select>
+                    </div>
+
+                    <!-- select grados alerta -->
+                    <div class="container" *ngIf="cfgTipoAlertaSelected <= 6 || cfgTipoAlertaSelected >= 1 && apoderado == 'false'">
+                        <div class="form-group row col-xs-12 col-lg-12">
+                            <label>Grados alerta
+                                <span class="text-danger">*</span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="gradosAlerta" [(ngModel)]="gradoSelected" required name="gradoAlertaId">
+                            </ng-select>
+                        </div>
+
+
+
+
+                        <!--Buscardor Identificador/Nit -->
+                        <div class="col-xs-12 col-lg-12 row">
+                            <!--Cuando es de tipo propio -->
+                            <div class="col-xs-12 col-lg-12" *ngIf="tipoPropiedadSelected == 2">
+                                <br>
+                                <label class="custom-control custom-checkbox" for="sustrato">
+                                    <input type="checkbox" [(ngModel)]="datos.solidario" name="solidario" class="custom-control-input" id="sustrato" required>
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">solidario</span>
+                                </label>
+                            </div>
+                            <!-- cuando es de tipo leasing -->
+                            <div class="col-xs-12 col-lg-12" *ngIf="tipoPropiedadSelected == 1 && propietario">
+                                <h6>Propietario</h6>
+                            </div>
+                            <div class="col-xs-12 col-lg-12" *ngIf="tipoPropiedadSelected == 1 && propietario == false">
+                                <h6>Locatario</h6>
+                            </div>
+                        
+                            <div class="col-xs-8 col-lg-6">
+                                <label>Tipo de identificación
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" (ngModelChange)="changedtipoIdentificacion($event)" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected"
+                                    required name="tipoIdentificacionId">
+                                </ng-select>
+                            </div>
+                        
+                            <!--tipo identificacion ciudadano -->
+                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
+                                <label>Identificación</label>
+                                <div class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
+                                    <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion"
+                                        required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2"
+                                            [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div class="has-danger" *ngIf="ciudadanoEncontrado === 3">
+                                    <div class="form-control-feedback has-danger has-error">No se encontró la persona</div>
+                                </div>
+                            </div>
+                        
+                            <!--tipo identificacion nit -->
+                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
+                                <label>NIT</label>
+                                <div class="input-group" [class.has-success]="empresaEncontrada === 2" [class.has-danger]="empresaEncontrada === 3">
+                                    <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onKeyEmpresa()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2"
+                                            [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div class="has-danger" *ngIf="empresaEncontrada === 3">
+                                    <div class="form-control-feedback has-danger has-error">No se encontró la empresa</div>
+                                </div>
+                            </div>
+                        
+                            <!--propietarios ciudadanos -->
+                            <div class="container" *ngIf="listaPropietariosCiudadanos">
+                                <br>
+                                <table class="table " id="dataTables-example">
+                                    <br>
+                                    <thead>
+                                        <tr>
+                                            <th>Permiso tramite</th>
+                                            <th>Solicitante Ciudadano</th>
+                                            <th>Apoderado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let ciudadano of datos.propietariosCiudadanos; let i = index">
+                        
+                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==2">
+                                                <p>Si</p>
+                                            </td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==2">
+                                                <p>No</p>
+                                            </td>
+                        
+                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==1">
+                                                <p>Propietario</p>
+                                            </td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==1">
+                                                <p>Locatario</p>
+                                            </td>
+                        
+                                            <td class="center">
+                                                <p>{{ciudadano.identificacion}}
+                                                    <br>{{ciudadano.nombre}}</p>
+                                            </td>
+                                            <td class="center" *ngIf="ciudadano.identificacionApoderado">
+                                                <p>{{ciudadano.identificacionApoderado}}
+                                                    <br>{{ciudadano.nombreApoderado}}</p>
+                                            </td>
+                                            <td class="center" *ngIf="!ciudadano.identificacionApoderado">
+                                                <button (click)="agregarApoderadoCiudadano(ciudadano)" class="btn btn-primary pull-right">Agregar</button>
+                                            </td>
+                                            <td class="center">
+                                                <button (click)="delete(ciudadano)" class="btn btn-danger">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <!--propietarios empresas -->
+                            <div class="container" *ngIf="listaPropietariosEmpresas">
+                                <br>
+                                <table class="table " id="dataTables-example">
+                                    <br>
+                                    <thead>
+                                        <tr>
+                                            <th>Permiso tramite</th>
+                                            <th>Solicitante Empresa</th>
+                                            <th>Apoderado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let empresa of datos.propietariosEmpresas; let i = index">
+                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==2">
+                                                <p>Si</p>
+                                            </td>
+                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==2">
+                                                <p>No</p>
+                                            </td>
+                        
+                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==1">
+                                                <p>Propietario</p>
+                                            </td>
+                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==1">
+                                                <p>Locatario</p>
+                                            </td>
+                                            <td class="center">
+                                                <p>{{empresa.nit}}
+                                                    <br>{{empresa.nombre}}</p>
+                                            </td>
+                                            <td class="center" *ngIf="empresa.identificacionApoderado">
+                                                <p>{{empresa.identificacionApoderado}}
+                                                    <br>{{empresa.nombreApoderado}}</p>
+                                            </td>
+                                            <td class="center" *ngIf="!empresa.identificacionApoderado">
+                                                <button (click)="agregarApoderadoEmpresa(empresa)" class="btn btn-primary pull-right">Agregar</button>
+                                            </td>
+                                            <td class="center">
+                                                <button (click)="deleteEmpresa(empresa)" class="btn btn-danger">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
