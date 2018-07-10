@@ -5,7 +5,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class TramiteTrasladoService {
-	private url = environment.apiUrl + "tramiteTraslado";
+	private url = environment.apiUrl + "tramitetraslado";
 	public identity;
 	public token;
 
@@ -15,9 +15,9 @@ export class TramiteTrasladoService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(tipoFestivo,token){ 
+	register(tramiteTraslado,token){ 
 		
-		let json = JSON.stringify(tipoFestivo);
+		let json = JSON.stringify(tramiteTraslado);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
