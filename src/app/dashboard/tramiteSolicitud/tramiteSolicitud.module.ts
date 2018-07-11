@@ -4,9 +4,10 @@ import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { EmpresaService } from '../../services/empresa.service';
+import { DefaultService } from '../../services/default.service';
 import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 
-import { NewRnaComponent } from './newRna/newRna.component';
+import { NewRnaComponent } from './newRna/newRna.component'; 
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
 import { NewRnaDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/newRna.duplicadoLicencia.component';
 import { NewRnaCambioColorComponent } from './rna/tramiteCambioColor/newRna.cambioColor.component'; 
@@ -108,7 +109,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaCambioConjuntoComponent,
         NewTrasladoComponent
     ],
-    providers:[TramiteSolicitudService,CfgTipoAlertaService,TramiteTrasladoService]
+    providers:[TramiteSolicitudService,CfgTipoAlertaService,TramiteTrasladoService,EmpresaService,DefaultService]
 })
 
 export class TramiteSolicitudModule { }
