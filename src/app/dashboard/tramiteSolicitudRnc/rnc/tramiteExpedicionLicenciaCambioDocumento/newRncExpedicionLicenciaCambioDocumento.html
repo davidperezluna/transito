@@ -1,0 +1,77 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Expedicion de licencia cambio de documento
+                </h5>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <form>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Conductor</label>
+                            <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Identificación actual <b class="text-danger">*</b></label>
+                            <input type="text" class="form-control" [(ngModel)]="datos.identificacionActual" name="identificacionActual" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Identificación anterior</label>
+                            <input type="text" class="form-control" [(ngModel)]="datos.identificacionAnterior" value="{{ solicitante.identificacion }}" name="identificacionAnterior" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Categoria <b class="text-danger">*</b></label>
+                            <select class="form-control" [(ngModel)]="datos.categoria" name="categoria" required>
+                                <option *ngFor="let categoria of categorias" [value]="categoria"> {{ categoria }}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Clase vehiculo <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="clases" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Servicio <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" name="servicios" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Vigencia <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Número de Licencia <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Número RUNT <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="enviarTramite()" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

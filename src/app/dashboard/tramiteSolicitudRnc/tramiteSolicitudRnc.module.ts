@@ -8,6 +8,10 @@ import { NewRncSustratoComponent } from './newRncSustrato/newRncSustrato.compone
 import { NewRncCiudadanoComponent } from './newRncCiudadano/newRncCiudadano.component';
 import { NewRncExpedicionLicenciaComponent } from './rnc/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
 import { NewRncDuplicadoLicenciaComponent } from './rnc/tramiteDuplicadoLicencia/newRncDuplicadoLicencia.component';
+import { NewRncExpedicionLicenciaCambioDocumentoComponent } from './rnc/tramiteExpedicionLicenciaCambioDocumento/newRncExpedicionLicenciaCambioDocumento.component';
+import { NewRncRecategorizacionLicenciaAbajoComponent } from './rnc/tramiteRecategorizacionLicenciaAbajo/newRncRecategorizacionLicenciaAbajo.component';
+import { NewRncRecategorizacionLicenciaArribaComponent } from './rnc/tramiteRecategorizacionLicenciaArriba/newRncRecategorizacionLicenciaArriba.component';
+import { NewRncRefrendacionLicenciaComponent } from './rnc/tramiteRefrendacionLicencia/newRncRefrendacionLicencia.component';
 
 import { NewRncComponent } from './newRnc/newRnc.component';
 import { EditComponent } from './edit/edit.component';
@@ -22,7 +26,11 @@ import { SelectModule } from 'angular2-select';
         NewRncSustratoComponent,
         NewRncCiudadanoComponent,
         NewRncExpedicionLicenciaComponent,
-        NewRncDuplicadoLicenciaComponent
+        NewRncDuplicadoLicenciaComponent,
+        NewRncExpedicionLicenciaCambioDocumentoComponent,
+        NewRncRecategorizacionLicenciaAbajoComponent,
+        NewRncRecategorizacionLicenciaArribaComponent,
+        NewRncRefrendacionLicenciaComponent
     ],
     exports: [
         TramiteSolicitudRncComponent,
@@ -31,7 +39,11 @@ import { SelectModule } from 'angular2-select';
         NewRncSustratoComponent,
         NewRncCiudadanoComponent,
         NewRncExpedicionLicenciaComponent,
-        NewRncDuplicadoLicenciaComponent
+        NewRncDuplicadoLicenciaComponent,
+        NewRncExpedicionLicenciaCambioDocumentoComponent,
+        NewRncRecategorizacionLicenciaAbajoComponent,
+        NewRncRecategorizacionLicenciaArribaComponent,
+        NewRncRefrendacionLicenciaComponent
     ],
     providers: [TramiteSolicitudRncService]
 })

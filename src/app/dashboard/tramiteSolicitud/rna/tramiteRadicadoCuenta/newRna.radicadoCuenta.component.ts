@@ -91,6 +91,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
    
     enviarTramite(){     
         let token = this._loginService.getToken();
+
         this.datos.municipioSelected = this.municipioSelected;
         this.datos.tipoIdentificacionSelected = this.tipoIdentificacionSelected;
         this.datos.numeroDocumento = this.numeroDocumento;
@@ -101,6 +102,8 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         this.datos.tramiteFactura = 4;
         console.log(this.datos);
         this.readyTramite.emit(this.datos);
+
+        
 
     }
     onCancelar(){

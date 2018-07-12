@@ -1,0 +1,93 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Recategorización de licencia abajo
+                </h5>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <form>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Conductor</label>
+                            <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Identificación</label>
+                            <input type="text" class="form-control" value="{{ solicitante.identificacion }}" name="solicitante_identificacion" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Categoria actual <b class="text-danger">*</b></label>
+                            <select class="form-control" [(ngModel)]="datos.categoriaActual" name="categoria_actual" required>
+                                <option *ngFor="let categoria of categorias" [value]="categoria"> {{ categoria }}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Categoria nueva <b class="text-danger">*</b></label>
+                            <select class="form-control" [(ngModel)]="datos.categoriaNueva" name="categoria_nueva" required>
+                                <option *ngFor="let categoria of categorias" [value]="categoria"> {{ categoria }}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Clase vehiculo <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="clases" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Servicio <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" name="servicios" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Vigencia <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Número de Licencia <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Número RUNT <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="documentacion" class="custom-control-input" id="check-documentacion" name="check_documentacion">
+                                <label class="custom-control-label" for="check-documentacion">Entrega documentación</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row" *ngIf="documentacion">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Registre que documento se entrega por parte del solicitante <b class="text-danger">*</b></label>
+                            <textarea class="form-control" [(ngModel)]="datos.documentacion" rows="4" name="documentacion"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="enviarTramite()" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

@@ -15,12 +15,7 @@ export class VehiculoService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	indexRna(){
-		return this._http.get(this.url+"/rna").map(res => res.json());
-	}
-
-	register(vehiculo,token){
-		
+	register(vehiculo, token){
 		let json = JSON.stringify(vehiculo);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -29,7 +24,6 @@ export class VehiculoService {
 	}
 
 	deleteVehiculo(token,id){
-
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})

@@ -15,6 +15,7 @@ export class NewTrasladoComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Output() readyTramite = new EventEmitter<any>();
 @Input() vehiculo: any = null;
+@Input() tramiteTraslado: any = null;
 @Input() tramitesFactura: any = null;
 public sedeOperativaSelected: any;
 public sedes: any;
@@ -22,15 +23,11 @@ public tramiteFacturaSelected: any;
 public tramiteRealizado: any = false;
 public errorMessage;
 public respuesta;
-public datos = {
-  'sedeOperarivaIdNew': null,
-  'sedeOperarivaIdOld': null,
-  'fechaSalida': null,
-  'numeroRunt': null,
-  'numeroGuia': null,
-  'nombreEmpresa': null,
-  'tramiteFactura': null,
-};
+public numeroGuia;
+public fechaSalida;
+public numeroRunt;
+public nombreEmpresa;
+public datos: any = null;
 
 constructor(
   private _loginService: LoginService,
@@ -42,6 +39,18 @@ constructor(
   ){}
 
   ngOnInit() {
+    this.datos = null;
+    if (this.datos == null){
+      this.datos = {
+        'sedeOperativaIdNew': null,
+        'sedeOperativaIdOld': null,
+        'fechaSalida': null,
+        'numeroRunt': null,
+        'numeroGuia': null,
+        'nombreEmpresa': null,
+        'tramiteFactura': null,
+        'vehiculoId': null};
+    }
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
@@ -99,8 +108,8 @@ constructor(
       response => {
           this.respuesta = response; 
           if(this.respuesta.status == 'success'){
-              this.datos.sedeOperarivaIdNew = this.sedeOperativaSelected;
-              this.datos.sedeOperarivaIdOld = this.vehiculo.sedeOperativa.id;
+              this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
+              this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
               this.datos.tramiteFactura =3;
               this.readyTramite.emit(this.datos);
           }
@@ -113,6 +122,29 @@ constructor(
                   }
               }
       }); 
+
+        this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
+        this.datos.vehiculoId = this.vehiculo.id;
+        this.datos.numeroGuia = this.numeroGuia;
+        this.datos.numeroRunt = this.numeroRunt;
+        this.datos.fechaSalida = this.fechaSalida;
+        this.datos.nombreEmpresa = this.nombreEmpresa;
+        this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
+        this.respuesta = response; 
+        if(this.respuesta.status == 'success'){
+          alert("Datos enviados con éxito");
+        }
+        error => {
+                this.errorMessage = <any>error;
+
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+    });
+
+    this.ngOnInit();
 		
   }
 
