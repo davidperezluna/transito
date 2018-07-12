@@ -37,7 +37,7 @@ export class NewRnaCambioColorComponent implements OnInit {
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
     ) { }
- 
+  
     ngOnInit() {
         this.tramitesFactura.forEach(tramiteFactura => {
             if (tramiteFactura.realizado == 1) {
@@ -49,7 +49,11 @@ export class NewRnaCambioColorComponent implements OnInit {
         });
         //consultar tramite solicitud con tramiterealizado.id
         let token = this._loginService.getToken();
+<<<<<<< HEAD
         if(this.tramiteRealizado){
+=======
+        if (this.tramiteRealizado) {
+>>>>>>> 59dd64a1c8f5f43b842150b5bcda724a0f29b2c1
             this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
                 response => {
                     this.datos = response.data.datos
