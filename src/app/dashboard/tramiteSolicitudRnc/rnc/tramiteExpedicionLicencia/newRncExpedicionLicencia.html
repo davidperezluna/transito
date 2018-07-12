@@ -10,6 +10,14 @@
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <form>
+                    <div class="col-xs-12 col-lg-8">
+                        <label>Conductor</label>
+                        <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Identificación</label>
+                        <input type="text" class="form-control" value="{{ solicitante.identificacion }}" name="solicitante_identificacion" readonly>
+                    </div>
                     <label><b>¿Convalidación?</b></label>
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-2">
@@ -69,8 +77,8 @@
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="enviarTramite()" class="btn btn-success">Enviar</button>
             </div>
         </div>
     </div>

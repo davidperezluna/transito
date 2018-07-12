@@ -10,43 +10,35 @@
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <form>
-                    <label><b>¿Convalidación?</b></label>
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-2">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" [(ngModel)]="radio" id="radio-si" name="customRadio" value="true" class="custom-control-input">
-                                <label class="custom-control-label" for="radio-si">
-                                    Si
-                                </label>
-                            </div>
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Conductor</label>
+                            <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
                         </div>
-                        <div class="col-xs-12 col-lg-2">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" [(ngModel)]="radio" id="radio-no" name="customRadio" value="false" class="custom-control-input" checked="">
-                                <label class="custom-control-label" for="radio-no">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-6" *ngIf="radio == 'true'">
-                            <label>País expedición licencia extranjera <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="paises" [(ngModel)]="paisSelected" name="paises">
-                            </ng-select>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Identificación</label>
+                            <input type="text" class="form-control" value="{{ solicitante.identificacion }}" name="solicitante_identificacion" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Categoria <b class="text-danger">*</b></label>
-                            <select class="form-control" [(ngModel)]="datos.categoria" name="categoria" required>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Categoria actual <b class="text-danger">*</b></label>
+                            <select class="form-control" [(ngModel)]="datos.categoriaActual" name="categoria_actual" required>
                                 <option *ngFor="let categoria of categorias" [value]="categoria"> {{ categoria }}</option>
                             </select>
                         </div>
-                        <div class="col-xs-12 col-lg-4">
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Categoria nueva <b class="text-danger">*</b></label>
+                            <select class="form-control" [(ngModel)]="datos.categoriaNueva" name="categoria_nueva" required>
+                                <option *ngFor="let categoria of categorias" [value]="categoria"> {{ categoria }}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
                             <label>Clase vehiculo <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="clases" required>
                             </ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-4">
+                        <div class="col-xs-12 col-lg-3">
                             <label>Servicio <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" name="servicios" required>
                             </ng-select>
@@ -66,11 +58,33 @@
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="documentacion" class="custom-control-input" id="check-documentacion" name="check_documentacion">
+                                <label class="custom-control-label" for="check-documentacion">Entrega documentación</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row" *ngIf="documentacion">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Registre que documento se entrega por parte del solicitante <b class="text-danger">*</b></label>
+                            <textarea class="form-control" [(ngModel)]="datos.documentacion" rows="4" name="documentacion"></textarea>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="enviarTramite()" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
             </div>
         </div>
     </div>
