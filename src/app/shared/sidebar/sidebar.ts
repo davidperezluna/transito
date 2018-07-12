@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
       this.showMenu = element;
     }
   }
+  
   addSubExpandClass(element: any) {
     if (element === this.showSubMenu) {
       this.showSubMenu = '0';
