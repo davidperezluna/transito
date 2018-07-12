@@ -20,21 +20,22 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     @Input() tramitesFactura: any = null;
+
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
     public tramiteRealizado: any;
-    public numeroDocumento: any;
-    public fechaIngreso: any;
-    public guiaLlegada: any;
-    public empresaEnvio: any;
-    public rut: any;
     public municipios:any;
     public municipio:any;
     public municipioSelected:any;
     public tiposIdentificacion: any;
     public tipoIdentificacion: any;
     public tipoIdentificacionSelected:any;
+    public numeroDocumento: any;
+    public fechaIngreso: any;
+    public guiaLlegada: any;
+    public empresaEnvio: any;
+    public rut: any;
     public datos = {
         'municipioSelected': null,
         'tipoIdentificacionSelected': null,
