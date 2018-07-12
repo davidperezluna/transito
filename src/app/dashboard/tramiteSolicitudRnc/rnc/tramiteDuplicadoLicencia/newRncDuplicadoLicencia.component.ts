@@ -98,24 +98,11 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     enviarTramite() {
         let token = this._LoginService.getToken();
         
-        this.datos.tramiteFactura = 58;
+        this.datos.tramiteFactura = 59;
         this.datos.claseId = this.claseSelected;
         this.datos.servicioId = this.servicioSelected;
         this.datos.paisId = this.paisSelected;
         this.datos.solicitanteId = this.solicitante.id;
-
-        this._CiudadanoService.editLicenciaConduccion(this.datos,token).subscribe(
-            response => {
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            }
-        );
 
         this.readyTramite.emit(this.datos);
     }

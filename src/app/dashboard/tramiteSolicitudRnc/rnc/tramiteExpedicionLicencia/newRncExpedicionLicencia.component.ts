@@ -34,6 +34,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         'licenciaConduccion': null,
         'numeroRunt': null,
         'vigencia': null,
+        'documentacion': null,
         'paisId': null,
         'claseId': null,
         'servicioId': null,
@@ -103,19 +104,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         this.datos.servicioId = this.servicioSelected;
         this.datos.paisId = this.paisSelected;
         this.datos.solicitanteId = this.solicitante.id;
-
-        this._CiudadanoService.editLicenciaConduccion(this.datos,token).subscribe(
-            response => {
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            }
-        );
 
         this.readyTramite.emit(this.datos);
     }

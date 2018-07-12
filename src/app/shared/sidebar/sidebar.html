@@ -312,6 +312,12 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
+          <a class="nav-link" [routerLink]="['factura/', 'RNA']"  [ngClass]="{'active' : ( addActive === 'factura')}" (click)="addActiveMenu('factura')">
+            <i class="fa fa-angle-right"></i>
+            Factura
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="rnaPreregistro" [ngClass]="{'active' : ( addActive === 'rnaPreregistro')}" (click)="addActiveMenu('rnaPreregistro')">
             <i class="fa fa-angle-right"></i> Pre-registro
           </a>

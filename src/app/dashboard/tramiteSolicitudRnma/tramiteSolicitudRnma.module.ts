@@ -31,6 +31,7 @@ import { NewRnmaMatricualaInicialComponent } from './Rnma/tramiteMatriculaInicia
 import { NewRnmaTransformacionComponent } from './Rnma/tramiteTransformacion/newRnma.transformacion.component';
 import { NewRnmaCambioConjuntoComponent } from './Rnma/tramiteCambioConjunto/newRnma.cambioConjunto.component';
 import { NewRnmaRadicadoCuentaComponent } from './Rnma/tramiteRadicadoCuenta/newRnma.radicadoCuenta.component';
+import { NewRnmaRegistroMaquinariaComponent } from './Rnma/tramiteRegistroMaquinaria/newRnma.registroMaquinaria.component';
 import { NewTrasladoComponent } from './rnma/tramiteTraslado/newTraslado.component';
 import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
 import { EditComponent } from './edit/edit.component';
@@ -69,6 +70,7 @@ import { SelectModule } from 'angular2-select';
         NewRnmaTransformacionComponent,
         NewRnmaCambioConjuntoComponent,
         NewRnmaRadicadoCuentaComponent,
+        NewRnmaRegistroMaquinariaComponent,
         NewTrasladoComponent
     ],
     exports: [
@@ -101,6 +103,7 @@ import { SelectModule } from 'angular2-select';
         NewRnmaTransformacionComponent,
         NewRnmaCambioConjuntoComponent,
         NewRnmaRadicadoCuentaComponent,
+        NewRnmaRegistroMaquinariaComponent,
         NewTrasladoComponent
     ],
     providers:[TramiteSolicitudService,EmpresaService,TramiteTrasladoService]

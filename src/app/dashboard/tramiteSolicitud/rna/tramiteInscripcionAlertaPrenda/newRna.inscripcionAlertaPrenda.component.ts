@@ -2,14 +2,12 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
+import { BancoService } from '../../../../services/banco.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 
 
@@ -23,36 +21,29 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() banco: any = null;
     @Input() factura: any = null;
     @Input() tramitesFactura: any = null;
 
     public errorMessage;
     public respuesta;
-    public colores: any;
     public cfgTiposAlerta: any;
     public tramiteFacturaSelected: any;
-    public colorSelected: any;
+    public nombreAcreedor: any;
     public tramiteRealizado: any;
     public cfgTipoAlertaSelected: any;
     public gradoSelected: any;
-    public ciudadano: any;
-    public apoderadoSelected: any;
-    public empresa: any;
-    public empresaSelected: any;
-    public identificacion: any;
-    public identificacionApoderado: any;
-    public ciudadanoEncontrado = 1;
-    public apoderadoEncontrado = 1;
-    public empresaEncontrada = 1;
-    public nit: any;
-    public tipoIdentificacionSelected = null;
-    public listaPropietariosCiudadanos = false;
-    public listaPropietariosEmpresas = false;
-    public ciudadanoNew = false;
+    public acreedorNew = false;
+    public acreedorEncontrado = 1;
     public propietario = true;
     public propietarioPresente = false;
     public ciudadanoSelected: any;
     public apoderado = 'false';
+    public vehiculosAcreedor;
+    public table: any;
+    public formIndex = true;
+    public vehiculoAcreedor: any; 
+    public acreedores:any=[];
     public gradosAlerta = [
         { 'value': 1, 'label': "UNO" },
         { 'value': 2, 'label': "DOS" },
@@ -65,34 +56,29 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         { 'value': 9, 'label': "NUEVE" }
     ];
     public datos = {
-        'newData': null,
-        'oldData': null,
-        'propietariosEmpresas': [],
-        'propietariosCiudadanos': [],
-        'solidario': false,
-        'vehiculo': null,
-        'sustrato': null,
-        'numeroLicencia': null,
+        'tipoAlerta': [],
+        'gradoAlerta': null,
         'tramiteFactura': null,
     };
+    public datos2 = {
+        'vehiculoId': null,
+        'bancoId': null,
+    }
     public tipoIdentificaciones = [];
 
     constructor(
-        private _ColorService: ColorService,
         private _CfgTipoAlertaService: CfgTipoAlertaService,
         private _TramiteSolicitudService: TramiteSolicitudService,
+        private _BancoService: BancoService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
+        private _VehiculoAcreedorService: VehiculoAcreedorService,
         private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
-        private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
     ) { }
  
     ngOnInit() {
-  
         this._CfgTipoAlertaService.getAlertaSelect().subscribe(
             response => {
                 this.cfgTiposAlerta = response;
@@ -106,44 +92,145 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                 }
             }
         );
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._VehiculoAcreedorService.getAcreedor().subscribe(
             response => {
-                this.tipoIdentificaciones = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+                this.respuesta = response;
+                console.log(response);
+                if (this.respuesta.status == 'success') {
+                    this.vehiculosAcreedor = this.respuesta.data;
+                    
+                    // this.acreedorEncontrado = 2;
+                    // this.acreedorNew = false;
+                } else {
+                    this.acreedorEncontrado = 3;
+                    this.acreedorNew = true;
                 }
-            }
-        );
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }); 
         
 
     }
+
+    
     
    
-    enviarTramite(){
+    enviarTramite() {
+        // this.datos.vehiculo = this.vehiculo.placa;
+        //this.datos.banco = this.banco.nombre;
+
+       
         let token = this._loginService.getToken();
+        this._VehiculoAcreedorService.register(this.datos2, token).subscribe(
+            response => {
+                this.respuesta = response;
+                if (this.respuesta.status == 'success') {
+                    this.vehiculoAcreedor = this.respuesta.data;
+                    this.ngOnInit();
+                    this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
+                    this.datos.gradoAlerta = this.gradoSelected;
+                    this.datos.tramiteFactura = 46;
+                    this.readyTramite.emit(this.datos);
+                    this.acreedorNew = false;
+
+                    this.acreedorEncontrado = 2;
+                } else {
+                    this.acreedorEncontrado = 3;
+                    this.acreedorNew = true;
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );
 
         
+      
+
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
 
-    // ready(isCreado: any) {
-    //     if (isCreado) {
-    //         console.log(isCreado);
-    //     } else {
-    //         this.ciudadanoNew = false;
-    //     }
-    // }
+   
 
     changedtipoIdentificacion(e) {
-        this.ciudadanoEncontrado = 1;
-        this.empresaEncontrada = 1;
+        // this.ciudadanoEncontrado = 1;
+        // this.empresaEncontrada = 1;
     }
+
+  
+    btnNewAcreedor() {
+        let token = this._loginService.getToken();
+        //this.acreedorNew = true;
+        this.acreedores.push(
+            {
+                'id':this.banco.id,
+                'nombre':this.banco.nombre
+            }
+        )
+        
+    }
+
+    onKeyAcreedor() {
+        let token = this._loginService.getToken();
+        let nombreAcreedor = {
+            'nombreAcreedor': this.nombreAcreedor,
+        };
+        this._BancoService.showAcreedorNombre(token, nombreAcreedor).subscribe(
+            response => {
+                this.respuesta = response;
+                if (this.respuesta.status == 'success') {
+                    this.banco = this.respuesta.data;
+                    this.acreedorEncontrado = 2;
+                    this.acreedorNew = false;
+                    this.datos2.bancoId = this.banco.nombre;
+                    this.datos2.vehiculoId = this.vehiculo.id;
+                } else {
+                    this.acreedorEncontrado = 3;
+                    this.acreedorNew = true;
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
+    }
+
+    btnCancelarAcreedor() {
+        this.acreedorEncontrado = 1
+    }
+
+
+    delete(acreedor:any): void{
+        this.acreedores = this.acreedores.filter(h => h !== acreedor);
+
+    }
+
+    ready(isCreado: any) {
+    if (isCreado) {
+      console.log(isCreado);
+      // this.onKeyCiudadano();
+        this.acreedorNew = false;
+        // this.acreedorEncontrado = 2;
+    } else {
+      this.acreedorNew = false;
+    }
+  }
 
 }

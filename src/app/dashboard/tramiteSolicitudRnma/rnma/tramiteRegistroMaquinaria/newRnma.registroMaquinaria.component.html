@@ -1,0 +1,172 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">Resgistro de maquinaria</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="container">
+                    <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Placa*</label> 
+                        <input class="form-control" [(ngModel)]="vehiculo.placa" name="palca" placeholder="" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. serie*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. VIN*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. chasis*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. motor*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Condición de ingreso*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="marcas"
+                            [(ngModel)]="marcaSelected"
+                            (ngModelChange)="changedDepartamento($event)"
+                            required
+                            name="marcaId">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha de ingreso*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Color*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Clase maquinaria*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Marca*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="marcas"
+                            [(ngModel)]="marcaSelected"
+                            (ngModelChange)="changedDepartamento($event)"
+                            required
+                            name="marcaId">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Tipo de MMA por clase*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="marcas"
+                            [(ngModel)]="marcaSelected"
+                            (ngModelChange)="changedDepartamento($event)"
+                            required
+                            name="marcaId">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>linea*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="marcas"
+                            [(ngModel)]="marcaSelected"
+                            (ngModelChange)="changedDepartamento($event)"
+                            required
+                            name="marcaId">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Tipo maquinaria*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="marcas"
+                            [(ngModel)]="marcaSelected"
+                            (ngModelChange)="changedDepartamento($event)"
+                            required
+                            name="marcaId">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Carrocería*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="marcas"
+                            [(ngModel)]="marcaSelected"
+                            (ngModelChange)="changedDepartamento($event)"
+                            required
+                            name="marcaId">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Peso bruto vehiculo*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Carga util maxima*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Rodaje*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. ejes*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nro. llantas*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Tipo cabina*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Alto total*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Largo total*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Ancho total*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Combustible*</label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="marcas"
+                            [(ngModel)]="marcaSelected"
+                            (ngModelChange)="changedDepartamento($event)"
+                            required
+                            name="marcaId">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Origen vehiculo*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Subpartido arancel*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div>
+                    </div> 
+                </div>
+        </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" class="btn btn-success pull-right">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>
