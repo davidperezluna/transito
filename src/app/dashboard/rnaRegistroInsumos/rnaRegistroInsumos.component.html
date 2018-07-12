@@ -22,12 +22,26 @@
               <thead>
                 <tr>
                   <th>No.Acta</th>
+                  <th>Empresa</th>
+                  <th>Sede</th>
+                  <th>Insumo</th>
+                  <th>Rango Inicio</th>
+                  <th>Rango Fin</th>
+                  <th>Cantidad</th>
+                  <th>Referencia</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let loteInsumo of loteInsumos; let i = index">
                   <td >{{loteInsumo.numeroActa}}</td>
+                  <td >{{loteInsumo.empresa.nombre}}</td>
+                  <td >{{loteInsumo.sedeOperativa.nombre}}</td>
+                  <td >{{loteInsumo.casoInsumo.nombre}}</td>
+                  <td >{{loteInsumo.rangoInicio}}</td>
+                  <td >{{loteInsumo.rangoFin}}</td>
+                  <td >{{loteInsumo.cantidad}}</td>
+                  <td >{{loteInsumo.referencia}}</td>
                   <td>
                     <button (click)="editRnaLoteInsumo(loteInsumo)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteRnaLoteInsumo(loteInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
@@ -40,4 +54,5 @@
         </div>
       </div>
     </div>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
