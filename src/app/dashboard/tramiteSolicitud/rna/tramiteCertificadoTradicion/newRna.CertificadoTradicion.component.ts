@@ -20,7 +20,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     public apiUrl = environment.apiUrl + 'default';
     public errorMessage;
     public respuesta;
-    public tramiteFacturaSelected: any;
+    public tramiteFacturaSelected: any; 
     public sustratos: any;
     public sustratoSelected: any;
     public tipoRegrabacionList: string[];

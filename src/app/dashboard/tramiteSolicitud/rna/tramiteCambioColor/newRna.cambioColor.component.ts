@@ -93,8 +93,8 @@ export class NewRnaCambioColorComponent implements OnInit {
                     this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
                     this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
                     this.vehiculo.claseId = this.vehiculo.clase.id   
-                    this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+                    this.vehiculo.servicioId = this.vehiculo.servicio.id                     
+                    this._VehiculoService.editVehiculoColor(this.vehiculo,token).subscribe(
                     response => {
                         this.respuesta = response; 
                         if(this.respuesta.status == 'success'){
