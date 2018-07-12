@@ -87,20 +87,8 @@ constructor(
         console.log(this.date);
         // console.log(this.tramitePrecio.tramiteId);
         // console.log(this.tramitePrecio);
-       
-        if (this.date < this.fechaInicio) {
-          // let nombre = 
-          // this.tramitesPrecios.forEach(tramitePrecio => {
-          //   if (tramitePrecio.nombre==) {
-              
-          //   }
-          // });
 
-          // alert ("estas aqui la fecha es mayor");
-
-
-          console.log(this.claseSelected);
-          this.tramitePrecio.moduloId = this.moduloSelected;
+        this.tramitePrecio.moduloId = this.moduloSelected;
           this._TramitePrecioService.register(this.tramitePrecio,token).subscribe(
             response => {
               this.respuesta = response;
@@ -129,18 +117,18 @@ constructor(
                 }
               }
       
-          }); 
-
-
-
-        }else{
-          swal({
-            title: 'Verificar!',
-            text: 'La fecha de inicio tiene que ser mayor a la fecha actual.',
-            type: 'warning',
-            confirmButtonText: 'Aceptar'
-          })
-        }
+          });
+       
+        // if (this.date < this.fechaInicio) {
+            // se quito la validacion para que puedan hacer pruebas
+        // }else{
+        //   swal({
+        //     title: 'Verificar!',
+        //     text: 'La fecha de inicio tiene que ser mayor a la fecha actual.',
+        //     type: 'warning',
+        //     confirmButtonText: 'Aceptar' 
+        //   })
+        // }
 
    
   }
