@@ -49,20 +49,22 @@ export class NewRnaCambioColorComponent implements OnInit {
         });
         //consultar tramite solicitud con tramiterealizado.id
         let token = this._loginService.getToken();
-        this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
-            response => {
-                this.datos = response.data.datos
-                console.log(response.data.datos);
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+        if(this.tramiteRealizado){
+            this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
+                response => {
+                    this.datos = response.data.datos
+                    console.log(response.data.datos);
+                },
+                error => {
+                    this.errorMessage = <any>error;
+    
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
                 }
-            }
-        );
+            );
+        }
 
         this._ColorService.getColorSelect().subscribe(
             response => {

@@ -49,6 +49,7 @@ export class NewRnmaCambioColorComponent implements OnInit {
         });
         //consultar tramite solicitud con tramiterealizado.id
         let token = this._loginService.getToken();
+        if(this.tramiteRealizado){
         this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
             response => {
                 this.datos = response.data.datos
@@ -62,7 +63,7 @@ export class NewRnmaCambioColorComponent implements OnInit {
                     alert('Error en la petición');
                 }
             }
-        );
+        );}
 
         this._ColorService.getColorSelect().subscribe(
             response => {

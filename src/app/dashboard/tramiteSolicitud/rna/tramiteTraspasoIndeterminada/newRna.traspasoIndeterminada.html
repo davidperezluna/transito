@@ -1,0 +1,65 @@
+<hr>
+<div class="row">
+   <div class="col-xs-12 col-lg-4">
+      <div class="card">
+         <div class="card-header">
+            <h5 class="text-uppercase">Nuevo tramite traspaso a persona indeterminada</h5>
+         </div>
+         
+         <div class="row justify-content-center container">
+            <label>Datos básicos</label>
+            <table class="table table-bordered">
+                <thead>
+                   <tr>
+                      <th><b>Fecha</b></th>
+                      <th><b>Codigo Organismo Transito</b></th>
+                      <th><b>Tipo documento traspaso</b></th>
+                      <th><b>Tipo de servicio</b></th>
+                      <th><b>Solicitante Apoderado</b></th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr class="odd">
+                      <td>
+                         {{date| date: 'yyyy-MM-dd'}}
+                      </td>
+                      <td> 
+                         {{codigoOrganismo}}
+                      </td>
+                      <td> 
+                          <div class="container"><ng-select
+                            [multiple]="false"
+                            [options]="tipos"
+                            [(ngModel)]="tipoSelected"
+                            required
+                            name="tipoId">
+                        </ng-select></div>
+                        
+                      </td>
+                      <td> 
+                         {{tipoServicio}}
+                      </td>
+                      <td>{{tipoServicio}}<!--<div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="customRadio2" class="custom-control-input" >
+                            <label class="custom-control-label" for="customRadio2" [(ngModel)]="viewApoderado"></label>
+                        </div>--></td>
+                   </tr>
+                </tbody>
+             </table>
+    </div>
+
+         <div class="card-footer">
+            <div class="btn-group">
+               <button (click)="onCancelar()" class="btn btn-default">
+               <i class="fa fa-times"></i>
+               Cancel
+               </button>
+               <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+               <i class="fa fa-save"></i>
+               Enviar
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
