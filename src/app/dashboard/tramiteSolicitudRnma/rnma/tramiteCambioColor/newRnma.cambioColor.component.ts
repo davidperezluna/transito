@@ -43,7 +43,6 @@ export class NewRnmaCambioColorComponent implements OnInit {
             if (tramiteFactura.realizado == 1) {
                 if (tramiteFactura.tramitePrecio.tramite.id == 5) {
                     this.tramiteRealizado = tramiteFactura;
-                    console.log(this.tramiteRealizado);
                 }
             }
         });

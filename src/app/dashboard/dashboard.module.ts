@@ -79,6 +79,7 @@ import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
+import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -156,6 +157,7 @@ import {RightsidebarComponent} from '../shared/index';
       CfgPlacaModule,
       CfgSedeOperativaModule,
       MsvTalonarioModule,
+      rnaRegistroInsumosModule,
       //MsvTCAsignacionModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

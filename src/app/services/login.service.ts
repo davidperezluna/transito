@@ -5,9 +5,9 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class LoginService {
-	public url = "http://localhost/GitHub/colossus-sit/web/app_dev.php";
+	private url = environment.apiUrl; 
 	public identity;
-	public token;
+	public token; 
 
 	constructor(private _http: Http){}
 
@@ -16,7 +16,7 @@ export class LoginService {
 		let params = "json="+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 
-		return this._http.post(this.url+"/login", params, {headers: headers})
+		return this._http.post(this.url+"login", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
@@ -25,7 +25,7 @@ export class LoginService {
 		let params = "json="+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		console.log(params);
-		return this._http.post(this.url+"/usuario/new", params, {headers: headers})
+		return this._http.post(this.url+"usuario/new", params, {headers: headers})
 							  .map(res => res.json());
 
 	}
