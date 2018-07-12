@@ -104,19 +104,6 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         this.datos.paisId = this.paisSelected;
         this.datos.solicitanteId = this.solicitante.id;
 
-        this._CiudadanoService.editLicenciaConduccion(this.datos,token).subscribe(
-            response => {
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            }
-        );
-
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

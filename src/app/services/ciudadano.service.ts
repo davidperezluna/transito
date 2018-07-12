@@ -65,11 +65,4 @@ export class CiudadanoService {
 		return this._http.post(this.url+"/isCiudadano/tipoIde/Ide", params, {headers: headers})
 							  .map(res => res.json());
 	}
-
-	editLicenciaConduccion(datos,token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/edit/licencia/conduccion", params, {headers: headers}).map(res => res.json());
-	}
 }
