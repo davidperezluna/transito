@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">formulario para el ingreso de una nueva marca</h5>
+            <hr>
+            <form #newForm="ngForm">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 ">
+                        <div class="form-group row">
+                            <div class="col-lg-4 col-md-4">
+                                <label>No.Acta*</label>
+                                <input class="form-control" [(ngModel)]="rnaRegistroInsumos.numeroActa" name="numeroActa" placeholder="" type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Empresa*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="empresas"
+                                    [(ngModel)]="empresaSelected"
+                                    required
+                                    name="empresaId">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Sede*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="sedes"
+                                    [(ngModel)]="sedeSelected"
+                                    required
+                                    name="sedeId">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Insumo*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="insumos"
+                                    [(ngModel)]="insumoSelected"
+                                    required
+                                    name="insumoId">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </form>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>

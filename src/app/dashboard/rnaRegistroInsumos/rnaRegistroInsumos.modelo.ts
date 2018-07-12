@@ -1,6 +1,16 @@
-export class Color{
+export class rnaRegistroInsumos{
 	constructor(
 		public id:number,
-		public nombre:string
+		public estado:string,
+		public numeroActa:string,
+		public fecha:string,
+		public rangoInicio:string,
+		public rangoFin:string,
+		public referencia:string,
+		public cantidad:string,
+		public empresaId:string,
+		public sedeOperativaId:string,
+		public casoInsumoId:string,
+		
 	){}
 }
