@@ -16,8 +16,8 @@ export class VehiculoAcreedorService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(datos2, token){
-		let json = JSON.stringify(datos2);
+	register(datos, token){
+		let json = JSON.stringify(datos);
 		console.log(json);
 		
 		let params = "json="+json+"&authorization="+token;
