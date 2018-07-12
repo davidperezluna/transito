@@ -34,6 +34,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         'licenciaConduccion': null,
         'numeroRunt': null,
         'vigencia': null,
+        'documentacion': null,
         'paisId': null,
         'claseId': null,
         'servicioId': null,
