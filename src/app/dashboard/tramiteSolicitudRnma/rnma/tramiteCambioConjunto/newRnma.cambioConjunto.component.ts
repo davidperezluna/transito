@@ -66,7 +66,7 @@ export class NewRnmaCambioConjuntoComponent implements OnInit {
                 this.datos.oldData = this.vehiculo.modelo;
                 this.datos.tipoPotenciacion = this.descricion;
                 this.datos.descricion = this.tipoPotenciacionSelect;
-                this.datos.tramiteFactura =58;
+                this.datos.tramiteFactura =59;
                 this.readyTramite.emit(this.datos);
             }
             error => {
