@@ -2,6 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { LoginService } from '../../../services/login.service';
 import { SustratoService } from '../../../services/sustrato.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 
 
 import swal from 'sweetalert2';
@@ -43,6 +44,7 @@ export class NewRncSustratoComponent implements OnInit {
         private _SustratoService: SustratoService,
         private _loginService: LoginService,
         private _CiudadanoService: CiudadanoService,
+        private _CiudadanoVehiculoService: CiudadanoVehiculoService,
     ) { } 
 
     ngOnInit() {
@@ -90,7 +92,7 @@ export class NewRncSustratoComponent implements OnInit {
 
         // console.log(this.identificacion);
 
-        this._CiudadanoService.editLicenciaConduccion(this.datos,token).subscribe(
+        this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(
             response => {
                 this.respuesta = response;
                 if(this.respuesta.status == 'success'){

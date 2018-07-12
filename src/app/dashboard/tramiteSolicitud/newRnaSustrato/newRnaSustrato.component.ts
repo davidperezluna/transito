@@ -116,11 +116,11 @@ export class NewRnaSustratoComponent implements OnInit {
 
         this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(
             
-            response => {
+            response => { 
                 
                 this.respuesta = response;
                 console.log(this.respuesta);
-                if(this.respuesta.status == 'success'){
+                if(this.respuesta.status == 'success'){ 
                   swal({
                     title: 'Perfecto!',
                     text: 'El registro se ha modificado con exito',
