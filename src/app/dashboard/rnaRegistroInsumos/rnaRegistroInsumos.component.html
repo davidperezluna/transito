@@ -1,0 +1,43 @@
+<div class="container" >
+  <div  class="row align-items-center justify-content-between">
+    <div class="col-11 col-sm-12 page-title">
+      <h3>Insumos</h3>
+      <p>aquí podrás registrar los insumos</p>
+    </div>
+    <div class="col text-right ">
+      <div class="btn-group pull-right">
+        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+      </div>
+    </div>
+    
+  </div>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">RnaLoteInsumoes <small>Registrados</small></h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>No.Acta</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let loteInsumo of loteInsumos; let i = index">
+                  <td >{{loteInsumo.numeroActa}}</td>
+                  <td>
+                    <button (click)="editRnaLoteInsumo(loteInsumo)" class="btn btn-outline-info" type="button">Editar</button> 
+                    <button (click)="deleteRnaLoteInsumo(loteInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
