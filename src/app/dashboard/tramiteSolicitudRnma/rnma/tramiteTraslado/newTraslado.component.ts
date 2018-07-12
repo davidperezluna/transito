@@ -8,7 +8,7 @@ import {VehiculoService} from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-traslado',
+  selector: 'app-new-trasladoRnma',
   templateUrl: './newTraslado.component.html'
 })
 export class NewTrasladoComponent implements OnInit {
@@ -39,8 +39,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.datos = null;
-    if (this.datos == null){
+    
       this.datos = {
         'sedeOperativaIdNew': null,
         'sedeOperativaIdOld': null,
@@ -50,7 +49,6 @@ constructor(
         'nombreEmpresa': null,
         'tramiteFactura': null,
         'vehiculoId': null};
-    }
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
@@ -127,8 +125,8 @@ constructor(
         this.datos.vehiculoId = this.vehiculo.id;
         this.datos.numeroGuia = this.numeroGuia;
         this.datos.numeroRunt = this.numeroRunt;
-        this.datos.fechaSalida = this.fechaSalida;
-        this.datos.nombreEmpresa = this.nombreEmpresa;
+        this.datos.fechaSalida = this.fechaSalida;       
+        this.datos.nombreEmpresa = this.nombreEmpresa; 
         this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
         this.respuesta = response; 
         if(this.respuesta.status == 'success'){
@@ -143,9 +141,6 @@ constructor(
                 }
             }
     });
-
-    this.ngOnInit();
-		
   }
 
 }

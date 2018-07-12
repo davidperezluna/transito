@@ -35,15 +35,16 @@ constructor(
 		this._ConceptoParametroService.editConceptoParametro(this.conceptoParametro,token).subscribe(
 			response => {
         this.respuesta = response;
+
+        swal({
+          title: 'Info!',
+          text: response.msj,
+          type: 'info',
+          confirmButtonText: 'Aceptar'
+        })
         
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
         }
 			error => {
 					this.errorMessage = <any>error;
