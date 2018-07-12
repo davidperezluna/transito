@@ -1,42 +1,40 @@
 import  {Injectable} from "@angular/core";
 import  {Http, Response,Headers} from "@angular/http";
-import { LoggerService } from "../logger/services/logger.service";
-import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
+import { environment } from 'environments/environment';
 
 @Injectable()
-export class BancoService {
-	private url = environment.apiUrl + "banco";
+export class VehiculoAcreedorService {
+	private url = environment.apiUrl + "vehiculoacreedor";
 	public identity;
 	public token;
 
-	constructor(
-		private _http: Http,
-		private _loogerService: LoggerService
-	){}
+	constructor(private _http: Http){}
 
-	getBanco(){
+	getAcreedor(){
+		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(banco,token){
-		let json = JSON.stringify(banco);
+	register(datos2, token){
+		let json = JSON.stringify(datos2);
+		console.log(json);
+		
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers}).map(
-			res => res.json(),
-			this._loogerService.registerLog(token,'INSERT',json,this.url)
-		);
+		return this._http.post(this.url+"/new", params, {headers: headers})
+							  .map(res => res.json());
 	}
 
-	deleteBanco(token,id){
+	deleteAcreedor(token,id){
+
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showBanco(token,id){
+	showAcreedor(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -45,9 +43,9 @@ export class BancoService {
 
 	}
 
-	editBanco(banco,token){
+	editAcreedor(vehiculoAcreedor,token){
 
-		let json = JSON.stringify(banco);
+		let json = JSON.stringify(vehiculoAcreedor);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -55,15 +53,13 @@ export class BancoService {
 
 	}
 
-	getBancoSelect(){
+	getClaseSelect(){
+		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 
-	showAcreedorNombre(token, nombreAcreedor) {
-		let json = JSON.stringify(nombreAcreedor);
-		let params = "json=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/nombre", params, { headers: headers }).map(res => res.json());
+	getClasePorModuloSelect(id){
+		return this._http.get(this.url+"/"+id+"/select/clases/por/modulo").map(res => res.json());
 	}
 	
 }

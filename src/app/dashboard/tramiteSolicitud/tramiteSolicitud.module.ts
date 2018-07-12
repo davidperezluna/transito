@@ -5,6 +5,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { EmpresaService } from '../../services/empresa.service';
 import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
+import { VehiculoAcreedorService } from '../../services/vehiculoAcreedor.service';
 
 import { NewRnaComponent } from './newRna/newRna.component';
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
@@ -26,6 +27,7 @@ import { NewRnaCertificadoTradicionComponent } from './rna/tramiteCertificadoTra
 import { NewRnaBlindajeComponent } from './rna/tramiteBlindaje/newRna.blindaje.component';
 import { NewRnaPreregistroComponent } from './rna/tramitePreregistro/newRna.preregistro.component';
 import { NewRnaCiudadanoComponent } from './newRnaCiudadano/newRnaCiudadano.component';
+import { NewRnaAcreedorComponent } from './newRnaAcreedor/newRnaAcreedor.component';
 import { NewRnaSustratoComponent } from './newRnaSustrato/newRnaSustrato.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
 import { NewTrasladoComponent } from './rna/tramiteTraslado/newTraslado.component';
@@ -68,6 +70,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaTraspasoComponent,
         NewRnaTramiteInscripcionAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
+        NewRnaAcreedorComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
         NewRnaRadicadoCuentaComponent,
@@ -101,6 +104,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaTraspasoComponent,
         NewRnaTramiteInscripcionAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
+        NewRnaAcreedorComponent,
         NewRnaSustratoComponent,
         NewRnaMatricualaInicialComponent,
         NewRnaRadicadoCuentaComponent,
@@ -108,7 +112,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaCambioConjuntoComponent,
         NewTrasladoComponent
     ],
-    providers:[TramiteSolicitudService,CfgTipoAlertaService,TramiteTrasladoService]
+    providers:[TramiteSolicitudService,CfgTipoAlertaService,TramiteTrasladoService,VehiculoAcreedorService]
 })
 
 export class TramiteSolicitudModule { }
