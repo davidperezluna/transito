@@ -1,34 +1,32 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {rnaRegistroInsumos} from '../rnaRegistroInsumos.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
-import {LoginService} from '../../../services/login.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { CasoInsumoService } from '../../../services/casoInsumo.service';
-import { DatePipe } from '@angular/common';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html',
-  providers: [DatePipe]
+  selector: 'app-edit',
+  templateUrl: './edit.component.html'
 })
-export class NewComponent implements OnInit {
+export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-public rnaRegistroInsumos: rnaRegistroInsumos;
+@Input() loteInsumoInsumo:any = null;
+@Input() tipoInsumo:any = null;
 public errorMessage;
 public respuesta;
-public empresas:any;
-public empresaSelected:any;
-public sedes:any;
+public formReady = false;
 public sedeSelected:any;
-public insumos:any;
-public insumoSelect:any;
 public insumoSelected:any;
-public date:any;
+public empresaSelected:any;
+public insumos:any;
+public sedes:any;
+public empresas:any;
 
 constructor(
-  private datePipe: DatePipe,
+  private _rnaloteInsumosService: RnaLoteInsumoService,
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
   private _EmpresaService: EmpresaService,
@@ -36,15 +34,14 @@ constructor(
   private _CasoInsumoService: CasoInsumoService,
   ){}
 
-  ngOnInit() {
-    this.date = new Date();
-    var datePiper = new DatePipe(this.date);
-    this.rnaRegistroInsumos = new rnaRegistroInsumos(null,null,null,null,null,null,null,null,null,null,null);
-    this.rnaRegistroInsumos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
+  ngOnInit(){ 
 
     this._EmpresaService.getEmpresaSelect().subscribe(
       response => {
         this.empresas = response;
+        setTimeout(() => {
+           this.empresaSelected = [this.loteInsumoInsumo.empresa.id];
+        });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -58,6 +55,9 @@ constructor(
     this._CasoInsumoService.getCasoInsumoSelect().subscribe(
       response => {
         this.insumos = response;
+        setTimeout(() => {
+           this.insumoSelected = [this.loteInsumoInsumo.casoInsumo.id];
+         });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -69,52 +69,47 @@ constructor(
       }
     );
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-      response => {
-        this.sedes = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
+    if (this.tipoInsumo == 'sustrato') {
+      this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        response => {
+          this.sedes = response;
+          setTimeout(() => {
+            this.sedeSelected = [this.loteInsumoInsumo.sedeOperativa.id];
+          });
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
-      }
-    );
+      );
+    }
+  }
 
-  }
-  onCancelar(){
-    this.ready.emit(true);
-  }
+  onCancelar(){ this.ready.emit(true); }
+
   onEnviar(){
+    this.loteInsumoInsumo.empresaId = this.empresaSelected;
+    this.loteInsumoInsumo.sedeOperativaId = this.sedeSelected;
+    this.loteInsumoInsumo.casoInsumoId = this.insumoSelected;
     let token = this._loginService.getToken();
-    this.rnaRegistroInsumos.empresaId = this.empresaSelected;
-    this.rnaRegistroInsumos.sedeOperativaId = this.sedeSelected;
-    this.rnaRegistroInsumos.casoInsumoId = this.insumoSelected;
-    console.log(this.rnaRegistroInsumos);
-		this._rnaRegistroInsumosService.register(this.rnaRegistroInsumos,token).subscribe(
+		this._rnaloteInsumosService.edit(this.loteInsumoInsumo,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: 'El registro se ha modificado con exito',
             type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El codigo ya se encuentra registrado',
-            type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
 			error => {
 					this.errorMessage = <any>error;
-
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
@@ -124,7 +119,7 @@ constructor(
 		}); 
   }
   isFin() {
-   this.rnaRegistroInsumos.cantidad = parseInt(this.rnaRegistroInsumos.rangoFin) - parseInt(this.rnaRegistroInsumos.rangoInicio)+1;
-  }
+    this.loteInsumoInsumo.cantidad = parseInt(this.loteInsumoInsumo.rangoFin) - parseInt(this.loteInsumoInsumo.rangoInicio)+1;
+   }
 
 }
