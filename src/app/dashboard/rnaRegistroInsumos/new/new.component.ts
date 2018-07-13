@@ -5,11 +5,13 @@ import {LoginService} from '../../../services/login.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { CasoInsumoService } from '../../../services/casoInsumo.service';
+import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html',
+  providers: [DatePipe]
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
@@ -22,8 +24,10 @@ public sedes:any;
 public sedeSelect:any;
 public insumos:any;
 public insumoSelect:any;
+public date:any;
 
 constructor(
+  private datePipe: DatePipe,
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
   private _EmpresaService: EmpresaService,
@@ -32,7 +36,10 @@ constructor(
   ){}
 
   ngOnInit() {
+    this.date = new Date();
+    var datePiper = new DatePipe(this.date);
     this.rnaRegistroInsumos = new rnaRegistroInsumos(null,null,null,null,null,null,null,null,null,null,null);
+    this.rnaRegistroInsumos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
 
     this._EmpresaService.getEmpresaSelect().subscribe(
       response => {
@@ -111,6 +118,9 @@ constructor(
 				}
 
 		}); 
+  }
+  isFin() {
+   this.rnaRegistroInsumos.cantidad = parseInt(this.rnaRegistroInsumos.rangoFin) - parseInt(this.rnaRegistroInsumos.rangoInicio)+1;
   }
 
 }

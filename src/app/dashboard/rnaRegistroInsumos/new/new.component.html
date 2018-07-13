@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
         <div class="card-body">
-            <h5 class="m-0">formulario para el ingreso de una nueva marca</h5>
+            <h5 class="m-0">formulario para el ingreso de insumos</h5>
             <hr>
             <form #newForm="ngForm">
                 <div class="row justify-content-center">
@@ -49,17 +49,22 @@
 
                             <div class="col-lg-4 col-md-4">
                                 <label>Rango Fin*</label>
-                                <input class="form-control" [(ngModel)]="rnaRegistroInsumos.rangoFin" name="rangoFin" placeholder="" type="text" required>
+                                <input class="form-control" (blur)="isFin()" [(ngModel)]="rnaRegistroInsumos.rangoFin" name="rangoFin" placeholder="" type="text" required>
                             </div>
 
                             <div class="col-lg-4 col-md-4">
                                 <label>Cantidad*</label>
-                                <input class="form-control" [(ngModel)]="rnaRegistroInsumos.cantidad" name="cantidad" placeholder="" type="text" required>
+                                <input class="form-control" [disabled]="true" [(ngModel)]="rnaRegistroInsumos.cantidad" name="cantidad" placeholder="" type="text" required>
                             </div>
 
                             <div class="col-lg-4 col-md-4">
-                                <label>Referencia*</label>
+                                <label>No.caja*</label>
                                 <input class="form-control" [(ngModel)]="rnaRegistroInsumos.referencia" name="referencia" placeholder="" type="text" required>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4">
+                                <label>Fecha*</label>
+                                <input class="form-control" [disabled]="true" [(ngModel)]="rnaRegistroInsumos.fecha" name="fecha" placeholder="" type="date" required>
                             </div>
                         </div>
                     </div>    

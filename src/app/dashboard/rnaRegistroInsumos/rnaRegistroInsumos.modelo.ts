@@ -7,7 +7,7 @@ export class rnaRegistroInsumos{
 		public rangoInicio:string,
 		public rangoFin:string,
 		public referencia:string,
-		public cantidad:string,
+		public cantidad:number,
 		public empresaId:string,
 		public sedeOperativaId:string,
 		public casoInsumoId:string,
