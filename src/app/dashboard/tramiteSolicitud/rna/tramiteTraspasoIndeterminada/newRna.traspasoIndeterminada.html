@@ -1,6 +1,7 @@
 <hr>
+<div class="row justify-content-center container">
 <div class="row">
-   <div class="col-xs-12 col-lg-4">
+   <div class="col-xs-12 col-lg-8">
       <div class="card">
          <div class="card-header">
             <h5 class="text-uppercase">Nuevo tramite traspaso a persona indeterminada</h5>
@@ -32,21 +33,78 @@
                             [options]="tipos"
                             [(ngModel)]="tipoSelected"
                             required
-                            name="tipoId">
+                            name="tipoId2">
                         </ng-select></div>
                         
                       </td>
                       <td> 
                          {{tipoServicio}}
                       </td>
-                      <td>{{tipoServicio}}<!--<div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio2" name="customRadio2" class="custom-control-input" >
-                            <label class="custom-control-label" for="customRadio2" [(ngModel)]="viewApoderado"></label>
-                        </div>--></td>
+                      <td>
+                        <!-- <div class="container">
+                            <input [(ngModel)]="viewApoderado" type="radio" id="customRadio123" name="customRadio" class="custom-control-input" checked="">
+                            <label class="custom-control-label" for="customRadio123">Apoderado</label>
+                        </div> -->
+                        <div class="custom-control custom-checkbox">
+                            <input [(ngModel)]="viewApoderado" type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                            <label class="custom-control-label" for="customCheck1"></label>
+                        </div>
+                    </td> 
                    </tr>
                 </tbody>
              </table>
     </div>
+    <div class="row justify-content-center container" *ngIf="viewApoderado">
+        <label>Información del apoderado</label>
+        <table class="table table-bordered">
+            <thead>
+               <tr>
+                  <th><b>Tipo documento apoderado</b></th>
+                  <th><b>Número documento</b></th>
+                  <th><b>Nombre apoderado</b></th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr class="odd">
+                  <td>
+                     {{tipoDocApoderado}}
+                  </td>
+                  <td> 
+                     {{numeroDocumento}}
+                  </td>
+                  <td> 
+                    {{nombreApoderado}}
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+</div>
+<div class="row justify-content-center container">
+    <label>Información del destinatario del traspaso</label>
+    <table class="table table-bordered">
+        <thead>
+           <tr>
+              <th><b>Tipo documento apoderado</b></th>
+              <th><b>Número documento</b></th>
+              <th><b>Nombre apoderado</b></th>
+              <th><b>Fecha de enajenación</b></th>
+           </tr>
+        </thead>
+        <tbody>
+           <tr class="odd">
+              <td>
+                 {{sinRegistro}}
+              </td>
+              <td> 
+                 {{sinRegistro}}
+              </td>
+              <td> 
+                {{sinRegistro}}
+              </td>
+           </tr>
+        </tbody>
+     </table>
+</div>
 
          <div class="card-footer">
             <div class="btn-group">
@@ -62,4 +120,5 @@
          </div>
       </div>
    </div>
+</div>
 </div>
