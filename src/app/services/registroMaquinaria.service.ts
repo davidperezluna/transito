@@ -4,10 +4,10 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class ColorService{
-	private url = environment.apiUrl + "color";
+export class RegistroMaquinariaService {
+	private url = environment.apiUrl + "registroMaquinaria";
 	public identity;
-	public token;
+	public token; 
 
 	constructor(private _http: Http){}
 
@@ -16,9 +16,9 @@ export class ColorService{
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(color,token){
+	register(registroMaquinaria,token){
 		
-		let json = JSON.stringify(color);
+		let json = JSON.stringify(registroMaquinaria);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
@@ -42,9 +42,9 @@ export class ColorService{
 
 	}
 
-	editColor(color,token){
+	editColor(registroMaquinaria,token){
 
-		let json = JSON.stringify(color);
+		let json = JSON.stringify(registroMaquinaria);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})

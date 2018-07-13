@@ -1,22 +1,25 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitudRnma.modelo';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
+import { RegistroMaquinaria } from './newRnma.registroMaquinaria.modelo';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import {LoginService} from '../../../../services/login.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
 import {MunicipioService} from '../../../../services/municipio.service';
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 
-import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
 import {DepartamentoService} from "../../../../services/departamento.service";
 import {LineaService} from '../../../../services/linea.service';
 import {ClaseService} from '../../../../services/clase.service';
 import {CarroceriaService} from '../../../../services/carroceria.service';
-import {ServicioService} from '../../../../services/servicio.service';
 import {ColorService} from '../../../../services/color.service';
 import {CombustibleService} from '../../../../services/combustible.service';
 import {SedeOperativaService} from '../../../../services/sedeOperativa.service';
 import {MarcaService} from '../../../../services/marca.service';
+import { TipoVehiculoService } from '../../../../services/tipoVehiculo.service';
+
+import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
+import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import {ServicioService} from '../../../../services/servicio.service';
+import { TramiteSolicitud } from '../../tramiteSolicitudRnma.modelo';
+import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 
 import swal from 'sweetalert2';
 import { Factura } from '../../../factura/factura.modelo';
@@ -32,48 +35,48 @@ export class NewRnmaRegistroMaquinariaComponent implements OnInit {
 @Input() factura: any = null;
 @Input() tramitesFactura: any = null;
 
+public registroMaquinaria:RegistroMaquinaria;
 public errorMessage:any;
 public respuesta:any;
 public tramiteFacturaSelected: any;
 public tramiteRealizado: any;
 public sustratos: any;
 
-public municipios:any;
-
-
-public clases:any;
-public carrocerias:any;
 public colores:any;
+public tiposVehiculo:any;
+public clases:any;
+public marcas:any;
+public lineas:any;
+public carrocerias:any;
 public combustibles:any;
 
 
 
-public sedesOperativas:any;
-public lineaSelected:any;
-public claseSelected:any;
-public carroceriaSelected:any;
-public servicioSelected:any;
 public colorSelected:any;
-
-
-public sedeOperativaSelected:any;
-public combustibleSelected:any;
+public tipoVehiculoSelected:any;
+public claseSelected:any;
 public marcaSelected:any;
+public lineaSelected:any;
+public carroceriaSelected:any;
+public combustibleSelected:any;
+
 
 public placa:string;
 public numeroSerie:any;
 public numeroVin:any;
 public numeroChasis:any;
 public numeroMotor:any;
-public codigoIngreso:any;
 public fechaIngreso:any;
-public color:any;
-public claseMaquinariaClase:any;
-public marcas:any;
+
+
+
+public codigoIngreso:any;
+
+public tipoVehiculo:any;
+public clase:any;
+
 public tipoClase:any;
 public linea:any;
-public lineas:any;
-public tipoMaquinaria:any;
 public carroceria:any;
 public pesoBruto:any;
 public CargaUtil:any;
@@ -103,7 +106,7 @@ public datos = {
   'numeroMotor': null,
   'codigoIngreso': null,
   'fechaIngreso': null,
-  'color': null,
+  'colorId': null,
   'claseMaquinariaClase': null,
   'marcas': null,
   'tipoClase': null,
@@ -133,17 +136,18 @@ constructor(
   private _lineaService: LineaService,
   private _ClaseService: ClaseService,
   private _CarroceriaService: CarroceriaService,
-  // private _ServicioService: ServicioService,
   private _ColorService: ColorService,
+  // private _ServicioService: ServicioService,
   private _CombustibleService: CombustibleService,
   private _VehiculoService: VehiculoService,
   private _SedeOperativaService: SedeOperativaService,
   private _MarcaService: MarcaService,
   private _TramiteFacturaService: TramiteFacturaService,
+  private _TipoVehiculoService: TipoVehiculoService,
   ){}
   
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.registroMaquinaria = new RegistroMaquinaria(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     this._ColorService.getColorSelect().subscribe(
       response => {
@@ -158,10 +162,22 @@ constructor(
         }
       }
     );
-
-    this._lineaService.getLineaSelect().subscribe(
+    this._TipoVehiculoService.getTipoVehiculoSelect().subscribe(
       response => {
-        this.lineas = response;
+        this.tiposVehiculo = response;
+      }, 
+      error => { 
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._ClaseService.getClaseSelect().subscribe(
+      response => {
+        this.clases = response;
       }, 
       error => { 
         this.errorMessage = <any>error;
@@ -185,37 +201,11 @@ constructor(
         }
       }
     );
-    this._MunicipioService.getMunicipioSelect().subscribe(
+    this._lineaService.getLineaSelect().subscribe(
       response => {
-        this.municipios = response;
+        this.lineas = response;
       }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-      response => {
-        this.sedesOperativas = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ClaseService.getClaseSelect().subscribe(
-      response => {
-        this.clases = response;
-      }, 
-      error => {
+      error => { 
         this.errorMessage = <any>error;
 
         if(this.errorMessage != null){
@@ -237,19 +227,6 @@ constructor(
         }
       }
     );
-    // this._ServicioService.getServicioSelect().subscribe(
-    //   response => {
-    //     this.servicios = response;
-    //   }, 
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
     this._CombustibleService.getCombustibleSelect().subscribe(
       response => {
         this.combustibles = response;
@@ -274,10 +251,10 @@ constructor(
     this.vehiculo.lineaId = this.lineaSelected;
     this.vehiculo.claseId = this.claseSelected;
     this.vehiculo.carroceriaId = this.carroceriaSelected;
-    this.vehiculo.servicioId = this.servicioSelected;
+    // this.vehiculo.servicioId = this.servicioSelected;
     this.vehiculo.colorId = this.colorSelected;
     this.vehiculo.combustibleId = this.combustibleSelected;
-    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
+    // this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     console.log(this.vehiculo);  
     let token = this._loginService.getToken();
     this._VehiculoService.register(this.vehiculo,token).subscribe(
