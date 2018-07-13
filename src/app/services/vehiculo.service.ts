@@ -68,6 +68,16 @@ export class VehiculoService {
 
 	}
 
+	editVehiculoPignorado(vehiculo,token){
+
+		let json = JSON.stringify(vehiculo);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 			return this._http.post(this.url+"/edit/pignorado", params, {headers: headers})
+							  .map(res => res.json());
+
+	}
+
 	editSedeOperativaVehiculo(vehiculo,token){
 
 		let json = JSON.stringify(vehiculo);

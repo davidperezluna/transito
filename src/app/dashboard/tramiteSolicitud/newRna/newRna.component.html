@@ -279,6 +279,10 @@
                             <appRna-cambio-carroceria [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-carroceria>
                         </div>
                         
+                        <div class="tab-pane" id="45" role="tabpanel"> 
+                            <appRna-levantamiento-alerta-prenda [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-levantamiento-alerta-prenda>
+                        </div>
+
                         <div class="tab-pane" id="46" role="tabpanel"> 
                             <appRna-inscripcion-alerta-prenda [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
                         </div>
