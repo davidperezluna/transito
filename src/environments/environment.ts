@@ -5,6 +5,9 @@
 
 export const environment = {
   production: false,
+  // apiUrl : 'http://190.146.7.242/colossus-sit/web/app.php/',
+  // docsUrl : 'http://190.146.7.242/colossus-sit/web/docs/', 
   apiUrl : 'http://localhost/GitHub/colossus-sit/web/app_dev.php/',
-  docsUrl : 'http://localhost/GitHub/colossus-sit/web/docs/',
+  docsUrl : 'http://localhost/GitHub/colossus-sit/web/docs/', 
+
 };

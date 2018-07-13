@@ -15,8 +15,12 @@ export class RnaLoteInsumoService {
 		private _loogerService: LoggerService
 	){}
 
-	index(){
-		return this._http.get(this.url+"/").map(res => res.json());
+	indexSustrato(){
+		return this._http.get(this.url+"/sustrato").map(res => res.json());
+	}
+
+	indexInsumo(){
+		return this._http.get(this.url+"/insumo").map(res => res.json());
 	}
 
 	register(smlmv,token){

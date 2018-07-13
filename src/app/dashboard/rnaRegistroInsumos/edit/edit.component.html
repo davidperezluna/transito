@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">Editar Pais</h5>
+                <hr> 
+                <div class="row justify-content-center">
+                    <div class="card-body col-md-12">
+                        <form #formNew="ngForm">
+                            <div class="form-group row">
+                                <div class="col-lg-4 col-md-4">
+                                    <label>No.Acta*</label>
+                                    <input class="form-control" [(ngModel)]="loteInsumoInsumo.numeroActa" name="numeroActa" placeholder="" type="text" required>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <label>Empresa*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="empresas"
+                                        [(ngModel)]="empresaSelected"
+                                        required
+                                        name="empresaId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='sustrato'">
+                                    <label>Sede*</label>
+                                    <ng-select
+                                        [multiple]="false" 
+                                        [options]="sedes"
+                                        [(ngModel)]="sedeSelected"
+                                        name="sedeId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <label>Insumo*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="insumos"
+                                        [(ngModel)]="insumoSelected"
+                                        required
+                                        name="insumoId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='sustrato'">
+                                    <label>Rango Inicio*</label>
+                                    <input class="form-control" [(ngModel)]="loteInsumoInsumo.rangoInicio" name="rangoInicio" placeholder="" type="text">
+                                </div>
+    
+                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='sustrato'">
+                                    <label>Rango Fin*</label>
+                                    <input class="form-control" (blur)="isFin()" [(ngModel)]="loteInsumoInsumo.rangoFin" name="rangoFin" placeholder="" type="text">
+                                </div>
+    
+                                <div class="col-lg-4 col-md-4">
+                                    <label>Cantidad*</label>
+                                    <input class="form-control" [(ngModel)]="loteInsumoInsumo.cantidad" name="cantidad" placeholder="" type="text" required>
+                                </div>
+    
+                                <div class="col-lg-4 col-md-4">
+                                    <label>No.caja*</label>
+                                    <input class="form-control" [(ngModel)]="loteInsumoInsumo.referencia" name="referencia" placeholder="" type="text" required>
+                                </div>
+    
+                                <div class="col-lg-4 col-md-4">
+                                    <label>Fecha*</label>
+                                    <input class="form-control" [disabled]="true" [(ngModel)]="loteInsumoInsumo.fecha" value="{{loteInsumoInsumo.fecha}}" name="fecha" placeholder="" type="date" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
