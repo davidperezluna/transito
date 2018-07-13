@@ -12,11 +12,14 @@ export class rnaRegistroInsumosComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public loteInsumos;
+	public loteInsumoSustratos;
+	public loteInsumoInsumos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
+  public tipoInsumo :any;
   public table:any; 
+  public loteInsumoInsumo:any; 
   public color:any; 
 
   constructor(
@@ -39,11 +42,11 @@ export class rnaRegistroInsumosComponent implements OnInit {
       ) {
       }
     })
-		this._RnaLoteInsumoService.index().subscribe(
+		this._RnaLoteInsumoService.indexSustrato().subscribe(
 				response => {
-          this.loteInsumos = response.data;
+          this.loteInsumoSustratos = response.data; 
           let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
+            this.iniciarTablaSustrato();
           }, 100); 
 				}, 
 				error => {
@@ -55,9 +58,43 @@ export class rnaRegistroInsumosComponent implements OnInit {
 					}
 				}
       );
+
+		this._RnaLoteInsumoService.indexInsumo().subscribe(
+				response => {
+          this.loteInsumoInsumos = response.data; 
+          let timeoutId = setTimeout(() => {  
+            this.iniciarTablaInsumos();
+          }, 100); 
+				},  
+				error => {
+					this.errorMessage = <any>error;
+
+					if(this.errorMessage != null){
+						console.log(this.errorMessage);
+						alert("Error en la petición");
+					}
+				}
+      );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  iniciarTablaSustrato(){
+    $('#dataTables-example-Sustratos').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+           oPaginate: {
+           sFirst: '<<',
+           sPrevious: '<',
+           sNext: '>',
+           sLast: '>>'
+        }
+      }
+   });
+   this.table = $('#dataTables-example').DataTable();
+  }
+
+  iniciarTablaInsumos(){
+    $('#dataTables-example-Insumos').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -124,8 +161,16 @@ export class rnaRegistroInsumosComponent implements OnInit {
     })
   }
  
-  editRnaLoteInsumo(color:any){
-    // this.color = color;
+  editRnaLoteInsumoSustrato(loteInsumoInsumo:any){
+    this.loteInsumoInsumo = loteInsumoInsumo;
+    this.tipoInsumo = 'sustrato';
+    this.formEdit = true;
+    this.formIndex = false;
+  }
+
+  editRnaLoteInsumoInsumo(loteInsumoInsumo:any){
+    this.loteInsumoInsumo = loteInsumoInsumo;
+    this.tipoInsumo = 'insumo';
     this.formEdit = true;
     this.formIndex = false;
   }

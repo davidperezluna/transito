@@ -4,14 +4,14 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class ColorService{
-	private url = environment.apiUrl + "color";
+export class CasoInsumoService {
+	private url = environment.apiUrl + "casoinsumo";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getColor(){
+	getCasoInsumo(){ 
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
@@ -25,7 +25,7 @@ export class ColorService{
 							  .map(res => res.json());
 	}
 
-	deleteColor(token,id){
+	deleteCasoInsumo(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class ColorService{
 							  .map(res => res.json());
 	}
 
-	showColor(token,id){
+	showCasoInsumo(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,7 +42,7 @@ export class ColorService{
 
 	}
 
-	editColor(color,token){
+	editCasoInsumo(color,token){
 
 		let json = JSON.stringify(color);
 		let params = "json="+json+"&authorization="+token;
@@ -52,7 +52,7 @@ export class ColorService{
 
 	}
 
-	getColorSelect(){
+	getCasoInsumoSelect(){
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}

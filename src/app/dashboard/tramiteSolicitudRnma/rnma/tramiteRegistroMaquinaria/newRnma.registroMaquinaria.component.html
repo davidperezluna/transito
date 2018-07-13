@@ -60,44 +60,55 @@
                         </ng-select>
                     </div>
                     <div class="col-md-3">
-                        <label>Clase maquinaria*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="claseMaquinaria" name="claseMaquinaria" type="text" required>
-                    </div>
-                    <div class="col-lg-3">
-                        <label>Marca*</label>
+                        <label>Tipo maquinaria*</label>
                         <ng-select
-                            [multiple]="false"
-                            [options]="marcas"
-                            [(ngModel)]="marcaSelected"
-                            (ngModelChange)="changedDepartamento($event)"
-                            required
-                            name="marcaId">
-                        </ng-select>
-                    </div>
-                    <div class="col-lg-3">
-                        <label>Tipo de MMA por clase*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="marcas"
-                            [(ngModel)]="marcaSelected"
-                            (ngModelChange)="changedDepartamento($event)"
-                            required
-                            name="marcaId">
-                        </ng-select>
-                    </div>
-                    <div class="col-lg-3">
-                        <label>linea*</label>
+                        [multiple]="false"
+                        [options]="tiposVehiculo"
+                        [(ngModel)]="tipoVehiculoSelected"
+                        (ngModelChange)="changedDepartamento($event)"
+                        required
+                        name="tipoVehiculoId">
+                    </ng-select>
+                </div>
+                <div class="col-lg-3">
+                    <label>Clase de maquinaria*</label>
+                    <ng-select
+                        [multiple]="false"
+                        [options]="clases"
+                        [(ngModel)]="claseSelected"
+                        (ngModelChange)="changedDepartamento($event)"
+                        required
+                        name="claseId">
+                    </ng-select>
+                </div>
+                <div class="col-lg-3">
+                    <label>Marca*</label>
+                    <ng-select
+                        [multiple]="false"
+                        [options]="marcas"
+                        [(ngModel)]="marcaSelected"
+                        (ngModelChange)="changedDepartamento($event)"
+                        required
+                        name="marcaId">
+                    </ng-select>
+                </div>
+                <div class="col-lg-3">
+                        <label>linea de vehiculo*</label>
                         <ng-select
                             [multiple]="false"
                             [options]="lineas"
-                            [(ngModel)]="marcaSelected"
+                            [(ngModel)]="lineaSelected"
                             (ngModelChange)="changedDepartamento($event)"
                             required
-                            name="marcaId">
+                            name="lineaId">
                         </ng-select>
                     </div>
-                    <div class="col-lg-3">
-                        <label>Tipo maquinaria*</label>
+                    <div class="col-lg-3 col-md-3">
+                        <label>Año de modelo*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="pesoBruto" name="pesoBruto" type="text" required>
+                    </div>
+                    <!-- <div class="col-lg-3">
+                        <label>Tipo maq XXXXXXX*</label>
                         <ng-select
                             [multiple]="false"
                             [options]="marcas"
@@ -106,16 +117,16 @@
                             required
                             name="marcaId">
                         </ng-select>
-                    </div>
+                    </div> -->
                     <div class="col-lg-3">
                         <label>Carrocería*</label>
                         <ng-select
                             [multiple]="false"
-                            [options]="marcas"
-                            [(ngModel)]="marcaSelected"
+                            [options]="carrocerias"
+                            [(ngModel)]="carroceriaSelected"
                             (ngModelChange)="changedDepartamento($event)"
                             required
-                            name="marcaId">
+                            name="carroceriaId">
                         </ng-select>
                     </div>
                     <div class="col-lg-3 col-md-3">
@@ -126,9 +137,12 @@
                         <label>Carga util maxima*</label>
                         <input class="form-control" placeholder="" [(ngModel)]="cargaUtil" name="cargaUtil" type="text" required>
                     </div>
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-md-3">
                         <label>Rodaje*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="rodaje" name="rodaje" type="text" required>
+                        <select class="form-control" name="rodaje" [(ngModel)]="rodaje" required>
+                            <option value="cilindros">Cilindros</option>
+                            <option value="neumaticos">Neumaticos</option>
+                        </select>
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <label>Nro. ejes*</label>
@@ -138,9 +152,11 @@
                         <label>Nro. llantas*</label>
                         <input class="form-control" placeholder="" [(ngModel)]="numeroLlantas" name="numeroLlantas" type="text" required>
                     </div>
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-md-3">
                         <label>Tipo cabina*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="tipoCabina" name="tipoCabina" type="text" required>
+                        <select class="form-control" name="tipoCabina" [(ngModel)]="tipoCabina" required>
+                            <option value="cilindros">No aplica</option>
+                        </select>
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <label>Alto total*</label>
@@ -158,16 +174,19 @@
                         <label>Combustible*</label>
                         <ng-select
                             [multiple]="false"
-                            [options]="marcas"
-                            [(ngModel)]="marcaSelected"
+                            [options]="combustibles"
+                            [(ngModel)]="combustibleSelected"
                             (ngModelChange)="changedDepartamento($event)"
                             required
-                            name="marcaId">
+                            name="combustibleId">
                         </ng-select>
                     </div>
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-md-3">
                         <label>Origen vehiculo*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="origenVehiculo" name="origenVehiculo" type="text" required>
+                        <select class="form-control" name="origenVehiculo" [(ngModel)]="origenVehiculo" required>
+                            <option value="importado temporal">Importado temporal</option>
+                            <option value="internacional temporal">Internacional temporal</option>
+                        </select>
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <label>Subpartida arancelaria*</label>
