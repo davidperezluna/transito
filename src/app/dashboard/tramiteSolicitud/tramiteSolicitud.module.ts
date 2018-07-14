@@ -34,6 +34,7 @@ import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.c
 import { NewRnaTraspasoIndeterminadaComponent } from './rna/tramiteTraspasoIndeterminada/newRna.traspasoIndeterminada.component';
 import { NewTrasladoComponent } from './rna/tramiteTraslado/newTraslado.component';
 import { NewRnaTramiteInscripcionAlertaPrendaComponent } from './rna/tramiteInscripcionAlertaPrenda/newRna.inscripcionAlertaPrenda.component';
+import { NewRnaTramiteLevantamientoAlertaPrendaComponent } from './rna/tramiteLevantamientoAlertaPrenda/newRna.levantamientoAlertaPrenda.component';
 import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/newRna.matriculaInicial.component';
 import { NewRnaRadicadoCuentaComponent } from './rna/tramiteRadicadoCuenta/newRna.radicadoCuenta.component'; 
 
@@ -72,6 +73,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaTraspasoComponent,
         NewRnaTraspasoIndeterminadaComponent,
         NewRnaTramiteInscripcionAlertaPrendaComponent,
+        NewRnaTramiteLevantamientoAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
         NewRnaAcreedorComponent,
         NewRnaSustratoComponent,
@@ -107,6 +109,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaTraspasoComponent,
         NewRnaTraspasoIndeterminadaComponent,
         NewRnaTramiteInscripcionAlertaPrendaComponent,
+        NewRnaTramiteLevantamientoAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
         NewRnaAcreedorComponent,
         NewRnaSustratoComponent,
