@@ -11,7 +11,7 @@ export class RegistroMaquinariaService {
 
 	constructor(private _http: Http){}
 
-	getColor(){
+	getRegistroMaquinaria(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
@@ -25,7 +25,7 @@ export class RegistroMaquinariaService {
 							  .map(res => res.json());
 	}
 
-	deleteColor(token,id){
+	deleteRegistroMaquinaria(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class RegistroMaquinariaService {
 							  .map(res => res.json());
 	}
 
-	showColor(token,id){
+	showRegistroMaquinaria(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,7 +42,7 @@ export class RegistroMaquinariaService {
 
 	}
 
-	editColor(registroMaquinaria,token){
+	editRegistroMaquinaria(registroMaquinaria,token){
 
 		let json = JSON.stringify(registroMaquinaria);
 		let params = "json="+json+"&authorization="+token;
@@ -52,7 +52,7 @@ export class RegistroMaquinariaService {
 
 	}
 
-	getColorSelect(){
+	getRegistroMaquinariaSelect(){
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}

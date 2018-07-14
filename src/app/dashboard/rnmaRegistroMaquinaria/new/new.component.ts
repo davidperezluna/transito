@@ -1,26 +1,26 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { RegistroMaquinaria } from './newRnma.registroMaquinaria.modelo';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import {LoginService} from '../../../../services/login.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
-import {ColorService} from '../../../../services/color.service';
-import { TipoVehiculoService } from '../../../../services/tipoVehiculo.service';
-import {ClaseService} from '../../../../services/clase.service';
-import {MarcaService} from '../../../../services/marca.service';
-import {LineaService} from '../../../../services/linea.service';
-import {CarroceriaService} from '../../../../services/carroceria.service';
-import {CombustibleService} from '../../../../services/combustible.service';
+import { RegistroMaquinaria } from './../newRnmaRegistroMaquinaria.modelo';
+import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
+import {LoginService} from '../../../services/login.service';
+import {RegistroMaquinariaService} from '../../../services/registroMaquinaria.service';
+import {ColorService} from '../../../services/color.service';
+import { TipoVehiculoService } from '../../../services/tipoVehiculo.service';
+import {ClaseService} from '../../../services/clase.service';
+import {MarcaService} from '../../../services/marca.service';
+import {LineaService} from '../../../services/linea.service';
+import {CarroceriaService} from '../../../services/carroceria.service';
+import {CombustibleService} from '../../../services/combustible.service';
 
-import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
+
 
 import swal from 'sweetalert2';
-import { Factura } from '../../../factura/factura.modelo';
+// import { Factura } from '../factura/factura.modelo';
 
 @Component({
   selector: 'appRnma-new-registroMaquinaria',
-  templateUrl: './newRnma.registroMaquinaria.component.html'
+  templateUrl: './new.component.html'
 })
-export class NewRnmaRegistroMaquinariaComponent implements OnInit {
+export class NewRegistroMaquinariaComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Output() cancelarTramite = new EventEmitter<any>();
 @Input() vehiculo: any = null;
@@ -131,7 +131,7 @@ constructor(
   private _ColorService: ColorService,
   
   private _CombustibleService: CombustibleService,
-  private _VehiculoService: VehiculoService,
+  private _RegistroMaquinariaService: RegistroMaquinariaService,
   
   private _MarcaService: MarcaService,
   private _TramiteFacturaService: TramiteFacturaService,
@@ -249,7 +249,7 @@ constructor(
     // this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     console.log(this.vehiculo);  
     let token = this._loginService.getToken();
-    this._VehiculoService.register(this.vehiculo,token).subscribe(
+    this._RegistroMaquinariaService.register(this.vehiculo,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

@@ -1,29 +1,29 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { RegistroMaquinaria } from './newRnma.registroMaquinaria.modelo';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import {LoginService} from '../../../../services/login.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
-import {ColorService} from '../../../../services/color.service';
-import { TipoVehiculoService } from '../../../../services/tipoVehiculo.service';
-import {ClaseService} from '../../../../services/clase.service';
-import {MarcaService} from '../../../../services/marca.service';
-import {LineaService} from '../../../../services/linea.service';
-import {CarroceriaService} from '../../../../services/carroceria.service';
-import {CombustibleService} from '../../../../services/combustible.service';
+import { RegistroMaquinaria } from './newRnmaRegistroMaquinaria.modelo';
+import { TramiteFacturaService } from '../../services/tramiteFactura.service';
+import {LoginService} from '../../services/login.service';
+import {RegistroMaquinariaService} from '../../services/registroMaquinaria.service';
+import {ColorService} from '../../services/color.service';
+import { TipoVehiculoService } from '../../services/tipoVehiculo.service';
+import {ClaseService} from '../../services/clase.service';
+import {MarcaService} from '../../services/marca.service';
+import {LineaService} from '../../services/linea.service';
+import {CarroceriaService} from '../../services/carroceria.service';
+import {CombustibleService} from '../../services/combustible.service';
 
-import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
+// import {Vehiculo} from '../registroMaquinaria/vehiculo.modelo';
 
 import swal from 'sweetalert2';
-import { Factura } from '../../../factura/factura.modelo';
+import { Factura } from '../factura/factura.modelo';
 
 @Component({
   selector: 'appRnma-new-registroMaquinaria',
-  templateUrl: './newRnma.registroMaquinaria.component.html'
+  templateUrl: './newRnmaRegistroMaquinaria.component.html'
 })
 export class NewRnmaRegistroMaquinariaComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Output() cancelarTramite = new EventEmitter<any>();
-@Input() vehiculo: any = null;
+// @Input() registroMaquinaria: any = null;
 @Input() factura: any = null;
 @Input() tramitesFactura: any = null;
 
@@ -131,7 +131,7 @@ constructor(
   private _ColorService: ColorService,
   
   private _CombustibleService: CombustibleService,
-  private _VehiculoService: VehiculoService,
+  private _RegistroMaquinariaService: RegistroMaquinariaService,
   
   private _MarcaService: MarcaService,
   private _TramiteFacturaService: TramiteFacturaService,
@@ -239,28 +239,28 @@ constructor(
 }
   onEnviar(){
 
-    this.vehiculo.municipioId = this.municipioSelected;
-    this.vehiculo.lineaId = this.lineaSelected;
-    this.vehiculo.claseId = this.claseSelected;
-    this.vehiculo.carroceriaId = this.carroceriaSelected;
-    // this.vehiculo.servicioId = this.servicioSelected;
-    this.vehiculo.colorId = this.colorSelected;
-    this.vehiculo.combustibleId = this.combustibleSelected;
-    // this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
-    console.log(this.vehiculo);  
+    this.registroMaquinaria.id = this.municipioSelected;
+    this.registroMaquinaria.lineaId = this.lineaSelected;
+    this.registroMaquinaria.claseId = this.claseSelected;
+    this.registroMaquinaria.carroceriaId = this.carroceriaSelected;
+    // this.registroMaquinaria.servicioId = this.servicioSelected;
+    this.registroMaquinaria.colorId = this.colorSelected;
+    this.registroMaquinaria.combustibleId = this.combustibleSelected;
+    // this.registroMaquinaria.sedeOperativaId = this.sedeOperativaSelected;
+    console.log(this.registroMaquinaria);  
     let token = this._loginService.getToken();
-    this._VehiculoService.register(this.vehiculo,token).subscribe(
+    this._RegistroMaquinariaService.register(this.registroMaquinaria,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.datos.numeroMotor = this.vehiculo.motor;
+          this.datos.numeroMotor = this.registroMaquinaria.id;
           this.datos.tramiteFactura =58;
           this.readyTramite.emit(this.datos);
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.vehiculo.placa +' ya se encuentra registrado',
+            text: 'El registroMaquinaria '+ this.registroMaquinaria.id+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
