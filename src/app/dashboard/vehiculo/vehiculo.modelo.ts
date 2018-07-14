@@ -1,7 +1,7 @@
 export class Vehiculo{
 	constructor(
 		public id:number,
-		public claseId:number,
+		public claseId:string,
 		public municipioId:number,
 		public lineaId:number,
 		public servicioId:number,
