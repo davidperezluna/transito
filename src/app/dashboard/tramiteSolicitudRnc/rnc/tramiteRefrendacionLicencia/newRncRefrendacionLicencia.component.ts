@@ -36,7 +36,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
         'paisId': null,
         'claseId': null,
         'servicioId': null,
-        'solicitanteId': null,
+        'ciudadanoId': null,
     };
 
     constructor(
@@ -99,7 +99,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
         this.datos.claseId = this.claseSelected;
         this.datos.servicioId = this.servicioSelected;
         this.datos.paisId = this.paisSelected;
-        this.datos.solicitanteId = this.solicitante.id;
+        this.datos.ciudadanoId = this.solicitante.id;
 
         this.readyTramite.emit(this.datos);
     }
