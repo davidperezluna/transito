@@ -56,7 +56,8 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       'vehiculoId': null,
       'tipoDocApoderado': null,
       'nombreApoderado': null,
-      'numeroDocumento': null};
+      'numeroDocumento': null,
+      'ciudadanoId': null};
       
       this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
       this.datos.tipoServicio = this.vehiculo.servicio.nombre;
@@ -83,6 +84,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     this.nombreApoderado = this.datos.nombreApoderado;
     this.tipoDocApoderado = this.datos.tipoDocApoderado;
     this.numeroDocumento = this.datos.numeroDocumento;
+    this.datos.ciudadanoId= this.ciudadano.id;
   }
   
   onNew(){
@@ -104,5 +106,26 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     let token = this._loginService.getToken();       
       this.datos.tramiteFactura =58;
       this.readyTramite.emit(this.datos);
+      this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token,this.datos).subscribe(
+        response => {
+          this.respuesta = response; 
+          if(this.respuesta.status == 'success'){
+            swal({
+              title: 'Perfecto!',
+              text: 'El registro se ha modificado con éxito',
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          error => {
+                  this.errorMessage = <any>error;
+
+                  if(this.errorMessage != null){
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                  }
+              }
+      }
+      );
   }
 }
