@@ -57,7 +57,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       'tipoDocApoderado': null,
       'nombreApoderado': null,
       'numeroDocumento': null,
-      'ciudadanoId': null};
+      'solicitanteId': null};
       
       this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
       this.datos.tipoServicio = this.vehiculo.servicio.nombre;
@@ -84,7 +84,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     this.nombreApoderado = this.datos.nombreApoderado;
     this.tipoDocApoderado = this.datos.tipoDocApoderado;
     this.numeroDocumento = this.datos.numeroDocumento;
-    this.datos.ciudadanoId= this.ciudadano.id;
+    this.datos.solicitanteId= this.ciudadano.id;
   }
   
   onNew(){
