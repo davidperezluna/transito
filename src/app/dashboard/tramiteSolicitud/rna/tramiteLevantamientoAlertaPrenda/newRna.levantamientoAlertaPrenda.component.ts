@@ -17,10 +17,10 @@ import { TipoIdentificacionService } from '../../../../services/tipoIdentificaci
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-inscripcion-alerta-prenda',
-    templateUrl: './newRna.inscripcionAlertaPrenda.html'
+    selector: 'appRna-levantamiento-alerta-prenda',
+    templateUrl: './newRna.levantamientoAlertaPrenda.html'
 })
-export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
+export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;

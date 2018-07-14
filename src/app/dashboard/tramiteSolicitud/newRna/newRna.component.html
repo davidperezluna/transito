@@ -47,7 +47,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                            {{vehiculo.cfgPlaca?.numero}}
+                                            {{vehiculo.placa?.numero}}
                                             </td>
                                             <td> 
                                                 {{vehiculo.motor}}
@@ -56,7 +56,7 @@
                                                 {{vehiculo.servicio.nombre}}
                                             </td>
                                             <td> 
-                                                {{vehiculo.tipoVehiculo}}
+                                                {{vehiculo.clase?.nombre}}
                                             </td>
                                         </tr>
                                     </tbody> 
@@ -212,8 +212,8 @@
                         </div>
 
                         <div class="tab-pane" id="58" role="tabpanel"> 
-                                <appRna-traspaso-indeterminada [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
-                            </div>
+                            <appRna-traspaso-indeterminada [vehiculo] = "vehiculo" [factura] = "factura" [ciudadano] = "ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
+                        </div>
                         
                         <div class="tab-pane" id="3" role="tabpanel"> 
                             <app-new-traslado [vehiculo] = "vehiculo" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-new-traslado>
@@ -279,6 +279,10 @@
                             <appRna-cambio-carroceria [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-carroceria>
                         </div>
                         
+                        <div class="tab-pane" id="45" role="tabpanel"> 
+                            <appRna-levantamiento-alerta-prenda [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-levantamiento-alerta-prenda>
+                        </div>
+
                         <div class="tab-pane" id="46" role="tabpanel"> 
                             <appRna-inscripcion-alerta-prenda [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
                         </div>

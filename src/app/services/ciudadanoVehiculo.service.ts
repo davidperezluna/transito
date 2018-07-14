@@ -85,4 +85,12 @@ export class CiudadanoVehiculoService {
 							  .map(res => res.json());
 
 	}
+
+	eliminarVehiculoPropietario(token,datos){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/delete/vehiculo", params, {headers: headers})
+							  .map(res => res.json());
+	}
 }
