@@ -2,10 +2,8 @@ import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { Factura } from '../factura.modelo';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { MflTipoRecaudoService } from '../../../services/mflTipoRecaudo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
@@ -22,7 +20,6 @@ import swal from 'sweetalert2';
 
 export class NewComponent  implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@Input() tipo:any = null;
 public factura: Factura;
 public errorMessage;
 public respuesta;
@@ -60,12 +57,9 @@ constructor(
   private _TramitePrecioService: TramitePrecioService,
   private _CiudadanoService: CiudadanoService,
   private _loginService: LoginService,
-  private _VehiculoService: VehiculoService,
   private _tipoIdentificacionService: TipoIdentificacionService,
-  private _SedeOperativaService: SedeOperativaService,
   private _FuncionarioService: MpersonalFuncionarioService,
   private _MflTipoRecaudoService: MflTipoRecaudoService,
-  private datePipe: DatePipe,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _moduloService: ModuloService,
   ){}
@@ -74,7 +68,6 @@ constructor(
     this._moduloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
-        
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -121,6 +114,7 @@ constructor(
   
     var datePiper = new DatePipe(this.date);
     let token = this._loginService.getToken();
+    
     this._FuncionarioService.searchLogin(identity,token).subscribe(
       response => {
         this.respuesta = response;
