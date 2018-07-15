@@ -15,6 +15,7 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() loteInsumoInsumo:any = null;
 @Input() tipoInsumo:any = null;
+
 public errorMessage;
 public respuesta;
 public formReady = false;
