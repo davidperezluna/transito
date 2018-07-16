@@ -312,6 +312,11 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="rnaAsignacionInsumos" [ngClass]="{'active' : ( addActive === 'rnaAsignacionInsumos')}" (click)="addActiveMenu('rnaAsignacionInsumos')">
+            <i class="fa fa-angle-right"></i> Asignación Insumos
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="pre-asignacion-placa" [ngClass]="{'active' : ( addActive === 'pre-asignacion-placa')}" (click)="addActiveMenu('pre-asignacion-placa')">
             <i class="fa fa-angle-right"></i> Pre-asignación-placa  
           </a>
