@@ -5,14 +5,13 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class RegistroMaquinariaService {
-	private url = environment.apiUrl + "registroMaquinaria";
+	private url = environment.apiUrl + "vehiculomaquinaria";
 	public identity;
 	public token; 
 
 	constructor(private _http: Http){}
 
-	getRegistroMaquinaria(){
-		
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
