@@ -15,7 +15,8 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public vehiculos;
+  public vehiculos;
+  public registrosMaquinaria;
   public formIndex = true;
   public formNew = false;
   public formEdit= false;
@@ -44,11 +45,10 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
       }
     })
     this.formEdit=false;
-    this.formNew=false;
+    this.formNew=false;    
 		this._RegistroMaquinariaService.index().subscribe(
 				response => {
-          this.vehiculos = response.data;
-          
+          this.registrosMaquinaria = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -80,8 +80,8 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
    this.table = $('#dataTables-example').DataTable();
   }
   onNew(){
-    this.formNew = true;
     this.formIndex = false;
+    this.formNew = true;
     this.table.destroy();
   }
 
