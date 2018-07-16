@@ -24,7 +24,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.talonario = new MpersonalTalonario(null, null, null, null, null, null, null);
+    this.talonario = new MpersonalTalonario(null, null, null, null, null, null, null, null);
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
@@ -32,13 +32,24 @@ constructor(
       },
       error => {
         this.errorMessage = <any>error;
-
         if(this.errorMessage != null){
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
       }
     );
+  }
+
+  onCalcularTotal() {
+    let ini, fin, rangos;
+    ini = this.talonario.desde;
+    fin = this.talonario.hasta;
+    rangos = (fin - ini);
+
+    if (rangos < 0) {
+      rangos = 0;
+    }
+    this.talonario.rangos = rangos;
   }
   
   onCancelar(){
