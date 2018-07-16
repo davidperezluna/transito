@@ -33,10 +33,6 @@ export class FacturaComponent implements OnInit {
   ){}
     
   ngOnInit() {
-    this.sub = this._route.params.subscribe(params => {
-      this.tipo = params['tipo'];
-    });
-    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -51,10 +47,6 @@ export class FacturaComponent implements OnInit {
       }
     })
     
-
-    
-
-
 		this._FacturaService.getFactura().subscribe(
 				response => {
           this.facturas = response.data;

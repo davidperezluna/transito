@@ -28,8 +28,8 @@
                
                 <div class="col-md-12 ">
                     <div class="form-group row">
-                        <div class="col-lg-12 col-md-12">
-                            <label>Tipo Recaudo*</label>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Recaudo <b class="text-danger">*</b></label>
                             <ng-select 
                                 [multiple]="false" 
                                 [options]="tiposRecaudo" 
@@ -38,6 +38,18 @@
                                 name="tiposRecaudoId">
                             </ng-select>
                         </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Modulo <b class="text-danger">*</b></label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="modulos"
+                                [(ngModel)]="moduloSelected"
+                                (ngModelChange)="changedModulo($event)"
+                                required
+                                name="moduloId">
+                            </ng-select>
+                            <br><br>
+                        </div> 
                     </div>
                 </div> 
 
@@ -87,7 +99,7 @@
                     </table>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf="tipo != 'RNC'">
+                <div class="col-xs-12 col-lg-12" *ngIf="moduloSelected != 4">
                     <div class="input-group" [ngClass]="{'has-danger' : isErrorVehiculo,'has-success': isExistVehiculo}">
                         <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" required />
                         <span class="input-group-btn">
@@ -173,20 +185,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf="isExistVehiculo || tipo == 'RNC'">
-                    <label>Modulo*</label>
-                    <ng-select
-                        [multiple]="false"
-                        [options]="modulos"
-                        [(ngModel)]="moduloSelected"
-                        (ngModelChange)="changedModulo($event)"
-                        required
-                        name="moduloId">
-                    </ng-select>
-                    <br><br>
-                </div> 
-
-                <div class="col-xs-12 col-lg-12" *ngIf="isExistVehiculo || tipo == 'RNC'">
+                <div class="col-xs-12 col-lg-12" *ngIf="moduloSelected != 4 && isExistVehiculo || moduloSelected == 4 && isExistCiudadano">
                     <label>Tramites*</label>
                     <ng-select
                         [multiple]="false"

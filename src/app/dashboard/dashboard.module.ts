@@ -76,6 +76,7 @@ import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsigna
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
+// import { RegistroMaquinariaModule } from './rnmaRegistroMaquinaria/newRnmaRegistroMaquinaria.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
