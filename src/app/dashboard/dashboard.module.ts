@@ -76,11 +76,12 @@ import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsigna
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
-import { RegistroMaquinariaModule } from './rnmaRegistroMaquinaria/newRnmaRegistroMaquinaria.module';
+// import { RegistroMaquinariaModule } from './rnmaRegistroMaquinaria/newRnmaRegistroMaquinaria.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
+import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/RnmaRegistroMaquinaria.module';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -159,7 +160,7 @@ import {RightsidebarComponent} from '../shared/index';
       CfgSedeOperativaModule,
       MsvTalonarioModule,
       rnaRegistroInsumosModule,
-      RegistroMaquinariaModule,
+      RnmaRegistroMaquinariaModule,
       
       //MsvTCAsignacionModule,
     ],
