@@ -106,21 +106,17 @@ export class NewComponent implements OnInit {
         console.log("asd");
     }
 
-    calcularTotal() {
+    onCalcularTotal() {
         let ini, fin, total;
-        ini = 0;
-        fin = 0;
-        total = 0;
+
         ini = this.msvTalonario.rangoini;
         fin = this.msvTalonario.rangofin;
-        total = (fin - ini) + 1;
-        console.log(total);
+        total = (fin - ini);
+
         if (total < 0) {
             total = 0;
-
         }
         this.msvTalonario.total = total;
-
     }
 
     /*ready(isCreado: any) {

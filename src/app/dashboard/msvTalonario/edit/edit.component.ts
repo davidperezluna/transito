@@ -94,18 +94,15 @@ export class EditComponent {
       });
   }
 
-  calcularTotal() {
+  onCalcularTotal() {
     let ini, fin, total;
-    ini = 0;
-    fin = 0;
-    total = 0;
+
     ini = this.talonario.rangoini;
     fin = this.talonario.rangofin;
-    total = (fin - ini) + 1;
-    console.log(total);
+    total = (fin - ini);
+
     if (total < 0) {
       total = 0;
-
     }
     this.talonario.total = total;
 

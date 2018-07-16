@@ -1,5 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MpersonalTalonarioService } from '../../../services/mpersonalTalonario.service';
+import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,22 +11,55 @@ import swal from 'sweetalert2';
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() talonario:any = null;
+public sedesOperativas: any;
+public sedeOperativaSelected: any;
 public errorMessage;
 public respuesta;
 public formReady = false;
 
 constructor(
-  private _talonarioService: MpersonalTalonarioService,
+  private _TalonarioService: MpersonalTalonarioService,
+  private _SedeOperativaService: SedeOperativaService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.talonario);  }
+  ngOnInit(){ 
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+      response => {
+        this.sedesOperativas = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+  }
 
-  onCancelar(){ this.ready.emit(true); }
+  onCalcularTotal() {
+    let ini, fin, rangos;
+    ini = this.talonario.desde;
+    fin = this.talonario.hasta;
+    rangos = (fin - ini);
+
+    if (rangos < 0) {
+      rangos = 0;
+    }
+    this.talonario.rangos = rangos;
+  }
+
+  onCancelar(){ 
+    this.ready.emit(true); 
+  }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._talonarioService.edit(this.talonario,token).subscribe(
+
+    this.talonario.sedeOperativaId = this.sedeOperativaSelected;
+
+		this._TalonarioService.edit(this.talonario,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

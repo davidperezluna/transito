@@ -18,15 +18,15 @@
                     <div class="form-group row">
                         <div  class="col-xs-12 col-lg-4">
                             <label>Desde</label>
-                            <input class="form-control" [(ngModel)]="talonario.desde" name="desde" type="numeric" required>
+                            <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.desde" name="desde" type="numeric" required>
                         </div>
                         <div  class="col-xs-12 col-lg-4">
                             <label>Hasta</label>
-                            <input class="form-control" [(ngModel)]="talonario.hasta" name="hasta" type="numeric" required>
+                            <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.hasta" name="hasta" type="numeric" required>
                         </div>
                         <div  class="col-xs-12 col-lg-4">
                             <label>Rangos</label>
-                            <input class="form-control" [(ngModel)]="rangos" name="rangos" type="numeric" required>
+                            <input class="form-control" [(ngModel)]="talonario.rangos" name="rangos" type="numeric" required readonly>
                         </div>
                     </div>
 
