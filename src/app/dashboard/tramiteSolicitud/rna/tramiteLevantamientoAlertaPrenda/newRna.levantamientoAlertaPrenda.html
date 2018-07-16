@@ -48,6 +48,55 @@
                                 </div>
                             </div>
 
+                            <!--acreedores vehiculo -->
+                            <div class="container" *ngIf="listaAcreedoresVehiculo">
+                                <br>
+                                <table class="table " id="dataTables-example">
+                                    <br>
+                                    <thead>
+                                        <tr>
+                                            <!-- <th>Permiso tramite</th>
+                                            <th>Solicitante Ciudadano</th> -->
+                                            <th>Acreedor</th>
+                                            <th>Tipo Alerta</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let acreedor of datos.acreedoresVehiculo; let i = index">
+                            
+                                            <!-- <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==2">
+                                                <p>Si</p>
+                                            </td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==2">
+                                                <p>No</p>
+                                            </td>
+                            
+                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==1">
+                                                <p>Propietario</p>
+                                            </td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==1">
+                                                <p>Locatario</p>
+                                            </td> -->
+                            
+                                            <td class="center">
+                                                <p> Identificación: {{acreedor.identificacion}}
+                                                    <br> Nombre: {{acreedor.nombre}}</p>
+                                            </td>
+                                            <td class="center" >
+                                                <p>{{acreedor.tipoAlerta}} - Grado: {{acreedor.gradoAlerta}}</p>
+                                            </td>
+                                            <!-- <td class="center" *ngIf="!ciudadano.identificacionAcreedor">
+                                                <button (click)="agregarAcreedorCiudadano(ciudadano)" class="btn btn-primary pull-right">Agregar</button>
+                                            </td> -->
+                                            <td class="center">
+                                                <button (click)="delete(ciudadano)" class="btn btn-danger">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                             <!--acreedores ciudadanos -->
                             <div class="container" *ngIf="listaAcreedoresCiudadanos">
                                 <br>
@@ -340,7 +389,7 @@
                     
                 </div>
             </div>
-            <div class="card-footer" *ngIf="gradoSelected > 0">
+            <div class="card-footer" >
                 <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
                 <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
             </div>

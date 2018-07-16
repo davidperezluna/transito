@@ -132,7 +132,6 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         this._VehiculoAcreedorService.getAcreedor().subscribe(
             response => {
                 this.respuesta = response;
-                console.log(response);
                 if (this.respuesta.status == 'success') {
                     this.vehiculosAcreedor = this.respuesta.data;
                     
@@ -163,7 +162,6 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         //this.datos.banco = this.banco.nombre;
         let placaT = this.vehiculo.placa;
         this.datos.vehiculoPlaca = this.vehiculo.placa.numero;
-        console.log(placaT);
         let token = this._loginService.getToken();
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
@@ -334,6 +332,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         let nit = {
             'nit': this.nit,
         };
+
         this._EmpresaService.showNit(token, this.nit).subscribe(
             response => {
                 this.respuesta = response;
@@ -375,7 +374,6 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                 this.propietario = false
             }
         
-        console.log(this.datos.acreedoresCiudadanos);
         this.ciudadanoEncontrado = 1;
         this.listaAcreedoresCiudadanos = true;
     }
