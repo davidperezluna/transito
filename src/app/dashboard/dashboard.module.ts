@@ -80,6 +80,7 @@ import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
+import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
 import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
 
 import { DashboardComponent } from './dashboard.component'; 
@@ -160,6 +161,7 @@ import {RightsidebarComponent} from '../shared/index';
       MsvTalonarioModule,
       rnaRegistroInsumosModule,
       RnmaRegistroMaquinariaModule,
+      rnaAsignacionInsumosModule,
       
       //MsvTCAsignacionModule,
     ],

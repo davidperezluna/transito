@@ -5,7 +5,7 @@
           <div class="card-header">
             <h5 class="card-title">
               <b class="text-uppercase">RNA</b>
-              <small>Registro insumos</small>
+              <small>Asignacion insumos</small>
               <div class="col text-right ">
                 <div class="btn-group pull-right">
                   <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
@@ -33,32 +33,26 @@
                   <table class="table " id="dataTables-example-Sustratos">
                     <thead>
                       <tr>
-                        <th>No.Acta</th>
-                        <th>Empresa</th>
                         <th>Sede</th>
                         <th>Insumo</th>
                         <th>Rango Inicio</th>
                         <th>Rango Fin</th>
                         <th>Cantidad</th>
-                        <th>Referencia</th>
                         <th>Fecha</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr class="odd" *ngFor="let loteInsumoSustrato of loteInsumoSustratos; let i = index">
-                        <td >{{loteInsumoSustrato.numeroActa}}</td>
-                        <td >{{loteInsumoSustrato.empresa.nombre}}</td>
                         <td >{{loteInsumoSustrato.sedeOperativa.nombre}}</td>
                         <td >{{loteInsumoSustrato.casoInsumo.nombre}}</td>
                         <td >{{loteInsumoSustrato.rangoInicio}}</td>
                         <td >{{loteInsumoSustrato.rangoFin}}</td>
-                        <td >{{loteInsumoSustrato.cantidad}}</td>
-                        <td >{{loteInsumoSustrato.referencia}}</td>
+                        <td >{{loteInsumoSustrato.numero}}</td>
                         <td >{{loteInsumoSustrato.fecha}}</td>
                         <td>
-                          <button (click)="editRnaLoteInsumoSustrato(loteInsumoSustrato)" class="btn btn-outline-info" type="button">Editar</button> 
-                          <button (click)="deleteRnaLoteInsumo(loteInsumoSustrato.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                          <button (click)="editRnaInsumoSustrato(loteInsumoSustrato)" class="btn btn-outline-info" type="button">Editar</button> 
+                          <button (click)="deleteRnaInsumo(loteInsumoSustrato.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
                         </td>
                       </tr>
                     </tbody>
@@ -68,8 +62,6 @@
                     <table class="table " id="dataTables-example-Insumos">
                       <thead>
                         <tr>
-                          <th>No.Acta</th>
-                          <th>Empresa</th>
                           <th>Insumo</th>
                           <th>Cantidad</th>
                           <th>Referencia</th>
@@ -79,15 +71,13 @@
                       </thead>
                       <tbody>
                         <tr class="odd" *ngFor="let loteInsumoInsumo of loteInsumoInsumos; let i = index">
-                          <td >{{loteInsumoInsumo.numeroActa}}</td>
-                          <td >{{loteInsumoInsumo.empresa.nombre}}</td>
                           <td >{{loteInsumoInsumo.casoInsumo.nombre}}</td>
                           <td >{{loteInsumoInsumo.cantidad}}</td>
                           <td >{{loteInsumoInsumo.referencia}}</td>
                           <td >{{loteInsumoInsumo.fecha}}</td>
                           <td>
-                            <button (click)="editRnaLoteInsumoInsumo(loteInsumoInsumo)" class="btn btn-outline-info" type="button">Editar</button> 
-                            <!-- <button (click)="deleteRnaLoteInsumo(loteInsumoInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button>  -->
+                            <button (click)="editRnaInsumoInsumo(loteInsumoInsumo)" class="btn btn-outline-info" type="button">Editar</button> 
+                            <!-- <button (click)="deleteRnaInsumo(loteInsumoInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button>  -->
                           </td>
                         </tr>
                       </tbody> 
