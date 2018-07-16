@@ -12,11 +12,11 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item"> 
-                                    <a (click)="onInsumo()" class="nav-link active" data-toggle="tab" href="#sustrato" role="tab">Sustrato</a> 
+                                    <a class="nav-link active" data-toggle="tab" href="#sustrato" role="tab">Sustrato</a> 
                                     <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
                                 </li>  
                                 <li class="nav-item"> 
-                                    <a (click)="onSustrato()" class="nav-link" data-toggle="tab" href="#insumo" role="tab">Insumo</a> 
+                                    <a class="nav-link" data-toggle="tab" href="#insumo" role="tab">Insumo</a> 
                                     <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
                                 </li>  
                             </ul>
@@ -24,25 +24,12 @@
                             <div class="tab-pane active" id="sustrato" role="tabpanel"> 
                                 <div class="form-group row">
                                     <div class="col-lg-4 col-md-4">
-                                        <label>No.Acta*</label>
-                                        <input class="form-control" [(ngModel)]="rnaRegistroInsumos.numeroActa" name="numeroActa" placeholder="" type="text" required>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <label>Empresa*</label>
-                                        <ng-select
-                                            [multiple]="false"
-                                            [options]="empresas"
-                                            [(ngModel)]="empresaSelected"
-                                            required
-                                            name="empresaId">
-                                        </ng-select>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
                                         <label>Sede*</label>
                                         <ng-select
                                             [multiple]="false"
                                             [options]="sedes"
                                             [(ngModel)]="sedeSelected"
+                                            (ngModelChange)="changedSedeOperativa($event)"
                                             name="sedeId">
                                         </ng-select>
                                     </div>
@@ -53,76 +40,65 @@
                                             [options]="sustratos"
                                             [(ngModel)]="insumoSelected"
                                             required
+                                            (ngModelChange)="changedInsumo($event)"
+                                            [disabled]= 'frmInsumoSelect'
                                             name="insumoId">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
                                         <label>Rango Inicio*</label>
-                                        <input class="form-control" [(ngModel)]="rnaRegistroInsumos.rangoInicio" name="rangoInicio" placeholder="" type="text">
+                                        <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.rangoInicio" name="rangoInicio" placeholder="" type="text">
                                     </div>
         
                                     <div class="col-lg-4 col-md-4">
                                         <label>Rango Fin*</label>
-                                        <input class="form-control" (blur)="isFin()" [(ngModel)]="rnaRegistroInsumos.rangoFin" name="rangoFin" placeholder="" type="text">
+                                        <input class="form-control" (blur)="isFin()" [(ngModel)]="rnaAsignacionInsumos.rangoFin" name="rangoFin" placeholder="" type="text">
                                     </div>
         
                                     <div class="col-lg-4 col-md-4">
                                         <label>Cantidad*</label>
-                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaRegistroInsumos.cantidad" name="cantidad" placeholder="" type="text" required>
+                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaAsignacionInsumos.cantidad" name="cantidad" placeholder="" type="text" required>
                                     </div>
         
                                     <div class="col-lg-4 col-md-4">
                                         <label>No.caja*</label>
-                                        <input class="form-control" [(ngModel)]="rnaRegistroInsumos.referencia" name="referencia" placeholder="" type="text" required>
+                                        <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.referencia" name="referencia" placeholder="" type="text" required>
                                     </div>
         
                                     <div class="col-lg-4 col-md-4">
                                         <label>Fecha*</label>
-                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaRegistroInsumos.fecha" name="fecha" placeholder="" type="date" required>
+                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="tab-pane" id="insumo" role="tabpanel">
-                                <div class="form-group row" >
-                                    <div class="col-lg-4 col-md-4">
-                                        <label>No.Acta*</label>
-                                        <input class="form-control" [(ngModel)]="rnaRegistroInsumos.numeroActa" name="numeroActa" placeholder="" type="text" required>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <label>Empresa*</label>
-                                        <ng-select
-                                            [multiple]="false"
-                                            [options]="empresas"
-                                            [(ngModel)]="empresaInsumoSelected"
-                                            required
-                                            name="empresa1Id">
-                                        </ng-select>
-                                    </div>
+                                <div class="form-group row">
                                     <div class="col-lg-4 col-md-4">
                                         <label>Insumo*</label>
                                         <ng-select
                                             [multiple]="false"
                                             [options]="insumos"
-                                            [(ngModel)]="insumoInsumoSelected"
+                                            [(ngModel)]="insumoSelectedInsumo"
+                                            (ngModelChange)="changedInsumo($event)"
                                             required
-                                            name="insumo1Id">
+                                            name="insumoId">
                                         </ng-select>
                                     </div>
         
                                     <div class="col-lg-4 col-md-4">
                                         <label>Cantidad*</label>
-                                        <input class="form-control" [(ngModel)]="rnaRegistroInsumos.cantidad" name="cantidad" placeholder="" type="text" required>
+                                        <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.numero" name="cantidad" placeholder="" type="text" required>
                                     </div>
         
                                     <div class="col-lg-4 col-md-4">
                                         <label>No.caja*</label>
-                                        <input class="form-control" [(ngModel)]="rnaRegistroInsumos.referencia" name="referencia" placeholder="" type="text" required>
+                                        <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.referencia" name="referencia" placeholder="" type="text" required>
                                     </div>
         
                                     <div class="col-lg-4 col-md-4">
                                         <label>Fecha*</label>
-                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaRegistroInsumos.fecha" name="fecha" placeholder="" type="date" required>
+                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
                                     </div>
                                 </div>
                             </div>    
@@ -132,7 +108,7 @@
             </form>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    
         </div>
     </div>

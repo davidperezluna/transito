@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-lg-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0">Editar Pais</h5>
+                <h5 class="m-0">Editar lote insumo</h5>
                 <hr> 
                 <div class="row justify-content-center">
                     <div class="card-body col-md-12">
@@ -31,21 +31,11 @@
                                         name="sedeId">
                                     </ng-select>
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='insumo'">
+                                <div class="col-lg-4 col-md-4">
                                     <label>Insumo*</label>
                                     <ng-select
                                         [multiple]="false"
                                         [options]="insumos"
-                                        [(ngModel)]="insumoSelected"
-                                        required
-                                        name="insumoId">
-                                    </ng-select>
-                                </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="tipoInsumo =='sustrato'">
-                                    <label>Insumo*</label>
-                                    <ng-select
-                                        [multiple]="false"
-                                        [options]="sustratos"
                                         [(ngModel)]="insumoSelected"
                                         required
                                         name="insumoId">

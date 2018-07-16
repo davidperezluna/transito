@@ -52,9 +52,12 @@ export class CasoInsumoService {
 
 	}
 
-	getCasoInsumoSelect(){
-		
-		return this._http.get(this.url+"/select").map(res => res.json());
+	getCasoInsumoInsumoSelect(){ 
+		return this._http.get(this.url+"/select/insumo").map(res => res.json());
+	}
+
+	getCasoInsumoSustratoSelect(){ 
+		return this._http.get(this.url+"/select/sustrato").map(res => res.json());
 	}
 	
 }
