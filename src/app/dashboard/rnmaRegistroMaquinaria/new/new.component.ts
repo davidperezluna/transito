@@ -1,266 +1,205 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { RegistroMaquinaria } from './../newRnmaRegistroMaquinaria.modelo';
-import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
+import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import {RegistroMaquinaria} from '../rnmaRegistroMaquinaria.modelo';
+import {DepartamentoService} from "../../../services/departamento.service";
 import {LoginService} from '../../../services/login.service';
-import {RegistroMaquinariaService} from '../../../services/registroMaquinaria.service';
-import {ColorService} from '../../../services/color.service';
-import { TipoVehiculoService } from '../../../services/tipoVehiculo.service';
-import {ClaseService} from '../../../services/clase.service';
-import {MarcaService} from '../../../services/marca.service';
+import {MunicipioService} from '../../../services/municipio.service';
 import {LineaService} from '../../../services/linea.service';
+import {ClaseService} from '../../../services/clase.service';
 import {CarroceriaService} from '../../../services/carroceria.service';
+import {ServicioService} from '../../../services/servicio.service';
+import {ColorService} from '../../../services/color.service';
 import {CombustibleService} from '../../../services/combustible.service';
-
-
-
+import {VehiculoService} from '../../../services/vehiculo.service';
+import {SedeOperativaService} from '../../../services/sedeOperativa.service';
+import {MarcaService} from '../../../services/marca.service';
 import swal from 'sweetalert2';
-// import { Factura } from '../factura/factura.modelo';
-
 @Component({
-  selector: 'appRnma-new-registroMaquinaria',
+  selector: 'app-new-rnmaRegistroMaquinaria',
   templateUrl: './new.component.html'
 })
 export class NewRegistroMaquinariaComponent implements OnInit {
-@Output() readyTramite = new EventEmitter<any>();
-@Output() cancelarTramite = new EventEmitter<any>();
-@Input() vehiculo: any = null;
-@Input() factura: any = null;
-@Input() tramitesFactura: any = null;
-
-public registroMaquinaria:RegistroMaquinaria;
+@Output() ready = new EventEmitter<any>();
+public registroMaquinaria: RegistroMaquinaria;
+public municipios:any;
 public errorMessage:any;
-public respuesta:any;
-public tramiteFacturaSelected: any;
-public tramiteRealizado: any;
-public sustratos: any;
-
-public colores:any;
-public tiposVehiculo:any;
-public clases:any;
-public marcas:any;
+public habilitar:any;
 public lineas:any;
+public clases:any;
 public carrocerias:any;
+public servicios:any;
+public colores:any;
+public marcas:any;
 public combustibles:any;
-
-
-
-public colorSelected:any;
-public tipoVehiculoSelected:any;
-public claseSelected:any;
-public marcaSelected:any;
-public lineaSelected:any;
-public carroceriaSelected:any;
-public combustibleSelected:any;
-
-
-public placa:string;
-public numeroSerie:any;
-public numeroVin:any;
-public numeroChasis:any;
-public numeroMotor:any;
-public fechaIngreso:any;
-
-
-
-public codigoIngreso:any;
-
-public tipoVehiculo:any;
-public clase:any;
-
-public tipoClase:any;
-public linea:any;
-public carroceria:any;
-public pesoBruto:any;
-public CargaUtil:any;
-public rodaje:any;
-public numeroEjes:any;
-public numeroLlantas:any;
-public tipoCabina:any;
-public altoTotal:any;
-public largoTotal:any;
-public anchoTotal:any;
-public combustible:any;
-public origenVehiculo:any;
-public subpartidaArancelaria:any;
 public municipioSelected:any;
-public tramiteFactura:any;
-public condicionesSelected;
-public condiciones =[
-  {'value':"Nuevo",'label':"Nuevo"},{'value':"Sin registro antes de inicio RNMA",'label':"Sin registro antes de inicio RNMA"}
-]
-
-
-public datos = {
-  'placa': null,
-  'numeroSerie': null,
-  'numeroVin': null,
-  'numeroChasis': null,
-  'numeroMotor': null,
-  'codigoIngreso': null,
-  'fechaIngreso': null,
-  'colorId': null,
-  'claseMaquinariaClase': null,
-  'marcas': null,
-  'tipoClase': null,
-  'linea': null,
-  'tipoMaquinaria': null,
-  'carroceria': null,
-  'pesoBruto': null,
-  'cargaUtil': null,
-  'rodaje': null,
-  'numeroEjes': null,
-  'numeroLlantas': null,
-  'tipoCabina': null,
-  'altoTotal': null,
-  'largoTotal': null,
-  'anchoTotal': null,
-  'combustible': null,
-  'origenVehiculo': null,
-  'subpartidaArancelaria': null,
-  'tramiteFactura': null,
-  
-};
+public lineaSelected:any;
+public claseSelected:any;
+public carroceriaSelected:any;
+public servicioSelected:any;
+public colorSelected:any;
+public marcaSelected:any;
+public sedeOperativaSelected:any;
+public combustibleSelected:any;
+public respuesta:any;
+public sedesOperativas:any;
 
 constructor(
-  
+  private _departamentoService: DepartamentoService,
   private _loginService: LoginService,
-  
+  private _MunicipioService: MunicipioService,
+  private _MarcaService: MarcaService,
   private _lineaService: LineaService,
   private _ClaseService: ClaseService,
   private _CarroceriaService: CarroceriaService,
+  private _ServicioService: ServicioService,
   private _ColorService: ColorService,
-  
   private _CombustibleService: CombustibleService,
-  private _RegistroMaquinariaService: RegistroMaquinariaService,
-  
-  private _MarcaService: MarcaService,
-  private _TramiteFacturaService: TramiteFacturaService,
-  private _TipoVehiculoService: TipoVehiculoService,
+  private _VehiculoService: VehiculoService,
+  private _SedeOperativaService: SedeOperativaService,
   ){}
-  
+
   ngOnInit() {
     this.registroMaquinaria = new RegistroMaquinaria(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
-    this._ColorService.getColorSelect().subscribe(
-      response => {
-        this.colores = response;
-      },  
-      error => {
-        this.errorMessage = <any>error;
-  
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._TipoVehiculoService.getTipoVehiculoSelect().subscribe(
-      response => {
-        this.tiposVehiculo = response;
-      }, 
-      error => { 
-        this.errorMessage = <any>error;
+    
+    // this._MarcaService.getMarcaSelect().subscribe(
+    //   response => {
+    //     this.marcas = response;
+    //   }, 
+    //   error => { 
+    //     this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ClaseService.getClaseSelect().subscribe(
-      response => {
-        this.clases = response;
-      }, 
-      error => { 
-        this.errorMessage = <any>error;
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
+    // this._MunicipioService.getMunicipioSelect().subscribe(
+    //   response => {
+    //     this.municipios = response;
+    //   }, 
+    //   error => {
+    //     this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._MarcaService.getMarcaSelect().subscribe(
-      response => {
-        this.marcas = response;
-      }, 
-      error => { 
-        this.errorMessage = <any>error;
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
+    // this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    //   response => {
+    //     this.sedesOperativas = response;
+    //   }, 
+    //   error => {
+    //     this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._lineaService.getLineaSelect().subscribe(
-      response => {
-        this.lineas = response;
-      }, 
-      error => { 
-        this.errorMessage = <any>error;
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
+    // this._ClaseService.getClaseSelect().subscribe(
+    //   response => {
+    //     this.clases = response;
+    //   }, 
+    //   error => {
+    //     this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._CarroceriaService.getCarroceriaSelect().subscribe(
-      response => {
-        this.carrocerias = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
+    // this._CarroceriaService.getCarroceriaSelect().subscribe(
+    //   response => {
+    //     this.carrocerias = response;
+    //   }, 
+    //   error => {
+    //     this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._CombustibleService.getCombustibleSelect().subscribe(
-      response => {
-        this.combustibles = response;
-      },  
-      error => {
-        this.errorMessage = <any>error;
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
+    // this._ServicioService.getServicioSelect().subscribe(
+    //   response => {
+    //     this.servicios = response;
+    //   }, 
+    //   error => {
+    //     this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
+    // this._ColorService.getColorSelect().subscribe(
+    //   response => {
+    //     this.colores = response;
+    //   },  
+    //   error => {
+    //     this.errorMessage = <any>error;
+
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
+    // this._CombustibleService.getCombustibleSelect().subscribe(
+    //   response => {
+    //     this.combustibles = response;
+    //   },  
+    //   error => {
+    //     this.errorMessage = <any>error;
+
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
   }
 
+  
+
   onCancelar(){
-    this.cancelarTramite.emit(true);
-}
+      this.ready.emit(true);
+  }
   onEnviar(){
 
-    this.vehiculo.municipioId = this.municipioSelected;
-    this.vehiculo.lineaId = this.lineaSelected;
-    this.vehiculo.claseId = this.claseSelected;
-    this.vehiculo.carroceriaId = this.carroceriaSelected;
-    // this.vehiculo.servicioId = this.servicioSelected;
-    this.vehiculo.colorId = this.colorSelected;
-    this.vehiculo.combustibleId = this.combustibleSelected;
-    // this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
-    console.log(this.vehiculo);  
+    // this.registroMaquinaria.id = this.municipioSelected;
+    // this.registroMaquinaria.Id = this.lineaSelected;
+    // this.registroMaquinaria.Id = this.claseSelected;
+    // this.registroMaquinaria.Id = this.carroceriaSelected;
+    // this.registroMaquinaria.Id = this.servicioSelected;
+    // this.registroMaquinaria.Id = this.colorSelected;
+    // this.registroMaquinaria.Id = this.combustibleSelected;
+    // this.registroMaquinaria.sedeOperativaId = this.sedeOperativaSelected;
+    console.log(this.registroMaquinaria);  
     let token = this._loginService.getToken();
-    this._RegistroMaquinariaService.register(this.vehiculo,token).subscribe(
+    this._VehiculoService.register(this.registroMaquinaria,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.datos.numeroMotor = this.vehiculo.motor;
-          this.datos.tramiteFactura =58;
-          this.readyTramite.emit(this.datos);
+          this.ready.emit(true);
+          swal({
+            title: 'Perfecto!',
+            text: 'El registro se ha registrado con exito',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.vehiculo.placa +' ya se encuentra registrado',
+            text: 'El vehiculo '+ this.registroMaquinaria.altoTotal +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -300,5 +239,4 @@ constructor(
         );
     }
     }
-  
 }
