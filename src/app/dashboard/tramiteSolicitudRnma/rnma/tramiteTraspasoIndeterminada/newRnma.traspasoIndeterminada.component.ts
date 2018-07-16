@@ -8,11 +8,11 @@ import swal from 'sweetalert2';
 
 
 @Component({
-    selector: 'appRna-traspaso-indeterminada',
-    templateUrl: './newRna.traspasoIndeterminada.html',
+    selector: 'appRnma-traspaso-indeterminada',
+    templateUrl: './newRnma.traspasoIndeterminada.html',
     providers: [DatePipe]
 })
-export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
+export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
   @Output() readyTramite = new EventEmitter<any>();
   @Input() vehiculo: any = null;
   @Input() factura: any = null;
@@ -107,7 +107,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
 
   onEnviar(){
     let token = this._loginService.getToken();       
-      this.datos.tramiteFactura =60;
+      this.datos.tramiteFactura =61;
       this.readyTramite.emit(this.datos);
       this.datos.personaTraslado = this.sinRegistro;
       console.log(this.datos.solicitanteId);
