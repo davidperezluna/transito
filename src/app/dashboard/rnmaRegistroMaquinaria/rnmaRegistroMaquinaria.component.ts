@@ -45,7 +45,7 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
     })
     this.formEdit=false;
     this.formNew=false;
-		this._RegistroMaquinariaService.getRegistroMaquinaria().subscribe(
+		this._RegistroMaquinariaService.index().subscribe(
 				response => {
           this.vehiculos = response.data;
           
