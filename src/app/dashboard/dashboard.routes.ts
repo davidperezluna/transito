@@ -74,7 +74,7 @@ import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
 import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
-import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/RnmaRegistroMaquinaria.routes';
+import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from './index';
 
