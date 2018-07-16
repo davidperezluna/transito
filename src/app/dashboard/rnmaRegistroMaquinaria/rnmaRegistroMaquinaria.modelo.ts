@@ -21,7 +21,5 @@ export class RegistroMaquinaria{
 		public carroceriaId: number,
 		public combustibleId: number,
 
-
-		
 	){}
 }
