@@ -4,27 +4,12 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
-                    Nueva Alerta
+                    Levantamiento de  Alerta
                 </h5>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <div class="row justify-content-center container">
-                    <div class="form-group row col-xs-12 col-lg-12">
-                        <label>Alertas disponibles <span class="text-danger">*</span></label>
-                        <ng-select [multiple]="false" [options]="cfgTiposAlerta" [(ngModel)]="cfgTipoAlertaSelected" placeholder="Seleccione una alerta" required name="alertaId">
-                        </ng-select>
-                    </div>
-
-                    <!-- select grados alerta -->
-                    <div class="container" *ngIf="cfgTipoAlertaSelected <= 6 || cfgTipoAlertaSelected >= 1 && acreedor == 'false'">
-                        <div class="form-group row col-xs-12 col-lg-12">
-                            <label>Grados alerta
-                                <span class="text-danger">*</span>
-                            </label>
-                            <ng-select [multiple]="false" [options]="gradosAlerta" [(ngModel)]="gradoSelected" required name="gradoAlertaId">
-                            </ng-select>
-                        </div>
-
+                    
                     <!--Buscardor Identificador/Nit -->
                             <div class="col-xs-8 col-lg-6">
                                 <label>Tipo de identificación
@@ -272,7 +257,7 @@
                             (ready)="ready($event)"></app-new-rna-ciudadano>
 
                         
-                    </div>
+                    
 
                     <!-- agregar acreedor -->
                     <div class="container" *ngIf="acreedor == 'ciudadano' || acreedor == 'empresa'">
