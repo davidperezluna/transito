@@ -5,6 +5,7 @@ import {LoginService} from '../../../services/login.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { CasoInsumoService } from '../../../services/casoInsumo.service';
+import {RnaInsumoService} from '../../../services/rnaInsumos.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
@@ -22,12 +23,16 @@ public empresas:any;
 public empresaSelected:any;
 public sedes:any;
 public sedeSelected:any;
+public sedeSelectedInsumo:any;
+public frmInsumoSelectInsumo:any=true;
 public insumos:any;
 public sustratos:any;
 public insumoSelect:any;
+public loteInsumo:any;
 public insumoSelected:any;
 public insumoSelectedInsumo:any;
 public date:any;
+public numero:any;
 public frmInsumo:any=true;
 public frmInsumoSelect:any=true;
 
@@ -38,12 +43,13 @@ constructor(
   private _EmpresaService: EmpresaService,
   private _SedeOperativaService: SedeOperativaService,
   private _CasoInsumoService: CasoInsumoService,
+  private _RnaInsumoService: RnaInsumoService,
   ){}
 
   ngOnInit() {
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
-    this.rnaAsignacionInsumos = new rnaAsignacionInsumos(null,null,null,null,null,null,null,null,null);
+    this.rnaAsignacionInsumos = new rnaAsignacionInsumos(null,null,null,null,null,null,null,null,null,null);
     this.rnaAsignacionInsumos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
 
 
@@ -95,13 +101,18 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
+    this.rnaAsignacionInsumos.loteInsumoId = this.loteInsumo.id;
+
     if (this.frmInsumo) {
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelected;
+      this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
     }else{
+      this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelectedInsumo;
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelectedInsumo;
+      this.rnaAsignacionInsumos.numero = this.numero;
     }
-		this._rnaRegistroInsumosService.register(this.rnaAsignacionInsumos,token).subscribe(
+    console.log(this.rnaAsignacionInsumos);
+		this._RnaInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
@@ -141,13 +152,80 @@ constructor(
     }
   }
 
-  changedInsumo(e){
+  changedSedeOperativaInsumo(e){
     if (e) {
-      if (this.frmInsumo) {
-        console.log(this.insumoSelectedInsumo);
-      }else{
-        console.log(this.insumoSelected);
+      this.frmInsumoSelectInsumo = false;
+    }
+  }
+
+  changedInsumoInsumo(e){
+    if (e) {
+      let datos={
+        'casoInsumo':this.insumoSelectedInsumo,
+        'sedeOperativa':this.sedeSelectedInsumo,
       }
+      let token = this._loginService.getToken();
+      this._rnaRegistroInsumosService.showInsumo(datos,token).subscribe(
+        response => {
+          this.loteInsumo = response.data;
+          if (response.status == 'success') {
+            this.numero = this.loteInsumo.cantidad;
+          }else{
+            swal({
+              title: 'Error!',
+              text: 'No existen insumos para esta sede',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          
+        error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+
+      });
+      
+    } 
+  }
+
+  changedInsumoSustrato(e){
+    if (e) {
+      let datos={
+        'casoInsumo':this.insumoSelected,
+        'sedeOperativa':this.sedeSelected,
+      }
+      let token = this._loginService.getToken();
+      this._rnaRegistroInsumosService.showSedeInsumo(datos,token).subscribe(
+        response => {
+          this.loteInsumo = response.data;
+          if (response.status == 'success') {
+            this.rnaAsignacionInsumos.rangoInicio = this.loteInsumo.rangoInicio;
+            this.rnaAsignacionInsumos.rangoFin = this.loteInsumo.rangoFin;
+            this.rnaAsignacionInsumos.numero = this.loteInsumo.cantidad;
+          }else{
+            swal({
+              title: 'Error!',
+              text: 'No existen sustratos para esta sede',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          
+        error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+
+      });
     } 
   }
 

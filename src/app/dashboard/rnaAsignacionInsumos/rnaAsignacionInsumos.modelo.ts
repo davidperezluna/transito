@@ -9,6 +9,7 @@ export class rnaAsignacionInsumos{
 		public rangoFin:string,
 		public sedeOperativaId:string,
 		public casoInsumoId:string,
+		public loteInsumoId:string,
 		
 	){}
 }
