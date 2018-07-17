@@ -205,7 +205,7 @@ constructor(
                   swal.close();
               } else {
                 this.facturas = false;
-                this.mensaje = 'No hay faturas para el vehiculo';
+                this.mensaje = 'No hay facturas para el vehÍculo';
                 this.isError = true;
                 this.vehiculoSuccess=false;
                 this.factura=false;

@@ -32,6 +32,7 @@ import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCo
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
+import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 
 import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { MsvRevisionModule } from './msvRevision/msvRevision.module';
@@ -120,6 +121,7 @@ import {RightsidebarComponent} from '../shared/index';
       CfgAuditoriaModule,
       CfgSmlmvModule,
       cfgFestivoModule,
+      buscarAutomotorModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
