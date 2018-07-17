@@ -27,7 +27,7 @@
                 <th>Total</th>
                 <th>Fecha Asignación</th>
                 <th>N° Resolución</th>
-                <th>Acciones</th>
+                <!-- <th>Acciones</th> -->
               </tr>
             </thead>
             <tbody>
@@ -39,15 +39,16 @@
                 <td>{{msvTalonario.total}}</td>
                 <td>{{msvTalonario.fechaAsignacion}}</td>
                 <td>{{msvTalonario.nResolucion}}</td>
-                <td>
-                  <button (click)="editMsvTalonario(msvTalonario)" class="btn btn-xs btn-info" type="button">Editar
-                    <i class="fa fa-edit"></i>
-                  </button>
-                  <button (click)="deleteMsvTalonario(msvTalonario.id)" class="btn btn-xs btn-danger" type="button">Eliminar
-                    <i class="fa fa-trash"></i>
-                  </button>
-
-                </td>
+                <!-- 
+                  <td>
+                    <button (click)="editMsvTalonario(msvTalonario)" class="btn btn-xs btn-info" type="button">Editar
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button (click)="deleteMsvTalonario(msvTalonario.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                -->
               </tr>
             </tbody>
           </table>

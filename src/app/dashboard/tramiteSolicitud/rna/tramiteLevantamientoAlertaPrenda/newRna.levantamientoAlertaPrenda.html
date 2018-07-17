@@ -4,27 +4,12 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
-                    Nueva Alerta
+                    Levantamiento de  Alerta
                 </h5>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <div class="row justify-content-center container">
-                    <div class="form-group row col-xs-12 col-lg-12">
-                        <label>Alertas disponibles <span class="text-danger">*</span></label>
-                        <ng-select [multiple]="false" [options]="cfgTiposAlerta" [(ngModel)]="cfgTipoAlertaSelected" placeholder="Seleccione una alerta" required name="alertaId">
-                        </ng-select>
-                    </div>
-
-                    <!-- select grados alerta -->
-                    <div class="container" *ngIf="cfgTipoAlertaSelected <= 6 || cfgTipoAlertaSelected >= 1 && acreedor == 'false'">
-                        <div class="form-group row col-xs-12 col-lg-12">
-                            <label>Grados alerta
-                                <span class="text-danger">*</span>
-                            </label>
-                            <ng-select [multiple]="false" [options]="gradosAlerta" [(ngModel)]="gradoSelected" required name="gradoAlertaId">
-                            </ng-select>
-                        </div>
-
+                    
                     <!--Buscardor Identificador/Nit -->
                             <div class="col-xs-8 col-lg-6">
                                 <label>Tipo de identificación
@@ -61,6 +46,55 @@
                                 <div class="has-danger" *ngIf="empresaEncontrada === 3">
                                     <div class="form-control-feedback has-danger has-error">No se encontró la empresa</div>
                                 </div>
+                            </div>
+
+                            <!--acreedores vehiculo -->
+                            <div class="container" *ngIf="listaAcreedoresVehiculo">
+                                <br>
+                                <table class="table " id="dataTables-example">
+                                    <br>
+                                    <thead>
+                                        <tr>
+                                            <!-- <th>Permiso tramite</th>
+                                            <th>Solicitante Ciudadano</th> -->
+                                            <th>Acreedor</th>
+                                            <th>Tipo Alerta</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let acreedor of datos.acreedoresVehiculo; let i = index">
+                            
+                                            <!-- <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==2">
+                                                <p>Si</p>
+                                            </td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==2">
+                                                <p>No</p>
+                                            </td>
+                            
+                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==1">
+                                                <p>Propietario</p>
+                                            </td>
+                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==1">
+                                                <p>Locatario</p>
+                                            </td> -->
+                            
+                                            <td class="center">
+                                                <p> Identificación: {{acreedor.identificacion}}
+                                                    <br> Nombre: {{acreedor.nombre}}</p>
+                                            </td>
+                                            <td class="center" >
+                                                <p>{{acreedor.tipoAlerta}} - Grado: {{acreedor.gradoAlerta}}</p>
+                                            </td>
+                                            <!-- <td class="center" *ngIf="!ciudadano.identificacionAcreedor">
+                                                <button (click)="agregarAcreedorCiudadano(ciudadano)" class="btn btn-primary pull-right">Agregar</button>
+                                            </td> -->
+                                            <td class="center">
+                                                <button (click)="delete(ciudadano)" class="btn btn-danger">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
                             <!--acreedores ciudadanos -->
@@ -272,7 +306,7 @@
                             (ready)="ready($event)"></app-new-rna-ciudadano>
 
                         
-                    </div>
+                    
 
                     <!-- agregar acreedor -->
                     <div class="container" *ngIf="acreedor == 'ciudadano' || acreedor == 'empresa'">
@@ -355,7 +389,7 @@
                     
                 </div>
             </div>
-            <div class="card-footer" *ngIf="gradoSelected > 0">
+            <div class="card-footer" *ngIf="acreedorEncontrado === 5">
                 <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
                 <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
             </div>
