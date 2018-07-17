@@ -33,6 +33,25 @@ export class RnaLoteInsumoService {
 		);
 	}
 
+	showSedeInsumo(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/insumo/lote/sede", params, {headers: headers}).map(
+			res => res.json(),
+			this._loogerService.registerLog(token,'INSERT',json,this.url)
+		);
+	}
+	showInsumo(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/insumo/lote/insumo", params, {headers: headers}).map(
+			res => res.json(), 
+			this._loogerService.registerLog(token,'INSERT',json,this.url)
+		);
+	}
+
 	delete(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

@@ -12,7 +12,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public InsumoSustratos;
+	public insumoSustratos;
 	public InsumoInsumos;
 	public formNew = false;
 	public formEdit = false;
@@ -44,7 +44,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
     })
 		this._RnaInsumoService.indexSustrato().subscribe(
 				response => {
-          this.InsumoSustratos = response.data; 
+          this.insumoSustratos = response.data; 
           let timeoutId = setTimeout(() => {  
             this.iniciarTablaSustrato();
           }, 100); 
