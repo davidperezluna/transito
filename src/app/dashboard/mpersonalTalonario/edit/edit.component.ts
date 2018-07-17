@@ -27,6 +27,9 @@ constructor(
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
         this.sedesOperativas = response;
+        setTimeout(() => {
+          this.sedeOperativaSelected = [this.talonario.sedeOperativa.id];
+        });
       },
       error => {
         this.errorMessage = <any>error;
@@ -62,7 +65,6 @@ constructor(
 		this._TalonarioService.edit(this.talonario,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
