@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {rnaRegistroInsumos} from '../rnaRegistroInsumos.modelo';
+import {rnaAsignacionInsumos} from '../rnaAsignacionInsumos.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
@@ -57,9 +57,6 @@ constructor(
     this._CasoInsumoService.getCasoInsumoInsumoSelect().subscribe(
       response => {
         this.insumos = response;
-        setTimeout(() => {
-          this.insumoSelected = [this.loteInsumoInsumo.casoInsumo.id];
-        });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -74,9 +71,6 @@ constructor(
     this._CasoInsumoService.getCasoInsumoSustratoSelect().subscribe(
       response => {
         this.sustratos = response;
-        setTimeout(() => {
-          this.insumoSelected = [this.loteInsumoInsumo.casoInsumo.id];
-        });
       }, 
       error => {
         this.errorMessage = <any>error;

@@ -107,7 +107,6 @@ constructor(
 
     this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
     response => {
-      this.factura = response[0].factura;
       let active = true;
       let token = this._loginService.getToken();
       if (this.isMatricula == false) {
@@ -115,7 +114,7 @@ constructor(
           responseCiudadano =>{
             if (responseCiudadano.status == 'success') {
               this.ciudadano = responseCiudadano.data.ciudadano;
-  
+              this.factura = response[0].factura;  
             }
             error => {
               this.errorMessage = <any>error;

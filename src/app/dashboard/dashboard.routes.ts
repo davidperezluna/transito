@@ -74,6 +74,7 @@ import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
 import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
+import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
 import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from './index';
@@ -148,6 +149,7 @@ export const DashboardRoutes: Route[] = [
         ...MsvTalonarioRoutes, 
         //...MsvTCAsignacionRoutes, 
         ...ConceptoParametroRoutes,  
-        ...RnmaRegistroMaquinariaRoutes    ]
+        ...RnmaRegistroMaquinariaRoutes,
+        ...rnaAsignacionInsumosRoutes    ]
     }
 ];
