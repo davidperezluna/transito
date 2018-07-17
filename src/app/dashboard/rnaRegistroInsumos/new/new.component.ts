@@ -6,7 +6,7 @@ import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { CasoInsumoService } from '../../../services/casoInsumo.service';
 import { DatePipe } from '@angular/common';
-import swal from 'sweetalert2';
+import swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-new',
@@ -23,8 +23,12 @@ public empresaSelected:any;
 public sedes:any;
 public sedeSelected:any;
 public insumos:any;
+public sustratos:any;
 public insumoSelect:any;
 public insumoSelected:any;
+public empresaInsumoSelected:any;
+public insumoInsumoSelected:any;
+public frmInsumo:any=false;
 public date:any;
 
 constructor(
@@ -55,9 +59,24 @@ constructor(
         }
       }
     );
-    this._CasoInsumoService.getCasoInsumoSelect().subscribe(
+
+    this._CasoInsumoService.getCasoInsumoInsumoSelect().subscribe(
       response => {
         this.insumos = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._CasoInsumoService.getCasoInsumoSustratoSelect().subscribe(
+      response => {
+        this.sustratos = response;
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -89,10 +108,14 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.rnaRegistroInsumos.empresaId = this.empresaSelected;
     this.rnaRegistroInsumos.sedeOperativaId = this.sedeSelected;
-    this.rnaRegistroInsumos.casoInsumoId = this.insumoSelected;
-    console.log(this.rnaRegistroInsumos);
+    if (this.frmInsumo) {
+      this.rnaRegistroInsumos.empresaId = this.empresaSelected;
+      this.rnaRegistroInsumos.casoInsumoId = this.insumoSelected;
+    }else{
+      this.rnaRegistroInsumos.empresaId = this.empresaInsumoSelected;
+      this.rnaRegistroInsumos.casoInsumoId = this.insumoInsumoSelected;
+    }
 		this._rnaRegistroInsumosService.register(this.rnaRegistroInsumos,token).subscribe(
 			response => {
         this.respuesta = response;
@@ -127,4 +150,10 @@ constructor(
    this.rnaRegistroInsumos.cantidad = parseInt(this.rnaRegistroInsumos.rangoFin) - parseInt(this.rnaRegistroInsumos.rangoInicio)+1;
   }
 
+  onInsumo() {
+    this.frmInsumo = true;
+  }
+  onSustrato() {
+    this.frmInsumo = false;
+  }
 }

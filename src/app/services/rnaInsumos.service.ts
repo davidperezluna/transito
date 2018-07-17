@@ -5,12 +5,12 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class RnaLoteInsumoService {
-	private url = environment.apiUrl + "loteinsumo";
+export class RnaInsumoService {
+	private url = environment.apiUrl + "insumo";
 	public identity;
 	public token;
 
-	constructor(
+	constructor( 
 		private _http: Http,
 		private _loogerService: LoggerService
 	){}
@@ -29,25 +29,6 @@ export class RnaLoteInsumoService {
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(
 			res => res.json(),
-			this._loogerService.registerLog(token,'INSERT',json,this.url)
-		);
-	}
-
-	showSedeInsumo(datos,token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/insumo/lote/sede", params, {headers: headers}).map(
-			res => res.json(),
-			this._loogerService.registerLog(token,'INSERT',json,this.url)
-		);
-	}
-	showInsumo(datos,token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/insumo/lote/insumo", params, {headers: headers}).map(
-			res => res.json(), 
 			this._loogerService.registerLog(token,'INSERT',json,this.url)
 		);
 	}

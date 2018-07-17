@@ -14,24 +14,27 @@
               <thead>
                 <tr>
                   <th>Placa </th>
-                  <th>Motor</th>
+                  <th>Tipo de vehiculo</th>
                   <th>Modelo</th>
                   <th>Marca</th>
                   <th>linea</th> 
-                  <th>valor</th>
+                  <th>Motor</th>
                   <th>chasis</th>
+                  <th>Combustible</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let vehiculo of vehiculos; let i = index">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                <tr class="odd" *ngFor="let registroMaquinaria of registrosMaquinaria; let i = index">
+                  <td>{{ registroMaquinaria.vehiculo.placa.numero }}</td>
+                  <td>{{ registroMaquinaria.tipoVehiculo.nombre }}</td>
+                  <td>{{ registroMaquinaria.vehiculo.modelo }}</td>
+                  <td>{{ registroMaquinaria.vehiculo.linea.marca.nombre}}</td>
+                  <td>{{ registroMaquinaria.vehiculo.linea.nombre }}</td>
+                  <td>{{ registroMaquinaria.vehiculo.motor }}</td>
+                  <td>{{ registroMaquinaria.vehiculo.chasis }}</td>
+                  <td>{{ registroMaquinaria.vehiculo.combustible.nombre }}</td>
+                  <!-- <td>{{ registroMaquinaria.id }}</td> -->
                   <td>
                     <button (click)="editVehiculo(vehiculo)" class="btn btn-outline-info" type="button">Editar</button> 
                     <button (click)="deleteVehiculo(vehiculo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
@@ -45,6 +48,6 @@
       </div>
     </div>
     <!-- <app-edit *ngIf='formEdit' [vehiculo]="vehiculo" (ready)="ready($event)"></app-edit> -->
-    <!-- <app-new-vehiculo *ngIf='formNew' (ready)="ready($event)"></app-new-vehiculo> -->
+    <app-new-rnmaRegistroMaquinaria *ngIf='formNew' (ready)="ready($event)"></app-new-rnmaRegistroMaquinaria>
 
 </div>

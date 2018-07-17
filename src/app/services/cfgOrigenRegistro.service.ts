@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class CasoInsumoService {
-	private url = environment.apiUrl + "casoinsumo";
+export class CfgOrigenRegistroService{
+	private url = environment.apiUrl + "cfgorigenregistro";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getCasoInsumo(){ 
+	getCfgOrigenRegistro(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(color,token){
+	register(cfgOrigenRegistro,token){
 		
-		let json = JSON.stringify(color);
+		let json = JSON.stringify(cfgOrigenRegistro);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteCasoInsumo(token,id){
+	deleteCfgOrigenRegistro(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class CasoInsumoService {
 							  .map(res => res.json());
 	}
 
-	showCasoInsumo(token,id){
+	showColor(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,9 +42,9 @@ export class CasoInsumoService {
 
 	}
 
-	editCasoInsumo(color,token){
+	editCfgOrigenRegistro(cfgOrigenRegistro,token){
 
-		let json = JSON.stringify(color);
+		let json = JSON.stringify(cfgOrigenRegistro);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,12 +52,10 @@ export class CasoInsumoService {
 
 	}
 
-	getCasoInsumoInsumoSelect(){ 
-		return this._http.get(this.url+"/select/insumo").map(res => res.json());
-	}
 
-	getCasoInsumoSustratoSelect(){ 
-		return this._http.get(this.url+"/select/sustrato").map(res => res.json());
+	getCfgOrigenRegistroSelect(){
+		
+		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	
 }
