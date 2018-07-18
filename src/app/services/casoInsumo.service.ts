@@ -54,7 +54,7 @@ export class CasoInsumoService {
 
 	getCasoInsumoInsumoSelect(){ 
 		return this._http.get(this.url+"/select/insumo").map(res => res.json());
-	}
+	} 
 
 	getCasoInsumoSustratoSelect(){ 
 		return this._http.get(this.url+"/select/sustrato").map(res => res.json());

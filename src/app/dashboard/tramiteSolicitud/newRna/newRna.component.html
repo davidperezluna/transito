@@ -84,12 +84,63 @@
                                                 </div>
                                             </td>
                                             <td>
+                                            <p *ngIf='apoderado'>
                                                 <strong>Apoderado: </strong>
-                                                <button (click)="agregarApoderadoEmpresa()" class="btn btn-primary pull-right">Agregar</button>
+                                                {{apoderado.primerNombre}} {{apoderado.segundoNombre}} {{apoderado.primerApellido}} {{apoderado.segundoApellido}}
+                                                <button (click)="cerrarApoderado()"  class="btn btn-danger" ngxclipboard="" type="button"><i class="fa fa-close"></i></button>   
+                                            </p>    
+                                            <button *ngIf='!frmApoderado && !apoderado' (click)="agregarApoderado()" class="btn btn-primary" [disabled]='!tramiteSolicitud.solicitanteId'>Agregar apoderado</button>
+                                            <div *ngIf='frmApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group" >
+                                                <div  class="input-group" [class.has-success]="apoderadoEncontrado === 2" [class.has-danger]="apoderadoEncontrado === 3">
+                                                    <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
+                                                    <span class="input-group-btn">
+                                                        <button (click)="onKeyApoderado()" [class.btn-default]="apoderadoEncontrado === 1" [class.btn-success]="apoderadoEncontrado === 2" [class.btn-danger]="apoderadoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                                    </span>
+                                                    <span class="input-group-btn">
+                                                        <button (click)="cerrarApoderado()"  class="btn btn-danger" ngxclipboard="" type="button"><i class="fa fa-close"></i></button>
+                                                    </span>
+                                                </div>
+                                                <div class="has-danger" *ngIf="apoderadoEncontrado === 3">
+                                                    <div class="form-control-feedback has-danger has-error">No se encontró el apoderado</div>
+                                                </div>
+                                            </div>
                                             </td>
                                         </tr>
                                     </tbody> 
                                 </table> 
+
+                                <!--si existe el apoderado -->
+                                <div class="container form-group" *ngIf="apoderadoEncontrado === 2">
+                                    
+                                    <h5 class="container">
+                                        Resultados de búsqueda
+                                    </h5>
+                                    <table class="table " id="dataTables-example">
+                                        <tbody>
+                                            <tr class="odd">
+                                                <td>Tipo de identificación</td>
+                                                <td class="center"><p>{{apoderadoSelect.tipoIdentificacion.nombre}}</p></td>
+                                                <td>Numero de identificación</td>
+                                                <td class="center"><p>{{apoderadoSelect.identificacion}}</p></td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td>Primer nombre</td>
+                                                <td class="center"><p>{{apoderadoSelect.primerNombre}}</p></td>
+                                                <td>Segundo nombre</td>
+                                                <td class="center"><p>{{apoderadoSelect.segundoNombre}}</p></td>
+                                            </tr>
+                                            <tr class="odd">
+                                                <td>Primer apellido</td>
+                                                <td class="center"><p>{{apoderadoSelect.primerApellido}}</p></td>
+                                                <td>Segundo apellido</td>
+                                                <td class="center"><p>{{apoderadoSelect.segundoApellido}}</p></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button class="btn btn-secondary" (click)="cerrarApoderado()">Atrás</button>
+                                    <button (click)="btnNewApoderado()" class="btn btn-primary pull-right">Agregar</button>
+                                </div>
+                                
                                 <table class="table table-bordered" *ngIf="isEmpresa">
                                     <thead>
                                         <tr>
