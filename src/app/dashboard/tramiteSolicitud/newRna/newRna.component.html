@@ -26,7 +26,7 @@
     <div class="row"><!-- .row -->
              
              
-        <div class="container col-xs-12 col-lg-6" *ngIf="vehiculoSuccess">
+        <div class="container col-xs-12 col-lg-12" *ngIf="vehiculoSuccess">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -62,6 +62,74 @@
                                     </tbody> 
                                 </table> 
                             </div>
+                            <div class="col-xs-12 col-lg-12" >
+                                <label>Propietarios
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <table class="table table-bordered" *ngIf="isCiudadano">
+                                    <tbody>
+                                        <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                            <td>
+                                                <strong>Nombre: </strong>
+                                                {{ciudadanoVehiculo.ciudadano?.usuario.primerNombre}} {{ciudadanoVehiculo.ciudadano?.usuario.primerApellido}}
+                                            </td>
+                                            <td>
+                                                <strong>Identificación: </strong>
+                                                {{ciudadanoVehiculo.ciudadano?.usuario.identificacion}}
+                                            </td>
+                                            <td> 
+                                                <div class="custom-control custom-radio">
+                                                    <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+                                                    <label class="custom-control-label" for="customRadio1">Solicitante</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <strong>Apoderado: </strong>
+                                                <button (click)="agregarApoderadoEmpresa()" class="btn btn-primary pull-right">Agregar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                                </table> 
+                                <table class="table table-bordered" *ngIf="isEmpresa">
+                                    <thead>
+                                        <tr>
+                                            <th>Solicitante Empresa</th>
+                                            <th>Check</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                            <td>
+                                                <strong>Nit: </strong>
+                                                {{ciudadanoVehiculo.empresa?.nit}}
+                                                <br>
+                                                <strong>Nombre: </strong>
+                                                {{ciudadanoVehiculo.empresa?.nombre}}
+                                            </td>
+                                            <td> 
+                                                <label class="custom-control custom-radio" for="3option3">
+                                                    <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" required >
+                                                    <span class="custom-control-indicator"></span> 
+                                                    <span class="custom-control-description">Solicitante</span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                                </table> 
+                                <div class="container" *ngIf="tramiteSolicitud.solicitanteId">
+                                    <label>Facturas
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <ng-select 
+                                    [multiple]="false" 
+                                    [options]="facturas" 
+                                    (ngModelChange)="changedFactura($event)"
+                                    [(ngModel)]="facturaSelected" 
+                                    name="facturaId" 
+                                    required>
+                                    </ng-select>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <button (click)="onCancelar()" class="btn btn-secondary">
@@ -78,102 +146,8 @@
             </div>
         </div>
 
-        <div class="col-lg-6 col-md-6 form-group" *ngIf="vehiculoSuccess">
-            <div class="container col-xs-12 col-lg-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Propietario <small>Vehiculo</small></h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="col-xs-12 col-lg-12" >
-                                    <table class="table table-bordered" *ngIf="isCiudadano">
-                                        <tbody>
-                                            <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
-                                                <td>
-                                                    <strong>Nombre: </strong>
-                                                    {{ciudadanoVehiculo.ciudadano?.usuario.primerNombre}} {{ciudadanoVehiculo.ciudadano?.usuario.primerApellido}}
-                                                </td>
-                                                <td>
-                                                     <strong>Identificación: </strong>
-                                                    {{ciudadanoVehiculo.ciudadano?.usuario.identificacion}}
-                                                </td>
-                                                <td> 
-                                                    <div class="custom-control custom-radio">
-                                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
-                                                        <label class="custom-control-label" for="customRadio1">Solicitante</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody> 
-                                    </table> 
-                                    <table class="table table-bordered" *ngIf="isEmpresa">
-                                        <thead>
-                                            <tr>
-                                                <th>Solicitante Empresa</th>
-                                                <th>Check</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
-                                                <td>
-                                                    <strong>Nit: </strong>
-                                                    {{ciudadanoVehiculo.empresa?.nit}}
-                                                    <br>
-                                                    <strong>Nombre: </strong>
-                                                    {{ciudadanoVehiculo.empresa?.nombre}}
-                                                </td>
-                                                <td> 
-                                                    <label class="custom-control custom-radio" for="3option3">
-                                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" required >
-                                                        <span class="custom-control-indicator"></span> 
-                                                        <span class="custom-control-description">Solicitante</span>
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                        </tbody> 
-                                    </table> 
-                                    <div class="container" *ngIf="tramiteSolicitud.solicitanteId">
-                                        <label>Facturas
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <ng-select 
-                                        [multiple]="false" 
-                                        [options]="facturas" 
-                                        (ngModelChange)="changedFactura($event)"
-                                        [(ngModel)]="facturaSelected" 
-                                        name="facturaId" 
-                                        required>
-                                        </ng-select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body" *ngIf="isMatricula">
-                                <div class="col-xs-12 col-lg-12" >
-                                    <div class="container">
-                                        <label>Facturas
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <ng-select 
-                                        [multiple]="false" 
-                                        [options]="facturas" 
-                                        (ngModelChange)="changedFactura($event)"
-                                        [(ngModel)]="facturaSelected" 
-                                        name="facturaId" 
-                                        required>
-                                        </ng-select>
-                                    </div>
-                                </div>
-                            </div>        
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="container-fluid" *ngIf="factura">
-            <div class="card col-md-12 col-md-16">
+            <div class="card col-md-12 col-md-12">
                 <div class="card-header">
                     <h6 class="card-title">Tramites</h6>
                 </div>
