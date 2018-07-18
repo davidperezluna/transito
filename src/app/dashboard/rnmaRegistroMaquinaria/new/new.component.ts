@@ -1,15 +1,13 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {RegistroMaquinaria} from '../rnmaRegistroMaquinaria.modelo';
-import {DepartamentoService} from "../../../services/departamento.service";
+import {RegistroMaquinariaService} from '../../../services/registroMaquinaria.service';
 import {LoginService} from '../../../services/login.service';
 import {ColorService} from '../../../services/color.service';
 import { TipoVehiculoService } from '../../../services/tipoVehiculo.service';
 import {ClaseService} from '../../../services/clase.service';
 import {CarroceriaService} from '../../../services/carroceria.service';
-import {ServicioService} from '../../../services/servicio.service';
 import {LineaService} from '../../../services/linea.service';
 import {CombustibleService} from '../../../services/combustible.service';
-import {VehiculoService} from '../../../services/vehiculo.service';
 import {MarcaService} from '../../../services/marca.service';
 import {CfgOrigenRegistroService} from '../../../services/cfgOrigenRegistro.service';
 import swal from 'sweetalert2';
@@ -35,6 +33,19 @@ public combustibles:any;
 public cfgOrigenRegistros:any;
 public servicios:any;
 
+public condicionSelected:any;
+public fechaIngreso:any;
+public pesoBruto:any;
+public cargaUtilMaxima:any;
+public rodajeSelected:any;
+public numeroEjes:any;
+public numeroLlantas:any;
+public tipoCabinaSelected:any;
+public altoTotal:any;
+public anchoTotal:any;
+public largoTotal:any;
+public subpartidaArancelaria:any;
+
 public colorSelected:any;
 public tipoVehiculoSelected:any;
 public claseSelected:any;
@@ -44,19 +55,19 @@ public carroceriaSelected:any;
 public combustibleSelected:any;
 public cfgOrigenRegistroSelected:any;
 public servicioSelected:any;
-
 public condiciones =[
   {'value':"Nuevo",'label':"Nuevo"},{'value':"Sin registro antes de inicio RNMA",'label':"Sin registro antes de inicio RNMA"}
 ]
 public rodajes =[
   {'value':"cilindros",'label':"Cilindros"},{'value':"neumaticos",'label':"Neumaticos"}
 ]
-public origenes =[
-  {'value':"importado temporal",'label':"Importado temporal"},{'value':"internacional temporal",'label':"Internacional temporal"}
+public tiposCabina =[
+  {'value':"no_aplica",'label':"No aplica"}
 ]
 
+
 constructor(
-  private _VehiculoService: VehiculoService,
+  private _RegistroMaquinariaService: RegistroMaquinariaService,
   private _loginService: LoginService,
   private _lineaService: LineaService,
   private _ColorService: ColorService,
@@ -70,7 +81,7 @@ constructor(
 ){}
 
 ngOnInit() {
-  this.registroMaquinaria = new RegistroMaquinaria(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  this.registroMaquinaria = new RegistroMaquinaria(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   
   this._ColorService.getColorSelect().subscribe(
     response => {
@@ -165,117 +176,78 @@ ngOnInit() {
     }
   );
     
-    // this._CfgOrigenRegistroService.getCfgOrigenRegistroSelect().subscribe(
-    //   response => {
-    //     this.cfgOrigenRegistros = response;
-    //   }, 
-    //   error => { 
-    //     this.errorMessage = <any>error;
+  this._CfgOrigenRegistroService.getCfgOrigenRegistroSelect().subscribe(
+    response => {
+      this.cfgOrigenRegistros = response;
+      console.log(this.cfgOrigenRegistros);
+      
+    }, 
+    error => { 
+      this.errorMessage = <any>error;
 
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
-    // this._MunicipioService.getMunicipioSelect().subscribe(
-    //   response => {
-    //     this.municipios = response;
-    //   }, 
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
-    // this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-    //   response => {
-    //     this.sedesOperativas = response;
-    //   }, 
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
-    // this._ClaseService.getClaseSelect().subscribe(
-    //   response => {
-    //     this.clases = response;
-    //   }, 
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
-    // this._CarroceriaService.getCarroceriaSelect().subscribe(
-    //   response => {
-    //     this.carrocerias = response;
-    //   }, 
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
-    // this._ServicioService.getServicioSelect().subscribe(
-    //   response => {
-    //     this.servicios = response;
-    //   }, 
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
-    // this._CombustibleService.getCombustibleSelect().subscribe(
-    //   response => {
-    //     this.combustibles = response;
-    //   },  
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
+      if(this.errorMessage != null){
+        console.log(this.errorMessage);
+        alert("Error en la petición");
+      }
+    }
+  );
+    
   }
-
-  
 
   onCancelar(){
       this.ready.emit(true);
   }
   onEnviar(){
-
-    // this.registroMaquinaria.id = this.municipioSelected;
-    // this.registroMaquinaria.Id = this.lineaSelected;
-    // this.registroMaquinaria.Id = this.claseSelected;
-    // this.registroMaquinaria.Id = this.carroceriaSelected;
-    // this.registroMaquinaria.Id = this.servicioSelected;
-    // this.registroMaquinaria.Id = this.colorSelected;
-    // this.registroMaquinaria.Id = this.combustibleSelected;
-    // this.registroMaquinaria.sedeOperativaId = this.sedeOperativaSelected;
-    console.log(this.registroMaquinaria);  
     let token = this._loginService.getToken();
-    this._VehiculoService.register(this.registroMaquinaria,token).subscribe(
+    this.registroMaquinaria.tipoVehiculoId = this.combustibleSelected;
+    this.registroMaquinaria.cfgOrigenVehiculoId = this.cfgOrigenRegistroSelected;
+    
+    this.registroMaquinaria.vehiculoColorId = this.colorSelected;
+    this.registroMaquinaria.vehiculoMarcasId = this.marcaSelected;
+    this.registroMaquinaria.vehiculoClaseId = this.claseSelected;
+    this.registroMaquinaria.vehiculoLineaId = this.lineaSelected;
+    this.registroMaquinaria.vehiculoCarroceriaId = this.carroceriaSelected;
+    this.registroMaquinaria.vehiculoCombustibleId = this.combustibleSelected;
+
+    this.registroMaquinaria.condicionSelected = this.condicionSelected;
+    this.registroMaquinaria.fechaIngreso = this.fechaIngreso;
+    this.registroMaquinaria.pesoBruto = this.pesoBruto;
+    this.registroMaquinaria.cargaUtilMaxima = this.cargaUtilMaxima;
+    this.registroMaquinaria.rodajeSelected = this.rodajeSelected;
+    this.registroMaquinaria.numeroEjes = this.numeroEjes;
+    this.registroMaquinaria.numeroLlantas = this.numeroLlantas;
+    this.registroMaquinaria.tipoCabinaSelected = this.tipoCabinaSelected;
+    this.registroMaquinaria.altoTotal = this.altoTotal;
+    this.registroMaquinaria.largoTotal = this.largoTotal;
+    this.registroMaquinaria.anchoTotal = this.anchoTotal;
+    this.registroMaquinaria.subpartidaArancelaria = this.subpartidaArancelaria;
+    console.log(this.registroMaquinaria);  
+    
+    var html = 'los datos de la maquinaria a ingresar son:<br>'+
+               'Placa: <b>'+this.registroMaquinaria.vehiculoPlaca+'</b><br>'+
+               'Condicon ingreso: <b>'+this.registroMaquinaria.condicionSelected+'</b><br>'+
+               'Motor: <b>'+this.registroMaquinaria.vehiculoMotor+'</b><br>'+
+               'Serie: <b>'+this.registroMaquinaria.vehiculoSerie+'</b><br>'+
+               'Chasis: <b>'+this.registroMaquinaria.vehiculoChasis+'</b><br>'+
+               'Fecha ingreso: <b>'+this.registroMaquinaria.fechaIngreso+'</b><br>';
+               
+
+   swal({
+      title: 'Preregistro de maquinaria!',
+      type: 'warning',
+      html:html,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Crear!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+      '<i class="fa fa-thumbs-down"></i> No crear',
+      cancelButtonAriaLabel: 'Thumbs down',
+    }).then((result) => {
+        if (result.value) {
+
+    this._RegistroMaquinariaService.register(this.registroMaquinaria,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -304,7 +276,14 @@ ngOnInit() {
 					}
 				}
 
-		}); 
+    }); 
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === swal.DismissReason.cancel
+        ) {
+
+        }
+      })
   }
 
   changedDepartamento(e){

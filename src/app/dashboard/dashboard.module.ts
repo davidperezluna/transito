@@ -53,6 +53,7 @@ import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
+import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
@@ -159,6 +160,7 @@ import {RightsidebarComponent} from '../shared/index';
       RnaPreasignacionPlacaModule,
       RnaPreregistroModule,
       CfgPlacaModule,
+      CfgCasoInsumoModule,
       CfgSedeOperativaModule,
       MsvTalonarioModule,
       rnaRegistroInsumosModule,

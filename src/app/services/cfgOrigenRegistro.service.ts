@@ -12,7 +12,6 @@ export class CfgOrigenRegistroService{
 	constructor(private _http: Http){}
 
 	getCfgOrigenRegistro(){
-		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 

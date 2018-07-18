@@ -52,6 +52,7 @@ constructor(
   private _municipioService: MunicipioService,
   private _paisService: PaisService,
   private _departamentoService: DepartamentoService,
+
 ){}
 
   ngOnInit() {
@@ -117,6 +118,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.ciudadano.tipoIdentificacionUsuarioId = this.tipoIdentificacionSelected;
+    
     this.ciudadano.generoId = this.generoSelected;
     this.ciudadano.grupoSanguineoId = this.grupoSanguineoSelected;
     this.ciudadano.municipioNacimientoId = this.municipioNacimientoSelected;
@@ -145,6 +147,7 @@ constructor(
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
         if (result.value) {
+          
     this._CiudadanoService.register(this.ciudadano,token).subscribe(
       response => {
         this.respuesta = response;

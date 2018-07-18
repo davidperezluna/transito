@@ -45,8 +45,13 @@ export class NewRnaComponent implements OnInit {
   public tramiteMatriculaInicial=false;
   public tramite=false;
   public sustrato=false;
+  public frmApoderado=false;
+  public identificacionApoderado=false;
+  public apoderado=false;
+  public apoderadoSelect=false;
   public isTramites:boolean=true;
   public isMatricula:boolean=false;
+  public apoderadoEncontrado=1;
   
   public cantidadSustrato = 1;
 
@@ -370,6 +375,49 @@ constructor(
           })
 
           
+  }
+
+  agregarApoderado(){
+    this.frmApoderado = true;
+  }
+
+  btnNewApoderado(){
+    this.frmApoderado = false;
+    this.apoderado = this.apoderadoSelect;
+    this.apoderadoEncontrado = 1;
+  }
+
+  onKeyApoderado(){
+    let token = this._loginService.getToken();
+    let identificacion = {
+  'numeroIdentificacion' : this.identificacionApoderado,
+    };
+    this._ciudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+        response => {
+            this.respuesta = response; 
+            if(this.respuesta.status == 'success'){
+                this.apoderadoSelect = this.respuesta.data;
+                this.apoderadoEncontrado= 2;
+                // this.ciudadanoNew = false;
+        }else{
+            this.apoderadoEncontrado=3;
+            // this.ciudadanoNew = true;
+        }
+        error => {
+                this.errorMessage = <any>error;
+            
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+    }); 
+}
+
+  cerrarApoderado(){
+    this.frmApoderado = false;
+    this.apoderado = false; 
+    this.apoderadoEncontrado = 1; 
   }
 
 }
