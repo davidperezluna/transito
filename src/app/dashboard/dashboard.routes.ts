@@ -72,6 +72,7 @@ import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
+import { CfgCasoInsumoRoutes } from './cfgCasoInsumo/cfgCasoInsumo.routes';
 import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
@@ -147,6 +148,7 @@ export const DashboardRoutes: Route[] = [
         // ...SucursalRoutes,
         ...TramitePrecioRoutes, 
         ...CfgPlacaRoutes,
+        ...CfgCasoInsumoRoutes,
         ...CfgSedeOperativaRoutes,
         ...MsvTalonarioRoutes, 
         //...MsvTCAsignacionRoutes, 
