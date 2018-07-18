@@ -302,6 +302,11 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
+          <a class="nav-link" routerLink="buscarAutomotor" [ngClass]="{'active' : ( addActive === 'buscarAutomotor')}" (click)="addActiveMenu('buscarAutomotor')">
+            <i class="fa fa-angle-right"></i> Buscar Automotor
+          </a>
+          </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="rnaPreregistro" [ngClass]="{'active' : ( addActive === 'rnaPreregistro')}" (click)="addActiveMenu('rnaPreregistro')">
             <i class="fa fa-angle-right"></i> Pre-registro
           </a>
@@ -402,6 +407,21 @@
         </li>
       </ul>
       <!-- /.nav-second-level --> 
+    </li>
+
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-insumos')}">
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-insumos')">
+        Insumos
+        <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-second-level ">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cfgCasoInsumo" [ngClass]="{'active' : ( addActive === 'cfgCasoInsumo')}" (click)="addActiveMenu('cfgCasoInsumo')">
+            <i class="fa fa-angle-right"></i> Caso Insumo
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav-second-level -->
     </li>
 
     <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-fl' }"> 

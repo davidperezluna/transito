@@ -32,6 +32,7 @@ import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCo
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
+import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 
 import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { MsvRevisionModule } from './msvRevision/msvRevision.module';
@@ -52,6 +53,7 @@ import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
+import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
@@ -120,6 +122,7 @@ import {RightsidebarComponent} from '../shared/index';
       CfgAuditoriaModule,
       CfgSmlmvModule,
       cfgFestivoModule,
+      buscarAutomotorModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
@@ -157,6 +160,7 @@ import {RightsidebarComponent} from '../shared/index';
       RnaPreasignacionPlacaModule,
       RnaPreregistroModule,
       CfgPlacaModule,
+      CfgCasoInsumoModule,
       CfgSedeOperativaModule,
       MsvTalonarioModule,
       rnaRegistroInsumosModule,

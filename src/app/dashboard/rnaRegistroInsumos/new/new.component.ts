@@ -6,7 +6,7 @@ import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { CasoInsumoService } from '../../../services/casoInsumo.service';
 import { DatePipe } from '@angular/common';
-import swal from 'sweetalert2';
+import swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-new',

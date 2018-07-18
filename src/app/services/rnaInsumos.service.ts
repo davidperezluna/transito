@@ -10,7 +10,7 @@ export class RnaInsumoService {
 	public identity;
 	public token;
 
-	constructor(
+	constructor( 
 		private _http: Http,
 		private _loogerService: LoggerService
 	){}

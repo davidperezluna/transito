@@ -31,7 +31,6 @@ export class VehiculoService {
 	}
 
 	showVehiculo(token,id){
-		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
@@ -44,6 +43,24 @@ export class VehiculoService {
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/placa", params, {headers: headers})
+							  .map(res => res.json());
+
+	}
+
+	showVehiculoParametro(token,parametro){
+		let json = JSON.stringify(parametro);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/parametro", params, {headers: headers})
+							  .map(res => res.json());
+
+	}
+
+	showVehiculoTipo(token,parametro){
+		let json = JSON.stringify(parametro);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/tipo", params, {headers: headers})
 							  .map(res => res.json());
 
 	}

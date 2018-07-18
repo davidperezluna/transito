@@ -33,27 +33,23 @@
                   <table class="table " id="dataTables-example-Sustratos">
                     <thead>
                       <tr>
-                        <th>Sede</th>
+                        <th>Sede Operativa</th>
                         <th>Insumo</th>
-                        <th>Rango Inicio</th>
-                        <th>Rango Fin</th>
-                        <th>Cantidad</th>
+                        <th>Numero</th>
                         <th>Fecha</th>
-                        <th>Acciones</th>
+                        <!-- <th>Acciones</th> -->
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="odd" *ngFor="let loteInsumoSustrato of loteInsumoSustratos; let i = index">
-                        <td >{{loteInsumoSustrato.sedeOperativa.nombre}}</td>
-                        <td >{{loteInsumoSustrato.casoInsumo.nombre}}</td>
-                        <td >{{loteInsumoSustrato.rangoInicio}}</td>
-                        <td >{{loteInsumoSustrato.rangoFin}}</td>
-                        <td >{{loteInsumoSustrato.numero}}</td>
-                        <td >{{loteInsumoSustrato.fecha}}</td>
-                        <td>
+                      <tr class="odd" *ngFor="let insumoSustrato of insumoSustratos; let i = index">
+                        <td >{{insumoSustrato.sedeOperativa.nombre}}</td>
+                        <td >{{insumoSustrato.casoInsumo.nombre}}</td>
+                        <td >{{insumoSustrato.numero}}</td>
+                        <td >{{insumoSustrato.fecha}}</td>
+                        <!-- <td>
                           <button (click)="editRnaInsumoSustrato(loteInsumoSustrato)" class="btn btn-outline-info" type="button">Editar</button> 
                           <button (click)="deleteRnaInsumo(loteInsumoSustrato.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
-                        </td>
+                        </td> -->
                       </tr>
                     </tbody>
                   </table>
@@ -62,23 +58,23 @@
                     <table class="table " id="dataTables-example-Insumos">
                       <thead>
                         <tr>
+                          <th>Sede Operativa</th>
                           <th>Insumo</th>
-                          <th>Cantidad</th>
-                          <th>Referencia</th>
+                          <th>numero</th>
                           <th>Fecha</th>
-                          <th>Acciones</th>
+                          <!-- <th>Acciones</th> -->
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="odd" *ngFor="let loteInsumoInsumo of loteInsumoInsumos; let i = index">
-                          <td >{{loteInsumoInsumo.casoInsumo.nombre}}</td>
-                          <td >{{loteInsumoInsumo.cantidad}}</td>
-                          <td >{{loteInsumoInsumo.referencia}}</td>
-                          <td >{{loteInsumoInsumo.fecha}}</td>
-                          <td>
-                            <button (click)="editRnaInsumoInsumo(loteInsumoInsumo)" class="btn btn-outline-info" type="button">Editar</button> 
-                            <!-- <button (click)="deleteRnaInsumo(loteInsumoInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button>  -->
-                          </td>
+                        <tr class="odd" *ngFor="let InsumoInsumo of InsumoInsumos; let i = index">
+                          <td >{{InsumoInsumo.casoInsumo.nombre}}</td>
+                          <td >{{InsumoInsumo.sedeOperativa.nombre}}</td>
+                          <td >{{InsumoInsumo.numero}}</td>
+                          <td >{{InsumoInsumo.fecha}}</td>
+                          <!-- <td>
+                            <button (click)="editRnaInsumoInsumo(InsumoInsumo)" class="btn btn-outline-info" type="button">Editar</button>  
+                            <button (click)="deleteRnaInsumo(loteInsumoInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                          </td> -->
                         </tr>
                       </tbody> 
                     </table>

@@ -26,11 +26,14 @@ export class VehiculoAcreedorService {
 							  .map(res => res.json());
 	}
 
-	deleteAcreedor(token,id){
+	deleteAcreedor(datos,token){
 
-		let params = "authorization="+token;
+		let json = JSON.stringify(datos);
+		
+		let params = "json="+json+"&authorization="+token;
+		console.log(params);
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
+		return this._http.post(this.url+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
@@ -60,6 +63,24 @@ export class VehiculoAcreedorService {
 
 	getClasePorModuloSelect(id){
 		return this._http.get(this.url+"/"+id+"/select/clases/por/modulo").map(res => res.json());
+	}
+
+	showAcreedorCiudadano(token, ciudadanoId) {
+		let json = JSON.stringify(ciudadanoId);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/acreedor", params, { headers: headers })
+			.map(res => res.json());
+
+	}
+
+	showAcreedorEmpresa(token, empresaId) {
+		let json = JSON.stringify(empresaId);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/acreedor/empresa", params, { headers: headers })
+			.map(res => res.json());
+
 	}
 	
 }

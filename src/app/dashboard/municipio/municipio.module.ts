@@ -12,7 +12,7 @@ import {SelectModule} from 'angular2-select';
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [MunicipioComponent,NewComponent,EditComponent],
-    exports: [MunicipioComponent, NewComponent,EditComponent],
+    exports: [MunicipioComponent, NewComponent,EditComponent], 
     providers:[MunicipioService]
 })
 

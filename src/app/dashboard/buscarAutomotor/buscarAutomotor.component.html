@@ -1,0 +1,52 @@
+<br>
+<div class="row">
+   <!-- .row -->
+   <div class="col-xs-12 col-lg-6">
+      <div class="input-group" [ngClass]="{'has-danger' : isError}">
+         <input type="text" class="form-control" placeholder="Placa,Número motor,Número serie,Número chasis,Identificación propietario" [(ngModel)]="parametro" name="parametro" required />
+         <span class="input-group-btn">
+         <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+         </span>
+      </div>
+      <div class="has-danger" *ngIf="error" >
+         <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+      </div>
+      <div class="has-success" *ngIf="vehiculoSuccess" >
+         <div class="form-control-feedback has-danger has-success">{{msj}}</div>
+         <br>
+      </div>
+   </div>
+</div>
+<!-- .row -->
+<div class="row" *ngIf='vehiculoSuccess'>
+   <div class="col-md-12">
+      <div class="card">
+         <div class="card-header">
+            <h5 class="card-title">Vehículo(s) <small>Registrado(s)</small></h5>
+         </div>
+         <div class="card-body">
+            <table class="table " id="dataTables-example">
+               <thead>
+                  <tr>
+                     <th>Placa</th>
+                     <th>Chasis</th>
+                     <th>Número VIN</th>
+                     <th>Acciones</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr class="odd">
+                     <td >{{vehiculo.placa.numero}}</td>
+                     <td >{{vehiculo.chasis}}</td>
+                     <td >{{vehiculo.vin}}</td>
+                     <td><button (click)="showVehiculo()" class="btn btn-outline-info" type="button">Detalles</button> 
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+         </div>
+      </div>
+   </div>
+   <app-vehiculo-show *ngIf='showV'  [vehiculo]="vehiculo" (ready)="ready($event)"></app-vehiculo-show>
+</div>

@@ -25,6 +25,7 @@ import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacio
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
+import { buscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
 import { MsvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
 import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
@@ -71,6 +72,7 @@ import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
+import { CfgCasoInsumoRoutes } from './cfgCasoInsumo/cfgCasoInsumo.routes';
 import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
@@ -104,6 +106,7 @@ export const DashboardRoutes: Route[] = [
         ...CfgAuditoriaRoutes,
         ...CfgSmlmvRoutes,
         ...cfgFestivoRoutes,    
+        ...buscarAutomotorRoutes,
         ...MsvCaracterizacion,
         ...MsvEvaluacionRoutes,
         ...MsvRevisionRoutes,
@@ -145,6 +148,7 @@ export const DashboardRoutes: Route[] = [
         // ...SucursalRoutes,
         ...TramitePrecioRoutes, 
         ...CfgPlacaRoutes,
+        ...CfgCasoInsumoRoutes,
         ...CfgSedeOperativaRoutes,
         ...MsvTalonarioRoutes, 
         //...MsvTCAsignacionRoutes, 

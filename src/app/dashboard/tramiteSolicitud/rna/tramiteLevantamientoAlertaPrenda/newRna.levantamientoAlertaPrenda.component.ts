@@ -41,9 +41,11 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     public identificacionAcreedor: any;
     public ciudadanoEncontrado = 1;
     public acreedorEncontrado = 1;
+    public enviarEncontrado = 1;
     public empresaEncontrada = 1;
     public nit: any;
     public tipoIdentificacionSelected = null;
+    public listaAcreedoresVehiculo = false;
     public listaAcreedoresCiudadanos = false;
     public listaAcreedoresEmpresas = false;
     public ciudadanoNew = false;
@@ -56,7 +58,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     public propietario = true;
     public propietarioPresente = false;
     public ciudadanoSelected: any;
-    public acreedor = 'false';
+    public acreedor: any;
     public vehiculosAcreedor;
     public table: any;
     public formIndex = true;
@@ -74,6 +76,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         { 'value': 9, 'label': "NUEVE" }
     ];
     public datos = {
+        'acreedoresVehiculo': [],
         'acreedoresEmpresas': [],
         'acreedoresCiudadanos': [],
         'tipoAlerta': [],
@@ -81,10 +84,6 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         'tramiteFactura': null,
         'vehiculoPlaca': null,
     };
-    public datos2 = {
-        'vehiculoId': null,
-        'bancoId': null,
-    }
     public tipoIdentificaciones = [];
 
     constructor(
@@ -159,8 +158,6 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     
    
     enviarTramite() {
-        // this.datos.vehiculo = this.vehiculo.placa;
-        //this.datos.banco = this.banco.nombre;
         let placaT = this.vehiculo.placa;
         this.datos.vehiculoPlaca = this.vehiculo.placa.numero;
         console.log(placaT);
@@ -168,19 +165,12 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.tramiteFactura = 46;
+        this.datos.tramiteFactura = 45;
                
-        this._VehiculoAcreedorService.register(this.datos, token).subscribe(
+        this._VehiculoAcreedorService.deleteAcreedor(this.datos, token).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
-                    // this.vehiculoAcreedor = this.respuesta.data;
-                    // this.ngOnInit();
-                    // this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
-                    // this.datos.gradoAlerta = this.gradoSelected;
-                    // this.datos.tramiteFactura = 46;
-                    // this.readyTramite.emit(this.datos);
-                    // this.acreedorNew = false;
                     this.vehiculo.pignorado = true;
 
                     this._VehiculoService.editVehiculoPignorado(this.vehiculo, token).subscribe(
@@ -233,46 +223,12 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         this.cancelarTramite.emit(true);
     }
 
-  
-    // btnNewAcreedor() {
-    //     let token = this._loginService.getToken();
-    //     //this.acreedorNew = true;
-    //     this.acreedores.push(
-    //         {
-    //             'id':this.banco.id,
-    //             'nombre':this.banco.nombre
-    //         }
-    //     )
-        
-    // }
 
     onKeyAcreedor() {
         let token = this._loginService.getToken();
         let nombreAcreedor = {
             'nombreAcreedor': this.nombreAcreedor,
         };
-        this._BancoService.showAcreedorNombre(token, nombreAcreedor).subscribe(
-            response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.banco = this.respuesta.data;
-                    this.acreedorEncontrado = 2;
-                    this.acreedorNew = false;
-                    this.datos2.bancoId = this.banco.nombre;
-                    // this.datos2.vehiculo = this.vehiculo.id;
-                } else {
-                    this.acreedorEncontrado = 3;
-                    this.acreedorNew = true;
-                }
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            });
     }
 
     onKeyCiudadano() {
@@ -284,12 +240,66 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
-                    this.ciudadano = this.respuesta.data;
-                    this.ciudadanoEncontrado = 2;
-                    this.ciudadanoNew = false;
+                    this.ciudadano = this.respuesta.data.ciudadano.id;
+                    //this.ciudadanoEncontrado = 2;
+                   // this.ciudadanoNew = false;
+                   console.log(this.ciudadano);
+                   
+
+                    this._VehiculoAcreedorService.showAcreedorCiudadano(token, this.ciudadano).subscribe(
+                        response => {
+                            this.respuesta = response;
+                            if (this.respuesta.status == 'success') {
+                                this.acreedor = this.respuesta.data;
+                                this.acreedorEncontrado = 2;
+                                this.enviarEncontrado = 5;
+  
+                                    this.datos.acreedoresVehiculo.push(
+                                        {
+                                            'identificacion': this.acreedor.ciudadano.usuario.identificacion,
+                                            'nombre': this.acreedor.ciudadano.usuario.primerNombre + " " + this.acreedor.ciudadano.usuario.segundoNombre,
+                                            'ciudadanoId': this.acreedor.ciudadano.id,
+                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
+                                            'gradoAlerta': this.acreedor.gradoAlerta
+                                        }
+                                    );
+                                    this.datos.acreedoresCiudadanos.push(
+                                        {
+                                            'identificacion': this.acreedor.ciudadano.usuario.identificacion,
+                                            'nombre': this.acreedor.ciudadano.usuario.primerNombre + " " + this.acreedor.ciudadano.usuario.segundoNombre,
+                                            'ciudadanoId': this.acreedor.ciudadano.id,
+                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
+                                            'gradoAlerta': this.acreedor.gradoAlerta
+                                        }
+                                    );
+
+                                if (this.propietario) {
+                                    this.propietario = false
+                                }
+
+                                console.log(this.acreedor);
+                                this.acreedorEncontrado = 1;
+                                this.listaAcreedoresVehiculo = true;
+                                //this.ciudadanoNew = false;
+                            } else {
+                                this.acreedorEncontrado = 3;
+                                //this.ciudadanoNew = true;
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        });
+
+
+
                 } else {
                     this.ciudadanoEncontrado = 3;
-                    this.ciudadanoNew = true;
+                    //this.ciudadanoNew = true;
                 }
                 error => {
                     this.errorMessage = <any>error;
@@ -300,6 +310,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
                     }
                 }
             });
+
     }
 
     onKeyApoderado() {
@@ -311,7 +322,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
-                    this.acreedorSelected = this.respuesta.data;
+                    this.acreedorSelected = this.respuesta.data.empresa.id;
                     this.acreedorEncontrado = 2;
                     // this.ciudadanoNew = false;
                 } else {
@@ -339,7 +350,57 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
                     this.empresa = this.respuesta.data;
-                    this.empresaEncontrada = 2;
+                   // this.empresaEncontrada = 2;
+                    this._VehiculoAcreedorService.showAcreedorEmpresa(token, this.empresa).subscribe(
+                        response => {
+                            this.respuesta = response;
+                            if (this.respuesta.status == 'success') {
+                                this.acreedor = this.respuesta.data;
+                                this.acreedorEncontrado = 2;
+                                this.enviarEncontrado = 5;
+                                // if (this.acreedor.empresa) {
+
+                                    this.datos.acreedoresVehiculo.push(
+                                        {
+                                            'identificacion': this.acreedor.empresa.nit,
+                                            'nombre': this.acreedor.empresa.nombre,
+                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
+                                            'gradoAlerta': this.acreedor.gradoAlerta,
+                                            'empresaId': this.acreedor.empresa.id,
+                                        }
+                                    );
+                                    this.datos.acreedoresEmpresas.push(
+                                        {
+                                            'identificacion': this.acreedor.empresa.nit,
+                                            'nombre': this.acreedor.empresa.nombre,
+                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
+                                            'gradoAlerta': this.acreedor.gradoAlerta,
+                                            'empresaId': this.acreedor.empresa.id,
+                                        }
+                                    );
+                                // }
+
+                                if (this.propietario) {
+                                    this.propietario = false
+                                }
+
+                                console.log(this.acreedor);
+                                this.acreedorEncontrado = 1;
+                                this.listaAcreedoresVehiculo = true;
+                                //this.ciudadanoNew = false;
+                            } else {
+                                this.empresaEncontrada = 3;
+                                //this.ciudadanoNew = true;
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        });
                 } else {
                     this.empresaEncontrada = 3;
                 }
@@ -394,6 +455,14 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         
         this.empresaEncontrada = 1;
         this.listaAcreedoresEmpresas = true;
+    }
+
+    btnCancelarCiudadano() {
+        this.ciudadanoEncontrado = 1
+    }
+
+    btnCancelarEmpresa() {
+        this.empresaEncontrada = 1
     }
 
     btnNewAcreedor() {
