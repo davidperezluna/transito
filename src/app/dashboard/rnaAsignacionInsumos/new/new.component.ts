@@ -103,7 +103,7 @@ constructor(
     let token = this._loginService.getToken();
     this.rnaAsignacionInsumos.loteInsumoId = this.loteInsumo.id;
 
-    if (this.frmInsumo) {
+    if (!this.frmInsumo) {
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelected;
       this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
     }else{
@@ -111,7 +111,6 @@ constructor(
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelectedInsumo;
       this.rnaAsignacionInsumos.numero = this.numero;
     }
-    console.log(this.rnaAsignacionInsumos);
 		this._RnaInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
 			response => {
         this.respuesta = response;

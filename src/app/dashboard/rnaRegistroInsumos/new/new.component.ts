@@ -109,10 +109,13 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.rnaRegistroInsumos.sedeOperativaId = this.sedeSelected;
-    if (this.frmInsumo) {
+    console.log(this.frmInsumo);
+    if (!this.frmInsumo) {
       this.rnaRegistroInsumos.empresaId = this.empresaSelected;
       this.rnaRegistroInsumos.casoInsumoId = this.insumoSelected;
+     
     }else{
+
       this.rnaRegistroInsumos.empresaId = this.empresaInsumoSelected;
       this.rnaRegistroInsumos.casoInsumoId = this.insumoInsumoSelected;
     }
