@@ -1,6 +1,7 @@
 export class Ciudadano{
 	constructor(
 		public id: number,
+		
 		public tipoIdentificacionUsuarioId: number,
 		public municipioNacimientoId: number,
 		public municipioResidenciaId: number,

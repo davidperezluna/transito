@@ -93,10 +93,10 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
       }
   }
 
-  editRegistroMaquinaria(registroMaquinaria:any){
-    this.registroMaquinaria = registroMaquinaria;
-    this.formEdit = true;
+  editVehiculo(){
+    // this.registroMaquinaria = registroMaquinaria;
     this.formIndex = false;
+    this.formEdit = true;
   }
 
 }
