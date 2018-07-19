@@ -26,6 +26,9 @@ import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
 import { buscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
+
+import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
+
 import { MsvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
 import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
@@ -79,7 +82,7 @@ import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumo
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
 import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
-import { DashboardComponent } from './index';
+import { DashboardComponent } from '.';
 
 export const DashboardRoutes: Route[] = [
     {
@@ -107,6 +110,7 @@ export const DashboardRoutes: Route[] = [
         ...CfgSmlmvRoutes,
         ...cfgFestivoRoutes,    
         ...buscarAutomotorRoutes,
+        ...CfgLicenciaConduccionCategoriaRoutes,    
         ...MsvCaracterizacion,
         ...MsvEvaluacionRoutes,
         ...MsvRevisionRoutes,

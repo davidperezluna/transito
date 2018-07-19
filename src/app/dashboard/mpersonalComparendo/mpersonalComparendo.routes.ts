@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MpersonalComparendoComponent } from './index';
+import { MpersonalComparendoComponent } from '.';
 
 export const MpersonalComparendoRoutes: Route[] = [
     {

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MflInfraccionComponent } from './index';
+import { MflInfraccionComponent } from '.';
 
 export const MflInfraccionRoutes: Route[] = [
     {

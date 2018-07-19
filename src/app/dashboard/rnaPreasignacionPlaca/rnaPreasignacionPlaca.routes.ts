@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { RnaPreasignacionPlacaComponent } from './index';
+import { RnaPreasignacionPlacaComponent } from '.';
 
 export const RnaPreasignacionPlacaRoutes: Route[] = [
     {

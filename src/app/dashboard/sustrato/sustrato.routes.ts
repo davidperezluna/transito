@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { SustratoComponent } from './index';
+import { SustratoComponent } from '.';
 
 export const SustratoRoutes: Route[] = [
     {

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MgdTipoCorrespondenciaComponent } from './index';
+import { MgdTipoCorrespondenciaComponent } from '.';
 
 export const MgdTipoCorrespondenciaRoutes: Route[] = [
     {

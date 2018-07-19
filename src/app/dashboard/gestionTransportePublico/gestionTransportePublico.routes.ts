@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { GestionTransportePublicoComponent } from './index';
+import { GestionTransportePublicoComponent } from '.';
 
 export const GestionTransportePublicoRoutes: Route[] = [
     {

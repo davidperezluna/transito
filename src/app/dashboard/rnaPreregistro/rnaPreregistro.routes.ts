@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { RnaPreregistroComponent } from './index';
+import { RnaPreregistroComponent } from '.';
 
 export const RnaPreregistroRoutes: Route[] = [
     {

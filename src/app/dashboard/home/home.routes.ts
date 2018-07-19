@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { HomeComponent } from './index';
+import { HomeComponent } from '.';
 
 export const HomeRoutes: Route[] = [
     {

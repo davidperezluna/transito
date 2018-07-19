@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { CiudadanoComponent } from './index';
+import { CiudadanoComponent } from '.';
 
 export const CiudadanoRoutes: Route[] = [
     {

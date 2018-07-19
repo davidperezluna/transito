@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MparqGruaCiudadanoComponent } from './index';
+import { MparqGruaCiudadanoComponent } from '.';
 
 export const MparqGruaCiudadanoRoutes: Route[] = [
     {

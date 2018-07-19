@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ConsumibleComponent } from './index';
+import { ConsumibleComponent } from '.';
 
 export const ConsumibleRoutes: Route[] = [
     {

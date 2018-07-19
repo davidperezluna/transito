@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { GrupoSanguineoComponent } from './index';
+import { GrupoSanguineoComponent } from '.';
 
 export const GrupoSanguineoRoutes: Route[] = [
     {

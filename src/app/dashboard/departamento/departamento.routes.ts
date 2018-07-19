@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { DepartamentoComponent } from './index';
+import { DepartamentoComponent } from '.';
 
 export const DepartamentoRoutes: Route[] = [
     {

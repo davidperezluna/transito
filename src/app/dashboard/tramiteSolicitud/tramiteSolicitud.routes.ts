@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { TramiteSolicitudComponent } from './index';
+import { TramiteSolicitudComponent } from '.';
 
 export const TramiteSolicitudRoutes: Route[] = [
     {

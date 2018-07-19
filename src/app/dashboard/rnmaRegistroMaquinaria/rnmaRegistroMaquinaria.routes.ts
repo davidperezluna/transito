@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { RnmaRegistroMaquinariaComponent } from './index';
+import { RnmaRegistroMaquinariaComponent } from '.';
 
 export const RnmaRegistroMaquinariaRoutes: Route[] = [
     {

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { AlmacenComponent } from './index';
+import { AlmacenComponent } from '.';
 
 export const AlmacenRoutes: Route[] = [
     {

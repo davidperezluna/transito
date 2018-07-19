@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Sucursal } from '../new/sucursal.modelo';
+import { Sucursal } from './sucursal.modelo';
 // import { Empresa } from '../new/empresa.modelo';
 
 import { SucursalService } from '../../../../services/sucursal.service';

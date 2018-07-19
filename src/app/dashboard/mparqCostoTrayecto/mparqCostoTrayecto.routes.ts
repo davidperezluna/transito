@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MparqCostoTrayectoComponent } from './index';
+import { MparqCostoTrayectoComponent } from '.';
 
 export const MparqCostoTrayectoRoutes: Route[] = [
     {
