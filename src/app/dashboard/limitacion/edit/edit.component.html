@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">formulario para editar una clase</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <div class="container">
+                        <div class="form-group row">
+                        <div class="col-lg-6 col-md-5">
+                            <label>Nombre*</label>
+                            <input class="form-control" [(ngModel)]="clase.nombre" name="nombre" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Codigo MT*</label>
+                            <input class="form-control" [(ngModel)]="clase.codigoMt" name="codigoMt" placeholder="" type="text" required>
+                        </div>
+                        <div class="col-lg-6 col-md-5">
+                            <label>Modulo*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="modulos"
+                                [(ngModel)]="moduloSelected"
+                                required
+                                name="moduloId">
+                            </ng-select>
+                        </div>
+                        </div>
+                    </div> 
+                </div>   
+        </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>
