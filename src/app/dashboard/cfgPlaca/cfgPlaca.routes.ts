@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { CfgPlacaComponent } from './index';
+import { CfgPlacaComponent } from '.';
 
 export const CfgPlacaRoutes: Route[] = [
     {

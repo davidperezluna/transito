@@ -7,7 +7,7 @@
           <h5 class="card-title">
             <b class="text-uppercase">Configuración</b>
             <br>
-            <small>Placas</small>
+            <small>Caso Insumos</small>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                 <i class="fa fa-plus"></i>
@@ -21,25 +21,25 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Numero</th>
-                <th>Estado</th>
-                <th>Clase</th>
-                <th>Sede Operativa</th>
+                <th>Módulo</th>
+                <th>Nombre</th>
+                <th>Referencia</th>
+                <th>Valor</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr class="odd" *ngFor="let cfgCasoInsumo of cfgCasoInsumos; let i = index">
                 <td>{{cfgCasoInsumo.id}}</td>
-                <td>{{cfgCasoInsumo.numero}}</td>
-                <td>{{cfgCasoInsumo.estado}}</td>
-                <td>{{cfgCasoInsumo.clase?.nombre}}</td>
-                <td>{{cfgCasoInsumo.sedeOperativa?.nombre}}</td>
+                <td>{{cfgCasoInsumo.modulo?.nombre}}</td>
+                <td>{{cfgCasoInsumo.nombre}}</td>
+                <td>{{cfgCasoInsumo.referencia}}</td>
+                <td>{{cfgCasoInsumo.valor}}</td>
                 <td>
                   <button (click)="editCfgCasoInsumo(cfgCasoInsumo)" class="btn btn-xs btn-info" type="button">Editar
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button (click)="deleteCfgCasoInsumo(cfgCasoInsumo.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                  <button (click)="deleteCfgCasoInsumo(cfgCasoInsumo)" class="btn btn-xs btn-danger" type="button">Eliminar
                     <i class="fa fa-trash"></i>
                   </button>
 

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MgdDocumentoComponent } from './index';
+import { MgdDocumentoComponent } from '.';
 
 export const MgdDocumentoRoutes: Route[] = [
     {

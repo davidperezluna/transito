@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { CarroceriaComponent } from './index';
+import { CarroceriaComponent } from '.';
 
 export const CarroceriaRoutes: Route[] = [
     {

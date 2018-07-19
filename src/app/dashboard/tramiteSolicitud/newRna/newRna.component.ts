@@ -8,7 +8,7 @@ import { CiudadanoService } from '../../../services/ciudadano.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { Factura } from 'app/dashboard/factura/factura.modelo';
+import { Factura } from '../../factura/factura.modelo';
 import { error } from 'selenium-webdriver';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Response } from '@angular/http/src/static_response';
@@ -47,7 +47,7 @@ export class NewRnaComponent implements OnInit {
   public sustrato=false;
   public frmApoderado=false;
   public identificacionApoderado=false;
-  public apoderado=false;
+  public apoderado:any=false;
   public apoderadoSelect=false;
   public isTramites:boolean=true;
   public isMatricula:boolean=false;
@@ -66,7 +66,7 @@ constructor(
 
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null);
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null,null);
     
     
   }
@@ -287,6 +287,7 @@ constructor(
     });
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
+    this.tramiteSolicitud.ciudadanoId=this.apoderado.id;
 
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
@@ -373,8 +374,6 @@ constructor(
     
             }
           })
-
-          
   }
 
   agregarApoderado(){

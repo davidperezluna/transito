@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MparqGruaComponent } from './index';
+import { MparqGruaComponent } from '.';
 
 export const MparqGruaRoutes: Route[] = [
     {

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MunicipioComponent } from './index';
+import { MunicipioComponent } from '.';
 
 export const MunicipioRoutes: Route[] = [
     {

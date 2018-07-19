@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { InfraccionComponent } from './index';
+import { InfraccionComponent } from '.';
 
 export const InfraccionRoutes: Route[] = [
     {

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { TipoIdentificacionComponent } from './index';
+import { TipoIdentificacionComponent } from '.';
 
 export const TipoIdentificacionRoutes: Route[] = [
     {

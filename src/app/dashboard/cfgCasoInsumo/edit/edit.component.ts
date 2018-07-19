@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import { LoginService } from '../../../services/login.service';
-import { ClaseService } from '../../../services/clase.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { ModuloService } from '../../../services/modulo.service';
 import swal from 'sweetalert2';
 
 
@@ -15,17 +14,19 @@ export class EditComponent {
   @Input() cfgCasoInsumo: any = null;
   public errorMessage;
   public respuesta;
-  public clases: any;
-  public claseSelected: any;
-  public sedesOperativas: any;
-  public sedeOperativaSelected: any;
+  public modulos: any;
+  public moduloSelected: any;
+  public tipoCasoInsumos = [
+    { 'value': "Insumo", 'label': "Insumo" },
+    { 'value': "Sustrato", 'label': "Sustrato" }
+  ];
+  public tipoCasoInsumoSelected: any;
   // public tipoIdentificacion: Array<any>
 
   constructor(
     private _CfgCasoInsumoService: CfgCasoInsumoService,
     private _loginService: LoginService,
-    private _claseService: ClaseService,
-    private _sedeOperativaService: SedeOperativaService,
+    private _ModuloService: ModuloService,
   ) {
     //   this.tipoIdentificacion = [
     //     {value: 'CC', label: 'Cédula de ciudadanía'},
@@ -37,11 +38,11 @@ export class EditComponent {
 
   ngOnInit() {
 
-    this._claseService.getClaseSelect().subscribe(
+    this._ModuloService.getModuloSelect().subscribe(
       response => {
-        this.clases = response;
+        this.modulos = response;
         setTimeout(() => {
-          this.claseSelected = [this.cfgCasoInsumo.clase.id];
+          this.moduloSelected = [this.cfgCasoInsumo.modulo.id];
         });
       },
       error => {
@@ -54,22 +55,7 @@ export class EditComponent {
       }
     );
 
-    this._sedeOperativaService.getSedeOperativaSelect().subscribe(
-      response => {
-        this.sedesOperativas = response;
-        setTimeout(() => {
-          this.sedeOperativaSelected = [this.cfgCasoInsumo.sedeOperativa.id];
-        });
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    
   }
 
 
@@ -78,8 +64,7 @@ export class EditComponent {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgCasoInsumo.claseId = this.claseSelected;
-    this.cfgCasoInsumo.sedeOperativaId = this.sedeOperativaSelected;
+    this.cfgCasoInsumo.moduloId = this.moduloSelected;
     this._CfgCasoInsumoService.editCfgCasoInsumo(this.cfgCasoInsumo, token).subscribe(
       response => {
         //console.log(response);

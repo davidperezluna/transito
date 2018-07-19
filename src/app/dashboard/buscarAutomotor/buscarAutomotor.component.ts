@@ -3,7 +3,7 @@ import { Vehiculo } from '../vehiculo/vehiculo.modelo';
 import { LoginService } from '../../services/login.service';
 import { VehiculoService } from '../../services/vehiculo.service';
 import swal from 'sweetalert2';
-import { Factura } from 'app/dashboard/factura/factura.modelo';
+import { Factura } from '../factura/factura.modelo';
 import { error } from 'selenium-webdriver';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Response } from '@angular/http/src/static_response';
@@ -92,5 +92,9 @@ constructor(
 
   showVehiculo(){
     this.showV = true;
+  }
+
+  cerrarForm(isForm:any){
+    this.showV = isForm;
   }
 }
