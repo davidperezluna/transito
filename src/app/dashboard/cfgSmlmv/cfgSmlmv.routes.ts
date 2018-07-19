@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { CfgSmlmvComponent } from './index';
+import { CfgSmlmvComponent } from '.';
 
 export const CfgSmlmvRoutes: Route[] = [
     {

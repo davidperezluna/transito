@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { OrganismoTransitoComponent } from './index';
+import { OrganismoTransitoComponent } from '.';
 
 export const OrganismoTransitoRoutes: Route[] = [
     {

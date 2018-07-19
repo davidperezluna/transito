@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MarcaComponent } from './index';
+import { MarcaComponent } from '.';
 
 export const MarcaRoutes: Route[] = [
     {

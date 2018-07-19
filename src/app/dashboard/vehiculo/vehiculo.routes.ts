@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { VehiculoComponent } from './index';
+import { VehiculoComponent } from '.';
 
 export const VehiculoRoutes: Route[] = [
     {

@@ -1,9 +1,9 @@
 /**
  * This barrel file provides the exports for the shared resources (services, components).
  */
-export * from './topnav/index';
-export * from './sidebar/index';
-export * from './name-list/index';
-export * from './rightsidebar/index';
-export * from './footer/index';
+export * from './topnav';
+export * from './sidebar';
+export * from './name-list';
+export * from './rightsidebar';
+export * from './footer';
 

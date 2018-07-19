@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MsvConsecutivoComponent } from './index';
+import { MsvConsecutivoComponent } from '.';
 
 export const MsvConsecutivoRoutes: Route[] = [
     {

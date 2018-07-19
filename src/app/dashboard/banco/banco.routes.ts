@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { BancoComponent } from './index';
+import { BancoComponent } from '.';
 
 export const BancoRoutes: Route[] = [
     {

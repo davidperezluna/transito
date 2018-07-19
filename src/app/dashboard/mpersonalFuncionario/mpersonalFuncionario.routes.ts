@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MpersonalFuncionarioComponent } from './index';
+import { MpersonalFuncionarioComponent } from '.';
 
 export const MpersonalFuncionarioRoutes: Route[] = [
     {

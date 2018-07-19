@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MpersonalAsignacionComponent } from './index';
+import { MpersonalAsignacionComponent } from '.';
 
 export const MpersonalAsignacionRoutes: Route[] = [
     {

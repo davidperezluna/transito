@@ -3,7 +3,7 @@ import { MsvTalonarioService } from '../../../services/msvTalonario.service';
 import { LoginService } from '../../../services/login.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
-import { MsvTalonario } from '.././msvTalonario.modelo';
+import { MsvTalonario } from '../msvTalonario.modelo';
 declare var $: any;
 
 @Component({
