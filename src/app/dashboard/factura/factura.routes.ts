@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { FacturaComponent } from './index';
+import { FacturaComponent } from '.';
 
 export const FacturaRoutes: Route[] = [
     {

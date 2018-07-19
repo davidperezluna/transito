@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
-import { CfgCasoInsumoComponent } from './index';
+import { CfgCasoInsumoComponent } from '.';
 
 export const CfgCasoInsumoRoutes: Route[] = [
     {
-      path: 'cfgCasoInsumo',
+      path: 'casoinsumo',
       component: CfgCasoInsumoComponent
     }
 ];

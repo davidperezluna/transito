@@ -3,7 +3,7 @@ import { Vehiculo } from '../vehiculo/vehiculo.modelo';
 import { LoginService } from '../../services/login.service';
 import { VehiculoService } from '../../services/vehiculo.service';
 import swal from 'sweetalert2';
-import { Factura } from 'app/dashboard/factura/factura.modelo';
+import { Factura } from '../factura/factura.modelo';
 import { error } from 'selenium-webdriver';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Response } from '@angular/http/src/static_response';
@@ -22,7 +22,7 @@ export class buscarAutomotorComponent implements OnInit {
   public error=false;
   public msj='';
   public vehiculoSuccess = false;
-  public showV = false;
+  public showV:any;
 
 constructor(
   private _loginService: LoginService,
@@ -38,6 +38,7 @@ constructor(
   }
   
   onKeyValidateVehiculo(){
+    this.showV = false;
     this.msj = '';
     this.mensaje = '';
     swal({
@@ -91,6 +92,9 @@ constructor(
 
   showVehiculo(){
     this.showV = true;
-    console.log(this.vehiculo);
+  }
+
+  cerrarForm(isForm:any){
+    this.showV = isForm;
   }
 }

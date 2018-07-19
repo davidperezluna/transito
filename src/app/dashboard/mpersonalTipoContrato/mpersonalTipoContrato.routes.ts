@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MpersonalTipoContratoComponent } from './index';
+import { MpersonalTipoContratoComponent } from '.';
 
 export const MpersonalTipoContratoRoutes: Route[] = [
     {

@@ -1,8 +1,10 @@
 export class CfgCasoInsumo{
 	constructor(
-		public numero:string,
-		public estado:string,
-		public claseId:number,
-		public sedeOperativaId:number
+		public moduloId:number,
+		public nombre:string,
+		public referencia: string,
+		public estado:number,
+		public valor:string,
+		public tipo:string
 	){}
 }

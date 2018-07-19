@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { TramiteSolicitudRncComponent } from './index';
+import { TramiteSolicitudRncComponent } from '.';
 
 export const TramiteSolicitudRncRoutes: Route[] = [
     {

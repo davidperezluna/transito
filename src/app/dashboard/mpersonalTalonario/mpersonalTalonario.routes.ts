@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MpersonalTalonarioComponent } from './index';
+import { MpersonalTalonarioComponent } from '.';
 
 export const MpersonalTalonarioRoutes: Route[] = [
     {

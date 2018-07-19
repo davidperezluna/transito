@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ServicioComponent } from './index';
+import { ServicioComponent } from '.';
 
 export const ServicioRoutes: Route[] = [
     {

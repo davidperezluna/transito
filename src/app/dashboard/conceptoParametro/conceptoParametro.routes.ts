@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ConceptoParametroComponent } from './index';
+import { ConceptoParametroComponent } from '.';
 
 export const ConceptoParametroRoutes: Route[] = [
     {

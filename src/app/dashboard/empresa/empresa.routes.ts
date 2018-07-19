@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { EmpresaComponent } from './index';
+import { EmpresaComponent } from '.';
 
 export const EmpresaRoutes: Route[] = [
     {

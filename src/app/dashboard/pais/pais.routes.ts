@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { PaisComponent } from './index';
+import { PaisComponent } from '.';
 
 export const PaisRoutes: Route[] = [
     {

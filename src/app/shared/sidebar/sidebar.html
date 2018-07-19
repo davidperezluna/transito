@@ -120,6 +120,11 @@
                 <i class="fa fa-angle-right"></i> Tipo Identificación
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgLicenciaConduccionCategoria" [ngClass]="{'active' : ( addActive === 'cfgLicenciaConduccionCategoria')}" (click)="addActiveMenu('cfgLicenciaConduccionCategoria')">
+                <i class="fa fa-angle-right"></i> Categorias Licencia Conducción
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level --> 
         </li>
@@ -416,7 +421,7 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
-          <a class="nav-link" routerLink="cfgCasoInsumo" [ngClass]="{'active' : ( addActive === 'cfgCasoInsumo')}" (click)="addActiveMenu('cfgCasoInsumo')">
+          <a class="nav-link" routerLink="casoinsumo" [ngClass]="{'active' : ( addActive === 'casoinsumo')}" (click)="addActiveMenu('casoinsumo')">
             <i class="fa fa-angle-right"></i> Caso Insumo
           </a>
         </li>
