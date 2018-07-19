@@ -93,4 +93,8 @@ constructor(
   showVehiculo(){
     this.showV = true;
   }
+
+  cerrarForm(isForm:any){
+    this.showV = isForm;
+  }
 }
