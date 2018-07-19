@@ -22,7 +22,7 @@ export class buscarAutomotorComponent implements OnInit {
   public error=false;
   public msj='';
   public vehiculoSuccess = false;
-  public showV = false;
+  public showV:any;
 
 constructor(
   private _loginService: LoginService,
@@ -38,6 +38,7 @@ constructor(
   }
   
   onKeyValidateVehiculo(){
+    this.showV = false;
     this.msj = '';
     this.mensaje = '';
     swal({
@@ -91,6 +92,5 @@ constructor(
 
   showVehiculo(){
     this.showV = true;
-    console.log(this.vehiculo);
   }
 }

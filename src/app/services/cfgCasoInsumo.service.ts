@@ -5,7 +5,7 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class CfgCasoInsumoService {
-	private url = environment.apiUrl + "cfgCasoInsumo";
+	private url = environment.apiUrl + "casoinsumo";
 	public identity;
 	public token;
 
@@ -58,7 +58,7 @@ export class CfgCasoInsumoService {
 	}
 
 	getCfgCasoInsumoPorIdSelect(id) {
-		return this._http.get(this.url + "/" + id + "/select/cfgCasoInsumos/por/id").map(res => res.json());
+		return this._http.get(this.url + "/" + id + "/select/casoInsumos/por/id").map(res => res.json());
 	}
 
 
