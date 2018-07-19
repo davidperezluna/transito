@@ -55,6 +55,7 @@ public carroceriaSelected:any;
 public combustibleSelected:any;
 public cfgOrigenRegistroSelected:any;
 public servicioSelected:any;
+
 public condiciones =[
   {'value':"Nuevo",'label':"Nuevo"},{'value':"Sin registro antes de inicio RNMA",'label':"Sin registro antes de inicio RNMA"}
 ]
@@ -203,7 +204,7 @@ ngOnInit() {
     this.registroMaquinaria.cfgOrigenVehiculoId = this.cfgOrigenRegistroSelected;
     
     this.registroMaquinaria.vehiculoColorId = this.colorSelected;
-    this.registroMaquinaria.vehiculoMarcasId = this.marcaSelected;
+    this.registroMaquinaria.vehiculoMarcaId = this.marcaSelected;
     this.registroMaquinaria.vehiculoClaseId = this.claseSelected;
     this.registroMaquinaria.vehiculoLineaId = this.lineaSelected;
     this.registroMaquinaria.vehiculoCarroceriaId = this.carroceriaSelected;
@@ -285,6 +286,29 @@ ngOnInit() {
         }
       })
   }
+  changedMarca(e){
+    if (this.marcaSelected) {
+      let token = this._loginService.getToken()
+        this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+          response => { 
+            if (response.data[0] != null) {
+              this.lineas = response.data;
+            }else{
+              this.lineas = [];
+            }
+          }, 
+          error => { 
+            this.errorMessage = <any>error;
+    
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+    }
+    }
+
 
   changedDepartamento(e){
     // if (this.marcaSelected) {

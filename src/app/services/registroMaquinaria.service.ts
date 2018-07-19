@@ -44,6 +44,8 @@ export class RegistroMaquinariaService {
 	editRegistroMaquinaria(registroMaquinaria,token){
 
 		let json = JSON.stringify(registroMaquinaria);
+		console.log(json);
+		
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})

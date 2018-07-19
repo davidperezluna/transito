@@ -258,8 +258,7 @@ constructor(
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
         this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
-          response => {
-            console.log(response.data[0]);
+          response => { 
             if (response.data[0] != null) {
               this.lineas = response.data;
             }else{
