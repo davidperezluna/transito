@@ -18,8 +18,8 @@ export class NewComponent implements OnInit {
   public modulos: any;
   public moduloSelected: any;
   public tipoCasoInsumos = [
-    { 'value': "Insumo", 'label': "Sustrato" },
-    { 'value': "Sustrato", 'label': "Insumo" }
+    { 'value': "Insumo", 'label': "Insumo" },
+    { 'value': "Sustrato", 'label': "Sustrato" }
   ];
   public tipoCasoInsumoSelected: any;
 
