@@ -34,7 +34,7 @@ public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
 public frmInsumo:any=true;
-public frmInsumoSelect:any=true;
+public frmInsumoSelect:any=false;
 
 constructor(
   private datePipe: DatePipe,
@@ -104,9 +104,11 @@ constructor(
     this.rnaAsignacionInsumos.loteInsumoId = this.loteInsumo.id;
 
     if (!this.frmInsumo) {
+      console.log('sustrato');
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelected;
       this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
     }else{
+      console.log('insumo');
       this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelectedInsumo;
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelectedInsumo;
       this.rnaAsignacionInsumos.numero = this.numero;
