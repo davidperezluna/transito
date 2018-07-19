@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ModalidadComponent } from './index';
+import { ModalidadComponent } from '.';
 
 export const ModalidadRoutes: Route[] = [
     {

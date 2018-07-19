@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { rnaAsignacionInsumosComponent } from './index';
+import { rnaAsignacionInsumosComponent } from '.';
 
 export const rnaAsignacionInsumosRoutes: Route[] = [
     {

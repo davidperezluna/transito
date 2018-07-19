@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { CfgAuditoriaComponent } from './index';
+import { CfgAuditoriaComponent } from '.';
 
 export const CfgAuditoriaRoutes: Route[] = [
     {

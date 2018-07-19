@@ -34,6 +34,8 @@ import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 
+import { CfgLicenciaConduccionCategoriaModule } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.module';
+
 import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { MsvRevisionModule } from './msvRevision/msvRevision.module';
 import { MsvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
@@ -87,10 +89,10 @@ import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegis
 
 import { DashboardComponent } from './dashboard.component'; 
 
-import {TopNavComponent} from '../shared/index';
-import {SidebarComponent} from '../shared/index';
-import {FooterComponent} from '../shared/index';
-import {RightsidebarComponent} from '../shared/index';
+import {TopNavComponent} from '../shared';
+import {SidebarComponent} from '../shared';
+import {FooterComponent} from '../shared';
+import {RightsidebarComponent} from '../shared';
 
 
 @NgModule({
@@ -123,6 +125,7 @@ import {RightsidebarComponent} from '../shared/index';
       CfgSmlmvModule,
       cfgFestivoModule,
       buscarAutomotorModule,
+      CfgLicenciaConduccionCategoriaModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,

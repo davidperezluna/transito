@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { ComparendoComponent } from './index';
-import { NewComponent } from './index';
+import { ComparendoComponent } from '.';
+import { NewComponent } from '.';
 
 export const ComparendoRoutes: Route[] = [
     {

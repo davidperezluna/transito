@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ClaseComponent } from './index';
+import { ClaseComponent } from '.';
 
 export const ClaseRoutes: Route[] = [
     {

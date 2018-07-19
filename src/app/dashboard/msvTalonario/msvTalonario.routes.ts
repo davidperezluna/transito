@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MsvTalonarioComponent } from './index';
+import { MsvTalonarioComponent } from '.';
 
 export const MsvTalonarioRoutes: Route[] = [
     {

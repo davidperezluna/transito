@@ -8,7 +8,7 @@ import { LoginRoutes } from './login/login.routes';
 import { DashboardRoutes } from './dashboard/dashboard.routes';
 
 
-import { LoginComponent } from './login/index';
+import { LoginComponent } from './login';
 
 export const routes: Routes = [
   ...LoginRoutes,

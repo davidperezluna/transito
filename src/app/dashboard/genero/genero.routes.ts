@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { GeneroComponent } from './index';
+import { GeneroComponent } from '.';
 
 export const GeneroRoutes: Route[] = [
     {

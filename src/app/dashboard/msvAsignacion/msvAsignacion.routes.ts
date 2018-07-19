@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { MsvAsignacionComponent } from './index';
+import { MsvAsignacionComponent } from '.';
 
 export const MsvAsignacionRoutes: Route[] = [
     {

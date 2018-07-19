@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { TramitePrecioComponent } from './index';
+import { TramitePrecioComponent } from '.';
 
 export const TramitePrecioRoutes: Route[] = [
     {

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { CuentaComponent } from './index';
+import { CuentaComponent } from '.';
 
 export const CuentaRoutes: Route[] = [
     {

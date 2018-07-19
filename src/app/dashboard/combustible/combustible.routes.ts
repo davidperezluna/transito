@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { CombustibleComponent } from './index';
+import { CombustibleComponent } from '.';
 
 export const CombustibleRoutes: Route[] = [
     {
