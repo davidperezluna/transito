@@ -1,4 +1,4 @@
-<div class="container" *ngIf="showVi">
+<div class="container">
         <div class="col-md-12">
            <div class="card">
               <div class="card-body">
@@ -28,27 +28,27 @@
                              <label>Estado tarjeta registro</label>
                              <input class="form-control" placeholder="PENDIENTE" name="estadoTarjeta" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Acta de importación o de remate o adjudicación</label>
                              <input class="form-control" placeholder="PENDIENTE" name="acta" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Número de acta</label>
                              <input class="form-control" placeholder="PENDIENTE" name="numeroActa" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Fecha declaración</label>
                              <input class="form-control" placeholder="PENDIENTE" name="fechaDeclaracion" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Declaración de importación simplificada</label>
                              <input class="form-control" placeholder="PENDIENTE" name="declaracion" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Reposición</label>
                              <input class="form-control" placeholder="PENDIENTE" name="reposicion" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Origen registro</label>
                              <input class="form-control" placeholder="PENDIENTE" name="origenRegistro" type="text" required readonly>
                           </div>
@@ -132,23 +132,23 @@
                              <label>Nro. fichas tecnicas homologación</label>
                              <input class="form-control" name="numeroFichas" [(ngModel)]="numeroFichas" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Repotenciado</label>
                              <input class="form-control" placeholder="PENDIENTE" name="repotenciado" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Potencia</label>
                              <input class="form-control" placeholder="PENDIENTE" name="potencia" type="text" required readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Tipo de motor</label>
                              <input class="form-control" placeholder="PENDIENTE" name="tipoMotor" type="text" required readonly readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Año fabricación</label>
                              <input class="form-control" placeholder="PENDIENTE" name="anioFabricacion" type="text" required readonly readonly>
                           </div>
-                          <div class="col-lg-4 col-md-4">
+                          <div class="col-lg-4 col-md-4" *ngIf="oculto">
                              <label>Migrado</label>
                              <input class="form-control" placeholder="PENDIENTE" name="migrado" type="text" required readonly readonly>
                           </div>
