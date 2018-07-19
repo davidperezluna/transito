@@ -54,6 +54,7 @@ export class NewComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
     this.cfgCasoInsumo.moduloId = this.moduloSelected;
+    this.cfgCasoInsumo.tipo = this.tipoCasoInsumoSelected;
     console.log(this.cfgCasoInsumo);
     this._CfgCasoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
       response => {
