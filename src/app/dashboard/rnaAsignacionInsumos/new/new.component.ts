@@ -4,7 +4,7 @@ import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
-import { CasoInsumoService } from '../../../services/casoInsumo.service';
+import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import {RnaInsumoService} from '../../../services/rnaInsumos.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -42,7 +42,7 @@ constructor(
   private _loginService: LoginService,
   private _EmpresaService: EmpresaService,
   private _SedeOperativaService: SedeOperativaService,
-  private _CasoInsumoService: CasoInsumoService,
+  private _CasoInsumoService: CfgCasoInsumoService,
   private _RnaInsumoService: RnaInsumoService,
   ){}
 

@@ -3,7 +3,7 @@ import {rnaAsignacionInsumos} from '../rnaAsignacionInsumos.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
-import { CasoInsumoService } from '../../../services/casoInsumo.service';
+import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -33,7 +33,7 @@ constructor(
   private _loginService: LoginService,
   private _EmpresaService: EmpresaService,
   private _SedeOperativaService: SedeOperativaService,
-  private _CasoInsumoService: CasoInsumoService,
+  private _CasoInsumoService: CfgCasoInsumoService,
   ){}
 
   ngOnInit(){ 
