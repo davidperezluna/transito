@@ -8,11 +8,11 @@ import swal from 'sweetalert2';
 
 
 @Component({
-    selector: 'appRnma-traspaso-indeterminada',
-    templateUrl: './newRnma.traspasoIndeterminada.html',
+    selector: 'appRnrs-traspaso-indeterminada',
+    templateUrl: './newRnrs.traspasoIndeterminada.html',
     providers: [DatePipe]
 })
-export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
+export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
   @Output() readyTramite = new EventEmitter<any>();
   @Input() vehiculo: any = null;
   @Input() factura: any = null;
