@@ -198,7 +198,7 @@
                         <div class="tab-pane" id="sustrato" role="tabpanel"> 
                             <appRnma-sustrato [factura] = "factura"  [ciudadanoPropietario] = "ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-sustrato>
                         </div>
-
+ 
                         <!-- <div class="tab-pane" id="1" role="tabpanel"> 
                             <appRnma-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-rematricula>
                         </div> -->
@@ -288,11 +288,15 @@
 
                         </div>
 
-                        <div class="tab-pane" id="59" role="tabpanel"> 
+                        <div class="tab-pane" id="58" role="tabpanel"> 
                             <appRnma-cambioConjunto [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambioConjunto>
                         </div>
 
-                        <div class="tab-pane" id="60" role="tabpanel"> 
+                        <div class="tab-pane" id="59" role="tabpanel"> 
+                            <appRnma-certificadoTradicion [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-certificadoTradicion>
+                       </div>
+
+                        <!-- <div class="tab-pane" id="61" role="tabpanel"> 
                             <appRnma-traspaso-indeterminada [vehiculo] = "vehiculo" [factura] = "factura" [ciudadano] = "ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-traspaso-indeterminada>
                         </div>
 
