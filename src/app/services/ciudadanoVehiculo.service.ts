@@ -75,6 +75,17 @@ export class CiudadanoVehiculoService {
 
 	}
 
+	showPropietarioByIdVehiculo(token,id){
+		
+		let params = "authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/show/propietario/vehiculo/"+id, params, {headers: headers})
+							  .map(res => res.json());
+
+	}
+
+	
+
 	
 	editLicenciaTransito(datos,token){
 
