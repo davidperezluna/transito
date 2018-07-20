@@ -81,6 +81,7 @@ import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
 import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
+import { LimitacionRoutes } from './limitacion/limitacion.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
@@ -158,6 +159,8 @@ export const DashboardRoutes: Route[] = [
         //...MsvTCAsignacionRoutes, 
         ...ConceptoParametroRoutes,  
         ...RnmaRegistroMaquinariaRoutes,
-        ...rnaAsignacionInsumosRoutes    ]
+        ...rnaAsignacionInsumosRoutes ,
+        ...LimitacionRoutes,
+       ]
     }
 ];
