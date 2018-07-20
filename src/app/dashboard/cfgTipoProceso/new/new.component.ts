@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Limitacion} from '../limitacion.modelo';
-import {LimitacionService} from '../../../services/cfgLimitacion.service';
+import { CfgTipoProceso } from '../cfgTipoProceso.modelo';
+import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public limitacion: Limitacion;
+  public cfgTipoProceso: CfgTipoProceso;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _LimitacionService: LimitacionService,
+  private _CfgTipoProcesoService: CfgTipoProcesoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.limitacion = new Limitacion(null,null);
+    this.cfgTipoProceso = new CfgTipoProceso(null,null);
 
 
   }
@@ -30,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._LimitacionService.register(this.limitacion,token).subscribe(
+    this._CfgTipoProcesoService.register(this.cfgTipoProceso,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -45,7 +45,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El limitacion '+ this.limitacion.nombre +' ya se encuentra registrado',
+            text: 'El tipo de proceso ' + this.cfgTipoProceso.nombre +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

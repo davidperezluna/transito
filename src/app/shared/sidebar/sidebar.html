@@ -217,6 +217,18 @@
                 SMLMV
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="limitacion"  [ngClass]="{'active' : ( addActive === 'limitacion')}" (click)="addActiveMenu('limitacion')">
+                <i class="fa fa-angle-right"></i>
+                Limitación
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgTipoProceso"  [ngClass]="{'active' : ( addActive === 'cfgTipoProceso')}" (click)="addActiveMenu('cfgTipoProceso')">
+                <i class="fa fa-angle-right"></i>
+                Tipo de Proceso
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level --> 
         </li>
@@ -244,6 +256,11 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="cfgsedeoperativa" [ngClass]="{'active' : ( addActive === 'cfgsedeoperativa')}" (click)="addActiveMenu('cfgsedeoperativa')">
             <i class="fa fa-angle-right"></i> Sede Operativa
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cfgEntidadJudicial" [ngClass]="{'active' : ( addActive === 'cfgEntidadJudicial')}" (click)="addActiveMenu('cfgEntidadJudicial')">
+            <i class="fa fa-angle-right"></i> Entidad Judicial
           </a>
         </li>
         
@@ -361,16 +378,31 @@
             <i class="fa fa-angle-right"></i> Pre-registro maquinaria
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="rnmaTramiteInscripcionLimitacion" [ngClass]="{'active' : ( addActive === 'rnmaTramiteInscripcionLimitacion')}" (click)="addActiveMenu('rnmaTramiteInscripcionLimitacion')">
-            <i class="fa fa-angle-right"></i> Trámite Inscripción Limitación
-          </a>
-        </li>
+
+        
         <li class="nav-item">
           <a class="nav-link" routerLink="tramiteSolicitudRnma" [ngClass]="{'active' : ( addActive === 'tramiteSolicitudRnma')}" (click)="addActiveMenu('tramiteSolicitudRnma')">
             <i class="fa fa-angle-right"></i> Solicitud de tramite
           </a>
         </li>
+
+        <ul class="nav flex-column nav-second-level">
+          <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
+            <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">
+              Tramite Limitación
+              <i class="fa fa-angle-right"></i>
+            </a>
+            <ul class="nav flex-column nav-third-level">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="rnmaTramiteInscripcionLimitacion" [ngClass]="{'active' : ( addActive === 'rnmaTramiteInscripcionLimitacion')}"
+                  (click)="addActiveMenu('rnmaTramiteInscripcionLimitacion')">
+                  <i class="fa fa-angle-right"></i> Inscripción Limitación
+                </a>
+              </li>
+            </ul>
+            <!-- /.nav-third-level -->
+          </li>
+        </ul>
       </ul>
       <!-- /.nav-second-level -->
     </li>
