@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Clase} from '../clase.modelo';
+import {Clase} from '../limitacion.modelo';
 import {ClaseService} from '../../../services/clase.service';
 import {LoginService} from '../../../services/login.service';
 import {ModuloService} from '../../../services/modulo.service';

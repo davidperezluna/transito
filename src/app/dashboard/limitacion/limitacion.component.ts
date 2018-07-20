@@ -8,7 +8,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './clase.component.html'
 })
-export class ClaseComponent implements OnInit {
+export class LimitacionComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
