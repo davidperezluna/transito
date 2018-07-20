@@ -13,12 +13,8 @@ declare var $: any;
 export class ShowAutomotorComponent implements OnInit {
 @Input() vehiculo:any;
 @Output() cerrarForm = new EventEmitter<any>();
-public errorMessage;
-public respuesta;
-public table:any; 
 public pesado;
 public maquinaria;
-public checked:any;
 public sedeOperativa;
 public placa;
 public estado;
@@ -78,7 +74,10 @@ constructor(
     this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token,this.vehiculo.id).subscribe(
       response=>{
                 this.vehiculoDatosTramite = response.data;
-
+                console.log(this.vehiculoDatosTramite);
+                console.log(response.data2);
+                
+        
                 this.vehiculoDatosTramite.forEach(element => {                    
                   if(element.tramiteFactura.tramitePrecio.tramite.id == 7){
                       this.regrabacionMotor = "SI";

@@ -36,8 +36,8 @@
                   <td>{{ registroMaquinaria.vehiculo.combustible.nombre }}</td>
                   <!-- <td>{{ registroMaquinaria.id }}</td> -->
                   <td>
-                    <button (click)="editVehiculo()" class="btn btn-outline-info" type="button" >Editar</button> 
-                    <button (click)="deleteVehiculo(vehiculo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                    <button (click)="editVehiculo(registroMaquinaria)" class="btn btn-outline-info" type="button" >Editar</button> 
+                    <button (click)="deleteMaquinaria(registroMaquinaria.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
                   </td>
                 </tr>
               </tbody>
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit'  (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [registroMaquinaria]="registroMaquinaria" (ready)="ready($event)"></app-edit>
     <app-new-rnmaRegistroMaquinaria *ngIf='formNew' (ready)="ready($event)"></app-new-rnmaRegistroMaquinaria>
 
 </div>

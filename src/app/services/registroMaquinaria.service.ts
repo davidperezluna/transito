@@ -26,9 +26,10 @@ export class RegistroMaquinariaService {
 
 	deleteRegistroMaquinaria(token,id){
 
-		let params = "authorization="+token;
+		let json = JSON.stringify(id);
+		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
+		return this._http.post(this.url+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
@@ -44,6 +45,8 @@ export class RegistroMaquinariaService {
 	editRegistroMaquinaria(registroMaquinaria,token){
 
 		let json = JSON.stringify(registroMaquinaria);
+		console.log(json);
+		
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -55,5 +58,7 @@ export class RegistroMaquinariaService {
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
+
+	
 	
 }
