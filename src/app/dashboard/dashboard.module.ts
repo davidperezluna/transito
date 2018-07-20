@@ -65,6 +65,7 @@ import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicia
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
+import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
 import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
@@ -159,6 +160,7 @@ import {RightsidebarComponent} from '../shared';
       TramiteSolicitudModule,
       TramiteSolicitudRncModule,
       TramiteSolicitudRnmaModule,
+      TramiteSolicitudRnrsModule,
       SustratoModule,
       GestionTransportePublicoModule,
       EmpresaModule,

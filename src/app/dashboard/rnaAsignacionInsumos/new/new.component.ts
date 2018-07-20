@@ -34,7 +34,7 @@ public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
 public frmInsumo:any=true;
-public frmInsumoSelect:any=false;
+public frmInsumoSelect:any=false; 
 
 constructor(
   private datePipe: DatePipe,

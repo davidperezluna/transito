@@ -35,7 +35,7 @@ export class NewRnaComponent implements OnInit {
   public ciudadanosVehiculo=false;
   public isCiudadano=false;
   public isEmpresa=false;
-  public ciudadano: any;
+  public ciudadano: any = false;
   public vehiculoSuccess=false;
   public tipoError=200;
   public error=false;
@@ -115,25 +115,6 @@ constructor(
       let active = true;
       let token = this._loginService.getToken();
      
-      
-      if (this.isMatricula == false) {
-        this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
-          responseCiudadano =>{
-            if (responseCiudadano.status == 'success') {
-              this.ciudadano = responseCiudadano.data.ciudadano;
-              this.factura = response[0].factura;
-  
-            }
-            error => {
-              this.errorMessage = <any>error;
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          }
-        );
-      }
       this.tramitesFactura = response;
       this.tramitesFactura.forEach(tramiteFactura => {
         if (tramiteFactura.realizado == 0) {
@@ -145,11 +126,46 @@ constructor(
         if (tramiteFactura.tramitePrecio.tramite.sustrato) {
           this.sustrato = true;
         }
+        if(tramiteFactura.tramitePrecio.tramite.id == 1){
+          this.isMatricula = true;
+        }
       });
 
       if (active) {
         this.isTramites = false;
       }
+
+      if (this.tramiteSolicitud.solicitanteId) {
+        this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
+          responseCiudadano =>{
+            if (responseCiudadano.status == 'success') {
+                this.ciudadano = responseCiudadano.data.ciudadano;
+                this.factura = response[0].factura;
+            }
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          }
+        );
+      }else{
+        if(this.isMatricula){
+          this.factura = response[0].factura;
+        }else{
+          swal({
+            title: 'Error!',
+            text: 'El vehiculo no tiene propietarios por favor facture matricula inicial',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+      }
+      
+
+      
       
       error => {
         this.errorMessage = <any>error;
