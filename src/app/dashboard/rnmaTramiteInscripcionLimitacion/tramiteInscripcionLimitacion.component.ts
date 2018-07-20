@@ -6,9 +6,9 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgPlaca.component.html'
+  templateUrl: './tramiteInscripcionLimitacion.component.html'
 })
-export class CfgPlacaComponent implements OnInit {
+export class TramiteInscripcionLimitacionComponent implements OnInit {
   public errorMessage;
   public id;
   public respuesta;

@@ -1,26 +1,26 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {ClaseService} from '../../services/clase.service';
+import {LimitacionService} from '../../services/limitacion.service';
 import {LoginService} from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './clase.component.html'
+  templateUrl: './limitacion.component.html'
 })
-export class ClaseComponent implements OnInit {
+export class LimitacionComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public clases;
+	public limitaciones;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public clase:any; 
+  public limitacion:any; 
 
   constructor(
-		private _ClaseService: ClaseService,
+		private _LimitacionService: LimitacionService,
 		private _loginService: LoginService,
     ){}
     
@@ -39,9 +39,9 @@ export class ClaseComponent implements OnInit {
       ) {
       }
     })
-		this._ClaseService.getClase().subscribe(
+		this._LimitacionService.getLimitacion().subscribe(
 				response => {
-          this.clases = response.data;
+          this.limitaciones = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -86,7 +86,7 @@ export class ClaseComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteClase(id:any){
+  deleteLimitacion(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -100,7 +100,7 @@ export class ClaseComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ClaseService.deleteClase(token,id).subscribe(
+        this._LimitacionService.deleteLimitacion(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -127,8 +127,8 @@ export class ClaseComponent implements OnInit {
     })
   }
 
-  editClase(clase:any){
-    this.clase = clase;
+  editLimitacion(limitacion:any){
+    this.limitacion = limitacion;
     this.formEdit = true;
     this.formIndex = false;
   }

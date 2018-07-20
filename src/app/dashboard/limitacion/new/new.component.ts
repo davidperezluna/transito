@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Clase} from '../clase.modelo';
-import {ClaseService} from '../../../services/clase.service';
+import {Limitacion} from '../limitacion.modelo';
+import {LimitacionService} from '../../../services/limitacion.service';
 import {LoginService} from '../../../services/login.service';
 import {ModuloService} from '../../../services/modulo.service';
 import swal from 'sweetalert2';
@@ -11,20 +11,20 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public clase: Clase;
+public limitacion: Limitacion;
 public errorMessage;
 public respuesta;
 public modulos:any;
 public moduloSelected:any;
 
 constructor(
-  private _ClaseService: ClaseService,
+  private _LimitacionService: LimitacionService,
   private _loginService: LoginService,
   private _moduloService: ModuloService,
   ){}
 
   ngOnInit() {
-    this.clase = new Clase(null,null,null,null);
+    this.limitacion = new Limitacion(null,null,null,null);
 
     this._moduloService.getModuloSelect().subscribe(
       response => {
@@ -46,9 +46,9 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.clase.moduloId = this.moduloSelected;
+    this.limitacion.moduloId = this.moduloSelected;
 
-		this._ClaseService.register(this.clase,token).subscribe(
+		this._LimitacionService.register(this.limitacion,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -63,7 +63,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El clase '+ this.clase.nombre +' ya se encuentra registrado',
+            text: 'El limitacion '+ this.limitacion.nombre +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

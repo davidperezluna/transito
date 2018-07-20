@@ -1,17 +1,16 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { BancoService } from '../../../../services/banco.service';
-import { CfgPlaca } from '../../../cfgPlaca/cfgPlaca.modelo';
-import { LoginService } from '../../../../services/login.service';
-import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
-import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
+import { TramiteFacturaService } from '../../services/tramiteFactura.service';
+import { BancoService } from '../../services/banco.service';
+import { CfgPlaca } from '../cfgPlaca/cfgPlaca.modelo';
+import { LoginService } from '../../services/login.service';
+import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
+import { VehiculoService } from '../../services/vehiculo.service';
+import { VehiculoAcreedorService } from '../../services/vehiculoAcreedor.service';
+import { CiudadanoService } from '../../services/ciudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { EmpresaService } from "../../services/empresa.service";
+import { TipoIdentificacionService } from '../../services/tipoIdentificacion.service';
 
 
 import swal from 'sweetalert2';

@@ -1,4 +1,4 @@
-export class Clase{
+export class Limitacion{
 	constructor(
 		public id:number,
 		public moduloId:number,
