@@ -39,6 +39,7 @@ public isErrorCiudadano: any;
 public isExistCiudadano:boolean=false;
 public isErrorVehiculo: any;
 public isExistVehiculo:boolean=false;
+public propietario:boolean=false;
 public identificacion:any;
 public tipoIdentificacionSelected:any;
 public ciudadano:any;
@@ -243,7 +244,7 @@ constructor(
     
 
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
-      response => {
+      response => { 
         
         if (response.code == 200 ) {
           this.msj = 'vehiculo encontrado';
@@ -251,6 +252,7 @@ constructor(
           this.isExistVehiculo = true;
           this.vehiculo=response.data[0].vehiculo;
           this.factura.vehiculoId = this.vehiculo.id;
+          this.propietario = true;
           swal.close();
         }
         if (response.code == 400 ) {
@@ -260,9 +262,15 @@ constructor(
           this.vehiculo=response.data;
           this.factura.vehiculoId = this.vehiculo.id;
           swal.close();
+          swal({
+            title: 'Sin propietarios!',
+            text: 'Necesita facturar matricula inicial para este vehiculo',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
         }
         if(response.code == 401){
-          console.log(response);
+          
           this.msj = 'vehiculo no se encuentra en la base de datos';
           this.isErrorVehiculo = true;
           this.isExistVehiculo = false;
@@ -301,28 +309,63 @@ constructor(
 
   btnNewTramite(){
     let token = this._loginService.getToken();
-    this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
-      response => {
-        this.tramitePrecio = response.data;
-        this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
-        this.tramitesValor.push(
-          {
-            'nombre':this.tramitePrecio.nombre,
-            'valor':this.tramitePrecio.valorTotal
+
+    if (!this.propietario) {
+      this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
+        response => {
+          this.tramitePrecio = response.data;
+          if (this.tramitePrecio.tramite.id == 1) {
+            this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
+            this.tramitesValor.push(
+              {
+                'nombre':this.tramitePrecio.nombre,
+                'valor':this.tramitePrecio.valorTotal
+              }
+            )
+          }else{
+            swal({
+              title: 'Sin propietarios!',
+              text: 'Necesita facturar matricula inicial para este vehiculo',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
           }
-        )
-        console.log(this.factura);
-
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
+  
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
-      }
-    );
+      );
+    
+    }else{
+      this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
+        response => {
+          this.tramitePrecio = response.data;
+          this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
+          this.tramitesValor.push(
+            {
+              'nombre':this.tramitePrecio.nombre,
+              'valor':this.tramitePrecio.valorTotal
+            }
+          )
+          console.log(this.factura);
+  
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
   }
   deleteTramiteValor(tramiteValor){
     this.factura.valorBruto = this.factura.valorBruto - parseInt(tramiteValor.valor);
