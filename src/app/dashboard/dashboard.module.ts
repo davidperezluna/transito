@@ -171,6 +171,8 @@ import {RightsidebarComponent} from '../shared';
       rnaRegistroInsumosModule,
       RnmaRegistroMaquinariaModule,
       rnaAsignacionInsumosModule,
+      LimitacionModule,
+      TramiteInscripcionLimitacionModule,
       
       //MsvTCAsignacionModule,
     ],
