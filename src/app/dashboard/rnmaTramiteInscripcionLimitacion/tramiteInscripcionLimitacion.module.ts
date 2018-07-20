@@ -17,4 +17,4 @@ import {SelectModule} from 'angular2-select';
     providers:[LimitacionService]
 })
 
-export class LimitacionModule { }
+export class TramiteInscripcionLimitacionModule { }
