@@ -47,6 +47,11 @@ export class NewRnrsComponent implements OnInit {
   public sustrato=false;
   public isTramites:boolean=true;
   public isMatricula:boolean=false;
+  public apoderadoSelect=false;
+  public frmApoderado=false;
+  public identificacionApoderado=false;
+  public apoderado:any=false;
+  public apoderadoEncontrado=1
   
   public cantidadSustrato = 1;
 
@@ -61,7 +66,7 @@ constructor(
 
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null);
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null,null);
     
     
   }
@@ -104,53 +109,76 @@ constructor(
   }
 
   changedFactura(id){
-
-    this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
-    response => {
-      let active = true;
-      let token = this._loginService.getToken();
-      if (this.isMatricula == false) {
-        this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
-          responseCiudadano =>{
-            if (responseCiudadano.status == 'success') {
-              this.ciudadano = responseCiudadano.data.ciudadano;
-              this.factura = response[0].factura;  
-            }
-            error => {
-              this.errorMessage = <any>error;
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
+    if (id) {
+      this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
+      response => {
+        this.isMatricula=false;
+        this.isTramites = true;
+        let active = true;
+        let token = this._loginService.getToken();
+       
+        this.tramitesFactura = response;
+        this.tramitesFactura.forEach(tramiteFactura => {
+          if (tramiteFactura.realizado == 0) {
+            active = false;
+          }else{
+            //consultar tramite solicitud con el id de tramite factura
+            //hacer un push array para extraer todas las solicitudes en estado realizado
+          }
+          if (tramiteFactura.tramitePrecio.tramite.sustrato) {
+            this.sustrato = true;
+          }
+          if(tramiteFactura.tramitePrecio.tramite.id == 1){
+            this.isMatricula = true;
+          }else{
+            this.isMatricula = false;
+          }
+        });
+        
+        if (active) {
+          this.isTramites = false;
+        }
+        if (this.tramiteSolicitud.solicitanteId) {
+          this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
+            responseCiudadano =>{
+              if (responseCiudadano.status == 'success') {
+                this.ciudadano = responseCiudadano.data.ciudadano;
+                this.factura = response[0].factura;
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
               }
             }
-          }
-        );
-      }
-      this.tramitesFactura = response;
-      this.tramitesFactura.forEach(tramiteFactura => {
-        if (tramiteFactura.realizado == 0) {
-          active = false;
+          );
         }else{
-          //consultar tramite solicitud con el id de tramite factura
-          //hacer un push array para extraer todas las solicitudes en estado realizado
+          console.log(this.isMatricula);
+          
+          if(this.isMatricula){
+            this.factura = response[0].factura;
+          }else{
+            this.factura = false;
+            swal({
+              title: 'Error!',
+              text: 'El vehiculo no tiene propietarios por favor facture matricula inicial',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
         }
-        if (tramiteFactura.tramitePrecio.tramite.sustrato) {
-          this.sustrato = true;
+        
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
       });
-
-      if (active) {
-        this.isTramites = false;
-      }
-      
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    });
+    }
   }
   
   onKeyValidateVehiculo(){
@@ -279,13 +307,14 @@ constructor(
     });
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
+    this.tramiteSolicitud.ciudadanoId=this.apoderado.id;
 
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
         this.respuesta = response;
         console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (this.respuesta.status == 'success') { 
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',
@@ -367,6 +396,49 @@ constructor(
           })
 
           
+  }
+
+   agregarApoderado(){
+    this.frmApoderado = true;
+  }
+
+  btnNewApoderado(){
+    this.frmApoderado = false;
+    this.apoderado = this.apoderadoSelect;
+    this.apoderadoEncontrado = 1;
+  }
+
+  onKeyApoderado(){
+    let token = this._loginService.getToken();
+    let identificacion = {
+  'numeroIdentificacion' : this.identificacionApoderado,
+    };
+    this._ciudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+        response => {
+            this.respuesta = response; 
+            if(this.respuesta.status == 'success'){
+                this.apoderadoSelect = this.respuesta.data;
+                this.apoderadoEncontrado= 2;
+                // this.ciudadanoNew = false;
+        }else{
+            this.apoderadoEncontrado=3;
+            // this.ciudadanoNew = true;
+        }
+        error => {
+                this.errorMessage = <any>error;
+            
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+    }); 
+}
+
+  cerrarApoderado(){
+    this.frmApoderado = false;
+    this.apoderado = false; 
+    this.apoderadoEncontrado = 1; 
   }
 
 }

@@ -301,6 +301,7 @@
         </li>
       </ul>
         <!-- /.nav-second-level --> 
+        </ul>
      </li>
      <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnc')}">
         <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnc')">
@@ -338,16 +339,7 @@
               <i class="fa fa-angle-right"></i> Pre-registro
               </a>
            </li>
-           <li class="nav-item">
-              <a class="nav-link" routerLink="rnaRegistroInsumos" [ngClass]="{'active' : ( addActive === 'rnaRegistroInsumos')}" (click)="addActiveMenu('rnaRegistroInsumos')">
-              <i class="fa fa-angle-right"></i> Registro Insumos
-              </a>
-           </li>
-           <li class="nav-item">
-              <a class="nav-link" routerLink="rnaAsignacionInsumos" [ngClass]="{'active' : ( addActive === 'rnaAsignacionInsumos')}" (click)="addActiveMenu('rnaAsignacionInsumos')">
-              <i class="fa fa-angle-right"></i> Asignación Insumos
-              </a>
-           </li>
+           
            <li class="nav-item">
               <a class="nav-link" routerLink="pre-asignacion-placa" [ngClass]="{'active' : ( addActive === 'pre-asignacion-placa')}" (click)="addActiveMenu('pre-asignacion-placa')">
               <i class="fa fa-angle-right"></i> Pre-asignación-placa  
@@ -411,6 +403,50 @@
       <!-- /.nav-second-level -->
     </li>
 
+    <!-- /menu RNRS -->
+           <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnrs')}">
+        <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnrs')">
+        RNRS
+        <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-second-level ">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="rnrsRegistroMaquinaria" [ngClass]="{'active' : ( addActive === 'rnrsRegistroMaquinaria')}" (click)="addActiveMenu('rnrsRegistroMaquinaria')">
+            <i class="fa fa-angle-right"></i> Pre-registro maquinaria
+          </a>
+        </li>
+
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tramiteSolicitudRnrs" [ngClass]="{'active' : ( addActive === 'tramiteSolicitudRnrs')}" (click)="addActiveMenu('tramiteSolicitudRnrs')">
+            <i class="fa fa-angle-right"></i> Solicitud de tramite
+          </a>
+        </li>
+
+        <ul class="nav flex-column nav-second-level">
+          <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
+            <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">
+              Tramite Limitación
+              <i class="fa fa-angle-right"></i>
+            </a>
+            <ul class="nav flex-column nav-third-level">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="rnrsTramiteInscripcionLimitacion" [ngClass]="{'active' : ( addActive === 'rnrsTramiteInscripcionLimitacion')}"
+                  (click)="addActiveMenu('rnrsTramiteInscripcionLimitacion')">
+                  <i class="fa fa-angle-right"></i> Inscripción Limitación
+                </a>
+              </li>
+            </ul>
+            <!-- /.nav-third-level -->
+          </li>
+        </ul>
+      </ul>
+      <!-- /.nav-second-level -->
+    </li>
+
+    <!-- /FIN menu RNRS -->
+     
+
     <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-rpccc' }"> 
     	<a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-rpccc')">
         RPCCC<i class="fa fa-angle-down "></i>
@@ -464,6 +500,16 @@
               <i class="fa fa-angle-right"></i> Caso Insumo
               </a>
            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="rnaRegistroInsumos" [ngClass]="{'active' : ( addActive === 'rnaRegistroInsumos')}" (click)="addActiveMenu('rnaRegistroInsumos')">
+                <i class="fa fa-angle-right"></i> Registro Insumos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="rnaAsignacionInsumos" [ngClass]="{'active' : ( addActive === 'rnaAsignacionInsumos')}" (click)="addActiveMenu('rnaAsignacionInsumos')">
+                <i class="fa fa-angle-right"></i> Asignación Insumos
+                </a>
+            </li>
         </ul>
         <!-- /.nav-second-level -->
      </li>

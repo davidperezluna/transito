@@ -92,10 +92,10 @@ export class RnaPreregistroComponent implements OnInit {
       }
   }
 
-  editRnaPreregistro(vehiculo:any){
+  editVehiculo(vehiculo:any){
     this.vehiculo = vehiculo;
-    this.formEdit = true;
     this.formIndex = false;
+    this.formEdit = true;
   }
 
 }

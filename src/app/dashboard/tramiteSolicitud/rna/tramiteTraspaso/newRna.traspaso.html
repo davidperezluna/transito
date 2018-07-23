@@ -22,14 +22,14 @@
                         <!--Buscardor Identificador/Nit -->
                         <div class="col-xs-12 col-lg-12 row" >
                             <!--Cuando es de tipo propio -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="tipoPropiedadSelected == 2">
-                                <br>
-                                <label class="custom-control custom-checkbox" for="sustrato" >
-                                    <input type="checkbox"  [(ngModel)]="datos.solidario" name="solidario" class="custom-control-input"  id="sustrato" required>
-                                    <span class="custom-control-indicator"></span> 
-                                    <span class="custom-control-description">solidario</span>
-                                </label>
+                            <div class="col-xs-12 col-lg-12" >
+                                <br> 
+                                <div class="custom-control custom-checkbox"  >
+                                    <input  [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
+                                    <label class="custom-control-label" for="solidario">solidario</label>
+                                </div>
                             </div>
+
                             <!-- cuando es de tipo leasing -->
                             <div class="col-xs-12 col-lg-12" *ngIf="tipoPropiedadSelected == 1 && propietario">
                                 <h6>Propietario</h6>

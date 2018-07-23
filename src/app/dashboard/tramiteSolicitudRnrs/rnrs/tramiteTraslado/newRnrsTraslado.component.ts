@@ -5,11 +5,11 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
-import swal from 'sweetalert2';
+import swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-new-trasladoRnrs',
-  templateUrl: './newTraslado.component.html'
+  templateUrl: './newRnrsTraslado.component.html'  
 })
 export class NewTrasladoComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();

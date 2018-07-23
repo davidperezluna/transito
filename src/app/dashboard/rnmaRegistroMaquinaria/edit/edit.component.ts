@@ -248,13 +248,13 @@ constructor(
     this.registroMaquinaria.vehiculoCombustibleId = this.combustibleSelected;
 
     this.registroMaquinaria.condicionSelected = this.condicionSelected;
+    this.registroMaquinaria.rodajeSelected = this.rodajeSelected;
+    this.registroMaquinaria.tipoCabinaSelected = this.tipoCabinaSelected;
     // this.registroMaquinaria.fechaIngreso = this.fechaIngreso;
     // this.registroMaquinaria.pesoBruto = this.pesoBruto;
     // this.registroMaquinaria.cargaUtilMaxima = this.cargaUtilMaxima;
-    this.registroMaquinaria.rodajeSelected = this.rodajeSelected;
     // this.registroMaquinaria.numeroEjes = this.numeroEjes;
     // this.registroMaquinaria.numeroLlantas = this.numeroLlantas;
-    this.registroMaquinaria.tipoCabinaSelected = this.tipoCabinaSelected;
     // this.registroMaquinaria.altoTotal = this.altoTotal;
     // this.registroMaquinaria.largoTotal = this.largoTotal;
     // this.registroMaquinaria.anchoTotal = this.anchoTotal;
@@ -263,14 +263,6 @@ constructor(
     
     var html = 'los datos de la maquinaria sera editados !<br>';
     
-              //  'Placa: <b>'+this.registroMaquinaria.vehiculoPlaca+'</b><br>'+
-              //  'Condicon ingreso: <b>'+this.registroMaquinaria.condicionSelected+'</b><br>'+
-              //  'Motor: <b>'+this.registroMaquinaria.vehiculoMotor+'</b><br>'+
-              //  'Serie: <b>'+this.registroMaquinaria.vehiculoSerie+'</b><br>'+
-              //  'Chasis: <b>'+this.registroMaquinaria.vehiculoChasis+'</b><br>'+
-              //  'Fecha ingreso: <b>'+this.registroMaquinaria.fechaIngreso+'</b><br>';
-               
-
    swal({
       title: 'Actualización de maquinaria!',
       type: 'warning',
@@ -326,75 +318,20 @@ constructor(
 
 
    changedPaisNacimiento(id){
-  // if (id) {
-  //   this.paisNacimientoSelected = id;
-  //   this._departamentoService.getDepartamentoPorPaisSelect(this.paisNacimientoSelected).subscribe(
-  //     response => {
-  //       this.departamentosNacimiento = response;
-  //     },
-  //     error => {
-  //       this.errorMessage = <any>error;
-  //       if (this.errorMessage != null) {
-  //         console.log(this.errorMessage);
-  //         alert('Error en la petición');
-  //       }
-  //     }
-  //   );
-  // }
-
+  
   }
 
   changedDepartamentoNacimiento(id){
-    // if (id) {
-    //   this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoNacimientoSelected).subscribe(
-    //     response => {
-    //       this.municipiosNacimiento = response;
-
-    //     },
-    //     error => {
-    //       this.errorMessage = <any>error;
-    //       if (this.errorMessage != null) {
-    //         console.log(this.errorMessage);
-    //         alert('Error en la petición');
-    //       }
-    //     }
-    //   );
-    // }
+  
   
   }
 
   changedPaisResidencia(id){
-    // if (id) {
-    //   this._departamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
-    //     response => {
-    //       this.departamentosResidencia = response;
-    //     },
-    //     error => {
-    //       this.errorMessage = <any>error;
-    //       if (this.errorMessage != null) {
-    //         console.log(this.errorMessage);
-    //         alert('Error en la petición');
-    //       }
-    //     }
-    //   );
-    // }
+  
   }
 
   changedDepartamentoResidencia(id){
-  //   if (id) {
-  //     this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoResidenciaSelected).subscribe(
-  //       response => {
-  //         this.municipiosResidencia = response;
-
-  //       },
-  //       error => {
-  //         this.errorMessage = <any>error;
-  //         if (this.errorMessage != null) {
-  //           alert('Error en la petición');
-  //         }
-  //       }
-  //     );
-  //   }
+ 
   
   }
 

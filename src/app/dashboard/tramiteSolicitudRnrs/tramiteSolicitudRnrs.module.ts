@@ -32,7 +32,7 @@ import { NewRnrsTransformacionComponent } from './Rnrs/tramiteTransformacion/new
 import { NewRnrsCambioConjuntoComponent } from './Rnrs/tramiteCambioConjunto/newRnrs.cambioConjunto.component';
 import { NewRnrsRadicadoCuentaComponent } from './Rnrs/tramiteRadicadoCuenta/newRnrs.radicadoCuenta.component';
 import { NewRnrsRegistroMaquinariaComponent } from './Rnrs/tramiteRegistroMaquinaria/newRnrs.registroMaquinaria.component';
-import { NewTrasladoComponent } from './Rnrs/tramiteTraslado/newTraslado.component';
+import { NewTrasladoComponent } from './Rnrs/tramiteTraslado/newRnrsTraslado.component';
 import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
 import { NewRnrsTraspasoIndeterminadaComponent } from './Rnrs/tramiteTraspasoIndeterminada/newRnrs.traspasoIndeterminada.component';
 import { EditComponent } from './edit/edit.component';
