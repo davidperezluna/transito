@@ -102,7 +102,7 @@ export class NewRnaTraspasoComponent implements OnInit {
             response => {
                 this.datos.tramiteFactura = 2;
                 this.readyTramite.emit(this.datos);
-            },
+            }, 
             error => {
               this.errorMessage = <any>error;
     
