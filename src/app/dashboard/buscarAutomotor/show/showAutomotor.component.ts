@@ -2,6 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { LoginService } from '../../../services/login.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service'
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 declare var $: any;
@@ -50,7 +51,6 @@ public vehiculoMaquinaria = "Maquinaria";
 public vehiculoPesado = "Pesado";
 public tipoVehiculo: any;
 public vehiculoDatosTramite: any;
-
 public oculto = false;
 public tipoRegrabar;
 
@@ -58,6 +58,7 @@ constructor(
   private _loginService: LoginService,
   private _VehiculoService: VehiculoService,
   private _TramiteSolicitudService: TramiteSolicitudService,
+  private _CiudadanoVehiculoService: CiudadanoVehiculoService,
   
   ){}
 
@@ -71,12 +72,14 @@ constructor(
       this.estado = "Activo";
     }
 
+    this._CiudadanoVehiculoService.showPropietarioByIdVehiculo(token,this.vehiculo.id).subscribe(
+      response=>{
+                this.numeroTarjeta = response.data.licenciaTransito;                
+      }
+    );
     this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token,this.vehiculo.id).subscribe(
       response=>{
-                this.vehiculoDatosTramite = response.data;
-                console.log(this.vehiculoDatosTramite);
-                console.log(response.data2);
-                
+                this.vehiculoDatosTramite = response.data;             
         
                 this.vehiculoDatosTramite.forEach(element => {                    
                   if(element.tramiteFactura.tramitePrecio.tramite.id == 7){

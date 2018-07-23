@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TramiteInscripcionLimitacionComponent } from './tramiteInscripcionLimitacion.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { LimitacionService } from '../../services/limitacion.service';
+import { LimitacionService } from '../../services/cfgLimitacion.service';
 
 // import { NewComponent } from './new/new.component';
 // import { EditComponent } from './edit/edit.component';
