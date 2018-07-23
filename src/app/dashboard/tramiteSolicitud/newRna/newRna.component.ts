@@ -35,7 +35,7 @@ export class NewRnaComponent implements OnInit {
   public ciudadanosVehiculo=false;
   public isCiudadano=false;
   public isEmpresa=false;
-  public ciudadano: any;
+  public ciudadano: any = false;
   public vehiculoSuccess=false;
   public tipoError=200;
   public error=false;
@@ -45,13 +45,13 @@ export class NewRnaComponent implements OnInit {
   public tramiteMatriculaInicial=false;
   public tramite=false;
   public sustrato=false;
+  public isTramites:boolean=true;
+  public isMatricula:boolean=false;
+  public apoderadoSelect=false;
+  public apoderadoEncontrado=1;
   public frmApoderado=false;
   public identificacionApoderado=false;
   public apoderado:any=false;
-  public apoderadoSelect=false;
-  public isTramites:boolean=true;
-  public isMatricula:boolean=false;
-  public apoderadoEncontrado=1;
   
   public cantidadSustrato = 1;
 
@@ -109,56 +109,75 @@ constructor(
   }
 
   changedFactura(id){
-    this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
-    response => {
-      
-      let active = true;
-      let token = this._loginService.getToken();
-     
-      
-      if (this.isMatricula == false) {
-        this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
-          responseCiudadano =>{
-            if (responseCiudadano.status == 'success') {
-              this.ciudadano = responseCiudadano.data.ciudadano;
-              this.factura = response[0].factura;
-  
-            }
-            error => {
-              this.errorMessage = <any>error;
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
+    if (id) {
+      this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
+      response => {
+        this.isMatricula=false;
+        let active = true;
+        let token = this._loginService.getToken();
+       
+        this.tramitesFactura = response;
+        this.tramitesFactura.forEach(tramiteFactura => {
+          if (tramiteFactura.realizado == 0) {
+            active = false;
+          }else{
+            //consultar tramite solicitud con el id de tramite factura
+            //hacer un push array para extraer todas las solicitudes en estado realizado
+          }
+          if (tramiteFactura.tramitePrecio.tramite.sustrato) {
+            this.sustrato = true;
+          }
+          if(tramiteFactura.tramitePrecio.tramite.id == 1){
+            this.isMatricula = true;
+          }else{
+            this.isMatricula = false;
+          }
+        });
+        
+        if (active) {
+          this.isTramites = false;
+        }
+        if (this.tramiteSolicitud.solicitanteId) {
+          this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
+            responseCiudadano =>{
+              if (responseCiudadano.status == 'success') {
+                this.ciudadano = responseCiudadano.data.ciudadano;
+                this.factura = response[0].factura;
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
               }
             }
-          }
-        );
-      }
-      this.tramitesFactura = response;
-      this.tramitesFactura.forEach(tramiteFactura => {
-        if (tramiteFactura.realizado == 0) {
-          active = false;
+          );
         }else{
-          //consultar tramite solicitud con el id de tramite factura
-          //hacer un push array para extraer todas las solicitudes en estado realizado
+          console.log(this.isMatricula);
+          
+          if(this.isMatricula){
+            this.factura = response[0].factura;
+          }else{
+            this.factura = false;
+            swal({
+              title: 'Error!',
+              text: 'El vehiculo no tiene propietarios por favor facture matricula inicial',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
         }
-        if (tramiteFactura.tramitePrecio.tramite.sustrato) {
-          this.sustrato = true;
+        
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
       });
-
-      if (active) {
-        this.isTramites = false;
-      }
-      
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    });
+    }
   }
   
   onKeyValidateVehiculo(){
@@ -294,7 +313,7 @@ constructor(
       response => {
         this.respuesta = response;
         console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (this.respuesta.status == 'success') { 
           swal({
             title: 'Perfecto!',
             text: 'El registro se ha registrado con exito',

@@ -1,26 +1,26 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {LimitacionService} from '../../services/cfgLimitacion.service';
+import { CfgTipoProcesoService } from '../../services/cfgTipoProceso.service';
 import {LoginService} from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './limitacion.component.html'
+  templateUrl: './cfgTipoProceso.component.html'
 })
-export class LimitacionComponent implements OnInit {
+export class CfgTipoProcesoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public limitaciones;
+  public cfgTipoProcesos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public limitacion:any; 
+  public cfgTipoProceso:any; 
 
   constructor(
-		private _LimitacionService: LimitacionService,
+    private _CfgTipoProcesoService: CfgTipoProcesoService,
 		private _loginService: LoginService,
     ){}
     
@@ -39,9 +39,9 @@ export class LimitacionComponent implements OnInit {
       ) {
       }
     })
-		this._LimitacionService.getLimitacion().subscribe(
+    this._CfgTipoProcesoService.getTipoProceso().subscribe(
 				response => {
-          this.limitaciones = response.data;
+          this.cfgTipoProcesos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -86,7 +86,7 @@ export class LimitacionComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteLimitacion(id:any){
+  deleteTipoProceso(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -100,7 +100,7 @@ export class LimitacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._LimitacionService.deleteLimitacion(token,id).subscribe(
+        this._CfgTipoProcesoService.deleteTipoProceso(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -127,8 +127,8 @@ export class LimitacionComponent implements OnInit {
     })
   }
 
-  editLimitacion(limitacion:any){
-    this.limitacion = limitacion;
+  editTipoProceso(cfgTipoProceso:any){
+    this.cfgTipoProceso = cfgTipoProceso;
     this.formEdit = true;
     this.formIndex = false;
   }

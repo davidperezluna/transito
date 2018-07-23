@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LimitacionComponent } from './limitacion.component';
+import { CfgTipoProcesoComponent } from './cfgTipoProceso.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { LimitacionService } from '../../services/cfgLimitacion.service';
+import { CfgTipoProcesoService } from '../../services/cfgTipoProceso.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -12,9 +12,9 @@ import {SelectModule} from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [LimitacionComponent,NewComponent,EditComponent],
-    exports: [LimitacionComponent, NewComponent,EditComponent],
-    providers:[LimitacionService]
+    declarations: [CfgTipoProcesoComponent,NewComponent,EditComponent],
+    exports: [CfgTipoProcesoComponent, NewComponent,EditComponent],
+    providers: [CfgTipoProcesoService]
 })
 
-export class LimitacionModule { }
+export class CfgTipoProcesoModule { }

@@ -2,7 +2,7 @@
   <div  class="row align-items-center justify-content-between">
     <div class="col-11 col-sm-12 page-title">
       <h3>Limitacion</h3>
-      <p>aquí podrás visualizar las limitaciones inscritas e inscribir nuevas</p>
+      <p>aquí podrás visualizar los tipos de proceso inscritas e inscribir nuevas</p>
     </div>
     <div class="col text-right ">
       <div class="btn-group pull-right">
@@ -15,7 +15,7 @@
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Limitaciones <small>Registradas</small></h5>
+            <h5 class="card-title">Tipos de Proceso <small>Registrados</small></h5>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -27,11 +27,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let limitacion of limitaciones; let i = index">
-                  <td >{{limitacion.id}}</td>
-                  <td >{{limitacion.nombre}}</td>
-                  <td><button (click)="editLimitacion(limitacion)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteLimitacion(limitacion.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
+                <tr class="odd" *ngFor="let cfgTipoProceso of cfgTipoProcesos; let i = index">
+                  <td >{{cfgTipoProceso.id}}</td>
+                  <td >{{cfgTipoProceso.nombre}}</td>
+                  <td><button (click)="editTipoProceso(cfgTipoProceso)" class="btn btn-outline-info" type="button">Editar</button> 
+                    <button (click)="deleteTipoProceso(cfgTipoProceso.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>
@@ -40,6 +40,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [limitacion]="limitacion" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [cfgTipoProceso]="cfgTipoProceso" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

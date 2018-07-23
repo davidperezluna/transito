@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LimitacionComponent } from './limitacion.component';
+import { CfgEntidadJudicialComponent } from './cfgEntidadJudicial.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { LimitacionService } from '../../services/cfgLimitacion.service';
+import { CfgEntidadJudicialService } from '../../services/cfgEntidadJudicial.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -12,9 +12,9 @@ import {SelectModule} from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [LimitacionComponent,NewComponent,EditComponent],
-    exports: [LimitacionComponent, NewComponent,EditComponent],
-    providers:[LimitacionService]
+    declarations: [CfgEntidadJudicialComponent,NewComponent,EditComponent],
+    exports: [CfgEntidadJudicialComponent, NewComponent,EditComponent],
+    providers: [CfgEntidadJudicialService]
 })
 
-export class LimitacionModule { }
+export class CfgEntidadJudicialModule { }

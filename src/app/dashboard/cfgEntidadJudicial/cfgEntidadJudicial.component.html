@@ -1,0 +1,56 @@
+<div class="container">
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Configuración</b>
+            <br>
+            <small>Entidades Judiciales</small>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Codigo Divipo</th>
+                <th>Ciudad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let cfgEntidadJudicial of cfgEntidadesJudiciales; let i = index">
+                <td>{{cfgEntidadJudicial.id}}</td>
+                <td>{{cfgEntidadJudicial.nombre}}</td>
+                <td>{{cfgEntidadJudicial.codigoDivipo}}</td>
+                <td>{{cfgEntidadJudicial.municipio?.nombre}}</td>
+                <td>
+                  <button (click)="editEntidadJudicial(cfgEntidadJudicial)" class="btn btn-xs btn-info" type="button">Editar
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button (click)="deleteEntidadJudicial(cfgEntidadJudicial.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-edit *ngIf='formEdit' [cfgEntidadJudicial]="cfgEntidadJudicial" (ready)="ready($event)"></app-edit>
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>
