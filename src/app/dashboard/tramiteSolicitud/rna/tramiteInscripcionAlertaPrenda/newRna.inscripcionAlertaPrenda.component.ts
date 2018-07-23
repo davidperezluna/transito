@@ -28,7 +28,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Input() factura: any = null;
     @Input() tramitesFactura: any = null;
 
-    public placa: CfgPlaca = null;;
+    public placa: CfgPlaca = null;
     public errorMessage;
     public respuesta;
     public cfgTiposAlerta: any;
