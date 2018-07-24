@@ -253,14 +253,6 @@
                             <appRnrs-cambio-servicio [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-servicio>
                         </div>
 
-                        <div class="tab-pane" id="7" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-regrabar-motor [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-regrabar-motor>
-                        </div>
-
-                        <div class="tab-pane" id="8" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-regrabar-chasis [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-regrabar-chasis>
-                        </div>
-
                         <div class="tab-pane" id="9" role="tabpanel" *ngIf='ciudadano'> 
                             <appRnrs-regrabar-serie [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-regrabar-serie>
                         </div>
