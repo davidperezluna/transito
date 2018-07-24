@@ -299,7 +299,7 @@ constructor(
     this.formCiudadano = true;
     this.ciudadanoNoEncontrado = false;
     let token = this._loginService.getToken();
-    this._ciudadanoService.showCiudadanoCedula(token,this.identificacion).subscribe(
+    this._ciudadanoService.searchByIdentificacion(token,this.identificacion).subscribe(
       response => {
         if (response.status == "success") {
         this.ciudadano = response.data;

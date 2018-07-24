@@ -278,7 +278,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         let identificacion = {
             'numeroIdentificacion': this.identificacion,
         };
-        this._CiudadanoService.showCiudadanoCedula(token, identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
@@ -305,7 +305,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         let identificacion = {
             'numeroIdentificacion': this.identificacionAcreedor,
         };
-        this._CiudadanoService.showCiudadanoCedula(token, identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {

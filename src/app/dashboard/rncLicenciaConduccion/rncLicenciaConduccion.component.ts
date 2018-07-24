@@ -1,70 +1,49 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Router} from '@angular/router'
-import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
-import {LoginService} from '../../services/login.service';
-import { MpersonalTipoContratoService } from '../../services/mpersonalTipoContrato.service';
+import { RncLicenciaConduccionService } from '../../services/rncLicenciaConduccion.service';
+import { LoginService } from '../../services/login.service';
+import { TipoIdentificacionService } from '../../services/tipoIdentificacion.service';
 import { SedeOperativaService } from '../../services/sedeOperativa.service';
-import { MpersonalFuncionario } from './mpersonalFuncionario.modelo';
+import { CiudadanoService } from '../../services/ciudadano.service';
+import { RncLicenciaConduccion } from './rncLicenciaConduccion.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './mpersonalFuncionario.component.html'
+  templateUrl: './rncLicenciaConduccion.component.html'
 })
-export class MpersonalFuncionarioComponent implements OnInit {
+export class RncLicenciaConduccionComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public funcionarios;
+	public licencias;
+	public ciudadano;
 	public formNew = false;
 	public formEdit = false;
 	public formIndex = false;
-	public formTime = false;
   public formSearch = true;
   public table: any = null;
-  public funcionario: MpersonalFuncionario;
+  public licenciaConduccion: RncLicenciaConduccion;
   public identificacion:any;
-  public nombre:any;
-  public cargo:any;
-  public tiposContrato: any;
-  public tipoContratoSelected: any;
+  public tiposIdentificacion: any;
+  public tipoIdentificacionSelected: any;
   public sedesOperativas: any;
   public sedeOperativaSelected: any;
-  public datos = {
-    'nombre' : null,
-    'identificacion' : null,
-    'cargo' : null,
-    'tipoContratoId' : null,
-    'sedeOperativaId' : null
-  }
 
   constructor(
-    private _FuncionarioService: MpersonalFuncionarioService,
-    private _TipoContratoService: MpersonalTipoContratoService,
+    private _LicenciaConduccionService: RncLicenciaConduccionService,
+    private _TipoIdentificacionService: TipoIdentificacionService,
     private _SedeOperativaService: SedeOperativaService,
+    private _CiudadanoService: CiudadanoService,
     private _loginService: LoginService,
     private router: Router
     ){}
     
   ngOnInit() {
-    this._TipoContratoService.select().subscribe(
+    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
-        this.tiposContrato = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-    
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-      response => {
-        this.sedesOperativas = response;
+        this.tiposIdentificacion = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -79,16 +58,28 @@ export class MpersonalFuncionarioComponent implements OnInit {
   
   onNew(){
     this.formNew = true;
-    this.formSearch = false;
-    this.formTime = false;
+    this.formSearch = 
     this.formIndex = false;
     if(this.table){
       this.table.destroy();
     }
+
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+      response => {
+        this.sedesOperativas = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
-  onTime(funcionario:any){
-    this.funcionario = funcionario;
-    this.formTime = true;
+  onTime(licenciaConduccion:any){
+    this.licenciaConduccion = licenciaConduccion;
     this.formNew = false;
     this.formSearch = false;
     this.formIndex = false;
@@ -101,60 +92,55 @@ export class MpersonalFuncionarioComponent implements OnInit {
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formTime = false;
       this.formIndex = false;
       this.formSearch = true;
       this.ngOnInit();
     }
   }
   
-  search(){
-    this.datos.nombre = this.nombre;
-    this.datos.identificacion = this.identificacion;
-    this.datos.cargo = this.cargo;
-    this.datos.tipoContratoId = this.tipoContratoSelected;
-    this.datos.sedeOperativaId = this.sedeOperativaSelected;
-    
+  onSearchCiudadano(){  
     let token = this._loginService.getToken();
-		this._FuncionarioService.searchByParametros(this.datos,token).subscribe(
+    this._CiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.identificacion }).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.funcionarios = response.data;
-          this.iniciarTabla();
-          this.formIndex = true;
+          this.ciudadano = response.data;
 
-          swal({
-            title: 'Perfecto',
-            text: "¡Funcionarios encontrados!",
-            type: 'info',
-            showCloseButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> OK!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down',
-          });
+          this._LicenciaConduccionService.recordByCiudadanoId({ 'ciudadanoId': this.ciudadano.id }, token).subscribe(
+            response => {
+              this.respuesta = response;
+              if (this.respuesta.status == 'success') {
+                this.licencias = response.data;
+
+                this.iniciarTabla();
+                this.formIndex = true;
+
+                swal({
+                  title: 'Perfecto',
+                  text: response.message,
+                  type: 'info'
+                });
+              } else {
+                swal({
+                  title: 'Alerta',
+                  text: response.message,
+                  type: 'warning'
+                });
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+
+            });
         }else{
           swal({
             title: 'Alerta',
-            text: "¡No existen funcionarios, por favor registrelo y vuelva vincularse!",
-            type: 'warning',
-            showCancelButton: true,
-            focusConfirm: true,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Registrar',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i> Cancelar',
-            cancelButtonAriaLabel: 'Thumbs down',
-          }).then((result) => {
-            if (result.value) {
-              this.formNew = true;
-              this.formSearch = false;
-            }
+            text: response.msj,
+            type: 'warning'
           });
         }
 			error => {
@@ -198,7 +184,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._FuncionarioService.delete(token,id).subscribe(
+        this._LicenciaConduccionService.register(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -225,8 +211,8 @@ export class MpersonalFuncionarioComponent implements OnInit {
     })
   }
 
-  edit(funcionario:any){
-    this.funcionario = funcionario;
+  edit(licenciaConduccion:any){
+    this.licenciaConduccion = licenciaConduccion;
     this.formEdit = true;
     this.formSearch = false;
   }

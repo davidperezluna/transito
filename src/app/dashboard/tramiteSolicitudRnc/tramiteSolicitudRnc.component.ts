@@ -48,22 +48,23 @@ export class TramiteSolicitudRncComponent implements OnInit {
       ) {
       }
     });
+    
     this._TramiteSolicitudRncService.index().subscribe(
-				response => {
-          this.tramitesSolicitud = response.data;
-          let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
-            swal.close();
-          }, 100);
-				},
-				error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+      response => {
+        this.tramitesSolicitud = response.data;
+        let timeoutId = setTimeout(() => {
+          this.iniciarTabla();
+          swal.close();
+        }, 100);
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   iniciarTabla(){
@@ -114,7 +115,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
 
   onSearchSolicitante(){
     let token = this._loginService.getToken();
-    this._CiudadanoService.showCiudadanoCedula(token, {'numeroIdentificacion':this.identificacion}).subscribe(
+    this._CiudadanoService.searchByIdentificacion(token, {'numeroIdentificacion':this.identificacion}).subscribe(
       response => {          
         if(response.status == 'success'){
           this.solicitante = response.data;

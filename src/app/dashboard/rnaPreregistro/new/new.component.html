@@ -11,15 +11,15 @@
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label>No Factura de compra*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                        <input class="form-control" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
                     </div>
                     <div class="col-lg-3">
                         <label>Fecha Factura*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
+                        <input class="form-control" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
                     </div>
                     <div class="col-lg-3">
                         <label>Valor</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.valor" name="valor" required>
+                        <input class="form-control" type="number" [(ngModel)]="vehiculo.valor" name="valor" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -122,36 +122,36 @@
                     </div>
                     <div class="col-lg-3">
                         <label>Fecha Manifiesto*</label>
-                        <input class="form-control" placeholder="" type="date"  [(ngModel)]="vehiculo.fechaManifiesto" name="fechaManifiesto">
+                        <input class="form-control" type="date"  [(ngModel)]="vehiculo.fechaManifiesto" name="fechaManifiesto">
                     </div>
                     <div class="col-lg-3">
                         <label>Cilindraje</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.cilindraje" name="cilindraje">
+                        <input class="form-control" type="text" [(ngModel)]="vehiculo.cilindraje" name="cilindraje">
                     </div>
                     <div class="col-lg-3">
                         <label>Modelo</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.modelo" name="modelo">
+                        <input class="form-control" type="number" [(ngModel)]="vehiculo.modelo" name="modelo">
                     </div>
                     <div class="col-lg-3">
                         <label>Motor</label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.motor" name="motor">
+                        <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.motor" name="motor">
                     </div>
                     <div class="col-lg-3">
                         <label>Chasis</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.chasis" name="chasis">
+                        <input class="form-control" type="text" [(ngModel)]="vehiculo.chasis" name="chasis">
                     </div>
                     <div class="col-lg-3">
                         <label>Serie</label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.serie" name="serie">
+                        <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.serie" name="serie">
                     </div>
 
                     <div class="col-lg-3">
                         <label>Vin</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.vin" name="vin">
+                        <input class="form-control" type="number" [(ngModel)]="vehiculo.vin" name="vin">
                     </div>
                     <div class="col-lg-3">
                         <label>Numero Pasajeros</label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="numeroPasajeros">
+                        <input class="form-control" type="number" [(ngModel)]="vehiculo.numeroPasajeros" name="numeroPasajeros">
                     </div>
                 
                     <div class="col-lg-3">

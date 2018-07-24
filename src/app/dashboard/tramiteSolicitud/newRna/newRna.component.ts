@@ -392,7 +392,7 @@ constructor(
     let identificacion = {
   'numeroIdentificacion' : this.identificacionApoderado,
     };
-    this._ciudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+    this._ciudadanoService.searchByIdentificacion(token,identificacion).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){

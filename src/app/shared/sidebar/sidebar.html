@@ -297,6 +297,11 @@
             <i class="fa fa-angle-right"></i> Solicitud de tramite
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="rncLicenciaConduccion" [ngClass]="{'active' : ( addActive === 'rncLicenciaConduccion')}" (click)="addActiveMenu('rncLicenciaConduccion')">
+            <i class="fa fa-angle-right"></i> Historial Licencia Conducción
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level --> 
     </li>
