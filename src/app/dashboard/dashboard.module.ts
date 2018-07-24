@@ -56,12 +56,17 @@ import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
+import { LimitacionModule } from './limitacion/limitacion.module';
+import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
+import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
+import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
+import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
 import { EmpresaModule } from './empresa/empresa.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
@@ -156,6 +161,7 @@ import {RightsidebarComponent} from '../shared';
       TramiteSolicitudModule,
       TramiteSolicitudRncModule,
       TramiteSolicitudRnmaModule,
+      TramiteSolicitudRnrsModule,
       SustratoModule,
       GestionTransportePublicoModule,
       EmpresaModule,
@@ -166,10 +172,14 @@ import {RightsidebarComponent} from '../shared';
       CfgPlacaModule,
       CfgCasoInsumoModule,
       CfgSedeOperativaModule,
+      CfgEntidadJudicialModule,
       MsvTalonarioModule,
       rnaRegistroInsumosModule,
       RnmaRegistroMaquinariaModule,
       rnaAsignacionInsumosModule,
+      LimitacionModule,
+      CfgTipoProcesoModule,
+      RnmaTramiteInscripcionLimitacionModule,
       
       //MsvTCAsignacionModule,
     ],

@@ -4,7 +4,7 @@ import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
-import { CasoInsumoService } from '../../../services/casoInsumo.service';
+import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import {RnaInsumoService} from '../../../services/rnaInsumos.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -34,7 +34,7 @@ public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
 public frmInsumo:any=true;
-public frmInsumoSelect:any=true;
+public frmInsumoSelect:any=false; 
 
 constructor(
   private datePipe: DatePipe,
@@ -42,7 +42,7 @@ constructor(
   private _loginService: LoginService,
   private _EmpresaService: EmpresaService,
   private _SedeOperativaService: SedeOperativaService,
-  private _CasoInsumoService: CasoInsumoService,
+  private _CasoInsumoService: CfgCasoInsumoService,
   private _RnaInsumoService: RnaInsumoService,
   ){}
 
@@ -104,9 +104,11 @@ constructor(
     this.rnaAsignacionInsumos.loteInsumoId = this.loteInsumo.id;
 
     if (!this.frmInsumo) {
+      console.log('sustrato');
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelected;
       this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
     }else{
+      console.log('insumo');
       this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelectedInsumo;
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelectedInsumo;
       this.rnaAsignacionInsumos.numero = this.numero;

@@ -66,7 +66,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     
     this._MarcaService.getMarcaSelect().subscribe(
@@ -174,7 +174,7 @@ constructor(
       }
     );
 
-    this._CfgRadioAccionService.select().subscribe(
+    this._CfgRadioAccionService.getCfgRadioAccionSelect().subscribe(
       response => {
         this.radiosAccion = response;
       },  
@@ -188,7 +188,7 @@ constructor(
       }
     );
 
-    this._CfgModalidadTransporteService.select().subscribe(
+    this._CfgModalidadTransporteService.getCfgModalidadTransporteSelect().subscribe(
       response => {
         this.modalidadesTransporte = response;
       },  
@@ -237,7 +237,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.vehiculo.placa +' ya se encuentra registrado',
+            text: 'El vehiculo '+ this.vehiculo.id +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -258,8 +258,7 @@ constructor(
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
         this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
-          response => {
-            console.log(response.data[0]);
+          response => { 
             if (response.data[0] != null) {
               this.lineas = response.data;
             }else{

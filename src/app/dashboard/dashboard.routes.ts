@@ -64,6 +64,7 @@ import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
 import { TramiteSolicitudRncRoutes } from './tramiteSolicitudRnc/tramiteSolicitudRnc.routes';
 import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
+import { TramiteSolicitudRnrsRoutes } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.routes';
 
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
@@ -78,10 +79,14 @@ import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
 import { CfgCasoInsumoRoutes } from './cfgCasoInsumo/cfgCasoInsumo.routes';
 import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
+import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicial.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
 import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
+import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
+import { LimitacionRoutes } from './limitacion/limitacion.routes';
+import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
@@ -145,6 +150,7 @@ export const DashboardRoutes: Route[] = [
         ...TramiteSolicitudRoutes,
         ...TramiteSolicitudRncRoutes,
         ...TramiteSolicitudRnmaRoutes,
+        ...TramiteSolicitudRnrsRoutes,
         ...SustratoRoutes,
         ...GestionTransportePublicoRoutes,
         ...EmpresaRoutes,
@@ -156,10 +162,15 @@ export const DashboardRoutes: Route[] = [
         ...CfgPlacaRoutes,
         ...CfgCasoInsumoRoutes,
         ...CfgSedeOperativaRoutes,
+        ...CfgEntidadJudicialRoutes,
         ...MsvTalonarioRoutes, 
         //...MsvTCAsignacionRoutes, 
         ...ConceptoParametroRoutes,  
         ...RnmaRegistroMaquinariaRoutes,
-        ...rnaAsignacionInsumosRoutes    ]
+        ...TramiteInscripcionLimitacionRoutes,
+        ...rnaAsignacionInsumosRoutes ,
+        ...LimitacionRoutes,
+        ...CfgTipoProcesoRoutes,
+       ]
     }
 ];

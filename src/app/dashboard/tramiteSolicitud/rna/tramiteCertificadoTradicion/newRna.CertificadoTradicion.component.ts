@@ -61,25 +61,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
 
     enviarTramite() {
         let token = this._loginService.getToken();
-        let datos = {
-            'dato1':'k'
-        }
-        this._DefaultService.pdfLicenciaTransito(token,datos).subscribe( 
-            response => {
-                // this.respuesta = response; 
-                
-            error => {
-                    this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-        }); 
-        // this.datos.tramiteFactura =58;
-        // this.readyTramite.emit(this.datos);
-
+      
         this.datos.tramiteFactura =59;
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;

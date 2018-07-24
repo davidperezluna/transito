@@ -52,13 +52,12 @@ export class CfgCasoInsumoService {
 
 	}
 
-	getCfgCasoInsumoSelect() {
-
-		return this._http.get(this.url + "/select").map(res => res.json());
+	getCasoInsumoInsumoSelect() {
+		return this._http.get(this.url + "/select/insumo").map(res => res.json());
 	}
 
-	getCfgCasoInsumoPorIdSelect(id) {
-		return this._http.get(this.url + "/" + id + "/select/casoInsumos/por/id").map(res => res.json());
+	getCasoInsumoSustratoSelect() {
+		return this._http.get(this.url + "/select/sustrato").map(res => res.json());
 	}
 
 

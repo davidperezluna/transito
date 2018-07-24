@@ -25,7 +25,7 @@ export class RegistroMaquinaria{
 
 		
 		public vehiculoColorId: number,
-		public vehiculoMarcasId: number,
+		public vehiculoMarcaId: number,
 		public vehiculoClaseId: number,
 		public vehiculoLineaId: number,
 		public vehiculoCarroceriaId: number,

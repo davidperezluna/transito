@@ -1,6 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
+import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service'
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 declare var $: any;
@@ -11,13 +13,9 @@ declare var $: any;
 })
 export class ShowAutomotorComponent implements OnInit {
 @Input() vehiculo:any;
-@Input() showV:any;
-public errorMessage;
-public respuesta;
-public table:any; 
+@Output() cerrarForm = new EventEmitter<any>();
 public pesado;
 public maquinaria;
-public checked:any;
 public sedeOperativa;
 public placa;
 public estado;
@@ -39,9 +37,9 @@ public cilindraje;
 public numeroSerie;
 public numeroMotor;
 public numeroChasis;
-public regrabacionSerie;
-public regrabacionMotor;
-public regrabacionChasis;
+public regrabacionSerie = "NO";
+public regrabacionMotor ="NO";
+public regrabacionChasis ="NO";
 public combustible;
 public pesoBruto;
 public numeroEjes;
@@ -52,16 +50,19 @@ public tipoMotor;
 public vehiculoMaquinaria = "Maquinaria";
 public vehiculoPesado = "Pesado";
 public tipoVehiculo: any;
-public showVi;
+public vehiculoDatosTramite: any;
+public oculto = false;
+public tipoRegrabar;
 
 constructor(
   private _loginService: LoginService,
   private _VehiculoService: VehiculoService,
+  private _TramiteSolicitudService: TramiteSolicitudService,
+  private _CiudadanoVehiculoService: CiudadanoVehiculoService,
   
   ){}
 
   ngOnInit() {
-    this.showVi = this.showV;
     this.pesado = false;
     this.maquinaria = false;
     let token = this._loginService.getToken();
@@ -71,10 +72,32 @@ constructor(
       this.estado = "Activo";
     }
 
+    this._CiudadanoVehiculoService.showPropietarioByIdVehiculo(token,this.vehiculo.id).subscribe(
+      response=>{
+                this.numeroTarjeta = response.data.licenciaTransito;                
+      }
+    );
+    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token,this.vehiculo.id).subscribe(
+      response=>{
+                this.vehiculoDatosTramite = response.data;             
+        
+                this.vehiculoDatosTramite.forEach(element => {                    
+                  if(element.tramiteFactura.tramitePrecio.tramite.id == 7){
+                      this.regrabacionMotor = "SI";
+                  }
+                  else if(element.tramiteFactura.tramitePrecio.tramite.id == 8){
+                      this.regrabacionChasis = "SI";
+                  }
+                  else if(element.tramiteFactura.tramitePrecio.tramite.id == 9){
+                      this.regrabacionSerie = "SI";
+                  }                  
+                });
+      }
+    );
+
     this._VehiculoService.showVehiculoTipo(token,this.vehiculo.id).subscribe(
       response => {
                   this.tipoVehiculo = response.data;
-                  console.log(this.tipoVehiculo);  
                   if(response.msj == this.vehiculoPesado){
                     this.numeroEjes = this.tipoVehiculo.numeroEjes;
                     this.numeroFichas = "Carroceria: " + this.tipoVehiculo.fichaTecnicaHomologacionCarroceria + "/Chasis: " +this.tipoVehiculo.fichaTecnicaHomologacionChasis
@@ -111,6 +134,6 @@ constructor(
   }  
   
   onCancelar(){
-      this.showVi = false;
+      this.cerrarForm.emit(false);
   }
 }
