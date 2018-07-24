@@ -85,7 +85,7 @@ constructor(
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: 'Registro exitoso!',
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
@@ -313,11 +313,10 @@ constructor(
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if (this.respuesta.status == 'success') { 
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: 'Registro exitoso!',
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

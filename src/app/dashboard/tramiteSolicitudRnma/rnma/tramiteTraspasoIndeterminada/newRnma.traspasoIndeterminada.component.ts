@@ -49,7 +49,6 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
     ){}
     
   ngOnInit() {
-    alert(1);
     this.datos = {
       'fecha': null,
       'codigoOrganismo': null,
