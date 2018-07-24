@@ -147,7 +147,7 @@ export class NewRnrsSustratoComponent implements OnInit {
                 if (response.status == 'success') {
                     swal({
                         title: 'Perfecto!',
-                        text: 'El registro se ha registrado con exito',
+                        text: 'Registro exitoso!',
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                       })

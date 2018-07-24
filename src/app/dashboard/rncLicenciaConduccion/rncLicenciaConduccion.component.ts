@@ -41,7 +41,7 @@ export class RncLicenciaConduccionComponent implements OnInit {
     ){}
     
   ngOnInit() {
-    this._TipoIdentificacionService.getTipoIdentificacion().subscribe(
+    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },

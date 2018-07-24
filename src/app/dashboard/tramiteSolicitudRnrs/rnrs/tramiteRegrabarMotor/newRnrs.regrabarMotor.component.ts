@@ -81,6 +81,8 @@ export class NewRnrsRegrabarMotorComponent implements OnInit {
         this.vehiculo.motor = this.nuevoNumero;
         
         let token = this._loginService.getToken();
+        console.log(this.vehiculo);
+        
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
         response => {
             this.respuesta = response; 

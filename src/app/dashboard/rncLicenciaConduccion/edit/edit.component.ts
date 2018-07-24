@@ -28,7 +28,6 @@ constructor(
 		this._LicenciaService.edit(this.licencia,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({
@@ -40,7 +39,6 @@ constructor(
         }
 			error => {
 					this.errorMessage = <any>error;
-
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");

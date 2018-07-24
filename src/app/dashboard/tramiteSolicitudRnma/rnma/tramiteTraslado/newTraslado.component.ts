@@ -109,7 +109,28 @@ constructor(
               this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
               this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
               this.datos.tramiteFactura =3;
-              this.readyTramite.emit(this.datos);
+
+              this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
+              this.datos.vehiculoId = this.vehiculo.id;
+              this.datos.numeroGuia = this.numeroGuia; 
+              this.datos.numeroRunt = this.numeroRunt;
+              this.datos.fechaSalida = this.fechaSalida;       
+              this.datos.nombreEmpresa = this.nombreEmpresa; 
+              this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
+              this.respuesta = response; 
+              if(this.respuesta.status == 'success'){
+                this.readyTramite.emit(this.datos);
+              }
+              error => {
+                      this.errorMessage = <any>error;
+
+                      if(this.errorMessage != null){
+                          console.log(this.errorMessage);
+                          alert("Error en la petición");
+                      }
+                  }
+          });
+
           }
           error => {
                   this.errorMessage = <any>error;
@@ -121,26 +142,7 @@ constructor(
               }
       }); 
 
-        this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
-        this.datos.vehiculoId = this.vehiculo.id;
-        this.datos.numeroGuia = this.numeroGuia;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.fechaSalida = this.fechaSalida;       
-        this.datos.nombreEmpresa = this.nombreEmpresa; 
-        this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
-        this.respuesta = response; 
-        if(this.respuesta.status == 'success'){
-          alert("Datos enviados con éxito");
-        }
-        error => {
-                this.errorMessage = <any>error;
-
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-    });
+        
   }
 
 }
