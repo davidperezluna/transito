@@ -116,7 +116,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
     this.datos.sedeOperativaId = this.sedeOperativaSelected;
     
     let token = this._loginService.getToken();
-		this._FuncionarioService.searchByParametros(this.datos,token).subscribe(
+		this._FuncionarioService.search(this.datos,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

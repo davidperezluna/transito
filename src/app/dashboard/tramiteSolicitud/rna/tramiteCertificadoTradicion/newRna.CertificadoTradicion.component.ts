@@ -77,7 +77,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
 			'numeroIdentificacion' : this.ciudadanoId,
         };
         
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

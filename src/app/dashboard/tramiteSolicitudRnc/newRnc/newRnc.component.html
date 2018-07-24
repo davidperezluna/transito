@@ -10,23 +10,21 @@
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-12">
                                 <label>Número de factura <strong class="text-danger">*</strong></label>
-                                <div class="input-group">
-                                    <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onCancelar()" class="btn btn-secondary">
-                                            <i class="fa fa-times"></i>
-                                            Cancelar
-                                        </button>
-                                        <button class="btn btn-primary" (click)="onSearchFactura()" [disabled]="formPay.invalid">
-                                            <i class="fa fa-search"></i>
-                                            Consultar
-                                        </button>
-                                    </span>
-                                </div>
+                                <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
                             </div>
                         </div>
                     </form>
                 </div>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button class="btn btn-primary" (click)="onSearchFactura()" [disabled]="formPay.invalid">
+                        <i class="fa fa-search"></i>
+                        Consultar
+                    </button>
+                </div> 
             </div>
         </div>
 
@@ -93,7 +91,7 @@
                         </div>
 
                         <div class="tab-pane" id="58" role="tabpanel"> 
-                            <appRnc-expedicion-licencia [tramiteFactura] = "tramiteFactura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
+                            <appRnc-expedicion-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
                         </div>
 
                         <div class="tab-pane" id="59" role="tabpanel"> 

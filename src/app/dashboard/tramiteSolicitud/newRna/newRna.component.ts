@@ -410,7 +410,7 @@ constructor(
     let identificacion = {
   'numeroIdentificacion' : this.identificacionApoderado,
     };
-    this._ciudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+    this._ciudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){

@@ -28,7 +28,6 @@ import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
 import { buscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
 
 import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
-import { RncLicenciaConduccionRoutes } from './rncLicenciaConduccion/rncLicenciaConduccion.routes';
 
 import { MsvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
 import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
@@ -116,8 +115,7 @@ export const DashboardRoutes: Route[] = [
         ...CfgSmlmvRoutes,
         ...cfgFestivoRoutes,    
         ...buscarAutomotorRoutes,
-        ...CfgLicenciaConduccionCategoriaRoutes,
-        ...RncLicenciaConduccionRoutes,
+        ...CfgLicenciaConduccionCategoriaRoutes,    
         ...MsvCaracterizacion,
         ...MsvEvaluacionRoutes,
         ...MsvRevisionRoutes,

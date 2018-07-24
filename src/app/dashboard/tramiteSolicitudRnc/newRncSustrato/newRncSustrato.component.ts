@@ -54,7 +54,7 @@ export class NewRncSustratoComponent implements OnInit {
     onKeyCiudadano(){
         let token = this._loginService.getToken();
         
-        this._CiudadanoService.searchByIdentificacion(token,{ 'numeroIdentificacion' : this.datos.cedula }).subscribe(
+        this._CiudadanoService.showCiudadanoCedula(token,{ 'numeroIdentificacion' : this.datos.cedula }).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

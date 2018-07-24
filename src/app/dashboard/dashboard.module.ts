@@ -35,7 +35,6 @@ import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 
 import { CfgLicenciaConduccionCategoriaModule } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.module';
-import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicenciaConduccion.module';
 
 import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { MsvRevisionModule } from './msvRevision/msvRevision.module';
@@ -82,6 +81,7 @@ import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFunc
 import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
+
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
@@ -131,7 +131,6 @@ import {RightsidebarComponent} from '../shared';
       cfgFestivoModule,
       buscarAutomotorModule,
       CfgLicenciaConduccionCategoriaModule,
-      RncLicenciaConduccionModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudRncComponent } from './tramiteSolicitudRnc.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudRncService } from '../../services/tramiteSolicitudRnc.service';
+
 import { NewRncSustratoComponent } from './newRncSustrato/newRncSustrato.component';
 import { NewRncCiudadanoComponent } from './newRncCiudadano/newRncCiudadano.component';
 import { NewRncExpedicionLicenciaComponent } from './rnc/tramiteExpedicionLicencia/newRncExpedicionLicencia.component';
@@ -15,7 +16,6 @@ import { NewRncRefrendacionLicenciaComponent } from './rnc/tramiteRefrendacionLi
 import { NewRncComponent } from './newRnc/newRnc.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
-import { RncLicenciaConduccionComponent } from '../rncLicenciaConduccion';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
