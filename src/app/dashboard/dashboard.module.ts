@@ -57,7 +57,7 @@ import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
 import { LimitacionModule } from './limitacion/limitacion.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
-import { TramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/tramiteInscripcionLimitacion.module';
+import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
@@ -178,7 +178,7 @@ import {RightsidebarComponent} from '../shared';
       rnaAsignacionInsumosModule,
       LimitacionModule,
       CfgTipoProcesoModule,
-      TramiteInscripcionLimitacionModule,
+      RnmaTramiteInscripcionLimitacionModule,
       
       //MsvTCAsignacionModule,
     ],
