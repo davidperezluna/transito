@@ -4,7 +4,7 @@ import { LoginService } from '../../../services/login.service';
 import { ModuloService } from '../../../services/modulo.service';
 import swal from 'sweetalert2';
 
-
+ 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html'
@@ -15,7 +15,7 @@ export class EditComponent {
   public errorMessage;
   public respuesta;
   public modulos: any;
-  public moduloSelected: any;
+  public moduloSelected: any; 
   public tipoCasoInsumos = [
     { 'value': "Insumo", 'label': "Insumo" },
     { 'value': "Sustrato", 'label': "Sustrato" }
