@@ -35,6 +35,7 @@ import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 
 import { CfgLicenciaConduccionCategoriaModule } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.module';
+import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicenciaConduccion.module';
 
 import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { MsvRevisionModule } from './msvRevision/msvRevision.module';
@@ -57,7 +58,7 @@ import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
 import { LimitacionModule } from './limitacion/limitacion.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
-import { TramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/tramiteInscripcionLimitacion.module';
+import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
@@ -131,6 +132,7 @@ import {RightsidebarComponent} from '../shared';
       cfgFestivoModule,
       buscarAutomotorModule,
       CfgLicenciaConduccionCategoriaModule,
+      RncLicenciaConduccionModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
@@ -178,7 +180,7 @@ import {RightsidebarComponent} from '../shared';
       rnaAsignacionInsumosModule,
       LimitacionModule,
       CfgTipoProcesoModule,
-      TramiteInscripcionLimitacionModule,
+      RnmaTramiteInscripcionLimitacionModule,
       
       //MsvTCAsignacionModule,
     ],

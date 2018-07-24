@@ -47,11 +47,11 @@ export class CiudadanoService {
  			return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	showCiudadanoCedula(token,ciudadano){
+	searchByIdentificacion(token,ciudadano){ 
 		let json = JSON.stringify(ciudadano);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/cedula", params, {headers: headers}).map(res => res.json());
+ 			return this._http.post(this.url+"/search/identificacion", params, {headers: headers}).map(res => res.json());
 	}
 
 	showCiudadanoCedulaId(token,id){

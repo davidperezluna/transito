@@ -1,18 +1,23 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgPlacaService } from '../../services/cfgPlaca.service';
+import { RnmaTramiteLimitacionService } from '../../services/rnmaTramiteLimitacion.service';
+import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
+import { RnmaTramiteInscripcionLimitacion } from './rnmaTramiteInscripcionLimitacion.modelo';
+import { Ciudadano } from '../ciudadano/ciudadano.modelo';
+
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './tramiteInscripcionLimitacion.component.html'
+  templateUrl: './rnmaTramiteInscripcionLimitacion.component.html'
 })
-export class TramiteInscripcionLimitacionComponent implements OnInit {
+export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
+  public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
+  public RnmaTramiteLimitacionService:any;
   public errorMessage;
-  public id;
   public respuesta;
-  public cfgPlacas;
+  public tramitesInscripcion;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
@@ -20,7 +25,7 @@ export class TramiteInscripcionLimitacionComponent implements OnInit {
   public cfgPlaca: any;
 
   constructor(
-    private _CfgPlacaService: CfgPlacaService,
+    private _TramiteLimitacionService: RnmaTramiteLimitacionService,
     private _loginService: LoginService,
   ) { }
 
@@ -39,12 +44,12 @@ export class TramiteInscripcionLimitacionComponent implements OnInit {
       ) {
       }
     })
-    this._CfgPlacaService.getCfgPlaca().subscribe(
+    this._TramiteLimitacionService.getTramiteLimitacion().subscribe(
       response => {
         if (response) {
 
           console.log(response);
-          this.cfgPlacas = response.data;
+          this.tramitesInscripcion = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
@@ -106,7 +111,7 @@ export class TramiteInscripcionLimitacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgPlacaService.deleteCfgPlaca(token, id).subscribe(
+        this._TramiteLimitacionService.deleteTramiteLimitacion(token, id).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
