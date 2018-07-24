@@ -9,23 +9,23 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() funcionario:any = null;
+@Input() licencia:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
 
 constructor(
-  private _funcionarioService: MpersonalFuncionarioService,
+  private _LicenciaService: MpersonalFuncionarioService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.funcionario);  }
+  ngOnInit(){ console.log(this.licencia);  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._funcionarioService.edit(this.funcionario,token).subscribe(
+		this._LicenciaService.edit(this.licencia,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
