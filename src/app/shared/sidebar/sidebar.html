@@ -374,6 +374,26 @@
       <!-- /.nav-second-level -->
     </li>
 
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnrs')}">
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnrs')">
+        RNRS
+        <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-second-level ">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="rnrsRegistroMaquinaria" [ngClass]="{'active' : ( addActive === 'rnrsRegistroMaquinaria')}" (click)="addActiveMenu('rnrsRegistroMaquinaria')">
+            <i class="fa fa-angle-right"></i> Pre-registro maquinaria
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tramiteSolicitudRnrs" [ngClass]="{'active' : ( addActive === 'tramiteSolicitudRnrs')}" (click)="addActiveMenu('tramiteSolicitudRnrs')">
+            <i class="fa fa-angle-right"></i> Solicitud de tramite
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav-second-level -->
+    </li>
+
     <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-rpccc' }"> 
     	<a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-rpccc')">
         RPCCC<i class="fa fa-angle-down "></i>

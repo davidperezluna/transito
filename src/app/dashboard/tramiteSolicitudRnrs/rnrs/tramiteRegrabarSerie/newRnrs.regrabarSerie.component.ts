@@ -88,6 +88,7 @@ export class NewRnrsRegrabarSerieComponent implements OnInit {
                 this.datos.documentacion = this.documentacion;
                 this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
+                this.datos.tramiteFactura = 9;
                 this.readyTramite.emit(this.datos);
             }
             error => {
