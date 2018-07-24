@@ -67,7 +67,7 @@ export class NewRnmaSustratoComponent implements OnInit {
         };
         console.log(this.tarjetaEntregada);
         
-        this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

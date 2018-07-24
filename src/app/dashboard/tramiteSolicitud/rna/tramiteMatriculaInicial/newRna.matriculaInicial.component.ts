@@ -124,7 +124,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacion,
         };
-        this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -151,7 +151,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacionApoderado,
         };
-        this._CiudadanoService.showCiudadanoCedula(token,identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
