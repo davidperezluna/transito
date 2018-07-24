@@ -1,0 +1,178 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Registro de personal</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div *ngIf='!formConfirm'>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo identificación <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacion" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Identificación <strong class="text-danger">*</strong></label>
+                                <input class="form-control" (blur)="onSearch()" [(ngModel)]="funcionario.identificacion" name="identificacion" type="text" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Primer nombre <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="primerNombre" name="primerNombre" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Segundo nombre <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="segundoNombre" name="segundoNombre" type="text" />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Primer apellido </label>
+                                <input class="form-control" [(ngModel)]="primerApellido" name="primerApellido" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Segundo apellido </label>
+                                <input class="form-control" [(ngModel)]="segundoApellido" name="segundoApellido" type="text" />
+                            </div>
+                        </div>
+                            
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo Contrato <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="tipoContratoSelected" name="tiposContrato" required>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf='tipoContratoSelected == 1'>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Acta de posesion </label>
+                                <input class="form-control" [(ngModel)]="funcionario.actaPosesion" name="actaPosesion" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Resolución </label>
+                                <input class="form-control" [(ngModel)]="funcionario.resolucion" name="resolucion" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Tipo nombramiento </label>
+                                <select class="form-control" [(ngModel)]="funcionario.tipoNombramiento" name="tipoNombramiento">
+                                    <option value="Propiedad">Propiedad</option>
+                                    <option value="Provisionalidad">Provisionalidad</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf='tipoContratoSelected == 2'>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Fecha inicio </label>
+                                    <input class="form-control" [(ngModel)]="funcionario.fechaInicio" name="fechaInicio" type="date" required />
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Fecha fin </label>
+                                    <input class="form-control" [(ngModel)]="funcionario.fechaFin" name="fechaFin" type="date" required />
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Numero de contrato </label>
+                                    <input class="form-control" [(ngModel)]="funcionario.numeroContrato" name="numeroContrato" type="text" required />
+                                </div>
+                            </div>
+
+                        <div class="form-group row" *ngIf='tipoContratoSelected == 3'>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha inicio </label>
+                                <input class="form-control" [(ngModel)]="funcionario.fechaInicio" name="fechaInicio" type="date" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha fin </label>
+                                <input class="form-control" [(ngModel)]="funcionario.fechaFin" name="fechaFin" type="date" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Numero de placa </label>
+                                <input class="form-control" [(ngModel)]="funcionario.numeroPlaca" name="numeroPlaca" type="text" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Sede operativa <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected" name="sedesOperativas" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cargo </label>
+                                <input class="form-control" [(ngModel)]="funcionario.cargo" name="cargo" type="text" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-3 offset-lg-3">
+                                <div class="custom-control custom-radio">
+                                    <input name="inhabilidad" [(ngModel)]="funcionario.activo" value="true" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadio1">Dar de alta</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <div class="custom-control custom-radio">
+                                    <input name="inhabilidad" [(ngModel)]="funcionario.activo" value="false" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" >
+                                    <label class="custom-control-label" for="customRadio2">Inhabilitar</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="btn-group">
+                                <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                                    <i class="fa fa-times"></i>
+                                    Cancel
+                                </button>
+                                <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                                    <i class="fa fa-save"></i>
+                                    Enviar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row" *ngIf='formConfirm'>
+                        <div class="col-xs-12 col-lg-3 offset-lg-3">
+                            <div class="custom-control custom-radio">
+                                <input name="confirm" [(ngModel)]="funcionario.inhabilidad" value="true" type="radio" id="customRadio3" name="customRadioConfirm" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio3">Si</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <div class="custom-control custom-radio">
+                                <input name="confirm" [(ngModel)]="funcionario.inhabilidad" value="false" type="radio" id="customRadio4" name="customRadioConfirm" class="custom-control-input" >
+                                <label class="custom-control-label" for="customRadio4">No</label>
+                            </div>
+                        </div>
+    
+                        <div  class="col-xs-12 col-lg-8 offset-lg-2" *ngIf='funcionario.inhabilidad == "true"'>
+                            <textarea class="form-control" [(ngModel)]="funcionario.novedad" rows='5' name="novedad" required></textarea>
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button (click)="onCancelarConfirm()" (ready)="ready($event)" class="btn btn-default">
+                                <i class="fa fa-times"></i>
+                                Cancel
+                            </button>
+                            <button (click)="onConfirm()" (ready)="ready($event)" class="btn btn-primary" type="button">
+                                <i class="fa fa-save"></i>
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="form-group row" *ngIf='formPdf'>
+                    <a href="">
+                        Generar PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

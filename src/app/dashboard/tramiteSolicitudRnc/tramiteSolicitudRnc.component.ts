@@ -114,7 +114,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
 
   onSearchSolicitante(){
     let token = this._loginService.getToken();
-    this._CiudadanoService.showCiudadanoCedula(token, {'numeroIdentificacion':this.identificacion}).subscribe(
+    this._CiudadanoService.searchByIdentificacion(token, {'numeroIdentificacion':this.identificacion}).subscribe(
       response => {          
         if(response.status == 'success'){
           this.solicitante = response.data;

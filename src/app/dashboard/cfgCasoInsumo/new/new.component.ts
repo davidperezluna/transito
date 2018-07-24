@@ -18,8 +18,8 @@ export class NewComponent implements OnInit {
   public modulos: any;
   public moduloSelected: any;
   public tipoCasoInsumos = [
-    { 'value': "Insumo", 'label': "Insumo" },
-    { 'value': "Sustrato", 'label': "Sustrato" }
+    { 'value': "Insumo", 'label': "Sustrato" },
+    { 'value': "Sustrato", 'label': "Insumo" }
   ];
   public tipoCasoInsumoSelected: any;
 
@@ -54,7 +54,6 @@ export class NewComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
     this.cfgCasoInsumo.moduloId = this.moduloSelected;
-    this.cfgCasoInsumo.tipo = this.tipoCasoInsumoSelected;
     console.log(this.cfgCasoInsumo);
     this._CfgCasoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
       response => {
