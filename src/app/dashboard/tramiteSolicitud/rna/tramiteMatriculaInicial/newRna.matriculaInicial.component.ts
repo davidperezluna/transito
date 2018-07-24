@@ -60,7 +60,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         'vehiculo': null,
         'sustrato': null,
         'numeroLicencia': null,
-        'tramiteFactura': null,
+        'tramiteFactura': null, 
     };
 
     constructor(
