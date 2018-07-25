@@ -460,4 +460,11 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     }
   }
 
+    btnCancelarCiudadano() {
+        this.ciudadanoEncontrado = 1
+    }
+
+    btnCancelarEmpresa() {
+        this.empresaEncontrada = 1
+    }
 }
