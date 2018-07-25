@@ -25,6 +25,7 @@ import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacio
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
+import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 import { buscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
 
 import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
@@ -171,6 +172,7 @@ export const DashboardRoutes: Route[] = [
         ...rnaAsignacionInsumosRoutes ,
         ...LimitacionRoutes,
         ...CfgTipoProcesoRoutes,
+        ...CfgValorVehiculoRoutes,
        ]
     }
 ];

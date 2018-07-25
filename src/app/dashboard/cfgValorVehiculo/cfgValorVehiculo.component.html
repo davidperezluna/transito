@@ -1,0 +1,60 @@
+<div class="container">
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Configuración</b>
+            <br>
+            <small>Valor</small>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Marca</th>
+                <th>Linea</th>
+                <th>Clase</th>
+                <th>Valor</th>
+                <th>Año</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let cfgValorVehiculo of cfgValorVehiculos; let i = index">
+                <td>{{cfgValorVehiculo.id}}</td>
+                <td>{{cfgValorVehiculo.linea.marca.nombre}}</td>
+                <td>{{cfgValorVehiculo.marca}}</td>
+                <td>{{cfgValorVehiculo.clase?.nombre}}</td>
+                <td>{{cfgValorVehiculo.valor}}</td>
+                <td>{{cfgValorVehiculo.anio}}</td>
+                <td>
+                  <button (click)="editCfgValorVehiculo(cfgValorVehiculo)" class="btn btn-xs btn-info" type="button">Editar
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button (click)="deleteCfgValorVehiculo(cfgValorVehiculo.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-edit *ngIf='formEdit' [cfgValorVehiculo]="cfgValorVehiculo" (ready)="ready($event)"></app-edit>
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>
