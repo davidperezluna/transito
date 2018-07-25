@@ -92,6 +92,7 @@ import { GestionTransportePublicoModule } from './gestionTransportePublico/gesti
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
 import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
+import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -181,6 +182,7 @@ import {RightsidebarComponent} from '../shared';
       LimitacionModule,
       CfgTipoProcesoModule,
       RnmaTramiteInscripcionLimitacionModule,
+      RnrsPreregistroModule,
       
       //MsvTCAsignacionModule,
     ],
