@@ -22,7 +22,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
   public formEdit = false;
   public formIndex = true;
   public table: any = null;
-  public cfgPlaca: any;
+  public tramiteInscripcion: any;
 
   constructor(
     private _TramiteLimitacionService: RnmaTramiteLimitacionService,
@@ -138,8 +138,8 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
     })
   }
 
-  editCfgPlaca(cfgPLaca: any) {
-    this.cfgPlaca = cfgPLaca;
+  editCfgPlaca(tramiteInscripcion: any) {
+    this.tramiteInscripcion = tramiteInscripcion;
     this.formEdit = true;
     this.formIndex = false;
   }

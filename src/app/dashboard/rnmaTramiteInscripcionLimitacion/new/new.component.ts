@@ -52,7 +52,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null);
+    // this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null,null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._MunicipioService.getMunicipioSelect().subscribe(
       response => {
