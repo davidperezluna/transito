@@ -1,5 +1,7 @@
 export class RnmaTramiteInscripcionLimitacion{
 	constructor(
+		
+		public limitacionDatos:string,
 		public fechaRadicacion:string,
 		public municipioId:number,
 		public departamentoId:number,

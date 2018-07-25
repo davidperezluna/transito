@@ -1,23 +1,77 @@
-
 <div class="row"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
-                    Transformaciones
+                    Transformación o conversión de remolque o semiremolque
                 </h5>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <div class="row justify-content-center container">
-                    <div class="form-group row col-xs-12 col-lg-12">
-                        <label>Tipo Potenciación <span class="text-danger">*</span></label>
-                        <ng-select [multiple]="false" [options]="tiposPotenciacion" [(ngModel)]="tipoPotenciacionSelect" required name="tipoPotenciacion">
-                        </ng-select>
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Nuevo número de ejes<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="datos.nuevoNumeroEjes" name="nuevoNumeroEjes" type="text" required />
+                    </div> 
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Número FTH<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="datos.numeroFTH" name="numeroFTH" type="text" required />
                     </div>
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Peso Vacio<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="datos.pesoVacio" name="pesoVacio" type="text" required />
+                    </div>
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Carga Útil<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="datos.cargaUtil" name="cargaUtil" type="text" required />
+                    </div>
+                    <br><br>
                     <div class="col-xs-12 col-lg-12">
-                        <label>Nueva Modelo<span class="text-danger">*</span></label>
-                        <input class="form-control" [(ngModel)]="nuevoModelo" name="nuevoModelo" type="text" required />
+                        <label><h5>Datos Documento soporte</h5></label>
                     </div>
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Tipo documento 
+                            <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-control" name="tipoDocumentoSelected" [(ngModel)]="datos.tipoDocumento" required>
+                            <option value="Carné diplomático">Carné diplomático</option>
+                            <option value="Cédula ciudadania">Cédula ciudadania</option>
+                            <option value="Cédula extranjería" >Cédula extranjería</option>
+                            <option value="NIT">NIT</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Registro civil nacimiento">Registro civil nacimiento</option>
+                            <option value="Pasaporte">Tarjeta identidad</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Número documento<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="datos.numeroDocumento" name="numeroDocumento" type="text" required />
+                    </div> 
+                    <div class="col-xs-6 col-lg-12">
+                        <label>Nombre empresa<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="datos.nombreEmpresa" name="nombreEmpresa" type="text" required />
+                    </div> 
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Fecha factura (dd/mm/aaaa)<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="datos.fechaFactura" name="fechaFactura" type="date" required/>
+                    </div>
+                    <div class="col-xs-6 col-lg-6">
+                            <label>Tipo documento soporte
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" name="tipoDocumentoSoporteSelected" [(ngModel)]="datos.tipoDocumentoSoporte" required>
+                                <option value="Carné diplomático">Carné diplomático</option>
+                                <option value="Cédula ciudadania">Cédula ciudadania</option>
+                                <option value="Cédula extranjería" >Cédula extranjería</option>
+                                <option value="NIT">NIT</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                                <option value="Registro civil nacimiento">Registro civil nacimiento</option>
+                                <option value="Pasaporte">Tarjeta identidad</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6 col-lg-6">
+                                <label>Número factura<span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" type="text" required />
+                            </div> 
                 </div>
             </div>
             <div class="card-footer">
@@ -26,4 +80,4 @@
             </div>
         </div>
     </div><!-- /.col -->
-</div><!-- /.row -->
+</div><!-- /.row --><div class="row"><!-- .row -->

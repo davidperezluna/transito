@@ -2,11 +2,14 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { LoginService } from '../../../services/login.service';
 import { RnmaTramiteLimitacionService } from '../../../services/rnmaTramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
+import { VehiculoService } from '../../../services/vehiculo.service';
+import { CiudadanoService } from '../../../services/ciudadano.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { DepartamentoService } from '../../../services/departamento.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
+import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { RnmaTramiteInscripcionLimitacion } from '../rnmaTramiteInscripcionLimitacion.modelo';
 import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
 import swal from 'sweetalert2';
@@ -20,39 +23,68 @@ export class NewComponent implements OnInit {
   public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
   public errorMessage;
   public respuesta;
-  public ciudadanoDemandado: Ciudadano = null;
-  public ciudadanoDemandante: Ciudadano = null;
+  public ciudadanoDemandado: any;
+  public ciudadanoDemandadoEncontrado = 1;
+  public ciudadanoDemandante: any;
+  public ciudadanoDemandanteEncontrado = 1;
   public municipios;
   public municipioSelected;
   public departamentos;
   public departamentoSelected;
+  public tipoIdentificacionSelected;
   public entidadesJudiciales;
   public entidadJudicialSelected;
   public limitaciones;
   public limitacionSelected;
   public tiposProceso;
   public tipoProcesoSelected;
+  public placa: any;
+  public vehiculo: any;
+  public placaEncontrada = 1;
+  public demandado = false;
+  public demandante = false;
+  public listaVehiculosPlacas = false;
+  public identificacionDemandado: any;
+  public identificacionDemandante: any;
+  public tipoIdentificaciones = [];
   public datos = {
   }
   public datos2 = {
     'vehiculos': [],
-    'ciudadanoDemandante': null,
-    'ciudadanoDemandado': null,
+    'cDemandante': [],
+    'cDemandado': [],
   }
 
   constructor(
     private _RnmaTramiteInscripcionLimitacionService: RnmaTramiteLimitacionService,
     private _VehiculoLimitacionService: VehiculoLimitacionService,
+    private _VehiculoService: VehiculoService,
+    private _CiudadanoService: CiudadanoService,
     private _loginService: LoginService,
     private _MunicipioService: MunicipioService,
     private _DepartamentoService: DepartamentoService,
     private _CfgEntidadJuducialService: CfgEntidadJudicialService,
     private _LimitacionService: LimitacionService,
     private _CfgTipoProcesoService: CfgTipoProcesoService,
+    private _tipoIdentificacionService: TipoIdentificacionService,
   ) { }
 
   ngOnInit() {
-    this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null);
+    // this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null,null, null, null, null, null, null, null, null, null, null, null, null);
+
+    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+      response => {
+        this.tipoIdentificaciones = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
 
     this._MunicipioService.getMunicipioSelect().subscribe(
       response => {
@@ -122,13 +154,18 @@ export class NewComponent implements OnInit {
     );
 
   }
+
+
+  enviarTramite(){
+    
+  }
+
   onCancelar() {
     this.ready.emit(true);
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.datos2.ciudadanoDemandado.id;
-    this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.datos2.ciudadanoDemandante.id;
+
     this.rnmaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
     this.rnmaTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
     this.rnmaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
@@ -165,6 +202,152 @@ export class NewComponent implements OnInit {
         }
 
       });
+  }
+
+  onKeyPlaca() {
+    let token = this._loginService.getToken();
+    let placa = {
+      'numeroPlaca': this.placa,
+    };
+    this._VehiculoService.showVehiculoParametro(token, this.placa).subscribe(
+      response => {
+        this.respuesta = response;
+        if (this.respuesta.status == 'success') {
+          this.vehiculo = this.respuesta.data;
+          this.placaEncontrada = 2;
+        } else {
+          this.placaEncontrada = 3;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+  }
+
+  onKeyCiudadanoDemandado() {
+    let token = this._loginService.getToken();
+    let identificacion = {
+      'numeroIdentificacion': this.identificacionDemandado,
+    };
+    this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+      response => {
+        this.respuesta = response;
+        if (this.respuesta.status == 'success') {
+          this.ciudadanoDemandado = this.respuesta.data;
+          this.ciudadanoDemandadoEncontrado = 2;
+          console.log(this.ciudadanoDemandado);
+        } else {
+          this.ciudadanoDemandadoEncontrado = 3;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+  }
+
+  onKeyCiudadanoDemandante() {
+    let token = this._loginService.getToken();
+    let identificacion = {
+      'numeroIdentificacion': this.identificacionDemandado,
+    };
+    this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+      response => {
+        this.respuesta = response;
+        if (this.respuesta.status == 'success') {
+          this.ciudadanoDemandante = this.respuesta.data;
+          this.placaEncontrada = 2;
+        } else {
+          this.placaEncontrada = 3;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+  }
+
+  delete(vehiculo: any): void {
+    this.datos2.vehiculos = this.datos2.vehiculos.filter(h => h !== vehiculo);
+    if (this.datos2.vehiculos.length === 0) {
+      this.listaVehiculosPlacas = false;
+    }
+  }
+
+  deleteCiudadanoDemandado(ciudadanoDemandado: any): void {
+    this.datos2.cDemandado = this.datos2.cDemandado.filter(h => h !== ciudadanoDemandado);
+    if (this.datos2.cDemandado.length === 0) {
+      this.demandado = false;
+    }
+  }
+
+  deleteCiudadanoDemandante(ciudadanoDemandante: any): void {
+    this.datos2.cDemandante = this.datos2.cDemandante.filter(h => h !== ciudadanoDemandante);
+    if (this.datos2.cDemandante.length === 0) {
+      this.demandante = false;
+    }
+  }
+
+  btnNewVehiculo() {
+
+    this.datos2.vehiculos.push(
+      {
+        'placa': this.vehiculo.placa.numero,
+        'sedeOperativa': this.vehiculo.sedeOperativa.nombre
+      }
+    );
+
+    this.placaEncontrada = 1;
+    this.listaVehiculosPlacas = true;
+  }
+
+  btnNewDemandado() {
+    this.datos2.cDemandado.push(
+      {
+        'nombres': this.ciudadanoDemandado.primerNombre,
+        'identificacion': this.ciudadanoDemandado.identificacion
+      }
+    );
+
+    this.ciudadanoDemandadoEncontrado = 1;
+    this.demandado = true;
+  }
+  btnNewDemandante() {
+    this.datos2.cDemandado.push(
+      {
+        'nombres': this.ciudadanoDemandante.primerNombre,
+        'identificacion': this.ciudadanoDemandante.identificacion
+      }
+    );
+
+    this.ciudadanoDemandanteEncontrado = 1;
+    this.demandante = true;
+  }
+
+
+  btnCancelarVehiculo() {
+    this.placaEncontrada = 1
+  }
+
+  btnCancelarDemandado() {
+    this.ciudadanoDemandadoEncontrado = 1
+  }
+
+  btnCancelarDemandante() {
+    this.ciudadanoDemandanteEncontrado = 1
   }
 
 }

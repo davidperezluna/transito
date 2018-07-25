@@ -136,4 +136,5 @@ export class TramiteSolicitudComponent implements OnInit {
     this.formEdit = true;
     this.formIndex = false;
   }
+  
 }
