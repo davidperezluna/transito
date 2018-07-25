@@ -30,14 +30,17 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
     public entregada = false;
     public datos = {
         'motivoCancelacion': null,
-        'entidadJudicial': null,
-        'numeroOficio': null, 
-        'declaracion':null,  
-        'fechaDeclaracion':null,
-        'ipat':null,
-        'fechaEchos':null,
-        'recuperarMotor':null,         
-        'sustrato': null,
+        'fechaHechos': null,
+        'numeroRunt': null,
+        'tipoDocumento': null,
+        'numeroDocumento': null,
+        'fechaExpedicion': null,
+        'entidadExpide': null,
+        'fechaDeclaracion': null,
+        'numeroDeclaracion': null,
+        'numeroDesintegracion': null,
+        'nombreDesintegradora': null,
+        'fechaHechosDesintegracion': null,
         'tramiteFactura': null,
     };
 
@@ -49,9 +52,9 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+
         this.nivelBlindajeList = ['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO','SEIS','SIETE','OCHO'];
         this.tipoBlindajeList = ['Blindaje de un vehículo', 'Desblindaje de un vehículo'];
-
         this._SustratoService.getSustratoSelect().subscribe(
             response => {
                 this.sustratos = response;
@@ -68,37 +71,39 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.cancelado=true
-        this.datos.tramiteFactura =15;
+        this.vehiculo.servicioId = this.vehiculo.servicio.id
+        this.vehiculo.municipioId = this.vehiculo.municipio.id
+        this.vehiculo.lineaId = this.vehiculo.linea.id
+        this.vehiculo.colorId = this.vehiculo.color.id
+        this.vehiculo.combustibleId = this.vehiculo.combustible.id
+        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id
+        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id
+        this.vehiculo.claseId = this.vehiculo.clase.id
+        this.vehiculo.servicioId = this.vehiculo.servicio.id
+        this.vehiculo.cancelado = true
+        this.datos.tramiteFactura = 15;
+        console.log(this.vehiculo);
+        
         let token = this._loginService.getToken();
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.readyTramite.emit(this.datos);
-            }
-            error => {
+        this._VehiculoService.editVehiculo(this.vehiculo, token).subscribe(
+            response => {
+                this.respuesta = response;
+                if (this.respuesta.status == 'success') {
+                    this.readyTramite.emit(this.datos);
+                }
+                error => {
                     this.errorMessage = <any>error;
 
-                    if(this.errorMessage != null){
+                    if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
                     }
                 }
-        });
+            });
 
 
     }
-    onCancelar(){
+    onCancelar() {
         this.cancelarTramite.emit(true);
     }
 

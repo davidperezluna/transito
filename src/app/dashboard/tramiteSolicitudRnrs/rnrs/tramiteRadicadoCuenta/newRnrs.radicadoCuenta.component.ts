@@ -88,11 +88,9 @@ export class NewRnrsRadicadoCuentaComponent implements OnInit {
           );
 
     }
-    
    
     enviarTramite(){     
         let token = this._loginService.getToken();
-
         this.datos.municipioSelected = this.municipioSelected;
         this.datos.tipoIdentificacionSelected = this.tipoIdentificacionSelected;
         this.datos.numeroDocumento = this.numeroDocumento;
@@ -101,11 +99,7 @@ export class NewRnrsRadicadoCuentaComponent implements OnInit {
         this.datos.empresaEnvio = this.empresaEnvio;
         this.datos.rut = this.rut;
         this.datos.tramiteFactura = 4;
-        console.log(this.datos);
         this.readyTramite.emit(this.datos);
-
-        
-
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
