@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {RnaPreregistroService} from '../../services/rnaPreregistro.service';
+import {VehiculoService} from '../../services/vehiculo.service';
 import {LoginService} from '../../services/login.service';
 import {RnaPreregistro} from './rnaPreregistro.modelo';
 import { NewRnaPreregistroComponent } from './new/new.component';
@@ -22,6 +23,7 @@ export class RnaPreregistroComponent implements OnInit {
   public vehiculo: RnaPreregistro;
 
   constructor(
+		private _VehiculoService: VehiculoService,
 		private _RnaPreregistroService: RnaPreregistroService,
 		private _loginService: LoginService,
 	
@@ -97,5 +99,50 @@ export class RnaPreregistroComponent implements OnInit {
     this.formIndex = false;
     this.formEdit = true;
   }
+
+  
+  deleteVehiculo(id:any){
+
+  console.log(this.id);
+  swal({
+    title: '¿Estás seguro?',
+    text: "¡Se eliminara este registro!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#15d4be',
+    cancelButtonColor: '#ff6262',
+    confirmButtonText: 'Confirmar',
+    cancelButtonText: 'Cancelar'
+    
+  }).then((result) => {
+    if (result.value) {
+      let token = this._loginService.getToken();
+      this._VehiculoService.deleteVehiculo(token,id).subscribe(
+          response => {
+              swal({
+                    title: 'Eliminado!',
+                    text:'Registro eliminado correctamente.',
+                    type:'success',
+                    confirmButtonColor: '#15d4be',
+                  })
+                this.table.destroy();
+                this.respuesta= response;
+                this.ngOnInit();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+    }
+  })
+}
+
+
+
 
 }
