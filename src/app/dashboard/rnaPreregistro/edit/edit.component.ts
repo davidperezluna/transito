@@ -279,7 +279,7 @@ constructor(
     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
 			response => {
         this.respuesta = response; 
-        console.log(this.respuesta);
+        console.log(this.respuesta); 
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({

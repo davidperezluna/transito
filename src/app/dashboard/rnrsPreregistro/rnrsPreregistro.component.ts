@@ -2,16 +2,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {RegistroMaquinariaService} from '../../services/registroMaquinaria.service';
 import {LoginService} from '../../services/login.service';
 // import {Vehiculo} from './vehiculo.modelo';
-import { RegistroMaquinaria } from './rnmaRegistroMaquinaria.modelo';
-import { NewRegistroMaquinariaComponent } from './new/new.component';
+import { RegistroRemolque } from './rnrsPreregistro.modelo';
+import { NewRegistroRemolqueComponent } from './new/new.component';
 declare var $: any;
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnmaRegistroMaquinaria.component.html'
+  templateUrl: './rnrsPreregistro.component.html'
 })
-export class RnmaRegistroMaquinariaComponent implements OnInit {
+export class RnrsPreregistroComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -21,7 +21,7 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
   public formNew = false;
   public formEdit= false;
   public table:any; 
-  public registroMaquinaria: RegistroMaquinaria;
+  public registroMaquinaria: RegistroRemolque;
 
   constructor(
 		private _RegistroMaquinariaService: RegistroMaquinariaService,
@@ -99,7 +99,7 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
     this.formEdit = true;
   }
 
-  deleteRegistroMaquinaria(id:any){
+  deleteMaquinaria(id:any){
 
     swal({
       title: '¿Estás seguro?',

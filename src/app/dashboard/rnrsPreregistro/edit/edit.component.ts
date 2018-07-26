@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { RegistroMaquinaria } from '../rnmaRegistroMaquinaria.modelo';
-import { RnmaRegistroMaquinariaModule } from '../rnmaRegistroMaquinaria.module';
+import { RegistroRemolque } from '../rnrsPreregistro.modelo';
+import { RnrsPreregistroModule } from '../rnrsPreregistro.module';
 import {RegistroMaquinariaService} from '../../../services/registroMaquinaria.service';
 import { LoginService } from '../../../services/login.service';
 import {ColorService} from '../../../services/color.service';

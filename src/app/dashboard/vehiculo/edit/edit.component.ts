@@ -76,7 +76,7 @@ constructor(
     
     this._lineaService.getLineaSelect().subscribe(
       response => {
-        this.lineas = response;
+        this.lineas = response; 
         setTimeout(() => {
             this.lineaSelected = [this.vehiculo.linea.id]; 
             this._MarcaService.getMarcaSelect().subscribe(

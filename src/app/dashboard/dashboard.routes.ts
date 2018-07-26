@@ -25,6 +25,7 @@ import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacio
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
 import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
+import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 import { buscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
 
 import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
@@ -87,6 +88,7 @@ import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegis
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
+import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
@@ -171,6 +173,8 @@ export const DashboardRoutes: Route[] = [
         ...rnaAsignacionInsumosRoutes ,
         ...LimitacionRoutes,
         ...CfgTipoProcesoRoutes,
+        ...CfgValorVehiculoRoutes,
+        ...RnrsPreregistroRoutes,
        ]
     }
 ];

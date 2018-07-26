@@ -4,7 +4,8 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
 import { CombustibleService } from '../../../../services/combustible.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
+import { RegistroRemolqueService } from '../../../../services/rnrsRegistroRemolque.service';
 
 import swal from 'sweetalert2';
 
@@ -18,55 +19,58 @@ export class NewRnrsTransformacionComponent implements OnInit {
     @Input() vehiculo: any = null;
     public errorMessage;
     public respuesta;
-    public nuevoModelo: any;
-    public datos = {
-        'nuevoNumeroEjes': null,
-        'numeroFTH': null,
-        'pesoVacio': null,
-        'cargaUtil': null,
-        'tipoDocumento': null,
-        'numeroDocumento': null,
-        'nombreEmpresa': null,
-        'fechaFactura': null,
-        'tipoDocumentoSoporte': null,
-        'numeroFactura': null,
-        'tramiteFactura': null,
-        'idVehiculo': null,
-    };
+    public datos: any;
 
     constructor(
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
+        private _RemolqueService: RegistroRemolqueService,
     ) { }
 
     ngOnInit() {
-
+        this.datos = {
+            'nuevoNumeroEjes': null,
+            'numeroFTH': null,
+            'pesoVacio': null,
+            'cargaUtil': null,
+            'tipoDocumento': null,
+            'numeroDocumento': null,
+            'nombreEmpresa': null,
+            'fechaFactura': null,
+            'tipoDocumentoSoporte': null,
+            'numeroFactura': null,
+            'tramiteFactura': null,
+            'idVehiculo': null,
+        };
     }
-    
-    enviarTramite(){
-        
-        let token = this._loginService.getToken();
-        console.log(this.vehiculo);
-        this.datos.idVehiculo = this.vehiculo.id;
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.datos.tramiteFactura =10;
-                this.readyTramite.emit(this.datos);
-            }
-            error => {
-                    this.errorMessage = <any>error;
 
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
+    enviarTramite() {
+        let token = this._loginService.getToken();
+        this.datos.idVehiculo = this.vehiculo.id;
+        this._RemolqueService.transformacionVehiculoRemolque(this.datos, token).subscribe(
+            response => {
+                this.respuesta = response;
+                if (this.respuesta.status == 'success') {
+                    this.datos.tramiteFactura = 10;
+                    this.readyTramite.emit(this.datos);
+                    this.ngOnInit();
+                }
+                else if (this.respuesta.status == "error") {
+                    swal({
+                        type: 'error',
+                        title: 'Oops...',
+                        text: this.respuesta.msj
+                    })
+                }
+                error => {
+                    if (this.errorMessage != null) {
                         alert("Error en la petición");
                     }
                 }
-        }); 
+            });
     }
 
-    onCancelar(){
+    onCancelar() {
         this.cancelarTramite.emit(true);
     }
 
