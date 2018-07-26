@@ -93,6 +93,7 @@ import { GestionTransportePublicoModule } from './gestionTransportePublico/gesti
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
 import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
+import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -183,12 +184,13 @@ import {RightsidebarComponent} from '../shared';
       CfgTipoProcesoModule,
       RnmaTramiteInscripcionLimitacionModule,
       CfgValorVehiculoModule,
+      RnrsPreregistroModule,
       
       //MsvTCAsignacionModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
-    providers:[],
+  providers: [],
 })
 
 export class DashboardModule { }

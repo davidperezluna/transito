@@ -88,6 +88,7 @@ import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegis
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
+import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
@@ -173,6 +174,7 @@ export const DashboardRoutes: Route[] = [
         ...LimitacionRoutes,
         ...CfgTipoProcesoRoutes,
         ...CfgValorVehiculoRoutes,
+        ...RnrsPreregistroRoutes,
        ]
     }
 ];

@@ -1,0 +1,151 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-10">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">formulario para el ingreso de nueva remolque </h5>
+                <hr> 
+                    <form #newForm="ngForm" >
+                    <div  class="row justify-content-center">
+                            <div class="container">
+                                <div class="form-group row">
+                                <div class="col-lg-3 col-md-4">
+                                    <label>Placa*</label> 
+                                    <input class="form-control" [(ngModel)]="registroMaquinaria.vehiculoPlaca" name="placa" placeholder="" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-4">
+                                    <label>Nro. serie*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.vehiculoSerie" name="serie" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-4">
+                                    <label>Nro. VIN*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.vehiculoVin" name="vin" type="text" required>
+                                </div>
+                                <div class=" col-md-3">
+                                    <label>Carroceria*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="carrocerias"
+                                        [(ngModel)]="carroceriaSelected"
+                                        
+                                        required
+                                        name="carroceriaId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>Marca*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="marcas"
+                                        [(ngModel)]="marcaSelected"
+                                        (ngModelChange)="changedMarca($event)"
+                                        required
+                                        name="marcaId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Alto total*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="altoTotal" name="altoTotal" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Largo total*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="largoTotal" name="LargoTotal" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Ancho total*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="anchoTotal" name="anchoTotal" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Nro. ejes*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="numeroEjes" name="numeroEjes" type="text" required>
+                                </div>
+                                <div class=" col-md-3">
+                                    <label>Origen de registro*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="origenRegistros"
+                                        [(ngModel)]="origenRegistroSelected"
+                                        required
+                                        name="origenRegistrosId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Carga util*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="cargaUtilMaxima" name="cargaUtilMaxima" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Peso vació*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="pesoBruto" name="pesoBruto" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Referencia*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="referencia" name="referencia" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Año de modelo*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.vehiculoModelo" name="modelo" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Nro. FTH*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="nroFth" name="nroFth" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Nro. solicitud RUT*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="rut" name="rut" type="text" required>
+                                </div>
+                                </div>
+                            </div> 
+                            <div class="container">
+                                <hr> 
+                                <h5 class="m-0">Datos básicos</h5><br>
+                                <div class="form-group row">                                    
+                                    <div class=" col-md-3">
+                                        <label>Condición de ingreso*</label>
+                                        <ng-select
+                                            [multiple]="false"
+                                            [options]="condiciones"
+                                            [(ngModel)]="condicionSelected"
+                                            required
+                                            name="condicion">
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <label>Clase de vehiculo*</label>
+                                        <ng-select
+                                            [multiple]="false"
+                                            [options]="clases"
+                                            [(ngModel)]="claseSelected"
+                                            required
+                                            name="claseId">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <hr> 
+                                <h5 class="m-0">Datos propietario</h5><br>
+                                <div class="form-group row">
+                                    <div class=" col-md-3">
+                                        <label>Tipo propietario*</label>
+                                        <ng-select
+                                            [multiple]="false"
+                                            [options]="colores"
+                                            [(ngModel)]="colorSelected"
+                                            required
+                                            name="colorId">
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <br><button class="btn btn-success " >Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </form>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" class="btn btn-success " [disabled]="newForm.invalid">Enviar</button>
+                </div>    
+            </div>
+        </div>    
+    </div>
+</div>

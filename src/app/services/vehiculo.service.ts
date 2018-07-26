@@ -24,6 +24,8 @@ export class VehiculoService {
 	}
 
 	deleteVehiculo(token,id){
+
+		let json = JSON.stringify(id);
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
@@ -76,7 +78,7 @@ export class VehiculoService {
 	}
 
 	editVehiculoColor(vehiculo,token){
-
+ 
 		let json = JSON.stringify(vehiculo);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

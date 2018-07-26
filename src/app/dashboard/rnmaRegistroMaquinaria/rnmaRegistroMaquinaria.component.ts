@@ -99,7 +99,7 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
     this.formEdit = true;
   }
 
-  deleteMaquinaria(id:any){
+  deleteRegistroMaquinaria(id:any){
 
     swal({
       title: '¿Estás seguro?',
