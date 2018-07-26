@@ -13,31 +13,30 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                  <th>Placa </th>
-                  <th>Tipo de vehiculo</th>
-                  <th>Modelo</th>
+                  <th>Placa</th>
                   <th>Marca</th>
-                  <th>linea</th> 
-                  <th>Motor</th>
-                  <th>chasis</th>
-                  <th>Combustible</th>
+                  <th>Serie</th>
+                  <th>Vin</th>
+                  <th>Numero de ejes</th>
+                  <th>Origen del destino</th>
+                  <th>Numero Fth</th>
+                  <th>Condicion Ingreso</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let registroMaquinaria of registrosMaquinaria; let i = index">
-                  <td>{{ registroMaquinaria.vehiculo.placa.numero }}</td>
-                  <td>{{ registroMaquinaria.tipoVehiculo.nombre }}</td>
-                  <td>{{ registroMaquinaria.vehiculo.modelo }}</td>
-                  <td>{{ registroMaquinaria.vehiculo.linea.marca.nombre}}</td>
-                  <td>{{ registroMaquinaria.vehiculo.linea.nombre }}</td>
-                  <td>{{ registroMaquinaria.vehiculo.motor }}</td>
-                  <td>{{ registroMaquinaria.vehiculo.chasis }}</td>
-                  <td>{{ registroMaquinaria.vehiculo.combustible.nombre }}</td>
-                  <!-- <td>{{ registroMaquinaria.id }}</td> -->
+                <tr class="odd" *ngFor="let registroRemolque of registrosRemolque; let i = index">
+                  <td>{{ registroRemolque.vehiculo.placa.numero }}</td>
+                  <td>{{ registroRemolque.vehiculo.linea.marca.nombre }}</td>
+                  <td>{{ registroRemolque.vehiculo.serie}}</td>
+                  <td>{{ registroRemolque.vehiculo.vin}}</td>
+                  <td>{{ registroRemolque.numeroEjes }}</td>
+                  <td>{{ registroRemolque.origenRegistro.nombre }}</td>
+                  <td>{{ registroRemolque.numeroFth }}</td>
+                  <td>{{ registroRemolque.condicionIngreso.nombre }}</td>
                   <td>
-                    <button (click)="editVehiculo(registroMaquinaria)" class="btn btn-outline-info" type="button" >Editar</button> 
-                    <button (click)="deleteMaquinaria(registroMaquinaria.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                    <button (click)="editRemolque(registroRemolque)" class="btn btn-outline-info" type="button" >Editar</button> 
+                    <button (click)="deleteRemolque(registroRemolque.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
                   </td>
                 </tr>
               </tbody>
@@ -47,7 +46,7 @@
         </div>
       </div>
     </div>
-    <!-- <app-edit *ngIf='formEdit' [registroMaquinaria]="registroMaquinaria" (ready)="ready($event)"></app-edit> -->
+    <app-edit *ngIf='formEdit' [registroRemolque]="registroRemolque" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new> 
 
 </div>

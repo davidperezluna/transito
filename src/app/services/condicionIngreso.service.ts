@@ -4,36 +4,36 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class RegistroRemolqueService {
-	private url = environment.apiUrl + "vehiculoremolque";
+export class CondicionIngresoService{
+	private url = environment.apiUrl + "condicioningreso";
 	public identity;
-	public token; 
+	public token;
 
 	constructor(private _http: Http){}
 
-	index(){
+	getCondicionIngreso(){
+		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(registroRemolque,token){
+	register(condicionIngreso,token){
 		
-		let json = JSON.stringify(registroRemolque);
+		let json = JSON.stringify(condicionIngreso);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteRegistroRemolque(token,id){
+	deleteCondicionIngreso(token,id){
 
-		let json = JSON.stringify(id);
-		let params = "json="+json+"&authorization="+token;
+		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showRegistroRemolque(token,id){
+	showCondicionIngreso(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,9 +42,9 @@ export class RegistroRemolqueService {
 
 	}
 
-	editRegistroRemolque(registroRemolque,token){
- 
-		let json = JSON.stringify(registroRemolque);		
+	editCondicionIngreso(condicionIngreso,token){
+
+		let json = JSON.stringify(condicionIngreso);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,11 +52,9 @@ export class RegistroRemolqueService {
 
 	}
 
-	getRegistroRemolqueSelect(){
+	getCondicionIngresoSelect(){
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
-
-	
 	
 }
