@@ -4,7 +4,8 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
 import { CombustibleService } from '../../../../services/combustible.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
+import { RegistroRemolqueService } from '../../../../services/rnrsRegistroRemolque.service';
 
 import swal from 'sweetalert2';
 
@@ -37,6 +38,7 @@ export class NewRnrsTransformacionComponent implements OnInit {
     constructor(
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
+        private _RemolqueService: RegistroRemolqueService,
     ) { }
 
     ngOnInit() {
