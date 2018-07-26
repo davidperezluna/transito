@@ -3,7 +3,7 @@ import {RegistroMaquinariaService} from '../../services/registroMaquinaria.servi
 import {LoginService} from '../../services/login.service';
 // import {Vehiculo} from './vehiculo.modelo';
 import { RegistroRemolque } from './rnrsPreregistro.modelo';
-import { NewRegistroMaquinariaComponent } from './new/new.component';
+import { NewRegistroRemolqueComponent } from './new/new.component';
 declare var $: any;
 import swal from 'sweetalert2';
 

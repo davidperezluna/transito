@@ -62,6 +62,11 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" routerLink="cfgValorVehiculo" [ngClass]="{'active' : ( addActive === 'cfgValorVehiculo')}" (click)="addActiveMenu('cfgValorVehiculo')">
+                <i class="fa fa-angle-right"></i> Valor Vehiculo
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" routerLink="linea"  [ngClass]="{'active' : ( addActive === 'linea')}" (click)="addActiveMenu('linea')"><i class="fa fa-angle-right"></i> Linea
               </a>
             </li>
