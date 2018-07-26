@@ -21,6 +21,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
+  public vehiculoLimitacion: any;
   public errorMessage;
   public respuesta;
   public ciudadanoDemandado: any;
@@ -31,7 +32,8 @@ export class NewComponent implements OnInit {
   public municipioSelected;
   public departamentos;
   public departamentoSelected;
-  public tipoIdentificacionSelected;
+  public tipoIdentificacionDemandanteSelected:any;
+  public tipoIdentificacionDemandadoSelected:any;
   public entidadesJudiciales;
   public entidadJudicialSelected;
   public limitaciones;
@@ -46,7 +48,8 @@ export class NewComponent implements OnInit {
   public listaVehiculosPlacas = false;
   public identificacionDemandado: any;
   public identificacionDemandante: any;
-  public tipoIdentificaciones = [];
+  public tipoIdentificacionesDemandado;
+  public tipoIdentificacionesDemandante;
   public datos = {
   }
   public datos2 = {
@@ -70,11 +73,25 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null,null, null, null, null, null, null, null, null, null, null, null, null);
+    this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
-        this.tipoIdentificaciones = response;
+        this.tipoIdentificacionesDemandado = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+      response => {
+        this.tipoIdentificacionesDemandante = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -139,7 +156,7 @@ export class NewComponent implements OnInit {
         }
       }
     );
-    this._CfgTipoProcesoService.getTipoProceso().subscribe(
+    this._CfgTipoProcesoService.getTipoProcesoSelect().subscribe(
       response => {
         this.tiposProceso = response;
       },
@@ -156,14 +173,14 @@ export class NewComponent implements OnInit {
   }
 
 
-  enviarTramite(){
+  onEnviar(){
     
   }
 
   onCancelar() {
     this.ready.emit(true);
   }
-  onEnviar() {
+  enviarTramite() {
     let token = this._loginService.getToken();
 
     this.rnmaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
@@ -171,8 +188,14 @@ export class NewComponent implements OnInit {
     this.rnmaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
     this.rnmaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
     this.rnmaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
-    console.log(this.rnmaTramiteInscripcionLimitacion);
-    this._RnmaTramiteInscripcionLimitacionService.register(this.rnmaTramiteInscripcionLimitacion, token).subscribe(
+    this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
+    this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
+    let data =[
+      {'datosLimitacion': this.rnmaTramiteInscripcionLimitacion},
+
+      {'vehiculosLimitacionArray': this.datos2}
+    ]
+    this._RnmaTramiteInscripcionLimitacionService.register(data, token).subscribe(
       response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -184,10 +207,40 @@ export class NewComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
+          // this._VehiculoLimitacionService.register(this.datos2, token).subscribe(
+          //   response => {
+          //     this.respuesta = response;
+          //     console.log(this.respuesta);
+          //     if (this.respuesta.status == 'success') {
+          //       this.ready.emit(true);
+          //       swal({
+          //         title: 'Perfecto!',
+          //         text: 'Registro exitoso!',
+          //         type: 'success',
+          //         confirmButtonText: 'Aceptar'
+          //       })
+          //     } else {
+          //       swal({
+          //         title: 'Error!',
+          //         text: 'La limitacion ya se encuentra registrado',
+          //         type: 'error',
+          //         confirmButtonText: 'Aceptar'
+          //       })
+          //     }
+          //     error => {
+          //       this.errorMessage = <any>error;
+
+          //       if (this.errorMessage != null) {
+          //         console.log(this.errorMessage);
+          //         alert("Error en la petición");
+          //       }
+          //     }
+
+          //   });
         } else {
           swal({
             title: 'Error!',
-            text: 'La placa ya se encuentra registrado',
+            text: 'La limitacion ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -202,6 +255,8 @@ export class NewComponent implements OnInit {
         }
 
       });
+
+
   }
 
   onKeyPlaca() {
@@ -258,16 +313,16 @@ export class NewComponent implements OnInit {
   onKeyCiudadanoDemandante() {
     let token = this._loginService.getToken();
     let identificacion = {
-      'numeroIdentificacion': this.identificacionDemandado,
+      'numeroIdentificacion': this.identificacionDemandante,
     };
     this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
           this.ciudadanoDemandante = this.respuesta.data;
-          this.placaEncontrada = 2;
+          this.ciudadanoDemandanteEncontrado = 2;
         } else {
-          this.placaEncontrada = 3;
+          this.ciudadanoDemandanteEncontrado = 3;
         }
         error => {
           this.errorMessage = <any>error;
@@ -291,6 +346,7 @@ export class NewComponent implements OnInit {
     this.datos2.cDemandado = this.datos2.cDemandado.filter(h => h !== ciudadanoDemandado);
     if (this.datos2.cDemandado.length === 0) {
       this.demandado = false;
+      this.ciudadanoDemandadoEncontrado = 1;
     }
   }
 
@@ -298,6 +354,7 @@ export class NewComponent implements OnInit {
     this.datos2.cDemandante = this.datos2.cDemandante.filter(h => h !== ciudadanoDemandante);
     if (this.datos2.cDemandante.length === 0) {
       this.demandante = false;
+      this.ciudadanoDemandanteEncontrado = 1;
     }
   }
 
@@ -322,18 +379,18 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this.ciudadanoDemandadoEncontrado = 1;
+    this.ciudadanoDemandadoEncontrado = 5;
     this.demandado = true;
   }
   btnNewDemandante() {
-    this.datos2.cDemandado.push(
+    this.datos2.cDemandante.push(
       {
         'nombres': this.ciudadanoDemandante.primerNombre,
         'identificacion': this.ciudadanoDemandante.identificacion
       }
     );
 
-    this.ciudadanoDemandanteEncontrado = 1;
+    this.ciudadanoDemandanteEncontrado = 5;
     this.demandante = true;
   }
 
