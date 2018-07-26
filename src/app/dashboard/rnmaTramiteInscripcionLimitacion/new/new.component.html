@@ -4,6 +4,7 @@
         <!-- .col -->
         <div class="card">
             <div class="card-body">
+                <form #formNew="ngForm">
                 <h5 class="m-0">
                     Registrar limitaciones a la propiedad
                 </h5>
@@ -59,7 +60,7 @@
                             <div class="form-group row col-xs-12 col-lg-12">
                                 <label>Fecha Radicación
                                 </label>
-                                <input type="date" class="form-control" placeholder="fecha radicacion" [(ngModel)]="string" name="fechaRadicacion" required
+                                <input class="form-control" [(ngModel)]="rnmaTramiteInscripcionLimitacion.fechaRadicacion" name="fechaRadicacion" type="date" required
                                 />
 
                             </div>
@@ -77,37 +78,41 @@
                                 <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipioId">
                                 </ng-select>
                             </div>
+                            <br>
+                            <hr>
 
-                            <!--Buscardor Identificador/Demandado -->
-                            <div class="">
+                            <!--Buscardor Tipo Identificador/Demandado -->
+                            <div class="form-group" *ngIf="ciudadanoDemandadoEncontrado === 1 || ciudadanoDemandanteEncontrado === 3">
                                 <h5 class="m-0">
-                                    Registrar demandado 
+                                    Registrar demandado
                                 </h5>
-                            <div class="col-xs-8 col-lg-6">
-                                <label>Tipo de identificación
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
-                                </ng-select>
-                            </div>
-
-                            <!--tipo identificacion ciudadano demandado -->
-                            
-                            <div class="col-xs-8 col-lg-6">
-                                <label>Identificación</label>
-                                <div class="input-group" [class.has-success]="ciudadanoDemandadoEncontrado === 2" [class.has-danger]="ciudadanoDemandadoEncontrado === 3">
-                                    <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacionDemandado" name="identificacionDemandado"
-                                        required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onKeyCiudadanoDemandado()" [class.btn-default]="ciudadanoDemandadoEncontrado === 1" [class.btn-success]="ciudadanoDemandadoEncontrado === 2"
-                                            [class.btn-danger]="ciudadanoDemandadoEncontrado === 3" class="btn" ngxclipboard=""
-                                            type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
+                                <div class="form-group col-xs-8 col-lg-6">
+                                    <label>Tipo de identificación
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <ng-select [multiple]="false" [options]="tipoIdentificacionesDemandado" [(ngModel)]="tipoIdentificacionDemandadoSelected"
+                                        required name="tipoIdentificacionId">
+                                    </ng-select>
                                 </div>
-                                <div class="has-danger" *ngIf="ciudadanoDemandadoEncontrado === 3">
-                                    <div class="form-control-feedback has-danger has-error">No se encontró la persona demandada</div>
+
+                                <!-- identificacion ciudadano demandado -->
+
+                                <div class="col-xs-8 col-lg-6">
+                                    <label>Identificación</label>
+                                    <div class="input-group" [class.has-success]="ciudadanoDemandadoEncontrado === 2" [class.has-danger]="ciudadanoDemandadoEncontrado === 3">
+                                        <input type="number" class="form-control" placeholder="identificacion demandado" [(ngModel)]="identificacionDemandado" name="identificacionDemandado"
+                                            required />
+                                        <span class="input-group-btn">
+                                            <button (click)="onKeyCiudadanoDemandado()" [class.btn-default]="ciudadanoDemandadoEncontrado === 1" [class.btn-success]="ciudadanoDemandadoEncontrado === 2"
+                                                [class.btn-danger]="ciudadanoDemandadoEncontrado === 3" class="btn" ngxclipboard=""
+                                                type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="has-danger" *ngIf="ciudadanoDemandadoEncontrado === 3">
+                                        <div class="form-control-feedback has-danger has-error">No se encontró la persona demandada</div>
+                                    </div>
                                 </div>
                             </div>
                             <!--ciudadano demandado -->
@@ -122,7 +127,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd">
+                                        <tr class="odd" *ngFor="let ciudadanoDemandado of datos2.cDemandado; let i = index">
 
                                             <td class="center">
                                                 <p>{{ciudadanoDemandado.primerNombre}}
@@ -136,70 +141,125 @@
                                     </tbody>
                                 </table>
                             </div>
-                            </div>
 
-                            <!--Buscardor Identificador/Demandante -->
-                            <div class="" *ngIf="!demandante">
+                            <br>
+                            <hr>
+                            <!--Buscardor Tipo Identificador/Demandante -->
+                            <div class="form-group" *ngIf="ciudadanoDemandanteEncontrado === 1 || ciudadanoDemandanteEncontrado === 3">
                                 <h5 class="m-0">
                                     Registrar demandante
                                 </h5>
-                            <div class="col-xs-8 col-lg-6">
-                                <label>Tipo de identificación
+                                <div class="form-group col-xs-8 col-lg-6">
+                                    <label>Tipo de identificación
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <ng-select [multiple]="false" [options]="tipoIdentificacionesDemandante" [(ngModel)]="tipoIdentificacionDemandanteSelected"
+                                        required name="tipoIdentificacionId">
+                                    </ng-select>
+                                </div>
+
+                                <!-- identificacion ciudadano demandante -->
+
+                                <div class="col-xs-8 col-lg-6">
+                                    <label>Identificación</label>
+                                    <div class="input-group" [class.has-success]="ciudadanoDemandanteEncontrado === 2" [class.has-danger]="ciudadanoDemandanteEncontrado === 3">
+                                        <input type="number" class="form-control" placeholder="identificacion demandante" [(ngModel)]="identificacionDemandante"
+                                            name="identificacionDemandante" required />
+                                        <span class="input-group-btn">
+                                            <button (click)="onKeyCiudadanoDemandante()" [class.btn-default]="ciudadanoDemandanteEncontrado === 1" [class.btn-success]="ciudadanoDemandanteEncontrado === 2"
+                                                [class.btn-danger]="ciudadanoDemandanteEncontrado === 3" class="btn" ngxclipboard=""
+                                                type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="has-danger" *ngIf="ciudadanoDemandanteEncontrado === 3">
+                                        <div class="form-control-feedback has-danger has-error">No se encontró la persona demandante</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--ciudadano demandante -->
+                            <div class="container" *ngIf="demandante">
+                                <br>
+                                <table class="table " id="dataTables-example">
+                                    <br>
+                                    <thead>
+                                        <tr>
+                                            <th>Demandante</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let ciudadanoDemandante of datos2.cDemandante; let i = index">
+
+                                            <td class="center">
+                                                <p>{{ciudadanoDemandante.primerNombre}}
+                                                    <br>{{ciudadanoDemandante.identificacion}}</p>
+                                            </td>
+
+                                            <td class="center">
+                                                <button (click)="deleteCiudadanoDemandante(ciudadanoDemandante)" class="btn btn-danger">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Nro Orden Judicial</label>
+                                <input class="form-control" placeholder="" type="text" [(ngModel)]="rnmaTramiteInscripcionLimitacion.nOrdenJudicial" name="valor"
+                                    required>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <label>Tipo Limitación
                                     <span class="text-danger">*</span>
                                 </label>
-                                <ng-select [multiple]="false" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
+                                <ng-select [multiple]="false" [options]="limitaciones" [(ngModel)]="limitacionSelected" required name="limitacionId">
                                 </ng-select>
                             </div>
+                            <br>
+                            <div class="form-group row col-xs-12 col-lg-12">
+                                <label>Fecha Expedición
+                                </label>
+                                <input type="date" class="form-control" placeholder="fecha expedición" [(ngModel)]="rnmaTramiteInscripcionLimitacion.fechaExpedicion" name="fechaExpedicion" required
+                                />
                             
-                            <!--tipo identificacion ciudadano demandante -->
-
-                            <div class="col-xs-8 col-lg-6">
-                                <label>Identificación</label>
-                                <div class="input-group" [class.has-success]="ciudadanoDemandanteEncontrado === 2" [class.has-danger]="ciudadanoDemandanteEncontrado === 3">
-                                    <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacionDemandante" name="identificacionDemandante"
-                                        required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onKeyCiudadanoDemandante()" [class.btn-default]="ciudadanoDemandanteEncontrado === 1" [class.btn-success]="ciudadanoDemandanteEncontrado === 2"
-                                            [class.btn-danger]="ciudadanoDemandanteEncontrado === 3" class="btn" ngxclipboard="" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <div class="has-danger" *ngIf="ciudadanoDemandanteEncontrado === 3">
-                                    <div class="form-control-feedback has-danger has-error">No se encontró la persona demandante</div>
-                                </div>
                             </div>
-</div>
+                            <br>
+                            <hr>
+                            <h5 class="m-0 col-lg-6 col-md-6">
+                                Causal de Limitación
+                            </h5>
+
+                            <div class="col-lg-6 col-md-6">
+                                <label>Tipo de Proceso
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="tiposProceso" [(ngModel)]="tipoProcesoSelected" required name="tipoProcesoId">
+                                </ng-select>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <label>Entidad Judicial
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="entidadJudicialSelected" required name="entidadJudicialId">
+                                </ng-select>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <label>Observaciones</label>
+                                <textarea class="form-control" [(ngModel)]="rnmaTramiteInscripcionLimitacion.observaciones" name="observaciones" placeholder="Aqui puede ingresar las observaciones"
+                                    required></textarea>
+                            </div>
+
                         </div>
                     </div>
-                    <!--ciudadano demandante -->
-                    <div class="container" *ngIf="demandante">
-                        <br>
-                        <table class="table " id="dataTables-example">
-                            <br>
-                            <thead>
-                                <tr>
-                                    <th>Demandante</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd">
 
-                                    <td class="center">
-                                        <p>{{ciudadanoDemandante.primerNombre}}
-                                            <br>{{ciudadanoDemandante.identificacion}}</p>
-                                    </td>
-
-                                    <td class="center">
-                                        <button (click)="deleteCiudadanoDemandante(ciudadanoDemandante)" class="btn btn-danger">Eliminar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
+            
 
             <!--Resultados si existe una placa -->
             <div class="container row" *ngIf="placaEncontrada === 2">
@@ -291,6 +351,8 @@
                     <button (click)="btnCancelarDemandante()" class="btn btn-secondary">Cancel</button>
                 </div>
             </div>
+            </form>
+            </div>
 
 
         </div>
@@ -299,10 +361,10 @@
 
     </div>
 
-<div class="card-footer">
-    <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
-    <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
-</div>
-<!-- /.col -->
+    <div class="card-footer" *ngIf="listaVehiculosPlacas">
+        <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
+        <button (click)="enviarTramite()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
+    </div>
+    <!-- /.col -->
 </div>
 <!-- /.row -->

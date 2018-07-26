@@ -5,7 +5,7 @@ import  'rxjs/add/operator/map';
 
 @Injectable()
 export class RnmaTramiteLimitacionService {
-	private url = environment.apiUrl + "vehiculolimitacion";
+	private url = environment.apiUrl + "limitacionDatos";
 	public identity;
 	public token;
 

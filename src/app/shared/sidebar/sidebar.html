@@ -222,6 +222,18 @@
                 SMLMV
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="limitacion" [ngClass]="{'active' : ( addActive === 'limitacion')}" (click)="addActiveMenu('limitacion')">
+                <i class="fa fa-angle-right"></i>
+                Limitación
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgTipoProceso" [ngClass]="{'active' : ( addActive === 'cfgTipoProceso')}" (click)="addActiveMenu('cfgTipoProceso')">
+                <i class="fa fa-angle-right"></i>
+                Tipo de Proceso
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level --> 
         </li>
@@ -249,6 +261,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="cfgsedeoperativa" [ngClass]="{'active' : ( addActive === 'cfgsedeoperativa')}" (click)="addActiveMenu('cfgsedeoperativa')">
             <i class="fa fa-angle-right"></i> Sede Operativa
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cfgEntidadJudicial" [ngClass]="{'active' : ( addActive === 'cfgEntidadJudicial')}" (click)="addActiveMenu('cfgEntidadJudicial')">
+            <i class="fa fa-angle-right"></i> Entidad Judicial
           </a>
         </li>
         
