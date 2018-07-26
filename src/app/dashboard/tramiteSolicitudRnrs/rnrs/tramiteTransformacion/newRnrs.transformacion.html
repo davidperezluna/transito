@@ -8,16 +8,17 @@
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <div class="row justify-content-center container">
+                        
                     <div class="col-xs-6 col-lg-6">
                         <label>Nuevo número de ejes<span class="text-danger">*</span></label>
                         <input class="form-control" [(ngModel)]="datos.nuevoNumeroEjes" name="nuevoNumeroEjes" type="text" required />
                     </div> 
                     <div class="col-xs-6 col-lg-6">
-                        <label>Número FTH<span class="text-danger">*</span></label>
+                        <label>Número FTH</label>
                         <input class="form-control" [(ngModel)]="datos.numeroFTH" name="numeroFTH" type="text" required />
                     </div>
                     <div class="col-xs-6 col-lg-6">
-                        <label>Peso Vacio<span class="text-danger">*</span></label>
+                        <label>Peso Vacio</label>
                         <input class="form-control" [(ngModel)]="datos.pesoVacio" name="pesoVacio" type="text" required />
                     </div>
                     <div class="col-xs-6 col-lg-6">
@@ -46,8 +47,8 @@
                         <label>Número documento<span class="text-danger">*</span></label>
                         <input class="form-control" [(ngModel)]="datos.numeroDocumento" name="numeroDocumento" type="text" required />
                     </div> 
-                    <div class="col-xs-6 col-lg-12">
-                        <label>Nombre empresa<span class="text-danger">*</span></label>
+                    <div class="col-xs-6 col-lg-6">
+                        <label>Nombre empresa</label>
                         <input class="form-control" [(ngModel)]="datos.nombreEmpresa" name="nombreEmpresa" type="text" required />
                     </div> 
                     <div class="col-xs-6 col-lg-6">
@@ -71,7 +72,7 @@
                         <div class="col-xs-6 col-lg-6">
                                 <label>Número factura<span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" type="text" required />
-                            </div> 
+                        </div>                         
                 </div>
             </div>
             <div class="card-footer">
