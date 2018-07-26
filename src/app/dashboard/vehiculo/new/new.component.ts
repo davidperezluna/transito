@@ -72,7 +72,7 @@ constructor(
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
-      }
+      } 
     );
     this._MunicipioService.getMunicipioSelect().subscribe(
       response => {
