@@ -50,7 +50,7 @@ public moduloSelected:any;
 public vehiculoCriterio:any; 
 public tramitesPrecio:any; 
 public tramitePrecio:any; 
-public tramitePrecioSelected:any; 
+public tramitePrecioSelected:any;
 public tramitesValor:any=[]; 
 
 constructor(
@@ -62,11 +62,11 @@ constructor(
   private _FuncionarioService: MpersonalFuncionarioService,
   private _MflTipoRecaudoService: MflTipoRecaudoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _moduloService: ModuloService,
+  private _ModuloService: ModuloService,
   ){}
 
   ngOnInit() {   
-    this._moduloService.getModuloSelect().subscribe(
+    this._ModuloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
       }, 
@@ -309,64 +309,100 @@ constructor(
 
   btnNewTramite(){
     let token = this._loginService.getToken();
+    let modulo = null;
 
-    if (!this.propietario) {
-      this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
-        response => {
-          this.tramitePrecio = response.data;
-          if (this.tramitePrecio.tramite.id == 1) {
-            this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
-            this.tramitesValor.push(
-              {
-                'nombre':this.tramitePrecio.nombre,
-                'valor':this.tramitePrecio.valorTotal
+    this._ModuloService.showModulo(token, this.moduloSelected).subscribe(
+      response => {
+        modulo = response.data;
+        if (modulo.abreviatura != 'RNC') {
+          if (!this.propietario) {
+            this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
+              response => {
+                this.tramitePrecio = response.data;
+                if (this.tramitePrecio.tramite.id == 1) {
+                  this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
+                  this.tramitesValor.push(
+                    {
+                      'nombre': this.tramitePrecio.nombre,
+                      'valor': this.tramitePrecio.valorTotal
+                    }
+                  )
+                } else {
+                  swal({
+                    title: 'Sin propietarios!',
+                    text: 'Necesita facturar matricula inicial para este vehiculo',
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                  })
+                }
+
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
               }
-            )
-          }else{
-            swal({
-              title: 'Sin propietarios!',
-              text: 'Necesita facturar matricula inicial para este vehiculo',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            })
+            );
+          }else {
+            this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
+              response => {
+                this.tramitePrecio = response.data;
+                this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
+                this.tramitesValor.push(
+                  {
+                    'nombre': this.tramitePrecio.nombre,
+                    'valor': this.tramitePrecio.valorTotal
+                  }
+                )
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
           }
-  
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-  
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    
-    }else{
-      this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
-        response => {
-          this.tramitePrecio = response.data;
-          this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
-          this.tramitesValor.push(
-            {
-              'nombre':this.tramitePrecio.nombre,
-              'valor':this.tramitePrecio.valorTotal
+        }else {
+          this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
+            response => {
+              this.tramitePrecio = response.data;
+              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
+              this.tramitesValor.push(
+                {
+                  'nombre': this.tramitePrecio.nombre,
+                  'valor': this.tramitePrecio.valorTotal
+                }
+              )
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
             }
-          )
-          console.log(this.factura);
-  
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-  
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+          );
         }
-      );
-    }
+
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
+
   deleteTramiteValor(tramiteValor){
     this.factura.valorBruto = this.factura.valorBruto - parseInt(tramiteValor.valor);
     this.tramitesValor =  this.tramitesValor.filter(h => h !== tramiteValor);
