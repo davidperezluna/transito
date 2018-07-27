@@ -84,7 +84,6 @@ export class RnmaRegistroMaquinariaComponent implements OnInit {
     this.formNew = true;
     this.table.destroy();
   }
-
   ready(isCreado:any){
       if(isCreado) {
         this.formNew = false;
