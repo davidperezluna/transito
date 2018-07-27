@@ -1,0 +1,74 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+
+            <div class="card-body">
+
+                <form #formnew="ngForm">
+                    <h5 class="m-0">
+                        Consulta de productos expedidos
+                    </h5>
+                    <hr>
+                    <div class="row justify-content-center container">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Consultar registros de productos para:
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" name="tipoProductoSelected"  required="required">
+                                <option value="Registro RNMA">Registro RNMA</option>
+                                <option value="Registro RNC">Registro RNC</option>
+                                <option value="Registro RNA">Registro RNA</option>
+                                <option value="Registro RNRS">Registro RNRS</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo de consulta
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" name="tipoConsultaSelected" [(ngModel)]="datos.tipoConsulta" required="required">
+                                <option value="Automotor">Automotor</option>
+                                <option value="Todo">Todo</option>
+                            </select>
+                        </div>
+                        <div class="row justify-content-center container" *ngIf="datos.tipoConsulta =='Automotor'">
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número Placa</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroPlaca" name="numeroPlaca" type="text" required />
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número VIN</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroVIN" name="numeroVIN" type="text" required />
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número Serie</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroSerie" name="numeroSerie" type="text" required />
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número Motor</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroMotor" name="numeroMotor" type="text" required />
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número Chasis</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroChasis" name="numeroChasis" type="text" required />
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label></label>
+                                <button (click)="buscarVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                            </div>
+                         </div>                        
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <!-- .row -->
