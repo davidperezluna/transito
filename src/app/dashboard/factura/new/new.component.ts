@@ -66,9 +66,23 @@ constructor(
   ){}
 
   ngOnInit() {   
+    swal({
+      title: 'Cargando Datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+      }).then((result) => {
+        if (
+          // Read more about handling dismissals
+          result.dismiss === swal.DismissReason.timer 
+        ) {
+        }
+      })
     this._moduloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
+        swal.close();
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -83,6 +97,7 @@ constructor(
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
         this.tiposIdentificacion = response;
+        swal.close();
       },
       error => {
         this.errorMessage = <any>error;
@@ -94,19 +109,7 @@ constructor(
       }
     );
 
-    swal({
-      title: 'Cargando Datos!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer 
-      ) {
-      }
-    })
+    
 
     this.date = new Date();
     let identity = this._loginService.getIdentity();
