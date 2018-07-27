@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {RegistroMaquinariaService} from '../../services/registroMaquinaria.service';
+import {RegistroRemolqueService} from '../../services/rnrsRegistroRemolque.service';
 import {LoginService} from '../../services/login.service';
 // import {Vehiculo} from './vehiculo.modelo';
 import { RegistroRemolque } from './rnrsPreregistro.modelo';
@@ -16,15 +16,15 @@ export class RnrsPreregistroComponent implements OnInit {
 	public id;
 	public respuesta;
   public vehiculos;
-  public registrosMaquinaria;
+  public registrosRemolque;
   public formIndex = true;
   public formNew = false;
   public formEdit= false;
   public table:any; 
-  public registroMaquinaria: RegistroRemolque;
+  public registroRemolque: RegistroRemolque;
 
   constructor(
-		private _RegistroMaquinariaService: RegistroMaquinariaService,
+		private _RegistroRemolqueService: RegistroRemolqueService,
 		private _loginService: LoginService,
 	
 		
@@ -46,9 +46,11 @@ export class RnrsPreregistroComponent implements OnInit {
     })
     this.formEdit=false;
     this.formNew=false;    
-		this._RegistroMaquinariaService.index().subscribe(
-				response => {
-          this.registrosMaquinaria = response.data;
+		this._RegistroRemolqueService.index().subscribe(
+      response => {
+        console.log(response.data);
+          this.registrosRemolque = response.data;
+          
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -84,7 +86,6 @@ export class RnrsPreregistroComponent implements OnInit {
     this.formNew = true;
     this.table.destroy();
   }
-
   ready(isCreado:any){
       if(isCreado) {
         this.formNew = false;
@@ -93,13 +94,13 @@ export class RnrsPreregistroComponent implements OnInit {
       }
   }
 
-  editVehiculo(registroMaquinaria:any){
-    this.registroMaquinaria = registroMaquinaria;
+  editRemolque(registroRemolque:any){
+    this.registroRemolque = registroRemolque;
     this.formIndex = false;
     this.formEdit = true;
   }
 
-  deleteMaquinaria(id:any){
+  deleteRemolque(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -113,7 +114,7 @@ export class RnrsPreregistroComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._RegistroMaquinariaService.deleteRegistroMaquinaria(token,id).subscribe(
+        this._RegistroRemolqueService.deleteRegistroRemolque(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

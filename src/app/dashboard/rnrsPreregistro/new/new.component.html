@@ -10,15 +10,15 @@
                                 <div class="form-group row">
                                 <div class="col-lg-3 col-md-4">
                                     <label>Placa*</label> 
-                                    <input class="form-control" [(ngModel)]="registroMaquinaria.vehiculoPlaca" name="placa" placeholder="" type="text" required>
+                                    <input class="form-control" [(ngModel)]="registroRemolque.vehiculoPlaca" name="placa" placeholder="" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-4">
                                     <label>Nro. serie*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.vehiculoSerie" name="serie" type="text" required>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroRemolque.vehiculoSerie" name="serie" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-4">
                                     <label>Nro. VIN*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.vehiculoVin" name="vin" type="text" required>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroRemolque.vehiculoVin" name="vin" type="text" required>
                                 </div>
                                 <div class=" col-md-3">
                                     <label>Carroceria*</label>
@@ -43,16 +43,16 @@
                                     </ng-select>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
-                                    <label>Alto total*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="altoTotal" name="altoTotal" type="text" required>
+                                    <label>Alto*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="alto" name="alto" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
-                                    <label>Largo total*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="largoTotal" name="LargoTotal" type="text" required>
+                                    <label>Largo*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="largo" name="Largo" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
-                                    <label>Ancho total*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="anchoTotal" name="anchoTotal" type="text" required>
+                                    <label>Ancho*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="ancho" name="ancho" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <label>Nro. ejes*</label>
@@ -65,16 +65,16 @@
                                         [options]="origenRegistros"
                                         [(ngModel)]="origenRegistroSelected"
                                         required
-                                        name="origenRegistrosId">
+                                        name="origenRegistroId">
                                     </ng-select>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <label>Carga util*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="cargaUtilMaxima" name="cargaUtilMaxima" type="text" required>
+                                    <input class="form-control" placeholder="" [(ngModel)]="cargaUtil" name="cargaUtil" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <label>Peso vació*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="pesoBruto" name="pesoBruto" type="text" required>
+                                    <input class="form-control" placeholder="" [(ngModel)]="pesoVacio" name="pesoVacio" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <label>Referencia*</label>
@@ -82,11 +82,11 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <label>Año de modelo*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.vehiculoModelo" name="modelo" type="text" required>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroRemolque.vehiculoModelo" name="modelo" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <label>Nro. FTH*</label>
-                                    <input class="form-control" placeholder="" [(ngModel)]="nroFth" name="nroFth" type="text" required>
+                                    <input class="form-control" placeholder="" [(ngModel)]="numeroFth" name="numeroFth" type="text" required>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
                                     <label>Nro. solicitud RUT*</label>
@@ -102,10 +102,10 @@
                                         <label>Condición de ingreso*</label>
                                         <ng-select
                                             [multiple]="false"
-                                            [options]="condiciones"
-                                            [(ngModel)]="condicionSelected"
+                                            [options]="condicionIngresos"
+                                            [(ngModel)]="condicionIngresoSelected"
                                             required
-                                            name="condicion">
+                                            name="condicionIngresoId">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-3">
@@ -120,25 +120,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="container">
-                                <hr> 
-                                <h5 class="m-0">Datos propietario</h5><br>
-                                <div class="form-group row">
-                                    <div class=" col-md-3">
-                                        <label>Tipo propietario*</label>
-                                        <ng-select
-                                            [multiple]="false"
-                                            [options]="colores"
-                                            [(ngModel)]="colorSelected"
-                                            required
-                                            name="colorId">
-                                        </ng-select>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <br><button class="btn btn-success " >Agregar</button>
-                                    </div>
-                                </div>
-                            </div>
+                            
                     </div>
                     </form>
                 <div class="card-footer">

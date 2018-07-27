@@ -1,35 +1,25 @@
 export class RegistroRemolque{
 	constructor(
 		public id: number,
-		public condicionSelected: string,
-		public fechaIngreso: string,
-		public pesoBruto: string,
-		public cargaUtilMaxima: string,
-		public rodajeSelected: string,
+		public alto: string,
+		public largo: string,
+		public ancho: string,
 		public numeroEjes: string,
-		public numeroLlantas: string,
-		public tipoCabinaSelected: string,
-		public altoTotal: string,
-		public anchoTotal: string,
-		public largoTotal: string,
-		public subpartidaArancelaria: string,
-		public tipoVehiculoId: number,
-		public cfgOrigenVehiculoId: string,
-
+		public cargaUtil: string,
+		public pesoVacio: string,
+		public referencia: string,
+		public numeroFth: string,
+		public rut: string,
+		public origenRegistroId: string,
+		public condicionIngresoId: string,
 		public vehiculoPlaca: string,
 		public vehiculoSerie: string,
-		public vehiculoVin: string,
-		public vehiculoChasis: string,
-		public vehiculoMotor: string,
-		public vehiculoModelo: string,
-
-		
-		public vehiculoColorId: number,
-		public vehiculoMarcaId: number,
-		public vehiculoClaseId: number,
-		public vehiculoLineaId: number,
 		public vehiculoCarroceriaId: number,
-		public vehiculoCombustibleId: number,
+		public vehiculoVin: string,
+		public vehiculoMarcaId: number,
+		public vehiculoModelo: string,
+		public vehiculoClaseId: number,
+
 
 	){}
 }
