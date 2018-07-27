@@ -276,6 +276,23 @@ constructor(
     this.vehiculo.radioAccionId = this.radioAccionSelected;
     this.vehiculo.modalidadTransporteId = this.modalidadTransporteSelected;
      
+    var html = 'los datos de la Automotor sera editados !<br>';
+   
+   swal({
+      title: 'Actualización de automotor!',
+      type: 'warning',
+      html:html,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Crear!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+      '<i class="fa fa-thumbs-down"></i> No crear',
+      cancelButtonAriaLabel: 'Thumbs down',
+    }).then((result) => {
+        if (result.value) {
+
     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
 			response => {
         this.respuesta = response; 
@@ -305,7 +322,14 @@ constructor(
 					}
 				}
 
-		}); 
+    }); 
+      } else if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+
+      }
+    })
   }
 
   changedDepartamento(e){
