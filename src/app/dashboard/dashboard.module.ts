@@ -30,6 +30,7 @@ import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacio
 import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
 
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
+import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
@@ -92,6 +93,7 @@ import { GestionTransportePublicoModule } from './gestionTransportePublico/gesti
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
 import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
+import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -181,12 +183,14 @@ import {RightsidebarComponent} from '../shared';
       LimitacionModule,
       CfgTipoProcesoModule,
       RnmaTramiteInscripcionLimitacionModule,
+      CfgValorVehiculoModule,
+      RnrsPreregistroModule,
       
       //MsvTCAsignacionModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
-    providers:[],
+  providers: [],
 })
 
 export class DashboardModule { }

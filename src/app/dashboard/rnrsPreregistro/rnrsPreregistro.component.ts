@@ -1,41 +1,39 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { LoginService } from '../../services/login.service';
-import { TramiteSolicitud } from './tramiteSolicitud.modelo';
-import swal from 'sweetalert2';
+import {RegistroRemolqueService} from '../../services/rnrsRegistroRemolque.service';
+import {LoginService} from '../../services/login.service';
+// import {Vehiculo} from './vehiculo.modelo';
+import { RegistroRemolque } from './rnrsPreregistro.modelo';
+import { NewRegistroRemolqueComponent } from './new/new.component';
 declare var $: any;
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-index',
-  templateUrl: './tramiteSolicitud.component.html'
+  templateUrl: './rnrsPreregistro.component.html'
 })
-export class TramiteSolicitudComponent implements OnInit {
-  public tipo: any;
+export class RnrsPreregistroComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public tramitesSolicitud;
-	public formNew = false;
-	public formEdit = false;
+  public vehiculos;
+  public registrosRemolque;
   public formIndex = true;
-  public table: any;
-  public tramiteSolicitud: TramiteSolicitud;
+  public formNew = false;
+  public formEdit= false;
+  public table:any; 
+  public registroRemolque: RegistroRemolque;
 
   constructor(
-    private _TramiteSolicitudService: TramiteSolicitudService,
-    private _route: ActivatedRoute,
+		private _RegistroRemolqueService: RegistroRemolqueService,
 		private _loginService: LoginService,
-    ){}
-    
+	
+		
+		){}
   ngOnInit() {
-    this._route.params.subscribe(params =>{
-      this.tipo = +params["tipo"];
-    });
-    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
@@ -46,16 +44,20 @@ export class TramiteSolicitudComponent implements OnInit {
       ) {
       }
     })
-    this._TramiteSolicitudService.getTramiteSolicitud().subscribe(
-				response => {
-          this.tramitesSolicitud = response.data;
-          let timeoutId = setTimeout(() => {
+    this.formEdit=false;
+    this.formNew=false;    
+		this._RegistroRemolqueService.index().subscribe(
+      response => {
+        console.log(response.data);
+          this.registrosRemolque = response.data;
+          
+          let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
-            swal.close();
           }, 100);
-				},
+				}, 
 				error => {
 					this.errorMessage = <any>error;
+
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
@@ -80,20 +82,26 @@ export class TramiteSolicitudComponent implements OnInit {
    this.table = $('#dataTables-example').DataTable();
   }
   onNew(){
-    this.formNew = true;
     this.formIndex = false;
+    this.formNew = true;
     this.table.destroy();
   }
-
-  ready(isCreado: any){
-    if(isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formIndex = true;
-      this.ngOnInit();
-    }
+  ready(isCreado:any){
+      if(isCreado) {
+        this.formNew = false;
+        this.formIndex = true;
+        this.ngOnInit();
+      }
   }
-  deleteTramiteSolicitud(id: any){
+
+  editRemolque(registroRemolque:any){
+    this.registroRemolque = registroRemolque;
+    this.formIndex = false;
+    this.formEdit = true;
+  }
+
+  deleteRemolque(id:any){
+
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -106,7 +114,7 @@ export class TramiteSolicitudComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TramiteSolicitudService.deleteTramiteSolicitud(token,id).subscribe(
+        this._RegistroRemolqueService.deleteRegistroRemolque(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -131,10 +139,4 @@ export class TramiteSolicitudComponent implements OnInit {
     })
   }
 
-  editTramiteSolicitud(tramiteSolicitud: any){
-    this.tramiteSolicitud = tramiteSolicitud;
-    this.formEdit = true;
-    this.formIndex = false;
-  }
-  
 }

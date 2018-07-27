@@ -230,7 +230,6 @@ constructor(
       );
 
   }
-
   onCancelar(){
     this.ready.emit(true);
   }

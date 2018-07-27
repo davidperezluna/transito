@@ -7,6 +7,7 @@ import { RnmaTramiteLimitacionService } from '../../services/rnmaTramiteLimitaci
  import { NewComponent } from './new/new.component';
 // import { EditComponent } from './edit/edit.component';
 import {SelectModule} from 'angular2-select';
+import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 // import {SelectModule} from 'angular2-select';
 
 
@@ -14,7 +15,7 @@ import {SelectModule} from 'angular2-select';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [RnmaTramiteInscripcionLimitacionComponent,NewComponent/*,EditComponent*/],
     exports: [RnmaTramiteInscripcionLimitacionComponent, NewComponent/*,EditComponent*/],
-    providers: [RnmaTramiteLimitacionService]
+    providers: [RnmaTramiteLimitacionService,VehiculoLimitacionService]
 })
 
 export class RnmaTramiteInscripcionLimitacionModule { }

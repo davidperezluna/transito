@@ -4,36 +4,36 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class RegistroMaquinariaService {
-	private url = environment.apiUrl + "vehiculomaquinaria";
+export class CfgValorVehiculoService {
+	private url = environment.apiUrl + "cfgValorVehiculo";
 	public identity;
-	public token; 
+	public token;
 
 	constructor(private _http: Http){}
 
-	index(){
+	getCfgValorVehiculo(){
+		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(registroMaquinaria,token){
+	register(cfgValorVehiculo,token){
 		
-		let json = JSON.stringify(registroMaquinaria);
+		let json = JSON.stringify(cfgValorVehiculo);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteRegistroMaquinaria(token,id){
+	deleteCfgValorVehiculo(token,id){
 
-		let json = JSON.stringify(id);
-		let params = "json="+json+"&authorization="+token;
+		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showRegistroMaquinaria(token,id){
+	showCfgValorVehiculo(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,9 +42,9 @@ export class RegistroMaquinariaService {
 
 	}
 
-	editRegistroMaquinaria(registroMaquinaria,token){
+	editCfgValorVehiculo(cfgValorVehiculo,token){
 
-		let json = JSON.stringify(registroMaquinaria);		
+		let json = JSON.stringify(cfgValorVehiculo);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,11 +52,9 @@ export class RegistroMaquinariaService {
 
 	}
 
-	getRegistroMaquinariaSelect(){
+	getCfgValorVehiculoSelect(){
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
-
-	
 	
 }

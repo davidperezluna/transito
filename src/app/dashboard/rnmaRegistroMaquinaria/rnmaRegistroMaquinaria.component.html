@@ -33,11 +33,11 @@
                   <td>{{ registroMaquinaria.vehiculo.linea.nombre }}</td>
                   <td>{{ registroMaquinaria.vehiculo.motor }}</td>
                   <td>{{ registroMaquinaria.vehiculo.chasis }}</td>
-                  <td>{{ registroMaquinaria.vehiculo.combustible.nombre }}</td>
+                  <td>{{ registroMaquinaria.vehiculo.combustible.nombre }}</td> 
                   <!-- <td>{{ registroMaquinaria.id }}</td> -->
                   <td>
                     <button (click)="editVehiculo(registroMaquinaria)" class="btn btn-outline-info" type="button" >Editar</button> 
-                    <button (click)="deleteMaquinaria(registroMaquinaria.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                    <button (click)="deleteRegistroMaquinaria(registroMaquinaria.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
                   </td>
                 </tr>
               </tbody>
