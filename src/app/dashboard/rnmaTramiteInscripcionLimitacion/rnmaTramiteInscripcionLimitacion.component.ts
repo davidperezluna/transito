@@ -25,7 +25,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
   public tramiteInscripcion: any;
 
   constructor(
-    private _TramiteLimitacionService: RnmaTramiteLimitacionService,
+    private _VehiculoLimitacionService: VehiculoLimitacionService,
     private _loginService: LoginService,
   ) { }
 
@@ -44,7 +44,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
       ) {
       }
     })
-    this._TramiteLimitacionService.getTramiteLimitacion().subscribe(
+    this._VehiculoLimitacionService.getVehiculoLimitacion().subscribe(
       response => {
         if (response) {
 
@@ -111,7 +111,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TramiteLimitacionService.deleteTramiteLimitacion(token, id).subscribe(
+        this._VehiculoLimitacionService.deleteVehiculoLimitacion(token, id).subscribe(
           response => {
             swal({
               title: 'Eliminado!',

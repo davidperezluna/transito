@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Router } from "@angular/router";
-
-
-
+import { VehiculoService } from '../../services/vehiculo.service';
+import { LoginService } from '../../services/login.service';
+import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service'
 import swal from 'sweetalert2';
 
 
@@ -10,51 +10,75 @@ import swal from 'sweetalert2';
     selector: 'app-registroEntregaProducto',
     templateUrl: './new.registroEntregaProducto.html',
 })
-export class NewRegistroEntregaProductoComponent implements OnInit {
-    public errorMessage;
-    public respuesta;
-    public colores: any;
-    public tramiteFacturaSelected: any;
-    public tipoProducto: any;
-    public tipoConsulta: any;
-    public ciudadano: any;
-    public apoderadoSelected: any;
-    public empresa: any;
-    public empresaSelected: any;
-    public identificacion: any;
-    public identificacionApoderado: any;
-    public ciudadanoEncontrado = 1;
-    public apoderadoEncontrado = 1;
-    public empresaEncontrada = 1;
-    public nit: any;
-    public tipoIdentificacionSelected = null;
-    public listaPropietariosCiudadanos = false;
-    public listaPropietariosEmpresas = false;
-    public ciudadanoNew = false;
-    public propietario = true;
-    public propietarioPresente = false;
-    public ciudadanoSelected: any;
-    public apoderado = 'false';
-    public tipoIdentificaciones = [];
+export class NewRegistroEntregaProductoComponent implements OnInit {    
+    public errorMessage=false;
+    public error=false;
+    public msj='';
+    public vehiculoSuccess = false;
+    public vehiculo: any;
+    public tramiteSolicitud: any;
     public datos = {
-        'propietariosEmpresas': [],
-        'propietariosCiudadanos': [],
-        'solidario': false,
         'vehiculo': null,
-        'sustrato': null,
-        'numeroLicencia': null,
         'tramiteFactura': null,
         'tipoConsulta': null,
+        'numeroPlaca': null,
+        'numeroVIN': null,
+        'numeroSerie': null,
+        'numeroMotor': null,
+        'numeroChasis': null,
     };
 
     constructor(
         private router: Router,
+        private _loginService: LoginService,
+        private _VehiculoService: VehiculoService,
+        private _TramiteSolicitudService: TramiteSolicitudService,
     ) { }
 
     ngOnInit() {
     }
 
     buscarVehiculo(){
+        let token = this._loginService.getToken();
+
+    this._VehiculoService.showVehiculoParametro(token,this.datos).subscribe(
+      response => {
+        if (response.status == 'error' ) {
+          if(response.code ==401){
+            this.msj= response.msj;
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: response.msj
+            })
+          }else if(response.code == 400){
+            this.msj= response.msj;
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: response.msj
+            })
+          }
+          this.error = true;
+          this.vehiculoSuccess = false;
+        }else{          
+          this.vehiculo = response.data;
+          this.vehiculoSuccess = true;
+        }
+      error => { 
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición"); 
+          }
+        }
+        this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.vehiculo.id).subscribe(
+            response=>{
+                this.tramiteSolicitud = response.data;
+                console.log(this.tramiteSolicitud);
+            }            
+        );
+    });
     }
 
     onCancelar() {

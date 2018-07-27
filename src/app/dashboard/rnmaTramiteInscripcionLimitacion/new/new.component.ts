@@ -50,6 +50,8 @@ export class NewComponent implements OnInit {
   public identificacionDemandante: any;
   public tipoIdentificacionesDemandado;
   public tipoIdentificacionesDemandante;
+  public opcionSeleccionado: string = '0'; // Iniciamos
+  public verSeleccion: string = '';
   public datos = {
   }
   public datos2 = {
@@ -207,40 +209,13 @@ export class NewComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
-          // this._VehiculoLimitacionService.register(this.datos2, token).subscribe(
-          //   response => {
-          //     this.respuesta = response;
-          //     console.log(this.respuesta);
-          //     if (this.respuesta.status == 'success') {
-          //       this.ready.emit(true);
-          //       swal({
-          //         title: 'Perfecto!',
-          //         text: 'Registro exitoso!',
-          //         type: 'success',
-          //         confirmButtonText: 'Aceptar'
-          //       })
-          //     } else {
-          //       swal({
-          //         title: 'Error!',
-          //         text: 'La limitacion ya se encuentra registrado',
-          //         type: 'error',
-          //         confirmButtonText: 'Aceptar'
-          //       })
-          //     }
-          //     error => {
-          //       this.errorMessage = <any>error;
-
-          //       if (this.errorMessage != null) {
-          //         console.log(this.errorMessage);
-          //         alert("Error en la petición");
-          //       }
-          //     }
-
-          //   });
+          
         } else {
+          let eJudicial = this.entidadesJudiciales[this.entidadJudicialSelected - 1].label;
+          
           swal({
             title: 'Error!',
-            text: 'La limitacion ya se encuentra registrado',
+            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnmaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -257,6 +232,11 @@ export class NewComponent implements OnInit {
       });
 
 
+  }
+
+  capturar() {
+
+    this.verSeleccion = this.opcionSeleccionado;
   }
 
   onKeyPlaca() {
