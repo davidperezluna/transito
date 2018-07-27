@@ -94,6 +94,7 @@ import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumo
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
 import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
+import { ReporteModule } from './reporte/reporte.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -185,6 +186,7 @@ import {RightsidebarComponent} from '../shared';
       RnmaTramiteInscripcionLimitacionModule,
       CfgValorVehiculoModule,
       RnrsPreregistroModule,
+      ReporteModule,
       
       //MsvTCAsignacionModule,
     ],

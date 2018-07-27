@@ -505,6 +505,12 @@
               Factura
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="reporte"  [ngClass]="{'active' : ( addActive === 'reporte')}" (click)="addActiveMenu('reporte')">
+              <i class="fa fa-angle-right"></i>
+              Reporte
+            </a>
+          </li>
         </ul>
         <!-- /.nav-second-level --> 
       </li>
