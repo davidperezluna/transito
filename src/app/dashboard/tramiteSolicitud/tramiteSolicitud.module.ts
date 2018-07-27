@@ -37,6 +37,7 @@ import { NewRnaTramiteInscripcionAlertaPrendaComponent } from './rna/tramiteInsc
 import { NewRnaTramiteLevantamientoAlertaPrendaComponent } from './rna/tramiteLevantamientoAlertaPrenda/newRna.levantamientoAlertaPrenda.component';
 import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/newRna.matriculaInicial.component';
 import { NewRnaRadicadoCuentaComponent } from './rna/tramiteRadicadoCuenta/newRna.radicadoCuenta.component'; 
+import { NewRnaRegistroEntregaProductoComponent } from './rna/tramiteRegistroEntregaProducto/newRna.registroEntregaProducto.component';
 
 import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRna.transformacion.component';
 import { NewRnaCambioConjuntoComponent } from './rna/tramiteCambioConjunto/newRna.cambioConjunto.component';
@@ -81,7 +82,8 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent,
-        NewTrasladoComponent
+        NewTrasladoComponent,
+        NewRnaRegistroEntregaProductoComponent
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -117,7 +119,8 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent,
-        NewTrasladoComponent
+        NewTrasladoComponent,
+        NewRnaRegistroEntregaProductoComponent
     ],
     providers: [TramiteSolicitudService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, EmpresaService, DefaultService]
 })

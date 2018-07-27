@@ -1,7 +1,10 @@
 <div class="row"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
+
             <div class="card-body">
+
+                    <form #formNew="ngForm">
                 <h5 class="m-0">
                     Transformación o conversión de remolque o semiremolque
                 </h5>
@@ -74,10 +77,11 @@
                                 <input class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" type="text" required />
                         </div>                         
                 </div>
+                </form>
             </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+                <button (click)="enviarTramite()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
             </div>
         </div>
     </div><!-- /.col -->
