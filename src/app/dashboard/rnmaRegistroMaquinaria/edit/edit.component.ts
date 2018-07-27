@@ -249,17 +249,7 @@ constructor(
     this.registroMaquinaria.condicionSelected = this.condicionSelected;
     this.registroMaquinaria.rodajeSelected = this.rodajeSelected;
     this.registroMaquinaria.tipoCabinaSelected = this.tipoCabinaSelected;
-    // this.registroMaquinaria.fechaIngreso = this.fechaIngreso;
-    // this.registroMaquinaria.pesoBruto = this.pesoBruto;
-    // this.registroMaquinaria.cargaUtilMaxima = this.cargaUtilMaxima;
-    // this.registroMaquinaria.numeroEjes = this.numeroEjes;
-    // this.registroMaquinaria.numeroLlantas = this.numeroLlantas;
-    // this.registroMaquinaria.altoTotal = this.altoTotal;
-    // this.registroMaquinaria.largoTotal = this.largoTotal;
-    // this.registroMaquinaria.anchoTotal = this.anchoTotal;
-    // this.registroMaquinaria.subpartidaArancelaria = this.subpartidaArancelaria;
-    // console.log(this.registroMaquinaria.vehiculoColorId);  
-    
+        
     var html = 'los datos de la maquinaria sera editados !<br>';
     
    swal({
@@ -291,7 +281,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.registroMaquinaria.altoTotal +' ya se encuentra registrado',
+            text: 'El vehiculo '+ this.registroMaquinaria.cfgPlaca +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -315,23 +305,8 @@ constructor(
       })
   }
 
-
-   changedPaisNacimiento(id){
-  
+  changedXX(id){
   }
 
-  changedDepartamentoNacimiento(id){
-  
-  
-  }
-
-  changedPaisResidencia(id){
-  
-  }
-
-  changedDepartamentoResidencia(id){
- 
-  
-  }
 
 }

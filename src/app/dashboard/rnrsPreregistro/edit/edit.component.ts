@@ -1,17 +1,14 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { RegistroRemolque } from '../rnrsPreregistro.modelo';
-import { RnrsPreregistroModule } from '../rnrsPreregistro.module';
-import {RegistroMaquinariaService} from '../../../services/registroMaquinaria.service';
-import { LoginService } from '../../../services/login.service';
-import {ColorService} from '../../../services/color.service';
-import { TipoVehiculoService } from '../../../services/tipoVehiculo.service';
-import {ClaseService} from '../../../services/clase.service';
+import {RegistroRemolque} from '../rnrsPreregistro.modelo';
+import {RegistroRemolqueService} from '../../../services/rnrsRegistroRemolque.service';
+import {LoginService} from '../../../services/login.service';
 import {CarroceriaService} from '../../../services/carroceria.service';
-import {LineaService} from '../../../services/linea.service';
-import {CombustibleService} from '../../../services/combustible.service';
 import {MarcaService} from '../../../services/marca.service';
+import {LineaService} from '../../../services/linea.service';
 import {CfgOrigenRegistroService} from '../../../services/cfgOrigenRegistro.service';
-
+import {CondicionIngresoService} from '../../../services/condicionIngreso.service';
+import {ClaseService} from '../../../services/clase.service';
+import {UsuarioService} from '../../../services/usuario.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +17,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() registroMaquinaria:any = null;
+@Input() registroRemolque:any = null;
 @Input() vehiculo:any = null;
 @Input() cfgPlaca:any = null;
 
@@ -29,42 +26,35 @@ public habilitar:any;
 public respuesta;
 public formReady = false;
 
-public colores: Array<any>
-public colorSelected: Array<any>; // ng-select [(ngModel)]
-public tiposVehiculo: Array<any>
-public tipoVehiculoSelected: Array<any>; // ng-select [(ngModel)]
-public clases: Array<any>
-public claseSelected: Array<any>; // ng-select [(ngModel)]
-public marcas: Array<any>;
-public marcaSelected: Array<any>;
-public lineas: Array<any>;
-public lineaSelected:Array<any>;
-public carrocerias: Array<any>;
-public carroceriaSelected:Array<any>;
-public combustibles: Array<any>;
-public combustibleSelected: Array<any>;
-public cfgOrigenRegistros: Array<any>;
-public cfgOrigenRegistroSelected: Array<any>;
-public servicios: Array<any>;
-public serviciosSelected: Array<any>;
+public carrocerias:any;
+public carroceriaSelected:any;
+public marcas:any;
+public marcaSelected:any;
+public lineas:any;
+public lineaSelected:any;
+public origenRegistros:any;
+public origenRegistroSelected:any;
+public condicionIngresos:any;
+public condicionIngresoSelected:any;
+public clases:any;
+public claseSelected:any;
+public propietarios:any;
+public propietarioSelected:any;
 
-
-public condicionSelected:any;
-public fechaIngreso:any;
-public pesoBruto:any;
-public cargaUtilMaxima:any;
-public rodajeSelected:any;
+public placa:any;
+public serie:any;
+public vin:any;
+public largo:any;
+public alto:any;
+public ancho:any;
 public numeroEjes:any;
-public numeroLlantas:any;
-public tipoCabinaSelected:any;
-public altoTotal:any;
-public anchoTotal:any;
-public largoTotal:any;
-public subpartidaArancelaria:any;
+public cargaUtil:any;
+public pesoVacio:any;
+public referencia:any;
+public modelo:any;
+public numeroFth:any;
+public rut:any;
 
-public condiciones =[
-  {'value':"Nuevo",'label':"Nuevo"},{'value':"Sin registro antes de inicio RNMA",'label':"Sin registro antes de inicio RNMA"}
-]
 public rodajes =[
   {'value':"cilindros",'label':"Cilindros"},{'value':"neumaticos",'label':"Neumaticos"}
 ]
@@ -73,16 +63,15 @@ public tiposCabina =[
 ]
 
 constructor(
-  private _registroMaquinariaService: RegistroMaquinariaService,
+  private _RegistroRemolqueService: RegistroRemolqueService,
   private _loginService: LoginService,
-  private _colorService: ColorService,
-  private _lineaService: LineaService,
-  private _tipoVehiculoService: TipoVehiculoService,
-  private _claseService: ClaseService,
-  private _marcaService: MarcaService,
-  private _carroceriaService: CarroceriaService,
-  private _combustibleService: CombustibleService,
-  private _cfgOrigenRegistroService: CfgOrigenRegistroService,
+  private _LineaService: LineaService,
+  private _ClaseService: ClaseService,
+  private _MarcaService: MarcaService,
+  private _CarroceriaService: CarroceriaService,
+  private _CfgOrigenRegistroService: CfgOrigenRegistroService,
+  private _CondicionIngresoService: CondicionIngresoService,
+  private _UsuarioService: UsuarioService,
 
 ){}
 
@@ -102,12 +91,11 @@ constructor(
       ) {
       }
     })
-
-    this._colorService.getColorSelect().subscribe(
+    this._CarroceriaService.getCarroceriaSelect().subscribe(
       response => {
-        this.colores = response;
+        this.carrocerias = response;
         setTimeout(() => {
-          this.colorSelected = [this.registroMaquinaria.vehiculo.color.id];
+          this.carroceriaSelected = [this.registroRemolque.vehiculo.carroceria.id];
         });
       },
       error => {
@@ -119,115 +107,84 @@ constructor(
       }
     );
 
-     this._tipoVehiculoService.getTipoVehiculoSelect().subscribe(
+    this._LineaService.getLineaSelect().subscribe(
       response => {
-        this.tiposVehiculo = response;
+        this.lineas = response;
         setTimeout(() => {
-          this.tipoVehiculoSelected = [this.registroMaquinaria.tipoVehiculo.id];
-        });
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-     this._claseService.getClaseSelect().subscribe(
-        response => {
-          this.clases = response;
-          setTimeout(() => {
-            this.claseSelected = [this.registroMaquinaria.vehiculo.clase.id];
-          });
-        },
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      );
-
-      this._lineaService.getLineaSelect().subscribe(
-        response => {
-          this.lineas = response;
-          setTimeout(() => {
-              this.lineaSelected = [this.registroMaquinaria.vehiculo.linea.id]; 
-              this._marcaService.getMarcaSelect().subscribe(
-                response => {
-                  this.marcas = response;
-                  setTimeout(() => {
-                      this.marcaSelected = [this.registroMaquinaria.vehiculo.linea.marca.id];
-                  })
-                }, 
-                error => { 
-                  this.errorMessage = <any>error;
-          
-                  if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
+            this.lineaSelected = [this.registroRemolque.vehiculo.linea.id]; 
+            this._MarcaService.getMarcaSelect().subscribe(
+              response => {
+                this.marcas = response;
+                setTimeout(() => {
+                    this.marcaSelected = [this.registroRemolque.vehiculo.linea.marca.id];
+                })
+              }, 
+              error => { 
+                this.errorMessage = <any>error;
+        
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
                 }
-              );
-          });
-        }, 
-        error => { 
-          this.errorMessage = <any>error;
-  
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+              }
+            );
+        });
+      }, 
+      error => { 
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
         }
-      );
-      this._carroceriaService.getCarroceriaSelect().subscribe(
-        response => {
-          this.carrocerias = response;
-          setTimeout(() => {
-            this.carroceriaSelected = [this.registroMaquinaria.vehiculo.carroceria.id];
-          });
-        },
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
+      }
+    );
+
+    this._CfgOrigenRegistroService.getCfgOrigenRegistroSelect().subscribe(
+      response => {
+        this.origenRegistros = response;
+        setTimeout(() => {
+          this.origenRegistroSelected = [this.registroRemolque.origenRegistro.id];
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
-      );
-      this._combustibleService.getCombustibleSelect().subscribe(
-        response => {
-          this.combustibles = response;
-          setTimeout(() => {
-            this.combustibleSelected = [this.registroMaquinaria.vehiculo.combustible.id];
-          });
-        },
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
+      }
+    );
+    this._CondicionIngresoService.getCondicionIngresoSelect().subscribe(
+      response => {
+        this.condicionIngresos = response;
+        setTimeout(() => {
+          this.condicionIngresoSelected = [this.registroRemolque.condicionIngreso.id];
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
-      );
-      this._cfgOrigenRegistroService.getCfgOrigenRegistroSelect().subscribe(
-        response => {
-          this.cfgOrigenRegistros = response;
-          setTimeout(() => {
-            this.cfgOrigenRegistroSelected = [this.registroMaquinaria.cfgOrigenRegistro.id];
-          });
-        },
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
+      }
+    );
+    this._ClaseService.getClaseSelect().subscribe(
+      response => {
+        this.clases = response;
+        setTimeout(() => {
+          this.claseSelected = [this.registroRemolque.vehiculo.clase.id];
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
-      );
+      }
+    );
 
   }
   onCancelar(){
@@ -236,34 +193,18 @@ constructor(
   onEnviar(){
 
     let token = this._loginService.getToken();
-    this.registroMaquinaria.tipoVehiculoId = this.tipoVehiculoSelected;
-    this.registroMaquinaria.cfgOrigenVehiculoId = this.cfgOrigenRegistroSelected;
-    
-    this.registroMaquinaria.vehiculoColorId = this.colorSelected;
-    this.registroMaquinaria.vehiculoMarcaId = this.marcaSelected;
-    this.registroMaquinaria.vehiculoClaseId = this.claseSelected;
-    this.registroMaquinaria.vehiculoLineaId = this.lineaSelected;
-    this.registroMaquinaria.vehiculoCarroceriaId = this.carroceriaSelected;
-    this.registroMaquinaria.vehiculoCombustibleId = this.combustibleSelected;
 
-    this.registroMaquinaria.condicionSelected = this.condicionSelected;
-    this.registroMaquinaria.rodajeSelected = this.rodajeSelected;
-    this.registroMaquinaria.tipoCabinaSelected = this.tipoCabinaSelected;
-    // this.registroMaquinaria.fechaIngreso = this.fechaIngreso;
-    // this.registroMaquinaria.pesoBruto = this.pesoBruto;
-    // this.registroMaquinaria.cargaUtilMaxima = this.cargaUtilMaxima;
-    // this.registroMaquinaria.numeroEjes = this.numeroEjes;
-    // this.registroMaquinaria.numeroLlantas = this.numeroLlantas;
-    // this.registroMaquinaria.altoTotal = this.altoTotal;
-    // this.registroMaquinaria.largoTotal = this.largoTotal;
-    // this.registroMaquinaria.anchoTotal = this.anchoTotal;
-    // this.registroMaquinaria.subpartidaArancelaria = this.subpartidaArancelaria;
-    // console.log(this.registroMaquinaria.vehiculoColorId);  
+    this.registroRemolque.origenRegistroId = this.origenRegistroSelected;
+    this.registroRemolque.condicionIngresoId = this.condicionIngresoSelected;
     
-    var html = 'los datos de la maquinaria sera editados !<br>';
-    
+    this.registroRemolque.vehiculoCarroceriaId = this.carroceriaSelected;
+    this.registroRemolque.vehiculoMarcaId = this.marcaSelected;
+    this.registroRemolque.vehiculoClaseId = this.claseSelected;
+
+    var html = 'los datos de la Remolque sera editados !<br>';
+   
    swal({
-      title: 'Actualización de maquinaria!',
+      title: 'Actualización de remolque!',
       type: 'warning',
       html:html,
       showCancelButton: true,
@@ -277,7 +218,7 @@ constructor(
     }).then((result) => {
         if (result.value) {
 
-    this._registroMaquinariaService.editRegistroMaquinaria(this.registroMaquinaria,token).subscribe(
+    this._RegistroRemolqueService.editRegistroRemolque(this.registroRemolque,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
@@ -291,7 +232,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.registroMaquinaria.altoTotal +' ya se encuentra registrado',
+            text: 'El vehiculo '+ this.registroRemolque.placa+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

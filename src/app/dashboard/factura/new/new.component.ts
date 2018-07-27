@@ -52,6 +52,10 @@ public tramitesPrecio:any;
 public tramitePrecio:any; 
 public tramitePrecioSelected:any; 
 public tramitesValor:any=[]; 
+public vendedores:any=[]; 
+public ciudadanosVehiculo:any=[]; 
+public isCiudadanoForm=false;
+public isEmpresa=false;
 
 constructor(
   private _FacturaService: FacturaService,
@@ -66,9 +70,23 @@ constructor(
   ){}
 
   ngOnInit() {   
+    swal({
+      title: 'Cargando Datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+      }).then((result) => {
+        if (
+          // Read more about handling dismissals
+          result.dismiss === swal.DismissReason.timer 
+        ) {
+        }
+      })
     this._moduloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
+        swal.close();
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -83,6 +101,7 @@ constructor(
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
         this.tiposIdentificacion = response;
+        swal.close();
       },
       error => {
         this.errorMessage = <any>error;
@@ -94,19 +113,7 @@ constructor(
       }
     );
 
-    swal({
-      title: 'Cargando Datos!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer 
-      ) {
-      }
-    })
+    
 
     this.date = new Date();
     let identity = this._loginService.getIdentity();
@@ -346,14 +353,36 @@ constructor(
       this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
         response => {
           this.tramitePrecio = response.data;
-          this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
-          this.tramitesValor.push(
-            {
-              'nombre':this.tramitePrecio.nombre,
-              'valor':this.tramitePrecio.valorTotal
-            }
-          )
-          console.log(this.factura);
+          if (this.tramitePrecio.tramite.id == 2) {
+            this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
+                response => {
+                  this.ciudadanosVehiculo = response.data;
+                  response.data.forEach(element => {
+                    if (element.ciudadano) {
+                      this.isCiudadanoForm = true;
+                    }
+                    if(element.empresa){
+                      this.isEmpresa = true;
+                    }
+                  });   
+               
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+              });
+          }else{
+            this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
+            this.tramitesValor.push(
+              {
+                'nombre':this.tramitePrecio.nombre,
+                'valor':this.tramitePrecio.valorTotal
+              }
+            )
+          }
   
         }, 
         error => {
@@ -372,6 +401,10 @@ constructor(
     this.tramitesValor =  this.tramitesValor.filter(h => h !== tramiteValor);
     console.log(this.factura); 
     
+  }
+  btnRetefunete(){
+    console.log(this.ciudadanosVehiculo);
+
   }
 
 }

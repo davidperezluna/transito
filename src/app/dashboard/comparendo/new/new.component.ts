@@ -52,7 +52,7 @@ constructor(
   private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
   private _mpersonalFuncionarioService: MpersonalFuncionarioService,
-  private _sedeOperativaService: SedeOperativaService,
+  private _SedeOperativaService: SedeOperativaService,
   private _municipioService: MunicipioService,
   private _vechiculoService: VehiculoService,
   private _ciudadanoService: CiudadanoService,
@@ -96,7 +96,7 @@ constructor(
           }
         }
       );
-    this._sedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
         response => {
           this.sedesOperativas = response;
         }, 
@@ -129,7 +129,7 @@ constructor(
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
@@ -153,14 +153,13 @@ constructor(
 		}); 
   }
 
-  changedMpersonalFuncionario(e){
+  onChangedMpersonalFuncionario(e){
     if (e) {
      let token = this._loginService.getToken();
-     /*this._mpersonalFuncionarioService.showMpersonalFuncionario(token,e).subscribe(
+     this._mpersonalFuncionarioService.show(token,e).subscribe(
         response => {
-          this.mpersonalFuncionario = response;
+          this.funcionario = response.data;
           this.funcionarioReady = true;
-          console.log(this.mpersonalFuncionario);
         }, 
         error => {
           this.errorMessage = <any>error;
@@ -170,20 +169,19 @@ constructor(
             alert("Error en la petición");
           }
         }
-      );*/
+      );
     }
   }
 
-  changedSedeOperativa(e){
+  onChangedSedeOperativa(e){
     this.validado = false;
     if (e) {
      let token = this._loginService.getToken();
-     this._sedeOperativaService.showSedeOperativa(token,e).subscribe(
+     this._SedeOperativaService.showSedeOperativa(token,e).subscribe(
         response => {
-          this.sedeOperativa = response;
+          this.sedeOperativa = response.data;
           this.sedeOperativaReady = true;
-          this.comparendo.numeroOrden = this.sedeOperativa.data.codigoDivipo;
-          console.log(this.sedeOperativa);
+          this.comparendo.numeroOrden = this.sedeOperativa.codigoDivipo;
         }, 
         error => {
           this.errorMessage = <any>error;
@@ -202,7 +200,6 @@ constructor(
     this._ComparendoService.serchComparendo(this.comparendo,token).subscribe(
       response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.validado = true;
           this.comparendoExistente = false;
@@ -217,7 +214,6 @@ constructor(
             alert("Error en la petición"); 
           }
         }
-
     }); 
     
   }
@@ -244,12 +240,12 @@ constructor(
   this._vechiculoService.showVehiculoPlaca(token,this.placa).subscribe(
     response => {
         if (response.status == "success") {
-        this.vehiculo = response.data;
-        this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculo.id).subscribe(
+          this.vehiculo = response.data;
+          this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculo.id).subscribe(
             response => {
               this.ciudadanosVehiculo = response.data;
-              console.log(this.ciudadanosVehiculo);
-            error => { 
+              console.log(response);
+            error => {
                 this.errorMessage = <any>error;
                 if(this.errorMessage != null){
                   console.log(this.errorMessage);
