@@ -94,8 +94,6 @@ export class EditComponent {
     );
     
   }
-
-
   onCancelar() {
     this.ready.emit(true);
   }
@@ -123,7 +121,6 @@ export class EditComponent {
             alert("Error en la petición");
           }
         }
-
       });
   }
 
@@ -141,7 +138,6 @@ export class EditComponent {
           }, 
           error => { 
             this.errorMessage = <any>error;
-    
             if(this.errorMessage != null){
               console.log(this.errorMessage);
               alert("Error en la petición");

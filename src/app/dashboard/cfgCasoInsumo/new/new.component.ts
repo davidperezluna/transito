@@ -59,7 +59,7 @@ export class NewComponent implements OnInit {
     this._CfgCasoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
       response => {
         this.respuesta = response;
-        console.log(this.respuesta);
+        
         if (this.respuesta.status == 'success') {
           this.ready.emit(true);
           swal({
