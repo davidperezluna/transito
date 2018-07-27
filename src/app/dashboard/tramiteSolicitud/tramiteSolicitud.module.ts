@@ -81,7 +81,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent,
-        NewTrasladoComponent
+        NewTrasladoComponent,
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -117,7 +117,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent,
-        NewTrasladoComponent
+        NewTrasladoComponent,
     ],
     providers: [TramiteSolicitudService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, EmpresaService, DefaultService]
 })

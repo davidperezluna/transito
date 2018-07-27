@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RnmaTramiteLimitacionService } from '../../services/rnmaTramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
-import { RnmaTramiteInscripcionLimitacion } from './rnmaTramiteInscripcionLimitacion.modelo';
+import { RnmaTramiteLevantamientoLimitacion } from './rnmaTramiteLevantamientoLimitacion.modelo';
 import { Ciudadano } from '../ciudadano/ciudadano.modelo';
 
 import { LoginService } from '../../services/login.service';
@@ -10,19 +10,19 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnmaTramiteInscripcionLimitacion.component.html'
+  templateUrl: './rnmaTramiteLevantamientoLimitacion.component.html'
 })
-export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
-  public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
+export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
+  public rnmaTramiteLevantamientoLimitacion: RnmaTramiteLevantamientoLimitacion;
   public RnmaTramiteLimitacionService:any;
   public errorMessage;
   public respuesta;
-  public tramitesInscripcion;
+  public tramitesLevantamiento;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table: any = null;
-  public tramiteInscripcion: any;
+  public tramiteLevantamiento: any;
 
   constructor(
     private _VehiculoLimitacionService: VehiculoLimitacionService,
@@ -49,7 +49,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
         if (response) {
 
           console.log(response);
-          this.tramitesInscripcion = response.data;
+          this.tramitesLevantamiento = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
@@ -138,8 +138,8 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
     })
   }
 
-  editCfgPlaca(tramiteInscripcion: any) {
-    this.tramiteInscripcion = tramiteInscripcion;
+  editCfgPlaca(tramiteLevantamiento: any) {
+    this.tramiteLevantamiento = tramiteLevantamiento;
     this.formEdit = true;
     this.formIndex = false;
   }

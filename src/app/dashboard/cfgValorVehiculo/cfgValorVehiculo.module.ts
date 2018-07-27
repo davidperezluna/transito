@@ -17,4 +17,4 @@ import {SelectModule} from 'angular2-select';
     providers:[CfgValorVehiculoService]
 })
 
-export class CfgValorVehiculoModule { }
+export class CfgValorVehiculoModule { } 

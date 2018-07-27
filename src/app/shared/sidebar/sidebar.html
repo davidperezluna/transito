@@ -297,6 +297,21 @@
       </ul>
     </li>
 
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnrs')}">
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnrs')">
+        General
+        <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-second-level ">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="registroEntregaProducto" [ngClass]="{'active' : ( addActive === 'registroEntregaProducto')}" (click)="addActiveMenu('registroEntregaProducto')">
+            <i class="fa fa-angle-right"></i> Producto Entregado
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav-second-level -->
+    </li>
+
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnc')}"> 
       <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnc')">
         RNC<i class="fa fa-angle-down "></i>
@@ -395,6 +410,14 @@
                 <a class="nav-link" routerLink="rnmaTramiteInscripcionLimitacion" [ngClass]="{'active' : ( addActive === 'rnmaTramiteInscripcionLimitacion')}"
                   (click)="addActiveMenu('rnmaTramiteInscripcionLimitacion')">
                   <i class="fa fa-angle-right"></i> Inscripción Limitación
+                </a>
+              </li>
+            </ul>
+            <ul class="nav flex-column nav-third-level">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="rnmaTramiteLevantamientoLimitacion" [ngClass]="{'active' : ( addActive === 'rnmaTramiteLevantamientoLimitacion')}"
+                  (click)="addActiveMenu('rnmaTramiteLevantamientoLimitacion')">
+                  <i class="fa fa-angle-right"></i> Levantamiento Limitación
                 </a>
               </li>
             </ul>

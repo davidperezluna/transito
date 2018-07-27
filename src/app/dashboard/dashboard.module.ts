@@ -34,6 +34,7 @@ import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.modu
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
+import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
 import { CfgLicenciaConduccionCategoriaModule } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.module';
 import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicenciaConduccion.module';
@@ -186,7 +187,11 @@ import {RightsidebarComponent} from '../shared';
       RnmaTramiteInscripcionLimitacionModule,
       CfgValorVehiculoModule,
       RnrsPreregistroModule,
+<<<<<<< HEAD
       ReporteModule,
+=======
+      registroEntregaProductoModule
+>>>>>>> 1b6a2eb331eee7dd5f11aca6abeba0b08343a5ae
       
       //MsvTCAsignacionModule,
     ],
