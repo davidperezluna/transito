@@ -50,6 +50,8 @@ export class NewComponent implements OnInit {
   public identificacionDemandante: any;
   public tipoIdentificacionesDemandado;
   public tipoIdentificacionesDemandante;
+  public opcionSeleccionado: string = '0'; // Iniciamos
+  public verSeleccion: string = '';
   public datos = {
   }
   public datos2 = {
@@ -209,9 +211,11 @@ export class NewComponent implements OnInit {
           })
           
         } else {
+          let eJudicial = this.entidadesJudiciales[this.entidadJudicialSelected - 1].label;
+          
           swal({
             title: 'Error!',
-            text: 'La limitacion ya se encuentra registrado',
+            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnmaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -228,6 +232,11 @@ export class NewComponent implements OnInit {
       });
 
 
+  }
+
+  capturar() {
+
+    this.verSeleccion = this.opcionSeleccionado;
   }
 
   onKeyPlaca() {
