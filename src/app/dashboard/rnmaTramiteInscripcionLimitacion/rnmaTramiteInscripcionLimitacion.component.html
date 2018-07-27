@@ -23,25 +23,14 @@
                 <th>Id</th>
                 <th>Limitacion Datos</th>
                 <th>Vehiculo</th>
-                <th>Acciones</th>
+                <!-- <th>Acciones</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let cfgPlaca of cfgPlacas; let i = index">
-                <td>{{cfgPlaca.id}}</td>
-                <td>{{cfgPlaca.numero}}</td>
-                <td>{{cfgPlaca.estado}}</td>
-                <td>{{cfgPlaca.clase?.nombre}}</td>
-                <td>{{cfgPlaca.sedeOperativa?.nombre}}</td>
-                <td>
-                  <button (click)="editCfgPlaca(cfgPlaca)" class="btn btn-xs btn-info" type="button">Editar
-                    <i class="fa fa-edit"></i>
-                  </button>
-                  <button (click)="deleteCfgPlaca(cfgPlaca.id)" class="btn btn-xs btn-danger" type="button">Eliminar
-                    <i class="fa fa-trash"></i>
-                  </button>
-
-                </td>
+              <tr class="odd" *ngFor="let tramiteInscripcion of tramitesInscripcion; let i = index">
+                <td>{{tramiteInscripcion.id}}</td>
+                <td>{{tramiteInscripcion.limitacionDatos.nOrdenJudicial}}</td>
+                <td>{{tramiteInscripcion.vehiculo?.placa?.numero}}</td>
               </tr>
             </tbody>
           </table>
