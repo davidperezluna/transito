@@ -404,6 +404,7 @@ constructor(
   }
   btnRetefunete(){
     console.log(this.ciudadanosVehiculo);
+
   }
 
 }
