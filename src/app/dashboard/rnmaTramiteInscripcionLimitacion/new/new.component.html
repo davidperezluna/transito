@@ -245,7 +245,7 @@
                                 <label>Entidad Judicial
                                     <span class="text-danger">*</span>
                                 </label>
-                                <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="entidadJudicialSelected" required name="entidadJudicialId">
+                                <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="entidadJudicialSelected" (change)="capturar()" required name="entidadJudicialId">
                                 </ng-select>
                             </div>
 
