@@ -67,7 +67,6 @@ export class CiudadanoVehiculoService {
 	}
 
 	showCiudadanoVehiculoId(token,id){
-		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/ciudadano/vehiculo/"+id, params, {headers: headers})
@@ -83,12 +82,8 @@ export class CiudadanoVehiculoService {
 							  .map(res => res.json());
 
 	}
-
-	
-
 	
 	editLicenciaTransito(datos,token){
-
 		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

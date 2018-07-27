@@ -200,30 +200,11 @@ constructor(
     this.registroRemolque.vehiculoCarroceriaId = this.carroceriaSelected;
     this.registroRemolque.vehiculoMarcaId = this.marcaSelected;
     this.registroRemolque.vehiculoClaseId = this.claseSelected;
-    
-    // this.registroRemolque.numeroEjes = this.numeroEjes;
-    // this.registroRemolque.alto = this.alto;
-    // this.registroRemolque.largo = this.largo;
-    // this.registroRemolque.ancho = this.ancho;
-    // this.registroRemolque.numeroEjes = this.numeroEjes;
-    // this.registroRemolque.cargaUtil = this.cargaUtil;
-    // this.registroRemolque.pesoVacio = this.pesoVacio;
-    // this.registroRemolque.referencia = this.referencia;
-    // this.registroRemolque.numeroFth = this.numeroFth;
-    // this.registroRemolque.rut = this.rut;
 
-    var html = 'los datos de la maquinaria sera editados:<br>'+
-               'Placa: <b>'+this.registroRemolque.vehiculoPlaca+'</b><br>'+
-               'Serie: <b>'+this.registroRemolque.vehiculoSerie+'</b><br>'+
-               'Carga util: <b>'+this.registroRemolque.cargaUtil+'</b><br>'+
-               'Peso vacio: <b>'+this.registroRemolque.pesoVacio+'</b><br>'+
-               'Referencia: <b>'+this.registroRemolque.referencia+'</b><br>';
-               'Ficha tecnica: <b>'+this.registroRemolque.numeroFth+'</b><br>'+
-    
-  //   var html = 'los datos de la maquinaria sera editados !<br>';
-    
+    var html = 'los datos de la Remolque sera editados !<br>';
+   
    swal({
-      title: 'Actualización de maquinaria!',
+      title: 'Actualización de remolque!',
       type: 'warning',
       html:html,
       showCancelButton: true,
@@ -251,7 +232,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.registroRemolque.id +' ya se encuentra registrado',
+            text: 'El vehiculo '+ this.registroRemolque.placa+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

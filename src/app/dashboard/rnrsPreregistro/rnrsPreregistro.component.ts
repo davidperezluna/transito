@@ -93,13 +93,11 @@ export class RnrsPreregistroComponent implements OnInit {
         this.ngOnInit();
       }
   }
-
   editRemolque(registroRemolque:any){
     this.registroRemolque = registroRemolque;
     this.formIndex = false;
     this.formEdit = true;
   }
-
   deleteRemolque(id:any){
 
     swal({
