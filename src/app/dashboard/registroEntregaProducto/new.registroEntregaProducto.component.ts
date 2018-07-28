@@ -2,8 +2,10 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { Router } from "@angular/router";
 import { VehiculoService } from '../../services/vehiculo.service';
 import { LoginService } from '../../services/login.service';
-import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service'
+import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
+import { Vehiculo } from '../vehiculo/vehiculo.modelo';
 import swal from 'sweetalert2';
+import { log } from 'util';
 
 
 @Component({
@@ -16,8 +18,10 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
     public msj = '';
     public vehiculoSuccess = false;
     public vehiculo: any;
+    public vehiculos: any;
     public tramiteSolicitud: any;
     public idVehiculo;
+    public showV:any;
     public datos = {
         'vehiculo': null,
         'tramiteFactura': null,
@@ -37,11 +41,13 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);    
+
     }
 
     buscarVehiculo() {
         let token = this._loginService.getToken();
-
+        this.showV = false;
         this._VehiculoService.showVehiculoParametro(token, this.datos).subscribe(
             response => {
                 if (response.status == 'error') {
@@ -63,17 +69,8 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
                     this.error = true;
                     this.vehiculoSuccess = false;
                 } else {
-                    this.vehiculo = response.data;
+                    this.vehiculos = response.data;
                     this.vehiculoSuccess = true;
-                    this.vehiculo.forEach(element => {
-                        this.idVehiculo = element.id;
-                    });
-                    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.idVehiculo).subscribe(
-                        response => {
-                            this.tramiteSolicitud = response.data;
-                            console.log(this.tramiteSolicitud);
-                        }
-                    );
                 }
                 error => {
                     this.errorMessage = <any>error;
@@ -87,4 +84,10 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
 
     onCancelar() {
     }
+
+    showVehiculo(vehiculo:any){
+        this.vehiculo = vehiculo;
+        console.log(this.vehiculo);        
+        this.showV = true;
+      }
 }
