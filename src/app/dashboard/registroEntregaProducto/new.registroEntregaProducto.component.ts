@@ -10,13 +10,14 @@ import swal from 'sweetalert2';
     selector: 'app-registroEntregaProducto',
     templateUrl: './new.registroEntregaProducto.html',
 })
-export class NewRegistroEntregaProductoComponent implements OnInit {    
-    public errorMessage=false;
-    public error=false;
-    public msj='';
+export class NewRegistroEntregaProductoComponent implements OnInit {
+    public errorMessage = false;
+    public error = false;
+    public msj = '';
     public vehiculoSuccess = false;
     public vehiculo: any;
     public tramiteSolicitud: any;
+    public idVehiculo;
     public datos = {
         'vehiculo': null,
         'tramiteFactura': null,
@@ -38,47 +39,50 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
     ngOnInit() {
     }
 
-    buscarVehiculo(){
+    buscarVehiculo() {
         let token = this._loginService.getToken();
 
-    this._VehiculoService.showVehiculoParametro(token,this.datos).subscribe(
-      response => {
-        if (response.status == 'error' ) {
-          if(response.code ==401){
-            this.msj= response.msj;
-            swal({
-                type: 'error',
-                title: 'Oops...',
-                text: response.msj
-            })
-          }else if(response.code == 400){
-            this.msj= response.msj;
-            swal({
-                type: 'error',
-                title: 'Oops...',
-                text: response.msj
-            })
-          }
-          this.error = true;
-          this.vehiculoSuccess = false;
-        }else{          
-          this.vehiculo = response.data;
-          this.vehiculoSuccess = true;
-        }
-      error => { 
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición"); 
-          }
-        }
-        this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.vehiculo.id).subscribe(
-            response=>{
-                this.tramiteSolicitud = response.data;
-                console.log(this.tramiteSolicitud);
-            }            
-        );
-    });
+        this._VehiculoService.showVehiculoParametro(token, this.datos).subscribe(
+            response => {
+                if (response.status == 'error') {
+                    if (response.code == 401) {
+                        this.msj = response.msj;
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: response.msj
+                        })
+                    } else if (response.code == 400) {
+                        this.msj = response.msj;
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: response.msj
+                        })
+                    }
+                    this.error = true;
+                    this.vehiculoSuccess = false;
+                } else {
+                    this.vehiculo = response.data;
+                    this.vehiculoSuccess = true;
+                    this.vehiculo.forEach(element => {
+                        this.idVehiculo = element.id;
+                    });
+                    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.idVehiculo).subscribe(
+                        response => {
+                            this.tramiteSolicitud = response.data;
+                            console.log(this.tramiteSolicitud);
+                        }
+                    );
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
     }
 
     onCancelar() {
