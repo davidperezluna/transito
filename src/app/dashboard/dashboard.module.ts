@@ -187,11 +187,8 @@ import {RightsidebarComponent} from '../shared';
       RnmaTramiteInscripcionLimitacionModule,
       CfgValorVehiculoModule,
       RnrsPreregistroModule,
-<<<<<<< HEAD
       ReporteModule,
-=======
-      registroEntregaProductoModule
->>>>>>> 1b6a2eb331eee7dd5f11aca6abeba0b08343a5ae
+      registroEntregaProductoModule,
       
       //MsvTCAsignacionModule,
     ],
