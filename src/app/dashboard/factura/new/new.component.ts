@@ -10,6 +10,7 @@ import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.se
 import { ModuloService } from '../../../services/modulo.service';
 import { TramitePrecioService } from '../../../services/tramitePrecio.service';
 import { DatePipe } from '@angular/common';
+import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -52,10 +53,12 @@ public tramitesPrecio:any;
 public tramitePrecio:any; 
 public tramitePrecioSelected:any; 
 public tramitesValor:any=[]; 
-public vendedores:any=[]; 
-public ciudadanosVehiculo:any=[]; 
+public vendedores:any=0; 
+public propietariosVehiculo:any=[]; 
 public isCiudadanoForm=false;
-public isEmpresa=false;
+public isEmpresaForm=false;
+public valorRetefuente:any;
+public valorRetefuenteUnitario:any=0;
 
 constructor(
   private _FacturaService: FacturaService,
@@ -67,6 +70,7 @@ constructor(
   private _MflTipoRecaudoService: MflTipoRecaudoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _moduloService: ModuloService,
+  private _CfgValorVehiculoService: CfgValorVehiculoService,
   ){}
 
   ngOnInit() {   
@@ -355,17 +359,37 @@ constructor(
           this.tramitePrecio = response.data;
           if (this.tramitePrecio.tramite.id == 2) {
             this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
-                response => {
-                  this.ciudadanosVehiculo = response.data;
-                  response.data.forEach(element => {
-                    if (element.ciudadano) {
-                      this.isCiudadanoForm = true;
+                response => { 
+                  let datos ={
+                    'linea':this.vehiculo.linea.id,
+                    'clase':this.vehiculo.clase.id,
+                    'modelo':this.vehiculo.modelo
+                  }
+
+                  this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos,token).subscribe(
+                      valorVehiculo => {
+                      // console.log(response.datos.valor);
+                      // console.log(parseInt(response.datos.valor)*0.01);
+                      this.valorRetefuente =parseInt(valorVehiculo.datos.valor)*0.01;
+                      this.propietariosVehiculo = response.data;
+                      response.data.forEach(element => {
+                        if (element.ciudadano) {
+                          this.isCiudadanoForm = true;
+                        }
+                        if(element.empresa){
+                          this.isEmpresaForm = true;
+                        }
+                      }); 
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
                     }
-                    if(element.empresa){
-                      this.isEmpresa = true;
-                    }
-                  });   
-               
+                  );
                 error => {
                   this.errorMessage = <any>error;
                   if (this.errorMessage != null) {
@@ -402,9 +426,38 @@ constructor(
     console.log(this.factura); 
     
   }
-  btnRetefunete(){
-    console.log(this.ciudadanosVehiculo);
 
+  btnRetefunete(){
+    console.log(this.propietariosVehiculo);
+    let token = this._loginService.getToken();
+    this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
+      response => {
+        this.tramitePrecio = response.data;
+        this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
+          this.tramitesValor.push(
+            {
+              'nombre':this.tramitePrecio.nombre,
+              'valor':this.tramitePrecio.valorTotal
+            }
+          )
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });    
+  }
+
+  onVendedorSelect(eve: any){
+    if (eve.target.checked) {
+      this.vendedores = this.vendedores + 1;
+    }else{
+      this.vendedores = this.vendedores - 1;
+    }
+    this.valorRetefuenteUnitario = this.valorRetefuente / this.vendedores;
+    console.log(this.valorRetefuenteUnitario);
   }
 
 }

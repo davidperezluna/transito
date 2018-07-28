@@ -200,65 +200,63 @@
                     <br><br>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" >
-                    <label>Propietarios
-                        <span class="text-danger">*</span>
-                    </label>
-
-                    <div *ngIf="isCiudadanoForm" class="container-fluid">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
-                                    <td>
-                                        <strong>Nombre: </strong>
-                                        {{ciudadanoVehiculo.ciudadano?.usuario.primerNombre}} {{ciudadanoVehiculo.ciudadano?.usuario.primerApellido}}
-                                    </td>
-                                    <td>
-                                        <strong>Identificación: </strong>
-                                        {{ciudadanoVehiculo.ciudadano?.usuario.identificacion}}
-                                    </td>
-                                    <td> 
-                                        <div class="col-xs-12 col-lg-12" >
-                                            <br> 
+                <div class="col-xs-12 col-lg-12" *ngIf="isCiudadanoForm || isEmpresaForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h5 class="text-uppercase">Propietarios</h5>
+                                <p class="text-uppercase">valor retefuente: {{valorRetefuente}}</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered" *ngIf="isCiudadanoForm">
+                                <tbody>
+                                    <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
+                                        <td>
+                                            <strong>Nombre: </strong>
+                                            {{ propietarioVehiculo.ciudadano?.usuario.primerNombre }} {{ propietarioVehiculo.ciudadano?.usuario.primerApellido }}
+                                        </td>
+                                        <td>
+                                            <strong>Identificación: </strong>
+                                            {{ propietarioVehiculo.ciudadano?.usuario.identificacion }}
+                                        </td>
+                                        <td> 
                                             <div class="custom-control custom-checkbox"  >
-                                                <input  [(ngModel)]="ciudadanoVehiculo.state" name="{{ciudadanoVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{ciudadanoVehiculo.id}}">
-                                                <label class="custom-control-label" for="{{ciudadanoVehiculo.id}}">solidario</label>
+                                                <input (change)="onVendedorSelect($event)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
+                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}</p></label>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody> 
-                        </table> 
-                        <button (click)="btnRetefunete()" class="btn btn-primary pull-right">Aceptar</button>
-                    </div>
+                                        </td>
+                                    </tr>
+                                </tbody> 
+                            </table> 
 
-                    <table class="table table-bordered" *ngIf="isEmpresa">
-                        <thead>
-                            <tr>
-                                <th>Solicitante Empresa</th>
-                                <th>Check</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
-                                <td>
-                                    <strong>Nit: </strong>
-                                    {{ciudadanoVehiculo.empresa?.nit}}
-                                    <br>
-                                    <strong>Nombre: </strong>
-                                    {{ciudadanoVehiculo.empresa?.nombre}}
-                                </td>
-                                <!-- <td> 
-                                    <label class="custom-control custom-radio" for="3option3">
-                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" required >
-                                        <span class="custom-control-indicator"></span> 
-                                        <span class="custom-control-description">Solicitante</span>
-                                    </label>
-                                </td> -->
-                            </tr>
-                        </tbody> 
-                    </table> 
+                            <table class="table table-bordered" *ngIf="isEmpresaForm">
+                                <tbody>
+                                    <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
+                                        <td>
+                                            <strong>Nit: </strong>
+                                            {{propietarioVehiculo.empresa?.nit}}
+                                            <br>
+                                            <strong>Nombre: </strong>
+                                            {{propietarioVehiculo.empresa?.nombre}}
+                                        </td>
+                                        <td> 
+                                            <div class="custom-control custom-checkbox"  >
+                                                <input (change)="onVendedorSelect($event)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
+                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}</p></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody> 
+                            </table> 
+
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="btnRetefunete()" class="btn btn-primary pull-right">Aceptar</button>
+                        </div>
+                    </div>
                 </div> 
+                
                 
 
 

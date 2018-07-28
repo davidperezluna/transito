@@ -90,6 +90,7 @@ import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimi
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
+import { ReporteRoutes } from './reporte/reporte.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
@@ -177,6 +178,7 @@ export const DashboardRoutes: Route[] = [
         ...CfgTipoProcesoRoutes,
         ...CfgValorVehiculoRoutes,
         ...RnrsPreregistroRoutes,
+        ...ReporteRoutes,
        ]
     }
 ];

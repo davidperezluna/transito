@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">formulario tramite</h5>
+                <hr> 
+                <form #tramite="ngForm" >
+                    <div  class="row justify-content-center">
+                        <div class="container">
+                            <div class="form-group row">
+                                <div class=" col-md-11">
+                                    <label>seleccione sede operativa*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="sedeOperativas"
+                                        [(ngModel)]="sedeOperativaSelected"
+                                        required
+                                        name="sedeOperativaId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-3 col-md-2">
+                                    <label>Periodo de Informe*</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Desde*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="desde" name="desde" type="text" required>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+                                    <label class="custom-control-label" for="customRadio1">Informe diario</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <button (click)="generarPdf()" class="btn btn-secondary">Generar PDF</button>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </form>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" class="btn btn-success " [disabled]="newForm.invalid">Enviar</button>
+                </div>    
+            </div>
+        </div>    
+    </div>
+</div>

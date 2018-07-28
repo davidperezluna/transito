@@ -1,0 +1,32 @@
+<div class="container" >
+  <div class="row" *ngIf='formIndex'>
+      <div class="col-md-8 ">
+        <div class="card">
+          <div class="card-header">
+          <h5 class="card-title">Reportes<small> de ingresos</small></h5>
+          </div>
+          <div class="card-body">
+            <div class="row justify-content-center container">
+              <div class="col-xs-8 col-lg-8">
+                <label>Seleccione tipo de reportes</label>
+                <ng-select
+                    [multiple]="false"
+                    [options]="tipoReportes"
+                    [(ngModel)]="tipoReporteSelected"
+                  
+                    required
+                    name="tipoReportes">
+                </ng-select>
+              </div>
+            </div> 
+          </div>
+        </div>
+            <div class="col-xs-12 col-lg-12" *ngIf="tipoReporteSelected=='tramite'">
+                  <h1>tramite</h1>
+                   <app-tramite  (ready)="ready($event)"></app-tramite>
+            </div>
+      </div>
+    </div>
+    <!-- <app-edit *ngIf='formEdit' [registroMaquinaria]="registroMaquinaria" (ready)="ready($event)"></app-edit>
+    <app-new-rnmaRegistroMaquinaria *ngIf='formNew' (ready)="ready($event)"></app-new-rnmaRegistroMaquinaria> -->
+</div>
