@@ -57,7 +57,34 @@
                                 <label></label>
                                 <button (click)="buscarVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                             </div>
-                         </div>                        
+                         </div>   
+                         <div class="card">
+                            <div class="card-header">
+                               <h5 class="card-title">Vehículo(s) <small>Registrado(s)</small></h5>
+                            </div>
+                            <div class="card-body">
+                               <table class="table " id="dataTables-example">
+                                  <thead>
+                                     <tr>
+                                        <th>Placa</th>
+                                        <th>Chasis</th>
+                                        <th>Número VIN</th>
+                                        <th>Acciones</th>
+                                     </tr>
+                                  </thead>
+                                  <tbody>
+                                     <tr class="odd">
+                                        <td >{{vehiculo.placa.numero}}</td>
+                                        <td >{{vehiculo.chasis}}</td>
+                                        <td >{{vehiculo.vin}}</td>
+                                        <td><button (click)="showVehiculo()" class="btn btn-outline-info" type="button">Detalles</button> 
+                                        </td>
+                                     </tr>
+                                  </tbody>
+                               </table>
+                               <!-- /.table-responsive --> 
+                            </div>
+                         </div>                     
                     </div>
                 </form>
             </div>
