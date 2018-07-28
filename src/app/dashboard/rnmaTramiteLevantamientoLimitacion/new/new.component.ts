@@ -10,7 +10,7 @@ import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.
 import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { RnmaTramiteInscripcionLimitacion } from '../rnmaTramiteInscripcionLimitacion.modelo';
+import { RnmaTramiteLevantamientoLimitacion } from '../rnmaTramiteLevantamientoLimitacion.modelo';
 import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
 import swal from 'sweetalert2';
 
@@ -20,7 +20,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
+  public rnmaTramiteLevantamientoLimitacion: RnmaTramiteLevantamientoLimitacion;
   public vehiculoLimitacion: any;
   public errorMessage;
   public respuesta;
@@ -61,7 +61,7 @@ export class NewComponent implements OnInit {
   }
 
   constructor(
-    private _RnmaTramiteInscripcionLimitacionService: RnmaTramiteLimitacionService,
+    private _RnmaTramiteLevantamientoLimitacionService: RnmaTramiteLimitacionService,
     private _VehiculoLimitacionService: VehiculoLimitacionService,
     private _VehiculoService: VehiculoService,
     private _CiudadanoService: CiudadanoService,
@@ -75,7 +75,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null);
+    this.rnmaTramiteLevantamientoLimitacion = new RnmaTramiteLevantamientoLimitacion(null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
@@ -185,19 +185,19 @@ export class NewComponent implements OnInit {
   enviarTramite() {
     let token = this._loginService.getToken();
 
-    this.rnmaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
-    this.rnmaTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
-    this.rnmaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
-    this.rnmaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
-    this.rnmaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
-    this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
-    this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
+    this.rnmaTramiteLevantamientoLimitacion.departamentoId = this.departamentoSelected;
+    this.rnmaTramiteLevantamientoLimitacion.entidadJudicialId = this.entidadJudicialSelected;
+    this.rnmaTramiteLevantamientoLimitacion.limitacionId = this.limitacionSelected;
+    this.rnmaTramiteLevantamientoLimitacion.municipioId = this.municipioSelected;
+    this.rnmaTramiteLevantamientoLimitacion.tipoProcesoId = this.tipoProcesoSelected;
+    this.rnmaTramiteLevantamientoLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
+    this.rnmaTramiteLevantamientoLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
     let data =[
-      {'datosLimitacion': this.rnmaTramiteInscripcionLimitacion},
+      {'datosLimitacion': this.rnmaTramiteLevantamientoLimitacion},
 
       {'vehiculosLimitacionArray': this.datos2}
     ]
-    this._RnmaTramiteInscripcionLimitacionService.register(data, token).subscribe(
+    this._RnmaTramiteLevantamientoLimitacionService.register(data, token).subscribe(
       response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -215,7 +215,7 @@ export class NewComponent implements OnInit {
           
           swal({
             title: 'Error!',
-            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnmaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
+            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnmaTramiteLevantamientoLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
