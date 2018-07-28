@@ -188,7 +188,7 @@ import {RightsidebarComponent} from '../shared';
       CfgValorVehiculoModule,
       RnrsPreregistroModule,
       ReporteModule,
-      registroEntregaProductoModule,
+      registroEntregaProductoModule
       
       //MsvTCAsignacionModule,
     ],
