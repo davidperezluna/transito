@@ -223,7 +223,7 @@
                                         <td> 
                                             <div class="custom-control custom-checkbox"  >
                                                 <input (change)="onVendedorSelect($event)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
-                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}</p></label>
+                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}$</p><p *ngIf="!propietarioVehiculo.state">0$</p></label>
                                             </div>
                                         </td>
                                     </tr>
@@ -243,7 +243,7 @@
                                         <td> 
                                             <div class="custom-control custom-checkbox"  >
                                                 <input (change)="onVendedorSelect($event)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
-                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}</p></label>
+                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}$</p><p *ngIf="!propietarioVehiculo.state">0$</p></label>
                                             </div>
                                         </td>
                                     </tr>
@@ -252,14 +252,10 @@
 
                         </div>
                         <div class="card-footer">
-                            <button (click)="btnRetefunete()" class="btn btn-primary pull-right">Aceptar</button>
+                            <button (click)="btnRetefunete()" [disabled]='vendedores == 0' class="btn btn-primary pull-right">Aceptar</button>
                         </div>
                     </div>
                 </div> 
-                
-                
-
-
                 <div class="col-xs-12 col-lg-12">
                     <table class="table " id="dataTables-example">
                         <thead>
