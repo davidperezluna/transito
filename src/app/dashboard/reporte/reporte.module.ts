@@ -8,14 +8,14 @@ import {CarroceriaService} from '../../services/carroceria.service';
 import {CfgOrigenRegistroService} from '../../services/cfgOrigenRegistro.service';
 
 import { TramiteComponent } from './tramite/tramite.component';
-// import { EditComponent } from './edit/edit.component';
-// import { EditComponent } from './edit/edit.component';
+import { MultaComponent } from './multa/multa.component';
+import { RetefuenteComponent } from './retefuente/retefuente.component';
 import {SelectModule} from 'angular2-select';
 // ,EditComponent
 @NgModule({
-    declarations: [ReporteComponent,TramiteComponent],
+    declarations: [ReporteComponent,TramiteComponent,MultaComponent,RetefuenteComponent],
     imports: [CommonModule, ChartsModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    exports: [ReporteComponent, TramiteComponent],
+    exports: [ReporteComponent, TramiteComponent,MultaComponent,RetefuenteComponent],
     providers:[RegistroMaquinariaService,CarroceriaService,CfgOrigenRegistroService]
 })
 

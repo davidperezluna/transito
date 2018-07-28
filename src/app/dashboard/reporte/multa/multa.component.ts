@@ -5,10 +5,10 @@ import {SedeOperativaService} from '../../../services/sedeOperativa.service';
 
 import swal from 'sweetalert2';
 @Component({
-  selector: 'app-tramite',
-  templateUrl: './tramite.component.html'
+  selector: 'app-multa',
+  templateUrl: './multa.component.html'
 })
-export class TramiteComponent implements OnInit {
+export class MultaComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public registroMaquinaria: Reporte;
 public municipios:any;
@@ -17,15 +17,19 @@ public habilitar:any;
 public respuesta:any;
 public formIndex = true;
 public tramite = false;
-public multa= false;
+public infraccion= false;
 public retefuente= false;
 
 public desde:any;
 public hasta:any;
 public diario:any;
 
-public sedeOperativas:any;
-public sedeOperativaSelected:any;
+public infracciones =[
+  {'value':"resoluciones",'label':"Resoluciones"},
+  {'value':"acuerdos de pago",'label':"Acuerdos de pago"},
+  {'value':"comparendo",'label':"Comparendo"},
+  {'value':"cobro coactivo",'label':"Cobro coactivo"}
+]
 
 constructor(
   private _SedeOperativaService: SedeOperativaService,
@@ -36,25 +40,11 @@ constructor(
 ngOnInit() {
   // this.registroMaquinaria = new Reporte();
   
-  this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-    response => {
-      this.sedeOperativas = response;
-    },  
-    error => {
-      this.errorMessage = <any>error;
   
-      if(this.errorMessage != null){
-        console.log(this.errorMessage);
-        alert("Error en la petición");
-      }
-    }
-  );
- 
   }
 
   onCancelar(){
-      this.multa=false;
-      // this.ready.emit(true);
+      this.ready.emit(true);
   }
   onEnviar(){
     // let token = this._loginService.getToken();
