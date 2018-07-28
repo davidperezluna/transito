@@ -423,12 +423,9 @@ constructor(
   deleteTramiteValor(tramiteValor){
     this.factura.valorBruto = this.factura.valorBruto - parseInt(tramiteValor.valor);
     this.tramitesValor =  this.tramitesValor.filter(h => h !== tramiteValor);
-    console.log(this.factura); 
-    
   }
 
   btnRetefunete(){
-    console.log(this.propietariosVehiculo);
     let token = this._loginService.getToken();
     this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
       response => {
@@ -452,12 +449,11 @@ constructor(
 
   onVendedorSelect(eve: any){
     if (eve.target.checked) {
-      this.vendedores = this.vendedores + 1;
+    this.vendedores = this.vendedores + 1;
     }else{
       this.vendedores = this.vendedores - 1;
     }
     this.valorRetefuenteUnitario = this.valorRetefuente / this.vendedores;
-    console.log(this.valorRetefuenteUnitario);
   }
 
 }
