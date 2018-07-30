@@ -4,12 +4,13 @@ import { NewRegistroEntregaProductoComponent } from './new.registroEntregaProduc
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { SelectModule } from 'angular2-select';
+import { showRegistroEntregaProductoComponent } from './show/showRegistroEntregaProducto.component';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [NewRegistroEntregaProductoComponent],
-    exports: [NewRegistroEntregaProductoComponent],
+    declarations: [NewRegistroEntregaProductoComponent, showRegistroEntregaProductoComponent],
+    exports: [NewRegistroEntregaProductoComponent, showRegistroEntregaProductoComponent],
     providers:[VehiculoService]
 })
 
