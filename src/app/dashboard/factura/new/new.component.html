@@ -222,7 +222,7 @@
                                         </td>
                                         <td> 
                                             <div class="custom-control custom-checkbox"  >
-                                                <input (change)="onVendedorSelect($event)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
+                                                <input (change)="onVendedorSelect($event,propietarioVehiculo.id)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
                                                 <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}$</p><p *ngIf="!propietarioVehiculo.state">0$</p></label>
                                             </div>
                                         </td>
