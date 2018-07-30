@@ -55,6 +55,13 @@ export class TramiteSolicitudService {
 		let json = JSON.stringify(idVehiculo);
 		let params = 'json=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + '/byvehiculo',params,{ headers: headers }).map(res => res.json());
+		return this._http.post(this.url + '/byvehiculoorder',params,{ headers: headers }).map(res => res.json());
+	}
+
+	getTramiteSolicitudByIdVehiculoAndDate(token,datos) {
+		let json = JSON.stringify(datos);
+		let params = 'json=' + json + '&authorization=' + token;		
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/byvehiculoanddate',params,{ headers: headers }).map(res => res.json());
 	}
 }
