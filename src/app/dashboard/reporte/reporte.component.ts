@@ -25,7 +25,7 @@ export class ReporteComponent implements OnInit {
   public Reporte: Reporte;
 
   public tipoReportes =[
-    {'value':"tramite",'label':"Tramite"},{'value':"infraccion",'label':"Infraccion"},{'value':"retefuente",'label':"Retefuente"}
+    {'value':"tramite",'label':"Tramite"},{'value':"multa",'label':"Infraccion"},{'value':"retefuente",'label':"Retefuente"}
   ]
 
   constructor(
