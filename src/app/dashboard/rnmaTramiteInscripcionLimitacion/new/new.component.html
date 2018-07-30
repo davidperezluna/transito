@@ -107,7 +107,7 @@
                             <label>Municipio
                                 <span class="text-danger">*</span>
                             </label>
-                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipioId">
+                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" (ngModelChange)="changedDepartamento($event)" required name="municipioId">
                             </ng-select>
                         </div>
 
@@ -323,9 +323,13 @@
                         <br>
                         <hr>
                         <br>
-                        <h5 class="m-0 col-lg-6 col-md-6">
-                            Causal de Limitación
-                        </h5>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Causal de Limitación
+                                <span class="text-danger">*</span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="causalesLimitacion" [(ngModel)]="causalLimitacionSelected" required name="causalLimitacionId">
+                            </ng-select>
+                        </div>
 
                         <div class="col-lg-6 col-md-6">
                             <label>Tipo de Proceso
