@@ -1,25 +1,28 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {Reporte} from '../reporte.modelo';
 import {LoginService} from '../../../services/login.service';
-import {SedeOperativaService} from '../../../services/sedeOperativa.service';
+import {ComparendoService} from '../../../services/comparendo.service';
 
 import swal from 'sweetalert2';
+declare var $: any;
 @Component({
   selector: 'app-retefuente',
   templateUrl: './retefuente.component.html'
 })
 export class RetefuenteComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public registroMaquinaria: Reporte;
+
 public municipios:any;
 public errorMessage:any;
 public habilitar:any;
 public respuesta:any;
+public comparendos:any;
 public formIndex = true;
 public tramite = false;
 public infraccion= false;
 public retefuente= false;
 
+public table:any;
 public desde:any;
 public hasta:any;
 public diario:any;
@@ -30,15 +33,64 @@ public retefuentes =[
 ]
 
 constructor(
-  private _SedeOperativaService: SedeOperativaService,
+  private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
 
 ){}
 
 ngOnInit() {
-  // this.registroMaquinaria = new Reporte();
+  swal({
+    title: 'Cargando Tabla!',
+    text: 'Solo tardara unos segundos por favor espere.',
+    timer: 1500,
+    onOpen: () => {
+      swal.showLoading()
+    }
+  }).then((result) => {
+    if (
+      // Read more about handling dismissals
+      result.dismiss === swal.DismissReason.timer
+    ) {
+    }
+  })
+  this._ComparendoService.getComparendo().subscribe(
+    response => {
+      this.comparendos  = response.data;
+      console.log(this.comparendos);
+      
+      let timeoutId = setTimeout(() => {  
+        this.iniciarTabla();
+        swal.close();
+      }, 100);
+    }, 
+    error => {
+      this.errorMessage = <any>error;
+
+      if(this.errorMessage != null){
+        console.log(this.errorMessage);
+        alert("Error en la petición");
+      }
+    }
+  );
   
   
+  }
+
+  iniciarTabla(){
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+           oPaginate: {
+           sFirst: '<<',
+           sPrevious: '<',
+           sNext: '>',
+           sLast: '>>'
+        }
+      }
+   });
+   this.table = $('#dataTables-example').DataTable();
   }
 
   onCancelar(){

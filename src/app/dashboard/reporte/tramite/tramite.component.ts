@@ -2,8 +2,12 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {Reporte} from '../reporte.modelo';
 import {LoginService} from '../../../services/login.service';
 import {SedeOperativaService} from '../../../services/sedeOperativa.service';
+import {TramiteSolicitudService} from '../../../services/tramiteSolicitud.service';
+import {TramiteFacturaService} from '../../../services/tramiteFactura.service';
+import {TramitePrecioService} from '../../../services/tramitePrecio.service';
 
 import swal from 'sweetalert2';
+declare var $: any;
 @Component({
   selector: 'app-tramite',
   templateUrl: './tramite.component.html'
@@ -20,21 +24,23 @@ public tramite = false;
 public multa= false;
 public retefuente= false;
 
+public table:any;
 public desde:any;
 public hasta:any;
 public diario:any;
 
 public sedeOperativas:any;
+public tramiteReportes:any;
 public sedeOperativaSelected:any;
 
 constructor(
   private _SedeOperativaService: SedeOperativaService,
+  private _TramiteSolicitudService: TramiteSolicitudService,
   private _loginService: LoginService,
 
 ){}
 
 ngOnInit() {
-  // this.registroMaquinaria = new Reporte();
   
   this._SedeOperativaService.getSedeOperativaSelect().subscribe(
     response => {
@@ -42,14 +48,50 @@ ngOnInit() {
     },  
     error => {
       this.errorMessage = <any>error;
-  
+      
       if(this.errorMessage != null){
         console.log(this.errorMessage);
         alert("Error en la petición");
       }
     }
   );
+  this._TramiteSolicitudService.getTramiteReporte().subscribe(
+    response => {
+      this.tramiteReportes = response.data;
+      console.log(this.tramiteReportes);
+      let timeoutId = setTimeout(() => {  
+        this.iniciarTabla();
+        swal.close();
+      }, 100);
+    }, 
+    error => {
+      this.errorMessage = <any>error;
+      
+      if(this.errorMessage != null){
+        console.log(this.errorMessage);
+        alert("Error en la petición");
+      }
+    }
+  );
+  
  
+  }
+
+  iniciarTabla(){
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+           oPaginate: {
+           sFirst: '<<',
+           sPrevious: '<',
+           sNext: '>',
+           sLast: '>>'
+        }
+      }
+   });
+   this.table = $('#dataTables-example').DataTable();
   }
 
   onCancelar(){

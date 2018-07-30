@@ -55,8 +55,11 @@ public tramitePrecioSelected:any;
 public tramitesValor:any=[]; 
 public vendedores:any=0; 
 public propietariosVehiculo:any=[]; 
+public propietariosVehiculoRetefuente:any=[]; 
 public isCiudadanoForm=false;
 public isEmpresaForm=false;
+public datos:any=[];
+public valorVehiculoId:any;
 public valorRetefuente:any;
 public valorRetefuenteUnitario:any=0;
 
@@ -174,8 +177,11 @@ constructor(
       let datos = {
         'factura':this.factura,
         'tramitesValor': this.tramitesValor,
+        'valorVehiculoId': this.valorVehiculoId,
+        'propietarios': this.propietariosVehiculoRetefuente,
+        'retencion':this.valorRetefuenteUnitario
       }
-    
+    console.log(datos);
 		this._FacturaService.register(datos,token).subscribe(
 			response => {
         this.respuesta = response;
@@ -217,6 +223,7 @@ constructor(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'error'){
+          console.log(this.respuesta);
           this.ciudadano = this.respuesta.datos;
           this.factura.ciudadanoId = this.ciudadano.id;
           this.isExistCiudadano = true;
@@ -371,6 +378,7 @@ constructor(
                       // console.log(response.datos.valor);
                       // console.log(parseInt(response.datos.valor)*0.01);
                       this.valorRetefuente =parseInt(valorVehiculo.datos.valor)*0.01;
+                      this.valorVehiculoId = valorVehiculo.datos.id;
                       this.propietariosVehiculo = response.data;
                       response.data.forEach(element => {
                         if (element.ciudadano) {
@@ -447,12 +455,15 @@ constructor(
       });    
   }
 
-  onVendedorSelect(eve: any){
+  onVendedorSelect(eve: any,propietarioVehiculo:any){
     if (eve.target.checked) {
-    this.vendedores = this.vendedores + 1;
+      this.propietariosVehiculoRetefuente.push(propietarioVehiculo);
+      this.vendedores = this.vendedores + 1;
     }else{
       this.vendedores = this.vendedores - 1;
+      this.propietariosVehiculoRetefuente =  this.propietariosVehiculoRetefuente.filter(h => h !== propietarioVehiculo);
     }
+    console.log(this.propietariosVehiculoRetefuente);
     this.valorRetefuenteUnitario = this.valorRetefuente / this.vendedores;
   }
 

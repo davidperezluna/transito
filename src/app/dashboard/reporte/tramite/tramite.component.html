@@ -8,7 +8,7 @@
                     <div  class="row justify-content-center">
                         <div class="container">
                             <div class="form-group row">
-                                <div class=" col-md-11">
+                                <div class=" col-md-12">
                                     <label>seleccione sede operativa*</label>
                                     <ng-select
                                         [multiple]="false"
@@ -19,6 +19,7 @@
                                     </ng-select>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
+                                    <br>
                                     <label>Periodo de Informe*</label>
                                 </div>
                                 <div class="col-lg-3 col-md-3">
@@ -31,12 +32,14 @@
                                     <!-- <input class="form-control" placeholder=""  name="hasta" type="data" required> -->
                                     <input class="form-control" placeholder="" [(ngModel)]="hasta" name="hasta" type="month" min="1900-12" max="3000-12" required>
                                 </div>
-                                <div class="custom-control custom-checkbox">
-                                        <!-- [(ngModel)]="" --><br>
-                                    <input   name="informe"  type="checkbox" class="custom-control-input" id="informe">
-                                    <label class="custom-control-label" for="informe">Informe diario</label>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="custom-control custom-checkbox">
+                                            <!-- [(ngModel)]="" --><br>
+                                        <input   name="informe"  type="checkbox" class="custom-control-input" id="informe">
+                                        <label class="custom-control-label" for="informe">Informe diario</label>
+                                    </div>
                                 </div>
-                                <div class="col-lg-3 col-md-2"><br>
+                                <div class="col-lg-3 col-md-3"><br>
                                     <button (click)="generarPdf()" class="btn btn-secondary">Generar PDF</button>
                                 </div>
                             </div> 
@@ -54,18 +57,27 @@
                     <table class="table " id="dataTables-example">
                         <thead>
                         <tr>
-                            <th>Numero resolución </th>
-                            <th>Numero factura</th>
+                            <th>Codigo </th>
+                            <th>Concepto </th>
+                            <th>Conteo</th>
                             <th>Valor</th>
+                            <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="odd" >
-                            <td>ref001</td>
-                            <td>fac001</td>
-                            <td>2000</td>
+                                <!-- {{let total=0}} -->
+                        <tr class="odd" *ngFor="let tramiteReporte of tramiteReportes; let i = index" >
+                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.tramite.id}}</td>
+                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.tramite.nombre}}</td>
+                            <td>{{tramiteReporte.conteo}}</td>
+                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.valor}}</td>
+                            <td>{{tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor}}</td>
+                            
+                            <!-- {{ total = total + tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor }} -->
                         </tr>
-                        </tbody>
+                        <!-- </tbody>
+                        <th>valor total </th>
+                        <td *ngFor="let tramiteReporte of tramiteReportes; let i = index"></td> -->
                     </table> 
                     <!-- /.table-responsive --> 
             </div> 

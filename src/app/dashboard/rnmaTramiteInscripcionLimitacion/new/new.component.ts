@@ -9,6 +9,7 @@ import { DepartamentoService } from '../../../services/departamento.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
+import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { RnmaTramiteInscripcionLimitacion } from '../rnmaTramiteInscripcionLimitacion.modelo';
 import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
@@ -40,6 +41,8 @@ export class NewComponent implements OnInit {
   public limitacionSelected;
   public tiposProceso;
   public tipoProcesoSelected;
+  public causalesLimitacion;
+  public causalLimitacionSelected;
   public placa: any;
   public vehiculo: any;
   public placaEncontrada = 1;
@@ -71,15 +74,29 @@ export class NewComponent implements OnInit {
     private _CfgEntidadJuducialService: CfgEntidadJudicialService,
     private _LimitacionService: LimitacionService,
     private _CfgTipoProcesoService: CfgTipoProcesoService,
+    private _CfgCausalLimitacionService: CfgCausalLimitacionService,
     private _tipoIdentificacionService: TipoIdentificacionService,
   ) { }
 
   ngOnInit() {
-    this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null);
+    this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
         this.tipoIdentificacionesDemandado = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+    this._CfgCausalLimitacionService.getCausalLimitacionSelect().subscribe(
+      response => {
+        this.causalesLimitacion = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -105,19 +122,19 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this._MunicipioService.getMunicipioSelect().subscribe(
-      response => {
-        this.municipios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
+    // this._MunicipioService.getMunicipioSelect().subscribe(
+    //   response => {
+    //     this.municipios = response;
+    //   },
+    //   error => {
+    //     this.errorMessage = <any>error;
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    //     if (this.errorMessage != null) {
+    //       console.log(this.errorMessage);
+    //       alert("Error en la petición");
+    //     }
+    //   }
+    // );
     this._DepartamentoService.getDepartamentoSelect().subscribe(
       response => {
         this.departamentos = response;
@@ -190,6 +207,7 @@ export class NewComponent implements OnInit {
     this.rnmaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
     this.rnmaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
     this.rnmaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
+    this.rnmaTramiteInscripcionLimitacion.causalLimitacionId = this.causalLimitacionSelected;
     this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
     this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
     let data =[
@@ -335,6 +353,32 @@ export class NewComponent implements OnInit {
     if (this.datos2.cDemandante.length === 0) {
       this.demandante = false;
       this.ciudadanoDemandanteEncontrado = 1;
+    }
+  }
+
+  changedDepartamento(e) {
+    console.log("municipio");
+    if (this.departamentoSelected) {
+      let token = this._loginService.getToken();
+      this._MunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+        response => {
+          console.log(response.data);
+          
+          if (response.data[0] != null) {
+            this.municipios = response.data;
+          } else {
+            this.municipios = [];
+          }
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
     }
   }
 
