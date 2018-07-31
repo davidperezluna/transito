@@ -27,6 +27,7 @@ import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 import { buscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
+import { registroEntregaProductoRoutes } from './registroEntregaProducto/registroEntregaProducto.routes';
 
 import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
 import { RncLicenciaConduccionRoutes } from './rncLicenciaConduccion/rncLicenciaConduccion.routes';
@@ -81,14 +82,17 @@ import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
 import { CfgCasoInsumoRoutes } from './cfgCasoInsumo/cfgCasoInsumo.routes';
 import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
 import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicial.routes';
+import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimitacion.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
 import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
+import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
+import { ReporteRoutes } from './reporte/reporte.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
@@ -118,6 +122,7 @@ export const DashboardRoutes: Route[] = [
         ...CfgSmlmvRoutes,
         ...cfgFestivoRoutes,    
         ...buscarAutomotorRoutes,
+        ...registroEntregaProductoRoutes,
         ...CfgLicenciaConduccionCategoriaRoutes,  
         ...RncLicenciaConduccionRoutes,  
         ...MsvCaracterizacion,
@@ -165,16 +170,19 @@ export const DashboardRoutes: Route[] = [
         ...CfgCasoInsumoRoutes,
         ...CfgSedeOperativaRoutes,
         ...CfgEntidadJudicialRoutes,
+        ...CfgCausalLimitacionRoutes,
         ...MsvTalonarioRoutes, 
         //...MsvTCAsignacionRoutes, 
         ...ConceptoParametroRoutes,  
         ...RnmaRegistroMaquinariaRoutes,
         ...TramiteInscripcionLimitacionRoutes,
+        ...TramiteLevantamientoLimitacionRoutes,
         ...rnaAsignacionInsumosRoutes ,
         ...LimitacionRoutes,
         ...CfgTipoProcesoRoutes,
         ...CfgValorVehiculoRoutes,
         ...RnrsPreregistroRoutes,
+        ...ReporteRoutes,
        ]
     }
 ];

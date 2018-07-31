@@ -14,7 +14,7 @@ export class TramiteSolicitudService {
 	getTramiteSolicitud() {
 		return this._http.get(this.url + '/index').map(res => res.json());
 	}
-
+	
 	register(tramiteSolicitud, token) {
 		let json = JSON.stringify(tramiteSolicitud);
 		let params = 'json=' + json + '&authorization=' + token;
@@ -55,6 +55,17 @@ export class TramiteSolicitudService {
 		let json = JSON.stringify(idVehiculo);
 		let params = 'json=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + '/byvehiculo',params,{ headers: headers }).map(res => res.json());
+		return this._http.post(this.url + '/byvehiculoorder',params,{ headers: headers }).map(res => res.json());
+	}
+
+	getTramiteSolicitudByIdVehiculoAndDate(token,datos) {
+		let json = JSON.stringify(datos);
+		let params = 'json=' + json + '&authorization=' + token;		
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/byvehiculoanddate',params,{ headers: headers }).map(res => res.json());
+	}
+
+	getTramiteReporte() {
+		return this._http.get(this.url + '/reporte').map(res => res.json());
 	}
 }

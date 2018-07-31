@@ -49,11 +49,11 @@ export class VehiculoService {
 
 	}
 
-	showVehiculoParametro(token,parametro){
-		let json = JSON.stringify(parametro);
+	showVehiculoParametro(token,parametros){
+		let json = JSON.stringify(parametros);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/parametro", params, {headers: headers})
+		return this._http.post(this.url+"/parametros", params, {headers: headers})
 							  .map(res => res.json());
 
 	}

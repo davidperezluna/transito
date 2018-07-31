@@ -10,6 +10,7 @@ import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.se
 import { ModuloService } from '../../../services/modulo.service';
 import { TramitePrecioService } from '../../../services/tramitePrecio.service';
 import { DatePipe } from '@angular/common';
+import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -50,8 +51,17 @@ public moduloSelected:any;
 public vehiculoCriterio:any; 
 public tramitesPrecio:any; 
 public tramitePrecio:any; 
-public tramitePrecioSelected:any;
+public tramitePrecioSelected:any; 
 public tramitesValor:any=[]; 
+public vendedores:any=0; 
+public propietariosVehiculo:any=[]; 
+public propietariosVehiculoRetefuente:any=[]; 
+public isCiudadanoForm=false;
+public isEmpresaForm=false;
+public datos:any=[];
+public valorVehiculoId:any;
+public valorRetefuente:any;
+public valorRetefuenteUnitario:any=0;
 
 constructor(
   private _FacturaService: FacturaService,
@@ -62,11 +72,25 @@ constructor(
   private _FuncionarioService: MpersonalFuncionarioService,
   private _MflTipoRecaudoService: MflTipoRecaudoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _ModuloService: ModuloService,
+  private _moduloService: ModuloService,
+  private _CfgValorVehiculoService: CfgValorVehiculoService,
   ){}
 
   ngOnInit() {   
-    this._ModuloService.getModuloSelect().subscribe(
+    swal({
+      title: 'Cargando Datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+      }).then((result) => {
+        if (
+          // Read more about handling dismissals
+          result.dismiss === swal.DismissReason.timer 
+        ) {
+        }
+      })
+    this._moduloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
         swal.close();
@@ -153,8 +177,11 @@ constructor(
       let datos = {
         'factura':this.factura,
         'tramitesValor': this.tramitesValor,
+        'valorVehiculoId': this.valorVehiculoId,
+        'propietarios': this.propietariosVehiculoRetefuente,
+        'retencion':this.valorRetefuenteUnitario
       }
-    
+    console.log(datos);
 		this._FacturaService.register(datos,token).subscribe(
 			response => {
         this.respuesta = response;
@@ -196,6 +223,7 @@ constructor(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'error'){
+          console.log(this.respuesta);
           this.ciudadano = this.respuesta.datos;
           this.factura.ciudadanoId = this.ciudadano.id;
           this.isExistCiudadano = true;
@@ -299,105 +327,144 @@ constructor(
 
   btnNewTramite(){
     let token = this._loginService.getToken();
-    let modulo = null;
 
-    this._ModuloService.showModulo(token, this.moduloSelected).subscribe(
-      response => {
-        modulo = response.data;
-        if (modulo.abreviatura != 'RNC') {
-          if (!this.propietario) {
-            this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
-              response => {
-                this.tramitePrecio = response.data;
-                if (this.tramitePrecio.tramite.id == 1) {
-                  this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
-                  this.tramitesValor.push(
-                    {
-                      'nombre': this.tramitePrecio.nombre,
-                      'valor': this.tramitePrecio.valorTotal
-                    }
-                  )
-                } else {
-                  swal({
-                    title: 'Sin propietarios!',
-                    text: 'Necesita facturar matricula inicial para este vehiculo',
-                    type: 'error',
-                    confirmButtonText: 'Aceptar'
-                  })
-                }
-
-              },
-              error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
+    if (!this.propietario) {
+      this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
+        response => {
+          this.tramitePrecio = response.data;
+          if (this.tramitePrecio.tramite.id == 1) {
+            this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
+            this.tramitesValor.push(
+              {
+                'nombre':this.tramitePrecio.nombre,
+                'valor':this.tramitePrecio.valorTotal
               }
-            );
-          }else {
-            this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
-              response => {
-                this.tramitePrecio = response.data;
-                this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
-                this.tramitesValor.push(
-                  {
-                    'nombre': this.tramitePrecio.nombre,
-                    'valor': this.tramitePrecio.valorTotal
-                  }
-                )
-              },
-              error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            );
+            )
+          }else{
+            swal({
+              title: 'Sin propietarios!',
+              text: 'Necesita facturar matricula inicial para este vehiculo',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
           }
-        }else {
-          this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
-            response => {
-              this.tramitePrecio = response.data;
-              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
-              this.tramitesValor.push(
-                {
-                  'nombre': this.tramitePrecio.nombre,
-                  'valor': this.tramitePrecio.valorTotal
+  
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    
+    }else{
+      this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
+        response => {
+          this.tramitePrecio = response.data;
+          if (this.tramitePrecio.tramite.id == 2) {
+            this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
+                response => { 
+                  let datos ={
+                    'linea':this.vehiculo.linea.id,
+                    'clase':this.vehiculo.clase.id,
+                    'modelo':this.vehiculo.modelo
+                  }
+
+                  this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos,token).subscribe(
+                      valorVehiculo => {
+                      // console.log(response.datos.valor);
+                      // console.log(parseInt(response.datos.valor)*0.01);
+                      this.valorRetefuente =parseInt(valorVehiculo.datos.valor)*0.01;
+                      this.valorVehiculoId = valorVehiculo.datos.id;
+                      this.propietariosVehiculo = response.data;
+                      response.data.forEach(element => {
+                        if (element.ciudadano) {
+                          this.isCiudadanoForm = true;
+                        }
+                        if(element.empresa){
+                          this.isEmpresaForm = true;
+                        }
+                      }); 
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+              
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
                 }
-              )
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
+              });
+          }else{
+            this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
+            this.tramitesValor.push(
+              {
+                'nombre':this.tramitePrecio.nombre,
+                'valor':this.tramitePrecio.valorTotal
               }
-            }
-          );
+            )
+          }
+  
+        }, 
+        error => {
+          this.errorMessage = <any>error;
+  
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
-
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+      );
+    }
   }
-
   deleteTramiteValor(tramiteValor){
     this.factura.valorBruto = this.factura.valorBruto - parseInt(tramiteValor.valor);
     this.tramitesValor =  this.tramitesValor.filter(h => h !== tramiteValor);
-    console.log(this.factura); 
-    
+  }
+
+  btnRetefunete(){
+    let token = this._loginService.getToken();
+    this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
+      response => {
+        this.tramitePrecio = response.data;
+        this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
+          this.tramitesValor.push(
+            {
+              'nombre':this.tramitePrecio.nombre,
+              'valor':this.tramitePrecio.valorTotal
+            }
+          )
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });    
+  }
+
+  onVendedorSelect(eve: any,propietarioVehiculo:any){
+    if (eve.target.checked) {
+      this.propietariosVehiculoRetefuente.push(propietarioVehiculo);
+      this.vendedores = this.vendedores + 1;
+    }else{
+      this.vendedores = this.vendedores - 1;
+      this.propietariosVehiculoRetefuente =  this.propietariosVehiculoRetefuente.filter(h => h !== propietarioVehiculo);
+    }
+    console.log(this.propietariosVehiculoRetefuente);
+    this.valorRetefuenteUnitario = this.valorRetefuente / this.vendedores;
   }
 
 }

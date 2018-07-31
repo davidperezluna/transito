@@ -34,6 +34,7 @@ import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.modu
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
+import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
 import { CfgLicenciaConduccionCategoriaModule } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.module';
 import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicenciaConduccion.module';
@@ -60,9 +61,11 @@ import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
 import { LimitacionModule } from './limitacion/limitacion.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
+import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
+import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
@@ -94,6 +97,7 @@ import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumo
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
 import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
+import { ReporteModule } from './reporte/reporte.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -176,6 +180,7 @@ import {RightsidebarComponent} from '../shared';
       CfgCasoInsumoModule,
       CfgSedeOperativaModule,
       CfgEntidadJudicialModule,
+      CfgCausalLimitacionModule,
       MsvTalonarioModule,
       rnaRegistroInsumosModule,
       RnmaRegistroMaquinariaModule,
@@ -183,8 +188,11 @@ import {RightsidebarComponent} from '../shared';
       LimitacionModule,
       CfgTipoProcesoModule,
       RnmaTramiteInscripcionLimitacionModule,
+      RnmaTramiteLevantamientoLimitacionModule,
       CfgValorVehiculoModule,
       RnrsPreregistroModule,
+      ReporteModule,
+      registroEntregaProductoModule
       
       //MsvTCAsignacionModule,
     ],
