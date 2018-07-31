@@ -61,7 +61,7 @@ export class NewRnmaCertificadoTradicionComponent implements OnInit {
 
     enviarTramite() {
         let token = this._loginService.getToken();
-        this.datos.tramiteFactura =59;
+        this.datos.tramiteFactura =30;
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;
         this.readyTramite.emit(this.datos);

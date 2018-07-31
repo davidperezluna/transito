@@ -41,7 +41,7 @@ export class NewRnrsCambioColorComponent implements OnInit {
     ngOnInit() {
         this.tramitesFactura.forEach(tramiteFactura => {
             if (tramiteFactura.realizado == 1) {
-                if (tramiteFactura.tramitePrecio.tramite.id == 5) {
+                if (tramiteFactura.tramitePrecio.tramite.id == 15) {
                     this.tramiteRealizado = tramiteFactura;
                 }
             }
@@ -100,7 +100,7 @@ export class NewRnrsCambioColorComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = color.data.nombre;
                             this.datos.oldData = this.vehiculo.color.nombre;
-                            this.datos.tramiteFactura =5;
+                            this.datos.tramiteFactura =15;
                             this.readyTramite.emit(this.datos);
                         }
                         error => {

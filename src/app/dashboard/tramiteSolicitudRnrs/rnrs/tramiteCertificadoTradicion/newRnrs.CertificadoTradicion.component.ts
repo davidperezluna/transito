@@ -79,7 +79,7 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
         // this.datos.tramiteFactura =58;
         // this.readyTramite.emit(this.datos);
 
-        this.datos.tramiteFactura =59;
+        this.datos.tramiteFactura =30;
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;
         this.readyTramite.emit(this.datos);

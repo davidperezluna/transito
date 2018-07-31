@@ -81,7 +81,7 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
         this.vehiculo.claseId = this.vehiculo.clase.id
         this.vehiculo.servicioId = this.vehiculo.servicio.id
         this.vehiculo.cancelado = true
-        this.datos.tramiteFactura = 15;
+        this.datos.tramiteFactura = 14;
         console.log(this.vehiculo);
         
         let token = this._loginService.getToken();

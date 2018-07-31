@@ -100,7 +100,7 @@ export class NewRnrsTraspasoComponent implements OnInit {
         let token = this._loginService.getToken(); 
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.tramiteFactura = 2;
+                this.datos.tramiteFactura = 6;
                 this.readyTramite.emit(this.datos);
             },
             error => {
