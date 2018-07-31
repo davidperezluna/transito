@@ -1,6 +1,6 @@
 export class Comparendo{
 	constructor(
-		public numeroOrden:string,
+		public consecutivo:string,
 		public fechaDiligenciamiento:string,
 		public lugarInfraccion:string,
 		public barrioInfraccion:string,
