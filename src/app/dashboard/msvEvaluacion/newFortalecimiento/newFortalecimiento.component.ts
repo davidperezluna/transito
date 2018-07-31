@@ -8,11 +8,11 @@ import { forEach } from '@angular/router/src/utils/collection';
 declare var $: any;
 
 @Component({
-  selector: 'app-vehiculo-showEntrega',
-  templateUrl: './showRegistroEntregaProducto.component.html'
+  selector: 'app-new-fortalecimiento',
+  templateUrl: './newFortalecimiento.html'
 })
-export class showRegistroEntregaProductoComponent implements OnInit {
-  @Input() vehiculo: any;
+export class NewFortalecimientoComponent implements OnInit {
+  @Input() msvCategoria: any;
   @Output() cerrarForm = new EventEmitter<any>();
   public tramiteSolicitud: any;
   public msj = '';
@@ -40,9 +40,9 @@ export class showRegistroEntregaProductoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.datos.idVehiculo = this.vehiculo.id;
+    this.datos.idVehiculo = this.msvCategoria.id;
     let token = this._loginService.getToken();
-    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.vehiculo.id).subscribe(
+    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.msvCategoria.id).subscribe(
       response => {
         this.tramiteSolicitud = response;
         if (this.tramiteSolicitud.length>0) {
