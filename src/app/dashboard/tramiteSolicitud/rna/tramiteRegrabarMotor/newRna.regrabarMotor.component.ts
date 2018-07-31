@@ -89,7 +89,7 @@ export class NewRnaRegrabarMotorComponent implements OnInit {
                 this.datos.documentacion = this.documentacion;
                 this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
-                this.datos.tramiteFactura = 7;
+                this.datos.tramiteFactura = 22;
                 this.readyTramite.emit(this.datos);
             }
             error => {

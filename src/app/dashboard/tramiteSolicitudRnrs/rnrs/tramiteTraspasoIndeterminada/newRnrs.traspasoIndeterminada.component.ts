@@ -107,7 +107,7 @@ export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
 
   onEnviar(){
     let token = this._loginService.getToken();       
-      this.datos.tramiteFactura =60;
+      this.datos.tramiteFactura =7;
       this.readyTramite.emit(this.datos);
       this.datos.personaTraslado = this.sinRegistro;
       console.log(this.datos.solicitanteId);

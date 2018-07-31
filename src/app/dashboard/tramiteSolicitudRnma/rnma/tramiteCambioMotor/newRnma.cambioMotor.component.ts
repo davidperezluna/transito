@@ -96,7 +96,7 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
-        this.datos.tramiteFactura =24;
+        this.datos.tramiteFactura =21;
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

@@ -48,7 +48,7 @@ export class NewRnmaDuplicadoPlacaComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
-        this.datos.tramiteFactura =16;
+        this.datos.tramiteFactura =18;
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){
