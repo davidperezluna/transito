@@ -100,7 +100,7 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
         let token = this._loginService.getToken(); 
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.tramiteFactura = 1;
+                this.datos.tramiteFactura = 8;
                 this.readyTramite.emit(this.datos);
             },
             error => {

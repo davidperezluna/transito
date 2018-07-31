@@ -24,6 +24,15 @@ export class FacturaService {
 							  .map(res => res.json());
 	}
 
+	imprimir(factura,token){
+		
+		let json = JSON.stringify(factura);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/imprimir/factura", params, {headers: headers})
+							  .map(res => res.json());
+	}
+
 	deleteFactura(token,id){
 
 		let params = "authorization="+token;

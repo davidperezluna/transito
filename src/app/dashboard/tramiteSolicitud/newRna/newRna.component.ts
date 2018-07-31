@@ -204,7 +204,7 @@ constructor(
         this.ciudadanosVehiculo = response.data;
         if (response.status == 'error' ) {
           this.isCiudadano = false;
-          if(response.code ==401){
+          if(response.code == 401){
             this.vehiculoSuccess=false;
             this.msj= response.msj;
             this.isError = true;
@@ -298,6 +298,7 @@ constructor(
         }
     });
   }
+
   readyTramite(datos:any){
     this.tramitesFactura.forEach(tramiteFactura => {
       if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {

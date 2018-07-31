@@ -4,9 +4,11 @@ import { EmpresaService } from '../../services/empresa.service';
 import { MsvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
 import { MsvEvaluacion } from './msvEvaluacion.modelo';
+import { MsvCategoriaService } from '../../services/msvCategoria.service';
 import { Empresa } from '../empresa/empresa.modelo';
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
+import { MsvCategoria } from '../msvCategoria/msvCategoria.modelo';
 declare var $: any;
 
 @Component({
@@ -14,6 +16,7 @@ declare var $: any;
   templateUrl: './msvEvaluacion.component.html'
 })
 export class MsvEvaluacionComponent implements OnInit {
+  @Output() msvCategoria;
   public errorMessage;
   public id;
 	public respuesta;
@@ -35,12 +38,14 @@ export class MsvEvaluacionComponent implements OnInit {
   public miEmpresa:Empresa;
   public revisiones:any = false;
   public msvEvaluacion: MsvEvaluacion;
+  public msvCategorias:any;
 
   constructor(
     private _EvaluacionService: MsvEvaluacionService,
     private _EmpresaService: EmpresaService,
     private _RevisionService: MsvRevisionService,
-		private _loginService: LoginService,
+    private _loginService: LoginService,
+    private _MsvCategoriaService: MsvCategoriaService,
     ){}
     
   ngOnInit() {
@@ -75,7 +80,20 @@ export class MsvEvaluacionComponent implements OnInit {
 				}
       );
 
-     // this.empresas = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+     this._MsvCategoriaService.getCategoria().subscribe(
+      response => {
+        this.msvCategorias = response.data;
+        
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+     );
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({

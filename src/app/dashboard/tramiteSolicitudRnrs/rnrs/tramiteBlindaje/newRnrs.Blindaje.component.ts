@@ -64,7 +64,7 @@ export class NewRnrsBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
-       this.datos.tramiteFactura =26;
+       this.datos.tramiteFactura =10;
        this.readyTramite.emit(this.datos);
     }
     onCancelar(){

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     onSubmit(){
 			swal({
 				title: 'Comprobando Datos!',
-				text: 'Tardara solo unos segundos por favor espere.',
+				text: 'Tardará solo unos segundos por favor espere.',
 				onOpen: () => {
 					swal.showLoading()
 				}

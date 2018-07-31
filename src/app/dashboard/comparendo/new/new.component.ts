@@ -4,6 +4,7 @@ import { Inmovilizacion } from '../inmovilizacion.modelo';
 import { ComparendoService } from '../../../services/comparendo.service';
 import { LoginService } from '../../../services/login.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { MpersonalComparendoService } from '../../../services/mpersonalComparendo.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
@@ -22,39 +23,37 @@ public comparendo: Comparendo;
 public inmovilizacion: Inmovilizacion;
 public errorMessage;
 public respuesta;
+public consecutivo: any = null;
 public agentesTransito: any;
-public sedesOperativas: any;
+public agenteTransitoSelected: any;
 public municipios: any;
-public funcionarioSelected: any;
 public municipioSelected: any;
-public sedeOperativaSelected: any;
 public funcionario: any;
-public sedeOperativa: any;
 public funcionarioReady = false;
 public sedeOperativaReady = false;
 public validado = false;
-public comparendoExistente = false;
 public placa: any;
 public identificacion: any;
 public vehiculo: any;
 public municipioId: any;
 public ciudadano: any;
-public ciudadanosVehiculo: any;
-public vehiculoNoEncontrado = false;
-public ciudadanoNoEncontrado = false;
+public propietariosVehiculo: any;
 public formCiudadano = false;
 public inmovilizacionForm = false;
 public tipoIdentificacionSelected: any;
 public tiposIdentificacion: any;
 public municipioNacimientoSelected: any;
+public isCiudadano = false;
+public isEmpresa = false;
 
 constructor(
   private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
-  private _mpersonalFuncionarioService: MpersonalFuncionarioService,
+  private _MpersonalFuncionarioService: MpersonalFuncionarioService,
+  private _MpersonalComparendoService: MpersonalComparendoService,
   private _SedeOperativaService: SedeOperativaService,
-  private _municipioService: MunicipioService,
-  private _vechiculoService: VehiculoService,
+  private _MunicipioService: MunicipioService,
+  private _VechiculoService: VehiculoService,
   private _ciudadanoService: CiudadanoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _tipoIdentificacionService: TipoIdentificacionService,
@@ -70,7 +69,7 @@ constructor(
     this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.inmovilizacion = new Inmovilizacion(null,null,null,null,null,null,null,null);
 
-    this._mpersonalFuncionarioService.selectAgentes().subscribe(
+    this._MpersonalFuncionarioService.selectAgentes().subscribe(
         response => {
           this.agentesTransito = response;
         }, 
@@ -83,44 +82,18 @@ constructor(
           }
         }
       );
-    this._municipioService.getMunicipioSelect().subscribe(
-        response => {
-          this.municipios = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-        response => {
-          this.sedesOperativas = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
-    this.comparendo.funcionarioId = this.funcionarioSelected;
     this.comparendo.municipioId = this.municipioSelected;
     this.comparendo.vehiculoId = this.vehiculo.id;
     this.comparendo.ciudadanoId = this.ciudadano.id;
     
-    console.log(this.comparendo);
 		this._ComparendoService.register(this.comparendo,token).subscribe(
 			response => {
         this.respuesta = response;
@@ -132,11 +105,11 @@ constructor(
             text: 'El registro se ha registrado con exito',
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }else{
           swal({
             title: 'Error!',
-            text: 'la comparendo '+ this.comparendo.numeroOrden +' ya se encuentra registrado',
+            text: 'la comparendo '+ this.comparendo.consecutivo +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -149,17 +122,18 @@ constructor(
 						alert("Error en la petición"); 
 					}
 				}
-
 		}); 
   }
 
   onChangedMpersonalFuncionario(e){
     if (e) {
      let token = this._loginService.getToken();
-     this._mpersonalFuncionarioService.show(token,e).subscribe(
+     this._MpersonalFuncionarioService.show(token,e).subscribe(
         response => {
           this.funcionario = response.data;
           this.funcionarioReady = true;
+          this.comparendo.consecutivo = this.funcionario.sedeOperativa.codigoDivipo;
+          this.comparendo.funcionarioId = this.funcionario.id;
         }, 
         error => {
           this.errorMessage = <any>error;
@@ -173,38 +147,43 @@ constructor(
     }
   }
 
-  onChangedSedeOperativa(e){
-    this.validado = false;
-    if (e) {
-     let token = this._loginService.getToken();
-     this._SedeOperativaService.showSedeOperativa(token,e).subscribe(
-        response => {
-          this.sedeOperativa = response.data;
-          this.sedeOperativaReady = true;
-          this.comparendo.numeroOrden = this.sedeOperativa.codigoDivipo;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    }
-  }
-
-  onValidarNumeroOrden(){
+  onValidarConsecutivo(){
     let token = this._loginService.getToken();
-    this._ComparendoService.serchComparendo(this.comparendo,token).subscribe(
+
+    let datos = {'consecutivo':this.comparendo.consecutivo, 'funcionarioId': this.comparendo.funcionarioId}
+    this._MpersonalComparendoService.searchByConsecutivoAndFuncionario(datos,token).subscribe(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
           this.validado = true;
-          this.comparendoExistente = false;
+          this.consecutivo = response.data;
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+
+          this._MunicipioService.getMunicipioSelect().subscribe(
+            response => {
+              this.municipios = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
         }else{
-          this.comparendoExistente = true;
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
         }
       error => {
           this.errorMessage = <any>error;
@@ -218,56 +197,67 @@ constructor(
     
   }
 
-
   onKeyPlaca(){
-  swal({
-    title: 'Cargando Datos del Vehiculo!',
-    text: 'Solo tardara unos segundos por favor espere.',
-    timer: 2500,
-    onOpen: () => {
-      swal.showLoading()
-    }
-  }).then((result) => {
-    if (
-      // Read more about handling dismissals
-      result.dismiss === swal.DismissReason.timer
-    ) {
-    }
-  });
+    swal({
+      title: 'Cargando Datos del Vehiculo!',
+      text: 'Solo tardará unos segundos por favor espere.',
+      timer: 2500,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    });
   
-  this.vehiculoNoEncontrado = false;
-  let token = this._loginService.getToken();
-  this._vechiculoService.showVehiculoPlaca(token,this.placa).subscribe(
-    response => {
+    let token = this._loginService.getToken();
+    this._VechiculoService.showVehiculoPlaca(token, this.placa).subscribe(
+      response => {
         if (response.status == "success") {
           this.vehiculo = response.data;
-          this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculo.id).subscribe(
+          this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token, this.vehiculo.placa.numero).subscribe(
             response => {
-              this.ciudadanosVehiculo = response.data;
-              console.log(response);
-            error => {
+              this.propietariosVehiculo = response.data;
+
+              this.propietariosVehiculo.forEach(element => {
+                if (element.ciudadano) {
+                  this.isCiudadano = true;
+                }
+                if (element.empresa) {
+                  this.isEmpresa = true;
+                }
+              });
+
+              error => {
                 this.errorMessage = <any>error;
-                if(this.errorMessage != null){
+                if (this.errorMessage != null) {
                   console.log(this.errorMessage);
-                  alert("Error en la petición"); 
+                  alert("Error en la petición");
                 }
               }
+            });
+
+          
+        }else {
+          swal({
+            title: 'Atención!',
+            text: response.msj,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
           });
-        }else{
-        this.vehiculoNoEncontrado = true;
-        this.vehiculo = false;
+          this.vehiculo = false;
         }
-        console.log(this.vehiculo);
-      error => {
+        error => {
           this.errorMessage = <any>error;
-          if(this.errorMessage != null){
+          if (this.errorMessage != null) {
             console.log(this.errorMessage);
-            alert("Error en la petición"); 
+            alert("Error en la petición");
           }
         }
-
-    }); 
-    
+      }); 
   }
 
   clickOnmovilizacion(){
@@ -277,10 +267,11 @@ constructor(
       this.inmovilizacionForm = true;
     }
   }
+  
   onKeyIdentificacion(){
     swal({
     title: 'Cargando Datos del Ciudadano!',
-    text: 'Solo tardara unos segundos por favor espere.',
+    text: 'Solo tardará unos segundos por favor espere.',
     timer: 1000,
     onOpen: () => {
       swal.showLoading()
@@ -293,14 +284,19 @@ constructor(
     }
   })
     this.formCiudadano = true;
-    this.ciudadanoNoEncontrado = false;
     let token = this._loginService.getToken();
     this._ciudadanoService.searchByIdentificacion(token,this.identificacion).subscribe(
       response => {
         if (response.status == "success") {
-        this.ciudadano = response.data;
-        console.log(this.ciudadano);
+          this.ciudadano = response.data;
         }else{
+          swal({
+            title: 'Atención!',
+            text: response.msj,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+          
           this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
             response => {
               this.tiposIdentificacion = response;
@@ -314,7 +310,7 @@ constructor(
               }
             }
           );
-          this._municipioService.getMunicipioSelect().subscribe(
+          this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
               this.municipios = response;
             }, 
@@ -326,8 +322,7 @@ constructor(
               }
             }
           );
-        this.ciudadanoNoEncontrado = true;
-        this.ciudadano = false;
+          this.ciudadano = false;
         }
         console.log(this.vehiculo);
       error => {
