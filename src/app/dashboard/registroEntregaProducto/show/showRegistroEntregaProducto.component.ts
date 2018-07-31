@@ -71,6 +71,7 @@ export class showRegistroEntregaProductoComponent implements OnInit {
 
   buscarTramiteByFecha(){
     let token = this._loginService.getToken();
+     
     this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculoAndDate(token,this.datos).subscribe(
       response => {
         console.log(response);
@@ -84,6 +85,7 @@ export class showRegistroEntregaProductoComponent implements OnInit {
           }
           console.log(this.tramitesEspecificos);
             
+
           });
       } else {
           swal({
