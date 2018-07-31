@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { LoginService } from '../../../services/login.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service'
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 declare var $: any;
@@ -12,7 +12,7 @@ declare var $: any;
   templateUrl: './newFortalecimiento.html'
 })
 export class NewFortalecimientoComponent implements OnInit {
-  @Input() msvCategoria: any;
+  @Input() msvCategoriaId;
   @Output() cerrarForm = new EventEmitter<any>();
   public tramiteSolicitud: any;
   public msj = '';
@@ -24,6 +24,7 @@ export class NewFortalecimientoComponent implements OnInit {
   public tramitesNombres;
   public tramitesEspecificos: any = [];
   public tramiteNombreSelected:any;
+  public formulario:any = "app-new-fortalecimiento";
   public datos = {
   'fechaDesde': null,
   'fechaHasta': null,
@@ -40,28 +41,29 @@ export class NewFortalecimientoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.datos.idVehiculo = this.msvCategoria.id;
-    let token = this._loginService.getToken();
-    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.msvCategoria.id).subscribe(
-      response => {
-        this.tramiteSolicitud = response;
-        if (this.tramiteSolicitud.length>0) {
-          //entra aquí si encuentra tramites
-          this.tramitesNombres = response;
-          // setTimeout(() => {
-          //   this.tramiteNombreSelected = [this.linea.marca.id];
-          // });
-          this.showT = true;
+    console.log(this.msvCategoriaId);
 
-      } else {
-          swal({
-              type: 'error',
-              title: 'Oops...',
-              text: '¡El Vehiculo no tiene certificados expedidos!'
-          })
-      }
-      }
-    );
+    // let token = this._loginService.getToken();
+    // this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.msvCategoria.id).subscribe(
+    //   response => {
+    //     this.tramiteSolicitud = response;
+    //     if (this.tramiteSolicitud.length>0) {
+    //       //entra aquí si encuentra tramites
+    //       this.tramitesNombres = response;
+    //       // setTimeout(() => {
+    //       //   this.tramiteNombreSelected = [this.linea.marca.id];
+    //       // });
+    //       this.showT = true;
+
+    //   } else {
+    //       swal({
+    //           type: 'error',
+    //           title: 'Oops...',
+    //           text: '¡El Vehiculo no tiene certificados expedidos!'
+    //       })
+    //   }
+    //   }
+    // );
   }
 
   onCancelar() {
