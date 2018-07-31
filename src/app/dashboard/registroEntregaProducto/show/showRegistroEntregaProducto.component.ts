@@ -17,9 +17,18 @@ export class showRegistroEntregaProductoComponent implements OnInit {
   public tramiteSolicitud: any;
   public msj = '';
   public showT = false;
+  public tramitesFecha: any = [];
+  public anioMomento;
+  public mesMomento;
+  public diaMomento;
+  public tramitesNombres;
+  public tramitesEspecificos;
+  public tramiteNombreSelected:any;
   public datos = {
   'fechaDesde': null,
   'fechaHasta': null,
+  'idVehiculo': null,
+  'tramiteNombreSelected': null,
 };
 
   constructor(
@@ -31,13 +40,18 @@ export class showRegistroEntregaProductoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.datos.idVehiculo = this.vehiculo.id;
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.vehiculo.id).subscribe(
       response => {
-        this.tramiteSolicitud = response.data;
+        this.tramiteSolicitud = response;
         console.log(this.tramiteSolicitud);
         if (this.tramiteSolicitud.length>0) {
           //entra aquí si encuentra tramites
+          this.tramitesNombres = response;
+          // setTimeout(() => {
+          //   this.tramiteNombreSelected = [this.linea.marca.id];
+          // });
           this.showT = true;
 
       } else {
@@ -53,5 +67,32 @@ export class showRegistroEntregaProductoComponent implements OnInit {
 
   onCancelar() {
     this.cerrarForm.emit(false);
+  }
+
+  buscarTramiteByFecha(){
+    let token = this._loginService.getToken();
+    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculoAndDate(token,this.datos).subscribe(
+      response => {
+        console.log(response);
+        this.tramiteSolicitud = response.data;
+        if (this.tramiteSolicitud) {
+          //entra aquí si encuentra tramites
+          this.tramiteSolicitud.forEach(element => {
+
+          if(element.tramiteFactura.tramitePrecio.tramite.id == this.datos.tramiteNombreSelected){
+            this.tramitesEspecificos.push(element);
+          }
+          console.log(this.tramitesEspecificos);
+            
+          });
+      } else {
+          swal({
+              type: 'error',
+              title: 'Oops...',
+              text: '¡El Vehiculo no tiene certificados expedidos entre esas fechas!'
+          })
+      }
+      }
+    );
   }
 }

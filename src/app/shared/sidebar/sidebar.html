@@ -229,6 +229,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" routerLink="cfgCausalLimitacion" [ngClass]="{'active' : ( addActive === 'cfgCausalLimitacion')}" (click)="addActiveMenu('cfgCausalLimitacion')">
+                <i class="fa fa-angle-right"></i>
+                Causal de limitación
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" routerLink="cfgTipoProceso" [ngClass]="{'active' : ( addActive === 'cfgTipoProceso')}" (click)="addActiveMenu('cfgTipoProceso')">
                 <i class="fa fa-angle-right"></i>
                 Tipo de Proceso

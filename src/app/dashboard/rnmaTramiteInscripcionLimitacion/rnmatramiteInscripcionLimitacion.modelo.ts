@@ -11,6 +11,7 @@ export class RnmaTramiteInscripcionLimitacion{
 		public fechaExpedicion:string,
 		public tipoProcesoId:number,
 		public entidadJudicialId:number,
+		public causalLimitacionId:number,
 		public observaciones:string,
 		public datos:string
 	){}

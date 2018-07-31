@@ -29,7 +29,7 @@ export class ReporteComponent implements OnInit {
   ]
 
   constructor(
-		private _RegistroMaquinariaService: RegistroMaquinariaService,
+		// private _RegistroMaquinariaService: RegistroMaquinariaService,
 		private _loginService: LoginService,
 	
 		
@@ -52,22 +52,22 @@ export class ReporteComponent implements OnInit {
     // this.tramite=false;
     // this.formNew=false;    
     // this.formNew=false;    
-		this._RegistroMaquinariaService.index().subscribe(
-				response => {
-          this.registrosMaquinaria = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+		// this._RegistroMaquinariaService.index().subscribe(
+		// 		response => {
+    //       this.registrosMaquinaria = response.data;
+    //       let timeoutId = setTimeout(() => {  
+    //         this.iniciarTabla();
+    //       }, 100);
+		// 		}, 
+		// 		error => {
+		// 			this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+		// 			if(this.errorMessage != null){
+		// 				console.log(this.errorMessage);
+		// 				alert("Error en la petición");
+		// 			}
+		// 		}
+    //   );
   }
   iniciarTabla(){
   //   $('#dataTables-example').DataTable({
