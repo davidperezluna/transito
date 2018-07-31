@@ -42,7 +42,7 @@ export class NewRnrsCambioPlacaComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.nuevaPlaca = this.nuevaPlaca;
         this.datos.documentacion = this.documentacion;
-        this.datos.tramiteFactura =16;
+        this.datos.tramiteFactura =17;
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

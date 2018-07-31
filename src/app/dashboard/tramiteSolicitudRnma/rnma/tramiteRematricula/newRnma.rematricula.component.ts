@@ -116,7 +116,7 @@ export class NewRnmaRematriculaComponent implements OnInit {
         this.datos.numeroIdentificacionEntrega = this.numeroIdentificacionEntrega;
         this.datos.nombreEntrega = this.nombreEntrega;
         this.datos.estado = this.estado;
-        this.datos.tramiteFactura = 1;
+        this.datos.tramiteFactura = 25;
         this.readyTramite.emit(this.datos);
     }
 

@@ -98,7 +98,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     enviarTramite() {
         let token = this._LoginService.getToken();
         
-        this.datos.tramiteFactura = 59;
+        this.datos.tramiteFactura = 5;
         this.datos.claseId = this.claseSelected;
         this.datos.servicioId = this.servicioSelected;
         this.datos.paisId = this.paisSelected;

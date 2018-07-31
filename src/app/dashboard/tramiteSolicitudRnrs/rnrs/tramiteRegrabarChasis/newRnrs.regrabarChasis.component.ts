@@ -89,7 +89,7 @@ export class NewRnrsRegrabarChasisComponent implements OnInit {
                 this.datos.documentacion = this.documentacion;
                 this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
-                this.datos.tramiteFactura = 8;
+                this.datos.tramiteFactura = 23;
                 this.readyTramite.emit(this.datos);
             }
             error => {

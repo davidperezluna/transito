@@ -99,7 +99,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     enviarTramite() {
         let token = this._LoginService.getToken();
         
-        this.datos.tramiteFactura = 58;
+        this.datos.tramiteFactura = 1;
         this.datos.claseId = this.claseSelected;
         this.datos.servicioId = this.servicioSelected;
         this.datos.paisId = this.paisSelected;

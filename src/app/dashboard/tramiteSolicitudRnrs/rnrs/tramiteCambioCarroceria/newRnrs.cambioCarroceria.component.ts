@@ -75,7 +75,7 @@ export class NewRnrsCambioCarroceriaComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = carroceria.data.nombre;
                             this.datos.oldData = this.vehiculo.carroceria.nombre;
-                            this.datos.tramiteFactura =32;
+                            this.datos.tramiteFactura =27;
                             this.readyTramite.emit(this.datos);
                         }
                         error => {
