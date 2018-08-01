@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
-import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+import { MsvParametroService } from '../../../services/msvParametro.service';
+import { MsvVariableService } from '../../../services/msvVariable.service';
 import swal from 'sweetalert2';
-import { forEach } from '@angular/router/src/utils/collection';
 declare var $: any;
 
 @Component({
@@ -13,85 +11,60 @@ declare var $: any;
 })
 export class NewFortalecimientoComponent implements OnInit {
   @Input() msvCategoriaId;
-  @Output() cerrarForm = new EventEmitter<any>();
-  public tramiteSolicitud: any;
   public msj = '';
   public showT = false;
-  public viewTabla = false;
-  public anioMomento;
-  public mesMomento;
-  public diaMomento;
-  public tramitesNombres;
-  public tramitesEspecificos: any = [];
+  public msvParametros;
+  public msvVariables;
+  public msvVariablesLength;
   public tramiteNombreSelected:any;
-  public formulario:any = "app-new-fortalecimiento";
-  public datos = {
-  'fechaDesde': null,
-  'fechaHasta': null,
-  'idVehiculo': null,
-  'tramiteNombreSelected': null,
-};
 
   constructor(
     private _loginService: LoginService,
-    private _VehiculoService: VehiculoService,
-    private _TramiteSolicitudService: TramiteSolicitudService,
-    private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+    private _MsvParametroService: MsvParametroService,
+    private _MsvVariableService: MsvVariableService,
 
   ) { }
 
   ngOnInit() {
-    console.log(this.msvCategoriaId);
-
-    // let token = this._loginService.getToken();
-    // this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token, this.msvCategoria.id).subscribe(
-    //   response => {
-    //     this.tramiteSolicitud = response;
-    //     if (this.tramiteSolicitud.length>0) {
-    //       //entra aquí si encuentra tramites
-    //       this.tramitesNombres = response;
-    //       // setTimeout(() => {
-    //       //   this.tramiteNombreSelected = [this.linea.marca.id];
-    //       // });
-    //       this.showT = true;
-
-    //   } else {
-    //       swal({
-    //           type: 'error',
-    //           title: 'Oops...',
-    //           text: '¡El Vehiculo no tiene certificados expedidos!'
-    //       })
-    //   }
-    //   }
-    // );
-  }
-
-  onCancelar() {
-    this.cerrarForm.emit(false);
-  }
-
-  buscarTramiteByFecha(){
+    
     let token = this._loginService.getToken();
-    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculoAndDate(token,this.datos).subscribe(
+    console.log(this.msvCategoriaId);
+    this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
       response => {
-        this.tramiteSolicitud = response.data;
-        if (this.tramiteSolicitud) {
-          //entra aquí si encuentra tramites
-          this.tramiteSolicitud.forEach(element => {
-
-          if(element.tramiteFactura.tramitePrecio.tramite.id == this.datos.tramiteNombreSelected){
-            this.tramitesEspecificos.push(element);
-          }
-          this.viewTabla = true; 
-          });
+        this.msvParametros = response.data;
+        if (this.msvParametros) {
+          //entra aquí si encuentra Parametro
+          console.log(this.msvParametros);
+          this.showT = true;
       } else {
           swal({
               type: 'error',
               title: 'Oops...',
-              text: '¡El Vehiculo no tiene certificados expedidos entre esas fechas!'
+              text: '¡La categoria no tiene parametros!'
           })
       }
       }
     );
+
+    this._MsvVariableService.getVariable().subscribe(
+      response => {
+        this.msvVariables = response.data;
+        this.msvVariablesLength = this.msvVariables.length;        
+        if (this.msvVariables) {
+          //entra aquí si encuentra Parametro
+          console.log(this.msvVariables);
+          this.showT = true;
+      } else {
+          swal({
+              type: 'error',
+              title: 'Oops...',
+              text: '¡El parametro no tiene variables!'
+          })
+      }
+      }
+    );
+  }
+
+  onCancelar() {
   }
 }

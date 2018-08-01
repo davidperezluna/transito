@@ -199,8 +199,7 @@ export class MsvEvaluacionComponent implements OnInit {
           if(this.empresas){
             this.habilitarBotonRev = true;
           }
-          for(let miEmpresa of this.empresas){
-            //console.log(miEmpresa);         
+          for(let miEmpresa of this.empresas){       
             this._RevisionService.showRevision(token, miEmpresa.id).subscribe(
               response => {
                 if (response.code == 200 ) {
@@ -213,7 +212,6 @@ export class MsvEvaluacionComponent implements OnInit {
                 //si no existe revision coloca en true la variable para mostrar mensaje
                 if(this.revisiones == false){
                 this.revisionMensaje = true;
-                console.log("Hola");
                  }        
               error => { 
                   this.errorMessage = <any>error;

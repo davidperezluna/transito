@@ -23,6 +23,16 @@ export class buscarAutomotorComponent implements OnInit {
   public msj='';
   public vehiculoSuccess = false;
   public showV:any;
+  public vehiculos: any;
+  public datos = {
+    'numeroPlaca': null,
+    'numeroVIN': null,
+    'numeroSerie': null,
+    'numeroMotor': null,
+    'numeroChasis': null,
+    'propietario': null,
+};
+
 
 constructor(
   private _loginService: LoginService,
@@ -56,42 +66,45 @@ constructor(
     })
     let token = this._loginService.getToken();
 
-    this._VehiculoService.showVehiculoParametro(token,this.parametro).subscribe(
-      response => {
-        if (response.status == 'error' ) {
-          if(response.code ==401){
-            this.msj= response.msj;
-            swal.close();
-          }else if(response.code == 400){
-            this.msj= response.msj;
-            swal.close();
-          }
-          this.error = true;
-          swal({
-            title: response.msj,
-            onOpen: () => {
-              swal.showLoading()
-            }
-          })
-          swal.close();
-          this.vehiculoSuccess = false;
-        }else{          
-          this.vehiculo = response.data;
-          this.vehiculoSuccess = true;
-          swal.close();
-        }
-      error => { 
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición"); 
-          }
-        }
-    });
+     this._VehiculoService.showVehiculoParametro(token, this.datos).subscribe(
+            response => {
+                if (response.status == 'error') {
+                    if (response.code == 401) {
+                        this.msj = response.msj;
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: response.msj
+                        })
+                    } else if (response.code == 400) {
+                        this.msj = response.msj;
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: response.msj
+                        })
+                    }
+                    this.error = true;
+                    this.vehiculoSuccess = false;
+                } else {
+                    this.vehiculos = response.data;
+                    this.vehiculoSuccess = true;  
+                    swal.close();                  
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
   }
 
-  showVehiculo(){
+  showVehiculo(vehiculo:any){
+    this.vehiculo = vehiculo;
     this.showV = true;
+
   }
 
   cerrarForm(isForm:any){
