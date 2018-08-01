@@ -45,7 +45,10 @@ export class TramiteFacturaService {
 		return this._http.get(this.url + "/"+idFactura+"/select").map(res => res.json());
 	}
 
-	getTramiteShowFactura(idFactura){
-		return this._http.get(this.url + "/"+idFactura+"/show/factura").map(res => res.json());
+	getTramiteShowFactura(datos){
+		let json = JSON.stringify(datos);
+		let params = 'json=' + json;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/show/factura", params, { headers: headers }).map(res => res.json());
 	}
 }

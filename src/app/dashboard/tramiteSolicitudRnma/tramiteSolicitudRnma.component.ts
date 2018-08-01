@@ -19,6 +19,7 @@ export class TramiteSolicitudRnmaComponent implements OnInit {
   public formIndex = true;
   public table: any;
   public tramiteSolicitud: TramiteSolicitud;
+  public moduloId = 3;
 
   constructor(
     private _TramiteSolicitudService: TramiteSolicitudService,
@@ -39,7 +40,7 @@ export class TramiteSolicitudRnmaComponent implements OnInit {
       ) {
       }
     })
-    this._TramiteSolicitudService.getTramiteSolicitud().subscribe(
+    this._TramiteSolicitudService.getByModulo(this.moduloId).subscribe(
 				response => {
           this.tramitesSolicitud = response.data;
           let timeoutId = setTimeout(() => {
