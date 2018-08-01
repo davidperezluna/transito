@@ -132,8 +132,7 @@ constructor(
     
     this._FuncionarioService.searchLogin(identity,token).subscribe(
       response => {
-        if(this.respuesta.status == 'success'){
-          console.log(response.data);
+        if(response.status == 'success'){
           this.sedeOperativa = response.data.sedeOperativa;
           this.funcionario = true;
           this.factura.numero = datePiper.transform(this.date,'hmss');
@@ -169,18 +168,20 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-      this.factura.sedeOperativaId = this.tipoRecaudoSelected;
-      let datos = {
-        'factura':this.factura,
-        'tramitesValor': this.tramitesValor,
-        'valorVehiculoId': this.valorVehiculoId,
-        'propietarios': this.propietariosVehiculoRetefuente,
-        'retencion':this.valorRetefuenteUnitario
-      }
-		this._FacturaService.register(datos,token).subscribe(
-			response => {
+
+    console.log(this.factura);
+    
+    let datos = {
+      'factura': this.factura,
+      'tramitesValor': this.tramitesValor,
+      'valorVehiculoId': this.valorVehiculoId,
+      'propietarios': this.propietariosVehiculoRetefuente,
+      'retencion': this.valorRetefuenteUnitario
+    }
+    this._FacturaService.register(datos, token).subscribe(
+      response => {
         this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if (this.respuesta.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -188,22 +189,22 @@ constructor(
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
-        }else{
+        } else {
           swal({
             title: 'Error!',
-            text: 'El factura '+ this.factura.numero +' ya se encuentra registrado',
+            text: 'El factura ' + this.factura.numero + ' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-		});
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
   }
 
   isCiudadano() {

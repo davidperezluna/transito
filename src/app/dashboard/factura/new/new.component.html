@@ -255,11 +255,11 @@
                         </div>
                     </div>
                 </div> 
-                <div class="col-xs-12 col-lg-12">
-                    <table class="table " id="dataTables-example">
+                <div class="col-xs-12 col-lg-12" *ngIf="tramitesValor?.length > 0">
+                    <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>nombre</th>
+                                <th>Nombre</th>
                                 <th>Valor</th>
                                 <th>Acciones</th>
                             </tr>
@@ -269,7 +269,9 @@
                                 <td>{{tramiteValor.nombre}}</td>
                                 <td>{{tramiteValor.valor}}</td>
                                 <td>
-                                    <button (click)="deleteTramiteValor(tramiteValor)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                                    <button (click)="deleteTramiteValor(tramiteValor)"  class="btn btn-xs btn-danger" type="button">
+                                        <i class="fa fa-trash"></i>
+                                    </button> 
                                 </td>
                             </tr>
                         </tbody>
