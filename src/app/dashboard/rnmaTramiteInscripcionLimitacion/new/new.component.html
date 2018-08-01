@@ -100,14 +100,14 @@
                             <label>Departamento
                                 <span class="text-danger">*</span>
                             </label>
-                            <ng-select [multiple]="false" [options]="departamentos" [(ngModel)]="departamentoSelected" required name="departamentoId">
+                            <ng-select [multiple]="false" [options]="departamentos" [(ngModel)]="departamentoSelected" (ngModelChange)="changedDepartamento($event)" required name="departamentoId">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Municipio
                                 <span class="text-danger">*</span>
                             </label>
-                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" (ngModelChange)="changedDepartamento($event)" required name="municipioId">
+                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipioId">
                             </ng-select>
                         </div>
 

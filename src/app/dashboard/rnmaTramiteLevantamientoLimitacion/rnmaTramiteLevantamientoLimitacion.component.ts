@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RnmaTramiteLimitacionService } from '../../services/rnmaTramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
+import { VehiculoService } from '../../services/vehiculo.service';
 import { RnmaTramiteLevantamientoLimitacion } from './rnmaTramiteLevantamientoLimitacion.modelo';
 import { Ciudadano } from '../ciudadano/ciudadano.modelo';
 
@@ -18,14 +19,19 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
   public errorMessage;
   public respuesta;
   public tramitesLevantamiento;
-  public formNew = false;
-  public formEdit = false;
-  public formIndex = true;
   public table: any = null;
   public tramiteLevantamiento: any;
+  public listaLimitacionVehiculo = false;
+  public limitacionesVehiculo: any;
+  public limitacionVehiculoMostrar: any;
+  public limitacionVehiculoM=false;
+  public formIndex = true;
+  public placa: any;
+  public limitacionVehiculoEncontrada = 1;
 
   constructor(
     private _VehiculoLimitacionService: VehiculoLimitacionService,
+    private _VehiculoService: VehiculoService,
     private _loginService: LoginService,
   ) { }
 
@@ -81,67 +87,101 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
     });
     this.table = $('#dataTables-example').DataTable();
   }
-  onNew() {
-    this.formNew = true;
-    this.formIndex = false;
-    if (this.table) {
-      this.table.destroy();
-    }
-  }
+
 
   ready(isCreado: any) {
     if (isCreado) {
-      this.formNew = false;
-      this.formEdit = false;
       this.formIndex = true;
       this.ngOnInit();
     }
   }
-  deleteCfgPlaca(id: any) {
 
-    swal({
-      title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#15d4be',
-      cancelButtonColor: '#ff6262',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        let token = this._loginService.getToken();
-        this._VehiculoLimitacionService.deleteVehiculoLimitacion(token, id).subscribe(
-          response => {
-            swal({
-              title: 'Eliminado!',
-              text: 'Registro eliminado correctamente.',
-              type: 'success',
-              confirmButtonColor: '#15d4be',
-            })
-            this.table.destroy();
-            this.respuesta = response;
-            this.ngOnInit();
-          },
-          error => {
-            this.errorMessage = <any>error;
+  onKeyPlaca() {
+    let token = this._loginService.getToken();
+    let placa = {
+      'placa': this.placa,
+    };
 
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
+    this._VehiculoService.showVehiculoPlaca(token, placa).subscribe(
+      response => {
+        this.respuesta = response;
+        if (this.respuesta.status == 'success') {
+          this.limitacionVehiculoEncontrada = 4;
+          this._VehiculoLimitacionService.getTramiteLimitacionPlaca(placa, token).subscribe(
+            response => {
+              this.respuesta = response;
+              if (this.respuesta.status == 'success') {
+                this.limitacionesVehiculo = this.respuesta.data;
+                this.limitacionVehiculoEncontrada = 2;
+                this.listaLimitacionVehiculo = true;
+              } else {
+                this.limitacionVehiculoEncontrada = 3;
+              }
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            });
+        } else {
+          this.limitacionVehiculoEncontrada = 5;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
-        );
+        }
+      });
 
 
-      }
-    })
+
   }
 
-  editCfgPlaca(tramiteLevantamiento: any) {
-    this.tramiteLevantamiento = tramiteLevantamiento;
-    this.formEdit = true;
-    this.formIndex = false;
+  enviarTramite(limitacionVehiculo:any) {
+    let token = this._loginService.getToken();
+    this._VehiculoLimitacionService.levantarLimitacion(limitacionVehiculo, token).subscribe(
+      response => {
+        this.respuesta = response;
+        if (this.respuesta.status == 'success') {
+          swal({
+            title: 'Perfecto!',
+            text: 'Registro exitoso!',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+          this.listaLimitacionVehiculo = false;
+          this.limitacionVehiculoM = false;
+          this.limitacionVehiculoMostrar = null;
+          this.limitacionVehiculoEncontrada = 1;
+        } else {
+          this.limitacionVehiculoEncontrada = 3;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+  }
+
+  onCancelar() {
+    this.listaLimitacionVehiculo = true;
+    this.limitacionVehiculoM = false;
+  }
+
+  ver(limitacionVehiculoP: any): void {
+    this.limitacionVehiculoM = true;
+    this.limitacionVehiculoMostrar = limitacionVehiculoP;
+    this.listaLimitacionVehiculo = false;
   }
 
 }

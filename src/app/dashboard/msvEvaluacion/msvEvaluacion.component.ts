@@ -8,6 +8,7 @@ import { MsvCategoriaService } from '../../services/msvCategoria.service';
 import { Empresa } from '../empresa/empresa.modelo';
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
+import { MsvCategoria } from '../msvCategoria/msvCategoria.modelo';
 declare var $: any;
 
 @Component({
@@ -15,6 +16,7 @@ declare var $: any;
   templateUrl: './msvEvaluacion.component.html'
 })
 export class MsvEvaluacionComponent implements OnInit {
+  @Output() msvCategoria;
   public errorMessage;
   public id;
 	public respuesta;
@@ -81,7 +83,6 @@ export class MsvEvaluacionComponent implements OnInit {
      this._MsvCategoriaService.getCategoria().subscribe(
       response => {
         this.msvCategorias = response.data;
-        console.log(this.msvCategorias);
         
       }, 
       error => {
