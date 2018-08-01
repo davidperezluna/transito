@@ -6,6 +6,7 @@ import { ChartsModule } from 'ng2-charts';
 import {RegistroMaquinariaService} from '../../services/registroMaquinaria.service';
 import {CarroceriaService} from '../../services/carroceria.service';
 import {CfgOrigenRegistroService} from '../../services/cfgOrigenRegistro.service';
+import {CfgEmpresaGpsService} from '../../services/cfgEmpresaGps.service';
 
 import { NewRegistroMaquinariaComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -16,7 +17,7 @@ import {SelectModule} from 'angular2-select';
     declarations: [RnmaRegistroMaquinariaComponent,NewRegistroMaquinariaComponent,EditComponent],
     imports: [CommonModule, ChartsModule, Ng2BootstrapModule.forRoot(),SelectModule],
     exports: [RnmaRegistroMaquinariaComponent, NewRegistroMaquinariaComponent,EditComponent],
-    providers:[RegistroMaquinariaService,CarroceriaService,CfgOrigenRegistroService]
+    providers:[RegistroMaquinariaService,CarroceriaService,CfgOrigenRegistroService,CfgEmpresaGpsService]
 })
 
 export class RnmaRegistroMaquinariaModule { }

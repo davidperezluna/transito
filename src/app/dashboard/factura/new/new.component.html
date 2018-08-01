@@ -107,14 +107,12 @@
                         
                     </div>
                     <br>
-                    <br>
 
                     <div class="has-danger" *ngIf="isErrorVehiculo" >
                         <div class="form-control-feedback has-danger has-error">{{msj}}</div><br>
                     </div>
     
                     <div class="has-success" *ngIf="isExistVehiculo" >
-                        <div class="form-control-feedback has-danger has-success">{{msj}}</div><br>
                         <!-- tabla de detalles del vehiculo sin placa -->
                         <div class="col-xs-12 col-lg-12" >
                             <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>
@@ -198,6 +196,7 @@
                     </div>
                     <br><br>
                 </div>
+
 
                 <div class="col-xs-12 col-lg-12" *ngIf="isCiudadanoForm || isEmpresaForm">
                     <div class="card">

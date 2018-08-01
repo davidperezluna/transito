@@ -219,12 +219,10 @@ constructor(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'error'){
-          console.log(this.respuesta);
           this.ciudadano = this.respuesta.datos;
           this.factura.ciudadanoId = this.ciudadano.id;
           this.isExistCiudadano = true;
           this.isErrorCiudadano = false;
-          
         }else{
           this.isErrorCiudadano = true;
           this.isExistCiudadano = false;
@@ -334,7 +332,7 @@ constructor(
 
   }
 
-  btnNewTramite(){
+  btnNewTramite(){ 
     let token = this._loginService.getToken(); 
 
     if (this.modulo.abreviatura != 'RNC') {
@@ -384,19 +382,27 @@ constructor(
 
                   this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
                     valorVehiculo => {
-                      // console.log(response.datos.valor);
-                      // console.log(parseInt(response.datos.valor)*0.01);
-                      this.valorRetefuente = parseInt(valorVehiculo.datos.valor) * 0.01;
-                      this.valorVehiculoId = valorVehiculo.datos.id;
-                      this.propietariosVehiculo = response.data;
-                      response.data.forEach(element => {
-                        if (element.ciudadano) {
-                          this.isCiudadanoForm = true;
-                        }
-                        if (element.empresa) {
-                          this.isEmpresaForm = true;
-                        }
-                      });
+                      if (valorVehiculo.datos != null) {
+                        this.valorRetefuente = parseInt(valorVehiculo.datos.valor) * 0.01;
+                        this.valorVehiculoId = valorVehiculo.datos.id;
+                        this.propietariosVehiculo = response.data;
+                        response.data.forEach(element => {
+                          if (element.ciudadano) {
+                            this.isCiudadanoForm = true;
+                          }
+                          if (element.empresa) {
+                            this.isEmpresaForm = true;
+                          }
+                        });
+                      }else{
+                        swal({
+                          title: 'Sin valor!',
+                          text: 'Necesita ingresar el valor del vehiculo',
+                          type: 'error',
+                          confirmButtonText: 'Aceptar'
+                        })
+                        return(0);
+                      }
                     },
                     error => {
                       this.errorMessage = <any>error;
