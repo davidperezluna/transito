@@ -357,15 +357,13 @@ export class NewComponent implements OnInit {
   }
 
   changedDepartamento(e) {
-    console.log("municipio");
     if (this.departamentoSelected) {
       let token = this._loginService.getToken();
       this._MunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
         response => {
-          console.log(response.data);
           
-          if (response.data[0] != null) {
-            this.municipios = response.data;
+          if (response != null) {
+            this.municipios = response;
           } else {
             this.municipios = [];
           }

@@ -55,5 +55,26 @@ export class VehiculoLimitacionService {
 							  .map(res => res.json());
 
 	}
+
+
+	getTramiteLimitacionPlaca(placa, token) {
+
+		let json = JSON.stringify(placa);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/limitacion/placaestado", params, { headers: headers })
+			.map(res => res.json());
+
+	}
+
+	levantarLimitacion(vehiculoLimitacionId, token) {
+
+		let json = JSON.stringify(vehiculoLimitacionId);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/levantar/limitacion", params, { headers: headers })
+			.map(res => res.json());
+
+	}
 	
 }
