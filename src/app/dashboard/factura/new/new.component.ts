@@ -46,6 +46,7 @@ public tipoIdentificacionSelected:any;
 public ciudadano:any;
 public msj:any;
 public vehiculo:any;
+public modulo:any = null;
 public modulos:any;
 public moduloSelected:any;
 public vehiculoCriterio:any; 
@@ -72,7 +73,7 @@ constructor(
   private _FuncionarioService: MpersonalFuncionarioService,
   private _MflTipoRecaudoService: MflTipoRecaudoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _moduloService: ModuloService,
+  private _ModuloService: ModuloService,
   private _CfgValorVehiculoService: CfgValorVehiculoService,
   ){}
 
@@ -89,8 +90,9 @@ constructor(
           result.dismiss === swal.DismissReason.timer 
         ) {
         }
-      })
-    this._moduloService.getModuloSelect().subscribe(
+      });
+
+    this._ModuloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
         swal.close();
@@ -120,8 +122,6 @@ constructor(
       }
     );
 
-    
-
     this.date = new Date();
     let identity = this._loginService.getIdentity();
 
@@ -132,14 +132,13 @@ constructor(
     
     this._FuncionarioService.searchLogin(identity,token).subscribe(
       response => {
-        this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.sedeOperativa = this.respuesta.data.sedeOperativa;
-          this.funcionario= true;
+          console.log(response.data);
+          this.sedeOperativa = response.data.sedeOperativa;
+          this.funcionario = true;
           this.factura.numero = datePiper.transform(this.date,'hmss');
           this.factura.fechaCreacion = datePiper.transform(this.date,'yyyy-MM-dd');
           this.factura.sedeOperativaId = this.sedeOperativa.id;
-          swal.close();
         }
       error => {
           this.errorMessage = <any>error;
@@ -149,9 +148,6 @@ constructor(
           }
         }
     });
-
-    
-
 
     this._MflTipoRecaudoService.select().subscribe(
       response => {
@@ -258,8 +254,6 @@ constructor(
     })
     let token = this._loginService.getToken();
 
-    
-
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
       response => { 
         
@@ -305,8 +299,23 @@ constructor(
   }
 
   changedModulo(e){
-
     if (e) {
+      let token = this._loginService.getToken();
+
+      this._ModuloService.showModulo(token, this.moduloSelected).subscribe(
+        response => {
+          this.modulo = response.data;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
       this._TramitePrecioService.getTramitePrecioPorModuloSelect(this.moduloSelected).subscribe(
         response => {
           this.tramitesPrecio = response;
@@ -325,101 +334,123 @@ constructor(
   }
 
   btnNewTramite(){
-    let token = this._loginService.getToken();
+    let token = this._loginService.getToken(); 
 
-    if (!this.propietario) {
-      this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
-        response => {
-          this.tramitePrecio = response.data;
-          if (this.tramitePrecio.tramite.id == 1) {
-            this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
-            this.tramitesValor.push(
-              {
-                'nombre':this.tramitePrecio.nombre,
-                'valor':this.tramitePrecio.valorTotal
-              }
-            )
-          }else{
-            swal({
-              title: 'Sin propietarios!',
-              text: 'Necesita facturar matricula inicial para este vehiculo',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            })
+    if (this.modulo.abreviatura != 'RNC') {
+      if (!this.propietario) {
+        this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
+          response => {
+            this.tramitePrecio = response.data;
+            if (this.tramitePrecio.tramite.id == 8) {
+              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
+              this.tramitesValor.push(
+                {
+                  'nombre': this.tramitePrecio.nombre,
+                  'valor': this.tramitePrecio.valorTotal
+                }
+              )
+            } else {
+              swal({
+                title: 'Sin propietarios!',
+                text: 'Necesita facturar matricula inicial para este vehiculo',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              })
+            }
+
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
           }
-  
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-  
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    
-    }else{
-      this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
-        response => {
-          this.tramitePrecio = response.data;
-          if (this.tramitePrecio.tramite.id == 2) {
-            this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
-                response => { 
-                  let datos ={
-                    'linea':this.vehiculo.linea.id,
-                    'clase':this.vehiculo.clase.id,
-                    'modelo':this.vehiculo.modelo
+        );
+      } else {
+        this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
+          response => {
+            this.tramitePrecio = response.data;
+            if (this.tramitePrecio.tramite.id == 6) {
+              this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token, this.vehiculoCriterio).subscribe(
+                response => {
+                  let datos = {
+                    'linea': this.vehiculo.linea.id,
+                    'clase': this.vehiculo.clase.id,
+                    'modelo': this.vehiculo.modelo
                   }
 
-                  this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos,token).subscribe(
-                      valorVehiculo => {
+                  this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
+                    valorVehiculo => {
                       // console.log(response.datos.valor);
                       // console.log(parseInt(response.datos.valor)*0.01);
-                      this.valorRetefuente =parseInt(valorVehiculo.datos.valor)*0.01;
+                      this.valorRetefuente = parseInt(valorVehiculo.datos.valor) * 0.01;
                       this.valorVehiculoId = valorVehiculo.datos.id;
                       this.propietariosVehiculo = response.data;
                       response.data.forEach(element => {
                         if (element.ciudadano) {
                           this.isCiudadanoForm = true;
                         }
-                        if(element.empresa){
+                        if (element.empresa) {
                           this.isEmpresaForm = true;
                         }
-                      }); 
+                      });
                     },
                     error => {
                       this.errorMessage = <any>error;
-              
+
                       if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
                       }
                     }
                   );
-                error => {
-                  this.errorMessage = <any>error;
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
+                  error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
                   }
+                });
+            } else {
+              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
+              this.tramitesValor.push(
+                {
+                  'nombre': this.tramitePrecio.nombre,
+                  'valor': this.tramitePrecio.valorTotal
                 }
-              });
-          }else{
-            this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
-            this.tramitesValor.push(
-              {
-                'nombre':this.tramitePrecio.nombre,
-                'valor':this.tramitePrecio.valorTotal
-              }
-            )
+              )
+            }
+
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
           }
-  
-        }, 
+        );
+      }
+    } else {
+      this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
+        response => {
+          this.tramitePrecio = response.data;
+          this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
+          this.tramitesValor.push(
+            {
+              'nombre': this.tramitePrecio.nombre,
+              'valor': this.tramitePrecio.valorTotal
+            }
+          )
+        },
         error => {
           this.errorMessage = <any>error;
-  
-          if(this.errorMessage != null){
+
+          if (this.errorMessage != null) {
             console.log(this.errorMessage);
             alert("Error en la petición");
           }
