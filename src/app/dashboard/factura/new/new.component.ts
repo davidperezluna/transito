@@ -467,26 +467,26 @@ constructor(
   }
 
   onImprimir(){
-  //   let token = this._loginService.getToken();
-  //   let datos = {
-  //     'factura':this.factura,
-  //     'tramitesValor': this.tramitesValor,
-  //     'valorVehiculoId': this.valorVehiculoId,
-  //     'propietarios': this.propietariosVehiculoRetefuente,
-  //     'retencion':this.valorRetefuenteUnitario
-  //   }
-  //   this._FacturaService.imprimir(datos,token).subscribe(
-  //     response => {
-  //         this.respuesta = response; 
-  //     error => {
-  //             this.errorMessage = <any>error;
+    let token = this._loginService.getToken();
+    let datos = {
+      'factura':this.factura,
+      'tramitesValor': this.tramitesValor,
+      'valorVehiculoId': this.valorVehiculoId,
+      'propietarios': this.propietariosVehiculoRetefuente,
+      'retencion':this.valorRetefuenteUnitario
+    }
+    this._FacturaService.imprimir(datos,token).subscribe(
+      response => {
+          this.respuesta = response; 
+      error => {
+              this.errorMessage = <any>error;
           
-  //             if(this.errorMessage != null){
-  //                 console.log(this.errorMessage);
-  //                 alert("Error en la petición");
-  //             }
-  //         }
-  // }); 
+              if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+              }
+          }
+  }); 
 
   }
 
