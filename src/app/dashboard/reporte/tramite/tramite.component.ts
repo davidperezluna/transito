@@ -6,11 +6,13 @@ import {TramiteSolicitudService} from '../../../services/tramiteSolicitud.servic
 import {TramiteFacturaService} from '../../../services/tramiteFactura.service';
 import {TramitePrecioService} from '../../../services/tramitePrecio.service';
 
+import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
 @Component({
   selector: 'app-tramite',
-  templateUrl: './tramite.component.html'
+  templateUrl: './tramite.component.html',
+  providers: [DatePipe]
 })
 export class TramiteComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
@@ -20,8 +22,13 @@ public errorMessage:any;
 public habilitar:any;
 public respuesta:any;
 public formIndex = true;
-public tramite = false;
+public repFecha = false;
+public informe = false;
+public informe2=false;
+public date:any;
+
 public multa= false;
+public tramite = false;
 public retefuente= false;
 
 public table:any;
@@ -31,7 +38,14 @@ public diario:any;
 
 public sedeOperativas:any;
 public tramiteReportes:any;
+public reporteFechas:any;
 public sedeOperativaSelected:any;
+
+public datos = {
+  'desde': null,
+  'hasta': null,
+  'sedeOperativa': null,
+}
 
 constructor(
   private _SedeOperativaService: SedeOperativaService,
@@ -45,6 +59,8 @@ ngOnInit() {
   this._SedeOperativaService.getSedeOperativaSelect().subscribe(
     response => {
       this.sedeOperativas = response;
+      this.repFecha=false;
+      this.informe = false;
     },  
     error => {
       this.errorMessage = <any>error;
@@ -73,164 +89,80 @@ ngOnInit() {
       }
     }
   );
-  
- 
   }
-
   iniciarTabla(){
-    $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
-        }
-      }
-   });
-   this.table = $('#dataTables-example').DataTable();
+  
   }
-
   onCancelar(){
       this.multa=false;
       // this.ready.emit(true);
   }
   onEnviar(){
-    // let token = this._loginService.getToken();
-    // this.registroMaquinaria.tipoVehiculoId = this.combustibleSelected;
-    // this.registroMaquinaria.cfgOrigenVehiculoId = this.cfgOrigenRegistroSelected;
-    
-    // this.registroMaquinaria.vehiculoColorId = this.colorSelected;
-    // this.registroMaquinaria.vehiculoMarcaId = this.marcaSelected;
-    // this.registroMaquinaria.vehiculoClaseId = this.claseSelected;
-    // this.registroMaquinaria.vehiculoLineaId = this.lineaSelected;
-    // this.registroMaquinaria.vehiculoCarroceriaId = this.carroceriaSelected;
-    // this.registroMaquinaria.vehiculoCombustibleId = this.combustibleSelected;
-
-    // this.registroMaquinaria.condicionSelected = this.condicionSelected;
-    // this.registroMaquinaria.fechaIngreso = this.fechaIngreso;
-    // this.registroMaquinaria.pesoBruto = this.pesoBruto;
-    // this.registroMaquinaria.cargaUtilMaxima = this.cargaUtilMaxima;
-    // this.registroMaquinaria.rodajeSelected = this.rodajeSelected;
-    // this.registroMaquinaria.numeroEjes = this.numeroEjes;
-    // this.registroMaquinaria.numeroLlantas = this.numeroLlantas;
-    // this.registroMaquinaria.tipoCabinaSelected = this.tipoCabinaSelected;
-    // this.registroMaquinaria.altoTotal = this.altoTotal;
-    // this.registroMaquinaria.largoTotal = this.largoTotal;
-    // this.registroMaquinaria.anchoTotal = this.anchoTotal;
-    // this.registroMaquinaria.subpartidaArancelaria = this.subpartidaArancelaria;
-    // console.log(this.registroMaquinaria);  
-    
-    // var html = 'los datos de la maquinaria a ingresar son:<br>'+
-    //            'Placa: <b>'+this.registroMaquinaria.vehiculoPlaca+'</b><br>'+
-    //            'Condicon ingreso: <b>'+this.registroMaquinaria.condicionSelected+'</b><br>'+
-    //            'Motor: <b>'+this.registroMaquinaria.vehiculoMotor+'</b><br>'+
-    //            'Serie: <b>'+this.registroMaquinaria.vehiculoSerie+'</b><br>'+
-    //            'Chasis: <b>'+this.registroMaquinaria.vehiculoChasis+'</b><br>'+
-    //            'Fecha ingreso: <b>'+this.registroMaquinaria.fechaIngreso+'</b><br>';
-               
-
-  //  swal({
-  //     title: 'Preregistro de maquinaria!',
-  //     type: 'warning',
-  //     html:html,
-  //     showCancelButton: true,
-  //     focusConfirm: false,
-  //     confirmButtonText:
-  //       '<i class="fa fa-thumbs-up"></i> Crear!',
-  //     confirmButtonAriaLabel: 'Thumbs up, great!',
-  //     cancelButtonText:
-  //     '<i class="fa fa-thumbs-down"></i> No crear',
-  //     cancelButtonAriaLabel: 'Thumbs down',
-  //   }).then((result) => {
-  //       if (result.value) {
-
-  //   this._RegistroMaquinariaService.register(this.registroMaquinaria,token).subscribe(
-	// 		response => {
-  //       this.respuesta = response;
-  //       console.log(this.respuesta);
-  //       if(this.respuesta.status == 'success'){
-  //         this.ready.emit(true);
-  //         swal({
-  //           title: 'Perfecto!',
-  //           text: 'Registro exitoso!',
-  //           type: 'success',
-  //           confirmButtonText: 'Aceptar'
-  //         })
-  //       }else{
-  //         swal({
-  //           title: 'Error!',
-  //           text: 'El vehiculo '+ this.registroMaquinaria.altoTotal +' ya se encuentra registrado',
-  //           type: 'error',
-  //           confirmButtonText: 'Aceptar'
-  //         })
-  //       }
-	// 		error => {
-	// 				this.errorMessage = <any>error;
-
-	// 				if(this.errorMessage != null){
-	// 					console.log(this.errorMessage);
-	// 					alert("Error en la petición");
-	// 				}
-	// 			}
-
-    // }); 
-    //     } else if (
-    //       // Read more about handling dismissals
-    //       result.dismiss === swal.DismissReason.cancel
-    //     ) {
-
-    //     }
-    //   })
   }
-  changedMarca(e){
-    // if (this.marcaSelected) {
-    //   let token = this._loginService.getToken()
-    //     this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
-    //       response => { 
-    //         if (response.data[0] != null) {
-    //           this.lineas = response.data;
-    //         }else{
-    //           this.lineas = [];
-    //         }
-    //       }, 
-    //       error => { 
-    //         this.errorMessage = <any>error;
+  reporteFecha(){
+    let token = this._loginService.getToken();
+    this.datos.sedeOperativa = this.sedeOperativaSelected;
+    console.log(this.datos);
+    this._TramiteSolicitudService.getReporteFecha(token,this.datos).subscribe(
+      response => {
+        
+        this.reporteFechas = response.data;
+        this.repFecha=true;
+        this.informe=false;
+        
+        this.informe2=true;
+        
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+          swal.close();
+        }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+        
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+  reporteDiario(){
+    let desde = new Date();
+    this.hasta = new Date();
+    this.hasta.setDate(desde.getDate() + 1);
+    var datePiper = new DatePipe(this.hasta);
+    var datePiper = new DatePipe(this.desde);
+    this.datos.hasta = datePiper.transform(this.hasta,'yyyy-MM-dd');
+    this.datos.desde = datePiper.transform(desde,'yyyy-MM-dd');
+    console.log(this.datos);
     
-    //         if(this.errorMessage != null){
-    //           console.log(this.errorMessage);
-    //           alert("Error en la petición");
-    //         }
-    //       }
-    //     );
-    // }
-    }
-
-
-  changedDepartamento(e){
-    // if (this.marcaSelected) {
-    //   let token = this._loginService.getToken()
-    //     this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
-    //       response => {
-    //         console.log(response.data[0]);
-    //         if (response.data[0] != null) {
-    //           this.lineas = response.data;
-    //         }else{
-    //           this.lineas = [];
-    //         }
-    //       }, 
-    //       error => { 
-    //         this.errorMessage = <any>error;
+    let token = this._loginService.getToken();
+    this.datos.sedeOperativa = this.sedeOperativaSelected;
     
-    //         if(this.errorMessage != null){
-    //           console.log(this.errorMessage);
-    //           alert("Error en la petición");
-    //         }
-    //       }
-    //     );
-    // }
-    }
+    this._TramiteSolicitudService.getReporteFecha(token,this.datos).subscribe(
+      response => {
+        
+        this.reporteFechas = response.data;
+        this.repFecha=true;
+        this.informe=false;
+        
+        this.informe2=true;
+        console.log(this.reporteFecha);
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+          swal.close();
+        }, 100);
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+        
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+  }
 }

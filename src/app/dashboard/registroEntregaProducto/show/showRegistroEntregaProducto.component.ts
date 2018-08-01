@@ -70,6 +70,7 @@ export class showRegistroEntregaProductoComponent implements OnInit {
 
   buscarTramiteByFecha(){
     let token = this._loginService.getToken();
+     
     this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculoAndDate(token,this.datos).subscribe(
       response => {
         this.tramiteSolicitud = response.data;

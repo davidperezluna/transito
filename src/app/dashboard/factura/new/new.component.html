@@ -53,7 +53,7 @@
                     </div>
                 </div> 
 
-                <div class="form-group row col-xs-12 col-lg-12">
+                <div class="form-group row col-xs-12 col-lg-12" *ngIf="modulo">
                     <div class="col-xs-12 col-lg-12">
                         <h4>Datos Principales</h4>
                         <hr>
@@ -78,28 +78,27 @@
                     <table class="table table-bordered " id="dataTables-example">
                         <tbody>
                             <tr class="odd">
-                                <td><b>Tipo de identificación</b></td>
-                                <td class="center"><p>{{ciudadano.tipoIdentificacion.nombre}}</p></td>
-                                <td><b>Numero de identificación</b></td>
-                                <td class="center"><p>{{ciudadano.identificacion}}</p></td>
-                            </tr>
-                            <tr class="odd">
-                                <td><b>Primer nombre</b></td>
-                                <td class="center"><p>{{ciudadano.primerNombre}}</p></td>
-                                <td><b>Segundo nombre</b></td>
-                                <td class="center"><p>{{ciudadano.segundoNombre}}</p></td>
-                            </tr>
-                            <tr class="odd">
-                                <td><b>Primer apellido</b></td>
-                                <td class="center"><p>{{ciudadano.primerApellido}}</p></td>
-                                <td><b>Segundo apellido</b></td>
-                                <td class="center"><p>{{ciudadano.segundoApellido}}</p></td>
+                                <td>
+                                    <b>Tipo de identificación</b>
+                                    <br>
+                                    {{ ciudadano.tipoIdentificacion.nombre }}
+                                </td>
+                                <td>
+                                    <b>Numero de identificación</b>
+                                    <br>
+                                    {{ ciudadano.identificacion }}
+                                </td>
+                                <td>
+                                    <b>Ciudadano</b>
+                                    <br> 
+                                    {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf="moduloSelected != 4">
+                <div class="col-xs-12 col-lg-12" *ngIf="moduloSelected != 4 && modulo">
                     <div class="input-group" [ngClass]="{'has-danger' : isErrorVehiculo,'has-success': isExistVehiculo}">
                         <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" required />
                         <span class="input-group-btn">
@@ -108,14 +107,12 @@
                         
                     </div>
                     <br>
-                    <br>
 
                     <div class="has-danger" *ngIf="isErrorVehiculo" >
                         <div class="form-control-feedback has-danger has-error">{{msj}}</div><br>
                     </div>
     
                     <div class="has-success" *ngIf="isExistVehiculo" >
-                        <div class="form-control-feedback has-danger has-success">{{msj}}</div><br>
                         <!-- tabla de detalles del vehiculo sin placa -->
                         <div class="col-xs-12 col-lg-12" >
                             <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>
@@ -200,6 +197,7 @@
                     <br><br>
                 </div>
 
+
                 <div class="col-xs-12 col-lg-12" *ngIf="isCiudadanoForm || isEmpresaForm">
                     <div class="card">
                         <div class="card-header">
@@ -256,11 +254,11 @@
                         </div>
                     </div>
                 </div> 
-                <div class="col-xs-12 col-lg-12">
-                    <table class="table " id="dataTables-example">
+                <div class="col-xs-12 col-lg-12" *ngIf="tramitesValor?.length > 0">
+                    <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>nombre</th>
+                                <th>Nombre</th>
                                 <th>Valor</th>
                                 <th>Acciones</th>
                             </tr>
@@ -270,7 +268,9 @@
                                 <td>{{tramiteValor.nombre}}</td>
                                 <td>{{tramiteValor.valor}}</td>
                                 <td>
-                                    <button (click)="deleteTramiteValor(tramiteValor)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                                    <button (click)="deleteTramiteValor(tramiteValor)"  class="btn btn-xs btn-danger" type="button">
+                                        <i class="fa fa-trash"></i>
+                                    </button> 
                                 </td>
                             </tr>
                         </tbody>
@@ -287,7 +287,7 @@
                             <i class="fa fa-file-pdf-o"></i>
                             Imprimir Planilla
                         </a>
-                        <button  class="btn btn-primary" type="button">
+                        <button (click)="onEnviar()"  class="btn btn-primary" type="button">
                             <i class="fa fa-save"></i>
                             Enviar
                         </button>

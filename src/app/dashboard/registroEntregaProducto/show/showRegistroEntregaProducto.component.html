@@ -1,74 +1,64 @@
-<div  class="row" *ngIf="showT">
-    <div class="col-xs-12 col-lg-12">
-       <div class="card">
-          <div class="card-body">
-             <h5 class="m-0">Fecha de consulta</h5>
-             <hr>
-             <div class="row justify-content-center container">
-                <div class="row justify-content-center container">
-                   <div class="col-lg-6 col-md-6">
-                      <label>Fecha desde</label>
-                      <input class="form-control" name="fechaDesde" [(ngModel)]="datos.fechaDesde" type="date" required="required">
-                   </div>
-                   <div class="col-lg-6 col-md-6">
-                      <label>Fecha hasta</label>
-                      <input class="form-control" name="fechaHasta" [(ngModel)]="datos.fechaHasta" type="date" required="required">
-                   </div>
-                   <div class="col-xs-6 col-lg-6">
-                      <label>Tipo de tramite</label>
-                      <ng-select
-                      [multiple]="false"
-                      [options]="tramitesNombres"
-                      [(ngModel)]="datos.tramiteNombreSelected"
-                      name="tramiteNombreId" required>
-                      </ng-select>
-                   </div>
-                   <div class="col-xs-6 col-lg-6">
-                      <label>Estado del producto
-                      <span class="text-danger">*</span>
-                      </label>
-                      <select class="form-control" name="tipoProductoSelected"  required="required">
-                         <option value="Entregado">Entregado</option>
-                         <option value="No Entregado">No Entregado</option>
-                      </select>
-                   </div>
-                   <div class="col-xs-6 col-lg-6">
-                      <label></label>
-                      <button (click)="buscarTramiteByFecha()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                   </div>
+<div class="container" *ngIf="showT">
+    <div class="col-md-12">
+        <div class="card-body">
+            <div class="col-xs-12 col-lg-12">
+                <h5 class="m-0">Fecha de consulta</h5>
+                <hr>
+                <div class="container">
+                    <div class="row justify-content-center container">
+                        <div class="col-lg-6 col-md-6">
+                            <label>Fecha desde</label>
+                            <input class="form-control" name="fechaDesde" [(ngModel)]="datos.fechaDesde" type="date" required="required">
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Fecha hasta</label>
+                            <input class="form-control" name="fechaHasta" [(ngModel)]="datos.fechaHasta" type="date" required="required">
+                        </div>
+                        <div class="col-xs-6 col-lg-6">
+                            <label>Tipo de tramite</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="tramitesNombres"
+                                [(ngModel)]="datos.tramiteNombreSelected"
+                                name="tramiteNombreId" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-6 col-lg-6">
+                            <label>Estado del producto
+                                <span class="text-danger">*</span>
+                            </label>
+                            <select class="form-control" name="tipoProductoSelected"  required="required">
+                                <option value="Entregado">Entregado</option>
+                                <option value="No Entregado">No Entregado</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6 col-lg-6">
+                            <label></label>
+                            <button (click)="buscarTramiteByFecha()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>                    
+                </div> 
+                <div class="col-xs-12 col-lg-12">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Tipo registro</th>
+                                <th>Nro. Certificado</th>
+                                <th>Nro. Placa</th>
+                                <th>Entidad Expide</th>
+                                <th>Estado</th>
+                                <th>Fecha Expedición</th>
+                                <th>Fecha Entrega</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
                 </div>
-             </div>
-             <div class="col-xs-12 col-lg-12" *ngIf="viewTabla">
-                <table class="table" id="dataTables-example">
-                   <thead>
-                      <tr>
-                         <th>Tipo registro</th>
-                         <th>Nro. Certificado</th>
-                         <th>Nro. Placa</th>
-                         <th>Entidad Expide</th>
-                         <th>Estado</th>
-                         <th>Fecha Expedición</th>
-                         <th>Fecha Entrega</th>
-                         <th>Detalle</th>
-                      </tr>
-                   </thead>
-                   <tbody>
-                      <tr *ngFor="let tramiteEspecifico of tramitesEspecificos; let i = index">
-                         <td>{{tramiteEspecifico.tramiteFactura.tramitePrecio.modulo.nombre}}</td>
-                         <td>{{tramiteEspecifico.vehiculo.placa.numero}}</td>
-                         <td>{{tramiteEspecifico.vehiculo.placa.numero}}</td>
-                         <td>{{tramiteEspecifico.vehiculo.tramiteFactura.factura.sedeOperativa.nombre}}</td>
-                         <td>{{tramiteEspecifico.vehiculo.placa.numero}}</td>
-                         <td>{{tramiteEspecifico.vehiculo.placa.nombre}}</td>
-                         <td>{{tramiteEspecifico.vehiculo.placa.nombre}}</td>
-                         <td>
-                            <button  class="btn btn-outline-info" type="button">Detalles</button>
-                         </td>
-                      </tr>
-                   </tbody>
-                </table>
-                <!-- /.table-responsive -->
-             </div>
-          </div>
-       </div>
+            </div>
+        </div>
     </div>

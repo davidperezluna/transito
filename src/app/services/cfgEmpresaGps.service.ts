@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class ClaseService {
-	private url = environment.apiUrl + "clase";
+export class CfgEmpresaGpsService{
+	private url = environment.apiUrl + "cfgempresagps";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getClase(){
+	getCfgEmpresaGps(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(clase,token){
+	register(cfgEmpresaGps,token){
 		
-		let json = JSON.stringify(clase);
+		let json = JSON.stringify(cfgEmpresaGps);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteClase(token,id){
+	deleteCfgEmpresaGps(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class ClaseService {
 							  .map(res => res.json());
 	}
 
-	showClase(token,id){
+	showCfgEmpresaGps(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,9 +42,9 @@ export class ClaseService {
 
 	}
 
-	editClase(clase,token){
+	editCfgEmpresaGps(cfgEmpresaGps,token){
 
-		let json = JSON.stringify(clase);
+		let json = JSON.stringify(cfgEmpresaGps);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,20 +52,9 @@ export class ClaseService {
 
 	}
 
-	getClaseSelect(){
+	getCfgEmpresaGpsSelect(){
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
-
-	getClasePorModuloSelect(id){
-		return this._http.get(this.url+"/"+id+"/select/clases/por/modulo").map(res => res.json());
-	}
-
-	getClaseParaMaquinariaSelect(){
-		
-		return this._http.get(this.url+"/maquinaria/select").map(res => res.json());
-	}
-
-
 	
 }

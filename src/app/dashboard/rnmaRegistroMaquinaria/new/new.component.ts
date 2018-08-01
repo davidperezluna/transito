@@ -10,6 +10,7 @@ import {LineaService} from '../../../services/linea.service';
 import {CombustibleService} from '../../../services/combustible.service';
 import {MarcaService} from '../../../services/marca.service';
 import {CfgOrigenRegistroService} from '../../../services/cfgOrigenRegistro.service';
+import {CfgEmpresaGpsService} from '../../../services/cfgEmpresaGps.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-new-rnmaRegistroMaquinaria',
@@ -31,6 +32,7 @@ public lineas:any;
 public carrocerias:any;
 public combustibles:any;
 public cfgOrigenRegistros:any;
+public cfgEmpresasGps:any;
 public servicios:any;
 
 public condicionSelected:any;
@@ -46,6 +48,10 @@ public anchoTotal:any;
 public largoTotal:any;
 public subpartidaArancelaria:any;
 
+public numeroActivacion:any;
+public tipoDispositivo:any;
+public numeroImportacion:any;
+
 public colorSelected:any;
 public tipoVehiculoSelected:any;
 public claseSelected:any;
@@ -54,6 +60,7 @@ public lineaSelected:any;
 public carroceriaSelected:any;
 public combustibleSelected:any;
 public cfgOrigenRegistroSelected:any;
+public cfgEmpresaGpsSelected:any;
 public servicioSelected:any;
 
 public condiciones =[
@@ -78,11 +85,12 @@ constructor(
   private _CarroceriaService: CarroceriaService,
   private _CombustibleService: CombustibleService,
   private _CfgOrigenRegistroService: CfgOrigenRegistroService,
+  private _CfgEmpresaGpsService: CfgEmpresaGpsService,
 
 ){}
 
 ngOnInit() {
-  this.registroMaquinaria = new RegistroMaquinaria(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  this.registroMaquinaria = new RegistroMaquinaria(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   
   this._ColorService.getColorSelect().subscribe(
     response => {
@@ -111,7 +119,7 @@ ngOnInit() {
       }
     }
   );
-  this._ClaseService.getClaseSelect().subscribe(
+  this._ClaseService.getClaseParaMaquinariaSelect().subscribe(
     response => {
       this.clases = response;
     }, 
@@ -192,6 +200,22 @@ ngOnInit() {
       }
     }
   );
+
+  this._CfgEmpresaGpsService.getCfgEmpresaGpsSelect().subscribe(
+    response => {
+      this.cfgEmpresasGps = response;
+      console.log(this.cfgEmpresasGps);
+      
+    }, 
+    error => { 
+      this.errorMessage = <any>error;
+
+      if(this.errorMessage != null){
+        console.log(this.errorMessage);
+        alert("Error en la petición");
+      }
+    }
+  );
     
   }
 
@@ -202,6 +226,7 @@ ngOnInit() {
     let token = this._loginService.getToken();
     this.registroMaquinaria.tipoVehiculoId = this.combustibleSelected;
     this.registroMaquinaria.cfgOrigenVehiculoId = this.cfgOrigenRegistroSelected;
+    this.registroMaquinaria.cfgEmpresaGpsId = this.cfgEmpresaGpsSelected;
     
     this.registroMaquinaria.vehiculoColorId = this.colorSelected;
     this.registroMaquinaria.vehiculoMarcaId = this.marcaSelected;
@@ -222,6 +247,9 @@ ngOnInit() {
     this.registroMaquinaria.largoTotal = this.largoTotal;
     this.registroMaquinaria.anchoTotal = this.anchoTotal;
     this.registroMaquinaria.subpartidaArancelaria = this.subpartidaArancelaria;
+    this.registroMaquinaria.numeroActivacion = this.numeroActivacion;
+    this.registroMaquinaria.tipoDispositivo = this.tipoDispositivo;
+    this.registroMaquinaria.numeroImportacion = this.numeroImportacion;
     console.log(this.registroMaquinaria);  
     
     var html = 'los datos de la maquinaria a ingresar son:<br>'+
