@@ -38,16 +38,11 @@ constructor(
   ){}
 
   ngOnInit() {
-
-    // nuevooooooooooooooooooooooooooooooooooooo.......................
-
     this._TramitePrecioService.getTramitePrecio().subscribe(
       response => {
         this.tramitesPrecios = response.tramitePreciosActivo;
       }, 
     );
-      // finnnnnnnnn..........................................................
-
 
     this.claseSelected=null;
     // console.log(this.tramitePrecio);
@@ -81,19 +76,14 @@ constructor(
     if (this.claseSelected) {
       this.tramitePrecio.claseId = this.claseSelected;
     }
-        console.log(this.tramitePrecio.fechaInicio);
+
         this.fechaInicio = new Date(this.tramitePrecio.fechaInicio);
-        console.log(this.fechaInicio);
-        console.log(this.date);
-        // console.log(this.tramitePrecio.tramiteId);
-        // console.log(this.tramitePrecio);
 
         this.tramitePrecio.moduloId = this.moduloSelected;
           this._TramitePrecioService.register(this.tramitePrecio,token).subscribe(
             response => {
               this.respuesta = response;
               if(this.respuesta.status == 'success'){
-                //this.ready.emit(true);
                 swal({
                   title: 'Perfecto!',
                   text: 'Registro exitoso!',
