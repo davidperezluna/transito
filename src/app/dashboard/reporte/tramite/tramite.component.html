@@ -22,56 +22,85 @@
                                     <br>
                                     <label>Periodo de Informe*</label>
                                 </div>
-                                <div class="col-lg-3 col-md-3">
+                                <div class="col-md-3">
                                     <label>Desde*</label>
-                                    <!-- <input class="form-control" placeholder=""  name="desde" type="data" required> -->
-                                    <input class="form-control" placeholder="" [(ngModel)]="desde" name="desde" type="month" min="1900-12" max="3000-12"  required>
+                                    <input class="form-control" placeholder="" [(ngModel)]="datos.desde" name="desde" type="date" min="1900-12" max="3000-12"  required>
                                 </div>
-                                <div class="col-lg-3 col-md-3">
+                                <div class="col-md-3">
                                     <label>Hasta*</label>
-                                    <!-- <input class="form-control" placeholder=""  name="hasta" type="data" required> -->
-                                    <input class="form-control" placeholder="" [(ngModel)]="hasta" name="hasta" type="month" min="1900-12" max="3000-12" required>
+                                    <input class="form-control" placeholder="" [(ngModel)]="datos.hasta" name="hasta" type="date" min="1900-12" max="3000-12" required>
                                 </div>
-                                <div class="col-lg-3 col-md-3">
+                                <div class="col-md-2"><br>
+                                    <button (click)="reporteFecha()" class="btn btn-secondary">Reporte</button>
+                                </div>
+                                <div class="col-md-2">
                                     <div class="custom-control custom-checkbox">
                                             <!-- [(ngModel)]="" --><br>
-                                        <input   name="informe"  type="checkbox" class="custom-control-input" id="informe">
-                                        <label class="custom-control-label" for="informe">Informe diario</label>
+                                        <input [(ngModel)]="informe"   name="informe"  type="checkbox" class="custom-control-input" id="informe">
+                                        <label class="custom-control-label" (click)="reporteDiario()" for="informe">Informe diario</label>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-3"><br>
-                                    <button (click)="generarPdf()" class="btn btn-secondary">Generar PDF</button>
-                                </div>
+                                <div class="col-md-2"><br>
+                                    <button (click)="generarPdf()" class="btn btn-success " disabled="false">GENERAR PDF</button>
+                                </div>    
                             </div> 
                         </div>
                     </div>
                 </form>
-                <div class="card-footer">
-                    <button (click)="onEnviar()" class="btn btn-success " >Generar</button>
-                </div>    
             </div>
         </div>    
-        <div class="card">
-            <div class="card-body">
-                    <h5 class="m-0">Reporte generado de tramites</h5>
+        <div class="card"  *ngIf="informe">
+        <div class="card-body">
+                    <h5 class="m-0">Reporte diario de tramites</h5>
                     <table class="table " id="dataTables-example">
                         <thead>
                         <tr>
+                            <th>Conteo</th>
                             <th>Codigo </th>
                             <th>Concepto </th>
+                            <th>Valor</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                                <!--{{let total=0}} -->
+                        <tr class="odd" *ngFor="let tramiteReporte of tramiteReportes; let i = index" >
+                            <td>{{tramiteReporte.conteo}}</td>
+                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.tramite.id}}</td>
+                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.tramite.nombre}}</td>
+                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.valor}}</td>
+                            <td>{{tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor}}</td>
+                             
+                            <!-- {{ total = total + tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor }} -->
+                        </tr>
+                        </tbody>
+                        <!-- <th>valor total </th>
+                        <td *ngFor="let tramiteReporte of tramiteReportes; let i = index"></td> -->
+                    </table> 
+                    <!-- /.table-responsive --> 
+            </div> 
+        </div> 
+        <div class="card" *ngIf='informe2 && !informe'>
+            <div class="card-body" >
+                    <h5 class="m-0">Reporte por fechas de tramites</h5>
+                    <table class="table " >
+                        <thead>
+                        <tr>
                             <th>Conteo</th>
+                            <th>Codigo </th>
+                            <th>Concepto </th>
                             <th>Valor</th>
                             <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
                                 <!-- {{let total=0}} -->
-                        <tr class="odd" *ngFor="let tramiteReporte of tramiteReportes; let i = index" >
-                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.tramite.id}}</td>
-                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.tramite.nombre}}</td>
-                            <td>{{tramiteReporte.conteo}}</td>
-                            <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.valor}}</td>
-                            <td>{{tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor}}</td>
+                        <tr class="odd" *ngFor="let reporteFecha of reporteFechas; let i = index" >
+                            <td>{{reporteFecha.conteo}}</td>
+                            <td>{{reporteFecha[0].tramiteFactura.tramitePrecio.tramite.id}}</td>
+                            <td>{{reporteFecha[0].tramiteFactura.tramitePrecio.tramite.nombre}}</td>
+                            <td>{{reporteFecha[0].tramiteFactura.tramitePrecio.valor}}</td>
+                            <td>{{reporteFecha.conteo * reporteFecha[0].tramiteFactura.tramitePrecio.valor}}</td>
                             
                             <!-- {{ total = total + tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor }} -->
                         </tr>

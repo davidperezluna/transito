@@ -68,4 +68,11 @@ export class TramiteSolicitudService {
 	getTramiteReporte() {
 		return this._http.get(this.url + '/reporte').map(res => res.json());
 	}
+
+	getReporteFecha(token,datos) {
+		let json = JSON.stringify(datos);
+		let params = 'json=' + json + '&authorization=' + token;		
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/reportefecha',params,{ headers: headers }).map(res => res.json());
+	}
 }

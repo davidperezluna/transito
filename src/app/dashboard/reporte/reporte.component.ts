@@ -25,7 +25,9 @@ export class ReporteComponent implements OnInit {
   public Reporte: Reporte;
 
   public tipoReportes =[
-    {'value':"tramite",'label':"Tramite"},{'value':"multa",'label':"Infraccion"},{'value':"retefuente",'label':"Retefuente"}
+    {'value':"tramite",'label':"Tramite"},
+    {'value':"multa",'label':"Infraccion"},
+    {'value':"retefuente",'label':"Retefuente"}
   ]
 
   constructor(
@@ -49,25 +51,7 @@ export class ReporteComponent implements OnInit {
       ) {
       }
     })
-    // this.tramite=false;
-    // this.formNew=false;    
-    // this.formNew=false;    
-		// this._RegistroMaquinariaService.index().subscribe(
-		// 		response => {
-    //       this.registrosMaquinaria = response.data;
-    //       let timeoutId = setTimeout(() => {  
-    //         this.iniciarTabla();
-    //       }, 100);
-		// 		}, 
-		// 		error => {
-		// 			this.errorMessage = <any>error;
-
-		// 			if(this.errorMessage != null){
-		// 				console.log(this.errorMessage);
-		// 				alert("Error en la petición");
-		// 			}
-		// 		}
-    //   );
+    
   }
   iniciarTabla(){
   //   $('#dataTables-example').DataTable({
@@ -104,41 +88,6 @@ export class ReporteComponent implements OnInit {
 
   deleteRegistroMaquinaria(id:any){
 
-  //   swal({
-  //     title: '¿Estás seguro?',
-  //     text: "¡Se eliminara este registro!",
-  //     type: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#15d4be',
-  //     cancelButtonColor: '#ff6262',
-  //     confirmButtonText: 'Confirmar',
-  //     cancelButtonText: 'Cancelar'
-  //   }).then((result) => {
-  //     if (result.value) {
-  //       let token = this._loginService.getToken();
-  //       this._RegistroMaquinariaService.deleteRegistroMaquinaria(token,id).subscribe(
-  //           response => {
-  //               swal({
-  //                     title: 'Eliminado!',
-  //                     text:'Registro eliminado correctamente.',
-  //                     type:'success',
-  //                     confirmButtonColor: '#15d4be',
-  //                   })
-  //                 this.table.destroy();
-  //                 this.respuesta= response;
-  //                 this.ngOnInit();
-  //             }, 
-  //           error => {
-  //             this.errorMessage = <any>error;
-
-  //             if(this.errorMessage != null){
-  //               console.log(this.errorMessage);
-  //               alert("Error en la petición");
-  //             }
-  //           }
-  //         );
-  //     }
-  //   })
   }
 
 }
