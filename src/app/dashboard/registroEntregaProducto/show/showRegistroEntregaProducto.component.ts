@@ -81,13 +81,7 @@ export class showRegistroEntregaProductoComponent implements OnInit {
           if(element.tramiteFactura.tramitePrecio.tramite.id == this.datos.tramiteNombreSelected){
             this.tramitesEspecificos.push(element);
           }
-<<<<<<< HEAD
-          console.log(this.tramitesEspecificos);
-            
-
-=======
           this.viewTabla = true; 
->>>>>>> cbc23b4015464ce70641daaab4ae4f9516a933cf
           });
       } else {
           swal({
