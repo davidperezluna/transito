@@ -53,6 +53,8 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
 
     ngOnInit() {
         this.categorias = ['A2'];
+        
+        this.datos.identificacionAnterior = this.solicitante.identificacion;
 
         this._ClaseService.getClaseSelect().subscribe(
             response => {
