@@ -387,6 +387,31 @@
             <i class="fa fa-angle-right"></i> Gestión Transporte Público
           </a>
         </li>
+        <!-- <ul class="nav flex-column nav-second-level"> -->
+          <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
+            <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">
+              Tramite Limitación
+              <i class="fa fa-angle-right"></i>
+            </a>
+            <ul class="nav flex-column nav-third-level">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="rnaTramiteInscripcionLimitacion" [ngClass]="{'active' : ( addActive === 'rnaTramiteInscripcionLimitacion')}"
+                  (click)="addActiveMenu('rnaTramiteInscripcionLimitacion')">
+                  <i class="fa fa-angle-right"></i> Inscripción
+                </a>
+              </li>
+            </ul>
+            <ul class="nav flex-column nav-third-level">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="rnaTramiteLevantamientoLimitacion" [ngClass]="{'active' : ( addActive === 'rnaTramiteLevantamientoLimitacion')}"
+                  (click)="addActiveMenu('rnaTramiteLevantamientoLimitacion')">
+                  <i class="fa fa-angle-right"></i> Levantamiento
+                </a>
+              </li>
+            </ul>
+            <!-- /.nav-third-level -->
+          </li>
+        <!-- </ul> -->
       </ul>
       <!-- /.nav-second-level -->
     </li>

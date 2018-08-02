@@ -63,6 +63,8 @@ import { LimitacionModule } from './limitacion/limitacion.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
+import { RnaTramiteInscripcionLimitacionModule } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.module';
+import { RnaTramiteLevantamientoLimitacionModule } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
@@ -191,6 +193,8 @@ import {RightsidebarComponent} from '../shared';
       CfgTipoProcesoModule,
       RnmaTramiteInscripcionLimitacionModule,
       RnmaTramiteLevantamientoLimitacionModule,
+      RnaTramiteInscripcionLimitacionModule,
+      RnaTramiteLevantamientoLimitacionModule,
       CfgValorVehiculoModule,
       RnrsPreregistroModule,
       ReporteModule,

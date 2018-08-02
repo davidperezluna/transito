@@ -90,6 +90,8 @@ import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacion
 import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
+import { RnaTramiteInscripcionLimitacionRoutes } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.routes';
+import { RnaTramiteLevantamientoLimitacionRoutes } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
@@ -179,6 +181,8 @@ export const DashboardRoutes: Route[] = [
         ...RnmaRegistroMaquinariaRoutes,
         ...TramiteInscripcionLimitacionRoutes,
         ...TramiteLevantamientoLimitacionRoutes,
+        ...RnaTramiteInscripcionLimitacionRoutes,
+        ...RnaTramiteLevantamientoLimitacionRoutes,
         ...rnaAsignacionInsumosRoutes ,
         ...LimitacionRoutes,
         ...CfgTipoProcesoRoutes,

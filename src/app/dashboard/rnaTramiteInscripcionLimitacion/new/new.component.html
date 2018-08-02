@@ -92,7 +92,7 @@
                         <div class="col-lg-6 col-md-6">
                             <label>Fecha Radicación
                             </label>
-                            <input class="form-control" [(ngModel)]="rnmaTramiteInscripcionLimitacion.fechaRadicacion" name="fechaRadicacion" type="date"
+                            <input class="form-control" [(ngModel)]="rnaTramiteInscripcionLimitacion.fechaRadicacion" name="fechaRadicacion" type="date"
                                 required />
 
                         </div>
@@ -301,7 +301,7 @@
                         <div class="col-lg-6 col-md-6">
                             <br>
                             <label>Nro Orden Judicial</label>
-                            <input class="form-control" placeholder="" type="text" [(ngModel)]="rnmaTramiteInscripcionLimitacion.nOrdenJudicial" name="valor"
+                            <input class="form-control" placeholder="" type="text" [(ngModel)]="rnaTramiteInscripcionLimitacion.nOrdenJudicial" name="valor"
                                 required>
                         </div>
 
@@ -317,7 +317,7 @@
                         <div class="col-lg-6 col-md-6">
                             <label>Fecha Expedición
                             </label>
-                            <input type="date" class="form-control" placeholder="fecha expedición" [(ngModel)]="rnmaTramiteInscripcionLimitacion.fechaExpedicion"
+                            <input type="date" class="form-control" placeholder="fecha expedición" [(ngModel)]="rnaTramiteInscripcionLimitacion.fechaExpedicion"
                                 name="fechaExpedicion" required />
 
                         </div>
@@ -351,7 +351,7 @@
 
                         <div class="col-lg-6 col-md-6">
                             <label>Observaciones</label>
-                            <textarea class="form-control" [(ngModel)]="rnmaTramiteInscripcionLimitacion.observaciones" name="observaciones" placeholder="Aqui puede ingresar las observaciones"
+                            <textarea class="form-control" [(ngModel)]="rnaTramiteInscripcionLimitacion.observaciones" name="observaciones" placeholder="Aqui puede ingresar las observaciones"
                                 required></textarea>
                         </div>
 
@@ -359,7 +359,9 @@
 
 
                     </div>
+
                     <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+
 
 
                 </form>

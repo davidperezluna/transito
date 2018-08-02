@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RnmaTramiteInscripcionLimitacionComponent } from './rnmaTramiteInscripcionLimitacion.component';
+import { RnaTramiteInscripcionLimitacionComponent } from './rnaTramiteInscripcionLimitacion.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
 
@@ -13,9 +13,9 @@ import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.ser
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [RnmaTramiteInscripcionLimitacionComponent,NewComponent/*,EditComponent*/],
-    exports: [RnmaTramiteInscripcionLimitacionComponent, NewComponent/*,EditComponent*/],
+    declarations: [RnaTramiteInscripcionLimitacionComponent,NewComponent/*,EditComponent*/],
+    exports: [RnaTramiteInscripcionLimitacionComponent, NewComponent/*,EditComponent*/],
     providers: [TramiteLimitacionService,VehiculoLimitacionService]
 })
 
-export class RnmaTramiteInscripcionLimitacionModule { }
+export class RnaTramiteInscripcionLimitacionModule { }
