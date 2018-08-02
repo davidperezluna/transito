@@ -368,10 +368,24 @@ constructor(
           }
         );
       } else {
+        
         this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
           response => {
             this.tramitePrecio = response.data;
             if (this.tramitePrecio.tramite.id == 6) {
+              swal({
+                title: 'Buscando Propietarios!',
+                text: 'Solo tardara unos segundos por favor espere.',
+                onOpen: () => {
+                  swal.showLoading()
+                }
+              }).then((result) => {
+                if (
+                  // Read more about handling dismissals
+                  result.dismiss === swal.DismissReason.timer
+                ) {
+                }
+              })
               this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token, this.vehiculoCriterio).subscribe(
                 response => {
                   let datos = {
@@ -394,7 +408,9 @@ constructor(
                             this.isEmpresaForm = true;
                           }
                         });
+                        swal.close();
                       }else{
+                        swal.close();
                         swal({
                           title: 'Sin valor!',
                           text: 'Necesita ingresar el valor del vehiculo',
@@ -526,6 +542,10 @@ constructor(
           }
   }); 
 
+  }
+  onCancelarTraspaso(){
+    this.isCiudadanoForm = false;
+    this.isEmpresaForm = false;
   }
 
 }
