@@ -11,7 +11,7 @@ import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { RnmaTramiteInscripcionLimitacion } from '../rnmaTramiteInscripcionLimitacion.modelo';
+import { RnaTramiteInscripcionLimitacion } from '../rnaTramiteInscripcionLimitacion.modelo';
 import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
 import swal from 'sweetalert2';
 
@@ -21,7 +21,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
+  public rnaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
   public vehiculoLimitacion: any;
   public errorMessage;
   public respuesta;
@@ -79,7 +79,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.rnmaTramiteInscripcionLimitacion = new RnmaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.rnaTramiteInscripcionLimitacion = new RnaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
@@ -202,16 +202,16 @@ export class NewComponent implements OnInit {
   enviarTramite() {
     let token = this._loginService.getToken();
 
-    this.rnmaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
-    this.rnmaTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
-    this.rnmaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
-    this.rnmaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
-    this.rnmaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
-    this.rnmaTramiteInscripcionLimitacion.causalLimitacionId = this.causalLimitacionSelected;
-    this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
-    this.rnmaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
+    this.rnaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
+    this.rnaTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
+    this.rnaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
+    this.rnaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
+    this.rnaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
+    this.rnaTramiteInscripcionLimitacion.causalLimitacionId = this.causalLimitacionSelected;
+    this.rnaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
+    this.rnaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
     let data =[
-      {'datosLimitacion': this.rnmaTramiteInscripcionLimitacion},
+      {'datosLimitacion': this.rnaTramiteInscripcionLimitacion},
 
       {'vehiculosLimitacionArray': this.datos2}
     ]
@@ -233,7 +233,7 @@ export class NewComponent implements OnInit {
           
           swal({
             title: 'Error!',
-            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnmaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
+            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
