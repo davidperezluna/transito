@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
         <div class="card-body">
-            <h5 class="m-0">formulario para editar una clase</h5>
+            <h5 class="m-0">Editar clase</h5>
             <hr> 
             <div class="row justify-content-center">
                 <div class="col-md-10 ">
@@ -31,8 +31,16 @@
                 </div>   
         </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-secondary">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
             </div>    
         </div>
     </div>

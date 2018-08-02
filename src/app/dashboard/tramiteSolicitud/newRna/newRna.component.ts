@@ -54,7 +54,12 @@ export class NewRnaComponent implements OnInit {
   public apoderado:any=false;
   
   public cantidadSustrato = 1;
-
+  public moduloId = 1;
+  public datos = {
+    'moduloId': null,
+    'id': null,
+    'vehiculoId': null,
+  };
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
   private _loginService: LoginService,
@@ -110,7 +115,10 @@ constructor(
 
   changedFactura(id){
     if (id) {
-      this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
+      this.datos.id = id;
+      this.datos.moduloId = this.moduloId;
+      this.datos.vehiculoId = this.vehiculo.id;
+      this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
       response => {
         this.isMatricula=false;
         let active = true;
@@ -264,7 +272,7 @@ constructor(
                 swal.close();
             } else {
               this.facturas = false;
-              this.mensaje = 'No hay faturas para el vehiculo';
+              this.mensaje = 'No hay facturas para el vehiculo';
               this.isError = true;
               this.vehiculoSuccess=false;
               this.factura=false;

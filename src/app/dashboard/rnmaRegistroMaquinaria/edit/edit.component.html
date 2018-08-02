@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-lg-10">
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0">Formulario para la edicion de maquinaria</h5>
+                <h5 class="m-0">Editar preregistro</h5>
                 <hr>
                     <form #editForm="ngForm">
                         <div  class="row justify-content-center">
@@ -186,6 +186,33 @@
                                     <label>Subpartida arancelaria*</label>
                                     <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.subpartidaArancelaria" name="subpartidaArancelaria" type="text" required>
                                 </div>
+
+                                <br><hr> 
+                                <h5 class="col-md-12">Gps</h5>
+                                <div class=" col-md-3">
+                                    <label>Empresa activacion de GPS*</label>
+                                    <ng-select
+                                        [multiple]="false"
+                                        [options]="cfgOrigenRegistros"
+                                        [(ngModel)]="cfgOrigenRegistroSelected"
+                                        
+                                        required
+                                        name="CfgOrigenRegistroId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Numero de activacion Gps*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.numeroActivacion" name="numeroActivacion" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Tipo de dispositivo de provedor nacional*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.tipoDispositivo" name="tipoDispositivo" type="text" required>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <label>Numero de importacion*</label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.numeroImportacion" name="numeroImportacion" type="text" required>
+                                </div>
+
                                 </div> 
                             </div>
                         </div>

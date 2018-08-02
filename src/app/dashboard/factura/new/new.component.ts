@@ -168,8 +168,6 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-
-    console.log(this.factura);
     
     let datos = {
       'factura': this.factura,

@@ -60,5 +60,12 @@ export class ClaseService {
 	getClasePorModuloSelect(id){
 		return this._http.get(this.url+"/"+id+"/select/clases/por/modulo").map(res => res.json());
 	}
+
+	getClaseParaMaquinariaSelect(){
+		
+		return this._http.get(this.url+"/maquinaria/select").map(res => res.json());
+	}
+
+
 	
 }

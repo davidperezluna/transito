@@ -15,6 +15,13 @@ export class MsvCategoriaService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
+	getCategoriaById(token,idCategoria) {
+		let json = JSON.stringify(idCategoria);
+		let params = 'json=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/getById',params,{ headers: headers }).map(res => res.json());
+	}
+
 	register(revision,token){ 
 		
 		let json = JSON.stringify(revision);

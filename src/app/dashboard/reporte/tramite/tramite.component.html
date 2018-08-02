@@ -36,8 +36,8 @@
                                 <div class="col-md-2">
                                     <div class="custom-control custom-checkbox">
                                             <!-- [(ngModel)]="" --><br>
-                                        <input [(ngModel)]="informe"   name="informe"  type="checkbox" class="custom-control-input" id="informe">
-                                        <label class="custom-control-label" (click)="reporteDiario()" for="informe">Informe diario</label>
+                                        <input [(ngModel)]="informe"   name="informe"  type="checkbox" class="custom-control-input" id="informe" >
+                                        <label class="custom-control-label" (click)="reporteDiario()" for="informe" >Informe diario</label>
                                     </div>
                                 </div>
                                 <div class="col-md-2"><br>
@@ -63,19 +63,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                                <!--{{let total=0}} -->
                         <tr class="odd" *ngFor="let tramiteReporte of tramiteReportes; let i = index" >
                             <td>{{tramiteReporte.conteo}}</td>
                             <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.tramite.id}}</td>
                             <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.tramite.nombre}}</td>
                             <td>{{tramiteReporte[0].tramiteFactura.tramitePrecio.valor}}</td>
                             <td>{{tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor}}</td>
-                             
-                            <!-- {{ total = total + tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor }} -->
                         </tr>
                         </tbody>
-                        <!-- <th>valor total </th>
-                        <td *ngFor="let tramiteReporte of tramiteReportes; let i = index"></td> -->
                     </table> 
                     <!-- /.table-responsive --> 
             </div> 
@@ -102,7 +97,7 @@
                             <td>{{reporteFecha[0].tramiteFactura.tramitePrecio.valor}}</td>
                             <td>{{reporteFecha.conteo * reporteFecha[0].tramiteFactura.tramitePrecio.valor}}</td>
                             
-                            <!-- {{ total = total + tramiteReporte.conteo * tramiteReporte[0].tramiteFactura.tramitePrecio.valor }} -->
+                            
                         </tr>
                         <!-- </tbody>
                         <th>valor total </th>

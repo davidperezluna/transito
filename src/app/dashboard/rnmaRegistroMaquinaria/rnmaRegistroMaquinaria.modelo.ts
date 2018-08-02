@@ -15,6 +15,11 @@ export class RegistroMaquinaria{
 		public subpartidaArancelaria: string,
 		public tipoVehiculoId: number,
 		public cfgOrigenVehiculoId: string,
+		public cfgEmpresaGpsId: string,
+
+		public numeroActivacion: string,
+		public tipoDispositivo: string,
+		public numeroImportacion: string,
 
 		public vehiculoPlaca: string,
 		public vehiculoSerie: string,

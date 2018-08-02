@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TramiteSolicitudRncService } from '../../services/tramiteSolicitudRnc.service';
+import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { TipoIdentificacionService } from '../../services/tipoIdentificacion.service';
 import { CiudadanoService } from '../../services/ciudadano.service';
 import { LoginService } from '../../services/login.service';
@@ -26,9 +27,11 @@ export class TramiteSolicitudRncComponent implements OnInit {
   public formIndex = true;
   public table: any;
   public tramiteSolicitud: TramiteSolicitudRnc;
+  public moduloId = 4;
 
   constructor(
     private _TramiteSolicitudRncService: TramiteSolicitudRncService,
+    private _TramiteSolicitudService: TramiteSolicitudService,
     private _TipoIdentificacionService: TipoIdentificacionService,
     private _CiudadanoService: CiudadanoService,
 		private _loginService: LoginService,
@@ -48,7 +51,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
       ) {
       }
     });
-    this._TramiteSolicitudRncService.index().subscribe(
+    this._TramiteSolicitudService.getByModulo(this.moduloId).subscribe(
 				response => {
           this.tramitesSolicitud = response.data;
           let timeoutId = setTimeout(() => {

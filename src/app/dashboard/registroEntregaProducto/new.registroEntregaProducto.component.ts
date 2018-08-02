@@ -31,6 +31,7 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
         'numeroSerie': null,
         'numeroMotor': null,
         'numeroChasis': null,
+        'propietario': null,
     };
 
     constructor(

@@ -93,10 +93,15 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-3">
-                            <label>Placa
-                                <b class="text-danger">*</b>
-                            </label>
-                            <input class="form-control" [(ngModel)]="placa.placa" (blur)="onKeyPlaca()" id="placa" name="placa" type="text" required>
+                            <label>Placa <b class="text-danger">*</b></label>                      
+                            <div class="input-group">
+                                <input class="form-control" type="text" [(ngModel)]="placa.placa" id="placa" name="placa" required>
+                                <span class="input-group-btn">
+                                    <button (click)="onKeyPlaca()" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                         <div  class="col-xs-12 col-lg-3" *ngIf="vehiculo">
                             <label>Matriculado en</label>
@@ -136,9 +141,16 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Nip Infractor <b class="text-danger">*</b></label> 
-                            <input class="form-control" [(ngModel)]="identificacion.numeroIdentificacion" (blur)="onKeyIdentificacion()" id="identificacion" name="placa" type="text" required>
+                        <div class="col-xs-12 col-lg-3">                       
+                            <label>Nip Infractor <b class="text-danger">*</b></label>                      
+                            <div class="input-group">
+                                <input class="form-control" [(ngModel)]="identificacion.numeroIdentificacion" id="identificacion" name="placa" type="text" srequired>
+                                <span class="input-group-btn">
+                                    <button (click)="onKeyIdentificacion()" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-lg-3" *ngIf='ciudadano'>
                             <label>Tipo Identificación</label>

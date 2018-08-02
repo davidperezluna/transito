@@ -46,6 +46,13 @@
             Vehiculos <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
+
+              <li class="nav-item">
+                  <a class="nav-link" routerLink="buscarAutomotor" [ngClass]="{'active' : ( addActive === 'buscarAutomotor')}" (click)="addActiveMenu('buscarAutomotor')">
+                    <i class="fa fa-angle-right"></i> Buscar Automotor
+                  </a>
+                  </li>
+
             <li class="nav-item">
               <a class="nav-link" routerLink="marca"  [ngClass]="{'active' : ( addActive === 'marca')}" (click)="addActiveMenu('marca')">
                 <i class="fa fa-angle-right"></i>
@@ -354,11 +361,6 @@
         <i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level ">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="buscarAutomotor" [ngClass]="{'active' : ( addActive === 'buscarAutomotor')}" (click)="addActiveMenu('buscarAutomotor')">
-            <i class="fa fa-angle-right"></i> Buscar Automotor
-          </a>
-          </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="rnaPreregistro" [ngClass]="{'active' : ( addActive === 'rnaPreregistro')}" (click)="addActiveMenu('rnaPreregistro')">
             <i class="fa fa-angle-right"></i> Pre-registro Automotor

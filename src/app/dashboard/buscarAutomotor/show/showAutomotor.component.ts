@@ -66,6 +66,8 @@ constructor(
     this.pesado = false;
     this.maquinaria = false;
     let token = this._loginService.getToken();
+    console.log(this.vehiculo);
+    
     this.sedeOperativa = this.vehiculo.sedeOperativa.nombre;
     this.placa = this.vehiculo.placa.numero;
     if(this.vehiculo.estado == true ){
@@ -77,15 +79,16 @@ constructor(
                 this.numeroTarjeta = response.data.licenciaTransito;                
       }
     );
-    this._TramiteSolicitudService.getTramiteSolicitudByIdVehiculo(token,this.vehiculo.id).subscribe(
+    this._TramiteSolicitudService.byIdVehiculo(token,this.vehiculo.id).subscribe(
       response=>{
                 this.vehiculoDatosTramite = response.data;             
-        
+                console.log(this.vehiculoDatosTramite);
+                
                 this.vehiculoDatosTramite.forEach(element => {                    
-                  if(element.tramiteFactura.tramitePrecio.tramite.id == 7){
+                  if(element.tramiteFactura.tramitePrecio.tramite.id == 22){
                       this.regrabacionMotor = "SI";
                   }
-                  else if(element.tramiteFactura.tramitePrecio.tramite.id == 8){
+                  else if(element.tramiteFactura.tramitePrecio.tramite.id == 23){
                       this.regrabacionChasis = "SI";
                   }
                   else if(element.tramiteFactura.tramitePrecio.tramite.id == 9){
@@ -97,7 +100,7 @@ constructor(
 
     this._VehiculoService.showVehiculoTipo(token,this.vehiculo.id).subscribe(
       response => {
-                  this.tipoVehiculo = response.data;
+                  this.tipoVehiculo = response.data;                  
                   if(response.msj == this.vehiculoPesado){
                     this.numeroEjes = this.tipoVehiculo.numeroEjes;
                     this.numeroFichas = "Carroceria: " + this.tipoVehiculo.fichaTecnicaHomologacionCarroceria + "/Chasis: " +this.tipoVehiculo.fichaTecnicaHomologacionChasis
