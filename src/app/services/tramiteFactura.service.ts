@@ -53,6 +53,6 @@ export class TramiteFacturaService {
 		let json = JSON.stringify(datos);
 		let params = 'json=' + json;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/show/modulo", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/show/factura", params, { headers: headers }).map(res => res.json());
 	}
 }
