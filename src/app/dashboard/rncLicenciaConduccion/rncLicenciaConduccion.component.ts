@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Router} from '@angular/router'
-import { RncLicenciaConduccionService } from '../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../services/login.service';
 import { TipoIdentificacionService } from '../../services/tipoIdentificacion.service';
 import { SedeOperativaService } from '../../services/sedeOperativa.service';
 import { CiudadanoService } from '../../services/ciudadano.service';
+import { RncLicenciaConduccionService } from '../../services/rncLicenciaConduccion.service';
 import { RncLicenciaConduccion } from './rncLicenciaConduccion.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
