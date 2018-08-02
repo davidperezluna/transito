@@ -52,9 +52,13 @@ export class NewRnrsComponent implements OnInit {
   public identificacionApoderado=false;
   public apoderado:any=false;
   public apoderadoEncontrado=1
-  
+  public moduloId = 5;
   public cantidadSustrato = 1;
-
+  public datos = {
+    'moduloId': null,
+    'id': null,
+    'vehiculoId': null,
+  };
 constructor(
   private _TramiteSolicitudService: TramiteSolicitudService,
   private _loginService: LoginService,
@@ -110,7 +114,10 @@ constructor(
 
   changedFactura(id){
     if (id) {
-      this._tramiteFacturaService.getTramiteShowFactura(id).subscribe(
+      this.datos.id = id;
+      this.datos.moduloId = this.moduloId;
+      this.datos.vehiculoId = this.vehiculo.id;
+      this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
       response => {
         this.isMatricula=false;
         this.isTramites = true;
@@ -413,7 +420,7 @@ constructor(
     let identificacion = {
   'numeroIdentificacion' : this.identificacionApoderado,
     };
-    this._ciudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+    this._ciudadanoService.searchByIdentificacion(token, identificacion).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){
