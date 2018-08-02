@@ -51,6 +51,7 @@ import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
 import { MparqGruaCiudadanoModule } from './mparqGruaCiudadano/mparqGruaCiudadano.module';
 import { MparqEntradaModule } from './mparqEntrada/mparqEntrada.module';
 import { MparqSalidaModule } from './mparqSalida/mparqSalida.module';
+import { MparqPatioModule } from './mparqPatio/mparqPatio.module';
 
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
@@ -153,6 +154,7 @@ import {RightsidebarComponent} from '../shared';
       MparqGruaCiudadanoModule,
       MparqEntradaModule,
       MparqSalidaModule,
+      MparqPatioModule,
       MpersonalFuncionarioModule,
       MpersonalTipoContratoModule,
       MpersonalTalonarioModule,

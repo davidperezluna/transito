@@ -49,6 +49,7 @@ import { MparqGruaRoutes } from './mparqGrua/mparqGrua.routes';
 import { MparqGruaCiudadanoRoutes } from './mparqGruaCiudadano/mparqGruaCiudadano.routes';
 import { MparqEntradaRoutes } from './mparqEntrada/mparqEntrada.routes';
 import { MparqSalidaRoutes } from './mparqSalida/mparqSalida.routes';
+import { MparqPatioRoutes } from './mparqPatio/mparqPatio.routes';
 
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
 import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
@@ -138,6 +139,7 @@ export const DashboardRoutes: Route[] = [
         ...MparqGruaRoutes,
         ...MparqEntradaRoutes,
         ...MparqSalidaRoutes,
+        ...MparqPatioRoutes,
         ...MparqGruaCiudadanoRoutes,
         ...MpersonalFuncionarioRoutes,
         ...MpersonalTipoContratoRoutes,
