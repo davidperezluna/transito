@@ -39,8 +39,9 @@
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Modulo <b class="text-danger" ng-disabled="tramitesValor" >*</b></label>
+                            <label>Modulo <b class="text-danger" >*</b></label>
                             <ng-select
+                                [disabled]="!tramitesValor"
                                 [multiple]="false"
                                 [options]="modulos"
                                 [(ngModel)]="moduloSelected"

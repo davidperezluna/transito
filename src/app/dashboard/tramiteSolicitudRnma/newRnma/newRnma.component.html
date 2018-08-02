@@ -328,10 +328,13 @@
                     <div class="tab-pane" id="44" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-certificadoTradicion [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-certificadoTradicion>
                     </div>
-                    <!-- <div class="tab-pane" id="45" role="tabpanel" *ngIf='ciudadano'>
+                    <div class="tab-pane" id="59" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-levantamiento-alerta-prenda [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-levantamiento-alerta-prenda>
-                    </div> -->
+                    </div>
 
+                    <div class="tab-pane" id="60" role="tabpanel" *ngIf='ciudadano'>
+                        <appRnma-inscripcion-alerta-prenda [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-inscripcion-alerta-prenda>
+                    </div>
                 </div>
             </div>
         </div>
