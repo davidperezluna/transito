@@ -251,6 +251,10 @@
 
                         </div>
                         <div class="card-footer">
+                            <button (click)="onCancelarTraspaso()" class="btn btn-default">
+                                <i class="fa fa-times"></i>
+                                Cancelar
+                            </button>
                             <button (click)="btnRetefunete()" [disabled]='vendedores == 0' class="btn btn-primary pull-right">Aceptar</button>
                         </div>
                     </div>
@@ -266,8 +270,9 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let tramiteValor of tramitesValor; let i = index">
-                                <td>{{tramiteValor.nombre}}</td>
-                                <td>{{tramiteValor.valor}}</td>
+                                <td >{{tramiteValor.nombre}}</td>
+                                <td *ngIf='tramiteValor.valor'>{{tramiteValor.valor}}</td>
+                                <td *ngIf='!tramiteValor.valor'>0</td>
                                 <td>
                                     <button (click)="deleteTramiteValor(tramiteValor)"  class="btn btn-xs btn-danger" type="button">
                                         <i class="fa fa-trash"></i>

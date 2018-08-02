@@ -290,7 +290,7 @@
                         </div>
 
                         <div class="tab-pane" id="21" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRna-cambio-motor *ngIf="tramiteSelected == 24" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
+                            <appRna-cambio-motor (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
                         </div>
                         
                         <div class="tab-pane" id="10" role="tabpanel" *ngIf='ciudadano'> 
