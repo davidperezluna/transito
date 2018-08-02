@@ -17,7 +17,6 @@ export class LineaService {
 	}
 
 	register(linea,token){
-		
 		let json = JSON.stringify(linea);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

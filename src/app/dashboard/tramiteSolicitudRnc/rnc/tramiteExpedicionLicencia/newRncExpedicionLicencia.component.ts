@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { MpersonalFuncionarioService } from '../../../../services/mpersonalFuncionario.service';
+import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
+import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { PaisService } from '../../../../services/pais.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -28,30 +30,46 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public tipoCambioSelected: any;
     public categorias: string[];
+    public categoriaSelected: any;
     public datos = {
         'tramiteFactura': null,
-        'categoria': null,
-        'licenciaConduccion': null,
+        'numeroLicenciaConduccion': null,
         'numeroRunt': null,
-        'vigencia': null,
+        'fechaExpedicion': null,
         'documentacion': null,
         'paisId': null,
+        'categoriaId': null,
         'claseId': null,
         'servicioId': null,
         'ciudadanoId': null,
+        'sedeOperativaId': null,
     };
 
     constructor(
         private _LoginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
         private _ClaseService: ClaseService,
         private _ServicioService: ServicioService,
         private _CiudadanoService: CiudadanoService,
         private _PaisService: PaisService,
+        private _MpersonalFuncionarioService: MpersonalFuncionarioService,
+        private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
+        private _RncLicenciaConduccionService: RncLicenciaConduccionService,
     ) { }
 
     ngOnInit() {
-        this.categorias = ['A2'];
+        this._CfgLicenciaConduccionCategoriaService.select().subscribe(
+            response => {
+                this.categorias = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
 
         this._ClaseService.getClaseSelect().subscribe(
             response => {
@@ -96,17 +114,61 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         );
     }
     
-    enviarTramite() {
+    onEnviarTramite() {
         let token = this._LoginService.getToken();
-        
-        this.datos.tramiteFactura = 1;
-        this.datos.claseId = this.claseSelected;
-        this.datos.servicioId = this.servicioSelected;
-        this.datos.paisId = this.paisSelected;
-        this.datos.ciudadanoId = this.solicitante.id;
 
-        this.readyTramite.emit(this.datos);
+        let identity = this._LoginService.getIdentity();
+
+        this._MpersonalFuncionarioService.searchLogin(identity, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.datos.sedeOperativaId = response.data.sedeOperativa.id;
+                    //Verificar la posibilidad de insertar solo la factura y/o el tramite
+                    this.datos.tramiteFactura = 1;
+                    this.datos.categoriaId = this.categoriaSelected;
+                    this.datos.claseId = this.claseSelected;
+                    this.datos.servicioId = this.servicioSelected;
+                    this.datos.paisId = this.paisSelected;
+                    this.datos.ciudadanoId = this.solicitante.id;
+
+                    this._RncLicenciaConduccionService.register(this.datos, token).subscribe(
+                        response => {
+                            if (response.status == 'success') {
+                                this.readyTramite.emit(this.datos);
+                            } else {
+                                swal({
+                                    type: 'warning',
+                                    title: 'Alerta!',
+                                    text: "No se registro el trámite."
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        }
+                    );
+                }else{
+                    swal({
+                        type: 'warning',
+                        title: 'Alerta!',
+                        text: "Usted no tiene permisos para este trámite."
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
     }
+
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
