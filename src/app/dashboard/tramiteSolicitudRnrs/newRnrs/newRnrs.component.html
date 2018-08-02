@@ -318,6 +318,14 @@
                             <appRnrs-traspaso-indeterminada [vehiculo] = "vehiculo" [factura] = "factura" [ciudadano] = "ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-traspaso-indeterminada>
                         </div>
 
+                        <div class="tab-pane" id="63" role="tabpanel" *ngIf='ciudadano'>
+                            <appRnrs-levantamiento-alerta-prenda [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-levantamiento-alerta-prenda>
+                        </div>
+                        
+                        <div class="tab-pane" id="62" role="tabpanel" *ngIf='ciudadano'>
+                            <appRnrs-inscripcion-alerta-prenda [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-inscripcion-alerta-prenda>
+                        </div>
+
                     </div>
                 </div>
             </div>
