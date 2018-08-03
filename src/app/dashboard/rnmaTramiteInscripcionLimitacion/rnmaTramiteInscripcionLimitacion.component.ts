@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { RnmaTramiteLimitacionService } from '../../services/rnmaTramiteLimitacion.service';
+import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 import { RnmaTramiteInscripcionLimitacion } from './rnmaTramiteInscripcionLimitacion.modelo';
 import { Ciudadano } from '../ciudadano/ciudadano.modelo';
@@ -14,7 +14,7 @@ declare var $: any;
 })
 export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
   public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
-  public RnmaTramiteLimitacionService:any;
+  public TramiteLimitacionService:any;
   public errorMessage;
   public respuesta;
   public tramitesInscripcion;
