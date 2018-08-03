@@ -19,8 +19,8 @@ export class MparqPatioService {
         return this._http.get(this.url + "/").map(res => res.json());
     }
 
-    register(smlmv, token) {
-        let json = JSON.stringify(smlmv);
+    register(datos, token) {
+        let json = JSON.stringify(datos);
         let params = "json=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/new", params, { headers: headers }).map(
@@ -44,8 +44,8 @@ export class MparqPatioService {
             .map(res => res.json());
     }
 
-    edit(smlmv, token) {
-        let json = JSON.stringify(smlmv);
+    edit(datos, token) {
+        let json = JSON.stringify(datos);
         let params = "json=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/edit", params, { headers: headers }).map(

@@ -13,7 +13,7 @@ export class MparqPatioComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public smlmvs;
+	public patios;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
@@ -21,7 +21,7 @@ export class MparqPatioComponent implements OnInit {
   public smlmv: MparqPatio;
 
   constructor(
-    private _InfraccionCategoriaService: MparqPatioService,
+    private _PatioService: MparqPatioService,
 		private _loginService: LoginService,
     ){}
     
@@ -40,9 +40,9 @@ export class MparqPatioComponent implements OnInit {
       ) {
       }
     })
-    this._InfraccionCategoriaService.index().subscribe(
+    this._PatioService.index().subscribe(
 				response => {
-          this.smlmvs = response.data;
+          this.patios = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -101,7 +101,7 @@ export class MparqPatioComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._InfraccionCategoriaService.delete(token,id).subscribe(
+        this._PatioService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

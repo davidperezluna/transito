@@ -17,12 +17,11 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public sustratos: any;
     public sustratoSelected: any;
-    public numeroRunt: any;
-    public documentacion: any;
     public entregada = false;
     public datos = {
-        'sustrato': null,
+        'numeroLicencia': null,
         'numeroRunt': null,
+        'sustrato': null,
         'documentacion': null,
         'entregada': null,
         'tramiteFactura': null,
@@ -34,30 +33,10 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
         private _SustratoService: SustratoService,
     ) { }
 
-    ngOnInit() {
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
+    ngOnInit() {}
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-    }
-
-   
-    
-    enviarTramite() {
-        this.datos.sustrato = this.sustratoSelected;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.documentacion = this.documentacion;
-        this.datos.entregada = this.entregada;
-        this.datos.tramiteFactura =28;
+    onEnviarTramite() {
+        this.datos.tramiteFactura = 28;
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){
