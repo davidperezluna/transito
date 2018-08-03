@@ -70,8 +70,9 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
         );
     }
 
-    enviarTramite() {
-        this.vehiculo.servicioId = this.vehiculo.servicio.id
+    onEnviarTramite() {
+        this.readyTramite.emit(this.datos);
+        /*this.vehiculo.servicioId = this.vehiculo.servicio.id
         this.vehiculo.municipioId = this.vehiculo.municipio.id
         this.vehiculo.lineaId = this.vehiculo.linea.id
         this.vehiculo.colorId = this.vehiculo.color.id
@@ -82,7 +83,7 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
         this.vehiculo.servicioId = this.vehiculo.servicio.id
         this.vehiculo.cancelado = true
         this.datos.tramiteFactura = 14;
-        console.log(this.vehiculo);
+
         
         let token = this._loginService.getToken();
         this._VehiculoService.editVehiculo(this.vehiculo, token).subscribe(
@@ -99,9 +100,7 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-            });
-
-
+            });*/
     }
     onCancelar() {
         this.cancelarTramite.emit(true);

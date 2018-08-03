@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public smlmv: MparqPatio;
+public patio: MparqPatio;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _SmlmvService: MparqPatioService,
+  private _PatioService: MparqPatioService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.smlmv = new MparqPatio(null, null, null);
+    this.patio = new MparqPatio(null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);
@@ -29,22 +29,20 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    console.log(this.smlmv);
-		this._SmlmvService.register(this.smlmv,token).subscribe(
+		this._PatioService.register(this.patio,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: 'El smlmv '+  +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

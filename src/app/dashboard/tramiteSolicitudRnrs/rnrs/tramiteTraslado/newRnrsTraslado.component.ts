@@ -8,7 +8,7 @@ import {VehiculoService} from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2'; 
 
 @Component({
-  selector: 'app-new-trasladoRnrs',
+  selector: 'appRnrs-traslado',
   templateUrl: './newRnrsTraslado.component.html'  
 })
 export class NewTrasladoComponent implements OnInit {

@@ -44,22 +44,21 @@ export class NewRnrsTransformacionComponent implements OnInit {
         };
     }
 
-    enviarTramite() {
+    onEnviarTramite() {
         let token = this._loginService.getToken();
         this.datos.idVehiculo = this.vehiculo.id;
         this._RemolqueService.transformacionVehiculoRemolque(this.datos, token).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
+                if (response.status == 'success') {
                     this.datos.tramiteFactura = 10;
                     this.readyTramite.emit(this.datos);
                     this.ngOnInit();
                 }
-                else if (this.respuesta.status == "error") {
+                else if (response.status == "error") {
                     swal({
                         type: 'error',
-                        title: 'Oops...',
-                        text: this.respuesta.msj
+                        title: 'Atención!',
+                        text: response.message
                     })
                 }
                 error => {
