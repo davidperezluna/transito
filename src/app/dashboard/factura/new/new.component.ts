@@ -162,6 +162,7 @@ constructor(
       }
     );
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
@@ -342,6 +343,7 @@ constructor(
               this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
               this.tramitesValor.push(
                 {
+                  'idTramitePrecio': this.tramitePrecio.id,
                   'nombre': this.tramitePrecio.nombre,
                   'valor': this.tramitePrecio.valorTotal
                 }
@@ -439,6 +441,7 @@ constructor(
               this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
               this.tramitesValor.push(
                 {
+                  'idTramitePrecio': this.tramitePrecio.id,
                   'nombre': this.tramitePrecio.nombre,
                   'valor': this.tramitePrecio.valorTotal
                 }
@@ -463,6 +466,7 @@ constructor(
           this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
           this.tramitesValor.push(
             {
+              'idTramitePrecio': this.tramitePrecio.id,
               'nombre': this.tramitePrecio.nombre,
               'valor': this.tramitePrecio.valorTotal
             }

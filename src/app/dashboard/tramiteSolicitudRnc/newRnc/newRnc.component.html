@@ -69,7 +69,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index"> 
-                            <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.id}}" role="tab">
+                            <a class="nav-link" data-toggle="tab" href="#{{ tramiteFactura.tramitePrecio.tramite.formulario }}" role="tab">
                                 <small>{{ tramiteFactura.tramitePrecio.nombre }}</small>
                                 <i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i>
                             </a> 
@@ -90,27 +90,27 @@
                             <appRnc-sustrato [factura] = "factura"  [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato>
                         </div>
 
-                        <div class="tab-pane" id="1" role="tabpanel"> 
+                        <div class="tab-pane" id="rnc-expedicionlicencia" role="tabpanel"> 
                             <appRnc-expedicion-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
                         </div>
 
-                        <div class="tab-pane" id="2" role="tabpanel">
+                        <div class="tab-pane" id="rnc-expedicioncambiodocumento" role="tabpanel">
                             <appRnc-expedicion-licencia-cambio-documento [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
                         </div>
 
-                        <div class="tab-pane" id="3" role="tabpanel"> 
+                        <div class="tab-pane" id="rnc-duplicadolicencia" role="tabpanel"> 
                             <appRnc-duplicado-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
                         </div>
 
-                        <div class="tab-pane" id="4" role="tabpanel"> 
+                        <div class="tab-pane" id="rnc-recategorizacionabajo" role="tabpanel"> 
                             <appRnc-recategorizacion-licencia-abajo [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-abajo>
                         </div>
 
-                        <div class="tab-pane" id="5" role="tabpanel"> 
+                        <div class="tab-pane" id="rnc-recategorizacionarriba" role="tabpanel"> 
                             <appRnc-recategorizacion-licencia-arriba [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
                         </div>
 
-                        <div class="tab-pane" id="6" role="tabpanel"> 
+                        <div class="tab-pane" id="rnc-refrendacionlicencia" role="tabpanel"> 
                             <appRnc-refrendacion-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-refrendacion-licencia>
                         </div>
                     </div>
