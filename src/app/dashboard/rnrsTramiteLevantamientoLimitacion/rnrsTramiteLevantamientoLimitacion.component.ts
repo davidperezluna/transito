@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../services/vehiculo.service';
-import { RnaTramiteLevantamientoLimitacion } from './rnaTramiteLevantamientoLimitacion.modelo';
+import { RnrsTramiteLevantamientoLimitacion } from './rnrsTramiteLevantamientoLimitacion.modelo';
 import { Ciudadano } from '../ciudadano/ciudadano.modelo';
 
 import { LoginService } from '../../services/login.service';
@@ -11,10 +11,10 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnaTramiteLevantamientoLimitacion.component.html'
+  templateUrl: './rnrsTramiteLevantamientoLimitacion.component.html'
 })
-export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
-  public rnaTramiteLevantamientoLimitacion: RnaTramiteLevantamientoLimitacion;
+export class RnrsTramiteLevantamientoLimitacionComponent implements OnInit {
+  public rnrsTramiteLevantamientoLimitacion: RnrsTramiteLevantamientoLimitacion;
   public TramiteLimitacionService:any;
   public errorMessage;
   public respuesta;
@@ -36,6 +36,7 @@ export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -51,7 +52,7 @@ export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
       }
     })
     let datos = {
-      'moduloId': 1,
+      'moduloId': 5,
     };
     this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
       response => {
@@ -103,7 +104,7 @@ export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
     let token = this._loginService.getToken();
     let datos = {
       'placa': this.placa,
-      'modulo': 1
+      'moduloId': 5,
     };
 
     this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(

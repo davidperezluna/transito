@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
-import { RnmaTramiteInscripcionLimitacion } from './rnmaTramiteInscripcionLimitacion.modelo';
+import { RnrsTramiteInscripcionLimitacion } from './rnrsTramiteInscripcionLimitacion.modelo';
 import { Ciudadano } from '../ciudadano/ciudadano.modelo';
 
 import { LoginService } from '../../services/login.service';
@@ -10,10 +10,10 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnmaTramiteInscripcionLimitacion.component.html'
+  templateUrl: './rnrsTramiteInscripcionLimitacion.component.html'
 })
-export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
-  public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
+export class RnrsTramiteInscripcionLimitacionComponent implements OnInit {
+  public rnrsTramiteInscripcionLimitacion: RnrsTramiteInscripcionLimitacion;
   public TramiteLimitacionService:any;
   public errorMessage;
   public respuesta;
@@ -45,7 +45,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
       }
     })
     let datos = {
-      'moduloId': 3,
+      'moduloId': 5,
     };
     this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
       response => {

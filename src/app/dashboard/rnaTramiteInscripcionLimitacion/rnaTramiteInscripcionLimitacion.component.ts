@@ -13,7 +13,7 @@ declare var $: any;
   templateUrl: './rnaTramiteInscripcionLimitacion.component.html'
 })
 export class RnaTramiteInscripcionLimitacionComponent implements OnInit {
-  public rnmaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
+  public rnaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
   public TramiteLimitacionService:any;
   public errorMessage;
   public respuesta;
@@ -30,6 +30,9 @@ export class RnaTramiteInscripcionLimitacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let datos = {
+      'moduloId': 1,
+    };
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -44,7 +47,7 @@ export class RnaTramiteInscripcionLimitacionComponent implements OnInit {
       ) {
       }
     })
-    this._VehiculoLimitacionService.getVehiculoLimitacion().subscribe(
+    this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
       response => {
         if (response) {
 
