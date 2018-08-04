@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
-import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.service';
+import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
 import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
@@ -11,7 +11,7 @@ import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { RnaTramiteInscripcionLimitacion } from '../rnaTramiteInscripcionLimitacion.modelo';
+import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
 import swal from 'sweetalert2';
 
@@ -21,7 +21,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public rnaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
+  public msvRegistroIpat: MsvRegistroIpat;
   public vehiculoLimitacion: any;
   public errorMessage;
   public respuesta;
@@ -64,7 +64,7 @@ export class NewComponent implements OnInit {
   }
 
   constructor(
-    private _TramiteInscripcionLimitacionService: TramiteLimitacionService,
+    private _MsvRegistroIpatService: MsvRegistroIpatService,
     private _VehiculoLimitacionService: VehiculoLimitacionService,
     private _VehiculoService: VehiculoService,
     private _CiudadanoService: CiudadanoService,
@@ -79,7 +79,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.rnaTramiteInscripcionLimitacion = new RnaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
@@ -122,19 +122,6 @@ export class NewComponent implements OnInit {
       }
     );
 
-    // this._MunicipioService.getMunicipioSelect().subscribe(
-    //   response => {
-    //     this.municipios = response;
-    //   },
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if (this.errorMessage != null) {
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
     this._DepartamentoService.getDepartamentoSelect().subscribe(
       response => {
         this.departamentos = response;
@@ -202,20 +189,20 @@ export class NewComponent implements OnInit {
   enviarTramite() {
     let token = this._loginService.getToken();
 
-    this.rnaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
-    this.rnaTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
-    this.rnaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
-    this.rnaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
-    this.rnaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
-    this.rnaTramiteInscripcionLimitacion.causalLimitacionId = this.causalLimitacionSelected;
-    this.rnaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
-    this.rnaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
+    this.msvRegistroIpat.departamentoId = this.departamentoSelected;
+    this.msvRegistroIpat.entidadJudicialId = this.entidadJudicialSelected;
+    this.msvRegistroIpat.limitacionId = this.limitacionSelected;
+    this.msvRegistroIpat.municipioId = this.municipioSelected;
+    this.msvRegistroIpat.tipoProcesoId = this.tipoProcesoSelected;
+    this.msvRegistroIpat.causalLimitacionId = this.causalLimitacionSelected;
+    this.msvRegistroIpat.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
+    this.msvRegistroIpat.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
     let data =[
-      {'datosLimitacion': this.rnaTramiteInscripcionLimitacion},
+      {'datosLimitacion': this.msvRegistroIpat},
 
       {'vehiculosLimitacionArray': this.datos2}
     ]
-    this._TramiteInscripcionLimitacionService.register(data, token).subscribe(
+    this._MsvRegistroIpatService.register(data, token).subscribe(
       response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -233,7 +220,7 @@ export class NewComponent implements OnInit {
           
           swal({
             title: 'Error!',
-            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
+            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.msvRegistroIpat.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -257,7 +244,7 @@ export class NewComponent implements OnInit {
     this.verSeleccion = this.opcionSeleccionado;
   }
 
-  onKeyPlaca() {
+  onKeyIpat() {
     let token = this._loginService.getToken();
     let datos = {
       'placa': this.placa,

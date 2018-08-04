@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
+import { MsvRegistroIpatService } from '../../services/msvRegistroIpat.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
-import { RnmaTramiteInscripcionLimitacion } from './rnmaTramiteInscripcionLimitacion.modelo';
+import { MsvRegistroIpat } from './msvRegistroIpat.modelo';
 import { Ciudadano } from '../ciudadano/ciudadano.modelo';
 
 import { LoginService } from '../../services/login.service';
@@ -10,10 +10,10 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnmaTramiteInscripcionLimitacion.component.html'
+  templateUrl: './msvRegistroIpat.component.html'
 })
-export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
-  public rnmaTramiteInscripcionLimitacion: RnmaTramiteInscripcionLimitacion;
+export class MsvRegistroIpatComponent implements OnInit {
+  public msvRegistroIpat: MsvRegistroIpat;
   public TramiteLimitacionService:any;
   public errorMessage;
   public respuesta;
@@ -25,11 +25,14 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
   public tramiteInscripcion: any;
 
   constructor(
-    private _VehiculoLimitacionService: VehiculoLimitacionService,
+    private _MsvRegistroIpatService: MsvRegistroIpatService,
     private _loginService: LoginService,
   ) { }
 
   ngOnInit() {
+    let datos = {
+      'moduloId': 1,
+    };
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -44,10 +47,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
       ) {
       }
     })
-    let datos = {
-      'moduloId': 3,
-    };
-    this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
+    this._MsvRegistroIpatService.getMsvRegistroIpat().subscribe(
       response => {
         if (response) {
 
@@ -114,7 +114,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._VehiculoLimitacionService.deleteVehiculoLimitacion(token, id).subscribe(
+        this._MsvRegistroIpatService.deleteMsvRegistroIpat(token, id).subscribe(
           response => {
             swal({
               title: 'Eliminado!',

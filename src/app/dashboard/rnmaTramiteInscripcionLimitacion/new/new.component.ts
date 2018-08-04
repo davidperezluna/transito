@@ -259,10 +259,11 @@ export class NewComponent implements OnInit {
 
   onKeyPlaca() {
     let token = this._loginService.getToken();
-    let placa = {
+    let datos = {
       'placa': this.placa,
+      'moduloId': 3,
     };
-    this._VehiculoService.showVehiculoPlaca(token, placa).subscribe(
+    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {

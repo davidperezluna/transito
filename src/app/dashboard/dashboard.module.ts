@@ -63,8 +63,11 @@ import { LimitacionModule } from './limitacion/limitacion.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
+import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
+import { RnrsTramiteLevantamientoLimitacionModule } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.module';
 import { RnaTramiteInscripcionLimitacionModule } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.module';
 import { RnaTramiteLevantamientoLimitacionModule } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.module';
+import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
@@ -193,8 +196,11 @@ import {RightsidebarComponent} from '../shared';
       CfgTipoProcesoModule,
       RnmaTramiteInscripcionLimitacionModule,
       RnmaTramiteLevantamientoLimitacionModule,
+      RnrsTramiteInscripcionLimitacionModule,
+      RnrsTramiteLevantamientoLimitacionModule,
       RnaTramiteInscripcionLimitacionModule,
       RnaTramiteLevantamientoLimitacionModule,
+      MsvRegistroIpatModule,
       CfgValorVehiculoModule,
       RnrsPreregistroModule,
       ReporteModule,

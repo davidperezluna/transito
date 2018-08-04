@@ -11,7 +11,7 @@ import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { RnaTramiteInscripcionLimitacion } from '../rnaTramiteInscripcionLimitacion.modelo';
+import { RnrsTramiteInscripcionLimitacion } from '../rnrsTramiteInscripcionLimitacion.modelo';
 import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
 import swal from 'sweetalert2';
 
@@ -21,7 +21,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public rnaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
+  public rnrsTramiteInscripcionLimitacion: RnrsTramiteInscripcionLimitacion;
   public vehiculoLimitacion: any;
   public errorMessage;
   public respuesta;
@@ -79,7 +79,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.rnaTramiteInscripcionLimitacion = new RnaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.rnrsTramiteInscripcionLimitacion = new RnrsTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
@@ -202,16 +202,16 @@ export class NewComponent implements OnInit {
   enviarTramite() {
     let token = this._loginService.getToken();
 
-    this.rnaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
-    this.rnaTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
-    this.rnaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
-    this.rnaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
-    this.rnaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
-    this.rnaTramiteInscripcionLimitacion.causalLimitacionId = this.causalLimitacionSelected;
-    this.rnaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
-    this.rnaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
+    this.rnrsTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
+    this.rnrsTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
+    this.rnrsTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
+    this.rnrsTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
+    this.rnrsTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
+    this.rnrsTramiteInscripcionLimitacion.causalLimitacionId = this.causalLimitacionSelected;
+    this.rnrsTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
+    this.rnrsTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
     let data =[
-      {'datosLimitacion': this.rnaTramiteInscripcionLimitacion},
+      {'datosLimitacion': this.rnrsTramiteInscripcionLimitacion},
 
       {'vehiculosLimitacionArray': this.datos2}
     ]
@@ -233,7 +233,7 @@ export class NewComponent implements OnInit {
           
           swal({
             title: 'Error!',
-            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
+            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnrsTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -261,7 +261,7 @@ export class NewComponent implements OnInit {
     let token = this._loginService.getToken();
     let datos = {
       'placa': this.placa,
-      'moduloId': 1,
+      'moduloId': 5,
     };
     this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
