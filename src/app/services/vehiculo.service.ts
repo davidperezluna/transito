@@ -86,7 +86,6 @@ export class VehiculoService {
 
 	}
 
-<<<<<<< HEAD
 	editCombustibleVehiculo(datos,token){
 
 		let json = JSON.stringify(datos);
@@ -97,10 +96,7 @@ export class VehiculoService {
 
 	}
 
-	editVehiculoColor(vehiculo,token){
-=======
 	editVehiculoColor(vehiculo, token){
->>>>>>> b29a8347de17bba638aae244529c8c1a21a1eb94
  
 		let json = JSON.stringify(vehiculo);
 		let params = "json="+json+"&authorization="+token;
