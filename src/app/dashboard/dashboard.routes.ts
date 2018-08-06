@@ -88,10 +88,13 @@ import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
 import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
+import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
 import { RnaTramiteInscripcionLimitacionRoutes } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.routes';
 import { RnaTramiteLevantamientoLimitacionRoutes } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.routes';
+import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
+import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
@@ -179,10 +182,13 @@ export const DashboardRoutes: Route[] = [
         //...MsvTCAsignacionRoutes, 
         ...ConceptoParametroRoutes,  
         ...RnmaRegistroMaquinariaRoutes,
+        ...MsvRegistroIpatRoutes,
         ...TramiteInscripcionLimitacionRoutes,
         ...TramiteLevantamientoLimitacionRoutes,
         ...RnaTramiteInscripcionLimitacionRoutes,
         ...RnaTramiteLevantamientoLimitacionRoutes,
+        ...RnrsTramiteInscripcionLimitacionRoutes,
+        ...RnrsTramiteLevantamientoLimitacionRoutes,
         ...rnaAsignacionInsumosRoutes ,
         ...LimitacionRoutes,
         ...CfgTipoProcesoRoutes,

@@ -50,7 +50,10 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
       ) {
       }
     })
-    this._VehiculoLimitacionService.getVehiculoLimitacion().subscribe(
+    let datos = {
+      'moduloId': 3,
+    };
+    this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
       response => {
         if (response) {
 
@@ -98,16 +101,17 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
 
   onKeyPlaca() {
     let token = this._loginService.getToken();
-    let placa = {
+    let datos = {
       'placa': this.placa,
+      'moduloId': 3,
     };
 
-    this._VehiculoService.showVehiculoPlaca(token, placa).subscribe(
+    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
           this.limitacionVehiculoEncontrada = 4;
-          this._VehiculoLimitacionService.getTramiteLimitacionPlaca(placa, token).subscribe(
+          this._VehiculoLimitacionService.getTramiteLimitacionPlaca(datos, token).subscribe(
             response => {
               this.respuesta = response;
               if (this.respuesta.status == 'success') {

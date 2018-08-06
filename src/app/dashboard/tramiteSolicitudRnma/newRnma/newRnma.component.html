@@ -232,7 +232,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index">
-                        <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.id}}" role="tab">{{tramiteFactura.tramitePrecio.nombre}}
+                        <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.formulario}}" role="tab">{{tramiteFactura.tramitePrecio.nombre}}
                             <i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i>
                         </a>
                         <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->

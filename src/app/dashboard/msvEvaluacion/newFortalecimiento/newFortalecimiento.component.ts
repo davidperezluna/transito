@@ -46,23 +46,6 @@ export class NewFortalecimientoComponent implements OnInit {
       }
     );
 
-    this._MsvVariableService.getVariable().subscribe(
-      response => {
-        this.msvVariables = response.data;
-        this.msvVariablesLength = this.msvVariables.length;        
-        if (this.msvVariables) {
-          //entra aquí si encuentra Parametro
-          console.log(this.msvVariables);
-          this.showT = true;
-      } else {
-          swal({
-              type: 'error',
-              title: 'Oops...',
-              text: '¡El parametro no tiene variables!'
-          })
-      }
-      }
-    );
   }
 
   onCancelar() {
