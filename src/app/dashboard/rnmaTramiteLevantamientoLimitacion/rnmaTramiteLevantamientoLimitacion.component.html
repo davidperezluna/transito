@@ -72,6 +72,7 @@
                       </td>
                     </tr>
                   </tbody>
+                      <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
                 </table>
               </div>
 
@@ -177,10 +178,6 @@
 
   </div>
 
-  <div class="card-footer" *ngIf="listaVehiculosPlacas">
-    <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
-    <button (click)="enviarTramite()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
-  </div>
   <!-- /.col -->
 </div>
 <!-- /.row -->

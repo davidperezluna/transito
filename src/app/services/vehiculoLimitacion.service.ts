@@ -11,9 +11,14 @@ export class VehiculoLimitacionService {
 
 	constructor(private _http: Http){}
 
-	getVehiculoLimitacion(){
-		
-		return this._http.get(this.url+"/").map(res => res.json());
+	getVehiculoLimitacion(datos){
+		let json = JSON.stringify(datos);
+		console.log(json);
+
+		let params = "json=" + json;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/", params, { headers: headers })
+			.map(res => res.json());
 	}
 
 	register(datos, token){

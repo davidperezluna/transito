@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
-import { RnmaTramiteLimitacionService } from '../../../services/rnmaTramiteLimitacion.service';
+import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
@@ -64,7 +64,7 @@ export class NewComponent implements OnInit {
   }
 
   constructor(
-    private _RnmaTramiteInscripcionLimitacionService: RnmaTramiteLimitacionService,
+    private _TramiteInscripcionLimitacionService: TramiteLimitacionService,
     private _VehiculoLimitacionService: VehiculoLimitacionService,
     private _VehiculoService: VehiculoService,
     private _CiudadanoService: CiudadanoService,
@@ -215,7 +215,7 @@ export class NewComponent implements OnInit {
 
       {'vehiculosLimitacionArray': this.datos2}
     ]
-    this._RnmaTramiteInscripcionLimitacionService.register(data, token).subscribe(
+    this._TramiteInscripcionLimitacionService.register(data, token).subscribe(
       response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -259,10 +259,11 @@ export class NewComponent implements OnInit {
 
   onKeyPlaca() {
     let token = this._loginService.getToken();
-    let placa = {
+    let datos = {
       'placa': this.placa,
+      'moduloId': 3,
     };
-    this._VehiculoService.showVehiculoPlaca(token, placa).subscribe(
+    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {

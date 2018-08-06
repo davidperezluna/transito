@@ -5,7 +5,7 @@
             <div class="card-header"><!-- .card-header -->
                 <h5 class="card-title"><!-- .card-title -->
                     <b class="text-uppercase">Validación de ingreso de comparendo</b> 
-                    <small class="pull-right">Los campos con<b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
+                    <small class="pull-right">Los campos con <b class="text-danger">*</b> son obligatorios</small>
                 </h5><!-- /.card-title -->
             </div><!-- /.card-header -->
             <div class="card-body"><!-- .card-body -->
@@ -187,7 +187,7 @@
                     <div class="form-group row" *ngIf='ciudadanoNoEncontrado'> 
                         <div class="col-xs-12 col-lg-3">
                             <label>Tipo Identificación</label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="departamentoId"></ng-select>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="tiposIdentificacion" required></ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3">
                             <label>Primer Nombre</label>
@@ -329,33 +329,19 @@
                     <div class="col-md-16" *ngIf='comparendo.inmovilizacion'>
                         <div class="row ">
                             <div class="col-xs-12 col-lg-4">
-                                <div class="form-group ">
+                                <div class="form-group">
                                     <label>Patio <b class="text-danger">*</b></label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.patio" name="numeroPatio" required  type="text">
+                                    <ng-select [multiple]="false" [options]="patios" [(ngModel)]="patioSelected" name="patios" required></ng-select>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <div class="form-group ">
-                                    <label>Dirección patio <b class="text-danger">*</b></label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.patioDireccion" name="patioDireccion" required  type="text">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <div class="form-group ">
-                                    <label>Numero Grúa <b class="text-danger">*</b></label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.numeroGrua" name="numeroGrua" required type="text">
+                                <div class="form-group">
+                                    <label>Grúa <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="gruas" [(ngModel)]="gruaSelected" name="gruas" required></ng-select>
                                 </div> 
                             </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="form-group ">
-                                    <label>Placa Grua <b class="text-danger">*</b></label>
-                                    <input class="form-control" [(ngModel)]="inmovilizacion.placaGrua" name="placaGrua" required  type="text">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="form-group ">
+                            <div class="col-xs-12 col-lg-4">
+                                <div class="form-group">
                                     <label>Numero Consecutivo <b class="text-danger">*</b></label>
                                     <input class="form-control" [(ngModel)]="inmovilizacion.numeroConsecutivo" name="numeroConsecutivo" required type="text">
                                 </div>
@@ -366,20 +352,16 @@
             </div>
 
             <div class="card">
-                <div class="card-header align-items-start justify-content-between flex">
-                    <div class="list-unstyled comment-list">
-                        <div class="media"> 
-                            <div class="media-body">
-                                <h6 class="mt-0 mb-1">Datos de infracción</h6>
-                                rellene los campos para finalizar
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-header">
+                    <h5 class="card-title"><!-- .card-title -->
+                        <b class="text-uppercase">Datos de infracción</b> 
+                        <small class="pull-right">rellene los campos para finalizar</small>
+                    </h5><!-- /.card-title -->
                 </div>
                 <div class="card-body">
                     <div class="row ">
                         <div class="col-lg-4 col-md-4">
-                            <div class="form-group ">
+                            <div class="form-group">
                                 <label>Fotomulta <b class="text-danger">*</b></label>
                                 <select class="form-control" [(ngModel)]="comparendo.fotomulta" name="fotomulta" required>
                                     <option value="1">Aplica</option>
@@ -388,19 +370,19 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <div class="form-group ">
+                            <div class="form-group">
                                 <label>Fecha notificación</label>
                                 <input class="form-control" [(ngModel)]="comparendo.fechaNotificacion" name="fechaNotificacion" type="date">
                             </div> 
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <div class="form-group ">
+                            <div class="form-group">
                                 <label>Grado Alcoholemia <span class="ai-lab"></span></label>
                                 <input class="form-control" [(ngModel)]="comparendo.gradoAlchoholemia" name="gradoAlchoholemia" type="text">
                             </div> 
                         </div>
                         <div class="col-lg-12">
-                            <div class="form-group ">
+                            <div class="form-group">
                                 <label>Descripción <span class="ai-lab"></span></label>
                                 <textarea class="form-control" [(ngModel)]="comparendo.descripcion" name="descripcion" type="textArea"></textarea>
                             </div> 

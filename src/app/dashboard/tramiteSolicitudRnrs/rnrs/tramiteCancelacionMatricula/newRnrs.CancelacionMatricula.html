@@ -11,93 +11,102 @@
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <form class="container"> 
-                <div class="row justify-content-center container">
-                    <div class="form-group row"> 
+                    <div class="form-group row">
                         <!-- lista de motivos -->
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Motivo de cancelación 
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Motivo de cancelación
                                 <span class="text-danger">*</span>
                             </label>
                             <select class="form-control" name="motivoCancelacionSelected" [(ngModel)]="datos.motivoCancelacion" required>
                                 <option value="Desaparición documental">Desaparición documental</option>
-                                <option value="Hurto o perdida definitiva" >Hurto o perdida definitiva</option>
-                                <option value="Exportación o reexportación" >Exportación o reexportación</option>
+                                <option value="Hurto o perdida definitiva">Hurto o perdida definitiva</option>
+                                <option value="Exportación o reexportación">Exportación o reexportación</option>
                                 <option value="Destrucción total por accidente transito">Destrucción total por accidente transito</option>
                                 <option value="Destrucción total por caso fortuito o fuerza mayor">Destrucción total por caso fortuito o fuerza mayor</option>
                                 <option value="Desintegración física">Desintegración física</option>
                             </select>
                         </div>
-                        <br>                        
-                        <div class="col-xs-6 col-lg-6"><br>
-                                <label>Fecha de hechos <strong class="text-danger">*</strong></label>
-                                <input class="form-control" [(ngModel)]="datos.fechaHechos" name="fechaHechos" type="date" required />
+                        <br>
+                        <div class="col-xs-6 col-lg-4">
+                            <label>Fecha de hechos
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.fechaHechos" name="fechaHechos" type="date" required />
                         </div>
-                        <div class="col-xs-6 col-lg-6"><br>
+                        <div class="col-xs-6 col-lg-4">
                             <label> Numero solicitud RUNT
                                 <span class="text-danger">*</span>
                             </label>
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="number" required />
                         </div>
                         <br>
-                        <div class="col-xs-12 col-lg-12" *ngIf="datos.motivoCancelacion != null"><br>
-                            <label><h5>Datos de soporte</h5></label>
+                        <div class="col-xs-12 col-lg-12" *ngIf="datos.motivoCancelacion != null">
+                            <label>
+                                <h5>Datos de soporte</h5>
+                            </label>
                         </div>
                         <br>
-                        <div class="col-xs-6 col-lg-6 form-group" *ngIf="datos.motivoCancelacion =='Desaparición documental' || datos.motivoCancelacion =='Destrucción total por accidente transito' || datos.motivoCancelacion =='Destrucción total por caso fortuito o fuerza mayor' || datos.motivoCancelacion =='Hurto o perdida definitiva'"><br>
-                                <label>Tipo de documento 
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input class="form-control" [(ngModel)]="datos.tipoDocumento" name="tipoDocumento" type="text" required/>                           
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desaparición documental' || datos.motivoCancelacion =='Destrucción total por accidente transito' || datos.motivoCancelacion =='Destrucción total por caso fortuito o fuerza mayor' || datos.motivoCancelacion =='Hurto o perdida definitiva'">
+                            <label>Tipo de documento
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.tipoDocumento" name="tipoDocumento" type="text" required/>
                         </div>
-                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desaparición documental' || datos.motivoCancelacion =='Destrucción total por accidente transito' || datos.motivoCancelacion =='Destrucción total por caso fortuito o fuerza mayor' || datos.motivoCancelacion =='Hurto o perdida definitiva'"><br>
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desaparición documental' || datos.motivoCancelacion =='Destrucción total por accidente transito' || datos.motivoCancelacion =='Destrucción total por caso fortuito o fuerza mayor' || datos.motivoCancelacion =='Hurto o perdida definitiva'">
                             <label>Número documento
                                 <span class="text-danger">*</span>
                             </label>
                             <input class="form-control" [(ngModel)]="datos.numeroDocumento" name="numeroDocumento" type="text" required />
                         </div>
-                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desaparición documental' || datos.motivoCancelacion =='Destrucción total por accidente transito' || datos.motivoCancelacion =='Destrucción total por caso fortuito o fuerza mayor' || datos.motivoCancelacion =='Hurto o perdida definitiva'"><br>
-                            <label>Fecha expedición<strong class="text-danger">*</strong></label>
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desaparición documental' || datos.motivoCancelacion =='Destrucción total por accidente transito' || datos.motivoCancelacion =='Destrucción total por caso fortuito o fuerza mayor' || datos.motivoCancelacion =='Hurto o perdida definitiva'">
+                            <label>Fecha expedición
+                                <strong class="text-danger">*</strong>
+                            </label>
                             <input class="form-control" [(ngModel)]="datos.fechaExpedicion" name="fechaExpedicion" type="date" required />
+                        </div>
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desaparición documental' || datos.motivoCancelacion =='Destrucción total por accidente transito' || datos.motivoCancelacion =='Destrucción total por caso fortuito o fuerza mayor' || datos.motivoCancelacion =='Hurto o perdida definitiva'">
+                            <label>Entidad que expide
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.entidad" name="entidad" type="text" required />
+                        </div>
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Exportación o reexportación'">
+                            <label>Fecha declaración
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.fechaDeclaracion" name="fechaDeclaracion" type="date" required />
+                        </div>
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Exportación o reexportación'">
+                            <label>Número de declaración
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.numeroDeclaracion" name="numeroDeclaracion" type="text" required />
+                        </div>
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desintegración física'">
+                            <label>Número de desintegración
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.numeroDesintegracion" name="numeroDesintegracion" type="text" required />
+                        </div>
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desintegración física'">
+                            <label>Nombre desintegradora
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.nombreDesintegradora" name="nombreDesintegradora" type="text" required />
+                        </div>
+                        <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desintegración física'">
+                            <label>Fecha de hechos
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.fechaHechosDesintegracion" name="fechaHechosDesintegracion" type="date" required
+                            />
+                        </div>
                     </div>
-                    <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desaparición documental' || datos.motivoCancelacion =='Destrucción total por accidente transito' || datos.motivoCancelacion =='Destrucción total por caso fortuito o fuerza mayor' || datos.motivoCancelacion =='Hurto o perdida definitiva'"><br>
-                        <label>Entidad que expide 
-                            <span class="text-danger">*</span>
-                        </label>
-                        <input class="form-control" [(ngModel)]="datos.entidad" name="entidad" type="text" required />
-                    </div>   
-                    <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Exportación o reexportación'"><br>
-                        <label>Fecha declaración<strong class="text-danger">*</strong></label>
-                        <input class="form-control" [(ngModel)]="datos.fechaDeclaracion" name="fechaDeclaracion" type="date" required />
-                </div>   
-                <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Exportación o reexportación'"><br>
-                    <label>Número de declaración
-                        <span class="text-danger">*</span>
-                    </label>
-                    <input class="form-control" [(ngModel)]="datos.numeroDeclaracion" name="numeroDeclaracion" type="text" required />
-                </div>           
-                <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desintegración física'"><br>
-                    <label>Número de desintegración
-                        <span class="text-danger">*</span>
-                    </label>
-                    <input class="form-control" [(ngModel)]="datos.numeroDesintegracion" name="numeroDesintegracion" type="text" required />
-                </div>
-                <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desintegración física'"><br>
-                    <label>Nombre desintegradora
-                        <span class="text-danger">*</span>
-                    </label>
-                    <input class="form-control" [(ngModel)]="datos.nombreDesintegradora" name="nombreDesintegradora" type="text" required />
-                </div>
-                <div class="col-xs-6 col-lg-6" *ngIf="datos.motivoCancelacion =='Desintegración física'"><br>
-                    <label>Fecha de hechos <strong class="text-danger">*</strong></label>
-                    <input class="form-control" [(ngModel)]="datos.fechaHechosDesintegracion" name="fechaHechosDesintegracion" type="date" required />
-                </div>
-                    </div>
-                </div>
-            </form>
+                </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="onEnviarTramite()" class="btn btn-primary">Enviar</button>
             </div>
         </div>
     </div> 

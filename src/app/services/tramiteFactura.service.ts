@@ -45,6 +45,10 @@ export class TramiteFacturaService {
 		return this._http.get(this.url + "/"+idFactura+"/select").map(res => res.json());
 	}
 
+	getTramitesByFacturaSelect(idFactura) {
+		return this._http.get(this.url + "/" + idFactura + "/tramites/by/factura/select").map(res => res.json());
+	}
+
 	getTramiteShowFactura(datos){
 		let json = JSON.stringify(datos);
 		let params = 'json=' + json;

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { RnmaTramiteLimitacionService } from '../../services/rnmaTramiteLimitacion.service';
+import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { RnmaTramiteLevantamientoLimitacion } from './rnmaTramiteLevantamientoLimitacion.modelo';
@@ -15,7 +15,7 @@ declare var $: any;
 })
 export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
   public rnmaTramiteLevantamientoLimitacion: RnmaTramiteLevantamientoLimitacion;
-  public RnmaTramiteLimitacionService:any;
+  public TramiteLimitacionService:any;
   public errorMessage;
   public respuesta;
   public tramitesLevantamiento;
@@ -50,7 +50,10 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
       ) {
       }
     })
-    this._VehiculoLimitacionService.getVehiculoLimitacion().subscribe(
+    let datos = {
+      'moduloId': 3,
+    };
+    this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
       response => {
         if (response) {
 
@@ -98,16 +101,17 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
 
   onKeyPlaca() {
     let token = this._loginService.getToken();
-    let placa = {
+    let datos = {
       'placa': this.placa,
+      'moduloId': 3,
     };
 
-    this._VehiculoService.showVehiculoPlaca(token, placa).subscribe(
+    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
           this.limitacionVehiculoEncontrada = 4;
-          this._VehiculoLimitacionService.getTramiteLimitacionPlaca(placa, token).subscribe(
+          this._VehiculoLimitacionService.getTramiteLimitacionPlaca(datos, token).subscribe(
             response => {
               this.respuesta = response;
               if (this.respuesta.status == 'success') {
@@ -174,8 +178,9 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
   }
 
   onCancelar() {
-    this.listaLimitacionVehiculo = true;
+    this.listaLimitacionVehiculo = false;
     this.limitacionVehiculoM = false;
+    this.limitacionVehiculoEncontrada = 1;
   }
 
   ver(limitacionVehiculoP: any): void {

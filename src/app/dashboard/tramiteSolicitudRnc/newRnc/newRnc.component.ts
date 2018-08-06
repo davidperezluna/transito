@@ -71,7 +71,7 @@ constructor(
             type: 'info',
           });
 
-          this._TramiteFacturaService.getTramiteShowFactura(this.factura.id).subscribe(
+          this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
             response => {
               let active = true;
               this.tramitesFactura = response;              
