@@ -12,6 +12,7 @@ import { TramitePrecioService } from '../../../services/tramitePrecio.service';
 import { DatePipe } from '@angular/common';
 import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import swal from 'sweetalert2';
+import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-new-factura',
@@ -533,7 +534,7 @@ constructor(
     }
     this._FacturaService.imprimir(datos,token).subscribe(
       response => {
-          this.respuesta = response; 
+          window.open(environment.uploadUrl+response);
       error => {
               this.errorMessage = <any>error;
           
