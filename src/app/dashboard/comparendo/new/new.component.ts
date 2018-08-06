@@ -11,6 +11,8 @@ import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { MparqPatioService } from '../../../services/mparqPatio.service';
+import { MparqGruaService } from '../../../services/mparqGrua.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -29,6 +31,10 @@ public agenteTransitoSelected: any;
 public municipios: any;
 public municipioSelected: any;
 public funcionario: any;
+public patios: any;
+public patioSelected: any;
+public gruas: any;
+public gruaSelected: any;
 public funcionarioReady = false;
 public sedeOperativaReady = false;
 public validado = false;
@@ -54,9 +60,11 @@ constructor(
   private _SedeOperativaService: SedeOperativaService,
   private _MunicipioService: MunicipioService,
   private _VechiculoService: VehiculoService,
-  private _ciudadanoService: CiudadanoService,
+  private _CiudadanoService: CiudadanoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: TipoIdentificacionService,
+  private _MparqPatioService: MparqPatioService,
+  private _MparqGruaService: MparqGruaService,
   ){}
 
   ngOnInit() {
@@ -67,21 +75,21 @@ constructor(
      'numeroIdentificacion' : this.identificacion,
    }; 
     this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this.inmovilizacion = new Inmovilizacion(null,null,null,null,null,null,null,null);
+    this.inmovilizacion = new Inmovilizacion(null, null, null, null, null, null);
 
     this._MpersonalFuncionarioService.selectAgentes().subscribe(
-        response => {
-          this.agentesTransito = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
+      response => {
+        this.agentesTransito = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
         }
-      );
+      }
+    );
   }
 
   onCancelar(){
@@ -177,6 +185,34 @@ constructor(
               }
             }
           );
+
+          this._MparqPatioService.select().subscribe(
+            response => {
+              this.patios = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+          this._MparqGruaService.select().subscribe(
+            response => {
+              this.gruas = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
         }else{
           swal({
             title: 'Atención!',
@@ -193,8 +229,7 @@ constructor(
             alert("Error en la petición"); 
           }
         }
-    }); 
-    
+    });
   }
 
   onKeyPlaca(){
@@ -285,7 +320,7 @@ constructor(
   })
     this.formCiudadano = true;
     let token = this._loginService.getToken();
-    this._ciudadanoService.searchByIdentificacion(token,this.identificacion).subscribe(
+    this._CiudadanoService.searchByIdentificacion(token,this.identificacion).subscribe(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
@@ -297,7 +332,7 @@ constructor(
             confirmButtonText: 'Aceptar'
           });
           
-          this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+          this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
             response => {
               this.tiposIdentificacion = response;
             }, 

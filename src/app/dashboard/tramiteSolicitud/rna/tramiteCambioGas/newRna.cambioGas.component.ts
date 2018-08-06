@@ -26,7 +26,10 @@ export class NewRnaCambioGasComponent implements OnInit {
     public tramiteRealizado: any;
     public vehiculo1;
     public combustibles;
-    public combustibleCambio;
+    public datos2 = {
+        'combustibleCambioId': null,
+        'vehiculoId': null,
+    };
     public datos = {
         'numeroCertificado': null,
         'fechaExpedicion': null,
@@ -39,6 +42,7 @@ export class NewRnaCambioGasComponent implements OnInit {
         'presion': null,
         'numeroRUNT': null,
     };
+    
 
     constructor(
         private _ColorService: ColorService,
@@ -63,17 +67,12 @@ export class NewRnaCambioGasComponent implements OnInit {
                 console.log(this.combustibles);
                 this.combustibles.data.forEach(element => { 
                     if(element.id == 4 ){
-                        this.combustibleCambio = element; 
-                        this.vehiculo1.combustible = this.combustibleCambio;
-                        console.log(this.combustibleCambio);
-                        console.log(this.vehiculo1);
+                        this.datos2.combustibleCambioId = element.id;
+                        this.datos2.vehiculoId = this.vehiculo1.id;
                         
                         
                     }                  
                 });
-                
-                if(this.respuesta.status == 'success'){
-                }
                 error => {
                         this.errorMessage = <any>error;
     
@@ -84,7 +83,7 @@ export class NewRnaCambioGasComponent implements OnInit {
                     }
             }
         );
-        this._VehiculoService.editVehiculo(this.vehiculo1,token).subscribe(
+        this._VehiculoService.editCombustibleVehiculo(this.datos2,token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

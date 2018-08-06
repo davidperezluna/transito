@@ -86,6 +86,16 @@ export class VehiculoService {
 
 	}
 
+	editCombustibleVehiculo(datos,token){
+
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 			return this._http.post(this.url+"/edit/combustible", params, {headers: headers})
+							  .map(res => res.json());
+
+	}
+
 	editVehiculoColor(vehiculo, token){
  
 		let json = JSON.stringify(vehiculo);

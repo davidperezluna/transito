@@ -127,6 +127,7 @@ export class NewRnmaComponent implements OnInit {
           let token = this._loginService.getToken();
 
           this.tramitesFactura = response;
+          console.log(response);
           this.tramitesFactura.forEach(tramiteFactura => {
             if (tramiteFactura.realizado == 0) {
               active = false;
@@ -164,7 +165,7 @@ export class NewRnmaComponent implements OnInit {
               }
             );
           } else {
-            console.log(this.isMatricula);
+            
 
             if (this.isMatricula) {
               this.factura = response[0].factura;
