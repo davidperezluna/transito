@@ -7,7 +7,7 @@ import { MsvRegistroIpatService } from '../../services/msvRegistroIpat.service';
  import { NewComponent } from './new/new.component';
 // import { EditComponent } from './edit/edit.component';
 import {SelectModule} from 'angular2-select';
-import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
+import { MsvConsecutivoService } from '../../services/msvConsecutivo.service';
 // import {SelectModule} from 'angular2-select';
 
 
@@ -15,7 +15,7 @@ import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.ser
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [MsvRegistroIpatComponent,NewComponent/*,EditComponent*/],
     exports: [MsvRegistroIpatComponent, NewComponent/*,EditComponent*/],
-    providers: [MsvRegistroIpatService,VehiculoLimitacionService]
+    providers: [MsvRegistroIpatService, MsvConsecutivoService]
 })
 
 export class MsvRegistroIpatModule { }

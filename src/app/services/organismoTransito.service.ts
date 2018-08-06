@@ -56,5 +56,14 @@ export class OrganismoTransitoService {
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
+
+	showBySedeOperativa(token, datos) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/sede", params, { headers: headers })
+			.map(res => res.json());
+
+	}
 	
 }

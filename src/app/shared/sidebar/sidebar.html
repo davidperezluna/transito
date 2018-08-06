@@ -40,6 +40,13 @@
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
+              <a class="nav-link" routerLink="cfgGravedad" [ngClass]="{'active' : ( addActive === 'cfgGravedad')}" (click)="addActiveMenu('cfgGravedad')">
+                <i class="fa fa-angle-right"></i> Gravedad
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
               <a class="nav-link" routerLink="msvTalonario" [ngClass]="{'active' : ( addActive === 'msvTalonario')}" (click)="addActiveMenu('msvTalonario')">
                 <i class="fa fa-angle-right"></i> Talonarios
               </a>

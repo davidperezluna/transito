@@ -73,6 +73,8 @@ import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.modu
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
 import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
 
+import { CfgGravedadModule } from './cfgGravedad/cfgGravedad.module';
+
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
@@ -185,6 +187,7 @@ import {RightsidebarComponent} from '../shared';
       RnaPreregistroModule,
       CfgPlacaModule,
       CfgCasoInsumoModule,
+      CfgGravedadModule,
       CfgSedeOperativaModule,
       CfgEntidadJudicialModule,
       CfgCausalLimitacionModule,

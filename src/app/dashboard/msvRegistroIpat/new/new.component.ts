@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
-import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
+import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { DepartamentoService } from '../../../services/departamento.service';
@@ -22,39 +22,14 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public msvRegistroIpat: MsvRegistroIpat;
-  public vehiculoLimitacion: any;
+  public sedeOperativa: any;
   public errorMessage;
   public respuesta;
-  public ciudadanoDemandado: any;
-  public ciudadanoDemandadoEncontrado = 1;
-  public ciudadanoDemandante: any;
-  public ciudadanoDemandanteEncontrado = 1;
-  public municipios;
-  public municipioSelected;
-  public departamentos;
-  public departamentoSelected;
-  public tipoIdentificacionDemandanteSelected:any;
-  public tipoIdentificacionDemandadoSelected:any;
-  public entidadesJudiciales;
-  public entidadJudicialSelected;
-  public limitaciones;
-  public limitacionSelected;
-  public tiposProceso;
-  public tipoProcesoSelected;
-  public causalesLimitacion;
-  public causalLimitacionSelected;
-  public placa: any;
-  public vehiculo: any;
-  public placaEncontrada = 1;
-  public demandado = false;
-  public demandante = false;
-  public listaVehiculosPlacas = false;
-  public identificacionDemandado: any;
-  public identificacionDemandante: any;
-  public tipoIdentificacionesDemandado;
-  public tipoIdentificacionesDemandante;
-  public opcionSeleccionado: string = '0'; // Iniciamos
-  public verSeleccion: string = '';
+  public nroIpat: any;
+  public consecutivo: any;
+  public ipatEncontrado = 1;
+  public ipats = false;
+  public identity: any;
   public datos = {
   }
   public datos2 = {
@@ -65,8 +40,8 @@ export class NewComponent implements OnInit {
 
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
-    private _VehiculoLimitacionService: VehiculoLimitacionService,
-    private _VehiculoService: VehiculoService,
+    private _FuncionarioService: MpersonalFuncionarioService,
+    private _MsvConsecutivoService: MsvConsecutivoService,
     private _CiudadanoService: CiudadanoService,
     private _loginService: LoginService,
     private _MunicipioService: MunicipioService,
@@ -81,100 +56,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
-      response => {
-        this.tipoIdentificacionesDemandado = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-    this._CfgCausalLimitacionService.getCausalLimitacionSelect().subscribe(
-      response => {
-        this.causalesLimitacion = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
-      response => {
-        this.tipoIdentificacionesDemandante = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._DepartamentoService.getDepartamentoSelect().subscribe(
-      response => {
-        this.departamentos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._CfgEntidadJuducialService.getEntidadJudicialSelect().subscribe(
-      response => {
-        this.entidadesJudiciales = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._LimitacionService.getLimitacionSelect().subscribe(
-      response => {
-        this.limitaciones = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._CfgTipoProcesoService.getTipoProcesoSelect().subscribe(
-      response => {
-        this.tiposProceso = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
 
   }
 
@@ -189,14 +71,6 @@ export class NewComponent implements OnInit {
   enviarTramite() {
     let token = this._loginService.getToken();
 
-    this.msvRegistroIpat.departamentoId = this.departamentoSelected;
-    this.msvRegistroIpat.entidadJudicialId = this.entidadJudicialSelected;
-    this.msvRegistroIpat.limitacionId = this.limitacionSelected;
-    this.msvRegistroIpat.municipioId = this.municipioSelected;
-    this.msvRegistroIpat.tipoProcesoId = this.tipoProcesoSelected;
-    this.msvRegistroIpat.causalLimitacionId = this.causalLimitacionSelected;
-    this.msvRegistroIpat.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
-    this.msvRegistroIpat.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
     let data =[
       {'datosLimitacion': this.msvRegistroIpat},
 
@@ -216,11 +90,10 @@ export class NewComponent implements OnInit {
           })
           
         } else {
-          let eJudicial = this.entidadesJudiciales[this.entidadJudicialSelected - 1].label;
           
           swal({
             title: 'Error!',
-            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.msvRegistroIpat.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
+            text: 'La limitacion a la propiedad ' + this.consecutivo + ', con la fecha: ' + this.msvRegistroIpat.fechaExpedicion ,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -239,25 +112,43 @@ export class NewComponent implements OnInit {
 
   }
 
-  capturar() {
 
-    this.verSeleccion = this.opcionSeleccionado;
-  }
 
   onKeyIpat() {
     let token = this._loginService.getToken();
+    this.identity = this._loginService.getIdentity();
     let datos = {
-      'placa': this.placa,
-      'moduloId': 1,
+      'nroIpat': this.nroIpat,
+      'identificacionUsuario': this.identity.identificacion,
     };
-    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
+    this._MsvConsecutivoService.showBySedeConsecutivo(token, datos).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
-          this.vehiculo = this.respuesta.data;
-          this.placaEncontrada = 2;
+          this.consecutivo = this.respuesta.data;
+          
+          this.ipatEncontrado = 2;
         } else {
-          this.placaEncontrada = 3;
+          this.ipatEncontrado = 3;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+    this._FuncionarioService.searchLogin(this.identity, token).subscribe(
+      response => {
+        this.respuesta = response;
+        if (this.respuesta.status == 'success') {
+          this.sedeOperativa = this.respuesta.data.sedeOperativa;
+
+          this.ipatEncontrado = 2;
+        } else {
+          this.ipatEncontrado = 3;
         }
         error => {
           this.errorMessage = <any>error;
@@ -270,151 +161,31 @@ export class NewComponent implements OnInit {
       });
   }
 
-  onKeyCiudadanoDemandado() {
-    let token = this._loginService.getToken();
-    let identificacion = {
-      'numeroIdentificacion': this.identificacionDemandado,
-    };
-    this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
-      response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.ciudadanoDemandado = this.respuesta.data;
-          this.ciudadanoDemandadoEncontrado = 2;
-          console.log(this.ciudadanoDemandado);
-        } else {
-          this.ciudadanoDemandadoEncontrado = 3;
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      });
-  }
-
-  onKeyCiudadanoDemandante() {
-    let token = this._loginService.getToken();
-    let identificacion = {
-      'numeroIdentificacion': this.identificacionDemandante,
-    };
-    this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
-      response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.ciudadanoDemandante = this.respuesta.data;
-          this.ciudadanoDemandanteEncontrado = 2;
-        } else {
-          this.ciudadanoDemandanteEncontrado = 3;
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      });
-  }
 
   delete(vehiculo: any): void {
     this.datos2.vehiculos = this.datos2.vehiculos.filter(h => h !== vehiculo);
     if (this.datos2.vehiculos.length === 0) {
-      this.listaVehiculosPlacas = false;
+      this.ipats = false;
     }
   }
 
-  deleteCiudadanoDemandado(ciudadanoDemandado: any): void {
-    this.datos2.cDemandado = this.datos2.cDemandado.filter(h => h !== ciudadanoDemandado);
-    if (this.datos2.cDemandado.length === 0) {
-      this.demandado = false;
-      this.ciudadanoDemandadoEncontrado = 1;
-    }
-  }
-
-  deleteCiudadanoDemandante(ciudadanoDemandante: any): void {
-    this.datos2.cDemandante = this.datos2.cDemandante.filter(h => h !== ciudadanoDemandante);
-    if (this.datos2.cDemandante.length === 0) {
-      this.demandante = false;
-      this.ciudadanoDemandanteEncontrado = 1;
-    }
-  }
-
-  changedDepartamento(e) {
-    if (this.departamentoSelected) {
-      let token = this._loginService.getToken();
-      this._MunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
-        response => {
-          
-          if (response != null) {
-            this.municipios = response;
-          } else {
-            this.municipios = [];
-          }
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    }
-  }
 
   btnNewVehiculo() {
 
     this.datos2.vehiculos.push(
       {
-        'placa': this.vehiculo.placa.numero,
-        'sedeOperativa': this.vehiculo.sedeOperativa.nombre
+        'placa': this.consecutivo,
+        'sedeOperativa': this.consecutivo
       }
     );
 
-    this.placaEncontrada = 1;
-    this.listaVehiculosPlacas = true;
+    this.ipatEncontrado = 1;
+    this.ipats = true;
   }
-
-  btnNewDemandado() {
-    this.datos2.cDemandado.push(
-      {
-        'nombres': this.ciudadanoDemandado.primerNombre,
-        'identificacion': this.ciudadanoDemandado.identificacion
-      }
-    );
-
-    this.ciudadanoDemandadoEncontrado = 5;
-    this.demandado = true;
-  }
-  btnNewDemandante() {
-    this.datos2.cDemandante.push(
-      {
-        'nombres': this.ciudadanoDemandante.primerNombre,
-        'identificacion': this.ciudadanoDemandante.identificacion
-      }
-    );
-
-    this.ciudadanoDemandanteEncontrado = 5;
-    this.demandante = true;
-  }
-
 
   btnCancelarVehiculo() {
-    this.placaEncontrada = 1
+    this.ipatEncontrado = 1
   }
 
-  btnCancelarDemandado() {
-    this.ciudadanoDemandadoEncontrado = 1
-  }
-
-  btnCancelarDemandante() {
-    this.ciudadanoDemandanteEncontrado = 1
-  }
 
 }
