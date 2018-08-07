@@ -7,7 +7,7 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html' 
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
