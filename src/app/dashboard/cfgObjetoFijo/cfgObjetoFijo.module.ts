@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CfgCasoInsumoComponent } from './cfgCasoInsumo.component';
+import { CfgObjetoFijoComponent } from './cfgObjetoFijo.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { CfgCasoInsumoService } from '../../services/cfgCasoInsumo.service';
+import { CfgObjetoFijoService } from '../../services/cfgObjetoFijo.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -12,9 +12,9 @@ import {SelectModule} from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [CfgCasoInsumoComponent,NewComponent,EditComponent],
-    exports: [CfgCasoInsumoComponent, NewComponent,EditComponent],
-    providers:[CfgCasoInsumoService]
+    declarations: [CfgObjetoFijoComponent,NewComponent,EditComponent],
+    exports: [CfgObjetoFijoComponent, NewComponent,EditComponent],
+    providers:[CfgObjetoFijoService]
 })
 
-export class CfgCasoInsumoModule { }
+export class CfgObjetoFijoModule { }

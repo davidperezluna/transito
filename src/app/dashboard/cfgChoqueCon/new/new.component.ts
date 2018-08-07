@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumo } from '../cfgCasoInsumo.modelo';
-import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
+import { CfgChoqueCon } from '../cfgChoqueCon.modelo';
+import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { LoginService } from '../../../services/login.service';
-import { ModuloService } from '../../../services/modulo.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,40 +10,19 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public cfgCasoInsumo: CfgCasoInsumo;
+  public cfgChoqueCon: CfgChoqueCon;
   public errorMessage;
   public respuesta;
-  public modulos: any;
-  public moduloSelected: any;
-  public tipoCasoInsumos = [
-    { 'value': "Insumo", 'label': "Insumo" },
-    { 'value': "Sustrato", 'label': "Sustrato" }
-  ];
-  public tipoCasoInsumoSelected: any;
+  
 
   constructor(
-    private _CfgCasoInsumoService: CfgCasoInsumoService,
+    private _CfgChoqueConService: CfgChoqueConService,
     private _loginService: LoginService,
-    private _ModuloService: ModuloService,
-    private _sedeOperativaService: SedeOperativaService,
   ) { }
 
   ngOnInit() {
-    this.cfgCasoInsumo = new CfgCasoInsumo(null, null, null, null, null, null);
+    this.cfgChoqueCon = new CfgChoqueCon(null, null);
 
-    this._ModuloService.getModuloSelect().subscribe(
-      response => {
-        this.modulos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
 
   }
   onCancelar() {
@@ -53,10 +30,8 @@ export class NewComponent implements OnInit {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgCasoInsumo.moduloId = this.moduloSelected;
-    this.cfgCasoInsumo.tipo = this.tipoCasoInsumoSelected;
     
-    this._CfgCasoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
+    this._CfgChoqueConService.register(this.cfgChoqueCon, token).subscribe(
       response => {
         this.respuesta = response;
         
@@ -71,7 +46,7 @@ export class NewComponent implements OnInit {
         } else {
           swal({
             title: 'Error!',
-            text: 'El Caso Insumo ya se encuentra registrado',
+            text: 'El Choque Con ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

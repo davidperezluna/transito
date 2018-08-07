@@ -7,7 +7,7 @@
           <h5 class="card-title">
             <b class="text-uppercase">Configuración</b>
             <br>
-            <small>Trámites Limitación</small>
+            <small>Registros Ipats</small>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                 <i class="fa fa-plus"></i>
@@ -21,16 +21,16 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Limitacion Datos</th>
-                <th>Vehiculo</th>
+                <th>Numero Consecutivo</th>
+                <th>Estado</th>
                 <!-- <th>Acciones</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let tramiteInscripcion of tramitesInscripcion; let i = index">
-                <td>{{tramiteInscripcion.id}}</td>
-                <td>{{tramiteInscripcion.limitacionDatos.nOrdenJudicial}}</td>
-                <td>{{tramiteInscripcion.vehiculo?.placa?.numero}}</td>
+              <tr class="odd" *ngFor="let consecutivo of consecutivos; let i = index">
+                <td>{{consecutivo.id}}</td>
+                <td>{{consecutivo.consecutivo}}</td>
+                <td>{{consecutivo.estado}}</td>
               </tr>
             </tbody>
           </table>

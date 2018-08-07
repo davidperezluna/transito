@@ -6,6 +6,7 @@ import { MsvRevisionService } from '../../services/msvRevision.service';
 import { MsvEvaluacionService } from '../../services/msvEvaluacion.service';
 import { MsvParametroService } from '../../services/msvParametro.service';
 import { MsvVariableService } from '../../services/msvVariable.service';
+import { MsvCalificacionService } from '../../services/msvCalificacion.service';
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { NewFortalecimientoComponent } from './newFortalecimiento/newFortalecimiento.component';
@@ -18,7 +19,7 @@ import { NewRevisionComponent } from './newRevision/newRevision.component';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [MsvEvaluacionComponent,NewComponent,EditComponent,NewEmpresaComponent,NewRevisionComponent,NewFortalecimientoComponent],
     exports: [MsvEvaluacionComponent, NewComponent,EditComponent,NewEmpresaComponent,NewRevisionComponent, NewFortalecimientoComponent],
-    providers:[MsvRevisionService,MsvEvaluacionService,MsvParametroService,MsvVariableService]
+    providers:[MsvRevisionService,MsvEvaluacionService,MsvParametroService,MsvVariableService,MsvCalificacionService]
 })
 
 export class MsvEvaluacionModule { }

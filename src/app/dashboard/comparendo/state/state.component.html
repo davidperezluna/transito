@@ -1,0 +1,75 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4 offset-lg-4" *ngIf='!validado'><!-- .col -->
+        <div class="card"><!-- .card -->
+            <div class="card-header"><!-- .card-header -->
+                <h5 class="card-title"><!-- .card-title -->
+                    <b class="text-uppercase">Ordenes de comparendo</b> 
+                    <small class="pull-right">Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                </h5><!-- /.card-title -->
+            </div><!-- /.card-header -->
+            <div class="card-body"><!-- .card-body -->
+                <div class="row">
+                    <form #formSearch="ngForm">
+                            <div class="form-group row">                    
+                                <div class="col-lg-12">
+                                    <label>Búsquedas <b class="text-danger">*</b></label>
+                                    <select class="form-control" [(ngModel)]="tipo">
+                                        <option value="Inhibitorio">Inhibitorios</option>
+                                        <option value="Caducidad">Caducos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary pull-right" type="button">Validar</button>
+                    </form>     
+                </div>
+            </div><!-- /.card-body -->
+        </div><!-- /.card -->
+    </div><!-- /.col -->
+
+
+    <div class="col-xs-12 col-lg-12" *ngIf='comparendos'>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h6 class="text-uppercase text-center">
+                        <b>Comparendos encontrados</b>
+                    </h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Consecutivo</th>
+                                        <th>Fecha</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Nip</th>
+                                        <th>Infracción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                                        <td>{{ i }}</td>
+                                        <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                                        <td>{{ comparendo.fecha }}</td>
+                                        <td>{{ comparendo.ciudadanoInfractor?.usuario.primerNombre }}</td>
+                                        <td>{{ comparendo.ciudadanoInfractor?.usuario.primerApellido }}</td>
+                                        <td>{{ comparendo.ciudadanoInfractor?.usuario.identificacion }}</td>
+                                        <td>{{ comparendo.infraccion.codigo }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

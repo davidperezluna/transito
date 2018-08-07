@@ -78,6 +78,9 @@ import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicia
 import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
 
 import { CfgGravedadModule } from './cfgGravedad/cfgGravedad.module';
+import { CfgClaseAccidenteModule } from './cfgClaseAccidente/cfgClaseAccidente.module';
+import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
+import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
@@ -194,6 +197,9 @@ import {RightsidebarComponent} from '../shared';
       CfgPlacaModule,
       CfgCasoInsumoModule,
       CfgGravedadModule,
+      CfgClaseAccidenteModule,
+      CfgChoqueConModule,
+      CfgObjetoFijoModule,
       CfgSedeOperativaModule,
       CfgEntidadJudicialModule,
       CfgCausalLimitacionModule,
