@@ -17,8 +17,12 @@ import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
+import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
+
+import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
+
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
 
@@ -156,7 +160,9 @@ export const DashboardRoutes: Route[] = [
         ...ModuloRoutes,
         ...TramiteRoutes,
         ...AlmacenRoutes,
+        ...CfgTipoInfractorRoutes,
         ...ComparendoRoutes,
+        ...CfgComparendoEstadoRoutes,
         ...InfraccionRoutes,
         ...CarroceriaRoutes,
         ...FacturaRoutes,
