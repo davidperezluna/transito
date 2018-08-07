@@ -55,7 +55,6 @@ export class EmpresaService {
 
 		let json = JSON.stringify(parametro);
 		let params = "json="+json+"&authorization="+token;
-		console.log(params);
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show/nitnombre", params, {headers: headers})
 		.map(res => res.json())					  

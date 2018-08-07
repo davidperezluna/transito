@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
+import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
 import { LoginService } from '../../../services/login.service';
-import { ModuloService } from '../../../services/modulo.service';
 import swal from 'sweetalert2';
 
  
@@ -11,49 +10,20 @@ import swal from 'sweetalert2';
 })
 export class EditComponent {
   @Output() ready = new EventEmitter<any>();
-  @Input() cfgCasoInsumo: any = null;
+  @Input() cfgObjetoFijo: any = null;
   public errorMessage;
   public respuesta;
-  public modulos: any;
-  public moduloSelected: any; 
-  public tipoCasoInsumos = [
-    { 'value': "Insumo", 'label': "Insumo" },
-    { 'value': "Sustrato", 'label': "Sustrato" }
-  ];
-  public tipoCasoInsumoSelected: any;
-  // public tipoIdentificacion: Array<any>
+
 
   constructor(
-    private _CfgCasoInsumoService: CfgCasoInsumoService,
+    private _CfgObjetoFijoService: CfgObjetoFijoService,
     private _loginService: LoginService,
-    private _ModuloService: ModuloService,
   ) {
-    //   this.tipoIdentificacion = [
-    //     {value: 'CC', label: 'Cédula de ciudadanía'},
-    //     {value: 'TE', label: 'Tarjeta de extranjería'},
-    //     {value: 'CE', label: 'Cédula de extranjería'},
-    //     {value: 'P', label: 'Pasaporte'},
-    // ];
+   
   }
 
   ngOnInit() {
 
-    this._ModuloService.getModuloSelect().subscribe(
-      response => {
-        this.modulos = response;
-        setTimeout(() => {
-          this.moduloSelected = [this.cfgCasoInsumo.modulo.id];
-        });
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
 
     
   }
@@ -64,12 +34,10 @@ export class EditComponent {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgCasoInsumo.moduloId = this.moduloSelected;
-    this._CfgCasoInsumoService.editCfgCasoInsumo(this.cfgCasoInsumo, token).subscribe(
+    this._CfgObjetoFijoService.editCfgObjetoFijo(this.cfgObjetoFijo, token).subscribe(
       response => {
         //console.log(response);
         this.respuesta = response;
-        console.log(this.respuesta);
         if (this.respuesta.status == 'success') {
           this.ready.emit(true);
           swal({

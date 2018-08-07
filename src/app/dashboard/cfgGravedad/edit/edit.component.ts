@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { LoginService } from '../../../services/login.service';
-import { ModuloService } from '../../../services/modulo.service';
 import swal from 'sweetalert2';
 
  
@@ -39,7 +38,6 @@ export class EditComponent {
       response => {
         //console.log(response);
         this.respuesta = response;
-        console.log(this.respuesta);
         if (this.respuesta.status == 'success') {
           this.ready.emit(true);
           swal({

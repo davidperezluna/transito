@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumo } from '../cfgCasoInsumo.modelo';
-import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
+import { CfgObjetoFijo } from '../cfgObjetoFijo.modelo';
+import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
 import { LoginService } from '../../../services/login.service';
-import { ModuloService } from '../../../services/modulo.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,40 +10,19 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public cfgCasoInsumo: CfgCasoInsumo;
+  public cfgObjetoFijo: CfgObjetoFijo;
   public errorMessage;
   public respuesta;
-  public modulos: any;
-  public moduloSelected: any;
-  public tipoCasoInsumos = [
-    { 'value': "Insumo", 'label': "Insumo" },
-    { 'value': "Sustrato", 'label': "Sustrato" }
-  ];
-  public tipoCasoInsumoSelected: any;
+  
 
   constructor(
-    private _CfgCasoInsumoService: CfgCasoInsumoService,
+    private _CfgObjetoFijoService: CfgObjetoFijoService,
     private _loginService: LoginService,
-    private _ModuloService: ModuloService,
-    private _sedeOperativaService: SedeOperativaService,
   ) { }
 
   ngOnInit() {
-    this.cfgCasoInsumo = new CfgCasoInsumo(null, null, null, null, null, null);
+    this.cfgObjetoFijo = new CfgObjetoFijo(null, null);
 
-    this._ModuloService.getModuloSelect().subscribe(
-      response => {
-        this.modulos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
 
   }
   onCancelar() {
@@ -53,10 +30,8 @@ export class NewComponent implements OnInit {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgCasoInsumo.moduloId = this.moduloSelected;
-    this.cfgCasoInsumo.tipo = this.tipoCasoInsumoSelected;
     
-    this._CfgCasoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
+    this._CfgObjetoFijoService.register(this.cfgObjetoFijo, token).subscribe(
       response => {
         this.respuesta = response;
         

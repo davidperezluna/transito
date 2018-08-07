@@ -37,13 +37,13 @@
                                         <div class="col-lg-2" style="border:1px solid #cccccc;">
                                             {{ msvCriterio.name }}
                                         </div>  
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"></div>
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"></div>
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"></div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox" [(ngModel)]="msvCriterio.aplica"></div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox" [(ngModel)]="msvCriterio.evidencia"></div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox" [(ngModel)]="msvCriterio.responde"></div>
                                         <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor}}</div>
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvVariables.length()}}</div>
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="text" size="4%"></div>
-                                        <div class="col-lg-4" style="border:1px solid #cccccc;"><input type="text" size="4%"></div>                                      
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor / msvCriterios}}</div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"></div>
+                                        <div class="col-lg-4" style="border:1px solid #cccccc;"><input type="text" size="4%" [(ngModel)]="msvCriterio.observacion"></div>                                      
                                     </div>
                                 </div>
                             </div>
@@ -53,5 +53,8 @@
                 </div>
             </div>
           </div>
+          <button (click)="onEnviar()" class="btn btn-primary">
+              Enviar
+          </button>
        </div>
     </div>

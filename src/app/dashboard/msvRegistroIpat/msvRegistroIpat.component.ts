@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MsvRegistroIpatService } from '../../services/msvRegistroIpat.service';
+import { MsvConsecutivoService } from '../../services/msvConsecutivo.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 import { MsvRegistroIpat } from './msvRegistroIpat.modelo';
 import { Ciudadano } from '../ciudadano/ciudadano.modelo';
@@ -18,6 +19,7 @@ export class MsvRegistroIpatComponent implements OnInit {
   public errorMessage;
   public respuesta;
   public tramitesInscripcion;
+  public consecutivos;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
@@ -26,13 +28,11 @@ export class MsvRegistroIpatComponent implements OnInit {
 
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
+    private _MsvConsecutivoService: MsvConsecutivoService,
     private _loginService: LoginService,
   ) { }
 
   ngOnInit() {
-    let datos = {
-      'moduloId': 1,
-    };
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -47,12 +47,16 @@ export class MsvRegistroIpatComponent implements OnInit {
       ) {
       }
     })
-    this._MsvRegistroIpatService.getMsvRegistroIpat().subscribe(
+    let token = this._loginService.getToken();
+    let identity = this._loginService.getIdentity();
+    let datos = {
+      'identificacionUsuario': identity.identificacion,
+    };
+    this._MsvConsecutivoService.showBySede(token, datos).subscribe(
       response => {
         if (response) {
 
-          console.log(response);
-          this.tramitesInscripcion = response.data;
+          this.consecutivos = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);

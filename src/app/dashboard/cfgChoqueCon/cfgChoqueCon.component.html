@@ -7,7 +7,7 @@
           <h5 class="card-title">
             <b class="text-uppercase">Configuración</b>
             <br>
-            <small>Caso Insumos</small>
+            <small>Choque Con</small>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                 <i class="fa fa-plus"></i>
@@ -21,25 +21,19 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Módulo</th>
                 <th>Nombre</th>
-                <th>Referencia</th>
-                <th>Valor</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let cfgCasoInsumo of cfgCasoInsumos; let i = index">
-                <td>{{cfgCasoInsumo.id}}</td>
-                <td>{{cfgCasoInsumo.modulo?.nombre}}</td>
-                <td>{{cfgCasoInsumo.nombre}}</td>
-                <td>{{cfgCasoInsumo.referencia}}</td>
-                <td>{{cfgCasoInsumo.valor}}</td>
+              <tr class="odd" *ngFor="let cfgChoqueCon of cfgChoquesCon; let i = index">
+                <td>{{cfgChoqueCon.id}}</td>
+                <td>{{cfgChoqueCon.nombre}}</td>
                 <td>
-                  <button (click)="editCfgCasoInsumo(cfgCasoInsumo)" class="btn btn-xs btn-info" type="button">Editar
+                  <button (click)="editCfgChoqueCon(cfgChoqueCon)" class="btn btn-xs btn-info" type="button">Editar
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button (click)="deleteCfgCasoInsumo(cfgCasoInsumo)" class="btn btn-xs btn-danger" type="button">Eliminar
+                  <button (click)="deleteCfgChoqueCon(cfgChoqueCon)" class="btn btn-xs btn-danger" type="button">Eliminar
                     <i class="fa fa-trash"></i>
                   </button>
 
@@ -53,6 +47,6 @@
       </div>
     </div>
   </div>
-  <app-edit *ngIf='formEdit' [cfgCasoInsumo]="cfgCasoInsumo" (ready)="ready($event)"></app-edit>
+  <app-edit *ngIf='formEdit' [cfgChoqueCon]="cfgChoqueCon" (ready)="ready($event)"></app-edit>
   <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
