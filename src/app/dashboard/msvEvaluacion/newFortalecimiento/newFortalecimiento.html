@@ -4,37 +4,54 @@
           <div class="card-body">
              <h5 class="m-0">Evaluación</h5>
              <hr>
-             <div class="col-xs-12 col-lg-12">
-                <table class="table" id="dataTables-example">
-                   <thead>
-                      <tr>
-                         <th>Parámetro-Definición</th>
-                         <th>Variables</th>
-                         <th>Criterio de aval</th>
-                         <th>Aplica</th>
-                         <th>Evidencias de su existencia</th>
-                         <th>Responde a los requerimientos</th>
-                         <th>Valor del parametro</th>
-                         <th>Valor de la variable</th>
-                         <th>Valor obtenido</th>
-                         <th>Observaciones</th>
-                      </tr>
-                   </thead>
-                   <tbody>
-                      <tr>
-                         <td *ngFor="let msvParametro of msvParametros; let i=index">{{msvParametro.nombre}}</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                      </tr>
-                   </tbody>
-                </table>
-                <!-- /.table-responsive -->
-             </div>
+             <div class="row text-center text-uppercase">
+                <div class="col-lg-2" style="border:1px solid #cccccc;">Parámetro-Definición</div>
+                <div class="col-lg-10" style="border:1px solid #cccccc;">
+                    <div class="row">
+                        <div class="col-lg-3">Variables</div>
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-lg-2" style="border:1px solid #cccccc;">Criterio de aval</div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;">Aplica</div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;">Evidencias de su existencia</div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;">Responde a los requerimientos</div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;">Valor del parametro</div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;">Valor de la variable</div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;">Valor obtenido</div>
+                                <div class="col-lg-4" style="border:1px solid #cccccc;">Observaciones</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row" *ngFor="let msvParametro of msvParametros; let i=index">
+                <div class="col-lg-12" style="border:1px solid #cccccc;">
+                    <div class="row">
+                        <div class="col-lg-2" style="border:1px solid #cccccc;">{{ msvParametro.name }}</div>
+                        <div class="col-lg-10" style="border:1px solid #cccccc;">
+                            <div class="row" *ngFor="let msvVariable of msvParametro.variables; let i=index">
+                                <div class="col-lg-3" style="border:1px solid #cccccc;">{{ msvVariable.name }}</div>
+                                <div class="col-lg-9" style="border:1px solid #cccccc;">
+                                    <div class="row" *ngFor="let msvCriterio of msvVariable.criterios; let i=index">
+                                        <div class="col-lg-2" style="border:1px solid #cccccc;">
+                                            {{ msvCriterio.name }}
+                                        </div>  
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"></div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"></div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"></div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor}}</div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvVariables.length()}}</div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="text" size="4%"></div>
+                                        <div class="col-lg-4" style="border:1px solid #cccccc;"><input type="text" size="4%"></div>                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
           </div>
        </div>
     </div>

@@ -101,6 +101,7 @@ import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcion
 import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
+import { CfgGravedadRoutes } from './cfgGravedad/cfgGravedad.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
@@ -189,6 +190,7 @@ export const DashboardRoutes: Route[] = [
         ...ConceptoParametroRoutes,  
         ...RnmaRegistroMaquinariaRoutes,
         ...MsvRegistroIpatRoutes,
+        ...CfgGravedadRoutes,
         ...TramiteInscripcionLimitacionRoutes,
         ...TramiteLevantamientoLimitacionRoutes,
         ...RnaTramiteInscripcionLimitacionRoutes,
