@@ -16,7 +16,7 @@ declare var $: any;
   templateUrl: './msvEvaluacion.component.html'
 })
 export class MsvEvaluacionComponent implements OnInit {
-  @Output() msvCategoria;
+  @Output() msvCategoria;  
   public errorMessage;
   public id;
 	public respuesta;
@@ -32,13 +32,14 @@ export class MsvEvaluacionComponent implements OnInit {
   public isError:any; 
   public isExist:any; 
   public msj:any; 
-  public parametro:any; 
   public nit:any; 
-  public empresas:any;
+  public empresa:any;
   public miEmpresa:Empresa;
   public revisiones:any = false;
   public msvEvaluacion: MsvEvaluacion;
   public msvCategorias:any;
+  public datos = {'parametro': null,
+                  'parametro2': null}
 
   constructor(
     private _EvaluacionService: MsvEvaluacionService,
@@ -186,21 +187,20 @@ export class MsvEvaluacionComponent implements OnInit {
     this.revisionMensaje = false;
     this.revisionNew = false;
     let token = this._loginService.getToken();
-    let dato = {'parametro':this.parametro}
-    console.log(dato);
 
-    this._EmpresaService.showNitOrNombre(token,dato).subscribe(
+    this._EmpresaService.showNitOrNombre(token,this.datos).subscribe(
       response => {
         //console.log(response.data);
         if (response.code == 200 ) {
           this.msj = response.msj;
           this.isError = false;
-          this.empresas=response.data;
-          if(this.empresas){
+          this.empresa=response.data;
+          if(this.empresa){
             this.habilitarBotonRev = true;
-          }
-          for(let miEmpresa of this.empresas){       
-            this._RevisionService.showRevision(token, miEmpresa.id).subscribe(
+            console.log(this.empresa);
+            
+          }      
+            this._RevisionService.showRevision(token, this.empresa.id).subscribe(
               response => {
                 if (response.code == 200 ) {
                   this.msj = response.msj;
@@ -221,7 +221,6 @@ export class MsvEvaluacionComponent implements OnInit {
                   }
                 }
             }); 
-          }
           
           this.isExist = true;
           
@@ -268,9 +267,9 @@ export class MsvEvaluacionComponent implements OnInit {
       }
     })
     let token = this._loginService.getToken();
-    let dato = {'parametro':this.parametro}
-
-    this._RevisionService.showRevision(token,this.parametro).subscribe(
+    console.log(this.empresa.id);
+    
+    this._RevisionService.showRevision(token,this.empresa.id).subscribe(
       response => {
         console.log(response.data);
         if (response.code == 200 ) {
