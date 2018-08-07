@@ -4,6 +4,7 @@ import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { PaisService } from '../../../../services/pais.service';
+import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -47,6 +48,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         private _ServicioService: ServicioService,
         private _CiudadanoService: CiudadanoService,
         private _PaisService: PaisService,
+        private _RncLicenciaConduccionService: RncLicenciaConduccionService,
     ) { }
 
     ngOnInit() {
@@ -95,7 +97,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         );
     }
     
-    enviarTramite() {
+    onEnviarTramite() {
         let token = this._LoginService.getToken();
         
         this.datos.tramiteFactura = 5;
@@ -104,7 +106,26 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
 
-        this.readyTramite.emit(this.datos);
+        this._RncLicenciaConduccionService.searchVigente(token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.readyTramite.emit(this.datos);
+                } else {
+                    swal({
+                        type: 'warning',
+                        title: 'Alerta!',
+                        text: response.message
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

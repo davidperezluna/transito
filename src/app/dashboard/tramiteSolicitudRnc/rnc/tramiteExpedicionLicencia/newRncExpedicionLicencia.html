@@ -76,8 +76,16 @@
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="onEnviarTramite()" class="btn btn-success">Enviar</button>
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviarTramite()" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

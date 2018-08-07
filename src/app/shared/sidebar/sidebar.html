@@ -256,6 +256,12 @@
                 Infracciones
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="mflTipoRecaudo" [ngClass]="{'active' : ( addActive === 'mflTipoRecaudo')}" (click)="addActiveMenu('mflTipoRecaudo')">
+                <i class="fa fa-angle-right"></i>
+                Tipo recaudo
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level -->
         </li>
