@@ -33,8 +33,9 @@ export class NewFortalecimientoComponent implements OnInit {
       response => {
         this.msvParametros = response.data;
         if (this.msvParametros) {
-          //entra aquí si encuentra Parametro
+          //entra aquí si encuentra Parametro   
           console.log(this.msvParametros);
+                 
           this.showT = true;
       } else {
           swal({

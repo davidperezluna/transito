@@ -17,8 +17,12 @@ import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
+import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
+
+import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
+
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
 
@@ -97,6 +101,7 @@ import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcion
 import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
+import { CfgGravedadRoutes } from './cfgGravedad/cfgGravedad.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
@@ -156,7 +161,9 @@ export const DashboardRoutes: Route[] = [
         ...ModuloRoutes,
         ...TramiteRoutes,
         ...AlmacenRoutes,
+        ...CfgTipoInfractorRoutes,
         ...ComparendoRoutes,
+        ...CfgComparendoEstadoRoutes,
         ...InfraccionRoutes,
         ...CarroceriaRoutes,
         ...FacturaRoutes,
@@ -183,6 +190,7 @@ export const DashboardRoutes: Route[] = [
         ...ConceptoParametroRoutes,  
         ...RnmaRegistroMaquinariaRoutes,
         ...MsvRegistroIpatRoutes,
+        ...CfgGravedadRoutes,
         ...TramiteInscripcionLimitacionRoutes,
         ...TramiteLevantamientoLimitacionRoutes,
         ...RnaTramiteInscripcionLimitacionRoutes,

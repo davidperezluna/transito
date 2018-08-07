@@ -13,6 +13,10 @@ import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.se
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { MparqPatioService } from '../../../services/mparqPatio.service';
 import { MparqGruaService } from '../../../services/mparqGrua.service';
+import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { MflInfraccionService } from '../../../services/mflInfraccion.service';
+import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
+import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -21,36 +25,40 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public comparendo: Comparendo;
-public inmovilizacion: Inmovilizacion;
-public errorMessage;
-public respuesta;
-public consecutivo: any = null;
-public agentesTransito: any;
-public agenteTransitoSelected: any;
-public municipios: any;
-public municipioSelected: any;
-public funcionario: any;
-public patios: any;
-public patioSelected: any;
-public gruas: any;
-public gruaSelected: any;
-public funcionarioReady = false;
-public sedeOperativaReady = false;
-public validado = false;
-public placa: any;
-public identificacion: any;
-public vehiculo: any;
-public municipioId: any;
-public ciudadano: any;
-public propietariosVehiculo: any;
-public formCiudadano = false;
-public inmovilizacionForm = false;
-public tipoIdentificacionSelected: any;
-public tiposIdentificacion: any;
-public municipioNacimientoSelected: any;
-public isCiudadano = false;
-public isEmpresa = false;
+  public comparendo: Comparendo;
+  public inmovilizacion: Inmovilizacion;
+  public errorMessage;
+  public respuesta;
+  public consecutivo: any = null;
+  public funcionario: any;
+  public vehiculo: any;
+  public ciudadano: any;
+  public testigo: any = [{ 'identificacion':null }];
+  public validado = false;
+  public placa: any;
+  public identificacion: any;
+  public propietariosVehiculo: any;
+  public isCiudadano = false;
+  public isEmpresa = false;
+  public agentesTransito: any;
+  public agenteTransitoSelected: any;
+  public municipios: any;
+  public municipioSelected: any;
+  public municipioNacimientoSelected: any;
+  public infractorTipos: any;
+  public infractorTipoSelected: any;
+  public categorias: any;
+  public categoriaSelected: any;
+  public patios: any;
+  public patioSelected: any;
+  public gruas: any;
+  public gruaSelected: any;
+  public comparendoEstados: any;
+  public comparendoEstadoSelected: any; 
+  public infracciones: any;
+  public infraccionSelected: any;
+  public tipoIdentificacionSelected: any;
+  public tiposIdentificacion: any;
 
 constructor(
   private _ComparendoService: ComparendoService,
@@ -65,6 +73,10 @@ constructor(
   private _TipoIdentificacionService: TipoIdentificacionService,
   private _MparqPatioService: MparqPatioService,
   private _MparqGruaService: MparqGruaService,
+  private _CfgComparendoEstadoService: CfgComparendoEstadoService,
+  private _MflInfraccionService: MflInfraccionService,
+  private _CfgTipoInfractorService: CfgTipoInfractorService,
+  private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
   ){}
 
   ngOnInit() {
@@ -74,8 +86,8 @@ constructor(
    this.identificacion = {
      'numeroIdentificacion' : this.identificacion,
    }; 
-    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this.inmovilizacion = new Inmovilizacion(null, null, null, null, null, null);
+    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.inmovilizacion = new Inmovilizacion(null, null, null);
 
     this._MpersonalFuncionarioService.selectAgentes().subscribe(
       response => {
@@ -93,27 +105,38 @@ constructor(
   }
 
   onCancelar(){
-    this.ready.emit(true);
+    this.validado = false;
   }
 
   onEnviar(){
     let token = this._loginService.getToken();
     this.comparendo.municipioId = this.municipioSelected;
+    this.comparendo.infraccionId = this.infraccionSelected;
+    this.comparendo.estadoId = this.comparendoEstadoSelected;
+    this.comparendo.tipoInfractorId = this.infractorTipoSelected;
     this.comparendo.vehiculoId = this.vehiculo.id;
     this.comparendo.ciudadanoId = this.ciudadano.id;
+    this.comparendo.testigoId = this.testigo.id;
+
+    this.inmovilizacion.gruaId = this.gruaSelected;
+    this.inmovilizacion.patioId = this.patioSelected;
+
+    let datos = {
+      'comparendo': this.comparendo,
+      'inmovilizacion': this.inmovilizacion
+    }
     
-		this._ComparendoService.register(this.comparendo,token).subscribe(
+		this._ComparendoService.register(datos,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha registrado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+          this.validado = false;
         }else{
           swal({
             title: 'Error!',
@@ -139,7 +162,6 @@ constructor(
      this._MpersonalFuncionarioService.show(token,e).subscribe(
         response => {
           this.funcionario = response.data;
-          this.funcionarioReady = true;
           this.comparendo.consecutivo = this.funcionario.sedeOperativa.codigoDivipo;
           this.comparendo.funcionarioId = this.funcionario.id;
         }, 
@@ -161,10 +183,10 @@ constructor(
     let datos = {'consecutivo':this.comparendo.consecutivo, 'funcionarioId': this.comparendo.funcionarioId}
     this._MpersonalComparendoService.searchByConsecutivoAndFuncionario(datos,token).subscribe(
       response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.validado = true;
           this.consecutivo = response.data;
+          this.comparendo.consecutivoId = this.consecutivo.id;
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -203,6 +225,62 @@ constructor(
           this._MparqGruaService.select().subscribe(
             response => {
               this.gruas = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+          this._CfgComparendoEstadoService.select().subscribe(
+            response => {
+              this.comparendoEstados = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+          this._MflInfraccionService.select().subscribe(
+            response => {
+              this.infracciones = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+          this._CfgTipoInfractorService.select().subscribe(
+            response => {
+              this.infractorTipos = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+          this._CfgLicenciaConduccionCategoriaService.select().subscribe(
+            response => {
+              this.categorias = response;
             },
             error => {
               this.errorMessage = <any>error;
@@ -294,31 +372,23 @@ constructor(
         }
       }); 
   }
-
-  clickOnmovilizacion(){
-    if (this.inmovilizacionForm) {
-      this.inmovilizacionForm = false;
-    }else{
-      this.inmovilizacionForm = true;
-    }
-  }
   
-  onKeyIdentificacion(){
+  onSearchInfractor(){
     swal({
-    title: 'Cargando Datos del Ciudadano!',
-    text: 'Solo tardará unos segundos por favor espere.',
-    timer: 1000,
-    onOpen: () => {
-      swal.showLoading()
-    }
-  }).then((result) => {
-    if (
-      // Read more about handling dismissals
-      result.dismiss === swal.DismissReason.timer
-    ) {
-    }
-  })
-    this.formCiudadano = true;
+      title: 'Cargando Datos del Ciudadano!',
+      text: 'Solo tardará unos segundos por favor espere.',
+      timer: 1000,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    });
+
     let token = this._loginService.getToken();
     this._CiudadanoService.searchByIdentificacion(token,this.identificacion).subscribe(
       response => {
@@ -369,6 +439,47 @@ constructor(
         }
 
     }); 
+  }
+
+  onSearchTestigo() {
+    swal({
+      title: 'Cargando Datos del Ciudadano!',
+      text: 'Solo tardará unos segundos por favor espere.',
+      timer: 1000,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    });
+
+    let token = this._loginService.getToken();
+    this._CiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.testigo.identificacion} ).subscribe(
+      response => {
+        if (response.status == "success") {
+          this.testigo = response.data;
+        }else {
+          swal({
+            title: 'Atención!',
+            text: response.msj,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        console.log(this.vehiculo);
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+
+    });
   }
 
 }

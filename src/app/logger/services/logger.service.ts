@@ -23,12 +23,6 @@ export class LoggerService {
                 .map(res => res.json());
   }
 
-  getIpAddress() {
-    return this._http
-          .get('http://freegeoip.net/json/?callback')
-          .map(response => response || {});
-  }
-
   public registerLog(token:string,action:string,json:string,url:string)
 	{
 		let log = new Log;

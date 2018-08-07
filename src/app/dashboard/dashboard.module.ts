@@ -22,6 +22,10 @@ import { ServicioModule } from './servicio/servicio.module';
 import { ModuloModule } from './modulo/modulo.module';
 import { TramiteModule } from './tramite/tramite.module'; 
 import { AlmacenModule } from './almacen/almacen.module';
+import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
+
+
+import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
 
@@ -72,6 +76,8 @@ import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
 import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
+
+import { CfgGravedadModule } from './cfgGravedad/cfgGravedad.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
@@ -137,6 +143,7 @@ import {RightsidebarComponent} from '../shared';
       ModuloModule,
       TramiteModule,
       AlmacenModule,
+      CfgTipoInfractorModule,
       CiudadanoModule,
       TipoIdentificacionModule,
       CfgAuditoriaModule,
@@ -169,6 +176,7 @@ import {RightsidebarComponent} from '../shared';
       CuentaModule,
       CarroceriaModule,
       ComparendoModule,
+      CfgComparendoEstadoModule,
       InfraccionModule,
       FacturaModule,
       TramiteFacturaModule,
@@ -185,6 +193,7 @@ import {RightsidebarComponent} from '../shared';
       RnaPreregistroModule,
       CfgPlacaModule,
       CfgCasoInsumoModule,
+      CfgGravedadModule,
       CfgSedeOperativaModule,
       CfgEntidadJudicialModule,
       CfgCausalLimitacionModule,
