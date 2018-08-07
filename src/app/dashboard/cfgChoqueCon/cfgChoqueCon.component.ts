@@ -1,26 +1,26 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumoService } from '../../services/cfgCasoInsumo.service';
+import { CfgChoqueConService } from '../../services/cfgChoqueCon.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgCasoInsumo.component.html'
+  templateUrl: './cfgChoqueCon.component.html'
 })
-export class CfgCasoInsumoComponent implements OnInit {
+export class CfgChoqueConComponent implements OnInit {
   public errorMessage;
   public id;
   public respuesta;
-  public cfgCasoInsumos;
+  public cfgChoquesCon;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table: any = null;
-  public cfgCasoInsumo: any;
+  public cfgChoqueCon: any;
 
   constructor(
-    private _CfgCasoInsumoService: CfgCasoInsumoService,
+    private _CfgChoqueConService: CfgChoqueConService,
     private _loginService: LoginService,
   ) { }
 
@@ -39,12 +39,11 @@ export class CfgCasoInsumoComponent implements OnInit {
       ) {
       }
     })
-    this._CfgCasoInsumoService.getCfgCasoInsumo().subscribe(
+    this._CfgChoqueConService.getCfgChoqueCon().subscribe(
       response => {
         if (response) {
 
-          console.log(response);
-          this.cfgCasoInsumos = response.data;
+          this.cfgChoquesCon = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
@@ -92,7 +91,7 @@ export class CfgCasoInsumoComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteCfgCasoInsumo(id: any) {
+  deleteCfgChoqueCon(id: any) {
 
     swal({
       title: '¿Estás seguro?',
@@ -106,7 +105,7 @@ export class CfgCasoInsumoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgCasoInsumoService.deleteCfgCasoInsumo(token, id).subscribe(
+        this._CfgChoqueConService.deleteCfgChoqueCon(token, id).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
@@ -133,8 +132,8 @@ export class CfgCasoInsumoComponent implements OnInit {
     })
   }
 
-  editCfgCasoInsumo(cfgCasoInsumo: any) {
-    this.cfgCasoInsumo = cfgCasoInsumo;
+  editCfgChoqueCon(cfgChoqueCon: any) {
+    this.cfgChoqueCon = cfgChoqueCon;
     this.formEdit = true;
     this.formIndex = false;
   }

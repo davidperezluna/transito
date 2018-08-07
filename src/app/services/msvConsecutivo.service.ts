@@ -79,4 +79,13 @@ export class MsvConsecutivoService {
 			.map(res => res.json());
 
 	}
+
+	showBySede(token, datos) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/operativasede", params, { headers: headers })
+			.map(res => res.json());
+
+	}
 }

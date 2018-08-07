@@ -2,8 +2,6 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { CfgGravedad } from '../cfgGravedad.modelo';
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { LoginService } from '../../../services/login.service';
-import { ModuloService } from '../../../services/modulo.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -22,27 +20,10 @@ export class NewComponent implements OnInit {
   constructor(
     private _CfgGravedadService: CfgGravedadService,
     private _loginService: LoginService,
-    private _ModuloService: ModuloService,
-    private _sedeOperativaService: SedeOperativaService,
   ) { }
 
   ngOnInit() {
     this.cfgGravedad = new CfgGravedad(null, null);
-
-    this._ModuloService.getModuloSelect().subscribe(
-      response => {
-        this.modulos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
   }
   onCancelar() {
     this.ready.emit(true);
@@ -65,7 +46,7 @@ export class NewComponent implements OnInit {
         } else {
           swal({
             title: 'Error!',
-            text: 'El Caso Insumo ya se encuentra registrado',
+            text: 'La gravedad ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

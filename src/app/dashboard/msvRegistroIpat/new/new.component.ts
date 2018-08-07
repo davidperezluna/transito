@@ -6,10 +6,10 @@ import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service'
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { DepartamentoService } from '../../../services/departamento.service';
-import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
-import { LimitacionService } from '../../../services/cfgLimitacion.service';
-import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
-import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
+import { CfgGravedadService } from '../../../services/cfgGravedad.service';
+import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
+import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
+import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
@@ -30,6 +30,14 @@ export class NewComponent implements OnInit {
   public ipatEncontrado = 1;
   public ipats = false;
   public identity: any;
+  public gravedades: any;
+  public gravedadSelected: any;
+  public clasesAccidente: any;
+  public claseAccidenteSelected: any;
+  public choquesCon: any;
+  public choqueConSelected: any;
+  public objetosFijos: any;
+  public objetoFijoSelected: any;
   public datos = {
   }
   public datos2 = {
@@ -46,16 +54,66 @@ export class NewComponent implements OnInit {
     private _loginService: LoginService,
     private _MunicipioService: MunicipioService,
     private _DepartamentoService: DepartamentoService,
-    private _CfgEntidadJuducialService: CfgEntidadJudicialService,
-    private _LimitacionService: LimitacionService,
-    private _CfgTipoProcesoService: CfgTipoProcesoService,
-    private _CfgCausalLimitacionService: CfgCausalLimitacionService,
-    private _tipoIdentificacionService: TipoIdentificacionService,
+    private _GravedadService: CfgGravedadService,
+    private _ClaseAccidenteService: CfgClaseAccidenteService,
+    private _ChoqueConService: CfgChoqueConService,
+    private _ObjetoFijoService: CfgObjetoFijoService,
   ) { }
 
   ngOnInit() {
-    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this._GravedadService.getGravedadSelect().subscribe(
+      response => {
+        this.gravedades = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
 
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
+      response => {
+        this.clasesAccidente = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._ChoqueConService.getChoqueConSelect().subscribe(
+      response => {
+        this.choquesCon = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._ObjetoFijoService.getObjetoFijoSelect().subscribe(
+      response => {
+        this.objetosFijos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
 
 
   }
@@ -93,7 +151,7 @@ export class NewComponent implements OnInit {
           
           swal({
             title: 'Error!',
-            text: 'La limitacion a la propiedad ' + this.consecutivo + ', con la fecha: ' + this.msvRegistroIpat.fechaExpedicion ,
+            text: 'La limitacion a la propiedad ' + this.consecutivo + ', con la fecha: ' + this.msvRegistroIpat.fechaAccidente ,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
