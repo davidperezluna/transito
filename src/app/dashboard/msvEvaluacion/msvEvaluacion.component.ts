@@ -33,7 +33,7 @@ export class MsvEvaluacionComponent implements OnInit {
   public isExist:any; 
   public msj:any; 
   public nit:any; 
-  public empresa:any;
+  public empresas:any;
   public miEmpresa:Empresa;
   public revisiones:any = false;
   public msvEvaluacion: MsvEvaluacion;
@@ -194,13 +194,21 @@ export class MsvEvaluacionComponent implements OnInit {
         if (response.code == 200 ) {
           this.msj = response.msj;
           this.isError = false;
-          this.empresa=response.data;
-          if(this.empresa){
+          this.empresas=response.data;
+          this.empresas.forEach(element => {
+
+            if(element.nombre == this.datos.parametro){
+              this.miEmpresa = element;
+
+            }
+            
+          });          
+          if(this.miEmpresa){
             this.habilitarBotonRev = true;
-            console.log(this.empresa);
+            console.log(this.miEmpresa);
             
           }      
-            this._RevisionService.showRevision(token, this.empresa.id).subscribe(
+            this._RevisionService.showRevision(token, this.miEmpresa.id).subscribe(
               response => {
                 if (response.code == 200 ) {
                   this.msj = response.msj;
@@ -267,9 +275,9 @@ export class MsvEvaluacionComponent implements OnInit {
       }
     })
     let token = this._loginService.getToken();
-    console.log(this.empresa.id);
+    console.log(this.miEmpresa.id);
     
-    this._RevisionService.showRevision(token,this.empresa.id).subscribe(
+    this._RevisionService.showRevision(token,this.miEmpresa.id).subscribe(
       response => {
         console.log(response.data);
         if (response.code == 200 ) {
