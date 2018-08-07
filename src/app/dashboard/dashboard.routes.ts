@@ -45,7 +45,6 @@ import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
 import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
 import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
 
-import { MflTipoRecaudoRoutes } from './mflTipoRecaudo/mflTipoRecaudo.routes';
 import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
 
@@ -147,7 +146,6 @@ export const DashboardRoutes: Route[] = [
         ...MgdDocumentoRoutes,
         ...MgdRegistroRoutes,
         ...MgdTipoCorrespondenciaRoutes,
-        ...MflTipoRecaudoRoutes,
         ...MflInfraccionRoutes,
         ...MflInfraccionCategoriaRoutes,
         ...MparqCostoTrayectoRoutes,

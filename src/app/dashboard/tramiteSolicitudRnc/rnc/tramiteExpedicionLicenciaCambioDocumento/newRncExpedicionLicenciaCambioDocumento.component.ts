@@ -4,7 +4,6 @@ import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { PaisService } from '../../../../services/pais.service';
-import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -50,7 +49,6 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         private _ServicioService: ServicioService,
         private _CiudadanoService: CiudadanoService,
         private _PaisService: PaisService,
-        private _RncLicenciaConduccionService: RncLicenciaConduccionService,
     ) { }
 
     ngOnInit() {
@@ -101,7 +99,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         );
     }
     
-    onEnviarTramite() {
+    enviarTramite() {
         let token = this._LoginService.getToken();
         
         this.datos.tramiteFactura = 2;
@@ -110,26 +108,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
 
-        this._RncLicenciaConduccionService.validateTipoIdentificacionByCiudadanoId({ 'ciudadanoId':this.solicitante.id },token).subscribe(
-            response => {
-                if (response.status == 'success') {
-                    this.readyTramite.emit(this.datos);
-                } else {
-                    swal({
-                        type: 'warning',
-                        title: 'Alerta!',
-                        text: response.message
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
+        this.readyTramite.emit(this.datos);
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

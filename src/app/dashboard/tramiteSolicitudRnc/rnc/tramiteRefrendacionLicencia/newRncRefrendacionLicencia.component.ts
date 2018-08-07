@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { PaisService } from '../../../../services/pais.service';
-import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -45,7 +44,6 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
         private _ClaseService: ClaseService,
         private _ServicioService: ServicioService,
         private _PaisService: PaisService,
-        private _RncLicenciaConduccionService: RncLicenciaConduccionService,
     ) { }
 
     ngOnInit() {
@@ -103,26 +101,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
         this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
 
-        this._RncLicenciaConduccionService.searchVigente(token).subscribe(
-            response => {
-                if (response.status == 'success') {
-                    this.readyTramite.emit(this.datos);
-                } else {
-                    swal({
-                        type: 'warning',
-                        title: 'Alerta!',
-                        text: response.message
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
+        this.readyTramite.emit(this.datos);
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

@@ -94,7 +94,6 @@ import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
 import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
 
-import { MflTipoRecaudoModule } from './mflTipoRecaudo/mflTipoRecaudo.module';
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
 
@@ -162,7 +161,6 @@ import {RightsidebarComponent} from '../shared';
       MsvCategoriaModule,
       MgdDocumentoModule,
       MgdTipoCorrespondenciaModule,
-      MflTipoRecaudoModule,
       MflInfraccionModule,
       MflInfraccionCategoriaModule,
       MgdRegistroModule,

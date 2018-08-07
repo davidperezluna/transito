@@ -4,7 +4,7 @@ import { MsvParametroService } from '../../../services/msvParametro.service';
 import { MsvVariableService } from '../../../services/msvVariable.service';
 import { MsvCalificacionService } from '../../../services/msvCalificacion.service';
 import swal from 'sweetalert2';
-import { tokenKey } from '@angular/core/src/view/util';
+import { tokenKey } from '../../../../../node_modules/@angular/core/src/view/util';
 declare var $: any;
 
 @Component({
