@@ -45,9 +45,8 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-4">
                             <label>Categoria <b class="text-danger">*</b></label>
-                            <select class="form-control" [(ngModel)]="datos.categoria" name="categoria" required>
-                                <option *ngFor="let categoria of categorias" [value]="categoria"> {{ categoria }}</option>
-                            </select>
+                            <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="categoriaSelected" name="categorias" required>
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Clase vehiculo <b class="text-danger">*</b></label>
@@ -62,12 +61,12 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-4">
-                            <label>Vigencia <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" required />
+                            <label>Fecha Expedición <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.fechaExpedicion" name="fechaExpedicion" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Número de Licencia <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroLicenciaConduccion" name="numeroLicenciaConduccion" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Número RUNT <b class="text-danger">*</b></label>
@@ -77,8 +76,16 @@
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="enviarTramite()" class="btn btn-success">Enviar</button>
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviarTramite()" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

@@ -63,4 +63,17 @@ export class RncLicenciaConduccionService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/record/ciudadano/id", params, { headers: headers }).map(res => res.json());
     }
+
+    searchVigente(token) {
+        let params = "authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/search/vigente", params, { headers: headers }).map(res => res.json());
+    }
+
+    validateTipoIdentificacionByCiudadanoId(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "json=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/validate/tipo/identificacion/ciudadano/id", params, { headers: headers }).map(res => res.json());
+    }
 }

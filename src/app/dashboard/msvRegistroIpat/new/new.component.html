@@ -1,0 +1,150 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <h5 class="m-0">
+                        Registrar limitaciones a la propiedad
+                    </h5>
+                    <small>Todos los campos con
+                        <b class="text-danger">*</b> son obligatorios</small>
+                    <hr>
+                    <div class="row justify-content-center container">
+
+                        <!-- Nro. IPAT -->
+                        <div class="col-xs-8 col-lg-6">
+                            <label>Nro IPAT</label>
+                            <div class="input-group" [class.has-success]="ipatEncontrado === 2" [class.has-danger]="ipatEncontrado === 3">
+                                <input type="text" class="form-control" placeholder="nroIpat" [(ngModel)]="nroIpat" name="nroIpat" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onKeyIpat()" [class.btn-default]="ipatEncontrado === 1" [class.btn-success]="ipatEncontrado === 2" [class.btn-danger]="ipatEncontrado === 3"
+                                        class="btn" ngxclipboard="" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="has-danger" *ngIf="ipatEncontrado === 3">
+                                <div class="form-control-feedback has-danger has-error">No se encontró el consecutivo</div>
+                            </div>
+                            <div class="col-lg-12 col-md-12" *ngIf="ipatEncontrado === 2">
+                                <br>
+
+                                <label>Datos Básicos
+                                </label>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <td>
+                                            <strong>Organismo de Transito: </strong>
+                                            {{sedeOperativa?.nombre}}
+                                        </td>
+                                        <td>
+                                            <strong>Nro. IPAT: </strong>
+                                            {{consecutivo?.consecutivo}}
+                                        </td>
+                                        <td>
+                                            <strong>Estado IPAT: </strong>
+                                            {{consecutivo?.estado}}
+                                        </td>
+
+
+                                    </tbody>
+                                </table>
+                                <button (click)="btnRegistrar()" class="btn btn-primary pull-right">Registrar</button>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+
+
+
+                </form>
+            </div>
+
+            <div class="row justify-content-center container">
+
+                <div class="col-lg-6 col-md-6">
+                    <label>Gravedad
+                        <span class="text-danger">*</span>
+                    </label>
+                    <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="gravedadSelected" required name="gravedadId">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Clase Accidente
+                        <span class="text-danger">*</span>
+                    </label>
+                    <ng-select [multiple]="false" [options]="clasesAccidente" [(ngModel)]="claseAccidenteSelected" required name="claseAccidenteId">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <br>
+                    <label>Otro (Clase Accidente)</label>
+                    <input class="form-control" placeholder="" type="text" [(ngModel)]="msvRegistroIpat.otroClaseAccidente" name="valor" required>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Choque Con
+                        <span class="text-danger">*</span>
+                    </label>
+                    <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="choqueConSelected" required name="choqueConId">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Objeto Fijo
+                        <span class="text-danger">*</span>
+                    </label>
+                    <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="objetoFijoSelected" required name="objetoFijoId">
+                    </ng-select>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <br>
+                    <label>Otro (Objeto Fijo)</label>
+                    <input class="form-control" placeholder="" type="text" [(ngModel)]="msvRegistroIpat.otroObjetoFijo" name="valor" required>
+                </div>
+
+                <br>
+                <div class="col-lg-6 col-md-6">
+                    <label>Fecha Accidente
+                    </label>
+                    <input type="date" class="form-control" placeholder="fecha accidente" [(ngModel)]="msvRegistroIpat.fechaAccidente" name="fechaAccidente"
+                        required />
+
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <label>Fecha Levantamiento
+                    </label>
+                    <input type="date" class="form-control" placeholder="fecha levantamiento" [(ngModel)]="msvRegistroIpat.fechaLevantamiento" name="fechaLevantamiento"
+                        required />
+
+                </div>
+                <br>
+                <hr>
+                <br>
+
+                <div class="col-lg-6 col-md-6">
+                    <label>Observaciones</label>
+                    <textarea class="form-control" [(ngModel)]="msvRegistroIpat.observaciones" name="observaciones" placeholder="Aqui puede ingresar las observaciones"
+                        required></textarea>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+    <div class="card-footer" *ngIf="listaVehiculosPlacas">
+        <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
+        <button (click)="enviarTramite()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

@@ -70,4 +70,22 @@ export class MsvConsecutivoService {
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}
+
+	showBySedeConsecutivo(token, datos) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/sede/consecutivo", params, { headers: headers })
+			.map(res => res.json());
+
+	}
+
+	showBySede(token, datos) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/operativasede", params, { headers: headers })
+			.map(res => res.json());
+
+	}
 }

@@ -100,7 +100,8 @@
                             <label>Departamento
                                 <span class="text-danger">*</span>
                             </label>
-                            <ng-select [multiple]="false" [options]="departamentos" [(ngModel)]="departamentoSelected" (ngModelChange)="changedDepartamento($event)" required name="departamentoId">
+                            <ng-select [multiple]="false" [options]="departamentos" [(ngModel)]="departamentoSelected" (ngModelChange)="changedDepartamento($event)"
+                                required name="departamentoId">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -296,7 +297,7 @@
                                 <button (click)="btnCancelarDemandante()" class="btn btn-secondary">Cancel</button>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-6 col-md-6">
                             <br>
                             <label>Nro Orden Judicial</label>
@@ -358,9 +359,7 @@
 
 
                     </div>
-
-
-
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
 
 
                 </form>

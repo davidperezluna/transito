@@ -39,8 +39,9 @@
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Modulo <b class="text-danger" ng-disabled="tramitesValor" >*</b></label>
+                            <label>Modulo <b class="text-danger" >*</b></label>
                             <ng-select
+                                [disabled]="tramitesValor?.length > 0"
                                 [multiple]="false"
                                 [options]="modulos"
                                 [(ngModel)]="moduloSelected"
@@ -115,65 +116,49 @@
                     <div class="has-success" *ngIf="isExistVehiculo" >
                         <!-- tabla de detalles del vehiculo sin placa -->
                         <div class="col-xs-12 col-lg-12" >
-                            <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>
+                            <h5 class="card-title"><small>Detalles del vehiculo encontrado</small></h5>
                             <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th><b>Nro.Factura</b></th>
-                                        <th><b>Servicio</b></th>
-                                        <th><b>Clases de vehículo</b></th>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                        {{vehiculo.numeroFactura}}
+                                            <b>Nro.Factura: </b>
+                                            {{ vehiculo.numeroFactura }}
                                         </td>
-                                        <td> 
-                                            {{vehiculo.servicio.nombre}}
+                                        <td>
+                                            <b>Servicio: </b>
+                                            {{ vehiculo.servicio.nombre }}
                                         </td>
-                                        <td> 
-                                            {{vehiculo.clase.nombre}}
+                                        <td>
+                                            <b>Clases de vehículo: </b>
+                                            {{ vehiculo.clase.nombre }}
                                         </td>
                                     </tr>
-                                </tbody> 
-                                <thead>
-                                    <tr>
-                                    <th><b>Nro.Motor</b></th>
-                                    <th><b>Nro.Chasis</b></th>
-                                    <th><b>Nro.Serie</b></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
                                     <tr>
                                         <td>
-                                        {{vehiculo.motor}}
+                                            <b>Nro.Motor: </b>
+                                            {{ vehiculo.motor }}
                                         </td>
-                                        <td> 
-                                            {{vehiculo.chasis}}
+                                        <td>
+                                            <b>Nro.Chasis: </b>
+                                            {{ vehiculo.chasis }}
                                         </td>
-                                        <td> 
-                                            {{vehiculo.serie}}
+                                        <td>
+                                            <b>Nro.Serie: </b>
+                                            {{ vehiculo.serie }}
                                         </td>
                                     </tr>
-                                </tbody> 
-                                <thead>
-                                    <tr>
-                                    <th><b>Nro.VIN</b></th>
-                                    <th><b>Nro.Factura compra venta</b></th>
-                                    <th><b>Fecha compra venta</b></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
                                     <tr>
                                         <td>
-                                        {{vehiculo.vin}}
+                                            <b>Nro.VIN: </b>
+                                            {{ vehiculo.vin }}
                                         </td>
-                                        <td> 
-                                            {{vehiculo.numeroFactura}}
+                                        <td>
+                                            <b>Nro.Factura compra venta</b>
+                                            {{ vehiculo.numeroFactura }}
                                         </td>
-                                        <td> 
-                                            {{vehiculo.fechaFactura}}
+                                        <td>
+                                            <b>Fecha compra venta</b>
+                                            {{ vehiculo.fechaFactura }}
                                         </td>
                                     </tr>
                                 </tbody> 
@@ -250,6 +235,10 @@
 
                         </div>
                         <div class="card-footer">
+                            <button (click)="onCancelarTraspaso()" class="btn btn-default">
+                                <i class="fa fa-times"></i>
+                                Cancelar
+                            </button>
                             <button (click)="btnRetefunete()" [disabled]='vendedores == 0' class="btn btn-primary pull-right">Aceptar</button>
                         </div>
                     </div>
@@ -265,8 +254,9 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let tramiteValor of tramitesValor; let i = index">
-                                <td>{{tramiteValor.nombre}}</td>
-                                <td>{{tramiteValor.valor}}</td>
+                                <td >{{tramiteValor.nombre}}</td>
+                                <td *ngIf='tramiteValor.valor'>{{tramiteValor.valor}}</td>
+                                <td *ngIf='!tramiteValor.valor'>0</td>
                                 <td>
                                     <button (click)="deleteTramiteValor(tramiteValor)"  class="btn btn-xs btn-danger" type="button">
                                         <i class="fa fa-trash"></i>
