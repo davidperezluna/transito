@@ -15,7 +15,7 @@ public tramite: Tramite;
 public errorMessage;
 public respuesta;
 public modulos: any;
-public moduloSelected: any;
+public moduloSelected: any; 
 
 constructor(
   private _TramiteService: TramiteService,
