@@ -12,7 +12,7 @@ import { TramitePrecioService } from '../../../services/tramitePrecio.service';
 import { DatePipe } from '@angular/common';
 import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import swal from 'sweetalert2';
-import { environment } from '../../../../environments/environment'
+import { environment } from 'environments/environment'
 
 @Component({
   selector: 'app-new-factura',
@@ -374,6 +374,16 @@ constructor(
           response => {
             this.tramitePrecio = response.data;
             if (this.tramitePrecio.tramite.id == 6) {
+              
+              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
+              this.tramitesValor.push(
+                {
+                  'idTramitePrecio': this.tramitePrecio.id,
+                  'nombre': this.tramitePrecio.nombre,
+                  'valor': this.tramitePrecio.valorTotal
+                }
+              )
+
               swal({
                 title: 'Buscando Propietarios!',
                 text: 'Solo tardara unos segundos por favor espere.',
