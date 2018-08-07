@@ -47,6 +47,27 @@
           </ul>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
+              <a class="nav-link" routerLink="cfgClaseAccidente" [ngClass]="{'active' : ( addActive === 'cfgClaseAccidente')}" (click)="addActiveMenu('cfgClaseAccidente')">
+                <i class="fa fa-angle-right"></i> Clase Accidente
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgChoqueCon" [ngClass]="{'active' : ( addActive === 'cfgChoqueCon')}" (click)="addActiveMenu('cfgChoqueCon')">
+                <i class="fa fa-angle-right"></i> Choque Con
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgObjetoFijo" [ngClass]="{'active' : ( addActive === 'cfgObjetoFijo')}" (click)="addActiveMenu('cfgObjetoFijo')">
+                <i class="fa fa-angle-right"></i> Objeto Fijo
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
               <a class="nav-link" routerLink="msvTalonario" [ngClass]="{'active' : ( addActive === 'msvTalonario')}" (click)="addActiveMenu('msvTalonario')">
                 <i class="fa fa-angle-right"></i> Talonarios
               </a>

@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumo } from '../cfgCasoInsumo.modelo';
-import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
+import { CfgClaseAccidente } from '../cfgClaseAccidente.modelo';
+import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
 import { LoginService } from '../../../services/login.service';
-import { ModuloService } from '../../../services/modulo.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,40 +10,19 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public cfgCasoInsumo: CfgCasoInsumo;
+  public cfgClaseAccidente: CfgClaseAccidente;
   public errorMessage;
   public respuesta;
-  public modulos: any;
-  public moduloSelected: any;
-  public tipoCasoInsumos = [
-    { 'value': "Insumo", 'label': "Insumo" },
-    { 'value': "Sustrato", 'label': "Sustrato" }
-  ];
-  public tipoCasoInsumoSelected: any;
+  
 
   constructor(
-    private _CfgCasoInsumoService: CfgCasoInsumoService,
+    private _CfgClaseAccidenteService: CfgClaseAccidenteService,
     private _loginService: LoginService,
-    private _ModuloService: ModuloService,
-    private _sedeOperativaService: SedeOperativaService,
   ) { }
 
   ngOnInit() {
-    this.cfgCasoInsumo = new CfgCasoInsumo(null, null, null, null, null, null);
+    this.cfgClaseAccidente = new CfgClaseAccidente(null, null);
 
-    this._ModuloService.getModuloSelect().subscribe(
-      response => {
-        this.modulos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
 
   }
   onCancelar() {
@@ -53,10 +30,8 @@ export class NewComponent implements OnInit {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgCasoInsumo.moduloId = this.moduloSelected;
-    this.cfgCasoInsumo.tipo = this.tipoCasoInsumoSelected;
     
-    this._CfgCasoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
+    this._CfgClaseAccidenteService.register(this.cfgClaseAccidente, token).subscribe(
       response => {
         this.respuesta = response;
         
@@ -71,7 +46,7 @@ export class NewComponent implements OnInit {
         } else {
           swal({
             title: 'Error!',
-            text: 'El Caso Insumo ya se encuentra registrado',
+            text: 'La clase accidente ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

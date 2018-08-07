@@ -42,8 +42,6 @@ export class CfgGravedadComponent implements OnInit {
     this._CfgGravedadService.getCfgGravedad().subscribe(
       response => {
         if (response) {
-
-          console.log(response);
           this.cfgGravedades = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
