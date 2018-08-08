@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class ComparendoService {
-	private url = environment.apiUrl + "datos";
+	private url = environment.apiUrl + "comparendo";
 	public identity;
 	public token;
 
@@ -72,5 +72,12 @@ export class ComparendoService {
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/tipo", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchByParametros(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/parametros", params, { headers: headers }).map(res => res.json());
 	}
 }

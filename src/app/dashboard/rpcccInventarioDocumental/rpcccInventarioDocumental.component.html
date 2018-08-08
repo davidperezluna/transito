@@ -1,0 +1,72 @@
+<div class="container" >
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <b class="text-uppercase">Reporte documental por estado de comparendo</b>
+              <br>
+              <small>Seleccione el estado a incluir en el reporte</small>
+            </h5>
+          </div>
+
+          <div class="card-body">
+            <div class="form-group row">
+              <div class="col-xs-4 col-lg-4">
+              <label>Agente transito<strong class="text-danger">*</strong></label>
+              <ng-select
+                  [multiple]="false"
+                  [options]="agentes"
+                  [(ngModel)]="agenteSelected"
+                  required
+                  name="agenteId">
+              </ng-select>
+              </div>
+              <div class="col-xs-4 col-lg-4">
+                <label>Fecha desde<strong class="text-danger">*</strong></label>
+                <input class="form-control" [(ngModel)]="datos.fechaDesde" name="fechaDesde" type="date" required />
+              </div>
+              <div class="col-xs-4 col-lg-4">
+                <label>Fecha hasta<strong class="text-danger">*</strong></label>
+                <input class="form-control" [(ngModel)]="datos.fechaHasta" name="fechaHasta" type="date" required />
+              </div>
+              <div class="col-xs-4 col-lg-4">
+                  <label>Estados del reporte<strong class="text-danger">*</strong></label>
+                  <ng-select
+                      [multiple]="true"
+                      [options]="tipoComparendos"
+                      [(ngModel)]="comparendosSelected"
+                      required
+                      name="comparendosId">
+                  </ng-select>
+              </div>
+              <div class="card-footer">
+                  <button (click)="buscarComparendos()" class="btn btn-success pull-right">Enviar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body" *ngIf="reportes">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Valor total recaudo</th>
+                    <th>Fecha Reporte</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let reporte of reportes; let i = index">
+                  <td >{{ reporte.cantidad }}</td>
+                  <td >{{ reporte.valorRecaudo }}</td>
+                  <td >{{ datos.fechaDesde }}-{{ datos.fechaHasta }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
