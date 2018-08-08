@@ -29,7 +29,7 @@ import { NewRnaBlindajeComponent } from './rna/tramiteBlindaje/newRna.blindaje.c
 import { NewRnaPreregistroComponent } from './rna/tramitePreregistro/newRna.preregistro.component';
 import { NewRnaCiudadanoComponent } from './newRnaCiudadano/newRnaCiudadano.component';
 import { NewRnaAcreedorComponent } from './newRnaAcreedor/newRnaAcreedor.component';
-import { NewRnaSustratoComponent } from './newRnaSustrato/newRnaSustrato.component';
+import { NewRnaInsumoComponent } from './newRnaSustrato/newRnaSustrato.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
 import { NewRnaTraspasoIndeterminadaComponent } from './rna/tramiteTraspasoIndeterminada/newRna.traspasoIndeterminada.component';
 import { NewTrasladoComponent } from './rna/tramiteTraslado/newTraslado.component';
@@ -44,6 +44,7 @@ import { NewRnaCambioConjuntoComponent } from './rna/tramiteCambioConjunto/newRn
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
+import { FacturaInsumoService } from '../../services/facturaInsumo.service';
 
 
 
@@ -77,7 +78,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaTramiteLevantamientoAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
         NewRnaAcreedorComponent,
-        NewRnaSustratoComponent,
+        NewRnaInsumoComponent,
         NewRnaMatricualaInicialComponent,
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
@@ -114,7 +115,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewRnaTramiteLevantamientoAlertaPrendaComponent,
         NewRnaCiudadanoComponent,
         NewRnaAcreedorComponent,
-        NewRnaSustratoComponent,
+        NewRnaInsumoComponent,
         NewRnaMatricualaInicialComponent,
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
@@ -122,7 +123,7 @@ import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
         NewTrasladoComponent,
         NewRnaCambioGasComponent,
     ],
-    providers: [TramiteSolicitudService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, EmpresaService, DefaultService]
+    providers: [FacturaInsumoService,TramiteSolicitudService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, EmpresaService, DefaultService]
 })
 
 export class TramiteSolicitudModule { }
