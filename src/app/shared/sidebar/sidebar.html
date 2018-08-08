@@ -339,7 +339,7 @@
                 <i class="fa fa-angle-right"></i> Valor tramite
               </a>
             </li>
-            
+
             <li class="nav-item">
               <a class="nav-link" routerLink="departamento" [ngClass]="{'active' : ( addActive === 'departamento')}" (click)="addActiveMenu('departamento')">
                 <i class="fa fa-angle-right"></i> Departamento
@@ -355,19 +355,19 @@
                 <i class="fa fa-angle-right"></i> Sede Operativa
               </a>
             </li>
-            
+
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgEntidadJudicial" [ngClass]="{'active' : ( addActive === 'cfgEntidadJudicial')}" (click)="addActiveMenu('cfgEntidadJudicial')">
                 <i class="fa fa-angle-right"></i> Entidad Judicial
               </a>
             </li>
-            
+
             <li class="nav-item">
               <a class="nav-link" routerLink="organismoTransito" [ngClass]="{'active' : ( addActive === 'organismoTransito')}" (click)="addActiveMenu('organismoTransito')">
                 <i class="fa fa-angle-right"></i> Organismo Transito
               </a>
             </li>
-            
+
             <li class="nav-item">
               <a class="nav-link" routerLink="modulo" [ngClass]="{'active' : ( addActive === 'modulo')}" (click)="addActiveMenu('modulo')">
                 <i class="fa fa-angle-right"></i>
@@ -615,6 +615,12 @@
             </li>
           </ul>
           <!-- /.nav-third-level -->
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tramiteSolicitudRpccc" [ngClass]="{'active' : ( addActive === 'tramiteSolicitudRpccc')}" (click)="addActiveMenu('tramiteSolicitudRpccc')">
+            <i class="fa fa-angle-right"></i> Solicitud de tramite
+          </a>
         </li>
       </ul>
       <!-- /.nav-second-level -->

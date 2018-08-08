@@ -67,7 +67,7 @@
                                 </ng-select>
                               </div>
                               <div class="col-xs-12 col-lg-12">
-                                <label>Identificación <strong class="text-danger">*</strong></label>
+                                <label>Indentificación <strong class="text-danger">*</strong></label>
                                 <input class="form-control" [(ngModel)]="identificacion" name="identificacion" type="text" required />
                               </div>
                           </div>
@@ -83,6 +83,10 @@
           </div>
       </div>
     </div><!-- .row -->
+    <div class="tab-pane" id="rpccc-ciudadano" role="tabpanel">
+      <app-new-rpccc-ciudadano *ngIf="solicitanteEncontrado === 3" [identificacion]="identificacion"
+        (ready)="ready($event)"></app-new-rpccc-ciudadano>
+    </div>
 
     <app-edit *ngIf='formEdit' [tramiteSolicitud]="tramiteSolicitud" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' [solicitante]="solicitante" (ready)="ready($event)"></app-new>

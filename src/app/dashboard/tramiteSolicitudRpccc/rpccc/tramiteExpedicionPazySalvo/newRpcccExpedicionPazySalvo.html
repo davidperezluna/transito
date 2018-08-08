@@ -1,0 +1,57 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Expedicion de licencia
+                </h5>
+                <small>Todos los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <form>
+                    <div class="col-xs-12 col-lg-8">
+                        <label>Solicitante</label>
+                        <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante"
+                            readonly>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Identificación</label>
+                        <input type="text" class="form-control" value="{{ solicitante.identificacion }}" name="solicitante_identificacion" readonly>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="card-body" *ngIf="comparendos">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Número orden Comparendo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                            <td>{{ comparendo.id }}</td>
+                            <td>{{ comparendo.numeroOrden }}</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
+            </div>
+
+
+
+
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="onEnviarTramite()" class="btn btn-success">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
