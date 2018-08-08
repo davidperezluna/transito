@@ -1,26 +1,30 @@
 <div class="row">
     <div class="col-xs-12 col-lg-6">
         <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Editar Tipo de Identificación</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
             <div class="card-body">
-                <h5 class="m-0">Editar Tipo de Identificación</h5>
-                <hr> 
-                <div class="row justify-content-center">
-                    <form #tipoIdentificacionForm="ngForm">
-                        <div class="form-group row">                  
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Nombre*</label>
+                <form #tipoIdentificacionForm="ngForm">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="form-group">                  
+                                <label>Nombre <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="tipoIdentificacion.nombre" name="nombre" placeholder="Nombre" type="text" required>
                             </div>
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Sigla*</label>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="form-group">
+                                <label>Sigla <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="tipoIdentificacion.sigla" name="sigla" placeholder="Sigla" type="text" required>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
                 <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                    <button (click)="onEnviar()" [disabled]="tipoIdentificacionForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                    <button (click)="onEnviar()" [disabled]="tipoIdentificacionForm.invalid" class="btn btn-primary" type="button">Enviar</button>
                 </div>    
             </div>
         </div>

@@ -1,26 +1,28 @@
 <div class="row">
     <div class="col-xs-12 col-lg-6">
         <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo Genero</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
             <div class="card-body">
-                <h5 class="m-0">Nuevo Genero</h5>
-                <hr>
                 <form #newForm="ngForm" class="container">  
-                    <div class="row justify-content-center">
-                        <div class="form-group row">
+                    <div class="row">
+                        <div class="form-group">
                             <div class="col-xs-12 col-lg-12">
-                                <label>Nombre*</label>
+                                <label>Nombre <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="genero.nombre" name="nombre" placeholder="Nombre" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-12">
-                                <label>Sigla*</label>
+                                <label>Sigla <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="genero.sigla" name="sigla" placeholder="Sigla" type="text" required>
                             </div>
                         </div>
                     </div>
                 </form>
                 <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                    <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                    <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
                 </div>    
             </div>
         </div>
