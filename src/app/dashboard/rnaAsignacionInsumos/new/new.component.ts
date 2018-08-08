@@ -34,7 +34,7 @@ public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
 public frmInsumo:any=true;
-public frmInsumoSelect:any=false; 
+public frmInsumoSelect:any=true; 
 
 constructor(
   private datePipe: DatePipe,
@@ -149,6 +149,7 @@ constructor(
 
   changedSedeOperativa(e){
     if (e) {
+      console.log('holaaaaa');
       this.frmInsumoSelect = false;
     }
   }

@@ -85,19 +85,15 @@
                         <div class="tab-pane" id="realizado" role="tabpanel"> 
                             <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
                         </div>
-
+                        
                         <div class="tab-pane" id="sustrato" role="tabpanel"> 
                             <appRnc-sustrato [factura] = "factura"  [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato>
                         </div>
-
+                        
                         <div class="tab-pane" id="rnc-expedicionlicencia" role="tabpanel"> 
                             <appRnc-expedicion-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
                         </div>
-
-                        <div class="tab-pane" id="rnc-expedicioncambiodocumento" role="tabpanel">
-                            <appRnc-expedicion-licencia-cambio-documento [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
-                        </div>
-
+                        
                         <div class="tab-pane" id="rnc-duplicadolicencia" role="tabpanel"> 
                             <appRnc-duplicado-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
                         </div>
@@ -108,6 +104,10 @@
 
                         <div class="tab-pane" id="rnc-recategorizacionarriba" role="tabpanel"> 
                             <appRnc-recategorizacion-licencia-arriba [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
+                        </div>
+
+                        <div class="tab-pane" id="rnc-expedicioncambiodocumento" role="tabpanel">
+                            <appRnc-expedicion-licencia-cambio-documento [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
                         </div>
 
                         <div class="tab-pane" id="rnc-refrendacionlicencia" role="tabpanel"> 

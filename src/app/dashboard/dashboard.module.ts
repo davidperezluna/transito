@@ -22,11 +22,14 @@ import { ServicioModule } from './servicio/servicio.module';
 import { ModuloModule } from './modulo/modulo.module';
 import { TramiteModule } from './tramite/tramite.module'; 
 import { AlmacenModule } from './almacen/almacen.module';
+<<<<<<< HEAD
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
+=======
+>>>>>>> 43d62454abdffb367d5093871de647534016db2c
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
 
@@ -56,7 +59,6 @@ import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
 import { MparqGruaCiudadanoModule } from './mparqGruaCiudadano/mparqGruaCiudadano.module';
 import { MparqEntradaModule } from './mparqEntrada/mparqEntrada.module';
 import { MparqSalidaModule } from './mparqSalida/mparqSalida.module';
-import { MparqPatioModule } from './mparqPatio/mparqPatio.module';
 
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
@@ -67,21 +69,9 @@ import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
 import { LimitacionModule } from './limitacion/limitacion.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
-import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
-import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
-import { RnrsTramiteLevantamientoLimitacionModule } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.module';
-import { RnaTramiteInscripcionLimitacionModule } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.module';
-import { RnaTramiteLevantamientoLimitacionModule } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.module';
-import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
-import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
-
-import { CfgGravedadModule } from './cfgGravedad/cfgGravedad.module';
-import { CfgClaseAccidenteModule } from './cfgClaseAccidente/cfgClaseAccidente.module';
-import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
-import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
@@ -122,6 +112,8 @@ import {SidebarComponent} from '../shared';
 import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
+import { MsvInventarioSenialModule } from './msvInventarioSenial/msvInventarioSenial.module';
+import { MsvSenialModule } from './msvSenial/msvSenial.module';
 
 @NgModule({
   imports: [
@@ -147,7 +139,6 @@ import {RightsidebarComponent} from '../shared';
       ModuloModule,
       TramiteModule,
       AlmacenModule,
-      CfgTipoInfractorModule,
       CiudadanoModule,
       TipoIdentificacionModule,
       CfgAuditoriaModule,
@@ -170,7 +161,6 @@ import {RightsidebarComponent} from '../shared';
       MparqGruaCiudadanoModule,
       MparqEntradaModule,
       MparqSalidaModule,
-      MparqPatioModule,
       MpersonalFuncionarioModule,
       MpersonalTipoContratoModule,
       MpersonalTalonarioModule,
@@ -180,7 +170,6 @@ import {RightsidebarComponent} from '../shared';
       CuentaModule,
       CarroceriaModule,
       ComparendoModule,
-      CfgComparendoEstadoModule,
       InfraccionModule,
       FacturaModule,
       TramiteFacturaModule,
@@ -197,13 +186,8 @@ import {RightsidebarComponent} from '../shared';
       RnaPreregistroModule,
       CfgPlacaModule,
       CfgCasoInsumoModule,
-      CfgGravedadModule,
-      CfgClaseAccidenteModule,
-      CfgChoqueConModule,
-      CfgObjetoFijoModule,
       CfgSedeOperativaModule,
       CfgEntidadJudicialModule,
-      CfgCausalLimitacionModule,
       MsvTalonarioModule,
       rnaRegistroInsumosModule,
       RnmaRegistroMaquinariaModule,
@@ -211,19 +195,19 @@ import {RightsidebarComponent} from '../shared';
       LimitacionModule,
       CfgTipoProcesoModule,
       RnmaTramiteInscripcionLimitacionModule,
-      RnmaTramiteLevantamientoLimitacionModule,
-      RnrsTramiteInscripcionLimitacionModule,
-      RnrsTramiteLevantamientoLimitacionModule,
-      RnaTramiteInscripcionLimitacionModule,
-      RnaTramiteLevantamientoLimitacionModule,
-      MsvRegistroIpatModule,
       CfgValorVehiculoModule,
       RnrsPreregistroModule,
       ReporteModule,
       registroEntregaProductoModule,
+<<<<<<< HEAD
       RpcccInventarioDocumentalModule
+=======
+>>>>>>> 43d62454abdffb367d5093871de647534016db2c
       
       //MsvTCAsignacionModule,
+
+      MsvInventarioSenialModule,
+      MsvSenialModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
