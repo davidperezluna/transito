@@ -10,13 +10,14 @@ import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.servi
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { StateComponent } from './state/state.component';
+import { SearchComponent } from './search/search.component';
 import {SelectModule} from 'angular2-select';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [ComparendoComponent,NewComponent,EditComponent,StateComponent],
-    exports: [ComparendoComponent, NewComponent,EditComponent,StateComponent],
+    declarations: [ComparendoComponent,NewComponent,EditComponent,StateComponent,SearchComponent],
+    exports: [ComparendoComponent, NewComponent,EditComponent,StateComponent,SearchComponent],
     providers:[MpersonalFuncionarioService,ComparendoService,SedeOperativaService,CiudadanoVehiculoService]
 })
 

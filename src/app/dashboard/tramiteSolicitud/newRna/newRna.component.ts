@@ -150,6 +150,7 @@ constructor(
             responseCiudadano =>{
               if (responseCiudadano.status == 'success') {
                 this.ciudadano = responseCiudadano.data.ciudadano;
+                console.log(response);
                 this.factura = response[0].factura;
               }
               error => {
