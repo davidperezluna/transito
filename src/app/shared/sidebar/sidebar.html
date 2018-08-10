@@ -234,6 +234,72 @@
                 Tipo de Proceso
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgComparendoEstado" [ngClass]="{'active' : ( addActive === 'cfgComparendoEstado')}" (click)="addActiveMenu('cfgComparendoEstado')">
+                <i class="fa fa-angle-right"></i>
+                Estado de Comparendo
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="banco" [ngClass]="{'active' : ( addActive === 'banco')}" (click)="addActiveMenu('banco')">
+                <i class="fa fa-angle-right"></i> Banco
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="tramitePrecio" [ngClass]="{'active' : ( addActive === 'tramitePrecio')}" (click)="addActiveMenu('tramitePrecio')">
+                <i class="fa fa-angle-right"></i> Valor tramite
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="departamento" [ngClass]="{'active' : ( addActive === 'departamento')}" (click)="addActiveMenu('departamento')">
+                <i class="fa fa-angle-right"></i> Departamento
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="municipio" [ngClass]="{'active' : ( addActive === 'municipio')}" (click)="addActiveMenu('municipio')">
+                <i class="fa fa-angle-right"></i> Municipio
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgsedeoperativa" [ngClass]="{'active' : ( addActive === 'cfgsedeoperativa')}" (click)="addActiveMenu('cfgsedeoperativa')">
+                <i class="fa fa-angle-right"></i> Sede Operativa
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgEntidadJudicial" [ngClass]="{'active' : ( addActive === 'cfgEntidadJudicial')}" (click)="addActiveMenu('cfgEntidadJudicial')">
+                <i class="fa fa-angle-right"></i> Entidad Judicial
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="organismoTransito" [ngClass]="{'active' : ( addActive === 'organismoTransito')}" (click)="addActiveMenu('organismoTransito')">
+                <i class="fa fa-angle-right"></i> Organismo Transito
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="modulo" [ngClass]="{'active' : ( addActive === 'modulo')}" (click)="addActiveMenu('modulo')">
+                <i class="fa fa-angle-right"></i>
+                Grupo de tramites
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="almacen" [ngClass]="{'active' : ( addActive === 'almacen')}" (click)="addActiveMenu('almacen')">
+                <i class="fa fa-angle-right"></i> Almacen
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="ciudadano" [ngClass]="{'active' : ( addActive === 'ciudadano')}" (click)="addActiveMenu('ciudadano')">
+                <i class="fa fa-angle-right"></i> Ciudadano
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="tramite" [ngClass]="{'active' : ( addActive === 'tramite')}" (click)="addActiveMenu('tramite')">
+                <i class="fa fa-angle-right"></i> Tramite
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level --> 
         </li>
@@ -482,6 +548,18 @@
             <li class="nav-item"><a class="nav-link" routerLink="comparendo/new" href="javascript:void(0)">Diligenciar comparendo</a> </li>
           </ul>
           <!-- /.nav-third-level --> 
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="rpcccInventarioDocumental" [ngClass]="{'active' : ( addActive === 'rpcccInventarioDocumental')}" (click)="addActiveMenu('rpcccInventarioDocumental')">
+              <i class="fa fa-angle-right"></i>
+              Inventario documental
+            </a>
+          </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tramiteSolicitudRpccc" [ngClass]="{'active' : ( addActive === 'tramiteSolicitudRpccc')}" (click)="addActiveMenu('tramiteSolicitudRpccc')">
+            <i class="fa fa-angle-right"></i> Solicitud de tramite
+          </a>
         </li>
       </ul>
       <!-- /.nav-second-level --> 

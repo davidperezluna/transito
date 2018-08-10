@@ -65,6 +65,7 @@ import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
 import { TramiteSolicitudRncRoutes } from './tramiteSolicitudRnc/tramiteSolicitudRnc.routes';
+import { TramiteSolicitudRpcccRoutes } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.routes';
 import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
 import { TramiteSolicitudRnrsRoutes } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.routes';
 
@@ -72,6 +73,7 @@ import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
 import { EmpresaRoutes } from './empresa/empresa.routes';
+import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 
 import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasignacionPlaca.routes';
 import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
@@ -157,6 +159,7 @@ export const DashboardRoutes: Route[] = [
         ...TramiteFacturaRoutes,
         ...TramiteSolicitudRoutes,
         ...TramiteSolicitudRncRoutes,
+        ...TramiteSolicitudRpcccRoutes,
         ...TramiteSolicitudRnmaRoutes,
         ...TramiteSolicitudRnrsRoutes,
         ...SustratoRoutes,
@@ -182,7 +185,7 @@ export const DashboardRoutes: Route[] = [
         ...CfgValorVehiculoRoutes,
         ...RnrsPreregistroRoutes,
         ...ReporteRoutes,
-
+        ...RpcccInventarioDocumentalRoutes,
         ...MsvInventarioSenialRoutes,
         ...MsvSenialRoutes,
        ]
