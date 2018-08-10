@@ -72,6 +72,7 @@ import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicia
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
+import { TramiteSolicitudRpcccModule } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
 import { EmpresaModule } from './empresa/empresa.module';
@@ -172,6 +173,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       TramiteFacturaModule,
       TramiteSolicitudModule,
       TramiteSolicitudRncModule,
+      TramiteSolicitudRpcccModule,
       TramiteSolicitudRnmaModule,
       TramiteSolicitudRnrsModule,
       SustratoModule,

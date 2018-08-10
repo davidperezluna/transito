@@ -67,6 +67,12 @@ export class ComparendoService {
 		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
 	}
 
+	serchComparendosCiudadano(ciudadano, token) {
+		let json = JSON.stringify(ciudadano);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/ciudadano/search", params, { headers: headers }).map(res => res.json());
+	}
 	searchByTipo(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;

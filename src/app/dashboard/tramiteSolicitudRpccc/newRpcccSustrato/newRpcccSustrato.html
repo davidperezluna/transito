@@ -1,0 +1,90 @@
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-6"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Asignar Sustrato
+                </h5>
+                <hr>
+                <div class="row">
+                    <form #sustratoForm="ngForm"> 
+                        <div class="form-group row">
+                            <div class="input-group col-xs-12 col-lg-12" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
+                                <input type="text" class="form-control" placeholder="Numero" [(ngModel)]="datos.sustrato" name="consecutivo" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onKeyValidateSustrato()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf="isExist">
+                            <!-- digitar la nueva licencia de transito  -->
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control " >
+                                    <label>Licencia de conducción</label>
+                                    <input class="form-control"  type="text" [(ngModel)]="datos.licenciaConduccion" name="licenciaConduccion" placeholder=" Digite número" required>
+                                </div>
+                            </div>
+                            <!-- Aquien se entrega documento -->
+                            <div class="col-xs-12 col-lg-12" >
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="tarjetaEntregada" class="custom-control-input" id="check-entregda" name="tarjetaEntregada" checked="">
+                                    <label class="custom-control-label" for="check-entregda">Entregada</label>
+                                </div>
+                            </div>
+                            <!--tipo identificacion ciudadano -->
+                            <div class="col-xs-12 col-lg-12" *ngIf="tarjetaEntregada">
+                                <label>Identificación</label>
+                                <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
+                                    <input type="number" class="form-control" placeholder="Digite identificación" [(ngModel)]="datos.cedula" name="cedula" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                                <div class="has-danger" *ngIf="ciudadanoEncontrado === 3">
+                                    <div class="form-control-feedback has-danger has-error">No se encontró la persona</div>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <!--si existe un ciudadano -->
+                        <div class="row" *ngIf="ciudadanoEncontrado === 2 && tarjetaEntregada && isExist ">
+                            <h5 class="container">
+                                Resultados de búsqueda
+                            </h5>
+                            <table class="table " id="dataTables-example">
+                                <tbody>
+                                    <tr class="odd">
+                                        <td><b>Tipo de identificación:</b></td>
+                                        <td class="center"><p>{{ usuario.tipoIdentificacion.nombre }}</p></td>
+                                        <td><b>Numero de identificación</b></td>
+                                        <td class="center"><p>{{ usuario.identificacion }}</p></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td><b>Primer nombre:</b></td>
+                                        <td class="center"><p>{{ usuario.primerNombre }}</p></td>
+                                        <td><b>Segundo nombre:</b></td>
+                                        <td class="center"><p>{{ usuario.segundoNombre }}</p></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td><b>Primer apellido:</b></td>
+                                        <td class="center"><p>{{ usuario.primerApellido }}</p></td>
+                                        <td><b>Segundo apellido:</b></td>
+                                        <td class="center"><p>{{ usuario.segundoApellido }}</p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <app-new-rpccc-ciudadano *ngIf="ciudadanoEncontrado === 3 && tarjetaEntregada" [identificacion]="usuario.identificacion" (ready)="ready($event)"></app-new-rpccc-ciudadano>
+                    </form>
+                </div>
+            </div>
+            <div class="container">
+                <button (click)="enviarTramite()"  [disabled]="sustratoForm.invalid" class="btn btn-success pull-right">Aceptar</button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
