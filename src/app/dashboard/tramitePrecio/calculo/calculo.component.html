@@ -28,7 +28,7 @@
                                 <td tooltip content="{{tramitePrecio.conceptos}}">{{tramitePrecio.valorConcepto}}</td>
                                 <td>{{tramitePrecio.valorTotal}}</td>
                                 <td>
-                                    <button (click)="delete(tramitePrecio.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> 
+                                    <button (click)="delete(tramitePrecio.id)"  class="btn btn-danger" type="button">Eliminar  </button> 
                                 </td>
                             </tr>
                         </tbody>
@@ -47,9 +47,9 @@
                    
                 </div>
                 <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                    <button (click)="onEnviar()" class="btn btn-outline-success pull-right" type="button">Enviar</button>
-                    <button (click)="onCalculo()" class="btn btn-outline-primary pull-right" type="button">Calcular</button>
+                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                    <button (click)="onEnviar()" class="btn btn-success" type="button">Enviar</button>
+                    <button (click)="onCalculo()" class="btn btn-primary" type="button">Calcular</button>
                 </div>
             </div>
 

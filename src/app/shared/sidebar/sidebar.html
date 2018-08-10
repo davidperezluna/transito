@@ -1,116 +1,59 @@
-<div class="sidebar-left">
+<div class="sidebar-left" >
   <div class="user-menu-items">
     <div class="list-unstyled btn-group">
-      <button class="media btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="message_userpic">
-          <img class="d-flex" src="assets/img/admin.png" alt="Generic user image">
-        </span>
-        <span class="media-body">
-          <span class="mt-0 mb-1">Admin</span>
-          <small>Nariño.</small>
-        </span>
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item">Profile</a>
-        <a class="dropdown-item">Mailbox</a>
-        <a class="dropdown-item">Application</a>
-        <a class="dropdown-item">Analytics Report</a>
-        <a class="dropdown-item">Preferances</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item">Setting</a>
-      </div>
+      <button class="media btn btn-link dropdown-toggle"   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="message_userpic"><img class="d-flex" src="assets/img/admin.png" alt="Generic user image"></span> <span class="media-body"> <span class="mt-0 mb-1">Admin</span> <small>Nariño.</small> </span> </button>
+      	<div class="dropdown-menu"> 
+	      	<a class="dropdown-item" >Profile</a> 
+	      	<a class="dropdown-item" >Mailbox</a> 
+	      	<a class="dropdown-item" >Application</a> 
+	      	<a class="dropdown-item" >Analytics Report</a>
+	      	<a class="dropdown-item" >Preferances</a>
+        	<div class="dropdown-divider"></div>
+        	<a class="dropdown-item" >Setting</a> 
+        </div>
     </div>
   </div>
   <br>
   <ul class="nav flex-column in" id="side-menu">
-    <li class="title-nav ">
-      <a class="active nav-link" routerLink="home" [ngClass]="{'active' : ( addActive === 'home')}" (click)="addActiveMenu('home')">INICIO</a>
-    </li>
-    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'dashboard')}">
-      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('dashboard')">Parametrizacion
-        <i class="fa fa-angle-down "></i>
-      </a>
+    <li class="title-nav " ><a class="active nav-link" routerLink="home" [ngClass]="{'active' : ( addActive === 'home')}" (click)="addActiveMenu('home')">INICIO</a></li>
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'dashboard')}"> <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('dashboard')">Parametrizacion<i class="fa fa-angle-down "></i></a>
       <ul class="nav flex-column nav-second-level">
 
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'msv_seguridad_vial' }">
-
-          <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('msv_seguridad_vial')">
-            Seguridad Vial
-            <i class="fa fa-angle-right"></i>
-          </a>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="cfgGravedad" [ngClass]="{'active' : ( addActive === 'cfgGravedad')}" (click)="addActiveMenu('cfgGravedad')">
-                <i class="fa fa-angle-right"></i> Gravedad
-              </a>
-            </li>
-          </ul>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="cfgClaseAccidente" [ngClass]="{'active' : ( addActive === 'cfgClaseAccidente')}" (click)="addActiveMenu('cfgClaseAccidente')">
-                <i class="fa fa-angle-right"></i> Clase Accidente
-              </a>
-            </li>
-          </ul>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="cfgChoqueCon" [ngClass]="{'active' : ( addActive === 'cfgChoqueCon')}" (click)="addActiveMenu('cfgChoqueCon')">
-                <i class="fa fa-angle-right"></i> Choque Con
-              </a>
-            </li>
-          </ul>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="cfgObjetoFijo" [ngClass]="{'active' : ( addActive === 'cfgObjetoFijo')}" (click)="addActiveMenu('cfgObjetoFijo')">
-                <i class="fa fa-angle-right"></i> Objeto Fijo
-              </a>
-            </li>
-          </ul>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="msvTalonario" [ngClass]="{'active' : ( addActive === 'msvTalonario')}" (click)="addActiveMenu('msvTalonario')">
-                <i class="fa fa-angle-right"></i> Talonarios
-              </a>
-            </li>
-          </ul>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="msvEvaluacion" [ngClass]="{'active' : ( addActive === 'msvEvaluacion')}" (click)="addActiveMenu('msvEvaluacion')">
-                <i class="fa fa-angle-right"></i> Plan estratégico
-              </a>
-            </li>
-          </ul>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="msvRegistroIpat" [ngClass]="{'active' : ( addActive === 'msvRegistroIpat')}" (click)="addActiveMenu('msvRegistroIpat')">
-                <i class="fa fa-angle-right"></i> Registro Ipat
-              </a>
-            </li>
-          </ul>
-          <!-- /.nav-third-level -->
-        </li>
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_vehiculo' }">
+                <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'msv_seguridad_vial' }">
+                  
+                  <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('msv_seguridad_vial')">
+                    Seguridad Vial
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                  <ul class="nav flex-column nav-third-level">
+                    <li class="nav-item">
+                      <a class="nav-link" routerLink="msvTalonario" [ngClass]="{'active' : ( addActive === 'msvTalonario')}" (click)="addActiveMenu('msvTalonario')">
+                        <i class="fa fa-angle-right"></i> Talonarios
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav flex-column nav-third-level">
+                    <li class="nav-item">
+                      <a class="nav-link" routerLink="msvEvaluacion" [ngClass]="{'active' : ( addActive === 'msvEvaluacion')}" (click)="addActiveMenu('msvEvaluacion')">
+                        <i class="fa fa-angle-right"></i> Plan estratégico
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- /.nav-third-level -->
+                </li>
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'cfg_vehiculo' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_vehiculo')">
-            Vehiculos
-            <i class="fa fa-angle-right"></i>
+            Vehiculos <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
-
             <li class="nav-item">
-              <a class="nav-link" routerLink="buscarAutomotor" [ngClass]="{'active' : ( addActive === 'buscarAutomotor')}" (click)="addActiveMenu('buscarAutomotor')">
-                <i class="fa fa-angle-right"></i> Buscar Automotor
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" routerLink="marca" [ngClass]="{'active' : ( addActive === 'marca')}" (click)="addActiveMenu('marca')">
+              <a class="nav-link" routerLink="marca"  [ngClass]="{'active' : ( addActive === 'marca')}" (click)="addActiveMenu('marca')">
                 <i class="fa fa-angle-right"></i>
                 Marca
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="conceptoParametro" [ngClass]="{'active' : ( addActive === 'concepto')}" (click)="addActiveMenu('concepto')">
-                <i class="fa fa-angle-right"></i> Concepto
+              <a class="nav-link" routerLink="conceptoParametro"  [ngClass]="{'active' : ( addActive === 'concepto')}" (click)="addActiveMenu('concepto')"><i class="fa fa-angle-right"></i> Concepto
               </a>
             </li>
             <li class="nav-item">
@@ -124,55 +67,47 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="linea" [ngClass]="{'active' : ( addActive === 'linea')}" (click)="addActiveMenu('linea')">
-                <i class="fa fa-angle-right"></i> Linea
+              <a class="nav-link" routerLink="linea"  [ngClass]="{'active' : ( addActive === 'linea')}" (click)="addActiveMenu('linea')"><i class="fa fa-angle-right"></i> Linea
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="clase" [ngClass]="{'active' : ( addActive === 'clase')}" (click)="addActiveMenu('clase')">
-                <i class="fa fa-angle-right"></i> Clase
+              <a class="nav-link" routerLink="clase"  [ngClass]="{'active' : ( addActive === 'clase')}" (click)="addActiveMenu('clase')"><i class="fa fa-angle-right"></i> Clase
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="color" [ngClass]="{'active' : ( addActive === 'color')}" (click)="addActiveMenu('color')">
-                <i class="fa fa-angle-right"></i> Color
+              <a class="nav-link" routerLink="color"  [ngClass]="{'active' : ( addActive === 'color')}" (click)="addActiveMenu('color')"><i class="fa fa-angle-right"></i> Color
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="combustible" [ngClass]="{'active' : ( addActive === 'combustible')}" (click)="addActiveMenu('combustible')">
-                <i class="fa fa-angle-right"></i> Combustible
+              <a class="nav-link" routerLink="combustible"  [ngClass]="{'active' : ( addActive === 'combustible')}" (click)="addActiveMenu('combustible')"><i class="fa fa-angle-right"></i> Combustible
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="consumible" [ngClass]="{'active' : ( addActive === 'consumible')}" (click)="addActiveMenu('consumible')">
-                <i class="fa fa-angle-right"></i> Consumible
+              <a class="nav-link" routerLink="consumible"  [ngClass]="{'active' : ( addActive === 'consumible')}" (click)="addActiveMenu('consumible')"><i class="fa fa-angle-right"></i> Consumible
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="modalidad" [ngClass]="{'active' : ( addActive === 'modalidad')}" (click)="addActiveMenu('modalidad')">
-                <i class="fa fa-angle-right"></i> Modalidad
+              <a class="nav-link" routerLink="modalidad"  [ngClass]="{'active' : ( addActive === 'modalidad')}" (click)="addActiveMenu('modalidad')"><i class="fa fa-angle-right"></i> Modalidad
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="carroceria" [ngClass]="{'active' : ( addActive === 'carroceria')}" (click)="addActiveMenu('carroceria')">
+              <a class="nav-link" routerLink="carroceria"  [ngClass]="{'active' : ( addActive === 'carroceria')}" (click)="addActiveMenu('carroceria')">
                 <i class="fa fa-angle-right"></i> Carroceria
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="servicio" [ngClass]="{'active' : ( addActive === 'servicio')}" (click)="addActiveMenu('servicio')">
-                <i class="fa fa-angle-right"></i> Servicio
+              <a class="nav-link" routerLink="servicio"  [ngClass]="{'active' : ( addActive === 'servicio')}" (click)="addActiveMenu('servicio')"><i class="fa fa-angle-right"></i> Servicio
               </a>
             </li>
           </ul>
-          <!-- /.nav-third-level -->
+          <!-- /.nav-third-level --> 
         </li>
       </ul>
 
       <ul class="nav flex-column nav-second-level">
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_usuario' }">
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'cfg_usuario' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_usuario')">
-            Usuarios
-            <i class="fa fa-angle-right"></i>
+            Usuarios <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
@@ -191,116 +126,98 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="cfgLicenciaConduccionCategoria" [ngClass]="{'active' : ( addActive === 'cfgLicenciaConduccionCategoria')}"
-                (click)="addActiveMenu('cfgLicenciaConduccionCategoria')">
+              <a class="nav-link" routerLink="cfgLicenciaConduccionCategoria" [ngClass]="{'active' : ( addActive === 'cfgLicenciaConduccionCategoria')}" (click)="addActiveMenu('cfgLicenciaConduccionCategoria')">
                 <i class="fa fa-angle-right"></i> Categorias Licencia Conducción
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="cfgTipoInfractor" [ngClass]="{'active' : ( addActive === 'cfgTipoInfractor')}" (click)="addActiveMenu('cfgTipoInfractor')">
-                <i class="fa fa-angle-right"></i> Tipo Infractor
-              </a>
-            </li>
           </ul>
-          <!-- /.nav-third-level -->
+          <!-- /.nav-third-level --> 
         </li>
       </ul>
 
       <ul class="nav flex-column nav-second-level">
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mparq' }">
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'cfg_mparq' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mparq')">
-            Parqueadero
-            <i class="fa fa-angle-right"></i>
+            Parqueadero <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="mparqCostoTrayecto" [ngClass]="{'active' : ( addActive === 'mparqCostoTrayecto')}" (click)="addActiveMenu('mparqCostoTrayecto')">
+              <a class="nav-link" routerLink="mparqCostoTrayecto"  [ngClass]="{'active' : ( addActive === 'mparqCostoTrayecto')}" (click)="addActiveMenu('mparqCostoTrayecto')">
                 <i class="fa fa-angle-right"></i>
                 Costo trayectos
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="mparqGrua" [ngClass]="{'active' : ( addActive === 'mparqGrua')}" (click)="addActiveMenu('mparqGrua')">
+              <a class="nav-link" routerLink="mparqGrua"  [ngClass]="{'active' : ( addActive === 'mparqGrua')}" (click)="addActiveMenu('mparqGrua')">
                 <i class="fa fa-angle-right"></i>
                 Gruas
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="mparqPatio" [ngClass]="{'active' : ( addActive === 'mparqPatio')}" (click)="addActiveMenu('mparqPatio')">
-                <i class="fa fa-angle-right"></i>
-                Patios
-              </a>
-            </li>
           </ul>
-          <!-- /.nav-third-level -->
+          <!-- /.nav-third-level --> 
         </li>
       </ul>
 
       <ul class="nav flex-column nav-second-level">
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'menu_mfl' }">
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'menu_mfl' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('menu_mfl')">
-            Financiero y Liquidaciones
-            <i class="fa fa-angle-right"></i>
+            Financiero y Liquidaciones <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="mflInfraccionCategoria" [ngClass]="{'active' : ( addActive === 'mflInfraccionCategoria')}"
-                (click)="addActiveMenu('mflInfraccionCategoria')">
+              <a class="nav-link" routerLink="mflInfraccionCategoria"  [ngClass]="{'active' : ( addActive === 'mflInfraccionCategoria')}" (click)="addActiveMenu('mflInfraccionCategoria')">
                 <i class="fa fa-angle-right"></i>
                 Infracción Categoria
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="mflInfraccion" [ngClass]="{'active' : ( addActive === 'mflInfraccion')}" (click)="addActiveMenu('mflInfraccion')">
+              <a class="nav-link" routerLink="mflInfraccion"  [ngClass]="{'active' : ( addActive === 'mflInfraccion')}" (click)="addActiveMenu('mflInfraccion')">
                 <i class="fa fa-angle-right"></i>
                 Infracciones
               </a>
             </li>
           </ul>
-          <!-- /.nav-third-level -->
+          <!-- /.nav-third-level --> 
         </li>
       </ul>
 
       <ul class="nav flex-column nav-second-level">
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">
-            Gestión Documental
-            <i class="fa fa-angle-right"></i>
+            Gestión Documental <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="mgdTipoCorrespondencia" [ngClass]="{'active' : ( addActive === 'mgdTipoCorrespondencia')}"
-                (click)="addActiveMenu('mgdTipoCorrespondencia')">
+              <a class="nav-link" routerLink="mgdTipoCorrespondencia"  [ngClass]="{'active' : ( addActive === 'mgdTipoCorrespondencia')}" (click)="addActiveMenu('mgdTipoCorrespondencia')">
                 <i class="fa fa-angle-right"></i>
                 Tipos Correspondencia
               </a>
             </li>
           </ul>
-          <!-- /.nav-third-level -->
+          <!-- /.nav-third-level --> 
         </li>
       </ul>
-
+      
       <ul class="nav flex-column nav-second-level">
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_festivo' }">
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'cfg_festivo' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_festivo')">
-            General
-            <i class="fa fa-angle-right"></i>
+            General <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="cfgAuditoria" [ngClass]="{'active' : ( addActive === 'cfgAuditoria')}" (click)="addActiveMenu('cfgAuditoria')">
+              <a class="nav-link" routerLink="cfgAuditoria"  [ngClass]="{'active' : ( addActive === 'cfgAuditoria')}" (click)="addActiveMenu('cfgAuditoria')">
                 <i class="fa fa-angle-right"></i>
                 Auditoria
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="cfgFestivo" [ngClass]="{'active' : ( addActive === 'cfgFestivo')}" (click)="addActiveMenu('cfgFestivo')">
+              <a class="nav-link" routerLink="cfgFestivo"  [ngClass]="{'active' : ( addActive === 'cfgFestivo')}" (click)="addActiveMenu('cfgFestivo')">
                 <i class="fa fa-angle-right"></i>
                 Festivos
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="cfgSmlmv" [ngClass]="{'active' : ( addActive === 'cfgSmlmv')}" (click)="addActiveMenu('cfgSmlmv')">
+              <a class="nav-link" routerLink="cfgSmlmv"  [ngClass]="{'active' : ( addActive === 'cfgSmlmv')}" (click)="addActiveMenu('cfgSmlmv')">
                 <i class="fa fa-angle-right"></i>
                 SMLMV
               </a>
@@ -309,12 +226,6 @@
               <a class="nav-link" routerLink="limitacion" [ngClass]="{'active' : ( addActive === 'limitacion')}" (click)="addActiveMenu('limitacion')">
                 <i class="fa fa-angle-right"></i>
                 Limitación
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="cfgCausalLimitacion" [ngClass]="{'active' : ( addActive === 'cfgCausalLimitacion')}" (click)="addActiveMenu('cfgCausalLimitacion')">
-                <i class="fa fa-angle-right"></i>
-                Causal de limitación
               </a>
             </li>
             <li class="nav-item">
@@ -390,8 +301,65 @@
               </a>
             </li>
           </ul>
-          <!-- /.nav-third-level -->
+          <!-- /.nav-third-level --> 
         </li>
+      </ul>
+
+      <ul class="nav flex-column nav-second-level ">
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="banco"  [ngClass]="{'active' : ( addActive === 'banco')}" (click)="addActiveMenu('banco')"><i class="fa fa-angle-right"></i> Banco
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tramitePrecio"  [ngClass]="{'active' : ( addActive === 'tramitePrecio')}" (click)="addActiveMenu('tramitePrecio')"><i class="fa fa-angle-right"></i> Valor tramite
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="departamento"  [ngClass]="{'active' : ( addActive === 'departamento')}" (click)="addActiveMenu('departamento')"><i class="fa fa-angle-right"></i> Departamento
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="municipio"  [ngClass]="{'active' : ( addActive === 'municipio')}" (click)="addActiveMenu('municipio')"><i class="fa fa-angle-right"></i> Municipio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cfgsedeoperativa" [ngClass]="{'active' : ( addActive === 'cfgsedeoperativa')}" (click)="addActiveMenu('cfgsedeoperativa')">
+            <i class="fa fa-angle-right"></i> Sede Operativa
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cfgEntidadJudicial" [ngClass]="{'active' : ( addActive === 'cfgEntidadJudicial')}" (click)="addActiveMenu('cfgEntidadJudicial')">
+            <i class="fa fa-angle-right"></i> Entidad Judicial
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="organismoTransito" [ngClass]="{'active' : ( addActive === 'organismoTransito')}" (click)="addActiveMenu('organismoTransito')"><i class="fa fa-angle-right"></i> Organismo Transito
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" routerLink="modulo"  [ngClass]="{'active' : ( addActive === 'modulo')}" (click)="addActiveMenu('modulo')"><i class="fa fa-angle-right"></i> 
+            Grupo de tramites
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="almacen"  [ngClass]="{'active' : ( addActive === 'almacen')}" (click)="addActiveMenu('almacen')"><i class="fa fa-angle-right"></i> Almacen
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="ciudadano"  [ngClass]="{'active' : ( addActive === 'ciudadano')}" (click)="addActiveMenu('ciudadano')"><i class="fa fa-angle-right"></i> Ciudadano
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="tramite" [ngClass]="{'active' : ( addActive === 'tramite')}" (click)="addActiveMenu('tramite')">
+            <i class="fa fa-angle-right"></i> Tramite
+          </a>
+        </li>
+        <!-- /.nav-second-level --> 
       </ul>
     </li>
 
@@ -402,8 +370,7 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
-          <a class="nav-link" routerLink="registroEntregaProducto" [ngClass]="{'active' : ( addActive === 'registroEntregaProducto')}"
-            (click)="addActiveMenu('registroEntregaProducto')">
+          <a class="nav-link" routerLink="registroEntregaProducto" [ngClass]="{'active' : ( addActive === 'registroEntregaProducto')}" (click)="addActiveMenu('registroEntregaProducto')">
             <i class="fa fa-angle-right"></i> Producto Entregado
           </a>
         </li>
@@ -411,21 +378,42 @@
       <!-- /.nav-second-level -->
     </li>
 
-    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnc')}">
-      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnc')">
-        RNC
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'm_rf_sv_seguridad_vial')}">
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('m_rf_sv_seguridad_vial')">
+        RF- Seguridad Vial
         <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvInventarioSenial" [ngClass]="{'active' : ( addActive === 'msvInventarioSenial')}" (click)="addActiveMenu('msvInventarioSenial')">
+            <i class="fa fa-angle-right"></i> <!--HU-08-->Inventario Señales
+          </a>
+        </li>
+      </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvSenial" [ngClass]="{'active' : ( addActive === 'msvSenial')}" (click)="addActiveMenu('msvSenial')">
+            <i class="fa fa-angle-right"></i> <!--HU-09-->Señales
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav-second-level -->
+    </li>
+
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnc')}"> 
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnc')">
+        RNC<i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
-          <a class="nav-link" routerLink="ciudadano" [ngClass]="{'active' : ( addActive === 'ciudadano')}" (click)="addActiveMenu('ciudadano')">
+          <a class="nav-link" routerLink="ciudadano"  [ngClass]="{'active' : ( addActive === 'ciudadano')}" (click)="addActiveMenu('ciudadano')">
             <i class="fa fa-angle-right"></i>
             Ins. Persona Natural
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="empresa" [ngClass]="{'active' : ( addActive === 'empresa')}" (click)="addActiveMenu('empresa')">
-            <i class="fa fa-angle-right"></i>
+            <i class="fa fa-angle-right"></i> 
             Ins. Persona Juridica
           </a>
         </li>
@@ -435,13 +423,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="rncLicenciaConduccion" [ngClass]="{'active' : ( addActive === 'rncLicenciaConduccion')}"
-            (click)="addActiveMenu('rncLicenciaConduccion')">
-            <i class="fa fa-angle-right"></i> Licencias conducción
+          <a class="nav-link" routerLink="rncLicenciaConduccion" [ngClass]="{'active' : ( addActive === 'rncLicenciaConduccion')}" (click)="addActiveMenu('rncLicenciaConduccion')">
+            <i class="fa fa-angle-right"></i> Licencias conducción 
           </a>
         </li>
       </ul>
-      <!-- /.nav-second-level -->
+      <!-- /.nav-second-level --> 
     </li>
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rna')}">
       <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rna')">
@@ -450,14 +437,19 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
+          <a class="nav-link" routerLink="buscarAutomotor" [ngClass]="{'active' : ( addActive === 'buscarAutomotor')}" (click)="addActiveMenu('buscarAutomotor')">
+            <i class="fa fa-angle-right"></i> Buscar Automotor
+          </a>
+          </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="rnaPreregistro" [ngClass]="{'active' : ( addActive === 'rnaPreregistro')}" (click)="addActiveMenu('rnaPreregistro')">
             <i class="fa fa-angle-right"></i> Pre-registro Automotor
           </a>
         </li>
-
+        
         <li class="nav-item">
           <a class="nav-link" routerLink="pre-asignacion-placa" [ngClass]="{'active' : ( addActive === 'pre-asignacion-placa')}" (click)="addActiveMenu('pre-asignacion-placa')">
-            <i class="fa fa-angle-right"></i> Pre-asignación-placa
+            <i class="fa fa-angle-right"></i> Pre-asignación-placa  
           </a>
         </li>
         <li class="nav-item">
@@ -471,36 +463,10 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="gestionTransportePublico" [ngClass]="{'active' : ( addActive === 'gestionTransportePublico')}"
-            (click)="addActiveMenu('gestionTransportePublico')">
+          <a class="nav-link" routerLink="gestionTransportePublico" [ngClass]="{'active' : ( addActive === 'gestionTransportePublico')}" (click)="addActiveMenu('gestionTransportePublico')">
             <i class="fa fa-angle-right"></i> Gestión Transporte Público
           </a>
         </li>
-        <!-- <ul class="nav flex-column nav-second-level"> -->
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
-          <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">
-            Tramite Limitación
-            <i class="fa fa-angle-right"></i>
-          </a>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="rnaTramiteInscripcionLimitacion" [ngClass]="{'active' : ( addActive === 'rnaTramiteInscripcionLimitacion')}"
-                (click)="addActiveMenu('rnaTramiteInscripcionLimitacion')">
-                <i class="fa fa-angle-right"></i> Inscripción
-              </a>
-            </li>
-          </ul>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="rnaTramiteLevantamientoLimitacion" [ngClass]="{'active' : ( addActive === 'rnaTramiteLevantamientoLimitacion')}"
-                (click)="addActiveMenu('rnaTramiteLevantamientoLimitacion')">
-                <i class="fa fa-angle-right"></i> Levantamiento
-              </a>
-            </li>
-          </ul>
-          <!-- /.nav-third-level -->
-        </li>
-        <!-- </ul> -->
       </ul>
       <!-- /.nav-second-level -->
     </li>
@@ -512,8 +478,7 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
-          <a class="nav-link" routerLink="rnmaRegistroMaquinaria" [ngClass]="{'active' : ( addActive === 'rnmaRegistroMaquinaria')}"
-            (click)="addActiveMenu('rnmaRegistroMaquinaria')">
+          <a class="nav-link" routerLink="rnmaRegistroMaquinaria" [ngClass]="{'active' : ( addActive === 'rnmaRegistroMaquinaria')}" (click)="addActiveMenu('rnmaRegistroMaquinaria')">
             <i class="fa fa-angle-right"></i> Pre-registro Maquinaria
           </a>
         </li>
@@ -532,7 +497,7 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="rnmaTramiteInscripcionLimitacion" [ngClass]="{'active' : ( addActive === 'rnmaTramiteInscripcionLimitacion')}"
                   (click)="addActiveMenu('rnmaTramiteInscripcionLimitacion')">
-                  <i class="fa fa-angle-right"></i> Inscripción
+                  <i class="fa fa-angle-right"></i> Inscripción 
                 </a>
               </li>
             </ul>
@@ -540,7 +505,7 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="rnmaTramiteLevantamientoLimitacion" [ngClass]="{'active' : ( addActive === 'rnmaTramiteLevantamientoLimitacion')}"
                   (click)="addActiveMenu('rnmaTramiteLevantamientoLimitacion')">
-                  <i class="fa fa-angle-right"></i> Levantamiento
+                  <i class="fa fa-angle-right"></i> Levantamiento 
                 </a>
               </li>
             </ul>
@@ -567,54 +532,22 @@
             <i class="fa fa-angle-right"></i> Solicitud de tramite
           </a>
         </li>
-        <!-- <ul class="nav flex-column nav-second-level"> -->
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
-          <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">
-            Tramite Limitación
-            <i class="fa fa-angle-right"></i>
-          </a>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="rnrsTramiteInscripcionLimitacion" [ngClass]="{'active' : ( addActive === 'rnrsTramiteInscripcionLimitacion')}"
-                (click)="addActiveMenu('rnrsTramiteInscripcionLimitacion')">
-                <i class="fa fa-angle-right"></i> Inscripción
-              </a>
-            </li>
-          </ul>
-          <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="rnrsTramiteLevantamientoLimitacion" [ngClass]="{'active' : ( addActive === 'rnrsTramiteLevantamientoLimitacion')}"
-                (click)="addActiveMenu('rnrsTramiteLevantamientoLimitacion')">
-                <i class="fa fa-angle-right"></i> Levantamiento
-              </a>
-            </li>
-          </ul>
-          <!-- /.nav-third-level -->
-        </li>
-        <!-- </ul> -->
       </ul>
       <!-- /.nav-second-level -->
     </li>
 
-    <li class="nav-item" [ngClass]="{'active' : showMenu === 'menu-rpccc' }">
-      <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-rpccc')">
-        RPCCC
-        <i class="fa fa-angle-down "></i>
+    <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-rpccc' }"> 
+    	<a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-rpccc')">
+        RPCCC<i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level">
-        <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'thirdlevel' }">
-          <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('thirdlevel')">Ordenes comparendos
-            <i class="fa fa-angle-down "></i>
-          </a>
+        <li class="nav-item"  [ngClass]="{'active' : showSubMenu === 'thirdlevel' }">
+	      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('thirdlevel')">Ordenes comparendos <i class="fa fa-angle-down "></i></a>
           <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="comparendo">Cargar archivo plano</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="comparendo/new" href="javascript:void(0)">Diligenciar comparendo</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" routerLink="comparendo">Cargar archivo plano</a> </li>
+            <li class="nav-item"><a class="nav-link" routerLink="comparendo/new" href="javascript:void(0)">Diligenciar comparendo</a> </li>
           </ul>
-          <!-- /.nav-third-level -->
+          <!-- /.nav-third-level --> 
         </li>
 
         <li class="nav-item">
@@ -623,35 +556,34 @@
           </a>
         </li>
       </ul>
-      <!-- /.nav-second-level -->
+      <!-- /.nav-second-level --> 
     </li>
 
-    <li class="nav-item" [ngClass]="{'active' : showMenu === 'menu-personal' }">
+    <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-personal' }"> 
       <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-personal')">
-        Modulo Personal
-        <i class="fa fa-angle-down "></i>
+        Modulo Personal<i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level">
         <li class="nav-item">
-          <a class="nav-link" routerLink="mpersonalFuncionario" [ngClass]="{'active' : ( addActive === 'mpersonalFuncionario')}" (click)="addActiveMenu('mpersonalFuncionario')">
-            <i class="fa fa-angle-right"></i>
+          <a class="nav-link" routerLink="mpersonalFuncionario"  [ngClass]="{'active' : ( addActive === 'mpersonalFuncionario')}" (click)="addActiveMenu('mpersonalFuncionario')">
+            <i class="fa fa-angle-right"></i> 
             Hoja de vida
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="mpersonalTalonario" [ngClass]="{'active' : ( addActive === 'mpersonalTalonario')}" (click)="addActiveMenu('mpersonalTalonario')">
-            <i class="fa fa-angle-right"></i>
+          <a class="nav-link" routerLink="mpersonalTalonario"  [ngClass]="{'active' : ( addActive === 'mpersonalTalonario')}" (click)="addActiveMenu('mpersonalTalonario')">
+            <i class="fa fa-angle-right"></i> 
             Talonarios comparendos
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="mpersonalAsignacion" [ngClass]="{'active' : ( addActive === 'mpersonalAsignacion')}" (click)="addActiveMenu('mpersonalAsignacion')">
-            <i class="fa fa-angle-right"></i>
+          <a class="nav-link" routerLink="mpersonalAsignacion"  [ngClass]="{'active' : ( addActive === 'mpersonalAsignacion')}" (click)="addActiveMenu('mpersonalAsignacion')">
+            <i class="fa fa-angle-right"></i> 
             Gestión de rangos
           </a>
         </li>
       </ul>
-      <!-- /.nav-second-level -->
+      <!-- /.nav-second-level --> 
     </li>
 
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-insumos')}">
@@ -679,71 +611,69 @@
       <!-- /.nav-second-level -->
     </li>
 
-    <li class="nav-item" [ngClass]="{'active' : showMenu === 'menu-fl' }">
-      <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-fl')">
-        Financiero y Liquidaciones
-        <i class="fa fa-angle-down "></i>
-      </a>
-      <ul class="nav flex-column nav-second-level">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="factura" [ngClass]="{'active' : ( addActive === 'factura')}" (click)="addActiveMenu('factura')">
-            <i class="fa fa-angle-right"></i>
-            Factura
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="reporte" [ngClass]="{'active' : ( addActive === 'reporte')}" (click)="addActiveMenu('reporte')">
-            <i class="fa fa-angle-right"></i>
-            Reporte
-          </a>
-        </li>
-      </ul>
-      <!-- /.nav-second-level -->
-    </li>
+    <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-fl' }"> 
+        <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-fl')">
+          Financiero y Liquidaciones <i class="fa fa-angle-down "></i>
+        </a>
+        <ul class="nav flex-column nav-second-level">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="factura"  [ngClass]="{'active' : ( addActive === 'factura')}" (click)="addActiveMenu('factura')">
+              <i class="fa fa-angle-right"></i>
+              Factura
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="reporte"  [ngClass]="{'active' : ( addActive === 'reporte')}" (click)="addActiveMenu('reporte')">
+              <i class="fa fa-angle-right"></i>
+              Reporte
+            </a>
+          </li>
+        </ul>
+        <!-- /.nav-second-level --> 
+      </li>
 
-    <li class="nav-item" [ngClass]="{'active' : showMenu === 'menu-gestion-documental' }">
+    <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-gestion-documental' }"> 
       <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-gestion-documental')">
-        Gestion Documental
-        <i class="fa fa-angle-down "></i>
+        Gestion Documental<i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level">
         <li class="nav-item">
-          <a class="nav-link" routerLink="mgdRegistro" [ngClass]="{'active' : ( addActive === 'mgdRegistro')}" (click)="addActiveMenu('mgdRegistro')">
-            <i class="fa fa-angle-right"></i>
+          <a class="nav-link" routerLink="mgdRegistro"  [ngClass]="{'active' : ( addActive === 'mgdRegistro')}" (click)="addActiveMenu('mgdRegistro')">
+            <i class="fa fa-angle-right"></i> 
             Registrar documento
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="mgdDocumento" [ngClass]="{'active' : ( addActive === 'mgdDocumento')}" (click)="addActiveMenu('mgdDocumento')">
-            <i class="fa fa-angle-right"></i>
+          <a class="nav-link" routerLink="mgdDocumento"  [ngClass]="{'active' : ( addActive === 'mgdDocumento')}" (click)="addActiveMenu('mgdDocumento')">
+            <i class="fa fa-angle-right"></i> 
             Buscar documento
           </a>
         </li>
       </ul>
-      <!-- /.nav-second-level -->
+      <!-- /.nav-second-level --> 
     </li>
 
-    <li class="nav-item" [ngClass]="{'active' : showMenu === 'menu-parqueadero' }">
+    <li class="nav-item"  [ngClass]="{'active' : showMenu === 'menu-parqueadero' }"> 
       <a href="javascript:void(0)" class="nav-link menudropdown " (click)="addExpandClass('menu-parqueadero')">
-        Parqueadero
-        <i class="fa fa-angle-down "></i>
+        Parqueadero<i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level">
         <li class="nav-item">
-          <a class="nav-link" routerLink="mparqEntrada" [ngClass]="{'active' : ( addActive === 'mparqEntrada')}" (click)="addActiveMenu('mparqEntrada')">
+          <a class="nav-link" routerLink="mparqEntrada"  [ngClass]="{'active' : ( addActive === 'mparqEntrada')}" (click)="addActiveMenu('mparqEntrada')">
             <i class="fa fa-angle-right"></i>
             Entradas
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="mparqSalida" [ngClass]="{'active' : ( addActive === 'mparqSalida')}" (click)="addActiveMenu('mparqSalida')">
-            <i class="fa fa-angle-right"></i>
-            Salidas
-          </a>
-        </li>
+            <a class="nav-link" routerLink="mparqSalida"  [ngClass]="{'active' : ( addActive === 'mparqSalida')}" (click)="addActiveMenu('mparqSalida')">
+              <i class="fa fa-angle-right"></i>
+              Salidas
+            </a>
+          </li>
       </ul>
-      <!-- /.nav-second-level -->
+      <!-- /.nav-second-level --> 
     </li>
 
-  </ul>
+  </ul>  
 </div>
+

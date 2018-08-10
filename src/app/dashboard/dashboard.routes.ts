@@ -17,12 +17,8 @@ import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
-import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
-
-import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
-
 import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
 import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
 
@@ -53,7 +49,6 @@ import { MparqGruaRoutes } from './mparqGrua/mparqGrua.routes';
 import { MparqGruaCiudadanoRoutes } from './mparqGruaCiudadano/mparqGruaCiudadano.routes';
 import { MparqEntradaRoutes } from './mparqEntrada/mparqEntrada.routes';
 import { MparqSalidaRoutes } from './mparqSalida/mparqSalida.routes';
-import { MparqPatioRoutes } from './mparqPatio/mparqPatio.routes';
 
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
 import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
@@ -88,28 +83,20 @@ import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
 import { CfgCasoInsumoRoutes } from './cfgCasoInsumo/cfgCasoInsumo.routes';
 import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
 import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicial.routes';
-import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimitacion.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
 import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
-import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
-import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
-import { RnaTramiteInscripcionLimitacionRoutes } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.routes';
-import { RnaTramiteLevantamientoLimitacionRoutes } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.routes';
-import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
-import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
-import { CfgGravedadRoutes } from './cfgGravedad/cfgGravedad.routes';
-import { CfgClaseAccidenteRoutes } from './cfgClaseAccidente/cfgClaseAccidente.routes';
-import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
-import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
+
+import { MsvInventarioSenialRoutes } from './msvInventarioSenial/msvInventarioSenial.routes';
+import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
 
 export const DashboardRoutes: Route[] = [
     {
@@ -153,7 +140,6 @@ export const DashboardRoutes: Route[] = [
         ...MparqGruaRoutes,
         ...MparqEntradaRoutes,
         ...MparqSalidaRoutes,
-        ...MparqPatioRoutes,
         ...MparqGruaCiudadanoRoutes,
         ...MpersonalFuncionarioRoutes,
         ...MpersonalTipoContratoRoutes,
@@ -165,9 +151,7 @@ export const DashboardRoutes: Route[] = [
         ...ModuloRoutes,
         ...TramiteRoutes,
         ...AlmacenRoutes,
-        ...CfgTipoInfractorRoutes,
         ...ComparendoRoutes,
-        ...CfgComparendoEstadoRoutes,
         ...InfraccionRoutes,
         ...CarroceriaRoutes,
         ...FacturaRoutes,
@@ -189,28 +173,20 @@ export const DashboardRoutes: Route[] = [
         ...CfgCasoInsumoRoutes,
         ...CfgSedeOperativaRoutes,
         ...CfgEntidadJudicialRoutes,
-        ...CfgCausalLimitacionRoutes,
         ...MsvTalonarioRoutes, 
         //...MsvTCAsignacionRoutes, 
         ...ConceptoParametroRoutes,  
         ...RnmaRegistroMaquinariaRoutes,
-        ...MsvRegistroIpatRoutes,
-        ...CfgGravedadRoutes,
-        ...CfgClaseAccidenteRoutes,
-        ...CfgChoqueConRoutes,
-        ...CfgObjetoFijoRoutes,
         ...TramiteInscripcionLimitacionRoutes,
-        ...TramiteLevantamientoLimitacionRoutes,
-        ...RnaTramiteInscripcionLimitacionRoutes,
-        ...RnaTramiteLevantamientoLimitacionRoutes,
-        ...RnrsTramiteInscripcionLimitacionRoutes,
-        ...RnrsTramiteLevantamientoLimitacionRoutes,
         ...rnaAsignacionInsumosRoutes ,
         ...LimitacionRoutes,
         ...CfgTipoProcesoRoutes,
         ...CfgValorVehiculoRoutes,
         ...RnrsPreregistroRoutes,
         ...ReporteRoutes,
+
+        ...MsvInventarioSenialRoutes,
+        ...MsvSenialRoutes,
        ]
     }
 ];

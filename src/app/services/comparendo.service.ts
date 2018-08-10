@@ -16,9 +16,9 @@ export class ComparendoService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(comparendo,token){
+	register(datos,token){
 		
-		let json = JSON.stringify(comparendo);
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
@@ -42,9 +42,9 @@ export class ComparendoService {
 
 	}
 
-	editComparendo(comparendo,token){
+	editComparendo(datos,token){
 
-		let json = JSON.stringify(comparendo);
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,16 +52,16 @@ export class ComparendoService {
 
 	}
 
-	setComparendoArchivo(comparendos,polca,token){
-		let json = JSON.stringify(comparendos);
+	setComparendoArchivo(datoss,polca,token){
+		let json = JSON.stringify(datoss);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/"+polca+"/archivo", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	serchComparendo(comparendo,token){
-		let json = JSON.stringify(comparendo);
+	searchComparendo(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
@@ -72,5 +72,11 @@ export class ComparendoService {
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/ciudadano/search", params, { headers: headers }).map(res => res.json());
+	}
+	searchByTipo(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/tipo", params, { headers: headers }).map(res => res.json());
 	}
 }

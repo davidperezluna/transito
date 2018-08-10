@@ -30,7 +30,7 @@
                                             [options]="sedes"
                                             [(ngModel)]="sedeSelected"
                                             (ngModelChange)="changedSedeOperativa($event)"
-                                            name="sedeId">
+                                            name="sedeSustratoId">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
@@ -41,8 +41,8 @@
                                             [(ngModel)]="insumoSelected"
                                             required
                                             (ngModelChange)="changedInsumoSustrato($event)"
-                                            [disabled]= 'frmInsumoSelect'
-                                            name="insumoId">
+                                            [disabled]='frmInsumoSelect'
+                                            name="insumoSustratoId">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
@@ -76,7 +76,7 @@
                                             [options]="sedes"
                                             [(ngModel)]="sedeSelectedInsumo"
                                             (ngModelChange)="changedSedeOperativaInsumo($event)"
-                                            name="sedeId">
+                                            name="sedeInsumoId">
                                         </ng-select>
                                     </div>
                                     <div class="col-lg-4 col-md-4">
@@ -88,7 +88,7 @@
                                             (ngModelChange)="changedInsumoInsumo($event)"
                                             [disabled]='frmInsumoSelectInsumo'
                                             required
-                                            name="insumoId">
+                                            name="insumoInsumoId">
                                         </ng-select>
                                     </div>
         

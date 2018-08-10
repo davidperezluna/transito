@@ -16,7 +16,7 @@ import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
+  selector: 'app-new', 
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
