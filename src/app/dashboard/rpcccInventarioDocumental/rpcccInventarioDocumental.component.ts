@@ -13,13 +13,24 @@ declare var $: any;
 export class rpcccInventarioDocumentalComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
+  public respuesta;
   public table:any;   
   public agentes;
   public tipoComparendos;
   public comparendos;
   public comparendosSelected;
   public agenteSelected;
+  public comparendosSancionado=[];
+  public comparendosExonerado=[];
+  public comparendosInhibitorio=[];
+  public comparendosAcuerdoPago=[];
+  public comparendosAcuerdoPagoIncumplido=[];
+  public comparendosPrescripcion=[];
+  public comparendosCaducidad=[];
+  public comparendosPagado=[];
+  public comparendosRevocatoria=[];
+  public comparendosInterposicion=[];
+  public comparendosNulidad=[];
   public datos = {'fechaDesde': null,
                   'fechaHasta': null,
                   'agenteId': null,
@@ -115,7 +126,42 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
           if(response.code == 200){
             this.comparendos = response.data;
             console.log(this.comparendos);
-            
+            this.comparendos.forEach(element => {
+
+              if(element.estado.id == 1){
+                this.comparendosSancionado.push(element);
+              }
+              else if(element.estado.id == 2){
+                this.comparendosExonerado.push(element);
+              }
+              else if(element.estado.id == 3){
+                this.comparendosInhibitorio.push(element);
+              }
+              else if(element.estado.id == 4){
+                this.comparendosAcuerdoPago.push(element);
+              }
+              else if(element.estado.id == 5){
+                this.comparendosAcuerdoPagoIncumplido.push(element);
+              }
+              else if(element.estado.id == 6){
+                this.comparendosPrescripcion.push(element);
+              }
+              else if(element.estado.id == 7){
+                this.comparendosCaducidad.push(element);
+              }
+              else if(element.estado.id == 8){
+                this.comparendosPagado.push(element);
+              }
+              else if(element.estado.id == 9){
+                this.comparendosRevocatoria.push(element);
+              }
+              else if(element.estado.id == 10){
+                this.comparendosInterposicion.push(element);
+              }
+              else if(element.estado.id == 11){
+                this.comparendosNulidad.push(element);
+              }             
+            });            
           }
           else if(response.code == 400){
             console.log(this.errorMessage);
@@ -126,6 +172,10 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
       );
       
       
+  }
+
+  generarPDF(){
+
   }
 
 }
