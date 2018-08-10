@@ -1,8 +1,10 @@
 <div class="container">
+
   <hr>
   <div class="row" *ngIf='formSearch'>
     <div class="col-md-12 col-lg-8 offset-lg-2">
       <div class="card">
+
         <div class="card-body">
           <h5 class="text-uppercase">Señalización</h5>
           <small></small>
@@ -30,6 +32,7 @@
                 </table>
               </div>
             </div>
+
             <hr>
             <div class="form-group row">
               <div class="col-xs-12 col-lg-4">
@@ -44,19 +47,17 @@
             </div>
           </form>
         </div>
+
         <div class="card-footer">
           <button (click)="search()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
             <i class="fa fa-search"></i>
             Buscar
           </button>
-          <!--<button (click)="onNew()" (ready)="ready($event)" class="btn btn-info" type="button">
-            <i class="fa fa-plus"></i>
-            Nuevo
-          </button>-->
         </div>
       </div>
     </div>
   </div>
+
   <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
@@ -65,7 +66,6 @@
           <h5 class="card-title">
             <b class="text-uppercase">Inventario</b>
             <br>
-            <!--<small>Señales</small>-->
             <div class="btn-group pull-right">
               <button (click)="onAdd()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                 <i class="fa fa-plus"></i>
@@ -86,52 +86,42 @@
               <tr class="odd" *ngFor="let senal of senales; let i = index">
                 <td>{{senal.inventarioSenialId.codigo}}</td>
                 <td>{{senal.inventarioSenialId.fecha}}</td>
-                <!--
-                  <td>
-                    <button (click)="editMsvTalonario(msvTalonario)" class="btn btn-xs btn-info" type="button">Editar
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button (click)="deleteMsvTalonario(msvTalonario.id)" class="btn btn-xs btn-danger" type="button">Eliminar
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </td>
-                -->
               </tr>
             </tbody>
           </table>
-          <!-- /.table-responsive -->
         </div>
       </div>
     </div>
   </div>
+
   <hr>
-  <div class="row" *ngIf='formAdd'>
+  <div class="row"><!--*ngIf='formAdd'-->
     <div class="col-md-12">
       <div class="card">
+
         <div class="card-header">
-          <h5 class="card-title">
+
+          <div class="card-title">
             <b class="text-uppercase">Agregar señales</b>
             <br>
-            <!--<small>Señales</small>-->
             <div class="col-md-12 col-lg-8 offset-lg-2">
               <div class="card">
                 <div class="card-body">
-                  <!--<h5 class="text-uppercase">Señalización</h5>
-                  <small></small>
-                  <hr>-->
+
+
                   <form #formNew="ngForm">
                     <div class="form-group row">
                       <div class="col-xs-12 col-lg-10">
                         <table>
                           <tr>
-                          <td>
-                            <label>Fecha:</label>
-                          </td>
+                            <td>
+                              <label>Fecha:</label>
+                            </td>
                             <td>
                         <span>
                         <input type="date" [(ngModel)]="fechaSelected" class="form-control" name="fecha">
                         </span>
-                          </td>
+                            </td>
                           </tr>
 
                           <tr>
@@ -157,24 +147,15 @@
                           </tr>
 
                           <tr>
-                            <td>
-                              <label>Latitud:</label>
+                            <td align="left">
+                              <button (click)="onAddress()" (ready)="ready($event)" class="btn btn-primary" type="button">
+                                Ingresar dirección
+                              </button>
                             </td>
                             <td>
-                        <span>
-                        <input type="text" [(ngModel)]="latitudSelected" class="form-control" name="latitud">
-                        </span>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>
-                              <label>Longitud:</label>
-                            </td>
-                            <td>
-                        <span>
-                        <input type="text" [(ngModel)]="longitudSelected" class="form-control" name="longitud">
-                        </span>
+                              <span>
+                              <input type="text" [(ngModel)]="direccionSelected" class="form-control" name="direccion" readonly>
+                              </span>
                             </td>
                           </tr>
 
@@ -195,7 +176,7 @@
                             </td>
                             <td>
                         <span>
-                        <input type="file" [(ngModel)]="archivoSelected" (change)="onFileChange($event)"  placeholder="Adjuntar" accept=".jpeg,.jpg" value="20000" multiple="false" class="form-control">
+                        <input type="file" [(ngModel)]="archivoSelected" (change)="onFileChange($event)"  placeholder="Adjuntar" accept=".jpeg,.jpg" value="20000" multiple="false" class="form-control" name="file">
                         </span>
                             </td>
                           </tr>
@@ -217,7 +198,7 @@
                             </td>
                             <td>
                         <span>
-                        <input type="text" [(ngModel)]="estadoSelected" class="form-control" name="valor">
+                        <input type="number" [(ngModel)]="valorSelected" class="form-control" name="valor">
                         </span>
                             </td>
                           </tr>
@@ -243,227 +224,158 @@
                         </span>
                             </td>
                           </tr>
-                          </table>
+
+                        </table>
                       </div>
                     </div>
-
                   </form>
-                </div>
-
-                <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk3sbqJFg6zDsnVlJ4p1VR8b6PQwcQobU&language=es&libraries=places"></script>
-                <div class="form-group row">
-                  <div class="col-xs-12 col-lg-10">
 
 
-                    <div class="form-group">
-                      <label for="address" class="col-md-3 control-label">Dirección</label>
-                      <div class="col-md-9">
-                        <input id="address" class="form-control" type="textbox" value="New York, NY">
+                  <div class="col-md-12 col-sm-12">
+                    <!--<input type="text" style="width:400px" id="lat" />
+                    <input type="text" style="width:400px" id="lng" />
+                    <div id="geo"><div #map style="width:400px; height:300px">loading...</div></div>-->
+
+                    <div id="geo" class="swal2-container swal2-center swal2-fade swal2-shown" style="visibility: hidden; overflow-y: auto;">
+                      <div aria-labelledby="swal2-title" aria-describedby="swal2-content" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: flex;">
+                        <div class="swal2-header">
+                         <ul class="swal2-progresssteps" style="display: none;"></ul>
+                         <div class="swal2-icon swal2-error" style="display: none;">
+                           <span class="swal2-x-mark">
+                             <span class="swal2-x-mark-line-left"></span>
+                             <span class="swal2-x-mark-line-right"></span>
+                           </span>
+                         </div>
+                         <!--<div class="swal2-icon swal2-question" style="display: none;">
+                           <span class="swal2-icon-text">?</span>
+                         </div>
+                         <div class="swal2-icon swal2-warning" style="display: none;">
+                           <span class="swal2-icon-text">!</span>
+                         </div>
+                         <div class="swal2-icon swal2-info swal2-animate-info-icon" style="display: flex;">
+                           <span class="swal2-icon-text">i</span>
+                         </div>-->
+                         <!--<div class="swal2-icon swal2-success" style="display: none;">
+                           <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                           <span class="swal2-success-line-tip"></span>
+                           <span class="swal2-success-line-long"></span>
+                           <div class="swal2-success-ring"></div>
+                           <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                           <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                         </div>-->
+                           <img class="swal2-image" style="display: none;">
+                           <h2 class="swal2-title" id="swal2-title">Ubicación de la señal</h2>
+                           <button (click)="onCloseGeo()" type="button" class="swal2-close" aria-label="Close this dialog" style="display: flex;">
+                             ×
+                           </button>
+                         </div>
+                           <div class="swal2-content">
+                             <div id="swal2-content" style="display: block;">
+
+                               <!--content-->
+                               <input type="hidden" style="width:400px" id="lat" />
+                               <input type="hidden" style="width:400px" id="lng" />
+                               <input type="text" style="width:400px" class="form-control" style="visibility: hidden;" id="address" />
+                               <div align="center">
+                                 <div #map style="width:400px; height:300px" id="map">loading...</div>
+                               </div>
+
+                             </div>
+                             <input class="swal2-input" style="display: none;">
+                             <input type="file" class="swal2-file" style="display: none;">
+                             <div class="swal2-range" style="display: none;">
+                              <input type="range">
+                              <output></output>
+                             </div>
+                             <select class="swal2-select" style="display: none;"></select>
+                             <div class="swal2-radio" style="display: none;"></div>
+                             <label for="swal2-checkbox" class="swal2-checkbox" style="display: none;">
+                              <input type="checkbox">
+                             </label>
+                             <textarea class="swal2-textarea" style="display: none;"></textarea>
+                             <div class="swal2-validationerror" id="swal2-validationerror" style="display: none;"></div>
+                             </div>
+                             <div class="swal2-actions" style="display: flex;">
+                              <button (click)="onCloseGeo()" type="button" class="swal2-confirm swal2-styled" aria-label="Thumbs up, great!" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
+                                <i class="fa fa-thumbs-up"></i> OK!
+                              </button>
+                               <button (click)="onSearchGeo()" id="searchAddress" (ready)="ready($event)" class="swal2-confirm swal2-styled" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
+                                 <i class="fa fa-eye"></i> Buscar Dirección
+                               </button>
+                              <button type="button" class="swal2-cancel swal2-styled" aria-label="Thumbs down" style="display: none;">
+                                <i class="fa fa-thumbs-down"></i>
+                              </button>
+                             </div>
+                             <div class="swal2-footer" style="display: none;"></div>
+                           </div>
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-md-offset-3 col-md-4">
-                        <button type="button" class="btn btn-primary" onclick="codeAddress()">Obtener Coordenadas GPS</button>
+
+
+                      <div class="card-footer">
+                        <button (click)="onExport()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                          Exportar
+                        </button>
+                        <hr>
+                        <button (click)="onSend()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                          <i class="fa fa-save"></i>
+                          Enviar
+                        </button>
                       </div>
-                    </div>
-
-
-
-                    <h4>GD (grados decimales)*</h4>
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="latitude">Latitud</label>
-                      <div class="col-md-9">
-                        <input id="latitude" class="form-control" type="textbox">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="longitude">Longitud</label>
-                      <div class="col-md-9">
-                        <input id="longitude" class="form-control" type="textbox">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <div class="col-md-offset-3 col-md-4">
-                        <button type="button" class="btn btn-primary" onclick="codeLatLng(1)">Obtener Dirección</button>
-                      </div>
-                    </div>
-
-
-
-
-                    <h4>GMS (grados, minutos, segundos)*</h4>
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="latitude">Latitud</label>
-                      <div class="col-md-9">
-                        <label class="radio-inline">
-                          <input type="radio" name="latnordsud" value="nord" id="nord" checked/>
-                          N
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="latnordsud" value="sud" id="sud" />
-                          S
-                        </label>
-
-                        <input class="form-control sexagesimal" id="latitude_degres" type="textbox">
-                        <label for="latitude_degres">&deg;</label>
-                        <input class="form-control sexagesimal" id="latitude_minutes" type="textbox">
-                        <label for="latitude_minutes">'</label>
-                        <input class="form-control sexagesimalsec" id="latitude_secondes" type="textbox">
-                        <label for="latitude_secondes">''</label>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="longitude">Longitud</label>
-                      <div class="col-md-9">
-                        <label class="radio-inline">
-                          <input type="radio" name="lngestouest" value="est" id="est" checked/>
-                          E
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="lngestouest" value="ouest" id="ouest" />
-                          O
-                        </label>
-
-                        <input class="form-control sexagesimal" id="longitude_degres" type="textbox">
-                        <label for="longitude_degres">&deg;</label>
-
-
-                        <input class="form-control sexagesimal" id="longitude_minutes" type="textbox">
-                        <label for="longitude_minutes">'</label>
-                        <input class="form-control sexagesimalsec" id="longitude_secondes" type="textbox">
-                        <label for="longitude_secondes">''</label>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <div class="col-md-offset-3 col-md-4">
-                        <button type="button" class="btn btn-primary" onclick="dmsversdd()">Obtener Dirección</button>
-                      </div>
-                    </div>
-
-                  <span class="help-block"><small>* Sistema Geodésico Mundial 1984 (WGS 84)</small></span>
-
-                </div>
-                <div class="col-md-8">
-                  <div id="map_canvas"><p id="statusinfo" class="bg-orange"><img src="/images/ripple.gif"/>Allow or deny location access to proceed</p></div>
                   </div>
-                </div>-->
 
 
-
-                  <!-- This stylesheet contains specific styles for displaying
-                       the map on this page. Replace it with your own styles as
-                       described in the documentation:
-                       https://developers.google.com/maps/documentation/javascript/tutorial
-                  -->xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-                <script src="http://maps.googleapis.com/maps/api/js"></script>
-                <!--<div #gmap style="width:100%;height:400px"></div>-->
-                <div id="map"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
-
-                <div class="card-footer">
-                  <!--<span>
-                  <input type="file" [(ngModel)]="archivoSelected" (change)="onFileChange($event)"  placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" class="form-control">
-                  </span>
-                  <hr>-->
-                  <button (click)="onExport()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
-                    Exportar
-                  </button>
-                  <hr>
-                  <!--<button (click)="onNew()" (ready)="ready($event)" class="btn btn-info" type="button">
-                    Guardar
-                  </button>-->
-                  <button (click)="onSend()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                  </button>
-                  <!--<button (click)="onAttach()" class="btn btn-success" data-target="#themepicker" data-toggle="modal">
-                      <span class="text">Adjuntar</span>
-                  </button>-->
+                  </div>
                 </div>
               </div>
+
             </div>
-            <!--<div class="btn-group pull-right">
-              <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
-                <i class="fa fa-plus"></i>
-                <span class="text">Nuevo</span>
-              </button>
-            </div>-->
-          </h5>
+
+
+            <div class="card-body">
+              <table class="table " id="dataTables-example2">
+                <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Fecha</th>
+                  <th>Unidad</th>
+                  <th>Color</th>
+                  <th>Latitud</th>
+                  <th>Longitud</th>
+                  <th>Código</th>
+                  <th>Logo</th>
+                  <th>Nombre</th>
+                  <th>Valor</th>
+                  <th>Estado</th>
+                  <th>Cantidad</th>
+                  <th>Georreferenciación</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="odd" *ngFor="let senalPorAsignar of senalesPorAsignar?.data; let i = ind">
+                  <td>{{senalPorAsignar.id}}</td>
+                  <td>{{senalPorAsignar.fecha}}</td>
+                  <td>{{senalPorAsignar.unidad}}</td>
+                  <td>{{senalPorAsignar.color}}</td>
+                  <td>{{senalPorAsignar.latitud}}</td>
+                  <td>{{senalPorAsignar.longitud}}</td>
+                  <td>{{senalPorAsignar.codigo}}</td>
+                  <td>{{senalPorAsignar.logo}}</td>
+                  <td>{{senalPorAsignar.nombre}}</td>
+                  <td>{{senalPorAsignar.valor}}</td>
+                  <td>{{senalPorAsignar.estado}}</td>
+                  <td>{{senalPorAsignar.cantidad}}</td>
+                  <td><button (click)="onGeo()" (ready)="ready($event)" class="btn btn-primary" type="button">
+                    <i class="fa fa-eye"></i>
+                  </button></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+
         </div>
-        <div class="card-body">
-          <table class="table " id="dataTables-example2">
-            <thead>
-            <tr>
-              <th><!--<input type="checkbox" (click)="checkAll($event)" name="_senalParent_" >--></th>
-              <th>Id</th>
-              <!--<th>Fecha</th>
-              <th>Unidad</th>
-              <th>Color</th>
-              <th>Latitud</th>
-              <th>Longitud</th>
-              <th>Código</th>
-              <th>Logo</th>
-              <th>Nombre</th>
-              <th>Valor</th>
-              <th>Estado</th>
-              <th>Cantidad</th>-->
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="odd" *ngFor="let senalPorAsignar of senalesPorAsignar?.data; let i = ind">
-              <td><!--<input type="checkbox" value="{{senalPorAsignar.id}}" (click)="check($event)" name="_senal_">--></td>
-              <td>{{senalPorAsignar.id}}fff</td>
-              <!--<td>{{senalPorAsignar.fecha}}</td>
-              <td>{{senalPorAsignar.unidad}}</td>
-              <td>{{senalPorAsignar.color}}</td>
-              <td>{{senalPorAsignar.latitud}}</td>
-              <td>{{senalPorAsignar.longitud}}</td>
-              <td>{{senalPorAsignar.codigo}}</td>
-              <td>{{senalPorAsignar.logo}}</td>
-              <td>{{senalPorAsignar.nombre}}</td>
-              <td>{{senalPorAsignar.valor}}</td>
-              <td>{{senalPorAsignar.estado}}</td>
-              <td>{{senalPorAsignar.cantidad}}</td>-->
-              <!--
-                <td>
-                  <button (click)="editMsvTalonario(msvTalonario)" class="btn btn-xs btn-info" type="button">Editar
-                    <i class="fa fa-edit"></i>
-                  </button>
-                  <button (click)="deleteMsvTalonario(msvTalonario.id)" class="btn btn-xs btn-danger" type="button">Eliminar
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              -->
-            </tr>
-            </tbody>
-          </table>
-          <!-- /.table-responsive -->
-        </div>
+
       </div>
     </div>
   </div>
-  <!--<app-edit *ngIf='formEdit' [talonario]="msvInventarioSenial" (ready)="ready($event)"></app-edit>
-  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>-->
 </div>
