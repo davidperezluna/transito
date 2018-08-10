@@ -175,7 +175,6 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
   }
 
   generarPDF(){
-
   }
 
 }
