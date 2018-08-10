@@ -22,14 +22,11 @@ import { ServicioModule } from './servicio/servicio.module';
 import { ModuloModule } from './modulo/modulo.module';
 import { TramiteModule } from './tramite/tramite.module'; 
 import { AlmacenModule } from './almacen/almacen.module';
-<<<<<<< HEAD
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
-=======
->>>>>>> 43d62454abdffb367d5093871de647534016db2c
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
 
@@ -199,10 +196,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       RnrsPreregistroModule,
       ReporteModule,
       registroEntregaProductoModule,
-<<<<<<< HEAD
-      RpcccInventarioDocumentalModule
-=======
->>>>>>> 43d62454abdffb367d5093871de647534016db2c
+      RpcccInventarioDocumentalModule,
       
       //MsvTCAsignacionModule,
 

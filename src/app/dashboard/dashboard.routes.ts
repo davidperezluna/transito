@@ -183,13 +183,9 @@ export const DashboardRoutes: Route[] = [
         ...CfgValorVehiculoRoutes,
         ...RnrsPreregistroRoutes,
         ...ReporteRoutes,
-<<<<<<< HEAD
-        ...RpcccInventarioDocumentalRoutes
-=======
-
+        ...RpcccInventarioDocumentalRoutes,
         ...MsvInventarioSenialRoutes,
         ...MsvSenialRoutes,
->>>>>>> 43d62454abdffb367d5093871de647534016db2c
        ]
     }
 ];
