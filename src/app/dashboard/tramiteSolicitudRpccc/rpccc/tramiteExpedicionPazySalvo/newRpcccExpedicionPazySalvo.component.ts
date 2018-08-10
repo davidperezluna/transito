@@ -60,7 +60,7 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
         }
         this._ComparendoService.serchComparendosCiudadano(ciudadano, token).subscribe(
             response => {
-                this.comparendos = response;
+                this.comparendos = response.data;
             },
             error => {
                 this.errorMessage = <any>error;
