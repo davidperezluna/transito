@@ -22,7 +22,9 @@
     "@angular/platform-browser-dynamic": "4.0.0",
     "@angular/router": "4.0.0",
     "@angular/tsc-wrapped": "0.5.0",
+    "@types/googlemaps": "^3.30.11",
     "angular-froala-wysiwyg": "^2.8.4",
+    "angular2-google-map": "^0.1.8",
     "angular2-tooltip": "^3.1.0",
     "bootstrap": "4.0.0-beta.2",
     "core-js": "2.4.1",
@@ -63,6 +65,7 @@
   },
   "devDependencies": {
     "@angular/cli": "1.0.0",
+    "@types/googlemaps": "^3.30.11",
     "@types/jasmine": "2.2.30",
     "@types/node": "7.0.10",
     "angular-ide": "^0.9.32",

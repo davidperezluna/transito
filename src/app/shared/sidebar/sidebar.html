@@ -549,6 +549,12 @@
           </ul>
           <!-- /.nav-third-level --> 
         </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="rpcccInventarioDocumental" [ngClass]="{'active' : ( addActive === 'rpcccInventarioDocumental')}" (click)="addActiveMenu('rpcccInventarioDocumental')">
+              <i class="fa fa-angle-right"></i>
+              Inventario documental
+            </a>
+          </li>
 
         <li class="nav-item">
           <a class="nav-link" routerLink="tramiteSolicitudRpccc" [ngClass]="{'active' : ( addActive === 'tramiteSolicitudRpccc')}" (click)="addActiveMenu('tramiteSolicitudRpccc')">

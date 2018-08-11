@@ -380,6 +380,9 @@ export class MsvSenialComponent implements OnInit {
         if (this.msvSenial.inventarioSenialId == "") {
             valid += "Debe seleccionar la señal(es) que desea agregar al inventario.";
         }
+        if(this.file == null){
+            valid += "Debe agregar algún comprobate o nota en formato pdf.\n";
+        }
 
     if(valid != ""){
             swal({
