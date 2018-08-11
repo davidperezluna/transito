@@ -152,6 +152,8 @@ constructor(
   }
   
   readyTramite(datos:any){
+    
+    console.log(datos);
     this.tramitesFactura.forEach(tramiteFactura => {
       if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {
         this.tramiteSolicitud.tramiteFacturaId = tramiteFactura.id;
