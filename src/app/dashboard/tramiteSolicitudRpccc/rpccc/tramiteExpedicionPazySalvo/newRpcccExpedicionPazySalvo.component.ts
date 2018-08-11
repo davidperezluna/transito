@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { ComparendoService } from '../../../../services/comparendo.service';
@@ -32,20 +33,11 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
     public categoriaSelected: any;
     public datos = {
         'tramiteFactura': null,
-        'numeroLicenciaConduccion': null,
-        'numeroRunt': null,
-        'fechaExpedicion': null,
-        'documentacion': null,
-        'paisId': null,
-        'categoriaId': null,
-        'claseId': null,
-        'servicioId': null,
-        'ciudadanoId': null,
-        'sedeOperativaId': null,
     };
 
     constructor(
         private _LoginService: LoginService,
+        private _tramiteFacturaService: TramiteFacturaService,
         private _ServicioService: ServicioService,
         private _CiudadanoService: CiudadanoService,
         private _ComparendoService: ComparendoService,
@@ -105,55 +97,9 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         let identity = this._LoginService.getIdentity();
-
-        this._MpersonalFuncionarioService.searchLogin(identity, token).subscribe(
-            response => {
-                if (response.status == 'success') {
-                    this.datos.sedeOperativaId = response.data.sedeOperativa.id;
-                    //Verificar la posibilidad de insertar solo la factura y/o el tramite
-                    this.datos.tramiteFactura = 1;
-                    this.datos.categoriaId = this.categoriaSelected;
-                    this.datos.claseId = this.claseSelected;
-                    this.datos.servicioId = this.servicioSelected;
-                    this.datos.paisId = this.paisSelected;
-                    this.datos.ciudadanoId = this.solicitante.id;
-
-                    // this._RpcccLicenciaConduccionService.register(this.datos, token).subscribe(
-                    //     response => {
-                    //         if (response.status == 'success') {
-                    //             this.readyTramite.emit(this.datos);
-                    //         } else {
-                    //             swal({
-                    //                 type: 'warning',
-                    //                 title: 'Alerta!',
-                    //                 text: "No se registro el trámite."
-                    //             });
-                    //         }
-                    //         error => {
-                    //             this.errorMessage = <any>error;
-                    //             if (this.errorMessage != null) {
-                    //                 console.log(this.errorMessage);
-                    //                 alert('Error en la petición');
-                    //             }
-                    //         }
-                    //     }
-                    // );
-                }else{
-                    swal({
-                        type: 'warning',
-                        title: 'Alerta!',
-                        text: "Usted no tiene permisos para este trámite."
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
+        this.datos.tramiteFactura = 65;
+        this.readyTramite.emit(this.datos);
+      
     }
 
     onCancelar(){

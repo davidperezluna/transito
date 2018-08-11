@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, EventEmitter /**/, ElementRef, ViewChild /**/ } from '@angular/core';
-import { MsvInventarioSenialService } from '../../services/msvInventarioSenial.service';
+// import { MsvInventarioSenialService } from '../../services/msvInventarioSenial.service';
 import { LoginService } from '../../services/login.service';
 
-import { CfgTipoDestinoService } from '../../services/cfgTipoDestino.service';
-import { CfgBodegaService } from '../../services/cfgBodega.service';
-import { MunicipioService } from '../../services/municipio.service';
-import { CfgTipoSenialService } from '../../services/cfgTipoSenial.service';
+// import { CfgTipoDestinoService } from '../../services/cfgTipoDestino.service';
+// import { CfgBodegaService } from '../../services/cfgBodega.service';
+// import { MunicipioService } from '../../services/municipio.service';
+// import { CfgTipoSenialService } from '../../services/cfgTipoSenial.service';
 //import { MsvSenialService } from '../../services/msvSenial.service'
 
 import { MsvInventarioSenial } from './msvInventarioSenial.modelo';
@@ -105,13 +105,13 @@ export class MsvInventarioSenialComponent implements OnInit {
     //public sedeOperativa: any;
 
     constructor(
-        private _msvInventarioSenialService: MsvInventarioSenialService,
-        private _loginService: LoginService,
+        // private _msvInventarioSenialService: MsvInventarioSenialService,
+        // private _loginService: LoginService,
 
-        private _cfgTipoDestinoService : CfgTipoDestinoService,
-        private _cfgBodegaService : CfgBodegaService,
-        private _municipioService : MunicipioService,
-        private _cfgTipoSenialService : CfgTipoSenialService,
+        // private _cfgTipoDestinoService : CfgTipoDestinoService,
+        // private _cfgBodegaService : CfgBodegaService,
+        // private _municipioService : MunicipioService,
+        // private _cfgTipoSenialService : CfgTipoSenialService,
         //private _msvSenialService: MsvSenialService,
 
         //private _sedeOperativaService: SedeOperativaService,
@@ -160,33 +160,33 @@ export class MsvInventarioSenialComponent implements OnInit {
             }
         });*/
 
-        this._cfgTipoDestinoService.select().subscribe(
-                response => {
-                this.tiposDestino = response;
-            },
-                error => {
-                this.errorMessage = <any>error;
+        // this._cfgTipoDestinoService.select().subscribe(
+        //         response => {
+        //         this.tiposDestino = response;
+        //     },
+        //         error => {
+        //         this.errorMessage = <any>error;
 
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
+        //         if(this.errorMessage != null){
+        //             console.log(this.errorMessage);
+        //             alert('Error en la petición');
+        //         }
+        //     }
+        // );
 
-        this._cfgTipoSenialService.select().subscribe(
-                response => {
-                this.senal = response;
-            },
-                error => {
-                this.errorMessage = <any>error;
+        // this._cfgTipoSenialService.select().subscribe(
+        //         response => {
+        //         this.senal = response;
+        //     },
+        //         error => {
+        //         this.errorMessage = <any>error;
 
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
+        //         if(this.errorMessage != null){
+        //             console.log(this.errorMessage);
+        //             alert('Error en la petición');
+        //         }
+        //     }
+        // );
 
         /*this._sedeOperativaService.getSedeOperativaSelect().subscribe(
          response => {
@@ -203,26 +203,26 @@ export class MsvInventarioSenialComponent implements OnInit {
          }
          }
          );*/
-        this._msvInventarioSenialService.getMsvInventarioSenial().subscribe(
-                response => {
-                if (response) {
+        // this._msvInventarioSenialService.getMsvInventarioSenial().subscribe(
+        //         response => {
+        //         if (response) {
 
-                    console.log(response);
-                    this.msvInventarioSenials = response.data;
-                    let timeoutId = setTimeout(() => {
-                        //this.iniciarTabla();
-                    }, 100);
-                }
-            },
-                error => {
-                this.errorMessage = <any>error;
+        //             console.log(response);
+        //             this.msvInventarioSenials = response.data;
+        //             let timeoutId = setTimeout(() => {
+        //                 //this.iniciarTabla();
+        //             }, 100);
+        //         }
+        //     },
+        //         error => {
+        //         this.errorMessage = <any>error;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
+        //         if (this.errorMessage != null) {
+        //             console.log(this.errorMessage);
+        //             alert("Error en la petición");
+        //         }
+        //     }
+        // );
     }
 
 
@@ -367,36 +367,36 @@ export class MsvInventarioSenialComponent implements OnInit {
         switch (value) {
             case 1:
 
-                this._cfgBodegaService.select().subscribe(
-                        response => {
-                        this.destino = response;
-                    },
-                        error => {
-                        this.errorMessage = <any>error;
+                // this._cfgBodegaService.select().subscribe(
+                //         response => {
+                //         this.destino = response;
+                //     },
+                //         error => {
+                //         this.errorMessage = <any>error;
 
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                        }
-                    }
-                );
+                //         if (this.errorMessage != null) {
+                //             console.log(this.errorMessage);
+                //             alert('Error en la petición');
+                //         }
+                //     }
+                // );
 
                 break;
             case 2:
 
-                this._municipioService.getMunicipioSelect().subscribe(
-                        response => {
-                        this.destino = response;
-                    },
-                        error => {
-                        this.errorMessage = <any>error;
+                // this._municipioService.getMunicipioSelect().subscribe(
+                //         response => {
+                //         this.destino = response;
+                //     },
+                //         error => {
+                //         this.errorMessage = <any>error;
 
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert('Error en la petición');
-                        }
-                    }
-                );
+                //         if (this.errorMessage != null) {
+                //             console.log(this.errorMessage);
+                //             alert('Error en la petición');
+                //         }
+                //     }
+                // );
 
                 break;
         }
@@ -432,81 +432,81 @@ export class MsvInventarioSenialComponent implements OnInit {
         this.datos.tipoDestinoId = this.tipoDestinoSelected;
         this.datos.tipoSenalId = this.tipoSenalSelected;
 
-        let token = this._loginService.getToken();
-        this._msvInventarioSenialService.searchByParametros(this.datos,token).subscribe(
-                response => {
-                this.respuesta = response;
-                if(this.respuesta.status == 'success'){ console.log(response.data);
-                    this.senales = response.data;
-                    //this.iniciarTabla();
-                    this.formSearch = true;//false;
-                    this.formIndex = true;
+        // let token = this._loginService.getToken();
+    //     this._msvInventarioSenialService.searchByParametros(this.datos,token).subscribe(
+    //             response => {
+    //             this.respuesta = response;
+    //             if(this.respuesta.status == 'success'){ console.log(response.data);
+    //                 this.senales = response.data;
+    //                 //this.iniciarTabla();
+    //                 this.formSearch = true;//false;
+    //                 this.formIndex = true;
 
-                    swal({
-                        title: 'Perfecto',
-                        text: "¡Señales encontradas!",
-                        type: 'info',
-                        showCloseButton: true,
-                        focusConfirm: false,
-                        confirmButtonText:
-                            '<i class="fa fa-thumbs-up"></i> OK!',
-                        confirmButtonAriaLabel: 'Thumbs up, great!',
-                        cancelButtonText:
-                            '<i class="fa fa-thumbs-down"></i>',
-                        cancelButtonAriaLabel: 'Thumbs down',
-                    });
-                }else{
-                    swal({
-                        title: 'Alerta',
-                        text: "¡No existen señales, por favor registrela y vuelva hacer una búsqueda!",
-                        type: 'warning',
-                        showCancelButton: true,
-                        focusConfirm: true,
-                        confirmButtonText:
-                            '<i class="fa fa-thumbs-up"></i> Registrar',
-                        confirmButtonAriaLabel: 'Thumbs up, great!',
-                        cancelButtonText:
-                            '<i class="fa fa-thumbs-down"></i> Cancelar',
-                        cancelButtonAriaLabel: 'Thumbs down',
-                    }).then((result) => {
-                        if (result.value) {
-                            this.formNew = true;
-                            this.formSearch = false;
-                        }
-                    });
-                }
-                    error => {
-                    this.errorMessage = <any>error;
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
+    //                 swal({
+    //                     title: 'Perfecto',
+    //                     text: "¡Señales encontradas!",
+    //                     type: 'info',
+    //                     showCloseButton: true,
+    //                     focusConfirm: false,
+    //                     confirmButtonText:
+    //                         '<i class="fa fa-thumbs-up"></i> OK!',
+    //                     confirmButtonAriaLabel: 'Thumbs up, great!',
+    //                     cancelButtonText:
+    //                         '<i class="fa fa-thumbs-down"></i>',
+    //                     cancelButtonAriaLabel: 'Thumbs down',
+    //                 });
+    //             }else{
+    //                 swal({
+    //                     title: 'Alerta',
+    //                     text: "¡No existen señales, por favor registrela y vuelva hacer una búsqueda!",
+    //                     type: 'warning',
+    //                     showCancelButton: true,
+    //                     focusConfirm: true,
+    //                     confirmButtonText:
+    //                         '<i class="fa fa-thumbs-up"></i> Registrar',
+    //                     confirmButtonAriaLabel: 'Thumbs up, great!',
+    //                     cancelButtonText:
+    //                         '<i class="fa fa-thumbs-down"></i> Cancelar',
+    //                     cancelButtonAriaLabel: 'Thumbs down',
+    //                 }).then((result) => {
+    //                     if (result.value) {
+    //                         this.formNew = true;
+    //                         this.formSearch = false;
+    //                     }
+    //                 });
+    //             }
+    //                 error => {
+    //                 this.errorMessage = <any>error;
+    //                 if(this.errorMessage != null){
+    //                     console.log(this.errorMessage);
+    //                     alert("Error en la petición");
+    //                 }
+    //             }
 
-            });
-    }
+    //         });
+    // }
 
-    onAdd(){
+    // onAdd(){
 
-        this._msvInventarioSenialService.searchByFull().subscribe(
-                response => {
-                if(response!=""){
-                    var checkboxParent = document.getElementsByName('_senalParent_')[0];
+    //     this._msvInventarioSenialService.searchByFull().subscribe(
+    //             response => {
+    //             if(response!=""){
+    //                 var checkboxParent = document.getElementsByName('_senalParent_')[0];
 
-                    console.log(response);}
-                this.senalesPorAsignar = response;
-                this.formAdd = true;
-                this.formIndex = true;//false;
-            },
-                error => {
-                this.errorMessage = <any>error;
+    //                 console.log(response);}
+    //             this.senalesPorAsignar = response;
+    //             this.formAdd = true;
+    //             this.formIndex = true;//false;
+    //         },
+    //             error => {
+    //             this.errorMessage = <any>error;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
+    //             if (this.errorMessage != null) {
+    //                 console.log(this.errorMessage);
+    //                 alert('Error en la petición');
+    //             }
+    //         }
+    //     );
 
     }
 
@@ -558,11 +558,11 @@ export class MsvInventarioSenialComponent implements OnInit {
     }
 
     onExport(){
-        this._msvInventarioSenialService.export();
+        // this._msvInventarioSenialService.export();
     }
 
     onSend() {
-        let token = this._loginService.getToken();
+        // let token = this._loginService.getToken();
 
         this.msvInventarioSenial.fecha     = this.fechaSelected;
         this.msvInventarioSenial.unidad    = this.unidadSelected;
@@ -626,38 +626,38 @@ export class MsvInventarioSenialComponent implements OnInit {
         }else {
 
             //if(this.funcionario.activo == 'true'){
-            this._msvInventarioSenialService.register(this.file, this.msvInventarioSenial, token).subscribe(
-                    response => {
+            // this._msvInventarioSenialService.register(this.file, this.msvInventarioSenial, token).subscribe(
+            //         response => {
 
-                    this.respuesta = response;
-                    //this.formConfirm = false;
-                    //this.formPdf = true;
+            //         this.respuesta = response;
+            //         //this.formConfirm = false;
+            //         //this.formPdf = true;
 
-                    if (this.respuesta.status == 'success') {
-                        this.ready.emit(true);
-                        swal({
-                            title: 'Perfecto!',
-                            text: 'Registro exitoso!',
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        });
-                        this.onAdd();
-                    } else {
-                        swal({
-                            title: 'Error!',
-                            text: 'La señal ya se encuentra registrada',
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        })
-                    }
-                        error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                });
+            //         if (this.respuesta.status == 'success') {
+            //             this.ready.emit(true);
+            //             swal({
+            //                 title: 'Perfecto!',
+            //                 text: 'Registro exitoso!',
+            //                 type: 'success',
+            //                 confirmButtonText: 'Aceptar'
+            //             });
+            //             this.onAdd();
+            //         } else {
+            //             swal({
+            //                 title: 'Error!',
+            //                 text: 'La señal ya se encuentra registrada',
+            //                 type: 'error',
+            //                 confirmButtonText: 'Aceptar'
+            //             })
+            //         }
+            //             error => {
+            //             this.errorMessage = <any>error;
+            //             if (this.errorMessage != null) {
+            //                 console.log(this.errorMessage);
+            //                 alert("Error en la petición");
+            //             }
+            //         }
+            //     });
             //}else{
             //  this.formConfirm = true;
             //this.formPdf = false;

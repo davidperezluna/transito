@@ -76,18 +76,20 @@
                     </ng-select>
                 </div>
                 <div class="col-lg-6 col-md-6">
+                    
+                </div>
+                <div class="col-lg-6 col-md-6">
                     <label>Clase Accidente
                         <span class="text-danger">*</span>
                     </label>
-                    <ng-select [multiple]="false" [options]="clasesAccidente" [(ngModel)]="claseAccidenteSelected" required name="claseAccidenteId">
+                    <ng-select [multiple]="false" [options]="clasesAccidente" (ngModelChange)="imprime($event)" [(ngModel)]="claseAccidenteSelected" required name="claseAccidenteId">
                     </ng-select>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <br>
+                <div class="col-lg-6 col-md-6" *ngIf="claseAccidenteSelected==1">
                     <label>Otro (Clase Accidente)</label>
                     <input class="form-control" placeholder="" type="text" [(ngModel)]="msvRegistroIpat.otroClaseAccidente" name="valor" required>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-6 col-md-6" *ngIf="claseAccidenteSelected==1">
                     <label>Choque Con
                         <span class="text-danger">*</span>
                     </label>
@@ -102,7 +104,6 @@
                     </ng-select>
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <br>
                     <label>Otro (Objeto Fijo)</label>
                     <input class="form-control" placeholder="" type="text" [(ngModel)]="msvRegistroIpat.otroObjetoFijo" name="valor" required>
                 </div>
