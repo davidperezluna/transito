@@ -82,7 +82,7 @@
                     <label>Clase Accidente
                         <span class="text-danger">*</span>
                     </label>
-                    <ng-select [multiple]="false" [options]="clasesAccidente" *ngIf="claseAccidenteSelected==2" (ngModelChange)="imprime($event)" [(ngModel)]="claseAccidenteSelected" required name="claseAccidenteId">
+                    <ng-select [multiple]="false" [options]="clasesAccidente" (ngModelChange)="imprime($event)" [(ngModel)]="claseAccidenteSelected" required name="claseAccidenteId">
                     </ng-select>
                 </div>
                 <div class="col-lg-6 col-md-6" *ngIf="claseAccidenteSelected==1">

@@ -246,7 +246,8 @@ export class NewComponent implements OnInit {
   }
 
   imprime(){
-    console.log(this.claseAccidenteSelected);
+    console.log(this.clasesAccidente);
+    
   }
 
 
