@@ -9,7 +9,7 @@ import { MpersonalFuncionarioService } from '../../../services/mpersonalFunciona
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { ModuloService } from '../../../services/modulo.service';
 import { TramitePrecioService } from '../../../services/tramitePrecio.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, CurrencyPipe  } from '@angular/common';
 import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import swal from 'sweetalert2';
 import { environment } from 'environments/environment'
