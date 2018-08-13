@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class NewFortalecimientoComponent implements OnInit {
   @Input() msvCategoriaId;
-  @Input() miEmpresa;
+  @Input() miEmpresa: any = null;
   public msj = '';
   public showT = false;
   public msvParametros;
