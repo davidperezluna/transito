@@ -1,0 +1,93 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title"><b>Módulo RNC</b> <small>Solicitudes de tramite</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-success btn-round " data-target="#themepicker" data-toggle="modal">
+                  <span class="text">Nuevo</span>
+                  <i class="ti-save ml-2"></i>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Factura</th>
+                    <th>Tramite</th>
+                    <th>Detalles</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
+                  <td >{{ tramiteSolicitud.id }}</td>
+                  <td >{{ tramiteSolicitud.tramiteFactura.factura.numero }}</td>
+                  <td >{{ tramiteSolicitud.tramiteFactura.tramitePrecio.nombre }}</td>
+                  <td >
+                    {{ tramiteSolicitud.datos }}
+                  </td>
+                  <td>
+                    <button (click)="editTramiteSolicitud(tramiteSolicitud)" class="btn btn-info" type="button">
+                      <i class="fa fa-pencil"></i>
+                      Editar
+                    </button> 
+                    <button (click)="deleteTramiteSolicitud(tramiteSolicitud.id)"  class="btn btn-danger" type="button">
+                      <i class="fa fa-trash"></i>
+                      Eliminar
+                    </button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="formSearch"><!-- .row -->
+      <div class="col-xs-12 col-lg-4">
+          <div class="card">
+              <div class="card-header">
+                  <h5 class="card-title">Buscar solicitante</h5>
+              </div>
+              <div class="card-body">
+                  <div class="col-xs-12 col-lg-12" >
+                      <form #formSearch="ngForm"> 
+                          <div class="form-group row">
+                              <div class="col-xs-12 col-lg-12">
+                                <label>Tipo documento <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="tiposIdentificacion" required>
+                                </ng-select>
+                              </div>
+                              <div class="col-xs-12 col-lg-12">
+                                <label>Indentificación <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="identificacion" name="identificacion" type="text" required />
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+              <div class="card-footer">
+                  <button class="btn btn-primary" [disabled]="formSearch.invalid" (click)="onSearchSolicitante()" [disabled]="isTramites">
+                      <i class="fa fa-search"></i>
+                      Buscar
+                  </button>
+              </div> 
+          </div>
+      </div>
+    </div><!-- .row -->
+    <div class="tab-pane" id="rpccc-ciudadano" role="tabpanel">
+      <app-new-rpccc-ciudadano *ngIf="solicitanteEncontrado === 3" [identificacion]="identificacion"
+        (ready)="ready($event)"></app-new-rpccc-ciudadano>
+    </div>
+
+    <app-edit *ngIf='formEdit' [tramiteSolicitud]="tramiteSolicitud" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' [solicitante]="solicitante" (ready)="ready($event)"></app-new>
+</div>

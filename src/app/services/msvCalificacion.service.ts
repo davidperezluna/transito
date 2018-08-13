@@ -40,11 +40,11 @@ export class MsvCalificacionService {
 	}
 
 	// tslint:disable-next-line:one-line
-	editCalificacion(token,calificacion){
+	newCalificacion(token,calificacion,id){
 		let json = JSON.stringify(calificacion);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
+ 		return this._http.post(this.url+"/"+id+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
 	getCalificacionSelect(){

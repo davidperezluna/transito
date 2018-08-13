@@ -245,5 +245,10 @@ export class NewComponent implements OnInit {
     this.ipatEncontrado = 1
   }
 
+  imprime(){
+    console.log(this.clasesAccidente);
+    
+  }
+
 
 }

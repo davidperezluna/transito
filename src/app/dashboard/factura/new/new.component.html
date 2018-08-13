@@ -99,7 +99,7 @@
                     </table>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf="moduloSelected != 4 && modulo">
+                <div class="col-xs-12 col-lg-12" *ngIf="(moduloSelected != 4 || moduloSelected != 6) && modulo">
                     <div class="input-group" [ngClass]="{'has-danger' : isErrorVehiculo,'has-success': isExistVehiculo}">
                         <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" required />
                         <span class="input-group-btn">
@@ -167,7 +167,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf="moduloSelected != 4 && isExistVehiculo || moduloSelected == 4 && isExistCiudadano">
+                <div class="col-xs-12 col-lg-12" *ngIf="((moduloSelected != 4 || moduloSelected != 6) && isExistVehiculo) || ((moduloSelected == 6 || moduloSelected == 4) && isExistCiudadano)">
                     <label>Tramites*</label>
                     <ng-select
                         [multiple]="false"
