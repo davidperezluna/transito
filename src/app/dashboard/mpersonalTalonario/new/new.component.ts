@@ -14,6 +14,7 @@ export class NewComponent implements OnInit {
 public talonario: MpersonalTalonario;
 public sedesOperativas: any;
 public sedeOperativaSelected: any;
+public sedeOperativa: any = null;
 public errorMessage;
 public respuesta: any = null;
 
@@ -44,12 +45,44 @@ constructor(
     let ini, fin, rangos;
     ini = this.talonario.desde;
     fin = this.talonario.hasta;
-    rangos = (fin - ini);
 
-    if (rangos < 0) {
-      rangos = 0;
+    if (fin > ini) {
+      rangos = (fin - ini);
+
+      if (rangos < 0) {
+        rangos = 0;
+      }
+      this.talonario.rangos = rangos;
+    }else{
+      swal({
+        title: 'Alerta!',
+        text: 'El número de inicio no puede ser superior o igual al número de finalización',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+
+      this.talonario.rangos = null;
     }
-    this.talonario.rangos = rangos;
+  }
+
+  onChangedSedeOperativa(e) {
+    if (e) {
+      let token = this._loginService.getToken();
+      this._SedeOperativaService.showSedeOperativa(token, e).subscribe(
+        response => {
+          this.talonario.desde = response.data.codigoDivipo;
+          this.talonario.hasta = response.data.codigoDivipo;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
   }
   
   onCancelar(){
@@ -69,14 +102,14 @@ constructor(
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha realizado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
         }else{
           swal({
             title: 'Error!',
-            text: 'El talonario ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

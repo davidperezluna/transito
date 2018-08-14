@@ -1,43 +1,77 @@
-<br>
-<div class="row">
-   <!-- .row -->
-   <div class="row justify-content-center container">
-    <div class="col-xs-6 col-lg-6">
-        <label>Número Placa</label>
-        <input class="form-control" [(ngModel)]="datos.numeroPlaca" name="numeroPlaca" type="text" required />
-    </div>
-    <div class="col-xs-6 col-lg-6">
-        <label>Número VIN</label>
-        <input class="form-control" [(ngModel)]="datos.numeroVIN" name="numeroVIN" type="text" required />
-    </div>
-    <div class="col-xs-6 col-lg-6">
-        <label>Número Serie</label>
-        <input class="form-control" [(ngModel)]="datos.numeroSerie" name="numeroSerie" type="text" required />
-    </div>
-    <div class="col-xs-6 col-lg-6">
-        <label>Número Motor</label>
-        <input class="form-control" [(ngModel)]="datos.numeroMotor" name="numeroMotor" type="text" required />
-    </div>
-    <div class="col-xs-6 col-lg-6">
-        <label>Número Chasis</label>
-        <input class="form-control" [(ngModel)]="datos.numeroChasis" name="numeroChasis" type="text" required />
-    </div>
-    <div class="col-xs-6 col-lg-6">
-        <label>Identificación Propietario</label>
-        <input class="form-control" [(ngModel)]="datos.propietario" name="propietario" type="text" required />
-    </div>
-    <div class="col-xs-6 col-lg-6">
-        <label></label>
-        <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-    </div>
- </div> 
-</div>
-<!-- .row -->
+<hr>
+<div class="row"><!-- .row -->
+    <div class="col-md-12"><!-- .col -->
+        <div class="card"><!-- .card -->
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Buscar Automotor</strong> 
+                    <small>filtros</small>
+                </h5>
+            </div><!-- /.card-header -->
+            <div class="card-body"><!-- .card-body -->
+                <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Número Placa</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroPlaca" name="numeroPlaca" type="text" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Número VIN</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroVIN" name="numeroVIN" type="text" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Número Serie</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroSerie" name="numeroSerie" type="text" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Número Motor</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroMotor" name="numeroMotor" type="text" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Número Chasis</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroChasis" name="numeroChasis" type="text" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <div class="form-group">
+                            <label>Identificación Propietario</label>
+                            <input class="form-control" [(ngModel)]="datos.propietario" name="propietario" type="text" required />
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+                <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="form-group">
+                            <div class="btn-group btn-group-justified">
+                                <div class="btn-group">
+                                    <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.row -->
+            </div><!-- /.card-body -->
+        </div><!-- /.card -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+
+
 <div class="row" *ngIf='vehiculoSuccess'>
    <div class="col-md-12">
       <div class="card">
          <div class="card-header">
-            <h5 class="card-title">Vehículo(s) <small>Registrado(s)</small></h5>
+            <h5 class="card-title"><strong>Vehículo(s)</strong> <small>Encontrados(s)</small></h5>
          </div>
          <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -54,7 +88,7 @@
                      <td >{{vehiculo.placa.numero}}</td>
                      <td >{{vehiculo.chasis}}</td>
                      <td >{{vehiculo.vin}}</td>
-                     <td><button (click)="showVehiculo(vehiculo)" class="btn btn-outline-info" type="button">Detalles</button> 
+                     <td><button (click)="onShowVehiculo(vehiculo)" class="btn btn-primary" type="button">Detalles</button> 
                      </td>
                   </tr>
                </tbody>
@@ -63,5 +97,5 @@
          </div>
       </div>
    </div>
-   <app-vehiculo-show *ngIf='showV' [vehiculo]="vehiculo" (cerrarForm)="cerrarForm($event)"></app-vehiculo-show>
+   <app-vehiculo-show *ngIf='formShow' [vehiculo]="vehiculo" (cerrarForm)="cerrarForm($event)"></app-vehiculo-show>
 </div>

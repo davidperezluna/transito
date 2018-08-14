@@ -53,6 +53,9 @@ public tipoVehiculo: any;
 public vehiculoDatosTramite: any;
 public oculto = false;
 public tipoRegrabar;
+public propietariosVehiculo: any;
+public isCiudadano = false;
+public isEmpresa = false;
 
 constructor(
   private _loginService: LoginService,
@@ -66,7 +69,6 @@ constructor(
     this.pesado = false;
     this.maquinaria = false;
     let token = this._loginService.getToken();
-    console.log(this.vehiculo);
     
     this.sedeOperativa = this.vehiculo.sedeOperativa.nombre;
     this.placa = this.vehiculo.placa.numero;
@@ -79,41 +81,55 @@ constructor(
                 this.numeroTarjeta = response.data.licenciaTransito;                
       }
     );
-    this._TramiteSolicitudService.byIdVehiculo(token,this.vehiculo.id).subscribe(
+    
+    /*this._TramiteSolicitudService.byIdVehiculo(token,this.vehiculo.id).subscribe(
       response=>{
-                this.vehiculoDatosTramite = response.data;             
-                console.log(this.vehiculoDatosTramite);
+        this.vehiculoDatosTramite = response.data;             
                 
-                this.vehiculoDatosTramite.forEach(element => {                    
-                  if(element.tramiteFactura.tramitePrecio.tramite.id == 22){
-                      this.regrabacionMotor = "SI";
-                  }
-                  else if(element.tramiteFactura.tramitePrecio.tramite.id == 23){
-                      this.regrabacionChasis = "SI";
-                  }
-                  else if(element.tramiteFactura.tramitePrecio.tramite.id == 9){
-                      this.regrabacionSerie = "SI";
-                  }                  
-                });
+        this.vehiculoDatosTramite.forEach(element => {                    
+          if(element.tramiteFactura.tramitePrecio.tramite.id == 22){
+              this.regrabacionMotor = "SI";
+          }
+          else if(element.tramiteFactura.tramitePrecio.tramite.id == 23){
+              this.regrabacionChasis = "SI";
+          }
+          else if(element.tramiteFactura.tramitePrecio.tramite.id == 9){
+              this.regrabacionSerie = "SI";
+          }                  
+        });
       }
-    );
+    );*/
 
     this._VehiculoService.showVehiculoTipo(token,this.vehiculo.id).subscribe(
       response => {
-                  this.tipoVehiculo = response.data;                  
-                  if(response.msj == this.vehiculoPesado){
-                    this.numeroEjes = this.tipoVehiculo.numeroEjes;
-                    this.numeroFichas = "Carroceria: " + this.tipoVehiculo.fichaTecnicaHomologacionCarroceria + "/Chasis: " +this.tipoVehiculo.fichaTecnicaHomologacionChasis
-                    ;
-                    this.pesado = true;
-                  }
-                  else if(response.msj == this.vehiculoMaquinaria){
-                    this.pesoBruto = this.tipoVehiculo.tonelaje;
-                    this.numeroEjes = this.tipoVehiculo.numeroEjes;
-                    this.maquinaria = true;
-                  }
-                  }
-    );   
+        this.tipoVehiculo = response.data;                  
+        if(response.msj == this.vehiculoPesado){
+          this.numeroEjes = this.tipoVehiculo.numeroEjes;
+          this.numeroFichas = "Carroceria: " + this.tipoVehiculo.fichaTecnicaHomologacionCarroceria + "/Chasis: " +this.tipoVehiculo.fichaTecnicaHomologacionChasis
+          ;
+          this.pesado = true;
+        }
+        else if(response.msj == this.vehiculoMaquinaria){
+          this.pesoBruto = this.tipoVehiculo.tonelaje;
+          this.numeroEjes = this.tipoVehiculo.numeroEjes;
+          this.maquinaria = true;
+        }
+      }
+    );
+    
+    this._CiudadanoVehiculoService.showCiudadanoVehiculoId(token, this.vehiculo.placa.numero).subscribe(
+      response => {
+        this.propietariosVehiculo = response.data;
+
+        this.propietariosVehiculo.forEach(element => {
+          if (element.ciudadano) {
+            this.isCiudadano = true;
+          }
+          if (element.empresa) {
+            this.isEmpresa = true;
+          }
+        });
+      });
  
     this.numeroTarjeta = this.vehiculo.placa.numero;
     this.estadoTarjeta = this.vehiculo.placa.numero;
