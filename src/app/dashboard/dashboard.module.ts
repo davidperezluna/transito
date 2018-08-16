@@ -99,6 +99,7 @@ import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
 
+import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
 import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
 import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
@@ -172,6 +173,7 @@ import {RightsidebarComponent} from '../shared';
       MparqEntradaModule,
       MparqSalidaModule,
       MparqPatioModule,
+      CfgCargoModule,
       MpersonalFuncionarioModule,
       MpersonalTipoContratoModule,
       MpersonalTalonarioModule,

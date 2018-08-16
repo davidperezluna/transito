@@ -657,6 +657,18 @@
             Gestión de rangos
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mpersonalTipoContrato" [ngClass]="{'active' : ( addActive === 'mpersonalTipoContrato')}" (click)="addActiveMenu('mpersonalTipoContrato')">
+            <i class="fa fa-angle-right"></i>
+            Tipo contrato
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cfgCargo" [ngClass]="{'active' : ( addActive === 'cfgCargo')}" (click)="addActiveMenu('cfgCargo')">
+            <i class="fa fa-angle-right"></i>
+            Cargos
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level -->
     </li>

@@ -297,7 +297,7 @@ constructor(
     });
   }
 
-  changedModulo(e){
+  onChangedModulo(e){
     if (e) {
       let token = this._loginService.getToken();
 

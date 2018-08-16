@@ -45,7 +45,7 @@
                                 [multiple]="false"
                                 [options]="modulos"
                                 [(ngModel)]="moduloSelected"
-                                (ngModelChange)="changedModulo($event)"
+                                (ngModelChange)="onChangedModulo($event)"
                                 required
                                 name="moduloId">
                             </ng-select>
@@ -99,7 +99,7 @@
                     </table>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf="(moduloSelected != 4 || moduloSelected != 6) && modulo">
+                <div class="col-xs-12 col-lg-12" *ngIf="modulo?.vehiculo && modulo">
                     <div class="input-group" [ngClass]="{'has-danger' : isErrorVehiculo,'has-success': isExistVehiculo}">
                         <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" required />
                         <span class="input-group-btn">
@@ -167,7 +167,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-lg-12" *ngIf="((moduloSelected != 4 || moduloSelected != 6) && isExistVehiculo) || ((moduloSelected == 6 || moduloSelected == 4) && isExistCiudadano)">
+                <div class="col-xs-12 col-lg-12" *ngIf="(isExistVehiculo) || (isExistCiudadano)">
                     <label>Tramites*</label>
                     <ng-select
                         [multiple]="false"
@@ -188,7 +188,7 @@
                         <div class="card-header">
                             <div class="card-title">
                                 <h5 class="text-uppercase">Propietarios</h5>
-                                <p class="text-uppercase">valor retefuente: {{valorRetefuente}}</p>
+                                <p class="text-uppercase">Valor retefuente: {{ valorRetefuente }}</p>
                             </div>
                         </div>
                         <div class="card-body">
@@ -226,13 +226,12 @@
                                         <td> 
                                             <div class="custom-control custom-checkbox"  >
                                                 <input (change)="onVendedorSelect($event,propietarioVehiculo.id)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
-                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}$</p><p *ngIf="!propietarioVehiculo.state">0$</p></label>
+                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">${{valorRetefuenteUnitario}}</p><p *ngIf="!propietarioVehiculo.state">$0</p></label>
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody> 
-                            </table> 
-
+                            </table>
                         </div>
                         <div class="card-footer">
                             <button (click)="onCancelarTraspaso()" class="btn btn-default">

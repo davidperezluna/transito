@@ -13,7 +13,7 @@ import { MsvInventarioSenial } from './msvInventarioSenial.modelo';
 //import { SedeOperativaService } from '../../services/sedeOperativa.service';
 
 ///////////////////////
-import {} from '@types/googlemaps';
+import {} from 'googlemaps';
 declare var google: any;
 ///////////////////////
 
