@@ -39,15 +39,15 @@
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
-                  <td >{{tramitePrecio.id}}</td>
-                  <td >{{tramitePrecio.fechaInicio}}</td>
-                  <td >{{tramitePrecio.nombre}}</td>
+                  <td >{{ tramitePrecio.id }}</td>
+                  <td >{{ tramitePrecio.fechaInicio }}</td>
+                  <td >{{ tramitePrecio.nombre }}</td>
                   <td placement="top" ngbTooltip="Tooltip on top" data-toggle="ngbTooltip"   title="holaMundo" data-html="true">{{tramitePrecio.tramite.nombre}}
                     <!-- <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="holaMundo" data-placement="right"  data-original-title="Tooltip on right">Right</button> -->
                   </td>
-                  <td >{{tramitePrecio.modulo.abreviatura}}</td>
-                  <td >{{tramitePrecio.valor}}</td>
-                  <td >{{tramitePrecio.valorTotal}}</td>
+                  <td >{{ tramitePrecio.modulo.abreviatura }}</td>
+                  <td >{{ tramitePrecio.valor | currency: 'COP' }}</td>
+                  <td >{{ tramitePrecio.valorTotal | currency: 'COP' }}</td>
                   <td><button (click)="editTramitePrecio(tramitePrecio)" class="btn btn-info" type="button">Editar</button> 
                     <button (click)="deleteTramitePrecio(tramitePrecio.id)"  class="btn btn-danger" type="button">Eliminar  </button> </td>
                 </tr>

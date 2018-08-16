@@ -18,15 +18,16 @@
                               <input class="form-control" [(ngModel)]="identificacion" name="identificacion" type="text">
                           </div>
                           <div  class="col-xs-12 col-lg-4">
-                              <label>Tipo contrato</label>
-                              <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="tipoContratoSelected" name="tiposContrato">
+                            <label>Tipo contrato</label>
+                            <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="tipoContratoSelected" name="tiposContrato">
                             </ng-select>
                           </div>
                       </div>
                       <div class="form-group row">
                         <div  class="col-xs-12 col-lg-3 offset-lg-3">
                             <label>Cargo</label>
-                            <input class="form-control" [(ngModel)]="cargo" name="cargo" type="text">
+                            <ng-select [multiple]="false" [options]="cargos" [(ngModel)]="cargoSelected" name="cargos">
+                            </ng-select>
                         </div>
                         <div  class="col-xs-12 col-lg-3">
                             <label>Sede</label>
@@ -37,7 +38,7 @@
                   </form>
               </div>
               <div class="card-footer">
-                  <button (click)="search()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                  <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-search"></i>
                     Buscar
                   </button>
@@ -82,11 +83,11 @@
                   <td >{{ funcionario.ciudadano.usuario.identificacion }}</td>
                   <td >{{ funcionario.tipoContrato.nombre }}</td>
                   <td>
-                    <button (click)="edit(funcionario)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
-                    <button (click)="onTime(funcionario)" (ready)="ready($event)"  class="btn btn-xs btn-primary" type="button">
+                    <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary" type="button">
+                      <i class="fa fa-eye"></i>
+                      Ver
+                    </button>
+                    <button (click)="onTime(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary" type="button" *ngIf="funcionario.tipoContrato.horarios">
                       <i class="fa fa-clock-o"></i>
                       Horarios
                     </button>
@@ -100,7 +101,8 @@
       </div>
     </div>
 
-    <app-edit *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit>
     <app-time *ngIf='formTime' [funcionario]="funcionario" (ready)="ready($event)"></app-time>
+    <app-show *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)"></app-show>
 </div>

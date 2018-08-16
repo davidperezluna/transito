@@ -13,12 +13,12 @@ export class CfgCargoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public estados;
+	public cargos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public smlmv: CfgCargo;
+  public cargo: CfgCargo;
 
   constructor(
     private _CargoService: CfgCargoService,
@@ -43,7 +43,7 @@ export class CfgCargoComponent implements OnInit {
 
     this._CargoService.index().subscribe(
 				response => {
-          this.estados = response.data;
+          this.cargos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -103,7 +103,7 @@ export class CfgCargoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CargoService.delete(token,id).subscribe(
+        this._CargoService.delete({ 'id': id }, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -130,8 +130,8 @@ export class CfgCargoComponent implements OnInit {
     })
   }
 
-  onEdit(smlmv:any){
-    this.smlmv = smlmv;
+  onEdit(cargo:any){
+    this.cargo = cargo;
     this.formEdit = true;
     this.formIndex = false;
   }

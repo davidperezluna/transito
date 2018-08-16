@@ -125,6 +125,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                     this.datos.sedeOperativaId = response.data.sedeOperativa.id;
                     //Verificar la posibilidad de insertar solo la factura y/o el tramite
                     this.datos.tramiteFactura = 1;
+                    this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
                     this.datos.categoriaId = this.categoriaSelected;
                     this.datos.claseId = this.claseSelected;
                     this.datos.servicioId = this.servicioSelected;

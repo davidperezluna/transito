@@ -60,7 +60,10 @@
                   <td>{{ licencia.numero }}</td>
                   <td>{{ licencia.sedeOperativa.nombre }}</td>
                   <td>{{ licencia.fechaExpedicion }}</td>
-                  <td>{{ licencia.activo }}</td>
+                  <td>
+                    <label class="label label-success text-success" *ngIf="licencia.activo">Activo</label>
+                    <label class="label label-danger text-danger" *ngIf="!licencia.activo">Inactivo</label>
+                  </td>
                   <!--
                     <td>
                       <button (click)="edit(licencia)" class="btn btn-xs btn-info" type="button">

@@ -21,7 +21,7 @@ export class CfgCargoService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -29,10 +29,11 @@ export class CfgCargoService {
 		);
 	}
 
-	delete(token, id) {
-		let params = "authorization=" + token;
+	delete(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/delete", params, { headers: headers }).map(
+		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
 			res => res.json()
 		);
 	}

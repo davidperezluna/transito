@@ -15,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _EstadoService: CfgCargoService,
+  private _CargoService: CfgCargoService,
   private _loginService: LoginService,
   ){}
 
@@ -25,7 +25,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._EstadoService.edit(this.cargo,token).subscribe(
+		this._CargoService.edit(this.cargo,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

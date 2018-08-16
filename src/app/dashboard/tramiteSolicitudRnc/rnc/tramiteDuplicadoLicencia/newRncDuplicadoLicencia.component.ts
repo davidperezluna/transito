@@ -31,7 +31,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     public datos = {
         'tramiteFactura': null,
         'categoria': null,
-        'licenciaConduccion': null,
+        'numeroLicenciaConduccion': null,
         'numeroRunt': null,
         'vigencia': null,
         'paisId': null,
@@ -99,6 +99,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         let token = this._LoginService.getToken();
         
         this.datos.tramiteFactura = 5;
+        this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
         this.datos.claseId = this.claseSelected;
         this.datos.servicioId = this.servicioSelected;
         this.datos.paisId = this.paisSelected;

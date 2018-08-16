@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public estado: CfgCargo;
+public cargo: CfgCargo;
 public errorMessage;
 public respuesta;
 
@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.estado = new CfgCargo(null, null);
+    this.cargo = new CfgCargo(null, null);
   }
   
   onCancelar(){
@@ -30,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._CargoService.register(this.estado,token).subscribe(
+		this._CargoService.register(this.cargo,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
