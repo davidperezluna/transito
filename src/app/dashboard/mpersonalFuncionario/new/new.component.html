@@ -104,7 +104,8 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Cargo </label>
-                                <input class="form-control" [(ngModel)]="funcionario.cargo" name="cargo" type="text" required />
+                                <ng-select [multiple]="false" [options]="cargos" [(ngModel)]="cargoSelected" name="cargos" required>
+                                </ng-select>
                             </div>
                         </div>
 

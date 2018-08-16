@@ -352,8 +352,6 @@ constructor(
                 }
               }
             });
-
-          
         }else {
           swal({
             title: 'Atención!',

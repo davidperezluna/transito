@@ -6,6 +6,7 @@ import {ConceptoParametroTramiteService} from '../../../services/conceptoParameT
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 import {TramitePrecioService} from '../../../services/tramitePrecio.service';
+import { CurrencyPipe } from '@angular/common';
 import { log } from 'util';
 declare var $: any;
 

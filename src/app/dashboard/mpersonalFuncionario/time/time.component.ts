@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MpersonalHorario } from '../mpersonalHorario.modelo';
 import { MpersonalHorarioService } from '../../../services/mpersonalHorario.service';
+import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -13,17 +14,34 @@ export class TimeComponent implements OnInit {
 @Input() funcionario:any = null;
 public horario: MpersonalHorario;
 public errorMessage;
-public respuesta: any = null;
+public horarios: any = null;
 public agregar: any;
 public semana: any;
 
 constructor(
   private _HorarioService: MpersonalHorarioService,
+  private _FuncionarioService: MpersonalFuncionarioService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
     this.horario = new MpersonalHorario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    
+    let token = this._loginService.getToken();
+
+    this._FuncionarioService.recordTimes(this.funcionario, token).subscribe(
+      response => {
+        this.horarios = response.data;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
   
   onCancelar(){
@@ -60,10 +78,8 @@ constructor(
     this.horario.dias = this.semana;
 
     this._HorarioService.register(this.horario,token).subscribe(
-      response => {
-        this.respuesta = response;
-        
-        if(this.respuesta.status == 'success'){
+      response => {        
+        if(response.status == 'success'){
           if(this.agregar == 'true'){
             swal({
               title: 'Perfecto!',

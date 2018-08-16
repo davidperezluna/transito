@@ -1,35 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {TramitePrecioService} from '../../services/tramitePrecio.service';
-import {LoginService} from '../../services/login.service';
-import {TramitePrecio} from './tramitePrecio.modelo';
-import { CurrencyPipe } from '@angular/common';
+import { CfgCargoService } from '../../services/cfgCargo.service';
+import { LoginService } from '../../services/login.service';
+import { CfgCargo } from './cfgCargo.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
-// declare var fechaActual: any;
-
 
 @Component({
   selector: 'app-index',
-  templateUrl: './tramitePrecio.component.html'
+  templateUrl: './cfgCargo.component.html'
 })
-export class TramitePrecioComponent implements OnInit {
+export class CfgCargoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public tramitePrecios;
-	public tramiteProximo;
-	public compa;
+	public cargos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public formSmlmv = false;
-  public formCalculo = false;
   public table:any; 
-  public tramitePrecio: TramitePrecio;
-  public fechaActual ;
+  public cargo: CfgCargo;
 
   constructor(
-		private _TramitePrecioService: TramitePrecioService,
+    private _CargoService: CfgCargoService,
 		private _loginService: LoginService,
     ){}
     
@@ -49,21 +41,9 @@ export class TramitePrecioComponent implements OnInit {
       }
     })
 
-		this._TramitePrecioService.getTramitePrecio().subscribe(
+    this._CargoService.index().subscribe(
 				response => {
-          this.tramitePrecios = response.tramitePreciosActivo;
-          this.tramiteProximo = response.tramiteProximo;
-          this.compa = response.compa;
-          this.fechaActual = new Date();
-
-          
-
-          console.log(this.tramitePrecios);
-          console.log(this.tramiteProximo);
-          console.log(this.fechaActual);
-          // console.log(this.compa.clase);
-          
-     
+          this.cargos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -77,11 +57,6 @@ export class TramitePrecioComponent implements OnInit {
 					}
 				}
       );
-
-      
-
-
-
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -99,25 +74,23 @@ export class TramitePrecioComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;
-    this.formSmlmv = false;
     this.table.destroy();
   }
 
   ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formSmlmv = false;
-        this.formCalculo = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
+    if(isCreado) {
+      this.formNew = false;
+      this.formEdit = false;
+      this.formIndex = true;
+      this.ngOnInit();
+    }
   }
-  deleteTramitePrecio(id:any){
 
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -130,7 +103,7 @@ export class TramitePrecioComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TramitePrecioService.deleteTramitePrecio(token,id).subscribe(
+        this._CargoService.delete({ 'id': id }, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -157,26 +130,9 @@ export class TramitePrecioComponent implements OnInit {
     })
   }
 
-  editTramitePrecio(tramitePrecio:any){
-    this.tramitePrecio = tramitePrecio;
+  onEdit(cargo:any){
+    this.cargo = cargo;
     this.formEdit = true;
     this.formIndex = false;
   }
-
-  onNewSmlmv(){
-    this.formEdit = false;
-    this.formIndex = false;
-    this.formNew = false;
-    this.formCalculo =false;
-    this.formSmlmv = true;
-  }
-
-  onNewCalculo(){
-    this.formEdit = false;
-    this.formIndex = false;
-    this.formNew = false;
-    this.formSmlmv = false;
-    this.formCalculo = true;
-  }
-
 }
