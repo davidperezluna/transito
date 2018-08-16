@@ -409,6 +409,27 @@
       <!-- /.nav-second-level -->
     </li>
 
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'm_rf_sv_seguridad_vial')}">
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('m_rf_sv_seguridad_vial')">
+        RF- Seguridad Vial
+        <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvInventarioSenial" [ngClass]="{'active' : ( addActive === 'msvInventarioSenial')}" (click)="addActiveMenu('msvInventarioSenial')">
+            <i class="fa fa-angle-right"></i> <!--HU-08-->Inventario Señales
+          </a>
+        </li>
+      </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvSenial" [ngClass]="{'active' : ( addActive === 'msvSenial')}" (click)="addActiveMenu('msvSenial')">
+            <i class="fa fa-angle-right"></i> <!--HU-09-->Señales
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav-
+
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnc')}">
       <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnc')">
         RNC

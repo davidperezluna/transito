@@ -112,6 +112,9 @@ import { ReporteRoutes } from './reporte/reporte.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
+import { MsvInventarioSenialRoutes } from './msvInventarioSenial/msvInventarioSenial.routes';
+import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
+
 export const DashboardRoutes: Route[] = [
   {
     path: 'dashboard',
@@ -213,8 +216,9 @@ export const DashboardRoutes: Route[] = [
       ...RnrsPreregistroRoutes,
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
-      // ...MsvInventarioSenialRoutes,
-      // ...MsvSenialRoutes,
+
+      ...MsvInventarioSenialRoutes,
+      ...MsvSenialRoutes,
     ]
   }
 ];

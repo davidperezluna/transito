@@ -1,6 +1,6 @@
 <div class="container">
 
-  <hr>
+  <!--<hr>-->
   <div class="row" *ngIf='formSearch'>
     <div class="col-md-12 col-lg-8 offset-lg-2">
       <div class="card">
@@ -25,7 +25,6 @@
                    </td>
                    <td>
                     <ng-select [multiple]="false" [options]="destino" [(ngModel)]="destinoSelected" name="destino" style="width:300px">
-                      <option value="" ng-if="false">-- Selecionar --</option>
                     </ng-select>
                    </td>
                   </tr>
@@ -58,7 +57,85 @@
     </div>
   </div>
 
-  <hr>
+  <!--<hr>-->
+  <div class="row" *ngIf='formInventario'>
+    <div class="col-md-12">
+      <div class="card">
+
+        <div class="card-body">
+          <h5 class="text-uppercase">Inventario</h5>
+          <small></small>
+          <hr>
+          <div class="form-group row">
+            <div class="col-md-12 col-lg-8 offset-lg-2">
+              <label>Seleccion el tipo de señal a buscar:</label>
+              <hr>
+                <span *ngFor="let senales of senal; let i = index">
+                  <input  type="radio" (click)="searchInventario()" value="senales.value" ng-model="senalSelected" name="senal">
+                  {{senales.label}}
+                  &nbsp;&nbsp;
+                </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <table class="table " id="dataTables-inventario" style="display: none;">
+            <thead>
+            <tr style="text-align: center;">
+              <th><!--<input type="checkbox" (click)="checkAll($eve)" name="_senalParent_" >--></th>
+              <th>Id</th>
+              <th># Inventario</th>
+              <th>Fecha de Inventario</th>
+              <th>Fecha de ingreso</th>
+              <th>Fecha</th>
+              <th>Unidad</th>
+              <th>Color</th>
+              <th>Latitud</th>
+              <th>Longitud</th>
+              <th>Código</th>
+              <th>Logo</th>
+              <th>Nombre</th>
+              <th>Valor</th>
+              <th>Estado</th>
+              <th>Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="odd" style="text-align: center;" *ngFor="let senalPorAsignar of senalesPorAsignar?.data; let i = ind">
+              <td><input type="checkbox" value="{{senalPorAsignar.id}}" (click)="check($event)" name="_senal_"></td>
+              <td>{{senalPorAsignar.id}}</td>
+              <td>{{senalPorAsignar.inventario.numero}}</td>
+              <td>{{senalPorAsignar.inventario.fecha}}</td>
+              <td>{{senalPorAsignar.fecha}}</td>
+              <td>{{senalPorAsignar.unidad}}</td>
+              <td>
+                <div style="background-image: url('assets/img/loader.gif'); background-size: 30px; background-repeat: no-repeat; background-position: center; border:solid 0.5px #ccc; border-radius:0.5px; box-shadow: -0.5px -0.5px 0.5px 0px red, 0.5px -0.5px 0.5px yellow, 0.5px 0.5px 0.5px green, -0.5px 0.5px 0.5px blue;" name="setColor">&nbsp;</div>
+                <input type="hidden" name="getColor" value="{{senalPorAsignar.tipoColor.hex}}">
+                {{senalPorAsignar.tipoColor.nombre}}
+              </td>
+              <td>{{senalPorAsignar.latitud}}</td>
+              <td>{{senalPorAsignar.longitud}}</td>
+              <td>{{senalPorAsignar.codigo}}</td>
+              <td>
+                <input type="hidden" name="src" value="{{senalPorAsignar.logo}}">
+                <img height="30px" src="assets/img/loader.gif" name="logo">
+              </td>
+              <td>{{senalPorAsignar.nombre}}</td>
+              <td>{{senalPorAsignar.valor}}</td>
+              <td>{{senalPorAsignar.tipoEstado.nombre}}</td>
+              <td>{{senalPorAsignar.cantidad}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!--<hr>-->
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
       <div class="card">
@@ -83,9 +160,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="odd" *ngFor="let senal of senales; let i = index">
-                <td>{{senal.inventarioSenialId.codigo}}</td>
-                <td>{{senal.inventarioSenialId.fecha}}</td>
+              <tr class="odd" *ngFor="let senal of senales?.data; let i = index">
+                <td>{{senal.numero}}</td>
+                <td><a (click)="getInventario()" style="text-decoration: underline; cursor: pointer;">{{senal.fecha}}</a></td>
               </tr>
             </tbody>
           </table>
@@ -94,8 +171,8 @@
     </div>
   </div>
 
-  <hr>
-  <div class="row"><!--*ngIf='formAdd'-->
+  <!--<hr>-->
+  <div class="row" id="formAdd" style="visibility: hidden;"><!--*ngIf='formAdd'-->
     <div class="col-md-12">
       <div class="card">
 
@@ -113,6 +190,19 @@
                     <div class="form-group row">
                       <div class="col-xs-12 col-lg-10">
                         <table>
+                          <tr>
+                            <td>
+                              <label>Inventario:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="hidden" [(ngModel)]="idSelected" name="id" />
+                        <select name="inventario" class="form-control" style="width:300px;">
+                        </select>
+                        </span>
+                            </td>
+                          </tr>
+
                           <tr>
                             <td>
                               <label>Fecha:</label>
@@ -141,19 +231,18 @@
                             </td>
                             <td>
                         <span>
-                        <input type="color" [(ngModel)]="colorSelected" class="form-control" name="color">
+                          <select name="color" class="form-control" style="width:300px;">
+                          </select>
                         </span>
                             </td>
                           </tr>
 
                           <tr>
                             <td align="left">
-                              <button (click)="onAddress()" (ready)="ready($event)" class="btn btn-primary" type="button">
-                                Ingresar dirección
-                              </button>
+                                Dirección:
                             </td>
                             <td>
-                              <span>
+                              <span (click)="onAddress()">
                               <input type="text" [(ngModel)]="direccionSelected" class="form-control" name="direccion" readonly>
                               </span>
                             </td>
@@ -176,7 +265,7 @@
                             </td>
                             <td>
                         <span>
-                        <input type="file" [(ngModel)]="archivoSelected" (change)="onFileChange($event)"  placeholder="Adjuntar" accept=".jpeg,.jpg" value="20000" multiple="false" class="form-control" name="file">
+                        <input type="file" [(ngModel)]="archivoSelected" (change)="onFileChange($event)"  placeholder="Adjuntar" accept=".jpeg,.jpg" multiple="false" class="form-control" name="file">
                         </span>
                             </td>
                           </tr>
@@ -198,7 +287,7 @@
                             </td>
                             <td>
                         <span>
-                        <input type="number" [(ngModel)]="valorSelected" class="form-control" name="valor">
+                        <input type="number" [(ngModel)]="valorSelected" class="form-control" min="0" max="100000000" maxlength="10" name="valor">
                         </span>
                             </td>
                           </tr>
@@ -209,7 +298,8 @@
                             </td>
                             <td>
                         <span>
-                        <input type="text" [(ngModel)]="estadoSelected" class="form-control" name="estado">
+                          <select name="estado" class="form-control" style="width:300px;">
+                          </select>
                         </span>
                             </td>
                           </tr>
@@ -220,7 +310,7 @@
                             </td>
                             <td>
                         <span>
-                        <input type="number" [(ngModel)]="cantidadSelected" class="form-control" name="cantidad">
+                        <input type="number" [(ngModel)]="cantidadSelected" class="form-control" min="0" max="100000000" maxlength="10" name="cantidad">
                         </span>
                             </td>
                           </tr>
@@ -237,7 +327,7 @@
                     <div id="geo"><div #map style="width:400px; height:300px">loading...</div></div>-->
 
                     <div id="geo" class="swal2-container swal2-center swal2-fade swal2-shown" style="visibility: hidden; overflow-y: auto;">
-                      <div aria-labelledby="swal2-title" aria-describedby="swal2-content" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: flex;">
+                      <div aria-labelledby="swal2-title" aria-describedby="swal2-content" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="width: 700px; display: flex;">
                         <div class="swal2-header">
                          <ul class="swal2-progresssteps" style="display: none;"></ul>
                          <div class="swal2-icon swal2-error" style="display: none;">
@@ -277,7 +367,7 @@
                                <input type="hidden" style="width:400px" id="lng" />
                                <input type="text" style="width:400px" class="form-control" style="visibility: hidden;" id="address" />
                                <div align="center">
-                                 <div #map style="width:400px; height:300px" id="map">loading...</div>
+                                 <div #map style="width:660px; height:300px" id="map">loading...</div>
                                </div>
 
                              </div>
@@ -296,15 +386,15 @@
                              <div class="swal2-validationerror" id="swal2-validationerror" style="display: none;"></div>
                              </div>
                              <div class="swal2-actions" style="display: flex;">
-                              <button (click)="onCloseGeo()" type="button" class="swal2-confirm swal2-styled" aria-label="Thumbs up, great!" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
+                              <!--<button (click)="onCloseGeo()" type="button" class="swal2-confirm swal2-styled" aria-label="Thumbs up, great!" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
                                 <i class="fa fa-thumbs-up"></i> OK!
-                              </button>
+                              </button>-->
                                <button (click)="onSearchGeo()" id="searchAddress" (ready)="ready($event)" class="swal2-confirm swal2-styled" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
                                  <i class="fa fa-eye"></i> Buscar Dirección
                                </button>
-                              <button type="button" class="swal2-cancel swal2-styled" aria-label="Thumbs down" style="display: none;">
+                              <!--<button type="button" class="swal2-cancel swal2-styled" aria-label="Thumbs down" style="display: none;">
                                 <i class="fa fa-thumbs-down"></i>
-                              </button>
+                              </button>-->
                              </div>
                              <div class="swal2-footer" style="display: none;"></div>
                            </div>
@@ -334,9 +424,11 @@
             <div class="card-body">
               <table class="table " id="dataTables-example2">
                 <thead>
-                <tr>
+                <tr style="text-align: center;">
                   <th>Id</th>
-                  <th>Fecha</th>
+                  <th># Inventario</th>
+                  <th>Fecha de Inventario</th>
+                  <th>Fecha de ingreso</th>
                   <th>Unidad</th>
                   <th>Color</th>
                   <th>Latitud</th>
@@ -347,25 +439,38 @@
                   <th>Valor</th>
                   <th>Estado</th>
                   <th>Cantidad</th>
-                  <th>Georreferenciación</th>
+                  <th>Geo</th>
+                  <th>||</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="odd" *ngFor="let senalPorAsignar of senalesPorAsignar?.data; let i = ind">
+                <tr class="odd" style="text-align: center;" *ngFor="let senalPorAsignar of senalesPorAsignar?.data; let i = ind">
                   <td>{{senalPorAsignar.id}}</td>
+                  <td>{{senalPorAsignar.inventario.numero}}</td>
+                  <td>{{senalPorAsignar.inventario.fecha}}</td>
                   <td>{{senalPorAsignar.fecha}}</td>
                   <td>{{senalPorAsignar.unidad}}</td>
-                  <td>{{senalPorAsignar.color}}</td>
+                  <td>
+                    <div style="background-image: url('assets/img/loader.gif'); background-size: 30px; background-repeat: no-repeat; background-position: center; border:solid 0.5px #ccc; border-radius:0.5px; box-shadow: -0.5px -0.5px 0.5px 0px red, 0.5px -0.5px 0.5px yellow, 0.5px 0.5px 0.5px green, -0.5px 0.5px 0.5px blue;" name="setColor">&nbsp;</div>
+                    <input type="hidden" name="getColor" value="{{senalPorAsignar.tipoColor.hex}}">
+                    {{senalPorAsignar.tipoColor.nombre}}
+                  </td>
                   <td>{{senalPorAsignar.latitud}}</td>
                   <td>{{senalPorAsignar.longitud}}</td>
                   <td>{{senalPorAsignar.codigo}}</td>
-                  <td>{{senalPorAsignar.logo}}</td>
+                  <td>
+                      <input type="hidden" name="src" value="{{senalPorAsignar.logo}}">
+                      <img height="30px" src="assets/img/loader.gif" name="logo">
+                  </td>
                   <td>{{senalPorAsignar.nombre}}</td>
                   <td>{{senalPorAsignar.valor}}</td>
-                  <td>{{senalPorAsignar.estado}}</td>
+                  <td>{{senalPorAsignar.tipoEstado.nombre}}</td>
                   <td>{{senalPorAsignar.cantidad}}</td>
-                  <td><button (click)="onGeo()" (ready)="ready($event)" class="btn btn-primary" type="button">
+                  <td><button (click)='onGeo(senalPorAsignar.direccion)' (ready)="ready($event)" class="btn btn-primary" type="button">
                     <i class="fa fa-eye"></i>
+                  </button></td>
+                  <td><button (click)="onEdit(senalPorAsignar)" (ready)="ready($event)" class="btn btn-primary" type="button">
+                    <i class="fa fa-pencil-square-o"></i>
                   </button></td>
                 </tr>
                 </tbody>
