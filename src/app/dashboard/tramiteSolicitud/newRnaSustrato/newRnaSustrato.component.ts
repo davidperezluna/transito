@@ -6,7 +6,7 @@ import { RnaInsumoService } from '../../../services/rnaInsumos.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { FacturaInsumo } from './facturaInsumo.modelo';
-import { FacturaInsumoService } from '../../../services/FacturaInsumo.service';
+import { FacturaInsumoService } from '../../../services/facturaInsumo.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 
 

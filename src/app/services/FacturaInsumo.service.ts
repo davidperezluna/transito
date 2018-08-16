@@ -12,7 +12,6 @@ export class FacturaInsumoService {
 	constructor(private _http: Http){}
 
 	getFacturaInsumo(){
-		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 

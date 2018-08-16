@@ -11,21 +11,11 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="tipoCorrespondencia.nombre" name="nombre" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Dias vigencia <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="tipoCorrespondencia.diasVigencia" name="diasVigencia" type="text" required />
+                            <input class="form-control" [(ngModel)]="tipoContrato.nombre" name="nombre" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <div class="custom-control custom-checkbox">
-                                <input [(ngModel)]="tipoCorrespondencia.editable" name="editable" type="checkbox" class="custom-control-input" id="checkbox-editable" checked="">
-                                <label class="custom-control-label" for="checkbox-editable">Días editables</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <div class="custom-control custom-checkbox">
-                                <input [(ngModel)]="tipoCorrespondencia.prohibion" name="prohibion" type="checkbox" class="custom-control-input" id="checkbox-prohibicion">
+                                <input [(ngModel)]="tipoContrato.horarios" name="prohibion" type="checkbox" class="custom-control-input" id="checkbox-prohibicion">
                                 <label class="custom-control-label" for="checkbox-prohibicion">Prohibicion</label>
                             </div>
                         </div>
