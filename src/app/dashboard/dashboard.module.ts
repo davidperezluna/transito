@@ -124,6 +124,8 @@ import {SidebarComponent} from '../shared';
 import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
+import { MsvInventarioSenialModule } from './msvInventarioSenial/msvInventarioSenial.module';
+import { MsvSenialModule } from './msvSenial/msvSenial.module';
 
 @NgModule({
   imports: [
@@ -228,6 +230,9 @@ import {RightsidebarComponent} from '../shared';
       RpcccInventarioDocumentalModule,
       
       //MsvTCAsignacionModule,
+
+      MsvInventarioSenialModule,
+      MsvSenialModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

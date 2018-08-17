@@ -15,7 +15,6 @@
                                 <div class="col-lg-1" style="border:1px solid #cccccc;">Aplica</div>
                                 <div class="col-lg-1" style="border:1px solid #cccccc;">Evidencias de su existencia</div>
                                 <div class="col-lg-1" style="border:1px solid #cccccc;">Responde a los requerimientos</div>
-                                <div class="col-lg-1" style="border:1px solid #cccccc;">Valor del parametro</div>
                                 <div class="col-lg-1" style="border:1px solid #cccccc;">Valor de la variable</div>
                                 <div class="col-lg-1" style="border:1px solid #cccccc;">Valor obtenido</div>
                                 <div class="col-lg-4" style="border:1px solid #cccccc;">Observaciones</div>
@@ -40,9 +39,9 @@
                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox" [(ngModel)]="msvCriterio.aplica"></div>
                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox" [(ngModel)]="msvCriterio.evidencia"></div>
                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox" [(ngModel)]="msvCriterio.responde"></div>
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor}}</div>
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor / msvCriterios}}</div>
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;"></div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor /msvParametro.numeroVariables}}</div>
+                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><label *ngIf="msvCriterio.responde == true">{{msvParametro.valor /msvParametro.numeroVariables}}</label>
+                                        <label *ngIf="msvCriterio.responde == false">0</label></div>                                        
                                         <div class="col-lg-4" style="border:1px solid #cccccc;"><input type="text" size="4%" [(ngModel)]="msvCriterio.observacion"></div>                                      
                                     </div>
                                 </div>
