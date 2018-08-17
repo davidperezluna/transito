@@ -15,12 +15,27 @@ export class MsvInventarioSenialService {
 	    return this._http.get(this.url + "/").map(res => res.json());
     }
 
+	searchBySenial(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/bysenial", params, {headers: headers}).map(res => res.json());
+	}
+
 	searchByFull(){
 		return this._http.get(this.url + "/full").map(res => res.json());
 	}
 
 	export(){
 		window.location.href = this.url + "/export";
+	}
+
+	exportInv(data){
+		let params = '';
+		for (var item in data) {
+			params += data[item] + '_'
+		}
+		window.location.href = this.url + "/exportinv/" + params.substr(0, (params.length - 1));
 	}
 	
 	searchByParametros(datos,token){

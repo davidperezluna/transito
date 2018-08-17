@@ -10,7 +10,6 @@ import { CfgTipoDestinoService } from '../../services/cfgTipoDestino.service';
 import { CfgBodegaService } from '../../services/cfgBodega.service';
 import { MunicipioService } from '../../services/municipio.service';
 import { CfgTipoSenialService } from '../../services/cfgTipoSenial.service';
-//import { MsvSenialService } from '../../services/msvSenial.service'
 
 import { MsvInventarioSenial } from './msvInventarioSenial.modelo';
 
@@ -35,17 +34,17 @@ export class MsvInventarioSenialComponent implements OnInit {
     private geocoder: google.maps.Geocoder;
     private scriptLoadingPromise: Promise<void>;
     ///////////////////////
+    private idInv: any;
+    private dateInv: any;
 
     @Output() ready = new EventEmitter<any>();
     public errorMessage;
     public respuesta;
     public msvInventarioSenials;
     public formNew = true;
-    public formIndex = false;//true;
+    public formIndex = true;
 
     public formSearch = true;
-    public formAdd = false;//true;
-    public formInventario = false;
 
     public table: any = null;
 
@@ -62,7 +61,10 @@ export class MsvInventarioSenialComponent implements OnInit {
     public senales: any;
     private build : any;
     public file: any;
+
     public senalesPorAsignar: any;
+    public senalesPorInventario: any;
+
     public datos = {
         'fecha'     : null,
         'unidad'    : null,
@@ -81,6 +83,12 @@ export class MsvInventarioSenialComponent implements OnInit {
         'tipoSenalId' : null
     }
 
+    public datInv = {
+        'idInv' : null,
+        'dateInv' : null,
+        'typeSen' : null
+    }
+
     constructor(
         private _msvInventarioSenialService: MsvInventarioSenialService,
         private _loginService: LoginService,
@@ -92,7 +100,6 @@ export class MsvInventarioSenialComponent implements OnInit {
         private _cfgBodegaService : CfgBodegaService,
         private _municipioService : MunicipioService,
         private _cfgTipoSenialService : CfgTipoSenialService,
-        //private _msvSenialService: MsvSenialService,
 
         /////////////////////////////////
 
@@ -559,8 +566,6 @@ export class MsvInventarioSenialComponent implements OnInit {
                 if(this.respuesta.status == 'success'){ console.log(response.data);
                     this.senales = response.data;
                     //this.iniciarTabla();
-                    this.formSearch = false;//true;
-                    this.formIndex = true;
 
                     /*swal({
                         title: 'Perfecto',
@@ -574,7 +579,7 @@ export class MsvInventarioSenialComponent implements OnInit {
                         cancelButtonText:
                             '<i class="fa fa-thumbs-down"></i>',
                         cancelButtonAriaLabel: 'Thumbs down',
-                    });*/alert('Perfecto ¡Señales encontradas!');
+                    });*/alert('Perfecto Señales encontradas!');
                 }else{
                     /*swal({
                         title: 'Alerta',
@@ -595,8 +600,6 @@ export class MsvInventarioSenialComponent implements OnInit {
                         }
                     });*/
                     alert('Alerta ¡No existen señal(es) o aún no se ha(n) agregado a un inventario, por favor registrela aquí o agreguela a un inventario:(Dirijase a: RF- Seguridad Vial:Señales) y vuelva hacer una búsqueda!');
-                    document.getElementById("formAdd")['style']['visibility'] = "visible";
-                    this.formSearch = false;
                     this.onAdd();
                 }
                     error => {
@@ -610,28 +613,100 @@ export class MsvInventarioSenialComponent implements OnInit {
             });
     }
 
-    getInventario(){
-        this.formInventario = true;//document.getElementById("formInventario")['style']['display'] = "inline";
-        this.formSearch = false;
+    getInventario(idInv, dateInv){
+        document.getElementById("inventario")['style']['visibility'] = "visible";
+        this.idInv = idInv;
+        this.dateInv   = dateInv;
     }
 
-    searchInventario(){
-        document.getElementById("dataTables-inventario")['style']['display'] = "inline";
-        this.onAdd();
+    searchInventario(type){
+
+        this.searchBySenial(type);
+
+    }
+
+    onExportInv(){
+
+        var radios = document.getElementsByName('senal');
+        var senial = 0;
+
+        for (var i in radios){
+            for(var item in radios[i]){
+                if(typeof radios[i]['checked'] !== 'undefined') {
+                    if (radios[i]['checked']) {
+                        senial = radios[i]['value'];
+                    }
+                }
+            }
+        }
+
+        if(senial == 0) {
+            alert('Seleccione el Tipo de señal a buscar!')
+        } else
+        {
+            this.datInv.idInv = this.idInv;
+            this.datInv.dateInv = this.dateInv;
+            this.datInv.typeSen = senial;
+
+            this._msvInventarioSenialService.exportInv(this.datInv);
+        }
+
+    }
+
+    searchBySenial(typeSen) {
+
+        this.datInv.idInv = this.idInv;
+        this.datInv.dateInv = this.dateInv;
+        this.datInv.typeSen = typeSen;
+
+        let token = this._loginService.getToken();
+        this._msvInventarioSenialService.searchBySenial(this.datInv, token).subscribe(
+                response => {
+
+                this.senalesPorInventario = response;
+
+            },
+                error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+
+        setTimeout(function(){
+            var src = document.getElementsByName("src");
+            var logo = document.getElementsByName("logo");
+
+            for (var i in src){
+                for(var item in src[i]){
+                    logo[i].setAttribute('src', environment.apiUrl + '../logos/' + src[i]['value']);
+                }
+            }
+
+            var setColor = document.getElementsByName("setColor");
+            var getColor = document.getElementsByName("getColor");
+
+            for (var i in getColor){
+                for(var item in getColor[i]){
+                    setColor[i]['style']['background-color'] = getColor[i]['value'];
+                    setColor[i]['style']['background-image'] = '';
+                }
+            }
+        }, 2500);
     }
 
     onAdd(){
 
         this._msvInventarioSenialService.searchByFull().subscribe(
                 response => {
-                if(response!=""){
-                    var checkboxParent = document.getElementsByName('_senalParent_')[0];
 
-                    console.log(response);}
                 this.senalesPorAsignar = response;
-                this.formAdd = true;
-                document.getElementById("formAdd")['style']['visibility'] = "visible";
-                this.formIndex = false;//true;
+
+                    document.getElementById("formAdd")['style']['visibility'] = "visible";
+
             },
                 error => {
                 this.errorMessage = <any>error;
@@ -784,8 +859,6 @@ export class MsvInventarioSenialComponent implements OnInit {
                     response => {
 
                     this.respuesta = response;
-                    //this.formConfirm = false;
-                    //this.formPdf = true;
 
                     if (this.respuesta.status == 'success') {
                         this.ready.emit(true);

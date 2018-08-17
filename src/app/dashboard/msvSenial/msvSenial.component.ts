@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter /**/, ElementRef, ViewChild /**/ } from '@angular/core';
 import { MsvSenialService } from '../../services/msvSenial.service';
 import { LoginService } from '../../services/login.service';
 
@@ -11,6 +11,11 @@ import { LoginService } from '../../services/login.service';
 
  import { MsvSenial } from './msvSenial.modelo';
 
+///////////////////////
+import {} from '@types/googlemaps';
+declare var google: any;
+///////////////////////
+
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -20,16 +25,25 @@ declare var $: any;
 })
 
 export class MsvSenialComponent implements OnInit {
+
+  ///////////////////////
+  @ViewChild('map') mapRef: ElementRef;
+  private map: google.maps.Map;
+  private geocoder: google.maps.Geocoder;
+  private scriptLoadingPromise: Promise<void>;
+  ///////////////////////
+  private idInv: any;
+  private dateInv: any;
+
   @Output() ready = new EventEmitter<any>();
   public errorMessage;
   //public id;
   public respuesta;
   public msvSenials;
   public formNew = false;
-  public formIndex = false;
+  public formIndex = true;
 
     public formSearch = true;
-    public formAdd = false;
 
   public table: any = null;
 
@@ -44,11 +58,20 @@ export class MsvSenialComponent implements OnInit {
     public senales: any;
     private build : any;
     public file: any;
+
     public senalesPorAsignar: any;
+    public senalesPorInventario: any;
+
     public datos = {
         'destinoId' : null,
         'tipoDestinoId' : null,
         'tipoSenalId' : null
+    }
+
+    public datInv = {
+        'idInv' : null,
+        'dateInv' : null,
+        'typeSen' : null
     }
 
   constructor(
@@ -61,12 +84,34 @@ export class MsvSenialComponent implements OnInit {
        private _cfgTipoSenialService : CfgTipoSenialService,
        //private _msvInventarioSenialService: MsvInventarioSenialService,
 
-  ) { this.senalSelected = ""; this.build = {}; }
+  ) { this.senalSelected = ""; this.build = {};
+
+      /////////////////////////////////
+      //Loading script
+      this.loadScriptLoadingPromise();
+      //Loading other components
+      this.onReady().then(() => {
+          this.geocoder = new google.maps.Geocoder();
+      });
+      /////////////////////////////
+  }
 
   ngOnInit() {
     this.msvSenial = new MsvSenial(null, null, null, null);
 
-    swal({
+      this.initMap(this.mapRef.nativeElement, {
+          center: {lat: 4.624335, lng: -74.063644},
+          zoom: 16,
+          scrollwheel: true,
+          disableDoubleClickZoom: false,
+          rotateControl: true,
+          scaleControl: true,
+          disableDefaultUI: true,
+          zoomControl: true,
+          gestureHandling: 'greedy'
+      });
+
+    /*swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
       timer: 1500,
@@ -79,7 +124,7 @@ export class MsvSenialComponent implements OnInit {
       result.dismiss === swal.DismissReason.timer
       ) {
       }
-    });
+    });*/
 
       this._cfgTipoDestinoService.select().subscribe(
               response => {
@@ -130,6 +175,12 @@ export class MsvSenialComponent implements OnInit {
         }
     );
   }
+
+    onCloseGeo() {
+        document.getElementById("geo")['style']['visibility'] = "hidden";
+        document.getElementById("address")['style']['visibility'] = "hidden";
+        document.getElementById("searchAddress")['style']['visibility'] = "hidden";
+    }
 
     obtieneDestino(value) {
 
@@ -208,10 +259,8 @@ export class MsvSenialComponent implements OnInit {
                 if(this.respuesta.status == 'success'){
                     this.senales = response.data;
                     //this.iniciarTabla();
-                    this.formSearch = false;
-                    this.formIndex = true;
 
-                    swal({
+                    /*swal({
                         title: 'Perfecto',
                         text: "¡Señales encontradas!",
                         type: 'info',
@@ -223,9 +272,9 @@ export class MsvSenialComponent implements OnInit {
                         cancelButtonText:
                             '<i class="fa fa-thumbs-down"></i>',
                         cancelButtonAriaLabel: 'Thumbs down',
-                    });
+                    });*/alert('Perfecto Señales encontradas!');
                 }else{
-                    swal({
+                    /*swal({
                         title: 'Alerta',
                         text: "Alerta ¡No existen señal(es) o aún no se ha(n) agregado a un inventario, por favor registrela:(Dirijase a: RF- Seguridad Vial:Inventario Señales) " +
                               "o agreguela a un inventario aquí y vuelva hacer una búsqueda!",
@@ -241,11 +290,14 @@ export class MsvSenialComponent implements OnInit {
                     }).then((result) => {
                         if (result.value) {
                             //this.formNew = true;
+                            //this.formAdd = true;
+                            document.getElementById("formAdd")['style']['visibility'] = "visible";
                             this.formSearch = false;
-                            this.formAdd = true;
                             this.onAdd();
                         }
-                    });
+                    });*/
+                    alert('Alerta ¡No existen señal(es) o aún no se ha(n) agregado a un inventario, por favor registrela:(Dirijase a: RF- Seguridad Vial:Inventario Señales) o agreguela a un inventario aquí y vuelva hacer una búsqueda!');
+                    this.onAdd();
                 }
                     error => {
                     this.errorMessage = <any>error;
@@ -258,26 +310,225 @@ export class MsvSenialComponent implements OnInit {
             });
     }
 
-    getInventario(){
-        document.getElementById("formInventario")['style']['visibility'] = "visible";
-        this.formSearch = false;
+    //////////////////////////////////
+    onReady(): Promise<void> {
+        return this.scriptLoadingPromise;
     }
 
-    searchInventario(){
-        document.getElementById("dataTables-inventario")['style']['visibility'] = "visible";
-        this.onAdd();
+    initMap(mapHtmlElement: HTMLElement, options: google.maps.MapOptions): Promise<google.maps.Map> {
+        return this.onReady().then(() => {
+            this.map = new google.maps.Map(mapHtmlElement, options);
+
+            var marker = new google.maps.Marker({
+                position: {lat: 4.624335, lng: -74.063644},
+                map: this.map,
+                animation: google.maps.Animation.BOUNCE,
+                draggable: true
+            });
+
+
+            google.maps.event.addListener(this.map, 'click', function (event) {
+
+                var newLatLng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+                marker.setPosition(newLatLng);
+
+                document.getElementById("lat")['value'] = event.latLng.lat();
+                document.getElementById("lng")['value'] = event.latLng.lng();
+
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({
+                    'latLng': event.latLng
+                }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            document.getElementById("address")['value'] = results[0].formatted_address;
+                            document.getElementsByName("direccion")[0]['value'] = results[0].formatted_address;
+                        }
+                    }
+                });
+
+            });
+
+
+            return this.map;
+
+        });
+    }
+
+    loadScriptLoadingPromise() {
+        const script = window.document.createElement('script');
+        script.type = 'text/javascript';
+        script.async = true;
+        script.defer = true;
+        const callbackName: string = 'initMap';
+        script.src = getScriptSrc(callbackName);
+        this.scriptLoadingPromise = new Promise<void>((resolve: Function, reject: Function) => {
+            (<any>window)[callbackName] = () => { resolve(); };
+
+            script.onerror = (error: Event) => { reject(error); };
+        });
+        window.document.body.appendChild(script);
+    }
+    //////////////////////////////////
+
+    onGeo(address) {
+        document.getElementById('address')['value'] = address;
+        document.getElementById("geo")['style']['visibility'] = "visible";
+        document.getElementById("searchAddress")['style']['visibility'] = "hidden";
+        document.getElementById("map")['style']['pointer-events'] = "none";
+        document.getElementById("address")['style']['visibility'] = "visible";
+        document.getElementById("address").setAttribute('readonly', 'readonly');
+        this.onSearchGeo();
+    }
+
+    onSearchGeo() {
+
+        var map = new google.maps.Map(this.mapRef.nativeElement, {
+            center: {lat: 4.624335, lng: -74.063644},
+            zoom: 16,
+            scrollwheel: true,
+            disableDoubleClickZoom: false,
+            rotateControl: true,
+            scaleControl: true,
+            disableDefaultUI: true,
+            zoomControl: true,
+            gestureHandling: 'greedy'
+        });
+        var geocoder = new google.maps.Geocoder();
+        var address = document.getElementById('address')['value'];
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    map: map,
+                    animation: google.maps.Animation.BOUNCE,
+                    draggable: true
+                });
+
+                google.maps.event.addListener(map, 'click', function(event){
+
+                    var newLatLng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+                    marker.setPosition(newLatLng);
+
+                    document.getElementById("lat")['value'] = event.latLng.lat();
+                    document.getElementById("lng")['value'] = event.latLng.lng();
+
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({
+                        'latLng': event.latLng
+                    }, function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            if (results[0]) {
+                                document.getElementById("address")['value'] = results[0].formatted_address;
+                                document.getElementsByName("direccion")[0]['value'] = results[0].formatted_address;
+                            }
+                        }
+                    });
+
+                });
+            } else {
+                alert('La bÃºsqueda no tuvo Ã©xito.');
+            }
+        });
+
+    }
+    //////////////////////////////////
+
+    getInventario(idInv, dateInv){
+        document.getElementById("inventario")['style']['visibility'] = "visible";
+        this.idInv = idInv;
+        this.dateInv   = dateInv;
+    }
+
+    searchInventario(type){
+
+        this.searchBySenial(type);
+
+    }
+
+    onExportInv(){
+
+        var radios = document.getElementsByName('senal');
+        var senial = 0;
+
+        for (var i in radios){
+            for(var item in radios[i]){
+                if(typeof radios[i]['checked'] !== 'undefined') {
+                    if (radios[i]['checked']) {
+                        senial = radios[i]['value'];
+                    }
+                }
+            }
+        }
+
+        if(senial == 0) {
+            alert('Seleccione el Tipo de señal a buscar!')
+        } else
+        {
+            this.datInv.idInv = this.idInv;
+            this.datInv.dateInv = this.dateInv;
+            this.datInv.typeSen = senial;
+
+            this._msvSenialService.exportInv(this.datInv);
+        }
+
+    }
+
+    searchBySenial(typeSen) {
+
+        this.datInv.idInv = this.idInv;
+        this.datInv.dateInv = this.dateInv;
+        this.datInv.typeSen = typeSen;
+
+        let token = this._loginService.getToken();
+        this._msvSenialService.searchBySenial(this.datInv, token).subscribe(
+                response => {
+
+                this.senalesPorInventario = response;
+
+            },
+                error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+
+        setTimeout(function(){
+            var src = document.getElementsByName("src");
+            var logo = document.getElementsByName("logo");
+
+            for (var i in src){
+                for(var item in src[i]){
+                    logo[i].setAttribute('src', environment.apiUrl + '../logos/' + src[i]['value']);
+                }
+            }
+
+            var setColor = document.getElementsByName("setColor");
+            var getColor = document.getElementsByName("getColor");
+
+            for (var i in getColor){
+                for(var item in getColor[i]){
+                    setColor[i]['style']['background-color'] = getColor[i]['value'];
+                    setColor[i]['style']['background-image'] = '';
+                }
+            }
+        }, 2500);
     }
 
   onAdd(){
 
       this._msvSenialService.searchByFull().subscribe(
               response => {
-                  if(response!=""){
-                      var checkboxParent = document.getElementsByName('_senalParent_')[0];
-                  }
+
               this.senalesPorAsignar = response;
-              this.formAdd = true;
-              this.formIndex = false;
+
+                  document.getElementById("formAdd")['style']['visibility'] = "visible";
+
           },
               error => {
               this.errorMessage = <any>error;
@@ -392,15 +643,16 @@ export class MsvSenialComponent implements OnInit {
         }
 
     if(valid != ""){
-            swal({
+            /*swal({
                 title: 'Advertencia',
                 text: valid,
                 type: 'error',
                 confirmButtonText: 'Aceptar'
-            });
+            });*/
+            alert(valid);
     }else {
 
-        swal({
+        /*swal({
             title: 'Alerta',
             text: "¿Está seguro que desea asignar esta señal(es) a este destino?",
             type: 'warning',
@@ -412,10 +664,12 @@ export class MsvSenialComponent implements OnInit {
             cancelButtonText:
                 '<i class="fa fa-thumbs-down"></i> Cancelar',
             cancelButtonAriaLabel: 'Thumbs down',
-        }).then((result) => {
+        }).then((result) => {*/
 
+        var r = confirm("¿Está seguro que desea asignar esta señal(es) a este destino?");
+        if (r == true) {
 
-            if (result.value) {
+            ////if (result.value) {
 
             //if(this.funcionario.activo == 'true'){
             this._msvSenialService.register(this.file, this.msvSenial, token).subscribe(
@@ -427,20 +681,22 @@ export class MsvSenialComponent implements OnInit {
 
                     if (this.respuesta.status == 'success') {
                         this.ready.emit(true);
-                        swal({
+                        /*swal({
                             title: 'Perfecto!',
                             text: 'Registro exitoso!',
                             type: 'success',
                             confirmButtonText: 'Aceptar'
-                        });
+                        });*/
+                        alert('Perfecto!\nRegistro exitoso!');
                         this.onAdd();
                     } else {
-                        swal({
+                        /*swal({
                             title: 'Error!',
                             text: 'La señal ya se encuentra registrada',
                             type: 'error',
                             confirmButtonText: 'Aceptar'
-                        })
+                        })*/
+                        alert('Error!\nLa seÃ±al ya se encuentra registrada');
                     }
                         error => {
                         this.errorMessage = <any>error;
@@ -452,7 +708,7 @@ export class MsvSenialComponent implements OnInit {
                 });
         }
 
-        });
+        ////});
             //}else{
             //  this.formConfirm = true;
             //this.formPdf = false;
@@ -478,4 +734,9 @@ export class MsvSenialComponent implements OnInit {
     this.table = $('#dataTables-example').DataTable();
   }
 
+}
+
+//Replace this by anything without an ID_KEY
+const getScriptSrc = (callbackName) => {
+    return `https://maps.googleapis.com/maps/api/js?key=AIzaSyCZLRPtun19mn3xqSZi08dPp-1R4P2A2B4&callback=${callbackName}`;
 }
