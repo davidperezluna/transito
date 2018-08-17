@@ -614,7 +614,7 @@ export class MsvInventarioSenialComponent implements OnInit {
     }
 
     getInventario(idInv, dateInv){
-        document.getElementById("inventario")['style']['visibility'] = "visible";
+        document.getElementById("inventario")['style']['display'] = "inline";
         this.idInv = idInv;
         this.dateInv   = dateInv;
     }
@@ -695,7 +695,26 @@ export class MsvInventarioSenialComponent implements OnInit {
                     setColor[i]['style']['background-image'] = '';
                 }
             }
-        }, 2500);
+
+            var loc = document.getElementsByName("loc");
+            var file = document.getElementsByName("archivo");
+
+            for (var i in loc){
+                for(var item in loc[i]){
+                    if(loc[i]['value'] != ''){
+                        file[i].setAttribute('target', '_blank');
+                        file[i].setAttribute('href', environment.apiUrl + '../docs/' + loc[i]['value']);
+                        file[i]['innerHTML'] = '<i class="fa fa-file" aria-hidden="true"></i>';
+                    }else{
+                        file[i].removeAttribute('href');
+                        file[i].removeAttribute('target');
+                        file[i]['style']['cursor'] = 'text';
+                        file[i]['innerHTML'] = 'No disponible.';
+                    }
+                }
+            }
+
+        }, 3000);
     }
 
     onAdd(){
@@ -737,6 +756,25 @@ export class MsvInventarioSenialComponent implements OnInit {
                     setColor[i]['style']['background-image'] = '';
                 }
             }
+
+            var loc = document.getElementsByName("loc");
+            var file = document.getElementsByName("archivo");
+
+            for (var i in loc){
+                for(var item in loc[i]){
+                    if(loc[i]['value'] != ''){
+                        file[i].setAttribute('target', '_blank');
+                        file[i].setAttribute('href', environment.apiUrl + '../docs/' + loc[i]['value']);
+                        file[i]['innerHTML'] = '<i class="fa fa-file" aria-hidden="true"></i>';
+                    }else{
+                        file[i].removeAttribute('href');
+                        file[i].removeAttribute('target');
+                        file[i]['style']['cursor'] = 'text';
+                        file[i]['innerHTML'] = 'No disponible.';
+                    }
+                }
+            }
+
         }, 2500);
 
 
