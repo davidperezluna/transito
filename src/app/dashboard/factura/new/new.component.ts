@@ -340,7 +340,7 @@ constructor(
         this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
           response => {
             this.tramitePrecio = response.data;
-            if (this.tramitePrecio.tramite.id == 8) {
+            if (this.tramitePrecio.tramite.formulario == 'rna-matriculainicial') {
               this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
               this.tramitesValor.push(
                 {
