@@ -116,6 +116,7 @@ import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacion
 import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
+import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -228,7 +229,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       ReporteModule,
       registroEntregaProductoModule,
       RpcccInventarioDocumentalModule,
-      
+      InsumoBusquedaModule,
       //MsvTCAsignacionModule,
 
       MsvInventarioSenialModule,

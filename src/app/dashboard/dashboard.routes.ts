@@ -109,9 +109,11 @@ import { CfgClaseAccidenteRoutes } from './cfgClaseAccidente/cfgClaseAccidente.r
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
+import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
+
 
 import { MsvInventarioSenialRoutes } from './msvInventarioSenial/msvInventarioSenial.routes';
 import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
@@ -218,7 +220,7 @@ export const DashboardRoutes: Route[] = [
       ...RnrsPreregistroRoutes,
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
-
+      ...InsumoBusquedaRoutes,
       ...MsvInventarioSenialRoutes,
       ...MsvSenialRoutes,
     ]
