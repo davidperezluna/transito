@@ -115,55 +115,57 @@
     
                     <div class="has-success" *ngIf="isExistVehiculo" >
                         <!-- tabla de detalles del vehiculo sin placa -->
-                        <div class="col-xs-12 col-lg-12" >
-                            <h5 class="card-title"><small>Detalles del vehiculo encontrado</small></h5>
-                            <table class="table table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <b>Nro.Factura: </b>
-                                            {{ vehiculo.numeroFactura }}
-                                        </td>
-                                        <td>
-                                            <b>Servicio: </b>
-                                            {{ vehiculo.servicio.nombre }}
-                                        </td>
-                                        <td>
-                                            <b>Clases de vehículo: </b>
-                                            {{ vehiculo.clase.nombre }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <b>Nro.Motor: </b>
-                                            {{ vehiculo.motor }}
-                                        </td>
-                                        <td>
-                                            <b>Nro.Chasis: </b>
-                                            {{ vehiculo.chasis }}
-                                        </td>
-                                        <td>
-                                            <b>Nro.Serie: </b>
-                                            {{ vehiculo.serie }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <b>Nro.VIN: </b>
-                                            {{ vehiculo.vin }}
-                                        </td>
-                                        <td>
-                                            <b>Nro.Factura compra venta</b>
-                                            {{ vehiculo.numeroFactura }}
-                                        </td>
-                                        <td>
-                                            <b>Fecha compra venta</b>
-                                            {{ vehiculo.fechaFactura }}
-                                        </td>
-                                    </tr>
-                                </tbody> 
-                            </table>
-                        </div><!-- fin detalles del vehiculo -->
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12" >
+                                <h5 class="card-title"><small>Detalles del vehiculo encontrado</small></h5>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>Nro.Factura: </b>
+                                                {{ vehiculo.numeroFactura }}
+                                            </td>
+                                            <td>
+                                                <b>Servicio: </b>
+                                                {{ vehiculo.servicio.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Clase de vehículo: </b>
+                                                {{ vehiculo.clase.nombre }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Nro.Motor: </b>
+                                                {{ vehiculo.motor }}
+                                            </td>
+                                            <td>
+                                                <b>Nro.Chasis: </b>
+                                                {{ vehiculo.chasis }}
+                                            </td>
+                                            <td>
+                                                <b>Nro.Serie: </b>
+                                                {{ vehiculo.serie }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Nro.VIN: </b>
+                                                {{ vehiculo.vin }}
+                                            </td>
+                                            <td>
+                                                <b>Nro.Factura compra venta</b>
+                                                {{ vehiculo.numeroFactura }}
+                                            </td>
+                                            <td>
+                                                <b>Fecha compra venta</b>
+                                                {{ vehiculo.fechaFactura }}
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                                </table>
+                            </div><!-- fin detalles del vehiculo -->
+                        </div>
                     </div>
                 </div>
 

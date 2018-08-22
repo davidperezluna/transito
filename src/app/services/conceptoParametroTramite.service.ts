@@ -55,7 +55,7 @@ export class ConceptoParametroTramiteService {
 	}
 
 	getConceptoParametroSelect(){
-		return this._http.get(this.url+"/select/concepto").map(res => res.json());
+		return this._http.get(this.url+"/select").map(res => res.json());
 	} 
 	
 }

@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0">formulario para el ingreso de una nueva linea</h5>
+                <h5 class="m-0">Nueva linea</h5>
                 <hr>
                 <form #formNew="ngForm">
                     <div class="row justify-content-center">
@@ -30,8 +30,8 @@
                         </div>    
                     </div>
                     <div class="card-footer">
-                        <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                        <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">Enviar</button>
                     </div> 
                 </form>   
             </div>

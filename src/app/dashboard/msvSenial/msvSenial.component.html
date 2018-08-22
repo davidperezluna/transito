@@ -99,7 +99,7 @@
         <div class="card-body">
           <h5 class="text-uppercase">Inventario</h5>
           <hr>
-          <div id="inventario" style="visibility: hidden;">
+          <div id="inventario" style="display: none;">
           <div class="form-group row">
             <div class="col-md-12 col-lg-8 offset-lg-2">
               <label>Seleccione el tipo de señal a buscar:</label>
@@ -139,33 +139,38 @@
               <th>Valor</th>
               <th>Estado</th>
               <th>Cantidad</th>
+              <th>Comprobante/Nota</th>
               <th>Geo</th>
             </tr>
             </thead>
             <tbody>
             <tr class="odd" style="text-align: center;" *ngFor="let senalPorInventario of senalesPorInventario?.data; let i = ind">
-              <td>{{senalPorInventario.id}}</td>
-              <td>{{senalPorInventario.inventario.numero}}</td>
-              <td>{{senalPorInventario.inventario.fecha}}</td>
-              <td>{{senalPorInventario.fecha}}</td>
-              <td>{{senalPorInventario.unidad}}</td>
+              <td>{{senalPorInventario.ID}}</td>
+              <td>{{senalPorInventario.NUMERO_INVENTARIO}}</td>
+              <td>{{senalPorInventario.FECHA_INVENTARIO}}</td>
+              <td>{{senalPorInventario.FECHA_INGRESO}}</td>
+              <td>{{senalPorInventario.UNIDAD}}</td>
               <td>
                 <div style="background-image: url('assets/img/loader.gif'); background-size: 30px; background-repeat: no-repeat; background-position: center; border:solid 0.5px #ccc; border-radius:0.5px; box-shadow: -0.5px -0.5px 0.5px 0px red, 0.5px -0.5px 0.5px yellow, 0.5px 0.5px 0.5px green, -0.5px 0.5px 0.5px blue;" name="setColor">&nbsp;</div>
-                <input type="hidden" name="getColor" value="{{senalPorInventario.tipoColor.hex}}">
-                {{senalPorInventario.tipoColor.nombre}}
+                <input type="hidden" name="getColor" value="{{senalPorInventario.HEX}}">
+                {{senalPorInventario.COLOR}}
               </td>
-              <td>{{senalPorInventario.latitud}}</td>
-              <td>{{senalPorInventario.longitud}}</td>
-              <td>{{senalPorInventario.codigo}}</td>
+              <td>{{senalPorInventario.LATITUD}}</td>
+              <td>{{senalPorInventario.LONGITUD}}</td>
+              <td>{{senalPorInventario.CODIGO}}</td>
               <td>
-                <input type="hidden" name="src" value="{{senalPorInventario.logo}}">
+                <input type="hidden" name="src" value="{{senalPorInventario.LOGO}}">
                 <img height="30px" src="assets/img/loader.gif" name="logo">
               </td>
-              <td>{{senalPorInventario.nombre}}</td>
-              <td>{{senalPorInventario.valor}}</td>
-              <td>{{senalPorInventario.tipoEstado.nombre}}</td>
-              <td>{{senalPorInventario.cantidad}}</td>
-              <td><button (click)='onGeo(senalPorInventario.direccion)' (ready)="ready($event)" class="btn btn-primary" type="button">
+              <td>{{senalPorInventario.NOMBRE}}</td>
+              <td>{{senalPorInventario.VALOR}}</td>
+              <td>{{senalPorInventario.ESTADO}}</td>
+              <td>{{senalPorInventario.CANTIDAD}}</td>
+              <td>
+                <input type="hidden" name="loc" value="{{senalPorInventario.ARCHIVO}}">
+                <a name="archivo"><img height="30px" src="assets/img/loader.gif"></a>
+              </td>
+              <td><button (click)='onGeo(senalPorInventario.DIRECCION)' (ready)="ready($event)" class="btn btn-primary" type="button">
                 <i class="fa fa-eye"></i>
               </button>
               </td>
