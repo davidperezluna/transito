@@ -46,7 +46,7 @@ export class ConceptoParametroService {
 		 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/tramitePrecio/concepto", params, {headers: headers})
+		return this._http.post(this.url+"/"+id+"/tramiteprecio/id", params, {headers: headers})
 							  .map(res => res.json());
 
 	} 
@@ -62,7 +62,7 @@ export class ConceptoParametroService {
 	}
 
 	getConceptoParametroSelect(){
-		return this._http.get(this.url+"/select/concepto").map(res => res.json());
+		return this._http.get(this.url+"/select").map(res => res.json());
 	} 
 	
 }

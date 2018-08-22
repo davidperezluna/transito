@@ -256,6 +256,16 @@
                 Infracciones
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="tramite" [ngClass]="{'active' : ( addActive === 'tramite')}" (click)="addActiveMenu('tramite')">
+                <i class="fa fa-angle-right"></i> Tramite
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="tramitePrecio" [ngClass]="{'active' : ( addActive === 'tramitePrecio')}" (click)="addActiveMenu('tramitePrecio')">
+                <i class="fa fa-angle-right"></i> Valor tramite
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level -->
         </li>
@@ -334,13 +344,7 @@
                 <i class="fa fa-angle-right"></i> Banco
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="tramitePrecio" [ngClass]="{'active' : ( addActive === 'tramitePrecio')}" (click)="addActiveMenu('tramitePrecio')">
-                <i class="fa fa-angle-right"></i> Valor tramite
-              </a>
-            </li>
-
-            
+                        
             <li class="nav-item">
               <a class="nav-link" routerLink="departamento" [ngClass]="{'active' : ( addActive === 'departamento')}" (click)="addActiveMenu('departamento')">
                 <i class="fa fa-angle-right"></i> Departamento
@@ -382,11 +386,6 @@
                 <i class="fa fa-angle-right"></i> Ciudadano
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="tramite" [ngClass]="{'active' : ( addActive === 'tramite')}" (click)="addActiveMenu('tramite')">
-                <i class="fa fa-angle-right"></i> Tramite
-              </a>
-            </li>
           </ul>
           <!-- /.nav-third-level -->
         </li>
@@ -411,7 +410,7 @@
 
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'm_rf_sv_seguridad_vial')}">
       <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('m_rf_sv_seguridad_vial')">
-        RF- Seguridad Vial
+        Seguridad Vial
         <i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-third-level">
@@ -428,7 +427,7 @@
           </a>
         </li>
       </ul>
-      <!-- /.nav-
+      <!-- /.nav- -->
 
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnc')}">
       <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnc')">
