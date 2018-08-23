@@ -202,7 +202,7 @@ constructor(
         'sedeOperativa':this.sedeSelected,
       }
       let token = this._loginService.getToken();
-      this._rnaRegistroInsumosService.showSedeInsumo(datos,token).subscribe(
+      this._rnaRegistroInsumosService.showSedeInsumo(datos,token).subscribe( 
         response => {
           this.loteInsumo = response.data;
           if (response.status == 'success') {
