@@ -441,7 +441,7 @@ export class NewRnmaComponent implements OnInit {
       });
   }
 
-  cerrarApoderado() {
+  cerrarApoderado(){
     this.frmApoderado = false;
     this.apoderado = false;
     this.apoderadoEncontrado = 1;
