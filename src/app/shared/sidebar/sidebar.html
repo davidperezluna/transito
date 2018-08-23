@@ -700,6 +700,11 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
+          <a class="nav-link" routerLink="insumoBusqueda" [ngClass]="{'active' : ( addActive === 'insumoBusqueda')}" (click)="addActiveMenu('insumoBusqueda')">
+            <i class="fa fa-angle-right"></i>Insumos
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="casoinsumo" [ngClass]="{'active' : ( addActive === 'casoinsumo')}" (click)="addActiveMenu('casoinsumo')">
             <i class="fa fa-angle-right"></i> Caso Insumo
           </a>

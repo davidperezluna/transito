@@ -22,7 +22,8 @@ export class InsumoBusquedaComponent implements OnInit {
   public sedeOperativaSelected:any;
   public sedesOperativas:any;
   public loteInsumos:any;
-  public loteInsumoId:any;
+  public loteInsumo:any;
+  public insumos:any;
 
   constructor(
 		private _RnaInsumoService: RnaInsumoService,
@@ -59,22 +60,7 @@ export class InsumoBusquedaComponent implements OnInit {
       ) {
       }
     })
-		// this._RnaInsumoService.getInsum().subscribe(
-		// 		response => {
-    //       this.colors = response.data;
-    //       let timeoutId = setTimeout(() => {  
-    //         this.iniciarTabla();
-    //       }, 100); 
-		// 		}, 
-		// 		error => {
-		// 			this.errorMessage = <any>error;
-
-		// 			if(this.errorMessage != null){
-		// 				console.log(this.errorMessage);
-		// 				alert("Error en la petición");
-		// 			}
-		// 		}
-    //   );
+	
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -103,8 +89,9 @@ export class InsumoBusquedaComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.loteInsumos = response.data;
-            this.iniciarTabla(),
-            console.log(this.loteInsumos);
+            let timeoutId = setTimeout(() => {  
+              this.iniciarTabla();
+            }, 100);
           }else{
             swal({
               title: 'Error!',
@@ -127,9 +114,26 @@ export class InsumoBusquedaComponent implements OnInit {
     } 
   }
   showLoteInsumoSustrato(e){
-    alert(1);
-    this.loteInsumoId = e;
-    this.formShow = true;
+    this.loteInsumo = e;
+    let token = this._loginService.getToken();
+    this._RnaInsumoService.showLote(this.loteInsumo.id,token).subscribe(
+			response => {
+        this.respuesta = response;
+        if(this.respuesta.status == 'success'){
+          this.insumos = this.respuesta.datos;
+          this.formShow = true;
+          // console.log(this.insumos);    
+        }
+        error => {
+            this.errorMessage = <any>error;
+
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+
+      }); 
   }
 
 }

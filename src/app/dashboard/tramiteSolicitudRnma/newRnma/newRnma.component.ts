@@ -55,7 +55,7 @@ export class NewRnmaComponent implements OnInit {
   public moduloId = 3;
   public datos = {
     'moduloId': null,
-    'id': null,
+    'facturaId': null,
     'vehiculoId': null,
   };
 
@@ -116,7 +116,7 @@ export class NewRnmaComponent implements OnInit {
 
   changedFactura(id) {
     if (id) {
-      this.datos.id = id;
+      this.datos.facturaId = id;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
@@ -125,9 +125,7 @@ export class NewRnmaComponent implements OnInit {
           this.isTramites = true;
           let active = true;
           let token = this._loginService.getToken();
-
           this.tramitesFactura = response;
-          console.log(response);
           this.tramitesFactura.forEach(tramiteFactura => {
             if (tramiteFactura.realizado == 0) {
               active = false;

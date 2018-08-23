@@ -45,7 +45,7 @@
                   <td >{{loteInsumo.referencia}}</td>
                   <td >{{loteInsumo.fecha}}</td>
                   <td>
-                    <button (click)="showLoteInsumoSustrato(loteInsumo.id)" class="btn btn-outline-info" type="button">Ver</button> 
+                    <button (click)="showLoteInsumoSustrato(loteInsumo)" class="btn btn-outline-info" type="button">Ver</button> 
                   </td>
                 </tr>
               </tbody>
@@ -55,5 +55,5 @@
         </div>
       </div>
     </div>
-    <app-show *ngIf='formShow' [loteInsumoId]="loteInsumoId" (ready)="ready($event)"></app-show>
+    <app-show *ngIf='formShow' [insumos]="insumos" [loteInsumo]="loteInsumo" (ready)="ready($event)"></app-show>
 </div>
