@@ -1,4 +1,5 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router'
 import { MgdPeticionario } from '../mgdPeticionario.modelo';
 import { MgdDocumento } from '../mgdDocumento.modelo';
 import { MgdMedidaCautelar } from '../mgdMedidaCautelar.modelo';
@@ -49,6 +50,7 @@ constructor(
   private _tipoIdentificacionService: TipoIdentificacionService,
   private _tipoCorrespondenciaService: MgdTipoCorrespondenciaService,
   private _claseService: ClaseService,
+  private router: Router
   ){}
 
   ngOnInit() {
@@ -58,6 +60,9 @@ constructor(
     this.vehiculo = new MgdVehiculo(null, null, null, null);
     this.prohibicion = false;
     this.date = new Date();
+
+    this.documento.correoCertificadoLlegada = 'false';
+
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
         this.tiposIdentificacion = response;
@@ -75,20 +80,6 @@ constructor(
     this._tipoCorrespondenciaService.getTipoCorrespondenciaSelect().subscribe(
       response => {
         this.tiposCorrespondencia = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._claseService.getClaseSelect().subscribe(
-      response => {
-        this.clases = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -119,6 +110,24 @@ constructor(
           this.peticionario.segundoNombre = response.data.segundoNombre;
           this.peticionario.primerApellido = response.data.primerApellido;
           this.peticionario.segundoApellido = response.data.segundoApellido;
+        }else{
+          swal({
+            title: 'Alerta',
+            text: response.message,
+            type: 'warning',
+            showCancelButton: true,
+            focusConfirm: true,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Registrar',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+              '<i class="fa fa-thumbs-down"></i> Cancelar',
+            cancelButtonAriaLabel: 'Thumbs down',
+          }).then((result) => {
+            if (result.value) {
+              this.router.navigate(['/dashboard/ciudadano']);
+            }
+          });
         }
       error => {
           this.errorMessage = <any>error;
@@ -192,6 +201,20 @@ constructor(
   }
 
   onCrearProhibicion(){
+    this._claseService.getClaseSelect().subscribe(
+      response => {
+        this.clases = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+    
     this.datosRegistro.medidaCautelar.push({
       'numeroOficio':this.medidaCautelar.numeroOficio,
       'quienOrdena':this.medidaCautelar.quienOrdena,

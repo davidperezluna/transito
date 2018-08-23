@@ -153,15 +153,14 @@ export class MpersonalFuncionarioComponent implements OnInit {
     let token = this._loginService.getToken();
 		this._FuncionarioService.searchByParametros(this.datos,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.funcionarios = response.data;
           this.iniciarTabla();
           this.formIndex = true;
 
           swal({
             title: 'Perfecto',
-            text: "¡Funcionarios encontrados!",
+            text: response.message,
             type: 'info',
             showCloseButton: true,
             focusConfirm: false,
@@ -175,7 +174,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
         }else{
           swal({
             title: 'Alerta',
-            text: "¡No existen funcionarios, por favor registrelo y vuelva vincularse!",
+            text: response.message,
             type: 'warning',
             showCancelButton: true,
             focusConfirm: true,

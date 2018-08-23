@@ -53,6 +53,7 @@ export class MgdRegistroComponent implements OnInit {
     });
 
     this.peticionario = new MgdRegistro(null,null,null,null,null);
+    this.peticionario.tipo = 'Persona';
   }
 
   iniciarTabla(){
