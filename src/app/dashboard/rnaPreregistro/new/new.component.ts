@@ -108,7 +108,7 @@ constructor(
         }
       }
     );
-    this._ClaseService.getClasePorModuloSelect(1).subscribe(
+    this._ClaseService.getClasePorModuloSelect(2).subscribe(
       response => {
         this.clases = response;
       }, 

@@ -5,9 +5,7 @@
       <div class="card">
         <div class="card-header">
           <h5 class="card-title">
-            <b class="text-uppercase">Configuración</b>
-            <br>
-            <small>Valor</small>
+            <b class="text-uppercase">Configuración</b> <small>Valor</small>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                 <i class="fa fa-plus"></i>
@@ -31,12 +29,12 @@
             </thead>
             <tbody>
               <tr class="odd" *ngFor="let cfgValorVehiculo of cfgValorVehiculos; let i = index">
-                <td>{{cfgValorVehiculo.id}}</td>
-                <td>{{cfgValorVehiculo.linea.marca.nombre}}</td>
-                <td>{{cfgValorVehiculo.marca}}</td>
-                <td>{{cfgValorVehiculo.clase?.nombre}}</td>
-                <td>{{cfgValorVehiculo.valor}}</td>
-                <td>{{cfgValorVehiculo.anio}}</td>
+                <td>{{ cfgValorVehiculo.id }}</td>
+                <td>{{ cfgValorVehiculo.linea.marca.nombre }}</td>
+                <td>{{ cfgValorVehiculo.linea.nombre }}</td>
+                <td>{{ cfgValorVehiculo.clase?.nombre }}</td>
+                <td>{{ cfgValorVehiculo.valor }}</td>
+                <td>{{ cfgValorVehiculo.anio }}</td>
                 <td>
                   <button (click)="editCfgValorVehiculo(cfgValorVehiculo)" class="btn btn-xs btn-info" type="button">Editar
                     <i class="fa fa-edit"></i>

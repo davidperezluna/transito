@@ -21,7 +21,7 @@ export class TramiteSolicitudComponent implements OnInit {
   public formIndex = true;
   public table: any;
   public tramiteSolicitud: TramiteSolicitud;
-  public moduloId = 1;
+  public moduloId = 2;
 
   constructor(
     private _TramiteSolicitudService: TramiteSolicitudService,

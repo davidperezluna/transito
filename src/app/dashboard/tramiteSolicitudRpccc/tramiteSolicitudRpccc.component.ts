@@ -28,7 +28,7 @@ export class TramiteSolicitudRpcccComponent implements OnInit {
   public table: any;
   public tramiteSolicitud: TramiteSolicitudRpccc;
   public solicitanteEncontrado = 1;
-  public moduloId = 6;
+  public moduloId = 5;
 
   constructor(
     private _TramiteSolicitudRpcccService: TramiteSolicitudRpcccService,

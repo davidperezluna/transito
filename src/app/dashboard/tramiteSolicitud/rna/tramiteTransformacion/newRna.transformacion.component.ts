@@ -46,7 +46,6 @@ export class NewRnaTransformacionComponent implements OnInit {
     enviarTramite(){
         
         let token = this._loginService.getToken();
-        console.log(this.vehiculo);
         this.vehiculo.modelo = this.nuevoModelo    
         this.vehiculo.placa = this.vehiculo.cfgPlaca.numero    
         this.vehiculo.municipioId = this.vehiculo.municipio.id   

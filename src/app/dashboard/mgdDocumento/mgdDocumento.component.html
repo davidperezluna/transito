@@ -5,8 +5,7 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">
-              <b class="text-uppercase">Gestión Documental</b>
-              <br>
+              <b class="text-uppercase">Gestión Documental</b> 
               <small>Documentos</small>
             </h5>
           </div>
@@ -30,10 +29,14 @@
                   <td >{{ documento.numeroRadicado }}</td>
                   <td >{{ documento.estado }}</td>
                   <td>
-                    <button (click)="onShow(documento)" class="btn btn-xs btn-info" type="button">
+                    <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'En proceso'">
                       <i class="fa fa-edit"></i>
                       Diligenciar
-                    </button> 
+                    </button>
+                    <button (click)="readyPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'Respuesta Generada'">
+                      <i class="fa fa-edit"></i>
+                      Finalizar
+                    </button>
                   </td>
                 </tr>
               </tbody>

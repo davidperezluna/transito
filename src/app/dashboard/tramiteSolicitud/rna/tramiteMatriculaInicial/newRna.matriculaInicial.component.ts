@@ -100,7 +100,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         let token = this._loginService.getToken(); 
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.tramiteFactura = 8;
+                //this.datos.tramiteFactura = 8;
                 this.readyTramite.emit(this.datos);
             },
             error => {
@@ -223,7 +223,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 this.propietario = false
             }
         }
-        console.log(this.datos.propietariosCiudadanos);
+
         this.ciudadanoEncontrado=1;
         this.listaPropietariosCiudadanos=true;
     }
