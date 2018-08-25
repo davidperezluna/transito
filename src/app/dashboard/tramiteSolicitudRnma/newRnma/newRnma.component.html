@@ -276,10 +276,10 @@
                         <app-new-trasladoRnma [vehiculo]="vehiculo" [tramitesFactura]="tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-new-trasladoRnma>
                     </div>
                     <div class="tab-pane" id="rnma-cambiocolor" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cambio-color [vehiculo]="vehiculo" [tramitesFactura]="tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-color>
+                        <appRnma-cambio-color [vehiculo]="vehiculo" [factura]="factura" [tramitesFactura]="tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-color>
                     </div>
                     <div class="tab-pane" id="rnma-cambioservicio" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cambio-servicio [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-servicio>
+                        <appRnma-cambio-servicio [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-servicio>
                     </div>
                     <div class="tab-pane" id="rnma-regrabarmotor" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-regrabar-motor [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-regrabar-motor>
@@ -294,31 +294,31 @@
                         <appRnma-transformacion [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-transformacion>
                     </div>
                     <div class="tab-pane" id="rnma-duplicado-licencia" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-duplicado-licencia (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-duplicado-licencia>
+                        <appRnma-duplicado-licencia [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-duplicado-licencia>
                     </div>
                     <div class="tab-pane" id="rnma-cancelacionmatricula" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cancelacionMatricula [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cancelacionMatricula>
+                        <appRnma-cancelacionMatricula [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cancelacionMatricula>
                     </div>
                     <div class="tab-pane" id="rnma-cambioplaca" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cambio-placa (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-placa>
+                        <appRnma-cambio-placa [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-placa>
                     </div>
                     <div class="tab-pane" id="rnma-dupicadoplaca" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-duplicado-placa (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-duplicado-placa>
                     </div>
                     <div class="tab-pane" id="rnma-cambiomotor" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cambio-motor (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-motor>
+                        <appRnma-cambio-motor [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-motor>
                     </div>
                     <div class="tab-pane" id="rnma-blindaje" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-blindaje [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-blindaje>
+                        <appRnma-blindaje [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-blindaje>
                     </div>
                     <!-- <div class="tab-pane" id="rnma-traslado" role="tabpanel" *ngIf='ciudadano'>
                   <app-new-trasladoRnma [vehiculo] = "vehiculo" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></app-new-trasladoRnma>
                </div> -->
                     <div class="tab-pane" id="rnma-cambiocombustible" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cambio-combustible [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-combustible>
+                        <appRnma-cambio-combustible [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-combustible>
                     </div>
                     <div class="tab-pane" id="rnma-cambiocarroceria" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cambio-carroceria [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-carroceria>
+                        <appRnma-cambio-carroceria [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-carroceria>
                     </div>
                     <div class="tab-pane" id="rnma-regrabarvin" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-regrabar-vin [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-regrabar-vin>
@@ -327,14 +327,14 @@
                         <appRnma-new-registroMaquinaria [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-new-registroMaquinaria>
                     </div>
                     <div class="tab-pane" id="rnma-cambioconjunto" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cambioConjunto [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambioConjunto>
+                        <appRnma-cambioConjunto [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambioConjunto>
                     </div>
                     <div class="tab-pane" id="7" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-traspaso-indeterminada [vehiculo]="vehiculo" [factura]="factura" [ciudadano]="ciudadano" (readyTramite)="readyTramite($event)"
                         (cancelarTramite)="cancelarTramite($event)"></appRnma-traspaso-indeterminada>
                     </div>
                     <div class="tab-pane" id="rnma-ceritificadotradicion" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-certificadoTradicion [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-certificadoTradicion>
+                        <appRnma-certificadoTradicion [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-certificadoTradicion>
                     </div>
                     <div class="tab-pane" id="rnma-levantamientoalertaprenda" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-levantamiento-alerta-prenda [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-levantamiento-alerta-prenda>

@@ -16,6 +16,7 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public carrocerias: any;
@@ -25,7 +26,8 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
         'newData': null,
         'oldData': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -75,7 +77,8 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = carroceria.data.nombre;
                             this.datos.oldData = this.vehiculo.carroceria.nombre;
-                            this.datos.tramiteFactura =27;
+                            this.datos.facturaId = this.factura.id;
+                            this.datos.tramiteFormulario = 'rna-cambiocarroceria';
                             this.readyTramite.emit(this.datos);
                         }
                         error => {

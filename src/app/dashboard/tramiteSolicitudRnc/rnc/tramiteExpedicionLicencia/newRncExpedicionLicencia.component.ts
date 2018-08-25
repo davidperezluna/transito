@@ -32,7 +32,8 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public categorias: string[];
     public categoriaSelected: any;
     public datos = {
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
         'numeroLicenciaConduccion': null,
         'numeroRunt': null,
         'fechaExpedicion': null,
@@ -124,7 +125,8 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                 if (response.status == 'success') {
                     this.datos.sedeOperativaId = response.data.sedeOperativa.id;
                     //Verificar la posibilidad de insertar solo la factura y/o el tramite
-                    this.datos.tramiteFactura = 1;
+                    this.datos.facturaId = this.factura.id;
+                    this.datos.tramiteFormulario = 'rnc-expedicionlicencia';
                     this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
                     this.datos.categoriaId = this.categoriaSelected;
                     this.datos.claseId = this.claseSelected;

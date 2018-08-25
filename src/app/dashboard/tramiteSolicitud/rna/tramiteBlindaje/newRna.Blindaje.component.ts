@@ -14,6 +14,7 @@ export class NewRnaBlindajeComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -34,7 +35,8 @@ export class NewRnaBlindajeComponent implements OnInit {
         'empresaBlindadora': null,
         'numeroRunt': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -64,7 +66,8 @@ export class NewRnaBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
-       this.datos.tramiteFactura =10;
+       this.datos.facturaId = this.factura.id;
+       this.datos.tramiteFormulario = 'rna-blindaje';
        this.readyTramite.emit(this.datos);
     }
     onCancelar(){

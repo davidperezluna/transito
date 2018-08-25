@@ -309,11 +309,7 @@ constructor(
   }
 
   readyTramite(datos:any){
-    this.tramitesFactura.forEach(tramiteFactura => {
-      if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {
-        this.tramiteSolicitud.tramiteFacturaId = tramiteFactura.id;
-      }
-    });
+    
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
     this.tramiteSolicitud.ciudadanoId=this.apoderado.id;

@@ -28,7 +28,8 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
     public tipoCambioSelected: any;
     public categorias: string[];
     public datos = {
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
         'categoriaActual': null,
         'categoriaNueva': null,
         'numeroLicenciaConduccion': null,
@@ -97,7 +98,8 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
     enviarTramite() {
         let token = this._LoginService.getToken();
         
-        this.datos.tramiteFactura = 62;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnc-recategorizacionarriba';
         this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
         this.datos.claseId = this.claseSelected;
         this.datos.servicioId = this.servicioSelected;

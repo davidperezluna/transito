@@ -19,7 +19,6 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
-    @Input() tramitesFactura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -43,7 +42,8 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         'guiaLlegada': null,
         'empresaEnvio': null,
         'rut': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -99,7 +99,8 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         this.datos.guiaLlegada = this.guiaLlegada;
         this.datos.empresaEnvio = this.empresaEnvio;
         this.datos.rut = this.rut;
-        this.datos.tramiteFactura = 4;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-radicadocuenta';
         console.log(this.datos);
         this.readyTramite.emit(this.datos);
 

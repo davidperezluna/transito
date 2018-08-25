@@ -16,6 +16,7 @@ export class NewRnaTransformacionComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tipoPotenciacionSelect: any;
@@ -24,7 +25,8 @@ export class NewRnaTransformacionComponent implements OnInit {
         'newData': null,
         'oldData': null,
         'tipoPotenciacion': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
     public tiposPotenciacion = [
         {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
@@ -62,7 +64,8 @@ export class NewRnaTransformacionComponent implements OnInit {
                 this.datos.newData = this.nuevoModelo;
                 this.datos.oldData = this.vehiculo.modelo;
                 this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
-                this.datos.tramiteFactura =10;
+                this.datos.facturaId = this.factura.id;
+                this.datos.tramiteFormulario = 'rna-transformacion';
                 this.readyTramite.emit(this.datos);
             }
             error => {

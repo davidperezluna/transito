@@ -16,7 +16,7 @@ export class NewTrasladoComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Input() vehiculo: any = null;
 @Input() tramiteTraslado: any = null;
-@Input() tramitesFactura: any = null;
+@Input() factura: any = null;
 public sedeOperativaSelected: any;
 public sedes: any;
 public tramiteFacturaSelected: any;
@@ -48,8 +48,9 @@ constructor(
         'numeroRunt': null,
         'numeroGuia': null,
         'nombreEmpresa': null,
-        'tramiteFactura': null,
-        'vehiculoId': null};
+        'tramiteFormulario': null,
+        'facturaId': null,
+        'vehiculoId': null}; 
     }
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
@@ -68,7 +69,7 @@ constructor(
       }
     );
 
-    this.tramitesFactura.forEach(tramiteFactura => {
+    this.factura.forEach(tramiteFactura => {
       if (tramiteFactura.realizado == 1) {
           if (tramiteFactura.tramitePrecio.tramite.id == 3) {
               this.tramiteRealizado = tramiteFactura;
@@ -110,7 +111,8 @@ constructor(
           if(this.respuesta.status == 'success'){
               this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
               this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
-              this.datos.tramiteFactura =3;
+              this.datos.facturaId = this.factura.id;
+              this.datos.tramiteFormulario = 'rna-traslado';
               this.readyTramite.emit(this.datos);
           }
           error => {

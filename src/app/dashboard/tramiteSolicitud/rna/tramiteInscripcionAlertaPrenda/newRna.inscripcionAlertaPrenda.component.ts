@@ -26,7 +26,6 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() banco: any = null;
     @Input() factura: any = null;
-    @Input() tramitesFactura: any = null;
 
     public placa: CfgPlaca = null;
     public errorMessage;
@@ -78,7 +77,8 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'acreedoresCiudadanos': [],
         'tipoAlerta': [],
         'gradoAlerta': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
         'vehiculoPlaca': null,
     };
     public datos2 = {
@@ -166,7 +166,8 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.tramiteFactura = 46;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-inscripcionalertaprenda';
                
         this._VehiculoAcreedorService.register(this.datos, token).subscribe(
             response => {
