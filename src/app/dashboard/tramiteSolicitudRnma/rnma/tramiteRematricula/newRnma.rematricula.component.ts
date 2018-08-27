@@ -14,6 +14,7 @@ import swal from 'sweetalert2';
 export class NewRnmaRematriculaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -46,7 +47,8 @@ export class NewRnmaRematriculaComponent implements OnInit {
         'nombreEntrega': null,
         'estado': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -116,7 +118,8 @@ export class NewRnmaRematriculaComponent implements OnInit {
         this.datos.numeroIdentificacionEntrega = this.numeroIdentificacionEntrega;
         this.datos.nombreEntrega = this.nombreEntrega;
         this.datos.estado = this.estado;
-        this.datos.tramiteFactura = 25;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-rematricula';
         this.readyTramite.emit(this.datos);
     }
 

@@ -16,6 +16,7 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public sedesOperativas: any;
@@ -26,7 +27,8 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
         'oldData': null,
         'numeroRunt': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -69,7 +71,8 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
                     this.vehiculo.combustibleId = this.vehiculo.combustible.id   
                     this.vehiculo.claseId = this.vehiculo.clase.id   
                     this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this.datos.tramiteFactura =3;
+                    this.datos.facturaId = this.factura.id;
+                    this.datos.tramiteFormulario = 'rnrs-cambiosedeoperativa';
                     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
                     response => {
                         this.respuesta = response; 

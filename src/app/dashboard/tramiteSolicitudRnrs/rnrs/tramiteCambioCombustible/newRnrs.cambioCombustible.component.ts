@@ -16,6 +16,7 @@ export class NewRnrsCambioCombustibleComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public combustibles: any;
@@ -25,7 +26,8 @@ export class NewRnrsCambioCombustibleComponent implements OnInit {
         'newData': null,
         'oldData': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -74,7 +76,8 @@ export class NewRnrsCambioCombustibleComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = combustible.data.nombre;
                             this.datos.oldData = this.vehiculo.combustible.nombre;
-                            this.datos.tramiteFactura =31;
+                            this.datos.facturaId = this.factura.id;
+                            this.datos.tramiteFormulario = 'rnrs-cambiocombustible';
                             this.readyTramite.emit(this.datos);
                         }
                         error => {

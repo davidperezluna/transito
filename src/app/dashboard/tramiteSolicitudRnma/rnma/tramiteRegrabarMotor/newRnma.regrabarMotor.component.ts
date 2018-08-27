@@ -15,6 +15,7 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -36,7 +37,8 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -89,7 +91,8 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
                 this.datos.documentacion = this.documentacion;
                 this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
-                this.datos.tramiteFactura = 22;
+                this.datos.facturaId = this.factura.id;
+                this.datos.tramiteFormulario = 'rnma-regrabarmotor';
                 this.readyTramite.emit(this.datos);
             }
             error => {

@@ -216,7 +216,7 @@
                             <appRnrs-sustrato [factura] = "factura"  [ciudadanoPropietario] = "ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-sustrato>
                         </div>
 
-                        <!-- <div class="tab-pane" id="25" role="tabpanel"> 
+                        <!-- <div class="tab-pane" id="rnrs-rematricula" role="tabpanel"> 
                             <appRnrs-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-rematricula>
                         </div> -->
 
@@ -229,7 +229,7 @@
                         </div>
 
                         <div class="tab-pane" id="rnrs-cambiosedeoperativa" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-cambio-sedeOperativa [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-sedeOperativa>
+                            <appRnrs-cambio-sedeOperativa [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-sedeOperativa>
                         </div>
 
                         <div class="tab-pane" id="rnrns-radicadocuenta" role="tabpanel" *ngIf='ciudadano'> 
@@ -237,51 +237,51 @@
                         </div>
                         
                          <div class="tab-pane" id="rnrs-cambiocolor" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-cambio-color [vehiculo] = "vehiculo" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-color>
+                            <appRnrs-cambio-color [vehiculo] = "vehiculo" [factura] = "factura" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-color>
                         </div>
                         
-                        <div class="tab-pane" id="rnrs-cambiocolor" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-cambio-servicio [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-servicio>
+                        <div class="tab-pane" id="rnrs-cambioservicio" role="tabpanel" *ngIf='ciudadano'> 
+                            <appRnrs-cambio-servicio [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-servicio>
                         </div>
 
                         <div class="tab-pane" id="rnrs-regrabarserie" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-regrabar-serie [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-regrabar-serie>
+                            <appRnrs-regrabar-serie [vehiculo] = "vehiculo" [factura] = "factura"  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-regrabar-serie>
                         </div>
 
                         <div class="tab-pane" id="rnrs-transformacion" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-transformacion [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-transformacion>
+                            <appRnrs-transformacion [vehiculo] = "vehiculo"  [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-transformacion>
                         </div>
 
                         <div class="tab-pane" id="rnrs-duplicadolicencia" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-duplicado-licencia (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-duplicado-licencia>
+                            <appRnrs-duplicado-licencia [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-duplicado-licencia>
                         </div>
 
                         <div class="tab-pane" id="rnrs-cancelacionmatricula" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-cancelacionMatricula  [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cancelacionMatricula>
+                            <appRnrs-cancelacionMatricula  [factura] = "factura" [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cancelacionMatricula>
                         </div>
                         
                         <div class="tab-pane" id="rnrs-cambioplaca" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-cambio-placa (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-placa>
+                            <appRnrs-cambio-placa (readyTramite)="readyTramite($event)" [factura] = "factura" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-placa>
                         </div>
                         
                         <div class="tab-pane" id="rnrs-duplicadoplaca" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-duplicado-placa  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-duplicado-placa>
+                            <appRnrs-duplicado-placa [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-duplicado-placa>
                         </div>
                         
-                        <div class="tab-pane" id="rnrs-cambiocolor" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-cambio-motor *ngIf="tramiteSelected == 24" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-motor>
+                        <div class="tab-pane" id="rnrs-cambiomotor" role="tabpanel" *ngIf='ciudadano'> 
+                            <appRnrs-cambio-motor *ngIf="tramiteSelected == 24" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-motor>
                         </div>
                         
                         <div class="tab-pane" id="rnrs-blindaje" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-blindaje [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-blindaje>
+                            <appRnrs-blindaje [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-blindaje>
                         </div>
 
                         <div class="tab-pane" id="rnrs-traslado" role="tabpanel">
-                            <appRnrs-traslado [vehiculo] = "vehiculo" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-traslado>
+                            <appRnrs-traslado [vehiculo] = "vehiculo" [factura] = "factura" [tramitesFactura] = "tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-traslado>
                         </div>
                         
                         <div class="tab-pane" id="rnrs-cambiocombustible" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-cambio-combustible [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-combustible>
+                            <appRnrs-cambio-combustible [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-combustible>
                         </div>
                         
                         <div class="tab-pane" id="rnrs-cambiocarroceria" role="tabpanel" *ngIf='ciudadano'> 
@@ -289,15 +289,15 @@
                         </div>
                         
                         <div class="tab-pane" id="rnrs-regrabarvin" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-regrabar-vin [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-regrabar-vin>
+                            <appRnrs-regrabar-vin [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-regrabar-vin>
                         </div>
 
                         <div class="tab-pane" id="rnrs-cambioconjunto" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-cambioConjunto [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambioConjunto>
+                            <appRnrs-cambioConjunto [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambioConjunto>
                         </div>
 
                         <div class="tab-pane" id="rnrs-certificadotradicion" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRnrs-certificadoTradicion [vehiculo] = "vehiculo" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-certificadoTradicion>
+                            <appRnrs-certificadoTradicion [vehiculo] = "vehiculo"  [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-certificadoTradicion>
                          </div> 
 
                         <div class="tab-pane" id="rnrs-trapasoindeterminada" role="tabpanel" *ngIf='ciudadano' > 
@@ -312,7 +312,7 @@
                             <appRnrs-levantamiento-alerta-prenda [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-levantamiento-alerta-prenda>
                         </div>
 
-                        <div class="tab-pane" id="58" role="tabpanel" *ngIf='ciudadano'>
+                        <div class="tab-pane" id="rnrs-registromaquinaria" role="tabpanel" *ngIf='ciudadano'>
                             <appRnrs-new-registroMaquinaria [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-new-registroMaquinaria>
                         </div>
 

@@ -44,7 +44,8 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
         'guiaLlegada': null,
         'empresaEnvio': null,
         'rut': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -100,8 +101,8 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
         this.datos.guiaLlegada = this.guiaLlegada;
         this.datos.empresaEnvio = this.empresaEnvio;
         this.datos.rut = this.rut;
-        this.datos.tramiteFactura = 4;
-        console.log(this.datos);
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-radicadocuenta';
         this.readyTramite.emit(this.datos);
 
         

@@ -17,6 +17,7 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public apiUrl = environment.apiUrl + 'default';
     public errorMessage;
     public respuesta;
@@ -42,7 +43,8 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
         'observacion': null,                  
         'certificadoEntregada': null,
         'entregado': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -79,7 +81,8 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
         // this.datos.tramiteFactura =58;
         // this.readyTramite.emit(this.datos);
 
-        this.datos.tramiteFactura =30;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnrs-certificadotradicion';
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;
         this.readyTramite.emit(this.datos);

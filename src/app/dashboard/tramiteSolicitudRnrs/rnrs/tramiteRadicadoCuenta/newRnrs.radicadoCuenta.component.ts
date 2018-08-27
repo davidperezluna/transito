@@ -44,7 +44,8 @@ export class NewRnrsRadicadoCuentaComponent implements OnInit {
         'guiaLlegada': null,
         'empresaEnvio': null,
         'rut': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -98,7 +99,8 @@ export class NewRnrsRadicadoCuentaComponent implements OnInit {
         this.datos.guiaLlegada = this.guiaLlegada;
         this.datos.empresaEnvio = this.empresaEnvio;
         this.datos.rut = this.rut;
-        this.datos.tramiteFactura = 4;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnrns-radicadocuenta';
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

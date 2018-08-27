@@ -52,7 +52,6 @@ export class NewRnmaDuplicadoLicenciaComponent implements OnInit {
         );
     }
 
-   
     
     enviarTramite() {
         this.datos.sustrato = this.sustratoSelected;
@@ -60,7 +59,7 @@ export class NewRnmaDuplicadoLicenciaComponent implements OnInit {
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
         this.datos.facturaId = this.factura.id;
-        this.datos.tramiteFormulario = 'rnma-ceritificadotradicion';
+        this.datos.tramiteFormulario = 'rnma-duplicado-licencia';
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

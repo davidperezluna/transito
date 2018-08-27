@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -24,7 +25,8 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
         'sustrato': null,
         'documentacion': null,
         'entregada': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -36,7 +38,8 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     ngOnInit() {}
 
     onEnviarTramite() {
-        this.datos.tramiteFactura = 28;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnrs-duplicadolicencia';
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

@@ -14,6 +14,7 @@ export class NewRnrsRegrabarSerieComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -35,7 +36,8 @@ export class NewRnrsRegrabarSerieComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -88,7 +90,8 @@ export class NewRnrsRegrabarSerieComponent implements OnInit {
                 this.datos.documentacion = this.documentacion;
                 this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
-                this.datos.tramiteFactura = 9;
+                this.datos.facturaId = this.factura.id;
+                this.datos.tramiteFormulario = 'rnrs-regrabarserie';
                 this.readyTramite.emit(this.datos);
             }
             error => {
