@@ -27,14 +27,10 @@
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
-                  <td >{{ tramiteSolicitud.id }}</td>
-                  <td ></td>
-                  <td ></td>
-                  <td >
-                    <li *ngFor="let datos of tramiteSolicitud.datos">
-                      {{ datos }}
-                    </li>
-                  </td>
+                  <td>{{ tramiteSolicitud.id }}</td>
+                  <td>{{ tramiteSolicitud.tramiteFactura.factura.numero }}</td>
+                  <td>{{ tramiteSolicitud.tramiteFactura.tramitePrecio.tramite.nombre }}</td>
+                  <td>{{ tramiteSolicitud.datos }}</td>
                   <td>
                     <button (click)="editTramiteSolicitud(tramiteSolicitud)" class="btn btn-info" type="button">
                       <i class="fa fa-pencil"></i>

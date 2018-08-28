@@ -46,9 +46,9 @@ export class NewRnaTransformacionComponent implements OnInit {
     }
     
     enviarTramite(){
-        
         let token = this._loginService.getToken();
-        this.vehiculo.modelo = this.nuevoModelo    
+
+        /*this.vehiculo.modelo = this.nuevoModelo    
         this.vehiculo.placa = this.vehiculo.cfgPlaca.numero    
         this.vehiculo.municipioId = this.vehiculo.municipio.id   
         this.vehiculo.lineaId = this.vehiculo.linea.id   
@@ -60,14 +60,14 @@ export class NewRnaTransformacionComponent implements OnInit {
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
         response => {
             this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
+            if(this.respuesta.status == 'success'){*/
                 this.datos.newData = this.nuevoModelo;
                 this.datos.oldData = this.vehiculo.modelo;
                 this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
                 this.datos.facturaId = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-transformacion';
                 this.readyTramite.emit(this.datos);
-            }
+            //}
             error => {
                     this.errorMessage = <any>error;
 
@@ -76,7 +76,7 @@ export class NewRnaTransformacionComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-        }); 
+        //}); 
     }
 
     onCancelar(){
