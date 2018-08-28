@@ -72,7 +72,6 @@ constructor(
       if (tramiteFactura.realizado == 1) {
           if (tramiteFactura.tramitePrecio.tramite.id == 3) {
               this.tramiteRealizado = tramiteFactura;
-              console.log(this.tramiteRealizado);
           }
       }
   });

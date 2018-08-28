@@ -23,7 +23,7 @@ export class NewRnaComponent implements OnInit {
   public vehiculo: Vehiculo;
   public errorMessage;
   public respuesta;
-  public tramitesFactura: any;
+  public tramitesFactura: any = null;
   public tramiteFacturaSelected: any;
   public facturaSelected: any;
   public facturas: any;
@@ -113,11 +113,12 @@ constructor(
 		});
   }
 
-  changedFactura(id){
+  onSearchFactura(id){
     if (id) {
       this.datos.facturaId = id;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
+
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
       response => {
         this.isMatricula=false;
@@ -327,7 +328,7 @@ constructor(
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
-          this.changedFactura(this.factura.id)
+          this.onSearchFactura(this.factura.id)
         } else {
           swal({
             title: 'Error!',
