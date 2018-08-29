@@ -103,7 +103,7 @@ export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
     let token = this._loginService.getToken();
     let datos = {
       'placa': this.placa,
-      'modulo': 1
+      'moduloId': 2
     };
 
     this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
