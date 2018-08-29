@@ -102,47 +102,42 @@ export class RnaPreregistroComponent implements OnInit {
 
   
   deleteVehiculo(id:any){
+    console.log(this.id);
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se eliminara este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+      
+    }).then((result) => {
+      if (result.value) {
+        let token = this._loginService.getToken();
+        this._VehiculoService.deleteVehiculo(token,id).subscribe(
+            response => {
+                swal({
+                      title: 'Eliminado!',
+                      text:'Registro eliminado correctamente.',
+                      type:'success',
+                      confirmButtonColor: '#15d4be',
+                    })
+                  this.table.destroy();
+                  this.respuesta= response;
+                  this.ngOnInit();
+              }, 
+            error => {
+              this.errorMessage = <any>error;
 
-  console.log(this.id);
-  swal({
-    title: '¿Estás seguro?',
-    text: "¡Se eliminara este registro!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#15d4be',
-    cancelButtonColor: '#ff6262',
-    confirmButtonText: 'Confirmar',
-    cancelButtonText: 'Cancelar'
-    
-  }).then((result) => {
-    if (result.value) {
-      let token = this._loginService.getToken();
-      this._VehiculoService.deleteVehiculo(token,id).subscribe(
-          response => {
-              swal({
-                    title: 'Eliminado!',
-                    text:'Registro eliminado correctamente.',
-                    type:'success',
-                    confirmButtonColor: '#15d4be',
-                  })
-                this.table.destroy();
-                this.respuesta= response;
-                this.ngOnInit();
-            }, 
-          error => {
-            this.errorMessage = <any>error;
-
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
             }
-          }
-        );
-    }
-  })
-}
-
-
-
-
+          );
+      }
+    })
+  }
 }
