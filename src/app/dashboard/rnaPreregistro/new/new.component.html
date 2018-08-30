@@ -8,7 +8,32 @@
             </div>
         <div class="card-body">
             <form #formNew="ngForm">
-                <div class="form-group row">
+                <div class="btn-group-vertical" data-toggle="buttons">
+                    <button (click)="onRadicado() "type="button" class="btn btn-primary" aria-pressed="true">Preregistro para radicado de cuenta</button>
+                    <button (click)="onRadicado() "type="button" class="btn btn-primary" aria-pressed="true">Preregistro para matricula inicial</button>
+                </div>
+                <br>
+                <br>
+                <div class="form-group row" *ngIf='radicado'>
+                    <div class="col-lg-6">
+                        <label>Placa*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
+                    </div> 
+                    <div class="col-lg-6">
+                        <label>No Factura de compra*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div> 
+                    <div class="col-lg-6">
+                        <label>Fecha Factura*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Valor</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.valor" type="text"  name="valor" required>
+                    </div>
+                </div>
+
+                <div class="form-group row" *ngIf='!radicado'>
                     <div class="col-lg-6">
                         <label>No Factura de compra*</label>
                         <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
@@ -22,6 +47,7 @@
                         <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.valor" name="valor" required>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <div class="col-lg-3">
                         <label>Marca*</label>
@@ -177,168 +203,10 @@
                 </div>
             </form>
         </div>
-        <div class="card-body">
-            <div class="row justify-content-center container">
-
-                <!-- tipo prioridad propio -->
-                <div class="container">
-                    <!--Buscardor Identificador/Nit -->
-                    <div class="col-xs-12 col-lg-12 row" >
-                        <!-- cuando es de tipo leasing -->
-                        <div class="col-xs-12 col-lg-12" *ngIf="tipoPropiedadSelected == 1 && propietario">
-                            <h6>Propietario</h6>
-                        </div>
-
-                        <div class="col-xs-8 col-lg-6">
-                            <label>Tipo de identificación <span class="text-danger">*</span></label>
-                            <ng-select [multiple]="false" (ngModelChange)="changedtipoIdentificacion($event)" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
-                            </ng-select>
-                        </div>
-
-                        <!--tipo identificacion ciudadano -->
-                        <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
-                            <label>Identificación</label>
-                            <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
-                                <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                                </span>
-                            </div>
-                            <div class="has-danger" *ngIf="ciudadanoEncontrado === 3">
-                                <div class="form-control-feedback has-danger has-error">No se encontró la persona</div>
-                            </div>
-                        </div>
-
-                        <!--tipo identificacion nit -->
-                        <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
-                            <label>NIT</label>
-                            <div  class="input-group" [class.has-success]="empresaEncontrada === 2" [class.has-danger]="empresaEncontrada === 3">
-                                <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onKeyEmpresa()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2" [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                                </span>
-                            </div>
-                            <div class="has-danger" *ngIf="empresaEncontrada === 3">
-                                <div class="form-control-feedback has-danger has-error">No se encontró la empresa</div>
-                            </div>
-                        </div>
-                        
-                        <!--propietarios ciudadanos -->
-                        <div class="container"  *ngIf="listaPropietariosCiudadanos">
-                            <br>
-                            <table class="table " id="dataTables-example">
-                                <br>
-                                <thead>
-                                    <tr>
-                                        <th>Permiso tramite</th>
-                                        <th>Tipo</th>
-                                        <th>Solicitante Ciudadano</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="odd" *ngFor="let ciudadano of datos.propietariosCiudadanos; let i = index">
-
-                                        <td class="center"><p >Si</p></td>
-                                       
-                                        <td class="center"><p >Propietario</p></td>
-
-                                        <td class="center"><p>{{ciudadano.identificacion}}<br>{{ciudadano.nombre}}</p></td>
-                                        
-                                        <td class="center"><button (click)="delete(ciudadano)" class="btn btn-danger">Eliminar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!--propietarios empresas -->
-                        <div class="container"  *ngIf="listaPropietariosEmpresas">
-                            <br>
-                            <table class="table " id="dataTables-example">
-                                <br>
-                                <thead>
-                                    <tr>
-                                        <th>Permiso tramite</th>
-                                        <th>Tipo</th>
-                                        <th>Solicitante Empresa</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="odd" *ngFor="let empresa of datos.propietariosEmpresas; let i = index">
-                                        <td class="center" ><p >Si</p></td>
-                                        <td class="center" ><p >Propietario</p></td>
-                                        <td class="center"><p>{{empresa.nit}}<br>{{empresa.nombre}}</p></td>
-                                        <td class="center"><button (click)="deleteEmpresa(empresa)" class="btn btn-danger">Eliminar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                    <!--si existe una empresa -->
-                    <div class="container row" *ngIf="empresaEncontrada === 2">
-                        <table class="table " id="dataTables-example">
-                            <tbody>
-                                <tr class="odd">
-                                    <td>NIT: {{empresa.nit}}</td>
-                                    <td>Nombre: {{empresa.nombre}}</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td>Tipo empresa: {{empresa.nombre}}</td>
-                                    <td>Municipio: {{empresa.municipio.nombre}}</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td>Dirección: {{empresa.direccion}}</td>
-                                    <td>Persona: {{empresa.ciudadano.usuario.primerNombre}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="container">
-                            <button (click)="btnNewEmpresa()" class="btn btn-primary pull-right">Agregar</button>
-                            <button (click)="btnCancelarEmpresa()" class="btn btn-secondary">Cancelar</button>
-                        </div>
-                    </div>
-                    
-                    <!--si existe un ciudadano -->
-                    <div class="container row" *ngIf="ciudadanoEncontrado === 2">
-                        <table class="table " id="dataTables-example">
-                            <tbody>
-                                <tr class="odd">
-                                    <td>Tipo de identificación: {{ciudadano.tipoIdentificacion.nombre}}</td>
-                                    <td>Numero de identificación: {{ciudadano.identificacion}}</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td>Nombres: {{ciudadano.primerNombre}} {{ciudadano.segundoNombre}}</td>
-                                    <td>Apellidos: {{ciudadano.primerApellido}} {{ciudadano.segundoApellido}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="col-xs-12 col-lg-12">
-                            <br>
-                            <div class="custom-control custom-checkbox" for="propietarioPresente">
-                                <input type="checkbox" [(ngModel)]="propietarioPresente" class="custom-control-input" id="propietarioPresente" name="propietarioPresente" checked="">
-                                <label class="custom-control-label" for="propietarioPresente">Propietario presente</label>
-                            </div>
-                        </div>   
-                        <div class="container">
-                            <br>
-                            <button (click)="btnNewCiudadano()" class="btn btn-primary pull-right">Agregar</button>
-                            <button (click)="btnCancelarCiudadano()" class="btn btn-secondary">Cancelar</button>
-                        </div>
-                    </div>
-
-                    <!--si no existe un ciudadano -->
-                    <app-new-ciudadano *ngIf="ciudadanoNew" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (readyCiudadano)="readyCiudadano($event)"></app-new-ciudadano>
-                    <app-new-empresa *ngIf="empresaNew" [tipoIdentificacion]="tipoIdentificacionSelected" [nit]="nit" (readyEmpresa)="readyEmpresa($event)"></app-new-empresa>
-                </div>
-            </div>
-        </div>
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancelar</button>
-                <button (click)="onEnviar()" class="btn btn-primary">Enviar</button>
-            </div>    
+        <div class="card-footer">
+            <button (click)="onCancelar()" class="btn btn-secondary">Cancelar</button>
+            <button (click)="onEnviar()" class="btn btn-primary">Enviar</button>
+        </div>    
         </div>
     </div>
 </div>

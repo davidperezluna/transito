@@ -18,6 +18,7 @@ import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { EmpresaService } from "../../../services/empresa.service";
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-new',
@@ -62,8 +63,11 @@ public propietarioPresente:any;
 public listaPropietariosCiudadanos=false;
 public listaPropietariosEmpresas=false;
 public empresaNew=false;
+public radicado=false;
 public identificacion:any;
 public tipoPropiedadSelected:any;
+public sedeOperativa:any;
+public btnRadicado:any = 'Preregistro para matricula inicial';
 public propietario = true;
 public tipoPropiedades= [
   {'value':1,'label':"Leasing"},
@@ -100,11 +104,29 @@ constructor(
   private _CiudadanoService: CiudadanoService,
   private _EmpresaService: EmpresaService,
   private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+  private _FuncionarioService: MpersonalFuncionarioService,
   ){}
 
   ngOnInit() {
     this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
+    let token = this._loginService.getToken();
+    let identity = this._loginService.getIdentity();
+    let datos = {'identificacion':identity.identificacion};
+    this._FuncionarioService.searchLogin(datos,token).subscribe(
+      response => { 
+        if(response.status == 'success'){
+          this.sedeOperativa = response.data.sedeOperativa;
+        }
+      error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage); 
+            alert('Error en la petición');
+          }
+        }
+    });
+
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
         this.tipoIdentificaciones = response;
@@ -269,7 +291,7 @@ constructor(
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     let datos = { 
       'vehiculo':this.vehiculo,
-      'datosPropietarios':this.datos,
+      'sedeOperativaId':this.sedeOperativa.id,
     }
 
     let token = this._loginService.getToken();
@@ -287,7 +309,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El vehiculo '+ this.vehiculo.id +' ya se encuentra registrado',
+            text: this.respuesta.msj,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -327,138 +349,13 @@ constructor(
     }
     }
 
-    changedtipoIdentificacion(e){
-      this.ciudadanoEncontrado = 1;
-      this.empresaEncontrada = 1;
-  }
-  onKeyCiudadano(){
-    let token = this._loginService.getToken();
-    let identificacion = {
-    'numeroIdentificacion' : this.identificacion,
-      };
-      this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
-          response => {
-              this.respuesta = response; 
-              if(this.respuesta.status == 'success'){
-                  this.ciudadano = this.respuesta.data;
-                  this.ciudadanoEncontrado= 2;
-                  this.ciudadanoNew = false;
-          }else{
-              this.ciudadanoEncontrado=3;
-              this.ciudadanoNew = true;
-          }
-          error => {
-                  this.errorMessage = <any>error;
-              
-                  if(this.errorMessage != null){
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                  }
-              }
-      }); 
-  }
-  onKeyEmpresa(){
-    let token = this._loginService.getToken();
-    
-      this._EmpresaService.showNit(token,this.nit).subscribe(
-          response => {
-              this.respuesta = response; 
-              if(this.respuesta.status == 'success'){
-                  this.empresa = this.respuesta.data;
-                  this.empresaEncontrada= 2;
-          }else{
-              this.empresaEncontrada=3;
-              this.empresaNew = true;
-          }
-          error => {
-                  this.errorMessage = <any>error;
-              
-                  if(this.errorMessage != null){
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                  }
-              }
-      }); 
-  }
-
-  btnNewCiudadano(){
-    if (this.tipoPropiedadSelected == 2) {
-        this.datos.propietariosCiudadanos.push(
-            {'identificacion':this.ciudadano.identificacion,
-            'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
-            'permisoTramite':this.datos.solidario,
-            'propietarioPresente':this.propietarioPresente
-            }   
-        );
+  onRadicado(){
+    if(this.radicado) {
+      this.radicado = false; 
+      this.btnRadicado = 'Preregistro para matricula inicial';
     }else{
-        this.datos.propietariosCiudadanos.push(
-                {'identificacion':this.ciudadano.identificacion,
-                'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
-                'permisoTramite':this.propietario
-            }   
-        );
-        if (this.propietario) {
-            this.propietario = false
-        }
+      this.btnRadicado = 'Preregistro para radicado de cuenta';
+      this.radicado = true; 
     }
-      this.ciudadanoEncontrado=1;
-      this.listaPropietariosCiudadanos=true;
-  }
-  delete(ciudadano:any): void {
-    this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== ciudadano);
-      if (this.datos.propietariosCiudadanos.length === 0) {
-          this.listaPropietariosCiudadanos = false;
-      }
-      if(ciudadano.permisoTramite){
-          this.propietario = true;
-      }
-  }
-  deleteEmpresa(empresa:any): void {
-    this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== empresa);
-    if (this.datos.propietariosEmpresas.length === 0) {
-        this.listaPropietariosEmpresas = false;
-        }
-        if(empresa.permisoTramite){
-            this.propietario = true;
-        }
-    }
-  btnNewEmpresa(){
-    if (this.tipoPropiedadSelected == 2) {
-        this.datos.propietariosEmpresas.push(
-            {'nit':this.empresa.nit,
-            'nombre':this.empresa.nombre,
-            'permisoTramite':this.datos.solidario,
-            'propietarioPresente':this.propietarioPresente
-            }   
-        );
-    }else{
-        this.datos.propietariosEmpresas.push(
-                {'nit':this.empresa.nit,
-                'nombre':this.empresa.nombre,
-                'permisoTramite':this.propietario
-            }   
-        );
-        if (this.propietario) {
-            this.propietario = false
-        }
-      }   
-      this.empresaEncontrada=1;
-      this.listaPropietariosEmpresas=true;
-  }
-  
-  readyCiudadano(isCreado:any){
-      if(isCreado) {
-        this.onKeyCiudadano();
-      }else{
-        this.ciudadanoNew = false; 
-      }
-  }
-
-  readyEmpresa(isCreado:any){
-      if(isCreado) {
-        this.onKeyEmpresa();
-      }else{
-        this.empresaNew = false; 
-      }
   }
 }
