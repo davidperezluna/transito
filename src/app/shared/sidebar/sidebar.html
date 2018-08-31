@@ -474,6 +474,12 @@
         </li>
 
         <li class="nav-item">
+          <a class="nav-link" routerLink="rnaCertificadoTradicionOficial" [ngClass]="{'active' : ( addActive === 'rnaCertificadoTradicionOficial')}" (click)="addActiveMenu('rnaCertificadoTradicionOficial')">
+            <i class="fa fa-angle-right"></i> Certificado de tradición para uso oficial
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link" routerLink="pre-asignacion-placa" [ngClass]="{'active' : ( addActive === 'pre-asignacion-placa')}" (click)="addActiveMenu('pre-asignacion-placa')">
             <i class="fa fa-angle-right"></i> Pre-asignación-placa
           </a>

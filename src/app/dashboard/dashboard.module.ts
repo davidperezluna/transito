@@ -117,6 +117,7 @@ import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegis
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
+import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -234,6 +235,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
 
       MsvInventarioSenialModule,
       MsvSenialModule,
+      RnaCertificadoTradicionOficialModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

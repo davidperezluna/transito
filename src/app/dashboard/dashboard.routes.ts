@@ -117,10 +117,11 @@ import { DashboardComponent } from '.';
 
 import { MsvInventarioSenialRoutes } from './msvInventarioSenial/msvInventarioSenial.routes';
 import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
+import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 
 export const DashboardRoutes: Route[] = [
   {
-    path: 'dashboard',
+    path: 'dashboard', 
     component: DashboardComponent,
     children: [
       ...HomeRoutes,
@@ -223,6 +224,7 @@ export const DashboardRoutes: Route[] = [
       ...InsumoBusquedaRoutes,
       ...MsvInventarioSenialRoutes,
       ...MsvSenialRoutes,
+      ...RnaCertificadoTradicionRoutes
     ]
   }
 ];
