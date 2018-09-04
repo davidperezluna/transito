@@ -14,6 +14,7 @@ export class NewRnrsBlindajeComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -34,7 +35,8 @@ export class NewRnrsBlindajeComponent implements OnInit {
         'empresaBlindadora': null,
         'numeroRunt': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -64,8 +66,9 @@ export class NewRnrsBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
-       this.datos.tramiteFactura =10;
-       this.readyTramite.emit(this.datos);
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnrs-blindaje';
+        this.readyTramite.emit(this.datos);
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

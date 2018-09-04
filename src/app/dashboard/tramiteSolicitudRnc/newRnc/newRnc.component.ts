@@ -22,7 +22,7 @@ export class NewRncComponent implements OnInit {
   public tramiteSolicitud: TramiteSolicitudRnc;
   public errorMessage;
   public respuesta;
-  public tramitesFactura: any;
+  public tramitesFactura: any = null;
   public tramiteFacturaSelected: any;
   public factura: any;
   public numeroFactura: any;

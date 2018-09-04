@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">{{loteInsumo.casoInsumo.nombre}} {{loteInsumo.sedeOperativa.nombre}}</h5>
+            <hr>
+            <table class="table " id="dataTables-example-Sustratos">
+                <thead>
+                  <tr>
+                    <th class="filter">Estado</th>
+                    <th>Insumo</th>
+                    <th class="filter">Numero</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd" *ngFor="let insumo of insumos; let i = index">
+                    <td >{{insumo.estado}}</td>
+                    <td >{{insumo.casoInsumo.nombre}}</td>
+                    <td >{{insumo.numero}}</td>
+                    <td >{{insumo.fecha}}</td>
+                    <td>
+                      <button (click)="deleteInsumo(insumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+                
+        </div>
+    </div>
+</div>

@@ -29,9 +29,10 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     public tipoCambioSelected: any;
     public categorias: string[];
     public datos = {
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
         'categoria': null,
-        'licenciaConduccion': null,
+        'numeroLicenciaConduccion': null,
         'numeroRunt': null,
         'vigencia': null,
         'paisId': null,
@@ -98,7 +99,10 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     enviarTramite() {
         let token = this._LoginService.getToken();
         
-        this.datos.tramiteFactura = 5;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnc-duplicadolicencia';
+
+        this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
         this.datos.claseId = this.claseSelected;
         this.datos.servicioId = this.servicioSelected;
         this.datos.paisId = this.paisSelected;

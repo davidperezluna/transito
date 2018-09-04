@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {Router} from '@angular/router'
+import { Router } from '@angular/router'
 import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
-import {LoginService} from '../../services/login.service';
+import { LoginService } from '../../services/login.service';
 import { MpersonalTipoContratoService } from '../../services/mpersonalTipoContrato.service';
+import { CfgCargoService } from '../../services/cfgCargo.service';
 import { SedeOperativaService } from '../../services/sedeOperativa.service';
 import { MpersonalFuncionario } from './mpersonalFuncionario.modelo';
 import swal from 'sweetalert2';
@@ -21,6 +22,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
 	public formEdit = false;
 	public formIndex = false;
 	public formTime = false;
+	public formShow = false;
   public formSearch = true;
   public table: any = null;
   public funcionario: MpersonalFuncionario;
@@ -29,6 +31,8 @@ export class MpersonalFuncionarioComponent implements OnInit {
   public cargo:any;
   public tiposContrato: any;
   public tipoContratoSelected: any;
+  public cargos: any;
+  public cargoSelected: any;
   public sedesOperativas: any;
   public sedeOperativaSelected: any;
   public datos = {
@@ -42,6 +46,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
   constructor(
     private _FuncionarioService: MpersonalFuncionarioService,
     private _TipoContratoService: MpersonalTipoContratoService,
+    private _CargoService: CfgCargoService,
     private _SedeOperativaService: SedeOperativaService,
     private _loginService: LoginService,
     private router: Router
@@ -56,6 +61,20 @@ export class MpersonalFuncionarioComponent implements OnInit {
         this.errorMessage = <any>error;
 
         if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this._CargoService.select().subscribe(
+      response => {
+        this.cargos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -81,18 +100,33 @@ export class MpersonalFuncionarioComponent implements OnInit {
     this.formNew = true;
     this.formSearch = false;
     this.formTime = false;
+    this.formShow = false;
     this.formIndex = false;
     if(this.table){
       this.table.destroy();
     }
   }
+
   onTime(funcionario:any){
     this.funcionario = funcionario;
     this.formTime = true;
     this.formNew = false;
     this.formSearch = false;
+    this.formShow = false;
     this.formIndex = false;
     if(this.table){
+      this.table.destroy();
+    }
+  }
+
+  onShow(funcionario: any) {
+    this.funcionario = funcionario;
+    this.formShow = true;
+    this.formTime = false;
+    this.formNew = false;
+    this.formSearch = false;
+    this.formIndex = false;
+    if (this.table) {
       this.table.destroy();
     }
   }
@@ -103,30 +137,30 @@ export class MpersonalFuncionarioComponent implements OnInit {
       this.formEdit = false;
       this.formTime = false;
       this.formIndex = false;
+      this.formShow = false;
       this.formSearch = true;
       this.ngOnInit();
     }
   }
   
-  search(){
+  onSearch(){
     this.datos.nombre = this.nombre;
     this.datos.identificacion = this.identificacion;
-    this.datos.cargo = this.cargo;
+    this.datos.cargo = this.cargoSelected;
     this.datos.tipoContratoId = this.tipoContratoSelected;
     this.datos.sedeOperativaId = this.sedeOperativaSelected;
     
     let token = this._loginService.getToken();
 		this._FuncionarioService.searchByParametros(this.datos,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.funcionarios = response.data;
           this.iniciarTabla();
           this.formIndex = true;
 
           swal({
             title: 'Perfecto',
-            text: "¡Funcionarios encontrados!",
+            text: response.message,
             type: 'info',
             showCloseButton: true,
             focusConfirm: false,
@@ -140,7 +174,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
         }else{
           swal({
             title: 'Alerta',
-            text: "¡No existen funcionarios, por favor registrelo y vuelva vincularse!",
+            text: response.message,
             type: 'warning',
             showCancelButton: true,
             focusConfirm: true,
@@ -225,7 +259,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
     })
   }
 
-  edit(funcionario:any){
+  onEdit(funcionario:any){
     this.funcionario = funcionario;
     this.formEdit = true;
     this.formSearch = false;

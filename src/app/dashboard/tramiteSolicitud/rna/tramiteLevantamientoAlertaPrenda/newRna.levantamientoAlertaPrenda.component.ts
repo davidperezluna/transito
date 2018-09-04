@@ -26,7 +26,6 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() banco: any = null;
     @Input() factura: any = null;
-    @Input() tramitesFactura: any = null;
 
     public placa: CfgPlaca = null;;
     public errorMessage;
@@ -81,7 +80,8 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         'acreedoresCiudadanos': [],
         'tipoAlerta': [],
         'gradoAlerta': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
         'vehiculoPlaca': null,
     };
     public tipoIdentificaciones = [];
@@ -165,7 +165,8 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.tramiteFactura = 45;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-levantamientoalertaprenda';
                
         this._VehiculoAcreedorService.deleteAcreedor(this.datos, token).subscribe(
             response => {

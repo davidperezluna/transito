@@ -56,7 +56,7 @@ export class NewRnrsComponent implements OnInit {
   public cantidadSustrato = 1;
   public datos = {
     'moduloId': null,
-    'id': null,
+    'facturaId': null,
     'vehiculoId': null,
   };
 constructor(
@@ -71,17 +71,13 @@ constructor(
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null,null);
-    
-    
   }
   onCancelar(){
     this.ready.emit(true);
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
-
 		this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
         this.respuesta = response;
@@ -102,19 +98,18 @@ constructor(
           })
         }
 			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
 		});
   }
 
   changedFactura(id){
     if (id) {
-      this.datos.id = id;
+      this.datos.facturaId = id;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(

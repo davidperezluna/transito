@@ -1,29 +1,26 @@
+<hr>
 <div class="container" >
-  <div  class="row align-items-center justify-content-between">
-    <div class="col-11 col-sm-12 page-title">
-      <h3>Marca</h3>
-      <p>aquí podrás visualizar las marcas inscritas e inscribir nuevas</p>
-    </div>
-    <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-      </div>
-    </div>
-    
-  </div>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Marcas <small>Registradas</small></h5>
+            <h5 class="card-title">
+              Marcas <small>Registradas</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-success btn-round">
+                  <span class="text">Nuevo</span>
+                  <i class="ti-save ml-2"></i>
+                </button>
+              </div>
+            </h5>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nombre</th>
-                  <th>Código Mt</th>
+                  <th class="filter">Nombre</th>
+                  <th class="filter">Código Mt</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -32,8 +29,8 @@
                   <td >{{marca.id}}</td>
                   <td >{{marca.nombre}}</td>
                   <td >{{marca.codigoMt}}</td>
-                  <td><button (click)="editMarca(marca)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteMarca(marca.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
+                  <td><button (click)="editMarca(marca)" class="btn btn-info" type="button">Editar</button> 
+                    <button (click)="deleteMarca(marca.id)"  class="btn btn-danger" type="button">Eliminar  </button> </td>
                 </tr>
               </tbody>
             </table>

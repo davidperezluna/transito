@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {TramitePrecioService} from '../../services/tramitePrecio.service';
 import {LoginService} from '../../services/login.service';
 import {TramitePrecio} from './tramitePrecio.modelo';
+import { CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
 // declare var fechaActual: any;

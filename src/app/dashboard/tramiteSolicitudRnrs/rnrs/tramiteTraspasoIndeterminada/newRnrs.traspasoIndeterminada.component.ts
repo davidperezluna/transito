@@ -58,6 +58,8 @@ export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
       'tipoDocApoderado': null,
       'nombreApoderado': null,
       'numeroDocumento': null,
+      'tramiteFormulario': null,
+      'facturaId': null,
       'solicitanteId': null,
       'personaTraslado': null};
       
@@ -107,11 +109,10 @@ export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
 
   onEnviar(){
     let token = this._loginService.getToken();       
-      this.datos.tramiteFactura =7;
+    this.datos.facturaId = this.factura.id;
+    this.datos.tramiteFormulario = 'rnrs-trapasoindeterminada';
       this.readyTramite.emit(this.datos);
       this.datos.personaTraslado = this.sinRegistro;
-      console.log(this.datos.solicitanteId);
-      console.log(this.datos.vehiculoId);
       
       this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token,this.datos).subscribe(
         response => {

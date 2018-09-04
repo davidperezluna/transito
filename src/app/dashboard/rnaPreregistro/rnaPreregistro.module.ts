@@ -10,13 +10,16 @@ import { CfgModalidadTransporteService } from '../../services/cfgModalidadTransp
 
 import { NewRnaPreregistroComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
+import { NewCiudadanoComponent } from './newCiudadano/newCiudadano.component';
+import { NewEmpresaComponent } from './newEmpresa/newEmpresa.component';
+
 import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, ChartsModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [RnaPreregistroComponent,NewRnaPreregistroComponent,EditComponent],
-    exports: [RnaPreregistroComponent, NewRnaPreregistroComponent,EditComponent],
+    declarations: [RnaPreregistroComponent,NewRnaPreregistroComponent,EditComponent,NewCiudadanoComponent,NewEmpresaComponent],
+    exports: [RnaPreregistroComponent, NewRnaPreregistroComponent,EditComponent,NewCiudadanoComponent,NewEmpresaComponent],
     providers:[RnaPreregistroService,CarroceriaService,CfgRadioAccionService,CfgModalidadTransporteService]
-})
+}) 
 
 export class RnaPreregistroModule { }

@@ -38,6 +38,7 @@ constructor(
 
   ngOnInit() {
     this.date = new Date();
+    this.correoCertificadoEnvio = 'false';
   }
 
   onCancelar(){

@@ -13,6 +13,7 @@ import swal from 'sweetalert2';
 export class NewRnaCambioMotorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -43,7 +44,8 @@ export class NewRnaCambioMotorComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -96,7 +98,8 @@ export class NewRnaCambioMotorComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
-        this.datos.tramiteFactura =21;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-cambiomotor';
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

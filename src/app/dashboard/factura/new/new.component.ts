@@ -9,7 +9,7 @@ import { MpersonalFuncionarioService } from '../../../services/mpersonalFunciona
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { ModuloService } from '../../../services/modulo.service';
 import { TramitePrecioService } from '../../../services/tramitePrecio.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, CurrencyPipe  } from '@angular/common';
 import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import swal from 'sweetalert2';
 import { environment } from 'environments/environment'
@@ -132,10 +132,10 @@ constructor(
     let token = this._loginService.getToken();
     
     this._FuncionarioService.searchLogin(identity,token).subscribe(
-      response => {
+      response => { 
         if(response.status == 'success'){
           this.sedeOperativa = response.data.sedeOperativa;
-          this.funcionario = true;
+          this.funcionario = true; 
           this.factura.numero = datePiper.transform(this.date,'hmss');
           this.factura.fechaCreacion = datePiper.transform(this.date,'yyyy-MM-dd');
           this.factura.sedeOperativaId = this.sedeOperativa.id;
@@ -279,8 +279,8 @@ constructor(
             confirmButtonText: 'Aceptar'
           })
         }
+        
         if(response.code == 401){
-          
           this.msj = 'vehiculo no se encuentra en la base de datos';
           this.isErrorVehiculo = true;
           this.isExistVehiculo = false;
@@ -297,7 +297,7 @@ constructor(
     });
   }
 
-  changedModulo(e){
+  onChangedModulo(e){
     if (e) {
       let token = this._loginService.getToken();
 
@@ -340,7 +340,7 @@ constructor(
         this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
           response => {
             this.tramitePrecio = response.data;
-            if (this.tramitePrecio.tramite.id == 8) {
+            if (this.tramitePrecio.tramite.formulario == 'rna-matriculainicial') {
               this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
               this.tramitesValor.push(
                 {

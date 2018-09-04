@@ -1,7 +1,7 @@
 <hr>
 <div class="row">
     <div class="col-xs-12 col-lg-12">
-        <div class="card">
+        <div class="card"><!-- .card -->
             <div class="card-header">
                 <h5 class="text-uppercase">Registro de personal - Asignación de horarios</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
@@ -123,6 +123,40 @@
                     </div>
                 </form>
             </div>
+        </div><!-- /.card -->
+    </div>
+</div>
+
+<div class="row" *ngIf="horarios && horarios.length > 0">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <!-- .card -->
+            <div class="card-header">
+                <h5 class="text-uppercase">Horarios actuales</h5>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Jornada</th>
+                            <th>Día</th>
+                            <th>Hora Inicial</th>
+                            <th>Hora Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let horario of horarios; let i = index">
+                            <td>{{ horario.id }}</td>
+                            <td>{{ horario.jornada }}</td>
+                            <td>{{ horario.dia }}</td>
+                            <td>{{ horario.horaInicio }}</td>
+                            <td>{{ horario.horaFin }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <!-- /.card -->
     </div>
 </div>

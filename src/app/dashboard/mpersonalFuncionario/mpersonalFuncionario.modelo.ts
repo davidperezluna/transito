@@ -1,6 +1,5 @@
 export class MpersonalFuncionario{
 	constructor(
-		public cargo: string,
 		public actaPosesion: string,
 		public resolucion: string,
 		public tipoNombramiento: string,
@@ -11,9 +10,10 @@ export class MpersonalFuncionario{
 		public novedad: string,
 		public activo: string,
 		public inhabilidad: string,
+		public identificacion: number,
 		public sedeOperativaId: number,
 		public tipoContratoId: number,
-		public identificacion: number,
+		public cargoId: number,
 		public id:number
 	){}
 }

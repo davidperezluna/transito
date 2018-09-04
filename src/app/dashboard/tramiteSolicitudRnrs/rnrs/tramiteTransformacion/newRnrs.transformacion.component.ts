@@ -17,6 +17,7 @@ export class NewRnrsTransformacionComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null; 
     public errorMessage;
     public respuesta;
     public datos: any;
@@ -39,7 +40,8 @@ export class NewRnrsTransformacionComponent implements OnInit {
             'fechaFactura': null,
             'tipoDocumentoSoporte': null,
             'numeroFactura': null,
-            'tramiteFactura': null,
+            'tramiteFormulario': null,
+            'facturaId': null,
             'idVehiculo': null,
         };
     }
@@ -50,7 +52,8 @@ export class NewRnrsTransformacionComponent implements OnInit {
         this._RemolqueService.transformacionVehiculoRemolque(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.datos.tramiteFactura = 10;
+                    this.datos.facturaId = this.factura.id;
+                    this.datos.tramiteFormulario = 'rnrs-transformacion';
                     this.readyTramite.emit(this.datos);
                     this.ngOnInit();
                 }

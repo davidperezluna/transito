@@ -124,7 +124,6 @@ constructor(
   }
 
   changedModulo(e){
-
     if (e) {
       this._tramiteService.getTramitePorModuloSelect(this.moduloSelected).subscribe(
         response => {

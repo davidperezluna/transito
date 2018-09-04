@@ -60,7 +60,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         'vehiculo': null,
         'sustrato': null,
         'numeroLicencia': null,
-        'tramiteFactura': null, 
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -98,9 +99,10 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         this.datos.vehiculo = this.vehiculo.placa;
         this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
         let token = this._loginService.getToken(); 
+        
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.tramiteFactura = 8;
+                //this.datos.tramiteFactura = 8;
                 this.readyTramite.emit(this.datos);
             },
             error => {
@@ -156,7 +158,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
                     this.apoderadoSelected = this.respuesta.data;
-                    this.apoderadoEncontrado= 2;
+                    this.datos.facturaId = this.factura.id;
+                    this.datos.tramiteFormulario = 'rna-matriculainicial';
                     // this.ciudadanoNew = false;
             }else{
                 this.apoderadoEncontrado=3;
@@ -223,7 +226,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 this.propietario = false
             }
         }
-        console.log(this.datos.propietariosCiudadanos);
+
         this.ciudadanoEncontrado=1;
         this.listaPropietariosCiudadanos=true;
     }

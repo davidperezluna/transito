@@ -58,7 +58,7 @@ export class MarcaComponent implements OnInit {
   }
   iniciarTabla(){
     // Setup - add a text input to each footer cell
-    $('#dataTables-example thead th').each( function () {
+    $('#dataTables-example thead th.filter').each( function () {
       var title = $(this).text();
       $(this).html( '<input type="text" class="form-control" placeholder="'+title+'" />' );
     } );

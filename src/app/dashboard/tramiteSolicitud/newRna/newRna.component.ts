@@ -23,7 +23,7 @@ export class NewRnaComponent implements OnInit {
   public vehiculo: Vehiculo;
   public errorMessage;
   public respuesta;
-  public tramitesFactura: any;
+  public tramitesFactura: any = null;
   public tramiteFacturaSelected: any;
   public facturaSelected: any;
   public facturas: any;
@@ -57,7 +57,7 @@ export class NewRnaComponent implements OnInit {
   public moduloId = 1;
   public datos = {
     'moduloId': null,
-    'id': null,
+    'facturaId': null,
     'vehiculoId': null,
   };
 constructor(
@@ -72,8 +72,6 @@ constructor(
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null,null);
-    
-    
   }
   onCancelar(){
     this.ready.emit(true);
@@ -113,11 +111,12 @@ constructor(
 		});
   }
 
-  changedFactura(id){
+  onSearchFactura(id){
     if (id) {
-      this.datos.id = id;
+      this.datos.facturaId = id;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
+
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
       response => {
         this.isMatricula=false;
@@ -132,10 +131,12 @@ constructor(
             //consultar tramite solicitud con el id de tramite factura
             //hacer un push array para extraer todas las solicitudes en estado realizado
           }
+          
           if (tramiteFactura.tramitePrecio.tramite.sustrato) {
             this.sustrato = true;
           }
-          if(tramiteFactura.tramitePrecio.tramite.id == 1){
+
+          if (tramiteFactura.tramitePrecio.tramite.formulario == 'rna-matriculainicial'){
             this.isMatricula = true;
           }else{
             this.isMatricula = false;
@@ -145,12 +146,12 @@ constructor(
         if (active) {
           this.isTramites = false;
         }
+
         if (this.tramiteSolicitud.solicitanteId) {
           this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
             responseCiudadano =>{
               if (responseCiudadano.status == 'success') {
                 this.ciudadano = responseCiudadano.data.ciudadano;
-                console.log(response);
                 this.factura = response[0].factura;
               }
               error => {
@@ -162,9 +163,7 @@ constructor(
               }
             }
           );
-        }else{
-          console.log(this.isMatricula);
-          
+        }else{          
           if(this.isMatricula){
             this.factura = response[0].factura;
           }else{
@@ -309,11 +308,7 @@ constructor(
   }
 
   readyTramite(datos:any){
-    this.tramitesFactura.forEach(tramiteFactura => {
-      if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {
-        this.tramiteSolicitud.tramiteFacturaId = tramiteFactura.id;
-      }
-    });
+    
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
     this.tramiteSolicitud.ciudadanoId=this.apoderado.id;
@@ -331,7 +326,7 @@ constructor(
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
-          this.changedFactura(this.factura.id)
+          this.onSearchFactura(this.factura.id)
         } else {
           swal({
             title: 'Error!',

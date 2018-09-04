@@ -1,0 +1,65 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Certificado de Tradición para uso oficial
+                </h5>
+                <hr>
+                <form #certificadoTradicionForm="ngForm" class="container">
+                    <div class="row justify-content-center container">
+                        <div #forma1 class="container"> 
+                            <!--caja de texto-->
+                            <div class="input-group col-xs-12 col-md-12" >
+                                <input class="form-control" placeholder="Nro. de Placa" [(ngModel)]="placa" name="nroRunt" type="text" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                                <a (click)="ngAbrirInput()" class="btn btn-success" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    Generación masiva 
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </form>
+                <div class="ustify-content-center container col-xs-12 col-lg-12" *ngIf="vehiculo">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>Placa:</b>
+                                        {{vehiculo.placa?.numero}}
+                                    </td>
+                                    <td>
+                                        <b>Chasis:</b>
+                                        {{vehiculo.chasis}}
+                                    </td>
+                                    <td>
+                                        <b>Serie:</b>
+                                        {{vehiculo.serie}}
+                                    </td>
+                                    <td>
+                                        <a href="{{ apiUrl }}/pdf/certificadoTradicion/{{placa}}" class="btn btn-success" target="_blank">
+                                            <i class="fa fa-file-pdf-o"></i>
+                                            Generar 
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody> 
+                        </table> 
+                    </div>
+            </div>
+            <div class="card-footer"> 
+                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right"  [disabled]="certificadoTradicionForm.invalid" >Enviar</button>
+            </div>
+        </div>
+    </div> 
+    <!-- /.col -->
+</div>
+<!-- /.row -->

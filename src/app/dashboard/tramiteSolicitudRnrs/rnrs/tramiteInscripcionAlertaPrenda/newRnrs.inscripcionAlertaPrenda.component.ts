@@ -78,7 +78,8 @@ export class NewRnrsTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'acreedoresCiudadanos': [],
         'tipoAlerta': [],
         'gradoAlerta': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
         'vehiculoPlaca': null,
     };
     public datos2 = {
@@ -166,7 +167,8 @@ export class NewRnrsTramiteInscripcionAlertaPrendaComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.tramiteFactura = 46;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rnrs-insscripcionprenda';
                
         this._VehiculoAcreedorService.register(this.datos, token).subscribe(
             response => {

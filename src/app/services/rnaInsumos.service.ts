@@ -33,6 +33,15 @@ export class RnaInsumoService {
 		);
 	}
 
+	showLote(loteInsumoId,token){
+		let json = JSON.stringify(loteInsumoId);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/show/loteInsumo", params, {headers: headers}).map(
+			res => res.json(),
+		);
+	}
+
 	delete(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

@@ -8,11 +8,35 @@
             </div>
         <div class="card-body">
             <form #formNew="ngForm">
-                <div class="form-group row">
+                <div class="btn-group-vertical" data-toggle="buttons">
+                    <button (click)="onRadicado() "type="button" class="btn btn-primary" aria-pressed="true">{{btnRadicado}}</button>
+                </div>
+                <br>
+                <br>
+                <div class="form-group row" *ngIf='radicado'>
+                    <div class="col-lg-6">
+                        <label>Placa*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
+                    </div> 
                     <div class="col-lg-6">
                         <label>No Factura de compra*</label>
                         <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div> 
+                    <div class="col-lg-6">
+                        <label>Fecha Factura*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
                     </div>
+                    <div class="col-lg-6">
+                        <label>Valor</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.valor" type="text"  name="valor" required>
+                    </div>
+                </div>
+
+                <div class="form-group row" *ngIf='!radicado'>
+                    <div class="col-lg-6">
+                        <label>No Factura de compra*</label>
+                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                    </div> 
                     <div class="col-lg-3">
                         <label>Fecha Factura*</label>
                         <input class="form-control" placeholder="" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
@@ -22,6 +46,7 @@
                         <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.valor" name="valor" required>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <div class="col-lg-3">
                         <label>Marca*</label>
@@ -177,10 +202,10 @@
                 </div>
             </form>
         </div>
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-primary">Enviar</button>
-            </div>    
+        <div class="card-footer">
+            <button (click)="onCancelar()" class="btn btn-secondary">Cancelar</button>
+            <button (click)="onEnviar()" class="btn btn-primary">Enviar</button>
+        </div>    
         </div>
     </div>
 </div>

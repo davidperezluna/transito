@@ -21,7 +21,7 @@ export class RnaLoteInsumoService {
 
 	indexInsumo(){
 		return this._http.get(this.url+"/insumo").map(res => res.json());
-	}
+	} 
 
 	register(smlmv,token){
 		let json = JSON.stringify(smlmv);
@@ -42,13 +42,21 @@ export class RnaLoteInsumoService {
 			this._loogerService.registerLog(token,'INSERT',json,this.url)
 		);
 	}
+
+	showSedeOperativaInsumo(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/insumo/lote/sedeOperativa", params, {headers: headers}).map(
+			res => res.json()
+		);
+	}
 	showInsumo(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/insumo/lote/insumo", params, {headers: headers}).map(
-			res => res.json(), 
-			this._loogerService.registerLog(token,'INSERT',json,this.url)
+			res => res.json()
 		);
 	}
 

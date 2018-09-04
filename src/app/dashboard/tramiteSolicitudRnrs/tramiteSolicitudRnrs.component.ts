@@ -19,7 +19,7 @@ export class TramiteSolicitudRnrsComponent implements OnInit {
   public formIndex = true;
   public table: any;
   public tramiteSolicitud: TramiteSolicitud;
-  public moduloId = 5;
+  public moduloId = 4;
 
   constructor(
     private _TramiteSolicitudService: TramiteSolicitudService,

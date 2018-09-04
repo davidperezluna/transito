@@ -60,7 +60,8 @@ export class NewRnrsTraspasoComponent implements OnInit {
         'vehiculo': null,
         'sustrato': null,
         'numeroLicencia': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -100,7 +101,8 @@ export class NewRnrsTraspasoComponent implements OnInit {
         let token = this._loginService.getToken(); 
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.tramiteFactura = 6;
+                this.datos.facturaId = this.factura.id;
+                this.datos.tramiteFormulario = 'rnrs-traspaso';
                 this.readyTramite.emit(this.datos);
             },
             error => {

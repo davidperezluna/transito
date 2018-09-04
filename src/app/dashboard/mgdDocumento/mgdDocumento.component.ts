@@ -109,6 +109,7 @@ export class MgdDocumentoComponent implements OnInit {
       this.formPrint = false;
       this.formEdit = false;
       this.formShow = false;
+      this.formIndex = false;
       this.ngOnInit();
     }
   }
@@ -120,6 +121,7 @@ export class MgdDocumentoComponent implements OnInit {
       this.formNew = false;
       this.formEdit = false;
       this.formShow = false;
+      this.formIndex = false;
       this.ngOnInit();
     }
   }

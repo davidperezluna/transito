@@ -20,6 +20,7 @@ import swal from 'sweetalert2';
 export class NewRnmaPreregistroComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Output() cancelarTramite = new EventEmitter<any>();
+@Input() factura: any = null;
 public vehiculo: Vehiculo;
 public municipios:any;
 public errorMessage:any;
@@ -44,7 +45,8 @@ public respuesta:any;
 public sedesOperativas:any;
 public datos = {
   'numeroMotor': null,
-  'tramiteFactura': null,
+  'tramiteFormulario': null,
+  'facturaId': null,
 };
 
 constructor(
@@ -204,7 +206,8 @@ constructor(
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.datos.numeroMotor = this.vehiculo.motor;
-          this.datos.tramiteFactura =12;
+          this.datos.facturaId = this.factura.id;
+          this.datos.tramiteFormulario = 'rnma-preregistro';
           this.readyTramite.emit(this.datos);
         }else{
           swal({

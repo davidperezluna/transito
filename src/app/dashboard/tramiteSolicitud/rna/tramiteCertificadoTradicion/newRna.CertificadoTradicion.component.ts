@@ -17,6 +17,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public apiUrl = environment.apiUrl + 'default';
     public errorMessage;
     public respuesta;
@@ -42,7 +43,8 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         'observacion': null,                  
         'certificadoEntregada': null,
         'entregado': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -62,7 +64,8 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     enviarTramite() {
         let token = this._loginService.getToken();
       
-        this.datos.tramiteFactura =30;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-certificadotradicion';
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;
         this.readyTramite.emit(this.datos);

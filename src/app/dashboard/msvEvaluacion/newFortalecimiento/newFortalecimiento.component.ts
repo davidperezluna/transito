@@ -4,7 +4,7 @@ import { MsvParametroService } from '../../../services/msvParametro.service';
 import { MsvVariableService } from '../../../services/msvVariable.service';
 import { MsvCalificacionService } from '../../../services/msvCalificacion.service';
 import swal from 'sweetalert2';
-import { tokenKey } from '../../../../../node_modules/@angular/core/src/view/util';
+import { tokenKey } from '@angular/core/src/view/util';
 declare var $: any;
 
 @Component({
@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class NewFortalecimientoComponent implements OnInit {
   @Input() msvCategoriaId;
-  @Input() empresa;
+  @Input() miEmpresa: any = null;
   public msj = '';
   public showT = false;
   public msvParametros;
@@ -23,7 +23,7 @@ export class NewFortalecimientoComponent implements OnInit {
   public criterio;
   public aplica;
   public evidencia;
-  public datos: any = [];
+  public datos: any = []; 
 
   constructor(
     private _loginService: LoginService,
@@ -35,15 +35,12 @@ export class NewFortalecimientoComponent implements OnInit {
 
   ngOnInit() {
     
-    let token = this._loginService.getToken();
-    console.log(this.empresa);
+    let token = this._loginService.getToken();    
     this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
       response => {
         this.msvParametros = response.data;
         if (this.msvParametros) {
-          //entra aquí si encuentra Parametro   
-          console.log(this.msvParametros);
-                 
+          //entra aquí si encuentra Parametro                    
           this.showT = true;
       } else {
           swal({
@@ -60,7 +57,7 @@ export class NewFortalecimientoComponent implements OnInit {
   onEnviar() {
     console.log(this.msvParametros);
     let token = this._loginService.getToken();
-    this._MsvCalificacionService.editCalificacion(token,this.msvParametros).subscribe();
+    this._MsvCalificacionService.newCalificacion(token,this.msvParametros,this.miEmpresa.id).subscribe();
     
   }
 }

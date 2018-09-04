@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Número de Licencia <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia" type="text" required />
+                            <input class="form-control" [(ngModel)]="solicitante.identificacion" name="numeroLicencia" type="text" required readonly />
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Número RUNT <b class="text-danger">*</b></label>
@@ -69,8 +69,7 @@
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+                <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
             </div>
         </div>
     </div>

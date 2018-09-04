@@ -2,11 +2,8 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { Vehiculo } from '../vehiculo/vehiculo.modelo';
 import { LoginService } from '../../services/login.service';
 import { VehiculoService } from '../../services/vehiculo.service';
+import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.service';
 import swal from 'sweetalert2';
-import { Factura } from '../factura/factura.modelo';
-import { error } from 'selenium-webdriver';
-import { forEach } from '@angular/router/src/utils/collection';
-import { Response } from '@angular/http/src/static_response';
 
 @Component({
   selector: 'app-buscar-automotor',
@@ -22,7 +19,7 @@ export class buscarAutomotorComponent implements OnInit {
   public error=false;
   public msj='';
   public vehiculoSuccess = false;
-  public showV:any;
+  public formShow:any;
   public vehiculos: any;
   public datos = {
     'numeroPlaca': null,
@@ -37,6 +34,7 @@ export class buscarAutomotorComponent implements OnInit {
 constructor(
   private _loginService: LoginService,
   private _VehiculoService: VehiculoService,
+  private _ciudadanoVehiculoService: CiudadanoVehiculoService,
 ){}
 
   ngOnInit() {
@@ -48,7 +46,7 @@ constructor(
   }
   
   onKeyValidateVehiculo(){
-    this.showV = false;
+    this.formShow = false;
     this.msj = '';
     this.mensaje = '';
     swal({
@@ -101,13 +99,12 @@ constructor(
             });
   }
 
-  showVehiculo(vehiculo:any){
+  onShowVehiculo(vehiculo:any){
     this.vehiculo = vehiculo;
-    this.showV = true;
-
+    this.formShow = true;
   }
 
   cerrarForm(isForm:any){
-    this.showV = isForm;
+    this.formShow = isForm;
   }
 }

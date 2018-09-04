@@ -7,7 +7,7 @@
           <div class="card-header">
             <h5 class="card-title"><small>Solicitudes de tramite</small>
               <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-outline-success btn-round " data-target="#themepicker" data-toggle="modal">
+                <button (click)="onNew()" class="btn btn-success btn-round">
                   <span class="text">Nuevo</span>
                   <i class="ti-save ml-2"></i>
                 </button>
@@ -27,18 +27,16 @@
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
-                  <td >{{ tramiteSolicitud.id }}</td>
-                  <td >{{ tramiteSolicitud.tramiteFactura.factura.numero }}</td>
-                  <td >{{ tramiteSolicitud.tramiteFactura.tramitePrecio.nombre }}</td>
-                  <td >
-                    {{ tramiteSolicitud.datos }}
-                  </td>
+                  <td>{{ tramiteSolicitud.id }}</td>
+                  <td>{{ tramiteSolicitud.tramiteFactura.factura.numero }}</td>
+                  <td>{{ tramiteSolicitud.tramiteFactura.tramitePrecio.tramite.nombre }}</td>
+                  <td>{{ tramiteSolicitud.datos }}</td>
                   <td>
-                    <button (click)="editTramiteSolicitud(tramiteSolicitud)" class="btn btn-outline-info" type="button">
+                    <button (click)="editTramiteSolicitud(tramiteSolicitud)" class="btn btn-info" type="button">
                       <i class="fa fa-pencil"></i>
                       Editar
                     </button> 
-                    <button (click)="deleteTramiteSolicitud(tramiteSolicitud.id)"  class="btn btn-outline-danger" type="button">
+                    <button (click)="deleteTramiteSolicitud(tramiteSolicitud.id)"  class="btn btn-danger" type="button">
                       <i class="fa fa-trash"></i>
                       Eliminar
                     </button> 

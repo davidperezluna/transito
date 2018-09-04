@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 export class NewRnaCambioPlacaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -25,7 +26,8 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         'nuevaPlaca': null,
         'documentacion': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -42,7 +44,8 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.nuevaPlaca = this.nuevaPlaca;
         this.datos.documentacion = this.documentacion;
-        this.datos.tramiteFactura =17;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-cambioplaca';
         this.readyTramite.emit(this.datos);
     }
     onCancelar(){

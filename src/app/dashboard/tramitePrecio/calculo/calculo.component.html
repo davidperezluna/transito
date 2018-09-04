@@ -19,14 +19,14 @@
                         <tbody>
                             <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecios; let i = index">
                                 <td>{{tramitePrecio.nombre}}</td>
-                                <td>{{tramitePrecio.valor}}</td>
+                                <td>{{ tramitePrecio.valor | currency: 'COP' }}</td>
                                 <td>
                                     <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicio" name="fechaInicio" placeholder=""
                                     type="date" required>
                                 </td>
                                 <td><input class="form-control" [(ngModel)]="tramitePrecio.valorNuevo" name="valorNuevo" placeholder="" type="number" required></td>
-                                <td tooltip content="{{tramitePrecio.conceptos}}">{{tramitePrecio.valorConcepto}}</td>
-                                <td>{{tramitePrecio.valorTotal}}</td>
+                                <td tooltip content="{{tramitePrecio.conceptos}}">{{ tramitePrecio.valorConcepto | currency: 'COP' }}</td>
+                                <td>{{ tramitePrecio.valorTotal | currency: 'COP' }}</td>
                                 <td>
                                     <button (click)="delete(tramitePrecio.id)"  class="btn btn-danger" type="button">Eliminar  </button> 
                                 </td>

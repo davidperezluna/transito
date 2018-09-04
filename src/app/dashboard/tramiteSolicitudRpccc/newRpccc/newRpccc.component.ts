@@ -165,7 +165,6 @@ constructor(
     this._TramiteSolicitudRpcccService.register(this.tramiteSolicitud, token).subscribe(
       response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if (this.respuesta.status == 'success') {
           swal({
             title: 'Perfecto!',

@@ -81,14 +81,14 @@
                         <input class="form-control" [(ngModel)]="datos.presion" name="presion" type="text" required/>
                     </div>
                     <div class="col-xs-6 col-lg-6">
-                        <label>Número RUNT</label>
+                        <label>Número solicitud RUNT</label>
                         <input class="form-control" [(ngModel)]="datos.numeroRUNT" name="numeroRUNT" type="text" required/>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="enviarTramite()" class="btn btn-success">Enviar</button>
             </div>
         </div>
     </div><!-- /.col -->

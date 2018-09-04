@@ -30,9 +30,7 @@
                   <td >{{ tramiteSolicitud.id }}</td>
                   <td >{{ tramiteSolicitud.tramiteFactura.factura.numero }}</td>
                   <td >{{ tramiteSolicitud.tramiteFactura.tramitePrecio.nombre }}</td>
-                  <td >
-                    {{ tramiteSolicitud.datos }}
-                  </td>
+                  <td >{{ tramiteSolicitud.datos }}</td>
                   <td>
                     <button (click)="editTramiteSolicitud(tramiteSolicitud)" class="btn btn-outline-info" type="button">
                       <i class="fa fa-pencil"></i>

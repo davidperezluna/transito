@@ -14,6 +14,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -38,7 +39,8 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         'fechaEchos':null,
         'recuperarMotor':null,         
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -78,7 +80,8 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         this.vehiculo.claseId = this.vehiculo.clase.id   
         this.vehiculo.servicioId = this.vehiculo.servicio.id 
         this.vehiculo.cancelado=true
-        this.datos.tramiteFactura =14;
+        this.datos.facturaId = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-cancelacionmatricula';
         let token = this._loginService.getToken();
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
         response => {

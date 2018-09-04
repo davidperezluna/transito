@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
         <div class="card-body">
-            <h5 class="m-0">formulario para el editar una linea</h5>
+            <h5 class="m-0">Editar una linea</h5>
             <hr> 
             <div class="row justify-content-center">
                 <div class="col-md-10 ">
@@ -38,8 +38,8 @@
                 </ng-select>  -->
         </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" [disabled]="editForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="onEnviar()" [disabled]="editForm.invalid" class="btn btn-primary" type="button">Enviar</button>
             </div>    
         </div>
     </div>

@@ -1,0 +1,140 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Datos de personal</h5>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div *ngIf='!formConfirm'>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo identificación: <strong>{{ funcionario.ciudadano.usuario.tipoIdentificacion.nombre }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Identificación: <strong>{{ funcionario.ciudadano.usuario.tipoIdentificacion.nombre }}</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Primer nombre
+                                    <strong>{{ funcionario.ciudadano.usuario.primerNombre }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Segundo nombre
+                                    <strong>{{ funcionario.ciudadano.usuario.segundoNombre }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Primer apellido <strong>{{ funcionario.ciudadano.usuario.primerApellido }}</strong></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Segundo apellido <strong>{{ funcionario.ciudadano.usuario.segundoApellido }}</strong></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo Contrato
+                                    <strong>{{ funcionario.tipoContrato.nombre }}</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf='funcionario.tipoContrato.id == 1'>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Acta de posesion </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Resolución </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Tipo nombramiento </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf='funcionario.tipoContrato.id == 2'>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha inicio </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha fin </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Numero de contrato </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf='funcionario.tipoContrato.id == 3'>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha inicio </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha fin </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Numero de placa </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Sede operativa: <strong>{{ funcionario.sedeOperativa.nombre }}</strong>
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Cargo: <strong>{{ funcionario.cargo.nombre }}</strong></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="btn-group">
+                                <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                                    <i class="fa fa-times"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-6" *ngIf="horarios && horarios.length > 0">
+        <div class="col-xs-12 col-lg-12">
+            <div class="card"><!-- .card -->
+                <div class="card-header">
+                    <h5 class="text-uppercase">Horarios actuales</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Jornada</th>
+                                <th>Día</th>
+                                <th>Hora Inicial</th>
+                                <th>Hora Final</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let horario of horarios; let i = index">
+                                <td>{{ horario.id }}</td>
+                                <td>{{ horario.jornada }}</td>
+                                <td>{{ horario.dia }}</td>
+                                <td>{{ horario.horaInicio }}</td>
+                                <td>{{ horario.horaFin }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- /.card -->
+        </div>
+    </div>
+</div>

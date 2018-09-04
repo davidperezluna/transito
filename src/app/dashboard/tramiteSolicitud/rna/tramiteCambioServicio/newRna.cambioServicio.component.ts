@@ -7,6 +7,7 @@ import { ServicioService } from '../../../../services/servicio.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
+import { Factura } from 'app/dashboard/factura/factura.modelo';
 
 @Component({
     selector: 'appRna-cambio-servicio',
@@ -16,6 +17,7 @@ export class NewRnaCambioServicioComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public servicios: any;
@@ -25,7 +27,8 @@ export class NewRnaCambioServicioComponent implements OnInit {
         'newData': null,
         'oldData': null,
         'sustrato': null,
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
     };
 
     constructor(
@@ -69,7 +72,8 @@ export class NewRnaCambioServicioComponent implements OnInit {
                     this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
                     this.vehiculo.claseId = this.vehiculo.clase.id   
                     this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this.datos.tramiteFactura =16;
+                    this.datos.facturaId = this.factura.id;
+                    this.datos.tramiteFormulario = 'rna-cambioservicio';
                     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
                     response => {
                         this.respuesta = response; 
