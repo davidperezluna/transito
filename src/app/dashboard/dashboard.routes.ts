@@ -59,6 +59,7 @@ import { MparqEntradaRoutes } from './mparqEntrada/mparqEntrada.routes';
 import { MparqSalidaRoutes } from './mparqSalida/mparqSalida.routes';
 import { MparqPatioRoutes } from './mparqPatio/mparqPatio.routes';
 
+import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
 import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
 import { MpersonalTalonarioRoutes } from './mpersonalTalonario/mpersonalTalonario.routes';
@@ -112,13 +113,19 @@ import { CfgClaseAccidenteRoutes } from './cfgClaseAccidente/cfgClaseAccidente.r
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
+import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
+
+import { MsvInventarioSenialRoutes } from './msvInventarioSenial/msvInventarioSenial.routes';
+import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
+import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
+
 export const DashboardRoutes: Route[] = [
   {
-    path: 'dashboard',
+    path: 'dashboard', 
     component: DashboardComponent,
     children: [
       ...HomeRoutes,
@@ -163,6 +170,7 @@ export const DashboardRoutes: Route[] = [
       ...MparqSalidaRoutes,
       ...MparqPatioRoutes,
       ...MparqGruaCiudadanoRoutes,
+      ...CfgCargoRoutes,
       ...MpersonalFuncionarioRoutes,
       ...MpersonalTipoContratoRoutes,
       ...MpersonalTalonarioRoutes,
@@ -220,8 +228,10 @@ export const DashboardRoutes: Route[] = [
       ...RnrsPreregistroRoutes,
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
-      // ...MsvInventarioSenialRoutes,
-      // ...MsvSenialRoutes,
+      ...InsumoBusquedaRoutes,
+      ...MsvInventarioSenialRoutes,
+      ...MsvSenialRoutes,
+      ...RnaCertificadoTradicionRoutes
     ]
   }
 ];

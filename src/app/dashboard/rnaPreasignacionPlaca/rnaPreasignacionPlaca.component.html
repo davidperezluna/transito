@@ -16,13 +16,11 @@
                         <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                     </span>
                   </div>
-                  <div class="has-danger" *ngIf="isError" >
+                  <div class="has-danger" *ngIf="isError">
                     <div class="form-control-feedback has-danger has-error">{{msj}}</div><br>
                   </div>
 
-                  <div class="has-success" *ngIf="isExist" >
-                    <div class="form-control-feedback has-danger has-success">{{msj}}</div><br>
-                    
+                  <div class="has-success" *ngIf="isExist">                    
                     <!-- tabla de detalles del vehiculo sin placa -->
                     <div class="col-xs-12 col-lg-12" >
                         <h5 class="card-title">Detalles del vehiculo <small> Encontrado</small></h5>

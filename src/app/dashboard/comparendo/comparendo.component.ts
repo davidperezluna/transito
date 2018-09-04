@@ -37,7 +37,7 @@ export class ComparendoComponent implements OnInit {
       }
     })
   }
-
+ 
   async ngAbrirInput(polca:any){
     const {value: files} = await swal({
       title: 'Seleccione el atchivo .txt',
@@ -45,7 +45,7 @@ export class ComparendoComponent implements OnInit {
       inputAttributes: {
         'accept': 'txt/*',
         'aria-label': 'Upload your profile picture'
-      }
+      } 
     })
 
     if (files) {

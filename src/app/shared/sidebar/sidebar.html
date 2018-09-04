@@ -277,6 +277,16 @@
                 Infracciones
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="tramite" [ngClass]="{'active' : ( addActive === 'tramite')}" (click)="addActiveMenu('tramite')">
+                <i class="fa fa-angle-right"></i> Tramite
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="tramitePrecio" [ngClass]="{'active' : ( addActive === 'tramitePrecio')}" (click)="addActiveMenu('tramitePrecio')">
+                <i class="fa fa-angle-right"></i> Valor tramite
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level -->
         </li>
@@ -355,13 +365,7 @@
                 <i class="fa fa-angle-right"></i> Banco
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="tramitePrecio" [ngClass]="{'active' : ( addActive === 'tramitePrecio')}" (click)="addActiveMenu('tramitePrecio')">
-                <i class="fa fa-angle-right"></i> Valor tramite
-              </a>
-            </li>
-
-            
+                        
             <li class="nav-item">
               <a class="nav-link" routerLink="departamento" [ngClass]="{'active' : ( addActive === 'departamento')}" (click)="addActiveMenu('departamento')">
                 <i class="fa fa-angle-right"></i> Departamento
@@ -403,11 +407,6 @@
                 <i class="fa fa-angle-right"></i> Ciudadano
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="tramite" [ngClass]="{'active' : ( addActive === 'tramite')}" (click)="addActiveMenu('tramite')">
-                <i class="fa fa-angle-right"></i> Tramite
-              </a>
-            </li>
           </ul>
           <!-- /.nav-third-level -->
         </li>
@@ -429,6 +428,27 @@
       </ul>
       <!-- /.nav-second-level -->
     </li>
+
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'm_rf_sv_seguridad_vial')}">
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('m_rf_sv_seguridad_vial')">
+        Seguridad Vial
+        <i class="fa fa-angle-down "></i>
+      </a>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvInventarioSenial" [ngClass]="{'active' : ( addActive === 'msvInventarioSenial')}" (click)="addActiveMenu('msvInventarioSenial')">
+            <i class="fa fa-angle-right"></i> <!--HU-08-->Inventario Señales
+          </a>
+        </li>
+      </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvSenial" [ngClass]="{'active' : ( addActive === 'msvSenial')}" (click)="addActiveMenu('msvSenial')">
+            <i class="fa fa-angle-right"></i> <!--HU-09-->Señales
+          </a>
+        </li>
+      </ul>
+      <!-- /.nav- -->
 
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnc')}">
       <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('menu-rnc')">
@@ -471,6 +491,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="rnaPreregistro" [ngClass]="{'active' : ( addActive === 'rnaPreregistro')}" (click)="addActiveMenu('rnaPreregistro')">
             <i class="fa fa-angle-right"></i> Pre-registro Automotor
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="rnaCertificadoTradicionOficial" [ngClass]="{'active' : ( addActive === 'rnaCertificadoTradicionOficial')}" (click)="addActiveMenu('rnaCertificadoTradicionOficial')">
+            <i class="fa fa-angle-right"></i> Certificado de tradición para uso oficial
           </a>
         </li>
 
@@ -623,7 +649,7 @@
       <ul class="nav flex-column nav-second-level">
         <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'thirdlevel' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('thirdlevel')">Ordenes comparendos
-            <i class="fa fa-angle-down "></i>
+            <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
@@ -678,6 +704,18 @@
             Gestión de rangos
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="mpersonalTipoContrato" [ngClass]="{'active' : ( addActive === 'mpersonalTipoContrato')}" (click)="addActiveMenu('mpersonalTipoContrato')">
+            <i class="fa fa-angle-right"></i>
+            Tipo contrato
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cfgCargo" [ngClass]="{'active' : ( addActive === 'cfgCargo')}" (click)="addActiveMenu('cfgCargo')">
+            <i class="fa fa-angle-right"></i>
+            Cargos
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level -->
     </li>
@@ -688,6 +726,11 @@
         <i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level ">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="insumoBusqueda" [ngClass]="{'active' : ( addActive === 'insumoBusqueda')}" (click)="addActiveMenu('insumoBusqueda')">
+            <i class="fa fa-angle-right"></i>Insumos
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="casoinsumo" [ngClass]="{'active' : ( addActive === 'casoinsumo')}" (click)="addActiveMenu('casoinsumo')">
             <i class="fa fa-angle-right"></i> Caso Insumo

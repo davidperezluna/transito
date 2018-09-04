@@ -103,6 +103,7 @@ import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
 
+import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
 import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
 import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
@@ -119,6 +120,8 @@ import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacion
 import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
+import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
+import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -127,6 +130,8 @@ import {SidebarComponent} from '../shared';
 import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
+import { MsvInventarioSenialModule } from './msvInventarioSenial/msvInventarioSenial.module';
+import { MsvSenialModule } from './msvSenial/msvSenial.module';
 
 @NgModule({
   imports: [
@@ -179,6 +184,7 @@ import {RightsidebarComponent} from '../shared';
       MparqEntradaModule,
       MparqSalidaModule,
       MparqPatioModule,
+      CfgCargoModule,
       MpersonalFuncionarioModule,
       MpersonalTipoContratoModule,
       MpersonalTalonarioModule,
@@ -231,8 +237,12 @@ import {RightsidebarComponent} from '../shared';
       ReporteModule,
       registroEntregaProductoModule,
       RpcccInventarioDocumentalModule,
-      
+      InsumoBusquedaModule,
       //MsvTCAsignacionModule,
+
+      MsvInventarioSenialModule,
+      MsvSenialModule,
+      RnaCertificadoTradicionOficialModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
