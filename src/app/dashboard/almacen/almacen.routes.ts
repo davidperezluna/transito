@@ -7,4 +7,3 @@ export const AlmacenRoutes: Route[] = [
       component: AlmacenComponent
     }
 ];
- 

@@ -11,7 +11,7 @@ declare var $: any;
 })
 export class ComparendoComponent implements OnInit {
   public comparendo: Comparendo;
-  public txt:any[];
+  public txt: any[];
   public errorMessage:any;
   public valido= true;
 

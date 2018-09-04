@@ -113,7 +113,7 @@ export class CfgSedeOperativaComponent implements OnInit {
               text: 'Registro eliminado correctamente.',
               type: 'success',
               confirmButtonColor: '#15d4be',
-            })
+            });
             this.table.destroy();
             this.respuesta = response;
             this.ngOnInit();
@@ -130,7 +130,7 @@ export class CfgSedeOperativaComponent implements OnInit {
 
 
       }
-    })
+    });
   }
 
   editSedeOperativa(cfgSedeOperativa: any) {

@@ -45,6 +45,10 @@ export class SedeOperativaService {
 
 	getSedeOperativaSelect(){
 		return this._http.get(this.url + '/select').map(res => res.json());
+		/*let params = "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/select/" + marcaId, { headers: headers })
+			.map(res => res.json());*/
 	}
 
 	showSedeOperativa(token,id){

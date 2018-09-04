@@ -1,0 +1,39 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Editar Tipo-Clase vehículo</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formEdit="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Seleccionar Tipo Vehículo <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tipoVehiculoSelected" required name="tipoVehiculo">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Seleccionar clase de vehículo <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" required name="clase">
+                            </ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
