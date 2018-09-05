@@ -1,5 +1,5 @@
 import  {Injectable} from "@angular/core";
-import  {Http, Response,Headers} from "@angular/http";
+import  {Http, Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
@@ -21,8 +21,7 @@ export class CondicionIngresoService{
 		let json = JSON.stringify(condicionIngreso);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
 	deleteCondicionIngreso(token,id){

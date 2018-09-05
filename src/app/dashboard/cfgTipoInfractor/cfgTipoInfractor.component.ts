@@ -28,7 +28,7 @@ export class CfgTipoInfractorComponent implements OnInit {
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
+      text: 'Solo tardará unos segundos, por favor espere.',
       timer: 1500,
       onOpen: () => {
         swal.showLoading()

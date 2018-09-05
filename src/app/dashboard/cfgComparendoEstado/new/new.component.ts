@@ -22,6 +22,7 @@ constructor(
   ngOnInit() {
     this.estado = new CfgComparendoEstado(null, null);
   }
+  
   onCancelar(){
     this.ready.emit(true);
   }

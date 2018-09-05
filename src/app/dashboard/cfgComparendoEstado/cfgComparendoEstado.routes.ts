@@ -7,4 +7,3 @@ export const CfgComparendoEstadoRoutes: Route[] = [
       component: CfgComparendoEstadoComponent
     }
 ];
- 

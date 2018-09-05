@@ -36,6 +36,10 @@ import { registroEntregaProductoRoutes } from './registroEntregaProducto/registr
 import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
 import { RncLicenciaConduccionRoutes } from './rncLicenciaConduccion/rncLicenciaConduccion.routes';
 
+import { CfgTipoVehiculoRoutes } from './cfgTipoVehiculo/cfgTipoVehiculo.routes';
+import { CfgAsignacionPlacaSedeRoutes } from './cfgAsignacionPlacaSede/cfgAsignacionPlacaSede.routes';
+import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
+
 import { MsvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
 import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
@@ -147,6 +151,9 @@ export const DashboardRoutes: Route[] = [
       ...buscarAutomotorRoutes,
       ...registroEntregaProductoRoutes,
       ...CfgLicenciaConduccionCategoriaRoutes,
+      ...CfgTipoVehiculoRoutes,
+      ...CfgAsignacionPlacaSedeRoutes,
+      ...CfgTipoClaseRoutes,
       ...RncLicenciaConduccionRoutes,
       ...MsvCaracterizacion,
       ...MsvEvaluacionRoutes,
