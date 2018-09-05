@@ -16,6 +16,8 @@ import swal from 'sweetalert2';
 })
 export class NewCiudadanoComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
+@Input() identificacion:any = null;
+@Input() tipoIdentificacion:any = null;
 public ciudadano: Ciudadano;
 public errorMessage;
 public respuesta;

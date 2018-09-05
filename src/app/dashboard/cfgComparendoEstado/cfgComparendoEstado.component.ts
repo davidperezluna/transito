@@ -17,13 +17,13 @@ export class CfgComparendoEstadoComponent implements OnInit {
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table:any; 
+  public table: any;
   public smlmv: CfgComparendoEstado;
 
   constructor(
     private _EstadoService: CfgComparendoEstadoService,
-		private _loginService: LoginService,
-    ){}
+		private _LoginService: LoginService,
+    ) {}
     
   ngOnInit() {
     swal({
@@ -88,6 +88,7 @@ export class CfgComparendoEstadoComponent implements OnInit {
       this.ngOnInit();
     }
   }
+  
   deleteInfraccionCategoria(id:any){
     swal({
       title: '¿Estás seguro?',
@@ -100,7 +101,7 @@ export class CfgComparendoEstadoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._EstadoService.delete(token,id).subscribe(
             response => {
                 swal({

@@ -72,8 +72,6 @@ constructor(
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null,null);
-    
-    
   }
   onCancelar(){
     this.ready.emit(true);

@@ -46,6 +46,10 @@ import { registroEntregaProductoModule } from './registroEntregaProducto/registr
 import { CfgLicenciaConduccionCategoriaModule } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.module';
 import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicenciaConduccion.module';
 
+import { CfgTipoVehiculoModule } from './cfgTipoVehiculo/cfgTipoVehiculo.module';
+import { CfgAsignacionPlacaSedeModule } from './cfgAsignacionPlacaSede/cfgAsignacionPlacaSede.module';
+import { CfgTipoClaseModule } from './cfgTipoClase/cfgTipoClase.module';
+
 import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { MsvRevisionModule } from './msvRevision/msvRevision.module';
 import { MsvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
@@ -119,6 +123,7 @@ import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegis
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
+import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -162,6 +167,9 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       cfgFestivoModule,
       buscarAutomotorModule,
       CfgLicenciaConduccionCategoriaModule,
+      CfgTipoVehiculoModule,
+      CfgAsignacionPlacaSedeModule,
+      CfgTipoClaseModule,
       RncLicenciaConduccionModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
@@ -238,6 +246,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
 
       MsvInventarioSenialModule,
       MsvSenialModule,
+      RnaCertificadoTradicionOficialModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

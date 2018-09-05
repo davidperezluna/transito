@@ -39,6 +39,10 @@ import { registroEntregaProductoRoutes } from './registroEntregaProducto/registr
 import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
 import { RncLicenciaConduccionRoutes } from './rncLicenciaConduccion/rncLicenciaConduccion.routes';
 
+import { CfgTipoVehiculoRoutes } from './cfgTipoVehiculo/cfgTipoVehiculo.routes';
+import { CfgAsignacionPlacaSedeRoutes } from './cfgAsignacionPlacaSede/cfgAsignacionPlacaSede.routes';
+import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
+
 import { MsvCaracterizacion } from './msvCaracterizacion/msvCaracterizacion.routes';
 import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
@@ -120,10 +124,11 @@ import { DashboardComponent } from '.';
 
 import { MsvInventarioSenialRoutes } from './msvInventarioSenial/msvInventarioSenial.routes';
 import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
+import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 
 export const DashboardRoutes: Route[] = [
   {
-    path: 'dashboard',
+    path: 'dashboard', 
     component: DashboardComponent,
     children: [
       ...HomeRoutes,
@@ -149,6 +154,9 @@ export const DashboardRoutes: Route[] = [
       ...buscarAutomotorRoutes,
       ...registroEntregaProductoRoutes,
       ...CfgLicenciaConduccionCategoriaRoutes,
+      ...CfgTipoVehiculoRoutes,
+      ...CfgAsignacionPlacaSedeRoutes,
+      ...CfgTipoClaseRoutes,
       ...RncLicenciaConduccionRoutes,
       ...MsvCaracterizacion,
       ...MsvEvaluacionRoutes,
@@ -228,6 +236,7 @@ export const DashboardRoutes: Route[] = [
       ...InsumoBusquedaRoutes,
       ...MsvInventarioSenialRoutes,
       ...MsvSenialRoutes,
+      ...RnaCertificadoTradicionRoutes
     ]
   }
 ];

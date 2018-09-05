@@ -132,10 +132,10 @@ constructor(
     let token = this._loginService.getToken();
     
     this._FuncionarioService.searchLogin(identity,token).subscribe(
-      response => {
+      response => { 
         if(response.status == 'success'){
           this.sedeOperativa = response.data.sedeOperativa;
-          this.funcionario = true;
+          this.funcionario = true; 
           this.factura.numero = datePiper.transform(this.date,'hmss');
           this.factura.fechaCreacion = datePiper.transform(this.date,'yyyy-MM-dd');
           this.factura.sedeOperativaId = this.sedeOperativa.id;

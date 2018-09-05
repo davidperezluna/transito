@@ -113,6 +113,27 @@
                 Marca
               </a>
             </li>
+
+            <!--para tipo vehiculo-->
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgTipoVehiculo" [ngClass]="{'active' : ( addActive === 'cfgTipoVehiculo')}" (click)="addActiveMenu('cfgTipoVehiculo')">
+                <i class="fa fa-angle-right"></i>
+                Tipo Vehiculo
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgTipoClase" [ngClass]="{'active' : ( addActive === 'cfgTipoClase')}" (click)="addActiveMenu('cfgTipoClase')">
+                <i class="fa fa-angle-right"></i>
+                Tipo-Clase
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgAsignacionPlacaSede" [ngClass]="{'active' : ( addActive === 'cfgAsignacionPlacaSede')}" (click)="addActiveMenu('cfgAsignacionPlacaSede')">
+                <i class="fa fa-angle-right"></i>
+                Asignación Placas a Sedes
+              </a>
+            </li>
+            <!---->
             <li class="nav-item">
               <a class="nav-link" routerLink="conceptoParametro" [ngClass]="{'active' : ( addActive === 'concepto')}" (click)="addActiveMenu('concepto')">
                 <i class="fa fa-angle-right"></i> Concepto
@@ -481,6 +502,12 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="rnaPreregistro" [ngClass]="{'active' : ( addActive === 'rnaPreregistro')}" (click)="addActiveMenu('rnaPreregistro')">
             <i class="fa fa-angle-right"></i> Pre-registro Automotor
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="rnaCertificadoTradicionOficial" [ngClass]="{'active' : ( addActive === 'rnaCertificadoTradicionOficial')}" (click)="addActiveMenu('rnaCertificadoTradicionOficial')">
+            <i class="fa fa-angle-right"></i> Certificado de tradición para uso oficial
           </a>
         </li>
 
