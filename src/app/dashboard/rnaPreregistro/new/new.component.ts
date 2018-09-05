@@ -113,19 +113,7 @@ constructor(
     let token = this._loginService.getToken();
     let identity = this._loginService.getIdentity();
     let datos = {'identificacion':identity.identificacion};
-    this._FuncionarioService.searchLogin(datos,token).subscribe(
-      response => { 
-        if(response.status == 'success'){
-          this.sedeOperativa = response.data.sedeOperativa;
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage); 
-            alert('Error en la petición');
-          }
-        }
-    });
+    
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
@@ -170,6 +158,20 @@ constructor(
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
         this.sedesOperativas = response;
+        this._FuncionarioService.searchLogin(datos,token).subscribe(
+          response => { 
+            if(response.status == 'success'){
+              this.sedeOperativa = response.data.sedeOperativa;
+              this.sedeOperativaSelected = [this.sedeOperativa.id];
+            }
+          error => {
+              this.errorMessage = <any>error;
+              if(this.errorMessage != null){
+                console.log(this.errorMessage); 
+                alert('Error en la petición');
+              }
+            }
+        });
       }, 
       error => {
         this.errorMessage = <any>error;

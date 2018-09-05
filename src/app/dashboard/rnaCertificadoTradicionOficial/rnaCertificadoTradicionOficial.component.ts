@@ -84,22 +84,22 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
             'placa' : this.placa
         }
         this._VehiculoService.showVehiculoPlaca(token, datos).subscribe(
-            response => {
-             this.vehiculo = response.data;
-             swal.close();
-            error => {
-              this.errorMessage = <any>error;
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+          response => {
+            this.vehiculo = response.data;
+            swal.close();
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          });
+          }
+        });
     }   
     
     async ngAbrirInput(){
         const {value: files} = await swal({
-          title: 'Seleccione el atchivo .txt',
+          title: 'Seleccione el atchivo .csv',
           input: 'file',
           inputAttributes: {
             'accept': 'txt/*',
@@ -115,7 +115,7 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
             let txt: string = reader.result;
             let allTextLines = txt.split(/\r\n|\n/);
             for (let i = 0; i < allTextLines.length; i++) {
-              let data = allTextLines[i].split(',');
+              let data = allTextLines[i].split(','); 
               if (data.length <= 0) {
                   this.valido = false;
               }else{
@@ -137,7 +137,6 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
             //     }, 
             //     error => {
             //       this.errorMessage = <any>error;
-          
             //       if(this.errorMessage != null){
             //         console.log(this.errorMessage);
             //         alert("Error en la petición");
@@ -162,9 +161,6 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
                 })
             }    
           }
-    
-    
         }
       }   
- 
 }
