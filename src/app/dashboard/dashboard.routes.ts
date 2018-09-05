@@ -19,6 +19,9 @@ import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 
+import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
+import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
+
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
@@ -175,6 +178,8 @@ export const DashboardRoutes: Route[] = [
       ...AlmacenRoutes,
       ...CfgTipoInfractorRoutes,
       ...ComparendoRoutes,
+      ...CfgCdaRoutes,
+      ...VehiculoTecnoMecanicaRoutes,
       ...CfgComparendoEstadoRoutes,
       ...InfraccionRoutes,
       ...CarroceriaRoutes,

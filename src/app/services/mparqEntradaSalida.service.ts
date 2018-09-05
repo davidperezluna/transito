@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class MparqEntradaSalidaService {
-	private url = environment.apiUrl + 'mparqentradaSalidasalida';
+	private url = environment.apiUrl + 'mparqentradasalida';
 	public identity;
 	public token;
 

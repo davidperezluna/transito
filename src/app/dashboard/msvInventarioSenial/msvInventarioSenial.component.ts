@@ -1,3 +1,4 @@
+/// <reference types="@types/googlemaps" />
 import { Component, OnInit, Output, EventEmitter /**/, ElementRef, ViewChild /**/ } from '@angular/core';
 import { MsvInventarioSenialService } from '../../services/msvInventarioSenial.service';
 import { LoginService } from '../../services/login.service';
@@ -14,7 +15,7 @@ import { CfgTipoSenialService } from '../../services/cfgTipoSenial.service';
 import { MsvInventarioSenial } from './msvInventarioSenial.modelo';
 
 ///////////////////////
-import {} from '@types/googlemaps';
+import { } from "googlemaps";
 declare var google: any;
 ///////////////////////
 

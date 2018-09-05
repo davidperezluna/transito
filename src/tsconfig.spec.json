@@ -14,13 +14,15 @@
     "baseUrl": "",
     "types": [
       "jasmine",
-      "node"
+      "node",
+      "googlemaps"
     ]
   },
   "files": [
     "test.ts"
   ],
   "include": [
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.d.ts"
   ]
 }

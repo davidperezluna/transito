@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter /**/, ElementRef, ViewChild /**/ } from '@angular/core';
+/// <reference types="@types/googlemaps" />
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { MsvSenialService } from '../../services/msvSenial.service';
 import { LoginService } from '../../services/login.service';
 
@@ -12,7 +13,7 @@ import { LoginService } from '../../services/login.service';
  import { MsvSenial } from './msvSenial.modelo';
 
 ///////////////////////
-import {} from '@types/googlemaps';
+import { } from "googlemaps";
 declare var google: any;
 ///////////////////////
 

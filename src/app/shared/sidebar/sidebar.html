@@ -101,7 +101,12 @@
                 <i class="fa fa-angle-right"></i> Buscar Automotor
               </a>
             </li>
-
+            <li class="nav-item">
+              <a class="nav-link" routerLink="vehiculoTecnoMecanica" [ngClass]="{'active' : ( addActive === 'vehiculoTecnoMecanica')}" (click)="addActiveMenu('vehiculoTecnoMecanica')">
+                <i class="fa fa-angle-right"></i>
+                Técnico mecánica
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="marca" [ngClass]="{'active' : ( addActive === 'marca')}" (click)="addActiveMenu('marca')">
                 <i class="fa fa-angle-right"></i>
@@ -161,6 +166,12 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="servicio" [ngClass]="{'active' : ( addActive === 'servicio')}" (click)="addActiveMenu('servicio')">
                 <i class="fa fa-angle-right"></i> Servicio
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgCda" [ngClass]="{'active' : ( addActive === 'cfgCda')}" (click)="addActiveMenu('cfgCda')">
+                <i class="fa fa-angle-right"></i>
+                CDAs
               </a>
             </li>
           </ul>

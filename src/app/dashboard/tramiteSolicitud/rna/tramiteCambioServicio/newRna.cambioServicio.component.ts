@@ -7,7 +7,7 @@ import { ServicioService } from '../../../../services/servicio.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
-import { Factura } from 'app/dashboard/factura/factura.modelo';
+//import { Factura } from '../../../factura/factura.modelo
 
 @Component({
     selector: 'appRna-cambio-servicio',

@@ -24,7 +24,6 @@ export class VehiculoService {
 	}
 
 	deleteVehiculo(token, id){
-
 		let json = JSON.stringify(id);
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
