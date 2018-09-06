@@ -111,6 +111,7 @@ import { RnaTramiteInscripcionLimitacionRoutes } from './rnaTramiteInscripcionLi
 import { RnaTramiteLevantamientoLimitacionRoutes } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.routes';
 import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
 import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
+import { CfgEmpresaServicioRoutes } from './cfgEmpresaServicio/cfgEmpresaServicio.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { CfgGravedadRoutes } from './cfgGravedad/cfgGravedad.routes';
@@ -239,7 +240,8 @@ export const DashboardRoutes: Route[] = [
       ...InsumoBusquedaRoutes,
       ...MsvInventarioSenialRoutes,
       ...MsvSenialRoutes,
-      ...RnaCertificadoTradicionRoutes
+      ...RnaCertificadoTradicionRoutes,
+      ...CfgEmpresaServicioRoutes
     ]
   }
 ];

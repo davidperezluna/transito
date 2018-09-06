@@ -126,6 +126,7 @@ import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module'
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -246,7 +247,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       RpcccInventarioDocumentalModule,
       InsumoBusquedaModule,
       //MsvTCAsignacionModule,
-
+      CfgEmpresaServicioModule,
       MsvInventarioSenialModule,
       MsvSenialModule,
       RnaCertificadoTradicionOficialModule,
