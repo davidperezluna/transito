@@ -27,6 +27,7 @@ import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpc
 
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
+import { SoatModule } from './soat/soat.module';
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -198,6 +199,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       ComparendoModule,
       CfgCdaModule,
       VehiculoTecnoMecanicaModule,
+      SoatModule,
       CfgComparendoEstadoModule,
       InfraccionModule,
       FacturaModule,

@@ -1,0 +1,86 @@
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Filtro de búsqueda</strong>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Número de placa" [(ngModel)]="placa" name="numeroPlaca" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="vehiculo">
+                        <br>
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>No. Placa:</strong> {{ vehiculo.placa.numero }}</td>
+                                        <td><strong>Servicio:</strong> {{ vehiculo.servicio.nombre }}</td>
+                                        <td><strong>Clase:</strong> {{ vehiculo.clase.nombre }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-12" *ngIf='formIndex && vehiculo'>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Historial <small>soat</small>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNew()" class="btn btn-outline-success btn-round">
+                                <i class="fa fa-plus"></i>
+                                Nuevo
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example" *ngIf="soats">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha expedición</th>
+                                <th>Vigencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let soat of soats; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ soat.fechaExpedicion }}</td>
+                                <td>{{ soat.vigencia }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="alert alert-danger text-center" *ngIf="!soats">
+                        <i class="fa fa-exclamation-triangle fa-3x"></i>
+                        Ningún registro encontrado
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <app-new *ngIf='formNew' [vehiculo]="vehiculo" (ready)="ready($event)"></app-new>
+    </div>
+
+
+</div>

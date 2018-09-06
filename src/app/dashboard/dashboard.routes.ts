@@ -21,6 +21,8 @@ import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.rout
 
 import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
+import { SoatRoutes } from './soat/soat.routes';
+
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -188,6 +190,7 @@ export const DashboardRoutes: Route[] = [
       ...ComparendoRoutes,
       ...CfgCdaRoutes,
       ...VehiculoTecnoMecanicaRoutes,
+      ...SoatRoutes,
       ...CfgComparendoEstadoRoutes,
       ...InfraccionRoutes,
       ...CarroceriaRoutes,
