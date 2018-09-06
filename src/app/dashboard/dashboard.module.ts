@@ -25,6 +25,8 @@ import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
+import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
+
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
 import { SoatModule } from './soat/soat.module';
@@ -125,6 +127,7 @@ import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module'
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -197,6 +200,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CuentaModule,
       CarroceriaModule,
       ComparendoModule,
+      CfgBodegaModule,
       CfgCdaModule,
       VehiculoTecnoMecanicaModule,
       SoatModule,
@@ -245,7 +249,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       RpcccInventarioDocumentalModule,
       InsumoBusquedaModule,
       //MsvTCAsignacionModule,
-
+      CfgEmpresaServicioModule,
       MsvInventarioSenialModule,
       MsvSenialModule,
       RnaCertificadoTradicionOficialModule,

@@ -40,7 +40,7 @@ export class MsvSenialComponent implements OnInit {
   public errorMessage;
   //public id;
   public respuesta;
-  public msvSenials;
+  public msvSeniales;
   public formNew = false;
   public formIndex = true;
 
@@ -155,12 +155,12 @@ export class MsvSenialComponent implements OnInit {
           }
       );
 
-    this._msvSenialService.getMsvSenial().subscribe(
+    this._msvSenialService.index().subscribe(
             response => {
           if (response) {
 
             console.log(response);
-            this.msvSenials = response.data;
+            this.msvSeniales = response.data;
             let timeoutId = setTimeout(() => {
               this.iniciarTabla();
             }, 100);

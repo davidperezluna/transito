@@ -19,6 +19,8 @@ import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 
+import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
+
 import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
 import { SoatRoutes } from './soat/soat.routes';
@@ -111,6 +113,7 @@ import { RnaTramiteInscripcionLimitacionRoutes } from './rnaTramiteInscripcionLi
 import { RnaTramiteLevantamientoLimitacionRoutes } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.routes';
 import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
 import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
+import { CfgEmpresaServicioRoutes } from './cfgEmpresaServicio/cfgEmpresaServicio.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { CfgGravedadRoutes } from './cfgGravedad/cfgGravedad.routes';
@@ -188,6 +191,7 @@ export const DashboardRoutes: Route[] = [
       ...AlmacenRoutes,
       ...CfgTipoInfractorRoutes,
       ...ComparendoRoutes,
+      ...CfgBodegaRoutes,
       ...CfgCdaRoutes,
       ...VehiculoTecnoMecanicaRoutes,
       ...SoatRoutes,
@@ -239,7 +243,8 @@ export const DashboardRoutes: Route[] = [
       ...InsumoBusquedaRoutes,
       ...MsvInventarioSenialRoutes,
       ...MsvSenialRoutes,
-      ...RnaCertificadoTradicionRoutes
+      ...RnaCertificadoTradicionRoutes,
+      ...CfgEmpresaServicioRoutes
     ]
   }
 ];
