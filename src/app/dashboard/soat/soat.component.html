@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Número de placa" [(ngModel)]="placa" name="numeroPlaca" required />
+                                <input type="text" class="form-control" placeholder="Número de placa" [(ngModel)]="placa" required name="numeroPlaca"/>
                                 <span class="input-group-btn">
                                     <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
                                         <i class="fa fa-search"></i>
@@ -46,7 +46,7 @@
                 <div class="card-header">
                     <h5 class="card-title">Historial <small>soat</small>
                         <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-outline-success btn-round">
+                            <button (click)="onNew()" class="btn btn-primary btn-round">
                                 <i class="fa fa-plus"></i>
                                 Nuevo
                             </button>
@@ -58,19 +58,24 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Fecha expedición</th>
-                                <th>Vigencia</th>
+                                <th>No. de Poliza</th>
+                                <th>Nombre Empresa</th>
+                                <th>Fecha Expedición</th>
+                                <th>Fecha Vigencia</th>
+                                <th>Fecha Vencimiento</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let soat of soats; let i = index">
                                 <td>{{ i + 1 }}</td>
+                                <td>{{ soat.numeroPoliza }}</td>
+                                <td>{{ soat.nombreEmpresa }}</td>
                                 <td>{{ soat.fechaExpedicion }}</td>
-                                <td>{{ soat.vigencia }}</td>
+                                <td>{{ soat.fechaVigencia }}</td>
+                                <td>{{ soat.fechaVencimiento }}</td>
                             </tr>
                         </tbody>
                     </table>
-
                     <div class="alert alert-danger text-center" *ngIf="!soats">
                         <i class="fa fa-exclamation-triangle fa-3x"></i>
                         Ningún registro encontrado

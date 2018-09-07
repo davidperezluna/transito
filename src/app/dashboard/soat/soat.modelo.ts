@@ -2,7 +2,8 @@ export class Soat{
     constructor(
         public idVehiculo: string,
         public fechaExpedicion: string,
-        public vigencia: string,
+        public fechaVigencia: string,
+        public fechaVencimiento: string,
         public numeroPoliza: string,
         public nombreEmpresa: string,
         public idMunicipio: number,

@@ -29,7 +29,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.soat = new Soat(null, null, null, null, null, null, null);
+        this.soat = new Soat(null, null, null, null, null, null, null, null);
 
         this._Municipioervice.getMunicipioSelect().subscribe(
             response => {
@@ -67,7 +67,7 @@ export class NewComponent implements OnInit {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                this._SoatService.register(this.soat, token).subscribe(
+                this._SoatService.register(this.soat, token).subscribe(                    
                     response => {
                         if (response.status == 'success') {
                             this.ready.emit(true);
@@ -100,14 +100,15 @@ export class NewComponent implements OnInit {
 
     }
 
-    onCalcularVigencia() {
+    onCalcularVencimiento() {
         let token = this._loginService.getToken();
 
         if (this.soat.fechaExpedicion) {
-            this._SoatService.getVigencia({ 'fechaExpedicion': this.soat.fechaExpedicion }, token).subscribe(
+            this._SoatService.getFechaVencimiento({ 'fechaExpedicion': this.soat.fechaExpedicion }, token).subscribe(
                 response => {
                     if (response.status == 'success') {
-                        this.soat.vigencia = response.data;
+                        this.soat.fechaVencimiento = response.fechaVencimiento;
+                        this.soat.fechaVigencia = response.fechaVigencia;
                         //swal.close();
                     } else {
                         swal({
