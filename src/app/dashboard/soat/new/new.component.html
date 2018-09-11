@@ -8,6 +8,10 @@
             <form #formNew="ngForm">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
+                        <label>No. de poliza <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="soat.numeroPoliza" name="numeroPoliza" required/>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
                         <label>Fecha de Expedición <strong class="text-danger">*</strong></label>
                         <input type="date" class="form-control" (blur)="onCalcularVencimiento()" [(ngModel)]="soat.fechaExpedicion" name="fechaExpedicion" required autofocus/>
                     </div>
@@ -19,10 +23,7 @@
                         <label>Fecha Vencimiento<strong class="text-danger">*</strong></label>
                         <input type="date" class="form-control" [(ngModel)]="soat.fechaVencimiento" name="fechaVencimiento" disabled required />
                     </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>No. de poliza <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="soat.numeroPoliza" name="numeroPoliza" required/>
-                    </div>
+                    
                     <div class="col-xs-12 col-lg-6">
                         <label>Nombre Empresa <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="soat.nombreEmpresa" name="nombreEmpresa" required />

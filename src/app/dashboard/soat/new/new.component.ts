@@ -57,7 +57,7 @@ export class NewComponent implements OnInit {
         this.soat.idVehiculo = this.vehiculo.id;
 
         swal({
-            title: '¿Estás seguro?',
+            title: '¿Está seguro?',
             text: "¿Desea guardar la información?",
             type: 'warning',
             showCancelButton: true,

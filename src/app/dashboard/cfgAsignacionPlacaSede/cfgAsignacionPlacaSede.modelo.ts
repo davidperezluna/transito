@@ -5,7 +5,7 @@ export class CfgAsignacionPlacaSede {
         public moduloId: number,
         public cfgTipoVehiculo: number,
         public letrasPlaca: string,
-        public numeroInicial: number,
+        public numeroInicial: string,
         public numeroFinal: string,
         public letraFinal: string,
     ) { }

@@ -52,8 +52,8 @@ constructor(
     this.cda.idVehiculo = this.vehiculo.id;
 
     swal({
-      title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
+      title: '¿Está seguro?',
+      text: "¿Desea guardar la información?",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
