@@ -25,8 +25,11 @@ import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
+import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
+
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
+import { SoatModule } from './soat/soat.module';
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -197,8 +200,10 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CuentaModule,
       CarroceriaModule,
       ComparendoModule,
+      CfgBodegaModule,
       CfgCdaModule,
       VehiculoTecnoMecanicaModule,
+      SoatModule,
       CfgComparendoEstadoModule,
       InfraccionModule,
       FacturaModule,

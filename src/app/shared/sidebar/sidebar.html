@@ -31,14 +31,17 @@
         <i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level">
-
         <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'msv_seguridad_vial' }">
-
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('msv_seguridad_vial')">
             Seguridad Vial
             <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgBodega" [ngClass]="{'active' : ( addActive === 'cfgBodega')}" (click)="addActiveMenu('cfgBodega')">
+                <i class="fa fa-angle-right"></i> Bodega
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgGravedad" [ngClass]="{'active' : ( addActive === 'cfgGravedad')}" (click)="addActiveMenu('cfgGravedad')">
                 <i class="fa fa-angle-right"></i> Gravedad
@@ -95,7 +98,6 @@
             <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
-
             <li class="nav-item">
               <a class="nav-link" routerLink="buscarAutomotor" [ngClass]="{'active' : ( addActive === 'buscarAutomotor')}" (click)="addActiveMenu('buscarAutomotor')">
                 <i class="fa fa-angle-right"></i> Buscar Automotor
@@ -113,7 +115,6 @@
                 Marca
               </a>
             </li>
-
             <!--para tipo vehiculo-->
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgTipoVehiculo" [ngClass]="{'active' : ( addActive === 'cfgTipoVehiculo')}" (click)="addActiveMenu('cfgTipoVehiculo')">
@@ -131,6 +132,13 @@
               <a class="nav-link" routerLink="cfgAsignacionPlacaSede" [ngClass]="{'active' : ( addActive === 'cfgAsignacionPlacaSede')}" (click)="addActiveMenu('cfgAsignacionPlacaSede')">
                 <i class="fa fa-angle-right"></i>
                 Asignación Placas a Sedes
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="soat" [ngClass]="{'active' : ( addActive === 'soat')}"
+                (click)="addActiveMenu('soat')">
+                <i class="fa fa-angle-right"></i>
+                SOAT
               </a>
             </li>
             <!---->

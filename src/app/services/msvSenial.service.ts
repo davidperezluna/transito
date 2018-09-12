@@ -13,7 +13,7 @@ export class MsvSenialService {
 
 	constructor(private _http: Http, private _loogerService: LoggerService) { }
 
-	getMsvSenial() {
+	index() {
 	    return this._http.get(this.url + "/").map(res => res.json());
     }
 
