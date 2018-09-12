@@ -9,6 +9,7 @@ import { CiudadanoService } from '../../../services/ciudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { RepresentanteEmpresaService } from '../../../services/representanteEmpresa.service';
+import { CfgEmpresaServicioService } from '../../../services/cfgEmpresaServicio.service';
 
 import swal from 'sweetalert2';
 
@@ -48,6 +49,8 @@ public tipoIdentificacionSelected: Array<any>; // ng-select [(ngModel)]
 
 // public representantes: Array<any>
 public representanteEmpresaSelected: Array<any>; // ng-select [(ngModel)]
+public servicioSelected: any;
+public servicios: any;
 
 constructor(
   private _empresaService: EmpresaService,
@@ -58,10 +61,12 @@ constructor(
   private _ciudadanoService: CiudadanoService,
   private _tipoIdentificacionService: TipoIdentificacionService,
   private _representanteEmpresaService: RepresentanteEmpresaService,
+  private _CfgEmpresaServicio: CfgEmpresaServicioService,
 
   ){}
 
   ngOnInit(){
+    console.log(this.empresa);
      swal({
       title: 'Cargando Formulario!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -99,13 +104,28 @@ constructor(
         }
       }, 
     );
+
+    this._CfgEmpresaServicio.select().subscribe(
+      response => {
+        this.servicios = response;
+        setTimeout(() => {
+          this.servicioSelected = [this.empresa.cfgEmpresaServicio.id];
+        });
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
     
     this._municipioService.getMunicipioSelect().subscribe(
         response => {
           this.municipios = response;
           setTimeout(() => {
             this.municipioSelected = [this.empresa.municipio.id];
-            
           });
         }, 
         error => {
@@ -185,8 +205,9 @@ constructor(
     this.empresa.tipoSociedadId = this.tipoSociedadSelected;
     this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.empresa.ciudadanoId = this.ciudadanoSelected;
+    this.empresa.cfgEmpresaServicioId = this.servicioSelected;
        
-    // console.log(this.empresa.tipoIdentificacionId);
+    console.log(this.empresa);
     
 		this._empresaService.editEmpresa(this.empresa,token).subscribe(
 			response => {

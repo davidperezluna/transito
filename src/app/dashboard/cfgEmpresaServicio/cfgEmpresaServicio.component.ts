@@ -21,7 +21,7 @@ export class CfgEmpresaServicioComponent implements OnInit {
   public empresaServicio: CfgEmpresaServicio;
 
   constructor(
-    private _CargoService: CfgEmpresaServicioService,
+    private _CfgEmpresaServicioService: CfgEmpresaServicioService,
 		private _loginService: LoginService,
     ){}
     
@@ -41,7 +41,7 @@ export class CfgEmpresaServicioComponent implements OnInit {
       }
     })
 
-    this._CargoService.index().subscribe(
+    this._CfgEmpresaServicioService.index().subscribe(
 				response => {
           this.empresaServicios = response.data;
           let timeoutId = setTimeout(() => {  
@@ -103,7 +103,7 @@ export class CfgEmpresaServicioComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CargoService.delete({ 'id': id }, token).subscribe(
+        this._CfgEmpresaServicioService.delete({ 'id': id }, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

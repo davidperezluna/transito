@@ -174,7 +174,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
           this.msj = 'vehiculo ya tiene placa asignada';
           this.isError = true;
           this.isExist = false;
-          
+           
           swal.close();
         }
         if(response.code == 401){

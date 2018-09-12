@@ -65,6 +65,7 @@ public listaPropietariosEmpresas=false;
 public empresaNew=false;
 public radicado=false;
 public identificacion:any;
+public persona:any='empresa';
 public tipoPropiedadSelected:any;
 public sedeOperativa:any;
 public btnRadicado:any = 'Preregistro para matricula inicial';
@@ -161,8 +162,26 @@ constructor(
         this._FuncionarioService.searchLogin(datos,token).subscribe(
           response => { 
             if(response.status == 'success'){
+              this.persona='funcionario';
               this.sedeOperativa = response.data.sedeOperativa;
               this.sedeOperativaSelected = [this.sedeOperativa.id];
+            }else{
+              this._FuncionarioService.searchEmpresa(datos,token).subscribe(
+                response => {
+                  if(response.status == 'success'){
+                    this.persona='empresa';
+                  }
+            
+                }, 
+                error => {
+                  this.errorMessage = <any>error;
+          
+                  if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+              );
             }
           error => {
               this.errorMessage = <any>error;

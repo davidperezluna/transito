@@ -51,6 +51,13 @@
                             <ng-select [multiple]="false" [options]="tiposSociedad" [(ngModel)]="tipoSociedadSelected" required name="tipoSociedadId"></ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">
+                            <label>Servicio 
+                                <span class="text-danger">*</span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicioId">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
                             <label>Tipo entidad</label>
                             <select class="form-control" name="tipoEntidadSelected" [(ngModel)]="empresa.tipoEntidad">
                                 <option value="Empresa del estado">Empresa del estado</option>
