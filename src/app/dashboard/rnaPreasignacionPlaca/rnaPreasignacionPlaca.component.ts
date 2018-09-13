@@ -249,49 +249,55 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   onEnviar(){
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     this.vehiculo.placa = this.cfgPlacaSelected;
-    
     let token = this._loginService.getToken();
 
-    this._vehiculoService.asignacionPlaca(this.vehiculo,token).subscribe(
-			response => {
-        this.respuesta = response;
-         
-        if(this.respuesta.status == 'success'){
+    var html = 'El vehiculo con:<br> numero de chasis:  <b>'+this.vehiculo.chasis+
+                '</b><br>numero de motor:  <b>'+this.vehiculo.motor+
+                '</b><br>numero de serie:  <b>'+this.vehiculo.serie+
+                '</b><br>fue asignada La placa:<br><b><h2>'+this.vehiculo.placa+
+                '</h2></b>con exitosamente durante 60 días';
 
-          var html = 'El vehiculo con:<br> numero de chasis:  <b>'+this.vehiculo.chasis+
-                     '</b><br>numero de motor:  <b>'+this.vehiculo.motor+
-                     '</b><br>numero de serie:  <b>'+this.vehiculo.serie+
-                     '</b><br>fue asignada La placa:<br><b><h2>'+this.vehiculo.placa+
-                     '</h2></b>con exitosamente durante 60 días';
- 
-          swal({
-            title: 'Perfecto!',
-            html: html,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          }).then((result) => {
-            if (result.value) {
-              this.onCancelar();
+    swal({
+      title: '¿Estás seguro?',
+      type: 'info',
+      html:html,
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this._vehiculoService.asignacionPlaca(this.vehiculo,token).subscribe(
+          response => {
+            this.respuesta = response;
+            if(this.respuesta.status == 'success'){
+              swal({
+                title: 'Perfecto!',
+                html: html,
+                type: 'success',
+                confirmButtonText: 'Aceptar',
+              }).then((result) => {
+                if (result.value) {
+                  this.onCancelar();
+                }
+              });          
             }
-          });          
-        }
-			error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-    }); 
-
+          error => {
+              this.errorMessage = <any>error;
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+    
+        }); 
+      }
+    })
   }
-
   onCancelar(){
     this.isError = false;
     this.isExist = false;
     this.ngOnInit();
   }
-
 }
