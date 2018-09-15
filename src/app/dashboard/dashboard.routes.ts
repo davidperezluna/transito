@@ -78,6 +78,7 @@ import { CarroceriaRoutes } from './carroceria/carroceria.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
 import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
+import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
@@ -199,6 +200,7 @@ export const DashboardRoutes: Route[] = [
       ...InfraccionRoutes,
       ...CarroceriaRoutes,
       ...FacturaRoutes,
+      ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,
       ...TramiteSolicitudRoutes,
       ...TramiteSolicitudRncRoutes,
