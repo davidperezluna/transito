@@ -3,6 +3,7 @@ import { ComparendoComponent } from '.';
 import { NewComponent } from '.';
 import { StateComponent } from '.';
 import { SearchComponent } from '.';
+import { ExportComponent } from '.';
 
 export const ComparendoRoutes: Route[] = [
     {
@@ -23,6 +24,11 @@ export const ComparendoRoutes: Route[] = [
     {
       path: 'comparendo/search',
       component: SearchComponent
-    }
+    },
+
+    {
+    path: 'comparendo/export',
+    component: ExportComponent
+  }
 ];
  

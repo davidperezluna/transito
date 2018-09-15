@@ -20,7 +20,10 @@
         "styles.css",
         "../node_modules/font-awesome/css/font-awesome.css",		
 		"../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",        
-		"../node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css",
+    "../node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css",
+
+        
+
 		"../node_modules/fullcalendar/dist/fullcalendar.css",
 		"../node_modules/jstree/dist/themes/default/style.min.css",
 		"../node_modules/swipebox/src/css/swipebox.min.css",
@@ -39,10 +42,20 @@
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/moment/moment.js",
         "../node_modules/jquery-circle-progress/dist/circle-progress.min.js",
-        "../node_modules/datatables.net/js/jquery.dataTables.js",
+
         "../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js",
         "../node_modules/datatables.net-responsive/js/dataTables.responsive.js",
-        "../node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js",		
+        "../node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js",	
+        
+        "../node_modules/datatables.net/js/jquery.dataTables.min.js",
+        "../node_modules/datatables.net/js/dataTables.buttons.min.js",
+        "../node_modules/datatables.net/js/jszip.min.js",
+        "../node_modules/datatables.net/js/pdfmake.min.js",
+        "../node_modules/datatables.net/js/vfs_fonts.js",
+        "../node_modules/datatables.net/js/buttons.html5.min.js",
+        "../node_modules/datatables.net/js/buttons.print.min.js",
+
+
 		"../node_modules/jvectormap/jquery-jvectormap.min.js", 		 
 		"../node_modules/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js", 
 		"../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-lcc-en.js", 

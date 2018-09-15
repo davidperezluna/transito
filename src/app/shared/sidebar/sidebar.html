@@ -701,6 +701,12 @@
             <i class="fa fa-angle-right"></i> Solicitud de tramite
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard/comparendo/export" [ngClass]="{'active' : ( addActive === '/dashboard/comparendo/export')}"
+            (click)="addActiveMenu('/dashboard/comparendo/export')">
+            <i class="fa fa-angle-right"></i> Exportar Archivo Plano para SIMIT
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level -->
     </li>

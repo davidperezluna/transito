@@ -86,4 +86,8 @@ export class ComparendoService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/parametros", params, { headers: headers }).map(res => res.json());
 	}
+
+	export() { 
+		return this._http.get(this.url + "/export").map(res => res.json());
+	}
 }
