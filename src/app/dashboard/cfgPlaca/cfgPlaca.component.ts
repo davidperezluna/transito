@@ -92,11 +92,11 @@ export class CfgPlacaComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteCfgPlaca(id: any) {
 
+  liberarCfgPlaca(id: any) {
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
+      text: "¡Esta placa estara libre para su uso!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
@@ -106,7 +106,7 @@ export class CfgPlacaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgPlacaService.deleteCfgPlaca(token, id).subscribe(
+        this._CfgPlacaService.liberarCfgPlaca(token, id).subscribe(
           response => {
             swal({
               title: 'Eliminado!',

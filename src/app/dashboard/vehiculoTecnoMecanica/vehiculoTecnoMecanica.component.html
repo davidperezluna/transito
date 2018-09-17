@@ -47,7 +47,7 @@
           <div class="card-header">
             <h5 class="card-title">Historial <small>revisiones técnico mécanicas</small>
               <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-outline-success btn-round">
+                <button (click)="onNew()" class="btn btn-primary btn-round">
                   <i class="fa fa-plus"></i>
                   Nuevo
                 </button>
@@ -73,11 +73,6 @@
                 </tr>
               </tbody>
             </table>
-
-            <div class="alert alert-danger text-center" *ngIf="!tecnoMecanicas">
-              <i class="fa fa-exclamation-triangle fa-3x"></i>
-              Ningún registro encontrado
-            </div>
           </div>
         </div>
       </div>

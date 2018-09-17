@@ -1,0 +1,115 @@
+<div class="container" >
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">
+                  <strong class="text-uppercase">Financiera y Liquidaciones </strong>
+                  <small>Factura Infracciones</small>
+                  <div class="btn-group pull-right">
+                  </div>
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xs-6 col-lg-6">
+                  <label>Tipo de identificación <span class="text-danger">*</span></label>
+                  <ng-select [multiple]="false" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
+                  </ng-select> 
+                </div>
+                <div class="col-xs-6 col-lg-6">
+                    <label>Identificación</label>
+                    <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
+                        <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
+                        <span class="input-group-btn">
+                            <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div> 
+                    <div class="has-danger" *ngIf="ciudadanoEncontrado === 3">
+                        <div class="form-control-feedback has-danger has-error">No se encontró la persona</div>
+                    </div>
+                </div>
+              </div>
+
+              <!--si existe un ciudadano -->
+              <div class="container row" *ngIf="ciudadanoEncontrado === 2">
+                <div class="col-xs-12 col-lg-12 row">
+                    <hr>
+                    <br>
+                </div>
+                <h5 class="container">
+                    Resultados de búsqueda
+                </h5>
+                <table class="table " id="dataTables-example">
+                    <tbody>
+                        <tr class="odd">
+                            <td>Tipo de identificación</td>
+                            <td class="center"><p>{{ciudadano.tipoIdentificacion.nombre}}</p></td>
+                            <td>Numero de identificación</td>
+                            <td class="center"><p>{{ciudadano.identificacion}}</p></td>
+                        </tr>
+                        <tr class="odd">
+                            <td>Primer nombre</td>
+                            <td class="center"><p>{{ciudadano.primerNombre}}</p></td>
+                            <td>Segundo nombre</td>
+                            <td class="center"><p>{{ciudadano.segundoNombre}}</p></td>
+                        </tr>
+                        <tr class="odd">
+                            <td>Primer apellido</td>
+                            <td class="center"><p>{{ciudadano.primerApellido}}</p></td>
+                            <td>Segundo apellido</td>
+                            <td class="center"><p>{{ciudadano.segundoApellido}}</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card-body" *ngIf="comparendos">
+                    <h4>Infracciones</h4>
+                    <div class="btn-group pull-right">
+                        <label for="">Valor</label>
+                        <input type="text" class="form-control" [(ngModel)]="facturaInfraccion.valorTotal">
+                        <br>
+                    </div>
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Número orden Comparendo</th>
+                                <th>Fecha</th>
+                                <th>Vehiculo</th>
+                                <th>Valor</th>
+                                <th>Seleccionar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                                <td>{{ comparendo.id }}</td>
+                                <td>{{ comparendo.consecutivo?.consecutivo }}</td>
+                                <td>{{ comparendo.fecha }}</td>
+                                <td>{{ comparendo.vehiculo.placa.numero }}</td>
+                                <td>{{ comparendo.valorInfraccion }}</td> 
+                                <td>
+                                    <div class="custom-control custom-checkbox" style="margin-top: -17px;" >
+                                        <input type="checkbox" [(ngModel)]="comparendo.state" value="{{comparendo.id}}" (change)="onInfraccionSelect(comparendo.valorInfraccion,$event)"  class="custom-control-input"  id="{{comparendo.id}}">
+                                        <label class="custom-control-label" for="{{comparendo.id}}"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Recaudo
+                    </button>
+                </div>
+            </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>

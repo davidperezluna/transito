@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class RnaPreregistroService {
-	private url = environment.apiUrl + "vehiculo";
+	private url = environment.apiUrl + "app/vehiculo";
 	public identity;
 	public token;
 

@@ -30,6 +30,8 @@ import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.r
 
 import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
+import { SoatRoutes } from './soat/soat.routes';
+
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -83,6 +85,7 @@ import { CarroceriaRoutes } from './carroceria/carroceria.routes';
 import { ModuloRoutes } from './modulo/modulo.routes';
 import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
+import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
@@ -205,10 +208,12 @@ export const DashboardRoutes: Route[] = [
       ...CfgSvUnidadMedidaRoutes,
       ...CfgCdaRoutes,
       ...VehiculoTecnoMecanicaRoutes,
+      ...SoatRoutes,
       ...CfgComparendoEstadoRoutes,
       ...InfraccionRoutes,
       ...CarroceriaRoutes,
       ...FacturaRoutes,
+      ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,
       ...TramiteSolicitudRoutes,
       ...TramiteSolicitudRncRoutes,

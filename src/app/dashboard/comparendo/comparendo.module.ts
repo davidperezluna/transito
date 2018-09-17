@@ -11,13 +11,14 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { StateComponent } from './state/state.component';
 import { SearchComponent } from './search/search.component';
-import { SelectModule } from 'angular2-select';
+import { ExportComponent } from './export/export.component';
+import {SelectModule} from 'angular2-select';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [ComparendoComponent,NewComponent,EditComponent,StateComponent,SearchComponent],
-    exports: [ComparendoComponent, NewComponent,EditComponent,StateComponent,SearchComponent],
+    declarations: [ComparendoComponent,NewComponent,EditComponent,StateComponent,SearchComponent, ExportComponent],
+    exports: [ComparendoComponent, NewComponent, EditComponent, StateComponent, SearchComponent, ExportComponent],
     providers:[MpersonalFuncionarioService,ComparendoService,SedeOperativaService,CiudadanoVehiculoService]
 })
 

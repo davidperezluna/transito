@@ -8,7 +8,7 @@
             </div>
         <div class="card-body">
             <form #formNew="ngForm">
-                <div class="btn-group-vertical" data-toggle="buttons">
+                <div class="btn-group-vertical" data-toggle="buttons" *ngIf="persona == 'funcionario'">
                     <button (click)="onRadicado() "type="button" class="btn btn-primary" aria-pressed="true">{{btnRadicado}}</button>
                 </div>
                 <br>
@@ -124,6 +124,7 @@
                         <label>Sede Operativa*</label>
                         <ng-select
                             [multiple]="false"
+                            [disabled]="persona == 'funcionario'"
                             [options]="sedesOperativas"
                             [(ngModel)]="sedeOperativaSelected"
                             required

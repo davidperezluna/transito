@@ -11,6 +11,7 @@ export class Empresa{
 		public correo: string,
 		public estado: number,
 		public tipoIdentificacionId: number,
+		public cfgEmpresaServicioId: number,
 		public dv: number,
 		public celular: number,
 		public fax: number,

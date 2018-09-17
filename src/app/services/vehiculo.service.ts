@@ -5,11 +5,11 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class VehiculoService {
-	private url = environment.apiUrl + "vehiculo";
+	private url = environment.apiUrl + "app/vehiculo";
 	public identity;
 	public token;
 
-	constructor(private _http: Http){}
+	constructor(private _http: Http){} 
 
 	getVehiculo(){
 		return this._http.get(this.url+"/").map(res => res.json());

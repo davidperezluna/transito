@@ -36,13 +36,8 @@
                 <td>{{cfgPlaca.tipoVehiculo?.nombre}}</td>
                 <td>{{cfgPlaca.sedeOperativa?.nombre}}</td>
                 <td>
-                  <button (click)="editCfgPlaca(cfgPlaca)" class="btn btn-xs btn-info" type="button">Editar
-                    <i class="fa fa-edit"></i>
+                  <button (click)="liberarCfgPlaca(cfgPlaca.id)" class="btn btn-xs btn-info" type="button">Liberar
                   </button>
-                  <button (click)="deleteCfgPlaca(cfgPlaca.id)" class="btn btn-xs btn-danger" type="button">Eliminar
-                    <i class="fa fa-trash"></i>
-                  </button>
-
                 </td>
               </tr>
             </tbody>

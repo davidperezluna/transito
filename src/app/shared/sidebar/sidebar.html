@@ -149,6 +149,13 @@
                 Asignación Placas
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="soat" [ngClass]="{'active' : ( addActive === 'soat')}"
+                (click)="addActiveMenu('soat')">
+                <i class="fa fa-angle-right"></i>
+                SOAT
+              </a>
+            </li>
             <!---->
             <li class="nav-item">
               <a class="nav-link" routerLink="conceptoParametro" [ngClass]="{'active' : ( addActive === 'concepto')}" (click)="addActiveMenu('concepto')">
@@ -348,7 +355,13 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgAuditoria" [ngClass]="{'active' : ( addActive === 'cfgAuditoria')}" (click)="addActiveMenu('cfgAuditoria')">
                 <i class="fa fa-angle-right"></i>
-                Auditoria
+                Auditoria 
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgEmpresaServicio" [ngClass]="{'active' : ( addActive === 'cfgEmpresaServicio')}" (click)="addActiveMenu('cfgEmpresaServicio')">
+                <i class="fa fa-angle-right"></i>
+                Empresa servicio
               </a>
             </li>
             <li class="nav-item">
@@ -706,6 +719,12 @@
             <i class="fa fa-angle-right"></i> Solicitud de tramite
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard/comparendo/export" [ngClass]="{'active' : ( addActive === '/dashboard/comparendo/export')}"
+            (click)="addActiveMenu('/dashboard/comparendo/export')">
+            <i class="fa fa-angle-right"></i> Exportar Archivo Plano para SIMIT
+          </a>
+        </li>
       </ul>
       <!-- /.nav-second-level -->
     </li>
@@ -789,8 +808,14 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="factura" [ngClass]="{'active' : ( addActive === 'factura')}" (click)="addActiveMenu('factura')">
             <i class="fa fa-angle-right"></i>
-            Factura
+            Factura Tramites
           </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="facturaInfraccion" [ngClass]="{'active' : ( addActive === 'facturaInfraccion')}" (click)="addActiveMenu('facturaInfraccion')">
+            <i class="fa fa-angle-right"></i>
+            Factura Infracciones
+          </a> 
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="reporte" [ngClass]="{'active' : ( addActive === 'reporte')}" (click)="addActiveMenu('reporte')">

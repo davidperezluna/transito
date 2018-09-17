@@ -36,6 +36,7 @@ import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.m
 
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
+import { SoatModule } from './soat/soat.module';
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -77,6 +78,7 @@ import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
 import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
+import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
 import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
 import { LimitacionModule } from './limitacion/limitacion.module';
@@ -215,6 +217,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CfgSvUnidadMedidaModule,
       CfgCdaModule,
       VehiculoTecnoMecanicaModule,
+      SoatModule,
       CfgComparendoEstadoModule,
       InfraccionModule,
       FacturaModule,
@@ -259,6 +262,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       registroEntregaProductoModule,
       RpcccInventarioDocumentalModule,
       InsumoBusquedaModule,
+      FacturaInfraccionModule,
       //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,

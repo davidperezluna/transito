@@ -33,6 +33,14 @@ export class CfgPlacaService {
 			.map(res => res.json());
 	}
 
+	liberarCfgPlaca(token, id) {
+		let json = JSON.stringify(id);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/liberar/placa", params, { headers: headers })
+			.map(res => res.json());
+	}
+
 	showCfgPLaca(token, id) {
 
 		let params = "authorization=" + token;

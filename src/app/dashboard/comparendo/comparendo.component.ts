@@ -14,10 +14,12 @@ export class ComparendoComponent implements OnInit {
   public txt: any[];
   public errorMessage:any;
   public valido= true;
+  public comparendos;
+  public table: any;
 
   constructor(
 		private _ComparendoService: ComparendoService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
 
     ngOnInit() {
@@ -67,7 +69,7 @@ export class ComparendoComponent implements OnInit {
         }
         
         if (this.valido) {
-          let token = this._loginService.getToken();
+          let token = this._LoginService.getToken();
           this._ComparendoService.setComparendoArchivo(this.txt,polca,token).subscribe(
             response => {
               if (response.status == 'success') {
@@ -106,7 +108,5 @@ export class ComparendoComponent implements OnInit {
 
     }
 
-  }   
- 
+  }
 }
-

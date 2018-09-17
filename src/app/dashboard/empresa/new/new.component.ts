@@ -9,6 +9,7 @@ import { CiudadanoService } from '../../../services/ciudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { SucursalService } from '../../../services/sucursal.service';
+import { CfgEmpresaServicioService } from '../../../services/cfgEmpresaServicio.service';
 
 import swal from 'sweetalert2';
  
@@ -30,6 +31,8 @@ public tiposSociedad: any;
 public tiposIdentificacion: any;
 public municipioSelected: any;
 public ciudadanoSelected: any;
+public servicioSelected: any;
+public servicios: any;
 public tipoSociedadSelected: any;
 public tipoIdentificacionSelected: any;
 public municipioResidenciaSelected: any;
@@ -47,14 +50,28 @@ constructor(
   private _tipoSociedadService: TipoSociedadService,
   private _tipoIdentificacionService: TipoIdentificacionService,
   private _ciudadanoService: CiudadanoService,
+  private _CfgEmpresaServicio: CfgEmpresaServicioService,
 ){}
 
   ngOnInit() {
-    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._tipoSociedadService.getTipoSociedadSelect().subscribe(
       response => {
         this.tiposSociedad = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this._CfgEmpresaServicio.select().subscribe(
+      response => {
+        this.servicios = response;
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -129,6 +146,7 @@ constructor(
     this.empresa.tipoSociedadId = this.tipoSociedadSelected;
     this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.empresa.ciudadanoId = this.ciudadanoSelected;
+    this.empresa.cfgEmpresaServicioId = this.servicioSelected;
 
     let datos = {
       'empresa': this.empresa,
