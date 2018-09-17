@@ -34,7 +34,6 @@ constructor(
 		this.GruaService.register(this.gruaCiudadano,token).subscribe(
 			response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.ready.emit(true);
           swal({

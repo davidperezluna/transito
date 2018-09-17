@@ -7,7 +7,7 @@ import { LoggerService } from "../logger/services/logger.service";
 
 @Injectable()
 export class MsvSenialService {
-	private url = environment.apiUrl + "msvsenial";
+	private url = environment.apiUrl + "seguridadvial/svsenial";
 	public identity;
 	public token;
 
@@ -56,4 +56,14 @@ export class MsvSenialService {
 		return this._http.post(this.url+"/new", formData).map(res => res.json());
 	}
 
+	select() {
+		return this._http.get(this.url + "/select").map(res => res.json());
+	}
+
+	selectByTipoSenial(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/select/tiposenial", params, { headers: headers }).map(res => res.json());
+	}
 }

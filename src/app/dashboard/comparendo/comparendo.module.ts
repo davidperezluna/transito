@@ -11,7 +11,7 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { StateComponent } from './state/state.component';
 import { SearchComponent } from './search/search.component';
-import {SelectModule} from 'angular2-select';
+import { SelectModule } from 'angular2-select';
 
 
 @NgModule({

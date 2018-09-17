@@ -25,7 +25,14 @@ import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
+import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
+
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
+import { CfgSvConectorModule } from './cfgSvConector/cfgSvConector.module';
+import { CfgSvSenialTipoModule } from './cfgSvSenialTipo/cfgSvSenialTipo.module';
+import { CfgSvSenialColorModule } from './cfgSvSenialColor/cfgSvSenialColor.module';
+import { CfgSvSenialEstadoModule } from './cfgSvSenialEstado/cfgSvSenialEstado.module';
+import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.module';
 
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
@@ -135,7 +142,7 @@ import {SidebarComponent} from '../shared';
 import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
-import { MsvInventarioSenialModule } from './msvInventarioSenial/msvInventarioSenial.module';
+import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
 import { MsvSenialModule } from './msvSenial/msvSenial.module';
 
 @NgModule({
@@ -199,7 +206,13 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CuentaModule,
       CarroceriaModule,
       ComparendoModule,
+      CfgAdmFormatoTipoModule,
       CfgBodegaModule,
+      CfgSvConectorModule,
+      CfgSvSenialTipoModule,
+      CfgSvSenialColorModule,
+      CfgSvSenialEstadoModule,
+      CfgSvUnidadMedidaModule,
       CfgCdaModule,
       VehiculoTecnoMecanicaModule,
       CfgComparendoEstadoModule,
@@ -248,7 +261,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       InsumoBusquedaModule,
       //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
-      MsvInventarioSenialModule,
+      MsvSenialInventarioModule,
       MsvSenialModule,
       RnaCertificadoTradicionOficialModule,
     ],

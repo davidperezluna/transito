@@ -1,7 +1,9 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { ComparendoService } from '../../../services/comparendo.service';
+import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-state',
@@ -11,35 +13,61 @@ import swal from 'sweetalert2';
 export class StateComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public errorMessage;
-  public tipo;
+  public estados: any = null;
+  public estadoSelected: any;
   public comparendos: any = null;
+  public table: any;
 
 constructor(
   private _LoginService: LoginService,
   private _ComparendoService: ComparendoService,
+  private _EstadoService: CfgComparendoEstadoService,
 ){}
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this._EstadoService.select().subscribe(
+      response => {
+        this.estados = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
 
-  onEnviar(){
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    $('#summernote').summernote({
+      placeholder: 'Hello bootstrap 4',
+      tabsize: 2,
+      height: 300
+    });
+  }
+
+  onSearch(){
     let token = this._LoginService.getToken();
 
-    
-		this._ComparendoService.searchByTipo(this.tipo,token).subscribe(
+    this._ComparendoService.searchByState({'idEstado': this.estadoSelected}, token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
+          this.comparendos = response.data;
           swal({
             title: 'Perfecto!',
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
         }else{
+          this.comparendos = null;
           swal({
-            title: 'Error!',
+            title: 'Alerta!',
             text: response.message,
-            type: 'error',
+            type: 'warning',
             confirmButtonText: 'Aceptar'
           })
         }
@@ -51,6 +79,24 @@ constructor(
 						alert("Error en la petición"); 
 					}
 				}
-		}); 
+      }
+    ); 
+  }
+
+  iniciarTabla() {
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
+        }
+      }
+    });
+    this.table = $('#dataTables-example').DataTable();
   }
 }

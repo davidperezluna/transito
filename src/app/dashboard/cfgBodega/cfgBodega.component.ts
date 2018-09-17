@@ -13,15 +13,15 @@ export class CfgBodegaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public cdas;
+	public bodegas;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public cda: CfgBodega;
+  public bodega: CfgBodega;
 
   constructor(
-    private _EstadoService: CfgBodegaService,
+    private _BodegaService: CfgBodegaService,
 		private _loginService: LoginService,
     ){}
     
@@ -29,7 +29,6 @@ export class CfgBodegaComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
@@ -40,12 +39,14 @@ export class CfgBodegaComponent implements OnInit {
       ) {
       }
     })
-    this._EstadoService.index().subscribe(
+
+    this._BodegaService.index().subscribe(
 				response => {
-          this.cdas = response.data;
+          this.bodegas = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -103,7 +104,7 @@ export class CfgBodegaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._EstadoService.delete({'id':id},token).subscribe(
+        this._BodegaService.delete({'id':id},token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -124,14 +125,12 @@ export class CfgBodegaComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }
 
-  onEdit(cda:any){
-    this.cda = cda;
+  onEdit(bodega:any){
+    this.bodega = bodega;
     this.formEdit = true;
     this.formIndex = false;
   }

@@ -17,7 +17,6 @@ export class CiudadanoService {
 	}
 
 	register(ciudadano,token){
-		
 		let json = JSON.stringify(ciudadano);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -52,6 +51,13 @@ export class CiudadanoService {
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/search/identificacion", params, {headers: headers}).map(res => res.json());
+	}
+
+	calculateAge(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/calculate/age", params, { headers: headers }).map(res => res.json());
 	}
 
 	showCiudadanoCedulaId(token,id){

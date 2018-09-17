@@ -1,0 +1,129 @@
+<div class="container">
+  <hr>
+  <div class="row" *ngIf='formSearch'>
+    <div class="col-xs-12 col-lg-4"><!-- .col -->
+      <div class="card">
+        <div class="card-header">
+            <h5 class="text-uppercase">Señalización <small>Buscar señales</small></h5>
+        </div>
+        <div class="card-body">
+          <form #formSearch="ngForm">
+            <div class="row"><!-- .row -->
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <label>Seleccione donde quiera buscar:</label>
+                  <ng-select (ngModelChange)="getDestino($event)" [multiple]="false" [options]="tiposDestino" [(ngModel)]="tipoDestinoSelected" name="tipoDestino" required></ng-select>
+                </div>
+              </div>
+              <div class="col-xs-12 col-lg-12" *ngIf="municipios && tipoDestinoSelected != 1">
+                <div class="form-group">
+                  <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" name="municipios" required></ng-select>
+                </div>
+              </div>
+            </div><!-- /.row -->
+
+            <div class="row"><!-- .row -->
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <label>Seleccione Tipo de señal a buscar:</label><br>
+                  <ng-select [multiple]="false" [options]="tiposSenial" [(ngModel)]="tipoSenialSelected" name="tipoSenial" required>
+                  </ng-select>
+                </div>
+              </div>
+            </div><!-- /.row -->
+          </form>
+        </div>
+
+        <div class="card-footer">
+          <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-search"></i>
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div><!-- /.col -->
+    
+    <!-- ======================== Inventarios en Bodega Principal ============================== -->
+    <div class="col-xs-12 col-lg-8" *ngIf="tipoDestinoSelected == 1 && formIndex"><!-- .col -->
+      <div class="card"><!-- .card -->
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Inventario</b> <small>bodega principal</small>
+            <div class="btn-group pull-right">
+              <button (click)="onNewSenialBodega()" class="btn btn-success btn-round">
+                <i class="fa fa-plus"></i>
+                <span class="text">Agregar señales</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body" *ngIf="inventariosBodega">
+          <table class="table" id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Número</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let inventario of inventariosBodega; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ inventario.consecutivo }}</td>
+                <td>
+                  {{ inventario.fecha }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div><!-- /.card -->
+    </div><!-- /.col -->
+    
+    <!-- ======================== Inventarios en Municipio seleccionado ============================== -->
+    <div class="col-xs-12 col-lg-8" *ngIf="tipoDestinoSelected == 2 && formIndex"><!-- .col -->
+      <div class="card"><!-- .card -->
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Inventario</b> <small>municipio</small>
+            <div class="btn-group pull-right">
+              <button (click)="onNewSenialMunicipio()" class="btn btn-success btn-round">
+                <i class="fa fa-plus"></i>
+                <span class="text">Agregar señales</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body" *ngIf="inventariosMunicipio">
+          <table class="table" id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Número</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let inventario of inventariosMunicipio; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ inventario.consecutivo }}</td>
+                <td>
+                  {{ inventario.fecha }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div><!-- /.card -->
+    </div><!-- /.col -->
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formNewSenialBodega'><!-- .col -->
+      <app-new-senial-bodega [tipoSenialSelected]="tipoSenialSelected" (ready)="ready($event)"></app-new-senial-bodega>
+    </div><!-- /.col -->
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formNewSenialMunicipio'><!-- .col -->
+      <app-new-senial-municipio [municipioSelected]="municipioSelected" [tipoSenialSelected]="tipoSenialSelected" (ready)="ready($event)"></app-new-senial-municipio>
+    </div><!-- /.col -->
+  </div>
+
+</div>

@@ -1,39 +1,29 @@
+<hr>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">formulario para el editar una cuenta</h5>
-            <hr> 
-            <div class="row justify-content-center">
-                <div class="col-md-10 ">
-                    <form  #lineaForm="ngForm">
-                        <!-- <div class="form-group row">
-                            <div class="col-lg-4 col-md-4">
-                                <label>Numero*</label>
-                                <input class="form-control" [(ngModel)]="cuenta.numero" name="numero" placeholder="" type="text" required>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <label>Observación*</label>
-                                <input class="form-control" [(ngModel)]="cuenta.observacion" name='observacion' placeholder="" type="textArea">
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <label>Banco*</label>
-                                <ng-select
-                                    [multiple]="false"
-                                    [options]="bancos"
-                                    [(ngModel)]="bancoSelected"
-                                    required
-                                    name="bancoId">
-                                </ng-select>
-                            </div>
-                        </div> -->
-                    </form>    
-                </div>   
-                       </div>
+            <div class="card-header">
+                <h5 class="text-uppercase"><strong>Ordenes de comparendo</strong> <small>búsquedas</small></h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formSearch="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Estado <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" name="estados" required></ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" [disabled]="lineaForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
-            </div>    
+                <div class="btn-group">
+                    <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-search"></i>
+                        Buscar
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

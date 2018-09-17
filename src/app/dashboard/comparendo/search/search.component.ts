@@ -1,8 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Comparendo} from '../comparendo.modelo';
-import {ComparendoService} from '../../../services/comparendo.service';
-import {BancoService} from '../../../services/banco.service';
-import {LoginService} from '../../../services/login.service';
+import { ComparendoService } from '../../../services/comparendo.service';
+import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -15,20 +14,19 @@ export class SearchComponent implements OnInit{
 public errorMessage;
 public respuesta;
 public formReady = false;
-public bancos: Array<any>
+public estados: any
 public bancoSelected: Array<any>; // ng-select [(ngModel)]
 
 constructor(
   private _comparendoService: ComparendoService,
+  private _EstadoService: CfgComparendoEstadoService,
   private _loginService: LoginService,
-  private _bancoService: BancoService,
   ){}
 
   ngOnInit(){
-    console.log(this.bancoSelected);
-    this._bancoService.getBancoSelect().subscribe(
+    this._EstadoService.select().subscribe(
         response => {
-          this.bancos = response;
+          this.estados = response;
           setTimeout(() => {
             // this.bancoSelected = [this.comparendo.banco.id];
             this.formReady = true;
@@ -49,10 +47,12 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
-  onEnviar(){
+
+  onSearch(){
     let token = this._loginService.getToken();
     this.comparendo.bancoId = this.bancoSelected;
-		this._comparendoService.editComparendo(this.comparendo,token).subscribe(
+
+		this._comparendoService.searchByState(this.comparendo,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
