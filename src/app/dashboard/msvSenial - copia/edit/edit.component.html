@@ -1,0 +1,113 @@
+<br>
+<br>
+<div class="card">
+    <div class="card-header">
+        <h5 class="m-0 justify-content-center">Seleccione una sede operativa</h5>
+        <br>
+        <div class="row justify-content-center">
+            <form #comparendoForm="ngForm">
+                <div class="form-group row">
+                    <div class="col-lg-12 col-md-16">
+                        <label>Sede*</label>
+                        <ng-select placeholder="Seleccione una Sede Operativa"  [disabled]="true" [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected"
+                            (ngModelChange)="changedSedeOperativa($event)" required name="bancoId">
+                        </ng-select>
+                    </div>
+                    <!--
+                  <div class="col-lg-12 col-md-16">
+                    <label>Numero de Comparendo*</label>
+                    <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text" required>
+                  </div>-->
+
+                    <div class="col-lg-12 col-md-16" *ngIf="sedeOperativaSuccess">
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="text-uppercase">Editar Talonario</h5>
+                                        <small>Los campos con
+                                            <b class="text-danger">*</b> son obligatorios</small>
+                                    </div>
+                                    <div class="card-body">
+                                        <form #formN="ngForm">
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-lg-12">
+                                                    <label>Desde
+                                                        <strong class="text-danger">*</strong>
+                                                    </label>
+                                                    <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.rangoini" name="rangoini" placeholder="" type="number"
+                                                        required>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-12">
+                                                    <label>Hasta
+                                                        <strong class="text-danger">*</strong>
+                                                    </label>
+                                                    <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.rangofin" name="rangofin" placeholder="" type="number"
+                                                        required>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-12">
+                                                    <label>Total Talonarios
+                                                        <strong class="text-danger">*</strong>
+                                                    </label>
+                                                    <input class="form-control" [readonly]="true" [(ngModel)]="talonario.total" name="total" placeholder="" type="number"
+                                                        required>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-12">
+                                                    <label>Número de Resolución
+                                                        <strong class="text-danger">*</strong>
+                                                    </label>
+                                                    <input class="form-control" [(ngModel)]="talonario.nResolucion" name="nResolucion" placeholder="" type="text" required>
+                                                </div>
+                                                <div class="col-xs-12 col-lg-12">
+                                                    <label>Fecha de Asignación
+                                                        <strong class="text-danger">*</strong>
+                                                    </label>
+                                                    <input class="form-control" [(ngModel)]="talonario.fechaAsignacion" name="fechaAsignacion" datetime="yyyy-MM-dd" placeholder=""
+                                                        type="date" required>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group">
+                                            <button (click)="onCancelar()" class="btn btn-default">
+                                                <i class="fa fa-times"></i>
+                                                Cancel
+                                            </button>
+                                            <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                                                <i class="fa fa-save"></i>
+                                                Enviar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- /.row -->
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <!-- .row -->
+
+
+
+
+</div>
+<!-- /.row -->

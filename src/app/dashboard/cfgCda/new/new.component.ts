@@ -15,7 +15,7 @@ public errorMessage;
 public respuesta;
 
 constructor(
-  private _EstadoService: CfgCdaService,
+  private _CdaService: CfgCdaService,
   private _loginService: LoginService,
   ){}
 
@@ -29,7 +29,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._EstadoService.register(this.cda,token).subscribe(
+		this._CdaService.register(this.cda,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

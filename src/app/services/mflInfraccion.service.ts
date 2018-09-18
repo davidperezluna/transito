@@ -19,8 +19,8 @@ export class MflInfraccionService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(infraccion,token){
-		let json = JSON.stringify(infraccion);
+	register(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(
@@ -37,15 +37,17 @@ export class MflInfraccionService {
 		);
 	}
 
-	show(token,id){
-		let params = "authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
-							  .map(res => res.json());
+	show(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/show", params, { headers: headers }).map(
+			res => res.json()
+		);
 	}
 
-	edit(infraccion,token){
-		let json = JSON.stringify(infraccion);
+	edit(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(
@@ -56,5 +58,14 @@ export class MflInfraccionService {
 
 	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
+	}
+
+	calculateValue(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/calculate/value", params, { headers: headers }).map(
+			res => res.json()
+		);
 	}
 }

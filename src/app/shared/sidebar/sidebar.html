@@ -38,8 +38,23 @@
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="cfgBodega" [ngClass]="{'active' : ( addActive === 'cfgBodega')}" (click)="addActiveMenu('cfgBodega')">
-                <i class="fa fa-angle-right"></i> Bodega
+              <a class="nav-link" routerLink="cfgSvConector" [ngClass]="{'active' : ( addActive === 'cfgSvConector')}" (click)="addActiveMenu('cfgSvConector')">
+                <i class="fa fa-angle-right"></i> Conector
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgSvUnidadMedida" [ngClass]="{'active' : ( addActive === 'cfgSvUnidadMedida')}" (click)="addActiveMenu('cfgSvUnidadMedida')">
+                <i class="fa fa-angle-right"></i> Und. medida
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgSvSenialTipo" [ngClass]="{'active' : ( addActive === 'cfgSvSenialTipo')}" (click)="addActiveMenu('cfgSvSenialTipo')">
+                <i class="fa fa-angle-right"></i> Tipo señal
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cfgSvSenialEstado" [ngClass]="{'active' : ( addActive === 'cfgSvSenialEstado')}" (click)="addActiveMenu('cfgSvSenialEstado')">
+                <i class="fa fa-angle-right"></i> Estado señal
               </a>
             </li>
             <li class="nav-item">
@@ -125,13 +140,13 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgTipoClase" [ngClass]="{'active' : ( addActive === 'cfgTipoClase')}" (click)="addActiveMenu('cfgTipoClase')">
                 <i class="fa fa-angle-right"></i>
-                Tipo-Clase
+                Tipo Clase
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgAsignacionPlacaSede" [ngClass]="{'active' : ( addActive === 'cfgAsignacionPlacaSede')}" (click)="addActiveMenu('cfgAsignacionPlacaSede')">
                 <i class="fa fa-angle-right"></i>
-                Asignación Placas a Sedes
+                Asignación Placas
               </a>
             </li>
             <li class="nav-item">
@@ -461,7 +476,7 @@
       </a>
       <ul class="nav flex-column nav-third-level">
         <li class="nav-item">
-          <a class="nav-link" routerLink="msvInventarioSenial" [ngClass]="{'active' : ( addActive === 'msvInventarioSenial')}" (click)="addActiveMenu('msvInventarioSenial')">
+          <a class="nav-link" routerLink="msvSenialInventario" [ngClass]="{'active' : ( addActive === 'msvSenialInventario')}" (click)="addActiveMenu('msvSenialInventario')">
             <i class="fa fa-angle-right"></i> <!--HU-08-->Inventario Señales
           </a>
         </li>
@@ -677,8 +692,11 @@
             <i class="fa fa-angle-right"></i>
           </a>
           <ul class="nav flex-column nav-third-level">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" routerLink="comparendo/search">Filtros</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" routerLink="comparendo/state">Busquedas por estado</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="comparendo">Cargar archivo plano</a>

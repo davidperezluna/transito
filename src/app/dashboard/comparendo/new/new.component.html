@@ -1,6 +1,6 @@
 <hr>
 <div class="row">
-    <div class="col-xs-12 col-lg-4 offset-lg-4"><!-- .col -->
+    <div class="col-xs-12 col-lg-4"><!-- .col -->
         <div class="card"><!-- .card -->
             <div class="card-header"><!-- .card-header -->
                 <h5 class="card-title"><!-- .card-title -->
@@ -31,7 +31,7 @@
     </div><!-- /.col -->
 
 
-    <div class="col-xs-12 col-lg-12" *ngIf='validado'>
+    <div class="col-xs-12 col-lg-8" *ngIf='validado'>
         <div class="card"><!-- .card -->
             <div class="card-header"><!-- .card-header -->
                 <h5 class="card-title"><!-- .card-title -->
@@ -59,7 +59,7 @@
             </div><!-- /.card-header -->
         </div><!-- /.card -->
 
-        <form #comparendoDiligenciadoForm="ngForm">
+        <form #formNew="ngForm">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
@@ -435,8 +435,9 @@
                         <div class="col-xs-12 col-lg-3">
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="comparendo.fotomulta" class="custom-control-input" id="fotomulta" name="fotomulta">
                                     <label class="custom-control-label" for="fotomulta">Fotomulta</label>
+                                    <br>
+                                    <input type="checkbox" [(ngModel)]="comparendo.fotomulta" class="custom-control-input" id="fotomulta" name="fotomulta">
                                 </div>
                             </div>
                         </div>
@@ -458,32 +459,32 @@
                         <div class="col-xs-12 col-lg-3">
                             <div class="form-group">
                                 <label>Infracción <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="infracciones" [(ngModel)]="infraccionSelected" name="infracciones" required></ng-select>
+                                <ng-select (ngModelChange)="onChangedInfraccion($event)" [multiple]="false" [options]="infracciones" [(ngModel)]="infraccionSelected" name="infracciones" required></ng-select>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-lg-3">
+                        <div class="col-xs-12 col-lg-3" *ngIf="infraccion">
                             <div class="form-group">
                                 <label>Descripción <b class="text-danger"></b></label>
-                                <textarea class="form-control" [(ngModel)]="comparendo.descripcion" name="descripcion" rows="1" readonly></textarea>
+                                <textarea class="form-control" [(ngModel)]="infraccion.descripcion" name="descripcion" rows="1" readonly></textarea>
                             </div> 
                         </div>
-                        <div class="col-xs-12 col-lg-3">
+                        <div class="col-xs-12 col-lg-3"  *ngIf="infraccion">
                             <div class="form-group">
                                 <label>Valor <b class="text-danger"></b></label>
-                                <input class="form-control" [(ngModel)]="comparendo.valor" name="valor" type="text"  readonly>
+                                <input class="form-control" [(ngModel)]="infraccion.valor" name="valor" type="text"  readonly>
                             </div> 
                         </div>
-                        <div class="col-xs-12 col-lg-3">
+                        <div class="col-xs-12 col-lg-3" *ngIf="infraccion">
                             <div class="form-group">
                                 <label>Valor adicional <b class="text-danger"></b></label>
-                                <input class="form-control" [(ngModel)]="comparendo.valorAdicional" name="valorAdicional" type="text">
+                                <input class="form-control" [(ngModel)]="comparendo.infraccionValorAdicional" name="valorAdicional" type="text">
                             </div> 
                         </div>
                     </div>
                 </div>
                 <div class="card-footer col-lg-12">
                     <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                    <button (click)="onEnviar()" [disabled]="comparendoDiligenciadoForm.invalid" class="btn btn-primary" type="button">Enviar</button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">Enviar</button>
                 </div>
             </div>
         </form>
