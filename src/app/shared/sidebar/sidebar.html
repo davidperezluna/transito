@@ -305,6 +305,7 @@
                 Infracción Categoria
               </a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" routerLink="mflInfraccion" [ngClass]="{'active' : ( addActive === 'mflInfraccion')}" (click)="addActiveMenu('mflInfraccion')">
                 <i class="fa fa-angle-right"></i>
@@ -321,11 +322,18 @@
                 <i class="fa fa-angle-right"></i> Valor tramite
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cvCfgPorcentajeInicial" [ngClass]="{'active' : ( addActive === 'cvCfgPorcentajeInicial')}"
+                (click)="addActiveMenu('cvCfgPorcentajeInicial')">
+                <i class="fa fa-angle-right"></i>
+                Porcentaje inicial
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level -->
         </li>
       </ul>
-
       <ul class="nav flex-column nav-second-level">
         <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">

@@ -34,6 +34,8 @@ import { CfgSvSenialColorModule } from './cfgSvSenialColor/cfgSvSenialColor.modu
 import { CfgSvSenialEstadoModule } from './cfgSvSenialEstado/cfgSvSenialEstado.module';
 import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.module';
 
+import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
+
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
 import { SoatModule } from './soat/soat.module';
@@ -215,6 +217,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CfgSvSenialColorModule,
       CfgSvSenialEstadoModule,
       CfgSvUnidadMedidaModule,
+      CvCfgPorcentajeInicialModule,
       CfgCdaModule,
       VehiculoTecnoMecanicaModule,
       SoatModule,

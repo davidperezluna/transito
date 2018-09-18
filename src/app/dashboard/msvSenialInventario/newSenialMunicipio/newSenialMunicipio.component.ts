@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core'; 
 import { MsvSenialInventarioService } from '../../../services/msvSenialInventario.service';
 import { MsvSenialService } from '../../../services/msvSenial.service';
+import { CfgSvSenialEstadoService } from '../../../services/cfgSvSenialEstado.service';
 import { CfgSvConectorService } from '../../../services/cfgSvConector.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { LoginService } from '../../../services/login.service';
@@ -26,6 +27,9 @@ export class NewSenialMunicipioComponent implements OnInit {
     public conectores: any;
     public conectorSelected: any;
 
+    public estados: any;
+    public estadoSelected: any;
+
     public formEdit = false;
     public formIndex = true;
     public senialMunicipio: MsvSenialMunicipio;
@@ -34,6 +38,7 @@ export class NewSenialMunicipioComponent implements OnInit {
         private _MsvSenialInventarioService: MsvSenialInventarioService,
         private _MsvSenialService: MsvSenialService,
         private _ConectorService: CfgSvConectorService,
+        private _EstadoService: CfgSvSenialEstadoService,
         private _MunicipioService: MunicipioService,
         private _LoginService: LoginService,
     ) { }
@@ -76,6 +81,20 @@ export class NewSenialMunicipioComponent implements OnInit {
         this._ConectorService.select().subscribe(
             response => {
                 this.conectores = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
+        this._EstadoService.select().subscribe(
+            response => {
+                this.estados = response;
             },
             error => {
                 this.errorMessage = <any>error;
