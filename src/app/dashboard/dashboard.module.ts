@@ -35,6 +35,7 @@ import { CfgSvSenialEstadoModule } from './cfgSvSenialEstado/cfgSvSenialEstado.m
 import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.module';
 
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
+import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
 
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
@@ -218,6 +219,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CfgSvSenialEstadoModule,
       CfgSvUnidadMedidaModule,
       CvCfgPorcentajeInicialModule,
+      CvAcuerdoPagoModule,
       CfgCdaModule,
       VehiculoTecnoMecanicaModule,
       SoatModule,
