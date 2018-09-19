@@ -473,6 +473,15 @@
           </a>
         </li>
       </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="svCapacitacion" [ngClass]="{'active' : ( addActive === 'svCapacitacion')}"
+            (click)="addActiveMenu('svCapacitacion')">
+            <i class="fa fa-angle-right"></i>
+            <!--HU-08-->Capacitaciones
+          </a>
+        </li>
+      </ul>
       <!-- /.nav- -->
 
     <li class="nav-item" [ngClass]="{'active' : (showMenu === 'menu-rnc')}">

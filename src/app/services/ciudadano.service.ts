@@ -47,15 +47,15 @@ export class CiudadanoService {
  			return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	searchByIdentificacion(token,ciudadano){ 
+	searchByIdentificacion(ciudadano, token){ 
 		let json = JSON.stringify(ciudadano);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/search/identificacion", params, {headers: headers}).map(res => res.json());
 	}
 
-	showCiudadanoCedulaId(token,id){
-		let json = JSON.stringify(id);
+	 showCiudadanoCedulaId(token,datos){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/acreedor/id", params, {headers: headers}).map(res => res.json());

@@ -1,0 +1,94 @@
+<div class="col-xs-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-uppercase">Registrar CAPACITACIÓN</h5>
+            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+        </div>
+        <div class="card-body">
+            <form #formNew="ngForm">
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Fecha <strong class="text-danger">*</strong></label>
+                        <input type="date" class="form-control" [(ngModel)]="capacitacion.fecha" name="fecha"
+                            required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Hora <strong class="text-danger">*</strong></label>
+                        <input type="time" value="time" class="form-control" [(ngModel)]="capacitacion.hora"
+                            name="hora" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Formador <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.formador" name="formador"
+                             required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Cédula Formador<strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.cedula" name="cedula"
+                            required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Fecha Actividad<strong class="text-danger">*</strong></label>
+                        <input type="date" class="form-control" [(ngModel)]="capacitacion.fechaActividad" name="fechaActividad" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Semana <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.semana" name="semana" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Municipio <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio"></ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Función Seguridad Vial <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.funcionSeguridadVial" name="funcionSeguridadVial" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Clase Actividad <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.claseActividad" name="claseActividad" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Tema Capacitacion <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.temaCapacitacion" name="temaCapacitacion" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Descripción de la Actividad <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.descripcionActividad" name="descripcionActividad" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Nombre del actor de la vía <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.nombreActorVial" name="nombreActorVial" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Apellido del actor de la vía <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.apellidoActorVial" name="apellidoActorVial" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Número Cédula actor de la vía <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.numeroCedulaActorVial" name="numeroCedulaActorVial" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Clase de Actor de la vía <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.claseActorVial" name="claseActorVial" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Adjuntar Documentación <strong class="text-danger">*</strong></label>
+                        <input type="file" (change)="onFileChange($event)" class="form-control" [(ngModel)]="capacitacion.documento" name="documento" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="btn-group">
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancel
+                </button>
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

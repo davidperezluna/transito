@@ -7,4 +7,4 @@ export const SoatRoutes: Route[] = [
       component: SoatComponent
     }
 ];
- 
+
