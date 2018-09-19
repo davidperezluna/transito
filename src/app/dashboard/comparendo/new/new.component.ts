@@ -192,13 +192,6 @@ constructor(
           this.validado = true;
           this.consecutivo = response.data;
           this.comparendo.consecutivoId = this.consecutivo.id;
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-
           this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
               this.municipios = response;

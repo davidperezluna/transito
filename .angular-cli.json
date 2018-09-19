@@ -19,36 +19,31 @@
       "styles": [
         "styles.css",
         "../node_modules/font-awesome/css/font-awesome.css",		
-		"../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",        
-    "../node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css",
-
-        
-
-		"../node_modules/fullcalendar/dist/fullcalendar.css",
-		"../node_modules/jstree/dist/themes/default/style.min.css",
-		"../node_modules/swipebox/src/css/swipebox.min.css",
-		"../node_modules/spinkit/scss/spinkit.scss", 
-		"../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css", 
-		"assets/vendors/bootstrap4beta/css/bootstrap.css",
-		"assets/vendors/flags/flags.min.css",
-		"assets/vendors/weather-icons-master/css/weather-icons.min.css",
-		"assets/vendors/weather-icons-master/css/weather-icons-wind.min.css",
-		"assets/vendors/themify-icons/themify-icons.css",
-    "assets/scss/light_adminux.scss",
-    "../node_modules/summernote/dist/summernote-bs4.css"
+        "../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",        
+        "../node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css",
+        "../node_modules/fullcalendar/dist/fullcalendar.css",
+        "../node_modules/jstree/dist/themes/default/style.min.css",
+        "../node_modules/swipebox/src/css/swipebox.min.css",
+        "../node_modules/spinkit/scss/spinkit.scss", 
+        "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css", 
+        "assets/vendors/bootstrap4beta/css/bootstrap.css",
+        "assets/vendors/flags/flags.min.css",
+        "assets/vendors/weather-icons-master/css/weather-icons.min.css",
+        "assets/vendors/weather-icons-master/css/weather-icons-wind.min.css",
+        "assets/vendors/themify-icons/themify-icons.css",
+        "assets/scss/light_adminux.scss",
+        "../node_modules/summernote/dist/summernote-bs4.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/moment/moment.js",
-        "../node_modules/jquery-circle-progress/dist/circle-progress.min.js",
-
-        "../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js",
-        "../node_modules/datatables.net-responsive/js/dataTables.responsive.js",
-        "../node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js",	
-        
+	
         "../node_modules/datatables.net/js/jquery.dataTables.min.js",
+        "../node_modules/datatables.net-responsive/js/dataTables.responsive.js",
+        "../node_modules/jquery-circle-progress/dist/circle-progress.min.js",
+        
         "../node_modules/datatables.net/js/dataTables.buttons.min.js",
         "../node_modules/datatables.net/js/jszip.min.js",
         "../node_modules/datatables.net/js/pdfmake.min.js",
@@ -57,22 +52,22 @@
         "../node_modules/datatables.net/js/buttons.print.min.js",
 
 
-		"../node_modules/jvectormap/jquery-jvectormap.min.js", 		 
-		"../node_modules/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js", 
-		"../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-lcc-en.js", 
-		"../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-merc-en.js", 
-		"../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-aea-en.js", 
-		"../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-mill-en.js", 
+        "../node_modules/jvectormap/jquery-jvectormap.min.js", 		 
+        "../node_modules/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js", 
+        "../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-lcc-en.js", 
+        "../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-merc-en.js", 
+        "../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-aea-en.js", 
+        "../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-mill-en.js", 
         "../node_modules/flexslider/jquery.flexslider-min.js",
         "../node_modules/fullcalendar/dist/fullcalendar.min.js",
         "../node_modules/highcharts/highcharts.js",
-		"assets/vendors/sparklines/jquery.sparkline.min.js",
-		"../node_modules/masonry-layout/dist/masonry.pkgd.min.js",
-		"../node_modules/swipebox/src/js/jquery.swipebox.min.js",
-		"../node_modules/jstree/dist/jstree.min.js",
-		"../node_modules/rangeslider.js/dist/rangeslider.min.js",
-		"../node_modules/footable/dist/footable.all.min.js",
-		"../node_modules/summernote/dist/summernote-bs4.js"	
+        "assets/vendors/sparklines/jquery.sparkline.min.js",
+        "../node_modules/masonry-layout/dist/masonry.pkgd.min.js",
+        "../node_modules/swipebox/src/js/jquery.swipebox.min.js",
+        "../node_modules/jstree/dist/jstree.min.js",
+        "../node_modules/rangeslider.js/dist/rangeslider.min.js",
+        "../node_modules/footable/dist/footable.all.min.js",
+        "../node_modules/summernote/dist/summernote-bs4.js"	
       ],
  	 "environmentSource": "environments/environment.ts",
 	 "environments": {

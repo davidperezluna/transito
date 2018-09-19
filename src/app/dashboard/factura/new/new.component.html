@@ -72,9 +72,10 @@
                             </span>
                         </div> 
                     </div>
-                    
                 </div>  
-                
+
+                <app-new-ciudadano *ngIf='newCiudadanoForm' [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (redyCidadano)="redyCidadano($event)"></app-new-ciudadano>
+                 
                 <div class="container col-xs-12 col-lg-12" *ngIf='isExistCiudadano'>
                     <table class="table table-bordered " id="dataTables-example">
                         <tbody>
