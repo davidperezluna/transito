@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CvCfgPorcentajeInicialService } from '../../../services/cvCfgPorcentajeInicial.service';
+import { CfgSvConectorService } from '../../../services/cfgSvConector.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _PorcentajeService: CvCfgPorcentajeInicialService,
+  private _ConectorService: CfgSvConectorService,
   private _loginService: LoginService,
   ){}
 
@@ -25,7 +25,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._PorcentajeService.edit(this.porcentaje,token).subscribe(
+		this._ConectorService.edit(this.porcentaje,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
