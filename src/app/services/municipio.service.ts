@@ -34,7 +34,6 @@ export class MunicipioService {
 	}
 
 	showMunicipio(token,id){
-		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
@@ -70,7 +69,6 @@ export class MunicipioService {
 	}
 
 	getMunicipioPorDepartamentoSelect(id){
-		
 		return this._http.get(this.url+"/"+id+"/select/municipios/por/departamento").map(res => res.json());
 	}
 

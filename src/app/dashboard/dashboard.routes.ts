@@ -19,7 +19,17 @@ import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 
+import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.routes';
+
+import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.routes';
+import { CvAcuerdoPagoRoutes } from './cvAcuerdoPago/cvAcuerdoPago.routes';
+
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
+import { CfgSvConectorRoutes } from './cfgSvConector/cfgSvConector.routes';
+import { CfgSvSenialTipoRoutes } from './cfgSvSenialTipo/cfgSvSenialTipo.routes';
+import { CfgSvSenialColorRoutes } from './cfgSvSenialColor/cfgSvSenialColor.routes';
+import { CfgSvSenialEstadoRoutes } from './cfgSvSenialEstado/cfgSvSenialEstado.routes';
+import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.routes';
 
 import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
@@ -129,7 +139,7 @@ import { ReporteRoutes } from './reporte/reporte.routes';
 import { DashboardComponent } from '.';
 
 
-import { MsvInventarioSenialRoutes } from './msvInventarioSenial/msvInventarioSenial.routes';
+import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
 import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 
@@ -193,7 +203,15 @@ export const DashboardRoutes: Route[] = [
       ...AlmacenRoutes,
       ...CfgTipoInfractorRoutes,
       ...ComparendoRoutes,
+      ...CfgAdmFormatoTipoRoutes,
+      ...CvCfgPorcentajeInicialRoutes,
+      ...CvAcuerdoPagoRoutes,
       ...CfgBodegaRoutes,
+      ...CfgSvConectorRoutes,
+      ...CfgSvSenialTipoRoutes,
+      ...CfgSvSenialColorRoutes,
+      ...CfgSvSenialEstadoRoutes,
+      ...CfgSvUnidadMedidaRoutes,
       ...CfgCdaRoutes,
       ...VehiculoTecnoMecanicaRoutes,
       ...SoatRoutes,
@@ -245,7 +263,7 @@ export const DashboardRoutes: Route[] = [
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...InsumoBusquedaRoutes,
-      ...MsvInventarioSenialRoutes,
+      ...MsvSenialInventarioRoutes,
       ...MsvSenialRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CfgEmpresaServicioRoutes

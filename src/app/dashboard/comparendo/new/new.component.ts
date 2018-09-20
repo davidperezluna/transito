@@ -30,9 +30,10 @@ export class NewComponent implements OnInit {
   public errorMessage;
   public respuesta;
   public consecutivo: any = null;
+  public edad: any = null;
   public funcionario: any;
   public vehiculo: any;
-  public ciudadano: any;
+  public ciudadano: any = null;
   public testigo: any = [{ 'identificacion':null }];
   public validado = false;
   public placa: any;
@@ -47,6 +48,7 @@ export class NewComponent implements OnInit {
   public municipioNacimientoSelected: any;
   public infractorTipos: any;
   public infractorTipoSelected: any;
+  public infraccion: any = null;
   public categorias: any;
   public categoriaSelected: any;
   public patios: any;
@@ -115,9 +117,12 @@ constructor(
     this.comparendo.estadoId = this.comparendoEstadoSelected;
     this.comparendo.tipoInfractorId = this.infractorTipoSelected;
     this.comparendo.vehiculoId = this.vehiculo.id;
-    this.comparendo.ciudadanoId = this.ciudadano.id;
-    this.comparendo.testigoId = this.testigo.id;
 
+    if (this.ciudadano) {
+      this.comparendo.ciudadanoId = this.ciudadano.id;
+    }
+    
+    this.comparendo.testigoId = this.testigo.id;
     this.inmovilizacion.gruaId = this.gruaSelected;
     this.inmovilizacion.patioId = this.patioSelected;
 
@@ -187,13 +192,6 @@ constructor(
           this.validado = true;
           this.consecutivo = response.data;
           this.comparendo.consecutivoId = this.consecutivo.id;
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-
           this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
               this.municipios = response;
@@ -351,7 +349,8 @@ constructor(
                   alert("Error en la petición");
                 }
               }
-            });
+            }
+          );
         }else {
           swal({
             title: 'Atención!',
@@ -392,6 +391,21 @@ constructor(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
+
+          this._CiudadanoService.calculateAge({'fechaNacimiento':this.ciudadano.fechaNacimiento}, token).subscribe(
+            response => {
+              this.edad = response.data;
+
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+
         }else{
           swal({
             title: 'Atención!',
@@ -437,6 +451,39 @@ constructor(
         }
 
     }); 
+  }
+
+  onChangedInfraccion(e) {
+    if (e) {
+      let token = this._loginService.getToken();
+      this._MflInfraccionService.show({'id':e}, token).subscribe(
+        response => {
+          this.infraccion = response.data;
+
+          this._MflInfraccionService.calculateValue({'idInfraccion': this.infraccion.id}, token).subscribe(
+            response => {
+              this.infraccion.valor = response.data;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
   }
 
   onSearchTestigo() {

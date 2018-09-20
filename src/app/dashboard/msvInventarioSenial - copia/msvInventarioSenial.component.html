@@ -1,0 +1,504 @@
+<div class="container">
+  <hr>
+  <div class="row" *ngIf='formSearch'>
+    <div class="col-md-12 col-lg-4">
+      <div class="card">
+
+        <div class="card-body">
+          <h5 class="text-uppercase">Señalización <small>Buscar señales</small></h5>
+          <hr>
+          <form #formSearch="ngForm">
+            <div class="row"><!-- .row -->
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <label>Seleccione donde quiera buscar:</label>
+                  <table style="width: 100%;">
+                    <tr>
+                     <td>
+                      <span *ngFor="let tiposDestinos of tiposDestino; let i = index">
+                        <input  type="radio" value="tiposDestinos.value" ng-model="tipoDestinoSelected" name="tipoDestino" (click)="obtieneDestino(tiposDestinos.value)">
+                        {{tiposDestinos.label}}
+                        &nbsp;&nbsp;
+                      </span>
+                     </td>
+                     <td>
+                      <ng-select [multiple]="false" [options]="destino" [(ngModel)]="destinoSelected" name="destino" style="width:300px">
+                      </ng-select>
+                     </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div><!-- /.row -->
+
+            <div class="row"><!-- .row -->
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <label>Seleccione Tipo de señal a buscar:</label><br>
+                  <span *ngFor="let senales of senal; let i = index">
+                    <input  type="radio" value="senales.value" ng-model="senialSelected" name="senal">
+                    {{senales.label}}
+                    &nbsp;&nbsp;
+                  </span>
+                </div>
+              </div>
+            </div><!-- /.row -->
+          </form>
+        </div>
+
+        <div class="card-footer">
+          <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-search"></i>
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<hr>-->
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-xs-12 col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Inventario</b>
+            <br>
+            <div class="btn-group pull-right">
+              <button (click)="onAdd()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                <i class="fa fa-plus"></i>
+                <span class="text">Agregar nuevas señales</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Nro. de Inventario</th>
+                <th>Fecha de Inventario</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let senal of seniales; let i = index">
+                <td>{{senal.numero}}</td>
+                <td><a (click)="getInventario(senal.id, senal.fecha)" style="text-decoration: underline; cursor: pointer;">{{senal.fecha}}</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<hr>-->
+  <div class="row" id='formInventario'><!--*ngIf='formInventario'-->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div class="card-body">
+          <h5 class="text-uppercase">Inventario</h5>
+          <hr>
+          <div id="inventario" style="display: none;">
+          <div class="form-group row">
+            <div class="col-md-12 col-lg-8 offset-lg-2">
+              <label>Seleccione el Tipo de señal a buscar:</label>
+              <hr>
+                <span *ngFor="let senales of senal; let i = index">
+                  <input  type="radio" (click)="searchInventario(senales.value)" value="{{senales.value}}" ng-model="senialSelected" name="senal">
+                  {{senales.label}}
+                  &nbsp;&nbsp;
+                </span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-12 col-lg-8 offset-lg-2">
+              <button (click)="onExportInv()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                Exportar
+              </button>
+            </div>
+          </div>
+         </div>
+        </div>
+
+        <div class="card-body">
+          <table class="table " id="dataTables-inventario">
+            <thead>
+            <tr style="text-align: center;">
+              <th>Id</th>
+              <th># Inventario</th>
+              <th>Fecha de Inventario</th>
+              <th>Fecha de ingreso</th>
+              <th>Unidad</th>
+              <th>Color</th>
+              <th>Latitud</th>
+              <th>Longitud</th>
+              <th>Código</th>
+              <th>Logo</th>
+              <th>Nombre</th>
+              <th>Valor</th>
+              <th>Estado</th>
+              <th>Cantidad</th>
+              <th>Comprobante/Nota</th>
+              <th>Geo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="odd" style="text-align: center;" *ngFor="let senalPorInventario of senalesPorInventario?.data; let i = ind">
+              <td>{{senalPorInventario.ID}}</td>
+              <td>{{senalPorInventario.NUMERO_INVENTARIO}}</td>
+              <td>{{senalPorInventario.FECHA_INVENTARIO}}</td>
+              <td>{{senalPorInventario.FECHA_INGRESO}}</td>
+              <td>{{senalPorInventario.UNIDAD}}</td>
+              <td>
+                <div style="background-image: url('assets/img/loader.gif'); background-size: 30px; background-repeat: no-repeat; background-position: center; border:solid 0.5px #ccc; border-radius:0.5px; box-shadow: -0.5px -0.5px 0.5px 0px red, 0.5px -0.5px 0.5px yellow, 0.5px 0.5px 0.5px green, -0.5px 0.5px 0.5px blue;" name="setColor">&nbsp;</div>
+                <input type="hidden" name="getColor" value="{{senalPorInventario.HEX}}">
+                {{senalPorInventario.COLOR}}
+              </td>
+              <td>{{senalPorInventario.LATITUD}}</td>
+              <td>{{senalPorInventario.LONGITUD}}</td>
+              <td>{{senalPorInventario.CODIGO}}</td>
+              <td>
+                <input type="hidden" name="src" value="{{senalPorInventario.LOGO}}">
+                <img height="30px" src="assets/img/loader.gif" name="logo">
+              </td>
+              <td>{{senalPorInventario.NOMBRE}}</td>
+              <td>{{senalPorInventario.VALOR}}</td>
+              <td>{{senalPorInventario.ESTADO}}</td>
+              <td>{{senalPorInventario.CANTIDAD}}</td>
+              <td>
+                <input type="hidden" name="loc" value="{{senalPorInventario.ARCHIVO}}">
+                <a name="archivo"><img height="30px" src="assets/img/loader.gif"></a>
+              </td>
+              <td><button (click)='onGeo(senalPorInventario.DIRECCION)' (ready)="ready($event)" class="btn btn-primary" type="button">
+                <i class="fa fa-eye"></i>
+              </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!--<hr>-->
+  <div class="row" id="formAdd" style="visibility: hidden;"><!--*ngIf='formAdd'-->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div class="card-header">
+
+          <div class="card-title">
+            <b class="text-uppercase">Agregar señales</b>
+            <br>
+            <div class="col-md-12 col-lg-8 offset-lg-2">
+              <div class="card">
+                <div class="card-body">
+
+
+                  <form #formNew="ngForm">
+                    <div class="form-group row">
+                      <div class="col-xs-12 col-lg-10">
+                        <table>
+                          <tr>
+                            <td>
+                              <label>Inventario:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="hidden" [(ngModel)]="idSelected" name="id" />
+                        <select name="inventario" class="form-control" style="width:300px;">
+                        </select>
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Fecha:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="date" [(ngModel)]="fechaSelected" class="form-control" name="fecha">
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Unidad:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="text" [(ngModel)]="unidadSelected" class="form-control" name="unidad">
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Color:</label>
+                            </td>
+                            <td>
+                        <span>
+                          <select name="color" class="form-control" style="width:300px;">
+                          </select>
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td align="left">
+                                Dirección:
+                            </td>
+                            <td>
+                              <span (click)="onAddress()">
+                              <input type="text" [(ngModel)]="direccionSelected" class="form-control" name="direccion" readonly>
+                              </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Código:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="text" [(ngModel)]="codigoSelected" class="form-control" name="codigo">
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Logo:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="file" [(ngModel)]="archivoSelected" (change)="onFileChange($event)"  placeholder="Adjuntar" accept=".jpeg,.jpg" multiple="false" class="form-control" name="file">
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Nombre:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="text" [(ngModel)]="nombreSelected" class="form-control" name="nombre">
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Valor:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="number" [(ngModel)]="valorSelected" class="form-control" min="0" max="100000000" maxlength="10" name="valor">
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Estado:</label>
+                            </td>
+                            <td>
+                        <span>
+                          <select name="estado" class="form-control" style="width:300px;">
+                          </select>
+                        </span>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              <label>Cantidad:</label>
+                            </td>
+                            <td>
+                        <span>
+                        <input type="number" [(ngModel)]="cantidadSelected" class="form-control" min="0" max="100000000" maxlength="10" name="cantidad">
+                        </span>
+                            </td>
+                          </tr>
+
+                        </table>
+                      </div>
+                    </div>
+                  </form>
+
+
+                  <div class="col-md-12 col-sm-12">
+                    <!--<input type="text" style="width:400px" id="lat" />
+                    <input type="text" style="width:400px" id="lng" />
+                    <div id="geo"><div #map style="width:400px; height:300px">loading...</div></div>-->
+
+                    <div id="geo" class="swal2-container swal2-center swal2-fade swal2-shown" style="visibility: hidden; overflow-y: auto;">
+                      <div aria-labelledby="swal2-title" aria-describedby="swal2-content" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="width: 700px; display: flex;">
+                        <div class="swal2-header">
+                         <ul class="swal2-progresssteps" style="display: none;"></ul>
+                         <div class="swal2-icon swal2-error" style="display: none;">
+                           <span class="swal2-x-mark">
+                             <span class="swal2-x-mark-line-left"></span>
+                             <span class="swal2-x-mark-line-right"></span>
+                           </span>
+                         </div>
+                         <!--<div class="swal2-icon swal2-question" style="display: none;">
+                           <span class="swal2-icon-text">?</span>
+                         </div>
+                         <div class="swal2-icon swal2-warning" style="display: none;">
+                           <span class="swal2-icon-text">!</span>
+                         </div>
+                         <div class="swal2-icon swal2-info swal2-animate-info-icon" style="display: flex;">
+                           <span class="swal2-icon-text">i</span>
+                         </div>-->
+                         <!--<div class="swal2-icon swal2-success" style="display: none;">
+                           <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                           <span class="swal2-success-line-tip"></span>
+                           <span class="swal2-success-line-long"></span>
+                           <div class="swal2-success-ring"></div>
+                           <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                           <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                         </div>-->
+                           <img class="swal2-image" style="display: none;">
+                           <h2 class="swal2-title" id="swal2-title">Ubicación de la señal</h2>
+                           <button (click)="onCloseGeo()" type="button" class="swal2-close" aria-label="Close this dialog" style="display: flex;">
+                             ×
+                           </button>
+                         </div>
+                           <div class="swal2-content">
+                             <div id="swal2-content" style="display: block;">
+
+                               <!--content-->
+                               <input type="hidden" style="width:400px" id="lat" />
+                               <input type="hidden" style="width:400px" id="lng" />
+                               <input type="text" style="width:400px" class="form-control" style="visibility: hidden;" id="address" />
+                               <div align="center">
+                                 <div #map style="width:660px; height:300px" id="map">loading...</div>
+                               </div>
+
+                             </div>
+                             <input class="swal2-input" style="display: none;">
+                             <input type="file" class="swal2-file" style="display: none;">
+                             <div class="swal2-range" style="display: none;">
+                              <input type="range">
+                              <output></output>
+                             </div>
+                             <select class="swal2-select" style="display: none;"></select>
+                             <div class="swal2-radio" style="display: none;"></div>
+                             <label for="swal2-checkbox" class="swal2-checkbox" style="display: none;">
+                              <input type="checkbox">
+                             </label>
+                             <textarea class="swal2-textarea" style="display: none;"></textarea>
+                             <div class="swal2-validationerror" id="swal2-validationerror" style="display: none;"></div>
+                             </div>
+                             <div class="swal2-actions" style="display: flex;">
+                              <!--<button (click)="onCloseGeo()" type="button" class="swal2-confirm swal2-styled" aria-label="Thumbs up, great!" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
+                                <i class="fa fa-thumbs-up"></i> OK!
+                              </button>-->
+                               <button (click)="onSearchGeo()" id="searchAddress" (ready)="ready($event)" class="swal2-confirm swal2-styled" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
+                                 <i class="fa fa-eye"></i> Buscar Dirección
+                               </button>
+                              <!--<button type="button" class="swal2-cancel swal2-styled" aria-label="Thumbs down" style="display: none;">
+                                <i class="fa fa-thumbs-down"></i>
+                              </button>-->
+                             </div>
+                             <div class="swal2-footer" style="display: none;"></div>
+                           </div>
+                      </div>
+
+
+                      <div class="card-footer">
+                        <button (click)="onExport()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                          Exportar
+                        </button>
+                        <hr>
+                        <button (click)="onSend()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                          <i class="fa fa-save"></i>
+                          Enviar
+                        </button>
+                      </div>
+                  </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="card-body">
+              <table class="table " id="dataTables-example2">
+                <thead>
+                <tr style="text-align: center;">
+                  <th>Id</th>
+                  <th># Inventario</th>
+                  <th>Fecha de Inventario</th>
+                  <th>Fecha de ingreso</th>
+                  <th>Unidad</th>
+                  <th>Color</th>
+                  <th>Latitud</th>
+                  <th>Longitud</th>
+                  <th>Código</th>
+                  <th>Logo</th>
+                  <th>Nombre</th>
+                  <th>Valor</th>
+                  <th>Estado</th>
+                  <th>Cantidad</th>
+                  <th>Comprobante/Nota</th>
+                  <th>Geo</th>
+                  <th>||</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="odd" style="text-align: center;" *ngFor="let senalPorAsignar of senalesPorAsignar?.data; let i = ind">
+                  <td>{{senalPorAsignar.ID}}</td>
+                  <td>{{senalPorAsignar.NUMERO_INVENTARIO}}</td>
+                  <td>{{senalPorAsignar.FECHA_INVENTARIO}}</td>
+                  <td>{{senalPorAsignar.FECHA_INGRESO}}</td>
+                  <td>{{senalPorAsignar.UNIDAD}}</td>
+                  <td>
+                    <div style="background-image: url('assets/img/loader.gif'); background-size: 30px; background-repeat: no-repeat; background-position: center; border:solid 0.5px #ccc; border-radius:0.5px; box-shadow: -0.5px -0.5px 0.5px 0px red, 0.5px -0.5px 0.5px yellow, 0.5px 0.5px 0.5px green, -0.5px 0.5px 0.5px blue;" name="setColor">&nbsp;</div>
+                    <input type="hidden" name="getColor" value="{{senalPorAsignar.HEX}}">
+                    {{senalPorAsignar.COLOR}}
+                  </td>
+                  <td>{{senalPorAsignar.LATITUD}}</td>
+                  <td>{{senalPorAsignar.LONGITUD}}</td>
+                  <td>{{senalPorAsignar.CODIGO}}</td>
+                  <td>
+                    <input type="hidden" name="src" value="{{senalPorAsignar.LOGO}}">
+                    <img height="30px" src="assets/img/loader.gif" name="logo">
+                  </td>
+                  <td>{{senalPorAsignar.NOMBRE}}</td>
+                  <td>{{senalPorAsignar.VALOR}}</td>
+                  <td>{{senalPorAsignar.ESTADO}}</td>
+                  <td>{{senalPorAsignar.CANTIDAD}}</td>
+                  <td>
+                    <input type="hidden" name="loc" value="{{senalPorAsignar.ARCHIVO}}">
+                    <a name="archivo"><img height="30px" src="assets/img/loader.gif"></a>
+                  </td>
+                  <td><button (click)='onGeo(senalPorAsignar.DIRECCION)' (ready)="ready($event)" class="btn btn-primary" type="button">
+                    <i class="fa fa-eye"></i>
+                  </button></td>
+                  <td><button (click)="onEdit(senalPorAsignar)" (ready)="ready($event)" class="btn btn-primary" type="button">
+                    <i class="fa fa-pencil-square-o"></i>
+                  </button></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

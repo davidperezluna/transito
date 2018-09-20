@@ -19,8 +19,7 @@ constructor(
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.bodega);
-   }
+  ngOnInit(){ }
 
   onCancelar(){ this.ready.emit(true); }
 

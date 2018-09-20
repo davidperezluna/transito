@@ -1,0 +1,95 @@
+
+<div class="card">
+    <div class="card-header">
+        <h5>
+            <strong class="text-uppercase">Nueva señal</strong>
+            <small *ngIf="municipio">{{ municipio.nombre }}</small>
+        </h5>
+        <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+    </div>
+    <div class="card-body">
+        <form #formNew="ngForm">
+            <div class="form-group row">
+                <div class="col-xs-12 col-lg-3">
+                    <label>Fecha <strong class="text-danger">*</strong></label>
+                    <input type="date" class="form-control" [(ngModel)]="senialMunicipio.fecha" name="fecha" required autofocus />
+                </div>
+                <div class="col-xs-12 col-lg-9">
+                    <label>Señal <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="senialSelected" name="seniales" required>
+                    </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                    <label>Latitud <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.latitud" name="latitud" required />
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                    <label>Longitud <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.longitud" name="longitud" required />
+                </div>
+                <div class="col-xs-12 col-lg-6">
+                    <label>Dirección <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.direccion" name="direccion" required disabled />
+                </div>
+                <div class="col-xs-12 col-lg-2">
+                    <label>Via 1 <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via1" name="via1" required />
+                </div>
+                <div class="col-xs-12 col-lg-2">
+                    <label>No. 1 <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no1" name="no1" required />
+                </div>
+                <div class="col-xs-12 col-lg-2">
+                    <label>Conector <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="conectores" [(ngModel)]="conectorSelected" required name="conectores">
+                    </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-2">
+                    <label>Via 2 <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via2" name="via2" required />
+                </div>
+                <div class="col-xs-12 col-lg-2">
+                    <label>No. 2 <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no2" name="no2" required />
+                </div><div class="col-xs-12 col-lg-2">
+                    <label>Via 3 <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via3" name="via3" required />
+                </div>
+                <div class="col-xs-12 col-lg-2">
+                    <label>No. 3 <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no3" name="no3" required />
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                    <label>Cantidad <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.cantidad" name="cantidad" required />
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                    <label>Valor <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.valor" name="valor" required />
+                </div>
+                <div class="col-xs-12 col-lg-6">
+                    <label>Estado <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required name="estados">
+                    </ng-select>
+                </div>
+                
+                <div class="col-xs-12 col-lg-6">
+                    <label>Adjunto <strong class="text-danger">*</strong></label>
+                    <input type="file"  class="form-control" [(ngModel)]="fileSelected" (change)="onFileChange($event)" placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" name="file">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="btn-group">
+            <button (click)="onCancelar()" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                Cancel
+            </button>
+            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                <i class="fa fa-save"></i>
+                Enviar
+            </button>
+        </div>
+    </div>
+</div>
