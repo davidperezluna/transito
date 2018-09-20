@@ -84,6 +84,11 @@
       </div>
     </div><!-- .row -->
 
+    <div class="tab-pane" id="rnc-ciudadano" role="tabpanel">
+      <app-new-rnc-ciudadano *ngIf="solicitanteEncontrado === 3" [identificacion]="identificacion"
+        (ready)="ready($event)"></app-new-rnc-ciudadano> 
+    </div>
+
     <app-edit *ngIf='formEdit' [tramiteSolicitud]="tramiteSolicitud" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' [solicitante]="solicitante" (ready)="ready($event)"></app-new>
 </div>
