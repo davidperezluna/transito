@@ -6,7 +6,7 @@
           <div class="card-header">
             <h5 class="card-title">
               <strong class="text-uppercase">Configuración</strong>
-              <small>Porcentaje inicial</small>
+              <small>Intereses</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                   <i class="fa fa-plus"></i>
@@ -26,16 +26,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let porcentaje of porcentajes; let i = index">
+                <tr class="odd" *ngFor="let interes of intereses; let i = index">
                   <td >{{ i + 1 }}</td>
-                  <td >{{ porcentaje.anio }}</td>
-                  <td >{{ porcentaje.valor }} %</td>
+                  <td >{{ interes.anio }}</td>
+                  <td >{{ interes.valor }} %</td>
                   <td>
-                    <button (click)="onEdit(porcentaje)" class="btn btn-xs btn-info" type="button">
+                    <button (click)="onEdit(interes)" class="btn btn-xs btn-info" type="button">
                       <i class="fa fa-edit"></i>
                       Editar
                     </button> 
-                    <button (click)="onDelete(porcentaje.id)"  class="btn btn-xs btn-danger" type="button">
+                    <button (click)="onDelete(interes.id)"  class="btn btn-xs btn-danger" type="button">
                       <i class="fa fa-trash"></i>
                       Eliminar
                     </button> 
@@ -49,6 +49,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [porcentaje]="porcentaje" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [interes]="interes" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

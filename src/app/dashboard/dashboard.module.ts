@@ -34,12 +34,15 @@ import { CfgSvSenialColorModule } from './cfgSvSenialColor/cfgSvSenialColor.modu
 import { CfgSvSenialEstadoModule } from './cfgSvSenialEstado/cfgSvSenialEstado.module';
 import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.module';
 
+import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
 
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
 import { SoatModule } from './soat/soat.module';
+
+import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -186,6 +189,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CfgAsignacionPlacaSedeModule,
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
+      SvCapacitacionModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
@@ -218,6 +222,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CfgSvSenialColorModule,
       CfgSvSenialEstadoModule,
       CfgSvUnidadMedidaModule,
+      CvCfgInteresModule,
       CvCfgPorcentajeInicialModule,
       CvAcuerdoPagoModule,
       CfgCdaModule,

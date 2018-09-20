@@ -21,6 +21,7 @@ import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.rout
 
 import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.routes';
 
+import { CvCfgInteresRoutes } from './cvCfgInteres/cvCfgInteres.routes';
 import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.routes';
 import { CvAcuerdoPagoRoutes } from './cvAcuerdoPago/cvAcuerdoPago.routes';
 
@@ -35,6 +36,7 @@ import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
 import { SoatRoutes } from './soat/soat.routes';
 
+import { SvCapacitacionRoutes } from './svCapacitacion/svCapacitacion.routes';
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -203,6 +205,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgTipoInfractorRoutes,
       ...ComparendoRoutes,
       ...CfgAdmFormatoTipoRoutes,
+      ...CvCfgInteresRoutes,
       ...CvCfgPorcentajeInicialRoutes,
       ...CvAcuerdoPagoRoutes,
       ...CfgBodegaRoutes,
@@ -214,6 +217,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgCdaRoutes,
       ...VehiculoTecnoMecanicaRoutes,
       ...SoatRoutes,
+      ...SvCapacitacionRoutes,
       ...CfgComparendoEstadoRoutes,
       ...InfraccionRoutes,
       ...CarroceriaRoutes,
