@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CvAcuerdoPagoService } from '../../services/cvAcuerdoPago.service';
 import { LoginService } from '../../services/login.service';
-import { CvAcuerdoPago } from './cvAcuerdoPago.modelo';
+import { CiudadanoService } from '../../services/ciudadano.service';
+import { ComparendoService } from '../../services/comparendo.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -9,54 +10,102 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './cvAcuerdoPago.component.html'
 })
+
 export class CvAcuerdoPagoComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
-	public porcentajes;
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
-  public table:any; 
-  public porcentaje: CvAcuerdoPago;
+	public acuerdoPago: any;
+	public valorTotal: any;
+	public ciudadano: any;
+	public comparendos: any = null;
+  public comparendosSelect: any = [];
+	public numeroIdentificacion: any;
+  
+  public formIndex = false;
+  public formNew = false;
+  public formEdit = false;
+  public formSearch = true;
+  public table: any = null;
+
 
   constructor(
-    private _ConectorService: CvAcuerdoPagoService,
-		private _loginService: LoginService,
-    ){}
+    private _AcuerdoPagoService: CvAcuerdoPagoService,
+    private _loginService: LoginService,
+    private _CiudadanoService: CiudadanoService,
+    private _ComparendoService: ComparendoService,
+  ){}
     
-  ngOnInit() {
-    swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._ConectorService.index().subscribe(
-				response => {
-          this.porcentajes = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+  ngOnInit() {  }
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+  onSearch() {
+    this.formIndex = false;
+
+    let token = this._loginService.getToken();
+
+    this._CiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.numeroIdentificacion }).subscribe(
+      response => {
+        if (response.status == 'success') {          
+          this.ciudadano = response.data;
+          this._ComparendoService.searchComparendosCiudadano({ 'ciudadanoId': this.ciudadano.id }, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.comparendos = response.data;
+                let timeoutId = setTimeout(() => {
+                  this.iniciarTabla();
+                }, 100);
+                this.formIndex = true;
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'info',
+                  confirmButtonText: 'Aceptar'
+                });
+              } else {
+                swal({
+                  title: 'Alerta!',
+                  text: response.message,
+                  type: 'warning',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          );
+        } else {
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
   }
+
+  onSelect(idComparendo: any, eve: any) {
+    if (eve.target.checked) {
+      this.comparendosSelect.push(idComparendo);
+    } else {
+      let index = this.comparendosSelect.indexOf(idComparendo);
+      if (index > -1) {
+        this.comparendosSelect.splice(index, 1);
+      }
+    }
+  }
+
 
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -78,6 +127,7 @@ export class CvAcuerdoPagoComponent implements OnInit {
   onNew(){
     this.formNew = true;
     this.formIndex = false;
+    this.formSearch = false;
     this.table.destroy();
   }
 
@@ -85,53 +135,14 @@ export class CvAcuerdoPagoComponent implements OnInit {
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formIndex = true;
+      this.formIndex = false;
+      this.formSearch = true;
       this.ngOnInit();
     }
   }
 
-  onDelete(id:any){
-    swal({
-      title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#15d4be',
-      cancelButtonColor: '#ff6262',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        let token = this._loginService.getToken();
-        this._ConectorService.delete({'id':id},token).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
-
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-        
-      }
-    })
-  }
-
-  onEdit(porcentaje:any){
-    this.porcentaje = porcentaje;
+  onEdit(acuerdoPago:any){
+    this.acuerdoPago = acuerdoPago;
     this.formEdit = true;
     this.formIndex = false;
   }

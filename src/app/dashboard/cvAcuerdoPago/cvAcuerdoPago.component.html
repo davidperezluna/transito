@@ -1,54 +1,81 @@
-<div class="container" >
+<div class="container">
   <hr>
-  <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">
-              <strong class="text-uppercase">Configuración Seguridad Vial</strong>
-              <small>Conectores</small>
-              <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
-                  <i class="fa fa-plus"></i>
-                  <span class="text">Nuevo</span>
-                </button>
+  <div class="row" *ngIf='formSearch'><!-- .row -->
+    <div class="col-xs-12 col-lg-4"><!-- .col -->
+      <div class="card">
+        <div class="card-header">
+            <h5 class="text-uppercase"><strong>Acuerdos de pago</strong> <small>Buscar comparendos</small></h5>
+        </div>
+        <div class="card-body"><!-- .card-body -->
+          <form #formSearch="ngForm">
+            <div class="row"><!-- .row -->
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <label>Número de identificación:</label>
+                  <input type="text" class="form-control" [(ngModel)]="numeroIdentificacion" name="numeroIdentificacion" required autofocus />
+                </div>
               </div>
-            </h5>
-          </div>
-          <div class="card-body">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Año</th>
-                    <th>Valor</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd" *ngFor="let porcentaje of porcentajes; let i = index">
-                  <td >{{ i + 1 }}</td>
-                  <td >{{ porcentaje.anio }}</td>
-                  <td >{{ porcentaje.valor }} %</td>
-                  <td>
-                    <button (click)="onEdit(porcentaje)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
-                    <button (click)="onDelete(porcentaje.id)"  class="btn btn-xs btn-danger" type="button">
-                      <i class="fa fa-trash"></i>
-                      Eliminar
-                    </button> 
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- /.table-responsive --> 
-          </div>
+            </div><!-- /.row -->
+          </form>
+        </div><!-- /.card-body -->
+        <div class="card-footer">
+          <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-search"></i>
+            Buscar
+          </button>
         </div>
       </div>
-    </div>
+    </div><!-- /.col -->
     
-    <app-edit *ngIf='formEdit' [porcentaje]="porcentaje" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <!-- ======================== Inventarios en Municipio seleccionado ============================== -->
+    <div class="col-xs-12 col-lg-8" *ngIf="comparendos && formIndex"><!-- .col -->
+      <div class="card"><!-- .card -->
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Comparendos asociados</b> <small> {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}</small>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered" id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Número</th>
+                <th>Fecha</th>
+                <th>Cod. Infracción</th>
+                <th>Valor</th>
+                <th>Placa</th>
+                <th>Estado</th>
+                <th>Seleccionar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                <td>{{ comparendo.fecha }}</td>
+                <td>{{ comparendo.infraccion?.codigo }}</td>
+                <td>{{ comparendo.valorInfraccion + comparendo.valorAdicional }}</td>
+                <td>{{ comparendo.vehiculo?.placa.numero }}</td>
+                <td>{{ comparendo.estado?.nombre }}</td>
+                <td>
+                  <div class="custom-control custom-checkbox" style="margin-top: -17px;">
+                    <input type="checkbox" value="{{comparendo.id}}" (change)="onSelect(comparendo.id, $event)" class="custom-control-input" id="{{comparendo.id}}">
+                    <label class="custom-control-label" for="{{comparendo.id}}"></label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer"><!-- .card-footer -->
+          <div class="btn-group">
+            <button type="button" (click)="onNew()" class="btn btn-primary btn-lg btn-block" [disabled]='comparendosSelect?.length == 0'>Preliquidar</button>
+          </div>
+        </div><!-- /.card-footer -->
+      </div><!-- /.card -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+  <app-new *ngIf='formNew' [comparendosSelect]="comparendosSelect" (ready)="ready($event)"></app-new>
 </div>

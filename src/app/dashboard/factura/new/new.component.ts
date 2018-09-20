@@ -499,9 +499,10 @@ constructor(
       );
     }
   }
+  
   deleteTramiteValor(tramiteValor){
     this.factura.valorBruto = this.factura.valorBruto - parseInt(tramiteValor.valor);
-    this.tramitesValor =  this.tramitesValor.filter(h => h !== tramiteValor);
+    this.tramitesValor = this.tramitesValor.filter(h => h !== tramiteValor);
   }
 
   btnRetefunete(){
