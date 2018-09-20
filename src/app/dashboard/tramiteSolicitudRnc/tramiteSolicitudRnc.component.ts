@@ -24,6 +24,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
 	public formNew = false;
 	public formEdit = false;
   public formSearch = false;
+  public solicitanteEncontrado = 1;
   public formIndex = true;
   public table: any;
   public tramiteSolicitud: TramiteSolicitudRnc;
@@ -111,20 +112,22 @@ export class TramiteSolicitudRncComponent implements OnInit {
       this.formNew = false;
       this.formEdit = false;
       this.formIndex = true;
+      this.solicitanteEncontrado = 2;
       this.ngOnInit();
     }
   }
 
   onSearchSolicitante(){
     let token = this._loginService.getToken();
-    this._CiudadanoService.searchByIdentificacion(token, {'numeroIdentificacion':this.identificacion}).subscribe(
+    this._CiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.identificacion},token).subscribe(
       response => {          
-        if(response.status == 'success'){
+        if(response.status == 'success'){ 
           this.solicitante = response.data;
           this.formNew = true;
           this.formEdit = false;
           this.formIndex = false;
           this.formSearch = false;
+          this.solicitanteEncontrado = 2;
           swal({
             type: 'info',
             title: 'Perfecto',
@@ -135,6 +138,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
           this.formEdit = false;
           this.formIndex = false;
           this.formSearch = true;
+          this.solicitanteEncontrado = 3;
           swal({
             type: 'warning',
             title: 'Alerta',
