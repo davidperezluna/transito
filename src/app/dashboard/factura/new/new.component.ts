@@ -45,6 +45,7 @@ public propietario:boolean=false;
 public identificacion:any;
 public tipoIdentificacionSelected:any;
 public ciudadano:any;
+public newCiudadanoForm:any= false;
 public msj:any;
 public vehiculo:any;
 public modulo:any = null;
@@ -223,9 +224,13 @@ constructor(
           this.factura.ciudadanoId = this.ciudadano.id;
           this.isExistCiudadano = true;
           this.isErrorCiudadano = false;
+
+          this.newCiudadanoForm = false;
         }else{
           this.isErrorCiudadano = true;
           this.isExistCiudadano = false;
+
+          this.newCiudadanoForm = true;
         }
       error => {
           this.errorMessage = <any>error;
@@ -561,5 +566,10 @@ constructor(
     this.isCiudadanoForm = false;
     this.isEmpresaForm = false;
   }
+
+  redyCidadano(ready:any){
+    this.newCiudadanoForm = false;
+  }
+  
 
 }

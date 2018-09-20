@@ -39,15 +39,28 @@
         "../node_modules/popper.js/dist/umd/popper.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/moment/moment.js",
+<<<<<<< HEAD
+	
+        "../node_modules/datatables.net/js/jquery.dataTables.min.js",
+        "../node_modules/datatables.net-responsive/js/dataTables.responsive.js",
+        "../node_modules/jquery-circle-progress/dist/circle-progress.min.js",
+        
+=======
         "../node_modules/jquery-circle-progress/dist/circle-progress.min.js",
         "../node_modules/datatables.net/js/jquery.dataTables.min.js",
         "../node_modules/datatables.net-responsive/js/dataTables.responsive.js",
+>>>>>>> 32619649736e022c87c35056ea8d9fe4162286c7
         "../node_modules/datatables.net/js/dataTables.buttons.min.js",
         "../node_modules/datatables.net/js/jszip.min.js",
         "../node_modules/datatables.net/js/pdfmake.min.js",
         "../node_modules/datatables.net/js/vfs_fonts.js",
         "../node_modules/datatables.net/js/buttons.html5.min.js",
         "../node_modules/datatables.net/js/buttons.print.min.js",
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 32619649736e022c87c35056ea8d9fe4162286c7
         "../node_modules/jvectormap/jquery-jvectormap.min.js", 		 
         "../node_modules/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js", 
         "../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-lcc-en.js", 
