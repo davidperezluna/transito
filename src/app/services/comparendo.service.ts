@@ -60,7 +60,7 @@ export class ComparendoService {
 							  .map(res => res.json());
 	}
 	
-	serchComparendosCiudadano(ciudadano, token) {
+	searchComparendosCiudadano(ciudadano, token) {
 		let json = JSON.stringify(ciudadano);
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });

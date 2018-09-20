@@ -330,6 +330,14 @@
                 Porcentaje inicial
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cvCfgInteres" [ngClass]="{'active' : ( addActive === 'cvCfgInteres')}"
+                (click)="addActiveMenu('cvCfgInteres')">
+                <i class="fa fa-angle-right"></i>
+                Interes
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level -->
         </li>
@@ -824,6 +832,12 @@
             <i class="fa fa-angle-right"></i>
             Factura Infracciones
           </a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cvAcuerdoPago" [ngClass]="{'active' : ( addActive === 'cvAcuerdoPago')}" (click)="addActiveMenu('cvAcuerdoPago')">
+            <i class="fa fa-angle-right"></i>
+            Acuerdos de pago
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="reporte" [ngClass]="{'active' : ( addActive === 'reporte')}" (click)="addActiveMenu('reporte')">

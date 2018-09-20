@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CvCfgPorcentajeInicialService {
-	private url = environment.apiUrl + 'contravencional/cvcfgporcentajeinicial';
+export class CvCfgInteresService {
+	private url = environment.apiUrl + 'contravencional/cvcfginteres';
 	public identity;
 	public token;
 
@@ -39,11 +39,13 @@ export class CvCfgPorcentajeInicialService {
 		);
 	}
 
-	show(token, id) {
-		let params = "authorization=" + token;
+	show(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
-			.map(res => res.json());
+		return this._http.post(this.url + "/show", params, { headers: headers }).map(
+			res => res.json()
+		);
 	}
 
 	edit(datos, token) {
@@ -58,9 +60,5 @@ export class CvCfgPorcentajeInicialService {
 
 	select() {
 		return this._http.get(this.url + "/select").map(res => res.json());
-	}
-
-	searchActive() {
-		return this._http.get(this.url + "/search/active").map(res => res.json());
 	}
 }

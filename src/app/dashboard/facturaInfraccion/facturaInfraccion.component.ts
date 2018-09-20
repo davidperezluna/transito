@@ -140,7 +140,7 @@ export class FacturaInfraccionComponent implements OnInit {
                 let ciudadano = {
                   'ciudadanoId': this.ciudadano.id,
                   }
-                  this._ComparendoService.serchComparendosCiudadano(ciudadano, token).subscribe(
+                  this._ComparendoService.searchComparendosCiudadano(ciudadano, token).subscribe(
                       response => {
                           this.comparendos = response.data;
                           console.log(this.comparendos);
