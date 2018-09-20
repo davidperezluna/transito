@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ComparendoService } from '../../../services/comparendo.service';
-import { LoginService } from '../../../services/login.service';
 import { Comparendo } from '../comparendo.modelo';
 import swal from 'sweetalert2';
+import { Inmovilizacion } from '../inmovilizacion.modelo';
 declare var $: any;
 
 @Component({
@@ -18,10 +18,10 @@ export class ExportComponent implements OnInit {
     public formIndex = true;
     public table: any;
     public comparendos: Comparendo;
+    public inmovilizacion: Inmovilizacion;
 
     constructor(
         private _ComparendoService: ComparendoService,
-        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -42,6 +42,8 @@ export class ExportComponent implements OnInit {
         this._ComparendoService.export().subscribe(
             response => {
                 this.comparendos = response.data;
+                this.inmovilizacion = response.inmovilizacion;
+                console.log(this.inmovilizacion);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
