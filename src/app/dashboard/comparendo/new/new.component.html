@@ -45,14 +45,15 @@
                             <small>{{ funcionario.sedeOperativa.nombre }}</small>
                         </div>
                     </div>
+                    <label>Fecha:</label>
                     <div class="row">
-                        <div class="col-xs-12 col-lg-3 offset-lg-4">
-                            <label>Fecha:</label>
+                        <div class="col-xs-12 col-lg-3 offset-lg-3">
                             <input class="form-control" [(ngModel)]="comparendo.fecha" name="fecha" type="date" required>
                         </div>
-                        <div class="col-xs-12 col-lg-2">
-                            <label>Hora:</label>
-                            <input class="form-control" [(ngModel)]="comparendo.hora" name="hora" type="time" required>
+                        <div class="col-xs-12 col-lg-6 row">
+                            <input class="form-control col-lg-2" [(ngModel)]="comparendo.horas" placeholder="Horas" name="horas" type="number" required>
+                            <input class="form-control col-lg-2" [(ngModel)]="comparendo.minutos" placeholder="Minutos" name="minutos" type="number" required>
+                            <!-- <input class="form-control" min="0:00" max="23:59" [(ngModel)]="comparendo.hora" name="hora" type="time" required> -->
                         </div>
                     </div>
                 </h5><!-- /.card-title -->
