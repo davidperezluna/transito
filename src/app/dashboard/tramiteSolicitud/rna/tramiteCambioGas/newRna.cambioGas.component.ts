@@ -30,7 +30,7 @@ export class NewRnaCambioGasComponent implements OnInit {
         'combustibleCambioId': null,
         'vehiculoId': null,
     };
-    public datos = {
+    public resumen = {};     public datos = {
         'numeroCertificado': null,
         'fechaExpedicion': null,
         'fechaVencimiento': null,
@@ -90,7 +90,7 @@ export class NewRnaCambioGasComponent implements OnInit {
                 if(this.respuesta.status == 'success'){
                     this.datos.facturaId = this.factura.id;
                     this.datos.tramiteFormulario = 'rna-cambiogas';
-                    this.readyTramite.emit(this.datos);
+                    this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                 }
                 error => {
                         this.errorMessage = <any>error;

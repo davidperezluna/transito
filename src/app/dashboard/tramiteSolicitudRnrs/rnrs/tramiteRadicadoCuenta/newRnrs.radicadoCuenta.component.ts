@@ -36,7 +36,7 @@ export class NewRnrsRadicadoCuentaComponent implements OnInit {
     public guiaLlegada: any;
     public empresaEnvio: any;
     public rut: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'municipioSelected': null,
         'tipoIdentificacionSelected': null,
         'numeroDocumento': null,
@@ -101,7 +101,7 @@ export class NewRnrsRadicadoCuentaComponent implements OnInit {
         this.datos.rut = this.rut;
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnrns-radicadocuenta';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

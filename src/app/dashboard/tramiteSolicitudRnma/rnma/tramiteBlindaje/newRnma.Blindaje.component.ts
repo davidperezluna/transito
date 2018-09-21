@@ -29,7 +29,7 @@ export class NewRnmaBlindajeComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'tipoBlindaje': null,
         'nivelBlindaje': null,
         'empresaBlindadora': null,

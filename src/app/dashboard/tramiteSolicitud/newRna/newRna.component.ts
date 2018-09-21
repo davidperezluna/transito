@@ -55,7 +55,7 @@ export class NewRnaComponent implements OnInit {
   
   public cantidadSustrato = 1;
   public moduloId = 1;
-  public datos = {
+  public resumen = {};     public datos = {
     'moduloId': null,
     'facturaId': null,
     'vehiculoId': null,

@@ -75,7 +75,7 @@ public tipoPropiedades= [
   {'value':2,'label':"Propio"}
 ];
 
-public datos = {
+public resumen = {};     public datos = {
   'propietariosEmpresas': [],
   'propietariosCiudadanos': [],
   'solidario': false,

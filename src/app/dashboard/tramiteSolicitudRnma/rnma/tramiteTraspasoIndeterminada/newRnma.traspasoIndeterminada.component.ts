@@ -39,7 +39,8 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
     {'value': "Declaración",
     'label': "Declaración"},
     {'value': "Manifestación",
-    'label': "Manifestación"}]    
+    'label': "Manifestación"}];
+  public resumen = {};  
 
   constructor(
     private _TramiteSolicitudService: TramiteSolicitudService,
@@ -111,7 +112,7 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
     let token = this._loginService.getToken();       
       this.datos.facturaId = this.factura.id;
       this.datos.tramiteFormulario = 'rnma-trapasoindeterminada'
-      this.readyTramite.emit(this.datos);
+      this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
       this.datos.personaTraslado = this.sinRegistro;
       console.log(this.datos.solicitanteId);
       console.log(this.datos.vehiculoId);

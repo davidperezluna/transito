@@ -21,6 +21,7 @@ export class NewRnrsTransformacionComponent implements OnInit {
     public errorMessage;
     public respuesta;
     public datos: any;
+    public resumen = {};
 
     constructor(
         private _loginService: LoginService,
@@ -29,6 +30,8 @@ export class NewRnrsTransformacionComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+
+
         this.datos = {
             'nuevoNumeroEjes': null,
             'numeroFTH': null,
@@ -54,7 +57,7 @@ export class NewRnrsTransformacionComponent implements OnInit {
                 if (response.status == 'success') {
                     this.datos.facturaId = this.factura.id;
                     this.datos.tramiteFormulario = 'rnrs-transformacion';
-                    this.readyTramite.emit(this.datos);
+                    this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                     this.ngOnInit();
                 }
                 else if (response.status == "error") {

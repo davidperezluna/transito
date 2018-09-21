@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { SustratoService } from '../../../../services/sustrato.service';
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
-import { LoginService } from '../../../../services/login.service';
+import { CombustibleService } from '../../../../services/combustible.service';
 
 import swal from 'sweetalert2';
 
@@ -32,7 +31,9 @@ export class NewRnrsCambioMotorComponent implements OnInit {
     public numeroIdentificacion: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public combustibles: any;
+    public combustibleSelected: any;
+    public resumen = {};     public datos = {
         'tipoIngreso': null,
         'numeroMotor': null,
         'numeroAceptacion': null,
@@ -46,12 +47,12 @@ export class NewRnrsCambioMotorComponent implements OnInit {
         'sustrato': null,
         'tramiteFormulario': null,
         'facturaId': null,
+        'combustibleId': null,
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
         private _SustratoService: SustratoService,
+        private _CombustibleService: CombustibleService,
         private _TipoIdentificacionService: TipoIdentificacionService,
     ) { }
 
@@ -98,9 +99,10 @@ export class NewRnrsCambioMotorComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
+        this.datos.combustibleId = this.combustibleSelected;
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-cambiomotor';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

@@ -34,7 +34,7 @@ export class NewRnmaRematriculaComponent implements OnInit {
     public numeroIdentificacionEntrega: any;
     public nombreEntrega: any;
     public estado: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'entidad': null,
         'numeroActa': null,
         'fechaActa': null,
@@ -120,7 +120,7 @@ export class NewRnmaRematriculaComponent implements OnInit {
         this.datos.estado = this.estado;
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-rematricula';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
 
     onCancelar(){

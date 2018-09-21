@@ -41,7 +41,7 @@ public tramiteReportes:any;
 public reporteFechas:any;
 public sedeOperativaSelected:any;
 
-public datos = {
+public resumen = {};     public datos = {
   'desde': null,
   'hasta': null,
   'sedeOperativa': null,

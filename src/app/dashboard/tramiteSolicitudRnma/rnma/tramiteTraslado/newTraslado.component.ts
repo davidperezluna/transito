@@ -29,6 +29,7 @@ public fechaSalida;
 public numeroRunt;
 public nombreEmpresa;
 public datos: any = null;
+public resumen = {};
 
 constructor(
   private _loginService: LoginService,
@@ -122,7 +123,7 @@ constructor(
               this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
               this.respuesta = response; 
               if(this.respuesta.status == 'success'){
-                this.readyTramite.emit(this.datos);
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
               }
               error => {
                       this.errorMessage = <any>error;

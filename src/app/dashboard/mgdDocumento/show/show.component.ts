@@ -16,7 +16,7 @@ public respuesta;
 public date: any;
 public observaciones: any;
 public aceptada: any;
-public datos = {
+public resumen = {};     public datos = {
   'observaciones': null,
   'aceptada': null,
   'documentoId': null,

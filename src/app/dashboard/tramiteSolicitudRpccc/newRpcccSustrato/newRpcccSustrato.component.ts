@@ -29,7 +29,7 @@ export class NewRpcccSustratoComponent implements OnInit {
     public isError = false;
     public isExist = false;
     public ciudadanoEncontrado=1;
-    public datos = {
+    public resumen = {};     public datos = {
         'solicitante': null,
         'cedula': null,
         'licenciaConduccion': null,

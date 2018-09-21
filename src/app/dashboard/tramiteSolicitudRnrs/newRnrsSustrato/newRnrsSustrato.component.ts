@@ -36,7 +36,7 @@ export class NewRnrsSustratoComponent implements OnInit {
     public isExist = false;
     public ciudadanoEncontrado=1;
     public sustrato: Sustrato;
-    public datos = {
+    public resumen = {};     public datos = {
         'cedula': 0,
         'licenciaTransito': "",
         'vehiculoId': ""

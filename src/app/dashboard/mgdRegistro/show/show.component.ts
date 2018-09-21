@@ -18,7 +18,7 @@ public usuarios: any;
 public usuarioSelected: any;
 public observaciones: any;
 public date: any;
-public datos = {
+public resumen = {};     public datos = {
   'usuarioId': null,
   'observaciones': null,
   'documentoId': null

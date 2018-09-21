@@ -48,7 +48,7 @@ public combustibleSelected:any;
 public marcaSelected:any;
 public respuesta:any;
 public sedesOperativas:any;
-public datos = {
+public resumen = {};     public datos = {
   'numeroMotor': null,
   'tramiteFactura': null,
 };
@@ -110,7 +110,7 @@ constructor(
         if(this.respuesta.status == 'success'){
           this.datos.numeroMotor = this.vehiculo.motor;
           this.datos.tramiteFactura =12;
-          this.readyTramite.emit(this.datos);
+          this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
         }else{
           swal({
             title: 'Error!',

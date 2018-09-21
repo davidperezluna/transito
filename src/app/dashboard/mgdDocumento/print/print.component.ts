@@ -21,7 +21,7 @@ public fechaEnvio: any;
 public numeroGuia: any;
 public numeroCarpeta: any;
 public medioEnvio: any;
-public datos = {
+public resumen = {};     public datos = {
   'correoCertificadoEnvio': null,
   'nombreTransportadoraEnvio': null,
   'fechaEnvio': null,

@@ -21,7 +21,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
     public sedesOperativas: any;
     public tramiteFacturaSelected: any;
     public sedeOperativaSelected: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'newData': null,
         'oldData': null,
         'numeroRunt': null,
@@ -76,7 +76,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = sedeOperativa.data.nombre;
                             this.datos.oldData = this.vehiculo.sedeOperativa.nombre;
-                            this.readyTramite.emit(this.datos);
+                            this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                         }
                         error => {
                                 this.errorMessage = <any>error;

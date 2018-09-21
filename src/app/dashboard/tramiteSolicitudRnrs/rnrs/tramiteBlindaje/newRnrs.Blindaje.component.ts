@@ -29,7 +29,7 @@ export class NewRnrsBlindajeComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'tipoBlindaje': null,
         'nivelBlindaje': null,
         'empresaBlindadora': null,
@@ -68,7 +68,7 @@ export class NewRnrsBlindajeComponent implements OnInit {
     enviarTramite() {
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-blindaje';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

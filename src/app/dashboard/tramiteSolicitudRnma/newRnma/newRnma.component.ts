@@ -53,7 +53,7 @@ export class NewRnmaComponent implements OnInit {
   public apoderado: any = false;
   public apoderadoEncontrado = 1;
   public moduloId = 3;
-  public datos = {
+  public resumen = {};     public datos = {
     'moduloId': null,
     'facturaId': null,
     'vehiculoId': null,

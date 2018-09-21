@@ -54,7 +54,7 @@ export class NewRnrsComponent implements OnInit {
   public apoderadoEncontrado=1
   public moduloId = 5;
   public cantidadSustrato = 1;
-  public datos = {
+  public resumen = {};     public datos = {
     'moduloId': null,
     'facturaId': null,
     'vehiculoId': null,

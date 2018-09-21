@@ -21,7 +21,7 @@ export class buscarAutomotorComponent implements OnInit {
   public vehiculoSuccess = false;
   public formShow:any;
   public vehiculos: any;
-  public datos = {
+  public resumen = {};     public datos = {
     'numeroPlaca': null,
     'numeroVIN': null,
     'numeroSerie': null,

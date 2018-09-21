@@ -21,7 +21,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'sustrato': null,
         'numeroRunt': null,
         'documentacion': null,
@@ -61,7 +61,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         this.datos.entregada = this.entregada;
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rna-duplicadolicencia';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

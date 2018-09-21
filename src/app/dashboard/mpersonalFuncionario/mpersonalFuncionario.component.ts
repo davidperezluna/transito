@@ -35,7 +35,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
   public cargoSelected: any;
   public sedesOperativas: any;
   public sedeOperativaSelected: any;
-  public datos = {
+  public resumen = {};     public datos = {
     'nombre' : null,
     'identificacion' : null,
     'cargo' : null,

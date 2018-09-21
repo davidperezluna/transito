@@ -22,7 +22,7 @@ export class NewRnaCambioConjuntoComponent implements OnInit {
     public tipoPotenciacionSelect: any;
     public nuevoModelo: any;
     public descricion: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'newData': null,
         'oldData': null,
         'tipoPotenciacion': null,
@@ -70,7 +70,7 @@ export class NewRnaCambioConjuntoComponent implements OnInit {
                 this.datos.descricion = this.tipoPotenciacionSelect;
                 this.datos.facturaId = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-cambioconjunto'; 
-                this.readyTramite.emit(this.datos); 
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen}); 
             }
             error => {
                     this.errorMessage = <any>error;

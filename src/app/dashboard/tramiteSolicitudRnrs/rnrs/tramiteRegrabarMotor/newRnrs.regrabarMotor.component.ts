@@ -28,7 +28,7 @@ export class NewRnrsRegrabarMotorComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'tipoRegrabacion': null,
         'motivo': null,
         'nuevoNumero': null,
@@ -94,7 +94,7 @@ export class NewRnrsRegrabarMotorComponent implements OnInit {
                 this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
                 this.datos.tramiteFactura = 22;
-                this.readyTramite.emit(this.datos);
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }
             error => {
                     this.errorMessage = <any>error;

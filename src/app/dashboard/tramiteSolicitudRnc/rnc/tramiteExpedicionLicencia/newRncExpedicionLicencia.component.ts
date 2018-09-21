@@ -33,7 +33,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public identificacion: any;
     public categorias: string[];
     public categoriaSelected: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'tramiteFormulario': null,
         'facturaId': null,
         'numeroLicenciaConduccion': null,
@@ -139,7 +139,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                     this._RncLicenciaConduccionService.register(this.datos, token).subscribe(
                         response => {
                             if (response.status == 'success') {
-                                this.readyTramite.emit(this.datos);
+                                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                             } else {
                                 swal({
                                     type: 'warning',

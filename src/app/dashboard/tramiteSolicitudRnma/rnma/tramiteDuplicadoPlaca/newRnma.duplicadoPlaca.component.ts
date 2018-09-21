@@ -22,7 +22,7 @@ export class NewRnmaDuplicadoPlacaComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'motivo': null,
         'cantidad': null,
         'numeroRunt': null,
@@ -52,7 +52,7 @@ export class NewRnmaDuplicadoPlacaComponent implements OnInit {
         this.datos.entregada = this.entregada;
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-dupicadoplaca';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
