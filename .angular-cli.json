@@ -39,11 +39,17 @@
         "../node_modules/popper.js/dist/umd/popper.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/moment/moment.js",
+<<<<<<< HEAD
+        "../node_modules/jquery-circle-progress/dist/circle-progress.min.js",
+        "../node_modules/datatables.net/js/jquery.dataTables.min.js",
+        "../node_modules/datatables.net-responsive/js/dataTables.responsive.js",
+=======
 	
         "../node_modules/datatables.net/js/jquery.dataTables.min.js",
         "../node_modules/datatables.net-responsive/js/dataTables.responsive.js",
         "../node_modules/jquery-circle-progress/dist/circle-progress.min.js",
         
+>>>>>>> c19e9d1c95cb3b90d5190fb943bcff229c75b600
         "../node_modules/datatables.net/js/dataTables.buttons.min.js",
         "../node_modules/datatables.net/js/jszip.min.js",
         "../node_modules/datatables.net/js/pdfmake.min.js",
