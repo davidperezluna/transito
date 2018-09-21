@@ -6,6 +6,10 @@ import { LoginService } from '../../../services/login.service';
 import { MunicipioService } from '../../../services/municipio.service';
 
 import swal from 'sweetalert2';
+import { SvCfgTemaCapacitacionService } from '../../../services/svCfgTemaCapacitacion.service';
+import { SvCfgFuncion } from '../../svCfgFuncion/svCfgFuncion.modelo';
+import { SvCfgClaseActorViaService } from '../../../services/svCfgClaseActorVia.service';
+import { SvCfgFuncionService } from '../../../services/svCfgFuncion.service';
 
 @Component({
     selector: 'app-new',
@@ -18,22 +22,74 @@ export class NewComponent implements OnInit {
     public errorMessage;
     public capacitaciones: any;
     public file: any;
+    public date: any;
+
     public municipios: any;
+    public funciones: any;
+    public temasCapacitaciones: any;
+    public clasesActoresVia: any;
+
     public municipioSelected: any;
+    public funcionSelected: any;
+    public temaCapacitacionSelected: any;
+    public claseActorViaSelected: any;
+
 
     constructor(
-        private _SvCapacitacionService: SvCapacitacionService,
+        private _CapacitacionService: SvCapacitacionService,
         private _loginService: LoginService,
         private _Municipioervice: MunicipioService,
+        private _FuncionService: SvCfgFuncionService,
+        private _TemaCapacitacion: SvCfgTemaCapacitacionService,
+        private _ClaseActorVia: SvCfgClaseActorViaService,
 
     ) { }
 
     ngOnInit() {
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null);
-
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
+        this.date = new Date();
         this._Municipioervice.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._TemaCapacitacion.select().subscribe(
+            response => {
+                this.temasCapacitaciones = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._FuncionService.select().subscribe(
+            response => {
+                this.funciones = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._ClaseActorVia.select().subscribe(
+            response => {
+                this.clasesActoresVia = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -67,7 +123,7 @@ export class NewComponent implements OnInit {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                this._SvCapacitacionService.register(this.file, this.capacitacion, token).subscribe(
+                this._CapacitacionService.register(this.file, this.capacitacion, token).subscribe(
                     response => {
                         if (response.status == 'success') {
                             this.ready.emit(true);

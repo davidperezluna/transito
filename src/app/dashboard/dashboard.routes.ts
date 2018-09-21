@@ -37,6 +37,8 @@ import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTec
 import { SoatRoutes } from './soat/soat.routes';
 
 import { SvCapacitacionRoutes } from './svCapacitacion/svCapacitacion.routes';
+import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.routes';
+import { SvCfgFuncionRoutes } from './svCfgFuncion/svCfgFuncion.routes';
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -218,6 +220,8 @@ export const DashboardRoutes: Route[] = [
       ...VehiculoTecnoMecanicaRoutes,
       ...SoatRoutes,
       ...SvCapacitacionRoutes,
+      ...SvCfgTemaCapacitacionRoutes,
+      ...SvCfgFuncionRoutes,
       ...CfgComparendoEstadoRoutes,
       ...InfraccionRoutes,
       ...CarroceriaRoutes,
