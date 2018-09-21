@@ -26,6 +26,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public tipoCambioSelected: any;
     public categorias: string[];
+    public resumen = {};    
     public datos = {
         'tramiteFormulario': null,
         'facturaId': null,
@@ -40,6 +41,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         'servicioId': null,
         'ciudadanoId': null,
     };
+    
 
     constructor(
         private _LoginService: LoginService,
@@ -105,7 +107,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
 
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

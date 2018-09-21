@@ -24,7 +24,7 @@ export class showRegistroEntregaProductoComponent implements OnInit {
   public tramitesNombres;
   public tramitesEspecificos: any = [];
   public tramiteNombreSelected:any;
-  public datos = {
+  public resumen = {};     public datos = {
   'fechaDesde': null,
   'fechaHasta': null,
   'idVehiculo': null,

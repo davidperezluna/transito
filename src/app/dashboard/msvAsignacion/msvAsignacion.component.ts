@@ -21,7 +21,7 @@ export class MsvAsignacionComponent implements OnInit {
   public formSearch = true;
   public table: any;
   public parametro: any;
-  public datos = {
+  public resumen = {};     public datos = {
     'parametro' : null
   }
   public asignacion: MsvAsignacion;

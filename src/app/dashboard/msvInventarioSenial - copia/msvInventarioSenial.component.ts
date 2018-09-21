@@ -63,7 +63,7 @@ export class MsvInventarioSenialComponent implements OnInit {
     public senalesPorAsignar: any;
     public senalesPorInventario: any;
 
-    public datos = {
+    public resumen = {};     public datos = {
         'fecha'     : null,
         'unidad'    : null,
         'color'     : null,

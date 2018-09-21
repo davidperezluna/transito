@@ -38,7 +38,7 @@ export class NewRnmaCertificadoTradicionComponent implements OnInit {
     public ciudadanoEncontrado=1;
     public ciudadanoNew = false;
     public ciudadano:any;
-    public datos = {
+    public resumen = {};     public datos = {
         'nroRunt': null,
         'observacion': null,                  
         'certificadoEntregada': null,
@@ -67,7 +67,7 @@ export class NewRnmaCertificadoTradicionComponent implements OnInit {
         this.datos.tramiteFormulario = 'rnma-ceritificadotradicion';
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

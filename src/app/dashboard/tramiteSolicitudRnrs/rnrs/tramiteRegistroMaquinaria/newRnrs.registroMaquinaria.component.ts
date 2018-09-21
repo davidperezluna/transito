@@ -90,7 +90,7 @@ public condiciones =[
 ]
 
 
-public datos = {
+public resumen = {};     public datos = {
   'placa': null,
   'numeroSerie': null,
   'numeroVin': null,
@@ -258,7 +258,7 @@ constructor(
           this.datos.numeroMotor = this.vehiculo.motor;
           this.datos.facturaId = this.factura.id;
           this.datos.tramiteFormulario = 'rnrs-registromaquinaria';
-          this.readyTramite.emit(this.datos);
+          this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
         }else{
           swal({
             title: 'Error!',

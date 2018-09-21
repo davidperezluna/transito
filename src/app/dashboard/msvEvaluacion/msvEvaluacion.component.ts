@@ -38,7 +38,7 @@ export class MsvEvaluacionComponent implements OnInit {
   public revisiones:any = false;
   public msvEvaluacion: MsvEvaluacion;
   public msvCategorias:any;
-  public datos = {'parametro': null,
+  public resumen = {};     public datos = {'parametro': null,
                   'parametro2': null}
 
   constructor(

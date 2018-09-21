@@ -24,7 +24,7 @@ export class NewRnmaCambioColorComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public colorSelected: any;
     public tramiteRealizado: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'newData': null,
         'oldData': null,
         'sustrato': null,
@@ -104,7 +104,7 @@ export class NewRnmaCambioColorComponent implements OnInit {
                             this.datos.oldData = this.vehiculo.color.nombre;
                             this.datos.facturaId = this.factura.id;
                             this.datos.tramiteFormulario = 'rnma-cambiocolor';
-                            this.readyTramite.emit(this.datos);
+                            this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                         }
                         error => {
                                 this.errorMessage = <any>error;

@@ -29,7 +29,7 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'tipoRegrabacion': null,
         'motivo': null,
         'nuevoNumero': null,
@@ -93,7 +93,7 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
                 this.datos.entregada = this.entregada;
                 this.datos.facturaId = this.factura.id;
                 this.datos.tramiteFormulario = 'rnma-regrabarmotor';
-                this.readyTramite.emit(this.datos);
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }
             error => {
                     this.errorMessage = <any>error;

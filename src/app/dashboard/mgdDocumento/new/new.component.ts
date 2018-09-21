@@ -14,7 +14,7 @@ export class NewComponent implements OnInit {
 public errorMessage;
 public respuesta;
 public descripcion:any;
-public datos = {
+public resumen = {};     public datos = {
   'descripcion': null,
   'documentoId': null,
 };

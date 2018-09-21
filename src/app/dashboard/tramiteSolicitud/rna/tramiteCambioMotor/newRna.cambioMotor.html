@@ -52,9 +52,14 @@
                                 <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-16">
+                        <div class="col-lg-6 col-md-16">
                             <label>Fecha *</label>
                             <input class="form-control" [(ngModel)]="fecha" name="fecha" type="date" required />
+                        </div>
+                        <div class="col-xs-6 col-lg-6">
+                            <label>Combustibles disponibles <span class="text-danger">*</span></label>
+                            <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="combustibleSelected" required name="combustibleId">
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Número solicitud RUNT</label>

@@ -38,7 +38,7 @@ export class NewComponent implements OnInit {
   public choqueConSelected: any;
   public objetosFijos: any;
   public objetoFijoSelected: any;
-  public datos = {
+  public resumen = {};     public datos = {
   }
   public datos2 = {
     'vehiculos': [],

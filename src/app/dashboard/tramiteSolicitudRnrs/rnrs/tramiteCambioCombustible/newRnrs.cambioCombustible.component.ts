@@ -22,7 +22,7 @@ export class NewRnrsCambioCombustibleComponent implements OnInit {
     public combustibles: any;
     public tramiteFacturaSelected: any;
     public combustibleSelected: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'newData': null,
         'oldData': null,
         'sustrato': null,
@@ -78,7 +78,7 @@ export class NewRnrsCambioCombustibleComponent implements OnInit {
                             this.datos.oldData = this.vehiculo.combustible.nombre;
                             this.datos.facturaId = this.factura.id;
                             this.datos.tramiteFormulario = 'rnrs-cambiocombustible';
-                            this.readyTramite.emit(this.datos);
+                            this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                         }
                         error => {
                                 this.errorMessage = <any>error;

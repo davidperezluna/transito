@@ -20,7 +20,7 @@ export class NewRnaCambioPlacaComponent implements OnInit {
     public numeroRunt: any;
     public nuevaPlaca: any;
     public documentacion: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'tipoCambio': null,
         'numeroRunt': null,
         'nuevaPlaca': null,
@@ -46,7 +46,7 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         this.datos.documentacion = this.documentacion;
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rna-cambioplaca';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

@@ -39,7 +39,7 @@ export class NewRnaInsumoComponent implements OnInit {
     public insumo:any;
     public ciudadanoEncontrado=1;
     public FacturaInsumo: FacturaInsumo;
-    public datos = {
+    public resumen = {};     public datos = {
         'cedula': 0,
         'licenciaTransito': "",
         'vehiculoId': ""
