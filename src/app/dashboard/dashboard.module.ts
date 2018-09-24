@@ -43,6 +43,8 @@ import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTec
 import { SoatModule } from './soat/soat.module';
 
 import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
+import { SvCfgTemaCapacitacionModule } from "./svCfgTemaCapacitacion/svCfgTemaCapacitacion.module";
+import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -190,6 +192,8 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
       SvCapacitacionModule,
+      SvCfgTemaCapacitacionModule,
+      SvCfgFuncionModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,

@@ -8,14 +8,8 @@
             <form #formNew="ngForm">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>Fecha <strong class="text-danger">*</strong></label>
-                        <input type="date" class="form-control" [(ngModel)]="capacitacion.fecha" name="fecha"
-                            required />
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Hora <strong class="text-danger">*</strong></label>
-                        <input type="time" value="time" class="form-control" [(ngModel)]="capacitacion.hora"
-                            name="hora" required />
+                        <label>Fecha y Hora Registro <strong class="text-danger">*</strong></label>
+                        <input class="form-control" value="{{ date|date:('dd/MM/yyyy HH:mm:ss a') }}" readonly type="text">
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Formador <strong class="text-danger">*</strong></label>
@@ -41,7 +35,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Función Seguridad Vial <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.funcionSeguridadVial" name="funcionSeguridadVial" required />
+                        <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" required name="funcion"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Clase Actividad <strong class="text-danger">*</strong></label>
@@ -49,7 +43,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Tema Capacitacion <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.temaCapacitacion" name="temaCapacitacion" required />
+                        <ng-select [multiple]="false" [options]="temasCapacitaciones" [(ngModel)]="temaCapacitacionSelected" required name="temaCapacitacion"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Descripción de la Actividad <strong class="text-danger">*</strong></label>

@@ -1,7 +1,6 @@
 export class SvCapacitacion {
     constructor(
-        public fecha: string,
-        public hora: string,
+        public fechaHoraRegistro: string,
         public formador: string,
         public cedula: string,
         public fechaActividad: string,
