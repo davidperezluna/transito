@@ -53,10 +53,6 @@ export class CiudadanoService {
  			return this._http.post(this.url+"/search/identificacion", params, {headers: headers}).map(res => res.json());
 	}
 
-<<<<<<< HEAD
-=======
-	 
->>>>>>> c19e9d1c95cb3b90d5190fb943bcff229c75b600
 	calculateAge(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;
@@ -64,13 +60,8 @@ export class CiudadanoService {
 		return this._http.post(this.url + "/calculate/age", params, { headers: headers }).map(res => res.json());
 	}
 
-<<<<<<< HEAD
-	showCiudadanoCedulaId(token,id){
-		let json = JSON.stringify(id);
-=======
 	showCiudadanoCedulaId(token,datos){
 		let json = JSON.stringify(datos);
->>>>>>> c19e9d1c95cb3b90d5190fb943bcff229c75b600
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/acreedor/id", params, {headers: headers}).map(res => res.json());
