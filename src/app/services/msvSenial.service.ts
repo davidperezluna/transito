@@ -15,7 +15,22 @@ export class MsvSenialService {
 
 	index() {
 	    return this._http.get(this.url + "/").map(res => res.json());
-    }
+	}
+
+	register(formData, datos, token) {
+		let json = JSON.stringify(datos);
+		formData.append('json', json);
+		formData.append('authorization', token);
+
+		return this._http.post(this.url + "/new", formData).map(res => res.json());
+	}
+	
+	show(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/show", params, { headers: headers }).map(res => res.json());
+	}
 
 	searchBySenial(datos, token){
 		let json = JSON.stringify(datos);
@@ -45,15 +60,6 @@ export class MsvSenialService {
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/search/parametros", params, {headers: headers}).map(res => res.json());
-	}
-
-	register(formData, datos, token){
-		let json = JSON.stringify(datos);
-		formData.append('data', json);
-		formData.append('authorization', token);
-
-		console.log(formData);
-		return this._http.post(this.url+"/new", formData).map(res => res.json());
 	}
 
 	select() {

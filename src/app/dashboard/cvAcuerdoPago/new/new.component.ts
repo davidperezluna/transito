@@ -131,6 +131,8 @@ constructor(
           this.valorTotal = response.data;
           this.valorCuotaInicial = (this.valorTotal * this.porcentaje.valor) / 100;
           this.valorInteres = (this.valorTotal * this.interes.valor) / 100;
+          this.acuerdoPago.valorCapital = this.valorTotal;
+          this.acuerdoPago.valorCuotaInicial = this.valorCuotaInicial;
           this.formPreliquidacion = true;
         } else {
           swal({
@@ -151,15 +153,12 @@ constructor(
       }
     );
 
-    let timeoutId = setTimeout(() => {
-      this.acuerdoPago.valorCapital = this.valorTotal;
-      this.acuerdoPago.valorCuotaInicial = this.valorCuotaInicial;
-    }, 100);
-
     this._AcuerdoPagoService.calculateDues(this.acuerdoPago, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.cuotas = response.data;
+          this.acuerdoPago.valorCapital = this.valorTotal;
+          this.acuerdoPago.valorCuotaInicial = this.valorCuotaInicial;
         } else {
           swal({
             title: 'Error!',

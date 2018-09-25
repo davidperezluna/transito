@@ -4,8 +4,8 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class CfgTipoDestinoService {
-	private url = environment.apiUrl + "cfgtipodestino";
+export class CfgSvDestinoService {
+	private url = environment.apiUrl + "configuracion/cfgsvsenialdestino";
 	public identity;
 	public token;
 

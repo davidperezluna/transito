@@ -149,7 +149,7 @@ import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
 import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
-import { MsvSenialModule } from './msvSenial/msvSenial.module';
+
 
 @NgModule({
   imports: [
@@ -273,7 +273,6 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,
-      MsvSenialModule,
       RnaCertificadoTradicionOficialModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
