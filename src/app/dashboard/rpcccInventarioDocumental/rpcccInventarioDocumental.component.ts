@@ -31,7 +31,7 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
   public comparendosRevocatoria=[];
   public comparendosInterposicion=[];
   public comparendosNulidad=[];
-  public datos = {'fechaDesde': null,
+  public resumen = {};     public datos = {'fechaDesde': null,
                   'fechaHasta': null,
                   'agenteId': null,
                   'comparendosId': null};

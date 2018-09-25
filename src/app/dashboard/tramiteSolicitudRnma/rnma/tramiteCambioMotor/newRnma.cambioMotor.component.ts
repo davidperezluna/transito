@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { SustratoService } from '../../../../services/sustrato.service';
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
-import { LoginService } from '../../../../services/login.service';
+import { CombustibleService } from '../../../../services/combustible.service';
 
-import swal from 'sweetalert2';
 
 @Component({
     selector: 'appRnma-cambio-motor',
@@ -32,7 +30,9 @@ export class NewRnmaCambioMotorComponent implements OnInit {
     public numeroIdentificacion: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public combustibles: any;
+    public combustibleSelected: any;
+    public resumen = {};     public datos = {
         'tipoIngreso': null,
         'numeroMotor': null,
         'numeroAceptacion': null,
@@ -45,18 +45,32 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         'entregada': null,
         'sustrato': null,
         'tramiteFormulario': null,
+        'combustibleId': null,
         'facturaId': null,
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
+        private _CombustibleService: CombustibleService,
         private _SustratoService: SustratoService,
         private _TipoIdentificacionService: TipoIdentificacionService,
     ) { }
 
     ngOnInit() {
         this.tipoIngresoList = ['Nuevo', 'Usado'];
+
+        this._CombustibleService.getCombustibleSelect().subscribe(
+            response => {
+                this.combustibles = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
 
         this._SustratoService.getSustratoSelect().subscribe(
             response => {
@@ -99,8 +113,9 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
         this.datos.facturaId = this.factura.id;
+        this.datos.combustibleId = this.combustibleSelected;
         this.datos.tramiteFormulario = 'rnma-cambiomotor';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

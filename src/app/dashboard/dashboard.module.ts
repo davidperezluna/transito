@@ -42,6 +42,10 @@ import { CfgCdaModule } from './cfgCda/cfgCda.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
 import { SoatModule } from './soat/soat.module';
 
+import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
+import { SvCfgTemaCapacitacionModule } from "./svCfgTemaCapacitacion/svCfgTemaCapacitacion.module";
+import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
+
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
@@ -187,6 +191,9 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgAsignacionPlacaSedeModule,
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
+      SvCapacitacionModule,
+      SvCfgTemaCapacitacionModule,
+      SvCfgFuncionModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,

@@ -53,7 +53,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         {'value':2,'label':"Propio"}
     ];
     public tipoIdentificaciones= [ ];
-    public datos = {
+    public resumen = {};     public datos = {
         'propietariosEmpresas': [],
         'propietariosCiudadanos': [],
         'solidario': false,
@@ -103,7 +103,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
                 //this.datos.tramiteFactura = 8;
-                this.readyTramite.emit(this.datos);
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             },
             error => {
               this.errorMessage = <any>error;

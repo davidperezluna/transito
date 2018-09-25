@@ -53,7 +53,7 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
         {'value':2,'label':"Propio"}
     ];
     public tipoIdentificaciones= [ ];
-    public datos = {
+    public resumen = {};     public datos = {
         'propietariosEmpresas': [],
         'propietariosCiudadanos': [],
         'solidario': false,
@@ -103,7 +103,7 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
             response => {
                 this.datos.facturaId = this.factura.id;
                 this.datos.tramiteFormulario = 'rnma-matriculainicial';
-                this.readyTramite.emit(this.datos);
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             },
             error => {
               this.errorMessage = <any>error;

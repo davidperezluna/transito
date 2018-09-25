@@ -31,7 +31,7 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
     public tipoCambioSelected: any;
     public categorias: string[];
     public categoriaSelected: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'tramiteFactura': null,
     };
 
@@ -98,7 +98,7 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
 
         let identity = this._LoginService.getIdentity();
         this.datos.tramiteFactura = 65;
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
       
     }
 

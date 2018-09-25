@@ -21,7 +21,7 @@ export class NewRnmaTransformacionComponent implements OnInit {
     public respuesta;
     public tipoPotenciacionSelect: any;
     public nuevoModelo: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'newData': null,
         'oldData': null,
         'tipoPotenciacion': null,
@@ -67,7 +67,7 @@ export class NewRnmaTransformacionComponent implements OnInit {
                 this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
                 this.datos.facturaId = this.factura.id;
                 this.datos.tramiteFormulario = 'rnma-tranformacion';
-                this.readyTramite.emit(this.datos);
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }
             error => {
                     this.errorMessage = <any>error;

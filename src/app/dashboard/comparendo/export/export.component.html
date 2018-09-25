@@ -54,6 +54,7 @@
                                 <th>PATIO INMOVILIZACION</th>
                                 <th>DIRECCION PATIO INMOVILIZACION</th>
                                 <th>NUMERO INTERNO</th>
+                                <th>PLACA GRUA</th>
                                 <th>CONSECUTIVO INMOVILIZACION</th>-->
                                 <th>IDENTIFICACION CIUDADANO TESTIGO</th>
                                 <th>NOMBRES TESTIGO</th>
@@ -62,7 +63,7 @@
                                 <!--<th>ORGANISMO</th>-->
                                 <th>ESTADO COMPARENDO</th>
                                 <th>POLCA</th>
-                                <!--<th>CODIGO INFRACCION</th>-->
+                                <th>CODIGO INFRACCION</th>
                                 <th>VALOR INFRACCION</th>
                                 <th>FOTOMULTA</th>
                                 <th>FECHA NOTIFICACION</th>
@@ -113,12 +114,12 @@
                                 <td>{{ comparendo.observacionesAgente }}</td>
                                 <td>{{ comparendo.fuga }}</td>
                                 <td>{{ comparendo.accidente }}</td>
-                                <!--<td>{{ comparendo.inmovilizacion.id }}</td>
-                                <td>{{ comparendo.inmovilizacion.patio.nombre }}</td>
-                                <td>{{ comparendo.inmovilizacion.patio.direccion }}</td>
-                                <td>{{ comparendo.inmovilizacion.grua.numeroInterno }}</td>
-                                <td>{{ comparendo.inmovilizacion.grua.placa }}</td>
-                                <td>{{ comparendo.inmovilizacion.consecutivo }}</td>-->
+                                <!--<td>{{ inmovilizacion.id }}</td>
+                                <td>{{ inmovilizacion.patio.nombre }}</td>
+                                <td>{{ inmovilizacion.patio.direccion }}</td>
+                                <td>{{ inmovilizacion.grua.numeroInterno }}</td>
+                                <td>{{ inmovilizacion.grua.placa }}</td>
+                                <td>{{ inmovilizacion.consecutivo }}</td>-->
                                 <td>{{ comparendo.ciudadanoTestigo.usuario.identificacion }}</td>
                                 <td>{{ comparendo.ciudadanoTestigo.usuario.primerNombre }}</td>
                                 <td>{{ comparendo.ciudadanoTestigo.usuario.telefono }}</td>
@@ -126,7 +127,7 @@
                                 <!--<td>{{ comparendo.organismo }}</td>-->
                                 <td>{{ comparendo.estado.nombre }}</td>
                                 <td>{{ comparendo.polca }}</td>
-                                <!--<td>{{ comparendo.codigoInfraccion }}}</td>-->
+                                <td>{{ comparendo.infraccion.codigo }}</td>
                                 <td>{{ comparendo.valorInfraccion }}</td>
                                 <td>{{ comparendo.fotomulta }}</td>
                                 <td>{{ comparendo.fechaNotificacion }}</td>

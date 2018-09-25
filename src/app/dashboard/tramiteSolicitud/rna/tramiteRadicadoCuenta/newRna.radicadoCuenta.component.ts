@@ -34,7 +34,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
     public tiposIdentificacion: any;
     public tipoIdentificacion: any;
     public tipoIdentificacionSelected:any;
-    public datos = {
+    public resumen = {};     public datos = {
         'municipioSelected': null,
         'tipoIdentificacionSelected': null,
         'numeroDocumento': null,
@@ -102,7 +102,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rna-radicadocuenta';
         console.log(this.datos);
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
 
         
 

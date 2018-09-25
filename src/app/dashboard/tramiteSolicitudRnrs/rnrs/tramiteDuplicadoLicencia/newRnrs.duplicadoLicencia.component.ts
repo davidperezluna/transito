@@ -19,7 +19,7 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     public sustratos: any;
     public sustratoSelected: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'numeroLicencia': null,
         'numeroRunt': null,
         'sustrato': null,
@@ -40,7 +40,7 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     onEnviarTramite() {
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-duplicadolicencia';
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

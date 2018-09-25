@@ -43,27 +43,29 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         'ciudadanoId': null,
     };
 
+    public resumen = {
+        'Numero licencia conduccion actual': null,
+        'Numero licencia conduccion anterior': null,
+        'identificacion Anterior': null,
+        'identificacion Actual': null,
+        'Nombre Solicitante': null,
+    };
+
     constructor(
-        private _LoginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
         private _ClaseService: ClaseService,
         private _ServicioService: ServicioService,
-        private _CiudadanoService: CiudadanoService,
         private _PaisService: PaisService,
     ) { }
 
     ngOnInit() {
         this.categorias = ['A2'];
-        
         this.datos.identificacionAnterior = this.solicitante.identificacion;
-
         this._ClaseService.getClaseSelect().subscribe(
             response => {
               this.clases = response;
             },
             error => {
               this.errorMessage = <any>error;
-      
               if(this.errorMessage != null){
                 console.log(this.errorMessage);
                 alert('Error en la petición');
@@ -98,20 +100,24 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
               }
             }
         );
-    }
+    } 
     
     enviarTramite() {
-        let token = this._LoginService.getToken();
+        // let token = this._LoginService.getToken();
         
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnc-expedicioncambiodocumento';
-        this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
+        this.datos.numeroLicenciaConduccion = this.datos.identificacionActual;
         this.datos.claseId = this.claseSelected;
         this.datos.servicioId = this.servicioSelected;
         this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
-
-        this.readyTramite.emit(this.datos);
+        this.resumen["identificacion Actual"] = this.datos.identificacionActual;
+        this.resumen["identificacion Anterior"] = this.datos.identificacionAnterior;
+        this.resumen["Nombre Solicitante"]= this.solicitante.primerNombre+' '+this.solicitante.segundoNombre+' '+this.solicitante.primerApellido+' '+this.solicitante.segundoApellido;
+        this.resumen["Numero licencia conduccion actual"] = this.datos.identificacionActual;
+        this.resumen["Numero licencia conduccion anterior"] = this.datos.identificacionAnterior;
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

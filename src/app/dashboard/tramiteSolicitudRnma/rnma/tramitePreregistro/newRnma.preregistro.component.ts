@@ -43,7 +43,7 @@ public combustibleSelected:any;
 public marcaSelected:any;
 public respuesta:any;
 public sedesOperativas:any;
-public datos = {
+public resumen = {};     public datos = {
   'numeroMotor': null,
   'tramiteFormulario': null,
   'facturaId': null,
@@ -208,7 +208,7 @@ constructor(
           this.datos.numeroMotor = this.vehiculo.motor;
           this.datos.facturaId = this.factura.id;
           this.datos.tramiteFormulario = 'rnma-preregistro';
-          this.readyTramite.emit(this.datos);
+          this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
         }else{
           swal({
             title: 'Error!',

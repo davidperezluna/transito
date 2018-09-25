@@ -497,6 +497,22 @@
           </a>
         </li>
       </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvSenial" [ngClass]="{'active' : ( addActive === 'msvSenial')}" (click)="addActiveMenu('msvSenial')">
+            <i class="fa fa-angle-right"></i> <!--HU-09-->Señales
+          </a>
+        </li>
+      </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="svCapacitacion" [ngClass]="{'active' : ( addActive === 'svCapacitacion')}"
+            (click)="addActiveMenu('svCapacitacion')">
+            <i class="fa fa-angle-right"></i>
+            <!--HU-08-->Capacitaciones
+          </a>
+        </li>
+      </ul>
       <!-- /.nav- -->
     
 

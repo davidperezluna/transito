@@ -130,6 +130,7 @@ constructor(
       'comparendo': this.comparendo,
       'inmovilizacion': this.inmovilizacion
     }
+    console.log(this.comparendo);
     
 		this._ComparendoService.register(datos,token).subscribe(
 			response => {

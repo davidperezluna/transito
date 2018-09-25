@@ -29,7 +29,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'motivoCancelacion': null,
         'entidadJudicial': null,
         'numeroOficio': null, 
@@ -87,7 +87,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){
-                this.readyTramite.emit(this.datos);
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }
             error => {
                     this.errorMessage = <any>error;

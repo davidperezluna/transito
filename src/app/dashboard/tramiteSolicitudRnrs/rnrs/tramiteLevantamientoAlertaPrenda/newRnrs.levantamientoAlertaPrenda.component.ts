@@ -75,7 +75,7 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         { 'value': 8, 'label': "OCHO" },
         { 'value': 9, 'label': "NUEVE" }
     ];
-    public datos = {
+    public resumen = {};     public datos = {
         'acreedoresVehiculo': [],
         'acreedoresEmpresas': [],
         'acreedoresCiudadanos': [],
@@ -184,7 +184,7 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
                                 // this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
                                 // this.datos.gradoAlerta = this.gradoSelected;
                                 // this.datos.tramiteFactura = 46;
-                                this.readyTramite.emit(this.datos);
+                                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                                 this.acreedorNew = false;
 
                                 this.acreedorEncontrado = 2;

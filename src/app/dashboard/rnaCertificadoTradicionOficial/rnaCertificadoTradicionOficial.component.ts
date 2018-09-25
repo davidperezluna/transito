@@ -38,7 +38,7 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
     public ciudadano:any;
     public txt:any;
     public valido:any;
-    public datos = {
+    public resumen = {};     public datos = {
         'nroRunt': null,
         'observacion': null,                  
         'certificadoEntregada': null,

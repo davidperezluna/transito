@@ -38,6 +38,7 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
     public ciudadanoEncontrado=1;
     public ciudadanoNew = false;
     public ciudadano:any;
+    public resumen = {};     
     public datos = {
         'nroRunt': null,
         'observacion': null,                  
@@ -79,13 +80,13 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
                 }
         }); 
         // this.datos.tramiteFactura =58;
-        // this.readyTramite.emit(this.datos);
+        // this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
 
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-certificadotradicion';
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen}); 
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

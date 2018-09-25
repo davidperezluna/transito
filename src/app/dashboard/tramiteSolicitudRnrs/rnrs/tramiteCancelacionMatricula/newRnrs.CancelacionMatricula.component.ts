@@ -29,7 +29,7 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public datos = {
+    public resumen = {};     public datos = {
         'motivoCancelacion': null,
         'fechaHechos': null,
         'numeroRunt': null,
@@ -73,7 +73,7 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
     }
 
     onEnviarTramite() {
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
         /*this.vehiculo.servicioId = this.vehiculo.servicio.id
         this.vehiculo.municipioId = this.vehiculo.municipio.id
         this.vehiculo.lineaId = this.vehiculo.linea.id
@@ -92,7 +92,7 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
-                    this.readyTramite.emit(this.datos);
+                    this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                 }
                 error => {
                     this.errorMessage = <any>error;

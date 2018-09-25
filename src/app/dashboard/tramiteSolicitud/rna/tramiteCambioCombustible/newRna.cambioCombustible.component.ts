@@ -21,7 +21,7 @@ export class NewRnaCambioCombustibleComponent implements OnInit {
     public combustibles: any;
     public tramiteFacturaSelected: any;
     public combustibleSelected: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'newData': null,
         'oldData': null,
         'sustrato': null,
@@ -75,7 +75,7 @@ export class NewRnaCambioCombustibleComponent implements OnInit {
                             this.datos.newData = combustible.data.nombre;
                             this.datos.oldData = this.vehiculo.combustible.nombre;
                             this.datos.tramiteFactura =31;
-                            this.readyTramite.emit(this.datos);
+                            this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                         }
                         error => {
                                 this.errorMessage = <any>error;

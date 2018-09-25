@@ -22,7 +22,7 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
     public tramiteSolicitud: any;
     public idVehiculo;
     public showV:any;
-    public datos = {
+    public resumen = {};     public datos = {
         'vehiculo': null,
         'tramiteFactura': null,
         'tipoConsulta': null,

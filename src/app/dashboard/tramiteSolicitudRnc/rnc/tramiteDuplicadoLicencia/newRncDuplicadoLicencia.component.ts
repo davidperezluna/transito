@@ -28,7 +28,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public tipoCambioSelected: any;
     public categorias: string[];
-    public datos = {
+    public resumen = {};     public datos = {
         'tramiteFormulario': null,
         'facturaId': null,
         'categoria': null,
@@ -108,7 +108,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
 
-        this.readyTramite.emit(this.datos);
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

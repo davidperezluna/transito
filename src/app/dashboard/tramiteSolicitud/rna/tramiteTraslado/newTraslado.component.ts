@@ -29,7 +29,7 @@ public fechaSalida;
 public numeroRunt;
 public nombreEmpresa;
 public datos: any = null;
-
+public resumen = {};
 constructor(
   private _loginService: LoginService,
   private _TramiteSolicitudService: TramiteSolicitudService,
@@ -128,7 +128,7 @@ constructor(
               this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
               this.datos.facturaId = this.factura.id;
               this.datos.tramiteFormulario = 'rna-traslado';
-              this.readyTramite.emit(this.datos);
+              this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
           }
           error => {
                   this.errorMessage = <any>error;

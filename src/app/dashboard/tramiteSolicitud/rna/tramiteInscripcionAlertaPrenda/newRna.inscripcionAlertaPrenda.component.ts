@@ -72,7 +72,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         { 'value': 8, 'label': "OCHO" },
         { 'value': 9, 'label': "NUEVE" }
     ];
-    public datos = {
+    public resumen = {};     public datos = {
         'acreedoresEmpresas': [],
         'acreedoresCiudadanos': [],
         'tipoAlerta': [],
@@ -178,7 +178,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                     // this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
                     // this.datos.gradoAlerta = this.gradoSelected;
                     // this.datos.tramiteFactura = 46;
-                    // this.readyTramite.emit(this.datos);
+                    // this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                     // this.acreedorNew = false;
                     this.vehiculo.pignorado = true;
 
@@ -191,7 +191,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                                 // this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
                                 // this.datos.gradoAlerta = this.gradoSelected;
                                 // this.datos.tramiteFactura = 46;
-                                this.readyTramite.emit(this.datos);
+                                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                                 this.acreedorNew = false;
 
                                 this.acreedorEncontrado = 2;
@@ -279,7 +279,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         let identificacion = {
             'numeroIdentificacion': this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {

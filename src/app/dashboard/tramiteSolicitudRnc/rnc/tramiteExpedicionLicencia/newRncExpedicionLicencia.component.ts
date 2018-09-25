@@ -28,10 +28,12 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     public paises: any;
     public paisSelected: any;
     public tramiteFacturaSelected: any;
+    public ciudadanoEncontrado=1;
     public tipoCambioSelected: any;
+    public identificacion: any;
     public categorias: string[];
     public categoriaSelected: any;
-    public datos = {
+    public resumen = {};     public datos = {
         'tramiteFormulario': null,
         'facturaId': null,
         'numeroLicenciaConduccion': null,
@@ -137,7 +139,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                     this._RncLicenciaConduccionService.register(this.datos, token).subscribe(
                         response => {
                             if (response.status == 'success') {
-                                this.readyTramite.emit(this.datos);
+                                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                             } else {
                                 swal({
                                     type: 'warning',
@@ -174,6 +176,29 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
 
     onCancelar(){
         this.cancelarTramite.emit(true);
+    }
+
+    onKeyCiudadano(){
+        let token = this._LoginService.getToken();
+        this._CiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.solicitante.identificacion},token).subscribe(
+            response => {
+                this.respuesta = response; 
+                if(this.respuesta.status == 'success'){
+                    this.solicitante = this.respuesta.data;
+                    console.log(this.respuesta.data);
+                    this.ciudadanoEncontrado= 2;
+                }else{
+                    this.ciudadanoEncontrado=3;
+                }
+                error => {
+                        this.errorMessage = <any>error;
+                    
+                        if(this.errorMessage != null){
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+            }); 
     }
 
 }

@@ -55,7 +55,7 @@ export class NewComponent implements OnInit {
   public tipoIdentificacionesDemandante;
   public opcionSeleccionado: string = '0'; // Iniciamos
   public verSeleccion: string = '';
-  public datos = {
+  public resumen = {};     public datos = {
   }
   public datos2 = {
     'vehiculos': [],

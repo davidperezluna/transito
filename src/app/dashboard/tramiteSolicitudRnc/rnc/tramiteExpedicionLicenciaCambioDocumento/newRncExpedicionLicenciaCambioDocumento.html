@@ -2,7 +2,7 @@
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
-        <div class="card">
+        <div class="card" *ngIf='solicitante.tipoIdentificacion.id == 7'>
             <div class="card-body">
                 <h5 class="m-0">
                     Expedicion de licencia cambio de documento
@@ -49,8 +49,8 @@
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Número de Licencia <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="solicitante.Identificacion" name="numeroLicencia" type="text" required readonly />
-                        </div>
+                            <input class="form-control" [(ngModel)]="datos.identificacionActual" name="numeroLicencia" type="text" required/>
+                        </div> 
                         <div class="col-xs-12 col-lg-4">
                             <label>Número RUNT <b class="text-danger">*</b></label>
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
@@ -66,6 +66,9 @@
                     </button>
                 </div>
             </div>
+        </div>
+        <div class="card" *ngIf='solicitante.tipoIdentificacion.id != 7'>
+            <h3> El solicitante no tiene TRAJETA DE IDENTIDAD </h3>
         </div>
     </div>
     <!-- /.col -->

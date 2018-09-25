@@ -1,0 +1,122 @@
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Filtro de búsqueda</strong>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
+                            <!--<div class="col-xs-12 col-lg-6">
+                                <label>Municipio <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio"></ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Educación <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio"></ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Función <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio"></ng-select>
+                            </div>-->
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="No. cédula ó NIT" [(ngModel)]="cedula"
+                                    required name="cedula" />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="ciudadano">
+                        <br>
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Nombre:</strong> {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}</td>
+                                        <td><strong>Cédula:</strong> {{ ciudadano.identificacion }}</td>
+                                        <td><strong>Municipio Residencia: </strong> {{ ciudadano.ciudadano.municipioResidencia.nombre }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-12" *ngIf='formIndex && ciudadano'>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Historial <small>Capacitaciones</small>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNew()" class="btn btn-primary btn-round">
+                                <i class="fa fa-plus"></i>
+                                Nuevo
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example" *ngIf="capacitaciones">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha y Hora Registro:</th>
+                                <th>Formador: </th>
+                                <th>Cédula: </th>
+                                <th>Fecha Actividad: </th>
+                                <th>Semana: </th>
+                                <th>Municipio: </th>
+                                <th>Función de Seg. Víal: </th>
+                                <th>Clase de Actividad: </th>
+                                <th>Tema de Capacitación: </th>
+                                <th>Descripción actividades: </th>
+                                <th>Nombres Actor de la vía: </th>
+                                <th>Apellidos Actor de la vía: </th>
+                                <th>No. cédula Actor de la vía: </th>
+                                <th>Clase Actor de la vía: </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let capacitacion of capacitaciones; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ capacitacion.fechaHoraRegistro }}</td>
+                                <td>{{ capacitacion.formador }}</td>
+                                <td>{{ capacitacion.cedula }}</td>
+                                <td>{{ capacitacion.fechaActividad }}</td>
+                                <td>{{ capacitacion.semana }}</td>
+                                <td>{{ capacitacion.municipio.nombre }}</td>
+                                <td>{{ capacitacion.funcionSeguridadVial }}</td>
+                                <td>{{ capacitacion.claseActividad }}</td>
+                                <td>{{ capacitacion.temaCapacitacion }}</td>
+                                <td>{{ capacitacion.descripcionActividad }}</td>
+                                <td>{{ capacitacion.nombreActorVial }}</td>
+                                <td>{{ capacitacion.apellidoActorVial }}</td>
+                                <td>{{ capacitacion.numeroCedulaActorVial }}</td>
+                                <td>{{ capacitacion.claseActorVial }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="alert alert-danger text-center" *ngIf="!capacitaciones">
+                        <i class="fa fa-exclamation-triangle fa-3x"></i>
+                        Ningún registro encontrado
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <app-new *ngIf='formNew' [ciudadano]="ciudadano" (ready)="ready($event)"></app-new>
+    </div>
+
+
+</div>
