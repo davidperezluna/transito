@@ -26,14 +26,15 @@ export class SvCapacitacionService {
 
     register(formData, datos, token) {
         let json = JSON.stringify(datos);
-        //formData.append('data', json);
-        //formData.append('authorization', token);
-        let params = "json=" + json + "&authorization=" + token;
+        formData.append('data', json);
+        formData.append('authorization', token);
+        return this._http.post(this.url + "/new", formData).map(res => res.json());
+        /*let params = "json=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/new", params, { headers: headers }).map(
             res => res.json(),
             this._loogerService.registerLog(token, 'INSERT', json, this.url)
-        );
+        );*/
     }
 
     delete(datos, token) {

@@ -6,10 +6,11 @@ import { LoginService } from '../../../services/login.service';
 import { MunicipioService } from '../../../services/municipio.service';
 
 import swal from 'sweetalert2';
-import { SvCfgTemaCapacitacionService } from '../../../services/svCfgTemaCapacitacion.service';
-import { SvCfgFuncion } from '../../svCfgFuncion/svCfgFuncion.modelo';
-import { SvCfgClaseActorViaService } from '../../../services/svCfgClaseActorVia.service';
 import { SvCfgFuncionService } from '../../../services/svCfgFuncion.service';
+import { SvCfgFuncionCriterioService } from '../../../services/svCfgFuncionCriterio.service';
+import { SvCfgTemaCapacitacionService } from '../../../services/svCfgTemaCapacitacion.service';
+import { SvCfgClaseActorViaService } from '../../../services/svCfgClaseActorVia.service';
+import { SvCfgClaseActorVia } from '../../svCfgClaseActorVia/svCfgClaseActorVia.modelo';
 
 @Component({
     selector: 'app-new',
@@ -26,29 +27,31 @@ export class NewComponent implements OnInit {
 
     public municipios: any;
     public funciones: any;
+    public funcionesCriterios: any;
     public temasCapacitaciones: any;
     public clasesActoresVia: any;
 
     public municipioSelected: any;
     public funcionSelected: any;
+    public funcionCriterioSeleted: any;
     public temaCapacitacionSelected: any;
     public claseActorViaSelected: any;
-
 
     constructor(
         private _CapacitacionService: SvCapacitacionService,
         private _loginService: LoginService,
-        private _Municipioervice: MunicipioService,
+        private _MunicipioService: MunicipioService,
         private _FuncionService: SvCfgFuncionService,
-        private _TemaCapacitacion: SvCfgTemaCapacitacionService,
-        private _ClaseActorVia: SvCfgClaseActorViaService,
+        private _FuncionCriterioService: SvCfgFuncionCriterioService,
+        private _TemaCapacitacionService: SvCfgTemaCapacitacionService,
+        private _SvCfgClaseActorViaService: SvCfgClaseActorViaService,
 
     ) { }
 
     ngOnInit() {
         this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
         this.date = new Date();
-        this._Municipioervice.getMunicipioSelect().subscribe(
+        this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
             },
@@ -61,20 +64,7 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-        this._TemaCapacitacion.select().subscribe(
-            response => {
-                this.temasCapacitaciones = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-        this._FuncionService.select().subscribe(
+        this._FuncionService.getFuncionSelect().subscribe(
             response => {
                 this.funciones = response;
             },
@@ -87,7 +77,33 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-        this._ClaseActorVia.select().subscribe(
+        this._FuncionCriterioService.getFuncionCriterioSelect().subscribe(
+            response => {
+                this.funcionesCriterios = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._TemaCapacitacionService.getTemaCapacitacionSelect().subscribe(
+            response => {
+                this.temasCapacitaciones = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._SvCfgClaseActorViaService.getClaseActorViaSelect().subscribe(
             response => {
                 this.clasesActoresVia = response;
             },
@@ -111,6 +127,9 @@ export class NewComponent implements OnInit {
 
         this.capacitacion.municipio = this.municipioSelected;
         //this.capacitacion.cedula = this.ciudadano.cedula;
+        this.capacitacion.funcion = this.funcionSelected;
+        this.capacitacion.claseActorVial = this.claseActorViaSelected;
+        this.capacitacion.temaCapacitacion = this.temaCapacitacionSelected;
 
         swal({
             title: '¿Está seguro?',
