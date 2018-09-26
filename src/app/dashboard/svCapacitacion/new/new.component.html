@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Clase de Actor de la vía <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.claseActorVial" name="claseActorVial" required />
+                        <ng-select [multiple]="false" [options]="clasesActoresVia" [(ngModel)]="claseActorViaSelected" required name="claseActorVia"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Adjuntar Documentación <strong class="text-danger">*</strong></label>

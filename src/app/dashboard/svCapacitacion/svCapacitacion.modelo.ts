@@ -6,7 +6,7 @@ export class SvCapacitacion {
         public fechaActividad: string,
         public semana: string,
         public municipio: string,
-        public funcionSeguridadVial: string,
+        public funcion: string,
         public claseActividad: string,
         public temaCapacitacion: string,
         public descripcionActividad: string,

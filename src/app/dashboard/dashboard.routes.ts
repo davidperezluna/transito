@@ -38,8 +38,8 @@ import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTec
 import { SoatRoutes } from './soat/soat.routes';
 
 import { SvCapacitacionRoutes } from './svCapacitacion/svCapacitacion.routes';
-import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.routes';
 import { SvCfgFuncionRoutes } from './svCfgFuncion/svCfgFuncion.routes';
+import { SvCfgFuncionCriterioRoutes } from './svCfgFuncionCriterio/svCfgFuncionCriterio.routes';
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -144,6 +144,15 @@ import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/
 import { DashboardComponent } from '.';
 
 
+<<<<<<< HEAD
+import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
+import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
+import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
+import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
+import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
+
+=======
+>>>>>>> 40e3f4e598c616304623570204b5204f5f63d770
 export const DashboardRoutes: Route[] = [
   {
     path: 'dashboard', 
@@ -219,8 +228,10 @@ export const DashboardRoutes: Route[] = [
       ...VehiculoTecnoMecanicaRoutes,
       ...SoatRoutes,
       ...SvCapacitacionRoutes,
-      ...SvCfgTemaCapacitacionRoutes,
       ...SvCfgFuncionRoutes,
+      ...SvCfgFuncionCriterioRoutes,
+      ...SvCfgClaseActorViaRoutes,
+      ...SvCfgTemaCapacitacionRoutes,
       ...CfgComparendoEstadoRoutes,
       ...InfraccionRoutes,
       ...CarroceriaRoutes,

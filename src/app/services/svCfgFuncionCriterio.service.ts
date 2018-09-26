@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import "rxjs/add/operator/map";
 
 @Injectable()
-export class SvCfgFuncionService {
-    private url = environment.apiUrl + 'seguridadvial/svcfgfuncion';
+export class SvCfgFuncionCriterioService {
+    private url = environment.apiUrl + 'seguridadvial/svcfgfuncioncriterio';
     public identity;
     public token;
 
@@ -61,7 +61,7 @@ export class SvCfgFuncionService {
         );
     }
 
-    getFuncionSelect() {
+    getFuncionCriterioSelect() {
         return this._http.get(this.url + "/select").map(res => res.json());
     }
 }

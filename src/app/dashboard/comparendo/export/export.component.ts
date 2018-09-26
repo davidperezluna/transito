@@ -42,8 +42,7 @@ export class ExportComponent implements OnInit {
         this._ComparendoService.export().subscribe(
             response => {
                 this.comparendos = response.data;
-                this.inmovilizacion = response.inmovilizacion;
-                console.log(this.inmovilizacion);
+                console.log(this.comparendos);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -65,7 +64,7 @@ export class ExportComponent implements OnInit {
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
             buttons: [
-                'excel'
+                'excel', 'csv'
             ],
             oLanguage: {
                 oPaginate: {

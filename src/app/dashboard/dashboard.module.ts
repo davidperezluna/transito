@@ -43,8 +43,8 @@ import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTec
 import { SoatModule } from './soat/soat.module';
 
 import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
-import { SvCfgTemaCapacitacionModule } from "./svCfgTemaCapacitacion/svCfgTemaCapacitacion.module";
 import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
+import { SvCfgFuncionCriterioModule } from "./svCfgFuncionCriterio/svCfgFuncionCriterio.module";
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -153,7 +153,13 @@ import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
 import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
+<<<<<<< HEAD
+import { MsvSenialModule } from './msvSenial/msvSenial.module';
+import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
+import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
+=======
 
+>>>>>>> 40e3f4e598c616304623570204b5204f5f63d770
 
 @NgModule({
   imports: [
@@ -192,8 +198,10 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
       SvCapacitacionModule,
-      SvCfgTemaCapacitacionModule,
       SvCfgFuncionModule,
+      SvCfgFuncionCriterioModule,
+      SvCfgClaseActorViaModule,
+      SvCfgTemaCapacitacionModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
