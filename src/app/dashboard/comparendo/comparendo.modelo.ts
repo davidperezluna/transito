@@ -3,6 +3,7 @@ export class Comparendo{
 		public consecutivo:string,
 		public fecha:string,
 		public hora:string,
+		public minutos:string,
 		public direccion:string,
 		public localidad:string,
 		public observacionesAgente:string,

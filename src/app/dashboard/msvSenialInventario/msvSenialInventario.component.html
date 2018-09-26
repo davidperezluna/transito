@@ -124,6 +124,14 @@
     <div class="col-xs-12 col-lg-8" *ngIf='formLocationSenial'><!-- .col -->
       <app-location [inventario]="inventario" [tipoDestinoSelected]="tipoDestinoSelected" (ready)="ready($event)"></app-location>
     </div><!-- /.col -->
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formNewBodega'><!-- .col -->
+      <app-new-senial-municipio [municipioSelected]="municipioSelected" [tipoSenialSelected]="tipoSenialSelected" (ready)="ready($event)"></app-new-senial-municipio>
+    </div><!-- /.col -->
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formNewMunicipio'><!-- .col -->
+      <app-new-senial-bodega [tipoSenialSelected]="tipoSenialSelected" (ready)="ready($event)"></app-new-senial-bodega>
+    </div><!-- /.col -->
   </div>
 
 </div>
