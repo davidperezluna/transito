@@ -5,10 +5,11 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { MsvSenialInventarioService } from '../../services/msvSenialInventario.service';
 import { MsvSenialUbicacionService } from '../../services/msvSenialUbicacion.service';
+import { MsvSenialService } from '../../services/msvSenial.service';
 import { CfgInventarioService } from '../../services/cfgInventario.service';
 import { CfgTipoEstadoService } from '../../services/cfgTipoEstado.service';
 import { CfgTipoColorService } from '../../services/cfgTipoColor.service';
-import { CfgTipoDestinoService } from '../../services/cfgTipoDestino.service';
+import { CfgSvDestinoService } from '../../services/cfgSvDestino.service';
 import { CfgBodegaService } from '../../services/cfgBodega.service';
 import { MunicipioService } from '../../services/municipio.service';
 import { CfgTipoSenialService } from '../../services/cfgTipoSenial.service';
@@ -23,7 +24,7 @@ import { SelectModule } from 'angular2-select';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [MsvSenialInventarioComponent, NewSenialBodegaComponent, NewSenialMunicipioComponent, EditComponent, LocationComponent],
     exports: [MsvSenialInventarioComponent, NewSenialBodegaComponent, NewSenialMunicipioComponent, EditComponent, LocationComponent],
-    providers: [MsvSenialInventarioService, MsvSenialUbicacionService, CfgTipoDestinoService, CfgBodegaService, MunicipioService, CfgTipoSenialService, CfgTipoColorService, CfgTipoEstadoService, CfgInventarioService]
+    providers: [MsvSenialInventarioService, MsvSenialUbicacionService, MsvSenialService, CfgSvDestinoService, CfgBodegaService, MunicipioService, CfgTipoSenialService, CfgTipoColorService, CfgTipoEstadoService, CfgInventarioService]
 })
 
 export class MsvSenialInventarioModule { }

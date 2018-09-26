@@ -51,7 +51,6 @@
         "../node_modules/datatables.net/js/buttons.html5.min.js",
         "../node_modules/datatables.net/js/buttons.print.min.js",
 
-
         "../node_modules/jvectormap/jquery-jvectormap.min.js", 		 
         "../node_modules/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js", 
         "../node_modules/jvectormap/tests/assets/jquery-jvectormap-us-lcc-en.js", 

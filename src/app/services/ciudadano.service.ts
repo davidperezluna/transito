@@ -53,7 +53,6 @@ export class CiudadanoService {
  			return this._http.post(this.url+"/search/identificacion", params, {headers: headers}).map(res => res.json());
 	}
 
-	 
 	calculateAge(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;

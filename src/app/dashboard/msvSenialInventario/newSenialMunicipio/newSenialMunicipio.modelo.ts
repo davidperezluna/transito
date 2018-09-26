@@ -12,6 +12,7 @@ export class MsvSenialMunicipio{
 		public direccion: string,
 		public cantidad: number,
 		public valor: number,
+		public idTipoSenial: number,
 		public idConector: number,
 		public idSenial: number,
 		public idEstado: number,

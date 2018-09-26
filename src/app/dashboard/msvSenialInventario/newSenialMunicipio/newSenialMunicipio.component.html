@@ -1,4 +1,3 @@
-
 <div class="card">
     <div class="card-header">
         <h5>
@@ -14,9 +13,18 @@
                     <label>Fecha <strong class="text-danger">*</strong></label>
                     <input type="date" class="form-control" [(ngModel)]="senialMunicipio.fecha" name="fecha" required autofocus />
                 </div>
-                <div class="col-xs-12 col-lg-9">
+                <div class="col-xs-12 col-lg-4">
                     <label>Señal <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="senialSelected" name="seniales" required>
+                    <ng-select (ngModelChange)="onChangeSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialSelected" name="seniales" required>
+                    </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-2">
+                    <label>Cantidad <strong class="text-danger">*</strong></label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.cantidad" name="cantidad" required />
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                    <label>Estado <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required name="estados">
                     </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-3">
@@ -29,17 +37,24 @@
                 </div>
                 <div class="col-xs-12 col-lg-6">
                     <label>Dirección <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.direccion" name="direccion" required disabled />
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="senialMunicipio.direccion" name="direccion" required />
+                        <span class="input-group-btn">
+                            <button (click)="onGetAddress()" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-map-marker"></i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
                 <div class="col-xs-12 col-lg-2">
                     <label>Via 1 <strong class="text-danger">*</strong></label>
                     <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via1" name="via1" required />
                 </div>
-                <div class="col-xs-12 col-lg-2">
-                    <label>No. 1 <strong class="text-danger">*</strong></label>
+                <div class="col-xs-12 col-lg-1">
+                    <label># 1 <strong class="text-danger">*</strong></label>
                     <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no1" name="no1" required />
                 </div>
-                <div class="col-xs-12 col-lg-2">
+                <div class="col-xs-12 col-lg-3">
                     <label>Conector <strong class="text-danger">*</strong></label>
                     <ng-select [multiple]="false" [options]="conectores" [(ngModel)]="conectorSelected" required name="conectores">
                     </ng-select>
@@ -48,31 +63,22 @@
                     <label>Via 2 <strong class="text-danger">*</strong></label>
                     <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via2" name="via2" required />
                 </div>
-                <div class="col-xs-12 col-lg-2">
-                    <label>No. 2 <strong class="text-danger">*</strong></label>
+                <div class="col-xs-12 col-lg-1">
+                    <label># 2 <strong class="text-danger">*</strong></label>
                     <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no2" name="no2" required />
-                </div><div class="col-xs-12 col-lg-2">
-                    <label>Via 3 <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via3" name="via3" required />
                 </div>
                 <div class="col-xs-12 col-lg-2">
-                    <label>No. 3 <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no3" name="no3" required />
+                    <label>Via 3</label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via3" name="via3" />
                 </div>
-                <div class="col-xs-12 col-lg-3">
-                    <label>Cantidad <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.cantidad" name="cantidad" required />
+                <div class="col-xs-12 col-lg-1">
+                    <label># 3</label>
+                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no3" name="no3" />
                 </div>
                 <div class="col-xs-12 col-lg-3">
                     <label>Valor <strong class="text-danger">*</strong></label>
                     <input type="text" class="form-control" [(ngModel)]="senialMunicipio.valor" name="valor" required />
                 </div>
-                <div class="col-xs-12 col-lg-6">
-                    <label>Estado <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required name="estados">
-                    </ng-select>
-                </div>
-                
                 <div class="col-xs-12 col-lg-6">
                     <label>Adjunto <strong class="text-danger">*</strong></label>
                     <input type="file"  class="form-control" [(ngModel)]="fileSelected" (change)="onFileChange($event)" placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" name="file">
@@ -93,3 +99,59 @@
         </div>
     </div>
 </div>
+
+<div class="row"><!-- .row -->
+    <div class="col-md-12 col-sm-12">
+       
+        <div id="geo" class="swal2-container swal2-center swal2-fade swal2-shown" style="visibility: hidden; overflow-y: auto;">
+            <div aria-labelledby="swal2-title" aria-describedby="swal2-content" class="swal2-popup swal2-modal swal2-show" tabindex="-1"
+                role="dialog" aria-live="assertive" aria-modal="true" style="width: 700px; display: flex;">
+                <div class="swal2-header">
+                    <ul class="swal2-progresssteps" style="display: none;"></ul>
+                    <div class="swal2-icon swal2-error" style="display: none;">
+                        <span class="swal2-x-mark">
+                            <span class="swal2-x-mark-line-left"></span>
+                            <span class="swal2-x-mark-line-right"></span>
+                        </span>
+                    </div>
+                    <img class="swal2-image" style="display: none;">
+                    <h2 class="swal2-title" id="swal2-title">Ubicación de la señal</h2>
+                    <button (click)="onCloseGeo()" type="button" class="swal2-close" aria-label="Close this dialog" style="display: flex;">
+                        ×
+                    </button>
+                </div>
+                <div class="swal2-content">
+                    <div id="swal2-content" style="display: block;">
+                        <!--content-->
+                        <input type="hidden" style="width:400px" id="lat" />
+                        <input type="hidden" style="width:400px" id="lng" />
+                        <input type="text" style="width:400px" class="form-control" style="visibility: hidden;" id="address" />
+                        <div align="center">
+                            <div #map style="width:660px; height:300px" id="map">loading...</div>
+                        </div>
+    
+                    </div>
+                    <input class="swal2-input" style="display: none;">
+                    <input type="file" class="swal2-file" style="display: none;">
+                    <div class="swal2-range" style="display: none;">
+                        <input type="range">
+                        <output></output>
+                    </div>
+                    <select class="swal2-select" style="display: none;"></select>
+                    <div class="swal2-radio" style="display: none;"></div>
+                    <label for="swal2-checkbox" class="swal2-checkbox" style="display: none;">
+                        <input type="checkbox">
+                    </label>
+                    <textarea class="swal2-textarea" style="display: none;"></textarea>
+                    <div class="swal2-validationerror" id="swal2-validationerror" style="display: none;"></div>
+                </div>
+                <div class="swal2-actions" style="display: flex;">
+                    <button (click)="onSearchGeo()" id="searchAddress" (ready)="ready($event)" class="swal2-confirm swal2-styled" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
+                        <i class="fa fa-eye"></i> Buscar Dirección
+                    </button>
+                </div>
+                <div class="swal2-footer" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.row -->

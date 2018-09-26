@@ -34,6 +34,20 @@ export class MsvSenialInventarioService {
 		}
 	}
 
+	registerSenialMunicipio(formData, datos, token) {
+		if (formData == null) {
+			let json = JSON.stringify(datos);
+			let params = "json=" + json + "&authorization=" + token;
+			let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+			return this._http.post(this.urlMunicipio + "/new", params, { headers: headers }).map(res => res.json());
+		} else {
+			let json = JSON.stringify(datos);
+			formData.append('json', json);
+			formData.append('authorization', token);
+			return this._http.post(this.urlMunicipio + "/new", formData).map(res => res.json());
+		}
+	}
+
 	edit(formData, datos, token){
 		if(formData == null){
 			let json = JSON.stringify(datos);

@@ -26,15 +26,11 @@ export class MsvSenialUbicacionService {
 		return this._http.post(this.url+"/new", formData).map(res => res.json());
 	}
 
-	searchByTipoSenialAndMunicipio(datos, token) {
+	searchByDestino(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/tiposenial/municipio", params, { headers: headers }).map(res => res.json());
-	}
-
-	searchByFull() {
-		return this._http.get(this.url + "/full").map(res => res.json());
+		return this._http.post(this.url + "/search/destino", params, { headers: headers }).map(res => res.json());
 	}
 
 	export() {

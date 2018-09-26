@@ -30,6 +30,7 @@ import { CfgSvConectorRoutes } from './cfgSvConector/cfgSvConector.routes';
 import { CfgSvSenialTipoRoutes } from './cfgSvSenialTipo/cfgSvSenialTipo.routes';
 import { CfgSvSenialColorRoutes } from './cfgSvSenialColor/cfgSvSenialColor.routes';
 import { CfgSvSenialEstadoRoutes } from './cfgSvSenialEstado/cfgSvSenialEstado.routes';
+import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
 import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.routes';
 
 import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
@@ -138,16 +139,20 @@ import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
+import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 import { DashboardComponent } from '.';
 
 
+<<<<<<< HEAD
 import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
 import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
 import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
 
+=======
+>>>>>>> 40e3f4e598c616304623570204b5204f5f63d770
 export const DashboardRoutes: Route[] = [
   {
     path: 'dashboard', 
@@ -217,6 +222,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgSvSenialTipoRoutes,
       ...CfgSvSenialColorRoutes,
       ...CfgSvSenialEstadoRoutes,
+      ...MsvSenialInventarioRoutes,
       ...CfgSvUnidadMedidaRoutes,
       ...CfgCdaRoutes,
       ...VehiculoTecnoMecanicaRoutes,
@@ -273,8 +279,6 @@ export const DashboardRoutes: Route[] = [
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...InsumoBusquedaRoutes,
-      ...MsvSenialInventarioRoutes,
-      ...MsvSenialRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CfgEmpresaServicioRoutes
     ]

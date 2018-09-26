@@ -153,9 +153,13 @@ import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
 import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
+<<<<<<< HEAD
 import { MsvSenialModule } from './msvSenial/msvSenial.module';
 import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
 import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
+=======
+
+>>>>>>> 40e3f4e598c616304623570204b5204f5f63d770
 
 @NgModule({
   imports: [
@@ -284,7 +288,6 @@ import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCa
       //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,
-      MsvSenialModule,
       RnaCertificadoTradicionOficialModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

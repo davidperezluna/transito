@@ -279,7 +279,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         let identificacion = {
             'numeroIdentificacion': this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
