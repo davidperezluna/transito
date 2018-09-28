@@ -34,12 +34,21 @@ import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInvent
 import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.routes';
 
 import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
+import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
+import { VhloCfgEmpresaGpsRoutes } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.routes';
+import { VhloCfgTipoRodajeRoutes } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.routes';
+import { VhloCfgTipoCabinaRoutes } from './vhloCfgTipoCabina/vhloCfgTipoCabina.routes';
+import { VhloCfgTipoMaquinariaRoutes } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.routes';
+import { VhloCfgCondicionIngresoRoutes } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
 import { SoatRoutes } from './soat/soat.routes';
 
 import { SvCapacitacionRoutes } from './svCapacitacion/svCapacitacion.routes';
 import { SvCfgFuncionRoutes } from './svCfgFuncion/svCfgFuncion.routes';
 import { SvCfgFuncionCriterioRoutes } from './svCfgFuncionCriterio/svCfgFuncionCriterio.routes';
+
+import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
+import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -121,7 +130,7 @@ import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimita
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
-import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
+import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes';
 import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
@@ -141,18 +150,9 @@ import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
+
 import { DashboardComponent } from '.';
 
-
-<<<<<<< HEAD
-import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
-import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
-import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
-import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
-import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
-
-=======
->>>>>>> 40e3f4e598c616304623570204b5204f5f63d770
 export const DashboardRoutes: Route[] = [
   {
     path: 'dashboard', 
@@ -225,6 +225,12 @@ export const DashboardRoutes: Route[] = [
       ...MsvSenialInventarioRoutes,
       ...CfgSvUnidadMedidaRoutes,
       ...CfgCdaRoutes,
+      ...VhloCfgOrigenRegistroRoutes,
+      ...VhloCfgEmpresaGpsRoutes,
+      ...VhloCfgTipoRodajeRoutes,
+      ...VhloCfgTipoCabinaRoutes,
+      ...VhloCfgTipoMaquinariaRoutes,
+      ...VhloCfgCondicionIngresoRoutes,
       ...VehiculoTecnoMecanicaRoutes,
       ...SoatRoutes,
       ...SvCapacitacionRoutes,
@@ -259,7 +265,7 @@ export const DashboardRoutes: Route[] = [
       ...MsvTalonarioRoutes,
       //...MsvTCAsignacionRoutes, 
       ...ConceptoParametroRoutes,
-      ...RnmaRegistroMaquinariaRoutes,
+      ...RnmaPreregistroRoutes,
       ...MsvRegistroIpatRoutes,
       ...CfgGravedadRoutes,
       ...CfgClaseAccidenteRoutes,

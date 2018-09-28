@@ -114,6 +114,42 @@
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
+              <a class="nav-link" routerLink="vhloCfgCondicionIngreso" [ngClass]="{'active' : ( addActive === 'vhloCfgCondicionIngreso')}" (click)="addActiveMenu('vhloCfgCondicionIngreso')">
+                <i class="fa fa-angle-right"></i>
+                Condición Ingreso
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="vhloCfgEmpresaGps" [ngClass]="{'active' : ( addActive === 'vhloCfgEmpresaGps')}" (click)="addActiveMenu('vhloCfgEmpresaGps')">
+                <i class="fa fa-angle-right"></i>
+                Empresa GPS
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="vhloCfgOrigenRegistro" [ngClass]="{'active' : ( addActive === 'vhloCfgOrigenRegistro')}" (click)="addActiveMenu('vhloCfgOrigenRegistro')">
+                <i class="fa fa-angle-right"></i>
+                Origen Registro
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="vhloCfgTipoRodaje" [ngClass]="{'active' : ( addActive === 'vhloCfgTipoRodaje')}" (click)="addActiveMenu('vhloCfgTipoRodaje')">
+                <i class="fa fa-angle-right"></i>
+                Tipo Rodaje
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="vhloCfgTipoCabina" [ngClass]="{'active' : ( addActive === 'vhloCfgTipoCabina')}" (click)="addActiveMenu('vhloCfgTipoCabina')">
+                <i class="fa fa-angle-right"></i>
+                Tipo Cabina
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="vhloCfgTipoMaquinaria" [ngClass]="{'active' : ( addActive === 'vhloCfgTipoMaquinaria')}" (click)="addActiveMenu('vhloCfgTipoMaquinaria')">
+                <i class="fa fa-angle-right"></i>
+                Tipo Maquinaria
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" routerLink="buscarAutomotor" [ngClass]="{'active' : ( addActive === 'buscarAutomotor')}" (click)="addActiveMenu('buscarAutomotor')">
                 <i class="fa fa-angle-right"></i> Buscar Automotor
               </a>
@@ -623,9 +659,9 @@
       </a>
       <ul class="nav flex-column nav-second-level ">
         <li class="nav-item">
-          <a class="nav-link" routerLink="rnmaRegistroMaquinaria" [ngClass]="{'active' : ( addActive === 'rnmaRegistroMaquinaria')}"
-            (click)="addActiveMenu('rnmaRegistroMaquinaria')">
-            <i class="fa fa-angle-right"></i> Pre-registro Maquinaria
+          <a class="nav-link" routerLink="rnmaPreregistro" [ngClass]="{'active' : ( addActive === 'rnmaPreregistro')}"
+            (click)="addActiveMenu('rnmaPreregistro')">
+            <i class="fa fa-angle-right"></i> Preregistro
           </a>
         </li>
         <li class="nav-item">
