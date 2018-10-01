@@ -6,4 +6,4 @@ export class CfgValorVehiculo{
 		public lineaId:number,
 		public claseId:number
 	){}
-}
+} 
