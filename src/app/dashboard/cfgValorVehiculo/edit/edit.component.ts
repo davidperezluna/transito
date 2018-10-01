@@ -43,7 +43,7 @@ export class EditComponent {
 
   ngOnInit() {
     console.log(this.cfgValorVehiculo);
-    this._lineaService.getLineaSelect().subscribe(
+    this._lineaService.select().subscribe(
       response => {
         this.lineas = response;
         setTimeout(() => {
@@ -126,7 +126,7 @@ export class EditComponent {
   changedDepartamento(e){
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
-        this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+        this._lineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
           response => {
             console.log(response.data[0]);
             if (response.data[0] != null) {

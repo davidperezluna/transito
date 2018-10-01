@@ -244,7 +244,7 @@ ngOnInit() {
   changedMarca(e){
     if (e) {
       let token = this._loginService.getToken()
-      this._LineaService.searchByMarca(e, token).subscribe(
+      this._LineaService.searchByMarcaSelect(e, token).subscribe(
           response => { 
             if (response.data[0] != null) {
               this.lineas = response.data;
@@ -267,7 +267,7 @@ ngOnInit() {
   changedDepartamento(e){
     // if (this.marcaSelected) {
     //   let token = this._loginService.getToken()
-    //     this._LineaService.getLineasMar(this.marcaSelected, token).subscribe(
+    //     this._LineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
     //       response => {
     //         console.log(response.data[0]);
     //         if (response.data[0] != null) {

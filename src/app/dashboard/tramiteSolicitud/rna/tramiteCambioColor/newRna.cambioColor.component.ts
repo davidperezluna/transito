@@ -83,7 +83,7 @@ export class NewRnaCambioColorComponent implements OnInit {
             );
         }
 
-        this._ColorService.getColorSelect().subscribe(
+        this._ColorService.select().subscribe(
             response => {
                 this.colores = response;
             },
@@ -103,7 +103,7 @@ export class NewRnaCambioColorComponent implements OnInit {
     enviarTramite(){
         let token = this._loginService.getToken();
 
-        this._ColorService.showColor(token,this.colorSelected).subscribe(
+        this._ColorService.show(token,this.colorSelected).subscribe(
             color => {
                     this.vehiculo.combustibleId = this.vehiculo.combustible.id;
                     this.vehiculo.municipioId = this.vehiculo.municipio.id; 

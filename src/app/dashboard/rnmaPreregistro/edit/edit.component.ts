@@ -103,7 +103,7 @@ constructor(
       }
     })
 
-    this._colorService.getColorSelect().subscribe(
+    this._colorService.select().subscribe(
       response => {
         this.colores = response;
         setTimeout(() => {
@@ -151,7 +151,7 @@ constructor(
         }
       );
 
-      this._lineaService.getLineaSelect().subscribe(
+      this._lineaService.select().subscribe(
         response => {
           this.lineas = response;
           setTimeout(() => {
