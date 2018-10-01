@@ -53,7 +53,7 @@ constructor(
   private _departamentoService: DepartamentoService,
   private _loginService: LoginService,
   private _MunicipioService: MunicipioService,
-  private _lineaService: LineaService,
+  private _LineaService: LineaService,
   private _ClaseService: ClaseService,
   private _CarroceriaService: CarroceriaService,
   private _ServicioService: ServicioService,
@@ -66,7 +66,8 @@ constructor(
 
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this._lineaService.indexSelect().subscribe(
+    
+    this._LineaService.index().subscribe(
       response => {
         this.lineas = response;
       }, 
@@ -232,7 +233,7 @@ constructor(
   changedDepartamento(e){
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
-        this._lineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
+        this._LineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
           response => {
             console.log(response.data[0]);
             if (response.data[0] != null) {

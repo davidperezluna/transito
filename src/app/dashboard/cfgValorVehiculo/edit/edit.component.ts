@@ -43,7 +43,7 @@ export class EditComponent {
 
   ngOnInit() {
     console.log(this.cfgValorVehiculo);
-    this._lineaService.indexSelect().subscribe(
+    this._lineaService.index().subscribe(
       response => {
         this.lineas = response;
         setTimeout(() => {

@@ -151,7 +151,7 @@ constructor(
         }
       );
 
-      this._lineaService.indexSelect().subscribe(
+      this._lineaService.index().subscribe(
         response => {
           this.lineas = response;
           setTimeout(() => {
