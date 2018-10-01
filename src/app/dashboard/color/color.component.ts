@@ -100,7 +100,7 @@ export class ColorComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ColorService.deleteColor(token,id).subscribe(
+        this._ColorService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
