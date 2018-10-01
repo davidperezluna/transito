@@ -106,7 +106,7 @@ constructor(
       }
     );
 
-    this._LineaService.getLineaSelect().subscribe(
+    this._LineaService.select().subscribe(
       response => {
         this.lineas = response;
         setTimeout(() => {
