@@ -24,7 +24,8 @@
                                 <th>TIPO SERVICIO</th>
                                 <th>RADIO ACCIÓN</th>
                                 <th>MODALIDAD TRANSPORTE</th>
-                                <th>NUMERO PASAJEROS</th>
+                                <!--<th>NUMERO PASAJEROS</th>-->
+                                <th>Transporte Pasajeros</th>
                                 <th>IDENTIFICACION INFRACTOR</th>
                                 <th>TIPO IDENTIFICACION INFRACTOR</th>
                                 <th>NOMBRE INFRACTOR</th>
@@ -39,13 +40,13 @@
                                 <th>FECHA VENCIMIENTO</th>
                                 <th>TIPO INFRACTOR</th>
                                 <th>LICENCIA TRANSITO</th>
-                                <!--<th>DIVISION LICENCIA TRANSITO</th>
+                                <!--<th>DIVISION LICENCIA TRANSITO</th>-->
                                 <th>IDENTIFICACION PROPIETARIO</th>
                                 <th>TIPO DOCUMENTO PROPIETARIO</th>
                                 <th>NOMBRE PROPIETARIO</th>
                                 <th>NOMBRE EMPRESA</th>
                                 <th>NIT EMPRESA</th>
-                                <th>TARJETA OPERACION</th>-->
+                                <th>TARJETA OPERACION</th>
                                 <th>NUMERO DE PLACA AGENTE DE TRANSITO</th>
                                 <th>OBSERVACIONES AGENTE</th>
                                 <th>FUGA</th>
@@ -83,33 +84,34 @@
                                 <td>{{ comparendo.direccion }}</td>
                                 <td>{{ comparendo.municipio.nombre }}</td>
                                 <td>{{ comparendo.localidad }}</td>
-                                <td>{{ comparendo.vehiculo.placa.numero }}</td>
-                                <td>{{ comparendo.tipoVehiculo.nombre }}</td>
-                                <td>{{ comparendo.vehiculo.servicio.nombre }}</td>
-                                <td>{{ comparendo.vehiculo.radioAccion.nombre }}</td>
-                                <td>{{ comparendo.vehiculo.modalidadTransporte.nombre }}</td>
-                                <td>{{ comparendo.vehiculo.numeroPasajeros }}</td>
-                                <td>{{ comparendo.ciudadanoInfractor.usuario.identificacion }}</td>
-                                <td>{{ comparendo.ciudadanoInfractor.usuario.tipoIdentificacion.nombre }}</td>
-                                <td>{{ comparendo.ciudadanoInfractor.usuario.primerNombre }}</td>
-                                <td>{{ comparendo.ciudadanoInfractor.usuario.primerApellido }}</td>
-                                <td>{{ comparendo.ciudadanoInfractor.usuario.fechaNacimiento }}</td>
-                                <td>{{ comparendo.ciudadanoInfractor.usuario.correo }}</td>
-                                <td>{{ comparendo.ciudadanoInfractor.usuario.telefono }}</td>
-                                <td>{{ comparendo.ciudadanoInfractor.municipioResidencia.nombre }}</td>
-                                <td>{{ comparendo.licenciaConduccion.numero }}</td>
-                                <td>{{ comparendo.licenciaConduccion.categoria.nombre }}</td>
-                                <td>{{ comparendo.licenciaConduccion.sedeOperativa.nombre }}</td>
-                                <td>{{ comparendo.licenciaConduccion.fechaVencimiento }}</td>
+                                <td>{{ comparendo.placa }}</td>
+                                <td>{{ comparendo.clase.nombre }}</td>
+                                <td>{{ comparendo.servicio.nombre }}</td>
+                                <td>{{ comparendo.radioAccion.nombre }}</td>
+                                <td>{{ comparendo.modalidadTransporte.nombre }}</td>
+                                <!--<td>{{ comparendo.vehiculo.numeroPasajeros }}</td>-->
+                                <td>{{ comparendo.transportePasajeros }}</td>
+                                <td>{{ comparendo.infractorIdentificacion }}</td>
+                                <td>{{ comparendo.infractorTipoDocumento }}</td>
+                                <td>{{ comparendo.infractorNombres }}</td>
+                                <td>{{ comparendo.infractorApellidos }}</td>
+                                <td>{{ comparendo.infractorFechaNacimiento }}</td>
+                                <td>{{ comparendo.infractorEmail }}</td>
+                                <td>{{ comparendo.infractorTelefono }}</td>
+                                <td>{{ comparendo.infractorMunicipioResidencia }}</td>
+                                <td>{{ comparendo.infractorNumeroLicenciaConduccion }}</td>
+                                <td>{{ comparendo.categoria }}</td>
+                                <td>{{ comparendo.organismoTransito.nombre }}</td>
+                                <td>{{ comparendo.numeroLicenciaTransito }}</td>
                                 <td>{{ comparendo.tipoInfractor.nombre }}</td>
                                 <td>{{ comparendo.numeroLicenciaTransito }}</td>
-                                <!--<td>{{ comparendo.divLicenciaTransito }}</td>
-                                <td>{{ comparendo.propietarioVehiculo.ciudadano.usuario.identificacion }}</td>
-                                <td>{{ comparendo.propietarioVehiculo.ciudadano.usuario.tipoIdentificacion.nombre }}</td>
-                                <td>{{ comparendo.propietarioVehiculo.ciudadano.usuario.primerNombre }}</td>
-                                <td>{{ comparendo.nombreEmpresa }}</td>
-                                <td>{{ comparendo.nitEmpresa }}</td>
-                                <td>{{ comparendo.tarjetaOperacion }}</td>-->
+                                <!--<td>{{ comparendo.divLicenciaTransito }}</td>-->
+                                <td>{{ comparendo.propietarioIdentificacion }}</td>
+                                <td>{{ comparendo.propietarioTipoDocumento }}</td>
+                                <td>{{ comparendo.propietarioNombre }}{{ propietarioApellidos }}</td>
+                                <td>{{ comparendo.empresaNombre }}</td>
+                                <td>{{ comparendo.empresaNit }}</td>
+                                <td>{{ comparendo.tarjetaOperacion }}</td>
                                 <td>{{ comparendo.agenteTransito.numeroPlaca }}</td>
                                 <td>{{ comparendo.observacionesAgente }}</td>
                                 <td>{{ comparendo.fuga }}</td>
@@ -120,14 +122,14 @@
                                 <td>{{ inmovilizacion.grua.numeroInterno }}</td>
                                 <td>{{ inmovilizacion.grua.placa }}</td>
                                 <td>{{ inmovilizacion.consecutivo }}</td>-->
-                                <td>{{ comparendo.ciudadanoTestigo.usuario.identificacion }}</td>
-                                <td>{{ comparendo.ciudadanoTestigo.usuario.primerNombre }}</td>
-                                <td>{{ comparendo.ciudadanoTestigo.usuario.telefono }}</td>
+                                <td>{{ comparendo.ciudadanoTestigoIdentificacion }}</td>
+                                <td>{{ comparendo.ciudadanoTestigoNombres }}{{ comparendo.ciudadanoTestigoApellidos }}</td>
+                                <td>{{ comparendo.ciudadanoTestigoTelefono }}</td>
                                 <td>{{ comparendo.valorAdicional }}</td>
                                 <!--<td>{{ comparendo.organismo }}</td>-->
                                 <td>{{ comparendo.estado.nombre }}</td>
                                 <td>{{ comparendo.polca }}</td>
-                                <td>{{ comparendo.infraccion.codigo }}</td>
+                                <td>{{ comparendo.codigoInfraccion }}</td>
                                 <td>{{ comparendo.valorInfraccion }}</td>
                                 <td>{{ comparendo.fotomulta }}</td>
                                 <td>{{ comparendo.fechaNotificacion }}</td>

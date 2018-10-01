@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {RegistroMaquinariaService} from '../../services/registroMaquinaria.service';
 import {LoginService} from '../../services/login.service';
 // import {Vehiculo} from './vehiculo.modelo';
 import { Reporte } from './reporte.modelo';

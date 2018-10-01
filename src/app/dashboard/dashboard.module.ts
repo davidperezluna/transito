@@ -39,12 +39,21 @@ import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorc
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
 
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
+import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
+import { VhloCfgEmpresaGpsModule } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.module';
+import { VhloCfgTipoRodajeModule } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.module';
+import { VhloCfgTipoCabinaModule } from './vhloCfgTipoCabina/vhloCfgTipoCabina.module';
+import { VhloCfgTipoMaquinariaModule } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.module';
+import { VhloCfgCondicionIngresoModule } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
 import { SoatModule } from './soat/soat.module';
 
 import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
-import { SvCfgTemaCapacitacionModule } from "./svCfgTemaCapacitacion/svCfgTemaCapacitacion.module";
 import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
+import { SvCfgFuncionCriterioModule } from "./svCfgFuncionCriterio/svCfgFuncionCriterio.module";
+
+import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
+import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -138,7 +147,7 @@ import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
-import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
+import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
@@ -153,7 +162,6 @@ import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
 import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
-import { MsvSenialModule } from './msvSenial/msvSenial.module';
 
 @NgModule({
   imports: [
@@ -192,8 +200,10 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
       SvCapacitacionModule,
-      SvCfgTemaCapacitacionModule,
       SvCfgFuncionModule,
+      SvCfgFuncionCriterioModule,
+      SvCfgClaseActorViaModule,
+      SvCfgTemaCapacitacionModule,
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
@@ -230,6 +240,12 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CvCfgPorcentajeInicialModule,
       CvAcuerdoPagoModule,
       CfgCdaModule,
+      VhloCfgOrigenRegistroModule,
+      VhloCfgEmpresaGpsModule,
+      VhloCfgTipoRodajeModule,
+      VhloCfgTipoCabinaModule,
+      VhloCfgTipoMaquinariaModule,
+      VhloCfgCondicionIngresoModule,
       VehiculoTecnoMecanicaModule,
       SoatModule,
       CfgComparendoEstadoModule,
@@ -259,7 +275,7 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       CfgCausalLimitacionModule,
       MsvTalonarioModule,
       rnaRegistroInsumosModule,
-      RnmaRegistroMaquinariaModule,
+      RnmaPreregistroModule,
       rnaAsignacionInsumosModule,
       LimitacionModule,
       CfgTipoProcesoModule,
@@ -280,7 +296,6 @@ import { MsvSenialModule } from './msvSenial/msvSenial.module';
       //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,
-      MsvSenialModule,
       RnaCertificadoTradicionOficialModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

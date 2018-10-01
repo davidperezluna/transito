@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MsvSenialInventarioService } from '../../services/msvSenialInventario.service';
-import { MsvSenialUbicacionService } from '../../services/msvSenialUbicacion.service';
-import { CfgTipoDestinoService } from '../../services/cfgTipoDestino.service';
+import { CfgSvDestinoService } from '../../services/cfgSvDestino.service';
 import { CfgBodegaService } from '../../services/cfgBodega.service';
 import { MunicipioService } from '../../services/municipio.service';
 import { CfgSvSenialTipoService } from '../../services/cfgSvSenialTipo.service';
@@ -18,9 +17,9 @@ declare var $: any;
 
 export class MsvSenialInventarioComponent implements OnInit {
     public errorMessage;
-    public respuesta;
-    public formNewSenialBodega = false;
-    public formNewSenialMunicipio = false;
+    public formLocationSenial = false;
+    public formNewBodega = false;
+    public formNewMunicipio = false;
     public formIndex = false;
     public formSearch = true;
     public table: any = null;
@@ -36,20 +35,20 @@ export class MsvSenialInventarioComponent implements OnInit {
 
     public inventariosBodega: any = null;
     public inventariosMunicipio: any = null;
+    public inventario: any;
 
     
     constructor(
         private _loginService: LoginService,
         private _SenialInventarioService: MsvSenialInventarioService,
-        private _SenialUbicacionService : MsvSenialUbicacionService,
-        private _TipoDestinoService : CfgTipoDestinoService,
+        private _DestinoService : CfgSvDestinoService,
         private _BodegaService : CfgBodegaService,
         private _MunicipioService : MunicipioService,
         private _TipoSenialService: CfgSvSenialTipoService,
     ) { }
 
     ngOnInit() {
-        this._TipoDestinoService.select().subscribe(
+        this._DestinoService.select().subscribe(
                 response => {
                 this.tiposDestino = response;
             },
@@ -80,8 +79,7 @@ export class MsvSenialInventarioComponent implements OnInit {
 
     ready(isCreado: any) {
         if (isCreado) {
-            this.formNewSenialBodega = false;
-            this.formNewSenialMunicipio = false;
+            this.formLocationSenial = false;
             this.formIndex = true;
             this.ngOnInit();
         }
@@ -110,7 +108,6 @@ export class MsvSenialInventarioComponent implements OnInit {
 
                 break;
         }
-
     }
 
     onSearch(){
@@ -194,18 +191,27 @@ export class MsvSenialInventarioComponent implements OnInit {
         this.table = $('#dataTables-example').DataTable();
     }
 
-    onNewSenialBodega() {
-        this.formNewSenialBodega = true;
-        this.formNewSenialMunicipio = false;
+    onLocation(inventario) {
+        this.inventario = inventario;
+        this.formLocationSenial = true;
         this.formIndex = false;
         if (this.table) {
             this.table.destroy();
         }
     }
-    
+
     onNewSenialMunicipio() {
-        this.formNewSenialMunicipio = true;
-        this.formNewSenialBodega = false;
+        this.formNewMunicipio = true;
+        this.formNewBodega = false;
+        this.formIndex = false;
+        if (this.table) {
+            this.table.destroy();
+        }
+    }
+
+    onNewSenialBodega() {
+        this.formNewBodega = true;
+        this.formNewMunicipio = false;
         this.formIndex = false;
         if (this.table) {
             this.table.destroy();

@@ -26,8 +26,6 @@ export class SvCfgFuncionService {
 
     register(datos, token) {
         let json = JSON.stringify(datos);
-        //formData.append('data', json);
-        //formData.append('authorization', token);
         let params = "json=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/new", params, { headers: headers }).map(
@@ -63,7 +61,7 @@ export class SvCfgFuncionService {
         );
     }
 
-    select() {
+    getFuncionSelect() {
         return this._http.get(this.url + "/select").map(res => res.json());
     }
 }

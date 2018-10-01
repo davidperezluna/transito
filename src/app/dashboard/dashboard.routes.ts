@@ -30,15 +30,25 @@ import { CfgSvConectorRoutes } from './cfgSvConector/cfgSvConector.routes';
 import { CfgSvSenialTipoRoutes } from './cfgSvSenialTipo/cfgSvSenialTipo.routes';
 import { CfgSvSenialColorRoutes } from './cfgSvSenialColor/cfgSvSenialColor.routes';
 import { CfgSvSenialEstadoRoutes } from './cfgSvSenialEstado/cfgSvSenialEstado.routes';
+import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
 import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.routes';
 
 import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
+import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
+import { VhloCfgEmpresaGpsRoutes } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.routes';
+import { VhloCfgTipoRodajeRoutes } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.routes';
+import { VhloCfgTipoCabinaRoutes } from './vhloCfgTipoCabina/vhloCfgTipoCabina.routes';
+import { VhloCfgTipoMaquinariaRoutes } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.routes';
+import { VhloCfgCondicionIngresoRoutes } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
 import { SoatRoutes } from './soat/soat.routes';
 
 import { SvCapacitacionRoutes } from './svCapacitacion/svCapacitacion.routes';
-import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.routes';
 import { SvCfgFuncionRoutes } from './svCfgFuncion/svCfgFuncion.routes';
+import { SvCfgFuncionCriterioRoutes } from './svCfgFuncionCriterio/svCfgFuncionCriterio.routes';
+
+import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
+import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -120,7 +130,7 @@ import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimita
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
-import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
+import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes';
 import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
@@ -138,13 +148,10 @@ import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
-//import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
-import { DashboardComponent } from '.';
-
-
-import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
-import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
+//import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
+
+import { DashboardComponent } from '.';
 
 export const DashboardRoutes: Route[] = [
   {
@@ -215,13 +222,22 @@ export const DashboardRoutes: Route[] = [
       ...CfgSvSenialTipoRoutes,
       ...CfgSvSenialColorRoutes,
       ...CfgSvSenialEstadoRoutes,
+      ...MsvSenialInventarioRoutes,
       ...CfgSvUnidadMedidaRoutes,
       ...CfgCdaRoutes,
+      ...VhloCfgOrigenRegistroRoutes,
+      ...VhloCfgEmpresaGpsRoutes,
+      ...VhloCfgTipoRodajeRoutes,
+      ...VhloCfgTipoCabinaRoutes,
+      ...VhloCfgTipoMaquinariaRoutes,
+      ...VhloCfgCondicionIngresoRoutes,
       ...VehiculoTecnoMecanicaRoutes,
       ...SoatRoutes,
       ...SvCapacitacionRoutes,
-      ...SvCfgTemaCapacitacionRoutes,
       ...SvCfgFuncionRoutes,
+      ...SvCfgFuncionCriterioRoutes,
+      ...SvCfgClaseActorViaRoutes,
+      ...SvCfgTemaCapacitacionRoutes,
       ...CfgComparendoEstadoRoutes,
       ...InfraccionRoutes,
       ...CarroceriaRoutes,
@@ -249,7 +265,7 @@ export const DashboardRoutes: Route[] = [
       ...MsvTalonarioRoutes,
       //...MsvTCAsignacionRoutes, 
       ...ConceptoParametroRoutes,
-      ...RnmaRegistroMaquinariaRoutes,
+      ...RnmaPreregistroRoutes,
       ...MsvRegistroIpatRoutes,
       ...CfgGravedadRoutes,
       ...CfgClaseAccidenteRoutes,
@@ -269,8 +285,6 @@ export const DashboardRoutes: Route[] = [
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...InsumoBusquedaRoutes,
-      ...MsvSenialInventarioRoutes,
-      ...MsvSenialRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CfgEmpresaServicioRoutes
     ]

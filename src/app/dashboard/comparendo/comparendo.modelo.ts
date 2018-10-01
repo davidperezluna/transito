@@ -3,6 +3,7 @@ export class Comparendo{
 		public consecutivo:string,
 		public fecha:string,
 		public hora:string,
+		public minutos:string,
 		public direccion:string,
 		public localidad:string,
 		public observacionesAgente:string,
@@ -15,7 +16,6 @@ export class Comparendo{
 		public fechaNotificacion:string,
 		public gradoAlchoholemia:string,
 		public infraccionValorAdicional:string,
-		public id:number,
 		public consecutivoId:number,
 		public municipioId:number,
 		public vehiculoId:number,
@@ -24,6 +24,7 @@ export class Comparendo{
 		public funcionarioId:number,
 		public testigoId:number,
 		public estadoId:number,
-		public infraccionId:number
+		public infraccionId:number,
+		public id:number
 	){}
 } 

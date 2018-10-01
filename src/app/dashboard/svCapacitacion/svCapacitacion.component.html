@@ -17,11 +17,11 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Educación <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio"></ng-select>
+                                <ng-select [multiple]="false" [options]="educaciones" [(ngModel)]="educacionSelected" required name="educacion"></ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Función <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio"></ng-select>
+                                <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" required name="funcion"></ng-select>
                             </div>-->
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="No. cédula ó NIT" [(ngModel)]="cedula"
@@ -96,14 +96,14 @@
                                 <td>{{ capacitacion.fechaActividad }}</td>
                                 <td>{{ capacitacion.semana }}</td>
                                 <td>{{ capacitacion.municipio.nombre }}</td>
-                                <td>{{ capacitacion.funcionSeguridadVial }}</td>
+                                <td>{{ capacitacion.funcion.nombre }}</td>
                                 <td>{{ capacitacion.claseActividad }}</td>
-                                <td>{{ capacitacion.temaCapacitacion }}</td>
+                                <td>{{ capacitacion.temaCapacitacion.nombre }}</td>
                                 <td>{{ capacitacion.descripcionActividad }}</td>
                                 <td>{{ capacitacion.nombreActorVial }}</td>
                                 <td>{{ capacitacion.apellidoActorVial }}</td>
                                 <td>{{ capacitacion.numeroCedulaActorVial }}</td>
-                                <td>{{ capacitacion.claseActorVial }}</td>
+                                <td>{{ capacitacion.claseActorVial.nombre }}</td>
                             </tr>
                         </tbody>
                     </table>
