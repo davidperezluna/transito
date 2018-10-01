@@ -6,7 +6,7 @@
           <div class="card-header">
             <h5 class="card-title">
               <strong class="text-uppercase">Vehiculo</strong>
-              <small>Empresas de GPS</small>
+              <small>Subpartidas Arancelarias</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                   <i class="fa fa-plus"></i>
@@ -20,20 +20,20 @@
               <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
+                    <th>Código</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let empresaGps of empresasGps; let i = index">
-                  <td >{{ empresaGps.id }}</td>
-                  <td >{{ empresaGps.nombre }}</td>
+                <tr class="odd" *ngFor="let subpartidaArancelaria of subpartidasArancelarias; let i = index">
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ subpartidaArancelaria.codigo }}</td>
                   <td>
-                    <button (click)="onEdit(empresaGps)" class="btn btn-xs btn-info" type="button">
+                    <button (click)="onEdit(subpartidaArancelaria)" class="btn btn-xs btn-info" type="button">
                       <i class="fa fa-edit"></i>
                       Editar
                     </button> 
-                    <button (click)="onDelete(empresaGps.id)"  class="btn btn-xs btn-danger" type="button">
+                    <button (click)="onDelete(subpartidaArancelaria.id)"  class="btn btn-xs btn-danger" type="button">
                       <i class="fa fa-trash"></i>
                       Eliminar
                     </button> 
@@ -47,6 +47,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [empresaGps]="empresaGps" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [subpartidaArancelaria]="subpartidaArancelaria" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

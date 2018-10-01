@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { VhloCfgClaseMaquinariaService } from '../../../services/vhloCfgClaseMaquinaria.service';
-import { VhloCfgTipoMaquinariaService } from '../../../services/vhloCfgTipoMaquinaria.service';
+import { VhloCfgSubpartidaArancelariaService } from '../../../services/vhloCfgSubpartidaArancelaria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,41 +9,22 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() claseMaquinaria:any = null;
+@Input() subpartidaArancelaria:any = null;
 public errorMessage;
 public formReady = false;
-public tiposMaquinaria: any;
 
 constructor(
-  private _ClaseMaquinariaService: VhloCfgClaseMaquinariaService,
-  private _TipoMaquinariaService: VhloCfgTipoMaquinariaService,
+  private _SubpartidaArancelariaService: VhloCfgSubpartidaArancelariaService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){  
-    this._TipoMaquinariaService.select().subscribe(
-      response => {
-        this.tiposMaquinaria = response;
-        setTimeout(() => {
-          this.claseMaquinaria.idTipoMaquinaria = [this.claseMaquinaria.tipoMaquinaria.id];
-        });
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-  }
+  ngOnInit(){ }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._ClaseMaquinariaService.edit(this.claseMaquinaria,token).subscribe(
+		this._SubpartidaArancelariaService.edit(this.subpartidaArancelaria,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

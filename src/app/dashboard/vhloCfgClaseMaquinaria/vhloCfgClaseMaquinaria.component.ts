@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { VhloCfgEmpresaGpsService } from '../../services/vhloCfgEmpresaGps.service';
+import { VhloCfgClaseMaquinariaService } from '../../services/vhloCfgClaseMaquinaria.service';
 import { LoginService } from '../../services/login.service';
-import { VhloCfgEmpresaGps } from './vhloCfgEmpresaGps.modelo';
+import { VhloCfgClaseMaquinaria } from './vhloCfgClaseMaquinaria.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './vhloCfgEmpresaGps.component.html'
+  templateUrl: './vhloCfgClaseMaquinaria.component.html'
 })
-export class VhloCfgEmpresaGpsComponent implements OnInit {
+export class VhloCfgClaseMaquinariaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public formNew = false;
@@ -17,11 +17,11 @@ export class VhloCfgEmpresaGpsComponent implements OnInit {
   public formIndex = true;
   public table:any; 
 
-  public empresasGps;
-  public empresaGps: VhloCfgEmpresaGps;
+  public clasesMaquinaria;
+  public claseMaquinaria: VhloCfgClaseMaquinaria;
 
   constructor(
-    private _EmpresaGpsService: VhloCfgEmpresaGpsService,
+    private _ClaseMaquinariaService: VhloCfgClaseMaquinariaService,
 		private _loginService: LoginService,
     ){}
     
@@ -40,9 +40,9 @@ export class VhloCfgEmpresaGpsComponent implements OnInit {
       ) {
       }
     })
-    this._EmpresaGpsService.index().subscribe(
+    this._ClaseMaquinariaService.index().subscribe(
 				response => {
-          this.empresasGps = response.data;
+          this.clasesMaquinaria = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -103,7 +103,7 @@ export class VhloCfgEmpresaGpsComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._EmpresaGpsService.delete({'id':id},token).subscribe(
+        this._ClaseMaquinariaService.delete({'id':id},token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -129,8 +129,8 @@ export class VhloCfgEmpresaGpsComponent implements OnInit {
     })
   }
 
-  onEdit(empresaGps:any){
-    this.empresaGps = empresaGps;
+  onEdit(claseMaquinaria:any){
+    this.claseMaquinaria = claseMaquinaria;
     this.formEdit = true;
     this.formIndex = false;
   }

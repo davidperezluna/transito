@@ -1,6 +1,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { VhloCfgEmpresaGps } from '../vhloCfgEmpresaGps.modelo';
-import { VhloCfgEmpresaGpsService } from '../../../services/vhloCfgEmpresaGps.service';
+import { VhloCfgClaseMaquinaria } from '../vhloCfgClaseMaquinaria.modelo';
+import { VhloCfgClaseMaquinariaService } from '../../../services/vhloCfgClaseMaquinaria.service';
+import { VhloCfgTipoMaquinariaService } from '../../../services/vhloCfgTipoMaquinaria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +11,32 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public empresaGps: VhloCfgEmpresaGps;
+  public claseMaquinaria: VhloCfgClaseMaquinaria;
   public errorMessage;
-  public respuesta;
+  public tiposMaquinaria: any;
 
 constructor(
-  private _EmpresaGpsService: VhloCfgEmpresaGpsService,
+  private _ClaseMaquinariaService: VhloCfgClaseMaquinariaService,
+  private _TipoMaquinariaService: VhloCfgTipoMaquinariaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.empresaGps = new VhloCfgEmpresaGps(null, null);
+    this.claseMaquinaria = new VhloCfgClaseMaquinaria(null, null, null, null);
+
+    this._TipoMaquinariaService.select().subscribe(
+      response => {
+        this.tiposMaquinaria = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   onCancelar(){
@@ -30,7 +46,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._EmpresaGpsService.register(this.empresaGps,token).subscribe(
+		this._ClaseMaquinariaService.register(this.claseMaquinaria,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

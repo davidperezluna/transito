@@ -150,6 +150,18 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" routerLink="vhloCfgClaseMaquinaria" [ngClass]="{'active' : ( addActive === 'vhloCfgClaseMaquinaria')}" (click)="addActiveMenu('vhloCfgClaseMaquinaria')">
+                <i class="fa fa-angle-right"></i>
+                Clase Maquinaria
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="vhloCfgSubpartidaArancelaria" [ngClass]="{'active' : ( addActive === 'vhloCfgSubpartidaArancelaria')}" (click)="addActiveMenu('vhloCfgSubpartidaArancelaria')">
+                <i class="fa fa-angle-right"></i>
+                Subpartida Arancelaria
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" routerLink="buscarAutomotor" [ngClass]="{'active' : ( addActive === 'buscarAutomotor')}" (click)="addActiveMenu('buscarAutomotor')">
                 <i class="fa fa-angle-right"></i> Buscar Automotor
               </a>

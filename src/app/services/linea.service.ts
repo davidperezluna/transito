@@ -5,64 +5,52 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class LineaService {
-	private url = environment.apiUrl + "linea";
+	private url = environment.apiUrl + "datos";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getLinea(){
-		
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(linea,token){
-		let json = JSON.stringify(linea);
-		let params = "json="+json+"&authorization="+token;
+	register(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteLinea(token,id){
-
+	delete(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers}).map(res => res.json());
 	}
 
-	showLinea(token,id){
-		
+	show(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
-							  .map(res => res.json());
-
+		return this._http.post(this.url+"/show/"+id, params, {headers: headers}).map(res => res.json());
 	}
 
-	editLinea(linea,token){
-
-		let json = JSON.stringify(linea);
-		let params = "json="+json+"&authorization="+token;
+	edit(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/edit", params, {headers: headers})
-							  .map(res => res.json());
-
+ 		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getLineasMar(marcaId,token){
-
-		let params = "&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/lin/mar/"+marcaId, {headers: headers})
-							  .map(res => res.json());
-
-	}
-
-	getLineaSelect(){
-		
+	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
+	
+	searchByMarcaSelect(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/marca/select", params, { headers: headers }).map(res => res.json());
+	}
+
 	
 }

@@ -62,7 +62,7 @@ public tiposCabina =[
 constructor(
   private _RegistroRemolqueService: RegistroRemolqueService,
   private _loginService: LoginService,
-  private _lineaService: LineaService,
+  private _LineaService: LineaService,
   private _ClaseService: ClaseService,
   private _MarcaService: MarcaService,
   private _CarroceriaService: CarroceriaService,
@@ -143,7 +143,7 @@ ngOnInit() {
     }
   ); 
 
-  this._lineaService.getLineaSelect().subscribe(
+  this._LineaService.select().subscribe(
     response => {
       this.lineas = response;
     }, 
@@ -245,10 +245,11 @@ ngOnInit() {
         }
       })
   }
+
   changedMarca(e){
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
-        this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+      this._LineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
           response => { 
             if (response.data[0] != null) {
               this.lineas = response.data;
@@ -272,7 +273,7 @@ ngOnInit() {
   changedDepartamento(e){
     // if (this.marcaSelected) {
     //   let token = this._loginService.getToken()
-    //     this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+    //     this._LineaService.getLineasMar(this.marcaSelected, token).subscribe(
     //       response => {
     //         console.log(response.data[0]);
     //         if (response.data[0] != null) {

@@ -1,5 +1,5 @@
 /**
 *  This barrel file provides the export for the lazy loaded HomeComponent.
 */
-export * from './vhloCfgEmpresaGps.component';
-export * from './vhloCfgEmpresaGps.routes';
+export * from './vhloCfgClaseMaquinaria.component';
+export * from './vhloCfgClaseMaquinaria.routes';

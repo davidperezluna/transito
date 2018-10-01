@@ -1,6 +1,6 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { VhloCfgEmpresaGps } from '../vhloCfgEmpresaGps.modelo';
-import { VhloCfgEmpresaGpsService } from '../../../services/vhloCfgEmpresaGps.service';
+import { VhloCfgSubpartidaArancelaria } from '../vhloCfgSubpartidaArancelaria.modelo';
+import { VhloCfgSubpartidaArancelariaService } from '../../../services/vhloCfgSubpartidaArancelaria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,16 +10,16 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public empresaGps: VhloCfgEmpresaGps;
+  public subpartidaArancelaria: VhloCfgSubpartidaArancelaria;
   public errorMessage;
 
 constructor(
-  private _EmpresaGpsService: VhloCfgEmpresaGpsService,
+  private _SubpartidaArancelariaService: VhloCfgSubpartidaArancelariaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.empresaGps = new VhloCfgEmpresaGps(null, null);
+    this.subpartidaArancelaria = new VhloCfgSubpartidaArancelaria(null, null);
   }
 
   onCancelar(){
@@ -29,7 +29,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._EmpresaGpsService.register(this.empresaGps,token).subscribe(
+		this._SubpartidaArancelariaService.register(this.subpartidaArancelaria,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

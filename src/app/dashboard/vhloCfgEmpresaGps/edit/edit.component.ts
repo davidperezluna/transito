@@ -11,7 +11,6 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() empresaGps:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 
 constructor(

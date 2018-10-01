@@ -44,6 +44,8 @@ import { VhloCfgEmpresaGpsModule } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.m
 import { VhloCfgTipoRodajeModule } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.module';
 import { VhloCfgTipoCabinaModule } from './vhloCfgTipoCabina/vhloCfgTipoCabina.module';
 import { VhloCfgTipoMaquinariaModule } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.module';
+import { VhloCfgClaseMaquinariaModule } from './vhloCfgClaseMaquinaria/vhloCfgClaseMaquinaria.module';
+import { VhloCfgSubpartidaArancelariaModule } from './vhloCfgSubpartidaArancelaria/vhloCfgSubpartidaArancelaria.module';
 import { VhloCfgCondicionIngresoModule } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
 import { SoatModule } from './soat/soat.module';
@@ -245,6 +247,8 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       VhloCfgTipoRodajeModule,
       VhloCfgTipoCabinaModule,
       VhloCfgTipoMaquinariaModule,
+      VhloCfgClaseMaquinariaModule,
+      VhloCfgSubpartidaArancelariaModule,
       VhloCfgCondicionIngresoModule,
       VehiculoTecnoMecanicaModule,
       SoatModule,
