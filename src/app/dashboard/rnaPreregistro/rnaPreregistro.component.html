@@ -16,6 +16,8 @@
                 <tr>
                   <th>Placa </th>
                   <th>Motor</th>
+                  <th>Clase</th>
+                  <th>Cilindraje</th>
                   <th>Modelo</th>
                   <th>Marca</th>
                   <th>linea</th> 
@@ -35,6 +37,8 @@
                     </span>
                   </td>
                   <td>{{vehiculo.motor}}</td>
+                  <td>{{vehiculo.clase.nombre}}</td>
+                  <td>{{vehiculo.cilindraje}}</td>
                   <td>{{vehiculo.modelo}}</td>
                   <td>
                     <span *ngIf="vehiculo.linea">

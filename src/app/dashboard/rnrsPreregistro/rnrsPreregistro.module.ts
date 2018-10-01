@@ -20,5 +20,5 @@ import {SelectModule} from 'angular2-select';
     exports: [RnrsPreregistroComponent, NewRegistroRemolqueComponent,EditComponent],
     providers:[RegistroRemolqueService,CarroceriaService,CfgOrigenRegistroService,CondicionIngresoService,UsuarioService]
 })
-
+ 
 export class RnrsPreregistroModule { }

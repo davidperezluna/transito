@@ -18,6 +18,8 @@
                     <th>Tipo correspondencia</th>
                     <th>Radicado No.</th>
                     <th>Estado</th>
+                    <th>Fecha radicado</th>
+                    <th>Numero Oficio</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -28,6 +30,8 @@
                   <td >{{ documento.tipoCorrespondencia.nombre }}</td>
                   <td >{{ documento.numeroRadicado }}</td>
                   <td >{{ documento.estado }}</td>
+                  <td >{{ documento.fechaRegistro }}</td>
+                  <td >{{ documento.numeroOficio }}</td>
                   <td>
                     <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'En proceso'">
                       <i class="fa fa-edit"></i>

@@ -20,7 +20,7 @@ export class CfgEntidadJudicialComponent implements OnInit {
   public cfgEntidadJudicial: any;
 
   constructor(
-    private _CfgEntidadJudicialService: CfgEntidadJudicialService,
+    private _CfgEntidadJudicialService: CfgEntidadJudicialService, 
     private _loginService: LoginService,
   ) { }
 

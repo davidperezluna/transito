@@ -33,6 +33,11 @@ export class MgdRegistroComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    console.log(1);
+    setTimeout(() => {
+      this.ngOnInit();
+
+    });
     swal({
       title: '<i>Para Tener En Cuenta</i>',
       type: 'info',

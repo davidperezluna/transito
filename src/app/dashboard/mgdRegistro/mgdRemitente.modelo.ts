@@ -1,4 +1,4 @@
-export class MgdPeticionario{
+export class MgdRemitente{
 	constructor(
 		public id:number,
 		public tipoIdentificacionId:number,

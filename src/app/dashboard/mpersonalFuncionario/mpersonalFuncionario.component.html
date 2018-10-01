@@ -69,7 +69,12 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Identificación</th>
-                    <th>Tipo</th>
+                    <th>Tipo contrato</th>
+                    <th>Numero Contrato</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Tipo Nombramiento</th>
+                    <th>Numero de nombramiento</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -82,6 +87,11 @@
                   </td>
                   <td >{{ funcionario.ciudadano.usuario.identificacion }}</td>
                   <td >{{ funcionario.tipoContrato.nombre }}</td>
+                  <td >{{ funcionario.numeroContrato }}</td>
+                  <td >{{ funcionario.fechaInicio }}</td>
+                  <td >{{ funcionario.fechaFin }}</td> 
+                  <td >{{ funcionario.tipoNombramiento }}</td>
+                  <td >{{ funcionario.resolicion }}</td>
                   <td>
                     <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary" type="button">
                       <i class="fa fa-eye"></i>

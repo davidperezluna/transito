@@ -2,13 +2,15 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router'
 import { MgdPeticionario } from '../mgdPeticionario.modelo';
 import { MgdDocumento } from '../mgdDocumento.modelo';
+import { MgdRemitente } from '../mgdRemitente.modelo';
 import { MgdMedidaCautelar } from '../mgdMedidaCautelar.modelo';
 import { MgdVehiculo } from '../mgdVehiculo.modelo';
-import { MgdPeticionarioService } from '../../../services/mgdPeticionario.service';
+import { MgdRemitenteService } from '../../../services/mgdRemitente.service';
 import { MgdTipoCorrespondenciaService } from '../../../services/mgdTipoCorrespondencia.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { ClaseService } from '../../../services/clase.service';
 import { LoginService } from '../../../services/login.service';
+import { CiudadanoService } from '../../../services/ciudadano.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -22,6 +24,7 @@ public peticionario: MgdPeticionario;
 public documento: MgdDocumento;
 public medidaCautelar: MgdMedidaCautelar;
 public vehiculo: MgdVehiculo;
+public remitente: MgdRemitente;
 public errorMessage;
 public respuesta;
 public editable = false;
@@ -30,22 +33,27 @@ public crearDocumento = false;
 public peticionarios: any;
 public tiposIdentificacion:any;
 public tipoIdentificacionSelected: any;
+public tipoIdentificacionRemitenteSelected: any;
 public tiposCorrespondencia: any;
 public tipoCorrespondenciaSelected: any;
 public clases: any;
 public claseSelected: any;
 public date: any;
+public newCiudadano: any=false;
+public newRemitente: any=false;
 public file: any;
 public prohibicion: any;
 public datosRegistro = {
   'peticionario': [],
+  'remitente': [],
   'documento': [],
   'medidaCautelar': [],
   'vehiculo': [],
 };
 
 constructor(
-  private _PeticionarioService: MgdPeticionarioService,
+  private _CiudadanoService: CiudadanoService,
+  private _RemitenteService: MgdRemitenteService,
   private _loginService: LoginService,
   private _tipoIdentificacionService: TipoIdentificacionService,
   private _tipoCorrespondenciaService: MgdTipoCorrespondenciaService,
@@ -54,8 +62,9 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.peticionario = new MgdPeticionario(null, null, null, null, null, null, null, null, null, null, null, null);
-    this.documento = new MgdDocumento(null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.peticionario = new MgdPeticionario(null, null, null, null, null, null, null, null, null, null);
+    this.remitente = new MgdRemitente(null, null, null, null, null, null, null, null, null, null);
+    this.documento = new MgdDocumento(null,null,null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.medidaCautelar = new MgdMedidaCautelar(null, null, null, null, null, null, null, null);
     this.vehiculo = new MgdVehiculo(null, null, null, null);
     this.prohibicion = false;
@@ -99,59 +108,80 @@ constructor(
   onBuscarPeticionario() {
     let token = this._loginService.getToken();
     let datos = {
-      'identificacion':this.peticionario.identificacion
+      'numeroIdentificacion':this.peticionario.identificacion
     }
-    
-    this._PeticionarioService.buscarPeticionario(datos,token).subscribe(
-      response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.peticionario.primerNombre = response.data.primerNombre;
-          this.peticionario.segundoNombre = response.data.segundoNombre;
-          this.peticionario.primerApellido = response.data.primerApellido;
-          this.peticionario.segundoApellido = response.data.segundoApellido;
-        }else{
-          swal({
-            title: 'Alerta',
-            text: response.message,
-            type: 'warning',
-            showCancelButton: true,
-            focusConfirm: true,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Registrar',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-              '<i class="fa fa-thumbs-down"></i> Cancelar',
-            cancelButtonAriaLabel: 'Thumbs down',
-          }).then((result) => {
-            if (result.value) {
-              this.router.navigate(['/dashboard/ciudadano']);
+
+    this._CiudadanoService.searchByIdentificacion(datos,token).subscribe(
+        response => { 
+            this.respuesta = response; 
+            if(this.respuesta.status == 'success'){
+              this.newCiudadano = false;
+              this.peticionario.primerNombre = response.data.primerNombre;
+              this.peticionario.segundoNombre = response.data.segundoNombre;
+              this.peticionario.primerApellido = response.data.primerApellido;
+              this.peticionario.segundoApellido = response.data.segundoApellido;
+            }else{
+              this.newCiudadano = true;
+              this.peticionario = new MgdPeticionario(null, null, null, null, null, null, null, null, null, null);
             }
-          });
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-    });
+            error => {
+                    this.errorMessage = <any>error;
+                
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+        });
+  }
+
+  onBuscarRemitente() {
+    let token = this._loginService.getToken();
+    let datos = {
+      'identificacion':this.remitente.identificacion
+    }
+
+    this._RemitenteService.buscarRemitente(datos,token).subscribe(
+        response => { 
+            this.respuesta = response; 
+            if(this.respuesta.status == 'success'){
+              this.newRemitente = true;
+              this.remitente.primerNombre = response.data.primerNombre;
+              this.remitente.segundoNombre = response.data.segundoNombre;
+              this.remitente.primerApellido = response.data.primerApellido;
+              this.remitente.segundoApellido = response.data.segundoApellido;
+              this.remitente.direccion = response.data.direccion;
+              this.remitente.telefono = response.data.telefono;
+              this.remitente.correoElectronico = response.data.correoElectronico;
+            }else{
+              this.newRemitente = false;
+              this.remitente = new MgdRemitente(null, null, null, null, null, null, this.remitente.identificacion, null, null, null);
+            }
+            error => {
+                    this.errorMessage = <any>error;
+                
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+        });
   }
 
   onCrearRegistro(){
+    this.datosRegistro.remitente.push({
+      'primerNombre':this.remitente.primerNombre,
+      'segundoNombre':this.remitente.segundoNombre,
+      'primerApellido':this.remitente.primerApellido,
+      'segundoApellido':this.remitente.segundoApellido,
+      'identificacion':this.remitente.identificacion,
+      'direccion':this.remitente.direccion,
+      'telefono':this.remitente.telefono,
+      'correoElectronico':this.remitente.correoElectronico,
+      'tipoIdentificacionId':this.tipoIdentificacionRemitenteSelected
+    });
     this.datosRegistro.peticionario.push({
-      'primerNombre':this.peticionario.primerNombre,
-      'segundoNombre':this.peticionario.segundoNombre,
-      'primerApellido':this.peticionario.primerApellido,
-      'segundoApellido':this.peticionario.segundoApellido,
       'identificacion':this.peticionario.identificacion,
-      'entidadNombre':this.peticionario.entidadNombre,
-      'entidadCargo':this.peticionario.entidadCargo,
-      'direccion':this.peticionario.direccion,
-      'telefono':this.peticionario.telefono,
-      'correoElectronico':this.peticionario.correoElectronico,
-      'tipoIdentificacionId':this.tipoIdentificacionSelected
     });
 
     this.datosRegistro.documento.push({
@@ -164,12 +194,14 @@ constructor(
       'fechaLlegada':this.documento.fechaLlegada,
       'numeroGuiaLlegada':this.documento.numeroGuiaLlegada,
       'vigencia':this.documento.vigencia,
-      'tipoCorrespondenciaId':this.tipoCorrespondenciaSelected
+      'tipoCorrespondenciaId':this.tipoCorrespondenciaSelected,
+      'entidadNombre':this.documento.entidadNombre,
+      'entidadCargo':this.documento.entidadCargo,
     });
 
     let token = this._loginService.getToken();
 
-		this._PeticionarioService.register(this.file, this.datosRegistro, token).subscribe(
+		this._RemitenteService.register(this.file, this.datosRegistro, token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
@@ -292,5 +324,8 @@ constructor(
       this.file = new FormData();
       this.file.append('file', fileSelected);
     }
+  }
+  readyCiudadano(){
+    this.newCiudadano = false;
   }
 }

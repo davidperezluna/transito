@@ -15,6 +15,8 @@
                 <tr>
                   <th>Placa</th>
                   <th>Marca</th>
+                  <th>Clase</th>
+                  <th>Cilindraje</th>
                   <th>Serie</th>
                   <th>Vin</th>
                   <th>Numero de ejes</th>
@@ -28,6 +30,8 @@
                 <tr class="odd" *ngFor="let registroRemolque of registrosRemolque; let i = index">
                   <td>{{ registroRemolque.vehiculo.placa.numero }}</td>
                   <td>{{ registroRemolque.vehiculo.linea.marca.nombre }}</td>
+                  <td>{{ registroRemolque.vehiculo.clase.nombre }}</td>
+                  <td>{{ registroRemolque.vehiculo.cilindraje }}</td> 
                   <td>{{ registroRemolque.vehiculo.serie}}</td>
                   <td>{{ registroRemolque.vehiculo.vin}}</td>
                   <td>{{ registroRemolque.numeroEjes }}</td>

@@ -12,6 +12,8 @@ export class MgdDocumento{
 		public vigencia: number,
 		public tipoCorrespondenciaId: number,
         public sedeOperativaId: number,
-		public usuarioId: number
+		public usuarioId: number,
+		public entidadNombre:string,
+		public entidadCargo:string,
 	){}
 }

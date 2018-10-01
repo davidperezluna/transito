@@ -505,27 +505,27 @@ constructor(
     this.tramitesValor = this.tramitesValor.filter(h => h !== tramiteValor);
   }
 
-  btnRetefunete(){
-    let token = this._loginService.getToken();
-    this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
-      response => {
-        this.tramitePrecio = response.data;
-        this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
-          this.tramitesValor.push(
-            {
-              'nombre':this.tramitePrecio.nombre,
-              'valor':this.tramitePrecio.valorTotal
-            }
-          )
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      });    
-  }
+  // btnRetefunete(){
+  //   let token = this._loginService.getToken();
+  //   this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
+  //     response => {
+  //       this.tramitePrecio = response.data;
+  //       this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal); 
+  //         this.tramitesValor.push(
+  //           {
+  //             'nombre':this.tramitePrecio.nombre,
+  //             'valor':this.tramitePrecio.valorTotal
+  //           }
+  //         )
+  //       error => {
+  //         this.errorMessage = <any>error;
+  //         if (this.errorMessage != null) {
+  //           console.log(this.errorMessage);
+  //           alert("Error en la petición");
+  //         }
+  //       }
+  //     });    
+  // }
 
   onVendedorSelect(eve: any,propietarioVehiculo:any){
     if (eve.target.checked) {

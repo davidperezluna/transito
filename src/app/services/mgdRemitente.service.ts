@@ -5,21 +5,21 @@ import  {Observable} from "rxjs/Observable";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class MgdPeticionarioService {
-	private url = environment.apiUrl + "mgdpeticionario";
+export class MgdRemitenteService {
+	private url = environment.apiUrl + "mgdremitente";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getPeticionario(){
+	getRemitente(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	} 
 
 	register(formData, datos, token){
 		if(formData == null){
 			let json = JSON.stringify(datos);
-			let params = "json="+json+"&authorization="+token;
+			let params = "data="+json+"&authorization="+token;
 			let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 			return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 		}else {
@@ -30,14 +30,14 @@ export class MgdPeticionarioService {
 		}
 	}
 
-	deletePeticionario(token,id){
+	deleteRemitente(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showPeticionario(token,id){
+	showRemitente(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -46,8 +46,8 @@ export class MgdPeticionarioService {
 
 	}
 
-	editPeticionario(peticionario,token){
-		let json = JSON.stringify(peticionario);
+	editRemitente(remitente,token){
+		let json = JSON.stringify(remitente);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -55,7 +55,7 @@ export class MgdPeticionarioService {
 
 	}
 
-	buscarPeticionario(datos,token){
+	buscarRemitente(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
