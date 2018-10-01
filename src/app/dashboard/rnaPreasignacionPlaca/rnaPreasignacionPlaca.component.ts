@@ -62,7 +62,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
       ) {
       }
     })
-		this._ColorService.getColor().subscribe(
+		this._ColorService.index().subscribe(
       response => {
         // this.colors = response.data;
         let timeoutId = setTimeout(() => {  

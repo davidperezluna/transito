@@ -66,7 +66,7 @@ export class NewRnrsCambioColorComponent implements OnInit {
             }
         );}
 
-        this._ColorService.getColorSelect().subscribe(
+        this._ColorService.select().subscribe(
             response => {
                 this.colores = response;
             },

@@ -142,7 +142,7 @@ constructor(
   ngOnInit() {
     this.registroMaquinaria = new RegistroMaquinaria(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
-    this._ColorService.getColorSelect().subscribe(
+    this._ColorService.select().subscribe(
       response => {
         this.colores = response;
       },  
@@ -194,7 +194,7 @@ constructor(
         }
       }
     );
-    this._lineaService.getLineaSelect().subscribe(
+    this._lineaService.indexSelect().subscribe(
       response => {
         this.lineas = response;
       }, 
@@ -282,7 +282,7 @@ constructor(
   changedDepartamento(e){
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
-        this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+        this._lineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
           response => {
             console.log(response.data[0]);
             if (response.data[0] != null) {

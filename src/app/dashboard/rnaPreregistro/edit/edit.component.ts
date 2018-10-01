@@ -335,7 +335,7 @@ constructor(
   changedDepartamento(e){
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
-        this._LineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
+        this._LineaService.searchByMarcaSelectSelect(this.marcaSelected, token).subscribe(
           response => {
             console.log(response.data[0]);
             if (response.data[0] != null) {
