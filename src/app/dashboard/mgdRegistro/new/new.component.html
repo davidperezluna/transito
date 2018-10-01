@@ -18,65 +18,97 @@
                             <label>Fecha y Hora</label>
                             <input class="form-control" value="{{ date|date:('dd/MM/yyyy HH:mm:ss a') }}" readonly type="text">
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
-                            <label>Tipo Identificacion <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacionId" required>
+                            <label>Tipo Identificacion remitente<b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionRemitenteSelected" required name="tiposIdentificacionId" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Identificación <b class="text-danger">*</b></label>
-                            <input class="form-control" (blur)="onBuscarPeticionario()" [(ngModel)]="peticionario.identificacion" name="identificacion" type="text">
+                            <label>Identificación remitente<b class="text-danger">*</b></label>
+                            <input class="form-control" (blur)="onBuscarRemitente()" [(ngModel)]="remitente.identificacion" name="identificacion" type="text">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>Primer Nombre <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="peticionario.primerNombre" name="primerNombre" type="text" required>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.primerNombre" name="primerNombreRemitente" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Segundo Nombre</label>
-                            <input class="form-control" [(ngModel)]="peticionario.segundoNombre" name="segundoNombre" type="text">
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.segundoNombre" name="segundoNombreRemitente" type="text">
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Primer Apellido <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="peticionario.primerApellido" name="primerApellido" type="text" required>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.primerApellido" name="primerApellidoRemitente" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Segundo Apellido</label>
-                            <input class="form-control" [(ngModel)]="peticionario.segundoApellido" name="segundoApellido" type="text">
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.segundoApellido" name="segundoApellidoRemitente" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Dirección <b class="text-danger">*</b></label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.direccion" name="direccionRemitente" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Telefono <b class="text-danger">*</b></label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.telefono" name="telefonoRemitente" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Correo</label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.correoElectronico" name="correoElectronicoRemitente" type="text">
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Identificacion peticionario<b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionRemitenteId" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Identificación peticionario<b class="text-danger">*</b></label>
+                            <input class="form-control" (blur)="onBuscarPeticionario()" [(ngModel)]="peticionario.identificacion" name="identificacionRemitente" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf='peticionario.primerNombre'>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer Nombre <b class="text-danger">*</b></label>
+                            <input readonly class="form-control" [(ngModel)]="peticionario.primerNombre" name="primerNombre" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo Nombre</label>
+                            <input readonly class="form-control" [(ngModel)]="peticionario.segundoNombre" name="segundoNombre" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer Apellido <b class="text-danger">*</b></label>
+                            <input readonly class="form-control" [(ngModel)]="peticionario.primerApellido" name="primerApellido" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo Apellido</label>
+                            <input readonly class="form-control" [(ngModel)]="peticionario.segundoApellido" name="segundoApellido" type="text">
+                        </div>
+                    </div>
+
+                    <app-new-ciudadano *ngIf="newCiudadano" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="peticionario.identificacion" (readyCiudadano)="readyCiudadano($event)"></app-new-ciudadano>
 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>Entidad</label>
-                            <input class="form-control" [(ngModel)]="peticionario.entidadNombre" name="entidadNombre" type="text">
+                            <input class="form-control" [(ngModel)]="documento.entidadNombre" name="entidadNombre" type="text">
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Cargo</label>
-                            <input class="form-control" [(ngModel)]="peticionario.entidadCargo" name="entidadCargo" type="text">
+                            <input class="form-control" [(ngModel)]="documento.entidadCargo" name="entidadCargo" type="text">
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Dirección <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="peticionario.direccion" name="direccion" type="text">
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Telefono <b class="text-danger">*</b></label>
-                            <input class="form-control" [(ngModel)]="peticionario.telefono" name="telefono" type="text">
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Correo</label>
-                            <input class="form-control" [(ngModel)]="peticionario.correoElectronico" name="correoElectronico" type="text">
-                        </div>
-                    </div>
-
+                    
+ 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>Tipo Correspondencia <b class="text-danger">*</b></label>
