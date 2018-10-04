@@ -5,14 +5,13 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class ColorService{
-	private url = environment.apiUrl + "datos";
+	private url = environment.apiUrl + "color";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
 	index(){
-		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
@@ -53,7 +52,6 @@ export class ColorService{
 	}
 
 	select(){
-		
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	
