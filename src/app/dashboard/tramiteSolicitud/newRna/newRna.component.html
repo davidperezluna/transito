@@ -327,6 +327,11 @@
                         <div class="tab-pane" id="rna-cambiogas" role="tabpanel" *ngIf='ciudadano'> 
                             <appRna-cambio-gas [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
                         </div>
+
+                        <div class="tab-pane" id="rna-modificacion-acreedor-prendario" role="tabpanel" *ngIf='ciudadano'> 
+                            <appRna-cambio-acreedor-prendario [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario>
+                        </div> 
+                        
                     </div>
                 </div>
             </div>
