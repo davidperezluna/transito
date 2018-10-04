@@ -15,7 +15,7 @@ public errorMessage;
 public respuesta;
 
 constructor(
-  private _CargoService: GdCfgTipoCorrespondenciaService,
+  private _GdCfgTipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
   private _loginService: LoginService,
   ){}
 
@@ -30,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._CargoService.register(this.gdCfgTipoCorrespondencia,token).subscribe(
+		this._GdCfgTipoCorrespondenciaService.register(this.gdCfgTipoCorrespondencia,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

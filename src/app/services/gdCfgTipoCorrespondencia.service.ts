@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class GdCfgTipoCorrespondenciaService { 
-	private url = environment.apiUrl + 'gdCfgTipoCorrespondencia';
+	private url = environment.apiUrl + 'gestiondocuemntal/gdcfgtipocorrespondencia';
 	public identity;
 	public token;
  

@@ -155,6 +155,7 @@ import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
 import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.module';
+import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -298,7 +299,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       InsumoBusquedaModule,
       FacturaInfraccionModule,
       //MsvTCAsignacionModule,
-      //CfgEmpresaServicioModule,
+      CfgEmpresaServicioModule,
       GdCfgTipoCorrespondenciaModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
