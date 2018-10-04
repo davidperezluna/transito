@@ -14,11 +14,11 @@ export class RnmaPreregistroComponent implements OnInit {
 	public id;
 	public respuesta;
   public vehiculos;
-  public registrosMaquinaria;
+  public registrosMaquinaria: any = null;
   public formIndex = true;
   public formNew = false;
   public formEdit= false;
-  public table:any; 
+  public table:any = null; 
   public registroMaquinaria: RnmaPreregistro;
 
   constructor(
@@ -45,10 +45,12 @@ export class RnmaPreregistroComponent implements OnInit {
     this.formNew=false;    
 		this._PreregistroService.index().subscribe(
 				response => {
-          this.registrosMaquinaria = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
+          if (response.status == 'success') {
+            this.registrosMaquinaria = response.data;
+            let timeoutId = setTimeout(() => {  
+              this.iniciarTabla();
+            }, 100);
+          }
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -60,6 +62,7 @@ export class RnmaPreregistroComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -76,11 +79,15 @@ export class RnmaPreregistroComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formIndex = false;
     this.formNew = true;
-    this.table.destroy();
+    if (this.table) {
+      this.table.destroy();
+    }
   }
+  
   ready(isCreado:any){
       if(isCreado) {
         this.formNew = false;
@@ -89,14 +96,13 @@ export class RnmaPreregistroComponent implements OnInit {
       }
   }
 
-  editVehiculo(registroMaquinaria:any){
+  edit(registroMaquinaria:any){
     this.registroMaquinaria = registroMaquinaria;
     this.formIndex = false;
     this.formEdit = true;
   }
 
-  deletePreregistro(id:any){
-
+  delete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",

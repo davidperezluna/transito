@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class LineaService {
-	private url = environment.apiUrl + "datos";
+	private url = environment.apiUrl + "linea";
 	public identity;
 	public token;
 
@@ -51,6 +51,4 @@ export class LineaService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/marca/select", params, { headers: headers }).map(res => res.json());
 	}
-
-	
 }

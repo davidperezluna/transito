@@ -38,24 +38,26 @@ export class ColorComponent implements OnInit {
         result.dismiss === swal.DismissReason.timer
       ) {
       }
-    })
-		this._ColorService.index().subscribe(
-				response => {
-          this.colors = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100); 
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+		this._ColorService.index().subscribe(
+      response => {
+        this.colors = response.data;
+        let timeoutId = setTimeout(() => {
+          this.iniciarTabla();
+        }, 100);
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
+  
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,

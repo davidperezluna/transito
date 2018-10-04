@@ -16,8 +16,8 @@ export class CiudadanoService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(ciudadano,token){
-		let json = JSON.stringify(ciudadano);
+	register(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
@@ -39,15 +39,15 @@ export class CiudadanoService {
 							  .map(res => res.json());
 	}
 
-	editCiudadano(ciudadano,token){
-		let json = JSON.stringify(ciudadano);
+	editCiudadano(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	searchByIdentificacion(ciudadano, token){ 
-		let json = JSON.stringify(ciudadano);
+	searchByIdentificacion(datos, token){ 
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/search/identificacion", params, {headers: headers}).map(res => res.json());

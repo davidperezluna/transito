@@ -41,9 +41,9 @@ export class CvAcuerdoPagoComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    this._CiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.numeroIdentificacion }).subscribe(
+    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.numeroIdentificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {          
+        if (response.status == 'success') {     
           this.ciudadano = response.data;
           this._ComparendoService.searchComparendosCiudadano({ 'ciudadanoId': this.ciudadano.id }, token).subscribe(
             response => {

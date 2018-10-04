@@ -28,6 +28,7 @@ export class RnmaPreregistro{
 		public idCondicionIngreso: number,
 		public idOrigenRegistro: number,
 		public idEmpresaGps: number,
+		public idSedeOperativa: number,
 		public id: number,
 	){}
 }
