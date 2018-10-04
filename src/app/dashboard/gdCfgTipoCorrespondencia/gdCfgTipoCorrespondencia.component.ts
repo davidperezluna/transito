@@ -1,31 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { RnmaPreregistroService } from '../../services/rnmaPreregistro.service';
-import { RnmaPreregistro } from './rnmaPreregistro.modelo';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { GdCfgTipoCorrespondenciaService } from '../../services/gdCfgTipoCorrespondencia.service';
 import { LoginService } from '../../services/login.service';
-declare var $: any;
+import { GdCfgTipoCorrespondencia } from './gdCfgTipoCorrespondencia.modelo';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnmaPreregistro.component.html'
+  templateUrl: './GdCfgTipoCorrespondencia.component.html'
 })
-export class RnmaPreregistroComponent implements OnInit {
+export class GdCfgTipoCorrespondenciaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-  public vehiculos;
-  public registrosMaquinaria: any = null;
+	public gdCfgTipoCorrespondencias;
+	public formNew = false;
+	public formEdit = false;
   public formIndex = true;
-  public formNew = false;
-  public formEdit= false;
-  public table:any = null; 
-  public registroMaquinaria: RnmaPreregistro;
+  public table:any; 
+  public gdCfgTipoCorrespondencia: GdCfgTipoCorrespondencia;
 
   constructor(
-		private _PreregistroService: RnmaPreregistroService,
+    private _GdCfgTipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
 		private _loginService: LoginService,
-  ){}
-  
+    ){}
+    
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
@@ -41,16 +40,13 @@ export class RnmaPreregistroComponent implements OnInit {
       ) {
       }
     })
-    this.formEdit=false;
-    this.formNew=false;    
-		this._PreregistroService.index().subscribe(
+
+    this._GdCfgTipoCorrespondenciaService.index().subscribe(
 				response => {
-          if (response.status == 'success') {
-            this.registrosMaquinaria = response.data;
-            let timeoutId = setTimeout(() => {  
-              this.iniciarTabla();
-            }, 100);
-          }
+          this.gdCfgTipoCorrespondencias = response.data;
+          let timeoutId = setTimeout(() => {  
+            this.iniciarTabla();
+          }, 100);
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -62,7 +58,6 @@ export class RnmaPreregistroComponent implements OnInit {
 				}
       );
   }
-
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -79,30 +74,23 @@ export class RnmaPreregistroComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
-
+  
   onNew(){
-    this.formIndex = false;
     this.formNew = true;
-    if (this.table) {
-      this.table.destroy();
+    this.formIndex = false;
+    this.table.destroy();
+  }
+
+  ready(isCreado:any){
+    if(isCreado) {
+      this.formNew = false;
+      this.formEdit = false;
+      this.formIndex = true;
+      this.ngOnInit();
     }
   }
-  
-  ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
-  }
 
-  edit(registroMaquinaria:any){
-    this.registroMaquinaria = registroMaquinaria;
-    this.formIndex = false;
-    this.formEdit = true;
-  }
-
-  delete(id:any){
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -115,7 +103,7 @@ export class RnmaPreregistroComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._PreregistroService.delete(token,id).subscribe(
+        this._GdCfgTipoCorrespondenciaService.delete({ 'id': id }, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -136,8 +124,15 @@ export class RnmaPreregistroComponent implements OnInit {
               }
             }
           );
+
+        
       }
     })
   }
 
+  onEdit(gdCfgTipoCorrespondencia:any){
+    this.gdCfgTipoCorrespondencia = gdCfgTipoCorrespondencia;
+    this.formEdit = true;
+    this.formIndex = false;
+  }
 }

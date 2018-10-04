@@ -1,0 +1,51 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong class="text-uppercase">Gestión Documental</strong>
+              <small>Medio Correspondencia</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let gdCfgTipoCorrespondencia of gdCfgTipoCorrespondencias; let i = index">
+                  <td >{{ gdCfgTipoCorrespondencia.id }}</td>
+                  <td >{{ gdCfgTipoCorrespondencia.nombre }}</td>
+                  <td>
+                    <button (click)="onEdit(gdCfgTipoCorrespondencia)" class="btn btn-xs btn-info" type="button">
+                      <i class="fa fa-edit"></i>
+                      Editar
+                    </button> 
+                    <button (click)="onDelete(gdCfgTipoCorrespondencia.id)"  class="btn btn-xs btn-danger" type="button">
+                      <i class="fa fa-trash"></i>
+                      Eliminar
+                    </button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [gdCfgTipoCorrespondencia]="gdCfgTipoCorrespondencia" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

@@ -149,6 +149,7 @@ import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
+import { GdCfgTipoCorrespondenciaRoutes } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
@@ -290,7 +291,8 @@ export const DashboardRoutes: Route[] = [
       ...RpcccInventarioDocumentalRoutes,
       ...InsumoBusquedaRoutes,
       ...RnaCertificadoTradicionRoutes,
-      ...CfgEmpresaServicioRoutes
+      ...CfgEmpresaServicioRoutes,
+      ...GdCfgTipoCorrespondenciaRoutes
     ]
   }
 ];

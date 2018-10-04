@@ -15,9 +15,9 @@ export class RnmaPreregistroService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(registroMaquinaria,token){
-		let json = JSON.stringify(registroMaquinaria);
-		let params = "json="+json+"&authorization="+token;
+	register(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
@@ -25,7 +25,7 @@ export class RnmaPreregistroService {
 
 	delete(token,id){
 		let json = JSON.stringify(id);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
 							  .map(res => res.json());
@@ -39,9 +39,9 @@ export class RnmaPreregistroService {
 
 	}
 
-	edit(registroMaquinaria,token){
-		let json = JSON.stringify(registroMaquinaria);		
-		let params = "json="+json+"&authorization="+token;
+	edit(datos,token){
+		let json = JSON.stringify(datos);		
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
