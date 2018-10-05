@@ -27,6 +27,8 @@ import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpc
 
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
 
+import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
+
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
 import { CfgSvConectorModule } from './cfgSvConector/cfgSvConector.module';
 import { CfgSvSenialTipoModule } from './cfgSvSenialTipo/cfgSvSenialTipo.module';
@@ -298,7 +300,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       InsumoBusquedaModule,
       FacturaInfraccionModule,
       //MsvTCAsignacionModule,
-      //CfgEmpresaServicioModule,
+      CfgEmpresaServicioModule,
       GdCfgTipoCorrespondenciaModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
