@@ -13,15 +13,15 @@ export class GdCfgTipoCorrespondenciaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public cargos;
+	public gdCfgTipoCorrespondencias;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public cargo: GdCfgTipoCorrespondencia;
+  public gdCfgTipoCorrespondencia: GdCfgTipoCorrespondencia;
 
   constructor(
-    private _CargoService: GdCfgTipoCorrespondenciaService,
+    private _GdCfgTipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
 		private _loginService: LoginService,
     ){}
     
@@ -41,9 +41,9 @@ export class GdCfgTipoCorrespondenciaComponent implements OnInit {
       }
     })
 
-    this._CargoService.index().subscribe(
+    this._GdCfgTipoCorrespondenciaService.index().subscribe(
 				response => {
-          this.cargos = response.data;
+          this.gdCfgTipoCorrespondencias = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -103,7 +103,7 @@ export class GdCfgTipoCorrespondenciaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CargoService.delete({ 'id': id }, token).subscribe(
+        this._GdCfgTipoCorrespondenciaService.delete({ 'id': id }, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -130,8 +130,8 @@ export class GdCfgTipoCorrespondenciaComponent implements OnInit {
     })
   }
 
-  onEdit(cargo:any){
-    this.cargo = cargo;
+  onEdit(gdCfgTipoCorrespondencia:any){
+    this.gdCfgTipoCorrespondencia = gdCfgTipoCorrespondencia;
     this.formEdit = true;
     this.formIndex = false;
   }

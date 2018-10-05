@@ -9,13 +9,13 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() cargo:any = null;
+@Input() gdCfgTipoCorrespondencia:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
 
 constructor(
-  private _CargoService: GdCfgTipoCorrespondenciaService,
+  private _GdCfgTipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
   private _loginService: LoginService,
   ){}
 
@@ -25,7 +25,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._CargoService.edit(this.cargo,token).subscribe(
+		this._GdCfgTipoCorrespondenciaService.edit(this.gdCfgTipoCorrespondencia,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
