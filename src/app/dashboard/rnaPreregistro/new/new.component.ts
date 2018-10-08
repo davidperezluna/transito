@@ -347,16 +347,12 @@ constructor(
 		}); 
   }
 
-  changedDepartamento(e){
-    if (this.marcaSelected) {
+  onChangedMarca(e){
+    if (e) {
       let token = this._loginService.getToken()
-        this._lineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
-          response => { 
-            if (response.data[0] != null) {
-              this.lineas = response.data;
-            }else{
-              this.lineas = [];
-            }
+        this._lineaService.searchByMarcaSelect({'idMarca':e}, token).subscribe(
+          response => {
+            this.lineas = response;
           }, 
           error => { 
             this.errorMessage = <any>error;

@@ -47,7 +47,7 @@ constructor(
   private _loginService: LoginService,
   private _MunicipioService: MunicipioService,
   private _MarcaService: MarcaService,
-  private _lineaService: LineaService,
+  private _LineaService: LineaService,
   private _ClaseService: ClaseService,
   private _CarroceriaService: CarroceriaService,
   private _ServicioService: ServicioService,
@@ -167,13 +167,11 @@ constructor(
     );
   }
 
-  
-
   onCancelar(){
-      this.ready.emit(true);
+    this.ready.emit(true);
   }
-  onEnviar(){
 
+  onEnviar(){
     this.vehiculo.municipioId = this.municipioSelected;
     this.vehiculo.lineaId = this.lineaSelected;
     this.vehiculo.claseId = this.claseSelected;
@@ -182,7 +180,7 @@ constructor(
     this.vehiculo.colorId = this.colorSelected;
     this.vehiculo.combustibleId = this.combustibleSelected;
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
-    console.log(this.vehiculo);  
+
     let token = this._loginService.getToken();
     this._VehiculoService.register(this.vehiculo,token).subscribe(
 			response => {
@@ -216,17 +214,12 @@ constructor(
 		}); 
   }
 
-  changedDepartamento(e){
-    if (this.marcaSelected) {
+  onChangedMarca(e){
+    if (e) {
       let token = this._loginService.getToken()
-        this._lineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
+      this._LineaService.searchByMarcaSelect({ 'idMarca': e }, token).subscribe(
           response => {
-            console.log(response.data[0]);
-            if (response.data[0] != null) {
-              this.lineas = response.data;
-            }else{
-              this.lineas = [];
-            }
+            this.lineas = response;
           }, 
           error => { 
             this.errorMessage = <any>error;
@@ -238,5 +231,5 @@ constructor(
           }
         );
     }
-    }
+  }
 }

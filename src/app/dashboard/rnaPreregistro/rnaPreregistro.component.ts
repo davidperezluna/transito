@@ -31,27 +31,20 @@ export class RnaPreregistroComponent implements OnInit {
 		){}
   ngOnInit() {
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Cargando información!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+      type: 'info'
+    });
+
     this.formEdit=false;
     this.formNew=false;
 		this._RnaPreregistroService.index().subscribe(
 				response => {
           this.vehiculos = response.data;
-          console.log(this.vehiculos);          
+      
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
+            swal.close();
           }, 100);
 				}, 
 				error => {
