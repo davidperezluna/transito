@@ -36,6 +36,7 @@
                         <th>Sede Operativa</th>
                         <th>Insumo</th>
                         <th>Numero</th>
+                        <th>Estado</th>
                         <th>Fecha</th>
                         <!-- <th>Acciones</th> -->
                       </tr>
@@ -45,11 +46,8 @@
                         <td >{{insumoSustrato.sedeOperativa.nombre}}</td>
                         <td >{{insumoSustrato.casoInsumo.nombre}}</td>
                         <td >{{insumoSustrato.numero}}</td>
+                        <td >{{insumoSustrato.estado}}</td>
                         <td >{{insumoSustrato.fecha}}</td>
-                        <!-- <td>
-                          <button (click)="editRnaInsumoSustrato(loteInsumoSustrato)" class="btn btn-outline-info" type="button">Editar</button> 
-                          <button (click)="deleteRnaInsumo(loteInsumoSustrato.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
-                        </td> -->
                       </tr>
                     </tbody>
                   </table>
@@ -62,7 +60,6 @@
                           <th>Insumo</th>
                           <th>numero</th>
                           <th>Fecha</th>
-                          <!-- <th>Acciones</th> -->
                         </tr>
                       </thead>
                       <tbody>
@@ -71,10 +68,6 @@
                           <td >{{InsumoInsumo.sedeOperativa.nombre}}</td>
                           <td >{{InsumoInsumo.numero}}</td>
                           <td >{{InsumoInsumo.fecha}}</td>
-                          <!-- <td>
-                            <button (click)="editRnaInsumoInsumo(InsumoInsumo)" class="btn btn-outline-info" type="button">Editar</button>  
-                            <button (click)="deleteRnaInsumo(loteInsumoInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
-                          </td> -->
                         </tr>
                       </tbody> 
                     </table>

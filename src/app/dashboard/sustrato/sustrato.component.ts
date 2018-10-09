@@ -61,16 +61,20 @@ export class SustratoComponent implements OnInit {
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
+      dom: 'Bfrtip',
+      buttons: [
+          'pdf',
+      ],
       oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
-        }
+          oPaginate: {
+              sFirst: '<<',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '>>'
+          } 
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+  });
+  this.table = $('#dataTables-example').DataTable();
   }
   onNew(){
     this.formNew = true;

@@ -37,10 +37,8 @@ public frmInsumo:any=true;
 public frmInsumoSelect:any=true; 
 
 constructor(
-  private datePipe: DatePipe,
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
-  private _EmpresaService: EmpresaService,
   private _SedeOperativaService: SedeOperativaService,
   private _CasoInsumoService: CfgCasoInsumoService,
   private _RnaInsumoService: RnaInsumoService,
