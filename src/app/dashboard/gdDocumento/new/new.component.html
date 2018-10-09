@@ -1,0 +1,280 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-8">
+        <form #formNewRegistro="ngForm">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-uppercase"><strong>Registro de documento</strong></h5>
+                    <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>No. de Radicado <small><b>(generado por el sistema)</b></small></label>
+                            <input class="form-control" [(ngModel)]="documento.numeroRadicado" name="numeroRadicado" type="text" readonly>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>No. de folios <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="documento.folios" name="folios" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Fecha y Hora</label>
+                            <input class="form-control" value="{{ date|date:('dd/MM/yyyy HH:mm:ss a') }}" readonly type="text">
+                        </div>
+                    </div> 
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Identificacion remitente<b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionRemitenteSelected" required name="tiposIdentificacionId" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Identificación remitente<b class="text-danger">*</b></label>
+                            <input class="form-control" (blur)="onBuscarRemitente()" [(ngModel)]="remitente.identificacion" name="identificacion" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer Nombre <b class="text-danger">*</b></label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.primerNombre" name="primerNombreRemitente" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo Nombre</label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.segundoNombre" name="segundoNombreRemitente" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer Apellido <b class="text-danger">*</b></label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.primerApellido" name="primerApellidoRemitente" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo Apellido</label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.segundoApellido" name="segundoApellidoRemitente" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Dirección <b class="text-danger">*</b></label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.direccion" name="direccionRemitente" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Telefono <b class="text-danger">*</b></label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.telefono" name="telefonoRemitente" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Correo</label>
+                            <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.correoElectronico" name="correoElectronicoRemitente" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Identificacion peticionario<b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionRemitenteId" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Identificación peticionario<b class="text-danger">*</b></label>
+                            <input class="form-control" (blur)="onSearchCiudadano()" [(ngModel)]="peticionario.identificacion" name="identificacionRemitente" type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf='peticionario.primerNombre'>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer Nombre <b class="text-danger">*</b></label>
+                            <input readonly class="form-control" [(ngModel)]="peticionario.primerNombre" name="primerNombre" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo Nombre</label>
+                            <input readonly class="form-control" [(ngModel)]="peticionario.segundoNombre" name="segundoNombre" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Primer Apellido <b class="text-danger">*</b></label>
+                            <input readonly class="form-control" [(ngModel)]="peticionario.primerApellido" name="primerApellido" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Segundo Apellido</label>
+                            <input readonly class="form-control" [(ngModel)]="peticionario.segundoApellido" name="segundoApellido" type="text">
+                        </div>
+                    </div>
+
+                    <app-new-ciudadano *ngIf="ciudadano" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="peticionario.identificacion" (readyCiudadano)="readyCiudadano($event)"></app-new-ciudadano>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Entidad</label>
+                            <input class="form-control" [(ngModel)]="documento.entidadNombre" name="entidadNombre" type="text">
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Cargo</label>
+                            <input class="form-control" [(ngModel)]="documento.entidadCargo" name="entidadCargo" type="text">
+                        </div>
+                    </div>
+
+                    
+ 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Correspondencia <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" (ngModelChange)="changedTipoCorrespondencia($event)" [options]="tiposCorrespondencia" [(ngModel)]="tipoCorrespondenciaSelected" name="tipoCorrespondenciaId" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-2" *ngIf='editable'>
+                            <label>Vigencia (Días) <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="documento.vigencia" name="vigencia" type="text" required>
+                        </div>
+                        <div  class="col-xs-12 col-lg-2">
+                            <label>No. Oficio <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="documento.numeroOficio" name="medidaCautelarNumeroOficio" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Asunto y Concepto <b class="text-danger">*</b></label>
+                            <textarea class="form-control" [(ngModel)]="documento.descripcion" name="descripcion" rows="6" required></textarea>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Adjuntar documento <b class="text-danger">*</b></label>
+                            <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <h5>Llego por correo certificado</h5>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-3">
+                            <div class="custom-control custom-radio">
+                                <input name="correoCertificadoLlegada" [(ngModel)]="documento.correoCertificadoLlegada" value="true" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio1">Si</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <div class="custom-control custom-radio">
+                                <input name="correoCertificadoLlegada" [(ngModel)]="documento.correoCertificadoLlegada" value="false" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" checked>
+                                <label class="custom-control-label" for="customRadio2">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf='documento.correoCertificadoLlegada == "true"'>
+                        <div  class="col-xs-12 col-lg-6">
+                            <label>Empresa Transportadora</label>
+                            <input class="form-control" [(ngModel)]="documento.nombreTransportadoraLlegada" name="nombreTransportadoraLlegada" type="text">
+                        </div>
+                        <div  class="col-xs-12 col-lg-3">
+                            <label>Fecha llegada</label>
+                            <input class="form-control" [(ngModel)]="documento.fechaLlegada" name="fechaLlegada" type="date">
+                        </div>
+                        <div  class="col-xs-12 col-lg-3">
+                            <label>Numero de Guía</label>
+                            <input class="form-control" [(ngModel)]="documento.numeroGuiaLlegada" name="numeroGuiaLlegada" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario medida cautelar -->
+            <div class="row" *ngIf='prohibicion'>
+                <div class="col-xs-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-uppercase">Medida Cautelar</h5>
+                            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                            <hr>
+                            <div class="form-group row">
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>No. Oficio <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.numeroOficio" name="medidaCautelarnumeroOficio" type="text" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Quien Ordena <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.quienOrdena" name="quienOrdena" type="text" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Fecha Inicio <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.fechaInicio" name="fechaInicio" type="date" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Fecha Fin <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.fechaFin" name="fechaFin" type="date" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Identificación Implicado <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.identificacionImplicado" name="identificacionImplicado" type="text" required>
+                                </div>
+                                <div  class="col-xs-12 col-lg-6">
+                                    <label>Delito <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="medidaCautelar.delito" name="delito" type="text" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="onCrearProhibicion()" class="btn btn-primary pull-right" type="button">
+                            <i class="fa fa-save"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Formulario medida cautelar -->
+                    
+            <!-- Formulario vehiculo -->
+            <div class="row" *ngIf='datosRegistro.medidaCautelar.length > 0'>
+                <div class="col-xs-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-uppercase">Vehiculo</h5>
+                            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                            <hr>
+                            <div class="form-group row">
+                                <div  class="col-xs-12 col-lg-3">
+                                    <label>Lugar <b class="text-danger">*</b></label>
+                                    <input class="form-control" [(ngModel)]="vehiculo.lugar" name="lugar" type="text">
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Clase Vehiculo <b class="text-danger">*</b></label>
+                                    <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="claseId">
+                                    </ng-select>
+                                </div>
+                                <div  class="col-xs-12 col-lg-3">
+                                    <label>Placa</label>
+                                    <input class="form-control text-uppercase" [(ngModel)]="vehiculo.placa" name="placa" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="onCrearVehiculo()" class="btn btn-primary pull-right" type="button">
+                            <i class="fa fa-save"></i>
+                            </button>
+                        </div>
+                        <div class="form-group row" *ngIf='datosRegistro.vehiculo.length > 0'>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Lugar</th>
+                                        <th>Clase</th>
+                                        <th>placa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let vehiculo of datosRegistro.vehiculo; let i = index">
+                                        <td >{{vehiculo.lugar}}</td>
+                                        <td >{{vehiculo.claseId}}</td>
+                                        <td >{{vehiculo.placa}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Formulario medida cautelar -->  
+            <div class="form-group row">
+                <div  class="col-xs-12 col-lg-12">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onCrearRegistro()" [disabled]="formNewRegistro.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
