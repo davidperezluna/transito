@@ -78,9 +78,9 @@ import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
 import { MsvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
 
-import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
-import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
-import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
+import { GdTrazabilidadRoutes } from './gdTrazabilidad/gdTrazabilidad.routes';
+import { GdDocumentoRoutes } from './gdDocumento/gdDocumento.routes';
+import { GdCfgTipoCorrespondenciaRoutes } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.routes';
 
 import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
@@ -149,7 +149,6 @@ import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
-import { GdCfgTipoCorrespondenciaRoutes } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
@@ -192,9 +191,9 @@ export const DashboardRoutes: Route[] = [
       ...MsvEvaluacionRoutes,
       ...MsvRevisionRoutes,
       ...MsvCategoriaRoutes,
-      ...MgdDocumentoRoutes,
-      ...MgdRegistroRoutes,
-      ...MgdTipoCorrespondenciaRoutes,
+      ...GdDocumentoRoutes,
+      ...GdTrazabilidadRoutes,
+      ...GdCfgTipoCorrespondenciaRoutes,
       ...MflInfraccionRoutes,
       ...MflInfraccionCategoriaRoutes,
       ...MparqCostoTrayectoRoutes,

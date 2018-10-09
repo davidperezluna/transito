@@ -27,8 +27,6 @@ import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpc
 
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
 
-import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
-
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
 import { CfgSvConectorModule } from './cfgSvConector/cfgSvConector.module';
 import { CfgSvSenialTipoModule } from './cfgSvSenialTipo/cfgSvSenialTipo.module';
@@ -65,7 +63,6 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
-import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
 
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
@@ -131,8 +128,8 @@ import { EmpresaModule } from './empresa/empresa.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 
-import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
-import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
+import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
+import { GdDocumentoModule } from './gdDocumento/gdDocumento.module';
 
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
@@ -156,6 +153,7 @@ import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module'
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+
 import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.module';
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
@@ -213,11 +211,11 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       MsvRevisionModule,
       MsvCaracterizacionModule,
       MsvCategoriaModule,
-      MgdDocumentoModule,
-      MgdTipoCorrespondenciaModule,
+      GdDocumentoModule,
+      GdCfgTipoCorrespondenciaModule,
       MflInfraccionModule,
       MflInfraccionCategoriaModule,
-      MgdRegistroModule,
+      GdTrazabilidadModule,
       MparqCostoTrayectoModule,
       MparqGruaModule,
       MparqGruaCiudadanoModule,

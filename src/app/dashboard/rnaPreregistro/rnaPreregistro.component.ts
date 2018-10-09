@@ -33,7 +33,11 @@ export class RnaPreregistroComponent implements OnInit {
     swal({
       title: 'Cargando información!',
       text: 'Solo tardara unos segundos por favor espere.',
-      type: 'info'
+      type: 'info',
+      showConfirmButton: false,
+      onOpen: () => {
+        swal.showLoading()
+      }
     });
 
     this.formEdit=false;

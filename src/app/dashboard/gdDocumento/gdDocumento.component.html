@@ -1,0 +1,111 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formSearch'>
+    <div class="col-md-12 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="text-uppercase">Registro de documento</h5>
+          <small></small>
+          <hr>
+          <form #formSearch="ngForm">
+            <div class="form-group row">
+              <div class="col-xs-12 col-lg-6">
+                <div class="custom-control custom-radio">
+                  <input id="radioPersona" name="tipo-registro" [(ngModel)]="peticionario.idTipoPeticionario" value="Persona" type="radio" id="customRadio1"
+                    name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio1">Persona</label>
+                </div>
+              </div>
+              <div class="col-xs-12 col-lg-6">
+                <div class="custom-control custom-radio">
+                  <input id="radioEntidad" name="tipo-registro" [(ngModel)]="peticionario.idTipoPeticionario" value="Entidad" type="radio" id="customRadio2"
+                    name="customRadio" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadio2">Entidad</label>
+                </div>
+              </div>
+            </div>
+  
+            <div class="form-group row" *ngIf='peticionario.idTipoPeticionario == "Persona"'>
+              <div class="col-xs-12 col-lg-12">
+                <label>Numero de Cedula</label>
+                <input class="form-control" [(ngModel)]="peticionario.identificacion" name="identificacion" type="text" required>
+              </div>
+            </div>
+  
+            <div class="form-group row" *ngIf='peticionario.idTipoPeticionario == "Entidad"'>
+              <div class="col-xs-12 col-lg-6">
+                <label>Nombre Entidad</label>
+                <input class="form-control" [(ngModel)]="peticionario.entidadNombre" name="entidadNombre" type="text" required>
+              </div>
+              <div class="col-xs-12 col-lg-6">
+                <label>Numero Oficio</label>
+                <input class="form-control" [(ngModel)]="peticionario.numeroOficio" name="numeroOficio" type="text" required>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button" disabled>
+            <i class="fa fa-search"></i>
+            Ingresar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf='documentos'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <b class="text-uppercase">Gestión Documental</b> 
+              <small>Documentos</small>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Peticionario</th>
+                    <th>Tipo correspondencia</th>
+                    <th>Radicado No.</th>
+                    <th>Estado</th>
+                    <th>Fecha radicado</th>
+                    <th>Numero Oficio</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let documento of documentos; let i = index">
+                  <td >{{ documento.id }}</td>
+                  <td >{{ documento.peticionario.primerNombre }}</td>
+                  <td >{{ documento.tipoCorrespondencia.nombre }}</td>
+                  <td >{{ documento.numeroRadicado }}</td>
+                  <td >{{ documento.estado }}</td>
+                  <td >{{ documento.fechaRegistro }}</td>
+                  <td >{{ documento.numeroOficio }}</td>
+                  <td>
+                    <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'En proceso'">
+                      <i class="fa fa-edit"></i>
+                      Diligenciar
+                    </button>
+                    <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'Respuesta Generada'">
+                      <i class="fa fa-edit"></i>
+                      Finalizar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <app-new *ngIf='formNew' [documento]="documento" (ready)="ready($event)" (readyPrint)="readyPrint($event)"></app-new>
+    <app-show *ngIf='formShow' [documento]="documento" (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-show>
+    <app-print *ngIf='formPrint' [documento]="documento" (ready)="ready($event)"></app-print>
+</div>
