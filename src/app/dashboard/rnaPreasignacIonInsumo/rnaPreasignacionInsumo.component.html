@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-12">
+      <div class="card">
+      <div class="card-body">
+          <h5 class="m-0">reasignacion de insumos</h5>
+          <hr>
+          <form #newForm="ngForm">
+              <div class="row justify-content-center">
+                  <div class="card-body col-md-12"> 
+                    <div class="form-group row">
+                        <div class="col-lg-4 col-md-4">
+                            <label>Sede origen*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="sedes"
+                                [(ngModel)]="sedeOrigenSelected"
+                                (ngModelChange)="changedSedeOperativa($event)"
+                                required
+                                name="sedeOrigenId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Sede destino*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="sedes"
+                                [(ngModel)]="sedeDestinoSelected"
+                                (ngModelChange)="changedSedeOperativa($event)"
+                                required
+                                name="sedeDestinoId">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <label>Sustrato*</label>
+                            <ng-select
+                                [multiple]="false"
+                                [options]="sustratos"
+                                [(ngModel)]="insumoSelected"
+                                required
+                                name="insumoSustratoId">
+                            </ng-select>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4"> 
+                            <label>Cantidad*</label>
+                            <input class="form-control" (blur)="isExistencia()" [(ngModel)]="datosAsignacion.cantidad" name="cantidad" placeholder="" type="text" required>
+                        </div> 
+                    </div> 
+                  </div>    
+              </div>
+          </form>
+          <div class="card-footer">
+              <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+              <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+          </div>    
+      </div>
+  </div>
+</div>
