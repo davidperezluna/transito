@@ -54,7 +54,6 @@ import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
 import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
 import { SvCfgFuncionCriterioModule } from "./svCfgFuncionCriterio/svCfgFuncionCriterio.module";
 
-<<<<<<< HEAD
 import { SvCfgAreaModule } from "./svCfgArea/svCfgArea.module";
 import { SvCfgTipoAreaModule } from "./svCfgTipoArea/svCfgTipoArea.module";
 import { SvCfgAseguradoraModule } from "./svCfgAseguradora/svCfgAseguradora.module";
@@ -93,10 +92,8 @@ import { SvCfgUtilizacionModule } from "./svCfgUtilizacion/svCfgUtilizacion.modu
 import { SvCfgVisualModule } from "./svCfgVisual/svCfgVisual.module";
 import { SvCfgVisualDisminuidaModule } from "./svCfgVisualDisminuida/svCfgVisualDisminuida.module";
 import { SvCfgZonaModule } from "./svCfgZona/svCfgZona.module";
-=======
 import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
 import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
->>>>>>> 3337381a58ebae05789f2534ac2d0501c455ccce
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -208,13 +205,8 @@ import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
 import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
-<<<<<<< HEAD
 //import { MsvSenialModule } from './msvSenial/msvSenial.module';
-import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
-import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
 
-=======
->>>>>>> 3337381a58ebae05789f2534ac2d0501c455ccce
 
 @NgModule({
   imports: [
