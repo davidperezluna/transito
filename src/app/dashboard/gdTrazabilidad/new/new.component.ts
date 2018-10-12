@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { GdDocumentoService } from '../../../services/gdDocumento.service';
+import { GdTrazabilidadService } from '../../../services/gdTrazabilidad.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,19 +9,19 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@Output() readyPrint = new EventEmitter<any>();
-@Input() documento: any = null;
+@Input() trazabilidad: any = null;
+
 public errorMessage;
-public respuesta;
-public descripcion:any;
-public resumen = {};     public datos = {
+public file: any;
+
+public datos = {
   'descripcion': null,
-  'documentoId': null,
+  'idTrazabilidad': null,
 };
 
 
 constructor(
-  private _DocumentoService: GdDocumentoService,
+  private _TrazabilidadService: GdTrazabilidadService,
   private _loginService: LoginService,
   ){}
 
@@ -32,26 +32,33 @@ constructor(
     this.ready.emit(true);
   }
 
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const fileSelected: File = event.target.files[0];
+
+      this.file = new FormData();
+      this.file.append('file', fileSelected);
+    }
+  }
+
   onEnviar(){
-    this.datos.descripcion = this.descripcion;
-    this.datos.documentoId = this.documento.id;
+    this.datos.idTrazabilidad = this.trazabilidad.id;
 
     let token = this._loginService.getToken();
-		this._DocumentoService.response(this.datos,token).subscribe(
+		this._TrazabilidadService.response(this.file, this.datos,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.readyPrint.emit(this.respuesta.data);
+        if(response.status == 'success'){
+          this.ready.emit(response.data);
           swal({
             title: 'Perfecto!',
-            text: this.respuesta.msj,
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: 'El documento ya se encuentra registrado',
+            text: 'El trazabilidad ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

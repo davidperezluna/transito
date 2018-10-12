@@ -10,11 +10,11 @@
                 <form #formNew="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>No. Oficio <b>{{ documento.numeroOficio }}</b></label>
+                            <label>No. Oficio <b>{{ trazabilidad.documento.numeroOficio }}</b></label>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Respuesta <strong class="text-danger">*</strong></label>
-                            <textarea class="form-control" rows="5" [(ngModel)]="descripcion" name="descripcion" required></textarea>
+                            <label>Adjuntar respuesta <b class="text-danger">*</b></label>
+                            <input class="form-control" type="file" (change)="onFileChange($event)" required>
                         </div>
                     </div>
                 </form>

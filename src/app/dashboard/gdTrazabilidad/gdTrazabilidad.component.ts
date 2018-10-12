@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MgdPeticionarioService } from '../../services/gdPeticionario.service';
+import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
 import { GdDocumentoService } from '../../services/gdDocumento.service';
-import { GdTrazabilidad } from './gdTrazabilidad.modelo';
+import { GdTrazabilidadService } from '../../services/gdTrazabilidad.service';
 import { LoginService } from '../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -14,46 +14,96 @@ declare var $: any;
 export class GdTrazabilidadComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-  public documentos;
-  public peticionario: GdTrazabilidad;
+
+  public trazabilidades: any = null;
+  public trazabilidad:any;
+
 	public formNew = false;
   public formEdit = false;
   public formShow = false;
-  public formSearch = true;
-  public table:any;
-  public documento:any;
-  public mgdRegistros:any;
+  public formIndex = true;
+
+  public table:any = null;
+
+  public funcionario: any = null;
+
   public docsUrl = environment.docsUrl;
 
   constructor(
-    private _PeticionarioService: MgdPeticionarioService,
+    private _FuncionarioService: MpersonalFuncionarioService,
     private _DocumentoService: GdDocumentoService,
+    private _TrazabilidadService: GdTrazabilidadService,
 		private _loginService: LoginService,
     ){}
     
   ngOnInit() {
     swal({
-      title: '<i>Para Tener En Cuenta</i>',
-      type: 'info',
-      html:
-        '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN EN INTERÉS GENERAL Y PARTICULAR:</b>'+
-        ' El que tiene toda persona para presentar solicitudes respetuosas ante las autoridades consagrado en el articulo'+
-        '23 de la constitucion política como derecho fundamental. Termino de respuesta 15 días</p>'+
-        '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN DE INFORMACIÓN:</b> Petición para que el funcionario de a conocer como ha actuado en un caso determinado o permita el '+
-        'examen de los documentos públicos o expida copia de los mismos. Termino para Resolver 10 días </p>',
-      showCloseButton: true,
-      focusConfirm: false,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> OK!',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-      '<i class="fa fa-thumbs-down"></i>',
-      cancelButtonAriaLabel: 'Thumbs down',
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
     });
 
-    this.peticionario = new GdTrazabilidad(null,null,null,null,null);
-    this.peticionario.tipo = 'Persona';
+    this.formEdit = false;
+    this.formIndex = false;
+    this.formShow = false;
+    this.formNew = false;
+
+    let token = this._loginService.getToken();
+    let identity = this._loginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.funcionario = response.data;
+          this._TrazabilidadService.searchByFuncionario({ 'idFuncionario':this.funcionario.id }, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.formIndex = true;
+                this.trazabilidades = response.data;
+                let timeoutId = setTimeout(() => {
+                  this.iniciarTabla();
+                }, 100);
+                swal({
+                  title: 'Perfecto',
+                  text: response.message,
+                  type: 'success'
+                });
+              }else {
+                this.formIndex = false;
+                swal({
+                  title: 'Atención!',
+                  text: response.message,
+                  type: 'warning'
+                });
+              }
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+        }else {
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
   }
 
   iniciarTabla(){
@@ -73,36 +123,29 @@ export class GdTrazabilidadComponent implements OnInit {
    this.table = $('#dataTables-example').DataTable();
   }
 
-  onNew(){
-    this.formNew = true;
-    this.formSearch = false;
+  onNew(trazabilidad: any){
+    this.trazabilidad = trazabilidad;
+    this.formEdit = false;
+    this.formIndex = false;
     this.formShow = false;
-    this.documentos = null;
-    this.table.destroy();
+    this.formNew = true;
+  }
+
+  onShow(trazabilidad: any) {
+    this.trazabilidad = trazabilidad;
+    this.formNew = false;
+    this.formEdit = false;
+    this.formIndex = false;
+    this.formShow = true;
   }
 
   ready(isCreado:any){
       if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formShow = false;
-        this.formSearch = true;
         this.ngOnInit();
       }
   }
 
-  readyDocument(documento:any){
-    this.documento = documento;
-    if(this.documento) {
-      this.formNew = false;
-      this.formEdit = false;
-      this.formShow = true;
-      this.formSearch = false;
-      //this.ngOnInit();
-    }
-  }
-
-  deleteGestionDocumentos(id:any){
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -115,7 +158,7 @@ export class GdTrazabilidadComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._PeticionarioService.deletePeticionario(token,id).subscribe(
+        this._TrazabilidadService.delete({ 'id': id },token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -124,7 +167,6 @@ export class GdTrazabilidadComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -136,73 +178,11 @@ export class GdTrazabilidadComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }
 
-  editGestionDocumentos(mgdRegistros:any){
-    this.mgdRegistros = mgdRegistros;
+  onEdit(trazabilidad:any){
     this.formEdit = true;
-  }
-
-  onBuscarDocumentos(){
-    let datos = {
-      'tipo' : this.peticionario.tipo,
-      'identificacion' : this.peticionario.identificacion,
-      'entidadNombre' : this.peticionario.entidadNombre,
-      'numeroOficio' : this.peticionario.numeroOficio
-    }
-    let token = this._loginService.getToken();
-		this._DocumentoService.search(datos,token).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-           this.formNew = false;
-           this.formSearch = true;
-           this.documentos = response.data;
-
-           this.iniciarTabla();
-
-          swal({
-            title: 'Perfecto',
-            text: "¡Documentos encontrados!",
-            type: 'info',
-            showCloseButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> OK!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down',
-          });
-        }else{
-          this.formNew = true;
-          this.formSearch = false;
-          swal({
-            title: 'Alerta',
-            text: "¡No existe el documento!",
-            type: 'warning',
-            showCloseButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> OK!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down',
-          });
-        }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
   }
 }

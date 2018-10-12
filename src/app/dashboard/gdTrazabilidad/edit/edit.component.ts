@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MgdPeticionarioService } from '../../../services/gdPeticionario.service';
+import { GdTrazabilidadService } from '../../../services/gdTrazabilidad.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public respuesta;
 // public tipoIdentificacion: Array<any>
 
 constructor(
-  private _PeticionarioService: MgdPeticionarioService,
+  private _PeticionarioService: GdTrazabilidadService,
   private _loginService: LoginService,
   ){
   
@@ -27,7 +27,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._PeticionarioService.editPeticionario(this.peticionario,token).subscribe(
+		this._PeticionarioService.edit(this.peticionario,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

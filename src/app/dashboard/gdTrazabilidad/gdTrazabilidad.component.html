@@ -1,101 +1,71 @@
 <div class="container">
     <hr>
-    <div class="row" *ngIf='formSearch'>
-        <div class="col-md-12 col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="text-uppercase">Registro de documento</h5>
-                    <small></small>
-                    <hr>
-                    <form #formSearch="ngForm">
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="custom-control custom-radio">
-                                    <input id="radioPersona" name="tipo-registro" [(ngModel)]="peticionario.tipo" value="Persona" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio1">Persona</label>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <div class="custom-control custom-radio">
-                                    <input id="radioEntidad" name="tipo-registro" [(ngModel)]="peticionario.tipo" value="Entidad" type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio2">Entidad</label>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div class="form-group row" *ngIf='peticionario.tipo == "Persona"'>
-                            <div  class="col-xs-12 col-lg-12">
-                                <label>Numero de Cedula</label>
-                                <input class="form-control" [(ngModel)]="peticionario.identificacion" name="identificacion" type="text" required>
-                            </div>
-                        </div>
-         
-                        <div class="form-group row" *ngIf='peticionario.tipo == "Entidad"'>
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>Nombre Entidad</label>
-                                <input class="form-control" [(ngModel)]="peticionario.entidadNombre" name="entidadNombre" type="text" required>
-                            </div>
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>Numero Oficio</label>
-                                <input class="form-control" [(ngModel)]="peticionario.numeroOficio" name="numeroOficio" type="text" required>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <button (click)="onBuscarDocumentos()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button" disabled>
-                    <i class="fa fa-search"></i>
-                    Ingresar
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
     
-    <app-new *ngIf='formNew' (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-new>
-
-    <app-show *ngIf='formShow' [documento]="documento" (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-show>
-
-    <div class="row" *ngIf='documentos'>
+    <div class="row" *ngIf='formIndex'>
         <div class="col-xs-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="btn-group pull-right">
-                        <button (click)="onNew()" class="btn btn-primary" type="button">
-                            <i class="fa fa-plus"></i>
-                            Registrar documento
-                        </button>
-                    </div>
+                    <h5 class="text-uppercase">
+                        <strong>Documentos Encontrados</strong>
+                    </h5>
                 </div>
                 <div class="card-body container">
-                    <h5>Registros Encontrados</h5>
-                    <br>
                     <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Nombres y Apellidos</th>
-                                <th>Tipo Correspondencia</th>
-                                <th>No. Radicado</th>
+                                <th>Peticionario</th>
+                                <th>Tipo correspondencia</th>
+                                <th>Radicado No.</th>
                                 <th>Estado</th>
+                                <th>Fecha radicado</th>
+                                <th>Fecha vencimiento</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd" *ngFor="let documento of documentos; let i = index">
-                                <td >{{ documento.peticionario.primerNombre }} {{ documento.peticionario.primerApellido }}</td>
-                                <td >{{ documento.tipoCorrespondencia.nombre }}</td>
-                                <td >
-                                    <a href="{{docsUrl}}{{ documento.url }}" target="_blank">
-                                        {{ documento.numeroRadicado }}
+                            <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
+                                <td>{{ trazabilidad.documento.peticionario.usuario.primerNombre }} {{ trazabilidad.documento.peticionario.usuario.primerApellido }}</td>
+                                <td>{{ trazabilidad.documento.tipoCorrespondencia.nombre }}</td>
+                                <td>
+                                    <a href="{{docsUrl}}{{ trazabilidad.documento.url }}" target="_blank">
+                                        {{ trazabilidad.documento.numeroRadicado }}
                                     </a>
                                 </td>
-                                <td >
-                                    {{ documento.estado }}
+                                <td>{{ trazabilidad.estado }}</td>
+                                <td>{{ trazabilidad.documento.fechaRegistro }}</td>
+                                <td>{{ trazabilidad.documento.fechaVencimiento }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onShow(trazabilidad)" class="btn btn-xs btn-primary" type="button" *ngIf="trazabilidad.estado == 'PENDIENTE'">
+                                            <i class="fa fa-check-circle"></i>
+                                            Tramitar
+                                        </button>
+                                        <button (click)="onNew(trazabilidad)" class="btn btn-xs btn-primary" type="button" *ngIf="trazabilidad.estado == 'EN TRAMITE'">
+                                            <i class="fa fa-reply"></i>
+                                            Responder
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
-                    </table> 
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row" *ngIf='!formIndex && !trazabilidades'>
+        <div class="col-xs-12 col-lg-12">
+            <div class="alert alert-info">
+                <h4 class="text-uppercase text-center">
+                    <i class="fa fa-check-circle fa-2x"></i>
+                    <br>
+                    <strong>Usted no tiene documentos asignados pendientes por tramitar.</strong>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <app-new *ngIf='formNew' [trazabilidad]="trazabilidad" (ready)="ready($event)"></app-new>
+
+    <app-show *ngIf='formShow' [trazabilidad]="trazabilidad" (ready)="ready($event)" (onNew)="onNew($event)"></app-show>
 </div>

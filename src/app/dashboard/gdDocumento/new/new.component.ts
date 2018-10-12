@@ -5,12 +5,15 @@ import { GdRemitente } from '../gdRemitente.modelo';
 import { GdMedidaCautelar } from '../gdMedidaCautelar.modelo';
 import { GdVehiculo } from '../gdVehiculo.modelo';
 import { GdRemitenteService } from '../../../services/gdRemitente.service';
+import { GdDocumentoService } from '../../../services/gdDocumento.service';
 import { GdCfgTipoCorrespondenciaService } from '../../../services/gdCfgTipoCorrespondencia.service';
+import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { ClaseService } from '../../../services/clase.service';
 import { LoginService } from '../../../services/login.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-new',
@@ -18,26 +21,31 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@Output() readyDocument = new EventEmitter<any>();
+@Output() onShow = new EventEmitter<any>();
 @Input() peticionario: any = null;
 public documento: GdDocumento;
 public medidaCautelar: GdMedidaCautelar;
 public vehiculo: GdVehiculo;
 public remitente: GdRemitente;
+
 public errorMessage;
-public respuesta;
+
 public editable = false;
-public documentoEncontrado = false;
-public crearDocumento = false;
 public peticionarios: any;
 
-public tiposIdentificacion:any;
-public tipoIdentificacionSelected: any;
+public formNewDocumento: any = true;
+public formNewRemitente: any = false;
+public formNewCiudadano: any = false;
 
+public tiposIdentificacion:any;
 public tipoIdentificacionRemitenteSelected: any;
+public tipoIdentificacionCiudadanoSelected: any;
 
 public tiposCorrespondencia: any;
 public tipoCorrespondenciaSelected: any;
+
+public mediosCorrespondencia: any;
+public medioCorrespondenciaSelected: any;
 
 public clases: any;
 public claseSelected: any;
@@ -46,38 +54,44 @@ public date: any;
 
 public ciudadano: any = null;
 
-public newRemitente: any=false;
 public file: any;
 public prohibicion: any;
+
 public datosRegistro = {
-  'peticionario': [],
-  'remitente': [],
-  'documento': [],
-  'medidaCautelar': [],
-  'vehiculo': [],
+  'peticionario': null,
+  'remitente': null,
+  'documento': null,
+  'medidaCautelar': null,
+  'vehiculo': null,
 };
 
 constructor(
   private _CiudadanoService: CiudadanoService,
+  private _TipoIdentificacionService: TipoIdentificacionService,
   private _RemitenteService: GdRemitenteService,
-  private _loginService: LoginService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
   private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
-  private _claseService: ClaseService,
+  private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
+  private _DocumentoService: GdDocumentoService,
+  private _ClaseService: ClaseService,
+  private _loginService: LoginService,
   private router: Router
   ){}
 
   ngOnInit() {
     this.remitente = new GdRemitente(null, null, null, null, null, null, null, null, null, null);
-    this.documento = new GdDocumento(null,null,null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.documento = new GdDocumento(null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.medidaCautelar = new GdMedidaCautelar(null, null, null, null, null, null, null, null);
     this.vehiculo = new GdVehiculo(null, null, null, null);
     this.prohibicion = false;
     this.date = new Date();
 
-    this.documento.correoCertificadoLlegada = 'false';
+    $('#summernote').summernote({
+      placeholder: 'Registre los detalles de la llegada del documento',
+      tabsize: 2,
+      height: 300
+    });
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -104,119 +118,133 @@ constructor(
         }
       }
     );
+
+    this._MedioCorrespondenciaService.select().subscribe(
+      response => {
+        this.mediosCorrespondencia = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
 
   onCancelar(){
     this.ready.emit(true);
   }
 
-  onBuscarPeticionario() {
-    let token = this._loginService.getToken();
-    let datos = {
-      'numeroIdentificacion':this.peticionario.identificacion
-    }
-
-    this._CiudadanoService.searchByIdentificacion(datos,token).subscribe(
-        response => { 
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-              this.ciudadano = response.data;
-            }
-            error => {
-                    this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-        });
-  }
-
-  onBuscarRemitente() {
-    let token = this._loginService.getToken();
-    let datos = {
-      'identificacion':this.remitente.identificacion
-    }
-
-    this._RemitenteService.buscarRemitente(datos,token).subscribe(
-        response => { 
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-              this.newRemitente = true;
-              this.remitente.primerNombre = response.data.primerNombre;
-              this.remitente.segundoNombre = response.data.segundoNombre;
-              this.remitente.primerApellido = response.data.primerApellido;
-              this.remitente.segundoApellido = response.data.segundoApellido;
-              this.remitente.direccion = response.data.direccion;
-              this.remitente.telefono = response.data.telefono;
-              this.remitente.correoElectronico = response.data.correoElectronico;
-            }else{
-              this.newRemitente = false;
-              this.remitente = new GdRemitente(null, null, null, null, null, null, this.remitente.identificacion, null, null, null);
-            }
-            error => {
-                    this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-        });
-  }
-
-  onCrearRegistro(){
-    this.datosRegistro.remitente.push({
-      'primerNombre':this.remitente.primerNombre,
-      'segundoNombre':this.remitente.segundoNombre,
-      'primerApellido':this.remitente.primerApellido,
-      'segundoApellido':this.remitente.segundoApellido,
-      'identificacion':this.remitente.identificacion,
-      'direccion':this.remitente.direccion,
-      'telefono':this.remitente.telefono,
-      'correoElectronico':this.remitente.correoElectronico,
-      'tipoIdentificacionId':this.tipoIdentificacionRemitenteSelected
-    });
-    this.datosRegistro.peticionario.push({
-      'identificacion':this.peticionario.identificacion,
-    });
-
-    this.datosRegistro.documento.push({
-      'numeroRadicado':this.documento.numeroRadicado,
-      'folios':this.documento.folios,
-      'numeroOficio':this.documento.numeroOficio,
-      'descripcion':this.documento.descripcion,
-      'correoCertificadoLlegada':this.documento.correoCertificadoLlegada,
-      'nombreTransportadoraLlegada':this.documento.nombreTransportadoraLlegada,
-      'fechaLlegada':this.documento.fechaLlegada,
-      'numeroGuiaLlegada':this.documento.numeroGuiaLlegada,
-      'vigencia':this.documento.vigencia,
-      'tipoCorrespondenciaId':this.tipoCorrespondenciaSelected,
-      'entidadNombre':this.documento.entidadNombre,
-      'entidadCargo':this.documento.entidadCargo,
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
     });
 
     let token = this._loginService.getToken();
 
-		this._RemitenteService.register(this.file, this.datosRegistro, token).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.readyDocument.emit(this.respuesta.data);
+    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.peticionario.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.ciudadano = response.data;
+          this.formNewCiudadano = false;
+          this.formNewDocumento = true;
           swal({
             title: 'Perfecto!',
-            text: 'Documento radicado',
+            text: response.message,
+            type: 'success'
+          });
+        } else {
+          this.ciudadano = null;
+          this.formNewCiudadano = true;
+          this.formNewDocumento = false;
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onSearchRemitente() {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._loginService.getToken();
+
+    this._RemitenteService.searchByIdentificacion({ 'identificacion': this.remitente.identificacion }, token).subscribe(
+      response => { 
+          if(response.status == 'success'){
+            this.formNewRemitente = false;
+            this.remitente = response.data;
+            this.remitente.idTipoIdentificacion = response.data.tipoIdentificacion.id;
+            swal.close();
+          }else{
+            this.formNewRemitente = true;
+            
+            swal({
+              title: 'Atención!',
+              text: response.message,
+              type: 'warning'
+            });
+          }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onRegister(){
+    this.datosRegistro.remitente = this.remitente; 
+    this.datosRegistro.peticionario = this.ciudadano;
+    this.datosRegistro.documento = this.documento;
+
+    let token = this._loginService.getToken();
+
+		this._DocumentoService.register(this.file, this.datosRegistro, token).subscribe(
+			response => {
+        if(response.status == 'success'){
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+          this.onShow.emit(response.data);
         }else{
           swal({
             title: 'Error!',
-            text: this.respuesta.msg,
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -226,12 +254,12 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
-		});
+      }
+    );
   }
 
   onCrearProhibicion(){
-    this._claseService.getClaseSelect().subscribe(
+    this._ClaseService.getClaseSelect().subscribe(
       response => {
         this.clases = response;
       },
@@ -245,14 +273,7 @@ constructor(
       }
     );
     
-    this.datosRegistro.medidaCautelar.push({
-      'numeroOficio':this.medidaCautelar.numeroOficio,
-      'quienOrdena':this.medidaCautelar.quienOrdena,
-      'fechaInicio':this.medidaCautelar.fechaInicio,
-      'fechaFin':this.medidaCautelar.fechaFin,
-      'identificacionImplicado':this.medidaCautelar.identificacionImplicado,
-      'delito':this.medidaCautelar.delito
-    });
+    this.datosRegistro.medidaCautelar = this.medidaCautelar;
 
     swal({
       title: 'Perfecto',
@@ -291,27 +312,27 @@ constructor(
     });
   }
 
-  changedTipoCorrespondencia(event){
+  onChangedTipoCorrespondencia(event){
     if(event !== undefined){
       let token = this._loginService.getToken();
-	  	this._TipoCorrespondenciaService.show(token,event).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.prohibicion = response.data.prohibicion;
-          console.log(this.prohibicion);
-          this.editable = response.data.editable;
-          this.documento.vigencia = response.data.diasVigencia;
+
+      this._TipoCorrespondenciaService.show({ 'idTipoCorrespondencia':event }, token).subscribe(
+        response => {
+          response = response;
+          if(response.status == 'success'){
+            this.prohibicion = response.data.prohibicion;
+            this.editable = response.data.editable;
+            this.documento.vigencia = response.data.diasVigencia;
+          }
+        error => {
+            this.errorMessage = <any>error;
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
         }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-		  }); 
-      
+      );
     }
   }
 
@@ -324,7 +345,12 @@ constructor(
     }
   }
 
-  readyCiudadano(){
-    this.ciudadano = false;
+  onReadyCiudadano(ciudadano: any = null) {   
+    this.formNewCiudadano = false;
+    this.formNewDocumento = true;
+    
+    if (ciudadano) {
+      this.ciudadano = ciudadano;
+    }
   }
 }

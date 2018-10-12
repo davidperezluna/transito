@@ -1,7 +1,5 @@
 export class GdRemitente{
 	constructor(
-		public id:number,
-		public tipoIdentificacionId:number,
 		public primerNombre:string,
 		public segundoNombre:string,
 		public primerApellido:string,
@@ -9,6 +7,8 @@ export class GdRemitente{
 		public identificacion:string,
 		public direccion:string,
 		public telefono:string,
-		public correoElectronico:string
+		public correoElectronico:string,
+		public idTipoIdentificacion:number,
+		public id:number,
 	){}
 }

@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class GdCfgTipoCorrespondenciaService { 
-	private url = environment.apiUrl + 'gestiondocuemntal/gdcfgtipocorrespondencia';
+	private url = environment.apiUrl + 'gestiondocumental/gdcfgtipocorrespondencia';
 	public identity;
 	public token;
  
@@ -38,11 +38,11 @@ export class GdCfgTipoCorrespondenciaService {
 		);
 	}
 
-	show(token, id) {
-		let params = "authorization=" + token;
+	show(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
-			.map(res => res.json());
+		return this._http.post(this.url + "/show", params, { headers: headers }).map(res => res.json());
 	}
 
 	edit(datos, token) {

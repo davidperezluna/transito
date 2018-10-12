@@ -1,18 +1,18 @@
-<div class="row ">
-    <div class="container">
-        <div class="card">
+<div class="col-xs-12 col-lg-6">
+    <div class="card">
         <div class="card-body ">
             <h5 class="m-0">Nueva persona natural</h5>
+            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             <hr> 
             <div class="row justify-content-center container">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>Tipo Identificacion*</label>
+                        <label>Tipo Identificacion <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="departamentoId">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Identificacion*</label>
+                        <label>Identificacion <b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion" placeholder="" type="number"
                             required> 
                     </div>
@@ -22,7 +22,7 @@
                             type="date" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Genero*</label>
+                        <label>Genero <b class="text-danger">*</b></label>
                         <ng-select
                             [multiple]="false"
                             [options]="generos"
@@ -32,33 +32,33 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Primer Nombre*</label>
+                        <label>Primer Nombre <b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="ciudadano.primerNombreUsuario" name="primerNombre" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Segundo Nombre*</label>
+                        <label>Segundo Nombre</label>
                         <input class="form-control" [(ngModel)]="ciudadano.segundoNombreUsuario" name="segundoNombre" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Primer Apellido*</label>
+                        <label>Primer Apellido <b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="ciudadano.primerApellidoUsuario" name="primerApellido" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Segundo Apellido*</label>
+                        <label>Segundo Apellido</label>
                         <input class="form-control" [(ngModel)]="ciudadano.segundoApellidoUsuario" name="segundoApellido" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Grupo Sanguineo*</label>
+                        <label>Grupo Sanguineo <b class="text-danger">*</b></label>
                         <ng-select [multiple]="false" [options]="gruposSanguineos" [(ngModel)]="grupoSanguineoSelected" required name="grupoSanguineoId">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Fecha Nacimiento*</label>
+                        <label>Fecha Nacimiento <b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" placeholder=""
                             type="date" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Municipio Nacimiento*</label>
+                        <label>Municipio Nacimiento <b class="text-danger">*</b></label>
                         <ng-select
                             [multiple]="false"
                             [options]="municipios"
@@ -68,7 +68,7 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Municipio Residencia*</label>
+                        <label>Municipio Residencia <b class="text-danger">*</b></label>
                         <ng-select
                             [multiple]="false"
                             [options]="municipios"
@@ -78,15 +78,15 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Edad*</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.edad" name="edad" placeholder="" type="text" required>
+                        <label>Edad</label>
+                        <input class="form-control" [(ngModel)]="ciudadano.edad" name="edad" placeholder="" type="text" disabled>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Telefono*</label>
+                        <label>Telefono <b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefono" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Direccion Residencia</label>
+                        <label>Direccion Residencia  <b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
@@ -94,14 +94,22 @@
                         <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" placeholder="" type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Correo</label>
+                        <label>Correo  <b class="text-danger">*</b></label>
                         <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correo" placeholder="" type="email" required>
                     </div>
                 </div>   
-        </div>
+            </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="onEnviar()" class="btn btn-success pull-right">Registrar</button>
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                        Registrar
+                    </button>
+                </div>
             </div>   
         </div>
     </div>

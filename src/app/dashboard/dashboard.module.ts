@@ -54,8 +54,49 @@ import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
 import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
 import { SvCfgFuncionCriterioModule } from "./svCfgFuncionCriterio/svCfgFuncionCriterio.module";
 
+<<<<<<< HEAD
+import { SvCfgAreaModule } from "./svCfgArea/svCfgArea.module";
+import { SvCfgTipoAreaModule } from "./svCfgTipoArea/svCfgTipoArea.module";
+import { SvCfgAseguradoraModule } from "./svCfgAseguradora/svCfgAseguradora.module";
+import { SvCfgCalzadaCarrilModule } from "./svCfgCalzadaCarril/svCfgCalzadaCarril.module";
+import { SvCfgCardinalidadModule } from "./svCfgCardinalidad/svCfgCardinalidad.module";
+import { SvCfgClaseChoqueModule } from "./svCfgClaseChoque/svCfgClaseChoque.module";
+import { SvCfgCondicionViaModule } from "./svCfgCondicionVia/svCfgCondicionVia.module";
+import { SvCfgControlViaModule } from "./svCfgControlVia/svCfgControlVia.module";
+import { SvCfgDisenioModule } from "./svCfgDisenio/svCfgDisenio.module";
+import { SvCfgEntidadAccidenteModule } from "./svCfgEntidadAccidente/svCfgEntidadAccidente.module";
+import { SvCfgEstadoConductorModule } from "./svCfgEstadoConductor/svCfgEstadoConductor.module";
+import { SvCfgEstadoIluminacionModule } from "./svCfgEstadoIluminacion/svCfgEstadoIluminacion.module";
+import { SvCfgEstadoTiempoModule } from "./svCfgEstadoTiempo/svCfgEstadoTiempo.module";
+import { SvCfgEstadoViaModule } from "./svCfgEstadoVia/svCfgEstadoVia.module";
+import { SvCfgFallaModule } from "./svCfgFalla/svCfgFalla.module";
+import { SvCfgGeometriaModule } from "./svCfgGeometria/svCfgGeometria.module";
+import { SvCfgGradoExamenModule } from "./svCfgGradoExamen/svCfgGradoExamen.module";
+import { SvCfgGravedadVictimaModule } from "./svCfgGravedadVictima/svCfgGravedadVictima.module";
+import { SvCfgHipotesisModule } from "./svCfgHipotesis/svCfgHipotesis.module";
+import { SvCfgHospitalModule } from "./svCfgHospital/svCfgHospital.module";
+import { SvCfgIluminacionModule } from "./svCfgIluminacion/svCfgIluminacion.module";
+import { SvCfgLugarImpactoModule } from "./svCfgLugarImpacto/svCfgLugarImpacto.module";
+import { SvCfgMaterialModule } from "./svCfgMaterial/svCfgMaterial.module";
+import { SvCfgMotivoAnulacionModule } from "./svCfgMotivoAnulacion/svCfgMotivoAnulacion.module";
+import { SvCfgNacionalidadModule } from "./svCfgNacionalidad/svCfgNacionalidad.module";
+import { SvCfgRequiereEmpresaModule } from "./svCfgRequiereEmpresa/svCfgRequiereEmpresa.module";
+import { SvCfgResultadoExamenModule } from "./svCfgResultadoExamen/svCfgResultadoExamen.module";
+import { SvCfgSectorModule } from "./svCfgSector/svCfgSector.module";
+import { SvCfgSustanciaPeligrosaModule } from "./svCfgSustanciaPeligrosa/svCfgSustanciaPeligrosa.module"; 
+import { SvCfgTipoControlModule } from "./svCfgTipoControl/svCfgTipoControl.module";
+import { SvCfgTipoGeometriaModule } from "./svCfgTipoGeometria/svCfgTipoGeometria.module";
+import { SvCfgTipoViaModule } from "./svCfgTipoVia/svCfgTipoVia.module";
+import { SvCfgTipoVictimaModule } from "./svCfgTipoVictima/svCfgTipoVictima.module";
+import { SvCfgUnidadReceptoraModule } from "./svCfgUnidadReceptora/svCfgUnidadReceptora.module";
+import { SvCfgUtilizacionModule } from "./svCfgUtilizacion/svCfgUtilizacion.module";
+import { SvCfgVisualModule } from "./svCfgVisual/svCfgVisual.module";
+import { SvCfgVisualDisminuidaModule } from "./svCfgVisualDisminuida/svCfgVisualDisminuida.module";
+import { SvCfgZonaModule } from "./svCfgZona/svCfgZona.module";
+=======
 import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
 import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
+>>>>>>> 3337381a58ebae05789f2534ac2d0501c455ccce
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -128,8 +169,10 @@ import { EmpresaModule } from './empresa/empresa.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 
-import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
 import { GdDocumentoModule } from './gdDocumento/gdDocumento.module';
+import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
+import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.module';
+import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdCfgMedioCorrespondencia.module';
 
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
@@ -155,7 +198,6 @@ import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
 
-import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.module';
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
 import { DashboardComponent } from './dashboard.component'; 
@@ -166,6 +208,13 @@ import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
 import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
+<<<<<<< HEAD
+//import { MsvSenialModule } from './msvSenial/msvSenial.module';
+import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
+import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
+
+=======
+>>>>>>> 3337381a58ebae05789f2534ac2d0501c455ccce
 
 @NgModule({
   imports: [
@@ -203,20 +252,61 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgAsignacionPlacaSedeModule,
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
+      
       SvCapacitacionModule,
       SvCfgFuncionModule,
       SvCfgFuncionCriterioModule,
       SvCfgClaseActorViaModule,
       SvCfgTemaCapacitacionModule,
+      SvCfgAreaModule,
+      SvCfgTipoAreaModule,
+      SvCfgAseguradoraModule,
+      SvCfgCalzadaCarrilModule,
+      SvCfgCardinalidadModule,
+      SvCfgClaseChoqueModule,
+      SvCfgCondicionViaModule,
+      SvCfgControlViaModule,
+      SvCfgDisenioModule,
+      SvCfgEntidadAccidenteModule,
+      SvCfgEstadoConductorModule,
+      SvCfgEstadoIluminacionModule,
+      SvCfgEstadoTiempoModule,
+      SvCfgEstadoViaModule,
+      SvCfgFallaModule,
+      SvCfgGeometriaModule,
+      SvCfgGradoExamenModule,
+      SvCfgGravedadVictimaModule,
+      SvCfgHipotesisModule,
+      SvCfgHospitalModule,
+      SvCfgIluminacionModule,
+      SvCfgLugarImpactoModule,
+      SvCfgMaterialModule,
+      SvCfgMotivoAnulacionModule,
+      SvCfgNacionalidadModule,
+      SvCfgRequiereEmpresaModule,
+      SvCfgResultadoExamenModule,
+      SvCfgSectorModule,
+      SvCfgSustanciaPeligrosaModule,
+      SvCfgTipoControlModule,
+      SvCfgTipoGeometriaModule,
+      SvCfgTipoViaModule,
+      SvCfgTipoVictimaModule,
+      SvCfgUnidadReceptoraModule,
+      SvCfgUtilizacionModule,
+      SvCfgVisualModule,
+      SvCfgVisualDisminuidaModule,
+      SvCfgZonaModule,
+
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
       MsvCategoriaModule,
       GdDocumentoModule,
+      GdTrazabilidadModule,
       GdCfgTipoCorrespondenciaModule,
+      GdCfgMedioCorrespondenciaModule,
       MflInfraccionModule,
       MflInfraccionCategoriaModule,
-      GdTrazabilidadModule,
       MparqCostoTrayectoModule,
       MparqGruaModule,
       MparqGruaCiudadanoModule,
@@ -301,7 +391,6 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       FacturaInfraccionModule,
       //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
-      GdCfgTipoCorrespondenciaModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
       rnaPreasignacionInsumoModule,

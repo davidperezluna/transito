@@ -13,22 +13,21 @@ import swal from 'sweetalert2';
   templateUrl: './newCiudadano.component.html'
 })
 export class NewCiudadanoComponent implements OnInit {
-@Output() readyCiudadano = new EventEmitter<any>();
-@Input() identificacion:any = null;
-@Input() tipoIdentificacion:any = null;
-public ciudadano: Ciudadano;
-public errorMessage;
-public respuesta;
-public tiposIdentificacion: any;
-public generos: any;
-public gruposSanguineos: any;
-public municipios: any;
-public tipoIdentificacionSelected: any;
-public generoSelected: any;
-public grupoSanguineoSelected: any;
-public municipioResidenciaSelected: any;
-public municipioNacimientoSelected: any;
+  @Output() onReadyCiudadano = new EventEmitter<any>();
+  @Input() identificacion:any = null;
+  @Input() tipoIdentificacion:any = null;
+  public ciudadano: Ciudadano;
+  public errorMessage;
 
+  public tiposIdentificacion: any;
+  public generos: any;
+  public gruposSanguineos: any;
+  public municipios: any;
+  public tipoIdentificacionSelected: any;
+  public generoSelected: any;
+  public grupoSanguineoSelected: any;
+  public municipioResidenciaSelected: any;
+  public municipioNacimientoSelected: any;
 
 constructor(
   private _CiudadanoService: CiudadanoService,
@@ -99,9 +98,11 @@ constructor(
         }
       );
   }
+
   onCancelar(){
-    this.readyCiudadano.emit(false);
+    this.onReadyCiudadano.emit(null);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
     this.ciudadano.tipoIdentificacionUsuarioId = this.tipoIdentificacionSelected;
@@ -133,34 +134,32 @@ constructor(
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
         if (result.value) {
-         console.log(this.ciudadano);
-    this._CiudadanoService.register(this.ciudadano,token).subscribe(
-      response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.readyCiudadano.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El ciudadano ya se encuentra registrado',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-    }); 
+          this._CiudadanoService.register(this.ciudadano, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.onReadyCiudadano.emit(response.data);
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: 'El ciudadano ya se encuentra registrado',
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+                }
+              }
+            }); 
         } else if (
           // Read more about handling dismissals
           result.dismiss === swal.DismissReason.cancel

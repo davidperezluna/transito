@@ -6,7 +6,7 @@
             <div class="card-body">
                 <form #formNew="ngForm">
                     <h5 class="m-0">
-                        Registrar limitaciones a la propiedad
+                        Registrar Información de del IPAT
                     </h5>
                     <small>Todos los campos con
                         <b class="text-danger">*</b> son obligatorios</small>
@@ -15,137 +15,1036 @@
 
                         <!-- Nro. IPAT -->
                         <div class="col-xs-8 col-lg-6">
-                            <label>Nro IPAT</label>
-                            <div class="input-group" [class.has-success]="ipatEncontrado === 2" [class.has-danger]="ipatEncontrado === 3">
-                                <input type="text" class="form-control" placeholder="nroIpat" [(ngModel)]="nroIpat" name="nroIpat" required />
+                            <label>No. IPAT</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Número de placa" [(ngModel)]="nroIpat"
+                                    required name="numeroPlaca" />
                                 <span class="input-group-btn">
-                                    <button (click)="onKeyIpat()" [class.btn-default]="ipatEncontrado === 1" [class.btn-success]="ipatEncontrado === 2" [class.btn-danger]="ipatEncontrado === 3"
-                                        class="btn" ngxclipboard="" type="button">
+                                    <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
                             </div>
-                            <div class="has-danger" *ngIf="ipatEncontrado === 3">
-                                <div class="form-control-feedback has-danger has-error">No se encontró el consecutivo</div>
-                            </div>
-                            <div class="col-lg-12 col-md-12" *ngIf="ipatEncontrado === 2">
+                            <div class="col-lg-12 col-md-12" *ngIf="consecutivo">
                                 <br>
-
                                 <label>Datos Básicos
                                 </label>
                                 <table class="table table-bordered">
                                     <tbody>
-                                        <td>
-                                            <strong>Organismo de Transito: </strong>
-                                            {{sedeOperativa?.nombre}}
-                                        </td>
-                                        <td>
-                                            <strong>Nro. IPAT: </strong>
-                                            {{consecutivo?.consecutivo}}
-                                        </td>
-                                        <td>
-                                            <strong>Estado IPAT: </strong>
-                                            {{consecutivo?.estado}}
-                                        </td>
-
-
+                                        <td><strong>Organismo de Transito: </strong>{{ sedeOperativa?.nombre }}</td>
+                                        <td><strong>Nro. IPAT: </strong>{{ consecutivo?.consecutivo }}</td>
+                                        <td><strong>Estado IPAT: </strong>{{ consecutivo?.estado }}</td>
                                     </tbody>
                                 </table>
-                                <button (click)="btnRegistrar()" class="btn btn-primary">Registrar</button>
                             </div>
-
                         </div>
-
-
                     </div>
-
-                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-
-
-
+                    <!--<button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                    <button (click)="onEnviar()" class="btn btn-primary">Registrar</button>-->
                 </form>
             </div>
-
-            <div class="row justify-content-center container">
-
-                <div class="col-lg-6 col-md-6">
-                    <label>Gravedad
-                        <span class="text-danger">*</span>
-                    </label>
-                    <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="gravedadSelected" required name="gravedadId">
-                    </ng-select>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <label>Clase Accidente
-                        <span class="text-danger">*</span>
-                    </label>
-                    <ng-select [multiple]="false" [options]="clasesAccidente" (ngModelChange)="imprime($event)" [(ngModel)]="claseAccidenteSelected" required name="claseAccidenteId">
-                    </ng-select>
-                </div>
-                <div class="col-lg-6 col-md-6" *ngIf="claseAccidenteSelected==1">
-                    <label>Otro (Clase Accidente)</label>
-                    <input class="form-control" placeholder="" type="text" [(ngModel)]="msvRegistroIpat.otroClaseAccidente" name="valor" required>
-                </div>
-                <div class="col-lg-6 col-md-6" *ngIf="claseAccidenteSelected==1">
-                    <label>Choque Con
-                        <span class="text-danger">*</span>
-                    </label>
-                    <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="choqueConSelected" required name="choqueConId">
-                    </ng-select>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <label>Objeto Fijo
-                        <span class="text-danger">*</span>
-                    </label>
-                    <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="objetoFijoSelected" required name="objetoFijoId">
-                    </ng-select>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <label>Otro (Objeto Fijo)</label>
-                    <input class="form-control" placeholder="" type="text" [(ngModel)]="msvRegistroIpat.otroObjetoFijo" name="valor" required>
-                </div>
-
-                <br>
-                <div class="col-lg-6 col-md-6">
-                    <label>Fecha Accidente
-                    </label>
-                    <input type="date" class="form-control" placeholder="fecha accidente" [(ngModel)]="msvRegistroIpat.fechaAccidente" name="fechaAccidente"
-                        required />
-
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <label>Fecha Levantamiento
-                    </label>
-                    <input type="date" class="form-control" placeholder="fecha levantamiento" [(ngModel)]="msvRegistroIpat.fechaLevantamiento" name="fechaLevantamiento"
-                        required />
-
-                </div>
-                <br>
-                <hr>
-                <br>
-
-                <div class="col-lg-6 col-md-6">
-                    <label>Observaciones</label>
-                    <textarea class="form-control" [(ngModel)]="msvRegistroIpat.observaciones" name="observaciones" placeholder="Aqui puede ingresar las observaciones"
-                        required></textarea>
-                </div>
-
-            </div>
-
-
         </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Registrar Información del IPAT</strong>
+                    <small>Información General del accidente </small>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Organismo de Transito</label>
+                        <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected"
+                            required name="sedeOperativa">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Gravedad</label>
+                        <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="gravedadSelected" required name="gravedad">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Lugar</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.lugar" name="lugar"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha y Hora de Ocurrencia</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaAccidente" name="fechaAccidente"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha y Hora de Levantamiento</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaLevantamiento" name="fechaLevantamiento"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Clase de accidente</label>
+                        <ng-select [multiple]="false" [options]="clasesAccidente" [(ngModel)]="claseAccidenteSelected"
+                            required name="claseAccidente">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Otro (Clase de Accidente)</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroClaseAccidente" name="otroClaseAccidente"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Choque con</label>
+                        <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="choqueConSelected" required
+                            name="choqueCon">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Objeto Fijo</label>
+                        <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="objetoFijoSelected"
+                            required name="objetoFijo">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Otro (Objeto Fijo)</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroObjetoFijo" name="otroObjetoFijo"
+                            required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Caracteristicas del Lugar</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Área</label>
+                        <ng-select [multiple]="false" [options]="areas" [(ngModel)]="areaSelected" required name="area">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Sector</label>
+                        <ng-select [multiple]="false" [options]="sectores" [(ngModel)]="sectorSelected" required name="sector">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Zona</label>
+                        <ng-select [multiple]="false" [options]="zonas" [(ngModel)]="zonaSelected" required name="zona">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Diseño</label>
+                        <ng-select [multiple]="false" [options]="disenios" [(ngModel)]="disenioSelected" required name="disenio">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label> Estado Tiempo (Condición Clima)</label>
+                        <ng-select [multiple]="false" [options]="estadosTiempo" [(ngModel)]="estadoTiempoSelected"
+                            required name="estadoTiempo">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Caracteristicas de la vía</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Geometricas</label>
+                        <ng-select [multiple]="false" [options]="geometrias" [(ngModel)]="geometriaSelected" required
+                            name="geometria">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Utilizacion</label>
+                        <ng-select [multiple]="false" [options]="utilizaciones" [(ngModel)]="utilizacionSelected"
+                            required name="utilizacion">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Calzadas</label>
+                        <ng-select [multiple]="false" [options]="calzadasCarriles" [(ngModel)]="calzadaSelected"
+                            required name="calzada">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Carriles</label>
+                        <ng-select [multiple]="false" [options]="calzadasCarriles" [(ngModel)]="calzadaSelected"
+                            required name="carril">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Material(Superficie de Rodadura)</label>
+                        <ng-select [multiple]="false" [options]="materiales" [(ngModel)]="materialSelected" required
+                            name="material">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Estado Vía</label>
+                        <ng-select [multiple]="false" [options]="estadosVia" [(ngModel)]="estadoViaSelected" required
+                            name="estadoVia">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Condición Vía</label>
+                        <ng-select [multiple]="false" [options]="condicionesVia" [(ngModel)]="condicionViaSelected"
+                            required name="condicionVia">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Iluminación</label>
+                        <ng-select [multiple]="false" [options]="iluminaciones" [(ngModel)]="iluminacionSelected"
+                            required name="iluminacion">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Estado Iluminación</label>
+                        <ng-select [multiple]="false" [options]="estadosIluminacion" [(ngModel)]="estadoIluminacionSelected"
+                            required name="estadoIluminacion">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Visibilidad(Visual)</label>
+                        <ng-select [multiple]="false" [options]="visuales" [(ngModel)]="visualSelected" required name="visual">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Visual Disminuida por </label>
+                        <ng-select [multiple]="false" [options]="visualesDisminuidas" [(ngModel)]="visualDisminuidaSelected"
+                            required name="visualDisminuida">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Datos del Conductor</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Tipo Identificación</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tipoIdentificacionConductor"
+                            name="tipoIdentificacionConductor" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Identificacion Conductor</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.identificacionConductor"
+                            name="identificacionConductor" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nombres Conductor</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nombresConductor" name="nombresConductor"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Apellidos Conductor</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.apellidosConductor" name="apellidosConductor"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nacionalidad</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadConductor"
+                            name="nacionalidadConductor" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Nacimiento</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaNacimientoConductor"
+                            name="fechaNacimientoConductor" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Sexo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sexoConductor" name="sexoConductor"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Gravedad Conductor</label>
+                        <ng-select [multiple]="false" [options]="gravedadesVictima" [(ngModel)]="gravedadVictimaSelected" required
+                            name="gravedadConductor">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Direccion Residencia</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.direccionResidenciaConductor"
+                            name="direccionResidenciaConductor" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Ciudad residencia</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.ciudadResidenciaConductor"
+                            name="ciudadResidenciaConductor" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>telefono conductor</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.telefonoConductor" name="telefonoConductor"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Se practicó el examen?</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioPracticoExamenSi" name="examen" [(ngModel)]="msvRegistroIpat.practicoExamenConductor"
+                                        value="Si" type="radio" id="customRadioPract1" name="customRadioPract" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioPract1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioPracticoExamenNo" name="examen" [(ngModel)]="msvRegistroIpat.practicoExamenConductor"
+                                        value="No" type="radio" id="customRadioPract2" name="customRadioPract" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioPract2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Resultado Examen</label>
+                        <ng-select [multiple]="false" [options]="resultadosExamen" [(ngModel)]="resultadoExamenSelected"
+                            required name="resultadoExamenConductor">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Grado Examen</label>
+                        <ng-select [multiple]="false" [options]="gradosExamen" [(ngModel)]="gradoExamenSelected"
+                            required name="gradoExamenConductor">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Sustancias Psicoactivas?</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sustanciasPsicoactivasConductor"
+                            name="sustanciasPsicoactivasConductor" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Porta Licencia?</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioPortaLicenciaSi" name="portaLicencia" [(ngModel)]="msvRegistroIpat.portaLicencia"
+                                        value="Si" type="radio" id="customRadioPortaLicencia1" name="customRadioPortaLicencia"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioPortaLicencia1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioPortaLicenciaNo" name="portaLicencia" [(ngModel)]="msvRegistroIpat.portaLicencia"
+                                        value="No" type="radio" id="customRadioPortaLicencia2" name="customRadioPortaLicencia"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioPortaLicencia2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>No Lic. de Conducción</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroLicenciaConduccion"
+                            name="numeroLicenciaConduccion" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Categoria Lic.Conducción</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.categoriaLicenciaConduccion"
+                            name="categoriaLicenciaConduccion" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Restricción</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.restriccionConductor" name="restriccionConductor"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Expedicion</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaExpedicionLicenciaConduccion"
+                            name="fechaExpedicionLicenciaConduccion" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Vencimiento</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaVenciminetoLicenciaConduccion"
+                            name="fechaVenciminetoLicenciaConduccion" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Codigo Org. Transito ****</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sedeOperativa" name="sedeOperativa"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Chaleco</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioChalecoConductorSi" name="chalecoConductor" [(ngModel)]="msvRegistroIpat.chalecoConductor"
+                                        value="Si" type="radio" id="customRadioChalecoConductor1" name="customRadioChalecoConductor"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioChalecoConductor1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioChalecoConductorNo" name="chalecoConductor" [(ngModel)]="msvRegistroIpat.chalecoConductor"
+                                        value="No" type="radio" id="customRadioChalecoConductor2" name="customRadioChalecoConductor"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioChalecoConductor2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Casco</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioCascoConductorSi" name="cascoConductor" [(ngModel)]="msvRegistroIpat.cascoConductor"
+                                        value="Si" type="radio" id="customRadioCascoConductor1" name="customRadioCascoConductor"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioCascoConductor1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioCascoConductorNo" name="cascoConductor" [(ngModel)]="msvRegistroIpat.cascoConductor"
+                                        value="No" type="radio" id="customRadioCascoConductor2" name="customRadioCascoConductor"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioCascoConductor2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Cinturon</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioCinturonConductorSi" name="cinturonConductor" [(ngModel)]="msvRegistroIpat.cinturonConductor"
+                                        value="Si" type="radio" id="customRadioCinturonConductor1" name="customRadioCinturonConductor"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioCinturonConductor1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioCinturonConductorNo" name="cinturonConductor" [(ngModel)]="msvRegistroIpat.cinturonConductor"
+                                        value="No" type="radio" id="customRadioCinturonConductor2" name="customRadioCinturonConductor"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioCinturonConductor2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Hospital de atención</label>
+                        <ng-select [multiple]="false" [options]="hospitales" [(ngModel)]="hospitalSelected" required
+                            name="hospitalConductor">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Descripcion Lesiones</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionLesion" name="descripcionLesion"
+                            required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Caracteristicas del Vehiculo</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Placa Vehiculo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.placa" name="placa"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Placa remolque/semiremolque</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.placaRemolque" name="placaRemolque"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nacionalidad</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVehiculo" name="nacionalidadVehiculo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Marca</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.marca" name="marca"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Linea</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.linea" name="linea"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Color</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.color" name="color"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Modelo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.modelo" name="modelo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Carroceria</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.carroceria" name="carroceria"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Ton</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.ton" name="ton" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Pasajeros</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.pasajeros" name="pasajeros"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>No lic de transito</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroLicenciaTransito"
+                            name="numeroLicenciaTransito" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Empresa nombre</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.empresa" name="empresa"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>NIT Empresa</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nitEmpresa" name="nitEmpresa"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Matriculado En</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.matriculadoEn" name="matriculadoEn"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label> Inmovilizado en</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.inmovilizadoEn" name="inmovilizadoEn"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>A disposición de</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.aDisposicionDe" name="aDisposicionDe"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>No. Tarjeta de Registro</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tarjetaRegistro" name="tarjetaRegistro"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Revision Tecnomecanica Si/No</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioTecnoMecanicaSi" name="tecnoMecanica" [(ngModel)]="msvRegistroIpat.revisionTecnomecanica"
+                                        value="Si" type="radio" id="customRadioTecnoMecanica1" name="customRadioTecnoMecanica"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioTecnoMecanica1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioTecnoMecanicaNo" name="tecnoMecanica" [(ngModel)]="msvRegistroIpat.revisionTecnomecanica"
+                                        value="No" type="radio" id="customRadioTecnoMecanica2" name="customRadioTecnoMecanica"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioTecnoMecanica2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>No. TecnoMecanica</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroTecnoMecanica" name="numeroTecnoMecanica"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Cantidad acompañantes o pasajeros al momento del accidente</label>
+                        <input class="form-control" type="number" [(ngModel)]="msvRegistroIpat.cantidadAcompaniantes"
+                            name="cantidadAcompaniantes" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Porta SOAT?</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioSoatSi" name="portaSoat" [(ngModel)]="msvRegistroIpat.portaSoat"
+                                        value="Si" type="radio" id="customRadioSoat1" name="customRadioSoat" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSoat1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioSoatNo" name="portaSoat" [(ngModel)]="msvRegistroIpat.portaSoat"
+                                        value="No" type="radio" id="customRadioSoat2" name="customRadioSoat" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSoat2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Número de SOAT</label>
+                        <input class="form-control" type="number" [(ngModel)]="msvRegistroIpat.soat" name="soat"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>No. de Poliza</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroPoliza" name="numeroPoliza"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Aseguradora</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.aseguradoraSoat" name="aseguradoraSoat"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Vencimiento SOAT</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaVencimientoSoat" name="fechaVencimientoSoat"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Seguro de responsabilidad civil contractual Si/No</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioResponsabilidadSi" name="responsabilidad" [(ngModel)]="msvRegistroIpat.portaSeguroResponsabilidadCivil"
+                                        value="Si" type="radio" id="customRadioResponsabilidad1" name="customRadioResponsabilidad"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioResponsabilidad1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioResponsabilidadNo" name="responsabilidad" [(ngModel)]="msvRegistroIpat.portaSeguroResponsabilidadCivil"
+                                        value="No" type="radio" id="customRadioResponsabilidad2" name="customRadioResponsabilidad"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioResponsabilidad2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Numero Seguro de Responsabilidad Civil</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroSeguroResponsabilidadCivil"
+                            name="numeroSeguroResponsabilidadCivil" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Aseguradora</label>
+                        <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="aseguradoraSelected"
+                            required name="aseguradoraSeguroResponsabilidadCivil">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Vencimiento Seg. responsabilidad civil contractual</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaVencimientoResponsabilidadCivil"
+                            name="fechaVencimientoResponsabilidadCivil" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Porta seguro extracontractual? si/no</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioSeguroExtracontractualSi" name="seguroExtracontractual" [(ngModel)]="msvRegistroIpat.portaSeguroExtracontractual"
+                                        value="Si" type="radio" id="customRadioSeguroExtracontractual1" name="customRadioSeguroExtracontractual"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSeguroExtracontractual1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioSeguroExtracontractualNo" name="seguroExtracontractual" [(ngModel)]="msvRegistroIpat.portaSeguroExtracontractual"
+                                        value="No" type="radio" id="customRadioSeguroExtracontractual2" name="customRadioSeguroExtracontractual"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSeguroExtracontractual2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Número Seguro extracontractual</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroSeguroExtracontractual"
+                            name="numeroSeguroExtracontractual" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Aseguradora Seguro extracontractual</label>
+                        <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="aseguradoraSelected"
+                            required name="aseguradoraSeguroExtracontractual">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Vencimiento</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaVencimientoSeguroExtracontractual"
+                            name="fechaVencimientoSeguroExtracontractual" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Datos del Propietario</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Propietario ¿Mismo Conductor? si/No</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioMismoConductorSi" name="mismoConductor" [(ngModel)]="msvRegistroIpat.mismoConductor"
+                                        value="Si" type="radio" id="customRadioMismoConductor1" name="customRadioMismoConductor"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioMismoConductor1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioMismoConductorNo" name="mismoConductor" [(ngModel)]="msvRegistroIpat.mismoConductor"
+                                        value="No" type="radio" id="customRadioMismoConductor2" name="customRadioMismoConductor"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioMismoConductor2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Tipo Documento Propietario</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tipoIdentificacionPropietario"
+                            name="tipoIdentificacionPropietario" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Identificacion Propietario</label>
+                        <input class="form-control" type="number" [(ngModel)]="msvRegistroIpat.identificacionPropietario"
+                            name="identificacionPropietario" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nombre Propietario</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nombresPropietario" name="nombresPropietario"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Apellido Propietario</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.apellidosPropietario" name="apellidosPropietario"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Clase Vehiculo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.clase" name="clase"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Servicio</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.servicio" name="servicio"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Modalidad Transporte</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.modalidadTransporte" name="modalidadTransporte"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Radio Acción</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.radioAccion" name="radioAccion"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Descripción daños materiales del Vehiculo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionDanios" name="descripcionDanios"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fallas</label>
+                        <ng-select [multiple]="false" [options]="fallas" [(ngModel)]="fallaSelected" required name="falla">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Lugar Impacto</label>
+                        <ng-select [multiple]="false" [options]="lugaresImpacto" [(ngModel)]="lugarImpactoSelected"
+                            required name="lugarImpacto">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Hipotesis del accidente de transito</label>
+                        <ng-select [multiple]="false" [options]="hipotesis" [(ngModel)]="hipotesisSelected" required
+                            name="hipotesis">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Datos de quien conoce el accidente (Testigo)</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Grado</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.gradoTestigo" name="gradoTestigo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>tipo Documento Testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tipoIdentificacionTestigo"
+                            name="tipoIdentificacionTestigo" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Identificación Testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.identificacionTestigo"
+                            name="identificacionPropietario" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>nombre Testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nombresTestigo" name="nombresTestigo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>apellido testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.apellidosTestigo" name="apellidosTestigo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Placa</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.placaTestigo" name="placaTestigo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Entidad</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.entidadTestigo" name="entidadTestigo"
+                            required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="consecutivo">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Datos de Victimas</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-6 col-md-6">
+                        <label>Victimas si/no</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioVictimaSi" name="victima" [(ngModel)]="msvRegistroIpat.victima"
+                                        value="Si" type="radio" id="customRadioVictima1" name="customRadioVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioVictima1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioVictimaNo" name="victima" [(ngModel)]="msvRegistroIpat.victima"
+                                        value="No" type="radio" id="customRadioVictima2" name="customRadioVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioVictima2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Tipo Victima</label>
+                        <ng-select [multiple]="false" [options]="tiposVictima" [(ngModel)]="tipoVictimaSelected"
+                            required name="tipoVictima">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Gravedad Victima</label>
+                        <ng-select [multiple]="false" [options]="gravedadesVictima" [(ngModel)]="gravedadVictimaSelected"
+                            required name="gravedadVictima">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Tipo Documento Victima</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tipoIdentificacionVictima"
+                            name="tipoIdentificacionVictima" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Identificación Victima</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.identificacionVictima"
+                            name="identificacionVictima" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nombres Victima</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nombresVictima" name="nombresVictima"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Apellidos Victima</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.apellidosVictima" name="apellidosVictima"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nacionalidad</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVictima" name="nacionalidadVictima"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Fecha Nacimiento</label>
+                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaNacimientoVictima"
+                            name="fechaNacimientoVictima" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Sexo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sexoVictima" name="sexoVictima"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Direccion residencia victima</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.direccionResidenciaVictima"
+                            name="direccionResidenciaVictima" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>ciudad residencia victima</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.ciudadResidenciaVictima"
+                            name="ciudadResidenciaVictima" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>telefono </label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.telefonoVictima" name="telefonoVictima"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Hospital atención a la victima</label>
+                        <ng-select [multiple]="false" [options]="hospitales" [(ngModel)]="hospitalSelected" required
+                            name="hospitalVictima">
+                        </ng-select>
+                    </div>
 
-
-
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Se practicó el examen?</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioPracticoExamenVictimaSi" name="practicoExamenVictima" [(ngModel)]="msvRegistroIpat.practicoExamenVictima"
+                                        value="Si" type="radio" id="customRadioPract1" name="customRadioPract" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioPract1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioPracticoExamenVictimaNo" name="practicoExamenVictima" [(ngModel)]="msvRegistroIpat.practicoExamenVictima"
+                                        value="No" type="radio" id="customRadioPract2" name="customRadioPract" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioPract2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Autorizó Victima? </label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.autorizoVictima" name="autorizoVictima"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Resultado Examen</label>
+                        <ng-select [multiple]="false" [options]="resultadosExamen" [(ngModel)]="resultadoExamenSelected"
+                            required name="resultadoExamenVictima">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Grado Examen</label>
+                        <ng-select [multiple]="false" [options]="gradosExamen" [(ngModel)]="gradoExamenSelected"
+                            required name="gradoExamenVictima">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Sustancias Psicoactivas?</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sustanciasPsicoactivasVictima"
+                            name="sustanciasPsicoactivasVictima" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Chaleco</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioChalecoVictimaSi" name="chalecoVictima" [(ngModel)]="msvRegistroIpat.chalecoVictima"
+                                        value="Si" type="radio" id="customRadioChalecoVictima1" name="customRadioChalecoVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioChalecoVictima1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioChalecoVictimaNo" name="chalecoVictima" [(ngModel)]="msvRegistroIpat.chalecoVictima"
+                                        value="No" type="radio" id="customRadioChalecoVictima2" name="customRadioChalecoVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioChalecoVictima2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Casco</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioCascoVictimaSi" name="cascoVictima" [(ngModel)]="msvRegistroIpat.cascoVictima"
+                                        value="Si" type="radio" id="customRadioCascoVictima1" name="customRadioCascoVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioCascoVictima1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioCascoVictimaNo" name="cascoVictima" [(ngModel)]="msvRegistroIpat.cascoVictima"
+                                        value="No" type="radio" id="customRadioCascoVictima2" name="customRadioCascoVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioCascoVictima2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Cinturon</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioCinturonVictimaSi" name="cinturonVictima" [(ngModel)]="msvRegistroIpat.cinturonVictima"
+                                        value="Si" type="radio" id="customRadioCinturonVictima1" name="customRadioCinturonVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioCinturonVictima1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioCinturonVictimaNo" name="cinturonVictima" [(ngModel)]="msvRegistroIpat.cinturonVictima"
+                                        value="No" type="radio" id="customRadioCinturonVictima2" name="customRadioCinturonVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioCinturonVictima2">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Observaciones del Informe</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.observaciones" name="observaciones"
+                            required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="card-footer" *ngIf="listaVehiculosPlacas">-->
+        <div class="card-footer">
+            <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+            <button (click)="enviarTramite()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
+        </div>
+        <!-- /.col -->
     </div>
-
-    <div class="card-footer" *ngIf="listaVehiculosPlacas">
-        <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
-        <button (click)="enviarTramite()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
+    <!-- /.row -->

@@ -4,6 +4,7 @@ import { SvCfgFuncionCriterioService } from '../../../services/svCfgFuncionCrite
 import { LoginService } from '../../../services/login.service';
 
 import swal from 'sweetalert2';
+import { SvCfgFuncionService } from '../../../services/svCfgFuncion.service';
 
 @Component({
     selector: 'app-new',
@@ -11,19 +12,36 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() funcion: any = null;
     public funcionCriterio: SvCfgFuncionCriterio;
     public errorMessage;
+    public respuesta;
+
     public funciones: any;
+    public funcionSelected: any;
 
     constructor(
         private _FuncionCriterioService: SvCfgFuncionCriterioService,
         private _loginService: LoginService,
+        private _FuncionService: SvCfgFuncionService,
 
     ) { }
 
     ngOnInit() {
         this.funcionCriterio = new SvCfgFuncionCriterio(null, null, null);
+        this._FuncionService.getFuncionSelect().subscribe(
+            response => {
+                this.funciones = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
     }
 
     onCancelar() {
@@ -32,49 +50,35 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
+        this.funcionCriterio.funcionId = this.funcionSelected;
 
-
-        this.funcionCriterio.funcionId = this.funcion.id;
-
-        swal({
-            title: '¿Está seguro?',
-            text: "¿Desea guardar la información?",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#15d4be',
-            cancelButtonColor: '#ff6262',
-            confirmButtonText: 'Confirmar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
-                this._FuncionCriterioService.register(this.funcionCriterio, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            this.ready.emit(true);
-                            swal({
-                                title: 'Perfecto!',
-                                text: response.message,
-                                type: 'success',
-                                confirmButtonText: 'Aceptar'
-                            })
-                        } else {
-                            swal({
-                                title: 'Error!',
-                                text: response.message,
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                            })
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
+        this._FuncionCriterioService.register(this.funcionCriterio, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.ready.emit(true);
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
-                );
+                }
             }
-        });
+        );
     }
 }
+

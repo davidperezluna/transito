@@ -12,16 +12,13 @@ export class EditComponent implements OnInit {
     @Input() funcion: any = null;
     public errorMessage;
     public respuesta;
-    public formReady = false;
 
     constructor(
         private _FuncionService: SvCfgFuncionService,
         private _loginService: LoginService,
     ) { }
 
-    ngOnInit() {
-        console.log(this.funcion);
-    }
+    ngOnInit() { }
 
     onCancelar() { this.ready.emit(true); }
 
