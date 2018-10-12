@@ -1,5 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { GdTrazabilidadService } from '../../../services/gdTrazabilidad.service';
+import { GdCfgMedioCorrespondencia } from '../gdCfgMedioCorrespondencia.modelo';
+import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,46 +10,30 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@Input() trazabilidad: any = null;
-
+public gdCfgMedioCorrespondencia: GdCfgMedioCorrespondencia;
 public errorMessage;
-public file: any;
-
-public datos = {
-  'descripcion': null,
-  'idTrazabilidad': null,
-};
-
+public respuesta;
 
 constructor(
-  private _TrazabilidadService: GdTrazabilidadService,
+  private _GdCfgMedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
+    this.gdCfgMedioCorrespondencia = new GdCfgMedioCorrespondencia(null, null, null);
   }
-
+  
   onCancelar(){
     this.ready.emit(true);
   }
-
-  onFileChange(event) {
-    if (event.target.files.length > 0) {
-      const fileSelected: File = event.target.files[0];
-
-      this.file = new FormData();
-      this.file.append('file', fileSelected);
-    }
-  }
-
+  
   onEnviar(){
-    this.datos.idTrazabilidad = this.trazabilidad.id;
-
     let token = this._loginService.getToken();
-		this._TrazabilidadService.response(this.file, this.datos,token).subscribe(
+    
+		this._GdCfgMedioCorrespondenciaService.register(this.gdCfgMedioCorrespondencia,token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(response.data);
+          this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -58,7 +43,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El trazabilidad ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

@@ -927,9 +927,15 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="gdDocumento" [ngClass]="{'active' : ( addActive === 'gdDocumento')}" (click)="addActiveMenu('gdDocumento')">
+          <a class="nav-link" routerLink="gdTrazabilidad" [ngClass]="{'active' : ( addActive === 'gdTrazabilidad')}" (click)="addActiveMenu('gdTrazabilidad')">
             <i class="fa fa-angle-right"></i>
-            Buscar documento
+            Gestionar
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="gdCfgMedioCorrespondencia" [ngClass]="{'active' : ( addActive === 'gdCfgMedioCorrespondencia')}" (click)="addActiveMenu('gdCfgMedioCorrespondencia')">
+            <i class="fa fa-angle-right"></i>
+            Medio correspondencia
           </a>
         </li>
       </ul>

@@ -6,7 +6,7 @@
           <div class="card-header">
             <h5 class="card-title">
               <strong class="text-uppercase">Gestión Documental</strong>
-              <small>Tipo Correspondencia</small>
+              <small>Medio Correspondencia</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                   <i class="fa fa-plus"></i>
@@ -25,18 +25,20 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let gdCfgTipoCorrespondencia of gdCfgTipoCorrespondencias; let i = index">
-                  <td >{{ gdCfgTipoCorrespondencia.id }}</td>
-                  <td >{{ gdCfgTipoCorrespondencia.nombre }}</td>
+                <tr class="odd" *ngFor="let gdCfgMedioCorrespondencia of gdCfgMedioCorrespondencias; let i = index">
+                  <td >{{ gdCfgMedioCorrespondencia.id }}</td>
+                  <td >{{ gdCfgMedioCorrespondencia.nombre }}</td>
                   <td>
-                    <button (click)="onEdit(gdCfgTipoCorrespondencia)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
-                    <button (click)="onDelete(gdCfgTipoCorrespondencia.id)"  class="btn btn-xs btn-danger" type="button">
-                      <i class="fa fa-trash"></i>
-                      Eliminar
-                    </button> 
+                    <div class="btn-group" *ngIf="gdCfgMedioCorrespondencia.gestionable">
+                      <button (click)="onEdit(gdCfgMedioCorrespondencia)" class="btn btn-xs btn-info" type="button">
+                        <i class="fa fa-edit"></i>
+                        Editar
+                      </button> 
+                      <button (click)="onDelete(gdCfgMedioCorrespondencia.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                        Eliminar
+                      </button> 
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -46,6 +48,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [gdCfgTipoCorrespondencia]="gdCfgTipoCorrespondencia" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [gdCfgMedioCorrespondencia]="gdCfgMedioCorrespondencia" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

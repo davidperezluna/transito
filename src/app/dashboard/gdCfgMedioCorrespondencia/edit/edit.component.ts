@@ -1,41 +1,37 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { GdTrazabilidadService } from '../../../services/gdTrazabilidad.service';
-import {LoginService} from '../../../services/login.service';
+import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html'
 })
-export class EditComponent {
+export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() peticionario:any = null;
+@Input() gdCfgMedioCorrespondencia:any = null;
 public errorMessage;
 public respuesta;
-// public tipoIdentificacion: Array<any>
+public formReady = false;
 
 constructor(
-  private _PeticionarioService: GdTrazabilidadService,
+  private _GdCfgMedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
   private _loginService: LoginService,
-  ){
-  
-  }
+  ){}
 
-  onCancelar(){
-    this.ready.emit(true);
-  }
+  ngOnInit(){  }
+
+  onCancelar(){ this.ready.emit(true); }
+
   onEnviar(){
     let token = this._loginService.getToken();
-
-		this._PeticionarioService.edit(this.peticionario,token).subscribe(
+		this._GdCfgMedioCorrespondenciaService.edit(this.gdCfgMedioCorrespondencia,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

@@ -5,10 +5,10 @@ import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-show',
-  templateUrl: './show.component.html',
+  selector: 'app-template',
+  templateUrl: './template.component.html',
 })
-export class ShowComponent implements OnInit {
+export class TemplateComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() documento: any = null;
 public errorMessage;

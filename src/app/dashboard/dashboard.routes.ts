@@ -78,9 +78,10 @@ import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
 import { MsvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
 
-import { GdTrazabilidadRoutes } from './gdTrazabilidad/gdTrazabilidad.routes';
 import { GdDocumentoRoutes } from './gdDocumento/gdDocumento.routes';
+import { GdTrazabilidadRoutes } from './gdTrazabilidad/gdTrazabilidad.routes';
 import { GdCfgTipoCorrespondenciaRoutes } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.routes';
+import { GdCfgMedioCorrespondenciaRoutes } from './gdCfgMedioCorrespondencia/gdCfgMedioCorrespondencia.routes';
 
 import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
@@ -194,6 +195,7 @@ export const DashboardRoutes: Route[] = [
       ...GdDocumentoRoutes,
       ...GdTrazabilidadRoutes,
       ...GdCfgTipoCorrespondenciaRoutes,
+      ...GdCfgMedioCorrespondenciaRoutes,
       ...MflInfraccionRoutes,
       ...MflInfraccionCategoriaRoutes,
       ...MparqCostoTrayectoRoutes,
@@ -291,7 +293,6 @@ export const DashboardRoutes: Route[] = [
       ...InsumoBusquedaRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CfgEmpresaServicioRoutes,
-      ...GdCfgTipoCorrespondenciaRoutes
     ]
   }
 ];

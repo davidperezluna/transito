@@ -19,14 +19,24 @@ export class GdDocumentoService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(datos, token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url + "/new", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'INSERT', json, this.url)
-		);
+	register(formData, datos, token) {	
+		if (formData == null) {
+			let json = JSON.stringify(datos);
+			let params = "data=" + json + "&authorization=" + token;
+			let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+			return this._http.post(this.url + "/new", params, { headers: headers }).map(
+				res => res.json(),
+				this._loogerService.registerLog(token, 'INSERT', json, this.url)
+			);
+		} else {
+			let json = JSON.stringify(datos);
+			formData.append('data', json);
+			formData.append('authorization', token);
+			return this._http.post(this.url + "/new", formData).map(
+				res => res.json(),
+				this._loogerService.registerLog(token, 'INSERT', json, this.url)
+			);
+		}
 	}
 
 	delete(datos, token){
@@ -43,7 +53,7 @@ export class GdDocumentoService {
 
 	edit(datos,token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),
@@ -60,28 +70,14 @@ export class GdDocumentoService {
 
 	assign(datos, token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/assign", params, {headers: headers}).map(res => res.json());
 	}
 	
-	process(datos, token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/process", params, {headers: headers}).map(res => res.json());
-	}
-
-	response(datos, token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/response", params, {headers: headers}).map(res => res.json());
-	}
-
 	print(datos, token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		console.log(params);
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/print", params, {headers: headers}).map(res => res.json());

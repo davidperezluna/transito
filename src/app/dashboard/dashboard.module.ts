@@ -128,8 +128,10 @@ import { EmpresaModule } from './empresa/empresa.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 
-import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
 import { GdDocumentoModule } from './gdDocumento/gdDocumento.module';
+import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
+import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.module';
+import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdCfgMedioCorrespondencia.module';
 
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
@@ -154,7 +156,6 @@ import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
 
-import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.module';
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
 import { DashboardComponent } from './dashboard.component'; 
@@ -212,10 +213,11 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       MsvCaracterizacionModule,
       MsvCategoriaModule,
       GdDocumentoModule,
+      GdTrazabilidadModule,
       GdCfgTipoCorrespondenciaModule,
+      GdCfgMedioCorrespondenciaModule,
       MflInfraccionModule,
       MflInfraccionCategoriaModule,
-      GdTrazabilidadModule,
       MparqCostoTrayectoModule,
       MparqGruaModule,
       MparqGruaCiudadanoModule,
@@ -300,7 +302,6 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       FacturaInfraccionModule,
       //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
-      GdCfgTipoCorrespondenciaModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
     ],

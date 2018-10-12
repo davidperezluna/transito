@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GdTrazabilidadComponent } from './gdTrazabilidad.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { MgdPeticionarioService } from '../../services/gdPeticionario.service';
+import { GdTrazabilidadService } from '../../services/gdTrazabilidad.service';
 import { GdRemitenteService } from '../../services/gdRemitente.service';
 import { GdDocumentoService } from '../../services/gdDocumento.service';
 
@@ -16,7 +16,7 @@ import { SelectModule } from 'angular2-select';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [GdTrazabilidadComponent,NewComponent,EditComponent,ShowComponent],
     exports: [GdTrazabilidadComponent, NewComponent,EditComponent,ShowComponent],
-    providers:[GdRemitenteService,MgdPeticionarioService,GdDocumentoService]
+    providers:[GdRemitenteService,GdTrazabilidadService,GdDocumentoService]
 })
 
 export class GdTrazabilidadModule { }
