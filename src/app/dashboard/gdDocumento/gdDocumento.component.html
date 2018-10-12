@@ -120,7 +120,4 @@
         <app-print [documento]="documento" (ready)="ready($event)"></app-print>
       </div>
     </div>
-    <app-new *ngIf='formNew' (ready)="ready($event)" (readyPrint)="readyPrint($event)"></app-new>
-    <app-show *ngIf='formShow' [documento]="documento" (ready)="ready($event)" (readyDocument)="readyDocument($event)"></app-show>
-    <app-print *ngIf='formPrint' [documento]="documento" (ready)="ready($event)"></app-print>
 </div>
