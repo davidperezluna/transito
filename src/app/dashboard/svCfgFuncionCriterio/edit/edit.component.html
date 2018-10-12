@@ -14,7 +14,8 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Función id <strong class="text-danger">*</strong></label>
-                        <input type="number" class="form-control" [(ngModel)]="funcionCriterio.funcionId" name="funcionId" required />
+                        <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" required name="funcion">
+                        </ng-select>
                     </div>
                 </div>
             </form>

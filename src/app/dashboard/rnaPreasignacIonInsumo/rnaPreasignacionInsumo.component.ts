@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { SedeOperativaService } from '../../services/sedeOperativa.service';
 import { CfgCasoInsumoService } from '../../services/cfgCasoInsumo.service';
-import {RnaInsumoService} from '../../services/rnaInsumos.service';
+import { RnaInsumoService } from '../../services/rnaInsumos.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
@@ -36,6 +36,20 @@ constructor(
   ){}
 
   ngOnInit() {
+
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+      response => {
+        this.sedes = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
@@ -131,7 +145,4 @@ constructor(
 
 		});
   }
-
-
-
 }

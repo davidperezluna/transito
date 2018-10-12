@@ -87,21 +87,336 @@
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
               <a class="nav-link" routerLink="msvTalonario" [ngClass]="{'active' : ( addActive === 'msvTalonario')}" (click)="addActiveMenu('msvTalonario')">
-                <i class="fa fa-angle-right"></i> Talonarios
+                <i class="fa fa-angle-right"></i> Talonarios IPAT
+              </a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link" routerLink="svCfgFuncion" [ngClass]="{'active' : ( addActive === 'svCfgFuncion')}" (click)="addActiveMenu('svCfgFuncion')">
+                <i class="fa fa-angle-right"></i> Función Seg. Víal
               </a>
             </li>
           </ul>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="msvEvaluacion" [ngClass]="{'active' : ( addActive === 'msvEvaluacion')}" (click)="addActiveMenu('msvEvaluacion')">
-                <i class="fa fa-angle-right"></i> Plan estratégico
+              <a class="nav-link" routerLink="svCfgFuncionCriterio" [ngClass]="{'active' : ( addActive === 'svCfgFuncionCriterio')}" (click)="addActiveMenu('svCfgFuncionCriterio')">
+                <i class="fa fa-angle-right"></i> Función Criterio Seg. Víal
               </a>
             </li>
           </ul>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="msvRegistroIpat" [ngClass]="{'active' : ( addActive === 'msvRegistroIpat')}" (click)="addActiveMenu('msvRegistroIpat')">
-                <i class="fa fa-angle-right"></i> Registro Ipat
+              <a class="nav-link" routerLink="svCfgTemaCapacitacion" [ngClass]="{'active' : ( addActive === 'svCfgTemaCapacitacion')}" (click)="addActiveMenu('svCfgTemaCapacitacion')">
+                <i class="fa fa-angle-right"></i> Tema Capacitación
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgClaseActorVia" [ngClass]="{'active' : ( addActive === 'svCfgClaseActorVia')}" (click)="addActiveMenu('svCfgClaseActorVia')">
+                <i class="fa fa-angle-right"></i> Clase de Actor Víal
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgArea" [ngClass]="{'active' : ( addActive === 'svCfgArea')}"
+                (click)="addActiveMenu('svCfgArea')">
+                <i class="fa fa-angle-right"></i> Área
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgAseguradora" [ngClass]="{'active' : ( addActive === 'svCfgAseguradora')}"
+                (click)="addActiveMenu('svCfgAseguradora')">
+                <i class="fa fa-angle-right"></i> Aseguradora
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgCalzadaCarril" [ngClass]="{'active' : ( addActive === 'svCfgCalzadaCarril')}"
+                (click)="addActiveMenu('svCfgCalzadaCarril')">
+                <i class="fa fa-angle-right"></i> Calzada - Carril
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgCardinalidad" [ngClass]="{'active' : ( addActive === 'svCfgCardinalidad')}"
+                (click)="addActiveMenu('svCfgCardinalidad')">
+                <i class="fa fa-angle-right"></i> Cardinalidad
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgClaseChoque" [ngClass]="{'active' : ( addActive === 'svCfgClaseChoque')}"
+                (click)="addActiveMenu('svCfgClaseChoque')">
+                <i class="fa fa-angle-right"></i> Clase de Choque
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgCondicionVia" [ngClass]="{'active' : ( addActive === 'svCfgCondicionVia')}"
+                (click)="addActiveMenu('svCfgCondicionVia')">
+                <i class="fa fa-angle-right"></i> Condición Vía
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgControlVia" [ngClass]="{'active' : ( addActive === 'svCfgControlVia')}"
+                (click)="addActiveMenu('svCfgControlVia')">
+                <i class="fa fa-angle-right"></i> Control Vía
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgDisenio" [ngClass]="{'active' : ( addActive === 'svCfgDisenio')}"
+                (click)="addActiveMenu('svCfgDisenio')">
+                <i class="fa fa-angle-right"></i> Diseño
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgEntidadAccidente" [ngClass]="{'active' : ( addActive === 'svCfgEntidadAccidente')}"
+                (click)="addActiveMenu('svCfgEntidadAccidente')">
+                <i class="fa fa-angle-right"></i> Entidad Accidente
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgEstadoConductor" [ngClass]="{'active' : ( addActive === 'svCfgEstadoConductor')}"
+                (click)="addActiveMenu('svCfgEstadoConductor')">
+                <i class="fa fa-angle-right"></i> Estado Conductor
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgEstadoIluminacion" [ngClass]="{'active' : ( addActive === 'svCfgEstadoIluminacion')}"
+                (click)="addActiveMenu('svCfgEstadoIluminacion')">
+                <i class="fa fa-angle-right"></i> Estado Iluminación
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgEstadoTiempo" [ngClass]="{'active' : ( addActive === 'svCfgEstadoTiempo')}"
+                (click)="addActiveMenu('svCfgEstadoTiempo')">
+                <i class="fa fa-angle-right"></i> Estado Tiempo
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgEstadoVia" [ngClass]="{'active' : ( addActive === 'svCfgEstadoVia')}"
+                (click)="addActiveMenu('svCfgEstadoVia')">
+                <i class="fa fa-angle-right"></i> Estado Vía
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgFalla" [ngClass]="{'active' : ( addActive === 'svCfgFalla')}"
+                (click)="addActiveMenu('svCfgFalla')">
+                <i class="fa fa-angle-right"></i> Falla
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgGeometria" [ngClass]="{'active' : ( addActive === 'svCfgGeometria')}"
+                (click)="addActiveMenu('svCfgGeometria')">
+                <i class="fa fa-angle-right"></i> Geometría
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgGradoExamen" [ngClass]="{'active' : ( addActive === 'svCfgGradoExamen')}"
+                (click)="addActiveMenu('svCfgGradoExamen')">
+                <i class="fa fa-angle-right"></i> Grado Examen
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgGravedadVictima" [ngClass]="{'active' : ( addActive === 'svCfgGravedadVictima')}"
+                (click)="addActiveMenu('svCfgGravedadVictima')">
+                <i class="fa fa-angle-right"></i> Gravedad Victima
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgHipotesis" [ngClass]="{'active' : ( addActive === 'svCfgHipotesis')}"
+                (click)="addActiveMenu('svCfgHipotesis')">
+                <i class="fa fa-angle-right"></i> Hipotesis
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgHospital" [ngClass]="{'active' : ( addActive === 'svCfgHospital')}"
+                (click)="addActiveMenu('svCfgHospital')">
+                <i class="fa fa-angle-right"></i> Hospital
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgIluminacion" [ngClass]="{'active' : ( addActive === 'svCfgIluminacion')}"
+                (click)="addActiveMenu('svCfgIluminacion')">
+                <i class="fa fa-angle-right"></i> Iluminación
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgLugarImpacto" [ngClass]="{'active' : ( addActive === 'svCfgLugarImpacto')}"
+                (click)="addActiveMenu('svCfgLugarImpacto')">
+                <i class="fa fa-angle-right"></i> Lugar de Impacto
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgMaterial" [ngClass]="{'active' : ( addActive === 'svCfgMaterial')}"
+                (click)="addActiveMenu('svCfgMaterial')">
+                <i class="fa fa-angle-right"></i> Material
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgMotivoAnulacion" [ngClass]="{'active' : ( addActive === 'svCfgMotivoAnulacion')}"
+                (click)="addActiveMenu('svCfgMotivoAnulacion')">
+                <i class="fa fa-angle-right"></i> Motivo Anulación
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgNacionalidad" [ngClass]="{'active' : ( addActive === 'svCfgNacionalidad')}"
+                (click)="addActiveMenu('svCfgNacionalidad')">
+                <i class="fa fa-angle-right"></i> Nacionalidad
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgRequiereEmpresa" [ngClass]="{'active' : ( addActive === 'svCfgRequiereEmpresa')}"
+                (click)="addActiveMenu('svCfgRequiereEmpresa')">
+                <i class="fa fa-angle-right"></i> Requiere Empresa
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgResultadoExamen" [ngClass]="{'active' : ( addActive === 'svCfgResultadoExamen')}"
+                (click)="addActiveMenu('svCfgResultadoExamen')">
+                <i class="fa fa-angle-right"></i> Resultado Examen
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgSector" [ngClass]="{'active' : ( addActive === 'svCfgSector')}"
+                (click)="addActiveMenu('svCfgSector')">
+                <i class="fa fa-angle-right"></i> Sector
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgSustanciaPeligrosa" [ngClass]="{'active' : ( addActive === 'svCfgSustanciaPeligrosa')}"
+                (click)="addActiveMenu('svCfgSustanciaPeligrosa')">
+                <i class="fa fa-angle-right"></i> Sustancias Peligrosas
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgTipoArea" [ngClass]="{'active' : ( addActive === 'svCfgTipoArea')}"
+                (click)="addActiveMenu('svCfgTipoArea')">
+                <i class="fa fa-angle-right"></i> Tipo Área
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgTipoControl" [ngClass]="{'active' : ( addActive === 'svCfgTipoControl')}"
+                (click)="addActiveMenu('svCfgTipoControl')">
+                <i class="fa fa-angle-right"></i> Tipo Control
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgTipoGeometria" [ngClass]="{'active' : ( addActive === 'svCfgTipoGeometria')}"
+                (click)="addActiveMenu('svCfgTipoGeometria')">
+                <i class="fa fa-angle-right"></i> Tipo Geometría
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgTipoVia" [ngClass]="{'active' : ( addActive === 'svCfgTipoVia')}"
+                (click)="addActiveMenu('svCfgTipoVia')">
+                <i class="fa fa-angle-right"></i> Tipo Vía
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgTipoVictima" [ngClass]="{'active' : ( addActive === 'svCfgTipoVictima')}" (click)="addActiveMenu('svCfgTipoVictima')">
+                <i class="fa fa-angle-right"></i> Tipo Victima
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgUnidadReceptora" [ngClass]="{'active' : ( addActive === 'svCfgUnidadReceptora')}"
+                (click)="addActiveMenu('svCfgUnidadReceptora')">
+                <i class="fa fa-angle-right"></i> Unidad Receptora
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgUtilizacion" [ngClass]="{'active' : ( addActive === 'svCfgUtilizacion')}"
+                (click)="addActiveMenu('svCfgUtilizacion')">
+                <i class="fa fa-angle-right"></i> Utilización
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgVisual" [ngClass]="{'active' : ( addActive === 'svCfgVisual')}"
+                (click)="addActiveMenu('svCfgVisual')">
+                <i class="fa fa-angle-right"></i> Visibilidad
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgVisualDisminuida" [ngClass]="{'active' : ( addActive === 'svCfgVisualDisminuida')}"
+                (click)="addActiveMenu('svCfgVisualDisminuida')">
+                <i class="fa fa-angle-right"></i> Visibilidad Disminuida
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgZona" [ngClass]="{'active' : ( addActive === 'svCfgZona')}"
+                (click)="addActiveMenu('svCfgZona')">
+                <i class="fa fa-angle-right"></i> Zona
               </a>
             </li>
           </ul>
@@ -205,11 +520,7 @@
               </a>
             </li>
             <!---->
-            <li class="nav-item">
-              <a class="nav-link" routerLink="conceptoParametro" [ngClass]="{'active' : ( addActive === 'concepto')}" (click)="addActiveMenu('concepto')">
-                <i class="fa fa-angle-right"></i> Concepto
-              </a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgplaca" [ngClass]="{'active' : ( addActive === 'cfgplaca')}" (click)="addActiveMenu('cfgplaca')">
                 <i class="fa fa-angle-right"></i> Placa
@@ -384,6 +695,12 @@
                 (click)="addActiveMenu('cvCfgInteres')">
                 <i class="fa fa-angle-right"></i>
                 Interes
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="conceptoParametro" [ngClass]="{'active' : ( addActive === 'concepto')}" (click)="addActiveMenu('concepto')">
+                <i class="fa fa-angle-right"></i> Concepto
               </a>
             </li>
           </ul>
@@ -565,6 +882,28 @@
             (click)="addActiveMenu('svCapacitacion')">
             <i class="fa fa-angle-right"></i>
             <!--HU-08-->Capacitaciones
+          </a>
+        </li>
+      </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvTalonario" [ngClass]="{'active' : ( addActive === 'msvTalonario')}" (click)="addActiveMenu('msvTalonario')">
+            <i class="fa fa-angle-right"></i> Talonarios
+          </a>
+        </li>
+      </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvEvaluacion" [ngClass]="{'active' : ( addActive === 'msvEvaluacion')}" (click)="addActiveMenu('msvEvaluacion')">
+            <i class="fa fa-angle-right"></i> Plan estratégico
+          </a>
+        </li>
+      </ul>
+      <ul class="nav flex-column nav-third-level">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="msvRegistroIpat" [ngClass]="{'active' : ( addActive === 'msvRegistroIpat')}"
+            (click)="addActiveMenu('msvRegistroIpat')">
+            <i class="fa fa-angle-right"></i> Registro Ipat
           </a>
         </li>
       </ul>
@@ -878,7 +1217,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="rnaPreasignacionInsumo" [ngClass]="{'active' : ( addActive === 'rnaPreasignacionInsumo')}" (click)="addActiveMenu('rnaPreasignacionInsumo')">
-            <i class="fa fa-angle-right"></i> Preasignación Insumos
+            <i class="fa fa-angle-right"></i> Reasignación Insumos
           </a>
         </li>
       </ul>

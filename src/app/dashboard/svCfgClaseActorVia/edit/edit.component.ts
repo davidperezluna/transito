@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() claseActorVia: any = null;
+    @Input() claseActorVial: any = null;
     public errorMessage;
     public respuesta;
     public formReady = false;
@@ -20,14 +20,14 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.claseActorVia);
+        console.log(this.claseActorVial);
     }
 
     onCancelar() { this.ready.emit(true); }
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this._ClaseActorViaService.edit(this.claseActorVia, token).subscribe(
+        this._ClaseActorViaService.edit(this.claseActorVial, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);
@@ -36,7 +36,7 @@ export class EditComponent implements OnInit {
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
@@ -46,7 +46,7 @@ export class EditComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-
-            });
+            }
+        );
     }
 }

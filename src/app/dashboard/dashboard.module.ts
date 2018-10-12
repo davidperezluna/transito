@@ -54,6 +54,44 @@ import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
 import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
 import { SvCfgFuncionCriterioModule } from "./svCfgFuncionCriterio/svCfgFuncionCriterio.module";
 
+import { SvCfgAreaModule } from "./svCfgArea/svCfgArea.module";
+import { SvCfgTipoAreaModule } from "./svCfgTipoArea/svCfgTipoArea.module";
+import { SvCfgAseguradoraModule } from "./svCfgAseguradora/svCfgAseguradora.module";
+import { SvCfgCalzadaCarrilModule } from "./svCfgCalzadaCarril/svCfgCalzadaCarril.module";
+import { SvCfgCardinalidadModule } from "./svCfgCardinalidad/svCfgCardinalidad.module";
+import { SvCfgClaseChoqueModule } from "./svCfgClaseChoque/svCfgClaseChoque.module";
+import { SvCfgCondicionViaModule } from "./svCfgCondicionVia/svCfgCondicionVia.module";
+import { SvCfgControlViaModule } from "./svCfgControlVia/svCfgControlVia.module";
+import { SvCfgDisenioModule } from "./svCfgDisenio/svCfgDisenio.module";
+import { SvCfgEntidadAccidenteModule } from "./svCfgEntidadAccidente/svCfgEntidadAccidente.module";
+import { SvCfgEstadoConductorModule } from "./svCfgEstadoConductor/svCfgEstadoConductor.module";
+import { SvCfgEstadoIluminacionModule } from "./svCfgEstadoIluminacion/svCfgEstadoIluminacion.module";
+import { SvCfgEstadoTiempoModule } from "./svCfgEstadoTiempo/svCfgEstadoTiempo.module";
+import { SvCfgEstadoViaModule } from "./svCfgEstadoVia/svCfgEstadoVia.module";
+import { SvCfgFallaModule } from "./svCfgFalla/svCfgFalla.module";
+import { SvCfgGeometriaModule } from "./svCfgGeometria/svCfgGeometria.module";
+import { SvCfgGradoExamenModule } from "./svCfgGradoExamen/svCfgGradoExamen.module";
+import { SvCfgGravedadVictimaModule } from "./svCfgGravedadVictima/svCfgGravedadVictima.module";
+import { SvCfgHipotesisModule } from "./svCfgHipotesis/svCfgHipotesis.module";
+import { SvCfgHospitalModule } from "./svCfgHospital/svCfgHospital.module";
+import { SvCfgIluminacionModule } from "./svCfgIluminacion/svCfgIluminacion.module";
+import { SvCfgLugarImpactoModule } from "./svCfgLugarImpacto/svCfgLugarImpacto.module";
+import { SvCfgMaterialModule } from "./svCfgMaterial/svCfgMaterial.module";
+import { SvCfgMotivoAnulacionModule } from "./svCfgMotivoAnulacion/svCfgMotivoAnulacion.module";
+import { SvCfgNacionalidadModule } from "./svCfgNacionalidad/svCfgNacionalidad.module";
+import { SvCfgRequiereEmpresaModule } from "./svCfgRequiereEmpresa/svCfgRequiereEmpresa.module";
+import { SvCfgResultadoExamenModule } from "./svCfgResultadoExamen/svCfgResultadoExamen.module";
+import { SvCfgSectorModule } from "./svCfgSector/svCfgSector.module";
+import { SvCfgSustanciaPeligrosaModule } from "./svCfgSustanciaPeligrosa/svCfgSustanciaPeligrosa.module"; 
+import { SvCfgTipoControlModule } from "./svCfgTipoControl/svCfgTipoControl.module";
+import { SvCfgTipoGeometriaModule } from "./svCfgTipoGeometria/svCfgTipoGeometria.module";
+import { SvCfgTipoViaModule } from "./svCfgTipoVia/svCfgTipoVia.module";
+import { SvCfgTipoVictimaModule } from "./svCfgTipoVictima/svCfgTipoVictima.module";
+import { SvCfgUnidadReceptoraModule } from "./svCfgUnidadReceptora/svCfgUnidadReceptora.module";
+import { SvCfgUtilizacionModule } from "./svCfgUtilizacion/svCfgUtilizacion.module";
+import { SvCfgVisualModule } from "./svCfgVisual/svCfgVisual.module";
+import { SvCfgVisualDisminuidaModule } from "./svCfgVisualDisminuida/svCfgVisualDisminuida.module";
+import { SvCfgZonaModule } from "./svCfgZona/svCfgZona.module";
 import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
 import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
 
@@ -167,6 +205,8 @@ import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
 import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
+//import { MsvSenialModule } from './msvSenial/msvSenial.module';
+
 
 @NgModule({
   imports: [
@@ -204,11 +244,51 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgAsignacionPlacaSedeModule,
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
+      
       SvCapacitacionModule,
       SvCfgFuncionModule,
       SvCfgFuncionCriterioModule,
       SvCfgClaseActorViaModule,
       SvCfgTemaCapacitacionModule,
+      SvCfgAreaModule,
+      SvCfgTipoAreaModule,
+      SvCfgAseguradoraModule,
+      SvCfgCalzadaCarrilModule,
+      SvCfgCardinalidadModule,
+      SvCfgClaseChoqueModule,
+      SvCfgCondicionViaModule,
+      SvCfgControlViaModule,
+      SvCfgDisenioModule,
+      SvCfgEntidadAccidenteModule,
+      SvCfgEstadoConductorModule,
+      SvCfgEstadoIluminacionModule,
+      SvCfgEstadoTiempoModule,
+      SvCfgEstadoViaModule,
+      SvCfgFallaModule,
+      SvCfgGeometriaModule,
+      SvCfgGradoExamenModule,
+      SvCfgGravedadVictimaModule,
+      SvCfgHipotesisModule,
+      SvCfgHospitalModule,
+      SvCfgIluminacionModule,
+      SvCfgLugarImpactoModule,
+      SvCfgMaterialModule,
+      SvCfgMotivoAnulacionModule,
+      SvCfgNacionalidadModule,
+      SvCfgRequiereEmpresaModule,
+      SvCfgResultadoExamenModule,
+      SvCfgSectorModule,
+      SvCfgSustanciaPeligrosaModule,
+      SvCfgTipoControlModule,
+      SvCfgTipoGeometriaModule,
+      SvCfgTipoViaModule,
+      SvCfgTipoVictimaModule,
+      SvCfgUnidadReceptoraModule,
+      SvCfgUtilizacionModule,
+      SvCfgVisualModule,
+      SvCfgVisualDisminuidaModule,
+      SvCfgZonaModule,
+
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,

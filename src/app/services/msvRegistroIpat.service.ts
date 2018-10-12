@@ -5,7 +5,7 @@ import  'rxjs/add/operator/map';
 
 @Injectable()
 export class MsvRegistroIpatService {
-	private url = environment.apiUrl + "msvRegistroIpat";
+	private url = environment.apiUrl + "seguridadvial/svregistroipat";
 	public identity;
 	public token;
 
@@ -16,10 +16,10 @@ export class MsvRegistroIpatService {
 		return this._http.get(this.url + "/").map(res => res.json());
 	}
 
-	register(msvRegistroIpat, token) {
-		let json = JSON.stringify(msvRegistroIpat);
+	register(datos, token) {
+		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;
-		console.log(params);
+		//console.log(params);
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers })
 			.map(res => res.json());
