@@ -28,7 +28,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._ColorService.editColor(this.color,token).subscribe(
+		this._ColorService.edit(this.color,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

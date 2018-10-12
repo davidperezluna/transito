@@ -12,6 +12,7 @@ import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { Router } from "@angular/router";
 import { EmpresaService } from "../../../../services/empresa.service";
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
 
 
 import swal from 'sweetalert2';
@@ -58,6 +59,8 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     public ciudadanoSelected: any;
     public acreedor = 'false';
     public vehiculosAcreedor;
+    public cfgEntidadJudiciales: any;
+    public cfgEntidadJudicialSelected: any;
     public table: any;
     public formIndex = true;
     public vehiculoAcreedor: any; 
@@ -73,7 +76,8 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         { 'value': 8, 'label': "OCHO" },
         { 'value': 9, 'label': "NUEVE" }
     ];
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'acreedoresEmpresas': [],
         'acreedoresCiudadanos': [],
         'tipoAlerta': [],
@@ -81,6 +85,7 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'tramiteFormulario': null,
         'facturaId': null,
         'vehiculoPlaca': null,
+        'cfgEntidadJudicial':null
     };
     public datos2 = {
         'vehiculoId': null,
@@ -89,6 +94,7 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     public tipoIdentificaciones = [];
 
     constructor(
+        private _CfgEntidadJudicialService: CfgEntidadJudicialService,
         private _CfgTipoAlertaService: CfgTipoAlertaService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _BancoService: BancoService,
@@ -103,6 +109,20 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     ) { }
  
     ngOnInit() {
+
+        this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe(
+            response => {
+                this.cfgEntidadJudiciales = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        )
 
         this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
             response => {
@@ -168,6 +188,7 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
         this.datos.facturaId = this.factura.id;
+        this.datos.cfgEntidadJudicial = this.cfgEntidadJudicialSelected;
         this.datos.tramiteFormulario = 'rnma-inscripcionalertaprenda';
                
         this._VehiculoAcreedorService.register(this.datos, token).subscribe(

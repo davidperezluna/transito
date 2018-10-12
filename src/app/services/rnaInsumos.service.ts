@@ -33,6 +33,24 @@ export class RnaInsumoService {
 		);
 	}
 
+	isExistencia(datos){
+		let json = JSON.stringify(datos);
+		let params = "json="+json;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/isExistencia", params, {headers: headers}).map(
+			res => res.json(),
+		);
+	}
+	
+	reasignacionSustrato(datos){
+		let json = JSON.stringify(datos);
+		let params = "json="+json;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/reasignacionSustrato", params, {headers: headers}).map(
+			res => res.json(),
+		);
+	}
+
 	showLote(loteInsumoId,token){
 		let json = JSON.stringify(loteInsumoId);
 		let params = "json="+json+"&authorization="+token;

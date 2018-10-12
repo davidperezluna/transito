@@ -72,7 +72,7 @@ export class ExportComponent implements OnInit {
                     sPrevious: '<',
                     sNext: '>',
                     sLast: '>>'
-                }
+                } 
             }
         });
         this.table = $('#dataTables-example').DataTable();

@@ -62,7 +62,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
       ) {
       }
     })
-		this._ColorService.getColor().subscribe(
+		this._ColorService.index().subscribe(
       response => {
         // this.colors = response.data;
         let timeoutId = setTimeout(() => {  
@@ -125,7 +125,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ColorService.deleteColor(token,id).subscribe(
+        this._ColorService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

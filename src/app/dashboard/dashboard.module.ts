@@ -39,6 +39,14 @@ import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorc
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
 
 import { CfgCdaModule } from './cfgCda/cfgCda.module';
+import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
+import { VhloCfgEmpresaGpsModule } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.module';
+import { VhloCfgTipoRodajeModule } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.module';
+import { VhloCfgTipoCabinaModule } from './vhloCfgTipoCabina/vhloCfgTipoCabina.module';
+import { VhloCfgTipoMaquinariaModule } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.module';
+import { VhloCfgClaseMaquinariaModule } from './vhloCfgClaseMaquinaria/vhloCfgClaseMaquinaria.module';
+import { VhloCfgSubpartidaArancelariaModule } from './vhloCfgSubpartidaArancelaria/vhloCfgSubpartidaArancelaria.module';
+import { VhloCfgCondicionIngresoModule } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
 import { SoatModule } from './soat/soat.module';
 
@@ -46,6 +54,7 @@ import { SvCapacitacionModule } from "./svCapacitacion/svCapacitacion.module";
 import { SvCfgFuncionModule } from "./svCfgFuncion/svCfgFuncion.module";
 import { SvCfgFuncionCriterioModule } from "./svCfgFuncionCriterio/svCfgFuncionCriterio.module";
 
+<<<<<<< HEAD
 import { SvCfgAreaModule } from "./svCfgArea/svCfgArea.module";
 import { SvCfgTipoAreaModule } from "./svCfgTipoArea/svCfgTipoArea.module";
 import { SvCfgAseguradoraModule } from "./svCfgAseguradora/svCfgAseguradora.module";
@@ -84,6 +93,10 @@ import { SvCfgUtilizacionModule } from "./svCfgUtilizacion/svCfgUtilizacion.modu
 import { SvCfgVisualModule } from "./svCfgVisual/svCfgVisual.module";
 import { SvCfgVisualDisminuidaModule } from "./svCfgVisualDisminuida/svCfgVisualDisminuida.module";
 import { SvCfgZonaModule } from "./svCfgZona/svCfgZona.module";
+=======
+import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
+import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
+>>>>>>> 3337381a58ebae05789f2534ac2d0501c455ccce
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
@@ -91,7 +104,6 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
-import { MgdTipoCorrespondenciaModule } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.module';
 
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
@@ -157,8 +169,10 @@ import { EmpresaModule } from './empresa/empresa.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
 
-import { MgdRegistroModule } from './mgdRegistro/mgdRegistro.module';
-import { MgdDocumentoModule } from './mgdDocumento/mgdDocumento.module';
+import { GdDocumentoModule } from './gdDocumento/gdDocumento.module';
+import { GdTrazabilidadModule } from './gdTrazabilidad/gdTrazabilidad.module';
+import { GdCfgTipoCorrespondenciaModule } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.module';
+import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdCfgMedioCorrespondencia.module';
 
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
@@ -177,11 +191,13 @@ import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
-import { RnmaRegistroMaquinariaModule } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.module';
+import { rnaPreasignacionInsumoModule } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.module';
+import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
 import { DashboardComponent } from './dashboard.component'; 
@@ -192,10 +208,13 @@ import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
 import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
+<<<<<<< HEAD
 //import { MsvSenialModule } from './msvSenial/msvSenial.module';
 import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
 import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
 
+=======
+>>>>>>> 3337381a58ebae05789f2534ac2d0501c455ccce
 
 @NgModule({
   imports: [
@@ -282,11 +301,12 @@ import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCa
       MsvRevisionModule,
       MsvCaracterizacionModule,
       MsvCategoriaModule,
-      MgdDocumentoModule,
-      MgdTipoCorrespondenciaModule,
+      GdDocumentoModule,
+      GdTrazabilidadModule,
+      GdCfgTipoCorrespondenciaModule,
+      GdCfgMedioCorrespondenciaModule,
       MflInfraccionModule,
       MflInfraccionCategoriaModule,
-      MgdRegistroModule,
       MparqCostoTrayectoModule,
       MparqGruaModule,
       MparqGruaCiudadanoModule,
@@ -314,6 +334,14 @@ import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCa
       CvCfgPorcentajeInicialModule,
       CvAcuerdoPagoModule,
       CfgCdaModule,
+      VhloCfgOrigenRegistroModule,
+      VhloCfgEmpresaGpsModule,
+      VhloCfgTipoRodajeModule,
+      VhloCfgTipoCabinaModule,
+      VhloCfgTipoMaquinariaModule,
+      VhloCfgClaseMaquinariaModule,
+      VhloCfgSubpartidaArancelariaModule,
+      VhloCfgCondicionIngresoModule,
       VehiculoTecnoMecanicaModule,
       SoatModule,
       CfgComparendoEstadoModule,
@@ -343,7 +371,7 @@ import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCa
       CfgCausalLimitacionModule,
       MsvTalonarioModule,
       rnaRegistroInsumosModule,
-      RnmaRegistroMaquinariaModule,
+      RnmaPreregistroModule,
       rnaAsignacionInsumosModule,
       LimitacionModule,
       CfgTipoProcesoModule,
@@ -365,6 +393,7 @@ import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCa
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
+      rnaPreasignacionInsumoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

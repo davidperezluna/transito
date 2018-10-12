@@ -34,6 +34,14 @@ import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInvent
 import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.routes';
 
 import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
+import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
+import { VhloCfgEmpresaGpsRoutes } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.routes';
+import { VhloCfgTipoRodajeRoutes } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.routes';
+import { VhloCfgTipoCabinaRoutes } from './vhloCfgTipoCabina/vhloCfgTipoCabina.routes';
+import { VhloCfgTipoMaquinariaRoutes } from './vhloCfgTipoMaquinaria/vhloCfgTipoMaquinaria.routes';
+import { VhloCfgClaseMaquinariaRoutes } from './vhloCfgClaseMaquinaria/vhloCfgClaseMaquinaria.routes';
+import { VhloCfgSubpartidaArancelariaRoutes } from './vhloCfgSubpartidaArancelaria/vhloCfgSubpartidaArancelaria.routes';
+import { VhloCfgCondicionIngresoRoutes } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
 import { SoatRoutes } from './soat/soat.routes';
 
@@ -79,6 +87,9 @@ import { SvCfgVisualRoutes } from './svCfgVisual/svCfgVisual.routes';
 import { SvCfgVisualDisminuidaRoutes } from './svCfgVisualDisminuida/svCfgVisualDisminuida.routes';
 import { SvCfgZonaRoutes } from './svCfgZona/svCfgZona.routes';
 
+import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
+import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
+
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
@@ -105,9 +116,10 @@ import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
 import { MsvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
 
-import { MgdRegistroRoutes } from './mgdRegistro/mgdRegistro.routes';
-import { MgdDocumentoRoutes } from './mgdDocumento/mgdDocumento.routes';
-import { MgdTipoCorrespondenciaRoutes } from './mgdTipoCorrespondencia/mgdTipoCorrespondencia.routes';
+import { GdDocumentoRoutes } from './gdDocumento/gdDocumento.routes';
+import { GdTrazabilidadRoutes } from './gdTrazabilidad/gdTrazabilidad.routes';
+import { GdCfgTipoCorrespondenciaRoutes } from './gdCfgTipoCorrespondencia/gdCfgTipoCorrespondencia.routes';
+import { GdCfgMedioCorrespondenciaRoutes } from './gdCfgMedioCorrespondencia/gdCfgMedioCorrespondencia.routes';
 
 import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
@@ -159,7 +171,8 @@ import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimita
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
-import { RnmaRegistroMaquinariaRoutes } from './rnmaRegistroMaquinaria/rnmaRegistroMaquinaria.routes';
+import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
+import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
 import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
@@ -179,14 +192,16 @@ import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
-import { DashboardComponent } from '.';
 
-
+<<<<<<< HEAD
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
 //import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
 //import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
 import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
+=======
+import { DashboardComponent } from '.';
+>>>>>>> 3337381a58ebae05789f2534ac2d0501c455ccce
 
 export const DashboardRoutes: Route[] = [
   {
@@ -224,9 +239,10 @@ export const DashboardRoutes: Route[] = [
       ...MsvEvaluacionRoutes,
       ...MsvRevisionRoutes,
       ...MsvCategoriaRoutes,
-      ...MgdDocumentoRoutes,
-      ...MgdRegistroRoutes,
-      ...MgdTipoCorrespondenciaRoutes,
+      ...GdDocumentoRoutes,
+      ...GdTrazabilidadRoutes,
+      ...GdCfgTipoCorrespondenciaRoutes,
+      ...GdCfgMedioCorrespondenciaRoutes,
       ...MflInfraccionRoutes,
       ...MflInfraccionCategoriaRoutes,
       ...MparqCostoTrayectoRoutes,
@@ -260,6 +276,14 @@ export const DashboardRoutes: Route[] = [
       ...MsvSenialInventarioRoutes,
       ...CfgSvUnidadMedidaRoutes,
       ...CfgCdaRoutes,
+      ...VhloCfgOrigenRegistroRoutes,
+      ...VhloCfgEmpresaGpsRoutes,
+      ...VhloCfgTipoRodajeRoutes,
+      ...VhloCfgTipoCabinaRoutes,
+      ...VhloCfgTipoMaquinariaRoutes,
+      ...VhloCfgClaseMaquinariaRoutes,
+      ...VhloCfgSubpartidaArancelariaRoutes,
+      ...VhloCfgCondicionIngresoRoutes,
       ...VehiculoTecnoMecanicaRoutes,
 
       ...SoatRoutes,
@@ -334,7 +358,7 @@ export const DashboardRoutes: Route[] = [
       ...MsvTalonarioRoutes,
       //...MsvTCAsignacionRoutes, 
       ...ConceptoParametroRoutes,
-      ...RnmaRegistroMaquinariaRoutes,
+      ...RnmaPreregistroRoutes,
       ...MsvRegistroIpatRoutes,
       ...CfgGravedadRoutes,
       ...CfgClaseAccidenteRoutes,
@@ -355,7 +379,8 @@ export const DashboardRoutes: Route[] = [
       ...RpcccInventarioDocumentalRoutes,
       ...InsumoBusquedaRoutes,
       ...RnaCertificadoTradicionRoutes,
-      ...CfgEmpresaServicioRoutes
+      ...CfgEmpresaServicioRoutes,
+      ...rnaPreasignacionInsumoRoutes
     ]
   }
 ];

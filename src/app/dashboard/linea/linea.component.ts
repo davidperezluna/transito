@@ -40,7 +40,7 @@ export class LineaComponent implements OnInit {
       ) {
       }
     })
-		this._LineaService.getLinea().subscribe(
+		this._LineaService.index().subscribe(
 				response => {
           this.lineas = response.data;
           let timeoutId = setTimeout(() => {  
@@ -87,7 +87,7 @@ export class LineaComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteLinea(id:any){
+  delete(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -101,7 +101,7 @@ export class LineaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._LineaService.deleteLinea(token,id).subscribe(
+        this._LineaService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

@@ -12,6 +12,7 @@ import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { Router } from "@angular/router";
 import { EmpresaService } from "../../../../services/empresa.service";
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
 
 
 import swal from 'sweetalert2';
@@ -26,7 +27,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() banco: any = null;
     @Input() factura: any = null;
-
+ 
     public placa: CfgPlaca = null;
     public errorMessage;
     public respuesta;
@@ -55,6 +56,8 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     public propietario = true;
     public propietarioPresente = false;
     public ciudadanoSelected: any;
+    public cfgEntidadJudiciales: any;
+    public cfgEntidadJudicialSelected: any;
     public acreedor = 'false';
     public vehiculosAcreedor;
     public table: any;
@@ -72,7 +75,8 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         { 'value': 8, 'label': "OCHO" },
         { 'value': 9, 'label': "NUEVE" }
     ];
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'acreedoresEmpresas': [],
         'acreedoresCiudadanos': [],
         'tipoAlerta': [],
@@ -80,6 +84,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'tramiteFormulario': null,
         'facturaId': null,
         'vehiculoPlaca': null,
+        'cfgEntidadJudicial':null
     };
     public datos2 = {
         'vehiculoId': null,
@@ -88,6 +93,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     public tipoIdentificaciones = [];
 
     constructor(
+        private _CfgEntidadJudicialService: CfgEntidadJudicialService,
         private _CfgTipoAlertaService: CfgTipoAlertaService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _BancoService: BancoService,
@@ -103,6 +109,19 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
  
     ngOnInit() {
 
+        this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe(
+            response => {
+                this.cfgEntidadJudiciales = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
         this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
             response => {
                 this.tipoIdentificaciones = response;
@@ -152,11 +171,8 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
             }); 
         
 
-    }
-
+    }    
     
-    
-   
     enviarTramite() {
         // this.datos.vehiculo = this.vehiculo.placa;
         //this.datos.banco = this.banco.nombre;
@@ -166,6 +182,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
+        this.datos.cfgEntidadJudicial = this.cfgEntidadJudicialSelected;
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rna-inscripcionalertaprenda';
                

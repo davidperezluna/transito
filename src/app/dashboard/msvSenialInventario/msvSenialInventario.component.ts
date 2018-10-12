@@ -18,6 +18,8 @@ declare var $: any;
 export class MsvSenialInventarioComponent implements OnInit {
     public errorMessage;
     public formLocationSenial = false;
+    public formNewBodega = false;
+    public formNewMunicipio = false;
     public formIndex = false;
     public formSearch = true;
     public table: any = null;
@@ -192,6 +194,24 @@ export class MsvSenialInventarioComponent implements OnInit {
     onLocation(inventario) {
         this.inventario = inventario;
         this.formLocationSenial = true;
+        this.formIndex = false;
+        if (this.table) {
+            this.table.destroy();
+        }
+    }
+
+    onNewSenialMunicipio() {
+        this.formNewMunicipio = true;
+        this.formNewBodega = false;
+        this.formIndex = false;
+        if (this.table) {
+            this.table.destroy();
+        }
+    }
+
+    onNewSenialBodega() {
+        this.formNewBodega = true;
+        this.formNewMunicipio = false;
         this.formIndex = false;
         if (this.table) {
             this.table.destroy();

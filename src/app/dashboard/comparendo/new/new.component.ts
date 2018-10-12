@@ -28,7 +28,15 @@ export class NewComponent implements OnInit {
   public comparendo: Comparendo;
   public inmovilizacion: Inmovilizacion;
   public errorMessage;
-  public respuesta;
+
+  public horas = [
+    '00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'
+  ];
+
+  public minutos = [
+    '00', '10', '20', '30', '40', '50'
+  ];
+
   public consecutivo: any = null;
   public edad: any = null;
   public funcionario: any;
@@ -39,26 +47,55 @@ export class NewComponent implements OnInit {
   public placa: any;
   public identificacion: any;
   public propietariosVehiculo: any;
+
   public isCiudadano = false;
   public isEmpresa = false;
+  
   public agentesTransito: any;
   public agenteTransitoSelected: any;
+
   public municipios: any;
   public municipioSelected: any;
   public municipioNacimientoSelected: any;
+  public municipioMatriculadoSelected: any;
+
+  public infracciones: any;
+  public infraccionSelected: any;
+
+  public servicios: any;
+  public servicioSelected: any;
+
+  public tiposVehiculo: any;
+  public tipoVehiculoSelected: any;
+
+  public radiosAccion: any;
+  public radioAccionSelected: any;
+
+  public modalidaesTransporte: any;
+  public modalidadTransporteSelected: any;
+
+  public transportesPasajero: any;
+  public transportePasajeroSelected: any;
+
+  public transportesEspecial: any;
+  public transporteEspecialSelected: any;
+
   public infractorTipos: any;
   public infractorTipoSelected: any;
   public infraccion: any = null;
+
   public categorias: any;
   public categoriaSelected: any;
+
   public patios: any;
   public patioSelected: any;
+
   public gruas: any;
   public gruaSelected: any;
+
   public comparendoEstados: any;
   public comparendoEstadoSelected: any; 
-  public infracciones: any;
-  public infraccionSelected: any;
+
   public tipoIdentificacionSelected: any;
   public tiposIdentificacion: any;
 
@@ -82,13 +119,15 @@ constructor(
   ){}
 
   ngOnInit() {
-   this.placa = {
-     'placa' : this.placa,
-   }; 
-   this.identificacion = {
-     'numeroIdentificacion' : this.identificacion,
-   }; 
-    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.placa = {
+      'placa': this.placa,
+    };
+
+    this.identificacion = {
+      'numeroIdentificacion': this.identificacion,
+    };
+
+    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.inmovilizacion = new Inmovilizacion(null, null, null);
 
     this._MpersonalFuncionarioService.selectAgentes().subscribe(
@@ -235,20 +274,6 @@ constructor(
             }
           );
 
-          this._CfgComparendoEstadoService.select().subscribe(
-            response => {
-              this.comparendoEstados = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
           this._MflInfraccionService.select().subscribe(
             response => {
               this.infracciones = response;
@@ -319,6 +344,7 @@ constructor(
       }
     }).then((result) => {
       if (
+
         // Read more about handling dismissals
         result.dismiss === swal.DismissReason.timer
       ) {
@@ -326,6 +352,7 @@ constructor(
     });
   
     let token = this._loginService.getToken();
+
     this._VechiculoService.showVehiculoPlaca(token, this.placa).subscribe(
       response => {
         if (response.status == "success") {

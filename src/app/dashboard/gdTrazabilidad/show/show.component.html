@@ -1,0 +1,94 @@
+<div class="row">
+        <div class="col-xs-12 col-lg-8">
+            <form #formTramite="ngForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-uppercase">Reparto de documento</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-3">
+                                <label>No. de Radicado <b>{{ trazabilidad.documento.numeroRadicado }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>No. de folios <b>{{ trazabilidad.documento.folios }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Fecha <b>{{ date|date:('dd/MM/yyyy') }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Hora <b>{{ date|date:('HH:mm:ss a') }}</b></label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Peticionario: <b>{{ trazabilidad.documento.peticionario.usuario.primerNombre }} {{ trazabilidad.documento.peticionario.usuario.primerApellido }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Cedula o Nit: <b>{{ trazabilidad.documento.peticionario.usuario.identificacion }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="trazabilidad.documento.peticionario.usuario.entidadNombre">
+                                <label>Entidad: <b>{{ trazabilidad.documento.peticionario.usuario.entidadNombre }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="trazabilidad.documento.peticionario.usuario.direccion">
+                                <label>Dirección: <b>{{ trazabilidad.documento.peticionario.usuario.direccion }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3" *ngIf="trazabilidad.documento.peticionario.usuario.telefono">
+                                <label>Teléfono: <b>{{ trazabilidad.documento.peticionario.usuario.telefono }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3" *ngIf="trazabilidad.documento.peticionario.usuario.correoElectronico">
+                                <label>Correo: <b>{{ trazabilidad.documento.peticionario.usuario.correoElectronico }}</b></label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Tipo de Correspondencia: <b>{{ trazabilidad.documento.tipoCorrespondencia.nombre }}</b></label>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Asunto y Concepto:</label>
+                                <p class="text-justify"><b>{{ trazabilidad.documento.descripcion }}</b></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-3">
+                                <div class="custom-control custom-radio">
+                                    <input name="correoCertificadoLlegada" [(ngModel)]="datos.aceptada" value="true" type="radio" id="radio-tramite1" name="radio-tramite" class="custom-control-input">
+                                    <label class="custom-control-label" for="radio-tramite1">Aceptar</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <div class="custom-control custom-radio">
+                                    <input name="correoCertificadoLlegada" [(ngModel)]="datos.aceptada" value="false" type="radio" id="radio-tramite2" name="radio-tramite" class="custom-control-input" >
+                                    <label class="custom-control-label" for="radio-tramite2">Rechazar</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones</label>
+                                <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="6"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div  class="col-xs-12 col-lg-12">
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                        <button (click)="onRegister()" [disabled]="formTramite.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    

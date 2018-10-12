@@ -11,21 +11,20 @@ export class ColorService{
 
 	constructor(private _http: Http){}
 
-	getColor(){
-		
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(color,token){
+	register(datos,token){
 		
-		let json = JSON.stringify(color);
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteColor(token,id){
+	delete(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +32,7 @@ export class ColorService{
 							  .map(res => res.json());
 	}
 
-	showColor(token,id){
+	show(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -42,9 +41,9 @@ export class ColorService{
 
 	}
 
-	editColor(color,token){
+	edit(datos,token){
 
-		let json = JSON.stringify(color);
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,8 +51,7 @@ export class ColorService{
 
 	}
 
-	getColorSelect(){
-		
+	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	

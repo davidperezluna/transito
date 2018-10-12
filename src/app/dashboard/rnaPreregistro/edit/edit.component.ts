@@ -51,7 +51,7 @@ constructor(
   private _departamentoService: DepartamentoService,
   private _loginService: LoginService,
   private _MunicipioService: MunicipioService,
-  private _lineaService: LineaService,
+  private _LineaService: LineaService,
   private _ClaseService: ClaseService,
   private _CarroceriaService: CarroceriaService,
   private _ServicioService: ServicioService,
@@ -83,7 +83,7 @@ constructor(
       }
     })
     
-    this._lineaService.getLineaSelect().subscribe(
+    this._LineaService.select().subscribe(
       response => {
         this.lineas = response;
         setTimeout(() => {
@@ -161,7 +161,7 @@ constructor(
         }
       }
     );
-    this._ColorService.getColorSelect().subscribe(
+    this._ColorService.select().subscribe(
       response => {
         this.colores = response;
         setTimeout(() => {
@@ -335,7 +335,7 @@ constructor(
   changedDepartamento(e){
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
-        this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+        this._LineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
           response => {
             console.log(response.data[0]);
             if (response.data[0] != null) {

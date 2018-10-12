@@ -1,0 +1,71 @@
+<div class="container">
+    <hr>
+    
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-xs-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">
+                        <strong>Documentos Encontrados</strong>
+                    </h5>
+                </div>
+                <div class="card-body container">
+                    <table class="table" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Peticionario</th>
+                                <th>Tipo correspondencia</th>
+                                <th>Radicado No.</th>
+                                <th>Estado</th>
+                                <th>Fecha radicado</th>
+                                <th>Fecha vencimiento</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
+                                <td>{{ trazabilidad.documento.peticionario.usuario.primerNombre }} {{ trazabilidad.documento.peticionario.usuario.primerApellido }}</td>
+                                <td>{{ trazabilidad.documento.tipoCorrespondencia.nombre }}</td>
+                                <td>
+                                    <a href="{{docsUrl}}{{ trazabilidad.documento.url }}" target="_blank">
+                                        {{ trazabilidad.documento.numeroRadicado }}
+                                    </a>
+                                </td>
+                                <td>{{ trazabilidad.estado }}</td>
+                                <td>{{ trazabilidad.documento.fechaRegistro }}</td>
+                                <td>{{ trazabilidad.documento.fechaVencimiento }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onShow(trazabilidad)" class="btn btn-xs btn-primary" type="button" *ngIf="trazabilidad.estado == 'PENDIENTE'">
+                                            <i class="fa fa-check-circle"></i>
+                                            Tramitar
+                                        </button>
+                                        <button (click)="onNew(trazabilidad)" class="btn btn-xs btn-primary" type="button" *ngIf="trazabilidad.estado == 'EN TRAMITE'">
+                                            <i class="fa fa-reply"></i>
+                                            Responder
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf='!formIndex && !trazabilidades'>
+        <div class="col-xs-12 col-lg-12">
+            <div class="alert alert-info">
+                <h4 class="text-uppercase text-center">
+                    <i class="fa fa-check-circle fa-2x"></i>
+                    <br>
+                    <strong>Usted no tiene documentos asignados pendientes por tramitar.</strong>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <app-new *ngIf='formNew' [trazabilidad]="trazabilidad" (ready)="ready($event)"></app-new>
+
+    <app-show *ngIf='formShow' [trazabilidad]="trazabilidad" (ready)="ready($event)" (onNew)="onNew($event)"></app-show>
+</div>

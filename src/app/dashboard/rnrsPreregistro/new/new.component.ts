@@ -5,10 +5,9 @@ import {LoginService} from '../../../services/login.service';
 import {CarroceriaService} from '../../../services/carroceria.service';
 import {MarcaService} from '../../../services/marca.service';
 import {LineaService} from '../../../services/linea.service';
-import {CfgOrigenRegistroService} from '../../../services/cfgOrigenRegistro.service';
-import {CondicionIngresoService} from '../../../services/condicionIngreso.service';
+import { VhloCfgOrigenRegistroService } from '../../../services/vhloCfgOrigenRegistro.service';
+import { VhloCfgCondicionIngresoService } from '../../../services/vhloCfgCondicionIngreso.service';
 import {ClaseService} from '../../../services/clase.service';
-import {UsuarioService} from '../../../services/usuario.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -63,14 +62,12 @@ public tiposCabina =[
 constructor(
   private _RegistroRemolqueService: RegistroRemolqueService,
   private _loginService: LoginService,
-  private _lineaService: LineaService,
+  private _LineaService: LineaService,
   private _ClaseService: ClaseService,
   private _MarcaService: MarcaService,
   private _CarroceriaService: CarroceriaService,
-  private _CfgOrigenRegistroService: CfgOrigenRegistroService,
-  private _CondicionIngresoService: CondicionIngresoService,
-  private _UsuarioService: UsuarioService,
-
+  private _OrigenRegistroService: VhloCfgOrigenRegistroService,
+  private _CondicionIngresoService: VhloCfgCondicionIngresoService
 ){}
 
 ngOnInit() {
@@ -89,6 +86,7 @@ ngOnInit() {
       }
     }
   );
+
   this._MarcaService.getMarcaSelect().subscribe(
     response => {
       this.marcas = response;
@@ -102,7 +100,8 @@ ngOnInit() {
       }
     }
   );
-  this._CfgOrigenRegistroService.getCfgOrigenRegistroSelect().subscribe(
+
+  this._OrigenRegistroService.select().subscribe(
     response => {
       this.origenRegistros = response; 
     }, 
@@ -115,7 +114,8 @@ ngOnInit() {
       }
     }
   );
-  this._CondicionIngresoService.getCondicionIngresoSelect().subscribe(
+
+  this._CondicionIngresoService.select().subscribe(
     response => {
       this.condicionIngresos = response;
     },  
@@ -128,6 +128,7 @@ ngOnInit() {
       }
     }
   );
+
   this._ClaseService.getClaseSelect().subscribe(
     response => {
       this.clases = response;
@@ -140,8 +141,9 @@ ngOnInit() {
         alert("Error en la petición");
       }
     }
-  );  
-   this._lineaService.getLineaSelect().subscribe(
+  ); 
+
+  this._LineaService.select().subscribe(
     response => {
       this.lineas = response;
     }, 
@@ -243,10 +245,11 @@ ngOnInit() {
         }
       })
   }
+
   changedMarca(e){
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
-        this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+      this._LineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
           response => { 
             if (response.data[0] != null) {
               this.lineas = response.data;
@@ -270,7 +273,7 @@ ngOnInit() {
   changedDepartamento(e){
     // if (this.marcaSelected) {
     //   let token = this._loginService.getToken()
-    //     this._lineaService.getLineasMar(this.marcaSelected, token).subscribe(
+    //     this._LineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
     //       response => {
     //         console.log(response.data[0]);
     //         if (response.data[0] != null) {

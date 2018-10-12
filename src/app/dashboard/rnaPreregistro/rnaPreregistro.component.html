@@ -6,7 +6,10 @@
           <div class="card-header">
             <h5 class="card-title">Vehículos registrados<small> Automotor</small>
               <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+                <button (click)="onNew()" class="btn btn-success">
+                  <span class="text">Nuevo</span> 
+                  <i class="fa fa-save"></i>
+                </button>
               </div>
             </h5>
           </div>
@@ -16,6 +19,8 @@
                 <tr>
                   <th>Placa </th>
                   <th>Motor</th>
+                  <th>Clase</th>
+                  <th>Cilindraje</th>
                   <th>Modelo</th>
                   <th>Marca</th>
                   <th>linea</th> 
@@ -35,6 +40,8 @@
                     </span>
                   </td>
                   <td>{{vehiculo.motor}}</td>
+                  <td>{{vehiculo.clase.nombre}}</td>
+                  <td>{{vehiculo.cilindraje}}</td>
                   <td>{{vehiculo.modelo}}</td>
                   <td>
                     <span *ngIf="vehiculo.linea">
@@ -49,8 +56,14 @@
                   <td>{{vehiculo.valor}}</td> 
                   <td>{{vehiculo.chasis}}</td> 
                   <td>
-                    <button (click)="editVehiculo(vehiculo)" class="btn btn-info" type="button">Editar</button> 
-                    <button (click)="deleteVehiculo(vehiculo.id)"  class="btn btn-danger" type="button">Eliminar</button> 
+                    <div class="btn-group">
+                      <button (click)="editVehiculo(vehiculo)" class="btn btn-xs btn-info" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="deleteVehiculo(vehiculo.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
                   </td>
                 </tr>
               </tbody>

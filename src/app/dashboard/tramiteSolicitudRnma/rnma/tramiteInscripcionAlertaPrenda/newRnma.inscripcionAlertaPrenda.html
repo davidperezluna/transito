@@ -14,6 +14,23 @@
                         <ng-select [multiple]="false" [options]="cfgTiposAlerta" [(ngModel)]="cfgTipoAlertaSelected" placeholder="Seleccione una alerta" required name="alertaId">
                         </ng-select>
                     </div>
+                    <div class="form-group row col-xs-12 col-lg-12">
+                        <div class="col-xs-6 col-lg-6">
+                            <label>Fecha expedición</label>
+                            <input class="form-control" [(ngModel)]="datos.fechaExpedicion"  name="fechaExpedicion" type="date" required />
+                        </div>
+
+                        <div class="col-xs-6 col-lg-6">
+                            <label>Número Acta</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroActa" name="numeroActa" type="text" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-xs-12 col-lg-12">
+                        <label>Entidad que emite <span class="text-danger">*</span></label>
+                        <ng-select [multiple]="false" [options]="cfgEntidadJudiciales" [(ngModel)]="cfgEntidadJudicialSelected" placeholder="Seleccione una alerta" required name="alertaId">
+                        </ng-select>
+                    </div>
 
                     <!-- select grados alerta -->
                     <div class="container" *ngIf="cfgTipoAlertaSelected <= 6 || cfgTipoAlertaSelected >= 1 && acreedor == 'false'">
@@ -26,6 +43,7 @@
                         </div>
 
                     <!--Buscardor Identificador/Nit -->
+                        <div class="form-group row">
                             <div class="col-xs-8 col-lg-6">
                                 <label>Tipo de identificación
                                     <span class="text-danger">*</span>
@@ -62,6 +80,7 @@
                                     <div class="form-control-feedback has-danger has-error">No se encontró la empresa</div>
                                 </div>
                             </div>
+                        </div>
 
                             <!--acreedores ciudadanos -->
                             <div class="container" *ngIf="listaAcreedoresCiudadanos">
@@ -70,29 +89,13 @@
                                     <br>
                                     <thead>
                                         <tr>
-                                            <!-- <th>Permiso tramite</th>
-                                            <th>Solicitante Ciudadano</th> -->
                                             <th>Acreedor</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="odd" *ngFor="let ciudadano of datos.acreedoresCiudadanos; let i = index">
-                            
-                                            <!-- <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==2">
-                                                <p>Si</p>
-                                            </td>
-                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==2">
-                                                <p>No</p>
-                                            </td>
-                            
-                                            <td class="center" *ngIf="ciudadano.permisoTramite && tipoPropiedadSelected ==1">
-                                                <p>Propietario</p>
-                                            </td>
-                                            <td class="center" *ngIf="!ciudadano.permisoTramite && tipoPropiedadSelected ==1">
-                                                <p>Locatario</p>
-                                            </td> -->
-                            
+                                                                                            
                                             <td class="center">
                                                 <p>{{ciudadano.identificacion}}
                                                     <br>{{ciudadano.nombre}}</p>

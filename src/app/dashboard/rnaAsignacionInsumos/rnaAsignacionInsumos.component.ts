@@ -77,20 +77,24 @@ export class rnaAsignacionInsumosComponent implements OnInit {
       );
   }
   iniciarTablaSustrato(){
-    $('#dataTables-example-Sustratos').DataTable({
+   $('#dataTables-example-Sustratos').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
+      dom: 'Bfrtip',
+      buttons: [
+          'pdf',
+      ],
       oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
-        }
+          oPaginate: {
+              sFirst: '<<',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '>>'
+          } 
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+  });
+  this.table = $('#dataTables-example-Sustratos').DataTable();
   }
 
   iniciarTablaInsumos(){
@@ -98,6 +102,10 @@ export class rnaAsignacionInsumosComponent implements OnInit {
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
+      dom: 'Bfrtip',
+      buttons: [
+          'pdf',
+      ],
       oLanguage: {
            oPaginate: {
            sFirst: '<<',

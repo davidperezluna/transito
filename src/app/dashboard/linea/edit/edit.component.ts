@@ -51,7 +51,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.linea.marcaId = this.marcaSelected;
-		this._lineaService.editLinea(this.linea,token).subscribe(
+		this._lineaService.edit(this.linea,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

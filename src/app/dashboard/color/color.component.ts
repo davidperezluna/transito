@@ -38,24 +38,26 @@ export class ColorComponent implements OnInit {
         result.dismiss === swal.DismissReason.timer
       ) {
       }
-    })
-		this._ColorService.getColor().subscribe(
-				response => {
-          this.colors = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100); 
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+		this._ColorService.index().subscribe(
+      response => {
+        this.colors = response.data;
+        let timeoutId = setTimeout(() => {
+          this.iniciarTabla();
+        }, 100);
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
+  
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -100,7 +102,7 @@ export class ColorComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ColorService.deleteColor(token,id).subscribe(
+        this._ColorService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

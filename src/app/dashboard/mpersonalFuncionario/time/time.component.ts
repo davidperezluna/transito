@@ -4,6 +4,7 @@ import { MpersonalHorarioService } from '../../../services/mpersonalHorario.serv
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-time',
@@ -17,6 +18,7 @@ public errorMessage;
 public horarios: any = null;
 public agregar: any;
 public semana: any;
+public table: any;
 
 constructor(
   private _HorarioService: MpersonalHorarioService,
@@ -32,6 +34,9 @@ constructor(
     this._FuncionarioService.recordTimes(this.funcionario, token).subscribe(
       response => {
         this.horarios = response.data;
+        setTimeout(() => {
+            this.iniciarTabla();
+        }, 100);
       },
       error => {
         this.errorMessage = <any>error;
@@ -113,4 +118,24 @@ constructor(
       }
     });
   }
+  iniciarTabla() {
+    $('#dataTables-example').DataTable({
+        responsive: true,
+        pageLength: 8,
+        sPaginationType: 'full_numbers',
+        dom: 'Bfrtip',
+        buttons: [
+            'pdf'
+        ],
+        oLanguage: {
+            oPaginate: {
+                sFirst: '<<',
+                sPrevious: '<',
+                sNext: '>',
+                sLast: '>>'
+            }
+        }
+    });
+    this.table = $('#dataTables-example').DataTable();
+}
 }
