@@ -54,7 +54,7 @@ public date: any;
 
 public ciudadano: any = null;
 
-public file: any;
+public file: any = null;
 public prohibicion: any;
 
 public datosRegistro = {
