@@ -40,6 +40,44 @@ import { SoatRoutes } from './soat/soat.routes';
 import { SvCapacitacionRoutes } from './svCapacitacion/svCapacitacion.routes';
 import { SvCfgFuncionRoutes } from './svCfgFuncion/svCfgFuncion.routes';
 import { SvCfgFuncionCriterioRoutes } from './svCfgFuncionCriterio/svCfgFuncionCriterio.routes';
+import { SvCfgAreaRoutes } from './svCfgArea/svCfgArea.routes';
+import { SvCfgTipoAreaRoutes } from './svCfgTipoArea/svCfgTipoArea.routes';
+import { SvCfgAseguradoraRoutes } from './svCfgAseguradora/svCfgAseguradora.routes';
+import { SvCfgCalzadaCarrilRoutes } from './svCfgCalzadaCarril/svCfgCalzadaCarril.routes';
+import { SvCfgCardinalidadRoutes } from './svCfgCardinalidad/svCfgCardinalidad.routes';
+import { SvCfgClaseChoqueRoutes } from './svCfgClaseChoque/svCfgClaseChoque.routes';
+import { SvCfgCondicionViaRoutes } from './svCfgCondicionVia/svCfgCondicionVia.routes';
+import { SvCfgControlViaRoutes } from './svCfgControlVia/svCfgControlVia.routes';
+import { SvCfgDisenioRoutes } from './svCfgDisenio/svCfgDisenio.routes';
+import { SvCfgEntidadAccidenteRoutes } from './svCfgEntidadAccidente/svCfgEntidadAccidente.routes';
+import { SvCfgEstadoConductorRoutes } from './svCfgEstadoConductor/svCfgEstadoConductor.routes';
+import { SvCfgEstadoIluminacionRoutes } from './svCfgEstadoIluminacion/svCfgEstadoIluminacion.routes';
+import { SvCfgEstadoTiempoRoutes } from './svCfgEstadoTiempo/svCfgEstadoTiempo.routes';
+import { SvCfgEstadoViaRoutes } from './svCfgEstadoVia/svCfgEstadoVia.routes';
+import { SvCfgFallaRoutes } from './svCfgFalla/svCfgFalla.routes';
+import { SvCfgGeometriaRoutes } from './svCfgGeometria/svCfgGeometria.routes';
+import { SvCfgGradoExamenRoutes } from './svCfgGradoExamen/svCfgGradoExamen.routes';
+import { SvCfgGravedadVictimaRoutes } from './svCfgGravedadVictima/svCfgGravedadVictima.routes';
+import { SvCfgHipotesisRoutes } from './svCfgHipotesis/svCfgHipotesis.routes';
+import { SvCfgHospitalRoutes } from './svCfgHospital/svCfgHospital.routes';
+import { SvCfgIluminacionRoutes } from './svCfgIluminacion/svCfgIluminacion.routes';
+import { SvCfgLugarImpactoRoutes } from './svCfgLugarImpacto/svCfgLugarImpacto.routes';
+import { SvCfgMaterialRoutes } from './svCfgMaterial/svCfgMaterial.routes';
+import { SvCfgMotivoAnulacionRoutes } from './svCfgMotivoAnulacion/svCfgMotivoAnulacion.routes';
+import { SvCfgNacionalidadRoutes } from './svCfgNacionalidad/svCfgNacionalidad.routes';
+import { SvCfgRequiereEmpresaRoutes } from './svCfgRequiereEmpresa/svCfgRequiereEmpresa.routes';
+import { SvCfgResultadoExamenRoutes } from './svCfgResultadoExamen/svCfgResultadoExamen.routes';
+import { SvCfgSectorRoutes } from './svCfgSector/svCfgSector.routes';
+import { SvCfgSustanciaPeligrosaRoutes } from './svCfgSustanciaPeligrosa/svCfgSustanciaPeligrosa.routes';
+import { SvCfgTipoControlRoutes } from './svCfgTipoControl/svCfgTipoControl.routes';
+import { SvCfgTipoGeometriaRoutes } from './svCfgTipoGeometria/svCfgTipoGeometria.routes';
+import { SvCfgTipoViaRoutes } from './svCfgTipoVia/svCfgTipoVia.routes';
+import { SvCfgTipoVictimaRoutes } from './svCfgTipoVictima/svCfgTipoVictima.routes';
+import { SvCfgUnidadReceptoraRoutes } from './svCfgUnidadReceptora/svCfgUnidadReceptora.routes';
+import { SvCfgUtilizacionRoutes } from './svCfgUtilizacion/svCfgUtilizacion.routes';
+import { SvCfgVisualRoutes } from './svCfgVisual/svCfgVisual.routes';
+import { SvCfgVisualDisminuidaRoutes } from './svCfgVisualDisminuida/svCfgVisualDisminuida.routes';
+import { SvCfgZonaRoutes } from './svCfgZona/svCfgZona.routes';
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -144,15 +182,12 @@ import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/
 import { DashboardComponent } from '.';
 
 
-<<<<<<< HEAD
-import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
-import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
-import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
+//import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
+//import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
+//import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
 import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
 
-=======
->>>>>>> 40e3f4e598c616304623570204b5204f5f63d770
 export const DashboardRoutes: Route[] = [
   {
     path: 'dashboard', 
@@ -226,12 +261,52 @@ export const DashboardRoutes: Route[] = [
       ...CfgSvUnidadMedidaRoutes,
       ...CfgCdaRoutes,
       ...VehiculoTecnoMecanicaRoutes,
+
       ...SoatRoutes,
       ...SvCapacitacionRoutes,
       ...SvCfgFuncionRoutes,
       ...SvCfgFuncionCriterioRoutes,
       ...SvCfgClaseActorViaRoutes,
       ...SvCfgTemaCapacitacionRoutes,
+      ...SvCfgAreaRoutes,
+      ...SvCfgTipoAreaRoutes,
+      ...SvCfgAseguradoraRoutes,
+      ...SvCfgCalzadaCarrilRoutes,
+      ...SvCfgCardinalidadRoutes,
+      ...SvCfgClaseChoqueRoutes,
+      ...SvCfgCondicionViaRoutes,
+      ...SvCfgControlViaRoutes,
+      ...SvCfgDisenioRoutes,
+      ...SvCfgEntidadAccidenteRoutes,
+      ...SvCfgEstadoConductorRoutes,
+      ...SvCfgEstadoIluminacionRoutes,
+      ...SvCfgEstadoTiempoRoutes,
+      ...SvCfgEstadoViaRoutes,
+      ...SvCfgFallaRoutes,
+      ...SvCfgGeometriaRoutes,
+      ...SvCfgGradoExamenRoutes,
+      ...SvCfgGravedadVictimaRoutes,
+      ...SvCfgHipotesisRoutes,
+      ...SvCfgHospitalRoutes,
+      ...SvCfgIluminacionRoutes,
+      ...SvCfgLugarImpactoRoutes,
+      ...SvCfgMaterialRoutes,
+      ...SvCfgMotivoAnulacionRoutes,
+      ...SvCfgNacionalidadRoutes,
+      ...SvCfgRequiereEmpresaRoutes,
+      ...SvCfgResultadoExamenRoutes,
+      ...SvCfgSectorRoutes,
+      ...SvCfgSustanciaPeligrosaRoutes,
+      ...SvCfgTipoControlRoutes,
+      ...SvCfgTipoGeometriaRoutes,
+      ...SvCfgTipoViaRoutes,
+      ...SvCfgTipoVictimaRoutes,
+      ...SvCfgUnidadReceptoraRoutes,
+      ...SvCfgUtilizacionRoutes,
+      ...SvCfgVisualRoutes,
+      ...SvCfgVisualDisminuidaRoutes,
+      ...SvCfgZonaRoutes,
+
       ...CfgComparendoEstadoRoutes,
       ...InfraccionRoutes,
       ...CarroceriaRoutes,

@@ -27,7 +27,7 @@ export class SvCapacitacionComponent implements OnInit {
 
     ngOnInit() { }
 
-    onNew() {
+    onNew() { 
         this.formNew = true;
         this.formIndex = false;
     }
@@ -35,6 +35,7 @@ export class SvCapacitacionComponent implements OnInit {
     ready(isCreado: any) {
         if (isCreado) {
             this.formNew = false;
+            this.formEdit = false;
             this.formIndex = true;
             this.ngOnInit();
         }
