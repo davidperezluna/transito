@@ -133,7 +133,8 @@ import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimita
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
-import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes';
+import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
+import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
 import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
 import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
@@ -293,6 +294,7 @@ export const DashboardRoutes: Route[] = [
       ...InsumoBusquedaRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CfgEmpresaServicioRoutes,
+      ...rnaPreasignacionInsumoRoutes
     ]
   }
 ];

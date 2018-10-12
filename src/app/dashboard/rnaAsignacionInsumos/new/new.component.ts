@@ -2,7 +2,6 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {rnaAsignacionInsumos} from '../rnaAsignacionInsumos.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
-import { EmpresaService } from '../../../services/empresa.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import {RnaInsumoService} from '../../../services/rnaInsumos.service';
