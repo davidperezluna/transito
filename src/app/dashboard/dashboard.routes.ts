@@ -193,15 +193,10 @@ import { ReporteRoutes } from './reporte/reporte.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
-<<<<<<< HEAD
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
 //import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
 //import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
-import { SvCfgClaseActorViaRoutes } from './svCfgClaseActorVia';
-import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
-=======
 import { DashboardComponent } from '.';
->>>>>>> 3337381a58ebae05789f2534ac2d0501c455ccce
 
 export const DashboardRoutes: Route[] = [
   {
