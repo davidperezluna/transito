@@ -86,10 +86,19 @@ export class NewCfgAsignacionPlacaSedeComponent implements OnInit {
     }
 
     onEnviar() {
+        swal({
+            title: 'Un momento!',
+            text: 'Generando placas...',
+            onOpen: () => {
+                swal.showLoading();
+            }
+        });
+
         let token = this._loginService.getToken();
         this.asignacion.sedeOperativa = this.sedeOperativaSelected;
         this.asignacion.cfgTipoVehiculo = this.tipoSelected;
         this.asignacion.moduloId = this.moduloSelected;
+
 
         this._CfgAsignacionPlacaSedeService.register(this.asignacion, token).subscribe(
             response => {

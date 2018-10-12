@@ -87,7 +87,7 @@
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
               <a class="nav-link" routerLink="msvTalonario" [ngClass]="{'active' : ( addActive === 'msvTalonario')}" (click)="addActiveMenu('msvTalonario')">
-                <i class="fa fa-angle-right"></i> Talonarios
+                <i class="fa fa-angle-right"></i> Talonarios IPAT
               </a>
             </li>
           </ul>
@@ -205,11 +205,7 @@
               </a>
             </li>
             <!---->
-            <li class="nav-item">
-              <a class="nav-link" routerLink="conceptoParametro" [ngClass]="{'active' : ( addActive === 'concepto')}" (click)="addActiveMenu('concepto')">
-                <i class="fa fa-angle-right"></i> Concepto
-              </a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link" routerLink="cfgplaca" [ngClass]="{'active' : ( addActive === 'cfgplaca')}" (click)="addActiveMenu('cfgplaca')">
                 <i class="fa fa-angle-right"></i> Placa
@@ -384,6 +380,12 @@
                 (click)="addActiveMenu('cvCfgInteres')">
                 <i class="fa fa-angle-right"></i>
                 Interes
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" routerLink="conceptoParametro" [ngClass]="{'active' : ( addActive === 'concepto')}" (click)="addActiveMenu('concepto')">
+                <i class="fa fa-angle-right"></i> Concepto
               </a>
             </li>
           </ul>
@@ -878,7 +880,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="rnaPreasignacionInsumo" [ngClass]="{'active' : ( addActive === 'rnaPreasignacionInsumo')}" (click)="addActiveMenu('rnaPreasignacionInsumo')">
-            <i class="fa fa-angle-right"></i> Preasignación Insumos
+            <i class="fa fa-angle-right"></i> Reasignación Insumos
           </a>
         </li>
       </ul>

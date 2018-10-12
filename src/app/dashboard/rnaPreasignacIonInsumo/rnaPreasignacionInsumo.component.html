@@ -7,7 +7,7 @@
           <form #newForm="ngForm">
               <div class="row justify-content-center">
                   <div class="card-body col-md-12"> 
-                    <div class="form-group row">
+                    <!--<div class="form-group row">    
                         <div class="col-lg-4 col-md-4">
                             <label>Sede origen*</label>
                             <ng-select
@@ -45,7 +45,40 @@
                             <label>Cantidad*</label>
                             <input class="form-control" (blur)="isExistencia()" [(ngModel)]="datosAsignacion.cantidad" name="cantidad" placeholder="" type="text" required>
                         </div> 
-                    </div> 
+                    </div> -->
+                    <table class="table " id="dataTables-example-Sustratos">
+                    <thead>
+                      <tr>
+                        <th>No.Acta</th>
+                        <th>Empresa</th>
+                        <th>Sede</th>
+                        <th>Insumo</th>
+                        <th>Rango Inicio</th>
+                        <th>Rango Fin</th>
+                        <th>Cantidad</th>
+                        <th>Referencia</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="odd" *ngFor="let loteInsumoSustrato of loteInsumoSustratos; let i = index">
+                        <td >{{loteInsumoSustrato.numeroActa}}</td>
+                        <td >{{loteInsumoSustrato.empresa.nombre}}</td>
+                        <td >{{loteInsumoSustrato.sedeOperativa.nombre}}</td>
+                        <td >{{loteInsumoSustrato.casoInsumo.nombre}}</td>
+                        <td >{{loteInsumoSustrato.rangoInicio}}</td>
+                        <td >{{loteInsumoSustrato.rangoFin}}</td>
+                        <td >{{loteInsumoSustrato.cantidad}}</td>
+                        <td >{{loteInsumoSustrato.referencia}}</td>
+                        <td >{{loteInsumoSustrato.fecha}}</td>
+                        <td>
+                          <button (click)="editRnaLoteInsumoSustrato(loteInsumoSustrato)" class="btn btn-outline-info" type="button">Editar</button> 
+                          <button (click)="deleteRnaLoteInsumo(loteInsumoSustrato.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                   </div>    
               </div>
           </form>

@@ -47,7 +47,7 @@ constructor(
     fin = this.talonario.hasta;
 
     if (fin > ini) {
-      rangos = (fin - ini);
+      rangos = (fin - ini) + 1;
 
       if (rangos < 0) {
         rangos = 0;
@@ -70,8 +70,7 @@ constructor(
       let token = this._loginService.getToken();
       this._SedeOperativaService.showSedeOperativa(token, e).subscribe(
         response => {
-          this.talonario.desde = response.data.codigoDivipo;
-          this.talonario.hasta = response.data.codigoDivipo;
+            this.sedeOperativa = response.data;
         },
         error => {
           this.errorMessage = <any>error;
