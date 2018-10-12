@@ -340,7 +340,7 @@ constructor(
   btnNewTramite(){ 
     let token = this._loginService.getToken(); 
 
-    if (this.modulo.abreviatura != 'RNC' && this.modulo.abreviatura != 'RPCCC') {
+    if (this.modulo.abreviatura == 'RNA') {
       if (!this.propietario) {
         this._TramitePrecioService.showTramitePrecio(token, this.tramitePrecioSelected).subscribe(
           response => {

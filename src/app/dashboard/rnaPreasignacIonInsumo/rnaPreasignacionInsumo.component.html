@@ -49,32 +49,22 @@
                     <table class="table " id="dataTables-example-Sustratos">
                     <thead>
                       <tr>
-                        <th>No.Acta</th>
-                        <th>Empresa</th>
                         <th>Sede</th>
-                        <th>Insumo</th>
-                        <th>Rango Inicio</th>
-                        <th>Rango Fin</th>
-                        <th>Cantidad</th>
-                        <th>Referencia</th>
                         <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Descripcion</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="odd" *ngFor="let loteInsumoSustrato of loteInsumoSustratos; let i = index">
-                        <td >{{loteInsumoSustrato.numeroActa}}</td>
-                        <td >{{loteInsumoSustrato.empresa.nombre}}</td>
-                        <td >{{loteInsumoSustrato.sedeOperativa.nombre}}</td>
-                        <td >{{loteInsumoSustrato.casoInsumo.nombre}}</td>
-                        <td >{{loteInsumoSustrato.rangoInicio}}</td>
-                        <td >{{loteInsumoSustrato.rangoFin}}</td>
-                        <td >{{loteInsumoSustrato.cantidad}}</td>
-                        <td >{{loteInsumoSustrato.referencia}}</td>
-                        <td >{{loteInsumoSustrato.fecha}}</td>
+                      <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
+                        <td >{{reasignacion.sedeOperativa.nombre}}</td>
+                        <td >{{reasignacion.fehca}}</td>
+                        <td >{{reasignacion.estado}}</td>
+                        <td >{{reasignacion.descripcion}}</td>
                         <td>
-                          <button (click)="editRnaLoteInsumoSustrato(loteInsumoSustrato)" class="btn btn-outline-info" type="button">Editar</button> 
-                          <button (click)="deleteRnaLoteInsumo(loteInsumoSustrato.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                          <button (click)="editRnareasignacion(reasignacion)" class="btn btn-outline-info" type="button">Editar</button> 
+                          <button (click)="deleteRnaLoteInsumo(reasignacion.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
                         </td>
                       </tr>
                     </tbody>
