@@ -7,7 +7,7 @@
           <form #newForm="ngForm">
               <div class="row justify-content-center">
                   <div class="card-body col-md-12"> 
-                    <div class="form-group row">
+                    <!--<div class="form-group row">    
                         <div class="col-lg-4 col-md-4">
                             <label>Sede origen*</label>
                             <ng-select
@@ -45,7 +45,30 @@
                             <label>Cantidad*</label>
                             <input class="form-control" (blur)="isExistencia()" [(ngModel)]="datosAsignacion.cantidad" name="cantidad" placeholder="" type="text" required>
                         </div> 
-                    </div> 
+                    </div> -->
+                    <table class="table " id="dataTables-example-Sustratos">
+                    <thead>
+                      <tr>
+                        <th>Sede</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Descripcion</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
+                        <td >{{reasignacion.sedeOperativa.nombre}}</td>
+                        <td >{{reasignacion.fehca}}</td>
+                        <td >{{reasignacion.estado}}</td>
+                        <td >{{reasignacion.descripcion}}</td>
+                        <td>
+                          <button (click)="editRnareasignacion(reasignacion)" class="btn btn-outline-info" type="button">Editar</button> 
+                          <button (click)="deleteRnaLoteInsumo(reasignacion.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                   </div>    
               </div>
           </form>

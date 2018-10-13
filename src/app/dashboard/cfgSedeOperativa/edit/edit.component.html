@@ -17,7 +17,7 @@
                             <input class="form-control" [(ngModel)]="cfgSedeOperativa.nombre" name="nombre" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Estado
+                            <label>Codigo Divipo
                                 <strong class="text-danger">*</strong>
                             </label>
                             <input class="form-control" [(ngModel)]="cfgSedeOperativa.codigoDivipo" name="codigoDivipo" type="text" required />
@@ -28,6 +28,14 @@
                             </label>
                             <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipioId">
                             </ng-select>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="cfgSedeOperativa.asignacionRango" class="custom-control-input" id="asignacionRango" name="asignacionRango" checked="">
+                                    <label class="custom-control-label" for="asignacionRango">Asignacion de rangos</label>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

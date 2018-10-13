@@ -31,13 +31,14 @@ export class GdDocumentoComponent implements OnInit {
     'numeroOficio': null
   }
 
-
   constructor(
     private _DocumentoService: GdDocumentoService,
 		private _loginService: LoginService,
     ){}
     
-  ngOnInit() {
+  ngOnInit() {    
+    this.peticionario.idTipoPeticionario = 'Persona';
+
     swal({
       title: '<i>Para Tener En Cuenta</i>',
       type: 'info',
@@ -56,8 +57,6 @@ export class GdDocumentoComponent implements OnInit {
         '<i class="fa fa-thumbs-down"></i>',
       cancelButtonAriaLabel: 'Thumbs down',
     });
-    
-    this.peticionario.idTipoPeticionario = 'Persona';
 
     this.formIndex = false;
     this.formNew = false;
@@ -88,20 +87,29 @@ export class GdDocumentoComponent implements OnInit {
   }
 
   onNew(){
-    this.ngOnInit();
+    this.formIndex = false;
+    this.formEdit = false;
+    this.formShow = false;
+    this.formPrint = false;
     this.formNew = true;
   }
 
   onShow(documento: any){
-    this.ngOnInit();
     this.documento = documento;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+    this.formPrint = false;
     this.formShow = true;
   }
 
   onPrint(documento: any) {
     this.documento = documento;
     if (this.documento) {
-      this.ngOnInit();
+      this.formIndex = false;
+      this.formNew = false;
+      this.formEdit = false;
+      this.formShow = false;
       this.formPrint = true;
     }
   }

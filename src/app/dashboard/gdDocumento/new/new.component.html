@@ -260,7 +260,7 @@
                     <i class="fa fa-times"></i>
                     Cancelar
                 </button>
-                <button (click)="onRegister()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                <button (click)="onRegister()" [disabled]="formNew.invalid || !file" class="btn btn-primary" type="button">
                     <i class="fa fa-save"></i>
                     Enviar
                 </button>

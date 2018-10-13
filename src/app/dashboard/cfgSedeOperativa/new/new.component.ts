@@ -24,7 +24,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cfgSedeOperativa = new CfgSedeOperativa(null, null, null);
+    this.cfgSedeOperativa = new CfgSedeOperativa(null, null, null,null);
 
     this._municipioService.getMunicipioSelect().subscribe(
       response => {

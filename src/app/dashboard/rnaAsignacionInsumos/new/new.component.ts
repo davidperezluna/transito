@@ -32,7 +32,7 @@ public insumoSelected:any;
 public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
-public frmInsumo:any=true;
+public frmInsumo:any=false;
 public frmInsumoSelect:any=true; 
 
 constructor(
@@ -97,9 +97,9 @@ constructor(
     this.ready.emit(true);
   }
   onEnviar(){
+    console.log(this.frmInsumo);
     let token = this._loginService.getToken();
     this.rnaAsignacionInsumos.loteInsumoId = this.loteInsumo.id;
-    console.log(this.frmInsumo);
     
     if (!this.frmInsumo) {
       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelected;
