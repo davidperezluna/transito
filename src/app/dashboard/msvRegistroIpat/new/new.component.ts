@@ -32,24 +32,12 @@ import { SvCfgVisualService } from "../../../services/svCfgVisual.service";
 import { SvCfgVisualDisminuidaService } from "../../../services/svCfgVisualDisminuida.service";
 import { SvCfgResultadoExamenService } from "../../../services/svCfgResultadoExamen.service";
 import { SvCfgGradoExamenService } from "../../../services/svCfgGradoExamen.service";
-import { RncLicenciaConduccionService } from "../../../services/rncLicenciaConduccion.service";
 import { SvCfgHospitalService } from "../../../services/svCfgHospital.service";
-import { VehiculoService } from "../../../services/vehiculo.service";
-/*import { MarcaService } from "../../../services/marca.service";
-import { LineaService } from "../../../services/linea.service";
-import { ColorService } from "../../../services/color.service";
-import { CarroceriaService } from "../../../services/carroceria.service";*/
 import { EmpresaService } from "../../../services/empresa.service";
 import { SvCfgFallaService } from "../../../services/svCfgFalla.service";
 import { SvCfgLugarImpactoService } from "../../../services/svCfgLugarImpacto.service";
-//import { InmovilizacionService } from "../../../services/inmovilizacion.service";
-import { TecnoMecanicaService } from "../../../services/vehiculoTecnoMecanica.service";
-import { SoatService } from "../../../services/soat.service";
-//import { PropietarioVehiculoService } from "../../../services/propietarioVehiculo.service";
 import { ClaseService } from "../../../services/clase.service";
 import { ServicioService } from "../../../services/servicio.service";
-//import { CfgModalidadTransporteService } from "../../../services/cfgModalidadTransporte.service";
-//import { CfgRadioAccionService } from "../../../services/cfgRadioAccion.service";
 import { SvCfgHipotesisService } from "../../../services/svCfgHipotesis.service";
 import { SvCfgTipoVictimaService } from "../../../services/svCfgTipoVictima.service";
 import { SvCfgGravedadVictimaService } from "../../../services/svCfgGravedadVictima.service";
@@ -67,12 +55,15 @@ export class NewComponent implements OnInit {
   public msvRegistroIpat: MsvRegistroIpat;
   public sedeOperativa: any;
   public errorMessage;
-  public respuesta;
+
   public nroIpat: any;
   public consecutivo: any = null;
   public ipatEncontrado: any = null;
   public ipats = false;
   public identity: any;
+
+  public claseAccidente: any;
+  public choqueCon: any;
 
   public gravedades: any;
   public clasesAccidente: any;
@@ -100,11 +91,6 @@ export class NewComponent implements OnInit {
   public gradosExamen: any;
   public licenciasConduccion: any;
   public hospitales: any;
-  //public vehiculos: any;
-  /*public marcas: any;
-  public lineas: any;
-  public colores: any;
-  public carrocerias: any;*/
   public empresas: any;
   public lugaresImpacto: any;
   public inmovilizaciones: any;
@@ -119,53 +105,41 @@ export class NewComponent implements OnInit {
   public tiposVictima: any;
   public gravedadesVictima: any;
 
-  public gravedadSelected: any;
-  public claseAccidenteSelected: any;
-  public choqueConSelected: any;
-  public objetoFijoSelected: any;
-  public sedeOperativaSelected: any;
-  public aseguradoraSelected: any;
-  public areaSelected: any;
-  public sectorSelected: any;
-  public zonaSelected: any;
-  public disenioSelected: any;
-  public estadoTiempoSelected: any;
-  public geometriaSelected: any;
-  public utilizacionSelected: any;
-  public calzadaCarrilSelected: any;
-  public fallaSelected: any;
-  public materialSelected: any;
-  public estadoViaSelected: any;
-  public condicionViaSelected: any;
-  public iluminacionSelected: any;
-  public estadoIluminacionSelected: any;
-  public visualSelected: any;
-  public visualDisminuidaSelected: any;
-  public resultadoExamenSelected: any;
-  public gradoExamenSelected: any;
-  public licenciaConduccionSelected: any;
-  public hospitalSelected: any;
-  //public vehiculoSelected: any;
-  public marcaSelected: any;
-  public lineaSelected: any;
-  public colorSelected: any;
-  public carroceriaSelected: any;
-  public empresaSelected: any;
-  public lugarImpactoSelected: any;
-  public inmovilizacionSelected: any;
-  public tecnomecanicaSelected: any;
-  public claseSelected: any;
-  public servicioSelected: any;
-  //public modalidadTransporteSelected: any;
-  //public radioAccionSelected: any;
-  public hipotesisSelected: any;
-  public tipoVictimaSelected: any;
-  public gravedadVictimaSelected: any;
+  public gravedadSelected: any = null;
+  public claseAccidenteSelected: any = null;
+  public choqueConSelected: any = null;
+  public objetoFijoSelected: any = null;
+  public sedeOperativaSelected: any = null;
+  public aseguradoraSelected: any = null;
+  public areaSelected: any = null;
+  public sectorSelected: any = null;
+  public zonaSelected: any = null;
+  public disenioSelected: any = null;
+  public estadoTiempoSelected: any = null;
+  public geometriaSelected: any = null;
+  public utilizacionSelected: any = null;
+  public calzadaCarrilSelected: any = null;
+  public fallaSelected: any = null;
+  public materialSelected: any = null;
+  public estadoViaSelected: any = null;
+  public condicionViaSelected: any = null;
+  public iluminacionSelected: any = null;
+  public estadoIluminacionSelected: any = null;
+  public visualSelected: any = null;
+  public visualDisminuidaSelected: any = null;
+  public resultadoExamenSelected: any = null;
+  public gradoExamenSelected: any = null;
+  public licenciaConduccionSelected: any = null;
+  public lugarImpactoSelected: any = null;
+  public hipotesisSelected: any = null;
+  public tipoVictimaSelected: any = null;
+  public gravedadVictimaSelected: any = null;
+
 
   public resumen = {}; public datos = {
   }
 
-  public datos2 = {
+  public datosVehiculo = {
     'vehiculos': [],
     'cDemandante': [],
     'cDemandado': [],
@@ -203,24 +177,12 @@ export class NewComponent implements OnInit {
     private _VisualDisminuidaService: SvCfgVisualDisminuidaService,
     private _ResultadoExamenService: SvCfgResultadoExamenService,
     private _GradoExamenService: SvCfgGradoExamenService,
-    private _LicenciaConduccionService: RncLicenciaConduccionService,
     private _HospitalService: SvCfgHospitalService,
-    //private _VehiculoService: VehiculoService,
-    /*private _MarcaService: MarcaService,
-    private _LineaService: LineaService,
-    private _ColorService: ColorService,
-    private _CarroceriaService: CarroceriaService,*/
     private _EmpresaService: EmpresaService,
     private _FallaService: SvCfgFallaService,
     private _LugarImpactoService: SvCfgLugarImpactoService,
-    //private _InmovilizacionService: InmovilizacionService,
-    private _TecnoMecanicaService: TecnoMecanicaService,
-    private _SoatService: SoatService,
-    //private _PropietarioVehiculoService: PropietarioVehiculoService,
     private _ClaseService: ClaseService,
     private _ServicioService: ServicioService,
-    //private _ModalidadTransporteService: CfgModalidadTransporteService,
-    //private _RadioAccionService: CfgRadioAccionService,
     private _HipotesisService: SvCfgHipotesisService,
     private _TipoVictimaService: SvCfgTipoVictimaService,
     private _GravedadVictimaService: SvCfgGravedadVictimaService,
@@ -238,46 +200,14 @@ export class NewComponent implements OnInit {
   enviarTramite() {
     let token = this._loginService.getToken();
 
-    this.msvRegistroIpat.sedeOperativa = this.sedeOperativaSelected;
-    this.msvRegistroIpat.gravedad = this.gravedadSelected;
-    this.msvRegistroIpat.claseAccidente = this.claseAccidenteSelected;
-    this.msvRegistroIpat.choqueCon = this.choqueConSelected;
-    this.msvRegistroIpat.objetoFijo = this.objetoFijoSelected;
-    this.msvRegistroIpat.area = this.areaSelected;
-    this.msvRegistroIpat.sector = this.sectorSelected;
-    this.msvRegistroIpat.zona = this.zonaSelected;
-    this.msvRegistroIpat.disenio = this.disenioSelected;
-    this.msvRegistroIpat.estadoTiempo = this.estadoTiempoSelected;
-    this.msvRegistroIpat.geometria = this.geometriaSelected;
-    this.msvRegistroIpat.utilizacion = this.utilizacionSelected;
-    this.msvRegistroIpat.calzada = this.calzadaCarrilSelected;
-    this.msvRegistroIpat.carril = this.calzadaCarrilSelected;
-    this.msvRegistroIpat.material = this.materialSelected;
-    this.msvRegistroIpat.estadoVia = this.estadoViaSelected;
-    this.msvRegistroIpat.condicionVia = this.condicionViaSelected;
-    this.msvRegistroIpat.iluminacion = this.iluminacionSelected;
-    this.msvRegistroIpat.estadoIluminacion = this.estadoIluminacionSelected;
-    this.msvRegistroIpat.visual = this.visualSelected;
-    this.msvRegistroIpat.visualDisminuida = this.visualDisminuidaSelected;
-    this.msvRegistroIpat.resultadoExamenConductor = this.resultadoExamenSelected;
-    this.msvRegistroIpat.gradoExamenConductor = this.gradoExamenSelected;
-    this.msvRegistroIpat.hospitalConductor = this.hospitalSelected;
-    this.msvRegistroIpat.aseguradoraSoat = this.aseguradoraSelected;
-    this.msvRegistroIpat.falla = this.fallaSelected;
-    this.msvRegistroIpat.lugarImpacto = this.lugarImpactoSelected;
-    this.msvRegistroIpat.hipotesis = this.hipotesisSelected;
-    this.msvRegistroIpat.tipoVictima = this.tipoVictimaSelected;
-    this.msvRegistroIpat.gravedadVictima = this.gravedadVictimaSelected;
-
     let data =[
-      {'datosLimitacion': this.msvRegistroIpat},
-      {'vehiculosLimitacionArray': this.datos2},
+      { 'datosLimitacion': this.msvRegistroIpat },
+      { 'vehiculosLimitacionArray': this.datosVehiculo },
     ];
+    
     this._MsvRegistroIpatService.register(data, token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -327,9 +257,8 @@ export class NewComponent implements OnInit {
     };
     this._MsvConsecutivoService.showBySedeConsecutivo(token, datos).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.consecutivo = this.respuesta.data;
+        if (response.status == 'success') {
+          this.consecutivo = response.data;
           this._GravedadService.getGravedadSelect().subscribe(
             response => {
               this.gravedades = response;
@@ -668,71 +597,6 @@ export class NewComponent implements OnInit {
               }
             }
           );
-          /*this._VehiculoService.getVehiculoSelect().subscribe(
-            response => {
-              this.vehiculos = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._MarcaService.getMarcaSelect().subscribe(
-            response => {
-              this.marcas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._LineaService.getLineaSelect().subscribe(
-            response => {
-              this.lineas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ColorService.getColorSelect().subscribe(
-            response => {
-              this.colores = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._CarroceriaService.getCarroceriaSelect().subscribe(
-            response => {
-              this.carrocerias = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );*/
           this._EmpresaService.getEmpresaSelect().subscribe(
             response => {
               this.empresas = response;
@@ -798,32 +662,6 @@ export class NewComponent implements OnInit {
               }
             }
           );
-          /*this._ModalidadTransporteService.getCfgModalidadTransporteSelect().subscribe(
-            response => {
-              this.modalidadesTransporte = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._RadioAccionService.getCfgRadioAccionSelect().subscribe(
-            response => {
-              this.radioAciones = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );*/
           this._HipotesisService.getHipotesisSelect().subscribe(
             response => {
               this.hipotesis = response;
@@ -882,9 +720,8 @@ export class NewComponent implements OnInit {
       });
     this._FuncionarioService.searchLogin(this.identity, token).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.sedeOperativa = this.respuesta.data.sedeOperativa;
+        if (response.status == 'success') {
+          this.sedeOperativa = response.data.sedeOperativa;
         } else {
           swal({
             title: 'Alerta!',
@@ -906,15 +743,14 @@ export class NewComponent implements OnInit {
 
 
   delete(vehiculo: any): void {
-    this.datos2.vehiculos = this.datos2.vehiculos.filter(h => h !== vehiculo);
-    if (this.datos2.vehiculos.length === 0) {
+    this.datosVehiculo.vehiculos = this.datosVehiculo.vehiculos.filter(h => h !== vehiculo);
+    if (this.datosVehiculo.vehiculos.length === 0) {
       this.ipats = false;
     }
   }
 
   btnNewVehiculo() {
-
-    this.datos2.vehiculos.push(
+    this.datosVehiculo.vehiculos.push(
       {
         'placa': this.consecutivo,
         'sedeOperativa': this.consecutivo
