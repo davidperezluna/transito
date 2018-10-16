@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CfgCdaService {
-	private url = environment.apiUrl + 'vehiculo/cfgcda';
+export class VhloCfgCdaService {
+	private url = environment.apiUrl + 'vehiculo/vhlocfgcda';
 	public identity;
 	public token;
 

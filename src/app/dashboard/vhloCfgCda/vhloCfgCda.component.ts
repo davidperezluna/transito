@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgCdaService } from '../../services/cfgCda.service';
+import { VhloCfgCdaService } from '../../services/vhloCfgCda.service';
 import { LoginService } from '../../services/login.service';
-import { CfgCda } from './cfgCda.modelo';
+import { VhloCfgCda } from './vhloCfgCda.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgCda.component.html'
+  templateUrl: './vhloCfgCda.component.html'
 })
-export class CfgCdaComponent implements OnInit {
+export class VhloCfgCdaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -18,10 +18,10 @@ export class CfgCdaComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public cda: CfgCda;
+  public cda: VhloCfgCda;
 
   constructor(
-    private _EstadoService: CfgCdaService,
+    private _EstadoService: VhloCfgCdaService,
 		private _loginService: LoginService,
     ){}
     

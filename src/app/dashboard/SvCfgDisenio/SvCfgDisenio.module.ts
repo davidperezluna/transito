@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SvCfgDisenioComponent } from './svCfgDisenio.component';
+import { SvCfgDisenioComponent } from './SvCfgDisenio.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SvCfgDisenioService } from '../../services/svCfgDisenio.service';
 

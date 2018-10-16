@@ -12,7 +12,7 @@ import {VehiculoService} from '../../../services/vehiculo.service';
 import {SedeOperativaService} from '../../../services/sedeOperativa.service';
 import {MarcaService} from '../../../services/marca.service';
 import {CfgRadioAccionService} from '../../../services/cfgRadioAccion.service';
-import {CfgModalidadTransporteService} from '../../../services/cfgModalidadTransporte.service';
+import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-edit',
@@ -60,8 +60,8 @@ constructor(
   private _CombustibleService: CombustibleService,
   private _VehiculoService: VehiculoService,
   private _SedeOperativaService: SedeOperativaService,
-  private _CfgRadioAccionService: CfgRadioAccionService,
-  private _CfgModalidadTransporteService: CfgModalidadTransporteService,
+  private _RadioAccionService: CfgRadioAccionService,
+  private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   ){}
 
   ngOnInit() {
@@ -223,7 +223,7 @@ constructor(
         }
       }
     );
-    this._CfgRadioAccionService.getCfgRadioAccionSelect().subscribe(
+    this._RadioAccionService.getCfgRadioAccionSelect().subscribe(
       response => {
         this.radioAcciones = response;
         setTimeout(() => {
@@ -239,7 +239,7 @@ constructor(
         }
       }
     );
-    this._CfgModalidadTransporteService.getCfgModalidadTransporteSelect().subscribe(
+    this._ModalidadTransporteService.getCfgModalidadTransporteSelect().subscribe(
       response => {
         this.modalidadTransportes = response;
         setTimeout(() => {

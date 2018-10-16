@@ -15,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _EstadoService: TecnoMecanicaService,
+  private _TecnoMecanicaService: TecnoMecanicaService,
   private _loginService: LoginService,
   ){}
 
@@ -26,7 +26,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._EstadoService.edit(this.tecnoMecanica,token).subscribe(
+		this._TecnoMecanicaService.edit(this.tecnoMecanica,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

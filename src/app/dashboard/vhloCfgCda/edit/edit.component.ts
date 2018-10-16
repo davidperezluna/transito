@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CfgCdaService } from '../../../services/cfgCda.service';
+import { VhloCfgCdaService } from '../../../services/vhloCfgCda.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _EstadoService: CfgCdaService,
+  private _CdaService: VhloCfgCdaService,
   private _loginService: LoginService,
   ){}
 
@@ -26,7 +26,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._EstadoService.edit(this.cda,token).subscribe(
+		this._CdaService.edit(this.cda,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

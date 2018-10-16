@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TecnoMecanica } from '../vehiculoTecnoMecanica.modelo';
 import { TecnoMecanicaService } from '../../../services/vehiculoTecnoMecanica.service';
-import { CfgCdaService } from '../../../services/cfgCda.service';
+import { VhloCfgCdaService } from '../../../services/vhloCfgCda.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -19,7 +19,7 @@ export class NewComponent implements OnInit {
 
 constructor(
   private _TecnoMecanicaService: TecnoMecanicaService,
-  private _CdaService: CfgCdaService,
+  private _CdaService: VhloCfgCdaService,
   private _loginService: LoginService,
   ){}
 

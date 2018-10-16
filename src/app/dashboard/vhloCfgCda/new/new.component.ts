@@ -1,6 +1,6 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { CfgCda } from '../cfgCda.modelo';
-import { CfgCdaService } from '../../../services/cfgCda.service';
+import { VhloCfgCda } from '../vhloCfgCda.modelo';
+import { VhloCfgCdaService } from '../../../services/vhloCfgCda.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public cda: CfgCda;
+public cda: VhloCfgCda;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _CdaService: CfgCdaService,
+  private _CdaService: VhloCfgCdaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.cda = new CfgCda(null, null, null);
+    this.cda = new VhloCfgCda(null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);
