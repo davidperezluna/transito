@@ -126,7 +126,16 @@
                             <div class="col-xs-12 col-lg-4">
                                 <label>Correo electrónico <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="empresa.correo" name="correo" placeholder="" type="email" required>
-                            </div>                            
+                            </div> 
+
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Tipo empresa
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="tipoEmpresas" [(ngModel)]="tipoEmpresaSelected" required name="tipoEMpresaId">
+                                </ng-select>
+                            </div>
+
                             <br><br><hr>
                             <!-- fin datos direccion -->
                             <!-- DATOS REPRESENTANTE  -->

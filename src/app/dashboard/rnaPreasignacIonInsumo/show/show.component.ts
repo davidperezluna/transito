@@ -1,31 +1,31 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { SedeOperativaService } from '../../services/sedeOperativa.service';
-import { CfgCasoInsumoService } from '../../services/cfgCasoInsumo.service';
-import { RnaInsumoService } from '../../services/rnaInsumos.service';
-import { ImoTrazabilidadService } from '../../services/imoTrazabilidad.service';
+import { ImoTrazabilidadService } from '../../../services/imoTrazabilidad.service';
+import { ImoAsignacionService } from '../../../services/imoAsignacion.service';
+import { LoginService } from '../../../services/login.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-rnaPreasignacionInsumo',
-  templateUrl: './rnaPreasignacionInsumo.component.html',
+  selector: 'app-show',
+  templateUrl: './show.component.html',
   providers: [DatePipe]
 })
-export class RnaPreasignacionInsumoComponent implements OnInit {
-public formIndex = true;
-public formNew = false;
-public formShow = false;
+export class ShowComponent implements OnInit {
+@Input() reasignacionId:any = null;
+@Output() ready = new EventEmitter<any>();
 public errorMessage;
 public respuesta;
 public reasignaciones:any;
+public insumoSelected:any;
 public table: any = null;
+public numero:any;
 public isCantidad=true;
-public reasignacionId:any;
-
 
 constructor(
   private _ImoTrazabilidadService: ImoTrazabilidadService,
+  private _ImoAsignacionService: ImoAsignacionService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -39,7 +39,9 @@ constructor(
       }
     });
 
-    this._ImoTrazabilidadService.index().subscribe(
+    let token = this._LoginService.getToken();
+
+    this._ImoAsignacionService.showTrazabilidad(token,this.reasignacionId).subscribe(
       response => {
         this.reasignaciones = response.data;
         let timeoutId = setTimeout(() => {
@@ -57,31 +59,18 @@ constructor(
       }
     );
   }
-  onShow(id:any){
-    this.reasignacionId = id;
-    this.formIndex = false;
-    this.formNew = false;
-    this.formShow = true;
-    this.table.destroy();
-  }
-  onNew(){
-    this.formIndex = false;
-    this.formNew = true;
-    this.table.destroy();
-  }
-  ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formShow = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
+  onCancelar(){
+    this.ready.emit(true);
   }
   iniciarTabla() {
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
+      dom: 'Bfrtip',
+      buttons: [
+          'pdf',
+      ],
       oLanguage: {
         oPaginate: {
           sFirst: '<<',
