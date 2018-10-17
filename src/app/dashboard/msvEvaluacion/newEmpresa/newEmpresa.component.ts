@@ -31,7 +31,7 @@ public tiposIdentificacion: any;
 public municipioSelected: any;
 public ciudadanoSelected: any;
 public tipoSociedadSelected: any;
-public tipoIdentificacionSelected: any;
+public tipoIdentificacionSelected: any; 
 public municipioResidenciaSelected: any;
 public municipioNacimientoSelected: any;
 public formNewSucursal = false;
@@ -50,7 +50,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._tipoSociedadService.getTipoSociedadSelect().subscribe(
       response => {

@@ -1,0 +1,47 @@
+<div class="container" >
+    <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                
+            </div>
+            <div class="card-body">
+                <form #newForm="ngForm">
+                    <div class="row justify-content-center">
+                        <div class="card-body col-md-12"> 
+                            <table class="table " id="dataTables-example-Sustratos">
+                            <thead>
+                            <tr>
+                                <th>Sede</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Descripcion</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
+                                <td >{{reasignacion.sedeOperativa.nombre}}</td>
+                                <td >{{reasignacion.fecha}}</td>
+                                <td >{{reasignacion.estado}}</td>
+                                <td >{{reasignacion.descripcion}}</td>
+                                <td>
+                                <button (click)="onShow(reasignacion.id)"  class="btn btn-outline-info" type="button">Listar</button> 
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>    
+                    </div>
+                </form>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+    </div>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-show *ngIf='formShow' [reasignacionId]="reasignacionId" (ready)="ready($event)"></app-show>
+</div>

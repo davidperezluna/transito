@@ -1,0 +1,40 @@
+<div class="container" >
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+               
+                </div>
+                <div class="card-body">
+                    <form #newForm="ngForm">
+                        <div class="row justify-content-center">
+                            <div class="card-body col-md-12"> 
+                                <table class="table " id="dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th>Sede</th>
+                                    <th>sustrato</th>
+                                    <th>Estado</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
+                                    <td >{{reasignacion.insumo.sedeOperativa.nombre}}</td>
+                                    <td >{{reasignacion.insumo.numero}}</td>
+                                    <td >{{reasignacion.insumo.estado}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>    
+                        </div>
+                    </form>
+                    <div class="card-footer">
+                        <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                        <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                    </div>    
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    

@@ -8,7 +8,6 @@ import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { SucursalService } from '../../../services/sucursal.service';
 import { CfgEmpresaServicioService } from '../../../services/cfgEmpresaServicio.service';
 
 import swal from 'sweetalert2';
@@ -36,6 +35,8 @@ public servicios: any;
 public tipoSociedadSelected: any;
 public tipoIdentificacionSelected: any;
 public municipioResidenciaSelected: any;
+public tipoEmpresaSelected: any;
+public tipoEmpresas: any;
 public municipioNacimientoSelected: any;
 public formNewSucursal = false;
 public formIndexSucursal = true;
@@ -51,10 +52,23 @@ constructor(
   private _tipoIdentificacionService: TipoIdentificacionService,
   private _ciudadanoService: CiudadanoService,
   private _CfgEmpresaServicio: CfgEmpresaServicioService,
-){}
+){} 
 
   ngOnInit() {
-    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+
+    this._tipoEmpresaService.getTipoEmpresaSelect().subscribe(
+      response => {
+        this.tipoEmpresas = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
 
     this._tipoSociedadService.getTipoSociedadSelect().subscribe(
       response => {
@@ -146,6 +160,7 @@ constructor(
     this.empresa.tipoSociedadId = this.tipoSociedadSelected;
     this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.empresa.ciudadanoId = this.ciudadanoSelected;
+    this.empresa.cfgEmpresaServicioId = this.servicioSelected;
     this.empresa.cfgEmpresaServicioId = this.servicioSelected;
 
     let datos = {

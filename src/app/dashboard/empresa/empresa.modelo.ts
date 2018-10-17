@@ -24,6 +24,7 @@ export class Empresa{
 		public nroRegistroMercantil: string,
 		public fechaVencimientoRegistroMercantil:string,
 		public direccionTrabajo: string,
-		public fechaInicial: string
+		public fechaInicial: string,
+		public tipoEMpresa: string
 	){}
 }
