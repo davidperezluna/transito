@@ -11,16 +11,16 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Adjuntar plantilla <b class="text-danger">*</b></label>
-                            <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                            <input class="form-control" [(ngModel)]="file" type="file" (change)="onFileChange($event)" name="file" required>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onRegister()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
-                        Enviar
+                        Subir
                     </button>
                 </div>
             </div>

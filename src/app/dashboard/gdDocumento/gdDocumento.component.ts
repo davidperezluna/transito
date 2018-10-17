@@ -13,12 +13,14 @@ declare var $: any;
 export class GdDocumentoComponent implements OnInit {
   public errorMessage;
   public documentos: any = null;
+  public documentosPendientes: any = null;
   
 	public formNew = false;
 	public formEdit = false;
 	public formIndex = false;
   public formPrint = false;
   public formShow = false;
+  public formAssign = false;
   public formSearch = true;
   
   public table: any = null; 
@@ -39,6 +41,37 @@ export class GdDocumentoComponent implements OnInit {
   ngOnInit() {    
     this.peticionario.idTipoPeticionario = 'Persona';
 
+    if (this.table) {
+      this.table.destroy();
+    }
+
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+    this.formShow = false;
+    this.formPrint = false;
+    this.formAssign = false;
+
+    this._DocumentoService.index().subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.documentosPendientes = response.data;
+          this.formAssign = true;
+
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+
     swal({
       title: '<i>Para Tener En Cuenta</i>',
       type: 'info',
@@ -57,16 +90,6 @@ export class GdDocumentoComponent implements OnInit {
         '<i class="fa fa-thumbs-down"></i>',
       cancelButtonAriaLabel: 'Thumbs down',
     });
-
-    this.formIndex = false;
-    this.formNew = false;
-    this.formEdit = false;
-    this.formShow = false;
-    this.formPrint = false;
-
-    if (this.table) {
-      this.table.destroy();
-    }
   }
 
   iniciarTabla(){
@@ -91,6 +114,7 @@ export class GdDocumentoComponent implements OnInit {
     this.formEdit = false;
     this.formShow = false;
     this.formPrint = false;
+    this.formAssign = false;
     this.formNew = true;
   }
 
@@ -100,6 +124,7 @@ export class GdDocumentoComponent implements OnInit {
     this.formNew = false;
     this.formEdit = false;
     this.formPrint = false;
+    this.formAssign = false;
     this.formShow = true;
   }
 
@@ -110,6 +135,7 @@ export class GdDocumentoComponent implements OnInit {
       this.formNew = false;
       this.formEdit = false;
       this.formShow = false;
+      this.formAssign = false;
       this.formPrint = true;
     }
   }
@@ -143,7 +169,12 @@ export class GdDocumentoComponent implements OnInit {
         if (response.status == 'success') {
           this.ngOnInit();
           this.formIndex = true;
+          this.formAssign = false;
           this.documentos = response.data;
+
+          if (this.table) {
+            this.table.destroy();
+          }
 
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();

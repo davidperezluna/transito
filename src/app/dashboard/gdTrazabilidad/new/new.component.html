@@ -13,8 +13,14 @@
                             <label>No. Oficio <b>{{ trazabilidad.documento.numeroOficio }}</b></label>
                         </div>
                         <div class="col-xs-12 col-lg-12">
+                            <a href="{{ uploadUrl }}/template.docx" target="_blank" class="btn btn-primary">
+                                <i class="fa fa-file"></i>
+                                Descargar plantilla
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
                             <label>Adjuntar respuesta <b class="text-danger">*</b></label>
-                            <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                            <input class="form-control" type="file" (change)="onFileChange($event)" name="file" required>
                         </div>
                     </div>
                 </form>

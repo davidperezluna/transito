@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { GdTrazabilidadService } from '../../../services/gdTrazabilidad.service';
 import { LoginService } from '../../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +11,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() trazabilidad: any = null;
-
+public uploadUrl = environment.uploadUrl;
 public errorMessage;
 public file: any;
 

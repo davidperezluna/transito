@@ -720,12 +720,19 @@
                 <i class="fa fa-angle-right"></i>
                 Tipos Correspondencia
               </a>
-            </li> 
+            </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="gdCfgTipoCorrespondencia" [ngClass]="{'active' : ( addActive === 'gdCfgTipoCorrespondencia')}"
-                (click)="addActiveMenu('gdCfgTipoCorrespondencia')">
+              <a class="nav-link" routerLink="gdCfgMedioCorrespondencia" [ngClass]="{'active' : ( addActive === 'gdCfgMedioCorrespondencia')}"
+                (click)="addActiveMenu('gdCfgMedioCorrespondencia')">
                 <i class="fa fa-angle-right"></i>
-                Medios Correspondencia
+                Medio correspondencia
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="gdDocumento/template" [ngClass]="{'active' : ( addActive === 'gdDocumento/template')}"
+                (click)="addActiveMenu('gdDocumento/template')">
+                <i class="fa fa-angle-right"></i>
+                Plantilla
               </a>
             </li>
           </ul>
@@ -1274,12 +1281,6 @@
           <a class="nav-link" routerLink="gdTrazabilidad" [ngClass]="{'active' : ( addActive === 'gdTrazabilidad')}" (click)="addActiveMenu('gdTrazabilidad')">
             <i class="fa fa-angle-right"></i>
             Gestionar
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="gdCfgMedioCorrespondencia" [ngClass]="{'active' : ( addActive === 'gdCfgMedioCorrespondencia')}" (click)="addActiveMenu('gdCfgMedioCorrespondencia')">
-            <i class="fa fa-angle-right"></i>
-            Medio correspondencia
           </a>
         </li>
       </ul>
