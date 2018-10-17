@@ -38,7 +38,7 @@ import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
 
-import { CfgCdaModule } from './cfgCda/cfgCda.module';
+import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
 import { VhloCfgEmpresaGpsModule } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.module';
 import { VhloCfgTipoRodajeModule } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.module';
@@ -62,7 +62,7 @@ import { SvCfgCardinalidadModule } from "./svCfgCardinalidad/svCfgCardinalidad.m
 import { SvCfgClaseChoqueModule } from "./svCfgClaseChoque/svCfgClaseChoque.module";
 import { SvCfgCondicionViaModule } from "./svCfgCondicionVia/svCfgCondicionVia.module";
 import { SvCfgControlViaModule } from "./svCfgControlVia/svCfgControlVia.module";
-import { SvCfgDisenioModule } from "./svCfgDisenio/svCfgDisenio.module";
+import { SvCfgDisenioModule } from "./SvCfgDisenio/SvCfgDisenio.module";
 import { SvCfgEntidadAccidenteModule } from "./svCfgEntidadAccidente/svCfgEntidadAccidente.module";
 import { SvCfgEstadoConductorModule } from "./svCfgEstadoConductor/svCfgEstadoConductor.module";
 import { SvCfgEstadoIluminacionModule } from "./svCfgEstadoIluminacion/svCfgEstadoIluminacion.module";
@@ -188,7 +188,7 @@ import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
-import { rnaPreasignacionInsumoModule } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.module';
+import { rnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
 import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
@@ -325,7 +325,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CvCfgInteresModule,
       CvCfgPorcentajeInicialModule,
       CvAcuerdoPagoModule,
-      CfgCdaModule,
+      VhloCfgCdaModule,
       VhloCfgOrigenRegistroModule,
       VhloCfgEmpresaGpsModule,
       VhloCfgTipoRodajeModule,

@@ -10,7 +10,7 @@ import { ServicioService } from '../../../services/servicio.service';
 import { ColorService } from '../../../services/color.service';
 import { CombustibleService } from '../../../services/combustible.service';
 import { CfgRadioAccionService } from '../../../services/cfgRadioAccion.service';
-import { CfgModalidadTransporteService } from '../../../services/cfgModalidadTransporte.service';
+import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { MarcaService } from '../../../services/marca.service';
@@ -98,7 +98,7 @@ constructor(
   private _ColorService: ColorService,
   private _CombustibleService: CombustibleService,
   private _CfgRadioAccionService: CfgRadioAccionService,
-  private _CfgModalidadTransporteService: CfgModalidadTransporteService,
+  private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _RnaPreregistroService: RnaPreregistroService,
   private _SedeOperativaService: SedeOperativaService,
   private _tipoIdentificacionService: TipoIdentificacionService,
@@ -281,7 +281,7 @@ constructor(
       }
     );
 
-    this._CfgModalidadTransporteService.getCfgModalidadTransporteSelect().subscribe(
+    this._ModalidadTransporteService.getCfgModalidadTransporteSelect().subscribe(
       response => {
         this.modalidadesTransporte = response;
       },  

@@ -55,13 +55,13 @@
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-6">
                         <label>Organismo de Transito</label>
-                        <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected"
+                        <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="msvRegistroIpat.idSedeOperativa"
                             required name="sedeOperativa">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>Gravedad</label>
-                        <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="gravedadSelected" required name="gravedad">
+                        <label>Gravedad Accidente</label>
+                        <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="msvRegistroIpat.idGravedad" required name="gravedad">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -81,28 +81,28 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Clase de accidente</label>
-                        <ng-select [multiple]="false" [options]="clasesAccidente" [(ngModel)]="claseAccidenteSelected"
+                        <ng-select [multiple]="false" [options]="clasesAccidente" [(ngModel)]="msvRegistroIpat.idClaseAccidente"
                             required name="claseAccidente">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="claseAccidenteSelected && claseAccidente?.nombre !='OTRO'">
                         <label>Otro (Clase de Accidente)</label>
                         <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroClaseAccidente" name="otroClaseAccidente"
                             required>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Choque con</label>
-                        <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="choqueConSelected" required
+                        <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="msvRegistroIpat.idChoqueCon" required
                             name="choqueCon">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Objeto Fijo</label>
-                        <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="objetoFijoSelected"
+                        <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="msvRegistroIpat.idObjetoFijo"
                             required name="objetoFijo">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="objetoFijoSelected && objetoFijo?.nombre !='OTRO'">
                         <label>Otro (Objeto Fijo)</label>
                         <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroObjetoFijo" name="otroObjetoFijo"
                             required>
@@ -120,27 +120,27 @@
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-6">
                         <label>Área</label>
-                        <ng-select [multiple]="false" [options]="areas" [(ngModel)]="areaSelected" required name="area">
+                        <ng-select [multiple]="false" [options]="areas" [(ngModel)]="msvRegistroIpat.idArea" required name="area">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Sector</label>
-                        <ng-select [multiple]="false" [options]="sectores" [(ngModel)]="sectorSelected" required name="sector">
+                        <ng-select [multiple]="false" [options]="sectores" [(ngModel)]="msvRegistroIpat.idSector" required name="sector">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Zona</label>
-                        <ng-select [multiple]="false" [options]="zonas" [(ngModel)]="zonaSelected" required name="zona">
+                        <ng-select [multiple]="false" [options]="zonas" [(ngModel)]="msvRegistroIpat.idZona" required name="zona">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Diseño</label>
-                        <ng-select [multiple]="false" [options]="disenios" [(ngModel)]="disenioSelected" required name="disenio">
+                        <ng-select [multiple]="false" [options]="disenios" [(ngModel)]="msvRegistroIpat.idDisenio" required name="disenio">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label> Estado Tiempo (Condición Clima)</label>
-                        <ng-select [multiple]="false" [options]="estadosTiempo" [(ngModel)]="estadoTiempoSelected"
+                        <ng-select [multiple]="false" [options]="estadosTiempo" [(ngModel)]="msvRegistroIpat.idEstadoTiempo"
                             required name="estadoTiempo">
                         </ng-select>
                     </div>
@@ -157,66 +157,66 @@
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-6">
                         <label>Geometricas</label>
-                        <ng-select [multiple]="false" [options]="geometrias" [(ngModel)]="geometriaSelected" required
+                        <ng-select [multiple]="false" [options]="geometrias" [(ngModel)]="msvRegistroIpat.idGeometria" required
                             name="geometria">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Utilizacion</label>
-                        <ng-select [multiple]="false" [options]="utilizaciones" [(ngModel)]="utilizacionSelected"
+                        <ng-select [multiple]="false" [options]="utilizaciones" [(ngModel)]="msvRegistroIpat.idUtilizacion"
                             required name="utilizacion">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Calzadas</label>
-                        <ng-select [multiple]="false" [options]="calzadasCarriles" [(ngModel)]="calzadaSelected"
+                        <ng-select [multiple]="false" [options]="calzadasCarriles" [(ngModel)]="msvRegistroIpat.idCalzada"
                             required name="calzada">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Carriles</label>
-                        <ng-select [multiple]="false" [options]="calzadasCarriles" [(ngModel)]="calzadaSelected"
+                        <ng-select [multiple]="false" [options]="calzadasCarriles" [(ngModel)]="msvRegistroIpat.idCarril"
                             required name="carril">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Material(Superficie de Rodadura)</label>
-                        <ng-select [multiple]="false" [options]="materiales" [(ngModel)]="materialSelected" required
+                        <ng-select [multiple]="false" [options]="materiales" [(ngModel)]="msvRegistroIpat.idMaterial" required
                             name="material">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Estado Vía</label>
-                        <ng-select [multiple]="false" [options]="estadosVia" [(ngModel)]="estadoViaSelected" required
+                        <ng-select [multiple]="false" [options]="estadosVia" [(ngModel)]="msvRegistroIpat.idEstadoVia" required
                             name="estadoVia">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Condición Vía</label>
-                        <ng-select [multiple]="false" [options]="condicionesVia" [(ngModel)]="condicionViaSelected"
+                        <ng-select [multiple]="false" [options]="condicionesVia" [(ngModel)]="msvRegistroIpat.idCondicionVia"
                             required name="condicionVia">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Iluminación</label>
-                        <ng-select [multiple]="false" [options]="iluminaciones" [(ngModel)]="iluminacionSelected"
+                        <ng-select [multiple]="false" [options]="iluminaciones" [(ngModel)]="msvRegistroIpat.idIluminacion"
                             required name="iluminacion">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="iluminacionSelected && iluminacion?.nombre !='CON'">
                         <label>Estado Iluminación</label>
-                        <ng-select [multiple]="false" [options]="estadosIluminacion" [(ngModel)]="estadoIluminacionSelected"
+                        <ng-select [multiple]="false" [options]="estadosIluminacion" [(ngModel)]="msvRegistroIpat.idEstadoIluminacion"
                             required name="estadoIluminacion">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Visibilidad(Visual)</label>
-                        <ng-select [multiple]="false" [options]="visuales" [(ngModel)]="visualSelected" required name="visual">
+                        <ng-select [multiple]="false" [options]="visuales" [(ngModel)]="msvRegistroIpat.idVisual" required name="visual">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="visualSelected && visual?.nombre !='DISMINUIDA'">
                         <label>Visual Disminuida por </label>
-                        <ng-select [multiple]="false" [options]="visualesDisminuidas" [(ngModel)]="visualDisminuidaSelected"
+                        <ng-select [multiple]="false" [options]="visualesDisminuidas" [(ngModel)]="msvRegistroIpat.idVisualDisminuida"
                             required name="visualDisminuida">
                         </ng-select>
                     </div>
@@ -268,7 +268,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Gravedad Conductor</label>
-                        <ng-select [multiple]="false" [options]="gravedadesVictima" [(ngModel)]="gravedadVictimaSelected" required
+                        <ng-select [multiple]="false" [options]="gravedadesVictima" [(ngModel)]="msvRegistroIpat.idGravedadVictima" required
                             name="gravedadConductor">
                         </ng-select>
                     </div>
@@ -308,20 +308,34 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Resultado Examen</label>
-                        <ng-select [multiple]="false" [options]="resultadosExamen" [(ngModel)]="resultadoExamenSelected"
+                        <ng-select [multiple]="false" [options]="resultadosExamen" [(ngModel)]="msvRegistroIpat.idResultadoExamenConductor"
                             required name="resultadoExamenConductor">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Grado Examen</label>
-                        <ng-select [multiple]="false" [options]="gradosExamen" [(ngModel)]="gradoExamenSelected"
+                        <ng-select [multiple]="false" [options]="gradosExamen" [(ngModel)]="msvRegistroIpat.idGradoExamenConductor"
                             required name="gradoExamenConductor">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>¿Sustancias Psicoactivas?</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sustanciasPsicoactivasConductor"
-                            name="sustanciasPsicoactivasConductor" required>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioSustanciasPsicoactivasConductorSi" name="sustanciasPsicoactivasConductor" [(ngModel)]="msvRegistroIpat.sustanciasPsicoactivasConductor" value="Si"
+                                        type="radio" id="customRadioSustanciasPsicoactivasConductor1" name="customRadioSustanciasPsicoactivasConductor" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSustanciasPsicoactivasConductor1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioSustanciasPsicoactivasConductorNo" name="sustanciasPsicoactivasConductor" [(ngModel)]="msvRegistroIpat.sustanciasPsicoactivasConductor" value="No"
+                                        type="radio" id="customRadioSustanciasPsicoactivasConductor2" name="customRadioSustanciasPsicoactivasConductor" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSustanciasPsicoactivasConductor2">No</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>¿Porta Licencia?</label>
@@ -439,7 +453,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Hospital de atención</label>
-                        <ng-select [multiple]="false" [options]="hospitales" [(ngModel)]="hospitalSelected" required
+                        <ng-select [multiple]="false" [options]="hospitales" [(ngModel)]="msvRegistroIpat.idHospital" required
                             name="hospitalConductor">
                         </ng-select>
                     </div>
@@ -641,7 +655,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Aseguradora</label>
-                        <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="aseguradoraSelected"
+                        <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil"
                             required name="aseguradoraSeguroResponsabilidadCivil">
                         </ng-select>
                     </div>
@@ -678,7 +692,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Aseguradora Seguro extracontractual</label>
-                        <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="aseguradoraSelected"
+                        <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="msvRegistroIpat.idAseguradoraExtraContractual"
                             required name="aseguradoraSeguroExtracontractual">
                         </ng-select>
                     </div>
@@ -771,13 +785,13 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Lugar Impacto</label>
-                        <ng-select [multiple]="false" [options]="lugaresImpacto" [(ngModel)]="lugarImpactoSelected"
+                        <ng-select [multiple]="false" [options]="lugaresImpacto" [(ngModel)]="msvRegistroIpat.idLugarImpacto"
                             required name="lugarImpacto">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Hipotesis del accidente de transito</label>
-                        <ng-select [multiple]="false" [options]="hipotesis" [(ngModel)]="hipotesisSelected" required
+                        <ng-select [multiple]="false" [options]="hipotesis" [(ngModel)]="msvRegistroIpat.idHipotesis" required
                             name="hipotesis">
                         </ng-select>
                     </div>
@@ -861,13 +875,13 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Tipo Victima</label>
-                        <ng-select [multiple]="false" [options]="tiposVictima" [(ngModel)]="tipoVictimaSelected"
+                        <ng-select [multiple]="false" [options]="tiposVictima" [(ngModel)]="msvRegistroIpat.idTipoVictima"
                             required name="tipoVictima">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Gravedad Victima</label>
-                        <ng-select [multiple]="false" [options]="gravedadesVictima" [(ngModel)]="gravedadVictimaSelected"
+                        <ng-select [multiple]="false" [options]="gravedadesVictima" [(ngModel)]="msvRegistroIpat.idGravedadVictima"
                             required name="gravedadVictima">
                         </ng-select>
                     </div>
@@ -923,7 +937,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Hospital atención a la victima</label>
-                        <ng-select [multiple]="false" [options]="hospitales" [(ngModel)]="hospitalSelected" required
+                        <ng-select [multiple]="false" [options]="hospitales" [(ngModel)]="msvRegistroIpat.idHospitalVictima" required
                             name="hospitalVictima">
                         </ng-select>
                     </div>
@@ -949,25 +963,57 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>¿Autorizó Victima? </label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.autorizoVictima" name="autorizoVictima"
-                            required>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioAutorizoVictimaSi" name="autorizoVictima" [(ngModel)]="msvRegistroIpat.autorizoVictima"
+                                        value="Si" type="radio" id="customRadioAutorizoVictima1" name="customRadioAutorizoVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioAutorizoVictima1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioAutorizoVictimaNo" name="autorizoVictima" [(ngModel)]="msvRegistroIpat.autorizoVictima"
+                                        value="No" type="radio" id="customRadioAutorizoVictima2" name="customRadioAutorizoVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioAutorizoVictima2">No</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Resultado Examen</label>
-                        <ng-select [multiple]="false" [options]="resultadosExamen" [(ngModel)]="resultadoExamenSelected"
+                        <ng-select [multiple]="false" [options]="resultadosExamen" [(ngModel)]="msvRegistroIpat.idResultadoExamenVictima"
                             required name="resultadoExamenVictima">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Grado Examen</label>
-                        <ng-select [multiple]="false" [options]="gradosExamen" [(ngModel)]="gradoExamenSelected"
+                        <ng-select [multiple]="false" [options]="gradosExamen" [(ngModel)]="msvRegistroIpat.idGradoExamenVictima"
                             required name="gradoExamenVictima">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>¿Sustancias Psicoactivas?</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sustanciasPsicoactivasVictima"
-                            name="sustanciasPsicoactivasVictima" required>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioSustanciasPsicoactivasVictimaSi" name="sustanciasPsicoactivasVictima" [(ngModel)]="msvRegistroIpat.sustanciasPsicoactivasVictima"
+                                        value="Si" type="radio" id="customRadioSustanciasPsicoactivasVictima1" name="customRadioSustanciasPsicoactivasVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSustanciasPsicoactivasVictima1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioSustanciasPsicoactivasVictimaNo" name="sustanciasPsicoactivasVictima" [(ngModel)]="msvRegistroIpat.sustanciasPsicoactivasVictima"
+                                        value="No" type="radio" id="customRadioSustanciasPsicoactivasVictima2" name="customRadioSustanciasPsicoactivasVictima"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSustanciasPsicoactivasVictima2">No</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Chaleco</label>
