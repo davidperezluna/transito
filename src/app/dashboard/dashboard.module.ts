@@ -180,6 +180,8 @@ import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTi
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
 
+import { RnaPreasignacionInsumoModule } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.module';
+
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
@@ -385,7 +387,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
-      //RnaPreasignacionInsumoModule,
+      RnaPreasignacionInsumoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

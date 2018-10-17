@@ -190,6 +190,7 @@ import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
+import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
@@ -343,7 +344,7 @@ export const DashboardRoutes: Route[] = [
       ...RnaPreasignacionPlacaRoutes,
       ...RnaPreregistroRoutes,
       ...rnaRegistroInsumosRoutes,
-      // ...SucursalRoutes,
+      ...rnaPreasignacionInsumoRoutes,
       ...TramitePrecioRoutes,
       ...CfgPlacaRoutes,
       ...CfgCasoInsumoRoutes,
