@@ -45,6 +45,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
     'numeroContrato' : null,
     'fechaInicio':null,
     'fechaFin':null,
+    'nombramiento':null,
   }
 
   constructor(
@@ -272,6 +273,9 @@ export class MpersonalFuncionarioComponent implements OnInit {
         this.datos.numeroContrato = null;
         this.datos.fechaFin = null;
         this.datos.fechaFin = null;
+      }
+      if (e != 1) {
+        this.datos.nombramiento = null;
       }
     }
   }

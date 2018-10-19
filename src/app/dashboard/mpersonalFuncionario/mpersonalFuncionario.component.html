@@ -52,6 +52,12 @@
                         <div class="col-xs-12 col-lg-4">
                             <label>Fecha fin </label>
                             <input class="form-control" [(ngModel)]="datos.fechaFin" name="fechaFin" type="date" />
+                        </div> 
+                    </div>
+                    <div class="form-group row" *ngIf='tipoContratoSelected == 1'>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Nombramiento</label>
+                            <input class="form-control" [(ngModel)]="datos.nombramiento" name="nombramiento" type="text"/>
                         </div>
                     </div>
                   </form>
