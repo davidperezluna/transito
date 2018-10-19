@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { CvCfgTipoRestriccionComponent } from '.';
 
-export const CvAcuerdoPagoRoutes: Route[] = [
+export const CvCfgTipoRestriccionRoutes: Route[] = [
     {
     path: 'cvCfgTipoRestriccion',
       component: CvCfgTipoRestriccionComponent

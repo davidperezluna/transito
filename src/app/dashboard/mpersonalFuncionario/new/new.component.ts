@@ -46,7 +46,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.funcionario = new MpersonalFuncionario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.funcionario = new MpersonalFuncionario(null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._TipoContratoService.select().subscribe(
       response => {

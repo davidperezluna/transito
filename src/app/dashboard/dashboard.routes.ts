@@ -192,6 +192,7 @@ import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
 import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
+import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -281,7 +282,7 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgSubpartidaArancelariaRoutes,
       ...VhloCfgCondicionIngresoRoutes,
       ...VehiculoTecnoMecanicaRoutes,
-
+      ...CvCfgTipoRestriccionRoutes,
       ...SoatRoutes,
       ...SvCapacitacionRoutes,
       ...SvCfgFuncionRoutes,

@@ -15,4 +15,4 @@ import { SelectModule } from 'angular2-select';
     providers:[CvCfgTipoRestriccionService]
 })
 
-export class CvAcuerdoPagoModule { }
+export class CvCfgTipoRestriccionModule { }

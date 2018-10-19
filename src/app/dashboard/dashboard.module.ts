@@ -37,6 +37,7 @@ import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.m
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
+import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.module';
 
 import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
@@ -350,7 +351,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       SustratoModule,
       GestionTransportePublicoModule,
       EmpresaModule,
-      // SucursalModule,
+      CvCfgTipoRestriccionModule,
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,
       RnaPreregistroModule,
