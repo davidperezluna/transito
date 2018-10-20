@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CfgCdaService } from '../../../services/cfgCda.service';
+import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { UserCfgMenuService } from '../../../services/userCfgMenu.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,24 +9,38 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() cda:any = null;
+@Input() menu:any = null;
 public errorMessage;
-public respuesta;
+
 public formReady = false;
+  public menus: any = null;
 
 constructor(
-  private _EstadoService: CfgCdaService,
+  private _UserCfgMenuService: UserCfgMenuService,
   private _loginService: LoginService,
-  ){}
+  ){  }
 
-  ngOnInit(){ console.log(this.cda);
-   }
+  ngOnInit(){  
+    this._UserCfgMenuService.select().subscribe(
+      response => {
+        this.menus = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._EstadoService.edit(this.cda,token).subscribe(
+		this._UserCfgMenuService.edit(this.menu,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

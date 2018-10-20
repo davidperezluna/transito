@@ -29,6 +29,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
   public identificacion:any;
   public nombre:any;
   public cargo:any;
+  public numeroContrato:any;
   public tiposContrato: any;
   public tipoContratoSelected: any;
   public cargos: any;
@@ -40,7 +41,11 @@ export class MpersonalFuncionarioComponent implements OnInit {
     'identificacion' : null,
     'cargo' : null,
     'tipoContratoId' : null,
-    'sedeOperativaId' : null
+    'sedeOperativaId' : null,
+    'numeroContrato' : null,
+    'fechaInicio':null,
+    'fechaFin':null,
+    'nombramiento':null,
   }
 
   constructor(
@@ -149,6 +154,9 @@ export class MpersonalFuncionarioComponent implements OnInit {
     this.datos.cargo = this.cargoSelected;
     this.datos.tipoContratoId = this.tipoContratoSelected;
     this.datos.sedeOperativaId = this.sedeOperativaSelected;
+
+    console.log(this.datos);
+
     
     let token = this._loginService.getToken();
 		this._FuncionarioService.searchByParametros(this.datos,token).subscribe(
@@ -257,6 +265,19 @@ export class MpersonalFuncionarioComponent implements OnInit {
         
       }
     })
+  }
+
+  onChangedTipoContrato(e){
+    if (e) {
+      if (e != 2) {
+        this.datos.numeroContrato = null;
+        this.datos.fechaFin = null;
+        this.datos.fechaInicio = null;
+      }
+      if (e != 1) {
+        this.datos.nombramiento = null;
+      }
+    }
   }
 
   onEdit(funcionario:any){

@@ -82,4 +82,11 @@ export class GdDocumentoService {
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/print", params, {headers: headers}).map(res => res.json());
 	}
+
+	template(formData, token) {
+		formData.append('authorization', token);
+		return this._http.post(this.url + "/template", formData).map(
+			res => res.json()
+		);
+	}
 }

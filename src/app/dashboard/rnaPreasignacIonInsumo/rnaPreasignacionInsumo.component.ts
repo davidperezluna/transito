@@ -5,6 +5,7 @@ import { RnaInsumoService } from '../../services/rnaInsumos.service';
 import { ImoTrazabilidadService } from '../../services/imoTrazabilidad.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-rnaPreasignacionInsumo',
@@ -12,37 +13,39 @@ import swal from 'sweetalert2';
   providers: [DatePipe]
 })
 export class RnaPreasignacionInsumoComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
+public formIndex = true;
+public formNew = false;
+public formShow = false;
 public errorMessage;
 public respuesta;
-public empresaSelected:any;
-public sedes:any;
-public sedeOrigenSelected:any;
-public sedeDestinoSelected:any;
-public sustratos:any;
 public reasignaciones:any;
-public insumoSelected:any;
-public numero:any;
+public table: any = null;
 public isCantidad=true;
-public datosAsignacion = {
-  'sedeOrigen': null,
-  'sedeDestino': null,
-  'casoInsumo': null,
-  'cantidad': null,
-};
+public reasignacionId:any;
+
 
 constructor(
-  private _SedeOperativaService: SedeOperativaService,
   private _ImoTrazabilidadService: ImoTrazabilidadService,
-  private _CasoInsumoService: CfgCasoInsumoService,
-  private _RnaInsumoService: RnaInsumoService,
   ){}
 
   ngOnInit() {
 
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this._ImoTrazabilidadService.index().subscribe(
       response => {
-        this.reasignaciones = response;
+        this.reasignaciones = response.data;
+        let timeoutId = setTimeout(() => {
+          swal.close()
+          this.iniciarTabla();
+        }, 100);
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -53,85 +56,41 @@ constructor(
         }
       }
     );
-
-    this._CasoInsumoService.getCasoInsumoSustratoSelect().subscribe(
-      response => {
-        this.sustratos = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
+  }
+  onShow(id:any){
+    this.reasignacionId = id;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formShow = true;
+    this.table.destroy();
+  }
+  onNew(){
+    this.formIndex = false;
+    this.formNew = true;
+    this.table.destroy();
+  }
+  ready(isCreado:any){
+      if(isCreado) {
+        this.formNew = false;
+        this.formShow = false;
+        this.formIndex = true;
+        this.ngOnInit();
+      }
+  }
+  iniciarTabla() {
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
         }
       }
-    );
-
-  }
-  onCancelar(){
-    this.ready.emit(true);
-  }
-  onEnviar(){
-    this.datosAsignacion.sedeDestino = this.sedeDestinoSelected;
-    this.datosAsignacion.sedeOrigen = this.sedeOrigenSelected;
-    this.datosAsignacion.casoInsumo = this.insumoSelected;    
-		this._RnaInsumoService.reasignacionSustrato(this.datosAsignacion).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: this.respuesta.msj,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
-  }
-
-  changedSedeOperativa(e){
-    if (e) {
-
-    }
-  }
-
-  isExistencia(){
-    this.datosAsignacion.sedeDestino = this.sedeDestinoSelected;
-    this.datosAsignacion.sedeOrigen = this.sedeOrigenSelected;
-    this.datosAsignacion.casoInsumo = this.insumoSelected;
-    this._RnaInsumoService.isExistencia(this.datosAsignacion).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.isCantidad = false;
-        }else{
-          this.isCantidad = true;
-          swal({
-            title: 'Error!',
-            type: 'error',
-            text: this.respuesta.msj,
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		});
+    });
+    this.table = $('#dataTables-example').DataTable();
   }
 }

@@ -1,51 +1,48 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgCdaService } from '../../services/cfgCda.service';
+import { UserCfgRoleService } from '../../services/userCfgRole.service';
 import { LoginService } from '../../services/login.service';
-import { CfgCda } from './cfgCda.modelo';
+import { UserCfgRole } from './userCfgRole.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgCda.component.html'
+  templateUrl: './UserCfgRole.component.html'
 })
-export class CfgCdaComponent implements OnInit {
+export class UserCfgRoleComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-	public cdas;
+
+  public roles: any = null;
+  
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
+
   public table:any; 
-  public cda: CfgCda;
+  public role: UserCfgRole;
 
   constructor(
-    private _EstadoService: CfgCdaService,
+    private _UserCfgRoleService: UserCfgRoleService,
 		private _loginService: LoginService,
     ){}
     
-  ngOnInit() {
+  ngOnInit() {    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._EstadoService.index().subscribe(
-				response => {
-          this.cdas = response.data;
+    });
+
+    this._UserCfgRoleService.index().subscribe(
+				response => {         
+          this.roles = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -103,35 +100,32 @@ export class CfgCdaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._EstadoService.delete({'id':id},token).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
+        this._UserCfgRoleService.delete({ 'id': id }, token).subscribe(
+          response => {
+              swal({
+                title: 'Eliminado!',
+                text:'Registro eliminado correctamente.',
+                type:'success',
+                confirmButtonColor: '#15d4be',
+              });
+              this.table.destroy();
+              this.ngOnInit();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
-
-        
+          }
+        );
       }
     })
   }
 
-  onEdit(cda:any){
-    this.cda = cda;
+  onEdit(role:any){
+    this.role = role;
     this.formEdit = true;
     this.formIndex = false;
   }

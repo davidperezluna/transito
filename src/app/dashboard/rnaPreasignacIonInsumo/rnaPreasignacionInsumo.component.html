@@ -1,81 +1,54 @@
-<div class="row">
-  <div class="col-md-12">
-      <div class="card">
-      <div class="card-body">
-          <h5 class="m-0">reasignacion de insumos</h5>
-          <hr>
-          <form #newForm="ngForm">
-              <div class="row justify-content-center">
-                  <div class="card-body col-md-12"> 
-                    <!--<div class="form-group row">    
-                        <div class="col-lg-4 col-md-4">
-                            <label>Sede origen*</label>
-                            <ng-select
-                                [multiple]="false"
-                                [options]="sedes"
-                                [(ngModel)]="sedeOrigenSelected"
-                                (ngModelChange)="changedSedeOperativa($event)"
-                                required
-                                name="sedeOrigenId">
-                            </ng-select>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <label>Sede destino*</label>
-                            <ng-select
-                                [multiple]="false"
-                                [options]="sedes"
-                                [(ngModel)]="sedeDestinoSelected"
-                                (ngModelChange)="changedSedeOperativa($event)"
-                                required
-                                name="sedeDestinoId">
-                            </ng-select>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <label>Sustrato*</label>
-                            <ng-select
-                                [multiple]="false"
-                                [options]="sustratos"
-                                [(ngModel)]="insumoSelected"
-                                required
-                                name="insumoSustratoId">
-                            </ng-select>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4"> 
-                            <label>Cantidad*</label>
-                            <input class="form-control" (blur)="isExistencia()" [(ngModel)]="datosAsignacion.cantidad" name="cantidad" placeholder="" type="text" required>
-                        </div> 
-                    </div> -->
-                    <table class="table " id="dataTables-example-Sustratos">
-                    <thead>
-                      <tr>
-                        <th>Sede</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
-                        <th>Descripcion</th>
-                        <th>Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
-                        <td >{{reasignacion.sedeOperativa.nombre}}</td>
-                        <td >{{reasignacion.fehca}}</td>
-                        <td >{{reasignacion.estado}}</td>
-                        <td >{{reasignacion.descripcion}}</td>
-                        <td>
-                          <button (click)="editRnareasignacion(reasignacion)" class="btn btn-outline-info" type="button">Editar</button> 
-                          <button (click)="deleteRnaLoteInsumo(reasignacion.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  </div>    
-              </div>
-          </form>
-          <div class="card-footer">
-              <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-              <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
-          </div>    
-      </div>
-  </div>
+<div class="container" >
+    <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                        <i class="fa fa-plus"></i>
+                        <span class="text">Nuevo</span>
+                        </button>
+                    </div>
+                </h5>
+            </div>
+            <div class="card-body">
+                <form #newForm="ngForm">
+                    <div class="row justify-content-center">
+                        <div class="card-body col-md-12"> 
+                            <table class="table " id="dataTables-example-Sustratos">
+                            <thead>
+                            <tr>
+                                <th>Sede</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Descripcion</th>
+                                <th>Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="odd" *ngFor="let reasignacion of reasignaciones; let i = index">
+                                <td >{{reasignacion.sedeOperativa.nombre}}</td>
+                                <td >{{reasignacion.fecha}}</td>
+                                <td >{{reasignacion.estado}}</td>
+                                <td >{{reasignacion.descripcion}}</td>
+                                <td>
+                                <button (click)="onShow(reasignacion.id)"  class="btn btn-outline-info" type="button">Listar</button> 
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>    
+                    </div>
+                </form>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onEnviar()" [disabled]="isCantidad" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+    </div>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-show *ngIf='formShow' [reasignacionId]="reasignacionId" (ready)="ready($event)"></app-show>
 </div>

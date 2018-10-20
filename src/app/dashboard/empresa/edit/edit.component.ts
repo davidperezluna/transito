@@ -44,6 +44,9 @@ public tipoSociedadSelected: Array<any>; // ng-select [(ngModel)]
 public municipios: Array<any>
 public municipioSelected: Array<any>; // ng-select [(ngModel)]
 
+public tipoEmpresas: Array<any>
+public tipoEmpresaSelect: Array<any>; // ng-select [(ngModel)]
+
 public tiposIdentificacion: Array<any>
 public tipoIdentificacionSelected: Array<any>; // ng-select [(ngModel)]
 
@@ -66,6 +69,7 @@ constructor(
   ){}
 
   ngOnInit(){
+    
     console.log(this.empresa);
      swal({
       title: 'Cargando Formulario!',
@@ -81,6 +85,18 @@ constructor(
       ) {
       }
     })
+    this._tipoEmpresaService.getTipoEmpresaSelect().subscribe(
+      response => {
+        this.tipoEmpresas = response;
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
  
     let token = this._loginService.getToken();
     this._representanteEmpresaService.showRepresentanteEmpresa(this.empresa.id,token).subscribe(

@@ -67,19 +67,23 @@
                         </div>
 
                         <div class="form-group row" *ngIf='tipoContratoSelected == 2'>
-                                <div class="col-xs-12 col-lg-4">
-                                    <label>Fecha inicio </label>
-                                    <input class="form-control" [(ngModel)]="funcionario.fechaInicio" name="fechaInicio" type="date" required />
-                                </div>
-                                <div class="col-xs-12 col-lg-4">
-                                    <label>Fecha fin </label>
-                                    <input class="form-control" [(ngModel)]="funcionario.fechaFin" name="fechaFin" type="date" required />
-                                </div>
-                                <div class="col-xs-12 col-lg-4">
-                                    <label>Numero de contrato </label>
-                                    <input class="form-control" [(ngModel)]="funcionario.numeroContrato" name="numeroContrato" type="text" required />
-                                </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha inicio </label>
+                                <input class="form-control" [(ngModel)]="funcionario.fechaInicio" name="fechaInicio" type="date" required />
                             </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha fin </label>
+                                <input class="form-control" [(ngModel)]="funcionario.fechaFin" name="fechaFin" type="date" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Numero de contrato </label>
+                                <input class="form-control" [(ngModel)]="funcionario.numeroContrato" name="numeroContrato" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Objeto de contrato </label>
+                                <textarea class="form-control" [(ngModel)]="funcionario.objetoContrato" name="objetoContrato" rows="4"></textarea>
+                            </div>
+                        </div>
 
                         <div class="form-group row" *ngIf='tipoContratoSelected == 3'>
                             <div class="col-xs-12 col-lg-4">

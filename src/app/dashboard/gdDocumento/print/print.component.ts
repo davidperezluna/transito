@@ -1,5 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { GdDocumentoService } from '../../../services/gdDocumento.service';
+import { GdTrazabilidadService } from '../../../services/gdTrazabilidad.service';
+import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
+import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -11,34 +14,79 @@ import swal from 'sweetalert2';
 export class PrintComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() documento: any = null;
-public apiUrl = environment.apiUrl + 'mgddocumento';
+public docsUrl = environment.docsUrl;
 public errorMessage;
-public respuesta;
+
 public date: any;
-public correoCertificadoEnvio: any;
-public nombreTransportadoraEnvio: any;
-public fechaEnvio: any;
-public numeroGuia: any;
-public numeroCarpeta: any;
-public medioEnvio: any;
-public resumen = {};     public datos = {
-  'correoCertificadoEnvio': null,
-  'nombreTransportadoraEnvio': null,
+
+  public trazabilidades: any = null;
+  public mediosCorrespondencia: any;
+  public sedesOperativas: any;
+
+public datos = {
   'fechaEnvio': null,
-  'numeroGuia': null,
+  'detalleEnvio': null,
+  'observaciones': null,
   'numeroCarpeta': null,
-  'medioEnvio': null,
-  'documentoId': null,
+  'idMedioCorrespondenciaEnvio': null,
+  'idSedeOperativa': null,
+  'idDocumento': null,
 };
 
 constructor(
   private _DocumentoService: GdDocumentoService,
+  private _TrazabilidadService: GdTrazabilidadService,
+  private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
+  private _SedeOperativaService: SedeOperativaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
     this.date = new Date();
-    this.correoCertificadoEnvio = 'false';
+
+    let token = this._loginService.getToken();
+
+    this._TrazabilidadService.searchResponseByDocumento({ 'idDocumento':this.documento.id }, token).subscribe(
+      response => {
+        this.trazabilidades = response.data;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this._MedioCorrespondenciaService.select().subscribe(
+      response => {
+        this.mediosCorrespondencia = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+      response => {
+        this.sedesOperativas = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
   }
 
   onCancelar(){
@@ -46,31 +94,24 @@ constructor(
   }
 
   onEnviar(){
-    this.datos.correoCertificadoEnvio = this.correoCertificadoEnvio;
-    this.datos.nombreTransportadoraEnvio = this.nombreTransportadoraEnvio;
-    this.datos.fechaEnvio = this.fechaEnvio;
-    this.datos.numeroGuia = this.numeroGuia;
-    this.datos.numeroCarpeta = this.numeroCarpeta;
-    this.datos.medioEnvio = this.medioEnvio;
-    this.datos.documentoId = this.documento.id;
+    this.datos.idDocumento = this.documento.id;
 
     let token = this._loginService.getToken();
 
 		this._DocumentoService.print(this.datos, token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: this.respuesta.msj,
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: this.respuesta.msg,
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

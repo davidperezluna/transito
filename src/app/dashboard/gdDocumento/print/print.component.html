@@ -12,63 +12,72 @@
                                 <label>No. de Oficio <b>{{ documento.numeroOficio }}</b></label>
                             </div>
                         </div>
-    
-                        <div class="form-group row container jumbotron">
-                            <div class="col-xs-12 col-lg-3">
-                                <p>San Juan de Pasto.</p>
-                                <br>
-                                <p class="text-justify">{{ documento.respuesta }}</p>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Sede operativa <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="datos.idSedeOperativa" name="sedeOperativa"
+                                    required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Almacenado en carpeta No: <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.numeroCarpeta" name="fechaEnvio" type="text" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <p class="text-center">
-                                <a href="{{ apiUrl }}/{{ documento.id }}/pdf" target="_blank" class="btn btn-primary">
-                                    <i class="fa fa-file"></i>
-                                    Generar documento
-                                </a>
-                            </p>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-4 offset-lg-4">
-                                <label>Almacenado en carpeta No:</label>
-                                <input class="form-control" [(ngModel)]="numeroCarpeta" name="numeroCarpeta" type="text" required>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones</label>
+                                <textarea class="form-control" [(ngModel)]="datos.observaciones" name="observaciones" rows="6"></textarea>
                             </div>
                         </div>
-                        <hr>
-                        <h5>Se envia por correo certificado</h5>
+    
                         <div class="form-group row">
-                            <div class="col-xs-12 col-lg-3">
-                                <div class="custom-control custom-radio">
-                                    <input name="correoCertificadoEnvio" [(ngModel)]="correoCertificadoEnvio" value="true" type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio1">Si</label>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Medio Correspondencia <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="mediosCorrespondencia" [(ngModel)]="datos.idMedioCorrespondenciaEnvio" name="medioCorrespondenciaEnvio"
+                                    required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha envio <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.fechaEnvio" name="fechaEnvio" type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Detalle de envio
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <textarea class="form-control" [(ngModel)]="datos.detalleEnvio" name="nombreTransportadoraEnvio" required rows="4"
+                                    id="summernote"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <p class="text-center">
+                                    <a href="{{ docsUrl }}{{ documento.url }}" target="_blank" class="btn btn-primary">
+                                        <i class="fa fa-file"></i>
+                                        Documento radicado
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="trazabilidades">
+                                <p class="text-center" *ngFor="let trazabilidad of trazabilidades; let i = index">
+                                    <a href="{{ docsUrl }}{{ trazabilidad.url }}" target="_blank" class="btn btn-primary">
+                                        <i class="fa fa-file"></i>
+                                        Respuesta de funcionario {{ trazabilidad.responsable.ciudadano.usuario.primerNombre }} {{ trazabilidad.responsable.ciudadano.usuario.segundoApellido }}
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-lg-6" *ngIf="!trazabilidades">
+                                <div class="alert alert-danger">
+                                    <h4 class="text-uppercase text-center">
+                                        <i class="fa fa-exclamation-triangle fa-2x"></i>
+                                        <br>
+                                        <strong>No se ha adjuntado ninguna respuesta.</strong>
+                                    </h4>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <div class="custom-control custom-radio">
-                                    <input name="correoCertificadoEnvio" [(ngModel)]="correoCertificadoEnvio" value="false" type="radio" id="customRadio2" name="customRadio" class="custom-control-input" checked>
-                                    <label class="custom-control-label" for="customRadio2">No</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row" *ngIf='correoCertificadoEnvio == "true"'>
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>Empresa Transportadora</label>
-                                <input class="form-control" [(ngModel)]="nombreTransportadoraEnvio" name="nombreTransportadoraEnvio" type="text">
-                            </div>
-                            <div  class="col-xs-12 col-lg-3">
-                                <label>Fecha Envio</label>
-                                <input class="form-control" [(ngModel)]="fechaEnvio" name="fechaEnvio" type="date">
-                            </div>
-                            <div  class="col-xs-12 col-lg-3">
-                                <label>Numero de Guía</label>
-                                <input class="form-control" [(ngModel)]="numeroGuia" name="numeroGuia" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Medio envío:</label>
-                                <input class="form-control" [(ngModel)]="medioEnvio" name="medioEnvio" type="text">
                             </div>
                         </div>
                     </div>

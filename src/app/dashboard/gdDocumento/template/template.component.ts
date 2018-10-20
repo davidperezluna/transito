@@ -1,5 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { GdDocumentoService } from '../../../services/gdDocumento.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -10,51 +9,30 @@ import swal from 'sweetalert2';
 })
 export class TemplateComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-@Input() documento: any = null;
-public errorMessage;
+  public file: any = null;
+  public errorMessage;
 
-public funcionarios: any;
-public date: any;
- 
-public datos = {
-  'observaciones': null,
-  'idFuncionario': null,
-  'idDocumento': null
-};
 
 constructor(
   private _DocumentoService: GdDocumentoService,
-  private _FuncionarioService: MpersonalFuncionarioService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit() {
-    this.date = new Date();
-    this._FuncionarioService.select().subscribe(
-      response => {
-        this.funcionarios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
+  ngOnInit() {  }
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-  }
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const fileSelected: File = event.target.files[0];
 
-  onCancelar(){
-    this.ready.emit(true);
+      this.file = new FormData();
+      this.file.append('file', fileSelected);
+    }
   }
 
   onRegister(){
-    this.datos.idDocumento = this.documento.id;
-
     let token = this._loginService.getToken();
 
-		this._DocumentoService.assign(this.datos, token).subscribe(
+    this._DocumentoService.template(this.file, token).subscribe(
 			response => {
         if(response.status == 'success'){
           swal({
@@ -62,8 +40,6 @@ constructor(
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          }).then((result) => {
-            this.ready.emit(true);
           });
         }else{
           swal({

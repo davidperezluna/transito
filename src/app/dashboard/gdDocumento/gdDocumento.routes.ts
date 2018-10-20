@@ -9,7 +9,7 @@ export const GdDocumentoRoutes: Route[] = [
     },
 
     {
-      path: 'gdDocumento/new',
+      path: 'gdDocumento/template',
       component: TemplateComponent
     }
 ];

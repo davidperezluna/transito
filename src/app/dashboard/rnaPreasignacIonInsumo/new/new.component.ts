@@ -6,11 +6,11 @@ import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-rnaPreasignacionInsumo',
-  templateUrl: './rnaPreasignacionInsumo.component.html',
+  selector: 'app-new',
+  templateUrl: './new.component.html',
   providers: [DatePipe]
 })
-export class RnaPreasignacionInsumoComponent implements OnInit {
+export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public errorMessage;
 public respuesta;

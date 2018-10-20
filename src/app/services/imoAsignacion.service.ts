@@ -4,49 +4,51 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class CfgModalidadTransporteService {
-	private url = environment.apiUrl + "cfgmodalidadtransporte";
+export class ImoAsignacionService {
+	private url = environment.apiUrl + "insumo/imoasignacion";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
 	index(){
-		return this._http.get(this.url+"/").map(res => res.json());
+		return this._http.get(this.url+"/reasignacion").map(res => res.json());
 	}
 
-	register(tipoCorrespondencia,token){ 
-		
-		let json = JSON.stringify(tipoCorrespondencia);
-		let params = "json="+json+"&authorization="+token;
+	register(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteCfgModalidadTransporte(token,id){
-
+	delete(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers}).map(res => res.json());
 	}
 
-	showCfgModalidadTransporte(token,id){
+	show(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/show/"+id, params, {headers: headers}).map(res => res.json());
+	}
+
+	showTrazabilidad(token,id){
+		let params = "authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/show/trazabilidad/"+id, params, {headers: headers}).map(res => res.json());
 	}
 
 	// tslint:disable-next-line:one-line
-	editCfgModalidadTransporte(tipoCorrespondencia,token){
-		let json = JSON.stringify(tipoCorrespondencia);
-		let params = "json="+json+"&authorization="+token;
+	edit(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getCfgModalidadTransporteSelect(){
+	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 }

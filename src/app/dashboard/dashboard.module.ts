@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
+import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
+import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
+
 import { HomeModule } from './home/home.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
 import { MarcaModule } from './marca/marca.module';
@@ -37,8 +40,9 @@ import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.m
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
+import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.module';
 
-import { CfgCdaModule } from './cfgCda/cfgCda.module';
+import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
 import { VhloCfgEmpresaGpsModule } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.module';
 import { VhloCfgTipoRodajeModule } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.module';
@@ -182,6 +186,8 @@ import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTi
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
 
+import { RnaPreasignacionInsumoModule } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.module';
+
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
@@ -190,7 +196,7 @@ import { CuentaModule } from './cuenta/cuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
-import { rnaPreasignacionInsumoModule } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.module';
+//import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
 import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
@@ -216,6 +222,8 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CommonModule,
       RouterModule,
       Ng2BootstrapModule.forRoot(),
+      UserCfgMenuModule,
+      UserCfgRoleModule,
       HomeModule,
       VehiculoModule,
       MarcaModule,
@@ -329,7 +337,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CvCfgInteresModule,
       CvCfgPorcentajeInicialModule,
       CvAcuerdoPagoModule,
-      CfgCdaModule,
+      VhloCfgCdaModule,
       VhloCfgOrigenRegistroModule,
       VhloCfgEmpresaGpsModule,
       VhloCfgTipoRodajeModule,
@@ -352,7 +360,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       SustratoModule,
       GestionTransportePublicoModule,
       EmpresaModule,
-      // SucursalModule,
+      CvCfgTipoRestriccionModule,
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,
       RnaPreregistroModule,
@@ -389,7 +397,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
-      rnaPreasignacionInsumoModule,
+      RnaPreasignacionInsumoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

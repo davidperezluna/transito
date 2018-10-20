@@ -58,6 +58,55 @@
       </div>
     </div>
 
+    <div class="col-xs-12 col-lg-8" *ngIf='formAssign'>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Gestión Documental</b>
+            <small>Por tramitar</small>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Peticionario</th>
+                <th>Tipo correspondencia</th>
+                <th>Radicado No.</th>
+                <th>Estado</th>
+                <th>Fecha radicado</th>
+                <th>Numero Oficio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let documento of documentosPendientes; let i = index">
+                <td>{{ documento.id }}</td>
+                <td>{{ documento.peticionario.usuario.primerNombre }}</td>
+                <td>{{ documento.tipoCorrespondencia.nombre }}</td>
+                <td>{{ documento.numeroRadicado }}</td>
+                <td>{{ documento.estado }}</td>
+                <td>{{ documento.fechaRegistro }}</td>
+                <td>{{ documento.numeroOficio }}</td>
+                <td>
+                  <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO'">
+                    <i class="fa fa-reply"></i>
+                    Asignar
+                  </button>
+                  <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'RESPUESTA REALIZADA'">
+                    <i class="fa fa-check"></i>
+                    Finalizar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+        </div>
+      </div>
+    </div>
+
     <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
         <div class="card">
           <div class="card-header">

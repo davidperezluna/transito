@@ -1,5 +1,8 @@
 import { Route } from '@angular/router';
 
+import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
+import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
+
 import { HomeRoutes } from './home/home.routes';
 import { VehiculoRoutes } from './vehiculo/vehiculo.routes';
 import { MarcaRoutes } from './marca/marca.routes';
@@ -33,7 +36,7 @@ import { CfgSvSenialEstadoRoutes } from './cfgSvSenialEstado/cfgSvSenialEstado.r
 import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
 import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.routes';
 
-import { CfgCdaRoutes } from './cfgCda/cfgCda.routes';
+import { VhloCfgCdaRoutes } from './vhloCfgCda/vhloCfgCda.routes';
 import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
 import { VhloCfgEmpresaGpsRoutes } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.routes';
 import { VhloCfgTipoRodajeRoutes } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.routes';
@@ -173,7 +176,7 @@ import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimita
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
-import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
+//import { RnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
 import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
 import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.routes';
@@ -192,7 +195,9 @@ import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
+import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
+import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -205,6 +210,8 @@ export const DashboardRoutes: Route[] = [
     path: 'dashboard', 
     component: DashboardComponent,
     children: [
+      ...UserCfgMenuRoutes,
+      ...UserCfgRoleRoutes,
       ...HomeRoutes,
       ...VehiculoRoutes,
       ...MarcaRoutes,
@@ -272,7 +279,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgSvSenialEstadoRoutes,
       ...MsvSenialInventarioRoutes,
       ...CfgSvUnidadMedidaRoutes,
-      ...CfgCdaRoutes,
+      ...VhloCfgCdaRoutes,
       ...VhloCfgOrigenRegistroRoutes,
       ...VhloCfgEmpresaGpsRoutes,
       ...VhloCfgTipoRodajeRoutes,
@@ -282,7 +289,7 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgSubpartidaArancelariaRoutes,
       ...VhloCfgCondicionIngresoRoutes,
       ...VehiculoTecnoMecanicaRoutes,
-
+      ...CvCfgTipoRestriccionRoutes,
       ...SoatRoutes,
       ...SvCapacitacionRoutes,
       ...SvCfgFuncionRoutes,
@@ -347,7 +354,7 @@ export const DashboardRoutes: Route[] = [
       ...RnaPreasignacionPlacaRoutes,
       ...RnaPreregistroRoutes,
       ...rnaRegistroInsumosRoutes,
-      // ...SucursalRoutes,
+      ...rnaPreasignacionInsumoRoutes,
       ...TramitePrecioRoutes,
       ...CfgPlacaRoutes,
       ...CfgCasoInsumoRoutes,
@@ -377,9 +384,8 @@ export const DashboardRoutes: Route[] = [
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...InsumoBusquedaRoutes,
-      ...RnaCertificadoTradicionRoutes,
       ...CfgEmpresaServicioRoutes,
-      ...rnaPreasignacionInsumoRoutes
+      ...RnaCertificadoTradicionRoutes,
     ]
   }
 ];

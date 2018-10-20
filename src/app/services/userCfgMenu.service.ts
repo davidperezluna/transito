@@ -5,11 +5,11 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CfgCdaService {
-	private url = environment.apiUrl + 'vehiculo/cfgcda';
+export class UserCfgMenuService { 
+	private url = environment.apiUrl + 'usercfgmenu';
 	public identity;
 	public token;
-
+ 
 	constructor(
 		private _http: Http,
 		private _loogerService: LoggerService
@@ -21,7 +21,7 @@ export class CfgCdaService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -31,24 +31,23 @@ export class CfgCdaService {
 
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'DELETE', json, this.url)
+			res => res.json()
 		);
 	}
 
-	show(token, id) {
-		let params = "authorization=" + token;
+	show(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
-			.map(res => res.json());
+		return this._http.post(this.url + "/show", params, { headers: headers }).map(res => res.json());
 	}
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),
@@ -58,5 +57,9 @@ export class CfgCdaService {
 
 	select() {
 		return this._http.get(this.url + "/select").map(res => res.json());
+	}
+
+	list() {
+		return this._http.get(this.url + "/list").map(res => res.json());
 	}
 }
