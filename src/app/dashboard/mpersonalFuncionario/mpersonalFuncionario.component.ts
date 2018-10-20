@@ -272,7 +272,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
       if (e != 2) {
         this.datos.numeroContrato = null;
         this.datos.fechaFin = null;
-        this.datos.fechaFin = null;
+        this.datos.fechaInicio = null;
       }
       if (e != 1) {
         this.datos.nombramiento = null;
