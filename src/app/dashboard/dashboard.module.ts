@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
+import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
+import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
+
 import { HomeModule } from './home/home.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
 import { MarcaModule } from './marca/marca.module';
@@ -214,6 +217,8 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CommonModule,
       RouterModule,
       Ng2BootstrapModule.forRoot(),
+      UserCfgMenuModule,
+      UserCfgRoleModule,
       HomeModule,
       VehiculoModule,
       MarcaModule,
