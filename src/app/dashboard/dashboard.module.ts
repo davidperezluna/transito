@@ -62,6 +62,7 @@ import { SvCfgCardinalidadModule } from "./svCfgCardinalidad/svCfgCardinalidad.m
 import { SvCfgClaseChoqueModule } from "./svCfgClaseChoque/svCfgClaseChoque.module";
 import { SvCfgCondicionViaModule } from "./svCfgCondicionVia/svCfgCondicionVia.module";
 import { SvCfgControlViaModule } from "./svCfgControlVia/svCfgControlVia.module";
+import { SvCfgControlesTransitoModule } from "./svCfgControlesTransito/svCfgControlesTransito.module";
 import { SvCfgDisenioModule } from "./svCfgDisenio/svCfgDisenio.module";
 import { SvCfgEntidadAccidenteModule } from "./svCfgEntidadAccidente/svCfgEntidadAccidente.module";
 import { SvCfgEstadoConductorModule } from "./svCfgEstadoConductor/svCfgEstadoConductor.module";
@@ -84,6 +85,7 @@ import { SvCfgResultadoExamenModule } from "./svCfgResultadoExamen/svCfgResultad
 import { SvCfgSectorModule } from "./svCfgSector/svCfgSector.module";
 import { SvCfgSustanciaPeligrosaModule } from "./svCfgSustanciaPeligrosa/svCfgSustanciaPeligrosa.module"; 
 import { SvCfgTipoControlModule } from "./svCfgTipoControl/svCfgTipoControl.module";
+import { SvCfgTipoControlesTransitoModule } from "./svCfgTipoControlesTransito/svCfgTipoControlesTransito.module";
 import { SvCfgTipoGeometriaModule } from "./svCfgTipoGeometria/svCfgTipoGeometria.module";
 import { SvCfgTipoViaModule } from "./svCfgTipoVia/svCfgTipoVia.module";
 import { SvCfgTipoVictimaModule } from "./svCfgTipoVictima/svCfgTipoVictima.module";
@@ -258,6 +260,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       SvCfgClaseChoqueModule,
       SvCfgCondicionViaModule,
       SvCfgControlViaModule,
+      SvCfgControlesTransitoModule,
       SvCfgDisenioModule,
       SvCfgEntidadAccidenteModule,
       SvCfgEstadoConductorModule,
@@ -280,6 +283,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       SvCfgSectorModule,
       SvCfgSustanciaPeligrosaModule,
       SvCfgTipoControlModule,
+      SvCfgTipoControlesTransitoModule,
       SvCfgTipoGeometriaModule,
       SvCfgTipoViaModule,
       SvCfgTipoVictimaModule,

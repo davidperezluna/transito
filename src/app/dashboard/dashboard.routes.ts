@@ -56,6 +56,7 @@ import { SvCfgCardinalidadRoutes } from './svCfgCardinalidad/svCfgCardinalidad.r
 import { SvCfgClaseChoqueRoutes } from './svCfgClaseChoque/svCfgClaseChoque.routes';
 import { SvCfgCondicionViaRoutes } from './svCfgCondicionVia/svCfgCondicionVia.routes';
 import { SvCfgControlViaRoutes } from './svCfgControlVia/svCfgControlVia.routes';
+import { SvCfgControlesTransitoRoutes } from './svCfgControlesTransito/svCfgControlesTransito.routes';
 import { SvCfgDisenioRoutes } from './svCfgDisenio/svCfgDisenio.routes';
 import { SvCfgEntidadAccidenteRoutes } from './svCfgEntidadAccidente/svCfgEntidadAccidente.routes';
 import { SvCfgEstadoConductorRoutes } from './svCfgEstadoConductor/svCfgEstadoConductor.routes';
@@ -80,6 +81,7 @@ import { SvCfgSustanciaPeligrosaRoutes } from './svCfgSustanciaPeligrosa/svCfgSu
 import { SvCfgTipoControlRoutes } from './svCfgTipoControl/svCfgTipoControl.routes';
 import { SvCfgTipoGeometriaRoutes } from './svCfgTipoGeometria/svCfgTipoGeometria.routes';
 import { SvCfgTipoViaRoutes } from './svCfgTipoVia/svCfgTipoVia.routes';
+import { SvCfgTipoControlesTransitoRoutes } from './svCfgTipoControlesTransito/svCfgTipoControlesTransito.routes';
 import { SvCfgTipoVictimaRoutes } from './svCfgTipoVictima/svCfgTipoVictima.routes';
 import { SvCfgUnidadReceptoraRoutes } from './svCfgUnidadReceptora/svCfgUnidadReceptora.routes';
 import { SvCfgUtilizacionRoutes } from './svCfgUtilizacion/svCfgUtilizacion.routes';
@@ -295,6 +297,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgClaseChoqueRoutes,
       ...SvCfgCondicionViaRoutes,
       ...SvCfgControlViaRoutes,
+      ...SvCfgControlesTransitoRoutes,
       ...SvCfgDisenioRoutes,
       ...SvCfgEntidadAccidenteRoutes,
       ...SvCfgEstadoConductorRoutes,
@@ -317,6 +320,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgSectorRoutes,
       ...SvCfgSustanciaPeligrosaRoutes,
       ...SvCfgTipoControlRoutes,
+      ...SvCfgTipoControlesTransitoRoutes,
       ...SvCfgTipoGeometriaRoutes,
       ...SvCfgTipoViaRoutes,
       ...SvCfgTipoVictimaRoutes,

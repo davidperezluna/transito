@@ -167,6 +167,14 @@
           </ul>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgControlesTransito" [ngClass]="{'active' : ( addActive === 'svCfgControlesTransito')}"
+                (click)="addActiveMenu('svCfgControlesTransito')">
+                <i class="fa fa-angle-right"></i> Control Transito
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
               <a class="nav-link" routerLink="svCfgControlVia" [ngClass]="{'active' : ( addActive === 'svCfgControlVia')}"
                 (click)="addActiveMenu('svCfgControlVia')">
                 <i class="fa fa-angle-right"></i> Control Vía
@@ -354,6 +362,14 @@
               <a class="nav-link" routerLink="svCfgTipoControl" [ngClass]="{'active' : ( addActive === 'svCfgTipoControl')}"
                 (click)="addActiveMenu('svCfgTipoControl')">
                 <i class="fa fa-angle-right"></i> Tipo Control
+              </a>
+            </li>
+          </ul>
+          <ul class="nav flex-column nav-third-level">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgTipoControlesTransito" [ngClass]="{'active' : ( addActive === 'svCfgTipoControlesTransito')}"
+                (click)="addActiveMenu('svCfgTipoControlesTransito')">
+                <i class="fa fa-angle-right"></i> Tipo Control Transito
               </a>
             </li>
           </ul>

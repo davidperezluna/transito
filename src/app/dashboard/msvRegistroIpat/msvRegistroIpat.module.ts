@@ -9,10 +9,11 @@ import { MsvRegistroIpatService } from '../../services/msvRegistroIpat.service';
 import {SelectModule} from 'angular2-select';
 import { MsvConsecutivoService } from '../../services/msvConsecutivo.service';
 // import {SelectModule} from 'angular2-select';
-
+import { SortableModule } from 'ngx-bootstrap/sortable';
+import { ToolTipModule } from 'angular2-tooltip';
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, SortableModule.forRoot(), ToolTipModule],
     declarations: [MsvRegistroIpatComponent,NewComponent/*,EditComponent*/],
     exports: [MsvRegistroIpatComponent, NewComponent/*,EditComponent*/],
     providers: [MsvRegistroIpatService, MsvConsecutivoService]
