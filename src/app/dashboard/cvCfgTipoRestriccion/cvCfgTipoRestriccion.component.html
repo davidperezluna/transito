@@ -1,0 +1,48 @@
+<div class="container" >
+    <hr>
+    <div class="row" *ngIf='formIndex'>
+      <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+                <div class="btn-group pull-right">
+                  <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                    <i class="fa fa-plus"></i>
+                    <span class="text">Nuevo</span>
+                  </button>
+                </div>
+            </div>
+            <div class="card-body">
+              <table class="table " id="dataTables-example">
+                <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Nombre</th>
+                      <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd" *ngFor="let tipoRestriccion of tiposRestriccion; let i = index">
+                    <td >{{ tipoRestriccion.id }}</td>
+                    <td >{{ tipoRestriccion.nombre }}</td>
+                    <td>
+                      <button (click)="onEdit(tipoRestriccion)" class="btn btn-xs btn-info" type="button">
+                        <i class="fa fa-edit"></i>
+                        Editar
+                      </button> 
+                      <button (click)="onDelete(tipoRestriccion.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                        Eliminar
+                      </button> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /.table-responsive --> 
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <app-edit *ngIf='formEdit' [tipoRestriccion]="tipoRestriccion" (ready)="ready($event)"></app-edit>
+      <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+  </div>

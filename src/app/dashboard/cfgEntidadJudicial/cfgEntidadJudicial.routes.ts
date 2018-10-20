@@ -6,4 +6,4 @@ export const CfgEntidadJudicialRoutes: Route[] = [
       path: 'cfgEntidadJudicial',
       component: CfgEntidadJudicialComponent
     }
-  ];
+  ]; 

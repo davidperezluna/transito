@@ -19,7 +19,12 @@
                           </div>
                           <div  class="col-xs-12 col-lg-4">
                             <label>Tipo contrato</label>
-                            <ng-select [multiple]="false" [options]="tiposContrato" [(ngModel)]="tipoContratoSelected" name="tiposContrato">
+                            <ng-select 
+                              (ngModelChange)="onChangedTipoContrato($event)"
+                              [multiple]="false" 
+                              [options]="tiposContrato" 
+                              [(ngModel)]="tipoContratoSelected" 
+                              name="tiposContrato">
                             </ng-select>
                           </div>
                       </div>
@@ -33,6 +38,26 @@
                             <label>Sede</label>
                             <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected" name="sedeOperativa">
                                 </ng-select>
+                        </div>
+                    </div> 
+                    <div class="form-group row" *ngIf='tipoContratoSelected == 2'>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Numero de contrato </label>
+                            <input class="form-control" [(ngModel)]="datos.numeroContrato" name="numeroContrato" type="text"/>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Fecha inicio </label>
+                            <input class="form-control" [(ngModel)]="datos.fechaInicio" name="fechaInicio" type="date" />
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Fecha fin </label>
+                            <input class="form-control" [(ngModel)]="datos.fechaFin" name="fechaFin" type="date" />
+                        </div> 
+                    </div>
+                    <div class="form-group row" *ngIf='tipoContratoSelected == 1'>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Nombramiento</label>
+                            <input class="form-control" [(ngModel)]="datos.nombramiento" name="nombramiento" type="text"/>
                         </div>
                     </div>
                   </form>

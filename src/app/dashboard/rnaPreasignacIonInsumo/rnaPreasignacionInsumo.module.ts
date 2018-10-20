@@ -17,4 +17,4 @@ import { ShowComponent } from './show/show.component';
     providers:[RnaInsumoService,CfgCasoInsumoService,ImoTrazabilidadService,ImoAsignacionService]
 })
 
-export class rnaPreasignacionInsumoModule { }
+export class RnaPreasignacionInsumoModule { }

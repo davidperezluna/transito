@@ -4,6 +4,7 @@ export class MpersonalFuncionario{
 		public resolucion: string,
 		public tipoNombramiento: string,
 		public numeroContrato: string,
+		public objetoContrato: string,
 		public fechaInicio: string,
 		public fechaFin: string,
 		public numeroPlaca: string,
