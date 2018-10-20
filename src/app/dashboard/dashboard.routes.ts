@@ -1,5 +1,8 @@
 import { Route } from '@angular/router';
 
+import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
+import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
+
 import { HomeRoutes } from './home/home.routes';
 import { VehiculoRoutes } from './vehiculo/vehiculo.routes';
 import { MarcaRoutes } from './marca/marca.routes';
@@ -205,6 +208,8 @@ export const DashboardRoutes: Route[] = [
     path: 'dashboard', 
     component: DashboardComponent,
     children: [
+      ...UserCfgMenuRoutes,
+      ...UserCfgRoleRoutes,
       ...HomeRoutes,
       ...VehiculoRoutes,
       ...MarcaRoutes,

@@ -6,7 +6,7 @@
           <img class="d-flex" src="assets/img/admin.png" alt="Generic user image">
         </span>
         <span class="media-body">
-          <span class="mt-0 mb-1">Admin</span>
+          <span class="mt-0 mb-1">{{ nombreUsuario }}</span>
           <small>Nariño.</small>
         </span>
       </button>
@@ -23,11 +23,17 @@
   </div>
   <br>
   <ul class="nav flex-column in" id="side-menu">
-    <li class="title-nav ">
-      <a class="active nav-link" routerLink="home" [ngClass]="{'active' : ( addActive === 'home')}" (click)="addActiveMenu('home')">INICIO</a>
+    <li class="nav-item" *ngFor="let menu of menus">
+      
     </li>
-    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'dashboard')}">
-      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('dashboard')">Parametrizacion
+
+    <li class="nav-item">
+      <a class="active nav-link" routerLink="home" [ngClass]="{'active' : ( addActive === 'home')}" (click)="addActiveMenu('home')">
+        Inicio
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{'active' : (showMenu === 'config')}">
+      <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addExpandClass('config')">Parametrizacion
         <i class="fa fa-angle-down "></i>
       </a>
       <ul class="nav flex-column nav-second-level">
@@ -590,6 +596,16 @@
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
+              <a class="nav-link" routerLink="userCfgMenu" [ngClass]="{'active' : ( addActive === 'userCfgMenu')}" (click)="addActiveMenu('userCfgMenu')">
+                <i class="fa fa-angle-right"></i> Menus
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="userCfgRole" [ngClass]="{'active' : ( addActive === 'userCfgRole')}" (click)="addActiveRole('userCfgMenu')">
+                <i class="fa fa-angle-right"></i> Role
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" routerLink="genero" [ngClass]="{'active' : ( addActive === 'genero')}" (click)="addActiveMenu('genero')">
                 <i class="fa fa-angle-right"></i> Genero
               </a>
@@ -707,6 +723,7 @@
           <!-- /.nav-third-level -->
         </li>
       </ul>
+
       <ul class="nav flex-column nav-second-level">
         <li class="nav-item" [ngClass]="{'active' : showSubMenu === 'cfg_mgd' }">
           <a href="javascript:void(0)" class="menudropdown nav-link" (click)="addSubExpandClass('cfg_mgd')">
