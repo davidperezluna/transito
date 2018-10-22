@@ -57,13 +57,15 @@ constructor(
     );
   }
 
-  onChanged(id: string, isChecked: boolean) {
-    if (isChecked) {
+  onChanged(id: string, e: any) {
+    if (e.target.checked) {
       this.menuArray.push(id);
     } else {
       let index = this.menuArray.indexOf(id);
       this.menuArray.splice(index, 1);
     }
+
+    this.role.menus = this.menuArray;
   }
 
   onCancelar(){ this.ready.emit(true); }

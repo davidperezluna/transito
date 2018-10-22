@@ -21,7 +21,7 @@
                                         <h4>
                                             <i class="fa fa-angle-right"></i>
                                             {{ menu.title }}
-                                            <input type="checkbox" [value]="menu.id" [name]="menu.id" (ngModelChange)="onChanged(menu.id, $event)">
+                                            <input type="checkbox" [value]="menu.id" [name]="menu.id" (change)="onChanged(menu.id, $event)">
                                         </h4>
                                     </a>
                                     <a class="nav-link" href="javascript:void(0)" *ngIf="menu.childrens" data-toggle="collapse" [href]="'#' + menu.id" role="button" aria-expanded="false">
@@ -36,7 +36,7 @@
                                                 <h5>
                                                     <i class="fa fa-angle-right"></i>
                                                     {{ menuSecond.title }}
-                                                    <input type="checkbox" [value]="menuSecond.id" [name]="menuSecond.id" (ngModelChange)="onChanged(menuSecond.id, $event)">
+                                                    <input type="checkbox" [value]="menuSecond.id" [name]="menuSecond.id" (change)="onChanged(menuSecond.id, $event)">
                                                 </h5>
                                             </a>
                                             <a class="nav-link" href="javascript:void(0)" *ngIf="menuSecond.childrens" data-toggle="collapse" [href]="'#' + menuSecond.id" role="button" aria-expanded="false">
@@ -53,7 +53,7 @@
                                                                 <i class="fa fa-angle-right"></i>
                                                                 {{ menuThird.title }}
                                                             </b>
-                                                            <input type="checkbox" [value]="menuThird.id" [name]="menuThird.id" (ngModelChange)="onChanged(menuThird.id, $event)">
+                                                            <input type="checkbox" [value]="menuThird.id" [name]="menuThird.id" (change)="onChanged(menuSecond.id, $event)">
                                                         </h6>
                                                     </a>
                                                 </li>

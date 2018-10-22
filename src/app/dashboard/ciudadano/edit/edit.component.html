@@ -139,6 +139,11 @@
                             <label>Correo</label>
                             <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correoUsuario" placeholder="" type="email" required>
                         </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Rol *</label>
+                            <ng-select [multiple]="false" [options]="roles" [(ngModel)]="idRole" name="role" required>
+                            </ng-select>
+                        </div>
                     </div>
                 </div>    
             </div>

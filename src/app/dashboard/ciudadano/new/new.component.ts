@@ -26,7 +26,7 @@ public respuesta;
 public tiposIdentificacion: any;
 public tipoIdentificacionSelected: any;
 
-  public roles: any;
+public roles: any;
 
 public generos: any;
 public generoSelected: any;
