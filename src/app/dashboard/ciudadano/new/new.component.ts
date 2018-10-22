@@ -3,6 +3,7 @@ import { Ciudadano } from '../ciudadano.modelo';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { LoginService } from '../../../services/login.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgRoleService } from '../../../services/userCfgRole.service';
 import { GeneroService } from '../../../services/genero.service';
 import { GrupoSanguineoService } from '../../../services/grupoSanguineo.service';
 import { MunicipioService } from '../../../services/municipio.service';
@@ -21,27 +22,37 @@ export class NewCiudadanoComponent implements OnInit {
 public ciudadano: Ciudadano;
 public errorMessage;
 public respuesta;
+
 public tiposIdentificacion: any;
-public generos: any;
-public gruposSanguineos: any;
 public tipoIdentificacionSelected: any;
+
+  public roles: any;
+
+public generos: any;
 public generoSelected: any;
+
+public gruposSanguineos: any;
 public grupoSanguineoSelected: any;
 
 public paises: any;
 public paisNacimientoSelected: any;
+public paisResidenciaSelected: any;
+
 public municipiosNacimiento: any;
+public municipioNacimientoSelected: any;
+
 public departamentosNacimiento: any;
 public departamentoNacimientoSelected:any;
-public municipioNacimientoSelected: any;
-public paisResidenciaSelected: any;
+
 public departamentosResidencia: any;
 public departamentoResidenciaSelected:any;
+
 public municipiosResidencia: any;
+public municipioResidenciaSelected: any;
+
 public isError: any;
 public isExist:boolean=false;
 public tipoId:boolean=true;
-public municipioResidenciaSelected: any;
 
 
 
@@ -49,6 +60,7 @@ constructor(
   private _CiudadanoService: CiudadanoService,
   private _loginService: LoginService,
   private _tipoIdentificacionService: TipoIdentificacionService,
+  private _RoleService: UserCfgRoleService,
   private _generoService: GeneroService,
   private _grupoSanguineoService: GrupoSanguineoService,
   private _municipioService: MunicipioService,
@@ -58,21 +70,35 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.ciudadano = new Ciudadano(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.ciudadano = new Ciudadano(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
-        response => {
-          this.tiposIdentificacion = response;
-        },
-        error => {
-          this.errorMessage = <any>error;
+      response => {
+        this.tiposIdentificacion = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
 
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
-      );
+      }
+    );
+
+    this._RoleService.select().subscribe(
+      response => {
+        this.roles = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
 
     this._generoService.getGeneroSelect().subscribe(
       response => {
@@ -87,6 +113,7 @@ constructor(
         }
       }
     );
+
     this._paisService.select().subscribe(
       response => {
         this.paises = response;

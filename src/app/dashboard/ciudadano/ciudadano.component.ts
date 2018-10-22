@@ -31,34 +31,30 @@ export class CiudadanoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardará unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-		this._CiudadanoService.getCiudadano().subscribe(
-				response => {
-          this.ciudadanos = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+		this._CiudadanoService.getCiudadano().subscribe(
+      response => {
+        this.ciudadanos = response.data;
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+        }, 100);
+        swal.close();
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: false,
@@ -75,6 +71,7 @@ export class CiudadanoComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;

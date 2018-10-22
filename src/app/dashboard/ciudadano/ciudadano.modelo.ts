@@ -1,12 +1,5 @@
 export class Ciudadano{
 	constructor(
-		public id: number,
-		
-		public tipoIdentificacionUsuarioId: number,
-		public municipioNacimientoId: number,
-		public municipioResidenciaId: number,
-		public generoId: number,
-		public grupoSanguineoId: number,
 		public numeroIdentificacionUsuario: number,
 		public primerNombreUsuario: string,
 		public segundoNombreUsuario: string,
@@ -20,5 +13,12 @@ export class Ciudadano{
 		public fechaExpedicionDocumento: string,
 		public fechaNacimiento: string,
 		public edad: number,
+		public id: number,
+		public tipoIdentificacionUsuarioId: number,
+		public municipioNacimientoId: number,
+		public municipioResidenciaId: number,
+		public generoId: number,
+		public grupoSanguineoId: number,
+		public idRole: number,
 	){}
 }
