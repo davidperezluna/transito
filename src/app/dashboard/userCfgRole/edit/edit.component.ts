@@ -8,6 +8,7 @@ import swal from 'sweetalert2';
   selector: 'app-edit',
   templateUrl: './edit.component.html'
 })
+
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() role:any = null;
@@ -18,7 +19,10 @@ export class EditComponent implements OnInit{
   public menus: any = null;
   public menuArray: any = [];
 
+  public nodes: any = [];
+  public options = {};
 
+ 
 
 constructor(
   private _UserCfgRoleService: UserCfgRoleService,
@@ -31,11 +35,13 @@ constructor(
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
-        swal.showLoading()
+        swal.showLoading();
       }
     });
+
+    let token = this._loginService.getToken();
     
-    this._UserCfgMenuService.list().subscribe(
+    this._UserCfgMenuService.list({ 'type': 'create_menu' }, token).subscribe(
       response => {
         this.menus = response.data;
         swal.close();

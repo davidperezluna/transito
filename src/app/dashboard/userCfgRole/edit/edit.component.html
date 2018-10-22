@@ -14,7 +14,7 @@
                             <input class="form-control text-uppercase" [(ngModel)]="role.nombre" name="nombre" type="text" required autofocus />
                         </div>
                         <div class="col-xs-12 col-lg-8">                           
-                            <label>Menus {{ menuArray | json }}</label>
+                            <label>Menus</label>
                             <ul class="nav flex-column in">
                                 <li class="nav-item" *ngFor="let menu of menus">
                                     <a class="nav-link" *ngIf="!menu.childrens">
