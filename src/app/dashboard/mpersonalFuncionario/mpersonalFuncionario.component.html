@@ -126,6 +126,10 @@
                       <i class="fa fa-clock-o"></i>
                       Horarios
                     </button>
+                    <button (click)="onProrroga(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary" type="button" *ngIf="funcionario.tipoContrato.horarios">
+                      <i class="fa fa-clock-o"></i>
+                      Proroga
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -140,4 +144,5 @@
     <app-edit *ngIf='formEdit' [funcionario]="funcionario" (ready)="ready($event)"></app-edit>
     <app-time *ngIf='formTime' [funcionario]="funcionario" (ready)="ready($event)"></app-time>
     <app-show *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)"></app-show>
+    <app-prorroga *ngIf='formProrroga' [funcionario]="funcionario" (ready)="ready($event)"></app-prorroga>
 </div>

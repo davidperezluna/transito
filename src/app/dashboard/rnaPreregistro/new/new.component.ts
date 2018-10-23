@@ -159,38 +159,6 @@ constructor(
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
         this.sedesOperativas = response;
-        this._FuncionarioService.searchLogin(datos,token).subscribe(
-          response => { 
-            if(response.status == 'success'){
-              this.persona='funcionario';
-              this.sedeOperativa = response.data.sedeOperativa;
-              this.sedeOperativaSelected = [this.sedeOperativa.id];
-            }else{
-              this._FuncionarioService.searchEmpresa(datos,token).subscribe(
-                response => {
-                  if(response.status == 'success'){
-                    this.persona='empresa';
-                  }
-            
-                }, 
-                error => {
-                  this.errorMessage = <any>error;
-          
-                  if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              );
-            }
-          error => {
-              this.errorMessage = <any>error;
-              if(this.errorMessage != null){
-                console.log(this.errorMessage); 
-                alert('Error en la petición');
-              }
-            }
-        });
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -201,6 +169,40 @@ constructor(
         }
       }
     );
+
+    this._FuncionarioService.searchLogin(datos,token).subscribe(
+      response => { 
+        if(response.status == 'success'){
+          this.persona='funcionario';
+          this.sedeOperativa = response.data.sedeOperativa;
+          this.sedeOperativaSelected = [this.sedeOperativa.id];
+        }else{
+          this._FuncionarioService.searchEmpresa(datos,token).subscribe(
+            response => {
+              if(response.status == 'success'){
+                this.persona='empresa';
+              }
+        
+            }, 
+            error => {
+              this.errorMessage = <any>error;
+      
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+        }
+      error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage); 
+            alert('Error en la petición');
+          }
+        }
+    });
+    
     this._ClaseService.getClasePorModuloSelect(2).subscribe(
       response => {
         this.clases = response;
@@ -313,6 +315,7 @@ constructor(
     let datos = { 
       'vehiculo':this.vehiculo,
       'sedeOperativaId':this.sedeOperativa.id,
+      'persona':this.persona,
     }
 
     let token = this._loginService.getToken();
