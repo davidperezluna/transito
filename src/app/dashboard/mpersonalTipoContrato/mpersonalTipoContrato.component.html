@@ -6,8 +6,7 @@
           <div class="card-header">
             <h5 class="card-title">
               <b class="text-uppercase">Configuración</b>
-              <br>
-              <small>Tipos de Correspondencia</small>
+              <small>Tipos de contrato</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                   <i class="fa fa-plus"></i>
@@ -22,7 +21,6 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
-                    <th>Vigencia <small>(días)</small></th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -30,16 +28,15 @@
                 <tr class="odd" *ngFor="let tipoContrato of tiposContrato; let i = index">
                   <td >{{ tipoContrato.id }}</td>
                   <td >{{ tipoContrato.nombre }}</td>
-                  <td >{{ tipoContrato.diasVigencia }}</td>
                   <td>
-                    <button (click)="edit(tipoContrato)" class="btn btn-xs btn-info" type="button">
-                      <i class="fa fa-edit"></i>
-                      Editar
-                    </button> 
-                    <button (click)="delete(tipoContrato.id)"  class="btn btn-xs btn-danger" type="button">
-                      <i class="fa fa-trash"></i>
-                      Eliminar
-                    </button> 
+                    <div class="btn-group">
+                      <button (click)="edit(tipoContrato)" class="btn btn-xs btn-info" type="button">
+                        <i class="fa fa-edit"></i>
+                      </button> 
+                      <button (click)="delete(tipoContrato.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
                   </td>
                 </tr>
               </tbody>

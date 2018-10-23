@@ -196,6 +196,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
             if (result.value) {
               this.formNew = true;
               this.formSearch = false;
+              this.formIndex = false;
             }
           });
         }
