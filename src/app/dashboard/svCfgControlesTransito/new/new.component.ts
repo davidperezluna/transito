@@ -3,7 +3,7 @@ import { SvCfgControlesTransito } from '../svCfgControlesTransito.modelo';
 import { SvCfgControlesTransitoService } from '../../../services/svCfgControlesTransito.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { SvCfgTipoControlesTransitoService } from 'app/services/svCfgTipoControlesTransito.service';
+import { SvCfgTipoControlesTransitoService } from '../../../services/svCfgTipoControlesTransito.service';
 
 @Component({
     selector: 'app-new',

@@ -161,7 +161,6 @@ constructor(
           this.departamentoResidenciaSelected = [this.ciudadano.municipioResidencia.departamento.id];
           this.municipioResidenciaSelected = [this.ciudadano.municipioResidencia.id];
         });
-        console.log(this.departamentoNacimientoSelected);
       },
       error => {
         this.errorMessage = <any>error;
@@ -196,7 +195,7 @@ constructor(
       response => {
         this.roles = response;
         setTimeout(() => {
-          this.ciudadano.idRole = [this.ciudadano.usuario.cfgRoles.id];
+          this.ciudadano.idRole = [this.ciudadano.usuario.cfgRole.id];
           this.formReady = true;
         });
       },

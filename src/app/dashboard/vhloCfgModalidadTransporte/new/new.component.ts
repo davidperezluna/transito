@@ -1,6 +1,6 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { UserCfgMenu } from '../userCfgMenu.modelo';
-import { UserCfgMenuService } from '../../../services/userCfgMenu.service';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { VhloCfgModalidadTransporte } from '../vhloCfgModalidadTransporte.modelo';
+import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,34 +9,20 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public menu: UserCfgMenu;
-public errorMessage;
-public menus: any = null;
+  @Output() ready = new EventEmitter<any>();
+  public modalidadTransporte: VhloCfgModalidadTransporte;
+  public errorMessage;
+  public respuesta;
 
 constructor(
-  private _UserCfgMenuService: UserCfgMenuService,
+  private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.menu = new UserCfgMenu(null, null, null, null, null);
-
-    this._UserCfgMenuService.select().subscribe(
-      response => {
-        this.menus = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    this.modalidadTransporte = new VhloCfgModalidadTransporte(null, null, null);
   }
-  
+
   onCancelar(){
     this.ready.emit(true);
   }
@@ -44,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._UserCfgMenuService.register(this.menu,token).subscribe(
+		this._ModalidadTransporteService.register(this.modalidadTransporte,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

@@ -5,10 +5,10 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">
-              <strong class="text-uppercase">Usuarios</strong>
-              <small>Parametrización de menus</small>
+              <strong class="text-uppercase">Vehiculo</strong>
+              <small>Modalidades de transporte</small>
               <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-success">
+                <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
                   <i class="fa fa-plus"></i>
                   <span class="text">Nuevo</span>
                 </button>
@@ -19,23 +19,21 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Titulo</th>
-                    <th>Tipo</th>
+                    <th>#</th>
+                    <th>Nombre</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let menu of menus; let i = index">
-                  <td >{{ menu.id }}</td>
-                  <td >{{ menu.titulo }}</td>
-                  <td >{{ menu.tipo }}</td>
+                <tr class="odd" *ngFor="let modalidadTransporte of modalidadesTransporte; let i = index">
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ modalidadTransporte.nombre }}</td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="onEdit(menu)" class="btn btn-xs btn-primary" type="button">
+                      <button (click)="onEdit(modalidadTransporte)" class="btn btn-xs btn-primary" type="button">
                         <i class="fa fa-edit"></i>
                       </button> 
-                      <button (click)="onDelete(menu.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(modalidadTransporte.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                       </button> 
                     </div>
@@ -48,6 +46,7 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [menu]="menu" (ready)="ready($event)"></app-edit>
+    
+    <app-edit *ngIf='formEdit' [modalidadTransporte]="modalidadTransporte" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

@@ -36,7 +36,7 @@ constructor(
 
     let token = this._loginService.getToken();
 
-    this._UserCfgMenuService.list({ 'type': 'create_menu' }, token).subscribe(
+    this._UserCfgMenuService.list({ 'idRole': null }, token).subscribe(
       response => {
         this.menus = response.data;
         swal.close();

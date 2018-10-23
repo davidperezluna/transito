@@ -1,0 +1,39 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Editar tipo de maquinaria</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formEdit="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <input type="text" class="form-control" [(ngModel)]="modalidadTransporte.nombre" name="nombre" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [(ngModel)]="modalidadTransporte.gestionable" class="custom-control-input" id="gestionable" name="gestionable">
+                            <label class="custom-control-label" for="gestionable">Gestionable</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

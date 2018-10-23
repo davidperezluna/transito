@@ -38,6 +38,7 @@ import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.r
 
 import { VhloCfgCdaRoutes } from './vhloCfgCda/vhloCfgCda.routes';
 import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
+import { VhloCfgModalidadTransporteRoutes } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.routes';
 import { VhloCfgEmpresaGpsRoutes } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.routes';
 import { VhloCfgTipoRodajeRoutes } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.routes';
 import { VhloCfgTipoCabinaRoutes } from './vhloCfgTipoCabina/vhloCfgTipoCabina.routes';
@@ -195,7 +196,7 @@ import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
-import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
+import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
@@ -281,6 +282,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgSvUnidadMedidaRoutes,
       ...VhloCfgCdaRoutes,
       ...VhloCfgOrigenRegistroRoutes,
+      ...VhloCfgModalidadTransporteRoutes,
       ...VhloCfgEmpresaGpsRoutes,
       ...VhloCfgTipoRodajeRoutes,
       ...VhloCfgTipoCabinaRoutes,

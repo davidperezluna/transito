@@ -1,28 +1,27 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { VhloCfgCondicionIngresoService } from '../../services/vhloCfgCondicionIngreso.service';
+import { Component, OnInit } from '@angular/core';
+import { VhloCfgModalidadTransporteService } from '../../services/vhloCfgModalidadTransporte.service';
 import { LoginService } from '../../services/login.service';
-import { VhloCfgCondicionIngreso } from './vhloCfgCondicionIngreso.modelo';
+import { VhloCfgModalidadTransporte } from './vhloCfgModalidadTransporte.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './vhloCfgCondicionIngreso.component.html'
+  templateUrl: './vhloCfgModalidadTransporte.component.html'
 })
-export class VhloCfgCondicionIngresoComponent implements OnInit {
+export class VhloCfgModalidadTransporteComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
 
-	public condicionesIngreso;
-  public condicionIngreso: VhloCfgCondicionIngreso;
+  public modalidadesTransporte;
+  public modalidadTransporte: VhloCfgModalidadTransporte;
 
   constructor(
-    private _CondicionIngresoService: VhloCfgCondicionIngresoService,
+    private _ModalidadTrandporteService: VhloCfgModalidadTransporteService,
 		private _loginService: LoginService,
     ){}
     
@@ -35,9 +34,9 @@ export class VhloCfgCondicionIngresoComponent implements OnInit {
       }
     });
 
-    this._CondicionIngresoService.index().subscribe(
+    this._ModalidadTrandporteService.index().subscribe(
 				response => {
-          this.condicionesIngreso = response.data;
+          this.modalidadesTransporte = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -99,7 +98,7 @@ export class VhloCfgCondicionIngresoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CondicionIngresoService.delete({'id':id},token).subscribe(
+        this._ModalidadTrandporteService.delete({'id':id},token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -108,7 +107,6 @@ export class VhloCfgCondicionIngresoComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -126,8 +124,8 @@ export class VhloCfgCondicionIngresoComponent implements OnInit {
     })
   }
 
-  onEdit(condicionIngreso:any){
-    this.condicionIngreso = condicionIngreso;
+  onEdit(modalidadTransporte:any){
+    this.modalidadTransporte = modalidadTransporte;
     this.formEdit = true;
     this.formIndex = false;
   }

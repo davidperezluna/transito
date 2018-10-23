@@ -21,10 +21,10 @@
                                         <h4>
                                             <i class="fa fa-angle-right"></i>
                                             {{ menu.title }}
-                                            <input type="checkbox" [value]="menu.id" [name]="menu.id" (change)="onChanged(menu.id, $event)">
+                                            <input type="checkbox" [value]="menu.id" [name]="menu.id" (change)="onChanged(menu.id, $event)" [checked]="menu.checked">
                                         </h4>
                                     </a>
-                                    <a class="nav-link" href="javascript:void(0)" *ngIf="menu.childrens" data-toggle="collapse" [href]="'#' + menu.id" role="button" aria-expanded="false">
+                                    <a class="nav-link" *ngIf="menu.childrens" data-toggle="collapse" [href]="'#' + menu.id" role="button" aria-expanded="false">
                                         <h4>
                                             <i class="fa fa-angle-down"></i>
                                             {{ menu.title }}
@@ -36,24 +36,23 @@
                                                 <h5>
                                                     <i class="fa fa-angle-right"></i>
                                                     {{ menuSecond.title }}
-                                                    <input type="checkbox" [value]="menuSecond.id" [name]="menuSecond.id" (change)="onChanged(menuSecond.id, $event)">
+                                                    <input type="checkbox" [value]="menuSecond.id" [name]="menuSecond.id" (change)="onChanged(menuSecond.id, $event)" [checked]="menuSecond.checked">
                                                 </h5>
                                             </a>
-                                            <a class="nav-link" href="javascript:void(0)" *ngIf="menuSecond.childrens" data-toggle="collapse" [href]="'#' + menuSecond.id" role="button" aria-expanded="false">
-                                                <h5 class="text-primary">
-                                                    <i class="fa fa-angle-down"></i>
+                                            <a class="nav-link" *ngIf="menuSecond.childrens" data-toggle="collapse" [href]="'#' + menuSecond.id" role="button" aria-expanded="false">
+                                                <h5>
+                                                    <i class="fa fa-angle-right"></i>
                                                     {{ menuSecond.title }}
                                                 </h5>
                                             </a>
                                             <ul class="nav flex-column nav-third-level collapse multi-collapse" [id]="menuSecond.id" *ngIf="menuSecond.childrens"  style="padding-left: 15px;">
                                                 <li class="nav-item" *ngFor="let menuThird of menuSecond.childrens">
                                                     <a class="nav-link" href="javascript:void(0)">
-                                                        <h6 class="text-info">
+                                                        <h6>
                                                             <b>
-                                                                <i class="fa fa-angle-right"></i>
                                                                 {{ menuThird.title }}
                                                             </b>
-                                                            <input type="checkbox" [value]="menuThird.id" [name]="menuThird.id" (change)="onChanged(menuThird.id, $event)">
+                                                            <input type="checkbox" [value]="menuThird.id" [name]="menuThird.id" (change)="onChanged(menuThird.id, $event)" [checked]="menuThird.checked">
                                                         </h6>
                                                     </a>
                                                 </li>
