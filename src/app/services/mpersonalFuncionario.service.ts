@@ -99,4 +99,11 @@ export class MpersonalFuncionarioService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/record/times", params, { headers: headers }).map(res => res.json());
 	}
+
+	recordProrrogas(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/record/prorrogas", params, { headers: headers }).map(res => res.json());
+	}
 }

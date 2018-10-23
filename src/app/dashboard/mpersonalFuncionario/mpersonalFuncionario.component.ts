@@ -23,6 +23,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
 	public formIndex = false;
 	public formTime = false;
 	public formShow = false;
+	public formProrroga = false;
   public formSearch = true;
   public table: any = null;
   public funcionario: MpersonalFuncionario;
@@ -106,6 +107,20 @@ export class MpersonalFuncionarioComponent implements OnInit {
     this.formSearch = false;
     this.formTime = false;
     this.formShow = false;
+    this.formProrroga = false;
+    this.formIndex = false;
+    if(this.table){
+      this.table.destroy();
+    }
+  }
+
+  onProrroga(funcionario:any){
+    this.funcionario = funcionario;
+    this.formProrroga = true;
+    this.formNew = false;
+    this.formSearch = false;
+    this.formTime = false;
+    this.formShow = false;
     this.formIndex = false;
     if(this.table){
       this.table.destroy();
@@ -117,6 +132,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
     this.formTime = true;
     this.formNew = false;
     this.formSearch = false;
+    this.formProrroga = false;
     this.formShow = false;
     this.formIndex = false;
     if(this.table){
@@ -129,6 +145,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
     this.formShow = true;
     this.formTime = false;
     this.formNew = false;
+    this.formProrroga = false;
     this.formSearch = false;
     this.formIndex = false;
     if (this.table) {
@@ -141,6 +158,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
       this.formNew = false;
       this.formEdit = false;
       this.formTime = false;
+      this.formProrroga = false;
       this.formIndex = false;
       this.formShow = false;
       this.formSearch = true;
