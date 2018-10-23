@@ -2,6 +2,7 @@ import  {Injectable} from "@angular/core";
 import  {Http, Headers} from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
+import { EventEmitter } from '@angular/core';
 import  "rxjs/add/operator/map";
 
 @Injectable()
@@ -9,6 +10,7 @@ export class UserCfgMenuService {
 	private url = environment.apiUrl + 'usercfgmenu';
 	public identity;
 	public token;
+	public cartData = new EventEmitter<any>();
  
 	constructor(
 		private _http: Http,
@@ -51,7 +53,6 @@ export class UserCfgMenuService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),
-			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
 		);
 	}
 

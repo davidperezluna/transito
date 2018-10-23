@@ -3,11 +3,13 @@ import  {Http, Response,Headers} from "@angular/http";
 import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
+
 @Injectable()
 export class LoginService {
 	private url = environment.apiUrl; 
 	public identity;
 	public token; 
+	
 
 	constructor(private _http: Http){}
 

@@ -51,7 +51,6 @@ export class UserCfgRoleService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),
-			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
 		);
 	}
 
