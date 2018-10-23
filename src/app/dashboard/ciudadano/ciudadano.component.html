@@ -17,7 +17,7 @@
             </h5>
           </div>
           <div class="card-body">
-            <table class="table " id="dataTables-example">
+            <table class="table" id="dataTables-example">
                 <thead>
                   <tr>
                       <th>Id</th>
@@ -37,6 +37,9 @@
                     </td>
                     <td>
                       {{ ciudadano.usuario.primerNombre }} {{ ciudadano.usuario.segundoNombre }} {{ ciudadano.usuario.primerApellido }} {{ ciudadano.usuario.segundoApellido }}
+                    </td>
+                    <td>
+                       {{ ciudadano.usuario.cfgRole?.nombre }}
                     </td>
                     <td>
                       <div class="btn-group">

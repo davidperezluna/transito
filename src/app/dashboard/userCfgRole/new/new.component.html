@@ -32,7 +32,7 @@
                                         {{ menu.title }}
                                     </h4>
                                 </a>
-                                <ul class="nav flex-column nav-second-level collapse multi-collapse m-l-15" [id]="menu.id" *ngIf="menu.childrens" style="padding-left: 15px;">
+                                <ul class="nav flex-column nav-second-level collapse multi-collapse m-l-15" *ngIf="menu.childrens" style="padding-left: 15px;">
                                     <li class="nav-item" *ngFor="let menuSecond of menu.childrens">
                                         <a class="nav-link" href="javascript:void(0)" *ngIf="!menuSecond.childrens">
                                             <h5>
@@ -48,7 +48,7 @@
                                                 {{ menuSecond.title }}
                                             </h5>
                                         </a>
-                                        <ul class="nav flex-column nav-third-level collapse multi-collapse" [id]="menuSecond.id" *ngIf="menuSecond.childrens" style="padding-left: 15px;">
+                                        <ul class="nav flex-column nav-third-level collapse multi-collapse" *ngIf="menuSecond.childrens" style="padding-left: 15px;">
                                             <li class="nav-item" *ngFor="let menuThird of menuSecond.childrens">
                                                 <a class="nav-link" href="javascript:void(0)">
                                                     <h6 class="text-info">
@@ -56,7 +56,7 @@
                                                             <i class="fa fa-angle-right"></i>
                                                             {{ menuThird.title }}
                                                         </b>
-                                                        <input type="checkbox" [value]="menuThird.id" [name]="menuThird.id" (change)="onChanged(menuSecond.id, $event)">
+                                                        <input type="checkbox" [value]="menuThird.id" [name]="menuThird.id" (change)="onChanged(menuThird.id, $event)">
                                                     </h6>
                                                 </a>
                                             </li>

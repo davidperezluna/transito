@@ -55,21 +55,21 @@ export class CiudadanoComponent implements OnInit {
     );
   }
 
-  iniciarTabla(){
+  iniciarTabla() {
     $('#dataTables-example').DataTable({
-      responsive: false,
-      pageLength: 6,
+      responsive: true,
+      pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
+    this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){

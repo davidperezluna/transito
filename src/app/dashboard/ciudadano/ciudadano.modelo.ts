@@ -12,7 +12,7 @@ export class Ciudadano{
 		public sexo: string,
 		public fechaExpedicionDocumento: string,
 		public fechaNacimiento: string,
-		public edad: number,
+		public password: string,
 		public id: number,
 		public tipoIdentificacionUsuarioId: number,
 		public municipioNacimientoId: number,
