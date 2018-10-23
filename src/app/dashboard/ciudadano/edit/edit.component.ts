@@ -3,6 +3,7 @@ import { Ciudadano } from '../ciudadano.modelo';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { LoginService } from '../../../services/login.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgRoleService } from '../../../services/userCfgRole.service';
 import { GeneroService } from '../../../services/genero.service';
 import { GrupoSanguineoService } from '../../../services/grupoSanguineo.service';
 import { MunicipioService } from '../../../services/municipio.service';
@@ -22,14 +23,15 @@ public respuesta;
 public formReady = false;
 
 public tiposIdentificacion: Array<any>
-public tipoIdentificacionSelected: Array<any>; // ng-select [(ngModel)]
+public tipoIdentificacionSelected: Array<any>;
+
+public roles: any;
 
 public generos: Array<any>
-public generoSelected: Array<any>; // ng-select [(ngModel)]
+public generoSelected: Array<any>;
 
 public gruposSanguineos: Array<any>
-public grupoSanguineoSelected: Array<any>; // ng-select [(ngModel)]
-
+public grupoSanguineoSelected: Array<any>;
 
 public paises: Array<any>;
 public paisNacimientoSelected: Array<any>;
@@ -52,6 +54,7 @@ constructor(
   private _ciudadanoService: CiudadanoService,
   private _loginService: LoginService,
   private _tipoIdentificacionService: TipoIdentificacionService,
+  private _RoleService: UserCfgRoleService,
   private _generoService: GeneroService,
   private _grupoSanguineoService: GrupoSanguineoService,
   private _municipioService: MunicipioService,
@@ -76,8 +79,6 @@ constructor(
       }
     })
 
-
-    console.log(this.ciudadano);
     this.ciudadano.numeroIdentificacionUsuario = this.ciudadano.usuario.identificacion;
     this.ciudadano.primerNombreUsuario = this.ciudadano.usuario.primerNombre;
     this.ciudadano.segundoNombreUsuario = this.ciudadano.usuario.segundoNombre;
@@ -133,6 +134,7 @@ constructor(
           }
         }
       );
+
      this._municipioService.getMunicipioPorDepartamentoSelect(this.ciudadano.municipioResidencia.departamento.id).subscribe(
         response => {
           this.municipiosResidencia = response;
@@ -148,7 +150,6 @@ constructor(
           }
         }
       );
-
    
     this._paisService.select().subscribe(
       response => {
@@ -160,7 +161,6 @@ constructor(
           this.departamentoResidenciaSelected = [this.ciudadano.municipioResidencia.departamento.id];
           this.municipioResidenciaSelected = [this.ciudadano.municipioResidencia.id];
         });
-        console.log(this.departamentoNacimientoSelected);
       },
       error => {
         this.errorMessage = <any>error;
@@ -188,6 +188,26 @@ constructor(
           }
         }
       );
+
+
+
+    this._RoleService.select().subscribe(
+      response => {
+        this.roles = response;
+        setTimeout(() => {
+          this.ciudadano.idRole = [this.ciudadano.usuario.cfgRole.id];
+          this.formReady = true;
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
 
     this._generoService.getGeneroSelect().subscribe(
       response => {

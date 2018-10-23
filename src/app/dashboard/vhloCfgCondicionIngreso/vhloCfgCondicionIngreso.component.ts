@@ -30,23 +30,18 @@ export class VhloCfgCondicionIngresoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
+
     this._CondicionIngresoService.index().subscribe(
 				response => {
           this.condicionesIngreso = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;

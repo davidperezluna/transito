@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { ToolTipModule } from 'angular2-tooltip'
 
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
 import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
@@ -44,6 +45,7 @@ import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRest
 
 import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
+import { VhloCfgModalidadTransporteModule } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.module';
 import { VhloCfgEmpresaGpsModule } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.module';
 import { VhloCfgTipoRodajeModule } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.module';
 import { VhloCfgTipoCabinaModule } from './vhloCfgTipoCabina/vhloCfgTipoCabina.module';
@@ -66,6 +68,7 @@ import { SvCfgCardinalidadModule } from "./svCfgCardinalidad/svCfgCardinalidad.m
 import { SvCfgClaseChoqueModule } from "./svCfgClaseChoque/svCfgClaseChoque.module";
 import { SvCfgCondicionViaModule } from "./svCfgCondicionVia/svCfgCondicionVia.module";
 import { SvCfgControlViaModule } from "./svCfgControlVia/svCfgControlVia.module";
+import { SvCfgControlesTransitoModule } from "./svCfgControlesTransito/svCfgControlesTransito.module";
 import { SvCfgDisenioModule } from "./svCfgDisenio/svCfgDisenio.module";
 import { SvCfgEntidadAccidenteModule } from "./svCfgEntidadAccidente/svCfgEntidadAccidente.module";
 import { SvCfgEstadoConductorModule } from "./svCfgEstadoConductor/svCfgEstadoConductor.module";
@@ -88,6 +91,7 @@ import { SvCfgResultadoExamenModule } from "./svCfgResultadoExamen/svCfgResultad
 import { SvCfgSectorModule } from "./svCfgSector/svCfgSector.module";
 import { SvCfgSustanciaPeligrosaModule } from "./svCfgSustanciaPeligrosa/svCfgSustanciaPeligrosa.module"; 
 import { SvCfgTipoControlModule } from "./svCfgTipoControl/svCfgTipoControl.module";
+import { SvCfgTipoControlesTransitoModule } from "./svCfgTipoControlesTransito/svCfgTipoControlesTransito.module";
 import { SvCfgTipoGeometriaModule } from "./svCfgTipoGeometria/svCfgTipoGeometria.module";
 import { SvCfgTipoViaModule } from "./svCfgTipoVia/svCfgTipoVia.module";
 import { SvCfgTipoVictimaModule } from "./svCfgTipoVictima/svCfgTipoVictima.module";
@@ -184,7 +188,7 @@ import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTi
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
 
-import { RnaPreasignacionInsumoModule } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.module';
+import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
 
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
@@ -220,6 +224,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CommonModule,
       RouterModule,
       Ng2BootstrapModule.forRoot(),
+      ToolTipModule,
       UserCfgMenuModule,
       UserCfgRoleModule,
       HomeModule,
@@ -266,6 +271,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       SvCfgClaseChoqueModule,
       SvCfgCondicionViaModule,
       SvCfgControlViaModule,
+      SvCfgControlesTransitoModule,
       SvCfgDisenioModule,
       SvCfgEntidadAccidenteModule,
       SvCfgEstadoConductorModule,
@@ -288,6 +294,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       SvCfgSectorModule,
       SvCfgSustanciaPeligrosaModule,
       SvCfgTipoControlModule,
+      SvCfgTipoControlesTransitoModule,
       SvCfgTipoGeometriaModule,
       SvCfgTipoViaModule,
       SvCfgTipoVictimaModule,
@@ -335,6 +342,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CvAcuerdoPagoModule,
       VhloCfgCdaModule,
       VhloCfgOrigenRegistroModule,
+      VhloCfgModalidadTransporteModule,
       VhloCfgEmpresaGpsModule,
       VhloCfgTipoRodajeModule,
       VhloCfgTipoCabinaModule,

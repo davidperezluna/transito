@@ -52,4 +52,22 @@ export class MsvRegistroIpatService {
 		let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
 		return this._http.post(this.url + '/' + id + '/show', params, {headers: headers}).map(res => res.json());
 	}
+
+	getBuscarConductor(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/get/datos/conductor", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
+
+	getBuscarVehiculo(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/get/datos/vehiculo", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
 }

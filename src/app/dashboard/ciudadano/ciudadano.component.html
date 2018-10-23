@@ -17,12 +17,13 @@
             </h5>
           </div>
           <div class="card-body">
-            <table class="table " id="dataTables-example">
+            <table class="table" id="dataTables-example">
                 <thead>
                   <tr>
                       <th>Id</th>
                       <th>Identificacion</th>
                       <th>Ciudadano</th>
+                      <th>Role</th>
                       <th>Acciones</th>
                   </tr>
                 </thead>
@@ -38,12 +39,15 @@
                       {{ ciudadano.usuario.primerNombre }} {{ ciudadano.usuario.segundoNombre }} {{ ciudadano.usuario.primerApellido }} {{ ciudadano.usuario.segundoApellido }}
                     </td>
                     <td>
+                       {{ ciudadano.usuario.cfgRole?.nombre }}
+                    </td>
+                    <td>
                       <div class="btn-group">
-                        <button (click)="editCiudadano(ciudadano)" class="btn btn-info btn-xs" type="button">
-                          Editar
+                        <button (click)="editCiudadano(ciudadano)" class="btn btn-primary btn-xs" type="button" tooltip content="Editar">
+                          <i class="fa fa-edit"></i>
                         </button> 
                         <button (click)="deleteCiudadano(ciudadano.id)"  class="btn btn-danger btn-xs" type="button">
-                          Eliminar
+                          <i class="fa fa-trash"></i>
                         </button> 
                       </div>
                     </td>

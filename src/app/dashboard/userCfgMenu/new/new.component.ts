@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.menu = new UserCfgMenu(null, null, null, null, null, null);
+    this.menu = new UserCfgMenu(null, null, null, null, null);
 
     this._UserCfgMenuService.select().subscribe(
       response => {

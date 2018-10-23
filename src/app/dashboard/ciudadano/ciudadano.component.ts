@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CiudadanoService } from '../../services/ciudadano.service';
 import { LoginService } from '../../services/login.service';
 import { Ciudadano } from './ciudadano.modelo';
@@ -31,50 +31,47 @@ export class CiudadanoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardará unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-		this._CiudadanoService.getCiudadano().subscribe(
-				response => {
-          this.ciudadanos = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    });
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
-  }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
-      responsive: false,
-      pageLength: 6,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
+		this._CiudadanoService.getCiudadano().subscribe(
+      response => {
+        this.ciudadanos = response.data;
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+        }, 100);
+        swal.close();
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    );
   }
+
+  iniciarTabla() {
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
+        }
+      }
+    });
+    this.table = $('#dataTables-example').DataTable();
+  }
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;

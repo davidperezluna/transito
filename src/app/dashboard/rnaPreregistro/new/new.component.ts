@@ -283,7 +283,7 @@ constructor(
       }
     );
 
-    this._ModalidadTransporteService.getCfgModalidadTransporteSelect().subscribe(
+    this._ModalidadTransporteService.select().subscribe(
       response => {
         this.modalidadesTransporte = response;
       },  
