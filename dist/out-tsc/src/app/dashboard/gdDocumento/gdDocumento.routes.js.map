@@ -1,1 +1,0 @@
-{"version":3,"file":"gdDocumento.routes.js","sourceRoot":"","sources":["../../../../../../src/app/dashboard/gdDocumento/gdDocumento.routes.ts"],"names":[],"mappings":";AACA,sBAAyC;AACzC,sBAAsC;AAEzB,QAAA,iBAAiB,GAAY;IACtC;QACE,IAAI,EAAE,aAAa;QACnB,SAAS,EAAE,uBAAoB;KAChC;IAED;QACE,IAAI,EAAE,sBAAsB;QAC5B,SAAS,EAAE,oBAAiB;KAC7B;CACJ,CAAC"}

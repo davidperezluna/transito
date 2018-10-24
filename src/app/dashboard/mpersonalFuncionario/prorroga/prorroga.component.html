@@ -23,7 +23,7 @@
                         <div class="btn-group">
                             <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
                                 <i class="fa fa-times"></i>
-                                Cancel
+                                Cancelar
                             </button>
                             <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                                 <i class="fa fa-save"></i>
@@ -35,34 +35,32 @@
             </div>
         </div><!-- /.card -->
     </div>
-</div>
 
-  <div class="row" *ngIf="prorrogas && prorrogas.length > 0">
-      <div class="col-xs-12 col-lg-12">
-          <div class="card">
-              <!-- .card -->
-              <div class="card-header">
-                  <h5 class="text-uppercase">Prorrogas Actuales</h5>
-              </div>
-              <div class="card-body">
-                  <table class="table " id="dataTables-example">
+    <div class="col-xs-12 col-lg-8" *ngIf="prorrogas && prorrogas.length > 0">
+        <div class="card">
+            <!-- .card -->
+            <div class="card-header">
+                <h5 class="text-uppercase">Prorrogas Actuales</h5>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-example">
                     <thead>
-                      <tr>
-                        <th>Id</th>
-                        <th>Fecha inicio</th>
-                        <th>Fecha fin</th>
-                      </tr>
+                        <tr>
+                            <th>Id</th>
+                            <th>Fecha inicio</th>
+                            <th>Fecha fin</th>
+                        </tr>
                     </thead>
                     <tbody>
-                      <tr class="odd" *ngFor="let prorroga of prorrogas; let i = index">
-                        <td >{{prorroga.id}}</td>
-                        <td >{{prorroga.fechaInicio}}</td>
-                        <td >{{prorroga.fechaFin}}</td>
-                      </tr>
+                        <tr class="odd" *ngFor="let prorroga of prorrogas; let i = index">
+                            <td>{{prorroga.id}}</td>
+                            <td>{{prorroga.fechaInicio}}</td>
+                            <td>{{prorroga.fechaFin}}</td>
+                        </tr>
                     </tbody>
-                  </table>
-              </div>
-          </div>
-          <!-- /.card -->
-      </div>
-  </div>
+                </table>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
