@@ -19,6 +19,10 @@
                             <label>Fecha fin <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="prorroga.fechaFin" name="fechaFin" type="date" required />
                         </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Numero modificatoria <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="prorroga.numeroModificatorio" name="numeroModificatorio" type="number" required />
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -51,13 +55,15 @@
                             <th>Id</th>
                             <th>Fecha inicio</th>
                             <th>Fecha fin</th>
+                            <th>Numero modificatoria</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let prorroga of prorrogas; let i = index">
-                            <td>{{prorroga.id}}</td>
-                            <td>{{prorroga.fechaInicio}}</td>
-                            <td>{{prorroga.fechaFin}}</td>
+                            <td>{{ prorroga.id }}</td>
+                            <td>{{ prorroga.fechaInicio }}</td>
+                            <td>{{ prorroga.fechaFin }}</td>
+                            <td>{{ prorroga.numeroModificatorio }}</td>
                         </tr>
                     </tbody>
                 </table>

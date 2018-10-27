@@ -9,57 +9,53 @@
                   <hr>
                   <form #formSearch="ngForm">     
                       <div class="form-group row">
-                          <div  class="col-xs-12 col-lg-4">
+                          <div  class="col-xs-12 col-lg-3">
                               <label>Nombre</label>
                               <input class="form-control" [(ngModel)]="nombre" name="nombre" type="text">
                           </div>
-                          <div  class="col-xs-12 col-lg-4">
+                          <div  class="col-xs-12 col-lg-3">
                               <label>Identificación</label>
                               <input class="form-control" [(ngModel)]="identificacion" name="identificacion" type="text">
                           </div>
-                          <div  class="col-xs-12 col-lg-4">
-                            <label>Tipo contrato</label>
-                            <ng-select 
-                              (ngModelChange)="onChangedTipoContrato($event)"
-                              [multiple]="false" 
-                              [options]="tiposContrato" 
-                              [(ngModel)]="tipoContratoSelected" 
-                              name="tiposContrato">
-                            </ng-select>
+                          <div  class="col-xs-12 col-lg-3">
+                              <label>Cargo</label>
+                              <ng-select [multiple]="false" [options]="cargos" [(ngModel)]="cargoSelected" name="cargos">
+                              </ng-select>
+                          </div>
+                          <div  class="col-xs-12 col-lg-3">
+                              <label>Sede</label>
+                              <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected" name="sedeOperativa">
+                              </ng-select>
                           </div>
                       </div>
                       <div class="form-group row">
-                        <div  class="col-xs-12 col-lg-3 offset-lg-3">
-                            <label>Cargo</label>
-                            <ng-select [multiple]="false" [options]="cargos" [(ngModel)]="cargoSelected" name="cargos">
-                            </ng-select>
-                        </div>
                         <div  class="col-xs-12 col-lg-3">
-                            <label>Sede</label>
-                            <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected" name="sedeOperativa">
-                                </ng-select>
+                          <label>Tipo contrato</label>
+                          <ng-select 
+                            (ngModelChange)="onChangedTipoContrato($event)"
+                            [multiple]="false" 
+                            [options]="tiposContrato" 
+                            [(ngModel)]="tipoContratoSelected" 
+                            name="tiposContrato">
+                          </ng-select>
                         </div>
-                    </div> 
-                    <div class="form-group row" *ngIf='tipoContratoSelected == 2'>
-                        <div class="col-xs-12 col-lg-4">
+                        <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
                             <label>Numero de contrato </label>
                             <input class="form-control" [(ngModel)]="datos.numeroContrato" name="numeroContrato" type="text"/>
                         </div>
-                        <div class="col-xs-12 col-lg-4">
+                        <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
                             <label>Fecha inicio </label>
                             <input class="form-control" [(ngModel)]="datos.fechaInicio" name="fechaInicio" type="date" />
                         </div>
-                        <div class="col-xs-12 col-lg-4">
+                        <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
                             <label>Fecha fin </label>
                             <input class="form-control" [(ngModel)]="datos.fechaFin" name="fechaFin" type="date" />
                         </div> 
-                    </div>
-                    <div class="form-group row" *ngIf='tipoContratoSelected == 1'>
-                        <div class="col-xs-12 col-lg-4">
+                        <div *ngIf='tipoContratoSelected == 1' class="col-xs-12 col-lg-3">
                             <label>Nombramiento</label>
                             <input class="form-control" [(ngModel)]="datos.nombramiento" name="nombramiento" type="text"/>
                         </div>
-                    </div>
+                      </div> 
                   </form>
               </div>
               <div class="card-footer">
@@ -92,31 +88,67 @@
               <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Identificación</th>
-                    <th>Tipo contrato</th>
-                    <th>Numero Contrato</th>
-                    <th>Fecha inicio</th>
-                    <th>Fecha fin</th>
-                    <th>Tipo Nombramiento</th>
-                    <th>Numero de nombramiento</th>
+                    <th>Funcionario</th>
+                    <th>Contrato/Nombramiento</th>
+                    <th>Vigencias</th>
+                    <th>Estado</th>
+                    <th>Contrato</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let funcionario of funcionarios; let i = index">
-                  <td >{{ funcionario.id }}</td>
+                  <td >{{ i + 1 }}</td>
                   <td >
-                    {{ funcionario.ciudadano.usuario.primerNombre }}
-                    {{ funcionario.ciudadano.usuario.primerApellido }}
+                    <strong>Nombre y apellido:</strong>
+                    <small>
+                      {{ funcionario.ciudadano.usuario.primerNombre }}
+                      {{ funcionario.ciudadano.usuario.primerApellido }}
+                    </small>
+                    <br>
+                    <strong>Identificación:</strong>
+                    <small>
+                        {{ funcionario.ciudadano.usuario.identificacion }}
+                    </small>
                   </td>
-                  <td >{{ funcionario.ciudadano.usuario.identificacion }}</td>
-                  <td >{{ funcionario.tipoContrato.nombre }}</td>
-                  <td >{{ funcionario.numeroContrato }}</td>
-                  <td >{{ funcionario.fechaInicio }}</td>
-                  <td >{{ funcionario.fechaFin }}</td> 
-                  <td >{{ funcionario.tipoNombramiento }}</td>
-                  <td >{{ funcionario.resolicion }}</td>
+                  <td>
+                      <strong>Tipo contrato:</strong>
+                      <small>
+                          {{ funcionario.tipoContrato.nombre }}
+                      </small>
+                      <div *ngIf='funcionario.tipoContrato.id == 2'>
+                          <strong>No. contrato:</strong>
+                          <small>
+                              {{ funcionario.numeroContrato }}
+                          </small>
+                      </div>
+                      <div *ngIf='funcionario.tipoContrato.id == 1'>
+                          <strong>Tipo nombramiento:</strong>
+                          <small>
+                              {{ funcionario.tipoNombramiento }}
+                          </small>
+                          <br>
+                          <strong>No. nombramiento:</strong>
+                          <small>
+                              {{ funcionario.resolucion }}
+                          </small>
+                      </div>
+                  </td>
+                  <td> 
+                    <strong>Fecha inicio:</strong>
+                    <small>
+                        {{ funcionario.fechaInicio }}
+                    </small> 
+                    <br>
+                    <strong>Fecha fin:</strong>
+                    <small>
+                        {{ funcionario.fechaFin }}
+                    </small> 
+                  </td>
+                  <td *ngIf='funcionario.activo'>En ejecución</td>
+                  <td *ngIf='!funcionario.activo'>No vigente</td>
+                  <td *ngIf='funcionario.modificatorio'>Modificatorio</td>
+                  <td *ngIf='!funcionario.modificatorio'>Contrato principal</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">

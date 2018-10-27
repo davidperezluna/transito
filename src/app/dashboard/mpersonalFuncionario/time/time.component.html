@@ -8,38 +8,10 @@
             </div>
             <div class="card-body">
                 <form #formNew="ngForm">
+
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Días <strong class="text-danger">*</strong></label>
-                            <br>
-                            <label class="checkbox-inline" style="margin-right:15px;">
-                                <input type="checkbox" [(ngModel)]="horario.lunes" name="lunes" value="1">
-                                Lunes
-                            </label>
-                            <label class="checkbox-inline" style="margin-right:15px;">
-                                <input type="checkbox" [(ngModel)]="horario.martes" name="martes" value="2">
-                                Martes
-                            </label>
-                            <label class="checkbox-inline" style="margin-right:15px;">
-                                <input type="checkbox" [(ngModel)]="horario.miercoles" name="miercoles" value="3">
-                                Miercoles
-                            </label>
-                            <label class="checkbox-inline" style="margin-right:15px;">
-                                <input type="checkbox" [(ngModel)]="horario.jueves" name="jueves" value="4">
-                                Jueves
-                            </label>
-                            <label class="checkbox-inline" style="margin-right:15px;">
-                                <input type="checkbox" [(ngModel)]="horario.viernes" name="viernes" value="5">
-                                Viernes
-                            </label>
-                            <label class="checkbox-inline" style="margin-right:15px;">
-                                <input type="checkbox" [(ngModel)]="horario.sabado" name="sabado" value="6">
-                                Sabado
-                            </label>
-                            <label class="checkbox-inline" style="margin-right:15px;">
-                                <input type="checkbox" [(ngModel)]="horario.domingo" name="domingo" value="0">
-                                Domingo
-                            </label>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
+                            <input type="date" [(ngModel)]="horario.fecha" class="form-control" id="fecha" name="fecha" checked="">
                         </div>
                     </div>
 
@@ -58,6 +30,10 @@
                             <label>Hora fin <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="horario.horaFinManana" name="horaFinManana" type="time" />
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
+                            <label>Lugar <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="horario.lugarManana" name="lugarManana" type="text" />
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -75,6 +51,10 @@
                             <label>Hora fin <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="horario.horaFinTarde" name="horaFinTarde" type="time" />
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
+                            <label>Lugar <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="horario.lugarTarde" name="lugarTarde" type="text" />
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -91,6 +71,10 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
                             <label>Hora fin <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="horario.horaFinNoche" name="horaFinNoche" type="time" />
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
+                            <label>Lugar <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="horario.lugarNoche" name="lugarNoche" type="text" /> 
                         </div>
                     </div>
 
@@ -140,23 +124,24 @@
                         <tr>
                             <th>Id</th>
                             <th>Jornada</th>
-                            <th>Día</th>
+                            <th>Fecha</th>
                             <th>Hora Inicial</th>
                             <th>Hora Final</th>
-                        </tr>
+                            <th>Lugar</th>
+                        </tr> 
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let horario of horarios; let i = index">
                             <td>{{ horario.id }}</td>
                             <td>{{ horario.jornada }}</td>
-                            <td>{{ horario.dia }}</td>
-                            <td>{{ horario.horaInicio }}</td>
+                            <td>{{ horario.fecha }}</td>
+                            <td>{{ horario.horaInicio }}</td> 
                             <td>{{ horario.horaFin }}</td>
+                            <td>{{ horario.lugar }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <!-- /.card -->
     </div>
 </div>

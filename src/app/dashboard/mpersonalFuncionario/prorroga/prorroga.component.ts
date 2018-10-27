@@ -31,6 +31,7 @@ export class ProrrogaComponent implements OnInit {
     public prorroga = {
       'fechaInicio': null,
       'fechaFin': null,
+      'numeroModificatorio': null,
       'mPersonalFuncionarioId': null,
   };
 
