@@ -39,6 +39,7 @@ import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/
 import { NewRnaRadicadoCuentaComponent } from './rna/tramiteRadicadoCuenta/newRna.radicadoCuenta.component'; 
 import { NewRnaCambioGasComponent } from './rna/tramiteCambioGas/newRna.cambioGas.component'; 
 import { NewRnaTramiteCambioAcreedorPrendarioComponent } from './rna/tramiteCambioAcreedorPrendario/newRna.CambioAcreedorPrendario.component'; 
+import { NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent } from './rna/tramiteCambioAcreedorPrendarioPropietario/newRna.CambioAcreedorPrendarioPropietario.component'; 
 
 import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRna.transformacion.component';
 import { NewRnaCambioConjuntoComponent } from './rna/tramiteCambioConjunto/newRna.cambioConjunto.component';
@@ -87,6 +88,7 @@ import { FacturaInsumoService } from '../../services/facturaInsumo.service';
         NewTrasladoComponent,
         NewRnaCambioGasComponent,
         NewRnaTramiteCambioAcreedorPrendarioComponent,
+        NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -125,6 +127,7 @@ import { FacturaInsumoService } from '../../services/facturaInsumo.service';
         NewTrasladoComponent,
         NewRnaCambioGasComponent,
         NewRnaTramiteCambioAcreedorPrendarioComponent,
+        NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent
     ],
     providers: [FacturaInsumoService,TramiteSolicitudService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, EmpresaService, DefaultService]
 })

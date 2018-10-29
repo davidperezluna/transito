@@ -7,11 +7,13 @@ import { CfgCargoService } from '../../../services/cfgCargo.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { LoginService } from '../../../services/login.service';
+import { DatePipe  } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html',
+  providers: [DatePipe]
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
@@ -46,6 +48,7 @@ constructor(
   ){}
 
   ngOnInit() {
+    
     this.funcionario = new MpersonalFuncionario(null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._TipoContratoService.select().subscribe(

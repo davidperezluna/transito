@@ -16,7 +16,7 @@ import { TipoIdentificacionService } from '../../../../services/tipoIdentificaci
 import swal from 'sweetalert2';
 
 
-@Component({
+@Component({ 
     selector: 'appRna-traspaso',
     templateUrl: './newRna.traspaso.html',
 })

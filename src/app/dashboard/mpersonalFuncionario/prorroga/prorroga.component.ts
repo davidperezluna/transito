@@ -5,11 +5,14 @@ import { PnalProrrogaService } from '../../../services/pnalProrroga.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
+import { DatePipe  } from '@angular/common';
 declare var $: any;
+
 
 @Component({
   selector: 'app-prorroga',
-  templateUrl: './prorroga.component.html'
+  templateUrl: './prorroga.component.html',
+  providers: [DatePipe]
 })
 export class ProrrogaComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
@@ -18,14 +21,17 @@ export class ProrrogaComponent implements OnInit {
     public id;
     public respuesta;
     public prorrogas:any = null;
+    public date:any;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
+    public txtFechaInicio:any;
     public table:any; 
     public color:any; 
     public prorroga = {
       'fechaInicio': null,
       'fechaFin': null,
+      'numeroModificatorio': null,
       'mPersonalFuncionarioId': null,
   };
 
@@ -33,7 +39,11 @@ export class ProrrogaComponent implements OnInit {
 		private _PnalProrrogaService: PnalProrrogaService,
 		private _MpersonalFuncionarioService: MpersonalFuncionarioService,
 		private _loginService: LoginService,
-    ){}
+    ){
+      this.date = new Date();
+      var datePiper = new DatePipe(this.date);
+      this.date = datePiper.transform(this.date,'yyyy-MM-dd');
+    }
     
   ngOnInit() {
     console.log(this.funcionario);
@@ -95,7 +105,6 @@ export class ProrrogaComponent implements OnInit {
   onCancelar(){
     this.ready.emit(true);
   }
-
   onEnviar(){
     let token = this._loginService.getToken();
     this.prorroga.mPersonalFuncionarioId = this.funcionario.id;
@@ -115,6 +124,20 @@ export class ProrrogaComponent implements OnInit {
         }
       }
     );
+  }
+
+  isFecha(){
+    console.log(this.date);
+    console.log(this.prorroga.fechaInicio);
+
+    if (this.prorroga.fechaInicio >= this.date) {
+      console.log('fecha mayor');
+      this.txtFechaInicio = 'has-success';
+    }else{
+      this.txtFechaInicio = 'has-danger';
+      console.log('fecha menor');
+    }
+
   }
 
 }

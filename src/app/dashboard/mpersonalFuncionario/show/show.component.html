@@ -14,7 +14,7 @@
                                 </label>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Identificación: <strong>{{ funcionario.ciudadano.usuario.tipoIdentificacion.nombre }}</strong>
+                                <label>Identificación: <strong>{{ funcionario.ciudadano.usuario.identificacion }}</strong>
                                 </label>
                             </div>
                         </div>
@@ -51,34 +51,50 @@
                                 <label>Acta de posesion </label>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Resolución </label>
+                                <label>Resolución 
+                                    <strong>{{ funcionario.resolucion }}</strong>
+                                </label>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Tipo nombramiento </label>
+                                <label>Tipo nombramiento
+                                    <strong>{{ funcionario.tipoNombramiento }}</strong>     
+                                </label>
                             </div>
                         </div>
 
                         <div class="form-group row" *ngIf='funcionario.tipoContrato.id == 2'>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Fecha inicio </label>
+                                <label>Fecha inicio 
+                                    <strong>{{ funcionario.fechaInicio }}</strong>
+                                </label>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Fecha fin </label>
+                                <label>Fecha fin 
+                                    <strong>{{ funcionario.fechaFin }}</strong>
+                                </label>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Numero de contrato </label>
+                                <label>Numero de contrato 
+                                    <strong>{{ funcionario.numeroContrato }}</strong>
+                                </label>
                             </div>
                         </div>
 
                         <div class="form-group row" *ngIf='funcionario.tipoContrato.id == 3'>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Fecha inicio </label>
+                                <label>Fecha inicio 
+                                    <strong>{{ funcionario.fechaInicio }}</strong>
+                                </label>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Fecha fin </label>
+                                <label>Fecha fin 
+                                    <strong>{{ funcionario.fechaFin }}</strong>
+                                </label>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Numero de placa </label>
+                                <label>Numero de placa
+                                    <strong>{{ funcionario.numeroPlaca }}</strong>
+                                </label>
                             </div>
                         </div>
 
@@ -96,7 +112,7 @@
                             <div class="btn-group">
                                 <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
                                     <i class="fa fa-times"></i>
-                                    Cancel
+                                    Cancelar
                                 </button>
                             </div>
                         </div>

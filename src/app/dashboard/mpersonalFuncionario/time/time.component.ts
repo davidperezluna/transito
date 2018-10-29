@@ -20,6 +20,7 @@ public agregar: any;
 public semana: any;
 public table: any;
 
+
 constructor(
   private _HorarioService: MpersonalHorarioService,
   private _FuncionarioService: MpersonalFuncionarioService,
@@ -27,7 +28,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.horario = new MpersonalHorario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.horario = new MpersonalHorario(null,null,null,null,null, null, null, null, null, null, null, null, null, null, null, null);
     
     let token = this._loginService.getToken();
 
@@ -35,12 +36,11 @@ constructor(
       response => {
         this.horarios = response.data;
         setTimeout(() => {
-            this.iniciarTabla();
+          this.iniciarTabla();
         }, 100);
       },
       error => {
         this.errorMessage = <any>error;
-
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
@@ -56,32 +56,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.horario.funcionarioId = this.funcionario.id;
-    this.semana = []
-
-    if(this.horario.lunes){
-      this.semana.push({'1':'Lunes'});
-    }
-    if(this.horario.martes){
-      this.semana.push({'2':'Martes'});
-    }
-    if(this.horario.miercoles){
-      this.semana.push({3:'Miercoles'});
-    }
-    if(this.horario.jueves){
-      this.semana.push({4:'Jueves'});
-    }
-    if(this.horario.viernes){
-      this.semana.push({5:'Viernes'});
-    }
-    if(this.horario.sabado){
-      this.semana.push({6:'Sabado'});
-    }
-    if(this.horario.domingo){
-      this.semana.push({0:'Domingo'});
-    }
-
-    this.horario.dias = this.semana;
-
+    console.log(this.horario);
     this._HorarioService.register(this.horario,token).subscribe(
       response => {        
         if(response.status == 'success'){
