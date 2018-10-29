@@ -15,8 +15,17 @@ export class SvCfgControlViaService {
         private _loogerService: LoggerService
     ) { }
 
-    index() {
+    indexSemaforo() {
         return this._http.get(this.url + "/").map(res => res.json());
+    }
+    indexSenialVertical() {
+        return this._http.get(this.url + "/senialvertical").map(res => res.json());
+    }
+    indexSenialHorizontal() {
+        return this._http.get(this.url + "/senialhorizontal").map(res => res.json());
+    }
+    indexReductorVelocidad() {
+        return this._http.get(this.url + "/reductorvelocidad").map(res => res.json());
     }
 
     register(datos, token) {
@@ -58,5 +67,13 @@ export class SvCfgControlViaService {
 
     getControlViaSelect() {
         return this._http.get(this.url + "/select").map(res => res.json());
+    }
+
+    getControlViaSemaforoSelect() {
+        return this._http.get(this.url + "/select/semaforo").map(res => res.json());
+    }
+
+    getControlViaDelineadorPisoSelect() {
+        return this._http.get(this.url + "/select/delineadorpiso").map(res => res.json());
     }
 }

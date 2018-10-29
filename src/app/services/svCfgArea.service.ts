@@ -57,6 +57,6 @@ export class SvCfgAreaService {
     }
 
     getAreaSelect() {
-        return this._http.get(this.url + "/select").map(res => res.json());
+        return this._http.get(this.url + "/selectarea").map(res => res.json());
     }
 }

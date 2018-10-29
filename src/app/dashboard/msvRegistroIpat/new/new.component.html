@@ -44,6 +44,7 @@
                 </form>
             </div>
         </div>
+        <!--<form #formNew="ngForm">-->
         <div class="card" *ngIf="consecutivo">
             <div class="card-header">
                 <h5 class="card-title">
@@ -96,29 +97,44 @@
                             required name="claseAccidente">
                         </ng-select>
                     </div>
-                    <!--<div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.claseAccidente == 'OTRO'">-->
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idClaseAccidente == 'OTRO'">
                         <label>Otro (Clase de Accidente)</label>
                         <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroClaseAccidente" name="otroClaseAccidente">
                     </div>
-                    <!--<div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.claseAccidente == "CHOQUE"'>-->
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.claseAccidente == "CHOQUE"'>
                         <label>Choque con</label>
                         <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="msvRegistroIpat.idChoqueCon"
                             name="choqueCon">
                         </ng-select>
                     </div>
-                    <!--<div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.choqueCon == "OBJETO FIJO"'>-->
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idChoqueCon == 'OBJETO FIJO'">
                         <label>Objeto Fijo</label>
                         <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="msvRegistroIpat.idObjetoFijo"
                             name="objetoFijo">
                         </ng-select>
                     </div>
-                    <!--<div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.objetoFijo == 'OTRO'">-->
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.objetoFijo == 'OTRO'">
                         <label>Otro (Objeto Fijo)</label>
                         <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroObjetoFijo" name="otroObjetoFijo">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>¿Se identificaron testigos?</label>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioTestigoSi" name="testigo" [(ngModel)]="msvRegistroIpat.testigo" value="Si" type="radio"
+                                        id="customRadioTestigo1" name="customRadioTestigo" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioTestigo1">Si</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-radio">
+                                    <input id="radioTestigoNo" name="testigo" [(ngModel)]="msvRegistroIpat.testigo" value="No" type="radio"
+                                        id="customRadioTestigo2" name="customRadioTestigo" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioTestigo2">No</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -155,11 +171,39 @@
                             required name="disenio">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
-                        <label> Estado Tiempo (Condición Clima)</label>
-                        <ng-select [multiple]="false" [options]="estadosTiempo" [(ngModel)]="msvRegistroIpat.idEstadoTiempo"
-                            required name="estadoTiempo">
-                        </ng-select>
+                    <div class="row" id="multi" class="col-lg- col-md-6">
+                        <div class="form-group row">
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Estado Tiempo (Condición Climática)</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group">
+                                            <bs-sortable [(ngModel)]="itemStringsLeftClima" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Estado Tiempo" placeholderClass="placeholderStyle"
+                                                wrapperClass="sortable-wrapper" name="estadoTiempo">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Agregar</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
+                                            <bs-sortable [(ngModel)]="itemStringsRightClima" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Arrastre estados del tiempo"
+                                                placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="estadosTiempoAgregados">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -202,7 +246,7 @@
                             required name="material">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idMaterial == 'OTRO'">
                         <label>Otro (Material)</label>
                         <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroMaterial" name="otroMaterial">
                     </div>
@@ -218,7 +262,7 @@
                             required name="condicionVia">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idCondicionVia == 'OTRO'">
                         <label>Otra (Condición Vía)</label>
                         <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otraCondicionVia" name="otraCondicionVia">
                     </div>
@@ -240,35 +284,155 @@
                             required name="visual">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idVisual == 'DISMINUIDA'">
                         <label>Visibilidad(Visual) Disminuida por </label>
-                        <ng-select [multiple]="false" [options]="visualesDisminuidas" [(ngModel)]="msvRegistroIpat.idVisualDisminuida"
+                        <ng-select [multiple]="false" [options]="visualesDisminuidas" [(ngModel)]="msvRegistroIpat.idVisualDisminuida" 
                             required name="visualDisminuida">
                         </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idVisualDisminuida == 'OTRO'">
                         <label>Otra (Visibilidad Disminuida Por)</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otraVisualDisminuida" name="otraVisualDisminuida"
-                            required>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otraVisualDisminuida" name="otraVisualDisminuida">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>¿Hay Semaforo?</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
                                 <div class="custom-control custom-radio">
-                                    <input id="radioSemaforoSi" name="portaSemaforo" [(ngModel)]="msvRegistroIpat.semaforo" value="Si" type="radio"
+                                    <input id="radioSemaforoSi" name="semaforo" [(ngModel)]="msvRegistroIpat.semaforo" value="Si" type="radio"
                                         id="customRadioSemaforo1" name="customRadioSemaforo" class="custom-control-input">
                                     <label class="custom-control-label" for="customRadioSemaforo1">Si</label>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <div class="custom-control custom-radio">
-                                    <input id="radioSemaforoNo" name="portaSemaforo" [(ngModel)]="msvRegistroIpat.semaforo" value="No" type="radio"
+                                    <input id="radioSemaforoNo" name="semaforo" [(ngModel)]="msvRegistroIpat.semaforo" value="No" type="radio"
                                         id="customRadioSemaforo2" name="customRadioSemaforo" class="custom-control-input">
                                     <label class="custom-control-label" for="customRadioSemaforo2">No</label>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.semaforo == 'Si'">
+                        <label>Estado Semaforo </label>
+                        <ng-select [multiple]="false" [options]="estadosSemaforo" [(ngModel)]="msvRegistroIpat.idEstadoSemaforo"
+                            required name="estadoSemaforo">
+                        </ng-select>
+                    </div>
+                    <div class="row" id="multi" class="col-lg- col-md-6">
+                        <div class="form-group row">
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Señales Verticales</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group">
+                                            <bs-sortable [(ngModel)]="itemStringsLeftSenialVertical" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Señal Vertical" placeholderClass="placeholderStyle"
+                                                wrapperClass="sortable-wrapper" name="senialVertical">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Agregar</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
+                                            <bs-sortable [(ngModel)]="itemStringsRightSenialVertical" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Arrastre señales verticales"
+                                                placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="senialesVerticalesAgregadas">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="multi" class="col-lg- col-md-6">
+                        <div class="form-group row">
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Señales Horizontales</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group">
+                                            <bs-sortable [(ngModel)]="itemStringsLeftSenialHorizontal" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Señal Horizontal" placeholderClass="placeholderStyle"
+                                                wrapperClass="sortable-wrapper" name="senialHorizontal">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Agregar</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
+                                            <bs-sortable [(ngModel)]="itemStringsRightSenialHorizontal" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Arrastre señales horizontales"
+                                                placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="senialesHorizontalesAgregados">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="multi" class="col-lg- col-md-6">
+                        <div class="form-group row">
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Reductor Velocidad</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group">
+                                            <bs-sortable [(ngModel)]="itemStringsLeftReductorVelocidad" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Reductor de Velocidad" placeholderClass="placeholderStyle"
+                                                wrapperClass="sortable-wrapper" name="reductorVelocidad">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Agregar</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
+                                            <bs-sortable [(ngModel)]="itemStringsRightReductorVelocidad" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Arrastre reductores de velocidad"
+                                                placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="reductoresVelocidadAgregados">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Otro (Reductor Velocidad)</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroReductorVelocidad" name="otroReductorVelocidad">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Delineador de Piso</label>
+                        <ng-select [multiple]="false" [options]="delineadoresPiso" [(ngModel)]="msvRegistroIpat.idDelineadorPiso" required name="delineadorPiso">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idDelineadorPiso == 'OTRO'">
+                        <label>Otro (Delineador de Piso)</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroDelineadorPiso" name="otroDelineadorPiso">
                     </div>
                 </div>
             </div>
@@ -281,11 +445,6 @@
             </div>
             <div class="card-body">
                 <div class="form-group row">
-                    <!--<div class="col-lg-6 col-md-6">
-                                <label>Placa Vehiculo</label>
-                                <input class="form-control" type="text" (blur)="onBuscarVehiculo()" [(ngModel)]="msvRegistroIpat.placa" name="placa"
-                                    required>
-                            </div>-->
                     <div class="col-lg-6 col-md-6">
                         <label>¿Posee Placa?</label>
                         <div class="form-group row">
@@ -385,7 +544,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
                         <label>Matriculado En</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.matriculadoEn" name="matriculadoEn"
+                        <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.matriculadoEn" name="matriculadoEn"
                             required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
@@ -598,22 +757,46 @@
                         <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionDanios" name="descripcionDanios"
                             required>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
-                        <label>Fallas</label>
-                        <ng-select [multiple]="false" [options]="fallas" [(ngModel)]="msvRegistroIpat.idFalla" required name="falla">
-                        </ng-select>
+                    <div class="row" id="multi" class="col-lg- col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
+                        <div class="form-group row">
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Fallas</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group">
+                                            <bs-sortable [(ngModel)]="itemStringsLeftFalla" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Falla" placeholderClass="placeholderStyle"
+                                                wrapperClass="sortable-wrapper" name="fallas">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 tile">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Agregar</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
+                                            <bs-sortable [(ngModel)]="itemStringsRightFalla" itemClass="sortable-item list-group-item"
+                                                itemActiveClass="sortable-item-active" placeholderItem="Arrastre fallas del vehiculo"
+                                                placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="fallasAgregadas">
+                                            </bs-sortable>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
-                        <label>Otras Fallas</label>
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si' && msvRegistroIpat.idFalla == 'OTRA'">
+                        <label>Otra (Falla)</label>
                         <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otraFalla" name="otraFalla">
                     </div>
-                    <!--<div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
-                        <label>Lugar Impacto</label>
-                        <ng-select [multiple]="false" [options]="lugaresImpacto" [(ngModel)]="msvRegistroIpat.idLugarImpacto"
-                            required name="lugarImpacto">
-                        </ng-select>
-                    </div>-->
-                    <div class="row" id="multi" class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
+                    <div class="row" id="multi" class="col-lg- col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
+                        <div class="form-group row">
                         <div class="col-sm-6 tile">
                             <div class="card">
                                 <div class="card-header">
@@ -640,7 +823,7 @@
                                     <h6 class="card-title">Agregar</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="list-group">
+                                    <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
                                         <bs-sortable 
                                             [(ngModel)]="itemStringsRight" 
                                             itemClass="sortable-item list-group-item"
@@ -653,6 +836,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
@@ -751,7 +935,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.gravedad == 'CON HERIDOS' || msvRegistroIpat.gravedad == 'CON MUERTOS'">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.practicoExamenConductor == 'Si'">
                         <label>¿Autorizó el examen?</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -772,15 +956,13 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.practicoExamenConductor == "Si"'>-->
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.gravedad == 'CON HERIDOS' || msvRegistroIpat.gravedad == 'CON MUERTOS'">
+                    <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.practicoExamenConductor == "Si"'>
                         <label>Resultado Examen Conductor</label>
                         <ng-select [multiple]="false" [options]="resultadosExamen" [(ngModel)]="msvRegistroIpat.idResultadoExamenConductor"
                             required name="resultadoExamenConductor">
                         </ng-select>
                     </div>
-                    <!--<div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.practicoExamenConductor == "Si"'>-->
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.gravedad == 'CON HERIDOS' || msvRegistroIpat.gravedad == 'CON MUERTOS'">
+                    <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.practicoExamenConductor == "Si"'>
                         <label>Grado Examen Conductor</label>
                         <ng-select [multiple]="false" [options]="gradosExamen" [(ngModel)]="msvRegistroIpat.idGradoExamenConductor"
                             required name="gradoExamenConductor">
@@ -830,15 +1012,18 @@
                             </div>
                         </div>
                     </div>
-                    <!--<div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "Si"'>-->
-                    <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "Si"'>
-                        <label>No Lic. de Conducción</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroLicenciaConduccion"
-                            name="numeroLicenciaConduccion">
+                    <div class="input-group" class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "Si"'>
+                        <input type="text" class="form-control" placeholder="número de licencia de conducción" [(ngModel)]="msvRegistroIpat.numeroLicenciaConduccion"
+                            required name="numeroLicenciaConduccion" />
+                        <span class="input-group-btn">
+                            <button (click)="onBuscarLicenciaConductor()" class="col-lg-9 col-md-9" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "Si"'>
                         <label>Categoria Lic.Conducción</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.categoriaLicenciaConduccion"
+                        <input class="form-control" type="text" [disabled]="licencia" [(ngModel)]="msvRegistroIpat.categoriaLicenciaConduccion"
                             name="categoriaLicenciaConduccion">
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "Si"'>
@@ -847,17 +1032,17 @@
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "Si"'>
                         <label>Fecha Expedicion</label>
-                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaExpedicionLicenciaConduccion"
+                        <input class="form-control" type="date" [disabled]="licencia" [(ngModel)]="msvRegistroIpat.fechaExpedicionLicenciaConduccion"
                             name="fechaExpedicionLicenciaConduccion">
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "Si"'>
                         <label>Fecha Vencimiento</label>
-                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaVenciminetoLicenciaConduccion"
-                            name="fechaVenciminetoLicenciaConduccion">
+                        <input class="form-control" type="date" [disabled]="licencia" [(ngModel)]="msvRegistroIpat.fechaVencimientoLicenciaConduccion"
+                            name="fechaVencimientoLicenciaConduccion">
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "Si"'>
                         <label>Codigo Org. Transito ****</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sedeOperativa" name="sedeOperativa">
+                        <input class="form-control" type="text" [disabled]="licencia" [(ngModel)]="msvRegistroIpat.organismoTransito" name="organismoTransito">
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.clase == 'MOTOCARRO' || msvRegistroIpat.clase == 'MOTOCICLETA' || msvRegistroIpat.clase == 'CUATRIMOTO' || msvRegistroIpat.clase == 'BICICLETA'">
                         <label>Chaleco</label>
@@ -901,7 +1086,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.clase?.nombre == 'MOTOCARRO' || msvRegistroIpat.clase?.nombre == 'MOTOCICLETA' || msvRegistroIpat.clase?.nombre == 'CUATRIMOTO' || msvRegistroIpat.clase?.nombre == 'BICICLETA'">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.clase != 'MOTOCARRO' || msvRegistroIpat.clase != 'MOTOCICLETA' || msvRegistroIpat.clase != 'CUATRIMOTO' || msvRegistroIpat.clase != 'BICICLETA'">
                         <label>Cinturon</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -951,7 +1136,7 @@
                                 <div class="custom-control custom-radio">
                                     <input id="radioMismoConductorSi" name="mismoConductor" [(ngModel)]="msvRegistroIpat.mismoConductor"
                                         value="Si" type="radio" id="customRadioMismoConductor1" name="customRadioMismoConductor"
-                                        class="custom-control-input" (click)= onMismoConductor()>
+                                        class="custom-control-input" (click)= "onMismoConductor()">
                                     <label class="custom-control-label" for="customRadioMismoConductor1">Si</label>
                                 </div>
                             </div>
@@ -967,22 +1152,78 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Tipo Documento Propietario</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tipoIdentificacionPropietario"
+                        <input class="form-control" type="text" [disabled]="msmConductor" [(ngModel)]="msvRegistroIpat.tipoIdentificacionPropietario"
                             name="tipoIdentificacionPropietario" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Identificacion Propietario</label>
-                        <input class="form-control" type="number" [(ngModel)]="msvRegistroIpat.identificacionPropietario"
+                        <input class="form-control" type="number" [disabled]="msmConductor" [(ngModel)]="msvRegistroIpat.identificacionPropietario"
                             name="identificacionPropietario" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Nombre Propietario</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nombresPropietario" name="nombresPropietario"
+                        <input class="form-control" type="text" [disabled]="msmConductor" [(ngModel)]="msvRegistroIpat.nombresPropietario" name="nombresPropietario"
                             required>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Apellido Propietario</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.apellidosPropietario" name="apellidosPropietario"
+                        <input class="form-control" type="text" [disabled]="msmConductor" [(ngModel)]="msvRegistroIpat.apellidosPropietario" name="apellidosPropietario"
+                            required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="consecutivo && msvRegistroIpat.testigo == 'Si'" >
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Información General Testigo</strong>
+                </h5>
+            </div> 
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="input-group" class="col-lg-6 col-md-6">
+                        <input type="text" class="form-control" placeholder="Identificación Testigo" [(ngModel)]="msvRegistroIpat.identificacionTestigo"
+                            required name="identificacionTestigo" />
+                        <span class="input-group-btn">
+                            <button (click)="onBuscarTestigo()" class="col-lg-9 col-md-9" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Tipo Documento Testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tipoIdentificacionTestigo"
+                            name="tipoIdentificacionTestigo" required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Nombres Testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nombresTestigo" name="nombresTestigo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Apellidos testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.apellidosTestigo" name="apellidosTestigo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Departamento Domicilio</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.departamentoResidenciaTestigo" name="departamentoResidenciaTestigo"
+                            required>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6">
+                        <label>Dirección Testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.direccionTestigo" name="direccionTestigo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Ciudad Residencia Testigo</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.ciudadResidenciaTestigo" name="ciudadResidenciaTestigo"
+                            required>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Telefono</label>
+                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.telefonoTestigo" name="telefonoTestigo"
                             required>
                     </div>
                 </div>
@@ -991,63 +1232,48 @@
         <div class="card" *ngIf="consecutivo">
             <div class="card-header">
                 <h5 class="card-title">
-                    <strong class="text-uppercase">Datos de quien conoce el accidente (Testigo)</strong>
+                    <strong class="text-uppercase">Datos de quien conoce el accidente</strong>
                 </h5>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <label>¿Se identificaron testigos?</label>
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
-                        <div class="custom-control custom-radio">
-                            <input id="radioTestigoSi" name="testigo" [(ngModel)]="msvRegistroIpat.testigo"
-                                value="Si" type="radio" id="customRadioTestigo1" name="customRadioTestigo" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadioTestigo1">Si</label>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <div class="custom-control custom-radio">
-                            <input id="radioTestigoNo" name="testigo" [(ngModel)]="msvRegistroIpat.testigo"
-                                value="No" type="radio" id="customRadioTestigo2" name="customRadioTestigo" class="custom-control-input">
-                            <label class="custom-control-label" for="customRadioTestigo2">No</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div> 
             <div class="card-body">
-                <div class="form-group row" *ngIf="msvRegistroIpat.testigo == 'Si'">
+                <div class="form-group row">
+                    <div class="input-group" class="col-lg-6 col-md-6">
+                        <input type="text" class="form-control" placeholder="Identificación Agente" [(ngModel)]="msvRegistroIpat.identificacionAgente" required
+                            name="identificacionAgente" />
+                        <span class="input-group-btn">
+                            <button (click)="onBuscarAgente()" class="col-lg-9 col-md-9" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label>Tipo Documento Agente</label>
+                        <input class="form-control" type="text" [disabled]="agente" [(ngModel)]="msvRegistroIpat.tipoIdentificacionAgente"
+                            name="tipoIdentificacionAgente" required>
+                    </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Grado</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.gradoTestigo" name="gradoTestigo"
+                        <input class="form-control" type="text" [disabled]="agente" [(ngModel)]="msvRegistroIpat.gradoAgente" name="gradoAgente"
                             required>
-                    </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.testigo == 'Si'">
-                        <label>tipo Documento Testigo</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tipoIdentificacionTestigo"
-                            name="tipoIdentificacionTestigo" required>
-                    </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.testigo == 'Si'">
-                        <label>Identificación Testigo</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.identificacionTestigo"
-                            name="identificacionPropietario" required>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <label>nombre Testigo</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nombresTestigo" name="nombresTestigo"
+                        <label>Nombre Agente</label>
+                        <input class="form-control" type="text" [disabled]="agente" [(ngModel)]="msvRegistroIpat.nombresAgente" name="nombresAgente"
                             required>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.testigo == 'Si'">
-                        <label>apellido testigo</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.apellidosTestigo" name="apellidosTestigo"
+                    <div class="col-lg-6 col-md-6">
+                        <label>Apellido Agente</label>
+                        <input class="form-control" type="text" [disabled]="agente" [(ngModel)]="msvRegistroIpat.apellidosAgente" name="apellidosAgente"
                             required>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.testigo == 'Si'">
+                    <div class="col-lg-6 col-md-6">
                         <label>Placa</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.placaTestigo" name="placaTestigo"
+                        <input class="form-control" type="text" [disabled]="agente" [(ngModel)]="msvRegistroIpat.placaAgente" name="placaAgente"
                             required>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.testigo == 'Si'">
+                    <div class="col-lg-6 col-md-6">
                         <label>Entidad</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.entidadTestigo" name="entidadTestigo"
+                        <input class="form-control" type="text" [disabled]="agente" [(ngModel)]="msvRegistroIpat.entidadAgente" name="entidadAgente"
                             required>
                     </div>
                 </div>
@@ -1094,54 +1320,58 @@
                             required name="gravedadVictima">
                         </ng-select>
                     </div>
+                    <div class="input-group" class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
+                        <input type="text" class="form-control" placeholder="Identificación Victima" [(ngModel)]="msvRegistroIpat.identificacionVictima"
+                            required name="identificacionVictima" />
+                        <span class="input-group-btn">
+                            <button (click)="onBuscarVictima()" class="col-lg-9 col-md-9" class="btn btn-default btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>Tipo Documento Victima</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tipoIdentificacionVictima"
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.tipoIdentificacionVictima"
                             name="tipoIdentificacionVictima" required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
-                        <label>Identificación Victima</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.identificacionVictima"
-                            name="identificacionVictima" required>
-                    </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>Nombres Victima</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nombresVictima" name="nombresVictima"
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.nombresVictima" name="nombresVictima"
                             required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>Apellidos Victima</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.apellidosVictima" name="apellidosVictima"
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.apellidosVictima" name="apellidosVictima"
                             required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>Nacionalidad</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVictima" name="nacionalidadVictima"
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.nacionalidadVictima" name="nacionalidadVictima"
                             required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>Fecha Nacimiento</label>
-                        <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaNacimientoVictima"
+                        <input class="form-control" type="date" [disabled]="victima" [(ngModel)]="msvRegistroIpat.fechaNacimientoVictima"
                             name="fechaNacimientoVictima" required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>Sexo</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.sexoVictima" name="sexoVictima"
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.sexoVictima" name="sexoVictima"
                             required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>Direccion residencia victima</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.direccionResidenciaVictima"
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.direccionResidenciaVictima"
                             name="direccionResidenciaVictima" required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>ciudad residencia victima</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.ciudadResidenciaVictima"
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.ciudadResidenciaVictima"
                             name="ciudadResidenciaVictima" required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>telefono </label>
-                        <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.telefonoVictima" name="telefonoVictima"
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.telefonoVictima" name="telefonoVictima"
                             required>
                     </div>
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
@@ -1150,7 +1380,11 @@
                             required name="hospitalVictima">
                         </ng-select>
                     </div>
-
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idTipoVictima == 'PASAJERO' || msvRegistroIpat.idTipoVictima == 'ACOMPAÑANTE'">
+                        <label>Placa Vehiculo Victima </label>
+                        <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.placaVehiculoVictima" name="placaVehiculoVictima"
+                            required>
+                    </div>              
                     <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                         <label>¿Se practicó el examen?</label>
                         <div class="form-group row">
@@ -1228,7 +1462,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si' && msvRegistroIpat.clase == 'MOTOCARRO' || msvRegistroIpat.clase == 'MOTOCICLETA' || msvRegistroIpat.clase == 'CUATRIMOTO' || msvRegistroIpat.clase == 'BICICLETA'">
                         <label>Chaleco</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -1249,7 +1483,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si' && msvRegistroIpat.clase == 'MOTOCARRO' || msvRegistroIpat.clase == 'MOTOCICLETA' || msvRegistroIpat.clase == 'CUATRIMOTO' || msvRegistroIpat.clase == 'BICICLETA'">
                         <label>Casco</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -1270,7 +1504,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si' && msvRegistroIpat.clase != ' ' || msvRegistroIpat.clase != 'MOTOCARRO' || msvRegistroIpat.clase != 'MOTOCICLETA' || msvRegistroIpat.clase != 'CUATRIMOTO' || msvRegistroIpat.clase != 'BICICLETA'">
                         <label>Cinturon</label>
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
@@ -1299,10 +1533,11 @@
                 </div>
             </div>
         </div>
+        <!--</form>-->
         <!--<div class="card-footer" *ngIf="listaVehiculosPlacas">-->
         <div class="card-footer">
             <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-            <button (click)="enviarTramite()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
+            <button (click)="enviarTramite()" *ngIf="consecutivo" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
         </div>
         <!-- /.col -->
     </div>

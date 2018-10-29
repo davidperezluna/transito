@@ -37,6 +37,15 @@ export class MsvRegistroIpat{
 		public idVisualDisminuida:number,
 		public otraVisualDisminuida: string,
 		public semaforo: string,
+		
+		public idEstadoSemaforo: number,
+		public senialVertical: number,
+		public senialHorizontal: number,
+		public reductorVelocidad: number,
+		public otroReductorVelocidad: string,
+		public idDelineadorPiso: number,
+		public otroDelineadorPiso: string,
+
 
 		//campos vehiculo
 		public portaPlaca: string,
@@ -100,7 +109,7 @@ export class MsvRegistroIpat{
 		public descripcionDanios: string,
 		public idFalla: number,
 		public otraFalla: string,
-		public idLugarImpacto: number,
+		public lugarImpacto: number,
 		
 		//Datos Conductor
 		public nombresConductor: string,
@@ -125,6 +134,7 @@ export class MsvRegistroIpat{
 		public restriccionConductor: string,
 		public fechaExpedicionLicenciaConduccion: string,
 		public fechaVencimientoLicenciaConduccion: string,
+		public organismoTransito: string,
 		public chalecoConductor: string,
 		public cascoConductor: string,
 		public cinturonConductor: string,
@@ -145,6 +155,7 @@ export class MsvRegistroIpat{
 		public ciudadResidenciaVictima: string,
 		public telefonoVictima: string,
 		public idHospitalVictima: number,
+		public placaVehiculoVictima: string,
 		public practicoExamenVictima: string,
 		public autorizoVictima: string,
 		public idResultadoExamenVictima: string,
@@ -158,16 +169,26 @@ export class MsvRegistroIpat{
 
 		public observaciones:string,
 
-		// datos de quien conoce el accidente
-		public gradoTestigo: string,
-		public nombresTestigo: string,
-		public apellidosTestigo: string,
+		// información testigo
 		public tipoIdentificacionTestigo: number,
 		public identificacionTestigo: number,
-		public placaTestigo: string,
-		public entidadTestigo: string,
-
+		public nombresTestigo: string,
+		public apellidosTestigo: string,
+		public departamentoResidenciaTestigo: string,
+		public direccionTestigo: string,
+		public ciudadResidenciaTestigo: string,
+		public telefonoTestigo: string,
+		
 		public idHipotesis: number,
+		
+		//datos agente de transito
+		public gradoAgente: string,
+		public tipoIdentificacionAgente: string,
+		public identificacionAgente: string,
+		public nombresAgente: string,
+		public apellidosAgente: string,
+		public placaAgente: string,
+		public entidadAgente: string,
 
 		/*public limitacionId:number,
 		public tipoProcesoId:number,
