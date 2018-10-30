@@ -7,6 +7,7 @@ import { Ciudadano } from '../ciudadano/ciudadano.modelo';
 
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
+import { MsvConsecutivo } from '../msvConsecutivo/msvConsecutivo.modelo';
 declare var $: any;
 
 @Component({
@@ -23,8 +24,10 @@ export class MsvRegistroIpatComponent implements OnInit {
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
+  public formShow = false;
   public table: any = null;
   public tramiteInscripcion: any;
+  public consecutivo: MsvConsecutivo;
 
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
@@ -149,6 +152,16 @@ export class MsvRegistroIpatComponent implements OnInit {
     this.tramiteInscripcion = tramiteInscripcion;
     this.formEdit = true;
     this.formIndex = false;
+  }
+
+  onShow(consecutivo: any) {
+    this.consecutivo = consecutivo;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formShow = true;
+    if (this.table) {
+      this.table.destroy();
+    }
   }
 
 }

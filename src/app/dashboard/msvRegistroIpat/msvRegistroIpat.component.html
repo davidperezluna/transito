@@ -23,7 +23,7 @@
                 <th>Id</th>
                 <th>Numero Consecutivo</th>
                 <th>Estado</th>
-                <!-- <th>Acciones</th> -->
+                <!--<th>Acciones</th>-->
               </tr>
             </thead>
             <tbody>
@@ -31,6 +31,11 @@
                 <td>{{consecutivo.id}}</td>
                 <td>{{consecutivo.consecutivo}}</td>
                 <td>{{consecutivo.estado}}</td>
+                <!--<td><div class="btn-group">
+                  <button (click)="onShow(consecutivo)" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </div></td>-->
               </tr>
             </tbody>
           </table>
