@@ -39,7 +39,7 @@ export class SvCfgVisualDisminuidaService {
         );
     }
 
-    show(token, id) {
+    show(id, token) {
         let params = "authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })

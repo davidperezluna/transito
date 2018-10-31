@@ -320,32 +320,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     }
 
-    onKeyApoderado() {
-        let token = this._loginService.getToken();
-        let identificacion = {
-            'numeroIdentificacion': this.identificacionAcreedor,
-        };
-        this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
-            response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.acreedorSelected = this.respuesta.data.empresa.id;
-                    this.acreedorEncontrado = 2;
-                    // this.ciudadanoNew = false;
-                } else {
-                    this.acreedorEncontrado = 3;
-                    // this.ciudadanoNew = true;
-                }
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            });
-    }
 
     onKeyEmpresa() {
         let token = this._loginService.getToken();

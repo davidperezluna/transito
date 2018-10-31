@@ -39,7 +39,7 @@ export class SvCfgControlViaComponent implements OnInit {
             ) {
             }
         });
-        this._ControlViaService.index().subscribe(
+        this._ControlViaService.indexSemaforo().subscribe(
             response => {
                 this.controlesVia = response.data;
                 let timeoutId = setTimeout(() => {

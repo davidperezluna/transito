@@ -130,6 +130,7 @@ constructor(
     this.factura = new Factura(null,null, null, null, null, null, null, null, null);
   
     var datePiper = new DatePipe(this.date);
+    
     let token = this._loginService.getToken();
     
     this._FuncionarioService.searchLogin(identity,token).subscribe(

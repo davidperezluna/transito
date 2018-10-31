@@ -173,7 +173,19 @@ export class MpersonalFuncionarioComponent implements OnInit {
     this.datos.tipoContratoId = this.tipoContratoSelected;
     this.datos.sedeOperativaId = this.sedeOperativaSelected;
 
-    console.log(this.datos);
+    swal({
+      title: 'Cargando !',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+          swal.showLoading();
+      }
+    }).then((result) => {
+        if (
+            // Read more about handling dismissals
+            result.dismiss === swal.DismissReason.timer
+        ) {
+        }
+    });
 
     
     let token = this._loginService.getToken();
@@ -183,20 +195,20 @@ export class MpersonalFuncionarioComponent implements OnInit {
           this.funcionarios = response.data;
           this.iniciarTabla();
           this.formIndex = true;
-
-          swal({
-            title: 'Perfecto',
-            text: response.message,
-            type: 'info',
-            showCloseButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> OK!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down',
-          });
+          swal.close();
+          // swal({
+          //   title: 'Perfecto',
+          //   text: response.message,
+          //   type: 'info',
+          //   showCloseButton: true,
+          //   focusConfirm: false,
+          //   confirmButtonText:
+          //     '<i class="fa fa-thumbs-up"></i> OK!',
+          //   confirmButtonAriaLabel: 'Thumbs up, great!',
+          //   cancelButtonText:
+          //   '<i class="fa fa-thumbs-down"></i>',
+          //   cancelButtonAriaLabel: 'Thumbs down',
+          // });
         }else{
           swal({
             title: 'Alerta',

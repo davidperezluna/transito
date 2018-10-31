@@ -78,7 +78,7 @@ constructor(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
-          this._UserCfgMenuService.cartData.emit(this.menus);  
+          this._UserCfgMenuService.cartData.emit(this.menus);
           swal({
             title: 'Perfecto!',
             text: response.message,
