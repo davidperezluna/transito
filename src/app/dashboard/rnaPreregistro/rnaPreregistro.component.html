@@ -7,8 +7,8 @@
             <h5 class="card-title">Vehículos registrados<small> Automotor</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-success">
-                  <span class="text">Nuevo</span> 
-                  <i class="fa fa-save"></i>
+                  <i class="fa fa-plus"></i>
+                  Nuevo
                 </button>
               </div>
             </h5>
@@ -57,7 +57,7 @@
                   <td>{{vehiculo.chasis}}</td> 
                   <td>
                     <div class="btn-group">
-                      <button (click)="editVehiculo(vehiculo)" class="btn btn-xs btn-info" type="button">
+                      <button (click)="editVehiculo(vehiculo)" class="btn btn-xs btn-primary" type="button">
                         <i class="fa fa-pencil"></i>
                       </button> 
                       <button (click)="deleteVehiculo(vehiculo.id)"  class="btn btn-xs btn-danger" type="button">

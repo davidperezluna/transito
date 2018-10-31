@@ -124,8 +124,14 @@
                     </div>
                     </form>
                 <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                    <button (click)="onEnviar()" class="btn btn-success " [disabled]="newForm.invalid">Enviar</button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" class="btn btn-primary" [disabled]="newForm.invalid">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
                 </div>    
             </div>
         </div>    

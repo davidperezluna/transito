@@ -52,8 +52,8 @@ export class FacturaComponent implements OnInit {
           this.facturas = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
-            swal.close();
           }, 100);
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;

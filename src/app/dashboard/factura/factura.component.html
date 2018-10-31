@@ -8,8 +8,14 @@
                   <strong class="text-uppercase">Financiero y Liquidaciones </strong>
                   <small>Facturas</small>
                   <div class="btn-group pull-right">
-                    <button (click)="onNew()" *ngIf='formIndex' class="btn btn-success btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-                    <button (click)="onNewTramite()" *ngIf='formShow' class="btn btn-success btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Tramite</span> <i class="ti-save ml-2"></i></button>
+                    <button (click)="onNew()" *ngIf='formIndex' class="btn btn-success">
+                      <i class="fa fa-plus"></i>
+                      Nuevo
+                    </button>
+                    <button (click)="onNewTramite()" *ngIf='formShow' class="btn btn-success">
+                      <i class="fa fa-plus"></i>
+                      Tramite
+                    </button>
                   </div>
               </h5>
             </div>
@@ -30,17 +36,19 @@
                     <td>{{ factura.fechaCreacion }}</td>
                     <td>
                       <div class="btn-group">
-                          <button (click)="editFactura(factura)" class="btn btn-info" type="button" title="Editar">
-                            <i class="fa fa-pencil"></i>
-                          </button>
-                          <button (click)="deleteFactura(factura.id)"  class="btn btn-danger" type="button" title="Eliminar">
-                            <i class="fa fa-trash"></i>
-                          </button>
-                          <!--
-                            <button (click)="getTramiteFactura(factura)" class="btn btn-info" type="button" title="Tramites">
-                              <i class="fa fa-tasks"></i>
-                            </button>
+                        <!--
+                        <button (click)="editFactura(factura)" class="btn btn-primary" type="button" title="Editar">
+                          <i class="fa fa-pencil"></i>
+                        </button>
                           -->
+                        <button (click)="deleteFactura(factura.id)"  class="btn btn-danger" type="button" title="Eliminar">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                        <!--
+                          <button (click)="getTramiteFactura(factura)" class="btn btn-info" type="button" title="Tramites">
+                            <i class="fa fa-tasks"></i>
+                          </button>
+                        -->
                       </div>
                     </td>
                   </tr>
