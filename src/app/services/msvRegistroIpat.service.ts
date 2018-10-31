@@ -106,4 +106,8 @@ export class MsvRegistroIpatService {
 			res => res.json()
 		);
 	}
+
+	export() {
+		return this._http.get(this.url + "/export").map(res => res.json());
+	}
 }

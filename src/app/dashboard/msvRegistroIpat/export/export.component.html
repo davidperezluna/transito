@@ -1,0 +1,36 @@
+<div class="container">
+    <hr>
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <small>SISTEMA INTEGRADO DE INFORMACIÓN SOBRE MULTAS Y SANCIONES POR INFRACCIONES DE TRANSITO</small>
+                    </h5>
+                </div>
+                <div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Adjuntar Reporte Policia <strong class="text-danger">*</strong></label>
+                        <input type="file" (change)="onFileChange($event)" class="form-control" [(ngModel)]="msvRegistroIpat.documento" name="documento" />
+                    </div>
+                </div>
+                <div class="card-body" style="overflow-x: auto">
+                    <table class="table" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>IPAT CONSECUTIVO</th>
+                                <th>ID IPAT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let ipat of ipats; let i = index">
+                                <td>{{ ipat.consecutivo }}</td>
+                                <td>{{ ipat.id }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
