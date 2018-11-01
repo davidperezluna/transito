@@ -5,23 +5,34 @@
             <div class="card">
             <div class="card-body">
                 <h5 class="m-0">Nueva Factura</h5>
-                <table class="table " id="dataTables-example" *ngIf="funcionario">
-                    <thead>
-                      <tr>
-                          <th>Fecha de EX</th>
-                          <th>Hora</th>
-                          <th>Sede</th>
-                          <th>Factura Nro</th>
-                          <th>Fecha Vencimiento</th>
-                      </tr>
-                    </thead>
+                <table class="table table-bordered table-striped" *ngIf="funcionario">
                     <tbody>
                       <tr class="odd">
-                        <td>{{date| date: 'yyyy-MM-dd'}}</td>
-                        <td>{{date| date: 'h:m:ss'}}</td>
-                        <td>{{sedeOperativa.nombre}}</td> 
-                        <td>{{factura.numero}}</td>
-                        <td>{{date| date: 'yyyy-MM-dd'}}</td>
+                        <td>
+                            <strong>Fecha Expedición</strong>
+                            <br>
+                            {{ date| date: 'yyyy-MM-dd' }}
+                        </td>
+                        <td>
+                            <strong>Hora</strong>
+                            <br>
+                            {{ date| date: 'h:m:ss' }}
+                        </td>
+                        <td>
+                            <strong>Sede operativa</strong>
+                            <br>
+                            {{ sedeOperativa.nombre }}
+                        </td> 
+                        <td>
+                            <strong>Fctura No.</strong>
+                            <br>
+                            {{ factura.numero }}
+                        </td>
+                        <td>
+                            <strong>Fecha vencimiento</strong>
+                            <br>
+                            {{ date| date: 'yyyy-MM-dd' }}
+                        </td>
                       </tr>
                     </tbody>
                 </table>
@@ -275,9 +286,9 @@
                             <i class="fa fa-times"></i>
                             Cancelar
                         </button>
-                        <a (click)="onImprimir()" class="btn btn-success" target="_blank">
+                        <a (click)="onImprimir()" *ngIf="tramitesValor && tramitesValor?.length > 0" class="btn btn-success" target="_blank">
                             <i class="fa fa-file-pdf-o"></i>
-                            Imprimir Planilla
+                            Previsualizar
                         </a>
                         <button (click)="onEnviar()"  class="btn btn-primary" type="button">
                             <i class="fa fa-save"></i>

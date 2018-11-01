@@ -5,7 +5,10 @@
           <div class="card-header">
             <h5 class="card-title">Vehículos Registrados <small>remolques </small>
               <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-success btn-round"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+                <button (click)="onNew()" class="btn btn-success">
+                  <i class="fa fa-save"></i>
+                  Nuevo
+                </button>
               </div>
             </h5>
           </div>
@@ -16,7 +19,6 @@
                   <th>Placa</th>
                   <th>Marca</th>
                   <th>Clase</th>
-                  <th>Cilindraje</th>
                   <th>Serie</th>
                   <th>Vin</th>
                   <th>Numero de ejes</th>
@@ -31,7 +33,6 @@
                   <td>{{ registroRemolque.vehiculo.placa.numero }}</td>
                   <td>{{ registroRemolque.vehiculo.linea.marca.nombre }}</td>
                   <td>{{ registroRemolque.vehiculo.clase.nombre }}</td>
-                  <td>{{ registroRemolque.vehiculo.cilindraje }}</td> 
                   <td>{{ registroRemolque.vehiculo.serie}}</td>
                   <td>{{ registroRemolque.vehiculo.vin}}</td>
                   <td>{{ registroRemolque.numeroEjes }}</td>
@@ -39,8 +40,14 @@
                   <td>{{ registroRemolque.numeroFth }}</td>
                   <td>{{ registroRemolque.condicionIngreso.nombre }}</td>
                   <td>
-                    <button (click)="editRemolque(registroRemolque)" class="btn btn-outline-info" type="button" >Editar</button> 
-                    <button (click)="deleteRemolque(registroRemolque.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                    <div class="btn-group">
+                      <button (click)="editRemolque(registroRemolque)" class="btn btn-primary" type="button" >
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="deleteRemolque(registroRemolque.id)"  class="btn btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
                   </td>
                 </tr>
               </tbody>

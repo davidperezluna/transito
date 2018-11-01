@@ -7,10 +7,8 @@ import { CiudadanoService } from '../../../services/ciudadano.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { DepartamentoService } from '../../../services/departamento.service';
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 
-import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
@@ -46,6 +44,7 @@ import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Utils } from 'ng2-bootstrap';
 import { SvCfgAseguradoraService } from '../../../services/svCfgAseguradora.service';
+import { SvCfgControlViaService } from 'app/services/svCfgControlVia.service';
 
 @Component({
   selector: 'app-new',
@@ -57,15 +56,12 @@ export class NewComponent implements OnInit {
   public msvRegistroIpat: MsvRegistroIpat;
   public sedeOperativa: any;
   public errorMessage;
-
+  
   public nroIpat: any;
   public consecutivo: any = null;
   public ipatEncontrado: any = null;
   public ipats = false;
   public identity: any;
-
-  public claseAccidente: any;
-  public choqueCon: any;
 
   public gravedades: any;
   public clasesAccidente: any;
@@ -89,12 +85,19 @@ export class NewComponent implements OnInit {
   public estadosIluminacion: any;
   public visuales: any;
   public visualesDisminuidas: any;
+
+  public estadosSemaforo: any;
+  public senialesVerticales: any;
+  public senialesHorizontales: any;
+  public reductoresVelocidad: any;
+  public delineadoresPiso: any;
+
   public resultadosExamen: any;
   public gradosExamen: any;
   public licenciasConduccion: any;
   public hospitales: any;
   public empresas: any;
-  //public lugaresImpacto: any;
+
   public inmovilizaciones: any;
   public tecnomecanicas: any;
   public soats: any;
@@ -107,21 +110,38 @@ export class NewComponent implements OnInit {
   public tiposVictima: any;
   public gravedadesVictima: any;
 
-  public gravedad: any;
-  public claseAccidenteSelected: any = null;
-  public choqueConSelected: any = null;
-  public objetoFijoSelected: any = null;
-  public iluminacionSelected: any = null;
-  public estadoIluminacionSelected: any = null;
-  public visualSelected: any = null;
-  public visualDisminuidaSelected: any = null;
 
   public usuario = false;
   public vhl = false;
+  public agente = false;
+  public victima = false;
+  public testigo = false;
+  public msmConductor= false;
+  public licencia=false;
 
   public listado = false;
   itemStringsLeft: any[] = [];
-  itemStringsRight: any[] = [];  
+  itemStringsRight: any[] = [];
+
+  public listadoClima = false;
+  itemStringsLeftClima: any[] = [];
+  itemStringsRightClima: any[] = [];  
+  
+  public listadoSenialVertical = false;
+  itemStringsLeftSenialVertical: any[] = [];
+  itemStringsRightSenialVertical: any[] = [];  
+  
+  public listadoSenialHorizontal = false;
+  itemStringsLeftSenialHorizontal: any[] = [];
+  itemStringsRightSenialHorizontal: any[] = [];  
+  
+  public listadoReductorVelocidad = false;
+  itemStringsLeftReductorVelocidad: any[] = [];
+  itemStringsRightReductorVelocidad: any[] = [];
+
+  public listadoFalla = false;
+  itemStringsLeftFalla: any[] = [];
+  itemStringsRightFalla: any[] = [];  
 
   public resumen = {}; public datos = {
   }
@@ -136,8 +156,7 @@ export class NewComponent implements OnInit {
     private _MsvRegistroIpatService: MsvRegistroIpatService,
     private _FuncionarioService: MpersonalFuncionarioService,
     private _MsvConsecutivoService: MsvConsecutivoService,
-    private _CiudadanoService: CiudadanoService,
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
     private _MunicipioService: MunicipioService,
     private _DepartamentoService: DepartamentoService,
     private _GravedadService: CfgGravedadService,
@@ -162,6 +181,7 @@ export class NewComponent implements OnInit {
     private _EstadoIluminacionService: SvCfgEstadoIluminacionService,
     private _VisualService: SvCfgVisualService,
     private _VisualDisminuidaService: SvCfgVisualDisminuidaService,
+    private _ControlViaService: SvCfgControlViaService,
     private _ResultadoExamenService: SvCfgResultadoExamenService,
     private _GradoExamenService: SvCfgGradoExamenService,
     private _HospitalService: SvCfgHospitalService,
@@ -177,8 +197,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    
+    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this._LugarImpactoService.index().subscribe(
       response => {
         this.lugaresImpacto = response.data;
@@ -196,20 +215,111 @@ export class NewComponent implements OnInit {
         }
       }
     );
+    this._FallaService.index().subscribe(
+      response => {
+        this.fallas = response.data;
+        this.fallas.forEach(falla => {
+          this.itemStringsLeftFalla.push(falla.nombre);
+        });
+        this.listado = true;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._EstadoTiempoService.index().subscribe(
+      response => {
+        this.estadosTiempo = response.data;
+        this.estadosTiempo.forEach(estadoTiempo => {
+          this.itemStringsLeftClima.push(estadoTiempo.nombre);
+        });
+        this.listadoClima = true;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._ControlViaService.indexSenialVertical().subscribe(
+      response => {
+        this.senialesVerticales = response.data;
+        this.senialesVerticales.forEach(senialVertical => {
+          this.itemStringsLeftSenialVertical.push(senialVertical.nombre);
+        });
+        this.listadoSenialVertical = true;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._ControlViaService.indexSenialHorizontal().subscribe(
+      response => {
+        this.senialesHorizontales = response.data;
+        this.senialesHorizontales.forEach(senialHorizontal => {
+          this.itemStringsLeftSenialHorizontal.push(senialHorizontal.nombre);
+        });
+        this.listadoSenialHorizontal = true;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+    this._ControlViaService.indexReductorVelocidad().subscribe(
+      response => {
+        this.reductoresVelocidad = response.data;
+        this.reductoresVelocidad.forEach(reductorVelocidad => {
+          this.itemStringsLeftReductorVelocidad.push(reductorVelocidad.nombre);
+        });
+        this.listadoReductorVelocidad = true;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
 
   }
 
   onCancelar() {
     this.ready.emit(true);
   }
+
   enviarTramite() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     let data =[
       { 'datosLimitacion': this.msvRegistroIpat },
       { 'vehiculosLimitacionArray': this.datosVehiculo },
       { 'consecutivo': this.consecutivo },
-      { 'lugaresImpacto' : this.itemStringsRight },
+      { 'lugaresImpacto': this.itemStringsRight },
+      { 'estadosTiempo': this.itemStringsRightClima },
+      { 'senialesVerticales': this.itemStringsRightSenialVertical },
+      { 'senialesHorizontales': this.itemStringsRightSenialHorizontal },
+      { 'reductoresVelocidad': this.itemStringsRightReductorVelocidad },
+      { 'fallas': this.itemStringsRightFalla },
     ];
     
     this._MsvRegistroIpatService.register(data, token).subscribe(
@@ -225,7 +335,7 @@ export class NewComponent implements OnInit {
         } else {
           swal({
             title: 'Error!',
-            text: 'La limitacion a la propiedad ' + this.consecutivo + ', con la fecha: ' + this.msvRegistroIpat.fechaAccidente ,
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
@@ -256,8 +366,8 @@ export class NewComponent implements OnInit {
       }
     })
 
-    let token = this._loginService.getToken();
-    this.identity = this._loginService.getIdentity();
+    let token = this._LoginService.getToken();
+    this.identity = this._LoginService.getIdentity();
     let datos = {
       'nroIpat': this.nroIpat,
       'identificacionUsuario': this.identity.identificacion,
@@ -283,6 +393,19 @@ export class NewComponent implements OnInit {
           this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
             response => {
               this.clasesAccidente = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+          this._ControlViaService.getControlViaSemaforoSelect().subscribe(
+            response => {
+              this.estadosSemaforo = response;
             },
             error => {
               this.errorMessage = <any>error;
@@ -553,6 +676,32 @@ export class NewComponent implements OnInit {
               }
             }
           );
+          this._ControlViaService.getControlViaSemaforoSelect().subscribe(
+            response => {
+              this.estadosSemaforo = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+          this._ControlViaService.getControlViaDelineadorPisoSelect().subscribe(
+            response => {
+              this.delineadoresPiso = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
           this._ResultadoExamenService.getResultadoExamenSelect().subscribe(
             response => {
               this.resultadosExamen = response;
@@ -748,7 +897,7 @@ export class NewComponent implements OnInit {
   }
 
   onBuscarConductor() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     if (this.msvRegistroIpat.identificacionConductor) {
       this._MsvRegistroIpatService.getBuscarConductor({ 'identificacion': this.msvRegistroIpat.identificacionConductor }, token).subscribe(
     
@@ -786,7 +935,7 @@ export class NewComponent implements OnInit {
   }
 
   onBuscarVehiculo(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     if (this.msvRegistroIpat.placa) {
       this._MsvRegistroIpatService.getBuscarVehiculo({ 'placa': this.msvRegistroIpat.placa }, token).subscribe(
 
@@ -804,7 +953,6 @@ export class NewComponent implements OnInit {
             this.msvRegistroIpat.servicio = response.data.servicio.nombre;
             this.msvRegistroIpat.modalidadTransporte = response.data.modalidadTransporte.nombre;
             this.msvRegistroIpat.radioAccion = response.data.radioAccion.nombre;
-            this.onMismoConductor(this.msvRegistroIpat);
             //swal.close();
           } else {
             swal({
@@ -825,10 +973,163 @@ export class NewComponent implements OnInit {
       );
     }
   }
+
+  onBuscarLicenciaConductor() {
+    let token = this._LoginService.getToken();
+    if (this.msvRegistroIpat.numeroLicenciaConduccion) {
+      this._MsvRegistroIpatService.getBuscarLicenciaConductor({ 'numero': this.msvRegistroIpat.numeroLicenciaConduccion }, token).subscribe(
+
+        response => {
+          if (response.status == 'success') {
+            this.licencia = true;
+            this.msvRegistroIpat.categoriaLicenciaConduccion = response.data.categoria.nombre;
+            this.msvRegistroIpat.fechaExpedicionLicenciaConduccion = response.data.fechaExpedicion;
+            this.msvRegistroIpat.fechaVencimientoLicenciaConduccion = response.data.fechaVencimiento;
+            this.msvRegistroIpat.organismoTransito = response.data.sedeOperativa.nombre;
+            //swal.close();
+          } else {
+            swal({
+              title: 'Alerta!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      );
+    }
+  }
+
   onMismoConductor(msvRegistroIpat) {
-    this.msvRegistroIpat.tipoIdentificacionPropietario = this.msvRegistroIpat.tipoIdentificacionConductor;
-    this.msvRegistroIpat.identificacionPropietario = this.msvRegistroIpat.identificacionConductor;
-    this.msvRegistroIpat.nombresPropietario = this.msvRegistroIpat.nombresConductor;
-    this.msvRegistroIpat.apellidosPropietario = this.msvRegistroIpat.apellidosConductor;
+    if(this.msvRegistroIpat.identificacionConductor != null) {
+      this.msmConductor = true;
+      this.msvRegistroIpat.tipoIdentificacionPropietario = this.msvRegistroIpat.tipoIdentificacionConductor;
+      this.msvRegistroIpat.identificacionPropietario = this.msvRegistroIpat.identificacionConductor;
+      this.msvRegistroIpat.nombresPropietario = this.msvRegistroIpat.nombresConductor;
+      this.msvRegistroIpat.apellidosPropietario = this.msvRegistroIpat.apellidosConductor;
+    } else {
+      swal({
+        title: 'Alerta!',
+        text: 'Por favor, complete los datos del conductor.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }
+  }
+
+  onBuscarAgente() {
+    let token = this._LoginService.getToken();
+    if (this.msvRegistroIpat.identificacionAgente) {
+      this._MsvRegistroIpatService.getBuscarAgente({ 'identificacionAgente': this.msvRegistroIpat.identificacionAgente }, token).subscribe(
+
+        response => {
+          if (response.status == 'success') {
+            this.agente = true;
+            this.msvRegistroIpat.tipoIdentificacionAgente = response.data.ciudadano.usuario.tipoIdentificacion.nombre;
+            this.msvRegistroIpat.gradoAgente = response.data.cargo.nombre;
+            this.msvRegistroIpat.nombresAgente = response.data.ciudadano.usuario.primerNombre + ' ' + response.data.ciudadano.usuario.segundoNombre;
+            this.msvRegistroIpat.apellidosAgente = response.data.ciudadano.usuario.primerApellido + ' ' + response.data.ciudadano.usuario.segundoApellido;
+            this.msvRegistroIpat.placaAgente = response.data.numeroPlaca;
+            this.msvRegistroIpat.entidadAgente = response.data.sedeOperativa.nombre;
+            //swal.close();
+          } else {
+            swal({
+              title: 'Alerta!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      );
+    }
+  }
+
+  onBuscarVictima() {
+    let token = this._LoginService.getToken();
+    if (this.msvRegistroIpat.identificacionVictima) {
+      this._MsvRegistroIpatService.getBuscarVictima({ 'identificacionVictima': this.msvRegistroIpat.identificacionVictima }, token).subscribe(
+
+        response => {
+          if (response.status == 'success') {
+            this.victima = true;
+            this.msvRegistroIpat.tipoIdentificacionVictima = response.data[0].tipoIdentificacion.nombre;
+            this.msvRegistroIpat.nombresVictima = response.data[0].primerNombre + ' ' + response.data[0].segundoNombre;
+            this.msvRegistroIpat.apellidosVictima = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
+            this.msvRegistroIpat.nacionalidadVictima = response.data[0].nacionalidad;
+            this.msvRegistroIpat.fechaNacimientoVictima = response.data[0].fechaNacimiento;
+            this.msvRegistroIpat.sexoVictima = response.data[0].ciudadano.genero.sigla;
+            this.msvRegistroIpat.direccionResidenciaVictima = response.data[0].ciudadano.direccion;
+            this.msvRegistroIpat.ciudadResidenciaVictima = response.data[0].ciudadano.municipioResidencia.nombre;
+            this.msvRegistroIpat.telefonoVictima = response.data[0].telefono;
+            //swal.close();
+          } else {
+            swal({
+              title: 'Alerta!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      );
+    }
+  }
+
+  onBuscarTestigo() {
+    let token = this._LoginService.getToken();
+    if (this.msvRegistroIpat.identificacionTestigo) {
+      this._MsvRegistroIpatService.getBuscarTestigo({ 'identificacionTestigo': this.msvRegistroIpat.identificacionTestigo }, token).subscribe(
+
+        response => {
+          if (response.status == 'success') {
+            this.testigo = true;
+            this.msvRegistroIpat.tipoIdentificacionTestigo = response.data[0].tipoIdentificacion.nombre;
+            this.msvRegistroIpat.nombresTestigo = response.data[0].primerNombre + ' ' + response.data[0].segundoNombre;
+            this.msvRegistroIpat.apellidosTestigo = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
+            this.msvRegistroIpat.direccionTestigo = response.data[0].ciudadano.direccion;
+            this.msvRegistroIpat.ciudadResidenciaTestigo = response.data[0].ciudadano.municipioResidencia.nombre;
+            this.msvRegistroIpat.departamentoResidenciaTestigo = response.data[0].ciudadano.municipioResidencia.departamento.nombre;
+            this.msvRegistroIpat.telefonoTestigo = response.data[0].telefono;
+            //swal.close();
+          } else {
+            swal({
+              title: 'Alerta!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      );
+    }
   }
 }

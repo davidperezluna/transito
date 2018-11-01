@@ -70,4 +70,44 @@ export class MsvRegistroIpatService {
 			res => res.json()
 		);
 	}
+
+	getBuscarAgente(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/get/datos/agente", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
+
+	getBuscarVictima(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/get/datos/victima", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
+
+	getBuscarTestigo(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/get/datos/testigo", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
+
+	getBuscarLicenciaConductor(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/get/datos/licenciaconduccion", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
+
+	export() {
+		return this._http.get(this.url + "/export").map(res => res.json());
+	}
 }

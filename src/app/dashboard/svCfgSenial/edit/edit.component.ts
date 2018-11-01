@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { UserCfgMenuService } from '../../../services/userCfgMenu.service';
+import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,42 +9,26 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() menu:any = null;
+@Input() gdCfgMedioCorrespondencia:any = null;
 public errorMessage;
-
+public respuesta;
 public formReady = false;
-  public menus: any = null;
 
 constructor(
-  private _UserCfgMenuService: UserCfgMenuService,
+  private _GdCfgMedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
   private _loginService: LoginService,
-  ){  }
+  ){}
 
-  ngOnInit(){  
-    this._UserCfgMenuService.select().subscribe(
-      response => {
-        this.menus = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-  }
+  ngOnInit(){  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._UserCfgMenuService.edit(this.menu,token).subscribe(
+		this._GdCfgMedioCorrespondenciaService.edit(this.gdCfgMedioCorrespondencia,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
-          this._UserCfgMenuService.cartData.emit(this.menus);  
           swal({
             title: 'Perfecto!',
             text: response.message,

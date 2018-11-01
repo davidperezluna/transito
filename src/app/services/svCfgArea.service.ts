@@ -25,7 +25,7 @@ export class SvCfgAreaService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/new", params, { headers: headers }).map(
             res => res.json(),
-            this._loogerService.registerLog(token, 'INSERT', json, this.url)
+            //this._loogerService.registerLog(token, 'INSERT', json, this.url)
         );
     }
 
@@ -57,6 +57,6 @@ export class SvCfgAreaService {
     }
 
     getAreaSelect() {
-        return this._http.get(this.url + "/select").map(res => res.json());
+        return this._http.get(this.url + "/selectarea").map(res => res.json());
     }
 }

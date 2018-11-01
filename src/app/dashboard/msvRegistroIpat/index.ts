@@ -3,3 +3,4 @@
 */
 export * from './msvRegistroIpat.component';
 export * from './msvRegistroIpat.routes';
+export * from './export/export.component';

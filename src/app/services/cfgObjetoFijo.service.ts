@@ -33,7 +33,7 @@ export class CfgObjetoFijoService {
 			.map(res => res.json());
 	}
 
-	showCfgObjetoFijo(token, id) {
+	showCfgObjetoFijo(id, token) {
 
 		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });

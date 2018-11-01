@@ -1,27 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TramiteService } from '../../services/tramite.service';
+import { GdCfgMedioCorrespondenciaService } from '../../services/gdCfgMedioCorrespondencia.service';
 import { LoginService } from '../../services/login.service';
-import { Tramite } from './tramite.modelo';
+import { GdCfgMedioCorrespondencia } from './gdCfgMedioCorrespondencia.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './tramite.component.html'
+  templateUrl: './GdCfgMedioCorrespondencia.component.html'
 })
-export class TramiteComponent implements OnInit {
+export class GdCfgMedioCorrespondenciaComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-	public tramites;
+
+	public gdCfgMedioCorrespondencias;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public tramite: Tramite;
+  public gdCfgMedioCorrespondencia: GdCfgMedioCorrespondencia;
 
   constructor(
-    private _TramiteService: TramiteService,
+    private _GdCfgMedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
 		private _loginService: LoginService,
     ){}
     
@@ -29,21 +29,28 @@ export class TramiteComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    });
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
 
-    this._TramiteService.getTramite().subscribe(
+    this._GdCfgMedioCorrespondenciaService.index().subscribe(
 				response => {
-          this.tramites = response.data;
-          let timeoutId = setTimeout(() => {
+          this.gdCfgMedioCorrespondencias = response.data;
+          let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
-          swal.close();
-				},
+				}, 
 				error => {
 					this.errorMessage = <any>error;
+
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");
@@ -51,6 +58,7 @@ export class TramiteComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -67,6 +75,7 @@ export class TramiteComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -81,7 +90,8 @@ export class TramiteComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteTramite(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -94,33 +104,32 @@ export class TramiteComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TramiteService.deleteTramite(token,id).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
+        this._GdCfgMedioCorrespondenciaService.delete({ 'id': id }, token).subscribe(
+          response => {
+              swal({
+                title: 'Eliminado!',
+                text:'Registro eliminado correctamente.',
+                type:'success',
+                confirmButtonColor: '#15d4be',
+              });
+              this.table.destroy();
+              this.ngOnInit();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
+          }
+        );
       }
     })
   }
 
-  editTramite(tramite:any){
-    this.tramite = tramite;
+  onEdit(gdCfgMedioCorrespondencia:any){
+    this.gdCfgMedioCorrespondencia = gdCfgMedioCorrespondencia;
     this.formEdit = true;
     this.formIndex = false;
   }

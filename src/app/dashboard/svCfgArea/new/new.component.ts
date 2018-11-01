@@ -50,7 +50,7 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.area = this.tipoAreaSelected;
+        this.area.tipoAreaId = this.tipoAreaSelected;
 
         this._AreaService.register(this.area, token).subscribe(
             response => {
