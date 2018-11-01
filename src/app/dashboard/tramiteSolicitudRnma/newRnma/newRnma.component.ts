@@ -222,72 +222,22 @@ export class NewRnmaComponent implements OnInit {
             swal.close();
           } else {
             this.vehiculo = response.data;
-            let dato = {
-              'vehiculo': this.vehiculo.id,
-            };
-            this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
-              response => {
-
-                if (response.status == 'success') {
-                  this.facturas = response.data;
-                  this.vehiculoSuccess = true;
-                  this.isMatricula = true;
-                  this.msj = 'vehiculo encontrado';
-                  this.error = false;
-                  this.isError = false;
-                  swal.close();
-                } else {
-                  this.facturas = false;
-                  this.mensaje = 'No hay faturas para el vehiculo';
-                  this.isError = true;
-                  this.vehiculoSuccess = false;
-                  this.factura = false;
-                  swal.close();
-                }
-                error => {
-                  this.errorMessage = <any>error;
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              });
+            this.vehiculoSuccess = true;
+            this.isMatricula = true;
+            this.msj = 'vehiculo encontrado';
+            this.error = false;
+            this.isError = false;
+            swal.close();
           }
         } else {
           swal.close();
           this.vehiculo = response.data[0].vehiculo;
           // se busca las faturas si el vehiculo fue encontrado
-          let dato = {
-            'vehiculo': this.vehiculo.id,
-          };
-
-          this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
-            response => {
-
-              if (response.status == 'success') {
-                this.facturas = response.data;
-                this.vehiculoSuccess = true;
-                this.msj = 'vehiculo encontrado';
-                this.error = false;
-                this.isError = false;
-                swal.close();
-              } else {
-                this.facturas = false;
-                this.mensaje = 'No hay faturas para el vehiculo';
-                this.isError = true;
-                this.vehiculoSuccess = false;
-                this.factura = false;
-                swal.close();
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            });
-
+          this.vehiculoSuccess = true;
+          this.msj = 'vehiculo encontrado';
+          this.error = false;
+          this.isError = false;
+          swal.close();
 
           response.data.forEach(element => {
             if (element.ciudadano) {
@@ -325,7 +275,7 @@ export class NewRnmaComponent implements OnInit {
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
-            type: 'success',
+            type: 'success',  
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
@@ -354,7 +304,6 @@ export class NewRnmaComponent implements OnInit {
   }
 
   finalizarSolicitud() {
-
     let token = this._loginService.getToken();
     this.tramites = '';
     this.tramitesFactura.forEach(tramiteFactura => {
@@ -401,8 +350,6 @@ export class NewRnmaComponent implements OnInit {
 
       }
     })
-
-
   }
   agregarApoderado() {
     this.frmApoderado = true;
@@ -440,11 +387,9 @@ export class NewRnmaComponent implements OnInit {
         }
       });
   }
-
   cerrarApoderado(){
     this.frmApoderado = false;
     this.apoderado = false;
     this.apoderadoEncontrado = 1;
   }
-
 }

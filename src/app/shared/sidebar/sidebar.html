@@ -435,6 +435,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" routerLink="cvCfgTipoRestriccion" [ngClass]="{'active' : ( addActive === 'cvCfgTipoRestriccion')}" (click)="addActiveMenu('cvCfgTipoRestriccion')">
+                <i class="fa fa-angle-right"></i>
+                Tipo restriccion
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" routerLink="cfgEmpresaServicio" [ngClass]="{'active' : ( addActive === 'cfgEmpresaServicio')}" (click)="addActiveMenu('cfgEmpresaServicio')">
                 <i class="fa fa-angle-right"></i>
                 Empresa servicio
