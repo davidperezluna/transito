@@ -1,0 +1,70 @@
+<div class="container" >
+    <br>
+    <br>
+        <div class="row"><!-- .row -->
+            <div class="col-xs-12 col-lg-5">
+                <div class="input-group" [ngClass]="{'has-danger' : isError}">
+                    <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
+                    <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
+                    <span class="input-group-btn">
+                        <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                </div> 
+                <div class="has-danger" *ngIf="error">
+                    <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+                </div>
+                <div class="has-danger" *ngIf="isError">
+                    <div class="form-control-feedback has-danger has-error">{{mensaje}}</div>
+                </div>
+            </div>
+            <div class="input-group col-lg-3 col-xs-12 offset-lg-4" >
+                <button (click)="onKeyValidateVehiculo()" class="btn btn-default btn-primary" ngxclipboard="" type="button">Nueva Inscripción</button>
+             </div> 
+        </div><!-- .row -->
+    <hr>
+    <div class="row" *ngIf='formIndex'>
+      <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+                <div class="btn-group pull-right">
+                  <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                    <i class="fa fa-plus"></i>
+                    <span class="text">Nuevo</span>
+                  </button>
+                </div>
+            </div>
+            <div class="card-body">
+              <table class="table " id="dataTables-example">
+                <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Nombre</th>
+                      <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd" *ngFor="let tipoMedidaCautelar of tiposMedidasCautelares; let i = index">
+                    <td >{{ tipoMedidaCautelar.id }}</td>
+                    <td >{{ tipoMedidaCautelar.nombre }}</td>
+                    <td>
+                      <button (click)="onEdit(tipoMedidaCautelar)" class="btn btn-xs btn-info" type="button">
+                        <i class="fa fa-edit"></i>
+                        Editar
+                      </button> 
+                      <button (click)="onDelete(tipoMedidacautelar.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                        Eliminar
+                      </button> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /.table-responsive --> 
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <app-edit *ngIf='formEdit' [tipoMedidaCautelar]="tipoMedidaCautelar" (ready)="ready($event)"></app-edit>
+      <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+  </div>

@@ -43,6 +43,7 @@ import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorc
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
 import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.module';
 import { CvCfgTipoMedidaCautelarModule } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.module';
+import { CvMedidaCautelarModule } from './cvMedidaCautelar/cvMedidaCautelar.module';
 
 import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
@@ -399,7 +400,8 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
       RnaPreasignacionInsumoModule,
-      CvCfgTipoMedidaCautelarModule
+      CvCfgTipoMedidaCautelarModule,
+      CvMedidaCautelarModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
