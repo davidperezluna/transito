@@ -1,6 +1,7 @@
 export class MsvRegistroIpat{
 	constructor(
 
+		public documento:string,
 		/*public fechaRadicacion:string,
 		public municipioId:number,
 		public ciudadanoDemandadoId:number,

@@ -17,6 +17,7 @@ export class ExportComponent implements OnInit {
     public formIndex = true;
     public table: any;
     public ipats: MsvRegistroIpat;
+    public ipat = false;
 
     public file: any;
     public date: any;
@@ -42,6 +43,7 @@ export class ExportComponent implements OnInit {
         });
         this._IpatService.export().subscribe(
             response => {
+                this.ipat = true;
                 this.ipats = response.data;
                 console.log(this.ipats);
                 let timeoutId = setTimeout(() => {
@@ -65,7 +67,7 @@ export class ExportComponent implements OnInit {
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
             buttons: [
-                'excel', 'csv'
+                'excel', 'pdf'
             ],
             oLanguage: {
                 oPaginate: {

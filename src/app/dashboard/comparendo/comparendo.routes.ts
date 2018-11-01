@@ -29,6 +29,6 @@ export const ComparendoRoutes: Route[] = [
     {
     path: 'comparendo/export',
     component: ExportComponent
-  }
+    }
 ];
  
