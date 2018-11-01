@@ -1,0 +1,38 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4"><!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Editar tipo medida cautelar</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <input type="numeric" class="form-control" [(ngModel)]="tipoMedidaCautelar.nombre" name="nombre" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Código <strong class="text-danger">*</strong></label>
+                            <input type="numeric" class="form-control" [(ngModel)]="tipoMedidaCautelar.codigo" name="codigo" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default" type="button">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                    </button>
+                    <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.col -->
+
+</div>

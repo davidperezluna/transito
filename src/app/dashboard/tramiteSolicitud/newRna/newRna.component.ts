@@ -210,7 +210,7 @@ constructor(
       response => {
         
         this.ciudadanosVehiculo = response.data;
-        if (response.status == 'error' ) {
+        if (response.status == 'error' ) { 
           this.isCiudadano = false;
           if(response.code == 401){
             this.vehiculoSuccess=false;
@@ -221,91 +221,40 @@ constructor(
             swal.close();
           }else{
             this.vehiculo = response.data;
-            let dato = {
-              'vehiculo': this.vehiculo.id,
-            }; 
-            this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
-              response => {
-                
-              if (response.status == 'success') {
-                  this.facturas = response.data;
-                  this.vehiculoSuccess=true;
-                  this.isMatricula = true;
-                  this.msj ='vehiculo encontrado';
-                  this.error = false;
-                  this.isError = false;
-                  swal.close();
-              } else {
-                this.facturas = false;
-                this.mensaje = 'No hay facturas para el vehÍculo';
-                this.isError = true;
-                this.vehiculoSuccess=false;
-                this.factura=false;
-                swal.close();
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            });
+            this.vehiculoSuccess=true;
+            this.isMatricula = true;
+            this.msj ='vehiculo encontrado';
+            this.error = false;
+            this.isError = false;
+            swal.close();
           }
         }else{
           swal.close();
           this.vehiculo = response.data[0].vehiculo;
           // se busca las faturas si el vehiculo fue encontrado
-          let dato = {
-            'vehiculo': this.vehiculo.id,
-          };
-
-          this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
-            response => {
-              
-            if (response.status == 'success') {
-                this.facturas = response.data;
-                this.vehiculoSuccess = true;
+          this.vehiculoSuccess = true;
                 this.msj ='vehiculo encontrado';
                 this.error = false;
                 this.isError = false;
                 swal.close();
-            } else {
-              this.facturas = false;
-              this.mensaje = 'No hay facturas para el vehiculo';
-              this.isError = true;
-              this.vehiculoSuccess=false;
-              this.factura=false;
-              swal.close();
-            }
-            error => {
-              this.errorMessage = <any>error;
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
+                response.data.forEach(element => {
+                  if (element.ciudadano) {
+                    this.isCiudadano = true;
+                  }
+                  if(element.empresa){
+                    this.isEmpresa = true;
+                  }
+                });
               }
-            }
-          });
-
-          
-          response.data.forEach(element => {
-            if (element.ciudadano) {
-              this.isCiudadano = true;
-            }
-            if(element.empresa){
-              this.isEmpresa = true;
-            }
+            error => { 
+                this.errorMessage = <any>error;
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición"); 
+                }
+              }
           });
         }
-      error => { 
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición"); 
-          }
-        }
-    });
-  }
 
   readyTramite(datos:any){
     
