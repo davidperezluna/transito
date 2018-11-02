@@ -14,6 +14,7 @@ export class CvMedidaCautelarComponent implements OnInit {
 	public tipoMedidacautelar: any;
 	public valorTotal: any;
 	public ciudadano: any;
+	public identificacion: any;
 	public tiposMedidasCautelares: any = null;
 	public numeroIdentificacion: any;
   
