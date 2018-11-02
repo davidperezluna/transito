@@ -8,10 +8,7 @@ import { CiudadanoService } from '../../../services/ciudadano.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { Factura } from '../../factura/factura.modelo';
-import { error } from 'selenium-webdriver';
-import { forEach } from '@angular/router/src/utils/collection';
-import { Response } from '@angular/http/src/static_response';
+import { VehiculoService } from '../../../services/vehiculo.service';
 
 @Component({
   selector: 'app-new',
@@ -68,6 +65,7 @@ export class NewRnmaComponent implements OnInit {
     private _facturaService: FacturaService,
     private _ciudadanoVehiculoService: CiudadanoVehiculoService,
     private _ciudadanoService: CiudadanoService,
+    private _VehiculoService: VehiculoService,
   ) { }
 
   ngOnInit() {
@@ -206,105 +204,32 @@ export class NewRnmaComponent implements OnInit {
       }
     })
     let token = this._loginService.getToken();
-
-    this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token, this.tramiteSolicitud.vehiculoId).subscribe(
+    this._VehiculoService.showVehiculoRnma(this.tramiteSolicitud.vehiculoId,token).subscribe(
       response => {
-
-        this.ciudadanosVehiculo = response.data;
-        if (response.status == 'error') {
-          this.isCiudadano = false;
-          if (response.code == 401) {
-            this.vehiculoSuccess = false;
-            this.msj = response.msj;
-            this.isError = true;
-            this.error = true;
-            this.tipoError = response.code;
-            swal.close();
-          } else {
-            this.vehiculo = response.data;
-            let dato = {
-              'vehiculo': this.vehiculo.id,
-            };
-            this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
-              response => {
-
-                if (response.status == 'success') {
-                  this.facturas = response.data;
-                  this.vehiculoSuccess = true;
-                  this.isMatricula = true;
-                  this.msj = 'vehiculo encontrado';
-                  this.error = false;
-                  this.isError = false;
-                  swal.close();
-                } else {
-                  this.facturas = false;
-                  this.mensaje = 'No hay faturas para el vehiculo';
-                  this.isError = true;
-                  this.vehiculoSuccess = false;
-                  this.factura = false;
-                  swal.close();
-                }
-                error => {
-                  this.errorMessage = <any>error;
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
-              });
-          }
-        } else {
+        if (response.status == 'success' ) { 
+          this.isCiudadano = true
+          this.ciudadanosVehiculo = response.propietarios;
+          this.vehiculo = response.vehiculo;
+          this.vehiculoSuccess=true;
+          this.isMatricula = true;
+          this.msj ='vehiculo encontrado';
+          this.error = false;
+          this.isError = false;
           swal.close();
-          this.vehiculo = response.data[0].vehiculo;
-          // se busca las faturas si el vehiculo fue encontrado
-          let dato = {
-            'vehiculo': this.vehiculo.id,
-          };
-
-          this._facturaService.showFacturaByVehiculo(token, dato).subscribe(
-            response => {
-
-              if (response.status == 'success') {
-                this.facturas = response.data;
-                this.vehiculoSuccess = true;
-                this.msj = 'vehiculo encontrado';
-                this.error = false;
-                this.isError = false;
-                swal.close();
-              } else {
-                this.facturas = false;
-                this.mensaje = 'No hay faturas para el vehiculo';
-                this.isError = true;
-                this.vehiculoSuccess = false;
-                this.factura = false;
-                swal.close();
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            });
-
-
-          response.data.forEach(element => {
-            if (element.ciudadano) {
-              this.isCiudadano = true;
-            }
-            if (element.empresa) {
-              this.isEmpresa = true;
-            }
-          });
+        }else{
+          this.vehiculoSuccess = false;
+          this.msj ='vehiculo no encontrado encontrado';
+          this.error = true;
+          this.isError = true;
+          swal.close(); 
         }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
+        error => { 
+            this.errorMessage = <any>error;
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición"); 
+            }
           }
-        }
       });
   }
   readyTramite(datos: any) {
@@ -325,7 +250,7 @@ export class NewRnmaComponent implements OnInit {
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
-            type: 'success',
+            type: 'success',  
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
@@ -354,7 +279,6 @@ export class NewRnmaComponent implements OnInit {
   }
 
   finalizarSolicitud() {
-
     let token = this._loginService.getToken();
     this.tramites = '';
     this.tramitesFactura.forEach(tramiteFactura => {
@@ -401,8 +325,6 @@ export class NewRnmaComponent implements OnInit {
 
       }
     })
-
-
   }
   agregarApoderado() {
     this.frmApoderado = true;
@@ -440,11 +362,9 @@ export class NewRnmaComponent implements OnInit {
         }
       });
   }
-
   cerrarApoderado(){
     this.frmApoderado = false;
     this.apoderado = false;
     this.apoderadoEncontrado = 1;
   }
-
 }

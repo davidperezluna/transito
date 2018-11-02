@@ -176,7 +176,7 @@ constructor(
         } else {
           swal({
             title: 'Error!',
-            text: 'El tramiteSolicitud ' + +' ya se encuentra registrada',
+            text: 'El tramiteSolicitud '+ +' ya se encuentra registrada',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
