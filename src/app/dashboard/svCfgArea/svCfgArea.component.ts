@@ -42,6 +42,7 @@ export class SvCfgAreaComponent implements OnInit {
         this._AreaService.index().subscribe(
             response => {
                 this.areas = response.data;
+                console.log(this.areas);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
