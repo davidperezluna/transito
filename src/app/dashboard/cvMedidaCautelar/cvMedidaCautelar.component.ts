@@ -82,7 +82,7 @@ export class CvMedidaCautelarComponent implements OnInit {
   onNew(){
     this.formNew = true;
     this.formIndex = false;
-    this.table.destroy();
+    // this.table.destroy();
   }
 
   ready(isCreado:any){

@@ -34,7 +34,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.medidaCautelar = new CvMedidaCautelar(null, null);
+    this.medidaCautelar = new CvMedidaCautelar(null, null,null, null,null, null,null, null,null, null,null, null,null, null);
 
     
 
