@@ -37,6 +37,7 @@ export class ExportComponent implements OnInit {
     
     public exportIpat: MsvExportIpat;
 
+    public dia: any;
     public ipats: any;
     public gravedades: any;
     public tiposVictima: any;
@@ -93,42 +94,11 @@ export class ExportComponent implements OnInit {
 
     ngOnInit() {
         this.exportIpat = new MsvExportIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-        /*swal({
-            title: 'Cargando Tabla!',
-            text: 'Solo tardará unos segundos, por favor espere.',
-            timer: 1500,
-            onOpen: () => {
-                swal.showLoading();
-            }
-        }).then((result) => {
-            if (
-                // Read more about handling dismissals
-                result.dismiss === swal.DismissReason.timer
-            ) {
-            }
-        });
-        this._IpatService.export().subscribe(
-            response => {
-                this.ipat = true;
-                this.ipats = response.data;
-                console.log(this.ipats);
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );*/
+        
         this._GravedadService.getGravedadSelect().subscribe(
             response => {
                 this.gravedades = response;
-                console.log(this.gravedades);
+                //console.log(this.gravedades);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -145,7 +115,7 @@ export class ExportComponent implements OnInit {
         this._TipoVictimaService.getTipoVictimaSelect().subscribe(
             response => {
                 this.tiposVictima = response;
-                console.log(this.tiposVictima);
+                //console.log(this.tiposVictima);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -162,7 +132,7 @@ export class ExportComponent implements OnInit {
         this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
-                console.log(this.municipios);
+                //console.log(this.municipios);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -179,7 +149,7 @@ export class ExportComponent implements OnInit {
         this._ClaseService.getClaseSelect().subscribe(
             response => {
                 this.clases = response;
-                console.log(this.clases);
+                //console.log(this.clases);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -196,7 +166,7 @@ export class ExportComponent implements OnInit {
         this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
             response => {
                 this.clasesAccidente = response;
-                console.log(this.clasesAccidente);
+                //console.log(this.clasesAccidente);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -213,7 +183,7 @@ export class ExportComponent implements OnInit {
         this._ChoqueCon.getChoqueConSelect().subscribe(
             response => {
                 this.choquesCon = response;
-                console.log(this.choquesCon);
+                //console.log(this.choquesCon);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -230,7 +200,7 @@ export class ExportComponent implements OnInit {
         this._ObjetoFijo.getObjetoFijoSelect().subscribe(
             response => {
                 this.objetosFijos = response;
-                console.log(this.objetosFijos);
+                //console.log(this.objetosFijos);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -247,7 +217,7 @@ export class ExportComponent implements OnInit {
         this._GeneroService.getGeneroSelect().subscribe(
             response => {
                 this.generos = response;
-                console.log(this.generos);
+                //console.log(this.generos);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -304,13 +274,11 @@ export class ExportComponent implements OnInit {
     onEnviar(){
         let token = this._LoginService.getToken();
         this.exportIpat.documento =this.file;
-        this._IpatService.buscarIpat( this.exportIpat, token).subscribe(
-            /*response => {
+        this._IpatService.buscarIpat(this.exportIpat, token).subscribe(
+            response => {
                 this.ipats = response.data;
-                console.log(this.generos);
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
+                this.dia = response.diaSemana;
+                console.log(this.ipats);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -319,33 +287,7 @@ export class ExportComponent implements OnInit {
                     console.log(this.errorMessage);
                     alert("Error en la petición");
                 }
-            }*/
-            /*response => {
-                if (response.status == 'success') {
-                    this.ready.emit(true);
-                    swal({
-                        title: 'Perfecto!',
-                        text: 'Registro exitoso!',
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                    });
-                } else {
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            }*/
-            );
+            }
+        );
     }
 }

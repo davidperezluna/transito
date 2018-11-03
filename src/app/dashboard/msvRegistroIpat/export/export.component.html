@@ -102,17 +102,16 @@
                 </div>
 
                 <div class="card-body" style="overflow-x: auto">
-                    <table class="table" id="dataTables-example" *ngIf="ipat">
+                    <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
                                 <th>GRAVEDAD</th>
                                 <th>TIPO PASAJERO</th>
-                                <th></th>
-                                <th>HORA</th>
-                                <th>FECHA</th>
+                                <th>HORA ACCIDENTE</th>
+                                <th>FECHA ACCIDENTE</th>
                                 <th>EDAD</th>
                                 <th>MUNICIPIO</th>
-                                <th>DIAS DE SEMANA</th>
+                                <th>DIA DE SEMANA</th>
                                 <th>GENERO</th>
                                 <th>Vista</th>
                                 <th>Grafica</th>
@@ -120,15 +119,14 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let ipat of ipats; let i = index">
-                                <td>{{ ipat.tipoGravedad.nombre }}</td>
-                                <td>{{ ipat.tipoPasajero.nombre }}</td>
-                                <td>{{ ipat }}</td>
-                                <td>{{ ipat.hora }}</td>
+                                <td>{{ ipat.gravedad.nombre }}</td>
+                                <td>{{ ipat.tipoVictima.nombre }}</td>
+                                <td>{{ ipat.horaAccidente }}</td>
                                 <td>{{ ipat.fechaAccidente }}</td>
-                                <td>{{ ipat.edad }}</td>
-                                <td>{{ ipat.municipio.nombre }}</td>
-                                <td>{{ ipat.diaSemana }}</td>
-                                <td>{{ ipat.genero.sigla }}</td>
+                                <td>{{ ipat.fechaNacimientoConductor }}</td>
+                                <td>{{ ipat.ciudadResidenciaConductor }}</td>
+                                <td>{{ ipat.dia }}</td>
+                                <td>{{ ipat.sexoConductor }}</td>
                             </tr>
                         </tbody>
                     </table>
