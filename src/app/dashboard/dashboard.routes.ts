@@ -198,6 +198,7 @@ import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacIonInsumo/rnaPreasi
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
+import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -386,6 +387,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgEmpresaServicioRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CvCfgTipoMedidaCautelarRoutes,
+      ...CvMedidaCautelarRoutes,
     ]
   }
 ];

@@ -675,6 +675,13 @@
                 Interes
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="cvCfgTipoMedidaCautelar" [ngClass]="{'active' : ( addActive === 'cvCfgTipoMedidaCautelar')}"
+                (click)="addActiveMenu('cvCfgTipoMedidaCautelar')">
+                <i class="fa fa-angle-right"></i>
+                Tipo medida cautelar
+              </a>
+            </li>
           </ul>
           <!-- /.nav-third-level -->
         </li>
@@ -1261,6 +1268,12 @@
           <a class="nav-link" routerLink="reporte" [ngClass]="{'active' : ( addActive === 'reporte')}" (click)="addActiveMenu('reporte')">
             <i class="fa fa-angle-right"></i>
             Reporte
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="cvMedidaCautelar" [ngClass]="{'active' : ( addActive === 'cvMedidaCautelar')}" (click)="addActiveMenu('cvMedidaCautelar')">
+            <i class="fa fa-angle-right"></i>
+            Medida cautelar
           </a>
         </li>
       </ul>

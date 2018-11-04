@@ -1,101 +1,132 @@
 <div class="container">
     <hr>
     <div class="row" *ngIf='formIndex'>
-        <div class="col-md-12">
-            <div class="card">
+        <div class="col-xs-12 col-lg-12">
+            <div class=" card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        <small>SISTEMA INTEGRADO DE INFORMACIÓN SOBRE MULTAS Y SANCIONES POR INFRACCIONES DE TRANSITO</small>
+                        <small>REPORTE ACCIDENTALIDAD</small>
                     </h5>
                 </div>
-                <div>
+                <div class="card-body">
+                    <form #formNew="ngForm">
+                <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
                         <label>Adjuntar Reporte Policia <strong class="text-danger">*</strong></label>
-                        <input type="file" (change)="onFileChange($event)" class="form-control" [(ngModel)]="msvRegistroIpat.documento" name="documento" />
+                        <input type="file" (change)="onFileChange($event)" class="form-control" [(ngModel)]="exportIpat.documento" name="documento" />
                     </div>
+                    <div class="col-lg-6 col-md-6"></div>
                     <div class="col-lg-6 col-md-6">
                         <label>Tipo Gravedad</label>
-                        <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="msvRegistroIpat.idGravedad" required name="gravedad">
+                        <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="exportIpat.idGravedad"
+                            required name="gravedad">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Tipo Victima</label>
-                        <ng-select [multiple]="false" [options]="tiposVictima" [(ngModel)]="msvRegistroIpat.idTipoVictima" required name="tipoVictima">
+                        <ng-select [multiple]="false" [options]="tiposVictima" [(ngModel)]="exportIpat.idTipoVictima"
+                            required name="tipoVictima">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Hora (Desde) <strong class="text-danger">*</strong></label>
-                        <input type="time" class="form-control" [(ngModel)]="msvRegistroIpat.horaInicio"
-                            name="horaInicio" />
+                        <input type="time" class="form-control" [(ngModel)]="exportIpat.horaInicio" name="horaInicio" />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Hora (Hasta) <strong class="text-danger">*</strong></label>
-                        <input type="time" class="form-control" [(ngModel)]="msvRegistroIpat.horaFin"
-                            name="horaFin" />
+                        <input type="time" class="form-control" [(ngModel)]="exportIpat.horaFin" name="horaFin" />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha (Desde) <strong class="text-danger">*</strong></label>
-                        <input type="time" class="form-control" [(ngModel)]="msvRegistroIpat.fechaInicio"
-                            name="fechaInicio" />
+                        <input type="date" class="form-control" [(ngModel)]="exportIpat.fechaInicio" name="fechaInicio" />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha (Hasta) <strong class="text-danger">*</strong></label>
-                        <input type="time" class="form-control" [(ngModel)]="msvRegistroIpat.fechaFin"
-                            name="fechaFin" />
+                        <input type="date" class="form-control" [(ngModel)]="exportIpat.fechaFin" name="fechaFin" />
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Grupo de Edad</label>
-                        <ng-select [multiple]="false" [options]="gruposEdad" [(ngModel)]="msvRegistroIpat.idGrupoEdad" required name="grupoEdad">
+                        <ng-select [multiple]="false" [options]="gruposEdad" [(ngModel)]="exportIpat.idGrupoEdad"
+                            required name="grupoEdad">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Municipio</label>
-                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="msvRegistroIpat.idMunicipio" required name="municipio">
+                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="exportIpat.idMunicipio"
+                            required name="municipio">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Dias Semana</label>
-                        <ng-select [multiple]="false" [options]="diasSemana" [(ngModel)]="msvRegistroIpat.idDiaSemana" required name="diaSemana">
+                        <ng-select [multiple]="false" [options]="diasSemana" [(ngModel)]="exportIpat.idDiaSemana"
+                            required name="diaSemana">
+                            
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Genero</label>
-                        <ng-select [multiple]="false" [options]="generos" [(ngModel)]="msvRegistroIpat.idGenero" required name="genero">
+                        <ng-select [multiple]="false" [options]="generos" [(ngModel)]="exportIpat.idGenero" required
+                            name="genero">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Medio Transporte (Clase Vehiculo)</label>
-                        <ng-select [multiple]="false" [options]="clases" [(ngModel)]="msvRegistroIpat.idClase" required name="clase">
+                        <ng-select [multiple]="false" [options]="clases" [(ngModel)]="exportIpat.idClase" required
+                            name="clase">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Clase Accidente</label>
-                        <ng-select [multiple]="false" [options]="clasesAccidente" [(ngModel)]="msvRegistroIpat.idClaseAccidente" required name="claseAccidente">
+                        <ng-select [multiple]="false" [options]="clasesAccidente" [(ngModel)]="exportIpat.idClaseAccidente"
+                            required name="claseAccidente">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Choque Con</label>
-                        <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="msvRegistroIpat.idChoqueCon" required name="choqueCon">
+                        <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="exportIpat.idChoqueCon"
+                            required name="choqueCon">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Objeto Fijo</label>
-                        <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="msvRegistroIpat.idObjetoFijo" required name="objetoFijo">
+                        <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="exportIpat.idObjetoFijo"
+                            required name="objetoFijo">
                         </ng-select>
                     </div>
                 </div>
+                </form>
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
+                </div>
+                </div>
+
                 <div class="card-body" style="overflow-x: auto">
-                    <table class="table" id="dataTables-example" *ngIf="ipat">
+                    <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>IPAT CONSECUTIVO</th>
-                                <th>ID IPAT</th>
+                                <th>GRAVEDAD</th>
+                                <th>TIPO PASAJERO</th>
+                                <th>HORA ACCIDENTE</th>
+                                <th>FECHA ACCIDENTE</th>
+                                <th>EDAD</th>
+                                <th>MUNICIPIO</th>
+                                <th>DIA DE SEMANA</th>
+                                <th>GENERO</th>
+                                <th>Vista</th>
+                                <th>Grafica</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let ipat of ipats; let i = index">
-                                <td>{{ ipat.consecutivo }}</td>
-                                <td>{{ ipat.id }}</td>
+                                <td>{{ ipat.gravedad.nombre }}</td>
+                                <td>{{ ipat.tipoVictima.nombre }}</td>
+                                <td>{{ ipat.horaAccidente }}</td>
+                                <td>{{ ipat.fechaAccidente }}</td>
+                                <td>{{ ipat.fechaNacimientoConductor }}</td>
+                                <td>{{ ipat.ciudadResidenciaConductor }}</td>
+                                <td>{{ ipat.dia }}</td>
+                                <td>{{ ipat.sexoConductor }}</td>
                             </tr>
                         </tbody>
                     </table>

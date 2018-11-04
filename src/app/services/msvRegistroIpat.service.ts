@@ -100,7 +100,7 @@ export class MsvRegistroIpatService {
 
 	getBuscarLicenciaConductor(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/get/datos/licenciaconduccion", params, { headers: headers }).map(
 			res => res.json()
@@ -109,5 +109,14 @@ export class MsvRegistroIpatService {
 
 	export() {
 		return this._http.get(this.url + "/export").map(res => res.json());
+	}
+
+	buscarIpat(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/buscaripat", params, { headers: headers }).map(
+			res => res.json()
+		);
 	}
 }

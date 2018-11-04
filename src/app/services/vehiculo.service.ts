@@ -34,9 +34,32 @@ export class VehiculoService {
 	showVehiculo(token, id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
+		return this._http.post(this.url+"/show", params, {headers: headers})
 							  .map(res => res.json());
 
+	}
+
+	showVehiculoRna(vehiculo, token){
+		let json = JSON.stringify(vehiculo);
+		let params = "data="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/show/rna", params, {headers: headers})
+							  .map(res => res.json());
+	}
+	showVehiculoRnma(vehiculo, token){
+		let json = JSON.stringify(vehiculo);
+		let params = "data="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/show/rnma", params, {headers: headers})
+							  .map(res => res.json());
+	}
+
+	showVehiculoRnrs(vehiculo, token){
+		let json = JSON.stringify(vehiculo);
+		let params = "data="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
+		return this._http.post(this.url+"/show/rnrs", params, {headers: headers})
+							  .map(res => res.json());
 	}
 
 	showVehiculoPlaca(token, placa){
