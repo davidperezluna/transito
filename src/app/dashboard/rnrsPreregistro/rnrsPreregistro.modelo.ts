@@ -1,6 +1,5 @@
 export class RegistroRemolque{
 	constructor(
-		public id: number,
 		public alto: string,
 		public largo: string,
 		public ancho: string,
@@ -9,16 +8,18 @@ export class RegistroRemolque{
 		public pesoVacio: string,
 		public referencia: string,
 		public numeroFth: string,
-		public rut: string,
-		public origenRegistroId: string,
-		public condicionIngresoId: string,
-		public vehiculoPlaca: string,
-		public vehiculoSerie: string,
-		public vehiculoCarroceriaId: number,
-		public vehiculoVin: string,
-		public vehiculoMarcaId: number,
-		public vehiculoModelo: string,
-		public vehiculoClaseId: number,
+		public numeroRunt: string,
+		public modelo: string,
+		public placa: string,
+		public serie: string,
+		public vin: string,
+		public idOrigenRegistro: string,
+		public idCondicionIngreso: string,
+		public idCarroceria: number,
+		public idLinea: number,
+		public idClase: number,
+		public idSedeOperativa: number,
+		public id: number,
 
 
 	){}

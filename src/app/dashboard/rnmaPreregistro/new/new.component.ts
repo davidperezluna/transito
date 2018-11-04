@@ -61,7 +61,7 @@ constructor(
   private _OrigenRegistroService: VhloCfgOrigenRegistroService,
   private _EmpresaGpsService: VhloCfgEmpresaGpsService,
   private _SubpartidaArancelariaService: VhloCfgSubpartidaArancelariaService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _FuncionarioService: MpersonalFuncionarioService
 ){}
 
 ngOnInit() {

@@ -44,7 +44,7 @@ import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Utils } from 'ng2-bootstrap';
 import { SvCfgAseguradoraService } from '../../../services/svCfgAseguradora.service';
-import { SvCfgControlViaService } from 'app/services/svCfgControlVia.service';
+import { SvCfgControlViaService } from '../../../services/svCfgControlVia.service';
 
 @Component({
   selector: 'app-new',

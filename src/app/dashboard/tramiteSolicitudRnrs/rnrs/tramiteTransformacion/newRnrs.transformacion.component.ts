@@ -5,7 +5,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import { LoginService } from '../../../../services/login.service';
 import { CombustibleService } from '../../../../services/combustible.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
-import { RegistroRemolqueService } from '../../../../services/rnrsRegistroRemolque.service';
+import { RnrsPreregistroService } from '../../../../services/rnrsPreregistro.service';
 
 import swal from 'sweetalert2';
 
@@ -26,7 +26,7 @@ export class NewRnrsTransformacionComponent implements OnInit {
     constructor(
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
-        private _RemolqueService: RegistroRemolqueService,
+        private _RemolqueService: RnrsPreregistroService,
     ) { }
 
     ngOnInit() {
@@ -52,7 +52,7 @@ export class NewRnrsTransformacionComponent implements OnInit {
     onEnviarTramite() {
         let token = this._loginService.getToken();
         this.datos.idVehiculo = this.vehiculo.id;
-        this._RemolqueService.transformacionVehiculoRemolque(this.datos, token).subscribe(
+        this._RemolqueService.transformacion(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.datos.facturaId = this.factura.id;

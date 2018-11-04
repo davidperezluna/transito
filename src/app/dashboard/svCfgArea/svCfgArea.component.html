@@ -8,8 +8,7 @@
                         <strong class="text-uppercase">Áreas</strong>
                         <small>Lista de áreas</small>
                         <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
-                                data-toggle="modal">
+                            <button (click)="onNew()" class="btn btn-success">
                                 <i class="fa fa-plus"></i>
                                 <span class="text">Nuevo</span>
                             </button>
@@ -32,14 +31,14 @@
                                 <td>{{ area.nombre }}</td>
                                 <td>{{ area.tipoArea.nombre }}</td>
                                 <td>
-                                    <button (click)="editArea(area)" class="btn btn-xs btn-info" type="button">
-                                        <i class="fa fa-edit"></i>
-                                        Editar
-                                    </button>
-                                    <button (click)="onDelete(area.id)" class="btn btn-xs btn-danger" type="button">
-                                        <i class="fa fa-trash"></i>
-                                        Eliminar
-                                    </button>
+                                    <div class="btn-group">
+                                        <button (click)="editArea(area)" class="btn btn-xs btn-primary" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button (click)="onDelete(area.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

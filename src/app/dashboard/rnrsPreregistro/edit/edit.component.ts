@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {RegistroRemolque} from '../rnrsPreregistro.modelo';
-import {RegistroRemolqueService} from '../../../services/rnrsRegistroRemolque.service';
+import { RegistroRemolque } from '../rnrsPreregistro.modelo';
+import { RnrsPreregistroService } from '../../../services/rnrsPreregistro.service';
 import {LoginService} from '../../../services/login.service';
 import {CarroceriaService} from '../../../services/carroceria.service';
 import {MarcaService} from '../../../services/marca.service';
@@ -62,7 +62,7 @@ public tiposCabina =[
 ]
 
 constructor(
-  private _RegistroRemolqueService: RegistroRemolqueService,
+  private _RegistroRemolqueService: RnrsPreregistroService,
   private _loginService: LoginService,
   private _LineaService: LineaService,
   private _ClaseService: ClaseService,
@@ -218,7 +218,7 @@ constructor(
     }).then((result) => {
         if (result.value) {
 
-    this._RegistroRemolqueService.editRegistroRemolque(this.registroRemolque,token).subscribe(
+    this._RegistroRemolqueService.edit(this.registroRemolque,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

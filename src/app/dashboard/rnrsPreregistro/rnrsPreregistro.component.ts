@@ -1,9 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {RegistroRemolqueService} from '../../services/rnrsRegistroRemolque.service';
-import {LoginService} from '../../services/login.service';
-// import {Vehiculo} from './vehiculo.modelo';
 import { RegistroRemolque } from './rnrsPreregistro.modelo';
-import { NewRegistroRemolqueComponent } from './new/new.component';
+import { RnrsPreregistroService } from '../../services/rnrsPreregistro.service';
+import { LoginService } from '../../services/login.service';
+
 declare var $: any;
 import swal from 'sweetalert2';
 
@@ -24,11 +23,12 @@ export class RnrsPreregistroComponent implements OnInit {
   public registroRemolque: RegistroRemolque;
 
   constructor(
-		private _RegistroRemolqueService: RegistroRemolqueService,
+    private _RegistroRemolqueService: RnrsPreregistroService,
 		private _loginService: LoginService,
 	
 		
-		){}
+    ){}
+    
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
@@ -39,27 +39,28 @@ export class RnrsPreregistroComponent implements OnInit {
     });
 
     this.formEdit=false;
-    this.formNew=false;    
-		this._RegistroRemolqueService.index().subscribe(
-      response => {
-        console.log(response.data);
-          this.registrosRemolque = response.data;
-          
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-          swal.close();
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+    this.formNew=false;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+    this._RegistroRemolqueService.index().subscribe(
+      response => {
+        this.registrosRemolque = response.data;
+
+        let timeoutId = setTimeout(() => {
+          this.iniciarTabla();
+        }, 100);
+        swal.close();
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
+   
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -107,7 +108,7 @@ export class RnrsPreregistroComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._RegistroRemolqueService.deleteRegistroRemolque(token,id).subscribe(
+        this._RegistroRemolqueService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
