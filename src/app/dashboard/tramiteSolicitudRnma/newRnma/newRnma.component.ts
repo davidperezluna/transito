@@ -134,7 +134,7 @@ export class NewRnmaComponent implements OnInit {
             if (tramiteFactura.tramitePrecio.tramite.sustrato) {
               this.sustrato = true;
             }
-            if (tramiteFactura.tramitePrecio.tramite.id == 1) {
+            if (tramiteFactura.tramitePrecio.tramite.formulario == 'rnma-matriculainicial') {
               this.isMatricula = true;
             } else {
               this.isMatricula = false;

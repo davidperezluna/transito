@@ -128,7 +128,7 @@ constructor(
           if (tramiteFactura.tramitePrecio.tramite.sustrato) {
             this.sustrato = true;
           }
-          if(tramiteFactura.tramitePrecio.tramite.id == 1){
+          if (tramiteFactura.tramitePrecio.tramite.formulario == 'rnrs-matriculainicial'){
             this.isMatricula = true;
           }else{
             this.isMatricula = false;
