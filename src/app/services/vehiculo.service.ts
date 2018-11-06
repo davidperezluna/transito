@@ -46,6 +46,7 @@ export class VehiculoService {
 		return this._http.post(this.url+"/show/rna", params, {headers: headers})
 							  .map(res => res.json());
 	}
+	
 	showVehiculoRnma(vehiculo, token){
 		let json = JSON.stringify(vehiculo);
 		let params = "data="+json+"&authorization="+token;

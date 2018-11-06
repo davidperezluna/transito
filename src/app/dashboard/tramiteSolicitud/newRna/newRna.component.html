@@ -130,7 +130,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button class="btn btn-secondary" (click)="cerrarApoderado()">Atrás</button>
+                                    <button class="btn btn-default" (click)="cerrarApoderado()">Atrás</button>
                                     <button (click)="btnNewApoderado()" class="btn btn-primary pull-right">Agregar</button>
                                 </div>
                                 
@@ -172,19 +172,11 @@
                                             <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                         </span>
                                     </div>
-                                    <!-- <ng-select 
-                                    [multiple]="false" 
-                                    [options]="facturas" 
-                                    (ngModelChange)="changedFactura($event)"
-                                    [(ngModel)]="facturaSelected" 
-                                    name="facturaId" 
-                                    required>
-                                    </ng-select> -->
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button (click)="onCancelar()" class="btn btn-secondary">
+                            <button (click)="onCancelar()" class="btn btn-default">
                                 <i class="fa fa-times"></i>
                                 Cancelar
                             </button>

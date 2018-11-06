@@ -92,7 +92,7 @@ export class RncLicenciaConduccionComponent implements OnInit {
   onSearchCiudadano(){
     let token = this._loginService.getToken();
 
-		this._CiudadanoService.searchByIdentificacion(token, {'numeroIdentificacion':this.identificacion}).subscribe(
+    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

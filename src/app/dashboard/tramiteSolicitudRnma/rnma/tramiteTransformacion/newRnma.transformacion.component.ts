@@ -18,26 +18,28 @@ export class NewRnmaTransformacionComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
-    public tipoPotenciacionSelect: any;
-    public nuevoModelo: any;
-    public resumen = {};     public datos = {
+
+    public tipoTransformacionSelect: any;
+    public nuevoRegistro: any;
+
+    public resumen = {};     
+    
+    public datos = {
         'newData': null,
         'oldData': null,
-        'tipoPotenciacion': null,
+        'tipoTransformacion': null,
         'tramiteFormulario': null,
         'facturaId': null,
     };
-    public tiposPotenciacion = [
+
+    public tiposTransformacion = [
         {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
         {'value': 'Reparacion de motor y cambio de conjunto', 'label': 'Reparación de motor y cambio de conjunto'},
         {'value': 'Reparacion de motor', 'label': 'Reparación de motor'},
     ];
 
     constructor(
-        private _CombustibleService: CombustibleService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }
 
@@ -47,9 +49,9 @@ export class NewRnmaTransformacionComponent implements OnInit {
     
     enviarTramite(){
         
-        let token = this._loginService.getToken();
-        console.log(this.vehiculo);
-        this.vehiculo.modelo = this.nuevoModelo    
+        let token = this._LoginService.getToken();
+
+        this.vehiculo.modelo = this.nuevoRegistro    
         this.vehiculo.placa = this.vehiculo.cfgPlaca.numero    
         this.vehiculo.municipioId = this.vehiculo.municipio.id   
         this.vehiculo.lineaId = this.vehiculo.linea.id   
@@ -59,25 +61,25 @@ export class NewRnmaTransformacionComponent implements OnInit {
         this.vehiculo.claseId = this.vehiculo.clase.id   
         this.vehiculo.servicioId = this.vehiculo.servicio.id 
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.datos.newData = this.nuevoModelo;
-                this.datos.oldData = this.vehiculo.modelo;
-                this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
-                this.datos.facturaId = this.factura.id;
-                this.datos.tramiteFormulario = 'rnma-tranformacion';
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-            }
-            error => {
-                    this.errorMessage = <any>error;
-
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
+            response => {
+                if(response.status == 'success'){
+                    this.datos.newData = this.nuevoRegistro;
+                    this.datos.oldData = this.vehiculo.modelo;
+                    this.datos.tipoTransformacion = this.tipoTransformacionSelect;
+                    this.datos.facturaId = this.factura.id;
+                    this.datos.tramiteFormulario = 'rnma-tranformacion';
+                    this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                 }
-        }); 
+                error => {
+                        this.errorMessage = <any>error;
+
+                        if(this.errorMessage != null){
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+            }
+        ); 
     }
 
     onCancelar(){

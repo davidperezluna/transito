@@ -26,8 +26,7 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
-    public colores: any;
+
     public tramiteFacturaSelected: any;
     public tipoPropiedadSelected:any;
     public ciudadano:any;
@@ -121,16 +120,14 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
         this.cancelarTramite.emit(true);
     }
     
-    onKeyCiudadano(){
+    onSearhCiudadano(){
         let token = this._loginService.getToken();
-        let identificacion = {
-			'numeroIdentificacion' : this.identificacion,
-        };
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+
+        this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.ciudadano = this.respuesta.data;
+                
+                if(response.status == 'success'){
+                    this.ciudadano = response.data;
                     this.ciudadanoEncontrado= 2;
                     this.ciudadanoNew = false;
             }else{
@@ -148,16 +145,16 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
         }); 
     }
 
-    onKeyApoderado(){
+    onSearchApoderado(){
         let token = this._loginService.getToken();
         let identificacion = {
 			'numeroIdentificacion' : this.identificacionApoderado,
         };
         this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.apoderadoSelected = this.respuesta.data;
+                
+                if(response.status == 'success'){
+                    this.apoderadoSelected = response.data;
                     this.apoderadoEncontrado= 2;
                     // this.ciudadanoNew = false;
             }else{
@@ -182,9 +179,9 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
         };
         this._EmpresaService.showNit(token,nit).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.empresa = this.respuesta.data;
+                
+                if(response.status == 'success'){
+                    this.empresa = response.data;
                     this.empresaEncontrada= 2;
             }else{
                 this.empresaEncontrada=3;
@@ -323,7 +320,7 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
     ready(isCreado:any){
         if(isCreado) {
             console.log(isCreado);
-          this.onKeyCiudadano();
+          this.onSearhCiudadano();
         }else{
            this.ciudadanoNew = false; 
         }

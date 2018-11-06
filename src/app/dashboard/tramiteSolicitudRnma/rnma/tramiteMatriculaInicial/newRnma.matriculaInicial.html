@@ -4,9 +4,9 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
-                    Matricuala Inicial
+                    Matricula Inicial
                 </h5>
-                <small>Para agregar un comprador haga click en el botón Agregar </small>
+                <small>Los campos con <span class="text-danger">*</span> son obligatorios</small>
                 <hr>
                 <div class="row justify-content-center container">
                     <div class="form-group row col-xs-12 col-lg-12">
@@ -49,7 +49,9 @@
                                 <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
                                     <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
                                     <span class="input-group-btn">
-                                        <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                        <button (click)="onSearhCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
                                     </span>
                                 </div>
                                 <div class="has-danger" *ngIf="ciudadanoEncontrado === 3">
@@ -98,9 +100,15 @@
                                                 <p>{{ciudadano.identificacionApoderado}}<br>{{ciudadano.nombreApoderado}}</p>
                                             </td>
                                             <td class="center" *ngIf="!ciudadano.identificacionApoderado">
-                                                <button (click)="agregarApoderadoCiudadano(ciudadano)" class="btn btn-primary pull-right">Agregar</button>
+                                                <button (click)="agregarApoderadoCiudadano(ciudadano)" class="btn btn-primary">
+                                                    <i class="fa fa-save"></i>
+                                                </button>
                                             </td>
-                                            <td class="center"><button (click)="delete(ciudadano)" class="btn btn-danger">Eliminar</button></td>
+                                            <td class="center">
+                                                <button (click)="delete(ciudadano)" class="btn btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -131,9 +139,15 @@
                                                 <p>{{empresa.identificacionApoderado}}<br>{{empresa.nombreApoderado}}</p>
                                             </td>
                                             <td class="center" *ngIf="!empresa.identificacionApoderado">
-                                                <button (click)="agregarApoderadoEmpresa(empresa)" class="btn btn-primary pull-right">Agregar</button>
+                                                <button (click)="agregarApoderadoEmpresa(empresa)" class="btn btn-primary">
+                                                    <i class="fa fa-save"></i>
+                                                </button>
                                             </td>
-                                            <td class="center"><button (click)="deleteEmpresa(empresa)" class="btn btn-danger">Eliminar</button></td>
+                                            <td class="center">
+                                                <button (click)="deleteEmpresa(empresa)" class="btn btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -172,9 +186,13 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="container">
-                                <button (click)="btnNewEmpresa()" class="btn btn-primary pull-right">Agregar</button>
-                                <button (click)="btnCancelarEmpresa()" class="btn btn-secondary">Cancel</button>
+                            <div class="btn-group">
+                                <button (click)="btnNewEmpresa()" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                </button>
+                                <button (click)="btnCancelarEmpresa()" class="btn btn-default">
+                                    <i class="fa fa-times"></i>
+                                </button>
                             </div>
                         </div>
                         
@@ -217,10 +235,13 @@
                                     <span class="custom-control-description">Propietario presente</span>
                                 </label>
                             </div>   
-                            <div class="container">
-                                <br>
-                                <button (click)="btnNewCiudadano()" class="btn btn-primary pull-right">Agregar</button>
-                                <button (click)="btnCancelarCiudadano()" class="btn btn-secondary">Cancel</button>
+                            <div class="btn-group">
+                                <button (click)="btnNewCiudadano()" class="btn btn-xs btn-primary">
+                                    <i class="fa fa-save"></i>
+                                </button>
+                                <button (click)="btnCancelarCiudadano()" class="btn btn-xs btn-default">
+                                    <i class="fa fa-times"></i>
+                                </button>
                             </div>
                         </div>
 
@@ -244,13 +265,12 @@
                             <div  class="input-group" [class.has-success]="apoderadoEncontrado === 2" [class.has-danger]="apoderadoEncontrado === 3">
                                 <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
                                 <span class="input-group-btn">
-                                    <button (click)="onKeyApoderado()" [class.btn-default]="apoderadoEncontrado === 1" [class.btn-success]="apoderadoEncontrado === 2" [class.btn-danger]="apoderadoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                    <button (click)="onSearchApoderado()" [class.btn-default]="apoderadoEncontrado === 1" [class.btn-success]="apoderadoEncontrado === 2" [class.btn-danger]="apoderadoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                             <div class="has-danger" *ngIf="apoderadoEncontrado === 3">
                                 <div class="form-control-feedback has-danger has-error">No se encontró el apoderado</div>
                             </div>
-                            
                         </div>
 
                         <!--si existe el apoderado -->
@@ -284,22 +304,21 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            
                         </div>
-                        
                         <div class="card-footer">
-                            <button class="btn btn-secondary" (click)="onCancelarApoderado()">Atrás</button>
-                            <button (click)="btnNewApoderado()" class="btn btn-primary pull-right">Agregar</button>
+                            <div class="btn-group">
+                                <button class="btn btn-default" (click)="onCancelarApoderado()">Atrás</button>
+                                <button (click)="btnNewApoderado()" class="btn btn-primary">Agregar</button>
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </div>
             <div class="card-footer">
-                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right">Finalizar tramite</button>
             </div>
         </div>
     </div><!-- /.col -->
 </div><!-- /.row -->
-<!-- Button trigger modal -->
 

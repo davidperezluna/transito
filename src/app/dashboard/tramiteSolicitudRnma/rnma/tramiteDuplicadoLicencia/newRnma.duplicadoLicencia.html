@@ -12,37 +12,27 @@
                 <hr>
                 <div class="row justify-content-center container">
                     <div class="form-group row">
-                        <div class="col-lg-12 col-md-16">
-                            <label>Sustrato*</label>
-                            <ng-select 
-                            [multiple]="false" 
-                            [options]="sustratos" 
-                            [(ngModel)]="sustratoSelected" 
-                            required 
-                            name="sustratoId">
-                            </ng-select>
-                        </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Número RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                            <label>Número de solicitud RUNT</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Documentación</label>
-                            <textarea class="form-control" [(ngModel)]="documentacion" name="documentacion"></textarea>
+                            <textarea class="form-control" [(ngModel)]="datos.documentacion" name="documentacion"></textarea>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <br>
-                            <label class="custom-control custom-checkbox" for="ENTREGADA">
-                                <input type="checkbox"  [(ngModel)]="entregada" name="entregada" class="custom-control-input"  id="ENTREGADA" required>
-                                <span class="custom-control-indicator"></span> 
-                                <span class="custom-control-description">Entregada</span>
-                            </label>
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.entregada" class="custom-control-input" id="entregada" name="entregada" checked="">
+                                    <label class="custom-control-label" for="entregada">Documentación completa entregada</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
                 <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
             </div>
         </div>

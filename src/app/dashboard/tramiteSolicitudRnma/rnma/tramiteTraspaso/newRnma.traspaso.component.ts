@@ -121,12 +121,10 @@ export class NewRnmaTraspasoComponent implements OnInit {
         this.cancelarTramite.emit(true);
     }
     
-    onKeyCiudadano(){
+    onSearchCiudadano(){
         let token = this._loginService.getToken();
-        let identificacion = {
-			'numeroIdentificacion' : this.identificacion,
-        };
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+
+        this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -323,7 +321,7 @@ export class NewRnmaTraspasoComponent implements OnInit {
     ready(isCreado:any){
         if(isCreado) {
             console.log(isCreado);
-          this.onKeyCiudadano();
+          this.onSearchCiudadano();
         }else{
            this.ciudadanoNew = false; 
         }

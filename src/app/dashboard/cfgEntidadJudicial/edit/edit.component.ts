@@ -13,7 +13,7 @@ export class EditComponent {
   @Output() ready = new EventEmitter<any>();
   @Input() cfgEntidadJudicial: any = null;
   public errorMessage;
-  public respuesta;
+
   public municipios: any;
   public municipioSelected: any;
 
@@ -21,9 +21,7 @@ export class EditComponent {
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
     private _loginService: LoginService,
     private _municipioService: MunicipioService,
-  ) {
-  
-  }
+  ) { }
 
   ngOnInit() {
     console.log(this.cfgEntidadJudicial);
@@ -55,10 +53,7 @@ export class EditComponent {
     this.cfgEntidadJudicial.municipioId = this.municipioSelected;
     this._CfgEntidadJudicialService.editCfgEntidadJudicial(this.cfgEntidadJudicial, token).subscribe(
       response => {
-        //console.log(response);
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

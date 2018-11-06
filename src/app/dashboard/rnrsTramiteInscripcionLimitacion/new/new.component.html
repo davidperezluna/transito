@@ -82,7 +82,7 @@
                                 <div class="container">
                                     <br>
                                     <button (click)="btnNewVehiculo()" class="btn btn-primary pull-right">Agregar</button>
-                                    <button (click)="btnCancelarVehiculo()" class="btn btn-secondary">Cancel</button>
+                                    <button (click)="btnCancelarVehiculo()" class="btn btn-default">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +200,7 @@
                             <div class="container">
                                 <br>
                                 <button (click)="btnNewDemandado()" class="btn btn-primary pull-right">Agregar</button>
-                                <button (click)="btnCancelarDemandado()" class="btn btn-secondary">Cancel</button>
+                                <button (click)="btnCancelarDemandado()" class="btn btn-default">Cancelar</button>
                             </div>
                         </div>
 
@@ -294,7 +294,7 @@
                             <div class="container">
                                 <br>
                                 <button (click)="btnNewDemandante()" class="btn btn-primary pull-right">Agregar</button>
-                                <button (click)="btnCancelarDemandante()" class="btn btn-secondary">Cancel</button>
+                                <button (click)="btnCancelarDemandante()" class="btn btn-default">Cancelar</button>
                             </div>
                         </div>
 
@@ -360,7 +360,7 @@
 
                     </div>
 
-                    <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
+                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
 
 
 
@@ -375,7 +375,7 @@
     </div>
 
     <div class="card-footer" *ngIf="listaVehiculosPlacas">
-        <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
+        <!-- <button (click)="onCancelar()" class="btn btn-default">Cancelar</button> -->
         <button (click)="enviarTramite()" [disabled]="formNew.invalid" class="btn btn-success pull-right">Enviar</button>
     </div>
     <!-- /.col -->

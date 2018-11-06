@@ -230,7 +230,7 @@
                             </table>
                             <div class="container">
                                 <button (click)="btnNewEmpresa()" class="btn btn-primary pull-right">Agregar</button>
-                                <button (click)="btnCancelarEmpresa()" class="btn btn-secondary">Cancel</button>
+                                <button (click)="btnCancelarEmpresa()" class="btn btn-default">Cancelar</button>
                             </div>
                         </div>
                         
@@ -289,7 +289,7 @@
                             <div class="container">
                                 <br>
                                 <button (click)="btnNewCiudadano()" class="btn btn-primary pull-right">Agregar</button>
-                                <button (click)="btnCancelarCiudadano()" class="btn btn-secondary">Cancel</button>
+                                <button (click)="btnCancelarCiudadano()" class="btn btn-default">Cancelar</button>
                             </div>
                         </div>
                         
@@ -372,7 +372,7 @@
                             </table>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-secondary" (click)="onCancelarAcreedor()">Atrás</button>
+                            <button class="btn btn-default" (click)="onCancelarAcreedor()">Atrás</button>
                             <button (click)="btnNewAcreedor()" class="btn btn-primary pull-right">Agregar</button>
                         </div>
                     </div>
@@ -430,7 +430,7 @@
             </div>
             
             <div class="card-footer" *ngIf="ciudadanoAcreedorNew">
-                <!-- <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button> -->
+                <!-- <button (click)="onCancelar()" class="btn btn-default">Cancelar</button> -->
                 <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
             </div>
         </div>

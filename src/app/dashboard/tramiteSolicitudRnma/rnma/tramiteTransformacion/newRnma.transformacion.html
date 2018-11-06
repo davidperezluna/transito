@@ -1,6 +1,6 @@
 
 <div class="row"><!-- .row -->
-    <div class="col-xs-12 col-lg-12"><!-- .col -->
+    <div class="col-xs-12 col-lg-4"><!-- .col -->
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
@@ -10,19 +10,25 @@
                 <hr>
                 <div class="row justify-content-center container">
                     <div class="form-group row col-xs-12 col-lg-12">
-                        <label>Tipo Potenciación <span class="text-danger">*</span></label>
-                        <ng-select [multiple]="false" [options]="tiposPotenciacion" [(ngModel)]="tipoPotenciacionSelect" required name="tipoPotenciacion">
+                        <label>Tipo transformación <span class="text-danger">*</span></label>
+                        <ng-select [multiple]="false" [options]="tiposTransformacion" [(ngModel)]="tipoTransformacionSelect" name="tipoTransfromcacion" required>
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-12">
-                        <label>Nueva Modelo<span class="text-danger">*</span></label>
-                        <input class="form-control" [(ngModel)]="nuevoModelo" name="nuevoModelo" type="text" required />
+                        <label>Nuevo registro<span class="text-danger">*</span></label>
+                        <input class="form-control" [(ngModel)]="nuevoRegistro" name="nuevoRegistro" type="text" required />
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">Cancel</button>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right">Enviar</button>
+                <button class="btn btn-default" (click)="onCancelar()">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+                <button class="btn btn-primary" (click)="enviarTramite()">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
             </div>
         </div>
     </div><!-- /.col -->

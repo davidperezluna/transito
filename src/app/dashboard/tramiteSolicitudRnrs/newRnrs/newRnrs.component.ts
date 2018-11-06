@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { TramiteSolicitud } from '../tramiteSolicitudRnrs.modelo';
-import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
@@ -17,9 +16,8 @@ import { VehiculoService } from '../../../services/vehiculo.service';
 export class NewRnrsComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public tramiteSolicitud: TramiteSolicitud;
-  public vehiculo: Vehiculo;
   public errorMessage;
-  public respuesta;
+  
   public tramitesFactura: any;
   public tramiteFacturaSelected: any;
   public facturaSelected: any;
@@ -27,16 +25,18 @@ export class NewRnrsComponent implements OnInit {
   public factura: any;
   public isPagada = false;
   public tramiteSelected: any;
-  public mensaje = '';
+
   public isError = false;
-  public ciudadanosVehiculo=false;
+
+  public vehiculo: any = null;
+  public ciudadanosVehiculo: any = null;
+  public ciudadano: any = null;
   public isCiudadano=false;
   public isEmpresa=false;
-  public ciudadano: any;
-  public vehiculoSuccess=false;
+
   public tipoError=200;
   public error=false;
-  public msj='';
+ 
   public tramites='';
   public tramitePreasignacion=false;
   public tramiteMatriculaInicial=false;
@@ -67,7 +67,6 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null,null,null,null);
   }
   onCancelar(){
@@ -78,8 +77,7 @@ constructor(
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
 		this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -105,11 +103,12 @@ constructor(
 		});
   }
 
-  changedFactura(id){
-    if (id) {
-      this.datos.facturaId = id;
+  onSearchFactura(numero){
+    if (numero) {
+      this.datos.facturaId = numero;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
+
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
       response => {
         this.isMatricula=false;
@@ -130,8 +129,6 @@ constructor(
           }
           if (tramiteFactura.tramitePrecio.tramite.formulario == 'rnrs-matriculainicial'){
             this.isMatricula = true;
-          }else{
-            this.isMatricula = false;
           }
         });
         
@@ -154,9 +151,7 @@ constructor(
               }
             }
           );
-        }else{
-          console.log(this.isMatricula);
-          
+        }else{         
           if(this.isMatricula){
             this.factura = response[0].factura;
           }else{
@@ -181,42 +176,48 @@ constructor(
     }
   }
   
-  onKeyValidateVehiculo(){
-    this.msj = '';
-    this.mensaje = '';
+  onSearchVehiculo(){
     swal({
       title: 'Buscando Vehiculo!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
+    
     let token = this._loginService.getToken();
 
     this._VehiculoService.showVehiculoRnrs(this.tramiteSolicitud.vehiculoId,token).subscribe(
       response => {
         if (response.status == 'success' ) { 
           this.isCiudadano = true
-          this.ciudadanosVehiculo = response.propietarios;
           this.vehiculo = response.vehiculo;
-          this.vehiculoSuccess=true;
-          this.isMatricula = true;
-          this.msj ='vehiculo encontrado';
+          this.ciudadanosVehiculo = response.propietarios;
+          
+          if (response.propietarios) {
+            this.ciudadanosVehiculo = response.propietarios;
+            swal.close();
+          } else {
+            swal({
+              title: 'Alerta!',
+              type: 'warning',
+              text: response.message,
+              confirmButtonText: 'Aceptar'
+            });
+          }
+
           this.error = false;
           this.isError = false;
-          swal.close();
         }else{
-          this.vehiculoSuccess = false;
-          this.msj ='vehiculo no encontrado encontrado';
+          swal({
+            title: 'Alerta!',
+            type: 'warning',
+            text: response.message,
+            confirmButtonText: 'Aceptar'
+          });
+
           this.error = true;
           this.isError = true;
-          swal.close(); 
         }
         error => { 
             this.errorMessage = <any>error;
@@ -227,22 +228,24 @@ constructor(
           }
       });
   }
+
   readyTramite(datos:any){
     this.tramitesFactura.forEach(tramiteFactura => {
       if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {
         this.tramiteSolicitud.tramiteFacturaId = tramiteFactura.id;
       }
     });
+
     this.tramiteSolicitud.datos=datos;
     this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
     this.tramiteSolicitud.ciudadanoId=this.apoderado.id;
 
     let token = this._loginService.getToken();
+
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') { 
+        console.log(response);
+        if (response.status == 'success') { 
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
@@ -250,11 +253,10 @@ constructor(
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
-          this.changedFactura(this.factura.id)
         } else {
           swal({
             title: 'Error!',
-            text: 'El tramiteSolicitud ' + +' ya se encuentra registrada',
+            text: 'El tramiteSolicitud ya se encuentra registrada',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -282,12 +284,20 @@ constructor(
       this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>' 
     });
 
-          var html = 'Se va a enviar la siguiente solicitud:<br>'+
-                    'Factura: <b>'+this.factura.numero+'</b><br>'+
-                    'Vehiculo: <b>'+this.vehiculo.placa+'</b><br>'+
-                    'Solicitante: <b>'+this.ciudadano.usuario.identificacion+'</b><hr>'+
-                    'Tramites:<br>'+
-                    this.tramites  
+    if (this.ciudadano) {
+      var html = 'Se va a enviar la siguiente solicitud:<br>' +
+        'Factura: <b>' + this.factura.numero + '</b><br>' +
+        'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><br>' +
+        'Solicitante: <b>' + this.ciudadano.usuario.identificacion + '</b><hr>' +
+        'Tramites:<br>' +
+        this.tramites;
+    } else {
+      var html = 'Se va a enviar la siguiente solicitud:<br>' +
+        'Factura: <b>' + this.factura.numero + '</b><br>' +
+        'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><hr>' +
+        'Tramites:<br>' +
+        this.tramites;
+    }
           swal({
             title: 'Resumen',
             type: 'warning',
@@ -321,9 +331,7 @@ constructor(
             ) {
     
             }
-          })
-
-          
+          });
   }
 
    agregarApoderado(){
@@ -343,9 +351,9 @@ constructor(
     };
     this._ciudadanoService.searchByIdentificacion(token, identificacion).subscribe(
         response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.apoderadoSelect = this.respuesta.data;
+   
+            if(response.status == 'success'){
+                this.apoderadoSelect = response.data;
                 this.apoderadoEncontrado= 2;
                 // this.ciudadanoNew = false;
         }else{

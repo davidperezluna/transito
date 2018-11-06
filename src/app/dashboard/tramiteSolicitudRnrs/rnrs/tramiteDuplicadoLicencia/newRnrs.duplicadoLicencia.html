@@ -14,7 +14,7 @@
                             <input class="form-control" [(ngModel)]="datos.numeroLicencia" name="numeroLicencia" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Número RUNT <strong class="text-danger">*</strong></label>
+                            <label>Número de solicitud RUNT <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-4">
@@ -41,7 +41,7 @@
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-secondary">
+                <button (click)="onCancelar()" class="btn btn-default">
                     <i class="fa fa-times"></i>
                     Cancelar
                 </button>

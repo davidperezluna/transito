@@ -57,6 +57,7 @@ export class TramiteSolicitudRnmaComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -73,6 +74,7 @@ export class TramiteSolicitudRnmaComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -87,7 +89,8 @@ export class TramiteSolicitudRnmaComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteTramiteSolicitud(id: any){
+
+  onDelete(id: any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -125,7 +128,7 @@ export class TramiteSolicitudRnmaComponent implements OnInit {
     })
   }
 
-  editTramiteSolicitud(tramiteSolicitud: any){
+  onEdit(tramiteSolicitud: any){
     this.tramiteSolicitud = tramiteSolicitud;
     this.formEdit = true;
     this.formIndex = false;

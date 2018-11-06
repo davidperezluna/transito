@@ -7,15 +7,15 @@
           <div class="card-header">
             <h5 class="card-title"><small>Solicitudes de tramite</small>
               <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-outline-success btn-round " data-target="#themepicker" data-toggle="modal">
-                  <span class="text">Nuevo</span>
-                  <i class="ti-save ml-2"></i>
+                <button (click)="onNew()" class="btn btn-success">
+                  <i class="fa fa-plus"></i>
+                  Nuevo
                 </button>
               </div>
             </h5>
           </div>
           <div class="card-body">
-            <table class="table " id="dataTables-example">
+            <table class="table" id="dataTables-example">
               <thead>
                 <tr>
                     <th>Id</th>
@@ -32,14 +32,14 @@
                   <td >{{ tramiteSolicitud.tramiteFactura.tramitePrecio.nombre }}</td>
                   <td >{{ tramiteSolicitud.datos }}</td>
                   <td>
-                    <button (click)="editTramiteSolicitud(tramiteSolicitud)" class="btn btn-outline-info" type="button">
-                      <i class="fa fa-pencil"></i>
-                      Editar
-                    </button> 
-                    <button (click)="deleteTramiteSolicitud(tramiteSolicitud.id)"  class="btn btn-outline-danger" type="button">
-                      <i class="fa fa-trash"></i>
-                      Eliminar
-                    </button> 
+                    <div class="btn-group">
+                      <button (click)="onEdit(tramiteSolicitud)" class="btn btn-primary" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="onDelete(tramiteSolicitud.id)"  class="btn btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
                   </td>
                 </tr>
               </tbody>

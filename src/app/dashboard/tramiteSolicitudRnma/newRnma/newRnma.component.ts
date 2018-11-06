@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitud } from '../tramiteSolicitudRnma.modelo';
-import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
+
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
@@ -17,7 +17,7 @@ import { VehiculoService } from '../../../services/vehiculo.service';
 export class NewRnmaComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public tramiteSolicitud: TramiteSolicitud;
-  public vehiculo: Vehiculo;
+
   public errorMessage;
   public respuesta;
   public tramitesFactura: any;
@@ -27,16 +27,18 @@ export class NewRnmaComponent implements OnInit {
   public factura: any;
   public isPagada = false;
   public tramiteSelected: any;
-  public mensaje = '';
+  
   public isError = false;
-  public ciudadanosVehiculo = false;
+
+  public vehiculo: any = null;
+  public ciudadanosVehiculo: any = null;
   public isCiudadano = false;
   public isEmpresa = false;
-  public ciudadano: any;
-  public vehiculoSuccess = false;
+  public ciudadano: any = null;
+
   public tipoError = 200;
   public error = false;
-  public msj = '';
+
   public tramites = '';
   public tramitePreasignacion = false;
   public tramiteMatriculaInicial = false;
@@ -69,14 +71,12 @@ export class NewRnmaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null);
-
-
   }
   onCancelar() {
     this.ready.emit(true);
   }
+
   onEnviar() {
     let token = this._loginService.getToken();
 
@@ -112,18 +112,74 @@ export class NewRnmaComponent implements OnInit {
       });
   }
 
-  changedFactura(id) {
-    if (id) {
-      this.datos.facturaId = id;
+  onSearchVehiculo() {
+    swal({
+      title: 'Buscando Vehiculo!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._loginService.getToken();
+
+    this._VehiculoService.showVehiculoRnma(this.tramiteSolicitud.vehiculoId,token).subscribe(
+      response => {
+        if (response.status == 'success' ) { 
+          this.isCiudadano = true
+          this.vehiculo = response.vehiculo;
+
+          if (response.propietarios) {
+            this.ciudadanosVehiculo = response.propietarios;
+            swal.close();
+          }else{
+            swal({
+              title: 'Alerta!',
+              type: 'warning',
+              text: response.message,
+              confirmButtonText: 'Aceptar'
+            });
+          }
+
+          this.error = false;
+          this.isError = false;
+        }else{
+          swal({
+            title: 'Alerta!',
+            type: 'warning',
+            text: response.message,
+            confirmButtonText: 'Aceptar'
+          });
+
+          this.error = true;
+          this.isError = true;
+        }
+        error => { 
+            this.errorMessage = <any>error;
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición"); 
+            }
+          }
+      });
+  }
+
+  onSearchFactura(numero) {
+    if (numero) {
+      this.datos.facturaId = numero;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
+
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
         response => {
           this.isMatricula = false;
           this.isTramites = true;
+
           let active = true;
           let token = this._loginService.getToken();
+
           this.tramitesFactura = response;
+
           this.tramitesFactura.forEach(tramiteFactura => {
             if (tramiteFactura.realizado == 0) {
               active = false;
@@ -131,19 +187,22 @@ export class NewRnmaComponent implements OnInit {
               //consultar tramite solicitud con el id de tramite factura
               //hacer un push array para extraer todas las solicitudes en estado realizado
             }
+
             if (tramiteFactura.tramitePrecio.tramite.sustrato) {
               this.sustrato = true;
             }
+
+            console.log(tramiteFactura.tramitePrecio.tramite.formulario);
+
             if (tramiteFactura.tramitePrecio.tramite.formulario == 'rnma-matriculainicial') {
               this.isMatricula = true;
-            } else {
-              this.isMatricula = false;
             }
           });
 
           if (active) {
             this.isTramites = false;
           }
+
           if (this.tramiteSolicitud.solicitanteId) {
             this._ciudadanoVehiculoService.showCiudadanoVehiculo(token, this.tramiteSolicitud.solicitanteId).subscribe(
               responseCiudadano => {
@@ -161,8 +220,6 @@ export class NewRnmaComponent implements OnInit {
               }
             );
           } else {
-            
-
             if (this.isMatricula) {
               this.factura = response[0].factura;
             } else {
@@ -187,51 +244,6 @@ export class NewRnmaComponent implements OnInit {
     }
   }
 
-  onKeyValidateVehiculo() {
-    this.msj = '';
-    this.mensaje = '';
-    swal({
-      title: 'Buscando Vehiculo!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    let token = this._loginService.getToken();
-    this._VehiculoService.showVehiculoRnma(this.tramiteSolicitud.vehiculoId,token).subscribe(
-      response => {
-        if (response.status == 'success' ) { 
-          this.isCiudadano = true
-          this.ciudadanosVehiculo = response.propietarios;
-          this.vehiculo = response.vehiculo;
-          this.vehiculoSuccess=true;
-          this.isMatricula = true;
-          this.msj ='vehiculo encontrado';
-          this.error = false;
-          this.isError = false;
-          swal.close();
-        }else{
-          this.vehiculoSuccess = false;
-          this.msj ='vehiculo no encontrado encontrado';
-          this.error = true;
-          this.isError = true;
-          swal.close(); 
-        }
-        error => { 
-            this.errorMessage = <any>error;
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición"); 
-            }
-          }
-      });
-  }
   readyTramite(datos: any) {
     this.tramitesFactura.forEach(tramiteFactura => {
       if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {
@@ -243,6 +255,7 @@ export class NewRnmaComponent implements OnInit {
     this.tramiteSolicitud.ciudadanoId = this.apoderado.id;
 
     let token = this._loginService.getToken();
+
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
         this.respuesta = response;
@@ -254,11 +267,10 @@ export class NewRnmaComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
-          this.changedFactura(this.factura.id)
         } else {
           swal({
             title: 'Error!',
-            text: 'El tramiteSolicitud ' + +' ya se encuentra registrada',
+            text: 'El tramiteSolicitud ya se encuentra registrada',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -281,16 +293,26 @@ export class NewRnmaComponent implements OnInit {
   finalizarSolicitud() {
     let token = this._loginService.getToken();
     this.tramites = '';
+
     this.tramitesFactura.forEach(tramiteFactura => {
       this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>'
     });
 
-    var html = 'Se va a enviar la siguiente solicitud:<br>' +
+    if (this.ciudadano) {
+      var html = 'Se va a enviar la siguiente solicitud:<br>' +
       'Factura: <b>' + this.factura.numero + '</b><br>' +
-      'Vehiculo: <b>' + this.vehiculo.placa + '</b><br>' +
+      'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><br>' +
       'Solicitante: <b>' + this.ciudadano.usuario.identificacion + '</b><hr>' +
       'Tramites:<br>' +
-      this.tramites
+       this.tramites;
+    }else{
+      var html = 'Se va a enviar la siguiente solicitud:<br>' +
+      'Factura: <b>' + this.factura.numero + '</b><br>' +
+      'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><hr>' +
+      'Tramites:<br>' +
+      this.tramites;
+    }
+
     swal({
       title: 'Resumen',
       type: 'warning',
@@ -305,7 +327,6 @@ export class NewRnmaComponent implements OnInit {
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
       if (result.value) {
-        console.log(this.factura);
         this.factura.estado = 'Finalizada';
         this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
         this._facturaService.editFactura(this.factura, token).subscribe(
@@ -338,9 +359,11 @@ export class NewRnmaComponent implements OnInit {
 
   onKeyApoderado() {
     let token = this._loginService.getToken();
+
     let identificacion = {
       'numeroIdentificacion': this.identificacionApoderado,
     };
+
     this._ciudadanoService.searchByIdentificacion(token, identificacion).subscribe(
       response => {
         this.respuesta = response;

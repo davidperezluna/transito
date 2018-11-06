@@ -87,7 +87,8 @@ export class TramiteSolicitudRnrsComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteTramiteSolicitud(id: any){
+  
+  onDelete(id: any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -125,7 +126,7 @@ export class TramiteSolicitudRnrsComponent implements OnInit {
     })
   }
 
-  editTramiteSolicitud(tramiteSolicitud: any){
+  onEdit(tramiteSolicitud: any){
     this.tramiteSolicitud = tramiteSolicitud;
     this.formEdit = true;
     this.formIndex = false;
