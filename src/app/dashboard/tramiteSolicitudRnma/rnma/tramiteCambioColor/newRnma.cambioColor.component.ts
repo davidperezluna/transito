@@ -27,7 +27,6 @@ export class NewRnmaCambioColorComponent implements OnInit {
     public resumen = {};     public datos = {
         'newData': null,
         'oldData': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'facturaId': null,
     };

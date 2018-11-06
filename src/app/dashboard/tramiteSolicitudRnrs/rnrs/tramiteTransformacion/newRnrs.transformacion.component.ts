@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitudRnrs.modelo';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { CombustibleService } from '../../../../services/combustible.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
+import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 import { RnrsPreregistroService } from '../../../../services/rnrsPreregistro.service';
 
 import swal from 'sweetalert2';
@@ -20,34 +17,46 @@ export class NewRnrsTransformacionComponent implements OnInit {
     @Input() factura: any = null; 
     public errorMessage;
     public respuesta;
-    public datos: any;
+    public tiposIdentificacion: any;
     public resumen = {};
+    public datos = {
+        'nuevoNumeroEjes': null,
+        'numeroFTH': null,
+        'pesoVacio': null,
+        'cargaUtil': null,
+        'tipoDocumento': null,
+        'numeroDocumento': null,
+        'nombreEmpresa': null,
+        'fechaFactura': null,
+        'tipoDocumentoSoporte': null,
+        'numeroFactura': null,
+        'tramiteFormulario': null,
+        'facturaId': null,
+        'idVehiculo': null,
+    };
 
     constructor(
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
+        private _TipoIdentificacionService: TipoIdentificacionService,
         private _RemolqueService: RnrsPreregistroService,
     ) { }
 
-    ngOnInit() {
+    ngOnInit() { 
+        this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+            response => {
+                this.tiposIdentificacion = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
 
-
-        this.datos = {
-            'nuevoNumeroEjes': null,
-            'numeroFTH': null,
-            'pesoVacio': null,
-            'cargaUtil': null,
-            'tipoDocumento': null,
-            'numeroDocumento': null,
-            'nombreEmpresa': null,
-            'fechaFactura': null,
-            'tipoDocumentoSoporte': null,
-            'numeroFactura': null,
-            'tramiteFormulario': null,
-            'facturaId': null,
-            'idVehiculo': null,
-        };
-    }
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+     }
 
     onEnviarTramite() {
         let token = this._loginService.getToken();

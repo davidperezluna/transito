@@ -12,15 +12,6 @@
                 <hr>
                 <div class="row justify-content-center container">
                     <div class="form-group row">
-                        <!-- <div class="col-xs-12 col-lg-6">
-                            <label>Tipo regrabación
-                                <span class="text-danger">*</span>
-                            </label>
-                            <select class="form-control" name="tipoRegrabacionSelected" [(ngModel)]="tipoRegrabacionSelected" required>
-                                <option *ngFor="let tipoRegrabacion of tipoRegrabacionList" [value]="tipoRegrabacion"> {{ tipoRegrabacion }}
-                                </option>
-                            </select>
-                        </div> -->
                         <div class="col-xs-12 col-lg-6">
                             <label>Motivo
                                 <span class="text-danger">*</span>
@@ -31,13 +22,8 @@
                             </select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Nuevo número {{ tipoRegrabacionSelected }}</label>
+                            <label>Nuevo número</label>
                             <input class="form-control" [(ngModel)]="nuevoNumero" name="nuevoNumero" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Sustrato*</label>
-                            <ng-select [multiple]="false" [options]="sustratos" [(ngModel)]="sustratoSelected" required name="sustratoId">
-                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Número de solicitud RUNT</label>
@@ -59,7 +45,6 @@
                     </div>
                 </div>
             </div>
-            <app-new-rnrs-ciudadano (ready)="ready($event)"></app-new-rnrs-ciudadano>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
                 <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>

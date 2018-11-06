@@ -25,7 +25,6 @@ export class NewRnmaCambioCarroceriaComponent implements OnInit {
     public resumen = {};     public datos = {
         'newData': null,
         'oldData': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'facturaId': null,
     };
@@ -39,6 +38,7 @@ export class NewRnmaCambioCarroceriaComponent implements OnInit {
 
     ngOnInit() {
         this.vehiculo.carroceriaId = 4;
+        
         this._CarroceriaService.getCarroceriaSelect().subscribe(
             response => {
                 this.carrocerias = response;

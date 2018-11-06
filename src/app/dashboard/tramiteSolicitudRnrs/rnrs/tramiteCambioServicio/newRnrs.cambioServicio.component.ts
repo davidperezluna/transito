@@ -1,7 +1,4 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitudRnrs.modelo';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
@@ -22,23 +19,23 @@ export class NewRnrsCambioServicioComponent implements OnInit {
     public servicios: any;
     public tramiteFacturaSelected: any;
     public servicioSelected: any;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'newData': null,
         'oldData': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'facturaId': null,
     };
 
     constructor(
         private _ServicioService: ServicioService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() {
         this.vehiculo.servicioId = 4;
+
         this._ServicioService.getServicioSelect().subscribe(
             response => {
                 this.servicios = response;

@@ -28,8 +28,18 @@ public numeroGuia;
 public fechaSalida;
 public numeroRunt;
 public nombreEmpresa;
-public datos: any = null;
 public resumen = {};
+public datos = {
+  'sedeOperativaIdNew': null,
+  'sedeOperativaIdOld': null,
+  'fechaSalida': null,
+  'numeroRunt': null,
+  'numeroGuia': null,
+  'nombreEmpresa': null,
+  'tramiteFormulario': null,
+  'facturaId': null,
+  'vehiculoId': null
+};
 
 constructor(
   private _loginService: LoginService,
@@ -41,23 +51,9 @@ constructor(
   ){}
 
   ngOnInit() {
-    
-      this.datos = {
-        'sedeOperativaIdNew': null,
-        'sedeOperativaIdOld': null,
-        'fechaSalida': null,
-        'numeroRunt': null,
-        'numeroGuia': null,
-        'nombreEmpresa': null,
-        'tramiteFormulario': null,
-        'facturaId': null,
-        'vehiculoId': null};
-
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
       response => {
         this.sedes = response;
-        console.log(this.sedes);
-        
       },
       error => {
         this.errorMessage = <any>error;
@@ -68,33 +64,6 @@ constructor(
         }
       }
     );
-
-    this.tramitesFactura.forEach(tramiteFactura => {
-      if (tramiteFactura.realizado == 1) {
-          if (tramiteFactura.tramitePrecio.tramite.id == 3) {
-              this.tramiteRealizado = tramiteFactura;
-              console.log(this.tramiteRealizado);
-          }
-      }
-  });
-  //consultar tramite solicitud con tramiterealizado.id
-  let token = this._loginService.getToken();
-  if(this.tramiteRealizado != false ){
-    this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
-      response => {
-          this.datos = response.data.datos
-          console.log(response.data.datos);
-      },
-      error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert('Error en la petición');
-          }
-      }
-  );
-  }
   }
   onCancelar(){
     this.ready.emit(true);
@@ -103,7 +72,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected
+    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     
     this._VehiculoService.editSedeOperativaVehiculo(this.vehiculo,token).subscribe(
       response => {

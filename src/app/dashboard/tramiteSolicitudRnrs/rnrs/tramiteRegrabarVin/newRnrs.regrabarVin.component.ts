@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
@@ -17,9 +16,7 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
     @Input() factura: any = null;
     public errorMessage;
     public respuesta;
-    public tramiteFacturaSelected: any; 
-    public sustratos: any;
-    public sustratoSelected: any;
+    public tramiteFacturaSelected: any;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
     public motivoList: string[];
@@ -35,7 +32,6 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
         'numeroRunt': null,
         'documentacion': null,
         'entregada': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'facturaId': null,
     };
@@ -43,27 +39,12 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _SustratoService: SustratoService,
         private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() {
         // this.tipoRegrabacionList = ['Vin', 'Vin', 'Vin', 'VIN'];
         this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
-
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
     }
 
     ready(e:any){
@@ -92,7 +73,6 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
                 this.datos.nuevoNumero = this.nuevoNumero;
                 this.datos.numeroRunt = this.numeroRunt;
                 this.datos.documentacion = this.documentacion;
-                this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
                 this.datos.facturaId = this.factura.id;
                 this.datos.tramiteFormulario = 'rnrs-regrabarvin';
