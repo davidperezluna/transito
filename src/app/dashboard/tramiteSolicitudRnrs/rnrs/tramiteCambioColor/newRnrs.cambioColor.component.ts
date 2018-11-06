@@ -41,30 +41,7 @@ export class NewRnrsCambioColorComponent implements OnInit {
     ) { }
  
     ngOnInit() {
-        this.tramitesFactura.forEach(tramiteFactura => {
-            if (tramiteFactura.realizado == 1) {
-                if (tramiteFactura.tramitePrecio.tramite.id == 15) {
-                    this.tramiteRealizado = tramiteFactura;
-                }
-            }
-        });
-        //consultar tramite solicitud con tramiterealizado.id
         let token = this._loginService.getToken();
-        if(this.tramiteRealizado){
-        this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
-            response => {
-                this.datos = response.data.datos
-                console.log(response.data.datos);
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );}
 
         this._ColorService.select().subscribe(
             response => {
@@ -79,7 +56,6 @@ export class NewRnrsCambioColorComponent implements OnInit {
                 }
             }
         );
-
     }
     
    
