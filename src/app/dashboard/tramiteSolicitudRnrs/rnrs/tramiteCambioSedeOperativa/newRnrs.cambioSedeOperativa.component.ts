@@ -22,7 +22,8 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
     public sedesOperativas: any;
     public tramiteFacturaSelected: any;
     public sedeOperativaSelected: any;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'newData': null,
         'oldData': null,
         'numeroRunt': null,
@@ -33,7 +34,6 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
 
     constructor(
         private _SedeOperativaService: SedeOperativaService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }

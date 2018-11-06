@@ -195,7 +195,7 @@ constructor(
       }
     );
     
-    this._lineaService.index().subscribe(
+    this._lineaService.select().subscribe(
       response => {
         this.lineas = response;
       }, 
