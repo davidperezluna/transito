@@ -1,10 +1,6 @@
 import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitudRnrs.modelo';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { Router } from "@angular/router";
