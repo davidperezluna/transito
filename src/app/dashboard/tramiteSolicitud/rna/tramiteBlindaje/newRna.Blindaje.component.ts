@@ -29,7 +29,8 @@ export class NewRnaBlindajeComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'tipoBlindaje': null,
         'nivelBlindaje': null,
         'empresaBlindadora': null,
@@ -73,5 +74,4 @@ export class NewRnaBlindajeComponent implements OnInit {
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
-
 }
