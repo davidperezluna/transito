@@ -24,19 +24,19 @@
                         <div class="col-xs-12 col-lg-12">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" [(ngModel)]="checkDocumentacionDuplicadoLiencia" class="custom-control-input" id="check-documentacionDuplicadoLiencia" name="check_documentacionDuplicadoLiencia">
-                                <label class="custom-control-label" for="check-documentacionDuplicadoLiencia">Documentación entregada por solicitante</label>
+                                <label class="custom-control-label" for="check-documentacionDuplicadoLiencia">Licencia de transito entregada</label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-lg-12" *ngIf="checkDocumentacionDuplicadoLiencia">
                             <label>Documentación</label>
                             <textarea class="form-control" [(ngModel)]="documentacionDuplicadoLiencia" name="documentacionDuplicadoLiencia" rows="4" required></textarea>
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <!-- <div class="col-xs-12 col-lg-12">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" [(ngModel)]="datos.entregada" class="custom-control-input" id="check-entregada" name="check_entregada">
                                 <label class="custom-control-label" for="check-entregada">Licencia de transito entregada</label>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>

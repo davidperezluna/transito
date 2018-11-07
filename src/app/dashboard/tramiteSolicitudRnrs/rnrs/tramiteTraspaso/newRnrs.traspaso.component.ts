@@ -1,10 +1,6 @@
 import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitudRnrs.modelo';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { Router } from "@angular/router";
@@ -53,7 +49,8 @@ export class NewRnrsTraspasoComponent implements OnInit {
         {'value':2,'label':"Propio"}
     ];
     public tipoIdentificaciones= [ ];
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'propietariosEmpresas': [],
         'propietariosCiudadanos': [],
         'solidario': false,
@@ -65,11 +62,7 @@ export class NewRnrsTraspasoComponent implements OnInit {
     };
 
     constructor(
-        private _ColorService: ColorService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
         private _tipoIdentificacionService: TipoIdentificacionService,
         private _CiudadanoService: CiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,

@@ -57,7 +57,7 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
         private _DefaultService: DefaultService,
     ) { }
 
-    ngOnInit() {      
+    ngOnInit() {       
         
     }
 
@@ -79,8 +79,6 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
                     }
                 }
         }); 
-        // this.datos.tramiteFactura =58;
-        // this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
 
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-certificadotradicion';
