@@ -24,11 +24,13 @@ export class NewRnmaCambioColorComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public colorSelected: any;
     public tramiteRealizado: any;
-    public resumen = {};     public datos = {
-        'newData': null,
-        'oldData': null,
+    
+    public datos = {
+        'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idColor': null,
         'tramiteFormulario': null,
-        'facturaId': null,
     };
 
     constructor(
@@ -86,34 +88,31 @@ export class NewRnmaCambioColorComponent implements OnInit {
         let token = this._loginService.getToken();
 
         this._ColorService.show(token,this.colorSelected).subscribe(
-            color => {
-                    this.vehiculo.combustibleId = this.vehiculo.combustible.id    
-                    this.vehiculo.municipioId = this.vehiculo.municipio.id   
-                    this.vehiculo.lineaId = this.vehiculo.linea.id   
-                    this.vehiculo.colorId = this.colorSelected   
-                    this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-                    this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-                    this.vehiculo.claseId = this.vehiculo.clase.id   
-                    this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this._VehiculoService.editVehiculoColor(this.vehiculo,token).subscribe(
-                    response => {
-                        this.respuesta = response; 
-                        if(this.respuesta.status == 'success'){
-                            this.datos.newData = color.data.nombre;
-                            this.datos.oldData = this.vehiculo.color.nombre;
-                            this.datos.facturaId = this.factura.id;
-                            this.datos.tramiteFormulario = 'rnma-cambiocolor';
-                            this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-                        }
-                        error => {
-                                this.errorMessage = <any>error;
+            colorResponse => {
+                this.datos.idFactura = this.factura.id;
+                this.datos.tramiteFormulario = 'rnma-cambiocolor';
+                this.datos.idColor = this.colorSelected;
+                this.datos.idVehiculo = this.vehiculo.id;
+                this.datos.campos = ['color'];
+                 
+                this._VehiculoService.update(this.datos,token).subscribe(
+                response => { 
+                    if(response.status == 'success'){ 
+                        let resumen = {
+                            'color anterior': this.vehiculo.color.nombre,
+                            'nuevo color': colorResponse.data.nombre,
+                        };
+                        this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
+                    }
+                    error => {
+                            this.errorMessage = <any>error;
 
-                                if(this.errorMessage != null){
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
+                            if(this.errorMessage != null){
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
                             }
-                    }); 
+                        }
+                }); 
                 error => {
                         this.errorMessage = <any>error;
     

@@ -50,6 +50,7 @@ export class NewRnmaBlindajeComponent implements OnInit {
     enviarTramite() {
         this.datos.facturaId = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-blindaje';
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
