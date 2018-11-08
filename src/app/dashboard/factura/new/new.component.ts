@@ -133,7 +133,7 @@ constructor(
     
     let token = this._loginService.getToken();
     
-    this._FuncionarioService.searchLogin(identity,token).subscribe(
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion },token).subscribe(
       response => { 
         if(response.status == 'success'){
           this.sedeOperativa = response.data.sedeOperativa;

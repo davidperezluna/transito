@@ -71,13 +71,13 @@ export class MsvConsecutivoService {
  		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}
 
-	showBySedeConsecutivo(token, datos) {
+	searchLastBySede(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/sede/consecutivo", params, { headers: headers })
-			.map(res => res.json());
-
+		return this._http.post(this.url + "/search/last/sede", params, { headers: headers }).map(
+			res => res.json()
+		);
 	}
 
 	showBySede(token, datos) {

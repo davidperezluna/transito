@@ -1,13 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MsvRegistroIpatService } from '../../services/msvRegistroIpat.service';
 import { MsvConsecutivoService } from '../../services/msvConsecutivo.service';
-import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 import { MsvRegistroIpat } from './msvRegistroIpat.modelo';
-import { Ciudadano } from '../ciudadano/ciudadano.modelo';
-
 import { LoginService } from '../../services/login.service';
-import swal from 'sweetalert2';
 import { MsvConsecutivo } from '../msvConsecutivo/msvConsecutivo.modelo';
+import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -18,7 +15,7 @@ export class MsvRegistroIpatComponent implements OnInit {
   public msvRegistroIpat: MsvRegistroIpat;
   public TramiteLimitacionService:any;
   public errorMessage;
-  public respuesta;
+
   public tramitesInscripcion;
   public consecutivos;
   public formNew = false;
@@ -39,30 +36,26 @@ export class MsvRegistroIpatComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
+
     let token = this._loginService.getToken();
     let identity = this._loginService.getIdentity();
+
     let datos = {
       'identificacionUsuario': identity.identificacion,
     };
+
     this._MsvConsecutivoService.showBySede(token, datos).subscribe(
       response => {
         if (response) {
-
           this.consecutivos = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
+          swal.close();
         }
       },
       error => {
@@ -75,6 +68,7 @@ export class MsvRegistroIpatComponent implements OnInit {
       }
     );
   }
+
   iniciarTabla() {
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -130,7 +124,6 @@ export class MsvRegistroIpatComponent implements OnInit {
               confirmButtonColor: '#15d4be',
             })
             this.table.destroy();
-            this.respuesta = response;
             this.ngOnInit();
           },
           error => {

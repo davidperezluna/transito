@@ -45,6 +45,7 @@ import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRest
 import { CvCfgTipoMedidaCautelarModule } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.module';
 import { CvMedidaCautelarModule } from './cvMedidaCautelar/cvMedidaCautelar.module';
 
+import { VhloCfgTipoAlertaModule } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.module';
 import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
 import { VhloCfgModalidadTransporteModule } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.module';
@@ -338,6 +339,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CvCfgInteresModule,
       CvCfgPorcentajeInicialModule,
       CvAcuerdoPagoModule,
+      VhloCfgTipoAlertaModule,
       VhloCfgCdaModule,
       VhloCfgOrigenRegistroModule,
       VhloCfgModalidadTransporteModule,
