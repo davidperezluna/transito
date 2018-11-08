@@ -124,7 +124,7 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <form #formNew="ngForm">
+                <form #formActaNew="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                             <label>fecha <strong class="text-danger">*</strong></label>
@@ -151,7 +151,7 @@
                         <i class="fa fa-times"></i>
                         Cancel
                     </button>
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onEnviar()" [disabled]="formActaNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>
