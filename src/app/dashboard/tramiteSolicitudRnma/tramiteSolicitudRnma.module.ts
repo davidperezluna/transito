@@ -28,8 +28,6 @@ import { NewRnmaCiudadanoComponent } from './newRnmaCiudadano/newRnmaCiudadano.c
 import { NewRnmaSustratoComponent } from './newRnmaSustrato/newRnmaSustrato.component';
 import { NewRnmaTraspasoComponent } from './Rnma/tramiteTraspaso/newRnma.traspaso.component';
 import { NewRnmaMatricualaInicialComponent } from './Rnma/tramiteMatriculaInicial/newRnma.matriculaInicial.component';
-import { NewRnmaTransformacionComponent } from './Rnma/tramiteTransformacion/newRnma.transformacion.component';
-import { NewRnmaCambioConjuntoComponent } from './Rnma/tramiteCambioConjunto/newRnma.cambioConjunto.component';
 import { NewRnmaRadicadoCuentaComponent } from './Rnma/tramiteRadicadoCuenta/newRnma.radicadoCuenta.component';
 import { NewRnmaRegistroMaquinariaComponent } from './Rnma/tramiteRegistroMaquinaria/newRnma.registroMaquinaria.component';
 import { NewTrasladoComponent } from './rnma/tramiteTraslado/newTraslado.component';
@@ -70,8 +68,6 @@ import { SelectModule } from 'angular2-select';
         NewRnmaCiudadanoComponent,
         NewRnmaSustratoComponent,
         NewRnmaMatricualaInicialComponent,
-        NewRnmaTransformacionComponent,
-        NewRnmaCambioConjuntoComponent,
         NewRnmaRadicadoCuentaComponent,
         NewRnmaRegistroMaquinariaComponent,
         NewTrasladoComponent,
@@ -106,8 +102,6 @@ import { SelectModule } from 'angular2-select';
         NewRnmaCiudadanoComponent,
         NewRnmaSustratoComponent,
         NewRnmaMatricualaInicialComponent,
-        NewRnmaTransformacionComponent,
-        NewRnmaCambioConjuntoComponent,
         NewRnmaRadicadoCuentaComponent,
         NewRnmaRegistroMaquinariaComponent,
         NewTrasladoComponent,
