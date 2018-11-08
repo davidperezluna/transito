@@ -122,7 +122,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
 
         let identity = this._LoginService.getIdentity();
 
-        this._MpersonalFuncionarioService.searchLogin(identity, token).subscribe(
+        this._MpersonalFuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.datos.sedeOperativaId = response.data.sedeOperativa.id;

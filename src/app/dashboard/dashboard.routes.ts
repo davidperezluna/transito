@@ -36,6 +36,7 @@ import { CfgSvSenialEstadoRoutes } from './cfgSvSenialEstado/cfgSvSenialEstado.r
 import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
 import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.routes';
 
+import { VhloCfgTipoAlertaRoutes } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.routes';
 import { VhloCfgCdaRoutes } from './vhloCfgCda/vhloCfgCda.routes';
 import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
 import { VhloCfgModalidadTransporteRoutes } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.routes';
@@ -280,6 +281,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgSvSenialEstadoRoutes,
       ...MsvSenialInventarioRoutes,
       ...CfgSvUnidadMedidaRoutes,
+      ...VhloCfgTipoAlertaRoutes,
       ...VhloCfgCdaRoutes,
       ...VhloCfgOrigenRegistroRoutes,
       ...VhloCfgModalidadTransporteRoutes,
