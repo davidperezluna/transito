@@ -61,7 +61,6 @@ export class NewComponent implements OnInit {
   public consecutivo: any = null;
   public ipatEncontrado: any = null;
   public ipats = false;
-  public identity: any;
 
   public gravedades: any;
   public clasesAccidente: any;
@@ -163,7 +162,6 @@ export class NewComponent implements OnInit {
     private _ClaseAccidenteService: CfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
     private _ObjetoFijoService: CfgObjetoFijoService,
-
     private _SedeOperativaService: SedeOperativaService,
     private _AseguradoraService: SvCfgAseguradoraService,
     private _AreaService: SvCfgAreaService,
@@ -198,109 +196,623 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
     this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    this._LugarImpactoService.index().subscribe(
-      response => {
-        this.lugaresImpacto = response.data;
-        this.lugaresImpacto.forEach(lugarImpacto => {
-          this.itemStringsLeft.push(lugarImpacto.nombre);
-        });
-        this.listado = true;
-      },
-      error => {
-        this.errorMessage = <any>error;
+    
+    let token = this._LoginService.getToken();
+    let identity = this._LoginService.getIdentity();
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+      responseFuncionario => {
+        if (responseFuncionario.status == 'success') {
+          this.sedeOperativa = responseFuncionario.data.sedeOperativa;
+
+          /* ==================== */
+          this._MsvConsecutivoService.searchLastBySede({ 'sedeOperativa': this.sedeOperativa }, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.consecutivo = response.data;
+
+                this._GravedadService.getGravedadSelect().subscribe(
+                  response => {
+                    this.gravedades = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
+                  response => {
+                    this.clasesAccidente = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ControlViaService.getControlViaSemaforoSelect().subscribe(
+                  response => {
+                    this.estadosSemaforo = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ChoqueConService.getChoqueConSelect().subscribe(
+                  response => {
+                    this.choquesCon = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ObjetoFijoService.getObjetoFijoSelect().subscribe(
+                  response => {
+                    this.objetosFijos = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+                  response => {
+                    this.sedesOperativas = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._AreaService.getAreaSelect().subscribe(
+                  response => {
+                    this.areas = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._AseguradoraService.getAseguradoraSelect().subscribe(
+                  response => {
+                    this.aseguradoras = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._SectorService.getSectorSelect().subscribe(
+                  response => {
+                    this.sectores = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ZonaService.getZonaSelect().subscribe(
+                  response => {
+                    this.zonas = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._FallaService.getFallaSelect().subscribe(
+                  response => {
+                    this.fallas = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._DisenioService.getDisenioSelect().subscribe(
+                  response => {
+                    this.disenios = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._EstadoTiempoService.getEstadoTiempoSelect().subscribe(
+                  response => {
+                    this.estadosTiempo = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._GeometriaService.getGeometriaSelect().subscribe(
+                  response => {
+                    this.geometrias = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._UtilizacionService.getUtilizacionSelect().subscribe(
+                  response => {
+                    this.utilizaciones = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._CalzadaCarrilService.getCalzadaCarrilSelect().subscribe(
+                  response => {
+                    this.calzadasCarriles = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._MaterialService.getMaterialSelect().subscribe(
+                  response => {
+                    this.materiales = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._EstadoViaService.getEstadoViaSelect().subscribe(
+                  response => {
+                    this.estadosVia = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._CondicionViaService.getCondicionViaSelect().subscribe(
+                  response => {
+                    this.condicionesVia = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._IluminacionService.getIluminacionSelect().subscribe(
+                  response => {
+                    this.iluminaciones = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._EstadoIluminacionService.getEstadoIluminacionSelect().subscribe(
+                  response => {
+                    this.estadosIluminacion = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._VisualService.getVisualSelect().subscribe(
+                  response => {
+                    this.visuales = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._VisualDisminuidaService.getVisualDisminuidaSelect().subscribe(
+                  response => {
+                    this.visualesDisminuidas = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ControlViaService.getControlViaSemaforoSelect().subscribe(
+                  response => {
+                    this.estadosSemaforo = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ControlViaService.getControlViaDelineadorPisoSelect().subscribe(
+                  response => {
+                    this.delineadoresPiso = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ResultadoExamenService.getResultadoExamenSelect().subscribe(
+                  response => {
+                    this.resultadosExamen = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._GradoExamenService.getGradoExamenSelect().subscribe(
+                  response => {
+                    this.gradosExamen = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._LugarImpactoService.getLugarImpactoSelect().subscribe(
+                  response => {
+                    this.lugaresImpacto = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._HospitalService.getHospitalSelect().subscribe(
+                  response => {
+                    this.hospitales = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._EmpresaService.getEmpresaSelect().subscribe(
+                  response => {
+                    this.empresas = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ClaseService.getClaseSelect().subscribe(
+                  response => {
+                    this.clases = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ServicioService.getServicioSelect().subscribe(
+                  response => {
+                    this.servicios = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._HipotesisService.getHipotesisSelect().subscribe(
+                  response => {
+                    this.hipotesis = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._TipoVictimaService.getTipoVictimaSelect().subscribe(
+                  response => {
+                    this.tiposVictima = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+
+                this._GravedadVictimaService.getGravedadVictimaSelect().subscribe(
+                  response => {
+                    this.gravedadesVictima = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+
+                this._LugarImpactoService.index().subscribe(
+                  response => {
+                    this.lugaresImpacto = response.data;
+                    this.lugaresImpacto.forEach(lugarImpacto => {
+                      this.itemStringsLeft.push(lugarImpacto.nombre);
+                    });
+                    this.listado = true;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+
+                this._FallaService.index().subscribe(
+                  response => {
+                    this.fallas = response.data;
+                    this.fallas.forEach(falla => {
+                      this.itemStringsLeftFalla.push(falla.nombre);
+                    });
+                    this.listado = true;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+
+                this._EstadoTiempoService.index().subscribe(
+                  response => {
+                    this.estadosTiempo = response.data;
+                    this.estadosTiempo.forEach(estadoTiempo => {
+                      this.itemStringsLeftClima.push(estadoTiempo.nombre);
+                    });
+                    this.listadoClima = true;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+
+                this._ControlViaService.indexSenialVertical().subscribe(
+                  response => {
+                    this.senialesVerticales = response.data;
+                    this.senialesVerticales.forEach(senialVertical => {
+                      this.itemStringsLeftSenialVertical.push(senialVertical.nombre);
+                    });
+                    this.listadoSenialVertical = true;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+
+                this._ControlViaService.indexSenialHorizontal().subscribe(
+                  response => {
+                    this.senialesHorizontales = response.data;
+                    this.senialesHorizontales.forEach(senialHorizontal => {
+                      this.itemStringsLeftSenialHorizontal.push(senialHorizontal.nombre);
+                    });
+                    this.listadoSenialHorizontal = true;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+
+                this._ControlViaService.indexReductorVelocidad().subscribe(
+                  response => {
+                    this.reductoresVelocidad = response.data;
+                    this.reductoresVelocidad.forEach(reductorVelocidad => {
+                      this.itemStringsLeftReductorVelocidad.push(reductorVelocidad.nombre);
+                    });
+                    this.listadoReductorVelocidad = true;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+              } else {
+                swal({
+                  title: 'Alerta!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+          /* ==================== */
+
+        } else {
+          swal({
+            title: 'Alerta!',
+            text: responseFuncionario.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
       }
     );
-    this._FallaService.index().subscribe(
-      response => {
-        this.fallas = response.data;
-        this.fallas.forEach(falla => {
-          this.itemStringsLeftFalla.push(falla.nombre);
-        });
-        this.listado = true;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._EstadoTiempoService.index().subscribe(
-      response => {
-        this.estadosTiempo = response.data;
-        this.estadosTiempo.forEach(estadoTiempo => {
-          this.itemStringsLeftClima.push(estadoTiempo.nombre);
-        });
-        this.listadoClima = true;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ControlViaService.indexSenialVertical().subscribe(
-      response => {
-        this.senialesVerticales = response.data;
-        this.senialesVerticales.forEach(senialVertical => {
-          this.itemStringsLeftSenialVertical.push(senialVertical.nombre);
-        });
-        this.listadoSenialVertical = true;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ControlViaService.indexSenialHorizontal().subscribe(
-      response => {
-        this.senialesHorizontales = response.data;
-        this.senialesHorizontales.forEach(senialHorizontal => {
-          this.itemStringsLeftSenialHorizontal.push(senialHorizontal.nombre);
-        });
-        this.listadoSenialHorizontal = true;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._ControlViaService.indexReductorVelocidad().subscribe(
-      response => {
-        this.reductoresVelocidad = response.data;
-        this.reductoresVelocidad.forEach(reductorVelocidad => {
-          this.itemStringsLeftReductorVelocidad.push(reductorVelocidad.nombre);
-        });
-        this.listadoReductorVelocidad = true;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
   }
 
   onCancelar() {
@@ -319,7 +831,7 @@ export class NewComponent implements OnInit {
       { 'senialesVerticales': this.itemStringsRightSenialVertical },
       { 'senialesHorizontales': this.itemStringsRightSenialHorizontal },
       { 'reductoresVelocidad': this.itemStringsRightReductorVelocidad },
-      { 'fallas': this.itemStringsRightFalla },
+      { 'fallas': this.itemStringsRightFalla }
     ];
     
     this._MsvRegistroIpatService.register(data, token).subscribe(
@@ -328,7 +840,7 @@ export class NewComponent implements OnInit {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
@@ -364,512 +876,7 @@ export class NewComponent implements OnInit {
         result.dismiss === swal.DismissReason.timer
       ) {
       }
-    })
-
-    let token = this._LoginService.getToken();
-    this.identity = this._LoginService.getIdentity();
-    let datos = {
-      'nroIpat': this.nroIpat,
-      'identificacionUsuario': this.identity.identificacion,
-    };
-    this._MsvConsecutivoService.showBySedeConsecutivo(token, datos).subscribe(
-      response => {
-        if (response.status == 'success') {
-
-          this.consecutivo = response.data;
-          this._GravedadService.getGravedadSelect().subscribe(
-            response => {
-              this.gravedades = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
-            response => {
-              this.clasesAccidente = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ControlViaService.getControlViaSemaforoSelect().subscribe(
-            response => {
-              this.estadosSemaforo = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ChoqueConService.getChoqueConSelect().subscribe(
-            response => {
-              this.choquesCon = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ObjetoFijoService.getObjetoFijoSelect().subscribe(
-            response => {
-              this.objetosFijos = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-            response => {
-              this.sedesOperativas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._AreaService.getAreaSelect().subscribe(
-            response => {
-              this.areas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._AseguradoraService.getAseguradoraSelect().subscribe(
-            response => {
-              this.aseguradoras = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._SectorService.getSectorSelect().subscribe(
-            response => {
-              this.sectores = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ZonaService.getZonaSelect().subscribe(
-            response => {
-              this.zonas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._FallaService.getFallaSelect().subscribe(
-            response => {
-              this.fallas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._DisenioService.getDisenioSelect().subscribe(
-            response => {
-              this.disenios = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._EstadoTiempoService.getEstadoTiempoSelect().subscribe(
-            response => {
-              this.estadosTiempo = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._GeometriaService.getGeometriaSelect().subscribe(
-            response => {
-              this.geometrias = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._UtilizacionService.getUtilizacionSelect().subscribe(
-            response => {
-              this.utilizaciones = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._CalzadaCarrilService.getCalzadaCarrilSelect().subscribe(
-            response => {
-              this.calzadasCarriles = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._MaterialService.getMaterialSelect().subscribe(
-            response => {
-              this.materiales = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._EstadoViaService.getEstadoViaSelect().subscribe(
-            response => {
-              this.estadosVia = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._CondicionViaService.getCondicionViaSelect().subscribe(
-            response => {
-              this.condicionesVia = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._IluminacionService.getIluminacionSelect().subscribe(
-            response => {
-              this.iluminaciones = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._EstadoIluminacionService.getEstadoIluminacionSelect().subscribe(
-            response => {
-              this.estadosIluminacion = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._VisualService.getVisualSelect().subscribe(
-            response => {
-              this.visuales = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._VisualDisminuidaService.getVisualDisminuidaSelect().subscribe(
-            response => {
-              this.visualesDisminuidas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ControlViaService.getControlViaSemaforoSelect().subscribe(
-            response => {
-              this.estadosSemaforo = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ControlViaService.getControlViaDelineadorPisoSelect().subscribe(
-            response => {
-              this.delineadoresPiso = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ResultadoExamenService.getResultadoExamenSelect().subscribe(
-            response => {
-              this.resultadosExamen = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._GradoExamenService.getGradoExamenSelect().subscribe(
-            response => {
-              this.gradosExamen = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._LugarImpactoService.getLugarImpactoSelect().subscribe(
-            response => {
-              this.lugaresImpacto = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._HospitalService.getHospitalSelect().subscribe(
-            response => {
-              this.hospitales = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._EmpresaService.getEmpresaSelect().subscribe(
-            response => {
-              this.empresas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ClaseService.getClaseSelect().subscribe(
-            response => {
-              this.clases = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ServicioService.getServicioSelect().subscribe(
-            response => {
-              this.servicios = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._HipotesisService.getHipotesisSelect().subscribe(
-            response => {
-              this.hipotesis = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._TipoVictimaService.getTipoVictimaSelect().subscribe(
-            response => {
-              this.tiposVictima = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._GravedadVictimaService.getGravedadVictimaSelect().subscribe(
-            response => {
-              this.gravedadesVictima = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-        } else {
-          swal({
-            title: 'Alerta!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      });
-    this._FuncionarioService.searchLogin(this.identity, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.sedeOperativa = response.data.sedeOperativa;
-        } else {
-          swal({
-            title: 'Alerta!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      });
+    });
   }
 
 
