@@ -5,7 +5,7 @@ import { VehiculoService } from '../../../../services/vehiculo.service';
 import { CiudadanoVehiculoService} from '../../../../services/ciudadanoVehiculo.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
-
+ 
 
 @Component({
     selector: 'appRna-traspaso-indeterminada',

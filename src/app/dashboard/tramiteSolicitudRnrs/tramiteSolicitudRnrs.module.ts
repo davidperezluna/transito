@@ -33,6 +33,7 @@ import { NewRnrsRegistroMaquinariaComponent } from './Rnrs/tramiteRegistroMaquin
 import { NewTrasladoComponent } from './Rnrs/tramiteTraslado/newRnrsTraslado.component';
 import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
 import { NewRnrsTraspasoIndeterminadaComponent } from './Rnrs/tramiteTraspasoIndeterminada/newRnrs.traspasoIndeterminada.component';
+import { NewRnrsTransformacionComponent } from './rnrs/tramiteTransformacion/newRnrs.transformacion.component';
 import { NewRnrsTramiteInscripcionAlertaPrendaComponent } from './rnrs/tramiteInscripcionAlertaPrenda/newRnrs.inscripcionAlertaPrenda.component';
 import { NewRnrsTramiteLevantamientoAlertaPrendaComponent } from './rnrs/tramiteLevantamientoAlertaPrenda/newRnrs.levantamientoAlertaPrenda.component';
 import { EditComponent } from './edit/edit.component';
@@ -73,7 +74,8 @@ import { SelectModule } from 'angular2-select';
         NewTrasladoComponent,
         NewRnrsTraspasoIndeterminadaComponent,
         NewRnrsTramiteInscripcionAlertaPrendaComponent,
-        NewRnrsTramiteLevantamientoAlertaPrendaComponent
+        NewRnrsTramiteLevantamientoAlertaPrendaComponent,
+        NewRnrsTransformacionComponent
     ],
     exports: [
         TramiteSolicitudRnrsComponent,
@@ -107,7 +109,8 @@ import { SelectModule } from 'angular2-select';
         NewTrasladoComponent,
         NewRnrsTraspasoIndeterminadaComponent,
         NewRnrsTramiteInscripcionAlertaPrendaComponent,
-        NewRnrsTramiteLevantamientoAlertaPrendaComponent
+        NewRnrsTramiteLevantamientoAlertaPrendaComponent,
+        NewRnrsTransformacionComponent
     ],
     providers:[TramiteSolicitudService,EmpresaService,TramiteTrasladoService]
 })
