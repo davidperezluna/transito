@@ -82,7 +82,7 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
       this.codigoOrganismo = this.datos.codigoOrganismo;
       this.tipoServicio = this.datos.tipoServicio;
       this.date = this.datos.fecha;
-    })  
+    });  
     this.datos.nombreApoderado = this.ciudadano.usuario.primerNombre+" "+this.ciudadano.usuario.segundoNombre+" "+this.ciudadano.usuario.primerApellido;
     this.datos.tipoDocApoderado = this.ciudadano.usuario.tipoIdentificacion.nombre;
     this.datos.numeroDocumento = this.ciudadano.usuario.identificacion;   
