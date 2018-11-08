@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() vhloCfgTipoAlerta:any = null;
+@Input() tipoAlerta:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
@@ -19,13 +19,16 @@ constructor(
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){  }
+  ngOnInit() {  }
 
-  onCancelar(){ this.ready.emit(true); }
+  onCancelar(){ 
+    this.ready.emit(true); 
+  }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._VhloCfgTipoAlertaService.edit(this.vhloCfgTipoAlerta, token).subscribe(
+
+		this._VhloCfgTipoAlertaService.edit(this.tipoAlerta, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

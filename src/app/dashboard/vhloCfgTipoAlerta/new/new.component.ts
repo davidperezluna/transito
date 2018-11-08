@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public vhloCfgTipoAlerta: VhloCfgTipoAlerta;
+public tipoAlerta: VhloCfgTipoAlerta;
 public errorMessage;
 public respuesta;
 
@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vhloCfgTipoAlerta = new VhloCfgTipoAlerta(null, null);
+    this.tipoAlerta = new VhloCfgTipoAlerta(null, null);
   }
   
   onCancelar(){
@@ -30,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._VhloCfgTipoAlertaService.register(this.vhloCfgTipoAlerta,token).subscribe(
+		this._VhloCfgTipoAlertaService.register(this.tipoAlerta,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

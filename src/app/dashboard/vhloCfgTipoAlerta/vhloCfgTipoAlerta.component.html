@@ -25,18 +25,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let vhloCfgTipoAlerta of vhloCfgTipoAlertas; let i = index">
+                <tr class="odd" *ngFor="let tipoAlerta of tipoAlertas; let i = index">
                   <td >{{ i + 1 }}</td>
-                  <td >{{ vhloCfgTipoAlerta.nombre }}</td>
+                  <td >{{ tipoAlerta.nombre }}</td>
                   <td>
-                    <div class="btn-group" *ngIf="vhloCfgTipoAlerta.gestionable">
-                      <button (click)="onEdit(vhloCfgTipoAlerta)" class="btn btn-xs btn-info" type="button">
-                        <i class="fa fa-edit"></i>
-                        Editar
+                    <div class="btn-group">
+                      <button (click)="onEdit(tipoAlerta)" class="btn btn-xs btn-primary" type="button">
+                        <i class="fa fa-pencil"></i>
                       </button> 
-                      <button (click)="onDelete(vhloCfgTipoAlerta.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(tipoAlerta.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
-                        Eliminar
                       </button> 
                     </div>
                   </td>
@@ -47,6 +45,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [vhloCfgTipoAlerta]="vhloCfgTipoAlerta" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [tipoAlerta]="tipoAlerta" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

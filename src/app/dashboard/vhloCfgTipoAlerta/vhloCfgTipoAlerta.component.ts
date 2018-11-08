@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VhloCfgTipoAlertaService } from '../../services/vhloCfgTipoAlerta.service';
 import { LoginService } from '../../services/login.service';
-import { VhloCfgTipoAlerta } from './vhloCfgTipoAlerta.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -18,7 +17,7 @@ export class VhloCfgTipoAlertaComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any;
-  public tipoAlerta: VhloCfgTipoAlerta;
+  public tipoAlerta: any;
 
   constructor(
     private _VhloCfgTipoAlertaService: VhloCfgTipoAlertaService,
