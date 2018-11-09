@@ -24,6 +24,8 @@ import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.rout
 
 import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.routes';
 
+import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
+import { CvLcCfgRestriccionRoutes } from './cvLcCfgRestriccion/cvLcCfgRestriccion.routes';
 import { CvCfgInteresRoutes } from './cvCfgInteres/cvCfgInteres.routes';
 import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.routes';
 import { CvAcuerdoPagoRoutes } from './cvAcuerdoPago/cvAcuerdoPago.routes';
@@ -271,6 +273,8 @@ export const DashboardRoutes: Route[] = [
       ...CfgTipoInfractorRoutes,
       ...ComparendoRoutes,
       ...CfgAdmFormatoTipoRoutes,
+      ...CvLcCfgMotivoRoutes,
+      ...CvLcCfgRestriccionRoutes,
       ...CvCfgInteresRoutes,
       ...CvCfgPorcentajeInicialRoutes,
       ...CvAcuerdoPagoRoutes,

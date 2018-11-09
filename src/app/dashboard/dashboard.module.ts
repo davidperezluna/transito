@@ -38,6 +38,8 @@ import { CfgSvSenialColorModule } from './cfgSvSenialColor/cfgSvSenialColor.modu
 import { CfgSvSenialEstadoModule } from './cfgSvSenialEstado/cfgSvSenialEstado.module';
 import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.module';
 
+import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
+import { CvLcCfgRestriccionModule } from './cvLcCfgRestriccion/cvLcCfgRestriccion.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
@@ -336,6 +338,8 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgSvSenialColorModule,
       CfgSvSenialEstadoModule,
       CfgSvUnidadMedidaModule,
+      CvLcCfgMotivoModule,
+      CvLcCfgRestriccionModule,
       CvCfgInteresModule,
       CvCfgPorcentajeInicialModule,
       CvAcuerdoPagoModule,
