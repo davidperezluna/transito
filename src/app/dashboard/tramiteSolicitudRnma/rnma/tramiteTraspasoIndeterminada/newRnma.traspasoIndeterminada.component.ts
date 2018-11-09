@@ -3,6 +3,7 @@ import { LoginService } from '../../../../services/login.service';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { CiudadanoVehiculoService} from '../../../../services/ciudadanoVehiculo.service';
+import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
@@ -35,6 +36,12 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
   public tipoSelected;
   public viewApoderado: boolean;
   public sinRegistro = "SIN REGISTRO";
+  public acta = {
+    'fecha':null,
+    'numero':null,
+    'tramiteSolicitud':null,
+    'entidadJudicial':null,
+  }
   public tipos =[
     {'value': "Declaración",
     'label': "Declaración"},
@@ -43,7 +50,7 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
   public resumen = {};  
 
   constructor(
-    private _TramiteSolicitudService: TramiteSolicitudService,
+    private _CfgEntidadJudicialService: CfgEntidadJudicialService,
     private _loginService: LoginService,
     private _VehiculoService: VehiculoService,
     private _CiudadanoVehiculoService: CiudadanoVehiculoService,
@@ -82,7 +89,7 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
       this.codigoOrganismo = this.datos.codigoOrganismo;
       this.tipoServicio = this.datos.tipoServicio;
       this.date = this.datos.fecha;
-    })  
+    });  
     this.datos.nombreApoderado = this.ciudadano.usuario.primerNombre+" "+this.ciudadano.usuario.segundoNombre+" "+this.ciudadano.usuario.primerApellido;
     this.datos.tipoDocApoderado = this.ciudadano.usuario.tipoIdentificacion.nombre;
     this.datos.numeroDocumento = this.ciudadano.usuario.identificacion;   
@@ -112,22 +119,42 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
     let token = this._loginService.getToken();       
       this.datos.facturaId = this.factura.id;
       this.datos.tramiteFormulario = 'rnma-trapasoindeterminada'
-      this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
       this.datos.personaTraslado = this.sinRegistro;
-      console.log(this.datos.solicitanteId);
-      console.log(this.datos.vehiculoId);
       
       this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token,this.datos).subscribe(
         response => {
+          // _CfgEntidadJudicialService
+          // this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+ 
           this.respuesta = response; 
           if(this.respuesta.status == 'success'){
-            swal({
-              title: 'Perfecto!',
-              text: 'El registro se ha modificado con éxito',
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            })
-          }
+            // this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
+            //   response => {
+            //     this.respuesta = response;
+            //     if (this.respuesta.status == 'success') {
+            //       swal({
+            //         title: 'Perfecto!',
+            //         text: 'Registro exitoso!',
+            //         type: 'success',  
+            //         confirmButtonText: 'Aceptar'
+            //       })
+            //     } else {
+            //       swal({
+            //         title: 'Error!',
+            //         text: 'El tramiteSolicitud ya se encuentra registrada',
+            //         type: 'error',
+            //         confirmButtonText: 'Aceptar'
+            //       })
+            //     }
+            //     error => {
+            //       this.errorMessage = <any>error;
+            //       if (this.errorMessage != null) {
+            //         console.log(this.errorMessage);
+            //         alert("Error en la petición");
+            //       }
+            //     }
+            //   });
+            }
           error => {
                   this.errorMessage = <any>error;
 

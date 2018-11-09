@@ -72,8 +72,7 @@ export class NewRnmaCambioCombustibleComponent implements OnInit {
                     this.vehiculo.servicioId = this.vehiculo.servicio.id 
                     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
                     response => {
-                        this.respuesta = response; 
-                        if(this.respuesta.status == 'success'){
+                        if(response.status == 'success'){
                             this.datos.newData = combustible.data.nombre;
                             this.datos.oldData = this.vehiculo.combustible.nombre;
                             this.datos.facturaId = this.factura.id;
