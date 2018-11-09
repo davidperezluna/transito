@@ -82,7 +82,7 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         'tipoAlerta': [],
         'gradoAlerta': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'vehiculoPlaca': null,
     };
     public tipoIdentificaciones = [];
@@ -166,7 +166,7 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-levantamientoprenda';
                
         this._VehiculoAcreedorService.deleteAcreedor(this.datos, token).subscribe(

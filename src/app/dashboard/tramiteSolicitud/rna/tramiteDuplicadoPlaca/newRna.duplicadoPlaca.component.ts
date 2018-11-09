@@ -30,7 +30,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
         'entregada': null,
         'sustrato': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -50,7 +50,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-duplicadoplaca';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }

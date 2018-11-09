@@ -4,6 +4,6 @@ export class FacturaInsumo{
 		public entregado: boolean,
 		public insumoId: number,
 		public ciudadanoId: number,
-		public facturaId: number,
+		public idFactura: number,
 	){}
 }

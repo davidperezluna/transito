@@ -61,7 +61,7 @@ export class NewRnrsMatricualaInicialComponent implements OnInit {
         'sustrato': null,
         'numeroLicencia': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -101,7 +101,7 @@ export class NewRnrsMatricualaInicialComponent implements OnInit {
         let token = this._loginService.getToken(); 
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.facturaId = this.factura.id;
+                this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rnrs-matriculainicial'; 
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             },

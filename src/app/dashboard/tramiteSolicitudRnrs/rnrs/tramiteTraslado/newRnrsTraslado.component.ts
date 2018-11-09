@@ -37,7 +37,7 @@ public datos = {
   'numeroGuia': null,
   'nombreEmpresa': null,
   'tramiteFormulario': null,
-  'facturaId': null,
+  'idFactura': null,
   'vehiculoId': null
 };
 
@@ -80,7 +80,7 @@ constructor(
           if(this.respuesta.status == 'success'){
               this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
               this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
-              this.datos.facturaId = this.factura.id;
+              this.datos.idFactura = this.factura.id;
               this.datos.tramiteFormulario = 'rnrs-traslado';
               this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
               this.datos.vehiculoId = this.vehiculo.id;

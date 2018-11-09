@@ -37,7 +37,7 @@ export class NewRpcccSustratoComponent implements OnInit {
         'sustrato': null,
         'solicitanteId': null,
         'vehiculoId': null,
-        'facturaId': null,
+        'idFactura': null,
     }
     
     constructor(
@@ -82,7 +82,7 @@ export class NewRpcccSustratoComponent implements OnInit {
         let token = this._loginService.getToken();
         
         this.datos.entregada = this.tarjetaEntregada;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
 
         // if (this.sustrato.impresion) {
         //    this.sustrato.estado = 'Utilizado' 

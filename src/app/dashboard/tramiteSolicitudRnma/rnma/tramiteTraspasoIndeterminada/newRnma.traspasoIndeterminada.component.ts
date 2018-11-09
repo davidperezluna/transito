@@ -68,7 +68,7 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
       'numeroDocumento': null,
       'solicitanteId': null,
       'tramiteFormulario': null,
-      'facturaId': null,
+      'idFactura': null,
       'personaTraslado': null};
       
       this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
@@ -117,7 +117,7 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
 
   onEnviar(){
     let token = this._loginService.getToken();       
-      this.datos.facturaId = this.factura.id;
+      this.datos.idFactura = this.factura.id;
       this.datos.tramiteFormulario = 'rnma-trapasoindeterminada'
       this.datos.personaTraslado = this.sinRegistro;
       

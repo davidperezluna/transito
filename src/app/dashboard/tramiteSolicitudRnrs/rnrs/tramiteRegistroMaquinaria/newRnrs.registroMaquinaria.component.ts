@@ -118,7 +118,7 @@ public resumen = {};     public datos = {
   'origenVehiculo': null,
   'subpartidaArancelaria': null,
   'tramiteFormulario': null,
-  'facturaId': null,
+  'idFactura': null,
   
 };
 
@@ -257,7 +257,7 @@ constructor(
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.datos.numeroMotor = this.vehiculo.motor;
-          this.datos.facturaId = this.factura.id;
+          this.datos.idFactura = this.factura.id;
           this.datos.tramiteFormulario = 'rnrs-registromaquinaria';
           this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
         }else{

@@ -27,7 +27,7 @@ export class NewRnaCambioConjuntoComponent implements OnInit {
         'oldData': null,
         'tipoPotenciacion': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'descricion': null,
     };
     public tiposPotenciacion = [
@@ -68,7 +68,7 @@ export class NewRnaCambioConjuntoComponent implements OnInit {
                 this.datos.oldData = this.vehiculo.modelo;
                 this.datos.tipoPotenciacion = this.descricion;
                 this.datos.descricion = this.tipoPotenciacionSelect;
-                this.datos.facturaId = this.factura.id;
+                this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-cambioconjunto'; 
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen}); 
             }

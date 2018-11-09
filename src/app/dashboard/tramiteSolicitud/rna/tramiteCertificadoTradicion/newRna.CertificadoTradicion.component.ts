@@ -44,7 +44,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         'certificadoEntregada': null,
         'entregado': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -64,7 +64,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     enviarTramite() {
         let token = this._loginService.getToken();
       
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-certificadotradicion';
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;

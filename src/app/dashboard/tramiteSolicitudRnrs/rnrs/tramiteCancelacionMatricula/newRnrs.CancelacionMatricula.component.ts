@@ -43,7 +43,7 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
         'nombreDesintegradora': null,
         'fechaHechosDesintegracion': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(

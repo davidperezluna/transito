@@ -45,7 +45,7 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
         'certificadoEntregada': null,
         'entregado': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -80,7 +80,7 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
                 }
         }); 
 
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-certificadotradicion';
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.datos.entregado = this.ciudadanoId;

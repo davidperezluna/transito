@@ -61,7 +61,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         'sustrato': null,
         'numeroLicencia': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -101,7 +101,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         let token = this._loginService.getToken(); 
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.facturaId = this.factura.id;
+                this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-traspaso';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }, 

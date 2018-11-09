@@ -27,7 +27,7 @@ export class NewRnrsCambioCarroceriaComponent implements OnInit {
         'oldData': null,
         'sustrato': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -77,7 +77,7 @@ export class NewRnrsCambioCarroceriaComponent implements OnInit {
                         if(this.respuesta.status == 'success'){
                             this.datos.newData = carroceria.data.nombre;
                             this.datos.oldData = this.vehiculo.carroceria.nombre;
-                            this.datos.facturaId = this.factura.id;
+                            this.datos.idFactura = this.factura.id;
                             this.datos.tramiteFormulario = 'rnrs-cambiocarroceria';
                             this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                         }

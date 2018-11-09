@@ -29,7 +29,7 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
         'numeroRunt': null,
         'sustrato': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -71,7 +71,7 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
                     this.vehiculo.combustibleId = this.vehiculo.combustible.id   
                     this.vehiculo.claseId = this.vehiculo.clase.id   
                     this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this.datos.facturaId = this.factura.id;
+                    this.datos.idFactura = this.factura.id;
                     this.datos.tramiteFormulario = 'rnrs-cambiosedeoperativa';
                     this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
                     response => {

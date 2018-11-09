@@ -60,7 +60,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       'nombreApoderado': null,
       'numeroDocumento': null,
       'tramiteFormulario': null,
-      'facturaId': null,
+      'idFactura': null,
       'solicitanteId': null,
       'personaTraslado': null};
       
@@ -110,7 +110,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
 
   onEnviar(){
     let token = this._loginService.getToken();       
-      this.datos.facturaId = this.factura.id;
+      this.datos.idFactura = this.factura.id;
       this.datos.tramiteFormulario = 'rna-traspasoindeterminada';
       this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
       this.datos.personaTraslado = this.sinRegistro;

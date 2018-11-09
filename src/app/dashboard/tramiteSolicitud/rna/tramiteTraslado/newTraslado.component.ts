@@ -50,7 +50,7 @@ constructor(
         'numeroGuia': null,
         'nombreEmpresa': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'vehiculoId': null}; 
     }
 
@@ -126,7 +126,7 @@ constructor(
           if(this.respuesta.status == 'success'){
               this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
               this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
-              this.datos.facturaId = this.factura.id;
+              this.datos.idFactura = this.factura.id;
               this.datos.tramiteFormulario = 'rna-traslado';
               this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
           }

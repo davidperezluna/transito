@@ -99,7 +99,7 @@ export class NewRnaInsumoComponent implements OnInit {
         this.datos.vehiculoId  = this.factura.vehiculo.id;
         
         this.FacturaInsumo.entregado = this.tarjetaEntregada;
-        this.FacturaInsumo.facturaId = this.factura.id;
+        this.FacturaInsumo.idFactura = this.factura.id;
         console.log(this.FacturaInsumo);
         
         this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(

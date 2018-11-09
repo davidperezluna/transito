@@ -83,7 +83,7 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'tipoAlerta': [],
         'gradoAlerta': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'vehiculoPlaca': null,
         'cfgEntidadJudicial':null
     };
@@ -187,7 +187,7 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.cfgEntidadJudicial = this.cfgEntidadJudicialSelected;
         this.datos.tramiteFormulario = 'rnma-inscripcionalertaprenda';
                

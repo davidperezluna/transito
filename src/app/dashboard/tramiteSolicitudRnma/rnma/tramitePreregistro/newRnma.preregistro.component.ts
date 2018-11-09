@@ -46,7 +46,7 @@ public sedesOperativas:any;
 public resumen = {};     public datos = {
   'numeroMotor': null,
   'tramiteFormulario': null,
-  'facturaId': null,
+  'idFactura': null,
 };
 
 constructor(
@@ -207,7 +207,7 @@ constructor(
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
           this.datos.numeroMotor = this.vehiculo.motor;
-          this.datos.facturaId = this.factura.id;
+          this.datos.idFactura = this.factura.id;
           this.datos.tramiteFormulario = 'rnma-preregistro';
           this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
         }else{

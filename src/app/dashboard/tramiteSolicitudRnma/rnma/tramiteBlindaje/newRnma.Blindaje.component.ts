@@ -27,13 +27,13 @@ export class NewRnmaBlindajeComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public resumen = {};     public datos = {
-        'tipoBlindaje': null,
-        'nivelBlindaje': null,
-        'empresaBlindadora': null,
-        'numeroRunt': null,
+    
+    public datos = {
+        'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idBlindaje': null,
         'tramiteFormulario': null,
-        'facturaId': null,
     };
 
     constructor(
@@ -48,9 +48,43 @@ export class NewRnmaBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.datos.facturaId = this.factura.id;
-        this.datos.tramiteFormulario = 'rnma-blindaje';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        let token = this._loginService.getToken();
+
+        this._VehiculoService.showVehiculo(token, this.tipoBlindajeList).subscribe(
+            blindajeResponse => {
+                this.datos.idFactura = this.factura.id;
+                this.datos.tramiteFormulario = 'rnma-blindaje';
+                this.datos.idBlindaje = this.tipoBlindajeList;
+                this.datos.idVehiculo = this.vehiculo.id;
+                this.datos.campos = ['blindaje'];
+
+                this._VehiculoService.update(this.datos, token).subscribe(
+                    response => {
+                        if (response.status == 'success') {
+                            let resumen = {
+                                'blindaje anterior': this.vehiculo.blindaje.nombre,
+                                'nueva blindaje': blindajeResponse.data.nombre,
+                            };
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        }
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    });
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

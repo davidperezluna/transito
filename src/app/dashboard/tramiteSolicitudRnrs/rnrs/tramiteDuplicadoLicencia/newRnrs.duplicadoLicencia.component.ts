@@ -26,7 +26,7 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -38,7 +38,7 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     ngOnInit() {}
 
     onEnviarTramite() {
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-duplicadolicencia';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }

@@ -22,12 +22,13 @@ export class NewRnmaCambioCombustibleComponent implements OnInit {
     public combustibles: any;
     public tramiteFacturaSelected: any;
     public combustibleSelected: any;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'newData': null,
         'oldData': null, 
         'sustrato': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -75,7 +76,7 @@ export class NewRnmaCambioCombustibleComponent implements OnInit {
                         if(response.status == 'success'){
                             this.datos.newData = combustible.data.nombre;
                             this.datos.oldData = this.vehiculo.combustible.nombre;
-                            this.datos.facturaId = this.factura.id;
+                            this.datos.idFactura = this.factura.id;
                             this.datos.tramiteFormulario = 'rnma-cambiocombustible';
                             this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                         }

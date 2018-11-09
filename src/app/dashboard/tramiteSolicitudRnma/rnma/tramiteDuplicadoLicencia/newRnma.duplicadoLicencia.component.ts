@@ -29,7 +29,7 @@ export class NewRnmaDuplicadoLicenciaComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(

@@ -55,7 +55,7 @@ export class NewRnaComponent implements OnInit {
   public moduloId = 1;
   public resumen = {};     public datos = {
     'moduloId': null,
-    'facturaId': null,
+    'idFactura': null,
     'vehiculoId': null,
   };
 constructor(
@@ -112,7 +112,7 @@ constructor(
 
   onSearchFactura(id){
     if (id) {
-      this.datos.facturaId = id;
+      this.datos.idFactura = id;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
 

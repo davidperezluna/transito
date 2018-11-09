@@ -31,7 +31,7 @@ export class NewRnrsTransformacionComponent implements OnInit {
         'tipoDocumentoSoporte': null,
         'numeroFactura': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'idVehiculo': null,
     };
 
@@ -68,7 +68,7 @@ export class NewRnrsTransformacionComponent implements OnInit {
         this._RemolqueService.transformacion(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.datos.facturaId = this.factura.id;
+                    this.datos.idFactura = this.factura.id;
                     this.datos.tramiteFormulario = 'rnrs-transformacion';
                     this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                     this.ngOnInit();
