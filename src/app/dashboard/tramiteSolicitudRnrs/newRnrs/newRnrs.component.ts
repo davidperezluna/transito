@@ -53,7 +53,7 @@ export class NewRnrsComponent implements OnInit {
   public cantidadSustrato = 1;
   public resumen = {};     public datos = {
     'moduloId': null,
-    'facturaId': null,
+    'idFactura': null,
     'vehiculoId': null,
   };
 constructor(
@@ -105,7 +105,7 @@ constructor(
 
   onSearchFactura(numero){
     if (numero) {
-      this.datos.facturaId = numero;
+      this.datos.idFactura = numero;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
 

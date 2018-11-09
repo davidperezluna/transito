@@ -27,7 +27,7 @@ export class NewRnrsCambioPlacaComponent implements OnInit {
         'documentacion': null,
         'sustrato': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -44,7 +44,7 @@ export class NewRnrsCambioPlacaComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.nuevaPlaca = this.nuevaPlaca;
         this.datos.documentacion = this.documentacion;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-cambioplaca';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }

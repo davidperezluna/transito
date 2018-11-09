@@ -36,7 +36,7 @@ export class NewRnrsBlindajeComponent implements OnInit {
         'numeroRunt': null,
         'sustrato': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -66,7 +66,7 @@ export class NewRnrsBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-blindaje';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }

@@ -11,6 +11,6 @@ export class Sustrato{
 		public moduloId: number,
 		public claseId: number,
 		public ciudadanoId: number,
-		public facturaId: number,
+		public idFactura: number,
 	){}
 }

@@ -26,7 +26,7 @@ export class NewRnaTransformacionComponent implements OnInit {
         'oldData': null,
         'tipoPotenciacion': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
     public tiposPotenciacion = [
         {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
@@ -64,7 +64,7 @@ export class NewRnaTransformacionComponent implements OnInit {
                 this.datos.newData = this.nuevoModelo;
                 this.datos.oldData = this.vehiculo.modelo;
                 this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
-                this.datos.facturaId = this.factura.id;
+                this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-transformacion';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             //}

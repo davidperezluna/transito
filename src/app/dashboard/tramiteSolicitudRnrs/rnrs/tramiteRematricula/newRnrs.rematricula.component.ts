@@ -48,7 +48,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
         'estado': null,
         'sustrato': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -118,7 +118,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
         this.datos.numeroIdentificacionEntrega = this.numeroIdentificacionEntrega;
         this.datos.nombreEntrega = this.nombreEntrega;
         this.datos.estado = this.estado;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-rematricula';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }

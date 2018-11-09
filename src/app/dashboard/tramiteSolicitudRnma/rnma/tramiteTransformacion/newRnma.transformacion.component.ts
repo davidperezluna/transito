@@ -29,7 +29,7 @@ export class NewRnmaTransformacionComponent implements OnInit {
         'oldData': null,
         'tipoTransformacion': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     public tiposTransformacion = [
@@ -66,7 +66,7 @@ export class NewRnmaTransformacionComponent implements OnInit {
                     this.datos.newData = this.nuevoRegistro;
                     this.datos.oldData = this.vehiculo.modelo;
                     this.datos.tipoTransformacion = this.tipoTransformacionSelect;
-                    this.datos.facturaId = this.factura.id;
+                    this.datos.idFactura = this.factura.id;
                     this.datos.tramiteFormulario = 'rnma-tranformacion';
                     this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                 }

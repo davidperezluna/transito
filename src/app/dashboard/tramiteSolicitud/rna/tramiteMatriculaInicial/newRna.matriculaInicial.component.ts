@@ -61,7 +61,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         'sustrato': null,
         'numeroLicencia': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -158,7 +158,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
                     this.apoderadoSelected = this.respuesta.data;
-                    this.datos.facturaId = this.factura.id;
+                    this.datos.idFactura = this.factura.id;
                     this.datos.tramiteFormulario = 'rna-matriculainicial';
                     // this.ciudadanoNew = false;
             }else{

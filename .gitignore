@@ -1,3 +1,4 @@
 
 *.log
 dist.zip
+src/app/dashboard/tramiteSolicitudRnma/rnma/tramiteBlindaje/newRnma.Blindaje.component.ts

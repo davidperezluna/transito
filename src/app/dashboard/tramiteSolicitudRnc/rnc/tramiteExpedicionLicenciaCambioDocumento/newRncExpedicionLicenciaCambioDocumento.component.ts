@@ -30,7 +30,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     public categorias: string[];
     public datos = {
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'categoria': null,
         'numeroLicenciaConduccion': null,
         'identificacionAnterior': null,
@@ -105,7 +105,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     enviarTramite() {
         // let token = this._LoginService.getToken();
         
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnc-expedicioncambiodocumento';
         this.datos.numeroLicenciaConduccion = this.datos.identificacionActual;
         this.datos.claseId = this.claseSelected;

@@ -27,13 +27,17 @@ export class NewRnmaBlindajeComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public resumen = {};     public datos = {
-        'tipoBlindaje': null,
-        'nivelBlindaje': null,
-        'empresaBlindadora': null,
-        'numeroRunt': null,
-        'tramiteFormulario': null,
+    
+    public datos = {
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idBlindaje': null,
+        'tramiteFormulario': null,
+<<<<<<< HEAD
+=======
+        'idFactura': null,
+>>>>>>> 8fe411b8614dc4e4e493780710965c7305a7a2da
     };
 
     constructor(
@@ -48,9 +52,49 @@ export class NewRnmaBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
+<<<<<<< HEAD
+        let token = this._loginService.getToken();
+
+        this._VehiculoService.showVehiculo(token, this.tipoBlindajeList).subscribe(
+            blindajeResponse => {
+                this.datos.idFactura = this.factura.id;
+                this.datos.tramiteFormulario = 'rnma-blindaje';
+                this.datos.idBlindaje = this.tipoBlindajeList;
+                this.datos.idVehiculo = this.vehiculo.id;
+                this.datos.campos = ['blindaje'];
+
+                this._VehiculoService.update(this.datos, token).subscribe(
+                    response => {
+                        if (response.status == 'success') {
+                            let resumen = {
+                                'blindaje anterior': this.vehiculo.blindaje.nombre,
+                                'nueva blindaje': blindajeResponse.data.nombre,
+                            };
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        }
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    });
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
+=======
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-blindaje';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+>>>>>>> 8fe411b8614dc4e4e493780710965c7305a7a2da
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

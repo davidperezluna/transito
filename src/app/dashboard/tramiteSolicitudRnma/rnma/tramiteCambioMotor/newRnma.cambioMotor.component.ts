@@ -46,7 +46,7 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         'sustrato': null,
         'tramiteFormulario': null,
         'combustibleId': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -112,7 +112,7 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         this.datos.numeroRunt = this.numeroRunt;
         this.datos.documentacion = this.documentacion;
         this.datos.entregada = this.entregada;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.combustibleId = this.combustibleSelected;
         this.datos.tramiteFormulario = 'rnma-cambiomotor';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

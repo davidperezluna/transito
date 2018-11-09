@@ -83,7 +83,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         'tipoAlerta': [],
         'gradoAlerta': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'vehiculoPlaca': null,
         'vehiculoId': null,
         'ciudadanoOldId': null,
@@ -172,7 +172,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-modificacion-acreedor-prendario';
 
         this.datos.ciudadanoNewId = this.ciudadanoAcreedorNew.id;

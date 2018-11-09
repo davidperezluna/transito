@@ -50,7 +50,7 @@ constructor(
         'numeroGuia': null,
         'nombreEmpresa': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'vehiculoId': null};
 
     this._SedeOperativaService.getSedeOperativaSelect().subscribe(
@@ -118,7 +118,7 @@ constructor(
               this.datos.numeroRunt = this.numeroRunt;
               this.datos.fechaSalida = this.fechaSalida;       
               this.datos.nombreEmpresa = this.nombreEmpresa; 
-              this.datos.facturaId = this.factura.id;
+              this.datos.idFactura = this.factura.id;
               this.datos.tramiteFormulario = 'rnma-traslado';
               this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
               this.respuesta = response; 

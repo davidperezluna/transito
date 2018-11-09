@@ -33,7 +33,7 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
         'documentacion': null,
         'entregada': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -74,7 +74,7 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
                 this.datos.numeroRunt = this.numeroRunt;
                 this.datos.documentacion = this.documentacion;
                 this.datos.entregada = this.entregada;
-                this.datos.facturaId = this.factura.id;
+                this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rnrs-regrabarvin';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }

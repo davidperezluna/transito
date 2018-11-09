@@ -43,7 +43,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         'empresaEnvio': null,
         'rut': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -99,7 +99,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         this.datos.guiaLlegada = this.guiaLlegada;
         this.datos.empresaEnvio = this.empresaEnvio;
         this.datos.rut = this.rut;
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-radicadocuenta';
         console.log(this.datos);
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

@@ -28,7 +28,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
     public categorias: string[];
     public resumen = {};     public datos = {
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
         'categoria': null,
         'numeroLicenciaConduccion': null,
         'numeroRunt': null,
@@ -95,7 +95,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
     
     enviarTramite() {
         let token = this._LoginService.getToken();
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnc-refrendacionlicencia';
         this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
         this.datos.claseId = this.claseSelected;

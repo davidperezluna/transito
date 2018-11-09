@@ -102,7 +102,7 @@ export class NewRnmaSustratoComponent implements OnInit {
         // this.sustrato.impresion = this.licenciato;
         
         this.sustrato.entregado = this.tarjetaEntregada;
-        this.sustrato.facturaId = this.factura.id;
+        this.sustrato.idFactura = this.factura.id;
 
         // this.ciudadanoPropietario.licenciaTransito = this.datos.vehiculoId;
 

@@ -37,7 +37,7 @@ export class NewRnaRegrabarSerieComponent implements OnInit {
         'entregada': null,
         'sustrato': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -90,7 +90,7 @@ export class NewRnaRegrabarSerieComponent implements OnInit {
                 this.datos.documentacion = this.documentacion;
                 this.datos.sustrato = this.sustratoSelected;
                 this.datos.entregada = this.entregada;
-                this.datos.facturaId = this.factura.id;
+                this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-regrabarserie';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }
