@@ -165,6 +165,14 @@ export class NewRnmaComponent implements OnInit {
   }
 
   onSearchFactura(numero) {
+    swal({
+      title: 'Buscando Factura!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     if (numero) {
       this.datos.facturaId = numero;
       this.datos.moduloId = this.moduloId;
@@ -219,9 +227,12 @@ export class NewRnmaComponent implements OnInit {
                 }
               }
             );
+
+            swal.close();
           } else {
             if (this.isMatricula) {
               this.factura = response[0].factura;
+              swal.close();
             } else {
               this.factura = false;
               swal({

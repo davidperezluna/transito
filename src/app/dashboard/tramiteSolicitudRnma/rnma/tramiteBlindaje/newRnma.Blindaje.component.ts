@@ -33,7 +33,7 @@ export class NewRnmaBlindajeComponent implements OnInit {
         'empresaBlindadora': null,
         'numeroRunt': null,
         'tramiteFormulario': null,
-        'facturaId': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -48,7 +48,7 @@ export class NewRnmaBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.datos.facturaId = this.factura.id;
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-blindaje';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
