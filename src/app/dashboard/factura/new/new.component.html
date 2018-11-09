@@ -55,7 +55,7 @@
                                 [disabled]="tramitesValor?.length > 0"
                                 [multiple]="false"
                                 [options]="modulos"
-                                [(ngModel)]="moduloSelected"
+                                [(ngModel)]="factura.idModulo"
                                 (ngModelChange)="onChangedModulo($event)"
                                 required
                                 name="moduloId">

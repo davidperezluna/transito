@@ -50,7 +50,6 @@ public msj:any;
 public vehiculo:any;
 public modulo:any = null;
 public modulos:any;
-public moduloSelected:any;
 public vehiculoCriterio:any; 
 public tramitesPrecio:any; 
 public tramitePrecio:any; 
@@ -127,7 +126,7 @@ constructor(
     this.date = new Date();
     let identity = this._loginService.getIdentity();
 
-    this.factura = new Factura(null,null, null, null, null, null, null, null, null);
+    this.factura = new Factura(null, null,null, null, null, null, null, null, null, null);
   
     var datePiper = new DatePipe(this.date);
     
@@ -180,6 +179,7 @@ constructor(
       'propietarios': this.propietariosVehiculoRetefuente,
       'retencion': this.valorRetefuenteUnitario
     }
+
     this._FacturaService.register(datos, token).subscribe(
       response => {
         this.respuesta = response;
@@ -307,7 +307,7 @@ constructor(
     if (e) {
       let token = this._loginService.getToken();
 
-      this._ModuloService.showModulo(token, this.moduloSelected).subscribe(
+      this._ModuloService.showModulo(token, this.factura.idModulo).subscribe(
         response => {
           this.modulo = response.data;
         },
@@ -321,7 +321,7 @@ constructor(
         }
       );
 
-      this._TramitePrecioService.getTramitePrecioPorModuloSelect(this.moduloSelected).subscribe(
+      this._TramitePrecioService.getTramitePrecioPorModuloSelect(this.factura.idModulo).subscribe(
         response => {
           this.tramitesPrecio = response;
         }, 
