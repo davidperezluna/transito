@@ -8,6 +8,7 @@ export class Factura{
 		public fechaVencimiento: string,
 		public numero: string,
 		public valorBruto: number,
-		public estado: boolean
+		public estado: boolean,
+		public idModulo: boolean
 	){}
 }

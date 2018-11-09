@@ -125,11 +125,36 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
         response => {
           // _CfgEntidadJudicialService
           // this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-
+ 
           this.respuesta = response; 
           if(this.respuesta.status == 'success'){
-            console.log(this.respuesta);
-          }
+            // this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
+            //   response => {
+            //     this.respuesta = response;
+            //     if (this.respuesta.status == 'success') {
+            //       swal({
+            //         title: 'Perfecto!',
+            //         text: 'Registro exitoso!',
+            //         type: 'success',  
+            //         confirmButtonText: 'Aceptar'
+            //       })
+            //     } else {
+            //       swal({
+            //         title: 'Error!',
+            //         text: 'El tramiteSolicitud ya se encuentra registrada',
+            //         type: 'error',
+            //         confirmButtonText: 'Aceptar'
+            //       })
+            //     }
+            //     error => {
+            //       this.errorMessage = <any>error;
+            //       if (this.errorMessage != null) {
+            //         console.log(this.errorMessage);
+            //         alert("Error en la petición");
+            //       }
+            //     }
+            //   });
+            }
           error => {
                   this.errorMessage = <any>error;
 

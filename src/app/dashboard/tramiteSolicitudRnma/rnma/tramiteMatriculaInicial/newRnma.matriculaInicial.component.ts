@@ -52,7 +52,9 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
         {'value':2,'label':"Propio"}
     ];
     public tipoIdentificaciones= [ ];
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    
+    public datos = {
         'propietariosEmpresas': [],
         'propietariosCiudadanos': [],
         'solidario': false,
