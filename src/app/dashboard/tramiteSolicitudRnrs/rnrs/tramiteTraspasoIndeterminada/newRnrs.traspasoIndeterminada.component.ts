@@ -3,17 +3,21 @@ import { LoginService } from '../../../../services/login.service';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { CiudadanoVehiculoService} from '../../../../services/ciudadanoVehiculo.service';
+import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
+import { VhloActaTraspasoService } from '../../../../services/vhloActaTraspaso.service';
 import { DatePipe } from '@angular/common';
-import swal from 'sweetalert2';;
-
+import { TramiteSolicitud } from '../../tramiteSolicitudRnrs.modelo'
+import swal from 'sweetalert2';
+ 
 
 @Component({
     selector: 'appRnrs-traspaso-indeterminada',
-    templateUrl: './newRnrs.traspasoIndeterminada.html'
+    templateUrl: './newRnrs.traspasoIndeterminada.html',
+    providers: [DatePipe]
 })
 export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
   @Output() readyTramite = new EventEmitter<any>();
-  @Input() vehiculo: any = null;
+  @Input() vehiculo: any = null; 
   @Input() factura: any = null;
   @Input() ciudadano: any = null;
   public errorMessage;
@@ -22,33 +26,59 @@ export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
   public tipoServicio;
   public nombreApoderado;
   public tipoDocApoderado;
+  public idTramiteSolicitud;
   public numeroDocumento;
   public date:any;
+  public tramiteSolicitud: TramiteSolicitud;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table:any;    
+  public entidadesJudiciales:any;    
+  public entidadJudicialSelected:any;    
   public datos: any = null;
   public vehiculos: any = false;
   public propietarioVehiculo;
   public tipoSelected;
   public viewApoderado: boolean;
   public sinRegistro = "SIN REGISTRO";
+  public acta = {
+    'fecha':null,
+    'numero':null,
+    'tramiteSolicitud':null,
+    'entidadJudicial':null,
+  }
   public tipos =[
     {'value': "Declaración",
     'label': "Declaración"},
     {'value': "Manifestación",
     'label': "Manifestación"}];
-  public resumen = {};     
+  public resumen = {};  
 
   constructor(
-    private _TramiteSolicitudService: TramiteSolicitudService,
+    private _CfgEntidadJudicialService: CfgEntidadJudicialService,
+    private _VhloActaTraspasoService: VhloActaTraspasoService,
     private _loginService: LoginService,
     private _VehiculoService: VehiculoService,
     private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+    private _TramiteSolicitudService: TramiteSolicitudService,
     ){}
     
   ngOnInit() {
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null);
+    this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe( 
+      response => {
+        this.entidadesJudiciales = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
     this.datos = {
       'fecha': null,
       'codigoOrganismo': null,
@@ -58,9 +88,9 @@ export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
       'tipoDocApoderado': null,
       'nombreApoderado': null,
       'numeroDocumento': null,
+      'solicitanteId': null,
       'tramiteFormulario': null,
       'idFactura': null,
-      'solicitanteId': null,
       'personaTraslado': null};
       
       this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
@@ -81,7 +111,7 @@ export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
       this.codigoOrganismo = this.datos.codigoOrganismo;
       this.tipoServicio = this.datos.tipoServicio;
       this.date = this.datos.fecha;
-    })  
+    });  
     this.datos.nombreApoderado = this.ciudadano.usuario.primerNombre+" "+this.ciudadano.usuario.segundoNombre+" "+this.ciudadano.usuario.primerApellido;
     this.datos.tipoDocApoderado = this.ciudadano.usuario.tipoIdentificacion.nombre;
     this.datos.numeroDocumento = this.ciudadano.usuario.identificacion;   
@@ -110,32 +140,68 @@ export class NewRnrsTraspasoIndeterminadaComponent implements OnInit {
   onEnviar(){
     let token = this._loginService.getToken();       
       this.datos.idFactura = this.factura.id;
-      this.datos.tramiteFormulario = 'rna-traspasoindeterminada';
-      this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+      this.datos.tramiteFormulario = 'rnrs-trapasoindeterminada'
       this.datos.personaTraslado = this.sinRegistro;
-      console.log(this.datos.solicitanteId);
-      console.log(this.datos.vehiculoId);
+
+      this.tramiteSolicitud.datos = {'foraneas':this.datos, 'resumen':this.resumen};  
+      this.tramiteSolicitud.vehiculoId = this.vehiculo.id;
+      this.tramiteSolicitud.ciudadanoId = this.ciudadano.id;
+
+      this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
+        responseTramiteSolicitud => {
+          if (responseTramiteSolicitud.status == 'success') {
+              this.idTramiteSolicitud = responseTramiteSolicitud.idTramiteSolicitud;
+              this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token,this.datos).subscribe(
+                responseCiudadano => {
+                    if (responseCiudadano.status == 'success') {
+                      this.acta.tramiteSolicitud = this.idTramiteSolicitud;
+                      this.acta.entidadJudicial = this.entidadJudicialSelected;
+                        this._VhloActaTraspasoService.register(this.acta,token).subscribe(
+                          responseActaTraspaso => {
+                              if (responseActaTraspaso.status == 'success') {
+                                swal({
+                                  title: 'Perfecto!',
+                                  text: 'Registro exitoso!',
+                                  type: 'success',  
+                                  confirmButtonText: 'Aceptar'
+                                })
+                              } else {
+                                swal({
+                                  title: 'Error!',
+                                  text: 'El tramiteSolicitud ya se encuentra registrada',
+                                  type: 'error',
+                                  confirmButtonText: 'Aceptar'
+                                })
+                              }
+                            error => {
+                                    this.errorMessage = <any>error;
+                
+                                    if(this.errorMessage != null){
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                        }
+                      );
+                    }
+                  error => {
+                          this.errorMessage = <any>error;
       
-      this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token,this.datos).subscribe(
-        response => {
-          this.respuesta = response; 
-          if(this.respuesta.status == 'success'){
-            swal({
-              title: 'Perfecto!',
-              text: 'El registro se ha modificado con éxito',
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            })
+                          if(this.errorMessage != null){
+                              console.log(this.errorMessage);
+                              alert("Error en la petición");
+                          }
+                      }
+              }
+            );
           }
           error => {
-                  this.errorMessage = <any>error;
-
-                  if(this.errorMessage != null){
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                  }
-              }
-      }
-      );
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        });
   }
 }

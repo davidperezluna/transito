@@ -4,9 +4,11 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { CiudadanoVehiculoService} from '../../../../services/ciudadanoVehiculo.service';
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
+import { VhloActaTraspasoService } from '../../../../services/vhloActaTraspaso.service';
 import { DatePipe } from '@angular/common';
+import { TramiteSolicitud } from '../../tramiteSolicitudRnma.modelo';
 import swal from 'sweetalert2';
-
+ 
 
 @Component({
     selector: 'appRnma-traspaso-indeterminada',
@@ -24,12 +26,16 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
   public tipoServicio;
   public nombreApoderado;
   public tipoDocApoderado;
+  public idTramiteSolicitud;
   public numeroDocumento;
   public date:any;
+  public tramiteSolicitud: TramiteSolicitud;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table:any;    
+  public entidadesJudiciales:any;    
+  public entidadJudicialSelected:any;    
   public datos: any = null;
   public vehiculos: any = false;
   public propietarioVehiculo;
@@ -51,12 +57,28 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
 
   constructor(
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
+    private _VhloActaTraspasoService: VhloActaTraspasoService,
     private _loginService: LoginService,
     private _VehiculoService: VehiculoService,
     private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+    private _TramiteSolicitudService: TramiteSolicitudService,
     ){}
     
   ngOnInit() {
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null);
+    this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe( 
+      response => {
+        this.entidadesJudiciales = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
     this.datos = {
       'fecha': null,
       'codigoOrganismo': null,
@@ -120,50 +142,66 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
       this.datos.idFactura = this.factura.id;
       this.datos.tramiteFormulario = 'rnma-trapasoindeterminada'
       this.datos.personaTraslado = this.sinRegistro;
-      
-      this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token,this.datos).subscribe(
-        response => {
-          // _CfgEntidadJudicialService
-          // this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
- 
-          this.respuesta = response; 
-          if(this.respuesta.status == 'success'){
-            // this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
-            //   response => {
-            //     this.respuesta = response;
-            //     if (this.respuesta.status == 'success') {
-            //       swal({
-            //         title: 'Perfecto!',
-            //         text: 'Registro exitoso!',
-            //         type: 'success',  
-            //         confirmButtonText: 'Aceptar'
-            //       })
-            //     } else {
-            //       swal({
-            //         title: 'Error!',
-            //         text: 'El tramiteSolicitud ya se encuentra registrada',
-            //         type: 'error',
-            //         confirmButtonText: 'Aceptar'
-            //       })
-            //     }
-            //     error => {
-            //       this.errorMessage = <any>error;
-            //       if (this.errorMessage != null) {
-            //         console.log(this.errorMessage);
-            //         alert("Error en la petición");
-            //       }
-            //     }
-            //   });
-            }
-          error => {
-                  this.errorMessage = <any>error;
 
-                  if(this.errorMessage != null){
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                  }
+      this.tramiteSolicitud.datos = {'foraneas':this.datos, 'resumen':this.resumen};
+      this.tramiteSolicitud.vehiculoId = this.vehiculo.id;
+      this.tramiteSolicitud.ciudadanoId = this.ciudadano.id;
+
+      this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
+        responseTramiteSolicitud => {
+          if (responseTramiteSolicitud.status == 'success') {
+              this.idTramiteSolicitud = responseTramiteSolicitud.idTramiteSolicitud;
+              this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token,this.datos).subscribe(
+                responseCiudadano => {
+                    if (responseCiudadano.status == 'success') {
+                      this.acta.tramiteSolicitud = this.idTramiteSolicitud;
+                      this.acta.entidadJudicial = this.entidadJudicialSelected;
+                        this._VhloActaTraspasoService.register(this.acta,token).subscribe(
+                          responseActaTraspaso => {
+                              if (responseActaTraspaso.status == 'success') {
+                                swal({
+                                  title: 'Perfecto!',
+                                  text: 'Registro exitoso!',
+                                  type: 'success',  
+                                  confirmButtonText: 'Aceptar'
+                                })
+                              } else {
+                                swal({
+                                  title: 'Error!',
+                                  text: 'El tramiteSolicitud ya se encuentra registrada',
+                                  type: 'error',
+                                  confirmButtonText: 'Aceptar'
+                                })
+                              }
+                            error => {
+                                    this.errorMessage = <any>error;
+                
+                                    if(this.errorMessage != null){
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                        }
+                      );
+                    }
+                  error => {
+                          this.errorMessage = <any>error;
+      
+                          if(this.errorMessage != null){
+                              console.log(this.errorMessage);
+                              alert("Error en la petición");
+                          }
+                      }
               }
-      }
-      );
+            );
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        });
   }
 }
