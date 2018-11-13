@@ -27,17 +27,15 @@ export class NewRnmaBlindajeComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
+
+    public resumen = {};
     
     public datos = {
-        'idFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idBlindaje': null,
         'tramiteFormulario': null,
-<<<<<<< HEAD
-=======
         'idFactura': null,
->>>>>>> 8fe411b8614dc4e4e493780710965c7305a7a2da
     };
 
     constructor(
@@ -52,7 +50,6 @@ export class NewRnmaBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
-<<<<<<< HEAD
         let token = this._loginService.getToken();
 
         this._VehiculoService.showVehiculo(token, this.tipoBlindajeList).subscribe(
@@ -90,11 +87,9 @@ export class NewRnmaBlindajeComponent implements OnInit {
                     }
                 }
             });
-=======
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-blindaje';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
->>>>>>> 8fe411b8614dc4e4e493780710965c7305a7a2da
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
