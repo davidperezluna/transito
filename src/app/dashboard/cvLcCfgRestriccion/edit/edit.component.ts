@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() tipoAlerta:any = null;
+@Input() restriccion:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
@@ -28,7 +28,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._CvLcCfgRestriccionService.edit(this.tipoAlerta, token).subscribe(
+		this._CvLcCfgRestriccionService.edit(this.restriccion, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

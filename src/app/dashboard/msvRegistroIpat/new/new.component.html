@@ -19,9 +19,16 @@
                                 </label>
                                 <table class="table table-bordered">
                                     <tbody>
-                                        <td><strong>Organismo de Transito: </strong>{{ sedeOperativa?.nombre }}</td>
-                                        <td><strong>Nro. IPAT: </strong>{{ consecutivo?.consecutivo }}</td>
-                                        <td><strong>Estado IPAT: </strong>{{ consecutivo?.estado }}</td>
+                                        <td>
+                                            <strong>Organismo de Transito: </strong>
+                                            <br>{{ sedeOperativa?.nombre }}</td>
+                                        <td>
+                                            <strong>Nro. IPAT: </strong>
+                                            <br>{{ consecutivo?.consecutivo }}</td>
+                                        <td>
+                                            <strong>Estado IPAT: </strong>
+                                            <br>{{ consecutivo?.estado }}
+                                        </td>
                                     </tbody>
                                 </table>
                             </div>
@@ -835,6 +842,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="card" *ngIf="consecutivo">
                 <div class="card-header">
                     <h5 class="card-title">
