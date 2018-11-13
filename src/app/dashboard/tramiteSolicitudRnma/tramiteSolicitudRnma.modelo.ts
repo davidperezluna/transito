@@ -7,6 +7,6 @@ export class TramiteSolicitud{
 		public ciudadanoId: number,
 		public observacion: string,
 		public documentacion: boolean,
-		public datos: string
+		public datos: any
 	){}
 }

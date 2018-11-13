@@ -6,6 +6,7 @@ import { CiudadanoVehiculoService} from '../../../../services/ciudadanoVehiculo.
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
 import { VhloActaTraspasoService } from '../../../../services/vhloActaTraspaso.service';
 import { DatePipe } from '@angular/common';
+import { TramiteSolicitud } from '../../tramiteSolicitudRnma.modelo';
 import swal from 'sweetalert2';
  
 
@@ -28,11 +29,13 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
   public idTramiteSolicitud;
   public numeroDocumento;
   public date:any;
-  public tramiteSolicitud:any;
+  public tramiteSolicitud: TramiteSolicitud;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table:any;    
+  public entidadesJudiciales:any;    
+  public entidadJudicialSelected:any;    
   public datos: any = null;
   public vehiculos: any = false;
   public propietarioVehiculo;
@@ -62,6 +65,20 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
     ){}
     
   ngOnInit() {
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null);
+    this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe( 
+      response => {
+        this.entidadesJudiciales = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
     this.datos = {
       'fecha': null,
       'codigoOrganismo': null,
@@ -126,9 +143,10 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
       this.datos.tramiteFormulario = 'rnma-trapasoindeterminada'
       this.datos.personaTraslado = this.sinRegistro;
 
-      this.tramiteSolicitud.datos = this.datos;
+      this.tramiteSolicitud.datos = {'foraneas':this.datos, 'resumen':this.resumen};
       this.tramiteSolicitud.vehiculoId = this.vehiculo.id;
       this.tramiteSolicitud.ciudadanoId = this.ciudadano.id;
+
       this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
         responseTramiteSolicitud => {
           if (responseTramiteSolicitud.status == 'success') {
@@ -137,6 +155,7 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
                 responseCiudadano => {
                     if (responseCiudadano.status == 'success') {
                       this.acta.tramiteSolicitud = this.idTramiteSolicitud;
+                      this.acta.entidadJudicial = this.entidadJudicialSelected;
                         this._VhloActaTraspasoService.register(this.acta,token).subscribe(
                           responseActaTraspaso => {
                               if (responseActaTraspaso.status == 'success') {

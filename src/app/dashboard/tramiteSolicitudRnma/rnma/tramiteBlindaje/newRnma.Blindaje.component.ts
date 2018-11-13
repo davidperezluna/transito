@@ -27,13 +27,15 @@ export class NewRnmaBlindajeComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
+
+    public resumen = {};
     
     public datos = {
-        'idFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idBlindaje': null,
         'tramiteFormulario': null,
+        'idFactura': null,
     };
 
     constructor(
@@ -85,6 +87,9 @@ export class NewRnmaBlindajeComponent implements OnInit {
                     }
                 }
             });
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-blindaje';
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

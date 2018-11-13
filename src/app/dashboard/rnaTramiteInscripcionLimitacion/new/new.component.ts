@@ -149,7 +149,7 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this._CfgEntidadJuducialService.getEntidadJudicialSelect().subscribe(
+    this._CfgEntidadJuducialService.getEntidadJudicialSelect().subscribe( 
       response => {
         this.entidadesJudiciales = response;
       },
