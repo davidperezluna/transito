@@ -270,6 +270,9 @@
                     <div class="tab-pane" id="rnma-cambiocolor" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-cambio-color [vehiculo]="vehiculo" [factura]="factura" [tramitesFactura]="tramitesFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-color>
                     </div>
+                    <div class="tab-pane" id="rnma-transformacion" role="tabpanel" *ngIf='ciudadano'>
+                        <appRnma-transformacion [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-transformacion>
+                    </div>
                     <div class="tab-pane" id="rnma-cambioservicio" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-cambio-servicio [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-servicio>
                     </div>
