@@ -23,8 +23,6 @@ export class MsvTalonarioComponent implements OnInit {
   public formIndex = true;
   public table: any = null;
   public msvTalonario: MsvTalonario;
-  public sedesOperativas: any;
-  public sedeOperativaSelected: any;
   public sedeOperativaSuccess = false;
   public validado = false;
   public sedeOperativaReady = false;
@@ -42,42 +40,20 @@ export class MsvTalonarioComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
 
-    this._sedeOperativaService.getSedeOperativaSelect().subscribe(
-      response => {
-        this.sedesOperativas = response;
-        this.sedeOperativaSuccess = false;
-        this.formN = true;
-      },
-      error => {
-        this.errorMessage = <any>error;
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-    this._msvTalonarioService.getMsvTalonario().subscribe(
+    this._msvTalonarioService.index().subscribe(
       response => {
         if (response) {
-
-          console.log(response);
           this.msvTalonarios = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
+          swal.close();
         }
       },
       error => {
@@ -90,6 +66,7 @@ export class MsvTalonarioComponent implements OnInit {
       }
     );
   }
+
   iniciarTabla() {
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -106,6 +83,7 @@ export class MsvTalonarioComponent implements OnInit {
     });
     this.table = $('#dataTables-example').DataTable();
   }
+  
   onNew() {
     this.formNew = true;
     this.formN = false;
@@ -113,28 +91,6 @@ export class MsvTalonarioComponent implements OnInit {
     if (this.table) {
       this.table.destroy();
     }
-  }
-  
-
-  myFunc() {
-    console.log("asd");
-  }
-
-  calcularTotal() {
-    let ini, fin, total;
-    ini = 0;
-    fin = 0;
-    total = 0;
-    ini = this.msvTalonario.rangoini;
-    fin = this.msvTalonario.rangofin;
-    total = (fin-ini)+1;
-    console.log(total);
-    if (total<0) {
-      total=0;
-      
-    }
-    this.msvTalonario.total = total;
-
   }
 
   ready(isCreado: any) {
@@ -146,8 +102,8 @@ export class MsvTalonarioComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteMsvTalonario(id: any) {
 
+  deleteMsvTalonario(id: any) {
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -187,101 +143,10 @@ export class MsvTalonarioComponent implements OnInit {
     })
   }
 
-  editMsvTalonario(msvTalonario: any) {
-    console.log(msvTalonario);
-    
+  editMsvTalonario(msvTalonario: any) {    
     this.msvTalonario = msvTalonario;
-
     this.formEdit = true;
     this.formIndex = false;
-  }
-
-
- /* onEnviar() {
-    let token = this._loginService.getToken();
-    this.msvTalonario.rangoini = this.msvTalonario.rangoini;
-    this.msvTalonario.rangofin = this.msvTalonario.rangofin;
-    this.msvTalonario.total = this.msvTalonario.total;
-    this.msvTalonario.fechaAsignacion = this.msvTalonario.fechaAsignacion;
-    this.msvTalonario.nResolucion = this.msvTalonario.nResolucion;
-    this.msvTalonario.sedeOperativaId = this.sedeOperativaSelected;
-    this._msvTalonarioService.register(this.msvTalonario, token).subscribe(
-      response => {
-        //console.log(response);
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'El registro se ha agregado con exito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-
-      });
-  }*/
-
-
-  changedSedeOperativa(e) {
-
-    this.validado = false;
-    if (e) {
-      let token = this._loginService.getToken();
-      this._sedeOperativaService.showSedeOperativa(token, e).subscribe(
-        response => {
-          this.sedeOperativa = response;
-          this.sedeOperativaReady = true;
-//          this.msvTalonario.rangoini = this.sedeOperativa.data.
-          //this.comparendo.numeroOrden = this.sedeOperativa.data.codigoDivipo;
-          console.log(this.sedeOperativa);
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-
-      this._msvTalonarioService.showMsvTalonarioPorSedeOperativa(token, e).subscribe(
-        response => {
-          this.sedeOperativaSuccess = true;
-          if (response.status=="success") {
-            
-            this.msvTalonario = response.data;
-            
-            this.msvTalonarioReady = true;
-            this.msvTalonario.fechaAsignacion = this.msvTalonario.fechaAsignacion;
-            
-            //this.comparendo.numeroOrden = this.sedeOperativa.data.codigoDivipo;
-            console.log(this.msvTalonario);
-          }
-          else if (response.status=="vacio") {
-            this.msvTalonario = new MsvTalonario(0,0,0,"","",0);
-          }
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    }
   }
 
 }

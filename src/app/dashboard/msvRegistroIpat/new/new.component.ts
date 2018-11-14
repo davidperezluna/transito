@@ -205,10 +205,19 @@ export class NewComponent implements OnInit {
         if (responseFuncionario.status == 'success') {
           this.sedeOperativa = responseFuncionario.data.sedeOperativa;
 
-          /* ==================== */
+          swal({
+            title: 'Buscando IPAT en '+this.sedeOperativa.nombre,
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+              swal.showLoading()
+            }
+          });
+
           this._MsvConsecutivoService.searchLastBySede({ 'sedeOperativa': this.sedeOperativa }, token).subscribe(
             response => {
               if (response.status == 'success') {
+                swal.close();
+                
                 this.consecutivo = response.data;
 
                 this._GravedadService.getGravedadSelect().subscribe(

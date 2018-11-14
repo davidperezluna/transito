@@ -5,13 +5,12 @@
       <div class="card">
         <div class="card-header">
           <h5 class="card-title">
-            <b class="text-uppercase">Informe Policial de Accidentes de Transito (IPAT)</b>
-            <br>
-            <small>Listado de Ipats</small>
+            <b class="text-uppercase">Seguridad vial</b>
+            <small>Listado de IPAT</small>
             <div class="btn-group pull-right">
-              <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+              <button (click)="onNew()" class="btn btn-default">
                 <i class="fa fa-plus"></i>
-                <span class="text">Nuevo</span>
+                Nuevo
               </button>
             </div>
           </h5>
@@ -21,16 +20,18 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Numero Consecutivo</th>
+                <th>No. Consecutivo</th>
+                <th>Sede Operativa</th>
                 <th>Estado</th>
                 <!--<th>Acciones</th>-->
               </tr>
             </thead>
             <tbody>
               <tr class="odd" *ngFor="let consecutivo of consecutivos; let i = index">
-                <td>{{consecutivo.id}}</td>
-                <td>{{consecutivo.consecutivo}}</td>
-                <td>{{consecutivo.estado}}</td>
+                <td>{{ i + 1 }}</td>
+                <td>{{ consecutivo.consecutivo }}</td>
+                <td>{{ consecutivo.sedeOperativa?.nombre }}</td>
+                <td>{{ consecutivo.estado }}</td>
                 <!--<td><div class="btn-group">
                   <button (click)="onShow(consecutivo)" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
                     <i class="fa fa-eye"></i>

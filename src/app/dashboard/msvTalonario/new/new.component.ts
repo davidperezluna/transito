@@ -71,110 +71,34 @@ export class NewComponent implements OnInit {
         );
 
     }
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 8,
-            sPaginationType: 'full_numbers',
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
-                }
-            }
-        });
-        this.table = $('#dataTables-example').DataTable();
-    }
 
     onCancelar() {
         this.ready.emit(true);
     }
 
-
-    onNew() {
-        this.formNew = false;
-        this.formN = false;
-        this.formIndex = false;
-        if (this.table) {
-            this.table.destroy();
-        }
-    }
-
-    myFunc() {
-        console.log("asd");
-    }
-
     onCalcularTotal() {
-        let ini, fin, total;
-
+        let ini, fin, rangos;
         ini = this.msvTalonario.rangoini;
         fin = this.msvTalonario.rangofin;
-        total = (fin - ini);
 
-        if (total < 0) {
-            total = 0;
-        }
-        this.msvTalonario.total = total;
-    }
+        if (fin > ini) {
+            rangos = (fin - ini) + 1;
 
-    /*ready(isCreado: any) {
-      if (isCreado) {
-        this.formNew = false;
-        this.formN = false;
-        this.formEdit = false;
-        this.formIndex = false;
-        this.ngOnInit();
-      }
-    }*/
-    deleteMsvTalonario(id: any) {
-
-        swal({
-            title: '¿Estás seguro?',
-            text: "¡Se eliminara este registro!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#15d4be',
-            cancelButtonColor: '#ff6262',
-            confirmButtonText: 'Confirmar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
-                let token = this._loginService.getToken();
-                this._msvTalonarioService.deleteMsvTalonario(token, id).subscribe(
-                    response => {
-                        swal({
-                            title: 'Eliminado!',
-                            text: 'Registro eliminado correctamente.',
-                            type: 'success',
-                            confirmButtonColor: '#15d4be',
-                        })
-                        this.table.destroy();
-                        this.respuesta = response;
-                        this.ngOnInit();
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                );
-
-
+            if (rangos < 0) {
+                rangos = 0;
             }
-        })
-    }
+            this.msvTalonario.total = rangos;
+        } else {
+            swal({
+                title: 'Alerta!',
+                text: 'El número de inicio no puede ser superior o igual al número de finalización',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
 
-    editMsvTalonario(msvTalonario: any) {
-        this.msvTalonario = msvTalonario;
-        this.formEdit = true;
-        this.formIndex = false;
+            this.msvTalonario.total = null;
+        }
     }
-
 
     onEnviar() {
         let token = this._loginService.getToken();

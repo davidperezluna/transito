@@ -11,8 +11,7 @@ export class MsvTalonarioService {
 
 	constructor(private _http: Http) { }
 
-	getMsvTalonario() {
-
+	index() {
 		return this._http.get(this.url + "/").map(res => res.json());
 	}
 
