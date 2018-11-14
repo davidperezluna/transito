@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudRnmaComponent } from './tramiteSolicitudRnma.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
+import { VhloActaTraspasoService } from '../../services/vhloActaTraspaso.service';
 import { EmpresaService } from '../../services/empresa.service';
 
 import { NewRnmaComponent } from './newRnma/newRnma.component';
@@ -112,7 +113,7 @@ import { SelectModule } from 'angular2-select';
         NewRnmaTramiteLevantamientoAlertaPrendaComponent,
         NewRnmaTransformacionComponent
     ],
-    providers:[TramiteSolicitudService,EmpresaService,TramiteTrasladoService]
+    providers:[TramiteSolicitudService,EmpresaService,TramiteTrasladoService,VhloActaTraspasoService]
 })
 
 export class TramiteSolicitudRnmaModule { }

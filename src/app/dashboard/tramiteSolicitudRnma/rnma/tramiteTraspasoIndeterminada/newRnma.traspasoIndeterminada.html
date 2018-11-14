@@ -104,16 +104,6 @@
                 </table>
             </div>
             <div class="card-footer">
-            <div class="btn-group">
-                <button (click)="onCancelar()" class="btn btn-default">
-                <i class="fa fa-times"></i>
-                Cancel
-                </button>
-                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                <i class="fa fa-save"></i>
-                Enviar
-                </button>
-            </div>
             </div>
         </div>
    </div>
@@ -139,8 +129,12 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
-                            <label>Entidad que emite <strong class="text-danger">*</strong></label>
-                            <input type="text" class="form-control" [(ngModel)]="acta.numero" name="nombre" required />
+                            <label>Entidad Judicial que emite
+                                <span class="text-danger">*</span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="entidadJudicialSelected" (change)="capturar()"
+                                required name="entidadJudicialId">
+                            </ng-select>
                         </div>
                     </div>
                 </form>

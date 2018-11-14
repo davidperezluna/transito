@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class GdCfgMedioCorrespondenciaService { 
+export class CvLcCfgRestriccionService { 
 	private url = environment.apiUrl + 'contravencional/cvlccfgrestriccion';
 	public identity;
 	public token;
