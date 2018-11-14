@@ -61,7 +61,7 @@ export class NewRnmaRegrabarChasisComponent implements OnInit {
                 };
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
             }
-            error => {
+            error => { 
                     this.errorMessage = <any>error;
 
                     if(this.errorMessage != null){
