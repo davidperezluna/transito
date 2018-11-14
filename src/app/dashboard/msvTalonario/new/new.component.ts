@@ -38,26 +38,21 @@ export class NewComponent implements OnInit {
 
     ngOnInit() {
         this.msvTalonario = new MsvTalonario(null, null, null, null, null, null);
+
         swal({
-            title: 'Cargando Tabla!',
+            title: 'Cargando datos!',
             text: 'Solo tardara unos segundos por favor espere.',
-            timer: 1500,
             onOpen: () => {
                 swal.showLoading()
             }
-        }).then((result) => {
-            if (
-                // Read more about handling dismissals
-                result.dismiss === swal.DismissReason.timer
-            ) {
-            }
-        })
+        });
 
         this._sedeOperativaService.getSedeOperativaSelect().subscribe(
             response => {
                 this.sedesOperativas = response;
                 this.sedeOperativaSuccess = false;
                 this.formN = true;
+                swal.close();
             },
             error => {
                 this.errorMessage = <any>error;
@@ -100,6 +95,14 @@ export class NewComponent implements OnInit {
     }
 
     onEnviar() {
+        swal({
+            title: 'Generando consecutivos',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         let token = this._loginService.getToken();
 
         this.msvTalonario.sedeOperativaId = this.sedeOperativaSelected;
@@ -113,9 +116,10 @@ export class NewComponent implements OnInit {
                         text: 'El registro se ha agregado con exito',
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
                 }
                 error => {
+                    swal.close();
                     this.errorMessage = <any>error;
 
                     if (this.errorMessage != null) {
