@@ -33,7 +33,6 @@ export class NewRnmaRegrabarChasisComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _SustratoService: SustratoService,
         private _VehiculoService: VehiculoService,
     ) { }
 
@@ -50,7 +49,7 @@ export class NewRnmaRegrabarChasisComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['regrabarchasis'];
 
-        this._VehiculoService.update(this.vehiculo ,token).subscribe(
+        this._VehiculoService.update(this.datos ,token).subscribe(
         response => {
             if(response.status == 'success'){
                 let resumen = {

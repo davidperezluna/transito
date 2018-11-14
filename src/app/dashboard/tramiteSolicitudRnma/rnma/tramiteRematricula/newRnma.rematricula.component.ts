@@ -16,7 +16,6 @@ export class NewRnmaRematriculaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
     public sustratos: any;
     public sustratoSelected: any;
@@ -34,7 +33,8 @@ export class NewRnmaRematriculaComponent implements OnInit {
     public numeroIdentificacionEntrega: any;
     public nombreEntrega: any;
     public estado: any;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'entidad': null,
         'numeroActa': null,
         'fechaActa': null,
@@ -46,7 +46,6 @@ export class NewRnmaRematriculaComponent implements OnInit {
         'numeroIdentificacionEntrega': null,
         'nombreEntrega': null,
         'estado': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
     };
@@ -61,21 +60,6 @@ export class NewRnmaRematriculaComponent implements OnInit {
 
     ngOnInit() {
         this.entidadList = ['Fiscalía,', 'SIJIN', 'DIJIN'];
-
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-
         this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;

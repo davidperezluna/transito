@@ -17,7 +17,6 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
     public sustratos: any;
     public sustratoSelected: any;
@@ -39,6 +38,8 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
         'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'idVehiculo': null,
+        'campos': null,
     };
 
     constructor(
@@ -49,7 +50,6 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // this.tipoRegrabacionList = ['Serie', 'Chasis', 'Motor', 'VIN'];
         this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
 
         this._SustratoService.getSustratoSelect().subscribe(
@@ -68,31 +68,22 @@ export class NewRnmaRegrabarMotorComponent implements OnInit {
     }
 
     enviarTramite() {
-        // this.datos.tipoRegrabacion = this.tipoRegrabacionSelected;
-        
-
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
         let token = this._loginService.getToken();
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+        
+        this.datos.motivo = this.motivoSelected;
+        this.datos.nuevoNumero = this.nuevoNumero;
+        this.datos.numeroRunt = this.numeroRunt;
+        this.datos.documentacion = this.documentacion;
+        this.datos.sustrato = this.sustratoSelected;
+        this.datos.entregada = this.entregada;
+        this.datos.idFactura = this.factura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['regrabarmotor'];
+        this.datos.tramiteFormulario = 'rnma-regrabarmotor';
+
+        this._VehiculoService.update(this.datos,token).subscribe(
         response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.datos.motivo = this.motivoSelected;
-                this.datos.nuevoNumero = this.nuevoNumero;
-                this.datos.numeroRunt = this.numeroRunt;
-                this.datos.documentacion = this.documentacion;
-                this.datos.sustrato = this.sustratoSelected;
-                this.datos.entregada = this.entregada;
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rnma-regrabarmotor';
+            if(response.status == 'success'){
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }
             error => {

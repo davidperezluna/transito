@@ -4,8 +4,6 @@ import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
-import swal from 'sweetalert2';
-
 @Component({
     selector: 'appRnma-regrabar-serie',
     templateUrl: './newRnma.regrabarSerie.html'
@@ -16,7 +14,6 @@ export class NewRnmaRegrabarSerieComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
     public sustratos: any;
     public sustratoSelected: any;
@@ -24,74 +21,38 @@ export class NewRnmaRegrabarSerieComponent implements OnInit {
     public tipoRegrabacionSelected: any;
     public motivoList: string[];
     public motivoSelected: any;
-    public nuevoNumero: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
     public resumen = {};     public datos = {
-        'tipoRegrabacion': null,
         'motivo': null,
         'nuevoNumero': null,
         'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'idVehiculo': null,
+        'campos': null,
     };
 
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _SustratoService: SustratoService,
         private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() {
-        // this.tipoRegrabacionList = ['Serie', 'Chasis', 'Serie', 'VIN'];
         this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
-
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
     }
 
     enviarTramite() {
-        // this.datos.tipoRegrabacion = this.tipoRegrabacionSelected;
         let token = this._loginService.getToken();
 
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.serie = this.nuevoNumero
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+        this.datos.motivo = this.motivoSelected;
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-regrabarserie';
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['regrabarserie'];
+
+        this._VehiculoService.update(this.datos,token).subscribe(
         response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.datos.motivo = this.motivoSelected;
-                this.datos.nuevoNumero = this.nuevoNumero;
-                this.datos.numeroRunt = this.numeroRunt;
-                this.datos.documentacion = this.documentacion;
-                this.datos.sustrato = this.sustratoSelected;
-                this.datos.entregada = this.entregada;
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rnma-regrabarserie';
+            if(response.status == 'success'){                
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }
             error => {

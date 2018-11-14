@@ -25,11 +25,14 @@ export class NewRnmaTransformacionComponent implements OnInit {
     public resumen = {};     
     
     public datos = {
-        'newData': null,
         'oldData': null,
+        'newData': null,
         'tipoTransformacion': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'idVehiculo': null,
+        'campos': null,
+        'nuevoRegistro': null,
     };
 
     public tiposTransformacion = [
@@ -43,9 +46,7 @@ export class NewRnmaTransformacionComponent implements OnInit {
         private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() {
-
-    }
+    ngOnInit() { }
     
     enviarTramite(){
         

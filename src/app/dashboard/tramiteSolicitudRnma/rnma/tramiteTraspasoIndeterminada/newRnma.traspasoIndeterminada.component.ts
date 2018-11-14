@@ -21,7 +21,6 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
   @Input() factura: any = null;
   @Input() ciudadano: any = null;
   public errorMessage;
-  public respuesta;
   public codigoOrganismo;
   public tipoServicio;
   public nombreApoderado;
