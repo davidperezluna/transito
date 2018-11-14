@@ -19,7 +19,6 @@ export class NewRnmaCambioColorComponent implements OnInit {
     @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public colores: any;
     public tramiteFacturaSelected: any;
     public colorSelected: any;
@@ -97,7 +96,7 @@ export class NewRnmaCambioColorComponent implements OnInit {
                  
                 this._VehiculoService.update(this.datos,token).subscribe(
                 response => { 
-                    if(response.status == 'success'){ 
+                if(response.status == 'success'){ 
                         let resumen = {
                             'color anterior': this.vehiculo.color.nombre,
                             'nuevo color': colorResponse.data.nombre,

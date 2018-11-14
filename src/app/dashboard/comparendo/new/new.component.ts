@@ -188,7 +188,7 @@ constructor(
             text: 'la comparendo '+ this.comparendo.consecutivo +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
@@ -204,134 +204,151 @@ constructor(
   onChangedMpersonalFuncionario(e){
     if (e) {
      let token = this._loginService.getToken();
+
+      swal({
+        title: 'Buscando consecutivo',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      });
+
      this._MpersonalFuncionarioService.show(token,e).subscribe(
         response => {
-          this.funcionario = response.data;
-          this.comparendo.consecutivo = this.funcionario.sedeOperativa.codigoDivipo;
-          this.comparendo.funcionarioId = this.funcionario.id;
+          if (response.status == 'success') {
+            this.funcionario = response.data;
+            this.comparendo.funcionarioId = this.funcionario.id;
+  
+            this._MpersonalComparendoService.searchLastByFuncionario({ 'funcionario': this.funcionario }, token).subscribe(
+              response => {
+                if (response.status == 'success') {
+                  swal.close();
+
+                  this.consecutivo = response.data;
+                  this.comparendo.consecutivoId = this.consecutivo.id;
+
+                  this._MunicipioService.getMunicipioSelect().subscribe(
+                    response => {
+                      this.municipios = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+
+                  this._MparqPatioService.select().subscribe(
+                    response => {
+                      this.patios = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+
+                  this._MparqGruaService.select().subscribe(
+                    response => {
+                      this.gruas = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+
+                  this._MflInfraccionService.select().subscribe(
+                    response => {
+                      this.infracciones = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+
+                  this._CfgTipoInfractorService.select().subscribe(
+                    response => {
+                      this.infractorTipos = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+
+                  this._CfgLicenciaConduccionCategoriaService.select().subscribe(
+                    response => {
+                      this.categorias = response;
+                    },
+                    error => {
+                      this.errorMessage = <any>error;
+
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  );
+  
+                  this.consecutivo = response.data;
+                }else{
+                  swal({
+                    title: 'Error!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                  });
+                }
+              },
+              error => {
+                this.errorMessage = <any>error;
+  
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
+          }else{
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
         }, 
         error => {
           this.errorMessage = <any>error;
 
-          if(this.errorMessage != null){
+          if (this.errorMessage != null) {
             console.log(this.errorMessage);
             alert("Error en la petición");
           }
         }
       );
     }
-  }
-
-  onValidarConsecutivo(){
-    let token = this._loginService.getToken();
-
-    let datos = {'consecutivo':this.comparendo.consecutivo, 'funcionarioId': this.comparendo.funcionarioId}
-    this._MpersonalComparendoService.searchByConsecutivoAndFuncionario(datos,token).subscribe(
-      response => {
-        if(response.status == 'success'){
-          this.validado = true;
-          this.consecutivo = response.data;
-          this.comparendo.consecutivoId = this.consecutivo.id;
-          this._MunicipioService.getMunicipioSelect().subscribe(
-            response => {
-              this.municipios = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          this._MparqPatioService.select().subscribe(
-            response => {
-              this.patios = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          this._MparqGruaService.select().subscribe(
-            response => {
-              this.gruas = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          this._MflInfraccionService.select().subscribe(
-            response => {
-              this.infracciones = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          this._CfgTipoInfractorService.select().subscribe(
-            response => {
-              this.infractorTipos = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          this._CfgLicenciaConduccionCategoriaService.select().subscribe(
-            response => {
-              this.categorias = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-        }else{
-          swal({
-            title: 'Atención!',
-            text: response.message,
-            type: 'warning',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-      error => {
-          this.errorMessage = <any>error;
-
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición"); 
-          }
-        }
-    });
   }
 
   onKeyPlaca(){

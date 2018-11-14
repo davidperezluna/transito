@@ -17,26 +17,12 @@
                             <label>Número de solicitud RUNT <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Sustrato <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="datos.sustrato" name="sustrato" type="text" required />
-                        </div>
                         <div class="col-xs-12 col-lg-12">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" [(ngModel)]="checkDocumentacionDuplicadoLiencia" class="custom-control-input" id="check-documentacionDuplicadoLiencia" name="check_documentacionDuplicadoLiencia">
                                 <label class="custom-control-label" for="check-documentacionDuplicadoLiencia">Licencia de transito entregada</label>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-lg-12" *ngIf="checkDocumentacionDuplicadoLiencia">
-                            <label>Documentación</label>
-                            <textarea class="form-control" [(ngModel)]="documentacionDuplicadoLiencia" name="documentacionDuplicadoLiencia" rows="4" required></textarea>
-                        </div>
-                        <!-- <div class="col-xs-12 col-lg-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" [(ngModel)]="datos.entregada" class="custom-control-input" id="check-entregada" name="check_entregada">
-                                <label class="custom-control-label" for="check-entregada">Licencia de transito entregada</label>
-                            </div>
-                        </div> -->
                     </div>
                 </form>
             </div>

@@ -11,11 +11,6 @@ import { Router } from "@angular/router";
 import { EmpresaService } from "../../../../services/empresa.service";
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 
-
-
-import swal from 'sweetalert2';
-
-
 @Component({
     selector: 'appRnma-traspaso',
     templateUrl: './newRnma.traspaso.html',
@@ -26,8 +21,6 @@ export class NewRnmaTraspasoComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
-    public colores: any;
     public tramiteFacturaSelected: any;
     public tipoPropiedadSelected:any;
     public ciudadano:any;
@@ -122,9 +115,8 @@ export class NewRnmaTraspasoComponent implements OnInit {
 
         this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.ciudadano = this.respuesta.data;
+                if(response.status == 'success'){
+                    this.ciudadano = response.data;
                     this.ciudadanoEncontrado= 2;
                     this.ciudadanoNew = false;
             }else{
@@ -149,9 +141,8 @@ export class NewRnmaTraspasoComponent implements OnInit {
         };
         this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.apoderadoSelected = this.respuesta.data;
+                if(response.status == 'success'){
+                    this.apoderadoSelected = response.data;
                     this.apoderadoEncontrado= 2;
                     // this.ciudadanoNew = false;
             }else{
@@ -176,9 +167,8 @@ export class NewRnmaTraspasoComponent implements OnInit {
         };
         this._EmpresaService.showNit(token,nit).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.empresa = this.respuesta.data;
+                if(response.status == 'success'){
+                    this.empresa = response.data;
                     this.empresaEncontrada= 2;
             }else{
                 this.empresaEncontrada=3;

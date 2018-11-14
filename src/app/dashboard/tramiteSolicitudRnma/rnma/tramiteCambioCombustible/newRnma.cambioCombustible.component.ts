@@ -18,17 +18,16 @@ export class NewRnmaCambioCombustibleComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public combustibles: any;
     public tramiteFacturaSelected: any;
     public combustibleSelected: any;
-    public resumen = {};     
+
     public datos = {
-        'newData': null,
-        'oldData': null, 
-        'sustrato': null,
-        'tramiteFormulario': null,
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idCombustible': null,
+        'tramiteFormulario': null,
     };
 
     constructor(
@@ -61,42 +60,40 @@ export class NewRnmaCambioCombustibleComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        this._CombustibleService.showCombustible(token,this.combustibleSelected).subscribe(
-            combustible => {
-                    this.vehiculo.combustibleId = this.combustibleSelected    
-                    this.vehiculo.municipioId = this.vehiculo.municipio.id   
-                    this.vehiculo.lineaId = this.vehiculo.linea.id   
-                    this.vehiculo.colorId = this.vehiculo.color.id   
-                    this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-                    this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-                    this.vehiculo.claseId = this.vehiculo.clase.id   
-                    this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+        this._CombustibleService.showCombustible(token, this.combustibleSelected).subscribe(
+            combustibleResponse => {
+                this.datos.idFactura = this.factura.id;
+                this.datos.tramiteFormulario = 'rnma-cambiocombustible';
+                this.datos.idCombustible = this.combustibleSelected;
+                this.datos.idVehiculo = this.vehiculo.id;
+                this.datos.campos = ['combustible'];
+
+                this._VehiculoService.update(this.datos, token).subscribe(
                     response => {
-                        if(response.status == 'success'){
-                            this.datos.newData = combustible.data.nombre;
-                            this.datos.oldData = this.vehiculo.combustible.nombre;
-                            this.datos.idFactura = this.factura.id;
-                            this.datos.tramiteFormulario = 'rnma-cambiocombustible';
-                            this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                        if (response.status == 'success') {
+                            let resumen = {
+                                'combustible anterior': this.vehiculo.combustible.nombre,
+                                'nuevo combustible': combustibleResponse.data.nombre,
+                            };
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                         }
                         error => {
-                                this.errorMessage = <any>error;
+                            this.errorMessage = <any>error;
 
-                                if(this.errorMessage != null){
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
                             }
-                    }); 
-                error => {
-                        this.errorMessage = <any>error;
-    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
                         }
+                    });
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
+                }
             });
     }
     onCancelar(){

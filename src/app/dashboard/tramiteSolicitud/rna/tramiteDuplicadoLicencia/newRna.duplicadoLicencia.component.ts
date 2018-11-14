@@ -14,51 +14,26 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
-    public numeroRunt: any;
+
     public documentacion: any;
-    public entregada = false;
-    public resumen = {};     public datos = {
-        'sustrato': null,
+    public resumen = {};     
+    public datos = {
         'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'numeroLicenciaActual': null,
+        'nuevaLicencia': null,
     };
 
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _SustratoService: SustratoService,
     ) { }
 
-    ngOnInit() {
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-    }
-
-   
+    ngOnInit() { }
     
     enviarTramite() {
-        this.datos.sustrato = this.sustratoSelected;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.documentacion = this.documentacion;
-        this.datos.entregada = this.entregada;
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-duplicadolicencia';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

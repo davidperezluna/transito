@@ -3,8 +3,6 @@ import { LoginService } from '../../../../services/login.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
-import swal from 'sweetalert2';
-
 @Component({
     selector: 'appRnrs-cambio-servicio',
     templateUrl: './newRnrs.cambioServicio.html'
@@ -15,16 +13,16 @@ export class NewRnrsCambioServicioComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public servicios: any;
     public tramiteFacturaSelected: any;
     public servicioSelected: any;
-    public resumen = {};     
+    
     public datos = {
-        'newData': null,
-        'oldData': null,
-        'tramiteFormulario': null,
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idServicio': null,
+        'tramiteFormulario': null,
     };
 
     constructor(
@@ -57,44 +55,40 @@ export class NewRnrsCambioServicioComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        this._ServicioService.showServicio(token,this.servicioSelected).subscribe(
-            servicio => {
-                    this.vehiculo.servicioId = this.servicioSelected    
-                    this.vehiculo.municipioId = this.vehiculo.municipio.id   
-                    this.vehiculo.lineaId = this.vehiculo.linea.id   
-                    this.vehiculo.colorId = this.vehiculo.color.id   
-                    this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-                    this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-                    this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-                    this.vehiculo.claseId = this.vehiculo.clase.id   
-                    this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this.datos.idFactura = this.factura.id;
-                    this.datos.tramiteFormulario = 'rnrs-cambioservicio';
-                    this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+        this._ServicioService.showServicio(token, this.servicioSelected).subscribe(
+            servicioResponse => {
+                this.datos.idFactura = this.factura.id;
+                this.datos.tramiteFormulario = 'rnrs-cambioservicio';
+                this.datos.idServicio = this.servicioSelected;
+                this.datos.idVehiculo = this.vehiculo.id;
+                this.datos.campos = ['servicio'];
+
+                this._VehiculoService.update(this.datos, token).subscribe(
                     response => {
-                        this.respuesta = response; 
-                        if(this.respuesta.status == 'success'){
-                            this.datos.newData = servicio.data.nombre;
-                            this.datos.oldData = this.vehiculo.servicio.nombre;
-                            this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                        if (response.status == 'success') {
+                            let resumen = {
+                                'servicio anterior': this.vehiculo.servicio.nombre,
+                                'nuevo servicio': servicioResponse.data.nombre,
+                            };
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                         }
                         error => {
-                                this.errorMessage = <any>error;
+                            this.errorMessage = <any>error;
 
-                                if(this.errorMessage != null){
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
                             }
-                    }); 
-                error => {
-                        this.errorMessage = <any>error;
-    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
                         }
+                    });
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
+                }
             });
     }
     onCancelar(){

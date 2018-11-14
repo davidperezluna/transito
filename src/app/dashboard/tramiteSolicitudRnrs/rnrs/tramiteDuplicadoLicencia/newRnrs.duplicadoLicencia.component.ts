@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -16,15 +15,10 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
-    public entregada = false;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'numeroLicencia': null,
         'numeroRunt': null,
-        'sustrato': null,
-        'documentacion': null,
-        'entregada': null,
         'tramiteFormulario': null,
         'idFactura': null,
     };
@@ -32,7 +26,6 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _SustratoService: SustratoService,
     ) { }
 
     ngOnInit() {}

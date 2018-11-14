@@ -2,39 +2,32 @@
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
-        <div class="card">
+        <div class="card" *ngIf="consecutivo">
             <div class="card-body">
-                <form #formNew="ngForm">
-                    <h5 class="m-0">
-                        Registrar Información de del IPAT
-                    </h5>
-                    <small>Todos los campos con
-                        <b class="text-danger">*</b> son obligatorios</small>
-                    <hr>
-                    <div class="row">
-                        <div class="col-xs-8 col-lg-6">
-                            <div class="col-lg-12 col-md-12" *ngIf="consecutivo">
-                                <br>
-                                <label>Datos Básicos
-                                </label>
-                                <table class="table table-bordered">
-                                    <tbody>
+                <div class="row">
+                    <div class="col-xs-8 col-lg-6">
+                        <div class="col-lg-12 col-md-12">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr>
                                         <td>
                                             <strong>Organismo de Transito: </strong>
-                                            <br>{{ sedeOperativa?.nombre }}</td>
+                                            <br>{{ sedeOperativa?.nombre }}
+                                        </td>
                                         <td>
                                             <strong>Nro. IPAT: </strong>
-                                            <br>{{ consecutivo?.consecutivo }}</td>
+                                            <br>{{ consecutivo?.consecutivo }}
+                                        </td>
                                         <td>
                                             <strong>Estado IPAT: </strong>
                                             <br>{{ consecutivo?.estado }}
                                         </td>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -42,8 +35,9 @@
             <div class="card" *ngIf="consecutivo">
                 <div class="card-header">
                     <h5 class="card-title">
-                        <strong class="text-uppercase">Registrar Información del IPAT</strong>
-                        <small>Información General del accidente </small>
+                        <strong class="text-uppercase">Registrar Información del IPAT, Información General del accidente </strong>
+                        <br>
+                        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                     </h5>
                 </div>
                 <div class="card-body">

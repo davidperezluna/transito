@@ -3,6 +3,8 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
+//import { CfgEntidadJudicialService } from "../../../../services/cfgEntidadJudicial.service";
+import { CfgEntidadJudicialService } from "../../../../services/cfgEntidadJudicial.service";
 
 import swal from 'sweetalert2';
 
@@ -16,47 +18,47 @@ export class NewRnmaCancelacionMatriculaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
-    public tipoRegrabacionList: string[];
-    public tipoBlindajeList: string[];
-    public tipoRegrabacionSelected: any;
-    public nivelBlindajeList: string[];
-    public motivoSelected: any;
-    public nuevoNumero: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
-    public resumen = {};     public datos = {
-        'motivoCancelacion': null,
-        'entidadJudicial': null,
-        'numeroOficio': null, 
-        'declaracion':null,  
-        'fechaDeclaracion':null,
-        'ipat':null,
-        'fechaEchos':null,
-        'recuperarMotor':null,         
+    public entidadesJudiciales: any;
+    public vehiculos: any;
+
+    public datos = {
+        'idEntidadJudicial': null,
+        'numeroOficio': null,
+        'declaracion': null,
+        'fechaDeclaracion': null,
+        'ipat': null,
+        'fechaHechos': null,
+        'recuperarMotor': null,
         'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'idMotivoCancelacion': null,
+        'campos': null,
+        'idVehiculo': null,
+
     };
+
+    public motivosCancelacion = [
+        { value: 'DESAPARICIÓN DOCUMENTACIÓN', label: 'DESAPARICIÓN DOCUMENTACIÓN' },
+        { value: 'HURTO', label: 'HURTO' },
+        { value: 'PERDIDA DEFINITIVA', label: 'PERDIDA DEFINITIVA' },
+        { value: 'EXPORTACIÓN O REEXPORTACIÓN', label: 'EXPORTACIÓN O REEXPORTACIÓN' },
+        { value: 'DESTRUCCIÓN O PERDIDA TOTAL', label: 'DESTRUCCIÓN O PERDIDA TOTAL' },
+    ];
 
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _SustratoService: SustratoService,
         private _VehiculoService: VehiculoService,
+        private _EntidadJudicialService: CfgEntidadJudicialService,
     ) { }
 
     ngOnInit() {
-        this.nivelBlindajeList = ['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO','SEIS','SIETE','OCHO'];
-        this.tipoBlindajeList = ['Blindaje de un vehículo', 'Desblindaje de un vehículo'];
-
-        this._SustratoService.getSustratoSelect().subscribe(
+        this._EntidadJudicialService.getEntidadJudicialSelect().subscribe(
             response => {
-                this.sustratos = response;
+                this.entidadesJudiciales = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -70,39 +72,35 @@ export class NewRnmaCancelacionMatriculaComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.cancelado=true
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-cancelacionmatricula';
-        let token = this._loginService.getToken(); 
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-            }
-            error => {
+
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['cancelacionmatricula'];
+
+        let token = this._loginService.getToken();
+
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'id vehiculo': this.vehiculo.nombre,
+                        'id factura': this.datos.idFactura,
+                        'entidad judicial': this.datos.idEntidadJudicial,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
+                error => {
                     this.errorMessage = <any>error;
 
-                    if(this.errorMessage != null){
+                    if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
                     }
                 }
-        });
-
-
+            });
     }
-    onCancelar(){
+    onCancelar() {
         this.cancelarTramite.emit(true);
     }
-
 }

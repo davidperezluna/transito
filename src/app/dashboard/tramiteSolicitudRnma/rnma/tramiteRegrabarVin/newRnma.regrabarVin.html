@@ -23,21 +23,11 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Nuevo número</label>
-                            <input class="form-control" [(ngModel)]="nuevoNumero" name="nuevoNumero" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.nuevoNumero" name="nuevoNumero" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Número de solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Documentación</label>
-                            <textarea class="form-control" [(ngModel)]="documentacion" name="documentacion"></textarea>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" [(ngModel)]="entregada" class="custom-control-input" id="entregada" name="entregada" checked="">
-                                <label class="custom-control-label" for="entregada">Documentación completa entregada</label>
-                            </div>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                     </div>
                 </div>

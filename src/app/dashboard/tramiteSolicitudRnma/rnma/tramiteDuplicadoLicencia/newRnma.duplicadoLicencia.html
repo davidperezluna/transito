@@ -17,16 +17,12 @@
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Documentación</label>
-                            <textarea class="form-control" [(ngModel)]="datos.documentacion" name="documentacion"></textarea>
+                            <label>Número de Licencia</label>
+                            <input class="form-control" [(ngModel)]="vehiculo" name="numeroLicenciaActual" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <div class="col-xs-12 col-lg-12">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="datos.entregada" class="custom-control-input" id="entregada" name="entregada" checked="">
-                                    <label class="custom-control-label" for="entregada">Documentación completa entregada</label>
-                                </div>
-                            </div>
+                            <label>Nuevo Número Licencia</label>
+                            <input class="form-control" [(ngModel)]="datos.nuevaLicencia" name="nuevaLicencia" type="text" required />
                         </div>
                     </div>
                 </div>

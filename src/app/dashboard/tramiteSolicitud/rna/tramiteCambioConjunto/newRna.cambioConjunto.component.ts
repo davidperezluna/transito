@@ -18,7 +18,6 @@ export class NewRnaCambioConjuntoComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tipoPotenciacionSelect: any;
     public nuevoModelo: any;
     public descricion: any;
@@ -62,8 +61,8 @@ export class NewRnaCambioConjuntoComponent implements OnInit {
         this.vehiculo.servicioId = this.vehiculo.servicio.id 
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
         response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
+            response = response; 
+            if(response.status == 'success'){
                 this.datos.newData = this.nuevoModelo;
                 this.datos.oldData = this.vehiculo.modelo;
                 this.datos.tipoPotenciacion = this.descricion;

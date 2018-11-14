@@ -58,7 +58,6 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         'propietariosCiudadanos': [],
         'solidario': false,
         'vehiculo': null,
-        'sustrato': null,
         'numeroLicencia': null,
         'tramiteFormulario': null,
         'idFactura': null,

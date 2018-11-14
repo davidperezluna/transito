@@ -18,15 +18,17 @@ export class NewRnaTransformacionComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
+    public nuevoRegistro: any;
     public tipoPotenciacionSelect: any;
-    public nuevoModelo: any;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'newData': null,
         'oldData': null,
         'tipoPotenciacion': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'idVehiculo': null,
+        'campos': null,
     };
     public tiposPotenciacion = [
         {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
@@ -41,42 +43,40 @@ export class NewRnaTransformacionComponent implements OnInit {
         private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() {
-
-    }
+    ngOnInit() { }
     
     enviarTramite(){
         let token = this._loginService.getToken();
 
-        /*this.vehiculo.modelo = this.nuevoModelo    
-        this.vehiculo.placa = this.vehiculo.cfgPlaca.numero    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){*/
-                this.datos.newData = this.nuevoModelo;
-                this.datos.oldData = this.vehiculo.modelo;
-                this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rna-transformacion';
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-            //}
-            error => {
+        this.vehiculo.modelo = this.nuevoRegistro
+        this.vehiculo.placa = this.vehiculo.cfgPlaca.numero
+        this.vehiculo.municipioId = this.vehiculo.municipio.id
+        this.vehiculo.lineaId = this.vehiculo.linea.id
+        this.vehiculo.colorId = this.vehiculo.color.id
+        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id
+        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id
+        this.vehiculo.claseId = this.vehiculo.clase.id
+        this.vehiculo.servicioId = this.vehiculo.servicio.id
+        this._VehiculoService.editVehiculo(this.vehiculo, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.datos.newData = this.nuevoRegistro;
+                    this.datos.oldData = this.vehiculo.modelo;
+                    this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
+                    this.datos.idFactura = this.factura.id;
+                    this.datos.tramiteFormulario = 'rnma-tranformacion';
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': this.resumen });
+                }
+                error => {
                     this.errorMessage = <any>error;
 
-                    if(this.errorMessage != null){
+                    if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
                     }
                 }
-        //}); 
+            }
+        ); 
     }
 
     onCancelar(){

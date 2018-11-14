@@ -18,17 +18,11 @@ export class NewRnrsDuplicadoPlacaComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public motivoList: string[];
     public motivoSelected: any;
-    public cantidad: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'motivo': null,
         'cantidad': null,
         'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
     };
@@ -46,10 +40,6 @@ export class NewRnrsDuplicadoPlacaComponent implements OnInit {
    
     enviarTramite() {
         this.datos.motivo = this.motivoSelected;
-        this.datos.cantidad = this.cantidad;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.documentacion = this.documentacion;
-        this.datos.entregada = this.entregada;
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-duplicadoplaca';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

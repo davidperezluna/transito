@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { SustratoService } from '../../../../services/sustrato.service';
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 import { CombustibleService } from '../../../../services/combustible.service';
-
-import swal from 'sweetalert2';
+import { LoginService } from '../../../../services/login.service';
+import { VehiculoService } from 'app/services/vehiculo.service';
 
 @Component({
     selector: 'appRnrs-cambio-motor',
@@ -12,29 +11,19 @@ import swal from 'sweetalert2';
 export class NewRnrsCambioMotorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() vehiculo: any = null;
+    @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
     public tiposIdentificacion: any;
     public tipoIdentificacionSelected: any;
     public tipoIngresoList: string[];
     public tipoIngresoSelected: any;
-    public numeroMotor: any;
-    public numeroAceptacion: any;
-    public numeroFactura: any;
-    public numeroRunt: any;
-    public fecha: any;
-    public tipoIdentificacion: any;
-    public numeroIdentificacion: any;
-    public documentacion: any;
-    public entregada = false;
     public combustibles: any;
     public combustibleSelected: any;
-    public resumen = {};     public datos = {
-        'tipoIngreso': null,
+    public resumen = {};     
+    public datos = {
         'numeroMotor': null,
         'numeroAceptacion': null,
         'numeroFactura': null,
@@ -42,26 +31,27 @@ export class NewRnrsCambioMotorComponent implements OnInit {
         'tipoIdentificacion': null,
         'numeroIdentificacion': null,
         'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
-        'combustibleId': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idTipoIngreso': null,
+        'idCombustible': null,
     };
 
     constructor(
-        private _SustratoService: SustratoService,
         private _CombustibleService: CombustibleService,
+        private _loginService: LoginService,
         private _TipoIdentificacionService: TipoIdentificacionService,
+        private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() {
         this.tipoIngresoList = ['Nuevo', 'Usado'];
 
-        this._SustratoService.getSustratoSelect().subscribe(
+        this._CombustibleService.getCombustibleSelect().subscribe(
             response => {
-                this.sustratos = response;
+                this.combustibles = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -72,7 +62,7 @@ export class NewRnrsCambioMotorComponent implements OnInit {
                 }
             }
         );
-
+        
         this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
             response => {
                 this.tiposIdentificacion = response;
@@ -89,20 +79,31 @@ export class NewRnrsCambioMotorComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.datos.tipoIngreso = this.tipoIngresoSelected;
-        this.datos.numeroMotor = this.numeroMotor;
-        this.datos.numeroAceptacion = this.numeroAceptacion;
-        this.datos.numeroFactura = this.numeroFactura;
-        this.datos.fecha = this.fecha;
-        this.datos.tipoIdentificacion = this.tipoIdentificacionSelected;
-        this.datos.numeroIdentificacion = this.numeroIdentificacion;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.documentacion = this.documentacion;
-        this.datos.entregada = this.entregada;
-        this.datos.combustibleId = this.combustibleSelected;
+        let token = this._loginService.getToken();
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-cambiomotor';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        this.datos.idTipoIngreso = this.tipoIngresoSelected;
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['motor'];
+
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'motor anterior': this.vehiculo.motor.nombre,
+                        'nuevo motor': this.datos.numeroMotor,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });  
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

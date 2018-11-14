@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { SustratoService } from '../../../../services/sustrato.service';
-import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
@@ -16,9 +14,6 @@ export class NewRnmaDuplicadoLicenciaComponent implements OnInit {
     public errorMessage;
 
     public tramiteFacturaSelected: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
 
     public resumen = {
 
@@ -26,21 +21,20 @@ export class NewRnmaDuplicadoLicenciaComponent implements OnInit {
     
     public datos = {
         'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'numeroLicenciaActual': null,
+        'nuevaLicencia': null,
+
     };
 
     constructor(
-        private _loginService: LoginService,
-        private _SustratoService: SustratoService,
     ) { }
 
     ngOnInit() { }
-
     
     enviarTramite() {
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-duplicado-licencia';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }

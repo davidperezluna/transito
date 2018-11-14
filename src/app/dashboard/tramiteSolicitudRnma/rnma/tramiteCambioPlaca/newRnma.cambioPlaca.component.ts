@@ -3,6 +3,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
+import { VehiculoService } from 'app/services/vehiculo.service';
 
 @Component({
     selector: 'appRnma-cambio-placa',
@@ -11,45 +12,67 @@ import swal from 'sweetalert2';
 export class NewRnmaCambioPlacaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
-    public tramiteFacturaSelected: any;
-    public tipoCambioList: string[];
     public tipoCambioSelected: any;
-    public numeroRunt: any;
     public nuevaPlaca: any;
-    public documentacion: any;
-    public resumen = {};     public datos = {
-        'tipoCambio': null,
-        'numeroRunt': null,
-        'nuevaPlaca': null,
-        'documentacion': null,
-        'sustrato': null,
-        'tramiteFormulario': null,
+
+    public datos = {
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idTipoCambio': null,
+        'idPlaca': null,
+        'tramiteFormulario': null,
+        'numeroRunt': null,
+
     };
+
+    public tiposCambio = [
+        { value: 'ANTIGUO', label: 'ANTIGUO' },
+        { value: 'CLASICO', label: 'CLASICO' },
+        { value: 'NORMAL', label: 'NORMAL' },
+    ];
 
     constructor(
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
+        private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() {
-        this.tipoCambioList = ['Antiguo', 'Clasico', 'Normal'];
-    }
+    ngOnInit() { }
     
     enviarTramite() {
-        this.datos.tipoCambio = this.tipoCambioSelected;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.nuevaPlaca = this.nuevaPlaca;
-        this.datos.documentacion = this.documentacion;
+        let token = this._loginService.getToken();
+
+        this.datos.idTipoCambio = this.tipoCambioSelected;
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-cambioplaca';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['placa'];
+
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'placa anterior': this.vehiculo.placa.nombre,
+                        'nueva placa': response.data.nombre,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
     }
+
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
-
 }

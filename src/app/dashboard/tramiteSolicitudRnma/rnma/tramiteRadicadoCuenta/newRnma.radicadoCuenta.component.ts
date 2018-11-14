@@ -22,7 +22,6 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
     @Input() tramitesFactura: any = null;
 
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
     public tramiteRealizado: any;
     public municipios:any;

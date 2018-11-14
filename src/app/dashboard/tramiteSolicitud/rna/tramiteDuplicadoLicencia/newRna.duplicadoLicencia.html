@@ -12,31 +12,17 @@
                 <hr>
                 <div class="row justify-content-center container">
                     <div class="form-group row">
-                        <div class="col-lg-12 col-md-16">
-                            <label>Sustrato*</label>
-                            <ng-select 
-                            [multiple]="false" 
-                            [options]="sustratos" 
-                            [(ngModel)]="sustratoSelected" 
-                            required 
-                            name="sustratoId">
-                            </ng-select>
-                        </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Número solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Documentación</label>
-                            <textarea class="form-control" [(ngModel)]="documentacion" name="documentacion"></textarea>
+                            <label>Número de Licencia</label>
+                            <input class="form-control" [(ngModel)]="vehiculo" name="numeroLicenciaActual" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <br>
-                            <label class="custom-control custom-checkbox" for="ENTREGADA">
-                                <input type="checkbox"  [(ngModel)]="entregada" name="entregada" class="custom-control-input"  id="ENTREGADA" required>
-                                <span class="custom-control-indicator"></span> 
-                                <span class="custom-control-description">Entregada</span>
-                            </label>
+                            <label>Nuevo Número Licencia</label>
+                            <input class="form-control" [(ngModel)]="datos.nuevaLicencia" name="nuevaLicencia" type="text" required />
                         </div>
                     </div>
                 </div>

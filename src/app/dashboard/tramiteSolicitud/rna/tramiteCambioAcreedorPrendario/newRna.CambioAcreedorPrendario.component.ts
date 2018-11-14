@@ -29,7 +29,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     public placa: CfgPlaca = null;;
     public errorMessage;
-    public respuesta;
     public cfgTiposAlerta: any;
     public tramiteFacturaSelected: any;
     public ciudadano: any;
@@ -138,13 +137,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         );
         this._VehiculoAcreedorService.getAcreedor().subscribe(
             response => {
-                this.respuesta = response;
-                console.log(response);
-                if (this.respuesta.status == 'success') {
-                    this.vehiculosAcreedor = this.respuesta.data;
-                    
-                    // this.acreedorEncontrado = 2;
-                    // this.acreedorNew = false;
+                if (response.status == 'success') {
+                    this.vehiculosAcreedor = response.data;
                 } else {
                     this.acreedorEncontrado = 3;
                     this.acreedorNew = true;
@@ -182,15 +176,12 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         
         this._VehiculoAcreedorService.deleteAcreedor(this.datos, token).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
+                response = response;
+                if (response.status == 'success') {
                     this.ngOnInit();
                     this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                     this.acreedorNew = false;
-
                     this.acreedorEncontrado = 2;
-
-                    // this.acreedorEncontrado = 2;
                 } else {
                     this.acreedorEncontrado = 3;
                     this.acreedorNew = true;
@@ -205,13 +196,10 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 }
             }
         );
-      
-
     }
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
-
 
     onKeyAcreedor() {
         let token = this._loginService.getToken();
@@ -227,15 +215,15 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         };
         this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.ciudadano = this.respuesta.data.ciudadano.id;
+                response = response;
+                if (response.status == 'success') {
+                    this.ciudadano = response.data.ciudadano.id;
                     this.datos.ciudadanoOldId = this.ciudadano;
                     this._VehiculoAcreedorService.showAcreedorCiudadano(token, this.ciudadano).subscribe(
                         response => {
-                            this.respuesta = response;
-                            if (this.respuesta.status == 'success') {
-                                this.acreedor = this.respuesta.data;
+                            response = response;
+                            if (response.status == 'success') {
+                                this.acreedor = response.data;
                                 this.acreedorEncontrado = 2;
                                 this.enviarEncontrado = 5;
   
@@ -301,9 +289,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         };
         this._CiudadanoService.searchByIdentificacion(identificacionNuevoAcreedor,token).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.ciudadanoAcreedorNew = this.respuesta.data;
+                response = response;
+                if (response.status == 'success') {
+                    this.ciudadanoAcreedorNew = response.data;
                    
                 } else {
                     this.ciudadanoEncontrado = 3;
@@ -328,15 +316,15 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         };
         this._EmpresaService.showNit(token, this.nit).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.empresa = this.respuesta.data;
+                response = response;
+                if (response.status == 'success') {
+                    this.empresa = response.data;
                    // this.empresaEncontrada = 2;
                     this._VehiculoAcreedorService.showAcreedorEmpresa(token, this.empresa).subscribe(
                         response => {
-                            this.respuesta = response;
-                            if (this.respuesta.status == 'success') {
-                                this.acreedor = this.respuesta.data;
+                            response = response;
+                            if (response.status == 'success') {
+                                this.acreedor = response.data;
                                 this.acreedorEncontrado = 2;
                                 this.enviarEncontrado = 5;
                                 // if (this.acreedor.empresa) {
@@ -477,17 +465,15 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         }
     }
 
-
-
     changedtipoIdentificacion(e) {
         this.ciudadanoEncontrado = 1;
         this.empresaEncontrada = 1;
     }
+
     changedtipoIdentificacionNuevoAcreedor(e) {
         this.ciudadanoEncontrado = 1;
         this.empresaEncontrada = 1;
     }
-
 
     delete(acreedor:any): void{
         this.datos.acreedoresCiudadanos = this.datos.acreedoresCiudadanos.filter(h => h !== acreedor);
@@ -495,6 +481,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
             this.listaAcreedoresCiudadanos = false;
         }
     }
+    
     deleteEmpresa(empresa: any): void {
         this.datos.acreedoresEmpresas = this.datos.acreedoresEmpresas.filter(h => h !== empresa);
         if (this.datos.acreedoresEmpresas.length === 0) {
