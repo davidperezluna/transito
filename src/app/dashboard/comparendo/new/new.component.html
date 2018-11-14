@@ -18,12 +18,27 @@
                                         required name="agenteId">
                                     </ng-select>
                                 </div>
-                                <div class="col-lg-12">
-                                    <label>Numero de Comparendo <b class="text-danger">*</b></label>
-                                    <input class="form-control" [(ngModel)]="comparendo.consecutivo" name='consecutivo' type="text" required>
+                                <div class="col-lg-12" *ngIf='consecutivo'>
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong>Organismo de Transito: </strong>
+                                                    <br>{{ funcionario.sedeOperativa.nombre }}
+                                                </td>
+                                                <td>
+                                                    <strong>Nro. consecutivo: </strong>
+                                                    <br>{{ consecutivo?.numero }}
+                                                </td>
+                                                <td>
+                                                    <strong>Estado: </strong>
+                                                    <br>{{ consecutivo?.estado }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        <button (click)="onValidarConsecutivo()" [disabled]="comparendoForm.invalid" class="btn btn-primary pull-right" type="button">Validar</button>
                     </form>     
                 </div>
             </div><!-- /.card-body -->
@@ -31,7 +46,7 @@
     </div><!-- /.col -->
 
 
-    <div class="col-xs-12 col-lg-9" *ngIf='validado'>
+    <div class="col-xs-12 col-lg-9" *ngIf='consecutivo'>
         <div class="card"><!-- .card -->
             <div class="card-header"><!-- .card-header -->
                 <h5 class="card-title"><!-- .card-title -->
