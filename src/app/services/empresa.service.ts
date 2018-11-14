@@ -43,8 +43,8 @@ export class EmpresaService {
 
 	showNit(token,nit){
 
-		//let json = JSON.stringify(nit);
-		let params = /*"json="+json+*/"&authorization="+token;
+		let json = JSON.stringify(nit);
+		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show/empresa/"+nit, params, {headers: headers})
 		.map(res => res.json())					  
