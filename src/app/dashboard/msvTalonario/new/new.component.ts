@@ -14,7 +14,6 @@ export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public errorMessage;
     public id;
-    public respuesta;
     public msvTalonarios;
     public formNew = false;
     public formN = false;
@@ -102,18 +101,12 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.msvTalonario.rangoini = this.msvTalonario.rangoini;
-        this.msvTalonario.rangofin = this.msvTalonario.rangofin;
-        this.msvTalonario.total = this.msvTalonario.total;
-        this.msvTalonario.fechaAsignacion = this.msvTalonario.fechaAsignacion;
-        this.msvTalonario.nResolucion = this.msvTalonario.nResolucion;
+
         this.msvTalonario.sedeOperativaId = this.sedeOperativaSelected;
+        
         this._msvTalonarioService.register(this.msvTalonario, token).subscribe(
             response => {
-                //console.log(response);
-                this.respuesta = response;
-                console.log(this.respuesta);
-                if (this.respuesta.status == 'success') {
+                if (response.status == 'success') {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',
