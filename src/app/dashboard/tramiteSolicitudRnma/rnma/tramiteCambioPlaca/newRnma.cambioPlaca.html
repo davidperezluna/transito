@@ -16,10 +16,8 @@
                             <label>Tipo de Cambio
                                 <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control" name="tipoCambioSelected" [(ngModel)]="tipoCambioSelected" required>
-                                <option *ngFor="let tipoCambio of tipoCambioList" [value]="tipoCambio"> {{tipoCambio}}
-                                </option>
-                            </select>
+                            <ng-select [multiple]="false" [options]="tiposCambio" [(ngModel)]="datos.idTipoCambio" required name="tipoCambio">
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Número de solicitud RUNT</label>

@@ -16,10 +16,8 @@
                             <label>Tipo de Ingreso
                                 <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control" name="tipoIngresoSelected" [(ngModel)]="tipoIngresoSelected" required>
-                                <option *ngFor="let tipoIngreso of tipoIngresoList" [value]="tipoIngreso"> {{tipoIngreso}}
-                                </option>
-                            </select>
+                            <ng-select [multiple]="false" [options]="tiposIngreso" [(ngModel)]="datos.idTipoIngreso" required name="tipoIngreso">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Número de motor *</label>

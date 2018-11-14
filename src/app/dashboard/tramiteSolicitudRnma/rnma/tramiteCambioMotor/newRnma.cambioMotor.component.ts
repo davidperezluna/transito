@@ -2,6 +2,8 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { SustratoService } from '../../../../services/sustrato.service';
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 import { CombustibleService } from '../../../../services/combustible.service';
+import { VehiculoService } from 'app/services/vehiculo.service';
+import { LoginService } from '../../../../services/login.service';
 
 
 @Component({
@@ -11,6 +13,8 @@ import { CombustibleService } from '../../../../services/combustible.service';
 export class NewRnmaCambioMotorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() vehiculo: any = null;
+    @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
     public respuesta;
@@ -32,31 +36,30 @@ export class NewRnmaCambioMotorComponent implements OnInit {
     public entregada = false;
     public combustibles: any;
     public combustibleSelected: any;
-    public resumen = {};     public datos = {
-        'tipoIngreso': null,
-        'numeroMotor': null,
-        'numeroAceptacion': null,
-        'numeroFactura': null,
-        'fecha': null,
-        'tipoIdentificacion': null,
-        'numeroIdentificacion': null,
-        'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
-        'sustrato': null,
-        'tramiteFormulario': null,
-        'combustibleId': null,
+
+    public datos = {
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idTipoIngreso': null,
+        'idCombustible': null,
+        'tramiteFormulario': null,
     };
+
+    public tiposIngreso = [
+        { value: 'NUEVO', label: 'NUEVO' },
+        { value: 'USADO', label: 'DESBLINDAJE DE UN VEHICULO' },
+    ];
 
     constructor(
         private _CombustibleService: CombustibleService,
+        private _loginService: LoginService,
         private _SustratoService: SustratoService,
         private _TipoIdentificacionService: TipoIdentificacionService,
+        private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() {
-        this.tipoIngresoList = ['Nuevo', 'Usado'];
 
         this._CombustibleService.getCombustibleSelect().subscribe(
             response => {
@@ -102,20 +105,43 @@ export class NewRnmaCambioMotorComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.datos.tipoIngreso = this.tipoIngresoSelected;
-        this.datos.numeroMotor = this.numeroMotor;
-        this.datos.numeroAceptacion = this.numeroAceptacion;
-        this.datos.numeroFactura = this.numeroFactura;
-        this.datos.fecha = this.fecha;
-        this.datos.tipoIdentificacion = this.tipoIdentificacionSelected;
-        this.datos.numeroIdentificacion = this.numeroIdentificacion;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.documentacion = this.documentacion;
-        this.datos.entregada = this.entregada;
-        this.datos.idFactura = this.factura.id;
-        this.datos.combustibleId = this.combustibleSelected;
-        this.datos.tramiteFormulario = 'rnma-cambiomotor';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        let token = this._loginService.getToken();
+
+        this._VehiculoService.show(token, this.tipoIngresoSelected).subscribe(
+            motorResponse => {
+                this.datos.idFactura = this.factura.id;
+                this.datos.tramiteFormulario = 'rnma-cambiomotor';
+                this.datos.idTipoIngreso = this.tipoIngresoSelected;
+                this.datos.idVehiculo = this.vehiculo.id;
+                this.datos.campos = ['motor'];
+
+                this._VehiculoService.update(this.datos, token).subscribe(
+                    response => {
+                        if (response.status == 'success') {
+                            let resumen = {
+                                'motor anterior': this.vehiculo.motor.nombre,
+                                'nuevo motor': motorResponse.data.nombre,
+                            };
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        }
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    });
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

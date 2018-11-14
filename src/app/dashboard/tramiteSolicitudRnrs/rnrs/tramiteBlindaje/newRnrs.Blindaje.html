@@ -25,19 +25,15 @@
                             <label>Tipo blindaje
                                 <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control" name="tipoblindajeblindajeSelected" [(ngModel)]="datos.tipoBlindaje" required>
-                                <option *ngFor="let tipoBlindaje of tipoBlindajeList" [value]="tipoBlindaje"> {{tipoBlindaje}}
-                                </option>
-                            </select>
+                            <ng-select [multiple]="false" [options]="tiposBlindaje" [(ngModel)]="datos.idTipoBlindaje" required name="tipoBlindaje">
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Nivel blindaje
                                 <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control" name="nivelblindajeSelected" [(ngModel)]="datos.nivelBlindaje" required>
-                                <option *ngFor="let nivelBlindaje of nivelBlindajeList" [value]="nivelBlindaje"> {{nivelBlindaje}}
-                                </option>
-                            </select>
+                            <ng-select [multiple]="false" [options]="nivelesBlindaje" [(ngModel)]="datos.idNivelBlindaje" required name="nivelBlindaje">
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label> Empresa Blindadora</label>
@@ -45,7 +41,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Número de solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                         
                        

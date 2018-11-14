@@ -16,20 +16,20 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
     public respuesta;
     public sedesOperativas: any;
     public tramiteFacturaSelected: any;
     public sedeOperativaSelected: any;
-    public resumen = {};     
+    
     public datos = {
-        'newData': null,
-        'oldData': null,
-        'numeroRunt': null,
-        'sustrato': null,
-        'tramiteFormulario': null,
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idSedeOperativa': null,
+        'tramiteFormulario': null,
     };
 
     constructor(
@@ -61,43 +61,40 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        this._SedeOperativaService.showSedeOperativa(token,this.sedeOperativaSelected).subscribe(
-            sedeOperativa => {
-                    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected    
-                    this.vehiculo.municipioId = this.vehiculo.municipio.id   
-                    this.vehiculo.lineaId = this.vehiculo.linea.id   
-                    this.vehiculo.colorId = this.vehiculo.color.id   
-                    this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-                    this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-                    this.vehiculo.claseId = this.vehiculo.clase.id   
-                    this.vehiculo.servicioId = this.vehiculo.servicio.id 
-                    this.datos.idFactura = this.factura.id;
-                    this.datos.tramiteFormulario = 'rnrs-cambiosedeoperativa';
-                    this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+        this._SedeOperativaService.showSedeOperativa(token, this.sedeOperativaSelected).subscribe(
+            sedeOperativaResponse => {
+                this.datos.idFactura = this.factura.id;
+                this.datos.tramiteFormulario = 'rnrs-cambiosedeoperativa';
+                this.datos.idSedeOperativa = this.sedeOperativaSelected;
+                this.datos.idVehiculo = this.vehiculo.id;
+                this.datos.campos = ['sedeOperativa'];
+
+                this._VehiculoService.update(this.datos, token).subscribe(
                     response => {
-                        this.respuesta = response; 
-                        if(this.respuesta.status == 'success'){
-                            this.datos.newData = sedeOperativa.data.nombre;
-                            this.datos.oldData = this.vehiculo.sedeOperativa.nombre;
-                            this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                        if (response.status == 'success') {
+                            let resumen = {
+                                'sede anterior': this.vehiculo.sede.nombre,
+                                'nuevo sede': sedeOperativaResponse.data.nombre,
+                            };
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                         }
                         error => {
-                                this.errorMessage = <any>error;
+                            this.errorMessage = <any>error;
 
-                                if(this.errorMessage != null){
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
                             }
-                    }); 
-                error => {
-                        this.errorMessage = <any>error;
-    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
                         }
+                    });
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
+                }
             });
     }
     onCancelar(){
