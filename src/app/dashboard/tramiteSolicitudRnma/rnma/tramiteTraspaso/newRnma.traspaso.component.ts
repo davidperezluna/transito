@@ -58,10 +58,7 @@ export class NewRnmaTraspasoComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
         private _tipoIdentificacionService: TipoIdentificacionService,
         private _CiudadanoService: CiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
