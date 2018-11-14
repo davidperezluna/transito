@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
@@ -15,13 +14,12 @@ export class NewRnmaRegrabarSerieComponent implements OnInit {
     @Input() factura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
     public motivoList: string[];
     public motivoSelected: any;
-    public resumen = {};     public datos = {
+    public resumen = {};    
+    public datos = {
         'motivo': null,
         'nuevoNumero': null,
         'numeroRunt': null,

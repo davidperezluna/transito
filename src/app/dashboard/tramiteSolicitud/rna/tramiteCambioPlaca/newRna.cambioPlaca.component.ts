@@ -13,14 +13,11 @@ export class NewRnaCambioPlacaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
     public tipoCambioList: string[];
     public tipoCambioSelected: any;
-    public numeroRunt: any;
-    public nuevaPlaca: any;
-    public documentacion: any;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'tipoCambio': null,
         'numeroRunt': null,
         'nuevaPlaca': null,
@@ -41,9 +38,6 @@ export class NewRnaCambioPlacaComponent implements OnInit {
     
     enviarTramite() {
         this.datos.tipoCambio = this.tipoCambioSelected;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.nuevaPlaca = this.nuevaPlaca;
-        this.datos.documentacion = this.documentacion;
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-cambioplaca';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

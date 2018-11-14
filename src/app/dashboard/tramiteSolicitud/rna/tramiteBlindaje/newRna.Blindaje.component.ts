@@ -16,17 +16,11 @@ export class NewRnaBlindajeComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
     public motivoSelected: any;
     public nuevoNumero: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
 
     public tipoBlindajeSelected: any;
     public nivelBlindajeSelected: any;
@@ -37,7 +31,9 @@ export class NewRnaBlindajeComponent implements OnInit {
         'idVehiculo': null,
         'idTipoBlindaje': null,
         'idNivelBlindaje': null,
+        'empresaBlindadora': null,
         'tramiteFormulario': null,
+        'numeroRunt': null,
     };
 
     public tiposBlindaje = [
@@ -59,55 +55,28 @@ export class NewRnaBlindajeComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _SustratoService: SustratoService,
         private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() {
-
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-    }
+    ngOnInit() { }
 
     enviarTramite() {
         let token = this._loginService.getToken();
 
-        this._VehiculoService.show(token, this.tipoBlindajeSelected).subscribe(
-            blindajeResponse => {
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rna-blindaje';
-                this.datos.idVehiculo = this.vehiculo.id;
-                this.datos.campos = ['blindaje'];
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-blindaje';
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['blindaje'];
 
-                this._VehiculoService.update(this.datos, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            let resumen = {
-                                'blindaje anterior': this.vehiculo.blindaje.nombre,
-                                'nueva blindaje': blindajeResponse.data.nombre,
-                            };
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    });
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'blindaje anterior': this.vehiculo.blindaje.nombre,
+                        'nuevo blindaje': this.datos.idTipoBlindaje,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
                 error => {
                     this.errorMessage = <any>error;
 
@@ -117,9 +86,6 @@ export class NewRnaBlindajeComponent implements OnInit {
                     }
                 }
             });
-        //this.datos.idFactura = this.factura.id;
-        //this.datos.tramiteFormulario = 'rnma-blindaje';
-        //this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
     }
 
     onCancelar(){

@@ -19,7 +19,6 @@ export class NewRnaCambioGasComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public colores: any;
     public tramiteFacturaSelected: any;
     public colorSelected: any;
@@ -30,7 +29,8 @@ export class NewRnaCambioGasComponent implements OnInit {
         'combustibleCambioId': null,
         'vehiculoId': null,
     };
-    public resumen = {};     public datos = {
+    public resumen = {};    
+    public datos = {
         'numeroCertificado': null,
         'fechaExpedicion': null,
         'fechaVencimiento': null,
@@ -41,12 +41,11 @@ export class NewRnaCambioGasComponent implements OnInit {
         'numeroSerial': null,
         'fechaFabricacion': null,
         'presion': null,
-        'numeroRUNT': null,
+        'numeroRunt': null,
     };
     
 
     constructor(
-        private _ColorService: ColorService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
@@ -86,8 +85,8 @@ export class NewRnaCambioGasComponent implements OnInit {
         );
         this._VehiculoService.editCombustibleVehiculo(this.datos2,token).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
+                response = response; 
+                if(response.status == 'success'){
                     this.datos.idFactura = this.factura.id;
                     this.datos.tramiteFormulario = 'rna-cambiogas';
                     this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

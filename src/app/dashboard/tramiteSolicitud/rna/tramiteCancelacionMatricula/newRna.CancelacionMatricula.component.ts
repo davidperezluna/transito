@@ -16,31 +16,23 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
     public tipoRegrabacionList: string[];
-    public tipoBlindajeList: string[];
     public tipoRegrabacionSelected: any;
-    public nivelBlindajeList: string[];
     public motivoSelected: any;
-    public nuevoNumero: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
-    public resumen = {};     public datos = {
-        'motivoCancelacion': null,
-        'entidadJudicial': null,
+    public datos = {
+        'idMotivoCancelacion': null,
+        'idEntidadJudicial': null,
         'numeroOficio': null, 
         'declaracion':null,  
         'fechaDeclaracion':null,
         'ipat':null,
-        'fechaEchos':null,
+        'fechaHechos':null,
         'recuperarMotor':null,         
-        'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
     };
 
     constructor(
@@ -50,59 +42,40 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() {
-        this.nivelBlindajeList = ['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO','SEIS','SIETE','OCHO'];
-        this.tipoBlindajeList = ['Blindaje de un vehículo', 'Desblindaje de un vehículo'];
-
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-    }
+    ngOnInit() { }
 
     enviarTramite() {
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.cancelado=true
+        
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-cancelacionmatricula';
+
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['cancelacionmatricula'];
+
         let token = this._loginService.getToken();
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-            }
-            error => {
+
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'id vehiculo': this.vehiculo.nombre,
+                        'id factura': this.datos.idFactura,
+                        'entidad judicial': this.datos.idEntidadJudicial,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
+                error => {
                     this.errorMessage = <any>error;
 
-                    if(this.errorMessage != null){
+                    if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
                     }
                 }
-        });
-
-
+            });
     }
+
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
-
 }

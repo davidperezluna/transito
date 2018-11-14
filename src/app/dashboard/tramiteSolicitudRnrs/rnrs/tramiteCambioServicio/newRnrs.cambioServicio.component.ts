@@ -3,8 +3,6 @@ import { LoginService } from '../../../../services/login.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
-import swal from 'sweetalert2';
-
 @Component({
     selector: 'appRnrs-cambio-servicio',
     templateUrl: './newRnrs.cambioServicio.html'
@@ -15,7 +13,6 @@ export class NewRnrsCambioServicioComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public servicios: any;
     public tramiteFacturaSelected: any;
     public servicioSelected: any;

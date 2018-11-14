@@ -18,30 +18,30 @@ export class NewRnmaCambioMotorComponent implements OnInit {
     @Input() factura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
     public tiposIdentificacion: any;
     public tipoIdentificacionSelected: any;
     public tipoIngresoList: string[];
     public tipoIngresoSelected: any;
-    public numeroMotor: any;
-    public numeroAceptacion: any;
-    public numeroFactura: any;
-    public numeroRunt: any;
-    public fecha: any;
     public tipoIdentificacion: any;
     public numeroIdentificacion: any;
     public combustibles: any;
     public combustibleSelected: any;
 
     public datos = {
+        'numeroMotor': null,
+        'numeroAceptacion': null,
+        'numeroFactura': null,
+        'fecha': null,
+        'tipoIdentificacion': null,
+        'numeroIdentificacion': null,
+        'numeroRunt': null,
+        'tramiteFormulario': null,
+        'combustibleId': null,
         'idFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idTipoIngreso': null,
         'idCombustible': null,
-        'tramiteFormulario': null,
-        'numeroRunt': null,
     };
 
     public tiposIngreso = [
@@ -52,7 +52,6 @@ export class NewRnmaCambioMotorComponent implements OnInit {
     constructor(
         private _CombustibleService: CombustibleService,
         private _loginService: LoginService,
-        private _SustratoService: SustratoService,
         private _TipoIdentificacionService: TipoIdentificacionService,
         private _VehiculoService: VehiculoService,
     ) { }
@@ -90,33 +89,21 @@ export class NewRnmaCambioMotorComponent implements OnInit {
 
     enviarTramite() {
         let token = this._loginService.getToken();
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-cambiomotor';
+        this.datos.idTipoIngreso = this.tipoIngresoSelected;
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['motor'];
 
-        this._VehiculoService.show(token, this.tipoIngresoSelected).subscribe(
-            motorResponse => {
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rnma-cambiomotor';
-                this.datos.idTipoIngreso = this.tipoIngresoSelected;
-                this.datos.idVehiculo = this.vehiculo.id;
-                this.datos.campos = ['motor'];
-
-                this._VehiculoService.update(this.datos, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            let resumen = {
-                                'motor anterior': this.vehiculo.motor.nombre,
-                                'nuevo motor': motorResponse.data.nombre,
-                            };
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    });
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'motor anterior': this.vehiculo.motor.nombre,
+                        'nuevo motor': this.datos.numeroMotor,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
                 error => {
                     this.errorMessage = <any>error;
 
@@ -125,7 +112,7 @@ export class NewRnmaCambioMotorComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-            });
+            });       
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

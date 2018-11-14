@@ -6,8 +6,6 @@ import { LoginService } from '../../../../services/login.service';
 import { ColorService } from '../../../../services/color.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
 
-import swal from 'sweetalert2';
-
 @Component({
     selector: 'appRnrs-cambio-color',
     templateUrl: './newRnrs.cambioColor.html'
@@ -19,7 +17,6 @@ export class NewRnrsCambioColorComponent implements OnInit {
     @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public colores: any;
     public tramiteFacturaSelected: any;
     public colorSelected: any;

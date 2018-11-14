@@ -19,9 +19,8 @@ export class NewRnmaTransformacionComponent implements OnInit {
     @Input() factura: any = null;
     public errorMessage;
 
-    public tipoTransformacionSelect: any;
     public nuevoRegistro: any;
-
+    public tipoTransformacionSelect: any;
     public resumen = {};     
     
     public datos = {

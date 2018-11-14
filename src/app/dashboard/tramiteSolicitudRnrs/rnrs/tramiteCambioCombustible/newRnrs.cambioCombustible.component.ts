@@ -18,7 +18,6 @@ export class NewRnrsCambioCombustibleComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public combustibles: any;
     public tramiteFacturaSelected: any;
     public combustibleSelected: any;
@@ -58,7 +57,6 @@ export class NewRnrsCambioCombustibleComponent implements OnInit {
     
    
     enviarTramite(){
-        
         let token = this._loginService.getToken();
 
         this._CombustibleService.showCombustible(token, this.combustibleSelected).subscribe(

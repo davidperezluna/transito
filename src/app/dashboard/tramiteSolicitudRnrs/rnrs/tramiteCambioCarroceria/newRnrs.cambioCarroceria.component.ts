@@ -18,7 +18,6 @@ export class NewRnrsCambioCarroceriaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public carrocerias: any;
     public tramiteFacturaSelected: any;
     public carroceriaSelected: any;
@@ -58,7 +57,6 @@ export class NewRnrsCambioCarroceriaComponent implements OnInit {
     
    
     enviarTramite(){
-        
         let token = this._loginService.getToken();
 
         this._CarroceriaService.showCarroceria(token, this.carroceriaSelected).subscribe(

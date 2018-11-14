@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-
-import swal from 'sweetalert2';
+import { VehiculoService } from 'app/services/vehiculo.service';
 
 @Component({
     selector: 'appRnrs-cambio-placa',
@@ -11,23 +10,20 @@ import swal from 'sweetalert2';
 export class NewRnrsCambioPlacaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
     public tipoCambioList: string[];
     public tipoCambioSelected: any;
-    public numeroRunt: any;
-    public nuevaPlaca: any;
-    public documentacion: any;
-    public resumen = {};     public datos = {
-        'tipoCambio': null,
+    public datos = {
+        'idTipoCambio': null,
         'numeroRunt': null,
         'nuevaPlaca': null,
-        'documentacion': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
     };
 
     public tiposCambio = [
@@ -39,18 +35,38 @@ export class NewRnrsCambioPlacaComponent implements OnInit {
     constructor(
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
+        private _VehiculoService: VehiculoService,
     ) { }
 
     ngOnInit() { }
     
     enviarTramite() {
-        this.datos.tipoCambio = this.tipoCambioSelected;
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.nuevaPlaca = this.nuevaPlaca;
-        this.datos.documentacion = this.documentacion;
+        let token = this._loginService.getToken();
+
+        this.datos.idTipoCambio = this.tipoCambioSelected;
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnrs-cambioplaca';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['placa'];
+
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'placa anterior': this.vehiculo.placa.nombre,
+                        'nueva placa': response.data.nombre,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

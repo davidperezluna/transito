@@ -21,7 +21,6 @@ export class NewRnmaTraspasoComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public colores: any;
     public tramiteFacturaSelected: any;
     public tipoPropiedadSelected:any;
     public ciudadano:any;
@@ -59,7 +58,6 @@ export class NewRnmaTraspasoComponent implements OnInit {
     };
 
     constructor(
-        private _ColorService: ColorService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
