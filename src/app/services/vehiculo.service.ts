@@ -31,7 +31,7 @@ export class VehiculoService {
 							  .map(res => res.json());
 	}
 
-	showVehiculo(token, id){
+	show(token, id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show", params, {headers: headers})

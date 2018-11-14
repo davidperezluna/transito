@@ -41,6 +41,7 @@ export class NewRnmaDuplicadoLicenciaComponent implements OnInit {
 
     
     enviarTramite() {
+        this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-duplicado-licencia';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }

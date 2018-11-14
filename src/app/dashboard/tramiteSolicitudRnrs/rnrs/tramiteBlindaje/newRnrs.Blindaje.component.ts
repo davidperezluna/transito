@@ -14,6 +14,7 @@ export class NewRnrsBlindajeComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
+    @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
     public respuesta;
@@ -29,15 +30,34 @@ export class NewRnrsBlindajeComponent implements OnInit {
     public numeroRunt: any;
     public documentacion: any;
     public entregada = false;
-    public resumen = {};     public datos = {
-        'tipoBlindaje': null,
-        'nivelBlindaje': null,
-        'empresaBlindadora': null,
-        'numeroRunt': null,
-        'sustrato': null,
-        'tramiteFormulario': null,
+
+    public tipoBlindajeSelected: any;
+    public nivelBlindajeSelected: any;
+    
+    public datos = {
         'idFactura': null,
+        'campos': null,
+        'idVehiculo': null,
+        'idTipoBlindaje': null,
+        'idNivelBlindaje': null,
+        'tramiteFormulario': null,
     };
+
+    public tiposBlindaje = [
+        { value: 'BLINDAJE DE UN VEHICULO', label: 'BLINDAJE DE UN VEHICULO' },
+        { value: 'DESBLINDAJE DE UN VEHICULO', label: 'DESBLINDAJE DE UN VEHICULO' },
+    ];
+
+    public nivelesBlindaje = [
+        { value: 'UNO', label: 'UNO' },
+        { value: 'DOS', label: 'DOS' },
+        { value: 'TRES', label: 'TRES' },
+        { value: 'CUATRO', label: 'CUATRO' },
+        { value: 'CINCO', label: 'CINCO' },
+        { value: 'SEIS', label: 'SEIS' },
+        { value: 'SIETE', label: 'SIETE' },
+        { value: 'OCHO', label: 'OCHO' },
+    ];
 
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
@@ -47,9 +67,6 @@ export class NewRnrsBlindajeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.nivelBlindajeList = ['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO','SEIS','SIETE','OCHO'];
-        this.tipoBlindajeList = ['Blindaje de un vehículo', 'Desblindaje de un vehículo'];
-
         this._SustratoService.getSustratoSelect().subscribe(
             response => {
                 this.sustratos = response;
@@ -66,9 +83,42 @@ export class NewRnrsBlindajeComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rnrs-blindaje';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        let token = this._loginService.getToken();
+
+        this._VehiculoService.show(token, this.tipoBlindajeSelected).subscribe(
+            blindajeResponse => {
+                this.datos.idFactura = this.factura.id;
+                this.datos.tramiteFormulario = 'rnrs-blindaje';
+                this.datos.idVehiculo = this.vehiculo.id;
+                this.datos.campos = ['blindaje'];
+
+                this._VehiculoService.update(this.datos, token).subscribe(
+                    response => {
+                        if (response.status == 'success') {
+                            let resumen = {
+                                'blindaje anterior': this.vehiculo.blindaje.nombre,
+                                'nueva blindaje': blindajeResponse.data.nombre,
+                            };
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        }
+                        error => {
+                            this.errorMessage = <any>error;
+
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
+                    });
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

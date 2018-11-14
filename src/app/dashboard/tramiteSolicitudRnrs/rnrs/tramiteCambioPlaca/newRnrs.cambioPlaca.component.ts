@@ -30,14 +30,18 @@ export class NewRnrsCambioPlacaComponent implements OnInit {
         'idFactura': null,
     };
 
+    public tiposCambio = [
+        { value: 'ANTIGUO', label: 'ANTIGUO' },
+        { value: 'CLASICO', label: 'CLASICO' },
+        { value: 'NORMAL', label: 'NORMAL' },
+    ];
+
     constructor(
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
     ) { }
 
-    ngOnInit() {
-        this.tipoCambioList = ['Antiguo', 'Clasico', 'Normal'];
-    }
+    ngOnInit() { }
     
     enviarTramite() {
         this.datos.tipoCambio = this.tipoCambioSelected;

@@ -18,7 +18,6 @@ export class NewRnmaCambioCarroceriaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public carrocerias: any;
     public tramiteFacturaSelected: any;
     public carroceriaSelected: any;

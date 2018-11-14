@@ -15,28 +15,37 @@ export class NewRnmaBlindajeComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
 
-    public tipoRegrabacionList: string[];
-    public tipoBlindajeList: string[];
-    public tipoRegrabacionSelected: any;
-    public nivelBlindajeList: string[];
-    public motivoSelected: any;
-    public nuevoNumero: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
+    public tipoBlindajeSelected: any;
+    public nivelBlindajeSelected: any;
 
-    public resumen = {};
-    
     public datos = {
         'campos': null,
         'idVehiculo': null,
-        'idBlindaje': null,
+        'idTipoBlindaje': null,
+        'idNivelBlindaje': null,
         'tramiteFormulario': null,
+        'empresaBlindadora': null,
         'idFactura': null,
+        'numeroRunt': null,
     };
+
+    public tiposBlindaje = [
+        { value: 'BLINDAJE DE UN VEHICULO', label: 'BLINDAJE DE UN VEHICULO' },
+        { value: 'DESBLINDAJE DE UN VEHICULO', label: 'DESBLINDAJE DE UN VEHICULO' },
+    ];
+
+    public nivelesBlindaje = [
+        { value: 'UNO', label: 'UNO' },
+        { value: 'DOS', label: 'DOS' },
+        { value: 'TRES', label: 'TRES' },
+        { value: 'CUATRO', label: 'CUATRO' },
+        { value: 'CINCO', label: 'CINCO' },
+        { value: 'SEIS', label: 'SEIS' },
+        { value: 'SIETE', label: 'SIETE' },
+        { value: 'OCHO', label: 'OCHO' },
+    ];
 
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
@@ -44,40 +53,25 @@ export class NewRnmaBlindajeComponent implements OnInit {
         private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() {
-        this.nivelBlindajeList = ['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO','SEIS','SIETE','OCHO'];
-        this.tipoBlindajeList = ['Blindaje de un vehículo', 'Desblindaje de un vehículo'];
-    }
+    ngOnInit() { }
 
     enviarTramite() {
         let token = this._loginService.getToken();
 
-        this._VehiculoService.showVehiculo(token, this.tipoBlindajeList).subscribe(
-            blindajeResponse => {
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rnma-blindaje';
-                this.datos.idBlindaje = this.tipoBlindajeList;
-                this.datos.idVehiculo = this.vehiculo.id;
-                this.datos.campos = ['blindaje'];
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-blindaje';
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['blindaje'];
 
-                this._VehiculoService.update(this.datos, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            let resumen = {
-                                'blindaje anterior': this.vehiculo.blindaje.nombre,
-                                'nueva blindaje': blindajeResponse.data.nombre,
-                            };
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    });
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'blindaje anterior': this.vehiculo.blindaje.nombre,
+                        'nuevo blindaje': this.datos.idTipoBlindaje,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
                 error => {
                     this.errorMessage = <any>error;
 
@@ -87,11 +81,16 @@ export class NewRnmaBlindajeComponent implements OnInit {
                     }
                 }
             });
-        this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rnma-blindaje';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+            }
+        }
     }
-    onCancelar(){
+    onCancelar() {
         this.cancelarTramite.emit(true);
     }
 
