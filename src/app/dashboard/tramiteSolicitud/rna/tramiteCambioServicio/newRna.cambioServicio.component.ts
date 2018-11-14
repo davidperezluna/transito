@@ -7,7 +7,6 @@ import { ServicioService } from '../../../../services/servicio.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
-//import { Factura } from '../../../factura/factura.modelo
 
 @Component({
     selector: 'appRna-cambio-servicio',
@@ -19,7 +18,6 @@ export class NewRnaCambioServicioComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public servicios: any;
     public tramiteFacturaSelected: any;
     public servicioSelected: any;

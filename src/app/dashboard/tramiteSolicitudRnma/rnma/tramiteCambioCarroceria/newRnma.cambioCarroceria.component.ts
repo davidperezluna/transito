@@ -58,7 +58,6 @@ export class NewRnmaCambioCarroceriaComponent implements OnInit {
     
    
     enviarTramite(){
-        
         let token = this._loginService.getToken();
 
         this._CarroceriaService.showCarroceria(token,this.carroceriaSelected).subscribe(

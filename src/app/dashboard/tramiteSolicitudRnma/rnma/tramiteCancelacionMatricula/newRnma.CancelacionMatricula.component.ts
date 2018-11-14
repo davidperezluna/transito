@@ -72,16 +72,6 @@ export class NewRnmaCancelacionMatriculaComponent implements OnInit {
     }
 
     enviarTramite() {
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.cancelado=true
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-cancelacionmatricula';
 

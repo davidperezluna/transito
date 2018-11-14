@@ -19,7 +19,6 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
     @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public sedesOperativas: any;
     public tramiteFacturaSelected: any;
     public sedeOperativaSelected: any;
@@ -30,6 +29,7 @@ export class NewRnrsCambioSedeOperativaComponent implements OnInit {
         'idVehiculo': null,
         'idSedeOperativa': null,
         'tramiteFormulario': null,
+        'numeroRunt': null,
     };
 
     constructor(

@@ -4,7 +4,6 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { Router } from "@angular/router";
@@ -26,7 +25,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public colores: any;
     public tramiteFacturaSelected: any;
     public tipoPropiedadSelected:any;
@@ -65,7 +63,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     };
 
     constructor(
-        private _ColorService: ColorService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
@@ -128,9 +125,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         };
         this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.ciudadano = this.respuesta.data;
+                response = response; 
+                if(response.status == 'success'){
+                    this.ciudadano = response.data;
                     this.ciudadanoEncontrado= 2;
                     this.ciudadanoNew = false;
             }else{
@@ -155,9 +152,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         };
         this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.apoderadoSelected = this.respuesta.data;
+                response = response; 
+                if(response.status == 'success'){
+                    this.apoderadoSelected = response.data;
                     this.apoderadoEncontrado= 2;
                     // this.ciudadanoNew = false;
             }else{
@@ -182,9 +179,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         };
         this._EmpresaService.showNit(token, this.nit).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.empresa = this.respuesta.data;
+                response = response; 
+                if(response.status == 'success'){
+                    this.empresa = response.data;
                     this.empresaEncontrada= 2;
             }else{
                 this.empresaEncontrada=3;

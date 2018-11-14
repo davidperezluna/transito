@@ -12,15 +12,6 @@
                 <hr>
                 <div class="row justify-content-center container">
                     <div class="form-group row">
-                        <!-- <div class="col-xs-12 col-lg-6">
-                            <label>Tipo regrabación
-                                <span class="text-danger">*</span>
-                            </label>
-                            <select class="form-control" name="tipoRegrabacionSelected" [(ngModel)]="tipoRegrabacionSelected" required>
-                                <option *ngFor="let tipoRegrabacion of tipoRegrabacionList" [value]="tipoRegrabacion"> {{ tipoRegrabacion }}
-                                </option>
-                            </select>
-                        </div> -->
                         <div class="col-xs-12 col-lg-6">
                             <label>Motivo
                                 <span class="text-danger">*</span>
@@ -32,30 +23,12 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Nuevo número {{ tipoRegrabacionSelected }}</label>
-                            <input class="form-control" [(ngModel)]="nuevoNumero" name="nuevoNumero" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Sustrato*</label>
-                            <ng-select [multiple]="false" [options]="sustratos" [(ngModel)]="sustratoSelected" required name="sustratoId">
-                            </ng-select>
+                            <input class="form-control" [(ngModel)]="datos.nuevoNumero" name="nuevoNumero" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Número solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Documentación</label>
-                            <textarea class="form-control" [(ngModel)]="documentacion" name="documentacion"></textarea>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <br>
-                            <label class="custom-control custom-checkbox" for="entregada">
-                                <input type="checkbox"  [(ngModel)]="entregada" name="entregada" class="custom-control-input"  id="entregada" required>
-                                <span class="custom-control-indicator"></span> 
-                                <span class="custom-control-description">Entregada</span>
-                            </label>
-                        </div>
-                        
                     </div>
                 </div>
             </div>

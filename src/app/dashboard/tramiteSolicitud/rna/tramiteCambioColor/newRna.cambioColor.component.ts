@@ -18,7 +18,6 @@ export class NewRnaCambioColorComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage; 
-    public respuesta;
     public colores: any;
     public tramitesFactura: any = null;
     public tramiteFacturaSelected: any;

@@ -46,31 +46,21 @@ export class NewRnmaCambioPlacaComponent implements OnInit {
     enviarTramite() {
         let token = this._loginService.getToken();
 
-        this._VehiculoService.show(token, this.tipoCambioSelected).subscribe(
-            placaResponse => {
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rnma-cambioplaca';
-                this.datos.idVehiculo = this.vehiculo.id;
-                this.datos.campos = ['placa'];
+        this.datos.idTipoCambio = this.tipoCambioSelected;
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-cambioplaca';
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['placa'];
 
-                this._VehiculoService.update(this.datos, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            let resumen = {
-                                'placa anterior': this.vehiculo.placa.nombre,
-                                'nueva placa': placaResponse.data.nombre,
-                            };
-                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
-                    });
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'placa anterior': this.vehiculo.placa.nombre,
+                        'nueva placa': response.data.nombre,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
                 error => {
                     this.errorMessage = <any>error;
 

@@ -18,7 +18,7 @@
                             <label> Nro. de solicitud RUNT
                                 <span class="text-danger">*</span>
                             </label>
-                            <input class="form-control" [(ngModel)]="datos.nroRunt" name="nroRunt" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="nroRunt" type="text" required />
                         </div>
                             <!--fin caja -->                         
                         <!--fin lista-->                                         
@@ -29,11 +29,7 @@
                         </div>      
                         
                         <div class="col-xs-12 col-lg-12" >
-                            <br> 
-                            <div class="custom-control custom-checkbox"  >
-                                <input [(ngModel)]="certificadoEntregada" name="certificadoEntregada" type="checkbox" class="custom-control-input" id="certificadoEntregada">
-                                <label class="custom-control-label" for="certificadoEntregada">Certficado Entregada</label>
-                            </div>
+                            <br>
                             <!--tipo identificacion ciudadano -->
                             <div class="col-xs-12 col-lg-12" *ngIf="certificadoEntregada">
                                 <label>Identificación</label>
