@@ -15,12 +15,8 @@ export class NewRnmaCambioPlacaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
-    public : any;
     public tipoCambioSelected: any;
-    public numeroRunt: any;
     public nuevaPlaca: any;
-    public documentacion: any;
 
     public datos = {
         'idFactura': null,
@@ -29,6 +25,8 @@ export class NewRnmaCambioPlacaComponent implements OnInit {
         'idTipoCambio': null,
         'idPlaca': null,
         'tramiteFormulario': null,
+        'numeroRunt': null,
+
     };
 
     public tiposCambio = [

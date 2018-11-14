@@ -61,19 +61,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Número de solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Documentación</label>
-                            <textarea class="form-control" [(ngModel)]="documentacion" name="documentacion"></textarea>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <br>
-                            <label class="custom-control custom-checkbox" for="entregada">
-                                <input type="checkbox"  [(ngModel)]="entregada" name="entregada" class="custom-control-input"  id="entregada" required>
-                                <span class="custom-control-indicator"></span> 
-                                <span class="custom-control-description">Entregada</span>
-                            </label>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                     </div>
                 </div>

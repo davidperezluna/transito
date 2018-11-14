@@ -17,7 +17,6 @@ export class NewRnmaCambioMotorComponent implements OnInit {
     @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
     public sustratos: any;
     public sustratoSelected: any;
@@ -32,8 +31,6 @@ export class NewRnmaCambioMotorComponent implements OnInit {
     public fecha: any;
     public tipoIdentificacion: any;
     public numeroIdentificacion: any;
-    public documentacion: any;
-    public entregada = false;
     public combustibles: any;
     public combustibleSelected: any;
 
@@ -44,6 +41,7 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         'idTipoIngreso': null,
         'idCombustible': null,
         'tramiteFormulario': null,
+        'numeroRunt': null,
     };
 
     public tiposIngreso = [
@@ -64,20 +62,6 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         this._CombustibleService.getCombustibleSelect().subscribe(
             response => {
                 this.combustibles = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
             },
             error => {
                 this.errorMessage = <any>error;

@@ -18,9 +18,7 @@ export class NewRnmaCancelacionMatriculaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
     public entidadesJudiciales: any;
     public vehiculos: any;
 
@@ -58,19 +56,6 @@ export class NewRnmaCancelacionMatriculaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
         this._EntidadJudicialService.getEntidadJudicialSelect().subscribe(
             response => {
                 this.entidadesJudiciales = response;
@@ -84,5 +69,48 @@ export class NewRnmaCancelacionMatriculaComponent implements OnInit {
                 }
             }
         );
+    }
+
+    enviarTramite() {
+        this.vehiculo.servicioId = this.vehiculo.servicio.id    
+        this.vehiculo.municipioId = this.vehiculo.municipio.id   
+        this.vehiculo.lineaId = this.vehiculo.linea.id   
+        this.vehiculo.colorId = this.vehiculo.color.id   
+        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
+        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
+        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
+        this.vehiculo.claseId = this.vehiculo.clase.id   
+        this.vehiculo.servicioId = this.vehiculo.servicio.id 
+        this.vehiculo.cancelado=true
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-cancelacionmatricula';
+
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['cancelacionmatricula'];
+
+        let token = this._loginService.getToken();
+
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = {
+                        'id vehiculo': this.vehiculo.nombre,
+                        'id factura': this.datos.idFactura,
+                        'entidad judicial': this.datos.idEntidadJudicial,
+                    };
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
+    }
+    onCancelar() {
+        this.cancelarTramite.emit(true);
     }
 }

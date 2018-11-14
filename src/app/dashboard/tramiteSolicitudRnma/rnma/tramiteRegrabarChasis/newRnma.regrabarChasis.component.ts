@@ -16,28 +16,18 @@ export class NewRnmaRegrabarChasisComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
-    public tipoRegrabacionList: string[];
-    public tipoRegrabacionSelected: any;
     public motivoList: string[];
     public motivoSelected: any;
-    public nuevoNumero: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
-    public resumen = {};     public datos = {
-        'tipoRegrabacion': null,
+
+    public datos = {
         'motivo': null,
         'nuevoNumero': null,
         'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'idVehiculo': null,
+        'campos': null,
     };
 
     constructor(
@@ -48,52 +38,28 @@ export class NewRnmaRegrabarChasisComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // this.tipoRegrabacionList = ['Chasis', 'Chasis', 'Chasis', 'VIN'];
         this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
-
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
     }
 
     enviarTramite() {
-        // this.datos.tipoRegrabacion = this.tipoRegrabacionSelected;
         let token = this._loginService.getToken();
 
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
+        this.datos.motivo = this.motivoSelected;
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnma-regrabarchasis';
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['regrabarchasis'];
 
-        this.vehiculo.chasis = this.nuevoNumero
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+        this._VehiculoService.update(this.vehiculo ,token).subscribe(
         response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.datos.motivo = this.motivoSelected;
-                this.datos.nuevoNumero = this.nuevoNumero;
-                this.datos.numeroRunt = this.numeroRunt;
-                this.datos.documentacion = this.documentacion;
-                this.datos.sustrato = this.sustratoSelected;
-                this.datos.entregada = this.entregada;
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rnma-regrabarchasis';
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+            if(response.status == 'success'){
+                let resumen = {
+                    'chasis anterior': this.vehiculo.chasis,
+                    'nuevo numero chasis': this.datos.nuevoNumero,
+                    'motivo': this.datos.motivo,
+                    'numero runt': this.datos.numeroRunt,
+                };
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
             }
             error => {
                     this.errorMessage = <any>error;

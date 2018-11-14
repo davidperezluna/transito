@@ -15,36 +15,20 @@ export class NewRnmaBlindajeComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
 
-    public tipoRegrabacionList: string[];
-    public tipoRegrabacionSelected: any;
-    public motivoSelected: any;
-    public nuevoNumero: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
-
-<<<<<<< HEAD
     public tipoBlindajeSelected: any;
     public nivelBlindajeSelected: any;
 
-=======
-    public resumen = {};
-    
->>>>>>> bda1cf361751f6f1a3da640196b1ac46b141c999
     public datos = {
         'campos': null,
         'idVehiculo': null,
         'idTipoBlindaje': null,
         'idNivelBlindaje': null,
         'tramiteFormulario': null,
-<<<<<<< HEAD
         'empresaBlindadora': null,
-=======
         'idFactura': null,
->>>>>>> bda1cf361751f6f1a3da640196b1ac46b141c999
+        'numeroRunt': null,
     };
 
     public tiposBlindaje = [
@@ -97,7 +81,6 @@ export class NewRnmaBlindajeComponent implements OnInit {
                     }
                 }
             });
-<<<<<<< HEAD
         error => {
             this.errorMessage = <any>error;
 
@@ -106,11 +89,6 @@ export class NewRnmaBlindajeComponent implements OnInit {
                 alert("Error en la petición");
             }
         }
-=======
-        this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rnma-blindaje';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
->>>>>>> bda1cf361751f6f1a3da640196b1ac46b141c999
     }
     onCancelar() {
         this.cancelarTramite.emit(true);

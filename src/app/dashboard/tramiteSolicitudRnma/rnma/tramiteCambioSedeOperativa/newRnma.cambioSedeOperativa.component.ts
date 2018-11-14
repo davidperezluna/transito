@@ -29,6 +29,7 @@ export class NewRnmaCambioSedeOperativaComponent implements OnInit {
         'idVehiculo': null,
         'idSedeOperativa': null,
         'tramiteFormulario': null,
+        'numeroRunt': null,
     };
 
     constructor(

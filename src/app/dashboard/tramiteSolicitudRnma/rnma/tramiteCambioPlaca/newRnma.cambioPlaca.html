@@ -21,21 +21,12 @@
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Número de solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Nueva Placa</label>
-                            <input class="form-control" [(ngModel)]="nuevaPlaca" name="nuevaPlaca" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.idPlaca" name="idPlaca" type="text" required />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <br>
-                            <label class="custom-control custom-checkbox" for="documentacion">
-                                <input type="checkbox"  [(ngModel)]="documentacion" name="documentacion" class="custom-control-input"  id="documentacion" required>
-                                <span class="custom-control-indicator"></span> 
-                                <span class="custom-control-description">Presenta Documentación</span>
-                            </label>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
