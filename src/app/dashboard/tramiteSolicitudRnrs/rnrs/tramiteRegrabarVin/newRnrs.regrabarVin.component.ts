@@ -15,23 +15,17 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
     public tramiteFacturaSelected: any;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
     public motivoList: string[];
     public motivoSelected: any;
-    public nuevoNumero: any;
-    public numeroRunt: any;
-    public documentacion: any;
-    public entregada = false;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'tipoRegrabacion': null,
         'motivo': null,
         'nuevoNumero': null,
         'numeroRunt': null,
-        'documentacion': null,
-        'entregada': null,
         'tramiteFormulario': null,
         'idFactura': null,
     };
@@ -43,16 +37,10 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // this.tipoRegrabacionList = ['Vin', 'Vin', 'Vin', 'VIN'];
         this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
     }
 
-    ready(e:any){
-
-    }
-
     enviarTramite() {
-        // this.datos.tipoRegrabacion = this.tipoRegrabacionSelected;
         let token = this._loginService.getToken();
 
         this.vehiculo.servicioId = this.vehiculo.servicio.id    
@@ -64,16 +52,11 @@ export class NewRnrsRegrabarVinComponent implements OnInit {
         this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
         this.vehiculo.claseId = this.vehiculo.clase.id   
         this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.vin = this.nuevoNumero
+        this.vehiculo.vin = this.datos.nuevoNumero
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
+        response => { 
+            if(response.status == 'success'){
                 this.datos.motivo = this.motivoSelected;
-                this.datos.nuevoNumero = this.nuevoNumero;
-                this.datos.numeroRunt = this.numeroRunt;
-                this.datos.documentacion = this.documentacion;
-                this.datos.entregada = this.entregada;
                 this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rnrs-regrabarvin';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

@@ -21,7 +21,6 @@ export class NewRnmaDuplicadoPlacaComponent implements OnInit {
         'motivo': null,
         'cantidad': null,
         'numeroRunt': null,
-        'sustrato': null,
         'tramiteFormulario': null,
         'idFactura': null,
     };
