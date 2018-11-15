@@ -2,8 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { PaisService } from '../../../../services/pais.service';
+import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
+import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -18,28 +19,26 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     @Input() solicitante: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
+
     public clases: any;
-    public claseSelected: any;
     public servicios: any;
-    public servicioSelected: any;
     public paises: any;
-    public paisSelected: any;
+    public categorias: any;
+
     public tramiteFacturaSelected: any;
-    public tipoCambioSelected: any;
-    public categorias: string[];
+
     public datos = {
         'tramiteFormulario': null,
         'idFactura': null,
-        'categoria': null,
         'numeroLicenciaConduccion': null,
         'identificacionAnterior': null,
         'identificacionActual': null,
         'numeroRunt': null,
         'vigencia': null,
-        'paisId': null,
-        'claseId': null,
-        'servicioId': null,
+        'idPais': null,
+        'idClase': null,
+        'idServicio': null,
+        'idCategoria': null,
         'ciudadanoId': null,
     };
 
@@ -55,11 +54,12 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         private _ClaseService: ClaseService,
         private _ServicioService: ServicioService,
         private _PaisService: PaisService,
+        private _CategoriaService: CfgLicenciaConduccionCategoriaService,
     ) { }
 
     ngOnInit() {
-        this.categorias = ['A2'];
         this.datos.identificacionAnterior = this.solicitante.identificacion;
+
         this._ClaseService.getClaseSelect().subscribe(
             response => {
               this.clases = response;
@@ -100,23 +100,33 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
               }
             }
         );
+
+        this._CategoriaService.select().subscribe(
+            response => {
+                this.categorias = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
     } 
     
     enviarTramite() {
-        // let token = this._LoginService.getToken();
-        
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnc-expedicioncambiodocumento';
         this.datos.numeroLicenciaConduccion = this.datos.identificacionActual;
-        this.datos.claseId = this.claseSelected;
-        this.datos.servicioId = this.servicioSelected;
-        this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
         this.resumen["identificacion Actual"] = this.datos.identificacionActual;
         this.resumen["identificacion Anterior"] = this.datos.identificacionAnterior;
         this.resumen["Nombre Solicitante"]= this.solicitante.primerNombre+' '+this.solicitante.segundoNombre+' '+this.solicitante.primerApellido+' '+this.solicitante.segundoApellido;
         this.resumen["Numero licencia conduccion actual"] = this.datos.identificacionActual;
         this.resumen["Numero licencia conduccion anterior"] = this.datos.identificacionAnterior;
+        
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){

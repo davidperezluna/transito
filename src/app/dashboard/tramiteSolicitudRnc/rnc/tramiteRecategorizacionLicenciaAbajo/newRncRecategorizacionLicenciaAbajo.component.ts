@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { PaisService } from '../../../../services/pais.service';
+import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -16,29 +17,29 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     @Input() solicitante: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
+
     public clases: any;
-    public claseSelected: any;
     public servicios: any;
-    public servicioSelected: any;
     public paises: any;
-    public paisSelected: any;
+    public categorias: any;
+
     public tramiteFacturaSelected: any;
-    public tipoCambioSelected: any;
-    public categorias: string[];
-    public resumen = {};    
+
+    public resumen = {
+
+    };
+
     public datos = {
         'tramiteFormulario': null,
         'idFactura': null,
-        'categoriaActual': null,
-        'categoriaNueva': null,
         'numeroLicenciaConduccion': null,
         'numeroRunt': null,
         'vigencia': null,
-        'documentacion': null,
-        'paisId': null,
-        'claseId': null,
-        'servicioId': null,
+        'idCategoriaActual': null,
+        'idCategoriaNueva': null,
+        'idPais': null,
+        'idClase': null,
+        'idServicio': null,
         'ciudadanoId': null,
     };
     
@@ -48,6 +49,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         private _ClaseService: ClaseService,
         private _ServicioService: ServicioService,
         private _PaisService: PaisService,
+        private _CategoriaService: CfgLicenciaConduccionCategoriaService,
     ) { }
 
     ngOnInit() {
@@ -94,6 +96,21 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
               }
             }
         );
+
+        this._CategoriaService.select().subscribe(
+            response => {
+                this.categorias = response;
+                //this.datos.idCategoriaActual = [this.tramitePrecio.modulo.id];
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
     }
     
     enviarTramite() {
@@ -102,9 +119,6 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnc-recategorizacionabajo';
         this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
-        this.datos.claseId = this.claseSelected;
-        this.datos.servicioId = this.servicioSelected;
-        this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
 
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
