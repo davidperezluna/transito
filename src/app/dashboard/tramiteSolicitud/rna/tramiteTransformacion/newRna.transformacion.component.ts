@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { LoginService } from '../../../../services/login.service';
 import { CombustibleService } from '../../../../services/combustible.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
+import { CarroceriaService } from '../../../../services/carroceria.service';
+import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
@@ -18,53 +18,107 @@ export class NewRnaTransformacionComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public nuevoRegistro: any;
-    public tipoPotenciacionSelect: any;
-    public resumen = {};     
+
+    public carrocerias: any = null;
+    public combustibles: any = null;
+
+    public idCarroceria: any = null;
+    public idCombustible: any = null;
+    public modelo: any = null;
+    public descripcionModelo: any = null;
+
+    public resumen = {};
+
     public datos = {
         'newData': null,
         'oldData': null,
-        'tipoPotenciacion': null,
+        'tipoTransformacion': null,
         'tramiteFormulario': null,
         'idFactura': null,
         'idVehiculo': null,
+        'idCarroceria': null,
+        'idCombustible': null,
+        'modelo': null,
+        'descripcionModelo': null,
         'campos': null,
     };
-    public tiposPotenciacion = [
-        {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
-        {'value': 'Reparacion de motor y cambio de conjunto', 'label': 'Reparación de motor y cambio de conjunto'},
-        {'value': 'Reparacion de motor', 'label': 'Reparación de motor'},
+
+    public tiposTransformacion = [
+        {'value': '1', 'label': 'Cambio de carroceria'},
+        {'value': '2', 'label': 'Cambio combustible'},
+        {'value': '3', 'label': 'Cambio conjunto'},
+        {'value': '4', 'label': 'Repotenciación'},
     ];
 
     constructor(
         private _CombustibleService: CombustibleService,
+        private _CarroceriaService: CarroceriaService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this._CarroceriaService.getCarroceriaSelect().subscribe(
+            response => {
+                this.carrocerias = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+
+        this._CombustibleService.getCombustibleSelect().subscribe(
+            response => {
+                this.combustibles = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+     }
+
+    onChangedTipoTransformacion() {
+        this.datos.campos = null;
+    }
     
-    enviarTramite(){
+    onTramite(){
         let token = this._loginService.getToken();
 
-        this.vehiculo.modelo = this.nuevoRegistro
-        this.vehiculo.placa = this.vehiculo.cfgPlaca.numero
-        this.vehiculo.municipioId = this.vehiculo.municipio.id
-        this.vehiculo.lineaId = this.vehiculo.linea.id
-        this.vehiculo.colorId = this.vehiculo.color.id
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id
-        this.vehiculo.claseId = this.vehiculo.clase.id
-        this.vehiculo.servicioId = this.vehiculo.servicio.id
-        this._VehiculoService.editVehiculo(this.vehiculo, token).subscribe(
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-transformacion';
+        this.datos.idVehiculo = this.vehiculo.id;
+        
+        if (this.datos.tipoTransformacion == 1) {
+            this.datos.campos = ['carroceria'];
+        }else{
+            if (this.datos.tipoTransformacion == 2) {
+                this.datos.campos = ['combustible'];
+            }else{
+                if (this.datos.tipoTransformacion == 3) {
+                    this.datos.campos = ['conjunto'];
+                }else{
+                    if (this.datos.tipoTransformacion == 4) {
+                        this.datos.campos = ['repotenciacion'];
+                    }
+                }
+            }
+        }     
+
+        this._VehiculoService.update(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.datos.newData = this.nuevoRegistro;
-                    this.datos.oldData = this.vehiculo.modelo;
-                    this.datos.tipoPotenciacion = this.tipoPotenciacionSelect;
-                    this.datos.idFactura = this.factura.id;
-                    this.datos.tramiteFormulario = 'rnma-tranformacion';
+
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': this.resumen });
                 }
                 error => {
@@ -75,12 +129,22 @@ export class NewRnaTransformacionComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
+            });
+        error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
             }
-        ); 
+        }
     }
 
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
 
+    onClose() {
+        this.datos.tipoTransformacion = null;
+    }
 }

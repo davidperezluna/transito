@@ -39,6 +39,7 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
 
     ngOnInit() {
         this.vehiculo.carroceriaId = 4;
+        
         this._CarroceriaService.getCarroceriaSelect().subscribe(
             response => {
                 this.carrocerias = response;
