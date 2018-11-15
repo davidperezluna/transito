@@ -212,6 +212,88 @@ export class NewComponent implements OnInit {
               swal.showLoading()
             }
           });
+          this._ControlViaService.indexSenialVertical().subscribe(
+            response => {
+              this.senialesVerticales = response.data;
+              this.senialesVerticales.forEach(senialVertical => {
+                this.itemStringsLeftSenialVertical.push(senialVertical.nombre);
+              });
+              this.listadoSenialVertical = true;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+          this._ControlViaService.indexSenialHorizontal().subscribe(
+            response => {
+              this.senialesHorizontales = response.data;
+              this.senialesHorizontales.forEach(senialHorizontal => {
+                this.itemStringsLeftSenialHorizontal.push(senialHorizontal.nombre);
+              });
+              this.listadoSenialHorizontal = true;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+          this._ControlViaService.indexReductorVelocidad().subscribe(
+            response => {
+              this.reductoresVelocidad = response.data;
+              this.reductoresVelocidad.forEach(reductorVelocidad => {
+                this.itemStringsLeftReductorVelocidad.push(reductorVelocidad.nombre);
+              });
+              this.listadoReductorVelocidad = true;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+          this._EstadoTiempoService.index().subscribe(
+            response => {
+              this.estadosTiempo = response.data;
+              this.estadosTiempo.forEach(estadoTiempo => {
+                this.itemStringsLeftClima.push(estadoTiempo.nombre);
+              });
+              this.listadoClima = true;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+          this._ControlViaService.getControlViaSemaforoSelect().subscribe(
+            response => {
+              this.estadosSemaforo = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
 
           this._MsvConsecutivoService.searchLastBySede({ 'sedeOperativa': this.sedeOperativa }, token).subscribe(
             response => {
@@ -236,19 +318,6 @@ export class NewComponent implements OnInit {
                 this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
                   response => {
                     this.clasesAccidente = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ControlViaService.getControlViaSemaforoSelect().subscribe(
-                  response => {
-                    this.estadosSemaforo = response;
                   },
                   error => {
                     this.errorMessage = <any>error;
@@ -712,78 +781,6 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-
-                this._EstadoTiempoService.index().subscribe(
-                  response => {
-                    this.estadosTiempo = response.data;
-                    this.estadosTiempo.forEach(estadoTiempo => {
-                      this.itemStringsLeftClima.push(estadoTiempo.nombre);
-                    });
-                    this.listadoClima = true;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this._ControlViaService.indexSenialVertical().subscribe(
-                  response => {
-                    this.senialesVerticales = response.data;
-                    this.senialesVerticales.forEach(senialVertical => {
-                      this.itemStringsLeftSenialVertical.push(senialVertical.nombre);
-                    });
-                    this.listadoSenialVertical = true;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this._ControlViaService.indexSenialHorizontal().subscribe(
-                  response => {
-                    this.senialesHorizontales = response.data;
-                    this.senialesHorizontales.forEach(senialHorizontal => {
-                      this.itemStringsLeftSenialHorizontal.push(senialHorizontal.nombre);
-                    });
-                    this.listadoSenialHorizontal = true;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this._ControlViaService.indexReductorVelocidad().subscribe(
-                  response => {
-                    this.reductoresVelocidad = response.data;
-                    this.reductoresVelocidad.forEach(reductorVelocidad => {
-                      this.itemStringsLeftReductorVelocidad.push(reductorVelocidad.nombre);
-                    });
-                    this.listadoReductorVelocidad = true;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
               } else {
                 swal({
                   title: 'Alerta!',
@@ -921,8 +918,16 @@ export class NewComponent implements OnInit {
           if (response.status == 'success') {
             this.usuario = true;
             this.msvRegistroIpat.tipoIdentificacionConductor = response.data[0].tipoIdentificacion.nombre;
-            this.msvRegistroIpat.nombresConductor = response.data[0].primerNombre + ' ' + response.data[0].segundoNombre;
-            this.msvRegistroIpat.apellidosConductor = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
+            if (response.data[0].segundoNombre == null) {
+              this.msvRegistroIpat.nombresConductor = response.data[0].primerNombre;
+            } else {
+              this.msvRegistroIpat.nombresConductor = response.data[0].primerNombre + ' ' + response.data[0].segundoNombre;
+            }
+            if (response.data[0].segundoApellido == null) {
+              this.msvRegistroIpat.apellidosConductor = response.data[0].primerApellido;  
+            } else {
+              this.msvRegistroIpat.apellidosConductor = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
+            }
             this.msvRegistroIpat.nacionalidadConductor = response.data[0].nacionalidad;
             this.msvRegistroIpat.fechaNacimientoConductor = response.data[0].fechaNacimiento;
             this.msvRegistroIpat.sexoConductor = response.data[0].ciudadano.genero.sigla;
