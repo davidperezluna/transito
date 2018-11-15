@@ -3,6 +3,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
 import { PaisService } from '../../../../services/pais.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -18,32 +19,33 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     @Input() solicitante: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
+
     public clases: any;
-    public claseSelected: any;
     public servicios: any;
-    public servicioSelected: any;
     public paises: any;
-    public paisSelected: any;
-    public tramiteFacturaSelected: any;
-    public tipoCambioSelected: any;
-    public categorias: string[];
-    public resumen = {};     public datos = {
+    public categorias: any;
+
+    public resumen = {
+
+    };     
+    
+    public datos = {
         'tramiteFormulario': null,
         'idFactura': null,
         'categoria': null,
         'numeroLicenciaConduccion': null,
         'numeroRunt': null,
         'vigencia': null,
-        'paisId': null,
-        'claseId': null,
-        'servicioId': null,
+        'idPais': null,
+        'idClase': null,
+        'idCategoria': null,
+        'idServicio': null,
         'ciudadanoId': null,
     };
 
     constructor(
         private _LoginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
+        private _CategoriaService: CfgLicenciaConduccionCategoriaService,
         private _ClaseService: ClaseService,
         private _ServicioService: ServicioService,
         private _CiudadanoService: CiudadanoService,
@@ -51,8 +53,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.categorias = ['A2'];
-
         this._ClaseService.getClaseSelect().subscribe(
             response => {
               this.clases = response;
@@ -94,6 +94,20 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
               }
             }
         );
+
+        this._CategoriaService.select().subscribe(
+            response => {
+                this.categorias = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
     }
     
     enviarTramite() {
@@ -103,9 +117,6 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         this.datos.tramiteFormulario = 'rnc-duplicadolicencia';
 
         this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
-        this.datos.claseId = this.claseSelected;
-        this.datos.servicioId = this.servicioSelected;
-        this.datos.paisId = this.paisSelected;
         this.datos.ciudadanoId = this.solicitante.id;
 
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

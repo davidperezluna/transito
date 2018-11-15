@@ -53,6 +53,22 @@
                                         </tbody> 
                                     </table> 
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" [(ngModel)]="documentacion" class="custom-control-input" id="check-documentacion" name="check_documentacion">
+                                            <label class="custom-control-label" for="check-documentacion">Entrega documentación</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row" *ngIf="documentacion">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Registre que documento se entrega por parte del solicitante
+                                            <b class="text-danger">*</b>
+                                        </label>
+                                        <textarea class="form-control" [(ngModel)]="datos.documentacion" rows="4" name="documentacion"></textarea>
+                                    </div>
+                                </div>
                             </div>      
                         </div>
                     </div>

@@ -20,32 +20,27 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     @Input() solicitante: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public respuesta;
+
     public clases: any;
-    public claseSelected: any;
     public servicios: any;
-    public servicioSelected: any;
     public paises: any;
-    public paisSelected: any;
+    public categorias: any;
     public tramiteFacturaSelected: any;
     public ciudadanoEncontrado=1;
     public tipoCambioSelected: any;
     public identificacion: any;
-    public categorias: string[];
-    public categoriaSelected: any;
     public resumen = {};     public datos = {
         'tramiteFormulario': null,
-        'idFactura': null,
         'numeroLicenciaConduccion': null,
         'numeroRunt': null,
         'fechaExpedicion': null,
-        'documentacion': null,
-        'paisId': null,
-        'categoriaId': null,
-        'claseId': null,
-        'servicioId': null,
+        'idFactura': null,
+        'idPais': null,
+        'idCategoria': null,
+        'idClase': null,
+        'idServicio': null,
+        'idSedeOperativa': null,
         'ciudadanoId': null,
-        'sedeOperativaId': null,
     };
 
     constructor(
@@ -125,15 +120,10 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         this._MpersonalFuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.datos.sedeOperativaId = response.data.sedeOperativa.id;
-                    //Verificar la posibilidad de insertar solo la factura y/o el tramite
+                    this.datos.idSedeOperativa = response.data.sedeOperativa.id;
                     this.datos.idFactura = this.factura.id;
                     this.datos.tramiteFormulario = 'rnc-expedicionlicencia';
                     this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
-                    this.datos.categoriaId = this.categoriaSelected;
-                    this.datos.claseId = this.claseSelected;
-                    this.datos.servicioId = this.servicioSelected;
-                    this.datos.paisId = this.paisSelected;
                     this.datos.ciudadanoId = this.solicitante.id;
 
                     this._RncLicenciaConduccionService.register(this.datos, token).subscribe(
@@ -178,14 +168,12 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         this.cancelarTramite.emit(true);
     }
 
-    onKeyCiudadano(){
+    onSearchCiudadano(){
         let token = this._LoginService.getToken();
         this._CiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.solicitante.identificacion},token).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.solicitante = this.respuesta.data;
-                    console.log(this.respuesta.data);
+                if(response.status == 'success'){
+                    this.solicitante = response.data;
                     this.ciudadanoEncontrado= 2;
                 }else{
                     this.ciudadanoEncontrado=3;
