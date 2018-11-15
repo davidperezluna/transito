@@ -470,7 +470,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
                             <label>Nacionalidad</label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVehiculo" name="nacionalidadVehiculo"
+                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVehiculo" name="nacionalidadVehiculo"
                                 required>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == 'Si'">
@@ -672,7 +672,7 @@
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="custom-control custom-radio">
                                         <input id="radioResponsabilidadSi" name="responsabilidad" [(ngModel)]="msvRegistroIpat.portaSeguroResponsabilidadCivil"
-                                            value="Si" type="radio" id="customRadioResponsabilidad1" name="customRadioResponsabilidad"
+                                            value='1' type="radio" id="customRadioResponsabilidad1" name="customRadioResponsabilidad"
                                             class="custom-control-input">
                                         <label class="custom-control-label" for="customRadioResponsabilidad1">Si</label>
                                     </div>
@@ -680,25 +680,25 @@
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="custom-control custom-radio">
                                         <input id="radioResponsabilidadNo" name="responsabilidad" [(ngModel)]="msvRegistroIpat.portaSeguroResponsabilidadCivil"
-                                            value="No" type="radio" id="customRadioResponsabilidad2" name="customRadioResponsabilidad"
+                                            value='0' type="radio" id="customRadioResponsabilidad2" name="customRadioResponsabilidad"
                                             class="custom-control-input">
                                         <label class="custom-control-label" for="customRadioResponsabilidad2">No</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroResponsabilidadCivil == 'Si'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroResponsabilidadCivil == '1'">
                             <label>Número Seguro de Responsabilidad Civil</label>
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroSeguroResponsabilidadCivil"
                                 name="numeroSeguroResponsabilidadCivil" required>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroResponsabilidadCivil == 'Si'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroResponsabilidadCivil == '1'">
                             <label>Aseguradora</label>
                             <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil"
                                 required name="aseguradoraSeguroResponsabilidadCivil">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroResponsabilidadCivil == 'Si'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroResponsabilidadCivil == '1'">
                             <label>Fecha Vencimiento Seg. responsabilidad civil contractual</label>
                             <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaVencimientoSeguroResponsabilidadCivil"
                                 name="fechaVencimientoResponsabilidadCivil" required>
@@ -709,7 +709,7 @@
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="custom-control custom-radio">
                                         <input id="radioSeguroExtracontractualSi" name="seguroExtracontractual" [(ngModel)]="msvRegistroIpat.portaSeguroExtracontractual"
-                                            value="Si" type="radio" id="customRadioSeguroExtracontractual1" name="customRadioSeguroExtracontractual"
+                                            value="1" type="radio" id="customRadioSeguroExtracontractual1" name="customRadioSeguroExtracontractual"
                                             class="custom-control-input">
                                         <label class="custom-control-label" for="customRadioSeguroExtracontractual1">Si</label>
                                     </div>
@@ -717,25 +717,25 @@
                                 <div class="col-xs-12 col-lg-6">
                                     <div class="custom-control custom-radio">
                                         <input id="radioSeguroExtracontractualNo" name="seguroExtracontractual" [(ngModel)]="msvRegistroIpat.portaSeguroExtracontractual"
-                                            value="No" type="radio" id="customRadioSeguroExtracontractual2" name="customRadioSeguroExtracontractual"
+                                            value="0" type="radio" id="customRadioSeguroExtracontractual2" name="customRadioSeguroExtracontractual"
                                             class="custom-control-input">
                                         <label class="custom-control-label" for="customRadioSeguroExtracontractual2">No</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroExtracontractual == 'Si'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroExtracontractual == '1'">
                             <label>Número Seguro extracontractual</label>
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroSeguroExtracontractual" name="numeroSeguroExtracontractual"
                                 required>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroExtracontractual == 'Si'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroExtracontractual == '1'">
                             <label>Aseguradora Seguro extracontractual</label>
                             <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="msvRegistroIpat.idAseguradoraSeguroExtracontractual"
                                 required name="aseguradoraSeguroExtracontractual">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroExtracontractual == 'Si'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroExtracontractual == '1'">
                             <label>Fecha Vencimiento</label>
                             <input class="form-control" type="date" [(ngModel)]="msvRegistroIpat.fechaVencimientoSeguroExtracontractual"
                                 name="fechaVencimientoSeguroExtracontractual" required>
@@ -871,7 +871,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Nacionalidad Conductor</label>
-                            <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.nacionalidadConductor"
+                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadConductor"
                                 name="nacionalidadConductor" required>
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -1335,7 +1335,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">
                             <label>Nacionalidad</label>
-                            <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.nacionalidadVictima" name="nacionalidadVictima"
+                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVictima" name="nacionalidadVictima"
                                 required>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == 'Si'">

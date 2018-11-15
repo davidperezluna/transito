@@ -17,14 +17,13 @@
                             <div  class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
                                 <input type="number"  [(ngModel)]="solicitante.identificacion" class="form-control" placeholder="identificacion" name="solicitante_identificacion" required />
                                 <span class="input-group-btn">
-                                    <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                    <button (click)="onSearchCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2" [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Conductor</label>
                             <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
-                            
                         </div>
                     </div>
 
@@ -48,24 +47,24 @@
                         </div>
                         <div class="col-xs-12 col-lg-12" *ngIf="radio == 'true'">
                             <label>País expedición licencia extranjera <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="paises" [(ngModel)]="paisSelected" name="paises">
+                            <ng-select [multiple]="false" [options]="paises" [(ngModel)]="datos.idPais" name="paise">
                             </ng-select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-4">
                             <label>Categoria <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="categoriaSelected" name="categorias" required>
+                            <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="categoria" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Clase vehiculo <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="clases" required>
+                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="datos.idClase" name="clase" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Servicio <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" name="servicios" required>
+                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" name="servicio" required>
                             </ng-select>
                         </div>
                     </div>
