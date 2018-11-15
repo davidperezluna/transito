@@ -319,9 +319,6 @@
                     <div class="tab-pane" id="rnma-registromaquinaria" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-new-registroMaquinaria [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-new-registroMaquinaria>
                     </div>
-                  
-                    
-
                     <div class="tab-pane" id="rnma-ceritificadotradicion" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-certificadoTradicion [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-certificadoTradicion>
                     </div>
@@ -332,6 +329,12 @@
                     <div class="tab-pane" id="rnma-inscripcionalertaprenda" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-inscripcion-alerta-prenda [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-inscripcion-alerta-prenda>
                     </div>
+                    <div class="tab-pane" id="rnma-modificacion-acreedor-prendario" role="tabpanel" *ngIf='ciudadano'> 
+                        <appRnma-cambio-acreedor-prendario [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-acreedor-prendario>
+                    </div>
+                    <div class="tab-pane" id="rna-modificacion-acreedor-prendario-propietario" role="tabpanel" *ngIf='ciudadano'> 
+                        <appRnma-cambio-acreedor-prendario-propietario [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-acreedor-prendario-propietario>
+                    </div> 
                 </div>
             </div>
         </div>
