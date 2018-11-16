@@ -67,7 +67,10 @@
             </div>
         </div>
         <div class="card" *ngIf='solicitante.tipoIdentificacion.id != 7'>
-            <h3> El solicitante no tiene TRAJETA DE IDENTIDAD </h3>
+            <h3 class="alert alert-danger"> 
+                <i class="fa fa-exclamation-triangle"></i>
+                El solicitante no tiene TARJETA DE IDENTIDAD
+            </h3>
         </div>
     </div>
     <!-- /.col -->

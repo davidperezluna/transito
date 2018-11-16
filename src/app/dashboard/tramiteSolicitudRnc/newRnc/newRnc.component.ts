@@ -21,7 +21,7 @@ export class NewRncComponent implements OnInit {
   @Input() solicitante: any = null;
   public tramiteSolicitud: TramiteSolicitudRnc;
   public errorMessage;
-  public respuesta;
+
   public tramitesFactura: any = null;
   public tramiteFacturaSelected: any;
   public factura: any;
@@ -38,6 +38,8 @@ export class NewRncComponent implements OnInit {
   public sustrato=false;
   public isTramites:boolean=true;
   public isMatricula:boolean=false;
+  public documentacion: any;
+  public descripcionDocumentacion: any;
   
   public cantidadSustrato = 1;
 
@@ -124,8 +126,7 @@ constructor(
 
 		this._TramiteSolicitudRncService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -162,9 +163,7 @@ constructor(
     let token = this._loginService.getToken();
     this._TramiteSolicitudRncService.register(this.tramiteSolicitud, token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
