@@ -48,13 +48,13 @@ export class ExportComponent implements OnInit {
     public objetosFijos: any;
     public generos: any;
     public diasSemana = [ 
-        {value: 'LUNES', label:'LUNES'},
-        {value: 'MARTES', label:'MARTES'},
-        {value: 'MIERCOLES', label:'MIERCOLES'},
-        {value: 'JUEVES', label:'JUEVES'},
-        {value: 'VIERNES', label:'VIERNES'},
-        {value: 'SABADO', label:'SABADO'},
-        {value: 'DOMINGO', label:'DOMINGO'},
+        {value: 'Monday', label:'LUNES'},
+        {value: 'Thursday', label:'MARTES'},
+        {value: 'Wednesday', label:'MIERCOLES'},
+        {value: 'Tuesday', label:'JUEVES'},
+        {value: 'Friday', label:'VIERNES'},
+        {value: 'Saturday', label:'SABADO'},
+        {value: 'Sunday', label:'DOMINGO'},
         {value: 'FESTIVOS', label:'FESTIVOS'},
     ];
     
