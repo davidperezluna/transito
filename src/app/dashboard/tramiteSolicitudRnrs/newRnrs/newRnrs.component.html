@@ -308,7 +308,11 @@
                         <appRnrs-cambio-acreedor-prendario [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-acreedor-prendario>
                     </div>
 
-                </div>
+                    <div class="tab-pane" id="rnma-modificacion-acreedor-prendario-propietario" role="tabpanel" *ngIf='ciudadano'> 
+                        <appRnrs-cambio-acreedor-prendario-propietario [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-acreedor-prendario-propietario>
+                    </div> 
+
+                </div> 
             </div>
         </div>
     </div>
