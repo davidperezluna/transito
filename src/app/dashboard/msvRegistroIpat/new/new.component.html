@@ -260,7 +260,7 @@
                                 required name="iluminacion">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idIluminacion == '1'">
                             <label>Estado Iluminación</label>
                             <ng-select [multiple]="false" [options]="estadosIluminacion" [(ngModel)]="msvRegistroIpat.idEstadoIluminacion"
                                 required name="estadoIluminacion">
@@ -465,8 +465,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Placa remolque/semiremolque</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.placaRemolque" name="placaRemolque"
-                                required>
+                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.placaRemolque" name="placaRemolque">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Nacionalidad</label>
@@ -514,7 +513,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Capacidad de Carga (Ton)</label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.ton" name="ton" required>
+                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.ton" name="ton">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Pasajeros</label>
@@ -1369,10 +1368,9 @@
                                 required name="hospitalVictima">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.idTipoVictima == 'PASAJERO' || msvRegistroIpat.idTipoVictima == 'ACOMPAÑANTE'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == '1' && msvRegistroIpat.idTipoVictima == 'PASAJERO' || msvRegistroIpat.idTipoVictima == 'ACOMPAÑANTE'">
                             <label>Placa Vehiculo Victima </label>
-                            <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.placaVehiculoVictima" name="placaVehiculoVictima"
-                                required>
+                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.placaVehiculoVictima" name="placaVehiculoVictima">
                         </div>              
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == '1'">
                             <label>¿Se practicó el examen?</label>
@@ -1493,7 +1491,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == '1' && msvRegistroIpat.clase != ' ' || msvRegistroIpat.clase != 'MOTOCARRO' || msvRegistroIpat.clase != 'MOTOCICLETA' || msvRegistroIpat.clase != 'CUATRIMOTO' || msvRegistroIpat.clase != 'BICICLETA'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == '1' && msvRegistroIpat.clase != '' || msvRegistroIpat.clase != 'MOTOCARRO' || msvRegistroIpat.clase != 'MOTOCICLETA' || msvRegistroIpat.clase != 'CUATRIMOTO' || msvRegistroIpat.clase != 'BICICLETA'">
                             <label>Cinturon</label>
                             <div class="form-group row">
                                 <div class="col-xs-12 col-lg-6">
@@ -1504,7 +1502,7 @@
                                         <label class="custom-control-label" for="customRadioCinturonVictima1">Si</label>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-lg-6" *ngIf="msvRegistroIpat.victima == 'Si'">
+                                <div class="col-xs-12 col-lg-6">
                                     <div class="custom-control custom-radio">
                                         <input id="radioCinturonVictimaNo" name="cinturonVictima" [(ngModel)]="msvRegistroIpat.cinturonVictima"
                                             value="0" type="radio" id="customRadioCinturonVictima2" name="customRadioCinturonVictima"
