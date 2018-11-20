@@ -42,6 +42,9 @@ import { VhloCfgTipoAlertaRoutes } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.r
 import { VhloCfgCdaRoutes } from './vhloCfgCda/vhloCfgCda.routes';
 import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
 import { VhloCfgModalidadTransporteRoutes } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.routes';
+import { VhloCfgRadioAccionRoutes } from './vhloCfgRadioAccion/vhloCfgRadioAccion.routes';
+import { VhloCfgTransportePasajeroRoutes } from './vhloCfgTransportePasajero/vhloCfgTransportePasajero.routes';
+import { VhloCfgTransporteEspecialRoutes } from './vhloCfgTransporteEspecial/vhloCfgTransporteEspecial.routes';
 import { VhloCfgEmpresaGpsRoutes } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.routes';
 import { VhloCfgTipoRodajeRoutes } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.routes';
 import { VhloCfgTipoCabinaRoutes } from './vhloCfgTipoCabina/vhloCfgTipoCabina.routes';
@@ -289,6 +292,9 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgCdaRoutes,
       ...VhloCfgOrigenRegistroRoutes,
       ...VhloCfgModalidadTransporteRoutes,
+      ...VhloCfgRadioAccionRoutes,
+      ...VhloCfgTransportePasajeroRoutes,
+      ...VhloCfgTransporteEspecialRoutes,
       ...VhloCfgEmpresaGpsRoutes,
       ...VhloCfgTipoRodajeRoutes,
       ...VhloCfgTipoCabinaRoutes,

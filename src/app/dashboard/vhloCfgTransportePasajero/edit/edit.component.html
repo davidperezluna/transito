@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Editar estado de comparendo</h5>
+                <h5 class="text-uppercase">Editar transporte de pasajeros</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -11,7 +11,13 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control text-uppercase" [(ngModel)]="estado.nombre" name="nombre" type="numeric" required />
+                            <input class="form-control" [(ngModel)]="transportePasajero.nombre" name="nombre" type="numeric" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="transportePasajero.gestionable" class="custom-control-input" id="gestionable" name="gestionable">
+                                <label class="custom-control-label" for="gestionable">Gestionable</label>
+                            </div>
                         </div>
                     </div>
                 </form>

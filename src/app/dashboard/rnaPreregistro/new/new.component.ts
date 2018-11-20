@@ -9,7 +9,7 @@ import { CarroceriaService } from '../../../services/carroceria.service';
 import { ServicioService } from '../../../services/servicio.service';
 import { ColorService } from '../../../services/color.service';
 import { CombustibleService } from '../../../services/combustible.service';
-import { CfgRadioAccionService } from '../../../services/cfgRadioAccion.service';
+import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
@@ -97,7 +97,7 @@ constructor(
   private _ServicioService: ServicioService,
   private _ColorService: ColorService,
   private _CombustibleService: CombustibleService,
-  private _CfgRadioAccionService: CfgRadioAccionService,
+  private _CfgRadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _RnaPreregistroService: RnaPreregistroService,
   private _SedeOperativaService: SedeOperativaService,
@@ -269,7 +269,7 @@ constructor(
       }
     );
 
-    this._CfgRadioAccionService.getCfgRadioAccionSelect().subscribe(
+    this._CfgRadioAccionService.select().subscribe(
       response => {
         this.radiosAccion = response;
       },  

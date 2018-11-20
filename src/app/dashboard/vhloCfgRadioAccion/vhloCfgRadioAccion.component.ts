@@ -1,29 +1,29 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgComparendoEstadoService } from '../../services/cfgComparendoEstado.service';
+import { VhloCfgRadioAccionService } from '../../services/vhloCfgRadioAccion.service';
 import { LoginService } from '../../services/login.service';
-import { CfgComparendoEstado } from './cfgComparendoEstado.modelo';
+import { VhloCfgRadioAccion } from './vhloCfgRadioAccion.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgComparendoEstado.component.html'
+  templateUrl: './vhloCfgRadioAccion.component.html'
 })
-export class CfgComparendoEstadoComponent implements OnInit {
+export class VhloCfgRadioAccionComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-	public estados;
+
+	public radiosAccion;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table: any;
-  public estado: CfgComparendoEstado;
+  public table:any; 
+  public radioAccion: VhloCfgRadioAccion;
 
   constructor(
-    private _EstadoService: CfgComparendoEstadoService,
-		private _LoginService: LoginService,
-    ) {}
+    private _RadioAccionService: VhloCfgRadioAccionService,
+		private _loginService: LoginService,
+    ){}
     
   ngOnInit() {
     swal({
@@ -40,9 +40,10 @@ export class CfgComparendoEstadoComponent implements OnInit {
       ) {
       }
     })
-    this._EstadoService.index().subscribe(
+
+    this._RadioAccionService.index().subscribe(
 				response => {
-          this.estados = response.data;
+          this.radiosAccion = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -57,6 +58,7 @@ export class CfgComparendoEstadoComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -88,8 +90,8 @@ export class CfgComparendoEstadoComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  
-  deleteInfraccionCategoria(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -101,36 +103,33 @@ export class CfgComparendoEstadoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._LoginService.getToken();
-        this._EstadoService.delete(token,id).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
-              }, 
-            error => {
-              this.errorMessage = <any>error;
+        let token = this._loginService.getToken();
+        this._RadioAccionService.delete({ 'id': id }, token).subscribe(
+          response => {
+              swal({
+                title: 'Eliminado!',
+                text:'Registro eliminado correctamente.',
+                type:'success',
+                confirmButtonColor: '#15d4be',
+              });
+              this.table.destroy();
+              this.ngOnInit();
+            }, 
+          error => {
+            this.errorMessage = <any>error;
 
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
-          );
-
-        
+          }
+        );
       }
     })
   }
 
-  onEdit(estado:any){
-    this.estado = estado;
+  onEdit(radioAccion:any){
+    this.radioAccion = radioAccion;
     this.formEdit = true;
     this.formIndex = false;
   }

@@ -4,8 +4,8 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class CfgRadioAccionService {
-	private url = environment.apiUrl + "cfgradioaccion";
+export class VhloCfgRadioAccionService {
+	private url = environment.apiUrl + "vehiculo/vhlocfgradioaccion";
 	public identity;
 	public token;
 
@@ -15,38 +15,38 @@ export class CfgRadioAccionService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(tipoCorrespondencia,token){ 
-		
-		let json = JSON.stringify(tipoCorrespondencia);
-		let params = "json="+json+"&authorization="+token;
+	register(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteCfgRadioAccion(token,id){
-
-		let params = "authorization="+token;
+	delete(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
+		return this._http.post(this.url+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showCfgRadioAccion(token,id){
-		let params = "authorization="+token;
+	show(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
+		return this._http.post(this.url+"/show", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
 	// tslint:disable-next-line:one-line
-	editCfgRadioAccion(tipoCorrespondencia,token){
-		let json = JSON.stringify(tipoCorrespondencia);
-		let params = "json="+json+"&authorization="+token;
+	edit(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getCfgRadioAccionSelect(){
+	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 }

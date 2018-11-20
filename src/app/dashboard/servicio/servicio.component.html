@@ -1,21 +1,19 @@
-<div class="container" >
-  <div  class="row align-items-center justify-content-between">
-    <div class="col-11 col-sm-12 page-title">
-      <h3>Servicio</h3>
-      <p>aquí podrás visualizar los servicios inscritos e inscribir nuevos</p>
-    </div>
-    <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-      </div>
-    </div>
-    
-  </div>
+<div class="container">
+  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">Servicios <small>Registradas</small></h5>
+            <h5 class="card-title">
+              <strong class="text-uppercase">Configuración</strong>
+              <small>Clase de servicio</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -32,8 +30,16 @@
                   <td >{{servicio.id}}</td>
                   <td >{{servicio.nombre}}</td>
                   <td >{{servicio.codigo}}</td>
-                  <td><button (click)="editServicio(servicio)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteServicio(servicio.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="editServicio(servicio)" class="btn btn-primary" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="deleteServicio(servicio.id)"  class="btn btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>

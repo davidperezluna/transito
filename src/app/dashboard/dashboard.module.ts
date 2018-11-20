@@ -51,6 +51,9 @@ import { VhloCfgTipoAlertaModule } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.m
 import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
 import { VhloCfgModalidadTransporteModule } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.module';
+import { VhloCfgRadioAccionModule } from './vhloCfgRadioAccion/vhloCfgRadioAccion.module';
+import { VhloCfgTransportePasajeroModule } from './vhloCfgTransportePasajero/vhloCfgTransportePasajero.module';
+import { VhloCfgTransporteEspecialModule } from './vhloCfgTransporteEspecial/vhloCfgTransporteEspecial.module';
 import { VhloCfgEmpresaGpsModule } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.module';
 import { VhloCfgTipoRodajeModule } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.module';
 import { VhloCfgTipoCabinaModule } from './vhloCfgTipoCabina/vhloCfgTipoCabina.module';
@@ -347,6 +350,9 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       VhloCfgCdaModule,
       VhloCfgOrigenRegistroModule,
       VhloCfgModalidadTransporteModule,
+      VhloCfgRadioAccionModule,
+      VhloCfgTransportePasajeroModule,
+      VhloCfgTransporteEspecialModule,
       VhloCfgEmpresaGpsModule,
       VhloCfgTipoRodajeModule,
       VhloCfgTipoCabinaModule,

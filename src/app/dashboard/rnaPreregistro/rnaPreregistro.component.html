@@ -39,18 +39,18 @@
                       Sin Asignar
                     </span>
                   </td>
-                  <td>{{vehiculo.motor}}</td>
-                  <td>{{vehiculo.clase.nombre}}</td>
-                  <td>{{vehiculo.cilindraje}}</td>
-                  <td>{{vehiculo.modelo}}</td>
+                  <td>{{ vehiculo.motor }}</td>
+                  <td>{{ vehiculo.clase?.nombre }}</td>
+                  <td>{{ vehiculo.cilindraje }}</td>
+                  <td>{{ vehiculo.modelo }}</td>
                   <td>
                     <span *ngIf="vehiculo.linea">
-                        {{vehiculo.linea.marca.nombre}}
+                        {{vehiculo.linea?.marca.nombre}}
                     </span>
                   </td>
                   <td>
                     <span *ngIf="vehiculo.linea">
-                        {{vehiculo.linea.nombre}}
+                        {{vehiculo.linea?.nombre}}
                     </span>
                   </td>
                   <td>{{vehiculo.valor}}</td> 

@@ -30,8 +30,6 @@
         </div><!-- /.card -->
     </div><!-- /.col -->
 
-    <div id="summernote"></div>
-
     <div class="col-xs-12 col-lg-12" *ngIf='comparendos'>
         <div class="card">
             <div class="card-header">
@@ -50,6 +48,7 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Consecutivo</th>
+                                        <th>Placa</th>
                                         <th>Fecha</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
@@ -61,6 +60,7 @@
                                     <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
                                         <td>{{ i }}</td>
                                         <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                                        <td>{{ comparendo.placa }}</td>
                                         <td>{{ comparendo.fecha }}</td>
                                         <td>{{ comparendo.ciudadanoInfractor?.usuario.primerNombre }}</td>
                                         <td>{{ comparendo.ciudadanoInfractor?.usuario.primerApellido }}</td>
@@ -76,5 +76,7 @@
         </div>
     </div>
 </div>
+
+<div id="summernote1"></div>
 
 
