@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CfgSvSenialTipoService {
-	private url = environment.apiUrl + 'configuracion/cfgsvsenialtipo';
+export class SvCfgSenialTipoService {
+	private url = environment.apiUrl + 'seguridadvial/svcfgsenialtipo';
 	public identity;
 	public token;
 
@@ -21,7 +21,7 @@ export class CfgSvSenialTipoService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -31,7 +31,7 @@ export class CfgSvSenialTipoService {
 
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
 			res => res.json(),
@@ -48,7 +48,7 @@ export class CfgSvSenialTipoService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),

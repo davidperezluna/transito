@@ -33,7 +33,7 @@ import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.m
 
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
 import { CfgSvConectorModule } from './cfgSvConector/cfgSvConector.module';
-import { CfgSvSenialTipoModule } from './cfgSvSenialTipo/cfgSvSenialTipo.module';
+import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module';
 import { CfgSvSenialColorModule } from './cfgSvSenialColor/cfgSvSenialColor.module';
 import { CfgSvSenialEstadoModule } from './cfgSvSenialEstado/cfgSvSenialEstado.module';
 import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.module';
@@ -337,7 +337,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgAdmFormatoTipoModule,
       CfgBodegaModule,
       CfgSvConectorModule,
-      CfgSvSenialTipoModule,
+      SvCfgSenialTipoModule,
       CfgSvSenialColorModule,
       CfgSvSenialEstadoModule,
       CfgSvUnidadMedidaModule,

@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { GdCfgMedioCorrespondenciaService } from '../../services/gdCfgMedioCorrespondencia.service';
+import { SvCfgSenialTipoService } from '../../services/svCfgSenialTipo.service';
 import { LoginService } from '../../services/login.service';
-import { GdCfgMedioCorrespondencia } from './gdCfgMedioCorrespondencia.modelo';
+import { SvCfgSenialTipo } from './svCfgSenialTipo.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './GdCfgMedioCorrespondencia.component.html'
+  templateUrl: './SvCfgSenialTipo.component.html'
 })
-export class GdCfgMedioCorrespondenciaComponent implements OnInit {
+export class SvCfgSenialTipoComponent implements OnInit {
   public errorMessage;
 	public id;
 
@@ -18,10 +18,10 @@ export class GdCfgMedioCorrespondenciaComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public gdCfgMedioCorrespondencia: GdCfgMedioCorrespondencia;
+  public gdCfgMedioCorrespondencia: SvCfgSenialTipo;
 
   constructor(
-    private _GdCfgMedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
+    private _SvCfgSenialTipoService: SvCfgSenialTipoService,
 		private _loginService: LoginService,
     ){}
     
@@ -41,7 +41,7 @@ export class GdCfgMedioCorrespondenciaComponent implements OnInit {
       }
     })
 
-    this._GdCfgMedioCorrespondenciaService.index().subscribe(
+    this._SvCfgSenialTipoService.index().subscribe(
 				response => {
           this.gdCfgMedioCorrespondencias = response.data;
           let timeoutId = setTimeout(() => {  
@@ -104,7 +104,7 @@ export class GdCfgMedioCorrespondenciaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._GdCfgMedioCorrespondenciaService.delete({ 'id': id }, token).subscribe(
+        this._SvCfgSenialTipoService.delete({ 'id': id }, token).subscribe(
           response => {
               swal({
                 title: 'Eliminado!',

@@ -1,4 +1,4 @@
-export class GdCfgMedioCorrespondencia{
+export class SvCfgSenialTipo{
 	constructor(
 		public nombre: string,
 		public gestionable: boolean,
