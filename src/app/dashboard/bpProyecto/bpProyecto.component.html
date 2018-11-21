@@ -1,0 +1,61 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong class="text-uppercase">Configuración</strong>
+              <small>Cargos</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Numero</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Numero cuota</th>
+                    <th>Nombre cuota</th>
+                    <th>Costo valor</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let bpProyecto of bpProyectos; let i = index">
+                  <td >{{ bpProyecto.id }}</td>
+                  <td >{{ bpProyecto.numero }}</td>
+                  <td >{{ bpProyecto.nombre }}</td>
+                  <td >{{ bpProyecto.fecha }}</td>
+                  <td >{{ bpProyecto.numeroCuota }}</td>
+                  <td >{{ bpProyecto.nombreCuota }}</td>
+                  <td >{{ bpProyecto.costoValor }}</td>
+                  <td>
+                    <button (click)="onEdit(bpProyecto)" class="btn btn-xs btn-info" type="button">
+                      <i class="fa fa-edit"></i>
+                      Editar
+                    </button> 
+                    <button (click)="onDelete(bpProyecto.id)"  class="btn btn-xs btn-danger" type="button">
+                      <i class="fa fa-trash"></i>
+                      Eliminar
+                    </button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [bpProyecto]="bpProyecto" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>
