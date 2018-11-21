@@ -105,14 +105,21 @@
                     <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>GRAVEDAD</th>
-                                <th>TIPO PASAJERO</th>
+                                <th>GRAVEDAD ACCIDENTE</th>
                                 <th>HORA ACCIDENTE</th>
                                 <th>FECHA ACCIDENTE</th>
-                                <th>EDAD</th>
-                                <th>MUNICIPIO</th>
+                                <th>NOMBRE CONDUCTOR</th>
+                                <th>APELLIDO CONDUCTOR</th>
+                                <th>EDAD CONDUCTOR</th>
+                                <th>MUNICIPIO RESIDENCIA CONDUCTOR</th>
                                 <th>DIA DE SEMANA</th>
-                                <th>GENERO</th>
+                                <th>SEXO CONDUCTOR</th>
+                                <th>NOMBRE VICTIMA</th>
+                                <th>APELLIDO VICTIMA</th>
+                                <th>TIPO VICTIMA</th>
+                                <th>EDAD VICTIMA</th>
+                                <th>MUNICIPIO RESIDENCIA VICTIMA</th>
+                                <th>SEXO VICTIMA</th>
                                 <th>Vista</th>
                                 <th>Grafica</th>
                             </tr>
@@ -120,13 +127,20 @@
                         <tbody>
                             <tr class="odd" *ngFor="let ipat of ipats; let i = index">
                                 <td>{{ ipat.gravedad.nombre }}</td>
-                                <td>{{ ipat.tipoVictima.nombre }}</td>
                                 <td>{{ ipat.horaAccidente }}</td>
                                 <td>{{ ipat.fechaAccidente }}</td>
-                                <td>{{ ipat.fechaNacimientoConductor }}</td>
+                                <td>{{ ipat.nombresConductor }}</td>
+                                <td>{{ ipat.apellidosConductor }}</td>
+                                <td>{{ ipat.edadConductor }}</td>
                                 <td>{{ ipat.ciudadResidenciaConductor }}</td>
-                                <td>{{ dia }}</td>
+                                <td>{{ ipat.diaAccidente }}</td>
                                 <td>{{ ipat.sexoConductor }}</td>
+                                <td>{{ ipat.nombresVictima }}</td>
+                                <td>{{ ipat.apellidosVictima }}</td>
+                                <td>{{ ipat.tipoVictima.nombre }}</td>
+                                <td>{{ ipat.edadVictima }}</td>
+                                <td>{{ ipat.ciudadResidenciaVictima }}</td>
+                                <td>{{ ipat.sexoVictima }}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -29,7 +29,7 @@ export class ExportComponent implements OnInit {
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
-    public table: any;
+    public table: any = false;
     public ipat = false;
     
     public file: any;
@@ -48,34 +48,34 @@ export class ExportComponent implements OnInit {
     public objetosFijos: any;
     public generos: any;
     public diasSemana = [ 
-        {value: 'Monday', label:'LUNES'},
-        {value: 'Thursday', label:'MARTES'},
-        {value: 'Wednesday', label:'MIERCOLES'},
-        {value: 'Tuesday', label:'JUEVES'},
-        {value: 'Friday', label:'VIERNES'},
-        {value: 'Saturday', label:'SABADO'},
-        {value: 'Sunday', label:'DOMINGO'},
-        {value: 'FESTIVOS', label:'FESTIVOS'},
+        { value: 'LUNES', label:'LUNES' },
+        { value: 'MARTES', label:'MARTES' },
+        { value: 'MIERCOLES', label:'MIERCOLES' },
+        { value: 'JUEVES', label:'JUEVES' },
+        { value: 'VIERNES', label:'VIERNES' },
+        { value: 'SABADO', label:'SABADO' },
+        { value: 'DOMINGO', label:'DOMINGO' },
+        { value: 'FESTIVOS', label:'FESTIVOS' },
     ];
     
     public gruposEdad = [
-        {value: '0', label:'0 a 5'},
-        {value: '5', label:'5 a 10'},
-        {value: '10', label:'10 a 15'},
-        {value: '15', label:'15 a 20'},
-        {value: '20', label:'20 a 25'},
-        {value: '25', label:'25 a 30'},
-        {value: '30', label:'30 a 35'},
-        {value: '35', label:'35 a 40'},
-        {value: '40', label:'40 a 45'},
-        {value: '45', label:'45 a 50'},
-        {value: '50', label:'50 a 55'},
-        {value: '55', label:'55 a 60'},
-        {value: '60', label:'60 a 65'},
-        {value: '65', label:'65 a 70'},
-        {value: '70', label:'70 a 75'},
-        {value: '75', label:'75 a 80'},
-        {value: '80', label:'80 a 85'},
+        {value: '0', label:'0 a 4'},
+        {value: '5', label:'5 a 9'},
+        {value: '10', label:'10 a 14'},
+        {value: '15', label:'15 a 19'},
+        {value: '20', label:'20 a 24'},
+        {value: '25', label:'25 a 29'},
+        {value: '30', label:'30 a 34'},
+        {value: '35', label:'35 a 39'},
+        {value: '40', label:'40 a 44'},
+        {value: '45', label:'45 a 49'},
+        {value: '50', label:'50 a 54'},
+        {value: '55', label:'55 a 59'},
+        {value: '60', label:'60 a 64'},
+        {value: '65', label:'65 a 69'},
+        {value: '70', label:'70 a 74'},
+        {value: '75', label:'75 a 79'},
+        {value: '80', label:'80 a 84'},
         {value: '85', label:'85 a 90'},
     ];
 
@@ -98,7 +98,6 @@ export class ExportComponent implements OnInit {
         this._GravedadService.getGravedadSelect().subscribe(
             response => {
                 this.gravedades = response;
-                //console.log(this.gravedades);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -115,7 +114,6 @@ export class ExportComponent implements OnInit {
         this._TipoVictimaService.getTipoVictimaSelect().subscribe(
             response => {
                 this.tiposVictima = response;
-                //console.log(this.tiposVictima);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -132,7 +130,6 @@ export class ExportComponent implements OnInit {
         this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
-                //console.log(this.municipios);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -149,7 +146,6 @@ export class ExportComponent implements OnInit {
         this._ClaseService.getClaseSelect().subscribe(
             response => {
                 this.clases = response;
-                //console.log(this.clases);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -166,7 +162,6 @@ export class ExportComponent implements OnInit {
         this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
             response => {
                 this.clasesAccidente = response;
-                //console.log(this.clasesAccidente);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -183,7 +178,6 @@ export class ExportComponent implements OnInit {
         this._ChoqueCon.getChoqueConSelect().subscribe(
             response => {
                 this.choquesCon = response;
-                //console.log(this.choquesCon);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -200,7 +194,6 @@ export class ExportComponent implements OnInit {
         this._ObjetoFijo.getObjetoFijoSelect().subscribe(
             response => {
                 this.objetosFijos = response;
-                //console.log(this.objetosFijos);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -217,7 +210,6 @@ export class ExportComponent implements OnInit {
         this._GeneroService.getGeneroSelect().subscribe(
             response => {
                 this.generos = response;
-                //console.log(this.generos);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
@@ -233,6 +225,9 @@ export class ExportComponent implements OnInit {
         );
     }
     iniciarTabla() {
+        if (this.table) {
+            this.table.destroy();
+        }
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
@@ -277,7 +272,6 @@ export class ExportComponent implements OnInit {
         this._IpatService.buscarIpat(this.exportIpat, token).subscribe(
             response => {
                 this.ipats = response.data;
-                this.dia = response.diaSemana;
                 console.log(this.ipats);
             },
             error => {
