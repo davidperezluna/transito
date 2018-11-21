@@ -12,6 +12,7 @@ import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.
 import { ClaseService } from '../../../services/clase.service';
 import { LoginService } from '../../../services/login.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -53,9 +54,12 @@ public claseSelected: any;
 public date: any;
 
 public ciudadano: any = null;
+public prohibicion: any;
 
 public file: any = null;
-public prohibicion: any;
+public fileSelected: File = null;
+
+public docsUrl = environment.docsUrl;
 
 public datosRegistro = {
   'peticionario': null,
@@ -222,40 +226,58 @@ constructor(
   }
 
   onRegister(){
-    this.datosRegistro.remitente = this.remitente; 
-    this.datosRegistro.peticionario = this.ciudadano;
-    this.datosRegistro.documento = this.documento;
-
-    let token = this._loginService.getToken();
-
-		this._DocumentoService.register(this.file, this.datosRegistro, token).subscribe(
-			response => {
-        if(response.status == 'success'){
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-          this.onShow.emit(response.data);
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-			error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+    if (this.fileSelected) {
+      this.datosRegistro.remitente = this.remitente; 
+      this.datosRegistro.peticionario = this.ciudadano;
+      this.datosRegistro.documento = this.documento;
+  
+      if (!this.remitente.direccion && !this.remitente.telefono && !this.remitente.correoElectronico) {
+        swal({
+          title: 'Error!',
+          text: 'Debe diligenciar al menos un campo de (Dirección, Telefono y/o Correo Electronico).',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }else{
+        let token = this._loginService.getToken();
+    
+        this._DocumentoService.register(this.file, this.datosRegistro, token).subscribe(
+          response => {
+            if(response.status == 'success'){
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+              this.onShow.emit(response.data);
+            }else{
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          error => {
+              this.errorMessage = <any>error;
+    
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          }
+        );
       }
-    );
+    }else{
+      swal({
+        title: 'Error!',
+        text: 'Debe adjuntar el documento escaneado.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }
   }
 
   onCrearProhibicion(){
@@ -338,10 +360,10 @@ constructor(
 
   onFileChange(event) {
     if(event.target.files.length > 0) {
-      const fileSelected: File = event.target.files[0];
+      this.fileSelected = event.target.files[0];
       
       this.file = new FormData();
-      this.file.append('file', fileSelected);
+      this.file.append('file', this.fileSelected);
     }
   }
 

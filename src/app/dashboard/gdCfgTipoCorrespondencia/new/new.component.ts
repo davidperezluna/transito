@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.gdCfgTipoCorrespondencia = new GdCfgTipoCorrespondencia(null, null);
+    this.gdCfgTipoCorrespondencia = new GdCfgTipoCorrespondencia(null, null, false, null);
   }
   
   onCancelar(){

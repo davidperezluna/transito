@@ -144,9 +144,6 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     }
 
-    
-    
-   
     enviarTramite() {
         let placaT = this.vehiculo.placa;
         this.datos.vehiculoPlaca = this.vehiculo.placa.numero;
@@ -176,7 +173,6 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 }
                 error => {
                     this.errorMessage = <any>error;
-
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");

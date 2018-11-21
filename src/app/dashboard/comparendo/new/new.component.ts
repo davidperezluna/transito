@@ -14,6 +14,12 @@ import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.
 import { MparqPatioService } from '../../../services/mparqPatio.service';
 import { MparqGruaService } from '../../../services/mparqGrua.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
+import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
+import { VhloCfgTransportePasajeroService } from '../../../services/vhloCfgTransportePasajero.service';
+import { VhloCfgTransporteEspecialService } from '../../../services/vhloCfgTransporteEspecial.service';
+import { ClaseService } from '../../../services/clase.service';
+import { ServicioService } from '../../../services/servicio.service';
 import { MflInfraccionService } from '../../../services/mflInfraccion.service';
 import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
@@ -42,7 +48,6 @@ export class NewComponent implements OnInit {
   public funcionario: any;
   public vehiculo: any;
   public ciudadano: any = null;
-  public testigo: any = [{ 'identificacion':null }];
   public validado = false;
   public placa: any;
   public identificacion: any;
@@ -62,23 +67,13 @@ export class NewComponent implements OnInit {
   public infracciones: any;
   public infraccionSelected: any;
 
+  public sedesOperativas: any;
   public servicios: any;
-  public servicioSelected: any;
-
   public tiposVehiculo: any;
-  public tipoVehiculoSelected: any;
-
   public radiosAccion: any;
-  public radioAccionSelected: any;
-
-  public modalidaesTransporte: any;
-  public modalidadTransporteSelected: any;
-
+  public modalidadesTransporte: any;
   public transportesPasajero: any;
-  public transportePasajeroSelected: any;
-
   public transportesEspecial: any;
-  public transporteEspecialSelected: any;
 
   public infractorTipos: any;
   public infractorTipoSelected: any;
@@ -99,6 +94,40 @@ export class NewComponent implements OnInit {
   public tipoIdentificacionSelected: any;
   public tiposIdentificacion: any;
 
+  public infractor = {
+    'idTipoIdentificacion': null,
+    'idCategoriaLicenciaConduccion': null,
+    'identificacion': null,
+    'licenciaConduccion': null,
+    'fechaExpedicion': null,
+    'fechaVencimiento': null,
+    'nombres': null,
+    'direccion': null,
+    'edad': null,
+    'telefono': null,
+    'municipio': null,
+    'correo': null,
+  };
+
+  public propietario = {
+    'idTipoIdentificacion': null,
+    'identificacion': null,
+    'nombres': null,
+  };
+
+  public empresa = {
+    'nombre': null,
+    'nit': null,
+    'tarjeta': null,
+  };
+
+  public testigo = {
+    'nombres': null,
+    'identificacion': null,
+    'direccion': null,
+    'telefono': null,
+  };
+
 constructor(
   private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
@@ -113,6 +142,12 @@ constructor(
   private _MparqPatioService: MparqPatioService,
   private _MparqGruaService: MparqGruaService,
   private _CfgComparendoEstadoService: CfgComparendoEstadoService,
+  private _RadioAccionService: VhloCfgRadioAccionService,
+  private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
+  private _TransportePasajeroService: VhloCfgTransportePasajeroService,
+  private _TransporteEspecialService: VhloCfgTransporteEspecialService,
+  private _ClaseService: ClaseService,
+  private _ServicioService: ServicioService,
   private _MflInfraccionService: MflInfraccionService,
   private _CfgTipoInfractorService: CfgTipoInfractorService,
   private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
@@ -127,7 +162,7 @@ constructor(
       'numeroIdentificacion': this.identificacion,
     };
 
-    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.inmovilizacion = new Inmovilizacion(null, null, null);
 
     this._MpersonalFuncionarioService.selectAgentes().subscribe(
@@ -143,6 +178,188 @@ constructor(
         }
       }
     );
+
+    this._MunicipioService.getMunicipioSelect().subscribe(
+      response => {
+        this.municipios = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._MparqPatioService.select().subscribe(
+      response => {
+        this.patios = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._MparqGruaService.select().subscribe(
+      response => {
+        this.gruas = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._MflInfraccionService.select().subscribe(
+      response => {
+        this.infracciones = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._CfgTipoInfractorService.select().subscribe(
+      response => {
+        this.infractorTipos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._CfgLicenciaConduccionCategoriaService.select().subscribe(
+      response => {
+        this.categorias = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._RadioAccionService.select().subscribe(
+      response => {
+        this.radiosAccion = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._ModalidadTransporteService.select().subscribe(
+      response => {
+        this.modalidadesTransporte = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._TransportePasajeroService.select().subscribe(
+      response => {
+        this.transportesPasajero = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._ServicioService.getServicioSelect().subscribe(
+      response => {
+        this.servicios = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._ClaseService.getClaseSelect().subscribe(
+      response => {
+        this.tiposVehiculo = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+      response => {
+        this.sedesOperativas = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+      response => {
+        this.tiposIdentificacion = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   onCancelar(){
@@ -153,21 +370,18 @@ constructor(
     let token = this._loginService.getToken();
     this.comparendo.municipioId = this.municipioSelected;
     this.comparendo.infraccionId = this.infraccionSelected;
-    this.comparendo.estadoId = this.comparendoEstadoSelected;
     this.comparendo.tipoInfractorId = this.infractorTipoSelected;
-    this.comparendo.vehiculoId = this.vehiculo.id;
-
-    if (this.ciudadano) {
-      this.comparendo.ciudadanoId = this.ciudadano.id;
-    }
     
-    this.comparendo.testigoId = this.testigo.id;
     this.inmovilizacion.gruaId = this.gruaSelected;
     this.inmovilizacion.patioId = this.patioSelected;
 
     let datos = {
       'comparendo': this.comparendo,
-      'inmovilizacion': this.inmovilizacion
+      'inmovilizacion': this.inmovilizacion,
+      'infractor': this.infractor,
+      'propietario': this.propietario,
+      'empresa': this.empresa,
+      'testigo': this.testigo,
     }
     console.log(this.comparendo);
     
@@ -226,90 +440,6 @@ constructor(
 
                   this.consecutivo = response.data;
                   this.comparendo.consecutivoId = this.consecutivo.id;
-
-                  this._MunicipioService.getMunicipioSelect().subscribe(
-                    response => {
-                      this.municipios = response;
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
-                    }
-                  );
-
-                  this._MparqPatioService.select().subscribe(
-                    response => {
-                      this.patios = response;
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
-                    }
-                  );
-
-                  this._MparqGruaService.select().subscribe(
-                    response => {
-                      this.gruas = response;
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
-                    }
-                  );
-
-                  this._MflInfraccionService.select().subscribe(
-                    response => {
-                      this.infracciones = response;
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
-                    }
-                  );
-
-                  this._CfgTipoInfractorService.select().subscribe(
-                    response => {
-                      this.infractorTipos = response;
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
-                    }
-                  );
-
-                  this._CfgLicenciaConduccionCategoriaService.select().subscribe(
-                    response => {
-                      this.categorias = response;
-                    },
-                    error => {
-                      this.errorMessage = <any>error;
-
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
-                    }
-                  );
   
                   this.consecutivo = response.data;
                 }else{
@@ -459,31 +589,6 @@ constructor(
             confirmButtonText: 'Aceptar'
           });
           
-          this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
-            response => {
-              this.tiposIdentificacion = response;
-            }, 
-            error => {
-              this.errorMessage = <any>error;
-    
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._MunicipioService.getMunicipioSelect().subscribe(
-            response => {
-              this.municipios = response;
-            }, 
-            error => {
-              this.errorMessage = <any>error;
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
           this.ciudadano = false;
         }
         console.log(this.vehiculo);

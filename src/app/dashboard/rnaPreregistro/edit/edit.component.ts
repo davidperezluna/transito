@@ -11,7 +11,7 @@ import {CombustibleService} from '../../../services/combustible.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
 import {SedeOperativaService} from '../../../services/sedeOperativa.service';
 import {MarcaService} from '../../../services/marca.service';
-import {CfgRadioAccionService} from '../../../services/cfgRadioAccion.service';
+import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import swal from 'sweetalert2';
 @Component({
@@ -60,7 +60,7 @@ constructor(
   private _CombustibleService: CombustibleService,
   private _VehiculoService: VehiculoService,
   private _SedeOperativaService: SedeOperativaService,
-  private _RadioAccionService: CfgRadioAccionService,
+  private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   ){}
 
@@ -223,7 +223,7 @@ constructor(
         }
       }
     );
-    this._RadioAccionService.getCfgRadioAccionSelect().subscribe(
+    this._RadioAccionService.select().subscribe(
       response => {
         this.radioAcciones = response;
         setTimeout(() => {

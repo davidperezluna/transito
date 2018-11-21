@@ -37,8 +37,10 @@ public datos = {
   'numeroGuia': null,
   'nombreEmpresa': null,
   'tramiteFormulario': null,
+  'campos': null,
   'idFactura': null,
-  'vehiculoId': null
+  'idVehiculo': null,
+  'idSedeOperativa':null
 };
 
 constructor(
@@ -73,35 +75,24 @@ constructor(
     let token = this._loginService.getToken();
     
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
-    
-    this._VehiculoService.editSedeOperativaVehiculo(this.vehiculo,token).subscribe(
-      response => {
-          this.respuesta = response; 
-          if(this.respuesta.status == 'success'){
-              this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
-              this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
-              this.datos.idFactura = this.factura.id;
-              this.datos.tramiteFormulario = 'rnrs-traslado';
-              this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
-              this.datos.vehiculoId = this.vehiculo.id;
-              this.datos.numeroGuia = this.numeroGuia;
-              this.datos.numeroRunt = this.numeroRunt;
-              this.datos.fechaSalida = this.fechaSalida;       
-              this.datos.nombreEmpresa = this.nombreEmpresa; 
-              this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
-              this.respuesta = response; 
-                  if(this.respuesta.status == 'success'){
-                   this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-                  }
-                  error => {
-                    this.errorMessage = <any>error;
 
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-              });
+    this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
+    this.datos.idSedeOperativa = this.sedeOperativaSelected;
+    this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
+    this.datos.idFactura = this.factura.id;
+    this.datos.tramiteFormulario = 'rnrs-traslado';
+    this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
+    this.datos.idVehiculo = this.vehiculo.id;
+    this.datos.numeroGuia = this.numeroGuia;
+    this.datos.numeroRunt = this.numeroRunt;
+    this.datos.fechaSalida = this.fechaSalida;       
+    this.datos.campos = ['sedeOperativa'];
+    this.datos.nombreEmpresa = this.nombreEmpresa;  
+        
+    this._VehiculoService.update(this.datos,token).subscribe(
+      response => {
+          if(response.status == 'success'){
+              this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
           }
           error => {
                   this.errorMessage = <any>error;
@@ -111,9 +102,8 @@ constructor(
                       alert("Error en la petición");
                   }
               }
-      }); 
-
-        
+      });
+       
   }
 
 }

@@ -33,7 +33,7 @@ import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.m
 
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
 import { CfgSvConectorModule } from './cfgSvConector/cfgSvConector.module';
-import { CfgSvSenialTipoModule } from './cfgSvSenialTipo/cfgSvSenialTipo.module';
+import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module';
 import { CfgSvSenialColorModule } from './cfgSvSenialColor/cfgSvSenialColor.module';
 import { CfgSvSenialEstadoModule } from './cfgSvSenialEstado/cfgSvSenialEstado.module';
 import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.module';
@@ -51,6 +51,9 @@ import { VhloCfgTipoAlertaModule } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.m
 import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
 import { VhloCfgModalidadTransporteModule } from './vhloCfgModalidadTransporte/vhloCfgModalidadTransporte.module';
+import { VhloCfgRadioAccionModule } from './vhloCfgRadioAccion/vhloCfgRadioAccion.module';
+import { VhloCfgTransportePasajeroModule } from './vhloCfgTransportePasajero/vhloCfgTransportePasajero.module';
+import { VhloCfgTransporteEspecialModule } from './vhloCfgTransporteEspecial/vhloCfgTransporteEspecial.module';
 import { VhloCfgEmpresaGpsModule } from './vhloCfgEmpresaGps/vhloCfgEmpresaGps.module';
 import { VhloCfgTipoRodajeModule } from './vhloCfgTipoRodaje/vhloCfgTipoRodaje.module';
 import { VhloCfgTipoCabinaModule } from './vhloCfgTipoCabina/vhloCfgTipoCabina.module';
@@ -207,6 +210,7 @@ import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module'
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
 
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
@@ -334,7 +338,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       CfgAdmFormatoTipoModule,
       CfgBodegaModule,
       CfgSvConectorModule,
-      CfgSvSenialTipoModule,
+      SvCfgSenialTipoModule,
       CfgSvSenialColorModule,
       CfgSvSenialEstadoModule,
       CfgSvUnidadMedidaModule,
@@ -347,6 +351,9 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       VhloCfgCdaModule,
       VhloCfgOrigenRegistroModule,
       VhloCfgModalidadTransporteModule,
+      VhloCfgRadioAccionModule,
+      VhloCfgTransportePasajeroModule,
+      VhloCfgTransporteEspecialModule,
       VhloCfgEmpresaGpsModule,
       VhloCfgTipoRodajeModule,
       VhloCfgTipoCabinaModule,
@@ -401,13 +408,13 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       RpcccInventarioDocumentalModule,
       InsumoBusquedaModule,
       FacturaInfraccionModule,
-      //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
       RnaPreasignacionInsumoModule,
       CvCfgTipoMedidaCautelarModule,
-      CvMedidaCautelarModule
+      CvMedidaCautelarModule,
+      BpProyectoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

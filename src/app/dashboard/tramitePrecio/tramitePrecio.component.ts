@@ -55,15 +55,7 @@ export class TramitePrecioComponent implements OnInit {
           this.tramiteProximo = response.tramiteProximo;
           this.compa = response.compa;
           this.fechaActual = new Date();
-
           
-
-          console.log(this.tramitePrecios);
-          console.log(this.tramiteProximo);
-          console.log(this.fechaActual);
-          // console.log(this.compa.clase);
-          
-     
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -77,11 +69,6 @@ export class TramitePrecioComponent implements OnInit {
 					}
 				}
       );
-
-      
-
-
-
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({

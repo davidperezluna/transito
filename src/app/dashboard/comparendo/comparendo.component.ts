@@ -104,9 +104,6 @@ export class ComparendoComponent implements OnInit {
             })
         }    
       }
-
-
     }
-
   }
 }

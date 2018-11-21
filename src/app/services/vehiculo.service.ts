@@ -39,7 +39,7 @@ export class VehiculoService {
 
 	}
 
-	showVehiculoRna(vehiculo, token){
+	showVehiculoRna(vehiculo, token){ 
 		let json = JSON.stringify(vehiculo);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});

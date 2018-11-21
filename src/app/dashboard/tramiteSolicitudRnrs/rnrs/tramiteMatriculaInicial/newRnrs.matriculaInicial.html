@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
-                    Matricuala Inicial
+                    Matricula Inicial
                 </h5>
                 <small>Para agregar un comprador haga click en el botón Agregar </small>
                 <hr>
@@ -63,7 +63,7 @@
                                 <div  class="input-group" [class.has-success]="empresaEncontrada === 2" [class.has-danger]="empresaEncontrada === 3">
                                     <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
                                     <span class="input-group-btn">
-                                        <button (click)="onKeyEmpresa()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2" [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                        <button (click)="onSearchEmpresa()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2" [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
                                 <div class="has-danger" *ngIf="empresaEncontrada === 3">
@@ -129,7 +129,6 @@
                                         <tr class="odd" *ngFor="let empresa of datos.propietariosEmpresas; let i = index">
                                             <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==2"><p >Si</p></td>
                                             <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==2"><p >No</p></td>
-
                                             <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==1"><p >Propietario</p></td>
                                             <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==1"><p >Locatario</p></td>
                                             <td class="center"><p>{{empresa.nit}}<br>{{empresa.nombre}}</p></td>

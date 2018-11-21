@@ -3,7 +3,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
-import { VehiculoService } from 'app/services/vehiculo.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
 
 @Component({
     selector: 'appRnma-cambio-placa',

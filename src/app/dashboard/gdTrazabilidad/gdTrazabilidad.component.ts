@@ -3,7 +3,7 @@ import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario
 import { GdDocumentoService } from '../../services/gdDocumento.service';
 import { GdTrazabilidadService } from '../../services/gdTrazabilidad.service';
 import { LoginService } from '../../services/login.service';
-import { environment } from 'environments/environment';
+import { environment } from 'environments/environment'; 
 import swal from 'sweetalert2';
 declare var $: any;
 

@@ -73,6 +73,9 @@ export class NewRnrsCancelacionMatriculaComponent implements OnInit {
     }
 
     onEnviarTramite() {
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnrs-cancelacionmatricula';
+
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
         /*this.vehiculo.servicioId = this.vehiculo.servicio.id
         this.vehiculo.municipioId = this.vehiculo.municipio.id
