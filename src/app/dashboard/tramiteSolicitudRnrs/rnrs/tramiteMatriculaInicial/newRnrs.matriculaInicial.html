@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
-                    Matricuala Inicial
+                    Matricula Inicial
                 </h5>
                 <small>Para agregar un comprador haga click en el botón Agregar </small>
                 <hr>
@@ -129,7 +129,6 @@
                                         <tr class="odd" *ngFor="let empresa of datos.propietariosEmpresas; let i = index">
                                             <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==2"><p >Si</p></td>
                                             <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==2"><p >No</p></td>
-
                                             <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==1"><p >Propietario</p></td>
                                             <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==1"><p >Locatario</p></td>
                                             <td class="center"><p>{{empresa.nit}}<br>{{empresa.nombre}}</p></td>
