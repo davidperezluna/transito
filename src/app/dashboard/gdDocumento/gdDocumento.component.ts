@@ -81,14 +81,6 @@ export class GdDocumentoComponent implements OnInit {
         '23 de la constitucion política como derecho fundamental. Termino de respuesta 15 días</p>' +
         '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN DE INFORMACIÓN:</b> Petición para que el funcionario de a conocer como ha actuado en un caso determinado o permita el ' +
         'examen de los documentos públicos o expida copia de los mismos. Termino para Resolver 10 días </p>',
-      showCloseButton: true,
-      focusConfirm: false,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> OK!',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-        '<i class="fa fa-thumbs-down"></i>',
-      cancelButtonAriaLabel: 'Thumbs down',
     });
   }
 
@@ -167,7 +159,6 @@ export class GdDocumentoComponent implements OnInit {
     this._DocumentoService.search(this.peticionario, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.ngOnInit();
           this.formIndex = true;
           this.formAssign = false;
           this.documentos = response.data;

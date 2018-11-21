@@ -737,10 +737,24 @@
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="mgdTipoCorrespondencia" [ngClass]="{'active' : ( addActive === 'mgdTipoCorrespondencia')}"
-                (click)="addActiveMenu('mgdTipoCorrespondencia')">
+              <a class="nav-link" routerLink="gdCfgTipoCorrespondencia" [ngClass]="{'active' : ( addActive === 'gdCfgTipoCorrespondencia')}"
+                (click)="addActiveMenu('gdCfgTipoCorrespondencia')">
                 <i class="fa fa-angle-right"></i>
                 Tipos Correspondencia
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="gdCfgMedioCorrespondencia" [ngClass]="{'active' : ( addActive === 'gdCfgMedioCorrespondencia')}"
+                (click)="addActiveMenu('gdCfgMedioCorrespondencia')">
+                <i class="fa fa-angle-right"></i>
+                Medios Correspondencia
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="documentotemplate" [ngClass]="{'active' : ( addActive === 'documentotemplate')}"
+                (click)="addActiveMenu('documentotemplate')">
+                <i class="fa fa-angle-right"></i>
+                Cargar plantilla
               </a>
             </li>
           </ul>
@@ -1334,6 +1348,12 @@
             (click)="addActiveMenu('gdDocumento')">
             <i class="fa fa-angle-right"></i>
              Registrar documento
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="gdTrazabilidad" [ngClass]="{'active' : ( addActive === 'gdTrazabilidad')}" (click)="addActiveMenu('gdTrazabilidad')">
+            <i class="fa fa-angle-right"></i>
+            Gestionar
           </a>
         </li>
       </ul>

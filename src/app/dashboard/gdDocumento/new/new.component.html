@@ -37,10 +37,12 @@
                             </span>
                         </div>
                     </div>
-                    <p *ngIf="remitente.id">
-                        <strong>Remitente:</strong>
-                        <small>{{ remitente.primerNombre }} {{ remitente.primerApellido }}</small>
-                    </p>
+                    <div class="col-xs-12 col-lg-12">
+                        <h5 class="alert alert-success" *ngIf="remitente">
+                            <strong>Remitente encontrado:</strong>
+                            <small>{{ remitente.primerNombre }} {{ remitente.primerApellido }}</small>
+                        </h5>
+                    </div>
                 </div>
 
                 <div class="form-group row" *ngIf="formNewRemitente">
@@ -96,10 +98,12 @@
                             </span>
                         </div>
                     </div>
-                    <p *ngIf="ciudadano">
-                        <strong>Ciudadano:</strong>
-                        <small>{{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}</small>
-                    </p>
+                    <div class="col-xs-12 col-lg-12">
+                        <h5 class="alert alert-success" *ngIf="ciudadano">
+                            <strong>Ciudadano encontrado:</strong>
+                            <small>{{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}</small>
+                        </h5>
+                    </div>
                 </div>
 
                 <div class="form-group row">
@@ -148,7 +152,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha llegada <b class="text-danger">*</b></label>
-                        <input class="form-control" [(ngModel)]="documento.fechaLlegada" name="fechaLlegada" type="date" required>
+                        <input class="form-control" [(ngModel)]="documento.fechaLlegada" name="fechaLlegada" type="date" value="{{ date|date:('dd/MM/yyyy') }}" required>
                     </div>
                     <div class="col-xs-12 col-lg-12">
                         <label>Detalle de llegada <b class="text-danger">*</b></label>

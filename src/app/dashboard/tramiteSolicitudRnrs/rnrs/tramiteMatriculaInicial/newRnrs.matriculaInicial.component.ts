@@ -172,12 +172,12 @@ export class NewRnrsMatricualaInicialComponent implements OnInit {
         }); 
     }
 
-    onKeyEmpresa(){
+    onSearchEmpresa(){
         let token = this._loginService.getToken();
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token,nit).subscribe(
+        this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
