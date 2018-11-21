@@ -207,6 +207,7 @@ import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module'
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
 
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
@@ -401,13 +402,13 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       RpcccInventarioDocumentalModule,
       InsumoBusquedaModule,
       FacturaInfraccionModule,
-      //MsvTCAsignacionModule,
       CfgEmpresaServicioModule,
       MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
       RnaPreasignacionInsumoModule,
       CvCfgTipoMedidaCautelarModule,
-      CvMedidaCautelarModule
+      CvMedidaCautelarModule,
+      BpProyectoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

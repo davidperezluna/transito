@@ -202,6 +202,7 @@ import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
 import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.routes';
+import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -394,6 +395,7 @@ export const DashboardRoutes: Route[] = [
       ...RnaCertificadoTradicionRoutes,
       ...CvCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,
+      ...BpProyectoRoutes,
     ]
   }
 ];

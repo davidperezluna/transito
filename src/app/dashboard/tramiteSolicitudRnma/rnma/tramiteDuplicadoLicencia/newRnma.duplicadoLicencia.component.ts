@@ -22,7 +22,7 @@ export class NewRnmaDuplicadoLicenciaComponent implements OnInit {
     public datos = {
         'numeroRunt': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idFactura': null, 
         'numeroLicenciaActual': null,
         'nuevaLicencia': null,
 

@@ -17,10 +17,12 @@ export class NewRnrsDuplicadoLicenciaComponent implements OnInit {
     public tramiteFacturaSelected: any;
     public resumen = {};     
     public datos = {
-        'numeroLicencia': null,
         'numeroRunt': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'numeroLicenciaActual': null,
+        'nuevaLicencia': null,
+
     };
 
     constructor(
