@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { VehiculoService } from 'app/services/vehiculo.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
 
 @Component({
     selector: 'appRnrs-cambio-placa',

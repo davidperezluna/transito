@@ -3,7 +3,7 @@ import { MsvSenialInventarioService } from '../../services/msvSenialInventario.s
 import { CfgSvDestinoService } from '../../services/cfgSvDestino.service';
 import { CfgBodegaService } from '../../services/cfgBodega.service';
 import { MunicipioService } from '../../services/municipio.service';
-import { CfgSvSenialTipoService } from '../../services/cfgSvSenialTipo.service';
+import { SvCfgSenialTipoService } from '../../services/svCfgSenialTipo.service';
 import { LoginService } from '../../services/login.service';
 
 
@@ -44,7 +44,7 @@ export class MsvSenialInventarioComponent implements OnInit {
         private _DestinoService : CfgSvDestinoService,
         private _BodegaService : CfgBodegaService,
         private _MunicipioService : MunicipioService,
-        private _TipoSenialService: CfgSvSenialTipoService,
+        private _TipoSenialService: SvCfgSenialTipoService,
     ) { }
 
     ngOnInit() {

@@ -11,7 +11,7 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="estado.nombre" name="nombre" type="text" required />
+                            <input class="form-control text-uppercase" [(ngModel)]="estado.nombre" name="nombre" type="text" required />
                         </div>
                     </div>
                 </form>
@@ -20,7 +20,7 @@
                 <div class="btn-group">
                     <button (click)="onCancelar()" class="btn btn-default">
                         <i class="fa fa-times"></i>
-                        Cancel
+                        Cancelar
                     </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>

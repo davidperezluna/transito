@@ -18,7 +18,7 @@ export class CfgComparendoEstadoComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table: any;
-  public smlmv: CfgComparendoEstado;
+  public estado: CfgComparendoEstado;
 
   constructor(
     private _EstadoService: CfgComparendoEstadoService,
@@ -129,8 +129,8 @@ export class CfgComparendoEstadoComponent implements OnInit {
     })
   }
 
-  onEdit(smlmv:any){
-    this.smlmv = smlmv;
+  onEdit(estado:any){
+    this.estado = estado;
     this.formEdit = true;
     this.formIndex = false;
   }

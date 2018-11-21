@@ -31,15 +31,15 @@
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let registroRemolque of registrosRemolque; let i = index">
-                  <td>{{ registroRemolque.vehiculo.placa.numero }}</td>
-                  <td>{{ registroRemolque.vehiculo.linea.marca.nombre }}</td>
-                  <td>{{ registroRemolque.vehiculo.clase.nombre }}</td>
+                  <td>{{ registroRemolque.vehiculo.placa?.numero }}</td>
+                  <td>{{ registroRemolque.vehiculo.linea?.marca.nombre }}</td>
+                  <td>{{ registroRemolque.vehiculo.clase?.nombre }}</td>
                   <td>{{ registroRemolque.vehiculo.serie}}</td>
                   <td>{{ registroRemolque.vehiculo.vin}}</td>
                   <td>{{ registroRemolque.numeroEjes }}</td>
-                  <td>{{ registroRemolque.origenRegistro.nombre }}</td>
+                  <td>{{ registroRemolque.origenRegistro?.nombre }}</td>
                   <td>{{ registroRemolque.numeroFth }}</td>
-                  <td>{{ registroRemolque.condicionIngreso.nombre }}</td>
+                  <td>{{ registroRemolque.condicionIngreso?.nombre }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="editRemolque(registroRemolque)" class="btn btn-primary" type="button" >

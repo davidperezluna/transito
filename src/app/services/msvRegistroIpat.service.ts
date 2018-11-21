@@ -100,7 +100,7 @@ export class MsvRegistroIpatService {
 
 	getBuscarLicenciaConductor(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "&authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/get/datos/licenciaconduccion", params, { headers: headers }).map(
 			res => res.json()

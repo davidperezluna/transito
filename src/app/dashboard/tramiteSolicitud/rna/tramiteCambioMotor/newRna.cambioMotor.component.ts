@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 import { CombustibleService } from '../../../../services/combustible.service';
-import { VehiculoService } from 'app/services/vehiculo.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
 import { LoginService } from '../../../../services/login.service';
 
 @Component({

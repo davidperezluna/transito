@@ -998,6 +998,7 @@ export class NewComponent implements OnInit {
   onBuscarLicenciaConductor() {
     let token = this._LoginService.getToken();
     if (this.msvRegistroIpat.numeroLicenciaConduccion) {
+      console.log(this.msvRegistroIpat.numeroLicenciaConduccion);
       this._MsvRegistroIpatService.getBuscarLicenciaConductor({ 'numero': this.msvRegistroIpat.numeroLicenciaConduccion }, token).subscribe(
 
         response => {
