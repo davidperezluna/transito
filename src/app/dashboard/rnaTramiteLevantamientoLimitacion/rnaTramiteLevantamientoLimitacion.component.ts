@@ -51,7 +51,7 @@ export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
       }
     })
     let datos = {
-      'moduloId': 1,
+      'moduloId': 2,
     };
     this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
       response => {

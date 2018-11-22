@@ -263,6 +263,7 @@ export class NewComponent implements OnInit {
       'placa': this.placa,
       'moduloId': 3,
     };
+ 
     this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
         this.respuesta = response;
