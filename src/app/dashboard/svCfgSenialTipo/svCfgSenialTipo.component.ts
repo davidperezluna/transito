@@ -18,7 +18,7 @@ export class SvCfgSenialTipoComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public svCfgSenialTipo: SvCfgSenialTipo;
+  public tipo: SvCfgSenialTipo;
 
   constructor(
     private _SvCfgSenialTipoService: SvCfgSenialTipoService,
@@ -122,8 +122,8 @@ export class SvCfgSenialTipoComponent implements OnInit {
     })
   }
 
-  onEdit(svCfgSenialTipo:any){
-    this.svCfgSenialTipo = svCfgSenialTipo;
+  onEdit(tipo:any){
+    this.tipo = tipo;
     this.formEdit = true;
     this.formIndex = false;
   }

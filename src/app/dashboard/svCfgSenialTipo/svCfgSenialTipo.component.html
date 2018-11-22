@@ -25,18 +25,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let tipoSenial of tiposSenial; let i = index">
+                <tr class="odd" *ngFor="let tipo of tiposSenial; let i = index">
                   <td >{{ i + 1 }}</td>
-                  <td >{{ tipoSenial.nombre }}</td>
+                  <td >{{ tipo.nombre }}</td>
                   <td>
-                    <div class="btn-group" *ngIf="tipoSenial.gestionable">
-                      <button (click)="onEdit(tipoSenial)" class="btn btn-xs btn-info" type="button">
-                        <i class="fa fa-edit"></i>
-                        Editar
+                    <div class="btn-group">
+                      <button (click)="onEdit(tipo)" class="btn btn-xs btn-primary" type="button">
+                        <i class="fa fa-pencil"></i>
                       </button> 
-                      <button (click)="onDelete(tipoSenial.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(tipo.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
-                        Eliminar
                       </button> 
                     </div>
                   </td>
@@ -48,6 +46,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [tipoSenial]="tipoSenial" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [tipo]="tipo" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

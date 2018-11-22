@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-  @Input() tipoSenial:any = null;
+  @Input() tipo:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
@@ -25,7 +25,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-    this._SvCfgSenialTipoService.edit(this.tipoSenial,token).subscribe(
+    this._SvCfgSenialTipoService.edit(this.tipo,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
