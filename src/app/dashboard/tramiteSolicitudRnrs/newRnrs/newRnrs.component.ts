@@ -129,6 +129,7 @@ constructor(
           }
           if (tramiteFactura.tramitePrecio.tramite.formulario == 'rnrs-matriculainicial'){
             this.isMatricula = true;
+            alert(1);
           }
         });
         

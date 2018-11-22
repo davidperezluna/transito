@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.gdCfgMedioCorrespondencia = new GdCfgMedioCorrespondencia(null, null, null);
+    this.gdCfgMedioCorrespondencia = new GdCfgMedioCorrespondencia(null, true, null);
   }
   
   onCancelar(){

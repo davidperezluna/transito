@@ -13,12 +13,12 @@ export class SvCfgSenialTipoComponent implements OnInit {
   public errorMessage;
 	public id;
 
-	public gdCfgMedioCorrespondencias;
+	public tiposSenial;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public gdCfgMedioCorrespondencia: SvCfgSenialTipo;
+  public tipo: SvCfgSenialTipo;
 
   constructor(
     private _SvCfgSenialTipoService: SvCfgSenialTipoService,
@@ -29,24 +29,18 @@ export class SvCfgSenialTipoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
 
     this._SvCfgSenialTipoService.index().subscribe(
 				response => {
-          this.gdCfgMedioCorrespondencias = response.data;
+          this.tiposSenial = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -128,8 +122,8 @@ export class SvCfgSenialTipoComponent implements OnInit {
     })
   }
 
-  onEdit(gdCfgMedioCorrespondencia:any){
-    this.gdCfgMedioCorrespondencia = gdCfgMedioCorrespondencia;
+  onEdit(tipo:any){
+    this.tipo = tipo;
     this.formEdit = true;
     this.formIndex = false;
   }

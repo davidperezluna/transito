@@ -261,7 +261,7 @@ export class NewComponent implements OnInit {
     let token = this._loginService.getToken();
     let datos = {
       'placa': this.placa,
-      'moduloId': 5,
+      'moduloId': 4,
     };
     this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {

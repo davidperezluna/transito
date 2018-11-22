@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CfgSvSenialEstadoService } from '../../../services/cfgSvSenialEstado.service';
+import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _SenialEstadoService: CfgSvSenialEstadoService,
+  private _SenialEstadoService: SvCfgSenialEstadoService,
   private _loginService: LoginService,
   ){}
 

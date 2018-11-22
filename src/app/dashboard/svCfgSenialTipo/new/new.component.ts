@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public svCfgSenialTipo: SvCfgSenialTipo;
+public tipo: SvCfgSenialTipo;
 public errorMessage;
 public respuesta;
 
@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.svCfgSenialTipo = new SvCfgSenialTipo(null, null, null);
+    this.tipo = new SvCfgSenialTipo(null, null);
   }
   
   onCancelar(){
@@ -30,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._SvCfgSenialTipoService.register(this.svCfgSenialTipo,token).subscribe(
+		this._SvCfgSenialTipoService.register(this.tipo,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

@@ -94,19 +94,14 @@
                                 </label>
                                 <input class="form-control" [(ngModel)]="registroRemolque.referencia" name="referencia" type="text" required>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Nro. FTH
                                     <b class="text-danger">*</b>
                                 </label>
                                 <input class="form-control" [(ngModel)]="registroRemolque.numeroFth" name="numeroFth" type="text" required>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Nro. RUNT
-                                    <b class="text-danger">*</b>
-                                </label>
-                                <input class="form-control" [(ngModel)]="registroRemolque.numeroRunt" name="numeroRunt" type="text" required>
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
+                            
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Clase de vehiculo
                                     <b class="text-danger">*</b>
                                 </label>
@@ -126,6 +121,12 @@
                                 </label>
                                 <ng-select [multiple]="false" [options]="condicionIngresos" [(ngModel)]="registroRemolque.idCondicionIngreso" required name="condicionIngreso">
                                 </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nro. Solicitud RUNT
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <input class="form-control" [(ngModel)]="registroRemolque.numeroRunt" name="numeroRunt" type="text" required>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core'; 
-import { CfgSvSenialEstadoService } from '../../../services/cfgSvSenialEstado.service';
-import { CfgSvSenialColorService } from '../../../services/cfgSvSenialColor.service';
+import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
+import { SvCfgSenialColorService } from '../../../services/svCfgSenialColor.service';
 import { CfgSvUnidadMedidaService } from '../../../services/cfgSvUnidadMedida.service';
 import { MsvSenialInventarioService } from '../../../services/msvSenialInventario.service';
 import { LoginService } from '../../../services/login.service';
@@ -31,8 +31,8 @@ export class NewSenialBodegaComponent implements OnInit {
     public medidaSelected: any;
 
     constructor(
-        private _EstadoService: CfgSvSenialEstadoService,
-        private _ColorService: CfgSvSenialColorService,
+        private _EstadoService: SvCfgSenialEstadoService,
+        private _ColorService: SvCfgSenialColorService,
         private _UnidadMedidaService: CfgSvUnidadMedidaService,
         private _SenialInventarioService: MsvSenialInventarioService,
         private _loginService: LoginService,
