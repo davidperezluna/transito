@@ -1,6 +1,6 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { GdCfgMedioCorrespondencia } from '../gdCfgMedioCorrespondencia.modelo';
-import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { SvCfgSenialEstado } from '../svCfgSenialEstado.modelo';
+import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,19 +10,19 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public gdCfgMedioCorrespondencia: GdCfgMedioCorrespondencia;
+public estado: SvCfgSenialEstado;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _GdCfgMedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
+  private _EstadoService: SvCfgSenialEstadoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.gdCfgMedioCorrespondencia = new GdCfgMedioCorrespondencia(null, true, null);
+    this.estado = new SvCfgSenialEstado(null, null);
   }
-  
+
   onCancelar(){
     this.ready.emit(true);
   }
@@ -30,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._GdCfgMedioCorrespondenciaService.register(this.gdCfgMedioCorrespondencia,token).subscribe(
+		this._EstadoService.register(this.estado,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

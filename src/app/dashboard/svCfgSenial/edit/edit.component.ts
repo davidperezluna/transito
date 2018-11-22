@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { SvCfgSenialTipoService } from '../../../services/svCfgSenialTipo.service';
+import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,13 +9,13 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-  @Input() tipo:any = null;
+  @Input() senial:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
 
 constructor(
-  private _SvCfgSenialTipoService: SvCfgSenialTipoService,
+  private _SvCfgSenialService: SvCfgSenialService,
   private _loginService: LoginService,
   ){}
 
@@ -25,7 +25,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-    this._SvCfgSenialTipoService.edit(this.tipo,token).subscribe(
+    this._SvCfgSenialService.edit(this.senial,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

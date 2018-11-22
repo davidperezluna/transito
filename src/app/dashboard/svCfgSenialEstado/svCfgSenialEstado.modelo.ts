@@ -1,4 +1,4 @@
-export class SvCfgSenialTipo{
+export class SvCfgSenialEstado{
 	constructor(
 		public nombre: string,
 		public id:number

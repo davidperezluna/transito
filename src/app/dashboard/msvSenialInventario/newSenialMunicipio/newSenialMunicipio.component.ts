@@ -2,8 +2,8 @@
 import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core'; 
 import { MsvSenialInventarioService } from '../../../services/msvSenialInventario.service';
 import { MsvSenialService } from '../../../services/msvSenial.service';
-import { CfgSvSenialEstadoService } from '../../../services/cfgSvSenialEstado.service';
-import { CfgSvConectorService } from '../../../services/cfgSvConector.service';
+import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
+import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { LoginService } from '../../../services/login.service';
 import { MsvSenialMunicipio } from './newSenialMunicipio.modelo';
@@ -49,8 +49,8 @@ export class NewSenialMunicipioComponent implements OnInit {
     constructor(
         private _MsvSenialInventarioService: MsvSenialInventarioService,
         private _MsvSenialService: MsvSenialService,
-        private _ConectorService: CfgSvConectorService,
-        private _EstadoService: CfgSvSenialEstadoService,
+        private _ConectorService: SvCfgSenialConectorService,
+        private _EstadoService: SvCfgSenialEstadoService,
         private _MunicipioService: MunicipioService,
         private _LoginService: LoginService,
     ) {

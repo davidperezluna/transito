@@ -3,15 +3,15 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo medio de Correspondencia</h5>
+                <h5 class="text-uppercase">Editar conector</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <form #formNew="ngForm"> 
+                <form #formEdit="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="tipo.nombre" name="nombre" type="text" required autofocus />
+                            <input type="text" class="form-control" [(ngModel)]="estado.nombre" name="nombre" required />
                         </div>
                     </div>
                 </form>
@@ -22,7 +22,7 @@
                         <i class="fa fa-times"></i>
                         Cancelar
                     </button>
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>

@@ -5,8 +5,8 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">
-              <strong class="text-uppercase">Gestión Documental</strong>
-              <small>Medio Correspondencia</small>
+              <b class="text-uppercase">Seguridad Vial (Señales)</b>
+              <small>Configuración de Estados</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -19,21 +19,21 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let gdCfgMedioCorrespondencia of gdCfgMedioCorrespondencias; let i = index">
-                  <td >{{ i + 1 }}</td>
-                  <td >{{ gdCfgMedioCorrespondencia.nombre }}</td>
+                <tr class="odd" *ngFor="let estado of estados; let i = index">
+                  <td >{{ estado.id }}</td>
+                  <td >{{ estado.nombre }}</td>
                   <td>
-                    <div class="btn-group" *ngIf="gdCfgMedioCorrespondencia.gestionable">
-                      <button (click)="onEdit(gdCfgMedioCorrespondencia)" class="btn btn-xs btn-primary" type="button">
-                        <i class="fa fa-edit"></i>
+                    <div class="btn-group">
+                      <button (click)="onEdit(estado)" class="btn btn-xs btn-info" type="button">
+                        <i class="fa fa-pencil"></i>
                       </button> 
-                      <button (click)="onDelete(gdCfgMedioCorrespondencia.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(estado.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                       </button> 
                     </div>
@@ -46,6 +46,7 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [gdCfgMedioCorrespondencia]="gdCfgMedioCorrespondencia" (ready)="ready($event)"></app-edit>
+    
+    <app-edit *ngIf='formEdit' [estado]="estado" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
