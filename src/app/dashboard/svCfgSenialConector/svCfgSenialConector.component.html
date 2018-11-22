@@ -4,9 +4,9 @@
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">
+            <h5>
               <b class="text-uppercase">Seguridad Vial (Señales)</b>
-              <small>Configuración de Tipos</small>
+              <small>Configuración de Conectores</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -19,26 +19,24 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let tipoSenial of tiposSenial; let i = index">
-                  <td >{{ i + 1 }}</td>
-                  <td >{{ tipoSenial.nombre }}</td>
+                <tr class="odd" *ngFor="let conector of conectores; let i = index">
+                  <td >{{ conector.id }}</td>
+                  <td >{{ conector.nombre }}</td>
                   <td>
-                    <div class="btn-group" *ngIf="tipoSenial.gestionable">
-                      <button (click)="onEdit(tipoSenial)" class="btn btn-xs btn-info" type="button">
-                        <i class="fa fa-edit"></i>
-                        Editar
-                      </button> 
-                      <button (click)="onDelete(tipoSenial.id)"  class="btn btn-xs btn-danger" type="button">
-                        <i class="fa fa-trash"></i>
-                        Eliminar
-                      </button> 
-                    </div>
+                    <button (click)="onEdit(conector)" class="btn btn-xs btn-info" type="button">
+                      <i class="fa fa-edit"></i>
+                      Editar
+                    </button> 
+                    <button (click)="onDelete(conector.id)"  class="btn btn-xs btn-danger" type="button">
+                      <i class="fa fa-trash"></i>
+                      Eliminar
+                    </button> 
                   </td>
                 </tr>
               </tbody>
@@ -48,6 +46,7 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [tipoSenial]="tipoSenial" (ready)="ready($event)"></app-edit>
+    
+    <app-edit *ngIf='formEdit' [conector]="conector" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

@@ -38,27 +38,31 @@
           </a>
           <ul class="nav flex-column nav-third-level">
             <li class="nav-item">
-              <a class="nav-link" routerLink="cfgSvConector" [ngClass]="{'active' : ( addActive === 'cfgSvConector')}"
-                (click)="addActiveMenu('cfgSvConector')">
-                <i class="fa fa-angle-right"></i> Conector
+              <a class="nav-link" routerLink="svCfgSenialConector" [ngClass]="{'active' : ( addActive === 'svCfgSenialConector')}"
+                (click)="addActiveMenu('svCfgSenialConector')">
+                <i class="fa fa-angle-right"></i> Conector señal
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="cfgSvUnidadMedida" [ngClass]="{'active' : ( addActive === 'cfgSvUnidadMedida')}"
-                (click)="addActiveMenu('cfgSvUnidadMedida')">
-                <i class="fa fa-angle-right"></i> Und. medida
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="cfgSvSenialTipo" [ngClass]="{'active' : ( addActive === 'cfgSvSenialTipo')}"
-                (click)="addActiveMenu('cfgSvSenialTipo')">
+              <a class="nav-link" routerLink="svCfgSenialTipo" [ngClass]="{'active' : ( addActive === 'svCfgSenialTipo')}"
+                (click)="addActiveMenu('svCfgSenialTipo')">
                 <i class="fa fa-angle-right"></i> Tipo señal
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="cfgSvSenialEstado" [ngClass]="{'active' : ( addActive === 'cfgSvSenialEstado')}"
-                (click)="addActiveMenu('cfgSvSenialEstado')">
+              <a class="nav-link" routerLink="svCfgSenialEstado" [ngClass]="{'active' : ( addActive === 'svCfgSenialEstado')}"
+                (click)="addActiveMenu('svCfgSenialEstado')">
                 <i class="fa fa-angle-right"></i> Estado señal
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgSenialColor" [ngClass]="{'active' : ( addActive === 'svCfgSenialColor')}" (click)="addActiveMenu('svCfgSenialColor')">
+                <i class="fa fa-angle-right"></i> Color señal
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="svCfgSenial" [ngClass]="{'active' : ( addActive === 'svCfgSenial')}" (click)="addActiveMenu('svCfgSenial')">
+                <i class="fa fa-angle-right"></i> Señal
               </a>
             </li>
             <li class="nav-item">

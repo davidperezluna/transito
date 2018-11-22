@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
+import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,23 +9,24 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() porcentaje:any = null;
+@Input() estado:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
 
 constructor(
-  private _ConectorService: SvCfgSenialConectorService,
+  private _SenialEstadoService: SvCfgSenialEstadoService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.porcentaje); }
+  ngOnInit(){ console.log(this.estado);
+   }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._ConectorService.edit(this.porcentaje,token).subscribe(
+		this._SenialEstadoService.edit(this.estado,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

@@ -32,11 +32,11 @@ import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpc
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
 
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
-import { CfgSvConectorModule } from './cfgSvConector/cfgSvConector.module';
+import { SvCfgSenialConectorModule } from './svCfgSenialConector/svCfgSenialConector.module';
 import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module';
-import { CfgSvSenialColorModule } from './cfgSvSenialColor/cfgSvSenialColor.module';
-import { CfgSvSenialEstadoModule } from './cfgSvSenialEstado/cfgSvSenialEstado.module';
-import { CfgSvUnidadMedidaModule } from './cfgSvUnidadMedida/cfgSvUnidadMedida.module';
+import { SvCfgSenialColorModule } from './svCfgSenialColor/svCfgSenialColor.module';
+import { SvCfgSenialEstadoModule } from './svCfgSenialEstado/svCfgSenialEstado.module';
+import { SvCfgSenialModule } from './svCfgSenial/svCfgSenial.module';
 
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvLcCfgRestriccionModule } from './cvLcCfgRestriccion/cvLcCfgRestriccion.module';
@@ -337,11 +337,11 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       ComparendoModule,
       CfgAdmFormatoTipoModule,
       CfgBodegaModule,
-      CfgSvConectorModule,
+      SvCfgSenialConectorModule,
       SvCfgSenialTipoModule,
-      CfgSvSenialColorModule,
-      CfgSvSenialEstadoModule,
-      CfgSvUnidadMedidaModule,
+      SvCfgSenialColorModule,
+      SvCfgSenialEstadoModule,
+      SvCfgSenialModule,
       CvLcCfgMotivoModule,
       CvLcCfgRestriccionModule,
       CvCfgInteresModule,

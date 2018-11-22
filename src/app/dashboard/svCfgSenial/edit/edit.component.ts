@@ -1,36 +1,31 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { SvCfgSenialTipo } from '../svCfgSenialTipo.modelo';
-import { SvCfgSenialTipoService } from '../../../services/svCfgSenialTipo.service';
+import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-edit',
+  templateUrl: './edit.component.html'
 })
-export class NewComponent implements OnInit {
+export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-public svCfgSenialTipo: SvCfgSenialTipo;
+  @Input() senial:any = null;
 public errorMessage;
 public respuesta;
+public formReady = false;
 
 constructor(
-  private _SvCfgSenialTipoService: SvCfgSenialTipoService,
+  private _SvCfgSenialService: SvCfgSenialService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit() {
-    this.svCfgSenialTipo = new SvCfgSenialTipo(null, false, null);
-  }
-  
-  onCancelar(){
-    this.ready.emit(true);
-  }
-  
+  ngOnInit(){  }
+
+  onCancelar(){ this.ready.emit(true); }
+
   onEnviar(){
     let token = this._loginService.getToken();
-    
-		this._SvCfgSenialTipoService.register(this.svCfgSenialTipo,token).subscribe(
+    this._SvCfgSenialService.edit(this.senial,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -40,16 +35,10 @@ constructor(
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
         }
 			error => {
 					this.errorMessage = <any>error;
+
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");

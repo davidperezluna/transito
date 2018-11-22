@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SvCfgSenialTipoService } from '../../services/svCfgSenialTipo.service';
+import { SvCfgSenialService } from '../../services/svCfgSenial.service';
 import { LoginService } from '../../services/login.service';
-import { SvCfgSenialTipo } from './svCfgSenialTipo.modelo';
+import { SvCfgSenial } from './svCfgSenial.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './SvCfgSenialTipo.component.html'
+  templateUrl: './svCfgSenial.component.html'
 })
-export class SvCfgSenialTipoComponent implements OnInit {
+export class SvCfgSenialComponent implements OnInit {
   public errorMessage;
 	public id;
 
@@ -18,10 +18,10 @@ export class SvCfgSenialTipoComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public svCfgSenialTipo: SvCfgSenialTipo;
+  public senial: SvCfgSenial;
 
   constructor(
-    private _SvCfgSenialTipoService: SvCfgSenialTipoService,
+    private _SvCfgSenialService: SvCfgSenialService,
 		private _loginService: LoginService,
     ){}
     
@@ -29,18 +29,24 @@ export class SvCfgSenialTipoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
+      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    });
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
 
-    this._SvCfgSenialTipoService.index().subscribe(
+    this._SvCfgSenialService.index().subscribe(
 				response => {
           this.tiposSenial = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
-          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -98,7 +104,7 @@ export class SvCfgSenialTipoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._SvCfgSenialTipoService.delete({ 'id': id }, token).subscribe(
+        this._SvCfgSenialService.delete({ 'id': id }, token).subscribe(
           response => {
               swal({
                 title: 'Eliminado!',
@@ -122,8 +128,8 @@ export class SvCfgSenialTipoComponent implements OnInit {
     })
   }
 
-  onEdit(svCfgSenialTipo:any){
-    this.svCfgSenialTipo = svCfgSenialTipo;
+  onEdit(senial:any){
+    this.senial = senial;
     this.formEdit = true;
     this.formIndex = false;
   }

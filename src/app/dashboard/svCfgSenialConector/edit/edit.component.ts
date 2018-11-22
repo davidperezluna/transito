@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() porcentaje:any = null;
+@Input() conector:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
@@ -19,13 +19,14 @@ constructor(
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.porcentaje); }
+  ngOnInit(){ console.log(this.conector);
+   }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._ConectorService.edit(this.porcentaje,token).subscribe(
+		this._ConectorService.edit(this.conector,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

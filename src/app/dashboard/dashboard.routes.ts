@@ -31,12 +31,12 @@ import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorc
 import { CvAcuerdoPagoRoutes } from './cvAcuerdoPago/cvAcuerdoPago.routes';
 
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
-import { CfgSvConectorRoutes } from './cfgSvConector/cfgSvConector.routes';
+import { SvCfgSenialConectorRoutes } from './svCfgSenialConector/svCfgSenialConector.routes';
 import { SvCfgSenialTipoRoutes } from './svCfgSenialTipo/svCfgSenialTipo.routes';
-import { CfgSvSenialColorRoutes } from './cfgSvSenialColor/cfgSvSenialColor.routes';
-import { CfgSvSenialEstadoRoutes } from './cfgSvSenialEstado/cfgSvSenialEstado.routes';
+import { SvCfgSenialColorRoutes } from './svCfgSenialColor/svCfgSenialColor.routes';
+import { SvCfgSenialEstadoRoutes } from './svCfgSenialEstado/svCfgSenialEstado.routes';
+import { SvCfgSenialRoutes } from './svCfgSenial/svCfgSenial.routes';
 import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
-import { CfgSvUnidadMedidaRoutes } from './cfgSvUnidadMedida/cfgSvUnidadMedida.routes';
 
 import { VhloCfgTipoAlertaRoutes } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.routes';
 import { VhloCfgCdaRoutes } from './vhloCfgCda/vhloCfgCda.routes';
@@ -283,12 +283,12 @@ export const DashboardRoutes: Route[] = [
       ...CvCfgPorcentajeInicialRoutes,
       ...CvAcuerdoPagoRoutes,
       ...CfgBodegaRoutes,
-      ...CfgSvConectorRoutes,
+      ...SvCfgSenialConectorRoutes,
       ...SvCfgSenialTipoRoutes,
-      ...CfgSvSenialColorRoutes,
-      ...CfgSvSenialEstadoRoutes,
+      ...SvCfgSenialColorRoutes,
+      ...SvCfgSenialEstadoRoutes,
+      ...SvCfgSenialRoutes,
       ...MsvSenialInventarioRoutes,
-      ...CfgSvUnidadMedidaRoutes,
       ...VhloCfgTipoAlertaRoutes,
       ...VhloCfgCdaRoutes,
       ...VhloCfgOrigenRegistroRoutes,

@@ -4,9 +4,9 @@
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">
-              <b class="text-uppercase">Seguridad Vial (Señales)</b>
-              <small>Configuración de Tipos</small>
+            <h5>
+              <b class="text-uppercase">Seguridad Vial</b>
+              <small>Configuración de señales</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -25,16 +25,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let tipoSenial of tiposSenial; let i = index">
+                <tr class="odd" *ngFor="let senial of seniales; let i = index">
                   <td >{{ i + 1 }}</td>
-                  <td >{{ tipoSenial.nombre }}</td>
+                  <td >{{ senial.nombre }}</td>
                   <td>
-                    <div class="btn-group" *ngIf="tipoSenial.gestionable">
-                      <button (click)="onEdit(tipoSenial)" class="btn btn-xs btn-info" type="button">
+                    <div class="btn-group" *ngIf="senial.gestionable">
+                      <button (click)="onEdit(senial)" class="btn btn-xs btn-info" type="button">
                         <i class="fa fa-edit"></i>
                         Editar
                       </button> 
-                      <button (click)="onDelete(tipoSenial.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(senial.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                         Eliminar
                       </button> 
@@ -48,6 +48,6 @@
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [tipoSenial]="tipoSenial" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [senial]="senial" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

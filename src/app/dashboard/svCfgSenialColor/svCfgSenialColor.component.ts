@@ -1,27 +1,27 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SvCfgSenialTipoService } from '../../services/svCfgSenialTipo.service';
+import { Component, OnInit } from '@angular/core';
+import { SvCfgSenialColorService } from '../../services/svCfgSenialColor.service';
 import { LoginService } from '../../services/login.service';
-import { SvCfgSenialTipo } from './svCfgSenialTipo.modelo';
+import { SvCfgSenialColor } from './svCfgSenialColor.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './SvCfgSenialTipo.component.html'
+  templateUrl: './svCfgSenialColor.component.html'
 })
-export class SvCfgSenialTipoComponent implements OnInit {
+export class SvCfgSenialColorComponent implements OnInit {
   public errorMessage;
 	public id;
-
-	public tiposSenial;
+	public respuesta;
+	public colores;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public svCfgSenialTipo: SvCfgSenialTipo;
+  public color: SvCfgSenialColor;
 
   constructor(
-    private _SvCfgSenialTipoService: SvCfgSenialTipoService,
+    private _SenialColorService: SvCfgSenialColorService,
 		private _loginService: LoginService,
     ){}
     
@@ -34,9 +34,9 @@ export class SvCfgSenialTipoComponent implements OnInit {
       }
     });
 
-    this._SvCfgSenialTipoService.index().subscribe(
+    this._SenialColorService.index().subscribe(
 				response => {
-          this.tiposSenial = response.data;
+          this.colores = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -98,32 +98,35 @@ export class SvCfgSenialTipoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._SvCfgSenialTipoService.delete({ 'id': id }, token).subscribe(
-          response => {
-              swal({
-                title: 'Eliminado!',
-                text:'Registro eliminado correctamente.',
-                type:'success',
-                confirmButtonColor: '#15d4be',
-              });
-              this.table.destroy();
-              this.ngOnInit();
-            }, 
-          error => {
-            this.errorMessage = <any>error;
+        this._SenialColorService.delete({'id':id},token).subscribe(
+            response => {
+                swal({
+                      title: 'Eliminado!',
+                      text:'Registro eliminado correctamente.',
+                      type:'success',
+                      confirmButtonColor: '#15d4be',
+                    })
+                  this.table.destroy();
+                  this.respuesta= response;
+                  this.ngOnInit();
+              }, 
+            error => {
+              this.errorMessage = <any>error;
 
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
             }
-          }
-        );
+          );
+
+        
       }
     })
   }
 
-  onEdit(svCfgSenialTipo:any){
-    this.svCfgSenialTipo = svCfgSenialTipo;
+  onEdit(color:any){
+    this.color = color;
     this.formEdit = true;
     this.formIndex = false;
   }
