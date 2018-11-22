@@ -118,6 +118,7 @@ constructor(
        
         this.tramitesFactura = response;
         this.tramitesFactura.forEach(tramiteFactura => {
+          console.log(tramiteFactura.tramitePrecio.tramite.formulario);
           if (tramiteFactura.realizado == 0) {
             active = false;
           }else{
@@ -129,7 +130,6 @@ constructor(
           }
           if (tramiteFactura.tramitePrecio.tramite.formulario == 'rnrs-matriculainicial'){
             this.isMatricula = true;
-            alert(1);
           }
         });
         
