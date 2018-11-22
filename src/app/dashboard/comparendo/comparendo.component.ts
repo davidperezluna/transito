@@ -42,7 +42,7 @@ export class ComparendoComponent implements OnInit {
  
   async ngAbrirInput(polca:any){
     const {value: files} = await swal({
-      title: 'Seleccione el atchivo .txt',
+      title: 'Seleccione el archivo .txt',
       input: 'file',
       inputAttributes: {
         'accept': 'txt/*',

@@ -111,9 +111,9 @@ export class MsvRegistroIpatService {
 		return this._http.get(this.url + "/export").map(res => res.json());
 	}
 
-	buscarIpat(datos, token) {
+	buscarIpat(file, datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "file=" + file + "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/buscaripat", params, { headers: headers }).map(
 			res => res.json()
