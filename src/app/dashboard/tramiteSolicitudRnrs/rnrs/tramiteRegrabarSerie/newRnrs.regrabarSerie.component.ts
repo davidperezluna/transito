@@ -20,7 +20,7 @@ export class NewRnrsRegrabarSerieComponent implements OnInit {
     public tipoRegrabacionSelected: any;
     public motivoList: string[];
     public motivoSelected: any;
-    public resumen = {};     
+    public resumen = {};
     public datos = {
         'tipoRegrabacion': null,
         'motivo': null,
@@ -28,6 +28,8 @@ export class NewRnrsRegrabarSerieComponent implements OnInit {
         'numeroRunt': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'idVehiculo': null,
+        'campos': null,
     };
 
     constructor(
@@ -42,23 +44,15 @@ export class NewRnrsRegrabarSerieComponent implements OnInit {
 
     enviarTramite() {
         let token = this._loginService.getToken();
+        this.datos.motivo = this.motivoSelected;
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rnrs-regrabarserie';
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.campos = ['regrabarserie'];
 
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
-        this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
-        this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
-        this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
-        this.vehiculo.serie = this.datos.nuevoNumero
-        this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
+        this._VehiculoService.update(this.datos,token).subscribe(
         response => {
             if(response.status == 'success'){
-                this.datos.motivo = this.motivoSelected;
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rnrs-regrabarserie';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }
             error => {

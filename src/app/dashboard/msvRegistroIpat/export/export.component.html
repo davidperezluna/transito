@@ -12,8 +12,8 @@
                     <form #formNew="ngForm">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>Adjuntar Reporte Policia <strong class="text-danger">*</strong></label>
-                        <input type="file" (click)="ngAbrirInput()" class="form-control" [(ngModel)]="exportIpat.documento" name="documento" />
+                        <label>Adjuntar Reporte Policial <strong class="text-danger">*</strong></label>
+                        <button (click)="onUploadFile()" class="btn btn-default">archivo</button>
                     </div>
                     <div class="col-lg-6 col-md-6"></div>
                     <div class="col-lg-6 col-md-6">
