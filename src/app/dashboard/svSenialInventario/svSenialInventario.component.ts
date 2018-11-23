@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MsvSenialInventarioService } from '../../services/msvSenialInventario.service';
-import { CfgSvDestinoService } from '../../services/cfgSvDestino.service';
+import { SvSenialInventarioService } from '../../services/svSenialInventario.service';
 import { CfgBodegaService } from '../../services/cfgBodega.service';
 import { MunicipioService } from '../../services/municipio.service';
 import { SvCfgSenialTipoService } from '../../services/svCfgSenialTipo.service';
@@ -12,10 +11,10 @@ declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './msvSenialInventario.component.html'
+    templateUrl: './svSenialInventario.component.html'
 })
 
-export class MsvSenialInventarioComponent implements OnInit {
+export class SvSenialInventarioComponent implements OnInit {
     public errorMessage;
     public formLocationSenial = false;
     public formNewBodega = false;
@@ -24,8 +23,7 @@ export class MsvSenialInventarioComponent implements OnInit {
     public formSearch = true;
     public table: any = null;
     
-    public tiposDestino: any;
-    public tipoDestinoSelected: any;
+    public destinoSelected: any;
     
     public municipios: any = null;
     public municipioSelected: any;
@@ -37,31 +35,21 @@ export class MsvSenialInventarioComponent implements OnInit {
     public inventariosMunicipio: any = null;
     public inventario: any;
 
+    public destinos = [
+        { value: 'BODEGA', label: 'BODEGA' },
+        { value: 'MUNICIPIO', label: 'MUNICIPIO' },
+    ];
+
     
     constructor(
         private _loginService: LoginService,
-        private _SenialInventarioService: MsvSenialInventarioService,
-        private _DestinoService : CfgSvDestinoService,
+        private _SenialInventarioService: SvSenialInventarioService,
         private _BodegaService : CfgBodegaService,
         private _MunicipioService : MunicipioService,
         private _TipoSenialService: SvCfgSenialTipoService,
     ) { }
 
     ngOnInit() {
-        this._DestinoService.select().subscribe(
-                response => {
-                this.tiposDestino = response;
-            },
-                error => {
-                this.errorMessage = <any>error;
-
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-
         this._TipoSenialService.select().subscribe(
                 response => {
                     this.tiposSenial = response;
@@ -115,7 +103,7 @@ export class MsvSenialInventarioComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        if (this.tipoDestinoSelected == 1) {
+        if (this.destinoSelected == 'BODEGA') {
             this._SenialInventarioService.searchByTipoSenialInBodega({'idTipoSenial': this.tipoSenialSelected}, token).subscribe(
                 response => {
                     if (response.status == 'success') {
@@ -133,13 +121,6 @@ export class MsvSenialInventarioComponent implements OnInit {
                             type: 'warning',
                             confirmButtonText: 'Aceptar'
                         });
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
                     }
                 }
             );
@@ -161,13 +142,6 @@ export class MsvSenialInventarioComponent implements OnInit {
                             type: 'warning',
                             confirmButtonText: 'Aceptar'
                         });
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
                     }
                 }
             );

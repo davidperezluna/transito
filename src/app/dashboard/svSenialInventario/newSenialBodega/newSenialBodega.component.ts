@@ -2,9 +2,9 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { SvCfgSenialColorService } from '../../../services/svCfgSenialColor.service';
 import { CfgSvUnidadMedidaService } from '../../../services/cfgSvUnidadMedida.service';
-import { MsvSenialInventarioService } from '../../../services/msvSenialInventario.service';
+import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
 import { LoginService } from '../../../services/login.service';
-import { MsvSenialBodega } from './newSenialBodega.modelo';
+import { SvSenialBodega } from './newSenialBodega.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -19,7 +19,7 @@ export class NewSenialBodegaComponent implements OnInit {
     public id;
     public logo: any;
     public file: any = new FormData();
-    public senial: MsvSenialBodega;
+    public senial: SvSenialBodega;
 
     public estados: any;
     public estadoSelected: any;
@@ -34,12 +34,12 @@ export class NewSenialBodegaComponent implements OnInit {
         private _EstadoService: SvCfgSenialEstadoService,
         private _ColorService: SvCfgSenialColorService,
         private _UnidadMedidaService: CfgSvUnidadMedidaService,
-        private _SenialInventarioService: MsvSenialInventarioService,
+        private _SenialInventarioService: SvSenialInventarioService,
         private _loginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this.senial = new MsvSenialBodega(null, null, null, null, null, null, null, null, null, null);
+        this.senial = new SvSenialBodega(null, null, null, null, null, null, null, null, null, null);
 
         this._EstadoService.select().subscribe(
             response => {

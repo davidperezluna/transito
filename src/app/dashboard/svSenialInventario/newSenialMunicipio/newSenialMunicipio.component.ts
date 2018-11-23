@@ -1,12 +1,12 @@
 /// <reference types="@types/googlemaps" />
 import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core'; 
-import { MsvSenialInventarioService } from '../../../services/msvSenialInventario.service';
-import { MsvSenialService } from '../../../services/msvSenial.service';
+import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
+import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { LoginService } from '../../../services/login.service';
-import { MsvSenialMunicipio } from './newSenialMunicipio.modelo';
+import { SvSenialMunicipio } from './newSenialMunicipio.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 import { } from "googlemaps";
@@ -44,11 +44,11 @@ export class NewSenialMunicipioComponent implements OnInit {
 
     public formEdit = false;
     public formIndex = true;
-    public senialMunicipio: MsvSenialMunicipio;
+    public senialMunicipio: SvSenialMunicipio;
 
     constructor(
-        private _MsvSenialInventarioService: MsvSenialInventarioService,
-        private _MsvSenialService: MsvSenialService,
+        private _SvSenialInventarioService: SvSenialInventarioService,
+        private _SenialService: SvCfgSenialService,
         private _ConectorService: SvCfgSenialConectorService,
         private _EstadoService: SvCfgSenialEstadoService,
         private _MunicipioService: MunicipioService,
@@ -63,7 +63,7 @@ export class NewSenialMunicipioComponent implements OnInit {
      }
 
     ngOnInit() {   
-        this.senialMunicipio = new MsvSenialMunicipio(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.senialMunicipio = new SvSenialMunicipio(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         let token = this._LoginService.getToken();
 
@@ -81,7 +81,7 @@ export class NewSenialMunicipioComponent implements OnInit {
             }
         );
         
-        this._MsvSenialService.selectByTipoSenial({'idTipoSenial': this.tipoSenialSelected}, token).subscribe(
+        this._SenialService.selectByTipoSenial({'idTipoSenial': this.tipoSenialSelected}, token).subscribe(
             response => {
                 this.seniales = response;
             },
@@ -270,7 +270,7 @@ export class NewSenialMunicipioComponent implements OnInit {
         this.senialMunicipio.idMunicipio = this.municipioSelected;
         this.senialMunicipio.idTipoSenial = this.tipoSenialSelected;
 
-        this._MsvSenialInventarioService.registerSenialMunicipio(this.file, this.senialMunicipio, token).subscribe(
+        this._SvSenialInventarioService.registerSenialMunicipio(this.file, this.senialMunicipio, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);
@@ -305,7 +305,7 @@ export class NewSenialMunicipioComponent implements OnInit {
         if (value) {
             let token = this._LoginService.getToken();
     
-            this._MsvSenialService.show({ 'idSenial': value }, token).subscribe(
+            this._SenialService.show({ 'idSenial': value }, token).subscribe(
                 response => {
                     this.senial = response.data;
                     this.senialMunicipio.valor = this.senial.valor;

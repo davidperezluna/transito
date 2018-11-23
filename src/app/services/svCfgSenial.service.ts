@@ -19,14 +19,24 @@ export class SvCfgSenialService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/new", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'INSERT', json, this.url)
-		);
+	register(formData, datos, token) {
+		if (formData == null) {
+			let json = JSON.stringify(datos);
+			let params = "data=" + json + "&authorization=" + token;
+			let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+			return this._http.post(this.url + "/new", params, { headers: headers }).map(
+				res => res.json(),
+				this._loogerService.registerLog(token, 'INSERT', json, this.url)
+			);
+		} else {
+			let json = JSON.stringify(datos);
+			formData.append('data', json);
+			formData.append('authorization', token);
+			return this._http.post(this.url + "/new", formData).map(
+				res => res.json(),
+				this._loogerService.registerLog(token, 'INSERT', json, this.url)
+			);
+		}
 	}
 
 	delete(datos, token) {
@@ -46,17 +56,64 @@ export class SvCfgSenialService {
 			.map(res => res.json());
 	}
 
-	edit(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
-		);
+	edit(formData, datos, token) {
+		if (formData == null) {
+			let json = JSON.stringify(datos);
+			let params = "data=" + json + "&authorization=" + token;
+			let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+			return this._http.post(this.url + "/new", params, { headers: headers }).map(
+				res => res.json(),
+				this._loogerService.registerLog(token, 'UPDATE', json, this.url)
+			);
+		} else {
+			let json = JSON.stringify(datos);
+			formData.append('data', json);
+			formData.append('authorization', token);
+			return this._http.post(this.url + "/new", formData).map(
+				res => res.json(),
+				this._loogerService.registerLog(token, 'UPDATE', json, this.url)
+			);
+		}
 	}
 
 	select() {
 		return this._http.get(this.url + "/select").map(res => res.json());
+	}
+
+	selectByTipoSenial(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/select/tipo", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchBySenial(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/bysenial", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchByParametros(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/parametros", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchByFull() {
+		return this._http.get(this.url + "/full").map(res => res.json());
+	}
+
+	export() {
+		window.location.href = this.url + "/export";
+	}
+
+	exportInv(data) {
+		let params = '';
+		for (var item in data) {
+			params += data[item] + '_'
+		}
+		window.location.href = this.url + "/exportinv/" + params.substr(0, (params.length - 1));
 	}
 }

@@ -1,4 +1,4 @@
-export class MsvSenialInventario{
+export class SvSenialInventario{
 	constructor(
 		public inventario: number,
 		public fecha: string,
@@ -9,9 +9,9 @@ export class MsvSenialInventario{
 		public codigo: string,
 		public nombre: string,
 		public valor: number,
+		public cantidad: number,
 		public idTipo: number,
 		public idColor: number,
-		public cantidad: number,
 		public id: number
 	){}
 }

@@ -12,12 +12,12 @@ import swal from 'sweetalert2';
   templateUrl: './print.component.html',
 })
 export class PrintComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-@Input() documento: any = null;
-public docsUrl = environment.docsUrl;
-public errorMessage;
+  @Output() ready = new EventEmitter<any>();
+  @Input() documento: any = null;
+  public docsUrl = environment.docsUrl;
+  public errorMessage;
 
-public date: any;
+  public date: any;
 
   public trazabilidades: any = null;
   public mediosCorrespondencia: any;

@@ -4,7 +4,10 @@
     <div class="col-xs-12 col-lg-4"><!-- .col -->
       <div class="card">
         <div class="card-header">
-            <h5 class="text-uppercase">Señalización <small>Buscar señales</small></h5>
+            <h5 class="text-uppercase">
+              <b>Señalización</b>
+              <small>Buscar</small>
+            </h5>
         </div>
         <div class="card-body">
           <form #formSearch="ngForm">
@@ -12,10 +15,10 @@
               <div class="col-xs-12 col-lg-12">
                 <div class="form-group">
                   <label>Seleccione donde quiera buscar:</label>
-                  <ng-select (ngModelChange)="getDestino($event)" [multiple]="false" [options]="tiposDestino" [(ngModel)]="tipoDestinoSelected" name="tipoDestino" required></ng-select>
+                  <ng-select (change)="getDestino($event)" [multiple]="false" [options]="destinos" [(ngModel)]="destinoSelected" name="destino" required></ng-select>
                 </div>
               </div>
-              <div class="col-xs-12 col-lg-12" *ngIf="municipios && tipoDestinoSelected != 1">
+              <div class="col-xs-12 col-lg-12" *ngIf="municipios && destinoSelected == 'MUNICIPIO'">
                 <div class="form-group">
                   <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" name="municipios" required></ng-select>
                 </div>

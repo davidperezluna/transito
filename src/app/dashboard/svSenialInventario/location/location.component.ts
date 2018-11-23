@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core'; 
-import { MsvSenialInventarioService } from '../../../services/msvSenialInventario.service';
-import { MsvSenialUbicacionService } from '../../../services/msvSenialUbicacion.service';
+import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
+import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -20,8 +20,8 @@ export class LocationComponent implements OnInit {
     public table: any = null;
 
     constructor(
-        private _SenialInventarioService: MsvSenialInventarioService,
-        private _SenialUbicacionService: MsvSenialUbicacionService,
+        private _SenialInventarioService: SvSenialInventarioService,
+        private _SenialUbicacionService: SvSenialUbicacionService,
         private _loginService: LoginService
     ) { }
 

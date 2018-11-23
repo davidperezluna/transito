@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.tipo = new SvCfgSenialTipo(null, null);
+    this.tipo = new SvCfgSenialTipo(null, false, null);
   }
   
   onCancelar(){

@@ -13,7 +13,7 @@ export class SvCfgSenialTipoComponent implements OnInit {
   public errorMessage;
 	public id;
 
-	public tiposSenial;
+	public tiposSenial: any = null;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;

@@ -2,10 +2,8 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { CfgPlacaService } from '../../../services/cfgPlaca.service';
 import { LoginService } from '../../../services/login.service';
 //import { SedeOperativaService } from '../../../services/sedeOperativa.service';
-import { MsvSenialInventarioService } from '../../../services/msvSenialInventario.service';
+import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
 import swal from 'sweetalert2';
-import { MsvSenialInventario } from '../msvSenialInventario.modelo';
-
 
 @Component({
   selector: 'app-edit',

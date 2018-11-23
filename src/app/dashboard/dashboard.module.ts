@@ -37,6 +37,7 @@ import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module'
 import { SvCfgSenialColorModule } from './svCfgSenialColor/svCfgSenialColor.module';
 import { SvCfgSenialEstadoModule } from './svCfgSenialEstado/svCfgSenialEstado.module';
 import { SvCfgSenialModule } from './svCfgSenial/svCfgSenial.module';
+import { SvSenialInventarioModule } from './svSenialInventario/svSenialInventario.module';
 
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvLcCfgRestriccionModule } from './cvLcCfgRestriccion/cvLcCfgRestriccion.module';
@@ -221,8 +222,6 @@ import {SidebarComponent} from '../shared';
 import {FooterComponent} from '../shared';
 import {RightsidebarComponent} from '../shared';
 
-import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInventario.module';
-//import { MsvSenialModule } from './msvSenial/msvSenial.module';
 
 
 @NgModule({
@@ -342,6 +341,7 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       SvCfgSenialColorModule,
       SvCfgSenialEstadoModule,
       SvCfgSenialModule,
+      SvSenialInventarioModule,
       CvLcCfgMotivoModule,
       CvLcCfgRestriccionModule,
       CvCfgInteresModule,
@@ -409,7 +409,6 @@ import { MsvSenialInventarioModule } from './msvSenialInventario/msvSenialInvent
       InsumoBusquedaModule,
       FacturaInfraccionModule,
       CfgEmpresaServicioModule,
-      MsvSenialInventarioModule,
       RnaCertificadoTradicionOficialModule,
       RnaPreasignacionInsumoModule,
       CvCfgTipoMedidaCautelarModule,

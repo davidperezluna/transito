@@ -4,10 +4,9 @@ import { environment } from 'environments/environment';
 import "rxjs/add/operator/map";
 
 @Injectable()
-export class MsvSenialInventarioService {
+export class SvSenialInventarioService {
 	private urlBodega = environment.apiUrl + "seguridadvial/svsenialinventariobodega";
 	private urlSenialBodega = environment.apiUrl + "seguridadvial/svsenial";
-	private urlMunicipio = environment.apiUrl + "seguridadvial/svsenialinventariomunicipio";
 	private urlSenialMunicipio = environment.apiUrl + "seguridadvial/svsenialubicacion";
 	public identity;
 	public token;
@@ -39,12 +38,12 @@ export class MsvSenialInventarioService {
 			let json = JSON.stringify(datos);
 			let params = "json=" + json + "&authorization=" + token;
 			let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-			return this._http.post(this.urlMunicipio + "/new", params, { headers: headers }).map(res => res.json());
+			return this._http.post(this.urlSenialMunicipio + "/new", params, { headers: headers }).map(res => res.json());
 		} else {
 			let json = JSON.stringify(datos);
 			formData.append('json', json);
 			formData.append('authorization', token);
-			return this._http.post(this.urlMunicipio + "/new", formData).map(res => res.json());
+			return this._http.post(this.urlSenialMunicipio + "/new", formData).map(res => res.json());
 		}
 	}
 
@@ -66,16 +65,16 @@ export class MsvSenialInventarioService {
 
 	searchByTipoSenialInBodega(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.urlBodega + "/search/tiposenial", params, { headers: headers }).map(res => res.json());
 	}
 
 	searchByTipoSenialInMunicipio(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.urlMunicipio + "/search/tiposenial", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.urlSenialMunicipio + "/search/tiposenial", params, { headers: headers }).map(res => res.json());
 	}
 
 	searchByFull() {
