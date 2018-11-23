@@ -12,7 +12,6 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public estado: SvCfgSenialEstado;
 public errorMessage;
-public respuesta;
 
 constructor(
   private _EstadoService: SvCfgSenialEstadoService,

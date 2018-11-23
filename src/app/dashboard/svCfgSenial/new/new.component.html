@@ -3,21 +3,31 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo medio de Correspondencia</h5>
+                <h5 class="text-uppercase"><b>Nuevo tipo de señal</b></h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="svCfgSenialTipo.nombre" name="nombre" type="text" required autofocus />
+                            <label>Código <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="senial.codigo" name="codigo" type="text" required autofocus />
                         </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" [(ngModel)]="svCfgSenialTipo.gestionable" class="custom-control-input" id="gestionable" name="gestionable">
-                                <label class="custom-control-label" for="gestionable">Gestionable</label>
-                            </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <input class="form-control text-uppercase" [(ngModel)]="senial.nombre" name="nombre" type="text" required autofocus />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="senial.idSenialTipo" name="tipo" required></ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Color </label>
+                            <ng-select [multiple]="false" [options]="colores" [(ngModel)]="senial.idColor" name="color"></ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Adjuntar logo</label>
+                            <input class="form-control" type="file" (change)="onFileChange($event)">
                         </div>
                     </div>
                 </form>
@@ -26,7 +36,7 @@
                 <div class="btn-group">
                     <button (click)="onCancelar()" class="btn btn-default">
                         <i class="fa fa-times"></i>
-                        Cancel
+                        Cancelar
                     </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>

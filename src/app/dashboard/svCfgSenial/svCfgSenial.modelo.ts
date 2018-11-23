@@ -4,6 +4,7 @@ export class SvCfgSenial{
 		public nombre: string,
 		public logo: string,
 		public idSenialTipo:number,
+		public idColor:number,
 		public id:number
 	){}
 }

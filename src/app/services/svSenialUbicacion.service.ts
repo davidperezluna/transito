@@ -6,7 +6,7 @@ import "rxjs/add/operator/map";
 import { LoggerService } from "../logger/services/logger.service";
 
 @Injectable()
-export class MsvSenialUbicacionService {
+export class SvSenialUbicacionService {
 	private url = environment.apiUrl + "seguridadvial/svsenialubicacion";
 	public identity;
 	public token;

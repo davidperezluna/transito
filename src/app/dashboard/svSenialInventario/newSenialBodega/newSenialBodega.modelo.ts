@@ -1,4 +1,4 @@
-export class MsvSenialBodega{
+export class SvSenialBodega{
 	constructor(
 		public fecha: string,
 		public nombre: string,

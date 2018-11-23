@@ -13,7 +13,7 @@ export class SvCfgSenialComponent implements OnInit {
   public errorMessage;
 	public id;
 
-	public tiposSenial;
+	public seniales;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
@@ -29,34 +29,28 @@ export class SvCfgSenialComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
 
     this._SvCfgSenialService.index().subscribe(
-				response => {
-          this.tiposSenial = response.data;
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTabla();
-          }, 100);
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+      response => {
+        this.seniales = response.data;
+        let timeoutId = setTimeout(() => {  
+          this.iniciarTabla();
+        }, 100);
+        swal.close();
+      }, 
+      error => {
+        this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
 
   iniciarTabla(){

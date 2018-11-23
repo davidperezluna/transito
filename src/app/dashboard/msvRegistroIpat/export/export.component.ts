@@ -24,8 +24,6 @@ declare var $: any;
 export class ExportComponent implements OnInit {
     //@Output() ready = new EventEmitter<any>();
     public errorMessage;
-    public id;
-    public respuesta;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
@@ -33,11 +31,13 @@ export class ExportComponent implements OnInit {
     public ipat = false;
     
     public file: any;
+    public txt: any[];
+    public valido = true;
+
     public date: any;
     
     public exportIpat: MsvExportIpat;
 
-    public dia: any;
     public ipats: any;
     public gravedades: any;
     public tiposVictima: any;
@@ -90,6 +90,7 @@ export class ExportComponent implements OnInit {
         private _ChoqueCon: CfgChoqueConService,
         private _ObjetoFijo: CfgObjetoFijoService,
         private _GeneroService: GeneroService,
+        private _MsvRegistroIpat: MsvRegistroIpatService,
     ) { }
 
     ngOnInit() {
@@ -266,10 +267,43 @@ export class ExportComponent implements OnInit {
         }
     }
 
+    async ngAbrirInput() {
+        const { value: files } = await swal({
+            title: 'Seleccione el archivo .txt',
+            input: 'file',
+            inputAttributes: {
+                'accept': 'txt/*',
+                'aria-label': 'Upload your profile picture'
+            }
+        })
+
+        if (files) {
+            this.txt = [];
+            let reader: FileReader = new FileReader();
+            reader.readAsBinaryString(files);
+            reader.onload = (e) => {
+                let txt: string = reader.result;
+                let allTextLines = txt.split(/\r\n|\n/);
+                for (let i = 0; i < allTextLines.length; i++) {
+                    let data = allTextLines[i].split(',');
+                    if (data.length < 35) {
+                        this.valido = false;
+                    } else {
+                        if (data[0] != '') {
+                            this.txt.push(data);
+                            console.log(this.txt);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     onEnviar(){
         let token = this._LoginService.getToken();
-        this.exportIpat.documento =this.file;
-        this._IpatService.buscarIpat(this.exportIpat, token).subscribe(
+        this.exportIpat.documento = this.file;
+        this._IpatService.buscarIpat(this.txt, this.exportIpat, token).subscribe(
+            
             response => {
                 this.ipats = response.data;
                 console.log(this.ipats);
@@ -284,4 +318,8 @@ export class ExportComponent implements OnInit {
             }
         );
     }
+
+    onCancelar() {
+        this.valido = false;
+    } 
 }

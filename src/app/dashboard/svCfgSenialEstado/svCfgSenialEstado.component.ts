@@ -12,13 +12,13 @@ declare var $: any;
 export class SvCfgSenialEstadoComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-	public conectores;
+
+	public estados;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public conector: SvCfgSenialEstado;
+  public estado: SvCfgSenialEstado;
 
   constructor(
     private _SenialEstadoService: SvCfgSenialEstadoService,
@@ -36,7 +36,7 @@ export class SvCfgSenialEstadoComponent implements OnInit {
 
     this._SenialEstadoService.index().subscribe(
 				response => {
-          this.conectores = response.data;
+          this.estados = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -107,7 +107,6 @@ export class SvCfgSenialEstadoComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -125,8 +124,8 @@ export class SvCfgSenialEstadoComponent implements OnInit {
     })
   }
 
-  onEdit(conector:any){
-    this.conector = conector;
+  onEdit(estado:any){
+    this.estado = estado;
     this.formEdit = true;
     this.formIndex = false;
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { SvCfgSenial } from '../svCfgSenial.modelo';
 import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
+import { SvCfgSenialTipoService } from '../../../services/svCfgSenialTipo.service';
+import { SvCfgSenialColorService } from '../../../services/svCfgSenialColor.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -13,13 +15,49 @@ export class NewComponent implements OnInit {
 public senial: SvCfgSenial;
 public errorMessage;
 
+public tipos: any;
+public colores: any;
+
+public file: any = null;
+public fileSelected: File = null;
+
 constructor(
   private _SvCfgSenialService: SvCfgSenialService,
+  private _SenialTipoService: SvCfgSenialTipoService,
+  private _ColorService: SvCfgSenialColorService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.senial = new SvCfgSenial(null, null, null, null, null);
+    this.senial = new SvCfgSenial(null, null, null, null, null, null);
+
+    this._SenialTipoService.select().subscribe(
+      response => {
+        this.tipos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._ColorService.select().subscribe(
+      response => {
+        this.colores = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
   
   onCancelar(){
@@ -29,7 +67,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._SvCfgSenialService.register(this.senial,token).subscribe(
+    this._SvCfgSenialService.register(this.file, this.senial,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -58,4 +96,12 @@ constructor(
 		}); 
   }
 
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      this.fileSelected = event.target.files[0];
+
+      this.file = new FormData();
+      this.file.append('file', this.fileSelected);
+    }
+  }
 }

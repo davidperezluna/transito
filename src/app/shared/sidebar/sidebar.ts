@@ -31,7 +31,6 @@ export class SidebarComponent implements OnInit {
     let identity = this._LoginService.getIdentity();
     this.nombreUsuario = identity.primerNombre + " " + identity.primerApellido;
     this.idUsuario = identity.sub;
-    console.log(this.idUsuario);
   }
 
   ngOnInit() {

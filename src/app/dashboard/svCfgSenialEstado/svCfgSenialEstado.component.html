@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">
+            <h5>
               <b class="text-uppercase">Seguridad Vial (Señales)</b>
               <small>Configuración de Estados</small>
               <div class="btn-group pull-right">
@@ -30,7 +30,7 @@
                   <td >{{ estado.nombre }}</td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="onEdit(estado)" class="btn btn-xs btn-info" type="button">
+                      <button (click)="onEdit(estado)" class="btn btn-xs btn-primary" type="button">
                         <i class="fa fa-pencil"></i>
                       </button> 
                       <button (click)="onDelete(estado.id)"  class="btn btn-xs btn-danger" type="button">

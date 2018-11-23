@@ -1,4 +1,4 @@
-export class MsvSenialMunicipio{
+export class SvSenialMunicipio{
 	constructor(
 		public fecha: string,
 		public latitud: string,
