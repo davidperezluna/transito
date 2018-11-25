@@ -5,45 +5,44 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class SvSenialInventarioService {
-	private urlBodega = environment.apiUrl + "seguridadvial/svsenialinventariobodega";
-	private urlSenialBodega = environment.apiUrl + "seguridadvial/svsenial";
-	private urlSenialMunicipio = environment.apiUrl + "seguridadvial/svsenialubicacion";
+	private url = environment.apiUrl + "seguridadvial/svsenialinventario";
+	private urlSenialUbicacion = environment.apiUrl + "seguridadvial/svsenialubicacion";
 	public identity;
 	public token;
 
 	constructor(private _http: Http) { }
 
 	index() {
-	    return this._http.get(this.urlBodega + "/").map(res => res.json());
+	    return this._http.get(this.url + "/").map(res => res.json());
     }
 
-	registerSenialBodega(formData, datos, token){
+	register(formData, datos, token){
 		if(formData == null){
 			let json = JSON.stringify(datos);
-			let params = "json="+json+"&authorization="+token;
+			let params = "data="+json+"&authorization="+token;
 			let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-			return this._http.post(this.urlSenialBodega+"/new", params, {headers: headers}).map(res => res.json());
+			return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 		}else {
 			let json = JSON.stringify(datos);
-			formData.append('json', json);
+			formData.append('data', json);
 			formData.append('authorization', token);
 
 			console.log(formData);
-			return this._http.post(this.urlSenialBodega + "/new", formData).map(res => res.json());
+			return this._http.post(this.url + "/new", formData).map(res => res.json());
 		}
 	}
 
 	registerSenialMunicipio(formData, datos, token) {
 		if (formData == null) {
 			let json = JSON.stringify(datos);
-			let params = "json=" + json + "&authorization=" + token;
+			let params = "data=" + json + "&authorization=" + token;
 			let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-			return this._http.post(this.urlSenialMunicipio + "/new", params, { headers: headers }).map(res => res.json());
+			return this._http.post(this.urlSenialUbicacion + "/new", params, { headers: headers }).map(res => res.json());
 		} else {
 			let json = JSON.stringify(datos);
-			formData.append('json', json);
+			formData.append('data', json);
 			formData.append('authorization', token);
-			return this._http.post(this.urlSenialMunicipio + "/new", formData).map(res => res.json());
+			return this._http.post(this.urlSenialUbicacion + "/new", formData).map(res => res.json());
 		}
 	}
 
@@ -52,37 +51,30 @@ export class SvSenialInventarioService {
 			let json = JSON.stringify(datos);
 			let params = "data=" + json + "&authorization=" + token;
 			let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-			return this._http.post(this.urlBodega + "/edit", params, {headers: headers}).map(res => res.json());
+			return this._http.post(this.url + "/edit", params, {headers: headers}).map(res => res.json());
 		}else {
 			let json = JSON.stringify(datos);
 			 formData.append('data', json);
 			 formData.append('authorization', token);
 
 			 console.log(formData);
-			 return this._http.post(this.urlBodega+"/edit", formData).map(res => res.json());
+			 return this._http.post(this.url+"/edit", formData).map(res => res.json());
 		}
 	}
 
-	searchByTipoSenialInBodega(datos, token) {
+	searchByDateAndTipoAndDestino(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.urlBodega + "/search/tiposenial", params, { headers: headers }).map(res => res.json());
-	}
-
-	searchByTipoSenialInMunicipio(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.urlSenialMunicipio + "/search/tiposenial", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/date/tipo/destino", params, { headers: headers }).map(res => res.json());
 	}
 
 	searchByFull() {
-		return this._http.get(this.urlBodega + "/full").map(res => res.json());
+		return this._http.get(this.url + "/full").map(res => res.json());
 	}
 
 	export() {
-		window.location.href = this.urlBodega + "/export";
+		window.location.href = this.url + "/export";
 	}
 
 	exportInv(data) {
@@ -90,14 +82,14 @@ export class SvSenialInventarioService {
 		for (var item in data) {
 			params += data[item] + '_'
 		}
-		window.location.href = this.urlBodega + "/exportinv/" + params.substr(0, (params.length - 1));
+		window.location.href = this.url + "/exportinv/" + params.substr(0, (params.length - 1));
 	}
 
 	searchByParametros(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.urlBodega + "/search/parametros", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/parametros", params, { headers: headers }).map(res => res.json());
 	}
 
 }

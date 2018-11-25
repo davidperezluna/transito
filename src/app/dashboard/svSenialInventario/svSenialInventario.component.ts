@@ -23,16 +23,15 @@ export class SvSenialInventarioComponent implements OnInit {
     public formSearch = true;
     public table: any = null;
     
-    public destinoSelected: any;
-    
     public municipios: any = null;
-    public municipioSelected: any;
 
     public tiposSenial: any;
-    public tipoSenialSelected: any;
 
-    public inventariosBodega: any = null;
-    public inventariosMunicipio: any = null;
+    public fechaInicial: any = null;
+    public fechaFinal: any = null;
+
+    public inventarios: any = null;
+
     public inventario: any;
 
     public destinos = [
@@ -40,6 +39,13 @@ export class SvSenialInventarioComponent implements OnInit {
         { value: 'MUNICIPIO', label: 'MUNICIPIO' },
     ];
 
+    public datos = {
+        'idTipoSenial': null,
+        'idMunicipio': null,
+        'tipoDestino': null,
+        'fechaInicial': null,
+        'fechaFinal': null,
+    };
     
     constructor(
         private _loginService: LoginService,
@@ -67,24 +73,26 @@ export class SvSenialInventarioComponent implements OnInit {
 
     ready(isCreado: any) {
         if (isCreado) {
+            this.formIndex = false;
+            this.formNewBodega = false;
+            this.formNewMunicipio = false;
             this.formLocationSenial = false;
-            this.formIndex = true;
             this.ngOnInit();
         }
     }
 
     getDestino(value) {
         switch (value) {
-            case 1:
+            case 'BODEGA':
                 this.municipios = null;
-                    
+
                 break;
-            case 2:
+            case 'MUNICIPIO':
                 this._MunicipioService.getMunicipioPorDepartamentoSelect(21).subscribe(
-                        response => {
+                    response => {
                         this.municipios = response;
                     },
-                        error => {
+                    error => {
                         this.errorMessage = <any>error;
 
                         if (this.errorMessage != null) {
@@ -103,49 +111,27 @@ export class SvSenialInventarioComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        if (this.destinoSelected == 'BODEGA') {
-            this._SenialInventarioService.searchByTipoSenialInBodega({'idTipoSenial': this.tipoSenialSelected}, token).subscribe(
-                response => {
-                    if (response.status == 'success') {
-                        this.inventariosBodega = response.data;
-                        swal({
-                            title: 'Perfecto!',
-                            text: response.message,
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }else {
-                        swal({
-                            title: 'Alerta!',
-                            text: response.message,
-                            type: 'warning',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
+        this._SenialInventarioService.searchByDateAndTipoAndDestino(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.inventarios = response.data;
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
-            );
-        }else{
-            this._SenialInventarioService.searchByTipoSenialInMunicipio({ 'idTipoSenial': this.tipoSenialSelected, 'idMunicipio': this.municipioSelected }, token).subscribe(
-                response => {
-                    if (response.status == 'success') {
-                        this.inventariosMunicipio = response.data;
-                        swal({
-                            title: 'Perfecto!',
-                            text: response.message,
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    } else {
-                        swal({
-                            title: 'Alerta!',
-                            text: response.message,
-                            type: 'warning',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-                }
-            );
-        }
+            }
+        );
+       
     }
 
     iniciarTabla() {

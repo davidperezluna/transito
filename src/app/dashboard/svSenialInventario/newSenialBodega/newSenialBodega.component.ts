@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core'; 
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
-import { SvCfgSenialColorService } from '../../../services/svCfgSenialColor.service';
-import { CfgSvUnidadMedidaService } from '../../../services/cfgSvUnidadMedida.service';
-import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
+import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
+import { SvSenialBodegaService } from '../../../services/svSenialBodega.service';
 import { LoginService } from '../../../services/login.service';
 import { SvSenialBodega } from './newSenialBodega.modelo';
 import swal from 'sweetalert2';
@@ -14,32 +13,25 @@ declare var $: any;
 })
 export class NewSenialBodegaComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() tipoSenialSelected: any = null;
+    @Input() idTipoSenial: any = null;
     public errorMessage;
     public id;
     public logo: any;
     public file: any = new FormData();
-    public senial: SvSenialBodega;
+    public senialBodega: SvSenialBodega;
 
     public estados: any;
-    public estadoSelected: any;
-
-    public colores: any;
-    public colorSelected: any;
-
-    public medidas: any;
-    public medidaSelected: any;
+    public seniales: any;
 
     constructor(
         private _EstadoService: SvCfgSenialEstadoService,
-        private _ColorService: SvCfgSenialColorService,
-        private _UnidadMedidaService: CfgSvUnidadMedidaService,
-        private _SenialInventarioService: SvSenialInventarioService,
-        private _loginService: LoginService,
+        private _SenialService: SvCfgSenialService,
+        private _SenialBodegaService: SvSenialBodegaService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this.senial = new SvSenialBodega(null, null, null, null, null, null, null, null, null, null);
+        this.senialBodega = new SvSenialBodega(null, null, null, null, null, null, null);
 
         this._EstadoService.select().subscribe(
             response => {
@@ -55,26 +47,15 @@ export class NewSenialBodegaComponent implements OnInit {
             }
         );
 
-        this._ColorService.select().subscribe(
+        let token = this._LoginService.getToken();
+
+        this._SenialService.selectByTipo({ 'idTipoSenial': this.idTipoSenial }, token).subscribe(
             response => {
-                this.colores = response;
+                this.seniales= response;
             },
             error => {
                 this.errorMessage = <any>error;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-
-        this._UnidadMedidaService.select().subscribe(
-            response => {
-                this.medidas = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
                 if (this.errorMessage != null) {
                     console.log(this.errorMessage);
                     alert("Error en la petición");
@@ -102,13 +83,9 @@ export class NewSenialBodegaComponent implements OnInit {
     }
 
     onEnviar() {
-        let token = this._loginService.getToken();
-        this.senial.idEstado = this.estadoSelected;
-        this.senial.idColor = this.colorSelected;
-        this.senial.idUnidadNedida = this.medidaSelected;
-        this.senial.idTipoSenial = this.tipoSenialSelected;
+        let token = this._LoginService.getToken();
 
-        this._SenialInventarioService.registerSenialBodega(this.file, this.senial, token).subscribe(
+        this._SenialBodegaService.register(this.file, this.senialBodega, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

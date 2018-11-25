@@ -12,7 +12,7 @@ declare var $: any;
 export class LocationComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() inventario: any = null;
-    @Input() tipoDestinoSelected: any = null;
+    @Input() tipoDestino: any = null;
     public seniales: any = null;
 
     public errorMessage;
@@ -28,8 +28,8 @@ export class LocationComponent implements OnInit {
     ngOnInit() {
         let token = this._loginService.getToken();
         
-        if (this.tipoDestinoSelected == 1) {
-            this._SenialUbicacionService.searchByDestino({ 'inventario': this.inventario, 'tipoDestino': this.tipoDestinoSelected }, token).subscribe(
+        if (this.tipoDestino == 1) {
+            this._SenialUbicacionService.searchByDestino({ 'inventario': this.inventario, 'tipoDestino': this.tipoDestino }, token).subscribe(
                 response => {
                     if (response.status == 'success') {
                         this.seniales = response.data;
@@ -57,7 +57,7 @@ export class LocationComponent implements OnInit {
                 }
             );
         } else {
-            this._SenialUbicacionService.searchByDestino({ 'inventario': this.inventario, 'tipoDestino': this.tipoDestinoSelected }, token).subscribe(
+            this._SenialUbicacionService.searchByDestino({ 'inventario': this.inventario, 'tipoDestino': this.tipoDestino }, token).subscribe(
                 response => {
                     if (response.status == 'success') {
                         this.seniales = response.data;

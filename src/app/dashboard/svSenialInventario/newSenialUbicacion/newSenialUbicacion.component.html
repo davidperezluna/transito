@@ -9,36 +9,40 @@
     <div class="card-body">
         <form #formNew="ngForm">
             <div class="form-group row">
-                <div class="col-xs-12 col-lg-3">
-                    <label>Fecha <strong class="text-danger">*</strong></label>
-                    <input type="date" class="form-control" [(ngModel)]="senialMunicipio.fecha" name="fecha" required autofocus />
-                </div>
                 <div class="col-xs-12 col-lg-4">
+                    <label>Fecha <strong class="text-danger">*</strong></label>
+                    <input type="date" class="form-control" [(ngModel)]="ubicacion.fecha" name="fecha" required autofocus />
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                    <label>Hora <strong class="text-danger">*</strong></label>
+                    <input type="time" class="form-control" [(ngModel)]="ubicacion.hora" name="hora" required />
+                </div>
+                <div class="col-xs-12 col-lg-5">
                     <label>Señal <strong class="text-danger">*</strong></label>
-                    <ng-select (ngModelChange)="onChangeSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialSelected" name="seniales" required>
+                    <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="ubicacion.idSenial" name="senial" required>
+                    </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-5">
+                    <label>Estado <strong class="text-danger">*</strong></label>
+                    <ng-select [multiple]="false" [options]="estados" [(ngModel)]="ubicacion.idestado" required name="estado">
                     </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-2">
                     <label>Cantidad <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.cantidad" name="cantidad" required />
-                </div>
-                <div class="col-xs-12 col-lg-3">
-                    <label>Estado <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" required name="estados">
-                    </ng-select>
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.cantidad" name="cantidad" required />
                 </div>
                 <div class="col-xs-12 col-lg-3">
                     <label>Latitud <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.latitud" name="latitud" required />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.latitud" name="latitud" required />
                 </div>
                 <div class="col-xs-12 col-lg-3">
                     <label>Longitud <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.longitud" name="longitud" required />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.longitud" name="longitud" required />
                 </div>
                 <div class="col-xs-12 col-lg-6">
                     <label>Dirección <strong class="text-danger">*</strong></label>
                     <div class="input-group">
-                        <input type="text" class="form-control" [(ngModel)]="senialMunicipio.direccion" name="direccion" required />
+                        <input type="text" class="form-control" [(ngModel)]="ubicacion.direccion" name="direccion" required />
                         <span class="input-group-btn">
                             <button (click)="onGetAddress()" class="btn btn-default btn-primary" type="button">
                                 <i class="fa fa-map-marker"></i>
@@ -48,36 +52,36 @@
                 </div>
                 <div class="col-xs-12 col-lg-2">
                     <label>Via 1 <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via1" name="via1" required />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.via1" name="via1" required />
                 </div>
                 <div class="col-xs-12 col-lg-1">
                     <label># 1 <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no1" name="no1" required />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.no1" name="no1" required />
                 </div>
                 <div class="col-xs-12 col-lg-3">
                     <label>Conector <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="conectores" [(ngModel)]="conectorSelected" required name="conectores">
+                    <ng-select [multiple]="false" [options]="conectores" [(ngModel)]="ubicacion.idConector" required name="conector">
                     </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-2">
                     <label>Via 2 <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via2" name="via2" required />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.via2" name="via2" required />
                 </div>
                 <div class="col-xs-12 col-lg-1">
                     <label># 2 <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no2" name="no2" required />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.no2" name="no2" required />
                 </div>
                 <div class="col-xs-12 col-lg-2">
                     <label>Via 3</label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.via3" name="via3" />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.via3" name="via3" />
                 </div>
                 <div class="col-xs-12 col-lg-1">
                     <label># 3</label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.no3" name="no3" />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.no3" name="no3" />
                 </div>
                 <div class="col-xs-12 col-lg-3">
                     <label>Valor <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialMunicipio.valor" name="valor" required />
+                    <input type="text" class="form-control" [(ngModel)]="ubicacion.valor" name="valor" required />
                 </div>
                 <div class="col-xs-12 col-lg-6">
                     <label>Adjunto <strong class="text-danger">*</strong></label>
