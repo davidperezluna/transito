@@ -153,38 +153,24 @@
                                     <br>
                                     <thead>
                                         <tr>
-                                            <!-- <th>Permiso tramite</th> -->
-                                            <!-- <th>Solicitante Empresa</th> -->
                                             <th>Acreedor</th>
+                                            <th>Tipo de alerta</th>
+                                            <th>Grado de alerta</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="odd" *ngFor="let empresa of datos.acreedoresEmpresas; let i = index">
-                                            <!-- <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==2">
-                                                <p>Si</p>
-                                            </td>
-                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==2">
-                                                <p>No</p>
-                                            </td>
-                            
-                                            <td class="center" *ngIf="empresa.permisoTramite && tipoPropiedadSelected ==1">
-                                                <p>Acreedor</p>
-                                            </td>
-                                            <td class="center" *ngIf="!empresa.permisoTramite && tipoPropiedadSelected ==1">
-                                                <p>Locatario</p> 
-                                            </td>-->
                                             <td class="center">
-                                                <p>{{empresa.nit}}
-                                                    <br>{{empresa.nombre}}</p>
+                                                <p>Nit: {{empresa.nit}}
+                                                <br>Nombre: {{empresa.nombre}}</p>
                                             </td>
-                                            <td class="center" *ngIf="empresa.identificacionAcreedor">
-                                                <p>{{empresa.identificacionAcreedor}}
-                                                    <br>{{empresa.nombreAcreedor}}</p>
+                                            <td class="center">
+                                                {{empresa.tipoAlerta}}
                                             </td>
-                                            <!-- <td class="center" *ngIf="!empresa.identificacionAcreedor">
-                                                <button (click)="agregarAcreedorEmpresa(empresa)" class="btn btn-primary pull-right">Agregar</button>
-                                            </td> -->
+                                            <td class="center">
+                                                {{empresa.gradoAlerta}}
+                                            </td>
                                             <td class="center">
                                                 <button (click)="deleteEmpresa(empresa)" class="btn btn-danger">Eliminar</button>
                                             </td>

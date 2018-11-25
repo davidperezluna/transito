@@ -152,10 +152,10 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
         this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rna-modificacion-acreedor-prendario';
+        this.datos.tramiteFormulario = 'rnrs-modificacion-acreedor-prendario';
 
         this.datos.ciudadanoNewId = this.ciudadanoAcreedorNew.id;
-        this.datos.ciudadanoOldId = this.ciudadano.id;
+        // this.datos.ciudadanoOldId = this.ciudadano.id;
 
         console.log(this.datos);
         
@@ -298,7 +298,7 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let nit = {
             'nit': this.nit,
         };
-        this._EmpresaService.showNit(token, this.nit).subscribe(
+        this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 response = response;
                 if (response.status == 'success') {

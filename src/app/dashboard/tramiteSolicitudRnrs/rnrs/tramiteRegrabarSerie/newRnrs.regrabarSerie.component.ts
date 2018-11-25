@@ -43,15 +43,15 @@ export class NewRnrsRegrabarSerieComponent implements OnInit {
     enviarTramite() {
         let token = this._loginService.getToken();
 
-        this.vehiculo.servicioId = this.vehiculo.servicio.id    
-        this.vehiculo.municipioId = this.vehiculo.municipio.id   
-        this.vehiculo.lineaId = this.vehiculo.linea.id   
-        this.vehiculo.colorId = this.vehiculo.color.id   
-        this.vehiculo.combustibleId = this.vehiculo.combustible.id   
+        // this.vehiculo.servicioId = this.vehiculo.servicio.id    
+        // this.vehiculo.municipioId = this.vehiculo.municipio.id   
+        // this.vehiculo.lineaId = this.vehiculo.linea.id   
+        // this.vehiculo.colorId = this.vehiculo.color.id   
+        // this.vehiculo.combustibleId = this.vehiculo.combustible.id   
         this.vehiculo.carroceriaId = this.vehiculo.carroceria.id   
         this.vehiculo.sedeOperativaId = this.vehiculo.sedeOperativa.id   
         this.vehiculo.claseId = this.vehiculo.clase.id   
-        this.vehiculo.servicioId = this.vehiculo.servicio.id 
+        // this.vehiculo.servicioId = this.vehiculo.servicio.id 
         this.vehiculo.serie = this.datos.nuevoNumero
         this._VehiculoService.editVehiculo(this.vehiculo,token).subscribe(
         response => {

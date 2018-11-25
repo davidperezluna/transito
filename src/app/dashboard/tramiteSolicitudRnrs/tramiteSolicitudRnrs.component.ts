@@ -17,7 +17,7 @@ export class TramiteSolicitudRnrsComponent implements OnInit {
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table: any;
+  public table: any=null;
   public tramiteSolicitud: TramiteSolicitud;
   public moduloId = 4;
 
@@ -76,7 +76,9 @@ export class TramiteSolicitudRnrsComponent implements OnInit {
   onNew(){
     this.formNew = true;
     this.formIndex = false;
-    this.table.destroy();
+    if(this.table){
+      this.table.destroy();
+    }
   }
 
   ready(isCreado: any){

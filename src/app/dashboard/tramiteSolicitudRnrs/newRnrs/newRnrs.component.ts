@@ -118,6 +118,7 @@ constructor(
        
         this.tramitesFactura = response;
         this.tramitesFactura.forEach(tramiteFactura => {
+          console.log(tramiteFactura.tramitePrecio.tramite.formulario);
           if (tramiteFactura.realizado == 0) {
             active = false;
           }else{
@@ -129,7 +130,6 @@ constructor(
           }
           if (tramiteFactura.tramitePrecio.tramite.formulario == 'rnrs-matriculainicial'){
             this.isMatricula = true;
-            alert(1);
           }
         });
         
@@ -158,8 +158,8 @@ constructor(
           }else{
             this.factura = false;
             swal({
-              title: 'Error!',
-              text: 'El vehiculo no tiene propietarios por favor facture matricula inicial',
+              title: 'No se puede tramitar esta factura: '+numero,
+              text: 'El vehiculo no tiene propietarios y no se ha facturado matricula inicial',
               type: 'error',
               confirmButtonText: 'Aceptar'
             })
