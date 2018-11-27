@@ -1,11 +1,9 @@
 /// <reference types="@types/googlemaps" />
 import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core'; 
-import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
 import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
 import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
-import { MunicipioService } from '../../../services/municipio.service';
 import { LoginService } from '../../../services/login.service';
 import { SvSenialUbicacion } from './newSenialUbicacion.modelo';
 import swal from 'sweetalert2';
@@ -30,30 +28,22 @@ export class NewSenialUbicacionComponent implements OnInit {
     private scriptLoadingPromise: Promise<void>;
 
     public errorMessage;
-    public id;
-    public municipio: any = null;
 
     public seniales: any;
-    public senialSelected: any;
-    public senial: any = null;
-
     public conectores: any;
-    public conectorSelected: any;
-
     public estados: any;
-    public estadoSelected: any;
+    
+    public senial: any = null;
 
     public formEdit = false;
     public formIndex = true;
     public senialUbicacion: SvSenialUbicacion;
 
     constructor(
-        private _SvSenialInventarioService: SvSenialInventarioService,
         private _SvSenialUbicacionService: SvSenialUbicacionService,
         private _SenialService: SvCfgSenialService,
         private _ConectorService: SvCfgSenialConectorService,
         private _EstadoService: SvCfgSenialEstadoService,
-        private _MunicipioService: MunicipioService,
         private _LoginService: LoginService,
     ) {
         //Loading script
@@ -66,22 +56,6 @@ export class NewSenialUbicacionComponent implements OnInit {
 
     ngOnInit() {   
         this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-
-        let token = this._LoginService.getToken();
-        
-        this._SenialService.selectByTipo({'idTipoSenial': this.idTipoSenial}, token).subscribe(
-            response => {
-                this.seniales = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
 
         this._ConectorService.select().subscribe(
             response => {
@@ -100,6 +74,22 @@ export class NewSenialUbicacionComponent implements OnInit {
         this._EstadoService.select().subscribe(
             response => {
                 this.estados = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
+        let token = this._LoginService.getToken();
+
+        this._SenialService.selectByTipo({ 'idTipoSenial': this.idTipoSenial }, token).subscribe(
+            response => {
+                this.seniales = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -252,7 +242,9 @@ export class NewSenialUbicacionComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
-        this._SvSenialInventarioService.registerSenialMunicipio(this.file, this.senialUbicacion, token).subscribe(
+        this.senialUbicacion.idMunicipio = this.idMunicipio;
+
+        this._SvSenialUbicacionService.register(this.file, this.senialUbicacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

@@ -12,29 +12,29 @@
             <div class="form-group row">
                 <div class="col-xs-12 col-lg-4">
                     <label>Fecha <strong class="text-danger">*</strong></label>
-                    <input type="date" class="form-control" [(ngModel)]="senial.fecha" name="fecha" required />
+                    <input type="date" class="form-control" [(ngModel)]="senialBodega.fecha" name="fecha" required />
                 </div>
                 <div class="col-xs-12 col-lg-3">
                     <label>Hora <strong class="text-danger">*</strong></label>
-                    <input type="time" class="form-control" [(ngModel)]="senial.time" name="time" required />
+                    <input type="time" class="form-control" [(ngModel)]="senialBodega.hora" name="time" required />
                 </div>
                 <div class="col-xs-12 col-lg-6">
                     <label>Señal <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="senial.idSenial" name="seniales" required>
+                    <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="senialBodega.idSenial" name="seniales" required>
                     </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-6">
                     <label>Estado <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="estados" [(ngModel)]="senial.idEstado" required name="estados">
+                    <ng-select [multiple]="false" [options]="estados" [(ngModel)]="senialBodega.idEstado" required name="estados">
                     </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-3">
                     <label>Cantidad <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senial.cantidad" name="cantidad" required />
+                    <input type="text" class="form-control" [(ngModel)]="senialBodega.cantidad" name="cantidad" required />
                 </div>
                 <div class="col-xs-12 col-lg-3">
                     <label>Valor <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senial.valor" name="valor" required />
+                    <input type="text" class="form-control" [(ngModel)]="senialBodega.valor" name="valor" required />
                 </div>
                 <div class="col-xs-12 col-lg-6">
                     <label>Adjunto </label>

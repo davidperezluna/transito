@@ -25,8 +25,6 @@ export class SvSenialBodegaService {
 			let json = JSON.stringify(datos);
 			formData.append('data', json);
 			formData.append('authorization', token);
-
-			console.log(formData);
 			return this._http.post(this.url + "/new", formData).map(res => res.json());
 		}
 	}

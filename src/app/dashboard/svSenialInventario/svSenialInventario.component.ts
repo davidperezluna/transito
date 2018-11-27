@@ -107,9 +107,22 @@ export class SvSenialInventarioComponent implements OnInit {
     }
 
     onSearch(){
+        swal({
+            title: 'Buscando registros!',
+            text: 'Solo tardará unos segundos, por favor espere.',
+            onOpen: () => {
+                swal.showLoading();
+            }
+        });
+
         this.formIndex = true;
+        this.formLocationSenial = false;
         
         let token = this._loginService.getToken();
+
+        if (this.datos.tipoDestino == 'BODEGA') {
+            this.datos.idMunicipio = null;
+        }
 
         this._SenialInventarioService.searchByDateAndTipoAndDestino(this.datos, token).subscribe(
             response => {
@@ -121,6 +134,7 @@ export class SvSenialInventarioComponent implements OnInit {
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+                    swal.close();
                 }else {
                     swal({
                         title: 'Alerta!',
@@ -128,6 +142,7 @@ export class SvSenialInventarioComponent implements OnInit {
                         type: 'warning',
                         confirmButtonText: 'Aceptar'
                     });
+                    this.inventarios = null;
                 }
             }
         );

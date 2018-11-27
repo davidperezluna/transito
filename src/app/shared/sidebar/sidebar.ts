@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   addActive = '';
   public errorMessage;
   public nombreUsuario: string;
+  public identificacionUsuario: string;
   public idUsuario: number;
 
   public menus: any = null;
@@ -30,6 +31,7 @@ export class SidebarComponent implements OnInit {
       });
     let identity = this._LoginService.getIdentity();
     this.nombreUsuario = identity.primerNombre + " " + identity.primerApellido;
+    this.identificacionUsuario = identity.identificacion;
     this.idUsuario = identity.sub;
   }
 

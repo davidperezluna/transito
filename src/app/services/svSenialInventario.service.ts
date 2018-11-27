@@ -69,6 +69,13 @@ export class SvSenialInventarioService {
 		return this._http.post(this.url + "/search/date/tipo/destino", params, { headers: headers }).map(res => res.json());
 	}
 
+	searchByDestino(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/destino", params, { headers: headers }).map(res => res.json());
+	}
+
 	searchByFull() {
 		return this._http.get(this.url + "/full").map(res => res.json());
 	}

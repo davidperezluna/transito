@@ -15,8 +15,6 @@ export class NewSenialBodegaComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() idTipoSenial: any = null;
     public errorMessage;
-    public id;
-    public logo: any;
     public file: any = new FormData();
     public senialBodega: SvSenialBodega;
 
@@ -72,13 +70,6 @@ export class NewSenialBodegaComponent implements OnInit {
         if (event.target.files.length > 0) {
             const fileSelected: File = event.target.files[0];
             this.file.append('file', fileSelected);
-        }
-    }
-
-    onLogoChange(event) {
-        if (event.target.files.length > 0) {
-            const fileSelected: File = event.target.files[0];
-            this.file.append('logo', fileSelected);
         }
     }
 
