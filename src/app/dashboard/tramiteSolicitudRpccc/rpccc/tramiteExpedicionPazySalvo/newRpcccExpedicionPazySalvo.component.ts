@@ -50,7 +50,7 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
         let ciudadano = {
             'ciudadanoId': this.solicitante.id,
         }
-        this._ComparendoService.searchComparendosCiudadano(ciudadano, token).subscribe(
+        this._ComparendoService.searchByInfractor({ 'infractorIdentificacion': this.solicitante.ciudadano.identificacion}, token).subscribe(
             response => {
                 this.comparendos = response.data;
             },

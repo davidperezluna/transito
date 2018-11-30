@@ -1,11 +1,11 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { Comparendo } from '../comparendo.modelo';
-import { Inmovilizacion } from '../inmovilizacion.modelo';
 import { ComparendoService } from '../../../services/comparendo.service';
 import { LoginService } from '../../../services/login.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MpersonalComparendoService } from '../../../services/mpersonalComparendo.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { OrganismoTransitoService } from '../../../services/organismoTransito.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
@@ -32,7 +32,6 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
   public comparendo: Comparendo;
-  public inmovilizacion: Inmovilizacion;
   public errorMessage;
 
   public horas = [
@@ -60,12 +59,9 @@ export class NewComponent implements OnInit {
   public agenteTransitoSelected: any;
 
   public municipios: any;
-  public municipioSelected: any;
-  public municipioNacimientoSelected: any;
-  public municipioMatriculadoSelected: any;
+  public organismosTransito: any;
 
   public infracciones: any;
-  public infraccionSelected: any;
 
   public sedesOperativas: any;
   public servicios: any;
@@ -76,27 +72,17 @@ export class NewComponent implements OnInit {
   public transportesEspecial: any;
 
   public infractorTipos: any;
-  public infractorTipoSelected: any;
   public infraccion: any = null;
-
   public categorias: any;
-  public categoriaSelected: any;
-
   public patios: any;
-  public patioSelected: any;
-
   public gruas: any;
-  public gruaSelected: any;
-
-  public comparendoEstados: any;
-  public comparendoEstadoSelected: any; 
-
-  public tipoIdentificacionSelected: any;
   public tiposIdentificacion: any;
+  public comparendoEstados: any;
 
   public infractor = {
     'idTipoIdentificacion': null,
     'idCategoriaLicenciaConduccion': null,
+    'idTipoInfractor': null,
     'identificacion': null,
     'licenciaConduccion': null,
     'fechaExpedicion': null,
@@ -128,12 +114,17 @@ export class NewComponent implements OnInit {
     'telefono': null,
   };
 
+  public inmovilizacion = {
+    'idPatio': null,
+    'idGrua': null,
+  };
+
 constructor(
   private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
   private _MpersonalFuncionarioService: MpersonalFuncionarioService,
   private _MpersonalComparendoService: MpersonalComparendoService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: OrganismoTransitoService,
   private _MunicipioService: MunicipioService,
   private _VechiculoService: VehiculoService,
   private _CiudadanoService: CiudadanoService,
@@ -162,8 +153,7 @@ constructor(
       'numeroIdentificacion': this.identificacion,
     };
 
-    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this.inmovilizacion = new Inmovilizacion(null, null, null);
+    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._MpersonalFuncionarioService.selectAgentes().subscribe(
       response => {
@@ -182,6 +172,20 @@ constructor(
     this._MunicipioService.getMunicipioSelect().subscribe(
       response => {
         this.municipios = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._OrganismoTransitoService.getOrganismoTransitoSelect().subscribe(
+      response => {
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -305,6 +309,20 @@ constructor(
       }
     );
 
+    this._TransporteEspecialService.select().subscribe(
+      response => {
+        this.transportesEspecial = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
     this._ServicioService.getServicioSelect().subscribe(
       response => {
         this.servicios = response;
@@ -322,20 +340,6 @@ constructor(
     this._ClaseService.getClaseSelect().subscribe(
       response => {
         this.tiposVehiculo = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
-      response => {
-        this.sedesOperativas = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -368,12 +372,6 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-    this.comparendo.municipioId = this.municipioSelected;
-    this.comparendo.infraccionId = this.infraccionSelected;
-    this.comparendo.tipoInfractorId = this.infractorTipoSelected;
-    
-    this.inmovilizacion.gruaId = this.gruaSelected;
-    this.inmovilizacion.patioId = this.patioSelected;
 
     let datos = {
       'comparendo': this.comparendo,
@@ -383,7 +381,6 @@ constructor(
       'empresa': this.empresa,
       'testigo': this.testigo,
     }
-    console.log(this.comparendo);
     
 		this._ComparendoService.register(datos,token).subscribe(
 			response => {
@@ -431,7 +428,7 @@ constructor(
         response => {
           if (response.status == 'success') {
             this.funcionario = response.data;
-            this.comparendo.funcionarioId = this.funcionario.id;
+            this.comparendo.idFuncionario = this.funcionario.id;
   
             this._MpersonalComparendoService.searchLastByFuncionario({ 'funcionario': this.funcionario }, token).subscribe(
               response => {
@@ -439,7 +436,7 @@ constructor(
                   swal.close();
 
                   this.consecutivo = response.data;
-                  this.comparendo.consecutivoId = this.consecutivo.id;
+                  this.comparendo.idConsecutivo = this.consecutivo.id;
   
                   this.consecutivo = response.data;
                 }else{

@@ -45,7 +45,7 @@ export class CvAcuerdoPagoComponent implements OnInit {
       response => {
         if (response.status == 'success') {     
           this.ciudadano = response.data;
-          this._ComparendoService.searchComparendosCiudadano({ 'ciudadanoId': this.ciudadano.id }, token).subscribe(
+          this._ComparendoService.searchByInfractor({ 'infractorIndetificacion': this.numeroIdentificacion }, token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.comparendos = response.data;

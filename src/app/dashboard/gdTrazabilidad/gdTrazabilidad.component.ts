@@ -77,6 +77,7 @@ export class GdTrazabilidadComponent implements OnInit {
                   text: response.message,
                   type: 'warning'
                 });
+                this.trazabilidades = null;
               }
             },
             error => {
