@@ -29,6 +29,9 @@ export class RnmaPreregistro{
 		public idOrigenRegistro: number,
 		public idEmpresaGps: number,
 		public idSedeOperativa: number,
+		public numeroFactura: number,
+		public fechaFactura:string,
+		public valor:string,
 		public id: number,
 	){}
 }

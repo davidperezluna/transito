@@ -26,6 +26,11 @@
                                         <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="datos.idCarroceria" name="idCarroceria" required>
                                         </ng-select>
                                     </div>
+                                   
+                                    <div class="col-xs-12 col-lg-12" *ngIf='datos.tipoTransformacion == 1'>
+                                        <label>Nro. ficha técnica de homologación <span class="text-danger">*</span></label>
+                                        <input class="form-control" [(ngModel)]="datos.fichaTecnica" name="fichaTecnica" type="text" required />
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -124,13 +129,20 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-12">
-                                        <label>Tipo Repotenciación <span class="text-danger">*</span></label>
-                                        <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="datos.idCombustible" name="idCombustible" required>
-                                        </ng-select>
+                                        <label>Año de repotenciación <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
                                     </div>
                                     <div class="col-xs-12 col-lg-12">
-                                        <label>Nuevo Modelo <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
+                                        <label>Numero factura <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.numeroFactura" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Nombre taller repotenciación <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.tallerRepotenciacion" name="modeloRepotenciacion" required />
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Fecha repotenciación<span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" [(ngModel)]="datos.fechaRepotenciacion" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
                                     </div>
                                 </div>
                             </div>

@@ -50,6 +50,7 @@ export class NewRnaBlindajeComponent implements OnInit {
         { value: 'SEIS', label: 'SEIS' },
         { value: 'SIETE', label: 'SIETE' },
         { value: 'OCHO', label: 'OCHO' },
+        { value: 'SIN BLINDAJE', label: 'SIN BLINDAJE' },
     ];
 
     constructor(
@@ -72,7 +73,7 @@ export class NewRnaBlindajeComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     let resumen = {
-                        'blindaje anterior': this.vehiculo.blindaje.nombre,
+                        // 'blindaje anterior': this.vehiculo.blindaje.nombre,
                         'nuevo blindaje': this.datos.idTipoBlindaje,
                     };
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });

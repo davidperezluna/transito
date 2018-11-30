@@ -39,6 +39,7 @@ export class NewRnaTransformacionComponent implements OnInit {
         'idCarroceria': null,
         'idCombustible': null,
         'modelo': null,
+        'fichaTecnica': null,
         'descripcionModelo': null,
         'campos': null,
     };

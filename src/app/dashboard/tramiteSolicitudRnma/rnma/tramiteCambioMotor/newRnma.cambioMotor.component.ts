@@ -42,10 +42,10 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         'idTipoIngreso': null,
         'idCombustible': null,
     };
-
+ 
     public tiposIngreso = [
         { value: 'NUEVO', label: 'NUEVO' },
-        { value: 'USADO', label: 'DESBLINDAJE DE UN VEHICULO' },
+        { value: 'USADO', label: 'USADO' },
     ];
 
     constructor(

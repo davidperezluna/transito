@@ -4,9 +4,7 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
 import { ColorService } from '../../../../services/color.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
-
-import swal from 'sweetalert2';
+import { VehiculoService } from '../../../../services/vehiculo.service';
 
 @Component({
     selector: 'appRna-cambio-color',
@@ -85,6 +83,9 @@ export class NewRnaCambioColorComponent implements OnInit {
         this._ColorService.select().subscribe(
             response => {
                 this.colores = response;
+                setTimeout(() => {
+                    this.colorSelected = [this.vehiculo.color.id]
+                });
             },
             error => {
                 this.errorMessage = <any>error;
