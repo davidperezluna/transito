@@ -9,6 +9,7 @@ import { VhloCfgOrigenRegistroService } from '../../../services/vhloCfgOrigenReg
 import { VhloCfgCondicionIngresoService } from '../../../services/vhloCfgCondicionIngreso.service';
 import { ClaseService } from '../../../services/clase.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -28,9 +29,14 @@ export class NewRegistroRemolqueComponent implements OnInit {
   public origenRegistros:any;
   public condicionIngresos:any;
   public clases:any;
-
+  public persona:any='empresa';
+  public sedeOperativa:any;
+  public sedesOperativas:any;
+  public sedeOperativaSelected:any;
   public propietarios:any;
   public propietarioSelected:any;
+  public radicado=false;
+  public btnRadicado:any = 'Preregistro para matricula inicial';
 
 constructor(
   private _RegistroRemolqueService: RnrsPreregistroService,
@@ -41,12 +47,63 @@ constructor(
   private _CarroceriaService: CarroceriaService,
   private _OrigenRegistroService: VhloCfgOrigenRegistroService,
   private _CondicionIngresoService: VhloCfgCondicionIngresoService,
-  private _FuncionarioService: MpersonalFuncionarioService
+  private _FuncionarioService: MpersonalFuncionarioService,
+  private _loginService: LoginService,
+  private _SedeOperativaService: SedeOperativaService
 ){}
 
 ngOnInit() {
-  this.registroRemolque = new RegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+  let token = this._loginService.getToken();
+  let identity = this._loginService.getIdentity();
+  let datos = {'identificacion':identity.identificacion};
+  this._FuncionarioService.searchLogin(datos,token).subscribe(
+    response => { 
+      if(response.status == 'success'){
+        this.persona='funcionario';
+        this.sedeOperativa = response.data.sedeOperativa;
+        this.sedeOperativaSelected = [this.sedeOperativa.id];
+      }else{
+        this._FuncionarioService.searchEmpresa(datos,token).subscribe(
+          response => {
+            if(response.status == 'success'){
+              this.persona='empresa';
+            }
+      
+          }, 
+          error => {
+            this.errorMessage = <any>error;
+    
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }
+    error => {
+        this.errorMessage = <any>error;
+        if(this.errorMessage != null){
+          console.log(this.errorMessage); 
+          alert('Error en la petición');
+        }
+      }
+  });
+
+  this.registroRemolque = new RegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   
+  this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    response => {
+      this.sedesOperativas = response;
+    }, 
+    error => {
+      this.errorMessage = <any>error;
+
+      if(this.errorMessage != null){
+        console.log(this.errorMessage);
+        alert("Error en la petición");
+      }
+    }
+  );
   this._CarroceriaService.getCarroceriaSelect().subscribe(
     response => {
       this.carrocerias = response;
@@ -125,11 +182,11 @@ ngOnInit() {
   onEnviar(){
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
+    this.registroRemolque.idSedeOperativa = this.sedeOperativaSelected;
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.registroRemolque.idSedeOperativa = response.data.sedeOperativa.id;
         } else {
           swal({
             title: 'Alerta!',
@@ -226,6 +283,15 @@ ngOnInit() {
           }
         }
       );
+    }
+  }
+  onRadicado(){
+    if(this.radicado) {
+      this.radicado = false; 
+      this.btnRadicado = 'Preregistro para matricula inicial';
+    }else{
+      this.btnRadicado = 'Preregistro para radicado de cuenta';
+      this.radicado = true; 
     }
   }
 }

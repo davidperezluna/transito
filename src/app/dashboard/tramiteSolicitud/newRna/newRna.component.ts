@@ -140,6 +140,7 @@ constructor(
           }else{
             this.isMatricula = false;
           }
+          console.log(tramiteFactura.tramitePrecio.tramite.formulario);
         });
         
         if (active) {

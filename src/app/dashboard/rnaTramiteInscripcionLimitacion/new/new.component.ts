@@ -288,7 +288,7 @@ export class NewComponent implements OnInit {
     let identificacion = {
       'numeroIdentificacion': this.identificacionDemandado,
     };
-    this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+    this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
@@ -314,7 +314,7 @@ export class NewComponent implements OnInit {
     let identificacion = {
       'numeroIdentificacion': this.identificacionDemandante,
     };
-    this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+    this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {

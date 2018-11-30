@@ -177,7 +177,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token, this.nit).subscribe(
+        this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 response = response; 
                 if(response.status == 'success'){

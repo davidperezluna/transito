@@ -65,11 +65,7 @@ export class NewRnaTraspasoComponent implements OnInit {
     };
 
     constructor(
-        private _ColorService: ColorService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
         private _tipoIdentificacionService: TipoIdentificacionService,
         private _CiudadanoService: CiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
@@ -180,7 +176,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token, this.nit).subscribe(
+        this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

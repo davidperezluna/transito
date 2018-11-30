@@ -356,7 +356,7 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
             'nit': this.nit,
         };
 
-        this._EmpresaService.showNit(token, this.nit).subscribe(
+        this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {

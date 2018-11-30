@@ -15,9 +15,6 @@ import { RnaPreregistroService } from '../../../services/rnaPreregistro.service'
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { MarcaService } from '../../../services/marca.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
-import { EmpresaService } from "../../../services/empresa.service";
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import swal from 'sweetalert2';
 @Component({
@@ -87,7 +84,6 @@ public resumen = {};     public datos = {
 };
 
 constructor(
-  private _departamentoService: DepartamentoService,
   private _loginService: LoginService,
   private _MunicipioService: MunicipioService,
   private _MarcaService: MarcaService,
@@ -102,9 +98,6 @@ constructor(
   private _RnaPreregistroService: RnaPreregistroService,
   private _SedeOperativaService: SedeOperativaService,
   private _tipoIdentificacionService: TipoIdentificacionService,
-  private _CiudadanoService: CiudadanoService,
-  private _EmpresaService: EmpresaService,
-  private _CiudadanoVehiculoService: CiudadanoVehiculoService,
   private _FuncionarioService: MpersonalFuncionarioService,
   ){}
 

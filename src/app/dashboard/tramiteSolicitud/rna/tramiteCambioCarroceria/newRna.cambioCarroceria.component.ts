@@ -27,6 +27,7 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
         'campos': null,
         'idVehiculo': null,
         'idCarroceria': null,
+        'fichaTecnica': null,
         'tramiteFormulario': null,
     };
 

@@ -13,6 +13,7 @@ import { Router } from "@angular/router";
 import { EmpresaService } from "../../../../services/empresa.service";
 import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
+import { DatePipe  } from '@angular/common';
 
 
 import swal from 'sweetalert2';
@@ -64,6 +65,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     public formIndex = true;
     public vehiculoAcreedor: any; 
     public acreedores:any=[];
+    public date:any;
     public gradosAlerta = [
         { 'value': 1, 'label': "UNO" },
         { 'value': 2, 'label': "DOS" },
@@ -84,7 +86,8 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'tramiteFormulario': null,
         'idFactura': null,
         'vehiculoPlaca': null,
-        'cfgEntidadJudicial':null
+        'cfgEntidadJudicial':null,
+        'fechaExpedicion':null
     };
     public datos2 = {
         'vehiculoId': null,
@@ -108,6 +111,9 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     ) { }
  
     ngOnInit() {
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.datos.fechaExpedicion = datePiper.transform(this.date,'yyyy-MM-dd');
 
         this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe(
             response => {
@@ -351,7 +357,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
             'nit': this.nit,
         };
 
-        this._EmpresaService.showNit(token, this.nit).subscribe(
+        this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {

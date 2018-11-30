@@ -151,7 +151,7 @@
                                                 {{ciudadanoVehiculo.empresa?.nombre}}
                                             </td>
                                             <td> 
-                                                <label class="custom-control custom-radio" for="3option3">
+                                                <label class="custom-control custom-radio" for="option-{{ciudadanoVehiculo.id}}">
                                                     <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" required >
                                                     <span class="custom-control-indicator"></span> 
                                                     <span class="custom-control-description">Solicitante</span>
@@ -270,7 +270,7 @@
                         </div>
 
                         <div class="tab-pane" id="rna-duplicadolicencia" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRna-duplicado-licencia (readyTramite)="readyTramite($event)" [factura] = "factura" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
+                            <appRna-duplicado-licencia (readyTramite)="readyTramite($event)" [solicitanteId]='tramiteSolicitud.solicitanteId' [factura] = "factura" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
                         </div>
                         
                         <div class="tab-pane" id="rna-cancelacionmatricula" role="tabpanel" *ngIf='ciudadano'> 

@@ -20,7 +20,9 @@ export class RegistroRemolque{
 		public idClase: number,
 		public idSedeOperativa: number,
 		public id: number,
-
+		public numeroFactura:string,
+		public fechaFactura:string,
+		public valor:string,
 
 	){}
 }
