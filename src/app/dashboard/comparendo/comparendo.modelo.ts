@@ -2,7 +2,7 @@ export class Comparendo{
 	constructor(
 		public consecutivo:string,
 		public fecha:string,
-		public horas:string,
+		public hora:string,
 		public minutos:string,
 		public direccion:string,
 		public localidad:string,
@@ -22,11 +22,12 @@ export class Comparendo{
 		public vehiculoModalidadTransporte:string,
 		public vehiculoTransportePasajero:string,
 		public vehiculoTransporteEspecial:string,
-		public consecutivoId:number,
-		public municipioId:number,
-		public tipoInfractorId:string,
-		public funcionarioId:number,
-		public infraccionId:number,
+		public idConsecutivo:number,
+		public idMunicipioLugar:number,
+		public idOrganismoTransitoLicencia:number,
+		public idOrganismoTransitoMatriculado:number,
+		public idFuncionario:number,
+		public idInfraccion:number,
 		public idSedeOperativaExpide:number,
 		public id:number
 	){}

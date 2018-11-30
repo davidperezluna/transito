@@ -22,7 +22,7 @@ export class ComparendoComponent implements OnInit {
 		private _LoginService: LoginService,
     ){}
 
-    ngOnInit() {
+  ngOnInit() {
     swal({
       title: '¿Cual es la fuente del archivo?',
       type: 'info',

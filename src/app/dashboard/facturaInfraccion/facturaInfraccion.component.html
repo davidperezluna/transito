@@ -33,40 +33,14 @@
               </div>
 
               <!--si existe un ciudadano -->
-              <div class="container row" *ngIf="ciudadanoEncontrado === 2">
-                <div class="col-xs-12 col-lg-12 row">
-                    <hr>
-                    <br>
-                </div>
-                <h5 class="container">
-                    Resultados de búsqueda
-                </h5>
-                <table class="table " id="dataTables-example">
-                    <tbody>
-                        <tr class="odd">
-                            <td>Tipo de identificación</td>
-                            <td class="center"><p>{{ciudadano.tipoIdentificacion.nombre}}</p></td>
-                            <td>Numero de identificación</td>
-                            <td class="center"><p>{{ciudadano.identificacion}}</p></td>
-                        </tr>
-                        <tr class="odd">
-                            <td>Primer nombre</td>
-                            <td class="center"><p>{{ciudadano.primerNombre}}</p></td>
-                            <td>Segundo nombre</td>
-                            <td class="center"><p>{{ciudadano.segundoNombre}}</p></td>
-                        </tr>
-                        <tr class="odd">
-                            <td>Primer apellido</td>
-                            <td class="center"><p>{{ciudadano.primerApellido}}</p></td>
-                            <td>Segundo apellido</td>
-                            <td class="center"><p>{{ciudadano.segundoApellido}}</p></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="card-body" *ngIf="comparendos">
-                    <h4>Infracciones</h4>
+              <div class="row" *ngIf="comparendos">
+                
+                <div class="card-body">
+                    <h5>
+                        <b class="text-uppercase">Comparendos</b>
+                    </h5>
                     <div class="btn-group pull-right">
-                        <label for="">Valor</label>
+                        <label>Valor</label>
                         <input type="text" class="form-control" [(ngModel)]="facturaInfraccion.valorTotal">
                         <br>
                     </div>
@@ -74,7 +48,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Número orden Comparendo</th>
+                                <th>Número</th>
                                 <th>Fecha</th>
                                 <th>Vehículo</th>
                                 <th>Valor</th>
@@ -83,10 +57,10 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
-                                <td>{{ comparendo.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ comparendo.consecutivo?.consecutivo }}</td>
                                 <td>{{ comparendo.fecha }}</td>
-                                <td>{{ comparendo.vehiculo.placa.numero }}</td>
+                                <td>{{ comparendo.placa }}</td>
                                 <td>{{ comparendo.valorInfraccion }}</td> 
                                 <td>
                                     <div class="custom-control custom-checkbox" style="margin-top: -17px;" >
@@ -100,7 +74,7 @@
                     <!-- /.table-responsive -->
                 </div>
               </div>
-            <div class="card-footer">
+            <div class="card-footer" *ngIf="comparendos">
                 <div class="btn-group">
                     <button class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>

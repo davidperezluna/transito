@@ -1,10 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router'
 import { GdDocumento } from '../gdDocumento.modelo';
-import { GdRemitente } from '../gdRemitente.modelo';
 import { GdMedidaCautelar } from '../gdMedidaCautelar.modelo';
 import { GdVehiculo } from '../gdVehiculo.modelo';
-import { GdRemitenteService } from '../../../services/gdRemitente.service';
 import { GdDocumentoService } from '../../../services/gdDocumento.service';
 import { GdCfgTipoCorrespondenciaService } from '../../../services/gdCfgTipoCorrespondencia.service';
 import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
@@ -21,68 +19,65 @@ declare var $: any;
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-@Output() onShow = new EventEmitter<any>();
-@Input() peticionario: any = null;
-public documento: GdDocumento;
-public medidaCautelar: GdMedidaCautelar;
-public vehiculo: GdVehiculo;
-public remitente: GdRemitente;
+  @Output() ready = new EventEmitter<any>();
+  @Output() onShow = new EventEmitter<any>();
+  @Input() peticionario: any = null;
+  public documento: GdDocumento;
+  public medidaCautelar: GdMedidaCautelar;
+  public vehiculo: GdVehiculo;
 
-public errorMessage;
+  public errorMessage;
 
-public editable = false;
-public peticionarios: any;
+  public editable = false;
+  public peticionarios: any;
 
-public formNewDocumento: any = true;
-public formNewRemitente: any = false;
-public formNewCiudadano: any = false;
+  public formNewDocumento: any = true;
+  public formNewRemitente: any = false;
+  public formNewCiudadano: any = false;
 
-public tiposIdentificacion:any;
-public tipoIdentificacionRemitenteSelected: any;
-public tipoIdentificacionCiudadanoSelected: any;
+  public tiposIdentificacion: any;
+  public tipoIdentificacionRemitenteSelected: any;
+  public tipoIdentificacionCiudadanoSelected: any;
 
-public tiposCorrespondencia: any;
-public tipoCorrespondenciaSelected: any;
+  public tiposCorrespondencia: any;
+  public tipoCorrespondenciaSelected: any;
 
-public mediosCorrespondencia: any;
-public medioCorrespondenciaSelected: any;
+  public mediosCorrespondencia: any;
+  public medioCorrespondenciaSelected: any;
 
-public clases: any;
-public claseSelected: any;
+  public clases: any;
+  public claseSelected: any;
 
-public date: any;
+  public date: any;
 
-public ciudadano: any = null;
-public prohibicion: any;
+  public ciudadano: any = null;
+  public prohibicion: any;
 
-public file: any = null;
-public fileSelected: File = null;
+  public file: any = null;
+  public fileSelected: File = null;
 
-public docsUrl = environment.docsUrl;
+  public docsUrl = environment.docsUrl;
 
-public datosRegistro = {
-  'peticionario': null,
-  'remitente': null,
-  'documento': null,
-  'medidaCautelar': null,
-  'vehiculo': null,
-};
+  public datosRegistro = {
+    'peticionario': null,
+    'remitente': null,
+    'documento': null,
+    'medidaCautelar': null,
+    'vehiculo': null,
+  };
 
-constructor(
-  private _CiudadanoService: CiudadanoService,
-  private _TipoIdentificacionService: TipoIdentificacionService,
-  private _RemitenteService: GdRemitenteService,
-  private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
-  private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
-  private _DocumentoService: GdDocumentoService,
-  private _ClaseService: ClaseService,
-  private _loginService: LoginService,
-  private router: Router
-  ){}
+  constructor(
+    private _CiudadanoService: CiudadanoService,
+    private _TipoIdentificacionService: TipoIdentificacionService,
+    private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
+    private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
+    private _DocumentoService: GdDocumentoService,
+    private _ClaseService: ClaseService,
+    private _loginService: LoginService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.remitente = new GdRemitente(null, null, null, null, null, null, null, null, null, null);
     this.documento = new GdDocumento(null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.medidaCautelar = new GdMedidaCautelar(null, null, null, null, null, null, null, null);
     this.vehiculo = new GdVehiculo(null, null, null, null);
@@ -102,7 +97,7 @@ constructor(
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -116,7 +111,7 @@ constructor(
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -138,7 +133,7 @@ constructor(
     );
   }
 
-  onCancelar(){
+  onCancelar() {
     this.ready.emit(true);
   }
 
@@ -186,91 +181,42 @@ constructor(
     );
   }
 
-  onSearchRemitente() {
-    swal({
-      title: 'Buscando registros!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
-    let token = this._loginService.getToken();
-
-    this._RemitenteService.searchByIdentificacion({ 'identificacion': this.remitente.identificacion }, token).subscribe(
-      response => { 
-          if(response.status == 'success'){
-            this.formNewRemitente = false;
-            this.remitente = response.data;
-            this.remitente.idTipoIdentificacion = response.data.tipoIdentificacion.id;
-            swal.close();
-          }else{
-            this.formNewRemitente = true;
-            
-            swal({
-              title: 'Atención!',
-              text: response.message,
-              type: 'warning'
-            });
-          }
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );
-  }
-
-  onRegister(){
+  onRegister() {
     if (this.fileSelected) {
-      this.datosRegistro.remitente = this.remitente; 
       this.datosRegistro.peticionario = this.ciudadano;
       this.datosRegistro.documento = this.documento;
-  
-      if (!this.remitente.direccion && !this.remitente.telefono && !this.remitente.correoElectronico) {
-        swal({
-          title: 'Error!',
-          text: 'Debe diligenciar al menos un campo de (Dirección, Telefono y/o Correo Electronico).',
-          type: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-      }else{
-        let token = this._loginService.getToken();
-    
-        this._DocumentoService.register(this.file, this.datosRegistro, token).subscribe(
-          response => {
-            if(response.status == 'success'){
-              swal({
-                title: 'Perfecto!',
-                text: response.message,
-                type: 'success',
-                confirmButtonText: 'Aceptar'
-              });
-              this.onShow.emit(response.data);
-            }else{
-              swal({
-                title: 'Error!',
-                text: response.message,
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-              });
-            }
+
+      let token = this._loginService.getToken();
+
+      this._DocumentoService.register(this.file, this.datosRegistro, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+            this.onShow.emit(response.data);
+          } else {
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
           error => {
-              this.errorMessage = <any>error;
-    
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
             }
           }
-        );
-      }
-    }else{
+        }
+      );
+    } else {
       swal({
         title: 'Error!',
         text: 'Debe adjuntar el documento escaneado.',
@@ -280,7 +226,7 @@ constructor(
     }
   }
 
-  onCrearProhibicion(){
+  onCrearProhibicion() {
     this._ClaseService.getClaseSelect().subscribe(
       response => {
         this.clases = response;
@@ -294,7 +240,7 @@ constructor(
         }
       }
     );
-    
+
     this.datosRegistro.medidaCautelar = this.medidaCautelar;
 
     swal({
@@ -307,16 +253,16 @@ constructor(
         '<i class="fa fa-thumbs-up"></i> OK!',
       confirmButtonAriaLabel: 'Thumbs up, great!',
       cancelButtonText:
-      '<i class="fa fa-thumbs-down"></i>',
+        '<i class="fa fa-thumbs-down"></i>',
       cancelButtonAriaLabel: 'Thumbs down',
     });
   }
 
-  onCrearVehiculo(){
+  onCrearVehiculo() {
     this.datosRegistro.vehiculo.push({
-      'lugar':this.vehiculo.lugar,
-      'placa':this.vehiculo.placa,
-      'claseId':this.claseSelected
+      'lugar': this.vehiculo.lugar,
+      'placa': this.vehiculo.placa,
+      'claseId': this.claseSelected
     });
 
     swal({
@@ -329,26 +275,26 @@ constructor(
         '<i class="fa fa-thumbs-up"></i> OK!',
       confirmButtonAriaLabel: 'Thumbs up, great!',
       cancelButtonText:
-      '<i class="fa fa-thumbs-down"></i>',
+        '<i class="fa fa-thumbs-down"></i>',
       cancelButtonAriaLabel: 'Thumbs down',
     });
   }
 
-  onChangedTipoCorrespondencia(event){
-    if(event !== undefined){
+  onChangedTipoCorrespondencia(event) {
+    if (event !== undefined) {
       let token = this._loginService.getToken();
 
-      this._TipoCorrespondenciaService.show({ 'idTipoCorrespondencia':event }, token).subscribe(
+      this._TipoCorrespondenciaService.show({ 'idTipoCorrespondencia': event }, token).subscribe(
         response => {
           response = response;
-          if(response.status == 'success'){
+          if (response.status == 'success') {
             this.prohibicion = response.data.prohibicion;
             this.editable = response.data.editable;
             this.documento.vigencia = response.data.diasVigencia;
           }
-        error => {
+          error => {
             this.errorMessage = <any>error;
-            if(this.errorMessage != null){
+            if (this.errorMessage != null) {
               console.log(this.errorMessage);
               alert("Error en la petición");
             }
@@ -359,18 +305,18 @@ constructor(
   }
 
   onFileChange(event) {
-    if(event.target.files.length > 0) {
+    if (event.target.files.length > 0) {
       this.fileSelected = event.target.files[0];
-      
+
       this.file = new FormData();
       this.file.append('file', this.fileSelected);
     }
   }
 
-  onReadyCiudadano(ciudadano: any = null) {   
+  onReadyCiudadano(ciudadano: any = null) {
     this.formNewCiudadano = false;
     this.formNewDocumento = true;
-    
+
     if (ciudadano) {
       this.ciudadano = ciudadano;
     }

@@ -18,67 +18,6 @@
                         <label>Fecha y Hora</label>
                         <input class="form-control" value="{{ date|date:('dd/MM/yyyy HH:mm:ss a') }}" readonly type="text">
                     </div>
-                </div> 
-
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Tipo Identificacion remitente<b class="text-danger">*</b></label>
-                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="remitente.idTipoIdentificacion"  name="tipoIdentificacionRemitente" required>
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Identificación remitente<b class="text-danger">*</b></label>
-                        <div class="input-group">
-                            <input class="form-control" [(ngModel)]="remitente.identificacion" name="identificacionRemitente" type="text">
-                            <span class="input-group-btn">
-                                <button (click)="onSearchRemitente()" class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <h5 class="alert alert-success" *ngIf="remitente">
-                            <strong>Remitente encontrado:</strong>
-                            <small>{{ remitente.primerNombre }} {{ remitente.primerApellido }}</small>
-                        </h5>
-                    </div>
-                </div>
-
-                <div class="form-group row" *ngIf="formNewRemitente">
-                    <div class="col-xs-12 col-lg-12">
-                        <h6 class="text-uppercase text-center gradient">
-                            <b>Datos de remitente</b>
-                        </h6>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Primer Nombre <b class="text-danger">*</b></label>
-                        <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.primerNombre" name="primerNombreRemitente" type="text" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Segundo Nombre</label>
-                        <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.segundoNombre" name="segundoNombreRemitente" type="text">
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Primer Apellido <b class="text-danger">*</b></label>
-                        <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.primerApellido" name="primerApellidoRemitente" type="text" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Segundo Apellido</label>
-                        <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.segundoApellido" name="segundoApellidoRemitente" type="text">
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Dirección <b class="text-danger">*</b></label>
-                        <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.direccion" name="direccionRemitente" type="text" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-3">
-                        <label>Telefono <b class="text-danger">*</b></label>
-                        <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.telefono" name="telefonoRemitente" type="text" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-3">
-                        <label>Correo</label>
-                        <input [disabled]='newRemitente' class="form-control" [(ngModel)]="remitente.correoElectronico" name="correoElectronicoRemitente" type="text">
-                    </div>
                 </div>
 
                 <div class="form-group row">
@@ -128,8 +67,8 @@
                         <input class="form-control" [(ngModel)]="documento.vigencia" name="vigencia" type="text" required>
                     </div>
                     <div  class="col-xs-12 col-lg-2">
-                        <label>No. Oficio <b class="text-danger">*</b></label>
-                        <input class="form-control" [(ngModel)]="documento.numeroOficio" name="medidaCautelarNumeroOficio" type="text" required>
+                        <label>No. Oficio </label>
+                        <input class="form-control" [(ngModel)]="documento.numeroOficio" name="medidaCautelarNumeroOficio" type="text">
                     </div>
                     <div class="col-xs-12 col-lg-12">
                         <label>Asunto y Concepto <b class="text-danger">*</b></label>

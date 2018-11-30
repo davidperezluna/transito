@@ -1,12 +1,11 @@
 /// <reference types="@types/googlemaps" />
 import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core'; 
-import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
+import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
 import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
-import { MunicipioService } from '../../../services/municipio.service';
 import { LoginService } from '../../../services/login.service';
-import { SvSenialMunicipio } from './newSenialMunicipio.modelo';
+import { SvSenialUbicacion } from './newSenialUbicacion.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 import { } from "googlemaps";
@@ -14,13 +13,13 @@ declare var google: any;
 
 @Component({
     selector: 'app-new-senial-municipio',
-    templateUrl: './newSenialMunicipio.component.html'
+    templateUrl: './newSenialUbicacion.component.html'
 })
-export class NewSenialMunicipioComponent implements OnInit {
+export class NewSenialUbicacionComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() tipoSenialSelected: any = null;
-    @Input() municipioSelected: any = null;
-
+    @Input() idMunicipio: any = null;
+    @Input() idTipoSenial: any = null;
+    
     public file: any = new FormData();
 
     @ViewChild('map') mapRef: ElementRef;
@@ -29,29 +28,22 @@ export class NewSenialMunicipioComponent implements OnInit {
     private scriptLoadingPromise: Promise<void>;
 
     public errorMessage;
-    public id;
-    public municipio: any = null;
 
     public seniales: any;
-    public senialSelected: any;
-    public senial: any = null;
-
     public conectores: any;
-    public conectorSelected: any;
-
     public estados: any;
-    public estadoSelected: any;
+    
+    public senial: any = null;
 
     public formEdit = false;
     public formIndex = true;
-    public senialMunicipio: SvSenialMunicipio;
+    public senialUbicacion: SvSenialUbicacion;
 
     constructor(
-        private _SvSenialInventarioService: SvSenialInventarioService,
+        private _SvSenialUbicacionService: SvSenialUbicacionService,
         private _SenialService: SvCfgSenialService,
         private _ConectorService: SvCfgSenialConectorService,
         private _EstadoService: SvCfgSenialEstadoService,
-        private _MunicipioService: MunicipioService,
         private _LoginService: LoginService,
     ) {
         //Loading script
@@ -63,37 +55,7 @@ export class NewSenialMunicipioComponent implements OnInit {
      }
 
     ngOnInit() {   
-        this.senialMunicipio = new SvSenialMunicipio(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-
-        let token = this._LoginService.getToken();
-
-        this._MunicipioService.showMunicipio(token, this.municipioSelected).subscribe(
-            response => {
-                this.municipio = response.data;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-        
-        this._SenialService.selectByTipoSenial({'idTipoSenial': this.tipoSenialSelected}, token).subscribe(
-            response => {
-                this.seniales = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
+        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         this._ConectorService.select().subscribe(
             response => {
@@ -112,6 +74,22 @@ export class NewSenialMunicipioComponent implements OnInit {
         this._EstadoService.select().subscribe(
             response => {
                 this.estados = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
+        let token = this._LoginService.getToken();
+
+        this._SenialService.selectByTipo({ 'idTipoSenial': this.idTipoSenial }, token).subscribe(
+            response => {
+                this.seniales = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -264,13 +242,9 @@ export class NewSenialMunicipioComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
-        this.senialMunicipio.idEstado = this.estadoSelected;
-        this.senialMunicipio.idSenial= this.senialSelected;
-        this.senialMunicipio.idConector = this.conectorSelected;
-        this.senialMunicipio.idMunicipio = this.municipioSelected;
-        this.senialMunicipio.idTipoSenial = this.tipoSenialSelected;
+        this.senialUbicacion.idMunicipio = this.idMunicipio;
 
-        this._SvSenialInventarioService.registerSenialMunicipio(this.file, this.senialMunicipio, token).subscribe(
+        this._SvSenialUbicacionService.register(this.file, this.senialUbicacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);
@@ -298,27 +272,6 @@ export class NewSenialMunicipioComponent implements OnInit {
         if (event.target.files.length > 0) {
             const fileSelected: File = event.target.files[0];
             this.file.append('file', fileSelected);
-        }
-    }
-
-    onChangeSenial(value) {
-        if (value) {
-            let token = this._LoginService.getToken();
-    
-            this._SenialService.show({ 'idSenial': value }, token).subscribe(
-                response => {
-                    this.senial = response.data;
-                    this.senialMunicipio.valor = this.senial.valor;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-    
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            );
         }
     }
 }

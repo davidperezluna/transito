@@ -66,31 +66,62 @@
           <h5 class="card-title">
             <b class="text-uppercase">Gestión Documental</b>
             <small>Por tramitar</small>
+            <div class="btn-group pull-right">
+              <button class="btn btn-xs btn-danger">
+                PENDIENTE
+              </button>
+              <button class="btn btn-xs btn-primary">
+                ASIGNADO
+              </button>
+              <button class="btn btn-xs btn-warning">
+                EN TRAMITE
+              </button>
+              <button class="btn btn-xs btn-success">
+                FINALIZADO
+              </button>
+            </div>
           </h5>
         </div>
         <div class="card-body">
           <table class="table" id="dataTables-example">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>No.</th>
                 <th>Peticionario</th>
-                <th>Tipo correspondencia</th>
-                <th>Radicado No.</th>
-                <th>Estado</th>
-                <th>Fecha radicado</th>
-                <th>Numero Oficio</th>
+                <th>Detalles</th>
+                <th>Fechas</th>
                 <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr class="odd" *ngFor="let documento of documentosPendientes; let i = index">
-                <td>{{ documento.id }}</td>
-                <td>{{ documento.peticionario.usuario.primerNombre }}</td>
-                <td>{{ documento.tipoCorrespondencia.nombre }}</td>
-                <td>{{ documento.numeroRadicado }}</td>
-                <td>{{ documento.estado }}</td>
-                <td>{{ documento.fechaRegistro }}</td>
-                <td>{{ documento.numeroOficio }}</td>
+                <td class="btn btn-danger" *ngIf="documento.estado == 'PENDIENTE'">{{ i + 1 }}</td>
+                <td class="btn btn-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
+                <td class="btn btn-warning" *ngIf="documento.estado == 'EN TRAMITE'">{{ i + 1 }}</td>
+                <td class="btn btn-success" *ngIf="documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
+                <td>
+                  {{ documento.peticionario.usuario.primerNombre }} {{ documento.peticionario.usuario.primerApellido }}
+                  <br>
+                  {{ documento.peticionario.usuario.identificacion }}
+                </td>
+                <td>
+                  <b>No. radicado:</b> {{ documento.numeroRadicado }}
+                  <br>
+                  <b>Tipo:</b> {{ documento.tipoCorrespondencia.nombre }}
+                  <br>
+                  <b>Estado:</b> {{ documento.estado }}
+                  <br>
+                  <b>No. ofcicio:</b> {{ documento.numeroOficio }}
+                </td>
+                <td>
+                  <b>F. radicado:</b>
+                  <br>
+                  {{ documento.fechaRegistro }}
+                  <br>
+                  <b>F. vencimiento:</b>
+                  <br>
+                  {{ documento.fechaVencimiento }}
+                </td>
                 <td>
                   <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO'">
                     <i class="fa fa-reply"></i>
@@ -115,31 +146,59 @@
             <h5 class="card-title">
               <b class="text-uppercase">Gestión Documental</b> 
               <small>Documentos</small>
+              <div class="btn-group pull-right">
+                <button class="btn btn-xs btn-danger">
+                  PENDIENTE
+                </button>
+                <button class="btn btn-xs btn-primary">
+                  ASIGNADO
+                </button>
+                <button class="btn btn-xs btn-warning">
+                  EN TRAMITE
+                </button>
+                <button class="btn btn-xs btn-success">
+                  FINALIZADO
+                </button>
+              </div>
             </h5>
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>No.</th>
                     <th>Peticionario</th>
-                    <th>Tipo correspondencia</th>
-                    <th>Radicado No.</th>
-                    <th>Estado</th>
-                    <th>Fecha radicado</th>
-                    <th>Numero Oficio</th>
+                    <th>Detalles</th>
+                    <th>Fechas</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let documento of documentos; let i = index">
-                  <td >{{ documento.id }}</td>
-                  <td >{{ documento.peticionario.usuario.primerNombre }}</td>
-                  <td >{{ documento.tipoCorrespondencia.nombre }}</td>
-                  <td >{{ documento.numeroRadicado }}</td>
-                  <td >{{ documento.estado }}</td>
-                  <td >{{ documento.fechaRegistro }}</td>
-                  <td >{{ documento.numeroOficio }}</td>
+                  <td class="btn btn-danger" *ngIf="documento.estado == 'PENDIENTE'">{{ i + 1 }}</td>
+                  <td class="btn btn-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
+                  <td class="btn btn-warning" *ngIf="documento.estado == 'EN TRAMITE'">{{ i + 1 }}</td>
+                  <td class="btn btn-success" *ngIf="documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
+                  <td>
+                    {{ documento.peticionario.usuario.primerNombre }} {{ documento.peticionario.usuario.primerApellido }}
+                    <br> {{ documento.peticionario.usuario.identificacion }}
+                  </td>
+                  <td>
+                    <b>No. radicado:</b> {{ documento.numeroRadicado }}
+                    <br>
+                    <b>Tipo:</b> {{ documento.tipoCorrespondencia.nombre }}
+                    <br>
+                    <b>Estado:</b> {{ documento.estado }}
+                    <br>
+                    <b>No. ofcicio:</b> {{ documento.numeroOficio }}
+                  </td>
+                  <td>
+                    <b>F. radicado:</b>
+                    <br> {{ documento.fechaRegistro }}
+                    <br>
+                    <b>F. vencimiento:</b>
+                    <br> {{ documento.fechaVencimiento }}
+                  </td>
                   <td>
                     <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'PENDIENTE'">
                       <i class="fa fa-reply"></i>
