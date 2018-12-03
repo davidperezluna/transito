@@ -169,6 +169,7 @@ import { EmpresaRoutes } from './empresa/empresa.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 
 import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasignacionPlaca.routes';
+import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
 import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
 
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
@@ -402,6 +403,7 @@ export const DashboardRoutes: Route[] = [
       ...CvCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,
       ...BpProyectoRoutes,
+      ...RnrsPreasignacionPlacaRoutes
     ]
   }
 ];
