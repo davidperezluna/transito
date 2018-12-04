@@ -1,0 +1,55 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="m-0">Nueva Prórroga de Importación Temporal</h5>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #newForm="ngForm">
+                    <div class="row">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha Solicitud Prórroga <strong class="text-danger">*</strong></label>
+                                <input type="date" class="form-control" [(ngModel)]="fechaSolicitudProrroga" name="fechaSolicitudProrroga" disabled required />
+                            </div>
+                            <div></div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo Documento</label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected"
+                                    required name="tiposIdentificacionId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nro. Documento</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroDocumento" name="numeroDocumento"
+                                    type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nombre Solicitante</label>
+                                <input class="form-control" [(ngModel)]="datos.nombreSolicitante" name="nombreSolicitante"
+                                    type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nro. Cuotas (Meses)</label>
+                                <input class="form-control" [(ngModel)]="numeroCuotas" name="numeroCoutas" type="number"
+                                    required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Número solicitud RUNT</label>
+                                <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text"
+                                    required />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->

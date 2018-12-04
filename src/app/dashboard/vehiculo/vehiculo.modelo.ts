@@ -28,6 +28,7 @@ export class Vehiculo{
 		public radioAccion:string,
 		public modalidadTransporte:string,
 		public transportePasajeros:string,
+		public paisRegistro: number,
 		
 	){}
 }

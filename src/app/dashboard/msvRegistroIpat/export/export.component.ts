@@ -30,8 +30,7 @@ export class ExportComponent implements OnInit {
     public table: any = false;
     public ipat = false;
     
-    public file: any;
-    public txt: any[];
+    public txt: any[] = null;
     public valido = true;
 
     public date: any;
