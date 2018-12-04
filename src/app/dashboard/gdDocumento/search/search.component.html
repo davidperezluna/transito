@@ -1,0 +1,133 @@
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-xs-12 col-lg-3" *ngIf='formSearch'>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        <b class="text-uppercase">Buscar documentos</b>
+                    </h5>
+                    <hr>
+                    <form #formSearch="ngForm">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Tipo de filtro</label>
+                                    <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Filtro</label>
+                                    <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-default" type="button" disabled>
+                            <i class="fa fa-search"></i>
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-lg-8" *ngIf='formIndex'>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <b class="text-uppercase">Gestión Documental</b>
+                        <small>Documentos</small>
+                        <div class="btn-group pull-right">
+                            <button class="btn btn-xs btn-danger">
+                                PENDIENTE
+                            </button>
+                            <button class="btn btn-xs btn-primary">
+                                ASIGNADO
+                            </button>
+                            <button class="btn btn-xs btn-warning">
+                                EN TRAMITE
+                            </button>
+                            <button class="btn btn-xs btn-success">
+                                FINALIZADO
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Peticionario</th>
+                                <th>Detalles</th>
+                                <th>Fechas</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let documento of documentos; let i = index">
+                                <td class="btn btn-danger" *ngIf="documento.estado == 'PENDIENTE'">{{ i + 1 }}</td>
+                                <td class="btn btn-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
+                                <td class="btn btn-warning" *ngIf="documento.estado == 'EN TRAMITE' || documento.estado == 'RESPUESTA REALIZADA'">{{ i + 1 }}</td>
+                                <td class="btn btn-success" *ngIf="documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
+                                <td>
+                                    <span *ngIf="documento.peticionarioNombres">
+                                        {{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}
+                                        <br>
+                                    </span>
+                                    <span *ngIf="documento.identificacion">
+                                        {{ documento.identificacion }}
+                                        <br>
+                                    </span>
+                                    <span *ngIf="documento.entidadNombre">
+                                        {{ documento.entidadNombre }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <b>No. radicado:</b> {{ documento.numeroRadicado }}
+                                    <br>
+                                    <span *ngIf="documento.tipoCorrespondencia">
+                                        <b>Tipo:</b> {{ documento.tipoCorrespondencia.nombre }}
+                                        <br>
+                                    </span>
+                                    <b>Estado:</b> {{ documento.estado }}
+                                    <br>
+                                    <b>No. oficio:</b> {{ documento.numeroOficio }}
+                                </td>
+                                <td>
+                                    <b>F. radicado:</b>
+                                    <br> {{ documento.fechaRegistro }}
+                                    <br>
+                                    <b>F. vencimiento:</b>
+                                    <br> {{ documento.fechaVencimiento }}
+                                </td>
+                                <td>
+                                    <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'PENDIENTE'">
+                                        <i class="fa fa-reply"></i>
+                                        Asignar
+                                    </button>
+                                    <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'RESPUESTA REALIZADA'">
+                                        <i class="fa fa-check"></i>
+                                        Finalizar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-lg-8" *ngIf='formShow'>
+            <app-show [documento]="documento" (ready)="ready($event)"></app-show>
+        </div>
+
+        <div class="col-xs-12 col-lg-8" *ngIf='formPrint'>
+            <app-print [documento]="documento" (ready)="ready($event)"></app-print>
+        </div>
+    </div>
+</div>

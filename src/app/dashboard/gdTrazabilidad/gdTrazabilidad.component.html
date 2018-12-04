@@ -41,9 +41,17 @@
                                 <td class="btn btn-warning" *ngIf="trazabilidad.documento.estado == 'EN TRAMITE'">{{ i + 1 }}</td>
                                 <td class="btn btn-success" *ngIf="trazabilidad.documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
                                 <td>
-                                    {{ trazabilidad.documento.peticionario.usuario.primerNombre }} {{ trazabilidad.documento.peticionario.usuario.primerApellido }}
-                                    <br>
-                                     {{ trazabilidad.documento.peticionario.usuario.identificacion }}
+                                    <span *ngIf="trazabilidad.documento.peticionarioNombres">
+                                        {{ trazabilidad.documento.peticionarioNombres }} {{ trazabilidad.documento.peticionarioApellidos }}
+                                        <br>
+                                    </span>
+                                    <span *ngIf="trazabilidad.documento.identificacion">
+                                        {{ trazabilidad.documento.identificacion }}
+                                        <br>
+                                    </span>
+                                    <span *ngIf="trazabilidad.documento.entidadNombre">
+                                        {{ trazabilidad.documento.entidadNombre }}
+                                    </span>
                                 </td>
                                 <td>
                                     <b>No. radicado:</b>
@@ -51,9 +59,10 @@
                                         {{ trazabilidad.documento.numeroRadicado }}
                                     </a>
                                     <br>
-                                    <b>Tipo:</b>
-                                    {{ trazabilidad.documento.tipoCorrespondencia.nombre }}
-                                    <br>
+                                    <span *ngIf="trazabilidad.documento.tipoCorrespondencia">
+                                        <b>Tipo:</b> {{ trazabilidad.documento.tipoCorrespondencia.nombre }}
+                                        <br>
+                                    </span>
                                     <b>Estado:</b>
                                     {{ trazabilidad.estado }}
                                 </td>
