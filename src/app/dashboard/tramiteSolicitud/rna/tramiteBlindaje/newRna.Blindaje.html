@@ -2,7 +2,7 @@
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
-        <div class="card">
+    <div class="card" *ngIf='!tramiteRealizado'>
             <div class="card-body">
                 <h5 class="m-0">
                     Blindaje y desblindaje
@@ -43,6 +43,24 @@
                 <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
                 <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
             </div>
+        </div>
+    <div class="card" *ngIf='tramiteRealizado'>
+        <div class="card-body">
+            <h5 class="m-0">
+                Blindaje y desblindaje
+            </h5>
+            
+            <hr>
+            <div class="row justify-content-center container">
+                <div class="form-group row">
+                    <h4>{{resumen}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+            <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
+        </div>
         </div>
     </div>
     <!-- /.col -->

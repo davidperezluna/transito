@@ -4,6 +4,7 @@ import { RnrsPreasignacionPlacaComponent } from '.';
 export const RnrsPreasignacionPlacaRoutes: Route[] = [
     {
       path: 'rnrs-pre-asignacion-placa',
-      component: RnrsPreasignacionPlacaComponent
+      component: RnrsPreasignacionPlacaComponent  
     }
 ];
+ 

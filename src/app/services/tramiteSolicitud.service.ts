@@ -47,6 +47,13 @@ export class TramiteSolicitudService {
 		return this._http.post(this.url +'/'+ id+'/show/tramiteSolicitud', params, { headers: headers }).map(res => res.json());
 	}
 
+	showTramiteSolicitudByTamiteFacturaFormulario(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = 'data=' + json + '&authorization=' + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/tramiteSolicitud/search/idFactura/formulario', params, { headers: headers }).map(res => res.json());
+	}
+
 	editTramiteSolicitud(tramiteSolicitud, token) {
 		let json = JSON.stringify(tramiteSolicitud);
 		let params = 'json=' + json + '&authorization=' + token;

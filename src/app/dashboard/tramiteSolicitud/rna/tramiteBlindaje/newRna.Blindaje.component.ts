@@ -3,6 +3,7 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
+import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 
 import swal from 'sweetalert2';
 
@@ -21,9 +22,11 @@ export class NewRnaBlindajeComponent implements OnInit {
     public tipoRegrabacionSelected: any;
     public motivoSelected: any;
     public nuevoNumero: any;
-
+    public tramitesFactura: any = null;
     public tipoBlindajeSelected: any;
     public nivelBlindajeSelected: any;
+    public resumen: any ;
+    public tramiteRealizado: any=false;
 
     public datos = {
         'idFactura': null,
@@ -54,12 +57,55 @@ export class NewRnaBlindajeComponent implements OnInit {
     ];
 
     constructor(
+        private _TramiteFacturaService: TramiteFacturaService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }
+    showTramiteSolicitudByTamiteFactura
+    ngOnInit() {
+        let token = this._loginService.getToken()
+        this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
+            response => {
 
-    ngOnInit() { }
+                this.tramitesFactura = response;
+
+                this.tramitesFactura.forEach(tramiteFactura => {
+                    if (tramiteFactura.realizado == 1) {
+                        if (tramiteFactura.tramitePrecio.tramite.formulario == 'rna-blindaje') {
+                            let datos = {
+                                'idFactura':tramiteFactura.factura.id,
+                                'idTramiteFactura':tramiteFactura.id
+                            }
+                            this._TramiteSolicitudService.showTramiteSolicitudByTamiteFacturaFormulario(datos,token).subscribe(
+                                response => { 
+                                    console.log('***********');
+                                    console.log(response.data.resumen);
+                                    this.resumen = JSON.stringify(response.data.resumen);
+                                    this.tramiteRealizado = tramiteFactura;
+
+                                    error => {
+                                        this.errorMessage = <any>error;
+                                        if (this.errorMessage != null) {
+                                            console.log(this.errorMessage);
+                                            alert("Error en la petición");
+                                        }
+                                    }
+                                }
+                            );
+                        }
+                    }
+                });
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );
+     }
 
     enviarTramite() {
         let token = this._loginService.getToken();
@@ -73,8 +119,8 @@ export class NewRnaBlindajeComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     let resumen = {
-                        // 'blindaje anterior': this.vehiculo.blindaje.nombre,
-                        'nuevo blindaje': this.datos.idTipoBlindaje,
+                        'Tipo blindaje': this.datos.idTipoBlindaje,
+                        'Nivel blindaje': this.datos.idNivelBlindaje,
                     };
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                 }

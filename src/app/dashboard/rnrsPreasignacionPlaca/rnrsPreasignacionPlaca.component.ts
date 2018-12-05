@@ -92,7 +92,6 @@ export class RnrsPreasignacionPlacaComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
-
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -105,7 +104,7 @@ export class RnrsPreasignacionPlacaComponent implements OnInit {
         this.formEdit = false;
         this.formIndex = true;
         this.ngOnInit();
-      }
+      } 
   }
   
   deleteColor(id:any){

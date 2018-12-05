@@ -294,7 +294,6 @@ constructor(
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
         this.respuesta = response;
-        console.log(this.respuesta);
         if (this.respuesta.status == 'success') { 
           swal({
             title: 'Perfecto!',
@@ -303,7 +302,6 @@ constructor(
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
-          this.onSearchFactura(this.factura.id)
         } else {
           swal({
             title: 'Error!',
