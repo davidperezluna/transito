@@ -338,6 +338,10 @@
                     <div class="tab-pane" id="rnma-importacion-temporal" role="tabpanel" *ngIf='ciudadano'>
                         <appRnma-importacion-temporal [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-importacion-temporal>
                     </div>
+                    <div class="tab-pane" id="rnma-prorroga-importacion-temporal" role="tabpanel" *ngIf='ciudadano'>
+                        <appRnma-prorroga-importacion-temporal [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                            (cancelarTramite)="cancelarTramite($event)"></appRnma-prorroga-importacion-temporal>
+                    </div>
                 </div>
             </div>
         </div>

@@ -26,6 +26,8 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
 
     public numeroRunt: any;
     public numeroCoutas: any;
+    public numeroDocumento: any;
+    public nombreSolicitante: any;
     public fechaSolicitudProrroga: any;
     public date: any;
 
@@ -78,7 +80,6 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
             this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token, this.tramiteRealizado.id).subscribe(
                 response => {
                     this.datos = response.data.datos
-                    console.log(response.data.datos);
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -110,12 +111,14 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
         let token = this._loginService.getToken();
 
         this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rna-importacion-temporal';
+        this.datos.tramiteFormulario = 'rna-prorroga-importacion-temporal';
         this.datos.idVehiculo = this.vehiculo.id;
         let resumen = {
             'fecha solicitud prorroga': this.fechaSolicitudProrroga,
             'numero runt': this.numeroRunt,
             'numero cuotas': this.numeroCoutas,
+            'Número Documento Solicitante': this.numeroDocumento,
+            'Nombre Solicitante': this.nombreSolicitante,
         };
         this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
     }
