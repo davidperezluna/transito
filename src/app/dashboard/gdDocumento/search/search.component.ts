@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { GdDocumentoService } from '../../services/gdDocumento.service';
-import { LoginService } from '../../services/login.service';
-import { GdDocumento } from './gdDocumento.modelo';
+import { GdDocumentoService } from '../../../services/gdDocumento.service';
+import { LoginService } from '../../../services/login.service';
+import { GdDocumento } from './../gdDocumento.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './gdDocumento.component.html'
+  selector: 'app-search',
+  templateUrl: './search.component.html'
 })
 
-export class GdDocumentoComponent implements OnInit {
+export class SearchComponent implements OnInit {
   public errorMessage;
   public documentos: any = null;
   public documentosPendientes: any = null;
   
-	public formNew = false;
-	public formEdit = false;
-	public formIndex = false;
+  public formIndex = false;
   public formPrint = false;
   public formShow = false;
-  public formAssign = false;
   public formSearch = true;
   
   public table: any = null; 
@@ -51,42 +48,8 @@ export class GdDocumentoComponent implements OnInit {
     }
 
     this.formIndex = false;
-    this.formNew = false;
-    this.formEdit = false;
     this.formShow = false;
     this.formPrint = false;
-    this.formAssign = false;
-
-    this._DocumentoService.index().subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.documentosPendientes = response.data;
-          this.formAssign = true;
-
-          let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
-          }, 100);
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );
-
-    swal({
-      title: '<i>Para Tener En Cuenta</i>',
-      type: 'info',
-      html:
-        '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN EN INTERÉS GENERAL Y PARTICULAR:</b>' +
-        ' El que tiene toda persona para presentar solicitudes respetuosas ante las autoridades consagrado en el articulo' +
-        '23 de la constitucion política como derecho fundamental. Termino de respuesta 15 días</p>' +
-        '<p style="text-align:justify;"><b>- DERECHO DE PETICIÓN DE INFORMACIÓN:</b> Petición para que el funcionario de a conocer como ha actuado en un caso determinado o permita el ' +
-        'examen de los documentos públicos o expida copia de los mismos. Termino para Resolver 10 días </p>',
-    });
   }
 
   iniciarTabla(){
@@ -106,22 +69,10 @@ export class GdDocumentoComponent implements OnInit {
    this.table = $('#dataTables-example').DataTable();
   }
 
-  onNew(){
-    this.formIndex = false;
-    this.formEdit = false;
-    this.formShow = false;
-    this.formPrint = false;
-    this.formAssign = false;
-    this.formNew = true;
-  }
-
   onShow(documento: any){
     this.documento = documento;
     this.formIndex = false;
-    this.formNew = false;
-    this.formEdit = false;
     this.formPrint = false;
-    this.formAssign = false;
     this.formShow = true;
   }
 
@@ -129,25 +80,8 @@ export class GdDocumentoComponent implements OnInit {
     this.documento = documento;
     if (this.documento) {
       this.formIndex = false;
-      this.formNew = false;
-      this.formEdit = false;
       this.formShow = false;
-      this.formAssign = false;
       this.formPrint = true;
-    }
-  }
-
-  ready(isCreado:any){
-    if(isCreado) {
-      this.ngOnInit();
-    }
-  }
-
-  onReadyDocument(documento:any){
-    this.documento = documento;
-    if(this.documento) {
-      this.ngOnInit();
-      this.formSearch = true;
     }
   }
 
@@ -166,7 +100,6 @@ export class GdDocumentoComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.formIndex = true;
-          this.formAssign = false;
           this.documentos = response.data;
 
           if (this.table) {
@@ -233,10 +166,5 @@ export class GdDocumentoComponent implements OnInit {
         );
       }
     })
-  }
-
-  edit(documento: any) {
-    this.documento = documento;
-    this.formEdit = true;
   }
 }

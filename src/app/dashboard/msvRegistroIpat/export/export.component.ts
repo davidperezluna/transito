@@ -30,8 +30,7 @@ export class ExportComponent implements OnInit {
     public table: any = false;
     public ipat = false;
     
-    public file: any;
-    public txt: any[];
+    public txt: any[] = null;
     public valido = true;
 
     public date: any;
@@ -258,16 +257,7 @@ export class ExportComponent implements OnInit {
         }
     }
 
-    onFileChange(event) {
-        if (event.target.files.length > 0) {
-            const fileSelected: File = event.target.files[0];
-
-            this.file = new FormData();
-            this.file.append('file', fileSelected);
-        }
-    }
-
-    async ngAbrirInput() {
+    async onUploadFile() {        
         const { value: files } = await swal({
             title: 'Seleccione el archivo .txt',
             input: 'file',
@@ -276,7 +266,6 @@ export class ExportComponent implements OnInit {
                 'aria-label': 'Upload your profile picture'
             }
         })
-
         if (files) {
             this.txt = [];
             let reader: FileReader = new FileReader();
@@ -285,13 +274,12 @@ export class ExportComponent implements OnInit {
                 let txt: string = reader.result;
                 let allTextLines = txt.split(/\r\n|\n/);
                 for (let i = 0; i < allTextLines.length; i++) {
-                    let data = allTextLines[i].split(',');
+                    let data = allTextLines[i].split(';');
                     if (data.length < 35) {
                         this.valido = false;
                     } else {
                         if (data[0] != '') {
                             this.txt.push(data);
-                            console.log(this.txt);
                         }
                     }
                 }
@@ -301,8 +289,7 @@ export class ExportComponent implements OnInit {
 
     onEnviar(){
         let token = this._LoginService.getToken();
-        this.exportIpat.documento = this.file;
-        this._IpatService.buscarIpat(this.txt, this.exportIpat, token).subscribe(
+        this._IpatService.buscarIpat({"file":this.txt, "datos":this.exportIpat}, token).subscribe(
             
             response => {
                 this.ipats = response.data;

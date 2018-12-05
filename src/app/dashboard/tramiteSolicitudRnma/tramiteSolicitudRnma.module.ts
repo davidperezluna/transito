@@ -40,6 +40,12 @@ import { NewRnmaTransformacionComponent } from './rnma/tramiteTransformacion/new
 import { NewRnmaTramiteCambioAcreedorPrendarioComponent } from './rnma/tramiteCambioAcreedorPrendario/newRnma.CambioAcreedorPrendario.component'; 
 import { NewRnmaTramiteCambioAcreedorPrendarioPropietarioComponent } from './rnma/tramiteCambioAcreedorPrendarioPropietario/newRnma.CambioAcreedorPrendarioPropietario.component'; 
 
+import { NewRnmaImportacionTemporalComponent } from "./rnma/tramiteImportacionTemporal/newRnma.importacionTemporal.component";
+import { NewPropietarioVehiculoComponent } from "./rnma/tramiteImportacionTemporal/newPropietarioVehiculo/newPropietarioVehiculo.component";
+import { NewVehiculoComponent } from "./rnma/tramiteImportacionTemporal/newVehiculo/newVehiculo.component";
+import { NewRnmaProrrogaImportacionTemporalComponent } from "./rnma/tramiteProrrogaImportacionTemporal/newRnma.ProrrogaImprotacionTemporal.component";
+
+
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 
@@ -81,7 +87,11 @@ import { SelectModule } from 'angular2-select';
         NewRnmaTramiteLevantamientoAlertaPrendaComponent,
         NewRnmaTransformacionComponent,
         NewRnmaTramiteCambioAcreedorPrendarioComponent,
-        NewRnmaTramiteCambioAcreedorPrendarioPropietarioComponent
+        NewRnmaTramiteCambioAcreedorPrendarioPropietarioComponent,
+        NewRnmaImportacionTemporalComponent,
+        NewPropietarioVehiculoComponent,
+        NewVehiculoComponent,
+        NewRnmaProrrogaImportacionTemporalComponent,
     ],
     exports: [
         TramiteSolicitudRnmaComponent,
@@ -118,7 +128,11 @@ import { SelectModule } from 'angular2-select';
         NewRnmaTramiteLevantamientoAlertaPrendaComponent,
         NewRnmaTransformacionComponent,
         NewRnmaTramiteCambioAcreedorPrendarioComponent,
-        NewRnmaTramiteCambioAcreedorPrendarioPropietarioComponent
+        NewRnmaTramiteCambioAcreedorPrendarioPropietarioComponent,
+        NewRnmaImportacionTemporalComponent,
+        NewPropietarioVehiculoComponent,
+        NewVehiculoComponent,
+        NewRnmaProrrogaImportacionTemporalComponent,
     ],
     providers:[TramiteSolicitudService,EmpresaService,TramiteTrasladoService,VhloActaTraspasoService]
 })

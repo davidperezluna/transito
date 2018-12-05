@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-3">
                         <label>No. de folios <b class="text-danger">*</b></label>
-                        <input class="form-control" [(ngModel)]="documento.folios" name="folios" type="text">
+                        <input class="form-control" [(ngModel)]="documento.folios" name="folios" type="text" required>
                     </div>
                     <div class="col-xs-12 col-lg-3">
                         <label>Fecha y Hora</label>
@@ -22,188 +22,37 @@
 
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>Tipo Identificacion peticionario<b class="text-danger">*</b></label>
-                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionCiudadanoSelected" name="tipoIdentificacionCiudadano" required>
+                        <label>Tipo Identificacion peticionario</label>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="documento.idTipoIdentificacion" name="tipoIdentificacion">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Identificación peticionario<b class="text-danger">*</b></label>
-                        <div class="input-group">
-                            <input class="form-control" [(ngModel)]="peticionario.identificacion" name="identificacion" type="text">
-                            <span class="input-group-btn">
-                                <button (click)="onSearchCiudadano()" class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
+                        <label>Identificación peticionario</label>
+                        <input class="form-control" [(ngModel)]="documento.identificacion" name="identificacion" type="text">
                     </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <h5 class="alert alert-success" *ngIf="ciudadano">
-                            <strong>Ciudadano encontrado:</strong>
-                            <small>{{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}</small>
-                        </h5>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Nombres</label>
+                        <input class="form-control text-uppercase" [(ngModel)]="documento.peticionarioNombres" name="nombres" type="text">
                     </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Apellidos</label>
+                        <input class="form-control text-uppercase" [(ngModel)]="documento.peticionarioApellidos" name="apellidos" type="text">
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
                         <label>Entidad</label>
-                        <input class="form-control" [(ngModel)]="documento.entidadNombre" name="entidadNombre" type="text">
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Cargo</label>
-                        <input class="form-control" [(ngModel)]="documento.entidadCargo" name="entidadCargo" type="text">
+                        <input class="form-control text-uppercase" [(ngModel)]="documento.entidad" name="entidad" type="text">
                     </div>
                 </div>                
-
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Tipo Correspondencia <b class="text-danger">*</b></label>
-                        <ng-select [multiple]="false" (ngModelChange)="onChangedTipoCorrespondencia($event)" [options]="tiposCorrespondencia" [(ngModel)]="documento.idTipoCorrespondencia" name="tipoCorrespondencia" required>
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-2" *ngIf='editable'>
-                        <label>Vigencia (Días) <b class="text-danger">*</b></label>
-                        <input class="form-control" [(ngModel)]="documento.vigencia" name="vigencia" type="text" required>
-                    </div>
-                    <div  class="col-xs-12 col-lg-2">
-                        <label>No. Oficio </label>
-                        <input class="form-control" [(ngModel)]="documento.numeroOficio" name="medidaCautelarNumeroOficio" type="text">
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Asunto y Concepto <b class="text-danger">*</b></label>
-                        <textarea class="form-control" [(ngModel)]="documento.descripcion" name="descripcion" rows="6" required></textarea>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Adjuntar documento <b class="text-danger">*</b></label>
-                        <input class="form-control" type="file" (change)="onFileChange($event)" required>
-                    </div>
-                </div>
-
-                <hr>
-
-                <h5>Medio de llegada</h5>
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Medio Correspondencia <b class="text-danger">*</b></label>
-                        <ng-select [multiple]="false" [options]="mediosCorrespondencia" [(ngModel)]="documento.idMedioCorrespondenciaLlegada" name="medioCorrespondenciaLlegada" required>
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Fecha llegada <b class="text-danger">*</b></label>
-                        <input class="form-control" [(ngModel)]="documento.fechaLlegada" name="fechaLlegada" type="date" value="{{ date|date:('dd/MM/yyyy') }}" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Detalle de llegada <b class="text-danger">*</b></label>
-                        <textarea class="form-control" [(ngModel)]="documento.detalleLlegada" name="nombreTransportadoraLlegada" required rows="4"  id="summernote"></textarea>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <!-- Formulario medida cautelar -->
-        <div class="row" *ngIf='prohibicion'>
-            <div class="col-xs-12 col-lg-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="text-uppercase">Medida Cautelar</h5>
-                        <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-                        <hr>
-                        <div class="form-group row">
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>No. Oficio <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="medidaCautelar.numeroOficio" name="medidaCautelarnumeroOficio" type="text" required>
-                            </div>
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>Quien Ordena <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="medidaCautelar.quienOrdena" name="quienOrdena" type="text" required>
-                            </div>
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>Fecha Inicio <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="medidaCautelar.fechaInicio" name="fechaInicio" type="date" required>
-                            </div>
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>Fecha Fin <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="medidaCautelar.fechaFin" name="fechaFin" type="date" required>
-                            </div>
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>Identificación Implicado <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="medidaCautelar.identificacionImplicado" name="identificacionImplicado" type="text" required>
-                            </div>
-                            <div  class="col-xs-12 col-lg-6">
-                                <label>Delito <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="medidaCautelar.delito" name="delito" type="text" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button (click)="onCrearProhibicion()" class="btn btn-primary pull-right" type="button">
-                        <i class="fa fa-save"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Formulario medida cautelar -->
-                
-        <!-- Formulario vehiculo -->
-        <div class="row" *ngIf='datosRegistro.medidaCautelar'>
-            <div class="col-xs-12 col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="text-uppercase">Vehiculo</h5>
-                        <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-                        <hr>
-                        <div class="form-group row">
-                            <div  class="col-xs-12 col-lg-3">
-                                <label>Lugar <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="vehiculo.lugar" name="lugar" type="text">
-                            </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Clase Vehiculo <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" name="claseId">
-                                </ng-select>
-                            </div>
-                            <div  class="col-xs-12 col-lg-3">
-                                <label>Placa</label>
-                                <input class="form-control text-uppercase" [(ngModel)]="vehiculo.placa" name="placa" type="text">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button (click)="onCrearVehiculo()" class="btn btn-primary pull-right" type="button">
-                        <i class="fa fa-save"></i>
-                        </button>
-                    </div>
-                    <div class="form-group row" *ngIf='datosRegistro.vehiculo'>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Lugar</th>
-                                    <th>Clase</th>
-                                    <th>placa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd" *ngFor="let vehiculo of datosRegistro.vehiculo; let i = index">
-                                    <td >{{vehiculo.lugar}}</td>
-                                    <td >{{vehiculo.claseId}}</td>
-                                    <td >{{vehiculo.placa}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Formulario medida cautelar -->  
         <div class="form-group row">
             <div  class="col-xs-12 col-lg-12">
                 <button (click)="onCancelar()" class="btn btn-default">
                     <i class="fa fa-times"></i>
                     Cancelar
                 </button>
-                <button (click)="onRegister()" [disabled]="formNew.invalid || !file" class="btn btn-primary" type="button">
+                <button (click)="onRegister()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-save"></i>
                     Enviar
                 </button>
@@ -211,5 +60,3 @@
         </div>
     </form>
 </div>
-
-<app-new-ciudadano *ngIf="formNewCiudadano" [tipoIdentificacion]="tipoIdentificacionPeticionarioSelected" [identificacion]="peticionario.identificacion" (onReadyCiudadano)="onReadyCiudadano($event)"></app-new-ciudadano>
