@@ -230,7 +230,7 @@ export class NewRnrsTraspasoComponent implements OnInit {
                 'nombre':this.empresa.nombre,
                 'permisoTramite':this.datos.solidario,
                 'propietarioPresente':this.propietarioPresente
-                }   
+                }    
             );
         }else{
             this.datos.propietariosEmpresas.push(
@@ -266,7 +266,7 @@ export class NewRnrsTraspasoComponent implements OnInit {
         if (this.apoderado == 'empresa') {
             this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== this.empresaSelected[0]);
             this.datos.propietariosEmpresas.push(
-                {'nit':this.empresaSelected[0].nit,
+                {'nit':this.empresaSelected[0].nit, 
                 'nombre':this.empresaSelected[0].nombre,
                 'permisoTramite':this.empresaSelected[0].permisoTramite,
                 'identificacionApoderado':this.apoderadoSelected.identificacion,

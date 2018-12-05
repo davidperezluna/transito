@@ -98,7 +98,7 @@ export class NewRnrsTramiteCambioAcreedorPrendarioPropietarioComponent implement
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
                 this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rna-traspaso';
+                this.datos.tramiteFormulario = 'rnrs-modificacion-acreedor-prendario-propietario';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }, 
             error => {
@@ -176,7 +176,7 @@ export class NewRnrsTramiteCambioAcreedorPrendarioPropietarioComponent implement
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token, this.nit).subscribe(
+        this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 response = response; 
                 if(response.status == 'success'){

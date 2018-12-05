@@ -347,7 +347,7 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         let nit = {
             'nit': this.nit,
         };
-        this._EmpresaService.showNit(token, this.nit).subscribe(
+        this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
@@ -361,19 +361,9 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
                                 this.acreedorEncontrado = 2;
                                 this.enviarEncontrado = 5;
                                 // if (this.acreedor.empresa) {
-
-                                    this.datos.acreedoresVehiculo.push(
-                                        {
-                                            'identificacion': this.acreedor.empresa.nit,
-                                            'nombre': this.acreedor.empresa.nombre,
-                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
-                                            'gradoAlerta': this.acreedor.gradoAlerta,
-                                            'empresaId': this.acreedor.empresa.id,
-                                        }
-                                    );
                                     this.datos.acreedoresEmpresas.push(
                                         {
-                                            'identificacion': this.acreedor.empresa.nit,
+                                            'nit': this.acreedor.empresa.nit,
                                             'nombre': this.acreedor.empresa.nombre,
                                             'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
                                             'gradoAlerta': this.acreedor.gradoAlerta,
@@ -388,7 +378,7 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
 
                                 console.log(this.acreedor);
                                 this.acreedorEncontrado = 1;
-                                this.listaAcreedoresVehiculo = true;
+                                this.listaAcreedoresEmpresas = true;
                                 //this.ciudadanoNew = false;
                             } else {
                                 this.empresaEncontrada = 3;
@@ -500,21 +490,21 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         }
     }
 
-
-
     changedtipoIdentificacion(e) {
         this.ciudadanoEncontrado = 1;
         this.empresaEncontrada = 1;
     }
 
-
-    delete(acreedor:any): void{
+    delete(acreedor:any){
+        console.log('delete');
         this.datos.acreedoresCiudadanos = this.datos.acreedoresCiudadanos.filter(h => h !== acreedor);
         if (this.datos.acreedoresCiudadanos.length === 0) {
             this.listaAcreedoresCiudadanos = false;
         }
     }
-    deleteEmpresa(empresa: any): void {
+
+    deleteEmpresa(empresa: any){
+        console.log('deleteEmpresa');
         this.datos.acreedoresEmpresas = this.datos.acreedoresEmpresas.filter(h => h !== empresa);
         if (this.datos.acreedoresEmpresas.length === 0) {
             this.listaAcreedoresEmpresas = false;

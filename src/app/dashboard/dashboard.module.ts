@@ -199,6 +199,7 @@ import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasi
 
 
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
+import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 
 import { CuentaModule } from './cuenta/cuenta.module';
@@ -413,7 +414,8 @@ import {RightsidebarComponent} from '../shared';
       RnaPreasignacionInsumoModule,
       CvCfgTipoMedidaCautelarModule,
       CvMedidaCautelarModule,
-      BpProyectoModule
+      BpProyectoModule,
+      RnrsPreasignacionPlacaModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

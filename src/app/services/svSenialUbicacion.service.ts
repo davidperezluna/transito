@@ -17,13 +17,18 @@ export class SvSenialUbicacionService {
 	    return this._http.get(this.url + "/").map(res => res.json());
 	}
 	
-	register(formData, datos, token){
-		let json = JSON.stringify(datos);
-		formData.append('data', json);
-		formData.append('authorization', token);
-
-		console.log(formData);
-		return this._http.post(this.url+"/new", formData).map(res => res.json());
+	register(formData, datos, token) {
+		if (formData == null) {
+			let json = JSON.stringify(datos);
+			let params = "data=" + json + "&authorization=" + token;
+			let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+			return this._http.post(this.url + "/new", params, { headers: headers }).map(res => res.json());
+		} else {
+			let json = JSON.stringify(datos);
+			formData.append('data', json);
+			formData.append('authorization', token);
+			return this._http.post(this.url + "/new", formData).map(res => res.json());
+		}
 	}
 
 	searchByDestino(datos, token) {

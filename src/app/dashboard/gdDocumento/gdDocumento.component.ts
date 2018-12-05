@@ -26,12 +26,19 @@ export class GdDocumentoComponent implements OnInit {
   public table: any = null; 
   public documento: GdDocumento;
 
-  public peticionario: any = {
-    'idTipoPeticionario': null,
-    'identificacion': null,
-    'entidadNombre': null,
-    'numeroOficio': null
+  public filtro: any= null;
+
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
   }
+
+  public tiposFiltro = [
+    { 'value': '1', 'label': 'Nombres o Apellidos' },
+    { 'value': '2', 'label': 'Identificación' },
+    { 'value': '3', 'label': 'Entidad' },
+    { 'value': '4', 'label': 'No. de radicado' },
+  ];
 
   constructor(
     private _DocumentoService: GdDocumentoService,
@@ -39,8 +46,6 @@ export class GdDocumentoComponent implements OnInit {
     ){}
     
   ngOnInit() {    
-    this.peticionario.idTipoPeticionario = 'Persona';
-
     if (this.table) {
       this.table.destroy();
     }
@@ -156,7 +161,8 @@ export class GdDocumentoComponent implements OnInit {
     });
 
     let token = this._loginService.getToken();
-    this._DocumentoService.search(this.peticionario, token).subscribe(
+    
+    this._DocumentoService.search(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.formIndex = true;
@@ -171,12 +177,7 @@ export class GdDocumentoComponent implements OnInit {
             this.iniciarTabla();
           }, 100);
 
-          swal({
-            title: 'Perfecto',
-            type: 'info',
-            text: response.message,
-            showCloseButton: true,
-          });
+          swal.close();
         } else {
           swal({
             title: 'Alerta',
@@ -184,6 +185,8 @@ export class GdDocumentoComponent implements OnInit {
             text: response.message,
             showCloseButton: true,
           });
+
+          this.documentos = null;
         }
       error => {
         this.errorMessage = <any>error;

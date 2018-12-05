@@ -1,39 +1,81 @@
 <div class="container">
     <hr>
-    
     <div class="row" *ngIf='formIndex'>
         <div class="col-xs-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <h5 class="text-uppercase">
                         <strong>Documentos Encontrados</strong>
+                        <div class="btn-group pull-right">
+                            <button class="btn btn-xs btn-danger">
+                                PENDIENTE
+                            </button>
+                            <button class="btn btn-xs btn-primary">
+                                ASIGNADO
+                            </button>
+                            <button class="btn btn-xs btn-warning">
+                                EN TRAMITE
+                            </button>
+                            <button class="btn btn-xs btn-success">
+                                FINALIZADO
+                            </button>
+                        </div>
                     </h5>
                 </div>
                 <div class="card-body container">
                     <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>Peticionario</th>
-                                <th>Tipo correspondencia</th>
-                                <th>Radicado No.</th>
-                                <th>Estado</th>
-                                <th>Fecha radicado</th>
-                                <th>Fecha vencimiento</th>
+                                <th>Detalles</th>
+                                <th>Fechas</th>
+                                <th>Responsable</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
-                                <td>{{ trazabilidad.documento.peticionario.usuario.primerNombre }} {{ trazabilidad.documento.peticionario.usuario.primerApellido }}</td>
-                                <td>{{ trazabilidad.documento.tipoCorrespondencia.nombre }}</td>
+                                <td class="btn btn-danger" *ngIf="trazabilidad.documento.estado == 'PENDIENTE'">{{ i + 1 }}</td>
+                                <td class="btn btn-primary" *ngIf="trazabilidad.documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
+                                <td class="btn btn-warning" *ngIf="trazabilidad.documento.estado == 'EN TRAMITE'">{{ i + 1 }}</td>
+                                <td class="btn btn-success" *ngIf="trazabilidad.documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
                                 <td>
+                                    <span *ngIf="trazabilidad.documento.peticionarioNombres">
+                                        {{ trazabilidad.documento.peticionarioNombres }} {{ trazabilidad.documento.peticionarioApellidos }}
+                                        <br>
+                                    </span>
+                                    <span *ngIf="trazabilidad.documento.identificacion">
+                                        {{ trazabilidad.documento.identificacion }}
+                                        <br>
+                                    </span>
+                                    <span *ngIf="trazabilidad.documento.entidadNombre">
+                                        {{ trazabilidad.documento.entidadNombre }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <b>No. radicado:</b>
                                     <a href="{{docsUrl}}{{ trazabilidad.documento.url }}" target="_blank">
                                         {{ trazabilidad.documento.numeroRadicado }}
                                     </a>
+                                    <br>
+                                    <span *ngIf="trazabilidad.documento.tipoCorrespondencia">
+                                        <b>Tipo:</b> {{ trazabilidad.documento.tipoCorrespondencia.nombre }}
+                                        <br>
+                                    </span>
+                                    <b>Estado:</b>
+                                    {{ trazabilidad.estado }}
                                 </td>
-                                <td>{{ trazabilidad.estado }}</td>
-                                <td>{{ trazabilidad.documento.fechaRegistro }}</td>
-                                <td>{{ trazabilidad.documento.fechaVencimiento }}</td>
+                                <td>
+                                    <b>F. radicado:</b>{{ trazabilidad.documento.fechaRegistro }}
+                                    <br>
+                                    <b>F. vencimiento:</b>{{ trazabilidad.documento.fechaVencimiento }}
+                                </td>
+                                <td>
+                                    {{ trazabilidad.responsable.ciudadano.usuario.primerNombre }} {{ trazabilidad.responsable.ciudadano.usuario.primerApellido }}
+                                    <br>
+                                     {{ trazabilidad.responsable.cargo.nombre }}
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <button (click)="onShow(trazabilidad)" class="btn btn-xs btn-primary" type="button" *ngIf="trazabilidad.estado == 'PENDIENTE'">
@@ -55,12 +97,11 @@
     </div>
     <div class="row" *ngIf='!formIndex && !trazabilidades'>
         <div class="col-xs-12 col-lg-12">
-            <div class="alert alert-info">
-                <h4 class="text-uppercase text-center">
-                    <i class="fa fa-check-circle fa-2x"></i>
-                    <br>
-                    <strong>Usted no tiene documentos asignados pendientes por tramitar.</strong>
-                </h4>
+            <div class="alert alert-warning text-uppercase text-center">
+                <i class="fa fa-exclamation-triangle fa-2x"></i>
+                <b>
+                    Usted no tiene documentos asignados pendientes por tramitar.
+                </b>
             </div>
         </div>
     </div>

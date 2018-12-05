@@ -32,15 +32,6 @@
                         <div class="col-xs-12 col-lg-12">
                             <label><h5>Datos Documento soporte</h5></label>
                         </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Tipo Documento Soporte*</label>
-                            <ng-select [multiple]="false" [options]="tiposDocumentoSoporte" [(ngModel)]="datos.tipoDocumentoSoporte" name="tipoDocumentoSoporte" required>
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-6 col-lg-6">
-                            <label>Número documento<span class="text-danger">*</span></label>
-                            <input class="form-control" [(ngModel)]="datos.numeroDocumento" name="numeroDocumento" type="text" required />
-                        </div> 
                         <div class="col-xs-6 col-lg-6">
                             <label>Nombre empresa</label>
                             <input class="form-control" [(ngModel)]="datos.nombreEmpresa" name="nombreEmpresa" type="text" required />
@@ -50,15 +41,24 @@
                             <input class="form-control" [(ngModel)]="datos.fechaFactura" name="fechaFactura" type="date" required/>
                         </div>
                         <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Documento Soporte*</label>
+                            <ng-select [multiple]="false" [options]="tiposDocumentoSoporte" [(ngModel)]="datos.tipoDocumentoSoporte" name="tipoDocumentoSoporte" required>
+                            </ng-select>
+                        </div>
+                        
+                        <div class="col-xs-6 col-lg-6">
+                            <label>Número factura<span class="text-danger">*</span></label>
+                            <input class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" type="text" required />
+                        </div>  
+                        <div class="col-xs-12 col-lg-6">
                             <label>Tipo Documento*</label>
                             <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="datos.tipoDocumento" name="tipoDocumento" required>
                             </ng-select>
                         </div>
-
                         <div class="col-xs-6 col-lg-6">
-                            <label>Número factura<span class="text-danger">*</span></label>
-                            <input class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" type="text" required />
-                        </div>                         
+                            <label>Número documento<span class="text-danger">*</span></label>
+                            <input class="form-control" [(ngModel)]="datos.numeroDocumento" name="numeroDocumento" type="text" required />
+                        </div>                   
                     </div>
                     </form>
                 </div>

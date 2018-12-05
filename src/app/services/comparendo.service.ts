@@ -60,11 +60,11 @@ export class ComparendoService {
 							  .map(res => res.json());
 	}
 	
-	searchComparendosCiudadano(ciudadano, token) {
-		let json = JSON.stringify(ciudadano);
+	searchByInfractor(datos, token) {
+		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/ciudadano/search", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/infractor", params, { headers: headers }).map(res => res.json());
 	}
 
 	searchByState(datos, token) {

@@ -5,8 +5,8 @@ import { LoginService } from '../../services/login.service';
 import { FacturaInfraccion } from './facturaInfraccion.modelo';
 import { TipoIdentificacionService } from '../../services/tipoIdentificacion.service';
 import { CiudadanoService } from '../../services/ciudadano.service';
-import swal from 'sweetalert2';
 import { ComparendoService } from '../../services/comparendo.service';
+import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
@@ -22,7 +22,7 @@ export class FacturaInfraccionComponent implements OnInit {
 	public facturaInfracciones;
 	public identificacion = false;
   public table:any; 
-  public comparendos:any; 
+  public comparendos:any = null; 
   public ciudadano:any; 
   public tipoIdentificaciones:any; 
   public facturaInfraccion: FacturaInfraccion;
@@ -129,47 +129,37 @@ export class FacturaInfraccionComponent implements OnInit {
 
   onKeyCiudadano(){
     let token = this._loginService.getToken();
-    let identificacion = {
-      'numeroIdentificacion' : this.identificacion,
-    };
-    this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.ciudadano = this.respuesta.data;
-                let ciudadano = {
-                  'ciudadanoId': this.ciudadano.id,
-                  }
-                  this._ComparendoService.searchComparendosCiudadano(ciudadano, token).subscribe(
-                      response => {
-                          this.comparendos = response.data;
-                          console.log(this.comparendos);
-                          this.ciudadanoEncontrado= 2;
-
-                      },
-                      error => {
-                          this.errorMessage = <any>error;
-          
-                          if (this.errorMessage != null) {
-                              console.log(this.errorMessage);
-                              alert('Error en la petición');
-                          }
-                      }
-                  );
-        }else{
-            this.ciudadanoEncontrado=3;
-        }
-        error => {
-                this.errorMessage = <any>error;
-            
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-    }); 
-
     
+    this._ComparendoService.searchByInfractor({ 'infractorIdentificacion': this.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+          this.comparendos = response.data;
+          this.ciudadanoEncontrado = 2;
+        }else{
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+          this.comparendos = null;
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );   
   }
 
   onInfraccionSelect(valor:any,eve: any){

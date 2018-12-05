@@ -71,12 +71,20 @@ export class CfgPlacaService {
 
 	getCfgPlacaPorSedeOperativa(token, id) {
 		console.log(id);
-		
 		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/select/placas/por/sedeOperativa/" + id, 
 		 { headers: headers })
 			.map(res => res.json());
+	}
+
+	getCfgPlacaRnrs(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;	
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/select/placas/por/sedeOperativa/rnrs", params, { headers: headers }).map(
+			res => res.json(),
+		);
 	}
 
 } 

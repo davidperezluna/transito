@@ -97,6 +97,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     enviarTramite(){
         this.datos.vehiculo = this.vehiculo.placa;
         this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-matriculainicial';
         let token = this._loginService.getToken(); 
         
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(

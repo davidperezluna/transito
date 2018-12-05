@@ -1,6 +1,7 @@
-export class SvSenialMunicipio{
+export class SvSenialUbicacion{
 	constructor(
 		public fecha: string,
+		public hora: string,
 		public latitud: string,
 		public longitud: string,
 		public via1: string,
@@ -11,8 +12,6 @@ export class SvSenialMunicipio{
 		public no3: string,
 		public direccion: string,
 		public cantidad: number,
-		public valor: number,
-		public idTipoSenial: number,
 		public idConector: number,
 		public idSenial: number,
 		public idEstado: number,

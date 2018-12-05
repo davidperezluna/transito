@@ -19,24 +19,14 @@ export class GdDocumentoService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(formData, datos, token) {	
-		if (formData == null) {
-			let json = JSON.stringify(datos);
-			let params = "data=" + json + "&authorization=" + token;
-			let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-			return this._http.post(this.url + "/new", params, { headers: headers }).map(
-				res => res.json(),
-				this._loogerService.registerLog(token, 'INSERT', json, this.url)
-			);
-		} else {
-			let json = JSON.stringify(datos);
-			formData.append('data', json);
-			formData.append('authorization', token);
-			return this._http.post(this.url + "/new", formData).map(
-				res => res.json(),
-				this._loogerService.registerLog(token, 'INSERT', json, this.url)
-			);
-		}
+	register(datos, token) {	
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/new", params, { headers: headers }).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'INSERT', json, this.url)
+		);
 	}
 
 	delete(datos, token){
@@ -68,11 +58,14 @@ export class GdDocumentoService {
 		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
 	}
 
-	assign(datos, token){
+	assign(formData, datos, token){	
 		let json = JSON.stringify(datos);
-		let params = "data="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/assign", params, {headers: headers}).map(res => res.json());
+		formData.append('data', json);
+		formData.append('authorization', token);
+		return this._http.post(this.url + "/assign", formData).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'INSERT', json, this.url)
+		);
 	}
 	
 	print(datos, token){

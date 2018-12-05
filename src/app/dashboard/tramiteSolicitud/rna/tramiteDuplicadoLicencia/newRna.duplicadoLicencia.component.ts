@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { SustratoService } from '../../../../services/sustrato.service';
+import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../../../services/login.service';
 
-import swal from 'sweetalert2';
 
 @Component({
     selector: 'appRna-duplicado-licencia',
@@ -13,6 +11,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
+    @Input() solicitanteId: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
 
@@ -25,18 +24,41 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         'numeroLicenciaActual': null,
         'nuevaLicencia': null,
     };
-
+ 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
+        private _RncLicenciaConduccionService: RncLicenciaConduccionService,
+        private _LoginService: LoginService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        let datos = {
+            'idSolicitante': this.solicitanteId
+        }
+        let token = this._LoginService.getToken();
+        this._RncLicenciaConduccionService.searchLicenciaActual(datos,token).subscribe(
+            response => {
+            if(response.status == 'success'){
+                this.datos.numeroLicenciaActual = response.data.numero;
+                console.log(response);
+            }else{
+                
+            }
+            error => {
+                    this.errorMessage = <any>error;
+                
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+        }); 
+     }
     
     enviarTramite() {
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-duplicadolicencia';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

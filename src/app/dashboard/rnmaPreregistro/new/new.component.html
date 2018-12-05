@@ -7,7 +7,27 @@
                     <form #newForm="ngForm" >
                     <div  class="row justify-content-center">
                         <div class="container">
+                            <div class="btn-group-vertical" data-toggle="buttons">
+                                <button (click)="onRadicado() "type="button" class="btn btn-primary" aria-pressed="true">{{btnRadicado}}</button>
+                            </div>
+                            <br>
+                            <br>
+                            <h2>{{btnRadicado}}</h2>
+                            <div class="form-group row" *ngIf='!radicado'>
+                                <div class="col-lg-12">
+                                    <label>Valor<b class="text-danger">*</b></label>
+                                    <input class="form-control" placeholder="" type="text" [(ngModel)]="registroMaquinaria.valor" name="valor" >
+                                </div>
+                            </div>
                             <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Fecha Factura<b class="text-danger">*</b></label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.fechaFactura" name="fechaFactura" type="date" >
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>No Factura de compra<b class="text-danger">*</b></label>
+                                    <input class="form-control" placeholder="" [(ngModel)]="registroMaquinaria.numeroFactura" name="numeroFactura" type="text" required>
+                                </div>
                                 <div class="col-lg-3 col-md-3">
                                     <label>Placa <b class="text-danger">*</b></label> 
                                     <input class="form-control" [(ngModel)]="registroMaquinaria.placa" name="placa" type="text" required>
@@ -94,7 +114,6 @@
                                     <label>Nro. llantas <b class="text-danger">*</b></label>
                                     <input class="form-control" [(ngModel)]="registroMaquinaria.numeroLlantas" name="numeroLlantas" type="text" required>
                                 </div>
-
                                 <div class=" col-md-3">
                                     <label>Tipo cabina <b class="text-danger">*</b></label>
                                     <ng-select [multiple]="false" [options]="tiposCabina" [(ngModel)]="registroMaquinaria.idTipoCabina" required name="tipoCabina">

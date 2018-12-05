@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ComparendoService } from '../../../services/comparendo.service';
 import { Comparendo } from '../comparendo.modelo';
 import swal from 'sweetalert2';
-import { Inmovilizacion } from '../inmovilizacion.modelo';
 declare var $: any;
 
 @Component({
@@ -18,7 +17,6 @@ export class ExportComponent implements OnInit {
     public formIndex = true;
     public table: any;
     public comparendos: Comparendo;
-    public inmovilizacion: Inmovilizacion;
 
     constructor(
         private _ComparendoService: ComparendoService,

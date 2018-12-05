@@ -35,16 +35,17 @@ export class NewRegistroMaquinariaComponent implements OnInit {
   public carrocerias:any;
   public combustibles:any;
   public servicios:any;
-
+  public radicado=false;
   public origenesRegistro:any;
   public condicionesIngreso:any;
   public tiposMaquinaria:any;
   public tiposRodaje:any;
+  public persona:any='empresa';
   public tiposCabina:any;
   public clasesMaquinaria:any = null;
   public empresasGps:any;
   public subpartidasArancelarias:any;
-
+  public btnRadicado:string = "Preregistro para matricula inicial";
 constructor(
   private _RegistroMaquinariaService: RnmaPreregistroService,
   private _LoginService: LoginService,
@@ -65,8 +66,7 @@ constructor(
 ){}
 
 ngOnInit() {
-  this.registroMaquinaria = new RnmaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-  
+  this.registroMaquinaria = new RnmaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   this._ColorService.select().subscribe(
     response => {
       this.colores = response;
@@ -220,7 +220,6 @@ ngOnInit() {
         }
       }
     );
-    
   }
 
   onCancelar(){
@@ -345,6 +344,18 @@ ngOnInit() {
           }
         }
       );
+    }
+  }
+
+  onRadicado(){
+    if(this.radicado) {
+      this.radicado = false; 
+      this.btnRadicado = "Preregistro para matricula inicial";
+      console.log(this.btnRadicado);
+    }else{
+      this.btnRadicado = "Preregistro para radicado de cuenta";
+      console.log(this.btnRadicado);
+      this.radicado = true; 
     }
   }
 }

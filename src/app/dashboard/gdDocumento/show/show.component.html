@@ -27,35 +27,83 @@
                                 <label>Hora <b>{{ date|date:('HH:mm:ss a') }}</b></label>
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Peticionario: <b>{{ documento.peticionario.usuario.primerNombre }} {{ documento.peticionario.usuario.primerApellido }}</b></label>
+                            <div class="col-xs-12 col-lg-4" *ngIf="documento.peticionarioNombres">
+                                <label>Peticionario:
+                                    <b>{{ documento.peticionarioNombres }} {{ documento.peticionarioApellidos }}</b>
+                                </label>
                             </div>
-                            <div class="col-xs-12 col-lg-4">
-                                <label>Cedula: <b>{{ documento.peticionario.usuario.identificacion }}</b></label>
+                            <div class="col-xs-12 col-lg-4" *ngIf="documento.identificacion">
+                                <label>Identificación:
+                                    <b>{{ documento.identificacion }}</b>
+                                </label>
                             </div>
-                            <div class="col-xs-12 col-lg-4" *ngIf="documento.peticionario.entidadNombre">
-                                <label>Entidad: <b>{{ documento.peticionario.entidadNombre }}</b></label>
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Dirección: <b>{{ documento.peticionario.direccion }}</b></label>
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Teléfono: <b>{{ documento.peticionario.telefono }}</b></label>
-                            </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <label>Correo: <b>{{ documento.peticionario.correoElectronico }}</b></label>
+                            <div class="col-xs-12 col-lg-4" *ngIf="documento.entidadNombre">
+                                <label>Entidad:
+                                    <b>{{ documento.entidadNombre }}</b>
+                                </label>
                             </div>
                         </div>
-    
+
                         <div class="form-group row">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Tipo de Correspondencia: <b>{{ documento.tipoCorrespondencia.nombre }}</b></label>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo Correspondencia
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <ng-select [multiple]="false" (ngModelChange)="onChangedTipoCorrespondencia($event)" [options]="tiposCorrespondencia" [(ngModel)]="documento.idTipoCorrespondencia"
+                                    name="tipoCorrespondencia" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-2" *ngIf='editable'>
+                                <label>Vigencia (Días)
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <input class="form-control" [(ngModel)]="documento.vigencia" name="vigencia" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-2">
+                                <label>No. Oficio </label>
+                                <input class="form-control" [(ngModel)]="documento.numeroOficio" name="medidaCautelarNumeroOficio" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-12">
-                                <label>Asunto y Concepto:</label>
-                                <p class="text-justify"><b>{{ documento.descripcion }}</b></p>
+                                <label>Asunto y Concepto
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <textarea class="form-control" [(ngModel)]="documento.descripcion" name="descripcion" rows="6" required></textarea>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Adjuntar documento
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <input class="form-control" type="file" (change)="onFileChange($event)" required>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        
+                        <h5>Medio de llegada</h5>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Medio Correspondencia
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <ng-select [multiple]="false" [options]="mediosCorrespondencia" [(ngModel)]="documento.idMedioCorrespondenciaLlegada" name="medioCorrespondenciaLlegada"
+                                    required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha llegada
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <input class="form-control" [(ngModel)]="documento.fechaLlegada" name="fechaLlegada" type="date" value="{{ date|date:('dd/MM/yyyy') }}"
+                                    required>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Detalle de llegada
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <textarea class="form-control" [(ngModel)]="documento.detalleLlegada" name="nombreTransportadoraLlegada" required rows="4"
+                                    id="summernote"></textarea>
                             </div>
                         </div>
 

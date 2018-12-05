@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { GdDocumentoComponent } from '.';
 import { TemplateComponent } from '.';
+import { SearchComponent } from '.';
 
 export const GdDocumentoRoutes: Route[] = [
     {
@@ -11,6 +12,11 @@ export const GdDocumentoRoutes: Route[] = [
     {
       path: 'documentotemplate',
       component: TemplateComponent
+    },
+
+    {
+      path: 'documentosearch',
+      component: SearchComponent
     }
 ];
  
