@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitud } from '../tramiteSolicitud.modelo';
 import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
@@ -30,60 +30,76 @@ export class NewRnaComponent implements OnInit {
   public tramiteSelected: any;
   public mensaje = '';
   public isError = false;
-  public ciudadanosVehiculo=false;
-  public isCiudadano=false;
-  public isEmpresa=false;
+  public ciudadanosVehiculo = false;
+  public isCiudadano = false;
+  public isEmpresa = false;
   public ciudadano: any = false;
-  public vehiculoSuccess=false;
-  public tipoError=200;
-  public error=false;
-  public msj='';
-  public tramites='';
-  public tramitePreasignacion=false;
-  public tramiteMatriculaInicial=false;
-  public tramite=false;
-  public sustrato=false;
-  public isTramites:boolean=true;
-  public isMatricula:boolean=false;
-  public apoderadoSelect=false;
-  public apoderadoEncontrado=1;
-  public frmApoderado=false;
-  public identificacionApoderado=false;
-  public apoderado:any=false;
-  
+  public vehiculoSuccess = false;
+  public tipoError = 200;
+  public error = false;
+  public msj = '';
+  public tramites = '';
+  public tramitePreasignacion = false;
+  public tramiteMatriculaInicial = false;
+  public tramite = false;
+  public sustrato = false;
+  public isTramites: boolean = true;
+  public isMatricula: boolean = false;
+  public apoderadoSelect = false;
+  public apoderadoEncontrado = 1;
+  public frmApoderado = false;
+  public identificacionApoderado = false;
+  public apoderado: any = false;
+
+  public importacion: any;
   public cantidadSustrato = 1;
   public moduloId = 1;
-  public resumen = {};     public datos = {
+  public resumen = {}; public datos = {
     'moduloId': null,
     'idFactura': null,
     'vehiculoId': null,
   };
-constructor(
-  private _TramiteSolicitudService: TramiteSolicitudService,
-  private _loginService: LoginService,
-  private _tramiteFacturaService: TramiteFacturaService,
-  private _facturaService: FacturaService,
-  private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _ciudadanoService: CiudadanoService,
-  private _VehiculoService: VehiculoService,
-){}
+  constructor(
+    private _TramiteSolicitudService: TramiteSolicitudService,
+    private _loginService: LoginService,
+    private _tramiteFacturaService: TramiteFacturaService,
+    private _facturaService: FacturaService,
+    private _ciudadanoVehiculoService: CiudadanoVehiculoService,
+    private _ciudadanoService: CiudadanoService,
+    private _VehiculoService: VehiculoService,
+  ) { }
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null,null,null,null);
+    this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null, null);
+    swal({
+      title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.importacion = 'Si';
+      } else if (result.dismiss === swal.DismissReason.cancel) {
+        this.importacion = 'No';
+      }
+    });
   }
-  onCancelar(){
+  onCancelar() {
     this.ready.emit(true);
   }
-  onEnviar(){
+  onEnviar() {
     let token = this._loginService.getToken();
-    
+
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
 
-		this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
-			response => {
+    this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
+      response => {
         this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if (this.respuesta.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -91,100 +107,14 @@ constructor(
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
-        }else{
+        } else {
           swal({
             title: 'Error!',
-            text: 'El tramiteSolicitud '+  +' ya se encuentra registrada',
+            text: 'El tramiteSolicitud ' + +' ya se encuentra registrada',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		});
-  }
-
-  onSearchFactura(id){
-    if (id) {
-      this.datos.idFactura = id;
-      this.datos.moduloId = this.moduloId;
-      this.datos.vehiculoId = this.vehiculo.id;
-      
-      this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
-        response => {
-          this.isMatricula=false;
-          let active = true;
-          let token = this._loginService.getToken();
-          
-        this.tramitesFactura = response;
-        this.tramitesFactura.forEach(tramiteFactura => {
-          if (tramiteFactura.realizado == 0) {
-            active = false;
-          }else{
-            //consultar tramite solicitud con el id de tramite factura
-            //hacer un push array para extraer todas las solicitudes en estado realizado
-          }
-          
-          if (tramiteFactura.tramitePrecio.tramite.sustrato) {
-            this.sustrato = true;
-          }
-
-          if (tramiteFactura.tramitePrecio.tramite.formulario == 'rna-matriculainicial'){
-            this.isMatricula = true;
-          }else{
-            this.isMatricula = false;
-          }
-          console.log(tramiteFactura.tramitePrecio.tramite.formulario);
-        });
-        
-        if (active) {
-          this.isTramites = false;
-        }
-
-        if (this.tramiteSolicitud.solicitanteId) {
-          this._ciudadanoVehiculoService.showCiudadanoVehiculo(token,this.tramiteSolicitud.solicitanteId).subscribe(
-            responseCiudadano =>{
-              if (responseCiudadano.status == 'success') {
-                this.ciudadano = responseCiudadano.data.ciudadano;
-                this.factura = response[0].factura;
-                console.log("-------------------------------------------------------------------------------------------------------");
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
-            }
-          );
-        }else{          
-          if(this.isMatricula){
-            this.factura = response[0].factura;
-          }else{
-            if(this.tramiteSolicitud.importacion == "Si") {
-              console.log(this.ciudadano);
-              this.factura = response[0].factura;
-              console.log("*******************");
-            }
-            else {
-                this.factura = false;
-                swal({
-                  title: 'Error!',
-                  text: 'Seleccionar solicitante',
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                }); 
-              }
-            }
-        }
-        
         error => {
           this.errorMessage = <any>error;
           if (this.errorMessage != null) {
@@ -192,11 +122,101 @@ constructor(
             alert("Error en la petición");
           }
         }
+
       });
+  }
+
+  onSearchFactura(id) {
+    swal({
+      title: 'Buscando Factura!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+    if (id) {
+      this.datos.idFactura = id;
+      this.datos.moduloId = this.moduloId;
+      this.datos.vehiculoId = this.vehiculo.id;
+
+      this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
+        response => {
+          this.isMatricula = false;
+          let active = true;
+          let token = this._loginService.getToken();
+
+          this.tramitesFactura = response;
+          this.tramitesFactura.forEach(tramiteFactura => {
+            if (tramiteFactura.realizado == 0) {
+              active = false;
+            } else {
+              //consultar tramite solicitud con el id de tramite factura
+              //hacer un push array para extraer todas las solicitudes en estado realizado
+            }
+
+            if (tramiteFactura.tramitePrecio.tramite.sustrato) {
+              this.sustrato = true;
+            }
+
+            if (tramiteFactura.tramitePrecio.tramite.formulario == 'rna-matriculainicial') {
+              this.isMatricula = true;
+            } else {
+              this.isMatricula = false;
+            }
+            console.log(tramiteFactura.tramitePrecio.tramite.formulario);
+          });
+
+          if (active) {
+            this.isTramites = false;
+          }
+          swal.close();
+          if (this.tramiteSolicitud.solicitanteId) {
+            this._ciudadanoVehiculoService.showCiudadanoVehiculo(token, this.tramiteSolicitud.solicitanteId).subscribe(
+              responseCiudadano => {
+                if (responseCiudadano.status == 'success') {
+                  this.ciudadano = responseCiudadano.data.ciudadano;
+                  this.factura = response[0].factura;
+                }
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+              }
+            );
+          } else {
+            if (this.isMatricula) {
+              this.factura = response[0].factura;
+            } else {
+              if (this.importacion == "Si") {
+                this.factura = response[0].factura;
+              }
+              else {
+                this.factura = false;
+                swal({
+                  title: 'Error!',
+                  text: 'Seleccionar solicitante',
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            }
+          }
+
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        });
     }
   }
-  
-  onKeyValidateVehiculo(){
+
+  onKeyValidateVehiculo() {
     this.msj = '';
     this.mensaje = '';
     swal({
@@ -214,96 +234,94 @@ constructor(
     })
     let token = this._loginService.getToken();
 
-     this._VehiculoService.showVehiculoRna(this.tramiteSolicitud.vehiculoId,token).subscribe(
+    this._VehiculoService.showVehiculoRna(this.tramiteSolicitud.vehiculoId, token).subscribe(
       response => {
-        if (response.status == 'success' ) { 
+        if (response.status == 'success') {
           this.isCiudadano = true
           this.ciudadanosVehiculo = response.propietarios;
           this.vehiculo = response.vehiculo;
-          this.vehiculoSuccess=true;
+          this.vehiculoSuccess = true;
           this.isMatricula = true;
-          this.msj ='vehiculo encontrado';
+          this.msj = 'vehiculo encontrado';
           this.error = false;
           this.isError = false;
           swal.close();
-        }else{
+        } else {
           this.vehiculoSuccess = false;
-          this.msj ='vehiculo no encontrado encontrado';
+          this.msj = 'vehiculo no encontrado encontrado';
           this.error = true;
           this.isError = true;
           swal.close();
         }
-        error => { 
-            this.errorMessage = <any>error;
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición"); 
-            }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
+        }
       });
-    }
+  }
 
-    // this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
-    //   response => {
-    //     this.ciudadanosVehiculo = response.data;
-    //     if (response.status == 'error' ) { 
-    //       this.isCiudadano = false;
-    //       if(response.code == 401){
-    //         this.vehiculoSuccess=false;
-    //         this.msj= response.msj;
-    //         this.isError = true;
-    //         this.error = true;
-    //         this.tipoError = response.code; 
-    //         swal.close();
-    //       }else{
-    //         this.vehiculo = response.data;
-    //         this.vehiculoSuccess=true;
-    //         this.isMatricula = true;
-    //         this.msj ='vehiculo encontrado';
-    //         this.error = false;
-    //         this.isError = false;
-    //         swal.close();
-    //       }
-    //     }else{
-    //       swal.close();
-    //       this.vehiculo = response.data[0].vehiculo;
-    //       // se busca las faturas si el vehiculo fue encontrado
-    //       this.vehiculoSuccess = true;
-    //             this.msj ='vehiculo encontrado';
-    //             this.error = false;
-    //             this.isError = false;
-    //             swal.close();
-    //             response.data.forEach(element => {
-    //               if (element.ciudadano) {
-    //                 this.isCiudadano = true;
-    //               }
-    //               if(element.empresa){
-    //                 this.isEmpresa = true;
-    //               }
-    //             });
-    //           }
-    //         error => { 
-    //             this.errorMessage = <any>error;
-    //             if(this.errorMessage != null){
-    //               console.log(this.errorMessage);
-    //               alert("Error en la petición"); 
-    //             }
-    //           }
-    //       });
-    //     }
+  // this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
+  //   response => {
+  //     this.ciudadanosVehiculo = response.data;
+  //     if (response.status == 'error' ) { 
+  //       this.isCiudadano = false;
+  //       if(response.code == 401){
+  //         this.vehiculoSuccess=false;
+  //         this.msj= response.msj;
+  //         this.isError = true;
+  //         this.error = true;
+  //         this.tipoError = response.code; 
+  //         swal.close();
+  //       }else{
+  //         this.vehiculo = response.data;
+  //         this.vehiculoSuccess=true;
+  //         this.isMatricula = true;
+  //         this.msj ='vehiculo encontrado';
+  //         this.error = false;
+  //         this.isError = false;
+  //         swal.close();
+  //       }
+  //     }else{
+  //       swal.close();
+  //       this.vehiculo = response.data[0].vehiculo;
+  //       // se busca las faturas si el vehiculo fue encontrado
+  //       this.vehiculoSuccess = true;
+  //             this.msj ='vehiculo encontrado';
+  //             this.error = false;
+  //             this.isError = false;
+  //             swal.close();
+  //             response.data.forEach(element => {
+  //               if (element.ciudadano) {
+  //                 this.isCiudadano = true;
+  //               }
+  //               if(element.empresa){
+  //                 this.isEmpresa = true;
+  //               }
+  //             });
+  //           }
+  //         error => { 
+  //             this.errorMessage = <any>error;
+  //             if(this.errorMessage != null){
+  //               console.log(this.errorMessage);
+  //               alert("Error en la petición"); 
+  //             }
+  //           }
+  //       });
+  //     }
 
-  readyTramite(datos:any){
-    
-    this.tramiteSolicitud.datos=datos;
-    this.tramiteSolicitud.vehiculoId=this.vehiculo.id;
-    this.tramiteSolicitud.ciudadanoId=this.apoderado.id;
+  readyTramite(datos: any) {
+
+    this.tramiteSolicitud.datos = datos;
+    this.tramiteSolicitud.vehiculoId = this.vehiculo.id;
+    this.tramiteSolicitud.ciudadanoId = this.apoderado.id;
 
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') { 
+        if (response.status == 'success') {
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
@@ -315,7 +333,7 @@ constructor(
         } else {
           swal({
             title: 'Error!',
-            text: 'El tramiteSolicitud ' + +' ya se encuentra registrada',
+            text: 'El tramiteSolicitud ' + +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -327,105 +345,105 @@ constructor(
             alert("Error en la petición");
           }
         }
-      }); 
+      });
   }
 
-  cancelarTramite(){
+  cancelarTramite() {
     this.tramiteSelected = false;
     this.error = false;
   }
 
-  finalizarSolicitud(){
-    
+  finalizarSolicitud() {
+
     let token = this._loginService.getToken();
-    this.tramites='';
+    this.tramites = '';
     this.tramitesFactura.forEach(tramiteFactura => {
-      this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>' 
+      this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>'
     });
 
-          var html = 'Se va a enviar la siguiente solicitud:<br>'+
-                    'Factura: <b>'+this.factura.numero+'</b><br>'+
-                    'Vehiculo: <b>'+this.vehiculo.placa+'</b><br>'+
-                    'Solicitante: <b>'+this.ciudadano.usuario.identificacion+'</b><hr>'+
-                    'Tramites:<br>'+
-                    this.tramites  
-          swal({
-            title: 'Resumen',
-            type: 'warning',
-            html:html,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Aceptar!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
-            cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i> Cancelar',
-            cancelButtonAriaLabel: 'Thumbs down',
-          }).then((result) => {
-            if (result.value) {
-              console.log(this.factura);
-              this.factura.estado = 'Finalizada';
-              this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
-              this._facturaService.editFactura(this.factura,token).subscribe(
-                response => {
-                  error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                });
-              } else if (
-              // Read more about handling dismissals
-              result.dismiss === swal.DismissReason.cancel
-            ) {
-    
+    var html = 'Se va a enviar la siguiente solicitud:<br>' +
+      'Factura: <b>' + this.factura.numero + '</b><br>' +
+      'Vehiculo: <b>' + this.vehiculo.placa + '</b><br>' +
+      'Solicitante: <b>' + this.ciudadano.usuario.identificacion + '</b><hr>' +
+      'Tramites:<br>' +
+      this.tramites
+    swal({
+      title: 'Resumen',
+      type: 'warning',
+      html: html,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Aceptar!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+        '<i class="fa fa-thumbs-down"></i> Cancelar',
+      cancelButtonAriaLabel: 'Thumbs down',
+    }).then((result) => {
+      if (result.value) {
+        console.log(this.factura);
+        this.factura.estado = 'Finalizada';
+        this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
+        this._facturaService.editFactura(this.factura, token).subscribe(
+          response => {
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
             }
-          })
+          });
+      } else if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+
+      }
+    })
   }
 
-  agregarApoderado(){
+  agregarApoderado() {
     this.frmApoderado = true;
   }
 
-  btnNewApoderado(){
+  btnNewApoderado() {
     this.frmApoderado = false;
     this.apoderado = this.apoderadoSelect;
     this.apoderadoEncontrado = 1;
   }
 
-  onKeyApoderado(){
+  onKeyApoderado() {
     let token = this._loginService.getToken();
     let identificacion = {
-  'numeroIdentificacion' : this.identificacionApoderado,
+      'numeroIdentificacion': this.identificacionApoderado,
     };
-    this._ciudadanoService.searchByIdentificacion(token,identificacion).subscribe(
-        response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.apoderadoSelect = this.respuesta.data;
-                this.apoderadoEncontrado= 2;
-                // this.ciudadanoNew = false;
-        }else{
-            this.apoderadoEncontrado=3;
-            // this.ciudadanoNew = true;
+    this._ciudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+      response => {
+        this.respuesta = response;
+        if (this.respuesta.status == 'success') {
+          this.apoderadoSelect = this.respuesta.data;
+          this.apoderadoEncontrado = 2;
+          // this.ciudadanoNew = false;
+        } else {
+          this.apoderadoEncontrado = 3;
+          // this.ciudadanoNew = true;
         }
         error => {
-                this.errorMessage = <any>error;
-            
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-    }); 
-}
+          this.errorMessage = <any>error;
 
-  cerrarApoderado(){
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+  }
+
+  cerrarApoderado() {
     this.frmApoderado = false;
-    this.apoderado = false; 
-    this.apoderadoEncontrado = 1; 
+    this.apoderado = false;
+    this.apoderadoEncontrado = 1;
   }
 
 }

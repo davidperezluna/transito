@@ -3,26 +3,7 @@
 <div class="row">
     <!-- .row -->
     <div class="col-xs-12 col-lg-6">
-        <div class="col-lg-6 col-md-6">
-            <label>¿El vehiculo va a hacer una tramite de Importación Temporal?</label>
-            <div class="form-group row">
-                <div class="col-xs-12 col-lg-6">
-                    <div class="custom-control custom-radio">
-                        <input id="radioImportacionSi" name="importacion" [(ngModel)]="tramiteSolicitud.importacion"
-                            value="Si" type="radio" id="customRadioImportacion1" name="customRadioImportacion" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadioImportacion1">Si</label>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-lg-6">
-                    <div class="custom-control custom-radio">
-                        <input id="radioImportacionNo" name="importacion" [(ngModel)]="tramiteSolicitud.importacion"
-                            value="No" type="radio" id="customRadioImportacion2" name="customRadioImportacion" class="custom-control-input">
-                        <label class="custom-control-label" for="customRadioImportacion2">No</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="input-group" *ngIf="tramiteSolicitud.importacion == 'No'" [ngClass]="{'has-danger' : isError}">
+        <div class="input-group" *ngIf="importacion == 'No'" [ngClass]="{'has-danger' : isError}">
             <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
             <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId"
                 name="placaVehiculo" required />
@@ -42,8 +23,6 @@
 </div><!-- .row -->
 <div class="row">
     <!-- .row -->
-
-
     <div class="container col-xs-12 col-lg-12" *ngIf="vehiculoSuccess">
         <div class="row">
             <div class="col-md-12">
@@ -164,10 +143,11 @@
                                             <td>
                                                 <b>Apellidos</b>
                                                 {{apoderadoSelect.segundoNombre}} {{apoderadoSelect.segundoApellido}}
-                                            <td> 
+                                            <td>
                                                 <label class="custom-control custom-radio" for="option-{{ciudadanoVehiculo.id}}">
-                                                    <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" required >
-                                                    <span class="custom-control-indicator"></span> 
+                                                    <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}"
+                                                        type="radio" required>
+                                                    <span class="custom-control-indicator"></span>
                                                     <span class="custom-control-description">Solicitante</span>
                                                 </label>
                                             </td>
@@ -225,11 +205,11 @@
                             </label>
                             <div class="input-group" [ngClass]="{'has-danger' : isError}">
                                 <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
-                                <input type="text" class="form-control" placeholder="Numero de facura" [(ngModel)]="facturaSelected" name="factura"
-                                    required />
+                                <input type="text" class="form-control" placeholder="Numero de facura" [(ngModel)]="facturaSelected"
+                                    name="factura" required />
                                 <span class="input-group-btn">
-                                    <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
-                                        ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                    <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}"
+                                        class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -239,7 +219,7 @@
             </div>
         </div>
     </div>
-    <div class="card col-xs-12 col-lg-12" *ngIf="tramiteSolicitud.importacion == 'Si'">
+    <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
         <!-- <div class="container" *ngIf="tramiteSolicitud.solicitanteId"> -->
         <div class="container">
             <label>Facturas
@@ -247,8 +227,8 @@
             </label>
             <div class="input-group" [ngClass]="{'has-danger' : isError}">
                 <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
-                <input type="text" class="form-control" placeholder="Numero de facura" [(ngModel)]="facturaSelected" name="factura"
-                    required />
+                <input type="text" class="form-control" placeholder="Numero de facura" [(ngModel)]="facturaSelected"
+                    name="factura" required />
                 <span class="input-group-btn">
                     <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
                         ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
@@ -353,8 +333,9 @@
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
                         </div>
 
-                        <div class="tab-pane" id="rna-duplicadolicencia" role="tabpanel" *ngIf='ciudadano'> 
-                            <appRna-duplicado-licencia (readyTramite)="readyTramite($event)" [solicitanteId]='tramiteSolicitud.solicitanteId' [factura] = "factura" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
+                        <div class="tab-pane" id="rna-duplicadolicencia" role="tabpanel" *ngIf='ciudadano'>
+                            <appRna-duplicado-licencia (readyTramite)="readyTramite($event)" [solicitanteId]='tramiteSolicitud.solicitanteId'
+                                [factura]="factura" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
                         </div>
 
                         <div class="tab-pane" id="rna-cancelacionmatricula" role="tabpanel" *ngIf='ciudadano'>
@@ -427,13 +408,13 @@
                                 (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario-propietario>
                         </div>
 
-                        <div class="tab-pane" id="rna-importacion-temporal" role="tabpanel" *ngIf='ciudadano'>
+                        <div class="tab-pane" id="rna-importacion-temporal" role="tabpanel">
                             <appRna-importacion-temporal [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-importacion-temporal>
                         </div>
                         <div class="tab-pane" id="rna-prorroga-importacion-temporal" role="tabpanel" *ngIf='ciudadano'>
-                            <appRna-prorroga-importacion-temporal [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
-                                (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
+                            <appRna-prorroga-importacion-temporal [vehiculo]="vehiculo" [factura]="factura"
+                                (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
                         </div>
                     </div>
                 </div>
