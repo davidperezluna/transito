@@ -329,7 +329,6 @@ export class NewRnaComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
-          this.onSearchFactura(this.factura.id)
         } else {
           swal({
             title: 'Error!',

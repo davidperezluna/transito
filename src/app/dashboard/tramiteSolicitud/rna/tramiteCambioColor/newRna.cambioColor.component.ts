@@ -40,15 +40,13 @@ export class NewRnaCambioColorComponent implements OnInit {
     ngOnInit() {
         this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
             response => {
-
                 this.tramitesFactura = response;
-
                 this.tramitesFactura.forEach(tramiteFactura => {
                     if (tramiteFactura.realizado == 1) {
                         if (tramiteFactura.tramitePrecio.tramite.id == 3) {
                             this.tramiteRealizado = tramiteFactura;
                             console.log(this.tramiteRealizado);
-                        }
+                        } 
                     }
                 });
                 error => {
@@ -115,8 +113,8 @@ export class NewRnaCambioColorComponent implements OnInit {
                     response => {
                         if (response.status == 'success') {
                             let resumen = {
-                                'color anterior': this.vehiculo.color.nombre,
-                                'nuevo color': colorResponse.data.nombre,
+                                'Anterior': this.vehiculo.color.nombre,
+                                'Nuevo': colorResponse.data.nombre,
                             };
                             this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                         }
