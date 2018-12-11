@@ -39,6 +39,12 @@ import { ServicioService } from "../../../services/servicio.service";
 import { SvCfgHipotesisService } from "../../../services/svCfgHipotesis.service";
 import { SvCfgTipoVictimaService } from "../../../services/svCfgTipoVictima.service";
 import { SvCfgGravedadVictimaService } from "../../../services/svCfgGravedadVictima.service";
+import { SvCfgUnidadReceptoraService } from "../../../services/svCfgUnidadReceptora.service";
+
+import { TipoIdentificacionService } from "../../../services/tipoIdentificacion.service";
+import { SvCfgNacionalidadService } from "../../../services/svCfgNacionalidad.service";
+import { GeneroService } from "../../../services/genero.service";
+
 
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -109,6 +115,11 @@ export class NewComponent implements OnInit {
   public tiposVictima: any;
   public gravedadesVictima: any;
 
+  public tiposIdentificacion: any;
+  public nacionalidades: any;
+  public generos: any;
+  public municipios: any;
+
 
   public usuario = false;
   public vhl = false;
@@ -157,7 +168,6 @@ export class NewComponent implements OnInit {
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
     private _MunicipioService: MunicipioService,
-    private _DepartamentoService: DepartamentoService,
     private _GravedadService: CfgGravedadService,
     private _ClaseAccidenteService: CfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
@@ -192,10 +202,14 @@ export class NewComponent implements OnInit {
     private _TipoVictimaService: SvCfgTipoVictimaService,
     private _GravedadVictimaService: SvCfgGravedadVictimaService,
 
+    private _TipoIdentificacionService: TipoIdentificacionService,
+    private _NacionalidadService: SvCfgNacionalidadService,
+    private _GeneroService: GeneroService,
+
   ) { }
 
   ngOnInit() {
-    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -771,6 +785,58 @@ export class NewComponent implements OnInit {
                       this.itemStringsLeftFalla.push(falla.nombre);
                     });
                     this.listado = true;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+                  response => {
+                    this.tiposIdentificacion = response.data;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._NacionalidadService.getNacionalidadSelect().subscribe(
+                  response => {
+                    this.nacionalidades = response.data;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._GeneroService.getGeneroSelect().subscribe(
+                  response => {
+                    this.generos = response.data;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._MunicipioService.getMunicipioSelect().subscribe(
+                  response => {
+                    this.municipios = response.data;
                   },
                   error => {
                     this.errorMessage = <any>error;
