@@ -23,6 +23,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
 	public formIndex = false;
 	public formTime = false;
 	public formShow = false;
+	public formSuspension = false;
 	public formProrroga = false;
   public formSearch = true;
   public table: any = null;
@@ -121,17 +122,35 @@ export class MpersonalFuncionarioComponent implements OnInit {
     this.formSearch = false;
     this.formTime = false;
     this.formShow = false;
+    this.formSuspension = false;
+    this.formIndex = false;
+    if(this.table){
+      this.table.destroy();
+    }
+  }
+  
+  onSuspension(funcionario:any){
+    this.funcionario = funcionario;
+    this.formProrroga = false;
+    this.formSuspension = true;
+    this.formNew = false;
+    this.formSearch = false;
+    this.formTime = false;
+    this.formShow = false;
     this.formIndex = false;
     if(this.table){
       this.table.destroy();
     }
   }
 
+
+
   onTime(funcionario:any){
     this.funcionario = funcionario;
     this.formTime = true;
     this.formNew = false;
     this.formSearch = false;
+    this.formSuspension = false;
     this.formProrroga = false;
     this.formShow = false;
     this.formIndex = false;
@@ -161,6 +180,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
       this.formProrroga = false;
       this.formIndex = false;
       this.formShow = false;
+      this.formSuspension = false;
       this.formSearch = true;
       this.ngOnInit();
     }

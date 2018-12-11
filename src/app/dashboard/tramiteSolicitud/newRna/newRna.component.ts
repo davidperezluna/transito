@@ -69,8 +69,8 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null,null,null,null);
+    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.tramiteSolicitud = new TramiteSolicitud(null,null, null, null, null, null,null,null,null);
   }
   onCancelar(){
     this.ready.emit(true);
@@ -115,13 +115,13 @@ constructor(
       this.datos.idFactura = id;
       this.datos.moduloId = this.moduloId;
       this.datos.vehiculoId = this.vehiculo.id;
-      
+
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
-        response => {
-          this.isMatricula=false;
-          let active = true;
-          let token = this._loginService.getToken();
-          
+      response => {
+        this.isMatricula=false;
+        let active = true;
+        let token = this._loginService.getToken();
+       
         this.tramitesFactura = response;
         this.tramitesFactura.forEach(tramiteFactura => {
           if (tramiteFactura.realizado == 0) {
@@ -153,7 +153,6 @@ constructor(
               if (responseCiudadano.status == 'success') {
                 this.ciudadano = responseCiudadano.data.ciudadano;
                 this.factura = response[0].factura;
-                console.log("-------------------------------------------------------------------------------------------------------");
               }
               error => {
                 this.errorMessage = <any>error;
@@ -168,21 +167,14 @@ constructor(
           if(this.isMatricula){
             this.factura = response[0].factura;
           }else{
-            if(this.tramiteSolicitud.importacion == "Si") {
-              console.log(this.ciudadano);
-              this.factura = response[0].factura;
-              console.log("*******************");
-            }
-            else {
-                this.factura = false;
-                swal({
-                  title: 'Error!',
-                  text: 'Seleccionar solicitante',
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                }); 
-              }
-            }
+            this.factura = false;
+            swal({
+              title: 'Error!',
+              text: 'El vehiculo no tiene propietarios por favor facture matricula inicial',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
         }
         
         error => {
@@ -201,7 +193,7 @@ constructor(
     this.mensaje = '';
     swal({
       title: 'Buscando Vehiculo!',
-      text: 'Solo tardará unos segundos, por favor espere.',
+      text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }

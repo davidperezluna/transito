@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.tipoContrato = new MpersonalTipoContrato(null, null, null);
+    this.tipoContrato = new MpersonalTipoContrato(null, null, false, false);
   }
   onCancelar(){
     this.ready.emit(true);

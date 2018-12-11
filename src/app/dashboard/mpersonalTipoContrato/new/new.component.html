@@ -13,10 +13,18 @@
                             <label>Nombre <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="tipoContrato.nombre" name="nombre" type="text" required />
                         </div>
+                        <br>
                         <div class="col-xs-12 col-lg-12">
                             <div class="custom-control custom-checkbox">
                                 <input [(ngModel)]="tipoContrato.horarios" name="horarios" type="checkbox" class="custom-control-input" id="checkbox-horarios">
                                 <label class="custom-control-label" for="checkbox-horarios">Requiere horarios</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input [(ngModel)]="tipoContrato.prorroga" name="prorroga" type="checkbox" class="custom-control-input" id="checkbox-prorroga">
+                                <label class="custom-control-label" for="checkbox-prorroga">Requiere prorroga</label>
                             </div>
                         </div>
                     </div>
