@@ -27,7 +27,7 @@ export class ExportComponent implements OnInit {
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
-    public table: any = false;
+    public table: any = null;
     public ipat = false;
     
     public txt: any[] = null;
@@ -98,9 +98,6 @@ export class ExportComponent implements OnInit {
         this._GravedadService.getGravedadSelect().subscribe(
             response => {
                 this.gravedades = response;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -114,9 +111,6 @@ export class ExportComponent implements OnInit {
         this._TipoVictimaService.getTipoVictimaSelect().subscribe(
             response => {
                 this.tiposVictima = response;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -130,9 +124,6 @@ export class ExportComponent implements OnInit {
         this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -146,9 +137,6 @@ export class ExportComponent implements OnInit {
         this._ClaseService.getClaseSelect().subscribe(
             response => {
                 this.clases = response;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -162,9 +150,6 @@ export class ExportComponent implements OnInit {
         this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
             response => {
                 this.clasesAccidente = response;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -178,9 +163,6 @@ export class ExportComponent implements OnInit {
         this._ChoqueCon.getChoqueConSelect().subscribe(
             response => {
                 this.choquesCon = response;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -194,9 +176,6 @@ export class ExportComponent implements OnInit {
         this._ObjetoFijo.getObjetoFijoSelect().subscribe(
             response => {
                 this.objetosFijos = response;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -210,9 +189,6 @@ export class ExportComponent implements OnInit {
         this._GeneroService.getGeneroSelect().subscribe(
             response => {
                 this.generos = response;
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -225,12 +201,11 @@ export class ExportComponent implements OnInit {
         );
     }
     iniciarTabla() {
-        if (this.table) {
-            this.table.destroy();
-        }
+
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
+            orientation: 'portrait', 
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
             buttons: [
@@ -288,12 +263,16 @@ export class ExportComponent implements OnInit {
     }
 
     onEnviar(){
+        this.table.destroy();
         let token = this._LoginService.getToken();
         this._IpatService.buscarIpat({"file":this.txt, "datos":this.exportIpat}, token).subscribe(
-            
             response => {
-                this.ipats = response.data;
-                console.log(this.ipats);
+                if(response.status == 'success'){
+                    this.ipats = response.data;
+                    let timeoutId = setTimeout(() => {
+                        this.iniciarTabla();
+                    }, 100);
+                }
             },
             error => {
                 this.errorMessage = <any>error;

@@ -139,7 +139,7 @@ export class MsvRegistroIpat{
 		public cascoConductor: string,
 		public cinturonConductor: string,
 		public idHospitalConductor:number,
-		public descripcionLesion: string,
+		public descripcionLesionConductor: string,
 
 
 		//datos victima
@@ -166,6 +166,7 @@ export class MsvRegistroIpat{
 		public cinturonVictima: string,
 		public idTipoVictima:number,
 		public idGravedadVictima:number,
+		public descripcionLesionVictima: string,
 
 		public observaciones:string,
 
