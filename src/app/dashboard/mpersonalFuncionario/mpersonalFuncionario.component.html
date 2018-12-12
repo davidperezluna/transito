@@ -93,6 +93,7 @@
                     <th>Vigencias</th>
                     <th>Estado</th>
                     <th>Contrato</th>
+                    <th>Contrato</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
@@ -146,9 +147,11 @@
                     </small> 
                   </td>
                   <td *ngIf='funcionario.activo'>En ejecución</td>
-                  <td *ngIf='!funcionario.activo'>No vigente</td>
+                  <td *ngIf='!funcionario.activo'>Finalizado</td>
                   <td *ngIf='funcionario.modificatorio'>Modificatorio</td>
                   <td *ngIf='!funcionario.modificatorio'>Contrato principal</td>
+                  <td *ngIf='funcionario.activo'>Activo</td>
+                  <td *ngIf='!funcionario.activo'>Suspendido</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
@@ -157,8 +160,11 @@
                       <button (click)="onTime(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary" type="button" *ngIf="funcionario.tipoContrato.horarios">
                         <i class="fa fa-clock-o"></i>
                       </button>
-                      <button (click)="onProrroga(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-success" type="button" *ngIf="funcionario.tipoContrato.horarios">
+                      <button (click)="onProrroga(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-success" type="button" *ngIf="funcionario.tipoContrato.prorroga">
                         <i class="fa fa-calendar"></i>
+                      </button>
+                      <button (click)="onSuspension(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-danger" type="button" *ngIf="funcionario.activo">
+                        <i class="fa fa-ban"></i>
                       </button>
                     </div>
                   </td>
@@ -176,4 +182,5 @@
     <app-time *ngIf='formTime' [funcionario]="funcionario" (ready)="ready($event)"></app-time>
     <app-show *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)"></app-show>
     <app-prorroga *ngIf='formProrroga' [funcionario]="funcionario" (ready)="ready($event)"></app-prorroga>
+    <app-suspension *ngIf='formSuspension' [funcionario]="funcionario" (ready)="ready($event)"></app-suspension>
 </div>

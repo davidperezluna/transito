@@ -62,46 +62,29 @@ export class NewRnaBlindajeComponent implements OnInit {
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }
-    showTramiteSolicitudByTamiteFactura
+    // showTramiteSolicitudByTamiteFactura
     ngOnInit() {
-        let token = this._loginService.getToken()
-        this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
+        let token = this._loginService.getToken();
+        let datos = {
+            'idFactura':this.factura.id,
+            'idFormulario':'rna-blindaje'
+        }
+
+        this._TramiteSolicitudService.showTramiteSolicitudByTamiteFacturaFormulario(datos,token).subscribe(
             response => {
-
-                this.tramitesFactura = response;
-
-                this.tramitesFactura.forEach(tramiteFactura => {
-                    if (tramiteFactura.realizado == 1) {
-                        if (tramiteFactura.tramitePrecio.tramite.formulario == 'rna-blindaje') {
-                            let datos = {
-                                'idFactura':tramiteFactura.factura.id,
-                                'idTramiteFactura':tramiteFactura.id
-                            }
-                            this._TramiteSolicitudService.showTramiteSolicitudByTamiteFacturaFormulario(datos,token).subscribe(
-                                response => { 
-                                    console.log('***********');
-                                    console.log(response.data.resumen);
-                                    this.resumen = JSON.stringify(response.data.resumen);
-                                    this.tramiteRealizado = tramiteFactura;
-
-                                    error => {
-                                        this.errorMessage = <any>error;
-                                        if (this.errorMessage != null) {
-                                            console.log(this.errorMessage);
-                                            alert("Error en la petición");
-                                        }
-                                    }
-                                }
-                            );
-                        }
-                    }
-                });
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
+                if (response.status == 'success') {
+                    //this.resumen = JSON.stringify(response.data.resumen);
+                    this.resumen = response.data.resumen;
+                    this.tramiteRealizado = true;
+                }else{
+                    this.tramiteRealizado = false;
+                } 
+            },
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
                 }
             }
         );
@@ -119,8 +102,8 @@ export class NewRnaBlindajeComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     let resumen = {
-                        'Tipo blindaje': this.datos.idTipoBlindaje,
-                        'Nivel blindaje': this.datos.idNivelBlindaje,
+                        'tipoBlindaje': this.datos.idTipoBlindaje, 
+                        'nivelBlindaje': this.datos.idNivelBlindaje,
                     };
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                 }
