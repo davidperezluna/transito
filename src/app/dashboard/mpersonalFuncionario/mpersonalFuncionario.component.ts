@@ -196,19 +196,6 @@ export class MpersonalFuncionarioComponent implements OnInit {
           this.iniciarTabla();
           this.formIndex = true;
           swal.close();
-          // swal({
-          //   title: 'Perfecto',
-          //   text: response.message,
-          //   type: 'info',
-          //   showCloseButton: true,
-          //   focusConfirm: false,
-          //   confirmButtonText:
-          //     '<i class="fa fa-thumbs-up"></i> OK!',
-          //   confirmButtonAriaLabel: 'Thumbs up, great!',
-          //   cancelButtonText:
-          //   '<i class="fa fa-thumbs-down"></i>',
-          //   cancelButtonAriaLabel: 'Thumbs down',
-          // });
         }else{
           swal({
             title: 'Alerta',
@@ -242,6 +229,10 @@ export class MpersonalFuncionarioComponent implements OnInit {
   }
 
   iniciarTabla(){
+    if (this.table) {
+      this.table.destroy();
+    }
+    
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
