@@ -18,7 +18,7 @@ import swal from 'sweetalert2';
 
 @Component({ 
     selector: 'appRna-traspaso',
-    templateUrl: './newRna.traspaso.html',
+    templateUrl: './newRna.traspaso.html', 
 })
 export class NewRnaTraspasoComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
@@ -48,12 +48,14 @@ export class NewRnaTraspasoComponent implements OnInit {
     public propietarioPresente = false;
     public ciudadanoSelected:any;
     public apoderado = 'false';
+    public tramiteRealizado: any=false;
     public tipoPropiedades= [
         {'value':1,'label':"Leasing"},
         {'value':2,'label':"Propio"}
     ];
     public tipoIdentificaciones= [ ];
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'propietariosEmpresas': [],
         'propietariosCiudadanos': [],
         'solidario': false,
@@ -65,6 +67,7 @@ export class NewRnaTraspasoComponent implements OnInit {
     };
 
     constructor(
+        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tipoIdentificacionService: TipoIdentificacionService,
         private _CiudadanoService: CiudadanoService,
@@ -74,6 +77,33 @@ export class NewRnaTraspasoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+
+        let token = this._loginService.getToken();
+        let datos = {
+            'idFactura':this.factura.id,
+            'idFormulario':'rna-traspaso'
+        }
+
+        this._TramiteSolicitudService.showTramiteSolicitudByTamiteFacturaFormulario(datos,token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    //this.resumen = JSON.stringify(response.data.resumen);
+                    this.resumen = response.data.resumen;
+                    this.tramiteRealizado = true;
+                }else{
+                    this.tramiteRealizado = false;
+                } 
+                console.log('traspasoooooo');
+                console.log(response.data);
+            },
+            error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
 
         this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
             response => {
@@ -99,11 +129,14 @@ export class NewRnaTraspasoComponent implements OnInit {
             response => {
                 this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-traspaso';
+                // let resumen = {
+                //     'anteriorPropietario': this.datos.idTipoBlindaje, 
+                //     'nivelBlindaje': this.datos.idNivelBlindaje,
+                // };
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }, 
             error => {
               this.errorMessage = <any>error;
-    
               if(this.errorMessage != null){
                 console.log(this.errorMessage);
                 alert('Error en la petición');
@@ -122,7 +155,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -135,7 +168,6 @@ export class NewRnaTraspasoComponent implements OnInit {
             }
             error => {
                     this.errorMessage = <any>error;
-                
                     if(this.errorMessage != null){
                         console.log(this.errorMessage);
                         alert("Error en la petición");
@@ -195,7 +227,6 @@ export class NewRnaTraspasoComponent implements OnInit {
                 }
         }); 
     }
-
 
     goEmpresa(){
         this.router.navigate(['/dashboard/empresa']);

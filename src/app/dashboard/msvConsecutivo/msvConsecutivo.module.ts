@@ -11,8 +11,8 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-declarations: [MsvConsecutivoComponent/*,NewComponent,EditComponent*/],
-    exports: [MsvConsecutivoComponent/*, NewComponent,EditComponent*/],
+declarations: [MsvConsecutivoComponent,NewComponent,EditComponent],
+    exports: [MsvConsecutivoComponent, NewComponent,EditComponent],
     providers: [MsvConsecutivoService]
 })
 

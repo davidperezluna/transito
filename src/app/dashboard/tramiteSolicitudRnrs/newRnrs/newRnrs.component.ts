@@ -158,8 +158,8 @@ constructor(
           }else{
             this.factura = false;
             swal({
-              title: 'No se puede tramitar esta factura: '+numero,
-              text: 'El vehiculo no tiene propietarios y no se ha facturado matricula inicial',
+              title: 'Error!',
+              text: 'Seleccionar solicitante',
               type: 'error',
               confirmButtonText: 'Aceptar'
             })

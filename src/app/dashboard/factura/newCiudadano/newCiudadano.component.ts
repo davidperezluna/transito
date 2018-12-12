@@ -13,7 +13,7 @@ import swal from 'sweetalert2';
   templateUrl: './newCiudadano.component.html'
 })
 export class NewCiudadanoComponent implements OnInit {
-@Output() redyCidadano = new EventEmitter<any>();
+@Output() readyCiudadano = new EventEmitter<any>();
 @Input() identificacion:any = null;
 @Input() tipoIdentificacion:any = null;
 public ciudadano: Ciudadano;
@@ -100,7 +100,7 @@ constructor(
       );
   }
   onCancelar(){
-    this.redyCidadano.emit(false);
+    this.readyCiudadano.emit(false);
   }
   onEnviar(){
     let token = this._loginService.getToken();
@@ -138,7 +138,7 @@ constructor(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.redyCidadano.emit(true);
+          this.readyCiudadano.emit(true);
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',

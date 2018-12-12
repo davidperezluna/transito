@@ -46,7 +46,10 @@ import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
 import { FacturaInsumoService } from '../../services/facturaInsumo.service';
-
+import { NewRnaImportacionTemporalComponent } from "./rna/tramiteImportacionTemporal/newRna.importacionTemporal.component";
+import { NewPropietarioVehiculoComponent } from "./rna/tramiteImportacionTemporal/newPropietarioVehiculo/newPropietarioVehiculo.component";
+import { NewVehiculoComponent } from "./rna/tramiteImportacionTemporal/newVehiculo/newVehiculo.component";
+import { NewRnaProrrogaImportacionTemporalComponent } from "./rna/tramiteProrrogaImportacionTemporal/newRna.prorrogaImportacionTemporal.component";
 
 
 @NgModule({
@@ -87,7 +90,11 @@ import { FacturaInsumoService } from '../../services/facturaInsumo.service';
         NewTrasladoComponent,
         NewRnaCambioGasComponent,
         NewRnaTramiteCambioAcreedorPrendarioComponent,
-        NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent
+        NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent,
+        NewRnaImportacionTemporalComponent,
+        NewPropietarioVehiculoComponent,
+        NewVehiculoComponent,
+        NewRnaProrrogaImportacionTemporalComponent,
     ],
     exports: [
         TramiteSolicitudComponent,
@@ -126,7 +133,11 @@ import { FacturaInsumoService } from '../../services/facturaInsumo.service';
         NewTrasladoComponent,
         NewRnaCambioGasComponent,
         NewRnaTramiteCambioAcreedorPrendarioComponent,
-        NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent
+        NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent,
+        NewRnaImportacionTemporalComponent,
+        NewPropietarioVehiculoComponent,
+        NewVehiculoComponent,
+        NewRnaProrrogaImportacionTemporalComponent,
     ],
     providers: [FacturaInsumoService,TramiteSolicitudService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, EmpresaService, DefaultService]
 })

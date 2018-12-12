@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="m-0">Registrar nuevo vehículo</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #newForm="ngForm">
+                    <div class="row">
+                        <div class="form-group row">
+                            <div class="input-group" class="col-xs-12 col-lg-4">
+                                <input type="text" class="form-control" placeholder="placa" [(ngModel)]="vehiculo.placa"
+                                    required name="placa" />
+                                <span class="input-group-btn">
+                                    <button (click)="onBuscarVehiculo()" class="col-lg-9 col-md-9" class="btn btn-default btn-primary"
+                                        type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Pais de Registro <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [disabled]="vhl" [options]="paises" [(ngModel)]="paisSelected"
+                                    required name="paisId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Marca <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [disabled]="vhl" [options]="marcas" [(ngModel)]="marcaSelected"
+                                    required name="marcaId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Linea <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [disabled]="vhl" [options]="lineas" [(ngModel)]="lineaSelected"
+                                    required name="lineaId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Clase <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [disabled]="vhl" [options]="clases" [(ngModel)]="claseSelected"
+                                    required name="claseId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Color <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [disabled]="vhl" [options]="colores" [(ngModel)]="colorSelected"
+                                    required name="colorId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Modelo</label>
+                                <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="vehiculo.modelo"
+                                    name="modelo">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Motor</label>
+                                <input class="form-control" [disabled]="vhl" type="text" type="text" [(ngModel)]="vehiculo.motor"
+                                    name="motor">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Chasis</label>
+                                <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="vehiculo.chasis"
+                                    name="chasis">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Serie</label>
+                                <input class="form-control" [disabled]="vhl" type="text" type="text" [(ngModel)]="vehiculo.serie"
+                                    name="serie">
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Vin</label>
+                                <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="vehiculo.vin"
+                                    name="vin">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="onEnviar()" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>

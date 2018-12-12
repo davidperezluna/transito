@@ -1,0 +1,74 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card"><!-- .card -->
+            <div class="card-header">
+                <h5 class="text-uppercase">Registro de suspensión</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div [class]="txtFechaInicio">
+                                <label>Fecha inicio <strong class="text-danger">*</strong></label>
+                                <input class="form-control" (blur)="isFecha()" [(ngModel)]="suspension.fechaInicio" name="fechaInicio" type="date" required />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha fin <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="suspension.fechaFin" name="fechaFin" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Observacion <strong class="text-danger">*</strong></label>
+                            <textarea class="form-control" [(ngModel)]="suspension.observacion" name="numeroModificatorio" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="btn-group">
+                            <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                                <i class="fa fa-times"></i>
+                                Cancelar
+                            </button>
+                            <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                                <i class="fa fa-save"></i>
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.card -->
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="suspensions && suspensions.length > 0">
+        <div class="card">
+            <!-- .card -->
+            <div class="card-header">
+                <h5 class="text-uppercase">Suspensión Actuales</h5>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Fecha inicio</th>
+                            <th>Fecha fin</th>
+                            <th>Observación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let suspension of suspensions; let i = index">
+                            <td>{{ suspension.id }}</td>
+                            <td>{{ suspension.fechaInicio }}</td>
+                            <td>{{ suspension.fechaFin }}</td>
+                            <td>{{ suspension.observacion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
