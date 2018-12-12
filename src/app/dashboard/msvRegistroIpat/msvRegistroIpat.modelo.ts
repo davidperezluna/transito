@@ -170,6 +170,14 @@ export class MsvRegistroIpat{
 
 		public observaciones:string,
 
+		//total victimas
+		public totalPeatones: string,
+		public totalAcompaniantes: string,
+		public totalPasajeros: string,
+		public totalConductores: string,
+		public totalHeridos: string,
+		public totalMuertos: string,
+
 		// información testigo
 		public tipoIdentificacionTestigo: number,
 		public identificacionTestigo: number,

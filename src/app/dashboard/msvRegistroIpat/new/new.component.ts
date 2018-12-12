@@ -120,6 +120,22 @@ export class NewComponent implements OnInit {
   public generos: any;
   public municipios: any;
 
+  public tipoIdentificacionConductorSelected: any;
+  public tipoIdentificacionPropietarioSelected: any;
+  public tipoIdentificacionVictimaSelected: any;
+  public tipoIdentificacionTestigoSelected: any;
+  public tipoIdentificacionAgenteSelected: any;
+  
+  public nacionalidadConductorSelected: any;
+  public nacionalidadVictimaSelected: any;
+  
+  public sexoConductorSelected: any;
+  public sexoVictimaSelected: any;
+  
+  public ciudadResidenciaConductorSelected: any;
+  public ciudadResidenciaTestigoSelected: any;
+  public ciudadResidenciaVictimaSelected: any;
+
 
   public usuario = false;
   public vhl = false;
@@ -209,7 +225,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -223,7 +239,7 @@ export class NewComponent implements OnInit {
             title: 'Buscando IPAT en '+this.sedeOperativa.nombre,
             text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
-              swal.showLoading()
+              swal.showLoading();
             }
           });
           this._ControlViaService.indexSenialVertical().subscribe(
@@ -797,7 +813,7 @@ export class NewComponent implements OnInit {
                 );
                 this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
                   response => {
-                    this.tiposIdentificacion = response.data;
+                    this.tiposIdentificacion = response;
                   },
                   error => {
                     this.errorMessage = <any>error;
@@ -810,7 +826,7 @@ export class NewComponent implements OnInit {
                 );
                 this._NacionalidadService.getNacionalidadSelect().subscribe(
                   response => {
-                    this.nacionalidades = response.data;
+                    this.nacionalidades = response;
                   },
                   error => {
                     this.errorMessage = <any>error;
@@ -823,7 +839,7 @@ export class NewComponent implements OnInit {
                 );
                 this._GeneroService.getGeneroSelect().subscribe(
                   response => {
-                    this.generos = response.data;
+                    this.generos = response;
                   },
                   error => {
                     this.errorMessage = <any>error;
@@ -836,7 +852,7 @@ export class NewComponent implements OnInit {
                 );
                 this._MunicipioService.getMunicipioSelect().subscribe(
                   response => {
-                    this.municipios = response.data;
+                    this.municipios = response;
                   },
                   error => {
                     this.errorMessage = <any>error;
@@ -847,6 +863,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
+                swal.close();
               } else {
                 swal({
                   title: 'Alerta!',
@@ -893,6 +910,24 @@ export class NewComponent implements OnInit {
 
   enviarTramite() {
     let token = this._LoginService.getToken();
+    
+    this.msvRegistroIpat.tipoIdentificacionConductor = this.tipoIdentificacionConductorSelected;
+    this.msvRegistroIpat.nacionalidadConductor = this.nacionalidadConductorSelected;
+    this.msvRegistroIpat.sexoConductor = this.sexoConductorSelected;
+    this.msvRegistroIpat.ciudadResidenciaConductor = this.ciudadResidenciaConductorSelected;
+
+    this.msvRegistroIpat.tipoIdentificacionPropietario = this.tipoIdentificacionPropietarioSelected;
+
+    this.msvRegistroIpat.tipoIdentificacionAgente = this.tipoIdentificacionAgenteSelected;
+
+    this.msvRegistroIpat.tipoIdentificacionTestigo = this.tipoIdentificacionTestigoSelected;
+    this.msvRegistroIpat.ciudadResidenciaTestigo = this.ciudadResidenciaTestigoSelected;
+
+    this.msvRegistroIpat.tipoIdentificacionVictima = this.tipoIdentificacionVictimaSelected;
+    this.msvRegistroIpat.nacionalidadVictima = this.nacionalidadVictimaSelected;
+    this.msvRegistroIpat.sexoVictima = this.sexoVictimaSelected;
+
+    this.msvRegistroIpat.ciudadResidenciaVictima = this.ciudadResidenciaVictimaSelected;
 
     let data =[
       { 'datosLimitacion': this.msvRegistroIpat },
@@ -981,9 +1016,11 @@ export class NewComponent implements OnInit {
       this._MsvRegistroIpatService.getBuscarConductor({ 'identificacion': this.msvRegistroIpat.identificacionConductor }, token).subscribe(
     
         response => {
+
           if (response.status == 'success') {
+            console.log(response.data[0]);
             this.usuario = true;
-            this.msvRegistroIpat.tipoIdentificacionConductor = response.data[0].tipoIdentificacion.nombre;
+            this.tipoIdentificacionConductorSelected = [response.data[0].tipoIdentificacion.id];
             if (response.data[0].segundoNombre == null) {
               this.msvRegistroIpat.nombresConductor = response.data[0].primerNombre;
             } else {
@@ -994,11 +1031,11 @@ export class NewComponent implements OnInit {
             } else {
               this.msvRegistroIpat.apellidosConductor = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
             }
-            this.msvRegistroIpat.nacionalidadConductor = response.data[0].nacionalidad;
+            //this.msvRegistroIpat.nacionalidadConductor = response.data[0].nacionalidad;
             this.msvRegistroIpat.fechaNacimientoConductor = response.data[0].fechaNacimiento;
-            this.msvRegistroIpat.sexoConductor = response.data[0].ciudadano.genero.sigla;
+            this.sexoConductorSelected = [response.data[0].ciudadano.genero.id];
             this.msvRegistroIpat.direccionResidenciaConductor = response.data[0].ciudadano.direccion;
-            this.msvRegistroIpat.ciudadResidenciaConductor = response.data[0].ciudadano.municipioResidencia.nombre;
+            this.ciudadResidenciaConductorSelected = [response.data[0].ciudadano.municipioResidencia.id];
             this.msvRegistroIpat.telefonoConductor = response.data[0].telefono;
             //swal.close();
           } else {
@@ -1098,7 +1135,7 @@ export class NewComponent implements OnInit {
   onMismoConductor(msvRegistroIpat) {
     if(this.msvRegistroIpat.identificacionConductor != null) {
       this.msmConductor = true;
-      this.msvRegistroIpat.tipoIdentificacionPropietario = this.msvRegistroIpat.tipoIdentificacionConductor;
+      this.tipoIdentificacionPropietarioSelected = [this.tipoIdentificacionConductorSelected];
       this.msvRegistroIpat.identificacionPropietario = this.msvRegistroIpat.identificacionConductor;
       this.msvRegistroIpat.nombresPropietario = this.msvRegistroIpat.nombresConductor;
       this.msvRegistroIpat.apellidosPropietario = this.msvRegistroIpat.apellidosConductor;
@@ -1120,7 +1157,7 @@ export class NewComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.agente = true;
-            this.msvRegistroIpat.tipoIdentificacionAgente = response.data.ciudadano.usuario.tipoIdentificacion.nombre;
+            this.tipoIdentificacionAgenteSelected = [response.data.ciudadano.usuario.tipoIdentificacion.id];
             this.msvRegistroIpat.gradoAgente = response.data.cargo.nombre;
             this.msvRegistroIpat.nombresAgente = response.data.ciudadano.usuario.primerNombre + ' ' + response.data.ciudadano.usuario.segundoNombre;
             this.msvRegistroIpat.apellidosAgente = response.data.ciudadano.usuario.primerApellido + ' ' + response.data.ciudadano.usuario.segundoApellido;
@@ -1155,14 +1192,14 @@ export class NewComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.victima = true;
-            this.msvRegistroIpat.tipoIdentificacionVictima = response.data[0].tipoIdentificacion.nombre;
+            this.tipoIdentificacionVictimaSelected = [response.data[0].tipoIdentificacion.id];
             this.msvRegistroIpat.nombresVictima = response.data[0].primerNombre + ' ' + response.data[0].segundoNombre;
             this.msvRegistroIpat.apellidosVictima = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
-            this.msvRegistroIpat.nacionalidadVictima = response.data[0].nacionalidad;
+            //this.msvRegistroIpat.nacionalidadVictima = response.data[0].nacionalidad;
             this.msvRegistroIpat.fechaNacimientoVictima = response.data[0].fechaNacimiento;
-            this.msvRegistroIpat.sexoVictima = response.data[0].ciudadano.genero.sigla;
+            this.sexoVictimaSelected = [response.data[0].ciudadano.genero.id];
             this.msvRegistroIpat.direccionResidenciaVictima = response.data[0].ciudadano.direccion;
-            this.msvRegistroIpat.ciudadResidenciaVictima = response.data[0].ciudadano.municipioResidencia.nombre;
+            this.ciudadResidenciaVictimaSelected = [response.data[0].ciudadano.municipioResidencia.id];
             this.msvRegistroIpat.telefonoVictima = response.data[0].telefono;
             //swal.close();
           } else {
@@ -1193,12 +1230,11 @@ export class NewComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.testigo = true;
-            this.msvRegistroIpat.tipoIdentificacionTestigo = response.data[0].tipoIdentificacion.nombre;
+            this.tipoIdentificacionTestigoSelected = [response.data[0].tipoIdentificacion.id];
             this.msvRegistroIpat.nombresTestigo = response.data[0].primerNombre + ' ' + response.data[0].segundoNombre;
             this.msvRegistroIpat.apellidosTestigo = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
             this.msvRegistroIpat.direccionTestigo = response.data[0].ciudadano.direccion;
-            this.msvRegistroIpat.ciudadResidenciaTestigo = response.data[0].ciudadano.municipioResidencia.nombre;
-            this.msvRegistroIpat.departamentoResidenciaTestigo = response.data[0].ciudadano.municipioResidencia.departamento.nombre;
+            this.ciudadResidenciaTestigoSelected = [response.data[0].ciudadano.municipioResidencia.id];
             this.msvRegistroIpat.telefonoTestigo = response.data[0].telefono;
             //swal.close();
           } else {
