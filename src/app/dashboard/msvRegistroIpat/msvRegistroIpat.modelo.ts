@@ -170,6 +170,15 @@ export class MsvRegistroIpat{
 
 		public observaciones:string,
 
+		//correspondio
+		public idMunicipio: number,
+		public idEntidad: number,
+		public idUnidad: number,
+		public idAnio: number,
+		public consecutivo: number,
+		public correspondio: string,
+
+
 		//total victimas
 		public totalPeatones: string,
 		public totalAcompaniantes: string,

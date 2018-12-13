@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.unidadReceptora = new SvCfgUnidadReceptora(null, null, null, null);
+        this.unidadReceptora = new SvCfgUnidadReceptora(null,null, null, null, null);
         this._EntidadAccidenteService.getEntidadAccidenteSelect().subscribe(
             response => {
                 this.entidadesAccidente = response;

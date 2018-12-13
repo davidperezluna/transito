@@ -51,6 +51,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { Utils } from 'ng2-bootstrap';
 import { SvCfgAseguradoraService } from '../../../services/svCfgAseguradora.service';
 import { SvCfgControlViaService } from '../../../services/svCfgControlVia.service';
+import { SvCfgEntidadAccidenteService } from 'app/services/svCfgEntidadAccidente.service';
 
 @Component({
   selector: 'app-new',
@@ -119,6 +120,12 @@ export class NewComponent implements OnInit {
   public nacionalidades: any;
   public generos: any;
   public municipios: any;
+  public departamentos: any;
+  public entidades: any;
+  public unidades: any;
+  public anios: any [];
+
+  
 
   public tipoIdentificacionConductorSelected: any;
   public tipoIdentificacionPropietarioSelected: any;
@@ -136,6 +143,7 @@ export class NewComponent implements OnInit {
   public ciudadResidenciaTestigoSelected: any;
   public ciudadResidenciaVictimaSelected: any;
 
+  public fechaActual: any;
 
   public usuario = false;
   public vhl = false;
@@ -144,6 +152,8 @@ export class NewComponent implements OnInit {
   public testigo = false;
   public msmConductor= false;
   public licencia=false;
+  public correspondio=false;
+
 
   public listado = false;
   itemStringsLeft: any[] = [];
@@ -222,10 +232,13 @@ export class NewComponent implements OnInit {
     private _NacionalidadService: SvCfgNacionalidadService,
     private _GeneroService: GeneroService,
 
+    private _EntidadService: SvCfgEntidadAccidenteService,
+    private _UnidadReceptoraService: SvCfgUnidadReceptoraService,
+
   ) { }
 
   ngOnInit() {
-    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null ,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null,null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     
     let token = this._LoginService.getToken();
     let identity = this._LoginService.getIdentity();
@@ -863,7 +876,40 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                swal.close();
+                this._EntidadService.getEntidadAccidenteSelect().subscribe(
+                  response => {
+                    this.entidades = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._UnidadReceptoraService.getUnidadReceptoraSelect().subscribe(
+                  response => {
+                    this.unidades = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+
+                this.fechaActual = new Date().getFullYear();
+                console.log("----------------------------------"+ this.fechaActual);
+                this.anios = [
+                  /* for (let i = 1990; i < this.fechaActual; i++) {
+                  "{ value: '"+ i +"', label: '"+ i +"'},"
+                 } */
+                ];
               } else {
                 swal({
                   title: 'Alerta!',
@@ -1255,5 +1301,32 @@ export class NewComponent implements OnInit {
         }
       );
     }
+  }
+  obtenerCorrespondio(event) {
+    let token = this._LoginService.getToken();
+
+      this._MsvRegistroIpatService.getCorrespondio(this.msvRegistroIpat, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.correspondio = true;
+            //this.msvRegistroIpat.correspondio = this.msvRegistroIpat.idDepartamento + '-' + this.msvRegistroIpat.idMunicipio + '-' + this.msvRegistroIpat.idEntidad + '-' + this.msvRegistroIpat.idUnidad + '-' + this.msvRegistroIpat.idAnio + '-' + this.msvRegistroIpat.consecutivo;
+            this.msvRegistroIpat.correspondio = response.data;
+          } else {
+            swal({
+              title: 'Alerta!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          }
+        }
+      );
   }
 }
