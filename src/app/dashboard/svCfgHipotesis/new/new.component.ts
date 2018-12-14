@@ -20,7 +20,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.hipotesis = new SvCfgHipotesis(null, null);
+        this.hipotesis = new SvCfgHipotesis(null, null, null);
     }
 
     onCancelar() {
