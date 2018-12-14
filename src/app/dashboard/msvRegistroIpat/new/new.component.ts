@@ -123,7 +123,7 @@ export class NewComponent implements OnInit {
   public departamentos: any;
   public entidades: any;
   public unidades: any;
-  public anios: any [];
+  public anios = [];
 
   
 
@@ -904,12 +904,13 @@ export class NewComponent implements OnInit {
                 );
 
                 this.fechaActual = new Date().getFullYear();
-                console.log("----------------------------------"+ this.fechaActual);
-                this.anios = [
-                  /* for (let i = 1990; i < this.fechaActual; i++) {
-                  "{ value: '"+ i +"', label: '"+ i +"'},"
-                 } */
-                ];
+                for (let i = 1990; i <= (this.fechaActual); i++) {
+                  let obj = {
+                    value: i,
+                    label: i
+                  };
+                  this.anios.push(obj);
+               } 
               } else {
                 swal({
                   title: 'Alerta!',
