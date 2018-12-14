@@ -18,6 +18,10 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
+                        <label>Código <strong class="text-danger">*</strong></label>
+                        <input type="number" class="form-control" [(ngModel)]="unidadReceptora.codigo" name="codigo" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
                         <label>Municipio <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio">
                         </ng-select>

@@ -8,6 +8,10 @@
             <form #formNew="ngForm">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
+                        <label>Código <strong class="text-danger">*</strong></label>
+                        <input type="int" class="form-control" [(ngModel)]="hipotesis.codigo" name="codigo" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
                         <label>Nombre <strong class="text-danger">*</strong></label>
                         <input style="text-transform:uppercase" type="text" class="form-control" [(ngModel)]="hipotesis.nombre" name="nombre" required />
                     </div>
