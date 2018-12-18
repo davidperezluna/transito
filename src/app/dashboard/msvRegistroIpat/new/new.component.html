@@ -468,20 +468,28 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Nacionalidad <strong class="text-danger">*</strong></label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVehiculo" name="nacionalidadVehiculo"
-                                required>
+                            <!-- <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVehiculo" name="nacionalidadVehiculo"
+                                required> -->
+                            <ng-select [multiple]="false" [options]="nacionalidades" [(ngModel)]="nacionalidadVehiculoSelected" required name="nacionalidadVehiculo">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Marca <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.marca" name="marca" required>
+                            <!-- <input class="form-control"  type="text" [(ngModel)]="msvRegistroIpat.marca" name="marca" required> -->
+                            <ng-select [multiple]="false" [disabled]="vhl" [options]="marcas" [(ngModel)]="marcaSelected" required name="marca">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Linea <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.linea" name="linea" required>
+                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.linea" name="linea" required> -->
+                            <ng-select [multiple]="false" [disabled]="vhl" [options]="lineas" [(ngModel)]="lineaSelected" required name="linea">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Color <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.color" name="color" required>
+                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.color" name="color" required> -->
+                            <ng-select [multiple]="false" [disabled]="vhl" [options]="colores" [(ngModel)]="colorSelected" required name="color">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Modelo <strong class="text-danger">*</strong></label>
@@ -489,26 +497,36 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Carroceria <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.carroceria" name="carroceria"
-                                required>
+                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.carroceria" name="carroceria"
+                                required> -->
+                            <ng-select [multiple]="false" [disabled]="vhl" [options]="carrocerias" [(ngModel)]="carroceriaSelected" required name="carroceria">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Clase Vehiculo <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.clase" name="clase" required>
+                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.clase" name="clase" required> -->
+                            <ng-select [multiple]="false" [disabled]="vhl" [options]="clases" [(ngModel)]="claseSelected" required name="clase">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Servicio <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.servicio" name="servicio" required>
+                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.servicio" name="servicio" required> -->
+                            <ng-select [multiple]="false" [disabled]="vhl" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicio">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Modalidad Transporte <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.modalidadTransporte" name="modalidadTransporte"
-                                required>
+                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.modalidadTransporte" name="modalidadTransporte"
+                                required> -->
+                            <ng-select [multiple]="false" [disabled]="vhl" [options]="modalidadesTransporte" [(ngModel)]="modalidadTransporteSelected" required name="modalidadTransporte">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.servicio == 'PUBLICO'">
                             <label>Radio Acción <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.radioAccion" name="radioAccion"
-                                required>
+                            <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.radioAccion" name="radioAccion"
+                                required> -->
+                            <ng-select [multiple]="false" [disabled]="vhl" [options]="radiosAccion" [(ngModel)]="radioAccionSelected" required name="radioAccion">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Capacidad de Carga (Ton) <strong class="text-danger">*</strong></label>
@@ -617,7 +635,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Cantidad acompañantes o pasajeros al momento del accidente <strong class="text-danger">*</strong></label>
-                            <input class="form-control" type="number" min="0" max="200" [(ngModel)]="msvRegistroIpat.cantidadAcompaniantes" name="cantidadAcompaniantes"
+                            <input class="form-control" (change)="totalIpat()" type="number" min="0" max="200" [(ngModel)]="msvRegistroIpat.cantidadAcompaniantes" name="cantidadAcompaniantes"
                                 required>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
@@ -821,10 +839,11 @@
                             </ng-select>
                         </div>
                     </div>
+                    <button (click)="registrarVehiculo()" *ngIf="consecutivo && msvRegistroIpat.portaPlaca == '1'" class="btn btn-primary">Enviar</button>
                 </div>
             </div>
             
-            <div class="card" *ngIf="consecutivo">
+            <div class="card" id="datosconductor" *ngIf="consecutivo">
                 <div class="card-header">
                     <h5 class="card-title">
                         <strong class="text-uppercase">Datos del Conductor</strong>
@@ -1115,6 +1134,7 @@
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionLesionConductor" name="descripcionLesionConductor"
                                 required>
                         </div>
+                        <button (click)="registrarCiudadano()" *ngIf="consecutivo" class="btn btn-primary">Enviar</button>
                     </div>
                 </div>
             </div>
@@ -1524,6 +1544,7 @@
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.observaciones" name="observaciones">
                         </div>
                     </div>
+                    <button (click)="registrarVictima()" *ngIf="consecutivo && msvRegistroIpat.victima == '1'" class="btn btn-primary">Enviar</button>
                 </div>
             </div>
             <div class="card" *ngIf="consecutivo">
@@ -1536,31 +1557,31 @@
                     <div class="form-group row">
                         <div class="col-lg-4 col-md-6">
                             <label>Municipio</label>
-                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="msvRegistroIpat.idMunicipio" name="municipio">
+                            <ng-select [multiple]="false" [disabled]="numeroCorrespondio" (ngModelChange)="obtenerCorrespondio($event)" [options]="municipios" [(ngModel)]="msvRegistroIpat.idMunicipio" name="municipio">
                             </ng-select>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <label>Entidad Accidente</label>
-                            <ng-select [multiple]="false" [options]="entidades" [(ngModel)]="msvRegistroIpat.idEntidad" name="entidad">
+                            <ng-select [multiple]="false" [disabled]="numeroCorrespondio" (ngModelChange)="obtenerCorrespondio($event)" [options]="entidades" [(ngModel)]="msvRegistroIpat.idEntidad" name="entidad">
                             </ng-select>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <label>Unidad Receptora</label>
-                            <ng-select [multiple]="false" [options]="unidades" [(ngModel)]="msvRegistroIpat.idUnidad" name="unidad">
+                            <ng-select [multiple]="false" [disabled]="numeroCorrespondio" (ngModelChange)="obtenerCorrespondio($event)" [options]="unidades" [(ngModel)]="msvRegistroIpat.idUnidad" name="unidad">
                             </ng-select>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <label>Año</label>
-                            <ng-select [multiple]="false" [options]="anios" [(ngModel)]="msvRegistroIpat.idAnio" name="anio">
+                            <ng-select [multiple]="false" [disabled]="numeroCorrespondio" (ngModelChange)="obtenerCorrespondio($event)" [options]="anios" [(ngModel)]="msvRegistroIpat.idAnio" name="anio">
                             </ng-select>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <label>Consecutivo</label>
-                            <input class="form-control" (change)="obtenerCorrespondio($event)" type="text" [(ngModel)]="msvRegistroIpat.consecutivo" name="consecutivo">
+                            <input class="form-control" [disabled]="numeroCorrespondio" (change)="obtenerCorrespondio($event)" type="number" [(ngModel)]="msvRegistroIpat.consecutivo" name="consecutivo">
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <label>Correspondió</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.correspondio" name="correspondio">
+                            <input class="form-control" type="text" (change)="obtenerCorrespondio($event)" [(ngModel)]="msvRegistroIpat.correspondio" name="correspondio">
                         </div>
                     </div>
                 </div>

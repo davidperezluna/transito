@@ -52,6 +52,12 @@ import { Utils } from 'ng2-bootstrap';
 import { SvCfgAseguradoraService } from '../../../services/svCfgAseguradora.service';
 import { SvCfgControlViaService } from '../../../services/svCfgControlVia.service';
 import { SvCfgEntidadAccidenteService } from 'app/services/svCfgEntidadAccidente.service';
+import { MarcaService } from 'app/services/marca.service';
+import { LineaService } from 'app/services/linea.service';
+import { ColorService } from 'app/services/color.service';
+import { VhloCfgModalidadTransporteService } from 'app/services/vhloCfgModalidadTransporte.service';
+import { CarroceriaService } from 'app/services/carroceria.service';
+import { VhloCfgRadioAccionService } from 'app/services/vhloCfgRadioAccion.service';
 
 @Component({
   selector: 'app-new',
@@ -142,6 +148,32 @@ export class NewComponent implements OnInit {
   public ciudadResidenciaConductorSelected: any;
   public ciudadResidenciaTestigoSelected: any;
   public ciudadResidenciaVictimaSelected: any;
+  
+  //select vehiculo
+  public nacionalidadVehiculoSelected: any;
+  public marcaSelected: any;
+  public lineaSelected: any;
+  public colorSelected: any;
+  public carroceriaSelected: any;
+  public claseSelected: any;
+  public servicioSelected: any;
+  public modalidadTransporteSelected: any;
+  public radioAccionSelected: any;
+
+  public marcas: any;
+  public lineas: any;
+  public colores: any;
+  public carrocerias: any;
+  public radiosAccion: any;
+
+  //total 
+  public cantVictimas = 0;
+  public cantConductores = 0;
+  public cantAcompaniantes: any;
+  public cantPasajeros: any;
+  public cantPeatones: any;
+  public cantHeridos: any;
+  public cantMuertos: any;
 
   public fechaActual: any;
 
@@ -152,7 +184,7 @@ export class NewComponent implements OnInit {
   public testigo = false;
   public msmConductor= false;
   public licencia=false;
-  public correspondio=false;
+  public numeroCorrespondio=false;
 
 
   public listado = false;
@@ -190,6 +222,8 @@ export class NewComponent implements OnInit {
 
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
+    
+    private _CiudadanoService: CiudadanoService,
     private _FuncionarioService: MpersonalFuncionarioService,
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
@@ -234,6 +268,13 @@ export class NewComponent implements OnInit {
 
     private _EntidadService: SvCfgEntidadAccidenteService,
     private _UnidadReceptoraService: SvCfgUnidadReceptoraService,
+
+    private _MarcaService: MarcaService,
+    private _LineaService: LineaService,
+    private _ColorService: ColorService,
+    private _CarroceriaService: CarroceriaService,
+    private _ModalidadTransporteService: VhloCfgModalidadTransporteService ,
+    private _RadioAccionService: VhloCfgRadioAccionService,
 
   ) { }
 
@@ -902,6 +943,123 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
+                this._MarcaService.getMarcaSelect().subscribe(
+                  response => {
+                    this.marcas = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._LineaService.select().subscribe(
+                  response => {
+                    this.lineas = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ColorService.select().subscribe(
+                  response => {
+                    this.colores = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._CarroceriaService.getCarroceriaSelect().subscribe(
+                  response => {
+                    this.carrocerias = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._CarroceriaService.getCarroceriaSelect().subscribe(
+                  response => {
+                    this.carrocerias = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ClaseService.getClaseSelect().subscribe(
+                  response => {
+                    this.clases = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ServicioService.getServicioSelect().subscribe(
+                  response => {
+                    this.servicios = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._ModalidadTransporteService.select().subscribe(
+                  response => {
+                    this.modalidadesTransporte = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
+                this._RadioAccionService.select().subscribe(
+                  response => {
+                    this.radiosAccion = response;
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                );
 
                 this.fechaActual = new Date().getFullYear();
                 for (let i = 1990; i <= (this.fechaActual); i++) {
@@ -975,6 +1133,7 @@ export class NewComponent implements OnInit {
     this.msvRegistroIpat.sexoVictima = this.sexoVictimaSelected;
 
     this.msvRegistroIpat.ciudadResidenciaVictima = this.ciudadResidenciaVictimaSelected;
+
 
     let data =[
       { 'datosLimitacion': this.msvRegistroIpat },
@@ -1113,17 +1272,17 @@ export class NewComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.vhl = true;
-            this.msvRegistroIpat.marca = response.data.linea.marca.nombre;
-            this.msvRegistroIpat.linea = response.data.linea.nombre;
-            this.msvRegistroIpat.color = response.data.color.nombre;
+            this.marcaSelected = [response.data.linea.marca.id];
+            this.lineaSelected = [response.data.linea.id];
+            this.colorSelected = [response.data.color.id];
             this.msvRegistroIpat.modelo = response.data.modelo;
-            this.msvRegistroIpat.carroceria = response.data.carroceria.nombre;
+            this.carroceriaSelected = [response.data.carroceria.id];
             this.msvRegistroIpat.pasajeros = response.data.numeroPasajeros;
             this.msvRegistroIpat.matriculadoEn = response.data.municipio.nombre;
-            this.msvRegistroIpat.clase = response.data.clase.nombre;
-            this.msvRegistroIpat.servicio = response.data.servicio.nombre;
-            this.msvRegistroIpat.modalidadTransporte = response.data.modalidadTransporte.nombre;
-            this.msvRegistroIpat.radioAccion = response.data.radioAccion.nombre;
+            this.claseSelected = [response.data.clase.id];
+            this.servicioSelected = [response.data.servicio.id];
+            this.modalidadTransporteSelected = [response.data.modalidadTransporte.id];
+            this.radioAccionSelected = [response.data.radioAccion.id];
             //swal.close();
           } else {
             swal({
@@ -1309,8 +1468,9 @@ export class NewComponent implements OnInit {
       this._MsvRegistroIpatService.getCorrespondio(this.msvRegistroIpat, token).subscribe(
         response => {
           if (response.status == 'success') {
-            this.correspondio = true;
-            //this.msvRegistroIpat.correspondio = this.msvRegistroIpat.idDepartamento + '-' + this.msvRegistroIpat.idMunicipio + '-' + this.msvRegistroIpat.idEntidad + '-' + this.msvRegistroIpat.idUnidad + '-' + this.msvRegistroIpat.idAnio + '-' + this.msvRegistroIpat.consecutivo;
+            if(this.msvRegistroIpat.correspondio != null) {
+              this.numeroCorrespondio = true;
+            }
             this.msvRegistroIpat.correspondio = response.data;
           } else {
             swal({
@@ -1329,5 +1489,121 @@ export class NewComponent implements OnInit {
           }
         }
       );
+  }
+
+  registrarCiudadano() {
+    let token = this._LoginService.getToken();
+
+    this.msvRegistroIpat.tipoIdentificacionConductor = this.tipoIdentificacionConductorSelected;
+    this.msvRegistroIpat.nacionalidadConductor = this.nacionalidadConductorSelected;
+    this.msvRegistroIpat.sexoConductor = this.sexoConductorSelected;
+    this.msvRegistroIpat.ciudadResidenciaConductor = this.ciudadResidenciaConductorSelected;
+
+    this._MsvRegistroIpatService.registerCiudadanoIpat(this.msvRegistroIpat, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+          if(this.cantConductores == 0) {
+            this.cantConductores = 1;
+          } else {
+            this.cantConductores = this.cantConductores += 1; 
+            console.log(this.cantConductores);
+          }
+          this.usuario = false;
+          this.msvRegistroIpat.identificacionConductor = '';
+          this.tipoIdentificacionConductorSelected = [0];
+          this.nacionalidadConductorSelected = [0];
+          this.sexoConductorSelected = [0];
+          this.ciudadResidenciaConductorSelected = [0];
+          this.msvRegistroIpat.nombresConductor = '';
+          this.msvRegistroIpat.apellidosConductor = '';
+          this.msvRegistroIpat.fechaNacimientoConductor = '';
+          this.msvRegistroIpat.direccionResidenciaConductor = '';
+          this.msvRegistroIpat.telefonoConductor = 0;
+
+        } else {
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      }
+    );
+  }
+
+  registrarVehiculo(){
+    let token = this._LoginService.getToken();
+
+    this.msvRegistroIpat.marca = this.marcaSelected;
+    this.msvRegistroIpat.linea = this.lineaSelected;
+    this.msvRegistroIpat.color = this.colorSelected;
+    this.msvRegistroIpat.carroceria = this.carroceriaSelected;
+    this.msvRegistroIpat.clase = this.claseSelected;
+    this.msvRegistroIpat.servicio = this.servicioSelected;
+    this.msvRegistroIpat.modalidadTransporte = this.modalidadTransporteSelected;
+    this.msvRegistroIpat.radioAccion = this.radioAccionSelected;
+
+    this._MsvRegistroIpatService.registerVehiculoIpat(this.msvRegistroIpat, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+          
+          this.vhl = false;
+          /* this.msvRegistroIpat.identificacionConductor = '';
+          this.tipoIdentificacionConductorSelected = [0];
+          this.nacionalidadConductorSelected = [0];
+          this.sexoConductorSelected = [0];
+          this.ciudadResidenciaConductorSelected = [0];
+          this.msvRegistroIpat.nombresConductor = '';
+          this.msvRegistroIpat.apellidosConductor = '';
+          this.msvRegistroIpat.fechaNacimientoConductor = '';
+          this.msvRegistroIpat.direccionResidenciaConductor = '';
+          this.msvRegistroIpat.telefonoConductor = 0; */
+
+        } else {
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      }
+    );
+  }
+
+  registrarVictima(){
+    alert("registrar victima");
+  }
+
+  totalIpat(){
+    this.msvRegistroIpat.totalAcompaniantes = this.msvRegistroIpat.cantidadAcompaniantes;
+    this.msvRegistroIpat.totalConductores = this.cantConductores;
   }
 }

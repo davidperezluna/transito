@@ -100,7 +100,7 @@ export class MsvRegistroIpat{
 		public nombresPropietario: string,
 		public apellidosPropietario: string,
 		public tipoIdentificacionPropietario: string,
-		public identificacionPropietario: number,
+		public identificacionPropietario: string,
 
 		public clase:number,
 		public servicio:number,
@@ -115,7 +115,7 @@ export class MsvRegistroIpat{
 		public nombresConductor: string,
 		public apellidosConductor: string,
 		public tipoIdentificacionConductor: string,
-		public identificacionConductor: number,
+		public identificacionConductor: string,
 		public nacionalidadConductor: string,
 		public fechaNacimientoConductor: string,
 		public sexoConductor: string,
@@ -180,12 +180,12 @@ export class MsvRegistroIpat{
 
 
 		//total victimas
-		public totalPeatones: string,
-		public totalAcompaniantes: string,
-		public totalPasajeros: string,
-		public totalConductores: string,
-		public totalHeridos: string,
-		public totalMuertos: string,
+		public totalPeatones: number,
+		public totalAcompaniantes: number,
+		public totalPasajeros: number,
+		public totalConductores: number,
+		public totalHeridos: number,
+		public totalMuertos: number,
 
 		// información testigo
 		public tipoIdentificacionTestigo: number,
