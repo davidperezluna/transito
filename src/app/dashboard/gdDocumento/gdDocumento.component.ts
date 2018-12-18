@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GdDocumentoService } from '../../services/gdDocumento.service';
+import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
 import { LoginService } from '../../services/login.service';
 import { GdDocumento } from './gdDocumento.modelo';
 import swal from 'sweetalert2';
@@ -14,6 +15,8 @@ export class GdDocumentoComponent implements OnInit {
   public errorMessage;
   public documentos: any = null;
   public documentosPendientes: any = null;
+  public funcionarios: any;
+  public funcionarioSelected: any;
   
 	public formNew = false;
 	public formEdit = false;
@@ -42,6 +45,7 @@ export class GdDocumentoComponent implements OnInit {
 
   constructor(
     private _DocumentoService: GdDocumentoService,
+    private _FuncionarioService: MpersonalFuncionarioService,
 		private _loginService: LoginService,
     ){}
     
@@ -56,6 +60,20 @@ export class GdDocumentoComponent implements OnInit {
     this.formShow = false;
     this.formPrint = false;
     this.formAssign = false;
+
+    this._FuncionarioService.select().subscribe(
+      response => {
+        this.funcionarios = response;        
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
 
     this._DocumentoService.index().subscribe(
       response => {
@@ -104,6 +122,46 @@ export class GdDocumentoComponent implements OnInit {
       }
    });
    this.table = $('#dataTables-example').DataTable();
+  }
+
+  onChangedAssign(event,idDocumento) {
+    if (event !== undefined) {
+      let token = this._loginService.getToken();
+
+      let datos = {
+        'idFuncionario': event,
+        'idDocumento': idDocumento
+      };
+
+      this._DocumentoService.assign(datos, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+
+            this.ngOnInit();
+          } else {
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    }
   }
 
   onNew(){

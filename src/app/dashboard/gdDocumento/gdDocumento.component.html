@@ -31,7 +31,7 @@
             </button>
             <button (click)="onNew()" class="btn btn-primary" type="button">
               <i class="fa fa-save"></i>
-              Registrar
+              Radicar
             </button>
           </div>
         </div>
@@ -111,14 +111,21 @@
                   {{ documento.fechaVencimiento }}
                 </td>
                 <td>
-                  <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO'">
-                    <i class="fa fa-reply"></i>
-                    Asignar
-                  </button>
-                  <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'RESPUESTA REALIZADA'">
-                    <i class="fa fa-check"></i>
-                    Finalizar
-                  </button>
+                  <div class="btn-group">
+                    <button (click)="onShow(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="(documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO') && !documento.url">
+                      <i class="fa fa-file-text-o"></i>
+                      Registrar Información
+                    </button>
+                    <button (click)="onPrint(documento)" class="btn btn-xs btn-primary" type="button" *ngIf="documento.estado == 'RESPUESTA REALIZADA'">
+                      <i class="fa fa-check"></i>
+                      Finalizar
+                    </button>
+                  </div>
+                  <div class="col-xs-12 col-lg-12" *ngIf="documento.estado == 'PENDIENTE' && documento.url">
+                    <label>Asignar a</label>
+                    <ng-select [multiple]="false" [options]="funcionarios" [(ngModel)]="funcionarioSelected"  (ngModelChange)="onChangedAssign($event, documento.id)" name="funcionario" required>
+                    </ng-select>
+                  </div>
                 </td>
               </tr>
             </tbody>
