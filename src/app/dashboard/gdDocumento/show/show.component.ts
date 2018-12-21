@@ -158,6 +158,8 @@ constructor(
               type: 'success',
               confirmButtonText: 'Aceptar'
             });
+
+            this.ready.emit(true);
           } else {
             swal({
               title: 'Error!',

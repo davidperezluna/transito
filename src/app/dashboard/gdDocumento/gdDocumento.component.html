@@ -74,6 +74,7 @@
             <tbody>
               <tr class="odd" *ngFor="let documento of documentosPendientes; let i = index">
                 <td class="btn btn-danger" *ngIf="documento.estado == 'PENDIENTE'">{{ i + 1 }}</td>
+                <td class="btn btn-danger" *ngIf="documento.estado == 'RECHAZADO'">{{ i + 1 }}</td>
                 <td class="btn btn-primary" *ngIf="documento.estado == 'ASIGNADO'">{{ i + 1 }}</td>
                 <td class="btn btn-warning" *ngIf="documento.estado == 'EN TRAMITE' || documento.estado == 'RESPUESTA REALIZADA'">{{ i + 1 }}</td>
                 <td class="btn btn-success" *ngIf="documento.estado == 'FINALIZADO'">{{ i + 1 }}</td>
@@ -98,6 +99,10 @@
                     <br>
                   </span>
                   <b>Estado:</b> {{ documento.estado }}
+                  <span *ngIf="documento.estado == 'FINALIZADO'">
+                    <b>Tipo:</b> {{ documento.fechaEnvio }}
+                    <br>
+                  </span>
                   <br>
                   <b>No. oficio:</b> {{ documento.numeroOficio }}
                 </td>
@@ -121,7 +126,7 @@
                       Finalizar
                     </button>
                   </div>
-                  <div class="col-xs-12 col-lg-12" *ngIf="documento.estado == 'PENDIENTE' && documento.url">
+                  <div class="col-xs-12 col-lg-12" *ngIf="(documento.estado == 'PENDIENTE' || documento.estado == 'RECHAZADO') && documento.url">
                     <label>Asignar a</label>
                     <ng-select [multiple]="false" [options]="funcionarios" [(ngModel)]="funcionarioSelected"  (ngModelChange)="onChangedAssign($event, documento.id)" name="funcionario" required>
                     </ng-select>

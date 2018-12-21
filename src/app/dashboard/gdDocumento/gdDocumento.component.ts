@@ -28,6 +28,7 @@ export class GdDocumentoComponent implements OnInit {
   
   public table: any = null; 
   public documento: GdDocumento;
+  public documentoSelected: any = null;
 
   public filtro: any= null;
 
@@ -133,17 +134,12 @@ export class GdDocumentoComponent implements OnInit {
         'idDocumento': idDocumento
       };
 
-      this._DocumentoService.assign(datos, token).subscribe(
+      this._DocumentoService.show({'id': idDocumento}, token).subscribe(
         response => {
           if (response.status == 'success') {
-            swal({
-              title: 'Perfecto!',
-              text: response.message,
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            });
-
-            this.ngOnInit();
+            this.documentoSelected = response.data;
+            console.log(this.documentoSelected);
+            
           } else {
             swal({
               title: 'Error!',
@@ -151,6 +147,8 @@ export class GdDocumentoComponent implements OnInit {
               type: 'error',
               confirmButtonText: 'Aceptar'
             });
+
+            this.documentoSelected = null;
           }
           error => {
             this.errorMessage = <any>error;
@@ -161,6 +159,85 @@ export class GdDocumentoComponent implements OnInit {
           }
         }
       );
+
+      this._FuncionarioService.show({ 'id': event }, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.funcionarioSelected = response.data;
+            console.log(this.funcionarioSelected);
+            
+          } else {
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+
+            this.funcionarioSelected = null;
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+
+      var html = '¿Esta seguro que desea asignar este documento?';
+
+      swal({
+        title: 'Atención',
+        type: 'warning',
+        html: html,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Asignar!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down"></i> Cancelar',
+        cancelButtonAriaLabel: 'Thumbs down',
+      }).then((result) => {
+        if (result.value) {
+          this._DocumentoService.assign(datos, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                });
+
+                this.ngOnInit();
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === swal.DismissReason.cancel
+        ) {
+
+        }
+      });
+      
     }
   }
 

@@ -50,7 +50,7 @@
                                 <input class="form-control" [(ngModel)]="documento.telefono" name="telefono" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Telefono</label>
+                                <label>Correo</label>
                                 <input class="form-control" [(ngModel)]="documento.correo" name="correo" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-6">
@@ -126,7 +126,7 @@
                                 <label>Detalle de llegada
                                     <b class="text-danger">*</b>
                                 </label>
-                                <textarea class="form-control" [(ngModel)]="documento.detalleLlegada" name="nombreTransportadoraLlegada" required rows="4"
+                                <textarea class="form-control" [(ngModel)]="documento.detalleLlegada" name="nombreTransportadoraLlegada" rows="4"
                                     id="summernote"></textarea>
                             </div>
                         </div>
@@ -141,13 +141,13 @@
                 </div>
                 <div class="form-group row">
                     <div  class="col-xs-12 col-lg-12">
-                        <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
-                            <i class="fa fa-times"></i>
-                            Cancelar
-                        </button>
                         <button (click)="onRegister()" (ready)="ready($event)"  [disabled]="formReparto.invalid" class="btn btn-primary" type="button">
                             <i class="fa fa-save"></i>
                             Enviar
+                        </button>
+                        <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
                         </button>
                     </div>
                 </div>
