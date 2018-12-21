@@ -15,7 +15,7 @@
                                 name="conceptoId">
                             </ng-select>
                         </div>
-                        <div class="row" id="multi">
+                        <!-- <div class="row" id="multi">
                             <div class="col-sm-6 tile">
                                 <div class="card">
                                     <div class="card-header">
@@ -56,7 +56,19 @@
                                     </div>
                                 </div>
                             </div>
-                          </div>
+                        </div> -->
+                        
+                        <div class="col-lg-12 col-md-16">
+                            <label>Tramites*</label>
+                            <ng-select
+                                [multiple]="true"
+                                [options]="tramitesPrecio"
+                                [(ngModel)]="tramitesSelected"
+                                required
+                                name="tramitesId">
+                            </ng-select>
+                        </div>
+
                     </form> 
                     <div class=" load-wrapper2" *ngIf="!listado">
                         <div class="sk-wave">

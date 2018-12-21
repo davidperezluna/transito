@@ -21,7 +21,7 @@
                   <i class="fa fa-calculator"></i>
                 </button>
               </div>
-            </h5>
+            </h5> 
           </div>
           <div class="card-body">
             <table class="table " id="dataTables-example">
@@ -29,20 +29,20 @@
                 <tr>
                     <th>Id</th>
                     <th>Fecha inicio</th>
-                    <th>Nombre</th>
-                    <th>Tramite</th>
-                    <th>Modulo</th>
-                    <th>Valor</th>
+                    <th>Nombre</th> 
+                    <th>Tramite</th> 
+                    <th>Modulo</th>  
+                    <th>Valor</th> 
                     <th>Valor total</th>
                     <th>Acciones</th>
                 </tr>
-              </thead>
-              <tbody>
+              </thead> 
+              <tbody> 
                 <tr class="odd" *ngFor="let tramitePrecio of tramitePrecios; let i = index">
                   <td >{{ tramitePrecio.id }}</td>
                   <td >{{ tramitePrecio.fechaInicio }}</td>
                   <td >{{ tramitePrecio.nombre }}</td>
-                  <td placement="top" ngbTooltip="Tooltip on top" data-toggle="ngbTooltip"   title="holaMundo" data-html="true">{{tramitePrecio.tramite.nombre}}
+                  <td placement="top" ngbTooltip="Tooltip on top" data-toggle="ngbTooltip"   title="{{ tramitePrecio.nombre }}" data-html="true">{{tramitePrecio.tramite.nombre}}
                     <!-- <button type="button" class="btn btn-default" data-toggle="tooltip" title="holaMundo" data-placement="right"  data-original-title="Tooltip on right">Right</button> -->
                   </td>
                   <td >{{ tramitePrecio.modulo.abreviatura }}</td>
