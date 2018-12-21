@@ -20,14 +20,14 @@
                     <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>Código</th>
                                 <th>Nombre</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let hipotesis of svCfgHipotesis; let i = index">
-                                <td>{{ hipotesis.id }}</td>
+                                <td>{{ hipotesis.codigo }}</td>
                                 <td>{{ hipotesis.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(hipotesis)" class="btn btn-xs btn-info" type="button">

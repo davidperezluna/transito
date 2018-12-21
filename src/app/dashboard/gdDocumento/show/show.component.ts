@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { GdDocumentoService } from '../../../services/gdDocumento.service';
+import { DepartamentoService } from '../../../services/departamento.service';
+import { MunicipioService } from '../../../services/municipio.service';
 import { GdCfgTipoCorrespondenciaService } from '../../../services/gdCfgTipoCorrespondencia.service';
 import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
 import { LoginService } from '../../../services/login.service';
@@ -15,7 +16,6 @@ export class ShowComponent implements OnInit {
 @Input() documento: any = null;
 public errorMessage;
 
-public funcionarios: any;
 public date: any;
 
 public file: any = null;
@@ -23,6 +23,9 @@ public fileSelected: File = null;
 
   public editable = false;
 
+  public departamentos: any;
+  public municipios: any;
+  public departamentoSelected: any;
   public tiposCorrespondencia: any;
   public mediosCorrespondencia: any;
  
@@ -34,7 +37,8 @@ public datos = {
 
 constructor(
   private _DocumentoService: GdDocumentoService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _DepartamentoService: DepartamentoService,
+  private _MunicipioService: MunicipioService,
   private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
   private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
   private _loginService: LoginService,
@@ -43,14 +47,14 @@ constructor(
   ngOnInit() {
     this.date = new Date();
 
-    this._FuncionarioService.select().subscribe(
+    this._DepartamentoService.getDepartamentoSelect().subscribe(
       response => {
-        this.funcionarios = response;
+        this.departamentos = response;
       },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -99,6 +103,23 @@ constructor(
     }
   }
 
+  onChangedDepartamento(id) {
+    if (id) {
+      this._MunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+        response => {
+          this.municipios = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      );
+    }
+  }
+
   onChangedTipoCorrespondencia(event) {
     if (event !== undefined) {
       let token = this._loginService.getToken();
@@ -128,7 +149,7 @@ constructor(
 
       let token = this._loginService.getToken();
 
-      this._DocumentoService.assign(this.file, this.datos, token).subscribe(
+      this._DocumentoService.update(this.file, this.datos, token).subscribe(
         response => {
           if (response.status == 'success') {
             swal({

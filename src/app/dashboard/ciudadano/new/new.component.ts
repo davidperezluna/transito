@@ -103,7 +103,6 @@ constructor(
     this._generoService.getGeneroSelect().subscribe(
       response => {
         this.generos = response;
-        console.log(this.generos);
       },
       error => {
         this.errorMessage = <any>error;
@@ -177,11 +176,9 @@ constructor(
     }).then((result) => {
         if (result.value) {
           
-    this._CiudadanoService.register(this.ciudadano,token).subscribe(
+    this._CiudadanoService.register({'ciudadano': this.ciudadano, 'campo': 'ciudadano'},token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -220,7 +217,6 @@ constructor(
     this._departamentoService.getDepartamentoPorPaisSelect(this.paisNacimientoSelected).subscribe(
       response => {
         this.departamentosNacimiento = response;
-        console.log(this.departamentosNacimiento);
       },
       error => {
         this.errorMessage = <any>error;
@@ -239,8 +235,6 @@ constructor(
       this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoNacimientoSelected).subscribe(
         response => {
           this.municipiosNacimiento = response;
-          console.log(this.municipiosNacimiento);
-
         },
         error => {
           this.errorMessage = <any>error;
@@ -259,7 +253,6 @@ constructor(
       this._departamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
         response => {
           this.departamentosResidencia = response;
-          console.log(this.departamentosResidencia);
         },
         error => {
           this.errorMessage = <any>error;
@@ -277,8 +270,6 @@ constructor(
       this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoResidenciaSelected).subscribe(
         response => {
           this.municipiosResidencia = response;
-          console.log(this.municipiosResidencia);
-
         },
         error => {
           this.errorMessage = <any>error;
@@ -293,7 +284,6 @@ constructor(
   }
   
   isCiudadano() {
-    console.log(this.tipoIdentificacionSelected);
     let token = this._loginService.getToken();
     let datos = {
       'identificacion':this.ciudadano.numeroIdentificacionUsuario,
@@ -302,8 +292,7 @@ constructor(
     
     this._CiudadanoService.isCiudadano(datos,token).subscribe(
       response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'error'){
+        if(response.status == 'error'){
           //identificacion encontrada
           this.isError = true;
           this.isExist = false;

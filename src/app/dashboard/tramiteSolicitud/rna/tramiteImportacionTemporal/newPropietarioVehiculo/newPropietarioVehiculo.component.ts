@@ -176,9 +176,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
 
                 this._CiudadanoService.register({ 'ciudadano': this.ciudadano, 'campo': 'importacion-temporal'}, token).subscribe(
                     response => {
-                        this.respuesta = response;
-                        console.log(this.respuesta);
-                        if (this.respuesta.status == 'success') {
+                        if (response.status == 'success') {
                             this.ready.emit(true);
                             swal({
                                 title: 'Perfecto!',
