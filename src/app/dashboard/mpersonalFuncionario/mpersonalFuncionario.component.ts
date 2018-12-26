@@ -212,6 +212,16 @@ export class MpersonalFuncionarioComponent implements OnInit {
 		this._FuncionarioService.searchByParametros(this.datos,token).subscribe(
 			response => {
         if(response.status == 'success'){
+          this.nombre = null;
+          this.cargoSelected = null;
+          this.tipoContratoSelected = null;
+          this.sedeOperativaSelected = null;
+          this.identificacion= null;
+          this.datos.cargo = null;
+          this.datos.fechaFin = null;
+          this.datos.fechaInicio = null;
+          this.datos.nombramiento = null;
+          this.datos.numeroContrato = null;
           this.funcionarios = response.data;
           this.iniciarTabla();
           this.formIndex = true;
