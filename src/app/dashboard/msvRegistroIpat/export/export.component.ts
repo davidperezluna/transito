@@ -201,11 +201,10 @@ export class ExportComponent implements OnInit {
         );
     }
     iniciarTabla() {
-
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
-            orientation: 'portrait', 
+            orientation: 'landscape', 
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
             buttons: [
@@ -263,7 +262,7 @@ export class ExportComponent implements OnInit {
     }
 
     onEnviar(){
-        this.table.destroy();
+        //this.table.destroy();
         let token = this._LoginService.getToken();
         this._IpatService.buscarIpat({"file":this.txt, "datos":this.exportIpat}, token).subscribe(
             response => {
@@ -272,14 +271,20 @@ export class ExportComponent implements OnInit {
                     let timeoutId = setTimeout(() => {
                         this.iniciarTabla();
                     }, 100);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
                 }
             }
         );

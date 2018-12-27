@@ -266,9 +266,9 @@ export class NewComponent implements OnInit {
  
     this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.vehiculo = this.respuesta.data;
+        console.log(response);
+        if (response.status == 'success') {
+          this.vehiculo = response.data;
           this.placaEncontrada = 2;
         } else {
           this.placaEncontrada = 3;
@@ -289,7 +289,7 @@ export class NewComponent implements OnInit {
     let identificacion = {
       'numeroIdentificacion': this.identificacionDemandado,
     };
-    this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
@@ -315,7 +315,7 @@ export class NewComponent implements OnInit {
     let identificacion = {
       'numeroIdentificacion': this.identificacionDemandante,
     };
-    this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
