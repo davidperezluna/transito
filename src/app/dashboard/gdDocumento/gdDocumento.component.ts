@@ -24,6 +24,7 @@ export class GdDocumentoComponent implements OnInit {
   public formPrint = false;
   public formShow = false;
   public formAssign = false;
+  public formRecord = false;
   public formSearch = true;
   
   public table: any = null; 
@@ -59,6 +60,7 @@ export class GdDocumentoComponent implements OnInit {
     this.formNew = false;
     this.formEdit = false;
     this.formShow = false;
+    this.formRecord = false;
     this.formPrint = false;
     this.formAssign = false;
 
@@ -126,6 +128,8 @@ export class GdDocumentoComponent implements OnInit {
   }
 
   onChangedAssign(event,idDocumento) {
+    console.log(event);
+    
     if (event !== undefined) {
       let token = this._loginService.getToken();
 
@@ -137,9 +141,7 @@ export class GdDocumentoComponent implements OnInit {
       this._DocumentoService.show({'id': idDocumento}, token).subscribe(
         response => {
           if (response.status == 'success') {
-            this.documentoSelected = response.data;
-            console.log(this.documentoSelected);
-            
+            this.documentoSelected = response.data;            
           } else {
             swal({
               title: 'Error!',
@@ -164,8 +166,6 @@ export class GdDocumentoComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.funcionarioSelected = response.data;
-            console.log(this.funcionarioSelected);
-            
           } else {
             swal({
               title: 'Error!',
@@ -245,6 +245,7 @@ export class GdDocumentoComponent implements OnInit {
     this.formIndex = false;
     this.formEdit = false;
     this.formShow = false;
+    this.formRecord = false;
     this.formPrint = false;
     this.formAssign = false;
     this.formNew = true;
@@ -257,7 +258,21 @@ export class GdDocumentoComponent implements OnInit {
     this.formEdit = false;
     this.formPrint = false;
     this.formAssign = false;
+    this.formRecord = false;
     this.formShow = true;
+  }
+
+  onRecord(documento: any) {
+    this.documento = documento;    
+    if (this.documento) {
+      this.formIndex = false;
+      this.formNew = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.formRecord = true;
+      this.formAssign = false;
+      this.formPrint = false;
+    }
   }
 
   onPrint(documento: any) {
@@ -267,6 +282,7 @@ export class GdDocumentoComponent implements OnInit {
       this.formNew = false;
       this.formEdit = false;
       this.formShow = false;
+      this.formRecord = false;
       this.formAssign = false;
       this.formPrint = true;
     }
@@ -331,6 +347,53 @@ export class GdDocumentoComponent implements OnInit {
         }
       }
     });
+  }
+
+  onSearchByState(estado: any) {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._loginService.getToken();
+
+    this._DocumentoService.searchByState({ 'state':estado }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.formIndex = true;
+          this.formAssign = false;
+          this.documentos = response.data;
+
+          if (this.table) {
+            this.table.destroy();
+          }
+
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
+
+          swal.close();
+        } else {
+          swal({
+            title: 'Alerta',
+            type: 'warning',
+            text: response.message,
+            showCloseButton: true,
+          });
+
+          this.documentos = null;
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
   }
 
   delete(id: any) {
