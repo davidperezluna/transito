@@ -151,6 +151,10 @@ export class NewComponent implements OnInit {
   public ciudadResidenciaConductorSelected: any;
   public ciudadResidenciaTestigoSelected: any;
   public ciudadResidenciaVictimaSelected: any;
+
+  //
+  public tipoVictimaSelected: any;
+  public gravedadVictimaSelected: any;
   
   //select vehiculo
   public nacionalidadVehiculoSelected: any;
@@ -1167,6 +1171,7 @@ export class NewComponent implements OnInit {
       { 'fallas': this.itemStringsRightFalla },
       { 'dataConductores': this.conductores },
       { 'dataVehiculos': this.vehiculos },
+      { 'dataVictimas': this.victimas },
     ];
     this._MsvRegistroIpatService.register(data, token).subscribe(
       response => {
@@ -1429,6 +1434,7 @@ export class NewComponent implements OnInit {
             this.msvRegistroIpat.telefonoVictima = response.data[0].telefono;
             //swal.close();
             if (this.vehiculoIpat) {
+              console.log("entra al if buscar");
               let i = 0 ;
               this.vehiculos.forEach(element => {
                 i += 1;
@@ -1439,12 +1445,15 @@ export class NewComponent implements OnInit {
                 this.vehiculosIpat.push(obj);
               });
             } else {
+              console.log("entra al else buscar");
               let obj = {
                 value: this.msvRegistroIpat.placa,
                 label: this.msvRegistroIpat.placa,
+                
               };
               this.vehiculosIpat.push(obj);
             }
+            console.log(this.vehiculosIpat);
           } else {
             swal({
               title: 'Alerta!',
@@ -1499,15 +1508,15 @@ export class NewComponent implements OnInit {
       );
     }
   }
-  obtenerCorrespondio(event) {
+  obtenerCorrespondio(e) {
     let token = this._LoginService.getToken();
 
       this._MsvRegistroIpatService.getCorrespondio(this.msvRegistroIpat, token).subscribe(
         response => {
           if (response.status == 'success') {
-            if(this.msvRegistroIpat.correspondio != null) {
+            /* if(this.msvRegistroIpat.correspondio != null) {
               this.numeroCorrespondio = true;
-            }
+            } */
             this.msvRegistroIpat.correspondio = response.data;
           } else {
             swal({
@@ -1545,12 +1554,6 @@ export class NewComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
-          /* if(this.cantConductores == 0) {
-            this.cantConductores = 1;
-          } else {
-            this.cantConductores = this.cantConductores += 1; 
-            console.log(this.cantConductores);
-          } */
 
           //datos de cada conductor
           let dataConductores = {
@@ -1567,19 +1570,6 @@ export class NewComponent implements OnInit {
             'teléfono': this.msvRegistroIpat.telefonoConductor,
           };
           this.conductores.push(dataConductores);
-          /* this.conductores.push(
-            'identificacion:' + this.msvRegistroIpat.identificacionConductor,
-            'tipo identificacion: ' + this.msvRegistroIpat.tipoIdentificacionConductor,
-            'nombres: ' + this.msvRegistroIpat.nombresConductor,
-            'apellidos: ' + this.msvRegistroIpat.apellidosConductor,
-            'nacionalidad: ' + this.nacionalidadConductorSelected,
-            'fecha nacimiento: ' + this.msvRegistroIpat.fechaNacimientoConductor,
-            'sexo: ' + this.sexoConductorSelected,
-            'gravedad: ' + this.msvRegistroIpat.idGravedadConductor,
-            'direccion: ' + this.msvRegistroIpat.direccionResidenciaConductor,
-            'ciudad residencia: ' + this.ciudadResidenciaConductorSelected,
-            'teléfono: ' + this.msvRegistroIpat.telefonoConductor,
-          ); */
 
           this.usuario = false;
           this.msvRegistroIpat.identificacionConductor = '';
@@ -1685,12 +1675,65 @@ export class NewComponent implements OnInit {
     );
   }
 
-  registrarVictima(){
-    alert("registrar victima");
+  registrarVictima() {
+    let token = this._LoginService.getToken();
+
+    let dataVictimas = {
+      'tipo victima': this.tipoVictimaSelected,
+      'gravedad victima': this.gravedadVictimaSelected,
+      'tipo documento': this.tipoIdentificacionVictimaSelected,
+      'identificacion': this.msvRegistroIpat.identificacionVictima,
+      'nombres': this.msvRegistroIpat.nombresVictima,
+      'apellidos': this.msvRegistroIpat.apellidosVictima,
+      'nacionalidad': this.nacionalidadVictimaSelected,
+      'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoVictima,
+      'sexo': this.sexoVictimaSelected,
+      'dirección residencia': this.msvRegistroIpat.direccionResidenciaVictima,
+      'ciudad residencia': this.ciudadResidenciaVictimaSelected,
+      'telefono': this.msvRegistroIpat.telefonoVictima,
+      'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
+    };
+    this.victimas.push(dataVictimas);
+    this.victima = false;
+    this.tipoVictimaSelected = [0];
+    this.gravedadVictimaSelected = [0];
+    this.msvRegistroIpat.identificacionVictima = '';
+    this.msvRegistroIpat.tipoIdentificacionVictima = 0;
+    this.msvRegistroIpat.nombresVictima = '';
+    this.msvRegistroIpat.apellidosVictima = '';
+    this.nacionalidadVictimaSelected = [0];
+    this.msvRegistroIpat.fechaNacimientoVictima = '';
+    this.sexoVictimaSelected = [0];
+    this.msvRegistroIpat.direccionResidenciaVictima = '';
+    this.ciudadResidenciaVictimaSelected = [0];
+    this.msvRegistroIpat.telefonoVictima = '';
   }
 
   totalIpat(){
     this.msvRegistroIpat.totalAcompaniantes = this.msvRegistroIpat.cantidadAcompaniantes;
     this.msvRegistroIpat.totalConductores = this.cantConductores;
+  }
+
+  imprimirFormatos() {
+    alert("formatos policia judicial");
+  }
+
+  changedMunicipio(e) {
+    if (e) {
+      let token = this._LoginService.getToken();
+      this._MunicipioService.showMunicipio(token, this.msvRegistroIpat.idMunicipio).subscribe(
+        response => {
+          this.msvRegistroIpat.idMunicipio = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
   }
 }

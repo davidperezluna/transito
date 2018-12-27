@@ -146,7 +146,7 @@ export class MsvRegistroIpat{
 		public victima: string,
 		public nombresVictima: string,
 		public apellidosVictima: string,
-		public tipoIdentificacionVictima: string,
+		public tipoIdentificacionVictima: number,
 		public identificacionVictima: string,
 		public nacionalidadVictima: string,
 		public fechaNacimientoVictima: string,
