@@ -24,10 +24,12 @@ export class GdDocumentoComponent implements OnInit {
   public formPrint = false;
   public formShow = false;
   public formAssign = false;
+  public formRecord = false;
   public formSearch = true;
   
   public table: any = null; 
   public documento: GdDocumento;
+  public documentoSelected: any = null;
 
   public filtro: any= null;
 
@@ -58,6 +60,7 @@ export class GdDocumentoComponent implements OnInit {
     this.formNew = false;
     this.formEdit = false;
     this.formShow = false;
+    this.formRecord = false;
     this.formPrint = false;
     this.formAssign = false;
 
@@ -125,6 +128,8 @@ export class GdDocumentoComponent implements OnInit {
   }
 
   onChangedAssign(event,idDocumento) {
+    console.log(event);
+    
     if (event !== undefined) {
       let token = this._loginService.getToken();
 
@@ -133,17 +138,10 @@ export class GdDocumentoComponent implements OnInit {
         'idDocumento': idDocumento
       };
 
-      this._DocumentoService.assign(datos, token).subscribe(
+      this._DocumentoService.show({'id': idDocumento}, token).subscribe(
         response => {
           if (response.status == 'success') {
-            swal({
-              title: 'Perfecto!',
-              text: response.message,
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            });
-
-            this.ngOnInit();
+            this.documentoSelected = response.data;            
           } else {
             swal({
               title: 'Error!',
@@ -151,6 +149,8 @@ export class GdDocumentoComponent implements OnInit {
               type: 'error',
               confirmButtonText: 'Aceptar'
             });
+
+            this.documentoSelected = null;
           }
           error => {
             this.errorMessage = <any>error;
@@ -161,6 +161,83 @@ export class GdDocumentoComponent implements OnInit {
           }
         }
       );
+
+      this._FuncionarioService.show({ 'id': event }, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.funcionarioSelected = response.data;
+          } else {
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+
+            this.funcionarioSelected = null;
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+
+      var html = '¿Esta seguro que desea asignar este documento?';
+
+      swal({
+        title: 'Atención',
+        type: 'warning',
+        html: html,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Asignar!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down"></i> Cancelar',
+        cancelButtonAriaLabel: 'Thumbs down',
+      }).then((result) => {
+        if (result.value) {
+          this._DocumentoService.assign(datos, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                });
+
+                this.ngOnInit();
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        } else if (
+          // Read more about handling dismissals
+          result.dismiss === swal.DismissReason.cancel
+        ) {
+
+        }
+      });
+      
     }
   }
 
@@ -168,6 +245,7 @@ export class GdDocumentoComponent implements OnInit {
     this.formIndex = false;
     this.formEdit = false;
     this.formShow = false;
+    this.formRecord = false;
     this.formPrint = false;
     this.formAssign = false;
     this.formNew = true;
@@ -180,7 +258,21 @@ export class GdDocumentoComponent implements OnInit {
     this.formEdit = false;
     this.formPrint = false;
     this.formAssign = false;
+    this.formRecord = false;
     this.formShow = true;
+  }
+
+  onRecord(documento: any) {
+    this.documento = documento;    
+    if (this.documento) {
+      this.formIndex = false;
+      this.formNew = false;
+      this.formEdit = false;
+      this.formShow = false;
+      this.formRecord = true;
+      this.formAssign = false;
+      this.formPrint = false;
+    }
   }
 
   onPrint(documento: any) {
@@ -190,6 +282,7 @@ export class GdDocumentoComponent implements OnInit {
       this.formNew = false;
       this.formEdit = false;
       this.formShow = false;
+      this.formRecord = false;
       this.formAssign = false;
       this.formPrint = true;
     }
@@ -254,6 +347,53 @@ export class GdDocumentoComponent implements OnInit {
         }
       }
     });
+  }
+
+  onSearchByState(estado: any) {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._loginService.getToken();
+
+    this._DocumentoService.searchByState({ 'state':estado }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.formIndex = true;
+          this.formAssign = false;
+          this.documentos = response.data;
+
+          if (this.table) {
+            this.table.destroy();
+          }
+
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
+
+          swal.close();
+        } else {
+          swal({
+            title: 'Alerta',
+            type: 'warning',
+            text: response.message,
+            showCloseButton: true,
+          });
+
+          this.documentos = null;
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
   }
 
   delete(id: any) {

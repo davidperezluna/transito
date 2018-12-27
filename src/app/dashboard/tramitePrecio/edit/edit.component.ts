@@ -34,7 +34,6 @@ constructor(
 
   ngOnInit(){
 
-
     this._moduloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
@@ -44,23 +43,18 @@ constructor(
       }, 
       error => {
         this.errorMessage = <any>error;
-
         if(this.errorMessage != null){
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
       }
     );
-
-
-
-   
-    
   }
 
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
     this.tramitePrecio.tramiteId = this.tramiteSelected;
@@ -90,9 +84,7 @@ constructor(
 		}); 
   }
   changedModulo(e){
-
     if (e) {
-      
     this._tramiteService.getTramitePorModuloSelect(this.moduloSelected).subscribe(
       response => {
         this.tramites = response;
@@ -109,7 +101,9 @@ constructor(
         }
       }
     );
+
     this._claseService.getClasePorModuloSelect(this.moduloSelected).subscribe(
+      
         response => { 
           this.clases = response;
           setTimeout(() => {
@@ -118,15 +112,13 @@ constructor(
         }, 
         error => {
           this.errorMessage = <any>error;
-
           if(this.errorMessage != null){
             console.log(this.errorMessage);
             alert("Error en la petición");
           }
         }
+
       );
     }
-
   }
-
 }

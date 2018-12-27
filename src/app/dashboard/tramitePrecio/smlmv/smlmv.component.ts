@@ -21,6 +21,8 @@ public errorMessage;
 public respuesta;
 public table:any; 
 public conceptoSelected:any; 
+public tramitesSelected:any; 
+public tramitesPrecio:any; 
 public valorConcepto:number = 0; 
 public calcularForm = false; 
 public conceptoForm = false; 
@@ -31,11 +33,8 @@ public tramitesPrecios:any[]= [];
 public conceptoParametroTramites:any[]= [];
 public conceptos:any;
 
-  itemStringsLeft: any[] = [];
-  itemStringsRight: any[] = [];  
 
 constructor(
-  private _ParametroService: ParametroService,
   private _loginService: LoginService,
   private _TramitePrecioService: TramitePrecioService,
   private _ConceptoParametroService: ConceptoParametroService,
@@ -77,14 +76,12 @@ constructor(
           alert("Error en la petición");
         }
       }
-    );
-
-    this._TramitePrecioService.getTramitePrecio().subscribe(
-      response => {
-        this.tramitePrecios = response.data;
-        this.tramitePrecios.forEach(tramitePrecio => {
-        this.itemStringsLeft.push(tramitePrecio.nombre);
-        });
+      );
+      
+      this._TramitePrecioService.getTramitePrecioSelect().subscribe(
+        response => {
+        this.tramitesPrecio = response;
+        console.log(this.tramitesPrecio);
         this.listado = true;
       }, 
       error => {
@@ -120,18 +117,18 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-      let datos = {
-          'trmites': this.itemStringsRight,
+      let datos = { 
+          'trmites': this.tramitesSelected,  
           'concepto': this.conceptoSelected
-      };
+      }; 
 		this._ConceptoParametroTramiteService.register(datos,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
           this.table.destroy();
           this.ngOnInit();
-          swal({
-            title: 'Perfecto!',
+          swal({  
+            title: 'Perfecto!', 
             text: 'Registro exitoso!',
             type: 'success',
             confirmButtonText: 'Aceptar'
@@ -152,8 +149,8 @@ constructor(
 					}
 				}
 
-		}); 
-  }
+		});   
+  }   
   newConcepto(){
     this.conceptoForm = true;
   }

@@ -10,14 +10,15 @@ import { ShowComponent } from './show/show.component';
 import { PrintComponent } from './print/print.component';
 import { TemplateComponent } from './template/template.component';
 import { SearchComponent } from './search/search.component';
+import { RecordComponent } from './record/record.component';
 import { NewCiudadanoComponent } from './newCiudadano/newCiudadano.component';
 import { SelectModule } from 'angular2-select';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [GdDocumentoComponent,NewComponent,EditComponent,ShowComponent,PrintComponent,TemplateComponent,SearchComponent,NewCiudadanoComponent],
-    exports: [GdDocumentoComponent, NewComponent,EditComponent,ShowComponent,PrintComponent,TemplateComponent,SearchComponent,NewCiudadanoComponent],
+    declarations: [GdDocumentoComponent, NewComponent, EditComponent, ShowComponent, PrintComponent, TemplateComponent, SearchComponent, RecordComponent,NewCiudadanoComponent],
+    exports: [GdDocumentoComponent, NewComponent, EditComponent, ShowComponent, PrintComponent, TemplateComponent, SearchComponent, RecordComponent, NewCiudadanoComponent],
     providers:[GdDocumentoService]
 })
 
