@@ -51,7 +51,7 @@ export class NewRnaComponent implements OnInit {
   public identificacionApoderado = false;
   public apoderado: any = false;
 
-  public importacion: any;
+  public importacion: any =  'No';
   public cantidadSustrato = 1;
   public moduloId = 1;
   public resumen = {}; public datos = {
@@ -72,6 +72,22 @@ export class NewRnaComponent implements OnInit {
   ngOnInit() {
     this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.tramiteSolicitud = new TramiteSolicitud(null,null, null, null, null, null,null,null,null);
+    swal({
+      title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.importacion = 'Si';
+      } else if (result.dismiss === swal.DismissReason.cancel) {
+        this.importacion = 'No';
+      }
+    })
+
   }
   onCancelar() {
     this.ready.emit(true);
