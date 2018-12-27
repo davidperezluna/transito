@@ -51,7 +51,6 @@ export class EmpresaService {
 	}
 
 	showNitOrNombre(token,parametro){
-
 		let json = JSON.stringify(parametro);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
