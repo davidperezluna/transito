@@ -11,6 +11,7 @@ import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.se
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
 import { GeneroService } from '../../../services/genero.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 
 import swal from 'sweetalert2';
@@ -19,7 +20,8 @@ declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './export.component.html'
+    templateUrl: './export.component.html',
+    providers: [DatePipe]
 })
 export class ExportComponent implements OnInit {
     //@Output() ready = new EventEmitter<any>();
@@ -34,6 +36,7 @@ export class ExportComponent implements OnInit {
     public valido = true;
 
     public date: any;
+    public fecha: any;
     
     public exportIpat: MsvExportIpat;
 
@@ -201,14 +204,28 @@ export class ExportComponent implements OnInit {
         );
     }
     iniciarTabla() {
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
-            orientation: 'landscape', 
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
+            /* 'excel', 'pdf', */
             buttons: [
-                'excel', 'pdf'
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    title: 'xls',
+                    filename: 'Reporte_Accidentalidad_'+ this.fecha,
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    filename: 'Reporte_AccidentalidadPDF_'+ this.fecha,
+                }
             ],
             oLanguage: {
                 oPaginate: {
