@@ -18,6 +18,7 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
     public tramiteFacturaSelected: any; 
     public sustratos: any;
     public vehiculo: any = false;
+    public vehiculoRna: any = false;
     public placa: any;
     public sustratoSelected: any;
     public tipoRegrabacionList: string[];
@@ -79,10 +80,42 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
         let datos = {
             'placa' : this.placa
         }
+        
         this._VehiculoService.showVehiculoPlaca(token, datos).subscribe(
-          response => {
-            this.vehiculo = response.data;
-            swal.close();
+          responseVehiculo => {
+            if(responseVehiculo.status == 'success'){
+              this.vehiculo = responseVehiculo.data;
+              this._VehiculoService.showVehiculoRna(this.vehiculo.id, token).subscribe(
+                response => {
+                  if (response.status == 'success') {
+                    this.vehiculoRna = response.vehiculo;
+                    swal.close();
+                  }else{
+                    swal.close();
+                    swal({
+                      title: 'Error!',
+                      text: response.message,
+                      type: 'error',
+                      confirmButtonText: 'Aceptar'
+                    })
+                  }
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+              });
+            }else{
+              swal.close();
+              swal({
+                title: 'Error!',
+                text: responseVehiculo.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              })
+            }
           error => {
             this.errorMessage = <any>error;
             if (this.errorMessage != null) {
