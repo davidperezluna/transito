@@ -1,10 +1,8 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { SustratoService } from '../../services/sustrato.service';
+import { Component, OnInit } from '@angular/core';
+
 import { LoginService } from '../../services/login.service';
 import { VehiculoService } from '../../services/vehiculo.service';
-import { CiudadanoService } from '../../services/ciudadano.service';
-import { DefaultService } from '../../services/default.service';
+
 import { environment } from 'environments/environment';
 
 import swal from 'sweetalert2';
@@ -38,7 +36,8 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
     public ciudadano:any;
     public txt:any;
     public valido:any;
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'nroRunt': null,
         'observacion': null,                  
         'certificadoEntregada': null,
@@ -48,12 +47,9 @@ export class rnaCertificadoTradicionOficialComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _SustratoService: SustratoService,
         private _VehiculoService: VehiculoService,
-        private _CiudadanoService: CiudadanoService,
-        private _DefaultService: DefaultService,
+      
     ) { }
 
     ngOnInit() {

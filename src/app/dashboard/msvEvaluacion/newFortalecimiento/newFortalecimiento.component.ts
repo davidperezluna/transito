@@ -4,7 +4,6 @@ import { MsvParametroService } from '../../../services/msvParametro.service';
 import { MsvVariableService } from '../../../services/msvVariable.service';
 import { MsvCalificacionService } from '../../../services/msvCalificacion.service';
 import swal from 'sweetalert2';
-import { tokenKey } from '@angular/core/src/view/util';
 declare var $: any;
 
 @Component({
@@ -16,7 +15,7 @@ export class NewFortalecimientoComponent implements OnInit {
   @Input() miEmpresa: any = null;
   public msj = '';
   public showT = false;
-  public msvParametros;
+  public msvParametros;  
   public msvVariables;
   public msvVariablesLength;
   public tramiteNombreSelected:any;
@@ -33,7 +32,7 @@ export class NewFortalecimientoComponent implements OnInit {
 
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     
     let token = this._loginService.getToken();    
     this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
@@ -51,13 +50,11 @@ export class NewFortalecimientoComponent implements OnInit {
       }
       }
     );
-
   }
 
   onEnviar() {
     console.log(this.msvParametros);
     let token = this._loginService.getToken();
     this._MsvCalificacionService.newCalificacion(token,this.msvParametros,this.miEmpresa.id).subscribe();
-    
   }
 }

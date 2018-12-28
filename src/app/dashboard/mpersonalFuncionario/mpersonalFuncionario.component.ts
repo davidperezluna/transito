@@ -187,6 +187,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
   }
   
   onSearch(){
+    this.funcionarios = null;
     this.datos.nombre = this.nombre;
     this.datos.identificacion = this.identificacion;
     this.datos.cargo = this.cargoSelected;
@@ -223,7 +224,12 @@ export class MpersonalFuncionarioComponent implements OnInit {
           this.datos.nombramiento = null;
           this.datos.numeroContrato = null;
           this.funcionarios = response.data;
-          this.iniciarTabla();
+          if (this.table) {
+            this.table.destroy();
+          }
+          setTimeout(() => {
+            this.iniciarTabla();
+          });
           this.formIndex = true;
           swal.close();
         }else{
@@ -259,9 +265,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
   }
 
   iniciarTabla(){
-    if (this.table) {
-      this.table.destroy();
-    }
+    
     
     $('#dataTables-example').DataTable({
       responsive: true,
