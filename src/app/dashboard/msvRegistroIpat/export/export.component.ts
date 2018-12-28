@@ -11,6 +11,7 @@ import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.se
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
 import { GeneroService } from '../../../services/genero.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 
 import swal from 'sweetalert2';
@@ -19,7 +20,8 @@ declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './export.component.html'
+    templateUrl: './export.component.html',
+    providers: [DatePipe]
 })
 export class ExportComponent implements OnInit {
     //@Output() ready = new EventEmitter<any>();
@@ -34,6 +36,7 @@ export class ExportComponent implements OnInit {
     public valido = true;
 
     public date: any;
+    public fecha: any;
     
     public exportIpat: MsvExportIpat;
 
@@ -201,15 +204,28 @@ export class ExportComponent implements OnInit {
         );
     }
     iniciarTabla() {
-
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
-            orientation: 'portrait', 
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
+            /* 'excel', 'pdf', */
             buttons: [
-                'excel', 'pdf'
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    title: 'xls',
+                    filename: 'Reporte_Accidentalidad_'+ this.fecha,
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    filename: 'Reporte_AccidentalidadPDF_'+ this.fecha,
+                }
             ],
             oLanguage: {
                 oPaginate: {
@@ -263,7 +279,7 @@ export class ExportComponent implements OnInit {
     }
 
     onEnviar(){
-        this.table.destroy();
+        //this.table.destroy();
         let token = this._LoginService.getToken();
         this._IpatService.buscarIpat({"file":this.txt, "datos":this.exportIpat}, token).subscribe(
             response => {
@@ -272,14 +288,20 @@ export class ExportComponent implements OnInit {
                     let timeoutId = setTimeout(() => {
                         this.iniciarTabla();
                     }, 100);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
                 }
             }
         );

@@ -9,6 +9,7 @@ import { OrganismoTransitoService } from '../../../services/organismoTransito.se
 import { MunicipioService } from '../../../services/municipio.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
+import { EmpresaService } from '../../../services/empresa.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { MparqPatioService } from '../../../services/mparqPatio.service';
@@ -128,6 +129,7 @@ constructor(
   private _MunicipioService: MunicipioService,
   private _VechiculoService: VehiculoService,
   private _CiudadanoService: CiudadanoService,
+  private _EmpresaService: EmpresaService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _TipoIdentificacionService: TipoIdentificacionService,
   private _MparqPatioService: MparqPatioService,
@@ -424,7 +426,7 @@ constructor(
         }
       });
 
-     this._MpersonalFuncionarioService.show(token,e).subscribe(
+      this._MpersonalFuncionarioService.show({ 'id': e }, token).subscribe(
         response => {
           if (response.status == 'success') {
             this.funcionario = response.data;
@@ -542,31 +544,56 @@ constructor(
       }); 
   }
   
-  onSearchInfractor(){
-    swal({
-      title: 'Cargando Datos del Ciudadano!',
-      text: 'Solo tardará unos segundos por favor espere.',
-      timer: 1000,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    });
-
+  onSearchPropietario(){
     let token = this._loginService.getToken();
-    this._CiudadanoService.searchByIdentificacion(token,this.identificacion).subscribe(
+
+    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.propietario.identificacion }, token).subscribe(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
 
-          this._CiudadanoService.calculateAge({'fechaNacimiento':this.ciudadano.fechaNacimiento}, token).subscribe(
+          this.propietario.nombres = this.ciudadano.primerNombre + ' ' + this.ciudadano.primerApellido;
+        }
+      error => {
+          this.errorMessage = <any>error;
+          if(this.errorMessage != null){
+            console.log(this.errorMessage);
+            alert("Error en la petición"); 
+          }
+        }
+
+    }); 
+  }
+
+  onSearchEmpresa() {
+    let token = this._loginService.getToken();
+
+    this._EmpresaService.showNit(token, { 'nit':this.empresa.nit}).subscribe(
+      response => {
+        if (response.status == "success") {
+          this.empresa.nombre = response.data.nombre;
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      });
+  }
+
+  onSearchInfractor() {
+    let token = this._loginService.getToken();
+
+    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.infractor.identificacion }, token).subscribe(
+      response => {
+        if (response.status == "success") {
+          this.ciudadano = response.data;
+
+          this._CiudadanoService.calculateAge({ 'fechaNacimiento': this.ciudadano.fechaNacimiento }, token).subscribe(
             response => {
-              this.edad = response.data;
+              this.infractor.edad = response.data;
 
               error => {
                 this.errorMessage = <any>error;
@@ -578,26 +605,24 @@ constructor(
             }
           );
 
-        }else{
-          swal({
-            title: 'Atención!',
-            text: response.msj,
-            type: 'warning',
-            confirmButtonText: 'Aceptar'
-          });
-          
-          this.ciudadano = false;
+          this.infractor.nombres = this.ciudadano.primerNombre + ' ' + this.ciudadano.primerApellido;
+
+          if (this.ciudadano.ciudadano.direccion) {
+            this.infractor.direccion = this.ciudadano.ciudadano.direccion;
+          }
+          if (this.ciudadano.ciudadano.telefono) {
+            this.infractor.telefono = this.ciudadano.ciudadano.telefono;
+          }
         }
-        console.log(this.vehiculo);
-      error => {
+        error => {
           this.errorMessage = <any>error;
-          if(this.errorMessage != null){
+          if (this.errorMessage != null) {
             console.log(this.errorMessage);
-            alert("Error en la petición"); 
+            alert("Error en la petición");
           }
         }
 
-    }); 
+      });
   }
 
   onChangedInfraccion(e) {
