@@ -3,9 +3,10 @@
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
         <div class="card">
+
             <div class="card-body">
                 <h5 class="m-0">
-                    Certificado de Tradición para uso oficial
+                    Certificado de Tradición para uso oficial para RNA
                 </h5>
                 <hr>
                 <form #certificadoTradicionForm="ngForm" class="container">
@@ -27,37 +28,39 @@
                     <br>
                     <br>
                 </form>
-                <div class="ustify-content-center container col-xs-12 col-lg-12" *ngIf="vehiculo">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <b>Placa:</b>
-                                        {{vehiculo.placa?.numero}}
-                                    </td>
-                                    <td>
-                                        <b>Chasis:</b>
-                                        {{vehiculo.chasis}}
-                                    </td>
-                                    <td>
-                                        <b>Serie:</b>
-                                        {{vehiculo.serie}}
-                                    </td>
-                                    <td>
-                                        <a href="{{ apiUrl }}/pdf/certificadoTradicion/{{vehiculo.placa.id}}" class="btn btn-success" target="_blank">
-                                            <i class="fa fa-file-pdf-o"></i>
-                                            Generar 
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody> 
-                        </table> 
-                    </div>
+                <div class="ustify-content-center container col-xs-12 col-lg-12" *ngIf="vehiculoRna">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <b>Placa:</b>
+                                    {{vehiculo.placa?.numero}}
+                                </td>
+                                <td>
+                                    <b>Chasis:</b>
+                                    {{vehiculo.chasis}}
+                                </td>
+                                <td>
+                                    <b>Serie:</b>
+                                    {{vehiculo.serie}}
+                                </td>
+                                <td>
+                                    <a href="{{ apiUrl }}/pdf/certificadoTradicion/{{vehiculo.placa.id}}/OFICIAL" class="btn btn-success" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        Generar 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody> 
+                    </table> 
+                </div>
             </div>
+
             <!-- <div class="card-footer"> 
                 <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right"  [disabled]="certificadoTradicionForm.invalid" >Enviar</button>
+                <button (click)="enviarTramite()" class="btn btn-success pull-right" [disabled]="certificadoTradicionForm.invalid" >Enviar</button>
             </div> -->
+
         </div>
     </div> 
     <!-- /.col -->

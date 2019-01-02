@@ -253,7 +253,7 @@ export class NewRnaComponent implements OnInit {
           this.error = true;
           this.isError = true;
           swal.close();
-        }
+        } 
         error => {
           this.errorMessage = <any>error;
           if (this.errorMessage != null) {

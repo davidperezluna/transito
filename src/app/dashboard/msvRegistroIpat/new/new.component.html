@@ -1134,7 +1134,7 @@
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionLesionConductor" name="descripcionLesionConductor"
                                 required>
                         </div>
-                        <!-- <button (click)="registrarCiudadano()" *ngIf="consecutivo" class="btn btn-primary">Enviar</button> -->
+                        <button (click)="registrarCiudadano()" *ngIf="consecutivo" class="btn btn-primary">Enviar</button>
                     </div>
                 </div>
             </div>
@@ -1545,7 +1545,7 @@
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionLesionVictima" name="descripcionLesionVictima">
                         </div>
                     </div>
-                    <!-- <button (click)="registrarVictima()" *ngIf="consecutivo && msvRegistroIpat.victima == '1'" class="btn btn-primary">Enviar</button> -->
+                    <button (click)="registrarVictima()" *ngIf="consecutivo && msvRegistroIpat.victima == '1'" class="btn btn-primary">Enviar</button>
                 </div>
             </div>
             <div class="card" *ngIf="consecutivo && msvRegistroIpat.idGravedad == 2 || msvRegistroIpat.idGravedad == 3">
