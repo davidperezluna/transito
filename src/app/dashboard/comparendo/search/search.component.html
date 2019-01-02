@@ -10,8 +10,12 @@
                 <form #formSearch="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Estado <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="estados" [(ngModel)]="estadoSelected" name="estados" required></ng-select>
+                            <label>Tipo de filtro</label>
+                            <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Filtro</label>
+                            <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
                         </div>
                     </div>
                 </form>
@@ -22,6 +26,52 @@
                         <i class="fa fa-search"></i>
                         Buscar
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf='comparendos'>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <h6 class="text-uppercase text-center">
+                        <b>Comparendos encontrados</b>
+                    </h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Consecutivo</th>
+                                        <th>Placa</th>
+                                        <th>Fecha</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Nip</th>
+                                        <th>Infracción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                                        <td>{{ i }}</td>
+                                        <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                                        <td>{{ comparendo.placa }}</td>
+                                        <td>{{ comparendo.fecha }}</td>
+                                        <td>{{ comparendo.infractorNombres }}</td>
+                                        <td>{{ comparendo.infractorApellidos }}</td>
+                                        <td>{{ comparendo.infractorIdentificacion }}</td>
+                                        <td>{{ comparendo.infraccion.codigo }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
