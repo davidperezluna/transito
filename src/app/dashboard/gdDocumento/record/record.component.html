@@ -61,10 +61,10 @@
                         <tbody>
                             <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <td class="btn btn-danger" *ngIf="trazabilidad.documento.estado == 'PENDIENTE' || trazabilidad.documento.estado == 'RECHAZADO'">{{ trazabilidad.documento.estado }}</td>
-                                <td class="btn btn-primary" *ngIf="trazabilidad.documento.estado == 'ASIGNADO'">{{ trazabilidad.documento.estado }}</td>
-                                <td class="btn btn-warning" *ngIf="trazabilidad.documento.estado == 'EN TRAMITE' || trazabilidad.documento.estado == 'RESPUESTA REALIZADA'">{{ trazabilidad.documento.estado }}</td>
-                                <td class="btn btn-success" *ngIf="trazabilidad.documento.estado == 'FINALIZADO'">{{ trazabilidad.documento.estado }}</td>
+                                <td class="text-danger" *ngIf="trazabilidad.estado == 'PENDIENTE' || trazabilidad.estado == 'RECHAZADO'">{{ trazabilidad.estado }}</td>
+                                <td class="text-primary" *ngIf="trazabilidad.estado == 'ASIGNADO'">{{ trazabilidad.estado }}</td>
+                                <td class="text-warning" *ngIf="trazabilidad.estado == 'EN TRAMITE' || trazabilidad.estado == 'RESPUESTA REALIZADA'">{{ trazabilidad.estado }}</td>
+                                <td class="text-success" *ngIf="trazabilidad.estado == 'FINALIZADO'">{{ trazabilidad.estado }}</td>
                                 <td>
                                     <b>F. asignación:</b>{{ trazabilidad.fechaAsignacion }}
                                     <span *ngIf="trazabilidad.fechaRespuesta">

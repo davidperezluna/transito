@@ -22,10 +22,21 @@ export class RecordComponent implements OnInit {
     ngOnInit() {
         let token = this._loginService.getToken();
 
+        swal({
+            title: 'Buscando trazabilidad!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            timer: 1500,
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         this._TrazabilidadService.recordByDocumento({ 'id':this.documento.id }, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.trazabilidades = response.data;
+
+                    swal.close();
                 } else {
                     swal({
                         title: 'Error!',
