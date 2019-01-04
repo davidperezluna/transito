@@ -93,7 +93,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
         this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
             response => {
                 this.tiposIdentificacion = response;
-            },
+            }, 
             error => {
                 this.errorMessage = <any>error;
 

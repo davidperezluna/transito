@@ -194,41 +194,30 @@ export class MsvEvaluacionComponent implements OnInit {
         if (response.code == 200 ) {
           this.msj = response.msj;
           this.isError = false;
-          this.empresas=response.data;
-          this.empresas.forEach(element => {
+          this.miEmpresa = response.data;
+          this.habilitarBotonRev = true;
 
-            if(element.nombre == this.datos.parametro){
-              this.miEmpresa = element;
-
-            }
-            
-          });          
-          if(this.miEmpresa){
-            this.habilitarBotonRev = true;
-            console.log(this.miEmpresa);
-            
-          }      
-            this._RevisionService.showRevision(token, this.miEmpresa.id).subscribe(
-              response => {
-                if (response.code == 200 ) {
-                  this.msj = response.msj;
-                  this.isError = false;
-                  this.revisiones=response.data;                 
-                  this.isExist = true;
-                  swal.close();        
+          this._RevisionService.showRevision(token, this.miEmpresa.id).subscribe(
+            response => {
+              if (response.code == 200 ) {
+                this.msj = response.msj;
+                this.isError = false;
+                this.revisiones=response.data;                 
+                this.isExist = true;
+                swal.close();        
+              }
+              //si no existe revision coloca en true la variable para mostrar mensaje
+              if(this.revisiones == false){
+              this.revisionMensaje = true;
+                }        
+            error => { 
+                this.errorMessage = <any>error;
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert("Error en la petición"); 
                 }
-                //si no existe revision coloca en true la variable para mostrar mensaje
-                if(this.revisiones == false){
-                this.revisionMensaje = true;
-                 }        
-              error => { 
-                  this.errorMessage = <any>error;
-                  if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición"); 
-                  }
-                }
-            }); 
+              }
+          }); 
           
           this.isExist = true;
           

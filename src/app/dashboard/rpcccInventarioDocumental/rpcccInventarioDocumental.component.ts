@@ -125,7 +125,14 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
 
           if(response.code == 200){
             this.comparendos = response.data;
-            console.log(this.comparendos);
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            }); 
+
             this.comparendos.forEach(element => {
 
               if(element.estado.id == 1){
@@ -162,10 +169,13 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
                 this.comparendosNulidad.push(element);
               }             
             });            
-          }
-          else if(response.code == 400){
-            console.log(this.errorMessage);
-            alert('Error en la petición');              
+          }else if(response.code == 400){
+            swal({
+              title: 'Alerta!',
+              text: response.message,
+              type: 'warning',
+              confirmButtonText: 'Aceptar'
+            });       
           }
                   
         }

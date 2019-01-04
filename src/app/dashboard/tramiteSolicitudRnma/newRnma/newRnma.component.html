@@ -289,9 +289,9 @@
                         <appRnma-sustrato [factura]="factura" [ciudadanoPropietario]="ciudadano" (readyTramite)="readyTramite($event)"
                             (cancelarTramite)="cancelarTramite($event)"></appRnma-sustrato>
                     </div>
-                    <!-- <div class="tab-pane" id="25" role="tabpanel"> 
-                  <appRnma-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-rematricula>
-                  </div> -->
+                    <div class="tab-pane" id="rnma-rematricula" role="tabpanel"> 
+                         <appRnma-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-rematricula>
+                    </div>
                     <div class="tab-pane" id="rnma-matriculainicial" role="tabpanel">
                         <appRnma-matricula-inicial [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                             (cancelarTramite)="cancelarTramite($event)"></appRnma-matricula-inicial>

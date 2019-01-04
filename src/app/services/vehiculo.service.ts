@@ -69,7 +69,6 @@ export class VehiculoService {
 		let headers = new Headers({'Content-Type' : 'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/placa", params, {headers: headers})
 							  .map(res => res.json());
-
 	}
 
 	showVehiculoModuloPlaca(token, datos){
