@@ -67,7 +67,7 @@ export class NewRnaBlindajeComponent implements OnInit {
         let token = this._loginService.getToken();
         let datos = {
             'idFactura':this.factura.id,
-            'idFormulario':'rna-blindaje'
+            'tramiteFormulario':'rna-blindaje'
         }
 
         this._TramiteSolicitudService.showTramiteSolicitudByTamiteFacturaFormulario(datos,token).subscribe(
