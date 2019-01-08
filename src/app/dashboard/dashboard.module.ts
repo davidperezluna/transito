@@ -36,6 +36,7 @@ import { SvCfgSenialConectorModule } from './svCfgSenialConector/svCfgSenialCone
 import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module';
 import { SvCfgSenialColorModule } from './svCfgSenialColor/svCfgSenialColor.module';
 import { SvCfgSenialEstadoModule } from './svCfgSenialEstado/svCfgSenialEstado.module';
+import { SvCfgSenialProveedorModule } from './svCfgSenialProveedor/svCfgSenialProveedor.module';
 import { SvCfgSenialModule } from './svCfgSenial/svCfgSenial.module';
 import { SvSenialInventarioModule } from './svSenialInventario/svSenialInventario.module';
 
@@ -341,6 +342,7 @@ import {RightsidebarComponent} from '../shared';
       SvCfgSenialTipoModule,
       SvCfgSenialColorModule,
       SvCfgSenialEstadoModule,
+      SvCfgSenialProveedorModule,
       SvCfgSenialModule,
       SvSenialInventarioModule,
       CvLcCfgMotivoModule,
