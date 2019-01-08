@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { SvCfgSenialEstadoComponent } from '.';
+import { SvCfgSenialProveedorComponent } from '.';
 
-export const SvCfgSenialEstadoRoutes: Route[] = [
+export const SvCfgSenialProveedorRoutes: Route[] = [
     {
-      path: 'svCfgSenialEstado',
-      component: SvCfgSenialEstadoComponent
+    path: 'svCfgSenialProveedor',
+      component: SvCfgSenialProveedorComponent
     }
 ];
  

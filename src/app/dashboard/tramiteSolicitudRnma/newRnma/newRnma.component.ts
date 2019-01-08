@@ -9,7 +9,7 @@ import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { Vehiculo } from 'app/dashboard/vehiculo/vehiculo.modelo';
+import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 
 @Component({
   selector: 'app-new',

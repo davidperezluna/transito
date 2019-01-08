@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
+import { SvCfgSenialProveedorService } from '../../../services/svCfgSenialProveedor.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,24 +9,24 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() estado:any = null;
+@Input() proveedor:any = null;
 public errorMessage;
 
 public formReady = false;
 
 constructor(
-  private _SenialEstadoService: SvCfgSenialEstadoService,
+  private _SenialProveedorService: SvCfgSenialProveedorService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.estado);
-   }
+  ngOnInit(){
+  }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._SenialEstadoService.edit(this.estado,token).subscribe(
+		this._SenialProveedorService.edit(this.proveedor,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

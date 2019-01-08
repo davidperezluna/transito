@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { SvCfgSenialEstadoService } from '../../services/svCfgSenialEstado.service';
+import { SvCfgSenialProveedorService } from '../../services/svCfgSenialProveedor.service';
 import { LoginService } from '../../services/login.service';
-import { SvCfgSenialEstado } from './svCfgSenialProveedor.modelo';
+import { SvCfgSenialProveedor } from './svCfgSenialProveedor.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './svCfgSenialEstado.component.html'
+  templateUrl: './svCfgSenialProveedor.component.html'
 })
-export class SvCfgSenialEstadoComponent implements OnInit {
+export class SvCfgSenialProveedorComponent implements OnInit {
   public errorMessage;
 	public id;
 
-	public estados;
+	public proveedores;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public estado: SvCfgSenialEstado;
+  public proveedor: SvCfgSenialProveedor;
 
   constructor(
-    private _SenialEstadoService: SvCfgSenialEstadoService,
+    private _SenialProveedorService: SvCfgSenialProveedorService,
 		private _loginService: LoginService,
     ){}
     
@@ -34,9 +34,9 @@ export class SvCfgSenialEstadoComponent implements OnInit {
       }
     });
 
-    this._SenialEstadoService.index().subscribe(
+    this._SenialProveedorService.index().subscribe(
 				response => {
-          this.estados = response.data;
+          this.proveedores = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -98,7 +98,7 @@ export class SvCfgSenialEstadoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._SenialEstadoService.delete({'id':id},token).subscribe(
+        this._SenialProveedorService.delete({'id':id},token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -124,8 +124,8 @@ export class SvCfgSenialEstadoComponent implements OnInit {
     })
   }
 
-  onEdit(estado:any){
-    this.estado = estado;
+  onEdit(proveedor:any){
+    this.proveedor = proveedor;
     this.formEdit = true;
     this.formIndex = false;
   }

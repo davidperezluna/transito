@@ -1,6 +1,6 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { SvCfgSenialEstado } from '../svCfgSenialEstado.modelo';
-import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
+import { SvCfgSenialProveedor } from '../svCfgSenialProveedor.modelo';
+import { SvCfgSenialProveedorService } from '../../../services/svCfgSenialProveedor.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,16 +10,16 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public estado: SvCfgSenialEstado;
+public proveedor: SvCfgSenialProveedor;
 public errorMessage;
 
 constructor(
-  private _EstadoService: SvCfgSenialEstadoService,
+  private _ProveedorService: SvCfgSenialProveedorService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.estado = new SvCfgSenialEstado(null, null);
+    this.proveedor = new SvCfgSenialProveedor(null, null, null);
   }
 
   onCancelar(){
@@ -29,7 +29,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._EstadoService.register(this.estado,token).subscribe(
+		this._ProveedorService.register(this.proveedor,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
