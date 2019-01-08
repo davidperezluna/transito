@@ -35,6 +35,7 @@ import { SvCfgSenialConectorRoutes } from './svCfgSenialConector/svCfgSenialCone
 import { SvCfgSenialTipoRoutes } from './svCfgSenialTipo/svCfgSenialTipo.routes';
 import { SvCfgSenialColorRoutes } from './svCfgSenialColor/svCfgSenialColor.routes';
 import { SvCfgSenialEstadoRoutes } from './svCfgSenialEstado/svCfgSenialEstado.routes';
+import { SvCfgSenialLineaRoutes } from './svCfgSenialLinea/svCfgSenialLinea.routes';
 import { SvCfgSenialProveedorRoutes } from './svCfgSenialProveedor/svCfgSenialProveedor.routes';
 import { SvCfgSenialRoutes } from './svCfgSenial/svCfgSenial.routes';
 import { SvSenialInventarioRoutes } from './svSenialInventario/svSenialInventario.routes';
@@ -289,6 +290,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgSenialTipoRoutes,
       ...SvCfgSenialColorRoutes,
       ...SvCfgSenialEstadoRoutes,
+      ...SvCfgSenialLineaRoutes,
       ...SvCfgSenialProveedorRoutes,
       ...SvCfgSenialRoutes,
       ...SvSenialInventarioRoutes,

@@ -55,7 +55,7 @@ export class NewSenialUbicacionComponent implements OnInit {
      }
 
     ngOnInit() {   
-        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null);
 
         this._ConectorService.select().subscribe(
             response => {
