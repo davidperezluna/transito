@@ -81,6 +81,9 @@ export class ExportComponent implements OnInit {
         {value: '85', label:'85 a 90'},
     ];
 
+    public conductoresArray : any[] = [];
+    public victimasArray : any[] = [];
+
     constructor(
         private _IpatService: MsvRegistroIpatService,
         private _LoginService: LoginService,
@@ -285,7 +288,9 @@ export class ExportComponent implements OnInit {
             response => {
                 if(response.status == 'success'){
                     this.ipats = response.data;
-                    console.log(this.ipats);
+                    this.conductoresArray = response.conductores;
+                    this.victimasArray = response.victimas
+                    console.log(this.victimasArray);
                     let timeoutId = setTimeout(() => {
                         this.iniciarTabla();
                     }, 100);
