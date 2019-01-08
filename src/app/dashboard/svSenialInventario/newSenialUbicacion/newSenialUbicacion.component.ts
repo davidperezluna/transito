@@ -243,7 +243,8 @@ export class NewSenialUbicacionComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this.senialUbicacion.idMunicipio = this.idMunicipio;
-
+        console.log(this.file);
+        console.log(this.senialUbicacion);
         this._SvSenialUbicacionService.register(this.file, this.senialUbicacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
