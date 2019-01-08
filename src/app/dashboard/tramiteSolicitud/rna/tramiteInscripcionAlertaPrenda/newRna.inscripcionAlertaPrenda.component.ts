@@ -143,6 +143,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         );
         this._CfgTipoAlertaService.getAlertaSelect().subscribe(
             response => {
+                console.log(response);
                 this.cfgTiposAlerta = response;
             },
             error => {

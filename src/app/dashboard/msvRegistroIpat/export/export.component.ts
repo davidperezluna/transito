@@ -285,6 +285,7 @@ export class ExportComponent implements OnInit {
             response => {
                 if(response.status == 'success'){
                     this.ipats = response.data;
+                    console.log(this.ipats);
                     let timeoutId = setTimeout(() => {
                         this.iniciarTabla();
                     }, 100);

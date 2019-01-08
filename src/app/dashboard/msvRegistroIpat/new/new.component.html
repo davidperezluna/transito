@@ -839,7 +839,7 @@
                             </ng-select>
                         </div>
                     </div>
-                    <!-- <button (click)="registrarVehiculo()" *ngIf="consecutivo && msvRegistroIpat.portaPlaca == '1'" class="btn btn-primary">Enviar</button> -->
+                    <button (click)="registrarVehiculo()" *ngIf="consecutivo && msvRegistroIpat.portaPlaca == '1'" class="btn btn-primary">Enviar</button>
                 </div>
             </div>
             
@@ -852,7 +852,7 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="input-group" class="col-lg-6 col-md-6">
-                            <input type="text" class="form-control" placeholder="número de identificación" [(ngModel)]="msvRegistroIpat.identificacionConductor" required
+                            <input type="text" class="form-control" placeholder="número de identificación" [(ngModel)]="msvRegistroIpat.identificacionConductor" 
                                 name="identificacionConductor" />
                             <span class="input-group-btn">
                                 <button (click)="onBuscarConductor()" class="col-lg-9 col-md-9" class="btn btn-default btn-primary" type="button">
@@ -866,19 +866,19 @@
                                 name="tipoIdentificacionConductor" required>
                         </div> -->
                         <div class="col-lg-6 col-md-6">
-                            <label>Tipo Identificación Conductor <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [disabled]="usuario" [(ngModel)]="tipoIdentificacionConductorSelected" required name="tipoIdentificacionConductor">
+                            <label>Tipo Identificación Conductor</label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [disabled]="usuario" [(ngModel)]="tipoIdentificacionConductorSelected"  name="tipoIdentificacionConductor">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Nombres Conductor <strong class="text-danger">*</strong></label>
+                            <label>Nombres Conductor</label>
                             <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.nombresConductor" name="nombresConductor"
-                                required>
+                                >
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Apellidos Conductor<strong class="text-danger">*</strong></label>
+                            <label>Apellidos Conductor</label>
                             <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.apellidosConductor" name="apellidosConductor"
-                                required>
+                                >
                         </div>
                         <!-- <div class="col-lg-6 col-md-6">
                             <label>Nacionalidad Conductor</label>
@@ -886,53 +886,53 @@
                                 name="nacionalidadConductor" required>
                         </div> -->
                         <div class="col-lg-6 col-md-6">
-                            <label>Nacionalidad Conductor <strong class="text-danger">*</strong></label>
+                            <label>Nacionalidad Conductor</label>
                             <ng-select [multiple]="false" [options]="nacionalidades" [(ngModel)]="nacionalidadConductorSelected"
-                                required name="nacionalidades">
+                                 name="nacionalidades">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Fecha Nacimiento Conductor <strong class="text-danger">*</strong></label>
+                            <label>Fecha Nacimiento Conductor</label>
                             <input class="form-control" type="date" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.fechaNacimientoConductor"
-                                name="fechaNacimientoConductor" required>
+                                name="fechaNacimientoConductor" >
                         </div>
                         <!-- <div class="col-lg-6 col-md-6">
                             <label>Sexo Conductor</label>
                             <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.sexoConductor" name="sexoConductor"
-                                required>
+                                >
                         </div> -->
                         <div class="col-lg-6 col-md-6">
-                            <label>Sexo Conductor <strong class="text-danger">*</strong></label>
+                            <label>Sexo Conductor</label>
                             <ng-select [multiple]="false" [options]="generos" [disabled]="usuario" [(ngModel)]="sexoConductorSelected"
-                                required name="sexoConductor">
+                                 name="sexoConductor">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Gravedad Conductor <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="gravedadesVictima" [(ngModel)]="msvRegistroIpat.idGravedadConductor"
-                                required name="gravedadConductor">
+                            <label>Gravedad Conductor</label>
+                            <ng-select [multiple]="false" [options]="gravedadesVictima" [(ngModel)]="gravedadConductorSelected"
+                                 name="gravedadConductor">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Direccion Residencia Conductor <strong class="text-danger">*</strong></label>
+                            <label>Direccion Residencia Conductor</label>
                             <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.direccionResidenciaConductor"
-                                name="direccionResidenciaConductor" required>
+                                name="direccionResidenciaConductor" >
                         </div>
                         <!-- <div class="col-lg-6 col-md-6">
-                            <label>Ciudad residencia <strong class="text-danger">*</strong></label>
+                            <label>Ciudad residencia</label>
                             <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.ciudadResidenciaConductor"
-                                name="ciudadResidenciaConductor" required>
+                                name="ciudadResidenciaConductor" >
                         </div> -->
                         <div class="col-lg-6 col-md-6">
-                            <label>Ciudad residencia Conductor <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="municipios" [disabled]="usuario" [(ngModel)]="ciudadResidenciaConductorSelected" required
+                            <label>Ciudad residencia Conductor</label>
+                            <ng-select [multiple]="false" [options]="municipios" [disabled]="usuario" [(ngModel)]="ciudadResidenciaConductorSelected" 
                                 name="ciudadResidenciaConductor">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Telefono Conductor <strong class="text-danger">*</strong></label>
+                            <label>Telefono Conductor</label>
                             <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.telefonoConductor" name="telefonoConductor"
-                                required>
+                                >
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.gravedad == 'CON HERIDOS' || msvRegistroIpat.gravedad == 'CON MUERTOS'">
                             <label>¿Se practicó el examen?</label>
@@ -974,12 +974,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.practicoExamenConductor == "1"'>
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.practicoExamenConductor == '1'">
                             <label>Resultado Examen Conductor</label>
                             <ng-select [multiple]="false" [options]="resultadosExamen" [(ngModel)]="msvRegistroIpat.idResultadoExamenConductor" name="resultadoExamenConductor">
                             </ng-select>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.practicoExamenConductor == "1"'>
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.practicoExamenConductor == '1'">
                             <label>Grado Examen Conductor</label>
                             <ng-select [multiple]="false" [options]="gradosExamen" [(ngModel)]="msvRegistroIpat.idGradoExamenConductor" name="gradoExamenConductor">
                             </ng-select>
@@ -1030,7 +1030,7 @@
                         </div>
                         <div class="input-group" class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "1"'>
                             <input type="text" class="form-control" placeholder="número de licencia de conducción" [(ngModel)]="msvRegistroIpat.numeroLicenciaConduccion"
-                                required name="numeroLicenciaConduccion" />
+                                name="numeroLicenciaConduccion" />
                             <span class="input-group-btn">
                                 <button (click)="onBuscarLicenciaConductor()" class="col-lg-9 col-md-9" class="btn btn-default btn-primary" type="button">
                                     <i class="fa fa-search"></i>
@@ -1124,15 +1124,13 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Hospital de atención <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="hospitales" [(ngModel)]="msvRegistroIpat.idHospitalConductor"
-                                required name="hospitalConductor">
+                            <label>Hospital de atención</label>
+                            <ng-select [multiple]="false" [options]="hospitales" [(ngModel)]="msvRegistroIpat.idHospitalConductor" name="hospitalConductor">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Descripcion Lesiones Conductor <strong class="text-danger">*</strong></label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionLesionConductor" name="descripcionLesionConductor"
-                                required>
+                            <label>Descripcion Lesiones Conductor</label>
+                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionLesionConductor" name="descripcionLesionConductor">
                         </div>
                         <button (click)="registrarCiudadano()" *ngIf="consecutivo" class="btn btn-primary">Enviar</button>
                     </div>
@@ -1168,25 +1166,25 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Tipo Documento Propietario <strong class="text-danger">*</strong></label>
+                            <label>Tipo Documento Propietario</label>
                             <ng-select [multiple]="false" [options]="tiposIdentificacion" [disabled]="msmConductor" [(ngModel)]="tipoIdentificacionPropietarioSelected"
-                                required name="tipoIdentificacionPropietario">
+                                 name="tipoIdentificacionPropietario">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Identificacion Propietario <strong class="text-danger">*</strong></label>
+                            <label>Identificacion Propietario</label>
                             <input class="form-control" type="number" [disabled]="msmConductor" [(ngModel)]="msvRegistroIpat.identificacionPropietario"
-                                name="identificacionPropietario" required>
+                                name="identificacionPropietario" >
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Nombre Propietario <strong class="text-danger">*</strong></label>
+                            <label>Nombre Propietario</label>
                             <input class="form-control" type="text" [disabled]="msmConductor" [(ngModel)]="msvRegistroIpat.nombresPropietario" name="nombresPropietario"
-                                required>
+                                >
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Apellido Propietario <strong class="text-danger">*</strong></label>
+                            <label>Apellido Propietario</label>
                             <input class="form-control" type="text" [disabled]="msmConductor" [(ngModel)]="msvRegistroIpat.apellidosPropietario" name="apellidosPropietario"
-                                required>
+                                >
                         </div>
                     </div>
                 </div>
