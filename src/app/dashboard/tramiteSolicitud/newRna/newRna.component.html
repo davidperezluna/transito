@@ -324,7 +324,7 @@
                         <div class="tab-pane" id="rna-transformacion" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-transformacion [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
-                        </div>
+                        </div> 
 
                         <div class="tab-pane" id="rna-duplicadolicencia" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-duplicado-licencia (readyTramite)="readyTramite($event)" [solicitanteId]='tramiteSolicitud.solicitanteId'
@@ -349,7 +349,7 @@
                         <div class="tab-pane" id="rna-cambiomotor" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-cambio-motor (readyTramite)="readyTramite($event)" [factura]="factura"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
-                        </div>
+                        </div> 
 
                         <div class="tab-pane" id="rna-blindaje" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-blindaje [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
@@ -388,7 +388,7 @@
                         <div class="tab-pane" id="rna-cambiogas" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-cambio-gas [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
-                        </div>
+                        </div> 
 
                         <div class="tab-pane" id="rna-modificacion-acreedor-prendario" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-cambio-acreedor-prendario [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
@@ -408,7 +408,7 @@
                         <div class="tab-pane" id="rna-prorroga-importacion-temporal" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-prorroga-importacion-temporal [vehiculo]="vehiculo" [factura]="factura"
                                 (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>

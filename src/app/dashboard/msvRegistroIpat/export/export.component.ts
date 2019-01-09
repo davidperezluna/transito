@@ -81,6 +81,12 @@ export class ExportComponent implements OnInit {
         {value: '85', label:'85 a 90'},
     ];
 
+    public conductoresNombresArray : any;
+    public conductoresApellidosArray : any;
+
+    public victimasNombresArray : any;
+    public victimasApellidosArray : any;
+
     constructor(
         private _IpatService: MsvRegistroIpatService,
         private _LoginService: LoginService,
@@ -285,7 +291,10 @@ export class ExportComponent implements OnInit {
             response => {
                 if(response.status == 'success'){
                     this.ipats = response.data;
-                    console.log(this.ipats);
+                    this.conductoresNombresArray = response.conductores.nombres;
+                    this.conductoresApellidosArray = response.conductores.apellidos;
+                    this.victimasNombresArray = response.victimas.nombres;
+                    this.victimasApellidosArray = response.victimas.apellidos;
                     let timeoutId = setTimeout(() => {
                         this.iniciarTabla();
                     }, 100);
