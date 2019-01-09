@@ -1,10 +1,7 @@
-<br>
-<br>
-<div class="row">
+<div class="row" *ngIf="importacion == 'No'">
     <!-- .row -->
     <div class="col-xs-12 col-lg-6">
-        <div class="input-group" *ngIf="importacion == 'No'" [ngClass]="{'has-danger' : isError}">
-            <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
+        <div class="input-group" [ngClass]="{'has-danger' : isError}">
             <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId"
                 name="placaVehiculo" required />
             <span class="input-group-btn">
@@ -198,7 +195,6 @@
                         </button>
                     </div>
                     <div class="card col-xs-12 col-lg-12">
-                        <!-- <div class="container" *ngIf="tramiteSolicitud.solicitanteId"> -->
                         <div class="container">
                             <label>Facturas
                                 <span class="text-danger">*</span>
@@ -213,29 +209,26 @@
                                 </span>
                             </div>
                         </div>
-                        <hr>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
-        <!-- <div class="container" *ngIf="tramiteSolicitud.solicitanteId"> -->
         <div class="container">
             <label>Facturas
                 <span class="text-danger">*</span>
             </label>
             <div class="input-group" [ngClass]="{'has-danger' : isError}">
-                <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
                 <input type="text" class="form-control" placeholder="Numero de facura" [(ngModel)]="facturaSelected"
                     name="factura" required />
                 <span class="input-group-btn">
                     <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
-                        ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                       type="button"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
-        <hr>
     </div>
 
     <div class="container-fluid" *ngIf="factura && tramitesFactura?.length > 0">

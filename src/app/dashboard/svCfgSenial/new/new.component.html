@@ -21,9 +21,9 @@
                             <label>Tipo <strong class="text-danger">*</strong></label>
                             <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="senial.idSenialTipo" name="tipo" required></ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Color </label>
-                            <ng-select [multiple]="false" [options]="colores" [(ngModel)]="senial.idColor" name="color"></ng-select>
+                        <div class="col-xs-12 col-lg-12" *ngIf="senial.idSenialTipo && senial.idSenialTipo == 3">
+                            <label>Color <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="colores" [(ngModel)]="senial.idColor" name="color" required></ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Adjuntar logo</label>

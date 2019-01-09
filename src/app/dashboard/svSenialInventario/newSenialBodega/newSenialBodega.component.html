@@ -9,36 +9,56 @@
     </div>
     <div class="card-body">
         <form #formNew="ngForm">
-            <div class="form-group row">
-                <div class="col-xs-12 col-lg-4">
-                    <label>Fecha <strong class="text-danger">*</strong></label>
-                    <input type="date" class="form-control" [(ngModel)]="senialBodega.fecha" name="fecha" required />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Fecha <strong class="text-danger">*</strong></label>
+                        <input type="date" class="form-control" [(ngModel)]="senialBodega.fecha" name="fecha" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                        <label>Hora <strong class="text-danger">*</strong></label>
+                        <input type="time" class="form-control" [(ngModel)]="senialBodega.hora" name="time" required />
+                    </div>
                 </div>
-                <div class="col-xs-12 col-lg-3">
-                    <label>Hora <strong class="text-danger">*</strong></label>
-                    <input type="time" class="form-control" [(ngModel)]="senialBodega.hora" name="time" required />
+
+                <div class="row">
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Señal <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="senialBodega.idSenial" name="senial" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Estado <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="estados" [(ngModel)]="senialBodega.idEstado" required name="estado">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Proveedor <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="proveedores" [(ngModel)]="senialBodega.idProveedor" required name="proveedor">
+                        </ng-select>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-lg-6">
-                    <label>Señal <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="senialBodega.idSenial" name="seniales" required>
-                    </ng-select>
+
+                <div class="row">
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Cantidad <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="senialBodega.cantidad" name="cantidad" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Valor Unitario <strong class="text-danger">*</strong></label>
+                        <input type="text" (blur)="onCalcularTotal()" class="form-control" [(ngModel)]="senialBodega.valor" name="valor" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Valor Total</label>
+                        <input type="text" class="form-control" [(ngModel)]="senialBodega.valorTotal" name="valorTotal" disabled />
+                    </div>
                 </div>
-                <div class="col-xs-12 col-lg-6">
-                    <label>Estado <strong class="text-danger">*</strong></label>
-                    <ng-select [multiple]="false" [options]="estados" [(ngModel)]="senialBodega.idEstado" required name="estados">
-                    </ng-select>
-                </div>
-                <div class="col-xs-12 col-lg-3">
-                    <label>Cantidad <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialBodega.cantidad" name="cantidad" required />
-                </div>
-                <div class="col-xs-12 col-lg-3">
-                    <label>Valor <strong class="text-danger">*</strong></label>
-                    <input type="text" class="form-control" [(ngModel)]="senialBodega.valor" name="valor" required />
-                </div>
-                <div class="col-xs-12 col-lg-6">
-                    <label>Adjunto </label>
-                    <input type="file"  class="form-control" [(ngModel)]="fileSelected" (change)="onFileChange($event)" placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" name="file">
+
+                <div class="row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Adjunto </label>
+                        <input type="file"  class="form-control" [(ngModel)]="fileSelected" (change)="onFileChange($event)" placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" name="file">
+                    </div>
                 </div>
             </div>
         </form>
