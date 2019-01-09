@@ -1,50 +1,46 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MsvCaracterizacionService } from '../../services/msvCaracterizacion.service';
-import {LoginService} from '../../services/login.service';
-import { msvCaracterizacion } from './msvCaracterizacion.modelo';
+import { Component, OnInit } from '@angular/core';
+import { SvCfgSenialLineaService } from '../../services/svCfgSenialLinea.service';
+import { LoginService } from '../../services/login.service';
+import { SvCfgSenialLinea } from './svCfgSenialLinea.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './msvCaracterizacion.component.html'
+  templateUrl: './svCfgSenialLinea.component.html'
 })
-export class MsvCaracterizacionComponent implements OnInit {
+export class SvCfgSenialLineaComponent implements OnInit {
   public errorMessage;
 	public id;
-	public msvCaracterizaciones;
+
+	public lineas;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public msvCaracterizacion: msvCaracterizacion;
+  public linea: SvCfgSenialLinea;
 
   constructor(
-    private _CaracterizacionService: MsvCaracterizacionService,
-		private _LoginService: LoginService,
+    private _SenialEstadoService: SvCfgSenialLineaService,
+		private _loginService: LoginService,
     ){}
     
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._CaracterizacionService.getCaracterizacion().subscribe(
+    });
+
+    this._SenialEstadoService.index().subscribe(
 				response => {
-          this.msvCaracterizaciones = response.data;
+          this.lineas = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -56,6 +52,7 @@ export class MsvCaracterizacionComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -73,12 +70,10 @@ export class MsvCaracterizacionComponent implements OnInit {
    this.table = $('#dataTables-example').DataTable();
   }
   
-  onNew() {
+  onNew(){
     this.formNew = true;
     this.formIndex = false;
-    if (this.table) {
-      this.table.destroy();
-    }
+    this.table.destroy();
   }
 
   ready(isCreado:any){
@@ -89,7 +84,8 @@ export class MsvCaracterizacionComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deletemsvCaracterizaciones(id:any){
+
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -101,8 +97,8 @@ export class MsvCaracterizacionComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._LoginService.getToken();
-        this._CaracterizacionService.deleteCaracterizacion(token,id).subscribe(
+        let token = this._loginService.getToken();
+        this._SenialEstadoService.delete({'id':id},token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -128,8 +124,8 @@ export class MsvCaracterizacionComponent implements OnInit {
     })
   }
 
-  editmsvCaracterizacion(msvCaracterizacion:any){
-    this.msvCaracterizacion = msvCaracterizacion;
+  onEdit(linea:any){
+    this.linea = linea;
     this.formEdit = true;
     this.formIndex = false;
   }

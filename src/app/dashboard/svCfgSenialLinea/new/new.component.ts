@@ -1,6 +1,6 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvCaracterizacion } from '../msvCaracterizacion.modelo';
-import { MsvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { SvCfgSenialLinea } from '../svCfgSenialLinea.modelo';
+import { SvCfgSenialLineaService } from '../../../services/svCfgSenialLinea.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,18 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public msvCaracterizacion: msvCaracterizacion;
+public linea: SvCfgSenialLinea;
 public errorMessage;
 
 constructor(
-  private _MsvCaracterizacionService: MsvCaracterizacionService,
+  private _LineaService: SvCfgSenialLineaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.msvCaracterizacion = new msvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null);
+    this.linea = new SvCfgSenialLinea(null, null);
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
@@ -28,20 +29,20 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._MsvCaracterizacionService.register(this.msvCaracterizacion,token).subscribe(
+		this._LineaService.register(this.linea,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'Se ha registrado con éxito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          });
-        }else {
+          })
+        }else{
           swal({
             title: 'Error!',
-            text: 'La caracterización ya se encuentra registrada',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
