@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CfgAdmFormatoTipoService {
-	private url = environment.apiUrl + 'configuracion/cfgadmformatotipo';
+export class CfgAdmActoAdministrativoService {
+	private url = environment.apiUrl + 'configuracion/cfgadmactoadministrativo';
 	public identity;
 	public token;
 
@@ -21,7 +21,7 @@ export class CfgAdmFormatoTipoService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -31,7 +31,7 @@ export class CfgAdmFormatoTipoService {
 
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
 			res => res.json(),
@@ -48,7 +48,7 @@ export class CfgAdmFormatoTipoService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),

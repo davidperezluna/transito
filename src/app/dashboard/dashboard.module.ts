@@ -29,6 +29,7 @@ import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
+import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
 
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
@@ -337,6 +338,7 @@ import {RightsidebarComponent} from '../shared';
       CuentaModule,
       CarroceriaModule,
       ComparendoModule,
+      CfgAdmFormatoModule,
       CfgAdmFormatoTipoModule,
       CfgBodegaModule,
       SvCfgSenialConectorModule,

@@ -15,9 +15,16 @@
                                 <div class="row"><!-- .row -->
                                     <div class="col-xs-12 col-lg-12">
                                         <label>Agente de transito <b class="text-danger">*</b></label>
-                                        <ng-select [multiple]="false" [options]="agentesTransito" [(ngModel)]="agenteTransitoSelected" (ngModelChange)="onChangedMpersonalFuncionario($event)" name="idFuncionario"
-                                            required>
-                                        </ng-select>
+                                        <div class="input-group" [ngClass]="{'has-danger' : isErrorCiudadano,'has-success': isExistCiudadano}">
+                                            <ng-select [multiple]="false" [options]="agentesTransito" [(ngModel)]="agenteTransitoSelected" name="idFuncionario" required>
+                                            </ng-select>
+                                            <span class="input-group-btn">
+                                                <button (click)="onChangedMpersonalFuncionario()" [ngClass]="{'btn-danger' : isErrorCiudadano}" class="btn btn-default btn-success" ngxclipboard=""
+                                                    type="button">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                     <div class="col-lg-12" *ngIf='consecutivo'>
                                         <table class="table table-bordered table-striped">

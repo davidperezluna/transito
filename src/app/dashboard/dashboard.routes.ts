@@ -22,6 +22,7 @@ import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 
+import { CfgAdmFormatoRoutes } from './cfgAdmFormato/cfgAdmFormato.routes';
 import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.routes';
 
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
@@ -279,6 +280,7 @@ export const DashboardRoutes: Route[] = [
       ...AlmacenRoutes,
       ...CfgTipoInfractorRoutes,
       ...ComparendoRoutes,
+      ...CfgAdmFormatoRoutes,
       ...CfgAdmFormatoTipoRoutes,
       ...CvLcCfgMotivoRoutes,
       ...CvLcCfgRestriccionRoutes,

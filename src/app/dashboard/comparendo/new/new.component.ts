@@ -57,7 +57,7 @@ export class NewComponent implements OnInit {
   public isEmpresa = false;
   
   public agentesTransito: any;
-  public agenteTransitoSelected: any;
+  public agenteTransitoSelected: any = null;
 
   public municipios: any;
   public organismosTransito: any;
@@ -414,8 +414,8 @@ constructor(
 		}); 
   }
 
-  onChangedMpersonalFuncionario(e){
-    if (e) {
+  onChangedMpersonalFuncionario(){
+    if (this.agenteTransitoSelected) {
      let token = this._loginService.getToken();
 
       swal({
@@ -426,7 +426,7 @@ constructor(
         }
       });
 
-      this._MpersonalFuncionarioService.show({ 'id': e }, token).subscribe(
+      this._MpersonalFuncionarioService.show({ 'id': this.agenteTransitoSelected }, token).subscribe(
         response => {
           if (response.status == 'success') {
             this.funcionario = response.data;
