@@ -142,6 +142,7 @@ export class NewRnaComponent implements OnInit {
 
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
         response => {
+          
           this.isMatricula = false;
           let active = true;
           let token = this._loginService.getToken();

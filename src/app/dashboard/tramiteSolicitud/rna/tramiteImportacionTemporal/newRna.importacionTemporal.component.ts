@@ -28,12 +28,21 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     public tipoIdentificacionSelected;
     
     public vhl = false;
+    public cdno = false;
+
+    public resumen: any;
+    public ciudadano: any;
+    public propietario: any;
+    public vehiculoImportacion: any;
+    public vehiculoEncontrado: any;
+
+
     public date: any;
     public paises: any;
     public paisSelected: any;
 
     public numeroRunt: any;
-    public numeroCoutas: any;
+    public numeroCuotas: any;
 
     public tramiteRealizado: any;
     public datos = {
@@ -42,8 +51,6 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         'tramiteFormulario': null,
         'fechaSolicitud': null,
         'numeroIdentificacion': null,
-        'nombreSolicitante': null,
-        'apellidoSolicitante': null,
         'placa': null,
         'marca': null,
         'linea': null,
@@ -54,6 +61,12 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         'motor': null,
         'chasis': null,
         'vin': null,
+        'numeroAceptacion': null,
+    };
+
+    public datos2 = {
+        'cPropietario': [],
+        'vehiculos': [],
     };
 
     constructor(
@@ -147,7 +160,8 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
         let resumen = {
             'numero runt': this.numeroRunt,
-            'numero cuotas': this.numeroCoutas,
+            'numero cuotas': this.numeroCuotas,
+            'fecha solicitud': this.datos.fechaSolicitud,
         };
         this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
     }
@@ -160,12 +174,10 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         this._MsvRegistroIpatService.getBuscarConductor({ 'identificacion': this.datos.numeroIdentificacion }, token).subscribe(
 
             response => {
-
                 if (response.status == 'success') {
-                    console.log(response);
+                    this.cdno = true;
+                    this.ciudadano = response.data[0];
                     this.tipoIdentificacionSelected = [response.data[0].tipoIdentificacion.id];
-                    this.datos.nombreSolicitante = response.data[0].primerNombre + " " + response.data[0].segundoNombre;
-                    this.datos.apellidoSolicitante = response.data[0].primerApellido + " " + response.data[0].segundoApellido;
                     //swal.close();
                 } else {
                     swal({
@@ -192,41 +204,15 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         this._MsvRegistroIpatService.getBuscarVehiculo({ 'placa': this.datos.placa }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    console.log(response);
                     this.vhl = true;
-                    this.datos.serie = response.data.serie;
-                    this.datos.motor = response.data.motor;
-                    this.datos.motor = response.data.motor;
-                    this.datos.chasis = response.data.chasis;
-                    this.datos.chasis = response.data.chasis;
-                    this.datos.vin = response.data.vin;
-                    this.datos.vin = response.data.vin;
-                    this.datos.linea = response.data.linea.nombre;
-                    this.datos.modelo = response.data.modelo;
-                    this.datos.color = response.data.color.nombre;
-                    this.datos.marca = response.data.linea.marca.nombre;
-                    //swal.close();
+                    this.vehiculoImportacion = response.data;
+                    console.log(this.vehiculoImportacion);
                 } else {
                     swal({
                         title: 'Alerta!',
                         text: response.message,
                         type: 'error',
                         confirmButtonText: 'Aceptar'
-                    }).then((result) => {
-                        if (result.value) {
-                            this.vhl = false;
-                            this.datos.serie = '';
-                            this.datos.motor = '';
-                            this.datos.motor = '';
-                            this.datos.chasis = '';
-                            this.datos.chasis = '';
-                            this.datos.vin = '';
-                            this.datos.vin = '';
-                            this.datos.linea = '';
-                            this.datos.modelo = '';
-                            this.datos.color = '';
-                            this.datos.marca = '';
-                        }
                     });
                 }
                 error => {
@@ -238,5 +224,46 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
                 }
             }
         );
+    }
+
+    btnNewPropietario() {
+        this.datos2.cPropietario.push(
+            {
+                'nombre': this.ciudadano.primerNombre,
+                'apellido': this.ciudadano.primerApellido,
+                'identificacion': this.datos.numeroIdentificacion,
+            }
+        );
+        this.propietario = true;
+        this.cdno = false;
+    }
+
+    deleteCiudadanoPropietario(ciudadanoPropietario: any): void {
+        this.datos2.cPropietario = this.datos2.cPropietario.filter(h => h !== ciudadanoPropietario);
+        if (this.datos2.cPropietario.length === 0) {
+            this.propietario = false;
+            this.cdno = false;
+        }
+    }
+
+    btnNewVehiculo() {
+        this.datos2.vehiculos.push(
+            {
+                'placa': this.datos.placa,
+                'marca': this.vehiculoImportacion.linea.marca.nombre,
+                'modelo': this.vehiculoImportacion.modelo,
+                'chasis': this.vehiculoImportacion.chasis,
+            }
+        );
+        this.vehiculoEncontrado = true;
+        this.vhl = false;
+    }
+
+    deleteVehiculo(vehiculo: any): void {
+        this.datos2.vehiculos = this.datos2.vehiculos.filter(h => h !== vehiculo);
+        if (this.datos2.vehiculos.length === 0) {
+            this.vehiculoEncontrado = false;
+            this.vhl = false;
+        }
     }
 }
