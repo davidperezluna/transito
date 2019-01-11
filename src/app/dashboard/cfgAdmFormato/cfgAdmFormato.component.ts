@@ -1,26 +1,26 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgAdmFormatoTipoService } from '../../services/cfgAdmFormatoTipo.service';
+import { CfgAdmFormatoService } from '../../services/cfgAdmFormato.service';
 import { LoginService } from '../../services/login.service';
-import { CfgAdmFormatoTipo } from './cfgAdmFormatoTipo.modelo';
+import { CfgAdmFormato } from './cfgAdmFormato.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgAdmFormatoTipo.component.html'
+  templateUrl: './cfgAdmFormato.component.html'
 })
-export class CfgAdmFormatoTipoComponent implements OnInit {
+export class CfgAdmFormatoComponent implements OnInit {
   public errorMessage;
 	public id;
-	public tipos;
+	public formatos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public tipo: CfgAdmFormatoTipo;
+  public formato: CfgAdmFormato;
 
   constructor(
-    private _TipoService: CfgAdmFormatoTipoService,
+    private _FormatoService: CfgAdmFormatoService,
 		private _loginService: LoginService,
     ){}
     
@@ -33,9 +33,9 @@ export class CfgAdmFormatoTipoComponent implements OnInit {
       }
     });
 
-    this._TipoService.index().subscribe(
+    this._FormatoService.index().subscribe(
 				response => {
-          this.tipos = response.data;
+          this.formatos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -97,7 +97,7 @@ export class CfgAdmFormatoTipoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TipoService.delete({'id':id},token).subscribe(
+        this._FormatoService.delete({'id':id},token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -123,8 +123,8 @@ export class CfgAdmFormatoTipoComponent implements OnInit {
     })
   }
 
-  onEdit(tipo:any){
-    this.tipo = tipo;
+  onEdit(formato:any){
+    this.formato = formato;
     this.formEdit = true;
     this.formIndex = false;
   }

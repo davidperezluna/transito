@@ -6,7 +6,7 @@
           <div class="card-header">
             <h5 class="card-title">
               <strong class="text-uppercase">Configuración</strong>
-              <small>Tipos de formato</small>
+              <small>Formatos de plantilla</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -20,20 +20,24 @@
               <thead>
                 <tr>
                     <th>#</th>
+                    <th>Código</th>
                     <th>Nombre</th>
+                    <th>Tipo</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let tipo of tipos; let i = index">
+                <tr class="odd" *ngFor="let formato of formatos; let i = index">
                   <td >{{ i + 1 }}</td>
-                  <td >{{ tipo.nombre }}</td>
+                  <td >{{ formato.codigo }}</td>
+                  <td >{{ formato.nombre }}</td>
+                  <td >{{ formato.tipo.nombre }}</td>
                   <td>
-                    <div class="tbn-group">
-                      <button (click)="onEdit(tipo)" class="btn btn-xs btn-primary" type="button">
+                    <div class="btn-group">
+                      <button (click)="onEdit(formato)" class="btn btn-xs btn-primary" type="button">
                         <i class="fa fa-edit"></i>
                       </button> 
-                      <button (click)="onDelete(tipo.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(formato.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                       </button> 
                     </div>
@@ -47,6 +51,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [tipo]="tipo" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [formato]="formato" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

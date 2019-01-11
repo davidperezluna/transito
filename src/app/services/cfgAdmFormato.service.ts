@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CfgAdmFormatoTipoService {
-	private url = environment.apiUrl + 'configuracion/cfgadmformatotipo';
+export class CfgAdmFormatoService {
+	private url = environment.apiUrl + 'configuracion/cfgadmformato';
 	public identity;
 	public token;
 

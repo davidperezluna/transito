@@ -51,13 +51,13 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { Utils } from 'ng2-bootstrap';
 import { SvCfgAseguradoraService } from '../../../services/svCfgAseguradora.service';
 import { SvCfgControlViaService } from '../../../services/svCfgControlVia.service';
-import { SvCfgEntidadAccidenteService } from 'app/services/svCfgEntidadAccidente.service';
-import { MarcaService } from 'app/services/marca.service';
-import { LineaService } from 'app/services/linea.service';
-import { ColorService } from 'app/services/color.service';
-import { VhloCfgModalidadTransporteService } from 'app/services/vhloCfgModalidadTransporte.service';
-import { CarroceriaService } from 'app/services/carroceria.service';
-import { VhloCfgRadioAccionService } from 'app/services/vhloCfgRadioAccion.service';
+import { SvCfgEntidadAccidenteService } from '../../../services/svCfgEntidadAccidente.service';
+import { MarcaService } from '../../../services/marca.service';
+import { LineaService } from '../../../services/linea.service';
+import { ColorService } from '../../../services/color.service';
+import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
+import { CarroceriaService } from '../../../services/carroceria.service';
+import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 
 @Component({
   selector: 'app-new',

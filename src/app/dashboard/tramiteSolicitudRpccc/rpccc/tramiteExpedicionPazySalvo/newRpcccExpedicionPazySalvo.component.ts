@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { ServicioService } from '../../../../services/servicio.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { ComparendoService } from '../../../../services/comparendo.service';
-import { MpersonalFuncionarioService } from '../../../../services/mpersonalFuncionario.service';
 import { PaisService } from '../../../../services/pais.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -32,25 +30,23 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
     public categorias: string[];
     public categoriaSelected: any;
     public resumen = {};     public datos = {
-        'tramiteFactura': null,
+        'tramiteFormulario': null,
+        'ciudadanoId': null,
+        'idFactura': null,
     };
 
     constructor(
         private _LoginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _ServicioService: ServicioService,
-        private _CiudadanoService: CiudadanoService,
         private _ComparendoService: ComparendoService,
         private _PaisService: PaisService,
-        private _MpersonalFuncionarioService: MpersonalFuncionarioService,
     ) { }
 
     ngOnInit() {
         let token = this._LoginService.getToken();
-        let ciudadano = {
-            'ciudadanoId': this.solicitante.id,
-        }
-        this._ComparendoService.searchByInfractor({ 'infractorIdentificacion': this.solicitante.ciudadano.identificacion}, token).subscribe(
+        
+        this._ComparendoService.searchByInfractor({ 'infractorIdentificacion': this.solicitante.identificacion}, token).subscribe(
             response => {
                 this.comparendos = response.data;
             },
@@ -94,12 +90,12 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
     }
     
     onEnviarTramite() {
-        let token = this._LoginService.getToken();
 
-        let identity = this._LoginService.getIdentity();
-        this.datos.tramiteFactura = 65;
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rpccc-expedicionpazysalvo';
+        this.datos.ciudadanoId = this.solicitante.id;
+
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-      
     }
 
     onCancelar(){
