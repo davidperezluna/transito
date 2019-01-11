@@ -2,52 +2,144 @@
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
-        <div class="card">
-            <div class="card-header">
-                <h5 class="m-0">Nueva Importación Temporal</h5>
-                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-            </div>
-            <div class="card-body">
-                <form #newForm="ngForm">
-                    <div class="row">
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Tipo Documento</label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected"
-                                    required name="tiposIdentificacionId">
-                                </ng-select>
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Nro. Documento</label>
-                                <input class="form-control" [(ngModel)]="datos.numeroDocumento" name="numeroDocumento"
-                                    type="text" required />
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Nombre Solicitante</label>
-                                <input class="form-control" [(ngModel)]="datos.nombreSolicitante" name="nombreSolicitante"
-                                    type="text" required />
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Nro. Cuotas (Meses)</label>
-                                <input class="form-control" [(ngModel)]="numeroCuotas" name="numeroCoutas" type="number"
-                                    required />
-                            </div>
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Número solicitud RUNT</label>
-                                <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text"
-                                    required />
-                            </div>
+        <form #newForm="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Nueva Importación Temporal</strong>
+                        <br>
+                        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Fecha Solicitud <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="datos.fechaSolicitud" name="fechaSolicitud" type="date"
+                                required disabled />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Nro. Cuotas (Meses) <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="numeroCuotas" name="numeroCoutas" type="number"
+                                required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Número solicitud RUNT <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Licencia Conducción <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="datos.licenciaConduccion" name="datos.licenciaConduccion"
+                                type="text" required />
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-            <app-new-propietario-vehiculo [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion"
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Datos del Propietario</strong>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="número identificación" [(ngModel)]="datos.numeroIdentificacion"
+                                    name="numeroIdentificacion" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onBuscarCiudadano()" class="btn btn-default btn-primary" type="button"><i
+                                            class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo Documento <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected"
+                                required name="tiposIdentificacionId">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Nombres Solicitante <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="datos.nombreSolicitante" name="nombreSolicitante"
+                                type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Apellidos Solicitante <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="datos.apellidoSolicitante" name="apellidoSolicitante"
+                                type="text" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Caracteristicas del Vehiculo</strong>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-lg-6 col-md-6">
+                            <label>Pais Registro <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="paises" [(ngModel)]="paisSelected" name="pais" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Número de Aceptación <strong class="text-danger">*</strong></label>
+                            <input class="form-control" type="text" [(ngModel)]="datos.numeroAceptacion" name="numeroAceptacion" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="placa" [(ngModel)]="datos.placa"
+                                    name="placa" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onBuscarVehiculo()" class="btn btn-default btn-primary" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Serie <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="datos.serie" name="serie" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Motor <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="datos.motor" name="motor" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Número Chasis <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="datos.chasis" name="chasis" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Número Vin <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="datos.vin" name="vin" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Linea <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="datos.linea" name="linea" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Modelo <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="datos.modelo" name="modelo" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Color <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="datos.color" name="color" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Marca <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="datos.marca" name="marca" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- <app-new-propietario-vehiculo [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion"
                 (readyCiudadano)="readyCiudadano($event)"></app-new-propietario-vehiculo>
-            <app-new-vehiculo (readyCiudadano)="readyCiudadano($event)"></app-new-vehiculo>
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
-            </div>
+            <app-new-vehiculo (readyCiudadano)="readyCiudadano($event)"></app-new-vehiculo> -->
+        <div class="card-footer">
+            <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+            <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
         </div>
-    </div><!-- /.col -->
+    </div>
 </div><!-- /.row -->
