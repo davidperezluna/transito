@@ -1,45 +1,47 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Sucursal } from './sucursal.modelo';
+import { Convenio } from './convenio.modelo';
 // import { Empresa } from '../new/empresa.modelo';
 
-import { SucursalService } from '../../../../services/sucursal.service';
+import { VhloTpConvenioService } from '../../../../services/vhloTpConvenio.service';
 import { LoginService } from '../../../../services/login.service';
-import { DepartamentoService } from '../../../../services/departamento.service';
-import { MunicipioService } from '../../../../services/municipio.service';
+import { EmpresaService } from '../../../../services/empresa.service';
 
 import swal from 'sweetalert2';
  
 @Component({
-  selector: 'app-new-sucursal',
+  selector: 'app-new-convenio',
   templateUrl: './new.component.html'
 })
-export class NewSucursalComponent implements OnInit {
-@Output() readySucursal = new EventEmitter<any>();
+export class NewConvenioComponent implements OnInit {
+@Output() readyConvenio = new EventEmitter<any>();
 @Input() empresa:any = null;
-public sucursal: Sucursal;
+public convenio: Convenio;
 public errorMessage;
 public respuesta;
 public cerrarFormulario=true;
-public municipios: any;
-public municipioSelected: any;
+public empresasTransportePublico: any;
+
+
+
+
 public btnVisible=false;
-public formNewSucursal = false;
-public formIndexSucursal = true;
+public formNewConvenio = false;
+public formIndexConvenio = true;
 
 // los que vienen desde el base de datos
 constructor(
-  private _SucursalService: SucursalService,
+  private _VhloTpConvenioService: VhloTpConvenioService,
   private _loginService: LoginService,
-  private _municipioService: MunicipioService,
+  private _EmpresaService: EmpresaService,
  
 ){}
 
   ngOnInit() {
-    this.sucursal = new Sucursal(null,null,null,null,null,null,null,null,null,null,null);
+    this.convenio = new Convenio(null,null,null,null,null,null,null,null);
 
-    this._municipioService.getMunicipioSelect().subscribe(
+    this._EmpresaService.getEmpresaTransportePublicoSelect().subscribe( 
       response => {
-        this.municipios = response;
+        this.empresasTransportePublico = response;
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -49,29 +51,26 @@ constructor(
         }
       }
     );   
+
   } 
   // la función cancelar
   onCancelar(){
-    this.readySucursal.emit(true);
+    this.readyConvenio.emit(true);
    
   }
   // enviar a guarda
   onEnviar(){
 
-    this.sucursal.municipioId = this.municipioSelected;
-    this.sucursal.empresaId = this.empresa.id;
-    
-    // let token = this._loginService.getToken();
+    let token = this._loginService.getToken();
+    this.convenio.empresa = this.empresa.id;
+    console.log(this.convenio);
 
-
-  let token = this._loginService.getToken();
-
-    this._SucursalService.register(this.sucursal,token).subscribe(
+    this._VhloTpConvenioService.register(this.convenio,token).subscribe(
       response => {
         this.respuesta = response;
         console.log(this.respuesta);
         if(this.respuesta.status == 'success'){
-          this.readySucursal.emit(true);
+          this.readyConvenio.emit(true);
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
@@ -81,7 +80,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El sucursal ya se encuentra registrado',
+            text: 'El convenio ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -96,17 +95,5 @@ constructor(
     }); 
   }
   // final del enviar
-
-  onNewSucursal(){
-    this.formNewSucursal = true;
-    this.btnVisible=true;
-    this.formIndexSucursal = false;
-    // this.table.destroy();
-  }
-  cancelarNewFormulario1()
-{
-  this.btnVisible=false;
-  this.formNewSucursal=false
-}
 
 }

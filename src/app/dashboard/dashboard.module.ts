@@ -177,6 +177,7 @@ import { TramiteSolicitudRpcccModule } from './tramiteSolicitudRpccc/tramiteSoli
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
 import { EmpresaModule } from './empresa/empresa.module';
+import { EmpresaAlcaldiaModule } from './empresaAlcaldia/empresaAlcaldia.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
@@ -415,7 +416,8 @@ import {RightsidebarComponent} from '../shared';
       CvCfgTipoMedidaCautelarModule,
       CvMedidaCautelarModule,
       BpProyectoModule,
-      RnrsPreasignacionPlacaModule
+      RnrsPreasignacionPlacaModule,
+      EmpresaAlcaldiaModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

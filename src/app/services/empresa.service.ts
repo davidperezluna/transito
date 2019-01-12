@@ -15,6 +15,10 @@ export class EmpresaService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
+	getEmpresaAlcaldia(){
+		return this._http.get(this.url+"/index/empresaAlcaldia").map(res => res.json());
+	}
+
 	register(empresa,token){
 		
 		let json = JSON.stringify(empresa);
@@ -72,6 +76,10 @@ export class EmpresaService {
 	getEmpresaSelect(){
 		
 		return this._http.get(this.url+"/select").map(res => res.json());
+	}
+
+	getEmpresaTransportePublicoSelect(){
+		return this._http.get(this.url+"/select/trasporte/publico").map(res => res.json());
 	}
 
 

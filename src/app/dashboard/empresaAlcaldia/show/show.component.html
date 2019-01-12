@@ -1,0 +1,119 @@
+
+<div class="container">
+    <div class="row align-items-center justify-content-between">
+         <div class="col-11 col-sm-12 page-title">
+            <!-- <h5>
+                <b>Módulo RNC.</b>
+                <small>Inscripción de convenio</small>
+            </h5> 
+         </div> -->
+         <!-- <div class="col text-left ">
+             <div class="btn-group pull-left"><br>
+                   
+             </div>
+         </div> -->
+     </div>
+     
+<div class="container row">
+    <div class="col-md-4 col-lg-4">
+        <div class="card">
+            <div class="card-header align-items-start justify-content-between flex">
+                <h5 class=" pull-left">Alcaldía</h5>
+            </div>
+            <div class="card-body">
+                <!-- tabla donde se muestra la empresa agregar convenio -->
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th class="text-right">{{empresa.nombre}}</th>
+                      </tr>
+                      <tr>
+                        <td>Nr. NIT</td>
+                        <th class="text-right">{{empresa.nit}}</th>
+                      </tr>
+                      <tr>
+                        <td>Dirección</td>
+                        <td class="text-right">{{empresa.direccion}}</td>
+                      </tr>
+                      <tr>
+                        <td>Tipo entidad</td>                        
+                        <td class="text-right">{{empresa.tipoEntidad}}</td>
+                      </tr> 
+                      <tr>
+                        <td>Tipo sociedad</td>
+                        <td class="text-right">{{ empresa.tipoSociedad.nombre }}</td>                        
+                      </tr> 
+                      <tr>
+                        <td>Empresa prestadora</td>
+                        <td class="text-right">{{ empresa.empresaPrestadora }}</td>                        
+                      </tr> 
+                      <tr>
+                        <td>Municipio</td>
+                        <td class="text-right">{{empresa.municipio.nombre}}</td>
+                      </tr>
+                      <tr>
+                        <td>Telefono</td>
+                        <td class="text-right">{{empresa.telefono}}</td>
+                      </tr>
+                    </thead>
+                 </table> 
+                 <!-- fin de la tablar de empresa -->
+                <div class="card-footer">
+                    <button (click)="onCancelar()" class="btn btn-outline-secondary" type="button">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-11 col-lg-8">
+        <div class="table-responsive">
+            <div class="card" *ngIf='formListaConvenioes'>
+                <div class="card-header">
+                    <h5 >
+                        <b class="text-center">Convenios</b>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNewConvenio()" class="btn btn-outline-success  btn-round pull-left "  data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Numero</th>
+                                <th>fechaConvenio</th>
+                                <th>fechaActaInicio</th>
+                                <th>fechaActaFin</th>
+                                <th>observacion</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let convenio of convenios; let i = index">
+                               
+                                <td>{{convenio.numeroConvenio}}</td> 
+                                <td>{{convenio.fechaConvenio}}</td>
+                                <td>{{convenio.fechaActaInicio}}</td>
+                                <td>{{convenio.fechaActaFin}}</td>
+                                <td>{{convenio.observacion}}</td>
+                                <td>
+                                    <!-- <button (click)="editSucursal(convenio)"       class="btn btn-outline-info btn-xs" type="button">Editar</button>  -->
+                                    <button (click)="deleteSucursal(convenio.id)"  class="btn btn-outline-danger btn-xs" type="button">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>               
+            </div>          
+        </div>
+        <!-- fin de lista de convenioes -->
+        <!--formulario de nueva convenio-->
+        <app-new-convenio *ngIf='formNewConvenio' [empresa]="empresa" (readyConvenio)="readyConvenio($event)"></app-new-convenio>
+        <!-- fin formulario -->
+     </div> 
+     
+</div>
+</div>
+
+
+
