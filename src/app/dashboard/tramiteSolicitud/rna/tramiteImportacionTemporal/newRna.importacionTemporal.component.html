@@ -25,12 +25,12 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Número solicitud RUNT <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="number" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Licencia Conducción <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="datos.licenciaConduccion" name="datos.licenciaConduccion"
-                                type="text" required />
+                                type="number" required />
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
                         <strong class="text-uppercase">Datos del Vehiculo</strong>
@@ -187,10 +187,6 @@
                                         <td class="center">
                                             <p>{{ datos.placa }}</p>
                                         </td>
-                                        <!-- <td><em>Marca</em></td>
-                                        <td class="center">
-                                            <p>{{ vehiculo.linea.marca.nobmre }}</p>
-                                        </td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -202,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </form>
         <!-- <app-new-propietario-vehiculo [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion"
                 (readyCiudadano)="readyCiudadano($event)"></app-new-propietario-vehiculo>

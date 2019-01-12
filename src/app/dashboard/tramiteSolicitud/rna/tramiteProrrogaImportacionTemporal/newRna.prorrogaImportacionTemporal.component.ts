@@ -120,7 +120,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
         this.cancelarTramite.emit(true);
     }
 
-    onBuscarVehiculo() {
+    /* onBuscarVehiculo() {
         let token = this._loginService.getToken();
         this._MsvRegistroIpatService.getBuscarVehiculo({ 'placa': this.datos.placa }, token).subscribe(
             response => {
@@ -166,6 +166,6 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
             this.vehiculoEncontrado = false;
             this.vhl = false;
         }
-    }
+    } */
 
 }

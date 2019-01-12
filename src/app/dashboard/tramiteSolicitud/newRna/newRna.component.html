@@ -1,4 +1,4 @@
-<div class="row" *ngIf="importacion == 'No'">
+<div class="row">
     <!-- .row -->
     <div class="col-xs-12 col-lg-6">
         <div class="input-group" [ngClass]="{'has-danger' : isError}">
@@ -215,7 +215,7 @@
         </div>
     </div>
 
-    <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
+    <!-- <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
         <div class="container">
             <label>Facturas
                 <span class="text-danger">*</span>
@@ -229,7 +229,7 @@
                 </span>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="container-fluid" *ngIf="factura && tramitesFactura?.length > 0">
         <div class="col-md-12">

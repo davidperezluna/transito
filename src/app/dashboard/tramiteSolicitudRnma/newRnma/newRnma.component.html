@@ -2,7 +2,7 @@
     <!-- .row -->
     <div class="col-xs-12 col-lg-6">
         <!-- .col -->
-        <div class="input-group" *ngIf="importacion == 'No'" [ngClass]="{'has-danger' : isError}">
+        <div class="input-group" [ngClass]="{'has-danger' : isError}">
             <input type="text" class="form-control text-uppercase" placeholder="Vin,Chasis,Placa,Motor,Serie"
                 [(ngModel)]="tramiteSolicitud.vehiculoId" name="placaVehiculo" required />
             <span class="input-group-btn">
@@ -241,10 +241,8 @@
     </div>
 </div><!-- /.row -->
 <div class="row">
-    <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
-        <!-- .row -->
+    <!-- <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
         <div class="container">
-            <!-- .col -->
             <label>Facturas
                 <span class="text-danger">*</span>
             </label>
@@ -258,9 +256,9 @@
                     </button>
                 </span>
             </div>
-        </div><!-- /.col -->
+        </div>
         <hr>
-    </div><!-- /.row -->
+    </div> -->
     <div class="container-fluid" *ngIf="factura">
         <div class="card col-md-12 col-md-16">
             <div class="card-header">

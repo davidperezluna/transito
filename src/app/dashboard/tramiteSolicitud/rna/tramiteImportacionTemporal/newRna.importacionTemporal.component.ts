@@ -45,7 +45,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     public numeroCuotas: any;
 
     public tramiteRealizado: any;
-    public datos = {
+    /* public datos = {
         'idFactura': null,
         'idVehiculo': null,
         'tramiteFormulario': null,
@@ -62,6 +62,15 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         'chasis': null,
         'vin': null,
         'numeroAceptacion': null,
+    }; */
+    public datos = {
+        'idFactura': null,
+        'idVehiculo': null,
+        'tramiteFormulario': null,
+        'fechaSolicitud': null,
+        'numeroAceptacion': null,
+        'pais': null,
+        'numeroIdentificacion': null,
     };
 
     public datos2 = {
@@ -110,8 +119,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         if (this.tramiteRealizado) {
             this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token, this.tramiteRealizado.id).subscribe(
                 response => {
-                    this.datos = response.data.datos
-                    console.log(response.data.datos);
+                    this.datos = response.data.datos;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -199,7 +207,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
 
     }
 
-    onBuscarVehiculo() {
+    /* onBuscarVehiculo() {
         let token = this._loginService.getToken();
         this._MsvRegistroIpatService.getBuscarVehiculo({ 'placa': this.datos.placa }, token).subscribe(
             response => {
@@ -225,7 +233,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
             }
         );
     }
-
+ */
     btnNewPropietario() {
         this.datos2.cPropietario.push(
             {
@@ -246,7 +254,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         }
     }
 
-    btnNewVehiculo() {
+    /* btnNewVehiculo() {
         this.datos2.vehiculos.push(
             {
                 'placa': this.datos.placa,
@@ -265,5 +273,5 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
             this.vehiculoEncontrado = false;
             this.vhl = false;
         }
-    }
+    } */
 }

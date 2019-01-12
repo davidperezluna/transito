@@ -20,18 +20,18 @@
                         </div>
                         <div></div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Nro. Cuotas (Meses)</label>
+                            <label>Nro. Cuotas (Meses) <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="numeroCuotas" name="numeroCoutas" type="number"
                                 required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Número solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                            <label>Número solicitud RUNT <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="number" required />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
                         <strong class="text-uppercase">Datos del Vehiculo</strong>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </form>
         <div class="card-footer">
             <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
