@@ -22,6 +22,7 @@ import { ServicioRoutes } from './servicio/servicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 
+import { CfgAdmFormatoRoutes } from './cfgAdmFormato/cfgAdmFormato.routes';
 import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.routes';
 
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
@@ -35,6 +36,8 @@ import { SvCfgSenialConectorRoutes } from './svCfgSenialConector/svCfgSenialCone
 import { SvCfgSenialTipoRoutes } from './svCfgSenialTipo/svCfgSenialTipo.routes';
 import { SvCfgSenialColorRoutes } from './svCfgSenialColor/svCfgSenialColor.routes';
 import { SvCfgSenialEstadoRoutes } from './svCfgSenialEstado/svCfgSenialEstado.routes';
+import { SvCfgSenialLineaRoutes } from './svCfgSenialLinea/svCfgSenialLinea.routes';
+import { SvCfgSenialProveedorRoutes } from './svCfgSenialProveedor/svCfgSenialProveedor.routes';
 import { SvCfgSenialRoutes } from './svCfgSenial/svCfgSenial.routes';
 import { SvSenialInventarioRoutes } from './svSenialInventario/svSenialInventario.routes';
 
@@ -278,6 +281,7 @@ export const DashboardRoutes: Route[] = [
       ...AlmacenRoutes,
       ...CfgTipoInfractorRoutes,
       ...ComparendoRoutes,
+      ...CfgAdmFormatoRoutes,
       ...CfgAdmFormatoTipoRoutes,
       ...CvLcCfgMotivoRoutes,
       ...CvLcCfgRestriccionRoutes,
@@ -289,6 +293,8 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgSenialTipoRoutes,
       ...SvCfgSenialColorRoutes,
       ...SvCfgSenialEstadoRoutes,
+      ...SvCfgSenialLineaRoutes,
+      ...SvCfgSenialProveedorRoutes,
       ...SvCfgSenialRoutes,
       ...SvSenialInventarioRoutes,
       ...VhloCfgTipoAlertaRoutes,

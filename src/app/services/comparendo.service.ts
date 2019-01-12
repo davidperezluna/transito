@@ -61,7 +61,7 @@ export class ComparendoService {
 	}
 	
 	searchByInfractor(datos, token) {
-		let json = JSON.stringify(datos);
+		let json = JSON.stringify(datos);	
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/infractor", params, { headers: headers }).map(res => res.json());

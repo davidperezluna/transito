@@ -218,9 +218,7 @@ export class NewVehiculoComponent implements OnInit {
         let token = this._loginService.getToken();
         this._VehiculoService.register({'vehiculo': this.vehiculo, 'campo': 'importacion-temporal'}, token).subscribe(
             response => {
-                this.respuesta = response;
-                console.log(this.respuesta);
-                if (this.respuesta.status == 'success') {
+                if (response.status == 'success') {
                     this.ready.emit(true);
                     swal({
                         title: 'Perfecto!',

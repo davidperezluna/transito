@@ -1,10 +1,7 @@
-<br>
-<br>
 <div class="row">
     <!-- .row -->
     <div class="col-xs-12 col-lg-6">
-        <div class="input-group" *ngIf="importacion == 'No'" [ngClass]="{'has-danger' : isError}">
-            <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
+        <div class="input-group" [ngClass]="{'has-danger' : isError}">
             <input type="text" class="form-control" placeholder="Vin,Chasis,Placa,Motor,Serie" [(ngModel)]="tramiteSolicitud.vehiculoId"
                 name="placaVehiculo" required />
             <span class="input-group-btn">
@@ -198,7 +195,6 @@
                         </button>
                     </div>
                     <div class="card col-xs-12 col-lg-12">
-                        <!-- <div class="container" *ngIf="tramiteSolicitud.solicitanteId"> -->
                         <div class="container">
                             <label>Facturas
                                 <span class="text-danger">*</span>
@@ -213,30 +209,27 @@
                                 </span>
                             </div>
                         </div>
-                        <hr>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
-        <!-- <div class="container" *ngIf="tramiteSolicitud.solicitanteId"> -->
+
+    <!-- <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
         <div class="container">
             <label>Facturas
                 <span class="text-danger">*</span>
             </label>
             <div class="input-group" [ngClass]="{'has-danger' : isError}">
-                <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
                 <input type="text" class="form-control" placeholder="Numero de facura" [(ngModel)]="facturaSelected"
                     name="factura" required />
                 <span class="input-group-btn">
                     <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
-                        ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                       type="button"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </div>
-        <hr>
-    </div>
+    </div> -->
 
     <div class="container-fluid" *ngIf="factura && tramitesFactura?.length > 0">
         <div class="col-md-12">
@@ -331,7 +324,7 @@
                         <div class="tab-pane" id="rna-transformacion" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-transformacion [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
-                        </div>
+                        </div> 
 
                         <div class="tab-pane" id="rna-duplicadolicencia" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-duplicado-licencia (readyTramite)="readyTramite($event)" [solicitanteId]='tramiteSolicitud.solicitanteId'
@@ -356,7 +349,7 @@
                         <div class="tab-pane" id="rna-cambiomotor" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-cambio-motor (readyTramite)="readyTramite($event)" [factura]="factura"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
-                        </div>
+                        </div> 
 
                         <div class="tab-pane" id="rna-blindaje" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-blindaje [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
@@ -395,7 +388,7 @@
                         <div class="tab-pane" id="rna-cambiogas" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-cambio-gas [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
-                        </div>
+                        </div> 
 
                         <div class="tab-pane" id="rna-modificacion-acreedor-prendario" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-cambio-acreedor-prendario [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
@@ -415,7 +408,7 @@
                         <div class="tab-pane" id="rna-prorroga-importacion-temporal" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-prorroga-importacion-temporal [vehiculo]="vehiculo" [factura]="factura"
                                 (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>

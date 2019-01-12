@@ -12,7 +12,6 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public msvCaracterizacion: msvCaracterizacion;
 public errorMessage;
-public respuesta;
 
 constructor(
   private _MsvCaracterizacionService: MsvCaracterizacionService,
@@ -29,23 +28,20 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    console.log(this.msvCaracterizacion);
 		this._MsvCaracterizacionService.register(this.msvCaracterizacion,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'Se ha registrado con exito',
+            text: 'Se ha registrado con éxito',
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
-        }else{
+          });
+        }else {
           swal({
             title: 'Error!',
-            text: 'La caracterización ya se encuentra registrado',
+            text: 'La caracterización ya se encuentra registrada',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

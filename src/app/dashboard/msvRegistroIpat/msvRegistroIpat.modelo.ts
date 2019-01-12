@@ -122,7 +122,7 @@ export class MsvRegistroIpat{
 		public idGravedadConductor: number,
 		public direccionResidenciaConductor: string,
 		public ciudadResidenciaConductor: number,
-		public telefonoConductor: number,
+		public telefonoConductor: string,
 		public practicoExamenConductor: string,
 		public autorizoConductor: string,
 		public idResultadoExamenConductor: string,

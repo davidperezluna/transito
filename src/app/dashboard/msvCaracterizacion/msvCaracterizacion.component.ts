@@ -12,7 +12,6 @@ declare var $: any;
 export class MsvCaracterizacionComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
 	public msvCaracterizaciones;
 	public formNew = false;
 	public formEdit = false;
@@ -22,7 +21,7 @@ export class MsvCaracterizacionComponent implements OnInit {
 
   constructor(
     private _CaracterizacionService: MsvCaracterizacionService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
@@ -74,10 +73,12 @@ export class MsvCaracterizacionComponent implements OnInit {
    this.table = $('#dataTables-example').DataTable();
   }
   
-  onNew(){
+  onNew() {
     this.formNew = true;
     this.formIndex = false;
-    this.table.destroy();
+    if (this.table) {
+      this.table.destroy();
+    }
   }
 
   ready(isCreado:any){
@@ -100,7 +101,7 @@ export class MsvCaracterizacionComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._CaracterizacionService.deleteCaracterizacion(token,id).subscribe(
             response => {
                 swal({
@@ -110,7 +111,6 @@ export class MsvCaracterizacionComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {

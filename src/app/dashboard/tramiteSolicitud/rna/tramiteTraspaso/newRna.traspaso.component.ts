@@ -81,7 +81,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         let token = this._loginService.getToken();
         let datos = {
             'idFactura':this.factura.id,
-            'idFormulario':'rna-traspaso'
+            'tramiteFormulario':'rna-traspaso'
         }
 
         this._TramiteSolicitudService.showTramiteSolicitudByTamiteFacturaFormulario(datos,token).subscribe(

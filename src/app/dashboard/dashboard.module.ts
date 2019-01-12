@@ -29,6 +29,7 @@ import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
+import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
 
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
@@ -36,6 +37,8 @@ import { SvCfgSenialConectorModule } from './svCfgSenialConector/svCfgSenialCone
 import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module';
 import { SvCfgSenialColorModule } from './svCfgSenialColor/svCfgSenialColor.module';
 import { SvCfgSenialEstadoModule } from './svCfgSenialEstado/svCfgSenialEstado.module';
+import { SvCfgSenialLineaModule } from './svCfgSenialLinea/svCfgSenialLinea.module';
+import { SvCfgSenialProveedorModule } from './svCfgSenialProveedor/svCfgSenialProveedor.module';
 import { SvCfgSenialModule } from './svCfgSenial/svCfgSenial.module';
 import { SvSenialInventarioModule } from './svSenialInventario/svSenialInventario.module';
 
@@ -336,12 +339,15 @@ import {RightsidebarComponent} from '../shared';
       CuentaModule,
       CarroceriaModule,
       ComparendoModule,
+      CfgAdmFormatoModule,
       CfgAdmFormatoTipoModule,
       CfgBodegaModule,
       SvCfgSenialConectorModule,
       SvCfgSenialTipoModule,
       SvCfgSenialColorModule,
       SvCfgSenialEstadoModule,
+      SvCfgSenialLineaModule,
+      SvCfgSenialProveedorModule,
       SvCfgSenialModule,
       SvSenialInventarioModule,
       CvLcCfgMotivoModule,

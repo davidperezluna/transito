@@ -15,9 +15,16 @@
                                 <div class="row"><!-- .row -->
                                     <div class="col-xs-12 col-lg-12">
                                         <label>Agente de transito <b class="text-danger">*</b></label>
-                                        <ng-select [multiple]="false" [options]="agentesTransito" [(ngModel)]="agenteTransitoSelected" (ngModelChange)="onChangedMpersonalFuncionario($event)" name="idFuncionario"
-                                            required>
-                                        </ng-select>
+                                        <div class="input-group" [ngClass]="{'has-danger' : isErrorCiudadano,'has-success': isExistCiudadano}">
+                                            <ng-select [multiple]="false" [options]="agentesTransito" [(ngModel)]="agenteTransitoSelected" name="idFuncionario" required>
+                                            </ng-select>
+                                            <span class="input-group-btn">
+                                                <button (click)="onChangedMpersonalFuncionario()" [ngClass]="{'btn-danger' : isErrorCiudadano}" class="btn btn-default btn-success" ngxclipboard=""
+                                                    type="button">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                     <div class="col-lg-12" *ngIf='consecutivo'>
                                         <table class="table table-bordered table-striped">
@@ -258,11 +265,11 @@
                             <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="infractor.idTipoIdentificacion" name="infractorTipoIdentificacion"
                                 required></ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-8">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Número documento identidad</label>
                             <input class="form-control" (blur)='onSearchInfractor()' [(ngModel)]="infractor.identificacion" name="infractorIdentificacion" type="text">
                         </div>
-                        <div class="col-xs-12 col-lg-6">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Nombres y apellidos completos</label>
                             <input class="form-control" [(ngModel)]="infractor.nombres" name="infractorNombres" type="text">
                         </div>
@@ -274,17 +281,17 @@
                             <label>Edad</label>
                             <input class="form-control" [(ngModel)]="infractor.edad" name="infractorEdad" type="text">
                         </div>
-                        <div class="col-xs-12 col-lg-4">
+                        <div class="col-xs-12 col-lg-6">
                             <label>Telefono fijo/celular</label>
                             <input class="form-control" [(ngModel)]="infractor.telefono" name="infractorTelefono" type="text">
                         </div>
-                        <div class="col-xs-12 col-lg-4">
+                        <div class="col-xs-12 col-lg-6">
                             <label>Municipio</label>
                             <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="infractor.idMunicipio" name="infractorMunicipio"
                                 required>
                             </ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-4">
+                        <div class="col-xs-12 col-lg-6">
                             <label>Correo</label>
                             <input class="form-control" [(ngModel)]="infractor.correo" name="infractorCorreo" type="text">
                         </div>

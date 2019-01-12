@@ -6,7 +6,7 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body ">
-                <form #newForm="ngForm">
+                <form #formNew="ngForm">
                     <div class="row">
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-4">
@@ -117,7 +117,7 @@
             </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="onEnviar()" class="btn btn-primary">Enviar</button>
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">Enviar</button>
             </div>
         </div>
     </div>

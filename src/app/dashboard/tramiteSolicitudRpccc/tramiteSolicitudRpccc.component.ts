@@ -119,7 +119,7 @@ export class TramiteSolicitudRpcccComponent implements OnInit {
 
   onSearchSolicitante(){
     let token = this._loginService.getToken();
-    this._CiudadanoService.searchByIdentificacion(token, {'numeroIdentificacion':this.identificacion}).subscribe(
+    this._CiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.identificacion}, token).subscribe(
       response => {          
         if(response.status == 'success'){
           this.solicitante = response.data;

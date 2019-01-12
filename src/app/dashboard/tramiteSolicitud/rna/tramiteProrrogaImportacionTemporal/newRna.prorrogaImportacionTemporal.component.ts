@@ -5,6 +5,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import { LoginService } from '../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { TipoIdentificacionService } from "../../../../services/tipoIdentificacion.service";
+import { MsvRegistroIpatService } from "../../../../services/msvRegistroIpat.service";
 
 import swal from 'sweetalert2';
 
@@ -21,21 +22,27 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
     public tipoId: boolean = true;
     public tramitesFactura: any = null;
     public tramiteFacturaSelected: any;
-    public tiposIdentificacion: any;
-    public tipoIdentificacionSelected;
 
     public numeroRunt: any;
     public numeroCoutas: any;
-    public numeroDocumento: any;
-    public nombreSolicitante: any;
     public fechaSolicitudProrroga: any;
     public date: any;
+
+    public vhl : any;
+    public vehiculoProrroga : any;
+    public vehiculoEncontrado : any;
 
     public tramiteRealizado: any;
     public datos = {
         'idFactura': null,
         'idVehiculo': null,
         'tramiteFormulario': null,
+        'placa': null,
+    };
+
+    public datos2 = {
+        'cPropietario': [],
+        'vehiculos': [],
     };
 
     constructor(
@@ -43,6 +50,8 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _TramiteFacturaService: TramiteFacturaService,
+        private _MsvRegistroIpatService: MsvRegistroIpatService,
+
 
     ) { }
 
@@ -91,20 +100,6 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
                 }
             );
         }
-
-        this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
-            response => {
-                this.tiposIdentificacion = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
     }
 
     enviarTramite() {
@@ -117,8 +112,6 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
             'fecha solicitud prorroga': this.fechaSolicitudProrroga,
             'numero runt': this.numeroRunt,
             'numero cuotas': this.numeroCoutas,
-            'Número Documento Solicitante': this.numeroDocumento,
-            'Nombre Solicitante': this.nombreSolicitante,
         };
         this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
     }
@@ -126,4 +119,53 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
     onCancelar() {
         this.cancelarTramite.emit(true);
     }
+
+    /* onBuscarVehiculo() {
+        let token = this._loginService.getToken();
+        this._MsvRegistroIpatService.getBuscarVehiculo({ 'placa': this.datos.placa }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.vhl = true;
+                    this.vehiculoProrroga = response.data;
+                    console.log(this.vehiculoProrroga);
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
+    }
+
+    btnNewVehiculo() {
+        this.datos2.vehiculos.push(
+            {
+                'placa': this.datos.placa,
+                'marca': this.vehiculoProrroga.linea.marca.nombre,
+                'modelo': this.vehiculoProrroga.modelo,
+                'chasis': this.vehiculoProrroga.chasis,
+            }
+        );
+        this.vehiculoEncontrado = true;
+        this.vhl = false;
+    }
+
+    deleteVehiculo(vehiculo: any): void {
+        this.datos2.vehiculos = this.datos2.vehiculos.filter(h => h !== vehiculo);
+        if (this.datos2.vehiculos.length === 0) {
+            this.vehiculoEncontrado = false;
+            this.vhl = false;
+        }
+    } */
+
 }
