@@ -5,6 +5,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import { LoginService } from '../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { TipoIdentificacionService } from "../../../../services/tipoIdentificacion.service";
+import { MsvRegistroIpatService } from "../../../../services/msvRegistroIpat.service";
 
 import swal from 'sweetalert2';
 
@@ -26,16 +27,24 @@ export class NewRnmaProrrogaImportacionTemporalComponent implements OnInit {
 
     public numeroRunt: any;
     public numeroCoutas: any;
-    public numeroDocumento: any;
-    public nombreSolicitante: any;
     public fechaSolicitudProrroga: any;
     public date: any;
+
+    public vhl: any;
+    public vehiculoProrroga: any;
+    public vehiculoEncontrado: any;
 
     public tramiteRealizado: any;
     public datos = {
         'idFactura': null,
         'idVehiculo': null,
         'tramiteFormulario': null,
+        'placa': null,
+    };
+
+    public datos2 = {
+        'cPropietario': [],
+        'vehiculos': [],
     };
 
     constructor(
@@ -43,6 +52,7 @@ export class NewRnmaProrrogaImportacionTemporalComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _TramiteFacturaService: TramiteFacturaService,
+        private _MsvRegistroIpatService: MsvRegistroIpatService,
 
     ) { }
 
@@ -114,11 +124,9 @@ export class NewRnmaProrrogaImportacionTemporalComponent implements OnInit {
         this.datos.tramiteFormulario = 'rnma-prorroga-importacion-temporal';
         this.datos.idVehiculo = this.vehiculo.id;
         let resumen = {
-            'Fecha solicitud prorroga': this.fechaSolicitudProrroga,
-            'Número runt': this.numeroRunt,
-            'Número cuotas': this.numeroCoutas,
-            'Número Documento Solicitante': this.numeroDocumento,
-            'Nombre Solicitante': this.nombreSolicitante,
+            'fecha solicitud prorroga': this.fechaSolicitudProrroga,
+            'numero runt': this.numeroRunt,
+            'numero cuotas': this.numeroCoutas,
         };
         this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
     }

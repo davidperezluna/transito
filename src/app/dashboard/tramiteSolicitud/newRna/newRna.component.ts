@@ -51,7 +51,7 @@ export class NewRnaComponent implements OnInit {
   public identificacionApoderado = false;
   public apoderado: any = false;
 
-  public importacion: any =  'No';
+  public importacion: any = 'No';
   public cantidadSustrato = 1;
   public moduloId = 1;
   public resumen = {}; public datos = {
@@ -70,9 +70,9 @@ export class NewRnaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    this.tramiteSolicitud = new TramiteSolicitud(null,null, null, null, null, null,null,null,null);
-    swal({
+    this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null, null);
+    /* swal({
       title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',
       type: 'info',
       showCancelButton: true,
@@ -86,7 +86,7 @@ export class NewRnaComponent implements OnInit {
       } else if (result.dismiss === swal.DismissReason.cancel) {
         this.importacion = 'No';
       }
-    })
+    }) */
 
   }
   onCancelar() {
@@ -142,6 +142,7 @@ export class NewRnaComponent implements OnInit {
 
       this._tramiteFacturaService.getTramiteShowFactura(this.datos).subscribe(
         response => {
+
           this.isMatricula = false;
           let active = true;
           let token = this._loginService.getToken();
@@ -190,22 +191,20 @@ export class NewRnaComponent implements OnInit {
           } else {
             if (this.isMatricula) {
               this.factura = response[0].factura;
-            } else {
+            } /* else {
               if (this.importacion == "Si") {
                 this.factura = response[0].factura;
-              }
-              else {
-                this.factura = false;
-                swal({
-                  title: 'Error!',
-                  text: 'Seleccionar solicitante',
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
+              } */
+            else {
+              this.factura = false;
+              swal({
+                title: 'Error!',
+                text: 'Seleccionar solicitante',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
             }
           }
-
           error => {
             this.errorMessage = <any>error;
             if (this.errorMessage != null) {
@@ -253,7 +252,7 @@ export class NewRnaComponent implements OnInit {
           this.error = true;
           this.isError = true;
           swal.close();
-        } 
+        }
         error => {
           this.errorMessage = <any>error;
           if (this.errorMessage != null) {

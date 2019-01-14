@@ -29,7 +29,7 @@ export class NewRnmaComponent implements OnInit {
   public factura: any;
   public isPagada = false;
   public tramiteSelected: any;
-  
+
   public isError = false;
 
   //public vehiculo: any = null;
@@ -58,7 +58,7 @@ export class NewRnmaComponent implements OnInit {
   public importacion: any;
   public apoderadoEncontrado = 1;
   public moduloId = 3;
-  public resumen = {};     public datos = {
+  public resumen = {}; public datos = {
     'moduloId': null,
     'idFactura': null,
     'vehiculoId': null,
@@ -79,7 +79,7 @@ export class NewRnmaComponent implements OnInit {
   ngOnInit() {
     this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null);
-    swal({
+    /* swal({
       title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',
       type: 'info',
       showCancelButton: true,
@@ -93,7 +93,7 @@ export class NewRnmaComponent implements OnInit {
       } else if (result.dismiss === swal.DismissReason.cancel) {
         this.importacion = 'No';
       }
-    })
+    }) */
   }
   onCancelar() {
     this.ready.emit(true);
@@ -145,7 +145,7 @@ export class NewRnmaComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    this._VehiculoService.showVehiculoRnma(this.tramiteSolicitud.vehiculoId,token).subscribe(
+    this._VehiculoService.showVehiculoRnma(this.tramiteSolicitud.vehiculoId, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.isCiudadano = true
@@ -164,13 +164,13 @@ export class NewRnmaComponent implements OnInit {
           this.isError = true;
           swal.close();
         }
-        error => { 
-            this.errorMessage = <any>error;
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición"); 
-            }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
+        }
       });
   }
 
@@ -238,20 +238,21 @@ export class NewRnmaComponent implements OnInit {
           } else {
             if (this.isMatricula) {
               this.factura = response[0].factura;
-            } else {
+            } /* else {
               if (this.importacion == "Si") {
                 this.factura = response[0].factura;
-              } else {
-                this.factura = false;
-                swal({
-                  title: 'Error!',
-                  text: 'Seleccionar solicitante',
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
+              } */
+            else {
+              this.factura = false;
+              swal({
+                title: 'Error!',
+                text: 'Seleccionar solicitante',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
             }
           }
+
 
           error => {
             this.errorMessage = <any>error;
@@ -282,7 +283,7 @@ export class NewRnmaComponent implements OnInit {
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
-            type: 'success',  
+            type: 'success',
             confirmButtonText: 'Aceptar'
           })
           this.error = false;
@@ -319,17 +320,17 @@ export class NewRnmaComponent implements OnInit {
 
     if (this.ciudadano) {
       var html = 'Se va a enviar la siguiente solicitud:<br>' +
-      'Factura: <b>' + this.factura.numero + '</b><br>' +
-      //'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><br>' +
-      'Solicitante: <b>' + this.ciudadano.usuario.identificacion + '</b><hr>' +
-      'Tramites:<br>' +
-       this.tramites;
-    }else{
+        'Factura: <b>' + this.factura.numero + '</b><br>' +
+        //'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><br>' +
+        'Solicitante: <b>' + this.ciudadano.usuario.identificacion + '</b><hr>' +
+        'Tramites:<br>' +
+        this.tramites;
+    } else {
       var html = 'Se va a enviar la siguiente solicitud:<br>' +
-      'Factura: <b>' + this.factura.numero + '</b><br>' +
-      //'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><hr>' +
-      'Tramites:<br>' +
-      this.tramites;
+        'Factura: <b>' + this.factura.numero + '</b><br>' +
+        //'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><hr>' +
+        'Tramites:<br>' +
+        this.tramites;
     }
 
     swal({
@@ -404,7 +405,7 @@ export class NewRnmaComponent implements OnInit {
         }
       });
   }
-  cerrarApoderado(){
+  cerrarApoderado() {
     this.frmApoderado = false;
     this.apoderado = false;
     this.apoderadoEncontrado = 1;

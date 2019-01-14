@@ -4,28 +4,28 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class SucursalService {
-	private url = environment.apiUrl + "sucursal";
+export class VhloTpConvenioService {
+	private url = environment.apiUrl + "vehiculo/vhlotpconvenio";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getSucursal(){
+	getVhloTpConvenio(){
 		
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(sucursal,token){
+	register(vhlotpconvenio,token){
 		
-		let json = JSON.stringify(sucursal);
-		let params = "json="+json+"&authorization="+token;
+		let json = JSON.stringify(vhlotpconvenio);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteSucursal(token,id){
+	deleteVhloTpConvenio(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,7 +33,7 @@ export class SucursalService {
 							  .map(res => res.json());
 	}
 
-	showSucursal(token,id){
+	showVhloTpConvenio(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -52,9 +52,9 @@ export class SucursalService {
  
 	}
 
-	editSucursal(sucursal,token){
+	editVhloTpConvenio(vhlotpconvenio,token){
 
-		let json = JSON.stringify(sucursal);
+		let json = JSON.stringify(vhlotpconvenio);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -62,8 +62,8 @@ export class SucursalService {
 
 	}
 
-	getSucursalEmpresa(id){
-		return this._http.get(this.url+"/"+id+"/sucursales/por/empresa").map(res => res.json());
+	getVhloTpConvenioEmpresa(id){
+		return this._http.get(this.url+"/"+id+"/convenios/por/empresa").map(res => res.json());
 	}
 	
 }
