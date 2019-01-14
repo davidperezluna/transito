@@ -60,7 +60,11 @@
                                 <tbody>
                                     <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
                                         <td>{{ i }}</td>
-                                        <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                                        <td>
+                                            <a (click)="onRecord(comparendo)" class="text-primary">
+                                                <b>{{ comparendo.consecutivo.consecutivo }}</b>
+                                            </a>
+                                        </td>
                                         <td>{{ comparendo.placa }}</td>
                                         <td>{{ comparendo.fecha }}</td>
                                         <td>{{ comparendo.infractorNombres }}</td>
@@ -75,5 +79,9 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf='formRecord'>
+        <app-record [comparendo]="comparendo" (ready)="ready($event)"></app-record>
     </div>
 </div>

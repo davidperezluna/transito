@@ -13,9 +13,11 @@ export class SearchComponent implements OnInit{
   @Output() ready = new EventEmitter<any>();
   public errorMessage;
   public comparendos: any = null;
+  public comparendo: any = null;
   public table: any;
 
   public filtro: any = null;
+  public formRecord: any = false;
 
   public search: any = {
     'tipoFiltro': null,
@@ -81,6 +83,7 @@ constructor(
 
   iniciarTabla() {
     if (this.table) {
+      this.table.empty();
       this.table.destroy();
     }
 
@@ -98,5 +101,13 @@ constructor(
       }
     });
     this.table = $('#dataTables-example').DataTable();
+  }
+
+  onRecord(comparendo: any) {
+    this.comparendo = comparendo;
+    if (this.comparendo) {
+      this.formRecord = true;
+      this.comparendos = null;
+    }
   }
 }
