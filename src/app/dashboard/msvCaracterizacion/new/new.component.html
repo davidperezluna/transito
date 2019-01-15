@@ -23,23 +23,35 @@
                         <br>
                         <thead>
                             <tr>
-                                <th>NIT</th>
-                                <th>Nombre</th>
-                                <th>Telefono</th>
-                                <th>Dirección</th>
+                                <th>FECHA</th>
+                                <th>CIUDAD</th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <th>CEDULA</th>
+                                <th>LUGAR DE EXPEDICIÓN</th>
+                                <th>CLC</th>
+                                <th>FECHA DE VIGENCIA</th>
+                                <th>EDAD</th>
+                                <th>GENERO</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd">
-                                <td>{{ empresa.nit }}</td>
-                                <td>{{ empresa.nombre }}</td>
-                                <td>{{ empresa.telefono }}</td>
-                                <td>{{ empresa.direccion }}</td>
+                                <td>{{ empresa.fecha }}</td>
+                                <td>{{ empresa.municipio.nombre }}</td>
+                                <td>{{ empresa.ciudadano.usuario.primerNombre }}</td>
+                                <td>{{ empresa.ciudadano.usuario.identificacion }}</td>
+                                <td>{{ empresa.ciudadano.municipioNacimiento }}}</td>
+                                <td>{{ representante.licenciaConduccion.categoria.nombre }}</td>
+                                <td>{{ representante.licenciaConduccion.fechaVencimiento }}</td>
+                                <td>{{ representante.edad }}</td>
+                                <td>{{ empresa.ciudadano.genero.nombre }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div *ngIf="ctzn && empresaEncontrada">
+                <!-- <div *ngIf="ctzn && empresaEncontrada"> -->
+                <div *ngIf="ctzn">
                     <div class="col-lg-6 col-md-6">
                         <label>Grupo de trabajo al que pertenece:</label>
                         <div class="form-group row">
@@ -48,7 +60,7 @@
                                     <input id="radioAdministrativo" name="administrativo" [(ngModel)]="msvCaracterizacion.grupoTrabajo"
                                         value="0" type="radio" id="customRadioAdministrativo" name="customRadioAdministrativo"
                                         class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioAdministrativo">administrativo</label>
+                                    <label class="custom-control-label" for="customRadioAdministrativo">Administrativo</label>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-lg-6">
@@ -56,7 +68,7 @@
                                     <input id="radioComercial" name="comercial" [(ngModel)]="msvCaracterizacion.grupoTrabajo"
                                         value="1" type="radio" id="customRadioComercial" name="customRadioComercial"
                                         class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioComercial">comercial</label>
+                                    <label class="custom-control-label" for="customRadioComercial">Comercial</label>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-lg-6">
@@ -96,7 +108,7 @@
                                     <input id="radioIndefinido" name="indefinido" [(ngModel)]="msvCaracterizacion.tipoContrato"
                                         value="5" type="radio" id="customRadioIndefinido" name="customRadioIndefinido"
                                         class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioIndefinido">indefinido</label>
+                                    <label class="custom-control-label" for="customRadioIndefinido">Indefinido</label>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-lg-6">
@@ -112,7 +124,7 @@
                                     <input id="radioContratista" name="contratista" [(ngModel)]="msvCaracterizacion.tipoContrato"
                                         value="7" type="radio" id="customRadioContratista" name="customRadioContratista"
                                         class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioContratista">contratista</label>
+                                    <label class="custom-control-label" for="customRadioContratista">Contratista</label>
                                 </div>
                             </div>
 
@@ -437,6 +449,10 @@
                 <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-save"></i>
                     Enviar
+                </button>
+                <button (click)="onExportar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Exportar
                 </button>
             </div>
         </div>
