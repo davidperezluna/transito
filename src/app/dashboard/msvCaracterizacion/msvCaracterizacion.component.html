@@ -1,37 +1,51 @@
-<div class="container" >
+<div class="container">
   <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">
-              <b class="text-uppercase">Seguridad Vial</b>
-              <small>Caracterización Empresa</small>
-              <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-default">
-                  <i class="fa fa-plus"></i>
-                  Nuevo
-                </button>
-              </div>
-            </h5>
-          </div>
-          <div class="card-body">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Fecha</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              
-            </table>
-            <!-- /.table-responsive --> 
-          </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <strong class="text-uppercase">Caracterización Empresa</strong>
+            <small>Lista de Caracterizaciones</small>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table" id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let caracterizacion of msvCaracterizaciones; let i = index">
+                <td>{{ caracterizacion.id }}</td>
+                <td>{{ caracterizacion.nombre }}</td>
+                <td>
+                  <button (click)="onEdit(caracterizacion)" class="btn btn-xs btn-info" type="button">
+                    <i class="fa fa-edit"></i>
+                    Editar
+                  </button>
+                  <button (click)="onDelete(caracterizacion.id)" class="btn btn-xs btn-danger" type="button">
+                    <i class="fa fa-trash"></i>
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
         </div>
       </div>
     </div>
-    
+  </div>
+  <app-edit *ngIf='formEdit' [caracterizacion]="caracterizacion" (ready)="ready($event)"></app-edit>
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
