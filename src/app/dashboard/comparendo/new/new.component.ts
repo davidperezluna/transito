@@ -155,7 +155,7 @@ constructor(
       'numeroIdentificacion': this.identificacion,
     };
 
-    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.comparendo = new Comparendo(null,null,null,null,null,null,null,null,null,null,null,null,false,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._MpersonalFuncionarioService.selectAgentes().subscribe(
       response => {
@@ -398,7 +398,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'la comparendo '+ this.comparendo.consecutivo +' ya se encuentra registrado',
+            text: 'El comparendo '+ this.comparendo.consecutivo +' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
