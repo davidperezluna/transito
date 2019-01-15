@@ -1,60 +1,108 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { msvCaracterizacion } from '../msvCaracterizacion.modelo';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MsvCaracterizacion } from '../msvCaracterizacion.modelo';
 import { MsvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+    selector: 'app-new',
+    templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public msvCaracterizacion: msvCaracterizacion;
-public errorMessage;
+    @Output() ready = new EventEmitter<any>();
+    public msvCaracterizacion: MsvCaracterizacion;
+    public errorMessage;
 
-constructor(
-  private _MsvCaracterizacionService: MsvCaracterizacionService,
-  private _loginService: LoginService,
-  ){}
+    public ctzn: any;
+    public nit: any;
 
-  ngOnInit() {
-    this.msvCaracterizacion = new msvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null);
-  }
-  onCancelar(){
-    this.ready.emit(true);
-  }
-  
-  onEnviar(){
-    let token = this._loginService.getToken();
-    
-		this._MsvCaracterizacionService.register(this.msvCaracterizacion,token).subscribe(
-			response => {
-        if(response.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'Se ha registrado con éxito',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-        }else {
-          swal({
-            title: 'Error!',
-            text: 'La caracterización ya se encuentra registrada',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+    public empresaEncontrada = false;
+    public empresa: any;
 
-		}); 
-  }
+    constructor(
+        private _MsvCaracterizacionService: MsvCaracterizacionService,
+        private _loginService: LoginService,
+    ) { }
 
+    ngOnInit() {
+        this.msvCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        swal({
+            title: '¿La empresa solicita asistencia técnica?',
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No'
+            }).then((result) => {
+            if (result.value) {
+                this.ctzn = true;
+            } else if (result.dismiss === swal.DismissReason.cancel) {
+                this.ctzn = false;
+            }
+            });
+    }
+
+    onCancelar() {
+        this.ready.emit(true);
+    }
+
+    onEnviar() {
+        let token = this._loginService.getToken();
+
+        this._MsvCaracterizacionService.register(this.msvCaracterizacion, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.ready.emit(true);
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    })
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+
+            });
+    }
+
+    onBuscarEmpresa() {
+        let token = this._loginService.getToken();
+        this._MsvCaracterizacionService.getBuscarEmpresa({ 'nit': this.nit }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.empresaEncontrada = true;
+                    this.empresa = response.data[0];
+                    console.log(this.empresa);
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
+    }
 }

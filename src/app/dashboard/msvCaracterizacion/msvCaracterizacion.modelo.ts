@@ -1,4 +1,4 @@
-export class msvCaracterizacion{
+export class MsvCaracterizacion{
 	constructor(
 		public id:number,
 		public numero: string,
@@ -10,6 +10,31 @@ export class msvCaracterizacion{
 		public evidencia: boolean,
 		public responde: boolean,
 		public observacion: string,
-		public estado: boolean
+		public estado: boolean,
+
+		public grupoTrabajo: string,
+		public otroGrupoTrabajo: string,
+		public otroTipoContrato: string,
+		public cargo: string,
+		public experienciaConduccion: string,
+		public accidente: string,
+		public circunstancias: string,
+		public incidente: string,
+		public frecuenciaDesplazamiento: string,
+		public propioVehiculo: string,
+		public desplazamientoPlanificado: string,
+		public antelacion: string,
+		public trayectoDesplazamiento: string,
+		public trayecto: number,
+		public tiempoTrayecto: string,
+		public kmMensualTrayecto: string,
+		public estadoInfraestructura: string,
+		public organizacionTrabajo: string,
+		public propiaConduccion: string,
+		public otro2: string,
+		public otro3: string,
+		public riesgoPercibido: string,
+		public propuestaReduccion: string,
+
 	){}
 }
