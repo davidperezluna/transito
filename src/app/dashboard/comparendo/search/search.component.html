@@ -82,6 +82,77 @@
     </div>
 
     <div class="col-xs-12 col-lg-9" *ngIf='formRecord'>
-        <app-record [comparendo]="comparendo" (ready)="ready($event)"></app-record>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <strong>Trazabilidad de comparendo No. {{ comparendo.consecutivo.consecutivo }}
+                    </strong>
+                </h5>
+            </div>
+            <div class="card-body container">
+                <table class="table" id="dataTables-example" *ngIf="trazabilidades">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Estado</th>
+                            <th>Fechas</th>
+                            <th>Acto Administrativo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ trazabilidad.estado.nombre }}</td>
+                            <td>{{ trazabilidad.fecha }}</td>
+                            <td>
+                                <span *ngIf="trazabilidad.actoAdministrativo">
+                                    {{ trazabilidad.actoAdministrativo }}
+                                </span>
+                                <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-primary" type="button">
+                                    <i class="fa fa-file-text"></i>
+                                    Crear Acto Administrativo
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf='formDocument'>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <b>Crear acto administrativo</b>
+                </h5>
+                <small>Los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Número
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="datos.numero" name="numero" type="text" required autofocus />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

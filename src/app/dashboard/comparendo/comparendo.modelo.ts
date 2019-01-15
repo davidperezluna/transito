@@ -12,6 +12,7 @@ export class Comparendo{
 		public accidente:string,
 		public fuga:string,
 		public retencionLicencia:string,
+		public anulado:boolean,
 		public fechaNotificacion:string,
 		public infraccionValorAdicional:string,
 		public licenciaTransitoNumero:string,

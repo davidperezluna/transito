@@ -11,15 +11,15 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { StateComponent } from './state/state.component';
 import { SearchComponent } from './search/search.component';
-import { RecordComponent } from './record/record.component';
+import { DocumentComponent } from './document/document.component';
 import { ExportComponent } from './export/export.component';
 import { SelectModule } from 'angular2-select';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [ComparendoComponent,NewComponent,EditComponent,StateComponent, SearchComponent, RecordComponent, ExportComponent],
-    exports: [ComparendoComponent, NewComponent, EditComponent, StateComponent, SearchComponent, RecordComponent, ExportComponent],
+    declarations: [ComparendoComponent,NewComponent,EditComponent,StateComponent, SearchComponent, DocumentComponent, ExportComponent],
+    exports: [ComparendoComponent, NewComponent, EditComponent, StateComponent, SearchComponent, DocumentComponent, ExportComponent],
     providers:[MpersonalFuncionarioService,ComparendoService,SedeOperativaService,CiudadanoVehiculoService]
 })
 

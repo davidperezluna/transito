@@ -24,7 +24,7 @@ constructor(
 
   ngOnInit(){ 
     $('#summernote').summernote({
-      placeholder: 'Hello bootstrap 4',
+      placeholder: 'Diligencie el cuerpo de la plantilla',
       tabsize: 2,
       height: 500
     });
@@ -32,6 +32,10 @@ constructor(
     this._TipoService.select().subscribe(
       response => {
         this.tipos = response;
+        setTimeout(() => {
+          this.formato.idTipo = [this.formato.tipo.id];
+        })
+        $('#summernote').summernote('code', this.formato.cuerpo);
       },
       error => {
         this.errorMessage = <any>error;
@@ -48,6 +52,8 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
+
+    this.formato.cuerpo = $('#summernote').summernote('code');
     
 		this._FormatoService.edit(this.formato,token).subscribe(
 			response => {

@@ -53,7 +53,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-    this.formato.cuerpo = $('#summernote').text();
+    this.formato.cuerpo = $('#summernote').summernote('code');
     
 		this._FormatoService.register(this.formato,token).subscribe(
 			response => {
