@@ -224,13 +224,15 @@ export class MpersonalFuncionarioComponent implements OnInit {
           this.datos.nombramiento = null;
           this.datos.numeroContrato = null;
           this.funcionarios = response.data;
+          console.log(this.funcionarios);
           if (this.table) {
             this.table.destroy();
+            this.formIndex = false;
           }
           setTimeout(() => {
             this.iniciarTabla();
+            this.formIndex = true;
           });
-          this.formIndex = true;
           swal.close();
         }else{
           swal({

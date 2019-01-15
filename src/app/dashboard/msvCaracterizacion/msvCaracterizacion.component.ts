@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MsvCaracterizacionService } from '../../services/msvCaracterizacion.service';
 import {LoginService} from '../../services/login.service';
-import { msvCaracterizacion } from './msvCaracterizacion.modelo';
+import { MsvCaracterizacion } from "./msvCaracterizacion.modelo";
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -12,12 +12,12 @@ declare var $: any;
 export class MsvCaracterizacionComponent implements OnInit {
   public errorMessage;
 	public id;
-	public msvCaracterizaciones;
+	public msvCaracterizaciones: any;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public msvCaracterizacion: msvCaracterizacion;
+  public msvCaracterizacion: MsvCaracterizacion;
 
   constructor(
     private _CaracterizacionService: MsvCaracterizacionService,

@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() msvCaracterizacion:any = null;
+@Input() caracterizacion:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
@@ -25,7 +25,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._CaracterizacionService.editCaracterizacion(this.msvCaracterizacion,token).subscribe(
+		this._CaracterizacionService.editCaracterizacion(this.caracterizacion,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
