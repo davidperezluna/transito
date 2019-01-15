@@ -63,7 +63,6 @@ export class SucursalService {
 	}
 
 	getSucursalEmpresa(id){
-		
 		return this._http.get(this.url+"/"+id+"/sucursales/por/empresa").map(res => res.json());
 	}
 	

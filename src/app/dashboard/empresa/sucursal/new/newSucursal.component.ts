@@ -22,10 +22,6 @@ public respuesta;
 public cerrarFormulario=true;
 public municipios: any;
 public municipioSelected: any;
-
-
-
-
 public btnVisible=false;
 public formNewSucursal = false;
 public formIndexSucursal = true;

@@ -25,7 +25,6 @@ export class RecordComponent implements OnInit {
         swal({
             title: 'Buscando trazabilidad!',
             text: 'Solo tardara unos segundos por favor espere.',
-            timer: 1500,
             onOpen: () => {
                 swal.showLoading()
             }

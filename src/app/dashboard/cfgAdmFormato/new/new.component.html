@@ -19,16 +19,14 @@
                         </div>
                         <div class="col-xs-12 col-lg-4">
                             <label>Tipo <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="formato.idTipo" name="idTipo"
-                                required>
+                            <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="formato.idTipo" name="idTipo" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Cuerpo <strong class="text-danger">*</strong></label>
-                            <textarea class="form-control" [(ngModel)]="formato.cuerpo" name="cuerpo" id="summernote" required></textarea>
+                            <textarea class="form-control" [(ngModel)]="formato.cuerpo" name="cuerpo" id="summernote"></textarea>
                         </div>
                     </div>
-
                 </form>
             </div>
             <div class="card-footer">

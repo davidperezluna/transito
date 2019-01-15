@@ -13,7 +13,6 @@
                         <thead>
                             <tr>
                                 <th>CONSECUTIVO</th>
-                                <th>ID COMPARENDO</th>
                                 <th>FECHA</th>
                                 <th>HORA</th>
                                 <th>DIRECCIÓN</th>
@@ -78,19 +77,18 @@
                         <tbody>
                             <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
                                 <td>{{ comparendo.consecutivo.id }}</td>    
-                                <td>{{ comparendo.id }}</td>
                                 <td>{{ comparendo.fecha }}</td>    
                                 <td>{{ comparendo.hora }}</td>
                                 <td>{{ comparendo.direccion }}</td>
                                 <td>{{ comparendo.municipio.nombre }}</td>
                                 <td>{{ comparendo.localidad }}</td>
                                 <td>{{ comparendo.placa }}</td>
-                                <td>{{ comparendo.clase.nombre }}</td>
-                                <td>{{ comparendo.servicio.nombre }}</td>
-                                <td>{{ comparendo.radioAccion.nombre }}</td>
-                                <td>{{ comparendo.modalidadTransporte.nombre }}</td>
+                                <td>{{ comparendo.clase }}</td>
+                                <td>{{ comparendo.servicio }}</td>
+                                <td>{{ comparendo.radioAccion }}</td>
+                                <td>{{ comparendo.modalidadTransporte }}</td>
                                 <!--<td>{{ comparendo.vehiculo.numeroPasajeros }}</td>-->
-                                <td>{{ comparendo.transportePasajeros }}</td>
+                                <td>{{ comparendo.transporteEspecial }}</td>
                                 <td>{{ comparendo.infractorIdentificacion }}</td>
                                 <td>{{ comparendo.infractorTipoDocumento }}</td>
                                 <td>{{ comparendo.infractorNombres }}</td>
@@ -101,7 +99,7 @@
                                 <td>{{ comparendo.infractorMunicipioResidencia }}</td>
                                 <td>{{ comparendo.infractorNumeroLicenciaConduccion }}</td>
                                 <td>{{ comparendo.categoria }}</td>
-                                <td>{{ comparendo.organismoTransito.nombre }}</td>
+                                <td>{{ comparendo.organismoTransitoMatriculado.nombre }}</td>
                                 <td>{{ comparendo.numeroLicenciaTransito }}</td>
                                 <td>{{ comparendo.tipoInfractor.nombre }}</td>
                                 <td>{{ comparendo.numeroLicenciaTransito }}</td>

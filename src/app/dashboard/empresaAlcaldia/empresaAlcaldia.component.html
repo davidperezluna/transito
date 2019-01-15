@@ -1,0 +1,69 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+              <h5>
+                <b>Alcaldías</b>
+                <small>Registro de alcaldías</small>
+              </h5>
+          </div>
+          <div class="card-body responsive">
+          	<div class="table-responsive">
+            <table class="table" id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Tipo de sociedad</th>
+                    <th>Municipio</th>                    
+                    <th>NIT</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Correo</th>                    
+                    <th>Acciones</th>                    
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let empresa of empresas; let i = index">
+                  <td>{{ empresa.id }}</td>
+                  <td>
+                    {{ empresa.nombre }}
+                  </td>
+                  <td>  
+                    {{ empresa.tipoSociedad.nombre }}                  
+                  </td>
+                  <td>
+                    {{ empresa.municipio.nombre }}
+                  </td>
+                  <td>
+                      {{ empresa.nit }}
+                  </td>
+                  <td>
+                      {{ empresa.telefono }}
+                  </td>
+                  <td>
+                      {{ empresa.direccion }}
+                  </td>
+                  <td>
+                      {{ empresa.correo }}
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="getSucursal(empresa)" class="btn btn-info" type="button" title="Tramites">
+                        Convenios
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+            <!-- /.table-responsive -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <convenio-show *ngIf='formShow' [empresa]="empresa" (ready)="ready($event)"></convenio-show>
+</div>

@@ -94,9 +94,9 @@ export class NewRnrsRematriculaComponent implements OnInit {
             response => {
                 this.tiposIdentificacion = response;
             }, 
+            
             error => {
                 this.errorMessage = <any>error;
-
                 if (this.errorMessage != null) {
                     console.log(this.errorMessage);
                     alert('Error en la petición');
