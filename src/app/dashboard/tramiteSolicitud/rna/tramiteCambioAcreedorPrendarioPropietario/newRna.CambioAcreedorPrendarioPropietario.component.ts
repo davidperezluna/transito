@@ -99,7 +99,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
                 this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rna-traspaso';
+                this.datos.tramiteFormulario = 'rna-modificacion-acreedor-prendario-propietario';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }, 
             error => {
