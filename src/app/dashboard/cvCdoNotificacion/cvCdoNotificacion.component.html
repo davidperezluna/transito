@@ -1,0 +1,55 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>
+              <b class="text-uppercase">Seguridad Vial (Señales)</b>
+              <small>Configuración de Proveedores</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Proveedor</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let proveedor of proveedores; let i = index">
+                  <td>{{ proveedor.id }}</td>
+                  <td>
+                    {{ proveedor.nombre }}
+                    <small *ngIf="proveedor.nit"><br><b>NIT:</b> {{ proveedor.nit }}</small>
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="onEdit(proveedor)" class="btn btn-xs btn-primary" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="onDelete(proveedor.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <app-edit *ngIf='formEdit' [proveedor]="proveedor" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

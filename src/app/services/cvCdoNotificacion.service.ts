@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class SvCfgSenialTipoService {
-	private url = environment.apiUrl + 'seguridadvial/svcfgsenialtipo';
+export class CvCdoNotificacionService {
+	private url = environment.apiUrl + 'contravencional/cvcdonotificacion';
 	public identity;
 	public token;
 
@@ -39,11 +39,10 @@ export class SvCfgSenialTipoService {
 		);
 	}
 
-	show(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+	show(token, id) {
+		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/show", params, { headers: headers })
+		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
 			.map(res => res.json());
 	}
 
