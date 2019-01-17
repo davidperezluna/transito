@@ -25,7 +25,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.msvCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.msvCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         swal({
             title: '¿La empresa solicita asistencia técnica?',
             type: 'info',
@@ -82,12 +82,11 @@ export class NewComponent implements OnInit {
     onBuscarEmpresa() {
         let token = this._loginService.getToken();
         this._MsvCaracterizacionService.getBuscarEmpresa({ 'nit': this.nit }, token).subscribe(
-
             response => {
                 if (response.status == 'success') {
                     this.empresaEncontrada = true;
                     this.empresa = response.data[0];
-                    console.log(this.empresa)
+                    console.log(this.empresa);
                 } else {
                     swal({
                         title: 'Alerta!',
@@ -105,5 +104,9 @@ export class NewComponent implements OnInit {
                 }
             }
         );
+    }
+
+    onExport(){
+        alert("asdasd");
     }
 }
