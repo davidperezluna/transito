@@ -14,6 +14,7 @@ export class MsvCaracterizacion{
 
 		public grupoTrabajo: string,
 		public otroGrupoTrabajo: string,
+		public tipoContrato: string,
 		public otroTipoContrato: string,
 		public cargo: string,
 		public experienciaConduccion: string,
@@ -32,6 +33,7 @@ export class MsvCaracterizacion{
 		public organizacionTrabajo: string,
 		public propiaConduccion: string,
 		public otro2: string,
+		public causaRiesgo: string,
 		public otro3: string,
 		public riesgoPercibido: string,
 		public propuestaReduccion: string,

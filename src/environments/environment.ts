@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl : 'https://subdetra.nariño.gov.co/colossus-sit/web/',
-  docsUrl : 'https://subdetra.nariño.gov.co/colossus-sit/web/docs/', 
-  uploadUrl : 'https://subdetra.nariño.gov.co/colossus-sit/web/uploads/', 
+  apiUrl : 'http://localhost/GitHub/colossus-sit/web/app_dev.php/',
+  docsUrl : 'http://localhost/GitHub/colossus-sit/web/docs/', 
+  uploadUrl : 'http://localhost/GitHub/colossus-sit/web/uploads/', 
 };
