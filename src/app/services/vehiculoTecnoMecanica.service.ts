@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class TecnoMecanicaService {
-	private url = environment.apiUrl + 'vehiculo/tecnomecanica';
+	private url = environment.apiUrl + 'vehiculo/vhlotecnomecanica';
 	public identity;
 	public token;
 

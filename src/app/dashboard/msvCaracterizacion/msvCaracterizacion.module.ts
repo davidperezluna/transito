@@ -6,13 +6,14 @@ import { MsvCaracterizacionService } from '../../services/msvCaracterizacion.ser
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
+import { ExportComponent } from "./export/export.component";
 import { SelectModule } from 'angular2-select';
 
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [MsvCaracterizacionComponent,NewComponent,EditComponent],
-    exports: [MsvCaracterizacionComponent, NewComponent,EditComponent],
+    declarations: [MsvCaracterizacionComponent,NewComponent,EditComponent, ExportComponent],
+    exports: [MsvCaracterizacionComponent, NewComponent,EditComponent, ExportComponent],
     providers:[MsvCaracterizacionService]
 })
 

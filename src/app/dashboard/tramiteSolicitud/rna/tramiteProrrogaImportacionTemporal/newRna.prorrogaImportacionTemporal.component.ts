@@ -25,6 +25,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
 
     public numeroRunt: any;
     public numeroCoutas: any;
+    public licenciaTransito: any;
     public fechaSolicitudProrroga: any;
     public date: any;
 
@@ -46,11 +47,9 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
     };
 
     constructor(
-        private _TipoIdentificacionService: TipoIdentificacionService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _TramiteFacturaService: TramiteFacturaService,
-        private _MsvRegistroIpatService: MsvRegistroIpatService,
 
 
     ) { }
@@ -112,6 +111,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
             'fecha solicitud prorroga': this.fechaSolicitudProrroga,
             'numero runt': this.numeroRunt,
             'numero cuotas': this.numeroCoutas,
+            'numero licencia transito': this.licenciaTransito,
         };
         this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
     }
