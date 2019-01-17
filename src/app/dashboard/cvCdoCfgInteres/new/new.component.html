@@ -10,24 +10,18 @@
                 <form #formNew="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-4">
-                            <label>Día <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="dias" [(ngModel)]="notificacion.dia" name="dia" required>
-                            </ng-select>
+                            <label>Porcentaje <strong class="text-danger">*</strong></label>
+                            <input type="numeric" class="form-control" [(ngModel)]="interes.porcentaje" name="porcentaje" />
                         </div>
                         <div class="col-xs-12 col-lg-4">
-                            <label>Hora <strong class="text-danger">*</strong></label>
-                            <input type="time" class="form-control text-uppercase" [(ngModel)]="notificacion.hora" name="hora" />
+                            <label>Días <strong class="text-danger">*</strong></label>
+                            <input type="numeric" class="form-control" [(ngModel)]="interes.dias" name="dias" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Estado <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="estados" [(ngModel)]="notificacion.idComparendoEstado" name="idComparendoEstado" required>
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Cargo <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="true" [options]="cargos" [(ngModel)]="arrayCargos" name="cargos" required>
+                            <ng-select [multiple]="false" [options]="estados" [(ngModel)]="interes.idComparendoEstado" name="idComparendoEstado" required>
                             </ng-select>
                         </div>
                     </div>

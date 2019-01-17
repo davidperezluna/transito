@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { CvCdoNotificacionService } from '../../services/cvCdoNotificacion.service';
+import { CvCdoCfgInteresService } from '../../services/cvCdoCfgInteres.service';
 import { LoginService } from '../../services/login.service';
-import { CvCdoNotificacion } from './cvCdoNotificacion.modelo';
+import { CvCdoCfgInteres } from './cvCdoCfgInteres.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cvCdoNotificacion.component.html'
+  templateUrl: './cvCdoCfgInteres.component.html'
 })
-export class CvCdoNotificacionComponent implements OnInit {
+export class CvCdoCfgInteresComponent implements OnInit {
   public errorMessage;
 	public id;
 
-	public notificaciones;
+	public intereses;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public notificacion: CvCdoNotificacion;
+  public interes: CvCdoCfgInteres;
 
   constructor(
-    private _NotificacionService: CvCdoNotificacionService,
+    private _CfgInteresService: CvCdoCfgInteresService,
 		private _loginService: LoginService,
     ){}
     
@@ -34,9 +34,9 @@ export class CvCdoNotificacionComponent implements OnInit {
       }
     });
 
-    this._NotificacionService.index().subscribe(
+    this._CfgInteresService.index().subscribe(
 				response => {
-          this.notificaciones = response.data;
+          this.intereses = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -99,7 +99,7 @@ export class CvCdoNotificacionComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._NotificacionService.delete({'id':id}, token).subscribe(
+        this._CfgInteresService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -125,8 +125,8 @@ export class CvCdoNotificacionComponent implements OnInit {
     })
   }
 
-  onEdit(notificacion:any){
-    this.notificacion = notificacion;
+  onEdit(interes:any){
+    this.interes = interes;
     this.formEdit = true;
     this.formIndex = false;
   }

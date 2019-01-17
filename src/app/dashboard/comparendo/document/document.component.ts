@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgAdmFormatoService } from '../../../services/cfgAdmFormato.service';
-import { CvCdoTrazabilidadService } from '../../../services/cvCdoTrazabiliad.service';
+import { CvCdoTrazabilidadService } from '../../../services/cvCdoTrazabilidad.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;

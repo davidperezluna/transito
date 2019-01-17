@@ -1,0 +1,83 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formSearch'>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="text-uppercase">
+          <strong>Ordenes de comparendo</strong>
+          <small>búsquedas</small>
+        </h5>
+        <small>Los campos con
+          <b class="text-danger">*</b> son obligatorios</small>
+      </div>
+      <div class="card-body">
+        <form #formSearch="ngForm">
+          <div class="form-group row">
+            <div class="col-xs-12 col-lg-12">
+              <label>No. comparendo</label>
+              <input class="form-control text-uppercase" [(ngModel)]="numero" name="numero" type="text" required>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group">
+          <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-search"></i>
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf='formIndex && comparendo'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>
+              <b class="text-uppercase">Trazabilidad de comparendo No. {{ comparendo.consecutivo.consecutivo }}</b>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Estado</th>
+                    <th>Fechas</th>
+                    <th>Acto Administrativo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ trazabilidad.estado.nombre }}</td>
+                  <td>{{ trazabilidad.fecha }}</td>
+                  <td>
+                    <span *ngIf="trazabilidad.actoAdministrativo">
+                      {{ trazabilidad.actoAdministrativo }}
+                    </span>
+                    <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-primary" type="button">
+                      <i class="fa fa-file-text"></i>
+                      Crear Acto Administrativo
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <app-edit *ngIf='formEdit' [trazabilidad]="trazabilidad" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew && comparendo' [comparendo]="comparendo" (ready)="ready($event)"></app-new>
+</div>

@@ -42,6 +42,10 @@ import { SvCfgSenialProveedorModule } from './svCfgSenialProveedor/svCfgSenialPr
 import { SvCfgSenialModule } from './svCfgSenial/svCfgSenial.module';
 import { SvSenialInventarioModule } from './svSenialInventario/svSenialInventario.module';
 
+import { CvCdoTrazabilidadModule } from './cvCdoTrazabilidad/cvCdoTrazabilidad.module';
+import { CvCdoNotificacionModule } from './cvCdoNotificacion/cvCdoNotificacion.module';
+import { CvCdoCfgInteresModule } from './cvCdoCfgInteres/cvCdoCfgInteres.module';
+
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvLcCfgRestriccionModule } from './cvLcCfgRestriccion/cvLcCfgRestriccion.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
@@ -350,6 +354,9 @@ import {RightsidebarComponent} from '../shared';
       SvCfgSenialProveedorModule,
       SvCfgSenialModule,
       SvSenialInventarioModule,
+      CvCdoTrazabilidadModule,
+      CvCdoNotificacionModule,
+      CvCdoCfgInteresModule,
       CvLcCfgMotivoModule,
       CvLcCfgRestriccionModule,
       CvCfgInteresModule,
