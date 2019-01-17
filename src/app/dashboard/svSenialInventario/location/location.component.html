@@ -25,8 +25,10 @@
                                <b><i class="fa fa-calendar"></i></b> {{ inventario.fecha }}
                                <br>
                                <b><i class="fa fa-clock-o"></i></b> {{ inventario.hora }}
-                               <br>
-                               <b>{{ inventario.proveedor.nombre }}</b>
+                               <div *ngIf="inventario.proveedor">
+                                   <br>
+                                   <b>{{ inventario.proveedor.nombre }}</b>
+                                </div>
                             </td>
                             <td>
                                 {{ inventario.senial.codigo }} - {{ inventario.senial.nombre }}

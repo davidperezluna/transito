@@ -46,6 +46,7 @@ export class NewSenialUbicacionComponent implements OnInit {
         private _EstadoService: SvCfgSenialEstadoService,
         private _LoginService: LoginService,
     ) {
+        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null);
         //Loading script
         this.loadScriptLoadingPromise();
         //Loading other components
@@ -55,8 +56,7 @@ export class NewSenialUbicacionComponent implements OnInit {
      }
 
     ngOnInit() {   
-        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null);
-
+        //this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null);
         this._ConectorService.select().subscribe(
             response => {
                 this.conectores = response;
@@ -161,6 +161,9 @@ export class NewSenialUbicacionComponent implements OnInit {
                     var newLatLng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
                     marker.setPosition(newLatLng);
 
+                    //this.senialUbicacion.latitud = event.latLng.lat();
+                    //this.senialUbicacion.longitud = event.latLng.lng();
+
                     document.getElementsByName("latitud")[0]['value'] = event.latLng.lat();
                     document.getElementsByName("longitud")[0]['value'] = event.latLng.lng();
 
@@ -171,6 +174,7 @@ export class NewSenialUbicacionComponent implements OnInit {
                         if (status == google.maps.GeocoderStatus.OK) {
                             if (results[0]) {
                                 document.getElementById("address")['value'] = results[0].formatted_address;
+                                //this.senialUbicacion.direccion = results[0].formatted_address;
                                 document.getElementsByName("direccion")[0]['value'] = results[0].formatted_address;
                             }
                         }
@@ -203,6 +207,9 @@ export class NewSenialUbicacionComponent implements OnInit {
                 var newLatLng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
                 marker.setPosition(newLatLng);
 
+                //this.senialUbicacion.latitud = event.latLng.lat();
+                //this.senialUbicacion.longitud = event.latLng.lng();
+
                 document.getElementsByName("latitud")[0]['value'] = event.latLng.lat();
                 document.getElementsByName("longitud")[0]['value'] = event.latLng.lng();
 
@@ -213,6 +220,7 @@ export class NewSenialUbicacionComponent implements OnInit {
                     if (status == google.maps.GeocoderStatus.OK) {
                         if (results[0]) {
                             document.getElementById("address")['value'] = results[0].formatted_address;
+                            //this.senialUbicacion.direccion = results[0].formatted_address;
                             document.getElementsByName("direccion")[0]['value'] = results[0].formatted_address;
                         }
                     }
