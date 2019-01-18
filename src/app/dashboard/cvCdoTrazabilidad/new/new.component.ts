@@ -1,6 +1,6 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { CvCdoNotificacion } from '../cvCdoNotificacion.modelo';
-import { CvCdoNotificacionService } from '../../../services/cvCdoNotificacion.service';
+import { Component, OnInit,Output, Input, EventEmitter } from '@angular/core';
+import { CvCdoTrazabilidad } from '../cvCdoTrazabilidad.modelo';
+import { CvCdoTrazabilidadService } from '../../../services/cvCdoTrazabilidad.service';
 import { CfgCargoService } from '../../../services/cfgCargo.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
 import { LoginService } from '../../../services/login.service';
@@ -12,7 +12,8 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public notificacion: CvCdoNotificacion;
+  @Input() comparendo: any = null;
+  public trazabilidad: CvCdoTrazabilidad;
   public errorMessage;
   public cargos: any = null;
   public estados: any = null;
@@ -27,14 +28,14 @@ export class NewComponent implements OnInit {
   ];
 
 constructor(
-  private _NotificacionService: CvCdoNotificacionService,
+  private _ProveedorService: CvCdoTrazabilidadService,
   private _CargoService: CfgCargoService,
   private _EstadoService: CfgComparendoEstadoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.notificacion = new CvCdoNotificacion(null, null, null, null);
+    this.trazabilidad = new CvCdoTrazabilidad(null, null, null, null, null);
 
     this._CargoService.select().subscribe(
       response => {
@@ -73,11 +74,11 @@ constructor(
     let token = this._loginService.getToken();
 
     let datos = {
-      'notificacion': this.notificacion,
+      'trazabilidad': this.trazabilidad,
       'arrayCargos': this.arrayCargos
     }
     
-		this._NotificacionService.register(datos, token).subscribe(
+		this._ProveedorService.register(datos, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

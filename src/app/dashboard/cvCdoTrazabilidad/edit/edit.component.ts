@@ -1,5 +1,4 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { CvCdoNotificacion } from '../cvCdoNotificacion.modelo';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CvCdoNotificacionService } from '../../../services/cvCdoNotificacion.service';
 import { CfgCargoService } from '../../../services/cfgCargo.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
@@ -7,12 +6,12 @@ import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html'
+  selector: 'app-edit',
+  templateUrl: './edit.component.html'
 })
-export class NewComponent implements OnInit {
+export class EditComponent implements OnInit{
   @Output() ready = new EventEmitter<any>();
-  public notificacion: CvCdoNotificacion;
+  @Input() trazabilidad:any = null;
   public errorMessage;
   public cargos: any = null;
   public estados: any = null;
@@ -26,6 +25,8 @@ export class NewComponent implements OnInit {
     { 'value': '5', 'label': 'Viernes' },
   ];
 
+public formReady = false;
+
 constructor(
   private _NotificacionService: CvCdoNotificacionService,
   private _CargoService: CfgCargoService,
@@ -33,9 +34,7 @@ constructor(
   private _loginService: LoginService,
   ){}
 
-  ngOnInit() {
-    this.notificacion = new CvCdoNotificacion(null, null, null, null);
-
+  ngOnInit(){
     this._CargoService.select().subscribe(
       response => {
         this.cargos = response;
@@ -65,19 +64,11 @@ constructor(
     );
   }
 
-  onCancelar(){
-    this.ready.emit(true);
-  }
-  
+  onCancelar(){ this.ready.emit(true); }
+
   onEnviar(){
     let token = this._loginService.getToken();
-
-    let datos = {
-      'notificacion': this.notificacion,
-      'arrayCargos': this.arrayCargos
-    }
-    
-		this._NotificacionService.register(datos, token).subscribe(
+		this._NotificacionService.edit(this.trazabilidad,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -87,16 +78,10 @@ constructor(
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
         }
 			error => {
 					this.errorMessage = <any>error;
+
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");

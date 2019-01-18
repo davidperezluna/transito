@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CfgAdmFormatoService {
-	private url = environment.apiUrl + 'configuracion/cfgadmformato';
+export class CvCdoCfgInteresService {
+	private url = environment.apiUrl + 'contravencional/cvcdocfginteres';
 	public identity;
 	public token;
 
@@ -24,7 +24,9 @@ export class CfgAdmFormatoService {
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
-			res => res.json());
+			res => res.json(),
+			this._loogerService.registerLog(token, 'INSERT', json, this.url)
+		);
 	}
 
 	delete(datos, token) {
@@ -37,11 +39,11 @@ export class CfgAdmFormatoService {
 		);
 	}
 
-	show(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
+	show(token, id) {
+		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/show", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
+			.map(res => res.json());
 	}
 
 	edit(datos, token) {

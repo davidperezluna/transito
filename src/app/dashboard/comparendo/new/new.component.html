@@ -15,15 +15,11 @@
                                 <div class="row"><!-- .row -->
                                     <div class="col-xs-12 col-lg-12">
                                         <label>Agente de transito <b class="text-danger">*</b></label>
-                                        <div class="input-group" [ngClass]="{'has-danger' : isErrorCiudadano,'has-success': isExistCiudadano}">
-                                            <ng-select class="form-control" [multiple]="false" [options]="agentesTransito" [(ngModel)]="agenteTransitoSelected" name="idFuncionario" required>
+                                        <ng-select [multiple]="false" [options]="agentesTransito" [(ngModel)]="agenteTransitoSelected" name="idFuncionario" required>
                                             </ng-select>
-                                            <span class="input-group-btn">
-                                                <button (click)="onChangedMpersonalFuncionario()" class="btn btn-default btn-success">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </span>
-                                        </div>
+                                        <button (click)="onChangedMpersonalFuncionario()" class="btn btn-default pull-right">
+                                            Diligenciar
+                                        </button>
                                     </div>
                                     <div class="col-lg-12" *ngIf='consecutivo'>
                                         <table class="table table-bordered table-striped">

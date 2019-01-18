@@ -21,7 +21,7 @@ export class CvCdoTrazabilidadService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -64,7 +64,7 @@ export class CvCdoTrazabilidadService {
     
 	updateDocumento(datos, token) {
         let json = JSON.stringify(datos);
-        let params = "json=" + json + "&authorization=" + token;
+        let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/update/documento", params, { headers: headers }).map(
             res => res.json(),

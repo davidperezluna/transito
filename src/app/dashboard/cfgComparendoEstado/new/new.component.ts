@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.estado = new CfgComparendoEstado(null, null);
+    this.estado = new CfgComparendoEstado(null, null, null);
   }
   
   onCancelar(){
