@@ -23,21 +23,15 @@
                         <br>
                         <thead>
                             <tr>
-                                <th>NIT</th>
-                                <th>NOMBRES</th>
-                                <th>ACCIONES</th>
+                                <th>Nit</th>
+                                <th>Nombres</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd">
                                 <td>{{ empresa.nit }}</td>
                                 <td>{{ empresa.nombre }}</td>
-                                <td>
-                                    <button (click)="onExport(empresa)" class="btn btn-xs btn-info" type="button">
-                                        <i class="fa fa-print"></i>
-                                        
-                                    </button>
-                                </td>
                             </tr>
                         </tbody>
                     </table>

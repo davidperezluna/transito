@@ -25,6 +25,8 @@ export class ExportComponent implements OnInit {
     public ctzn: any;
     public nit: any;
 
+    public date: any;
+    public fecha: any;
     public empresaEncontrada = false;
     public empresa: any;
 
@@ -53,6 +55,42 @@ export class ExportComponent implements OnInit {
                 this.ctzn = false;
             }
             }); */
+    }
+
+    iniciarTabla() {
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            pageLength: 8,
+            sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            /* 'excel', 'pdf', */
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    title: 'xls',
+                    filename: 'Reporte_Accidentalidad_' + this.fecha,
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    filename: 'Reporte_AccidentalidadPDF_' + this.fecha,
+                }
+            ],
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<<',
+                    sPrevious: '<',
+                    sNext: '>',
+                    sLast: '>>'
+                }
+            }
+        });
+        this.table = $('#dataTables-example').DataTable();
     }
 
     onBuscarEmpresa() {

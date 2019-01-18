@@ -31,6 +31,10 @@ export class NewComponent implements OnInit {
     public representante: any;
     public edad: any;
 
+    public listadoClima = false;
+    itemStringsLeftClima: any[] = [];
+    itemStringsRightClima: any[] = [];
+
     constructor(
         private _MsvCaracterizacionService: MsvCaracterizacionService,
         private _LoginService: LoginService,
