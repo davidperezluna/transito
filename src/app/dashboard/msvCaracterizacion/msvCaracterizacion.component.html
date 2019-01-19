@@ -20,15 +20,16 @@
             <thead>
               <tr>
                 <th>Id</th>
+                <th>Nit</th>
                 <th>Nombre</th>
-                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
               <tr class="odd" *ngFor="let caracterizacion of msvCaracterizaciones; let i = index">
-                <td>{{ caracterizacion.id }}</td>
-                <td>{{ caracterizacion.nombre }}</td>
-                <td>
+                <td>{{ i + 1 }}</td>
+                <td>{{ caracterizacion.empresa.nit }}</td>
+                <td>{{ caracterizacion.empresa.nombre }}</td>
+                <!-- <td>
                   <button (click)="onEdit(caracterizacion)" class="btn btn-xs btn-info" type="button">
                     <i class="fa fa-edit"></i>
                     Editar
@@ -37,7 +38,7 @@
                     <i class="fa fa-trash"></i>
                     Eliminar
                   </button>
-                </td>
+                </td> -->
               </tr>
             </tbody>
           </table>

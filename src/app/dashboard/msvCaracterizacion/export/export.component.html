@@ -9,10 +9,10 @@
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="NIT Empresa" [(ngModel)]="nit" name="nit"
+                            <input type="number" class="form-control" placeholder="NIT Empresa" [(ngModel)]="exportCaracterizacion.nit" name="nit"
                                 required />
                             <span class="input-group-btn">
-                                <button (click)="onBuscarEmpresa()" class="btn btn-default btn-primary" type="button"><i
+                                <button (click)="onBuscarRegistros()" class="btn btn-default btn-primary" type="button"><i
                                         class="fa fa-search"></i></button>
                             </span>
                         </div>
@@ -23,15 +23,22 @@
                         <br>
                         <thead>
                             <tr>
-                                <th>Nit</th>
+                                <th>Id</th>
+                                <th>Cédula</th>
                                 <th>Nombres</th>
-                                <th>Acciones</th>
+                                <th>Apellidos</th>
+                                <!-- <th>Ciudad</th>
+                                <th>Edad</th>
+                                <th>Clc</th>
+                                <th>Experiencia Conducción</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd">
-                                <td>{{ empresa.nit }}</td>
-                                <td>{{ empresa.nombre }}</td>
+                            <tr class="odd" *ngFor="let registro of registros; let i = index">
+                                <td>{{ registro.id }}</td>
+                                <td>{{ registro.cedula }}</td>
+                                <td>{{ registro.nombres }}</td>
+                                <td>{{ registro.apellidos }}</td>
                             </tr>
                         </tbody>
                     </table>
