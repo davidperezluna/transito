@@ -6,12 +6,13 @@ import { BpProyectoService } from '../../services/bpProyecto.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
+import { ShowComponent } from './show/show.component';
 import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [BpProyectoComponent,NewComponent,EditComponent],
-    exports: [BpProyectoComponent, NewComponent,EditComponent],
+    declarations: [BpProyectoComponent,NewComponent,EditComponent,ShowComponent],
+    exports: [BpProyectoComponent, NewComponent,EditComponent,ShowComponent],
     providers:[BpProyectoService]
 })
 
