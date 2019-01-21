@@ -190,8 +190,7 @@ export class MsvEvaluacionComponent implements OnInit {
 
     this._EmpresaService.showNitOrNombre(token,this.datos).subscribe(
       response => {
-        //console.log(response.data);
-        if (response.code == 200 ) {
+        if (response.status == 'success' ) {
           this.msj = response.msj;
           this.isError = false;
           this.miEmpresa = response.data;
@@ -199,7 +198,8 @@ export class MsvEvaluacionComponent implements OnInit {
 
           this._RevisionService.showRevision(token, this.miEmpresa.id).subscribe(
             response => {
-              if (response.code == 200 ) {
+              console.log(response);
+              if (response.status == 'success' ) {
                 this.msj = response.msj;
                 this.isError = false;
                 this.revisiones=response.data;                 
@@ -208,7 +208,7 @@ export class MsvEvaluacionComponent implements OnInit {
               }
               //si no existe revision coloca en true la variable para mostrar mensaje
               if(this.revisiones == false){
-              this.revisionMensaje = true;
+                this.revisionMensaje = true;
                 }        
             error => { 
                 this.errorMessage = <any>error;
@@ -264,7 +264,6 @@ export class MsvEvaluacionComponent implements OnInit {
       }
     })
     let token = this._loginService.getToken();
-    console.log(this.miEmpresa.id);
     
     this._RevisionService.showRevision(token,this.miEmpresa.id).subscribe(
       response => {
