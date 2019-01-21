@@ -220,6 +220,8 @@ import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module'
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+
+import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
 
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
@@ -428,6 +430,7 @@ import {RightsidebarComponent} from '../shared';
       RnaPreasignacionInsumoModule,
       CvCfgTipoMedidaCautelarModule,
       CvMedidaCautelarModule,
+      BpCfgTipoInsumoModule,
       BpProyectoModule,
       RnrsPreasignacionPlacaModule,
       EmpresaAlcaldiaModule

@@ -83,6 +83,7 @@ export class NewComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
+          
           this.onShow.emit(response.data);
         } else {
           swal({

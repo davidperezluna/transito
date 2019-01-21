@@ -30,14 +30,14 @@ constructor(
 
       var list =
         "<div class='note-btn-group btn-group note-list col-xs-12 col-lg-12'>" +
-        "<li class='note-btn btn btn-default btn-sm' data-text='{EstablecimientoEducativoNombre}'>" +
+        "<li class='note-btn btn btn-default btn-sm' data-text='{NOM}'>" +
         "Nombre" +
         "</li>" +
-        "<li class='note-btn btn btn-default btn-sm' data-text='{EstablecimientoEducativoMunicipio}'>" +
-        "Municipio" +
+        "<li class='note-btn btn btn-default btn-sm' data-text='{ID}'>" +
+        "Identificación" +
         "</li>" +
-        "<li class='note-btn btn btn-default btn-sm' data-text='{EstablecimientoEducativoArea}'>" +
-        "Area" +
+        "<li class='note-btn btn btn-default btn-sm' data-text='{NOC}'>" +
+        "No. orden comparendo" +
         "</li>" +
         "</div>";
 

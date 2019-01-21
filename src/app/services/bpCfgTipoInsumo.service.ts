@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class BpProyectoService {
-	private url = environment.apiUrl + 'bancoproyecto/bpproyecto';
+export class BpCfgTipoInsumoService {
+	private url = environment.apiUrl + 'bancoproyecto/bpcfgtipoinsumo';
 	public identity;
 	public token;
 
@@ -21,7 +21,7 @@ export class BpProyectoService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;	
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -31,10 +31,11 @@ export class BpProyectoService {
 
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;	
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
-			res => res.json()
+			res => res.json(),
+			this._loogerService.registerLog(token, 'DELETE', json, this.url)
 		);
 	}
 
