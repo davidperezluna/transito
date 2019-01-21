@@ -111,6 +111,10 @@ export class GdDocumentoComponent implements OnInit {
   }
 
   iniciarTabla(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -128,8 +132,6 @@ export class GdDocumentoComponent implements OnInit {
   }
 
   onChangedAssign(event,idDocumento) {
-    console.log(event);
-    
     if (event !== undefined) {
       let token = this._loginService.getToken();
 
@@ -366,10 +368,6 @@ export class GdDocumentoComponent implements OnInit {
           this.formIndex = true;
           this.formAssign = false;
           this.documentos = response.data;
-
-          if (this.table) {
-            this.table.destroy();
-          }
 
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();

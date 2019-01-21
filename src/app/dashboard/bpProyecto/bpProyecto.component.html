@@ -5,8 +5,7 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-title">
-              <strong class="text-uppercase">Configuración</strong>
-              <small>Cargos</small>
+              <strong class="text-uppercase">Banco de Proyectos</strong>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -57,5 +56,5 @@
       </div>
     </div>
     <app-edit *ngIf='formEdit' [bpProyecto]="bpProyecto" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-new *ngIf='formNew' (ready)="ready($event)" (onShow)="onShow($event)"></app-new>
 </div>

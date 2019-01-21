@@ -1,6 +1,6 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { BpProyecto } from '../bpProyecto.modelo'; 
-import { BpProyectoService } from '../../../services/bpProyecto.service';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { BpCfgTipoInsumo } from '../bpCfgTipoInsumo.modelo';
+import { BpCfgTipoInsumoService } from '../../../services/bpCfgTipoInsumo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,20 +10,18 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Output() onShow = new EventEmitter<any>();
-  public proyecto: BpProyecto;
+  public tipo: BpCfgTipoInsumo;
   public errorMessage;
-  public respuesta;
 
 constructor(
-  private _ProyectoService: BpProyectoService,
+  private _TipoService: BpCfgTipoInsumoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.proyecto = new BpProyecto(null, null,null,null,null,null,null);
+    this.tipo = new BpCfgTipoInsumo(null, null);
   }
-  
+
   onCancelar(){
     this.ready.emit(true);
   }
@@ -31,7 +29,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._ProyectoService.register(this.proyecto,token).subscribe(
+		this._TipoService.register(this.tipo, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -40,9 +38,7 @@ constructor(
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          });
-
-          this.onShow.emit(response.data);
+          })
         }else{
           swal({
             title: 'Error!',

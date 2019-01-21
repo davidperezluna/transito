@@ -1,26 +1,27 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { BpProyectoService } from '../../services/bpProyecto.service';
+import { Component, OnInit } from '@angular/core';
+import { BpCfgTipoInsumoService } from '../../services/bpCfgTipoInsumo.service';
 import { LoginService } from '../../services/login.service';
-import { BpProyecto } from './bpProyecto.modelo';
+import { BpCfgTipoInsumo } from './bpCfgTipoInsumo.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './bpProyecto.component.html'
+  templateUrl: './bpCfgTipoInsumo.component.html'
 })
-export class BpProyectoComponent implements OnInit {
+export class BpCfgTipoInsumoComponent implements OnInit {
   public errorMessage;
 	public id;
-	public proyectos;
+
+	public tipos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public proyecto : BpProyecto;
+  public tipo: BpCfgTipoInsumo;
 
   constructor(
-    private _BpProyectoService: BpProyectoService,
+    private _NotificacionService: BpCfgTipoInsumoService,
 		private _loginService: LoginService,
     ){}
     
@@ -33,13 +34,12 @@ export class BpProyectoComponent implements OnInit {
       }
     });
 
-    this._BpProyectoService.index().subscribe(
+    this._NotificacionService.index().subscribe(
 				response => {
-          this.proyectos = response.data;
+          this.tipos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
-
           swal.close();
 				}, 
 				error => {
@@ -52,6 +52,7 @@ export class BpProyectoComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -97,7 +98,8 @@ export class BpProyectoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._BpProyectoService.delete({ 'id': id }, token).subscribe(
+        
+        this._NotificacionService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -123,16 +125,9 @@ export class BpProyectoComponent implements OnInit {
     })
   }
 
-  onEdit(proyecto :any){
-    this.proyecto  = proyecto;
+  onEdit(tipo:any){
+    this.tipo = tipo;
     this.formEdit = true;
     this.formIndex = false;
-  }
-
-  onShow(proyecto: any) {
-    this.proyecto = proyecto;
-    this.formIndex = false;
-    this.formNew = false;
-    this.formEdit = false;
   }
 }
