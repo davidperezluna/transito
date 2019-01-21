@@ -1,6 +1,7 @@
 export class MsvCaracterizacion{
 	constructor(
 		public id:number,
+		public nit:number,
 		/* public numero: string,
 		public parametro: string,
 		public item: string,
@@ -39,11 +40,25 @@ export class MsvCaracterizacion{
 		public trayecto: number,
 		public tiempoTrayecto: string,
 		public kmMensualTrayecto: string,
+
+		//checkbox factores riesgo
 		public estadoInfraestructura: string,
 		public organizacionTrabajo: string,
 		public propiaConduccion: string,
 		public otro2: string,
-		public causaRiesgo: string,
+		
+		//checkbox causas riesgo
+		public intensidadTrafico: string,
+		public condicionClimatologica: string,
+		public tipoVehiculo: string,
+		public organizacionTrabajo2: string,
+		public propiaConduccion2: string,
+		public estado: string,
+		public otroConductor: string,
+		public estadoInfraestructura2: string,
+		public faltaInformacion: string,
+		public otraCausa: string,
+
 		public otro3: string,
 		public riesgoPercibido: string,
 		public propuestaReduccion: string,

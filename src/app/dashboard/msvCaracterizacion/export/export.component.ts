@@ -25,10 +25,12 @@ export class ExportComponent implements OnInit {
     public ctzn: any;
     public nit: any;
 
+    public date: any;
+    public fecha: any;
     public empresaEncontrada = false;
-    public empresa: any;
+    public registros: any;
 
-    exportCaracterizacion: MsvCaracterizacion;
+    public exportCaracterizacion: MsvCaracterizacion;
 
     constructor(
         private _MsvCaracterizacionService: MsvCaracterizacionService,
@@ -37,7 +39,7 @@ export class ExportComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.exportCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.exportCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         /* swal({
             title: '¿La empresa solicita asistencia técnica?',
             type: 'info',
@@ -55,13 +57,52 @@ export class ExportComponent implements OnInit {
             }); */
     }
 
-    onBuscarEmpresa() {
+    iniciarTabla() {
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            pageLength: 8,
+            sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            /* 'excel', 'pdf', */
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    title: 'xls',
+                    filename: 'Reporte_caracterizacionEmpresa_' + this.fecha,
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    filename: 'Reporte_caracterizacionEmpresaPDF_' + this.fecha,
+                }
+            ],
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<<',
+                    sPrevious: '<',
+                    sNext: '>',
+                    sLast: '>>'
+                }
+            }
+        });
+        this.table = $('#dataTables-example').DataTable();
+    }
+
+    onBuscarRegistros() {
         let token = this._LoginService.getToken();
-        this._MsvCaracterizacionService.getBuscarEmpresa({ 'nit': this.nit }, token).subscribe(
+        this._MsvCaracterizacionService.getBuscarRegistros({ 'nit': this.exportCaracterizacion.nit }, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.empresaEncontrada = true;
-                    this.empresa = response.data;
+                    this.registros = response.data;
+                    let timeoutId = setTimeout(() => {
+                        this.iniciarTabla();
+                    }, 100);
                 } else {
                     swal({
                         title: 'Alerta!',
@@ -79,9 +120,5 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-    }
-
-    onExport(){
-        alert("d---------------------");
     }
 }

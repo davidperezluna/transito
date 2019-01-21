@@ -42,7 +42,7 @@ export class MsvCaracterizacionComponent implements OnInit {
     this._CaracterizacionService.getCaracterizacion().subscribe(
 				response => {
           this.msvCaracterizaciones = response.data;
-          console.log(response);
+          console.log(this.msvCaracterizaciones);
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);

@@ -23,13 +23,14 @@ export class NewComponent implements OnInit {
     public categoriasLicenciaConduccion: any;
     public generos: any;
 
-    public ctzn: any;
-    public nit: any;
-
     public empresaEncontrada = false;
     public empresa: any;
     public representante: any;
     public edad: any;
+
+    public listadoClima = false;
+    itemStringsLeftClima: any[] = [];
+    itemStringsRightClima: any[] = [];
 
     constructor(
         private _MsvCaracterizacionService: MsvCaracterizacionService,
@@ -41,7 +42,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.msvCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.msvCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         this.date = new Date;
         var datePiper = new DatePipe(this.date);
         this.msvCaracterizacion.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
@@ -120,5 +121,31 @@ export class NewComponent implements OnInit {
                 }
 
             });
+    }
+
+    onBuscarEmpresa() {
+        let token = this._LoginService.getToken();
+        this._MsvCaracterizacionService.getBuscarEmpresa({ 'nit': this.msvCaracterizacion.nit }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.empresaEncontrada = true;
+                    this.empresa = response.data;
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
     }
 }
