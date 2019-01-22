@@ -34,16 +34,6 @@
                   </ng-select>
                 </div>
               </div>
-
-              <div class="col-xs-12 col-lg-6">
-                  <label>Fecha inicial <b class="text-danger">*</b></label>
-                  <input class="form-control" [(ngModel)]="datos.fechaInicial" name="fechaInicial" placeholder="dd/mm/yyyy" type="date" required>
-              </div>
-
-              <div class="col-xs-12 col-lg-6">
-                  <label>Fecha final <b class="text-danger">*</b></label>
-                  <input class="form-control" [(ngModel)]="datos.fechaFinal" name="fechaFinal" placeholder="dd/mm/yyyy" type="date" required>
-              </div>
             </div><!-- /.row -->
           </form>
         </div>
@@ -73,8 +63,8 @@
             </div>
           </h5>
         </div>
-        <div class="card-body" *ngIf="inventarios">
-          <table class="table" id="dataTables-example">
+        <div class="card-body">
+          <table class="table" id="dataTables-example" *ngIf="inventarios">
             <thead>
               <tr>
                 <th>#</th>
@@ -89,6 +79,27 @@
                 <td>
                   <button (click)="onLocation(inventario, datos.tipoDestino)" class="btn btn-xs btn-primary">
                     {{ inventario.fecha }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table" id="dataTables-example" *ngIf="seniales">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Cantidad</th>
+                <th>Señal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let senial of seniales; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ senial.cantidad }}</td>
+                <td>
+                  <button (click)="onRecord(senial, datos.tipoDestino)" class="btn btn-xs btn-primary">
+                     {{ senial.codigo }} - {{ senial.nombre }}
                   </button>
                 </td>
               </tr>
@@ -112,8 +123,8 @@
             </div>
           </h5>
         </div>
-        <div class="card-body" *ngIf="inventarios">
-          <table class="table" id="dataTables-example">
+        <div class="card-body" >
+          <table class="table" id="dataTables-example" *ngIf="inventarios">
             <thead>
               <tr>
                 <th>#</th>
@@ -133,12 +144,37 @@
               </tr>
             </tbody>
           </table>
+
+          <table class="table" id="dataTables-example" *ngIf="seniales">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Cantidad</th>
+                <th>Señal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let senial of seniales; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ senial.cantidad }}</td>
+                <td>
+                  <button (click)="onRecord(senial, datos.tipoDestino)" class="btn btn-xs btn-primary">
+                    {{ senial.codigo }} - {{ senial.nombre }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div><!-- /.card -->
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-8" *ngIf='formLocationSenial'><!-- .col -->
       <app-location [inventario]="inventario" [tipoDestino]="datos.tipoDestino" (ready)="ready($event)"></app-location>
+    </div><!-- /.col -->
+
+    <div class="col-xs-12 col-lg-8" *ngIf='formRecord'><!-- .col -->
+      <app-record [senial]="senial" [tipoDestino]="datos.tipoDestino" (ready)="ready($event)"></app-record>
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-8" *ngIf='formNewMunicipio'><!-- .col -->

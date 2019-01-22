@@ -53,6 +53,7 @@ export class BpProyectoComponent implements OnInit {
 				}
       );
   }
+  
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -80,6 +81,7 @@ export class BpProyectoComponent implements OnInit {
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
+      this.formShow = false;
       this.formIndex = true;
       this.ngOnInit();
     }

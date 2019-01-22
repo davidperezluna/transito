@@ -18,7 +18,7 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Numero</th>
                     <th>Nombre</th>
                     <th>Fecha</th>
@@ -30,7 +30,7 @@
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let proyecto of proyectos; let i = index">
-                  <td >{{ proyecto.id }}</td>
+                  <td >{{ i + 1 }}</td>
                   <td >{{ proyecto.numero }}</td>
                   <td >{{ proyecto.nombre }}</td>
                   <td >{{ proyecto.fecha }}</td>

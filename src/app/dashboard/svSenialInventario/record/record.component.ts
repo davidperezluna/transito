@@ -1,5 +1,5 @@
 /// <reference types="@types/googlemaps" />
-import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core'; 
+import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
 import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
 import { LoginService } from '../../../services/login.service';
@@ -10,12 +10,12 @@ import { } from "googlemaps";
 declare var google: any;
 
 @Component({
-    selector: 'app-location',
-    templateUrl: './location.component.html'
+    selector: 'app-record',
+    templateUrl: './record.component.html'
 })
-export class LocationComponent implements OnInit {
+export class RecordComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() inventario: any = null;
+    @Input() senial: any = null;
     @Input() tipoDestino: any = null;
 
     @ViewChild('map') mapRef: ElementRef;
@@ -27,15 +27,13 @@ export class LocationComponent implements OnInit {
     public inventarios: any = null;
 
     public errorMessage;
-    public formIndex = true;
-    public formRecord = false;
     public table: any = null;
 
     constructor(
         private _SenialInventarioService: SvSenialInventarioService,
         private _SenialUbicacionService: SvSenialUbicacionService,
         private _loginService: LoginService
-    ) { 
+    ) {
         //Loading script
         this.loadScriptLoadingPromise();
         //Loading other components
@@ -55,7 +53,7 @@ export class LocationComponent implements OnInit {
 
         let token = this._loginService.getToken();
 
-        this._SenialInventarioService.searchByDestino({ 'inventario': this.inventario, 'tipoDestino': this.tipoDestino }, token).subscribe(
+        this._SenialInventarioService.searchBySenialAndTipoDestino({ 'idSenial': this.senial.id, 'tipoDestino': this.tipoDestino }, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.inventarios = response.data;
@@ -79,6 +77,7 @@ export class LocationComponent implements OnInit {
                         type: 'warning',
                         confirmButtonText: 'Aceptar'
                     });
+
                     this.inventarios = null;
                 }
                 error => {
@@ -119,7 +118,7 @@ export class LocationComponent implements OnInit {
     onGeo(latitud, longitud) {
         latitud = parseInt(latitud);
         longitud = parseInt(longitud);
-        
+
         this.initMap(this.mapRef.nativeElement, {
             center: { lat: latitud, lng: longitud },
             zoom: 14,
@@ -140,7 +139,7 @@ export class LocationComponent implements OnInit {
             map: this.map,
             animation: google.maps.Animation.BOUNCE,
             draggable: false
-        });        
+        });
     }
 
     onReady(): Promise<void> {
@@ -162,7 +161,7 @@ export class LocationComponent implements OnInit {
         window.document.body.appendChild(script);
     }
 
-   initMap(mapHtmlElement: HTMLElement, options: google.maps.MapOptions): Promise<google.maps.Map> {
+    initMap(mapHtmlElement: HTMLElement, options: google.maps.MapOptions): Promise<google.maps.Map> {
         return this.onReady().then(() => {
             this.map = new google.maps.Map(mapHtmlElement, options);
 

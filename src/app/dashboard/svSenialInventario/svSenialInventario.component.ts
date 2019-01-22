@@ -17,6 +17,7 @@ declare var $: any;
 export class SvSenialInventarioComponent implements OnInit {
     public errorMessage;
     public formLocationSenial = false;
+    public formRecord = false;
     public formNewBodega = false;
     public formNewMunicipio = false;
     public formIndex = false;
@@ -31,8 +32,10 @@ export class SvSenialInventarioComponent implements OnInit {
     public fechaFinal: any = null;
 
     public inventarios: any = null;
+    public seniales: any = null;
 
     public inventario: any;
+    public senial: any;
 
     public destinos = [
         { value: 'BODEGA', label: 'BODEGA' },
@@ -43,8 +46,6 @@ export class SvSenialInventarioComponent implements OnInit {
         'idTipoSenial': null,
         'idMunicipio': null,
         'tipoDestino': null,
-        'fechaInicial': null,
-        'fechaFinal': null,
     };
     
     constructor(
@@ -117,6 +118,9 @@ export class SvSenialInventarioComponent implements OnInit {
 
         this.formIndex = true;
         this.formLocationSenial = false;
+        this.formRecord = false;
+        this.formNewBodega = false;
+        this.formNewMunicipio = false;
         
         let token = this._loginService.getToken();
 
@@ -124,33 +128,43 @@ export class SvSenialInventarioComponent implements OnInit {
             this.datos.idMunicipio = null;
         }
 
-        this._SenialInventarioService.searchByDateAndTipoAndDestino(this.datos, token).subscribe(
+        this._SenialInventarioService.searchCantidadBySenialAndTipoDestino(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.inventarios = response.data;
+                    this.seniales = response.data;
+
+                    let timeoutId = setTimeout(() => {
+                        this.iniciarTabla();
+                    }, 100);
+                    
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+
                     swal.close();
-                }else {
+                } else {
                     swal({
                         title: 'Alerta!',
                         text: response.message,
                         type: 'warning',
                         confirmButtonText: 'Aceptar'
                     });
-                    this.inventarios = null;
+
+                    this.seniales = null;
                 }
             }
         );
-       
     }
 
     iniciarTabla() {
-        $('#dataTables-example').DataTable({
+        if (this.table) {
+            this.table.destroy();
+        }
+        
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -163,12 +177,22 @@ export class SvSenialInventarioComponent implements OnInit {
                 }
             },
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onLocation(inventario) {
         this.inventario = inventario;
         this.formLocationSenial = true;
+        this.formRecord = false;
+        this.formIndex = false;
+        if (this.table) {
+            this.table.destroy();
+        }
+    }
+
+    onRecord(senial) {
+        this.senial = senial;
+        this.formRecord = true;
+        this.formLocationSenial = false;
         this.formIndex = false;
         if (this.table) {
             this.table.destroy();
