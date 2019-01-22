@@ -6,7 +6,7 @@ export class RnaPreregistro{
 		public valor:string,
 		public MarcaId: number,
 		public lineaId:number,
-		public claseId:number,
+		public clase:number,
 		public carroceriaId:number,
 		public servicioId:number,
 		public colorId:number,

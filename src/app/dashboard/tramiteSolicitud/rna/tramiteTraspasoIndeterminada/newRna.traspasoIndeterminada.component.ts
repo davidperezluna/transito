@@ -21,7 +21,6 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   @Input() factura: any = null;
   @Input() ciudadano: any = null;
   public errorMessage;
-  public respuesta;
   public codigoOrganismo;
   public tipoServicio;
   public nombreApoderado;
@@ -94,7 +93,9 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       'personaTraslado': null};
       
       this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
-      this.datos.tipoServicio = this.vehiculo.servicio.nombre;
+      if (this.vehiculo.servicio) {
+        this.datos.tipoServicio = this.vehiculo.servicio.nombre;
+      }
       this.date = new Date();
       var datePiper = new DatePipe(this.date);
       this.datos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');

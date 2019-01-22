@@ -5,6 +5,7 @@ import { LoginService } from '../../../services/login.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { LineaService } from '../../../services/linea.service';
 import { ClaseService } from '../../../services/clase.service';
+//import { CfgTipoVehiculoService } from "../../../services/cfgTipoVehiculo.service";
 import { CarroceriaService } from '../../../services/carroceria.service';
 import { ServicioService } from '../../../services/servicio.service';
 import { ColorService } from '../../../services/color.service';
@@ -67,6 +68,7 @@ public tipoPropiedadSelected:any;
 public sedeOperativa:any;
 public btnRadicado:any = 'Preregistro para matricula inicial';
 public propietario = true;
+public campo = false;
 public tipoPropiedades= [
   {'value':1,'label':"Leasing"},
   {'value':2,'label':"Propio"}
@@ -89,6 +91,7 @@ constructor(
   private _MarcaService: MarcaService,
   private _lineaService: LineaService,
   private _ClaseService: ClaseService,
+  //private _CfgTipoVehiculo: CfgTipoVehiculoService,
   private _CarroceriaService: CarroceriaService,
   private _ServicioService: ServicioService,
   private _ColorService: ColorService,
@@ -297,7 +300,7 @@ constructor(
 
     this.vehiculo.municipioId = this.municipioSelected;
     this.vehiculo.lineaId = this.lineaSelected;
-    this.vehiculo.claseId = this.claseSelected;
+    this.vehiculo.clase = this.claseSelected;
     this.vehiculo.carroceriaId = this.carroceriaSelected;
     this.vehiculo.servicioId = this.servicioSelected;
     this.vehiculo.colorId = this.colorSelected;
@@ -312,7 +315,7 @@ constructor(
     }
 
     let token = this._loginService.getToken();
-    this._RnaPreregistroService.register(datos,token).subscribe(
+    this._RnaPreregistroService.register(datos, token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
