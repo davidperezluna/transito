@@ -8,7 +8,7 @@ declare var $: any;
 
 @Component({
   selector: 'app-new-fortalecimiento',
-  templateUrl: './newFortalecimiento.html'
+  templateUrl: './newFortalecimiento.component.html'
 })
 export class NewFortalecimientoComponent implements OnInit {
   @Input() msvCategoriaId;
@@ -38,6 +38,7 @@ export class NewFortalecimientoComponent implements OnInit {
     this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
       response => {
         this.msvParametros = response.data;
+        console.log(response.data);
         if (this.msvParametros) {
           //entra aquí si encuentra Parametro                    
           this.showT = true;

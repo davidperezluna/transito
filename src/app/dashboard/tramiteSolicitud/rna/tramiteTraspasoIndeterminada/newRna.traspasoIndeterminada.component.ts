@@ -137,71 +137,72 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     }
   }
 
-  onEnviar(){
-    let token = this._loginService.getToken();       
-      this.datos.idFactura = this.factura.id;
-      this.datos.tramiteFormulario = 'rna-trapasoindeterminada'
-      this.datos.personaTraslado = this.sinRegistro;
+  onEnviar() {
+    let token = this._loginService.getToken();
 
-      this.tramiteSolicitud.datos = {'foraneas':this.datos, 'resumen':this.resumen}; 
-      this.tramiteSolicitud.vehiculoId = this.vehiculo.id;
-      this.tramiteSolicitud.ciudadanoId = this.ciudadano.id;
+    this.datos.idFactura = this.factura.id;
+    this.datos.tramiteFormulario = 'rna-trapasoindeterminada';
+    this.datos.personaTraslado = this.sinRegistro;
 
-      this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
-        responseTramiteSolicitud => {
-          if (responseTramiteSolicitud.status == 'success') {
-              this.idTramiteSolicitud = responseTramiteSolicitud.idTramiteSolicitud;
-              this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token,this.datos).subscribe(
-                responseCiudadano => {
-                    if (responseCiudadano.status == 'success') {
-                      this.acta.tramiteSolicitud = this.idTramiteSolicitud;
-                      this.acta.entidadJudicial = this.entidadJudicialSelected;
-                        this._VhloActaTraspasoService.register(this.acta,token).subscribe(
-                          responseActaTraspaso => {
-                              if (responseActaTraspaso.status == 'success') {
-                                swal({
-                                  title: 'Perfecto!',
-                                  text: 'Registro exitoso!',
-                                  type: 'success',  
-                                  confirmButtonText: 'Aceptar'
-                                })
-                              } else {
-                                swal({
-                                  title: 'Error!',
-                                  text: 'El tramiteSolicitud ya se encuentra registrada',
-                                  type: 'error',
-                                  confirmButtonText: 'Aceptar'
-                                })
-                              }
-                            error => {
-                                    this.errorMessage = <any>error;
-                
-                                    if(this.errorMessage != null){
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                        }
-                      );
+    this.tramiteSolicitud.datos = { 'foraneas': this.datos, 'resumen': this.resumen };
+    this.tramiteSolicitud.vehiculoId = this.vehiculo.id;
+    this.tramiteSolicitud.ciudadanoId = this.ciudadano.id;
+
+    this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
+      responseTramiteSolicitud => {
+        if (responseTramiteSolicitud.status == 'success') {
+          this.idTramiteSolicitud = responseTramiteSolicitud.idTramiteSolicitud;
+          this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token, this.datos).subscribe(
+            responseCiudadano => {
+              if (responseCiudadano.status == 'success') {
+                this.acta.tramiteSolicitud = this.idTramiteSolicitud;
+                this.acta.entidadJudicial = this.entidadJudicialSelected;
+                this._VhloActaTraspasoService.register(this.acta, token).subscribe(
+                  responseActaTraspaso => {
+                    if (responseActaTraspaso.status == 'success') {
+                      swal({
+                        title: 'Perfecto!',
+                        text: 'Registro exitoso!',
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                      })
+                    } else {
+                      swal({
+                        title: 'Error!',
+                        text: 'El tramiteSolicitud ya se encuentra registrada',
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                      })
                     }
-                  error => {
-                          this.errorMessage = <any>error;
-      
-                          if(this.errorMessage != null){
-                              console.log(this.errorMessage);
-                              alert("Error en la petición");
-                          }
+                    error => {
+                      this.errorMessage = <any>error;
+
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                       }
+                    }
+                  }
+                );
               }
-            );
-          }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
             }
+          );
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
-        });
+        }
+      });
   }
 }

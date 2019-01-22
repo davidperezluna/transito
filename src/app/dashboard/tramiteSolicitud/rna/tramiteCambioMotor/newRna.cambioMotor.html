@@ -16,30 +16,28 @@
                             <label>Tipo de Ingreso
                                 <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control" name="tipoIngresoSelected" [(ngModel)]="tipoIngresoSelected" required>
-                                <option *ngFor="let tipoIngreso of tipoIngresoList" [value]="tipoIngreso"> {{tipoIngreso}}
-                                </option>
-                            </select>
+                            <ng-select [multiple]="false" [options]="tiposIngreso" [(ngModel)]="tipoIngresoSelected" required name="tipoIngreso">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Número de motor *</label>
+                            <label>Número de motor <span class="text-danger">*</span></label>
                             <input class="form-control" [(ngModel)]="datos.numeroMotor" name="numeroMotor" type="text" required />
                         </div>
 
                         <div class="col-lg-12 col-md-16 row" id="tipo-ingreso-nuevo" *ngIf="tipoIngresoSelected == 'Nuevo'">
                             <div class="col-lg-6 col-md-6">
-                                <label>Número de aceptación *</label>
+                                <label>Número de aceptación <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroAceptacion" name="numeroAceptacion" type="text" required />
                             </div>
                             <div class="col-lg-6 col-md-6">
-                                <label>Número de factura *</label>
+                                <label>Número de factura</label>
                                 <input class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" type="text" required />
                             </div>
                         </div>
 
                         <div class="col-lg-12 col-md-16 row" id="tipo-ingreso-usado" *ngIf="tipoIngresoSelected == 'Usado'">
                             <div class="col-lg-6 col-md-6">
-                                <label>Tipo identificación *</label>
+                                <label>Tipo identificación </label>
                                 <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
                                 </ng-select>
                             </div>
@@ -62,7 +60,7 @@
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Número solicitud RUNT</label>
+                            <label>Número solicitud RUNT <span class="text-danger">*</span></label>
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                     </div>
