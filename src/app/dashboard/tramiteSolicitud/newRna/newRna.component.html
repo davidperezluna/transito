@@ -347,7 +347,7 @@
                         </div>
 
                         <div class="tab-pane" id="rna-cambiomotor" role="tabpanel" *ngIf='ciudadano'>
-                            <appRna-cambio-motor (readyTramite)="readyTramite($event)" [factura]="factura"
+                            <appRna-cambio-motor [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" [factura]="factura"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
                         </div> 
 

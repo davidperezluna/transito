@@ -23,11 +23,8 @@ public sedes: any;
 public tramiteFacturaSelected: any;
 public tramiteRealizado: any = false;
 public errorMessage;
-public resumen = {};
 
 public datos = {
-    'sedeOperativaIdNew': null,
-    'sedeOperativaIdOld': null,
     'fechaSalida': null,
     'numeroRunt': null,
     'numeroGuia': null,
@@ -37,6 +34,7 @@ public datos = {
     'idFactura': null,
     'tramiteFactura': null,
     'campos': null,
+    'idSedeOperativa': null,
 };
 
 constructor(
@@ -96,28 +94,26 @@ constructor(
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+      let token = this._loginService.getToken();
+
+      this.datos.idSedeOperativa = this.sedeOperativaSelected;
+      this.datos.idVehiculo = this.vehiculo.id;
+      this.datos.idFactura = this.factura.id;
+      this.datos.tramiteFormulario = 'rnma-traslado';
+      this.datos.campos = ['sedeOperativa'];
     
-    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected
-    
-    this._VehiculoService.editSedeOperativaVehiculo(this.vehiculo,token).subscribe(
+      this._VehiculoService.update(this.datos,token).subscribe(
       response => {
           if(response.status == 'success'){
-              this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
-              this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
               this.datos.tramiteFactura =3;
-
-              this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
-              this.datos.idVehiculo = this.vehiculo.id;
-              this.datos.numeroGuia = this.datos.numeroGuia; 
-              this.datos.numeroRunt = this.datos.numeroRunt;
-              this.datos.fechaSalida = this.datos.fechaSalida;       
-              this.datos.nombreEmpresa = this.datos.nombreEmpresa; 
-              this.datos.idFactura = this.factura.id;
-              this.datos.tramiteFormulario = 'rnma-traslado';
+              let resumen = {
+                  'nueva sede operativa': this.datos.idSedeOperativa,
+                  'anterior sede operativa': this.vehiculo.sedeOperativa.id,
+              };
+              
               this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
               if(response.status == 'success'){
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
               }
               error => {
                       this.errorMessage = <any>error;
