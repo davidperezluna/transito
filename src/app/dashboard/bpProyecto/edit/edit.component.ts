@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() bpProyecto:any = null;
+@Input() proyecto:any = null;
 public errorMessage;
 public respuesta;
 public formReady = false;
@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit(){ 
-    console.log(this.bpProyecto);
+    console.log(this.proyecto);
 
   }
 
@@ -28,7 +28,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._BpProyectoService.edit(this.bpProyecto,token).subscribe(
+		this._BpProyectoService.edit(this.proyecto,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

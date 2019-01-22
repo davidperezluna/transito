@@ -15,6 +15,7 @@ export class BpProyectoComponent implements OnInit {
 	public proyectos;
 	public formNew = false;
 	public formEdit = false;
+	public formShow = false;
   public formIndex = true;
   public table:any; 
   public proyecto : BpProyecto;
@@ -127,10 +128,13 @@ export class BpProyectoComponent implements OnInit {
     this.proyecto  = proyecto;
     this.formEdit = true;
     this.formIndex = false;
+    this.formNew = false;
+    this.formShow = false;
   }
 
   onShow(proyecto: any) {
     this.proyecto = proyecto;
+    this.formShow = true;
     this.formIndex = false;
     this.formNew = false;
     this.formEdit = false;
