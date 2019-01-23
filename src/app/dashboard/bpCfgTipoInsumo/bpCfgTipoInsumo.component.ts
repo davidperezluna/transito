@@ -21,7 +21,7 @@ export class BpCfgTipoInsumoComponent implements OnInit {
   public tipo: BpCfgTipoInsumo;
 
   constructor(
-    private _NotificacionService: BpCfgTipoInsumoService,
+    private _TipoInsumoService: BpCfgTipoInsumoService,
 		private _loginService: LoginService,
     ){}
     
@@ -34,7 +34,7 @@ export class BpCfgTipoInsumoComponent implements OnInit {
       }
     });
 
-    this._NotificacionService.index().subscribe(
+    this._TipoInsumoService.index().subscribe(
 				response => {
           this.tipos = response.data;
           let timeoutId = setTimeout(() => {  
@@ -99,7 +99,7 @@ export class BpCfgTipoInsumoComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
         
-        this._NotificacionService.delete({'id':id}, token).subscribe(
+        this._TipoInsumoService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

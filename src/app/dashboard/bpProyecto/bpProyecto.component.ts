@@ -54,21 +54,21 @@ export class BpProyectoComponent implements OnInit {
       );
   }
   
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  iniciarTabla(){  
+    this.table = $('#dataTables-example').DataTable({
+      destroy: true,
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){
@@ -100,6 +100,7 @@ export class BpProyectoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
+        
         this._BpProyectoService.delete({ 'id': id }, token).subscribe(
             response => {
                 swal({

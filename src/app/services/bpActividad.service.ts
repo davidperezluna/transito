@@ -34,7 +34,8 @@ export class BpActividadService {
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/delete", params, { headers: headers }).map(
-            res => res.json()
+            res => res.json(),
+            this._loogerService.registerLog(token, 'DELETE', json, this.url)
         );
     }
 
@@ -55,7 +56,19 @@ export class BpActividadService {
         );
     }
 
-    select() {
-        return this._http.get(this.url + "/select").map(res => res.json());
+    select(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/select", params, { headers: headers }).map(
+            res => res.json()
+        );
+    }
+
+    searchInsumos(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/search/insumos", params, { headers: headers }).map(res => res.json());
     }
 }

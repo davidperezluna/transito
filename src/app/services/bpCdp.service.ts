@@ -29,6 +29,16 @@ export class BpCdpService {
 		);
 	}
 
+	request(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/request", params, { headers: headers }).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'INSERT', json, this.url)
+		);
+	}
+
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
