@@ -251,8 +251,17 @@ export class NewSenialUbicacionComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this.senialUbicacion.idMunicipio = this.idMunicipio;
-        console.log(this.file);
-        console.log(this.senialUbicacion);
+
+        if (document.getElementsByName("latitud")[0]['value'] != '') {
+            this.senialUbicacion.latitud = document.getElementsByName("latitud")[0]['value'];
+        }
+
+        if (document.getElementsByName("longitud")[0]['value'] != '') {
+            this.senialUbicacion.longitud = document.getElementsByName("longitud")[0]['value'];
+        }
+        
+        this.senialUbicacion.direccion = document.getElementsByName("direccion")[0]['value']
+
         this._SvSenialUbicacionService.register(this.file, this.senialUbicacion, token).subscribe(
             response => {
                 if (response.status == 'success') {

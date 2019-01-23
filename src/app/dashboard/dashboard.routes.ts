@@ -141,12 +141,11 @@ import { GdCfgMedioCorrespondenciaRoutes } from './gdCfgMedioCorrespondencia/gdC
 import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
 
+import { PqoCfgPatioRoutes } from './pqoCfgPatio/pqoCfgPatio.routes';
+import { PqoCfgGruaRoutes } from './pqoCfgGrua/pqoCfgGrua.routes';
+import { PqoGruaCiudadanoRoutes } from './pqoGruaCiudadano/pqoGruaCiudadano.routes';
+import { PqoInmovilizacionRoutes } from './pqoInmovilizacion/pqoInmovilizacion.routes';
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
-import { MparqGruaRoutes } from './mparqGrua/mparqGrua.routes';
-import { MparqGruaCiudadanoRoutes } from './mparqGruaCiudadano/mparqGruaCiudadano.routes';
-import { MparqEntradaRoutes } from './mparqEntrada/mparqEntrada.routes';
-import { MparqSalidaRoutes } from './mparqSalida/mparqSalida.routes';
-import { MparqPatioRoutes } from './mparqPatio/mparqPatio.routes';
 
 import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
@@ -217,6 +216,7 @@ import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.rout
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
+import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
 
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
@@ -269,12 +269,11 @@ export const DashboardRoutes: Route[] = [
       ...GdCfgMedioCorrespondenciaRoutes,
       ...MflInfraccionRoutes,
       ...MflInfraccionCategoriaRoutes,
+      ...PqoCfgPatioRoutes,
+      ...PqoCfgGruaRoutes,
+      ...PqoGruaCiudadanoRoutes,
+      ...PqoInmovilizacionRoutes,
       ...MparqCostoTrayectoRoutes,
-      ...MparqGruaRoutes,
-      ...MparqEntradaRoutes,
-      ...MparqSalidaRoutes,
-      ...MparqPatioRoutes,
-      ...MparqGruaCiudadanoRoutes,
       ...CfgCargoRoutes,
       ...MpersonalFuncionarioRoutes,
       ...MpersonalTipoContratoRoutes,
@@ -421,6 +420,7 @@ export const DashboardRoutes: Route[] = [
       ...CvMedidaCautelarRoutes,
       ...BpCfgTipoInsumoRoutes,
       ...BpProyectoRoutes,
+      ...BpCdpRoutes,
       ...RnrsPreasignacionPlacaRoutes,
       ...EmpresaAlcaldiaRoutes
     ]

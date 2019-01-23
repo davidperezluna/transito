@@ -11,12 +11,13 @@ import { NewSenialBodegaComponent } from './newSenialBodega/newSenialBodega.comp
 import { NewSenialUbicacionComponent } from './newSenialUbicacion/newSenialUbicacion.component';
 import { EditComponent } from './edit/edit.component';
 import { LocationComponent } from './location/location.component';
+import { RecordComponent } from './record/record.component';
 import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [SvSenialInventarioComponent, NewSenialBodegaComponent, NewSenialUbicacionComponent, EditComponent, LocationComponent],
-    exports: [SvSenialInventarioComponent, NewSenialBodegaComponent, NewSenialUbicacionComponent, EditComponent, LocationComponent],
+    declarations: [SvSenialInventarioComponent, NewSenialBodegaComponent, NewSenialUbicacionComponent, EditComponent, LocationComponent, RecordComponent],
+    exports: [SvSenialInventarioComponent, NewSenialBodegaComponent, NewSenialUbicacionComponent, EditComponent, LocationComponent, RecordComponent],
     providers: [SvSenialInventarioService, SvSenialUbicacionService, SvSenialBodegaService]
 })
 

@@ -1,0 +1,110 @@
+<div class="row" *ngIf="formSearch">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <b>Solicitud de disponibilidad presupuestal</b>
+                </h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formSearch="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="input-group">
+                                <input type="numeric" class="form-control" placeholder="Número de proyecto" [(ngModel)]="numeroProyecto" name="numeroProyecto" required />
+                                <span class="input-group-btn">
+                                    <button (click)="searchProyecto()" [disabled]="formSearch.invalid" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div> 
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="row">
+            <div class="col-xs-12 col-lg-4" *ngIf="proyecto">
+                <div class="card">
+                    <div class="card-header">
+                        <b class="text-uppercase">Resumen de proyecto</b>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>Número: </b>
+                                        {{ proyecto.numero }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Nombre: </b>
+                                        {{ proyecto.nombre }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Fecha: </b>
+                                        {{ proyecto.fecha }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Cuenta número: </b>
+                                        {{ proyecto.cuentaNumero }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Cuenta nombre: </b>
+                                        {{ proyecto.cuentaNombre }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Costo total: </b>
+                                        {{ proyecto.costoTotal }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>      
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-lg-6" *ngIf="actividades">
+                <div class="card">
+                    <div class="card-header">
+                        <b class="text-uppercase">Registrar solicitud</b>
+                    </div>
+                    <div class="card-body">
+                        <form #formNew="ngForm">
+                            <div class="form-group row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Actividades</label>
+                                    <ng-select [multiple]="false" [options]="actividades" [(ngModel)]="datos.idActividad" name="idActividad"></ng-select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                                <i class="fa fa-save"></i>
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

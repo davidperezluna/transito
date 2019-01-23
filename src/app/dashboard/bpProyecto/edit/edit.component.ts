@@ -20,14 +20,15 @@ constructor(
   ){}
 
   ngOnInit(){ 
-    console.log(this.proyecto);
-
   }
 
-  onCancelar(){ this.ready.emit(true); }
+  onCancelar(){ 
+    this.ready.emit(true); 
+  }
 
   onEnviar(){
     let token = this._loginService.getToken();
+
 		this._BpProyectoService.edit(this.proyecto,token).subscribe(
 			response => {
         if(response.status == 'success'){

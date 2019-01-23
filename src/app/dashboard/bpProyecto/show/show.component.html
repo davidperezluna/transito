@@ -1,74 +1,247 @@
 <div class="row">
-    <div class="col-xs-12 col-lg-12">
-        <div class="form-group row">
-            <div class="col-xs-12 col-lg-3">
-                <label>
-                </label>
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Resumen de proyecto</b>
             </div>
-            <div class="col-xs-12 col-lg-6">
-                <label>
-                </label>
-            </div>
-            <div class="col-xs-12 col-lg-3">
-                <label>
-                </label>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <b>Número: </b>
+                                {{ proyecto.numero }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Nombre: </b>
+                                {{ proyecto.nombre }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Fecha: </b>
+                                {{ proyecto.fecha }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Cuenta número: </b>
+                                {{ proyecto.cuentaNumero }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Cuenta nombre: </b>
+                                {{ proyecto.cuentaNombre }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Costo total: </b>
+                                {{ proyecto.costoTotal }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
             </div>
         </div>
-        <form #formReparto="ngForm">
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="formNewActividad">
+        <form #formActividad="ngForm">
             <div class="card">
                 <div class="card-header">
                     <h5 class="text-uppercase">Crear Actividad</h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped" *ngIf="funcionario">
-                        <tbody>
-                            <tr class="odd">
-                                <td>
-                                    No.
-                                    <b>{{ proyecto.numero }}</b>
-                                </td>
-                                <td>
-                                    Nombre
-                                    <b>{{ proyecto.nombre }}</b>
-                                </td>
-                                <td>
-                                    Fecha
-                                    <b>{{ proyecto.fecha }}</b>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-6">
                             <label>Nombre</label>
-                            <input class="form-control" [(ngModel)]="datos.nombre" name="direccion" type="text">
+                            <input class="form-control text-uppercase" [(ngModel)]="datos.nombre" name="nombre" type="text" required>
                         </div>
-                        <div class="col-xs-12 col-lg-6">
+                        <div class="col-xs-12 col-lg-3">
                             <label>Und. de medida</label>
-                            <input class="form-control" [(ngModel)]="datos.unidadMedida" name="telefono" type="text">
+                            <input class="form-control" [(ngModel)]="datos.unidadMedida" name="unidadMedida" type="text" required>
                         </div>
-                        <div class="col-xs-12 col-lg-6">
+                        <div class="col-xs-12 col-lg-3">
                             <label>Cantidad</label>
-                            <input class="form-control" [(ngModel)]="datos.cantidad" name="correo" type="numeric">
+                            <input class="form-control" (blur)="onCalcularTotalActividad()" [(ngModel)]="datos.cantidad" name="cantidad" type="numeric" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Costo Unitario</label>
-                            <input class="form-control" [(ngModel)]="datos.costoUnitario" name="correo" type="text">
+                            <input class="form-control" (blur)="onCalcularTotalActividad()" [(ngModel)]="datos.costoUnitario" name="costoUnitario" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Costo total</label>
-                            <input class="form-control" [(ngModel)]="datos.costoTotal" name="correo" type="text">
+                            <input class="form-control" [(ngModel)]="datos.costoTotal" name="costoTotal" type="text" disabled>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-xs-12 col-lg-12">
-                    <button (click)="onRegister()" (ready)="ready($event)" [disabled]="formReparto.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onRegisterActividad()" (ready)="ready($event)" [disabled]="formActividad.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>
-                    <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                    <button (click)="onCancelarActividad()" (ready)="ready($event)" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="formIndexActividad">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Actividades registradas
+                    <div class="btn-group pull-right">
+                        <button (click)="onNewActividad()" class="btn btn-xs btn-primary">
+                            <i class="fa fa-plus"></i>
+                            <span class="text">Nueva</span>
+                        </button>
+                    </div>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Und. Medida</th>
+                            <th>Cantidad</th>
+                            <th>Costo unitario</th>
+                            <th>Costo total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let actividad of actividades; let i = index">
+                            <td>{{ i +1 }}</td>
+                            <td>{{ actividad.nombre }}</td>
+                            <td>{{ actividad.unidadMedida }}</td>
+                            <td>{{ actividad.cantidad }}</td>
+                            <td>{{ actividad.costoUnitario }}</td>
+                            <td>{{ actividad.costoTotal }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button (click)="onIndexInsumo(actividad)" class="btn btn-xs btn-default" type="button">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button (click)="onDeleteActividad(actividad.id)" class="btn btn-xs btn-danger" type="button">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="formIndexInsumo">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Insumos registrados <small>{{ actividad.nombre }}</small>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNewInsumo(actividad)" class="btn btn-xs btn-primary">
+                            <i class="fa fa-plus"></i>
+                            <span class="text">Nueva</span>
+                        </button>
+                    </div>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Und. Medida</th>
+                            <th>Cantidad</th>
+                            <th>Valor unitario</th>
+                            <th>valor total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let insumo of insumos; let i = index">
+                            <td>{{ i +1 }}</td>
+                            <td>{{ insumo.nombre }}</td>
+                            <td>{{ insumo.unidadMedida }}</td>
+                            <td>{{ insumo.cantidad }}</td>
+                            <td>{{ insumo.valorUnitario }}</td>
+                            <td>{{ insumo.valorTotal }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button (click)="onDeleteInsumo(insumo.id)" class="btn btn-xs btn-danger" type="button">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf="formNewInsumo">
+        <form #formInsumo="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">
+                        Crear Insumo
+                        <small>{{ actividad.nombre }}</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo insumo</label>
+                            <ng-select [multiple]="false" [options]="tiposInsumo" [(ngModel)]="datosInsumo.idTipoInsumo" name="tipoInsumo"></ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Nombre</label>
+                            <input class="form-control text-uppercase" [(ngModel)]="datosInsumo.nombre" name="nombre" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Und. de medida</label>
+                            <input class="form-control" [(ngModel)]="datosInsumo.unidadMedida" name="unidadMedida" type="text" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Cantidad</label>
+                            <input class="form-control" (blur)="onCalcularTotalInsumo()" [(ngModel)]="datosInsumo.cantidad" name="cantidad" type="numeric" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Valor Unitario</label>
+                            <input class="form-control" (blur)="onCalcularTotalInsumo()" [(ngModel)]="datosInsumo.valorUnitario" name="valorUnitario" type="text"
+                                required>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Valor total</label>
+                            <input class="form-control" [(ngModel)]="datosInsumo.valorTotal" name="valorTotal" type="text" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-12 col-lg-12">
+                    <button (click)="onRegisterInsumo()" (ready)="ready($event)" [disabled]="formInsumo.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelarInsumo()" (ready)="ready($event)" class="btn btn-default">
                         <i class="fa fa-times"></i>
                         Cancelar
                     </button>

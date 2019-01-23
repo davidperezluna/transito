@@ -1,0 +1,104 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo Propietario/Conductor</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Fecha inicial <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="gruaCiudadano.fechaInicial" name="fechaInicial" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Tipo <strong class="text-danger">*</strong></label>
+                            <select class="form-control" [(ngModel)]="gruaCiudadano.tipo" name="tipo">
+                                <option value="Propietario">Propietario</option>
+                                <option value="Conductor">Conductor</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12s">
+                            <label>Ciudadano <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" name="ciudadanos" required>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div  class="col-xs-12 col-lg-12">
+                            <label>Observaciones</label>
+                            <textarea class="form-control" [(ngModel)]="gruaCiudadano.observaciones" rows='5' name="observaciones"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="btn-group">
+                            <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
+                                <i class="fa fa-times"></i>
+                                Cancelar
+                            </button>
+                            <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                                <i class="fa fa-save"></i>
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf='gruaCiudadanos?.length > 0'>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">HISTORIAL</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Propietario/Conductor</th>
+                                <th>Tipo</th>
+                                <th>Detalles</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let gruaCiudadano of gruaCiudadanos; let i = index">
+                                <td>{{ gruaCiudadano.id }}</td>
+                                <td>
+                                    {{ gruaCiudadano.ciudadano.usuario.primerNombre }} {{ gruaCiudadano.ciudadano.usuario.primerApellido }}
+                                </td>
+                                <td>{{ gruaCiudadano.tipo }}</td>
+                                <td>
+                                    <b>Fecha inicio:</b> {{ gruaCiudadano.fechaInicio }}
+                                    <div *ngIf="gruaCiudadano.fechaFin">
+                                        <br>
+                                        <b>Fecha inicio:</b>
+                                        {{ gruaCiudadano.fechaFin }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <button (click)="edit(gruaCiudadano)" class="btn btn-xs btn-info" type="button">
+                                        <i class="fa fa-edit"></i>
+                                        Editar
+                                    </button>
+                                    <button (click)="delete(gruaCiudadano.id)" class="btn btn-xs btn-danger" type="button">
+                                        <i class="fa fa-trash"></i>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
