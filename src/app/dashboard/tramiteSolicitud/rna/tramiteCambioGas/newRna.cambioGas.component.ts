@@ -25,12 +25,11 @@ export class NewRnaCambioGasComponent implements OnInit {
     public tramiteRealizado: any;
     public vehiculo1;
     public combustibles;
-    public datos2 = {
-        'combustibleCambioId': null,
-        'vehiculoId': null,
-    };
+    
     public resumen = {};    
     public datos = {
+        'idVehiculo': null,
+        'idCombustibleCambio': null,
         'numeroCertificado': null,
         'fechaExpedicion': null,
         'fechaVencimiento': null,
@@ -42,6 +41,7 @@ export class NewRnaCambioGasComponent implements OnInit {
         'fechaFabricacion': null,
         'presion': null,
         'numeroRunt': null,
+        'campos': null,
     };
     
 
@@ -67,8 +67,8 @@ export class NewRnaCambioGasComponent implements OnInit {
                 console.log(this.combustibles);
                 this.combustibles.data.forEach(element => { 
                     if(element.id == 4 ){
-                        this.datos2.combustibleCambioId = element.id;
-                        this.datos2.vehiculoId = this.vehiculo1.id;
+                        this.datos.idCombustibleCambio = element.id;
+                        this.datos.idVehiculo = this.vehiculo1.id;
                         
                         
                     }                  
@@ -83,12 +83,12 @@ export class NewRnaCambioGasComponent implements OnInit {
                     }
             }
         );
-        this._VehiculoService.editCombustibleVehiculo(this.datos2,token).subscribe(
+        this._VehiculoService.update(this.datos,token).subscribe(
             response => {
-                response = response; 
                 if(response.status == 'success'){
                     this.datos.idFactura = this.factura.id;
                     this.datos.tramiteFormulario = 'rna-cambiogas';
+                    this.datos.campos = ['gas'];
                     this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
                 }
                 error => {

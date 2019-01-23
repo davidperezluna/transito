@@ -17,6 +17,11 @@
                              required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
+                        <label>Email Formador <strong class="text-danger">*</strong></label>
+                        <input type="email" class="form-control" [(ngModel)]="capacitacion.emailFormador" name="emailFormador"
+                             required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
                         <label>Cédula Formador<strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="capacitacion.cedula" name="cedula"
                             required />
@@ -35,11 +40,11 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Función Seguridad Vial <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" required name="funcion"></ng-select>
+                        <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" (ngModelChange)="obtenerFuncionCriterioPorFuncion($event)" required name="funcion"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Clase Actividad <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.claseActividad" name="claseActividad" required />
+                        <ng-select [multiple]="false" [options]="funcionesCriterios" [(ngModel)]="funcionCriterioSelected" required name="funcionCriterio"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Tema Capacitacion <strong class="text-danger">*</strong></label>

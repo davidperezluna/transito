@@ -3,6 +3,7 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
+import { CfgEntidadJudicialService } from "../../../../services/cfgEntidadJudicial.service";
 
 import swal from 'sweetalert2';
 
@@ -16,6 +17,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
     public errorMessage;
+    public entidadesJudiciales: any;
     public tramiteFacturaSelected: any;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
@@ -40,9 +42,24 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         private _loginService: LoginService,
         private _SustratoService: SustratoService,
         private _VehiculoService: VehiculoService,
+        private _EntidadJudicialService: CfgEntidadJudicialService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        this._EntidadJudicialService.getEntidadJudicialSelect().subscribe(
+            response => {
+                this.entidadesJudiciales = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+    }
 
     enviarTramite() {
         

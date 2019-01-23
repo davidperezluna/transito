@@ -21,7 +21,6 @@ export class NewEmpresaComponent implements OnInit {
 public empresa: Empresa;
 public errorMessage;
 public btnVisible=false;
-public respuesta;
 public municipios: any;
 public ciudadanos: any;
 public generos: any;
@@ -41,18 +40,18 @@ public sucursales:any[]= [];
 // los que vienen desde el base de datos
 constructor(
   private _EmpresaService: EmpresaService,
-  private _loginService: LoginService,
-  private _municipioService: MunicipioService,
-  private _tipoEmpresaService: TipoEmpresaService,
-  private _tipoSociedadService: TipoSociedadService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
-  private _ciudadanoService: CiudadanoService,
+  private _LoginService: LoginService,
+  private _MunicipioService: MunicipioService,
+  private _TipoEmpresaService: TipoEmpresaService,
+  private _TipoSociedadService: TipoSociedadService,
+  private _TipoIdentificacionService: TipoIdentificacionService,
+  private _CiudadanoService: CiudadanoService,
 ){}
 
   ngOnInit() {
     this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
-    this._tipoSociedadService.getTipoSociedadSelect().subscribe(
+    this._TipoSociedadService.getTipoSociedadSelect().subscribe(
       response => {
         this.tiposSociedad = response;
       }, 
@@ -65,7 +64,7 @@ constructor(
       }
     );
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -78,7 +77,7 @@ constructor(
       }
     );
 
-    this._ciudadanoService.getCiudadanoSelect().subscribe(
+    this._CiudadanoService.getCiudadanoSelect().subscribe(
       response => {
         this.ciudadanos = response;
       }, 
@@ -91,10 +90,10 @@ constructor(
       }
     );
 
-    this._municipioService.getMunicipioSelect().subscribe(
+    this._MunicipioService.getMunicipioSelect().subscribe(
       response => {
         this.municipios = response;
-      }, 
+      },  
       error => {
         this.errorMessage = <any>error;
         if(this.errorMessage != null){
@@ -104,7 +103,7 @@ constructor(
       }
     );
 
-    this._tipoEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._TipoEmpresaService.getTipoEmpresaSelect().subscribe(
       response => {
         this.tiposEmpresa = response;
       },
@@ -119,12 +118,12 @@ constructor(
 
    
   }
-  onCancelar(){
+  onCancelar() {
     this.ready.emit(true);
   }
   // enviar a guarda
-  onEnviar(){
-    let token = this._loginService.getToken();
+  onEnviar() {
+    let token = this._LoginService.getToken();
     this.empresa.municipioId = this.municipioSelected;
     this.empresa.tipoSociedadId = this.tipoSociedadSelected;
     this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
@@ -135,19 +134,17 @@ constructor(
       'sucursales': this.sucursales
   };
 
-    this._EmpresaService.register(datos,token).subscribe(
+    this._EmpresaService.register(datos, token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
-        }else{
+          });
+        }else {
           swal({
             title: 'Error!',
             text: 'El empresa ya se encuentra registrado',
@@ -163,7 +160,6 @@ constructor(
           }
         }
     }); 
-    console.log(datos);    
   }
 
   readySucursal(sucursal:any){
@@ -184,10 +180,7 @@ constructor(
     );
 
     this.tablaSucursal=true;
-    this.formNewSucursal = false;
-
-    console.log(this.sucursales);
-    
+    this.formNewSucursal = false;    
   }
 
   onNewSucursal(){
@@ -207,10 +200,7 @@ constructor(
     this.sucursales =  this.sucursales.filter(h => h !== sucursal);
 
     if (this.sucursales.length === 0) {
-      this.tablaSucursal=false;
+      this.tablaSucursal = false;
     }
   }
-
- 
-
 }

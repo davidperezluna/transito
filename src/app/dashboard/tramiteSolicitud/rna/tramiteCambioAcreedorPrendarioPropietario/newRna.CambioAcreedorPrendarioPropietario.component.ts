@@ -123,7 +123,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         let identificacion = {
 			'numeroIdentificacion' : this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
             response => {
                 response = response; 
                 if(response.status == 'success'){
