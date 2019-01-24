@@ -10,7 +10,6 @@ import { SvCfgFuncionService } from '../../../services/svCfgFuncion.service';
 import { SvCfgFuncionCriterioService } from '../../../services/svCfgFuncionCriterio.service';
 import { SvCfgTemaCapacitacionService } from '../../../services/svCfgTemaCapacitacion.service';
 import { SvCfgClaseActorViaService } from '../../../services/svCfgClaseActorVia.service';
-import { SvCfgClaseActorVia } from '../../svCfgClaseActorVia/svCfgClaseActorVia.modelo';
 
 @Component({
     selector: 'app-new',
@@ -67,6 +66,7 @@ export class NewComponent implements OnInit {
         this._FuncionService.getFuncionSelect().subscribe(
             response => {
                 this.funciones = response;
+                console.log(response);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -113,7 +113,6 @@ export class NewComponent implements OnInit {
         let token = this._loginService.getToken();
 
         this.capacitacion.municipio = this.municipioSelected;
-        //this.capacitacion.cedula = this.ciudadano.cedula;
         this.capacitacion.funcion = this.funcionSelected;
         this.capacitacion.funcionCriterio = this.funcionCriterioSelected;
         this.capacitacion.claseActorVial = this.claseActorViaSelected;
@@ -171,23 +170,22 @@ export class NewComponent implements OnInit {
     }
 
     obtenerFuncionCriterioPorFuncion(e) {
-        let token = this._loginService.getToken();
-        console.log(e);
-        this._FuncionCriterioService.getFuncionCriterioPorFuncionSelect({ 'idFuncionCriterio': e }, token).subscribe(
-            response => {
-                this.funcionesCriterios = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
+        if (e) {
+            let token = this._loginService.getToken();
+            this._FuncionCriterioService.getFuncionCriterioPorFuncionSelect({ 'idFuncionCriterio': e }, token).subscribe(
+                response => {
+                    this.funcionesCriterios = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
                 }
-            }
-        );
-        
-
+            );
+        }
     }
 }
 
