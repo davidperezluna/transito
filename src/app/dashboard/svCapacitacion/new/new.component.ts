@@ -66,7 +66,6 @@ export class NewComponent implements OnInit {
         this._FuncionService.getFuncionSelect().subscribe(
             response => {
                 this.funciones = response;
-                console.log(response);
             },
             error => {
                 this.errorMessage = <any>error;
