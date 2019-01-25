@@ -20,7 +20,6 @@ export class NewRnaComponent implements OnInit {
   public tramiteSolicitud: TramiteSolicitud;
   public vehiculo: Vehiculo;
   public errorMessage;
-  public respuesta;
   public tramitesFactura: any = null;
   public tramiteFacturaSelected: any;
   public facturaSelected: any;
@@ -99,8 +98,7 @@ export class NewRnaComponent implements OnInit {
 
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -171,6 +169,7 @@ export class NewRnaComponent implements OnInit {
           if (active) {
             this.isTramites = false;
           }
+
           swal.close();
           if (this.tramiteSolicitud.solicitanteId) {
             this._ciudadanoVehiculoService.showCiudadanoVehiculo(token, this.tramiteSolicitud.solicitanteId).subscribe(
@@ -197,6 +196,7 @@ export class NewRnaComponent implements OnInit {
               } */
             else {
               this.factura = false;
+              
               swal({
                 title: 'Error!',
                 text: 'Seleccionar solicitante',
@@ -221,7 +221,7 @@ export class NewRnaComponent implements OnInit {
     this.mensaje = '';
     swal({
       title: 'Buscando Vehiculo!',
-      text: 'Solo tardara unos segundos por favor espere.',
+      text: 'Solo tardará unos segundos, por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
@@ -419,9 +419,8 @@ export class NewRnaComponent implements OnInit {
     };
     this._ciudadanoService.searchByIdentificacion(token, identificacion).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.apoderadoSelect = this.respuesta.data;
+        if (response.status == 'success') {
+          this.apoderadoSelect = response.data;
           this.apoderadoEncontrado = 2;
           // this.ciudadanoNew = false;
         } else {

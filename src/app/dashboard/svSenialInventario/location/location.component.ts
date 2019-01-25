@@ -28,6 +28,7 @@ export class LocationComponent implements OnInit {
 
     public errorMessage;
     public formIndex = true;
+    public formRecord = false;
     public table: any = null;
 
     constructor(
@@ -58,12 +59,18 @@ export class LocationComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.inventarios = response.data;
+
+                    let timeoutId = setTimeout(() => {
+                        this.iniciarTabla();
+                    }, 100);
+
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+
                     swal.close();
                 } else {
                     swal({
@@ -86,7 +93,11 @@ export class LocationComponent implements OnInit {
     }
 
     iniciarTabla() {
-        $('#dataTables-example').DataTable({
+        if (this.table) {
+            this.table.destroy();
+        }
+
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -97,9 +108,8 @@ export class LocationComponent implements OnInit {
                     sNext: '>',
                     sLast: '>>'
                 }
-            }
+            },
         });
-        this.table = $('#dataTables-example').DataTable();
     }
 
     onCancelar() {

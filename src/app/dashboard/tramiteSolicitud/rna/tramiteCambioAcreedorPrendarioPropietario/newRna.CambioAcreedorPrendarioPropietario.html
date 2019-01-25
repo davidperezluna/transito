@@ -17,18 +17,18 @@
 
                     <!-- tipo prioridad propio -->
                     <div class="container" *ngIf="tipoPropiedadSelected == 2 || tipoPropiedadSelected == 1 && apoderado == 'false'">
-
-
                         <!--Buscardor Identificador/Nit -->
-                        <div class="col-xs-12 col-lg-12 row" >
+                        <h5 class="m-0">Datos del Nuevo propietario</h5>
+                        <hr>
+                        <div class="col-xs-12 col-lg-12 row">
                             <!--Cuando es de tipo propio -->
-                            <div class="col-xs-12 col-lg-12" >
+                            <!-- <div class="col-xs-12 col-lg-12" >
                                 <br> 
                                 <div class="custom-control custom-checkbox"  >
                                     <input  [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
                                     <label class="custom-control-label" for="solidario">solidario</label>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- cuando es de tipo leasing -->
                             <div class="col-xs-12 col-lg-12" *ngIf="tipoPropiedadSelected == 1 && propietario">

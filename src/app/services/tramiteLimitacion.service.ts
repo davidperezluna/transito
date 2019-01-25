@@ -19,7 +19,6 @@ export class TramiteLimitacionService {
 	register(tramiteLimitacion, token) {
 		let json = JSON.stringify(tramiteLimitacion);
 		let params = "json=" + json + "&authorization=" + token;
-		console.log(params);
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers })
 			.map(res => res.json());

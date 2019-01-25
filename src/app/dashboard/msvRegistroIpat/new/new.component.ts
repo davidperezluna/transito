@@ -1382,6 +1382,21 @@ export class NewComponent implements OnInit {
               text: response.message,
               type: 'error',
               confirmButtonText: 'Aceptar'
+            }).then((result) => {
+              if (result.value) {
+                this.vhl = false;
+                this.marcaSelected = [0];
+                this.lineaSelected = [0];
+                this.colorSelected = [0];
+                this.msvRegistroIpat.modelo = '';
+                this.carroceriaSelected = [0];
+                this.msvRegistroIpat.pasajeros = '';
+                this.matriculadoEnSelected = [0];
+                this.claseSelected = [0];
+                this.servicioSelected = [0];
+                this.modalidadTransporteSelected = [0];
+                this.radioAccionSelected = [0];
+              }
             });
           }
           error => {
@@ -1399,7 +1414,6 @@ export class NewComponent implements OnInit {
   onBuscarLicenciaConductor() {
     let token = this._LoginService.getToken();
     if (this.msvRegistroIpat.numeroLicenciaConduccion) {
-      console.log(this.msvRegistroIpat.numeroLicenciaConduccion);
       this._MsvRegistroIpatService.getBuscarLicenciaConductor({ 'numero': this.msvRegistroIpat.numeroLicenciaConduccion }, token).subscribe(
 
         response => {
@@ -1431,7 +1445,7 @@ export class NewComponent implements OnInit {
   }
 
   onMismoConductor(msvRegistroIpat) {
-    if (this.msvRegistroIpat.identificacionConductor != null && this.tipoIdentificacionConductorSelected != [0] && this.msvRegistroIpat.nombresConductor != null && this.msvRegistroIpat.apellidosConductor != null) {
+    if (this.msvRegistroIpat.identificacionConductor != null && this.msvRegistroIpat.nombresConductor != '' && this.msvRegistroIpat.apellidosConductor != '') {
       this.msmConductor = true;
       this.tipoIdentificacionPropietarioSelected = [this.tipoIdentificacionConductorSelected];
       this.msvRegistroIpat.identificacionPropietario = this.msvRegistroIpat.identificacionConductor;
@@ -1468,6 +1482,16 @@ export class NewComponent implements OnInit {
               text: response.message,
               type: 'error',
               confirmButtonText: 'Aceptar'
+            }).then((result) => {
+              if (result.value) {
+                this.agente = false;
+                this.tipoIdentificacionAgenteSelected = [0];
+                this.msvRegistroIpat.gradoAgente = '';
+                this.msvRegistroIpat.nombresAgente = '';
+                this.msvRegistroIpat.apellidosAgente = '';
+                this.msvRegistroIpat.placaAgente = '';
+                this.msvRegistroIpat.entidadAgente = '';
+              }
             });
           }
           error => {
@@ -1501,7 +1525,6 @@ export class NewComponent implements OnInit {
             this.msvRegistroIpat.telefonoVictima = response.data[0].telefono;
             //swal.close();
             if (this.vehiculoIpat) {
-              console.log("entra al if buscar");
               let i = 0;
               this.vehiculos.forEach(element => {
                 i += 1;
@@ -1512,7 +1535,6 @@ export class NewComponent implements OnInit {
                 this.vehiculosIpat.push(obj);
               });
             } else {
-              console.log("entra al else buscar");
               let obj = {
                 value: this.msvRegistroIpat.placa,
                 label: this.msvRegistroIpat.placa,
@@ -1527,6 +1549,19 @@ export class NewComponent implements OnInit {
               text: response.message,
               type: 'error',
               confirmButtonText: 'Aceptar'
+            }).then((result) => {
+              if (result.value) {
+                this.victima = false;
+                this.tipoIdentificacionVictimaSelected = [0];
+                this.msvRegistroIpat.nombresVictima = '';
+                this.msvRegistroIpat.apellidosVictima = '';
+                //this.msvRegistroIpat.nacionalidadVictima = [0];
+                this.msvRegistroIpat.fechaNacimientoVictima = '';
+                this.sexoVictimaSelected = [0];
+                this.msvRegistroIpat.direccionResidenciaVictima = '';
+                this.ciudadResidenciaVictimaSelected = [0];
+                this.msvRegistroIpat.telefonoVictima = '';
+              }
             });
           }
           error => {
@@ -1562,6 +1597,16 @@ export class NewComponent implements OnInit {
               text: response.message,
               type: 'error',
               confirmButtonText: 'Aceptar'
+            }).then((result) => {
+              if (result.value) {
+                this.testigo = false;
+                this.tipoIdentificacionTestigoSelected = [0];
+                this.msvRegistroIpat.nombresTestigo = '';
+                this.msvRegistroIpat.apellidosTestigo = '';
+                this.msvRegistroIpat.direccionTestigo = '';
+                this.ciudadResidenciaTestigoSelected = [0];
+                this.msvRegistroIpat.telefonoTestigo = '';
+              }
             });
           }
           error => {

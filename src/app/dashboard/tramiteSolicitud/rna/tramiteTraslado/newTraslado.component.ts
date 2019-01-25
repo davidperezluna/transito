@@ -23,11 +23,8 @@ public tramitesFactura: any = null;
 public tramiteFacturaSelected: any;
 public tramiteRealizado: any = false;
 public errorMessage;
-public resumen = {};
 
 public datos = {
-    'sedeOperativaIdNew': null,
-    'sedeOperativaIdOld': null,
     'fechaSalida': null,
     'numeroRunt': null,
     'numeroGuia': null,
@@ -36,6 +33,8 @@ public datos = {
     'idFactura': null,
     'idVehiculo': null,
     'campos': null,
+    'idSedeOperativa': null,
+
   };
 
 constructor(
@@ -112,46 +111,45 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected
+    this.datos.idSedeOperativa = this.sedeOperativaSelected;
+    this.datos.idVehiculo = this.vehiculo.id;
+    this.datos.idFactura = this.factura.id;
+    this.datos.tramiteFormulario = 'rna-traslado';
+    this.datos.campos = ['sedeOperativa'];
     
-    this._VehiculoService.editSedeOperativaVehiculo(this.vehiculo,token).subscribe(
+    this._VehiculoService.update(this.datos,token).subscribe(
       response => {
           response = response; 
           if(response.status == 'success'){
-              this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
-              this.datos.sedeOperativaIdOld = this.vehiculo.sedeOperativa.id;
-              this.datos.idFactura = this.factura.id;
-              this.datos.tramiteFormulario = 'rna-traslado';
-              this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-          }
-          error => {
-                  this.errorMessage = <any>error;
+          let resumen = {
+            'nueva sede operativa': this.datos.idSedeOperativa,
+            'anterior sede operativa': this.vehiculo.sedeOperativa.id,
+          };
 
-                  if(this.errorMessage != null){
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                  }
+          this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
+            if (response.status == 'success') {
+              this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+            }
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
               }
-      }); 
+            }
+          });
 
-        this.datos.sedeOperativaIdNew = this.sedeOperativaSelected;
-        this.datos.idVehiculo = this.vehiculo.id;
-        this._TramiteTrasladoService.register(this.datos,token).subscribe(response => {
-        if(response.status == 'success'){
-          alert("Datos enviados con éxito");
         }
         error => {
-                this.errorMessage = <any>error;
+          this.errorMessage = <any>error;
 
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-    });
-
-    this.ngOnInit();
-		
-  }
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }); 
+    }
 
 }

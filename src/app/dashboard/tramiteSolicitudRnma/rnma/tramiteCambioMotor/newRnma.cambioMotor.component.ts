@@ -91,6 +91,7 @@ export class NewRnmaCambioMotorComponent implements OnInit {
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-cambiomotor';
         this.datos.idTipoIngreso = this.tipoIngresoSelected;
+        this.tipoIdentificacion = this.tipoIdentificacionSelected;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['motor'];
 

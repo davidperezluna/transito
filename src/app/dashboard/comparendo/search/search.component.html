@@ -51,9 +51,9 @@
                                         <th>Consecutivo</th>
                                         <th>Placa</th>
                                         <th>Fecha</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Nip</th>
+                                        <th>Infractor</th>
+                                        <th>NIP</th>
+                                        <th>Estado</th>
                                         <th>Infracción</th>
                                     </tr>
                                 </thead>
@@ -67,9 +67,9 @@
                                         </td>
                                         <td>{{ comparendo.placa }}</td>
                                         <td>{{ comparendo.fecha }}</td>
-                                        <td>{{ comparendo.infractorNombres }}</td>
-                                        <td>{{ comparendo.infractorApellidos }}</td>
+                                        <td>{{ comparendo.infractorNombres }} {{ comparendo.infractorApellidos }}</td>
                                         <td>{{ comparendo.infractorIdentificacion }}</td>
+                                        <td>{{ comparendo.estado?.nombre }}</td>
                                         <td>{{ comparendo.infraccion.codigo }}</td>
                                     </tr>
                                 </tbody>
@@ -87,6 +87,10 @@
                 <h5 class="text-uppercase">
                     <strong>Trazabilidad de comparendo No. {{ comparendo.consecutivo.consecutivo }}
                     </strong>
+                    <button (click)="onTrazabilidad()" class="btn btn-xs btn-primary pull-right" type="button">
+                        <i class="fa fa-plus"></i>
+                        Crear trazabilidad
+                    </button>
                 </h5>
             </div>
             <div class="card-body container">
@@ -95,20 +99,32 @@
                         <tr>
                             <th>No.</th>
                             <th>Estado</th>
-                            <th>Fechas</th>
+                            <th>Activo</th>
                             <th>Acto Administrativo</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ trazabilidad.estado.nombre }}</td>
-                            <td>{{ trazabilidad.fecha }}</td>
+                            <td>
+                                {{ trazabilidad.estado.nombre }}
+                                <br>
+                                {{ trazabilidad.fecha }}
+                            </td>
+                            <td>
+                                <i class="fa fa-check text-success" *ngIf="trazabilidad.activo"></i>
+                                <i class="fa fa-ban text-danger" *ngIf="!trazabilidad.activo"></i>
+                            </td>
                             <td>
                                 <span *ngIf="trazabilidad.actoAdministrativo">
-                                    {{ trazabilidad.actoAdministrativo }}
+                                    <a href="{{ apiUrl }}/configuracion/cfgadmactoadministrativo/{{ trazabilidad.id }}/pdf" class="btn btn-success" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        {{ trazabilidad.actoAdministrativo.numero }}
+                                    </a>
+                                    <br>
+                                     {{ trazabilidad.actoAdministrativo.fecha }}
                                 </span>
-                                <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-primary" type="button">
+                                <button *ngIf="!trazabilidad.actoAdministrativo" (click)="onDocument(trazabilidad)" class="btn btn-xs btn-default" type="button">
                                     <i class="fa fa-file-text"></i>
                                     Crear Acto Administrativo
                                 </button>
@@ -132,22 +148,77 @@
             <div class="card-body">
                 <form #formNew="ngForm">
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-6">
                             <label>Número
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <input class="form-control" [(ngModel)]="datos.numero" name="numero" type="text" required autofocus />
+                            <input class="form-control" [(ngModel)]="datos.numero" name="numero" type="text" required readonly />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Formato</label>
+                            <ng-select (ngModelChange)="onChangedFormato($event)" [multiple]="false" [options]="formatos" [(ngModel)]="datos.idFormato"
+                                name="idFormato" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Cuerpo
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <textarea class="form-control" [(ngModel)]="datos.cuerpo" name="cuerpo" id="summernote"></textarea>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" class="btn btn-default">
+                    <button (click)="onSearch()" class="btn btn-default">
                         <i class="fa fa-times"></i>
                         Cancelar
                     </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf='formTrazabilidad'>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <b>Crear nueva trazabilidad</b>
+                </h5>
+                <small>Los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNewTrazabilidad="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Fecha <strong class="text-danger">*</strong></label>
+                            <input type="date" class="form-control text-uppercase" [(ngModel)]="datosTrazabilidad.fecha" name="fecha" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Estado <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Observaciones </label>
+                            <textarea  class="form-control" [(ngModel)]="datosTrazabilidad.observaciones" name="observaciones" rows="4"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onSearch()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviarTrazabilidad()" [disabled]="formNewTrazabilidad.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>

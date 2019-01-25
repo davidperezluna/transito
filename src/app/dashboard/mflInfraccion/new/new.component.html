@@ -8,28 +8,53 @@
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="infraccion.nombre" name="nombre" type="text" required />
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nombre <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="infraccion.nombre" name="nombre" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Código <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="infraccion.codigo" name="codigo" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Descripción <strong class="text-danger">*</strong></label>
+                                <textarea class="form-control" [(ngModel)]="infraccion.descripcion" rows='4' name="descripcion" required ></textarea>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Categoria <strong class="text-danger">*</strong></label>
+                                <ng-select 
+                                    [multiple]="false" 
+                                    [options]="infraccionCategorias" 
+                                    [(ngModel)]="infraccionCategoriaSelected" 
+                                    required 
+                                    name="infraccionCategorias" required>
+                                </ng-select>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Código <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="infraccion.codigo" name="smldv" type="text" required />
+
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="infraccion.retiene" class="custom-control-input" id="retiene" name="retiene"
+                                        checked="">
+                                    <label class="custom-control-label" for="retiene">Retiene licencia</label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Descripción <strong class="text-danger">*</strong></label>
-                            <textarea class="form-control" [(ngModel)]="infraccion.descripcion" rows='4' name="descripcion" required ></textarea>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Categoria</label>
-                            <ng-select 
-                                [multiple]="false" 
-                                [options]="infraccionCategorias" 
-                                [(ngModel)]="infraccionCategoriaSelected" 
-                                required 
-                                name="infraccionCategorias">
-                            </ng-select>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="infraccion.inmoviliza" class="custom-control-input" id="inmoviliza" name="inmoviliza" checked="">
+                                    <label class="custom-control-label" for="inmoviliza">Inmoviliza véhiculo</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-12" *ngIf="infraccion.inmoviliza">
+                                <label>Días de inmovilización <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="infraccion.dias" name="dias" type="text" required />
+                            </div>
                         </div>
                     </div>
                 </form>

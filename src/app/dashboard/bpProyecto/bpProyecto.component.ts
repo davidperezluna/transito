@@ -12,13 +12,13 @@ declare var $: any;
 export class BpProyectoComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-	public bpProyectos;
+	public proyectos;
 	public formNew = false;
 	public formEdit = false;
+	public formShow = false;
   public formIndex = true;
   public table:any; 
-  public bpProyecto : BpProyecto;
+  public proyecto : BpProyecto;
 
   constructor(
     private _BpProyectoService: BpProyectoService,
@@ -29,24 +29,19 @@ export class BpProyectoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
 
     this._BpProyectoService.index().subscribe(
 				response => {
-          this.bpProyectos = response.data;
+          this.proyectos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -58,21 +53,22 @@ export class BpProyectoComponent implements OnInit {
 				}
       );
   }
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  
+  iniciarTabla(){  
+    this.table = $('#dataTables-example').DataTable({
+      destroy: true,
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){
@@ -85,6 +81,7 @@ export class BpProyectoComponent implements OnInit {
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
+      this.formShow = false;
       this.formIndex = true;
       this.ngOnInit();
     }
@@ -103,6 +100,7 @@ export class BpProyectoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
+        
         this._BpProyectoService.delete({ 'id': id }, token).subscribe(
             response => {
                 swal({
@@ -112,7 +110,6 @@ export class BpProyectoComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -130,9 +127,19 @@ export class BpProyectoComponent implements OnInit {
     })
   }
 
-  onEdit(bpProyecto :any){
-    this.bpProyecto  = bpProyecto  ;
+  onEdit(proyecto :any){
+    this.proyecto  = proyecto;
     this.formEdit = true;
     this.formIndex = false;
+    this.formNew = false;
+    this.formShow = false;
+  }
+
+  onShow(proyecto: any) {
+    this.proyecto = proyecto;
+    this.formShow = true;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
   }
 }

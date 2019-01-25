@@ -1,37 +1,32 @@
-<hr>
 <div class="row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-6">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo cargo</h5>
+                <h5 class="text-uppercase">Nuevo proyecto</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
                 <form #formNew="ngForm"> 
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Numero <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="bpProyecto.numero" name="numero" type="number" required autofocus />
+                            <input class="form-control" [(ngModel)]="proyecto.numero" name="numero" type="number" required autofocus />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-8">
                             <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="bpProyecto.nombre" name="nombre" type="text" required  />
+                            <input class="form-control text-uppercase" [(ngModel)]="proyecto.nombre" name="nombre" type="text" required  />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Fecha <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="bpProyecto.fecha" name="fecha" type="date" required  />
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Numero cuenta <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="proyecto.cuentaNumero" name="cuentaNumero" type="number" required  />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Numero cuota <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="bpProyecto.numeroCuota" name="numeroCuota" type="number" required  />
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Nombre cuenta <strong class="text-danger">*</strong></label>
+                            <input class="form-control text-uppercase" [(ngModel)]="proyecto.cuentaNombre" name="cuentaNombre" type="text" required  />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Nombre cuota <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="bpProyecto.nombreCuota" name="nombreCuota" type="text" required  />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Costo valor <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="bpProyecto.costoValor" name="costoValor" type="number" required  />
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Costo total <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="proyecto.costoTotal" name="costoTotal" type="number" required  />
                         </div>
                     </div>
                 </form> 
@@ -40,11 +35,11 @@
                 <div class="btn-group">
                     <button (click)="onCancelar()" class="btn btn-default">
                         <i class="fa fa-times"></i>
-                        Cancel
+                        Cancelar
                     </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
-                        Enviar
+                        Guardar
                     </button>
                 </div>
             </div>

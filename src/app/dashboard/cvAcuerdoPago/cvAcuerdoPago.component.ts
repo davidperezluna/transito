@@ -41,41 +41,20 @@ export class CvAcuerdoPagoComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.numeroIdentificacion }, token).subscribe(
+    this._ComparendoService.searchByInfractor({ 'infractorIdentificacion': this.numeroIdentificacion }, token).subscribe(
       response => {
-        if (response.status == 'success') {     
-          this.ciudadano = response.data;
-          this._ComparendoService.searchByInfractor({ 'infractorIndetificacion': this.numeroIdentificacion }, token).subscribe(
-            response => {
-              if (response.status == 'success') {
-                this.comparendos = response.data;
-                let timeoutId = setTimeout(() => {
-                  this.iniciarTabla();
-                }, 100);
-                this.formIndex = true;
-                swal({
-                  title: 'Perfecto!',
-                  text: response.message,
-                  type: 'info',
-                  confirmButtonText: 'Aceptar'
-                });
-              } else {
-                swal({
-                  title: 'Alerta!',
-                  text: response.message,
-                  type: 'warning',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            },
-            error => {
-              this.errorMessage = <any>error;
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-              }
-            }
-          );
+        if (response.status == 'success') {
+          this.comparendos = response.data;
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
+          this.formIndex = true;
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'info',
+            confirmButtonText: 'Aceptar'
+          });
         } else {
           swal({
             title: 'Alerta!',
@@ -84,15 +63,16 @@ export class CvAcuerdoPagoComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
         }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
       }
     );
+
   }
 
   onSelect(idComparendo: any, eve: any) {

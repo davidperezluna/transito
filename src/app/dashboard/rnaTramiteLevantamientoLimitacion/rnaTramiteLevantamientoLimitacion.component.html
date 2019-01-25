@@ -11,16 +11,16 @@
           <small>Todos los campos con
             <b class="text-danger">*</b> son obligatorios</small>
           <hr>
-          <div class="row justify-content-center container">
+          <div class="row">
 
             <!--placas vehiculos -->
-            <div class="col-xs-12 col-lg-6">
-              <label>Placas</label>
+            <div class="col-xs-12 col-lg-4">
+              <label>Placa</label>
               <div class="input-group" *ngIf="limitacionVehiculoEncontrada != 2" [class.has-success]="limitacionVehiculoEncontrada === 2"
                 [class.has-danger]="limitacionVehiculoEncontrada === 3">
-                <input type="text" class="form-control" placeholder="placa" [(ngModel)]="placa" name="placa" required />
+                <input type="text" class="form-control text-uppercase" placeholder="placa" [(ngModel)]="placa" name="placa" required />
                 <span class="input-group-btn">
-                  <button (click)="onKeyPlaca()" [class.btn-default]="limitacionVehiculoEncontrada === 1" [class.btn-success]="limitacionVehiculoEncontrada === 2"
+                  <button (click)="onSearchByPlaca()" [class.btn-default]="limitacionVehiculoEncontrada === 1" [class.btn-success]="limitacionVehiculoEncontrada === 2"
                     [class.btn-danger]="placaEncontrada === 3" class="btn" ngxclipboard="" type="button">
                     <i class="fa fa-search"></i>
                   </button>

@@ -358,7 +358,7 @@
                             (cancelarTramite)="cancelarTramite($event)"></appRnma-duplicado-placa>
                     </div>
                     <div class="tab-pane" id="rnma-cambiomotor" role="tabpanel" *ngIf='ciudadano'>
-                        <appRnma-cambio-motor [factura]="factura" (readyTramite)="readyTramite($event)"
+                        <appRnma-cambio-motor [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                             (cancelarTramite)="cancelarTramite($event)"></appRnma-cambio-motor>
                     </div>
                     <div class="tab-pane" id="rnma-blindaje" role="tabpanel" *ngIf='ciudadano'>

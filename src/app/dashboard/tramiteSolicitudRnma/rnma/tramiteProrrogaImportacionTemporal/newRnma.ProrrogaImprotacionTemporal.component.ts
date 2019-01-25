@@ -27,6 +27,7 @@ export class NewRnmaProrrogaImportacionTemporalComponent implements OnInit {
 
     public numeroRunt: any;
     public numeroCoutas: any;
+    public licenciaTransito: any;
     public fechaSolicitudProrroga: any;
     public date: any;
 
@@ -127,6 +128,7 @@ export class NewRnmaProrrogaImportacionTemporalComponent implements OnInit {
             'fecha solicitud prorroga': this.fechaSolicitudProrroga,
             'numero runt': this.numeroRunt,
             'numero cuotas': this.numeroCoutas,
+            'numero licencia transito': this.licenciaTransito,
         };
         this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
     }

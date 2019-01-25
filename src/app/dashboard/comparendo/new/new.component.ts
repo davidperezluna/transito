@@ -12,8 +12,8 @@ import { CiudadanoService } from '../../../services/ciudadano.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { MparqPatioService } from '../../../services/mparqPatio.service';
-import { MparqGruaService } from '../../../services/mparqGrua.service';
+import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
+import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
@@ -132,8 +132,8 @@ constructor(
   private _EmpresaService: EmpresaService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _TipoIdentificacionService: TipoIdentificacionService,
-  private _MparqPatioService: MparqPatioService,
-  private _MparqGruaService: MparqGruaService,
+  private _PqoCfgPatioService: PqoCfgPatioService,
+  private _PqoCfgGruaService: PqoCfgGruaService,
   private _CfgComparendoEstadoService: CfgComparendoEstadoService,
   private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
@@ -199,7 +199,7 @@ constructor(
       }
     );
 
-    this._MparqPatioService.select().subscribe(
+    this._PqoCfgPatioService.select().subscribe(
       response => {
         this.patios = response;
       },
@@ -213,7 +213,7 @@ constructor(
       }
     );
 
-    this._MparqGruaService.select().subscribe(
+    this._PqoCfgGruaService.select().subscribe(
       response => {
         this.gruas = response;
       },

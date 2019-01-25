@@ -32,7 +32,7 @@
       <div class="card"><!-- .card -->
         <div class="card-header">
           <h5 class="card-title">
-            <b class="text-uppercase">Comparendos asociados</b> <small> {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}</small>
+            <b class="text-uppercase">Comparendos asociados</b>
           </h5>
         </div>
         <div class="card-body">
@@ -55,8 +55,8 @@
                 <td>{{ comparendo.consecutivo.consecutivo }}</td>
                 <td>{{ comparendo.fecha }}</td>
                 <td>{{ comparendo.infraccion?.codigo }}</td>
-                <td>{{ comparendo.valorInfraccion + comparendo.valorAdicional }}</td>
-                <td>{{ comparendo.vehiculo?.placa.numero }}</td>
+                <td>{{ comparendo.valorInfraccion }}</td>
+                <td>{{ comparendo.placa }}</td>
                 <td>{{ comparendo.estado?.nombre }}</td>
                 <td>
                   <div class="custom-control custom-checkbox" style="margin-top: -17px;">

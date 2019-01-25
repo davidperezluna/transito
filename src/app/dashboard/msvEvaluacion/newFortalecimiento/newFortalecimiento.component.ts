@@ -8,7 +8,7 @@ declare var $: any;
 
 @Component({
   selector: 'app-new-fortalecimiento',
-  templateUrl: './newFortalecimiento.html'
+  templateUrl: './newFortalecimiento.component.html'
 })
 export class NewFortalecimientoComponent implements OnInit {
   @Input() msvCategoriaId;

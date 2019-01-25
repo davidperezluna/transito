@@ -1,13 +1,14 @@
 export class SvCapacitacion {
     constructor(
         public fechaHoraRegistro: string,
+        public emailFormador: string,
         public formador: string,
         public cedula: string,
         public fechaActividad: string,
         public semana: string,
         public municipio: string,
         public funcion: string,
-        public claseActividad: string,
+        public funcionCriterio: string,
         public temaCapacitacion: string,
         public descripcionActividad: string,
         public nombreActorVial: string,

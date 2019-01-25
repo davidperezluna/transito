@@ -62,11 +62,25 @@ export class SvSenialInventarioService {
 		}
 	}
 
-	searchByDateAndTipoAndDestino(datos, token) {
+	searchByDateAndTipoDestino(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/date/tipo/destino", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchCantidadBySenialAndTipoDestino(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/cantidad/senial/tipo/destino", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchBySenialAndTipoDestino(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/senial/tipo/destino", params, { headers: headers }).map(res => res.json());
 	}
 
 	searchByDestino(datos, token) {

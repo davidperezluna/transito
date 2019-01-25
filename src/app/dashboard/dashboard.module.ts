@@ -42,6 +42,10 @@ import { SvCfgSenialProveedorModule } from './svCfgSenialProveedor/svCfgSenialPr
 import { SvCfgSenialModule } from './svCfgSenial/svCfgSenial.module';
 import { SvSenialInventarioModule } from './svSenialInventario/svSenialInventario.module';
 
+import { CvCdoTrazabilidadModule } from './cvCdoTrazabilidad/cvCdoTrazabilidad.module';
+import { CvCdoNotificacionModule } from './cvCdoNotificacion/cvCdoNotificacion.module';
+import { CvCdoCfgInteresModule } from './cvCdoCfgInteres/cvCdoCfgInteres.module';
+
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvLcCfgRestriccionModule } from './cvLcCfgRestriccion/cvLcCfgRestriccion.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
@@ -141,12 +145,11 @@ import { MsvCategoriaModule } from './msvCategoria/msvCategoria.module';
 import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
 import { MsvAsignacionModule } from './msvAsignacion/msvAsignacion.module';
 
+import { PqoCfgPatioModule } from './pqoCfgPatio/pqoCfgPatio.module';
+import { PqoCfgGruaModule } from './pqoCfgGrua/pqoCfgGrua.module';
+import { PqoGruaCiudadanoModule } from './pqoGruaCiudadano/pqoGruaCiudadano.module';
+import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.module';
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
-import { MparqGruaModule } from './mparqGrua/mparqGrua.module';
-import { MparqGruaCiudadanoModule } from './mparqGruaCiudadano/mparqGruaCiudadano.module';
-import { MparqEntradaModule } from './mparqEntrada/mparqEntrada.module';
-import { MparqSalidaModule } from './mparqSalida/mparqSalida.module';
-import { MparqPatioModule } from './mparqPatio/mparqPatio.module';
 
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
@@ -200,8 +203,6 @@ import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonari
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
 
 import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
-
-
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
@@ -216,8 +217,11 @@ import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module'
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+
+import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
 import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
+import { BpCdpModule } from './bpCdp/bpCdp.module';
 
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
@@ -269,7 +273,6 @@ import {RightsidebarComponent} from '../shared';
       CfgAsignacionPlacaSedeModule,
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
-      
       SvCapacitacionModule,
       SvCfgFuncionModule,
       SvCfgFuncionCriterioModule,
@@ -313,7 +316,6 @@ import {RightsidebarComponent} from '../shared';
       SvCfgVisualModule,
       SvCfgVisualDisminuidaModule,
       SvCfgZonaModule,
-
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
@@ -324,12 +326,11 @@ import {RightsidebarComponent} from '../shared';
       GdCfgMedioCorrespondenciaModule,
       MflInfraccionModule,
       MflInfraccionCategoriaModule,
+      PqoCfgPatioModule,
+      PqoCfgGruaModule,
+      PqoGruaCiudadanoModule,
+      PqoInmovilizacionModule,
       MparqCostoTrayectoModule,
-      MparqGruaModule,
-      MparqGruaCiudadanoModule,
-      MparqEntradaModule,
-      MparqSalidaModule,
-      MparqPatioModule,
       CfgCargoModule,
       MpersonalFuncionarioModule,
       MpersonalTipoContratoModule,
@@ -351,6 +352,9 @@ import {RightsidebarComponent} from '../shared';
       SvCfgSenialProveedorModule,
       SvCfgSenialModule,
       SvSenialInventarioModule,
+      CvCdoTrazabilidadModule,
+      CvCdoNotificacionModule,
+      CvCdoCfgInteresModule,
       CvLcCfgMotivoModule,
       CvLcCfgRestriccionModule,
       CvCfgInteresModule,
@@ -422,7 +426,9 @@ import {RightsidebarComponent} from '../shared';
       RnaPreasignacionInsumoModule,
       CvCfgTipoMedidaCautelarModule,
       CvMedidaCautelarModule,
+      BpCfgTipoInsumoModule,
       BpProyectoModule,
+      BpCdpModule,
       RnrsPreasignacionPlacaModule,
       EmpresaAlcaldiaModule,
       FroRecaudoModule

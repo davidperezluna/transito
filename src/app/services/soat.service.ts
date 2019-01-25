@@ -6,7 +6,7 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class SoatService {
-    private url = environment.apiUrl + 'vehiculo/soat';
+    private url = environment.apiUrl + 'vehiculo/vhlosoat';
     public identity;
     public token;
 

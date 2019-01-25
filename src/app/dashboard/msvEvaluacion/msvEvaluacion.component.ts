@@ -19,8 +19,8 @@ export class MsvEvaluacionComponent implements OnInit {
   @Output() msvCategoria;  
   public errorMessage;
   public id;
-	public respuesta;
-	public msvEvaluaciones;
+  public msvEvaluaciones;
+  public respuesta;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
@@ -35,7 +35,7 @@ export class MsvEvaluacionComponent implements OnInit {
   public nit:any; 
   public empresas:any;
   public miEmpresa:Empresa;
-  public revisiones:any = false;
+  public revisiones: any;
   public msvEvaluacion: MsvEvaluacion;
   public msvCategorias:any;
   public resumen = {};     public datos = {'parametro': null,
@@ -169,7 +169,7 @@ export class MsvEvaluacionComponent implements OnInit {
   }
 
   onKeyValidateEvaluacion(){
-    this.revisiones =[];
+    
     swal({
       title: 'Buscando Empresa!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -190,8 +190,7 @@ export class MsvEvaluacionComponent implements OnInit {
 
     this._EmpresaService.showNitOrNombre(token,this.datos).subscribe(
       response => {
-        //console.log(response.data);
-        if (response.code == 200 ) {
+        if (response.status == 'success' ) {
           this.msj = response.msj;
           this.isError = false;
           this.miEmpresa = response.data;
@@ -199,16 +198,16 @@ export class MsvEvaluacionComponent implements OnInit {
 
           this._RevisionService.showRevision(token, this.miEmpresa.id).subscribe(
             response => {
-              if (response.code == 200 ) {
+              if (response.status == 'success' ) {
                 this.msj = response.msj;
                 this.isError = false;
-                this.revisiones=response.data;                 
+                this.revisiones = response.data;                 
                 this.isExist = true;
                 swal.close();        
               }
               //si no existe revision coloca en true la variable para mostrar mensaje
               if(this.revisiones == false){
-              this.revisionMensaje = true;
+                this.revisionMensaje = true;
                 }        
             error => { 
                 this.errorMessage = <any>error;
@@ -264,11 +263,9 @@ export class MsvEvaluacionComponent implements OnInit {
       }
     })
     let token = this._loginService.getToken();
-    console.log(this.miEmpresa.id);
     
     this._RevisionService.showRevision(token,this.miEmpresa.id).subscribe(
       response => {
-        console.log(response.data);
         if (response.code == 200 ) {
           this.msj = response.msj;
           this.isError = false;

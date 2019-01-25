@@ -9,18 +9,19 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public bpProyecto: BpProyecto;
-public errorMessage;
-public respuesta;
+  @Output() ready = new EventEmitter<any>();
+  @Output() onShow = new EventEmitter<any>();
+  public proyecto: BpProyecto;
+  public errorMessage;
+  public respuesta;
 
 constructor(
-  private _CargoService: BpProyectoService,
+  private _ProyectoService: BpProyectoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.bpProyecto = new BpProyecto(null, null,null,null,null,null,null);
+    this.proyecto = new BpProyecto(null, null, null, null, null, null);
   }
   
   onCancelar(){
@@ -30,7 +31,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._CargoService.register(this.bpProyecto,token).subscribe(
+		this._ProyectoService.register(this.proyecto,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -39,7 +40,9 @@ constructor(
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+
+          this.onShow.emit(response.data);
         }else{
           swal({
             title: 'Error!',

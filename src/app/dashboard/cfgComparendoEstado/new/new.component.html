@@ -13,6 +13,23 @@
                             <label>Nombre <strong class="text-danger">*</strong></label>
                             <input class="form-control text-uppercase" [(ngModel)]="estado.nombre" name="nombre" type="text" required />
                         </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Sigla <strong class="text-danger">*</strong></label>
+                            <input class="form-control text-uppercase" [(ngModel)]="estado.sigla" name="sigla" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Formato <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="formatos" [(ngModel)]="estado.idFormato" name="idFormato" required>
+                            </ng-select>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="estado.actualiza" class="custom-control-input" id="actualiza" name="actualiza" checked="">
+                                    <label class="custom-control-label" for="actualiza">Actualiza comparendo</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

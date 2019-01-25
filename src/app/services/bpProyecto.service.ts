@@ -21,7 +21,7 @@ export class BpProyectoService {
 
 	register(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;	
+		let params = "data=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers }).map(
 			res => res.json(),
@@ -31,7 +31,7 @@ export class BpProyectoService {
 
 	delete(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;	
+		let params = "data=" + json + "&authorization=" + token;	
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers }).map(
 			res => res.json()
@@ -47,7 +47,7 @@ export class BpProyectoService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
 			res => res.json(),
@@ -57,5 +57,19 @@ export class BpProyectoService {
 
 	select() {
 		return this._http.get(this.url + "/select").map(res => res.json());
+	}
+
+	searchActividades(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/actividades", params, { headers: headers }).map(res => res.json());
+	}
+
+	searchByNumero(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/numero", params, { headers: headers }).map(res => res.json());
 	}
 }

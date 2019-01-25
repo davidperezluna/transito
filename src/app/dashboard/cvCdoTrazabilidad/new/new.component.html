@@ -1,0 +1,44 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-5">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase"><b>Nueva trazabilidad</b></h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Fecha <strong class="text-danger">*</strong></label>
+                            <input type="date" class="form-control text-uppercase" [(ngModel)]="trazabilidad.fecha" name="fecha" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Observaciones </label>
+                            <textarea  class="form-control" [(ngModel)]="trazabilidad.observaciones" name="observaciones" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Estado <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="estados" [(ngModel)]="trazabilidad.idComparendoEstado" name="idComparendoEstado" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

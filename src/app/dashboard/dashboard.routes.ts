@@ -25,6 +25,10 @@ import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.rout
 import { CfgAdmFormatoRoutes } from './cfgAdmFormato/cfgAdmFormato.routes';
 import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.routes';
 
+import { CvCdoTrazabilidadRoutes } from './cvCdoTrazabilidad/cvCdoTrazabilidad.routes';
+import { CvCdoNotificacionRoutes } from './cvCdoNotificacion/cvCdoNotificacion.routes';
+import { CvCdoCfgInteresRoutes } from './cvCdoCfgInteres/cvCdoCfgInteres.routes';
+
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
 import { CvLcCfgRestriccionRoutes } from './cvLcCfgRestriccion/cvLcCfgRestriccion.routes';
 import { CvCfgInteresRoutes } from './cvCfgInteres/cvCfgInteres.routes';
@@ -137,12 +141,11 @@ import { GdCfgMedioCorrespondenciaRoutes } from './gdCfgMedioCorrespondencia/gdC
 import { MflInfraccionRoutes } from './mflInfraccion/mflInfraccion.routes';
 import { MflInfraccionCategoriaRoutes } from './mflInfraccionCategoria/mflInfraccionCategoria.routes';
 
+import { PqoCfgPatioRoutes } from './pqoCfgPatio/pqoCfgPatio.routes';
+import { PqoCfgGruaRoutes } from './pqoCfgGrua/pqoCfgGrua.routes';
+import { PqoGruaCiudadanoRoutes } from './pqoGruaCiudadano/pqoGruaCiudadano.routes';
+import { PqoInmovilizacionRoutes } from './pqoInmovilizacion/pqoInmovilizacion.routes';
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
-import { MparqGruaRoutes } from './mparqGrua/mparqGrua.routes';
-import { MparqGruaCiudadanoRoutes } from './mparqGruaCiudadano/mparqGruaCiudadano.routes';
-import { MparqEntradaRoutes } from './mparqEntrada/mparqEntrada.routes';
-import { MparqSalidaRoutes } from './mparqSalida/mparqSalida.routes';
-import { MparqPatioRoutes } from './mparqPatio/mparqPatio.routes';
 
 import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
@@ -210,8 +213,12 @@ import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
 import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.routes';
+
+import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
 import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
+import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
+
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -263,12 +270,11 @@ export const DashboardRoutes: Route[] = [
       ...GdCfgMedioCorrespondenciaRoutes,
       ...MflInfraccionRoutes,
       ...MflInfraccionCategoriaRoutes,
+      ...PqoCfgPatioRoutes,
+      ...PqoCfgGruaRoutes,
+      ...PqoGruaCiudadanoRoutes,
+      ...PqoInmovilizacionRoutes,
       ...MparqCostoTrayectoRoutes,
-      ...MparqGruaRoutes,
-      ...MparqEntradaRoutes,
-      ...MparqSalidaRoutes,
-      ...MparqPatioRoutes,
-      ...MparqGruaCiudadanoRoutes,
       ...CfgCargoRoutes,
       ...MpersonalFuncionarioRoutes,
       ...MpersonalTipoContratoRoutes,
@@ -284,6 +290,9 @@ export const DashboardRoutes: Route[] = [
       ...ComparendoRoutes,
       ...CfgAdmFormatoRoutes,
       ...CfgAdmFormatoTipoRoutes,
+      ...CvCdoTrazabilidadRoutes,
+      ...CvCdoNotificacionRoutes,
+      ...CvCdoCfgInteresRoutes,
       ...CvLcCfgMotivoRoutes,
       ...CvLcCfgRestriccionRoutes,
       ...CvCfgInteresRoutes,
@@ -410,7 +419,9 @@ export const DashboardRoutes: Route[] = [
       ...RnaCertificadoTradicionRoutes,
       ...CvCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,
+      ...BpCfgTipoInsumoRoutes,
       ...BpProyectoRoutes,
+      ...BpCdpRoutes,
       ...RnrsPreasignacionPlacaRoutes,
       ...EmpresaAlcaldiaRoutes,
       ...FroRecaudoRoutes,
