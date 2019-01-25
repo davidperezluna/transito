@@ -40,11 +40,13 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Función Seguridad Vial <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" (ngModelChange)="obtenerFuncionCriterioPorFuncion($event)" required name="funcion"></ng-select>
+                        <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" (ngModelChange)="obtenerFuncionCriterioPorFuncion($event)"
+                            required name="idFuncion">
+                        </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Clase Actividad <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="funcionesCriterios" [(ngModel)]="funcionCriterioSelected" required name="funcionCriterio"></ng-select>
+                        <ng-select [multiple]="false" [options]="funcionesCriterios" [(ngModel)]="funcionCriterioSelected" required name="idFuncionCriterio"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Tema Capacitacion <strong class="text-danger">*</strong></label>
