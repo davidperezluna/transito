@@ -217,6 +217,7 @@ import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
+import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
 
@@ -423,7 +424,8 @@ import {RightsidebarComponent} from '../shared';
       CvMedidaCautelarModule,
       BpProyectoModule,
       RnrsPreasignacionPlacaModule,
-      EmpresaAlcaldiaModule
+      EmpresaAlcaldiaModule,
+      FroRecaudoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
