@@ -169,6 +169,7 @@ export class NewRnaComponent implements OnInit {
           if (active) {
             this.isTramites = false;
           }
+
           swal.close();
           if (this.tramiteSolicitud.solicitanteId) {
             this._ciudadanoVehiculoService.showCiudadanoVehiculo(token, this.tramiteSolicitud.solicitanteId).subscribe(
@@ -195,6 +196,7 @@ export class NewRnaComponent implements OnInit {
               } */
             else {
               this.factura = false;
+              
               swal({
                 title: 'Error!',
                 text: 'Seleccionar solicitante',

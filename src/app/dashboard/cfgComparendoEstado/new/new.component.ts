@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { CfgComparendoEstado } from '../cfgComparendoEstado.modelo';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { CfgAdmFormatoService } from '../../../services/cfgAdmFormato.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -12,15 +13,31 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public estado: CfgComparendoEstado;
 public errorMessage;
-public respuesta;
+public formatos;
 
 constructor(
   private _EstadoService: CfgComparendoEstadoService,
+  private _FormatoService: CfgAdmFormatoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.estado = new CfgComparendoEstado(null, null, null);
+    this.estado = new CfgComparendoEstado(null, null, null, null, null);
+
+
+    this._FormatoService.select().subscribe(
+      response => {
+        this.formatos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
   
   onCancelar(){

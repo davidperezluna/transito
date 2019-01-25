@@ -70,7 +70,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
 			'numeroIdentificacion' : this.ciudadanoId,
         };
         
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
             response => {
                 if(response.status == 'success'){
                     this.ciudadano = response.data;

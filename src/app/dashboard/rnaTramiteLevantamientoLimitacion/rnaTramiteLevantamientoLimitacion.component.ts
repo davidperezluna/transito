@@ -49,7 +49,8 @@ export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
         result.dismiss === swal.DismissReason.timer
       ) {
       }
-    })
+    });
+
     let datos = {
       'moduloId': 2,
     };
@@ -99,7 +100,15 @@ export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
     }
   }
 
-  onKeyPlaca() {
+  onSearchByPlaca() {
+    swal({
+      title: 'Buscando vehiculo!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._loginService.getToken();
     let datos = {
       'placa': this.placa,
@@ -114,6 +123,7 @@ export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
           this._VehiculoLimitacionService.getTramiteLimitacionPlaca(datos, token).subscribe(
             response => {
               this.respuesta = response;
+              swal.close();
               if (this.respuesta.status == 'success') {
                 this.limitacionesVehiculo = this.respuesta.data;
                 this.limitacionVehiculoEncontrada = 2;

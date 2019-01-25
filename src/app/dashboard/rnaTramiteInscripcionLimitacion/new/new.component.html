@@ -14,12 +14,12 @@
 
                         <!--placas vehiculos -->
                         <div class="col-xs-8 col-lg-6">
-                            <label>Placas</label>
+                            <label>Placa</label>
                             <div class="input-group" [class.has-success]="placaEncontrada === 2" [class.has-danger]="placaEncontrada === 3">
-                                <input type="text" class="form-control" placeholder="placa" [(ngModel)]="placa" name="placa" required />
+                                <input type="text" class="form-control text-uppercase" placeholder="placa" [(ngModel)]="placa" name="placa" required />
                                 <span class="input-group-btn">
-                                    <button (click)="onKeyPlaca()" [class.btn-default]="placaEncontrada === 1" [class.btn-success]="placaEncontrada === 2" [class.btn-danger]="placaEncontrada === 3"
-                                        class="btn" ngxclipboard="" type="button">
+                                    <button (click)="onSearchByPlaca()" [class.btn-default]="placaEncontrada === 1" [class.btn-success]="placaEncontrada === 2" [class.btn-danger]="placaEncontrada === 3"
+                                        class="btn"  type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -80,8 +80,14 @@
                                 </table>
                                 <div class="container">
                                     <br>
-                                    <button (click)="btnNewVehiculo()" class="btn btn-primary pull-right">Agregar</button>
-                                    <button (click)="btnCancelarVehiculo()" class="btn btn-default">Cancelar</button>
+                                    <button (click)="btnNewVehiculo()" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Agregar
+                                    </button>
+                                    <button (click)="btnCancelarVehiculo()" class="btn btn-default">
+                                        <i class="fa fa-times"></i>
+                                        Cancelar
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -196,8 +202,14 @@
                                 </table>
                                 <div class="container">
                                     <br>
-                                    <button (click)="btnNewDemandado()" class="btn btn-primary pull-right">Agregar</button>
-                                    <button (click)="btnCancelarDemandado()" class="btn btn-default">Cancelar</button>
+                                    <button (click)="btnNewDemandado()" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Agregar
+                                    </button>
+                                    <button (click)="btnCancelarDemandado()" class="btn btn-default">
+                                        <i class="fa fa-times"></i>
+                                        Cancelar
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -290,8 +302,14 @@
                                 </table>
                                 <div class="container">
                                     <br>
-                                    <button (click)="btnNewDemandante()" class="btn btn-primary pull-right">Agregar</button>
-                                    <button (click)="btnCancelarDemandante()" class="btn btn-default">Cancelar</button>
+                                    <button (click)="btnNewDemandante()" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Agregar
+                                    </button>
+                                    <button (click)="btnCancelarDemandante()" class="btn btn-default">
+                                        <i class="fa fa-times"></i>
+                                        Cancelar
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -347,10 +365,9 @@
                             </ng-select>
                         </div>
 
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-xs-12 col-lg-12">
                             <label>Observaciones</label>
-                            <textarea class="form-control" [(ngModel)]="rnaTramiteInscripcionLimitacion.observaciones" name="observaciones" placeholder="Aqui puede ingresar las observaciones"
-                                required></textarea>
+                            <textarea class="form-control" [(ngModel)]="rnaTramiteInscripcionLimitacion.observaciones" name="observaciones" placeholder="Aqui puede ingresar las observaciones" rows="4" required></textarea>
                         </div>
 
 

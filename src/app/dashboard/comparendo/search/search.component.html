@@ -117,7 +117,10 @@
                             </td>
                             <td>
                                 <span *ngIf="trazabilidad.actoAdministrativo">
-                                    {{ trazabilidad.actoAdministrativo.numero }}
+                                    <a href="{{ apiUrl }}/configuracion/cfgadmactoadministrativo/{{ trazabilidad.id }}/pdf" class="btn btn-success" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        {{ trazabilidad.actoAdministrativo.numero }}
+                                    </a>
                                     <br>
                                      {{ trazabilidad.actoAdministrativo.fecha }}
                                 </span>
