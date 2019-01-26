@@ -135,15 +135,6 @@
                         <label>Correo <span class="text-danger">*</span></label>
                         <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correo" type="email" required>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Password</label>
-                        <input class="form-control" [(ngModel)]="ciudadano.password" name="password" type="text" required>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Rol *</label>
-                        <ng-select [multiple]="false" [options]="roles" [(ngModel)]="ciudadano.idRole" name="role" required >
-                        </ng-select>
-                    </div>
                 </div>   
         </div>
         </form>

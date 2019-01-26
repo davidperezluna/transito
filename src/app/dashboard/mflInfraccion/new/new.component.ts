@@ -24,7 +24,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.infraccion = new MflInfraccion(null, null, null, null, null);
+    this.infraccion = new MflInfraccion(null, null, null, null, null, null, null, null);
 
     this._InfraccionCategoriaService.select().subscribe(
       response => {

@@ -216,6 +216,7 @@ import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.rout
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
+import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
 import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
 
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
@@ -422,7 +423,8 @@ export const DashboardRoutes: Route[] = [
       ...BpProyectoRoutes,
       ...BpCdpRoutes,
       ...RnrsPreasignacionPlacaRoutes,
-      ...EmpresaAlcaldiaRoutes
+      ...EmpresaAlcaldiaRoutes,
+      ...FroRecaudoRoutes,
     ]
   }
 ];

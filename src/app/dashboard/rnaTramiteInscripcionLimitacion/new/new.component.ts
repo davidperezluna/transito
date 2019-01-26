@@ -24,7 +24,6 @@ export class NewComponent implements OnInit {
   public rnaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
   public vehiculoLimitacion: any;
   public errorMessage;
-  public respuesta;
   public ciudadanoDemandado: any;
   public ciudadanoDemandadoEncontrado = 1;
   public ciudadanoDemandante: any;
@@ -122,19 +121,6 @@ export class NewComponent implements OnInit {
       }
     );
 
-    // this._MunicipioService.getMunicipioSelect().subscribe(
-    //   response => {
-    //     this.municipios = response;
-    //   },
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if (this.errorMessage != null) {
-    //       console.log(this.errorMessage);
-    //       alert("Error en la petición");
-    //     }
-    //   }
-    // );
     this._DepartamentoService.getDepartamentoSelect().subscribe(
       response => {
         this.departamentos = response;
@@ -217,9 +203,7 @@ export class NewComponent implements OnInit {
     ]
     this._TramiteInscripcionLimitacionService.register(data, token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -257,17 +241,27 @@ export class NewComponent implements OnInit {
     this.verSeleccion = this.opcionSeleccionado;
   }
 
-  onKeyPlaca() {
+  onSearchByPlaca() {
+    swal({
+      title: 'Buscando vehiculo!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._loginService.getToken();
+
     let datos = {
       'placa': this.placa,
       'moduloId': 2,
     };
+
     this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.vehiculo = this.respuesta.data;
+        swal.close();
+        if (response.status == 'success') {
+          this.vehiculo = response.data;
           this.placaEncontrada = 2;
         } else {
           this.placaEncontrada = 3;
@@ -285,14 +279,15 @@ export class NewComponent implements OnInit {
 
   onKeyCiudadanoDemandado() {
     let token = this._loginService.getToken();
+
     let identificacion = {
       'numeroIdentificacion': this.identificacionDemandado,
     };
+
     this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.ciudadanoDemandado = this.respuesta.data;
+        if (response.status == 'success') {
+          this.ciudadanoDemandado = response.data;
           this.ciudadanoDemandadoEncontrado = 2;
           console.log(this.ciudadanoDemandado);
         } else {
@@ -311,14 +306,15 @@ export class NewComponent implements OnInit {
 
   onKeyCiudadanoDemandante() {
     let token = this._loginService.getToken();
+
     let identificacion = {
       'numeroIdentificacion': this.identificacionDemandante,
     };
+
     this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.ciudadanoDemandante = this.respuesta.data;
+        if (response.status == 'success') {
+          this.ciudadanoDemandante = response.data;
           this.ciudadanoDemandanteEncontrado = 2;
         } else {
           this.ciudadanoDemandanteEncontrado = 3;

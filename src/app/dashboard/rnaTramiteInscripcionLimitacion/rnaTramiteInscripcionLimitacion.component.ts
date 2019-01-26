@@ -50,8 +50,6 @@ export class RnaTramiteInscripcionLimitacionComponent implements OnInit {
     this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
       response => {
         if (response) {
-
-          console.log(response);
           this.tramitesInscripcion = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
