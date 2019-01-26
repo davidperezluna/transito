@@ -64,14 +64,11 @@ export class NewRnaCambioGasComponent implements OnInit {
         this._CombustibleService.getCombustible().subscribe(
             response => {
                 this.combustibles = response; 
-                console.log(this.combustibles);
                 this.combustibles.data.forEach(element => { 
                     if(element.id == 4 ){
                         this.datos.idCombustibleCambio = element.id;
-                        this.datos.idVehiculo = this.vehiculo1.id;
-                        
-                        
-                    }                  
+                        console.log(this.datos.idCombustibleCambio);
+                    }
                 });
                 error => {
                         this.errorMessage = <any>error;
@@ -83,23 +80,37 @@ export class NewRnaCambioGasComponent implements OnInit {
                     }
             }
         );
+
+        this.datos.idFactura = this.factura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.tramiteFormulario = 'rna-cambiogas';
+        this.datos.campos = ['gas'];
         this._VehiculoService.update(this.datos,token).subscribe(
             response => {
                 if(response.status == 'success'){
-                    this.datos.idFactura = this.factura.id;
-                    this.datos.tramiteFormulario = 'rna-cambiogas';
-                    this.datos.campos = ['gas'];
-                    this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                    let resumen = {
+                        'Anterior': this.vehiculo.combustible,
+                        'Nuevo': this.datos.idCombustibleCambio,
+                    };
+                    this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
                 }
                 error => {
-                        this.errorMessage = <any>error;
-    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
+                }
             });
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

@@ -4,20 +4,20 @@
           <div class="card-body">
              <h5 class="m-0">Evaluación</h5>
              <hr>
-             <div class="row text-center text-uppercase">
-                <div class="col-lg-2" style="border:1px solid #cccccc;">Parámetro-Definición</div>
+             <div class="row text-center text-uppercase" style="vertical-align:middle; line-height:normal;">
+                <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Parámetro-Definición</b></div>
                 <div class="col-lg-10" style="border:1px solid #cccccc;">
                     <div class="row">
-                        <div class="col-lg-3">Variables</div>
+                        <div class="col-lg-3"><b>Variables</b></div>
                         <div class="col-lg-9">
                             <div class="row">
-                                <div class="col-lg-2" style="border:1px solid #cccccc;">Criterio de aval</div>
-                                <div class="col-lg-1" style="border:1px solid #cccccc;">Aplica</div>
-                                <div class="col-lg-1" style="border:1px solid #cccccc;">Evidencias de su existencia</div>
-                                <div class="col-lg-1" style="border:1px solid #cccccc;">Responde a los requerimientos</div>
-                                <div class="col-lg-1" style="border:1px solid #cccccc;">Valor de la variable</div>
-                                <div class="col-lg-1" style="border:1px solid #cccccc;">Valor obtenido</div>
-                                <div class="col-lg-4" style="border:1px solid #cccccc;">Observaciones</div>
+                                <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Criterio de aval</b></div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Aplica</b></div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Evidencias de su existencia</b></div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Responde a los requerimientos</b></div>
+                                <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Valor de la variable</b></div>
+                                <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Valor obtenido</b></div>
+                                <div class="col-lg-4" style="border:1px solid #cccccc;"><b>Observaciones</b></div>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
             <div class="row" *ngFor="let msvParametro of msvParametros; let i=index">
                 <div class="col-lg-12" style="border:1px solid #cccccc;">
                     <div class="row">
-                        <div class="col-lg-2" style="border:1px solid #cccccc; width:100px; height:100px; overflow-y:auto;">{{ msvParametro.name }}</div>
+                        <div class="col-lg-2" style="border:1px solid #cccccc; overflow-y:auto; text-align:center; vertical-align:middle;">{{ msvParametro.name }}</div>
                         <div class="col-lg-10" style="border:1px solid #cccccc;">
                             <div class="row" *ngFor="let msvVariable of msvParametro.variables; let i=index">
                                 <div class="col-lg-3" style="border:1px solid #cccccc;">{{ msvVariable.name }}</div>
@@ -40,9 +40,9 @@
                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox" [(ngModel)]="msvCriterio.evidencia"></div>
                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox" [(ngModel)]="msvCriterio.responde"></div>
                                         <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor /msvParametro.numeroVariables}}</div>
-                                        <div class="col-lg-1" style="border:1px solid #cccccc;"><label *ngIf="msvCriterio.responde == true">{{msvParametro.valor /msvParametro.numeroVariables}}</label>
+                                        <div class="col-lg-2" style="border:1px solid #cccccc;"><label *ngIf="msvCriterio.responde == true">{{msvParametro.valor /msvParametro.numeroVariables}}</label>
                                         <label *ngIf="msvCriterio.responde == false">0</label></div>                                        
-                                        <div class="col-lg-4" style="border:1px solid #cccccc;"><input type="text" size="4%" [(ngModel)]="msvCriterio.observacion"></div>                                      
+                                        <div class="col-lg-4" style="border:1px solid #cccccc; overflow: inherit;"><input type="text" style="width: 100%;" [(ngModel)]="msvCriterio.observacion"></div>                                      
                                     </div>
                                 </div> 
                             </div>

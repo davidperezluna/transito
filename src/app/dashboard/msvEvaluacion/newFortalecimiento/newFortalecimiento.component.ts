@@ -11,8 +11,10 @@ declare var $: any;
   templateUrl: './newFortalecimiento.component.html'
 })
 export class NewFortalecimientoComponent implements OnInit {
+  @Output() ready = new EventEmitter<any>();
   @Input() msvCategoriaId;
   @Input() miEmpresa: any = null;
+  public errorMessage;
   public msj = '';
   public showT = false;
   public msvParametros;  
@@ -53,8 +55,33 @@ export class NewFortalecimientoComponent implements OnInit {
   }
 
   onEnviar() {
-    console.log(this.msvParametros);
     let token = this._loginService.getToken();
-    this._MsvCalificacionService.newCalificacion(token,this.msvParametros,this.miEmpresa.id).subscribe();
+    this._MsvCalificacionService.newCalificacion(token,this.msvParametros,this.miEmpresa.id).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.ready.emit(true);
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
   }
 }
