@@ -4,6 +4,7 @@ import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.se
 import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
+import { MunicipioService } from '../../../services/municipio.service';
 import { LoginService } from '../../../services/login.service';
 import { SvSenialUbicacion } from './newSenialUbicacion.modelo';
 import swal from 'sweetalert2';
@@ -17,8 +18,7 @@ declare var google: any;
 })
 export class NewSenialUbicacionComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() idMunicipio: any = null;
-    @Input() idTipoSenial: any = null;
+    @Input() datos: any = null;
     
     public file: any = new FormData();
 
@@ -34,6 +34,7 @@ export class NewSenialUbicacionComponent implements OnInit {
     public estados: any;
     
     public senial: any = null;
+    public municipio: any = null;
 
     public formEdit = false;
     public formIndex = true;
@@ -44,6 +45,7 @@ export class NewSenialUbicacionComponent implements OnInit {
         private _SenialService: SvCfgSenialService,
         private _ConectorService: SvCfgSenialConectorService,
         private _EstadoService: SvCfgSenialEstadoService,
+        private _MunicipioService: MunicipioService,
         private _LoginService: LoginService,
     ) {
         this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null);
@@ -55,7 +57,9 @@ export class NewSenialUbicacionComponent implements OnInit {
         });
      }
 
-    ngOnInit() {   
+    ngOnInit() {
+        console.log(this.datos);
+        
         //this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null);
         this._ConectorService.select().subscribe(
             response => {
@@ -87,9 +91,23 @@ export class NewSenialUbicacionComponent implements OnInit {
 
         let token = this._LoginService.getToken();
 
-        this._SenialService.selectByTipo({ 'idTipoSenial': this.idTipoSenial }, token).subscribe(
+        this._SenialService.selectByTipo({ 'idTipoSenial': this.datos.idTipoSenial }, token).subscribe(
             response => {
                 this.seniales = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
+        this._MunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
+            response => {
+                this.municipio = response.data;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -250,7 +268,7 @@ export class NewSenialUbicacionComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
-        this.senialUbicacion.idMunicipio = this.idMunicipio;
+        this.senialUbicacion.idMunicipio = this.municipio.id;
 
         if (document.getElementsByName("latitud")[0]['value'] != '') {
             this.senialUbicacion.latitud = document.getElementsByName("latitud")[0]['value'];

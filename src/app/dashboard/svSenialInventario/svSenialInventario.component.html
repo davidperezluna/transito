@@ -178,7 +178,7 @@
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-8" *ngIf='formNewMunicipio'><!-- .col -->
-      <app-new-senial-municipio [idMunicipio]="datos.idMunicipio" [idTipoSenial]="datos.idTipoSenial" (ready)="ready($event)"></app-new-senial-municipio>
+      <app-new-senial-municipio [datos]="datos" (ready)="ready($event)"></app-new-senial-municipio>
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-8" *ngIf='formNewBodega'><!-- .col -->
