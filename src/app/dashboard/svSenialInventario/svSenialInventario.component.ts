@@ -25,6 +25,7 @@ export class SvSenialInventarioComponent implements OnInit {
     public table: any = null;
     
     public municipios: any = null;
+    public municipio: any = null;
 
     public tiposSenial: any;
 
@@ -49,7 +50,7 @@ export class SvSenialInventarioComponent implements OnInit {
     };
     
     constructor(
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
         private _SenialInventarioService: SvSenialInventarioService,
         private _BodegaService : CfgBodegaService,
         private _MunicipioService : MunicipioService,
@@ -107,6 +108,30 @@ export class SvSenialInventarioComponent implements OnInit {
         }
     }
 
+    onChangedMunicipio(e) {
+        if (e) {
+            let token = this._LoginService.getToken();
+
+            this._MunicipioService.showMunicipio(token, e).subscribe(
+                response => {
+                    this.datos.idMunicipio = response.data.id;
+                    console.log(this.datos);
+                    
+                    this.municipio = response.data;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        }
+
+    }
+
     onSearch(){
         swal({
             title: 'Buscando registros!',
@@ -122,7 +147,7 @@ export class SvSenialInventarioComponent implements OnInit {
         this.formNewBodega = false;
         this.formNewMunicipio = false;
         
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         if (this.datos.tipoDestino == 'BODEGA') {
             this.datos.idMunicipio = null;

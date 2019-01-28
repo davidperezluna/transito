@@ -272,6 +272,13 @@ export class NewSenialUbicacionComponent implements OnInit {
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+                }else{
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
