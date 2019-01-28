@@ -214,13 +214,13 @@ import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
 import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.routes';
-import { FroFacturaRoutes } from './froFactura/froFactura.routes';
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
-import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
 import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
 
+import { FroFacturaRoutes } from './froFactura/froFactura.routes';
+import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -427,8 +427,8 @@ export const DashboardRoutes: Route[] = [
       ...BpCdpRoutes,
       ...RnrsPreasignacionPlacaRoutes,
       ...EmpresaAlcaldiaRoutes,
-      ...FroRecaudoRoutes,
       ...FroFacturaRoutes,
+      ...FroRecaudoRoutes,
       
     ]
   }

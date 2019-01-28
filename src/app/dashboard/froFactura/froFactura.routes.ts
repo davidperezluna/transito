@@ -3,7 +3,7 @@ import { FroFacturaComponent } from '.';
 
 export const FroFacturaRoutes: Route[] = [
     {
-    path: 'froFactura',
+      path: 'froFactura',
       component: FroFacturaComponent
     }
 ];

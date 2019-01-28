@@ -105,9 +105,16 @@ export class FroFacturaComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
+  onNew() {
+    this.formNew = true;
+    this.formIndex = false;
+    this.formSearch = false;
+    this.table.destroy();
+  }
   
-  onNew(){
-    let identity = this._loginService.getIdentity();
+ 
+    /*let identity = this._loginService.getIdentity();
     let token = this._loginService.getToken();
       
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion },token).subscribe(
@@ -126,8 +133,7 @@ export class FroFacturaComponent implements OnInit {
             alert('Error en la petición');
           }
         }
-    });
-  }
+    });*/
 
   ready(isCreado:any){
     if(isCreado) {

@@ -218,11 +218,13 @@ import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module'
 import { ReporteModule } from './reporte/reporte.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
-import { FroFacturaModule } from './froFactura/froFactura.module';
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
+
+import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
+
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
@@ -434,8 +436,8 @@ import {RightsidebarComponent} from '../shared';
       BpCdpModule,
       RnrsPreasignacionPlacaModule,
       EmpresaAlcaldiaModule,
-      FroRecaudoModule,
-      FroFacturaModule
+      FroFacturaModule,
+      FroRecaudoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

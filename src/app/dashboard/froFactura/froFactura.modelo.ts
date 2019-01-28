@@ -1,12 +1,8 @@
-export class CvAcuerdoPago{
+export class FroFactura{
 	constructor(
-		public fecha: string,
-		public numeroCuotas: number,
-		public valorCapital: number,
-		public valorCuotaInicial: number,
-		public comparendos: string,
-		public idPorcentajeInicial: number,
-		public idInteres: number,
+		public valor: number,
+		public comparendos: number,
+		public idSedeOperativa: number,
 		public id: number
 	){}
 }

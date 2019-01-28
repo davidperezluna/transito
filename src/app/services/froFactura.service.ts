@@ -24,8 +24,7 @@ export class FroFacturaService {
 							  .map(res => res.json());
 	}
 
-	imprimir(factura,token){
-		
+	imprimir(factura, token){
 		let json = JSON.stringify(factura);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -83,6 +82,13 @@ export class FroFacturaService {
 		let params = 'json=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + '/search/numero', params, { headers: headers }).map(res => res.json());
+	}
+
+	calculateValue(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/calculate/value", params, { headers: headers }).map(res => res.json());
 	}
 	
 }
