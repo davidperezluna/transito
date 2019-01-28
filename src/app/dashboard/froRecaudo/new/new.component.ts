@@ -51,6 +51,32 @@ export class NewComponent implements OnInit {
         this.ready.emit(true);
     }
 
+    onSearchFactura() {
+        let token = this._loginService.getToken();
+        let datos = {
+            'numeroFactura': this.numFactura
+        }
+
+        this._FroFacturaServiceService.searchByNumero(token, datos).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.disabled = false;
+                    this.froFactura = response.data;
+                } else {
+                    this.disabled = false;
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+    }
+
     onEnviar() {
         let token = this._loginService.getToken();
         this.froRecaudo.IdSedeOperativa = this.sedeOperativaSelected;
@@ -80,31 +106,6 @@ export class NewComponent implements OnInit {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
                     }
-                }
-            }
-        );
-    }
-    buscarFactura(){
-        let token = this._loginService.getToken();
-        let datos = {
-            'numeroFactura':this.numFactura
-        }
-
-        this._FroFacturaServiceService.searchByNumero(token,datos).subscribe(
-            response => {
-                if (response.status == 'success') {
-                    this.disabled = false;
-                    this.froFactura = response.data;
-                }else{
-                    this.disabled = false;
-                }
-            }, 
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
                 }
             }
         );

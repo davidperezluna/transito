@@ -45,6 +45,7 @@ import { SvSenialInventarioModule } from './svSenialInventario/svSenialInventari
 import { CvCdoTrazabilidadModule } from './cvCdoTrazabilidad/cvCdoTrazabilidad.module';
 import { CvCdoNotificacionModule } from './cvCdoNotificacion/cvCdoNotificacion.module';
 import { CvCdoCfgInteresModule } from './cvCdoCfgInteres/cvCdoCfgInteres.module';
+import { CvAudienciaModule } from './cvAudiencia/cvAudiencia.module';
 
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvLcCfgRestriccionModule } from './cvLcCfgRestriccion/cvLcCfgRestriccion.module';
@@ -220,7 +221,10 @@ import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionO
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
+
+import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
+
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
@@ -355,6 +359,7 @@ import {RightsidebarComponent} from '../shared';
       CvCdoTrazabilidadModule,
       CvCdoNotificacionModule,
       CvCdoCfgInteresModule,
+      CvAudienciaModule,
       CvLcCfgMotivoModule,
       CvLcCfgRestriccionModule,
       CvCfgInteresModule,
@@ -431,6 +436,7 @@ import {RightsidebarComponent} from '../shared';
       BpCdpModule,
       RnrsPreasignacionPlacaModule,
       EmpresaAlcaldiaModule,
+      FroFacturaModule,
       FroRecaudoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

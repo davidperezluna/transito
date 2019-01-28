@@ -22,7 +22,7 @@
               <div class="col-xs-12 col-lg-12" *ngIf="municipios && datos.tipoDestino == 'MUNICIPIO'">
                 <div class="form-group">
                   <label>Municipio:</label><br>
-                  <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="datos.idMunicipio" name="municipio" required>
+                  <ng-select (ngModelChange)="onChangedMunicipio($event)"  [multiple]="false" [options]="municipios" [(ngModel)]="datos.idMunicipio" name="municipio" required>
                   </ng-select>
                 </div>
               </div>
@@ -98,7 +98,7 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ senial.cantidad }}</td>
                 <td>
-                  <button (click)="onRecord(senial, datos.tipoDestino)" class="btn btn-xs btn-primary">
+                  <button (click)="onRecord(senial, datos)" class="btn btn-xs btn-primary">
                      {{ senial.codigo }} - {{ senial.nombre }}
                   </button>
                 </td>
@@ -114,7 +114,7 @@
       <div class="card"><!-- .card -->
         <div class="card-header">
           <h5>
-            <b class="text-uppercase">Inventario</b> <small>municipio</small>
+            <b class="text-uppercase">Inventario</b> <small>municipio {{ municipio.nombre }}</small>
             <div class="btn-group pull-right">
               <button (click)="onNewSenialMunicipio()" class="btn btn-success">
                 <i class="fa fa-plus"></i>
@@ -123,7 +123,7 @@
             </div>
           </h5>
         </div>
-        <div class="card-body" >
+        <div class="card-body">
           <table class="table" id="dataTables-example" *ngIf="inventarios">
             <thead>
               <tr>
@@ -158,7 +158,7 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ senial.cantidad }}</td>
                 <td>
-                  <button (click)="onRecord(senial, datos.tipoDestino)" class="btn btn-xs btn-primary">
+                  <button (click)="onRecord(senial, datos)" class="btn btn-xs btn-primary">
                     {{ senial.codigo }} - {{ senial.nombre }}
                   </button>
                 </td>
@@ -174,11 +174,11 @@
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-8" *ngIf='formRecord'><!-- .col -->
-      <app-record [senial]="senial" [tipoDestino]="datos.tipoDestino" (ready)="ready($event)"></app-record>
+      <app-record [senial]="senial" [datos]="datos" (ready)="ready($event)"></app-record>
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-8" *ngIf='formNewMunicipio'><!-- .col -->
-      <app-new-senial-municipio [idMunicipio]="datos.idMunicipio" [idTipoSenial]="datos.idTipoSenial" (ready)="ready($event)"></app-new-senial-municipio>
+      <app-new-senial-municipio [datos]="datos" (ready)="ready($event)"></app-new-senial-municipio>
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-8" *ngIf='formNewBodega'><!-- .col -->

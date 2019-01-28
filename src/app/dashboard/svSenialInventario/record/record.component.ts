@@ -2,6 +2,7 @@
 import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
 import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
+import { MunicipioService } from '../../../services/municipio.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -16,7 +17,7 @@ declare var google: any;
 export class RecordComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() senial: any = null;
-    @Input() tipoDestino: any = null;
+    @Input() datos: any = null;
 
     @ViewChild('map') mapRef: ElementRef;
     private map: google.maps.Map;
@@ -25,6 +26,7 @@ export class RecordComponent implements OnInit {
 
     public uploadUrl = environment.uploadUrl;
     public inventarios: any = null;
+    public municipio: any = null;
 
     public errorMessage;
     public table: any = null;
@@ -32,6 +34,7 @@ export class RecordComponent implements OnInit {
     constructor(
         private _SenialInventarioService: SvSenialInventarioService,
         private _SenialUbicacionService: SvSenialUbicacionService,
+        private _MunicipioService: MunicipioService,
         private _loginService: LoginService
     ) {
         //Loading script
@@ -53,7 +56,7 @@ export class RecordComponent implements OnInit {
 
         let token = this._loginService.getToken();
 
-        this._SenialInventarioService.searchBySenialAndTipoDestino({ 'idSenial': this.senial.id, 'tipoDestino': this.tipoDestino }, token).subscribe(
+        this._SenialInventarioService.searchBySenialAndTipoDestino({ 'idSenial': this.senial.id, 'tipoDestino': this.datos.tipoDestino }, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.inventarios = response.data;
@@ -89,6 +92,22 @@ export class RecordComponent implements OnInit {
                 }
             }
         );
+
+        if (this.datos.idMunicipio) {
+            this._MunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
+                response => {
+                    this.municipio = response.data;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        }
     }
 
     iniciarTabla() {

@@ -2,6 +2,9 @@
     <div class="card-header">
         <h5>
             <b class="text-uppercase">Detalles</b>
+            <small *ngIf="municipio">
+                {{ municipio.nombre }}
+            </small>
         </h5>
     </div>
     <div class="card-body">
