@@ -1,0 +1,50 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase"><b>Editar notificación</b></h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formEdit="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Día <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="dias" [(ngModel)]="notificacion.dia" name="dia" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Hora <strong class="text-danger">*</strong></label>
+                            <input type="time" class="form-control text-uppercase" [(ngModel)]="notificacion.hora" name="hora" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Estado <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="estados" [(ngModel)]="notificacion.idComparendoEstado" name="idComparendoEstado" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Cargo <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="true" [options]="cargos" [(ngModel)]="arrayCargos" name="cargos" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

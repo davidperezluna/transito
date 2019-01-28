@@ -28,6 +28,7 @@ import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.r
 import { CvCdoTrazabilidadRoutes } from './cvCdoTrazabilidad/cvCdoTrazabilidad.routes';
 import { CvCdoNotificacionRoutes } from './cvCdoNotificacion/cvCdoNotificacion.routes';
 import { CvCdoCfgInteresRoutes } from './cvCdoCfgInteres/cvCdoCfgInteres.routes';
+import { CvAudienciaRoutes } from './cvAudiencia/cvAudiencia.routes';
 
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
 import { CvLcCfgRestriccionRoutes } from './cvLcCfgRestriccion/cvLcCfgRestriccion.routes';
@@ -293,6 +294,7 @@ export const DashboardRoutes: Route[] = [
       ...CvCdoTrazabilidadRoutes,
       ...CvCdoNotificacionRoutes,
       ...CvCdoCfgInteresRoutes,
+      ...CvAudienciaRoutes,
       ...CvLcCfgMotivoRoutes,
       ...CvLcCfgRestriccionRoutes,
       ...CvCfgInteresRoutes,
