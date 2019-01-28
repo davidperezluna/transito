@@ -236,6 +236,7 @@ export class NewRnaComponent implements OnInit {
 
     this._VehiculoService.showVehiculoRna(this.tramiteSolicitud.vehiculoId, token).subscribe(
       response => {
+        console.log(response);
         if (response.status == 'success') {
           this.isCiudadano = true
           this.ciudadanosVehiculo = response.propietarios;
@@ -417,7 +418,7 @@ export class NewRnaComponent implements OnInit {
     let identificacion = {
       'numeroIdentificacion': this.identificacionApoderado,
     };
-    this._ciudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+    this._ciudadanoService.searchByIdentificacion(identificacion, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.apoderadoSelect = response.data;
