@@ -1,0 +1,63 @@
+<div class="container">
+    <hr>
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Áreas</strong>
+                        <small>Lista de áreas</small>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNew()" class="btn btn-default">
+                                <i class="fa fa-plus"></i>
+                                <span class="text">Nuevo</span>
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Fecha</th>
+                                <th>Valor</th>
+                                <th>Valor mora</th>
+                                <th>Valor financiación </th>
+                                <th>Valor capital </th>
+                                <th>Valor descuento </th>
+                                <th>N.Factura</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let recaudo of recaudos; let i = index">
+                                <td>{{ recaudo.id }}</td>
+                                <td>{{ recaudo.fecha }}</td>
+                                <td>{{ recaudo.valor }}</td>
+                                <td>{{ recaudo.valorMora }}</td>
+                                <td>{{ recaudo.valorFinanciacion }}</td>
+                                <td>{{ recaudo.valorCapital }}</td>
+                                <td>{{ recaudo.valorDescuento }}</td>
+                                <td>{{ recaudo.froFactura.numero }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="editArea(recaudo)" class="btn btn-xs btn-primary" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button (click)="onDelete(recaudo.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-edit *ngIf='formEdit' [froRecaudo]="froRecaudo" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

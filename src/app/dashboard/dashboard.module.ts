@@ -220,6 +220,7 @@ import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionO
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
+import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
 import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
@@ -429,7 +430,8 @@ import {RightsidebarComponent} from '../shared';
       BpProyectoModule,
       BpCdpModule,
       RnrsPreasignacionPlacaModule,
-      EmpresaAlcaldiaModule
+      EmpresaAlcaldiaModule,
+      FroRecaudoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
