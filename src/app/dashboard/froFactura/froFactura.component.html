@@ -1,0 +1,82 @@
+<div class="container">
+  <hr>
+  <div class="row" *ngIf='formSearch'><!-- .row -->
+    <div class="col-xs-12 col-lg-4"><!-- .col -->
+      <div class="card">
+        <div class="card-header">
+            <h5 class="text-uppercase"><strong>Facturas</strong> <small>Buscar comparendos</small></h5>
+        </div>
+        <div class="card-body"><!-- .card-body -->
+          <form #formSearch="ngForm">
+            <div class="row"><!-- .row -->
+              <div class="col-xs-12 col-lg-12">
+                <div class="form-group">
+                  <label>Número de identificación:</label>
+                  <input type="text" class="form-control" [(ngModel)]="numeroIdentificacion" name="numeroIdentificacion" required autofocus />
+                </div>
+              </div>
+            </div><!-- /.row -->
+          </form>
+        </div><!-- /.card-body -->
+        <div class="card-footer">
+          <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-search"></i>
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div><!-- /.col -->
+    
+    <!-- ======================== Inventarios en Municipio seleccionado ============================== -->
+    <div class="col-xs-12 col-lg-8" *ngIf="comparendos && formIndex"><!-- .col -->
+      <div class="card"><!-- .card -->
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Comparendos asociados</b>
+          </h5>
+        </div>
+        <div class="card-body">
+          Total {{valorTotal}}
+          <table class="table table-bordered" id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Número</th>
+                <th>Fecha</th>
+                <th>Cod. Infracción</th>
+                <th>Valor</th>
+                <th>Placa</th>
+                <th>Estado</th>
+                <th>Seleccionar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                <td>{{ comparendo.fecha }}</td>
+                <td>{{ comparendo.infraccion?.codigo }}</td>
+                <td>{{ comparendo.valorInfraccion }}</td>
+                <td>{{ comparendo.placa }}</td>
+                <td>{{ comparendo.estado?.nombre }}</td>
+                <td>
+                  <div class="custom-control custom-checkbox" style="margin-top: -17px;">
+                    <input type="checkbox" value="{{comparendo.id}}" (change)="onSelect(comparendo, $event)" class="custom-control-input" id="{{comparendo.id}}">
+                    <label class="custom-control-label" for="{{comparendo.id}}"></label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer"><!-- .card-footer -->
+          <div class="btn-group">
+            <button type="button" (click)="onNew()" class="btn btn-primary btn-lg btn-block" [disabled]='comparendosSelect?.length == 0'>Preliquidar</button>
+          </div>
+        </div><!-- /.card-footer -->
+      </div><!-- /.card -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+  <app-new *ngIf='formNew' [comparendosSelect]="comparendosSelect" (ready)="ready($event)"></app-new>
+</div>
