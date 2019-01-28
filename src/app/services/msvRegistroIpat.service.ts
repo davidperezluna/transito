@@ -137,6 +137,14 @@ export class MsvRegistroIpatService {
 			.map(res => res.json());
 	}
 
+	registerVictimaIpat(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/newVictimaIpat", params, { headers: headers })
+			.map(res => res.json());
+	}
+
 	registerVehiculoIpat(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;

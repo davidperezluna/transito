@@ -21,7 +21,7 @@ export class MsvRegistroIpat{
 		public idSector:number,
 		public idZona:number,
 		public idDisenio:number,
-		public idEstadoTiempo:number,
+		public arrayEstadosTiempo:number,
 		public idGeometria:number,
 		public idUtilizacion:number,
 		public idCalzada:number,
@@ -39,11 +39,11 @@ export class MsvRegistroIpat{
 		public semaforo: string,
 		
 		public idEstadoSemaforo: number,
-		public senialVertical: number,
-		public senialHorizontal: number,
-		public reductorVelocidad: number,
+		public arraySenialesVerticales: number,
+		public arraySenialesHorizontales: number,
+		public arrayReductoresVelocidad: number,
 		public otroReductorVelocidad: string,
-		public idDelineadorPiso: number,
+		public arrayDelineadoresPiso: number,
 		public otroDelineadorPiso: string,
 
 
@@ -107,9 +107,9 @@ export class MsvRegistroIpat{
 		public modalidadTransporte:number,
 		public radioAccion:number,
 		public descripcionDanios: string,
-		public idFalla: number,
+		public arrayFallas: string,
 		public otraFalla: string,
-		public lugarImpacto: number,
+		public arrayLugaresImpacto: number,
 		
 		//Datos Conductor
 		public nombresConductor: string,

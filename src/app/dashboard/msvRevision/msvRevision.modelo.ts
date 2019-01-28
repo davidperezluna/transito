@@ -2,6 +2,7 @@ export class MsvRevision{
 	constructor(
 		public id:number,
 		public fechaRecepcion: string,
+		public fechaRevision: string,
 		public fechaDevolucion: string,
 		public fechaOtorgamiento: string,
 		public estado: boolean,

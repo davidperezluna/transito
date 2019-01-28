@@ -56,7 +56,7 @@ export class SvCfgEstadoTiempoService {
         );
     }
 
-    getEstadoTiempoSelect() {
+    select() {
         return this._http.get(this.url + "/select").map(res => res.json());
     }
 }

@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 })
 export class NewRevisionComponent implements OnInit {
 @Output() ready = new EventEmitter<any>( );
+@Input() miEmpresa: any = null;
 public msvRevision: MsvRevision;
 public contratistas: any;
 public contratistaSelected: any;
@@ -29,7 +30,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.msvRevision = new MsvRevision(null, null, null, null, null, null,null,null,null,null);
+    this.msvRevision = new MsvRevision(null, null, null, null, null, null, null,null,null,null,null);
     
 
     this._MsvPersonalFuncionarioService.selectContratistas().subscribe(
@@ -70,8 +71,8 @@ constructor(
     let token = this._loginService.getToken();
 
     this.msvRevision.funcionarioId = this.contratistaSelected;
-    this.msvRevision.empresaId = this.empresaSelected;
-    
+    this.msvRevision.empresaId = this.miEmpresa.id;
+
 		this._MsvRevisionService.register(this.msvRevision,token).subscribe(
 			response => {
         this.respuesta = response;
@@ -87,7 +88,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'La revisión ya se encuentra registrado',
+            text: 'La revisión ya se encuentra registrada',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -101,6 +102,36 @@ constructor(
 				}
 
 		}); 
+  }
+
+  onCalcularDevolucion() {
+    let token = this._loginService.getToken();
+
+    if (this.msvRevision.fechaRecepcion) {
+      this._MsvRevisionService.getFechaDevolucion({ 'fechaRecepcion': this.msvRevision.fechaRecepcion }, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.msvRevision.fechaDevolucion = response.fechaDevolucion;
+            //swal.close();
+          } else {
+            swal({
+              title: 'Alerta!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        }
+      );
+    }
+
   }
 
 }
