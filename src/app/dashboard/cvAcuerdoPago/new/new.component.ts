@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { CvAcuerdoPago } from '../cvAcuerdoPago.modelo';
-import { CvAcuerdoPagoService } from '../../../services/cvAcuerdoPago.service';
+import { FroAcuerdoPagoService } from '../../../services/froAcuerdoPago.service';
 import { CvCfgInteresService } from '../../../services/cvCfgInteres.service';
 import { CvCfgPorcentajeInicialService } from '../../../services/cvCfgPorcentajeInicial.service';
 import { LoginService } from '../../../services/login.service';
@@ -25,17 +25,19 @@ export class NewComponent implements OnInit {
   public valorTotal: any;
   public valorInteres: any;
   public valorCuotaInicial: any;
+  public totalPagar: any;
   public fechaFinal: any;
   public cuotas: any = null;
 
 constructor(
-  private _AcuerdoPagoService: CvAcuerdoPagoService,
+  private _FroAcuerdoPagoService: FroAcuerdoPagoService,
   private _InteresService: CvCfgInteresService,
   private _PorcentajeService: CvCfgPorcentajeInicialService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
+    console.log(this.comparendosSelect);
     this.acuerdoPago = new CvAcuerdoPago(null, null, null, null, null, null, null, null);
 
     this._InteresService.select().subscribe(
@@ -100,7 +102,7 @@ constructor(
       }
     );
 
-    this._AcuerdoPagoService.calculateDateEnd(this.acuerdoPago, token).subscribe(
+    this._FroAcuerdoPagoService.calculateDateEnd(this.acuerdoPago, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.fechaFinal = response.data;
@@ -125,15 +127,45 @@ constructor(
 
     this.acuerdoPago.comparendos = this.comparendosSelect;
     
-    this._AcuerdoPagoService.calculateValue(this.acuerdoPago, token).subscribe(
+    this._FroAcuerdoPagoService.calculateValue(this.acuerdoPago, token).subscribe(
       response => {
         if (response.status == 'success') {
+
           this.valorTotal = response.data;
+          this.valorInteres = (this.interes.valor/ 100) * this.valorTotal;
+          this.valorTotal = this.valorTotal + this.valorInteres;
           this.valorCuotaInicial = (this.valorTotal * this.porcentaje.valor) / 100;
-          this.valorInteres = (this.valorTotal * this.interes.valor) / 100;
+          
           this.acuerdoPago.valorCapital = this.valorTotal;
           this.acuerdoPago.valorCuotaInicial = this.valorCuotaInicial;
-          this.formPreliquidacion = true;
+
+          this._FroAcuerdoPagoService.calculateDues(this.acuerdoPago, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.cuotas = response.data.cuotas;
+                this.totalPagar = response.data.totalPagar;
+                this.acuerdoPago.valorCapital = this.valorTotal;
+                this.acuerdoPago.valorCuotaInicial = this.valorCuotaInicial;
+                this.formPreliquidacion = true;
+
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
         } else {
           swal({
             title: 'Error!',
@@ -153,32 +185,8 @@ constructor(
       }
     );
 
-    this._AcuerdoPagoService.calculateDues(this.acuerdoPago, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.cuotas = response.data;
-          this.acuerdoPago.valorCapital = this.valorTotal;
-          this.acuerdoPago.valorCuotaInicial = this.valorCuotaInicial;
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-      },
-      error => {
-        this.errorMessage = <any>error;
+    
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    console.log(this.acuerdoPago);
 
     
   }
@@ -189,8 +197,14 @@ constructor(
     this.acuerdoPago.idPorcentajeInicial = this.porcentaje.id;
     this.acuerdoPago.idInteres = this.interesSelected;
     this.acuerdoPago.comparendos = this.comparendosSelect;
+
+    let datos = {
+      'acuerdoPago':this.acuerdoPago,
+      'cuotas':this.cuotas
+    }
+    console.log(datos);  
     
-		this._AcuerdoPagoService.register(this.acuerdoPago, token).subscribe(
+		this._FroAcuerdoPagoService.register(datos, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
