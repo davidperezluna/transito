@@ -159,40 +159,12 @@
                                 required name="disenio">
                             </ng-select>
                         </div>
-                        <div class="row" id="multi" class="col-lg- col-md-6">
-                            <div class="form-group row">
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Estado Tiempo (Condición Climática)</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group">
-                                                <bs-sortable [(ngModel)]="itemStringsLeftClima" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Estado Tiempo" placeholderClass="placeholderStyle"
-                                                    wrapperClass="sortable-wrapper" name="estadoTiempo">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Agregar</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
-                                                <bs-sortable [(ngModel)]="itemStringsRightClima" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Arrastre estados del tiempo"
-                                                    placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="estadosTiempoAgregados">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Estados Tiempo<strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="true" [options]="estadosTiempo" [(ngModel)]="msvRegistroIpat.arrayEstadosTiempo" required name="estadoTiempo">
+                            </ng-select>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -306,108 +278,22 @@
                             <ng-select [multiple]="false" [options]="estadosSemaforo" [(ngModel)]="msvRegistroIpat.idEstadoSemaforo" name="estadoSemaforo">
                             </ng-select>
                         </div>
-                        <div class="row" id="multi" class="col-lg- col-md-6">
-                            <div class="form-group row">
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Señales Verticales</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group">
-                                                <bs-sortable [(ngModel)]="itemStringsLeftSenialVertical" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Señal Vertical" placeholderClass="placeholderStyle"
-                                                    wrapperClass="sortable-wrapper" name="senialVertical">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Agregar</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
-                                                <bs-sortable [(ngModel)]="itemStringsRightSenialVertical" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Arrastre señales verticales"
-                                                    placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="senialesVerticalesAgregadas">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Señales Verticales</label>
+                            <ng-select [multiple]="true" [options]="senialesVerticales" [(ngModel)]="msvRegistroIpat.arraySenialesVerticales" name="senialVertical">
+                            </ng-select>
                         </div>
-                        <div class="row" id="multi" class="col-lg- col-md-6">
-                            <div class="form-group row">
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Señales Horizontales</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group">
-                                                <bs-sortable [(ngModel)]="itemStringsLeftSenialHorizontal" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Señal Horizontal" placeholderClass="placeholderStyle"
-                                                    wrapperClass="sortable-wrapper" name="senialHorizontal">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Agregar</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
-                                                <bs-sortable [(ngModel)]="itemStringsRightSenialHorizontal" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Arrastre señales horizontales"
-                                                    placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="senialesHorizontalesAgregados">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Señales Horizontales</label>
+                            <ng-select [multiple]="true" [options]="senialesHorizontales" [(ngModel)]="msvRegistroIpat.arraySenialesHorizontales" name="senialhorizontal">
+                            </ng-select>
                         </div>
-                        <div class="row" id="multi" class="col-lg- col-md-6">
-                            <div class="form-group row">
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Reductor Velocidad</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group">
-                                                <bs-sortable [(ngModel)]="itemStringsLeftReductorVelocidad" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Reductor de Velocidad" placeholderClass="placeholderStyle"
-                                                    wrapperClass="sortable-wrapper" name="reductorVelocidad">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Agregar</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
-                                                <bs-sortable [(ngModel)]="itemStringsRightReductorVelocidad" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Arrastre reductores de velocidad"
-                                                    placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="reductoresVelocidadAgregados">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Reductores de Velocidad</label>
+                            <ng-select [multiple]="true" [options]="reductoresVelocidad" [(ngModel)]="msvRegistroIpat.arrayReductoresVelocidad" name="reductorVelocidad">
+                            </ng-select>
                         </div>
+                        
                         <div class="col-lg-6 col-md-6">
                             <label>Otro (Reductor Velocidad)</label>
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otroReductorVelocidad" name="otroReductorVelocidad">
@@ -635,7 +521,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Cantidad acompañantes o pasajeros al momento del accidente <strong class="text-danger">*</strong></label>
-                            <input class="form-control" (change)="totalIpat()" type="number" min="0" max="200" [(ngModel)]="msvRegistroIpat.cantidadAcompaniantes" name="cantidadAcompaniantes"
+                            <input class="form-control" type="number" min="0" max="200" [(ngModel)]="msvRegistroIpat.cantidadAcompaniantes" name="cantidadAcompaniantes"
                                 required>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
@@ -750,87 +636,20 @@
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.descripcionDanios" name="descripcionDanios"
                                 required>
                         </div>
-                        <div class="row" id="multi" class="col-lg- col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
-                            <div class="form-group row">
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Fallas</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group">
-                                                <bs-sortable [(ngModel)]="itemStringsLeftFalla" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Falla" placeholderClass="placeholderStyle"
-                                                    wrapperClass="sortable-wrapper" name="fallas">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 tile">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-title">Agregar</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
-                                                <bs-sortable [(ngModel)]="itemStringsRightFalla" itemClass="sortable-item list-group-item"
-                                                    itemActiveClass="sortable-item-active" placeholderItem="Arrastre fallas del vehiculo"
-                                                    placeholderClass="sortable-item" wrapperClass="sortable-wrapper" name="fallasAgregadas">
-                                                </bs-sortable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
+                            <label>Fallas</label>
+                            <ng-select [multiple]="true" [options]="fallas" [(ngModel)]="msvRegistroIpat.arrayFallas"
+                                name="falla">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1' && msvRegistroIpat.idFalla == 'OTRA'">
                             <label>Otra (Falla)</label>
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.otraFalla" name="otraFalla">
                         </div>
-                        <div class="row" id="multi" class="col-lg- col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
-                            <div class="form-group row">
-                            <div class="col-sm-6 tile">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="card-title">Lugar Impacto</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="list-group">
-                                            <bs-sortable 
-                                                [(ngModel)]="itemStringsLeft" 
-                                                itemClass="sortable-item list-group-item"
-                                                itemActiveClass="sortable-item-active" 
-                                                placeholderItem="Lugares Impacto" 
-                                                placeholderClass="placeholderStyle"
-                                                wrapperClass="sortable-wrapper" 
-                                                name="lugaresImpacto">
-                                            </bs-sortable>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 tile">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6 class="card-title">Agregar</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="list-group" style="border: 1px solid #ccc; padding: 10px; background-color: #f0f0f0; min-height: 150px;">
-                                            <bs-sortable 
-                                                [(ngModel)]="itemStringsRight" 
-                                                itemClass="sortable-item list-group-item"
-                                                itemActiveClass="sortable-item-active" 
-                                                placeholderItem="Arrastre lugares de impacto" 
-                                                placeholderClass="sortable-item"
-                                                wrapperClass="sortable-wrapper" 
-                                                name="lugaresImpactoAgregados">
-                                            </bs-sortable>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
+                            <label>Lugar Impacto</label>
+                            <ng-select [multiple]="true" [options]="lugaresImpacto" [(ngModel)]="msvRegistroIpat.arrayLugaresImpacto" name="lugarImpacto">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Hipotesis del accidente de transito <strong class="text-danger">*</strong></label>
@@ -1626,7 +1445,7 @@
         <!--<div class="card-footer" *ngIf="listaVehiculosPlacas">-->
         <div class="card-footer">
             <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-            <button (click)="enviarTramite()" *ngIf="consecutivo" [disabled]="formNew.invalid" class="btn btn-primary">Enviar</button>
+            <button (click)="enviarTramite()" [disabled]="formNew.invalid"  *ngIf="consecutivo" class="btn btn-primary">Enviar</button>
         </div>
         <!-- /.col -->
     </div>

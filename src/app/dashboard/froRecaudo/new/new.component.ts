@@ -62,6 +62,7 @@ export class NewComponent implements OnInit {
                 if (response.status == 'success') {
                     this.disabled = false;
                     this.froFactura = response.data;
+                    this.froRecaudo.valor = this.froFactura.valor;
                 } else {
                     this.disabled = false;
                 }

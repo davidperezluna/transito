@@ -27,7 +27,7 @@ constructor(
     this.factura = new FroFactura(null, null, null, null);
 
     let token = this._loginService.getToken();
-
+    
     this._FacturaService.calculateValue(this.comparendosSelect, token).subscribe(
       response => {
         if (response.status == 'success') {

@@ -88,6 +88,19 @@ export class FroFacturaComponent implements OnInit {
     }
   }
 
+  /*onSelectCurso(comparendo: any, eve: any) {
+    if (eve.target.checked) {
+      this.comparendosSelect.push(comparendo.id);
+      this.valorTotal = this.valorTotal + comparendo.valor;
+    } else {
+      let index = this.comparendosSelect.indexOf(comparendo.id);
+      this.valorTotal = this.valorTotal - comparendo.valor;
+      if (index > -1) {
+        this.comparendosSelect.splice(index, 1);
+      }
+    }
+  }*/
+
 
   iniciarTabla(){
     $('#dataTables-example').DataTable({

@@ -51,4 +51,13 @@ export class MsvRevisionService {
 	getRevisionSelect(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
+
+	getFechaDevolucion(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/get/fecha/devolucion", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
 }

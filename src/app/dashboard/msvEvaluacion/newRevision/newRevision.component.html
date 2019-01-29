@@ -11,37 +11,41 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha recepción <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="msvRevision.fechaRecepcion" name="fechar" type="date" required />
+                            <input class="form-control" (blur)="onCalcularDevolucion()" [(ngModel)]="msvRevision.fechaRecepcion" name="fechar" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha revisión <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="msvRevision.fechaRevision" name="fechaRevision" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha devolución</label>
-                            <input class="form-control" [(ngModel)]="msvRevision.fechaDevolucion" name="fechad" type="date" required />
+                            <input class="form-control" [(ngModel)]="msvRevision.fechaDevolucion" name="fechad" type="date" disabled required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Fecha otorgamiento</label>
+                            <label>Fecha otorgamiento del aval</label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaOtorgamiento" name="fechao" type="date" />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <!-- <div class="col-xs-12 col-lg-12">
                             <label>Empresa</label>  
                             <ng-select [multiple]="false" [options]="empresas" [(ngModel)]="empresaSelected" name="empresas" required>
                             </ng-select>
+                        </div> -->
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Funcionario que revisa <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="contratistas" [(ngModel)]="contratistaSelected" name="contratistaId" required>
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Persona Contacto</label>
+                            <label>Persona Contacto <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="msvRevision.personaContacto" name="personac" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Cargo del contacto</label>
+                            <label>Cargo del contacto <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="msvRevision.cargo" name="cargo" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Correo del contacto</label>
+                            <label>Correo del contacto <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="msvRevision.correo" name="correo" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Funcionario que revisa</label>
-                            <ng-select [multiple]="false" [options]="contratistas" [(ngModel)]="contratistaSelected" name="contratistas" required>
-                            </ng-select>
                         </div>
                     </div>
                 </form>
