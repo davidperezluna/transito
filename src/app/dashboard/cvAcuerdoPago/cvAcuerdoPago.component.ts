@@ -84,6 +84,8 @@ export class CvAcuerdoPagoComponent implements OnInit {
         this.comparendosSelect.splice(index, 1);
       }
     }
+    console.log(this.comparendosSelect);
+
   }
 
 
