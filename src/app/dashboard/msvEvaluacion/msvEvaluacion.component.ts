@@ -35,6 +35,7 @@ export class MsvEvaluacionComponent implements OnInit {
   public nit:any; 
   public empresas:any;
   public miEmpresa:Empresa;
+  public miRevision = null;
   public revisiones: any;
   public msvEvaluacion: MsvEvaluacion;
   public msvCategorias:any;
@@ -271,6 +272,7 @@ export class MsvEvaluacionComponent implements OnInit {
           this.isError = false;
           this.isExist = true;
           this.revisiones=response.data;
+          this.miRevision = true;
           
           swal.close();
         }

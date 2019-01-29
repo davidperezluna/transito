@@ -46,7 +46,7 @@
                      <!--fin-->
                       <div class="container" *ngIf="revisionNew">
                          <div>
-                            <app-newRevision *ngIf="revisionNew" (ready)="ready($event)"></app-newRevision>
+                            <app-newRevision *ngIf="revisionNew" [miEmpresa] = "miEmpresa" (ready)="ready($event)"></app-newRevision>
                          </div>
                       </div>
                       <div class="has-success" *ngIf="isExist" >
@@ -59,6 +59,7 @@
                                <thead>
                                   <tr>
                                      <th><b>Fecha de recepción</b></th>
+                                     <th><b>Fecha de revisión</b></th>
                                      <th><b>Fecha de devolución</b></th>
                                      <th><b>Fecha de otorgamiento</b></th>
                                      <th><b>Funcionario que revisa</b></th>
@@ -71,6 +72,9 @@
                                   <tr class="odd" *ngFor="let revision of revisiones; let i = index">
                                      <td>
                                         {{revision.fechaRecepcion}}
+                                     </td>
+                                     <td>
+                                        {{revision.fechaRevision}}
                                      </td>
                                      <td> 
                                         {{revision.fechaDevolucion}}
@@ -98,7 +102,7 @@
                                   <tr>
                                      <th><b>Nombre empresa</b></th>
                                      <th><b>NIT</b></th>
-                                     <th><b>Ciudad Sede P.</b></th>
+                                     <th><b>Ciudad Sede Principal</b></th>
                                      <th><b>Dirección</b></th>
                                      <th><b>Teléfono</b></th>
                                   </tr>

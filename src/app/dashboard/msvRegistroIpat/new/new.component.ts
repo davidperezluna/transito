@@ -179,15 +179,6 @@ export class NewComponent implements OnInit {
   public vehiculosIpat = [];
   public vehiculoIpat = false;
 
-  //total 
-  public cantVictimas = 0;
-  public cantConductores = 0;
-  public cantAcompaniantes: any;
-  public cantPasajeros: any;
-  public cantPeatones: any;
-  public cantHeridos: any;
-  public cantMuertos: any;
-
   public fechaActual: any;
 
   public usuario = false;
@@ -199,39 +190,22 @@ export class NewComponent implements OnInit {
   public licencia = false;
   public numeroCorrespondio = false;
 
+  public contConductores = 0;
+  public contPasajeros = 0;
+  public contPeatones = 0;
+  public contHeridos = 0;
+  public contMuertos = 0;
+  public contAcompaniantes = 0;
 
-  public listado = false;
-  itemStringsLeft: any[] = [];
-  itemStringsRight: any[] = [];
 
-  public listadoClima = false;
-  itemStringsLeftClima: any[] = [];
-  itemStringsRightClima: any[] = [];
-
-  public listadoSenialVertical = false;
-  itemStringsLeftSenialVertical: any[] = [];
-  itemStringsRightSenialVertical: any[] = [];
-
-  public listadoSenialHorizontal = false;
-  itemStringsLeftSenialHorizontal: any[] = [];
-  itemStringsRightSenialHorizontal: any[] = [];
-
-  public listadoReductorVelocidad = false;
-  itemStringsLeftReductorVelocidad: any[] = [];
-  itemStringsRightReductorVelocidad: any[] = [];
-
-  public listadoFalla = false;
-  itemStringsLeftFalla: any[] = [];
-  itemStringsRightFalla: any[] = [];
-
-  public resumen = {}; public datos = {
+/*   public resumen = {}; public datos = {
   }
 
   public datosVehiculo = {
     'vehiculos': [],
     'cDemandante': [],
     'cDemandado': [],
-  }
+  } */
 
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
@@ -307,13 +281,22 @@ export class NewComponent implements OnInit {
               swal.showLoading();
             }
           });
-          this._ControlViaService.indexSenialVertical().subscribe(
+          this._ControlViaService.getSenialVerticalSelect().subscribe(
+              response => {
+                this.senialesVerticales = response;
+              },
+                error => {
+                  this.errorMessage = <any>error;
+
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+          );
+          this._ControlViaService.getSenialHorizontalSelect().subscribe(
             response => {
-              this.senialesVerticales = response.data;
-              this.senialesVerticales.forEach(senialVertical => {
-                this.itemStringsLeftSenialVertical.push(senialVertical.nombre);
-              });
-              this.listadoSenialVertical = true;
+              this.senialesHorizontales = response;
             },
             error => {
               this.errorMessage = <any>error;
@@ -324,49 +307,11 @@ export class NewComponent implements OnInit {
               }
             }
           );
-          this._ControlViaService.indexSenialHorizontal().subscribe(
-            response => {
-              this.senialesHorizontales = response.data;
-              this.senialesHorizontales.forEach(senialHorizontal => {
-                this.itemStringsLeftSenialHorizontal.push(senialHorizontal.nombre);
-              });
-              this.listadoSenialHorizontal = true;
-            },
-            error => {
-              this.errorMessage = <any>error;
 
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          this._ControlViaService.indexReductorVelocidad().subscribe(
+          this._ControlViaService.getReductorVelocidadSelect().subscribe(
             response => {
-              this.reductoresVelocidad = response.data;
-              this.reductoresVelocidad.forEach(reductorVelocidad => {
-                this.itemStringsLeftReductorVelocidad.push(reductorVelocidad.nombre);
-              });
-              this.listadoReductorVelocidad = true;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._EstadoTiempoService.index().subscribe(
-            response => {
-              this.estadosTiempo = response.data;
-              this.estadosTiempo.forEach(estadoTiempo => {
-                this.itemStringsLeftClima.push(estadoTiempo.nombre);
-              });
-              this.listadoClima = true;
-            },
+              this.reductoresVelocidad = response;
+            },  
             error => {
               this.errorMessage = <any>error;
 
@@ -540,7 +485,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._EstadoTiempoService.getEstadoTiempoSelect().subscribe(
+                this._EstadoTiempoService.select().subscribe(
                   response => {
                     this.estadosTiempo = response;
                   },
@@ -830,42 +775,6 @@ export class NewComponent implements OnInit {
                 this._GravedadVictimaService.getGravedadVictimaSelect().subscribe(
                   response => {
                     this.gravedadesVictima = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this._LugarImpactoService.index().subscribe(
-                  response => {
-                    this.lugaresImpacto = response.data;
-                    this.lugaresImpacto.forEach(lugarImpacto => {
-                      this.itemStringsLeft.push(lugarImpacto.nombre);
-                    });
-                    this.listado = true;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this._FallaService.index().subscribe(
-                  response => {
-                    this.fallas = response.data;
-                    this.fallas.forEach(falla => {
-                      this.itemStringsLeftFalla.push(falla.nombre);
-                    });
-                    this.listado = true;
                   },
                   error => {
                     this.errorMessage = <any>error;
@@ -1215,14 +1124,7 @@ export class NewComponent implements OnInit {
 
     let data = [
       { 'datosLimitacion': this.msvRegistroIpat },
-      { 'vehiculosLimitacionArray': this.datosVehiculo },
       { 'consecutivo': this.consecutivo },
-      { 'lugaresImpacto': this.itemStringsRight },
-      { 'estadosTiempo': this.itemStringsRightClima },
-      { 'senialesVerticales': this.itemStringsRightSenialVertical },
-      { 'senialesHorizontales': this.itemStringsRightSenialHorizontal },
-      { 'reductoresVelocidad': this.itemStringsRightReductorVelocidad },
-      { 'fallas': this.itemStringsRightFalla },
       { 'dataConductores': this.conductores },
       { 'dataVehiculos': this.vehiculos },
       { 'dataVictimas': this.victimas },
@@ -1273,14 +1175,14 @@ export class NewComponent implements OnInit {
   }
 
 
-  delete(vehiculo: any): void {
+  /* delete(vehiculo: any): void {
     this.datosVehiculo.vehiculos = this.datosVehiculo.vehiculos.filter(h => h !== vehiculo);
     if (this.datosVehiculo.vehiculos.length === 0) {
       this.ipats = false;
     }
-  }
+  } */
 
-  btnNewVehiculo() {
+  /* btnNewVehiculo() {
     this.datosVehiculo.vehiculos.push(
       {
         'placa': this.consecutivo,
@@ -1294,7 +1196,7 @@ export class NewComponent implements OnInit {
 
   btnCancelarVehiculo() {
     this.ipatEncontrado = 1;
-  }
+  } */
 
   onBuscarConductor() {
     let token = this._LoginService.getToken();
@@ -1358,6 +1260,7 @@ export class NewComponent implements OnInit {
 
   onBuscarVehiculo() {
     let token = this._LoginService.getToken();
+
     if (this.msvRegistroIpat.placa) {
       this._MsvRegistroIpatService.getBuscarVehiculo({ 'placa': this.msvRegistroIpat.placa }, token).subscribe(
 
@@ -1666,7 +1569,7 @@ export class NewComponent implements OnInit {
 
       var html = 'Se va a registrar el usuario:<br>' +
         'Nombres: <b>' + this.msvRegistroIpat.nombresConductor + ' ' + this.msvRegistroIpat.apellidosConductor +'</b><br>' +
-        'Tipo Identificación: <b>' + this.msvRegistroIpat.tipoIdentificacionConductor + '</b><br>' +
+        'Tipo Identificación: <b>' + this.tipoIdentificacionConductorSelected + '</b><br>' +
         'Identificación: <b>' + this.msvRegistroIpat.identificacionConductor + '</b><br>' +
         'Género: <b>' + this.sexoConductorSelected + '</b><br>' +
         'Teléfono: <b>' + this.msvRegistroIpat.telefonoConductor + '</b><br>';
@@ -1718,6 +1621,18 @@ export class NewComponent implements OnInit {
                 this.msvRegistroIpat.fechaNacimientoConductor = '';
                 this.msvRegistroIpat.direccionResidenciaConductor = '';
                 this.msvRegistroIpat.telefonoConductor = '';
+
+                this.contConductores +=   1;
+                this.msvRegistroIpat.totalConductores = this.contConductores;
+                if (this.gravedadConductorSelected = 'HERIDO') {
+                  this.contHeridos += 1;
+                  this.msvRegistroIpat.totalHeridos = this.contHeridos;
+                  console.log(this.contHeridos);
+                } if (this.gravedadConductorSelected = 'MUERTO') {
+                  this.contMuertos += 1;
+                  this.msvRegistroIpat.totalMuertos = this.contMuertos;
+                  console.log(this.contMuertos);
+                }
               } else {
                 swal({
                   title: 'Alerta!',
@@ -1752,6 +1667,20 @@ export class NewComponent implements OnInit {
                   'teléfono': this.msvRegistroIpat.telefonoConductor,
                 };
                 this.conductores.push(dataConductores);
+                
+                this.contConductores += 1;
+                this.msvRegistroIpat.totalConductores = this.contConductores;
+
+                if (this.gravedadConductorSelected = 'HERIDO') {
+                  this.contHeridos += 1;
+                  this.msvRegistroIpat.totalHeridos = this.contHeridos;
+                  console.log(this.contHeridos);
+                } if (this.gravedadConductorSelected = 'MUERTO') {
+                  this.contMuertos += 1;
+                  this.msvRegistroIpat.totalMuertos = this.contMuertos;
+                  console.log(this.contMuertos);
+                }
+
               } else {
                 swal({
                   title: 'Alerta!',
@@ -1920,41 +1849,170 @@ export class NewComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
     } else {
-      let dataVictimas = {
-        'tipo victima': this.tipoVictimaSelected,
-        'gravedad victima': this.gravedadVictimaSelected,
-        'tipo documento': this.tipoIdentificacionVictimaSelected,
-        'identificacion': this.msvRegistroIpat.identificacionVictima,
-        'nombres': this.msvRegistroIpat.nombresVictima,
-        'apellidos': this.msvRegistroIpat.apellidosVictima,
-        'nacionalidad': this.nacionalidadVictimaSelected,
-        'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoVictima,
-        'sexo': this.sexoVictimaSelected,
-        'dirección residencia': this.msvRegistroIpat.direccionResidenciaVictima,
-        'ciudad residencia': this.ciudadResidenciaVictimaSelected,
-        'telefono': this.msvRegistroIpat.telefonoVictima,
-        'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
-      };
-      this.victimas.push(dataVictimas);
-      this.victima = false;
-      this.tipoVictimaSelected = [0];
-      this.gravedadVictimaSelected = [0];
-      this.msvRegistroIpat.identificacionVictima = '';
-      this.msvRegistroIpat.tipoIdentificacionVictima = 0;
-      this.msvRegistroIpat.nombresVictima = '';
-      this.msvRegistroIpat.apellidosVictima = '';
-      this.nacionalidadVictimaSelected = [0];
-      this.msvRegistroIpat.fechaNacimientoVictima = '';
-      this.sexoVictimaSelected = [0];
-      this.msvRegistroIpat.direccionResidenciaVictima = '';
-      this.ciudadResidenciaVictimaSelected = [0];
-      this.msvRegistroIpat.telefonoVictima = '';
-    }
-  }
+      this.msvRegistroIpat.tipoIdentificacionVictima = this.tipoIdentificacionVictimaSelected;
+      this.msvRegistroIpat.nacionalidadVictima = this.nacionalidadVictimaSelected;
+      this.msvRegistroIpat.sexoVictima = this.sexoVictimaSelected;
+      this.msvRegistroIpat.ciudadResidenciaVictima = this.ciudadResidenciaVictimaSelected;
 
-  totalIpat() {
-    this.msvRegistroIpat.totalAcompaniantes = this.msvRegistroIpat.cantidadAcompaniantes;
-    this.msvRegistroIpat.totalConductores = this.cantConductores;
+      var html = 'Se va a registrar el usuario:<br>' +
+        'Nombres: <b>' + this.msvRegistroIpat.nombresVictima + ' ' + this.msvRegistroIpat.apellidosVictima + '</b><br>' +
+        'Tipo Identificación: <b>' + this.tipoIdentificacionVictimaSelected + '</b><br>' +
+        'Identificación: <b>' + this.msvRegistroIpat.identificacionVictima + '</b><br>' +
+        'Género: <b>' + this.sexoVictimaSelected + '</b><br>' +
+        'Teléfono: <b>' + this.msvRegistroIpat.telefonoVictima + '</b><br>';
+
+      swal({
+        title: 'Creación de persona natural',
+        type: 'warning',
+        html: html,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Agregar más victimas',
+        cancelButtonText: 'Agregar una sola victima',
+      }).then((result) => {
+        if (result.value) {
+          this._MsvRegistroIpatService.registerVictimaIpat(this.msvRegistroIpat, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                });
+
+                let dataVictimas = {
+                  'tipo victima': this.tipoVictimaSelected,
+                  'gravedad victima': this.gravedadVictimaSelected,
+                  'tipo documento': this.tipoIdentificacionVictimaSelected,
+                  'identificacion': this.msvRegistroIpat.identificacionVictima,
+                  'nombres': this.msvRegistroIpat.nombresVictima,
+                  'apellidos': this.msvRegistroIpat.apellidosVictima,
+                  'nacionalidad': this.nacionalidadVictimaSelected,
+                  'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoVictima,
+                  'sexo': this.sexoVictimaSelected,
+                  'dirección residencia': this.msvRegistroIpat.direccionResidenciaVictima,
+                  'ciudad residencia': this.ciudadResidenciaVictimaSelected,
+                  'telefono': this.msvRegistroIpat.telefonoVictima,
+                  'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
+                };
+                this.victimas.push(dataVictimas);
+                console.log(this.tipoVictimaSelected);
+                if (this.tipoVictimaSelected = 'PASAJERO') {
+                  this.contPasajeros += 1;
+                  this.msvRegistroIpat.totalPasajeros = this.contPasajeros;
+                  console.log(this.contPasajeros);
+                } if (this.tipoVictimaSelected = 'PEATON'){
+                  this.contPeatones += 1;
+                  this.msvRegistroIpat.totalPeatones = this.contPeatones;
+                  console.log(this.contPeatones); 
+                } if (this.tipoVictimaSelected = 'ACOMPAÑANTE'){
+                  this.contAcompaniantes += 1;
+                  this.msvRegistroIpat.totalAcompaniantes = this.contAcompaniantes;
+                  console.log(this.contAcompaniantes);
+                } 
+                if (this.gravedadVictimaSelected = 'HERIDO'){
+                  this.contHeridos +=1;
+                  this.msvRegistroIpat.totalHeridos = this.contHeridos;
+                  console.log(this.contHeridos);
+                } if (this.gravedadVictimaSelected = 'MUERTO'){
+                  this.contMuertos+=1;
+                  this.msvRegistroIpat.totalMuertos = this.contMuertos;
+                  console.log(this.contMuertos);
+                }
+
+                this.victima = false;
+                this.tipoVictimaSelected = [0];
+                this.gravedadVictimaSelected = [0];
+                this.msvRegistroIpat.identificacionVictima = '';
+                this.msvRegistroIpat.tipoIdentificacionVictima = 0;
+                this.msvRegistroIpat.nombresVictima = '';
+                this.msvRegistroIpat.apellidosVictima = '';
+                this.nacionalidadVictimaSelected = [0];
+                this.msvRegistroIpat.fechaNacimientoVictima = '';
+                this.sexoVictimaSelected = [0];
+                this.msvRegistroIpat.direccionResidenciaVictima = '';
+                this.ciudadResidenciaVictimaSelected = [0];
+                this.msvRegistroIpat.telefonoVictima = '';
+              } else {
+                swal({
+                  title: 'Alerta!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            });
+          }
+        else if (result.dismiss === swal.DismissReason.cancel) {
+          if (result.value) {
+            this._MsvRegistroIpatService.registerCiudadanoIpat(this.msvRegistroIpat, token).subscribe(
+              response => {
+                if (response.status == 'success') {
+                  swal({
+                    title: 'Perfecto!',
+                    text: response.message,
+                    type: 'success',
+                    confirmButtonText: 'Aceptar'
+                  });
+
+                  let dataVictimas = {
+                    'tipo victima': this.tipoVictimaSelected,
+                    'gravedad victima': this.gravedadVictimaSelected,
+                    'tipo documento': this.tipoIdentificacionVictimaSelected,
+                    'identificacion': this.msvRegistroIpat.identificacionVictima,
+                    'nombres': this.msvRegistroIpat.nombresVictima,
+                    'apellidos': this.msvRegistroIpat.apellidosVictima,
+                    'nacionalidad': this.nacionalidadVictimaSelected,
+                    'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoVictima,
+                    'sexo': this.sexoVictimaSelected,
+                    'dirección residencia': this.msvRegistroIpat.direccionResidenciaVictima,
+                    'ciudad residencia': this.ciudadResidenciaVictimaSelected,
+                    'telefono': this.msvRegistroIpat.telefonoVictima,
+                    'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
+                  };
+                  this.victimas.push(dataVictimas);
+                  
+                  if (this.tipoVictimaSelected = 'PASAJERO') {
+                    this.contPasajeros += 1;
+                    this.msvRegistroIpat.totalPasajeros = this.contPasajeros;
+                  } if (this.tipoVictimaSelected = 'PEATON') {
+                    this.contPeatones += 1;
+                    this.msvRegistroIpat.totalPeatones = this.contPeatones;
+                  } if (this.tipoVictimaSelected = 'ACOMPAÑANTE') {
+                    this.contAcompaniantes += 1;
+                    this.msvRegistroIpat.totalAcompaniantes = this.contAcompaniantes;
+                    console.log(this.contAcompaniantes);
+                  } if (this.gravedadVictimaSelected = 'HERIDO') {
+                    this.contHeridos += 1;
+                    this.msvRegistroIpat.totalHeridos = this.contHeridos;
+                    console.log(this.contHeridos);
+                  } if (this.gravedadVictimaSelected = 'MUERTO') {
+                    this.contMuertos += 1;
+                    this.msvRegistroIpat.totalMuertos = this.contMuertos;
+                    console.log(this.contMuertos);
+                  }
+                } else {
+                  swal({
+                    title: 'Alerta!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                  });
+                }
+              });
+            }
+          }
+        });
+
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    }
   }
 
   imprimirFormatos() {

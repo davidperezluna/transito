@@ -18,15 +18,7 @@ export class SvCfgControlViaService {
     indexSemaforo() {
         return this._http.get(this.url + "/").map(res => res.json());
     }
-    indexSenialVertical() {
-        return this._http.get(this.url + "/senialvertical").map(res => res.json());
-    }
-    indexSenialHorizontal() {
-        return this._http.get(this.url + "/senialhorizontal").map(res => res.json());
-    }
-    indexReductorVelocidad() {
-        return this._http.get(this.url + "/reductorvelocidad").map(res => res.json());
-    }
+
 
     register(datos, token) {
         let json = JSON.stringify(datos);
@@ -75,5 +67,17 @@ export class SvCfgControlViaService {
 
     getControlViaDelineadorPisoSelect() {
         return this._http.get(this.url + "/select/delineadorpiso").map(res => res.json());
+    }
+
+    getSenialVerticalSelect() {
+        return this._http.get(this.url + "/select/senialvertical").map(res => res.json());
+    }
+
+    getSenialHorizontalSelect() {
+        return this._http.get(this.url + "/select/senialhorizontal").map(res => res.json());
+    }
+
+    getReductorVelocidadSelect() {
+        return this._http.get(this.url + "/select/reductorvelocidad").map(res => res.json());
     }
 }
