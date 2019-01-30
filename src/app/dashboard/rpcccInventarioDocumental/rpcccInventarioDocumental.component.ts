@@ -3,12 +3,16 @@ import {LoginService} from '../../services/login.service';
 import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
 import { CfgComparendoEstadoService } from '../../services/cfgComparendoEstado.service';
 import { ComparendoService } from '../../services/comparendo.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
+
 import swal from 'sweetalert2';
+import { Utils } from 'ng2-bootstrap';
 declare var $: any;
 
 @Component({
   selector: 'rpcccInventarioDocumental',
-  templateUrl: './rpcccInventarioDocumental.component.html'
+  templateUrl: './rpcccInventarioDocumental.component.html',
+  providers: [DatePipe]
 })
 export class rpcccInventarioDocumentalComponent implements OnInit {
   public errorMessage;
@@ -20,21 +24,27 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
   public comparendos;
   public comparendosSelected;
   public agenteSelected;
+
+  public comparendosPendiente=[];
   public comparendosSancionado=[];
-  public comparendosExonerado=[];
-  public comparendosInhibitorio=[];
+  public comparendosCobroCoativo=[];
   public comparendosAcuerdoPago=[];
   public comparendosAcuerdoPagoIncumplido=[];
-  public comparendosPrescripcion=[];
+  public comparendosInhibitorio=[];
   public comparendosCaducidad=[];
   public comparendosPagado=[];
+  public comparendosPrescripcion=[];
+  public comparendosExonerado=[];
   public comparendosRevocatoria=[];
-  public comparendosInterposicion=[];
+  //public comparendosInterposicion=[];
   public comparendosNulidad=[];
   public resumen = {};     public datos = {'fechaDesde': null,
                   'fechaHasta': null,
                   'agenteId': null,
                   'comparendosId': null};
+
+  public date: any;
+  public fecha: any;
 
   constructor(
     private _loginService: LoginService,
@@ -89,11 +99,30 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
     
 
   }
-  iniciarTabla(){
+  iniciarTabla(estado){
+    this.date = new Date();
+    var datePiper = new DatePipe(this.date);
+    this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
+    if()
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'excel',
+          text: 'Excel',
+          title: 'xls',
+          filename: 'Reporte_Documental_Por_Estado' + this.fecha,
+        },
+        {
+          extend: 'pdfHtml5',
+          orientation: 'landscape',
+          pageSize: 'LEGAL',
+          filename: 'Reporte_Documental_Por_EstadoPDF_' + this.fecha,
+        }
+      ],
       oLanguage: {
            oPaginate: {
            sFirst: '<<',
@@ -125,7 +154,6 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
 
           if(response.code == 200){
             this.comparendos = response.data;
-
             swal({
               title: 'Perfecto!',
               text: response.message,
@@ -134,24 +162,30 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
             }); 
 
             this.comparendos.forEach(element => {
-
-              if(element.estado.id == 1){
+              if(element.estado.id == 1)
+              {
+                this.comparendosPendiente.push(element);
+              } 
+              else if(element.estado.id == 2){
                 this.comparendosSancionado.push(element);
               }
-              else if(element.estado.id == 2){
-                this.comparendosExonerado.push(element);
-              }
               else if(element.estado.id == 3){
-                this.comparendosInhibitorio.push(element);
+                this.comparendosCobroCoativo.push(element);
               }
               else if(element.estado.id == 4){
                 this.comparendosAcuerdoPago.push(element);
+                if(this.comparendosAcuerdoPago.length != 0){
+                  let estado = "acuerdoPago";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 5){
                 this.comparendosAcuerdoPagoIncumplido.push(element);
               }
               else if(element.estado.id == 6){
-                this.comparendosPrescripcion.push(element);
+                this.comparendosInhibitorio.push(element);
               }
               else if(element.estado.id == 7){
                 this.comparendosCaducidad.push(element);
@@ -160,12 +194,18 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
                 this.comparendosPagado.push(element);
               }
               else if(element.estado.id == 9){
-                this.comparendosRevocatoria.push(element);
+                this.comparendosPrescripcion.push(element);
               }
               else if(element.estado.id == 10){
-                this.comparendosInterposicion.push(element);
+                this.comparendosExonerado.push(element);
               }
               else if(element.estado.id == 11){
+                this.comparendosRevocatoria.push(element);
+              }
+              /* else if(element.estado.id == 10){
+                this.comparendosInterposicion.push(element);
+              } */
+              else if(element.estado.id == 12){
                 this.comparendosNulidad.push(element);
               }             
             });            

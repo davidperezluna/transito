@@ -521,7 +521,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Cantidad acompañantes o pasajeros al momento del accidente <strong class="text-danger">*</strong></label>
-                            <input class="form-control" (change)="totalIpat()" type="number" min="0" max="200" [(ngModel)]="msvRegistroIpat.cantidadAcompaniantes" name="cantidadAcompaniantes"
+                            <input class="form-control" type="number" min="0" max="200" [(ngModel)]="msvRegistroIpat.cantidadAcompaniantes" name="cantidadAcompaniantes"
                                 required>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">

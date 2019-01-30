@@ -9,7 +9,6 @@
               <small>Seleccione el estado a incluir en el reporte</small>
             </h5>
           </div>
-
           <div class="card-body">
             <div class="form-group">
               <div class="row">
@@ -55,6 +54,33 @@
               <button (click)="buscarComparendos()" class="btn btn-primary">Enviar</button>
           </div>
 
+          <div class="card-body" *ngIf="comparendosPendiente.length > 0">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Valor total recaudo</th>
+                    <th>Fecha Reporte</th>
+                    <th>Estado</th>
+                    <!-- <th>Acciones</th> -->
+                </tr>
+              </thead>
+              <p>Comparendos en estado PENDIENTE</p>
+              <tbody>
+                <tr class="odd">
+                  <td >{{comparendosPendiente.length}}</td>
+                  <td >pendiente valor recaudo</td>
+                  <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
+                  <td>PENDIENTE</td>
+                  <!-- <td>
+                    <div class="card-footer">
+                    <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
+                    </div>
+                  </td> -->
+                </tr>
+              </tbody>
+            </table>            
+          </div>
           <div class="card-body" *ngIf="comparendosSancionado.length > 0">
             <table class="table " id="dataTables-example">
               <thead>
@@ -63,25 +89,26 @@
                     <th>Valor total recaudo</th>
                     <th>Fecha Reporte</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                    <!-- <th>Acciones</th> -->
                 </tr>
               </thead>
+              <p>Comparendos en estado SANCIONADO</p>
               <tbody>
                 <tr class="odd">
                   <td >{{comparendosSancionado.length}}</td>
                   <td >pendiente valor recaudo</td>
                   <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
                   <td>SANCIONADO</td>
-                  <td>
+                  <!-- <td>
                     <div class="card-footer">
                     <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
                     </div>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>            
           </div>
-          <div class="card-body" *ngIf="comparendosExonerado.length > 0">
+          <div class="card-body" *ngIf="comparendosCobroCoativo.length > 0">
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
@@ -89,7 +116,191 @@
                     <th>Valor total recaudo</th>
                     <th>Fecha Reporte</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <p>Comparendos en estado COBRO COATIVO</p>
+              <tbody>
+                <tr class="odd">
+                  <td >{{comparendosCobroCoativo.length}}</td>
+                  <td >pendiente valor recaudo</td>
+                  <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
+                  <td>COBRO COACTIVO</td>
+                </tr>
+              </tbody>
+            </table>            
+          </div>
+          <div class="card-body" *ngIf="comparendosAcuerdoPago.length > 0">
+            <table class="table " id="dataTables-acuerdoPago">
+              <thead>
+                <p>Comparendos en estado ACUERDO PAGO</p>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Valor total recaudo</th>
+                  <th>Fecha Reporte</th>
+                  <th>Estado</th>
+                  <!-- <th>Acciones</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd">
+                  <td>{{comparendosAcuerdoPago.length}}</td>
+                  <td>pendiente valor recaudo</td>
+                  <td>{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
+                  <td>ACUERDO DE PAGO</td>
+                  <!-- <td>
+                                <div class="card-footer">
+                                <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
+                                </div>
+                            </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body" *ngIf="comparendosAcuerdoPagoIncumplido.length > 0">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <p>Comparendos en estado ACUERDO DE PAGO INCUMPLIDO</p>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Valor total recaudo</th>
+                  <th>Fecha Reporte</th>
+                  <th>Estado</th>
+                  <!-- <th>Acciones</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd">
+                  <td>{{comparendosAcuerdoPagoIncumplido.length}}</td>
+                  <td>pendiente valor recaudo</td>
+                  <td>{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
+                  <td>ACUERDO DE PAGO INCUMPLIDO</td>
+                  <!-- <td>
+                                <div class="card-footer">
+                                <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
+                                </div>
+                            </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body" *ngIf="comparendosInhibitorio.length > 0">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <p>Comparendos en estado INHIBITORIO</p>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Valor total recaudo</th>
+                  <th>Fecha Reporte</th>
+                  <th>Estado</th>
+                  <!-- <th>Acciones</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd">
+                  <td>{{comparendosInhibitorio.length}}</td>
+                  <td>pendiente valor recaudo</td>
+                  <td>{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
+                  <td>INHIBITORIO</td>
+                  <!-- <td>
+                                <div class="card-footer">
+                                <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
+                                </div>
+                            </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body" *ngIf="comparendosCaducidad.length > 0">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <p>Comparendos en estado CADUCIDAD</p>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Valor total recaudo</th>
+                  <th>Fecha Reporte</th>
+                  <th>Estado</th>
+                  <!-- <th>Acciones</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd">
+                  <td>{{comparendosCaducidad.length}}</td>
+                  <td>pendiente valor recaudo</td>
+                  <td>{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
+                  <td>CADUCIDAD</td>
+                  <!-- <td>
+                                <div class="card-footer">
+                                <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
+                                </div>
+                            </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body" *ngIf="comparendosPagado.length > 0">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <p>Comparendos en estado PAGADO</p>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Valor total recaudo</th>
+                  <th>Fecha Reporte</th>
+                  <th>Estado</th>
+                  <!-- <th>Acciones</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd">
+                  <td>{{comparendosPagado.length}}</td>
+                  <td>pendiente valor recaudo</td>
+                  <td>{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
+                  <td>PAGADO</td>
+                  <!-- <td>
+                                <div class="card-footer">
+                                <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
+                                </div>
+                            </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body" *ngIf="comparendosPrescripcion.length > 0">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <p>Comparendos en estado PREINSCRIPCION</p>
+                <tr>
+                  <th>Cantidad</th>
+                  <th>Valor total recaudo</th>
+                  <th>Fecha Reporte</th>
+                  <th>Estado</th>
+                  <!-- <th>Acciones</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd">
+                  <td>{{comparendosPrescripcion.length}}</td>
+                  <td>pendiente valor recaudo</td>
+                  <td>{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
+                  <td>PRESCRIPCIÓN</td>
+                  <!-- <td>
+                                <div class="card-footer">
+                                <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
+                                </div>
+                            </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body" *ngIf="comparendosExonerado.length > 0">
+            <table class="table" id="dataTables-example">
+              <thead>
+                <p>Comparendos en estado EXONERADO</p>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Valor total recaudo</th>
+                    <th>Fecha Reporte</th>
+                    <th>Estado</th>
+                    <!-- <th>Acciones</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -98,167 +309,11 @@
                   <td >pendiente valor recaudo</td>
                   <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
                   <td>EXONERADO</td>
-                  <td>
+                  <!-- <td>
                       <div class="card-footer">
                       <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
                       </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>            
-          </div>
-          <div class="card-body" *ngIf="comparendosInhibitorio.length > 0">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Valor total recaudo</th>
-                    <th>Fecha Reporte</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd">
-                  <td >{{comparendosInhibitorio.length}}</td>
-                  <td >pendiente valor recaudo</td>
-                  <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
-                  <td>INHIBITORIO</td>
-                  <td>
-                      <div class="card-footer">
-                      <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
-                      </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>            
-          </div>
-          <div class="card-body" *ngIf="comparendosAcuerdoPago.length > 0">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Valor total recaudo</th>
-                    <th>Fecha Reporte</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd">
-                  <td >{{comparendosAcuerdoPago.length}}</td>
-                  <td >pendiente valor recaudo</td>
-                  <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
-                  <td>ACUERDO DE PAGO</td>
-                  <td>
-                      <div class="card-footer">
-                      <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
-                      </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>            
-          </div>
-          <div class="card-body" *ngIf="comparendosAcuerdoPagoIncumplido.length > 0">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Valor total recaudo</th>
-                    <th>Fecha Reporte</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd">
-                  <td >{{comparendosAcuerdoPagoIncumplido.length}}</td>
-                  <td >pendiente valor recaudo</td>
-                  <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
-                  <td>ACUERDO DE PAGO INCUMPLIDO</td>
-                  <td>
-                      <div class="card-footer">
-                      <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
-                      </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>            
-          </div>
-          <div class="card-body" *ngIf="comparendosPrescripcion.length > 0">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Valor total recaudo</th>
-                    <th>Fecha Reporte</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd">
-                  <td >{{comparendosPrescripcion.length}}</td>
-                  <td >pendiente valor recaudo</td>
-                  <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
-                  <td>PRESCRIPCIÓN</td>
-                  <td>
-                      <div class="card-footer">
-                      <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
-                      </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>            
-          </div>
-          <div class="card-body" *ngIf="comparendosCaducidad.length > 0">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Valor total recaudo</th>
-                    <th>Fecha Reporte</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd">
-                  <td >{{comparendosCaducidad.length}}</td>
-                  <td >pendiente valor recaudo</td>
-                  <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
-                  <td>CADUCIDAD</td>
-                  <td>
-                      <div class="card-footer">
-                      <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
-                      </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>            
-          </div>
-          <div class="card-body" *ngIf="comparendosPagado.length > 0">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                    <th>Cantidad</th>
-                    <th>Valor total recaudo</th>
-                    <th>Fecha Reporte</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd">
-                  <td >{{comparendosPagado.length}}</td>
-                  <td >pendiente valor recaudo</td>
-                  <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
-                  <td>PAGADO</td>
-                  <td>
-                      <div class="card-footer">
-                      <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
-                      </div>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>            
@@ -266,12 +321,13 @@
           <div class="card-body" *ngIf="comparendosRevocatoria.length > 0">
             <table class="table " id="dataTables-example">
               <thead>
+                <p>Comparendos en estado REVOCATORIA</p>
                 <tr>
                     <th>Cantidad</th>
                     <th>Valor total recaudo</th>
                     <th>Fecha Reporte</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                    <!-- <th>Acciones</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -280,18 +336,19 @@
                   <td >pendiente valor recaudo</td>
                   <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
                   <td>REVOCATORIA</td>
-                  <td>
+                  <!-- <td>
                       <div class="card-footer">
                       <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
                       </div>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>            
           </div>
-          <div class="card-body" *ngIf="comparendosInterposicion.length > 0">
+          <!-- <div class="card-body" *ngIf="comparendosInterposicion.length > 0">
             <table class="table " id="dataTables-example">
               <thead>
+                <p>Comparendos en estado INTERPOSICIÓN</p>
                 <tr>
                     <th>Cantidad</th>
                     <th>Valor total recaudo</th>
@@ -314,16 +371,17 @@
                 </tr>
               </tbody>
             </table>            
-          </div>
+          </div> -->
           <div class="card-body" *ngIf="comparendosNulidad.length > 0">
             <table class="table " id="dataTables-example">
               <thead>
+                <p>Comparendos en estado NULIDAD</p>
                 <tr>
                     <th>Cantidad</th>
                     <th>Valor total recaudo</th>
                     <th>Fecha Reporte</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                    <!-- <th>Acciones</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -332,11 +390,11 @@
                   <td >pendiente valor recaudo</td>
                   <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
                   <td>NULIDAD</td>
-                  <td>
+                  <!-- <td>
                       <div class="card-footer">
                       <button (click)="generarPDF()" class="btn btn-primary pull-right">PDF</button>
                       </div>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>            
