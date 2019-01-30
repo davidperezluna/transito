@@ -55,7 +55,7 @@
           </div>
 
           <div class="card-body" *ngIf="comparendosPendiente.length > 0">
-            <table class="table " id="dataTables-example">
+            <table class="table " id="dataTables-pendiente">
               <thead>
                 <tr>
                     <th>Cantidad</th>
@@ -82,7 +82,7 @@
             </table>            
           </div>
           <div class="card-body" *ngIf="comparendosSancionado.length > 0">
-            <table class="table " id="dataTables-example">
+            <table class="table " id="dataTables-sancionado">
               <thead>
                 <tr>
                     <th>Cantidad</th>
@@ -108,8 +108,8 @@
               </tbody>
             </table>            
           </div>
-          <div class="card-body" *ngIf="comparendosCobroCoativo.length > 0">
-            <table class="table " id="dataTables-example">
+          <div class="card-body" *ngIf="comparendosCobroCoactivo.length > 0">
+            <table class="table " id="dataTables-cobroCoactivo">
               <thead>
                 <tr>
                     <th>Cantidad</th>
@@ -118,10 +118,10 @@
                     <th>Estado</th>
                 </tr>
               </thead>
-              <p>Comparendos en estado COBRO COATIVO</p>
+              <p>Comparendos en estado COBRO COACTIVO</p>
               <tbody>
                 <tr class="odd">
-                  <td >{{comparendosCobroCoativo.length}}</td>
+                  <td >{{comparendosCobroCoactivo.length}}</td>
                   <td >pendiente valor recaudo</td>
                   <td >{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
                   <td>COBRO COACTIVO</td>
@@ -157,7 +157,7 @@
             </table>
           </div>
           <div class="card-body" *ngIf="comparendosAcuerdoPagoIncumplido.length > 0">
-            <table class="table " id="dataTables-example">
+            <table class="table " id="dataTables-acuerdoPagoIncumplido">
               <thead>
                 <p>Comparendos en estado ACUERDO DE PAGO INCUMPLIDO</p>
                 <tr>
@@ -184,7 +184,7 @@
             </table>
           </div>
           <div class="card-body" *ngIf="comparendosInhibitorio.length > 0">
-            <table class="table " id="dataTables-example">
+            <table class="table " id="dataTables-inhibitorio">
               <thead>
                 <p>Comparendos en estado INHIBITORIO</p>
                 <tr>
@@ -211,7 +211,7 @@
             </table>
           </div>
           <div class="card-body" *ngIf="comparendosCaducidad.length > 0">
-            <table class="table " id="dataTables-example">
+            <table class="table " id="dataTables-caducidad">
               <thead>
                 <p>Comparendos en estado CADUCIDAD</p>
                 <tr>
@@ -238,7 +238,7 @@
             </table>
           </div>
           <div class="card-body" *ngIf="comparendosPagado.length > 0">
-            <table class="table " id="dataTables-example">
+            <table class="table " id="dataTables-pagado">
               <thead>
                 <p>Comparendos en estado PAGADO</p>
                 <tr>
@@ -264,8 +264,8 @@
               </tbody>
             </table>
           </div>
-          <div class="card-body" *ngIf="comparendosPrescripcion.length > 0">
-            <table class="table " id="dataTables-example">
+          <div class="card-body" *ngIf="comparendosPreinscripcion.length > 0">
+            <table class="table " id="dataTables-preinscripcion">
               <thead>
                 <p>Comparendos en estado PREINSCRIPCION</p>
                 <tr>
@@ -278,7 +278,7 @@
               </thead>
               <tbody>
                 <tr class="odd">
-                  <td>{{comparendosPrescripcion.length}}</td>
+                  <td>{{comparendosPresincripcion.length}}</td>
                   <td>pendiente valor recaudo</td>
                   <td>{{ datos.fechaDesde }} hasta {{ datos.fechaHasta }}</td>
                   <td>PRESCRIPCIÓN</td>
@@ -292,7 +292,7 @@
             </table>
           </div>
           <div class="card-body" *ngIf="comparendosExonerado.length > 0">
-            <table class="table" id="dataTables-example">
+            <table class="table" id="dataTables-exonerado">
               <thead>
                 <p>Comparendos en estado EXONERADO</p>
                 <tr>
@@ -319,7 +319,7 @@
             </table>            
           </div>
           <div class="card-body" *ngIf="comparendosRevocatoria.length > 0">
-            <table class="table " id="dataTables-example">
+            <table class="table " id="dataTables-revocatoria">
               <thead>
                 <p>Comparendos en estado REVOCATORIA</p>
                 <tr>
