@@ -13,6 +13,10 @@
                             <label>Fecha <strong class="text-danger">*</strong></label>
                             <input type="date" class="form-control text-uppercase" [(ngModel)]="trazabilidad.fecha" name="fecha" required />
                         </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Hora <strong class="text-danger">*</strong></label>
+                            <input type="time" class="form-control text-uppercase" [(ngModel)]="trazabilidad.hora" name="hora" required />
+                        </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Observaciones </label>
                             <textarea  class="form-control" [(ngModel)]="trazabilidad.observaciones" name="observaciones" rows="4"></textarea>
