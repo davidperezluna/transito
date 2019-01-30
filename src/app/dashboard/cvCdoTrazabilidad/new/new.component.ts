@@ -35,7 +35,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.trazabilidad = new CvCdoTrazabilidad(null, null, null, null, null);
+    this.trazabilidad = new CvCdoTrazabilidad(null, null, null, null, null, null);
 
     this._CargoService.select().subscribe(
       response => {

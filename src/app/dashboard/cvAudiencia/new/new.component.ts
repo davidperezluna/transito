@@ -1,8 +1,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { CvAudiencia } from '../cvAudiencia.modelo';
 import { CvAudienciaService } from '../../../services/cvAudiencia.service';
-import { CfgCargoService } from '../../../services/cfgCargo.service';
-import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { ComparendoService } from '../../../services/comparendo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -12,72 +11,68 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public notificacion: CvAudiencia;
+  public audiencia: CvAudiencia;
   public errorMessage;
-  public cargos: any = null;
-  public estados: any = null;
-  public arrayCargos: any = [];
-
-  public dias = [
-    { 'value': '1', 'label': 'Lunes' },
-    { 'value': '2', 'label': 'Martes' },
-    { 'value': '3', 'label': 'Miercoles' },
-    { 'value': '4', 'label': 'Jueves' },
-    { 'value': '5', 'label': 'Viernes' },
-  ];
+  public numeroComparendo: any = null;
+  public comparendo: any = null;
 
 constructor(
   private _NotificacionService: CvAudienciaService,
-  private _CargoService: CfgCargoService,
-  private _EstadoService: CfgComparendoEstadoService,
-  private _loginService: LoginService,
+  private _ComparendoService: ComparendoService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.notificacion = new CvAudiencia(null, null, null, null);
-
-    this._CargoService.select().subscribe(
-      response => {
-        this.cargos = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._EstadoService.select().subscribe(
-      response => {
-        this.estados = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
+    this.audiencia = new CvAudiencia(null, null, null, null);
   }
 
   onCancelar(){
     this.ready.emit(true);
   }
+
+  onSearchComparendo() {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._ComparendoService.searchByNumber({ 'numero':this.numeroComparendo }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.comparendo = response.data;
+        } else {
+          this.comparendo = null;
+
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
-    let datos = {
-      'notificacion': this.notificacion,
-      'arrayCargos': this.arrayCargos
-    }
+    this.audiencia.idComparendo = this.comparendo.id;
     
-		this._NotificacionService.register(datos, token).subscribe(
+		this._NotificacionService.register(this.audiencia, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

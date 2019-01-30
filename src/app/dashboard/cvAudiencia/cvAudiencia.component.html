@@ -20,20 +20,22 @@
               <thead>
                 <tr>
                     <th>#</th>
-                    <th>Estado</th>
+                    <th>Comparendo</th>
                     <th>Detalles</th>
+                    <th>Tipo</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let audiencia of audiencias; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ audiencia.estado.nombre }}</td>
+                  <td>{{ audiencia.comparendo.consecutivo.consecutivo }}</td>
                   <td>
                     <b>Día:</b> {{ audiencia.dia }}
                     <br>
                     <b>Hora:</b> {{ audiencia.hora }}
                   </td>
+                  <td>{{ audiencia.tipo }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onEdit(audiencia)" class="btn btn-xs btn-primary" type="button">

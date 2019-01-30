@@ -13,12 +13,12 @@ export class CvAudienciaComponent implements OnInit {
   public errorMessage;
 	public id;
 
-	public notificaciones;
+	public audiencias;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public notificacion: CvAudiencia;
+  public audiencia: CvAudiencia;
 
   constructor(
     private _NotificacionService: CvAudienciaService,
@@ -36,7 +36,8 @@ export class CvAudienciaComponent implements OnInit {
 
     this._NotificacionService.index().subscribe(
 				response => {
-          this.notificaciones = response.data;
+          this.audiencias = response.data;
+          
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -125,8 +126,8 @@ export class CvAudienciaComponent implements OnInit {
     })
   }
 
-  onEdit(notificacion:any){
-    this.notificacion = notificacion;
+  onEdit(audiencia:any){
+    this.audiencia = audiencia;
     this.formEdit = true;
     this.formIndex = false;
   }

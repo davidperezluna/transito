@@ -32,6 +32,4 @@ export class LoggerService {
 		log.action = action;
 		this.saveLog(log,token).subscribe(res => {});
 	}
-
-
 }

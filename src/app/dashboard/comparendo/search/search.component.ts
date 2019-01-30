@@ -4,6 +4,7 @@ import { CfgAdmFormatoService } from '../../../services/cfgAdmFormato.service';
 import { CvCdoTrazabilidadService } from '../../../services/cvCdoTrazabilidad.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
 import { LoginService } from '../../../services/login.service';
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -27,6 +28,8 @@ export class SearchComponent implements OnInit{
   public formDocument: any = false;
   public formatos: any = null;
 
+  public apiUrl = environment.apiUrl + 'configuracion';
+
   public search: any = {
     'tipoFiltro': null,
     'filtro': null,
@@ -48,6 +51,7 @@ export class SearchComponent implements OnInit{
 
   public datosTrazabilidad = {
     'fecha': null,
+    'hora': null,
     'observaciones': null,
     'idComparendo': null,
     'idComparendoEstado': null,
@@ -79,6 +83,7 @@ constructor(
 
     this.formDocument = false;
     this.formTrazabilidad = false;
+    this.formRecord = false;
 
     let token = this._LoginService.getToken();
 
@@ -112,8 +117,8 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
-		}); 
+      }
+    );
   }
 
   iniciarTabla() {

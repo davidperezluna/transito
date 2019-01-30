@@ -263,8 +263,28 @@ export class NewComponent implements OnInit {
       'placa': this.placa,
       'moduloId': 3,
     };
+
+    this._VehiculoService.showVehiculoRnma(this.placa, token).subscribe(
+      response => {
+        console.log(response);
+        if (response.status == 'success') {
+          this.vehiculo = response.vehiculo;
+          this.placaEncontrada = 2;
+        } else {
+          this.placaEncontrada = 3;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
  
-    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
+    /*this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
       response => {
         console.log(response);
         if (response.status == 'success') {
@@ -281,7 +301,10 @@ export class NewComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-      });
+      }
+    );*/
+
+
   }
 
   onKeyCiudadanoDemandado() {

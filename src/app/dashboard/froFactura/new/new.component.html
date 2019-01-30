@@ -17,6 +17,10 @@
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
+                            <label>Interes <strong class="text-danger">*</strong></label>
+                            <input type="numeric" class="form-control" [(ngModel)]="factura.interes" name="interes" readonly required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
                             <label>Valor a pagar <strong class="text-danger">*</strong></label>
                             <input type="numeric" class="form-control" [(ngModel)]="factura.valor" name="valor" readonly required />
                         </div>
@@ -33,6 +37,71 @@
                         <i class="fa fa-save"></i>
                         Facturar
                     </button>
+                    
+                </div>
+            </div>
+        </div>
+    </div><!-- /.col -->
+
+    <div class="col-xs-12 col-lg-8" *ngIf="factura.id"><!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Factura No. <b>{{ factura.numero }}</b></h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <b>Ciudad:</b>
+                                        <br> {{ municipio }}
+                                    </td>
+                                    <td>
+                                        <b>Fec. Creación:</b>
+                                        <br> {{ fechaCreacion }}
+                                    </td>
+                                    <td>
+                                        <b>Fec. Vencimiento:</b>
+                                        <br> {{ fechaVencimiento }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <table class="table table-bordered table-striped" *ngIf="factura.comparendos">
+                            <thead>
+                                <tr>
+                                    <th colspan="5">COMPARENDOS</th>
+                                </tr>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Fecha</th>
+                                    <th>Cod. Infracción</th>
+                                    <th>Valor</th>
+                                    <th>Placa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let comparendo of factura.comparendos; let i = index">
+                                    <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                                    <td>{{ comparendo.fecha }}</td>
+                                    <td>{{ comparendo.infraccion.codigo }}</td>
+                                    <td>{{ comparendo.valorInfraccion }}</td>
+                                    <td>{{ comparendo.placa }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <a href="{{ apiUrl }}/froFactura/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>
+                        Generar PDF
+                    </a>
                 </div>
             </div>
         </div>

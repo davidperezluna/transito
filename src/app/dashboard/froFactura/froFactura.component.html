@@ -8,11 +8,15 @@
         </div>
         <div class="card-body"><!-- .card-body -->
           <form #formSearch="ngForm">
-            <div class="row"><!-- .row -->
-              <div class="col-xs-12 col-lg-12">
-                <div class="form-group">
-                  <label>Número de identificación:</label>
-                  <input type="text" class="form-control" [(ngModel)]="numeroIdentificacion" name="numeroIdentificacion" required autofocus />
+            <div class="form-group">
+              <div class="row"><!-- .row -->
+                <div class="col-xs-12 col-lg-12">
+                  <label>Tipo de filtro</label>
+                  <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                  <label>Filtro</label>
+                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
                 </div>
               </div>
             </div><!-- /.row -->
@@ -46,6 +50,7 @@
                 <th>Cod. Infracción</th>
                 <th>Valor</th>
                 <th>Placa</th>
+                <th>Curso</th>
                 <th>Estado</th>
                 <th>Seleccionar</th>
               </tr>
@@ -58,11 +63,17 @@
                 <td>{{ comparendo.infraccion?.codigo }}</td>
                 <td>{{ comparendo.valorInfraccion }}</td>
                 <td>{{ comparendo.placa }}</td>
+                <td>
+                  <div class="custom-control custom-checkbox" style="margin-top: -17px;">
+                    <input type="checkbox" (change)="onSelectCurso(comparendo, $event)" class="custom-control-input" id="curso-{{comparendo.id}}" [disabled]="!comparendo.curso">
+                    <label class="custom-control-label" for="curso-{{comparendo.id}}"></label>
+                  </div>
+                </td>
                 <td>{{ comparendo.estado?.nombre }}</td>
                 <td>
                   <div class="custom-control custom-checkbox" style="margin-top: -17px;">
-                    <input type="checkbox" value="{{comparendo.id}}" (change)="onSelect(comparendo, $event)" class="custom-control-input" id="{{comparendo.id}}">
-                    <label class="custom-control-label" for="{{comparendo.id}}"></label>
+                    <input type="checkbox" value="{{comparendo.id}}" (change)="onSelectComparendo(comparendo, $event)" class="custom-control-input" id="seleccion-{{comparendo.id}}">
+                    <label class="custom-control-label" for="seleccion-{{comparendo.id}}"></label>
                   </div>
                 </td>
               </tr>

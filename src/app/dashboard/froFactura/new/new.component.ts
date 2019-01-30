@@ -4,6 +4,7 @@ import { FroFacturaService } from '../../../services/froFactura.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+import { environment } from 'environments/environment'
 
 @Component({
   selector: 'app-new',
@@ -16,6 +17,11 @@ export class NewComponent implements OnInit {
   public errorMessage;
 
   public sedesOperativas: any;
+  public municipio: any = null;
+  public fechaCreacion: any = null;
+  public fechaVencimiento: any = null;
+
+  public apiUrl = environment.apiUrl + 'financiero';
 
 constructor(
   private _FacturaService: FroFacturaService,
@@ -24,14 +30,15 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.factura = new FroFactura(null, null, null, null);
+    this.factura = new FroFactura(0, 0, null, null, null, null);
 
     let token = this._loginService.getToken();
     
     this._FacturaService.calculateValue(this.comparendosSelect, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.factura.valor = response.data;
+          this.factura.valor = response.data.totalPagar;
+          this.factura.interes = response.data.totalInteres;
         } else {
           swal({
             title: 'Error!',
@@ -75,12 +82,17 @@ constructor(
     let token = this._loginService.getToken();
 
     this.factura.comparendos = this.comparendosSelect;
+    //Tipo de recaudo infracciones
+    this.factura.idTipoRecaudo = 2;
     
 		this._FacturaService.register(this.factura, token).subscribe(
 			response => {
         if(response.status == 'success'){
-          this.ready.emit(true);
-          
+          this.factura.id = response.data.id;
+          this.municipio = response.data.sedeOperativa.municipio.nombre;
+          this.fechaCreacion = response.data.fechaCreacion;
+          this.fechaVencimiento = response.data.fechaVencimiento;
+
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -88,6 +100,8 @@ constructor(
             confirmButtonText: 'Aceptar'
           })
         }else{
+          this.factura.id = null;
+          
           swal({
             title: 'Error!',
             text: response.message,
@@ -105,5 +119,4 @@ constructor(
       }
     );
   }
-
 }
