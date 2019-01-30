@@ -45,6 +45,7 @@ constructor(
       response => {
         if (response.status == 'success') {
           this.comparendo = response.data;
+          this.audiencia.idComparendo = this.comparendo.id;
         } else {
           this.comparendo = null;
 

@@ -103,7 +103,7 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
     this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
-    if()
+    //if()
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,

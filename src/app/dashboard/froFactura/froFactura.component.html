@@ -64,17 +64,25 @@
                 <td>{{ comparendo.valorInfraccion }}</td>
                 <td>{{ comparendo.placa }}</td>
                 <td>
-                  <div class="custom-control custom-checkbox" style="margin-top: -17px;">
-                    <input type="checkbox" (change)="onSelectCurso(comparendo, $event)" class="custom-control-input" id="curso-{{comparendo.id}}" [disabled]="!comparendo.curso">
-                    <label class="custom-control-label" for="curso-{{comparendo.id}}"></label>
-                  </div>
+                  <div class="form-group"><!-- .form-group -->
+                    <div class="row"><!-- .row -->
+                      <div class="custom-control custom-checkbox" style="margin-top: -17px;">
+                        <input type="checkbox" (change)="onSelectCurso(comparendo, $event)" class="custom-control-input" id="curso-{{comparendo.id}}" [disabled]="!comparendo.curso">
+                        <label class="custom-control-label" for="curso-{{comparendo.id}}"></label>
+                      </div>
+                    </div><!-- /.row -->
+                  </div><!-- /.form-group -->
                 </td>
                 <td>{{ comparendo.estado?.nombre }}</td>
                 <td>
-                  <div class="custom-control custom-checkbox" style="margin-top: -17px;">
-                    <input type="checkbox" value="{{comparendo.id}}" (change)="onSelectComparendo(comparendo, $event)" class="custom-control-input" id="seleccion-{{comparendo.id}}">
-                    <label class="custom-control-label" for="seleccion-{{comparendo.id}}"></label>
-                  </div>
+                  <div class="form-group"><!-- .form-group -->
+                    <div class="row"><!-- .row -->
+                      <div class="custom-control custom-checkbox" style="margin-top: -17px;">
+                        <input type="checkbox" value="{{comparendo.id}}" (change)="onSelectComparendo(comparendo, $event)" class="custom-control-input" id="seleccion-{{comparendo.id}}">
+                        <label class="custom-control-label" for="seleccion-{{comparendo.id}}"></label>
+                      </div>
+                    </div><!-- /.row -->
+                  </div><!-- /.form-group -->
                 </td>
               </tr>
             </tbody>
