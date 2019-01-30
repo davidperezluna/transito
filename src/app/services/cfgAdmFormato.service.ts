@@ -46,12 +46,13 @@ export class CfgAdmFormatoService {
 
 	edit(datos, token) {
 		let json = JSON.stringify(datos);
+		json = encodeURI(json);
+		console.log(json);
+		
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/edit", params, { headers: headers }).map(
-			res => res.json(),
-			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
-		);
+			res => res.json());
 	}
 
 	select() {

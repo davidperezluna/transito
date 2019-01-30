@@ -263,11 +263,12 @@ export class NewComponent implements OnInit {
       'placa': this.placa,
       'moduloId': 4,
     };
-    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
+
+    this._VehiculoService.showVehiculoRnrs(this.placa, token).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
-          this.vehiculo = this.respuesta.data;
+          this.vehiculo = response.vehiculo;
           this.placaEncontrada = 2;
         } else {
           this.placaEncontrada = 3;

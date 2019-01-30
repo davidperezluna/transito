@@ -17,7 +17,6 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
   public rnmaTramiteLevantamientoLimitacion: RnmaTramiteLevantamientoLimitacion;
   public TramiteLimitacionService:any;
   public errorMessage;
-  public respuesta;
   public tramitesLevantamiento;
   public table: any = null;
   public tramiteLevantamiento: any;
@@ -106,16 +105,15 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
       'moduloId': 3,
     };
 
-    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
+    this._VehiculoService.showVehiculoRnma(this.placa, token).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.limitacionVehiculoEncontrada = 4;
           this._VehiculoLimitacionService.getTramiteLimitacionPlaca(datos, token).subscribe(
             response => {
-              this.respuesta = response;
-              if (this.respuesta.status == 'success') {
-                this.limitacionesVehiculo = this.respuesta.data;
+              response = response;
+              if (response.status == 'success') {
+                this.limitacionesVehiculo = response.data;
                 this.limitacionVehiculoEncontrada = 2;
                 this.listaLimitacionVehiculo = true;
               } else {
@@ -151,8 +149,7 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
     let token = this._loginService.getToken();
     this._VehiculoLimitacionService.levantarLimitacion(limitacionVehiculo, token).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',

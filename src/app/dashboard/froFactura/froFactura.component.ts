@@ -27,9 +27,21 @@ export class FroFacturaComponent implements OnInit {
   public table: any = null;
   public sedeOperativa: any = null;
 
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
+  }
+
+  public tiposFiltro = [
+    { 'value': '1', 'label': 'Nombres o Apellidos' },
+    { 'value': '2', 'label': 'Identificación' },
+    { 'value': '3', 'label': 'Placa' },
+    { 'value': '4', 'label': 'No. de comparendo' },
+  ];
+
 
   constructor(
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
     private _FuncionarioService: MpersonalFuncionarioService,
     private _ComparendoService: ComparendoService,
   ){}
@@ -37,70 +49,86 @@ export class FroFacturaComponent implements OnInit {
   ngOnInit() {  }
 
   onSearch() {
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     this.formIndex = false;
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
-    this._ComparendoService.searchByInfractor({ 'infractorIdentificacion': this.numeroIdentificacion }, token).subscribe(
+    this._ComparendoService.searchByFiltrosFactura(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.comparendos = response.data;
-          let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
-          }, 100);
           this.formIndex = true;
+
+          this.comparendos.forEach((element: any, key: any) => {            
+            this._ComparendoService.validateCurso({ 'id':element.id }, token).subscribe(
+              response => {
+                if (response.status == 'success') {
+                  element.curso = true;
+                }else{
+                  element.curso = false;
+                }
+              }
+            );
+          });
+
           swal({
             title: 'Perfecto!',
             text: response.message,
-            type: 'info',
+            type: 'success',
             confirmButtonText: 'Aceptar'
           });
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
         } else {
+          this.comparendos = null;
           swal({
             title: 'Alerta!',
             text: response.message,
             type: 'warning',
             confirmButtonText: 'Aceptar'
-          });
+          })
         }
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
       }
     );
-
   }
 
-  onSelect(comparendo: any, eve: any) {
+  onSelectCurso(comparendo: any, eve: any) {
     if (eve.target.checked) {
-      this.comparendosSelect.push(comparendo.id);
-      this.valorTotal = this.valorTotal + comparendo.valor;
+      comparendo.curso = true;
     } else {
-      let index = this.comparendosSelect.indexOf(comparendo.id);
-      this.valorTotal = this.valorTotal - comparendo.valor;
+      comparendo.curso = false;
+    }
+  }
+
+  onSelectComparendo(comparendo: any, eve: any) {
+    if (eve.target.checked) {
+      this.comparendosSelect.push(comparendo);
+      this.valorTotal = this.valorTotal + comparendo.valorInfraccion;
+    } else {
+      let index = this.comparendosSelect.indexOf(comparendo.consecutivo.consecutivo);
+      this.valorTotal = this.valorTotal - comparendo.valorInfraccion;
       if (index > -1) {
         this.comparendosSelect.splice(index, 1);
       }
     }
   }
-
-  /*onSelectCurso(comparendo: any, eve: any) {
-    if (eve.target.checked) {
-      this.comparendosSelect.push(comparendo.id);
-      this.valorTotal = this.valorTotal + comparendo.valor;
-    } else {
-      let index = this.comparendosSelect.indexOf(comparendo.id);
-      this.valorTotal = this.valorTotal - comparendo.valor;
-      if (index > -1) {
-        this.comparendosSelect.splice(index, 1);
-      }
-    }
-  }*/
-
 
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -127,8 +155,8 @@ export class FroFacturaComponent implements OnInit {
   }
   
  
-    /*let identity = this._loginService.getIdentity();
-    let token = this._loginService.getToken();
+    /*let identity = this._LoginService.getIdentity();
+    let token = this._LoginService.getToken();
       
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion },token).subscribe(
       response => { 

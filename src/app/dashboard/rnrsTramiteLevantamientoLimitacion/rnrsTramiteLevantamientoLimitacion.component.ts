@@ -54,6 +54,7 @@ export class RnrsTramiteLevantamientoLimitacionComponent implements OnInit {
     let datos = {
       'moduloId': 5,
     };
+    
     this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
       response => {
         if (response) {
