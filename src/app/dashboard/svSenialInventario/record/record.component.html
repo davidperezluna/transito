@@ -53,9 +53,9 @@
                             <td>
                                 <b>Disponibles:</b> {{ inventario.senial.cantidad }}
                                 <br>
-                                <span *ngIf="municipio">
+                                <span *ngIf="tipoDestino == 'MUNICIPIO'">
                                     <b>Instalados:</b> {{ inventario.cantidad }}</span>
-                                <span *ngIf="!municipio">
+                                <span *ngIf="tipoDestino == 'BODEGA'">
                                     <b>Entregado por proveedor:</b> {{ inventario.cantidad }}</span>
                                 <br>
                                 <b>Estado:</b> {{ inventario.estado.nombre }}

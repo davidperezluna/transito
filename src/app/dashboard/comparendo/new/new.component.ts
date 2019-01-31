@@ -373,14 +373,6 @@ constructor(
   }
 
   onEnviar(){
-    swal({
-      title: 'Guardando comparendo!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    });
-
     let token = this._loginService.getToken();
 
     let datos = {
