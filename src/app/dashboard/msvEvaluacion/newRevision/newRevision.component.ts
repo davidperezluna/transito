@@ -30,7 +30,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.msvRevision = new MsvRevision(null, null, null, null, null, null, null,null,null,null,null);
+    this.msvRevision = new MsvRevision(null, null, null, null, null, null, null, null, null,null,null,null,null);
     
 
     this._MsvPersonalFuncionarioService.selectContratistas().subscribe(
@@ -88,7 +88,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'La revisión ya se encuentra registrada',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
