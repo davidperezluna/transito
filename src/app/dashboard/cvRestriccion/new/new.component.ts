@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { CvLcCfgRestriccion } from '../cvLcCfgRestriccion.modelo';
-import { CvLcCfgRestriccionService } from '../../../services/cvLcCfgRestriccion.service';
+import { CvRestriccion } from '../cvRestriccion.modelo'; 
+import { CvRestriccionService } from '../../../services/cvRestriccion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public restriccion: CvLcCfgRestriccion;
+public restriccion: CvRestriccion;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _CvLcCfgRestriccionService: CvLcCfgRestriccionService,
+  private _CvRestriccionService: CvRestriccionService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.restriccion = new CvLcCfgRestriccion(null, null);
+    this.restriccion = new CvRestriccion(null, null);
   }
   
   onCancelar(){
@@ -30,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._CvLcCfgRestriccionService.register(this.restriccion,token).subscribe(
+		this._CvRestriccionService.register(this.restriccion,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

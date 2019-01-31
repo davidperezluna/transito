@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CvLcCfgRestriccionComponent } from './cvLcCfgRestriccion.component';
+import { CvRestriccionComponent } from './cvRestriccion.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { CvLcCfgRestriccionService } from '../../services/cvLcCfgRestriccion.service';
 
@@ -10,9 +10,9 @@ import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [CvLcCfgRestriccionComponent,NewComponent,EditComponent],
-    exports: [CvLcCfgRestriccionComponent, NewComponent,EditComponent],
+    declarations: [CvRestriccionComponent,NewComponent,EditComponent],
+    exports: [CvRestriccionComponent, NewComponent,EditComponent],
     providers:[CvLcCfgRestriccionService]     
 })
 
-export class CvLcCfgRestriccionModule { }
+export class CvRestriccionModule { }
