@@ -27,13 +27,13 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
 
   public comparendosPendiente=[];
   public comparendosSancionado=[];
-  public comparendosCobroCoativo=[];
+  public comparendosCobroCoactivo=[];
   public comparendosAcuerdoPago=[];
   public comparendosAcuerdoPagoIncumplido=[];
   public comparendosInhibitorio=[];
   public comparendosCaducidad=[];
   public comparendosPagado=[];
-  public comparendosPrescripcion=[];
+  public comparendosPreinscripcion=[];
   public comparendosExonerado=[];
   public comparendosRevocatoria=[];
   //public comparendosInterposicion=[];
@@ -103,36 +103,37 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
     this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
-    //if()
-    $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      dom: 'Bfrtip',
-      buttons: [
-        {
-          extend: 'excel',
-          text: 'Excel',
-          title: 'xls',
-          filename: 'Reporte_Documental_Por_Estado' + this.fecha,
-        },
-        {
-          extend: 'pdfHtml5',
-          orientation: 'landscape',
-          pageSize: 'LEGAL',
-          filename: 'Reporte_Documental_Por_EstadoPDF_' + this.fecha,
-        }
-      ],
-      oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
-        }
-      }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    if(estado) {
+        $('#'+ estado).DataTable({
+          responsive: true,
+          pageLength: 8,
+          sPaginationType: 'full_numbers',
+          dom: 'Bfrtip',
+          buttons: [
+            {
+              extend: 'excel',
+              text: 'Excel',
+              title: 'xls',
+              filename: 'Reporte_Documental_Por_Estado' + this.fecha,
+            },
+            {
+              extend: 'pdfHtml5',
+              orientation: 'landscape',
+              pageSize: 'LEGAL',
+              filename: 'Reporte_Documental_Por_EstadoPDF_' + this.fecha,
+            }
+          ],
+          oLanguage: {
+              oPaginate: {
+              sFirst: '<<',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '>>'
+            }
+          }
+      });
+      this.table = $('#'+ estado).DataTable();
+    }
   }
   
   onNew(){
@@ -165,17 +166,35 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
               if(element.estado.id == 1)
               {
                 this.comparendosPendiente.push(element);
+                if (this.comparendosPendiente.length != 0) {
+                  let estado = "dataTables-pendiente";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               } 
               else if(element.estado.id == 2){
                 this.comparendosSancionado.push(element);
+                if (this.comparendosSancionado.length != 0) {
+                  let estado = "dataTables-sancionado";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 3){
-                this.comparendosCobroCoativo.push(element);
+                this.comparendosCobroCoactivo.push(element);
+                if (this.comparendosCobroCoactivo.length != 0) {
+                  let estado = "dataTables-cobroCoactivo";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 4){
                 this.comparendosAcuerdoPago.push(element);
                 if(this.comparendosAcuerdoPago.length != 0){
-                  let estado = "acuerdoPago";
+                  let estado = "dataTables-acuerdoPago";
                   let timeoutId = setTimeout(() => {
                     this.iniciarTabla(estado);
                   }, 100);
@@ -183,30 +202,78 @@ export class rpcccInventarioDocumentalComponent implements OnInit {
               }
               else if(element.estado.id == 5){
                 this.comparendosAcuerdoPagoIncumplido.push(element);
+                if (this.comparendosAcuerdoPagoIncumplido.length != 0) {
+                  let estado = "dataTables-acuerdoPagoIncumplido";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 6){
                 this.comparendosInhibitorio.push(element);
+                if (this.comparendosInhibitorio.length != 0) {
+                  let estado = "dataTables-inhibitorio";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 7){
                 this.comparendosCaducidad.push(element);
+                if (this.comparendosCaducidad.length != 0) {
+                  let estado = "dataTables-caducidad";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 8){
                 this.comparendosPagado.push(element);
+                if (this.comparendosPagado.length != 0) {
+                  let estado = "dataTables-pagado";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 9){
-                this.comparendosPrescripcion.push(element);
+                this.comparendosPreinscripcion.push(element);
+                if (this.comparendosPreinscripcion.length != 0) {
+                  let estado = "dataTables-preinscripcion";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 10){
                 this.comparendosExonerado.push(element);
+                if (this.comparendosExonerado.length != 0) {
+                  let estado = "dataTables-exonerado";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               else if(element.estado.id == 11){
                 this.comparendosRevocatoria.push(element);
+                if (this.comparendosRevocatoria.length != 0) {
+                  let estado = "dataTables-revocatoria";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }
               /* else if(element.estado.id == 10){
                 this.comparendosInterposicion.push(element);
               } */
               else if(element.estado.id == 12){
                 this.comparendosNulidad.push(element);
+                if (this.comparendosNulidad.length != 0) {
+                  let estado = "dataTables-nulidad";
+                  let timeoutId = setTimeout(() => {
+                    this.iniciarTabla(estado);
+                  }, 100);
+                }
               }             
             });            
           }else if(response.code == 400){

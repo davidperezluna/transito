@@ -5,6 +5,8 @@ export class MsvRevision{
 		public fechaRevision: string,
 		public fechaDevolucion: string,
 		public fechaOtorgamiento: string,
+		public fechaVisitaControl1: string,
+		public fechaVisitaControl2: string,
 		public estado: boolean,
 		public empresaId: number,
 		public personaContacto: string,
