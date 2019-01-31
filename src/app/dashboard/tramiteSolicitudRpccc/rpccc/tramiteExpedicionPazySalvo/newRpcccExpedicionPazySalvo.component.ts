@@ -4,7 +4,7 @@ import { ServicioService } from '../../../../services/servicio.service';
 import { ComparendoService } from '../../../../services/comparendo.service';
 import { PaisService } from '../../../../services/pais.service';
 import { LoginService } from '../../../../services/login.service';
-
+import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 
 @Component({
@@ -34,6 +34,8 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
         'ciudadanoId': null,
         'idFactura': null,
     };
+
+    public apiUrl = environment.apiUrl;
 
     constructor(
         private _LoginService: LoginService,
