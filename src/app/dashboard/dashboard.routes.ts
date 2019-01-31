@@ -214,6 +214,7 @@ import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
 import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.routes';
+import { CvRestriccionRoutes } from './cvRestriccion/cvRestriccion.routes';
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
@@ -429,6 +430,7 @@ export const DashboardRoutes: Route[] = [
       ...EmpresaAlcaldiaRoutes,
       ...FroFacturaRoutes,
       ...FroRecaudoRoutes,
+      ...CvRestriccionRoutes,
       
     ]
   }
