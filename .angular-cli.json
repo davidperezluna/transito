@@ -32,7 +32,8 @@
         "assets/vendors/weather-icons-master/css/weather-icons-wind.min.css",
         "assets/vendors/themify-icons/themify-icons.css",
         "assets/scss/light_adminux.scss",
-        "../node_modules/summernote/dist/summernote-bs4.css"
+        "../node_modules/summernote/dist/summernote-bs4.css",
+        "../node_modules/angular-calendar/css/angular-calendar.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
