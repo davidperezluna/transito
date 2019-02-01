@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="row" *ngIf='formSearch'>
+        <div class="col-md-12 col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-uppercase">Historial de licencias de conducción</h5>
+                    <hr>
+                    <form #formSearch="ngForm">     
+                        <div class="form-group row">
+                          <div  class="col-xs-12 col-lg-6">
+                              <label>Tipo identificación</label>
+                              <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="tiposIdentificacion">
+                            </ng-select>
+                          </div>
+                          <div  class="col-xs-12 col-lg-6">
+                              <label>Identificación</label>
+                              <input class="form-control" [(ngModel)]="identificacion" name="identificacion" type="text">
+                          </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                  <div class="btn-group">
+                    <button (click)="onSearchCiudadano()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                      <i class="fa fa-search"></i>
+                      Buscar
+                    </button>
+                    <button (click)="onSearchCiudadano()" [disabled]="formSearch.invalid" class="btn btn-default" type="button">
+                      <i class="fa fa-save"></i>
+                      Agregar
+                    </button>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <hr>
+    <div class="row" *ngIf='licencias?.length > 0'>
+      <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">
+                <b class="text-uppercase">Licencias de conducción</b> 
+                <small>Registrados</small>
+              </h5>
+            </div>
+            <div class="card-body">
+              <table class="table " id="dataTables-example">
+                <thead>
+                  <tr>
+                      <th>Id</th>
+                      <th>Categoria</th>
+                      <th>Número</th>
+                      <th>O.T. Expide</th>
+                      <th>Fecha expedición</th>
+                      <th>Estado</th>
+                      <!-- <th>Acciones</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd" *ngFor="let licencia of licencias; let i = index">
+                    <td>{{ licencia.id }}</td>
+                    <td>{{ licencia.categoria.nombre }}</td>
+                    <td>{{ licencia.numero }}</td>
+                    <td>{{ licencia.sedeOperativa.nombre }}</td>
+                    <td>{{ licencia.fechaExpedicion }}</td>
+                    <td>
+                      <label class="label label-success text-success" *ngIf="licencia.activo">Activo</label>
+                      <label class="label label-danger text-danger" *ngIf="!licencia.activo">Inactivo</label>
+                    </td>
+                    <!--
+                      <td>
+                        <button (click)="edit(licencia)" class="btn btn-xs btn-info" type="button">
+                          <i class="fa fa-edit"></i>
+                          Editar
+                        </button> 
+                        <button (click)="delete(licencia.id)"  class="btn btn-xs btn-danger" type="button">
+                          <i class="fa fa-trash"></i>
+                          Eliminar
+                        </button>
+                      </td>
+                    -->
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /.table-responsive --> 
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- <app-edit *ngIf='formEdit' [licencia]="licencia" (ready)="ready($event)"></app-edit>
+      <app-new *ngIf='formNew' (ready)="ready($event)"></app-new> -->
+  </div>

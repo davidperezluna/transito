@@ -1,14 +1,14 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CvLcCfgRestriccionService } from '../../services/cvLcCfgRestriccion.service';
+import { CvRestriccionService } from '../../services/cvRestriccion.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cvLcCfgRestriccion.component.html'
+  templateUrl: './cvRestriccion.component.html'
 })
-export class CvLcCfgRestriccionComponent implements OnInit {
+export class CvRestriccionComponent implements OnInit {
   public errorMessage;
 	public id;
 
@@ -20,7 +20,7 @@ export class CvLcCfgRestriccionComponent implements OnInit {
   public restriccion: any;
 
   constructor(
-    private _CvLcCfgRestriccionService: CvLcCfgRestriccionService,
+    private _CvRestriccionService: CvRestriccionService,
 		private _loginService: LoginService,
     ){}
     
@@ -33,7 +33,7 @@ export class CvLcCfgRestriccionComponent implements OnInit {
       }
     });
 
-    this._CvLcCfgRestriccionService.index().subscribe(
+    this._CvRestriccionService.index().subscribe(
 				response => {
           this.restricciones = response.data;
           let timeoutId = setTimeout(() => {  
@@ -97,7 +97,7 @@ export class CvLcCfgRestriccionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CvLcCfgRestriccionService.delete({ 'id': id }, token).subscribe(
+        this._CvRestriccionService.delete({ 'id': id }, token).subscribe(
           response => {
               swal({
                 title: 'Eliminado!',
