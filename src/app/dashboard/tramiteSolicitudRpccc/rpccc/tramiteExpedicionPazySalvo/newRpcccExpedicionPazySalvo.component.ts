@@ -35,7 +35,7 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
         'idFactura': null,
     };
 
-    public apiUrl = environment.apiUrl;
+    public apiUrl = environment.apiUrl + 'comparendo';
 
     constructor(
         private _LoginService: LoginService,
