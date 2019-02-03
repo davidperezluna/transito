@@ -69,7 +69,7 @@ export class NewRnaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null, null);
     /* swal({
       title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',
@@ -413,11 +413,13 @@ export class NewRnaComponent implements OnInit {
     this.apoderadoEncontrado = 1;
   }
 
-  onKeyApoderado() {
+  onSearchApoderado() {
     let token = this._loginService.getToken();
+
     let identificacion = {
       'numeroIdentificacion': this.identificacionApoderado,
     };
+
     this._ciudadanoService.searchByIdentificacion(identificacion, token).subscribe(
       response => {
         if (response.status == 'success') {
@@ -439,7 +441,7 @@ export class NewRnaComponent implements OnInit {
       });
   }
 
-  cerrarApoderado() {
+  onCloseApoderado() {
     this.frmApoderado = false;
     this.apoderado = false;
     this.apoderadoEncontrado = 1;

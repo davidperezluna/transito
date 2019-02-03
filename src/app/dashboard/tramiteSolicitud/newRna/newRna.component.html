@@ -7,7 +7,7 @@
                 name="placaVehiculo" required />
             <span class="input-group-btn">
                 <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
-                    ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                 type="button"><i class="fa fa-search"></i></button>
             </span>
         </div>
 
@@ -97,7 +97,7 @@
                                             <p *ngIf='apoderado'>
                                                 <strong>Apoderado: </strong>
                                                 {{apoderado.primerNombre}} {{apoderado.segundoNombre}} {{apoderado.primerApellido}} {{apoderado.segundoApellido}}
-                                                <button (click)="cerrarApoderado()" class="btn btn-danger" ngxclipboard="" type="button">
+                                                <button (click)="cerrarApoderado()" class="btn btn-danger" type="button">
                                                     <i class="fa fa-close"></i>
                                                 </button>
                                             </p>
@@ -108,13 +108,13 @@
                                                     <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado"
                                                         required />
                                                     <span class="input-group-btn">
-                                                        <button (click)="onKeyApoderado()" [class.btn-default]="apoderadoEncontrado === 1" [class.btn-success]="apoderadoEncontrado === 2"
-                                                            [class.btn-danger]="apoderadoEncontrado === 3" class="btn" ngxclipboard="" type="button">
+                                                        <button (click)="onSearchApoderado()" [class.btn-default]="apoderadoEncontrado === 1" [class.btn-success]="apoderadoEncontrado === 2"
+                                                            [class.btn-danger]="apoderadoEncontrado === 3" class="btn" type="button">
                                                             <i class="fa fa-search"></i>
                                                         </button>
                                                     </span>
                                                     <span class="input-group-btn">
-                                                        <button (click)="cerrarApoderado()" class="btn btn-danger" ngxclipboard="" type="button">
+                                                        <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
                                                             <i class="fa fa-close"></i>
                                                         </button>
                                                     </span>
@@ -222,7 +222,7 @@
                                 />
                                 <span class="input-group-btn">
                                     <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
-                                        ngxclipboard="" type="button">
+                                     type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>

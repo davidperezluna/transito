@@ -161,10 +161,6 @@
                         <label>Vin</label>
                         <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.vin" name="vin">
                     </div>
-                    <div class="col-lg-3">
-                        <label>Numero Pasajeros</label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="numeroPasajeros">
-                    </div>
                 
                     <div class="col-lg-3" *ngIf='servicioSelected == 4'>
                         <label>Radio Acción*</label>
@@ -186,6 +182,11 @@
                             required
                             name="modalidadesTransporte">
                         </ng-select>
+                    </div>
+
+                    <div class="col-lg-3" *ngIf='modalidadTransporteSelected == 2 || modalidadTransporteSelected == 3'>
+                        <label>Capcaidad carga</label>
+                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
                     </div>
 
                 </div>

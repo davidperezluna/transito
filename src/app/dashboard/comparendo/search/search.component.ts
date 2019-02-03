@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit{
   public errorMessage;
   public comparendos: any = null;
   public comparendo: any = null;
+  public audiencia: any = null;
   public estados: any = null;
   public trazabilidades: any = null;
   public trazabilidad: any = null;
@@ -353,5 +354,5 @@ constructor(
         }
       }
     );
-  }  
+  }
 }

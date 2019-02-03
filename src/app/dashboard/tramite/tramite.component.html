@@ -20,7 +20,8 @@
             <table class="table " id="dataTables-example">
               <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
+                    <th>Código</th>
                     <th>Nombre</th>
                     <th>Módulo</th>
                     <th>Acciones</th>
@@ -28,7 +29,8 @@
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let tramite of tramites; let i = index">
-                  <td >{{ tramite.id }}</td>
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ tramite.codigo }}</td>
                   <td >{{ tramite.nombre }}</td>
                   <td >{{ tramite.modulo.abreviatura }}</td>
                   <td>

@@ -21,7 +21,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.proyecto = new BpProyecto(null, null, null, null, null, null);
+    this.proyecto = new BpProyecto(null, null, null, null, null);
   }
   
   onCancelar(){
