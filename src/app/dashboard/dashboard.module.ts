@@ -48,11 +48,12 @@ import { CvCdoCfgInteresModule } from './cvCdoCfgInteres/cvCdoCfgInteres.module'
 import { CvAudienciaModule } from './cvAudiencia/cvAudiencia.module';
 
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
-import { CvLcCfgRestriccionModule } from './cvLcCfgRestriccion/cvLcCfgRestriccion.module';
+import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
 import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
 import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.module';
+import { CvLcCfgTipoRestriccionModule } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.module';
 import { CvCfgTipoMedidaCautelarModule } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.module';
 import { CvMedidaCautelarModule } from './cvMedidaCautelar/cvMedidaCautelar.module';
 
@@ -240,6 +241,7 @@ import {RightsidebarComponent} from '../shared';
 
 @NgModule({
   imports: [
+      CvLcCfgTipoRestriccionModule,
       ConpetoParametroModule,
       CommonModule,
       RouterModule,
@@ -361,7 +363,7 @@ import {RightsidebarComponent} from '../shared';
       CvCdoCfgInteresModule,
       CvAudienciaModule,
       CvLcCfgMotivoModule,
-      CvLcCfgRestriccionModule,
+      CvRestriccionModule,
       CvCfgInteresModule,
       CvCfgPorcentajeInicialModule,
       CvAcuerdoPagoModule,

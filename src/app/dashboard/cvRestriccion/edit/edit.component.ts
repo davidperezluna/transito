@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { CvLcCfgRestriccionService } from '../../../services/cvLcCfgRestriccion.service';
+import { CvRestriccionService } from '../../../services/cvRestriccion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public respuesta;
 public formReady = false;
 
 constructor(
-  private _CvLcCfgRestriccionService: CvLcCfgRestriccionService,
+  private _CvRestriccionService: CvRestriccionService,
   private _loginService: LoginService,
   ){}
 
@@ -28,7 +28,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._CvLcCfgRestriccionService.edit(this.restriccion, token).subscribe(
+		this._CvRestriccionService.edit(this.restriccion, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
