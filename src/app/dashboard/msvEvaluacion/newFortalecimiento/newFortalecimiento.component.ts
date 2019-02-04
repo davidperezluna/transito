@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { MsvParametroService } from '../../../services/msvParametro.service';
-import { MsvVariableService } from '../../../services/msvVariable.service';
 import { MsvCalificacionService } from '../../../services/msvCalificacion.service';
 import { MsvResultadoService } from "../../../services/msvResultado.service";
 import swal from 'sweetalert2';
@@ -37,7 +36,6 @@ export class NewFortalecimientoComponent implements OnInit {
   constructor(
     private _loginService: LoginService,
     private _MsvParametroService: MsvParametroService,
-    private _MsvVariableService: MsvVariableService,
     private _MsvCalificacionService: MsvCalificacionService,
     private _MsvResultadoService: MsvResultadoService,
 
@@ -49,6 +47,7 @@ export class NewFortalecimientoComponent implements OnInit {
     this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
       response => {
         this.msvParametros = response.data;
+        console.log(this.msvParametros);
         if (this.msvParametros) {
           //entra aquí si encuentra Parametro                    
           this.showT = true;
@@ -124,5 +123,9 @@ export class NewFortalecimientoComponent implements OnInit {
         }
       }
     );
+  }
+  
+  onCalcularTotal(e){
+    alert("aksjhdas");
   }
 }

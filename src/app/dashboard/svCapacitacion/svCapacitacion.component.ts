@@ -10,8 +10,9 @@ declare var $: any;
     templateUrl: './svCapacitacion.component.html'
 })
 export class SvCapacitacionComponent implements OnInit {
+    
     public errorMessage;
-    public cedula: any;
+    public identificacion: any;
     public ciudadano: any = null;
     public capacitaciones: any = null;
     public table: any; 
@@ -58,19 +59,19 @@ export class SvCapacitacionComponent implements OnInit {
 
         let token = this._loginService.getToken();
         let datos = {
-            'cedula': this.cedula
+            'cedula': this.identificacion,
         };
         this._CiudadanoService.showCiudadanoCedulaId(token, datos).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ciudadano = response.data;
-                    this._CapacitacionService.index({ 'identificacion': this.ciudadano.identificacion }, token).subscribe(
+                    this._CapacitacionService.buscarCapacitacionByCiudadano({ 'identificacion': this.ciudadano.identificacion }, token).subscribe(
                         response => {
                             if (response.status == 'success') {
                                 this.capacitaciones = response.data;
-                                /*let timeoutId = setTimeout(() => {
+                                let timeoutId = setTimeout(() => {
                                     this.iniciarTabla();
-                                }, 100);*/
+                                }, 100);
                             } else {
                                 swal({
                                     title: 'Alerta!',
@@ -108,7 +109,7 @@ export class SvCapacitacionComponent implements OnInit {
         );
     }
 
-    /*iniciarTabla() {
+    iniciarTabla() {
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
@@ -123,5 +124,5 @@ export class SvCapacitacionComponent implements OnInit {
             }
         });
         this.table = $('#dataTables-example').DataTable();
-    }*/
+    }
 }

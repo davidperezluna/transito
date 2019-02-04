@@ -189,7 +189,7 @@ export class MsvEvaluacionComponent implements OnInit {
     this.revisionNew = false;
     let token = this._loginService.getToken();
 
-    this._EmpresaService.showNitOrNombre(token,this.datos).subscribe(
+    this._EmpresaService.showNitOrNombre(this.datos, token).subscribe(
       response => {
         if (response.status == 'success' ) {
           this.msj = response.msj;

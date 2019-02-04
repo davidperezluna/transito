@@ -54,8 +54,8 @@ export class EmpresaService {
  
 	}
 
-	showNitOrNombre(token,parametro){
-		let json = JSON.stringify(parametro);
+	showNitOrNombre(datos, token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/show/nitnombre", params, {headers: headers})
