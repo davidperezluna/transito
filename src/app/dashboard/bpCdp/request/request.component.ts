@@ -1,10 +1,12 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { BpCdp } from '../bpCdp.modelo';
 import { BpCdpService } from '../../../services/bpCdp.service';
 import { BpProyectoService } from '../../../services/bpProyecto.service';
 import { BpActividadService } from '../../../services/bpActividad.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-request',
@@ -17,8 +19,10 @@ export class RequestComponent implements OnInit {
     public numeroProyecto: any;
     public proyecto: any;
     public actividades: any;
+    public solicitudes: any;
+    public formIndex: any;
     public formSearch: any;
-    public formNew: any;
+    public table: any;
 
     public datos = {
         'idActividad': null
@@ -37,8 +41,50 @@ constructor(
         this.numeroProyecto = null;
         this.proyecto = null;
         this.actividades = null;
+        this.formIndex = true;
+        this.formSearch = false;
+
+        this._CdpService.index().subscribe(
+            response => {
+                this.solicitudes = response.data;
+                let timeoutId = setTimeout(() => {
+                    this.iniciarTabla();
+                }, 100);
+
+                swal.close();
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+    }
+
+    iniciarTabla() {
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            pageLength: 8,
+            sPaginationType: 'full_numbers',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<<',
+                    sPrevious: '<',
+                    sNext: '>',
+                    sLast: '>>'
+                }
+            }
+        });
+        this.table = $('#dataTables-example').DataTable();
+    }
+
+    onNew() {
         this.formSearch = true;
-        this.formNew = false;
+        this.formIndex = false;
+        this.table.destroy();
     }
 
     searchProyecto() {

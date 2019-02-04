@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { BpCdpService } from '../../services/bpCdp.service';
 import { LoginService } from '../../services/login.service';
 import { BpCdp } from './bpCdp.modelo';

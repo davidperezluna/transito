@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { BpProyectoService } from '../../services/bpProyecto.service';
 import { LoginService } from '../../services/login.service';
 import { BpProyecto } from './bpProyecto.modelo';

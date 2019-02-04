@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { BpProyectoService } from '../../../services/bpProyecto.service';
 import { BpActividadService } from '../../../services/bpActividad.service';
 import { BpCfgTipoInsumoService } from '../../../services/bpCfgTipoInsumo.service';

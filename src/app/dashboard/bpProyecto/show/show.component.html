@@ -40,7 +40,7 @@
                         <tr>
                             <td>
                                 <b>Costo total: </b>
-                                {{ proyecto.costoTotal }}
+                                {{ proyecto.costoTotal | currency: 'COP' }}
                             </td>
                         </tr>
                     </tbody>
@@ -109,7 +109,7 @@
                         <tr class="odd" *ngFor="let actividad of actividades; let i = index">
                             <td>{{ i +1 }}</td>
                             <td>{{ actividad.nombre }}</td>
-                            <td>{{ actividad.costoTotal }}</td>
+                            <td>{{ actividad.costoTotal | currency: 'COP' }}</td>
                             <td>
                                 <div class="btn-group">
                                     <button (click)="onIndexInsumo(actividad)" class="btn btn-xs btn-default" type="button">
@@ -158,8 +158,8 @@
                             <td>{{ insumo.nombre }}</td>
                             <td>{{ insumo.unidadMedida }}</td>
                             <td>{{ insumo.cantidad }}</td>
-                            <td>{{ insumo.valorUnitario }}</td>
-                            <td>{{ insumo.valorTotal }}</td>
+                            <td>{{ insumo.valorUnitario | currency: 'COP' }}</td>
+                            <td>{{ insumo.valorTotal | currency: 'COP' }}</td>
                             <td>
                                 <div class="btn-group">
                                     <button (click)="onDeleteInsumo(insumo.id)" class="btn btn-xs btn-danger" type="button">
