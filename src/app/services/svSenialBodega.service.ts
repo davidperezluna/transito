@@ -44,4 +44,11 @@ export class SvSenialBodegaService {
 			 return this._http.post(this.url+"/edit", formData).map(res => res.json());
 		}
 	}
+
+	selectProveedorBySenial(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/select/proveedor/senial", params, { headers: headers }).map(res => res.json());
+	}
 }
