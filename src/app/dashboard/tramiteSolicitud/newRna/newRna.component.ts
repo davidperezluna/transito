@@ -446,5 +446,5 @@ export class NewRnaComponent implements OnInit {
     this.apoderado = false;
     this.apoderadoEncontrado = 1;
   }
-
+ 
 }

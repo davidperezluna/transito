@@ -384,10 +384,10 @@ export class NewRnmaComponent implements OnInit {
       'numeroIdentificacion': this.identificacionApoderado,
     };
 
-    this._ciudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+    this._ciudadanoService.searchByIdentificacion(identificacion,token).subscribe(
       response => {
         this.respuesta = response;
-        if (this.respuesta.status == 'success') {
+        if (this.respuesta.status == 'success') { 
           this.apoderadoSelect = this.respuesta.data;
           this.apoderadoEncontrado = 2;
           // this.ciudadanoNew = false;
