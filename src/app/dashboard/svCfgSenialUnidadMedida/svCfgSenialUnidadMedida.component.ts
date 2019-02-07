@@ -1,27 +1,26 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SvCfgSenialConectorService } from '../../services/svCfgSenialConector.service';
+import { SvCfgSenialUnidadMedidaService } from '../../services/svCfgSenialUnidadMedida.service';
 import { LoginService } from '../../services/login.service';
-import { SvCfgSenialConector } from './svCfgSenialConector.modelo';
+import { SvCfgSenialUnidadMedida } from './svCfgSenialUnidadMedida.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './svCfgSenialConector.component.html'
+  templateUrl: './svCfgSenialUnidadMedida.component.html'
 })
-export class SvCfgSenialConectorComponent implements OnInit {
+export class SvCfgSenialUnidadMedidaComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-	public conectores;
+	public unidadesMedida;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public conector: SvCfgSenialConector;
+  public unidadMedida: SvCfgSenialUnidadMedida;
 
   constructor(
-    private _ConectorService: SvCfgSenialConectorService,
+    private _ConectorService: SvCfgSenialUnidadMedidaService,
 		private _loginService: LoginService,
     ){}
     
@@ -36,7 +35,7 @@ export class SvCfgSenialConectorComponent implements OnInit {
 
     this._ConectorService.index().subscribe(
 				response => {
-          this.conectores = response.data;
+          this.unidadesMedida = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -107,7 +106,6 @@ export class SvCfgSenialConectorComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -125,8 +123,8 @@ export class SvCfgSenialConectorComponent implements OnInit {
     })
   }
 
-  onEdit(conector:any){
-    this.conector = conector;
+  onEdit(unidadMedida:any){
+    this.unidadMedida = unidadMedida;
     this.formEdit = true;
     this.formIndex = false;
   }

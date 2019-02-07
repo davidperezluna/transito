@@ -1,13 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
-
-import swal from 'sweetalert2';
-import { Utils } from 'ng2-bootstrap';
-import { MpersonalFuncionarioService } from 'app/services/mpersonalFuncionario.service';
-import { CfgComparendoEstadoService } from 'app/services/cfgComparendoEstado.service';
-import { ComparendoService } from 'app/services/comparendo.service';
-import { SedeOperativaService } from "app/services/sedeOperativa.service";
+import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
+import { ComparendoService } from '../../../services/comparendo.service';
+import { SedeOperativaService } from "../../../services/sedeOperativa.service";
 import { DatePipe, CurrencyPipe } from '@angular/common';
+import { Utils } from 'ng2-bootstrap';
+import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({

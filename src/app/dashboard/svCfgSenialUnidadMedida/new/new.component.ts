@@ -1,6 +1,6 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { SvCfgSenialConector } from '../svCfgSenialConector.modelo';
-import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
+import { SvCfgSenialUnidadMedida } from '../svCfgSenialUnidadMedida.modelo';
+import { SvCfgSenialUnidadMedidaService } from '../../../services/svCfgSenialUnidadMedida.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public conector: SvCfgSenialConector;
+public unidadMedida: SvCfgSenialUnidadMedida;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _EstadoService: SvCfgSenialConectorService,
+  private _EstadoService: SvCfgSenialUnidadMedidaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.conector = new SvCfgSenialConector(null, null);
+    this.unidadMedida = new SvCfgSenialUnidadMedida(null, null);
   }
 
   onCancelar(){
@@ -30,7 +30,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._EstadoService.register(this.conector,token).subscribe(
+		this._EstadoService.register(this.unidadMedida,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

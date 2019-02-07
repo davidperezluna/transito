@@ -1,5 +1,3 @@
-import { ArrayType } from "../../../../../node_modules/@angular/compiler/src/output/output_ast";
-
 export class SvSenialUbicacion{
 	constructor(
 		public fecha: string,
@@ -10,6 +8,8 @@ export class SvSenialUbicacion{
 		public idEstado: number,
 		public idMunicipio: number,
 		public idBodega: number,
+		public idUnidadMedida: number,
+		public idLinea: number,
 		public id: number
 	){}
 }

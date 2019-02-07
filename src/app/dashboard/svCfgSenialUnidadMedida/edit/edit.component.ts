@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
+import { SvCfgSenialUnidadMedidaService } from '../../../services/svCfgSenialUnidadMedida.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,24 +9,22 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() conector:any = null;
+@Input() unidadMedida:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 
 constructor(
-  private _ConectorService: SvCfgSenialConectorService,
+  private _UnidadMedidaService: SvCfgSenialUnidadMedidaService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.conector);
-   }
+  ngOnInit(){ }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._ConectorService.edit(this.conector,token).subscribe(
+		this._UnidadMedidaService.edit(this.unidadMedida,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

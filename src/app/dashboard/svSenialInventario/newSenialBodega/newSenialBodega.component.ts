@@ -22,6 +22,7 @@ export class NewSenialBodegaComponent implements OnInit {
     public proveedores: any;
     public estados: any;
     public seniales: any;
+    public senial: any = null;
 
     constructor(
         private _ProveedorService: SvCfgSenialProveedorService,
@@ -81,6 +82,37 @@ export class NewSenialBodegaComponent implements OnInit {
     
     onCancelar() {
         this.ready.emit(true);
+    }
+
+    onChangedSenial(e) {
+        if (e) {
+            let token = this._LoginService.getToken();
+
+            this._SenialService.show({ 'id': e }, token).subscribe(
+                response => {
+                    if (response.status == 'success') {
+                        this.senial = response.data;
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        this.senial = null;
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        }
     }
 
     onCalcularTotal() {

@@ -6,7 +6,7 @@
           <div class="card-header">
             <h5>
               <b class="text-uppercase">Seguridad Vial (Señales)</b>
-              <small>Configuración de Conectores</small>
+              <small>Configuración de unidad de medida</small>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -25,15 +25,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let conector of conectores; let i = index">
-                  <td >{{ conector.id }}</td>
-                  <td >{{ conector.nombre }}</td>
+                <tr class="odd" *ngFor="let unidadMedida of unidadesMedida; let i = index">
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ unidadMedida.nombre }}</td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="onEdit(conector)" class="btn btn-xs btn-primary" type="button">
+                      <button (click)="onEdit(unidadMedida)" class="btn btn-xs btn-primary" type="button">
                         <i class="fa fa-pencil"></i>
                       </button> 
-                      <button (click)="onDelete(conector.id)"  class="btn btn-xs btn-danger" type="button">
+                      <button (click)="onDelete(unidadMedida.id)"  class="btn btn-xs btn-danger" type="button">
                         <i class="fa fa-trash"></i>
                       </button> 
                     </div>
@@ -47,6 +47,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [conector]="conector" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [unidadMedida]="unidadMedida" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

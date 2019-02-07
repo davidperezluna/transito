@@ -30,6 +30,14 @@
                         <ng-select [multiple]="false" [options]="estados" [(ngModel)]="senialUbicacion.idEstado" name="estado" required>
                         </ng-select>
                     </div>
+                </div>
+                <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12" *ngIf="senial && senial.tipoSenial.id == 1">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [(ngModel)]="demarcacion" class="custom-control-input" id="demarcacion" name="demarcacion" checked="">
+                            <label class="custom-control-label" for="demarcacion">Demarcación externa</label>
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-lg-4">
                         <label>Cantidad <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
@@ -39,6 +47,20 @@
                         <ng-select [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
                         </ng-select>
                     </div>
+                </div>
+                <div class="row" *ngIf="demarcacion"><!-- .row -->
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Linea <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Unidad medida <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="unidadesMedida" [(ngModel)]="senialUbicacion.idUnidadMedida" name="idUnidadMedida" required>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="row"><!-- .row -->
                     <div class="col-xs-12 col-lg-6">
                         <label>Adjunto</label>
                         <input type="file"  class="form-control" [(ngModel)]="fileSelected" (change)="onFileChange($event)" placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" name="file">
@@ -56,21 +78,6 @@
                             </span>
                         </div>
                         <div align="center">
-                            <agm-map height="500px" [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)">
-                            
-                                <agm-marker *ngFor="let m of markers; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
-                                    [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
-                            
-                                    <agm-info-window>
-                                        <strong>InfoWindow content</strong>
-                                    </agm-info-window>
-                            
-                                </agm-marker>
-                            
-                                <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="5000" [fillColor]="'red'" [circleDraggable]="true" [editable]="true">
-                                </agm-circle>
-                            
-                            </agm-map>
                         </div>
                     </div>
                 </div><!-- /.row -->

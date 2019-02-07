@@ -3,7 +3,8 @@ import { MouseEvent } from '@agm/core';
 import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
 import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
-import { SvCfgSenialConectorService } from '../../../services/svCfgSenialConector.service';
+import { SvCfgSenialLineaService } from '../../../services/svCfgSenialLinea.service';
+import { SvCfgSenialUnidadMedidaService } from '../../../services/svCfgSenialUnidadMedida.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { SvSenialBodegaService } from '../../../services/svSenialBodega.service';
 import { LoginService } from '../../../services/login.service';
@@ -26,6 +27,9 @@ export class NewSenialUbicacionComponent implements OnInit {
     public seniales: any;
     public bodegas: any;
     public estados: any;
+    public unidadesMedida: any = null;
+    public lineas: any = null;
+    public demarcacion: any;
 
     public senial: any = null;
     public municipio: any = null;
@@ -34,11 +38,11 @@ export class NewSenialUbicacionComponent implements OnInit {
     public formIndex = true;
     public senialUbicacion: SvSenialUbicacion;
 
-    zoom: number = 15;
-    lat: number = 1.2246233;
-    lng: number = -77.2808208;
+    public zoom: number = 15;
+    public lat: number = 1.2246233;
+    public lng: number = -77.2808208;
 
-    markers: marker[] = [
+    public markers: marker[] = [
         {
             lat: 51.673858,
             lng: 7.815982,
@@ -57,7 +61,7 @@ export class NewSenialUbicacionComponent implements OnInit {
             label: 'C',
             draggable: true
         }
-    ]
+    ];
 
     public data = {
         'senialUbicacion':null,
@@ -68,11 +72,13 @@ export class NewSenialUbicacionComponent implements OnInit {
         private _SvSenialUbicacionService: SvSenialUbicacionService,
         private _SenialService: SvCfgSenialService,
         private _EstadoService: SvCfgSenialEstadoService,
+        private _LineaService: SvCfgSenialLineaService,
+        private _UnidadMedidaService: SvCfgSenialUnidadMedidaService,
         private _MunicipioService: MunicipioService,
         private _BodegaService: SvSenialBodegaService,
         private _LoginService: LoginService,
     ) {
-        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null);
+        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null);
     }
 
     ngOnInit() {
@@ -144,6 +150,69 @@ export class NewSenialUbicacionComponent implements OnInit {
     onChangedSenial(e) {
         if (e) {
             let token = this._LoginService.getToken();
+
+            this._SenialService.show({ 'id': e }, token).subscribe(
+                response => {
+                    if (response.status == 'success') {
+                        this.senial = response.data;
+
+                        if (this.senial.tipoSenial.id == 1) {
+                            this._LineaService.select().subscribe(
+                                response => {
+                                    if (response) {
+                                        this.lineas = response;
+                                    } else {
+                                        this.lineas = null;
+                                    }
+                                },
+                                error => {
+                                    this.errorMessage = <any>error;
+
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            );
+
+                            this._UnidadMedidaService.select().subscribe(
+                                response => {
+                                    if (response) {
+                                        this.unidadesMedida = response;
+                                    }else{
+                                        this.unidadesMedida =  null;
+                                    }
+                                },
+                                error => {
+                                    this.errorMessage = <any>error;
+
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            );
+                        }
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        this.senial = null;
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
 
             this._BodegaService.selectProveedorBySenial({ 'idSenial': e }, token).subscribe(
                 response => {

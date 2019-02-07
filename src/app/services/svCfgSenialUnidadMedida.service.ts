@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class SvCfgSenialConectorService {
-	private url = environment.apiUrl + 'seguridadvial/svcfgsenialconector';
+export class SvCfgSenialUnidadMedidaService {
+	private url = environment.apiUrl + 'seguridadvial/svcfgsenialunidadmedida';
 	public identity;
 	public token;
 
