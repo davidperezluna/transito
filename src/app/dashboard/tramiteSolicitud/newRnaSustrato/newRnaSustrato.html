@@ -16,10 +16,10 @@
                         </div> -->
 
                         <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
-                            <input type="text" class="form-control" placeholder="Numero" [(ngModel)]="numeroInsumo" name="numero" required />
-                            <span class="input-group-btn">
+                            <input type="text" disabled class="form-control" placeholder="Numero" [(ngModel)]="numeroInsumo" name="numero" required />
+                            <!-- <span class="input-group-btn">
                                 <button (click)="onKeyValidateInsumo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                            </span>
+                            </span> -->
                         </div>
 
                         <div class="container" *ngIf="isExist">

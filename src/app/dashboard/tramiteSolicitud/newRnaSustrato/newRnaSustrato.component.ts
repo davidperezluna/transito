@@ -3,7 +3,7 @@ import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.serv
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { LoginService } from '../../../services/login.service';
 import { RnaInsumoService } from '../../../services/rnaInsumos.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
+import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { FacturaInsumo } from './facturaInsumo.modelo';
 import { FacturaInsumoService } from '../../../services/facturaInsumo.service';
@@ -51,7 +51,7 @@ export class NewRnaInsumoComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
+        private _FuncionarioService: MpersonalFuncionarioService,
         private _CiudadanoService: CiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private _FacturaInsumoService: FacturaInsumoService,
@@ -61,7 +61,59 @@ export class NewRnaInsumoComponent implements OnInit {
      } 
 
     ngOnInit() {
-        
+        let token = this._loginService.getToken();
+        let identity = this._loginService.getIdentity();
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                  console.log(response.data.sedeOperativa.id);
+                  let datos = {
+                        'sedeOperativa':1 
+                    }
+                    this._RnaInsumoService.showUltimoSustratoDisponible(datos).subscribe(
+                        responseInsumo => {
+                        if(responseInsumo.status == 'success'){
+                            this.numeroInsumo = responseInsumo.numero;
+                            this.isExist = true;
+                            this.isError = false
+                        }else{
+                            this.isError = true; 
+                            this.isExist = false;
+                            swal({
+                                title: 'Error!',
+                                text: 'No tiene asignado sustratos para la sede',
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        }
+                        error => {
+                                this.errorMessage = <any>error;
+
+                                if(this.errorMessage != null){
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+
+                    });
+      
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: 'Su usuario no tiene autorización para realizar facturación!',
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+      
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+                }
+              }
+            });
     }
 
     onKeyCiudadano(){
@@ -69,11 +121,12 @@ export class NewRnaInsumoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.FacturaInsumo.ciudadanoId,
         };
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
                     this.ciudadano = this.respuesta.data;
+                    this.ciudadanoEncontrado= 2;
                     this.ciudadanoEncontrado= 2;
                     this.ciudadanoNew = false;
             }else{
@@ -129,19 +182,14 @@ export class NewRnaInsumoComponent implements OnInit {
                 }
                 error => {
                         this.errorMessage = <any>error;
-    
                         if(this.errorMessage != null){
                             console.log(this.errorMessage);
                             alert("Error en la petición");
                         }
                     }
-        
             }
             
         );
-              
-     
-    
     }
 
     onCancelar(){
@@ -163,7 +211,6 @@ export class NewRnaInsumoComponent implements OnInit {
             },
             error => {
                 this.errorMessage = <any>error;
-
                 if (this.errorMessage != null) {
                     console.log(this.errorMessage);
                     alert('Error en la petición');

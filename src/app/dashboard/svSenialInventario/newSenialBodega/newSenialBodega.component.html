@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-lg-4">
                         <label>Señal <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="senialBodega.idSenial" name="senial" required>
+                        <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialBodega.idSenial" name="senial" required>
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-4">
@@ -41,7 +41,7 @@
 
                 <div class="row">
                     <div class="col-xs-12 col-lg-4">
-                        <label>Cantidad <strong class="text-danger">*</strong></label>
+                        <label>Cantidad <span *ngIf="senial && senial.tipoSenial.id == 1">(galones)</span> <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="senialBodega.cantidad" name="cantidad" required />
                     </div>
                     <div class="col-xs-12 col-lg-4">

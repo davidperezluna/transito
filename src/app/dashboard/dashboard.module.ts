@@ -33,7 +33,7 @@ import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
 
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
-import { SvCfgSenialConectorModule } from './svCfgSenialConector/svCfgSenialConector.module';
+import { SvCfgSenialUnidadMedidaModule } from './svCfgSenialUnidadMedida/svCfgSenialUnidadMedida.module';
 import { SvCfgSenialTipoModule } from './svCfgSenialTipo/svCfgSenialTipo.module';
 import { SvCfgSenialColorModule } from './svCfgSenialColor/svCfgSenialColor.module';
 import { SvCfgSenialEstadoModule } from './svCfgSenialEstado/svCfgSenialEstado.module';
@@ -350,7 +350,7 @@ import {RightsidebarComponent} from '../shared';
       CfgAdmFormatoModule,
       CfgAdmFormatoTipoModule,
       CfgBodegaModule,
-      SvCfgSenialConectorModule,
+      SvCfgSenialUnidadMedidaModule,
       SvCfgSenialTipoModule,
       SvCfgSenialColorModule,
       SvCfgSenialEstadoModule,
