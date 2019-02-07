@@ -64,6 +64,7 @@ public datos:any=[];
 public valorVehiculoId:any;
 public valorRetefuente:any;
 public valorRetefuenteUnitario:any=0;
+public formNew:any =  false;
 
 constructor(
   private _FacturaService: FacturaService,
@@ -85,11 +86,38 @@ constructor(
       onOpen: () => {
         swal.showLoading()
       }
-      }).then((result) => {
-        if (
-          // Read more about handling dismissals
-          result.dismiss === swal.DismissReason.timer 
-        ) {
+    });
+
+    let token = this._loginService.getToken();
+
+    let identity = this._loginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.sedeOperativa = response.data.sedeOperativa;
+          this.funcionario = true;
+          this.factura.numero = datePiper.transform(this.date, 'hmss');
+          this.factura.fechaCreacion = datePiper.transform(this.date, 'yyyy-MM-dd');
+          this.factura.sedeOperativaId = this.sedeOperativa.id;
+
+          this.formNew = true;
+        }else{
+          swal({
+            title: 'Error!',
+            text: 'Su usuario no tiene autorización para realizar facturación!',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+
+          this.formNew = false;
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
         }
       });
 
@@ -124,31 +152,10 @@ constructor(
     );
 
     this.date = new Date();
-    let identity = this._loginService.getIdentity();
 
     this.factura = new Factura(null, null,null, null, null, null, null, null, null, null);
    
     var datePiper = new DatePipe(this.date);
-    
-    let token = this._loginService.getToken();
-    
-    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion },token).subscribe(
-      response => { 
-        if(response.status == 'success'){
-          this.sedeOperativa = response.data.sedeOperativa;
-          this.funcionario = true; 
-          this.factura.numero = datePiper.transform(this.date,'hmss');
-          this.factura.fechaCreacion = datePiper.transform(this.date,'yyyy-MM-dd');
-          this.factura.sedeOperativaId = this.sedeOperativa.id;
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-    });
 
     this._MflTipoRecaudoService.select().subscribe(
       response => {

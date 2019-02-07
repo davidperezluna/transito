@@ -4,7 +4,6 @@ export class BpProyecto{
 		public nombre: string,
 		public cuentaNumero: number,
 		public cuentaNombre: string,
-		public costoTotal: number,
 		public id:number
 	){}
 } 

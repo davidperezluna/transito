@@ -22,6 +22,7 @@ export class RnaPreregistro{
 		public serie:string,
 		public vin:number,
 		public numeroPasajeros:number,
+		public capacidadCarga:number,
 		public radioAccionId:number,
 		public modalidadTransporteId:number,
 		

@@ -311,6 +311,14 @@
                     <div class="tab-pane" id="rnrs-modificacion-acreedor-prendario-propietario" role="tabpanel" *ngIf='ciudadano'> 
                         <appRnrs-cambio-acreedor-prendario-propietario [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-cambio-acreedor-prendario-propietario>
                     </div> 
+
+                    <div class="tab-pane" id="rnrs-importacion-temporal" role="tabpanel" *ngIf='ciudadano'> 
+                        <appRnrs-importacion-temporal [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-importacion-temporal>
+                    </div> 
+
+                    <div class="tab-pane" id="rnrs-prorroga-importacion-temporal" role="tabpanel" *ngIf='ciudadano'> 
+                        <appRnrs-prorroga-importacion-temporal [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-prorroga-importacion-temporal>
+                    </div> 
                 </div> 
             </div>
         </div>

@@ -31,7 +31,7 @@ import { CvCdoCfgInteresRoutes } from './cvCdoCfgInteres/cvCdoCfgInteres.routes'
 import { CvAudienciaRoutes } from './cvAudiencia/cvAudiencia.routes';
 
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
-import { CvLcCfgRestriccionRoutes } from './cvLcCfgRestriccion/cvLcCfgRestriccion.routes';
+import { CvRestriccionRoutes } from './cvRestriccion/cvRestriccion.routes';
 import { CvCfgInteresRoutes } from './cvCfgInteres/cvCfgInteres.routes';
 import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.routes';
 import { CvAcuerdoPagoRoutes } from './cvAcuerdoPago/cvAcuerdoPago.routes';
@@ -212,6 +212,7 @@ import { ReporteRoutes } from './reporte/reporte.routes';
 import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
+import { CvLcCfgTipoRestriccionRoutes } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.routes';
 import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
 import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.routes';
 
@@ -233,6 +234,7 @@ export const DashboardRoutes: Route[] = [
     path: 'dashboard', 
     component: DashboardComponent,
     children: [
+      ...CvLcCfgTipoRestriccionRoutes,
       ...UserCfgMenuRoutes,
       ...UserCfgRoleRoutes,
       ...HomeRoutes,
@@ -297,7 +299,7 @@ export const DashboardRoutes: Route[] = [
       ...CvCdoCfgInteresRoutes,
       ...CvAudienciaRoutes,
       ...CvLcCfgMotivoRoutes,
-      ...CvLcCfgRestriccionRoutes,
+      ...CvRestriccionRoutes,
       ...CvCfgInteresRoutes,
       ...CvCfgPorcentajeInicialRoutes,
       ...CvAcuerdoPagoRoutes,

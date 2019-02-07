@@ -380,7 +380,7 @@ constructor(
         swal.showLoading()
       }
     });
-
+    
     let token = this._loginService.getToken();
 
     let datos = {

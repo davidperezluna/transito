@@ -1,6 +1,6 @@
 <div class="row">
     <!-- .row -->
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-6">
         <!-- .col -->
         <div class="card">
             <div class="card-body">
@@ -17,7 +17,7 @@
                             <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante"
                                 readonly>
                         </div>
-                        <div class="col-xs-12 col-lg-4">
+                        <div class="col-xs-12 col-lg-12">
                             <label>Identificación</label>
                             <input type="text" class="form-control" value="{{ solicitante.identificacion }}" name="solicitanteIdentificacion" readonly>
                         </div>
@@ -38,44 +38,54 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-4" *ngIf="comparendos">
+    <div class="col-xs-12 col-lg-6" *ngIf="comparendos">
         <div class="card">                    
             <div class="card-body">
-                <table class="table " id="dataTables-example">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Número orden Comparendo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
-                            <td>{{ comparendo.id }}</td>
-                            <td>{{ comparendo.consecutivo?.consecutivo }}</td>
-        
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- /.table-responsive -->
-            </div>
-        
-            <div *ngIf="comparendos" align="center" class="text-danger">
-                <h5 class="m-0 text-danger">
-                    <i class="fa fa-exclamation-triangle"></i>
-                    <b>( No esta a paz y salvo )</b>
-                    <br> El solicitante {{ solicitante.primerNombre }} {{ solicitante.primerApellido }} tiene comparendos pendientes
-                    no pagados.
-                </h5>
-            </div>
-        
-            <div *ngIf="!comparendos" align="center" class="text-danger">
-                <h5 class="m-0 text-success">
-                    El solicitante {{ solicitante.primerNombre }} {{ solicitante.primerApellido }} se encuentra a paz y salvo,
-                </h5>
+                <div class="row"><!-- .row -->
+                    <table class="table table-bordered table-striped" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>No. Comparendo</th>
+                                <th>Cod. Infracción</th>
+                                <th>Placa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                                <td>{{ comparendo.consecutivo?.consecutivo }}</td>
+                                <td>{{ comparendo.infraccion?.codigo }}</td>
+                                <td>{{ comparendo.placa }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div><!-- /.row -->
+                <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12"><!-- .col -->
+                        <div *ngIf="comparendos" class="text-center">
+                            <h5 class="m-0 text-danger">
+                                <i class="fa fa-exclamation-triangle"></i>
+                            </h5>
+                            <h3>
+                                <b>El solicitante {{ solicitante.primerNombre }} {{ solicitante.primerApellido }} tiene comparendos pendientes no
+                                    pagados.</b>
+                            </h3>
+                        </div>
+                        
+                        <div *ngIf="!comparendos" class="text-center">
+                            <h5 class="m-0 text-success">
+                                <i class="fa fa-check"></i>
+                            </h5>
+                            <h3>
+                                <b>El solicitante {{ solicitante.primerNombre }} {{ solicitante.primerApellido }} se encuentra a paz y salvo.</b>
+                            </h3>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
             </div>
         
             <div class="card-footer">
-                <a href="{{ apiUrl }}comparendo/pazysalvo/{{ solicitante.id }}/pdf" class="btn btn-success" target="_blank">
+                <a href="{{ apiUrl }}/{{ solicitante.id }}/pazysalvo/pdf" class="btn btn-success" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Generar PDF
                 </a>

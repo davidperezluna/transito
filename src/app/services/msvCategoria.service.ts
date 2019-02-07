@@ -55,6 +55,6 @@ export class MsvCategoriaService {
 	}
 
 	getCategoriaSelect(){
-		return this._http.get(this.url+"/select").map(res => res.json());
+		return this._http.get(this.url+"/select/categoria").map(res => res.json());
 	}
 }

@@ -130,23 +130,21 @@
                          </div>
                          <div class="card-body" *ngIf="miEmpresa">
                           <!-- Nav tabs -->
-                          <ul class="nav nav-tabs" role="tablist">
+                          <!-- <ul class="nav nav-tabs" role="tablist">
                              <li class="nav-item" *ngFor="let msvCategoria of msvCategorias; let i = index">
                                 <a class="nav-link" data-toggle="tab"  href="#{{msvCategoria.id}}" role="tab">{{msvCategoria.nombre}}
                                 </a>
                              </li>
-                          </ul> 
-
-                          <div class="tab-content">
-                             <div class="tab-pane" id="1" role="tabpanel">
-                              <app-new-fortalecimiento  [msvCategoriaId] = "1" [miEmpresa] = "miEmpresa" (ready)="ready($event)"></app-new-fortalecimiento>
+                          </ul> --> 
+                           <label>Categoria <strong class="text-danger">*</strong></label>
+                           <ng-select [multiple]="false" [options]="msvCategorias" [(ngModel)]="categoriaSelected" required
+                              name="idCategoria">
+                           </ng-select>
+                          <div>
+                             <div class="col-xs-12 col-lg-12">
+                                 <app-new-fortalecimiento  [msvCategoriaId] = "categoriaSelected" [miEmpresa] = "miEmpresa" (ready)="ready($event)"></app-new-fortalecimiento>
                              </div>
                           </div> 
-
-                          <div class="tab-content">
-                            <div class="tab-pane" id="2" role="tabpanel">
-                            </div>
-                         </div>
                        </div>
                          <!-- fin detalles de la empresa -->
                       </div>

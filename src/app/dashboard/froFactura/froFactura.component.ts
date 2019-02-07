@@ -33,9 +33,7 @@ export class FroFacturaComponent implements OnInit {
   }
 
   public tiposFiltro = [
-    { 'value': '1', 'label': 'Nombres o Apellidos' },
     { 'value': '2', 'label': 'Identificación' },
-    { 'value': '3', 'label': 'Placa' },
     { 'value': '4', 'label': 'No. de comparendo' },
   ];
 

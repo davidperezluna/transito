@@ -43,8 +43,8 @@
                                             <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"
                                                     [(ngModel)]="msvCriterio.evidencia"></div>
                                             <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"
-                                                    [(ngModel)]="msvCriterio.responde"></div>
-                                            <div class="col-lg-1" (ngModelChange)= "calcularTotal($event)" style="border:1px solid #cccccc;">{{msvParametro.valor
+                                                   (ngModelChange)= "calcularTotal($event, msvParametro, msvCategoriaId)" [(ngModel)]="msvCriterio.responde"></div>
+                                            <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor
                                                 /msvParametro.numeroVariables}}</div>
                                             <div class="col-lg-2" style="border:1px solid #cccccc;"><label *ngIf="msvCriterio.responde == true">{{msvParametro.valor
                                                     /msvParametro.numeroVariables}}</label>
@@ -59,7 +59,23 @@
                     </div>
                     <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div>
                     <div class="col-lg-4" style="border:1px solid #cccccc;">
-                        <input class="form-control" [(ngModel)]="datos.fortalecimiento" name="fortalecimiento" type="number">
+                        <input class="form-control" [(ngModel)]="datos.valorObtenidoFortalecimiento" name="valorObtenidoFortalecimiento" type="number">
+                    </div>
+                    <!-- <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div> -->
+                    <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="msvCategoriaId == 2">
+                        <input class="form-control" [(ngModel)]="datos.valorObtenidoComportamiento" name="valorObtenidoComportamiento" type="number">
+                    </div>
+                    <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="msvCategoriaId == 3">
+                        <input class="form-control" [(ngModel)]="datos.valorObtenidoVehiculoSeguro" name="valorObtenidoVehiculoSeguro" type="number">
+                    </div>
+                    <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="msvCategoriaId == 4">
+                        <input class="form-control" [(ngModel)]="datos.valorObtenidoInfraestructuraSegura" name="valorObtenidoInfraestructuraSegura" type="number">
+                    </div>
+                    <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="msvCategoriaId == 5">
+                        <input class="form-control" [(ngModel)]="datos.valorObtenidoAtencionVictima" name="valorObtenidoAtencionVictima" type="number">
+                    </div>
+                    <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="msvCategoriaId == 6">
+                        <input class="form-control" [(ngModel)]="datos.valorObtenidoValorAgregado" name="valorObtenidoValorAgregado" type="number">
                     </div>
                 </div>
             </div>

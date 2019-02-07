@@ -306,7 +306,7 @@ constructor(
             showCancelButton: true,
             focusConfirm: false,
             confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Aceptar!',
+            '<i class="fa fa-thumbs-up"></i> Aceptar!',
             confirmButtonAriaLabel: 'Thumbs up, great!',
             cancelButtonText:
             '<i class="fa fa-thumbs-down"></i> Cancelar',
@@ -318,6 +318,7 @@ constructor(
               this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
               this._facturaService.editFactura(this.factura,token).subscribe(
                 response => {
+
                   error => {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
@@ -335,7 +336,7 @@ constructor(
           });
   }
 
-   agregarApoderado(){
+  agregarApoderado(){
     this.frmApoderado = true;
   }
 
@@ -350,7 +351,7 @@ constructor(
     let identificacion = {
   'numeroIdentificacion' : this.identificacionApoderado,
     };
-    this._ciudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+    this._ciudadanoService.searchByIdentificacion(identificacion,token).subscribe(
         response => {
    
             if(response.status == 'success'){

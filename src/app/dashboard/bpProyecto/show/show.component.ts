@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { BpProyectoService } from '../../../services/bpProyecto.service';
 import { BpActividadService } from '../../../services/bpActividad.service';
 import { BpCfgTipoInsumoService } from '../../../services/bpCfgTipoInsumo.service';
@@ -28,10 +29,7 @@ export class ShowComponent implements OnInit {
 
     public datos = {
         'nombre': null,
-        'unidadMedida': null,
-        'cantidad': null,
-        'costoUnitario': null,
-        'costoTotal': null,
+        'costoTotal': 0,
         'idProyecto': null,
     };
 
@@ -133,21 +131,7 @@ export class ShowComponent implements OnInit {
     }
 
     onCalcularTotalActividad() {
-        let cantidad, valor;
-        cantidad = this.datos.cantidad;
-        valor = this.datos.costoUnitario;
-
-        if (cantidad == 0 || valor == 0) {
-            swal({
-                title: 'Alerta!',
-                text: 'La cantidad y/o el valor unitario no pueden estar en 0',
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-            });
-            this.datos.costoTotal = 0;
-        } else {
-            this.datos.costoTotal = cantidad * valor;
-        }
+        
     }
 
     onRegisterActividad() {

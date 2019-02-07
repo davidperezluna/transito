@@ -25,12 +25,13 @@ export class NewFortalecimientoComponent implements OnInit {
   public aplica;
   public evidencia;
   public datos = {
-    'fortalecimiento': null,
-    'comportamiento': null,
-    'vehiculoSeguro': null,
-    'infraestructuraSegura': null,
-    'atencionVictima': null,
-    'valorAgregado': null,
+    'idEmpresa': null,
+    'valorObtenidoFortalecimiento': null,
+    'valorObtenidoComportamiento': null,
+    'valorObtenidoVehiculoSeguro': null,
+    'valorObtenidoInfraestructuraSegura': null,
+    'valorObtenidoAtencionVictima': null,
+    'valorObtenidoValorAgregado': null,
   };
 
   constructor(
@@ -42,12 +43,10 @@ export class NewFortalecimientoComponent implements OnInit {
   ) { }
 
   ngOnInit() { 
-    
     let token = this._loginService.getToken();    
-    this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
+    this._MsvParametroService.getParametroByCategoriaId(token, 2).subscribe(
       response => {
         this.msvParametros = response.data;
-        console.log(this.msvParametros);
         if (this.msvParametros) {
           //entra aquí si encuentra Parametro                    
           this.showT = true;
@@ -92,10 +91,51 @@ export class NewFortalecimientoComponent implements OnInit {
       }
     );
   }
+  
+  calcularTotal(e, parametro, idCategoria){
+    if(idCategoria == 1) {
+      if (e) {
+        this.datos.valorObtenidoFortalecimiento += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoFortalecimiento -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 2) {
+      if (e) {
+        this.datos.valorObtenidoComportamiento += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoComportamiento -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 3) {
+      if (e) {
+        this.datos.valorObtenidoVehiculoSeguro += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoVehiculoSeguro -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 4) {
+      if (e) {
+        this.datos.valorObtenidoInfraestructuraSegura += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoInfraestructuraSegura -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 5) {
+      if (e) {
+        this.datos.valorObtenidoAtencionVictima += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoAtencionVictima -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 6) {
+      if (e) {
+        this.datos.valorObtenidoValorAgregado += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoValorAgregado -= parametro.valor / parametro.numeroVariables;
+      }
+    }
+  }
 
   onFinalizar() {
     let token = this._loginService.getToken();
 
+    this.datos.idEmpresa = this.miEmpresa.id;
     this._MsvResultadoService.register(this.datos, token).subscribe(
       response => {
         if (response.status == 'success') {
@@ -112,7 +152,7 @@ export class NewFortalecimientoComponent implements OnInit {
             text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -123,9 +163,5 @@ export class NewFortalecimientoComponent implements OnInit {
         }
       }
     );
-  }
-  
-  onCalcularTotal(e){
-    alert("aksjhdas");
   }
 }

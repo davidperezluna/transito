@@ -36,7 +36,7 @@
                   <td >{{ proyecto.fecha }}</td>
                   <td >{{ proyecto.cuentaNumero }}</td>
                   <td >{{ proyecto.cuentaNombre }}</td>
-                  <td >{{ proyecto.costoTotal }}</td>
+                  <td >{{ proyecto.costoTotal | currency: 'COP' }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onShow(proyecto)" class="btn btn-xs btn-default" type="button">

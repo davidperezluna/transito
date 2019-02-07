@@ -195,23 +195,36 @@
             </div>
             <div class="card-body">
                 <form #formNewTrazabilidad="ngForm">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Fecha <strong class="text-danger">*</strong></label>
-                            <input type="date" class="form-control text-uppercase" [(ngModel)]="datosTrazabilidad.fecha" name="fecha" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Hora <strong class="text-danger">*</strong></label>
-                            <input type="time" class="form-control text-uppercase" [(ngModel)]="datosTrazabilidad.hora" name="hora" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Estado <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Observaciones </label>
-                            <textarea  class="form-control" [(ngModel)]="datosTrazabilidad.observaciones" name="observaciones" rows="4"></textarea>
+                    <div class="form-group">
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha <strong class="text-danger">*</strong></label>
+                                <input type="date" class="form-control text-uppercase" [(ngModel)]="datosTrazabilidad.fecha" name="fecha" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Hora <strong class="text-danger">*</strong></label>
+                                <input type="time" class="form-control text-uppercase" [(ngModel)]="datosTrazabilidad.hora" name="hora" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Estado <strong class="text-danger">*</strong></label>
+                                <ng-select [multiple]="false" [options]="estados" [(ngModel)]="datosTrazabilidad.idComparendoEstado" name="idComparendoEstado" required>
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones </label>
+                                <textarea  class="form-control" [(ngModel)]="datosTrazabilidad.observaciones" name="observaciones" rows="4"></textarea>
+                            </div>
+                        </div><!-- /.row -->
+
+                        <div class="row" *ngIf="datosTrazabilidad.idComparendoEstado == 14">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha <strong class="text-danger">*</strong></label>
+                                <input type="date" class="form-control text-uppercase" [(ngModel)]="audiencia.fecha" name="fecha" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Hora <strong class="text-danger">*</strong></label>
+                                <input type="time" class="form-control text-uppercase" [(ngModel)]="audiencia.hora" name="hora" required />
+                            </div>
                         </div>
                     </div>
                 </form>

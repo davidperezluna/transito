@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class CvLcCfgRestriccionService { 
-	private url = environment.apiUrl + 'contravencional/cvlccfgrestriccion';
+export class CvRestriccionService { 
+	private url = environment.apiUrl + 'contravencional/cvrestriccion';
 	public identity;
 	public token;
  
