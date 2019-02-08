@@ -28,8 +28,8 @@
                     <div class="card-header">
                         <b class="text-uppercase">Solicitud de trámite</b>
                     </div>
-                    <div class="card-body">
-                        <div class="col-xs-12 col-lg-4">
+                    <div class="card-body row"> 
+                        <div class="col-xs-4 col-lg-4">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -67,7 +67,7 @@
                             </table>
                         </div>
 
-                        <div class="col-xs-12 col-lg-8">
+                        <div class="col-xs-8 col-lg-8">
                             <table class="table table-bordered" *ngIf="isCiudadano">
                                 <thead>
                                     <tr>
@@ -88,84 +88,84 @@
                                         </td>
                                         <td>
                                             <div class="custom-control custom-radio">
-                                                <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="customRadio1" name="customRadio"
-                                                    class="custom-control-input" checked="">
-                                                <label class="custom-control-label" for="customRadio1">Solicitante</label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p *ngIf='apoderado'>
-                                                <strong>Apoderado: </strong>
-                                                {{apoderado.primerNombre}} {{apoderado.segundoNombre}} {{apoderado.primerApellido}} {{apoderado.segundoApellido}}
-                                                <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
-                                                    <i class="fa fa-close"></i>
-                                                </button>
-                                            </p>
-                                            <button *ngIf='!frmApoderado && !apoderado' (click)="agregarApoderado()" class="btn btn-primary" [disabled]='!tramiteSolicitud.solicitanteId'>Agregar apoderado
-                                            </button>
-                                            <div *ngIf='frmApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group">
-                                                <div class="input-group" [class.has-success]="apoderadoEncontrado === 2" [class.has-danger]="apoderadoEncontrado === 3">
-                                                    <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado"
-                                                        required />
-                                                    <span class="input-group-btn">
-                                                        <button (click)="onSearchApoderado()" [class.btn-default]="apoderadoEncontrado === 1" [class.btn-success]="apoderadoEncontrado === 2"
-                                                            [class.btn-danger]="apoderadoEncontrado === 3" class="btn" type="button">
-                                                            <i class="fa fa-search"></i>
-                                                        </button>
-                                                    </span>
-                                                    <span class="input-group-btn">
-                                                        <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
-                                                            <i class="fa fa-close"></i>
-                                                        </button>
-                                                    </span>
-                                                </div>
-                                                <div class="has-danger" *ngIf="apoderadoEncontrado === 3">
-                                                    <div class="form-control-feedback has-danger has-error">No se encontró el apoderado</div>
-                                                </div>
+                                                <input [disabled]='!confirmarSolicitante' [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="radio-{{ciudadanoVehiculo.id}}" name="radio-{{ciudadanoVehiculo.id}}"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="radio-{{ciudadanoVehiculo.id}}">Solicitante</label>
                                             </div>
                                         </td>
                                     </tr>
+                                    
                                 </tbody>
+                                <tfoot *ngIf='!frmApoderado && !apoderado'>
+                                    <tr>
+                                        <td colspan="3">
+                                            <button  (click)="agregarApoderado()" class="btn btn-primary" *ngIf='!confirmarSolicitante'>
+                                                <i class="fa fa-save"></i>
+                                                Agregar apoderado
+                                            </button> 
+                                            <button *ngIf='confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success" >
+                                                <i class="fa fa-save"></i>
+                                                Confirmar solicitante
+                                            </button> 
+                                        </td>
+                                    </tr>
+
+                                </tfoot>
                             </table>
+
+                            <div *ngIf='frmApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group">
+                                <div class="input-group"  [class.has-danger]="apoderado">
+                                    <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado"
+                                        required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchApoderado()" class="btn" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                    <span class="input-group-btn">
+                                        <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
                         
                             <!--si existe el apoderado -->
-                            <div class="container form-group" *ngIf="apoderadoEncontrado === 2">
+                            <div class="container form-group" *ngIf="apoderado">
                         
                                 <h5 class="container">
-                                    Resultados de búsqueda
+                                    Datos de apoderado
                                 </h5>
-                                <table class="table " id="dataTables-example">
+                                <table class="table table-bordered table-striped" id="dataTables-example">
                                     <tbody>
                                         <tr class="odd">
                                             <td>
                                                 <b>Tipo de identificación</b>
-                                                {{apoderadoSelect.tipoIdentificacion.nombre}}
-                                            </td>
-                                            <td>
+                                                <br>
+                                                {{apoderado.tipoIdentificacion.nombre}}
+                                                <br>
                                                 <b>Numero de identificación</b>
-                                                {{apoderadoSelect.identificacion}}
+                                                {{apoderado.identificacion}}
                                             </td>
-                                        </tr>
-                                        <tr class="odd">
                                             <td>
                                                 <b>Nombres</b>
-                                                {{apoderadoSelect.primerApellido}} {{apoderadoSelect.primerNombre}}
-                                            </td>
-                                            <td>
+                                                <br>
+                                                {{apoderado.primerNombre}} {{apoderado.segundoNombre}}
+                                                <br>
                                                 <b>Apellidos</b>
-                                                {{apoderadoSelect.segundoNombre}} {{apoderadoSelect.segundoApellido}}
-                                                <td>
-                                                    <div class="custom-control custom-radio">
-                                                        <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{apoderadoSelect.id}}" type="radio" required  id="option-{{apoderadoSelect.id}}" name="customRadio"
-                                                            class="custom-control-input" checked="">
-                                                        <label class="custom-control-label" for="option-{{apoderadoSelect.id}}">Solicitante</label>
-                                                    </div>
-                                                </td>
+                                                {{apoderado.primerApellido}} {{apoderado.segundoApellido}}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button class="btn btn-default" (click)="onCloseApoderado()">Atrás</button>
-                                <button (click)="btnNewApoderado()" class="btn btn-primary pull-right">Agregar</button>
+                                <!-- <button (click)="btnNewApoderado()" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                    Agregar
+                                </button> -->
+                                <button class="btn btn-default" (click)="onCloseApoderado()">
+                                    <i class="fa fa-times"></i>
+                                    Cancelar
+                                </button>
                             </div>
                         
                             <table class="table table-bordered" *ngIf="isEmpresa">
@@ -209,7 +209,7 @@
                 </div>
             </div>
             
-            <div class="col-xs-12 col-lg-12">
+            <div class="col-xs-12 col-lg-12" *ngIf='confirmarSolicitante'>
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">Factura</h5>
@@ -277,7 +277,7 @@
                             <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
                         </div>
                         <div class="tab-pane" id="rna-sustrato" role="tabpanel">
-                            <appRna-sustrato [factura]="factura" [ciudadanoPropietario]="ciudadano" (readyTramite)="readyTramite($event)"
+                            <appRna-sustrato [factura]="factura" [vehiculo]="vehiculo" [ciudadanoPropietario]="ciudadano" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-sustrato>
                         </div>
 
