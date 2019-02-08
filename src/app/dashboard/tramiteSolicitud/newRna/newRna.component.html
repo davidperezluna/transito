@@ -282,7 +282,7 @@
                         </div>
 
                         <div class="tab-pane" id="rna-rematricula" role="tabpanel"> 
-                            <appRna-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
+                            <appRna-rematricula [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
                         </div>
 
                         <div class="tab-pane" id="rna-matriculainicial" role="tabpanel">

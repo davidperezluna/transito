@@ -96,4 +96,11 @@ export class TramiteSolicitudService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + '/reportefecha',params,{ headers: headers }).map(res => res.json());
 	}
+
+	buscarMatriculaCancelada(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = 'json=' + json + '&authorization=' + token;		
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + '/buscar/matricula/cancelada',params,{ headers: headers }).map(res => res.json());
+	}
 }

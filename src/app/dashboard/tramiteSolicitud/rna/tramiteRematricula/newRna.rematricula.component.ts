@@ -14,6 +14,8 @@ import swal from 'sweetalert2';
 export class NewRnaRematriculaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
+    @Input() factura: any = null;
+    @Input() vehiculo: any = null;
     public errorMessage;
     public respuesta;
     public tramiteFacturaSelected: any;
@@ -33,6 +35,7 @@ export class NewRnaRematriculaComponent implements OnInit {
     public numeroIdentificacionEntrega: any;
     public nombreEntrega: any;
     public estado: any;
+    public matriculaCancelada;
     public resumen = {};     public datos = {
         'entidad': null,
         'numeroActa': null,
@@ -49,6 +52,12 @@ export class NewRnaRematriculaComponent implements OnInit {
         'tramiteFactura': null,
     };
 
+    public entidades = [
+        { value: 'FISCALIA', label: 'FISCALIA' },
+        { value: 'SIJIN', label: 'SIJIN' },
+        { value: 'DIJIN', label: 'DIJIN' },
+    ];
+
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
@@ -58,8 +67,30 @@ export class NewRnaRematriculaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.entidadList = ['Fiscalía,', 'SIJIN', 'DIJIN'];
+        let token = this._loginService.getToken();
+        this._TramiteSolicitudService.buscarMatriculaCancelada({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+            response => {
+                if (response) {
+                    this.matriculaCancelada = response.data;
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    this.matriculaCancelada = false;
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
 
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
         this._SustratoService.getSustratoSelect().subscribe(
             response => {
                 this.sustratos = response;

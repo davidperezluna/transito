@@ -222,6 +222,9 @@ import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
 
 import { FroFacturaRoutes } from './froFactura/froFactura.routes';
 import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
+import { FroTramiteRoutes } from './froTramite/froTramite.routes';
+import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
+import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -431,6 +434,10 @@ export const DashboardRoutes: Route[] = [
       ...EmpresaAlcaldiaRoutes,
       ...FroFacturaRoutes,
       ...FroRecaudoRoutes,
+      ...FroTramiteRoutes,
+      ...FroTrteCfgConceptoRoutes,
+      ...FroTrtePrecioRoutes,
+      ...FroTrtePrecioRoutes,
       
     ]
   }

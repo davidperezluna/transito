@@ -17,13 +17,9 @@
                             <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Entidad
-                                <span class="text-danger">*</span>
-                            </label>
-                            <select class="form-control" name="entidadSelected" [(ngModel)]="entidadSelected" required>
-                                <option *ngFor="let entidad of entidadList" [value]="entidad"> {{ entidad }}
-                                </option>
-                            </select>
+                            <label>Entidad <span class="text-danger">*</span></label>
+                            <ng-select class="form-control" [options]="entidades" name="idEntidad" [(ngModel)]="entidadSelected" required>
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Número de acta</label>
