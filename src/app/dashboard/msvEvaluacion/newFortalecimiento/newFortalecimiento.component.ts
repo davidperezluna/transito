@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { MsvParametroService } from '../../../services/msvParametro.service';
-import { MsvVariableService } from '../../../services/msvVariable.service';
 import { MsvCalificacionService } from '../../../services/msvCalificacion.service';
 import { MsvResultadoService } from "../../../services/msvResultado.service";
 import swal from 'sweetalert2';
@@ -26,27 +25,26 @@ export class NewFortalecimientoComponent implements OnInit {
   public aplica;
   public evidencia;
   public datos = {
-    'fortalecimiento': null,
-    'comportamiento': null,
-    'vehiculoSeguro': null,
-    'infraestructuraSegura': null,
-    'atencionVictima': null,
-    'valorAgregado': null,
+    'idEmpresa': null,
+    'valorObtenidoFortalecimiento': null,
+    'valorObtenidoComportamiento': null,
+    'valorObtenidoVehiculoSeguro': null,
+    'valorObtenidoInfraestructuraSegura': null,
+    'valorObtenidoAtencionVictima': null,
+    'valorObtenidoValorAgregado': null,
   };
 
   constructor(
     private _loginService: LoginService,
     private _MsvParametroService: MsvParametroService,
-    private _MsvVariableService: MsvVariableService,
     private _MsvCalificacionService: MsvCalificacionService,
     private _MsvResultadoService: MsvResultadoService,
 
   ) { }
 
   ngOnInit() { 
-    
     let token = this._loginService.getToken();    
-    this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
+    this._MsvParametroService.getParametroByCategoriaId(token, 2).subscribe(
       response => {
         this.msvParametros = response.data;
         if (this.msvParametros) {
@@ -93,10 +91,51 @@ export class NewFortalecimientoComponent implements OnInit {
       }
     );
   }
+  
+  calcularTotal(e, parametro, idCategoria){
+    if(idCategoria == 1) {
+      if (e) {
+        this.datos.valorObtenidoFortalecimiento += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoFortalecimiento -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 2) {
+      if (e) {
+        this.datos.valorObtenidoComportamiento += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoComportamiento -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 3) {
+      if (e) {
+        this.datos.valorObtenidoVehiculoSeguro += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoVehiculoSeguro -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 4) {
+      if (e) {
+        this.datos.valorObtenidoInfraestructuraSegura += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoInfraestructuraSegura -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 5) {
+      if (e) {
+        this.datos.valorObtenidoAtencionVictima += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoAtencionVictima -= parametro.valor / parametro.numeroVariables;
+      }
+    } else if (idCategoria == 6) {
+      if (e) {
+        this.datos.valorObtenidoValorAgregado += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos.valorObtenidoValorAgregado -= parametro.valor / parametro.numeroVariables;
+      }
+    }
+  }
 
   onFinalizar() {
     let token = this._loginService.getToken();
 
+    this.datos.idEmpresa = this.miEmpresa.id;
     this._MsvResultadoService.register(this.datos, token).subscribe(
       response => {
         if (response.status == 'success') {
@@ -113,7 +152,7 @@ export class NewFortalecimientoComponent implements OnInit {
             text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
         error => {
           this.errorMessage = <any>error;

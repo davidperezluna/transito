@@ -16,6 +16,7 @@ export class SvCapacitacion {
         public numeroCedulaActorVial: string,
         public claseActorVial: string,
         public id: number,
+        public identificacion: number,
     ) { }
 }
 

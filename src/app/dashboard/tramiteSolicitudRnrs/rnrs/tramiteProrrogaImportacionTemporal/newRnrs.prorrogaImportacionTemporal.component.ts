@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
+import { TramiteSolicitud } from '../../tramiteSolicitudRnrs.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
@@ -10,10 +10,10 @@ import { MsvRegistroIpatService } from "../../../../services/msvRegistroIpat.ser
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-prorroga-importacion-temporal',
-    templateUrl: './newRna.prorrogaImportacionTemporal.component.html'
+    selector: 'appRnrs-prorroga-importacion-temporal',
+    templateUrl: './newRnrs.prorrogaImportacionTemporal.component.html'
 })
-export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
+export class NewRnrsProrrogaImportacionTemporalComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
@@ -55,7 +55,6 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
         this.fechaSolicitudProrroga = datePiper.transform(this.date, 'yyyy-MM-dd');
@@ -105,9 +104,10 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
         let token = this._loginService.getToken();
 
         this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rna-prorroga-importacion-temporal';
+        this.datos.tramiteFormulario = 'rnrs-prorroga-importacion-temporal';
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.placa = this.vehiculo.placa.numero;
+        
         let resumen = {
             'fecha solicitud prorroga': this.fechaSolicitudProrroga,
             'numero runt': this.numeroRunt,

@@ -24,8 +24,8 @@
                                 <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" required name="funcion"></ng-select>
                             </div>-->
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="No. cédula ó NIT" [(ngModel)]="cedula"
-                                    required name="cedula" />
+                                <input type="number" class="form-control" placeholder="No. cédula ó NIT" [(ngModel)]="identificacion"
+                                    required name="identificaciom" />
                                 <span class="input-group-btn">
                                     <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
                                         <i class="fa fa-search"></i>
@@ -71,20 +71,20 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Fecha y Hora Registro:</th>
-                                <th>Formador: </th>
-                                <th>Cédula: </th>
-                                <th>Fecha Actividad: </th>
-                                <th>Semana: </th>
-                                <th>Municipio: </th>
-                                <th>Función de Seg. Víal: </th>
-                                <th>Clase de Actividad: </th>
-                                <th>Tema de Capacitación: </th>
-                                <th>Descripción actividades: </th>
-                                <th>Nombres Actor de la vía: </th>
-                                <th>Apellidos Actor de la vía: </th>
-                                <th>No. cédula Actor de la vía: </th>
-                                <th>Clase Actor de la vía: </th>
+                                <th>Fecha y Hora Registro</th>
+                                <th>Formador</th>
+                                <th>Cédula</th>
+                                <th>Fecha Actividad</th>
+                                <th>Semana</th>
+                                <th>Municipio</th>
+                                <th>Función de Seg. Víal</th>
+                                <th>Clase de Actividad</th>
+                                <th>Tema de Capacitación</th>
+                                <th>Descripción actividades</th>
+                                <th>Nombres Actor de la vía</th>
+                                <th>Apellidos Actor de la vía</th>
+                                <th>No. cédula Actor de la vía</th>
+                                <th>Clase Actor de la vía</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,7 +97,7 @@
                                 <td>{{ capacitacion.semana }}</td>
                                 <td>{{ capacitacion.municipio.nombre }}</td>
                                 <td>{{ capacitacion.funcion.nombre }}</td>
-                                <td>{{ capacitacion.claseActividad }}</td>
+                                <td>{{ capacitacion.funcionCriterio.nombre }}</td>
                                 <td>{{ capacitacion.temaCapacitacion.nombre }}</td>
                                 <td>{{ capacitacion.descripcionActividad }}</td>
                                 <td>{{ capacitacion.nombreActorVial }}</td>

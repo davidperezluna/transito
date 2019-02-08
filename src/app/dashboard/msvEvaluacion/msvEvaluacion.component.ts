@@ -38,6 +38,7 @@ export class MsvEvaluacionComponent implements OnInit {
   public miRevision = null;
   public revisiones: any;
   public msvEvaluacion: MsvEvaluacion;
+  public categoriaSelected: any;
   public msvCategorias:any;
   public resumen = {};     public datos = {'parametro': null,
                   'parametro2': null}
@@ -82,20 +83,22 @@ export class MsvEvaluacionComponent implements OnInit {
 				}
       );
 
-     this._MsvCategoriaService.getCategoria().subscribe(
+    this._MsvCategoriaService.getCategoriaSelect().subscribe(
       response => {
-        this.msvCategorias = response.data;
-        
-      }, 
+        this.msvCategorias = response;
+        let timeoutId = setTimeout(() => {
+          this.iniciarTabla();
+        }, 100);
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
       }
-     );
+    );
   }
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -189,7 +192,7 @@ export class MsvEvaluacionComponent implements OnInit {
     this.revisionNew = false;
     let token = this._loginService.getToken();
 
-    this._EmpresaService.showNitOrNombre(token,this.datos).subscribe(
+    this._EmpresaService.showNitOrNombre(this.datos, token).subscribe(
       response => {
         if (response.status == 'success' ) {
           this.msj = response.msj;
