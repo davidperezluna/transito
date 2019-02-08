@@ -120,8 +120,6 @@ export class BpCdpComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
   }

@@ -21,6 +21,7 @@ export class NewRnaInsumoComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
+    @Input() vehiculo: any = null;
     @Input() ciudadanoPropietario: any = null;
     public errorMessage;
     public respuesta;
@@ -74,6 +75,7 @@ export class NewRnaInsumoComponent implements OnInit {
                         responseInsumo => {
                         if(responseInsumo.status == 'success'){
                             this.numeroInsumo = responseInsumo.numero;
+                            this.FacturaInsumo.insumoId = responseInsumo.idInsumo;
                             this.isExist = true;
                             this.isError = false
                         }else{
@@ -149,19 +151,18 @@ export class NewRnaInsumoComponent implements OnInit {
 
         this.datos.licenciaTransito = this.licenciaTransito;
         this.datos.cedula  = this.ciudadanoPropietario.usuario.identificacion;
-        this.datos.vehiculoId  = this.factura.vehiculo.id;
+        this.datos.vehiculoId  = this.vehiculo.id;
         
         this.FacturaInsumo.entregado = this.tarjetaEntregada;
         this.FacturaInsumo.idFactura = this.factura.id;
-        console.log(this.FacturaInsumo);
         
         this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(
             response => { 
                 this.respuesta = response;
-                if(this.respuesta.status == 'success'){ 
+                if(this.respuesta.status == 'success'){  
                     this._FacturaInsumoService.register(this.FacturaInsumo,token).subscribe(
                         response => {
-                            if (response.status == 'success') {
+                            if (response.status == 'success') { 
                                 swal({
                                     title: 'Perfecto!',
                                     text: 'Registro exitoso!',

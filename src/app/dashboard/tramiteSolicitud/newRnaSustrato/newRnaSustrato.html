@@ -88,13 +88,14 @@
                                 </tbody>
                             </table>
                         </div>
+
                         <app-new-rna-ciudadano *ngIf="ciudadanoEncontrado === 3 && tarjetaEntregada" [identificacion]="FacturaInsumo.ciudadanoId" (ready)="ready($event)"></app-new-rna-ciudadano>
                     </form>
 
                 </div>
             </div>
             <div class="container">
-                <button (click)="enviarTramite()"  [disabled]="FacturaInsumoForm.invalid" class="btn btn-success pull-right">Aceptar</button>
+                <button (click)="enviarTramite()"  [disabled]="FacturaInsumoForm.invalid" class="btn btn-success">Enviar</button>
             </div>
         </div>
     </div><!-- /.col -->

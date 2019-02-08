@@ -36,6 +36,7 @@ export class NewRnaComponent implements OnInit {
   public vehiculoSuccess = false;
   public tipoError = 200;
   public error = false;
+  public confirmarSolicitante = false;
   public msj = '';
   public tramites = '';
   public tramitePreasignacion = false;
@@ -44,11 +45,9 @@ export class NewRnaComponent implements OnInit {
   public sustrato = false;
   public isTramites: boolean = true;
   public isMatricula: boolean = false;
-  public apoderadoSelect = false;
-  public apoderadoEncontrado = 1;
   public frmApoderado = false;
   public identificacionApoderado = false;
-  public apoderado: any = false;
+  public apoderado: any = null;
 
   public importacion: any = 'No';
   public cantidadSustrato = 1;
@@ -121,7 +120,7 @@ export class NewRnaComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-
+ 
       });
   }
 
@@ -405,12 +404,16 @@ export class NewRnaComponent implements OnInit {
 
   agregarApoderado() {
     this.frmApoderado = true;
+    if (this.apoderado) {
+      this.tramiteSolicitud.solicitanteId = this.apoderado.id;
+    }
   }
 
   btnNewApoderado() {
     this.frmApoderado = false;
-    this.apoderado = this.apoderadoSelect;
-    this.apoderadoEncontrado = 1;
+    if (this.apoderado) {
+      this.tramiteSolicitud.solicitanteId = this.apoderado.id;
+    }
   }
 
   onSearchApoderado() {
@@ -423,12 +426,15 @@ export class NewRnaComponent implements OnInit {
     this._ciudadanoService.searchByIdentificacion(identificacion, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.apoderadoSelect = response.data;
-          this.apoderadoEncontrado = 2;
-          // this.ciudadanoNew = false;
+          this.apoderado = response.data;
         } else {
-          this.apoderadoEncontrado = 3;
-          // this.ciudadanoNew = true;
+          this.apoderado = null;
+          swal({
+              title: 'Error!',
+              text: 'No se ha registrado un apoderado.',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -443,8 +449,25 @@ export class NewRnaComponent implements OnInit {
 
   onCloseApoderado() {
     this.frmApoderado = false;
-    this.apoderado = false;
-    this.apoderadoEncontrado = 1;
+    this.apoderado = null;
+  }
+
+  onConfirmarSolicitante() {
+
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Si confirma el solicitante ya no podrá editarlo!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.confirmarSolicitante = true;
+      }
+    })
   }
  
 }
