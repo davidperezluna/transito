@@ -88,7 +88,7 @@
                                         </td>
                                         <td>
                                             <div class="custom-control custom-radio">
-                                                <input [disabled]='!confirmarSolicitante' [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="radio-{{ciudadanoVehiculo.id}}" name="radio-{{ciudadanoVehiculo.id}}"
+                                                <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="radio-{{ciudadanoVehiculo.id}}" name="radio-{{ciudadanoVehiculo.id}}"
                                                     class="custom-control-input">
                                                 <label class="custom-control-label" for="radio-{{ciudadanoVehiculo.id}}">Solicitante</label>
                                             </div>
@@ -96,20 +96,19 @@
                                     </tr>
                                     
                                 </tbody>
-                                <tfoot *ngIf='!frmApoderado && !apoderado'>
+                                <tfoot >
                                     <tr>
                                         <td colspan="3">
-                                            <button  (click)="agregarApoderado()" class="btn btn-primary" *ngIf='!confirmarSolicitante'>
+                                            <button *ngIf='!frmApoderado && !apoderado && !confirmarSolicitante' (click)="agregarApoderado()" class="btn btn-primary">
                                                 <i class="fa fa-save"></i>
                                                 Agregar apoderado
                                             </button> 
-                                            <button *ngIf='confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success" >
+                                            <button *ngIf='!confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success" >
                                                 <i class="fa fa-save"></i>
                                                 Confirmar solicitante
                                             </button> 
-                                        </td>
+                                        </td> 
                                     </tr>
-
                                 </tfoot>
                             </table>
 
@@ -162,7 +161,7 @@
                                     <i class="fa fa-save"></i>
                                     Agregar
                                 </button> -->
-                                <button class="btn btn-default" (click)="onCloseApoderado()">
+                                <button *ngIf='!confirmarSolicitante' class="btn btn-default" (click)="onCloseApoderado()">
                                     <i class="fa fa-times"></i>
                                     Cancelar
                                 </button>
