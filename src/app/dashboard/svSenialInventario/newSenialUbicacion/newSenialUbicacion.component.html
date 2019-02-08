@@ -19,45 +19,68 @@
                         <input type="time" class="form-control" [(ngModel)]="senialUbicacion.hora" name="hora" required />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-lg-5">
+                <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-6">
                         <label>Señal <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
+                        <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-5">
+                    <div class="col-xs-12 col-lg-6">
                         <label>Estado <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="estados" [(ngModel)]="senialUbicacion.idEstado" name="estado" required>
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-2">
+                </div>
+                <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12" *ngIf="senial && senial.tipoSenial.id == 1">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [(ngModel)]="demarcacion" class="custom-control-input" id="demarcacion" name="demarcacion" checked="">
+                            <label class="custom-control-label" for="demarcacion">Demarcación externa</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
                         <label>Cantidad <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
                     </div>
-                    <div class="col-xs-12 col-lg-3">
-                        <label>Latitud</label>
-                        <input type="text" class="form-control" [(ngModel)]="senialUbicacion.latitud" name="latitud" />
+                    <div class="col-xs-12 col-lg-8">
+                        <label>Proveedor <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
+                        </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-3">
-                        <label>Longitud</label>
-                        <input type="text" class="form-control" [(ngModel)]="senialUbicacion.longitud" name="longitud" />
+                </div>
+                <div class="row" *ngIf="demarcacion"><!-- .row -->
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Linea <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea" required>
+                        </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Dirección <strong class="text-danger">*</strong></label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" [(ngModel)]="senialUbicacion.direccion" name="direccion" />
-                            <span class="input-group-btn">
-                                <button (click)="onGetAddress()" class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-map-marker"></i>
-                                </button>
-                            </span>
-                        </div>
+                        <label>Unidad medida <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="unidadesMedida" [(ngModel)]="senialUbicacion.idUnidadMedida" name="idUnidadMedida" required>
+                        </ng-select>
                     </div>
+                </div>
+                <div class="row"><!-- .row -->
                     <div class="col-xs-12 col-lg-6">
                         <label>Adjunto</label>
                         <input type="file"  class="form-control" [(ngModel)]="fileSelected" (change)="onFileChange($event)" placeholder="Adjuntar" accept=".pdf,.doc,.docx" value="20000" multiple="false" name="file">
                     </div>
-                </div>
+                </div><!-- /.row -->
+                <div class="row"><!-- .row -->
+                    <div class="col-md-12 col-sm-12">
+                        <label>Georeferenciación</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="address" placeholder="Dirección a buscar: Pasto, Nariño.." />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchGeo()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-map-marker"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div align="center">
+                        </div>
+                    </div>
+                </div><!-- /.row -->
             </div>
         </form>
     </div>
@@ -74,59 +97,3 @@
         </div>
     </div>
 </div>
-
-<div class="row"><!-- .row -->
-    <div class="col-md-12 col-sm-12">
-       
-        <div id="geo" class="swal2-container swal2-center swal2-fade swal2-shown" style="visibility: hidden; overflow-y: auto;">
-            <div aria-labelledby="swal2-title" aria-describedby="swal2-content" class="swal2-popup swal2-modal swal2-show" tabindex="-1"
-                role="dialog" aria-live="assertive" aria-modal="true" style="width: 700px; display: flex;">
-                <div class="swal2-header">
-                    <ul class="swal2-progresssteps" style="display: none;"></ul>
-                    <div class="swal2-icon swal2-error" style="display: none;">
-                        <span class="swal2-x-mark">
-                            <span class="swal2-x-mark-line-left"></span>
-                            <span class="swal2-x-mark-line-right"></span>
-                        </span>
-                    </div>
-                    <img class="swal2-image" style="display: none;">
-                    <h2 class="swal2-title" id="swal2-title">Ubicación de la señal</h2>
-                    <button (click)="onCloseGeo()" type="button" class="swal2-close" aria-label="Close this dialog" style="display: flex;">
-                        ×
-                    </button>
-                </div>
-                <div class="swal2-content">
-                    <div id="swal2-content" style="display: block;">
-                        <!--content-->
-                        <input type="hidden" style="width:400px" id="lat" />
-                        <input type="hidden" style="width:400px" id="lng" />
-                        <input type="text" style="width:400px" class="form-control" style="visibility: hidden;" id="address" placeholder="Dirección a buscar: Pasto, Nariño.." />
-                        <div align="center">
-                            <div #map style="width:660px; height:300px" id="map">loading...</div>
-                        </div>
-    
-                    </div>
-                    <input class="swal2-input" style="display: none;">
-                    <input type="file" class="swal2-file" style="display: none;">
-                    <div class="swal2-range" style="display: none;">
-                        <input type="range">
-                        <output></output>
-                    </div>
-                    <select class="swal2-select" style="display: none;"></select>
-                    <div class="swal2-radio" style="display: none;"></div>
-                    <label for="swal2-checkbox" class="swal2-checkbox" style="display: none;">
-                        <input type="checkbox">
-                    </label>
-                    <textarea class="swal2-textarea" style="display: none;"></textarea>
-                    <div class="swal2-validationerror" id="swal2-validationerror" style="display: none;"></div>
-                </div>
-                <div class="swal2-actions" style="display: flex;">
-                    <button (click)="onSearchGeo()" id="searchAddress" (ready)="ready($event)" class="swal2-confirm swal2-styled" style="border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);">
-                        <i class="fa fa-eye"></i> Buscar Dirección
-                    </button>
-                </div>
-                <div class="swal2-footer" style="display: none;"></div>
-            </div>
-        </div>
-    </div>
-</div><!-- /.row -->

@@ -362,65 +362,65 @@
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Marca <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control"  type="text" [(ngModel)]="msvRegistroIpat.marca" name="marca" required> -->
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="marcas" [(ngModel)]="marcaSelected" required name="marca">
+                            <ng-select [multiple]="false" [disabled]="vhlMarca" [options]="marcas" [(ngModel)]="marcaSelected" required name="marca">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Linea <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.linea" name="linea" required> -->
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="lineas" [(ngModel)]="lineaSelected" required name="linea">
+                            <ng-select [multiple]="false" [disabled]="vhlMarca" [options]="lineas" [(ngModel)]="lineaSelected" required name="linea">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Color <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.color" name="color" required> -->
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="colores" [(ngModel)]="colorSelected" required name="color">
+                            <ng-select [multiple]="false" [disabled]="vhlColor" [options]="colores" [(ngModel)]="colorSelected" required name="color">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Modelo <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.modelo" name="modelo" required>
+                            <input class="form-control" [disabled]="vhlModelo" type="text" [(ngModel)]="msvRegistroIpat.modelo" name="modelo" required>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Carroceria <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.carroceria" name="carroceria"
                                 required> -->
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="carrocerias" [(ngModel)]="carroceriaSelected" required name="carroceria">
+                            <ng-select [multiple]="false" [disabled]="vhlCarroceria" [options]="carrocerias" [(ngModel)]="carroceriaSelected" required name="carroceria">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Clase Vehiculo <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.clase" name="clase" required> -->
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="clases" [(ngModel)]="claseSelected" required name="clase">
+                            <ng-select [multiple]="false" [disabled]="vhlClase" [options]="clases" [(ngModel)]="claseSelected" required name="clase">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Servicio <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.servicio" name="servicio" required> -->
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicio">
+                            <ng-select [multiple]="false" [disabled]="vhlServicio" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicio">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Modalidad Transporte <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.modalidadTransporte" name="modalidadTransporte"
                                 required> -->
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="modalidadesTransporte" [(ngModel)]="modalidadTransporteSelected" required name="modalidadTransporte">
+                            <ng-select [multiple]="false" [disabled]="vhlModalidad" [options]="modalidadesTransporte" [(ngModel)]="modalidadTransporteSelected" required name="modalidadTransporte">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.servicio == 'PUBLICO'">
                             <label>Radio Acción <strong class="text-danger">*</strong></label>
                             <!-- <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.radioAccion" name="radioAccion"
                                 required> -->
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="radiosAccion" [(ngModel)]="radioAccionSelected" required name="radioAccion">
+                            <ng-select [multiple]="false" [disabled]="vhlRadioAccion" [options]="radiosAccion" [(ngModel)]="radioAccionSelected" required name="radioAccion">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
-                            <label>Capacidad de Carga (Ton) <strong class="text-danger">*</strong></label>
+                            <label>Capacidad de Carga (Ton)</label>
                             <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.ton" name="ton">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Pasajeros <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhl" type="text" [(ngModel)]="msvRegistroIpat.pasajeros" name="pasajeros"
+                            <input class="form-control" [disabled]="vhlPasajeros" type="text" [(ngModel)]="msvRegistroIpat.pasajeros" name="pasajeros"
                                 required>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1' && msvRegistroIpat.placaRemolque != ''">
@@ -433,7 +433,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Matriculado en <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [disabled]="vhl" [options]="municipios" [(ngModel)]="matriculadoEnSelected" required name="matriculadoEn">
+                            <ng-select [multiple]="false" [disabled]="vhlMatriculadoEn" [options]="municipios" [(ngModel)]="matriculadoEnSelected" required name="matriculadoEn">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">

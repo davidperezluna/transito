@@ -37,7 +37,7 @@ import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorc
 import { CvAcuerdoPagoRoutes } from './cvAcuerdoPago/cvAcuerdoPago.routes';
 
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
-import { SvCfgSenialConectorRoutes } from './svCfgSenialConector/svCfgSenialConector.routes';
+import { SvCfgSenialUnidadMedidaRoutes } from './svCfgSenialUnidadMedida/svCfgSenialUnidadMedida.routes';
 import { SvCfgSenialTipoRoutes } from './svCfgSenialTipo/svCfgSenialTipo.routes';
 import { SvCfgSenialColorRoutes } from './svCfgSenialColor/svCfgSenialColor.routes';
 import { SvCfgSenialEstadoRoutes } from './svCfgSenialEstado/svCfgSenialEstado.routes';
@@ -304,7 +304,7 @@ export const DashboardRoutes: Route[] = [
       ...CvCfgPorcentajeInicialRoutes,
       ...CvAcuerdoPagoRoutes,
       ...CfgBodegaRoutes,
-      ...SvCfgSenialConectorRoutes,
+      ...SvCfgSenialUnidadMedidaRoutes,
       ...SvCfgSenialTipoRoutes,
       ...SvCfgSenialColorRoutes,
       ...SvCfgSenialEstadoRoutes,

@@ -38,6 +38,8 @@ import { NewRnrsTramiteInscripcionAlertaPrendaComponent } from './rnrs/tramiteIn
 import { NewRnrsTramiteLevantamientoAlertaPrendaComponent } from './rnrs/tramiteLevantamientoAlertaPrenda/newRnrs.levantamientoAlertaPrenda.component';
 import { NewRnrsTramiteCambioAcreedorPrendarioComponent } from './rnrs/tramiteCambioAcreedorPrendario/newRnrs.CambioAcreedorPrendario.component'; 
 import { NewRnrsTramiteCambioAcreedorPrendarioPropietarioComponent } from './rnrs/tramiteCambioAcreedorPrendarioPropietario/newRnrs.CambioAcreedorPrendarioPropietario.component'; 
+import { NewRnrsImportacionTemporalComponent } from "./rnrs/tramiteImportacionTemporal/newRnrs.importacionTemporal.component";
+import { NewRnrsProrrogaImportacionTemporalComponent } from "./rnrs/tramiteProrrogaImportacionTemporal/newRnrs.prorrogaImportacionTemporal.component";
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 
@@ -79,7 +81,10 @@ import { SelectModule } from 'angular2-select';
         NewRnrsTramiteLevantamientoAlertaPrendaComponent,
         NewRnrsTransformacionComponent,
         NewRnrsTramiteCambioAcreedorPrendarioComponent,
-        NewRnrsTramiteCambioAcreedorPrendarioPropietarioComponent
+        NewRnrsTramiteCambioAcreedorPrendarioPropietarioComponent,
+        NewRnrsImportacionTemporalComponent,
+        NewRnrsProrrogaImportacionTemporalComponent,
+
     ],
     exports: [
         TramiteSolicitudRnrsComponent,
@@ -116,7 +121,9 @@ import { SelectModule } from 'angular2-select';
         NewRnrsTramiteLevantamientoAlertaPrendaComponent,
         NewRnrsTransformacionComponent,
         NewRnrsTramiteCambioAcreedorPrendarioComponent,
-        NewRnrsTramiteCambioAcreedorPrendarioPropietarioComponent
+        NewRnrsTramiteCambioAcreedorPrendarioPropietarioComponent,
+        NewRnrsImportacionTemporalComponent,
+        NewRnrsProrrogaImportacionTemporalComponent,
     ],
     providers:[TramiteSolicitudService,EmpresaService,TramiteTrasladoService]
 })

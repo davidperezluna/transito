@@ -15,13 +15,8 @@ export class SvCapacitacionService {
         private _loogerService: LoggerService
     ) { }
 
-    index(datos, token) {
-        let json = JSON.stringify(datos);
-        let params = "json=" + json + "&authorization=" + token;
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/", params, { headers: headers }).map(
-            res => res.json()
-        );
+    index() {
+        return this._http.get(this.url + "/").map(res => res.json());
     }
 
     register(formData, datos, token) {
@@ -29,12 +24,6 @@ export class SvCapacitacionService {
         formData.append('data', json);
         formData.append('authorization', token);
         return this._http.post(this.url + "/new", formData).map(res => res.json());
-        /*let params = "json=" + json + "&authorization=" + token;
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/new", params, { headers: headers }).map(
-            res => res.json(),
-            this._loogerService.registerLog(token, 'INSERT', json, this.url)
-        );*/
     }
 
     delete(datos, token) {
@@ -66,5 +55,14 @@ export class SvCapacitacionService {
 
     select() {
         return this._http.get(this.url + "/select").map(res => res.json());
+    }
+
+    buscarCapacitacionByCiudadano(datos, token){ 
+        let json = JSON.stringify(datos);
+        let params = "json=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/buscar/capacitacionbyciudadano", params, { headers: headers }).map(
+            res => res.json()
+        );
     }
 }

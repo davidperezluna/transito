@@ -114,9 +114,7 @@ export class SvSenialInventarioComponent implements OnInit {
 
             this._MunicipioService.showMunicipio(token, e).subscribe(
                 response => {
-                    this.datos.idMunicipio = response.data.id;
-                    console.log(this.datos);
-                    
+                    this.datos.idMunicipio = response.data.id;                    
                     this.municipio = response.data;
                 },
                 error => {
@@ -129,7 +127,6 @@ export class SvSenialInventarioComponent implements OnInit {
                 }
             );
         }
-
     }
 
     onSearch(){

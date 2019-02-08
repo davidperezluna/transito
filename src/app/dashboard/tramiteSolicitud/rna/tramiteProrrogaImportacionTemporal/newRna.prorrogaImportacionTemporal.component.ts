@@ -107,6 +107,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-prorroga-importacion-temporal';
         this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.placa = this.vehiculo.placa.numero;
         let resumen = {
             'fecha solicitud prorroga': this.fechaSolicitudProrroga,
             'numero runt': this.numeroRunt,

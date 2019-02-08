@@ -11,9 +11,12 @@ import { SvCfgFuncionCriterioService } from '../../../services/svCfgFuncionCrite
 import { SvCfgTemaCapacitacionService } from '../../../services/svCfgTemaCapacitacion.service';
 import { SvCfgClaseActorViaService } from '../../../services/svCfgClaseActorVia.service';
 
+import { DatePipe, CurrencyPipe } from '@angular/common';
+
 @Component({
     selector: 'app-new',
-    templateUrl: './new.component.html'
+    templateUrl: './new.component.html',
+    providers: [DatePipe]
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
@@ -23,6 +26,8 @@ export class NewComponent implements OnInit {
     public capacitaciones: any;
     public file: any;
     public date: any;
+    public fecha: any;
+
 
     public municipios: any;
     public funciones: any;
@@ -48,8 +53,13 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
+        
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
+        
         this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.capacitacion.fechaHoraRegistro = datePiper.transform(this.date, 'dd/MM/yyyy HH:mm:ss a');
+        
         this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
@@ -116,7 +126,7 @@ export class NewComponent implements OnInit {
         this.capacitacion.funcionCriterio = this.funcionCriterioSelected;
         this.capacitacion.claseActorVial = this.claseActorViaSelected;
         this.capacitacion.temaCapacitacion = this.temaCapacitacionSelected;
-
+        this.capacitacion.identificacion = this.ciudadano.identificacion;
         swal({
             title: '¿Está seguro?',
             text: "¿Desea guardar la información?",

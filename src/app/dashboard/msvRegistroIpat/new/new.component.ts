@@ -183,6 +183,18 @@ export class NewComponent implements OnInit {
 
   public usuario = false;
   public vhl = false;
+  
+  public vhlMarca = false;
+  public vhlColor = false;
+  public vhlModelo = false;
+  public vhlCarroceria = false;
+  public vhlClase = false;
+  public vhlServicio = false;
+  public vhlModalidad = false;
+  public vhlRadioAccion = false;
+  public vhlPasajeros = false;
+  public vhlMatriculadoEn = false;
+  
   public agente = false;
   public victima = false;
   public testigo = false;
@@ -1266,18 +1278,79 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
-            this.vhl = true;
-            this.marcaSelected = [response.data.linea.marca.id];
-            this.lineaSelected = [response.data.linea.id];
-            this.colorSelected = [response.data.color.id];
-            this.msvRegistroIpat.modelo = response.data.modelo;
-            this.carroceriaSelected = [response.data.carroceria.id];
-            this.msvRegistroIpat.pasajeros = response.data.numeroPasajeros;
-            this.matriculadoEnSelected = [response.data.municipio.id];
-            this.claseSelected = [response.data.clase.id];
-            this.servicioSelected = [response.data.servicio.id];
-            this.modalidadTransporteSelected = [response.data.modalidadTransporte.id];
-            this.radioAccionSelected = [response.data.radioAccion.id];
+            //this.vhl = true;
+            if(response.data.linea.marca.id != null) {
+              this.vhlMarca = true;
+              this.marcaSelected = [response.data.linea.marca.id];
+              this.lineaSelected = [response.data.linea.id];
+            } else {
+              this.vhlMarca = false;
+              this.marcaSelected = [0];
+              this.lineaSelected = [0];
+            }
+            if(response.data.color != null) {
+              this.vhlColor = true;  
+              this.colorSelected = [response.data.color.id];
+            } else {
+              this.vhlColor = false;
+              this.colorSelected = [0];
+            }
+            if(response.data.modelo != null) {
+              this.vhlModelo = true;
+              this.msvRegistroIpat.modelo = response.data.modelo;
+            } else {
+              this.vhlModelo = false;
+              this.msvRegistroIpat.modelo = "";
+            }
+            if(response.data.caroceria != null) {
+              this.vhlCarroceria = true;
+              this.carroceriaSelected = [response.data.carroceria.id];
+            } else {
+              this.vhlCarroceria = false;
+              this.carroceriaSelected = [0];
+            }
+            if(response.data.numeroPasajeros != null) {
+              this.vhlPasajeros = true;  
+              this.msvRegistroIpat.pasajeros = response.data.numeroPasajeros;
+            } else {
+              this.vhlPasajeros = false;
+              this.msvRegistroIpat.pasajeros = "";
+            }
+            if (response.data.municipio != null){
+              this.vhlMatriculadoEn = true;
+              this.matriculadoEnSelected = [response.data.municipio.id];
+            } else{
+              this.vhlMatriculadoEn = false;
+              this.matriculadoEnSelected = [0];
+            }
+            if (response.data.clase != null) {
+              this.vhlClase = true;
+              this.claseSelected = [response.data.clase.id];
+            } else {
+              this.vhlClase = false;
+              this.claseSelected = [0];
+            }
+            if (response.data.servicio != null){
+              this.vhlServicio = true;
+              this.servicioSelected = [response.data.servicio.id];
+            } else {
+              this.vhlServicio = false;
+              this.servicioSelected = [0];
+            }
+            if (response.data.modalidadTransporte != null) {
+              this.vhlModalidad = true;
+              this.modalidadTransporteSelected = [response.data.modalidadTransporte.id];
+            } else {
+              this.vhlModalidad = false;
+              this.modalidadTransporteSelected = [0];
+            }
+            if (response.data.radioAccion != null) {
+              this.vhlRadioAccion = true;
+              this.radioAccionSelected = [response.data.radioAccion.id];
+            } else {
+              this.vhlRadioAccion = false;
+              this.radioAccionSelected = [0];
+            }
             //swal.close();
           } else {
             swal({
