@@ -22,18 +22,11 @@ export class NewRnmaRematriculaComponent implements OnInit {
     public sustratoSelected: any;
     public entidadList: string[];
     public entidadSelected: any;
-    public numeroRunt: any;
-    public numeroActa: any;
-    public fechaActa: any;
     public municipios: any;
     public municipioActaSelected: any;
     public municipioEntregaSelected: any;
-    public fechaEntrega: any;
     public tiposIdentificacion: any;
     public tipoIdentificacionEntregaSelected: any;
-    public numeroIdentificacionEntrega: any;
-    public nombreEntrega: any;
-    public estado: any;
     public resumen = {};     
     public matriculaCancelada = false;
     public entidades = [
@@ -67,30 +60,6 @@ export class NewRnmaRematriculaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let token = this._loginService.getToken();
-        this._TramiteSolicitudService.buscarMatriculaCancelada({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
-            response => {
-                if (response) {
-                    this.matriculaCancelada = response.data;
-                    swal({
-                        title: 'Perfecto!',
-                        text: response.message,
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                    })
-                } else {
-                    this.matriculaCancelada = false;
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
         this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
@@ -123,17 +92,34 @@ export class NewRnmaRematriculaComponent implements OnInit {
     
     enviarTramite()
     {
-        this.datos.numeroRunt = this.numeroRunt;
+        let token = this._loginService.getToken();
+        this._TramiteSolicitudService.buscarMatriculaCancelada({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+            response => {
+                if (response) {
+                    this.matriculaCancelada = response.data;
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    })
+                } else {
+                    this.matriculaCancelada = false;
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
         this.datos.entidad = this.entidadSelected;
-        this.datos.numeroActa = this.numeroActa;
-        this.datos.fechaActa = this.fechaActa;
         this.datos.municipioActa = this.municipioActaSelected;
         this.datos.municipioEntrega = this.municipioEntregaSelected;
-        this.datos.fechaEntrega = this.fechaEntrega;
         this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
-        this.datos.numeroIdentificacionEntrega = this.numeroIdentificacionEntrega;
-        this.datos.nombreEntrega = this.nombreEntrega;
-        this.datos.estado = this.estado;
         this.datos.idFactura = this.factura.id;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.tramiteFormulario = 'rnma-rematricula';

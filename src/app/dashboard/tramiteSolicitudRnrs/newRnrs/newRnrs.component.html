@@ -209,11 +209,11 @@
                     </div>
 
                     <div class="tab-pane" id="rnrs-rematricula" role="tabpanel"> 
-                        <appRnrs-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-rematricula>
+                        <appRnrs-rematricula [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-rematricula>
                     </div>
 
                     <div class="tab-pane" id="rnrs-matriculainicial" role="tabpanel"> 
-                        <appRnrs-matricula-inicial  [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-matricula-inicial>
+                        <appRnrs-matricula-inicial [vehiculo] = "vehiculo" [factura] = "factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnrs-matricula-inicial>
                     </div>
                     
                     <div class="tab-pane" id="rnrs-traspaso" role="tabpanel" *ngIf='ciudadano'> 
