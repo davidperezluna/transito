@@ -37,7 +37,8 @@ export class NewComponent implements OnInit {
     'identificacion': null,
     'nombres': null,
     'apellidos': null,
-    'entidad': null,
+    'entidadCargo': null,
+    'entidadNombre': null,
     'numeroOficio': null,
   };
 

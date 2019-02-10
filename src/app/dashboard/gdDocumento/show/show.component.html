@@ -33,6 +33,11 @@
                                     <b>{{ documento.identificacion }}</b>
                                 </label>
                             </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf="documento.entidadCargo">
+                                <label>Cargo:
+                                    <b>{{ documento.entidadCargo }}</b>
+                                </label>
+                            </div>
                             <div class="col-xs-12 col-lg-4" *ngIf="documento.entidadNombre">
                                 <label>Entidad:
                                     <b>{{ documento.entidadNombre }}</b>
