@@ -362,7 +362,7 @@ export class NewRnaComponent implements OnInit {
 
     var html = 'Se va a enviar la siguiente solicitud:<br>' +
       'Factura: <b>' + this.factura.numero + '</b><br>' +
-      'Vehiculo: <b>' + this.vehiculo.placa + '</b><br>' +
+      'Vehiculo: <b>' + this.vehiculo.placa.numero + '</b><br>' +
       'Solicitante: <b>' + this.ciudadano.usuario.identificacion + '</b><hr>' +
       'Tramites:<br>' +
       this.tramites
@@ -380,9 +380,11 @@ export class NewRnaComponent implements OnInit {
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
       if (result.value) {
-        console.log(this.factura);
         this.factura.estado = 'Finalizada';
-        this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
+        this.factura.idSolicitante = this.tramiteSolicitud.solicitanteId;  
+        this.factura.idApoderado = this.apoderado.id;  
+        console.log(this.factura);
+        this.factura.sedeOperativaId = this.factura.sedeOperativa.id; 
         this._facturaService.editFactura(this.factura, token).subscribe(
           response => {
             error => {
@@ -391,7 +393,7 @@ export class NewRnaComponent implements OnInit {
                 console.log(this.errorMessage);
                 alert("Error en la petición");
               }
-            }
+            } 
           });
       } else if (
         // Read more about handling dismissals
@@ -404,16 +406,16 @@ export class NewRnaComponent implements OnInit {
 
   agregarApoderado() {
     this.frmApoderado = true;
-    if (this.apoderado) {
-      this.tramiteSolicitud.solicitanteId = this.apoderado.id;
-    }
+    // if (this.apoderado) {
+    //   this.tramiteSolicitud.solicitanteId = this.apoderado.id;
+    // }
   }
 
   btnNewApoderado() {
     this.frmApoderado = false;
-    if (this.apoderado) {
-      this.tramiteSolicitud.solicitanteId = this.apoderado.id;
-    }
+    // if (this.apoderado) {
+    //   this.tramiteSolicitud.solicitanteId = this.apoderado.id;
+    // }
   }
 
   onSearchApoderado() {
