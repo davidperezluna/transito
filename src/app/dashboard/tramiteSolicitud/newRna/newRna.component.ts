@@ -316,7 +316,9 @@ export class NewRnaComponent implements OnInit {
 
     this.tramiteSolicitud.datos = datos;
     this.tramiteSolicitud.vehiculoId = this.vehiculo.id;
-    this.tramiteSolicitud.ciudadanoId = this.apoderado.id;
+    if (this.apoderado) {
+      this.tramiteSolicitud.ciudadanoId = this.apoderado.id;
+    }
 
     let token = this._loginService.getToken();
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(

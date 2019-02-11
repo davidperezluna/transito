@@ -88,13 +88,12 @@
                                         </td>
                                         <td>
                                             <div class="custom-control custom-radio">
-                                                <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="radio-{{ciudadanoVehiculo.id}}" name="radio-{{ciudadanoVehiculo.id}}"
+                                                <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.ciudadano.id}}" type="radio" id="radio-{{ciudadanoVehiculo.ciudadano.id}}" name="radio-{{ciudadanoVehiculo.ciudadano.id}}"
                                                     class="custom-control-input">
-                                                <label class="custom-control-label" for="radio-{{ciudadanoVehiculo.id}}">Solicitante</label>
+                                                <label class="custom-control-label" for="radio-{{ciudadanoVehiculo.ciudadano.id}}">Solicitante</label>
                                             </div>
                                         </td>
-                                    </tr>
-                                    
+                                    </tr> 
                                 </tbody>
                                 <tfoot >
                                     <tr>
@@ -121,11 +120,11 @@
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
-                                    <span class="input-group-btn">
+                                    <!-- <span class="input-group-btn">
                                         <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
                                             <i class="fa fa-close"></i>
                                         </button>
-                                    </span>
+                                    </span> -->
                                 </div>
                             </div>
                         
