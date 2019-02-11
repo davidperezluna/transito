@@ -46,7 +46,7 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        console.log(this.tramite);
+
         this._FroTramiteService.register(this.tramite, token).subscribe(
             response => {
                 if (response.status == 'success') {

@@ -49,14 +49,18 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Rol</th>
-                    <th>Acciones</th>
+                    <!-- <th>Acciones</th> -->
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let usuarioMenu of usuarioMenus; let i = index">
                   <td >{{ i + 1 }}</td>
-                  <td >{{ usuarioMenu.menu.titulo }}</td>
+                  <td >
+                    {{ usuarioMenu.menu.titulo }}
+                    <small><b>{{ usuarioMenu.menu.parent.titulo }}</b></small>
+                  </td>
                   <td >{{ usuarioMenu.menu.role?.nombre }}</td>
+                  <!--
                   <td>
                     <div class="btn-group">
                       <button (click)="onEdit(usuarioMenu)" class="btn btn-xs btn-primary" type="button">
@@ -64,6 +68,7 @@
                       </button>
                     </div>
                   </td>
+                   -->
                 </tr>
               </tbody>
             </table>

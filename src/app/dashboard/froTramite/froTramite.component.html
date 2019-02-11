@@ -9,8 +9,7 @@
                         <strong class="text-uppercase">Financiero</strong>
                         <small>Tramites</small>
                         <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
-                                data-toggle="modal">
+                            <button (click)="onNew()" class="btn btn-default">
                                 <i class="fa fa-plus"></i>
                                 <span class="text">Nuevo</span>
                             </button>
@@ -22,23 +21,25 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Código</th>
                                 <th>Nombre</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let tramite of tramites; let i = index">
-                                <td>{{ tramite.id }}</td>
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ tramite.codigo }}</td>
                                 <td>{{ tramite.nombre }}</td>
                                 <td>
-                                    <button (click)="onEdit(tramite)" class="btn btn-xs btn-info" type="button">
-                                        <i class="fa fa-edit"></i>
-                                        Editar
-                                    </button>
-                                    <button (click)="onDelete(tramite.id)" class="btn btn-xs btn-danger" type="button">
-                                        <i class="fa fa-trash"></i>
-                                        Eliminar
-                                    </button>
+                                    <div class="btn-group">
+                                        <button (click)="onEdit(tramite)" class="btn btn-xs btn-primary" type="button">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button (click)="onDelete(tramite.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
