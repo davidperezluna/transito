@@ -8,8 +8,11 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 
+import { PopoverModule } from "ngx-popover";
+import { TooltipModule } from "ngx-tooltip";
+
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, PopoverModule, TooltipModule],
     declarations: [FroTramiteComponent, NewComponent, EditComponent],
     exports: [FroTramiteComponent, NewComponent, EditComponent],
     providers: [FroTramiteService]

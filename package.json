@@ -55,6 +55,8 @@
     "ngx-clipboard": "8.1.1",
     "ngx-color-picker": "4.0.3",
     "ngx-dropzone-wrapper": "4.6.6",
+    "ngx-popover": "0.0.16",
+    "ngx-tooltip": "0.0.9",
     "popper.js": "1.12.6",
     "protractor": "5.1.0",
     "rangeslider.js": "2.3.1",
