@@ -6,6 +6,7 @@ import { ToolTipModule } from 'angular2-tooltip'
 
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
 import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
+import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
 
 import { HomeModule } from './home/home.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
@@ -252,6 +253,7 @@ import {RightsidebarComponent} from '../shared';
       ToolTipModule,
       UserCfgMenuModule,
       UserCfgRoleModule,
+      UserUsuarioMenuModule,
       HomeModule,
       VehiculoModule,
       MarcaModule,

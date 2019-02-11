@@ -1,0 +1,64 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Asignar menús</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped" id="dataTables-example">
+                    <tbody>
+                        <tr class="odd">
+                            <td>
+                                <b>Tipo de identificación</b>
+                                <br> {{ usuario.tipoIdentificacion.nombre }}
+                                <br>
+                                <b>Numero de identificación</b>
+                                {{ usuario.identificacion }}
+                            </td>
+                            <td>
+                                <b>Nombres</b>
+                                <br> {{ usuario.primerNombre }} {{ usuario.segundoNombre }}
+                                <br>
+                                <b>Apellidos</b>
+                                {{ usuario.primerApellido }} {{ usuario.segundoApellido }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Rol <strong class="text-danger">*</strong></label>
+                            <ng-select (ngModelChange)="onChangedRole($event)" [multiple]="false" [options]="roles" [(ngModel)]="idRole" name="idRole">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Menus </label>
+                            <ng-select (ngModelChange)="onChangedParent($event)" [multiple]="false" [options]="parents" [(ngModel)]="idParent" name="idParent">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Submenu</label>
+                            <ng-select [multiple]="true" [options]="menus" [(ngModel)]="usuarioMenu.menus" name="menus">
+                            </ng-select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

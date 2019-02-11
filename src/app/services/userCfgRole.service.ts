@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class UserCfgRoleService { 
-	private url = environment.apiUrl + 'usercfgrole';
+	private url = environment.apiUrl + 'usuario/usercfgrole';
 	public identity;
 	public token;
  

@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
 import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
+import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes';
 
 import { HomeRoutes } from './home/home.routes';
 import { VehiculoRoutes } from './vehiculo/vehiculo.routes';
@@ -240,6 +241,7 @@ export const DashboardRoutes: Route[] = [
       ...CvLcCfgTipoRestriccionRoutes,
       ...UserCfgMenuRoutes,
       ...UserCfgRoleRoutes,
+      ...UserUsuarioMenuRoutes,
       ...HomeRoutes,
       ...VehiculoRoutes,
       ...MarcaRoutes,

@@ -1,5 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { UserCfgMenuService } from '../../../services/userCfgMenu.service';
+import { UserCfgRoleService } from '../../../services/userCfgRole.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -8,15 +9,15 @@ import swal from 'sweetalert2';
   templateUrl: './edit.component.html'
 })
 export class EditComponent implements OnInit{
-@Output() ready = new EventEmitter<any>();
-@Input() menu:any = null;
-public errorMessage;
-
-public formReady = false;
+  @Output() ready = new EventEmitter<any>();
+  @Input() menu:any = null;
+  public errorMessage;
   public menus: any = null;
+  public roles: any = null;
 
 constructor(
   private _UserCfgMenuService: UserCfgMenuService,
+  private _UserCfgRoleService: UserCfgRoleService,
   private _loginService: LoginService,
   ){  }
 
@@ -24,6 +25,20 @@ constructor(
     this._UserCfgMenuService.select().subscribe(
       response => {
         this.menus = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+
+    this._UserCfgRoleService.select().subscribe(
+      response => {
+        this.roles = response;
       },
       error => {
         this.errorMessage = <any>error;

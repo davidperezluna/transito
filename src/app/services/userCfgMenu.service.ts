@@ -7,7 +7,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class UserCfgMenuService { 
-	private url = environment.apiUrl + 'usercfgmenu';
+	private url = environment.apiUrl + 'usuario/usercfgmenu';
 	public identity;
 	public token;
 	public cartData = new EventEmitter<any>();
@@ -60,11 +60,19 @@ export class UserCfgMenuService {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 
-	list(datos, token) {
+	selectByParent(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/list", params, { headers: headers }).map(res => res.json()
+		return this._http.post(this.url + "/select/parent", params, { headers: headers }).map(res => res.json()
+		);
+	}
+
+	selectByRole(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/select/role", params, { headers: headers }).map(res => res.json()
 		);
 	}
 

@@ -5,11 +5,6 @@
             <div class="card-header">
                 <h5 class="text-uppercase">Editar role</h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <!-- <div class="card card-block">
-                    <h4 class="card-title">AsyncPipe</h4>
-                    <p class="card-text" ngNonBindable>{{ observableData }}
-                    <p class="card-text" *ngFor="let observableDat of observableData">{{ observableDat }}</p> 
-                </div> -->
             </div>
             <div class="card-body"> 
                 <form #formEdit="ngForm"> 
@@ -17,55 +12,6 @@
                         <div class="col-xs-12 col-lg-4">
                             <label>Nombre <strong class="text-danger">*</strong></label>
                             <input class="form-control text-uppercase" [(ngModel)]="role.nombre" name="nombre" type="text" required autofocus />
-                        </div>
-                        <div class="col-xs-12 col-lg-8">                           
-                            <label>Menus</label>
-                            <ul class="nav flex-column in">
-                                <li class="nav-item" *ngFor="let menu of menus">
-                                    <a class="nav-link" *ngIf="!menu.childrens">
-                                        <h4>
-                                            <i class="fa fa-angle-right"></i>
-                                            {{ menu.title }}
-                                            <input type="checkbox" [value]="menu.id" [name]="menu.id" (change)="onChanged(menu.id, $event)" [checked]="menu.checked">
-                                        </h4>
-                                    </a>
-                                    <a class="nav-link" *ngIf="menu.childrens" data-toggle="collapse" [href]="'#' + menu.id" role="button" aria-expanded="false">
-                                        <h4>
-                                            <i class="fa fa-angle-down"></i>
-                                            {{ menu.title }}
-                                        </h4>
-                                    </a>
-                                    <ul class="nav flex-column nav-second-level collapse multi-collapse m-l-15" [id]="menu.id" *ngIf="menu.childrens" style="padding-left: 15px;">
-                                        <li class="nav-item" *ngFor="let menuSecond of menu.childrens">
-                                            <a class="nav-link" href="javascript:void(0)" *ngIf="!menuSecond.childrens">
-                                                <h5>
-                                                    <i class="fa fa-angle-right"></i>
-                                                    {{ menuSecond.title }}
-                                                    <input type="checkbox" [value]="menuSecond.id" [name]="menuSecond.id" (change)="onChanged(menuSecond.id, $event)" [checked]="menuSecond.checked">
-                                                </h5>
-                                            </a>
-                                            <a class="nav-link" *ngIf="menuSecond.childrens" data-toggle="collapse" [href]="'#' + menuSecond.id" role="button" aria-expanded="false">
-                                                <h5>
-                                                    <i class="fa fa-angle-right"></i>
-                                                    {{ menuSecond.title }}
-                                                </h5>
-                                            </a>
-                                            <ul class="nav flex-column nav-third-level collapse multi-collapse" [id]="menuSecond.id" *ngIf="menuSecond.childrens"  style="padding-left: 15px;">
-                                                <li class="nav-item" *ngFor="let menuThird of menuSecond.childrens">
-                                                    <a class="nav-link" href="javascript:void(0)">
-                                                        <h6>
-                                                            <b>
-                                                                {{ menuThird.title }}
-                                                            </b>
-                                                            <input type="checkbox" [value]="menuThird.id" [name]="menuThird.id" (change)="onChanged(menuThird.id, $event)" [checked]="menuThird.checked">
-                                                        </h6>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>                            
                         </div>
                     </div>
                 </form>
