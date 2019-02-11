@@ -36,6 +36,13 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         'campos': null,
         'idVehiculo': null,
     };
+    public motivosCancelacion = [
+        { value: 'DESAPARICIÓN DOCUMENTAL', label: 'DESAPARICIÓN DOCUMENTAL' },
+        { value: 'HURTO', label: 'HURTO' },
+        { value: 'PERDIDA DEFINITIVA', label: 'PERDIDA DEFINITIVA' },
+        { value: 'EXPORTACIÓN O REEXPORTACIÓN', label: 'EXPORTACIÓN O REEXPORTACIÓN' },
+        { value: 'DESTRUCCIÓN O PERDIDA TOTAL', label: 'DESTRUCCIÓN O PERDIDA TOTAL' },
+    ];
 
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,

@@ -65,7 +65,6 @@ export class NewRnaCambioColorComponent implements OnInit {
             this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
                 response => {
                     this.datos = response.data.datos
-                    console.log(response.data.datos);
                 },
                 error => {
                     this.errorMessage = <any>error;
