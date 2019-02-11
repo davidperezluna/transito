@@ -24,11 +24,13 @@ export class SidebarComponent implements OnInit {
     private _LoginService: LoginService,
     private _UserCfgMenuService: UserCfgMenuService,
   ) {
+    
     this._UserCfgMenuService.cartData.subscribe(
       (data: any) => {
         console.log('**********');
         this.ngOnInit();
       });
+    
     let identity = this._LoginService.getIdentity();
     this.nombreUsuario = identity.primerNombre + " " + identity.primerApellido;
     this.identificacionUsuario = identity.identificacion;

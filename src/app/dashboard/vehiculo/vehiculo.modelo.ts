@@ -9,7 +9,7 @@ export class Vehiculo{
 		public combustibleId:number,
 		public carroceriaId:number,
 		public sedeOperativaId:number,
-		public placa:string,
+		public placa:any,
 		public numeroFactura:string,
 		public fechaFactura:string,
 		public valor:string,
