@@ -107,7 +107,7 @@ constructor(
 
       let token = this._LoginService.getToken();
 
-      this._UserCfgMenuService.selectByParent({ 'idParent': e }, token).subscribe(
+      this._UserCfgMenuService.selectByParent({ 'idParent': e, 'idUsuario': this.usuario.id }, token).subscribe(
         response => {
           if (response) {
             this.menus = response;

@@ -46,6 +46,11 @@ export class UserUsuarioMenuComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.usuarioMenus = response.data.usuarioMenus;
+          this.formIndex = true;
+
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
           
           swal({
             title: 'Perfecto!',
@@ -55,6 +60,7 @@ export class UserUsuarioMenuComponent implements OnInit {
           });
         }else{
           this.usuarioMenus = null;
+          this.formIndex = false;
           
           swal({
             title: 'Atención!',
