@@ -28,7 +28,7 @@ export class NewRnmaRematriculaComponent implements OnInit {
     public tiposIdentificacion: any;
     public tipoIdentificacionEntregaSelected: any;
     public resumen = {};     
-    public matriculaCancelada = false;
+    public matriculaCancelada: any = null;
     public entidades = [
         { value: 'FISCALIA', label: 'FISCALIA' },
         { value: 'SIJIN', label: 'SIJIN' },
@@ -90,21 +90,38 @@ export class NewRnmaRematriculaComponent implements OnInit {
     }
 
     
-    enviarTramite()
-    {
+    enviarTramite(){
         let token = this._loginService.getToken();
-        this._TramiteSolicitudService.buscarMatriculaCancelada({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+
+        this._TramiteSolicitudService.searchMatriculaCancelada({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
-                if (response) {
+                if (response.status == 'success') {
                     this.matriculaCancelada = response.data;
+                    
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
+
+                    this.datos.entidad = this.entidadSelected;
+                    this.datos.municipioActa = this.municipioActaSelected;
+                    this.datos.municipioEntrega = this.municipioEntregaSelected;
+                    this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
+                    this.datos.idFactura = this.factura.id;
+                    this.datos.idVehiculo = this.vehiculo.id;
+                    this.datos.tramiteFormulario = 'rnma-rematricula';
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': this.resumen });
                 } else {
-                    this.matriculaCancelada = false;
+                    this.matriculaCancelada = null;
+
+                    swal({
+                        title: 'Atención!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             },
             error => {
@@ -116,14 +133,6 @@ export class NewRnmaRematriculaComponent implements OnInit {
                 }
             }
         );
-        this.datos.entidad = this.entidadSelected;
-        this.datos.municipioActa = this.municipioActaSelected;
-        this.datos.municipioEntrega = this.municipioEntregaSelected;
-        this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
-        this.datos.idFactura = this.factura.id;
-        this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.tramiteFormulario = 'rnma-rematricula';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
 
     onCancelar(){

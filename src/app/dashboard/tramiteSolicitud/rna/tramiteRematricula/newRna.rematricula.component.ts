@@ -28,8 +28,8 @@ export class NewRnaRematriculaComponent implements OnInit {
     public municipioEntregaSelected: any;
     public tiposIdentificacion: any;
     public tipoIdentificacionEntregaSelected: any;
-    public matriculaCancelada;
-    public resumen = {};     
+    public matriculaCancelada: any = null;
+    public resumen: any;     
     public datos = {
         'entidad': null,
         'numeroActa': null,
@@ -62,31 +62,7 @@ export class NewRnaRematriculaComponent implements OnInit {
         private _TipoIdentificacionService: TipoIdentificacionService,
     ) { }
 
-    ngOnInit() {
-        let token = this._loginService.getToken();
-        this._TramiteSolicitudService.buscarMatriculaCancelada({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
-            response => {
-                if (response) {
-                    this.matriculaCancelada = response.data;
-                    swal({
-                        title: 'Perfecto!',
-                        text: response.message,
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                    })
-                } else {
-                    this.matriculaCancelada = false;
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
+    ngOnInit() {      
         this._SustratoService.getSustratoSelect().subscribe(
             response => {
                 this.sustratos = response;
@@ -133,18 +109,40 @@ export class NewRnaRematriculaComponent implements OnInit {
     
     enviarTramite() {
         let token = this._loginService.getToken();
-        this._TramiteSolicitudService.buscarMatriculaCancelada({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+
+        this._TramiteSolicitudService.searchMatriculaCancelada({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
-                if (response) {
+                if (response.status == 'success') {
                     this.matriculaCancelada = response.data;
+
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
+
+                    this.datos.entidad = this.entidadSelected;
+                    this.datos.municipioActa = this.municipioActaSelected;
+                    this.datos.municipioEntrega = this.municipioEntregaSelected;
+                    this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
+                    this.datos.tramiteFactura = 25;
+                    this.datos.idFactura = this.factura.id;
+                    this.datos.idVehiculo = this.vehiculo.id;
+                    this.datos.tramiteFormulario = 'rna-rematricula';
+
+                    //this.resumen = '';
+                    
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': this.resumen });
                 } else {
-                    this.matriculaCancelada = false;
+                    this.matriculaCancelada = null;
+
+                    swal({
+                        title: 'Atención!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             },
             error => {
@@ -156,15 +154,6 @@ export class NewRnaRematriculaComponent implements OnInit {
                 }
             }
         );
-        this.datos.entidad = this.entidadSelected;
-        this.datos.municipioActa = this.municipioActaSelected;
-        this.datos.municipioEntrega = this.municipioEntregaSelected;
-        this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
-        this.datos.tramiteFactura = 25;
-        this.datos.idFactura = this.factura.id;
-        this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.tramiteFormulario = 'rna-rematricula';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
 
     onCancelar(){

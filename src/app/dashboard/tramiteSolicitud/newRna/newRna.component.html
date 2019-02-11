@@ -1,6 +1,6 @@
 <div class="row">
     <!-- .row -->
-    <div class="col-xs-12 col-lg-5">
+    <div class="col-xs-12 col-lg-4">
         <label><b>Buscar por (Vin,Chasis,Placa,Motor,Serie)</b></label>
         <div class="input-group" [ngClass]="{'has-danger' : isError}">
             <input type="text" class="form-control text-uppercase" [(ngModel)]="tramiteSolicitud.vehiculoId"
@@ -88,7 +88,7 @@
                                         </td>
                                         <td>
                                             <div class="custom-control custom-radio">
-                                                <input [disabled]='!confirmarSolicitante' [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="radio-{{ciudadanoVehiculo.id}}" name="radio-{{ciudadanoVehiculo.id}}"
+                                                <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" id="radio-{{ciudadanoVehiculo.id}}" name="radio-{{ciudadanoVehiculo.id}}"
                                                     class="custom-control-input">
                                                 <label class="custom-control-label" for="radio-{{ciudadanoVehiculo.id}}">Solicitante</label>
                                             </div>
@@ -96,14 +96,14 @@
                                     </tr>
                                     
                                 </tbody>
-                                <tfoot *ngIf='!frmApoderado && !apoderado'>
+                                <tfoot *ngIf='!confirmarSolicitante'>
                                     <tr>
                                         <td colspan="3">
                                             <button  (click)="agregarApoderado()" class="btn btn-primary" *ngIf='!confirmarSolicitante'>
                                                 <i class="fa fa-save"></i>
                                                 Agregar apoderado
                                             </button> 
-                                            <button *ngIf='confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success" >
+                                            <button (click)="onConfirmarSolicitante()" class="btn btn-success" >
                                                 <i class="fa fa-save"></i>
                                                 Confirmar solicitante
                                             </button> 
@@ -261,7 +261,7 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index">
                             <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.formulario}}"
-                                role="tab">{{tramiteFactura.tramitePrecio.nombre}}<i *ngIf="tramiteFactura.realizado"
+                                role="tab">{{ tramiteFactura.tramitePrecio.tramite.nombre }}<i *ngIf="tramiteFactura.realizado"
                                     class="fa fa-dot-circle-o text-success"></i></a>
                             <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
                         </li>

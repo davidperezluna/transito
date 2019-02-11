@@ -28,7 +28,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
     public municipioEntregaSelected: any;
     public tiposIdentificacion: any;
     public tipoIdentificacionEntregaSelected: any;
-    public matriculaCancelada;
+    public matriculaCancelada: any = null;
     public resumen = {};     public datos = {
         'entidad': null,
         'numeroActa': null,
@@ -61,7 +61,6 @@ export class NewRnrsRematriculaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
         this._SustratoService.getSustratoSelect().subscribe(
             response => {
                 this.sustratos = response;
@@ -108,18 +107,35 @@ export class NewRnrsRematriculaComponent implements OnInit {
     
     enviarTramite() {
         let token = this._loginService.getToken();
-        this._TramiteSolicitudService.buscarMatriculaCancelada({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+        this._TramiteSolicitudService.searchMatriculaCancelada({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
-                if (response) {
+                if (response.status == 'success') {
                     this.matriculaCancelada = response.data;
+
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
+
+                    this.datos.entidad = this.entidadSelected;
+                    this.datos.municipioActa = this.municipioActaSelected;
+                    this.datos.municipioEntrega = this.municipioEntregaSelected;
+                    this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
+                    this.datos.idFactura = this.factura.id;
+                    this.datos.idVehiculo = this.vehiculo.id;
+                    this.datos.tramiteFormulario = 'rnrs-rematricula';
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': this.resumen });
                 } else {
-                    this.matriculaCancelada = false;
+                    this.matriculaCancelada = null;
+
+                    swal({
+                        title: 'Atención!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             },
             error => {
@@ -131,14 +147,6 @@ export class NewRnrsRematriculaComponent implements OnInit {
                 }
             }
         );
-        this.datos.entidad = this.entidadSelected;
-        this.datos.municipioActa = this.municipioActaSelected;
-        this.datos.municipioEntrega = this.municipioEntregaSelected;
-        this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
-        this.datos.idFactura = this.factura.id;
-        this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.tramiteFormulario = 'rnrs-rematricula';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
 
     onCancelar(){
