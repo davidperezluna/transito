@@ -6,6 +6,7 @@ import { ToolTipModule } from 'angular2-tooltip'
 
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
 import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
+import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
 
 import { HomeModule } from './home/home.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
@@ -225,6 +226,9 @@ import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
 
 import { FroFacturaModule } from './froFactura/froFactura.module';
 import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
+import { FroTramiteModule } from './froTramite/froTramite.module';
+import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcepto.module';
+import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
 
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
@@ -249,6 +253,7 @@ import {RightsidebarComponent} from '../shared';
       ToolTipModule,
       UserCfgMenuModule,
       UserCfgRoleModule,
+      UserUsuarioMenuModule,
       HomeModule,
       VehiculoModule,
       MarcaModule,
@@ -439,7 +444,10 @@ import {RightsidebarComponent} from '../shared';
       RnrsPreasignacionPlacaModule,
       EmpresaAlcaldiaModule,
       FroFacturaModule,
-      FroRecaudoModule
+      FroRecaudoModule,
+      FroTramiteModule,
+      FroTrteCfgConceptoModule,
+      FroTrtePrecioModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],

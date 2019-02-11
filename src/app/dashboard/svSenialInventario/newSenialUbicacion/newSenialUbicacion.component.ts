@@ -7,6 +7,7 @@ import { SvCfgSenialLineaService } from '../../../services/svCfgSenialLinea.serv
 import { SvCfgSenialUnidadMedidaService } from '../../../services/svCfgSenialUnidadMedida.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { SvSenialBodegaService } from '../../../services/svSenialBodega.service';
+import { SvCfgSenialProveedorService } from '../../../services/svCfgSenialProveedor.service';
 import { LoginService } from '../../../services/login.service';
 import { SvSenialUbicacion } from './newSenialUbicacion.modelo';
 import swal from 'sweetalert2';
@@ -25,7 +26,8 @@ export class NewSenialUbicacionComponent implements OnInit {
     public errorMessage;
 
     public seniales: any;
-    public bodegas: any;
+    public bodegas: any = null;
+    public proveedores: any = null;
     public estados: any;
     public unidadesMedida: any = null;
     public lineas: any = null;
@@ -76,9 +78,10 @@ export class NewSenialUbicacionComponent implements OnInit {
         private _UnidadMedidaService: SvCfgSenialUnidadMedidaService,
         private _MunicipioService: MunicipioService,
         private _BodegaService: SvSenialBodegaService,
+        private _ProveedorService: SvCfgSenialProveedorService,
         private _LoginService: LoginService,
     ) {
-        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null);
+        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     ngOnInit() {
@@ -214,28 +217,58 @@ export class NewSenialUbicacionComponent implements OnInit {
                 }
             );
 
-            this._BodegaService.selectProveedorBySenial({ 'idSenial': e }, token).subscribe(
-                response => {
-                    if (response) {
-                        this.bodegas = response;
-                    } else {
-                        swal({
-                            title: 'Error!',
-                            text: 'No tiene existencias en bodega para esa señal',
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
+            if (this.demarcacion) {
+                this._ProveedorService.select().subscribe(
+                    response => {
+                        if (response) {
+                            this.proveedores = response;
+                        } else {
+                            swal({
+                                title: 'Error!',
+                                text: 'No tiene proveedores registrados',
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
 
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
+                            this.proveedores = null;
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
                     }
-                }
-            );
+                );
+            }else{
+                this._BodegaService.selectProveedorBySenial({ 'idSenial': e }, token).subscribe(
+                    response => {
+                        if (response) {
+                            this.bodegas = response;
+                        } else {
+                            swal({
+                                title: 'Error!',
+                                text: 'No tiene existencias en bodega para esa señal',
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
+
+                            this.bodegas = null;
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+    
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                );
+            }
+
         }
     }
 

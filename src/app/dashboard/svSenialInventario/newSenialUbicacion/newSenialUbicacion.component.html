@@ -20,6 +20,12 @@
                     </div>
                 </div>
                 <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idTipoSenial.id == 1">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [(ngModel)]="demarcacion" class="custom-control-input" id="demarcacion" name="demarcacion" checked="">
+                            <label class="custom-control-label" for="demarcacion">Demarcación externa</label>
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Señal <strong class="text-danger">*</strong></label>
                         <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
@@ -32,19 +38,15 @@
                     </div>
                 </div>
                 <div class="row"><!-- .row -->
-                    <div class="col-xs-12 col-lg-12" *ngIf="senial && senial.tipoSenial.id == 1">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" [(ngModel)]="demarcacion" class="custom-control-input" id="demarcacion" name="demarcacion" checked="">
-                            <label class="custom-control-label" for="demarcacion">Demarcación externa</label>
-                        </div>
-                    </div>
                     <div class="col-xs-12 col-lg-4">
                         <label>Cantidad <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
                     </div>
                     <div class="col-xs-12 col-lg-8">
                         <label>Proveedor <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
+                        <ng-select *ngIf="bodegas" [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
+                        </ng-select>
+                        <ng-select *ngIf="proveedores" [multiple]="false" [options]="proveedores" [(ngModel)]="senialUbicacion.idProveedor" name="idProveedor" required>
                         </ng-select>
                     </div>
                 </div>

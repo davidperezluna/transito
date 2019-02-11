@@ -1,0 +1,80 @@
+<div class="container" >
+  <hr>
+  <div class="row" ><!-- .row -->
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3" *ngIf='formSearch'>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="text-uppercase">
+            <b>Asignación de menús</b>
+          </h5>
+        </div>
+        <div class="card-body">
+          <form #formSearch="ngForm">
+            <div class="form-group row">
+              <div class="col-xs-12 col-lg-12">
+                <label>Np. de identificación</label>
+                <input class="form-control text-uppercase" [(ngModel)]="numeroIdentificacion" name="numeroIdentificacion" type="numeric" required>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-9" *ngIf="usuario">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong class="text-uppercase">Menus</strong>
+              <div class="btn-group pull-right">
+                <button (click)="onNew(usuario)" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body" *ngIf='formIndex'>
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let usuarioMenu of usuarioMenus; let i = index">
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ usuarioMenu.menu.titulo }}</td>
+                  <td >{{ usuarioMenu.menu.role?.nombre }}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="onEdit(usuarioMenu)" class="btn btn-xs btn-primary" type="button">
+                        <i class="fa fa-pencil"></i>
+                      </button> 
+                      <button (click)="onDelete(usuarioMenu.id)"  class="btn btn-xs btn-danger" type="button">
+                        <i class="fa fa-trash"></i>
+                      </button> 
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+        <app-new *ngIf='formNew' [usuario]="usuario" (ready)="ready($event)"></app-new>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [usuarioMenu]="usuarioMenu" (ready)="ready($event)"></app-edit>
+</div>

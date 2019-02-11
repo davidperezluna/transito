@@ -15,25 +15,25 @@ export class NewRnmaRematriculaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
+    @Input() vehiculo: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
     public sustratos: any;
     public sustratoSelected: any;
     public entidadList: string[];
     public entidadSelected: any;
-    public numeroRunt: any;
-    public numeroActa: any;
-    public fechaActa: any;
     public municipios: any;
     public municipioActaSelected: any;
     public municipioEntregaSelected: any;
-    public fechaEntrega: any;
     public tiposIdentificacion: any;
     public tipoIdentificacionEntregaSelected: any;
-    public numeroIdentificacionEntrega: any;
-    public nombreEntrega: any;
-    public estado: any;
     public resumen = {};     
+    public matriculaCancelada: any = null;
+    public entidades = [
+        { value: 'FISCALIA', label: 'FISCALIA' },
+        { value: 'SIJIN', label: 'SIJIN' },
+        { value: 'DIJIN', label: 'DIJIN' },
+    ];
     public datos = {
         'entidad': null,
         'numeroActa': null,
@@ -48,6 +48,7 @@ export class NewRnmaRematriculaComponent implements OnInit {
         'estado': null,
         'tramiteFormulario': null,
         'idFactura': null,
+        'idVehiculo': null,
     };
 
     constructor(
@@ -59,7 +60,6 @@ export class NewRnmaRematriculaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.entidadList = ['Fiscalía,', 'SIJIN', 'DIJIN'];
         this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
@@ -90,21 +90,49 @@ export class NewRnmaRematriculaComponent implements OnInit {
     }
 
     
-    enviarTramite() {
-        this.datos.numeroRunt = this.numeroRunt;
-        this.datos.entidad = this.entidadSelected;
-        this.datos.numeroActa = this.numeroActa;
-        this.datos.fechaActa = this.fechaActa;
-        this.datos.municipioActa = this.municipioActaSelected;
-        this.datos.municipioEntrega = this.municipioEntregaSelected;
-        this.datos.fechaEntrega = this.fechaEntrega;
-        this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
-        this.datos.numeroIdentificacionEntrega = this.numeroIdentificacionEntrega;
-        this.datos.nombreEntrega = this.nombreEntrega;
-        this.datos.estado = this.estado;
-        this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rnma-rematricula';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+    enviarTramite(){
+        let token = this._loginService.getToken();
+
+        this._TramiteSolicitudService.searchMatriculaCancelada({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.matriculaCancelada = response.data;
+                    
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+
+                    this.datos.entidad = this.entidadSelected;
+                    this.datos.municipioActa = this.municipioActaSelected;
+                    this.datos.municipioEntrega = this.municipioEntregaSelected;
+                    this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
+                    this.datos.idFactura = this.factura.id;
+                    this.datos.idVehiculo = this.vehiculo.id;
+                    this.datos.tramiteFormulario = 'rnma-rematricula';
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': this.resumen });
+                } else {
+                    this.matriculaCancelada = null;
+
+                    swal({
+                        title: 'Atención!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
     }
 
     onCancelar(){

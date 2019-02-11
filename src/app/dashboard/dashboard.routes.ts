@@ -2,6 +2,7 @@ import { Route } from '@angular/router';
 
 import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
 import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
+import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes';
 
 import { HomeRoutes } from './home/home.routes';
 import { VehiculoRoutes } from './vehiculo/vehiculo.routes';
@@ -222,6 +223,9 @@ import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
 
 import { FroFacturaRoutes } from './froFactura/froFactura.routes';
 import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
+import { FroTramiteRoutes } from './froTramite/froTramite.routes';
+import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
+import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -237,6 +241,7 @@ export const DashboardRoutes: Route[] = [
       ...CvLcCfgTipoRestriccionRoutes,
       ...UserCfgMenuRoutes,
       ...UserCfgRoleRoutes,
+      ...UserUsuarioMenuRoutes,
       ...HomeRoutes,
       ...VehiculoRoutes,
       ...MarcaRoutes,
@@ -431,6 +436,10 @@ export const DashboardRoutes: Route[] = [
       ...EmpresaAlcaldiaRoutes,
       ...FroFacturaRoutes,
       ...FroRecaudoRoutes,
+      ...FroTramiteRoutes,
+      ...FroTrteCfgConceptoRoutes,
+      ...FroTrtePrecioRoutes,
+      ...FroTrtePrecioRoutes,
       
     ]
   }

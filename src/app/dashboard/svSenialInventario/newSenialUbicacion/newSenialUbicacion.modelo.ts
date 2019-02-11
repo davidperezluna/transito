@@ -8,6 +8,7 @@ export class SvSenialUbicacion{
 		public idEstado: number,
 		public idMunicipio: number,
 		public idBodega: number,
+		public idProveedor: number,
 		public idUnidadMedida: number,
 		public idLinea: number,
 		public id: number

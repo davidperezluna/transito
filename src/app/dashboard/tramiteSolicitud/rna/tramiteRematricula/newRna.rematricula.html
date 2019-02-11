@@ -14,20 +14,16 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12"> 
                             <label>Número solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Entidad
-                                <span class="text-danger">*</span>
-                            </label>
-                            <select class="form-control" name="entidadSelected" [(ngModel)]="entidadSelected" required>
-                                <option *ngFor="let entidad of entidadList" [value]="entidad"> {{ entidad }}
-                                </option>
-                            </select>
+                            <label>Entidad <span class="text-danger">*</span></label>
+                            <ng-select class="form-control" [multiple]="false" [options]="entidades" name="idEntidad" [(ngModel)]="entidadSelected" required>
+                            </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Número de acta</label>
-                            <input class="form-control" [(ngModel)]="numeroActa" name="numeroActa" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroActa" name="numeroActa" type="text" required />
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Municipio del acta *</label>
@@ -41,7 +37,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Fecha acta *</label>
-                            <input class="form-control" [(ngModel)]="fechaActa" name="fechaActa" type="date" required />
+                            <input class="form-control" [(ngModel)]="datos.fechaActa" name="fechaActa" type="date" required />
                         </div>
                         <hr>
                         <div class="justify-content-center col-lg-12 col-md-16">
@@ -60,16 +56,16 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Número Identificación</label>
-                            <input class="form-control" [(ngModel)]="numeroIdentificacionEntrega" name="numeroIdentificacionEntrega" type="text" required />
+                            <input class="form-control" [(ngModel)]="datos.numeroIdentificacionEntrega" name="numeroIdentificacionEntrega" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Nombre</label>
-                            <input class="form-control" [(ngModel)]="nombreEntrega" name="nombreEntrega" type="text" required
+                            <input class="form-control" [(ngModel)]="datos.nombreEntrega" name="nombreEntrega" type="text" required
                             />
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Fecha entrega *</label>
-                            <input class="form-control" [(ngModel)]="fechaEntrega" name="fechaEntrega" type="date" required />
+                            <input class="form-control" [(ngModel)]="datos.fechaEntrega" name="fechaEntrega" type="date" required />
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Municipio de entrega *</label>
@@ -83,15 +79,17 @@
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Estado del automotor</label>
-                            <textarea class="form-control" [(ngModel)]="estado" name="estado"></textarea>
+                            <textarea class="form-control" [(ngModel)]="datos.estado" name="estado"></textarea>
                         </div>
                         
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
+                <button (click)="enviarTramite()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
             </div>
             
         </div>

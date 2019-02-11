@@ -4,6 +4,7 @@ export class UserCfgMenu{
 		public path: string,
 		public abreviatura: string,
 		public idParent:number,
+		public idRole:number,
 		public id:number
 	){}
 }

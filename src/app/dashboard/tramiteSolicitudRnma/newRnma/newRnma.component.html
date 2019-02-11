@@ -288,7 +288,7 @@
                             (cancelarTramite)="cancelarTramite($event)"></appRnma-sustrato>
                     </div>
                     <div class="tab-pane" id="rnma-rematricula" role="tabpanel"> 
-                         <appRnma-rematricula  (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-rematricula>
+                         <appRnma-rematricula [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnma-rematricula>
                     </div>
                     <div class="tab-pane" id="rnma-matriculainicial" role="tabpanel">
                         <appRnma-matricula-inicial [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
