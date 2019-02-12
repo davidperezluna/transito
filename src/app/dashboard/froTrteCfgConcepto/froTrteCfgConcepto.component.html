@@ -6,11 +6,10 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        <strong class="text-uppercase">Financiero</strong>
-                        <small>Tramite Concepto</small>
+                        <strong class="text-uppercase">Trámites</strong>
+                        <small>Configurar Concepto</small>
                         <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
-                                data-toggle="modal">
+                            <button (click)="onNew()" class="btn btn-default">
                                 <i class="fa fa-plus"></i>
                                 <span class="text">Nuevo</span>
                             </button>
@@ -23,6 +22,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
+                                <th>Valor</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -30,15 +30,18 @@
                             <tr class="odd" *ngFor="let tramiteConcepto of tramitesConceptos; let i = index">
                                 <td>{{ tramiteConcepto.id }}</td>
                                 <td>{{ tramiteConcepto.nombre }}</td>
+                                <td>{{ tramiteConcepto.valor | currency: 'COP' }}</td>
                                 <td>
-                                    <button (click)="onEdit(tramiteConcepto)" class="btn btn-xs btn-info" type="button">
-                                        <i class="fa fa-edit"></i>
-                                        Editar
-                                    </button>
-                                    <button (click)="onDelete(tramiteConcepto.id)" class="btn btn-xs btn-danger" type="button">
-                                        <i class="fa fa-trash"></i>
-                                        Eliminar
-                                    </button>
+                                    <div class="btn-group">
+                                        <button (click)="onEdit(tramiteConcepto)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false"
+                                            [tooltipAnimation]="true" tooltipPlacement="top">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button (click)="onDelete(tramiteConcepto.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false"
+                                            [tooltipAnimation]="true" tooltipPlacement="top">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

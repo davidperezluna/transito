@@ -23,21 +23,6 @@ export class NewComponent implements OnInit {
 
     ngOnInit() {
         this.tramiteConcepto = new FroTrteCfgConcepto(null, null, null, null);
-
-        swal({
-            title: 'Cargando Tabla!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            timer: 1500,
-            onOpen: () => {
-                swal.showLoading();
-            }
-        }).then((result) => {
-            if (
-                // Read more about handling dismissals
-                result.dismiss === swal.DismissReason.timer
-            ) {
-            }
-        });
     }
 
     onCancelar() {
@@ -47,7 +32,7 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        console.log(this.tramiteConcepto);
+
         this._FroTrteCfgConceptoService.register(this.tramiteConcepto, token).subscribe(
             response => {
                 if (response.status == 'success') {
@@ -56,16 +41,16 @@ export class NewComponent implements OnInit {
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
-                } else {
-                    this.tramiteConcepto.id = null;
+                    });
 
+                    this.ready.emit(true);
+                } else {
                     swal({
                         title: 'Error!',
                         text: response.message,
                         type: 'error',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
