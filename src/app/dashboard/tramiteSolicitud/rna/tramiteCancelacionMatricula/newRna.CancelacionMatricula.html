@@ -67,7 +67,7 @@
                             </label>
                             <input class="form-control" [(ngModel)]="datos.fechaHechos" name="fechaHechos" type="date" min="0" required />
                         </div>
-                        <div class="col-lg-6 col-md-6 " *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
+                        <!-- <div class=""><br>
                             <br>
                             <label class="custom-control custom-checkbox" for="2c-option1">
                                 <input type="checkbox" [(ngModel)]="datos.recuperarMotor" name="recuperarMotor" class="custom-control-input"
@@ -75,6 +75,15 @@
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Recuperar motor</span>
                             </label>
+                        </div> -->
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-md-6 " *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.recuperarMotor" class="custom-control-input" id="recuperarMotor"
+                                        name="recuperarMotor" checked="">
+                                    <label class="custom-control-label" for="sustrato">Recuperar Motor</label>
+                                </div>
+                            </div>
                         </div>
                         <!--fin 5-->
                         <!--nunca borrar siempre ira en las todas las paginas -->                      

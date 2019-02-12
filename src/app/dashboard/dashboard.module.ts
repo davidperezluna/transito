@@ -229,6 +229,8 @@ import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 import { FroTramiteModule } from './froTramite/froTramite.module';
 import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcepto.module';
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
+import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
+import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
 
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
@@ -448,6 +450,8 @@ import {RightsidebarComponent} from '../shared';
       FroTramiteModule,
       FroTrteCfgConceptoModule,
       FroTrtePrecioModule,
+      FroReporteIngresosModule,
+      FroCfgTipoRecaudoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent, FooterComponent, RightsidebarComponent],
