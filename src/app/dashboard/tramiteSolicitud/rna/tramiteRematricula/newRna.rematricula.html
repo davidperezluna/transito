@@ -12,10 +12,6 @@
                 <hr>
                 <div class="row justify-content-center container">
                     <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12"> 
-                            <label>Número solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
-                        </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Entidad <span class="text-danger">*</span></label>
                             <ng-select [multiple]="false" [options]="entidades" name="idEntidad" [(ngModel)]="entidadSelected" required>
@@ -39,6 +35,7 @@
                             <label>Fecha acta *</label>
                             <input class="form-control" [(ngModel)]="datos.fechaActa" name="fechaActa" type="date" required />
                         </div>
+
                         <hr>
                         <div class="justify-content-center col-lg-12 col-md-16">
                             <br>
@@ -77,11 +74,14 @@
                             name="municipioEntregaSelected">
                             </ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-lg-6 col-md-6">
                             <label>Estado del automotor</label>
                             <textarea class="form-control" [(ngModel)]="datos.estado" name="estado"></textarea>
                         </div>
-                        
+                        <div class="col-lg-6 col-md-6">
+                            <label>Número solicitud RUNT</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
                     </div>
                 </div>
             </div>
