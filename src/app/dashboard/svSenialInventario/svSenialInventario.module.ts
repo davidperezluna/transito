@@ -14,8 +14,17 @@ import { LocationComponent } from './location/location.component';
 import { RecordComponent } from './record/record.component';
 import { SelectModule } from 'angular2-select';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
+    imports: [
+        CommonModule, 
+        Ng2BootstrapModule.forRoot(),
+        SelectModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCZLRPtun19mn3xqSZi08dPp-1R4P2A2B4'
+        })
+    ],
     declarations: [SvSenialInventarioComponent, NewSenialBodegaComponent, NewSenialUbicacionComponent, EditComponent, LocationComponent, RecordComponent],
     exports: [SvSenialInventarioComponent, NewSenialBodegaComponent, NewSenialUbicacionComponent, EditComponent, LocationComponent, RecordComponent],
     providers: [SvSenialInventarioService, SvSenialUbicacionService, SvSenialBodegaService]

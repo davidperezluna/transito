@@ -33,10 +33,10 @@
                                 <td>{{ tramite.nombre }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top" (click)="onEdit(tramite)" class="btn btn-xs btn-primary" type="button">
+                                        <button (click)="onEdit(tramite)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                        <button tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top" (click)="onDelete(tramite.id)" class="btn btn-xs btn-danger" type="button">
+                                        <button (click)="onDelete(tramite.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </div>

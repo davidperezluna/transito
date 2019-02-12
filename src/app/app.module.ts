@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { AgmCoreModule } from '@agm/core';
+
 
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -23,10 +23,7 @@ import { LoggerModule } from './logger/logger.module';
     RouterModule.forRoot(routes),
     LoginModule,
     DashboardModule,
-    LoggerModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCZLRPtun19mn3xqSZi08dPp-1R4P2A2B4'
-    })
+    LoggerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

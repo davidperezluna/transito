@@ -4,6 +4,7 @@ export class RnaPreregistro{
 		public numeroFactura:string,
 		public fechaFactura:string,
 		public valor:string,
+		public placa:any,
 		public MarcaId: number,
 		public lineaId:number,
 		public clase:number,
