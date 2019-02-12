@@ -17,6 +17,8 @@ import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { MarcaService } from '../../../services/marca.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { CiudadanoService } from '../../../services/ciudadano.service';
+import { EmpresaService } from "../../../services/empresa.service";
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-new',
@@ -36,11 +38,14 @@ public colores:any;
 public marcas:any;
 public combustibles:any;
 public radiosAccion:any;
+public empresaSelected:any;
 public modalidadesTransporte:any;
 public municipioSelected:any;
 public lineaSelected:any;
 public claseSelected:any;
 public carroceriaSelected:any;
+public apoderadoSelected:any;
+public ciudadanoSelected:any;
 public servicioSelected:any;
 public colorSelected:any;
 public marcaSelected:any;
@@ -48,12 +53,14 @@ public sedeOperativaSelected:any;
 public combustibleSelected:any;
 public radioAccionSelected:any;
 public modalidadTransporteSelected:any;
+public tipoIdentificacionSelected:any;
 public respuesta:any;
 public sedesOperativas:any;
 public tipoIdentificaciones:any;
 public ciudadanoEncontrado=1;
 public empresaEncontrada=1;
 public ciudadano:any;
+public apoderado = 'false';
 public ciudadanoNew:any;
 public empresa:any;
 public nit:any;
@@ -62,10 +69,12 @@ public listaPropietariosCiudadanos=false;
 public listaPropietariosEmpresas=false;
 public empresaNew=false;
 public radicado=false;
+public apoderadoEncontrado=1;
 public identificacion:any;
 public persona:any='empresa';
 public tipoPropiedadSelected:any;
 public sedeOperativa:any;
+public identificacionApoderado:any;
 public btnRadicado:any = 'Preregistro para matricula inicial';
 public propietario = true;
 public campo = false;
@@ -74,7 +83,10 @@ public tipoPropiedades= [
   {'value':2,'label':"Propio"}
 ];
 
-public resumen = {};     public datos = {
+
+
+public resumen = {};     
+public datos = {
   'propietariosEmpresas': [],
   'propietariosCiudadanos': [],
   'solidario': false,
@@ -91,7 +103,6 @@ constructor(
   private _MarcaService: MarcaService,
   private _lineaService: LineaService,
   private _ClaseService: ClaseService,
-  //private _CfgTipoVehiculo: CfgTipoVehiculoService,
   private _CarroceriaService: CarroceriaService,
   private _ServicioService: ServicioService,
   private _ColorService: ColorService,
@@ -102,10 +113,12 @@ constructor(
   private _SedeOperativaService: SedeOperativaService,
   private _tipoIdentificacionService: TipoIdentificacionService,
   private _FuncionarioService: MpersonalFuncionarioService,
+  private _CiudadanoService: CiudadanoService,
+  private _EmpresaService: EmpresaService,
   ){}
 
   ngOnInit() {
-    this.vehiculo = new RnaPreregistro(null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._loginService.getToken();
     let identity = this._loginService.getIdentity();
@@ -314,7 +327,28 @@ constructor(
       'persona':this.persona,
     }
 
-    let token = this._loginService.getToken();
+    this.datos.vehiculo = this.vehiculo.placa;
+    // this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
+    this.datos.tramiteFormulario = 'rna-matriculainicial';
+    let token = this._loginService.getToken(); 
+
+    console.log(this.datos);
+    // return (0);
+    
+    // this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
+    //   response => {
+    //       this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+    //   },
+    //   error => {
+    //     this.errorMessage = <any>error;
+
+    //     if(this.errorMessage != null){
+    //       console.log(this.errorMessage);
+    //       alert('Error en la petición');
+    //     }
+    //   }
+    // );
+
     this._RnaPreregistroService.register(datos, token).subscribe(
 			response => {
         this.respuesta = response;
@@ -374,5 +408,187 @@ constructor(
       this.radicado = true; 
     }
     // alert(this.btnRadicado); 
+  }
+
+  changedtipoIdentificacion(e){
+    this.ciudadanoEncontrado = 1;
+    this.empresaEncontrada = 1;
+  }
+
+  btnNewCiudadano(){
+      if (this.tipoPropiedadSelected == 2) {
+          this.datos.propietariosCiudadanos.push(
+              {'identificacion':this.ciudadano.identificacion,
+              'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
+              'permisoTramite':this.datos.solidario,
+              'propietarioPresente':this.propietarioPresente
+              }   
+          );
+      }else{
+          this.datos.propietariosCiudadanos.push(
+                  {'identificacion':this.ciudadano.identificacion,
+                  'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
+                  'permisoTramite':this.propietario
+              }   
+          );
+          if (this.propietario) {
+              this.propietario = false
+          }
+      }
+
+      this.ciudadanoEncontrado=1;
+      this.listaPropietariosCiudadanos=true;
+  }
+
+  btnNewEmpresa(){
+      if (this.tipoPropiedadSelected == 2) {
+          this.datos.propietariosEmpresas.push(
+              {'nit':this.empresa.nit,
+              'nombre':this.empresa.nombre,
+              'permisoTramite':this.datos.solidario,
+              'propietarioPresente':this.propietarioPresente
+              }   
+          );
+      }else{
+          this.datos.propietariosEmpresas.push(
+                  {'nit':this.empresa.nit,
+                  'nombre':this.empresa.nombre,
+                  'permisoTramite':this.propietario
+              }   
+          );
+          if (this.propietario) {
+              this.propietario = false
+          }
+      }   
+      this.empresaEncontrada=1;
+      this.listaPropietariosEmpresas=true;
+  }
+
+  btnNewApoderado(){
+      if (this.apoderado == 'ciudadano') {
+          this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== this.ciudadanoSelected[0]);
+          this.datos.propietariosCiudadanos.push(
+              {'identificacion':this.ciudadanoSelected[0].identificacion,
+              'nombre':this.ciudadanoSelected[0].nombre,
+              'permisoTramite':this.ciudadanoSelected[0].permisoTramite,
+              'propietarioPresente':this.ciudadanoSelected[0].propietarioPresente,
+              'identificacionApoderado':this.apoderadoSelected.identificacion,
+              'nombreApoderado':this.apoderadoSelected.primerNombre+" "+this.apoderadoSelected.segundoNombre,
+              }   
+          )
+          this.apoderado = 'false'
+          this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
+          this.listaPropietariosCiudadanos=true;
+      }
+      if (this.apoderado == 'empresa') {
+          this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== this.empresaSelected[0]);
+          this.datos.propietariosEmpresas.push(
+              {'nit':this.empresaSelected[0].nit,
+              'nombre':this.empresaSelected[0].nombre,
+              'permisoTramite':this.empresaSelected[0].permisoTramite,
+              'identificacionApoderado':this.apoderadoSelected.identificacion,
+              'nombreApoderado':this.apoderadoSelected.primerNombre+" "+this.apoderadoSelected.segundoNombre,
+              }   
+          );
+          this.apoderado = 'false'
+          this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
+          this.listaPropietariosEmpresas=true;
+      }
+  }
+
+  onKeyCiudadano(){ 
+    let token = this._loginService.getToken();
+    let identificacion = {
+      'numeroIdentificacion' : this.identificacion,
+    };
+    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+        response => {
+            this.respuesta = response; 
+            if(this.respuesta.status == 'success'){
+                this.ciudadano = this.respuesta.data;
+                this.ciudadanoEncontrado= 2;
+                this.ciudadanoNew = false;
+        }else{
+            this.ciudadanoEncontrado=3;
+            this.ciudadanoNew = true;
+        }
+        error => {
+                this.errorMessage = <any>error;
+            
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+    }); 
+}
+
+onKeyApoderado(){
+    let token = this._loginService.getToken();
+    let identificacion = {
+  'numeroIdentificacion' : this.identificacionApoderado,
+    };
+    this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        response => {
+            this.respuesta = response; 
+            if(this.respuesta.status == 'success'){
+                this.apoderadoSelected = this.respuesta.data;
+                // this.ciudadanoNew = false;
+        }else{
+            this.apoderadoEncontrado=3;
+            // this.ciudadanoNew = true;
+        }
+        error => {
+                this.errorMessage = <any>error;
+            
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+    }); 
+}
+
+onKeyEmpresa(){
+    let token = this._loginService.getToken();
+    let nit = {
+      'nit' : this.nit,
+    };
+    this._EmpresaService.showNit(token,nit).subscribe(
+        response => {
+            this.respuesta = response; 
+            if(this.respuesta.status == 'success'){
+                this.empresa = this.respuesta.data;
+                this.empresaEncontrada= 2;
+        }else{
+            this.empresaEncontrada=3;
+        }
+        error => {
+                this.errorMessage = <any>error;
+            
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+    }); 
+  }
+  delete(ciudadano:any): void {
+    this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== ciudadano);
+    if (this.datos.propietariosCiudadanos.length === 0) {
+        this.listaPropietariosCiudadanos = false;
+    }
+    if(ciudadano.permisoTramite){
+        this.propietario = true;
+    }
+  }
+  deleteEmpresa(empresa:any): void {
+      this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== empresa);
+      if (this.datos.propietariosEmpresas.length === 0) {
+          this.listaPropietariosEmpresas = false;
+      }
+      if(empresa.permisoTramite){
+          this.propietario = true;
+      }
   }
 } 

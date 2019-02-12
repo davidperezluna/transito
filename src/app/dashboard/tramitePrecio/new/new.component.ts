@@ -95,7 +95,7 @@ constructor(
               }else{
                 swal({
                   title: 'Error!',
-                  text: 'El tramitePrecio ya se encuentra registrado',
+                  text: response.message,
                   type: 'error',
                   confirmButtonText: 'Aceptar'
                 })

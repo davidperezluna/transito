@@ -48,21 +48,31 @@
                 <h5 class="text-uppercase">Preliquidacion</h5>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Capital total</th>
-                            <th>Interes total</th>
-                            <th>Fecha Fin</th>
-                            <th>Valor cuota 0</th>
-                        </tr>
-                    </thead>
+                <table class="table table-bordered table-striped">
                     <tbody>
-                        <tr>
-                            <td>{{ valorTotal | currency: 'COP' }}</td>
-                            <td>{{ valorInteres | currency: 'COP' }}</td>
-                            <td>{{ fechaFinal }}</td>
-                            <td>{{ valorCuotaInicial | currency: 'COP' }}</td>
+                        <tr class="odd">
+                            <td>
+                                <b>Capital total</b>
+                                <br>
+                                {{ valorTotal | currency: 'COP' }}
+                            </td>
+                                
+                            <td>
+                                <b>Interes total</b>
+                                <br>
+                                {{ valorInteres | currency: 'COP' }}
+                            </td>
+
+                            <td>
+                                <b>Fecha Fin</b>
+                                <br>
+                                {{ fechaFinal }}
+                            </td>
+                            <td>
+                                <b>Valor cuota 0</b>
+                                <br>
+                                {{ valorCuotaInicial | currency: 'COP' }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
