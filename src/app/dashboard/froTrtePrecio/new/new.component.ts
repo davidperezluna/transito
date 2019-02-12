@@ -105,7 +105,9 @@ export class NewComponent implements OnInit {
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
+
+                    this.ready.emit(true);
                 } else {
                     this.trtePrecio.id = null;
                     swal({
@@ -113,7 +115,7 @@ export class NewComponent implements OnInit {
                         text: response.message,
                         type: 'error',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
