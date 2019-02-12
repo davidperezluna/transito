@@ -373,5 +373,6 @@ constructor(
       this.btnRadicado = 'Preregistro para radicado de cuenta';
       this.radicado = true; 
     }
+    // alert(this.btnRadicado); 
   }
-}
+} 
