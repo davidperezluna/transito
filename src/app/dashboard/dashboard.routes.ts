@@ -30,6 +30,8 @@ import { CvCdoTrazabilidadRoutes } from './cvCdoTrazabilidad/cvCdoTrazabilidad.r
 import { CvCdoNotificacionRoutes } from './cvCdoNotificacion/cvCdoNotificacion.routes';
 import { CvCdoCfgInteresRoutes } from './cvCdoCfgInteres/cvCdoCfgInteres.routes';
 import { CvAudienciaRoutes } from './cvAudiencia/cvAudiencia.routes';
+import { CvAuCfgAtencionRoutes } from './cvAuCfgAtencion/cvAuCfgAtencion.routes';
+import { CvAuCfgHorarioRoutes } from './cvAuCfgHorario/cvAuCfgHorario.routes';
 
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
 import { CvRestriccionRoutes } from './cvRestriccion/cvRestriccion.routes';
@@ -303,6 +305,8 @@ export const DashboardRoutes: Route[] = [
       ...CvCdoNotificacionRoutes,
       ...CvCdoCfgInteresRoutes,
       ...CvAudienciaRoutes,
+      ...CvAuCfgAtencionRoutes,
+      ...CvAuCfgHorarioRoutes,
       ...CvLcCfgMotivoRoutes,
       ...CvRestriccionRoutes,
       ...CvCfgInteresRoutes,

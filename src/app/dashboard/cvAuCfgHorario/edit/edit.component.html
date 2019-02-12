@@ -1,0 +1,58 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase"><b>Editar notificación</b></h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formEdit="ngForm"> 
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Hora inicial mañana:
+                                    <strong class="text-danger">*</strong>
+                                </label>
+                                <input type="time" class="form-control text-uppercase" [(ngModel)]="horario.horaManianaInicial" name="horaManianaInicial"
+                                />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Hora final mañana
+                                    <strong class="text-danger">*</strong>
+                                </label>
+                                <input type="time" class="form-control text-uppercase" [(ngModel)]="horario.horaManianaFinal" name="horaManianaFinal" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Hora inicial tarde:
+                                    <strong class="text-danger">*</strong>
+                                </label>
+                                <input type="time" class="form-control text-uppercase" [(ngModel)]="horario.horaTardeInicial" name="horaTardeInicial" />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Hora final tarde
+                                    <strong class="text-danger">*</strong>
+                                </label>
+                                <input type="time" class="form-control text-uppercase" [(ngModel)]="horario.horaTardeFinal" name="horaTardeFinal" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -47,6 +47,8 @@ import { CvCdoTrazabilidadModule } from './cvCdoTrazabilidad/cvCdoTrazabilidad.m
 import { CvCdoNotificacionModule } from './cvCdoNotificacion/cvCdoNotificacion.module';
 import { CvCdoCfgInteresModule } from './cvCdoCfgInteres/cvCdoCfgInteres.module';
 import { CvAudienciaModule } from './cvAudiencia/cvAudiencia.module';
+import { CvAuCfgAtencionModule } from './cvAuCfgAtencion/cvAuCfgAtencion.module';
+import { CvAuCfgHorarioModule } from './cvAuCfgHorario/cvAuCfgHorario.module';
 
 import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
@@ -367,6 +369,8 @@ import {RightsidebarComponent} from '../shared';
       CvCdoNotificacionModule,
       CvCdoCfgInteresModule,
       CvAudienciaModule,
+      CvAuCfgAtencionModule,
+      CvAuCfgHorarioModule,
       CvLcCfgMotivoModule,
       CvRestriccionModule,
       CvCfgInteresModule,
