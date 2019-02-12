@@ -53,7 +53,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         {'value':2,'label':"Propio"}
     ];
     public tipoIdentificaciones= [ ];
-    public resumen = {};     public datos = {
+    public resumen = {};     
+    public datos = {
         'propietariosEmpresas': [],
         'propietariosCiudadanos': [],
         'solidario': false,
@@ -95,6 +96,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     }
     
     enviarTramite(){
+
+        
         this.datos.vehiculo = this.vehiculo.placa;
         this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
         this.datos.idFactura = this.factura.id;
