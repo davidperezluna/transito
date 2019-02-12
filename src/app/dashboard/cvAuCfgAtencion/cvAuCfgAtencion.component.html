@@ -1,0 +1,66 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>
+              <b class="text-uppercase">Audiencia</b>
+              <small>Configuración de atenciones</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Día</th>
+                    <th>Mañana</th>
+                    <th>Tarde</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let atencion of atenciones; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ atencion.dia }}</td>
+                  <td>
+                    <b>Hora inicial:</b> {{ atencion.horaManianaInicial }}
+                    <br>
+                    <b>Hora final:</b> {{ atencion.horaManianaFinal }}
+                  </td>
+                  <td>
+                    <b>Hora inicial:</b> {{ atencion.horaTardeInicial }}
+                    <br>
+                    <b>Hora final:</b> {{ atencion.horaTardeFinal }}
+                  </td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="onEdit(atencion)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                        tooltipPlacement="top">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button (click)="onDelete(atencion.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false"
+                        [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <app-edit *ngIf='formEdit' [atencion]="atencion" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

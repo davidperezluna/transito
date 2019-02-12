@@ -15,6 +15,11 @@ declare var $: any;
 
 @Component({
     selector: 'app-new-senial-municipio',
+    styles: [`
+        agm-map {
+        height: 500px;
+        }
+    `],
     templateUrl: './newSenialUbicacion.component.html'
 })
 export class NewSenialUbicacionComponent implements OnInit {
@@ -31,44 +36,21 @@ export class NewSenialUbicacionComponent implements OnInit {
     public estados: any;
     public unidadesMedida: any = null;
     public lineas: any = null;
-    public demarcacion: any;
+    public demarcacion: boolean = false;
 
     public senial: any = null;
     public municipio: any = null;
+    public address: any = null;
 
     public formEdit = false;
     public formIndex = true;
     public senialUbicacion: SvSenialUbicacion;
-
+    
     public zoom: number = 15;
     public lat: number = 1.2246233;
     public lng: number = -77.2808208;
-
-    public markers: marker[] = [
-        {
-            lat: 51.673858,
-            lng: 7.815982,
-            label: 'A',
-            draggable: true
-        },
-        {
-            lat: 51.373858,
-            lng: 7.215982,
-            label: 'B',
-            draggable: false
-        },
-        {
-            lat: 51.723858,
-            lng: 7.895982,
-            label: 'C',
-            draggable: true
-        }
-    ];
-
-    public data = {
-        'senialUbicacion':null,
-        'markers':[]
-    }
+    public map: any;
+    public markers: marker[] = [];
 
     constructor(
         private _SvSenialUbicacionService: SvSenialUbicacionService,
@@ -81,10 +63,12 @@ export class NewSenialUbicacionComponent implements OnInit {
         private _ProveedorService: SvCfgSenialProveedorService,
         private _LoginService: LoginService,
     ) {
-        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null);
+        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     ngOnInit() {
+        console.log(this.datos);
+        
         this._EstadoService.select().subscribe(
             response => {
                 this.estados = response;
@@ -130,16 +114,72 @@ export class NewSenialUbicacionComponent implements OnInit {
         );
     }
 
+    mapReady(map) {
+        this.map = map;
+    }
+
     clickedMarker(label: string, index: number) {
         console.log(`clicked the marker: ${label || index}`)
     }
 
-    mapClicked($event: MouseEvent) {
-        this.markers.push({
-            lat: $event.coords.lat,
-            lng: $event.coords.lng,
-            draggable: true
+    onRightClick(index: number) {
+        /*var marker = this.markers[index]; // find the marker by given id
+        marker.setMap(null);*/
+        //this.markers.splice(index, 1);
+        console.log('clicked right the marker:'+this.markers[index]);
+    }
+
+    getAddressLocation($event, callback){
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'location': $event.coords }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    //let timeoutId = setTimeout(() => {
+                        return callback(null, results[0].formatted_address);
+                    //}, 1000);
+                }else{
+                    return callback('Sin resultados', null);
+                }
+            }
         });
+    }
+
+    getAddress(address) {
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                return results[0].geometry.location;
+            } else {
+                return null;
+            }
+        });
+    }
+
+    mapClicked($event: MouseEvent) {
+        if (this.senialUbicacion.cantidad > 0) {
+            var address;
+
+            address = this.getAddressLocation($event, (error, result) => (error) ? console.error(error) : console.log(result));
+            
+            if (this.markers.length < this.senialUbicacion.cantidad) {
+                this.markers.push({
+                    lat: $event.coords.lat,
+                    lng: $event.coords.lng,
+                    draggable: true,
+                    label: address
+                });
+            } else {
+                swal({
+                    title: 'Atención!',
+                    text: 'El número de georeferenciaciones no puede ser mayor a la cantidad a asignar al municipio,',
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+            console.log(this.markers);
+        }
     }
 
     markerDragEnd(m: marker, $event: MouseEvent) {
@@ -273,40 +313,29 @@ export class NewSenialUbicacionComponent implements OnInit {
     }
 
     onSearchGeo() {
-        /*var geocoder = new google.maps.Geocoder();
         var address = document.getElementById('address')['value'];
-        geocoder.geocode({ 'address': address }, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                this.map.setCenter(results[0].geometry.location);
+        var LatLng;
 
-                google.maps.event.addListener(this.map, 'click', function (event) {
-                    var geocoder = new google.maps.Geocoder();
-                    geocoder.geocode({
-                        'latLng': event.latLng
-                    }, function (results, status) {
-                        if (status == google.maps.GeocoderStatus.OK) {
-                            if (results[0]) {
-                                //results[0].formatted_address;
-                            }
-                        }
-                    });
+        LatLng = this.getAddress(address);
 
-                });
-            } else {
-                swal({
-                    title: 'Atención!',
-                    text: 'La búsqueda no tuvo exito.',
-                    type: 'warning',
-                    confirmButtonText: 'Aceptar'
-                });
-            }
-        });*/
+        if (LatLng) {
+            this.lat = Number(LatLng.lat());
+            this.lng = Number(LatLng.lng());
+        }else{
+            swal({
+                title: 'Atención!',
+                text: 'La búsqueda no tuvo exito.',
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+            });
+        }
     }
 
     onEnviar() {
         let token = this._LoginService.getToken();
 
         this.senialUbicacion.idMunicipio = this.municipio.id;
+        this.senialUbicacion.markers = this.markers;
 
         this._SvSenialUbicacionService.register(this.file, this.senialUbicacion, token).subscribe(
             response => {

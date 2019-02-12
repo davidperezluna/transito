@@ -20,9 +20,9 @@
                     </div>
                 </div>
                 <div class="row"><!-- .row -->
-                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idTipoSenial.id == 1">
+                    <div class="col-xs-12 col-lg-12" *ngIf="datos.idTipoSenial == 1">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" [(ngModel)]="demarcacion" class="custom-control-input" id="demarcacion" name="demarcacion" checked="">
+                            <input type="checkbox" [(ngModel)]="demarcacion" class="custom-control-input" id="demarcacion" name="demarcacion">
                             <label class="custom-control-label" for="demarcacion">Demarcación externa</label>
                         </div>
                     </div>
@@ -71,15 +71,30 @@
                 <div class="row"><!-- .row -->
                     <div class="col-md-12 col-sm-12">
                         <label>Georeferenciación</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="address" placeholder="Dirección a buscar: Pasto, Nariño.." />
-                            <span class="input-group-btn">
-                                <button (click)="onSearchGeo()" class="btn btn-default btn-primary" type="button">
-                                    <i class="fa fa-map-marker"></i>
-                                </button>
-                            </span>
-                        </div>
+                        <!--
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="address" placeholder="Dirección a buscar: Pasto, Nariño.." />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchGeo()" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-map-marker"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        -->
                         <div align="center">
+                            <!-- <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                            </agm-map> -->
+                            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)" (mapReady)="mapReady($event)" [usePanning] = "true">
+                            
+                                <agm-marker *ngFor="let marker of markers; let i = index" (markerRightClick)="onRightClick(i)" (markerClick)="clickedMarker(marker.label, i)" [latitude]="marker.lat" [longitude]="marker.lng"
+                                    [label]="marker.label" [markerDraggable]="marker.draggable" (dragEnd)="markerDragEnd(marker, $event)">                            
+                                
+                                    <agm-info-window>
+                                        <strong>{{ marker.label }}</strong>
+                                    </agm-info-window>
+                                </agm-marker>
+                            
+                            </agm-map>
                         </div>
                     </div>
                 </div><!-- /.row -->

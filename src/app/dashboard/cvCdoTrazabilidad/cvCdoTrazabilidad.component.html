@@ -58,7 +58,16 @@
               <tbody>
                 <tr class="odd" *ngFor="let trazabilidad of trazabilidades; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ trazabilidad.estado.nombre }}</td>
+                  <td>
+                    {{ trazabilidad.estado.nombre }}
+                    <div *ngIf="trazabilidad.estado.id == 4 && acuerdoPago">
+                      <b>No. {{ acuerdoPago.numero }}</b>
+                      <br>
+                      <b>Fecha: {{ acuerdoPago.fecha }}</b>
+                      <br>
+                      <b>Cuotas: {{ acuerdoPago.numeroCuotas }}</b>
+                    </div>
+                  </td>
                   <td>{{ trazabilidad.fecha }}</td>
                   <td>
                     <span *ngIf="trazabilidad.actoAdministrativo">

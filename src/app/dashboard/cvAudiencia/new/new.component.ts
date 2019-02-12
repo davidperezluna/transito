@@ -17,13 +17,15 @@ export class NewComponent implements OnInit {
   public comparendo: any = null;
 
 constructor(
-  private _NotificacionService: CvAudienciaService,
+  private _AudienciaService: CvAudienciaService,
   private _ComparendoService: ComparendoService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
     this.audiencia = new CvAudiencia(null, null, null, null);
+
+
   }
 
   onCancelar(){
@@ -73,7 +75,7 @@ constructor(
 
     this.audiencia.idComparendo = this.comparendo.id;
     
-		this._NotificacionService.register(this.audiencia, token).subscribe(
+		this._AudienciaService.register(this.audiencia, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

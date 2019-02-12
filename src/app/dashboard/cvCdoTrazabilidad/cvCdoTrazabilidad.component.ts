@@ -18,7 +18,8 @@ export class CvCdoTrazabilidadComponent implements OnInit {
   public numero: any = null;
   public comparendo: any = null;
   public estados: any = null;
-	public trazabilidades;
+	public trazabilidades: any = null;
+	public acuerdoPago: any = null;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = false;
@@ -85,7 +86,9 @@ export class CvCdoTrazabilidadComponent implements OnInit {
           this._ComparendoService.record({ 'id': this.comparendo.id }, token).subscribe(
             response => {
               if (response.status == 'success') {
-                this.trazabilidades = response.data;
+                this.trazabilidades = response.data.trazabilidades;
+                this.acuerdoPago = response.data.acuerdoPago;
+
                 let timeoutId = setTimeout(() => {
                   this.iniciarTabla();
                 }, 100);

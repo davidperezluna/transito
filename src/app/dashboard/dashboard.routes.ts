@@ -30,6 +30,8 @@ import { CvCdoTrazabilidadRoutes } from './cvCdoTrazabilidad/cvCdoTrazabilidad.r
 import { CvCdoNotificacionRoutes } from './cvCdoNotificacion/cvCdoNotificacion.routes';
 import { CvCdoCfgInteresRoutes } from './cvCdoCfgInteres/cvCdoCfgInteres.routes';
 import { CvAudienciaRoutes } from './cvAudiencia/cvAudiencia.routes';
+import { CvAuCfgAtencionRoutes } from './cvAuCfgAtencion/cvAuCfgAtencion.routes';
+import { CvAuCfgHorarioRoutes } from './cvAuCfgHorario/cvAuCfgHorario.routes';
 
 import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
 import { CvRestriccionRoutes } from './cvRestriccion/cvRestriccion.routes';
@@ -226,6 +228,8 @@ import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
 import { FroTramiteRoutes } from './froTramite/froTramite.routes';
 import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
 import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
+import { FroReporteIngresosRoutes } from './froReporteIngresos/froReporteIngresos.routes';
+import { FroCfgTipoRecaudoRoutes } from './froCfgTipoRecaudo/froCfgTipoRecaudo.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
 
 //import { MsvSenialInventarioRoutes } from './msvSenialInventario/msvSenialInventario.routes';
@@ -303,6 +307,8 @@ export const DashboardRoutes: Route[] = [
       ...CvCdoNotificacionRoutes,
       ...CvCdoCfgInteresRoutes,
       ...CvAudienciaRoutes,
+      ...CvAuCfgAtencionRoutes,
+      ...CvAuCfgHorarioRoutes,
       ...CvLcCfgMotivoRoutes,
       ...CvRestriccionRoutes,
       ...CvCfgInteresRoutes,
@@ -440,6 +446,8 @@ export const DashboardRoutes: Route[] = [
       ...FroTrteCfgConceptoRoutes,
       ...FroTrtePrecioRoutes,
       ...FroTrtePrecioRoutes,
+      ...FroReporteIngresosRoutes,
+      ...FroCfgTipoRecaudoRoutes,
       
     ]
   }
