@@ -23,9 +23,29 @@
                             </ng-select>
                         </div>
                         <div class="row">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Días de espera <strong class="text-danger">*</strong></label>
+                                <input class="form-control text-uppercase" [(ngModel)]="estado.dias" name="dias" type="numeric" />
+                            </div>
+                            <div class="col-xs-12 col-lg-8">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="estado.habiles" class="custom-control-input" id="habiles" name="habiles">
+                                    <label class="custom-control-label" for="habiles">Habiles</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xs-12 col-lg-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" [(ngModel)]="estado.actualiza" class="custom-control-input" id="actualiza" name="actualiza" checked="">
+                                    <input type="checkbox" [(ngModel)]="estado.simit" class="custom-control-input" id="simit" name="simit">
+                                    <label class="custom-control-label" for="simit">Simit</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="estado.actualiza" class="custom-control-input" id="actualiza" name="actualiza">
                                     <label class="custom-control-label" for="actualiza">Actualiza comparendo</label>
                                 </div>
                             </div>

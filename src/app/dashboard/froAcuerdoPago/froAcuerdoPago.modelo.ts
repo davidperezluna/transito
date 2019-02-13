@@ -1,11 +1,11 @@
-export class CvAcuerdoPago{
+export class FroAcuerdoPago{
 	constructor(
 		public fecha: string,
 		public numeroCuotas: number,
 		public valorCapital: number,
 		public valorCuotaInicial: number,
+		public porcentajeInicial: number,
 		public comparendos: string,
-		public idPorcentajeInicial: number,
 		public idInteres: number,
 		public id: number
 	){}

@@ -24,8 +24,6 @@ constructor(
 
   ngOnInit() {
     this.audiencia = new CvAudiencia(null, null, null, null);
-
-
   }
 
   onCancelar(){
@@ -48,6 +46,8 @@ constructor(
         if (response.status == 'success') {
           this.comparendo = response.data;
           this.audiencia.idComparendo = this.comparendo.id;
+
+          swal.close();
         } else {
           this.comparendo = null;
 

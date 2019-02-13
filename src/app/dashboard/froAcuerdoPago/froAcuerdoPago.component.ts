@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CvAcuerdoPagoService } from '../../services/cvAcuerdoPago.service';
+import { FroAcuerdoPagoService } from '../../services/froAcuerdoPago.service';
 import { LoginService } from '../../services/login.service';
 import { CiudadanoService } from '../../services/ciudadano.service';
 import { ComparendoService } from '../../services/comparendo.service';
@@ -8,10 +8,10 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cvAcuerdoPago.component.html'
+  templateUrl: './froAcuerdoPago.component.html'
 })
 
-export class CvAcuerdoPagoComponent implements OnInit {
+export class FroAcuerdoPagoComponent implements OnInit {
   public errorMessage;
 	public acuerdoPago: any;
 	public valorTotal: any;
@@ -26,9 +26,18 @@ export class CvAcuerdoPagoComponent implements OnInit {
   public formSearch = true;
   public table: any = null;
 
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
+  }
+
+  public tiposFiltro = [
+    { 'value': '2', 'label': 'Identificación' },
+    { 'value': '4', 'label': 'No. de comparendo' },
+  ];
 
   constructor(
-    private _AcuerdoPagoService: CvAcuerdoPagoService,
+    private _AcuerdoPagoService: FroAcuerdoPagoService,
     private _loginService: LoginService,
     private _CiudadanoService: CiudadanoService,
     private _ComparendoService: ComparendoService,
@@ -41,14 +50,16 @@ export class CvAcuerdoPagoComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    this._ComparendoService.searchByInfractor({ 'infractorIdentificacion': this.numeroIdentificacion }, token).subscribe(
+    this._ComparendoService.searchByFiltrosFactura(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.comparendos = response.data;
+          this.formIndex = true;
+
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
-          this.formIndex = true;
+          
           swal({
             title: 'Perfecto!',
             text: response.message,
@@ -85,11 +96,14 @@ export class CvAcuerdoPagoComponent implements OnInit {
       }
     }
     console.log(this.comparendosSelect);
-
   }
 
 
   iniciarTabla(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -110,7 +124,6 @@ export class CvAcuerdoPagoComponent implements OnInit {
     this.formNew = true;
     this.formIndex = false;
     this.formSearch = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){

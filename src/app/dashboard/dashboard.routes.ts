@@ -37,7 +37,6 @@ import { CvLcCfgMotivoRoutes } from './cvLcCfgMotivo/cvLcCfgMotivo.routes';
 import { CvRestriccionRoutes } from './cvRestriccion/cvRestriccion.routes';
 import { CvCfgInteresRoutes } from './cvCfgInteres/cvCfgInteres.routes';
 import { CvCfgPorcentajeInicialRoutes } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.routes';
-import { CvAcuerdoPagoRoutes } from './cvAcuerdoPago/cvAcuerdoPago.routes';
 
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
 import { SvCfgSenialUnidadMedidaRoutes } from './svCfgSenialUnidadMedida/svCfgSenialUnidadMedida.routes';
@@ -225,6 +224,7 @@ import { BpCdpRoutes } from './bpCdp/bpCdp.routes';
 
 import { FroFacturaRoutes } from './froFactura/froFactura.routes';
 import { FroRecaudoRoutes } from './froRecaudo/froRecaudo.routes';
+import { FroAcuerdoPagoRoutes } from './froAcuerdoPago/froAcuerdoPago.routes';
 import { FroTramiteRoutes } from './froTramite/froTramite.routes';
 import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
 import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
@@ -313,7 +313,6 @@ export const DashboardRoutes: Route[] = [
       ...CvRestriccionRoutes,
       ...CvCfgInteresRoutes,
       ...CvCfgPorcentajeInicialRoutes,
-      ...CvAcuerdoPagoRoutes,
       ...CfgBodegaRoutes,
       ...SvCfgSenialUnidadMedidaRoutes,
       ...SvCfgSenialTipoRoutes,
@@ -442,6 +441,7 @@ export const DashboardRoutes: Route[] = [
       ...EmpresaAlcaldiaRoutes,
       ...FroFacturaRoutes,
       ...FroRecaudoRoutes,
+      ...FroAcuerdoPagoRoutes,
       ...FroTramiteRoutes,
       ...FroTrteCfgConceptoRoutes,
       ...FroTrtePrecioRoutes,

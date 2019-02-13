@@ -1,0 +1,230 @@
+<div class="container">
+    <hr>
+    <div class="row" *ngIf='formSearch'>
+        <!-- .row -->
+        <div class="col-xs-12 col-lg-4">
+            <!-- .col -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">
+                        <strong>Facturas</strong>
+                        <small>Buscar comparendos</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- .card-body -->
+                    <form #formSearch="ngForm">
+                        <div class="form-group">
+                            <div class="row">
+                                <!-- .row -->
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Tipo de filtro</label>
+                                    <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Filtro</label>
+                                    <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </form>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-search"></i>
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+
+        <!-- ======================== Inventarios en Municipio seleccionado ============================== -->
+        <div class="col-xs-12 col-lg-8" *ngIf="comparendos && formIndex">
+            <!-- .col -->
+            <div class="card">
+                <!-- .card -->
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <b class="text-uppercase">Comparendos asociados</b>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    Total {{valorTotal}}
+                    <table class="table table-bordered" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Número</th>
+                                <th>Fecha</th>
+                                <th>Cod. Infracción</th>
+                                <th>Valor</th>
+                                <th>Placa</th>
+                                <th>Curso</th>
+                                <th>Estado</th>
+                                <th>Seleccionar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                                <td>{{ comparendo.fecha }}</td>
+                                <td>{{ comparendo.infraccion?.codigo }}</td>
+                                <td>{{ comparendo.valorInfraccion }}</td>
+                                <td>{{ comparendo.placa }}</td>
+                                <td>
+                                    <div class="custom-control custom-checkbox" style="margin-top: 3px;">
+                                        <input type="checkbox" (change)="onSelectCurso(comparendo, $event)" class="custom-control-input"
+                                            id="curso-{{comparendo.id}}" [disabled]="!comparendo.curso">
+                                        <label class="custom-control-label" for="curso-{{comparendo.id}}"></label>
+                                    </div>
+                                </td>
+                                <td>{{ comparendo.estado?.nombre }}</td>
+                                <td>
+                                    <div class="custom-control custom-checkbox" style="margin-top: 3px;">
+                                        <input type="checkbox" value="{{comparendo.id}}" (change)="onSelectComparendo(comparendo, $event)" class="custom-control-input"
+                                            id="seleccion-{{comparendo.id}}">
+                                        <label class="custom-control-label" for="seleccion-{{comparendo.id}}"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <!-- .card-footer -->
+                    <div class="btn-group">
+                        <button type="button" (click)="onNew()" class="btn btn-primary btn-lg btn-block" [disabled]='comparendosSelect?.length == 0'>Liquidar</button>
+                    </div>
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row" *ngIf="formNew">
+        <div class="col-xs-12 col-lg-4">
+            <!-- .col -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">Nueva factura de infracciones</h5>
+                    <small>Los campos con
+                        <b class="text-danger">*</b> son obligatorios</small>
+                </div>
+                <div class="card-body">
+                    <form #formNew="ngForm">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Sede operativa
+                                    <strong class="text-danger">*</strong>
+                                </label>
+                                <ng-select [multiple]="false" [options]="sedesOperativas" [(ngModel)]="factura.idSedeOperativa" required name="sedesOperativa">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Interes
+                                    <strong class="text-danger">*</strong>
+                                </label>
+                                <input type="numeric" class="form-control" [(ngModel)]="factura.interes" name="interes" readonly required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Valor a pagar
+                                    <strong class="text-danger">*</strong>
+                                </label>
+                                <input type="numeric" class="form-control" [(ngModel)]="factura.valor" name="valor" readonly required />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Facturar
+                        </button>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    
+        <div class="col-xs-12 col-lg-8" *ngIf="factura.id">
+            <!-- .col -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">Factura No.
+                        <b>{{ facturaNumero }}</b>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Ciudad:</b>
+                                            <br> {{ municipio }}
+                                        </td>
+                                        <td>
+                                            <b>Fec. Creación:</b>
+                                            <br> {{ fechaCreacion }}
+                                        </td>
+                                        <td>
+                                            <b>Fec. Vencimiento:</b>
+                                            <br> {{ fechaVencimiento }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+    
+                            <table class="table table-bordered table-striped" *ngIf="factura.comparendos">
+                                <thead>
+                                    <tr>
+                                        <th colspan="5">COMPARENDOS</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Número</th>
+                                        <th>Fecha</th>
+                                        <th>Cod. Infracción</th>
+                                        <th>Valor</th>
+                                        <th>Placa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let comparendo of factura.comparendos; let i = index">
+                                        <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                                        <td>{{ comparendo.fecha }}</td>
+                                        <td>{{ comparendo.infraccion.codigo }}</td>
+                                        <td>{{ comparendo.valorInfraccion }}</td>
+                                        <td>{{ comparendo.placa }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <a href="{{ apiUrl }}/froFactura/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
+                            <i class="fa fa-file-pdf-o"></i>
+                            Generar PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
