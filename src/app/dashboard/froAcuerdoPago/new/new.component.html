@@ -22,7 +22,8 @@
                             <ng-select [multiple]="false" [options]="intereses" [(ngModel)]="interesSelected" name="intereses" required></ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Porcentaje cuota 0 <strong >{{ porcentaje?.valor }} %</strong></label>
+                            <label>Porcentaje cuota 0 <strong class="text-danger">*</strong></label>
+                            <input type="numeric" class="form-control" [(ngModel)]="acuerdoPago.porcentajeInicial" name="porcentajeInicial" required />
                         </div>
                     </div>
                 </form>

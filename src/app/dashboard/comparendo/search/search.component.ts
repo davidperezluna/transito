@@ -21,12 +21,15 @@ export class SearchComponent implements OnInit{
   public estados: any = null;
   public trazabilidades: any = null;
   public trazabilidad: any = null;
+  public acuerdoPago: any = null;
+  public amortizaciones: any = null;
   public table: any;
 
   public filtro: any = null;
   public formRecord: any = false;
   public formTrazabilidad: any = false;
   public formDocument: any = false;
+  public formAcuerdoPago: any = false;
   public formatos: any = null;
 
   public apiUrl = environment.apiUrl + 'configuracion';
@@ -85,6 +88,7 @@ constructor(
     this.formDocument = false;
     this.formTrazabilidad = false;
     this.formRecord = false;
+    this.formAcuerdoPago = false;
 
     let token = this._LoginService.getToken();
 
@@ -149,6 +153,7 @@ constructor(
       this.formRecord = true;
       this.formDocument = false;
       this.formTrazabilidad = false;
+      this.formAcuerdoPago = false;
       this.comparendos = null;
 
       let token = this._LoginService.getToken();
@@ -164,7 +169,9 @@ constructor(
       this._ComparendoService.record({ 'id': this.comparendo.id }, token).subscribe(
         response => {
           if (response.status == 'success') {
-            this.trazabilidades = response.data;
+            this.trazabilidades = response.data.trazabilidades;
+            this.acuerdoPago = response.data.acuerdoPago;
+            this.amortizaciones = response.data.amortizaciones;
             let timeoutId = setTimeout(() => {
               this.iniciarTabla();
             }, 100);
@@ -179,6 +186,8 @@ constructor(
             });
 
             this.trazabilidades = null;
+            this.acuerdoPago = null;
+            this.amortizaciones = null;
           }
           error => {
             this.errorMessage = <any>error;
@@ -262,6 +271,7 @@ constructor(
 
       this.formRecord = false;
       this.formTrazabilidad = false;
+      this.formAcuerdoPago = false;
       this.formDocument = true;
     }
   }
@@ -318,6 +328,14 @@ constructor(
 
     this.formRecord = false;
     this.formTrazabilidad = true;
+    this.formAcuerdoPago = false;
+    this.formDocument = false;
+  }
+
+  onAcuerdoPago() {
+    this.formRecord = false;
+    this.formTrazabilidad = false;
+    this.formAcuerdoPago = true;
     this.formDocument = false;
   }
 
