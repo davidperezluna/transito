@@ -4,11 +4,15 @@ import { LoginService } from '../../services/login.service';
 import { FroReporteIngresos } from "./froReporteIngresos.modelo";
 import { FroCfgTipoRecaudoService } from "../../services/froCfgTipoRecaudo.service";
 import swal from 'sweetalert2';
+
+import { DatePipe, CurrencyPipe } from '@angular/common';
+
 declare var $: any;
 
 @Component({
     selector: 'app-index',
     templateUrl: './froReporteIngresos.component.html',
+    providers: [DatePipe]
 })
 export class FroReporteIngresosComponent implements OnInit {
     public errorMessage;
@@ -21,6 +25,8 @@ export class FroReporteIngresosComponent implements OnInit {
     public tiposRecaudo;
     public tipoRecaudoSelected;
     public froReporteIngreso: FroReporteIngresos;
+    public fecha;
+    public date;
 
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
@@ -30,6 +36,10 @@ export class FroReporteIngresosComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.date = new Date();
+        var datePiper = new DatePipe(this.date);
+        this.fecha = datePiper.transform(this.date, 'dd/MM/yyyy HH:mm:ss a');
+
         swal({
             title: 'Cargando Tabla!',
             text: 'Solo tardará unos segundos, por favor espere.',
@@ -68,6 +78,20 @@ export class FroReporteIngresosComponent implements OnInit {
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    title: 'xls',
+                    filename: 'Reporte_Ingresos' + this.fecha,
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    filename: 'Reporte_IngresosPDF_' + this.fecha,
+                }
+            ],
             oLanguage: {
                 oPaginate: {
                     sFirst: '<<',
