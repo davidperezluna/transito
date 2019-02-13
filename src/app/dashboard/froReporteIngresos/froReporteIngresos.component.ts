@@ -3,6 +3,12 @@ import { FroReporteIngresosService } from '../../services/froReporteIngresos.ser
 import { LoginService } from '../../services/login.service';
 import { FroReporteIngresos } from "./froReporteIngresos.modelo";
 import { FroCfgTipoRecaudoService } from "../../services/froCfgTipoRecaudo.service";
+import { SedeOperativaService } from "../../services/sedeOperativa.service";
+
+import { FroTramiteService } from "../../services/froTramite.service";
+import { ComparendoService } from "../../services/comparendo.service";
+import { FroAcuerdoPagoService } from "../../services/froAcuerdoPago.service";
+
 import swal from 'sweetalert2';
 
 import { DatePipe, CurrencyPipe } from '@angular/common';
@@ -28,9 +34,17 @@ export class FroReporteIngresosComponent implements OnInit {
     public fecha;
     public date;
 
+    public sedeOperativaSelected;
+    public sedes;
+
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
         private _FroCfgTipoRecaudoService: FroCfgTipoRecaudoService,
+        private _SedeOperativaService: SedeOperativaService,
+
+        private _FroTramiteService: FroTramiteService,
+        private _ComparendoService: ComparendoService,
+        private _FroAcuerdoPagoServie: FroAcuerdoPagoService,
 
         private _LoginService: LoginService,
     ) { }
@@ -57,6 +71,23 @@ export class FroReporteIngresosComponent implements OnInit {
         this._FroCfgTipoRecaudoService.select().subscribe(
             response => {
                 this.tiposRecaudo = response;
+
+                let timeoutId = setTimeout(() => {
+                    this.iniciarTabla();
+                }, 100);
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+            response => {
+                this.sedes = response.data;
 
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
@@ -118,6 +149,39 @@ export class FroReporteIngresosComponent implements OnInit {
             this.formEdit = false;
             this.formIndex = true;
             this.ngOnInit();
+        }
+    }
+
+    onEnviar(){
+        let token = this._LoginService.getToken();
+
+        if(this.tipoRecaudoSelected == 1){
+            this._FroTramiteService.getTramitePorFecha(this.froReporteIngreso, token).subscribe(
+                response => {
+                    if (response.status == 'success') {
+                        swal({
+                            title: 'Perfecto!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
         }
     }
 }
