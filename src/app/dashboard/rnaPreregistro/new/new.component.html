@@ -11,9 +11,14 @@
                 <div class="btn-group-vertical" data-toggle="buttons" *ngIf="persona == 'funcionario'">
                     <button (click)="onRadicado() "type="button" class="btn btn-primary" aria-pressed="true">{{btnRadicado}}</button>
                 </div>
+                <div class="col-xs-12 col-lg-12">
+                    <label>Tipo de registro <span class="text-danger">*</span></label>
+                    <ng-select [multiple]="false" [options]="tipoMatricula" [(ngModel)]="tipoMatriculaSelect" required name="tipoPropiedadId">
+                    </ng-select>
+                </div> 
                 <br>
                 <br>
-                <div class="form-group row" *ngIf='radicado'>
+                <div class="form-group row" *ngIf="tipoMatriculaSelect == 'RADICADO'">
                     <div class="col-lg-6">
                         <label>Placa*</label>
                         <input class="form-control" placeholder="" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
@@ -184,12 +189,17 @@
                         </ng-select>
                     </div>
 
+                    <div class="col-lg-3" *ngIf='modalidadTransporteSelected == 1 || modalidadTransporteSelected == 2'>
+                        <label>Numero pasajeros</label>
+                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="capacidadCarga">
+                    </div>
+
                     <div class="col-lg-3" *ngIf='modalidadTransporteSelected == 2 || modalidadTransporteSelected == 3'>
                         <label>Capcaidad carga</label>
                         <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
                     </div>
 
-                    <div *ngIf='!radicado'>
+                    <div *ngIf="tipoMatriculaSelect == 'RADICADO'">
                         <div class="col-xs-12 col-lg-12">
                             <label>Tipo de propiedad <span class="text-danger">*</span></label>
                             <ng-select [multiple]="false" [options]="tipoPropiedades" [(ngModel)]="tipoPropiedadSelected" required name="tipoPropiedadId">
@@ -197,13 +207,13 @@
                         </div> 
                     </div> 
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" *ngIf="tipoMatriculaSelect == 'RADICADO'">
                         <label>Numero licencia transito </label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="numeroLicenciaTransito" name="serie">
+                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="licenciaTransito" name="serie">
                     </div>
 
                     <!-- tipo prioridad propio -->
-                    <div class="container" *ngIf="tipoPropiedadSelected == 2 || tipoPropiedadSelected == 1 && apoderado == 'false'">
+                    <div  class="container" *ngIf="tipoPropiedadSelected == 2 || tipoPropiedadSelected == 1 && apoderado == 'false' && tipoMatriculaSelect == 'RADICADO'">
                         <!--Buscardor Identificador/Nit -->
                         <div class="col-xs-12 col-lg-12 row" >
                             <!--Cuando es de tipo propio -->
@@ -383,7 +393,7 @@
                     </div>
 
                     <!-- agregar apoderado -->
-                    <div class="container" *ngIf="apoderado == 'ciudadano' || apoderado == 'empresa'">
+                    <div  class="container" *ngIf="apoderado == 'ciudadano' || apoderado == 'empresa' && tipoMatriculaSelect == 'RADICADO'">
                         <div class="col-xs-12 col-lg-12 form-group" >
                             <h5 class="m-0">
                                 Apoderado
