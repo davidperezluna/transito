@@ -19,6 +19,8 @@ import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { EmpresaService } from "../../../services/empresa.service";
+import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-new',
@@ -62,6 +64,7 @@ public empresaEncontrada=1;
 public ciudadano:any;
 public apoderado = 'false';
 public ciudadanoNew:any;
+public numeroLicenciaTransito:any;
 public empresa:any;
 public nit:any;
 public propietarioPresente:any;
@@ -115,6 +118,7 @@ constructor(
   private _FuncionarioService: MpersonalFuncionarioService,
   private _CiudadanoService: CiudadanoService,
   private _EmpresaService: EmpresaService,
+  private _CiudadanoVehiculoService: CiudadanoVehiculoService,
   ){}
 
   ngOnInit() {
@@ -328,38 +332,38 @@ constructor(
     }
 
     this.datos.vehiculo = this.vehiculo.placa;
-    // this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
+    this.datos.numeroLicencia = this.numeroLicenciaTransito;
     this.datos.tramiteFormulario = 'rna-matriculainicial';
     let token = this._loginService.getToken(); 
 
     console.log(this.datos);
-    // return (0);
     
-    // this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
-    //   response => {
-    //       this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-    //   },
-    //   error => {
-    //     this.errorMessage = <any>error;
-
-    //     if(this.errorMessage != null){
-    //       console.log(this.errorMessage);
-    //       alert('Error en la petición');
-    //     }
-    //   }
-    // );
+    
 
     this._RnaPreregistroService.register(datos, token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
+          this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
+            response => {
+              this.ready.emit(true);
+              swal({
+                title: 'Perfecto!',
+                text: 'Registro exitoso!',
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              })
+            },
+            error => {
+              this.errorMessage = <any>error;
+      
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          );
+          
         }else{
           swal({
             title: 'Error!',

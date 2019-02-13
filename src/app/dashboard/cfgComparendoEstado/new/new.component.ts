@@ -22,7 +22,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.estado = new CfgComparendoEstado(null, null, null, null, null);
+    this.estado = new CfgComparendoEstado(null, null, null, null, null, null, null, null);
 
 
     this._FormatoService.select().subscribe(

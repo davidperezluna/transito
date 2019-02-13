@@ -54,7 +54,6 @@ import { CvLcCfgMotivoModule } from './cvLcCfgMotivo/cvLcCfgMotivo.module';
 import { CvRestriccionModule } from './cvRestriccion/cvRestriccion.module';
 import { CvCfgInteresModule } from './cvCfgInteres/cvCfgInteres.module';
 import { CvCfgPorcentajeInicialModule } from './cvCfgPorcentajeInicial/cvCfgPorcentajeInicial.module';
-import { CvAcuerdoPagoModule } from './cvAcuerdoPago/cvAcuerdoPago.module';
 import { CvCfgTipoRestriccionModule } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.module';
 import { CvLcCfgTipoRestriccionModule } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.module';
 import { CvCfgTipoMedidaCautelarModule } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.module';
@@ -233,6 +232,7 @@ import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcept
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
 import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
+import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
 
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
@@ -377,7 +377,6 @@ import {RightsidebarComponent} from '../shared';
       CvRestriccionModule,
       CvCfgInteresModule,
       CvCfgPorcentajeInicialModule,
-      CvAcuerdoPagoModule,
       VhloCfgTipoAlertaModule,
       VhloCfgCdaModule,
       VhloCfgOrigenRegistroModule,
@@ -451,6 +450,7 @@ import {RightsidebarComponent} from '../shared';
       EmpresaAlcaldiaModule,
       FroFacturaModule,
       FroRecaudoModule,
+      FroAcuerdoPagoModule,
       FroTramiteModule,
       FroTrteCfgConceptoModule,
       FroTrtePrecioModule,

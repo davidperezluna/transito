@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { CvAcuerdoPago } from '../cvAcuerdoPago.modelo';
+import { FroAcuerdoPago } from '../froAcuerdoPago.modelo';
 import { FroAcuerdoPagoService } from '../../../services/froAcuerdoPago.service';
 import { CvCfgInteresService } from '../../../services/cvCfgInteres.service';
 import { CvCfgPorcentajeInicialService } from '../../../services/cvCfgPorcentajeInicial.service';
@@ -13,7 +13,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() comparendosSelect: any = null;
-  public acuerdoPago: CvAcuerdoPago;
+  public acuerdoPago: FroAcuerdoPago;
   public errorMessage;
   public formPreliquidacion = false;
 
@@ -38,7 +38,7 @@ constructor(
 
   ngOnInit() {
     console.log(this.comparendosSelect);
-    this.acuerdoPago = new CvAcuerdoPago(null, null, null, null, null, null, null, null);
+    this.acuerdoPago = new FroAcuerdoPago(null, null, null, null, null, null, null, null);
 
     this._InteresService.select().subscribe(
       response => {
@@ -59,6 +59,7 @@ constructor(
       response => {
         if (response.status == 'success') {
           this.porcentaje = response.data;
+          this.acuerdoPago.porcentajeInicial = this.porcentaje.valor;
         } else {
           swal({
             title: 'Error!',
@@ -134,7 +135,7 @@ constructor(
           this.valorTotal = response.data;
           this.valorInteres = (this.interes.valor/ 100) * this.valorTotal;
           this.valorTotal = this.valorTotal + this.valorInteres;
-          this.valorCuotaInicial = (this.valorTotal * this.porcentaje.valor) / 100;
+          this.valorCuotaInicial = (this.valorTotal * this.acuerdoPago.porcentajeInicial) / 100;
           
           this.acuerdoPago.valorCapital = this.valorTotal;
           this.acuerdoPago.valorCuotaInicial = this.valorCuotaInicial;
@@ -194,7 +195,6 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-    this.acuerdoPago.idPorcentajeInicial = this.porcentaje.id;
     this.acuerdoPago.idInteres = this.interesSelected;
     this.acuerdoPago.comparendos = this.comparendosSelect;
 

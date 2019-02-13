@@ -197,6 +197,11 @@
                         </div> 
                     </div> 
 
+                    <div class="col-lg-3">
+                        <label>Numero licencia transito </label>
+                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="numeroLicenciaTransito" name="serie">
+                    </div>
+
                     <!-- tipo prioridad propio -->
                     <div class="container" *ngIf="tipoPropiedadSelected == 2 || tipoPropiedadSelected == 1 && apoderado == 'false'">
                         <!--Buscardor Identificador/Nit -->

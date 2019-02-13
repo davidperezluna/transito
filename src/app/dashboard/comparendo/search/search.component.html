@@ -108,6 +108,14 @@
                             <td>{{ i + 1 }}</td>
                             <td>
                                 {{ trazabilidad.estado.nombre }}
+                                <span *ngIf="trazabilidad.estado.id == 4 && acuerdoPago">
+                                    <br>
+                                    <b>No.
+                                        <button (click)="onAcuerdoPago()" class="btn btn-xs btn-default">
+                                            {{ acuerdoPago.numero }}
+                                        </button>
+                                    </b>
+                                </span>
                                 <br>
                                 {{ trazabilidad.fecha }}
                             </td>
@@ -240,6 +248,54 @@
                         Enviar
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf='formAcuerdoPago'>
+        <div class="card">
+            <div class="card-header">
+                <h5>
+                    <b class="text-uppercase">Acuerdo pago No. {{ acuerdoPago.numero }}</b>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr class="odd">
+                            <td>
+                                <b>Capital total</b>
+                                <br> {{ acuerdoPago.valorNeto | currency: 'COP' }}
+                            </td>
+        
+                            <td>
+                                <b>Fecha</b>
+                                <br> {{ acuerdoPago.fecha }}
+                            </td>
+                            <td>
+                                <b>Cuotas</b>
+                                <br> {{ acuerdoPago.cuotas }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No. Cuota</th>
+                            <th>Valor Cuota</th>
+                            <th>Fecha Fin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let amortizacion of amortizaciones; let i = index">
+                            <td>{{ amortizacion.numeroCuota }}</td>
+                            <td>{{ amortizacion.valorNeto | currency: 'COP' }}</td>
+                            <td>{{ amortizacion.fechaLimite }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
