@@ -285,7 +285,8 @@
                         <tr>
                             <th>No. Cuota</th>
                             <th>Valor Cuota</th>
-                            <th>Fecha Fin</th>
+                            <th>Fecha Limite</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -293,6 +294,10 @@
                             <td>{{ amortizacion.numeroCuota }}</td>
                             <td>{{ amortizacion.valorNeto | currency: 'COP' }}</td>
                             <td>{{ amortizacion.fechaLimite }}</td>
+                            <td>
+                                <span *ngIf="amortizacion.pagada" class="text-success"><b>Pagada</b></span>
+                                <span *ngIf="!amortizacion.pagada" class="text-danger"><b>No pagada</b></span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

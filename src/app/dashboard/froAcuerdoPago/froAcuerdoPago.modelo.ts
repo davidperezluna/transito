@@ -1,6 +1,5 @@
 export class FroAcuerdoPago{
 	constructor(
-		public fecha: string,
 		public numeroCuotas: number,
 		public valorCapital: number,
 		public valorCuotaInicial: number,

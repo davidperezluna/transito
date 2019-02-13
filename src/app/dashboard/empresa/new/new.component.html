@@ -19,12 +19,12 @@
                                 <input class="form-control" [(ngModel)]="empresa.sigla" name="sigla" placeholder="" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Nro. NIT</label>
-                                <input class="form-control" [(ngModel)]="empresa.nit" name="nit" placeholder="" type="text">
+                                <label>Nro. NIT <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.nit" name="nit" placeholder="" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>DV</label>
-                                <input class="form-control" [(ngModel)]="empresa.dv" name="dv" placeholder="" type="text">
+                                <label>DV <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.dv" name="dv" placeholder="" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Tipo identificación
@@ -91,7 +91,7 @@
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Nro. Registro mercantil </label>
+                                <label>Nro. Registro mercantil <span class="text-danger">*</span></label>
                                 <input class="form-control" [(ngModel)]="empresa.nroRegistroMercantil" name="nroRegistroMercantil" placeholder="" type="text" required>
                             </div>
                             <!-- fin ubicacion -->
@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Fax</label>
-                                <input class="form-control" [(ngModel)]="empresa.fax" name="fax" placeholder="" type="email" required>
+                                <input class="form-control" [(ngModel)]="empresa.fax" name="fax" placeholder="" type="email">
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Correo electrónico <span class="text-danger">*</span></label>
@@ -147,7 +147,7 @@
                             </div>
                             <div class="col-xs-16 col-lg-6">
                                 <label>Fecha de inicio<span class="text-danger">*</span></label>
-                                <input class="form-control" [(ngModel)]="empresa.fechaInicial" name="fechaInicial" type="date" />
+                                <input class="form-control" [(ngModel)]="empresa.fechaInicial" name="fechaInicial" required type="date" />
                             </div>                            
                             <!-- FIN REPRESENTANTE -->
                         </div>

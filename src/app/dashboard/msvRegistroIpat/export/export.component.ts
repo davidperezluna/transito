@@ -285,7 +285,6 @@ export class ExportComponent implements OnInit {
     }
 
     onEnviar(){
-        //this.table.destroy();
         let token = this._LoginService.getToken();
         this._IpatService.buscarIpat({"file":this.txt, "datos":this.exportIpat}, token).subscribe(
             response => {
@@ -320,4 +319,36 @@ export class ExportComponent implements OnInit {
     onCancelar() {
         this.valido = false;
     } 
+
+    onExportarTotal(){
+        let token = this._LoginService.getToken();
+        this._IpatService.buscarIpatExport({ "file": this.txt, "datos": this.exportIpat }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.ipats = response.data;
+                    this.conductoresNombresArray = response.conductores.nombres;
+                    this.conductoresApellidosArray = response.conductores.apellidos;
+                    this.victimasNombresArray = response.victimas.nombres;
+                    this.victimasApellidosArray = response.victimas.apellidos;
+                    let timeoutId = setTimeout(() => {
+                        this.iniciarTabla();
+                    }, 100);
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
+                }
+            }
+        );
+    }
 }
