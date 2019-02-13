@@ -28,7 +28,6 @@ export class NewComponent implements OnInit {
     public date: any;
     public fecha: any;
 
-
     public municipios: any;
     public funciones: any;
     public funcionesCriterios: any;
@@ -53,12 +52,12 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
-        
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
-        this.capacitacion.fechaHoraRegistro = datePiper.transform(this.date, 'dd/MM/yyyy HH:mm:ss a');
+        /* this.capacitacion.fechaHoraRegistro = datePiper.transform(this.date, 'yyyy-MM-dd'); */
+        this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd HH:mm:ss a');
+
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
         
         this._MunicipioService.getMunicipioSelect().subscribe(
             response => {
@@ -120,8 +119,8 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-
         this.capacitacion.municipio = this.municipioSelected;
+        this.capacitacion.fechaHoraRegistro = this.fecha;
         this.capacitacion.funcion = this.funcionSelected;
         this.capacitacion.funcionCriterio = this.funcionCriterioSelected;
         this.capacitacion.claseActorVial = this.claseActorViaSelected;
