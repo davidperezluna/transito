@@ -64,7 +64,7 @@ public empresaEncontrada=1;
 public ciudadano:any;
 public apoderado = 'false';
 public ciudadanoNew:any;
-public numeroLicenciaTransito:any;
+public licenciaTransito:any;
 public empresa:any;
 public nit:any;
 public propietarioPresente:any;
@@ -78,6 +78,7 @@ public persona:any='empresa';
 public tipoPropiedadSelected:any;
 public sedeOperativa:any;
 public identificacionApoderado:any;
+public tipoMatriculaSelect:any;
 public btnRadicado:any = 'Preregistro para matricula inicial';
 public propietario = true;
 public campo = false;
@@ -86,7 +87,11 @@ public tipoPropiedades= [
   {'value':2,'label':"Propio"}
 ];
 
-
+public tipoMatricula= [
+  {'value':'RADICADO','label':"Radicado"},
+  {'value':'MATRICULA INICIAL','label':"Matricula inicial"},
+  {'value':'IMPORTACIÓN TEMPORAL','label':"Importación temporal"}
+];
 
 public resumen = {};     
 public datos = {
@@ -95,7 +100,7 @@ public datos = {
   'solidario': false,
   'vehiculo': null,
   'sustrato': null,
-  'numeroLicencia': null,
+  'licenciaTransito': null,
   'tramiteFormulario': null,
   'facturaId': null,
 };
@@ -122,7 +127,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     let token = this._loginService.getToken();
     let identity = this._loginService.getIdentity();
@@ -325,21 +330,20 @@ constructor(
     this.vehiculo.radioAccionId = this.radioAccionSelected;
     this.vehiculo.modalidadTransporteId = this.modalidadTransporteSelected;
     this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
+    this.vehiculo.tipoMatricula = this.tipoMatriculaSelect;
     let datos = { 
       'vehiculo':this.vehiculo,
       'sedeOperativaId':this.sedeOperativa.id,
       'persona':this.persona,
     }
 
-    this.datos.vehiculo = this.vehiculo.placa;
-    this.datos.numeroLicencia = this.numeroLicenciaTransito;
+    this.datos.vehiculo = this.vehiculo;
+    this.datos.licenciaTransito = this.licenciaTransito;
     this.datos.tramiteFormulario = 'rna-matriculainicial';
     let token = this._loginService.getToken(); 
 
     console.log(this.datos);
     
-    
-
     this._RnaPreregistroService.register(datos, token).subscribe(
 			response => {
         this.respuesta = response;
