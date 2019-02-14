@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase"><b>Nueva notificación</b></h5>
+                <h5 class="text-uppercase"><b>Días de atención de audiencias programadas</b></h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -12,20 +12,20 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
                                 <label>Día <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="dias" [(ngModel)]="atencion.dia" name="dia" required>
+                                <ng-select [multiple]="true" [options]="dias" [(ngModel)]="atencion.dias" name="dias" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Hora inicial mañana:
                                     <strong class="text-danger">*</strong>
                                 </label>
-                                <input type="time" class="form-control text-uppercase" [(ngModel)]="atencion.horaManianaInicial" name="horaManianaInicial" />
+                                <input type="time" class="form-control" [(ngModel)]="atencion.horaManianaInicial" name="horaManianaInicial" />
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Hora final mañana
                                     <strong class="text-danger">*</strong>
                                 </label>
-                                <input type="time" class="form-control text-uppercase" [(ngModel)]="atencion.horaManianaFinal" name="horaManianaFinal" />
+                                <input type="time" class="form-control" [(ngModel)]="atencion.horaManianaFinal" name="horaManianaFinal" />
                             </div>
                         </div>
                         <div class="row">
@@ -33,13 +33,13 @@
                                 <label>Hora inicial tarde:
                                     <strong class="text-danger">*</strong>
                                 </label>
-                                <input type="time" class="form-control text-uppercase" [(ngModel)]="atencion.horaTardeInicial" name="horaTardeInicial" />
+                                <input type="time" class="form-control" [(ngModel)]="atencion.horaTardeInicial" name="horaTardeInicial" />
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Hora final tarde
                                     <strong class="text-danger">*</strong>
                                 </label>
-                                <input type="time" class="form-control text-uppercase" [(ngModel)]="atencion.horaTardeFinal" name="horaTardeFinal" />
+                                <input type="time" class="form-control" [(ngModel)]="atencion.horaTardeFinal" name="horaTardeFinal" />
                             </div>
                         </div>
                     </div>

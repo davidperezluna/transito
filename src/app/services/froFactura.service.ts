@@ -16,12 +16,10 @@ export class FroFacturaService {
 	}
 
 	register(factura,token){
-		
 		let json = JSON.stringify(factura);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
 	deleteFactura(token,id){
@@ -89,5 +87,12 @@ export class FroFacturaService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/imprimir/factura", params, { headers: headers })
 			.map(res => res.json());
+	}
+
+	registerByAmortizacion(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/new/amortizacion", params, { headers: headers }).map(res => res.json());
 	}
 }

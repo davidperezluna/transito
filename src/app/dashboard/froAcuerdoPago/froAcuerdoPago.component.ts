@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FroAcuerdoPagoService } from '../../services/froAcuerdoPago.service';
 import { LoginService } from '../../services/login.service';
-import { CiudadanoService } from '../../services/ciudadano.service';
 import { ComparendoService } from '../../services/comparendo.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -37,15 +35,31 @@ export class FroAcuerdoPagoComponent implements OnInit {
   ];
 
   constructor(
-    private _AcuerdoPagoService: FroAcuerdoPagoService,
     private _loginService: LoginService,
-    private _CiudadanoService: CiudadanoService,
     private _ComparendoService: ComparendoService,
   ){}
     
   ngOnInit() {  }
 
   onSearch() {
+    if (this.comparendosSelect.length > 0) {
+      this.comparendosSelect.splice(0, this.comparendosSelect.length);
+    }
+
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    });
+
     this.formIndex = false;
 
     let token = this._loginService.getToken();
@@ -95,7 +109,6 @@ export class FroAcuerdoPagoComponent implements OnInit {
         this.comparendosSelect.splice(index, 1);
       }
     }
-    console.log(this.comparendosSelect);
   }
 
 

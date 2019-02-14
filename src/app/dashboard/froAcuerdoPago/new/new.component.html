@@ -53,24 +53,38 @@
                             <td>
                                 <b>Capital total</b>
                                 <br>
-                                {{ valorTotal | currency: 'COP' }}
+                                {{ valorBruto | currency: 'COP' }}
                             </td>
                                 
                             <td>
                                 <b>Interes total</b>
                                 <br>
-                                {{ valorInteres | currency: 'COP' }}
+                                {{ valorMora | currency: 'COP' }}
                             </td>
 
+                            <td colspan="2">
+                                <b>Total pagar</b>
+                                <br> {{ valorNeto | currency: 'COP' }}
+                            </td>
+                        </tr>
+                        <tr  class="odd text-uppercase">
                             <td>
-                                <b>Fecha Fin</b>
+                                <b>Fecha Final</b>
                                 <br>
                                 {{ fechaFinal }}
                             </td>
                             <td>
-                                <b>Valor couota inicial (0)</b>
+                                <b>Valor cuota inicial (0)</b>
                                 <br>
                                 {{ valorCuotaInicial | currency: 'COP' }}
+                            </td>
+                            <td>
+                                <b>25% Interes</b>
+                                <br> {{ valorPorcentajeInteres | currency: 'COP' }}
+                            </td>
+                            <td>
+                                <b>75% Capital</b>
+                                <br> {{ valorPorcentajeCapital | currency: 'COP' }}
                             </td>
                         </tr>
                     </tbody>
@@ -80,14 +94,18 @@
                     <thead>
                         <tr>
                             <th class="text-uppercase"><b>No. Cuota</b></th>
-                            <th class="text-uppercase"><b>Valor Cuota</b></th>
+                            <th class="text-uppercase"><b>Valor capital</b></th>
+                            <th class="text-uppercase"><b>Valor mora</b></th>
+                            <th class="text-uppercase"><b>Total pagar</b></th>
                             <th class="text-uppercase"><b>Fecha Limite</b></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let cuota of cuotas; let i = index">
                             <td>{{ i + 1 }}</td>
-                            <td>{{ cuota.valorCapital | currency: 'COP' }}</td>
+                            <td>{{ cuota.valorBruto }}</td>
+                            <td>{{ cuota.valorMora }}</td>
+                            <td>{{ cuota.valorNeto }}</td>
                             <td>{{ cuota.fechaMensual }}</td>
                         </tr>
                     </tbody>

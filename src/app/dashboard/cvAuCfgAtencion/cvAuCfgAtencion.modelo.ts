@@ -1,6 +1,6 @@
 export class CvAuCfgAtencion{
 	constructor(
-		public dia: number,
+		public dias: any,
 		public horaManianaInicial: string,
 		public horaManianaFinal: string,
 		public horaTardeInicial: string,
