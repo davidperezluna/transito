@@ -25,19 +25,18 @@ export class ComparendoService {
 	}
 
 	deleteComparendo(token,id){
-
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showComparendo(token,id){
-		
-		let params = "authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
-							  .map(res => res.json());
+	show(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/show", params, { headers: headers })
+			.map(res => res.json());
 
 	}
 

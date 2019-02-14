@@ -41,7 +41,7 @@
         </div>
         <!-- /.col -->
 
-        <!-- ======================== Inventarios en Municipio seleccionado ============================== -->
+        <!-- ======================== comparendos  ============================== -->
         <div class="col-xs-12 col-lg-8" *ngIf="comparendos && formIndex">
             <!-- .col -->
             <div class="card">
@@ -217,7 +217,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="btn-group">
-                        <a href="{{ apiUrl }}/froFactura/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
+                        <a href="{{ apiUrl }}/froFactura/2/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
                             <i class="fa fa-file-pdf-o"></i>
                             Generar PDF
                         </a>
