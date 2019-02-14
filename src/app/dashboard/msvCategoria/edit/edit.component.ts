@@ -9,9 +9,8 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
-@Input() msvCategoria:any = null;
+@Input() categoria:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 
 constructor(
@@ -25,11 +24,9 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._CategoriaService.editCategoria(this.msvCategoria,token).subscribe(
+		this._CategoriaService.editCategoria(this.categoria, token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

@@ -10,9 +10,8 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public msvCategoria: MsvCategoria;
+public categoria: MsvCategoria;
 public errorMessage;
-public respuesta;
 
 constructor(
   private _msvCategoriaService: MsvCategoriaService,
@@ -20,7 +19,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.msvCategoria = new MsvCategoria(null, null, null);
+    this.categoria = new MsvCategoria(null, null);
   }
   onCancelar(){
     this.ready.emit(true);
@@ -29,12 +28,9 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    console.log(this.msvCategoria);
-		this._msvCategoriaService.register(this.msvCategoria,token).subscribe(
+		this._msvCategoriaService.register(this.categoria, token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -45,7 +41,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'La evaluación ya se encuentra registrada',
+            text: 'La categoria ya se encuentra registrada',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

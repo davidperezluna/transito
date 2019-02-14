@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvCfgDisenioService } from '../../../services/svCfgDisenio.service';
+import { MsvCriterioService } from '../../../services/msvCriterio.service';
+import { MsvVariableService } from '../../../services/msvVariable.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,23 +10,44 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() disenio: any = null;
+    @Input() criterio: any = null;
     public errorMessage;
+    public variables;
+    public variableSelected;
 
     public formReady = false;
 
     constructor(
-        private _DisenioService: SvCfgDisenioService,
+        private _CriterioService: MsvCriterioService,
+        private _VariableService: MsvVariableService,
         private _loginService: LoginService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this._VariableService.getVariableSelect().subscribe(
+            response => {
+                this.variables = response;
+                setTimeout(() => {
+                    this.variableSelected = [this.criterio.variable.id];
+                });
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+     }
 
     onCancelar() { this.ready.emit(true); }
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this._DisenioService.edit(this.disenio, token).subscribe(
+        this.criterio.idVariable = this.variableSelected
+        this._CriterioService.editCriterio(this.criterio, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

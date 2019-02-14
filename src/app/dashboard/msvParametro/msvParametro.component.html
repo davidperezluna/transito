@@ -5,8 +5,8 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        <strong class="text-uppercase">Categoria</strong>
-                        <small>Lista de Categorias</small>
+                        <strong class="text-uppercase">Parametro</strong>
+                        <small>Lista de Parametros</small>
                         <div class="btn-group pull-right">
                             <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
                                 data-toggle="modal">
@@ -26,15 +26,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd" *ngFor="let categoria of categorias; let i = index">
-                                <td>{{ categoria.id }}</td>
-                                <td>{{ categoria.nombre }}</td>
+                            <tr class="odd" *ngFor="let parametro of parametros; let i = index">
+                                <td>{{ parametro.id }}</td>
+                                <td>{{ parametro.nombre }}</td>
                                 <td>
-                                    <button (click)="onEdit(categoria)" class="btn btn-xs btn-info" type="button">
+                                    <button (click)="onEdit(parametro)" class="btn btn-xs btn-info" type="button">
                                         <i class="fa fa-edit"></i>
                                         Editar
                                     </button>
-                                    <button (click)="onDelete(categoria.id)" class="btn btn-xs btn-danger" type="button">
+                                    <button (click)="onDelete(parametro.id)" class="btn btn-xs btn-danger" type="button">
                                         <i class="fa fa-trash"></i>
                                         Eliminar
                                     </button>
@@ -47,6 +47,6 @@
             </div>
         </div>
     </div>
-    <app-edit *ngIf='formEdit' [categoria]="categoria" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [parametro]="parametro" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

@@ -11,7 +11,7 @@ export class MsvCategoriaService {
 
 	constructor(private _http: Http){}
 
-	getCategoria(){
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
@@ -30,9 +30,9 @@ export class MsvCategoriaService {
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteCategoria(token,id){
+	deleteCategoria(token,datos){
 
-		let json = JSON.stringify(id);
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/delete", params, {headers: headers})
