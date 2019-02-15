@@ -30,7 +30,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.msvRevision = new MsvRevision(null, null, null, null, null, null, null, null, null,null,null,null,null);
+    this.msvRevision = new MsvRevision(null, null, null, null, null, null, null, null, null, null, null,null,null,null,null);
     
 
     this._MsvPersonalFuncionarioService.selectContratistas().subscribe(

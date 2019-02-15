@@ -34,6 +34,8 @@ export class NewFortalecimientoComponent implements OnInit {
     'valorObtenidoValorAgregado': null,
   };
 
+  public result: any = [];
+
   constructor(
     private _loginService: LoginService,
     private _MsvParametroService: MsvParametroService,
@@ -45,7 +47,7 @@ export class NewFortalecimientoComponent implements OnInit {
   ngOnInit() { 
     let token = this._loginService.getToken();  
     console.log(this.msvCategoriaId);  
-    this._MsvParametroService.getParametroByCategoriaId(token,1).subscribe(
+    this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
       response => {
         this.msvParametros = response.data;
         if (this.msvParametros) {
@@ -94,75 +96,95 @@ export class NewFortalecimientoComponent implements OnInit {
   }
   
   calcularTotal(e, parametro, idCategoria){
+    console.log(idCategoria);
     if(idCategoria == 1) {
       if (e) {
         this.datos.valorObtenidoFortalecimiento += parametro.valor / parametro.numeroVariables;
       } else {
         this.datos.valorObtenidoFortalecimiento -= parametro.valor / parametro.numeroVariables;
       }
-    } else if (idCategoria == 2) {
+    } if (idCategoria == 2) {
       if (e) {
         this.datos.valorObtenidoComportamiento += parametro.valor / parametro.numeroVariables;
       } else {
         this.datos.valorObtenidoComportamiento -= parametro.valor / parametro.numeroVariables;
       }
-    } else if (idCategoria == 3) {
+    } if (idCategoria == 3) {
       if (e) {
         this.datos.valorObtenidoVehiculoSeguro += parametro.valor / parametro.numeroVariables;
       } else {
         this.datos.valorObtenidoVehiculoSeguro -= parametro.valor / parametro.numeroVariables;
       }
-    } else if (idCategoria == 4) {
+    } if (idCategoria == 4) {
       if (e) {
         this.datos.valorObtenidoInfraestructuraSegura += parametro.valor / parametro.numeroVariables;
       } else {
         this.datos.valorObtenidoInfraestructuraSegura -= parametro.valor / parametro.numeroVariables;
       }
-    } else if (idCategoria == 5) {
+    } if (idCategoria == 5) {
       if (e) {
         this.datos.valorObtenidoAtencionVictima += parametro.valor / parametro.numeroVariables;
       } else {
         this.datos.valorObtenidoAtencionVictima -= parametro.valor / parametro.numeroVariables;
       }
-    } else if (idCategoria == 6) {
+    } if (idCategoria == 6) {
       if (e) {
         this.datos.valorObtenidoValorAgregado += parametro.valor / parametro.numeroVariables;
       } else {
         this.datos.valorObtenidoValorAgregado -= parametro.valor / parametro.numeroVariables;
       }
     }
+
+    this.result.push(
+      {
+        'result': this.datos,
+      } 
+    )
+    console.log(this.result);
   }
 
   onFinalizar() {
     let token = this._loginService.getToken();
 
     this.datos.idEmpresa = this.miEmpresa.id;
-    this._MsvResultadoService.register(this.datos, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
+    
+    swal({
+      title: '¿Desea guardar la información para la empresa?',
+      type: 'info',      
+      confirmButtonText: 'Confirmar',
+    }).then((result) => {
+      if (result.value) {
+        this._MsvResultadoService.register(this.datos, token).subscribe(
+          response => {
+            var html = 
+            response.message + '</b><br>' +
+            response.message2 ;
+                  if (response.status == 'success') {
+                    this.ready.emit(true);
+                    swal({
+                      title: 'Perfecto!',
+                      html: html,
+                      type: 'success',
+                      confirmButtonText: 'Aceptar'
+                    })
+                  } else {
+                    swal({
+                      title: 'Error!',
+                      text: response.message,
+                      type: 'error',
+                      confirmButtonText: 'Aceptar'
+                    })
+                  }
+                  error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+                }
+              );
+            }
           });
         }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );
-  }
 }
