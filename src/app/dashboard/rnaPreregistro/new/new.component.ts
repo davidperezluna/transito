@@ -319,7 +319,6 @@ constructor(
       this.ready.emit(true);
   }
   onEnviar(){
-
     this.vehiculo.municipioId = this.municipioSelected;
     this.vehiculo.lineaId = this.lineaSelected;
     this.vehiculo.clase = this.claseSelected;
@@ -348,25 +347,35 @@ constructor(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
-          this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
-            response => {
-              this.ready.emit(true);
-              swal({
-                title: 'Perfecto!',
-                text: 'Registro exitoso!',
-                type: 'success',
-                confirmButtonText: 'Aceptar'
-              })
-            },
-            error => {
-              this.errorMessage = <any>error;
-      
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert('Error en la petición');
+          if (this.tipoMatriculaSelect == 'RADICADO') {
+            this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
+              response => {
+                this.ready.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: 'Registro exitoso!',
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              },
+              error => {
+                this.errorMessage = <any>error;
+        
+                if(this.errorMessage != null){
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+                }
               }
-            }
-          );
+            );
+          }else{
+            this.ready.emit(true);
+            swal({
+              title: 'Perfecto!',
+              text: 'Registro exitoso!',
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            })
+          }
           
         }else{
           swal({

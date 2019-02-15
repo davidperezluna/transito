@@ -132,7 +132,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El codigo ya se encuentra registrado',
+            text: this.respuesta.msj,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -145,7 +145,6 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
 		}); 
   }
   isFin() {

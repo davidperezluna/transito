@@ -30,6 +30,7 @@ export class NewRnaInsumoComponent implements OnInit {
     public colorSelected: any;
     public identificacion: any;
     public licenciaTransito: any;
+    public idSedeOperativa: any;
     public ciudadano:any;
     public estadoImpresion=true;
     public tarjetaEntregada=true;
@@ -68,36 +69,37 @@ export class NewRnaInsumoComponent implements OnInit {
             response => {
               if (response.status == 'success') {
                   console.log(response.data.sedeOperativa.id);
-                  let datos = {
-                        'sedeOperativa':1 
-                    }
-                    this._RnaInsumoService.showUltimoSustratoDisponible(datos).subscribe(
-                        responseInsumo => {
-                        if(responseInsumo.status == 'success'){
-                            this.numeroInsumo = responseInsumo.numero;
-                            this.FacturaInsumo.insumoId = responseInsumo.idInsumo;
-                            this.isExist = true;
-                            this.isError = false
-                        }else{
-                            this.isError = true; 
-                            this.isExist = false;
-                            swal({
-                                title: 'Error!',
-                                text: 'No tiene asignado sustratos para la sede',
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                            });
-                        }
-                        error => {
-                                this.errorMessage = <any>error;
+                  this.idSedeOperativa = response.data.sedeOperativa.id;
+                //   let datos = {
+                //         'sedeOperativa':1 
+                //     }
+                //     this._RnaInsumoService.showUltimoSustratoDisponible(datos).subscribe(
+                //         responseInsumo => {
+                //         if(responseInsumo.status == 'success'){
+                //             this.numeroInsumo = responseInsumo.numero;
+                //             this.FacturaInsumo.insumoId = responseInsumo.idInsumo;
+                //             this.isExist = true;
+                //             this.isError = false
+                //         }else{
+                //             this.isError = true; 
+                //             this.isExist = false;
+                //             swal({
+                //                 title: 'Error!',
+                //                 text: 'No tiene asignado sustratos para la sede',
+                //                 type: 'error',
+                //                 confirmButtonText: 'Aceptar'
+                //             });
+                //         }
+                //         error => {
+                //                 this.errorMessage = <any>error;
 
-                                if(this.errorMessage != null){
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
-                            }
+                //                 if(this.errorMessage != null){
+                //                     console.log(this.errorMessage);
+                //                     alert("Error en la petición");
+                //                 }
+                //             }
 
-                    });
+                //     });
       
               }else{
                 swal({
@@ -199,7 +201,12 @@ export class NewRnaInsumoComponent implements OnInit {
 
     onKeyValidateInsumo(){
         let token = this._loginService.getToken();
-        this._RnaInsumoService.showNombre(token,this.numeroInsumo).subscribe(
+        let datos = {
+            'numero': this.numeroInsumo,
+            'idModulo': 2,
+            'idSedeOperativa': this.idSedeOperativa,
+        }
+        this._RnaInsumoService.showNombre(token,datos).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.FacturaInsumo.insumoId = response.data.id;

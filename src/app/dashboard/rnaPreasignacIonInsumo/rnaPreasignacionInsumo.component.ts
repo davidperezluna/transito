@@ -10,7 +10,7 @@ declare var $: any;
 @Component({
   selector: 'app-rnaPreasignacionInsumo',
   templateUrl: './rnaPreasignacionInsumo.component.html',
-  providers: [DatePipe]
+  providers: [DatePipe] 
 })
 export class RnaPreasignacionInsumoComponent implements OnInit {
 public formIndex = true;
@@ -41,7 +41,7 @@ constructor(
 
     this._ImoTrazabilidadService.index().subscribe(
       response => {
-        this.reasignaciones = response.data;
+        this.reasignaciones = response.data; 
         let timeoutId = setTimeout(() => {
           swal.close()
           this.iniciarTabla();
