@@ -8,9 +8,6 @@
             </div>
         <div class="card-body">
             <form #formNew="ngForm">
-                <div class="btn-group-vertical" data-toggle="buttons" *ngIf="persona == 'funcionario'">
-                    <button (click)="onRadicado() "type="button" class="btn btn-primary" aria-pressed="true">{{btnRadicado}}</button>
-                </div>
                 <div class="col-xs-12 col-lg-12">
                     <label>Tipo de registro <span class="text-danger">*</span></label>
                     <ng-select [multiple]="false" [options]="tipoMatricula" [(ngModel)]="tipoMatriculaSelect" required name="tipoPropiedadId">

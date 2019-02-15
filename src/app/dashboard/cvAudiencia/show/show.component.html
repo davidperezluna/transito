@@ -1,0 +1,53 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <b>Gestionar audiencia</b>
+                </h5>
+                <small>Los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped" id="dataTables-example">
+                    <tbody>
+                        <tr class="odd">
+                            <td>
+                                <b>Numero de identificación:</b>
+                                {{ audiencia.comparendo.infractorIdentificacion }}
+                                <br>
+                                <b>Infractor:</b>
+                                {{ audiencia.comparendo.infractorNombres }} {{ audiencia.comparendo.infractorApellidos }}                               
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form #formEdit="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Formato</label>
+                            <ng-select (ngModelChange)="onChangedFormato($event)" [multiple]="false" [options]="formatos" [(ngModel)]="datos.idFormato"
+                                name="idFormato" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Borrador
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <textarea class="form-control" [(ngModel)]="datos.borrador" name="borrador" id="summernote"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

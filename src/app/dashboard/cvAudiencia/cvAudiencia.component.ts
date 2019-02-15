@@ -16,45 +16,85 @@ export class CvAudienciaComponent implements OnInit {
 	public audiencias;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = true;
-  public table:any; 
+  public formIndex = false;
+  public formShow = false;
+  public formSearch = true;
+  public table:any = null; 
   public audiencia: CvAudiencia;
 
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
+  }
+
+  public tiposFiltro = [
+    { 'value': '1', 'label': 'Identificación' },
+    { 'value': '2', 'label': 'No. de comparendo' },
+    { 'value': '3', 'label': 'Fecha' },
+  ];
+
   constructor(
-    private _NotificacionService: CvAudienciaService,
-		private _loginService: LoginService,
+    private _AudienciaService: CvAudienciaService,
+		private _LoginService: LoginService,
     ){}
     
-  ngOnInit() {
+  ngOnInit() {  }
+
+  onSearch() {
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
     });
 
-    this._NotificacionService.index().subscribe(
-				response => {
+    this.formIndex = false;
+
+    let token = this._LoginService.getToken();
+
+    this._AudienciaService.searchByFiltros(this.search, token).subscribe(
+      response => {
+        if (response.status == 'success') {
           this.audiencias = response.data;
-          
-          let timeoutId = setTimeout(() => {  
+          this.formIndex = true;
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+          let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
-          swal.close();
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+        } else {
+          this.audiencias = null;
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
   }
 
+
   iniciarTabla(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -73,14 +113,16 @@ export class CvAudienciaComponent implements OnInit {
   
   onNew(){
     this.formNew = true;
+    this.formEdit = false;
+    this.formShow = false;
     this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
+      this.formShow = false;
       this.formIndex = true;
       this.ngOnInit();
     }
@@ -98,9 +140,9 @@ export class CvAudienciaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
-        this._NotificacionService.delete({'id':id}, token).subscribe(
+        this._AudienciaService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -120,15 +162,23 @@ export class CvAudienciaComponent implements OnInit {
               }
             }
           );
-
-        
       }
     })
+  }
+
+  onShow(audiencia: any) {
+    this.audiencia = audiencia;
+    this.formEdit = false;
+    this.formShow = true;
+    this.formNew = false;
+    this.formIndex = false;
   }
 
   onEdit(audiencia:any){
     this.audiencia = audiencia;
     this.formEdit = true;
     this.formIndex = false;
+    this.formShow = false;
+    this.formNew = false;
   }
 }

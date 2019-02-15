@@ -75,7 +75,7 @@
                             <td>{{ acuerdoPago.fechaFinal }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button onShow(acuerdoPago) class="btn btn-xs btn-primary"  type="button">
+                                    <button (click)="onShow(acuerdoPago)" class="btn btn-xs btn-primary"  type="button">
                                         <i class="fa fa-list"></i>
                                         Detalles
                                     </button>
@@ -147,24 +147,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd" *ngFor="let amortizacion of amortizaciones; let i = index">
+                        <tr *ngFor="let amortizacion of amortizaciones; let i = index">
                             <td>{{ amortizacion.numeroCuota }}</td>
                             <td>{{ amortizacion.valorBruto | currency: 'COP' }}</td>
                             <td>{{ amortizacion.valorMora | currency: 'COP' }}</td>
                             <td>{{ amortizacion.valorNeto | currency: 'COP' }}</td>
                             <td>{{ amortizacion.fechaLimite }}</td>
                             <td>
-                                <b class="text-success" *ngIf="amortizacion.pagada"></b>
-                                <b class="text-danger" *ngIf="!amortizacion.pagada"></b>
+                                <b class="text-success" *ngIf="amortizacion.pagada">Pagada</b>
+                                <b class="text-danger" *ngIf="!amortizacion.pagada">No pagada</b>
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="{{ apiUrl }}/froFactura/3/{{ amortizacion.factura.id }}/pdf" class="btn btn-success" target="_blank" *ngIf="amortizacion.factura">
+                                    <a href="{{ apiUrl }}/froFactura/3/{{ amortizacion.factura.id }}/pdf" class="btn btn-success" target="_blank" *ngIf="amortizacion.factura && !amortizacion.pagada">
                                         <i class="fa fa-file-pdf-o"></i>
-                                        Generar PDF
+                                        Imprimir factura
                                     </a>
                                     <button (click)="onEnviar(amortizacion.id)" class="btn btn-primary" type="button" *ngIf="!amortizacion.factura">
-                                        <i class="fa fa-save"></i>
+                                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
                                         Generar factura
                                     </button>
                                 </div>

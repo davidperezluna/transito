@@ -18,6 +18,7 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
     public valorTotal: any;
     public acuerdosPago: any = null;
     public amortizaciones: any = null;
+    public acuerdoPago: any = null;
     public numeroIdentificacion: any;
     public sedesOperativas: any;
 
@@ -117,7 +118,8 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
         this._AcuerdoPagoService.show(acuerdoPago, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.amortizaciones = response.data;
+                    this.amortizaciones = response.data.amortizaciones;
+                    this.acuerdoPago = response.data.acuerdoPago;
                     this.formShow = true;
 
                     swal({
@@ -180,22 +182,25 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
         this.ngOnInit();
     }
 
-    onEnviar(amortizacion) {
+    onEnviar(idAmortizacion) {
+        this.factura = new FroFacAcuerdoPago(null, null, null, null, null);
+
         let token = this._LoginService.getToken();
         //Tipo de recaudo acuerdo de pago
         this.factura.idTipoRecaudo = 3;
+        this.factura.idAmortizacion = idAmortizacion;
 
-        this._FacturaService.registerByAmortizacion(amortizacion, token).subscribe(
+        this._FacturaService.registerByAmortizacion(this.factura, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                   
+                    this.onShow(this.acuerdoPago);
 
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
                 } else {
                     
                     swal({
@@ -203,7 +208,7 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
                         text: response.message,
                         type: 'error',
                         confirmButtonText: 'Aceptar'
-                    })
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
