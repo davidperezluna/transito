@@ -1,0 +1,179 @@
+<hr>
+<div class="row" *ngIf='formSearch'>
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-4">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <strong>Facturas</strong>
+                    <small>Buscar acuerdo de pago</small>
+                </h5>
+            </div>
+            <div class="card-body">
+                <!-- .card-body -->
+                <form #formSearch="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Tipo de filtro</label>
+                                <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Filtro</label>
+                                <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </form>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-search"></i>
+                    Buscar
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+
+    <!-- ======================== acuerdos de pago  ============================== -->
+    <div class="col-xs-12 col-lg-8" *ngIf="acuerdosPago && formIndex">
+        <!-- .col -->
+        <div class="card">
+            <!-- .card -->
+            <div class="card-header">
+                <h5 class="card-title">
+                    <b class="text-uppercase">Acuerdos de pago</b>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Número</th>
+                            <th>Valor cuota incial</th>
+                            <th>Valor capital</th>
+                            <th>Valor mora</th>
+                            <th>Total pagar</th>
+                            <th>fecha final</th>
+                            <th>Seleccionar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let acuerdoPago of acuerdosPago; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ acuerdoPago.numero }}</td>
+                            <td>{{ acuerdoPago.valorCuotaInicial }}</td>
+                            <td>{{ acuerdoPago.valorBruto }}</td>
+                            <td>{{ acuerdoPago.valorMora }}</td>
+                            <td>{{ acuerdoPago.valorNeto }}</td>
+                            <td>{{ acuerdoPago.fechaFinal }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button (click)="onShow(acuerdoPago)" class="btn btn-xs btn-primary"  type="button">
+                                        <i class="fa fa-list"></i>
+                                        Detalles
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+
+    <div class="col-xs-12 col-lg-8" *ngIf="amortizaciones && formShow">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">
+                    <b>Acuerdo de pago No. {{ acuerdoPago.numero }}</b>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr class="odd text-uppercase">
+                            <td>
+                                <b>Capital total</b>
+                                <br> {{ acuerdoPago.valorBruto | currency: 'COP' }}
+                            </td>
+    
+                            <td>
+                                <b>Interes total</b>
+                                <br> {{ acuerdoPago.valorMora | currency: 'COP' }}
+                            </td>
+                            <td>
+                                <b>Valor total</b>
+                                <br> {{ acuerdoPago.valorNeto | currency: 'COP' }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <table class="table table-bordered table-striped" *ngIf="amortizaciones">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase">
+                                <b>No. Cuota</b>
+                            </th>
+                            <th class="text-uppercase">
+                                <b>Valor capital</b>
+                            </th>
+                            <th class="text-uppercase">
+                                <b>Valor mora</b>
+                            </th>
+                            <th class="text-uppercase">
+                                <b>Total pagar</b>
+                            </th>
+                            <th class="text-uppercase">
+                                <b>Fecha Limite</b>
+                            </th>
+                            <th class="text-uppercase">
+                                <b>Estado</b>
+                            </th>
+                            <th class="text-uppercase">
+                                <b>Imprimir</b>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let amortizacion of amortizaciones; let i = index">
+                            <td>{{ amortizacion.numeroCuota }}</td>
+                            <td>{{ amortizacion.valorBruto | currency: 'COP' }}</td>
+                            <td>{{ amortizacion.valorMora | currency: 'COP' }}</td>
+                            <td>{{ amortizacion.valorNeto | currency: 'COP' }}</td>
+                            <td>{{ amortizacion.fechaLimite }}</td>
+                            <td>
+                                <b class="text-success" *ngIf="amortizacion.pagada">Pagada</b>
+                                <b class="text-danger" *ngIf="!amortizacion.pagada">No pagada</b>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ apiUrl }}/froFactura/3/{{ amortizacion.factura.id }}/pdf" class="btn btn-success" target="_blank" *ngIf="amortizacion.factura && !amortizacion.pagada">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                        Imprimir factura
+                                    </a>
+                                    <button (click)="onEnviar(amortizacion.id)" class="btn btn-primary" type="button" *ngIf="!amortizacion.factura">
+                                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                        Generar factura
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>

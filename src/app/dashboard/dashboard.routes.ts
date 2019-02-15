@@ -135,6 +135,9 @@ import { MsvCaracterizacionRoutes } from './msvCaracterizacion/msvCaracterizacio
 import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
 import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
 import { MsvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
+import { MsvVariableRoutes } from './msvVariable/msvVariable.routes';
+import { MsvParametroRoutes } from './msvParametro/msvParametro.routes';
+import { MsvCriterioRoutes } from './msvCriterio/msvCriterio.routes';
 
 import { GdDocumentoRoutes } from './gdDocumento/gdDocumento.routes';
 import { GdTrazabilidadRoutes } from './gdTrazabilidad/gdTrazabilidad.routes';
@@ -273,10 +276,15 @@ export const DashboardRoutes: Route[] = [
       ...CfgAsignacionPlacaSedeRoutes,
       ...CfgTipoClaseRoutes,
       ...RncLicenciaConduccionRoutes,
+      
       ...MsvCaracterizacionRoutes,
       ...MsvEvaluacionRoutes,
       ...MsvRevisionRoutes,
       ...MsvCategoriaRoutes,
+      ...MsvVariableRoutes,
+      ...MsvParametroRoutes,
+      ...MsvCriterioRoutes,
+
       ...GdDocumentoRoutes,
       ...GdTrazabilidadRoutes,
       ...GdCfgTipoCorrespondenciaRoutes,

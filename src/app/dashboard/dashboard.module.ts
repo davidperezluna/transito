@@ -146,6 +146,10 @@ import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
 import { MsvRevisionModule } from './msvRevision/msvRevision.module';
 import { MsvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
 import { MsvCategoriaModule } from './msvCategoria/msvCategoria.module';
+import { MsvVariableModule } from './msvVariable/msvVariable.module';
+import { MsvParametroModule } from './msvParametro/msvParametro.module';
+import { MsvCriterioModule } from './msvCriterio/msvCriterio.module';
+
 import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
 import { MsvAsignacionModule } from './msvAsignacion/msvAsignacion.module';
 
@@ -331,10 +335,15 @@ import {RightsidebarComponent} from '../shared';
       SvCfgVisualModule,
       SvCfgVisualDisminuidaModule,
       SvCfgZonaModule,
+      
       MsvEvaluacionModule,
       MsvRevisionModule,
       MsvCaracterizacionModule,
       MsvCategoriaModule,
+      MsvVariableModule,
+      MsvParametroModule,
+      MsvCriterioModule,
+
       GdDocumentoModule,
       GdTrazabilidadModule,
       GdCfgTipoCorrespondenciaModule,

@@ -39,6 +39,7 @@ export class FacturaInfraccionComponent implements OnInit {
     
   ngOnInit() {
     this.facturaInfraccion = new FacturaInfraccion(null, null, null, null, null, null, 0, null);
+    
     swal({
       title: 'Cargando!',
       text: 'Solo tardara unos segundos por favor espere.',

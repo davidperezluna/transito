@@ -326,10 +326,10 @@ export class ExportComponent implements OnInit {
             response => {
                 if (response.status == 'success') {
                     this.ipats = response.data;
-                    this.conductoresNombresArray = response.conductores.nombres;
-                    this.conductoresApellidosArray = response.conductores.apellidos;
-                    this.victimasNombresArray = response.victimas.nombres;
-                    this.victimasApellidosArray = response.victimas.apellidos;
+                    //this.conductoresNombresArray = response.conductores.nombres;
+                    //this.conductoresApellidosArray = response.conductores.apellidos;
+                    //this.victimasNombresArray = response.victimas.nombres;
+                    //this.victimasApellidosArray = response.victimas.apellidos;
                     let timeoutId = setTimeout(() => {
                         this.iniciarTabla();
                     }, 100);

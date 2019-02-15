@@ -3,7 +3,7 @@ import { ComparendoService } from '../../../services/comparendo.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { LoginService } from '../../../services/login.service';
-import { FroFactura } from '../froFactura.modelo';
+import { FroFacInfraccion } from './froFacInfraccion.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 import { environment } from 'environments/environment'
@@ -15,7 +15,7 @@ import { environment } from 'environments/environment'
 
 export class FroFacInfraccionComponent implements OnInit {
   public errorMessage;
-  public factura: FroFactura;
+  public factura: FroFacInfraccion;
 	public valorTotal: any;
 	public comparendos: any = null;
   public comparendosSelect: any = [];
@@ -52,7 +52,11 @@ export class FroFacInfraccionComponent implements OnInit {
     private _LoginService: LoginService,
   ){}
     
-  ngOnInit() {  }
+  ngOnInit() { 
+    if (this.comparendosSelect.length > 0) {
+      this.comparendosSelect.splice(0, this.comparendosSelect.length);
+    }
+  }
 
   onSearch() {
     swal({
@@ -163,7 +167,7 @@ export class FroFacInfraccionComponent implements OnInit {
     this.formIndex = false;
     this.formSearch = false;
 
-    this.factura = new FroFactura(0, 0, null, null, null, null);
+    this.factura = new FroFacInfraccion(0, 0, null, null, null, null);
 
     swal({
       title: 'Calculando valores!',

@@ -65,7 +65,7 @@
                 <td>{{ comparendo.estado?.nombre }}</td>
                 <td>
                   <div class="custom-control custom-checkbox" style="margin-top: 3px;">
-                    <input type="checkbox" value="{{comparendo.id}}" (change)="onSelect(comparendo.id, $event)" class="custom-control-input" id="{{comparendo.id}}">
+                    <input type="checkbox" value="{{comparendo.id}}" (change)="onSelect(comparendo.id, $event)" class="custom-control-input" id="{{comparendo.id}}" [disabled]="comparendo.acuerdoPago">
                     <label class="custom-control-label" for="{{comparendo.id}}"></label>
                   </div>
                 </td>

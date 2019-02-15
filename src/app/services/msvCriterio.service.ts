@@ -4,35 +4,35 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class MsvCategoriaService {
-	private url = environment.apiUrl + 'msvcategoria';
+export class MsvCriterioService {
+	private url = environment.apiUrl + 'msvcriterio';
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getCategoria(){
+	getCriterio(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(revision,token){ 
+	register(datos,token){ 
 		
-		let json = JSON.stringify(revision);
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteCategoria(token,id){
+	deleteCriterio(datos,token){
 
-		let json = JSON.stringify(id);
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showCategoria(token,id){
+	showCriterio(token,id){
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
@@ -40,14 +40,14 @@ export class MsvCategoriaService {
 	}
 
 	// tslint:disable-next-line:one-line
-	editCategoria(revision,token){
+	editCriterio(revision,token){
 		let json = JSON.stringify(revision);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getCategoriaSelect(){
+	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 }
