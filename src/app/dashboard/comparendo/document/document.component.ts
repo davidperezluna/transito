@@ -57,7 +57,7 @@ export class DocumentComponent implements OnInit {
         if (e) {
             let token = this._LoginService.getToken();
 
-            this._FormatoService.show({ 'id':e }, token).subscribe(
+            this._FormatoService.show({ 'id':e, 'idComparendo':this.trazabilidad.comparendo.id }, token).subscribe(
                 response => {
                     $('#summernote').summernote('code', response.data.cuerpo);
                     this.datos.idFormato = response.data.id;

@@ -214,12 +214,12 @@ constructor(
 
       let token = this._LoginService.getToken();
 
-      this._FormatoService.show({ 'id': e }, token).subscribe(
+      this._FormatoService.show({ 'id': e, 'idComparendo': this.comparendo.id }, token).subscribe(
         response => {
           this.datos.numero = this.trazabilidad.estado.sigla + '-' + this.comparendo.consecutivo.consecutivo;
 
           $('#summernote').summernote({
-            placeholder: 'Diligencie el cuerpo del acto admisnitrativo',
+            placeholder: 'Diligencie el cuerpo del acto administrativo',
             tabsize: 2,
             height: 800,
             toolbar: [
@@ -231,9 +231,9 @@ constructor(
             ]
           });
 
-          $('#summernote').summernote('code',response.data.cuerpo);
+          $('#summernote').summernote('code',response.data.template);
 
-          this.datos.idFormato = response.data.id;
+          this.datos.idFormato = response.data.formato.id;
 
           swal.close();
         },
@@ -247,7 +247,6 @@ constructor(
         }
       );
     }
-
   }
 
   onDocument(trazabilidad: any) {
