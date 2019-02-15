@@ -45,7 +45,7 @@ export class NewFortalecimientoComponent implements OnInit {
   ngOnInit() { 
     let token = this._loginService.getToken();  
     console.log(this.msvCategoriaId);  
-    this._MsvParametroService.getParametroByCategoriaId(token,this.msvCategoriaId).subscribe(
+    this._MsvParametroService.getParametroByCategoriaId(token,1).subscribe(
       response => {
         this.msvParametros = response.data;
         if (this.msvParametros) {

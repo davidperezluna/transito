@@ -1,7 +1,7 @@
 <div class="col-xs-12 col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h5 class="text-uppercase">Registrar Categoría</h5>
+            <h5 class="text-uppercase">Editar Parametro</h5>
             <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
         </div>
         <div class="card-body">
@@ -10,7 +10,17 @@
                     <div class="col-xs-12 col-lg-6">
                         <label>Nombre <strong class="text-danger">*</strong></label>
                         <input style="text-transform:uppercase" type="text" class="form-control"
-                            [(ngModel)]="categoria.nombre" name="nombre" required />
+                            [(ngModel)]="parametro.nombre" name="nombre" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Categoría <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="categoriaSelected" required
+                            name="categoria">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Valor<strong class="text-danger">*</strong></label>
+                        <input type="number" class="form-control" [(ngModel)]="parametro.valor" name="valor" required />
                     </div>
                 </div>
             </form>

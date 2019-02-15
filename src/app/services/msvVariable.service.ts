@@ -11,7 +11,7 @@ export class MsvVariableService {
 
 	constructor(private _http: Http){}
 
-	getVariable(){
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
@@ -30,7 +30,7 @@ export class MsvVariableService {
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteVariable(token,id){
+	deleteVariable(id, token){
 
 		let json = JSON.stringify(id);
 		let params = "json="+json+"&authorization="+token;
@@ -47,8 +47,8 @@ export class MsvVariableService {
 	}
 
 	// tslint:disable-next-line:one-line
-	editVariable(revision,token){
-		let json = JSON.stringify(revision);
+	editVariable(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());

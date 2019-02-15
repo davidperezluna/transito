@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvCfgDisenioService } from '../../../services/svCfgDisenio.service';
+import { MsvParametroService } from '../../../services/msvParametro.service';
+import { MsvCategoriaService } from '../../../services/msvCategoria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,23 +10,45 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() disenio: any = null;
+    @Input() parametro: any = null;
+
     public errorMessage;
+    public categorias;
+    public categoriaSelected;
 
     public formReady = false;
 
     constructor(
-        private _DisenioService: SvCfgDisenioService,
+        private _ParametroService: MsvParametroService,
+        private _CategoriaService: MsvCategoriaService,
         private _loginService: LoginService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this._CategoriaService.getCategoriaSelect().subscribe(
+            response => {
+                this.categorias = response;
+                setTimeout(() => {
+                    this.categoriaSelected = [this.parametro.categoria.id];
+                });
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+     }
 
     onCancelar() { this.ready.emit(true); }
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this._DisenioService.edit(this.disenio, token).subscribe(
+        this.parametro.idCategoria = this.categoriaSelected;
+        this._ParametroService.editParametro(this.parametro, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

@@ -13,7 +13,7 @@ export class MsvCategoriaComponent implements OnInit {
   public errorMessage;
   public id;
 	public respuesta;
-	public msvCategorias;
+	public categorias;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
@@ -29,7 +29,7 @@ export class MsvCategoriaComponent implements OnInit {
   public nit:any; 
   public empresas:any;
   public revisiones:any = false;
-  public msvCategoria: MsvCategoria;
+  public categoria: MsvCategoria;
 
   constructor(
     private _CategoriaService: MsvCategoriaService,
@@ -51,9 +51,9 @@ export class MsvCategoriaComponent implements OnInit {
       ) {
       }
     })
-    this._CategoriaService.getCategoria().subscribe(
+    this._CategoriaService.index().subscribe(
 				response => {
-          this.msvCategorias = response.data;
+          this.categorias = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
@@ -87,7 +87,11 @@ export class MsvCategoriaComponent implements OnInit {
   }
   
   onNew(){
-    this.table.destroy();
+    this.formNew = true;
+    this.formIndex = false;
+    if (this.table) {
+      this.table.destroy();
+    }
   }
 
   ready(isCreado:any){
@@ -99,7 +103,7 @@ export class MsvCategoriaComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deletemsvCategoria(id:any){
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -132,9 +136,7 @@ export class MsvCategoriaComponent implements OnInit {
                 alert("Error en la petición");
               }
             }
-          );
-
-        
+          );   
       }
     })
   }
@@ -143,8 +145,8 @@ export class MsvCategoriaComponent implements OnInit {
     this.revisionNew = true;
   }
 
-  editmsvCategoria(msvCategoria:any){
-    this.msvCategoria = msvCategoria;
+  onEdit(categoria:any){
+    this.categoria = categoria;
     this.formEdit = true;
     this.formIndex = false;
   }

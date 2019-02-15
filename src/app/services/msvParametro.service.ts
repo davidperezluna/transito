@@ -30,7 +30,7 @@ export class MsvParametroService {
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteParametro(token,id){
+	deleteParametro(id, token){
 
 		let json = JSON.stringify(id);
 		let params = "json="+json+"&authorization="+token;
