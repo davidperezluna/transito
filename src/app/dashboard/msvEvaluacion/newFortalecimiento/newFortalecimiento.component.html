@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div>
-                    <div class="col-lg-4" style="border:1px solid #cccccc;">
+                    <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="msvCategoriaId == 1">
                         <input class="form-control" [(ngModel)]="datos.valorObtenidoFortalecimiento" name="valorObtenidoFortalecimiento" type="number">
                     </div>
                     <!-- <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div> -->
@@ -81,11 +81,11 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                    <!-- <button (click)="onEnviar()" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
-                    </button>
-                    <button (click)="onFinalizar()" class="btn btn-default">
+                    </button> -->
+                    <button (click)="onFinalizar()" class="btn btn-primary">
                         <i class="fa fa-times"></i>
                         Finalizar
                     </button> 

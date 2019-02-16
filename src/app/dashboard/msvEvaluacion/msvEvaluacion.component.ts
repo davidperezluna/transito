@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { MsvEvaluacionService } from '../../services/msvEvaluacion.service';
 import { EmpresaService } from '../../services/empresa.service';
 import { MsvRevisionService } from '../../services/msvRevision.service';
@@ -16,7 +16,7 @@ declare var $: any;
   templateUrl: './msvEvaluacion.component.html'
 })
 export class MsvEvaluacionComponent implements OnInit {
-  @Output() msvCategoria;  
+  @Input() msvCategoria;  
   public errorMessage;
   public id;
   public msvEvaluaciones;
@@ -38,8 +38,9 @@ export class MsvEvaluacionComponent implements OnInit {
   public miRevision = null;
   public revisiones: any;
   public msvEvaluacion: MsvEvaluacion;
-  public categoriaSelected: any;
+  public categoriaSelected: any = null;
   public msvCategorias:any;
+  public categoria = false;
   public resumen = {};     public datos = {'parametro': null,
                   'parametro2': null}
 
@@ -176,7 +177,7 @@ export class MsvEvaluacionComponent implements OnInit {
     
     swal({
       title: 'Buscando Empresa!',
-      text: 'Solo tardara unos segundos por favor espere.',
+      text: 'Solo tardará unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
@@ -255,7 +256,7 @@ export class MsvEvaluacionComponent implements OnInit {
   onKeyValidateRevision(){
     swal({
       title: 'Buscando Fechas de Revisión!',
-      text: 'Solo tardara unos segundos por favor espere.',
+      text: 'Solo tardará unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
@@ -306,9 +307,35 @@ export class MsvEvaluacionComponent implements OnInit {
     this.revisionNew = true;
   }
 
-  editmsvEvaluacion(msvEvaluacion:any){
+  editmsvEvaluacion(msvEvaluacion:any) {
     this.msvEvaluacion = msvEvaluacion;
     this.formEdit = true;
     this.formIndex = false;
+  }
+
+  changedCategoria(e){
+    if (e) {
+      let timeoutId = setTimeout(() => {
+        this.categoria = false;
+      }, 100);
+
+      let token = this._loginService.getToken();
+
+      this._MsvCategoriaService.showCategoria(token, e).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.categoria = true; 
+          }
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) { 
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
   }
 }

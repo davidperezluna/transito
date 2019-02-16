@@ -29,9 +29,17 @@
                             <label>Fecha visita de control 1</label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaVisitaControl1" name="fechaVisitaControl1" type="date" />
                         </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="msvRevision.fechaVisitaControl1">
+                            <label>Observaciones visita de control 1</label>
+                            <textarea class="form-control" [(ngModel)]="msvRevision.observacionVisita1" name="observacionVisita1"></textarea>
+                        </div>
                         <div class="col-xs-12 col-lg-12" *ngIf="msvRevision.fechaOtorgamiento">
                             <label>Fecha visita de control 2</label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaVisitaControl2" name="fechaVisitaControl2" type="date" />
+                        </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="msvRevision.fechaVisitaControl2">
+                            <label>Observaciones visita de control 2</label>
+                            <textarea class="form-control" [(ngModel)]="msvRevision.observacionVisita2" name="observacionVisita2"></textarea>
                         </div>
                         <!-- <div class="col-xs-12 col-lg-12">
                             <label>Empresa</label>  

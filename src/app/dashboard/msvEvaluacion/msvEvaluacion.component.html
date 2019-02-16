@@ -137,11 +137,10 @@
                              </li>
                           </ul> --> 
                            <label>Categoria <strong class="text-danger">*</strong></label>
-                           <ng-select [multiple]="false" [options]="msvCategorias" [(ngModel)]="categoriaSelected" required
-                              name="idCategoria">
+                           <ng-select [multiple]="false" [options]="msvCategorias" (ngModelChange)="changedCategoria($event)" [(ngModel)]="categoriaSelected" required name="idCategoria">
                            </ng-select>
                           <div>
-                             <div class="col-xs-12 col-lg-12">
+                             <div class="col-xs-12 col-lg-12" *ngIf="categoria">
                                  <app-new-fortalecimiento  [msvCategoriaId] = "categoriaSelected" [miEmpresa] = "miEmpresa" (ready)="ready($event)"></app-new-fortalecimiento>
                              </div>
                           </div> 
