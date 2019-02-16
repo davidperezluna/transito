@@ -3,6 +3,7 @@ export class SvSenialUbicacion{
 		public fecha: string,
 		public hora: string,
 		public cantidad: number,
+		public demarcaciones: any,
 		public markers: any,
 		public idConector: number,
 		public idSenial: number,

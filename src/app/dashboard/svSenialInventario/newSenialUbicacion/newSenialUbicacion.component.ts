@@ -51,6 +51,17 @@ export class NewSenialUbicacionComponent implements OnInit {
     public lng: number = -77.2808208;
     public map: any;
     public markers: marker[] = [];
+    public arrayDemarcaciones: any = [];
+
+    public demarcacionNew = {
+        'cantidad': null,
+        'anchoLinea': null,
+        'metraje': null,
+        'total': null,
+        'tramoVial': null,
+        'idLinea': null,
+        'idUnidadMedida': null
+    }
 
     constructor(
         private _SvSenialUbicacionService: SvSenialUbicacionService,
@@ -63,7 +74,7 @@ export class NewSenialUbicacionComponent implements OnInit {
         private _ProveedorService: SvCfgSenialProveedorService,
         private _LoginService: LoginService,
     ) {
-        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     ngOnInit() {
@@ -112,6 +123,152 @@ export class NewSenialUbicacionComponent implements OnInit {
                 }
             }
         );
+    }
+
+    onCancelar() {
+        this.ready.emit(true);
+    }
+
+    onChangedSenial(e) {
+        if (e) {
+            let token = this._LoginService.getToken();
+
+            this._SenialService.show({ 'id': e }, token).subscribe(
+                response => {
+                    if (response.status == 'success') {
+                        this.senial = response.data;
+
+                        if (this.senial.tipoSenial.id == 1) {
+                            this._LineaService.select().subscribe(
+                                response => {
+                                    if (response) {
+                                        this.lineas = response;
+                                    } else {
+                                        this.lineas = null;
+                                    }
+                                },
+                                error => {
+                                    this.errorMessage = <any>error;
+
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            );
+
+                            this._UnidadMedidaService.select().subscribe(
+                                response => {
+                                    if (response) {
+                                        this.unidadesMedida = response;
+                                    } else {
+                                        this.unidadesMedida = null;
+                                    }
+                                },
+                                error => {
+                                    this.errorMessage = <any>error;
+
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            );
+                        }
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        this.senial = null;
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+
+            if (this.demarcacion) {
+                this._ProveedorService.select().subscribe(
+                    response => {
+                        if (response) {
+                            this.proveedores = response;
+                        } else {
+                            swal({
+                                title: 'Error!',
+                                text: 'No tiene proveedores registrados',
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
+
+                            this.proveedores = null;
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                );
+            } else {
+                this._BodegaService.selectProveedorBySenial({ 'idSenial': e }, token).subscribe(
+                    response => {
+                        if (response) {
+                            this.bodegas = response;
+                        } else {
+                            swal({
+                                title: 'Error!',
+                                text: 'No tiene existencias en bodega para esa señal',
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
+
+                            this.bodegas = null;
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                );
+            }
+
+        }
+    }
+
+    onAddDemarcacion() {
+        this.arrayDemarcaciones.push(
+            {
+                'cantidad': this.demarcacionNew.cantidad,
+                'anchoLinea': this.demarcacionNew.anchoLinea,
+                'metraje': this.demarcacionNew.metraje,
+                'total': this.demarcacionNew.total,
+                'tramoVial': this.demarcacionNew.tramoVial,
+                'idLinea': this.senialUbicacion.idSenial,
+                'idUnidadMedida': this.seniales.idUnidadMedida
+            }
+        );
+
+        console.log(this.arrayDemarcaciones);
+    }
+
+    onRemoveDemarcacion(demarcacion) {
+        this.arrayDemarcaciones = this.arrayDemarcaciones.filter(h => h !== demarcacion);
     }
 
     mapReady(map) {
@@ -186,132 +343,6 @@ export class NewSenialUbicacionComponent implements OnInit {
         console.log('dragEnd', m, $event);
     }
 
-    onCancelar() {
-        this.ready.emit(true);
-    }
-
-    onChangedSenial(e) {
-        if (e) {
-            let token = this._LoginService.getToken();
-
-            this._SenialService.show({ 'id': e }, token).subscribe(
-                response => {
-                    if (response.status == 'success') {
-                        this.senial = response.data;
-
-                        if (this.senial.tipoSenial.id == 1) {
-                            this._LineaService.select().subscribe(
-                                response => {
-                                    if (response) {
-                                        this.lineas = response;
-                                    } else {
-                                        this.lineas = null;
-                                    }
-                                },
-                                error => {
-                                    this.errorMessage = <any>error;
-
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                            );
-
-                            this._UnidadMedidaService.select().subscribe(
-                                response => {
-                                    if (response) {
-                                        this.unidadesMedida = response;
-                                    }else{
-                                        this.unidadesMedida =  null;
-                                    }
-                                },
-                                error => {
-                                    this.errorMessage = <any>error;
-
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                            );
-                        }
-                    } else {
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-
-                        this.senial = null;
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            );
-
-            if (this.demarcacion) {
-                this._ProveedorService.select().subscribe(
-                    response => {
-                        if (response) {
-                            this.proveedores = response;
-                        } else {
-                            swal({
-                                title: 'Error!',
-                                text: 'No tiene proveedores registrados',
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                            });
-
-                            this.proveedores = null;
-                        }
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                );
-            }else{
-                this._BodegaService.selectProveedorBySenial({ 'idSenial': e }, token).subscribe(
-                    response => {
-                        if (response) {
-                            this.bodegas = response;
-                        } else {
-                            swal({
-                                title: 'Error!',
-                                text: 'No tiene existencias en bodega para esa señal',
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                            });
-
-                            this.bodegas = null;
-                        }
-                    },
-                    error => {
-                        this.errorMessage = <any>error;
-    
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                );
-            }
-
-        }
-    }
-
     onSearchGeo() {
         var address = document.getElementById('address')['value'];
         var LatLng;
@@ -336,6 +367,7 @@ export class NewSenialUbicacionComponent implements OnInit {
 
         this.senialUbicacion.idMunicipio = this.municipio.id;
         this.senialUbicacion.markers = this.markers;
+        this.senialUbicacion.demarcaciones = this.arrayDemarcaciones;
 
         this._SvSenialUbicacionService.register(this.file, this.senialUbicacion, token).subscribe(
             response => {
