@@ -37,7 +37,17 @@
                         </ng-select>
                     </div>
                 </div>
-                <div class="row"><!-- .row -->
+                <div class="row" *ngIf="!demarcacion"><!-- .row -->
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Linea <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Unidad medida <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="unidadesMedida" [(ngModel)]="senialUbicacion.idUnidadMedida" name="idUnidadMedida" required>
+                        </ng-select>
+                    </div>
                     <div class="col-xs-12 col-lg-4">
                         <label>Cantidad <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
@@ -45,8 +55,6 @@
                     <div class="col-xs-12 col-lg-8">
                         <label>Proveedor <strong class="text-danger">*</strong></label>
                         <ng-select *ngIf="bodegas" [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
-                        </ng-select>
-                        <ng-select *ngIf="proveedores" [multiple]="false" [options]="proveedores" [(ngModel)]="senialUbicacion.idProveedor" name="idProveedor" required>
                         </ng-select>
                     </div>
                 </div>
@@ -61,7 +69,66 @@
                         <ng-select [multiple]="false" [options]="unidadesMedida" [(ngModel)]="senialUbicacion.idUnidadMedida" name="idUnidadMedida" required>
                         </ng-select>
                     </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Cantidad <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.cantidad" name="cantidad" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-8">
+                        <label>Proveedor <strong class="text-danger">*</strong></label>
+                        <ng-select *ngIf="proveedores" [multiple]="false" [options]="proveedores" [(ngModel)]="senialUbicacion.idProveedor" name="idProveedor" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Ancho línea <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.anchoLinea" name="anchoLinea" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Metraje <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.metraje" name="metraje" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Total <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.total" name="total" disabled required />
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Tramo Vial <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.tramoVial" name="tramoVial" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <button (click)="onAddDemarcacion()" class="btn btn-primary" type="button">
+                            <i class="fa fa-plus"></i>
+                            Agregar demarcación
+                        </button>
+                    </div>
                 </div>
+                <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12"><!-- .col -->
+                        <div class="col-xs-12 col-lg-12" *ngIf="tramitesValor?.length > 0">
+                            <table class="table table-bordered table-striped table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Cantidad</th>
+                                        <th>Metraje</th>
+                                        <th>Total</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let demarcacionNew of demarcacion; let i = index">
+                                        <td>{{ demarcacionNew.cantidad }} </td>
+                                        <td>{{ demarcacionNew.metraje }}</td>
+                                        <td>{{ demarcacionNew.total }}</td>
+                                        <td>
+                                            <button (click)="onRemoveDemarcacion(demarcacionNew)" class="btn btn-xs btn-danger" type="button">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
                 <div class="row"><!-- .row -->
                     <div class="col-xs-12 col-lg-6">
                         <label>Adjunto</label>
