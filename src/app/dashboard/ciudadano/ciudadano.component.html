@@ -1,64 +1,110 @@
 <div class="container" >
   <hr>
-  <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">
-              <b class="text-uppercase">Módulo RNC</b>
-              <br>
-              <small>Inscripción de persona natural</small>
-              <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-default">
-                  <i class="fa fa-plus"></i>
-                  <span class="text">Nuevo</span>
-                </button>
+  <div class="row" *ngIf='formSearch'>
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-3">
+      <!-- .col -->
+      <div class="card">
+        <div class="card-header">
+          <h5 class="text-uppercase">
+            <strong>Ciudadanos</strong>
+            <small>Buscar</small>
+          </h5>
+        </div>
+        <div class="card-body">
+          <!-- .card-body -->
+          <form #formSearch="ngForm">
+            <div class="form-group">
+              <div class="row">
+                <!-- .row -->
+                <div class="col-xs-12 col-lg-12">
+                  <label>Tipo de filtro</label>
+                  <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                  <label>Filtro</label>
+                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                </div>
               </div>
-            </h5>
+            </div>
+            <!-- /.row -->
+          </form>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onNew()" class="btn btn-default" *ngIf="!ciudadanos">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
           </div>
-          <div class="card-body">
-            <table class="table" id="dataTables-example">
-                <thead>
-                  <tr>
-                      <th>Id</th>
-                      <th>Identificacion</th>
-                      <th>Ciudadano</th>
-                      <th>Role</th>
-                      <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="odd" *ngFor="let ciudadano of ciudadanos; let i = index">
-                    <td>{{ ciudadano.id }}</td>
-                    <td>
-                      {{ ciudadano.usuario.tipoIdentificacion.nombre }}
-                      <br>
-                      {{ ciudadano.usuario.identificacion }}
-                    </td>
-                    <td>
-                      {{ ciudadano.usuario.primerNombre }} {{ ciudadano.usuario.segundoNombre }} {{ ciudadano.usuario.primerApellido }} {{ ciudadano.usuario.segundoApellido }}
-                    </td>
-                    <td>
-                       {{ ciudadano.usuario.cfgRole?.nombre }}
-                    </td>
-                    <td>
-                      <div class="btn-group">
-                        <button (click)="editCiudadano(ciudadano)" class="btn btn-primary btn-xs" type="button" tooltip content="Editar">
-                          <i class="fa fa-edit"></i>
-                        </button> 
-                        <button (click)="deleteCiudadano(ciudadano.id)"  class="btn btn-danger btn-xs" type="button">
-                          <i class="fa fa-trash"></i>
-                        </button> 
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-            </table>
-            <!-- /.table-responsive --> 
+        </div>
+      </div>
+    </div>
+    <!-- /.col -->
+
+    <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">
+                <b class="text-uppercase">Módulo RNC</b>
+                <br>
+                <small>Inscripción de persona natural</small>
+                <div class="btn-group pull-right">
+                  <button (click)="onNew()" class="btn btn-default">
+                    <i class="fa fa-plus"></i>
+                    <span class="text">Nuevo</span>
+                  </button>
+                </div>
+              </h5>
+            </div>
+            <div class="card-body">
+              <table class="table" id="dataTables-example">
+                  <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Identificación</th>
+                        <th>Ciudadano</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="odd" *ngFor="let ciudadano of ciudadanos; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>
+                        {{ ciudadano.usuario.tipoIdentificacion.nombre }}
+                        <br>
+                        {{ ciudadano.usuario.identificacion }}
+                      </td>
+                      <td>
+                        {{ ciudadano.usuario.primerNombre }} {{ ciudadano.usuario.segundoNombre }} {{ ciudadano.usuario.primerApellido }} {{ ciudadano.usuario.segundoApellido }}
+                      </td>
+                      <td>
+                        <div class="btn-group">
+                          <button (click)="onEdit(ciudadano)" class="btn btn-primary btn-xs" type="button" tooltip content="Editar">
+                            <i class="fa fa-edit"></i>
+                          </button> 
+                          <button (click)="onDelete(ciudadano.id)"  class="btn btn-danger btn-xs" type="button">
+                            <i class="fa fa-trash"></i>
+                          </button> 
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <!-- /.table-responsive --> 
+            </div>
           </div>
         </div>
       </div>
     </div>
     <app-edit *ngIf='formEdit' [ciudadano]="ciudadano" (ready)="ready($event)"></app-edit>
     <app-new-ciudadano *ngIf='formNew' (ready)="ready($event)"></app-new-ciudadano>
+  </div>
 </div>

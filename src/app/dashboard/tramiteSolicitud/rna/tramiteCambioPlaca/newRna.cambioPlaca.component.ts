@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
 import { LoginService } from '../../../../services/login.service';
-
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,6 +12,7 @@ export class NewRnaCambioPlacaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
+    @Input() vehiculo: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
     public tipoCambioList: string[];
@@ -23,13 +24,16 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         'nuevaPlaca': null,
         'documentacion': null,
         'sustrato': null,
+        'campos': null,
         'tramiteFormulario': null,
+        'idVehiculo': null,
         'idFactura': null,
     };
 
     constructor(
-        private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
+        private _VehiculoService: VehiculoService,
+        private _loginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -37,10 +41,31 @@ export class NewRnaCambioPlacaComponent implements OnInit {
     }
     
     enviarTramite() {
+        let token = this._loginService.getToken();
+
         this.datos.tipoCambio = this.tipoCambioSelected;
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-cambioplaca';
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        this.datos.campos = ['placa'];
+        this.datos.idVehiculo = this.vehiculo.id;
+
+        this._VehiculoService.update(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    let resumen = 'Placa anterior '+ this.vehiculo.placa.numero +'<br/>Placa nueva' + this.datos.nuevaPlaca;
+
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

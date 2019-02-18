@@ -34,7 +34,7 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
     public fechaIngreso: any;
     public guiaLlegada: any;
     public empresaEnvio: any;
-    public rut: any;
+    public runt: any;
     public resumen = {};     public datos = {
         'municipioSelected': null,
         'tipoIdentificacionSelected': null,
@@ -42,7 +42,7 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
         'fechaIngreso': null,
         'guiaLlegada': null,
         'empresaEnvio': null,
-        'rut': null,
+        'runt': null,
         'tramiteFormulario': null,
         'idFactura': null,
     };
@@ -99,7 +99,7 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
         this.datos.fechaIngreso = this.fechaIngreso;
         this.datos.guiaLlegada = this.guiaLlegada;
         this.datos.empresaEnvio = this.empresaEnvio;
-        this.datos.rut = this.rut;
+        this.datos.runt = this.runt;
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rnma-radicadocuenta';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

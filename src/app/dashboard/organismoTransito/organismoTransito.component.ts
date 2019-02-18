@@ -62,11 +62,11 @@ export class OrganismoTransitoComponent implements OnInit {
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-forward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-backward"></i>'
         }
       }
    });

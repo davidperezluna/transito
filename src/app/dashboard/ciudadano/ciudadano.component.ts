@@ -14,40 +14,75 @@ declare var $: any;
 export class CiudadanoComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
-	public ciudadanos;
+	public ciudadanos: any = null;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = true;
-  public table:any; 
+	public formIndex = false;
+	public formSearch = true;
+  public table:any = null; 
   public ciudadano: Ciudadano;
+
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
+  }
+
+  public tiposFiltro = [
+    { 'value': '1', 'label': 'Identificación' },
+    { 'value': '2', 'label': 'Nombres y/o apellidos' },
+  ];
 
   constructor(
 		private _CiudadanoService: CiudadanoService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
-  ngOnInit() {
+  ngOnInit() { }
+
+  onSearch() {
     swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardará unos segundos por favor espere.',
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
     });
 
-		this._CiudadanoService.getCiudadano().subscribe(
+    let token = this._LoginService.getToken();
+
+    this._CiudadanoService.searchByFiltros(this.search, token).subscribe(
       response => {
-        this.ciudadanos = response.data;
-        let timeoutId = setTimeout(() => {  
-          this.iniciarTabla();
-        }, 100);
-        swal.close();
-      }, 
+        if (response.status == 'success') {
+          this.ciudadanos = response.data;
+          this.formIndex = true;
+          
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+          
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
+        }else{
+          this.ciudadanos =null;
+          this.formIndex = false;
+
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
@@ -56,6 +91,10 @@ export class CiudadanoComponent implements OnInit {
   }
 
   iniciarTabla() {
+    if (this.table) {
+      this.table.destroy();
+    }
+
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -69,25 +108,24 @@ export class CiudadanoComponent implements OnInit {
         }
       }
     });
+
     this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){
     this.formNew = true;
     this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
       if(isCreado) {
         this.formNew = false;
         this.formEdit = false;
-        this.formIndex = true;
         this.ngOnInit();
       }
   }
-  deleteCiudadano(id:any){
 
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -99,18 +137,17 @@ export class CiudadanoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._CiudadanoService.deleteCiudadano(token,id).subscribe(
             response => {
                 swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.respuesta= response;
-                  this.ngOnInit();
+                  title: 'Eliminado!',
+                  text:'Registro eliminado correctamente.',
+                  type:'success',
+                  confirmButtonColor: '#15d4be',
+                });
+
+                this.ngOnInit();
               }, 
             error => {
               this.errorMessage = <any>error;
@@ -127,7 +164,7 @@ export class CiudadanoComponent implements OnInit {
     })
   }
 
-  editCiudadano(ciudadano:any){
+  onEdit(ciudadano:any){
     this.ciudadano = ciudadano;
     this.formEdit = true;
     this.formIndex = false;
