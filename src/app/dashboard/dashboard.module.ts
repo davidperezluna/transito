@@ -143,7 +143,6 @@ import { CfgAsignacionPlacaSedeModule } from './cfgAsignacionPlacaSede/cfgAsigna
 import { CfgTipoClaseModule } from './cfgTipoClase/cfgTipoClase.module';
 
 import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
-import { MsvRevisionModule } from './msvRevision/msvRevision.module';
 import { MsvCaracterizacionModule } from './msvCaracterizacion/msvCaracterizacion.module';
 import { MsvCategoriaModule } from './msvCategoria/msvCategoria.module';
 import { MsvVariableModule } from './msvVariable/msvVariable.module';
@@ -337,7 +336,6 @@ import {RightsidebarComponent} from '../shared';
       SvCfgZonaModule,
       
       MsvEvaluacionModule,
-      MsvRevisionModule,
       MsvCaracterizacionModule,
       MsvCategoriaModule,
       MsvVariableModule,

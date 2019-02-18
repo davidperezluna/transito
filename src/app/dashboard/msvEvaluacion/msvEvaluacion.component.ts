@@ -8,7 +8,11 @@ import { MsvCategoriaService } from '../../services/msvCategoria.service';
 import { Empresa } from '../empresa/empresa.modelo';
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
-import { MsvCategoria } from '../msvCategoria/msvCategoria.modelo';
+
+import { MsvParametroService } from '../../services/msvParametro.service';
+import { MsvCalificacionService } from '../../services/msvCalificacion.service';
+import { MsvResultadoService } from "../../services/msvResultado.service";
+
 declare var $: any;
 
 @Component({
@@ -16,9 +20,9 @@ declare var $: any;
   templateUrl: './msvEvaluacion.component.html'
 })
 export class MsvEvaluacionComponent implements OnInit {
+  @Output() ready2 = new EventEmitter<any>();
   @Input() msvCategoria;  
   public errorMessage;
-  public id;
   public msvEvaluaciones;
   public respuesta;
 	public formNew = false;
@@ -44,15 +48,40 @@ export class MsvEvaluacionComponent implements OnInit {
   public resumen = {};     public datos = {'parametro': null,
                   'parametro2': null}
 
+
+  public showT = false;
+  public msvParametros;
+  public msvVariables;
+  public msvVariablesLength;
+  public tramiteNombreSelected: any;
+  public criterio;
+  public aplica;
+  public evidencia;
+  public datos2 = {
+    'idEmpresa': null,
+    'valorObtenidoFortalecimiento': null,
+    'valorObtenidoComportamiento': null,
+    'valorObtenidoVehiculoSeguro': null,
+    'valorObtenidoInfraestructuraSegura': null,
+    'valorObtenidoAtencionVictima': null,
+    'valorObtenidoValorAgregado': null,
+  };
+
+
   constructor(
     private _EvaluacionService: MsvEvaluacionService,
     private _EmpresaService: EmpresaService,
     private _RevisionService: MsvRevisionService,
     private _loginService: LoginService,
     private _MsvCategoriaService: MsvCategoriaService,
+
+    private _MsvParametroService: MsvParametroService,
+    private _MsvCalificacionService: MsvCalificacionService,
+    private _MsvResultadoService: MsvResultadoService,
     ){}
     
   ngOnInit() {
+    let token = this._loginService.getToken();
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -314,6 +343,20 @@ export class MsvEvaluacionComponent implements OnInit {
   }
 
   changedCategoria(e){
+    swal({
+      title: 'Cargando Formulario!',
+      text: 'Solo tardará unos segundos por favor espere.',
+      timer: 1500,
+      onOpen: () => {
+        swal.showLoading()
+      }
+    }).then((result) => {
+      if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.timer
+      ) {
+      }
+    })
     if (e) {
       let timeoutId = setTimeout(() => {
         this.categoria = false;
@@ -325,6 +368,23 @@ export class MsvEvaluacionComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.categoria = true; 
+            if (this.categoriaSelected) {
+              this._MsvParametroService.getParametroByCategoriaId(token, e).subscribe(
+                response => {
+                  this.msvParametros = response.data;
+                  if (this.msvParametros) {
+                    //entra aquí si encuentra Parametro                    
+                    this.showT = true;
+                  } else {
+                    swal({
+                      type: 'error',
+                      title: 'Oops...',
+                      text: '¡La categoria no tiene parametros!'
+                    })
+                  }
+                }
+              );
+            }
           }
         },
         error => {
@@ -337,5 +397,124 @@ export class MsvEvaluacionComponent implements OnInit {
         }
       );
     }
+  }
+
+
+  //********************************************************************************* */
+  /* onEnviar() {
+    let token = this._loginService.getToken();
+    this._MsvCalificacionService.newCalificacion(token, this.msvParametros, this.miEmpresa.id).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.ready2.emit(true);
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  } */
+
+  calcularTotal(e, parametro, idCategoria) {
+    console.log(idCategoria);
+    if (idCategoria == 1) {
+      if (e) {
+        this.datos2.valorObtenidoFortalecimiento += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos2.valorObtenidoFortalecimiento -= parametro.valor / parametro.numeroVariables;
+      }
+    } if (idCategoria == 2) {
+      if (e) {
+        this.datos2.valorObtenidoComportamiento += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos2.valorObtenidoComportamiento -= parametro.valor / parametro.numeroVariables;
+      }
+    } if (idCategoria == 3) {
+      if (e) {
+        this.datos2.valorObtenidoVehiculoSeguro += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos2.valorObtenidoVehiculoSeguro -= parametro.valor / parametro.numeroVariables;
+      }
+    } if (idCategoria == 4) {
+      if (e) {
+        this.datos2.valorObtenidoInfraestructuraSegura += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos2.valorObtenidoInfraestructuraSegura -= parametro.valor / parametro.numeroVariables;
+      }
+    } if (idCategoria == 5) {
+      if (e) {
+        this.datos2.valorObtenidoAtencionVictima += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos2.valorObtenidoAtencionVictima -= parametro.valor / parametro.numeroVariables;
+      }
+    } if (idCategoria == 6) {
+      if (e) {
+        this.datos2.valorObtenidoValorAgregado += parametro.valor / parametro.numeroVariables;
+      } else {
+        this.datos2.valorObtenidoValorAgregado -= parametro.valor / parametro.numeroVariables;
+      }
+    }
+  }
+
+  onFinalizar() {
+    let token = this._loginService.getToken();
+
+    this.datos2.idEmpresa = this.miEmpresa.id;
+
+    swal({
+      title: '¿Desea guardar la información para la empresa?',
+      type: 'info',
+      confirmButtonText: 'Confirmar',
+    }).then((result) => {
+      if (result.value) {
+        this._MsvResultadoService.register(this.datos2, token).subscribe(
+          response => {
+            var html =
+              response.message + '</b><br>' +
+              response.message2;
+            if (response.status == 'success') {
+              this.ready2.emit(true);
+              swal({
+                title: 'Perfecto!',
+                html: html,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              })
+            } else {
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              })
+            }
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          }
+        );
+      }
+    });
   }
 }

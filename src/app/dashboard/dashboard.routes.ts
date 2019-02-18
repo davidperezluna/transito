@@ -133,7 +133,6 @@ import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
 
 import { MsvCaracterizacionRoutes } from './msvCaracterizacion/msvCaracterizacion.routes';
 import { MsvEvaluacionRoutes } from './msvEvaluacion/msvEvaluacion.routes';
-import { MsvRevisionRoutes } from './msvRevision/msvRevision.routes';
 import { MsvCategoriaRoutes } from './msvCategoria/msvCategoria.routes';
 import { MsvVariableRoutes } from './msvVariable/msvVariable.routes';
 import { MsvParametroRoutes } from './msvParametro/msvParametro.routes';
@@ -279,7 +278,6 @@ export const DashboardRoutes: Route[] = [
       
       ...MsvCaracterizacionRoutes,
       ...MsvEvaluacionRoutes,
-      ...MsvRevisionRoutes,
       ...MsvCategoriaRoutes,
       ...MsvVariableRoutes,
       ...MsvParametroRoutes,

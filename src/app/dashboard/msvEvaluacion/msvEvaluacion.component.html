@@ -139,11 +139,116 @@
                            <label>Categoria <strong class="text-danger">*</strong></label>
                            <ng-select [multiple]="false" [options]="msvCategorias" (ngModelChange)="changedCategoria($event)" [(ngModel)]="categoriaSelected" required name="idCategoria">
                            </ng-select>
-                          <div>
-                             <div class="col-xs-12 col-lg-12" *ngIf="categoria">
-                                 <app-new-fortalecimiento  [msvCategoriaId] = "categoriaSelected" [miEmpresa] = "miEmpresa" (ready)="ready($event)"></app-new-fortalecimiento>
-                             </div>
-                          </div> 
+
+
+
+                           <div *ngFor="let msvCategoria of msvCategorias; let i=index">
+                              <div class="row" *ngIf="categoriaSelected == i+1 && showT">
+                                 <div class="col-xs-12 col-lg-12">
+                                    <div class="card">
+                                       <div class="card-body">
+                                          <h5 class="m-0">Evaluación</h5>
+                                          <hr>
+                                          <div class="row text-center text-uppercase" style="vertical-align:middle; line-height:normal;">
+                                             <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Parámetro-Definición</b></div>
+                                             <div class="col-lg-10" style="border:1px solid #cccccc;">
+                                                <div class="row">
+                                                   <div class="col-lg-3"><b>Variables</b></div>
+                                                   <div class="col-lg-9">
+                                                      <div class="row">
+                                                         <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Criterio de aval</b></div>
+                                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Aplica</b></div>
+                                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Evidencias de su
+                                                               existencia</b></div>
+                                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Responde a los
+                                                               requerimientos</b></div>
+                                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Valor de la variable</b></div>
+                                                         <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Valor obtenido</b></div>
+                                                         <div class="col-lg-4" style="border:1px solid #cccccc;"><b>Observaciones</b></div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="row" *ngFor="let msvParametro of msvParametros; let i=index">
+                                             <div class="col-lg-12" style="border:1px solid #cccccc;">
+                                                <div class="row">
+                                                   <div class="col-lg-2"
+                                                      style="border:1px solid #cccccc; overflow-y:auto; text-align:center; vertical-align:middle;">{{
+                                                            msvParametro.name }}</div>
+                                                   <div class="col-lg-10" style="border:1px solid #cccccc;">
+                                                      <div class="row" *ngFor="let msvVariable of msvParametro.variables; let i=index">
+                                                         <div class="col-lg-3" style="border:1px solid #cccccc;">{{ msvVariable.name }}</div>
+                                                         <div class="col-lg-9" style="border:1px solid #cccccc;">
+                                                            <div class="row" *ngFor="let msvCriterio of [msvVariable.criterios]; let i=index">
+                                                               <div class="col-lg-2" style="border:1px solid #cccccc;">
+                                                                  {{ msvCriterio.name }}
+                                                               </div>
+                                                               <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"
+                                                                     [(ngModel)]="msvCriterio.aplica" name="aplica{{ msvCriterio.id }}"></div>
+                                                               <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"
+                                                                     [(ngModel)]="msvCriterio.evidencia" name="evidencia{{ msvCriterio.id }}"></div>
+                                                               <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"
+                                                                     (ngModelChange)="calcularTotal($event, msvParametro, categoriaSelected)"
+                                                                     [(ngModel)]="msvCriterio.responde" name="responde{{ msvCriterio.id }}"></div>
+                                                               <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor
+                                                                              /msvParametro.numeroVariables}}</div>
+                                                               <div class="col-lg-2" style="border:1px solid #cccccc;"><label
+                                                                     *ngIf="msvCriterio.responde == true">{{msvParametro.valor
+                                                                                 /msvParametro.numeroVariables}}</label>
+                                                                  <label *ngIf="msvCriterio.responde == false">0</label></div>
+                                                               <div class="col-lg-4" style="border:1px solid #cccccc; overflow: inherit;"><input
+                                                                     type="text" style="width: 100%;" [(ngModel)]="msvCriterio.observacion"></div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 1">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoFortalecimiento"
+                                                   name="valorObtenidoFortalecimiento" type="number" disabled>
+                                             </div>
+                                             <!-- <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div> -->
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 2">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoComportamiento"
+                                                   name="valorObtenidoComportamiento" type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 3">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoVehiculoSeguro"
+                                                   name="valorObtenidoVehiculoSeguro" type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 4">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoInfraestructuraSegura"
+                                                   name="valorObtenidoInfraestructuraSegura" type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 5">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoAtencionVictima"
+                                                   name="valorObtenidoAtencionVictima" type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 6">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoValorAgregado"
+                                                   name="valorObtenidoValorAgregado" type="number" disabled>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="card-footer">
+                                          <div class="btn-group">
+                                             <!-- <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                                                      <i class="fa fa-save"></i>
+                                                      Enviar
+                                                </button> -->
+                                             <button (click)="onFinalizar()" class="btn btn-primary">
+                                                <i class="fa fa-times"></i>
+                                                Finalizar
+                                             </button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                        </div>
                          <!-- fin detalles de la empresa -->
                       </div>

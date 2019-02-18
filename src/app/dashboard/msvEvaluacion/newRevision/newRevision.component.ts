@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MsvRevision } from '../../msvRevision/msvRevision.modelo';
+import { MsvRevision } from '../msvRevision.modelo';
 import { MsvRevisionService } from '../../../services/msvRevision.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { EmpresaService } from '../../../services/empresa.service';
