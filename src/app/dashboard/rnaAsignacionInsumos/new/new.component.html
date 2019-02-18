@@ -40,12 +40,57 @@
                                             [options]="sustratos"
                                             [(ngModel)]="insumoSelected"
                                             required
-                                            (ngModelChange)="changedInsumoSustrato($event)"
                                             [disabled]='frmInsumoSelect'
                                             name="insumoSustratoId">
                                         </ng-select>
                                     </div>
+
                                     <div class="col-lg-4 col-md-4">
+                                        <label>Fecha*</label>
+                                        <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
+                                    </div>
+                                
+                                    <div class="col-lg-12 col-md-12">
+                                        <button (click)="onSearchLote()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">BUscar</button>
+                                    </div>
+
+                                    <div class="tab-pane active col-lg-12 col-md-12" id="lotes" role="tabpanel" *ngIf='lotes'>
+                                        <table class="table " id="dataTables-example">
+                                          <thead>
+                                            <tr>
+                                              <th>No.Acta</th>
+                                              <th>Empresa</th>
+                                              <th>Sede</th>
+                                              <th>Insumo</th>
+                                              <th>Rango Inicio</th>
+                                              <th>Rango Fin</th>
+                                              <th>Cantidad</th>
+                                              <th>Referencia</th>
+                                              <th>Fecha</th>
+                                              <th>Acciones</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr class="odd" *ngFor="let lote of lotes; let i = index">
+                                              <td >{{lote.numeroActa}}</td>
+                                              <td >{{lote.empresa.nombre}}</td>
+                                              <td >{{lote.sedeOperativa.nombre}}</td>
+                                              <td >{{lote.casoInsumo.nombre}}</td>
+                                              <td >{{lote.rangoInicio}}</td>
+                                              <td >{{lote.rangoFin}}</td>
+                                              <td >{{lote.cantidad}}</td>
+                                              <td >{{lote.referencia}}</td>
+                                              <td >{{lote.fecha}}</td>
+                                              <td>
+                                                <button (click)="onAsignarLote(lote)" class="btn btn-outline-success" type="button">Asignar</button> 
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+
+
+                                    <!-- <div class="col-lg-4 col-md-4">
                                         <label>Rango Inicio*</label>
                                         <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.rangoInicio" name="rangoInicio" placeholder="" type="text">
                                     </div>
@@ -58,12 +103,8 @@
                                     <div class="col-lg-4 col-md-4">
                                         <label>Cantidad*</label>
                                         <input class="form-control" [disabled]="true" [(ngModel)]="rnaAsignacionInsumos.numero" name="numero" placeholder="" type="text" required>
-                                    </div>
-        
-                                    <div class="col-lg-4 col-md-4">
-                                        <label>Fecha*</label>
-                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
-                                    </div>
+                                    </div> -->
+                                    
                                 </div>
                             </div>
 
@@ -99,7 +140,7 @@
         
                                     <div class="col-lg-4 col-md-4">
                                         <label>Fecha*</label>
-                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
+                                        <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
                                     </div>
                                 </div>
                             </div>    
@@ -107,7 +148,7 @@
                     </div>    
                 </div>
             </form>
-            <div class="card-footer">
+            <div class="card-footer" *ngIf='frmInsumo'>
                 <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
                 <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
             </div>    

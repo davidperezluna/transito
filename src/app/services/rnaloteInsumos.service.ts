@@ -39,7 +39,6 @@ export class RnaLoteInsumoService {
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/insumo/lote/sede", params, {headers: headers}).map(
 			res => res.json(),
-			this._loogerService.registerLog(token,'INSERT',json,this.url)
 		);
 	}
 
