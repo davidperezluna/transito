@@ -162,6 +162,7 @@ export class MsvEvaluacionComponent implements OnInit {
       this.ngOnInit();
     }
   }
+  
   deletemsvEvaluacion(id:any){
     swal({
       title: '¿Estás seguro?',
@@ -433,7 +434,6 @@ export class MsvEvaluacionComponent implements OnInit {
   } */
 
   calcularTotal(e, parametro, idCategoria) {
-    console.log(idCategoria);
     if (idCategoria == 1) {
       if (e) {
         this.datos2.valorObtenidoFortalecimiento += parametro.valor / parametro.numeroVariables;
