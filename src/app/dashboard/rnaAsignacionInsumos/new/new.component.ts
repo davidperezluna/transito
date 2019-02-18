@@ -7,6 +7,7 @@ import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import {RnaInsumoService} from '../../../services/rnaInsumos.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-new',
@@ -29,12 +30,13 @@ public sustratos:any;
 public insumoSelect:any;
 public loteInsumo:any;
 public insumoSelected:any;
+public lotes:any;
 public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
 public frmInsumo:any=false;
 public frmInsumoSelect:any=true; 
-
+public table:any; 
 constructor(
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
@@ -145,8 +147,7 @@ constructor(
   }
 
   changedSedeOperativa(e){
-    if (e) {
-      console.log('holaaaaa');
+    if (e) {  
       this.frmInsumoSelect = false;
     }
   }
@@ -192,8 +193,7 @@ constructor(
     } 
   }
 
-  changedInsumoSustrato(e){
-    if (e) {
+  onSearchLote(){
       let datos={
         'casoInsumo':this.insumoSelected,
         'sedeOperativa':this.sedeSelected,
@@ -201,11 +201,17 @@ constructor(
       let token = this._loginService.getToken();
       this._rnaRegistroInsumosService.showSedeInsumo(datos,token).subscribe( 
         response => {
-          this.loteInsumo = response.data;
+          
           if (response.status == 'success') {
-            this.rnaAsignacionInsumos.rangoInicio = this.loteInsumo.rangoInicio;
-            this.rnaAsignacionInsumos.rangoFin = this.loteInsumo.rangoFin;
-            this.rnaAsignacionInsumos.numero = this.loteInsumo.cantidad;
+            this.lotes = response.data;
+            if (this.table) {
+              this.table.destroy()
+            }
+            setTimeout(() => {
+              this.iniciarTabla();
+            });
+           
+
           }else{
             swal({
               title: 'Error!',
@@ -225,7 +231,6 @@ constructor(
           }
 
       });
-    } 
   }
 
   onInsumo() {
@@ -233,6 +238,76 @@ constructor(
   }
   onSustrato() {
     this.frmInsumo = false;
+  }
+
+  iniciarTabla(){
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+           oPaginate: {
+           sFirst: '<<',
+           sPrevious: '<',
+           sNext: '>',
+           sLast: '>>'
+        }
+      }
+   });
+   this.table = $('#dataTables-example').DataTable();
+  }
+
+  onAsignarLote(lote){
+
+    swal({
+      title: '¿Confirmar?',
+      text: "¿Desea asignar los sustratos?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._loginService.getToken();
+        this.rnaAsignacionInsumos.loteInsumoId = lote.id;
+        this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelected;
+        this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
+        this.rnaAsignacionInsumos.rangoInicio = lote.rangoInicio;
+        this.rnaAsignacionInsumos.rangoFin = lote.rangoFin;
+        this.rnaAsignacionInsumos.numero = lote.cantidad;
+
+        this._RnaInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
+          response => {
+            this.respuesta = response;
+            if(this.respuesta.status == 'success'){
+              this.ready.emit(true);
+              swal({
+                title: 'Perfecto!',
+                text: 'Registro exitoso!',
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              })
+            }else{
+              swal({
+                title: 'Error!',
+                text: 'El codigo ya se encuentra registrado',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              })
+            }
+          error => {
+              this.errorMessage = <any>error;
+
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+        }); 
+      }
+    })   
   }
 
 }
