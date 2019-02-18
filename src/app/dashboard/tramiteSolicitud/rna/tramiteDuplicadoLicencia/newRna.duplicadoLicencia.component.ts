@@ -16,14 +16,22 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     public tramiteFacturaSelected: any;
 
     public documentacion: any;
-    public resumen = {};     
+    public resumen: any = null;
+
     public datos = {
+        'motivo': null,
         'numeroRunt': null,
         'tramiteFormulario': null,
-        'idFactura': null,
         'numeroLicenciaActual': null,
         'nuevaLicencia': null,
+        'idFactura': null,
     };
+
+    public motivos = [
+        { 'value': 'Pérdida', 'label': 'Pérdida' },
+        { 'value': 'Hurto', 'label': 'Hurto' },
+        { 'value': 'Deterioro', 'label': 'Hurto' },
+    ];
  
     constructor(
         private _RncLicenciaConduccionService: RncLicenciaConduccionService,
@@ -57,8 +65,8 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     enviarTramite() {
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-duplicadolicencia';
+        this.resumen = "Motivo "+ this.datos.motivo +"<br/>";
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-        
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

@@ -84,13 +84,14 @@ export class NewRnaCambioMotorComponent implements OnInit {
 
     enviarTramite() {
         let token = this._loginService.getToken();
-        this.datos.idFactura = this.factura.id;
+
         this.datos.tramiteFormulario = 'rna-cambiomotor';
         this.datos.idTipoIngreso = this.tipoIngresoSelected;
         this.tipoIdentificacion = this.tipoIdentificacionSelected;
-        this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idCombustible = this.combustibleSelected;
         this.datos.campos = ['motor'];
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.idFactura = this.factura.id;
 
         this._VehiculoService.update(this.datos, token).subscribe(
             response => {
@@ -109,7 +110,8 @@ export class NewRnaCambioMotorComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-            });  
+            }
+        );  
             
     }
     onCancelar(){

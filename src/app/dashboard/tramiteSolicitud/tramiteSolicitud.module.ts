@@ -51,9 +51,10 @@ import { NewPropietarioVehiculoComponent } from "./rna/tramiteImportacionTempora
 import { NewVehiculoComponent } from "./rna/tramiteImportacionTemporal/newVehiculo/newVehiculo.component";
 import { NewRnaProrrogaImportacionTemporalComponent } from "./rna/tramiteProrrogaImportacionTemporal/newRna.prorrogaImportacionTemporal.component";
 
+import { TooltipModule, Tooltip } from "ngx-tooltip";
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule, TooltipModule],
     declarations: [
         TramiteSolicitudComponent,
         NewRnaComponent,

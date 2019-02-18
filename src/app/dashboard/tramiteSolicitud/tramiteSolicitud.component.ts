@@ -14,87 +14,127 @@ export class TramiteSolicitudComponent implements OnInit {
   public tipo: any;
   public errorMessage;
 	public id;
-	public respuesta;
 	public tramitesSolicitud;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = true;
-  public table: any;
+  public formIndex = false;
+  public formSearch = true;
+  public table: any = null;
   public tramiteSolicitud: TramiteSolicitud;
   public moduloId = 2;
+
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
+    'idModulo': 2
+  }
+
+  public tiposFiltro = [
+    { 'value': '1', 'label': 'No. de Placa' },
+    { 'value': '2', 'label': 'No. de factura' },
+    { 'value': '3', 'label': 'Fecha' },
+  ];
 
   constructor(
     private _TramiteSolicitudService: TramiteSolicitudService,
     private _route: ActivatedRoute,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
     this._route.params.subscribe(params =>{
       this.tipo = +params["tipo"];
     });
+  }
+
+  onSearch() {
+    this.tramitesSolicitud = null;
     
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._TramiteSolicitudService.getByModulo(this.moduloId).subscribe(
-				response => {
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._TramiteSolicitudService.searchByModuloAndFilter(this.search, token).subscribe(
+      response => {
+        if (response.status == 'success') {
           this.tramitesSolicitud = response.data;
+          this.formIndex = true;
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
-            swal.close();
           }, 100);
-				},
-				error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+        } else {
+          this.formIndex = false;
+
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
   }
-  iniciarTabla(){
+
+  iniciarTabla() {
+    if (this.table) {
+      this.table.empty();
+      this.table.destroy();
+    }
+
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
       oLanguage: {
-           oPaginate: {
-           sFirst: '<<',
-           sPrevious: '<',
-           sNext: '>',
-           sLast: '>>'
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-forward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-backward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
+
+    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado: any){
     if(isCreado) {
       this.formNew = false;
       this.formEdit = false;
-      this.formIndex = true;
+      this.formIndex = false;
       this.ngOnInit();
     }
   }
-  deleteTramiteSolicitud(id: any){
+
+  onDelete(id: any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -106,7 +146,7 @@ export class TramiteSolicitudComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._TramiteSolicitudService.deleteTramiteSolicitud(token,id).subscribe(
             response => {
                 swal({
@@ -116,7 +156,6 @@ export class TramiteSolicitudComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -132,7 +171,7 @@ export class TramiteSolicitudComponent implements OnInit {
     })
   }
 
-  editTramiteSolicitud(tramiteSolicitud: any){
+  onEdit(tramiteSolicitud: any){
     this.tramiteSolicitud = tramiteSolicitud;
     this.formEdit = true;
     this.formIndex = false;

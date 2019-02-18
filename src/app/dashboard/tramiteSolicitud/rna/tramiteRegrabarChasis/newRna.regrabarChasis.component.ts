@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
+import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 
@@ -52,12 +52,12 @@ export class NewRnaRegrabarChasisComponent implements OnInit {
         this._VehiculoService.update(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    let resumen = {
-                        'chasis anterior': this.vehiculo.chasis,
-                        'nuevo numero chasis': this.datos.nuevoNumero,
-                        'motivo': this.datos.motivo,
-                        'numero runt': this.datos.numeroRunt,
-                    };
+                    let resumen = 'Regrabado (SI)' +"<br/>"+
+                        'chasis anterior'+ this.vehiculo.chasis +"<br/>"+
+                        'chasis nuevo'+ this.datos.nuevoNumero +"<br/>"+
+                        'motivo'+ this.datos.motivo +"<br/>"+
+                        'numero runt'+ this.datos.numeroRunt;
+
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                 }
                 error => {

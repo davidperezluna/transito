@@ -1,6 +1,6 @@
 
 <div class="row"><!-- .row -->
-    <div class="col-xs-12 col-lg-12"><!-- .col -->
+    <div class="col-xs-12 col-lg-6"><!-- .col -->
         <div class="card">
             <div class="card-body">
                 <h5 class="m-0">
@@ -8,7 +8,7 @@
                 </h5>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <div class="row justify-content container">
+                <div class="row">
                     <div class="center col-lg-8">
                         <label>Organismo de transito de que proviene*</label>
                         <ng-select
@@ -33,7 +33,7 @@
                         </ng-select>
                     </div>
                     <div class="form-group col-xs-12 col-lg-6">
-                        <label>Nro. Documento<span class="text-danger">*</span></label>
+                        <label>No. Documento<span class="text-danger">*</span></label>
                         <input class="form-control" [(ngModel)]="numeroDocumento"  name="numeroDocumento" type="text" required />
                     </div>
                     <!-- </div>  -->
@@ -51,8 +51,8 @@
                         <input class="form-control" [(ngModel)]="empresaEnvio" name="empresaEnvio" type="text" required />
                     </div>
                     <div class="col-xs-12 col-lg-3">
-                        <label>Nro. RUT</label>
-                        <input class="form-control" [(ngModel)]="rut" name="rut" type="text" required />
+                        <label>Número RUNT</label>
+                        <input class="form-control" [(ngModel)]="runt" name="runt" type="text" required />
                     </div>
                 </div>
             </div>
