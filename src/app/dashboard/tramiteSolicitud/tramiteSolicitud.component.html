@@ -110,7 +110,10 @@
         </div>
       </div><!-- .row -->
     </div>
+
+    <div class="col-xs-12 col-lg-9">
+      <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    </div>
     <app-edit *ngIf='formEdit' [tramiteSolicitud]="tramiteSolicitud" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
   </div>
 </div>

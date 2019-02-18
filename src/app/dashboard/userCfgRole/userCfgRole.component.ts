@@ -62,10 +62,10 @@ export class UserCfgRoleComponent implements OnInit {
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<i class="fa fa-step-forward"></i>',
+          sFirst: '<i class="fa fa-step-backward"></i>',
           sPrevious: '<i class="fa fa-chevron-left"></i>',
           sNext: '<i class="fa fa-chevron-right"></i>',
-          sLast: '<i class="fa fa-step-backward"></i>'
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
    });
