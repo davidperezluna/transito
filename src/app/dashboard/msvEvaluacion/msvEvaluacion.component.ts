@@ -12,6 +12,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { MsvParametroService } from '../../services/msvParametro.service';
 import { MsvCalificacionService } from '../../services/msvCalificacion.service';
 import { MsvResultadoService } from "../../services/msvResultado.service";
+import { IfStmt } from '@angular/compiler/src/output/output_ast';
 
 declare var $: any;
 
@@ -67,6 +68,31 @@ export class MsvEvaluacionComponent implements OnInit {
     'valorObtenidoValorAgregado': null,
   };
 
+  public datosFortalecimiento = {
+    'parametros': null,
+  };
+  public datosComportamiento = {
+    'parametros': null,
+  };
+  public datosVehiculoSeguro = {
+    'parametros': null,
+  };
+  public datosInfraestructuraSegura = {
+    'parametros': null,
+  };
+  public datosAtencionVictimas = {
+    'parametros': null,
+  };
+  public datosValorAgregado = {
+    'parametros': null,
+  };  
+
+  public botonEnviarFortalecimiento = false;
+  public botonEnviarComportamiento = false;
+  public botonEnviarVehiculoSeguro = false;
+  public botonEnviarInfraestructuraSegura = false;
+  public botonEnviarAtencionVictimas = false;
+  public botonEnviarValorAgregado = false;
 
   constructor(
     private _EvaluacionService: MsvEvaluacionService,
@@ -162,7 +188,7 @@ export class MsvEvaluacionComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  
+
   deletemsvEvaluacion(id:any){
     swal({
       title: '¿Estás seguro?',
@@ -364,7 +390,6 @@ export class MsvEvaluacionComponent implements OnInit {
       }, 100);
 
       let token = this._loginService.getToken();
-
       this._MsvCategoriaService.showCategoria(token, e).subscribe(
         response => {
           if (response.status == 'success') {
@@ -373,6 +398,26 @@ export class MsvEvaluacionComponent implements OnInit {
               this._MsvParametroService.getParametroByCategoriaId(token, e).subscribe(
                 response => {
                   this.msvParametros = response.data;
+                  
+                  if(this.datosFortalecimiento.parametros != null && this.categoriaSelected == 1){
+                    this.msvParametros = this.datosFortalecimiento.parametros;
+                  }
+                  if(this.datosComportamiento.parametros != null && this.categoriaSelected == 2){
+                    this.msvParametros = this.datosComportamiento.parametros;
+                  }
+                  if(this.datosVehiculoSeguro.parametros != null && this.categoriaSelected == 3){
+                    this.msvParametros = this.datosVehiculoSeguro.parametros;
+                  }
+                  if(this.datosInfraestructuraSegura.parametros != null && this.categoriaSelected == 4){
+                    this.msvParametros = this.datosInfraestructuraSegura.parametros;
+                  }
+                  if(this.datosAtencionVictimas.parametros != null && this.categoriaSelected == 5){
+                    this.msvParametros = this.datosAtencionVictimas.parametros;
+                  }
+                  if(this.datosValorAgregado.parametros != null && this.categoriaSelected == 6){
+                    this.msvParametros = this.datosValorAgregado.parametros;
+                  }
+                  console.log(this.msvParametros);
                   if (this.msvParametros) {
                     //entra aquí si encuentra Parametro                    
                     this.showT = true;
@@ -433,6 +478,210 @@ export class MsvEvaluacionComponent implements OnInit {
     );
   } */
 
+  onEnviar(){
+    let token = this._loginService.getToken();
+    swal({
+      title: '¡Atención!',
+      text: "Al enviar los datos usted no podrá realizar modificaciones, ¿Desea continuar?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        if (this.categoriaSelected == 1) {
+          this.datosFortalecimiento.parametros = this.msvParametros;
+          this.botonEnviarFortalecimiento = true;
+          this._MsvCalificacionService.newCalificacion(token, this.datosFortalecimiento.parametros , this.miEmpresa.id).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.ready2.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        }
+        if (this.categoriaSelected == 2) {
+          this.datosComportamiento.parametros = this.msvParametros;
+          this.botonEnviarComportamiento = true;
+          this._MsvCalificacionService.newCalificacion(token, this.msvParametros, this.miEmpresa.id).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.ready2.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        }
+        if (this.categoriaSelected == 3) {
+          this.datosVehiculoSeguro.parametros = this.msvParametros;
+          this.botonEnviarVehiculoSeguro = true;
+          this._MsvCalificacionService.newCalificacion(token, this.msvParametros, this.miEmpresa.id).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.ready2.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        }
+        if (this.categoriaSelected == 4) {
+          this.datosInfraestructuraSegura.parametros = this.msvParametros;
+          this.botonEnviarInfraestructuraSegura = true;
+          this._MsvCalificacionService.newCalificacion(token, this.msvParametros, this.miEmpresa.id).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.ready2.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        }
+        if (this.categoriaSelected == 5) {
+          this.datosAtencionVictimas.parametros = this.msvParametros;
+          this.botonEnviarAtencionVictimas = true;
+          this._MsvCalificacionService.newCalificacion(token, this.msvParametros, this.miEmpresa.id).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.ready2.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        }
+        if (this.categoriaSelected == 6) {
+          this.datosValorAgregado.parametros = this.msvParametros;
+          this.botonEnviarValorAgregado = true;
+          this._MsvCalificacionService.newCalificacion(token, this.msvParametros, this.miEmpresa.id).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.ready2.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+        }
+      } 
+    })
+
+  }
+
   calcularTotal(e, parametro, idCategoria) {
     if (idCategoria == 1) {
       if (e) {
@@ -479,9 +728,11 @@ export class MsvEvaluacionComponent implements OnInit {
     this.datos2.idEmpresa = this.miEmpresa.id;
 
     swal({
-      title: '¿Desea guardar la información para la empresa?',
+      title: '¡Atención!',
+      text: '¿Desea guardar la información para la empresa?',
       type: 'info',
       confirmButtonText: 'Confirmar',
+
     }).then((result) => {
       if (result.value) {
         this._MsvResultadoService.register(this.datos2, token).subscribe(

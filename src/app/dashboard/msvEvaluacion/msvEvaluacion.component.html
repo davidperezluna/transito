@@ -232,14 +232,34 @@
                                                    name="valorObtenidoValorAgregado" type="number" disabled>
                                              </div>
                                           </div>
+                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 1" [disabled]="botonEnviarFortalecimiento">
+                                             <i class="fa fa-times"></i>
+                                             Enviar
+                                          </button>
+                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 2" [disabled]="botonEnviarComportamiento">
+                                             <i class="fa fa-times"></i>
+                                             Enviar
+                                          </button>
+                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 3" [disabled]="botonEnviarVehiculoSeguro">
+                                             <i class="fa fa-times"></i>
+                                             Enviar
+                                          </button>
+                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 4" [disabled]="botonEnviarInfraestructuraSegura">
+                                             <i class="fa fa-times"></i>
+                                             Enviar
+                                          </button>
+                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 5" [disabled]="botonEnviarAtencionVictimas">
+                                             <i class="fa fa-times"></i>
+                                             Enviar
+                                          </button>
+                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 6" [disabled]="botonEnviarValorAgregado">
+                                             <i class="fa fa-times"></i>
+                                             Enviar
+                                          </button>
                                        </div>
                                        <div class="card-footer">
                                           <div class="btn-group">
-                                             <!-- <button (click)="onEnviar()" class="btn btn-primary" type="button">
-                                                      <i class="fa fa-save"></i>
-                                                      Enviar
-                                                </button> -->
-                                             <button (click)="onFinalizar()" class="btn btn-primary">
+                                             <button (click)="onFinalizar()" *ngIf="datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null" class="btn btn-default">
                                                 <i class="fa fa-times"></i>
                                                 Finalizar
                                              </button>
