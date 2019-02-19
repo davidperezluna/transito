@@ -251,6 +251,25 @@ export class NewSenialUbicacionComponent implements OnInit {
         }
     }
 
+    onCalcularTotal() {
+        let cantidad, anchoLinea, metraje;
+        cantidad = this.demarcacionNew.cantidad;
+        anchoLinea = this.demarcacionNew.anchoLinea;
+        metraje = this.demarcacionNew.metraje;
+
+        if (cantidad == 0 || anchoLinea == 0 || metraje == 0) {
+            swal({
+                title: 'Alerta!',
+                text: 'La cantidad y/o el ancho de línea y/o  el metraje no pueden estar en 0',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            this.demarcacionNew.total = 0;
+        } else {
+            this.demarcacionNew.total = cantidad * (anchoLinea * metraje);
+        }
+    }
+
     onAddDemarcacion() {
         this.arrayDemarcaciones.push(
             {
@@ -263,8 +282,6 @@ export class NewSenialUbicacionComponent implements OnInit {
                 'idUnidadMedida': this.seniales.idUnidadMedida
             }
         );
-
-        console.log(this.arrayDemarcaciones);
     }
 
     onRemoveDemarcacion(demarcacion) {

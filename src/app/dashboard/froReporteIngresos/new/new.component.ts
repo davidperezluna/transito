@@ -25,7 +25,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.froReporteIngresos = new FroReporteIngresos(null, null, null);
+        this.froReporteIngresos = new FroReporteIngresos(null, null, null, null);
 
         this._SedeOperativaService.getSedeOperativaSelect().subscribe(
             response => {

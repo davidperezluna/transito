@@ -314,6 +314,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let nit = {
             'nit': this.nit,
         };
+        
         this._EmpresaService.showNit(token, nit).subscribe(
             response => {
                 response = response;

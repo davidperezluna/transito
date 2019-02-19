@@ -1,302 +1,325 @@
 <hr>
 <div class="row">
-    <div class="col-md-12" *ngIf="formNew">
+    <div class="col-xs-12 col-lg-12" *ngIf="formNew">
         <form #facturaForm="ngForm">
-            <div class="card">
-            <div class="card-body">
-                <h5 class="m-0">Nueva Factura</h5>
-                <table class="table table-bordered table-striped" *ngIf="funcionario">
-                    <tbody>
-                      <tr class="odd">
-                        <td>
-                            <strong>Fecha Expedición</strong>
-                            <br>
-                            {{ date| date: 'yyyy-MM-dd' }}
-                        </td>
-                        <td>
-                            <strong>Hora</strong>
-                            <br>
-                            {{ date| date: 'h:m:ss' }}
-                        </td>
-                        <td>
-                            <strong>Sede operativa</strong>
-                            <br>
-                            {{ sedeOperativa.nombre }}
-                        </td> 
-                        <td>
-                            <strong>Fctura No.</strong>
-                            <br>
-                            {{ factura.numero }}
-                        </td>
-                        <td>
-                            <strong>Fecha vencimiento</strong>
-                            <br>
-                            {{ date| date: 'yyyy-MM-dd' }}
-                        </td>
-                      </tr>
-                    </tbody>
-                </table>
-               
-                <div class="col-md-12 ">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Tipo Recaudo <b class="text-danger">*</b></label>
-                            <ng-select 
-                                [multiple]="false" 
-                                [options]="tiposRecaudo" 
-                                [(ngModel)]="tipoRecaudoSelected" 
-                                required 
-                                name="tiposRecaudoId">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Modulo <b class="text-danger" >*</b></label>
-                            <ng-select
-                                [disabled]="tramitesValor?.length > 0"
-                                [multiple]="false"
-                                [options]="modulos"
-                                [(ngModel)]="factura.idModulo"
-                                (ngModelChange)="onChangedModulo($event)"
-                                required
-                                name="moduloId">
-                            </ng-select>
-                            <br><br>
-                        </div> 
-                    </div>
-                </div> 
-
-                <div class="form-group row col-xs-12 col-lg-12" *ngIf="modulo">
-                    <div class="col-xs-12 col-lg-12">
-                        <h4>Datos del solicitante</h4>
-                        <hr>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <ng-select [multiple]="false" placeholder="Tipo Identificacion" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacionId">
-                        </ng-select>
-                    </div>
-
-                    <div class="col-xs-12 col-lg-6">
-                        <div class="input-group" [ngClass]="{'has-danger' : isErrorCiudadano,'has-success': isExistCiudadano}">
-                            <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="numeroIdentificacion" required />
-                            <span class="input-group-btn">
-                                <button (click)="isCiudadano()" [ngClass]="{'btn-danger' : isErrorCiudadano}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                            </span>
-                        </div> 
-                    </div>
-                </div>  
-
-                <app-new-ciudadano *ngIf='newCiudadanoForm' [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (readyCiudadano)="readyCiudadano($event)"></app-new-ciudadano>
-                 
-                <div class="container col-xs-12 col-lg-12" *ngIf='isExistCiudadano'>
-                    <table class="table table-bordered " id="dataTables-example">
+            <div class="card"><!-- .card -->
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <b class="text-uppercase">Nueva factura de trámites</b>
+                    </h5>
+                </div>
+                <div class="card-body"><!-- .card-body -->
+                    <table class="table table-bordered table-striped" *ngIf="funcionario">
                         <tbody>
-                            <tr class="odd">
-                                <td>
-                                    <b>Tipo de identificación</b>
-                                    <br>
-                                    {{ ciudadano.tipoIdentificacion.nombre }}
-                                </td>
-                                <td>
-                                    <b>Numero de identificación</b>
-                                    <br>
-                                    {{ ciudadano.identificacion }}
-                                </td>
-                                <td>
-                                    <b>Ciudadano</b>
-                                    <br> 
-                                    {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido }}
-                                </td>
-                            </tr>
+                        <tr class="odd">
+                            <td>
+                                <strong>Fecha Expedición</strong>
+                                <br>
+                                {{ date| date: 'yyyy-MM-dd' }}
+                            </td>
+                            <td>
+                                <strong>Hora</strong>
+                                <br>
+                                {{ date| date: 'h:m:ss' }}
+                            </td>
+                            <td>
+                                <strong>Sede operativa</strong>
+                                <br>
+                                {{ sedeOperativa.nombre }}
+                            </td> 
+                            <td>
+                                <strong>Fctura No.</strong>
+                                <br>
+                                {{ factura.numero }}
+                            </td>
+                            <td>
+                                <strong>Fecha vencimiento</strong>
+                                <br>
+                                {{ date| date: 'yyyy-MM-dd' }}
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
-                </div>
-
-                <div class="col-xs-12 col-lg-12" *ngIf="modulo?.vehiculo && modulo">
-                    <div class="input-group" [ngClass]="{'has-danger' : isErrorVehiculo,'has-success': isExistVehiculo}">
-                        <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo" />
-                        <span class="input-group-btn">
-                            <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isErrorVehiculo}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
-                        </span>
-                        
-                    </div>
-                    <br>
-
-                    <div class="has-danger" *ngIf="isErrorVehiculo" >
-                        <div class="form-control-feedback has-danger has-error">{{msj}}</div><br>
-                    </div>
-    
-                    <div class="has-success" *ngIf="isExistVehiculo" >
-                        <!-- tabla de detalles del vehiculo sin placa -->
+                
+                    <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-12 col-lg-12" >
-                                <h5 class="card-title"><small>Detalles del vehiculo encontrado</small></h5>
-                                <table class="table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <b>Nro.Factura: </b>
-                                                {{ vehiculo.numeroFactura }}
-                                            </td>
-                                            <td>
-                                                <b>Servicio: </b>
-                                                {{ vehiculo.servicio?.nombre }}
-                                            </td>
-                                            <td>
-                                                <b>Clase de vehículo: </b>
-                                                {{ vehiculo.clase?.nombre }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <b>Nro.Motor: </b>
-                                                {{ vehiculo.motor }}
-                                            </td>
-                                            <td>
-                                                <b>Nro.Chasis: </b>
-                                                {{ vehiculo.chasis }}
-                                            </td>
-                                            <td>
-                                                <b>Nro.Serie: </b>
-                                                {{ vehiculo.serie }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <b>Nro.VIN: </b>
-                                                {{ vehiculo.vin }}
-                                            </td>
-                                            <td>
-                                                <b>Nro.Factura compra venta</b>
-                                                {{ vehiculo.numeroFactura }}
-                                            </td>
-                                            <td>
-                                                <b>Fecha compra venta</b>
-                                                {{ vehiculo.fechaFactura }}
-                                            </td>
-                                        </tr>
-                                    </tbody> 
-                                </table>
-                            </div><!-- fin detalles del vehiculo -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-lg-12" *ngIf="(isExistVehiculo) || (isExistCiudadano)">
-                    <label>Tramites*</label>
-                    <ng-select
-                        [multiple]="false"
-                        [options]="tramitesPrecio"
-                        [(ngModel)]="tramitePrecioSelected"
-                        required
-                        name="tramitePrecioId">
-                    </ng-select>
-                    <div class="card-footer">
-                        <button (click)="btnNewTramite()" class="btn btn-primary pull-right">Agregar</button>
-                    </div>
-                    <br><br>
-                </div>
-
-
-                <div class="col-xs-12 col-lg-12" *ngIf="isCiudadanoForm || isEmpresaForm">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h5 class="text-uppercase">Propietarios</h5>
-                                <p class="text-uppercase">Valor retefuente: {{ valorRetefuente }}</p>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Módulo <b class="text-danger" >*</b></label>
+                                <ng-select
+                                    [disabled]="tramitesValor?.length > 0"
+                                    [multiple]="false"
+                                    [options]="modulos"
+                                    [(ngModel)]="factura.idModulo"
+                                    (ngModelChange)="onChangedModulo($event)"
+                                    required
+                                    name="moduloId">
+                                </ng-select>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <table class="table table-bordered" *ngIf="isCiudadanoForm">
-                                <tbody>
-                                    <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
-                                        <td>
-                                            <strong>Nombre: </strong>
-                                            {{ propietarioVehiculo.ciudadano?.usuario.primerNombre }} {{ propietarioVehiculo.ciudadano?.usuario.primerApellido }}
-                                        </td>
-                                        <td>
-                                            <strong>Identificación: </strong>
-                                            {{ propietarioVehiculo.ciudadano?.usuario.identificacion }}
-                                        </td>
-                                        <td> 
-                                            <div class="custom-control custom-checkbox"  >
-                                                <input (change)="onVendedorSelect($event,propietarioVehiculo.id)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
-                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}$</p><p *ngIf="!propietarioVehiculo.state">0$</p></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody> 
-                            </table> 
-
-                            <table class="table table-bordered" *ngIf="isEmpresaForm">
-                                <tbody>
-                                    <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
-                                        <td>
-                                            <strong>Nit: </strong>
-                                            {{propietarioVehiculo.empresa?.nit}}
-                                            <br>
-                                            <strong>Nombre: </strong>
-                                            {{propietarioVehiculo.empresa?.nombre}}
-                                        </td>
-                                        <td> 
-                                            <div class="custom-control custom-checkbox"  >
-                                                <input (change)="onVendedorSelect($event,propietarioVehiculo.id)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
-                                                <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">${{valorRetefuenteUnitario}}</p><p *ngIf="!propietarioVehiculo.state">$0</p></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody> 
-                            </table>
-                        </div>
-                        <div class="card-footer">
-                            <button (click)="onCancelarTraspaso()" class="btn btn-default">
-                                <i class="fa fa-times"></i>
-                                Cancelar
-                            </button>
-                            <!-- <button (click)="btnRetefunete()" [disabled]='vendedores == 0' class="btn btn-primary pull-right">Aceptar</button> -->
-                        </div>
                     </div>
-                </div> 
-                <div class="col-xs-12 col-lg-12" *ngIf="tramitesValor?.length > 0">
-                    <table class="table" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Valor</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd" *ngFor="let tramiteValor of tramitesValor; let i = index">
-                                <td >{{tramiteValor.nombre}}</td>
-                                <td *ngIf='tramiteValor.valor'>{{ tramiteValor.valor | currency: 'COP' }}</td>
-                                <td *ngIf='!tramiteValor.valor'>{{ 0 | currency: 'COP' }}</td>
-                                <td>
-                                    <button (click)="deleteTramiteValor(tramiteValor)"  class="btn btn-xs btn-danger" type="button">
-                                        <i class="fa fa-trash"></i>
-                                    </button> 
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br>
-                <div class="card-footer">
+
+                    <hr>
+
+                    <div class="form-group" *ngIf="modulo">
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <b class="text-uppercase">Buscar solicitante</b>
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-4">
+                                        <ng-select [multiple]="false" placeholder="Tipo Identificacion" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tiposIdentificacionId">
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-4">
+                                        <div class="input-group" [ngClass]="{'has-danger' : isErrorCiudadano,'has-success': isExistCiudadano}">
+                                            <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="numeroIdentificacion" required />
+                                            <span class="input-group-btn">
+                                                <button (click)="onSearchCiudadano()" [ngClass]="{'btn-danger' : isErrorCiudadano}" class="btn btn-default btn-success" ngxclipboard="" type="button">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
+
+                        <div class="row"><!-- .row -->
+                            <div class="container col-xs-12 col-lg-12" *ngIf='isExistCiudadano'>
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr class="odd">
+                                            <td>
+                                                <b>Tipo de identificación</b>
+                                                <br> {{ ciudadano.tipoIdentificacion.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Numero de identificación</b>
+                                                <br> {{ ciudadano.identificacion }}
+                                            </td>
+                                            <td>
+                                                <b>Ciudadano</b>
+                                                <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido
+                                                }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <app-new-ciudadano *ngIf='newCiudadanoForm' [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (readyCiudadano)="readyCiudadano($event)"></app-new-ciudadano>
+                        </div><!-- /.row -->
+                    </div>  
+
+
+                    <div class="form-group" *ngIf="modulo?.vehiculo && modulo"><!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-6">
+                                <b class="text-uppercase">Buscar vehiculo</b>
+                                <div class="input-group" [ngClass]="{'has-danger' : isErrorVehiculo,'has-success': isExistVehiculo}">
+                                    <input type="text" class="form-control" placeholder="Vin,Chasis,Motor,Serie" [(ngModel)]="vehiculoCriterio" name="placaVehiculo"
+                                    />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchVehiculo()" [ngClass]="{'btn-danger' : isErrorVehiculo}" class="btn btn-default btn-success"
+                                            ngxclipboard="" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <br>
+                                <div class="has-danger" *ngIf="isErrorVehiculo">
+                                    <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <div class="has-success" *ngIf="isExistVehiculo">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-lg-12">
+                                            <table class="table table-bordered table-striped">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Nro.Factura: </b>
+                                                            {{ vehiculo.numeroFactura }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Servicio: </b>
+                                                            {{ vehiculo.servicio?.nombre }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Clase de vehículo: </b>
+                                                            {{ vehiculo.clase?.nombre }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Nro.Motor: </b>
+                                                            {{ vehiculo.motor }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Nro.Chasis: </b>
+                                                            {{ vehiculo.chasis }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Nro.Serie: </b>
+                                                            {{ vehiculo.serie }}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Nro.VIN: </b>
+                                                            {{ vehiculo.vin }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Nro.Factura compra venta</b>
+                                                            {{ vehiculo.numeroFactura }}
+                                                        </td>
+                                                        <td>
+                                                            <b>Fecha compra venta</b>
+                                                            {{ vehiculo.fechaFactura }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- fin detalles del vehiculo -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group"><!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12" *ngIf="(isExistVehiculo) || (isExistCiudadano)">
+                                <label>Trámites</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="tramitesPrecio"
+                                    [(ngModel)]="tramitePrecioSelected"
+                                    required
+                                    name="tramitePrecioId">
+                                </ng-select>
+                                <div class="card-footer">
+                                    <button (click)="addNewTramite()" class="btn btn-primary pull-right">
+                                        <i class="fa fa-plus"></i>
+                                        Agregar
+                                    </button>
+                                </div>
+                                <br><br>
+                            </div>
+                        </div><!-- /.row -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group"><!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12" *ngIf="isCiudadanoForm || isEmpresaForm">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h5 class="text-uppercase"><b>Propietarios</b></h5>
+                                            <p>Valor retefuente: ${{ valorRetefuente }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-bordered table-striped" *ngIf="isCiudadanoForm">
+                                            <tbody>
+                                                <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
+                                                    <td>
+                                                        <strong>Nombre: </strong>
+                                                        {{ propietarioVehiculo.ciudadano?.usuario.primerNombre }} {{ propietarioVehiculo.ciudadano?.usuario.primerApellido }}
+                                                    </td>
+                                                    <td>
+                                                        <strong>Identificación: </strong>
+                                                        {{ propietarioVehiculo.ciudadano?.usuario.identificacion }}
+                                                    </td>
+                                                    <td> 
+                                                        <div class="custom-control custom-checkbox"  >
+                                                            <input (change)="onVendedorSelect($event,propietarioVehiculo.id)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
+                                                            <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}$</p><p *ngIf="!propietarioVehiculo.state">0$</p></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody> 
+                                        </table> 
+            
+                                        <table class="table table-bordered table-striped" *ngIf="isEmpresaForm">
+                                            <tbody>
+                                                <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
+                                                    <td>
+                                                        <strong>NIT: </strong>
+                                                        {{propietarioVehiculo.empresa?.nit}}
+                                                        <br>
+                                                        <strong>Nombre: </strong>
+                                                        {{propietarioVehiculo.empresa?.nombre}}
+                                                    </td>
+                                                    <td> 
+                                                        <div class="custom-control custom-checkbox"  >
+                                                            <input (change)="onVendedorSelect($event,propietarioVehiculo.id)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}" type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
+                                                            <label class="custom-control-label" for="{{propietarioVehiculo.id}}"><p *ngIf="propietarioVehiculo.state">${{valorRetefuenteUnitario}}</p><p *ngIf="!propietarioVehiculo.state">$0</p></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody> 
+                                        </table>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button (click)="onCancelarTraspaso()" class="btn btn-default">
+                                            <i class="fa fa-times"></i>
+                                            Cancelar
+                                        </button>
+                                        <!-- <button (click)="btnRetefunete()" [disabled]='vendedores == 0' class="btn btn-primary pull-right">Aceptar</button> -->
+                                    </div>
+                                </div>
+                            </div> 
+                        </div><!-- /.row -->
+                    </div><!-- /.form-group -->
+
+                    <div class="form-group"><!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12" *ngIf="tramitesValor?.length > 0">
+                                <table class="table table-bordered table-striped table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr class="text-center text-uppercase">
+                                            <th>Nombre</th>
+                                            <th>Valor</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let tramiteValor of tramitesValor; let i = index">
+                                            <td>{{tramiteValor.nombre}}</td>
+                                            <td *ngIf='tramiteValor.valor'>{{ tramiteValor.valor | currency: 'COP' }}</td>
+                                            <td *ngIf='!tramiteValor.valor'>{{ 0 | currency: 'COP' }}</td>
+                                            <td>
+                                                <button (click)="deleteTramiteValor(tramiteValor)" class="btn btn-xs btn-danger" type="button">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!-- /.row -->
+                    </div><!-- /.form-group -->
+                </div><!-- /.card-body -->
+                <div class="card-footer" *ngIf="tramitesValor && tramitesValor?.length > 0"><!-- .card-footer -->
                     <div class="btn-group">
-                        <button (click)="onCancelar()" class="btn btn-default">
-                            <i class="fa fa-times"></i>
-                            Cancelar
-                        </button>
-                        <a (click)="onImprimir()" *ngIf="tramitesValor && tramitesValor?.length > 0" class="btn btn-success" target="_blank">
-                            <i class="fa fa-file-pdf-o"></i>
-                            Previsualizar
-                        </a>
                         <button (click)="onEnviar()"  class="btn btn-primary" type="button">
                             <i class="fa fa-save"></i>
                             Enviar
                         </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                        <a (click)="onImprimir()" class="btn btn-success" target="_blank">
+                            <i class="fa fa-file-pdf-o"></i>
+                            Previsualizar
+                        </a>
                     </div>
-                </div>    
-            </div>
-        </div>
-    </form>
+                </div><!-- /.card-footer -->    
+            </div><!-- /.card -->
+        </form>
+    </div>
 </div>

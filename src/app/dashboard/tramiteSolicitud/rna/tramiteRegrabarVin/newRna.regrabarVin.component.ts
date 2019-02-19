@@ -16,36 +16,39 @@ export class NewRnaRegrabarVinComponent implements OnInit {
     @Input() factura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any; 
-    public tipoRegrabacionList: string[];
-    public tipoRegrabacionSelected: any;
-    public motivoList: string[];
     public motivoSelected: any;
-    public resumen = {};     
+    public resumen: any = null;
+    
+    public motivos = [
+        { 'value': 'Pérdida total', 'label': 'Pérdida total' },
+        { 'value': 'Deterioro', 'label': 'Deterioro' },
+        { 'value': 'Improntas ilegales', 'label': 'Improntas ilegales' },
+        { 'value': 'Improntas ilegibles', 'label': 'Improntas ilegibles' },
+        { 'value': 'Hurto', 'label': 'Hurto' },
+    ];
+
     public datos = {
         'tipoRegrabacion': null,
         'motivo': null,
         'nuevoNumero': null,
         'numeroRunt': null,
+        'campos': null,
         'tramiteFormulario': null,
         'idFactura': null,
         'idVehiculo': null,
-        'campos': null,
     };
 
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() {
-        this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
-    }
+    ngOnInit() { }
 
     enviarTramite() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        this.datos.motivo = this.motivoSelected;
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-regrabarvin';
         this.datos.idVehiculo = this.vehiculo.id;

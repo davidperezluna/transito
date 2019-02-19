@@ -4,7 +4,6 @@ import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { MflTipoRecaudoService } from '../../../services/mflTipoRecaudo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { ModuloService } from '../../../services/modulo.service';
@@ -32,9 +31,7 @@ public vehiculoSelected: any;
 public funcionario: boolean = false;
 public solicitanteSelected: any;
 public apoderadoSelected: any;
-public tipoRecaudoSelected: any;
 public date:any;
-public tiposRecaudo:any;
 public sedeOperativa:any;
 public tiposIdentificacion:any;
 public isErrorCiudadano: any;
@@ -70,10 +67,9 @@ constructor(
   private _FacturaService: FacturaService,
   private _TramitePrecioService: TramitePrecioService,
   private _CiudadanoService: CiudadanoService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   private _tipoIdentificacionService: TipoIdentificacionService,
   private _FuncionarioService: MpersonalFuncionarioService,
-  private _MflTipoRecaudoService: MflTipoRecaudoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _ModuloService: ModuloService,
   private _CfgValorVehiculoService: CfgValorVehiculoService,
@@ -88,9 +84,9 @@ constructor(
       }
     });
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
-    let identity = this._loginService.getIdentity();
+    let identity = this._LoginService.getIdentity();
 
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
@@ -156,20 +152,6 @@ constructor(
     this.factura = new Factura(null, null,null, null, null, null, null, null, null, null);
    
     var datePiper = new DatePipe(this.date);
-
-    this._MflTipoRecaudoService.select().subscribe(
-      response => {
-        this.tiposRecaudo = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
   }
 
   onCancelar(){
@@ -177,14 +159,23 @@ constructor(
   }
 
   onEnviar(){
-    let token = this._loginService.getToken();
+    swal({
+      title: 'Registrando factura!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
     
     let datos = {
       'factura': this.factura,
       'tramitesValor': this.tramitesValor,
       'valorVehiculoId': this.valorVehiculoId,
       'propietarios': this.propietariosVehiculoRetefuente,
-      'retencion': this.valorRetefuenteUnitario
+      'retencion': this.valorRetefuenteUnitario,
+      'idTipoRecaudo': 1,
     }
 
     this._FacturaService.register(datos, token).subscribe(
@@ -192,19 +183,20 @@ constructor(
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
           this.ready.emit(true);
+
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         } else {
           swal({
             title: 'Error!',
-            text: 'El factura ' + this.factura.numero + ' ya se encuentra registrado',
+            text: 'El factura ' + this.factura.numero + ' ya se encuentra registrada',
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -213,12 +205,21 @@ constructor(
             alert("Error en la petición");
           }
         }
-      });
+      }
+    );
   }
 
-  isCiudadano() {
-    console.log(this.tipoIdentificacionSelected);
-    let token = this._loginService.getToken();
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando ciudadano!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
     let datos = {
       'identificacion':this.identificacion,
       'tipoIdentificacion': this.tipoIdentificacionSelected,
@@ -240,6 +241,8 @@ constructor(
 
           this.newCiudadanoForm = true;
         }
+
+        swal.close();
       error => {
           this.errorMessage = <any>error;
           if(this.errorMessage != null){
@@ -250,21 +253,16 @@ constructor(
     });
   }
 
-  onKeyValidateVehiculo(){
+  onSearchVehiculo(){
     swal({
-      title: 'Buscando Vehiculo!',
+      title: 'Buscando vehiculo!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    let token = this._loginService.getToken();
+    });
+
+    let token = this._LoginService.getToken();
 
     this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token,this.vehiculoCriterio).subscribe(
       response => { 
@@ -311,12 +309,22 @@ constructor(
   }
 
   onChangedModulo(e){
+    swal({
+      title: 'Cargando trámites disponibles!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     if (e) {
-      let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
       this._ModuloService.showModulo(token, this.factura.idModulo).subscribe(
         response => {
           this.modulo = response.data;
+          
+          swal.close();
         },
         error => {
           this.errorMessage = <any>error;
@@ -345,8 +353,16 @@ constructor(
 
   }
 
-  btnNewTramite(){ 
-    let token = this._loginService.getToken(); 
+  addNewTramite(){
+    swal({
+      title: 'Agregando trámite!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken(); 
 
     if (this.modulo.abreviatura == 'RNA') {
       if (!this.propietario) {
@@ -361,16 +377,18 @@ constructor(
                   'nombre': this.tramitePrecio.nombre,
                   'valor': this.tramitePrecio.valorTotal
                 }
-              )
+              );
+
+              swal.close();
             } else {
               swal({
                 title: 'Sin propietarios!',
                 text: 'Necesita facturar matricula inicial para este vehiculo',
                 type: 'error',
                 confirmButtonText: 'Aceptar'
-              })
+              });
             }
-
+            
           },
           error => {
             this.errorMessage = <any>error;
@@ -514,7 +532,7 @@ constructor(
   }
 
   // btnRetefunete(){
-  //   let token = this._loginService.getToken();
+  //   let token = this._LoginService.getToken();
   //   this._TramitePrecioService.showTramitePrecio(token,this.tramitePrecioSelected).subscribe(
   //     response => {
   //       this.tramitePrecio = response.data;
@@ -548,7 +566,7 @@ constructor(
   }
 
   onImprimir(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     let datos = {
       'factura':this.factura,
       'tramitesValor': this.tramitesValor,
