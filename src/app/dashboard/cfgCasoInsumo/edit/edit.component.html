@@ -25,18 +25,9 @@
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Referencia
-                                <strong class="text-danger">*</strong>
                             </label>
-                            <input class="form-control" [(ngModel)]="cfgCasoInsumo.referencia" name="referencia" type="text" required />
+                            <input class="form-control" [(ngModel)]="cfgCasoInsumo.referencia" name="referencia" type="text" />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Valor
-                                <strong class="text-danger">*</strong>
-                            </label>
-                            <input class="form-control" [(ngModel)]="cfgCasoInsumo.valor" name="valor" type="text" required />
-                        </div>
-                        
-
                     </div>
                 </form>
             </div>
@@ -53,5 +44,43 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card" *ngIf='!formNewValor'>
+            <div class="card-header">
+            <h5 class="card-title">
+                <b class="text-uppercase">Configuración</b>
+                <br>
+                <small>Valores para {{cfgCasoInsumo.nombre}}</small>
+                <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                    <i class="fa fa-plus"></i>
+                    <span class="text">Nuevo</span>
+                </button>
+                </div>
+            </h5>
+            </div>
+            <div class="card-body">
+            <table class="table " id="dataTables-example-valor">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Valor</th>
+                    <th>Fecha</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="odd" *ngFor="let valor of valores; let i = index">
+                    <td>{{valor.id}}</td>
+                    <td>{{valor.valor}}</td>
+                    <td>{{valor.fecha}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- /.table-responsive -->
+            </div>
+        </div>
+        <app-new-valor *ngIf='formNewValor' [cfgCasoInsumo]="cfgCasoInsumo" (readyValor)="readyValor($event)"></app-new-valor>
     </div>
 </div>
