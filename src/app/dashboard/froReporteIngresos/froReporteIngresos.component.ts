@@ -23,19 +23,25 @@ declare var $: any;
 export class FroReporteIngresosComponent implements OnInit {
     public errorMessage;
     public respuesta;
-    public ReporteIngresoss;
+    public reporteIngresoss;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
     public table: any;
     public tiposRecaudo;
     public tipoRecaudoSelected;
-    public froReporteIngreso: FroReporteIngresos;
+    public froReporteIngresos: FroReporteIngresos;
     public fecha;
     public date;
-
+    public tablaTramites = false;
+    public tablaComparendos = false;
+    
     public sedeOperativaSelected;
     public sedes;
+
+    public tramites;
+    public comparendos;
+    public cant;
 
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
@@ -50,6 +56,8 @@ export class FroReporteIngresosComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.froReporteIngresos = new FroReporteIngresos(null, null, null, null);
+
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'dd/MM/yyyy HH:mm:ss a');
@@ -87,7 +95,7 @@ export class FroReporteIngresosComponent implements OnInit {
         );
         this._SedeOperativaService.getSedeOperativaSelect().subscribe(
             response => {
-                this.sedes = response.data;
+                this.sedes = response;
 
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
@@ -154,11 +162,43 @@ export class FroReporteIngresosComponent implements OnInit {
 
     onEnviar(){
         let token = this._LoginService.getToken();
-
+        this.froReporteIngresos.idSedeOperativa = this.sedeOperativaSelected;
         if(this.tipoRecaudoSelected == 1){
-            this._FroTramiteService.getTramitePorFecha(this.froReporteIngreso, token).subscribe(
+            this._FroTramiteService.getTramitePorFecha(this.froReporteIngresos, token).subscribe(
                 response => {
                     if (response.status == 'success') {
+                        this.tramites = response.data;
+                        this.cant = response.cant;
+                        this.tablaTramites = true;
+                        swal({
+                            title: 'Perfecto!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        } else if(this.tipoRecaudoSelected == 2) {
+            this._ComparendoService.getComparendoByFecha(this.froReporteIngresos, token).subscribe(
+                response => {
+                    if (response.status == 'success') {
+                        this.comparendos = response.data;
+                        this.tablaComparendos = true;
                         swal({
                             title: 'Perfecto!',
                             text: response.message,

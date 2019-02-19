@@ -14,13 +14,13 @@
                         name="idSedeOperativa">
                     </ng-select>
                 </div>
-                <div class="col-lg-6 col-md-4">
+                <div class="col-xs-12 col-lg-4">
                     <label>Desde<strong class="text-danger">*</strong></label>
-                    <input class="form-control" type="date" [(ngModel)]="fechaDesde" name="fechaDesde" required>
+                    <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaDesde" name="fechaDesde" required>
                 </div>
-                <div class="col-lg-6 col-md-4">
+                <div class="col-xs-12 col-lg-4">
                     <label>Hasta<strong class="text-danger">*</strong></label>
-                    <input class="form-control" type="date" [(ngModel)]="fechaHasta" name="fechaHasta" required>
+                    <input class="form-control" type="date" [(ngModel)]="froReporteIngresos.fechaHasta" name="fechaHasta" required>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-lg-12">
+    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 1 && tablaTramites">
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Informe Tramites</h5>
@@ -43,19 +43,20 @@
                     <br>
                     <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Concepto</th>
-                            <th>Cantidad</th>
-                            <th>Valor</th>
-                            <th>Total</th>
+                            <th><b>Código</b></th>
+                            <th><b>Concepto</b></th>
+                            <th><b>Cantidad</b></th>
+                            <th><b>Valor</b></th>
+                            <th><b>Total</b></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let tramite of tramites; let i = index">
-                            <td>{{ tramite.id }}</td>
-                            <td>{{ tramite.cedula }}</td>
-                            <td>{{ tramite.nombres }}</td>
-                            <td>{{ tramite.apellidos }}</td>
+                            <td>{{ tramite.codigo }}</td>
+                            <td>{{ "TRAMITE" }}</td>
+                            <td>{{ cant }}</td>
+                            <td>{{ tramite.valor }}</td>
+                            <td>{{ cant * tramite.valor }}</td>
                         </tr>
                     </tbody>
                 </table>
