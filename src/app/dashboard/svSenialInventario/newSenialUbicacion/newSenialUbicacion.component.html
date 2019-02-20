@@ -38,12 +38,12 @@
                     </div>
                 </div>
                 <div class="row" *ngIf="!demarcacion"><!-- .row -->
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial == 1">
                         <label>Linea <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea" required>
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial == 1">
                         <label>Unidad medida <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="unidadesMedida" [(ngModel)]="senialUbicacion.idUnidadMedida" name="idUnidadMedida" required>
                         </ng-select>
@@ -110,17 +110,27 @@
                             <table class="table table-bordered table-striped table-hover" id="dataTables-example">
                                 <thead>
                                     <tr class="text-uppercase text-center">
-                                        <th>Cantidad</th>
-                                        <th>Metraje</th>
-                                        <th>Total</th>
+                                        <th>#</th>
+                                        <th>Detalle</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="odd" *ngFor="let demarcacionNew of arrayDemarcaciones; let i = index">
-                                        <td>{{ demarcacionNew.cantidad }} </td>
-                                        <td>{{ demarcacionNew.metraje }}</td>
-                                        <td>{{ demarcacionNew.total }}</td>
+                                        <td>{{ i +  1 }} </td>
+                                        <td>
+                                            <b>Cantidad: </b>
+                                            {{ demarcacionNew.cantidad }}
+                                            <b>Metraje: </b>
+                                            {{ demarcacionNew.metraje }}
+                                            <span *ngIf="demarcacionNew.anchoLinea">
+                                                <br>
+                                                <b>Ancho línea: </b>
+                                                {{ demarcacionNew.anchoLinea }}
+                                            </span>
+                                            <br>
+                                            <b>Total: </b>
+                                            {{ demarcacionNew.total }}</td>
                                         <td>
                                             <button (click)="onRemoveDemarcacion(demarcacionNew)" class="btn btn-xs btn-danger" type="button">
                                                 <i class="fa fa-trash"></i>
@@ -156,8 +166,8 @@
                             </agm-map> -->
                             <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" (mapClick)="mapClicked($event)" (mapReady)="mapReady($event)" [usePanning] = "true">
                             
-                                <agm-marker *ngFor="let marker of markers; let i = index" (markerRightClick)="onRightClick(i)" (markerClick)="clickedMarker(marker.label, i)" [latitude]="marker.lat" [longitude]="marker.lng"
-                                    [label]="marker.label" [markerDraggable]="marker.draggable" (dragEnd)="markerDragEnd(marker, $event)">                            
+                                <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.lat" [longitude]="marker.lng" (markerRightClick)="onRightClick(i)" (markerClick)="clickedMarker(marker.label, i)"
+                                     [label]="marker.label" [markerDraggable]="marker.draggable" (dragEnd)="markerDragEnd(marker, $event)">                            
                                 
                                     <agm-info-window>
                                         <strong>{{ marker.label }}</strong>

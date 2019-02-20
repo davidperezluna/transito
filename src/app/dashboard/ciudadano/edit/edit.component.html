@@ -1,153 +1,155 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">Editar una persona natural</h5>
-            <hr> 
-            <div class="row justify-content-center">
-                <form #ciudadanoForm="ngForm">
+            <div class="card-header">
+                <h5 class="text-uppercase">Editar persona natural</h5>
+                <small>Los campos con <b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #editForm="ngForm">
+                
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Tipo Identificacion <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="departamentoId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Identificacion <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacionUsuario" type="number"
+                                    required>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha Expedición Documento</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.fechaExpedicionDocumento" name="fechaExpedicionDocumento" placeholder=""
+                                    type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Primer Nombre <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.primerNombreUsuario" name="primerNombreUsuario" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Segundo Nombre <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.segundoNombreUsuario" name="segundoNombreUsuario" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Primer Apellido <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.primerApellidoUsuario" name="primerApellidoUsuario" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-3">
+                                <label>Segundo Apellido <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.segundoApellidoUsuario" name="segundoApellido" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Genero <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="generos" [(ngModel)]="generoSelected" required name="generoId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Grupo Sanguineo <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="gruposSanguineos" [(ngModel)]="grupoSanguineoSelected" required name="grupoSanguineoId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Fecha Nacimiento <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" placeholder=""
+                                    type="date" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Pais Nacimiento <b class="text-danger">*</b></label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="paises"
+                                    [(ngModel)]="paisNacimientoSelected"
+                                    (ngModelChange)="changedPaisNacimiento($event)"
+                                    required
+                                    name="paisId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" >
+                                <label>Departamento Nacimiento <b class="text-danger">*</b></label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="departamentosNacimiento"
+                                    [(ngModel)]="departamentoNacimientoSelected"
+                                    (ngModelChange)="changedDepartamentoNacimiento($event)"
+                                    required
+                                    name="departamentoId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" >
+                                <label>Municipio Nacimiento <b class="text-danger">*</b></label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="municipiosNacimiento"
+                                    [(ngModel)]="municipioNacimientoSelected"
+                                    required
+                                    name="municipioId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Pais Residencia <b class="text-danger">*</b></label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="paises"
+                                    [(ngModel)]="paisResidenciaSelected"
+                                    (ngModelChange)="changedPaisResidencia($event)"
+                                    required
+                                    name="paisId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4" >
+                                <label>Departamento Residencia <b class="text-danger">*</b></label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="departamentosResidencia"
+                                    [(ngModel)]="departamentoResidenciaSelected"
+                                    (ngModelChange)="changedDepartamentoResidencia($event)"
+                                    required
+                                    name="departamentoId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Municipio Residencia <b class="text-danger">*</b></label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="municipiosResidencia"
+                                    [(ngModel)]="municipioResidenciaSelected"
+                                    required
+                                    name="departamentoId">
+                                </ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Telefono <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefonoUsuario" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Direccion Residencia</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Direccion Trabajo</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" type="text" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Correo</label>
+                                <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correoUsuario" type="email" required>
+                            </div>
+                        </div>
+                    </div> 
                 </form>
-                <div class="col-md-10 ">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Tipo Identificacion*</label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="departamentoId">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Identificacion*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacionUsuario" type="number"
-                                required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Fecha Expedición Documento</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.fechaExpedicionDocumento" name="fechaExpedicionDocumento" placeholder=""
-                                type="date" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Primer Nombre*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.primerNombreUsuario" name="primerNombreUsuario" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Segundo Nombre*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.segundoNombreUsuario" name="segundoNombreUsuario" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Primer Apellido*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.primerApellidoUsuario" name="primerApellidoUsuario" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Segundo Apellido*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.segundoApellidoUsuario" name="segundoApellido" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Genero*</label>
-                            <ng-select [multiple]="false" [options]="generos" [(ngModel)]="generoSelected" required name="generoId">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Grupo Sanguineo*</label>
-                            <ng-select [multiple]="false" [options]="gruposSanguineos" [(ngModel)]="grupoSanguineoSelected" required name="grupoSanguineoId">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Fecha Nacimiento*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.fechaNacimiento" name="fechaNacimiento" placeholder=""
-                                type="date" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                        <label>Pais Nacimiento*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="paises"
-                            [(ngModel)]="paisNacimientoSelected"
-                            (ngModelChange)="changedPaisNacimiento($event)"
-                            required
-                            name="paisId">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-4" >
-                        <label>Departamento Nacimiento*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="departamentosNacimiento"
-                            [(ngModel)]="departamentoNacimientoSelected"
-                            (ngModelChange)="changedDepartamentoNacimiento($event)"
-                            required
-                            name="departamentoId">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-4" >
-                        <label>Municipio Nacimiento*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="municipiosNacimiento"
-                            [(ngModel)]="municipioNacimientoSelected"
-                            required
-                            name="municipioId">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Pais Residencia*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="paises"
-                            [(ngModel)]="paisResidenciaSelected"
-                            (ngModelChange)="changedPaisResidencia($event)"
-                            required
-                            name="paisId">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-4" >
-                        <label>Departamento Residencia*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="departamentosResidencia"
-                            [(ngModel)]="departamentoResidenciaSelected"
-                            (ngModelChange)="changedDepartamentoResidencia($event)"
-                            required
-                            name="departamentoId">
-                        </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Municipio Residencia*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="municipiosResidencia"
-                            [(ngModel)]="municipioResidenciaSelected"
-                            required
-                            name="departamentoId">
-                        </ng-select>
-                    </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Telefono*</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefonoUsuario" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Direccion Residencia</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Direccion Trabajo</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.direccionTrabajo" name="direccionTrabajo" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Correo</label>
-                            <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correoUsuario" type="email" required>
-                        </div>
-                    </div>
-                </div>    
             </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-default">
                     <i class="fa fa-times"></i>
                     Cancelar
                 </button>
-                <button (click)="onEnviar()" [disabled]="ciudadanoForm.invalid" class="btn btn-primary" type="button">
+                <button (click)="onEnviar()" [disabled]="editForm.invalid" class="btn btn-primary" type="button">
                     <i class="fa fa-floppy-o"></i>
                     Enviar
                 </button>
-            </div>    
+            </div>
         </div>
     </div>
 </div>

@@ -85,7 +85,7 @@
             </tbody>
           </table>
 
-          <table class="table" id="dataTables-example" *ngIf="seniales">
+          <table class="table table-bordered table-striped table-hover" id="dataTables-example" *ngIf="seniales">
             <thead>
               <tr>
                 <th>#</th>
@@ -145,7 +145,7 @@
             </tbody>
           </table>
 
-          <table class="table" id="dataTables-example" *ngIf="seniales">
+          <table class="table table-bordered table-striped table-hover" id="dataTables-example" *ngIf="seniales">
             <thead>
               <tr>
                 <th>#</th>
@@ -167,10 +167,6 @@
           </table>
         </div>
       </div><!-- /.card -->
-    </div><!-- /.col -->
-
-    <div class="col-xs-12 col-lg-8" *ngIf='formLocationSenial'><!-- .col -->
-      <app-location [inventario]="inventario" [tipoDestino]="datos.tipoDestino" (ready)="ready($event)"></app-location>
     </div><!-- /.col -->
 
     <div class="col-xs-12 col-lg-8" *ngIf='formRecord'><!-- .col -->

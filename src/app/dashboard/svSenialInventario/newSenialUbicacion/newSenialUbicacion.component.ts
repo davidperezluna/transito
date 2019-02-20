@@ -77,9 +77,7 @@ export class NewSenialUbicacionComponent implements OnInit {
         this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    ngOnInit() {
-        console.log(this.datos);
-        
+    ngOnInit() {       
         this._EstadoService.select().subscribe(
             response => {
                 this.estados = response;
@@ -352,7 +350,6 @@ export class NewSenialUbicacionComponent implements OnInit {
                     confirmButtonText: 'Aceptar'
                 });
             }
-            console.log(this.markers);
         }
     }
 
