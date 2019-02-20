@@ -24,7 +24,6 @@
                 <th>Módulo</th>
                 <th>Nombre</th>
                 <th>Referencia</th>
-                <th>Valor</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -34,15 +33,13 @@
                 <td>{{cfgCasoInsumo.modulo?.nombre}}</td>
                 <td>{{cfgCasoInsumo.nombre}}</td>
                 <td>{{cfgCasoInsumo.referencia}}</td>
-                <td>{{cfgCasoInsumo.valor}}</td>
                 <td>
-                  <button (click)="editCfgCasoInsumo(cfgCasoInsumo)" class="btn btn-xs btn-info" type="button">Editar
-                    <i class="fa fa-edit"></i>
-                  </button>
-                  <button (click)="deleteCfgCasoInsumo(cfgCasoInsumo)" class="btn btn-xs btn-danger" type="button">Eliminar
-                    <i class="fa fa-trash"></i>
-                  </button>
-
+                  <div class="btn-group">
+                    <button (click)="onEdit(cfgCasoInsumo)" class="btn btn-xs btn-primary" type="button" tooltip="Configurar" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                      tooltipPlacement="top">
+                      <i class="fa fa-cog"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>

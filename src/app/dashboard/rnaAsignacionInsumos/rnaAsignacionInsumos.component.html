@@ -1,5 +1,5 @@
 <div class="container" >
-   <div class="row" *ngIf='formIndex'>
+   <!-- <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -17,15 +17,12 @@
             </h5>
           </div>
           <div class="card-body">
-            <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item"> 
                     <a class="nav-link active" data-toggle="tab" href="#sustrato" role="tab">Sustrato</a> 
-                    <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
                 </li>  
                 <li class="nav-item"> 
                     <a class="nav-link" data-toggle="tab" href="#insumo" role="tab">Insumo</a> 
-                    <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
                 </li>  
             </ul>
             <div class="tab-content">
@@ -38,7 +35,6 @@
                         <th>Numero</th>
                         <th>Estado</th>
                         <th>Fecha</th>
-                        <!-- <th>Acciones</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -73,11 +69,10 @@
                     </table>
                 </div>
             </div>
-            <!-- /.table-responsive --> 
           </div>
         </div>
       </div>
-    </div>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    </div> -->
+    <app-new (ready)="ready($event)"></app-new>
     <app-edit *ngIf='formEdit' [loteInsumoInsumo]="loteInsumoInsumo" [tipoInsumo]="tipoInsumo" (ready)="ready($event)"></app-edit>
 </div>
