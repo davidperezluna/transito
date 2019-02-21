@@ -5,8 +5,7 @@
         <div class="card">
           <div class="card-header">
             <h5>
-              <b class="text-uppercase">Audiencia</b>
-              <small>Configuración de atenciones</small>
+              <b class="text-uppercase">Organismos de transito</b>
               <div class="btn-group pull-right">
                 <button (click)="onNew()" class="btn btn-default">
                   <i class="fa fa-plus"></i>
@@ -20,33 +19,25 @@
               <thead>
                 <tr>
                     <th>#</th>
-                    <th>Día</th>
-                    <th>Mañana</th>
-                    <th>Tarde</th>
+                    <th>Nombre</th>
+                    <th>DIVIPO</th>
+                    <th>Jurisdicción</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let atencion of atenciones; let i = index">
+                <tr class="odd" *ngFor="let organismo of organismos; let i = index">
                   <td>{{ i + 1 }}</td>
-                  <td>{{ atencion.dia }}</td>
-                  <td>
-                    <b>Hora inicial:</b> {{ atencion.horaManianaInicial }}
-                    <br>
-                    <b>Hora final:</b> {{ atencion.horaManianaFinal }}
-                  </td>
-                  <td>
-                    <b>Hora inicial:</b> {{ atencion.horaTardeInicial }}
-                    <br>
-                    <b>Hora final:</b> {{ atencion.horaTardeFinal }}
-                  </td>
+                  <td>{{ organismo.nombre }}</td>
+                  <td>{{ organismo.divipo }}</td>
+                  <td>{{ organismo.jurisdiccion }}</td>
                   <td>
                     <div class="btn-group">
-                      <button (click)="onEdit(atencion)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                      <button (click)="onEdit(organismo)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false" [tooltipAnimation]="true"
                         tooltipPlacement="top">
                         <i class="fa fa-edit"></i>
                       </button>
-                      <button (click)="onDelete(atencion.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                      <button (click)="onDelete(organismo.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
                         <i class="fa fa-trash"></i>
                       </button>
                     </div>
@@ -60,6 +51,6 @@
       </div>
     </div>
     
-    <app-edit *ngIf='formEdit' [atencion]="atencion" (ready)="ready($event)"></app-edit>
+    <app-edit *ngIf='formEdit' [organismo]="organismo" (ready)="ready($event)"></app-edit>
     <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

@@ -22,7 +22,7 @@ export class NewComponent implements OnInit {
   ];
 
 constructor(
-  private _NotificacionService: CvAuCfgAtencionService,
+  private _AtencionService: CvAuCfgAtencionService,
   private _loginService: LoginService,
   ){}
 
@@ -37,7 +37,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._NotificacionService.register(this.atencion, token).subscribe(
+		this._AtencionService.register(this.atencion, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

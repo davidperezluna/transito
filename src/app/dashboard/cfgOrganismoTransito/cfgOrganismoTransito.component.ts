@@ -1,26 +1,25 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {ModuloService} from '../../services/modulo.service';
-import {LoginService} from '../../services/login.service';
+import { Component, OnInit } from '@angular/core';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
+import { LoginService } from '../../services/login.service';
+import { CfgOrganismoTransito } from './cfgOrganismoTransito.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './modulo.component.html'
+  templateUrl: './cfgOrganismoTransito.component.html'
 })
-export class ModuloComponent implements OnInit {
+export class CfgOrganismoTransitoComponent implements OnInit {
   public errorMessage;
-	public id;
-	public respuesta;
-	public modulos;
+	public organismos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
-  public table:any; 
-  public modulo:any; 
+  public table:any = null; 
+  public organismo: CfgOrganismoTransito;
 
   constructor(
-		private _ModuloService: ModuloService,
+    private _OrganismoService: CfgOrganismoTransitoService,
 		private _loginService: LoginService,
     ){}
     
@@ -28,23 +27,18 @@ export class ModuloComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-		this._ModuloService.getModulo().subscribe(
+    });
+
+    this._OrganismoService.index().subscribe(
 				response => {
-          this.modulos = response.data;
+          this.organismos = response.data;
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;
@@ -56,7 +50,12 @@ export class ModuloComponent implements OnInit {
 				}
       );
   }
+
   iniciarTabla(){
+    if (this.table) {
+      this.table.destroy();
+    }
+
     $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
@@ -70,24 +69,25 @@ export class ModuloComponent implements OnInit {
         }
       }
    });
+
    this.table = $('#dataTables-example').DataTable();
   }
+  
   onNew(){
     this.formNew = true;
     this.formIndex = false;
-    this.table.destroy();
   }
 
   ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
+    if(isCreado) {
+      this.formNew = false;
+      this.formEdit = false;
+      this.formIndex = true;
+      this.ngOnInit();
+    }
   }
-  deleteModulo(id:any){
 
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -100,7 +100,8 @@ export class ModuloComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ModuloService.deleteModulo(token,id).subscribe(
+        
+        this._OrganismoService.delete({'id':id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -109,7 +110,6 @@ export class ModuloComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -127,10 +127,9 @@ export class ModuloComponent implements OnInit {
     })
   }
 
-  editModulo(modulo:any){
-    this.modulo = modulo;
+  onEdit(organismo:any){
+    this.organismo = organismo;
     this.formEdit = true;
     this.formIndex = false;
   }
-
 }
