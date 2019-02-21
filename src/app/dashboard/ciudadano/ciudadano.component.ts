@@ -40,6 +40,10 @@ export class CiudadanoComponent implements OnInit {
   ngOnInit() { }
 
   onSearch() {
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+
     swal({
       title: 'Buscando registros!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -68,7 +72,6 @@ export class CiudadanoComponent implements OnInit {
           }, 100);
         }else{
           this.ciudadanos =null;
-          this.formIndex = false;
 
           swal({
             title: 'Atención!',
@@ -101,10 +104,10 @@ export class CiudadanoComponent implements OnInit {
       sPaginationType: 'full_numbers',
       oLanguage: {
         oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
     });
@@ -114,6 +117,7 @@ export class CiudadanoComponent implements OnInit {
   
   onNew(){
     this.formNew = true;
+    this.formEdit = false;
     this.formIndex = false;
   }
 
@@ -121,6 +125,7 @@ export class CiudadanoComponent implements OnInit {
       if(isCreado) {
         this.formNew = false;
         this.formEdit = false;
+        this.formIndex = false;
         this.ngOnInit();
       }
   }
@@ -168,6 +173,6 @@ export class CiudadanoComponent implements OnInit {
     this.ciudadano = ciudadano;
     this.formEdit = true;
     this.formIndex = false;
+    this.formNew = false;
   }
-
 }

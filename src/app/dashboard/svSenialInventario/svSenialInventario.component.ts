@@ -16,7 +16,6 @@ declare var $: any;
 
 export class SvSenialInventarioComponent implements OnInit {
     public errorMessage;
-    public formLocationSenial = false;
     public formRecord = false;
     public formNewBodega = false;
     public formNewMunicipio = false;
@@ -78,7 +77,6 @@ export class SvSenialInventarioComponent implements OnInit {
             this.formIndex = false;
             this.formNewBodega = false;
             this.formNewMunicipio = false;
-            this.formLocationSenial = false;
             this.ngOnInit();
         }
     }
@@ -139,7 +137,6 @@ export class SvSenialInventarioComponent implements OnInit {
         });
 
         this.formIndex = true;
-        this.formLocationSenial = false;
         this.formRecord = false;
         this.formNewBodega = false;
         this.formNewMunicipio = false;
@@ -183,6 +180,7 @@ export class SvSenialInventarioComponent implements OnInit {
 
     iniciarTabla() {
         if (this.table) {
+            this.table.empty();
             this.table.destroy();
         }
         
@@ -192,10 +190,10 @@ export class SvSenialInventarioComponent implements OnInit {
             sPaginationType: 'full_numbers',
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             },
         });
@@ -203,7 +201,6 @@ export class SvSenialInventarioComponent implements OnInit {
 
     onLocation(inventario) {
         this.inventario = inventario;
-        this.formLocationSenial = true;
         this.formRecord = false;
         this.formIndex = false;
         if (this.table) {
@@ -211,10 +208,11 @@ export class SvSenialInventarioComponent implements OnInit {
         }
     }
 
-    onRecord(senial) {
+    onRecord(senial, datos) {
         this.senial = senial;
+        this.datos = datos;
+        
         this.formRecord = true;
-        this.formLocationSenial = false;
         this.formIndex = false;
         if (this.table) {
             this.table.destroy();

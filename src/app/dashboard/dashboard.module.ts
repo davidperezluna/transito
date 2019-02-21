@@ -24,7 +24,6 @@ import { DepartamentoModule } from './departamento/departamento.module';
 import { MunicipioModule } from './municipio/municipio.module';
 import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
 import { ServicioModule } from './servicio/servicio.module';
-import { ModuloModule } from './modulo/modulo.module';
 import { TramiteModule } from './tramite/tramite.module'; 
 import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
@@ -32,6 +31,7 @@ import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpc
 
 import { CfgAdmFormatoModule } from './cfgAdmFormato/cfgAdmFormato.module';
 import { CfgAdmFormatoTipoModule } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.module';
+import { CfgModuloModule } from './cfgModulo/cfgModulo.module';
 
 import { CfgBodegaModule } from './cfgBodega/cfgBodega.module';
 import { SvCfgSenialUnidadMedidaModule } from './svCfgSenialUnidadMedida/svCfgSenialUnidadMedida.module';
@@ -73,6 +73,7 @@ import { VhloCfgTipoMaquinariaModule } from './vhloCfgTipoMaquinaria/vhloCfgTipo
 import { VhloCfgClaseMaquinariaModule } from './vhloCfgClaseMaquinaria/vhloCfgClaseMaquinaria.module';
 import { VhloCfgSubpartidaArancelariaModule } from './vhloCfgSubpartidaArancelaria/vhloCfgSubpartidaArancelaria.module';
 import { VhloCfgCondicionIngresoModule } from './vhloCfgCondicionIngreso/vhloCfgCondicionIngreso.module';
+import { VhloPlacaSedeModule } from './vhloPlacaSede/vhloPlacaSede.module';
 import { VehiculoTecnoMecanicaModule } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.module';
 import { SoatModule } from './soat/soat.module';
 
@@ -121,23 +122,23 @@ import { SvCfgZonaModule } from "./svCfgZona/svCfgZona.module";
 import { SvCfgClaseActorViaModule } from './svCfgClaseActorVia/svCfgClaseActorVia.module';
 import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCapacitacion.module';
 
-import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
 
 import { CiudadanoModule } from './ciudadano/ciudadano.module';
 import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
 
-import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
-import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
-import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
-import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
 import { CfgLicenciaConduccionCategoriaModule } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.module';
 import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicenciaConduccion.module';
 
+import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
+import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
+import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
+import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
+import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { CfgTipoVehiculoModule } from './cfgTipoVehiculo/cfgTipoVehiculo.module';
 import { CfgAsignacionPlacaSedeModule } from './cfgAsignacionPlacaSede/cfgAsignacionPlacaSede.module';
 import { CfgTipoClaseModule } from './cfgTipoClase/cfgTipoClase.module';
@@ -148,7 +149,6 @@ import { MsvCategoriaModule } from './msvCategoria/msvCategoria.module';
 import { MsvVariableModule } from './msvVariable/msvVariable.module';
 import { MsvParametroModule } from './msvParametro/msvParametro.module';
 import { MsvCriterioModule } from './msvCriterio/msvCriterio.module';
-
 import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
 import { MsvAsignacionModule } from './msvAsignacion/msvAsignacion.module';
 
@@ -164,9 +164,7 @@ import { CarroceriaModule } from './carroceria/carroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
-import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
 import { LimitacionModule } from './limitacion/limitacion.module';
-import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
 import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
@@ -174,11 +172,14 @@ import { RnrsTramiteLevantamientoLimitacionModule } from './rnrsTramiteLevantami
 import { RnaTramiteInscripcionLimitacionModule } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.module';
 import { RnaTramiteLevantamientoLimitacionModule } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.module';
 import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
+
+import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
+import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
+import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
 import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
-
 import { CfgGravedadModule } from './cfgGravedad/cfgGravedad.module';
 import { CfgClaseAccidenteModule } from './cfgClaseAccidente/cfgClaseAccidente.module';
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
@@ -276,9 +277,9 @@ import {RightsidebarComponent} from '../shared';
       MunicipioModule,
       OrganismoTransitoModule,
       ServicioModule,
-      ModuloModule,
       TramiteModule,
       AlmacenModule,
+      CfgModuloModule,
       CfgTipoInfractorModule,
       CiudadanoModule,
       TipoIdentificacionModule,
@@ -398,6 +399,7 @@ import {RightsidebarComponent} from '../shared';
       VhloCfgClaseMaquinariaModule,
       VhloCfgSubpartidaArancelariaModule,
       VhloCfgCondicionIngresoModule,
+      VhloPlacaSedeModule,
       VehiculoTecnoMecanicaModule,
       SoatModule,
       CfgComparendoEstadoModule,
@@ -416,6 +418,7 @@ import {RightsidebarComponent} from '../shared';
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,
       RnaPreregistroModule,
+      CfgOrganismoTransitoModule,
       CfgPlacaModule,
       CfgCasoInsumoModule,
       CfgGravedadModule,

@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
+import { ImoCfgValorService } from '../../../services/imoCfgValor.service';
 import { LoginService } from '../../../services/login.service';
 import { ModuloService } from '../../../services/modulo.service';
 import swal from 'sweetalert2';
+declare var $: any;
 
  
 @Component({
@@ -14,8 +16,12 @@ export class EditComponent {
   @Input() cfgCasoInsumo: any = null;
   public errorMessage;
   public respuesta;
+  public formNewValor: any=false;
   public modulos: any;
+  public table: any;
   public moduloSelected: any; 
+  public valores: any; 
+  
   public tipoCasoInsumos = [
     { 'value': "Insumo", 'label': "Insumo" },
     { 'value': "Sustrato", 'label': "Sustrato" }
@@ -26,15 +32,9 @@ export class EditComponent {
   constructor(
     private _CfgCasoInsumoService: CfgCasoInsumoService,
     private _loginService: LoginService,
+    private _ImoCfgValorService: ImoCfgValorService,
     private _ModuloService: ModuloService,
-  ) {
-    //   this.tipoIdentificacion = [
-    //     {value: 'CC', label: 'Cédula de ciudadanía'},
-    //     {value: 'TE', label: 'Tarjeta de extranjería'},
-    //     {value: 'CE', label: 'Cédula de extranjería'},
-    //     {value: 'P', label: 'Pasaporte'},
-    // ];
-  }
+  ) {}
 
   ngOnInit() {
 
@@ -54,12 +54,29 @@ export class EditComponent {
         }
       }
     );
+    let token = this._loginService.getToken();
+    this._ImoCfgValorService.showCasoInsumo(token,this.cfgCasoInsumo.id).subscribe(
+      response => {
+        this.valores = response.data;
+        this.iniciarTabla();
+      },
+      error => {
+        this.errorMessage = <any>error;
 
-    
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+   
   }
 
 
   onCancelar() {
+    if (this.table) {
+      this.table.destroy();
+    }
     this.ready.emit(true);
   }
   onEnviar() {
@@ -89,6 +106,32 @@ export class EditComponent {
         }
 
       });
+  }
+
+  iniciarTabla() {
+    $('#dataTables-example-valor').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
+        }
+      }
+    });
+    this.table = $('#dataTables-example-valor').DataTable();
+  }
+
+  onNew(){
+    this.formNewValor = true;
+  }
+  
+  readyValor(){
+    this.formNewValor = false;
+    this.iniciarTabla();
   }
 
 }

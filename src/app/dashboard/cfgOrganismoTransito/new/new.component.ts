@@ -1,7 +1,7 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Modulo} from '../modulo.modelo';
-import {ModuloService} from '../../../services/modulo.service';
-import {LoginService} from '../../../services/login.service';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { CfgOrganismoTransito } from '../cfgOrganismoTransito.modelo';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -9,48 +9,47 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public modulo: Modulo;
-public errorMessage;
-public respuesta;
+  @Output() ready = new EventEmitter<any>();
+  public organismo: CfgOrganismoTransito;
+  public errorMessage;
 
 constructor(
-  private _ModuloService: ModuloService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.modulo = new Modulo(null, null, null, null, null);
+    this.organismo = new CfgOrganismoTransito(null, null, null, null, null, null, null, null);
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
+  
   onEnviar(){
     let token = this._loginService.getToken();
-
-		this._ModuloService.register(this.modulo,token).subscribe(
+    
+		this._OrganismoTransitoService.register(this.organismo, token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
+
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }else{
           swal({
             title: 'Error!',
-            text: 'El modulo '+ this.modulo.nombre +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
 			error => {
 					this.errorMessage = <any>error;
-
 					if(this.errorMessage != null){
 						console.log(this.errorMessage);
 						alert("Error en la petición");

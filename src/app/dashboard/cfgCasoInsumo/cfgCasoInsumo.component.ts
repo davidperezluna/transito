@@ -92,8 +92,7 @@ export class CfgCasoInsumoComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteCfgCasoInsumo(id: any) {
-
+  onDelete(id: any) {
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -133,7 +132,7 @@ export class CfgCasoInsumoComponent implements OnInit {
     })
   }
 
-  editCfgCasoInsumo(cfgCasoInsumo: any) {
+  onEdit(cfgCasoInsumo: any) {
     this.cfgCasoInsumo = cfgCasoInsumo;
     this.formEdit = true;
     this.formIndex = false;

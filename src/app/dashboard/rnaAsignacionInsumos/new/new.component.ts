@@ -99,7 +99,6 @@ constructor(
     this.ready.emit(true);
   }
   onEnviar(){
-    console.log(this.frmInsumo);
     let token = this._loginService.getToken();
     this.rnaAsignacionInsumos.loteInsumoId = this.loteInsumo.id;
     
@@ -194,6 +193,9 @@ constructor(
   }
 
   onSearchLote(){
+      if (this.table) {
+        this.table.destroy()
+      }
       let datos={
         'casoInsumo':this.insumoSelected,
         'sedeOperativa':this.sedeSelected,
@@ -204,15 +206,13 @@ constructor(
           
           if (response.status == 'success') {
             this.lotes = response.data;
-            if (this.table) {
-              this.table.destroy()
-            }
             setTimeout(() => {
               this.iniciarTabla();
             });
            
 
           }else{
+            this.lotes = null;
             swal({
               title: 'Error!',
               text: 'No existen sustratos para esta sede',

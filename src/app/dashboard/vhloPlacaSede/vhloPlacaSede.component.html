@@ -1,0 +1,107 @@
+<div class="container">
+    <hr>
+    <div class="row" *ngIf='formSearch'>
+        <!-- .row -->
+        <div class="col-xs-12 col-lg-3">
+            <!-- .col -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">
+                        <strong>Placas por sede operativa</strong>
+                        <small>Buscar</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- .card-body -->
+                    <form #formSearch="ngForm">
+                        <div class="form-group">
+                            <div class="row">
+                                <!-- .row -->
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Sede operativa</label>
+                                    <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="search.idOrganismoTransito" name="idOrganismoTransito" required></ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </form>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-search"></i>
+                            Buscar
+                        </button>
+                        <button (click)="onNew()" class="btn btn-default" *ngIf="!ciudadanos">
+                            <i class="fa fa-plus"></i>
+                            <span class="text">Nuevo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+
+        <div class="col-xs-12 col-lg-9" *ngIf='formIndex && organismoTransito'><!-- .col -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <small>Asignación de Placas a Sede {{ organismoTransito.nombre }}</small>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNew()" class="btn btn-default">
+                                <i class="fa fa-plus"></i>
+                                <span class="text">Nuevo</span>
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table " id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Sede Operativa</th>
+                                <th>Letras Placa</th>
+                                <th>Rango</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let asignacion of asignaciones; let i = index">
+                                <td>{{ asignacion.id }}</td>
+                                <td>{{ asignacion.organismoTransito.nombre }}</td>
+                                <td>{{ asignacion.letrasPlaca }}</td>
+                                <td>
+                                    <b>Número inicial: </b>
+                                    {{ asignacion.numeroInicial }}
+                                    <br>
+                                    <b>Número final: </b>
+                                    {{ asignacion.numeroFinal }}
+                                </td>
+                                <td>
+                                    <button (click)="onEdit(asignacion)" class="btn btn-xs btn-info" type="button">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button (click)="onDelete(asignacion.id)" class="btn btn-xs btn-danger" type="button">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div><!-- .col -->
+
+        <div class="col-xs-12 col-lg-9" *ngIf='formNew && organismoTransito'>
+            <app-new [organismoTransito]="organismoTransito" (ready)="ready($event)"></app-new>
+        </div>
+
+        <div class="col-xs-12 col-lg-9" *ngIf='formEdit'>
+            <app-edit [asignacion]="asignacion" (ready)="ready($event)"></app-edit>
+        </div>
+
+    </div>
+</div>
