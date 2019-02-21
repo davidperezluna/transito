@@ -22,6 +22,7 @@ export class EditComponent {
   public moduloSelected: any; 
   public valores: any; 
   
+  
   public tipoCasoInsumos = [
     { 'value': "Insumo", 'label': "Insumo" },
     { 'value': "Sustrato", 'label': "Sustrato" }
@@ -37,7 +38,6 @@ export class EditComponent {
   ) {}
 
   ngOnInit() {
-
     this._ModuloService.getModuloSelect().subscribe(
       response => {
         this.modulos = response;
@@ -58,7 +58,9 @@ export class EditComponent {
     this._ImoCfgValorService.showCasoInsumo(token,this.cfgCasoInsumo.id).subscribe(
       response => {
         this.valores = response.data;
-        this.iniciarTabla();
+        let timeoutId = setTimeout(() => {
+          this.iniciarTabla();
+        }, 100);
       },
       error => {
         this.errorMessage = <any>error;
@@ -131,7 +133,7 @@ export class EditComponent {
   
   readyValor(){
     this.formNewValor = false;
-    this.iniciarTabla();
+    this.ngOnInit();
   }
 
 }

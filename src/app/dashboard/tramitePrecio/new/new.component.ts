@@ -22,7 +22,7 @@ public tramites:any;
 public clases:any;
 public modulos:any;
 public tramiteSelected:any;
-public date:any;
+public date:any; 
 public moduloSelected:any;
 public vehiculoTipoSelected:any;
 public claseSelected=null;
