@@ -67,7 +67,7 @@
                     <th>Id</th>
                     <th>Valor</th>
                     <th>Fecha</th>
-                    
+                    <th>estado</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -75,6 +75,8 @@
                     <td>{{valor.id}}</td>
                     <td>{{valor.valor}}</td>
                     <td>{{valor.fecha}}</td>
+                    <td *ngIf='valor.activo'>Activo</td>
+                    <td *ngIf='!valor.activo'>Inactivo</td>
                 </tr>
                 </tbody>
             </table>

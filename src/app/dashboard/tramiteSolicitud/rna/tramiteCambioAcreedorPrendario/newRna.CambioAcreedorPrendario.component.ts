@@ -42,6 +42,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     public enviarEncontrado = 1;
     public empresaEncontrada = 1;
     public nit: any;
+    public nitnewAcredor: any;
     public tipoIdentificacionSelected = null;
     public tipoIdentificacionNuevoAcreedorSelected = null;
     public listaAcreedoresVehiculo = false;
@@ -91,15 +92,12 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     };
     public tipoIdentificaciones = [];
     public ciudadanoAcreedorNew:any;
+    public empresaAcreedorNew:any;
     public identificacionNuevoAcreedor:any;
 
     constructor(
         private _CfgTipoAlertaService: CfgTipoAlertaService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _BancoService: BancoService,
         private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
         private _VehiculoAcreedorService: VehiculoAcreedorService,
         private _tipoIdentificacionService: TipoIdentificacionService,
         private _CiudadanoService: CiudadanoService,
@@ -369,6 +367,33 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                 }
                             }
                         });
+                } else {
+                    this.empresaEncontrada = 3;
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            });
+    }
+
+    onKeyEmpresaNuevoAcreedor() {
+        let token = this._loginService.getToken();
+        let nit = {
+            'nit': this.nitnewAcredor,
+        };
+        
+        this._EmpresaService.showNit(token, nit).subscribe(
+            response => {
+                response = response;
+                if (response.status == 'success') {
+                    this.empresaAcreedorNew = response.data;
+                    console.log(this.empresaAcreedorNew);
+                   
                 } else {
                     this.empresaEncontrada = 3;
                 }
