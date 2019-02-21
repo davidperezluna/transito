@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ComparendoService } from '../../../services/comparendo.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
-import { LoginService } from '../../../services/login.service';
 import { FroFacInfraccion } from './froFacInfraccion.modelo';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 import { environment } from 'environments/environment'

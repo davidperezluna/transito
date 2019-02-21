@@ -205,32 +205,32 @@
                                                    </div>
                                                 </div>
                                              </div>
-                                             <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 1">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoFortalecimiento"
-                                                   name="valorObtenidoFortalecimiento" type="number" disabled>
-                                             </div>
-                                             <!-- <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div> -->
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 2">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoComportamiento"
-                                                   name="valorObtenidoComportamiento" type="number" disabled>
-                                             </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 3">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoVehiculoSeguro"
-                                                   name="valorObtenidoVehiculoSeguro" type="number" disabled>
-                                             </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 4">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoInfraestructuraSegura"
-                                                   name="valorObtenidoInfraestructuraSegura" type="number" disabled>
-                                             </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 5">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoAtencionVictima"
-                                                   name="valorObtenidoAtencionVictima" type="number" disabled>
-                                             </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 6">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoValorAgregado"
-                                                   name="valorObtenidoValorAgregado" type="number" disabled>
-                                             </div>
+                                          </div>
+                                          <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div>
+                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 1">
+                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoFortalecimiento" name="valorObtenidoFortalecimiento"
+                                                type="number" disabled>
+                                          </div>
+                                          <!-- <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div> -->
+                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 2">
+                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoComportamiento" name="valorObtenidoComportamiento"
+                                                type="number" disabled>
+                                          </div>
+                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 3">
+                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoVehiculoSeguro" name="valorObtenidoVehiculoSeguro"
+                                                type="number" disabled>
+                                          </div>
+                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 4">
+                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoInfraestructuraSegura"
+                                                name="valorObtenidoInfraestructuraSegura" type="number" disabled>
+                                          </div>
+                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 5">
+                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoAtencionVictima" name="valorObtenidoAtencionVictima"
+                                                type="number" disabled>
+                                          </div>
+                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 6">
+                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoValorAgregado" name="valorObtenidoValorAgregado"
+                                                type="number" disabled>
                                           </div>
                                           <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 1" [disabled]="botonEnviarFortalecimiento">
                                              <i class="fa fa-times"></i>
@@ -269,6 +269,7 @@
                                  </div>
                               </div>
                            </div>
+                           
                        </div>
                          <!-- fin detalles de la empresa -->
                       </div>
