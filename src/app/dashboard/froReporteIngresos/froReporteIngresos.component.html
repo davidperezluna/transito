@@ -8,10 +8,16 @@
                         name="idTipoRecaudo">
                     </ng-select>
                 </div>
-                <div class="col-xs-12 col-lg-4" *ngIf="tipoRecaudoSelected == 1">
+                <div class="col-xs-12 col-lg-4" *ngIf="tipoRecaudoSelected == 1 || tipoRecaudoSelected == 3">
                     <label>Seleccionar sede operativa</label>
                     <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="sedeOperativaSelected" required
                         name="idSedeOperativa">
+                    </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-4" *ngIf="tipoRecaudoSelected == 3">
+                    <label>Seleccionar Tipo Persona</label>
+                    <ng-select [multiple]="false" [options]="tiposPersona" [(ngModel)]="tipoPersonaSelected" required
+                        name="idTipoPersona">
                     </ng-select>
                 </div>
                 <div class="col-xs-12 col-lg-4">
@@ -39,11 +45,11 @@
                 <h5 class="card-title">Informe Tramites</h5>
             </div>
             <div class="card-body">
-                <table class="table " id="dataTables-example">
+                <table class="table " id="dataTables-tablaTramites">
                     <br>
                     <thead>
                         <tr>
-                            <th><b>Código</b></th>
+                            <!-- <th><b>Código</b></th> -->
                             <th><b>Concepto</b></th>
                             <th><b>Cantidad</b></th>
                             <th><b>Valor</b></th>
@@ -52,11 +58,128 @@
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let tramite of tramites; let i = index">
-                            <td>{{ tramite.codigo }}</td>
+                            <!-- <td>{{ tramite.codigo }}</td> -->
                             <td>{{ "TRAMITE" }}</td>
                             <td>{{ cant }}</td>
                             <td>{{ tramite.valor }}</td>
                             <td>{{ cant * tramite.valor }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 2 && tablaComparendos">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Informe Comparendos</h5>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-tablaComparendos">
+                    <br>
+                    <thead>
+                        <tr>
+                            <th><b>Nro. Acuerdo</b></th>
+                            <th><b>Nro. Comparendo</b></th>
+                            <!-- <th><b>Nro. Factura</b></th> -->
+                            <th><b>Valor</b></th>
+                            <th><b>Total</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let comparendo of comparendos; let i = index">
+                            <td>{{ comparendo.acuerdoPago.numero }}</td>
+                            <td>{{ comparendo.consecutivo.consecutivo }}</td>
+                            <!-- <td>{{ comparendo.factura.consecutivo }}</td> -->
+                            <td>{{ comparendo.valorPagar }}</td>
+                            <td>{{ total }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 3 && tablaRetefuente && tipoPersonaSelected == 1">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Informe Retefuente</h5>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-tablaRetefuente">
+                    <br>
+                    <thead>
+                        <tr>
+                            <th><b>Fecha</b></th>
+                            <th><b>Placa</b></th>
+                            <th><b>Recibo de Caja</b></th>
+                            <th><b>Anulado</b></th>
+                            <th><b>Marca</b></th>
+                            <th><b>Tipo</b></th>
+                            <th><b>Modelo</b></th>
+                            <th><b>Primer Apellido</b></th>
+                            <th><b>Segundo Apellido</b></th>
+                            <th><b>Primer Nombre</b></th>
+                            <th><b>Segundo Nombre</b></th>
+                            <th *ngIf="tipoPersonaSelected == 1"><b>Identificación</b></th>
+                            <th *ngIf="tipoPersonaSelected == 2"><b>NIT</b></th>
+                            <th><b>Dirección</b></th>
+                            <th><b>Ciudad</b></th>
+                            <th><b>Telefono</b></th>
+                            <th><b>Avaluo</b></th>
+                            <th><b>Retención</b></th>
+                            <th><b>Total</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let retencion of retenciones; let i = index">
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retencion }}</td>
+                            <td>{{ retenciones }}</td>
+                            <td>{{ retenciones }}</td>
+                            <td>{{ retenciones }}</td>
+                            <td>{{ retenciones }}</td>
+                            <td>{{ total }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-lg-12" *ngIf="tipoRecaudoSelected == 5 && tablaAcuerdosPago">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Informe Acuerdos de Pago</h5>
+            </div>
+            <div class="card-body">
+                <table class="table " id="dataTables-tablaAcuerdosPago">
+                    <br>
+                    <thead>
+                        <tr>
+                            <th><b>Nro. Acuerdo</b></th>
+                            <th><b>Nro. Comparendo</b></th>
+                            <!-- <th><b>Nro. Factura</b></th> -->
+                            <th><b>Valor</b></th>
+                            <th><b>Total</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let acuerdoPago of acuerdosPago; let i = index">
+                            <td>{{ acuerdoPago.numero }}</td>
+                            <td>{{ acuerdoPago.comparendo.numero }}</td>
+                            <!-- <td>{{ acuerdoPago.factura.consecutivo }}</td> -->
+                            <td>{{ acuerdoPago.valorNeto }}</td>
+                            <td>{{ total }}</td>
                         </tr>
                     </tbody>
                 </table>
