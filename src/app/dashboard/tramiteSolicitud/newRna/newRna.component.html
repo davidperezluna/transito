@@ -382,7 +382,7 @@
                         </div>
 
                         <div class="tab-pane" id="rna-cambiocombustible" role="tabpanel" *ngIf='ciudadano'>
-                            <appRna-cambio-combustible [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)"
+                            <appRna-cambio-combustible [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-combustible>
                         </div>
 
