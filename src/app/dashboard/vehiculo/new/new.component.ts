@@ -1,17 +1,17 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Vehiculo} from '../vehiculo.modelo';
-import {DepartamentoService} from "../../../services/departamento.service";
-import {LoginService} from '../../../services/login.service';
-import {MunicipioService} from '../../../services/municipio.service';
-import {LineaService} from '../../../services/linea.service';
-import {ClaseService} from '../../../services/clase.service';
-import {CarroceriaService} from '../../../services/carroceria.service';
-import {ServicioService} from '../../../services/servicio.service';
-import {ColorService} from '../../../services/color.service';
-import {CombustibleService} from '../../../services/combustible.service';
-import {VehiculoService} from '../../../services/vehiculo.service';
-import {CfgOrganismoTransitoService} from '../../../services/cfgOrganismoTransito.service';
-import {MarcaService} from '../../../services/marca.service';
+import { Vehiculo } from '../vehiculo.modelo';
+import { DepartamentoService } from "../../../services/departamento.service";
+import { MunicipioService } from '../../../services/municipio.service';
+import { LineaService } from '../../../services/linea.service';
+import { ClaseService } from '../../../services/clase.service';
+import { CarroceriaService } from '../../../services/carroceria.service';
+import { ServicioService } from '../../../services/servicio.service';
+import { ColorService } from '../../../services/color.service';
+import { CombustibleService } from '../../../services/combustible.service';
+import { VehiculoService } from '../../../services/vehiculo.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { MarcaService } from '../../../services/marca.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-new-vehiculo',
