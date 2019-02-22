@@ -1,11 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgAsignacionPlacaSedeService } from '../../../services/cfgAsignacionPlacaSede.service';
+import { VhloPlacaSedeService } from '../../../services/vhloPlacaSede.service';
+import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
-import { CfgTipoVehiculoService } from '../../../services/cfgTipoVehiculo.service';
-import { ModuloService } from '../../../services/modulo.service';
 
 
 @Component({
@@ -26,11 +24,10 @@ export class EditComponent implements OnInit {
     public tipoVehiculoSelected: any;
 
     constructor(
-        private _CfgAsignacionPlacaSedeService: CfgAsignacionPlacaSedeService,
-        private _loginService: LoginService,
+        private _PlacaSedeService: VhloPlacaSedeService,
         private _SedeOperativaService: SedeOperativaService,
-        private _ModuloService: ModuloService,
-        private _TipoVehiculo: CfgTipoVehiculoService
+        private _TipoVehiculo: VhloCfgTipoVehiculoService,
+        private _loginService: LoginService,
 
     ) { }
 
@@ -51,23 +48,8 @@ export class EditComponent implements OnInit {
                 }
             }
         );
-        this._ModuloService.getModuloSelect().subscribe(
-            response => {
-                this.modulos = response;
-                setTimeout(() => {
-                    this.moduloSelected = [this.asignacion.modulo.id];
-                });
-            },
-            error => {
-                this.errorMessage = <any>error;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-        this._TipoVehiculo.getTipoVehiculoSelect().subscribe(
+        this._TipoVehiculo.select().subscribe(
             response => {
                 this.tiposVehiculos = response;
                 setTimeout(() => {
@@ -92,7 +74,7 @@ export class EditComponent implements OnInit {
         this.asignacion.sedeOperativa = this.sedeOperativaSelected;
         this.asignacion.modulo = this.moduloSelected;
         this.asignacion.tipoVehiculo = this.tipoVehiculoSelected;
-        this._CfgAsignacionPlacaSedeService.edit(this.asignacion, token).subscribe(
+        this._PlacaSedeService.edit(this.asignacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

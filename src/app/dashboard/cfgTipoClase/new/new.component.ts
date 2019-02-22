@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgTipoClase } from '../cfgTipoClase.modelo';
 import { CfgTipoClaseService } from '../../../services/cfgTipoClase.service';
+import { VhloCfgTipoVehiculoService } from "../../../services/vhloCfgTipoVehiculo.service";
+import { ClaseService } from "../../../services/clase.service";
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
-import { CfgTipoVehiculoService } from "../../../services/cfgTipoVehiculo.service";
-import { ClaseService } from "../../../services/clase.service";
 
 @Component({
     selector: 'app-new',
@@ -26,14 +26,14 @@ export class NewComponent implements OnInit {
     constructor(
         private _TipoClaseService: CfgTipoClaseService,
         private _loginService: LoginService,
-        private _TipoService: CfgTipoVehiculoService,
+        private _TipoService: VhloCfgTipoVehiculoService,
         private _ClaseService: ClaseService
     ) { }
 
     ngOnInit() {
         this.tipo = new CfgTipoClase(null, null, null);
 
-        this._TipoService.getTipoVehiculoSelect().subscribe(
+        this._TipoService.select().subscribe(
             response => {
                 this.tipos = response;
             },

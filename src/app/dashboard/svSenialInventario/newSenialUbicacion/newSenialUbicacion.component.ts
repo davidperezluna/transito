@@ -55,8 +55,9 @@ export class NewSenialUbicacionComponent implements OnInit {
 
     public demarcacionNew = {
         'cantidad': null,
-        'anchoLinea': null,
-        'metraje': null,
+        'area': null,
+        'ancho': null,
+        'largo': null,
         'total': null,
         'tramoVial': null,
         'idLinea': null,
@@ -249,22 +250,39 @@ export class NewSenialUbicacionComponent implements OnInit {
         }
     }
 
-    onCalcularTotal() {
-        let cantidad, anchoLinea, metraje;
-        cantidad = this.demarcacionNew.cantidad;
-        anchoLinea = this.demarcacionNew.anchoLinea;
-        metraje = this.demarcacionNew.metraje;
+    onCalcularTotalLinea() {
+        let ancho, largo;
+        ancho = this.demarcacionNew.ancho;
+        largo = this.demarcacionNew.largo;
 
-        if (cantidad == 0 || anchoLinea == 0 || metraje == 0) {
+        if (ancho == 0 || largo == 0) {
             swal({
                 title: 'Alerta!',
-                text: 'La cantidad y/o el ancho de línea y/o  el metraje no pueden estar en 0',
+                text: 'El ancho de línea y/o el largo no pueden estar en 0',
                 type: 'error',
                 confirmButtonText: 'Aceptar'
             });
             this.demarcacionNew.total = 0;
         } else {
-            this.demarcacionNew.total = cantidad * (anchoLinea * metraje);
+            this.demarcacionNew.total = (ancho / 100) * largo;
+        }
+    }
+
+    onCalcularTotalArea() {
+        let cantidad, area;
+        cantidad = this.demarcacionNew.cantidad;
+        area = this.demarcacionNew.area;
+
+        if (cantidad == 0 || area == 0) {
+            swal({
+                title: 'Alerta!',
+                text: 'La cantidad y/o area no pueden estar en 0',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            this.demarcacionNew.total = 0;
+        } else {
+            this.demarcacionNew.total = cantidad * area;
         }
     }
 
@@ -272,14 +290,29 @@ export class NewSenialUbicacionComponent implements OnInit {
         this.arrayDemarcaciones.push(
             {
                 'cantidad': this.demarcacionNew.cantidad,
-                'anchoLinea': this.demarcacionNew.anchoLinea,
-                'metraje': this.demarcacionNew.metraje,
+                'ancho': this.demarcacionNew.ancho,
+                'largo': this.demarcacionNew.largo,
+                'area': this.demarcacionNew.area,
                 'total': this.demarcacionNew.total,
                 'tramoVial': this.demarcacionNew.tramoVial,
                 'idLinea': this.senialUbicacion.idSenial,
                 'idUnidadMedida': this.seniales.idUnidadMedida
             }
         );
+
+        swal({
+            title: 'Perfecto!',
+            text: 'Demarcación agregada.',
+            type: 'info',
+            confirmButtonText: 'Aceptar'
+        });
+
+        this.demarcacionNew.cantidad = null;
+        this.demarcacionNew.area = null;
+        this.demarcacionNew.ancho = null;
+        this.demarcacionNew.largo = null;
+        this.demarcacionNew.total = null;
+        this.demarcacionNew.tramoVial = null;
     }
 
     onRemoveDemarcacion(demarcacion) {

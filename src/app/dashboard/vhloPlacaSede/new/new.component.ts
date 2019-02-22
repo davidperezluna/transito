@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { VhloPlacaSedeService } from '../../../services/vhloPlacaSede.service';
-import { CfgTipoVehiculoService } from "../../../services/cfgTipoVehiculo.service";
+import { VhloCfgTipoVehiculoService } from "../../../services/vhloCfgTipoVehiculo.service";
 import { LoginService } from '../../../services/login.service';
 import { VhloPlacaSede } from '../vhloPlacaSede.modelo';
 import swal from 'sweetalert2';
@@ -21,7 +21,7 @@ export class NewVhloPlacaSedeComponent implements OnInit {
     public modulos: any;
 
     constructor(
-        private _TipoVehiculoService: CfgTipoVehiculoService,
+        private _TipoVehiculoService: VhloCfgTipoVehiculoService,
         private _VhloPlacaSedeService: VhloPlacaSedeService,
         private _loginService: LoginService,
     ) { }
@@ -29,7 +29,7 @@ export class NewVhloPlacaSedeComponent implements OnInit {
     ngOnInit() {
         this.asignacion = new VhloPlacaSede(null, null, null, null, null, null, null);
 
-        this._TipoVehiculoService.getTipoVehiculoSelect().subscribe(
+        this._TipoVehiculoService.select().subscribe(
             response => {
                 this.tiposVehiculo = response;
             },
@@ -60,7 +60,6 @@ export class NewVhloPlacaSedeComponent implements OnInit {
         let token = this._loginService.getToken();
 
         this.asignacion.idOrganismoTransito = this.organismoTransito.id;
-        this.asignacion.idTipoVehiculo = this.tipoVehiculo.id;
 
         this._VhloPlacaSedeService.register(this.asignacion, token).subscribe(
             response => {
