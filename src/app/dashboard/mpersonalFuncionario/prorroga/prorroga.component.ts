@@ -44,7 +44,7 @@ export class ProrrogaComponent implements OnInit {
       var datePiper = new DatePipe(this.date);
       this.date = datePiper.transform(this.date,'yyyy-MM-dd');
     }
-    
+     
   ngOnInit() {
     console.log(this.funcionario);
     swal({

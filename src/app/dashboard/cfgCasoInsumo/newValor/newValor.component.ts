@@ -2,12 +2,14 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { ImoCfgValor } from './imoCfgValor.modelo';
 import { ImoCfgValorService } from '../../../services/imoCfgValor.service';
 import { LoginService } from '../../../services/login.service';
+import { DatePipe  } from '@angular/common';
 
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-valor',
-  templateUrl: './newValor.component.html'
+  templateUrl: './newValor.component.html',
+  providers: [DatePipe]
 })
 export class NewValorComponent implements OnInit {
   @Output() readyValor = new EventEmitter<any>();
@@ -17,6 +19,8 @@ export class NewValorComponent implements OnInit {
   public respuesta;
   public modulos: any;
   public moduloSelected: any;
+  public isFechaEnviar: boolean = false;
+  public date:any;
   public tipoCasoInsumos = [
     { 'value': "Insumo", 'label': "Insumo" },
     { 'value': "Sustrato", 'label': "Sustrato" }
@@ -28,18 +32,18 @@ export class NewValorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.imoCfgValor = new ImoCfgValor(null, null);
-    console.log(this.cfgCasoInsumo);
-
-
+    this.imoCfgValor = new ImoCfgValor(null, null,null);
   }
   onCancelar() {
     this.readyValor.emit(true);
   }
   onEnviar() {
     let token = this._loginService.getToken();
+    this.imoCfgValor.idCasoInsumo = this.cfgCasoInsumo.id;
+
     
-    this._ImoCfgValorService.register(this.cfgCasoInsumo, token).subscribe(
+    
+    this._ImoCfgValorService.register(this.imoCfgValor, token).subscribe(
       response => {
         this.respuesta = response;
         
@@ -68,6 +72,25 @@ export class NewValorComponent implements OnInit {
           }
         }
       });
+  }
+
+  isFecha(){
+    this.date = new Date();
+    var datePiper = new DatePipe(this.date);
+    this.date = datePiper.transform(this.date,'yyyy-MM-dd');
+
+
+    if (this.imoCfgValor.fecha <= this.date) {
+      swal({
+        title: 'Error!',
+        text: 'La fecha no puede ser menor o igual a la actual!',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }else{
+      this.isFechaEnviar = true;   
+    }
+
   }
 
 }

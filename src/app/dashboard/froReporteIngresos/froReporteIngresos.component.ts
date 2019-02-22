@@ -35,13 +35,33 @@ export class FroReporteIngresosComponent implements OnInit {
     public date;
     public tablaTramites = false;
     public tablaComparendos = false;
+    public tablaRetefuente = false;
+    public tablaCobroCoactivo = false;
+    public tablaAcuerdosPago = false;
     
     public sedeOperativaSelected;
     public sedes;
-
+    
     public tramites;
-    public comparendos;
     public cant;
+    
+    public comparendos;
+    public totalComparendos;
+    
+    public retefuentes;
+    public totalRetefuente;
+    
+    public cobrosCoactivos;
+    public totalCobroCoactivo;
+    
+    public acuerdosPago;
+    public totalAcuerdosPago;
+    
+    public tipoPersonaSelected;
+    public tiposPersona = [
+        { value: 'PERSONA NATURAL', label: 'PERSONA NATURAL' },
+        { value: 'PERSONA JURIDICA', label: 'PERSONA JURIDICA' },
+    ];
 
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
@@ -56,7 +76,7 @@ export class FroReporteIngresosComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.froReporteIngresos = new FroReporteIngresos(null, null, null, null);
+        this.froReporteIngresos = new FroReporteIngresos(null, null, null, null, null);
 
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
@@ -79,10 +99,6 @@ export class FroReporteIngresosComponent implements OnInit {
         this._FroCfgTipoRecaudoService.select().subscribe(
             response => {
                 this.tiposRecaudo = response;
-
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -96,10 +112,6 @@ export class FroReporteIngresosComponent implements OnInit {
         this._SedeOperativaService.getSedeOperativaSelect().subscribe(
             response => {
                 this.sedes = response;
-
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -112,35 +124,37 @@ export class FroReporteIngresosComponent implements OnInit {
         );
     }
 
-    iniciarTabla() {
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 8,
-            sPaginationType: 'full_numbers',
-            buttons: [
-                {
-                    extend: 'excel',
-                    text: 'Excel',
-                    title: 'xls',
-                    filename: 'Reporte_Ingresos' + this.fecha,
-                },
-                {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    pageSize: 'LEGAL',
-                    filename: 'Reporte_IngresosPDF_' + this.fecha,
+    iniciarTabla(estado) {
+        if (estado) {
+            $('#' + estado).DataTable({
+                responsive: true,
+                pageLength: 8,
+                sPaginationType: 'full_numbers',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: 'Excel',
+                        title: 'xls',
+                        filename: 'Reporte_Ingresos' + this.fecha,
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL',
+                        filename: 'Reporte_IngresosPDF_' + this.fecha,
+                    }
+                ],
+                oLanguage: {
+                    oPaginate: {
+                        sFirst: '<<',
+                        sPrevious: '<',
+                        sNext: '>',
+                        sLast: '>>'
+                    }
                 }
-            ],
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
-                }
-            }
-        });
-        this.table = $('#dataTables-example').DataTable();
+            });
+            this.table = $('#' + estado).DataTable();
+        }
     }
 
     onNew() {
@@ -163,6 +177,7 @@ export class FroReporteIngresosComponent implements OnInit {
     onEnviar(){
         let token = this._LoginService.getToken();
         this.froReporteIngresos.idSedeOperativa = this.sedeOperativaSelected;
+        this.froReporteIngresos.idTipoPersona = this.tipoPersonaSelected;
         if(this.tipoRecaudoSelected == 1){
             this._FroTramiteService.getTramitePorFecha(this.froReporteIngresos, token).subscribe(
                 response => {
@@ -170,6 +185,12 @@ export class FroReporteIngresosComponent implements OnInit {
                         this.tramites = response.data;
                         this.cant = response.cant;
                         this.tablaTramites = true;
+                        console.log(this.tramites);
+                        
+                        let estado = "dataTables-tablaTramites";
+                        let timeoutId = setTimeout(() => {
+                            this.iniciarTabla(estado);
+                        }, 100);
                         swal({
                             title: 'Perfecto!',
                             text: response.message,
@@ -198,7 +219,54 @@ export class FroReporteIngresosComponent implements OnInit {
                 response => {
                     if (response.status == 'success') {
                         this.comparendos = response.data;
+                        this.totalComparendos = response.totalComparendos;
+                        console.log(response.data);
                         this.tablaComparendos = true;
+
+                        let estado = "dataTables-tablaComparendos";
+                        let timeoutId = setTimeout(() => {
+                            this.iniciarTabla(estado);
+                        }, 100);
+                        swal({
+                            title: 'Perfecto!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    } else {
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        } else if (this.tipoRecaudoSelected == 3) {
+            alert("retefuente");
+        } else if (this.tipoRecaudoSelected == 4) {
+            alert("cobro coactivo")
+        } else if (this.tipoRecaudoSelected == 5) {
+            this._FroAcuerdoPagoServie.getAcuerdoPagoByFecha(this.froReporteIngresos, token).subscribe(
+                response => {
+                    if (response.status == 'success') {
+                        this.acuerdosPago = response.data;
+                        this.totalAcuerdosPago = response.totalAcuerdoPago;
+                        console.log(response.data);
+                        this.tablaAcuerdosPago = true;
+
+                        let estado = "dataTables-tablaComparendos";
+                        let timeoutId = setTimeout(() => {
+                            this.iniciarTabla(estado);
+                        }, 100);
                         swal({
                             title: 'Perfecto!',
                             text: response.message,

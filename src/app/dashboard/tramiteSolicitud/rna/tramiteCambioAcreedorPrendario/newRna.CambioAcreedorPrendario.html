@@ -346,7 +346,7 @@
                         <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionNuevoAcreedorSelected == 4">
                             <label>NIT</label>
                             <div  class="input-group" [class.has-success]="empresaEncontrada === 2" [class.has-danger]="empresaEncontrada === 3">
-                                <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
+                                <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nitnewAcredor" name="nit" required />
                                 <span class="input-group-btn">
                                     <button (click)="onKeyEmpresaNuevoAcreedor()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2" [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                                 </span>
@@ -358,10 +358,16 @@
                         <hr>
                         <div class="col-xs-8 col-lg-12" *ngIf="ciudadanoAcreedorNew">
                             <h5>Datos nuevo acreedor prendario</h5>
-                            Nombres: {{ciudadanoAcreedorNew.primerNombre}} {{ciudadanoAcreedorNew.segundoNombre}} {{ciudadanoAcreedorNew.primerApellido}} {{ciudadanoAcreedorNew.segundoApellido}} <br>
+                            Nombre: {{ciudadanoAcreedorNew.nombre}} <br>
                             Direccion: {{ciudadanoAcreedorNew.ciudadano.direccion}} <br>
                             Ciudad: {{ciudadanoAcreedorNew.ciudadano.municipioResidencia.nombre}} <br>
                             Departamento: {{ciudadanoAcreedorNew.ciudadano.municipioResidencia.departamento.nombre}}    
+                        </div>
+                        <div class="col-xs-8 col-lg-12" *ngIf="empresaAcreedorNew">
+                            <h5>Datos nuevo acreedor prendario</h5>
+                            Nombres: {{empresaAcreedorNew.primerNombre}} {{empresaAcreedorNew.segundoNombre}} {{empresaAcreedorNew.primerApellido}} {{empresaAcreedorNew.segundoApellido}} <br>
+                            Tipo de empresa: {{empresaAcreedorNew.tipoEmpresa.nombre}} <br>
+                            correo: {{empresaAcreedorNew.correo}} <br>
                         </div>
                 </div>
             </div>

@@ -122,13 +122,15 @@ export class NewRnaTraspasoComponent implements OnInit {
     }
     
     enviarTramite(){
+        let token = this._loginService.getToken(); 
+
         this.datos.vehiculo = this.vehiculo.placa;
         this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
-        let token = this._loginService.getToken(); 
+        this.datos.idFactura = this.factura.id;
+        this.datos.tramiteFormulario = 'rna-traspaso';
+        
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.idFactura = this.factura.id;
-                this.datos.tramiteFormulario = 'rna-traspaso';
                 // let resumen = {
                 //     'anteriorPropietario': this.datos.idTipoBlindaje, 
                 //     'nivelBlindaje': this.datos.idNivelBlindaje,
