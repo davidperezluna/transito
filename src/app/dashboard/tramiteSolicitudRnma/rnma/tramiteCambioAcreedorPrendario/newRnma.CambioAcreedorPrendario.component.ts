@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgPlaca } from '../../../cfgPlaca/cfgPlaca.modelo';
+import { VhloCfgPlaca } from '../../../vhloCfgPlaca/vhloCfgPlaca.modelo';
 import { LoginService } from '../../../../services/login.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
 import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
@@ -19,7 +19,7 @@ export class NewRnmaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     @Input() banco: any = null;
     @Input() factura: any = null;
 
-    public placa: CfgPlaca = null;;
+    public placa: VhloCfgPlaca = null;;
     public errorMessage;
     public cfgTiposAlerta: any;
     public tramiteFacturaSelected: any;

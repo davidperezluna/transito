@@ -4,7 +4,7 @@ import {TramitePrecioService} from '../../../services/tramitePrecio.service';
 import {LoginService} from '../../../services/login.service';
 import {TramiteService} from '../../../services/tramite.service';
 import {ModuloService} from '../../../services/modulo.service';
-import {ClaseService} from '../../../services/clase.service';
+import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
 import swal from 'sweetalert2';
 import { Alert } from 'selenium-webdriver';
 
@@ -33,7 +33,7 @@ constructor(
   private _TramitePrecioService: TramitePrecioService,
   private _loginService: LoginService,
   private _tramiteService: TramiteService,
-  private _claseService: ClaseService,
+  private _claseService: VhloCfgClaseService,
   private _moduloService: ModuloService,
   ){}
 

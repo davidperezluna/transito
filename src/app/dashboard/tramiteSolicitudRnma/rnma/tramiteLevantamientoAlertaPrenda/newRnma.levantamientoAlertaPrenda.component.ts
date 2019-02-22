@@ -3,7 +3,7 @@ import { TramiteSolicitud } from '../../tramiteSolicitudRnma.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { BancoService } from '../../../../services/banco.service';
-import { CfgPlaca } from '../../../cfgPlaca/cfgPlaca.modelo';
+import { VhloCfgPlaca } from '../../../vhloCfgPlaca/vhloCfgPlaca.modelo';
 import { LoginService } from '../../../../services/login.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
@@ -28,7 +28,7 @@ export class NewRnmaTramiteLevantamientoAlertaPrendaComponent implements OnInit 
     @Input() factura: any = null;
     @Input() tramitesFactura: any = null;
 
-    public placa: CfgPlaca = null;;
+    public placa: VhloCfgPlaca = null;;
     public errorMessage;
     public respuesta;
     public cfgTiposAlerta: any;

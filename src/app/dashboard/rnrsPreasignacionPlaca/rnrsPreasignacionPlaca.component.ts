@@ -1,11 +1,11 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
-import {ColorService} from '../../services/color.service';
+import {VhloCfgColorService} from '../../services/vhloCfgColor.service';
 import {LoginService} from '../../services/login.service';
 import {Vehiculo} from '../vehiculo/vehiculo.modelo';
 import {VehiculoService} from '../../services/vehiculo.service';
 import {CiudadanoVehiculoService} from '../../services/ciudadanoVehiculo.service';
 import {SedeOperativaService} from '../../services/sedeOperativa.service';
-import {CfgPlacaService} from '../../services/cfgPlaca.service';
+import {VhloCfgPlacaService} from '../../services/vhloCfgPlaca.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -37,11 +37,11 @@ export class RnrsPreasignacionPlacaComponent implements OnInit {
  
   constructor(
     private _vehiculoService: VehiculoService,
-		private _ColorService: ColorService,
+		private _ColorService: VhloCfgColorService,
     private _loginService: LoginService,
     private _ciudadanoVehiculoService: CiudadanoVehiculoService,
     private _SedeOperativaService: SedeOperativaService,
-    private _CfgPlacaService: CfgPlacaService,
+    private _CfgPlacaService: VhloCfgPlacaService,
     ){}
     
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgPlacaService } from '../../../services/cfgPlaca.service';
+import { VhloCfgPlacaService } from '../../../services/vhloCfgPlaca.service';
 import { LoginService } from '../../../services/login.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { MsvTalonarioService } from '../../../services/msvTalonario.service';
@@ -26,7 +26,7 @@ export class EditComponent {
   // public tipoIdentificacion: Array<any>
 
   constructor(
-    private _CfgPlacaService: CfgPlacaService,
+    private _CfgPlacaService: VhloCfgPlacaService,
     private _loginService: LoginService,
     private _sedeOperativaService: SedeOperativaService,
     private _msvTalonarioService: MsvTalonarioService,

@@ -3,15 +3,15 @@ import {Vehiculo} from '../vehiculo.modelo';
 import {DepartamentoService} from "../../../services/departamento.service";
 import {LoginService} from '../../../services/login.service';
 import {MunicipioService} from '../../../services/municipio.service';
-import {LineaService} from '../../../services/linea.service';
-import {ClaseService} from '../../../services/clase.service';
-import {CarroceriaService} from '../../../services/carroceria.service';
-import {ServicioService} from '../../../services/servicio.service';
-import {ColorService} from '../../../services/color.service';
-import {CombustibleService} from '../../../services/combustible.service';
+import {VhloCfgLineaService} from '../../../services/vhloCfgLinea.service';
+import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
+import {VhloCfgCarroceriaService} from '../../../services/vhloCfgCarroceria.service';
+import {VhloCfgServicioService} from '../../../services/vhloCfgServicio.service';
+import {VhloCfgColorService} from '../../../services/vhloCfgColor.service';
+import {VhloCfgCombustibleService} from '../../../services/vhloCfgCombustible.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
 import {SedeOperativaService} from '../../../services/sedeOperativa.service';
-import {MarcaService} from '../../../services/marca.service';
+import {VhloCfgMarcaService} from '../../../services/vhloCfgMarca.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-edit',
@@ -46,13 +46,13 @@ constructor(
   private _departamentoService: DepartamentoService,
   private _loginService: LoginService,
   private _MunicipioService: MunicipioService,
-  private _lineaService: LineaService,
-  private _ClaseService: ClaseService,
-  private _CarroceriaService: CarroceriaService,
-  private _ServicioService: ServicioService,
-  private _MarcaService: MarcaService,
-  private _ColorService: ColorService,
-  private _CombustibleService: CombustibleService,
+  private _lineaService: VhloCfgLineaService,
+  private _ClaseService: VhloCfgClaseService,
+  private _CarroceriaService: VhloCfgCarroceriaService,
+  private _ServicioService: VhloCfgServicioService,
+  private _MarcaService: VhloCfgMarcaService,
+  private _ColorService: VhloCfgColorService,
+  private _CombustibleService: VhloCfgCombustibleService,
   private _VehiculoService: VehiculoService,
   private _SedeOperativaService: SedeOperativaService,
   ){}

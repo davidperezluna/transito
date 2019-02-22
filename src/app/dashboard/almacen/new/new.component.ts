@@ -2,10 +2,10 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {Almacen} from '../almacen.modelo';
 import {AlmacenService} from '../../../services/almacen.service';
 import {LoginService} from '../../../services/login.service';
-import {ServicioService} from '../../../services/servicio.service';
+import {VhloCfgServicioService} from '../../../services/vhloCfgServicio.service';
 import {OrganismoTransitoService} from '../../../services/organismoTransito.service';
 import {ConsumibleService} from '../../../services/consumible.service';
-import {ClaseService} from '../../../services/clase.service';
+import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -30,10 +30,10 @@ public claseSelected:any;
 constructor(
   private _AlmacenService: AlmacenService,
   private _loginService: LoginService,
-  private _servicioService: ServicioService,
+  private _servicioService: VhloCfgServicioService,
   private _organismoTransitoService: OrganismoTransitoService,
   private _consumibleService: ConsumibleService,
-  private _claseService: ClaseService,
+  private _claseService: VhloCfgClaseService,
   ){}
 
   ngOnInit() {

@@ -34,8 +34,8 @@ import { SvCfgHospitalService } from "../../../services/svCfgHospital.service";
 import { EmpresaService } from "../../../services/empresa.service";
 import { SvCfgFallaService } from "../../../services/svCfgFalla.service";
 import { SvCfgLugarImpactoService } from "../../../services/svCfgLugarImpacto.service";
-import { ClaseService } from "../../../services/clase.service";
-import { ServicioService } from "../../../services/servicio.service";
+import { VhloCfgClaseService } from "../../../services/vhloCfgClase.service";
+import { VhloCfgServicioService } from "../../../services/vhloCfgServicio.service";
 import { SvCfgHipotesisService } from "../../../services/svCfgHipotesis.service";
 import { SvCfgTipoVictimaService } from "../../../services/svCfgTipoVictima.service";
 import { SvCfgGravedadVictimaService } from "../../../services/svCfgGravedadVictima.service";
@@ -52,11 +52,11 @@ import { Utils } from 'ng2-bootstrap';
 import { SvCfgAseguradoraService } from '../../../services/svCfgAseguradora.service';
 import { SvCfgControlViaService } from '../../../services/svCfgControlVia.service';
 import { SvCfgEntidadAccidenteService } from '../../../services/svCfgEntidadAccidente.service';
-import { MarcaService } from '../../../services/marca.service';
-import { LineaService } from '../../../services/linea.service';
-import { ColorService } from '../../../services/color.service';
+import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
+import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
+import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
-import { CarroceriaService } from '../../../services/carroceria.service';
+import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 
 @Component({
@@ -255,8 +255,8 @@ export class NewComponent implements OnInit {
     private _EmpresaService: EmpresaService,
     private _FallaService: SvCfgFallaService,
     private _LugarImpactoService: SvCfgLugarImpactoService,
-    private _ClaseService: ClaseService,
-    private _ServicioService: ServicioService,
+    private _ClaseService: VhloCfgClaseService,
+    private _ServicioService: VhloCfgServicioService,
     private _HipotesisService: SvCfgHipotesisService,
     private _TipoVictimaService: SvCfgTipoVictimaService,
     private _GravedadVictimaService: SvCfgGravedadVictimaService,
@@ -268,10 +268,10 @@ export class NewComponent implements OnInit {
     private _EntidadService: SvCfgEntidadAccidenteService,
     private _UnidadReceptoraService: SvCfgUnidadReceptoraService,
 
-    private _MarcaService: MarcaService,
-    private _LineaService: LineaService,
-    private _ColorService: ColorService,
-    private _CarroceriaService: CarroceriaService,
+    private _MarcaService: VhloCfgMarcaService,
+    private _LineaService: VhloCfgLineaService,
+    private _ColorService: VhloCfgColorService,
+    private _CarroceriaService: VhloCfgCarroceriaService,
     private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
     private _RadioAccionService: VhloCfgRadioAccionService,
 

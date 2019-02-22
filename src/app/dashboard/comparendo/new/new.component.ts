@@ -19,8 +19,8 @@ import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { VhloCfgTransportePasajeroService } from '../../../services/vhloCfgTransportePasajero.service';
 import { VhloCfgTransporteEspecialService } from '../../../services/vhloCfgTransporteEspecial.service';
-import { ClaseService } from '../../../services/clase.service';
-import { ServicioService } from '../../../services/servicio.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
 import { MflInfraccionService } from '../../../services/mflInfraccion.service';
 import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
@@ -139,8 +139,8 @@ constructor(
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _TransportePasajeroService: VhloCfgTransportePasajeroService,
   private _TransporteEspecialService: VhloCfgTransporteEspecialService,
-  private _ClaseService: ClaseService,
-  private _ServicioService: ServicioService,
+  private _ClaseService: VhloCfgClaseService,
+  private _ServicioService: VhloCfgServicioService,
   private _MflInfraccionService: MflInfraccionService,
   private _CfgTipoInfractorService: CfgTipoInfractorService,
   private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,

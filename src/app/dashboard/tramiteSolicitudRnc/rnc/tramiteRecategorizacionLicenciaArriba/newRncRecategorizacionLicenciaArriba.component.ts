@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ClaseService } from '../../../../services/clase.service';
-import { ServicioService } from '../../../../services/servicio.service';
+import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
+import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { PaisService } from '../../../../services/pais.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
 import { LoginService } from '../../../../services/login.service';
@@ -44,8 +44,8 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
 
     constructor(
         private _LoginService: LoginService,
-        private _ClaseService: ClaseService,
-        private _ServicioService: ServicioService,
+        private _ClaseService: VhloCfgClaseService,
+        private _ServicioService: VhloCfgServicioService,
         private _PaisService: PaisService,
         private _CategoriaService: CfgLicenciaConduccionCategoriaService,
     ) { }

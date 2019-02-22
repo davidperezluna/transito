@@ -3,13 +3,13 @@ import { RnmaPreregistro } from '../rnmaPreregistro.modelo';
 import { RnmaPreregistroModule } from '../rnmaPreregistro.module';
 import { RnmaPreregistroService } from '../../../services/rnmaPreregistro.service';
 import { LoginService } from '../../../services/login.service';
-import {ColorService} from '../../../services/color.service';
+import {VhloCfgColorService} from '../../../services/vhloCfgColor.service';
 import { TipoVehiculoService } from '../../../services/tipoVehiculo.service';
-import {ClaseService} from '../../../services/clase.service';
-import {CarroceriaService} from '../../../services/carroceria.service';
-import {LineaService} from '../../../services/linea.service';
-import {CombustibleService} from '../../../services/combustible.service';
-import {MarcaService} from '../../../services/marca.service';
+import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
+import {VhloCfgCarroceriaService} from '../../../services/vhloCfgCarroceria.service';
+import {VhloCfgLineaService} from '../../../services/vhloCfgLinea.service';
+import {VhloCfgCombustibleService} from '../../../services/vhloCfgCombustible.service';
+import {VhloCfgMarcaService} from '../../../services/vhloCfgMarca.service';
 import { VhloCfgOrigenRegistroService } from '../../../services/vhloCfgOrigenRegistro.service';
 
 import swal from 'sweetalert2';
@@ -75,13 +75,13 @@ public tiposCabina =[
 constructor(
   private _RegistroMaquinariaService: RnmaPreregistroService,
   private _loginService: LoginService,
-  private _colorService: ColorService,
-  private _lineaService: LineaService,
+  private _colorService: VhloCfgColorService,
+  private _lineaService: VhloCfgLineaService,
   private _tipoVehiculoService: TipoVehiculoService,
-  private _claseService: ClaseService,
-  private _marcaService: MarcaService,
-  private _carroceriaService: CarroceriaService,
-  private _combustibleService: CombustibleService,
+  private _claseService: VhloCfgClaseService,
+  private _marcaService: VhloCfgMarcaService,
+  private _carroceriaService: VhloCfgCarroceriaService,
+  private _combustibleService: VhloCfgCombustibleService,
   private _OrigenRegistroService: VhloCfgOrigenRegistroService,
 
 ){}

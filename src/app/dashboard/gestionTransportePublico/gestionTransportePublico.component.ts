@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { LoginService } from '../../services/login.service';
-import { ClaseService } from '../../services/clase.service';
+import { VhloCfgClaseService } from '../../services/vhloCfgClase.service';
 import { SedeOperativaService } from '../../services/sedeOperativa.service';
 import { GestionTransportePublico } from './gestionTransportePublico.modelo';
 
@@ -25,7 +25,7 @@ export class GestionTransportePublicoComponent implements OnInit {
   constructor(
 		private _VehiculoService: VehiculoService,
     private _loginService: LoginService,
-    private _claseService: ClaseService,
+    private _claseService: VhloCfgClaseService,
 		private _sedeOperativaService: SedeOperativaService,
     ){}
     

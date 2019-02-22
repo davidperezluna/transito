@@ -4,10 +4,10 @@ import { PqoInmovilizacionService } from '../../../services/pqoInmovilizacion.se
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { MarcaService } from '../../../services/marca.service';
-import { LineaService } from '../../../services/linea.service';
-import { ClaseService } from '../../../services/clase.service';
-import { ColorService } from '../../../services/color.service';
+import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
+import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -33,10 +33,10 @@ constructor(
   private _PqoCfgPatioService: PqoCfgPatioService,
   private _PqoCfgGruaService: PqoCfgGruaService,
   private _FuncionarioService: MpersonalFuncionarioService,
-  private _MarcaService: MarcaService,
-  private _LineaService: LineaService,
-  private _ClaseService: ClaseService,
-  private _ColorService: ColorService,
+  private _MarcaService: VhloCfgMarcaService,
+  private _LineaService: VhloCfgLineaService,
+  private _ClaseService: VhloCfgClaseService,
+  private _ColorService: VhloCfgColorService,
   private _loginService: LoginService,
   ){}
 

@@ -5,7 +5,7 @@ import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 import { CfgTipoVehiculoService } from "../../../services/cfgTipoVehiculo.service";
-import { ClaseService } from "../../../services/clase.service";
+import { VhloCfgClaseService } from "../../../services/vhloCfgClase.service";
 
 @Component({
     selector: 'app-new',
@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
         private _TipoClaseService: CfgTipoClaseService,
         private _loginService: LoginService,
         private _TipoService: CfgTipoVehiculoService,
-        private _ClaseService: ClaseService
+        private _ClaseService: VhloCfgClaseService
     ) { }
 
     ngOnInit() {

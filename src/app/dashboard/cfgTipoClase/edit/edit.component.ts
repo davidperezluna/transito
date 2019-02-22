@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { CfgTipoClaseService } from '../../../services/cfgTipoClase.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { ClaseService } from '../../../services/clase.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { CfgTipoVehiculoService } from '../../../services/cfgTipoVehiculo.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class EditComponent implements OnInit {
     constructor(
         private _TipoService: CfgTipoClaseService,
         private _loginService: LoginService,
-        private _ClaseService: ClaseService,
+        private _ClaseService: VhloCfgClaseService,
         private _TipoVehiculoService: CfgTipoVehiculoService
     ) { }
 

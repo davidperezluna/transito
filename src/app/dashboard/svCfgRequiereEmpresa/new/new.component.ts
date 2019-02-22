@@ -3,7 +3,7 @@ import { SvCfgRequiereEmpresa } from '../svCfgRequiereEmpresa.modelo';
 import { SvCfgRequiereEmpresaService } from '../../../services/svCfgRequiereEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { CarroceriaService } from '../../../services/carroceria.service';
+import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
 
 @Component({
     selector: 'app-new',
@@ -21,7 +21,7 @@ export class NewComponent implements OnInit {
     constructor(
         private _RequiereEmpresaService: SvCfgRequiereEmpresaService,
         private _loginService: LoginService,
-        private _CarroceriaService: CarroceriaService,
+        private _CarroceriaService: VhloCfgCarroceriaService,
     ) { }
 
     ngOnInit() {

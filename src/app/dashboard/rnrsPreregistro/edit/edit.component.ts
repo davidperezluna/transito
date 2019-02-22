@@ -2,12 +2,12 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { RegistroRemolque } from '../rnrsPreregistro.modelo';
 import { RnrsPreregistroService } from '../../../services/rnrsPreregistro.service';
 import {LoginService} from '../../../services/login.service';
-import {CarroceriaService} from '../../../services/carroceria.service';
-import {MarcaService} from '../../../services/marca.service';
-import {LineaService} from '../../../services/linea.service';
+import {VhloCfgCarroceriaService} from '../../../services/vhloCfgCarroceria.service';
+import {VhloCfgMarcaService} from '../../../services/vhloCfgMarca.service';
+import {VhloCfgLineaService} from '../../../services/vhloCfgLinea.service';
 import { VhloCfgOrigenRegistroService } from '../../../services/vhloCfgOrigenRegistro.service';
 import { VhloCfgCondicionIngresoService } from '../../../services/vhloCfgCondicionIngreso.service';
-import {ClaseService} from '../../../services/clase.service';
+import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -64,10 +64,10 @@ public tiposCabina =[
 constructor(
   private _RegistroRemolqueService: RnrsPreregistroService,
   private _loginService: LoginService,
-  private _LineaService: LineaService,
-  private _ClaseService: ClaseService,
-  private _MarcaService: MarcaService,
-  private _CarroceriaService: CarroceriaService,
+  private _LineaService: VhloCfgLineaService,
+  private _ClaseService: VhloCfgClaseService,
+  private _MarcaService: VhloCfgMarcaService,
+  private _CarroceriaService: VhloCfgCarroceriaService,
   private _OrigenRegistroService: VhloCfgOrigenRegistroService,
   private _CondicionIngresoService: VhloCfgCondicionIngresoService,
 

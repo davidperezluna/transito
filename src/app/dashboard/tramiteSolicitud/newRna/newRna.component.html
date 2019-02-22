@@ -286,7 +286,7 @@
                         <div class="tab-pane" id="rna-matriculainicial" role="tabpanel">
                             <appRna-matricula-inicial [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-matricula-inicial>
-                        </div>
+                        </div> 
                         
                         <div class="tab-pane" id="rna-traspaso" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-traspaso [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
@@ -361,15 +361,16 @@
                             <appRna-duplicado-placa (readyTramite)="readyTramite($event)" [factura]="factura"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
                         </div>
+                        
                         <div class="tab-pane" id="rna-cambiomotor" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-cambio-motor [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" [factura]="factura"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
                         </div>
 
-                        <!-- <div class="tab-pane" id="rna-blindaje" role="tabpanel" *ngIf='ciudadano'>
+                        <div class="tab-pane" id="rna-blindaje" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-blindaje [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
-                        </div> -->
+                        </div>
 
                         <div class="tab-pane" id="rna-cambiocarroceria" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-cambio-carroceria [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
@@ -424,7 +425,7 @@
                         <div class="tab-pane" id="rna-prorroga-importacion-temporal" role="tabpanel" *ngIf='ciudadano'>
                             <appRna-prorroga-importacion-temporal [vehiculo]="vehiculo" [factura]="factura"
                                 (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>

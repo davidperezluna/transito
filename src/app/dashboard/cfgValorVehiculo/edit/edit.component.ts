@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import { LoginService } from '../../../services/login.service';
-import { ClaseService } from '../../../services/clase.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { SedeOperativaService } from '../../../services/sedeOperativa.service';
-import { MarcaService } from '../../../services/marca.service';
-import { LineaService } from '../../../services/linea.service';
+import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
+import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import swal from 'sweetalert2';
 
 
@@ -28,10 +28,10 @@ export class EditComponent {
   constructor(
     private _CfgValorVehiculoService: CfgValorVehiculoService,
     private _loginService: LoginService,
-    private _claseService: ClaseService,
+    private _claseService: VhloCfgClaseService,
     private _sedeOperativaService: SedeOperativaService,
-    private _MarcaService: MarcaService,
-    private _lineaService: LineaService,  
+    private _MarcaService: VhloCfgMarcaService,
+    private _lineaService: VhloCfgLineaService,  
   ) {
     //   this.tipoIdentificacion = [
     //     {value: 'CC', label: 'Cédula de ciudadanía'},
