@@ -88,6 +88,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         'vehiculoId': null,
         'ciudadanoOldId': null,
         'ciudadanoNewId': null,
+        'idEmpresaNew': null,
 
     };
     public tipoIdentificaciones = [];
@@ -167,11 +168,12 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         this.datos.idFactura = this.factura.id;
         this.datos.tramiteFormulario = 'rna-modificacion-acreedor-prendario';
 
-        this.datos.ciudadanoNewId = this.ciudadanoAcreedorNew.id;
-        this.datos.ciudadanoOldId = this.ciudadano.id;
-
+        if (this.ciudadanoAcreedorNew) {
+            this.datos.ciudadanoNewId = this.ciudadanoAcreedorNew.id;
+        }else{
+            this.datos.idEmpresaNew = this.empresaAcreedorNew.id;
+        }
         console.log(this.datos);
-        
         this._VehiculoAcreedorService.deleteAcreedor(this.datos, token).subscribe(
             response => {
                 response = response;
@@ -327,7 +329,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                 this.acreedorEncontrado = 2;
                                 this.enviarEncontrado = 5;
                                 // if (this.acreedor.empresa) {
-
                                     this.datos.acreedoresVehiculo.push(
                                         {
                                             'identificacion': this.acreedor.empresa.nit,
@@ -393,7 +394,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 if (response.status == 'success') {
                     this.empresaAcreedorNew = response.data;
                     console.log(this.empresaAcreedorNew);
-                   
                 } else {
                     this.empresaEncontrada = 3;
                 }
