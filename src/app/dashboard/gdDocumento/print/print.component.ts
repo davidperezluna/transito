@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { GdDocumentoService } from '../../../services/gdDocumento.service';
 import { GdTrazabilidadService } from '../../../services/gdTrazabilidad.service';
 import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -21,7 +21,7 @@ export class PrintComponent implements OnInit {
 
   public trazabilidades: any = null;
   public mediosCorrespondencia: any;
-  public sedesOperativas: any;
+  public organismosTransito: any;
 
 public datos = {
   'fechaEnvio': null,
@@ -37,7 +37,7 @@ constructor(
   private _DocumentoService: GdDocumentoService,
   private _TrazabilidadService: GdTrazabilidadService,
   private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   ){}
 
@@ -74,9 +74,9 @@ constructor(
       }
     );
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;

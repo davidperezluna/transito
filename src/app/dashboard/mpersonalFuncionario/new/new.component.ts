@@ -5,7 +5,7 @@ import { MpersonalFuncionarioService } from '../../../services/mpersonalFunciona
 import { MpersonalTipoContratoService } from '../../../services/mpersonalTipoContrato.service';
 import { CfgCargoService } from '../../../services/cfgCargo.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
 import { DatePipe  } from '@angular/common';
 import swal from 'sweetalert2';
@@ -32,7 +32,7 @@ public cargoSelected: any;
 public tiposIdentificacion: any;
 public tipoIdentificacionSelected: any;
 public tipoNombramientoSelected: any;
-public sedesOperativas: any;
+public organismosTransito: any;
 public sedeOperativaSelected: any;
 public errorMessage;
 public respuesta: any = null;
@@ -42,7 +42,7 @@ constructor(
   private _TipoContratoService: MpersonalTipoContratoService,
   private _CargoService: CfgCargoService,
   private _TipoIdentificacionService: TipoIdentificacionService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   private router: Router
   ){}
@@ -93,9 +93,9 @@ constructor(
       }
     );
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;

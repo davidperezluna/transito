@@ -1,7 +1,7 @@
 export class GestionTransportePublico{
 	constructor(
 		public estado:number,
-		public claseId:number,
-		public sedeOperativaId:number
+		public idClase:number,
+		public idOrganismoTransito:number
 	){}
 }

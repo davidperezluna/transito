@@ -3,7 +3,7 @@ import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { SedeOperativaService } from '../../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
@@ -19,7 +19,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
     @Input() tramitesFactura: any = null;
     @Input() factura: any = null;
     public errorMessage;
-    public sedesOperativas: any;
+    public organismosTransito: any;
     public tramiteFacturaSelected: any;
     public sedeOperativaSelected: any;
 
@@ -34,7 +34,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
     };
 
     constructor(
-        private _SedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
@@ -42,9 +42,9 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
 
     ngOnInit() {
         this.vehiculo.sedeOperativaId = 4;
-        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
-                this.sedesOperativas = response;
+                this.organismosTransito = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -63,7 +63,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        this._SedeOperativaService.showSedeOperativa(token, this.sedeOperativaSelected).subscribe(
+        this._OrganismoTransitoService.show(token, this.sedeOperativaSelected).subscribe(
             sedeOperativaResponse => {
                 this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-cambiosedeoperativa';

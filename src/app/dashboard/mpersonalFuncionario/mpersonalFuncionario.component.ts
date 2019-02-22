@@ -4,7 +4,7 @@ import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario
 import { LoginService } from '../../services/login.service';
 import { MpersonalTipoContratoService } from '../../services/mpersonalTipoContrato.service';
 import { CfgCargoService } from '../../services/cfgCargo.service';
-import { SedeOperativaService } from '../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { MpersonalFuncionario } from './mpersonalFuncionario.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -36,7 +36,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
   public tipoContratoSelected: any;
   public cargos: any;
   public cargoSelected: any;
-  public sedesOperativas: any;
+  public organismosTransito: any;
   public sedeOperativaSelected: any;
   public resumen = {};     public datos = {
     'nombre' : null,
@@ -54,7 +54,7 @@ export class MpersonalFuncionarioComponent implements OnInit {
     private _FuncionarioService: MpersonalFuncionarioService,
     private _TipoContratoService: MpersonalTipoContratoService,
     private _CargoService: CfgCargoService,
-    private _SedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _loginService: LoginService,
     private router: Router
     ){}
@@ -88,9 +88,9 @@ export class MpersonalFuncionarioComponent implements OnInit {
       }
     );
     
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;

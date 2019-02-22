@@ -2,9 +2,9 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {Almacen} from '../almacen.modelo';
 import {AlmacenService} from '../../../services/almacen.service';
 import {VhloCfgServicioService} from '../../../services/vhloCfgServicio.service';
-import {OrganismoTransitoService} from '../../../services/organismoTransito.service';
 import {ConsumibleService} from '../../../services/consumible.service';
 import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -34,7 +34,7 @@ constructor(
   private _almacenService: AlmacenService,
   private _loginService: LoginService,
   private _servicioService: VhloCfgServicioService,
-  private _organismoTransitoService: OrganismoTransitoService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _consumibleService: ConsumibleService,
   private _claseService: VhloCfgClaseService,
   ){}
@@ -58,7 +58,7 @@ constructor(
           }
         }
       );
-    this._organismoTransitoService.getOrganismoTransitoSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
         response => {
           this.organismosTransito = response;
           setTimeout(() => {

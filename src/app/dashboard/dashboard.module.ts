@@ -59,6 +59,7 @@ import { CvLcCfgTipoRestriccionModule } from './cvLcCfgTipoRestriccion/cvLcCfgTi
 import { CvCfgTipoMedidaCautelarModule } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.module';
 import { CvMedidaCautelarModule } from './cvMedidaCautelar/cvMedidaCautelar.module';
 
+import { VhloCfgTipoVehiculoModule } from './vhloCfgTipoVehiculo/vhloCfgTipoVehiculo.module';
 import { VhloCfgTipoAlertaModule } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.module';
 import { VhloCfgCdaModule } from './vhloCfgCda/vhloCfgCda.module';
 import { VhloCfgOrigenRegistroModule } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.module';
@@ -139,8 +140,6 @@ import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
-import { CfgTipoVehiculoModule } from './cfgTipoVehiculo/cfgTipoVehiculo.module';
-import { CfgAsignacionPlacaSedeModule } from './cfgAsignacionPlacaSede/cfgAsignacionPlacaSede.module';
 import { CfgTipoClaseModule } from './cfgTipoClase/cfgTipoClase.module';
 
 import { MsvEvaluacionModule } from './msvEvaluacion/msvEvaluacion.module';
@@ -177,7 +176,6 @@ import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoT
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
-import { CfgSedeOperativaModule } from './cfgSedeOperativa/cfgSedeOperativa.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
 import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
 import { CfgGravedadModule } from './cfgGravedad/cfgGravedad.module';
@@ -288,8 +286,6 @@ import {RightsidebarComponent} from '../shared';
       cfgFestivoModule,
       buscarAutomotorModule,
       CfgLicenciaConduccionCategoriaModule,
-      CfgTipoVehiculoModule,
-      CfgAsignacionPlacaSedeModule,
       CfgTipoClaseModule,
       RncLicenciaConduccionModule,
       SvCapacitacionModule,
@@ -385,6 +381,7 @@ import {RightsidebarComponent} from '../shared';
       CvRestriccionModule,
       CvCfgInteresModule,
       CvCfgPorcentajeInicialModule,
+      VhloCfgTipoVehiculoModule,
       VhloCfgTipoAlertaModule,
       VhloCfgCdaModule,
       VhloCfgOrigenRegistroModule,
@@ -425,7 +422,6 @@ import {RightsidebarComponent} from '../shared';
       CfgClaseAccidenteModule,
       CfgChoqueConModule,
       CfgObjetoFijoModule,
-      CfgSedeOperativaModule,
       CfgEntidadJudicialModule,
       CfgCausalLimitacionModule,
       MsvTalonarioModule,

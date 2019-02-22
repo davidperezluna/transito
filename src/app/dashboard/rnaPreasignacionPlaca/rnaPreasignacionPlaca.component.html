@@ -95,7 +95,7 @@
                           <label>Sede Operativa <span class="text-danger">*</span></label><br>
                           <ng-select
                             [multiple]="false"
-                            [options]="sedesOperativas"
+                            [options]="organismosTransito"
                             [(ngModel)]="sedeOperativaSelected"
                             (ngModelChange)="changedSedeOperativa($event)"
                             required

@@ -3,7 +3,7 @@ import {rnaRegistroInsumos} from '../rnaRegistroInsumos.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
 import { EmpresaService } from '../../../services/empresa.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2'; 
@@ -36,7 +36,7 @@ constructor(
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
   private _EmpresaService: EmpresaService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: CfgCasoInsumoService,
   ){}
 
@@ -88,7 +88,7 @@ constructor(
       }
     );
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.sedes = response;
       }, 

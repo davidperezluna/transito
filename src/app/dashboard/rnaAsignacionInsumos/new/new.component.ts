@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {rnaAsignacionInsumos} from '../rnaAsignacionInsumos.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import {RnaInsumoService} from '../../../services/rnaInsumos.service';
 import { DatePipe } from '@angular/common';
@@ -40,7 +40,7 @@ public table:any;
 constructor(
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: CfgCasoInsumoService,
   private _RnaInsumoService: RnaInsumoService,
   ){}
@@ -80,7 +80,7 @@ constructor(
       }
     );
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.sedes = response;
       }, 

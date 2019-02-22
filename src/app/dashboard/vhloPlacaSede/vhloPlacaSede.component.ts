@@ -113,7 +113,7 @@ export class VhloPlacaSedeComponent implements OnInit {
                     );
                 }else{
                     this.organismosTransito = null; 
-                    
+
                     swal({
                         title: 'Atención!',
                         text: response.message,
@@ -154,12 +154,35 @@ export class VhloPlacaSedeComponent implements OnInit {
     }
 
     onNew() {
-        this.formNew = true;
         this.formEdit = false;
         this.formIndex = false;
-        if (this.table) {
-            this.table.destroy();
-        }
+
+        let token = this._LoginService.getToken();
+
+        this._OrganismoTransitoService.show({ 'id': this.search.idOrganismoTransito }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.organismoTransito = response.data;
+                    this.formNew = true;
+                } else {
+                    this.organismosTransito = null;
+                    swal({
+                        title: 'Atención!',
+                        text: response.message,
+                        type: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
     }
 
     ready(isCreado: any) {

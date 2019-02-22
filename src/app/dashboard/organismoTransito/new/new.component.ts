@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {OrganismoTransito} from '../organismoTransito.modelo';
-import {OrganismoTransitoService} from '../../../services/organismoTransito.service';
+import {CfgOrganismoTransitoService} from '../../../services/cfgOrganismoTransito.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ public errorMessage;
 public respuesta;
 
 constructor(
-  private _OrganismoTransitoService: OrganismoTransitoService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   ){}
 

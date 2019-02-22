@@ -10,8 +10,8 @@ import {VhloCfgServicioService} from '../../../services/vhloCfgServicio.service'
 import {VhloCfgColorService} from '../../../services/vhloCfgColor.service';
 import {VhloCfgCombustibleService} from '../../../services/vhloCfgCombustible.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
-import {SedeOperativaService} from '../../../services/sedeOperativa.service';
 import {VhloCfgMarcaService} from '../../../services/vhloCfgMarca.service';
+import {CfgOrganismoTransitoService} from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-edit',
@@ -40,7 +40,7 @@ public sedeOperativaSelected:any;
 public marcaSelected:any;
 public combustibleSelected:any;
 public respuesta:any;
-public sedesOperativas:any;
+public organismosTransito:any;
 
 constructor(
   private _departamentoService: DepartamentoService,
@@ -54,7 +54,7 @@ constructor(
   private _ColorService: VhloCfgColorService,
   private _CombustibleService: VhloCfgCombustibleService,
   private _VehiculoService: VehiculoService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ){}
 
   ngOnInit() {
@@ -122,9 +122,9 @@ constructor(
         }
       }
     );
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
         setTimeout(() => {
             this.sedeOperativaSelected = [this.vehiculo.sedeOperativa.id];
         });

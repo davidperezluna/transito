@@ -4,8 +4,8 @@ import {LoginService} from '../../services/login.service';
 import {Vehiculo} from '../vehiculo/vehiculo.modelo';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.service';
-import {SedeOperativaService} from '../../services/sedeOperativa.service';
 import {VhloCfgPlacaService} from '../../services/vhloCfgPlaca.service';
+import {CfgOrganismoTransitoService} from '../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -31,7 +31,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   public placas:any; 
   public vehiculoCriterio:any; 
   public sedeOperativaSelected:any;
-  public sedesOperativas:any;
+  public organismosTransito:any;
   public sedeOperativa:any;
 
   public cfgPlacaSelected:any;
@@ -43,8 +43,8 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
 		private _ColorService: VhloCfgColorService,
     private _loginService: LoginService,
     private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-    private _SedeOperativaService: SedeOperativaService,
     private _CfgPlacaService: VhloCfgPlacaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ){}
     
   ngOnInit() {
@@ -203,10 +203,10 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
     });
     // cargar el select de sede operatiba 
     
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
-        console.log(this.sedesOperativas);
+        this.organismosTransito = response;
+        console.log(this.organismosTransito);
         
       }, 
       error => {

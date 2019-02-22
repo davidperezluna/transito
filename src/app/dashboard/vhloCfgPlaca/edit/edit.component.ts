@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { VhloCfgPlacaService } from '../../../services/vhloCfgPlaca.service';
 import { LoginService } from '../../../services/login.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 
 
@@ -17,7 +17,7 @@ export class EditComponent {
   public respuesta;
   public clases: any;
   public claseSelected: any;
-  public sedesOperativas: any;
+  public organismosTransito: any;
   public sedeOperativaSelected: any;
   // public tipoIdentificacion: Array<any>
 
@@ -25,7 +25,7 @@ export class EditComponent {
     private _CfgPlacaService: VhloCfgPlacaService,
     private _loginService: LoginService,
     private _claseService: VhloCfgClaseService,
-    private _sedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ) {
     //   this.tipoIdentificacion = [
     //     {value: 'CC', label: 'Cédula de ciudadanía'},
@@ -54,9 +54,9 @@ export class EditComponent {
       }
     );
 
-    this._sedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
         setTimeout(() => {
           this.sedeOperativaSelected = [this.cfgPlaca.sedeOperativa.id];
         });

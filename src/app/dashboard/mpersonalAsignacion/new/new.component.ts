@@ -12,7 +12,7 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() funcionario:any = null;
 public asignacion: MpersonalAsignacion;
-public sedesOperativas: any;
+public organismosTransito: any;
 public sedeOperativaSelected: any;
 public errorMessage;
 public respuesta: any = null;

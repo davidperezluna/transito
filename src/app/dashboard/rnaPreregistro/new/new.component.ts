@@ -13,8 +13,8 @@ import { VhloCfgCombustibleService } from '../../../services/vhloCfgCombustible.
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
 import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
@@ -57,7 +57,7 @@ public radioAccionSelected:any;
 public modalidadTransporteSelected:any;
 public tipoIdentificacionSelected:any;
 public respuesta:any;
-public sedesOperativas:any;
+public organismosTransito:any;
 public tipoIdentificaciones:any;
 public ciudadanoEncontrado=1;
 public empresaEncontrada=1;
@@ -118,7 +118,7 @@ constructor(
   private _CfgRadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _RnaPreregistroService: RnaPreregistroService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _tipoIdentificacionService: TipoIdentificacionService,
   private _FuncionarioService: MpersonalFuncionarioService,
   private _CiudadanoService: CiudadanoService,
@@ -174,9 +174,9 @@ constructor(
         }
       }
     );
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       }, 
       error => {
         this.errorMessage = <any>error;

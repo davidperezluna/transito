@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { SedeOperativaService } from '../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { CfgCasoInsumoService } from '../../services/cfgCasoInsumo.service';
 import { RnaInsumoService } from '../../services/rnaInsumos.service';
 import { ImoTrazabilidadService } from '../../services/imoTrazabilidad.service';

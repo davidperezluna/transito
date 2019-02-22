@@ -3,7 +3,7 @@ import { VhloCfgPlaca } from '../vhloCfgPlaca.modelo';
 import { VhloCfgPlacaService } from '../../../services/vhloCfgPlaca.service';
 import { LoginService } from '../../../services/login.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -17,14 +17,14 @@ export class NewComponent implements OnInit {
   public respuesta;
   public clases: any;
   public claseSelected: any;
-  public sedesOperativas: any;
+  public organismosTransito: any;
   public sedeOperativaSelected: any;
 
   constructor(
     private _CfgPlacaService: VhloCfgPlacaService,
     private _loginService: LoginService,
     private _claseService: VhloCfgClaseService,
-    private _sedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ) { }
 
   ngOnInit() {
@@ -44,9 +44,9 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this._sedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;

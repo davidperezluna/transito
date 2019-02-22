@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgTipoVehiculoService } from '../../../services/cfgTipoVehiculo.service';
+import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +15,7 @@ export class EditComponent implements OnInit {
     public formReady = false;
 
     constructor(
-        private _CfgTipoVehiculoService: CfgTipoVehiculoService,
+        private _TipoVehiculoService: VhloCfgTipoVehiculoService,
         private _loginService: LoginService,
     ) { }
 
@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this._CfgTipoVehiculoService.edit(this.tipo, token).subscribe(
+        this._TipoVehiculoService.edit(this.tipo, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

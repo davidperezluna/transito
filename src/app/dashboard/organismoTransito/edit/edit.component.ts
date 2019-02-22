@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {OrganismoTransito} from '../organismoTransito.modelo';
-import {OrganismoTransitoService} from '../../../services/organismoTransito.service';
+import {CfgOrganismoTransitoService} from '../../../services/cfgOrganismoTransito.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -16,7 +16,7 @@ public respuesta;
 // public tipoIdentificacion: Array<any>
 
 constructor(
-  private _OrganismoTransitoService: OrganismoTransitoService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   ){
 
@@ -28,7 +28,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._OrganismoTransitoService.editOrganismoTransito(this.organismoTransito,token).subscribe(
+		this._OrganismoTransitoService.edit(this.organismoTransito,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

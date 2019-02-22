@@ -1,10 +1,9 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Factura } from '../factura.modelo';
 import { FacturaService } from '../../../services/factura.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { LoginService } from '../../../services/login.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -19,28 +18,29 @@ public respuesta;
 public formReady = false;
 public vehiculos: Array<any>
 public ciudadanos: any;
-public sedesOperativas: any;
+  public organismosTransito: any;
 public vehiculoSelected: Array<any>; // ng-select [(ngModel)]
 public solicitanteSelected: Array<any>; // ng-select [(ngModel)]
 public apoderadoSelected: Array<any>; // ng-select [(ngModel)]
-public sedeOperativaSelected: Array<any>; // ng-select [(ngModel)]
+  public organismoTransitoSelected: Array<any>; // ng-select [(ngModel)]
 
 constructor(
   private _FacturaService: FacturaService,
-  private _loginService: LoginService,
   private _VehiculoService: VehiculoService,
   private _CiudadanoService: CiudadanoService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
+  private _loginService: LoginService,
   ){}
 
   ngOnInit(){
     
     
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.select().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
+
         setTimeout(() => {
-          this.sedeOperativaSelected = [this.factura.sedeOperativa.id];
+          this.organismoTransitoSelected = [this.factura.sedeOperativa.id];
           this.formReady = true;
         });
       },
@@ -60,7 +60,9 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.factura.sedeOperativaId = this.sedeOperativaSelected;
+    
+    this.factura.sedeOperativaId = this.organismoTransitoSelected;
+
 		this._FacturaService.editFactura(this.factura,token).subscribe(
 			response => {
         this.respuesta = response;

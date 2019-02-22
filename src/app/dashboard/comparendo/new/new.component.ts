@@ -4,8 +4,7 @@ import { ComparendoService } from '../../../services/comparendo.service';
 import { LoginService } from '../../../services/login.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MpersonalComparendoService } from '../../../services/mpersonalComparendo.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
-import { OrganismoTransitoService } from '../../../services/organismoTransito.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
@@ -64,7 +63,6 @@ export class NewComponent implements OnInit {
 
   public infracciones: any;
 
-  public sedesOperativas: any;
   public servicios: any;
   public tiposVehiculo: any;
   public radiosAccion: any;
@@ -125,7 +123,7 @@ constructor(
   private _loginService: LoginService,
   private _MpersonalFuncionarioService: MpersonalFuncionarioService,
   private _MpersonalComparendoService: MpersonalComparendoService,
-  private _OrganismoTransitoService: OrganismoTransitoService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _MunicipioService: MunicipioService,
   private _VechiculoService: VehiculoService,
   private _CiudadanoService: CiudadanoService,
@@ -185,7 +183,7 @@ constructor(
       }
     );
 
-    this._OrganismoTransitoService.getOrganismoTransitoSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
       },

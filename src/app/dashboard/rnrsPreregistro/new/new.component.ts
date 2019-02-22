@@ -9,7 +9,7 @@ import { VhloCfgOrigenRegistroService } from '../../../services/vhloCfgOrigenReg
 import { VhloCfgCondicionIngresoService } from '../../../services/vhloCfgCondicionIngreso.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -31,7 +31,7 @@ export class NewRegistroRemolqueComponent implements OnInit {
   public clases:any;
   public persona:any='empresa';
   public sedeOperativa:any;
-  public sedesOperativas:any;
+  public organismosTransito:any;
   public sedeOperativaSelected:any;
   public propietarios:any;
   public propietarioSelected:any;
@@ -49,7 +49,7 @@ constructor(
   private _CondicionIngresoService: VhloCfgCondicionIngresoService,
   private _FuncionarioService: MpersonalFuncionarioService,
   private _loginService: LoginService,
-  private _SedeOperativaService: SedeOperativaService
+  private _OrganismoTransitoService: CfgOrganismoTransitoService
 ){}
 
 ngOnInit() {
@@ -91,9 +91,9 @@ ngOnInit() {
 
   this.registroRemolque = new RegistroRemolque(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
   
-  this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+  this._OrganismoTransitoService.selectSedes().subscribe(
     response => {
-      this.sedesOperativas = response;
+      this.organismosTransito = response;
     }, 
     error => {
       this.errorMessage = <any>error;

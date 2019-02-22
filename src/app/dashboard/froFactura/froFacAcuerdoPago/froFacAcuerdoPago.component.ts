@@ -20,7 +20,7 @@ export class FroFacAcuerdoPagoComponent implements OnInit {
     public amortizaciones: any = null;
     public acuerdoPago: any = null;
     public numeroIdentificacion: any;
-    public sedesOperativas: any;
+    public organismosTransito: any;
 
     public formIndex = false;
     public formShow = false;
