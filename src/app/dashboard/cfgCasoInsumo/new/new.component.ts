@@ -3,7 +3,7 @@ import { CfgCasoInsumo } from '../cfgCasoInsumo.modelo';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import { LoginService } from '../../../services/login.service';
 import { ModuloService } from '../../../services/modulo.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
     private _CfgCasoInsumoService: CfgCasoInsumoService,
     private _loginService: LoginService,
     private _ModuloService: ModuloService,
-    private _sedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ) { }
 
   ngOnInit() {

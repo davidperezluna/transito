@@ -3,7 +3,7 @@ import { FroRecaudo } from '../froRecaudo.modelo';
 import { FroRecaudoService } from '../../../services/froRecaudo.service';
 import { LoginService } from '../../../services/login.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -18,23 +18,23 @@ export class NewComponent implements OnInit {
 
     public numFactura: any;
     public disabled: boolean = true;
-    public sedesOperativas: any;
+    public organismosTransito: any;
     public froFactura: any;
     public sedeOperativaSelected: any;
 
     constructor(
         private _FroRecaudoService: FroRecaudoService,
         private _loginService: LoginService,
-        private _SedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _FroFacturaServiceService: FroFacturaService,
     ) { }
 
     ngOnInit() {
         this.froRecaudo = new FroRecaudo(null, null, null,null,null,null,null,null,null);
 
-        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
-                this.sedesOperativas = response;
+                this.organismosTransito = response;
             },
             error => {
                 this.errorMessage = <any>error;

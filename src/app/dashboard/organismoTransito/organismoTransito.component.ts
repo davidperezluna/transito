@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {OrganismoTransitoService} from '../../services/organismoTransito.service';
+import {CfgOrganismoTransitoService} from '../../services/cfgOrganismoTransito.service';
 import {LoginService} from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -20,7 +20,7 @@ export class OrganismoTransitoComponent implements OnInit {
   public organismoTransito:any; 
 
   constructor(
-		private _OrganismoTransitoService: OrganismoTransitoService,
+		private _OrganismoTransitoService: CfgOrganismoTransitoService,
 		private _loginService: LoginService,
     ){}
     
@@ -39,7 +39,7 @@ export class OrganismoTransitoComponent implements OnInit {
       ) {
       }
     })
-		this._OrganismoTransitoService.getOrganismoTransito().subscribe(
+		this._OrganismoTransitoService.index().subscribe(
 				response => {
           this.organismoTransitos = response.data;
           let timeoutId = setTimeout(() => {  
@@ -100,7 +100,7 @@ export class OrganismoTransitoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._OrganismoTransitoService.deleteOrganismoTransito(token,id).subscribe(
+        this._OrganismoTransitoService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

@@ -4,7 +4,7 @@ import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { TramiteFactura } from '../../tramiteFactura/tramiteFactura.modelo';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { TramiteService } from '../../../services/tramite.service';
@@ -24,7 +24,7 @@ public respuesta;
 public vehiculos: any;
 public tramiteFactura: TramiteFactura;
 public ciudadanos: any;
-public sedesOperativas: any;
+public organismosTransito: any;
 public vehiculoSelected: any;
 public solicitanteSelected: any;
 public apoderadoSelected: any;
@@ -41,7 +41,7 @@ constructor(
   private _CiudadanoService: CiudadanoService,
   private _loginService: LoginService,
   private _VehiculoService: VehiculoService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _TramiteFacturaService: TramiteFacturaService,
   private _TramiteService: TramiteService,
   ){}

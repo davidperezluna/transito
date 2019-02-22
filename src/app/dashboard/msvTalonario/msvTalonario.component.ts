@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MsvTalonarioService } from '../../services/msvTalonario.service';
 import { LoginService } from '../../services/login.service';
-import { SedeOperativaService } from '../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 import { MsvTalonario } from './msvTalonario.modelo';
 declare var $: any;
@@ -32,7 +32,7 @@ export class MsvTalonarioComponent implements OnInit {
   constructor(
     private _msvTalonarioService: MsvTalonarioService,
     private _loginService: LoginService,
-    private _sedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ) { }
 
   ngOnInit() {

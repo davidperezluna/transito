@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { VhloPlacaSedeService } from '../../../services/vhloPlacaSede.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -15,7 +15,7 @@ export class EditComponent implements OnInit {
     @Input() asignacion: any = null;
     public errorMessage;
 
-    public sedesOperativas: any;
+    public organismosTransito: any;
     public modulos: any;
     public tiposVehiculos: any;
 
@@ -25,16 +25,16 @@ export class EditComponent implements OnInit {
 
     constructor(
         private _PlacaSedeService: VhloPlacaSedeService,
-        private _SedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _TipoVehiculo: VhloCfgTipoVehiculoService,
         private _loginService: LoginService,
 
     ) { }
 
     ngOnInit() { 
-        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
-                this.sedesOperativas = response;
+                this.organismosTransito = response;
                 setTimeout(() => {
                     this.sedeOperativaSelected = [this.asignacion.sedeOperativa.id];
                 });

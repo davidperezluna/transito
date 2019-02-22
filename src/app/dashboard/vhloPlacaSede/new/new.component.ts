@@ -15,7 +15,7 @@ export class NewVhloPlacaSedeComponent implements OnInit {
     public asignacion: VhloPlacaSede;
     public errorMessage: any;
 
-    public sedesOperativas: any;
+    public organismosTransito: any;
     public tiposVehiculo: any;
     public tipoVehiculo: any;
     public modulos: any;

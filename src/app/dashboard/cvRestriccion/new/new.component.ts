@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Router} from '@angular/router'
 import { LoginService } from '../../../services/login.service';
 import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CiudadanoService } from '../../../services/ciudadano.service';
 import { RncLicenciaConduccionService } from '../../../services/rncLicenciaConduccion.service';
 import swal from 'sweetalert2';
@@ -27,13 +27,13 @@ export class NewComponent implements OnInit {
   public identificacion:any;
   public tiposIdentificacion: any;
   public tipoIdentificacionSelected: any;
-  public sedesOperativas: any;
+  public organismosTransito: any;
   public sedeOperativaSelected: any;
 
   constructor(
     private _LicenciaConduccionService: RncLicenciaConduccionService,
     private _TipoIdentificacionService: TipoIdentificacionService,
-    private _SedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _CiudadanoService: CiudadanoService,
     private _loginService: LoginService,
     private router: Router
@@ -63,9 +63,9 @@ export class NewComponent implements OnInit {
       this.table.destroy();
     }
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;

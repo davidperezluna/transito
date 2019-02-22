@@ -3,7 +3,7 @@ import { SvCfgHospitalService } from '../../../services/svCfgHospital.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { MunicipioService } from '../../../services/municipio.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 
 @Component({
     selector: 'app-edit',
@@ -16,7 +16,7 @@ export class EditComponent implements OnInit {
     public respuesta;
 
     public municipios: any;
-    public sedesOperativas: any;
+    public organismosTransito: any;
 
     public municipioSelected: any;
     public sedeOperativaSelected: any;
@@ -27,7 +27,7 @@ export class EditComponent implements OnInit {
         private _HospitalService: SvCfgHospitalService,
         private _loginService: LoginService,
         private _MunicipioService: MunicipioService,
-        private _SedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 
     ngOnInit() {
@@ -48,9 +48,9 @@ export class EditComponent implements OnInit {
                 }
             }
         );
-        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
-                this.sedesOperativas = response;
+                this.organismosTransito = response;
                 setTimeout(() => {
                     this.sedeOperativaSelected = [this.hospital.sedeOperativa.id];
                 });

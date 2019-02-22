@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MpersonalTalonario } from '../mpersonalTalonario.modelo';
 import { MpersonalTalonarioService } from '../../../services/mpersonalTalonario.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2'; 
 
@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public talonario: MpersonalTalonario;
-public sedesOperativas: any;
+public organismosTransito: any;
 public sedeOperativaSelected: any;
 public sedeOperativa: any = null;
 public errorMessage;
@@ -20,16 +20,16 @@ public respuesta: any = null;
 
 constructor(
   private _FuncionarioService: MpersonalTalonarioService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
     this.talonario = new MpersonalTalonario(null, null, null, null, null, null, null, null);
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -68,7 +68,7 @@ constructor(
   onChangedSedeOperativa(e) {
     if (e) {
       let token = this._loginService.getToken();
-      this._SedeOperativaService.showSedeOperativa(token, e).subscribe(
+      this._OrganismoTransitoService.show(token, e).subscribe(
         response => {
             this.sedeOperativa = response.data;
         },

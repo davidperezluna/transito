@@ -10,7 +10,7 @@ import {ServicioService} from '../../../../services/servicio.service';
 import {ColorService} from '../../../../services/color.service';
 import {CombustibleService} from '../../../../services/combustible.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
-import {SedeOperativaService} from '../../../../services/sedeOperativa.service';
+import {CfgOrganismoTransitoService} from '../../../../services/cfgOrganismoTransito.service';
 import {MarcaService} from '../../../../services/marca.service';
 import swal from 'sweetalert2';
 @Component({
@@ -42,7 +42,7 @@ public sedeOperativaSelected:any;
 public combustibleSelected:any;
 public marcaSelected:any;
 public respuesta:any;
-public sedesOperativas:any;
+public organismosTransito:any;
 public resumen = {};     public datos = {
   'numeroMotor': null,
   'tramiteFormulario': null,
@@ -61,7 +61,7 @@ constructor(
   private _ColorService: ColorService,
   private _CombustibleService: CombustibleService,
   private _VehiculoService: VehiculoService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ){}
 
   ngOnInit() {
@@ -106,9 +106,9 @@ constructor(
         }
       }
     );
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       }, 
       error => {
         this.errorMessage = <any>error;

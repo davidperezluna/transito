@@ -75,7 +75,7 @@
                 <div class="form-group row">
                   <div class="col-lg-12 col-md-16">
                     <label>Sede*</label>
-                    <ng-select placeholder="Seleccione una Sede Operativa" [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected" (ngModelChange)="changedSedeOperativa($event)"
+                    <ng-select placeholder="Seleccione una Sede Operativa" [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeOperativaSelected" (ngModelChange)="changedSedeOperativa($event)"
                       required name="bancoId">
                     </ng-select>
                   </div>

@@ -10,7 +10,7 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Sede operativa <b class="text-danger">*</b></label>
-                            <ng-select placeholder="Seleccione una Sede Operativa" [multiple]="false" [options]="sedesOperativas" [(ngModel)]="sedeOperativaSelected"
+                            <ng-select placeholder="Seleccione una Sede Operativa" [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeOperativaSelected"
                                 (ngModelChange)="changedSedeOperativa($event)" required name="idSedeOperativa">
                             </ng-select>
                         </div>

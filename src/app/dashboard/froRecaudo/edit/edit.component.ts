@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroRecaudoService } from '../../../services/froRecaudo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class EditComponent implements OnInit {
 
     public numFactura: any;
     public disabled: boolean = true;
-    public sedesOperativas: any;
+    public organismosTransito: any;
     public froFactura: any;
     public sedeOperativaSelected: any;
 
@@ -26,16 +26,16 @@ export class EditComponent implements OnInit {
     constructor(
         private _FroRecaudoService: FroRecaudoService,
         private _loginService: LoginService,
-        private _SedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _FroFacturaServiceService: FroFacturaService,
     ) {}
 
     ngOnInit() {
         this.numFactura = this.froRecaudo.froFactura.numero;
-        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
                 console.log(response); 
-                this.sedesOperativas = response;
+                this.organismosTransito = response;
                 setTimeout(() => {
                     this.sedeOperativaSelected = [this.froRecaudo.sedeOperativa.id];
                 });

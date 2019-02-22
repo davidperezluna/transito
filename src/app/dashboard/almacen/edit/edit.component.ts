@@ -1,11 +1,10 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Almacen} from '../almacen.modelo';
-import {AlmacenService} from '../../../services/almacen.service';
-import {ServicioService} from '../../../services/servicio.service';
-import {OrganismoTransitoService} from '../../../services/organismoTransito.service';
-import {ConsumibleService} from '../../../services/consumible.service';
-import {ClaseService} from '../../../services/clase.service';
-import {LoginService} from '../../../services/login.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AlmacenService } from '../../../services/almacen.service';
+import { ServicioService } from '../../../services/servicio.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { ConsumibleService } from '../../../services/consumible.service';
+import { ClaseService } from '../../../services/clase.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -34,7 +33,7 @@ constructor(
   private _almacenService: AlmacenService,
   private _loginService: LoginService,
   private _servicioService: ServicioService,
-  private _organismoTransitoService: OrganismoTransitoService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _consumibleService: ConsumibleService,
   private _claseService: ClaseService,
   ){}
@@ -58,7 +57,7 @@ constructor(
           }
         }
       );
-    this._organismoTransitoService.getOrganismoTransitoSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
         response => {
           this.organismosTransito = response;
           setTimeout(() => {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgPlacaService } from '../../../services/cfgPlaca.service';
 import { LoginService } from '../../../services/login.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { MsvTalonarioService } from '../../../services/msvTalonario.service';
 import swal from 'sweetalert2';
 import { MsvTalonario } from '../msvTalonario.modelo';
@@ -16,7 +16,7 @@ export class EditComponent {
   @Input() talonario: any = null;
   public errorMessage;
   public respuesta;
-  public sedesOperativas: any;
+  public organismosTransito: any;
   public sedeOperativaSuccess = false;
   public talonarioReady = false;
   public sedeOperativaSelected: any;
@@ -28,7 +28,7 @@ export class EditComponent {
   constructor(
     private _CfgPlacaService: CfgPlacaService,
     private _loginService: LoginService,
-    private _sedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _msvTalonarioService: MsvTalonarioService,
   ) {
     //   this.tipoIdentificacion = [
@@ -42,9 +42,9 @@ export class EditComponent {
   ngOnInit() {
 
 
-    this._sedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
         setTimeout(() => {
           this.sedeOperativaSelected = [this.talonario.sedeOperativa.id];
         });
@@ -113,7 +113,7 @@ export class EditComponent {
     this.validado = false;
     if (e) {
       let token = this._loginService.getToken();
-      this._sedeOperativaService.showSedeOperativa(token, e).subscribe(
+      this._OrganismoTransitoService.show(token, e).subscribe(
         response => {
           this.sedeOperativa = response;
           this.sedeOperativaReady = true;

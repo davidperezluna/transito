@@ -85,7 +85,7 @@ export class InsumoBusquedaComponent implements OnInit {
         'organismoTransito':this.organismoTransitoSelected,
       } 
       let token = this._loginService.getToken();
-      this._rnaRegistroInsumosService.showSedeOperativaInsumo(datos,token).subscribe(
+      this._rnaRegistroInsumosService.showInsumo(datos,token).subscribe(
         response => {
           if (response.status == 'success') {
             this.loteInsumos = response.data;

@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
 import { EmpresaService } from '../../../services/empresa.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import {RnaInsumoService} from '../../../services/rnaInsumos.service';
 import { DatePipe } from '@angular/common';
@@ -27,7 +27,7 @@ constructor(
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
   private _EmpresaService: EmpresaService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: CfgCasoInsumoService,
   private _RnaInsumoService: RnaInsumoService,
   ){}
