@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import { LoginService } from '../../../services/login.service';
 import { ClaseService } from '../../../services/clase.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { MarcaService } from '../../../services/marca.service';
 import { LineaService } from '../../../services/linea.service';
 import swal from 'sweetalert2';
@@ -29,7 +29,7 @@ export class EditComponent {
     private _CfgValorVehiculoService: CfgValorVehiculoService,
     private _loginService: LoginService,
     private _claseService: ClaseService,
-    private _sedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _MarcaService: MarcaService,
     private _lineaService: LineaService,  
   ) {

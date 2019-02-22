@@ -10,7 +10,7 @@ import { ServicioService } from '../../../../../services/servicio.service';
 import { ColorService } from '../../../../../services/color.service';
 import { CombustibleService } from '../../../../../services/combustible.service';
 import { VehiculoService } from '../../../../../services/vehiculo.service';
-import { SedeOperativaService } from '../../../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
 import { MarcaService } from '../../../../../services/marca.service';
 import { PaisService } from "../../../../../services/pais.service";
 import { MsvRegistroIpatService } from "../../../../../services/msvRegistroIpat.service";
@@ -45,7 +45,7 @@ export class NewVehiculoComponent implements OnInit {
     public sedeOperativaSelected: any;
     public combustibleSelected: any;
     public respuesta: any;
-    public sedesOperativas: any;
+    public organismosTransito: any;
 
     constructor(
         private _departamentoService: DepartamentoService,
@@ -59,7 +59,7 @@ export class NewVehiculoComponent implements OnInit {
         private _ColorService: ColorService,
         private _CombustibleService: CombustibleService,
         private _VehiculoService: VehiculoService,
-        private _SedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
         private _PaisService: PaisService,
         private _MsvRegistroIpatService: MsvRegistroIpatService,
     ) { }
@@ -107,9 +107,9 @@ export class NewVehiculoComponent implements OnInit {
                 }
             }
         );
-        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
-                this.sedesOperativas = response;
+                this.organismosTransito = response;
             },
             error => {
                 this.errorMessage = <any>error;

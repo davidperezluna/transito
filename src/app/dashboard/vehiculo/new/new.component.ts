@@ -1,17 +1,17 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Vehiculo} from '../vehiculo.modelo';
-import {DepartamentoService} from "../../../services/departamento.service";
-import {LoginService} from '../../../services/login.service';
-import {MunicipioService} from '../../../services/municipio.service';
-import {LineaService} from '../../../services/linea.service';
-import {ClaseService} from '../../../services/clase.service';
-import {CarroceriaService} from '../../../services/carroceria.service';
-import {ServicioService} from '../../../services/servicio.service';
-import {ColorService} from '../../../services/color.service';
-import {CombustibleService} from '../../../services/combustible.service';
-import {VehiculoService} from '../../../services/vehiculo.service';
-import {SedeOperativaService} from '../../../services/sedeOperativa.service';
-import {MarcaService} from '../../../services/marca.service';
+import { Vehiculo } from '../vehiculo.modelo';
+import { DepartamentoService } from "../../../services/departamento.service";
+import { MunicipioService } from '../../../services/municipio.service';
+import { LineaService } from '../../../services/linea.service';
+import { ClaseService } from '../../../services/clase.service';
+import { CarroceriaService } from '../../../services/carroceria.service';
+import { ServicioService } from '../../../services/servicio.service';
+import { ColorService } from '../../../services/color.service';
+import { CombustibleService } from '../../../services/combustible.service';
+import { VehiculoService } from '../../../services/vehiculo.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { MarcaService } from '../../../services/marca.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-new-vehiculo',
@@ -40,7 +40,7 @@ public marcaSelected:any;
 public sedeOperativaSelected:any;
 public combustibleSelected:any;
 public respuesta:any;
-public sedesOperativas:any;
+public organismosTransito:any;
 
 constructor(
   private _departamentoService: DepartamentoService,
@@ -54,7 +54,7 @@ constructor(
   private _ColorService: ColorService,
   private _CombustibleService: CombustibleService,
   private _VehiculoService: VehiculoService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ){}
 
   ngOnInit() {
@@ -87,9 +87,9 @@ constructor(
         }
       }
     );
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       }, 
       error => {
         this.errorMessage = <any>error;

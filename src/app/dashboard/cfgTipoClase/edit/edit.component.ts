@@ -3,7 +3,7 @@ import { CfgTipoClaseService } from '../../../services/cfgTipoClase.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { ClaseService } from '../../../services/clase.service';
-import { CfgTipoVehiculoService } from '../../../services/cfgTipoVehiculo.service';
+import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
 
 @Component({
     selector: 'app-edit',
@@ -25,11 +25,11 @@ export class EditComponent implements OnInit {
         private _TipoService: CfgTipoClaseService,
         private _loginService: LoginService,
         private _ClaseService: ClaseService,
-        private _TipoVehiculoService: CfgTipoVehiculoService
+        private _TipoVehiculoService: VhloCfgTipoVehiculoService
     ) { }
 
     ngOnInit() {
-        this._TipoVehiculoService.getTipoVehiculoSelect().subscribe(
+        this._TipoVehiculoService.select().subscribe(
             response => {
                 this.tiposVehiculo = response;
                 setTimeout(() => {

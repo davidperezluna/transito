@@ -10,11 +10,11 @@
                 <label>Sede Operativa*</label>
                 <ng-select
                     [multiple]="false"
-                    [options]="sedesOperativas"
+                    [options]="organismosTransito"
                     [(ngModel)]="sedeOperativaSelected"
                     (ngModelChange)="onChangedSede($event)"
                     required
-                    name="sedeOperativaId">
+                    name="idOrganismoTransito">
                 </ng-select>
             </div>
           <br>

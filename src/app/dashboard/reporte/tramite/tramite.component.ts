@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {Reporte} from '../reporte.modelo';
 import {LoginService} from '../../../services/login.service';
-import {SedeOperativaService} from '../../../services/sedeOperativa.service';
+import {CfgOrganismoTransitoService} from '../../../services/cfgOrganismoTransito.service';
 import {TramiteSolicitudService} from '../../../services/tramiteSolicitud.service';
 import {TramiteFacturaService} from '../../../services/tramiteFactura.service';
 import {TramitePrecioService} from '../../../services/tramitePrecio.service';
@@ -48,7 +48,7 @@ public resumen = {};     public datos = {
 }
 
 constructor(
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _TramiteSolicitudService: TramiteSolicitudService,
   private _loginService: LoginService,
 
@@ -56,7 +56,7 @@ constructor(
 
 ngOnInit() {
   
-  this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+  this._OrganismoTransitoService.selectSedes().subscribe(
     response => {
       this.sedeOperativas = response;
       this.repFecha=false;

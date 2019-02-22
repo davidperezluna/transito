@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ComparendoComponent } from './comparendo.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ComparendoService } from '../../services/comparendo.service';
-import { SedeOperativaService } from '../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.service';
 
@@ -20,7 +20,7 @@ import { SelectModule } from 'angular2-select';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [ComparendoComponent,NewComponent,EditComponent,StateComponent, SearchComponent, DocumentComponent, ExportComponent],
     exports: [ComparendoComponent, NewComponent, EditComponent, StateComponent, SearchComponent, DocumentComponent, ExportComponent],
-    providers:[MpersonalFuncionarioService,ComparendoService,SedeOperativaService,CiudadanoVehiculoService]
+    providers:[MpersonalFuncionarioService,ComparendoService,CfgOrganismoTransitoService,CiudadanoVehiculoService]
 })
 
 export class ComparendoModule { }

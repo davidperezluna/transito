@@ -1,28 +1,27 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgTipoVehiculoService } from '../../services/cfgTipoVehiculo.service';
+import { VhloCfgTipoVehiculoService } from '../../services/vhloCfgTipoVehiculo.service';
 import { LoginService } from '../../services/login.service';
-import {    CfgTipoVehiculo } from './cfgTipoVehiculo.modelo';
+import { VhloCfgTipoVehiculo } from './vhloCfgTipoVehiculo.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './cfgTipoVehiculo.component.html'
+    templateUrl: './vhloCfgTipoVehiculo.component.html'
 })
-export class CfgTipoVehiculoComponent implements OnInit {
+export class VhloCfgTipoVehiculoComponent implements OnInit {
     public errorMessage;
     public id;
-    public respuesta;
     public estados;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
     public table: any;
-    public tipo: CfgTipoVehiculo;
+    public tipo: VhloCfgTipoVehiculo;
 
 
     constructor(
-        private _CfgTipoVehiculoService: CfgTipoVehiculoService,
+        private _TipoVehiculoService: VhloCfgTipoVehiculoService,
         private _loginService: LoginService,
     ) { }
 
@@ -41,7 +40,7 @@ export class CfgTipoVehiculoComponent implements OnInit {
             ) {
             }
         })
-        this._CfgTipoVehiculoService.index().subscribe(
+        this._TipoVehiculoService.index().subscribe(
             response => {
                 this.estados = response.data;
                 let timeoutId = setTimeout(() => {
@@ -103,7 +102,7 @@ export class CfgTipoVehiculoComponent implements OnInit {
         }).then((result) => {
             if (result.value) {
                 let token = this._loginService.getToken();
-                this._CfgTipoVehiculoService.delete({ 'id': id }, token).subscribe(
+                this._TipoVehiculoService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
                             title: 'Eliminado!',
@@ -112,7 +111,6 @@ export class CfgTipoVehiculoComponent implements OnInit {
                             confirmButtonColor: '#15d4be',
                         })
                         this.table.destroy();
-                        this.respuesta = response;
                         this.ngOnInit();
                     },
                     error => {
@@ -148,7 +146,7 @@ export class CfgTipoVehiculoComponent implements OnInit {
         }).then((result) => {
             if (result.value) {
                 let token = this._loginService.getToken();
-                this._CfgTipoVehiculoService.delete(token, id).subscribe(
+                this._TipoVehiculoService.delete(token, id).subscribe(
                     response => {
                         swal({
                             title: 'Eliminado!',
@@ -157,7 +155,6 @@ export class CfgTipoVehiculoComponent implements OnInit {
                             confirmButtonColor: '#15d4be',
                         });
                         this.table.destroy();
-                        this.respuesta = response;
                         this.ngOnInit();
                     },
                     error => {

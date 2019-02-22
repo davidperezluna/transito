@@ -48,6 +48,7 @@ import { SvCfgSenialProveedorRoutes } from './svCfgSenialProveedor/svCfgSenialPr
 import { SvCfgSenialRoutes } from './svCfgSenial/svCfgSenial.routes';
 import { SvSenialInventarioRoutes } from './svSenialInventario/svSenialInventario.routes';
 
+import { VhloCfgTipoVehiculoRoutes } from './vhloCfgTipoVehiculo/vhloCfgTipoVehiculo.routes';
 import { VhloCfgTipoAlertaRoutes } from './vhloCfgTipoAlerta/vhloCfgTipoAlerta.routes';
 import { VhloCfgCdaRoutes } from './vhloCfgCda/vhloCfgCda.routes';
 import { VhloCfgOrigenRegistroRoutes } from './vhloCfgOrigenRegistro/vhloCfgOrigenRegistro.routes';
@@ -129,8 +130,6 @@ import { registroEntregaProductoRoutes } from './registroEntregaProducto/registr
 import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
 import { RncLicenciaConduccionRoutes } from './rncLicenciaConduccion/rncLicenciaConduccion.routes';
 
-import { CfgTipoVehiculoRoutes } from './cfgTipoVehiculo/cfgTipoVehiculo.routes';
-import { CfgAsignacionPlacaSedeRoutes } from './cfgAsignacionPlacaSede/cfgAsignacionPlacaSede.routes';
 import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
 
 import { MsvCaracterizacionRoutes } from './msvCaracterizacion/msvCaracterizacion.routes';
@@ -192,7 +191,6 @@ import { CfgModuloRoutes } from './cfgModulo/cfgModulo.routes';
 import { CfgOrganismoTransitoRoutes } from './cfgOrganismoTransito/cfgOrganismoTransito.routes';
 import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
 import { CfgCasoInsumoRoutes } from './cfgCasoInsumo/cfgCasoInsumo.routes';
-import { CfgSedeOperativaRoutes } from './cfgSedeOperativa/cfgSedeOperativa.routes';
 import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicial.routes';
 import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimitacion.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
@@ -275,8 +273,6 @@ export const DashboardRoutes: Route[] = [
       ...buscarAutomotorRoutes,
       ...registroEntregaProductoRoutes,
       ...CfgLicenciaConduccionCategoriaRoutes,
-      ...CfgTipoVehiculoRoutes,
-      ...CfgAsignacionPlacaSedeRoutes,
       ...CfgTipoClaseRoutes,
       ...RncLicenciaConduccionRoutes,
       
@@ -332,6 +328,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgSenialProveedorRoutes,
       ...SvCfgSenialRoutes,
       ...SvSenialInventarioRoutes,
+      ...VhloCfgTipoVehiculoRoutes,
       ...VhloCfgTipoAlertaRoutes,
       ...VhloCfgCdaRoutes,
       ...VhloCfgOrigenRegistroRoutes,
@@ -415,7 +412,6 @@ export const DashboardRoutes: Route[] = [
       ...CfgOrganismoTransitoRoutes,
       ...CfgPlacaRoutes,
       ...CfgCasoInsumoRoutes,
-      ...CfgSedeOperativaRoutes,
       ...CfgEntidadJudicialRoutes,
       ...CfgCausalLimitacionRoutes,
       ...CfgGravedadRoutes,

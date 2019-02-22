@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MsvTalonarioService } from '../../../services/msvTalonario.service';
 import { LoginService } from '../../../services/login.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 import { MsvTalonario } from '../msvTalonario.modelo';
 declare var $: any;
@@ -22,7 +22,7 @@ export class NewComponent implements OnInit {
     public formIndex = true;
     public table: any = null;
     public msvTalonario: MsvTalonario;
-    public sedesOperativas: any;
+    public organismosTransito: any;
     public sedeOperativaSelected: any;
     public sedeOperativaSuccess = false;
     public validado = false;
@@ -33,7 +33,7 @@ export class NewComponent implements OnInit {
     constructor(
         private _msvTalonarioService: MsvTalonarioService,
         private _loginService: LoginService,
-        private _sedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 
     ngOnInit() {
@@ -47,9 +47,9 @@ export class NewComponent implements OnInit {
             }
         });
 
-        this._sedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
-                this.sedesOperativas = response;
+                this.organismosTransito = response;
                 this.sedeOperativaSuccess = false;
                 this.formN = true;
                 swal.close();
@@ -137,7 +137,7 @@ export class NewComponent implements OnInit {
         this.validado = false;
         if (e) {
             let token = this._loginService.getToken();
-            this._sedeOperativaService.showSedeOperativa(token, e).subscribe(
+            this._OrganismoTransitoService.show(token, e).subscribe(
                 response => {
                     this.sedeOperativa = response;
                     this.sedeOperativaReady = true;

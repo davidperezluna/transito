@@ -3,7 +3,7 @@ import { FroReporteIngresosService } from '../../services/froReporteIngresos.ser
 import { LoginService } from '../../services/login.service';
 import { FroReporteIngresos } from "./froReporteIngresos.modelo";
 import { FroCfgTipoRecaudoService } from "../../services/froCfgTipoRecaudo.service";
-import { SedeOperativaService } from "../../services/sedeOperativa.service";
+import { CfgOrganismoTransitoService } from "../../services/cfgOrganismoTransito.service";
 
 import { FroTramiteService } from "../../services/froTramite.service";
 import { ComparendoService } from "../../services/comparendo.service";
@@ -66,7 +66,7 @@ export class FroReporteIngresosComponent implements OnInit {
     constructor(
         private _FroReporteIngresosService: FroReporteIngresosService,
         private _FroCfgTipoRecaudoService: FroCfgTipoRecaudoService,
-        private _SedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
 
         private _FroTramiteService: FroTramiteService,
         private _ComparendoService: ComparendoService,
@@ -109,7 +109,7 @@ export class FroReporteIngresosComponent implements OnInit {
                 }
             }
         );
-        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
                 this.sedes = response;
             },

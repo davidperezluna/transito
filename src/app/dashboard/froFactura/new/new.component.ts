@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FroFactura } from '../froFactura.modelo';
 import { FroFacturaService } from '../../../services/froFactura.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { environment } from 'environments/environment'
@@ -16,7 +16,7 @@ export class NewComponent implements OnInit {
   public factura: FroFactura;
   public errorMessage;
 
-  public sedesOperativas: any;
+  public organismosTransito: any;
   public municipio: any = null;
   public fechaCreacion: any = null;
   public fechaVencimiento: any = null;
@@ -26,7 +26,7 @@ export class NewComponent implements OnInit {
 
 constructor(
   private _FacturaService: FroFacturaService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   ){}
 
@@ -69,9 +69,9 @@ constructor(
       }
     );
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;

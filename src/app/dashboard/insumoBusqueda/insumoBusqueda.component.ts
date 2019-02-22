@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {RnaInsumoService} from '../../services/rnaInsumos.service';
-import {LoginService} from '../../services/login.service';
-import {SedeOperativaService} from '../../services/sedeOperativa.service';
-import {RnaLoteInsumoService} from '../../services/rnaloteInsumos.service';
+import { RnaInsumoService } from '../../services/rnaInsumos.service';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
+import { RnaLoteInsumoService } from '../../services/rnaloteInsumos.service';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -19,8 +19,8 @@ export class InsumoBusquedaComponent implements OnInit {
   public formShow = false;
   public table:any; 
   public color:any; 
-  public sedeOperativaSelected:any;
-  public sedesOperativas:any;
+  public organismoTransitoSelected:any;
+  public organismosTransito:any;
   public loteInsumos:any;
   public loteInsumo:any;
   public insumos:any;
@@ -28,14 +28,14 @@ export class InsumoBusquedaComponent implements OnInit {
   constructor(
 		private _RnaInsumoService: RnaInsumoService,
 		private _loginService: LoginService,
-    private _SedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _rnaRegistroInsumosService: RnaLoteInsumoService,
     ){}
     
   ngOnInit() {
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -82,10 +82,10 @@ export class InsumoBusquedaComponent implements OnInit {
   onChangedSede(e){
     if (e) {
       let datos={
-        'sedeOperativa':this.sedeOperativaSelected,
+        'organismoTransito':this.organismoTransitoSelected,
       } 
       let token = this._loginService.getToken();
-      this._rnaRegistroInsumosService.showSedeOperativaInsumo(datos,token).subscribe(
+      this._rnaRegistroInsumosService.showInsumo(datos,token).subscribe(
         response => {
           if (response.status == 'success') {
             this.loteInsumos = response.data;

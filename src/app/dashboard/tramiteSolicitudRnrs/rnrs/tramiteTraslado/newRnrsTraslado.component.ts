@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { LoginService } from '../../../../services/login.service';
-import { SedeOperativaService } from '../../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
@@ -49,11 +49,11 @@ constructor(
   private _TramiteTrasladoService: TramiteTrasladoService,
   private _tramiteFacturaService: TramiteFacturaService,
   private _VehiculoService: VehiculoService,
-  private _SedeOperativaService: SedeOperativaService
+  private _OrganismoTransitoService: CfgOrganismoTransitoService
   ){}
 
   ngOnInit() {
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.sedes = response;
       },

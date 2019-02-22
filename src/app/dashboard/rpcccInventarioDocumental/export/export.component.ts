@@ -3,7 +3,7 @@ import { LoginService } from '../../../services/login.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
 import { ComparendoService } from '../../../services/comparendo.service';
-import { SedeOperativaService } from "../../../services/sedeOperativa.service";
+import { CfgOrganismoTransitoService } from "../../../services/cfgOrganismoTransito.service";
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { Utils } from 'ng2-bootstrap';
 import swal from 'sweetalert2';
@@ -46,7 +46,7 @@ export class ExportComponent implements OnInit {
         private _MpersonalFuncionarioService: MpersonalFuncionarioService,
         private _CfgComparendoEstadoService: CfgComparendoEstadoService,
         private _ComparendoService: ComparendoService,
-        private _SedeOperativaService: SedeOperativaService,
+        private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 
     ngOnInit() {
@@ -79,7 +79,7 @@ export class ExportComponent implements OnInit {
             }
         );
 
-        this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+        this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
                 this.sedes = response;
             },

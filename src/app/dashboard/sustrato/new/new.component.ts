@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { Sustrato } from '../sustrato.modelo';
 import { SustratoService } from '../../../services/sustrato.service';
 import { LoginService } from '../../../services/login.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { ModuloService } from '../../../services/modulo.service';
 import { ClaseService } from '../../../services/clase.service';
 import swal from 'sweetalert2';
@@ -16,7 +16,7 @@ export class NewComponent implements OnInit {
   public sustrato: Sustrato;
   public errorMessage;
   public respuesta;
-  public sedesOperativas: any;
+  public organismosTransito: any;
   public sedeOperativaSelected: any;
   public modulos: any;
   public moduloSelected: any;
@@ -28,7 +28,7 @@ export class NewComponent implements OnInit {
 constructor(
   private _SustratoService: SustratoService,
   private _loginService: LoginService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _ModuloService: ModuloService,
   private _ClaseService: ClaseService,
   ){}
@@ -37,9 +37,9 @@ constructor(
     this.sustrato = new Sustrato(null, null, null, null, null, null,null,null,null,null,null,null);
     this.estadoList = ['Utilizado', 'Disponible', 'Dañado por impresión.'];
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;

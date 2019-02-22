@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComparendoService } from '../../../services/comparendo.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { FroFacInfraccion } from './froFacInfraccion.modelo';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -20,7 +20,7 @@ export class FroFacInfraccionComponent implements OnInit {
 	public comparendos: any = null;
   public comparendosSelect: any = [];
   public numeroIdentificacion: any;
-  public sedesOperativas: any;
+  public organismosTransito: any;
   
   public formIndex = false;
   public formNew = false;
@@ -48,7 +48,7 @@ export class FroFacInfraccionComponent implements OnInit {
   constructor(
     private _ComparendoService: ComparendoService,
     private _FacturaService: FroFacturaService,
-    private _SedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _LoginService: LoginService,
   ){}
     
@@ -205,9 +205,9 @@ export class FroFacInfraccionComponent implements OnInit {
       }
     );
 
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
       },
       error => {
         this.errorMessage = <any>error;

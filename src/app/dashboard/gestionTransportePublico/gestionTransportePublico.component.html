@@ -27,10 +27,10 @@
                         <label>Sede*</label>
                           <ng-select
                                 [multiple]="false"
-                                [options]="sedesOperativas"
-                                [(ngModel)]="gestionTransportePublico.sedeOperativaId"
+                                [options]="organismosTransito"
+                                [(ngModel)]="gestionTransportePublico.idOrganismoTransito"
                                 required
-                                name="claseId">
+                                name="idOrganismoTransito">
                           </ng-select>
                       </div>
                       <div class="col-lg-6 col-md-5">
@@ -38,9 +38,9 @@
                           <ng-select
                               [multiple]="false"
                               [options]="clases"
-                              [(ngModel)]="gestionTransportePublico.claseId"
+                              [(ngModel)]="gestionTransportePublico.idClase"
                               required
-                              name="claseId">
+                              name="idClase">
                           </ng-select>
                       </div>
                     </div>

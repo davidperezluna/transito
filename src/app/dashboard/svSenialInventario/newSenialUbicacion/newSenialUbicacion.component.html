@@ -1,8 +1,7 @@
 <div class="card">
     <div class="card-header">
         <h5>
-            <strong class="text-uppercase">Nueva señal</strong>
-            <small *ngIf="municipio">en {{ municipio?.nombre }}</small>
+            <strong class="text-uppercase">Nueva señal {{ municipio?.nombre }}</strong>
         </h5>
         <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
     </div>
@@ -26,8 +25,13 @@
                             <label class="custom-control-label" for="demarcacion">Demarcación externa</label>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial != 1">
                         <label>Señal <strong class="text-danger">*</strong></label>
+                        <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial == 1">
+                        <label>Color de pintura <strong class="text-danger">*</strong></label>
                         <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
                         </ng-select>
                     </div>
@@ -49,12 +53,12 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-4">
-                        <label>Cantidad <strong class="text-danger">*</strong></label>
+                        <label>Cantidad <small>(Galones)</small> <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
                     </div>
-                    <div class="col-xs-12 col-lg-8">
+                    <div class="col-xs-12 col-lg-8" *ngIf="bodegas">
                         <label>Proveedor <strong class="text-danger">*</strong></label>
-                        <ng-select *ngIf="bodegas" [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
+                        <ng-select [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
                         </ng-select>
                     </div>
                 </div>
@@ -69,79 +73,90 @@
                         <ng-select [multiple]="false" [options]="unidadesMedida" [(ngModel)]="senialUbicacion.idUnidadMedida" name="idUnidadMedida" required>
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Cantidad <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.cantidad" name="cantidad" required />
-                    </div>
-                    <div class="col-xs-12 col-lg-8">
+                    <div class="col-xs-12 col-lg-12" *ngIf="proveedores">
                         <label>Proveedor <strong class="text-danger">*</strong></label>
-                        <ng-select *ngIf="proveedores" [multiple]="false" [options]="proveedores" [(ngModel)]="senialUbicacion.idProveedor" name="idProveedor" required>
+                        <ng-select [multiple]="false" [options]="proveedores" [(ngModel)]="senialUbicacion.idProveedor" name="idProveedor" required>
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Ancho línea <strong class="text-danger">*</strong></label>
-                        <input (blur)="onCalcularTotal()" type="text" class="form-control" [(ngModel)]="demarcacionNew.anchoLinea" name="anchoLinea" required />
+                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 1">
+                        <label>Cantidad <strong class="text-danger">*</strong></label>
+                        <input (blur)="onCalcularTotalArea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.cantidad" name="cantidad" />
                     </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Metraje <strong class="text-danger">*</strong></label>
-                        <input (blur)="onCalcularTotal()" type="text" class="form-control" [(ngModel)]="demarcacionNew.metraje" name="metraje" required />
+                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 1">
+                        <label>Area <small>(m2)</small> <strong class="text-danger">*</strong></label>
+                        <input (blur)="onCalcularTotalArea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.area" name="area" />
                     </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Total <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.total" name="total" disabled required />
+                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 2">
+                        <label>Ancho <small>(cm)</small> <strong class="text-danger">*</strong></label>
+                        <input (blur)="onCalcularTotalLinea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.ancho" name="ancho" />
+                    </div>
+                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 2">
+                        <label>Largo <small>(ml)</small> <strong class="text-danger">*</strong></label>
+                        <input (blur)="onCalcularTotalLinea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.largo" name="largo" />
+                    </div>
+                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 1 || senialUbicacion.idUnidadMedida == 2">
+                        <label>Total <small>(m2)</small> <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.total" name="total" disabled  />
                     </div>
                     <div class="col-xs-12 col-lg-12">
                         <label>Tramo Vial <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.tramoVial" name="tramoVial" required />
+                        <input type="text" class="form-control" [(ngModel)]="demarcacionNew.tramoVial" name="tramoVial" />
                     </div>
-                    <hr>
+
+                    <!-- .col -->
                     <div class="col-xs-12 col-lg-12">
-                        <div class="btn-group m-5">
-                            <button (click)="onAddDemarcacion()" class="btn btn-primary" type="button">
+                        <div class="btn-group">
+                            <button (click)="onAddDemarcacion()" class="btn btn-xs btn-primary" type="button">
                                 <i class="fa fa-plus"></i>
                                 Agregar demarcación
                             </button>
                         </div>
-                    </div>
-                </div>
-                <div class="row"><!-- .row -->
-                    <div class="col-xs-12 col-lg-12"><!-- .col -->
-                        <div class="col-xs-12 col-lg-12" *ngIf="arrayDemarcaciones?.length > 0">
-                            <table class="table table-bordered table-striped table-hover" id="dataTables-example">
-                                <thead>
-                                    <tr class="text-uppercase text-center">
-                                        <th>#</th>
-                                        <th>Detalle</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="odd" *ngFor="let demarcacionNew of arrayDemarcaciones; let i = index">
-                                        <td>{{ i +  1 }} </td>
-                                        <td>
+                        <table class="table table-bordered table-striped table-hover" id="dataTables-example">
+                            <thead>
+                                <tr class="text-uppercase text-center">
+                                    <th>#</th>
+                                    <th>Detalle</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let demarcacionNew of arrayDemarcaciones; let i = index">
+                                    <td>{{ i + 1 }} </td>
+                                    <td>
+                                        <span *ngIf="demarcacionNew.cantidad">
                                             <b>Cantidad: </b>
                                             {{ demarcacionNew.cantidad }}
-                                            <b>Metraje: </b>
-                                            {{ demarcacionNew.metraje }}
-                                            <span *ngIf="demarcacionNew.anchoLinea">
-                                                <br>
-                                                <b>Ancho línea: </b>
-                                                {{ demarcacionNew.anchoLinea }}
-                                            </span>
                                             <br>
-                                            <b>Total: </b>
-                                            {{ demarcacionNew.total }}</td>
-                                        <td>
-                                            <button (click)="onRemoveDemarcacion(demarcacionNew)" class="btn btn-xs btn-danger" type="button">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
+                                        </span>
+                                        <span *ngIf="demarcacionNew.area">
+                                            <b>Area: </b>
+                                            {{ demarcacionNew.area }}
+                                        </span>
+                
+                                        <span *ngIf="demarcacionNew.ancho">
+                                            <b>Ancho: </b>
+                                            {{ demarcacionNew.ancho }}
+                                            <br>
+                                        </span>
+                                        <span *ngIf="demarcacionNew.largo">
+                                            <b>Largo: </b>
+                                            {{ demarcacionNew.largo }}
+                                        </span>
+                                        <br>
+                                        <b>Total (m2): </b>
+                                        {{ demarcacionNew.total }}</td>
+                                    <td>
+                                        <button (click)="onRemoveDemarcacion(demarcacionNew)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
                 <div class="row"><!-- .row -->
                     <div class="col-xs-12 col-lg-6">
                         <label>Adjunto</label>

@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { LoginService } from '../../services/login.service';
 import { ClaseService } from '../../services/clase.service';
-import { SedeOperativaService } from '../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { GestionTransportePublico } from './gestionTransportePublico.modelo';
 
 import swal from 'sweetalert2';
@@ -20,13 +20,13 @@ export class GestionTransportePublicoComponent implements OnInit {
   public vehiculos:any; 
   public gestionTransportePublico:any; 
   public clases:any;
-  public sedesOperativas:any;
+  public organismosTransito:any;
 
   constructor(
 		private _VehiculoService: VehiculoService,
     private _loginService: LoginService,
     private _claseService: ClaseService,
-		private _sedeOperativaService: SedeOperativaService,
+		private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ){}
     
   ngOnInit() {
@@ -35,17 +35,11 @@ export class GestionTransportePublicoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+    });
+
 		this._VehiculoService.getVehiculo().subscribe(
         response => {
           this.vehiculos = response.data;
@@ -77,9 +71,9 @@ export class GestionTransportePublicoComponent implements OnInit {
         }
       );
 
-     this._sedeOperativaService.getSedeOperativaSelect().subscribe(
+     this._OrganismoTransitoService.selectSedes().subscribe(
         response => {
-          this.sedesOperativas = response;
+          this.organismosTransito = response;
         }, 
         error => {
           this.errorMessage = <any>error;

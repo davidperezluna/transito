@@ -3,7 +3,7 @@ export class FroFactura{
 		public valor: number,
 		public interes: number,
 		public comparendos: string,
-		public idSedeOperativa: number,
+		public idOrganismoTransito: number,
 		public idTipoRecaudo: number,
 		public id: number
 	){}

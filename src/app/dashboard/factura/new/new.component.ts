@@ -26,7 +26,7 @@ public errorMessage;
 public respuesta;
 public vehiculos: any;
 public ciudadanos: any;
-public sedesOperativas: any;
+public organismosTransito: any;
 public vehiculoSelected: any; 
 public funcionario: boolean = false;
 public solicitanteSelected: any;

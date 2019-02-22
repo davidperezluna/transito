@@ -5,8 +5,8 @@ import "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class CfgTipoVehiculoService {
-    private url = environment.apiUrl + 'cfgtipovehiculo';
+export class VhloCfgTipoVehiculoService {
+    private url = environment.apiUrl + 'vehiculo/vhlocfgtipovehiculo';
     public identity;
     public token;
 
@@ -21,17 +21,17 @@ export class CfgTipoVehiculoService {
 
     register(tipo, token) {
         let json = JSON.stringify(tipo);
-        let params = "json=" + json + "&authorization=" + token;
+        let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/new", params, { headers: headers }).map(
-            res => res.json()
-            //this._loogerService.registerLog(token, 'INSERT', json, this.url)
+            res => res.json().
+            this._loogerService.registerLog(token, 'INSERT', json, this.url)
         );
     }
 
     delete(datos, token) {
         let json = JSON.stringify(datos);
-        let params = "json=" + json + "&authorization=" + token;
+        let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/delete", params, { headers: headers }).map(
             res => res.json(),
@@ -41,15 +41,15 @@ export class CfgTipoVehiculoService {
 
     show(datos, token) {
         let json = JSON.stringify(datos);
-        let params = "json=" + json + "&authorization=" + token;
+        let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + '/show', params, { headers: headers })
             .map(res => res.json());
     }
 
-    edit(tipo, token) {
-        let json = JSON.stringify(tipo);
-        let params = "json=" + json + "&authorization=" + token;
+    edit(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/edit", params, { headers: headers }).map(
             res => res.json(),
@@ -57,15 +57,7 @@ export class CfgTipoVehiculoService {
         );
     }
 
-    getTipoVehiculoSelect() {
+    select() {
         return this._http.get(this.url + "/select").map(res => res.json());
-    }
-
-    getTipoSelected(datos, token) {
-        let json = JSON.stringify(datos);
-        let params = "json=" + json + "&authorization=" + token;
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + "/select", params, { headers: headers }).map(res => res.json());
-
     }
 }

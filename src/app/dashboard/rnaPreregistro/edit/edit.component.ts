@@ -9,7 +9,7 @@ import {ServicioService} from '../../../services/servicio.service';
 import {ColorService} from '../../../services/color.service';
 import {CombustibleService} from '../../../services/combustible.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
-import {SedeOperativaService} from '../../../services/sedeOperativa.service';
+import {CfgOrganismoTransitoService} from '../../../services/cfgOrganismoTransito.service';
 import {MarcaService} from '../../../services/marca.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
@@ -45,7 +45,7 @@ public combustibleSelected:any;
 public radioAccionSelected:any;
 public modalidadTransporteSelected:any;
 public respuesta:any;
-public sedesOperativas:any;
+public organismosTransito:any;
 
 constructor(
   private _departamentoService: DepartamentoService,
@@ -59,7 +59,7 @@ constructor(
   private _ColorService: ColorService,
   private _CombustibleService: CombustibleService,
   private _VehiculoService: VehiculoService,
-  private _SedeOperativaService: SedeOperativaService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _RadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   ){}
@@ -191,9 +191,9 @@ constructor(
         }
       }
     );
-    this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        this.sedesOperativas = response;
+        this.organismosTransito = response;
         setTimeout(() => {
             this.sedeOperativaSelected = [this.vehiculo.sedeOperativa.id];
         });

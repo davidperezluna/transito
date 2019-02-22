@@ -9,7 +9,7 @@ import { DepartamentoService } from '../../../services/departamento.service';
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 
-import { SedeOperativaService } from '../../../services/sedeOperativa.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
@@ -79,7 +79,7 @@ export class NewComponent implements OnInit {
   public clasesAccidente: any;
   public choquesCon: any;
   public objetosFijos: any;
-  public sedesOperativas: any;
+  public organismosTransito: any;
   public aseguradoras: any;
   public areas: any;
   public sectores: any;
@@ -231,7 +231,7 @@ export class NewComponent implements OnInit {
     private _ClaseAccidenteService: CfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
     private _ObjetoFijoService: CfgObjetoFijoService,
-    private _SedeOperativaService: SedeOperativaService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _AseguradoraService: SvCfgAseguradoraService,
     private _AreaService: SvCfgAreaService,
     private _SectorService: SvCfgSectorService,
@@ -406,9 +406,9 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._SedeOperativaService.getSedeOperativaSelect().subscribe(
+                this._OrganismoTransitoService.selectSedes().subscribe(
                   response => {
-                    this.sedesOperativas = response;
+                    this.organismosTransito = response;
                   },
                   error => {
                     this.errorMessage = <any>error;
