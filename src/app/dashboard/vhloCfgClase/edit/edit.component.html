@@ -9,21 +9,17 @@
                     <div class="container">
                         <div class="form-group row">
                         <div class="col-lg-6 col-md-5">
-                            <label>Nombre*</label>
+                            <label>Nombre <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="clase.nombre" name="nombre" placeholder="" type="text" required>
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            <label>Codigo MT*</label>
+                            <label>Codigo MT <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="clase.codigoMt" name="codigoMt" placeholder="" type="text" required>
                         </div>
                         <div class="col-lg-6 col-md-5">
-                            <label>Modulo*</label>
-                            <ng-select
-                                [multiple]="false"
-                                [options]="modulos"
-                                [(ngModel)]="moduloSelected"
-                                required
-                                name="moduloId">
+                            <label>Tipo Vehiculo <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tipoVehiculoSelected" required
+                                name="idTipoVehiculo">
                             </ng-select>
                         </div>
                         </div>
