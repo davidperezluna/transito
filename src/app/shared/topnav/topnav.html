@@ -1,10 +1,12 @@
 <header class="navbar-fixed" >
   <nav class="navbar navbar-toggleable-md navbar-inverse bg-faded">
-    <div class=""> <a class="navbar-brand" [routerLink]="['/dashboard','/home']">
-      <img src="assets/img/logo.png">
-    </a>
+    <div class="">
+      <a class="navbar-brand" [routerLink]="['/dashboard','/home']">
+        <img src="assets/img/logo.png">
+      </a>
       <button class="btn btn-link icon-header mr-sm-2 pull-right menu-collapse" (click)="eventCalled()"  ><span class="fa fa-bars"></span></button>
     </div>
+    <!--
     <form class="form-inline mr-sm-2  pull-left search-header hidden-md-down">
       <input class="form-control " type="text" placeholder="Search" id="search_header">
       <button class="btn btn-link icon-header " type="submit"><span class="fa fa-search"></span></button>
@@ -88,6 +90,7 @@
         <li><a [routerLink]="['/']" class="btn btn-link icon-header" ><span class="fa fa-sign-out"></span></a></li>
       </ul>
     </div>
+     -->
   </nav>
 </header>
 
