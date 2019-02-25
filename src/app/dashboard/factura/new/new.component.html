@@ -213,7 +213,7 @@
 
                     <div class="form-group"><!-- .form-group -->
                         <div class="row"><!-- .row -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="isCiudadanoForm || isEmpresaForm">
+                            <div class="col-xs-12 col-lg-12" *ngIf="searchByIdentificacionForm || isEmpresaForm">
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="card-title">
@@ -222,7 +222,7 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-bordered table-striped" *ngIf="isCiudadanoForm">
+                                        <table class="table table-bordered table-striped" *ngIf="searchByIdentificacionForm">
                                             <tbody>
                                                 <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
                                                     <td>

@@ -8,10 +8,10 @@ import { LoginService } from '../../../../services/login.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
 import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 
 import swal from 'sweetalert2';
@@ -95,15 +95,15 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
         private _VehiculoAcreedorService: VehiculoAcreedorService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private router: Router,
         private _EmpresaService: EmpresaService,
     ) { }
  
     ngOnInit() {
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tipoIdentificaciones = response;
             },
@@ -238,7 +238,7 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         let identificacion = {
             'numeroIdentificacion': this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
@@ -320,7 +320,7 @@ export class NewRnrsTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         let identificacion = {
             'numeroIdentificacion': this.identificacionAcreedor,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {

@@ -4,10 +4,10 @@ import { EmpresaService } from '../../../services/empresa.service';
 import { LoginService } from '../../../services/login.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 // import { UsuarioService } from '../../../services/usuario.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { RepresentanteEmpresaService } from '../../../services/representanteEmpresa.service';
 import { CfgEmpresaServicioService } from '../../../services/cfgEmpresaServicio.service';
 
@@ -61,8 +61,8 @@ constructor(
   private _municipioService: MunicipioService,
   private _tipoEmpresaService: TipoEmpresaService,
   private _tipoSociedadService: TipoSociedadService,
-  private _ciudadanoService: CiudadanoService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
+  private _CiudadanoService: UserCiudadanoService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _representanteEmpresaService: RepresentanteEmpresaService,
   private _CfgEmpresaServicio: CfgEmpresaServicioService,
 
@@ -173,7 +173,7 @@ constructor(
         }
       );
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
         setTimeout(() => {
@@ -191,7 +191,7 @@ constructor(
         }
       );
 
-    this._ciudadanoService.getCiudadanoSelect().subscribe(
+    this._CiudadanoService.select().subscribe(
       response => {
         this.ciudadanos = response;
         setTimeout(() => {

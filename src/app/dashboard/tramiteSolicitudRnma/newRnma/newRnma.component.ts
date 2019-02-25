@@ -4,7 +4,7 @@ import { TramiteSolicitud } from '../tramiteSolicitudRnma.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -34,7 +34,7 @@ export class NewRnmaComponent implements OnInit {
 
   //public vehiculo: any = null;
   public ciudadanosVehiculo: any = null;
-  public isCiudadano = false;
+  public searchByIdentificacion = false;
   public isEmpresa = false;
   public ciudadano: any = null;
 
@@ -73,7 +73,7 @@ export class NewRnmaComponent implements OnInit {
     private _tramiteFacturaService: TramiteFacturaService,
     private _facturaService: FacturaService,
     private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-    private _ciudadanoService: CiudadanoService,
+    private _CiudadanoService: UserCiudadanoService,
     private _VehiculoService: VehiculoService,
   ) { }
 
@@ -149,7 +149,7 @@ export class NewRnmaComponent implements OnInit {
     this._VehiculoService.showVehiculoRnma(this.tramiteSolicitud.vehiculoId, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.isCiudadano = true
+          this.searchByIdentificacion = true
           this.ciudadanosVehiculo = response.propietarios;
           this.vehiculo = response.vehiculo;
           this.vehiculoSuccess = true;
@@ -385,7 +385,7 @@ export class NewRnmaComponent implements OnInit {
       'numeroIdentificacion': this.identificacionApoderado,
     };
 
-    this._ciudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+    this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') { 

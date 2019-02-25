@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { Ciudadano } from '../../../../ciudadano/ciudadano.modelo';
-import { CiudadanoService } from '../../../../../services/ciudadano.service';
+import { UserCiudadano } from '../../../../userCiudadano/userCiudadano.modelo';
+import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
 import { LoginService } from '../../../../../services/login.service';
-import { TipoIdentificacionService } from '../../../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgRoleService } from '../../../../../services/userCfgRole.service';
 import { GeneroService } from '../../../../../services/genero.service';
 import { MunicipioService } from '../../../../../services/municipio.service';
@@ -18,7 +18,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() identificacion: any = null;
     @Input() tipoIdentificacion: any = null;
-    public ciudadano: Ciudadano;
+    public ciudadano: UserCiudadano;
     public propietario = false;
 
     public errorMessage;
@@ -59,9 +59,9 @@ export class NewPropietarioVehiculoComponent implements OnInit {
 
 
     constructor(
-        private _CiudadanoService: CiudadanoService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _loginService: LoginService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _RoleService: UserCfgRoleService,
         private _generoService: GeneroService,
         private _municipioService: MunicipioService,
@@ -71,9 +71,9 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.ciudadano = new Ciudadano(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.ciudadano = new UserCiudadano(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tiposIdentificacion = response;
             },
@@ -145,19 +145,13 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     }
     onEnviar() {
         let token = this._loginService.getToken();
-        this.ciudadano.tipoIdentificacionUsuarioId = this.tipoIdentificacionSelected;
-
-        this.ciudadano.generoId = this.generoSelected;
-        this.ciudadano.grupoSanguineoId = this.grupoSanguineoSelected;
-        this.ciudadano.municipioNacimientoId = this.municipioNacimientoSelected;
-        this.ciudadano.municipioResidenciaId = this.municipioResidenciaSelected;
 
         var html = 'Se va a registrar el usuario:<br>' +
-            'Primer Nombre: <b>' + this.ciudadano.primerNombreUsuario + '</b><br>' +
-            'Tipo Identificacion: <b>' + this.ciudadano.tipoIdentificacionUsuarioId + '</b><br>' +
-            'Identificacion: <b>' + this.ciudadano.numeroIdentificacionUsuario + '</b><br>' +
-            'Genero: <b>' + this.ciudadano.generoId + '</b><br>' +
-            'Telefono: <b>' + this.ciudadano.telefonoUsuario + '</b><br>';
+            'Primer Nombre: <b>' + this.ciudadano.primerNombre + '</b><br>' +
+            'Tipo Identificacion: <b>' + this.ciudadano.idTipoIdentificacion + '</b><br>' +
+            'Identificacion: <b>' + this.ciudadano.identificacion + '</b><br>' +
+            'Genero: <b>' + this.ciudadano.idGenero + '</b><br>' +
+            'Telefono: <b>' + this.ciudadano.telefono + '</b><br>';
 
         swal({
             title: 'Creacion de persona natural',
@@ -174,7 +168,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
         }).then((result) => {
             if (result.value) {
 
-                this._CiudadanoService.register({ 'ciudadano': this.ciudadano, 'campo': 'importacion-temporal'}, token).subscribe(
+                this._UserCiudadanoService.register({ 'ciudadano': this.ciudadano, 'campo': 'importacion-temporal'}, token).subscribe(
                     response => {
                         if (response.status == 'success') {
                             this.ready.emit(true);
@@ -285,15 +279,15 @@ export class NewPropietarioVehiculoComponent implements OnInit {
 
     }
 
-    isCiudadano() {
+    searchByIdentificacion() {
         console.log(this.tipoIdentificacionSelected);
         let token = this._loginService.getToken();
         let datos = {
-            'identificacion': this.ciudadano.numeroIdentificacionUsuario,
+            'identificacion': this.ciudadano.identificacion,
             'tipoIdentificacion': this.tipoIdentificacionSelected,
         }
 
-        this._CiudadanoService.isCiudadano(datos, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'error') {
@@ -321,24 +315,24 @@ export class NewPropietarioVehiculoComponent implements OnInit {
 
     onBuscarCiudadano(){
         let token = this._loginService.getToken();
-        if (this.ciudadano.numeroIdentificacionUsuario) {
-            this._CiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.ciudadano.numeroIdentificacionUsuario}, token).subscribe(
+        if (this.ciudadano.identificacion) {
+            this._UserCiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.ciudadano.identificacion}, token).subscribe(
                 response => {
                     if (response.status == 'success') {
                         this.propietario = true;
                         this.tipoIdentificacionSelected = [response.data.tipoIdentificacion.id];
                         
                         if (response.data.segundoNombre == null) {
-                            this.ciudadano.primerNombreUsuario = response.data.primerNombre;
+                            this.ciudadano.primerNombre = response.data.primerNombre;
                         } else {
-                            this.ciudadano.primerNombreUsuario = response.data.primerNombre;
-                            this.ciudadano.segundoNombreUsuario = response.data.segundoNombre;
+                            this.ciudadano.primerNombre = response.data.primerNombre;
+                            this.ciudadano.segundoNombre = response.data.segundoNombre;
                         }
                         if (response.data.segundoApellido == null) {
-                            this.ciudadano.primerApellidoUsuario = response.data.primerApellido;
+                            this.ciudadano.primerApellido = response.data.primerApellido;
                         } else {
-                            this.ciudadano.primerApellidoUsuario = response.data.primerApellido;
-                            this.ciudadano.segundoApellidoUsuario = response.data.segundoApellido;
+                            this.ciudadano.primerApellido = response.data.primerApellido;
+                            this.ciudadano.segundoApellido = response.data.segundoApellido;
                         }
                         this.generoSelected = [response.data.ciudadano.genero.id];
                         this.ciudadano.fechaNacimiento = response.data.fechaNacimiento;
@@ -346,9 +340,9 @@ export class NewPropietarioVehiculoComponent implements OnInit {
                         this.municipioNacimientoSelected = [response.data.ciudadano.municipioNacimiento.id];
                         this.municipioResidenciaSelected = [response.data.ciudadano.municipioResidencia.id];
                         this.paisResidenciaSelected = [response.data.ciudadano.municipioResidencia.departamento.pais.id];
-                        this.ciudadano.telefonoUsuario = response.data.telefono;
-                        this.ciudadano.correoUsuario = response.data.correo;
-                        this.ciudadano.direccion = response.data.ciudadano.direccion;
+                        this.ciudadano.telefono = response.data.telefono;
+                        this.ciudadano.correo = response.data.correo;
+                        this.ciudadano.direccionPersonal= response.data.ciudadano.direccion;
                         this.roleSelected = [response.data.cfgRole.id];
                         console.log(response);
                         //swal.close();

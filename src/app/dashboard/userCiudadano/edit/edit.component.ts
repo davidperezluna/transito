@@ -1,8 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Ciudadano } from '../ciudadano.modelo';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgRoleService } from '../../../services/userCfgRole.service';
 import { GeneroService } from '../../../services/genero.service';
 import { GrupoSanguineoService } from '../../../services/grupoSanguineo.service';
@@ -51,9 +50,9 @@ public municipioResidenciaSelected: Array<any>;
 
 
 constructor(
-  private _ciudadanoService: CiudadanoService,
+  private _CiudadanoService: UserCiudadanoService,
   private _loginService: LoginService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _RoleService: UserCfgRoleService,
   private _generoService: GeneroService,
   private _grupoSanguineoService: GrupoSanguineoService,
@@ -79,12 +78,12 @@ constructor(
       }
     })
 
-    this.ciudadano.numeroIdentificacionUsuario = this.ciudadano.usuario.identificacion;
-    this.ciudadano.primerNombreUsuario = this.ciudadano.usuario.primerNombre;
-    this.ciudadano.segundoNombreUsuario = this.ciudadano.usuario.segundoNombre;
-    this.ciudadano.primerApellidoUsuario = this.ciudadano.usuario.primerApellido;
-    this.ciudadano.segundoApellidoUsuario = this.ciudadano.usuario.segundoApellido;
-    this.ciudadano.telefonoUsuario = this.ciudadano.usuario.telefono;
+    this.ciudadano.identificacion = this.ciudadano.usuario.identificacion;
+    this.ciudadano.primerNombre = this.ciudadano.usuario.primerNombre;
+    this.ciudadano.segundoNombre = this.ciudadano.usuario.segundoNombre;
+    this.ciudadano.primerApellido = this.ciudadano.usuario.primerApellido;
+    this.ciudadano.segundoApellido = this.ciudadano.usuario.segundoApellido;
+    this.ciudadano.telefono = this.ciudadano.usuario.telefono;
     this.ciudadano.correoUsuario = this.ciudadano.usuario.correo;
 
     this._departamentoService.getDepartamentoPorPaisSelect(this.ciudadano.municipioNacimiento.departamento.pais.id).subscribe(
@@ -171,7 +170,7 @@ constructor(
       }
     );
     
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
         response => {
           this.tiposIdentificacion = response;
           setTimeout(() => {
@@ -254,11 +253,11 @@ constructor(
     let token = this._loginService.getToken();
     this.ciudadano.municipioResidenciaId = this.municipioResidenciaSelected;
     this.ciudadano.municipioNacimientoId = this.municipioNacimientoSelected;
-    this.ciudadano.tipoIdentificacionUsuarioId = this.tipoIdentificacionSelected;
-    this.ciudadano.generoId = this.generoSelected;
-    this.ciudadano.grupoSanguineoId = this.grupoSanguineoSelected;
-    console.log(this.ciudadano);
-		this._ciudadanoService.editCiudadano(this.ciudadano,token).subscribe(
+    this.ciudadano.idTipoIdentificacion = this.tipoIdentificacionSelected;
+    this.ciudadano.idGenero = this.generoSelected;
+    this.ciudadano.idGrupoSanguineo = this.grupoSanguineoSelected;
+
+		this._CiudadanoService.edit(this.ciudadano,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

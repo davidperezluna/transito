@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CombustibleService } from '../../../../services/combustible.service';
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -49,7 +49,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
     constructor(
         private _loginService: LoginService,
         private _CombustibleService: CombustibleService,
-        private _TipoIdentificacionService: TipoIdentificacionService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _VehiculoService: VehiculoService,
     ) { }
 
@@ -67,7 +67,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
                 }
             }
         );
-        this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tiposIdentificacion = response;
             },

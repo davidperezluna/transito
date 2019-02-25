@@ -4,7 +4,7 @@ import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
@@ -30,7 +30,7 @@ export class NewRnaComponent implements OnInit {
   public mensaje = '';
   public isError = false;
   public ciudadanosVehiculo = false;
-  public isCiudadano = false;
+  public searchByIdentificacion = false;
   public isEmpresa = false;
   public ciudadano: any = false;
   public vehiculoSuccess = false;
@@ -63,7 +63,7 @@ export class NewRnaComponent implements OnInit {
     private _tramiteFacturaService: TramiteFacturaService,
     private _facturaService: FacturaService,
     private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-    private _ciudadanoService: CiudadanoService,
+    private _CiudadanoService: UserCiudadanoService,
     private _VehiculoService: VehiculoService,
   ) { }
 
@@ -237,7 +237,7 @@ export class NewRnaComponent implements OnInit {
       response => {
         console.log(response);
         if (response.status == 'success') {
-          this.isCiudadano = true
+          this.searchByIdentificacion = true
           this.ciudadanosVehiculo = response.propietarios;
           this.vehiculo = response.vehiculo;
           this.vehiculoSuccess = true;
@@ -267,7 +267,7 @@ export class NewRnaComponent implements OnInit {
   //   response => {
   //     this.ciudadanosVehiculo = response.data;
   //     if (response.status == 'error' ) { 
-  //       this.isCiudadano = false;
+  //       this.searchByIdentificacion = false;
   //       if(response.code == 401){
   //         this.vehiculoSuccess=false;
   //         this.msj= response.msj;
@@ -295,7 +295,7 @@ export class NewRnaComponent implements OnInit {
   //             swal.close();
   //             response.data.forEach(element => {
   //               if (element.ciudadano) {
-  //                 this.isCiudadano = true;
+  //                 this.searchByIdentificacion = true;
   //               }
   //               if(element.empresa){
   //                 this.isEmpresa = true;
@@ -427,7 +427,7 @@ export class NewRnaComponent implements OnInit {
       'numeroIdentificacion': this.identificacionApoderado,
     };
 
-    this._ciudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.apoderado = response.data;

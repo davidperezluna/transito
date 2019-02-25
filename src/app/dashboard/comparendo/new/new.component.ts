@@ -7,10 +7,10 @@ import { MpersonalComparendoService } from '../../../services/mpersonalComparend
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { EmpresaService } from '../../../services/empresa.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
@@ -52,7 +52,7 @@ export class NewComponent implements OnInit {
   public identificacion: any;
   public propietariosVehiculo: any;
 
-  public isCiudadano = false;
+  public searchByIdentificacion = false;
   public isEmpresa = false;
   
   public agentesTransito: any;
@@ -126,10 +126,10 @@ constructor(
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _MunicipioService: MunicipioService,
   private _VechiculoService: VehiculoService,
-  private _CiudadanoService: CiudadanoService,
+  private _UserCiudadanoService: UserCiudadanoService,
   private _EmpresaService: EmpresaService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _TipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _PqoCfgPatioService: PqoCfgPatioService,
   private _PqoCfgGruaService: PqoCfgGruaService,
   private _CfgComparendoEstadoService: CfgComparendoEstadoService,
@@ -351,7 +351,7 @@ constructor(
       }
     );
 
-    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -515,7 +515,7 @@ constructor(
 
               this.propietariosVehiculo.forEach(element => {
                 if (element.ciudadano) {
-                  this.isCiudadano = true;
+                  this.searchByIdentificacion = true;
                 }
                 if (element.empresa) {
                   this.isEmpresa = true;
@@ -553,7 +553,7 @@ constructor(
   onSearchPropietario(){
     let token = this._loginService.getToken();
 
-    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.propietario.identificacion }, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.propietario.identificacion }, token).subscribe(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
@@ -592,12 +592,12 @@ constructor(
   onSearchInfractor() {
     let token = this._loginService.getToken();
 
-    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.infractor.identificacion }, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.infractor.identificacion }, token).subscribe(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
 
-          this._CiudadanoService.calculateAge({ 'fechaNacimiento': this.ciudadano.fechaNacimiento }, token).subscribe(
+          this._UserCiudadanoService.calculateAge({ 'fechaNacimiento': this.ciudadano.fechaNacimiento }, token).subscribe(
             response => {
               this.infractor.edad = response.data;
 
@@ -681,7 +681,7 @@ constructor(
     });
 
     let token = this._loginService.getToken();
-    this._CiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.testigo.identificacion} ).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.testigo.identificacion} ).subscribe(
       response => {
         if (response.status == "success") {
           this.testigo = response.data;

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
 import { PaisService } from '../../../../services/pais.service';
 import { LoginService } from '../../../../services/login.service';
@@ -48,7 +48,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         private _CategoriaService: CfgLicenciaConduccionCategoriaService,
         private _ClaseService: ClaseService,
         private _ServicioService: ServicioService,
-        private _CiudadanoService: CiudadanoService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _PaisService: PaisService,
     ) { }
 

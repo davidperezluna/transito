@@ -3,7 +3,7 @@ import { LoginService } from '../../../services/login.service';
 import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { DepartamentoService } from '../../../services/departamento.service';
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
@@ -41,7 +41,7 @@ import { SvCfgTipoVictimaService } from "../../../services/svCfgTipoVictima.serv
 import { SvCfgGravedadVictimaService } from "../../../services/svCfgGravedadVictima.service";
 import { SvCfgUnidadReceptoraService } from "../../../services/svCfgUnidadReceptora.service";
 
-import { TipoIdentificacionService } from "../../../services/tipoIdentificacion.service";
+import { UserCfgTipoIdentificacionService } from "../../../services/userCfgTipoIdentificacion.service";
 import { SvCfgNacionalidadService } from "../../../services/svCfgNacionalidad.service";
 import { GeneroService } from "../../../services/genero.service";
 
@@ -222,7 +222,7 @@ export class NewComponent implements OnInit {
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
 
-    private _CiudadanoService: CiudadanoService,
+    private _UserCiudadanoService: UserCiudadanoService,
     private _FuncionarioService: MpersonalFuncionarioService,
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
@@ -261,7 +261,7 @@ export class NewComponent implements OnInit {
     private _TipoVictimaService: SvCfgTipoVictimaService,
     private _GravedadVictimaService: SvCfgGravedadVictimaService,
 
-    private _TipoIdentificacionService: TipoIdentificacionService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _NacionalidadService: SvCfgNacionalidadService,
     private _GeneroService: GeneroService,
 
@@ -797,7 +797,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+                this._TipoIdentificacionService.select().subscribe(
                   response => {
                     this.tiposIdentificacion = response;
                   },

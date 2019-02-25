@@ -22,7 +22,7 @@ export class PqoGruaCiudadanoComponent implements OnInit {
   public gruaCiudadano: PqoGruaCiudadano;
 
   constructor(
-    private _GruaCiudadanoService: PqoGruaCiudadanoService,
+    private _GruaUserCiudadanoService: PqoGruaCiudadanoService,
 		private _loginService: LoginService,
     ){}
     
@@ -35,7 +35,7 @@ export class PqoGruaCiudadanoComponent implements OnInit {
       }
     });
 
-    this._GruaCiudadanoService.index({ 'idGrua': this.grua.id }).subscribe(
+    this._GruaUserCiudadanoService.index({ 'idGrua': this.grua.id }).subscribe(
 				response => {
           this.gruas = response.data;
           let timeoutId = setTimeout(() => {
@@ -97,7 +97,7 @@ export class PqoGruaCiudadanoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._GruaCiudadanoService.delete(token,id).subscribe(
+        this._GruaUserCiudadanoService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

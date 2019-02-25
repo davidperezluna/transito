@@ -5,7 +5,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import {LoginService} from '../../../../services/login.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
 import {MunicipioService} from '../../../../services/municipio.service';
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 import swal from 'sweetalert2';
 import { Factura } from '../../../factura/factura.modelo';
@@ -53,7 +53,7 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
         private _MunicipioService: MunicipioService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     ) { }
  
     ngOnInit() {
@@ -74,7 +74,7 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
             }
           );
 
-          this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+          this._TipoIdentificacionService.select().subscribe(
             response => {
               this.tiposIdentificacion = response;
             },

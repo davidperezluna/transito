@@ -15,9 +15,9 @@ import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModa
 import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { MarcaService } from '../../../services/marca.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { EmpresaService } from "../../../services/empresa.service";
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 
@@ -119,9 +119,9 @@ constructor(
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _RnaPreregistroService: RnaPreregistroService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _FuncionarioService: MpersonalFuncionarioService,
-  private _CiudadanoService: CiudadanoService,
+  private _UserCiudadanoService: UserCiudadanoService,
   private _EmpresaService: EmpresaService,
   private _CiudadanoVehiculoService: CiudadanoVehiculoService,
   ){}
@@ -134,7 +134,7 @@ constructor(
     let datos = {'identificacion':identity.identificacion};
     
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tipoIdentificaciones = response;
       },
@@ -518,7 +518,7 @@ constructor(
     let identificacion = {
       'numeroIdentificacion' : this.identificacion,
     };
-    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){
@@ -545,7 +545,7 @@ onKeyApoderado(){
     let identificacion = {
   'numeroIdentificacion' : this.identificacionApoderado,
     };
-    this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){

@@ -4,7 +4,7 @@ import { TramiteFacturaService } from '../../../services/tramiteFactura.service'
 import { LoginService } from '../../../services/login.service';
 import { RnaInsumoService } from '../../../services/rnaInsumos.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaInsumo } from './facturaInsumo.modelo';
 import { FacturaInsumoService } from '../../../services/facturaInsumo.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
@@ -54,7 +54,7 @@ export class NewRnaInsumoComponent implements OnInit {
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _FuncionarioService: MpersonalFuncionarioService,
-        private _CiudadanoService: CiudadanoService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private _FacturaInsumoService: FacturaInsumoService,
     ) {
@@ -125,7 +125,7 @@ export class NewRnaInsumoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.FacturaInsumo.ciudadanoId,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

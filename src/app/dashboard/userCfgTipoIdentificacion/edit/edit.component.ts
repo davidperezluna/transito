@@ -1,7 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {TipoIdentificacion} from '../tipoIdentificacion.modelo';
-import {TipoIdentificacionService} from '../../../services/tipoIdentificacion.service';
-import {LoginService} from '../../../services/login.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -12,25 +11,22 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() tipoIdentificacion:any = null;
 public errorMessage;
-public respuesta;
-public formReady = false;
 
 constructor(
-  private _tipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _loginService: LoginService,
   ){}
 
-  ngOnInit(){ console.log(this.tipoIdentificacion);  }
+  ngOnInit(){ }
 
   onCancelar(){ this.ready.emit(true); }
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._tipoIdentificacionService.editTipoIdentificacion(this.tipoIdentificacion,token).subscribe(
+
+		this._TipoIdentificacionService.edit(this.tipoIdentificacion,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -47,8 +43,7 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
-		}); 
+      }
+    ); 
   }
-
 }

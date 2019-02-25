@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { CiudadanoService } from '../../services/ciudadano.service';
-import { LoginService } from '../../services/login.service';
-import { Ciudadano } from './ciudadano.modelo';
+import { UserCiudadano } from './userCiudadano.modelo';
 import { NewCiudadanoComponent } from './new/new.component';
+import { UserCiudadanoService } from '../../services/userCiudadano.service';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './ciudadano.component.html',
+  templateUrl: './userCiudadano.component.html',
   providers: [NewCiudadanoComponent],
 })
-export class CiudadanoComponent implements OnInit {
+export class UserCiudadanoComponent implements OnInit {
   public errorMessage;
 	public id;
 	public ciudadanos: any = null;
@@ -20,7 +20,7 @@ export class CiudadanoComponent implements OnInit {
 	public formIndex = false;
 	public formSearch = true;
   public table:any = null; 
-  public ciudadano: Ciudadano;
+  public ciudadano: UserCiudadano;
 
   public search: any = {
     'tipoFiltro': null,
@@ -33,7 +33,7 @@ export class CiudadanoComponent implements OnInit {
   ];
 
   constructor(
-		private _CiudadanoService: CiudadanoService,
+		private _UserCiudadanoService: UserCiudadanoService,
 		private _LoginService: LoginService,
     ){}
     
@@ -54,7 +54,7 @@ export class CiudadanoComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._CiudadanoService.searchByFiltros(this.search, token).subscribe(
+    this._UserCiudadanoService.searchByFiltros(this.search, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ciudadanos = response.data;
@@ -143,7 +143,8 @@ export class CiudadanoComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
-        this._CiudadanoService.deleteCiudadano(token,id).subscribe(
+
+        this._UserCiudadanoService.delete(token,id).subscribe(
             response => {
                 swal({
                   title: 'Eliminado!',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TramiteSolicitudRpcccService } from '../../services/tramiteSolicitudRpccc.service';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { TipoIdentificacionService } from '../../services/tipoIdentificacion.service';
-import { CiudadanoService } from '../../services/ciudadano.service';
+import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
+import { UserCiudadanoService } from '../../services/userCiudadano.service';
 import { LoginService } from '../../services/login.service';
 import { TramiteSolicitudRpccc } from './tramiteSolicitudRpccc.modelo';
 import swal from 'sweetalert2';
@@ -33,8 +33,8 @@ export class TramiteSolicitudRpcccComponent implements OnInit {
   constructor(
     private _TramiteSolicitudRpcccService: TramiteSolicitudRpcccService,
     private _TramiteSolicitudService: TramiteSolicitudService,
-    private _TipoIdentificacionService: TipoIdentificacionService,
-    private _CiudadanoService: CiudadanoService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+    private _UserCiudadanoService: UserCiudadanoService,
 		private _loginService: LoginService,
     ){}
     
@@ -88,7 +88,7 @@ export class TramiteSolicitudRpcccComponent implements OnInit {
   }
 
   onNew(){
-    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -119,7 +119,7 @@ export class TramiteSolicitudRpcccComponent implements OnInit {
 
   onSearchSolicitante(){
     let token = this._loginService.getToken();
-    this._CiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.identificacion}, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.identificacion}, token).subscribe(
       response => {          
         if(response.status == 'success'){
           this.solicitante = response.data;

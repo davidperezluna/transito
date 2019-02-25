@@ -2,7 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router'
 import { GdDocumento } from '../gdDocumento.modelo';
 import { GdDocumentoService } from '../../../services/gdDocumento.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -43,7 +43,7 @@ export class NewComponent implements OnInit {
   };
 
   constructor(
-    private _TipoIdentificacionService: TipoIdentificacionService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _DocumentoService: GdDocumentoService,
     private _loginService: LoginService,
     private router: Router
@@ -53,7 +53,7 @@ export class NewComponent implements OnInit {
     this.documento = new GdDocumento(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.date = new Date();
 
-    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },

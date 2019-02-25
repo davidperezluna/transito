@@ -1,5 +1,7 @@
 import { Route } from '@angular/router';
 
+import { UserCiudadanoRoutes } from './userCiudadano/userCiudadano.routes';
+import { UserCfgTipoIdentificacionRoutes } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.routes';
 import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
 import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
 import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes';
@@ -114,9 +116,6 @@ import { SvCfgTemaCapacitacionRoutes } from './svCfgTemaCapacitacion';
 
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
 import { InfraccionRoutes } from './infraccion/infraccion.routes';
-
-import { CiudadanoRoutes } from './ciudadano/ciudadano.routes';
-import { TipoIdentificacionRoutes } from './tipoIdentificacion/tipoIdentificacion.routes';
 
 import { CfgComparendoEstadoRoutes } from './cfgComparendoEstado/cfgComparendoEstado.routes';
 import { CfgAuditoriaRoutes } from './cfgAuditoria/cfgAuditoria.routes';
@@ -247,6 +246,8 @@ export const DashboardRoutes: Route[] = [
     component: DashboardComponent,
     children: [
       ...CvLcCfgTipoRestriccionRoutes,
+      ...UserCiudadanoRoutes,
+      ...UserCfgTipoIdentificacionRoutes,
       ...UserCfgMenuRoutes,
       ...UserCfgRoleRoutes,
       ...UserUsuarioMenuRoutes,
@@ -265,8 +266,6 @@ export const DashboardRoutes: Route[] = [
       ...MunicipioRoutes,
       ...OrganismoTransitoRoutes,
       ...ServicioRoutes,
-      ...CiudadanoRoutes,
-      ...TipoIdentificacionRoutes,
       ...CfgAuditoriaRoutes,
       ...CfgSmlmvRoutes,
       ...cfgFestivoRoutes,

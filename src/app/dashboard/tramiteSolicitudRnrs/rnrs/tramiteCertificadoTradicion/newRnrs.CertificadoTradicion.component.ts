@@ -3,7 +3,7 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { DefaultService } from '../../../../services/default.service';
 import { environment } from 'environments/environment';
 
@@ -53,7 +53,7 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
         private _loginService: LoginService,
         private _SustratoService: SustratoService,
         private _VehiculoService: VehiculoService,
-        private _CiudadanoService: CiudadanoService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _DefaultService: DefaultService,
     ) { }
 
@@ -96,7 +96,7 @@ export class NewRnrsCertificadoTradicionComponent implements OnInit {
 			'numeroIdentificacion' : this.ciudadanoId,
         };
         
-        this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

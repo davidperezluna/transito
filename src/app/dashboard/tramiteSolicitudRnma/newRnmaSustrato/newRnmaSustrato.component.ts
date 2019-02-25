@@ -4,7 +4,7 @@ import { TramiteFacturaService } from '../../../services/tramiteFactura.service'
 import { LoginService } from '../../../services/login.service';
 import { SustratoService } from '../../../services/sustrato.service';
 import {VehiculoService} from '../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { Sustrato } from '../../sustrato/sustrato.modelo';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 
@@ -49,7 +49,7 @@ export class NewRnmaSustratoComponent implements OnInit {
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
-        private _CiudadanoService: CiudadanoService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
     ) {
         this.sustrato = new Sustrato( null, null, null, null, null, null ,null,null,null,null,null,null);
@@ -67,7 +67,7 @@ export class NewRnmaSustratoComponent implements OnInit {
         };
         console.log(this.tarjetaEntregada);
         
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { DefaultService } from '../../../../services/default.service';
 import { environment } from 'environments/environment';
 
@@ -43,7 +43,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
-        private _CiudadanoService: CiudadanoService,
+        private _CiudadanoService: UserCiudadanoService,
         private _DefaultService: DefaultService,
     ) { }
 
@@ -67,7 +67,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     onKeyCiudadano(){
         let token = this._loginService.getToken();
         let identificacion = {
-			'numeroIdentificacion' : this.ciudadanoId,
+			'identificacion' : this.ciudadanoId,
         };
         
         this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(

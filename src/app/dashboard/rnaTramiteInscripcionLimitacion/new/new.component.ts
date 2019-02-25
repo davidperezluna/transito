@@ -3,16 +3,16 @@ import { LoginService } from '../../../services/login.service';
 import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { DepartamentoService } from '../../../services/departamento.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { RnaTramiteInscripcionLimitacion } from '../rnaTramiteInscripcionLimitacion.modelo';
-import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
+import { UserCiudadano } from '../../userCiudadano/userCiudadano.modelo';
 import swal from 'sweetalert2';
 
 @Component({
@@ -66,7 +66,7 @@ export class NewComponent implements OnInit {
     private _TramiteInscripcionLimitacionService: TramiteLimitacionService,
     private _VehiculoLimitacionService: VehiculoLimitacionService,
     private _VehiculoService: VehiculoService,
-    private _CiudadanoService: CiudadanoService,
+    private _UserCiudadanoService: UserCiudadanoService,
     private _loginService: LoginService,
     private _MunicipioService: MunicipioService,
     private _DepartamentoService: DepartamentoService,
@@ -74,13 +74,13 @@ export class NewComponent implements OnInit {
     private _LimitacionService: LimitacionService,
     private _CfgTipoProcesoService: CfgTipoProcesoService,
     private _CfgCausalLimitacionService: CfgCausalLimitacionService,
-    private _tipoIdentificacionService: TipoIdentificacionService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   ) { }
 
   ngOnInit() {
     this.rnaTramiteInscripcionLimitacion = new RnaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tipoIdentificacionesDemandado = response;
       },
@@ -107,7 +107,7 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tipoIdentificacionesDemandante = response;
       },
@@ -284,7 +284,7 @@ export class NewComponent implements OnInit {
       'numeroIdentificacion': this.identificacionDemandado,
     };
 
-    this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ciudadanoDemandado = response.data;
@@ -311,7 +311,7 @@ export class NewComponent implements OnInit {
       'numeroIdentificacion': this.identificacionDemandante,
     };
 
-    this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ciudadanoDemandante = response.data;

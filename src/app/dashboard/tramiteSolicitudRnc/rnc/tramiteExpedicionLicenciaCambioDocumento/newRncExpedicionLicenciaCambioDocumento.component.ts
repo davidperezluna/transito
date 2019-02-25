@@ -4,7 +4,7 @@ import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
 import { PaisService } from '../../../../services/pais.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';

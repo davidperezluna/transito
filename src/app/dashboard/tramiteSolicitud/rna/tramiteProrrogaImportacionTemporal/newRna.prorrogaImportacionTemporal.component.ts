@@ -4,7 +4,7 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
-import { TipoIdentificacionService } from "../../../../services/tipoIdentificacion.service";
+import { UserCfgTipoIdentificacionService } from "../../../../services/userCfgTipoIdentificacion.service";
 import { MsvRegistroIpatService } from "../../../../services/msvRegistroIpat.service";
 
 import swal from 'sweetalert2';

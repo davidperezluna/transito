@@ -5,9 +5,9 @@ import { LoginService } from '../../../services/login.service';
 import { DepartamentoService } from '../../../services/departamento.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { SucursalService } from '../../../services/sucursal.service';
 
 import swal from 'sweetalert2';
@@ -44,8 +44,8 @@ constructor(
   private _MunicipioService: MunicipioService,
   private _TipoEmpresaService: TipoEmpresaService,
   private _TipoSociedadService: TipoSociedadService,
-  private _TipoIdentificacionService: TipoIdentificacionService,
-  private _CiudadanoService: CiudadanoService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+  private _UserCiudadanoService: UserCiudadanoService,
 ){}
 
   ngOnInit() {
@@ -64,7 +64,7 @@ constructor(
       }
     );
 
-    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -77,7 +77,7 @@ constructor(
       }
     );
 
-    this._CiudadanoService.getCiudadanoSelect().subscribe(
+    this._UserCiudadanoService.select().subscribe(
       response => {
         this.ciudadanos = response;
       }, 

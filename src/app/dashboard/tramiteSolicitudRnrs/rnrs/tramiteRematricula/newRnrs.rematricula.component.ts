@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { SustratoService } from '../../../../services/sustrato.service';
 import { MunicipioService } from '../../../../services/municipio.service';
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -57,7 +57,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
         private _loginService: LoginService,
         private _SustratoService: SustratoService,
         private _MunicipioService: MunicipioService,
-        private _TipoIdentificacionService: TipoIdentificacionService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     ) { }
 
     ngOnInit() {
@@ -89,7 +89,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
             }
         );
 
-        this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tiposIdentificacion = response;
             }, 

@@ -1,8 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Ciudadano } from '../ciudadano.modelo';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadano } from '../userCiudadano.modelo';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgRoleService } from '../../../services/userCfgRole.service';
 import { GeneroService } from '../../../services/genero.service';
 import { GrupoSanguineoService } from '../../../services/grupoSanguineo.service';
@@ -19,7 +19,7 @@ export class NewCiudadanoComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() identificacion:any = null;
 @Input() tipoIdentificacion:any = null;
-public ciudadano: Ciudadano;
+public ciudadano: UserCiudadano;
 public errorMessage;
 public respuesta;
 
@@ -57,9 +57,9 @@ public tipoId:boolean=true;
 
 
 constructor(
-  private _CiudadanoService: CiudadanoService,
+  private _UserCiudadanoService: UserCiudadanoService,
   private _loginService: LoginService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _RoleService: UserCfgRoleService,
   private _generoService: GeneroService,
   private _grupoSanguineoService: GrupoSanguineoService,
@@ -70,9 +70,9 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.ciudadano = new Ciudadano(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.ciudadano = new UserCiudadano(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -145,21 +145,16 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.ciudadano.tipoIdentificacionUsuarioId = this.tipoIdentificacionSelected;
-    
-    this.ciudadano.generoId = this.generoSelected;
-    this.ciudadano.grupoSanguineoId = this.grupoSanguineoSelected;
-    this.ciudadano.municipioNacimientoId = this.municipioNacimientoSelected;
-    this.ciudadano.municipioResidenciaId = this.municipioResidenciaSelected;
+  
 
     var html = 'Se va a registrar el usuario:<br>'+
-               'Primer Nombre: <b>'+this.ciudadano.primerNombreUsuario+'</b><br>'+
-               'Tipo Identificacion: <b>'+this.ciudadano.tipoIdentificacionUsuarioId+'</b><br>'+
-               'Identificacion: <b>'+this.ciudadano.numeroIdentificacionUsuario+'</b><br>'+
-               'Genero: <b>'+this.ciudadano.generoId+'</b><br>'+
-               'Grupo Sanguineo: <b>'+this.ciudadano.grupoSanguineoId+'</b><br>'+
-               'Direccion: <b>'+this.ciudadano.direccion+'</b><br>'+
-               'Telefono: <b>'+this.ciudadano.telefonoUsuario+'</b><br>';
+               'Primer Nombre: <b>'+this.ciudadano.primerNombre+'</b><br>'+
+               'Tipo Identificacion: <b>'+this.ciudadano.idTipoIdentificacion+'</b><br>'+
+               'Identificacion: <b>'+this.ciudadano.identificacion+'</b><br>'+
+               'Genero: <b>'+this.ciudadano.idGenero+'</b><br>'+
+               'Grupo Sanguineo: <b>'+this.ciudadano.idGrupoSanguineo+'</b><br>'+
+               'Direccion: <b>'+this.ciudadano.direccionPersonal+'</b><br>'+
+               'Telefono: <b>'+this.ciudadano.telefono+'</b><br>';
 
    swal({
       title: 'Creacion de persona natural',
@@ -176,32 +171,33 @@ constructor(
     }).then((result) => {
         if (result.value) {
           
-    this._CiudadanoService.register({'ciudadano': this.ciudadano, 'campo': 'ciudadano'},token).subscribe(
-      response => {
-        if(response.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El ciudadano ya se encuentra registrado',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-    }); 
+          this._UserCiudadanoService.register({ 'ciudadano': this.ciudadano, 'campo': 'ciudadano' }, token).subscribe(
+            response => {
+              if (response.status == 'success') {
+                this.ready.emit(true);
+                swal({
+                  title: 'Perfecto!',
+                  text: 'Registro exitoso!',
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                })
+              } else {
+                swal({
+                  title: 'Error!',
+                  text: 'El ciudadano ya se encuentra registrado',
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                })
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+                }
+              }
+            }
+          ); 
         } else if (
           // Read more about handling dismissals
           result.dismiss === swal.DismissReason.cancel
@@ -283,14 +279,15 @@ constructor(
   
   }
   
-  isCiudadano() {
+  searchCiudadano() {
     let token = this._loginService.getToken();
+
     let datos = {
-      'identificacion':this.ciudadano.numeroIdentificacionUsuario,
+      'identificacion':this.ciudadano.identificacion,
       'tipoIdentificacion': this.tipoIdentificacionSelected,
     }
     
-    this._CiudadanoService.isCiudadano(datos,token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(datos,token).subscribe(
       response => {
         if(response.status == 'error'){
           //identificacion encontrada

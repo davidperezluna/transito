@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ToolTipModule } from 'angular2-tooltip'
 
+import { UserCiudadanoModule } from './userCiudadano/userCiudadano.module';
+import { UserCfgTipoIdentificacionModule } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.module';
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
 import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
 import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
@@ -125,10 +127,6 @@ import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCa
 
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
-
-import { CiudadanoModule } from './ciudadano/ciudadano.module';
-import { TipoIdentificacionModule } from './tipoIdentificacion/tipoIdentificacion.module';
-
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
@@ -257,6 +255,8 @@ import {RightsidebarComponent} from '../shared';
       RouterModule,
       Ng2BootstrapModule.forRoot(),
       ToolTipModule,
+      UserCiudadanoModule,
+      UserCfgTipoIdentificacionModule,
       UserCfgMenuModule,
       UserCfgRoleModule,
       UserUsuarioMenuModule,
@@ -279,8 +279,6 @@ import {RightsidebarComponent} from '../shared';
       AlmacenModule,
       CfgModuloModule,
       CfgTipoInfractorModule,
-      CiudadanoModule,
-      TipoIdentificacionModule,
       CfgAuditoriaModule,
       CfgSmlmvModule,
       cfgFestivoModule,

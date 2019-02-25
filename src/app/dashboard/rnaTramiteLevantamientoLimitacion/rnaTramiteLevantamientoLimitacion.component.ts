@@ -3,7 +3,7 @@ import { TramiteLimitacionService } from '../../services/tramiteLimitacion.servi
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { RnaTramiteLevantamientoLimitacion } from './rnaTramiteLevantamientoLimitacion.modelo';
-import { Ciudadano } from '../ciudadano/ciudadano.modelo';
+import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
 
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';

@@ -8,10 +8,10 @@ import { LoginService } from '../../../../services/login.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
 import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 
 import swal from 'sweetalert2';
@@ -100,15 +100,15 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         private _CfgTipoAlertaService: CfgTipoAlertaService,
         private _loginService: LoginService,
         private _VehiculoAcreedorService: VehiculoAcreedorService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private router: Router,
         private _EmpresaService: EmpresaService,
     ) { }
  
     ngOnInit() {
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tipoIdentificaciones = response;
             },
@@ -213,7 +213,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let identificacion = {
             'numeroIdentificacion': this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 response = response;
                 if (response.status == 'success') {
@@ -287,7 +287,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let identificacionNuevoAcreedor = {
             'numeroIdentificacion': this.identificacionNuevoAcreedor,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacionNuevoAcreedor,token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacionNuevoAcreedor,token).subscribe(
             response => {
                 response = response;
                 if (response.status == 'success') {

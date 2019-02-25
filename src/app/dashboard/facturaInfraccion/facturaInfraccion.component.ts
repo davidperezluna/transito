@@ -3,8 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { FacturaInfraccionService } from '../../services/facturaInfraccion.service';
 import { LoginService } from '../../services/login.service';
 import { FacturaInfraccion } from './facturaInfraccion.modelo';
-import { TipoIdentificacionService } from '../../services/tipoIdentificacion.service';
-import { CiudadanoService } from '../../services/ciudadano.service';
+import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
+import { UserCiudadanoService } from '../../services/userCiudadano.service';
 import { ComparendoService } from '../../services/comparendo.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -32,8 +32,8 @@ export class FacturaInfraccionComponent implements OnInit {
 		private _FacturaInfraccionService: FacturaInfraccionService,
     private _route: ActivatedRoute,
     private _loginService: LoginService,
-    private _tipoIdentificacionService: TipoIdentificacionService,
-    private _CiudadanoService: CiudadanoService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+    private _UserCiudadanoService: UserCiudadanoService,
     private _ComparendoService: ComparendoService,
   ){}
     
@@ -54,7 +54,7 @@ export class FacturaInfraccionComponent implements OnInit {
       }
     })
     
-		this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+		this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tipoIdentificaciones = response;
         swal.close();

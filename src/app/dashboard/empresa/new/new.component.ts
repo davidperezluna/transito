@@ -5,9 +5,9 @@ import { LoginService } from '../../../services/login.service';
 import { DepartamentoService } from '../../../services/departamento.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { CfgEmpresaServicioService } from '../../../services/cfgEmpresaServicio.service';
 
 import swal from 'sweetalert2';
@@ -49,8 +49,8 @@ constructor(
   private _municipioService: MunicipioService,
   private _tipoEmpresaService: TipoEmpresaService,
   private _tipoSociedadService: TipoSociedadService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
-  private _ciudadanoService: CiudadanoService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+  private _CiudadanoService: UserCiudadanoService,
   private _CfgEmpresaServicio: CfgEmpresaServicioService,
 ){} 
 
@@ -96,7 +96,7 @@ constructor(
       }
     );
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -109,7 +109,7 @@ constructor(
       }
     );
 
-    this._ciudadanoService.getCiudadanoSelect().subscribe(
+    this._CiudadanoService.select().subscribe(
       response => {
         this.ciudadanos = response;
       }, 

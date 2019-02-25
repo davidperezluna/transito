@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ClaseService } from '../../../../services/clase.service';
 import { ServicioService } from '../../../../services/servicio.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { MpersonalFuncionarioService } from '../../../../services/mpersonalFuncionario.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
 import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
@@ -47,7 +47,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         private _LoginService: LoginService,
         private _ClaseService: ClaseService,
         private _ServicioService: ServicioService,
-        private _CiudadanoService: CiudadanoService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _PaisService: PaisService,
         private _MpersonalFuncionarioService: MpersonalFuncionarioService,
         private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
@@ -170,7 +170,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
 
     onSearchCiudadano(){
         let token = this._LoginService.getToken();
-        this._CiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.solicitante.identificacion},token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.solicitante.identificacion},token).subscribe(
             response => {
                 if(response.status == 'success'){
                     this.solicitante = response.data;

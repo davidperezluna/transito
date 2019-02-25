@@ -54,7 +54,7 @@ public vehiculoDatosTramite: any;
 public oculto = false;
 public tipoRegrabar;
 public propietariosVehiculo: any;
-public isCiudadano = false;
+public searchByIdentificacion = false;
 public isEmpresa = false;
 
 constructor(
@@ -123,7 +123,7 @@ constructor(
 
         this.propietariosVehiculo.forEach(element => {
           if (element.ciudadano) {
-            this.isCiudadano = true;
+            this.searchByIdentificacion = true;
           }
           if (element.empresa) {
             this.isEmpresa = true;

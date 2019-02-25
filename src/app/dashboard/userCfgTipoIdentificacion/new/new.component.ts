@@ -1,6 +1,6 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { TipoIdentificacion } from '../tipoIdentificacion.modelo';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { UserCfgTipoIdentificacion } from '../userCfgTipoIdentificacion.modelo';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public tipoIdentificacion: TipoIdentificacion;
+public tipoIdentificacion: UserCfgTipoIdentificacion;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _TipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.tipoIdentificacion = new TipoIdentificacion(null,null,null);
+    this.tipoIdentificacion = new UserCfgTipoIdentificacion(null,null,null);
   }
   onCancelar(){
     this.ready.emit(true);
