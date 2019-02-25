@@ -42,7 +42,7 @@ export class UserUsuarioMenuComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    this._UserUsuarioMenuService.searchMenusByUsuario({ 'numeroIdentificacion': this.numeroIdentificacion }, token).subscribe(
+    this._UserUsuarioMenuService.searchMenus({ 'identificacion': this.numeroIdentificacion }, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.usuarioMenus = response.data.usuarioMenus;
