@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {VhloCfgClase} from '../vhloCfgClase.modelo';
 import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
 import {LoginService} from '../../../services/login.service';
-import {ModuloService} from '../../../services/modulo.service';
+import {VhloCfgTipoVehiculoService} from '../../../services/vhloCfgTipoVehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -14,21 +14,21 @@ export class NewComponent implements OnInit {
 public clase: VhloCfgClase;
 public errorMessage;
 public respuesta;
-public modulos:any;
-public moduloSelected:any;
+public tiposVehiculo:any;
+public tipoVehiculoSelected:any;
 
 constructor(
   private _ClaseService: VhloCfgClaseService,
   private _loginService: LoginService,
-  private _moduloService: ModuloService,
+  private _TipoVehiculoService: VhloCfgTipoVehiculoService,
   ){}
 
   ngOnInit() {
     this.clase = new VhloCfgClase(null,null,null,null);
 
-    this._moduloService.getModuloSelect().subscribe(
+    this._TipoVehiculoService.select().subscribe(
       response => {
-        this.modulos = response;
+        this.tiposVehiculo = response;
       }, 
       error => {
         this.errorMessage = <any>error; 
@@ -46,7 +46,7 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.clase.moduloId = this.moduloSelected;
+    this.clase.idTipoVehiculo = this.tipoVehiculoSelected;
 
 		this._ClaseService.register(this.clase,token).subscribe(
 			response => {
