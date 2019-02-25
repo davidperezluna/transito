@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
-import { CombustibleService } from '../../../../services/combustible.service';
+import { VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -49,7 +49,7 @@ export class NewRnmaCambioMotorComponent implements OnInit {
     ];
 
     constructor(
-        private _CombustibleService: CombustibleService,
+        private _CombustibleService: VhloCfgCombustibleService,
         private _loginService: LoginService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _VehiculoService: VehiculoService,

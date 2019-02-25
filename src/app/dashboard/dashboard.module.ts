@@ -12,20 +12,20 @@ import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module'
 
 import { HomeModule } from './home/home.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
-import { MarcaModule } from './marca/marca.module';
-import { LineaModule } from './linea/linea.module';
+import { VhloCfgMarcaModule } from './vhloCfgMarca/vhloCfgMarca.module';
+import { VhloCfgLineaModule } from './vhloCfgLinea/vhloCfgLinea.module';
 import { BancoModule } from './banco/banco.module';
-import { ClaseModule } from './clase/clase.module';
-import { ColorModule } from './color/color.module';
+import { VhloCfgClaseModule } from './vhloCfgClase/vhloCfgClase.module';
+import { VhloCfgColorModule } from './vhloCfgColor/vhloCfgColor.module';
 import { ConpetoParametroModule } from './conceptoParametro/conceptoParametro.module';
-import { CombustibleModule } from './combustible/combustible.module';
+import { VhloCfgCombustibleModule } from './vhloCfgCombustible/vhloCfgCombustible.module';
 import { ConsumibleModule } from './consumible/consumible.module';
 import { ModalidadModule } from './modalidad/modalidad.module';
 import { PaisModule } from './pais/pais.module';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { MunicipioModule } from './municipio/municipio.module';
 import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
-import { ServicioModule } from './servicio/servicio.module';
+import { VhloCfgServicioModule } from './vhloCfgServicio/vhloCfgServicio.module';
 import { TramiteModule } from './tramite/tramite.module'; 
 import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
@@ -157,7 +157,7 @@ import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayect
 
 import { GeneroModule } from './genero/genero.module';
 import { GrupoSanguineoModule } from './grupoSanguineo/grupoSanguineo.module';
-import { CarroceriaModule } from './carroceria/carroceria.module';
+import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
 import { FacturaModule } from './factura/factura.module';
 import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
@@ -171,7 +171,7 @@ import { RnaTramiteLevantamientoLimitacionModule } from './rnaTramiteLevantamien
 import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
 
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
-import { CfgPlacaModule } from './cfgPlaca/cfgPlaca.module';
+import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
@@ -262,19 +262,19 @@ import {RightsidebarComponent} from '../shared';
       UserUsuarioMenuModule,
       HomeModule,
       VehiculoModule,
-      MarcaModule,
-      LineaModule,
+      VhloCfgMarcaModule,
+      VhloCfgLineaModule,
       BancoModule,
-      ClaseModule,
-      ColorModule,
+      VhloCfgClaseModule,
+      VhloCfgColorModule,
       ModalidadModule,
       PaisModule,
       DepartamentoModule,
-      CombustibleModule,
+      VhloCfgCombustibleModule,
       ConsumibleModule,
       MunicipioModule,
       OrganismoTransitoModule,
-      ServicioModule,
+      VhloCfgServicioModule,
       TramiteModule,
       AlmacenModule,
       CfgModuloModule,
@@ -356,7 +356,7 @@ import {RightsidebarComponent} from '../shared';
       GeneroModule,
       GrupoSanguineoModule,
       CuentaModule,
-      CarroceriaModule,
+      VhloCfgCarroceriaModule,
       ComparendoModule,
       CfgAdmFormatoModule,
       CfgAdmFormatoTipoModule,
@@ -414,7 +414,7 @@ import {RightsidebarComponent} from '../shared';
       RnaPreasignacionPlacaModule,
       RnaPreregistroModule,
       CfgOrganismoTransitoModule,
-      CfgPlacaModule,
+      VhloCfgPlacaModule,
       CfgCasoInsumoModule,
       CfgGravedadModule,
       CfgClaseAccidenteModule,

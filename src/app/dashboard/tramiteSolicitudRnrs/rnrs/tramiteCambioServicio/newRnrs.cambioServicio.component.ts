@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../../services/login.service';
-import { ServicioService } from '../../../../services/servicio.service';
+import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class NewRnrsCambioServicioComponent implements OnInit {
     };
 
     constructor(
-        private _ServicioService: ServicioService,
+        private _ServicioService: VhloCfgServicioService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,
     ) { }

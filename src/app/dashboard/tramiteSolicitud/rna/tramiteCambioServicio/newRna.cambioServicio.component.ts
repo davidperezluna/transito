@@ -3,7 +3,7 @@ import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ServicioService } from '../../../../services/servicio.service';
+import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
@@ -30,7 +30,7 @@ export class NewRnaCambioServicioComponent implements OnInit {
     };
 
     constructor(
-        private _ServicioService: ServicioService,
+        private _ServicioService: VhloCfgServicioService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,

@@ -6,7 +6,7 @@ import { MsvExportIpat } from '../msvExportIpat.modelo';
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { SvCfgTipoVictimaService } from '../../../services/svCfgTipoVictima.service';
 import { MunicipioService } from '../../../services/municipio.service';
-import { ClaseService } from '../../../services/clase.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
@@ -93,7 +93,7 @@ export class ExportComponent implements OnInit {
         private _GravedadService: CfgGravedadService,
         private _TipoVictimaService: SvCfgTipoVictimaService,
         private _MunicipioService: MunicipioService,
-        private _ClaseService: ClaseService,
+        private _ClaseService: VhloCfgClaseService,
         private _ClaseAccidenteService: CfgClaseAccidenteService,
         private _ChoqueCon: CfgChoqueConService,
         private _ObjetoFijo: CfgObjetoFijoService,

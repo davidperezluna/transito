@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {ColorService} from '../../../services/color.service';
+import {VhloCfgColorService} from '../../../services/vhloCfgColor.service';
 import { MpersonalFuncionario } from '../mpersonalFuncionario.modelo';
 import { PnalSuspensionService } from '../../../services/pnalSuspension.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';

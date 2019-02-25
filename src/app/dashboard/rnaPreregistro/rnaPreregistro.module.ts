@@ -4,7 +4,7 @@ import { RnaPreregistroComponent } from './rnaPreregistro.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { RnaPreregistroService } from '../../services/rnaPreregistro.service';
-import { CarroceriaService } from '../../services/carroceria.service';
+import { VhloCfgCarroceriaService } from '../../services/vhloCfgCarroceria.service';
 import { VhloCfgRadioAccionService } from '../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../services/vhloCfgModalidadTransporte.service';
 
@@ -19,7 +19,7 @@ import { SelectModule } from 'angular2-select';
     imports: [CommonModule, ChartsModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [RnaPreregistroComponent,NewRnaPreregistroComponent,EditComponent,NewCiudadanoComponent,NewEmpresaComponent],
     exports: [RnaPreregistroComponent, NewRnaPreregistroComponent,EditComponent,NewCiudadanoComponent,NewEmpresaComponent],
-    providers:[RnaPreregistroService,CarroceriaService,VhloCfgRadioAccionService,VhloCfgModalidadTransporteService]
+    providers:[RnaPreregistroService,VhloCfgCarroceriaService,VhloCfgRadioAccionService,VhloCfgModalidadTransporteService]
 }) 
 
 export class RnaPreregistroModule { }

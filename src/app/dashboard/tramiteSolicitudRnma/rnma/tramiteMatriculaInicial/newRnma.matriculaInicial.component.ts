@@ -4,7 +4,7 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
+import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
@@ -66,7 +66,7 @@ export class NewRnmaMatricualaInicialComponent implements OnInit {
     };
 
     constructor(
-        private _ColorService: ColorService,
+        private _ColorService: VhloCfgColorService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,

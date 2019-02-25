@@ -8,12 +8,12 @@ import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes'
 
 import { HomeRoutes } from './home/home.routes';
 import { VehiculoRoutes } from './vehiculo/vehiculo.routes';
-import { MarcaRoutes } from './marca/marca.routes';
-import { LineaRoutes } from './linea/linea.routes';
+import { VhloCfgMarcaRoutes } from './vhloCfgMarca/vhloCfgMarca.routes';
+import { VhloCfgLineaRoutes } from './vhloCfgLinea/vhloCfgLinea.routes';
 import { BancoRoutes } from './banco/banco.routes';
-import { ClaseRoutes } from './clase/clase.routes';
-import { ColorRoutes } from './color/color.routes';
-import { CombustibleRoutes } from './combustible/combustible.routes';
+import { VhloCfgClaseRoutes } from './vhloCfgClase/vhloCfgClase.routes';
+import { VhloCfgColorRoutes } from './vhloCfgColor/vhloCfgColor.routes';
+import { VhloCfgCombustibleRoutes } from './vhloCfgCombustible/vhloCfgCombustible.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { ModalidadRoutes } from './modalidad/modalidad.routes';
 import { DepartamentoRoutes } from './departamento/departamento.routes';
@@ -21,7 +21,7 @@ import { MunicipioRoutes } from './municipio/municipio.routes';
 import { PaisRoutes } from './pais/pais.routes';
 import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
-import { ServicioRoutes } from './servicio/servicio.routes';
+import { VhloCfgServicioRoutes } from './vhloCfgServicio/vhloCfgServicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
 import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 
@@ -160,7 +160,7 @@ import { MpersonalAsignacionRoutes } from './mpersonalAsignacion/mpersonalAsigna
 
 import { GeneroRoutes } from './genero/genero.routes';
 import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
-import { CarroceriaRoutes } from './carroceria/carroceria.routes';
+import { VhloCfgCarroceriaRoutes } from './vhloCfgCarroceria/vhloCfgCarroceria.routes';
 import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
@@ -188,7 +188,7 @@ import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 
 import { CfgModuloRoutes } from './cfgModulo/cfgModulo.routes';
 import { CfgOrganismoTransitoRoutes } from './cfgOrganismoTransito/cfgOrganismoTransito.routes';
-import { CfgPlacaRoutes } from './cfgPlaca/cfgPlaca.routes';
+import { VhloCfgPlacaRoutes } from './vhloCfgPlaca/vhloCfgPlaca.routes';
 import { CfgCasoInsumoRoutes } from './cfgCasoInsumo/cfgCasoInsumo.routes';
 import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicial.routes';
 import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimitacion.routes';
@@ -253,19 +253,19 @@ export const DashboardRoutes: Route[] = [
       ...UserUsuarioMenuRoutes,
       ...HomeRoutes,
       ...VehiculoRoutes,
-      ...MarcaRoutes,
-      ...LineaRoutes,
+      ...VhloCfgMarcaRoutes,
+      ...VhloCfgLineaRoutes,
       ...BancoRoutes,
-      ...ClaseRoutes,
-      ...ColorRoutes,
-      ...CombustibleRoutes,
+      ...VhloCfgClaseRoutes,
+      ...VhloCfgColorRoutes,
+      ...VhloCfgCombustibleRoutes,
       ...ConsumibleRoutes,
       ...ModalidadRoutes,
       ...PaisRoutes,
       ...DepartamentoRoutes,
       ...MunicipioRoutes,
       ...OrganismoTransitoRoutes,
-      ...ServicioRoutes,
+      ...VhloCfgServicioRoutes,
       ...CfgAuditoriaRoutes,
       ...CfgSmlmvRoutes,
       ...cfgFestivoRoutes,
@@ -390,7 +390,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgVisualDisminuidaRoutes,
       ...SvCfgZonaRoutes,
       ...InfraccionRoutes,
-      ...CarroceriaRoutes,
+      ...VhloCfgCarroceriaRoutes,
       ...FacturaRoutes,
       ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,
@@ -409,7 +409,7 @@ export const DashboardRoutes: Route[] = [
       ...TramitePrecioRoutes,
       ...CfgComparendoEstadoRoutes,
       ...CfgOrganismoTransitoRoutes,
-      ...CfgPlacaRoutes,
+      ...VhloCfgPlacaRoutes,
       ...CfgCasoInsumoRoutes,
       ...CfgEntidadJudicialRoutes,
       ...CfgCausalLimitacionRoutes,

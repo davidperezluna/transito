@@ -3,7 +3,7 @@ import { TramiteSolicitud } from '../../tramiteSolicitudRnma.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { CombustibleService } from '../../../../services/combustible.service';
+import { VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
