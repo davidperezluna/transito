@@ -1,14 +1,13 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Empresa } from '../empresa.modelo';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import { MunicipioService } from '../../../services/municipio.service';
-import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
+import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 // import { UsuarioService } from '../../../services/usuario.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { RepresentanteEmpresaService } from '../../../services/representanteEmpresa.service';
+import { RepresentanteUserEmpresaService } from '../../../services/representanteEmpresa.service';
 import { CfgEmpresaServicioService } from '../../../services/cfgEmpresaServicio.service';
 
 import swal from 'sweetalert2';
@@ -56,16 +55,15 @@ public servicioSelected: any;
 public servicios: any;
 
 constructor(
-  private _empresaService: EmpresaService,
-  private _loginService: LoginService,
-  private _municipioService: MunicipioService,
-  private _tipoEmpresaService: TipoEmpresaService,
-  private _tipoSociedadService: TipoSociedadService,
+  private _EmpresaService: UserEmpresaService,
+  private _MunicipioService: MunicipioService,
+  private _TipoUserEmpresaService: TipoUserEmpresaService,
+  private _TipoSociedadService: TipoSociedadService,
   private _CiudadanoService: UserCiudadanoService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-  private _representanteEmpresaService: RepresentanteEmpresaService,
-  private _CfgEmpresaServicio: CfgEmpresaServicioService,
-
+  private _RepresentanteUserEmpresaService: RepresentanteUserEmpresaService,
+  private _EmpresaServicio: CfgEmpresaServicioService,
+  private _loginService: LoginService,
   ){}
 
   ngOnInit(){
@@ -85,7 +83,7 @@ constructor(
       ) {
       }
     })
-    this._tipoEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._TipoUserEmpresaService.getTipoEmpresaSelect().subscribe(
       response => {
         this.tipoEmpresas = response;
       }, 
@@ -99,7 +97,7 @@ constructor(
     );
  
     let token = this._loginService.getToken();
-    this._representanteEmpresaService.showRepresentanteEmpresa(this.empresa.id,token).subscribe(
+    this._RepresentanteUserEmpresaService.showRepresentanteEmpresa(this.empresa.id,token).subscribe(
       response => {
         if(response.status == "success"){
           
@@ -121,7 +119,7 @@ constructor(
       }, 
     );
 
-    this._CfgEmpresaServicio.select().subscribe(
+    this._EmpresaServicio.select().subscribe(
       response => {
         this.servicios = response;
         setTimeout(() => {
@@ -137,7 +135,7 @@ constructor(
       }
     );
     
-    this._municipioService.getMunicipioSelect().subscribe(
+    this._MunicipioService.getMunicipioSelect().subscribe(
         response => {
           this.municipios = response;
           setTimeout(() => {
@@ -155,7 +153,7 @@ constructor(
       );
 
       
-    this._tipoSociedadService.getTipoSociedadSelect().subscribe(
+    this._TipoSociedadService.getTipoSociedadSelect().subscribe(
         response => {
           this.tiposSociedad = response;
           setTimeout(() => {
@@ -222,10 +220,8 @@ constructor(
     this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.empresa.ciudadanoId = this.ciudadanoSelected;
     this.empresa.cfgEmpresaServicioId = this.servicioSelected;
-       
-    console.log(this.empresa);
     
-		this._empresaService.editEmpresa(this.empresa,token).subscribe(
+		this._EmpresaService.edit(this.empresa,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);
@@ -256,7 +252,7 @@ constructor(
       'ciudadanoId':this.ciudadanoSelected,
       'fechaFinal': this.empresa.fechaFinal,
     }
-    this._representanteEmpresaService.register(datos,token).subscribe(
+    this._RepresentanteUserEmpresaService.register(datos,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

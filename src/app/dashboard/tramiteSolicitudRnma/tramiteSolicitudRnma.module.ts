@@ -4,7 +4,7 @@ import { TramiteSolicitudRnmaComponent } from './tramiteSolicitudRnma.component'
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { VhloActaTraspasoService } from '../../services/vhloActaTraspaso.service';
-import { EmpresaService } from '../../services/empresa.service';
+import { UserEmpresaService } from '../../services/userEmpresa.service';
 
 import { NewRnmaComponent } from './newRnma/newRnma.component';
 import { NewRnmaDuplicadoPlacaComponent } from './Rnma/tramiteDuplicadoPlaca/newRnma.duplicadoPlaca.component';
@@ -134,7 +134,7 @@ import { SelectModule } from 'angular2-select';
         NewVehiculoComponent,
         NewRnmaProrrogaImportacionTemporalComponent,
     ],
-    providers:[TramiteSolicitudService,EmpresaService,TramiteTrasladoService,VhloActaTraspasoService]
+    providers:[TramiteSolicitudService,UserEmpresaService,TramiteTrasladoService,VhloActaTraspasoService]
 })
 
 export class TramiteSolicitudRnmaModule { }

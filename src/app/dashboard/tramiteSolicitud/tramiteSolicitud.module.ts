@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudComponent } from './tramiteSolicitud.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { EmpresaService } from '../../services/empresa.service';
+import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { DefaultService } from '../../services/default.service';
 import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 import { VehiculoAcreedorService } from '../../services/vehiculoAcreedor.service';
@@ -140,7 +140,7 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewVehiculoComponent,
         NewRnaProrrogaImportacionTemporalComponent,
     ],
-    providers: [FacturaInsumoService,TramiteSolicitudService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, EmpresaService, DefaultService]
+    providers: [FacturaInsumoService,TramiteSolicitudService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, UserEmpresaService, DefaultService]
 })
 
 export class TramiteSolicitudModule { }

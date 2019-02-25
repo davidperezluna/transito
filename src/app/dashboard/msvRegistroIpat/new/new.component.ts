@@ -31,7 +31,7 @@ import { SvCfgVisualDisminuidaService } from "../../../services/svCfgVisualDismi
 import { SvCfgResultadoExamenService } from "../../../services/svCfgResultadoExamen.service";
 import { SvCfgGradoExamenService } from "../../../services/svCfgGradoExamen.service";
 import { SvCfgHospitalService } from "../../../services/svCfgHospital.service";
-import { EmpresaService } from "../../../services/empresa.service";
+import { UserEmpresaService } from "../../../services/userEmpresa.service";
 import { SvCfgFallaService } from "../../../services/svCfgFalla.service";
 import { SvCfgLugarImpactoService } from "../../../services/svCfgLugarImpacto.service";
 import { VhloCfgClaseService } from "../../../services/vhloCfgClase.service";
@@ -252,7 +252,7 @@ export class NewComponent implements OnInit {
     private _ResultadoExamenService: SvCfgResultadoExamenService,
     private _GradoExamenService: SvCfgGradoExamenService,
     private _HospitalService: SvCfgHospitalService,
-    private _EmpresaService: EmpresaService,
+    private _EmpresaService: UserEmpresaService,
     private _FallaService: SvCfgFallaService,
     private _LugarImpactoService: SvCfgLugarImpactoService,
     private _ClaseService: VhloCfgClaseService,
@@ -718,7 +718,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._EmpresaService.getEmpresaSelect().subscribe(
+                this._EmpresaService.select().subscribe(
                   response => {
                     this.empresas = response;
                   },

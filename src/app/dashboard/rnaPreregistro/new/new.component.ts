@@ -18,7 +18,7 @@ import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTrans
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { EmpresaService } from "../../../services/empresa.service";
+import { UserEmpresaService } from "../../../services/userEmpresa.service";
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 
 import swal from 'sweetalert2';
@@ -106,7 +106,6 @@ public datos = {
 };
 
 constructor(
-  private _loginService: LoginService,
   private _MunicipioService: MunicipioService,
   private _MarcaService: VhloCfgMarcaService,
   private _lineaService: VhloCfgLineaService,
@@ -122,8 +121,9 @@ constructor(
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _FuncionarioService: MpersonalFuncionarioService,
   private _UserCiudadanoService: UserCiudadanoService,
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
   private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+  private _loginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -571,7 +571,7 @@ onKeyEmpresa(){
     let nit = {
       'nit' : this.nit,
     };
-    this._EmpresaService.showNit(token,nit).subscribe(
+    this._EmpresaService.showByNit(token,nit).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){

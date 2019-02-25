@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { MsvRevision } from '../msvRevision.modelo';
 import { MsvRevisionService } from '../../../services/msvRevision.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -25,7 +25,7 @@ public formNew = false;
 constructor(
   private _MsvRevisionService: MsvRevisionService,
   private _MsvPersonalFuncionarioService: MpersonalFuncionarioService,
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
   private _loginService: LoginService,
   ){}
 
@@ -47,11 +47,9 @@ constructor(
       }
     );
 
-    this._EmpresaService.getEmpresaSelect().subscribe(
+    this._EmpresaService.select().subscribe(
       response => {
-        this.empresas = response;
-        console.log(this.empresas);
-        
+        this.empresas = response;        
       },
       error => {
         this.errorMessage = <any>error;

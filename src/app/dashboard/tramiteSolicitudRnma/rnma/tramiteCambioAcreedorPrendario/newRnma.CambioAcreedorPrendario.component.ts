@@ -5,7 +5,7 @@ import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service
 import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 @Component({
@@ -92,7 +92,7 @@ export class NewRnmaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _UserCiudadanoService: UserCiudadanoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
+        private _EmpresaService: UserEmpresaService,
     ) { }
  
     ngOnInit() {
@@ -302,7 +302,7 @@ export class NewRnmaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let nit = {
             'nit': this.nit,
         };
-        this._EmpresaService.showNit(token, nit).subscribe(
+        this._EmpresaService.showByNit(token, nit).subscribe(
             response => {
                 response = response;
                 if (response.status == 'success') {

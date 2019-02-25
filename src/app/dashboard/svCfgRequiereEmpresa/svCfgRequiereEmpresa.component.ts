@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SvCfgRequiereEmpresaService } from '../../services/svCfgRequiereEmpresa.service';
+import { SvCfgRequiereUserEmpresaService } from '../../services/svCfgRequiereEmpresa.service';
 import { LoginService } from '../../services/login.service';
 import { SvCfgRequiereEmpresa } from './svCfgRequiereEmpresa.modelo';
 import swal from 'sweetalert2';
@@ -20,7 +20,7 @@ export class SvCfgRequiereEmpresaComponent implements OnInit {
     public requiereEmpresa: SvCfgRequiereEmpresa;
 
     constructor(
-        private _RequiereEmpresaService: SvCfgRequiereEmpresaService,
+        private _RequiereUserEmpresaService: SvCfgRequiereUserEmpresaService,
         private _LoginService: LoginService,
     ) { }
 
@@ -39,7 +39,7 @@ export class SvCfgRequiereEmpresaComponent implements OnInit {
             ) {
             }
         });
-        this._RequiereEmpresaService.index().subscribe(
+        this._RequiereUserEmpresaService.index().subscribe(
             response => {
                 this.requierenEmpresa = response.data;
                 console.log(this.requierenEmpresa);
@@ -105,7 +105,7 @@ export class SvCfgRequiereEmpresaComponent implements OnInit {
             if (result.value) {
                 let token = this._LoginService.getToken();
 
-                this._RequiereEmpresaService.delete({ 'id': id }, token).subscribe(
+                this._RequiereUserEmpresaService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({
                             title: 'Eliminado!',

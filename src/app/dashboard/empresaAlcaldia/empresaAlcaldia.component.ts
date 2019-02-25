@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { EmpresaService } from '../../services/empresa.service';
+import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { LoginService } from '../../services/login.service';
 import { EmpresaAlcaldia } from './empresaAlcaldia.modelo';
 import swal from 'sweetalert2';
@@ -22,7 +22,7 @@ export class EmpresaAlcaldiaComponent implements OnInit {
   public empresa: EmpresaAlcaldia;
 
   constructor(
-		private _EmpresaService: EmpresaService,
+		private _EmpresaService: UserEmpresaService,
 		private _loginService: LoginService,
     ){}
     
@@ -30,23 +30,20 @@ export class EmpresaAlcaldiaComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-		this._EmpresaService.getEmpresaAlcaldia().subscribe(
+    });
+
+		this._EmpresaService.indexByAlcaldia().subscribe(
 				response => {
           this.empresas = response.data;
+
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
           }, 100);
+
+          swal.close();
 				}, 
 				error => {
 					this.errorMessage = <any>error;

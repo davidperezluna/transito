@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Empresa } from '../empresa.modelo';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 
 
@@ -37,9 +36,8 @@ public cargar = true;
 public checked:any;
 
 constructor(
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
   private _MunicipioService: MunicipioService,
-  
   private _SucursalService: SucursalService,
   private _TipoSociedadService: TipoSociedadService,
   private _loginService: LoginService,

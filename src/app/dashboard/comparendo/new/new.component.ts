@@ -8,7 +8,7 @@ import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTrans
 import { MunicipioService } from '../../../services/municipio.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
@@ -127,7 +127,7 @@ constructor(
   private _MunicipioService: MunicipioService,
   private _VechiculoService: VehiculoService,
   private _UserCiudadanoService: UserCiudadanoService,
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _PqoCfgPatioService: PqoCfgPatioService,
@@ -574,7 +574,7 @@ constructor(
   onSearchEmpresa() {
     let token = this._loginService.getToken();
 
-    this._EmpresaService.showNit(token, { 'nit':this.empresa.nit}).subscribe(
+    this._EmpresaService.showByNit(token, { 'nit':this.empresa.nit}).subscribe(
       response => {
         if (response.status == "success") {
           this.empresa.nombre = response.data.nombre;

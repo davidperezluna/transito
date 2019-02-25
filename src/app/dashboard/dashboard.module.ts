@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ToolTipModule } from 'angular2-tooltip'
 
+import { UserEmpresaModule } from './userEmpresa/userEmpresa.module';
 import { UserCiudadanoModule } from './userCiudadano/userCiudadano.module';
 import { UserCfgTipoIdentificacionModule } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.module';
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
@@ -186,7 +187,7 @@ import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitu
 import { TramiteSolicitudRpcccModule } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
-import { EmpresaModule } from './empresa/empresa.module';
+
 import { EmpresaAlcaldiaModule } from './empresaAlcaldia/empresaAlcaldia.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
@@ -255,6 +256,7 @@ import {RightsidebarComponent} from '../shared';
       RouterModule,
       Ng2BootstrapModule.forRoot(),
       ToolTipModule,
+    UserEmpresaModule,
       UserCiudadanoModule,
       UserCfgTipoIdentificacionModule,
       UserCfgMenuModule,
@@ -408,7 +410,6 @@ import {RightsidebarComponent} from '../shared';
       TramiteSolicitudRnrsModule,
       SustratoModule,
       GestionTransportePublicoModule,
-      EmpresaModule,
       CvCfgTipoRestriccionModule,
       TramitePrecioModule,
       RnaPreasignacionPlacaModule,

@@ -7,7 +7,7 @@ import { LoginService } from '../../../../services/login.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 
@@ -71,7 +71,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
+        private _EmpresaService: UserEmpresaService,
     ) { }
 
     ngOnInit() {
@@ -177,7 +177,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token, nit).subscribe(
+        this._EmpresaService.showByNit(token, nit).subscribe(
             response => {
                 response = response; 
                 if(response.status == 'success'){

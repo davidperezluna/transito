@@ -8,7 +8,7 @@ import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 @Component({
@@ -63,7 +63,7 @@ export class NewRnmaTraspasoComponent implements OnInit {
         private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
+        private _EmpresaService: UserEmpresaService,
     ) { }
 
     ngOnInit() {
@@ -162,10 +162,12 @@ export class NewRnmaTraspasoComponent implements OnInit {
 
     onKeyEmpresa(){
         let token = this._loginService.getToken();
+        
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token,nit).subscribe(
+
+        this._EmpresaService.showByNit(token,nit).subscribe(
             response => {
                 if(response.status == 'success'){
                     this.empresa = response.data;

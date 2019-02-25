@@ -4,7 +4,7 @@ import { Convenio } from './convenio.modelo';
 
 import { VhloTpConvenioService } from '../../../../services/vhloTpConvenio.service';
 import { LoginService } from '../../../../services/login.service';
-import { EmpresaService } from '../../../../services/empresa.service';
+import { UserEmpresaService } from '../../../../services/userEmpresa.service';
 
 import swal from 'sweetalert2';
  
@@ -32,14 +32,14 @@ public formIndexConvenio = true;
 constructor(
   private _VhloTpConvenioService: VhloTpConvenioService,
   private _loginService: LoginService,
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
  
 ){}
 
   ngOnInit() {
     this.convenio = new Convenio(null,null,null,null,null,null,null,null);
 
-    this._EmpresaService.getEmpresaTransportePublicoSelect().subscribe( 
+    this._EmpresaService.selectTransportePublico().subscribe( 
       response => {
         this.empresasTransportePublico = response;
       }, 

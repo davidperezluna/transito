@@ -1,10 +1,10 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Empresa } from '../../empresa/empresa.modelo';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserEmpresa } from '../../userEmpresa/userEmpresa.modelo';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import { DepartamentoService } from '../../../services/departamento.service';
 import { MunicipioService } from '../../../services/municipio.service';
-import { TipoEmpresaService } from '../../../services/tipoEmpresa.service';
+import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
@@ -18,7 +18,7 @@ import swal from 'sweetalert2';
 })
 export class NewEmpresaComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public empresa: Empresa;
+public empresa: UserEmpresa;
 public errorMessage;
 public btnVisible=false;
 public municipios: any;
@@ -39,17 +39,17 @@ public tablaSucursal = false;
 public sucursales:any[]= [];
 // los que vienen desde el base de datos
 constructor(
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
   private _LoginService: LoginService,
   private _MunicipioService: MunicipioService,
-  private _TipoEmpresaService: TipoEmpresaService,
+  private _TipoUserEmpresaService: TipoUserEmpresaService,
   private _TipoSociedadService: TipoSociedadService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _UserCiudadanoService: UserCiudadanoService,
 ){}
 
   ngOnInit() {
-    this.empresa = new Empresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.empresa = new UserEmpresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._TipoSociedadService.getTipoSociedadSelect().subscribe(
       response => {
@@ -103,7 +103,7 @@ constructor(
       }
     );
 
-    this._TipoEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._TipoUserEmpresaService.getTipoEmpresaSelect().subscribe(
       response => {
         this.tiposEmpresa = response;
       },
@@ -124,10 +124,6 @@ constructor(
   // enviar a guarda
   onEnviar() {
     let token = this._LoginService.getToken();
-    this.empresa.municipioId = this.municipioSelected;
-    this.empresa.tipoSociedadId = this.tipoSociedadSelected;
-    this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
-    this.empresa.ciudadanoId = this.ciudadanoSelected;
 
     let datos = {
       'empresa': this.empresa,

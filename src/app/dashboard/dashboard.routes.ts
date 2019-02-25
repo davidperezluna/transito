@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 
+import { UserEmpresaRoutes } from './userEmpresa/userEmpresa.routes';
 import { UserCiudadanoRoutes } from './userCiudadano/userCiudadano.routes';
 import { UserCfgTipoIdentificacionRoutes } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.routes';
 import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
@@ -175,7 +176,7 @@ import { TramiteSolicitudRnrsRoutes } from './tramiteSolicitudRnrs/tramiteSolici
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
-import { EmpresaRoutes } from './empresa/empresa.routes';
+
 import { EmpresaAlcaldiaRoutes } from './empresaAlcaldia/empresaAlcaldia.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 
@@ -246,6 +247,7 @@ export const DashboardRoutes: Route[] = [
     component: DashboardComponent,
     children: [
       ...CvLcCfgTipoRestriccionRoutes,
+      ...UserEmpresaRoutes,
       ...UserCiudadanoRoutes,
       ...UserCfgTipoIdentificacionRoutes,
       ...UserCfgMenuRoutes,
@@ -401,7 +403,6 @@ export const DashboardRoutes: Route[] = [
       ...TramiteSolicitudRnrsRoutes,
       ...SustratoRoutes,
       ...GestionTransportePublicoRoutes,
-      ...EmpresaRoutes,
       ...RnaPreasignacionPlacaRoutes,
       ...RnaPreregistroRoutes,
       ...rnaRegistroInsumosRoutes,

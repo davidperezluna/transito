@@ -4,19 +4,15 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class EmpresaService {
-	private url = environment.apiUrl + "empresa";
+export class UserEmpresaService {
+	private url = environment.apiUrl + "ususario/userempresa";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
 
-	getEmpresa(){
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
-	}
-
-	getEmpresaAlcaldia(){
-		return this._http.get(this.url+"/index/empresaAlcaldia").map(res => res.json());
 	}
 
 	register(empresa,token){
@@ -28,7 +24,7 @@ export class EmpresaService {
 							  .map(res => res.json());
 	}
 
-	deleteEmpresa(token,id){
+	delete(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -36,7 +32,7 @@ export class EmpresaService {
 							  .map(res => res.json());
 	}
 
-	showEmpresa(token,id){
+	show(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -45,43 +41,40 @@ export class EmpresaService {
 
 	}
 
-	showNit(token,nit){
-		let json = JSON.stringify(nit);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/empresa", params, {headers: headers})
-		.map(res => res.json())					  
- 
-	}
-
-	showNitOrNombre(datos, token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/nitnombre", params, {headers: headers})
-		.map(res => res.json())					  
- 
-	}
-
-	editEmpresa(empresa,token){
+	edit(empresa,token){
 
 		let json = JSON.stringify(empresa);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
-
 	}
 
-	getEmpresaSelect(){
-		
+	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 
-	getEmpresaTransportePublicoSelect(){
+	selectTransportePublico(){
 		return this._http.get(this.url+"/select/trasporte/publico").map(res => res.json());
 	}
 
+	indexByAlcaldia() {
+		return this._http.get(this.url + "/index/empresaAlcaldia").map(res => res.json());
+	}
+
+	showByNit(token, nit) {
+		let json = JSON.stringify(nit);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/show/empresa", params, { headers: headers }).map(res => res.json())
+	}
+
+	showByNitOrNombre(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/show/nitnombre", params, { headers: headers }).map(res => res.json())
+	}
 
 	
 }

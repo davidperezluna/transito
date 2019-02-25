@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {rnaAsignacionInsumos} from '../rnaAsignacionInsumos.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import { LoginService } from '../../../services/login.service';
@@ -31,14 +31,14 @@ constructor(
   private _rnaloteInsumosService: RnaLoteInsumoService,
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: CfgCasoInsumoService,
   ){}
 
   ngOnInit(){ 
 
-    this._EmpresaService.getEmpresaSelect().subscribe(
+    this._EmpresaService.select().subscribe(
       response => {
         this.empresas = response;
         setTimeout(() => {

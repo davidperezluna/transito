@@ -1,30 +1,30 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { EmpresaService } from '../../services/empresa.service';
+import { UserEmpresa } from './userEmpresa.modelo';
+import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { LoginService } from '../../services/login.service';
-import { Empresa } from './empresa.modelo';
 // import { NewEmpresaComponent } from './new/new.component';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './empresa.component.html',
+  templateUrl: './userEmpresa.component.html',
   // providers: [NewEmpresaComponent],
 })
-export class EmpresaComponent implements OnInit {
+export class UserEmpresaComponent implements OnInit {
   public errorMessage;
 	public id;
-	public respuesta;
+
 	public empresas;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public formShow = false;
   public table:any; 
-  public empresa: Empresa;
+  public empresa: UserEmpresa;
 
   constructor(
-		private _EmpresaService: EmpresaService,
+		private _EmpresaService: UserEmpresaService,
 		private _loginService: LoginService,
     ){}
     
@@ -43,7 +43,7 @@ export class EmpresaComponent implements OnInit {
       ) {
       }
     })
-		this._EmpresaService.getEmpresa().subscribe(
+		this._EmpresaService.index().subscribe(
 				response => {
           this.empresas = response.data;
           let timeoutId = setTimeout(() => {  
@@ -106,7 +106,8 @@ export class EmpresaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._EmpresaService.deleteEmpresa(token,id).subscribe(
+
+        this._EmpresaService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -115,7 +116,6 @@ export class EmpresaComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {

@@ -1,9 +1,5 @@
-export class Empresa{
+export class UserEmpresa{
 	constructor(
-		public id: number,
-		public municipioId: number,
-		public tipoSociedadId: number,
-		public ciudadanoId: number,
 		public nit: string,
 		public nombre: string,
 		public telefono: number,
@@ -25,6 +21,10 @@ export class Empresa{
 		public fechaVencimientoRegistroMercantil:string,
 		public direccionTrabajo: string,
 		public fechaInicial: string,
-		public tipoEMpresa: string
+		public tipoEMpresa: string,
+		public idMunicipio: number,
+		public idTipoSociedad: number,
+		public idCiudadano: number,
+		public id: number,
 	){}
 }
