@@ -70,7 +70,7 @@ export class NewSenialUbicacionComponent implements OnInit {
         private _EstadoService: SvCfgSenialEstadoService,
         private _LineaService: SvCfgSenialLineaService,
         private _UnidadMedidaService: SvCfgSenialUnidadMedidaService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _BodegaService: SvSenialBodegaService,
         private _ProveedorService: SvCfgSenialProveedorService,
         private _LoginService: LoginService,
@@ -109,7 +109,7 @@ export class NewSenialUbicacionComponent implements OnInit {
             }
         );
 
-        this._CfgMunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
+        this._MunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
             response => {
                 this.municipio = response.data;
             },

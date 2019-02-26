@@ -52,7 +52,7 @@ export class SvSenialInventarioComponent implements OnInit {
         private _LoginService: LoginService,
         private _SenialInventarioService: SvSenialInventarioService,
         private _BodegaService : CfgBodegaService,
-        private _CfgMunicipioService : CfgMunicipioService,
+        private _MunicipioService : CfgMunicipioService,
         private _TipoSenialService: SvCfgSenialTipoService,
     ) { }
 
@@ -88,7 +88,7 @@ export class SvSenialInventarioComponent implements OnInit {
 
                 break;
             case 'MUNICIPIO':
-                this._CfgMunicipioService.getMunicipioPorDepartamentoSelect(21).subscribe(
+                this._MunicipioService.selectByDepartamento(21).subscribe(
                     response => {
                         this.municipios = response;
                     },
@@ -110,7 +110,7 @@ export class SvSenialInventarioComponent implements OnInit {
         if (e) {
             let token = this._LoginService.getToken();
 
-            this._CfgMunicipioService.showMunicipio(token, e).subscribe(
+            this._MunicipioService.showMunicipio(token, e).subscribe(
                 response => {
                     this.datos.idMunicipio = response.data.id;                    
                     this.municipio = response.data;

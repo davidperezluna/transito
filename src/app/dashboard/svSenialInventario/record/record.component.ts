@@ -40,7 +40,7 @@ export class RecordComponent implements OnInit {
     constructor(
         private _SenialInventarioService: SvSenialInventarioService,
         private _SenialUbicacionService: SvSenialUbicacionService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _loginService: LoginService
     ) {  }
 
@@ -93,7 +93,7 @@ export class RecordComponent implements OnInit {
         );
 
         if (this.datos.idMunicipio) {
-            this._CfgMunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
+            this._MunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
                 response => {
                     this.municipio = response.data;
                 },

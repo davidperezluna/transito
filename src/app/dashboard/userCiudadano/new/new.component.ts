@@ -42,7 +42,7 @@ constructor(
   private _GeneroService: UserCfgGeneroService,
   private _grupoSanguineoService: UserCfgGrupoSanguineoService,
   private _CfgPaisService: CfgPaisService,
-  private _municipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _departamentoService: CfgDepartamentoService,
 
 ){}
@@ -192,7 +192,9 @@ constructor(
 
   onChangedDepartamentoNacimiento(id){
     if (id) {
-      this._municipioService.getMunicipioPorDepartamentoSelect({ 'idDepartamento':id }).subscribe(
+      let token = this._loginService.getToken();
+
+      this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
           this.municipiosNacimiento = response;
         },
@@ -229,7 +231,9 @@ constructor(
 
   onChangedDepartamentoResidencia(id){
     if (id) {
-      this._municipioService.getMunicipioPorDepartamentoSelect({ 'idDepartamento':id }).subscribe(
+      let token = this._loginService.getToken();
+
+      this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
           this.municipiosResidencia = response;
         },

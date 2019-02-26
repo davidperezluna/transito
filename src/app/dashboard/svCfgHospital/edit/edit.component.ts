@@ -26,13 +26,13 @@ export class EditComponent implements OnInit {
     constructor(
         private _HospitalService: SvCfgHospitalService,
         private _loginService: LoginService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 
     ngOnInit() {
         console.log(this.hospital);
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
                 setTimeout(() => {

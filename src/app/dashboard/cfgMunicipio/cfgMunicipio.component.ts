@@ -19,7 +19,7 @@ export class CfgMunicipioComponent implements OnInit {
   public municipio: any;
 
   constructor(
-		private _CfgMunicipioService: CfgMunicipioService,
+		private _MunicipioService: CfgMunicipioService,
 		private _loginService: LoginService,
     ){}
     
@@ -32,7 +32,7 @@ export class CfgMunicipioComponent implements OnInit {
       }
     });
 
-		this._CfgMunicipioService.index().subscribe(
+		this._MunicipioService.index().subscribe(
 				response => {
           this.municipios = response.data;
 
@@ -98,7 +98,7 @@ export class CfgMunicipioComponent implements OnInit {
       if (result.value) {
         let token = this._loginService.getToken();
 
-        this._CfgMunicipioService.delete(token,id).subscribe(
+        this._MunicipioService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

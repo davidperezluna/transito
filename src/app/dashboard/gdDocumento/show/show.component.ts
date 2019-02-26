@@ -38,7 +38,7 @@ public datos = {
 constructor(
   private _DocumentoService: GdDocumentoService,
   private _CfgDepartamentoService: CfgDepartamentoService,
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
   private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
   private _loginService: LoginService,
@@ -105,7 +105,7 @@ constructor(
 
   onChangedDepartamento(id) {
     if (id) {
-      this._CfgMunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+      this._MunicipioService.selectByDepartamento(this.departamentoSelected).subscribe(
         response => {
           this.municipios = response;
         },

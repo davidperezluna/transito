@@ -1,11 +1,12 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { Comparendo } from '../comparendo.modelo';
 import { ComparendoService } from '../../../services/comparendo.service';
-import { LoginService } from '../../../services/login.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MpersonalComparendoService } from '../../../services/mpersonalComparendo.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
+import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
@@ -21,8 +22,7 @@ import { VhloCfgTransporteEspecialService } from '../../../services/vhloCfgTrans
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
 import { MflInfraccionService } from '../../../services/mflInfraccion.service';
-import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
-import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -124,7 +124,7 @@ constructor(
   private _MpersonalFuncionarioService: MpersonalFuncionarioService,
   private _MpersonalComparendoService: MpersonalComparendoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _VechiculoService: VehiculoService,
   private _UserCiudadanoService: UserCiudadanoService,
   private _EmpresaService: UserEmpresaService,
@@ -169,7 +169,7 @@ constructor(
       }
     );
 
-    this._CfgMunicipioService.getMunicipioSelect().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       },

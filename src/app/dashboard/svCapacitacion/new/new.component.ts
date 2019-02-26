@@ -43,7 +43,7 @@ export class NewComponent implements OnInit {
     constructor(
         private _CapacitacionService: SvCapacitacionService,
         private _loginService: LoginService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _FuncionService: SvCfgFuncionService,
         private _FuncionCriterioService: SvCfgFuncionCriterioService,
         private _TemaCapacitacionService: SvCfgTemaCapacitacionService,
@@ -59,7 +59,7 @@ export class NewComponent implements OnInit {
 
         this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
         
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

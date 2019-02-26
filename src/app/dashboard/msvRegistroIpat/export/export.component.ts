@@ -92,7 +92,7 @@ export class ExportComponent implements OnInit {
         private _LoginService: LoginService,
         private _GravedadService: CfgGravedadService,
         private _TipoVictimaService: SvCfgTipoVictimaService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _ClaseService: VhloCfgClaseService,
         private _ClaseAccidenteService: CfgClaseAccidenteService,
         private _ChoqueCon: CfgChoqueConService,
@@ -130,7 +130,7 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

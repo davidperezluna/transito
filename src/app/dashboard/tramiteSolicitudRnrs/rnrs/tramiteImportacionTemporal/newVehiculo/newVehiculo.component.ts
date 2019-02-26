@@ -50,7 +50,7 @@ export class NewVehiculoComponent implements OnInit {
     constructor(
         private _departamentoService: CfgDepartamentoService,
         private _loginService: LoginService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _MarcaService: VhloCfgMarcaService,
         private _LineaService: VhloCfgLineaService,
         private _ClaseService: VhloCfgClaseService,
@@ -94,7 +94,7 @@ export class NewVehiculoComponent implements OnInit {
                 }
             }
         );
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

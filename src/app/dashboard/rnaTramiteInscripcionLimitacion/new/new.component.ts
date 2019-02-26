@@ -68,7 +68,7 @@ export class NewComponent implements OnInit {
     private _VehiculoService: VehiculoService,
     private _UserCiudadanoService: UserCiudadanoService,
     private _CfgDepartamentoService: CfgDepartamentoService,
-    private _CfgMunicipioService: CfgMunicipioService,
+    private _MunicipioService: CfgMunicipioService,
     private _CfgEntidadJuducialService: CfgEntidadJudicialService,
     private _LimitacionService: LimitacionService,
     private _CfgTipoProcesoService: CfgTipoProcesoService,
@@ -356,7 +356,7 @@ export class NewComponent implements OnInit {
   changedDepartamento(e) {
     if (this.departamentoSelected) {
       let token = this._loginService.getToken();
-      this._CfgMunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+      this._MunicipioService.selectByDepartamento(this.departamentoSelected).subscribe(
         response => {
           
           if (response != null) {

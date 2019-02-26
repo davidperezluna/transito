@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
     ngOnInit() {
         this.soat = new Soat(null, null, null, null, null, null, null, null);
 
-        this._Municipioervice.getMunicipioSelect().subscribe(
+        this._Municipioervice.select().subscribe(
             response => {
                 this.municipios = response;
             },

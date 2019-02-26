@@ -19,7 +19,7 @@ public departamentoSelected:any;
 
 constructor(
   private _DepartamentoService: CfgDepartamentoService,
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _loginService: LoginService,
   ){}
 
@@ -48,7 +48,7 @@ constructor(
     this.municipio.departamentoId = this.departamentoSelected;
     
     console.log(this.municipio);
-		this._CfgMunicipioService.register(this.municipio,token).subscribe(
+		this._MunicipioService.register(this.municipio,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

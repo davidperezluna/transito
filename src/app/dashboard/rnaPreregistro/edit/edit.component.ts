@@ -50,7 +50,7 @@ public organismosTransito:any;
 constructor(
   private _departamentoService: CfgDepartamentoService,
   private _loginService: LoginService,
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _CarroceriaService: VhloCfgCarroceriaService,
@@ -207,7 +207,7 @@ constructor(
         }
       }
     );
-    this._CfgMunicipioService.getMunicipioSelect().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
         setTimeout(() => {
