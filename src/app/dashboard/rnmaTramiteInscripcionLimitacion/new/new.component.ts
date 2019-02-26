@@ -384,6 +384,7 @@ export class NewComponent implements OnInit {
   changedDepartamento(e) {
     if (this.departamentoSelected) {
       let token = this._loginService.getToken();
+      
       this._MunicipioService.selectByDepartamento(this.departamentoSelected).subscribe(
         response => {
           
