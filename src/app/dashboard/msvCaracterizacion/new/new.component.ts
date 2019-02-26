@@ -46,7 +46,7 @@ export class NewComponent implements OnInit {
         this.date = new Date;
         var datePiper = new DatePipe(this.date);
         this.msvCaracterizacion.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

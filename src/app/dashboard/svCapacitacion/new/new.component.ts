@@ -59,7 +59,7 @@ export class NewComponent implements OnInit {
 
         this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
         
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

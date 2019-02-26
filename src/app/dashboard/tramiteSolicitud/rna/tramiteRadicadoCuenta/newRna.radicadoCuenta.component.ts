@@ -59,7 +59,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         
          let token = this._loginService.getToken();
        
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.select().subscribe(
             response => {
               this.municipios = response;
             }, 

@@ -113,7 +113,7 @@ constructor(
       }
     );
 
-     this._municipioService.getMunicipioPorDepartamentoSelect(this.ciudadano.municipioNacimiento.departamento.id).subscribe(
+     this._municipioService.selectByDepartamento(this.ciudadano.municipioNacimiento.departamento.id, token).subscribe(
         response => {
           this.municipiosNacimiento = response;
           setTimeout(() => {
@@ -129,7 +129,7 @@ constructor(
         }
       );
 
-     this._municipioService.getMunicipioPorDepartamentoSelect(this.ciudadano.municipioResidencia.departamento.id).subscribe(
+     this._municipioService.selectByDepartamento(this.ciudadano.municipioResidencia.departamento.id, token).subscribe(
         response => {
           this.municipiosResidencia = response;
           setTimeout(() => {
@@ -298,7 +298,8 @@ constructor(
 
   onChangedDepartamentoNacimiento(id){
     if (id) {
-      this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoNacimientoSelected).subscribe(
+      let token = this._loginService.getToken();
+      this._municipioService.selectByDepartamento(this.departamentoNacimientoSelected, token).subscribe(
         response => {
           this.municipiosNacimiento = response;
 
@@ -335,7 +336,8 @@ constructor(
 
   onChangedDepartamentoResidencia(id){
     if (id) {
-      this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoResidenciaSelected).subscribe(
+      let token = this._loginService.getToken();
+      this._municipioService.selectByDepartamento(this.departamentoResidenciaSelected, token).subscribe(
         response => {
           this.municipiosResidencia = response;
 

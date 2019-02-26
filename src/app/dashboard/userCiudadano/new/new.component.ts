@@ -192,7 +192,8 @@ constructor(
 
   onChangedDepartamentoNacimiento(id){
     if (id) {
-      this._municipioService.getMunicipioPorDepartamentoSelect({ 'idDepartamento':id }).subscribe(
+      let token = this._loginService.getToken();
+      this._municipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
           this.municipiosNacimiento = response;
         },
@@ -229,7 +230,8 @@ constructor(
 
   onChangedDepartamentoResidencia(id){
     if (id) {
-      this._municipioService.getMunicipioPorDepartamentoSelect({ 'idDepartamento':id }).subscribe(
+      let token = this._loginService.getToken();
+      this._municipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
           this.municipiosResidencia = response;
         },

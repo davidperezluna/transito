@@ -82,13 +82,14 @@ export class SvSenialInventarioComponent implements OnInit {
     }
 
     getDestino(value) {
+        let token = this._LoginService.getToken();
         switch (value) {
             case 'BODEGA':
                 this.municipios = null;
 
                 break;
             case 'MUNICIPIO':
-                this._CfgMunicipioService.getMunicipioPorDepartamentoSelect(21).subscribe(
+                this._CfgMunicipioService.selectByDepartamento(21, token).subscribe(
                     response => {
                         this.municipios = response;
                     },
@@ -110,7 +111,7 @@ export class SvSenialInventarioComponent implements OnInit {
         if (e) {
             let token = this._LoginService.getToken();
 
-            this._CfgMunicipioService.showMunicipio(token, e).subscribe(
+            this._CfgMunicipioService.show(e, token).subscribe(
                 response => {
                     this.datos.idMunicipio = response.data.id;                    
                     this.municipio = response.data;

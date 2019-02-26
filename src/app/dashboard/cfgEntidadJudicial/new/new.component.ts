@@ -26,7 +26,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     this.cfgEntidadJudicial = new CfgEntidadJudicial(null, null, null, null);
 
-    this._municipioService.getMunicipioSelect().subscribe(
+    this._municipioService.select().subscribe(
       response => {
         this.municipios = response;
       },

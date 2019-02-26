@@ -360,7 +360,7 @@ export class NewComponent implements OnInit {
   changedDepartamento(e) {
     if (this.departamentoSelected) {
       let token = this._loginService.getToken();
-      this._CfgMunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+      this._CfgMunicipioService.selectByDepartamento(this.departamentoSelected, token).subscribe(
         response => {
           
           if (response != null) {

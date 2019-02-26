@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
 
     ngOnInit() {
         this.hospital = new SvCfgHospital(null, null, null, null);
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

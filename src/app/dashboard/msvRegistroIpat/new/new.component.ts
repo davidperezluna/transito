@@ -838,7 +838,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._CfgMunicipioService.getMunicipioSelect().subscribe(
+                this._CfgMunicipioService.select().subscribe(
                   response => {
                     this.municipios = response;
                   },
@@ -2097,7 +2097,7 @@ export class NewComponent implements OnInit {
   changedMunicipio(e) {
     if (e) {
       let token = this._LoginService.getToken();
-      this._CfgMunicipioService.showMunicipio(token, this.msvRegistroIpat.idMunicipio).subscribe(
+      this._CfgMunicipioService.show(token, this.msvRegistroIpat.idMunicipio).subscribe(
         response => {
           this.msvRegistroIpat.idMunicipio = response;
         },

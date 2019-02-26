@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
-import { CfgMunicipioService } from '../../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { VhloCfgLineaService } from '../../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgCarroceriaService } from '../../../../services/vhloCfgCarroceria.service';
@@ -89,7 +89,7 @@ constructor(
         }
       }
     );
-    this._CfgMunicipioService.getMunicipioSelect().subscribe(
+    this._CfgMunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 

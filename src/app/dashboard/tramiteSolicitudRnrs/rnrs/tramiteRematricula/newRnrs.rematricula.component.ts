@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { SustratoService } from '../../../../services/sustrato.service';
-import { CfgMunicipioService } from '../../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -75,7 +75,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
             }
         );
 
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

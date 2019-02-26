@@ -97,7 +97,7 @@ constructor(
       }
     );
 
-    this._municipioService.getMunicipioSelect().subscribe(
+    this._municipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 

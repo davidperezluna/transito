@@ -32,7 +32,7 @@ export class EditComponent implements OnInit {
 
     ngOnInit() {
         console.log(this.hospital);
-        this._CfgMunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
                 setTimeout(() => {

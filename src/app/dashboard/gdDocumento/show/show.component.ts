@@ -104,8 +104,9 @@ constructor(
   }
 
   onChangedDepartamento(id) {
+    let token = this._loginService.getToken();
     if (id) {
-      this._CfgMunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+      this._CfgMunicipioService.selectByDepartamento(this.departamentoSelected, token).subscribe(
         response => {
           this.municipios = response;
         },

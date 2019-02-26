@@ -74,7 +74,7 @@ constructor(
       } 
     );
 
-    this._CfgMunicipioService.getMunicipioSelect().subscribe(
+    this._CfgMunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 

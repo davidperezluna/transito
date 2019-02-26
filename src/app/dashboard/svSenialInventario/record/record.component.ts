@@ -93,7 +93,7 @@ export class RecordComponent implements OnInit {
         );
 
         if (this.datos.idMunicipio) {
-            this._CfgMunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
+            this._CfgMunicipioService.show(this.datos.idMunicipio, token).subscribe(
                 response => {
                     this.municipio = response.data;
                 },

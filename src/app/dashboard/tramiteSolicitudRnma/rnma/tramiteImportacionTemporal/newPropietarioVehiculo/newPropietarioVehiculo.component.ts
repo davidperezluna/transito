@@ -125,7 +125,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
                 }
             }
         );
-        this._municipioService.getMunicipioSelect().subscribe(
+        this._municipioService.select().subscribe(
             response => {
                 this.municipiosResidencia = response;
                 this.municipiosNacimiento = response;
@@ -199,15 +199,15 @@ export class NewPropietarioVehiculoComponent implements OnInit {
             ) {
 
             }
-        }
-        
-        onChangedPaisNacimiento(id) {
-            this.paisNacimientoSelected = id;
+        })
+    }
 
-            this._CfgDepartamentoService.selec(this.paisNacimientoSelected).subscribe(
-                if (id) {
-                sponse => {
-                    })
+    onChangedPaisNacimiento(id) {
+        if (id) {
+            let token = this._loginService.getToken();
+
+            this._CfgDepartamentoService.selectByPais({ 'idPais': id }, token).subscribe(
+                response => {
                     this.departamentosNacimiento = response;
                 },
                 error => {
@@ -222,9 +222,10 @@ export class NewPropietarioVehiculoComponent implements OnInit {
 
     }
 
-    changedDepartamentoNacimiento(id) {
+    onChangedDepartamentoNacimiento(id) {
         if (id) {
-            this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoNacimientoSelected).subscribe(
+            let token = this._loginService.getToken();
+            this._municipioService.selectByDepartamento(this.departamentoNacimientoSelected, token).subscribe(
                 response => {
                     this.municipiosNacimiento = response;
                     console.log(this.municipiosNacimiento);
@@ -238,14 +239,16 @@ export class NewPropietarioVehiculoComponent implements OnInit {
                     }
                 }
             );
-            
         }
-        
-    if (id) {
-        this._CfgDepartamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
-            changedPaisResidencia(id) {
-        esponse => {
-                }
+
+    }
+
+    onChangedPaisResidencia(id) {
+        if (id) {
+            let token = this._loginService.getToken();
+
+            this._CfgDepartamentoService.selectByPais({ 'idPais': id }, token).subscribe(
+                response => {
                     this.departamentosResidencia = response;
                 },
                 error => {
@@ -259,9 +262,10 @@ export class NewPropietarioVehiculoComponent implements OnInit {
         }
     }
 
-    changedDepartamentoResidencia(id) {
+    onChangedDepartamentoResidencia(id) {
         if (id) {
-            this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoResidenciaSelected).subscribe(
+            let token = this._loginService.getToken();
+            this._municipioService.selectByDepartamento(this.departamentoResidenciaSelected, token).subscribe(
                 response => {
                     this.municipiosResidencia = response;
                     console.log(this.municipiosResidencia);
@@ -278,37 +282,6 @@ export class NewPropietarioVehiculoComponent implements OnInit {
         }
 
     }
-
-    searchByIdentificacion() {
-        console.log(this.tipoIdentificacionSelected);
-        let token = this._loginService.getToken();
-        let datos = {
-            'identificacion': this.ciudadano.identificacion,
-            'tipoIdentificacion': this.tipoIdentificacionSelected,
-        }
-
-        this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'error') {
-                    //identificacion encontrada
-                    this.isError = true;
-                    this.isExist = false;
-
-                } else {
-                    this.isExist = true;
-                    this.isError = false;
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            });
-    }
-
     changedTipoId(event) {
         this.tipoId = false;
     }
