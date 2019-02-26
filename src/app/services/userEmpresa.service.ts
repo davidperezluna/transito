@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class UserEmpresaService {
-	private url = environment.apiUrl + "ususario/userempresa";
+	private url = environment.apiUrl + "usuario/userempresa";
 	public identity;
 	public token;
 

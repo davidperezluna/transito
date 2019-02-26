@@ -7,7 +7,7 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './grupoSanguineo.component.html'
+  templateUrl: './userCfgGrupoSanguineo.component.html'
 })
 export class UserCfgGrupoSanguineoComponent implements OnInit {
   public errorMessage;
