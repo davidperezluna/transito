@@ -4,8 +4,8 @@ import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.se
 import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { MunicipioService } from '../../../services/municipio.service';
-import { DepartamentoService } from '../../../services/departamento.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
@@ -67,14 +67,14 @@ export class NewComponent implements OnInit {
     private _VehiculoLimitacionService: VehiculoLimitacionService,
     private _VehiculoService: VehiculoService,
     private _UserCiudadanoService: UserCiudadanoService,
-    private _loginService: LoginService,
-    private _MunicipioService: MunicipioService,
-    private _DepartamentoService: DepartamentoService,
+    private _CfgDepartamentoService: CfgDepartamentoService,
+    private _CfgMunicipioService: CfgMunicipioService,
     private _CfgEntidadJuducialService: CfgEntidadJudicialService,
     private _LimitacionService: LimitacionService,
     private _CfgTipoProcesoService: CfgTipoProcesoService,
     private _CfgCausalLimitacionService: CfgCausalLimitacionService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+    private _loginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -121,7 +121,7 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this._DepartamentoService.getDepartamentoSelect().subscribe(
+    this._CfgDepartamentoService.select().subscribe(
       response => {
         this.departamentos = response;
       },
@@ -356,7 +356,7 @@ export class NewComponent implements OnInit {
   changedDepartamento(e) {
     if (this.departamentoSelected) {
       let token = this._loginService.getToken();
-      this._MunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+      this._CfgMunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
         response => {
           
           if (response != null) {

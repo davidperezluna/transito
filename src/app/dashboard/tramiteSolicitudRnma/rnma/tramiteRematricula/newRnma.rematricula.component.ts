@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { SustratoService } from '../../../../services/sustrato.service';
-import { MunicipioService } from '../../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../../services/municipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -55,12 +55,12 @@ export class NewRnmaRematriculaComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _SustratoService: SustratoService,
-        private _MunicipioService: MunicipioService,
+        private _CfgMunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     ) { }
 
     ngOnInit() {
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
             },

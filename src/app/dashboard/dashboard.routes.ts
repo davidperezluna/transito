@@ -3,6 +3,8 @@ import { Route } from '@angular/router';
 import { UserEmpresaRoutes } from './userEmpresa/userEmpresa.routes';
 import { UserCiudadanoRoutes } from './userCiudadano/userCiudadano.routes';
 import { UserCfgTipoIdentificacionRoutes } from './userCfgTipoIdentificacion/userCfgTipoIdentificacion.routes';
+import { UserCfgGeneroRoutes } from './userCfgGenero/userCfgGenero.routes';
+import { UserCfgGrupoSanguineoRoutes } from './userCfgGrupoSanguineo/userCfgGrupoSanguineo.routes';
 import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
 import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
 import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes';
@@ -17,15 +19,15 @@ import { VhloCfgColorRoutes } from './vhloCfgColor/vhloCfgColor.routes';
 import { VhloCfgCombustibleRoutes } from './vhloCfgCombustible/vhloCfgCombustible.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { ModalidadRoutes } from './modalidad/modalidad.routes';
-import { DepartamentoRoutes } from './departamento/departamento.routes';
-import { MunicipioRoutes } from './municipio/municipio.routes';
-import { PaisRoutes } from './pais/pais.routes';
 import { CuentaRoutes } from './cuenta/cuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { VhloCfgServicioRoutes } from './vhloCfgServicio/vhloCfgServicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
-import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 
+import { CfgPaisRoutes } from './cfgPais/cfgPais.routes';
+import { CfgDepartamentoRoutes } from './cfgDepartamento/cfgDepartamento.routes';
+import { CfgMunicipioRoutes } from './cfgMunicipio/cfgMunicipio.routes';
+import { CfgTipoInfractorRoutes } from './cfgTipoInfractor/cfgTipoInfractor.routes';
 import { CfgAdmFormatoRoutes } from './cfgAdmFormato/cfgAdmFormato.routes';
 import { CfgAdmFormatoTipoRoutes } from './cfgAdmFormatoTipo/cfgAdmFormatoTipo.routes';
 
@@ -158,9 +160,6 @@ import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFunc
 import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
 import { MpersonalTalonarioRoutes } from './mpersonalTalonario/mpersonalTalonario.routes';
 import { MpersonalAsignacionRoutes } from './mpersonalAsignacion/mpersonalAsignacion.routes';
-
-import { GeneroRoutes } from './genero/genero.routes';
-import { GrupoSanguineoRoutes } from './grupoSanguineo/grupoSanguineo.routes';
 import { VhloCfgCarroceriaRoutes } from './vhloCfgCarroceria/vhloCfgCarroceria.routes';
 import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
@@ -250,6 +249,8 @@ export const DashboardRoutes: Route[] = [
       ...UserEmpresaRoutes,
       ...UserCiudadanoRoutes,
       ...UserCfgTipoIdentificacionRoutes,
+      ...UserCfgGeneroRoutes,
+      ...UserCfgGrupoSanguineoRoutes,
       ...UserCfgMenuRoutes,
       ...UserCfgRoleRoutes,
       ...UserUsuarioMenuRoutes,
@@ -263,27 +264,30 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgCombustibleRoutes,
       ...ConsumibleRoutes,
       ...ModalidadRoutes,
-      ...PaisRoutes,
-      ...DepartamentoRoutes,
-      ...MunicipioRoutes,
       ...OrganismoTransitoRoutes,
       ...VhloCfgServicioRoutes,
+      ...CfgPaisRoutes,
+      ...CfgDepartamentoRoutes,
+      ...CfgMunicipioRoutes,
       ...CfgAuditoriaRoutes,
       ...CfgSmlmvRoutes,
       ...cfgFestivoRoutes,
-      ...buscarAutomotorRoutes,
-      ...registroEntregaProductoRoutes,
       ...CfgLicenciaConduccionCategoriaRoutes,
       ...CfgTipoClaseRoutes,
+      ...CfgModuloRoutes,
+      ...CfgCargoRoutes,
+      ...CfgTipoInfractorRoutes,
+      ...CfgAdmFormatoRoutes,
+      ...CfgAdmFormatoTipoRoutes,
+      ...buscarAutomotorRoutes,
+      ...registroEntregaProductoRoutes,
       ...RncLicenciaConduccionRoutes,
-      
       ...MsvCaracterizacionRoutes,
       ...MsvEvaluacionRoutes,
       ...MsvCategoriaRoutes,
       ...MsvVariableRoutes,
       ...MsvParametroRoutes,
       ...MsvCriterioRoutes,
-
       ...GdDocumentoRoutes,
       ...GdTrazabilidadRoutes,
       ...GdCfgTipoCorrespondenciaRoutes,
@@ -295,21 +299,14 @@ export const DashboardRoutes: Route[] = [
       ...PqoGruaCiudadanoRoutes,
       ...PqoInmovilizacionRoutes,
       ...MparqCostoTrayectoRoutes,
-      ...CfgCargoRoutes,
       ...MpersonalFuncionarioRoutes,
       ...MpersonalTipoContratoRoutes,
       ...MpersonalTalonarioRoutes,
       ...MpersonalAsignacionRoutes,
-      ...GeneroRoutes,
-      ...GrupoSanguineoRoutes,
       ...CuentaRoutes,
-      ...CfgModuloRoutes,
       ...TramiteRoutes,
       ...AlmacenRoutes,
       ...ComparendoRoutes,
-      ...CfgTipoInfractorRoutes,
-      ...CfgAdmFormatoRoutes,
-      ...CfgAdmFormatoTipoRoutes,
       ...CvCdoTrazabilidadRoutes,
       ...CvCdoNotificacionRoutes,
       ...CvCdoCfgInteresRoutes,

@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserCiudadano } from '../../../../userCiudadano/userCiudadano.modelo';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { LoginService } from '../../../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgRoleService } from '../../../../../services/userCfgRole.service';
-import { GeneroService } from '../../../../../services/genero.service';
-import { MunicipioService } from '../../../../../services/municipio.service';
-import { PaisService } from '../../../../../services/pais.service';
-import { DepartamentoService } from "../../../../../services/departamento.service";
+import { UserCfgGeneroService } from '../../../../../services/userCfgGenero.service';
+import { CfgPaisService } from '../../../../../services/cfgPais.service';
+import { CfgDepartamentoService } from "../../../../../services/cfgDepartamento.service";
+import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
+import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -60,14 +60,13 @@ export class NewPropietarioVehiculoComponent implements OnInit {
 
     constructor(
         private _UserCiudadanoService: UserCiudadanoService,
-        private _loginService: LoginService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _RoleService: UserCfgRoleService,
-        private _generoService: GeneroService,
-        private _municipioService: MunicipioService,
-        private _paisService: PaisService,
-        private _departamentoService: DepartamentoService,
-
+        private _GeneroService: UserCfgGeneroService,
+        private _paisService: CfgPaisService,
+        private _CfgDepartamentoService: CfgDepartamentoService,
+        private _municipioService: CfgMunicipioService,
+        private _loginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -101,7 +100,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
             }
         );
 
-        this._generoService.getGeneroSelect().subscribe(
+        this._GeneroService.select().subscribe(
             response => {
                 this.generos = response;
             },
@@ -200,14 +199,15 @@ export class NewPropietarioVehiculoComponent implements OnInit {
             ) {
 
             }
-        })
-    }
-
-    changedPaisNacimiento(id) {
-        if (id) {
+        }
+        
+        onChangedPaisNacimiento(id) {
             this.paisNacimientoSelected = id;
-            this._departamentoService.getDepartamentoPorPaisSelect(this.paisNacimientoSelected).subscribe(
-                response => {
+
+            this._CfgDepartamentoService.selec(this.paisNacimientoSelected).subscribe(
+                if (id) {
+                sponse => {
+                    })
                     this.departamentosNacimiento = response;
                 },
                 error => {
@@ -238,14 +238,14 @@ export class NewPropietarioVehiculoComponent implements OnInit {
                     }
                 }
             );
+            
         }
-
-    }
-
-    changedPaisResidencia(id) {
-        if (id) {
-            this._departamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
-                response => {
+        
+    if (id) {
+        this._CfgDepartamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
+            changedPaisResidencia(id) {
+        esponse => {
+                }
                     this.departamentosResidencia = response;
                 },
                 error => {

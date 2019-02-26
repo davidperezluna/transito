@@ -3,9 +3,9 @@ import { UserCiudadano } from '../../userCiudadano/userCiudadano.modelo';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { GeneroService } from '../../../services/genero.service';
-import { GrupoSanguineoService } from '../../../services/grupoSanguineo.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
+import { UserCfgGrupoSanguineoService } from '../../../services/userCfgGrupoSanguineo.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import swal from 'sweetalert2';
  
 @Component({
@@ -34,9 +34,9 @@ constructor(
   private _UserCiudadanoService: UserCiudadanoService,
   private _loginService: LoginService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-  private _generoService: GeneroService,
-  private _grupoSanguineoService: GrupoSanguineoService,
-  private _municipioService: MunicipioService,
+  private _GeneroService: UserCfgGeneroService,
+  private _grupoSanguineoService: UserCfgGrupoSanguineoService,
+  private _municipioService: CfgMunicipioService,
 ){}
 
   ngOnInit() {
@@ -59,7 +59,7 @@ constructor(
         }
       );
 
-    this._generoService.getGeneroSelect().subscribe(
+    this._GeneroService.select().subscribe(
       response => {
         this.generos = response;
       },
@@ -72,7 +72,7 @@ constructor(
       }
     );
 
-    this._grupoSanguineoService.getGrupoSanguineoSelect().subscribe(
+    this._grupoSanguineoService.select().subscribe(
       response => {
         this.gruposSanguineos = response;
       },

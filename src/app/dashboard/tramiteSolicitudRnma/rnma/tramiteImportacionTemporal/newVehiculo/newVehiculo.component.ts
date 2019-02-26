@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Vehiculo } from '../../../../vehiculo/vehiculo.modelo';
-import { DepartamentoService } from "../../../../../services/departamento.service";
 import { LoginService } from '../../../../../services/login.service';
-import { MunicipioService } from '../../../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../../../services/vhloCfgClase.service';
 import { VhloCfgCarroceriaService } from '../../../../../services/vhloCfgCarroceria.service';
@@ -12,7 +11,7 @@ import { VhloCfgCombustibleService } from '../../../../../services/vhloCfgCombus
 import { VehiculoService } from '../../../../../services/vehiculo.service';
 import { VhloCfgMarcaService } from '../../../../../services/vhloCfgMarca.service';
 import { CfgOrganismoTransitoService } from '../../../../../services/cfgOrganismoTransito.service';
-import { PaisService } from "../../../../../services/pais.service";
+import { CfgPaisService } from "../../../../../services/cfgPais.service";
 import { MsvRegistroIpatService } from "../../../../../services/msvRegistroIpat.service";
 import swal from 'sweetalert2';
 @Component({
@@ -48,9 +47,7 @@ export class NewVehiculoComponent implements OnInit {
     public organismosTransito: any;
 
     constructor(
-        private _departamentoService: DepartamentoService,
-        private _loginService: LoginService,
-        private _MunicipioService: MunicipioService,
+        private _CfgMunicipioService: CfgMunicipioService,
         private _MarcaService: VhloCfgMarcaService,
         private _LineaService: VhloCfgLineaService,
         private _ClaseService: VhloCfgClaseService,
@@ -60,8 +57,9 @@ export class NewVehiculoComponent implements OnInit {
         private _CombustibleService: VhloCfgCombustibleService,
         private _VehiculoService: VehiculoService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
-        private _PaisService: PaisService,
+        private _CfgPaisService: CfgPaisService,
         private _MsvRegistroIpatService: MsvRegistroIpatService,
+        private _loginService: LoginService,
     ) { }
 
     ngOnInit() {
@@ -94,7 +92,7 @@ export class NewVehiculoComponent implements OnInit {
                 }
             }
         );
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
             },
@@ -185,7 +183,7 @@ export class NewVehiculoComponent implements OnInit {
                 }
             }
         );
-        this._PaisService.select().subscribe(
+        this._CfgPaisService.select().subscribe(
             response => {
                 this.paises = response;
             },

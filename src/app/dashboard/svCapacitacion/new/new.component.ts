@@ -3,7 +3,7 @@ import { SvCapacitacion } from '../svCapacitacion.modelo';
 import { SvCapacitacionService } from '../../../services/svCapacitacion.service';
 import { LoginService } from '../../../services/login.service';
 
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 
 import swal from 'sweetalert2';
 import { SvCfgFuncionService } from '../../../services/svCfgFuncion.service';
@@ -43,7 +43,7 @@ export class NewComponent implements OnInit {
     constructor(
         private _CapacitacionService: SvCapacitacionService,
         private _loginService: LoginService,
-        private _MunicipioService: MunicipioService,
+        private _CfgMunicipioService: CfgMunicipioService,
         private _FuncionService: SvCfgFuncionService,
         private _FuncionCriterioService: SvCfgFuncionCriterioService,
         private _TemaCapacitacionService: SvCfgTemaCapacitacionService,
@@ -59,7 +59,7 @@ export class NewComponent implements OnInit {
 
         this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
         
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
             },

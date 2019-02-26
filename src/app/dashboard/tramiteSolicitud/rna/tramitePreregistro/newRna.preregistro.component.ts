@@ -1,17 +1,16 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
-import {DepartamentoService} from "../../../../services/departamento.service";
-import {LoginService} from '../../../../services/login.service';
-import {MunicipioService} from '../../../../services/municipio.service';
-import {VhloCfgLineaService} from '../../../../services/vhloCfgLinea.service';
-import {VhloCfgClaseService} from '../../../../services/vhloCfgClase.service';
-import {VhloCfgCarroceriaService} from '../../../../services/vhloCfgCarroceria.service';
-import {VhloCfgServicioService} from '../../../../services/vhloCfgServicio.service';
-import {VhloCfgColorService} from '../../../../services/vhloCfgColor.service';
-import {VhloCfgCombustibleService} from '../../../../services/vhloCfgCombustible.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
-import {VhloCfgMarcaService} from '../../../../services/vhloCfgMarca.service';
-import {CfgOrganismoTransitoService} from '../../../../services/cfgOrganismoTransito.service';
+import { Vehiculo } from '../../../vehiculo/vehiculo.modelo';
+import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
+import { VhloCfgLineaService } from '../../../../services/vhloCfgLinea.service';
+import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
+import { VhloCfgCarroceriaService } from '../../../../services/vhloCfgCarroceria.service';
+import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
+import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
+import { VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
+import { VhloCfgMarcaService } from '../../../../services/vhloCfgMarca.service';
+import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
+import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -54,9 +53,7 @@ public resumen = {};     public datos = {
 };
 
 constructor(
-  private _departamentoService: DepartamentoService,
-  private _loginService: LoginService,
-  private _MunicipioService: MunicipioService,
+  private _CfgMunicipioService: CfgMunicipioService,
   private _lineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _CarroceriaService: VhloCfgCarroceriaService,
@@ -66,6 +63,7 @@ constructor(
   private _CombustibleService: VhloCfgCombustibleService,
   private _VehiculoService: VehiculoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
+  private _loginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -177,7 +175,7 @@ constructor(
       }
     );
 
-    this._MunicipioService.getMunicipioSelect().subscribe(
+    this._CfgMunicipioService.getMunicipioSelect().subscribe(
       response => {
         this.municipios = response;
       }, 

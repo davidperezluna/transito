@@ -4,8 +4,7 @@ import { Sucursal } from './sucursal.modelo';
 
 import { SucursalService } from '../../../../services/sucursal.service';
 import { LoginService } from '../../../../services/login.service';
-import { DepartamentoService } from '../../../../services/departamento.service';
-import { MunicipioService } from '../../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 
 import swal from 'sweetalert2';
  
@@ -29,8 +28,8 @@ public formIndexSucursal = true;
 // los que vienen desde el base de datos
 constructor(
   private _SucursalService: SucursalService,
+  private _municipioService: CfgMunicipioService,
   private _loginService: LoginService,
-  private _municipioService: MunicipioService,
  
 ){}
 

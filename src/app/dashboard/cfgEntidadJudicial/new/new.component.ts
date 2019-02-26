@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgEntidadJudicial } from '../cfgEntidadJudicial.modelo';
 import { LoginService } from '../../../services/login.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import swal from 'sweetalert2';
 
@@ -20,7 +20,7 @@ export class NewComponent implements OnInit {
   constructor(
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
     private _loginService: LoginService,
-    private _municipioService: MunicipioService,
+    private _municipioService: CfgMunicipioService,
   ) { }
 
   ngOnInit() {

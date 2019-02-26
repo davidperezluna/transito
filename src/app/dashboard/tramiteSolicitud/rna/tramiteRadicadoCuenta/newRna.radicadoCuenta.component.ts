@@ -4,7 +4,7 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import {LoginService} from '../../../../services/login.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
-import {MunicipioService} from '../../../../services/municipio.service';
+import {CfgMunicipioService} from '../../../../services/cfgMunicipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 import swal from 'sweetalert2';
@@ -51,7 +51,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
-        private _MunicipioService: MunicipioService,
+        private _CfgMunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     ) { }
  
@@ -59,7 +59,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
         
          let token = this._loginService.getToken();
        
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.getMunicipioSelect().subscribe(
             response => {
               this.municipios = response;
             }, 

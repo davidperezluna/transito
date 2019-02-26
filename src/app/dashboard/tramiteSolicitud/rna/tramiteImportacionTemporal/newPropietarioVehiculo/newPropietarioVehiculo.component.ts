@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserCiudadano } from '../../../../userCiudadano/userCiudadano.modelo';
 import { UserCiudadanoService } from '../../../../../services/userCiudadano.service';
-import { LoginService } from '../../../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from '../../../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgRoleService } from '../../../../../services/userCfgRole.service';
-import { GeneroService } from '../../../../../services/genero.service';
-import { MunicipioService } from '../../../../../services/municipio.service';
-import { PaisService } from '../../../../../services/pais.service';
-import { DepartamentoService } from "../../../../../services/departamento.service";
+import { UserCfgGeneroService } from '../../../../../services/userCfgGenero.service';
+import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
+import { CfgPaisService } from '../../../../../services/cfgPais.service';
+import { CfgDepartamentoService } from "../../../../../services/cfgDepartamento.service";
+import { LoginService } from '../../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -63,10 +63,10 @@ export class NewPropietarioVehiculoComponent implements OnInit {
         private _loginService: LoginService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _RoleService: UserCfgRoleService,
-        private _generoService: GeneroService,
-        private _municipioService: MunicipioService,
-        private _paisService: PaisService,
-        private _departamentoService: DepartamentoService,
+        private _GeneroService: UserCfgGeneroService,
+        private _municipioService: CfgMunicipioService,
+        private _paisService: CfgPaisService,
+        private _CfgDepartamentoService: CfgDepartamentoService,
 
     ) { }
 
@@ -101,7 +101,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
             }
         );
 
-        this._generoService.getGeneroSelect().subscribe(
+        this._GeneroService.select().subscribe(
             response => {
                 this.generos = response;
             },
@@ -143,6 +143,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     onCancelar() {
         this.ready.emit(true);
     }
+
     onEnviar() {
         let token = this._loginService.getToken();
 
@@ -203,10 +204,11 @@ export class NewPropietarioVehiculoComponent implements OnInit {
         })
     }
 
-    changedPaisNacimiento(id) {
+    onChangedPaisNacimiento(id) {
         if (id) {
-            this.paisNacimientoSelected = id;
-            this._departamentoService.getDepartamentoPorPaisSelect(this.paisNacimientoSelected).subscribe(
+            let token = this._loginService.getToken();
+
+            this._CfgDepartamentoService.selectByPais({ 'idPais':id }, token).subscribe(
                 response => {
                     this.departamentosNacimiento = response;
                 },
@@ -222,7 +224,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
 
     }
 
-    changedDepartamentoNacimiento(id) {
+    onChangedDepartamentoNacimiento(id) {
         if (id) {
             this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoNacimientoSelected).subscribe(
                 response => {
@@ -242,9 +244,11 @@ export class NewPropietarioVehiculoComponent implements OnInit {
 
     }
 
-    changedPaisResidencia(id) {
+    onChangedPaisResidencia(id) {
         if (id) {
-            this._departamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
+            let token = this._loginService.getToken();
+
+            this._CfgDepartamentoService.selectByPais({ 'idPais':id }, token).subscribe(
                 response => {
                     this.departamentosResidencia = response;
                 },
@@ -259,7 +263,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
         }
     }
 
-    changedDepartamentoResidencia(id) {
+    onChangedDepartamentoResidencia(id) {
         if (id) {
             this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoResidenciaSelected).subscribe(
                 response => {

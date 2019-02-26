@@ -4,7 +4,7 @@ import { UserCiudadanoService } from '../../../../services/userCiudadano.service
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
-import { PaisService } from '../../../../services/pais.service';
+import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -49,7 +49,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         private _UserCiudadanoService: UserCiudadanoService,
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
-        private _PaisService: PaisService,
+        private _CfgPaisService: CfgPaisService,
     ) { }
 
     ngOnInit() {
@@ -81,7 +81,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
             }
         );
 
-        this._PaisService.select().subscribe(
+        this._CfgPaisService.select().subscribe(
             response => {
               this.paises = response;
             },

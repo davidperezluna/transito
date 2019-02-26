@@ -4,7 +4,7 @@ import { SvCfgUnidadReceptoraService } from '../../../services/svCfgUnidadRecept
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { SvCfgEntidadAccidenteService } from '../../../services/svCfgEntidadAccidente.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 
 @Component({
     selector: 'app-new',
@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
         private _UnidadReceptoraService: SvCfgUnidadReceptoraService,
         private _loginService: LoginService,
         private _EntidadAccidenteService: SvCfgEntidadAccidenteService,
-        private _MunicipioService: MunicipioService,
+        private _CfgMunicipioService: CfgMunicipioService,
     ) { }
 
     ngOnInit() {
@@ -45,7 +45,7 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._CfgMunicipioService.getMunicipioSelect().subscribe(
             response => {
                 this.municipios = response;
             },

@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { GdDocumentoService } from '../../../services/gdDocumento.service';
-import { DepartamentoService } from '../../../services/departamento.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { GdCfgTipoCorrespondenciaService } from '../../../services/gdCfgTipoCorrespondencia.service';
 import { GdCfgMedioCorrespondenciaService } from '../../../services/gdCfgMedioCorrespondencia.service';
 import { LoginService } from '../../../services/login.service';
@@ -37,8 +37,8 @@ public datos = {
 
 constructor(
   private _DocumentoService: GdDocumentoService,
-  private _DepartamentoService: DepartamentoService,
-  private _MunicipioService: MunicipioService,
+  private _CfgDepartamentoService: CfgDepartamentoService,
+  private _CfgMunicipioService: CfgMunicipioService,
   private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
   private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
   private _loginService: LoginService,
@@ -47,7 +47,7 @@ constructor(
   ngOnInit() {
     this.date = new Date();
 
-    this._DepartamentoService.getDepartamentoSelect().subscribe(
+    this._CfgDepartamentoService.select().subscribe(
       response => {
         this.departamentos = response;
       },
@@ -105,7 +105,7 @@ constructor(
 
   onChangedDepartamento(id) {
     if (id) {
-      this._MunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+      this._CfgMunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
         response => {
           this.municipios = response;
         },
