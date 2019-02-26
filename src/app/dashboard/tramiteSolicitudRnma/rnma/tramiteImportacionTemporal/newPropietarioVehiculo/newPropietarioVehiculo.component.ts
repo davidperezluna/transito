@@ -139,9 +139,11 @@ export class NewPropietarioVehiculoComponent implements OnInit {
             }
         );
     }
+    
     onCancelar() {
         this.ready.emit(true);
     }
+
     onEnviar() {
         let token = this._loginService.getToken();
 
