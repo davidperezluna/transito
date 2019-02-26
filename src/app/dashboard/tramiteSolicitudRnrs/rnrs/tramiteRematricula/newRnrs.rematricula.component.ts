@@ -56,7 +56,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _SustratoService: SustratoService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     ) { }
 
@@ -75,7 +75,7 @@ export class NewRnrsRematriculaComponent implements OnInit {
             }
         );
 
-        this._CfgMunicipioService.select().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

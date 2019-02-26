@@ -35,7 +35,7 @@ export class NewComponent implements OnInit {
     constructor(
         private _MsvCaracterizacionService: MsvCaracterizacionService,
         private _LoginService: LoginService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
         private _GeneroService: UserCfgGeneroService,
 
@@ -46,7 +46,7 @@ export class NewComponent implements OnInit {
         this.date = new Date;
         var datePiper = new DatePipe(this.date);
         this.msvCaracterizacion.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
-        this._CfgMunicipioService.select().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

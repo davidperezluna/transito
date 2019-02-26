@@ -47,7 +47,7 @@ public resumen = {};     public datos = {
 };
 
 constructor(
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _lineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _CarroceriaService: VhloCfgCarroceriaService,
@@ -89,19 +89,21 @@ constructor(
         }
       }
     );
-    this._CfgMunicipioService.select().subscribe(
+
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
 
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
       }
     );
+    
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;

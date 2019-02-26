@@ -44,7 +44,7 @@ public organismosTransito:any;
 
 constructor(
   private _CfgDepartamentoService: CfgDepartamentoService,
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _MarcaService: VhloCfgMarcaService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
@@ -74,7 +74,7 @@ constructor(
       } 
     );
 
-    this._CfgMunicipioService.select().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 

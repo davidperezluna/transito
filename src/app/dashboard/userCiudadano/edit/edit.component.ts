@@ -57,7 +57,7 @@ constructor(
   private _grupoSanguineoService: UserCfgGrupoSanguineoService,
   private _paisService: CfgPaisService,
   private _CfgDepartamentoService: CfgDepartamentoService,
-  private _municipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _loginService: LoginService,
 
   ){}
@@ -113,7 +113,7 @@ constructor(
       }
     );
 
-     this._municipioService.selectByDepartamento(this.ciudadano.municipioNacimiento.departamento.id, token).subscribe(
+    this._MunicipioService.selectByDepartamento({ 'idDepartamento':this.ciudadano.municipioNacimiento.departamento.id }, token).subscribe(
         response => {
           this.municipiosNacimiento = response;
           setTimeout(() => {
@@ -129,7 +129,7 @@ constructor(
         }
       );
 
-     this._municipioService.selectByDepartamento(this.ciudadano.municipioResidencia.departamento.id, token).subscribe(
+     this._MunicipioService.selectByDepartamento({ 'idDepartamento':this.ciudadano.municipioResidencia.departamento.id}, token).subscribe(
         response => {
           this.municipiosResidencia = response;
           setTimeout(() => {
@@ -297,9 +297,10 @@ constructor(
   }
 
   onChangedDepartamentoNacimiento(id){
+    let token = this._loginService.getToken();
+
     if (id) {
-      let token = this._loginService.getToken();
-      this._municipioService.selectByDepartamento(this.departamentoNacimientoSelected, token).subscribe(
+      this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
           this.municipiosNacimiento = response;
 
@@ -337,7 +338,8 @@ constructor(
   onChangedDepartamentoResidencia(id){
     if (id) {
       let token = this._loginService.getToken();
-      this._municipioService.selectByDepartamento(this.departamentoResidenciaSelected, token).subscribe(
+
+      this._MunicipioService.selectByDepartamento({ 'idDepartamento':id }, token).subscribe(
         response => {
           this.municipiosResidencia = response;
 

@@ -65,7 +65,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
         private _GeneroService: UserCfgGeneroService,
         private _paisService: CfgPaisService,
         private _CfgDepartamentoService: CfgDepartamentoService,
-        private _municipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _loginService: LoginService,
     ) { }
 
@@ -125,7 +125,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
                 }
             }
         );
-        this._municipioService.select().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipiosResidencia = response;
                 this.municipiosNacimiento = response;
@@ -225,7 +225,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     onChangedDepartamentoNacimiento(id) {
         if (id) {
             let token = this._loginService.getToken();
-            this._municipioService.selectByDepartamento(this.departamentoNacimientoSelected, token).subscribe(
+            this._MunicipioService.selectByDepartamento({'idDepartamento': id}, token).subscribe(
                 response => {
                     this.municipiosNacimiento = response;
                     console.log(this.municipiosNacimiento);
@@ -265,7 +265,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     onChangedDepartamentoResidencia(id) {
         if (id) {
             let token = this._loginService.getToken();
-            this._municipioService.selectByDepartamento(this.departamentoResidenciaSelected, token).subscribe(
+            this._MunicipioService.selectByDepartamento({'idDepartamento':id},token).subscribe(
                 response => {
                     this.municipiosResidencia = response;
                     console.log(this.municipiosResidencia);

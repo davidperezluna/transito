@@ -44,7 +44,7 @@ public sucursales:any[]= [];
 constructor(
   private _EmpresaService: UserEmpresaService,
   private _loginService: LoginService,
-  private _municipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _tipoUserEmpresaService: TipoUserEmpresaService,
   private _tipoSociedadService: TipoSociedadService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
@@ -97,7 +97,7 @@ constructor(
       }
     );
 
-    this._municipioService.select().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 

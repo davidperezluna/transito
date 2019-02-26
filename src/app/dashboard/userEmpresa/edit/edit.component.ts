@@ -56,7 +56,7 @@ public servicios: any;
 
 constructor(
   private _EmpresaService: UserEmpresaService,
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _TipoUserEmpresaService: TipoUserEmpresaService,
   private _TipoSociedadService: TipoSociedadService,
   private _CiudadanoService: UserCiudadanoService,
@@ -135,7 +135,7 @@ constructor(
       }
     );
     
-    this._CfgMunicipioService.select().subscribe(
+    this._MunicipioService.select().subscribe(
         response => {
           this.municipios = response;
           setTimeout(() => {

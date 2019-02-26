@@ -38,7 +38,7 @@ public datos = {
 constructor(
   private _DocumentoService: GdDocumentoService,
   private _CfgDepartamentoService: CfgDepartamentoService,
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _TipoCorrespondenciaService: GdCfgTipoCorrespondenciaService,
   private _MedioCorrespondenciaService: GdCfgMedioCorrespondenciaService,
   private _loginService: LoginService,
@@ -106,7 +106,7 @@ constructor(
   onChangedDepartamento(id) {
     let token = this._loginService.getToken();
     if (id) {
-      this._CfgMunicipioService.selectByDepartamento(this.departamentoSelected, token).subscribe(
+      this._MunicipioService.selectByDepartamento({'idDepartamento':id}, token).subscribe(
         response => {
           this.municipios = response;
         },

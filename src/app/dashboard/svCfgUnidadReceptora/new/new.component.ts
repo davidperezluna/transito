@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
         private _UnidadReceptoraService: SvCfgUnidadReceptoraService,
         private _loginService: LoginService,
         private _EntidadAccidenteService: SvCfgEntidadAccidenteService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
     ) { }
 
     ngOnInit() {
@@ -45,7 +45,7 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-        this._CfgMunicipioService.select().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

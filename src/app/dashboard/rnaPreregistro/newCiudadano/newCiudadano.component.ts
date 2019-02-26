@@ -36,7 +36,7 @@ constructor(
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _GeneroService: UserCfgGeneroService,
   private _grupoSanguineoService: UserCfgGrupoSanguineoService,
-  private _municipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
 ){}
 
   ngOnInit() {
@@ -86,7 +86,7 @@ constructor(
       }
     );
 
-    this._municipioService.select().subscribe(
+    this._MunicipioService.select().subscribe(
         response => {
           this.municipios = response;
         }, 

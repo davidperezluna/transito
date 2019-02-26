@@ -18,7 +18,7 @@ public departamentos: Array<any>
 public departamentoSelected: Array<any>; // ng-select [(ngModel)]
 
 constructor(
-  private _municipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _loginService: LoginService,
   private _departamentoService: CfgDepartamentoService,
   ){}
@@ -54,7 +54,7 @@ constructor(
     let token = this._loginService.getToken();
     this.municipio.departamentoId = this.departamentoSelected;
     
-		this._municipioService.edit(this.municipio,token).subscribe(
+		this._MunicipioService.edit(this.municipio,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

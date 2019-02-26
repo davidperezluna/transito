@@ -64,7 +64,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _RoleService: UserCfgRoleService,
         private _GeneroService: UserCfgGeneroService,
-        private _municipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _paisService: CfgPaisService,
         private _CfgDepartamentoService: CfgDepartamentoService,
 
@@ -126,7 +126,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
                 }
             }
         );
-        this._municipioService.select().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipiosResidencia = response;
                 this.municipiosNacimiento = response;
@@ -207,7 +207,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     onChangedPaisNacimiento(id) {
         if (id) {
             let token = this._loginService.getToken();
-
+            
             this._CfgDepartamentoService.selectByPais({ 'idPais':id }, token).subscribe(
                 response => {
                     this.departamentosNacimiento = response;
@@ -221,13 +221,13 @@ export class NewPropietarioVehiculoComponent implements OnInit {
                 }
             );
         }
-
+        
     }
-
+    
     onChangedDepartamentoNacimiento(id) {
+        let token = this._loginService.getToken();
         if (id) {
-            let token = this._loginService.getToken();
-            this._municipioService.selectByDepartamento(this.departamentoNacimientoSelected, token).subscribe(
+            this._MunicipioService.selectByDepartamento({ 'idDepartamento': id }, token).subscribe(
                 response => {
                     this.municipiosNacimiento = response;
                     console.log(this.municipiosNacimiento);
@@ -248,7 +248,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     onChangedPaisResidencia(id) {
         if (id) {
             let token = this._loginService.getToken();
-
+            
             this._CfgDepartamentoService.selectByPais({ 'idPais':id }, token).subscribe(
                 response => {
                     this.departamentosResidencia = response;
@@ -260,14 +260,14 @@ export class NewPropietarioVehiculoComponent implements OnInit {
                         alert('Error en la petición');
                     }
                 }
-            );
+                );
         }
     }
-
+    
     onChangedDepartamentoResidencia(id) {
+        let token = this._loginService.getToken();
         if (id) {
-            let token = this._loginService.getToken();
-            this._municipioService.selectByDepartamento(this.departamentoResidenciaSelected, token).subscribe(
+            this._MunicipioService.selectByDepartamento({ 'idDepartamento': id }, token).subscribe(
                 response => {
                     this.municipiosResidencia = response;
                     console.log(this.municipiosResidencia);

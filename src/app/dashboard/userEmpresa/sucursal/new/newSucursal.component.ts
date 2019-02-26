@@ -28,7 +28,7 @@ public formIndexSucursal = true;
 // los que vienen desde el base de datos
 constructor(
   private _SucursalService: SucursalService,
-  private _municipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _loginService: LoginService,
  
 ){}
@@ -36,7 +36,7 @@ constructor(
   ngOnInit() {
     this.sucursal = new Sucursal(null,null,null,null,null,null,null,null,null,null,null);
 
-    this._municipioService.select().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 

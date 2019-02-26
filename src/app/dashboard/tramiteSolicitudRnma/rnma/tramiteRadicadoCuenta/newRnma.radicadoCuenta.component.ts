@@ -52,7 +52,7 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
-        private _CfgMunicipioService: CfgMunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     ) { }
  
@@ -60,7 +60,7 @@ export class NewRnmaRadicadoCuentaComponent implements OnInit {
         
          let token = this._loginService.getToken();
        
-        this._CfgMunicipioService.select().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
               this.municipios = response;
             }, 

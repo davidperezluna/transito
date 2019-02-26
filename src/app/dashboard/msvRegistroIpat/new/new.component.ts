@@ -226,7 +226,7 @@ export class NewComponent implements OnInit {
     private _FuncionarioService: MpersonalFuncionarioService,
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
-    private _CfgMunicipioService: CfgMunicipioService,
+    private _MunicipioService: CfgMunicipioService,
     private _GravedadService: CfgGravedadService,
     private _ClaseAccidenteService: CfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
@@ -838,7 +838,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._CfgMunicipioService.select().subscribe(
+                this._MunicipioService.select().subscribe(
                   response => {
                     this.municipios = response;
                   },
@@ -2097,7 +2097,7 @@ export class NewComponent implements OnInit {
   changedMunicipio(e) {
     if (e) {
       let token = this._LoginService.getToken();
-      this._CfgMunicipioService.show(token, this.msvRegistroIpat.idMunicipio).subscribe(
+      this._MunicipioService.show(token, this.msvRegistroIpat.idMunicipio).subscribe(
         response => {
           this.msvRegistroIpat.idMunicipio = response;
         },

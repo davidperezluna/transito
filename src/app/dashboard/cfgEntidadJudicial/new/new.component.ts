@@ -20,13 +20,13 @@ export class NewComponent implements OnInit {
   constructor(
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
     private _loginService: LoginService,
-    private _municipioService: CfgMunicipioService,
+    private _MunicipioService: CfgMunicipioService,
   ) { }
 
   ngOnInit() {
     this.cfgEntidadJudicial = new CfgEntidadJudicial(null, null, null, null);
 
-    this._municipioService.select().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       },

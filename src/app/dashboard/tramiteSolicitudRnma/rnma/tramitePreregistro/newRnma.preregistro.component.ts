@@ -50,7 +50,7 @@ public resumen = {};     public datos = {
 
 constructor(
   private _loginService: LoginService,
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _CarroceriaService: VhloCfgCarroceriaService,
@@ -91,7 +91,7 @@ constructor(
         }
       }
     );
-    this._CfgMunicipioService.select().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 

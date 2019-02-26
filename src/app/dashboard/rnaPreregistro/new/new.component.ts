@@ -105,7 +105,7 @@ public datos = {
 };
 
 constructor(
-  private _CfgMunicipioService: CfgMunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _MarcaService: VhloCfgMarcaService,
   private _lineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
@@ -159,7 +159,7 @@ constructor(
         }
       }
     );
-    this._CfgMunicipioService.select().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 
