@@ -5,7 +5,7 @@ import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.ser
 import { MpersonalFuncionarioService } from '../../../../services/mpersonalFuncionario.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
 import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
-import { PaisService } from '../../../../services/pais.service';
+import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -48,7 +48,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         private _CiudadanoService: UserCiudadanoService,
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
-        private _PaisService: PaisService,
+        private _CfgPaisService: CfgPaisService,
         private _MpersonalFuncionarioService: MpersonalFuncionarioService,
         private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
         private _RncLicenciaConduccionService: RncLicenciaConduccionService,
@@ -97,7 +97,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
             }
         );
 
-        this._PaisService.select().subscribe(
+        this._CfgPaisService.select().subscribe(
             response => {
               this.paises = response;
             },

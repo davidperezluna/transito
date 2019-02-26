@@ -4,8 +4,8 @@ import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.servic
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { MunicipioService } from '../../../services/municipio.service';
-import { DepartamentoService } from '../../../services/departamento.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 
@@ -43,7 +43,7 @@ import { SvCfgUnidadReceptoraService } from "../../../services/svCfgUnidadRecept
 
 import { UserCfgTipoIdentificacionService } from "../../../services/userCfgTipoIdentificacion.service";
 import { SvCfgNacionalidadService } from "../../../services/svCfgNacionalidad.service";
-import { GeneroService } from "../../../services/genero.service";
+import { UserCfgGeneroService } from "../../../services/userCfgGenero.service";
 
 
 import swal from 'sweetalert2';
@@ -226,7 +226,7 @@ export class NewComponent implements OnInit {
     private _FuncionarioService: MpersonalFuncionarioService,
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
-    private _MunicipioService: MunicipioService,
+    private _CfgMunicipioService: CfgMunicipioService,
     private _GravedadService: CfgGravedadService,
     private _ClaseAccidenteService: CfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
@@ -263,7 +263,7 @@ export class NewComponent implements OnInit {
 
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _NacionalidadService: SvCfgNacionalidadService,
-    private _GeneroService: GeneroService,
+    private _GeneroService: UserCfgGeneroService,
 
     private _EntidadService: SvCfgEntidadAccidenteService,
     private _UnidadReceptoraService: SvCfgUnidadReceptoraService,
@@ -810,6 +810,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
+                
                 this._NacionalidadService.getNacionalidadSelect().subscribe(
                   response => {
                     this.nacionalidades = response;
@@ -823,7 +824,8 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._GeneroService.getGeneroSelect().subscribe(
+
+                this._GeneroService.select().subscribe(
                   response => {
                     this.generos = response;
                   },
@@ -836,7 +838,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._MunicipioService.getMunicipioSelect().subscribe(
+                this._CfgMunicipioService.getMunicipioSelect().subscribe(
                   response => {
                     this.municipios = response;
                   },
@@ -2095,7 +2097,7 @@ export class NewComponent implements OnInit {
   changedMunicipio(e) {
     if (e) {
       let token = this._LoginService.getToken();
-      this._MunicipioService.showMunicipio(token, this.msvRegistroIpat.idMunicipio).subscribe(
+      this._CfgMunicipioService.showMunicipio(token, this.msvRegistroIpat.idMunicipio).subscribe(
         response => {
           this.msvRegistroIpat.idMunicipio = response;
         },

@@ -3,12 +3,11 @@ import { UserCiudadano } from '../userCiudadano.modelo';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { LoginService } from '../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { UserCfgRoleService } from '../../../services/userCfgRole.service';
-import { GeneroService } from '../../../services/genero.service';
-import { GrupoSanguineoService } from '../../../services/grupoSanguineo.service';
-import { MunicipioService } from '../../../services/municipio.service';
-import { PaisService } from '../../../services/pais.service';
-import { DepartamentoService } from '../../../services/departamento.service';
+import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
+import { UserCfgGrupoSanguineoService } from '../../../services/userCfgGrupoSanguineo.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgPaisService } from '../../../services/cfgPais.service';
+import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import swal from 'sweetalert2';
  
 @Component({
@@ -24,34 +23,14 @@ public errorMessage;
 public respuesta;
 
 public tiposIdentificacion: any;
-public tipoIdentificacionSelected: any;
-
-public roles: any;
-
 public generos: any;
-public generoSelected: any;
-
 public gruposSanguineos: any;
-public grupoSanguineoSelected: any;
-
 public paises: any;
-public paisNacimientoSelected: any;
-public paisResidenciaSelected: any;
-
-public municipiosNacimiento: any;
-public municipioNacimientoSelected: any;
-
 public departamentosNacimiento: any;
-public departamentoNacimientoSelected:any;
-
+public municipiosNacimiento: any;
 public departamentosResidencia: any;
-public departamentoResidenciaSelected:any;
-
 public municipiosResidencia: any;
-public municipioResidenciaSelected: any;
 
-public isError: any;
-public isExist:boolean=false;
 public tipoId:boolean=true;
 
 
@@ -60,12 +39,11 @@ constructor(
   private _UserCiudadanoService: UserCiudadanoService,
   private _loginService: LoginService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-  private _RoleService: UserCfgRoleService,
-  private _generoService: GeneroService,
-  private _grupoSanguineoService: GrupoSanguineoService,
-  private _municipioService: MunicipioService,
-  private _paisService: PaisService,
-  private _departamentoService: DepartamentoService,
+  private _GeneroService: UserCfgGeneroService,
+  private _grupoSanguineoService: UserCfgGrupoSanguineoService,
+  private _CfgPaisService: CfgPaisService,
+  private _municipioService: CfgMunicipioService,
+  private _departamentoService: CfgDepartamentoService,
 
 ){}
 
@@ -86,21 +64,7 @@ constructor(
       }
     );
 
-    this._RoleService.select().subscribe(
-      response => {
-        this.roles = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._generoService.getGeneroSelect().subscribe(
+    this._GeneroService.select().subscribe(
       response => {
         this.generos = response;
       },
@@ -113,7 +77,7 @@ constructor(
       }
     );
 
-    this._paisService.select().subscribe(
+    this._CfgPaisService.select().subscribe(
       response => {
         this.paises = response;
       },
@@ -126,7 +90,7 @@ constructor(
       }
     );
 
-    this._grupoSanguineoService.getGrupoSanguineoSelect().subscribe(
+    this._grupoSanguineoService.select().subscribe(
       response => {
         this.gruposSanguineos = response;
       },
@@ -140,12 +104,13 @@ constructor(
       }
     );
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
-  
 
     var html = 'Se va a registrar el usuario:<br>'+
                'Primer Nombre: <b>'+this.ciudadano.primerNombre+'</b><br>'+
@@ -170,7 +135,6 @@ constructor(
       cancelButtonAriaLabel: 'Thumbs down',
     }).then((result) => {
         if (result.value) {
-          
           this._UserCiudadanoService.register({ 'ciudadano': this.ciudadano, 'campo': 'ciudadano' }, token).subscribe(
             response => {
               if (response.status == 'success') {
@@ -207,28 +171,28 @@ constructor(
       })
   }
 
-  changedPaisNacimiento(id){
-  if (id) {
-    this.paisNacimientoSelected = id;
-    this._departamentoService.getDepartamentoPorPaisSelect(this.paisNacimientoSelected).subscribe(
-      response => {
-        this.departamentosNacimiento = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-  }
-
-  }
-
-  changedDepartamentoNacimiento(id){
+  onChangedPaisNacimiento(id){
     if (id) {
-      this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoNacimientoSelected).subscribe(
+      let token = this._loginService.getToken();
+
+      this._departamentoService.selectByPais({ 'idPais': id}, token).subscribe(
+        response => {
+          this.departamentosNacimiento = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      );
+    }
+  }
+
+  onChangedDepartamentoNacimiento(id){
+    if (id) {
+      this._municipioService.getMunicipioPorDepartamentoSelect({ 'idDepartamento':id }).subscribe(
         response => {
           this.municipiosNacimiento = response;
         },
@@ -244,9 +208,11 @@ constructor(
   
   }
 
-  changedPaisResidencia(id){
+  onChangedPaisResidencia(id){
     if (id) {
-      this._departamentoService.getDepartamentoPorPaisSelect(this.paisResidenciaSelected).subscribe(
+      let token = this._loginService.getToken();
+      
+      this._departamentoService.selectByPais({ 'idPais':id }, token).subscribe(
         response => {
           this.departamentosResidencia = response;
         },
@@ -261,9 +227,9 @@ constructor(
     }
   }
 
-  changedDepartamentoResidencia(id){
+  onChangedDepartamentoResidencia(id){
     if (id) {
-      this._municipioService.getMunicipioPorDepartamentoSelect(this.departamentoResidenciaSelected).subscribe(
+      this._municipioService.getMunicipioPorDepartamentoSelect({ 'idDepartamento':id }).subscribe(
         response => {
           this.municipiosResidencia = response;
         },
@@ -276,10 +242,9 @@ constructor(
         }
       );
     }
-  
   }
   
-  searchCiudadano() {
+  /*searchCiudadano() {
     let token = this._loginService.getToken();
 
     let datos = {
@@ -306,9 +271,9 @@ constructor(
           }
         }
     });
-  }
+  }*/
 
-  changedTipoId(event){
+  onChangedTipoId(event){
     this.tipoId = false;
   }
 

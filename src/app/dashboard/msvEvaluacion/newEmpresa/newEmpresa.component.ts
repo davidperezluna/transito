@@ -2,8 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { UserEmpresa } from '../../userEmpresa/userEmpresa.modelo';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
-import { DepartamentoService } from '../../../services/departamento.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
@@ -41,7 +40,7 @@ public sucursales:any[]= [];
 constructor(
   private _EmpresaService: UserEmpresaService,
   private _LoginService: LoginService,
-  private _MunicipioService: MunicipioService,
+  private _CfgMunicipioService: CfgMunicipioService,
   private _TipoUserEmpresaService: TipoUserEmpresaService,
   private _TipoSociedadService: TipoSociedadService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
@@ -90,7 +89,7 @@ constructor(
       }
     );
 
-    this._MunicipioService.getMunicipioSelect().subscribe(
+    this._CfgMunicipioService.getMunicipioSelect().subscribe(
       response => {
         this.municipios = response;
       },  

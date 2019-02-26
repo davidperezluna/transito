@@ -6,7 +6,7 @@ import { LoginService } from '../../../../services/login.service';
 import { UserCfgTipoIdentificacionService } from "../../../../services/userCfgTipoIdentificacion.service";
 import { MsvRegistroIpatService } from "../../../../services/msvRegistroIpat.service";
 import { DatePipe, CurrencyPipe } from '@angular/common';
-import { PaisService } from "../../../../services/pais.service";
+import { CfgPaisService } from "../../../../services/cfgPais.service";
 
 import swal from 'sweetalert2';
 
@@ -84,7 +84,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         private _loginService: LoginService,
         private _TramiteFacturaService: TramiteFacturaService,
         private _MsvRegistroIpatService: MsvRegistroIpatService,
-        private _PaisService: PaisService,
+        private _CfgPaisService: CfgPaisService,
 
     ) { }
 
@@ -145,7 +145,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
                 }
             }
         );
-        this._PaisService.select().subscribe(
+        this._CfgPaisService.select().subscribe(
             response => {
                 this.paises = response;
             },

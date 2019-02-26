@@ -5,7 +5,7 @@ import { LoginService } from '../../../services/login.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MpersonalComparendoService } from '../../../services/mpersonalComparendo.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
@@ -124,7 +124,7 @@ constructor(
   private _MpersonalFuncionarioService: MpersonalFuncionarioService,
   private _MpersonalComparendoService: MpersonalComparendoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _MunicipioService: MunicipioService,
+  private _CfgMunicipioService: CfgMunicipioService,
   private _VechiculoService: VehiculoService,
   private _UserCiudadanoService: UserCiudadanoService,
   private _EmpresaService: UserEmpresaService,
@@ -169,7 +169,7 @@ constructor(
       }
     );
 
-    this._MunicipioService.getMunicipioSelect().subscribe(
+    this._CfgMunicipioService.getMunicipioSelect().subscribe(
       response => {
         this.municipios = response;
       },

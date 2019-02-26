@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 // import { UsuarioService } from '../../../services/usuario.service';
@@ -56,7 +56,7 @@ public servicios: any;
 
 constructor(
   private _EmpresaService: UserEmpresaService,
-  private _MunicipioService: MunicipioService,
+  private _CfgMunicipioService: CfgMunicipioService,
   private _TipoUserEmpresaService: TipoUserEmpresaService,
   private _TipoSociedadService: TipoSociedadService,
   private _CiudadanoService: UserCiudadanoService,
@@ -135,7 +135,7 @@ constructor(
       }
     );
     
-    this._MunicipioService.getMunicipioSelect().subscribe(
+    this._CfgMunicipioService.getMunicipioSelect().subscribe(
         response => {
           this.municipios = response;
           setTimeout(() => {

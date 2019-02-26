@@ -6,7 +6,7 @@ import { LoginService } from '../../../services/login.service';
 import { Sucursal } from '../sucursal/new/sucursal.modelo';
 import { SucursalService } from '../../../services/sucursal.service';
 import { Municipio } from '../../municipio/municipio.modelo';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 
 
@@ -37,7 +37,7 @@ public checked:any;
 
 constructor(
   private _EmpresaService: UserEmpresaService,
-  private _MunicipioService: MunicipioService,
+  private _CfgMunicipioService: CfgMunicipioService,
   private _SucursalService: SucursalService,
   private _TipoSociedadService: TipoSociedadService,
   private _loginService: LoginService,

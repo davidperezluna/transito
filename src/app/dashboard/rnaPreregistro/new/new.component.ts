@@ -1,11 +1,10 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { RnaPreregistro } from '../rnaPreregistro.modelo';
-import { DepartamentoService } from "../../../services/departamento.service";
+import { CfgDepartamentoService } from "../../../services/cfgDepartamento.service";
 import { LoginService } from '../../../services/login.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
-//import { CfgTipoVehiculoService } from "../../../services/cfgTipoVehiculo.service";
 import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
 import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
 import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
@@ -106,7 +105,7 @@ public datos = {
 };
 
 constructor(
-  private _MunicipioService: MunicipioService,
+  private _CfgMunicipioService: CfgMunicipioService,
   private _MarcaService: VhloCfgMarcaService,
   private _lineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
@@ -133,7 +132,6 @@ constructor(
     let identity = this._loginService.getIdentity();
     let datos = {'identificacion':identity.identificacion};
     
-
     this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tipoIdentificaciones = response;
@@ -161,7 +159,7 @@ constructor(
         }
       }
     );
-    this._MunicipioService.getMunicipioSelect().subscribe(
+    this._CfgMunicipioService.getMunicipioSelect().subscribe(
       response => {
         this.municipios = response;
       }, 
