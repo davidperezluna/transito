@@ -12,7 +12,6 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public combustible: VhloCfgCombustible;
 public errorMessage;
-public respuesta;
 
 constructor(
   private _CombustibleService: VhloCfgCombustibleService,
@@ -30,9 +29,7 @@ constructor(
 
 		this._CombustibleService.register(this.combustible,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

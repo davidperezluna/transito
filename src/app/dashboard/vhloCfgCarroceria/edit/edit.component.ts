@@ -13,7 +13,6 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() carroceria:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 public clases: Array<any>
 public claseSelected:any; // ng-select [(ngModel)]
@@ -25,9 +24,6 @@ constructor(
   ){}
 
   ngOnInit(){
-    
-
-    console.log(this.claseSelected);
     this._claseService.getClaseSelect().subscribe(
         response => {
           this.clases = response;
@@ -53,12 +49,10 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.carroceria.claseId = this.claseSelected;
+    this.carroceria.idClase = this.claseSelected;
 		this._carroceriaService.editCarroceria(this.carroceria,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

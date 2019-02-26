@@ -12,20 +12,11 @@ export class EditComponent {
 @Output() ready = new EventEmitter<any>();
 @Input() marca:any = null;
 public errorMessage;
-public respuesta;
-// public tipoIdentificacion: Array<any>
 
 constructor(
   private _MarcaService: VhloCfgMarcaService,
   private _loginService: LoginService,
-  ){
-  //   this.tipoIdentificacion = [
-  //     {value: 'CC', label: 'Cédula de ciudadanía'},
-  //     {value: 'TE', label: 'Tarjeta de extranjería'},
-  //     {value: 'CE', label: 'Cédula de extranjería'},
-  //     {value: 'P', label: 'Pasaporte'},
-  // ];
-  }
+  ){ }
 
   onCancelar(){
     this.ready.emit(true);
@@ -35,9 +26,7 @@ constructor(
 
 		this._MarcaService.editMarca(this.marca,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

@@ -12,27 +12,21 @@ export class EditComponent {
 @Output() ready = new EventEmitter<any>();
 @Input() combustible:any = null;
 public errorMessage;
-public respuesta;
-
 
 constructor(
   private _CombustibleService: VhloCfgCombustibleService,
   private _loginService: LoginService,
-  ){
-
-  }
+  ){ }
 
   onCancelar(){
     this.ready.emit(true);
   }
   onEnviar(){
     let token = this._loginService.getToken();
-
+    console.log(this.combustible);
 		this._CombustibleService.editCombustible(this.combustible,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

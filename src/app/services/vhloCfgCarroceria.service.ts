@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class VhloCfgCarroceriaService {
-	private url = environment.apiUrl + "vehiculo/vhloCfgCarroceria";
+	private url = environment.apiUrl + "vehiculo/vhlocfgcarroceria";
 	public identity;
 	public token;
 

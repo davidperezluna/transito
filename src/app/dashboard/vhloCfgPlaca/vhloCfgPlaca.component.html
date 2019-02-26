@@ -24,7 +24,7 @@
                 <th>Numero</th>
                 <th>Estado</th>
                 <th>Tipo</th>
-                <th>Sede Operativa</th>
+                <th>Oragnismo Transito</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -34,7 +34,7 @@
                 <td>{{cfgPlaca.numero}}</td>
                 <td>{{cfgPlaca.estado}}</td>
                 <td>{{cfgPlaca.tipoVehiculo?.nombre}}</td>
-                <td>{{cfgPlaca.sedeOperativa?.nombre}}</td>
+                <td>{{cfgPlaca.organismoTransito?.nombre}}</td>
                 <td>
                   <button (click)="liberarCfgPlaca(cfgPlaca.id)" class="btn btn-xs btn-info" type="button">Liberar
                   </button>

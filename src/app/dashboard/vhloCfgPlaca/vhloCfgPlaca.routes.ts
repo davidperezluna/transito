@@ -3,7 +3,7 @@ import { VhloCfgPlacaComponent } from '.';
 
 export const VhloCfgPlacaRoutes: Route[] = [
     {
-      path: 'vhloCfgplaca',
+      path: 'vhloCfgPlaca',
       component: VhloCfgPlacaComponent
     }
 ];
