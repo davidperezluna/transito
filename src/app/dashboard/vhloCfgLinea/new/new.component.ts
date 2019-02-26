@@ -13,7 +13,6 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public linea: VhloCfgLinea;
 public errorMessage;
-public respuesta;
 public marcas:any;
 public marcaSelected:any;
 
@@ -45,13 +44,10 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.linea.marcaId = this.marcaSelected;
-    console.log(this.linea);
+    this.linea.idMarca = this.marcaSelected;
 		this._LineaService.register(this.linea,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -62,7 +58,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El codigo '+ this.linea.codigoMt +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

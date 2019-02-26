@@ -17,17 +17,17 @@
                             <input class="form-control" [(ngModel)]="cfgPlaca.numero" name="numero" placeholder="" type="text" required>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Clase
+                            <label>Tipo Vehiculo
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="claseSelected" required name="claseId">
+                            <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tipoVehiculoSelected" required name="idTipoVehiculo">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Sede Operativa
+                            <label>Organismo Transito
                                 <strong class="text-danger">*</strong>
                             </label>
-                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeOperativaSelected" required name="sedeOperativaId">
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" required name="idOrganismoTransito">
                             </ng-select>
                         </div>
                     </div>

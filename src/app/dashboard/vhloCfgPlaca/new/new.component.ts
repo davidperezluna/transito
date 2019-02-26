@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { VhloCfgPlaca } from '../vhloCfgPlaca.modelo';
 import { VhloCfgPlacaService } from '../../../services/vhloCfgPlaca.service';
 import { LoginService } from '../../../services/login.service';
-import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import swal from 'sweetalert2';
 
@@ -15,24 +15,24 @@ export class NewComponent implements OnInit {
   public cfgPlaca: VhloCfgPlaca;
   public errorMessage;
   public respuesta;
-  public clases: any;
-  public claseSelected: any;
+  public tiposVehiculo: any;
+  public tipoVehiculoSelected: any;
   public organismosTransito: any;
-  public sedeOperativaSelected: any;
+  public organismoTransitoSelected: any;
 
   constructor(
     private _CfgPlacaService: VhloCfgPlacaService,
     private _loginService: LoginService,
-    private _claseService: VhloCfgClaseService,
+    private _TipoVehiculoService: VhloCfgTipoVehiculoService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
   ) { }
 
   ngOnInit() {
     this.cfgPlaca = new VhloCfgPlaca(null, null, null, null);
 
-    this._claseService.getClaseSelect().subscribe(
+    this._TipoVehiculoService.select().subscribe(
       response => {
-        this.clases = response;
+        this.tiposVehiculo = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -64,8 +64,8 @@ export class NewComponent implements OnInit {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.cfgPlaca.claseId = this.claseSelected;
-    this.cfgPlaca.sedeOperativaId = this.sedeOperativaSelected;
+    this.cfgPlaca.idTipoVehiculo = this.tipoVehiculoSelected;
+    this.cfgPlaca.idOrganismoTransito = this.organismoTransitoSelected;
     console.log(this.cfgPlaca);
     this._CfgPlacaService.register(this.cfgPlaca, token).subscribe(
       response => {

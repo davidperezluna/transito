@@ -3,6 +3,6 @@ export class VhloCfgClase{
 		public id:number,
 		public idTipoVehiculo:number,
 		public nombre:string,
-		public codigoMt:number
+		public codigo:number
 	){}
 }

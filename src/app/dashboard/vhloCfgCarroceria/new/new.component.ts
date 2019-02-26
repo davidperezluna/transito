@@ -13,7 +13,6 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public carroceria: VhloCfgCarroceria;
 public errorMessage;
-public respuesta;
 public clases:any;
 public claseSelected:any;
 
@@ -46,14 +45,12 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.carroceria.claseId = this.claseSelected;
+    this.carroceria.idClase = this.claseSelected;
     
     console.log(this.carroceria);
 		this._CarroceriaService.register(this.carroceria,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -64,7 +61,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'la carroceria '+ this.carroceria.codigoMt +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

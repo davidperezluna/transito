@@ -63,7 +63,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El clase '+ this.clase.nombre +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

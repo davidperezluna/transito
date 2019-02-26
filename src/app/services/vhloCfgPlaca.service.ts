@@ -5,7 +5,7 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class VhloCfgPlacaService {
-	private url = environment.apiUrl + "vhlocfgplaca";
+	private url = environment.apiUrl + "vehiculo/vhlocfgplaca";
 	public identity;
 	public token;
 
@@ -18,7 +18,7 @@ export class VhloCfgPlacaService {
 
 	register(cfgPlaca, token) {
 		let json = JSON.stringify(cfgPlaca);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		console.log(params);
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/new", params, { headers: headers })

@@ -13,7 +13,6 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() linea:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 public marcas: Array<any>
 public marcaSelected: Array<any>; // ng-select [(ngModel)]
@@ -50,12 +49,10 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.linea.marcaId = this.marcaSelected;
+    this.linea.idMarca = this.marcaSelected;
 		this._lineaService.edit(this.linea,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

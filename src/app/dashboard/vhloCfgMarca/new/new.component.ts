@@ -12,7 +12,6 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public marca: VhloCfgMarca;
 public errorMessage;
-public respuesta;
 
 constructor(
   private _MarcaService: VhloCfgMarcaService,
@@ -30,9 +29,7 @@ constructor(
 
 		this._MarcaService.register(this.marca,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -43,7 +40,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El codigo '+ this.marca.codigoMt +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
