@@ -73,7 +73,7 @@ export class UserEmpresaService {
 		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/show/nitnombre", params, { headers: headers }).map(res => res.json())
+		return this._http.post(this.url + "/show/nit/nombre", params, { headers: headers }).map(res => res.json())
 	}
 
 	
