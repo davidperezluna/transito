@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { RncLicenciaConduccion } from '../rncLicenciaConduccion.modelo';
 import { RncLicenciaConduccionService } from '../../../services/rncLicenciaConduccion.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -29,7 +29,7 @@ public respuesta: any = null;
 
 constructor(
   private _LicenciaConduccionService: RncLicenciaConduccionService,
-  private _TipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   ){}
@@ -37,7 +37,7 @@ constructor(
   ngOnInit() {
     this.funcionario = new RncLicenciaConduccion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
-    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },

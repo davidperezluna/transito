@@ -3,10 +3,10 @@ import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { TipoIdentificacionService } from "../../../../services/tipoIdentificacion.service";
+import { UserCfgTipoIdentificacionService } from "../../../../services/userCfgTipoIdentificacion.service";
 import { MsvRegistroIpatService } from "../../../../services/msvRegistroIpat.service";
 import { DatePipe, CurrencyPipe } from '@angular/common';
-import { PaisService } from "../../../../services/pais.service";
+import { CfgPaisService } from "../../../../services/cfgPais.service";
 
 import swal from 'sweetalert2';
 
@@ -79,12 +79,12 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     };
 
     constructor(
-        private _TipoIdentificacionService: TipoIdentificacionService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _TramiteFacturaService: TramiteFacturaService,
         private _MsvRegistroIpatService: MsvRegistroIpatService,
-        private _PaisService: PaisService,
+        private _CfgPaisService: CfgPaisService,
 
     ) { }
 
@@ -132,7 +132,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
             );
         }
 
-        this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tiposIdentificacion = response;
             },
@@ -145,7 +145,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
                 }
             }
         );
-        this._PaisService.select().subscribe(
+        this._CfgPaisService.select().subscribe(
             response => {
                 this.paises = response;
             },

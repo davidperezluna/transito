@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TramiteSolicitudRnrsComponent } from './tramiteSolicitudRnrs.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { EmpresaService } from '../../services/empresa.service';
+import { UserEmpresaService } from '../../services/userEmpresa.service';
 
 import { NewRnrsComponent } from './newRnrs/newRnrs.component';
 import { NewRnrsDuplicadoPlacaComponent } from './Rnrs/tramiteDuplicadoPlaca/newRnrs.duplicadoPlaca.component';
@@ -125,7 +125,7 @@ import { SelectModule } from 'angular2-select';
         NewRnrsImportacionTemporalComponent,
         NewRnrsProrrogaImportacionTemporalComponent,
     ],
-    providers:[TramiteSolicitudService,EmpresaService,TramiteTrasladoService]
+    providers:[TramiteSolicitudService,UserEmpresaService,TramiteTrasladoService]
 })
 
 export class TramiteSolicitudRnrsModule { }

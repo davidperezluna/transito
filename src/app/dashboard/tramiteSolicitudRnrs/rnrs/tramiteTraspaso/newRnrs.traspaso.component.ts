@@ -1,11 +1,11 @@
 import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
-import { LoginService } from '../../../../services/login.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { LoginService } from '../../../../services/login.service';
 
 
 
@@ -63,16 +63,16 @@ export class NewRnrsTraspasoComponent implements OnInit {
 
     constructor(
         private _loginService: LoginService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
+        private _EmpresaService: UserEmpresaService,
     ) { }
 
     ngOnInit() {
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
               this.tipoIdentificaciones = response;
             },
@@ -119,7 +119,7 @@ export class NewRnrsTraspasoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -146,7 +146,7 @@ export class NewRnrsTraspasoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacionApoderado,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -173,7 +173,7 @@ export class NewRnrsTraspasoComponent implements OnInit {
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token,nit).subscribe(
+        this._EmpresaService.showByNit(token,nit).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

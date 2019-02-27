@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import { LoginService } from '../../../services/login.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import swal from 'sweetalert2';
 
 
@@ -20,13 +20,13 @@ export class EditComponent {
   constructor(
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
     private _loginService: LoginService,
-    private _municipioService: MunicipioService,
+    private _MunicipioService: CfgMunicipioService,
   ) { }
 
   ngOnInit() {
     console.log(this.cfgEntidadJudicial);
 
-    this._municipioService.getMunicipioSelect().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
         setTimeout(() => {

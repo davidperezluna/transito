@@ -2,10 +2,10 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { TramiteSolicitud } from '../../tramiteSolicitudRnrs.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import {LoginService} from '../../../../services/login.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
-import {MunicipioService} from '../../../../services/municipio.service';
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
+import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
 import { Factura } from '../../../factura/factura.modelo';
@@ -49,19 +49,19 @@ export class NewRnrsRadicadoCuentaComponent implements OnInit {
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
-        private _MunicipioService: MunicipioService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
+      private _TramiteSolicitudService: TramiteSolicitudService,
+      private _loginService: LoginService,
+      private _tramiteFacturaService: TramiteFacturaService,
+      private _VehiculoService: VehiculoService,
+      private _MunicipioService: CfgMunicipioService,
+      private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     ) { }
  
     ngOnInit() {
         
          let token = this._loginService.getToken();
        
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
               this.municipios = response;
             }, 
@@ -75,7 +75,7 @@ export class NewRnrsRadicadoCuentaComponent implements OnInit {
             }
           );
 
-          this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+          this._TipoIdentificacionService.select().subscribe(
             response => {
               this.tiposIdentificacion = response;
             },

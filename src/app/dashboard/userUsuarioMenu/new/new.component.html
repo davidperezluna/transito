@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Asignar menús</h5>
+                <h5 class="text-uppercase"><b>Asignar menús</b></h5>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -12,17 +12,17 @@
                         <tr class="odd">
                             <td>
                                 <b>Tipo de identificación</b>
-                                <br> {{ usuario.tipoIdentificacion.nombre }}
+                                <br> {{ usuario.ciudadano.tipoIdentificacion?.nombre }}
                                 <br>
                                 <b>Numero de identificación</b>
-                                {{ usuario.identificacion }}
+                                {{ usuario.ciudadano.identificacion }}
                             </td>
                             <td>
                                 <b>Nombres</b>
-                                <br> {{ usuario.primerNombre }} {{ usuario.segundoNombre }}
+                                <br> {{ usuario.ciudadano.primerNombre }} {{ usuario.ciudadano.segundoNombre }}
                                 <br>
                                 <b>Apellidos</b>
-                                {{ usuario.primerApellido }} {{ usuario.segundoApellido }}
+                                {{ usuario.ciudadano.primerApellido }} {{ usuario.ciudadano.segundoApellido }}
                             </td>
                         </tr>
                     </tbody>

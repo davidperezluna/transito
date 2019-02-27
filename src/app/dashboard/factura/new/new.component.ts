@@ -2,8 +2,8 @@ import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { Factura } from '../factura.modelo';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { ModuloService } from '../../../services/modulo.service';
@@ -55,7 +55,7 @@ public tramitesValor:any=[];
 public vendedores:any=0; 
 public propietariosVehiculo:any=[]; 
 public propietariosVehiculoRetefuente:any=[]; 
-public isCiudadanoForm=false;
+public searchByIdentificacionForm=false;
 public isEmpresaForm=false;
 public datos:any=[];
 public valorVehiculoId:any;
@@ -66,9 +66,9 @@ public formNew:any =  false;
 constructor(
   private _FacturaService: FacturaService,
   private _TramitePrecioService: TramitePrecioService,
-  private _CiudadanoService: CiudadanoService,
+  private _UserCiudadanoService: UserCiudadanoService,
   private _LoginService: LoginService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _FuncionarioService: MpersonalFuncionarioService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _ModuloService: ModuloService,
@@ -132,7 +132,7 @@ constructor(
       }
     );
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
         swal.close();
@@ -225,7 +225,7 @@ constructor(
       'tipoIdentificacion': this.tipoIdentificacionSelected,
     }
     
-    this._CiudadanoService.isCiudadano(datos,token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(datos,token).subscribe(
       response => {
         this.respuesta = response;
         if(this.respuesta.status == 'error'){
@@ -444,7 +444,7 @@ constructor(
                         this.propietariosVehiculo = response.data;
                         response.data.forEach(element => {
                           if (element.ciudadano) {
-                            this.isCiudadanoForm = true;
+                            this.searchByIdentificacionForm = true;
                           }
                           if (element.empresa) {
                             this.isEmpresaForm = true;
@@ -589,7 +589,7 @@ constructor(
 
   }
   onCancelarTraspaso(){
-    this.isCiudadanoForm = false;
+    this.searchByIdentificacionForm = false;
     this.isEmpresaForm = false;
   }
 

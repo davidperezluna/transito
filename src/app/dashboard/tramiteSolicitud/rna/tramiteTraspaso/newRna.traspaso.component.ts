@@ -1,15 +1,14 @@
 import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
+import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 
 
@@ -69,11 +68,11 @@ export class NewRnaTraspasoComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+        private _EmpresaService: UserEmpresaService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
     ) { }
 
     ngOnInit() {
@@ -105,7 +104,7 @@ export class NewRnaTraspasoComponent implements OnInit {
             }
         );
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
               this.tipoIdentificaciones = response;
             },
@@ -157,7 +156,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -183,7 +182,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacionApoderado,
         };
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -210,7 +209,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token, nit).subscribe(
+        this._EmpresaService.showByNit(token, nit).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

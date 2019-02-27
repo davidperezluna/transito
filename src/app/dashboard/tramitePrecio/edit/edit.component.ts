@@ -3,7 +3,7 @@ import {TramitePrecio} from '../tramitePrecio.modelo';
 import {TramitePrecioService} from '../../../services/tramitePrecio.service';
 import {TramiteService} from '../../../services/tramite.service';
 import {LoginService} from '../../../services/login.service';
-import {ClaseService} from '../../../services/clase.service';
+import {VhloCfgClaseService} from '../../../services/vhloCfgClase.service';
 import {ModuloService} from '../../../services/modulo.service';
 import swal from 'sweetalert2';
 
@@ -28,7 +28,7 @@ constructor(
   private _tramitePrecioService: TramitePrecioService,
   private _loginService: LoginService,
   private _tramiteService: TramiteService,
-  private _claseService: ClaseService,
+  private _claseService: VhloCfgClaseService,
   private _moduloService: ModuloService,
   ){}
 

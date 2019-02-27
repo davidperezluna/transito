@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Router} from '@angular/router'
 import { LoginService } from '../../../services/login.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { RncLicenciaConduccionService } from '../../../services/rncLicenciaConduccion.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -32,15 +32,15 @@ export class NewComponent implements OnInit {
 
   constructor(
     private _LicenciaConduccionService: RncLicenciaConduccionService,
-    private _TipoIdentificacionService: TipoIdentificacionService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
-    private _CiudadanoService: CiudadanoService,
+    private _UserCiudadanoService: UserCiudadanoService,
     private _loginService: LoginService,
     private router: Router
     ){}
     
   ngOnInit() {
-    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -82,7 +82,7 @@ export class NewComponent implements OnInit {
   onSearchCiudadano(){
     let token = this._loginService.getToken();
 
-    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

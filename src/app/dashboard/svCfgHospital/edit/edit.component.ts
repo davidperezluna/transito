@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SvCfgHospitalService } from '../../../services/svCfgHospital.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 
 @Component({
@@ -26,13 +26,13 @@ export class EditComponent implements OnInit {
     constructor(
         private _HospitalService: SvCfgHospitalService,
         private _loginService: LoginService,
-        private _MunicipioService: MunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 
     ngOnInit() {
         console.log(this.hospital);
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
                 setTimeout(() => {

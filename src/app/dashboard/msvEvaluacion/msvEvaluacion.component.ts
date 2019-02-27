@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { UserEmpresa } from '../userEmpresa/userEmpresa.modelo';
 import { MsvEvaluacionService } from '../../services/msvEvaluacion.service';
-import { EmpresaService } from '../../services/empresa.service';
+import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { MsvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
 import { MsvEvaluacion } from './msvEvaluacion.modelo';
 import { MsvCategoriaService } from '../../services/msvCategoria.service';
-import { Empresa } from '../empresa/empresa.modelo';
 import swal from 'sweetalert2';
 import { forEach } from '@angular/router/src/utils/collection';
 
@@ -39,7 +39,7 @@ export class MsvEvaluacionComponent implements OnInit {
   public msj:any; 
   public nit:any; 
   public empresas:any;
-  public miEmpresa:Empresa;
+  public miEmpresa:UserEmpresa;
   public miRevision = null;
   public revisiones: any;
   public msvEvaluacion: MsvEvaluacion;
@@ -96,7 +96,7 @@ export class MsvEvaluacionComponent implements OnInit {
 
   constructor(
     private _EvaluacionService: MsvEvaluacionService,
-    private _EmpresaService: EmpresaService,
+    private _EmpresaService: UserEmpresaService,
     private _RevisionService: MsvRevisionService,
     private _loginService: LoginService,
     private _MsvCategoriaService: MsvCategoriaService,
@@ -249,7 +249,7 @@ export class MsvEvaluacionComponent implements OnInit {
     this.revisionNew = false;
     let token = this._loginService.getToken();
 
-    this._EmpresaService.showNitOrNombre(this.datos, token).subscribe(
+    this._EmpresaService.showByNitOrNombre(this.datos, token).subscribe(
       response => {
         if (response.status == 'success' ) {
           this.msj = response.msj;

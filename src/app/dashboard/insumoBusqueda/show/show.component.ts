@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import {RnaInsumoService} from '../../../services/rnaInsumos.service';
@@ -26,7 +26,7 @@ constructor(
   private datePipe: DatePipe,
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: CfgCasoInsumoService,
   private _RnaInsumoService: RnaInsumoService,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SvCapacitacionService } from '../../services/svCapacitacion.service';
-import { CiudadanoService } from '../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../services/userCiudadano.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -22,7 +22,7 @@ export class SvCapacitacionComponent implements OnInit {
 
     constructor(
         private _CapacitacionService: SvCapacitacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _loginService: LoginService,
     ) { }
 
@@ -58,13 +58,13 @@ export class SvCapacitacionComponent implements OnInit {
         })
 
         let token = this._loginService.getToken();
-        let datos = {
-            'cedula': this.identificacion,
-        };
-        this._CiudadanoService.showCiudadanoCedulaId(token, datos).subscribe(
+
+
+        this._UserCiudadanoService.searchByIdentificacion({ 'identificacion': this.identificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ciudadano = response.data;
+                    
                     this._CapacitacionService.buscarCapacitacionByCiudadano({ 'identificacion': this.ciudadano.identificacion }, token).subscribe(
                         response => {
                             if (response.status == 'success') {

@@ -4,12 +4,12 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
+import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 
 
@@ -65,21 +65,21 @@ export class NewRnrsMatricualaInicialComponent implements OnInit {
     };
 
     constructor(
-        private _ColorService: ColorService,
+        private _ColorService: VhloCfgColorService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
+        private _EmpresaService: UserEmpresaService,
     ) { }
 
     ngOnInit() {
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
               this.tipoIdentificaciones = response;
             },
@@ -123,7 +123,7 @@ export class NewRnrsMatricualaInicialComponent implements OnInit {
     onSearchCiudadano(){
         let token = this._loginService.getToken();
 
-        this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -150,7 +150,7 @@ export class NewRnrsMatricualaInicialComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacionApoderado,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
@@ -177,7 +177,7 @@ export class NewRnrsMatricualaInicialComponent implements OnInit {
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token, nit).subscribe(
+        this._EmpresaService.showByNit(token, nit).subscribe(
             response => {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){

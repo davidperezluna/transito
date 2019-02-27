@@ -3,7 +3,7 @@ import { Factura } from '../factura.modelo';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { TramiteFactura } from '../../tramiteFactura/tramiteFactura.modelo';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
@@ -38,7 +38,7 @@ public checked:any;
 
 constructor(
   private _FacturaService: FacturaService,
-  private _CiudadanoService: CiudadanoService,
+  private _UserCiudadanoService: UserCiudadanoService,
   private _loginService: LoginService,
   private _VehiculoService: VehiculoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,

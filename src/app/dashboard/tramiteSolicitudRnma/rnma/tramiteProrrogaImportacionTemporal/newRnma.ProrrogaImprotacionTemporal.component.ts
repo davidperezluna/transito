@@ -4,7 +4,7 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
-import { TipoIdentificacionService } from "../../../../services/tipoIdentificacion.service";
+import { UserCfgTipoIdentificacionService } from "../../../../services/userCfgTipoIdentificacion.service";
 import { MsvRegistroIpatService } from "../../../../services/msvRegistroIpat.service";
 
 import swal from 'sweetalert2';
@@ -49,7 +49,7 @@ export class NewRnmaProrrogaImportacionTemporalComponent implements OnInit {
     };
 
     constructor(
-        private _TipoIdentificacionService: TipoIdentificacionService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _TramiteFacturaService: TramiteFacturaService,
@@ -103,7 +103,7 @@ export class NewRnmaProrrogaImportacionTemporalComponent implements OnInit {
             );
         }
 
-        this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tiposIdentificacion = response;
             },

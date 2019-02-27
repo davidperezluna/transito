@@ -1,12 +1,12 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { RnmaPreregistro} from '../rnmaPreregistro.modelo';
 import { RnmaPreregistroService } from '../../../services/rnmaPreregistro.service';
-import { ColorService } from '../../../services/color.service';
-import { ClaseService } from '../../../services/clase.service';
-import { CarroceriaService } from '../../../services/carroceria.service';
-import { LineaService } from '../../../services/linea.service';
-import { CombustibleService } from '../../../services/combustible.service';
-import { MarcaService } from '../../../services/marca.service';
+import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
+import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
+import { VhloCfgCombustibleService } from '../../../services/vhloCfgCombustible.service';
+import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { VhloCfgTipoMaquinariaService } from '../../../services/vhloCfgTipoMaquinaria.service';
 import { VhloCfgTipoRodajeService } from '../../../services/vhloCfgTipoRodaje.service';
 import { VhloCfgTipoCabinaService } from '../../../services/vhloCfgTipoCabina.service';
@@ -49,16 +49,16 @@ export class NewRegistroMaquinariaComponent implements OnInit {
 constructor(
   private _RegistroMaquinariaService: RnmaPreregistroService,
   private _LoginService: LoginService,
-  private _LineaService: LineaService,
-  private _ColorService: ColorService,
+  private _LineaService: VhloCfgLineaService,
+  private _ColorService: VhloCfgColorService,
   private _TipoMaquinariaService: VhloCfgTipoMaquinariaService,
   private _TipoRodajeService: VhloCfgTipoRodajeService,
   private _TipoCabinaService: VhloCfgTipoCabinaService,
   private _ClaseMaquinariaService: VhloCfgClaseMaquinariaService,
   private _CondicionIngresoService: VhloCfgCondicionIngresoService,
-  private _MarcaService: MarcaService,
-  private _CarroceriaService: CarroceriaService,
-  private _CombustibleService: CombustibleService,
+  private _MarcaService: VhloCfgMarcaService,
+  private _CarroceriaService: VhloCfgCarroceriaService,
+  private _CombustibleService: VhloCfgCombustibleService,
   private _OrigenRegistroService: VhloCfgOrigenRegistroService,
   private _EmpresaGpsService: VhloCfgEmpresaGpsService,
   private _SubpartidaArancelariaService: VhloCfgSubpartidaArancelariaService,

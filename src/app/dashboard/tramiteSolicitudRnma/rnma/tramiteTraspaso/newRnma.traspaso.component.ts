@@ -4,12 +4,12 @@ import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.s
 import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
+import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 @Component({
     selector: 'appRnma-traspaso',
@@ -59,16 +59,16 @@ export class NewRnmaTraspasoComponent implements OnInit {
 
     constructor(
         private _loginService: LoginService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
+        private _EmpresaService: UserEmpresaService,
     ) { }
 
     ngOnInit() {
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
               this.tipoIdentificaciones = response;
             },
@@ -113,7 +113,7 @@ export class NewRnmaTraspasoComponent implements OnInit {
     onSearchCiudadano(){
         let token = this._loginService.getToken();
 
-        this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.identificacion }, token).subscribe(
             response => {
                 if(response.status == 'success'){
                     this.ciudadano = response.data;
@@ -139,7 +139,7 @@ export class NewRnmaTraspasoComponent implements OnInit {
         let identificacion = {
 			'numeroIdentificacion' : this.identificacionApoderado,
         };
-        this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
                 if(response.status == 'success'){
                     this.apoderadoSelected = response.data;
@@ -162,10 +162,12 @@ export class NewRnmaTraspasoComponent implements OnInit {
 
     onKeyEmpresa(){
         let token = this._loginService.getToken();
+        
         let nit = {
 			'nit' : this.nit,
         };
-        this._EmpresaService.showNit(token,nit).subscribe(
+
+        this._EmpresaService.showByNit(token,nit).subscribe(
             response => {
                 if(response.status == 'success'){
                     this.empresa = response.data;

@@ -3,9 +3,9 @@ import { LoginService } from '../../../services/login.service';
 import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
-import { MunicipioService } from '../../../services/municipio.service';
-import { DepartamentoService } from '../../../services/departamento.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 
@@ -31,19 +31,19 @@ import { SvCfgVisualDisminuidaService } from "../../../services/svCfgVisualDismi
 import { SvCfgResultadoExamenService } from "../../../services/svCfgResultadoExamen.service";
 import { SvCfgGradoExamenService } from "../../../services/svCfgGradoExamen.service";
 import { SvCfgHospitalService } from "../../../services/svCfgHospital.service";
-import { EmpresaService } from "../../../services/empresa.service";
+import { UserEmpresaService } from "../../../services/userEmpresa.service";
 import { SvCfgFallaService } from "../../../services/svCfgFalla.service";
 import { SvCfgLugarImpactoService } from "../../../services/svCfgLugarImpacto.service";
-import { ClaseService } from "../../../services/clase.service";
-import { ServicioService } from "../../../services/servicio.service";
+import { VhloCfgClaseService } from "../../../services/vhloCfgClase.service";
+import { VhloCfgServicioService } from "../../../services/vhloCfgServicio.service";
 import { SvCfgHipotesisService } from "../../../services/svCfgHipotesis.service";
 import { SvCfgTipoVictimaService } from "../../../services/svCfgTipoVictima.service";
 import { SvCfgGravedadVictimaService } from "../../../services/svCfgGravedadVictima.service";
 import { SvCfgUnidadReceptoraService } from "../../../services/svCfgUnidadReceptora.service";
 
-import { TipoIdentificacionService } from "../../../services/tipoIdentificacion.service";
+import { UserCfgTipoIdentificacionService } from "../../../services/userCfgTipoIdentificacion.service";
 import { SvCfgNacionalidadService } from "../../../services/svCfgNacionalidad.service";
-import { GeneroService } from "../../../services/genero.service";
+import { UserCfgGeneroService } from "../../../services/userCfgGenero.service";
 
 
 import swal from 'sweetalert2';
@@ -52,11 +52,11 @@ import { Utils } from 'ng2-bootstrap';
 import { SvCfgAseguradoraService } from '../../../services/svCfgAseguradora.service';
 import { SvCfgControlViaService } from '../../../services/svCfgControlVia.service';
 import { SvCfgEntidadAccidenteService } from '../../../services/svCfgEntidadAccidente.service';
-import { MarcaService } from '../../../services/marca.service';
-import { LineaService } from '../../../services/linea.service';
-import { ColorService } from '../../../services/color.service';
+import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
+import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
+import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
-import { CarroceriaService } from '../../../services/carroceria.service';
+import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 
 @Component({
@@ -222,11 +222,11 @@ export class NewComponent implements OnInit {
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
 
-    private _CiudadanoService: CiudadanoService,
+    private _UserCiudadanoService: UserCiudadanoService,
     private _FuncionarioService: MpersonalFuncionarioService,
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
-    private _MunicipioService: MunicipioService,
+    private _MunicipioService: CfgMunicipioService,
     private _GravedadService: CfgGravedadService,
     private _ClaseAccidenteService: CfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
@@ -252,26 +252,26 @@ export class NewComponent implements OnInit {
     private _ResultadoExamenService: SvCfgResultadoExamenService,
     private _GradoExamenService: SvCfgGradoExamenService,
     private _HospitalService: SvCfgHospitalService,
-    private _EmpresaService: EmpresaService,
+    private _EmpresaService: UserEmpresaService,
     private _FallaService: SvCfgFallaService,
     private _LugarImpactoService: SvCfgLugarImpactoService,
-    private _ClaseService: ClaseService,
-    private _ServicioService: ServicioService,
+    private _ClaseService: VhloCfgClaseService,
+    private _ServicioService: VhloCfgServicioService,
     private _HipotesisService: SvCfgHipotesisService,
     private _TipoVictimaService: SvCfgTipoVictimaService,
     private _GravedadVictimaService: SvCfgGravedadVictimaService,
 
-    private _TipoIdentificacionService: TipoIdentificacionService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _NacionalidadService: SvCfgNacionalidadService,
-    private _GeneroService: GeneroService,
+    private _GeneroService: UserCfgGeneroService,
 
     private _EntidadService: SvCfgEntidadAccidenteService,
     private _UnidadReceptoraService: SvCfgUnidadReceptoraService,
 
-    private _MarcaService: MarcaService,
-    private _LineaService: LineaService,
-    private _ColorService: ColorService,
-    private _CarroceriaService: CarroceriaService,
+    private _MarcaService: VhloCfgMarcaService,
+    private _LineaService: VhloCfgLineaService,
+    private _ColorService: VhloCfgColorService,
+    private _CarroceriaService: VhloCfgCarroceriaService,
     private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
     private _RadioAccionService: VhloCfgRadioAccionService,
 
@@ -718,7 +718,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._EmpresaService.getEmpresaSelect().subscribe(
+                this._EmpresaService.select().subscribe(
                   response => {
                     this.empresas = response;
                   },
@@ -797,7 +797,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+                this._TipoIdentificacionService.select().subscribe(
                   response => {
                     this.tiposIdentificacion = response;
                   },
@@ -810,6 +810,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
+                
                 this._NacionalidadService.getNacionalidadSelect().subscribe(
                   response => {
                     this.nacionalidades = response;
@@ -823,7 +824,8 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._GeneroService.getGeneroSelect().subscribe(
+
+                this._GeneroService.select().subscribe(
                   response => {
                     this.generos = response;
                   },
@@ -836,7 +838,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._MunicipioService.getMunicipioSelect().subscribe(
+                this._MunicipioService.select().subscribe(
                   response => {
                     this.municipios = response;
                   },
@@ -2095,7 +2097,7 @@ export class NewComponent implements OnInit {
   changedMunicipio(e) {
     if (e) {
       let token = this._LoginService.getToken();
-      this._MunicipioService.showMunicipio(token, this.msvRegistroIpat.idMunicipio).subscribe(
+      this._MunicipioService.show(token, this.msvRegistroIpat.idMunicipio).subscribe(
         response => {
           this.msvRegistroIpat.idMunicipio = response;
         },

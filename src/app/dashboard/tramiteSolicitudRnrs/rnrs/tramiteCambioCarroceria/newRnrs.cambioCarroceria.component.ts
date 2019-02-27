@@ -3,7 +3,7 @@ import { TramiteSolicitud } from '../../tramiteSolicitudRnrs.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { CarroceriaService } from '../../../../services/carroceria.service';
+import { VhloCfgCarroceriaService } from '../../../../services/vhloCfgCarroceria.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
@@ -31,7 +31,7 @@ export class NewRnrsCambioCarroceriaComponent implements OnInit {
     };
 
     constructor(
-        private _CarroceriaService: CarroceriaService,
+        private _CarroceriaService: VhloCfgCarroceriaService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,

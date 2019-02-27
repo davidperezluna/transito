@@ -27,7 +27,6 @@ export class SidebarComponent implements OnInit {
     
     this._UserCfgMenuService.cartData.subscribe(
       (data: any) => {
-        console.log('**********');
         this.ngOnInit();
       });
     

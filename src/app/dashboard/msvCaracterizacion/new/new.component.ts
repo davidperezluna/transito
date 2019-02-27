@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MsvCaracterizacion } from '../msvCaracterizacion.modelo';
 import { MsvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
-import { MunicipioService } from "../../../services/municipio.service";
+import { CfgMunicipioService } from "../../../services/cfgMunicipio.service";
 import { CfgLicenciaConduccionCategoriaService } from "../../../services/cfgLicenciaConduccionCategoria.service";
-import { GeneroService } from "../../../services/genero.service";
+import { UserCfgGeneroService } from "../../../services/userCfgGenero.service";
 import { LoginService } from '../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -35,9 +35,9 @@ export class NewComponent implements OnInit {
     constructor(
         private _MsvCaracterizacionService: MsvCaracterizacionService,
         private _LoginService: LoginService,
-        private _MunicipioService: MunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
-        private _GeneroService: GeneroService,
+        private _GeneroService: UserCfgGeneroService,
 
     ) { }
 
@@ -46,7 +46,7 @@ export class NewComponent implements OnInit {
         this.date = new Date;
         var datePiper = new DatePipe(this.date);
         this.msvCaracterizacion.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },
@@ -72,7 +72,7 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-        this._GeneroService.getGeneroSelect().subscribe(
+        this._GeneroService.select().subscribe(
             response => {
                 this.generos = response;
             },

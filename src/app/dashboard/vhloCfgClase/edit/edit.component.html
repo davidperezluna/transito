@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">Editar clase</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <div class="container">
+                        <div class="form-group row">
+                        <div class="col-lg-6 col-md-5">
+                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="clase.nombre" name="nombre" type="text" required>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Codigo MT <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="clase.codigo" name="codigo" type="text" required>
+                        </div>
+                        <div class="col-lg-6 col-md-5">
+                            <label>Tipo Vehiculo <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="tiposVehiculo" [(ngModel)]="tipoVehiculoSelected" required
+                                name="idTipoVehiculo">
+                            </ng-select>
+                        </div>
+                        </div>
+                    </div> 
+                </div>   
+        </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button (click)="onEnviar()" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>

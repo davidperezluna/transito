@@ -2,7 +2,7 @@
 import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
 import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
@@ -40,7 +40,7 @@ export class RecordComponent implements OnInit {
     constructor(
         private _SenialInventarioService: SvSenialInventarioService,
         private _SenialUbicacionService: SvSenialUbicacionService,
-        private _MunicipioService: MunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _loginService: LoginService
     ) {  }
 
@@ -93,7 +93,7 @@ export class RecordComponent implements OnInit {
         );
 
         if (this.datos.idMunicipio) {
-            this._MunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
+            this._MunicipioService.show(token, this.datos.idMunicipio).subscribe(
                 response => {
                     this.municipio = response.data;
                 },

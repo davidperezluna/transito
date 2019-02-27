@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { ServicioService } from '../../../../services/servicio.service';
+import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { ComparendoService } from '../../../../services/comparendo.service';
-import { PaisService } from '../../../../services/pais.service';
+import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { LoginService } from '../../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
@@ -40,9 +40,9 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
     constructor(
         private _LoginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
-        private _ServicioService: ServicioService,
+        private _ServicioService: VhloCfgServicioService,
         private _ComparendoService: ComparendoService,
-        private _PaisService: PaisService,
+        private _CfgPaisService: CfgPaisService,
     ) { }
 
     ngOnInit() {
@@ -76,7 +76,7 @@ export class NewRpcccExpedicionPazySalvoComponent implements OnInit {
             }
         );
 
-        this._PaisService.select().subscribe(
+        this._CfgPaisService.select().subscribe(
             response => {
               this.paises = response;
             },

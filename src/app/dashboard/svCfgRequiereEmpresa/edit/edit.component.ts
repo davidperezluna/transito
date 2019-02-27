@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SvCfgRequiereEmpresaService } from '../../../services/svCfgRequiereEmpresa.service';
+import { SvCfgRequiereUserEmpresaService } from '../../../services/svCfgRequiereEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { CarroceriaService } from '../../../services/carroceria.service';
+import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
 
 @Component({
     selector: 'app-edit',
@@ -20,9 +20,9 @@ export class EditComponent implements OnInit {
     public formReady = false;
 
     constructor(
-        private _RequiereEmpresaService: SvCfgRequiereEmpresaService,
+        private _RequiereUserEmpresaService: SvCfgRequiereUserEmpresaService,
         private _loginService: LoginService,
-        private _CarroceriaService: CarroceriaService,
+        private _CarroceriaService: VhloCfgCarroceriaService,
     ) { }
 
     ngOnInit() {
@@ -50,7 +50,7 @@ export class EditComponent implements OnInit {
         let token = this._loginService.getToken();
         this.requiereEmpresa.carroceria = this.carroceriaSelected;
         console.log("enviar: " + this.requiereEmpresa.nombre);
-        this._RequiereEmpresaService.edit(this.requiereEmpresa, token).subscribe(
+        this._RequiereUserEmpresaService.edit(this.requiereEmpresa, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

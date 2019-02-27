@@ -1,16 +1,17 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { Comparendo } from '../comparendo.modelo';
 import { ComparendoService } from '../../../services/comparendo.service';
-import { LoginService } from '../../../services/login.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MpersonalComparendoService } from '../../../services/mpersonalComparendo.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
+import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { PqoCfgPatioService } from '../../../services/pqoCfgPatio.service';
 import { PqoCfgGruaService } from '../../../services/pqoCfgGrua.service';
 import { CfgComparendoEstadoService } from '../../../services/cfgComparendoEstado.service';
@@ -18,11 +19,10 @@ import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { VhloCfgTransportePasajeroService } from '../../../services/vhloCfgTransportePasajero.service';
 import { VhloCfgTransporteEspecialService } from '../../../services/vhloCfgTransporteEspecial.service';
-import { ClaseService } from '../../../services/clase.service';
-import { ServicioService } from '../../../services/servicio.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
 import { MflInfraccionService } from '../../../services/mflInfraccion.service';
-import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
-import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -52,7 +52,7 @@ export class NewComponent implements OnInit {
   public identificacion: any;
   public propietariosVehiculo: any;
 
-  public isCiudadano = false;
+  public searchByIdentificacion = false;
   public isEmpresa = false;
   
   public agentesTransito: any;
@@ -124,12 +124,12 @@ constructor(
   private _MpersonalFuncionarioService: MpersonalFuncionarioService,
   private _MpersonalComparendoService: MpersonalComparendoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _MunicipioService: MunicipioService,
+  private _MunicipioService: CfgMunicipioService,
   private _VechiculoService: VehiculoService,
-  private _CiudadanoService: CiudadanoService,
-  private _EmpresaService: EmpresaService,
+  private _UserCiudadanoService: UserCiudadanoService,
+  private _EmpresaService: UserEmpresaService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _TipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _PqoCfgPatioService: PqoCfgPatioService,
   private _PqoCfgGruaService: PqoCfgGruaService,
   private _CfgComparendoEstadoService: CfgComparendoEstadoService,
@@ -137,8 +137,8 @@ constructor(
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _TransportePasajeroService: VhloCfgTransportePasajeroService,
   private _TransporteEspecialService: VhloCfgTransporteEspecialService,
-  private _ClaseService: ClaseService,
-  private _ServicioService: ServicioService,
+  private _ClaseService: VhloCfgClaseService,
+  private _ServicioService: VhloCfgServicioService,
   private _MflInfraccionService: MflInfraccionService,
   private _CfgTipoInfractorService: CfgTipoInfractorService,
   private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
@@ -169,7 +169,7 @@ constructor(
       }
     );
 
-    this._MunicipioService.getMunicipioSelect().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       },
@@ -351,7 +351,7 @@ constructor(
       }
     );
 
-    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },
@@ -515,7 +515,7 @@ constructor(
 
               this.propietariosVehiculo.forEach(element => {
                 if (element.ciudadano) {
-                  this.isCiudadano = true;
+                  this.searchByIdentificacion = true;
                 }
                 if (element.empresa) {
                   this.isEmpresa = true;
@@ -553,7 +553,7 @@ constructor(
   onSearchPropietario(){
     let token = this._loginService.getToken();
 
-    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.propietario.identificacion }, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.propietario.identificacion }, token).subscribe(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
@@ -574,7 +574,7 @@ constructor(
   onSearchEmpresa() {
     let token = this._loginService.getToken();
 
-    this._EmpresaService.showNit(token, { 'nit':this.empresa.nit}).subscribe(
+    this._EmpresaService.showByNit(token, { 'nit':this.empresa.nit}).subscribe(
       response => {
         if (response.status == "success") {
           this.empresa.nombre = response.data.nombre;
@@ -592,12 +592,12 @@ constructor(
   onSearchInfractor() {
     let token = this._loginService.getToken();
 
-    this._CiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.infractor.identificacion }, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion({ 'numeroIdentificacion': this.infractor.identificacion }, token).subscribe(
       response => {
         if (response.status == "success") {
           this.ciudadano = response.data;
 
-          this._CiudadanoService.calculateAge({ 'fechaNacimiento': this.ciudadano.fechaNacimiento }, token).subscribe(
+          this._UserCiudadanoService.calculateAge({ 'fechaNacimiento': this.ciudadano.fechaNacimiento }, token).subscribe(
             response => {
               this.infractor.edad = response.data;
 
@@ -681,7 +681,7 @@ constructor(
     });
 
     let token = this._loginService.getToken();
-    this._CiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.testigo.identificacion} ).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(token, { 'numeroIdentificacion': this.testigo.identificacion} ).subscribe(
       response => {
         if (response.status == "success") {
           this.testigo = response.data;

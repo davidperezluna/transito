@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SvSenialInventarioService } from '../../services/svSenialInventario.service';
 import { CfgBodegaService } from '../../services/cfgBodega.service';
-import { MunicipioService } from '../../services/municipio.service';
+import { CfgMunicipioService } from '../../services/cfgMunicipio.service';
 import { SvCfgSenialTipoService } from '../../services/svCfgSenialTipo.service';
 import { LoginService } from '../../services/login.service';
 
@@ -52,7 +52,7 @@ export class SvSenialInventarioComponent implements OnInit {
         private _LoginService: LoginService,
         private _SenialInventarioService: SvSenialInventarioService,
         private _BodegaService : CfgBodegaService,
-        private _MunicipioService : MunicipioService,
+        private _MunicipioService : CfgMunicipioService,
         private _TipoSenialService: SvCfgSenialTipoService,
     ) { }
 
@@ -82,13 +82,14 @@ export class SvSenialInventarioComponent implements OnInit {
     }
 
     getDestino(value) {
+        let token = this._LoginService.getToken();
         switch (value) {
             case 'BODEGA':
                 this.municipios = null;
 
                 break;
             case 'MUNICIPIO':
-                this._MunicipioService.getMunicipioPorDepartamentoSelect(21).subscribe(
+                this._MunicipioService.selectByDepartamento({'idDepartamento':21}, token).subscribe(
                     response => {
                         this.municipios = response;
                     },
@@ -110,7 +111,7 @@ export class SvSenialInventarioComponent implements OnInit {
         if (e) {
             let token = this._LoginService.getToken();
 
-            this._MunicipioService.showMunicipio(token, e).subscribe(
+            this._MunicipioService.show(e, token).subscribe(
                 response => {
                     this.datos.idMunicipio = response.data.id;                    
                     this.municipio = response.data;

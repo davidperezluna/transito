@@ -4,7 +4,7 @@ import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
 import { SvCfgEntidadAccidenteService } from '../../../services/svCfgEntidadAccidente.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 
 @Component({
     selector: 'app-edit',
@@ -27,7 +27,7 @@ export class EditComponent implements OnInit {
         private _UnidadReceptoraService: SvCfgUnidadReceptoraService,
         private _loginService: LoginService,
         private _EntidadAccidenteService: SvCfgEntidadAccidenteService,
-        private _MunicipioService: MunicipioService,
+        private _MunicipioService: CfgMunicipioService,
     ) { }
 
     ngOnInit() {
@@ -49,7 +49,7 @@ export class EditComponent implements OnInit {
                 }
             }
         );
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
                 setTimeout(() => {

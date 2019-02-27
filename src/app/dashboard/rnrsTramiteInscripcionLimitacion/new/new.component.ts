@@ -3,16 +3,15 @@ import { LoginService } from '../../../services/login.service';
 import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
-import { MunicipioService } from '../../../services/municipio.service';
-import { DepartamentoService } from '../../../services/departamento.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { RnrsTramiteInscripcionLimitacion } from '../rnrsTramiteInscripcionLimitacion.modelo';
-import { Ciudadano } from '../../ciudadano/ciudadano.modelo';
 import swal from 'sweetalert2';
 
 @Component({
@@ -67,21 +66,21 @@ export class NewComponent implements OnInit {
     private _TramiteInscripcionLimitacionService: TramiteLimitacionService,
     private _VehiculoLimitacionService: VehiculoLimitacionService,
     private _VehiculoService: VehiculoService,
-    private _CiudadanoService: CiudadanoService,
-    private _loginService: LoginService,
-    private _MunicipioService: MunicipioService,
-    private _DepartamentoService: DepartamentoService,
+    private _UserCiudadanoService: UserCiudadanoService,
+    private _MunicipioService: CfgMunicipioService,
+    private _CfgDepartamentoService: CfgDepartamentoService,
     private _CfgEntidadJuducialService: CfgEntidadJudicialService,
     private _LimitacionService: LimitacionService,
     private _CfgTipoProcesoService: CfgTipoProcesoService,
     private _CfgCausalLimitacionService: CfgCausalLimitacionService,
-    private _tipoIdentificacionService: TipoIdentificacionService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+    private _loginService: LoginService,
   ) { }
 
   ngOnInit() {
     this.rnrsTramiteInscripcionLimitacion = new RnrsTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tipoIdentificacionesDemandado = response;
       },
@@ -108,7 +107,7 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tipoIdentificacionesDemandante = response;
       },
@@ -122,7 +121,7 @@ export class NewComponent implements OnInit {
       }
     );
 
-    // this._MunicipioService.getMunicipioSelect().subscribe(
+    // this._MunicipioService.select().subscribe(
     //   response => {
     //     this.municipios = response;
     //   },
@@ -135,7 +134,7 @@ export class NewComponent implements OnInit {
     //     }
     //   }
     // );
-    this._DepartamentoService.getDepartamentoSelect().subscribe(
+    this._CfgDepartamentoService.select().subscribe(
       response => {
         this.departamentos = response;
       },
@@ -289,7 +288,7 @@ export class NewComponent implements OnInit {
     let identificacion = {
       'numeroIdentificacion': this.identificacionDemandado,
     };
-    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
@@ -315,7 +314,7 @@ export class NewComponent implements OnInit {
     let identificacion = {
       'numeroIdentificacion': this.identificacionDemandante,
     };
-    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
       response => {
         this.respuesta = response;
         if (this.respuesta.status == 'success') {
@@ -361,7 +360,7 @@ export class NewComponent implements OnInit {
   changedDepartamento(e) {
     if (this.departamentoSelected) {
       let token = this._loginService.getToken();
-      this._MunicipioService.getMunicipioPorDepartamentoSelect(this.departamentoSelected).subscribe(
+      this._MunicipioService.selectByDepartamento({ 'idDepartamento': this.departamentoSelected }, token).subscribe(
         response => {
           
           if (response != null) {

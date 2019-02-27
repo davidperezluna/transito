@@ -62,7 +62,7 @@
                         <label>Propietarios
                             <span class="text-danger">*</span>
                         </label>
-                        <table class="table table-bordered table-striped" *ngIf="isCiudadano">
+                        <table class="table table-bordered table-striped" *ngIf="searchByIdentificacion">
                             <tbody>
                                 <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
                                     <td>

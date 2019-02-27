@@ -1,0 +1,48 @@
+<div class="container" >
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title"><strong class="text-uppercase">Clases</strong> <small>Registradas</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal">
+                  <span class="text">Nuevo</span>
+                  <i class="ti-save ml-2"></i>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Tipo Vehiculo</th>
+                  <th>Codigo Mt</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let clase of clases; let i = index">
+                  <td >{{clase.id}}</td>
+                  <td >{{clase.nombre}}</td>
+                  <td >{{clase.tipoVehiculo?.nombre}}</td>
+                  <td >{{clase.codigo}}</td>
+                  <td>
+                    <div class="btn-group">  
+                      <button (click)="editClase(clase)" class="btn btn-xs btn-info" type="button">Editar</button> 
+                      <button (click)="deleteClase(clase.id)"  class="btn btn-xs btn-danger" type="button">Eliminar  </button> 
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [clase]="clase" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

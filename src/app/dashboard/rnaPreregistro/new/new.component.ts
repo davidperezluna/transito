@@ -1,24 +1,23 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { RnaPreregistro } from '../rnaPreregistro.modelo';
-import { DepartamentoService } from "../../../services/departamento.service";
+import { CfgDepartamentoService } from "../../../services/cfgDepartamento.service";
 import { LoginService } from '../../../services/login.service';
-import { MunicipioService } from '../../../services/municipio.service';
-import { LineaService } from '../../../services/linea.service';
-import { ClaseService } from '../../../services/clase.service';
-//import { CfgTipoVehiculoService } from "../../../services/cfgTipoVehiculo.service";
-import { CarroceriaService } from '../../../services/carroceria.service';
-import { ServicioService } from '../../../services/servicio.service';
-import { ColorService } from '../../../services/color.service';
-import { CombustibleService } from '../../../services/combustible.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
+import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
+import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
+import { VhloCfgCombustibleService } from '../../../services/vhloCfgCombustible.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
+import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { MarcaService } from '../../../services/marca.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
-import { EmpresaService } from "../../../services/empresa.service";
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { UserEmpresaService } from "../../../services/userEmpresa.service";
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 
 import swal from 'sweetalert2';
@@ -106,24 +105,24 @@ public datos = {
 };
 
 constructor(
-  private _loginService: LoginService,
-  private _MunicipioService: MunicipioService,
-  private _MarcaService: MarcaService,
-  private _lineaService: LineaService,
-  private _ClaseService: ClaseService,
-  private _CarroceriaService: CarroceriaService,
-  private _ServicioService: ServicioService,
-  private _ColorService: ColorService,
-  private _CombustibleService: CombustibleService,
+  private _MunicipioService: CfgMunicipioService,
+  private _MarcaService: VhloCfgMarcaService,
+  private _lineaService: VhloCfgLineaService,
+  private _ClaseService: VhloCfgClaseService,
+  private _CarroceriaService: VhloCfgCarroceriaService,
+  private _ServicioService: VhloCfgServicioService,
+  private _ColorService: VhloCfgColorService,
+  private _CombustibleService: VhloCfgCombustibleService,
   private _CfgRadioAccionService: VhloCfgRadioAccionService,
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _RnaPreregistroService: RnaPreregistroService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _tipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _FuncionarioService: MpersonalFuncionarioService,
-  private _CiudadanoService: CiudadanoService,
-  private _EmpresaService: EmpresaService,
+  private _UserCiudadanoService: UserCiudadanoService,
+  private _EmpresaService: UserEmpresaService,
   private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+  private _loginService: LoginService,
   ){}
 
   ngOnInit() {
@@ -133,8 +132,7 @@ constructor(
     let identity = this._loginService.getIdentity();
     let datos = {'identificacion':identity.identificacion};
     
-
-    this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tipoIdentificaciones = response;
       },
@@ -161,7 +159,7 @@ constructor(
         }
       }
     );
-    this._MunicipioService.getMunicipioSelect().subscribe(
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 
@@ -518,7 +516,7 @@ constructor(
     let identificacion = {
       'numeroIdentificacion' : this.identificacion,
     };
-    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){
@@ -545,7 +543,7 @@ onKeyApoderado(){
     let identificacion = {
   'numeroIdentificacion' : this.identificacionApoderado,
     };
-    this._CiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
+    this._UserCiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){
@@ -571,7 +569,7 @@ onKeyEmpresa(){
     let nit = {
       'nit' : this.nit,
     };
-    this._EmpresaService.showNit(token,nit).subscribe(
+    this._EmpresaService.showByNit(token,nit).subscribe(
         response => {
             this.respuesta = response; 
             if(this.respuesta.status == 'success'){

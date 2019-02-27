@@ -3,7 +3,7 @@ import { SvCfgHospital } from '../svCfgHospital.modelo';
 import { SvCfgHospitalService } from '../../../services/svCfgHospital.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 
 @Component({
@@ -25,13 +25,13 @@ export class NewComponent implements OnInit {
     constructor(
         private _HospitalService: SvCfgHospitalService,
         private _loginService: LoginService,
-        private _MunicipioService: MunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 
     ngOnInit() {
         this.hospital = new SvCfgHospital(null, null, null, null);
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },

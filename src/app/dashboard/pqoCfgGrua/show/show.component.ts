@@ -1,6 +1,6 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { PqoGruaCiudadanoService } from '../../../services/pqoGruaCiudadano.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { PqoGruaCiudadano } from '../pqoGruaCiudadano.modelo';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -22,15 +22,15 @@ public respuesta;
 public table:any;
 
 constructor(
-  private _GruaCiudadanoService: PqoGruaCiudadanoService,
-  private _CiudadanoService: CiudadanoService,
+  private _GruaUserCiudadanoService: PqoGruaCiudadanoService,
+  private _UserCiudadanoService: UserCiudadanoService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() { 
     this.gruaCiudadano = new PqoGruaCiudadano(null, null, null, null, null, null);
 
-    this._CiudadanoService.getCiudadanoSelect().subscribe(
+    this._UserCiudadanoService.select().subscribe(
       response => {
         this.ciudadanos = response;
       },
@@ -44,7 +44,7 @@ constructor(
       }
     );
 
-    this._GruaCiudadanoService.index(this.grua.id).subscribe(
+    this._GruaUserCiudadanoService.index(this.grua.id).subscribe(
       response => {
         this.gruaCiudadanos = response.data;
         let timeoutId = setTimeout(() => {
@@ -89,7 +89,7 @@ constructor(
     this.gruaCiudadano.idGrua = this.grua.id;
     this.gruaCiudadano.idCiudadano = this.ciudadanoSelected;
     
-		this._GruaCiudadanoService.register(this.gruaCiudadano,token).subscribe(
+		this._GruaUserCiudadanoService.register(this.gruaCiudadano,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

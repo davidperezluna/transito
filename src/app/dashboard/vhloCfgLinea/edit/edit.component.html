@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">Editar una linea</h5>
+            <hr> 
+            <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                    <form  #editForm="ngForm">
+                        <div class="form-group row">
+                            <div class="col-lg-4 col-md-4">
+                                <label>Nombre*</label>
+                                <input class="form-control" [(ngModel)]="linea.nombre" name="nombre" type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>CodigoMt*</label>
+                                <input class="form-control" [(ngModel)]="linea.codigo" name='codigo' type="text" required>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <label>Marca*</label>
+                                <ng-select
+                                    [multiple]="false"
+                                    [options]="marcas"
+                                    [(ngModel)]="marcaSelected"
+                                    required
+                                    name="marcaId">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </form>    
+                </div>   
+                <!-- <ng-select
+                    [multiple]="false"
+                    [options]="tipoIdentificacion"
+                    [(ngModel)]="linea.codigoMt"
+                    required
+                    name="codigoMt">
+                </ng-select>  -->
+        </div>
+            <div class="card-footer">
+                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                <button (click)="onEnviar()" [disabled]="editForm.invalid" class="btn btn-primary" type="button">Enviar</button>
+            </div>    
+        </div>
+    </div>
+</div>

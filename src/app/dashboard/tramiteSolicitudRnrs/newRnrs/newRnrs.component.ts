@@ -3,7 +3,7 @@ import { TramiteSolicitud } from '../tramiteSolicitudRnrs.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -31,7 +31,7 @@ export class NewRnrsComponent implements OnInit {
   public vehiculo: any = null;
   public ciudadanosVehiculo: any = null;
   public ciudadano: any = null;
-  public isCiudadano=false;
+  public searchByIdentificacion=false;
   public isEmpresa=false;
 
   public tipoError=200;
@@ -62,7 +62,7 @@ constructor(
   private _tramiteFacturaService: TramiteFacturaService,
   private _facturaService: FacturaService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _ciudadanoService: CiudadanoService,
+  private _CiudadanoService: UserCiudadanoService,
   private _VehiculoService: VehiculoService,
 ){}
 
@@ -191,7 +191,7 @@ constructor(
     this._VehiculoService.showVehiculoRnrs(this.tramiteSolicitud.vehiculoId,token).subscribe(
       response => {
         if (response.status == 'success' ) { 
-          this.isCiudadano = true
+          this.searchByIdentificacion = true
           this.vehiculo = response.vehiculo;
           this.ciudadanosVehiculo = response.propietarios;
           
@@ -351,7 +351,7 @@ constructor(
     let identificacion = {
   'numeroIdentificacion' : this.identificacionApoderado,
     };
-    this._ciudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+    this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
         response => {
    
             if(response.status == 'success'){

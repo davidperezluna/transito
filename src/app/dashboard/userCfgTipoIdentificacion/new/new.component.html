@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo Tipo de Identificación</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #newForm="ngForm"> 
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="form-group">
+                                <label>Nombre <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="tipoIdentificacion.nombre" name="nombre" placeholder="Nombre" type="text" required>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="form-group">
+                                <label>Sigla <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="tipoIdentificacion.sigla" name="sigla" placeholder="Sigla" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="card-footer">
+                    <button (click)="onEnviar()"  [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
+                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>

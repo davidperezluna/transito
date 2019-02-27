@@ -6,7 +6,7 @@
             <input type="text" class="form-control text-uppercase" [(ngModel)]="tramiteSolicitud.vehiculoId"
                 name="placaVehiculo" required />
             <span class="input-group-btn">
-                <button (click)="onKeyValidateVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
+                <button (click)="onSearchVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
                  type="button"><i class="fa fa-search"></i></button>
             </span>
         </div>
@@ -19,9 +19,9 @@
         </div>
     </div>
 </div><!-- .row -->
-<div class="row">
-    <!-- .row -->
-    <div class="container col-xs-12 col-lg-12" *ngIf="vehiculoSuccess">
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-12" *ngIf="vehiculo">
         <div class="row">
             <div class="col-xs-12 col-lg-12">
                 <div class="card">
@@ -29,7 +29,7 @@
                         <b class="text-uppercase">Solicitud de trámite</b>
                     </div>
                     <div class="card-body row"> 
-                        <div class="col-xs-4 col-lg-4">
+                        <div class="col-xs-12 col-lg-4">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -67,8 +67,8 @@
                             </table>
                         </div>
 
-                        <div class="col-xs-8 col-lg-8">
-                            <table class="table table-bordered" *ngIf="isCiudadano">
+                        <div class="col-xs-12 col-lg-8">
+                            <table class="table table-bordered" *ngIf="searchByIdentificacion">
                                 <thead>
                                     <tr>
                                         <th colspan="4" class="text-uppercase text-center">
@@ -249,29 +249,38 @@
     </div> -->
 
     <div class="container-fluid" *ngIf="factura && tramitesFactura?.length > 0">
-        <div class="col-md-12">
-            <div class="card col-md-12 col-md-12">
-                <div class="card-header">
-                    <h6 class="card-title">Tramites</h6>
-                </div>
+        <div class="col-xs-12 col-lg-12">
+            <div class="card">
                 <div class="card-body">
-                    <!-- Nav tabs -->
+
+                    <div class="form-group"><!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12"><!-- .col -->
+                                <select class="form-control" [(ngModel)]="tramiteSelected">
+                                    <option *ngFor="let tramiteFactura of tramitesFactura; let i = index">
+                                         {{ tramiteFactura.tramitePrecio.tramite.nombre }}
+                                    </option>
+                                </select>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.form-group -->
+
+                    <!-- Nav tabs 
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index">
                             <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.formulario}}"
                                 role="tab">{{ tramiteFactura.tramitePrecio.tramite.nombre }}<i *ngIf="tramiteFactura.realizado"
                                     class="fa fa-dot-circle-o text-success"></i></a>
-                            <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
-                        </li>
+                            //<a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>
 
                         <li class="nav-item" *ngIf='sustrato'>
                             <a class="nav-link " data-toggle="tab" href="#rna-sustrato" role="tab">Sustrato </a>
                         </li>
                     </ul>
+                     -->
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-
                         <div class="tab-pane" id="realizado" role="tabpanel">
                             <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
                         </div>
@@ -281,6 +290,7 @@
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-sustrato>
                         </div>
 
+                        <!--
                         <div class="tab-pane" id="rna-matriculainicial" role="tabpanel" *ngIf="tramiteSelected='1'">
                             <appRna-matricula-inicial [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-matricula-inicial>
@@ -389,7 +399,7 @@
 
 
 
-                        <!-- tramites sin id  -->
+                        tramites sin id 
                         <div class="tab-pane" id="rna-importacion-temporal" role="tabpanel">
                             <appRna-importacion-temporal [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-importacion-temporal>
@@ -434,6 +444,7 @@
                             <appRna-certificadoTradicion [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
                                 (cancelarTramite)="cancelarTramite($event)"></appRna-certificadoTradicion>
                         </div>
+                         -->
                     </div>
                 </div>
             </div>

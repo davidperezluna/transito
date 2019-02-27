@@ -5,7 +5,7 @@ import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { SvCfgSenialLineaService } from '../../../services/svCfgSenialLinea.service';
 import { SvCfgSenialUnidadMedidaService } from '../../../services/svCfgSenialUnidadMedida.service';
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { SvSenialBodegaService } from '../../../services/svSenialBodega.service';
 import { SvCfgSenialProveedorService } from '../../../services/svCfgSenialProveedor.service';
 import { LoginService } from '../../../services/login.service';
@@ -70,7 +70,7 @@ export class NewSenialUbicacionComponent implements OnInit {
         private _EstadoService: SvCfgSenialEstadoService,
         private _LineaService: SvCfgSenialLineaService,
         private _UnidadMedidaService: SvCfgSenialUnidadMedidaService,
-        private _MunicipioService: MunicipioService,
+        private _MunicipioService: CfgMunicipioService,
         private _BodegaService: SvSenialBodegaService,
         private _ProveedorService: SvCfgSenialProveedorService,
         private _LoginService: LoginService,
@@ -109,7 +109,7 @@ export class NewSenialUbicacionComponent implements OnInit {
             }
         );
 
-        this._MunicipioService.showMunicipio(token, this.datos.idMunicipio).subscribe(
+        this._MunicipioService.show(token, this.datos.idMunicipio).subscribe(
             response => {
                 this.municipio = response.data;
             },

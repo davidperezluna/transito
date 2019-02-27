@@ -2,9 +2,9 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { CfgValorVehiculo } from '../cfgValorVehiculo.modelo';
 import { CfgValorVehiculoService } from '../../../services/cfgValorVehiculo.service';
 import { LoginService } from '../../../services/login.service';
-import { ClaseService } from '../../../services/clase.service';
-import { MarcaService } from '../../../services/marca.service';
-import { LineaService } from '../../../services/linea.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
+import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -26,9 +26,9 @@ export class NewComponent implements OnInit {
   constructor( 
     private _CfgValorVehiculoService: CfgValorVehiculoService,
     private _loginService: LoginService,
-    private _claseService: ClaseService,
-    private _MarcaService: MarcaService,
-    private _lineaService: LineaService,  
+    private _claseService: VhloCfgClaseService,
+    private _MarcaService: VhloCfgMarcaService,
+    private _lineaService: VhloCfgLineaService,  
   ) { }
 
   ngOnInit() {

@@ -5,12 +5,12 @@ import { MsvExportIpat } from '../msvExportIpat.modelo';
 
 import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { SvCfgTipoVictimaService } from '../../../services/svCfgTipoVictima.service';
-import { MunicipioService } from '../../../services/municipio.service';
-import { ClaseService } from '../../../services/clase.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
-import { GeneroService } from '../../../services/genero.service';
+import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
 
@@ -92,12 +92,12 @@ export class ExportComponent implements OnInit {
         private _LoginService: LoginService,
         private _GravedadService: CfgGravedadService,
         private _TipoVictimaService: SvCfgTipoVictimaService,
-        private _MunicipioService: MunicipioService,
-        private _ClaseService: ClaseService,
+        private _MunicipioService: CfgMunicipioService,
+        private _ClaseService: VhloCfgClaseService,
         private _ClaseAccidenteService: CfgClaseAccidenteService,
         private _ChoqueCon: CfgChoqueConService,
         private _ObjetoFijo: CfgObjetoFijoService,
-        private _GeneroService: GeneroService,
+        private _GeneroService: UserCfgGeneroService,
         private _MsvRegistroIpat: MsvRegistroIpatService,
     ) { }
 
@@ -130,7 +130,7 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-        this._MunicipioService.getMunicipioSelect().subscribe(
+        this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
             },
@@ -195,7 +195,7 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-        this._GeneroService.getGeneroSelect().subscribe(
+        this._GeneroService.select().subscribe(
             response => {
                 this.generos = response;
             },

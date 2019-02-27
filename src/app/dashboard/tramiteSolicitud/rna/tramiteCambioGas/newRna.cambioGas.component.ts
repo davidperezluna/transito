@@ -3,9 +3,9 @@ import { TramiteSolicitud } from '../../tramiteSolicitud.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { LoginService } from '../../../../services/login.service';
-import { ColorService } from '../../../../services/color.service';
+import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
-import{ CombustibleService } from '../../../../services/combustible.service';
+import{ VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
 
 import swal from 'sweetalert2';
 
@@ -50,7 +50,7 @@ export class NewRnaCambioGasComponent implements OnInit {
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
-        private _CombustibleService: CombustibleService,
+        private _CombustibleService: VhloCfgCombustibleService,
     ) { }
   
     ngOnInit() {

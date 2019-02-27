@@ -1,16 +1,16 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Vehiculo } from '../vehiculo.modelo';
-import { DepartamentoService } from "../../../services/departamento.service";
-import { MunicipioService } from '../../../services/municipio.service';
-import { LineaService } from '../../../services/linea.service';
-import { ClaseService } from '../../../services/clase.service';
-import { CarroceriaService } from '../../../services/carroceria.service';
-import { ServicioService } from '../../../services/servicio.service';
-import { ColorService } from '../../../services/color.service';
-import { CombustibleService } from '../../../services/combustible.service';
+import {Vehiculo} from '../vehiculo.modelo';
+import { CfgDepartamentoService } from "../../../services/cfgDepartamento.service";
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
+import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
+import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
+import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
+import { VhloCfgCombustibleService } from '../../../services/vhloCfgCombustible.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
+import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { MarcaService } from '../../../services/marca.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 @Component({
@@ -43,23 +43,22 @@ public respuesta:any;
 public organismosTransito:any;
 
 constructor(
-  private _departamentoService: DepartamentoService,
-  private _loginService: LoginService,
-  private _MunicipioService: MunicipioService,
-  private _MarcaService: MarcaService,
-  private _LineaService: LineaService,
-  private _ClaseService: ClaseService,
-  private _CarroceriaService: CarroceriaService,
-  private _ServicioService: ServicioService,
-  private _ColorService: ColorService,
-  private _CombustibleService: CombustibleService,
+  private _CfgDepartamentoService: CfgDepartamentoService,
+  private _MunicipioService: CfgMunicipioService,
+  private _MarcaService: VhloCfgMarcaService,
+  private _LineaService: VhloCfgLineaService,
+  private _ClaseService: VhloCfgClaseService,
+  private _CarroceriaService: VhloCfgCarroceriaService,
+  private _ServicioService: VhloCfgServicioService,
+  private _ColorService: VhloCfgColorService,
+  private _CombustibleService: VhloCfgCombustibleService,
   private _VehiculoService: VehiculoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  ){}
+  private _loginService: LoginService,
+){}
 
   ngOnInit() {
     this.vehiculo = new Vehiculo(null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
-    
     
     this._MarcaService.getMarcaSelect().subscribe(
       response => {
@@ -74,7 +73,8 @@ constructor(
         }
       } 
     );
-    this._MunicipioService.getMunicipioSelect().subscribe(
+
+    this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
       }, 
@@ -87,6 +87,7 @@ constructor(
         }
       }
     );
+
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
@@ -100,6 +101,7 @@ constructor(
         }
       }
     );
+
     this._ClaseService.getClaseSelect().subscribe(
       response => {
         this.clases = response;
@@ -113,6 +115,7 @@ constructor(
         }
       }
     );
+
     this._CarroceriaService.getCarroceriaSelect().subscribe(
       response => {
         this.carrocerias = response;
@@ -126,6 +129,7 @@ constructor(
         }
       }
     );
+
     this._ServicioService.getServicioSelect().subscribe(
       response => {
         this.servicios = response;
@@ -139,6 +143,7 @@ constructor(
         }
       }
     );
+
     this._ColorService.select().subscribe(
       response => {
         this.colores = response;
@@ -152,6 +157,7 @@ constructor(
         }
       }
     );
+
     this._CombustibleService.getCombustibleSelect().subscribe(
       response => {
         this.combustibles = response;
@@ -219,18 +225,18 @@ constructor(
       let token = this._loginService.getToken()
       
       this._LineaService.searchByMarcaSelect({ 'idMarca': e }, token).subscribe(
-          response => {
-            this.lineas = response;
-          }, 
-          error => { 
-            this.errorMessage = <any>error;
-    
-            if(this.errorMessage != null){
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
+        response => {
+          this.lineas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
           }
-        );
+        }
+      );
     }
   }
 }

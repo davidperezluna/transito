@@ -3,15 +3,15 @@ import { TramiteSolicitud } from '../../tramiteSolicitudRnma.modelo';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import { BancoService } from '../../../../services/banco.service';
-import { CfgPlaca } from '../../../cfgPlaca/cfgPlaca.modelo';
+import { VhloCfgPlaca } from '../../../vhloCfgPlaca/vhloCfgPlaca.modelo';
 import { LoginService } from '../../../../services/login.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 
 import swal from 'sweetalert2';
@@ -28,7 +28,7 @@ export class NewRnmaTramiteLevantamientoAlertaPrendaComponent implements OnInit 
     @Input() factura: any = null;
     @Input() tramitesFactura: any = null;
 
-    public placa: CfgPlaca = null;;
+    public placa: VhloCfgPlaca = null;;
     public errorMessage;
     public respuesta;
     public cfgTiposAlerta: any;
@@ -95,15 +95,15 @@ export class NewRnmaTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
         private _VehiculoAcreedorService: VehiculoAcreedorService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
+        private _EmpresaService: UserEmpresaService,
     ) { }
  
     ngOnInit() {
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tipoIdentificaciones = response;
             },
@@ -238,7 +238,7 @@ export class NewRnmaTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         let identificacion = {
             'numeroIdentificacion': this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
@@ -320,7 +320,7 @@ export class NewRnmaTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         let identificacion = {
             'numeroIdentificacion': this.identificacionAcreedor,
         };
-        this._CiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {
@@ -347,7 +347,7 @@ export class NewRnmaTramiteLevantamientoAlertaPrendaComponent implements OnInit 
         let nit = {
             'nit': this.nit,
         };
-        this._EmpresaService.showNit(token, nit).subscribe(
+        this._EmpresaService.showByNit(token, nit).subscribe(
             response => {
                 this.respuesta = response;
                 if (this.respuesta.status == 'success') {

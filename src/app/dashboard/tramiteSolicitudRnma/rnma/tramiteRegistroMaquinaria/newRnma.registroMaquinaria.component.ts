@@ -3,13 +3,13 @@ import { RegistroMaquinaria } from './newRnma.registroMaquinaria.modelo';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 import {LoginService} from '../../../../services/login.service';
 import {VehiculoService} from '../../../../services/vehiculo.service';
-import {ColorService} from '../../../../services/color.service';
+import {VhloCfgColorService} from '../../../../services/vhloCfgColor.service';
 import { TipoVehiculoService } from '../../../../services/tipoVehiculo.service';
-import {ClaseService} from '../../../../services/clase.service';
-import {MarcaService} from '../../../../services/marca.service';
-import {LineaService} from '../../../../services/linea.service';
-import {CarroceriaService} from '../../../../services/carroceria.service';
-import {CombustibleService} from '../../../../services/combustible.service';
+import {VhloCfgClaseService} from '../../../../services/vhloCfgClase.service';
+import {VhloCfgMarcaService} from '../../../../services/vhloCfgMarca.service';
+import {VhloCfgLineaService} from '../../../../services/vhloCfgLinea.service';
+import {VhloCfgCarroceriaService} from '../../../../services/vhloCfgCarroceria.service';
+import {VhloCfgCombustibleService} from '../../../../services/vhloCfgCombustible.service';
 
 import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
 
@@ -126,15 +126,15 @@ constructor(
   
   private _loginService: LoginService,
   
-  private _LineaService: LineaService,
-  private _ClaseService: ClaseService,
-  private _CarroceriaService: CarroceriaService,
-  private _ColorService: ColorService,
+  private _LineaService: VhloCfgLineaService,
+  private _ClaseService: VhloCfgClaseService,
+  private _CarroceriaService: VhloCfgCarroceriaService,
+  private _ColorService: VhloCfgColorService,
   
-  private _CombustibleService: CombustibleService,
+  private _CombustibleService: VhloCfgCombustibleService,
   private _VehiculoService: VehiculoService,
   
-  private _MarcaService: MarcaService,
+  private _MarcaService: VhloCfgMarcaService,
   private _TramiteFacturaService: TramiteFacturaService,
   private _TipoVehiculoService: TipoVehiculoService,
   ){}

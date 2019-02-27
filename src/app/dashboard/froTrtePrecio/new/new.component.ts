@@ -3,7 +3,7 @@ import { FroTrtePrecio } from '../froTrtePrecio.modelo';
 import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
 
 import { FroTramiteService } from "../../../services/froTramite.service";
-import { ClaseService } from "../../../services/clase.service";
+import { VhloCfgClaseService } from "../../../services/vhloCfgClase.service";
 import { ModuloService } from "../../../services/modulo.service";
 
 import { LoginService } from '../../../services/login.service';
@@ -26,7 +26,7 @@ export class NewComponent implements OnInit {
         private _FroTrtePrecioService: FroTrtePrecioService,
         
         private _FroTramiteService: FroTramiteService,
-        private _ClaseService: ClaseService,
+        private _ClaseService: VhloCfgClaseService,
         private _ModuloService: ModuloService,
 
         private _loginService: LoginService,

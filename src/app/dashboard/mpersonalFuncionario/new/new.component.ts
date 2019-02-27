@@ -4,7 +4,7 @@ import { MpersonalFuncionario } from '../mpersonalFuncionario.modelo';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { MpersonalTipoContratoService } from '../../../services/mpersonalTipoContrato.service';
 import { CfgCargoService } from '../../../services/cfgCargo.service';
-import { TipoIdentificacionService } from '../../../services/tipoIdentificacion.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
 import { DatePipe  } from '@angular/common';
@@ -41,7 +41,7 @@ constructor(
   private _FuncionarioService: MpersonalFuncionarioService,
   private _TipoContratoService: MpersonalTipoContratoService,
   private _CargoService: CfgCargoService,
-  private _TipoIdentificacionService: TipoIdentificacionService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _loginService: LoginService,
   private router: Router
@@ -79,7 +79,7 @@ constructor(
       }
     );
 
-    this._TipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
         this.tiposIdentificacion = response;
       },

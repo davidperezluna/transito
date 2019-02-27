@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 import { RnaTramiteInscripcionLimitacion } from './rnaTramiteInscripcionLimitacion.modelo';
-import { Ciudadano } from '../ciudadano/ciudadano.modelo';
+import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
 
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';

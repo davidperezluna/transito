@@ -4,7 +4,7 @@ import { SustratoService } from '../../../services/sustrato.service';
 import { LoginService } from '../../../services/login.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { ModuloService } from '../../../services/modulo.service';
-import { ClaseService } from '../../../services/clase.service';
+import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -30,7 +30,7 @@ constructor(
   private _loginService: LoginService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _ModuloService: ModuloService,
-  private _ClaseService: ClaseService,
+  private _ClaseService: VhloCfgClaseService,
   ){}
 
   ngOnInit() {

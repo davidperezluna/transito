@@ -3,7 +3,7 @@ import { Soat } from '../soat.modelo';
 import { SoatService } from '../../../services/soat.service';
 import { LoginService } from '../../../services/login.service';
 
-import { MunicipioService } from '../../../services/municipio.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 
 import swal from 'sweetalert2';
 
@@ -24,14 +24,14 @@ export class NewComponent implements OnInit {
     constructor(
         private _SoatService: SoatService,
         private _loginService: LoginService,
-        private _Municipioervice: MunicipioService,
+        private _Municipioervice: CfgMunicipioService,
 
     ) { }
 
     ngOnInit() {
         this.soat = new Soat(null, null, null, null, null, null, null, null);
 
-        this._Municipioervice.getMunicipioSelect().subscribe(
+        this._Municipioervice.select().subscribe(
             response => {
                 this.municipios = response;
             },

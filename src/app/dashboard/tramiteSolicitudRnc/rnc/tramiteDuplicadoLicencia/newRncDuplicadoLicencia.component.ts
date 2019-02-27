@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { ClaseService } from '../../../../services/clase.service';
-import { ServicioService } from '../../../../services/servicio.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
+import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
+import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
-import { PaisService } from '../../../../services/pais.service';
+import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -46,10 +46,10 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     constructor(
         private _LoginService: LoginService,
         private _CategoriaService: CfgLicenciaConduccionCategoriaService,
-        private _ClaseService: ClaseService,
-        private _ServicioService: ServicioService,
-        private _CiudadanoService: CiudadanoService,
-        private _PaisService: PaisService,
+        private _UserCiudadanoService: UserCiudadanoService,
+        private _ClaseService: VhloCfgClaseService,
+        private _ServicioService: VhloCfgServicioService,
+        private _CfgPaisService: CfgPaisService,
     ) { }
 
     ngOnInit() {
@@ -81,7 +81,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
             }
         );
 
-        this._PaisService.select().subscribe(
+        this._CfgPaisService.select().subscribe(
             response => {
               this.paises = response;
             },

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReporteComponent } from './reporte.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ChartsModule } from 'ng2-charts';
-import {CarroceriaService} from '../../services/carroceria.service';
+import {VhloCfgCarroceriaService} from '../../services/vhloCfgCarroceria.service';
 import { RnmaPreregistroService } from '../../services/rnmaPreregistro.service';
 import { VhloCfgOrigenRegistroService } from '../../services/vhloCfgOrigenRegistro.service';
 
@@ -16,7 +16,7 @@ import {SelectModule} from 'angular2-select';
     declarations: [ReporteComponent,TramiteComponent,MultaComponent,RetefuenteComponent],
     imports: [CommonModule, ChartsModule, Ng2BootstrapModule.forRoot(),SelectModule],
     exports: [ReporteComponent, TramiteComponent,MultaComponent,RetefuenteComponent],
-    providers:[RnmaPreregistroService,CarroceriaService,VhloCfgOrigenRegistroService]
+    providers:[RnmaPreregistroService,VhloCfgCarroceriaService,VhloCfgOrigenRegistroService]
 })
 
 export class ReporteModule { }

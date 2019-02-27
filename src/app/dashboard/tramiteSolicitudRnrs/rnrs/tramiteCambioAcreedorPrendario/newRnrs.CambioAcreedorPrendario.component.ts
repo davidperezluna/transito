@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgPlaca } from '../../../cfgPlaca/cfgPlaca.modelo';
+import { VhloCfgPlaca } from '../../../vhloCfgPlaca/vhloCfgPlaca.modelo';
 import { LoginService } from '../../../../services/login.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
 import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
-import { CiudadanoService } from '../../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { Router } from "@angular/router";
-import { EmpresaService } from "../../../../services/empresa.service";
-import { TipoIdentificacionService } from '../../../../services/tipoIdentificacion.service';
+import { UserEmpresaService } from "../../../../services/userEmpresa.service";
+import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 
 @Component({
     selector: 'appRnrs-cambio-acreedor-prendario',
@@ -19,7 +19,7 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
     @Input() banco: any = null;
     @Input() factura: any = null;
 
-    public placa: CfgPlaca = null;;
+    public placa: VhloCfgPlaca = null;;
     public errorMessage;
     public cfgTiposAlerta: any;
     public tramiteFacturaSelected: any;
@@ -89,15 +89,15 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
         private _CfgTipoAlertaService: CfgTipoAlertaService,
         private _loginService: LoginService,
         private _VehiculoAcreedorService: VehiculoAcreedorService,
-        private _tipoIdentificacionService: TipoIdentificacionService,
-        private _CiudadanoService: CiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _UserCiudadanoService: UserCiudadanoService,
         private router: Router,
-        private _EmpresaService: EmpresaService,
+        private _EmpresaService: UserEmpresaService,
     ) { }
  
     ngOnInit() {
 
-        this._tipoIdentificacionService.getTipoIdentificacionSelect().subscribe(
+        this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tipoIdentificaciones = response;
             },
@@ -197,7 +197,7 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let identificacion = {
             'numeroIdentificacion': this.identificacion,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
                 response = response;
                 if (response.status == 'success') {
@@ -271,7 +271,7 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let identificacionNuevoAcreedor = {
             'numeroIdentificacion': this.identificacionNuevoAcreedor,
         };
-        this._CiudadanoService.searchByIdentificacion(identificacionNuevoAcreedor,token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacionNuevoAcreedor,token).subscribe(
             response => {
                 response = response;
                 if (response.status == 'success') {
@@ -298,7 +298,7 @@ export class NewRnrsTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let nit = {
             'nit': this.nit,
         };
-        this._EmpresaService.showNit(token, nit).subscribe(
+        this._EmpresaService.showByNit(token, nit).subscribe(
             response => {
                 response = response;
                 if (response.status == 'success') {

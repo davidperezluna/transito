@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { CombustibleService } from '../../../../services/combustible.service';
+import { VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CarroceriaService } from '../../../../services/carroceria.service';
+import { VhloCfgCarroceriaService } from '../../../../services/vhloCfgCarroceria.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -52,8 +52,8 @@ export class NewRnaTransformacionComponent implements OnInit {
     ];
 
     constructor(
-        private _CombustibleService: CombustibleService,
-        private _CarroceriaService: CarroceriaService,
+        private _CombustibleService: VhloCfgCombustibleService,
+        private _CarroceriaService: VhloCfgCarroceriaService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _VehiculoService: VehiculoService,

@@ -1,0 +1,51 @@
+<hr>
+<div class="container" >
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong class="text-uppercase">Módulo de Configuración</strong> 
+              <small>Generos</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-success btn-round " data-target="#themepicker" data-toggle="modal">
+                  <i class="fa fa-plus"></i>
+                  Nuevo
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Sigla</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let genero of generos; let i = index">
+                  <td >{{ i + 1 }}</td>
+                  <td >{{ genero.nombre }}</td>
+                  <td >{{ genero.sigla }}</td>
+                  <td>
+                    <button (click)="onEdit(genero)" class="btn btn-info" type="button">
+                      Editar
+                    </button> 
+                    <button (click)="onDelete(genero.id)"  class="btn btn-danger" type="button">
+                      Eliminar
+                    </button> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [genero]="genero" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

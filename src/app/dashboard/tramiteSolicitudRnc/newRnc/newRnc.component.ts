@@ -3,7 +3,7 @@ import { TramiteSolicitudRnc } from '../tramiteSolicitudRnc.modelo';
 import { TramiteSolicitudRncService } from '../../../services/tramiteSolicitudRnc.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
-import { CiudadanoService } from '../../../services/ciudadano.service';
+import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -49,7 +49,7 @@ constructor(
   private _TramiteFacturaService: TramiteFacturaService,
   private _FacturaService: FacturaService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
-  private _ciudadanoService: CiudadanoService,
+  private _CiudadanoService: UserCiudadanoService,
 ){}
 
   ngOnInit() {

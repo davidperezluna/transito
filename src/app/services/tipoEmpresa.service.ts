@@ -4,7 +4,7 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class TipoEmpresaService {
+export class TipoUserEmpresaService {
 	private url = environment.apiUrl + "tipoEmpresa";
 	public identity;
 	public token;

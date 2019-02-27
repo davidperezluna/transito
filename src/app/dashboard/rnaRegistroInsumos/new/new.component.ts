@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import {rnaRegistroInsumos} from '../rnaRegistroInsumos.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
-import { EmpresaService } from '../../../services/empresa.service';
+import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
 import { DatePipe } from '@angular/common';
@@ -35,7 +35,7 @@ constructor(
   private datePipe: DatePipe,
   private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
-  private _EmpresaService: EmpresaService,
+  private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: CfgCasoInsumoService,
   ){}
@@ -46,7 +46,7 @@ constructor(
     this.rnaRegistroInsumos = new rnaRegistroInsumos(null,null,null,null,null,null,null,null,null,null,null);
     this.rnaRegistroInsumos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
 
-    this._EmpresaService.getEmpresaSelect().subscribe(
+    this._EmpresaService.select().subscribe(
       response => {
         this.empresas = response;
       }, 

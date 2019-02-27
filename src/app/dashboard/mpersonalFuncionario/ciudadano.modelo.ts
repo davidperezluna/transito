@@ -6,7 +6,7 @@ export class Ciudadano{
 		public municipioResidenciaId: number,
 		public identificacion: number,
 		public generoId: number,
-		public grupoSanguineoId: number,
+		public idGrupoSanguineo: number,
 		public numeroIdentificacionUsuario: number,
 		public primerNombreUsuario: string,
 		public segundoNombreUsuario: string,
