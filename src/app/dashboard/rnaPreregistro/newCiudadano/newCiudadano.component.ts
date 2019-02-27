@@ -40,7 +40,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.ciudadano = new UserCiudadano(null,null,null,null,this.identificacion,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.ciudadano = new UserCiudadano(null, null,null,null,null,this.identificacion,null,null,null,null,null,null,null,null,null,null,null,null);
 
     this._TipoIdentificacionService.select().subscribe(
         response => {

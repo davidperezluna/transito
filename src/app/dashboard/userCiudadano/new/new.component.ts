@@ -15,25 +15,26 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 export class NewCiudadanoComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-@Input() identificacion:any = null;
-@Input() tipoIdentificacion:any = null;
-public ciudadano: UserCiudadano;
-public errorMessage;
-public respuesta;
+  @Output() ready = new EventEmitter<any>();
+  @Input() identificacion:any = null;
+  @Input() tipoIdentificacion:any = null;
+  public ciudadano: UserCiudadano;
+  public errorMessage;
+  public respuesta;
 
-public tiposIdentificacion: any;
-public generos: any;
-public gruposSanguineos: any;
-public paises: any;
-public departamentosNacimiento: any;
-public municipiosNacimiento: any;
-public departamentosResidencia: any;
-public municipiosResidencia: any;
+  public tiposIdentificacion: any;
+  public generos: any;
+  public gruposSanguineos: any;
+  public paises: any;
+  public idPaisNacimiento: any;
+  public departamentosNacimiento: any;
+  public idDepartamentoNacimiento: any;
+  public municipiosNacimiento: any;
+  public departamentosResidencia: any;
+  public idDepartamentoResidencia: any;
+  public municipiosResidencia: any;
 
-public tipoId:boolean=true;
-
-
+  public ciudadanoRegistrado:any = null;
 
 constructor(
   private _UserCiudadanoService: UserCiudadanoService,
@@ -43,7 +44,7 @@ constructor(
   private _grupoSanguineoService: UserCfgGrupoSanguineoService,
   private _CfgPaisService: CfgPaisService,
   private _MunicipioService: CfgMunicipioService,
-  private _departamentoService: CfgDepartamentoService,
+  private _DepartamentoService: CfgDepartamentoService,
 
 ){}
 
@@ -144,14 +145,14 @@ constructor(
                   text: 'Registro exitoso!',
                   type: 'success',
                   confirmButtonText: 'Aceptar'
-                })
+                });
               } else {
                 swal({
                   title: 'Error!',
                   text: 'El ciudadano ya se encuentra registrado',
                   type: 'error',
                   confirmButtonText: 'Aceptar'
-                })
+                });
               }
               error => {
                 this.errorMessage = <any>error;
@@ -171,11 +172,11 @@ constructor(
       })
   }
 
-  onChangedPaisNacimiento(id){
+  onChangedPaisNacimiento(id){   
     if (id) {
       let token = this._loginService.getToken();
 
-      this._departamentoService.selectByPais({ 'idPais': id}, token).subscribe(
+      this._DepartamentoService.selectByPais({ 'idPais': id}, token).subscribe(
         response => {
           this.departamentosNacimiento = response;
         },
@@ -214,7 +215,7 @@ constructor(
     if (id) {
       let token = this._loginService.getToken();
       
-      this._departamentoService.selectByPais({ 'idPais':id }, token).subscribe(
+      this._DepartamentoService.selectByPais({ 'idPais':id }, token).subscribe(
         response => {
           this.departamentosResidencia = response;
         },
@@ -248,37 +249,45 @@ constructor(
     }
   }
   
-  /*searchCiudadano() {
+  onSearchCiudadano() {
     let token = this._loginService.getToken();
 
-    let datos = {
-      'identificacion':this.ciudadano.identificacion,
-      'tipoIdentificacion': this.tipoIdentificacionSelected,
-    }
-    
-    this._UserCiudadanoService.searchByIdentificacion(datos,token).subscribe(
-      response => {
-        if(response.status == 'error'){
-          //identificacion encontrada
-          this.isError = true;
-          this.isExist = false;
-          
-        }else{
-          this.isExist = true;
-          this.isError = false;
-        }
-      error => {
-          this.errorMessage = <any>error;
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert('Error en la petición');
+    if (this.ciudadano.idTipoIdentificacion) {
+      let datos = {
+        'identificacion':this.ciudadano.identificacion,
+        'tipoIdentificacion': this.ciudadano.idTipoIdentificacion,
+      }
+      
+      this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
+        response => {
+          if(response.status == 'error'){
+            this.ciudadanoRegistrado = null;            
+          }else{
+            this.ciudadanoRegistrado = response.data;
+
+            swal({
+              title: 'Error!',
+              text: 'El ciudadano ya se encuentra registrado.',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        error => {
+            this.errorMessage = <any>error;
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
           }
         }
-    });
-  }*/
-
-  onChangedTipoId(event){
-    this.tipoId = false;
+      );
+    }else{
+      swal({
+        title: 'Error!',
+        text: 'Debe seleccionar un tipo de identificación.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }
   }
-
 }
