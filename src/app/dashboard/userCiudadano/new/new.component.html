@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-lg-10 ">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nueva persona natural</h5>
+                <h5 class="text-uppercase"><b>Nueva persona natural</b></h5>
                 <small>Los campos con <b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
             </div>
 
@@ -13,15 +13,14 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">
                                 <label>Tipo Identificacion <b class="text-danger">*</b></label>
-                                <ng-select (ngModelChange)="changedTipoId($event)" [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected"
-                                    required name="tiposIdentificacionId">
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="ciudadano.idTipoIdentificacion"
+                                    required name="idTipoIdentificacion">
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Identificacion <b class="text-danger">*</b></label>
-                                <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
-                                    <input class="form-control" (blur)="searchByIdentificacion()" [(ngModel)]="ciudadano.numeroIdentificacionUsuario" name="numeroIdentificacion"
-                                        type="number" [disabled]="tipoId" required>
+                                <div class="input-group">
+                                    <input class="form-control" (blur)="onSearchCiudadano()" [(ngModel)]="ciudadano.identificacion" [disabled]="!ciudadano.idTipoIdentificacion" name="identificacion" type="number" required>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-lg-4">
@@ -31,28 +30,28 @@
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Primer Nombre <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="ciudadano.primerNombreUsuario" name="primerNombre" type="text" required>
+                                <input class="form-control text-uppercase" [(ngModel)]="ciudadano.primerNombre" name="primerNombre" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Segundo Nombre</label>
-                                <input class="form-control" [(ngModel)]="ciudadano.segundoNombreUsuario" name="segundoNombre" type="text">
+                                <input class="form-control text-uppercase" [(ngModel)]="ciudadano.segundoNombre" name="segundoNombre" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Primer Apellido <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="ciudadano.primerApellidoUsuario" name="primerApellido" type="text" required>
+                                <input class="form-control text-uppercase" [(ngModel)]="ciudadano.primerApellido" name="primerApellido" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Segundo Apellido</label>
-                                <input class="form-control" [(ngModel)]="ciudadano.segundoApellidoUsuario" name="segundoApellido" type="text">
+                                <input class="form-control text-uppercase" [(ngModel)]="ciudadano.segundoApellido" name="segundoApellido" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Genero <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="generos" [(ngModel)]="generoSelected" required name="generoId">
+                                <ng-select [multiple]="false" [options]="generos" [(ngModel)]="ciudadano.idGenero" required name="idGenero">
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Grupo Sanguineo <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="gruposSanguineos" [(ngModel)]="grupoSanguineoSelected" required name="idGrupoSanguineo"
+                                <ng-select [multiple]="false" [options]="gruposSanguineos" [(ngModel)]="ciudadano.idGrupoSanguineo" required name="idGrupoSanguineo"
                                     required>
                                 </ng-select>
                             </div>
@@ -62,49 +61,45 @@
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Pais Nacimiento <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="paises" [(ngModel)]="paisNacimientoSelected" (ngModelChange)="changedPaisNacimiento($event)"
-                                    required name="paisId">
+                                <ng-select (ngModelChange)="onChangedPaisNacimiento($event)" [multiple]="false" [options]="paises" [(ngModel)]="idPaisNacimiento" name="idPaisNacimiento" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Departamento Nacimiento <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="departamentosNacimiento" [(ngModel)]="departamentoNacimientoSelected" (ngModelChange)="changedDepartamentoNacimiento($event)"
-                                    required name="departamentoId">
+                                <ng-select (ngModelChange)="onChangedDepartamentoNacimiento($event)" [multiple]="false" [options]="departamentosNacimiento" [(ngModel)]="idDepartamentoNacimiento" name="idDepartamentoNacimiento" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Municipio Nacimiento <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="municipiosNacimiento" [(ngModel)]="municipioNacimientoSelected" required name="municipioId">
+                                <ng-select [multiple]="false" [options]="municipiosNacimiento" [(ngModel)]="ciudadano.idMunicipioNacimiento" required name="idMunicipioNacimiento">
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Pais Residencia <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="paises" [(ngModel)]="paisResidenciaSelected" (ngModelChange)="changedPaisResidencia($event)"
-                                    required name="paisId">
+                                <ng-select (ngModelChange)="onChangedPaisResidencia($event)" [multiple]="false" [options]="paises" [(ngModel)]="idPaisResidencia" name="idPaisResidencia" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Departamento Residencia <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="departamentosResidencia" [(ngModel)]="departamentoResidenciaSelected" (ngModelChange)="changedDepartamentoResidencia($event)"
-                                    required name="departamentoId">
+                                <ng-select (ngModelChange)="onChangedDepartamentoResidencia($event)" [multiple]="false" [options]="departamentosResidencia" [(ngModel)]="idDepartamentoResidencia" name="idDepartamentoResidencia" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Municipio Residencia <b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="municipiosResidencia" [(ngModel)]="municipioResidenciaSelected" required name="departamentoId">
+                                <ng-select [multiple]="false" [options]="municipiosResidencia" [(ngModel)]="ciudadano.idMunicipioResidencia" name="idMunicipioResidencia" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Telefono
                                     <span class="text-danger"> <b class="text-danger">*</b></span>
                                 </label>
-                                <input class="form-control" [(ngModel)]="ciudadano.telefonoUsuario" name="telefono" type="number" required>
+                                <input class="form-control" [(ngModel)]="ciudadano.telefono" name="telefono" type="number" required>
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Direccion Residencia
                                     <span class="text-danger"> <b class="text-danger">*</b></span>
                                 </label>
-                                <input class="form-control" [(ngModel)]="ciudadano.direccion" name="direccion" type="text" required>
+                                <input class="form-control" [(ngModel)]="ciudadano.direccionPersonal" name="direccionPersonal" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Direccion Trabajo</label>
@@ -112,7 +107,7 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Correo</label>
-                                <input class="form-control" [(ngModel)]="ciudadano.correoUsuario" name="correo" type="email">
+                                <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" type="email">
                             </div>
                         </div>
                     </div>
@@ -120,7 +115,7 @@
             </div>
             <!--. /card-body -->
             <div class="card-footer">
-                <button (click)="onEnviar()" class="btn btn-primary" type="button" [disabled]="newForm.invalid">
+                <button (click)="onEnviar()" class="btn btn-primary" type="button" [disabled]="newForm.invalid && ciudadanoRegistrado">
                     <i class="fa fa-save"></i>
                     Enviar
                 </button>

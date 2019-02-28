@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class CfgDepartamentoService {
-	private url = environment.apiUrl + "configuracion/cfgDepartamento";
+	private url = environment.apiUrl + "configuracion/cfgdepartamento";
 	public identity;
 	public token;
 
