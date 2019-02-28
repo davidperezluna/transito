@@ -4,15 +4,14 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class CuentaService {
-	private url = environment.apiUrl + "cuenta";
+export class FroTrteCfgCuentaService {
+	private url = environment.apiUrl + "financiero/frotrtecfgcuenta";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
-
-	getCuenta(){
-		
+	FroTrteCfg
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
@@ -25,7 +24,7 @@ export class CuentaService {
 							  .map(res => res.json());
 	}
 
-	deleteCuenta(token,id){
+	delete(token,id){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -33,23 +32,26 @@ export class CuentaService {
 							  .map(res => res.json());
 	}
 
-	showCuenta(token,id){
+	show(token,id){
 		
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
+			.map(res => res.json());
 
 	}
 
-	editCuenta(cuenta,token){
+	edit(cuenta,token){
 
 		let json = JSON.stringify(cuenta);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());
+	}
 
+	select() {
+		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 	
 }

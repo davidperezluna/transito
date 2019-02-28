@@ -1,37 +1,42 @@
-<div class="col-xs-12 col-lg-12">
-    <div class="card">
-        <div class="card-header">
-            <h5 class="text-uppercase">Editar Financiero Traimite</h5>
-            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-        </div>
-        <div class="card-body">
-            <form #formEdit="ngForm">
-                <div class="form-group row">
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Nombre <strong class="text-danger">*</strong></label>
-                        <input class="form-control text-uppercase" [(ngModel)]="tramiteConcepto.nombre" name="nombre" type="text" required />
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Editar Financiero Traimite</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formEdit="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <input class="form-control text-uppercase" [(ngModel)]="tramiteConcepto.nombre"
+                                name="nombre" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Valor <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="tramiteConcepto.valor" name="valor" type="number"
+                                required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Seleccionar Cuenta <strong class="text-danger">*</strong></label>
+                            <ng-select [multiple]="false" [options]="cuentas" [(ngModel)]="tramiteConcepto.idCuenta" required name="idCuenta">
+                            </ng-select>
+                        </div>
                     </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Valor <strong class="text-danger">*</strong></label>
-                        <input [(ngModel)]="tramiteConcepto.valor" name="valor" type="number" required />
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Cuenta <strong class="text-danger">*</strong></label>
-                        <input [(ngModel)]="tramiteConcepto.cuenta" name="cuenta" type="number" required />
-                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
                 </div>
-            </form>
-        </div>
-        <div class="card-footer">
-            <div class="btn-group">
-                <button (click)="onEnviar()" [disabled]="formEdit.invalid" class="btn btn-primary" type="button">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </button>
             </div>
         </div>
     </div>
