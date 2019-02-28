@@ -232,6 +232,7 @@ import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 import { FroTramiteModule } from './froTramite/froTramite.module';
 import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcepto.module';
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
+import { FroTrteSolicitudRnaModule } from './froTrteSolicitudRna/froTrteSolicitudRna.module';
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
 import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
 import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
@@ -460,6 +461,7 @@ import {RightsidebarComponent} from '../shared';
     FroTramiteModule,
     FroTrteCfgConceptoModule,
     FroTrtePrecioModule,
+    FroTrteSolicitudRnaModule,
     FroReporteIngresosModule,
     FroCfgTipoRecaudoModule,
   ],

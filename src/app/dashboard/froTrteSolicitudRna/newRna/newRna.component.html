@@ -1,0 +1,455 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-4">
+        <label><b>Buscar por (Vin,Chasis,Placa,Motor,Serie)</b></label>
+        <div class="input-group" [ngClass]="{'has-danger' : isError}">
+            <input type="text" class="form-control text-uppercase" [(ngModel)]="tramiteSolicitud.vehiculoId"
+                name="placaVehiculo" required />
+            <span class="input-group-btn">
+                <button (click)="onSearchVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
+                 type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+
+        <div class="has-danger" *ngIf="error">
+            <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+        </div>
+        <div class="has-danger" *ngIf="isError">
+            <div class="form-control-feedback has-danger has-error">{{mensaje}}</div>
+        </div>
+    </div>
+</div><!-- .row -->
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-12" *ngIf="vehiculo">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <b class="text-uppercase">Solicitud de trámite</b>
+                    </div>
+                    <div class="card-body row"> 
+                        <div class="col-xs-12 col-lg-4">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-center">
+                                            <b>Resumen de vehiculo</b>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Placa</b>
+                                            {{vehiculo.placa?.numero}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Motor</b>
+                                            {{vehiculo.motor}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Servicio</b>
+                                            {{vehiculo.servicio.nombre}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Tipo</b>
+                                            {{vehiculo.clase?.nombre}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-8">
+                            <table class="table table-bordered" *ngIf="searchByIdentificacion">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4" class="text-uppercase text-center">
+                                            <b>Propietarios</b>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                        <td>
+                                            <strong>Nombre: </strong>
+                                            {{ciudadanoVehiculo.ciudadano?.usuario.primerNombre}} {{ciudadanoVehiculo.ciudadano?.usuario.primerApellido}}
+                                        </td>
+                                        <td>
+                                            <strong>Identificación: </strong>
+                                            {{ciudadanoVehiculo.ciudadano?.usuario.identificacion}}
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-radio">
+                                                <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.ciudadano.id}}" type="radio" id="radio-{{ciudadanoVehiculo.ciudadano.id}}" name="radio-{{ciudadanoVehiculo.ciudadano.id}}"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="radio-{{ciudadanoVehiculo.ciudadano.id}}">Solicitante</label>
+                                            </div>
+                                        </td>
+                                    </tr> 
+                                </tbody>
+                                <tfoot >
+                                    <tr>
+                                        <td colspan="3">
+                                            <button *ngIf='!frmApoderado && !apoderado && !confirmarSolicitante' (click)="agregarApoderado()" class="btn btn-primary">
+                                                <i class="fa fa-save"></i>
+                                                Agregar apoderado
+                                            </button> 
+                                            <button *ngIf='!confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success" >
+                                                <i class="fa fa-save"></i>
+                                                Confirmar solicitante
+                                            </button> 
+                                        </td> 
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <div *ngIf='frmApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group">
+                                <div class="input-group"  [class.has-danger]="apoderado">
+                                    <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado"
+                                        required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchApoderado()" class="btn" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                    <!-- <span class="input-group-btn">
+                                        <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
+                                            <i class="fa fa-close"></i>
+                                        </button>
+                                    </span> -->
+                                </div>
+                            </div>
+                        
+                            <!--si existe el apoderado -->
+                            <div class="container form-group" *ngIf="apoderado">
+                        
+                                <h5 class="container">
+                                    Datos de apoderado
+                                </h5>
+                                <table class="table table-bordered table-striped" id="dataTables-example">
+                                    <tbody>
+                                        <tr class="odd">
+                                            <td>
+                                                <b>Tipo de identificación</b>
+                                                <br>
+                                                {{apoderado.tipoIdentificacion.nombre}}
+                                                <br>
+                                                <b>Numero de identificación</b>
+                                                {{apoderado.identificacion}}
+                                            </td>
+                                            <td>
+                                                <b>Nombres</b>
+                                                <br>
+                                                {{apoderado.primerNombre}} {{apoderado.segundoNombre}}
+                                                <br>
+                                                <b>Apellidos</b>
+                                                {{apoderado.primerApellido}} {{apoderado.segundoApellido}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <button (click)="btnNewApoderado()" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                    Agregar
+                                </button> -->
+                                <button *ngIf='!confirmarSolicitante' class="btn btn-default" (click)="onCloseApoderado()">
+                                    <i class="fa fa-times"></i>
+                                    Cancelar
+                                </button>
+                            </div>
+                        
+                            <table class="table table-bordered" *ngIf="isEmpresa">
+                                <thead>
+                                    <tr>
+                                        <th>Solicitante Empresa</th>
+                                        <th>Check</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ciudadanoVehiculo of ciudadanosVehiculo; let i = index">
+                                        <td>
+                                            <strong>Nit: </strong>
+                                            {{ciudadanoVehiculo.empresa?.nit}}
+                                            <br>
+                                            <strong>Nombre: </strong>
+                                            {{ciudadanoVehiculo.empresa?.nombre}}
+                                        </td>
+                                        <td>
+                                            <label class="custom-control custom-radio" for="3option3">
+                                                <input [(ngModel)]="tramiteSolicitud.solicitanteId" value="{{ciudadanoVehiculo.id}}" type="radio" required>
+                                                <span class="custom-control-indicator"></span>
+                                                <span class="custom-control-description">Solicitante</span>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.card-body -->
+                    <div class="card-footer">
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                        <button class="btn btn-success" (click)="finalizarSolicitud()" [disabled]="isTramites">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-12 col-lg-12" *ngIf='confirmarSolicitante'>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Factura</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-xs-12 col-lg-4">
+                            <div class="input-group" [ngClass]="{'has-danger' : isError}">
+                                <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
+                                <input type="text" class="form-control" placeholder="Numero de facura" [(ngModel)]="facturaSelected" name="factura" required
+                                />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
+                                     type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="card col-xs-12 col-lg-12" *ngIf="importacion == 'Si'">
+        <div class="container">
+            <label>Facturas
+                <span class="text-danger">*</span>
+            </label>
+            <div class="input-group" [ngClass]="{'has-danger' : isError}">
+                <input type="text" class="form-control" placeholder="Numero de facura" [(ngModel)]="facturaSelected"
+                    name="factura" required />
+                <span class="input-group-btn">
+                    <button (click)="onSearchFactura(facturaSelected)" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
+                       type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container-fluid" *ngIf="factura && tramitesFactura?.length > 0">
+        <div class="col-xs-12 col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="form-group"><!-- .form-group -->
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12"><!-- .col -->
+                                <select class="form-control" [(ngModel)]="tramiteSelected">
+                                    <option *ngFor="let tramiteFactura of tramitesFactura; let i = index">
+                                         {{ tramiteFactura.tramitePrecio.tramite.nombre }}
+                                    </option>
+                                </select>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.form-group -->
+
+                    <!-- Nav tabs 
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index">
+                            <a class="nav-link" data-toggle="tab" href="#{{tramiteFactura.tramitePrecio.tramite.formulario}}"
+                                role="tab">{{ tramiteFactura.tramitePrecio.tramite.nombre }}<i *ngIf="tramiteFactura.realizado"
+                                    class="fa fa-dot-circle-o text-success"></i></a>
+                            //<a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>
+
+                        <li class="nav-item" *ngIf='sustrato'>
+                            <a class="nav-link " data-toggle="tab" href="#rna-sustrato" role="tab">Sustrato </a>
+                        </li>
+                    </ul>
+                     -->
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane" id="realizado" role="tabpanel">
+                            <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
+                        </div>
+
+                        <div class="tab-pane" id="rna-sustrato" role="tabpanel">
+                            <appRna-sustrato [factura]="factura" [vehiculo]="vehiculo" [ciudadanoPropietario]="ciudadano" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-sustrato>
+                        </div>
+
+                        <!--
+                        <div class="tab-pane" id="rna-matriculainicial" role="tabpanel" *ngIf="tramiteSelected='1'">
+                            <appRna-matricula-inicial [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-matricula-inicial>
+                        </div>
+
+                        <div class="tab-pane" id="rna-traspaso" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='2'">
+                            <appRna-traspaso [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso>
+                        </div>
+
+                        <div class="tab-pane" id="rna-traslado" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='3'">
+                            <app-new-traslado [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></app-new-traslado>
+                        </div>
+
+                        <div class="tab-pane" id="rna-radicadocuenta" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='4'">
+                            <appRna-radicado-cuenta [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-radicado-cuenta>
+                        </div>
+
+                        <div class="tab-pane" id="rna-cambiocolor" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='5'">
+                            <appRna-cambio-color [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-color>
+                        </div>
+
+                        <div class="tab-pane" id="rna-cambioservicio" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='6'">
+                            <appRna-cambio-servicio [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-servicio>
+                        </div>
+
+                        <div class="tab-pane" id="rna-regrabarmotor" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='8'">
+                            <appRna-regrabar-motor [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-motor>
+                        </div>
+
+                        <div class="tab-pane" id="rna-regrabarchasis" role="tabpanel" *ngIf='ciudadano'  *ngIf="tramiteSelected='9'"> 
+                            <appRna-regrabar-chasis [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-chasis>
+                        </div>
+
+                        <div class="tab-pane" id="rna-transformacion" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='10'">
+                            <appRna-transformacion [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
+                        </div>
+
+                        <div class="tab-pane" id="rna-duplicadolicencia" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='12'">
+                            <appRna-duplicado-licencia (readyTramite)="readyTramite($event)" [solicitanteId]='tramiteSolicitud.solicitanteId'
+                                [factura]="factura" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
+                        </div>
+
+                        <div class="tab-pane" id="rna-inscripcionalertaprenda" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='13'">
+                            <appRna-inscripcion-alerta-prenda [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
+                        </div>
+
+                        <div class="tab-pane" id="rna-levantamientoalertaprenda" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='14'">
+                            <appRna-levantamiento-alerta-prenda [vehiculo]="vehiculo" [factura]="factura"
+                                (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-levantamiento-alerta-prenda>
+                        </div>
+
+                        <div class="tab-pane" id="rna-cancelacionmatricula" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='15'">
+                            <appRna-cancelacionMatricula [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cancelacionMatricula>
+                        </div>
+
+                        <div class="tab-pane" id="rna-cambioplaca" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='16'">
+                            <appRna-cambio-placa (readyTramite)="readyTramite($event)" [vehiculo]="vehiculo" [factura]="factura"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-placa>
+                        </div>
+
+                        <div class="tab-pane" id="rna-duplicadoplaca" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='16'">
+                            <appRna-duplicado-placa (readyTramite)="readyTramite($event)" [factura]="factura"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
+                        </div>
+
+                        <div class="tab-pane" id="rna-blindaje" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='62'">
+                            <appRna-blindaje [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
+                        </div>
+
+                        <div class="tab-pane" id="rna-cambiomotor" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='60'">
+                            <appRna-cambio-motor [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" [factura]="factura"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
+                        </div>
+
+                        <div class="tab-pane" id="rna-rematricula" role="tabpanel" *ngIf="tramiteSelected='84'"> 
+                            <appRna-rematricula [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
+                        </div>
+
+
+                        <div class="tab-pane" id="rna-regrabarserie" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='98'">
+                            <appRna-regrabar-serie [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-serie>
+                        </div>
+
+
+                        <div class="tab-pane" id="rna-cambiocarroceria" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='80'">
+                            <appRna-cambio-carroceria [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-carroceria>
+                        </div>
+
+                        <div class="tab-pane" id="rna-cambiocombustible" role="tabpanel" *ngIf='ciudadano' *ngIf="tramiteSelected='79'">
+                            <appRna-cambio-combustible [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-combustible>
+                        </div>
+
+
+
+                        tramites sin id 
+                        <div class="tab-pane" id="rna-importacion-temporal" role="tabpanel">
+                            <appRna-importacion-temporal [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-importacion-temporal>
+                        </div>
+
+                        <div class="tab-pane" id="rna-prorroga-importacion-temporal" role="tabpanel" *ngIf='ciudadano'>
+                            <appRna-prorroga-importacion-temporal [vehiculo]="vehiculo" [factura]="factura"
+                                (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
+                        </div> 
+
+                        <div class="tab-pane" id="rna-modificacion-acreedor-prendario-propietario" role="tabpanel"
+                            *ngIf='ciudadano'>
+                            <appRna-cambio-acreedor-prendario-propietario [vehiculo]="vehiculo" [factura]="factura"
+                                (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario-propietario>
+                        </div>
+
+                        <div class="tab-pane" id="rna-modificacion-acreedor-prendario" role="tabpanel" *ngIf='ciudadano'>
+                            <appRna-cambio-acreedor-prendario [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario>
+                        </div>
+
+                        <div class="tab-pane" id="rna-cambiogas" role="tabpanel" *ngIf='ciudadano'>
+                            <appRna-cambio-gas [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
+                        </div> 
+
+                        <div class="tab-pane" id="rna-cambioconjunto" role="tabpanel" *ngIf='ciudadano'>
+                            <appRna-cambioConjunto [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-cambioConjunto>
+                        </div>
+
+                        <div class="tab-pane" id="rna-regrabarvin" role="tabpanel" *ngIf='ciudadano'>
+                            <appRna-regrabar-vin [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
+                        </div>
+
+                        <div class="tab-pane" id="rna-traspasoindeterminada" role="tabpanel" *ngIf='ciudadano'>
+                            <appRna-traspaso-indeterminada [vehiculo]="vehiculo" [factura]="factura" [ciudadano]="ciudadano"
+                                (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
+                        </div>
+                        <div class="tab-pane" id="rna-certificadotradicion" role="tabpanel" *ngIf='ciudadano'>
+                            <appRna-certificadoTradicion [vehiculo]="vehiculo" [factura]="factura" (readyTramite)="readyTramite($event)"
+                                (cancelarTramite)="cancelarTramite($event)"></appRna-certificadoTradicion>
+                        </div>
+                         -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div><!-- /.row -->

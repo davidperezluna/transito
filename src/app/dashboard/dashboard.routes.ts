@@ -165,7 +165,6 @@ import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
-
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
 import { TramiteSolicitudRncRoutes } from './tramiteSolicitudRnc/tramiteSolicitudRnc.routes';
 import { TramiteSolicitudRpcccRoutes } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.routes';
@@ -232,6 +231,7 @@ import { FroAcuerdoPagoRoutes } from './froAcuerdoPago/froAcuerdoPago.routes';
 import { FroTramiteRoutes } from './froTramite/froTramite.routes';
 import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
 import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
+import { FroTrteSolicitudRnaRoutes } from './froTrteSolicitudRna/froTrteSolicitudRna.routes';
 import { FroReporteIngresosRoutes } from './froReporteIngresos/froReporteIngresos.routes';
 import { FroCfgTipoRecaudoRoutes } from './froCfgTipoRecaudo/froCfgTipoRecaudo.routes';
 //import { MsvTCAsignacionRoutes } from './msvTCAsignacion/msvTCAsignacion.routes';
@@ -449,7 +449,7 @@ export const DashboardRoutes: Route[] = [
       ...FroTramiteRoutes,
       ...FroTrteCfgConceptoRoutes,
       ...FroTrtePrecioRoutes,
-      ...FroTrtePrecioRoutes,
+      ...FroTrteSolicitudRnaRoutes,
       ...FroReporteIngresosRoutes,
       ...FroCfgTipoRecaudoRoutes,
       

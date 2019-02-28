@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitud } from '../tramiteSolicitud.modelo';
+import { FroTrteSolicitudRna } from '../froTrteSolicitudRna.modelo';
 import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
-import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
+import { FroTrteSolicitudRnaService } from '../../../services/froTrteSolicitudRna.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
@@ -17,7 +17,7 @@ import swal from 'sweetalert2';
 })
 export class NewRnaComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public tramiteSolicitud: TramiteSolicitud;
+  public tramiteSolicitud: FroTrteSolicitudRna;
   public vehiculo: Vehiculo;
   public errorMessage;
   public tramitesFactura: any = null;
@@ -51,7 +51,7 @@ export class NewRnaComponent implements OnInit {
     'vehiculoId': null,
   };
   constructor(
-    private _TramiteSolicitudService: TramiteSolicitudService,
+    private _TramiteSolicitudService: FroTrteSolicitudRnaService,
     private _loginService: LoginService,
     private _tramiteFacturaService: TramiteFacturaService,
     private _facturaService: FacturaService,
@@ -62,7 +62,7 @@ export class NewRnaComponent implements OnInit {
 
   ngOnInit() {
     this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRna(null, null, null, null, null, null, null, null, null);
     /* swal({
       title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',
       type: 'info',

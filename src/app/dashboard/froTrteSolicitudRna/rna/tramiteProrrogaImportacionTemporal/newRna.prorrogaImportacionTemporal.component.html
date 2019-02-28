@@ -1,0 +1,121 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <form #newForm="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Nueva Prórroga de Importación Temporal</strong>
+                        <br>
+                        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Fecha Solicitud Prórroga <strong class="text-danger">*</strong></label>
+                            <input type="date" class="form-control" [(ngModel)]="fechaSolicitudProrroga" name="fechaSolicitudProrroga"
+                                disabled required />
+                        </div>
+                        <div></div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Nro. Cuotas (Meses) <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="numeroCuotas" name="numeroCoutas" type="number"
+                                required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Número Licencia Transito<strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="licenciaTransito" name="licenciaTransito" type="number" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Número solicitud RUNT <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="number" required />
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Datos del Vehiculo</strong>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="placa" [(ngModel)]="datos.placa"
+                                    name="placa" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onBuscarVehiculo()" class="btn btn-default btn-primary" type="button"><i
+                                            class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="vehiculoEncontrado" class="col-xs-12 col-lg-6">
+                            <br>
+                            <h5 class="m-0">
+                                Vehiculo
+                            </h5>
+                            <table class="table " id="dataTables-example">
+                                <br>
+                                <thead>
+                                    <tr>
+                                        <th>Placa</th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Chasis</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let vehiculo of datos2.vehiculos; let i = index">
+
+                                        <td class="center">{{ vehiculo.placa }}</td>
+                                        <td class="center">{{ vehiculo.marca }}</td>
+                                        <td class="center">{{ vehiculo.modelo }}</td>
+                                        <td class="center">{{ vehiculo.chasis }}</td>
+
+                                        <td class="center">
+                                            <button (click)="deleteVehiculo(vehiculo)" class="btn btn-danger">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div *ngIf="vhl" class="col-xs-12 col-lg-6">
+                            <div class="col-xs-12 col-lg-12 row">
+                                <hr>
+                                <br>
+                            </div>
+                            <h5 class="container">
+                                Resultados de búsqueda
+                            </h5>
+                            <table class="table " id="dataTables-example">
+
+                                <tbody>
+                                    <tr class="odd">
+                                        <td><b>Placa</b></td>
+                                        <td class="center">
+                                            <p>{{ datos.placa }}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="container">
+                                <br>
+                                <button (click)="btnNewVehiculo()" class="btn btn-primary pull-right">Agregar</button>
+                                <button (click)="btnCancelarVehiculo()" class="btn btn-default">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </form>
+        <div class="card-footer">
+            <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
+            <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
