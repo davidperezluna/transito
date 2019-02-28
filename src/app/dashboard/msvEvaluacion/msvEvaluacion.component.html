@@ -14,7 +14,6 @@
                    <!-- .row -->
                    <div class="col-xs-12 col-lg-12">
                       <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
-                         <!-- <input type="text" class="form-control" placeholder="Número de factura" [(ngModel)]="numeroFactura.numeroFactura" name="numeroFactura" required /> -->
                          <input type="text" class="form-control" placeholder="Nombre empresa" [(ngModel)]="datos.parametro" name="parametro" required />
                          <input type="text" class="form-control" placeholder="NIT" [(ngModel)]="datos.parametro2" name="parametro2" required />
                          <span class="input-group-btn">
@@ -83,7 +82,7 @@
                                         {{revision.fechaOtorgamiento}}
                                      </td>
                                      <td> 
-                                        {{revision.funcionario.ciudadano.usuario.primerNombre}} {{revision.funcionario.ciudadano.usuario.segundoNombre}} {{revision.funcionario.ciudadano.usuario.primerApellido}}
+                                        {{revision.funcionario.ciudadano.primerNombre}} {{revision.funcionario.ciudadano?.segundoNombre}} {{revision.funcionario.ciudadano.primerApellido}}
                                      </td>
                                      <td> 
                                         {{revision.personaContacto}}
@@ -180,7 +179,7 @@
                                                       <div class="row" *ngFor="let msvVariable of msvParametro.variables; let i=index">
                                                          <div class="col-lg-3" style="border:1px solid #cccccc;">{{ msvVariable.name }}</div>
                                                          <div class="col-lg-9" style="border:1px solid #cccccc;">
-                                                            <div class="row" *ngFor="let msvCriterio of [msvVariable.criterios]; let i=index">
+                                                            <div class="row" *ngFor="let msvCriterio of msvVariable.criterios; let i=index">
                                                                <div class="col-lg-2" style="border:1px solid #cccccc;">
                                                                   {{ msvCriterio.name }}
                                                                </div>
@@ -206,61 +205,73 @@
                                                 </div>
                                              </div>
                                           </div>
-                                          <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div>
-                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 1">
-                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoFortalecimiento" name="valorObtenidoFortalecimiento"
-                                                type="number" disabled>
-                                          </div>
-                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 2">
-                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoComportamiento" name="valorObtenidoComportamiento"
-                                                type="number" disabled>
-                                          </div>
-                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 3">
-                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoVehiculoSeguro" name="valorObtenidoVehiculoSeguro"
-                                                type="number" disabled>
-                                          </div>
-                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 4">
-                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoInfraestructuraSegura"
-                                                name="valorObtenidoInfraestructuraSegura" type="number" disabled>
-                                          </div>
-                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 5">
-                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoAtencionVictima" name="valorObtenidoAtencionVictima"
-                                                type="number" disabled>
-                                          </div>
-                                          <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 6">
-                                             <input class="form-control" [(ngModel)]="datos2.valorObtenidoValorAgregado" name="valorObtenidoValorAgregado"
-                                                type="number" disabled>
-                                          </div>
-                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 1" [disabled]="botonEnviarFortalecimiento">
-                                             <i class="fa fa-times"></i>
-                                             Enviar
-                                          </button>
-                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 2" [disabled]="botonEnviarComportamiento">
-                                             <i class="fa fa-times"></i>
-                                             Enviar
-                                          </button>
-                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 3" [disabled]="botonEnviarVehiculoSeguro">
-                                             <i class="fa fa-times"></i>
-                                             Enviar
-                                          </button>
-                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 4" [disabled]="botonEnviarInfraestructuraSegura">
-                                             <i class="fa fa-times"></i>
-                                             Enviar
-                                          </button>
-                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 5" [disabled]="botonEnviarAtencionVictimas">
-                                             <i class="fa fa-times"></i>
-                                             Enviar
-                                          </button>
-                                          <button (click)="onEnviar()" class="btn btn-primary" *ngIf="categoriaSelected == 6" [disabled]="botonEnviarValorAgregado">
-                                             <i class="fa fa-times"></i>
-                                             Enviar
-                                          </button>
+                                          <div class="row">
+                                             <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 1">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoFortalecimiento" name="valorObtenidoFortalecimiento"
+                                                   type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 2">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoComportamiento" name="valorObtenidoComportamiento"
+                                                   type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 3">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoVehiculoSeguro" name="valorObtenidoVehiculoSeguro"
+                                                   type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 4">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoInfraestructuraSegura"
+                                                   name="valorObtenidoInfraestructuraSegura" type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 5">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoAtencionVictima" name="valorObtenidoAtencionVictima"
+                                                   type="number" disabled>
+                                             </div>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 6">
+                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoValorAgregado" name="valorObtenidoValorAgregado"
+                                                   type="number" disabled>
+                                             </div>
+                                          </div>   
+                                          <div class="row">
+                                             <div class="col-lg-12">
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 1"
+                                                   [disabled]="botonEnviarFortalecimiento">
+                                                   <i class="fa fa-save"></i>
+                                                   Guardar
+                                                </button>
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 2"
+                                                   [disabled]="botonEnviarComportamiento">
+                                                   <i class="fa fa-save"></i>
+                                                   Guardar
+                                                </button>
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 3"
+                                                   [disabled]="botonEnviarVehiculoSeguro">
+                                                   <i class="fa fa-save"></i>
+                                                   Guardar
+                                                </button>
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 4"
+                                                   [disabled]="botonEnviarInfraestructuraSegura">
+                                                   <i class="fa fa-save"></i>
+                                                   Guardar
+                                                </button>
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 5"
+                                                   [disabled]="botonEnviarAtencionVictimas">
+                                                   <i class="fa fa-save"></i>
+                                                   Guardar
+                                                </button>
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 6"
+                                                   [disabled]="botonEnviarValorAgregado">
+                                                   <i class="fa fa-save"></i>
+                                                   Guardar
+                                                </button>
+                                             </div>
+                                          </div>                                   
                                        </div>
                                        <div class="card-footer">
                                           <div class="btn-group">
                                              <button (click)="onFinalizar()" *ngIf="datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null" class="btn btn-default">
-                                                <i class="fa fa-times"></i>
-                                                Finalizar
+                                                <i class="fa fa-check"></i>
+                                                Finalizar y Enviar
                                              </button>
                                           </div>
                                        </div>

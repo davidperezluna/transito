@@ -1,0 +1,55 @@
+<div class="container">
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">
+            <b class="text-uppercase">Configuración</b>
+            <br>
+            <small>Caso Insumos</small>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Módulo</th>
+                <th>Nombre</th>
+                <th>Referencia</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let cfgCasoInsumo of cfgCasoInsumos; let i = index">
+                <td>{{cfgCasoInsumo.id}}</td>
+                <td>{{cfgCasoInsumo.modulo?.nombre}}</td>
+                <td>{{cfgCasoInsumo.nombre}}</td>
+                <td>{{cfgCasoInsumo.referencia}}</td>
+                <td>
+                  <div class="btn-group">
+                    <button (click)="onEdit(cfgCasoInsumo)" class="btn btn-xs btn-primary" type="button" tooltip="Configurar" [tooltipDisabled]="false" [tooltipAnimation]="true"
+                      tooltipPlacement="top">
+                      <i class="fa fa-cog"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-edit *ngIf='formEdit' [cfgCasoInsumo]="cfgCasoInsumo" (ready)="ready($event)"></app-edit>
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

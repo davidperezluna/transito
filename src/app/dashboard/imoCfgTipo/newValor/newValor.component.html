@@ -1,0 +1,45 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo caso insumo</h5>
+                <small>Los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+
+                <form #formNew="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-lg-6">
+                            <label>Valor
+                                <strong class="text-danger">*</strong>
+                            </label>
+                            <input class="form-control" [(ngModel)]="imoCfgValor.valor" name="valor" placeholder="" type="number" required>
+                        </div> 
+                        <div class="col-xs-6 col-lg-6">
+                            <label>Fecha
+                            </label>
+                            <input class="form-control" (blur)="isFecha()" [(ngModel)]="imoCfgValor.fecha" name="fecha" placeholder="" type="date" required>
+                        </div>
+                    </div>
+                </form> 
+                
+            </div>
+
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid && isFechaEnviar" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div> 
+            </div>
+
+        </div>
+    </div>
+</div>

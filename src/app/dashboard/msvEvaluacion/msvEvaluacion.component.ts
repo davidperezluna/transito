@@ -256,7 +256,6 @@ export class MsvEvaluacionComponent implements OnInit {
           this.isError = false;
           this.miEmpresa = response.data;
           this.habilitarBotonRev = true;
-
           this._RevisionService.showRevision(token, this.miEmpresa.id).subscribe(
             response => {
               if (response.status == 'success' ) {
@@ -417,7 +416,6 @@ export class MsvEvaluacionComponent implements OnInit {
                   if(this.datosValorAgregado.parametros != null && this.categoriaSelected == 6){
                     this.msvParametros = this.datosValorAgregado.parametros;
                   }
-                  console.log(this.msvParametros);
                   if (this.msvParametros) {
                     //entra aquí si encuentra Parametro                    
                     this.showT = true;

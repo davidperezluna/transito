@@ -166,9 +166,7 @@ constructor(
 
     this._EmpresaService.register(datos,token).subscribe(
       response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
