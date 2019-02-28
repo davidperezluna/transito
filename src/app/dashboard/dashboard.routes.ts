@@ -19,7 +19,7 @@ import { VhloCfgColorRoutes } from './vhloCfgColor/vhloCfgColor.routes';
 import { VhloCfgCombustibleRoutes } from './vhloCfgCombustible/vhloCfgCombustible.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { ModalidadRoutes } from './modalidad/modalidad.routes';
-import { CuentaRoutes } from './cuenta/cuenta.routes';
+import { FroTrteCfgCuentaRoutes } from './froTrteCfgCuenta/froTrteCfgCuenta.routes';
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { VhloCfgServicioRoutes } from './vhloCfgServicio/vhloCfgServicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
@@ -304,7 +304,7 @@ export const DashboardRoutes: Route[] = [
       ...MpersonalTipoContratoRoutes,
       ...MpersonalTalonarioRoutes,
       ...MpersonalAsignacionRoutes,
-      ...CuentaRoutes,
+      ...FroTrteCfgCuentaRoutes,
       ...TramiteRoutes,
       ...AlmacenRoutes,
       ...ComparendoRoutes,

@@ -1,8 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {Cuenta} from '../cuenta.modelo';
-import {CuentaService} from '../../../services/cuenta.service';
+import {FroTrteCfgCuenta} from '../froTrteCfgCuenta.modelo';
+import {FroTrteCfgCuentaService} from '../../../services/froTrteCfgCuenta.service';
 import {LoginService} from '../../../services/login.service';
-import {BancoService} from '../../../services/banco.service';
+//import {BancoService} from '../../../services/banco.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -11,22 +11,21 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public cuenta: Cuenta;
+public cuenta: FroTrteCfgCuenta;
 public errorMessage;
-public respuesta;
-public bancos:any;
-public bancoSelected:any;
+//public bancos:any;
+//public bancoSelected:any;
 
 constructor(
-  private _CuentaService: CuentaService,
+  private _CuentaService: FroTrteCfgCuentaService,
   private _loginService: LoginService,
-  private _bancoService: BancoService,
+  //private _bancoService: BancoService,
   ){}
 
   ngOnInit() {
-    this.cuenta = new Cuenta(null,null,null,null);
+    this.cuenta = new FroTrteCfgCuenta(null,null,null);
 
-    this._bancoService.getBancoSelect().subscribe(
+    /* this._bancoService.getBancoSelect().subscribe(
         response => {
           this.bancos = response;
           console.log(this.bancos);
@@ -39,21 +38,19 @@ constructor(
             alert("Error en la petición");
           }
         }
-      );
+      ); */
   }
+
   onCancelar(){
     this.ready.emit(true);
   }
+
   onEnviar(){
     let token = this._loginService.getToken();
-    this.cuenta.bancoId = this.bancoSelected;
-    
-    console.log(this.cuenta);
+    //this.cuenta.bancoId = this.bancoSelected;
 		this._CuentaService.register(this.cuenta,token).subscribe(
 			response => {
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

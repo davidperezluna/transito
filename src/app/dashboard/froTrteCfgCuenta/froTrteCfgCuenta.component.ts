@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {CuentaService} from '../../services/cuenta.service';
+import {FroTrteCfgCuentaService} from '../../services/froTrteCfgCuenta.service';
 import {LoginService} from '../../services/login.service';
-import {Cuenta} from './cuenta.modelo';
+import {FroTrteCfgCuenta} from './froTrteCfgCuenta.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cuenta.component.html'
+  templateUrl: './froTrteCfgCuenta.component.html'
 })
-export class CuentaComponent implements OnInit {
+export class FroTrteCfgCuentaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -18,11 +18,11 @@ export class CuentaComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public cuenta: Cuenta;
+  public cuenta: FroTrteCfgCuenta;
 
   constructor(
-		private _CuentaService: CuentaService,
-		private _loginService: LoginService,
+		private _FroTrteCfgCuentaService: FroTrteCfgCuentaService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
@@ -40,7 +40,7 @@ export class CuentaComponent implements OnInit {
       ) {
       }
     })
-		this._CuentaService.getCuenta().subscribe(
+		this._FroTrteCfgCuentaService.index().subscribe(
 				response => {
           this.cuentas = response.data;
           let timeoutId = setTimeout(() => {  
@@ -87,7 +87,7 @@ export class CuentaComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteCuenta(id:any){
+  deletefroTrteCfgCuenta(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -100,8 +100,8 @@ export class CuentaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
-        this._CuentaService.deleteCuenta(token,id).subscribe(
+        let token = this._LoginService.getToken();
+        this._FroTrteCfgCuentaService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -128,7 +128,7 @@ export class CuentaComponent implements OnInit {
     })
   }
 
-  editCuenta(cuenta:any){
+  edit(cuenta:any){
     this.cuenta = cuenta;
     this.formEdit = true;
     this.formIndex = false;

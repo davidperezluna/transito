@@ -211,7 +211,7 @@ import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasign
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 
-import { CuentaModule } from './cuenta/cuenta.module';
+import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.module';
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
@@ -359,7 +359,7 @@ import {RightsidebarComponent} from '../shared';
     MpersonalTipoContratoModule,
     MpersonalTalonarioModule,
     MpersonalAsignacionModule,
-    CuentaModule,
+    FroTrteCfgCuentaModule,
     VhloCfgCarroceriaModule,
     ComparendoModule,
     CfgAdmFormatoModule,
