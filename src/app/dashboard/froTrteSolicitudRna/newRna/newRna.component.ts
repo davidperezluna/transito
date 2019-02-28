@@ -86,7 +86,7 @@ export class NewRnaComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
 
-    this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
+    this.tramiteSolicitud.idTramiteFactura = this.tramiteFacturaSelected;
 
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
@@ -166,8 +166,8 @@ export class NewRnaComponent implements OnInit {
 
           swal.close();
           
-          if (this.tramiteSolicitud.solicitanteId) {
-            this._ciudadanoVehiculoService.showCiudadanoVehiculo(token, this.tramiteSolicitud.solicitanteId).subscribe(
+          if (this.tramiteSolicitud.idSolicitante) {
+            this._ciudadanoVehiculoService.showCiudadanoVehiculo(token, this.tramiteSolicitud.idSolicitante).subscribe(
               responseCiudadano => {
                 if (responseCiudadano.status == 'success') {
                   this.ciudadano = responseCiudadano.data.ciudadano;
@@ -222,7 +222,7 @@ export class NewRnaComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    this._VehiculoService.showVehiculoRna(this.tramiteSolicitud.vehiculoId, token).subscribe(
+    this._VehiculoService.showVehiculoRna(this.tramiteSolicitud.idVehiculo, token).subscribe(
       response => {
         console.log(response);
         if (response.status == 'success') {
@@ -306,9 +306,9 @@ export class NewRnaComponent implements OnInit {
   readyTramite(datos: any) {
 
     this.tramiteSolicitud.datos = datos;
-    this.tramiteSolicitud.vehiculoId = this.vehiculo.id;
+    this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
     if (this.apoderado) {
-      this.tramiteSolicitud.ciudadanoId = this.apoderado.id;
+      this.tramiteSolicitud.idCiudadano = this.apoderado.id;
     }
 
     let token = this._loginService.getToken();
@@ -372,7 +372,7 @@ export class NewRnaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.factura.estado = 'Finalizada';
-        this.factura.idSolicitante = this.tramiteSolicitud.solicitanteId;  
+        this.factura.idSolicitante = this.tramiteSolicitud.idSolicitante;  
         this.factura.idApoderado = this.apoderado.id;  
         console.log(this.factura);
         this.factura.sedeOperativaId = this.factura.sedeOperativa.id; 
