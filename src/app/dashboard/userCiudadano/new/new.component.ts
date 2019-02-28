@@ -110,68 +110,6 @@ constructor(
     this.ready.emit(true);
   }
 
-  onEnviar(){
-    let token = this._loginService.getToken();
-
-    var html = 'Se va a registrar el usuario:<br>'+
-               'Primer Nombre: <b>'+this.ciudadano.primerNombre+'</b><br>'+
-               'Tipo Identificacion: <b>'+this.ciudadano.idTipoIdentificacion+'</b><br>'+
-               'Identificacion: <b>'+this.ciudadano.identificacion+'</b><br>'+
-               'Genero: <b>'+this.ciudadano.idGenero+'</b><br>'+
-               'Grupo Sanguineo: <b>'+this.ciudadano.idGrupoSanguineo+'</b><br>'+
-               'Direccion: <b>'+this.ciudadano.direccionPersonal+'</b><br>'+
-               'Telefono: <b>'+this.ciudadano.telefono+'</b><br>';
-
-   swal({
-      title: 'Creacion de persona natural',
-      type: 'warning',
-      html:html,
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonText:
-        '<i class="fa fa-thumbs-up"></i> Crear!',
-      confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:
-      '<i class="fa fa-thumbs-down"></i> No crear',
-      cancelButtonAriaLabel: 'Thumbs down',
-    }).then((result) => {
-        if (result.value) {
-          this._UserCiudadanoService.register({ 'ciudadano': this.ciudadano, 'campo': 'ciudadano' }, token).subscribe(
-            response => {
-              if (response.status == 'success') {
-                this.ready.emit(true);
-                swal({
-                  title: 'Perfecto!',
-                  text: 'Registro exitoso!',
-                  type: 'success',
-                  confirmButtonText: 'Aceptar'
-                });
-              } else {
-                swal({
-                  title: 'Error!',
-                  text: 'El ciudadano ya se encuentra registrado',
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert('Error en la petición');
-                }
-              }
-            }
-          ); 
-        } else if (
-          // Read more about handling dismissals
-          result.dismiss === swal.DismissReason.cancel
-        ) {
-
-        }
-      })
-  }
-
   onChangedPaisNacimiento(id){   
     if (id) {
       let token = this._loginService.getToken();
@@ -255,7 +193,7 @@ constructor(
     if (this.ciudadano.idTipoIdentificacion) {
       let datos = {
         'identificacion':this.ciudadano.identificacion,
-        'tipoIdentificacion': this.ciudadano.idTipoIdentificacion,
+        'idTipoIdentificacion': this.ciudadano.idTipoIdentificacion,
       }
       
       this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
@@ -289,5 +227,67 @@ constructor(
         confirmButtonText: 'Aceptar'
       });
     }
+  }
+
+  onEnviar() {
+    let token = this._loginService.getToken();
+
+    var html = 'Se va a registrar el usuario:<br>' +
+      'Primer Nombre: <b>' + this.ciudadano.primerNombre + '</b><br>' +
+      'Tipo Identificacion: <b>' + this.ciudadano.idTipoIdentificacion + '</b><br>' +
+      'Identificacion: <b>' + this.ciudadano.identificacion + '</b><br>' +
+      'Genero: <b>' + this.ciudadano.idGenero + '</b><br>' +
+      'Grupo Sanguineo: <b>' + this.ciudadano.idGrupoSanguineo + '</b><br>' +
+      'Direccion: <b>' + this.ciudadano.direccionPersonal + '</b><br>' +
+      'Telefono: <b>' + this.ciudadano.telefono + '</b><br>';
+
+    swal({
+      title: 'Creacion de persona natural',
+      type: 'warning',
+      html: html,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Crear!',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+        '<i class="fa fa-thumbs-down"></i> No crear',
+      cancelButtonAriaLabel: 'Thumbs down',
+    }).then((result) => {
+      if (result.value) {
+        this._UserCiudadanoService.register({ 'ciudadano': this.ciudadano, 'campo': 'ciudadano' }, token).subscribe(
+          response => {
+            if (response.status == 'success') {
+              this.ready.emit(true);
+              swal({
+                title: 'Perfecto!',
+                text: 'Registro exitoso!',
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+            } else {
+              swal({
+                title: 'Error!',
+                text: 'El ciudadano ya se encuentra registrado',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          }
+        );
+      } else if (
+        // Read more about handling dismissals
+        result.dismiss === swal.DismissReason.cancel
+      ) {
+
+      }
+    })
   }
 }
