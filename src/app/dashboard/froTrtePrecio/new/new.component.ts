@@ -4,7 +4,7 @@ import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
 
 import { FroTramiteService } from "../../../services/froTramite.service";
 import { VhloCfgClaseService } from "../../../services/vhloCfgClase.service";
-import { ModuloService } from "../../../services/modulo.service";
+import { CfgModuloService } from '../../../services/cfgModulo.service';
 
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
         
         private _FroTramiteService: FroTramiteService,
         private _ClaseService: VhloCfgClaseService,
-        private _ModuloService: ModuloService,
+        private _ModuloService: CfgModuloService,
 
         private _loginService: LoginService,
     ) { }
@@ -74,8 +74,9 @@ export class NewComponent implements OnInit {
                     alert("Error en la petición");
                 }
             }
-        );
-        this._ModuloService.getModuloSelect().subscribe(
+        );  
+        
+        this._ModuloService.select().subscribe(
             response => {
                 this.modulos = response;
             },

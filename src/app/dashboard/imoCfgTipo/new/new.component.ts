@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumo } from '../cfgCasoInsumo.modelo';
-import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
+import { CfgCasoInsumo } from '../imoCfgTipo.modelo';
+import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
 import { LoginService } from '../../../services/login.service';
-import { ModuloService } from '../../../services/modulo.service';
-import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
+import { CfgModuloService } from '../../../services/cfgModulo.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -24,16 +23,15 @@ export class NewComponent implements OnInit {
   public tipoCasoInsumoSelected: any;
 
   constructor(
-    private _CfgCasoInsumoService: CfgCasoInsumoService,
+    private _TipoInsumoService: ImoCfgTipoService,
     private _loginService: LoginService,
-    private _ModuloService: ModuloService,
-    private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _CfgModuloService: CfgModuloService,
   ) { }
 
   ngOnInit() {
     this.cfgCasoInsumo = new CfgCasoInsumo(null, null, null, null, null, null);
 
-    this._ModuloService.getModuloSelect().subscribe(
+    this._CfgModuloService.select().subscribe(
       response => {
         this.modulos = response;
       },
@@ -56,7 +54,7 @@ export class NewComponent implements OnInit {
     this.cfgCasoInsumo.moduloId = this.moduloSelected;
     this.cfgCasoInsumo.tipo = this.tipoCasoInsumoSelected;
     
-    this._CfgCasoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
+    this._TipoInsumoService.register(this.cfgCasoInsumo, token).subscribe(
       response => {
         this.respuesta = response;
         

@@ -1,14 +1,14 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumoService } from '../../services/cfgCasoInsumo.service';
+import { ImoCfgTipoService } from '../../services/imoCfgTipo.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgCasoInsumo.component.html'
+  templateUrl: './imoCfgTipo.component.html'
 })
-export class CfgCasoInsumoComponent implements OnInit {
+export class ImoCfgTipoComponent implements OnInit {
   public errorMessage;
   public id;
   public respuesta;
@@ -20,7 +20,7 @@ export class CfgCasoInsumoComponent implements OnInit {
   public cfgCasoInsumo: any;
 
   constructor(
-    private _CfgCasoInsumoService: CfgCasoInsumoService,
+    private _TipoService: ImoCfgTipoService,
     private _loginService: LoginService,
   ) { }
 
@@ -28,31 +28,24 @@ export class CfgCasoInsumoComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._CfgCasoInsumoService.getCfgCasoInsumo().subscribe(
+    });
+
+    this._TipoService.index().subscribe(
       response => {
         if (response) {
-
           console.log(response);
           this.cfgCasoInsumos = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
+          swal.close()
         }
       },
       error => {
         this.errorMessage = <any>error;
-
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
@@ -92,45 +85,7 @@ export class CfgCasoInsumoComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  onDelete(id: any) {
-    swal({
-      title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#15d4be',
-      cancelButtonColor: '#ff6262',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        let token = this._loginService.getToken();
-        this._CfgCasoInsumoService.deleteCfgCasoInsumo(token, id).subscribe(
-          response => {
-            swal({
-              title: 'Eliminado!',
-              text: 'Registro eliminado correctamente.',
-              type: 'success',
-              confirmButtonColor: '#15d4be',
-            })
-            this.table.destroy();
-            this.respuesta = response;
-            this.ngOnInit();
-          },
-          error => {
-            this.errorMessage = <any>error;
-
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        );
-
-
-      }
-    })
-  }
+ 
 
   onEdit(cfgCasoInsumo: any) {
     this.cfgCasoInsumo = cfgCasoInsumo;

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
+import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
 import { ImoCfgValorService } from '../../../services/imoCfgValor.service';
 import { LoginService } from '../../../services/login.service';
-import { ModuloService } from '../../../services/modulo.service';
+import { CfgModuloService } from '../../../services/cfgModulo.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -31,14 +31,14 @@ export class EditComponent {
   // public tipoIdentificacion: Array<any>
 
   constructor(
-    private _CfgCasoInsumoService: CfgCasoInsumoService,
+    private _ImoCfgTipoService: ImoCfgTipoService,
     private _loginService: LoginService,
     private _ImoCfgValorService: ImoCfgValorService,
-    private _ModuloService: ModuloService,
+    private _ModuloService: CfgModuloService,
   ) {}
 
   ngOnInit() {
-    this._ModuloService.getModuloSelect().subscribe(
+    this._ModuloService.select().subscribe(
       response => {
         this.modulos = response;
         setTimeout(() => {
@@ -84,7 +84,7 @@ export class EditComponent {
   onEnviar() {
     let token = this._loginService.getToken();
     this.cfgCasoInsumo.moduloId = this.moduloSelected;
-    this._CfgCasoInsumoService.editCfgCasoInsumo(this.cfgCasoInsumo, token).subscribe(
+    this._ImoCfgTipoService.edit(this.cfgCasoInsumo, token).subscribe(
       response => {
         //console.log(response);
         this.respuesta = response;

@@ -39,10 +39,7 @@ export class NewValorComponent implements OnInit {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this.imoCfgValor.idCasoInsumo = this.cfgCasoInsumo.id;
-
-    
-    
+    this.imoCfgValor.idCasoInsumo = this.cfgCasoInsumo.id;     
     this._ImoCfgValorService.register(this.imoCfgValor, token).subscribe(
       response => {
         this.respuesta = response;
@@ -65,7 +62,6 @@ export class NewValorComponent implements OnInit {
         }
         error => {
           this.errorMessage = <any>error;
-
           if (this.errorMessage != null) {
             console.log(this.errorMessage);
             alert("Error en la petición");
@@ -78,8 +74,6 @@ export class NewValorComponent implements OnInit {
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
     this.date = datePiper.transform(this.date,'yyyy-MM-dd');
-
-
     if (this.imoCfgValor.fecha <= this.date) {
       swal({
         title: 'Error!',
