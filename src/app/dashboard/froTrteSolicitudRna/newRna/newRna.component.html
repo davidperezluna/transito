@@ -2,20 +2,12 @@
     <!-- .row -->
     <div class="col-xs-12 col-lg-4">
         <label><b>Buscar por (Vin,Chasis,Placa,Motor,Serie)</b></label>
-        <div class="input-group" [ngClass]="{'has-danger' : isError}">
-            <input type="text" class="form-control text-uppercase" [(ngModel)]="tramiteSolicitud.vehiculoId"
-                name="placaVehiculo" required />
+        <div class="input-group">
+            <input type="text" class="form-control text-uppercase" [(ngModel)]="tramiteSolicitud.idVehiculo" name="placaVehiculo" required />
             <span class="input-group-btn">
-                <button (click)="onSearchVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success"
+                <button (click)="onSearchVehiculo()" class="btn btn-default btn-success"
                  type="button"><i class="fa fa-search"></i></button>
             </span>
-        </div>
-
-        <div class="has-danger" *ngIf="error">
-            <div class="form-control-feedback has-danger has-error">{{msj}}</div>
-        </div>
-        <div class="has-danger" *ngIf="isError">
-            <div class="form-control-feedback has-danger has-error">{{mensaje}}</div>
         </div>
     </div>
 </div><!-- .row -->
