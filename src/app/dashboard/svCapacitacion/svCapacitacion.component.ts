@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SvCapacitacionService } from '../../services/svCapacitacion.service';
 import { UserCiudadanoService } from '../../services/userCiudadano.service';
+import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -13,8 +14,10 @@ export class SvCapacitacionComponent implements OnInit {
     
     public errorMessage;
     public identificacion: any;
+    public idTipoIdentificacion: any;
     public ciudadano: any = null;
     public capacitaciones: any = null;
+    public tiposIdentificacion: any;
     public table: any; 
     public formNew = false;
     public formEdit = false;
@@ -23,10 +26,25 @@ export class SvCapacitacionComponent implements OnInit {
     constructor(
         private _CapacitacionService: SvCapacitacionService,
         private _UserCiudadanoService: UserCiudadanoService,
+        private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _loginService: LoginService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        this._TipoIdentificacionService.select().subscribe(
+            response => {
+                this.tiposIdentificacion = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+    }
 
     onNew() { 
         this.formNew = true;
@@ -60,7 +78,7 @@ export class SvCapacitacionComponent implements OnInit {
         let token = this._loginService.getToken();
 
 
-        this._UserCiudadanoService.searchByIdentificacion({ 'identificacion': this.identificacion }, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion({ 'identificacion': this.identificacion, 'idTipoIdentificacion': this.idTipoIdentificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ciudadano = response.data;
