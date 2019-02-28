@@ -1,0 +1,99 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body m-1">
+                <h5 class="m-0">
+                    Rematricula
+                </h5>
+                <small>Todos los campos con
+                    <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="row justify-content-center container">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Entidad <span class="text-danger">*</span></label>
+                            <ng-select [multiple]="false" [options]="entidades" name="idEntidad" [(ngModel)]="entidadSelected" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Número de acta</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroActa" name="numeroActa" type="text" required />
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Municipio del acta *</label>
+                            <ng-select 
+                            [multiple]="false" 
+                            [options]="municipios" 
+                            [(ngModel)]="municipioActaSelected" 
+                            required 
+                            name="municipioActaSelected">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Fecha acta *</label>
+                            <input class="form-control" [(ngModel)]="datos.fechaActa" name="fechaActa" type="date" required />
+                        </div>
+
+                        <hr>
+                        <div class="justify-content-center col-lg-12 col-md-16">
+                            <br>
+                            <h5 class="text-center">Datos de entrega</h5>
+                        </div>
+                        <div class="col-lg-12 col-md-16">
+                            <label>Tipo identificación *</label>
+                            <ng-select 
+                            [multiple]="false" 
+                            [options]="tiposIdentificacion" 
+                            [(ngModel)]="tipoIdentificacionEntregaSelected" 
+                            required 
+                            name="tipoIdentificacionSelected">
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Número Identificación</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroIdentificacionEntrega" name="numeroIdentificacionEntrega" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Nombre</label>
+                            <input class="form-control" [(ngModel)]="datos.nombreEntrega" name="nombreEntrega" type="text" required
+                            />
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Fecha entrega *</label>
+                            <input class="form-control" [(ngModel)]="datos.fechaEntrega" name="fechaEntrega" type="date" required />
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Municipio de entrega *</label>
+                            <ng-select 
+                            [multiple]="false" 
+                            [options]="municipios" 
+                            [(ngModel)]="municipioEntregaSelected" 
+                            required 
+                            name="municipioEntregaSelected">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Estado del automotor</label>
+                            <textarea class="form-control" [(ngModel)]="datos.estado" name="estado"></textarea>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label>Número solicitud RUNT</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="enviarTramite()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+            
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

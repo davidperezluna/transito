@@ -1,0 +1,170 @@
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-4"><!-- .col -->
+        <div class="card">
+            <div class="card-body"><!-- .card-body -->
+                <div class="row">
+                    <div class="form-group row col-xs-12 col-lg-12">
+                        <label>Tipo transformación <span class="text-danger">*</span></label>
+                        <ng-select [multiple]="false" [options]="tiposTransformacion" [(ngModel)]="datos.tipoTransformacion" (ngModelChange)="onChangedTipoTransformacion($event)" required name="tipoTransformacion">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="datos.tipoTransformacion == 1"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12"><!-- .col -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-uppercase">
+                                    <strong>Cambio de carrocería</strong>
+                                </h5>
+                                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Carrocerias disponibles <span class="text-danger">*</span></label>
+                                        <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="datos.idCarroceria" name="idCarroceria" required>
+                                        </ng-select>
+                                    </div>
+                                   
+                                    <div class="col-xs-12 col-lg-12" *ngIf='datos.tipoTransformacion == 1'>
+                                        <label>Nro. ficha técnica de homologación <span class="text-danger">*</span></label>
+                                        <input class="form-control" [(ngModel)]="datos.fichaTecnica" name="fichaTecnica" type="text" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group">
+                                    <button (click)="onClose()" class="btn btn-default">
+                                        <i class="fa fa-times"></i>
+                                        Cancelar
+                                    </button>
+                                    <button (click)="onTramite()" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Enviar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+
+                <div class="row" *ngIf="datos.tipoTransformacion == 2"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12"><!-- .col -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-uppercase">
+                                    <strong>Cambio de combustible</strong>
+                                </h5>
+                                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Combustibles disponibles <span class="text-danger">*</span></label>
+                                        <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="datos.idCombustible" name="idCombustible" required>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group">
+                                    <button (click)="onClose()" class="btn btn-default">
+                                        <i class="fa fa-times"></i>
+                                        Cancelar
+                                    </button>
+                                    <button (click)="onTramite()" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Enviar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+
+                <div class="row" *ngIf="datos.tipoTransformacion == 3"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12"><!-- .col -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-uppercase">
+                                    <strong>Cambio de conjunto</strong>
+                                </h5>
+                                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Nuevo Modelo <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloConjunto" minlength="4" maxlength="4" required />
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Descripción <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" [(ngModel)]="datos.decripcionModelo" cols="30" rows="10" name="descripcionModelo" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group">
+                                    <button (click)="onClose()" class="btn btn-default">
+                                        <i class="fa fa-times"></i>
+                                        Cancelar
+                                    </button>
+                                    <button (click)="onTramite()" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Enviar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+
+                <div class="row" *ngIf="datos.tipoTransformacion == 4"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12"><!-- .col -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-uppercase">
+                                    <strong>Repotenciación</strong>
+                                </h5>
+                                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Año de repotenciación <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Numero factura <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.numeroFactura" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Nombre taller repotenciación <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.tallerRepotenciacion" name="modeloRepotenciacion" required />
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Fecha repotenciación<span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" [(ngModel)]="datos.fechaRepotenciacion" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group">
+                                    <button (click)="onClose()" class="btn btn-default">
+                                        <i class="fa fa-times"></i>
+                                        Cancelar
+                                    </button>
+                                    <button (click)="onTramite()" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Enviar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.card-body -->
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+
+
+

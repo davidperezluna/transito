@@ -174,7 +174,6 @@ import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module'
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
-import { CfgCasoInsumoModule } from './cfgCasoInsumo/cfgCasoInsumo.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
 import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
 import { CfgGravedadModule } from './cfgGravedad/cfgGravedad.module';
@@ -220,8 +219,10 @@ import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacion
 import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
 import { ReporteModule } from './reporte/reporte.module';
-import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
+
+import { ImoCfgTipoModule } from './imoCfgTipo/imoCfgTipo.module';
+import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
@@ -231,6 +232,7 @@ import { FroRecaudoModule } from './froRecaudo/froRecaudo.module';
 import { FroTramiteModule } from './froTramite/froTramite.module';
 import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcepto.module';
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
+import { FroTrteSolicitudRnaModule } from './froTrteSolicitudRna/froTrteSolicitudRna.module';
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
 import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
 import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
@@ -416,7 +418,7 @@ import {RightsidebarComponent} from '../shared';
     RnaPreregistroModule,
     CfgOrganismoTransitoModule,
     VhloCfgPlacaModule,
-    CfgCasoInsumoModule,
+    ImoCfgTipoModule,
     CfgGravedadModule,
     CfgClaseAccidenteModule,
     CfgChoqueConModule,
@@ -459,6 +461,7 @@ import {RightsidebarComponent} from '../shared';
     FroTramiteModule,
     FroTrteCfgConceptoModule,
     FroTrtePrecioModule,
+    FroTrteSolicitudRnaModule,
     FroReporteIngresosModule,
     FroCfgTipoRecaudoModule,
   ],

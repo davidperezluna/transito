@@ -165,6 +165,7 @@ export class NewRnaComponent implements OnInit {
           }
 
           swal.close();
+          
           if (this.tramiteSolicitud.solicitanteId) {
             this._ciudadanoVehiculoService.showCiudadanoVehiculo(token, this.tramiteSolicitud.solicitanteId).subscribe(
               responseCiudadano => {

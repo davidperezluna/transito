@@ -3,7 +3,7 @@ import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { CfgCasoInsumoService } from '../../../services/cfgCasoInsumo.service';
+import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
 import {RnaInsumoService} from '../../../services/rnaInsumos.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -28,7 +28,7 @@ constructor(
   private _loginService: LoginService,
   private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _CasoInsumoService: CfgCasoInsumoService,
+  private _CasoInsumoService: ImoCfgTipoService,
   private _RnaInsumoService: RnaInsumoService,
   ){}
 
