@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SvCapacitacionService } from '../../services/svCapacitacion.service';
 import { UserCiudadanoService } from '../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
+import { SvCapacitacion } from './svCapacitacion.modelo';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -12,10 +13,15 @@ declare var $: any;
 })
 export class SvCapacitacionComponent implements OnInit {
     
+    public capacitacion: SvCapacitacion;
+
     public errorMessage;
     public identificacion: any;
     public idTipoIdentificacion: any;
+    
     public ciudadano: any = null;
+    public empresa: any = null;
+
     public capacitaciones: any = null;
     public tiposIdentificacion: any;
     public table: any; 
@@ -31,9 +37,14 @@ export class SvCapacitacionComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
         this._TipoIdentificacionService.select().subscribe(
             response => {
                 this.tiposIdentificacion = response;
+                let timeoutId = setTimeout(() => {
+                    this.iniciarTabla();
+                }, 100);
             },
             error => {
                 this.errorMessage = <any>error;
@@ -49,6 +60,9 @@ export class SvCapacitacionComponent implements OnInit {
     onNew() { 
         this.formNew = true;
         this.formIndex = false;
+        if (this.table) {
+            this.table.destroy();
+        }
     }
 
     ready(isCreado: any) {
@@ -61,6 +75,9 @@ export class SvCapacitacionComponent implements OnInit {
     }
 
     onSearch() {
+        if (this.table) {
+            this.table.destroy();
+        }
         swal({
             title: 'Buscando número de cédula',
             text: 'Solo tardará unos segundos, por favor espere.',
@@ -78,36 +95,71 @@ export class SvCapacitacionComponent implements OnInit {
         let token = this._loginService.getToken();
 
 
-        this._UserCiudadanoService.searchByIdentificacion({ 'identificacion': this.identificacion, 'idTipoIdentificacion': this.idTipoIdentificacion }, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion({ 'nit': this.capacitacion.nit, 'identificacion': this.capacitacion.identificacion, 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.ciudadano = response.data;
+                    if (response.ciudadano) {
+                        this.ciudadano = response.ciudadano;
+                        this.empresa = false;
+                    }
+                    if (response.empresa) {
+                        this.empresa = response.empresa;
+                        this.ciudadano = false;
+                    }
                     
-                    this._CapacitacionService.buscarCapacitacionByCiudadano({ 'identificacion': this.ciudadano.identificacion }, token).subscribe(
-                        response => {
-                            if (response.status == 'success') {
-                                this.capacitaciones = response.data;
-                                let timeoutId = setTimeout(() => {
-                                    this.iniciarTabla();
-                                }, 100);
-                            } else {
-                                swal({
-                                    title: 'Alerta!',
-                                    text: response.message,
-                                    type: 'error',
-                                    confirmButtonText: 'Aceptar'
-                                });
-                            }
-                            error => {
-                                this.errorMessage = <any>error;
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert('Error en la petición');
+                    if (this.ciudadano) {
+                        this._CapacitacionService.buscarCapacitacionByCiudadano({ 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion, 'identificacion': this.ciudadano.identificacion }, token).subscribe(
+                            response => {
+                                if (response.status == 'success') {
+                                    this.capacitaciones = response.data;
+                                    let timeoutId = setTimeout(() => {
+                                        this.iniciarTabla();
+                                    }, 100);
+                                } else {
+                                    swal({
+                                        title: 'Alerta!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert('Error en la petición');
+                                    }
                                 }
                             }
-                        }
-                    );
-                    swal.close();
+                        );
+                        swal.close();
+                        } else if (this.empresa) {
+                        this._CapacitacionService.buscarCapacitacionByCiudadano({ 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion, 'nit': this.empresa.nit }, token).subscribe(
+                            response => {
+                                if (response.status == 'success') {
+                                    this.capacitaciones = response.data;
+                                    let timeoutId = setTimeout(() => {
+                                        this.iniciarTabla();
+                                    }, 100);
+                                } else {
+                                    swal({
+                                        title: 'Alerta!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert('Error en la petición');
+                                    }
+                                }
+                            }
+                        );
+                        swal.close();
+                    }
                 } else {
                     swal({
                         title: 'Alerta!',
@@ -142,5 +194,11 @@ export class SvCapacitacionComponent implements OnInit {
             }
         });
         this.table = $('#dataTables-example').DataTable();
+    }
+
+    edit(capacitacion: any) {
+        this.capacitacion = capacitacion;
+        this.formEdit = true;
+        this.formIndex = false;
     }
 }

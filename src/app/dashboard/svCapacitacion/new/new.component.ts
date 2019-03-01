@@ -21,10 +21,15 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() ciudadano: any = null;
+    @Input() empresa: any = null;
+    @Input() capacitacionInput: any = null;
     public capacitacion: SvCapacitacion;
     public errorMessage;
     public capacitaciones: any;
-    public file: any;
+    
+    public file: any = null;
+    public fileSelected: File = null;
+
     public date: any;
     public fecha: any;
 
@@ -54,10 +59,9 @@ export class NewComponent implements OnInit {
     ngOnInit() {
         this.date = new Date();
         var datePiper = new DatePipe(this.date);
-        /* this.capacitacion.fechaHoraRegistro = datePiper.transform(this.date, 'yyyy-MM-dd'); */
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd HH:mm:ss a');
 
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
         
         this._MunicipioService.select().subscribe(
             response => {
@@ -125,7 +129,12 @@ export class NewComponent implements OnInit {
         this.capacitacion.funcionCriterio = this.funcionCriterioSelected;
         this.capacitacion.claseActorVial = this.claseActorViaSelected;
         this.capacitacion.temaCapacitacion = this.temaCapacitacionSelected;
-        this.capacitacion.identificacion = this.ciudadano.identificacion;
+
+        if (this.capacitacionInput.idTipoIdentificacion == 1) {
+            this.capacitacion.identificacion = this.ciudadano.identificacion;
+        } else if (this.capacitacionInput.idTipoIdentificacion == 4) {
+            this.capacitacion.nit = this.empresa.nit;
+        }
         swal({
             title: '¿Está seguro?',
             text: "¿Desea guardar la información?",
@@ -146,14 +155,14 @@ export class NewComponent implements OnInit {
                                 text: response.message,
                                 type: 'success',
                                 confirmButtonText: 'Aceptar'
-                            })
+                            });
                         } else {
                             swal({
                                 title: 'Error!',
                                 text: response.message,
                                 type: 'error',
                                 confirmButtonText: 'Aceptar'
-                            })
+                            });
                         }
                         error => {
                             this.errorMessage = <any>error;
@@ -170,16 +179,33 @@ export class NewComponent implements OnInit {
 
     onFileChange(event) {
         if (event.target.files.length > 0) {
-            const fileSelected: File = event.target.files[0];
+            this.fileSelected = event.target.files[0];
 
-            this.file = new FormData();
-            this.file.append('file', fileSelected);
+            if (this.capacitacion.documento != null) {
+                this.file = new FormData();
+                this.file.append('file', this.fileSelected);
+            }
         }
     }
 
     obtenerFuncionCriterioPorFuncion(e) {
         if (e) {
             let token = this._loginService.getToken();
+
+            swal({
+                title: 'Cargando Clases de Actividades!',
+                text: 'Solo tardará unos segundos, por favor espere.',
+                timer: 1000,
+                onOpen: () => {
+                    swal.showLoading();
+                }
+            }).then((result) => {
+                if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.timer
+                ) {
+                }
+            });
             this._FuncionCriterioService.getFuncionCriterioPorFuncionSelect({ 'idFuncionCriterio': e }, token).subscribe(
                 response => {
                     this.funcionesCriterios = response;
