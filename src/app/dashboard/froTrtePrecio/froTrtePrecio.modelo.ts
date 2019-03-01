@@ -6,6 +6,7 @@ export class FroTrtePrecio {
         public fechaInicio: string,
         public valorConcepto: string,
         public valorTotal: string,
+        public conceptos: any,
         public idTramite: string,
         public idClase: string,
         public idModulo: string,

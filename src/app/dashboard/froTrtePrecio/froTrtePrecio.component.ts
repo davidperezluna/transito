@@ -28,23 +28,20 @@ export class FroTrtePrecioComponent implements OnInit {
         swal({
             title: 'Cargando Tabla!',
             text: 'Solo tardará unos segundos, por favor espere.',
-            timer: 1500,
             onOpen: () => {
                 swal.showLoading();
             }
-        }).then((result) => {
-            if (
-                // Read more about handling dismissals
-                result.dismiss === swal.DismissReason.timer
-            ) {
-            }
         });
+
         this._FroTrtePrecioService.index().subscribe(
             response => {
                 this.tramitesPrecios = response.data;
+
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);
+
+                swal.close();
             },
             error => {
                 this.errorMessage = <any>error;
@@ -58,25 +55,31 @@ export class FroTrtePrecioComponent implements OnInit {
     }
 
     iniciarTabla() {
+        if (this.table) {
+            this.table.destroy();
+        }
+        
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
             oLanguage: {
                 oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
                 }
             }
         });
+
         this.table = $('#dataTables-example').DataTable();
     }
 
     onNew() {
         this.formNew = true;
         this.formIndex = false;
+
         if (this.table) {
             this.table.destroy();
         }
