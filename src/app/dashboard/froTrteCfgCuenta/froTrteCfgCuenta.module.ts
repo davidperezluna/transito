@@ -8,9 +8,10 @@ import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import {SelectModule} from 'angular2-select';
 
+import { TooltipModule } from "ngx-tooltip"; 
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
     declarations: [FroTrteCfgCuentaComponent,NewComponent,EditComponent],
     exports: [FroTrteCfgCuentaComponent, NewComponent,EditComponent],
     providers:[FroTrteCfgCuentaService]

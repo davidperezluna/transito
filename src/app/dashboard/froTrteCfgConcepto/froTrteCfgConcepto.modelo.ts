@@ -3,6 +3,6 @@ export class FroTrteCfgConcepto {
         public id: number,
         public nombre: string,
         public valor: number,
-        public idCuenta: string,
+        public idCuenta: number,
     ) { }
 }

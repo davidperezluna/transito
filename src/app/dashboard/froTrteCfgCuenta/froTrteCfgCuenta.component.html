@@ -1,49 +1,55 @@
-<div class="container" >
-  <div  class="row align-items-center justify-content-between">
-    <div class="col-11 col-sm-12 page-title">
-      <h3>Cuentas</h3>
-      <p>aquí podrás visualizar las cuentas inscritas e inscribir nuevas</p> 
-    </div>
-    <div class="col text-right ">
-      <div class="btn-group pull-right">
-        <button (click)="onNew()" class="btn btn-outline-success  btn-round " data-target="#themepicker" data-toggle="modal"><span class="text">Nuevo</span> <i class="ti-save ml-2"></i></button>
-      </div>
-    </div>
-    
-  </div>
+<div class="container">
+  <hr>
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h5 class="card-title">Cuentas <small>Registradas</small></h5>
-          </div>
-          <div class="card-body">
-            <table class="table " id="dataTables-example">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>numero</th>
-                  <th>observacion</th>
-                  <th>banco</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="odd" *ngFor="let cuenta of cuentas; let i = index">
-                  <td >{{cuenta.id}}</td>
-                    <td >{{cuenta.numero}}</td>
-                    <td >{{cuenta.observacion}}</td>
-                    <td >{{cuenta.banco.nombre}}</td>
-                  <td><button (click)="editCuenta(cuenta)" class="btn btn-outline-info" type="button">Editar</button> 
-                    <button (click)="deleteCuenta(cuenta.id)"  class="btn btn-outline-danger" type="button">Eliminar  </button> </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- /.table-responsive --> 
-          </div>
+      <div class="card">
+        <div class="card-header">
+          <h5>
+            <b class="text-uppercase">Cuentas</b>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
+          </h5>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>numero</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd" *ngFor="let cuenta of cuentas; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{cuenta.numero}}</td>
+                <td>{{cuenta.nombre}}</td>
+                <td>
+                  <div class="btn-group">
+                    <button (click)="onEdit(cuenta)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false"
+                      [tooltipAnimation]="true" tooltipPlacement="top">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button (click)="onDelete(cuenta.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false"
+                      [tooltipAnimation]="true" tooltipPlacement="top">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
         </div>
       </div>
     </div>
-    <app-edit *ngIf='formEdit' [cuenta]="cuenta" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+  </div>
+
+  <app-edit *ngIf='formEdit' [cuenta]="cuenta" (ready)="ready($event)"></app-edit>
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>

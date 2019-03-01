@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FroTrtePrecio } from '../froTrtePrecio.modelo';
 import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
-
 import { FroTramiteService } from "../../../services/froTramite.service";
-import { VhloCfgClaseService } from "../../../services/vhloCfgClase.service";
+import { FroTrteCfgConceptoService } from '../../../services/froTrteCfgConcepto.service';
+import { VhloCfgTipoVehiculoService } from "../../../services/vhloCfgTipoVehiculo.service";
 import { CfgModuloService } from '../../../services/cfgModulo.service';
 
 import { LoginService } from '../../../services/login.service';
@@ -20,36 +20,22 @@ export class NewComponent implements OnInit {
     public errorMessage;
     public tramites;
     public modulos;
-    public clases;
+    public tiposVehiculo;
+    public conceptos;
 
     constructor(
-        private _FroTrtePrecioService: FroTrtePrecioService,
-        
-        private _FroTramiteService: FroTramiteService,
-        private _ClaseService: VhloCfgClaseService,
+        private _TrtePrecioService: FroTrtePrecioService,
+        private _ConceptoService: FroTrteCfgConceptoService,
+        private _TramiteService: FroTramiteService,
+        private _TipoVehiculoService: VhloCfgTipoVehiculoService,
         private _ModuloService: CfgModuloService,
-
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this.trtePrecio = new FroTrtePrecio(null, null, null, null, null, null, null, null, null);
+        this.trtePrecio = new FroTrtePrecio(null, null, null, null, null, null, null, null, null, null);
 
-        swal({
-            title: 'Cargando Tabla!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            timer: 1500,
-            onOpen: () => {
-                swal.showLoading();
-            }
-        }).then((result) => {
-            if (
-                // Read more about handling dismissals
-                result.dismiss === swal.DismissReason.timer
-            ) {
-            }
-        });
-        this._FroTramiteService.select().subscribe(
+        this._TramiteService.select().subscribe(
             response => {
                 this.tramites = response;
             },
@@ -62,9 +48,10 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-        this._ClaseService.getClaseSelect().subscribe(
+        
+        this._ModuloService.select().subscribe(
             response => {
-                this.clases = response;
+                this.modulos = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -74,11 +61,11 @@ export class NewComponent implements OnInit {
                     alert("Error en la petición");
                 }
             }
-        );  
-        
-        this._ModuloService.select().subscribe(
+        );
+
+        this._ConceptoService.select().subscribe(
             response => {
-                this.modulos = response;
+                this.conceptos = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -95,10 +82,34 @@ export class NewComponent implements OnInit {
         this.ready.emit(true);
     }
 
+    onChangedModulo(e) {
+        if (e) {
+            let token = this._LoginService.getToken();
+
+            this._TipoVehiculoService.selectByModulo({ 'idModulo': e }, token).subscribe(
+                response => {
+                    if (response) {
+                        this.tiposVehiculo = response;
+                    }else{
+                        this.tiposVehiculo = null;
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        }
+    }
 
     onEnviar() {
-        let token = this._loginService.getToken();
-        this._FroTrtePrecioService.register(this.trtePrecio, token).subscribe(
+        let token = this._LoginService.getToken();
+
+        this._TrtePrecioService.register(this.trtePrecio, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     swal({
