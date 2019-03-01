@@ -8,7 +8,7 @@ export class FroTrtePrecio {
         public valorTotal: string,
         public conceptos: any,
         public idTramite: string,
-        public idClase: string,
+        public idTipoVehiculo: string,
         public idModulo: string,
     ) { }
 }

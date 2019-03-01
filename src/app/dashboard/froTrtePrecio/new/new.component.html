@@ -10,7 +10,7 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Módulo</label>
-                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="trtePrecio.idModulo" name="idModulo">
+                            <ng-select [multiple]="false" [options]="modulos" (ngModelChange)="onChangedModulo($event)" [(ngModel)]="trtePrecio.idModulo" name="idModulo">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
@@ -31,8 +31,8 @@
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Clase</label>
-                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="trtePrecio.idClase" name="idClase">
+                            <label>Tipo vehiculo</label>
+                            <ng-select [multiple]="false" [options]="tiposVehiculo"  [disabled]="!tiposVehiculo" [(ngModel)]="trtePrecio.idTipoVehiculo" name="idTipoVehiculo">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-12">

@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { LoginService } from '../../services/login.service';
 import { FroTrtePrecioService } from "../../services/froTrtePrecio.service";
+import { CfgModuloService } from '../../services/cfgModulo.service';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
-import { FroTrtePrecio } from './froTrtePrecio.modelo';
 declare var $: any;
 
 @Component({
@@ -12,36 +12,82 @@ declare var $: any;
 
 export class FroTrtePrecioComponent implements OnInit {
     public errorMessage;
-    public formIndex = true;
     public formNew = false;
     public formEdit = false;
+    public formIndex = false;
+    public formSearch = true;
     public table: any = null;
     public tramitesPrecios;
-    public tramitePrecio: FroTrtePrecio;
+    public modulos: any;
+
+    public search: any = {
+        'idModulo': null,
+    }
 
     constructor(
+        private _PrecioService: FroTrtePrecioService,
+        private _ModuloService: CfgModuloService,
         private _LoginService: LoginService,
-        private _FroTrtePrecioService: FroTrtePrecioService,
     ) { }
 
-    ngOnInit() {
+    ngOnInit() { 
+        this._ModuloService.select().subscribe(
+            response => {
+                this.modulos = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+    }
+
+    onSearch() {
+        this.formIndex = false;
+        this.formNew = false;
+        this.formEdit = false;
+
         swal({
-            title: 'Cargando Tabla!',
-            text: 'Solo tardará unos segundos, por favor espere.',
+            title: 'Buscando registros!',
+            text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
-                swal.showLoading();
+                swal.showLoading()
             }
         });
 
-        this._FroTrtePrecioService.index().subscribe(
+        let token = this._LoginService.getToken();
+
+        this._PrecioService.searchByModulo(this.search, token).subscribe(
             response => {
-                this.tramitesPrecios = response.data;
+                if (response.status == 'success') {
+                    this.tramitesPrecios = response.data;
+                    this.formIndex = true;
 
-                let timeoutId = setTimeout(() => {
-                    this.iniciarTabla();
-                }, 100);
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
 
-                swal.close();
+                    let timeoutId = setTimeout(() => {
+                        this.iniciarTabla();
+                    }, 100);
+                } else {
+                    this.tramitesPrecios = null;
+
+                    swal({
+                        title: 'Atención!',
+                        text: response.message,
+                        type: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+
             },
             error => {
                 this.errorMessage = <any>error;
@@ -59,7 +105,7 @@ export class FroTrtePrecioComponent implements OnInit {
             this.table.destroy();
         }
         
-        $('#dataTables-example').DataTable({
+        this.table = $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
             sPaginationType: 'full_numbers',
@@ -73,31 +119,29 @@ export class FroTrtePrecioComponent implements OnInit {
             }
         });
 
-        this.table = $('#dataTables-example').DataTable();
+        $('#dataTables-example').on('click', 'tbody td', function () {
+            this.table.cell(this).edit();
+        });
     }
 
     onNew() {
         this.formNew = true;
+        this.formEdit = false;
         this.formIndex = false;
-
-        if (this.table) {
-            this.table.destroy();
-        }
     }
 
     ready(isCreado: any) {
-        console.log(isCreado);
         if (isCreado) {
             this.formNew = false;
             this.formEdit = false;
-            this.formIndex = true;
+            this.formIndex = false;
             this.ngOnInit();
         }
     }
 
     onEdit(tramitePrecio: any) {
-        this.tramitePrecio = tramitePrecio;
         this.formEdit = true;
         this.formIndex = false;
+        this.formNew = false;
     }
 }

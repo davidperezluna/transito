@@ -1,8 +1,48 @@
 <div class="container">
     <hr>
-    <div class="row" *ngIf='formIndex'>
-        <!-- <div class="row"> -->
-        <div class="col-md-12">
+    <div class="row" *ngIf='formSearch'>
+        <!-- .row -->
+        <div class="col-xs-12 col-lg-3">
+            <!-- .col -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">
+                        <b>Trámites y valores por Modulo</b>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- .card-body -->
+                    <form #formSearch="ngForm">
+                        <div class="form-group">
+                            <div class="row">
+                                <!-- .row -->
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Módulo</label>
+                                    <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="search.idModulo" name="idModulo" required></ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </form>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <div class="btn-group">
+                        <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-search"></i>
+                            Buscar
+                        </button>
+                        <button (click)="onNew()" class="btn btn-default" *ngIf="!ciudadanos">
+                            <i class="fa fa-plus"></i>
+                            <span class="text">Nuevo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+
+        <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
@@ -33,17 +73,17 @@
                         <tbody>
                             <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecios; let i = index">
                                 <td>{{ tramitePrecio.id }}</td>
-                                <td>{{ tramitePrecio.fechaInicio }}</td>
+                                <td class="editable">{{ tramitePrecio.fechaInicio }}</td>
                                 <td>{{ tramitePrecio.tramite.nombre }}</td>
                                 <td>{{ tramitePrecio.modulo?.nombre }}</td>
-                                <td>$ {{ tramitePrecio.valor }}</td>
+                                <td class="editable">${{ tramitePrecio.valor }}</td>
                                 <td>
                                     <div *ngIf="tramitePrecio.conceptos">
                                         <tooltip-content #tooltipConceptos [animation]="true" placement="top">
                                             <b style="color: #00b3ee" class="text-uppercase">Resumen de conceptos</b>
                                             <br>
                                             <span *ngFor="let tramiteConcepto of tramitePrecio.conceptos; let i = index">
-                                                <small><b style="color: #cccccc">{{ tramiteConcepto.concepto.nombre }} - {{ tramiteConcepto.concepto.valor }}</b></small><br>
+                                                <small><b style="color: #cccccc">{{ tramiteConcepto.concepto.nombre }} - ${{ tramiteConcepto.concepto.valor }}</b></small><br>
                                             </span>
                                         </tooltip-content>
                                         <a class="text-primary" [tooltip]="tooltipConceptos">
@@ -71,7 +111,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xs-12 col-lg-9" *ngIf='formNew'>
+            <app-new (ready)="ready($event)"></app-new>
+        </div>
+
+        <div class="col-xs-12 col-lg-9" *ngIf='formEdit'>
+            <app-edit [tramitePrecio]="tramitePrecio" (ready)="ready($event)"></app-edit>
+        </div>
     </div>
-    <app-edit *ngIf='formEdit' [tramitePrecio]="tramitePrecio" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
