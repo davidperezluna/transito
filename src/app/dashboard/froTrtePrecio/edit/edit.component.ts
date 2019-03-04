@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
-
+import { FroTrteCfgConceptoService } from '../../../services/froTrteCfgConcepto.service';
+import { VhloCfgTipoVehiculoService } from "../../../services/vhloCfgTipoVehiculo.service";
 import { FroTramiteService } from "../../../services/froTramite.service";
-import { VhloCfgClaseService } from "../../../services/vhloCfgClase.service";
-import { ModuloService } from "../../../services/modulo.service";
-
+import { CfgModuloService } from '../../../services/cfgModulo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -16,29 +15,32 @@ export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() tramitePrecio: any = null;
     public errorMessage;
-
     public tramites;
     public modulos;
-    public clases;
-
-    public formReady = false;
+    public tiposVehiculo;
+    public conceptos;
+    public moduloSelected: any;
+    public tramiteSelected: any;
+    public tipoVehiculoSelected: any;
 
     constructor(
-        private _FroTrtePrecioService: FroTrtePrecioService,
-
-        private _FroTramiteService: FroTramiteService,
-        private _ClaseService: VhloCfgClaseService,
-        private _ModuloService: ModuloService,
-
-        private _loginService: LoginService,
+        private _PrecioService: FroTrtePrecioService,
+        private _ConceptoService: FroTrteCfgConceptoService,
+        private _TramiteService: FroTramiteService,
+        private _TipoVehiculoService: VhloCfgTipoVehiculoService,
+        private _ModuloService: CfgModuloService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this._FroTramiteService.select().subscribe(
+        console.log(this.tramitePrecio);
+        
+        this._TramiteService.select().subscribe(
             response => {
                 this.tramites = response;
+
                 setTimeout(() => {
-                    this.tramitePrecio.idTramite = [this.tramitePrecio.tramite.id];
+                    this.tramiteSelected = Number[ this.tramitePrecio.tramite.id ];
                 });
             },
             error => {
@@ -50,28 +52,28 @@ export class EditComponent implements OnInit {
                 }
             }
         );
-        this._ClaseService.getClaseSelect().subscribe(
-            response => {
-                this.clases = response;
-                setTimeout(() => {
-                    this.tramitePrecio.idClase = [this.tramitePrecio.clase.id];
-                });
-            },
-            error => {
-                this.errorMessage = <any>error;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-        this._ModuloService.getModuloSelect().subscribe(
+        this._ModuloService.select().subscribe(
             response => {
                 this.modulos = response;
+
                 setTimeout(() => {
-                    this.tramitePrecio.idModulo = [this.tramitePrecio.modulo.id];
+                    this.moduloSelected = Number[this.tramitePrecio.modulo.id];
                 });
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
+        this._ConceptoService.select().subscribe(
+            response => {
+                this.conceptos = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -84,14 +86,50 @@ export class EditComponent implements OnInit {
         );
     }
 
-    onCancelar() { this.ready.emit(true); }
+    onCancelar() { 
+        this.ready.emit(true); 
+    }
+
+    onChangedModulo(e) {
+        if (e) {
+            let token = this._LoginService.getToken();
+
+            this._TipoVehiculoService.selectByModulo({ 'idModulo': e }, token).subscribe(
+                response => {
+                    if (response) {
+                        this.tiposVehiculo = response;
+
+                        setTimeout(() => {
+                            this.tipoVehiculoSelected = Number[this.tramitePrecio.tipoVehiculo.id];
+                        });
+                    } else {
+                        this.tiposVehiculo = null;
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        }
+    }
 
     onEnviar() {
-        let token = this._loginService.getToken();
-        this._FroTrtePrecioService.edit(this.tramitePrecio, token).subscribe(
+        let token = this._LoginService.getToken();
+
+        this.tramitePrecio.idTramite = this.tramiteSelected;
+        this.tramitePrecio.idModulo = this.moduloSelected;
+        this.tramitePrecio.idTipoVehiculo = this.tipoVehiculoSelected;
+
+        this._PrecioService.edit(this.tramitePrecio, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);
+
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -108,7 +146,8 @@ export class EditComponent implements OnInit {
                     }
                 }
 
-            });
+            }
+        );
     }
 
 }
