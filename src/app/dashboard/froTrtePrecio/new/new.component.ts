@@ -5,7 +5,6 @@ import { FroTramiteService } from "../../../services/froTramite.service";
 import { FroTrteCfgConceptoService } from '../../../services/froTrteCfgConcepto.service';
 import { VhloCfgTipoVehiculoService } from "../../../services/vhloCfgTipoVehiculo.service";
 import { CfgModuloService } from '../../../services/cfgModulo.service';
-
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { environment } from 'environments/environment'

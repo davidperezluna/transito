@@ -19,10 +19,15 @@ export class FroTrtePrecioComponent implements OnInit {
     public table: any = null;
     public tramitesPrecios;
     public modulos: any;
+    public modulo: any = null;
+    public tramitePrecio: any = null;
+    public disableTextbox = true;
+    public dateError = false;
 
     public search: any = {
         'idModulo': null,
     }
+
 
     constructor(
         private _PrecioService: FroTrtePrecioService,
@@ -64,7 +69,8 @@ export class FroTrtePrecioComponent implements OnInit {
         this._PrecioService.searchByModulo(this.search, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.tramitesPrecios = response.data;
+                    this.tramitesPrecios = response.data.tramitesPrecio;
+                    this.modulo = response.data.modulo;
                     this.formIndex = true;
 
                     swal({
@@ -79,6 +85,7 @@ export class FroTrtePrecioComponent implements OnInit {
                     }, 100);
                 } else {
                     this.tramitesPrecios = null;
+                    this.modulo = null;
 
                     swal({
                         title: 'Atención!',
@@ -118,16 +125,92 @@ export class FroTrtePrecioComponent implements OnInit {
                 }
             }
         });
+    }
 
-        $('#dataTables-example').on('click', 'tbody td', function () {
-            this.table.cell(this).edit();
-        });
+    onToggleDisable() {
+        this.disableTextbox = !this.disableTextbox;
+    }
+
+    onDisable() {
+        this.disableTextbox = true;
+    }
+
+    onValidateDate(tramitePrecioChanged) {
+        this.disableTextbox = true;
+
+        let token = this._LoginService.getToken();
+
+        this._PrecioService.validateDate({ 'id': tramitePrecioChanged.id, 'date': tramitePrecioChanged.fechaInicio }, token).subscribe(
+            response => {
+                if (response.status == 'error') {
+                    this.dateError = true;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+
+                    tramitePrecioChanged.fechaInicio = response.data;
+                } else {
+                    this.dateError = false;
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
     }
 
     onNew() {
         this.formNew = true;
         this.formEdit = false;
         this.formIndex = false;
+    }
+
+    onUpdate() {
+        swal({
+            title: 'Actualizando registros!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        let token = this._LoginService.getToken();
+
+        this._PrecioService.update({ 'tramitesPrecios': this.tramitesPrecios}, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    swal({
+                        title: 'Atención!',
+                        text: response.message,
+                        type: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );
     }
 
     ready(isCreado: any) {
@@ -143,5 +226,6 @@ export class FroTrtePrecioComponent implements OnInit {
         this.formEdit = true;
         this.formIndex = false;
         this.formNew = false;
+        this.tramitePrecio = tramitePrecio;
     }
 }

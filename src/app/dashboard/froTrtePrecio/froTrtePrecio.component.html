@@ -34,7 +34,7 @@
                         </button>
                         <button (click)="onNew()" class="btn btn-default" *ngIf="!ciudadanos">
                             <i class="fa fa-plus"></i>
-                            <span class="text">Nuevo</span>
+                            Nuevo
                         </button>
                     </div>
                 </div>
@@ -42,16 +42,20 @@
         </div>
         <!-- /.col -->
 
-        <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
+        <div class="col-xs-12 col-lg-9" *ngIf='formIndex && modulo'>
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">
-                        <strong class="text-uppercase">Trámites</strong>
-                        <small>Configuración de valores</small>
+                        <strong class="text-uppercase">{{ modulo.abreviatura }}</strong>
+                        <small>Configuración de trámites y valores</small>
                         <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-default">
+                            <button (click)="onNew()" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
                                 <i class="fa fa-plus"></i>
-                                <span class="text">Nuevo</span>
+                                Nuevo
+                            </button>
+                            <button (click)="onUpdate()" class="btn btn-xs btn-primary" *ngIf="!dateError">
+                                <i class="fa fa-refresh"></i>
+                                Actualizar
                             </button>
                         </div>
                     </h5>
@@ -60,10 +64,9 @@
                     <table class="table" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Fecha inicio</th>
+                                <th>#</th>
                                 <th>Tramite</th>
-                                <th>Módulo</th>
+                                <th>Fec. inicio</th>
                                 <th>Vr. trámite</th>
                                 <th>Vr. conceptos</th>
                                 <th>Vr. total</th>
@@ -72,11 +75,16 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecios; let i = index">
-                                <td>{{ tramitePrecio.id }}</td>
-                                <td class="editable">{{ tramitePrecio.fechaInicio }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ tramitePrecio.tramite.nombre }}</td>
-                                <td>{{ tramitePrecio.modulo?.nombre }}</td>
-                                <td class="editable">${{ tramitePrecio.valor }}</td>
+                                <td>
+                                    <input class="form-control" [(ngModel)]="tramitePrecio.fechaInicio" name="fechaInicio" ptype="date" required 
+                                    (click)='onToggleDisable()' (blur)='onValidateDate(tramitePrecio)' [readonly]="disableTextbox">
+                                </td>
+                                <td>
+                                    <input class="form-control" [(ngModel)]="tramitePrecio.valor" name="valor" type="number" required
+                                     (click)='onToggleDisable()' (blur)='onDisable()' [readonly]="disableTextbox">
+                                </td>
                                 <td>
                                     <div *ngIf="tramitePrecio.conceptos">
                                         <tooltip-content #tooltipConceptos [animation]="true" placement="top">
