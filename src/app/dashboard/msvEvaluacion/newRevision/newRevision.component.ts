@@ -2,7 +2,6 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { MsvRevision } from '../msvRevision.modelo';
 import { MsvRevisionService } from '../../../services/msvRevision.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -24,31 +23,15 @@ public formNew = false;
 constructor(
   private _MsvRevisionService: MsvRevisionService,
   private _MsvPersonalFuncionarioService: MpersonalFuncionarioService,
-  private _EmpresaService: UserEmpresaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
     this.msvRevision = new MsvRevision(null, null, null, null, null, null, null, null, null, null, null,null,null,null,null);
-    
 
     this._MsvPersonalFuncionarioService.selectContratistas().subscribe(
       response => {
         this.contratistas = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
-
-    this._EmpresaService.select().subscribe(
-      response => {
-        this.empresas = response;        
       },
       error => {
         this.errorMessage = <any>error;
