@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Cédula Formador<strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.cedula" name="cedula"
+                        <input type="number" class="form-control" [(ngModel)]="capacitacion.cedula" name="cedula"
                             required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
@@ -66,14 +66,14 @@
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Número Cédula actor de la vía <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.numeroCedulaActorVial" name="numeroCedulaActorVial" required />
+                        <input type="number" class="form-control" [(ngModel)]="capacitacion.numeroCedulaActorVial" name="numeroCedulaActorVial" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Clase de Actor de la vía <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="clasesActoresVia" [(ngModel)]="claseActorViaSelected" required name="claseActorVia"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Adjuntar Documentación <strong class="text-danger">*</strong></label>
+                        <label>Adjuntar Documentación</label>
                         <input type="file" (change)="onFileChange($event)" class="form-control" [(ngModel)]="capacitacion.documento" name="documento" />
                     </div>
                 </div>

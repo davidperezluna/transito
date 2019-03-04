@@ -17,6 +17,9 @@ export class SvCapacitacion {
         public claseActorVial: string,
         public id: number,
         public identificacion: number,
+        public nit: number,
+        public idTipoIdentificacion: number,
+        public documento: string,
     ) { }
 }
 

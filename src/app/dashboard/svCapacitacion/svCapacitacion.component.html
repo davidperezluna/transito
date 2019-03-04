@@ -1,6 +1,6 @@
 <div class="container">
     <hr>
-    <div class="row">
+    <div class="row" *ngIf='formIndex'>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -12,8 +12,8 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-4">
                             <label>Tipo Identificacion <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="idTipoIdentificacion" required
-                                name="idTipoIdentificacion">
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion"
+                                [(ngModel)]="capacitacion.idTipoIdentificacion" required name="idTipoIdentificacion">
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">
@@ -29,9 +29,20 @@
                                 <label>Función <strong class="text-danger">*</strong></label>
                                 <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" required name="funcion"></ng-select>
                             </div>-->
-                            <div class="input-group">
-                                <input type="number" class="form-control" placeholder="No. cédula ó NIT" [(ngModel)]="identificacion"
-                                    required name="identificaciom" />
+                            <div class="input-group" style="margin-top: 6%;"
+                                *ngIf="capacitacion.idTipoIdentificacion == 1">
+                                <input type="number" class="form-control" placeholder="No. cédula"
+                                    [(ngModel)]="capacitacion.identificacion" required name="identificaciom" />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="input-group" style="margin-top: 6%;"
+                                *ngIf="capacitacion.idTipoIdentificacion == 4">
+                                <input type="number" class="form-control" placeholder="NIT"
+                                    [(ngModel)]="capacitacion.nit" required name="identificaciom" />
                                 <span class="input-group-btn">
                                     <button (click)="onSearch()" class="btn btn-default btn-primary" type="button">
                                         <i class="fa fa-search"></i>
@@ -40,15 +51,36 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" *ngIf="ciudadano">
+                    <div class="row" *ngIf="ciudadano" style="margin-top: 2%">
                         <br>
                         <div class="col-xs-12 col-lg-12">
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
-                                        <td><strong>Nombre:</strong> {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}</td>
+                                        <td><strong>Nombre:</strong> {{ ciudadano.primerNombre }}
+                                            {{ ciudadano.primerApellido }}</td>
                                         <td><strong>Cédula:</strong> {{ ciudadano.identificacion }}</td>
-                                        <td><strong>Municipio Residencia: </strong> {{ ciudadano.ciudadano.municipioResidencia.nombre }}</td>
+                                        <td><strong>Municipio Residencia: </strong>
+                                            {{ ciudadano.municipioResidencia.nombre }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="empresa" style="margin-top: 2%">
+                        <br>
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Nombre:</strong> {{ empresa.nombre }}</td>
+                                        <td><strong>NIT:</strong> {{ empresa.nit }}</td>
+                                        <td><strong>Ciudad Sede Principal:</strong> {{ empresa.municipio.nombre }}</td>
+                                        <td><strong>Dirección:</strong> {{ empresa.direccion }}</td>
+                                        <td><strong>Teléfono:</strong> {{ empresa.telefono }}</td>
+                                        <td><strong>Persona Contacto:</strong> {{ empresa.ciudadano.primerNombre }}
+                                            {{ empresa.ciudadano.primerApellido }}</td>
+                                        <td><strong>Email:</strong> {{ empresa.correo }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -58,16 +90,16 @@
             </div>
         </div>
     </div>
-
     <div class="row">
-        <div class="col-xs-12 col-lg-12" *ngIf='formIndex && ciudadano'>
+        <div class="col-xs-12 col-lg-12" *ngIf='formIndex && ciudadano || empresa'>
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Historial <small>Capacitaciones</small>
                         <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-primary btn-round">
+                            <button (click)="onNew()" class="btn btn-success  btn-round " data-target="#themepicker"
+                                data-toggle="modal">
                                 <i class="fa fa-plus"></i>
-                                Nuevo
+                                <span class="text">Nuevo</span>
                             </button>
                         </div>
                     </h5>
@@ -120,9 +152,7 @@
                 </div>
             </div>
         </div>
-
-        <app-new *ngIf='formNew' [ciudadano]="ciudadano" (ready)="ready($event)"></app-new>
+        <app-new *ngIf='formNew' [capacitacionInput]="capacitacion" [ciudadano]="ciudadano" [empresa]="empresa"
+            (ready)="ready($event)"></app-new>
     </div>
-
-
 </div>
