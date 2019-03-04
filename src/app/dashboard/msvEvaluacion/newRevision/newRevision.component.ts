@@ -19,7 +19,6 @@ public contratistaSelected: any;
 public empresas: any;
 public empresaSelected: any;
 public errorMessage;
-public respuesta;
 public formNew = false;
 
 constructor(
@@ -73,8 +72,7 @@ constructor(
 
 		this._MsvRevisionService.register(this.msvRevision,token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           
           swal({
             title: 'Perfecto!',
