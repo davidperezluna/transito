@@ -20,7 +20,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.msvEvaluacion = new MsvEvaluacion(null, null, null, null, null, null, null, null, null, null, null);
+    this.msvEvaluacion = new MsvEvaluacion(null, null, null, null, null, null, null, null, null, null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);

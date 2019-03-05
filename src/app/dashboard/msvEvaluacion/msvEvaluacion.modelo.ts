@@ -11,5 +11,6 @@ export class MsvEvaluacion{
 		public responde: boolean,
 		public observacion: string,
 		public estado: boolean,
+		public aval: boolean
 	){}
 }

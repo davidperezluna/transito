@@ -24,27 +24,27 @@
                             <input class="form-control" [(ngModel)]="msvRevision.fechaDevolucion" name="fechad"
                                 type="date" disabled required />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-12" *ngIf="aval">
                             <label>Fecha otorgamiento del aval</label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaOtorgamiento" name="fechao"
                                 type="date" />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-12" *ngIf="aval">
                             <label>Fecha visita de control 1</label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaVisitaControl1"
                                 name="fechaVisitaControl1" type="date" />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-12" *ngIf="aval">
                             <label>Observaciones visita de control 1</label>
                             <textarea class="form-control" [(ngModel)]="msvRevision.observacionVisita1"
                                 name="observacionVisita1"></textarea>
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-12" *ngIf="aval">
                             <label>Fecha visita de control 2</label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaVisitaControl2"
                                 name="fechaVisitaControl2" type="date" />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-12" *ngIf="aval">
                             <label>Observaciones visita de control 2</label>
                             <textarea class="form-control" [(ngModel)]="msvRevision.observacionVisita2"
                                 name="observacionVisita2"></textarea>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MsvRevisionService } from '../../../services/msvRevision.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { MsvResultadoService } from "../../../services/msvResultado.service";
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,19 +16,36 @@ export class EditRevisionComponent implements OnInit {
     public contratistas: any;
     public contratistaSelected: any;
     public formReady = false;
+    public aval;
 
     constructor(
         private _RevisionService: MsvRevisionService,
         private _MsvPersonalFuncionarioService: MpersonalFuncionarioService,
+        private _MsvResultadoService: MsvResultadoService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() { 
+        let token = this._LoginService.getToken();
+        this._MsvResultadoService.findAvalByEvaluacion(this.msvRevision, token).subscribe(
+            response => {
+                this.aval = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+        
         this._MsvPersonalFuncionarioService.selectContratistas().subscribe(
             response => {
                 this.contratistas = response;
                 setTimeout(() => {
-                    this.contratistaSelected = [this.msvRevision.funcionarioId];
+                    this.contratistaSelected = [this.msvRevision.funcionario.id];
                 });
             },
             error => {

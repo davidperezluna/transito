@@ -10,7 +10,6 @@ import { MsvRevision } from "../msvEvaluacion/msvRevision.modelo";
 
 import { MsvParametroService } from '../../services/msvParametro.service';
 import { MsvCalificacionService } from '../../services/msvCalificacion.service';
-import { MsvResultadoService } from "../../services/msvResultado.service";
 import { IfStmt } from '@angular/compiler/src/output/output_ast';
 import { forEach } from '@angular/router/src/utils/collection';
 import swal from 'sweetalert2';
@@ -95,6 +94,8 @@ export class MsvEvaluacionComponent implements OnInit {
   public botonEnviarInfraestructuraSegura = false;
   public botonEnviarAtencionVictimas = false;
   public botonEnviarValorAgregado = false;
+  
+  public mostrarTablaEvaluacion = false;
 
   constructor(
     private _EvaluacionService: MsvEvaluacionService,
@@ -105,7 +106,7 @@ export class MsvEvaluacionComponent implements OnInit {
 
     private _MsvParametroService: MsvParametroService,
     private _MsvCalificacionService: MsvCalificacionService,
-    private _MsvResultadoService: MsvResultadoService,
+    //private _MsvResultadoService: MsvResultadoService,
     ){}
     
   ngOnInit() {
@@ -733,7 +734,7 @@ export class MsvEvaluacionComponent implements OnInit {
 
     }).then((result) => {
       if (result.value) {
-        this._MsvResultadoService.register(this.datos2, token).subscribe(
+        this._EvaluacionService.register(this.datos2, token).subscribe(
           response => {
             var html =
               response.message + '</b><br>' +
@@ -771,5 +772,9 @@ export class MsvEvaluacionComponent implements OnInit {
     this.revision = revision;
     this.formEditRevision = true;
     this.formIndex = false;
+  }
+
+  iniciarEvaluacion(revision){
+    this.mostrarTablaEvaluacion = true; 
   }
 }

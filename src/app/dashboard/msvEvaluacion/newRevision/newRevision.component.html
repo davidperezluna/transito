@@ -21,7 +21,7 @@
                             <label>Fecha devolución</label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaDevolucion" name="fechad" type="date" disabled required />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <!-- <div class="col-xs-12 col-lg-12">
                             <label>Fecha otorgamiento del aval</label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaOtorgamiento" name="fechao" type="date" />
                         </div>
@@ -40,11 +40,6 @@
                         <div class="col-xs-12 col-lg-12" *ngIf="msvRevision.fechaVisitaControl2">
                             <label>Observaciones visita de control 2</label>
                             <textarea class="form-control" [(ngModel)]="msvRevision.observacionVisita2" name="observacionVisita2"></textarea>
-                        </div>
-                        <!-- <div class="col-xs-12 col-lg-12">
-                            <label>Empresa</label>  
-                            <ng-select [multiple]="false" [options]="empresas" [(ngModel)]="empresaSelected" name="empresas" required>
-                            </ng-select>
                         </div> -->
                         <div class="col-xs-12 col-lg-12">
                             <label>Funcionario que revisa <strong class="text-danger">*</strong></label>
