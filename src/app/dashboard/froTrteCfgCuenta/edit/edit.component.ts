@@ -1,5 +1,4 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {FroTrteCfgCuenta} from '../froTrteCfgCuenta.modelo';
 import {FroTrteCfgCuentaService} from '../../../services/froTrteCfgCuenta.service';
 import {BancoService} from '../../../services/banco.service';
 import {LoginService} from '../../../services/login.service';
@@ -13,7 +12,6 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() cuenta:any = null;
 public errorMessage;
-public formReady = false;
 /* public bancos: Array<any>
 public bancoSelected: Array<any>; */
 

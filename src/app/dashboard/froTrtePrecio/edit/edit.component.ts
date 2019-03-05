@@ -40,7 +40,7 @@ export class EditComponent implements OnInit {
                 this.tramites = response;
 
                 setTimeout(() => {
-                    this.tramiteSelected = Number[ this.tramitePrecio.tramite.id ];
+                    this.tramiteSelected = [ this.tramitePrecio.tramite.id ];
                 });
             },
             error => {
@@ -53,13 +53,19 @@ export class EditComponent implements OnInit {
             }
         );
 
-        this._ModuloService.select().subscribe(
-            response => {
-                this.modulos = response;
+        let token = this._LoginService.getToken();
 
-                setTimeout(() => {
-                    this.moduloSelected = Number[this.tramitePrecio.modulo.id];
-                });
+        this._TipoVehiculoService.selectByModulo({ 'idModulo': this.tramitePrecio.modulo.id }, token).subscribe(
+            response => {
+                if (response) {
+                    this.tiposVehiculo = response;
+
+                    setTimeout(() => {
+                        this.tipoVehiculoSelected = [this.tramitePrecio.tipoVehiculo.id];
+                    });
+                } else {
+                    this.tiposVehiculo = null;
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -88,34 +94,6 @@ export class EditComponent implements OnInit {
 
     onCancelar() { 
         this.ready.emit(true); 
-    }
-
-    onChangedModulo(e) {
-        if (e) {
-            let token = this._LoginService.getToken();
-
-            this._TipoVehiculoService.selectByModulo({ 'idModulo': e }, token).subscribe(
-                response => {
-                    if (response) {
-                        this.tiposVehiculo = response;
-
-                        setTimeout(() => {
-                            this.tipoVehiculoSelected = Number[this.tramitePrecio.tipoVehiculo.id];
-                        });
-                    } else {
-                        this.tiposVehiculo = null;
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            );
-        }
     }
 
     onEnviar() {
