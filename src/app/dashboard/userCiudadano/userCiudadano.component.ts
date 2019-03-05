@@ -144,11 +144,11 @@ export class UserCiudadanoComponent implements OnInit {
       if (result.value) {
         let token = this._LoginService.getToken();
 
-        this._UserCiudadanoService.delete(token,id).subscribe(
+        this._UserCiudadanoService.delete({ 'id':id }, token).subscribe(
             response => {
                 swal({
                   title: 'Eliminado!',
-                  text:'Registro eliminado correctamente.',
+                  text:response.message,
                   type:'success',
                   confirmButtonColor: '#15d4be',
                 });

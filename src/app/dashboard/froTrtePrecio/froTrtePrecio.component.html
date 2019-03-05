@@ -32,7 +32,7 @@
                             <i class="fa fa-search"></i>
                             Buscar
                         </button>
-                        <button (click)="onNew()" class="btn btn-default" *ngIf="!ciudadanos">
+                        <button (click)="onNew()" class="btn btn-default" *ngIf="!ciudadanos && modulo">
                             <i class="fa fa-plus"></i>
                             Nuevo
                         </button>
@@ -48,17 +48,17 @@
                     <h5 class="card-title">
                         <strong class="text-uppercase">{{ modulo.abreviatura }}</strong>
                         <small>Configuración de trámites y valores</small>
-                        <div class="btn-group pull-right">
-                            <button (click)="onNew()" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
-                                <i class="fa fa-plus"></i>
-                                Nuevo
-                            </button>
-                            <button (click)="onUpdate()" class="btn btn-xs btn-primary" *ngIf="!dateError">
-                                <i class="fa fa-refresh"></i>
-                                Actualizar
-                            </button>
-                        </div>
                     </h5>
+                    <div class="btn-group pull-right">
+                        <button (click)="onNew()" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
+                            <i class="fa fa-plus"></i>
+                            Nuevo
+                        </button>
+                        <button (click)="onUpdate()" class="btn btn-xs btn-primary" *ngIf="!dateError">
+                            <i class="fa fa-refresh"></i>
+                            Actualizar
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table" id="dataTables-example">
@@ -104,7 +104,7 @@
                                     <div class="btn-group">
                                         <button (click)="onEdit(tramitePrecio)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false"
                                             [tooltipAnimation]="true" tooltipPlacement="top">
-                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-pencil"></i>
                                         </button>
                                         <button (click)="onDelete(tramitePrecio.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false"
                                             [tooltipAnimation]="true" tooltipPlacement="top">
@@ -121,11 +121,11 @@
         </div>
 
         <div class="col-xs-12 col-lg-9" *ngIf='formNew'>
-            <app-new (ready)="ready($event)"></app-new>
+            <app-new (ready)="ready($event)" [modulo]="modulo"></app-new>
         </div>
 
         <div class="col-xs-12 col-lg-9" *ngIf='formEdit'>
-            <app-edit [tramitePrecio]="tramitePrecio" (ready)="ready($event)"></app-edit>
+            <app-edit (ready)="ready($event)" [tramitePrecio]="tramitePrecio"></app-edit>
         </div>
     </div>
 </div>

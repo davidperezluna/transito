@@ -32,6 +32,7 @@ public idPaisNacimiento: any;
 public idPaisResidencia: any;
 public idDepartamentoNacimiento:any;
 public idDepartamentoResidencia:any;
+public correo:any;
 
 constructor(
   private _CiudadanoService: UserCiudadanoService,
@@ -47,7 +48,7 @@ constructor(
   ){}
 
   ngOnInit(){
-     swal({
+    swal({
       title: 'Cargando Formulario!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
@@ -55,21 +56,16 @@ constructor(
       }
     });
   
-    this.ciudadano.identificacion = this.ciudadano.usuario.identificacion;
-    this.ciudadano.primerNombre = this.ciudadano.usuario.primerNombre;
-    this.ciudadano.segundoNombre = this.ciudadano.usuario.segundoNombre;
-    this.ciudadano.primerApellido = this.ciudadano.usuario.primerApellido;
-    this.ciudadano.segundoApellido = this.ciudadano.usuario.segundoApellido;
-    this.ciudadano.telefono = this.ciudadano.usuario.telefono;
-    this.ciudadano.correoUsuario = this.ciudadano.usuario.correo;
+    this.correo = this.ciudadano.usuario.correo;
 
     let token = this._loginService.getToken();
 
     this._CfgDepartamentoService.selectByPais({ 'idPais': this.ciudadano.municipioNacimiento.departamento.pais.id }, token).subscribe(
       response => {
         this.departamentosNacimiento = response;
+
         setTimeout(() => {
-          this.idDepartamentoNacimiento= [this.ciudadano.municipioNacimiento.departamento.id];
+          this.idDepartamentoNacimiento = [ this.ciudadano.municipioNacimiento.departamento.id ];
         });
       },
       error => {
@@ -113,29 +109,30 @@ constructor(
       }
     );
 
-     this._MunicipioService.selectByDepartamento({ 'idDepartamento':this.ciudadano.municipioResidencia.departamento.id}, token).subscribe(
-        response => {
-          this.municipiosResidencia = response;
-          setTimeout(() => {
-            this.ciudadano.idMunicipioResidencia = [this.ciudadano.municipioResidencia.id];
-          });
-        },
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
+    this._MunicipioService.selectByDepartamento({ 'idDepartamento':this.ciudadano.municipioResidencia.departamento.id}, token).subscribe(
+      response => {
+        this.municipiosResidencia = response;
+        setTimeout(() => {
+          this.ciudadano.idMunicipioResidencia = [this.ciudadano.municipioResidencia.id];
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
-      );
+      }
+    );
    
     this._paisService.select().subscribe(
       response => {
         this.paises = response;
+
         setTimeout(() => {
           this.idPaisNacimiento = [this.ciudadano.municipioNacimiento.departamento.pais.id];
-          this.idDepartamentoNacimiento = [this.ciudadano.municipioResidencia.departamento.id];
-          this.ciudadano.idMunipicioNacimiento = [this.ciudadano.municipioNacimiento.id];
+          this.idDepartamentoNacimiento = [this.ciudadano.municipioNacimiento.departamento.id];
+          this.ciudadano.idMunicipioNacimiento = [this.ciudadano.municipioNacimiento.id];
           this.idPaisResidencia = [this.ciudadano.municipioResidencia.departamento.pais.id];
           this.idDepartamentoResidencia = [this.ciudadano.municipioResidencia.departamento.id];
           this.ciudadano.idMunicipioResidencia = [this.ciudadano.municipioResidencia.id];
@@ -151,22 +148,22 @@ constructor(
     );
     
     this._TipoIdentificacionService.select().subscribe(
-        response => {
-          this.tiposIdentificacion = response;
-          setTimeout(() => {
-            this.ciudadano.idTipoIdentificacion = [this.ciudadano.usuario.tipoIdentificacion.id];
-          });
-        }, 
-        error => {
-          this.errorMessage = <any>error;
+      response => {
+        this.tiposIdentificacion = response;
 
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+        setTimeout(() => {
+          this.ciudadano.idTipoIdentificacion = [this.ciudadano.tipoIdentificacion.id];
+        });
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
         }
-      );
-
+      }
+    );
 
     this._GeneroService.select().subscribe(
       response => {
@@ -191,6 +188,8 @@ constructor(
         setTimeout(() => {
           this.ciudadano.idGrupoSanguineo = [this.ciudadano.grupoSanguineo.id];
         });
+
+        swal.close();
       },
       error => {
         this.errorMessage = <any>error;
@@ -210,7 +209,9 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._CiudadanoService.edit(this.ciudadano,token).subscribe(
+    this.ciudadano.usuario.correo = this.correo;
+
+    this._CiudadanoService.edit({ 'ciudadano': this.ciudadano }, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

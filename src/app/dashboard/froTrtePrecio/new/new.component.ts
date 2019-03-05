@@ -15,7 +15,8 @@ import { environment } from 'environments/environment'
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    public trtePrecio: FroTrtePrecio;
+    @Input() modulo: any = null;
+    public tramitePrecio: FroTrtePrecio;
     public errorMessage;
     public tramites;
     public modulos;
@@ -32,7 +33,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.trtePrecio = new FroTrtePrecio(null, null, null, null, null, null, null, null, null, null);
+        this.tramitePrecio = new FroTrtePrecio(null, null, null, null, null, null, null, null, null, null);
 
         this._TramiteService.select().subscribe(
             response => {
@@ -47,10 +48,16 @@ export class NewComponent implements OnInit {
                 }
             }
         );
-        
-        this._ModuloService.select().subscribe(
+
+        let token = this._LoginService.getToken();
+
+        this._TipoVehiculoService.selectByModulo({ 'idModulo': this.modulo.id }, token).subscribe(
             response => {
-                this.modulos = response;
+                if (response) {
+                    this.tiposVehiculo = response;
+                } else {
+                    this.tiposVehiculo = null;
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -81,34 +88,12 @@ export class NewComponent implements OnInit {
         this.ready.emit(true);
     }
 
-    onChangedModulo(e) {
-        if (e) {
-            let token = this._LoginService.getToken();
-
-            this._TipoVehiculoService.selectByModulo({ 'idModulo': e }, token).subscribe(
-                response => {
-                    if (response) {
-                        this.tiposVehiculo = response;
-                    }else{
-                        this.tiposVehiculo = null;
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            );
-        }
-    }
-
     onEnviar() {
         let token = this._LoginService.getToken();
 
-        this._TrtePrecioService.register(this.trtePrecio, token).subscribe(
+        this.tramitePrecio.idModulo = this.modulo.id;
+
+        this._TrtePrecioService.register(this.tramitePrecio, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     swal({
@@ -120,7 +105,7 @@ export class NewComponent implements OnInit {
 
                     this.ready.emit(true);
                 } else {
-                    this.trtePrecio.id = null;
+                    this.tramitePrecio.id = null;
                     swal({
                         title: 'Error!',
                         text: response.message,

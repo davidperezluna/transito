@@ -14,29 +14,23 @@
                                 <label>Tipo Identificacion
                                     <b class="text-danger">*</b>
                                 </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="ciudadano.idTipoIdentificacion" required name="idTipoIdentificacion">
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="ciudadano.idTipoIdentificacion" name="idTipoIdentificacion" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Identificacion
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Identificacion <b class="text-danger">*</b></label>
                                 <div class="input-group">
                                     <input class="form-control" (blur)="onSearchCiudadano()" [(ngModel)]="ciudadano.identificacion" [disabled]="!ciudadano.idTipoIdentificacion"
                                         name="identificacion" type="number" required>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Fecha Expedición Documento
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Fecha Expedición Documento <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="ciudadano.fechaExpedicionDocumento" name="fechaExpedicionDocumento" type="date"
                                     required>
                             </div>
                             <div class="col-xs-12 col-lg-3">
-                                <label>Primer Nombre
-                                    <b class="text-danger">*</b>
-                                </label>
+                                <label>Primer Nombre <b class="text-danger">*</b></label>
                                 <input class="form-control text-uppercase" [(ngModel)]="ciudadano.primerNombre" name="primerNombre" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-3">
@@ -143,7 +137,7 @@
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Correo</label>
-                                <input class="form-control" [(ngModel)]="ciudadano.correo" name="correo" type="email">
+                                <input class="form-control" [(ngModel)]="correo" name="correo" type="email">
                             </div>
                         </div>
                     </div> 
