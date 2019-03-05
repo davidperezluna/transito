@@ -6,13 +6,14 @@ import { MsvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
 import { MsvEvaluacion } from './msvEvaluacion.modelo';
 import { MsvCategoriaService } from '../../services/msvCategoria.service';
-import swal from 'sweetalert2';
-import { forEach } from '@angular/router/src/utils/collection';
+import { MsvRevision } from "../msvEvaluacion/msvRevision.modelo";
 
 import { MsvParametroService } from '../../services/msvParametro.service';
 import { MsvCalificacionService } from '../../services/msvCalificacion.service';
 import { MsvResultadoService } from "../../services/msvResultado.service";
 import { IfStmt } from '@angular/compiler/src/output/output_ast';
+import { forEach } from '@angular/router/src/utils/collection';
+import swal from 'sweetalert2';
 
 declare var $: any;
 
@@ -25,9 +26,9 @@ export class MsvEvaluacionComponent implements OnInit {
   @Input() msvCategoria;  
   public errorMessage;
   public msvEvaluaciones;
-  public respuesta;
 	public formNew = false;
 	public formEdit = false;
+	public formEditRevision = false;
   public formIndex = true;
   public newEmpresa = false;
   public revisionNew:boolean = false;
@@ -43,6 +44,7 @@ export class MsvEvaluacionComponent implements OnInit {
   public miRevision = null;
   public revisiones: any;
   public msvEvaluacion: MsvEvaluacion;
+  public revision: MsvRevision;
   public categoriaSelected: any = null;
   public msvCategorias:any;
   public categoria = false;
@@ -211,7 +213,6 @@ export class MsvEvaluacionComponent implements OnInit {
                       confirmButtonColor: '#15d4be',
                     })
                   this.table.destroy();
-                  this.respuesta= response;
                   this.ngOnInit();
               }, 
             error => {
@@ -764,5 +765,11 @@ export class MsvEvaluacionComponent implements OnInit {
         );
       }
     });
+  }
+
+  editRevision(revision: any) {
+    this.revision = revision;
+    this.formEditRevision = true;
+    this.formIndex = false;
   }
 }

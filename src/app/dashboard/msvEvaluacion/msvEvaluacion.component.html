@@ -1,146 +1,160 @@
-<div class="container" >
-    <hr>
-    <div class="row" *ngIf='formIndex'>
-       <div class="col-md-12">
-          <div class="card">
-             <div class="card-header">
-                <h5 class="card-title">
-                   <b class="text-uppercase">Plan estratégico de seguridad vial <small>Buscar</small></b>
-                   <br>
-                </h5>
-             </div>
-             <div class="card-body">
-                <div class="row">
-                   <!-- .row -->
-                   <div class="col-xs-12 col-lg-12">
-                      <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
-                         <input type="text" class="form-control" placeholder="Nombre empresa" [(ngModel)]="datos.parametro" name="parametro" required />
-                         <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="datos.parametro2" name="parametro2" required />
-                         <span class="input-group-btn">
-                         <button (click)="onKeyValidateEvaluacion()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" type="button"><i class="fa fa-search"></i></button>
-                         </span>
-                         <!--div de mensaje que no tiene revisión-->
-                         <div class="container" *ngIf="revisionMensaje">
-                            <div class="form-control-feedback has-danger has-error">La Empresa no tiene revisión</div>
-                            <br>
-                         </div>
-                         <!--fin-->
-                      </div>
-                      <br>
-                      
-                      <div class="has-danger" *ngIf="isError" >
-                         <div class="form-control-feedback has-danger has-error">{{msj}}</div>
-                         <br>                   
-                         <div class="btn-group pull-right">
-                            <button (click)="onNew()" class="btn btn-info" type="button" ><span class="text">Agregar Empresa</span> <i class="ti-save ml-2"></i></button>
-                         </div>
-                         <div *ngIf="newEmpresa">
-                            <app-new-empresa (ready)="ready($event)"></app-new-empresa>
-                         </div>
-                      </div>
-                      <!--boton agregar revision-->
-                      <div class="btn-group pull-right" *ngIf="habilitarBotonRev">
-                        <button (click)="onNewRevision()" class="btn btn-info" type="button" ><span class="text">Agregar Revisión</span> <i class="ti-save ml-2"></i></button>
+<div class="container">
+   <hr>
+   <div class="row" *ngIf='formIndex'>
+      <div class="col-md-12">
+         <div class="card">
+            <div class="card-header">
+               <h5 class="card-title">
+                  <b class="text-uppercase">Plan estratégico de seguridad vial <small>Buscar</small></b>
+                  <br>
+               </h5>
+            </div>
+            <div class="card-body">
+               <div class="row">
+                  <!-- .row -->
+                  <div class="col-xs-12 col-lg-12">
+                     <div class="input-group" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
+                        <input type="text" class="form-control" placeholder="Nombre empresa"
+                           [(ngModel)]="datos.parametro" name="parametro" required />
+                        <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="datos.parametro2"
+                           name="parametro2" required />
+                        <span class="input-group-btn">
+                           <button (click)="onKeyValidateEvaluacion()" [ngClass]="{'btn-danger' : isError}"
+                              class="btn btn-default btn-success" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                        <!--div de mensaje que no tiene revisión-->
+                        <div class="container" *ngIf="revisionMensaje">
+                           <div class="form-control-feedback has-danger has-error">La Empresa no tiene revisión</div>
+                           <br>
+                        </div>
+                        <!--fin-->
+                     </div>
+                     <br>
+                     <div class="has-danger" *ngIf="isError">
+                        <div class="form-control-feedback has-danger has-error">{{msj}}</div>
+                        <br>
+                        <div class="btn-group pull-right">
+                           <button (click)="onNew()" class="btn btn-info" type="button"><span class="text">Agregar
+                                 Empresa</span> <i class="ti-save ml-2"></i></button>
+                        </div>
+                        <div *ngIf="newEmpresa">
+                           <app-new-empresa (ready)="ready($event)"></app-new-empresa>
+                        </div>
+                     </div>
+                     <!--boton agregar revision-->
+                     <div class="btn-group pull-right" *ngIf="habilitarBotonRev">
+                        <button (click)="onNewRevision()" class="btn btn-info" type="button"><span class="text">Agregar
+                              Revisión</span> <i class="ti-save ml-2"></i></button>
                      </div>
                      <!--fin-->
-                      <div class="container" *ngIf="revisionNew">
-                         <div>
-                            <app-newRevision *ngIf="revisionNew" [miEmpresa] = "miEmpresa" (ready)="ready($event)"></app-newRevision>
-                         </div>
-                      </div>
-                      <div class="has-success" *ngIf="isExist" >
-                         <div class="form-control-feedback has-danger has-success">{{msj}}</div>
-                         <br> 
-                         <!-- tabla de detalles de la empresa -->
-                         <div class="col-xs-12 col-lg-12" >
-                            <h5 class="card-title">Detalles de la revisión y empresa</h5>
-                            <table class="table table-bordered">
-                               <thead>
-                                  <tr>
-                                     <th><b>Fecha de recepción</b></th>
-                                     <th><b>Fecha de revisión</b></th>
-                                     <th><b>Fecha de devolución</b></th>
-                                     <th><b>Fecha de otorgamiento</b></th>
-                                     <th><b>Funcionario que revisa</b></th>
-                                     <th><b>Persona contacto</b></th>
-                                     <th><b>Cargo</b></th>
-                                     <th><b>Correo electrónico</b></th>
-                                  </tr>
-                               </thead>
-                               <tbody>
-                                  <tr class="odd" *ngFor="let revision of revisiones; let i = index">
-                                     <td>
-                                        {{revision.fechaRecepcion}}
-                                     </td>
-                                     <td>
-                                        {{revision.fechaRevision}}
-                                     </td>
-                                     <td> 
-                                        {{revision.fechaDevolucion}}
-                                     </td>
-                                     <td> 
-                                        {{revision.fechaOtorgamiento}}
-                                     </td>
-                                     <td> 
-                                        {{revision.funcionario.ciudadano.primerNombre}} {{revision.funcionario.ciudadano?.segundoNombre}} {{revision.funcionario.ciudadano.primerApellido}}
-                                     </td>
-                                     <td> 
-                                        {{revision.personaContacto}}
-                                     </td>
-                                     <td> 
-                                        {{revision.cargo}}
-                                     </td>
-                                     <td> 
-                                        {{revision.correo}}
-                                     </td>
-                                  </tr>
-                               </tbody>
-                            </table>
-                            <table class="table table-bordered">
-                               <thead>
-                                  <tr>
-                                     <th><b>Nombre empresa</b></th>
-                                     <th><b>NIT</b></th>
-                                     <th><b>Ciudad Sede Principal</b></th>
-                                     <th><b>Dirección</b></th>
-                                     <th><b>Teléfono</b></th>
-                                  </tr>
-                               </thead>
-                               <tbody *ngIf="isExist">
-                                  <tr class="odd">
-                                     <td>
-                                        {{miEmpresa.nombre}}
-                                     </td>
-                                     <td> 
-                                        {{miEmpresa.nit}}
-                                     </td>
-                                     <td> 
-                                        {{miEmpresa.municipio.nombre}}
-                                     </td>
-                                     <td> 
-                                        {{miEmpresa.direccion}}
-                                     </td>
-                                     <td> 
-                                        {{miEmpresa.telefono}}
-                                     </td>
-                                  </tr>
-                               </tbody>
-                            </table>
-                         </div>
-                         <div class="card-body" *ngIf="miEmpresa">
-                          <!-- Nav tabs -->
-                          <!-- <ul class="nav nav-tabs" role="tablist">
+                     <div class="container" *ngIf="revisionNew">
+                        <div>
+                           <app-newRevision *ngIf="revisionNew" [miEmpresa]="miEmpresa" (ready)="ready($event)">
+                           </app-newRevision>
+                        </div>
+                     </div>
+                     <div class="has-success" *ngIf="isExist">
+                        <div class="form-control-feedback has-danger has-success">{{msj}}</div>
+                        <br>
+                        <!-- tabla de detalles de la empresa -->
+                        <div class="col-xs-12 col-lg-12">
+                           <h5 class="card-title">Detalles de la revisión y empresa</h5>
+                           <table class="table table-bordered">
+                              <thead>
+                                 <tr>
+                                    <th><b>Fecha de recepción</b></th>
+                                    <th><b>Fecha de revisión</b></th>
+                                    <th><b>Fecha de devolución</b></th>
+                                    <th><b>Fecha de otorgamiento</b></th>
+                                    <th><b>Funcionario que revisa</b></th>
+                                    <th><b>Persona contacto</b></th>
+                                    <th><b>Cargo</b></th>
+                                    <th><b>Correo electrónico</b></th>
+                                    <th><b>Acciones</b></th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr class="odd" *ngFor="let revision of revisiones; let i = index">
+                                    <td>
+                                       {{revision.fechaRecepcion}}
+                                    </td>
+                                    <td>
+                                       {{revision.fechaRevision}}
+                                    </td>
+                                    <td>
+                                       {{revision.fechaDevolucion}}
+                                    </td>
+                                    <td>
+                                       {{revision.fechaOtorgamiento}}
+                                    </td>
+                                    <td>
+                                       {{revision.funcionario.ciudadano.primerNombre}}
+                                       {{revision.funcionario.ciudadano?.segundoNombre}}
+                                       {{revision.funcionario.ciudadano.primerApellido}}
+                                    </td>
+                                    <td>
+                                       {{revision.personaContacto}}
+                                    </td>
+                                    <td>
+                                       {{revision.cargo}}
+                                    </td>
+                                    <td>
+                                       {{revision.correo}}
+                                    </td>
+                                    <td>
+                                       <div class="btn-group">
+                                          <button (click)="editRevision(revision)" class="btn btn-xs btn-primary" type="button">
+                                             <i class="fa fa-edit"></i>
+                                          </button>
+                                       </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <table class="table table-bordered">
+                              <thead>
+                                 <tr>
+                                    <th><b>Nombre empresa</b></th>
+                                    <th><b>NIT</b></th>
+                                    <th><b>Ciudad Sede Principal</b></th>
+                                    <th><b>Dirección</b></th>
+                                    <th><b>Teléfono</b></th>
+                                 </tr>
+                              </thead>
+                              <tbody *ngIf="isExist">
+                                 <tr class="odd">
+                                    <td>
+                                       {{miEmpresa.nombre}}
+                                    </td>
+                                    <td>
+                                       {{miEmpresa.nit}}
+                                    </td>
+                                    <td>
+                                       {{miEmpresa.municipio.nombre}}
+                                    </td>
+                                    <td>
+                                       {{miEmpresa.direccion}}
+                                    </td>
+                                    <td>
+                                       {{miEmpresa.telefono}}
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <div class="card-body" *ngIf="miEmpresa">
+                           <!-- Nav tabs -->
+                           <!-- <ul class="nav nav-tabs" role="tablist">
                              <li class="nav-item" *ngFor="let msvCategoria of msvCategorias; let i = index">
                                 <a class="nav-link" data-toggle="tab"  href="#{{msvCategoria.id}}" role="tab">{{msvCategoria.nombre}}
                                 </a>
                              </li>
-                          </ul> --> 
+                          </ul> -->
                            <label>Categoria <strong class="text-danger">*</strong></label>
-                           <ng-select [multiple]="false" [options]="msvCategorias" (ngModelChange)="changedCategoria($event)" [(ngModel)]="categoriaSelected" required name="idCategoria">
+                           <ng-select [multiple]="false" [options]="msvCategorias"
+                              (ngModelChange)="changedCategoria($event)" [(ngModel)]="categoriaSelected" required
+                              name="idCategoria">
                            </ng-select>
-
-
-
                            <div *ngFor="let msvCategoria of msvCategorias; let i=index">
                               <div class="row" *ngIf="categoriaSelected == i+1 && showT">
                                  <div class="col-xs-12 col-lg-12">
@@ -148,22 +162,31 @@
                                        <div class="card-body">
                                           <h5 class="m-0">Evaluación</h5>
                                           <hr>
-                                          <div class="row text-center text-uppercase" style="vertical-align:middle; line-height:normal;">
-                                             <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Parámetro-Definición</b></div>
+                                          <div class="row text-center text-uppercase"
+                                             style="vertical-align:middle; line-height:normal;">
+                                             <div class="col-lg-2" style="border:1px solid #cccccc;">
+                                                <b>Parámetro-Definición</b></div>
                                              <div class="col-lg-10" style="border:1px solid #cccccc;">
                                                 <div class="row">
                                                    <div class="col-lg-3"><b>Variables</b></div>
                                                    <div class="col-lg-9">
                                                       <div class="row">
-                                                         <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Criterio de aval</b></div>
-                                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Aplica</b></div>
-                                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Evidencias de su
+                                                         <div class="col-lg-2" style="border:1px solid #cccccc;">
+                                                            <b>Criterio de aval</b></div>
+                                                         <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                            <b>Aplica</b></div>
+                                                         <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                            <b>Evidencias de su
                                                                existencia</b></div>
-                                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Responde a los
+                                                         <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                            <b>Responde a los
                                                                requerimientos</b></div>
-                                                         <div class="col-lg-1" style="border:1px solid #cccccc;"><b>Valor de la variable</b></div>
-                                                         <div class="col-lg-2" style="border:1px solid #cccccc;"><b>Valor obtenido</b></div>
-                                                         <div class="col-lg-4" style="border:1px solid #cccccc;"><b>Observaciones</b></div>
+                                                         <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                            <b>Valor de la variable</b></div>
+                                                         <div class="col-lg-2" style="border:1px solid #cccccc;">
+                                                            <b>Valor obtenido</b></div>
+                                                         <div class="col-lg-4" style="border:1px solid #cccccc;">
+                                                            <b>Observaciones</b></div>
                                                       </div>
                                                    </div>
                                                 </div>
@@ -176,28 +199,42 @@
                                                       style="border:1px solid #cccccc; overflow-y:auto; text-align:center; vertical-align:middle;">{{
                                                             msvParametro.name }}</div>
                                                    <div class="col-lg-10" style="border:1px solid #cccccc;">
-                                                      <div class="row" *ngFor="let msvVariable of msvParametro.variables; let i=index">
-                                                         <div class="col-lg-3" style="border:1px solid #cccccc;">{{ msvVariable.name }}</div>
+                                                      <div class="row"
+                                                         *ngFor="let msvVariable of msvParametro.variables; let i=index">
+                                                         <div class="col-lg-3" style="border:1px solid #cccccc;">
+                                                            {{ msvVariable.name }}</div>
                                                          <div class="col-lg-9" style="border:1px solid #cccccc;">
-                                                            <div class="row" *ngFor="let msvCriterio of msvVariable.criterios; let i=index">
+                                                            <div class="row"
+                                                               *ngFor="let msvCriterio of msvVariable.criterios; let i=index">
                                                                <div class="col-lg-2" style="border:1px solid #cccccc;">
                                                                   {{ msvCriterio.name }}
                                                                </div>
-                                                               <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"
-                                                                     [(ngModel)]="msvCriterio.aplica" name="aplica{{ msvCriterio.id }}"></div>
-                                                               <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"
-                                                                     [(ngModel)]="msvCriterio.evidencia" name="evidencia{{ msvCriterio.id }}"></div>
-                                                               <div class="col-lg-1" style="border:1px solid #cccccc;"><input type="checkbox"
+                                                               <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                                  <input type="checkbox"
+                                                                     [(ngModel)]="msvCriterio.aplica"
+                                                                     name="aplica{{ msvCriterio.id }}"></div>
+                                                               <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                                  <input type="checkbox"
+                                                                     [(ngModel)]="msvCriterio.evidencia"
+                                                                     name="evidencia{{ msvCriterio.id }}"></div>
+                                                               <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                                  <input type="checkbox"
                                                                      (ngModelChange)="calcularTotal($event, msvParametro, categoriaSelected)"
-                                                                     [(ngModel)]="msvCriterio.responde" name="responde{{ msvCriterio.id }}"></div>
+                                                                     [(ngModel)]="msvCriterio.responde"
+                                                                     name="responde{{ msvCriterio.id }}"></div>
                                                                <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor
                                                                               /msvParametro.numeroVariables}}</div>
-                                                               <div class="col-lg-2" style="border:1px solid #cccccc;"><label
+                                                               <div class="col-lg-2" style="border:1px solid #cccccc;">
+                                                                  <label
                                                                      *ngIf="msvCriterio.responde == true">{{msvParametro.valor
                                                                                  /msvParametro.numeroVariables}}</label>
-                                                                  <label *ngIf="msvCriterio.responde == false">0</label></div>
-                                                               <div class="col-lg-4" style="border:1px solid #cccccc; overflow: inherit;"><input
-                                                                     type="text" style="width: 100%;" [(ngModel)]="msvCriterio.observacion"></div>
+                                                                  <label *ngIf="msvCriterio.responde == false">0</label>
+                                                               </div>
+                                                               <div class="col-lg-4"
+                                                                  style="border:1px solid #cccccc; overflow: inherit;">
+                                                                  <input type="text" style="width: 100%;"
+                                                                     [(ngModel)]="msvCriterio.observacion"/>
+                                                               </div>
                                                             </div>
                                                          </div>
                                                       </div>
@@ -207,69 +244,88 @@
                                           </div>
                                           <div class="row">
                                              <div class="col-lg-8" style="border:1px solid #cccccc;">TOTAL</div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 1">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoFortalecimiento" name="valorObtenidoFortalecimiento"
-                                                   type="number" disabled>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;"
+                                                *ngIf="categoriaSelected == 1">
+                                                <input class="form-control"
+                                                   [(ngModel)]="datos2.valorObtenidoFortalecimiento"
+                                                   name="valorObtenidoFortalecimiento" type="number" disabled>
                                              </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 2">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoComportamiento" name="valorObtenidoComportamiento"
-                                                   type="number" disabled>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;"
+                                                *ngIf="categoriaSelected == 2">
+                                                <input class="form-control"
+                                                   [(ngModel)]="datos2.valorObtenidoComportamiento"
+                                                   name="valorObtenidoComportamiento" type="number" disabled>
                                              </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 3">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoVehiculoSeguro" name="valorObtenidoVehiculoSeguro"
-                                                   type="number" disabled>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;"
+                                                *ngIf="categoriaSelected == 3">
+                                                <input class="form-control"
+                                                   [(ngModel)]="datos2.valorObtenidoVehiculoSeguro"
+                                                   name="valorObtenidoVehiculoSeguro" type="number" disabled>
                                              </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 4">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoInfraestructuraSegura"
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;"
+                                                *ngIf="categoriaSelected == 4">
+                                                <input class="form-control"
+                                                   [(ngModel)]="datos2.valorObtenidoInfraestructuraSegura"
                                                    name="valorObtenidoInfraestructuraSegura" type="number" disabled>
                                              </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 5">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoAtencionVictima" name="valorObtenidoAtencionVictima"
-                                                   type="number" disabled>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;"
+                                                *ngIf="categoriaSelected == 5">
+                                                <input class="form-control"
+                                                   [(ngModel)]="datos2.valorObtenidoAtencionVictima"
+                                                   name="valorObtenidoAtencionVictima" type="number" disabled>
                                              </div>
-                                             <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 6">
-                                                <input class="form-control" [(ngModel)]="datos2.valorObtenidoValorAgregado" name="valorObtenidoValorAgregado"
-                                                   type="number" disabled>
+                                             <div class="col-lg-4" style="border:1px solid #cccccc;"
+                                                *ngIf="categoriaSelected == 6">
+                                                <input class="form-control"
+                                                   [(ngModel)]="datos2.valorObtenidoValorAgregado"
+                                                   name="valorObtenidoValorAgregado" type="number" disabled>
                                              </div>
-                                          </div>   
+                                          </div>
                                           <div class="row">
                                              <div class="col-lg-12">
-                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 1"
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                                   *ngIf="categoriaSelected == 1"
                                                    [disabled]="botonEnviarFortalecimiento">
                                                    <i class="fa fa-save"></i>
                                                    Guardar
                                                 </button>
-                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 2"
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                                   *ngIf="categoriaSelected == 2"
                                                    [disabled]="botonEnviarComportamiento">
                                                    <i class="fa fa-save"></i>
                                                    Guardar
                                                 </button>
-                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 3"
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                                   *ngIf="categoriaSelected == 3"
                                                    [disabled]="botonEnviarVehiculoSeguro">
                                                    <i class="fa fa-save"></i>
                                                    Guardar
                                                 </button>
-                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 4"
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                                   *ngIf="categoriaSelected == 4"
                                                    [disabled]="botonEnviarInfraestructuraSegura">
                                                    <i class="fa fa-save"></i>
                                                    Guardar
                                                 </button>
-                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 5"
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                                   *ngIf="categoriaSelected == 5"
                                                    [disabled]="botonEnviarAtencionVictimas">
                                                    <i class="fa fa-save"></i>
                                                    Guardar
                                                 </button>
-                                                <button (click)="onEnviar()" class="btn btn-primary m-2" *ngIf="categoriaSelected == 6"
-                                                   [disabled]="botonEnviarValorAgregado">
+                                                <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                                   *ngIf="categoriaSelected == 6" [disabled]="botonEnviarValorAgregado">
                                                    <i class="fa fa-save"></i>
                                                    Guardar
                                                 </button>
                                              </div>
-                                          </div>                                   
+                                          </div>
                                        </div>
                                        <div class="card-footer">
                                           <div class="btn-group">
-                                             <button (click)="onFinalizar()" *ngIf="datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null" class="btn btn-default">
+                                             <button (click)="onFinalizar()"
+                                                *ngIf="datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null"
+                                                class="btn btn-default">
                                                 <i class="fa fa-check"></i>
                                                 Finalizar y Enviar
                                              </button>
@@ -279,14 +335,14 @@
                                  </div>
                               </div>
                            </div>
-                           
-                       </div>
-                         <!-- fin detalles de la empresa -->
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
-    </div>
- </div>
+                        </div>
+                        <!-- fin detalles de la empresa -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-edit-revision *ngIf='formEditRevision' [msvRevision]="revision" (ready)="ready($event)"></app-edit-revision>
+</div>
