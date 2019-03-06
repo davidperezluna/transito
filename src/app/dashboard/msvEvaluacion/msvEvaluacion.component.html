@@ -70,6 +70,7 @@
                                     <th><b>Persona contacto</b></th>
                                     <th><b>Cargo</b></th>
                                     <th><b>Correo electrónico</b></th>
+                                    <!-- <th><b>Puntaje Evaluación</b></th> -->
                                     <th><b>Acciones</b></th>
                                  </tr>
                               </thead>
@@ -101,13 +102,21 @@
                                     <td>
                                        {{revision.correo}}
                                     </td>
+                                    <!-- <td>
+                                       {{puntajeEvaluacion}}
+                                    </td> -->
                                     <td>
                                        <div class="btn-group">
                                           <button (click)="editRevision(revision)" class="btn btn-xs btn-primary" type="button">
                                              <i class="fa fa-edit"></i>
                                           </button>
-                                          <button (click)="iniciarEvaluacion(revision)" class="btn btn-xs btn-primary" type="button">
-                                             <i class="fa fa-plus"><span>Nueva Evaluacion</span></i>
+                                          <!-- <button *ngIf="deshabilitarNuevaEvaluacion" (click)="iniciarEvaluacion(revision)" class="btn btn-success">
+                                             <i class="fa fa-plus"></i>
+                                             NuevaEvaluacion
+                                          </button> -->
+                                          <button  (click)="iniciarEvaluacion(revision)" class="btn btn-success">
+                                             <i class="fa fa-plus"></i>
+                                             Nueva Evaluacion
                                           </button>
                                        </div>
                                     </td>
@@ -340,5 +349,5 @@
          </div>
       </div>
    </div>
-   <app-edit-revision *ngIf='formEditRevision' [msvRevision]="revision" (ready)="ready($event)"></app-edit-revision>
+   <app-edit-revision *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)"></app-edit-revision>
 </div>
