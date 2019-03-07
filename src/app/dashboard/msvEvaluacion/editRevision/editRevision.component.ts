@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MsvRevisionService } from '../../../services/msvRevision.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { MsvResultadoService } from "../../../services/msvResultado.service";
+import { MsvEvaluacionService } from "../../../services/msvEvaluacion.service";
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -12,6 +12,7 @@ import swal from 'sweetalert2';
 export class EditRevisionComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() msvRevision: any = null;
+    @Input() miEmpresa: any = null;
     public errorMessage;
     public contratistas: any;
     public contratistaSelected: any;
@@ -21,15 +22,15 @@ export class EditRevisionComponent implements OnInit {
     constructor(
         private _RevisionService: MsvRevisionService,
         private _MsvPersonalFuncionarioService: MpersonalFuncionarioService,
-        private _MsvResultadoService: MsvResultadoService,
+        private _MsvEvaluacionService: MsvEvaluacionService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() { 
         let token = this._LoginService.getToken();
-        this._MsvResultadoService.findAvalByEvaluacion(this.msvRevision, token).subscribe(
+        this._MsvEvaluacionService.findAvalByEvaluacion(this.msvRevision, token).subscribe(
             response => {
-                this.aval = response;
+                this.aval = response.data.aval;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -63,6 +64,8 @@ export class EditRevisionComponent implements OnInit {
 
     onEnviar() {
         let token = this._LoginService.getToken();
+        this.msvRevision.funcionarioId = this.contratistaSelected;
+        this.msvRevision.empresaId = this.miEmpresa.id;
         this._RevisionService.editRevision(this.msvRevision, token).subscribe(
             response => {
                 if (response.status == 'success') {

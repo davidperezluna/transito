@@ -67,6 +67,7 @@ export class MsvEvaluacionComponent implements OnInit {
     'valorObtenidoInfraestructuraSegura': null,
     'valorObtenidoAtencionVictima': null,
     'valorObtenidoValorAgregado': null,
+    'idRevision': null,
   };
 
   public datosFortalecimiento = {
@@ -96,6 +97,8 @@ export class MsvEvaluacionComponent implements OnInit {
   public botonEnviarValorAgregado = false;
   
   public mostrarTablaEvaluacion = false;
+  public puntajeEvaluacion = 0;
+  public deshabilitarNuevaEvaluacion = true;
 
   constructor(
     private _EvaluacionService: MsvEvaluacionService,
@@ -736,6 +739,8 @@ export class MsvEvaluacionComponent implements OnInit {
       if (result.value) {
         this._EvaluacionService.register(this.datos2, token).subscribe(
           response => {
+            this.puntajeEvaluacion = response.puntajeEvaluacion;
+            this.deshabilitarNuevaEvaluacion = false;
             var html =
               response.message + '</b><br>' +
               response.message2;
@@ -746,7 +751,8 @@ export class MsvEvaluacionComponent implements OnInit {
                 html: html,
                 type: 'success',
                 confirmButtonText: 'Aceptar'
-              })
+              });
+              this.mostrarTablaEvaluacion = false;
             } else {
               swal({
                 title: 'Error!',
@@ -775,6 +781,15 @@ export class MsvEvaluacionComponent implements OnInit {
   }
 
   iniciarEvaluacion(revision){
-    this.mostrarTablaEvaluacion = true; 
+    swal({
+      title: 'Cargando Tabla!',
+      text: 'Solo tardará unos segundos por favor espere.',
+      timer: 1000,
+      onOpen: () => {
+        swal.showLoading();
+      }
+    });
+    this.mostrarTablaEvaluacion = true;
+    this.datos2.idRevision = revision.id;
   }
 }
