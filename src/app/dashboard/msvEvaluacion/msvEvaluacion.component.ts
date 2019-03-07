@@ -6,7 +6,7 @@ import { MsvRevisionService } from '../../services/msvRevision.service';
 import {LoginService} from '../../services/login.service';
 import { MsvEvaluacion } from './msvEvaluacion.modelo';
 import { MsvCategoriaService } from '../../services/msvCategoria.service';
-import { MsvRevision } from "../msvEvaluacion/msvRevision.modelo";
+import { MsvRevision } from "./msvRevision.modelo";
 
 import { MsvParametroService } from '../../services/msvParametro.service';
 import { MsvCalificacionService } from '../../services/msvCalificacion.service';
