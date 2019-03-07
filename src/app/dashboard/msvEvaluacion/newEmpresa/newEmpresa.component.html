@@ -4,7 +4,7 @@
             <div class="card-body ">
                 <h5 class="m-0">Nueva persona jurídica</h5>
                 <hr>
-                <form  #formNew="ngForm">
+                <form #formNew="ngForm">
                     <div class="row justify-content-center container">
                         <div class="form-group row">
                             <!-- informacion  especifica de la nueva empresa-->
@@ -12,65 +12,76 @@
                                 <label>Razon social
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input class="form-control" [(ngModel)]="empresa.nombre" name="nombre" type="text" required>
+                                <input class="form-control" [(ngModel)]="empresa.nombre" name="nombre" type="text"
+                                    required>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Sigla</label>
                                 <input class="form-control" [(ngModel)]="empresa.sigla" name="sigla" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Nro. NIT</label>
-                                <input class="form-control" [(ngModel)]="empresa.nit" name="nit" type="text">
+                                <label>Nro. NIT <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.nit" name="nit" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>DV</label>
-                                <input class="form-control" [(ngModel)]="empresa.dv" name="dv" type="text">
+                                <label>DV <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.dv" name="dv" type="text" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Tipo identificación
                                     <span class="text-danger">*</span>
                                 </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion"
+                                    [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Capital pagado</label>
-                                <input class="form-control" [(ngModel)]="empresa.capitalPagado" name="capitalPagado" type="text">
+                                <input class="form-control" [(ngModel)]="empresa.capitalPagado" name="capitalPagado"
+                                    type="text">
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Patrimonio liquido</label>
-                                <input class="form-control" [(ngModel)]="empresa.capitalLiquido" name="capitalLiquido" type="text">
+                                <input class="form-control" [(ngModel)]="empresa.capitalLiquido" name="capitalLiquido"
+                                    type="text">
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Empresa prestadora
                                     <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-control" [(ngModel)]="empresa.empresaPrestadora" name="empresaPrestadoraSelected" placeholder="elija una opción"
-                                    required>
-                                    <option value="1">si</option>
-                                    <option value="0">no</option>
-                                </select>
+                                <ng-select [multiple]="false" [options]="empresasPrestadoras"
+                                    [(ngModel)]="empresaPrestadoraSelected" required name="empresaPrestadora">
+                                </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-3">
                                 <label>Certificado existencial</label>
-                                <input class="form-control" [(ngModel)]="empresa.certificadoExistencial" name="certificadoExistencial" type="text">
+                                <input class="form-control" [(ngModel)]="empresa.certificadoExistencial"
+                                    name="certificadoExistencial" type="text">
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Tipo sociedad
                                     <span class="text-danger">*</span>
                                 </label>
-                                <ng-select [multiple]="false" [options]="tiposSociedad" [(ngModel)]="tipoSociedadSelected" required name="tipoSociedadId">
+                                <ng-select [multiple]="false" [options]="tiposSociedad"
+                                    [(ngModel)]="tipoSociedadSelected" required name="idTipoSociedad">
                                 </ng-select>
                             </div>
+
                             <div class="col-xs-12 col-lg-4">
-                                <label>Tipo entidad
+                                <label>Servicio
+                                    <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-control" name="tipoEntidadSelected" [(ngModel)]="empresa.tipoEntidad">
-                                    <option value="Empresa del estado">Empresa del estado</option>
-                                    <option value="Empresa privada">Empresa privada</option>
-                                    <option value="Empresa publica">Empresa publica</option>
-                                    <option value="Empresa sin ánimo de lucro">Empresa sin ánimo de lucro</option>
-                                </select>
+                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected"
+                                    required name="idServicio">
+                                </ng-select>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Tipo entidad<span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="tiposEntidad" [(ngModel)]="tipoEntidadSelected"
+                                    required name="tipoEntidadSelected">
+                                </ng-select>
                             </div>
                             <!-- fin informacion  especifica -->
                             <!-- seleccion ubicacion geografica -->
@@ -78,20 +89,22 @@
                                 <label>Municipio
                                     <span class="text-danger">*</span>
                                 </label>
-                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipioId">
+                                <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected"
+                                    required name="idMunicipio">
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Nro. Registro mercantil
-                                </label>
-                                <input class="form-control" [(ngModel)]="empresa.nroRegistroMercantil" name="nroRegistroMercantil" type="text" required>
+                                <label>Nro. Registro mercantil <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.nroRegistroMercantil"
+                                    name="nroRegistroMercantil" type="text" required>
                             </div>
                             <!-- fin ubicacion -->
                             <!-- fecha VENCE -->
                             <div class="col-xs-12 col-lg-4">
                                 <label> Vencimiento de registro mercantil
                                 </label>
-                                <input class="form-control" [(ngModel)]="empresa.fechaVencimientoRegistroMercantil" name="fechaVencimientoRegistroMercantil" type="date" />
+                                <input class="form-control" [(ngModel)]="empresa.fechaVencimientoRegistroMercantil"
+                                    name="fechaVencimientoRegistroMercantil" type="date" />
                                 <br>
                             </div>
                             <!-- fin vence -->
@@ -100,48 +113,69 @@
                             <h5 class="col-xs-12 col-lg-12">Datos dirección </h5>
                             <!-- datos dirección -->
                             <div class="col-xs-12 col-lg-4">
-                                <label>Dirección*</label>
-                                <input class="form-control" [(ngModel)]="empresa.direccion" name="direccion" type="text" required>
+                                <label>Dirección <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.direccion" name="direccion" type="text"
+                                    required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Telefono</label>
-                                <input class="form-control" [(ngModel)]="empresa.telefono" name="telefono" type="number" min="0" required>
+                                <label>Telefono <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.telefono" name="telefono" type="number"
+                                    min="0" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Celular</label>
-                                <input class="form-control" [(ngModel)]="empresa.celular" name="celular" type="number" min="0" required>
+                                <label>Celular <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.celular" name="celular" type="number"
+                                    min="0" required>
                             </div>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Fax</label>
-                                <input class="form-control" [(ngModel)]="empresa.fax" name="fax" type="email" required>
+                                <input class="form-control" [(ngModel)]="empresa.fax" name="fax" type="email">
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Correo electrónico</label>
-                                <input class="form-control" [(ngModel)]="empresa.correo" name="correo" type="email" required>
-                            </div>                            
-                            <br><br><hr>
+                                <label>Correo electrónico <span class="text-danger">*</span></label>
+                                <input class="form-control" [(ngModel)]="empresa.correo" name="correo" type="email"
+                                    required>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Tipo empresa
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="tipoEmpresas" [(ngModel)]="tipoEmpresaSelected"
+                                    required name="idTipoEmpresa">
+                                </ng-select>
+                            </div>
+
+                            <br><br>
+                            <hr>
                             <!-- fin datos direccion -->
                             <!-- DATOS REPRESENTANTE  -->
                             <h5 class="col-xs-16 col-lg-12">Datos representante</h5>
-                            
+
                             <div class="col-xs-16 col-lg-6">
                                 <label>Ciudadano<span class="text-danger">*</span></label>
-                                <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId"></ng-select>
+                                <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected"
+                                    required name="idCiudadano"></ng-select>
                             </div>
                             <div class="col-xs-16 col-lg-6">
                                 <label>Fecha de inicio<span class="text-danger">*</span></label>
-                                <input class="form-control" [(ngModel)]="empresa.fechaInicial" name="fechaInicial" type="date" />
-                            </div>                            
+                                <input class="form-control" [(ngModel)]="empresa.fechaInicial" name="fechaInicial"
+                                    required type="date" />
+                            </div>
                             <!-- FIN REPRESENTANTE -->
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div class="btn-group">
-                            <button (click)="onCancelar()" class="btn btn-default"><i class="fa fa-times"></i>Cancelar</button>
-                            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button"><i class="fa fa-save"></i>Enviar</button>
-                        </div>
+                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-floppy-o"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelar()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
                     </div>
-                </form>    
+                </form>
             </div>
         </div>
     </div>

@@ -1,180 +1,201 @@
 <div class="row">
     <div class="col-sm-7">
         <div class="card">
-        <div class="card-body">
-            <h5 class="m-0">formulario para editar una persona jurídica</h5>
-            <hr> 
-            <div class="row justify-content-center">
-                <form #empresaForm="ngForm">
-                <div class="col-md-16 col-lg-12">
-                    <!-- formulario de empresa a editar -->
-                    <div class="form-group row">
-                        <!-- informacion  especifica de la nueva empresa-->
-                        <div class="col-xs-12 col-lg-2">
-                            <label>Nro. NIT</label>
-                            <th class="text-right">{{empresa.nit}}</th>
+            <div class="card-body">
+                <h5 class="m-0">formulario para editar una persona jurídica</h5>
+                <hr>
+                <div class="row justify-content-center">
+                    <form #empresaForm="ngForm">
+                        <div class="col-md-16 col-lg-12">
+                            <!-- formulario de empresa a editar -->
+                            <div class="form-group row">
+                                <!-- informacion  especifica de la nueva empresa-->
+                                <div class="col-xs-12 col-lg-2">
+                                    <label>Nro. NIT</label>
+                                    <th class="text-right">{{empresa.nit}}</th>
+                                </div>
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Razon social<span class="text-danger">*</span></label>
+                                    <input class="form-control" [(ngModel)]="empresa.nombre" name="nombre"
+                                        placeholder="" type="text" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Sigla</label>
+                                    <input class="form-control" [(ngModel)]="empresa.sigla" name="sigla" placeholder=""
+                                        type="text" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-3">
+                                    <label>DV</label>
+                                    <input class="form-control" [(ngModel)]="empresa.dv" name="dv" placeholder=""
+                                        type="text" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-3">
+                                    <label>Capital pagado</label>
+                                    <input class="form-control" [(ngModel)]="empresa.capitalPagado" name="capitalPagado"
+                                        placeholder="" type="text" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-3">
+                                    <label>Patrimonio liquido</label>
+                                    <input class="form-control" [(ngModel)]="empresa.capitalLiquido"
+                                        name="patrimonioLiquido" placeholder="" type="text" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-3" style="margin-top:4%">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" [(ngModel)]="empresa.empresaPrestadora"
+                                            class="custom-control-input" id="empresaPrestadora" name="empresaPrestadora"
+                                            checked="">
+                                        <label class="custom-control-label" for="empresaPrestadora">Empresa
+                                            prestadora</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Certificado existencial</label>
+                                    <input class="form-control" [(ngModel)]="empresa.certificadoExistencial"
+                                        name="certificadoExistencial" placeholder="" type="text">
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Tipo sociedad<span class="text-danger">*</span></label>
+                                    <ng-select [multiple]="false" [options]="tiposSociedad"
+                                        [(ngModel)]="tipoSociedadSelected" required name="tipoSociedadId"></ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Servicio
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected"
+                                        required name="idServicio">
+                                    </ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Tipo entidad</label>
+                                    <ng-select [multiple]="false" [options]="tiposEntidad"
+                                        [(ngModel)]="tipoEntidadSelected" required name="tipoEntidadSelected">
+                                    </ng-select>
+                                </div>
+                                <!-- fin informacion  especifica -->
+                                <!-- seleccion ubicacion geografica -->
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Municipio<span class="text-danger">*</span></label>
+                                    <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected"
+                                        required name="municipioId">
+                                    </ng-select>
+                                </div>
+                                <div class="col-xs-12 col-lg-3">
+                                    <label>Nro. Registro mercantil</label>
+                                    <input class="form-control" [(ngModel)]="empresa.nroRegistroMercantil"
+                                        name="nroRegistroMercantil" placeholder="" type="text" required>
+                                </div>
+                                <!-- fin ubicacion -->
+                                <!-- fecha VENCE -->
+                                <div class="col-xs-12 col-lg-5">
+                                    <label> Fecha de vencimiento de registro mercantil</label>
+                                    <input class="form-control" [(ngModel)]="empresa.fechaVencimientoRegistroMercantil"
+                                        name="fechaVencimientoRegistroMercantil" type="date" required /><br>
+                                </div>
+                                <!-- fin fecha  -->
+                                <!-- DATOS DE DIRECCION -->
+                                <hr>
+                                <h5 class="col-xs-12 col-lg-12">Datos dirección </h5>
+                                <!-- datos dirección -->
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Dirección*</label>
+                                    <input class="form-control" [(ngModel)]="empresa.direccion" name="direccion"
+                                        placeholder="" type="text" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Correo electrónico</label>
+                                    <input class="form-control" [(ngModel)]="empresa.correo" name="correo"
+                                        placeholder="" type="email" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Celular</label>
+                                    <input class="form-control" [(ngModel)]="empresa.celular" name="celular"
+                                        placeholder="" type="number" min="0" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Telefono</label>
+                                    <input class="form-control" [(ngModel)]="empresa.telefono" name="telefono"
+                                        placeholder="" type="number" min="0" required>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Fax</label>
+                                    <input class="form-control" [(ngModel)]="empresa.fax" name="fax" placeholder=""
+                                        type="number" required>
+                                </div>
+                            </div>
+                            <!-- fin formulario -->
                         </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Razon social<span class="text-danger">*</span></label>
-                            <input class="form-control" [(ngModel)]="empresa.nombre" name="nombre" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Sigla</label>
-                            <input class="form-control" [(ngModel)]="empresa.sigla" name="sigla" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>DV</label>
-                            <input class="form-control" [(ngModel)]="empresa.dv" name="dv" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Capital pagado</label>
-                            <input class="form-control" [(ngModel)]="empresa.capitalPagado" name="capitalPagado" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Patrimonio liquido</label>
-                            <input class="form-control" [(ngModel)]="empresa.capitalLiquido" name="patrimonioLiquido" placeholder="" type="text" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Empresa prestadora<span class="text-danger">*</span></label>
-                            <select class="form-control" [(ngModel)]="empresa.empresaPrestadora" name="empresaPrestadoraSelected" placeholder="elija una opción" required>
-                                <option value="true">si</option>
-                                <option value="false">no</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Certificado existencial</label>
-                            <input class="form-control" [(ngModel)]="empresa.certificadoExistencial" name="certificadoExistencial" placeholder="" type="text">
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Tipo sociedad<span class="text-danger">*</span></label>
-                            <ng-select [multiple]="false" [options]="tiposSociedad" [(ngModel)]="tipoSociedadSelected" required name="tipoSociedadId"></ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Servicio 
-                                <span class="text-danger">*</span>
-                            </label>
-                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicioId">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Tipo entidad</label>
-                            <select class="form-control" name="tipoEntidadSelected" [(ngModel)]="empresa.tipoEntidad">
-                                <option value="Empresa del estado">Empresa del estado</option>
-                                <option value="Empresa privada">Empresa privada</option>
-                                <option value="Empresa publica">Empresa publica</option>
-                                <option value="Empresa sin ánimo de lucro">Empresa sin ánimo de lucro</option>
-                            </select>
-                        </div>
-                        <!-- fin informacion  especifica -->
-                        <!-- seleccion ubicacion geografica -->
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Municipio<span class="text-danger">*</span></label>
-                            <ng-select
-                                [multiple]="false"
-                                [options]="municipios"
-                                [(ngModel)]="municipioSelected"
-                                required 
-                                name="municipioId">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Nro. Registro mercantil</label>
-                            <input class="form-control" [(ngModel)]="empresa.nroRegistroMercantil" name="nroRegistroMercantil" placeholder="" type="text" required>
-                        </div>
-                        <!-- fin ubicacion -->                    
-                        <!-- fecha VENCE -->
-                        <div class="col-xs-12 col-lg-5" >
-                            <label> Fecha de vencimiento de registro mercantil</label>
-                            <input class="form-control" [(ngModel)]="empresa.fechaVencimientoRegistroMercantil" name="fechaVencimientoRegistroMercantil" type="date" required /><br>
-                        </div>
-                        <!-- fin fecha  -->
-                        <!-- DATOS DE DIRECCION -->
-                        <hr>
-                        <h5 class="col-xs-12 col-lg-12">Datos dirección </h5>
-                        <!-- datos dirección -->
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Dirección*</label>
-                            <input class="form-control" [(ngModel)]="empresa.direccion" name="direccion" placeholder="" type="text"required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Correo electrónico</label>
-                            <input class="form-control" [(ngModel)]="empresa.correo" name="correo" placeholder="" type="email" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Celular</label>
-                            <input class="form-control" [(ngModel)]="empresa.celular" name="celular" placeholder="" type="number" min="0" required>
-                        </div> 
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Telefono</label>
-                            <input class="form-control" [(ngModel)]="empresa.telefono" name="telefono" placeholder="" type="number" min="0" required>
-                        </div>
-                        <div class="col-xs-12 col-lg-4">
-                            <label>Fax</label>
-                            <input class="form-control" [(ngModel)]="empresa.fax" name="fax" placeholder="" type="number" required>
-                        </div>
-                    </div>
-                    <!-- fin formulario -->
-                </div> 
-                </form>                  
+                    </form>
+                </div>
+                <!-- form 1 botones -->
+                <div class="card-footer">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-floppy-o"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+                <!-- fin -->
             </div>
-            <!-- form 1 botones -->
-            <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-outline-secondary" type="button">Cancelar</button>
-                <button (click)="onEnviar()" [disabled]="empresaForm.invalid" class="btn btn-outline-primary" type="button"><i class="fa fa-floppy-o"></i>Enviar</button>
-            </div>    
-            <!-- fin -->
-        </div>
         </div>
     </div>
-    <div class="col-md-5 " >
+    <div class="col-md-5 ">
         <div class="card" *ngIf='formListaRepresentanteVigente'><br>
-        <h5 class="text-center">Representante actual</h5>
-        <div class="card-body">
-            <table class="table " >
-                <thead>
-                    <tr>
-                    <th>Nombre</th>
-                    <th>Fecha</th>
-                    <!-- <th>Acción</th> -->
-                    <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>{{representanteVigente.ciudadano?.usuario.primerNombre + " "+representanteVigente.ciudadano?.usuario.primerApellido }}</td>
-                    <th >{{representanteVigente.fechaInicial}}</th>
-                    </tr>
-                </tbody>
-            </table>
+            <h5 class="text-center">Representante actual</h5>
+            <div class="card-body">
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                            <!-- <th>Acción</th> -->
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{representanteVigente.ciudadano?.usuario.primerNombre + " "+representanteVigente.ciudadano?.usuario.primerApellido }}
+                            </td>
+                            <th>{{representanteVigente.fechaInicial}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        </div>
-        <div class="card" *ngIf ='formNewRepresentante' ><br>
-            
+        <div class="card" *ngIf='formNewRepresentante'><br>
+
             <h5 class="text-center">Nuevo representante</h5>
             <div class="card-body">
-                <div class="form-group row" >
+                <div class="form-group row">
                     <div class="col-xs-12 col-lg-5">
                         <label>Nombre</label>
-                        <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required name="ciudadanoId" [disabled]="formNewRepresentante.invalid" required></ng-select>
+                        <ng-select [multiple]="false" [options]="ciudadanos" [(ngModel)]="ciudadanoSelected" required
+                            name="ciudadanoId" [disabled]="formNewRepresentante.invalid" required></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-5">
                         <label>Fecha de inicio</label>
-                        <input class="form-control" [(ngModel)]="empresa.fechaFinal" [disabled]="formNewRepresentante.invalid" name="nuevafecha" type="date" required />
+                        <input class="form-control" [(ngModel)]="empresa.fechaFinal"
+                            [disabled]="formNewRepresentante.invalid" name="nuevafecha" type="date" required />
                     </div>
                     <div class="col-xs-12 col-lg-2">
-                        <button (click)="nuevoRepresentante()" [disabled]="formNewRepresentante.invalid" class="btn btn-outline-success " style="margin-top: 30px;" type="button" ><i class="ti-save ml-2"></i></button>
-                    </div>                            
+                        <button (click)="nuevoRepresentante()" [disabled]="formNewRepresentante.invalid"
+                            class="btn btn-primary" style="margin-top: 30px;" type="button" type="button">
+                            <i class="fa fa-floppy-o"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-            
+
         </div>
 
-        <div class="table-responsive" *ngIf ='formNewRepresentante'>
-            <div class="card" *ngIf='formListaRepresentantes' ><br>
+        <div class="table-responsive" *ngIf='formNewRepresentante'>
+            <div class="card" *ngIf='formListaRepresentantes'><br>
                 <h5 class="text-center">Lista histórica</h5>
                 <div class="card-body">
-                    <table class="table " >
+                    <table class="table ">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -186,7 +207,8 @@
                         <tbody>
                             <tr *ngFor="let representante of representantes; let i = index">
                                 <td>{{representante.ciudadano.usuario.primerNombre+" "+representante.ciudadano?.usuario.segundoNombre 
-                                    +" "+representante.ciudadano?.usuario.primerApellido +" "+representante.ciudadano?.usuario.segundoApellido }}</td>
+                                    +" "+representante.ciudadano?.usuario.primerApellido +" "+representante.ciudadano?.usuario.segundoApellido }}
+                                </td>
                                 <td>{{representante.fechaInicial}}</td>
                                 <td>{{representante.fechaFinal}}</td>
                             </tr>
@@ -195,5 +217,5 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </div>

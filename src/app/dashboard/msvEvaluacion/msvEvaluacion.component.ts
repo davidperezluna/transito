@@ -740,7 +740,8 @@ export class MsvEvaluacionComponent implements OnInit {
         this._EvaluacionService.register(this.datos2, token).subscribe(
           response => {
             this.puntajeEvaluacion = response.puntajeEvaluacion;
-            this.deshabilitarNuevaEvaluacion = false;
+            //this.deshabilitarNuevaEvaluacion+this.datos2.idRevision = true;
+            //this.deshabilitarNuevaEvaluacion = true;
             var html =
               response.message + '</b><br>' +
               response.message2;

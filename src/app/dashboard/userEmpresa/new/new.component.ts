@@ -36,12 +36,20 @@ public tipoIdentificacionSelected: any;
 public municipioResidenciaSelected: any;
 public tipoEmpresaSelected: any;
 public tipoEmpresas: any;
+public tipoEntidadSelected: any;
 public municipioNacimientoSelected: any;
 public formNewSucursal = false;
 public formIndexSucursal = true;
 public tablaSucursal = false;
 public sucursales:any[]= [];
 // los que vienen desde el base de datos
+public tiposEntidad = [
+  { value: 'EMPRESA DEL ESTADO', label: 'EMPRESA DEL ESTADO' },
+  { value: 'EMPRESA PRIVADA', label: 'EMPRESA PRIVADA' },
+  { value: 'EMPRESA PÚBLICA', label: 'EMPRESA PÚBLICA' },
+  { value: 'EMPRESA SIN ÁNIMO DE LUCRO', label: 'EMPRESA SIN ÁNIMO DE LUCRO' },
+];
+
 constructor(
   private _EmpresaService: UserEmpresaService,
   private _loginService: LoginService,
@@ -156,8 +164,13 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-    this.empresa.cfgEmpresaServicioId = this.servicioSelected;
-    this.empresa.cfgEmpresaServicioId = this.servicioSelected;
+    this.empresa.idEmpresaServicio = this.servicioSelected;
+    this.empresa.idTipoIdentificacion = this.tipoIdentificacionSelected;
+    this.empresa.idTipoSociedad = this.tipoSociedadSelected;
+    this.empresa.idMunicipio = this.municipioSelected;
+    this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
+    this.empresa.idCiudadano = this.ciudadanoSelected;
+    this.empresa.tipoEntidad = this.tipoEntidadSelected;
 
     let datos = {
       'empresa': this.empresa,
