@@ -1,17 +1,15 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { UserEmpresa } from '../userEmpresa/userEmpresa.modelo';
+import { MsvEvaluacion } from './msvEvaluacion.modelo';
+import { MsvRevision } from "./msvRevision.modelo";
 import { MsvEvaluacionService } from '../../services/msvEvaluacion.service';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { MsvRevisionService } from '../../services/msvRevision.service';
-import {LoginService} from '../../services/login.service';
-import { MsvEvaluacion } from './msvEvaluacion.modelo';
 import { MsvCategoriaService } from '../../services/msvCategoria.service';
-import { MsvRevision } from "./msvRevision.modelo";
-
 import { MsvParametroService } from '../../services/msvParametro.service';
 import { MsvCalificacionService } from '../../services/msvCalificacion.service';
-import { IfStmt } from '@angular/compiler/src/output/output_ast';
-import { forEach } from '@angular/router/src/utils/collection';
+import {LoginService} from '../../services/login.service';
+import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 declare var $: any;
@@ -24,6 +22,7 @@ export class MsvEvaluacionComponent implements OnInit {
   @Output() ready2 = new EventEmitter<any>();
   @Input() msvCategoria;  
   public errorMessage;
+  public apiUrl = environment.apiUrl + 'msvevaluacion';
   public msvEvaluaciones;
 	public formNew = false;
 	public formEdit = false;
@@ -47,6 +46,8 @@ export class MsvEvaluacionComponent implements OnInit {
   public categoriaSelected: any = null;
   public msvCategorias:any;
   public categoria = false;
+  public evaluacion: any = null;
+
   public resumen = {};     public datos = {'parametro': null,
                   'parametro2': null}
 
@@ -742,19 +743,23 @@ export class MsvEvaluacionComponent implements OnInit {
             this.puntajeEvaluacion = response.puntajeEvaluacion;
             //this.deshabilitarNuevaEvaluacion+this.datos2.idRevision = true;
             //this.deshabilitarNuevaEvaluacion = true;
-            var html =
-              response.message + '</b><br>' +
-              response.message2;
+
             if (response.status == 'success') {
               this.ready2.emit(true);
+              
+              this.evaluacion = response.data;
+              
               swal({
                 title: 'Perfecto!',
-                html: html,
+                html: response.message,
                 type: 'success',
                 confirmButtonText: 'Aceptar'
               });
+              
               this.mostrarTablaEvaluacion = false;
             } else {
+              this.evaluacion = null;
+
               swal({
                 title: 'Error!',
                 text: response.message,
