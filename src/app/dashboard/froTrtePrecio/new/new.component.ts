@@ -15,6 +15,7 @@ import { environment } from 'environments/environment'
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
+    @Output() search = new EventEmitter<any>();
     @Input() modulo: any = null;
     public tramitePrecio: FroTrtePrecio;
     public errorMessage;
@@ -103,9 +104,10 @@ export class NewComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
 
-                    this.ready.emit(true);
+                    this.search.emit(true);
                 } else {
-                    this.tramitePrecio.id = null;
+                    this.tramitePrecio.idModulo = null;
+
                     swal({
                         title: 'Error!',
                         text: response.message,
