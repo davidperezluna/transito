@@ -39,11 +39,11 @@ export class UserCiudadanoService {
 		);
 	}
 
-	show(token, id) {
-		let params = "authorization=" + token;
+	show(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/" + id + "/show", params, { headers: headers })
-			.map(res => res.json());
+		return this._http.post(this.url + "/show", params, { headers: headers }).map(res => res.json());
 	}
 
 	edit(datos, token) {
@@ -56,28 +56,28 @@ export class UserCiudadanoService {
 		);
 	}
 
-	select() {
-		return this._http.get(this.url + "/select").map(res => res.json());
-	}
-
 	searchByIdentificacion(datos, token){ 
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 			return this._http.post(this.url+"/search/identificacion", params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url+"/search/identificacion", params, {headers: headers}).map(res => res.json());
 	}
-
+	
 	searchByFiltros(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/filtros", params, { headers: headers }).map(res => res.json());
 	}
-
+	
 	calculateAge(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/calculate/age", params, { headers: headers }).map(res => res.json());
+	}
+
+	select() {
+		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 }

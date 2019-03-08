@@ -54,7 +54,7 @@ constructor(
   ngOnInit() {
     this.empresa = new UserEmpresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.empresa.nit = this.nit;
-    this.empresa.tipoIdentificacionId = this.tipoIdentificacion;
+    this.empresa.idTipoIdentificacion = this.tipoIdentificacion;
     this._tipoSociedadService.getTipoSociedadSelect().subscribe(
       response => {
         this.tiposSociedad = response;
