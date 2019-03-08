@@ -171,7 +171,7 @@ export class NewEmpresaComponent implements OnInit {
     this.empresa.idEmpresaServicio = this.servicioSelected;
     this.empresa.idTipoIdentificacion = this.tipoIdentificacionSelected;
     this.empresa.idTipoSociedad = this.tipoSociedadSelected;
-    this.empresa.idTipoEntidad = this.tipoEntidadSelected;
+    this.empresa.tipoEntidad = this.tipoEntidadSelected;
     this.empresa.idMunicipio = this.municipioSelected;
     this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
     this.empresa.idCiudadano = this.ciudadanoSelected;
