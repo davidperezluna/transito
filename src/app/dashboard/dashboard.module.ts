@@ -158,7 +158,10 @@ import { PqoGruaCiudadanoModule } from './pqoGruaCiudadano/pqoGruaCiudadano.modu
 import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.module';
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 
+
+import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module';
 import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
+
 import { FacturaModule } from './factura/factura.module';
 import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
@@ -199,6 +202,8 @@ import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdC
 
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
+
+import { PnalFuncionarioModule } from './pnalFuncionario/pnalFuncionario.module';
 
 import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
 import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
@@ -354,12 +359,14 @@ import {RightsidebarComponent} from '../shared';
     PqoGruaCiudadanoModule,
     PqoInmovilizacionModule,
     MparqCostoTrayectoModule,
+    PnalFuncionarioModule,
     CfgCargoModule,
     MpersonalFuncionarioModule,
     MpersonalTipoContratoModule,
     MpersonalTalonarioModule,
     MpersonalAsignacionModule,
     FroTrteCfgCuentaModule,
+    VhloPropietarioModule,
     VhloCfgCarroceriaModule,
     ComparendoModule,
     CfgAdmFormatoModule,

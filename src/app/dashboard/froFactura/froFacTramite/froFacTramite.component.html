@@ -193,7 +193,7 @@
                                 <ng-select [multiple]="false" [options]="tramitesPrecio" [(ngModel)]="tramitePrecioSelected" required name="tramitePrecioId">
                                 </ng-select>
                                 <div class="card-footer">
-                                    <button (click)="addNewTramite()" class="btn btn-primary pull-right">
+                                    <button (click)="onAddTramite()" class="btn btn-primary pull-right">
                                         <i class="fa fa-plus"></i>
                                         Agregar
                                     </button>
@@ -303,7 +303,7 @@
                                             <td *ngIf='tramiteValor.valor'>{{ tramiteValor.valor | currency: 'COP' }}</td>
                                             <td *ngIf='!tramiteValor.valor'>{{ 0 | currency: 'COP' }}</td>
                                             <td>
-                                                <button (click)="deleteTramiteValor(tramiteValor)" class="btn btn-xs btn-danger" type="button">
+                                                <button (click)="onDeleteTramite(tramiteValor)" class="btn btn-xs btn-danger" type="button">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>

@@ -85,7 +85,7 @@ export class FroTrtePrecioComponent implements OnInit {
                     }, 100);
                 } else {
                     this.tramitesPrecios = null;
-                    this.modulo = null;
+                    this.modulo = response.data.modulo;
 
                     swal({
                         title: 'Atención!',
@@ -94,7 +94,6 @@ export class FroTrtePrecioComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
                 }
-
             },
             error => {
                 this.errorMessage = <any>error;
@@ -194,6 +193,8 @@ export class FroTrtePrecioComponent implements OnInit {
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+
+                    this.onSearch();
                 } else {
                     swal({
                         title: 'Atención!',

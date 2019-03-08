@@ -155,12 +155,17 @@ import { PqoGruaCiudadanoRoutes } from './pqoGruaCiudadano/pqoGruaCiudadano.rout
 import { PqoInmovilizacionRoutes } from './pqoInmovilizacion/pqoInmovilizacion.routes';
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
 
+import { PnalFuncionarioRoutes } from './pnalFuncionario/pnalFuncionario.routes';
+
 import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
 import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
 import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
 import { MpersonalTalonarioRoutes } from './mpersonalTalonario/mpersonalTalonario.routes';
 import { MpersonalAsignacionRoutes } from './mpersonalAsignacion/mpersonalAsignacion.routes';
+
+import { VhloPropietarioRoutes } from './vhloPropietario/vhloPropietario.routes';
 import { VhloCfgCarroceriaRoutes } from './vhloCfgCarroceria/vhloCfgCarroceria.routes';
+
 import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
@@ -276,6 +281,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgLicenciaConduccionCategoriaRoutes,
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
+      ...PnalFuncionarioRoutes,
       ...CfgCargoRoutes,
       ...CfgTipoInfractorRoutes,
       ...CfgAdmFormatoRoutes,
@@ -390,6 +396,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgVisualDisminuidaRoutes,
       ...SvCfgZonaRoutes,
       ...InfraccionRoutes,
+      ...VhloPropietarioRoutes,
       ...VhloCfgCarroceriaRoutes,
       ...FacturaRoutes,
       ...FacturaInfraccionRoutes,

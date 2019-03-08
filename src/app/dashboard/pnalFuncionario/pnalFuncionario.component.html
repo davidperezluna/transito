@@ -1,0 +1,57 @@
+<div class="container" >
+  <hr>
+  <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <strong class="text-uppercase">Usuarios</strong>
+              <small>Parametrización de menus</small>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  <span class="text">Nuevo</span>
+                </button>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Tipo</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="odd" *ngFor="let menu of menus; let i = index">
+                  <td >{{ menu.id }}</td>
+                  <td >{{ menu.titulo }}</td>
+                  <td >{{ menu.tipo }}</td>
+                  <td >{{ menu.role?.nombre }}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button (click)="onEdit(menu)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false"
+                        [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button (click)="onDelete(menu.id)" class="btn btn-xs btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false"
+                        [tooltipAnimation]="true" tooltipPlacement="top">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-edit *ngIf='formEdit' [menu]="menu" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>
