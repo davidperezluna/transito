@@ -1,6 +1,7 @@
 export class MsvRevision{
 	constructor(
 		public id:number,
+		public numeroRadicado:number,
 		public fechaRecepcion: string,
 		public fechaRevision: string,
 		public fechaDevolucion: string,
