@@ -2,7 +2,7 @@ export class SvCfgHospital {
     constructor(
         public id: number,
         public nombre: string,
-        public sedeOperativa: number,
+        public organismoTransito: number,
         public municipio: number
     ) { }
 }

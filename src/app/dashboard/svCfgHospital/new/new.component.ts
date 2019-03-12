@@ -20,7 +20,7 @@ export class NewComponent implements OnInit {
     public organismosTransito: any;
 
     public municipioSelected: any;
-    public sedeOperativaSelected: any;
+    public organismoTransitoSelected: any;
 
     constructor(
         private _HospitalService: SvCfgHospitalService,
@@ -66,8 +66,8 @@ export class NewComponent implements OnInit {
     onEnviar() {
         let token = this._loginService.getToken();
         this.hospital.municipio = this.municipioSelected;
-        this.hospital.sedeOperativa = this.sedeOperativaSelected;
-
+        this.hospital.organismoTransito = this.organismoTransitoSelected;
+        
         this._HospitalService.register(this.hospital, token).subscribe(
             response => {
                 if (response.status == 'success') {

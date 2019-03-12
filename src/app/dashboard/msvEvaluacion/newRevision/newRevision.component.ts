@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { MsvRevision } from '../msvRevision.modelo';
 import { MsvRevisionService } from '../../../services/msvRevision.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -22,14 +22,14 @@ public formNew = false;
 
 constructor(
   private _MsvRevisionService: MsvRevisionService,
-  private _MsvPersonalFuncionarioService: MpersonalFuncionarioService,
+  private _PnalFuncionarioService: PnalFuncionarioService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
     this.msvRevision = new MsvRevision(null, null, null, null, null, null, null, null, null, null, null, null,null,null,null,null);
 
-    this._MsvPersonalFuncionarioService.selectContratistas().subscribe(
+    this._PnalFuncionarioService.selectContratistas().subscribe(
       response => {
         this.contratistas = response;
       },

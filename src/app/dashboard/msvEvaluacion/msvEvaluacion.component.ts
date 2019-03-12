@@ -123,7 +123,6 @@ export class MsvEvaluacionComponent implements OnInit {
 
     let identity = this._loginService.getIdentity();
     this.idUsuario = identity.sub;
-    console.log(identity.sub);
 
     swal({
       title: 'Cargando Tabla!',
