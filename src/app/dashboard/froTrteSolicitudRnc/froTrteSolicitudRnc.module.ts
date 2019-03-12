@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FroTrteSolicitudRncComponent } from './froTrteSolicitudRnc.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { FroTrteSolicitudRncService } from '../../services/tramiteSolicitudRnc.service';
+import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
 
 import { NewRncSustratoComponent } from './newRncSustrato/newRncSustrato.component';
 import { NewRncCiudadanoComponent } from './newRncCiudadano/newRncCiudadano.component';
@@ -16,9 +16,10 @@ import { NewRncRefrendacionLicenciaComponent } from './rnc/tramiteRefrendacionLi
 import { NewRncComponent } from './newRnc/newRnc.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
+import { TooltipModule } from "ngx-tooltip";
 
 @NgModule({
-    imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
+    imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
     declarations: [
         FroTrteSolicitudRncComponent,
         NewRncComponent,
@@ -45,7 +46,7 @@ import { SelectModule } from 'angular2-select';
         NewRncRecategorizacionLicenciaArribaComponent,
         NewRncRefrendacionLicenciaComponent
     ],
-    providers: [FroTrteSolicitudRncService]
+    providers: [FroTrteSolicitudService]
 })
 
 export class FroTrteSolicitudRncModule { }

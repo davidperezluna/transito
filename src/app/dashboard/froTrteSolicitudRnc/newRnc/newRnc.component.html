@@ -16,13 +16,13 @@
                     </form>
                 </div>
                 <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancel
-                    </button>
                     <button class="btn btn-primary" (click)="onSearchFactura()" [disabled]="formPay.invalid">
                         <i class="fa fa-search"></i>
                         Consultar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div> 
             </div>

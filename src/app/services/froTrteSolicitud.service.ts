@@ -5,7 +5,7 @@ import { LoggerService } from "../logger/services/logger.service";
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class FroTrteSolicitudRncService {
+export class FroTrteSolicitudService {
 	private url = environment.apiUrl + "financiero/frotrtesolicitud";
 	public identity;
 	public token;

@@ -67,7 +67,7 @@ export class FroFacTramiteComponent implements OnInit {
   ){}
     
   ngOnInit() {
-    this.factura = new FroFacTramite(null, 0, null, null, null, null, null, null, null); 
+    this.factura = new FroFacTramite(null, 0, null, null, null, null, null, null, null, null); 
 
     swal({
       title: 'Cargando Datos!',
@@ -329,9 +329,7 @@ export class FroFacTramiteComponent implements OnInit {
       }
     });
 
-    let token = this._LoginService.getToken();
-    console.log(this.tramitesPrecioArray.length);
-    
+    let token = this._LoginService.getToken();  
 
     if (this.modulo.abreviatura == 'RNC') {
       if (this.tramitesPrecioArray.length < 1) {
@@ -576,6 +574,8 @@ export class FroFacTramiteComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.factura.id = response.data.id;
+          this.factura.numero = response.data.numero;
+          this.formNew = false;
 
           swal({
             title: 'Perfecto!',
@@ -585,6 +585,8 @@ export class FroFacTramiteComponent implements OnInit {
           })
         } else {
           this.factura.id = null;
+          this.factura.numero = null;
+          this.formNew = true;
 
           swal({
             title: 'Error!',
