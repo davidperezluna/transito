@@ -25,6 +25,7 @@ export class FroTrtePrecioService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         return this._http.post(this.url + "/new", params, { headers: headers }).map(
             res => res.json(),
+            this._loogerService.registerLog(token, 'INSERT', json, this.url)
         );
     }
 
@@ -42,7 +43,7 @@ export class FroTrtePrecioService {
         let json = JSON.stringify(datos);
         let params = "data=" + json + "&authorization=" + token;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        return this._http.post(this.url + '/show', params, { headers: headers }).map(res => res.json());
+        return this._http.post(this.url + "/show", params, { headers: headers }).map(res => res.json());
     }
 
     edit(datos, token) {

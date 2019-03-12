@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { PnalFuncionario } from './pnalFuncionario.modelo';
 import { UserCfgMenuService } from '../../services/userCfgMenu.service';
 import { LoginService } from '../../services/login.service';
-import { PnalFuncionario } from './pnalFuncionario.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 

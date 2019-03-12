@@ -28,8 +28,10 @@ export class FroFacTramiteComponent implements OnInit {
   public tiposIdentificacion: any;
   public tramitesPrecio: any = null;
 
+  public funcionario: any = null;
   public modulo: any = null;
   public ciudadano: any = null;
+  public empresa: any = null;
   public vehiculo: any = null;
   public propietarios: any = null;
 
@@ -37,8 +39,7 @@ export class FroFacTramiteComponent implements OnInit {
   public identificacion: any;
   public vehiculoFiltro: any;
   public tramitePrecioSelected: any = null;
-  public tramitesPrecioSelected: any = []; 
-  public organismoTransito: any = null;
+  public tramitesPrecioArray: any = []; 
   public municipio: any = null;
   public fechaCreacion: any = null;
   public fechaVencimiento: any = null;
@@ -47,6 +48,7 @@ export class FroFacTramiteComponent implements OnInit {
   
   public formIndex = false;
   public formNew = false;
+  public formCiudadano = false;
   public formSearch = true;
   public table: any = null;
 
@@ -65,6 +67,8 @@ export class FroFacTramiteComponent implements OnInit {
   ){}
     
   ngOnInit() {
+    this.factura = new FroFacTramite(null, 0, null, null, null, null, null, null, null); 
+
     swal({
       title: 'Cargando Datos!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -80,11 +84,9 @@ export class FroFacTramiteComponent implements OnInit {
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.organismoTransito = response.data.organismoTransito;
+          this.funcionario = response.data;
 
-          this.factura.numero = datePiper.transform(this.date, 'hmss');
-          this.factura.fechaCreacion = datePiper.transform(this.date, 'yyyy-MM-dd');
-          this.factura.idOrganismoTransito = this.organismoTransito.id;
+          this.factura.idOrganismoTransito = this.funcionario.organismoTransito.id;
 
           this.formNew = true;
         } else {
@@ -138,8 +140,6 @@ export class FroFacTramiteComponent implements OnInit {
     );
 
     this.date = new Date();
-
-    this.factura = new FroFacTramite(null, null, null, null, null, null, null, null, null, null, null);
 
     var datePiper = new DatePipe(this.date);
   }
@@ -221,19 +221,37 @@ export class FroFacTramiteComponent implements OnInit {
 
     let datos = {
       'identificacion': this.identificacion,
-      'tipoIdentificacion': this.tipoIdentificacionSelected,
+      'idTipoIdentificacion': this.tipoIdentificacionSelected,
     }
 
     this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
       response => {
-        if (response.status == 'error') {
-          this.ciudadano = response.datos;
-          this.factura.idCiudadano = this.ciudadano.id;
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.ciudadano = response.data.ciudadano;
+            this.factura.idCiudadano = this.ciudadano.id;
+            this.formCiudadano = false;
+            
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }else{
+            this.formCiudadano = true;
+          }
         } else {
           this.ciudadano = null;
-        }
+          this.formCiudadano = true;
 
-        swal.close();
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
         error => {
           this.errorMessage = <any>error;
           if (this.errorMessage != null) {
@@ -312,24 +330,56 @@ export class FroFacTramiteComponent implements OnInit {
     });
 
     let token = this._LoginService.getToken();
+    console.log(this.tramitesPrecioArray.length);
+    
 
+    if (this.modulo.abreviatura == 'RNC') {
+      if (this.tramitesPrecioArray.length < 1) {
+        this._TramitePrecioService.show({ 'id': this.tramitePrecioSelected }, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              this.tramitePrecioSelected = response.data;
+              this.onCreateArray();
+
+              swal.close();
+            } else {
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          },
+          error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+      }else{
+        swal({
+          title: 'Error!',
+          text: 'Ya tiene un trámite registrado.',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    }
+ 
+    /*
     if (this.modulo.abreviatura == 'RNA') {
       if (!this.propietarios) {
         this._TramitePrecioService.show({ 'id': this.tramitePrecioSelected }, token).subscribe(
           response => {
             this.tramitePrecioSelected = response.data;
+
+            //Valida si el tramite seleccionado es matricula inicial
             if (this.tramitePrecioSelected.tramite.id == 1) {
-              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecioSelected.valorTotal);
-
-              this.tramitesPrecioSelected.push(
-                {
-                  'nombre': this.tramitePrecioSelected.nombre,
-                  'valor': this.tramitePrecioSelected.valorTotal,
-                  'idTramitePrecio': this.tramitePrecioSelected.id,
-                }
-              );
-
-              swal.close();
+              this.onCreateArray();
             } else {
               swal({
                 title: 'Sin propietarios!',
@@ -350,16 +400,16 @@ export class FroFacTramiteComponent implements OnInit {
           }
         );
       } else {
-        /*
-        this._TramitePrecioService.show(token, this.tramitePrecioSelected).subscribe(
+        this._TramitePrecioService.show({ 'id':this.tramitePrecioSelected }, token).subscribe(
           response => {
             this.tramitePrecioSelected = response.data;
 
+            //Valida si el tramite seleccionado es 
             if (this.tramitePrecioSelected.tramite.id == 6) {
 
               this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecioSelected.valorTotal);
 
-              this.tramitesPrecioSelected.push(
+              this.tramitesPrecioArray.push(
                 {
                   'nombre': this.tramitePrecioSelected.nombre,
                   'valor': this.tramitePrecioSelected.valorTotal,
@@ -381,7 +431,7 @@ export class FroFacTramiteComponent implements OnInit {
                 }
               })
 
-              this._PropietarioService.searchByFilter(this.vehiculoCriterio, token).subscribe(
+              this._PropietarioService.searchByFilter(this.vehiculoFiltro, token).subscribe(
                 response => {
                   let datos = {
                     'linea': this.vehiculo.linea.id,
@@ -389,7 +439,7 @@ export class FroFacTramiteComponent implements OnInit {
                     'modelo': this.vehiculo.modelo
                   }
 
-                  this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
+                 /* this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
                     valorVehiculo => {
                       if (valorVehiculo.datos != null) {
                         this.valorRetefuente = parseInt(valorVehiculo.datos.valor) * 0.01;
@@ -433,12 +483,13 @@ export class FroFacTramiteComponent implements OnInit {
                   }
                 });
             } else {
-              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
-              this.tramitesValor.push(
+              this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecioSelected.valorTotal);
+
+              this.tramitesPrecioArray.push(
                 {
-                  'idTramitePrecio': this.tramitePrecio.id,
-                  'nombre': this.tramitePrecio.nombre,
-                  'valor': this.tramitePrecio.valorTotal
+                  'nombre': this.tramitePrecioSelected.nombre,
+                  'valor': this.tramitePrecioSelected.valorTotal,
+                  'idTramitePrecio': this.tramitePrecioSelected.id,
                 }
               )
             }
@@ -452,14 +503,18 @@ export class FroFacTramiteComponent implements OnInit {
               alert("Error en la petición");
             }
           }
-        );*/
+        );
       }
     } else {
+      if (this.modulo.abreviatura == 'RNC') {
+        
+      }
+
       this._TramitePrecioService.show(token, this.tramitePrecioSelected).subscribe(
         response => {
           this.tramitePrecioSelected = response.data;
           this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecioSelected.valorTotal);
-          this.tramitesPrecioSelected.push(
+          this.tramitesPrecioArray.push(
             {
               'nombre': this.tramitePrecioSelected.nombre,
               'valor': this.tramitePrecioSelected.valorTotal,
@@ -477,21 +532,30 @@ export class FroFacTramiteComponent implements OnInit {
         }
       );
     }
+    */
+  }
+
+  onCreateArray(){
+    this.factura.valor = this.factura.valor + parseInt(this.tramitePrecioSelected.valorTotal);
+
+    this.tramitesPrecioArray.push(
+      {
+        'nombre': this.tramitePrecioSelected.nombre,
+        'valor': this.tramitePrecioSelected.valorTotal,
+        'id': this.tramitePrecioSelected.id,
+      }
+    );
   }
 
   onDeleteTramite(tramiteValor) {
-    this.factura.valorBruto = this.factura.valorBruto - parseInt(tramiteValor.valor);
-    this.tramitesPrecioSelected = this.tramitesPrecioSelected.filter(h => h !== tramiteValor);
+    this.factura.valor = this.factura.valor - parseInt(tramiteValor.valor);
+    this.tramitesPrecioArray = this.tramitesPrecioArray.filter(h => h !== tramiteValor);
   }
 
   onNew() {
     this.formNew = true;
     this.formIndex = false;
     this.formSearch = false;
-
-    this.factura = new FroFacTramite(null, null, null, null, null, null, null, null, null, null, null);
-
-    
   }
 
   onCancelar(){
@@ -504,7 +568,7 @@ export class FroFacTramiteComponent implements OnInit {
   onEnviar() {
     let token = this._LoginService.getToken();
 
-    //this.factura.comparendos = this.comparendosSelect;
+    this.factura.tramites = this.tramitesPrecioArray;
     //Tipo de recaudo infracciones
     this.factura.idTipoRecaudo = 1;
 
@@ -512,10 +576,6 @@ export class FroFacTramiteComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.factura.id = response.data.id;
-          this.municipio = response.data.sedeOperativa.municipio.nombre;
-          this.fechaCreacion = response.data.fechaCreacion;
-          this.fechaVencimiento = response.data.fechaVencimiento;
-          this.facturaNumero = response.data.numero;
 
           swal({
             title: 'Perfecto!',

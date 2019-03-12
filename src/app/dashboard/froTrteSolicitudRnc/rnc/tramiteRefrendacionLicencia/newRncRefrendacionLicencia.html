@@ -1,0 +1,63 @@
+<div class="row">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="m-0">
+                    Refrendacion de licencia
+                </h5>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <form>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Conductor</label>
+                            <input type="text" class="form-control" value="{{ solicitante.primerNombre }} {{ solicitante.primerApellido }}" name="solicitante" readonly>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Identificación</label>
+                            <input type="text" class="form-control" value="{{ solicitante.identificacion }}" name="solicitante_identificacion" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Categoria a refrendar <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="datos.idCategoria" name="categoria" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Clase vehiculo <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="datos.idClase" name="clase" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Servicio <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="datos.idServicio" name="servicio" required>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Vigencia <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.vigencia" name="vigencia" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Número de Licencia <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="solicitante.identificacion" name="numeroLicencia" type="text" required readonly />
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Número solicitud RUNT <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

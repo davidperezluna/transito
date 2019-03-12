@@ -1,5 +1,75 @@
 <div class="container" >
   <hr>
+  <div class="row" *ngIf='formSearch'>
+    <div class="col-xs-12 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="text-uppercase">Buscar de personal</h5>
+          <small></small>
+          <hr>
+          <form #formSearch="ngForm">
+            <div class="form-group">
+              <div class="row"><!-- .row -->
+                <div class="col-xs-12 col-lg-3">
+                  <label>Nombre</label>
+                  <input class="form-control" [(ngModel)]="nombre" name="nombre" type="text">
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                  <label>Identificación</label>
+                  <input class="form-control" [(ngModel)]="identificacion" name="identificacion" type="text">
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                  <label>Cargo</label>
+                  <ng-select [multiple]="false" [options]="cargos" [(ngModel)]="cargoSelected" name="cargos">
+                  </ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                  <label>Sede</label>
+                  <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeOperativaSelected" name="sedeOperativa">
+                  </ng-select>
+                </div>
+              </div><!-- /.row -->
+              <div class="row"><!-- .row -->
+                <div class="col-xs-12 col-lg-3">
+                  <label>Tipo contrato</label>
+                  <ng-select (ngModelChange)="onChangedTipoContrato($event)" [multiple]="false" [options]="tiposContrato" [(ngModel)]="tipoContratoSelected"
+                    name="tiposContrato">
+                  </ng-select>
+                </div>
+                <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
+                  <label>Numero de contrato </label>
+                  <input class="form-control" [(ngModel)]="datos.numeroContrato" name="numeroContrato" type="text" />
+                </div>
+                <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
+                  <label>Fecha inicio </label>
+                  <input class="form-control" [(ngModel)]="datos.fechaInicio" name="fechaInicio" type="date" />
+                </div>
+                <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
+                  <label>Fecha fin </label>
+                  <input class="form-control" [(ngModel)]="datos.fechaFin" name="fechaFin" type="date" />
+                </div>
+                <div *ngIf='tipoContratoSelected == 1' class="col-xs-12 col-lg-3">
+                  <label>Nombramiento</label>
+                  <input class="form-control" [(ngModel)]="datos.nombramiento" name="nombramiento" type="text" />
+                </div>
+              </div><!-- /.row -->
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+            <i class="fa fa-search"></i>
+            Buscar
+          </button>
+          <button (click)="onNew()" (ready)="ready($event)" class="btn btn-info" type="button">
+            <i class="fa fa-plus"></i>
+            Nuevo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row" *ngIf='formIndex'>
     <div class="col-md-12">
         <div class="card">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TramiteSolicitudRncService } from '../../services/tramiteSolicitudRnc.service';
+import { FroTrteSolicitudRncService } from '../../services/tramiteSolicitudRnc.service';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../services/userCiudadano.service';
@@ -31,7 +31,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
   public moduloId = 1;
 
   constructor(
-    private _TramiteSolicitudRncService: TramiteSolicitudRncService,
+    private _FroTrteSolicitudRncService: FroTrteSolicitudRncService,
     private _TramiteSolicitudService: TramiteSolicitudService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _UserCiudadanoService: UserCiudadanoService,
@@ -169,7 +169,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TramiteSolicitudRncService.delete(token,id).subscribe(
+        this._FroTrteSolicitudRncService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

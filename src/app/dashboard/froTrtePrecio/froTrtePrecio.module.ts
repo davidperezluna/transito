@@ -10,7 +10,6 @@ import { ModuloService } from "../../services/modulo.service";
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
-
 import { TooltipModule } from "ngx-tooltip";
  
 @NgModule({

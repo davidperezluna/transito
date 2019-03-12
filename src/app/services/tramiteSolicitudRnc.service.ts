@@ -4,8 +4,8 @@ import { environment } from 'environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class TramiteSolicitudRncService {
-	private url = environment.apiUrl + "tramitesolicitud";
+export class FroTrteSolicitudRncService {
+	private url = environment.apiUrl + "financiero/frotrtesolicitud";
 	public identity;
 	public token;
 
@@ -17,7 +17,7 @@ export class TramiteSolicitudRncService {
 
 	register(tramiteSolicitud, token) {
 		let json = JSON.stringify(tramiteSolicitud);
-		let params = 'json=' + json + '&authorization=' + token;
+		let params = 'data=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + '/new', params, { headers: headers }).map(res => res.json());
 	}
@@ -42,7 +42,7 @@ export class TramiteSolicitudRncService {
 
 	edit(tramiteSolicitud, token) {
 		let json = JSON.stringify(tramiteSolicitud);
-		let params = 'json=' + json + '&authorization=' + token;
+		let params = 'data=' + json + '&authorization=' + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + '/edit', params, { headers: headers }).map(res => res.json());
 	}

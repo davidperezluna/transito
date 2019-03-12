@@ -19,7 +19,10 @@ import { VhloCfgColorRoutes } from './vhloCfgColor/vhloCfgColor.routes';
 import { VhloCfgCombustibleRoutes } from './vhloCfgCombustible/vhloCfgCombustible.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { ModalidadRoutes } from './modalidad/modalidad.routes';
+
+import { FroTrteSolicitudRncRoutes } from './froTrteSolicitudRnc/froTrteSolicitudRnc.routes';
 import { FroTrteCfgCuentaRoutes } from './froTrteCfgCuenta/froTrteCfgCuenta.routes';
+
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { VhloCfgServicioRoutes } from './vhloCfgServicio/vhloCfgServicio.routes';
 import { AlmacenRoutes } from './almacen/almacen.routes';
@@ -155,6 +158,8 @@ import { PqoGruaCiudadanoRoutes } from './pqoGruaCiudadano/pqoGruaCiudadano.rout
 import { PqoInmovilizacionRoutes } from './pqoInmovilizacion/pqoInmovilizacion.routes';
 import { MparqCostoTrayectoRoutes } from './mparqCostoTrayecto/mparqCostoTrayecto.routes';
 
+import { PnalCfgCargoRoutes } from './pnalCfgCargo/pnalCfgCargo.routes';
+import { PnalCfgTipoNombramientoRoutes } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.routes';
 import { PnalFuncionarioRoutes } from './pnalFuncionario/pnalFuncionario.routes';
 
 import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
@@ -281,6 +286,8 @@ export const DashboardRoutes: Route[] = [
       ...CfgLicenciaConduccionCategoriaRoutes,
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
+      ...PnalCfgCargoRoutes,
+      ...PnalCfgTipoNombramientoRoutes,
       ...PnalFuncionarioRoutes,
       ...CfgCargoRoutes,
       ...CfgTipoInfractorRoutes,
@@ -310,6 +317,7 @@ export const DashboardRoutes: Route[] = [
       ...MpersonalTipoContratoRoutes,
       ...MpersonalTalonarioRoutes,
       ...MpersonalAsignacionRoutes,
+      ...FroTrteSolicitudRncRoutes,
       ...FroTrteCfgCuentaRoutes,
       ...TramiteRoutes,
       ...AlmacenRoutes,

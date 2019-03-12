@@ -5,9 +5,7 @@
             <div class="card">
                 <!-- .card -->
                 <div class="card-header">
-                    <h5 class="card-title">
-                        <b class="text-uppercase">Nueva factura de trámites</b>
-                    </h5>
+                    <b class="text-uppercase">Nueva factura de trámites</b>
                 </div>
                 <div class="card-body">
                     <!-- .card-body -->
@@ -24,11 +22,7 @@
                                 </td>
                                 <td>
                                     <strong>Sede operativa</strong>
-                                    <br>{{ organimsoTransito.nombre }}
-                                </td>
-                                <td>
-                                    <strong>Fctura No.</strong>
-                                    <br>{{ factura.numero }}
+                                    <br>{{ funcionario.organismoTransito.nombre }}
                                 </td>
                                 <td>
                                     <strong>Fecha vencimiento</strong>
@@ -52,19 +46,18 @@
 
                     <hr>
 
-                    <div class="form-group" *ngIf="tramitesPrecio.length > 0 && modulo">
+                    <div class="form-group" *ngIf="modulo">
                         <div class="row">
                             <!-- .row -->
                             <div class="col-xs-12 col-lg-12">
                                 <b class="text-uppercase">Buscar solicitante</b>
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-4">
-                                        <ng-select [multiple]="false" placeholder="Tipo Identificación" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required>
-                                        </ng-select>
+                                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required></ng-select>
                                     </div>
-                                    <div class="col-xs-12 col-lg-4">
+                                    <div class="col-xs-12 col-lg-3">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="numeroIdentificacion" required />
+                                            <input type="text" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
                                             <span class="input-group-btn">
                                                 <button (click)="onSearchCiudadano()" class="btn btn-default btn-success"
                                                     type="button">
@@ -80,7 +73,7 @@
 
                         <div class="row">
                             <!-- .row -->
-                            <div class="container col-xs-12 col-lg-12" *ngIf='ciudadano'>
+                            <div class="col-xs-12 col-lg-12" *ngIf='ciudadano'>
                                 <table class="table table-bordered table-striped">
                                     <tbody>
                                         <tr class="odd">
@@ -99,10 +92,10 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table>    
                             </div>
 
-                            <app-new-ciudadano *ngIf='!ciudadano' [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion"></app-new-ciudadano>
+                            <app-new-ciudadano *ngIf='formCiudadano' [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion"></app-new-ciudadano>
                         </div>
                         <!-- /.row -->
                     </div>
@@ -184,11 +177,11 @@
                     </div>
                     <!-- /.form-group -->
 
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="vehiculo || ciudadano">
                         <!-- .form-group -->
                         <div class="row">
                             <!-- .row -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="vehiculo || ciudadano">
+                            <div class="col-xs-12 col-lg-6">
                                 <label>Trámites</label>
                                 <ng-select [multiple]="false" [options]="tramitesPrecio" [(ngModel)]="tramitePrecioSelected" required name="tramitePrecioId">
                                 </ng-select>
@@ -284,11 +277,11 @@
                     </div>
                     <!-- /.form-group -->
 
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="tramitesPrecioArray?.length > 0">
                         <!-- .form-group -->
                         <div class="row">
                             <!-- .row -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="tramitesValor?.length > 0">
+                            <div class="col-xs-12 col-lg-12">
                                 <table class="table table-bordered table-striped table-hover" id="dataTables-example">
                                     <thead>
                                         <tr class="text-center text-uppercase">
@@ -298,12 +291,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd" *ngFor="let tramiteValor of tramitesValor; let i = index">
-                                            <td>{{tramiteValor.nombre}}</td>
-                                            <td *ngIf='tramiteValor.valor'>{{ tramiteValor.valor | currency: 'COP' }}</td>
-                                            <td *ngIf='!tramiteValor.valor'>{{ 0 | currency: 'COP' }}</td>
+                                        <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecioArray; let i = index">
+                                            <td>{{tramitePrecio.nombre}}</td>
+                                            <td *ngIf='tramitePrecio.valor'>{{ tramitePrecio.valor | currency: 'COP' }}</td>
+                                            <td *ngIf='!tramitePrecio.valor'>{{ 0 | currency: 'COP' }}</td>
                                             <td>
-                                                <button (click)="onDeleteTramite(tramiteValor)" class="btn btn-xs btn-danger" type="button">
+                                                <button (click)="onDeleteTramite(tramitePrecio)" class="btn btn-xs btn-danger" type="button">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
@@ -317,7 +310,7 @@
                     <!-- /.form-group -->
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer" *ngIf="tramitesValor && tramitesValor?.length > 0">
+                <div class="card-footer" *ngIf="tramitesPrecioArray && tramitesPrecioArray.length > 0">
                     <!-- .card-footer -->
                     <div class="btn-group">
                         <button (click)="onEnviar()" class="btn btn-primary" type="button">
@@ -328,15 +321,18 @@
                             <i class="fa fa-times"></i>
                             Cancelar
                         </button>
-                        <a (click)="onImprimir()" class="btn btn-success" target="_blank">
-                            <i class="fa fa-file-pdf-o"></i>
-                            Previsualizar
-                        </a>
                     </div>
                 </div>
                 <!-- /.card-footer -->
             </div>
             <!-- /.card -->
         </form>
+    </div>
+
+    <div class="row" *ngIf="factura.id">
+        <a href="{{ apiUrl }}/froFactura/1/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
+            <i class="fa fa-file-pdf-o"></i>
+            Generar PDF
+        </a>
     </div>
 </div>

@@ -203,6 +203,8 @@ import { GdCfgMedioCorrespondenciaModule } from './gdCfgMedioCorrespondencia/gdC
 import { MflInfraccionModule } from './mflInfraccion/mflInfraccion.module';
 import { MflInfraccionCategoriaModule } from './mflInfraccionCategoria/mflInfraccionCategoria.module';
 
+import { PnalCfgCargoModule } from './pnalCfgCargo/pnalCfgCargo.module';
+import { PnalCfgTipoNombramientoModule } from './pnalCfgTipoNombramiento/pnalCfgTipoNombramiento.module';
 import { PnalFuncionarioModule } from './pnalFuncionario/pnalFuncionario.module';
 
 import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
@@ -216,7 +218,9 @@ import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasign
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 
+import { FroTrteSolicitudRncModule } from './froTrteSolicitudRnc/froTrteSolicitudRnc.module';
 import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.module';
+
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
 import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
@@ -359,12 +363,15 @@ import {RightsidebarComponent} from '../shared';
     PqoGruaCiudadanoModule,
     PqoInmovilizacionModule,
     MparqCostoTrayectoModule,
+    PnalCfgCargoModule,
+    PnalCfgTipoNombramientoModule,
     PnalFuncionarioModule,
     CfgCargoModule,
     MpersonalFuncionarioModule,
     MpersonalTipoContratoModule,
     MpersonalTalonarioModule,
     MpersonalAsignacionModule,
+    FroTrteSolicitudRncModule,
     FroTrteCfgCuentaModule,
     VhloPropietarioModule,
     VhloCfgCarroceriaModule,

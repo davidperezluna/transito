@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { TramiteSolicitudRnc } from '../tramiteSolicitudRnc.modelo';
-import { TramiteSolicitudRncService } from '../../../services/tramiteSolicitudRnc.service';
+import { FroTrteSolicitudRncService } from '../../../services/tramiteSolicitudRnc.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
@@ -44,7 +44,7 @@ export class NewRncComponent implements OnInit {
   public cantidadSustrato = 1;
 
 constructor(
-  private _TramiteSolicitudRncService: TramiteSolicitudRncService,
+  private _FroTrteSolicitudRncService: FroTrteSolicitudRncService,
   private _loginService: LoginService,
   private _TramiteFacturaService: TramiteFacturaService,
   private _FacturaService: FacturaService,
@@ -124,7 +124,7 @@ constructor(
     
     this.tramiteSolicitud.tramiteFacturaId = this.tramiteFacturaSelected;
 
-		this._TramiteSolicitudRncService.register(this.tramiteSolicitud, token).subscribe(
+		this._FroTrteSolicitudRncService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);
@@ -161,7 +161,7 @@ constructor(
     this.tramiteSolicitud.datos=datos;
 
     let token = this._loginService.getToken();
-    this._TramiteSolicitudRncService.register(this.tramiteSolicitud, token).subscribe(
+    this._FroTrteSolicitudRncService.register(this.tramiteSolicitud, token).subscribe(
       response => {
         if (response.status == 'success') {
           swal({

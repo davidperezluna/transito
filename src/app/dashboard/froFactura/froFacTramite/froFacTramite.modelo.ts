@@ -1,10 +1,8 @@
 export class FroFacTramite{
 	constructor(
-		public fechaCreacion: string,
-		public fechaVencimiento: string,
-		public numero: string,
-		public valorBruto: number,
-		public estado: boolean,
+		public valor: number,
+		public interes: number,
+		public tramites: string,
 		public idModulo: boolean,
 		public idTipoRecaudo: number,
 		public idVehiculo: number,

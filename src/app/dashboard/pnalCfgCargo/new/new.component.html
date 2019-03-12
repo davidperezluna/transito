@@ -1,0 +1,51 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo cargo</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm"> 
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <input class="form-control text-uppercase" [(ngModel)]="cargo.nombre" name="nombre" type="text" required autofocus />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="cargo.horarios" class="custom-control-input" id="horarios" name="horarios">
+                                <label class="custom-control-label" for="horarios">Requiere horarios</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="cargo.prorroga" class="custom-control-input" id="prorroga" name="prorroga">
+                                <label class="custom-control-label" for="prorroga">Requiere prorroga</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" [(ngModel)]="cargo.gestionable" class="custom-control-input" id="gestionable" name="gestionable">
+                                <label class="custom-control-label" for="gestionable">Gestionable</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
