@@ -19,7 +19,7 @@ export class EditComponent implements OnInit {
     public organismosTransito: any;
 
     public municipioSelected: any;
-    public sedeOperativaSelected: any;
+    public organismoTransitoSelected: any;
 
     public formReady = false;
 
@@ -52,7 +52,7 @@ export class EditComponent implements OnInit {
             response => {
                 this.organismosTransito = response;
                 setTimeout(() => {
-                    this.sedeOperativaSelected = [this.hospital.sedeOperativa.id];
+                    this.organismoTransitoSelected = [this.hospital.organismoTransito.id];
                 });
             },
             error => {
@@ -71,7 +71,7 @@ export class EditComponent implements OnInit {
     onEnviar() {
         let token = this._loginService.getToken();
         this.hospital.municipio = this.municipioSelected;
-        this.hospital.sedeOperativa = this.sedeOperativaSelected;
+        this.hospital.organismoTransito = this.organismoTransitoSelected;
         this._HospitalService.edit(this.hospital, token).subscribe(
             response => {
                 if (response.status == 'success') {

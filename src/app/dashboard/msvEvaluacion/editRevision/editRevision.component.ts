@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { MsvRevisionService } from '../../../services/msvRevision.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { MsvEvaluacionService } from "../../../services/msvEvaluacion.service";
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -21,7 +21,7 @@ export class EditRevisionComponent implements OnInit {
 
     constructor(
         private _RevisionService: MsvRevisionService,
-        private _MsvPersonalFuncionarioService: MpersonalFuncionarioService,
+        private _PnalFuncionarioService: PnalFuncionarioService,
         private _MsvEvaluacionService: MsvEvaluacionService,
         private _LoginService: LoginService,
     ) { }
@@ -42,7 +42,7 @@ export class EditRevisionComponent implements OnInit {
             }
         );
         
-        this._MsvPersonalFuncionarioService.selectContratistas().subscribe(
+        this._PnalFuncionarioService.selectContratistas().subscribe(
             response => {
                 this.contratistas = response;
                 setTimeout(() => {
