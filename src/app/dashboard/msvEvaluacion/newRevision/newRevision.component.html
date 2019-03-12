@@ -10,6 +10,10 @@
                 <form #formNew="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
+                            <label>No. de Radicado <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="msvRevision.numeroRadicado" name="numeroRadicado" type="number" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
                             <label>Fecha recepción <strong class="text-danger">*</strong></label>
                             <input class="form-control" (blur)="onCalcularDevolucion()" [(ngModel)]="msvRevision.fechaRecepcion" name="fechar" type="date" required />
                         </div>
@@ -63,13 +67,13 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancel
-                    </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Guardar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel
                     </button>
                 </div>
             </div>

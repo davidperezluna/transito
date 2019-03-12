@@ -10,6 +10,10 @@
                 <form #formEditRevision="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
+                            <label>No. de Radicado <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="msvRevision.numeroRadicado" name="numeroRadicado" type="number" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
                             <label>Fecha recepción <strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="msvRevision.fechaRecepcion" name="fechar"
                                 type="date" required />

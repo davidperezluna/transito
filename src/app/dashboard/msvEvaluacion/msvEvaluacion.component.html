@@ -62,6 +62,8 @@
                            <table class="table table-bordered">
                               <thead>
                                  <tr>
+                                    <th><b>Número Radicado</b></th>
+                                    <th><b>Consecutivo</b></th>
                                     <th><b>Fecha de recepción</b></th>
                                     <th><b>Fecha de revisión</b></th>
                                     <th><b>Fecha de devolución</b></th>
@@ -76,6 +78,12 @@
                               </thead>
                               <tbody>
                                  <tr class="odd" *ngFor="let revision of revisiones; let i = index">
+                                    <td>
+                                       {{revision.numeroRadicado}}
+                                    </td>
+                                    <td>
+                                       {{revision.consecutivo}}
+                                    </td>
                                     <td>
                                        {{revision.fechaRecepcion}}
                                     </td>
@@ -154,6 +162,7 @@
                               </tbody>
                            </table>
                         </div>
+                        
                         <div class="card-body" *ngIf="miEmpresa && mostrarTablaEvaluacion">
                            <label>Categoria <strong class="text-danger">*</strong></label>
                            <ng-select [multiple]="false" [options]="msvCategorias"
@@ -329,7 +338,7 @@
                                        <div class="card-footer">
                                           <div class="btn-group">
                                              <button (click)="onFinalizar()"
-                                                *ngIf="datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null"
+                                                *ngIf="!evaluacion && datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null"
                                                 class="btn btn-default">
                                                 <i class="fa fa-check"></i>
                                                 Finalizar y Enviar
@@ -341,6 +350,11 @@
                               </div>
                            </div>
                         </div>
+                        <a href="{{ apiUrl }}/{{ idUsuario }}/{{ evaluacion.id }}/aval/pdf" class="btn btn-success" target="_blank" *ngIf="evaluacion">
+                           <i class="fa fa-file-pdf-o"></i>
+                           Imprimir
+                        </a>
+                        
                         <!-- fin detalles de la empresa -->
                      </div>
                   </div>
