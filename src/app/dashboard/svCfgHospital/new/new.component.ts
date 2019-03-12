@@ -16,34 +16,17 @@ export class NewComponent implements OnInit {
     public errorMessage;
     public respuesta;
 
-    public municipios: any;
     public organismosTransito: any;
-
-    public municipioSelected: any;
     public organismoTransitoSelected: any;
 
     constructor(
         private _HospitalService: SvCfgHospitalService,
         private _loginService: LoginService,
-        private _MunicipioService: CfgMunicipioService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 
     ngOnInit() {
-        this.hospital = new SvCfgHospital(null, null, null, null);
-        this._MunicipioService.select().subscribe(
-            response => {
-                this.municipios = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
+        this.hospital = new SvCfgHospital(null, null, null);
         this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
                 this.organismosTransito = response;
@@ -65,7 +48,6 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.hospital.municipio = this.municipioSelected;
         this.hospital.organismoTransito = this.organismoTransitoSelected;
         
         this._HospitalService.register(this.hospital, token).subscribe(

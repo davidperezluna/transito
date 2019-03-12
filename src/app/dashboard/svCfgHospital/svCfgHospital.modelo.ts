@@ -3,6 +3,5 @@ export class SvCfgHospital {
         public id: number,
         public nombre: string,
         public organismoTransito: number,
-        public municipio: number
     ) { }
 }
