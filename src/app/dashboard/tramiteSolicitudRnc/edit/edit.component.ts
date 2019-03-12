@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { FroTrteSolicitudRncService } from '../../../services/tramiteSolicitudRnc.service';
+import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -18,7 +18,7 @@ export class EditComponent implements OnInit{
   public tramiteFacturaSelected: any;
 
 constructor(
-  private _tramiteSolicitudRncService: FroTrteSolicitudRncService,
+  private _tramiteSolicitudRncService: TramiteSolicitudService,
   private _loginService: LoginService,
   private _tramiteFacturaService: TramiteFacturaService,
   ){}
@@ -43,7 +43,7 @@ constructor(
 
   onEnviar(){
     let token = this._loginService.getToken();
-		this._tramiteSolicitudRncService.edit(this.tramiteSolicitud,token).subscribe(
+		this._tramiteSolicitudRncService.editTramiteSolicitud(this.tramiteSolicitud,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

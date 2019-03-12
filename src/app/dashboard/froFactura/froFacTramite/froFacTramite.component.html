@@ -329,10 +329,17 @@
         </form>
     </div>
 
-    <div class="row" *ngIf="factura.id">
-        <a href="{{ apiUrl }}/froFactura/1/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
-            <i class="fa fa-file-pdf-o"></i>
-            Generar PDF
-        </a>
+    <div class="col-xs-12 col-lg-12" *ngIf="factura.id">
+        <div class="card"><!-- .card -->
+            <div class="card-header">
+                <b class="text-uppercase">Factura # {{ factura.numero }}</b>
+            </div>
+            <div class="card-body">
+                <a href="{{ apiUrl }}/froFactura/1/{{ factura.id }}/pdf" class="btn btn-success" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    Generar PDF
+                </a>
+            </div>
+        </div><!-- /.card -->
     </div>
 </div>

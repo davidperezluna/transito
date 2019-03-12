@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FroTrteSolicitudRncService } from '../../services/froTrteSolicitudRnc.service';
+import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
 import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../services/userCiudadano.service';
 import { LoginService } from '../../services/login.service';
@@ -20,37 +20,36 @@ export class FroTrteSolicitudRncComponent implements OnInit {
   public tiposIdentificacion:any;
 	public tramitesSolicitud;
   public tipoIdentificacionSelected: any;
+
 	public formNew = false;
 	public formEdit = false;
-  public formSearch = false;
+  public formIndex = false;
+  public formSearchSolicitante = false;
+  public formSearch = true;
+
   public solicitanteEncontrado = 1;
-  public formIndex = true;
-  public table: any;
+  public table: any = null;
   public tramiteSolicitud: FroTrteSolicitudRnc;
   public moduloId = 1;
 
+  public search: any = {
+    'tipoFiltro': null,
+    'filtro': null,
+  }
+
+  public tiposFiltro = [
+    { 'value': '1', 'label': 'No. factura' },
+    { 'value': '2', 'label': 'Fecha' },
+  ];
+
   constructor(
-    private _SolicitudRncService: FroTrteSolicitudRncService,
+    private _SolicitudRncService: FroTrteSolicitudService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _UserCiudadanoService: UserCiudadanoService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
-    swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    });
-
     /*this._SolicitudRncService.getByModulo(this.moduloId).subscribe(
 				response => {
           this.tramitesSolicitud = response.data;
@@ -69,6 +68,61 @@ export class FroTrteSolicitudRncComponent implements OnInit {
       );*/
   }
 
+  onSearch() {
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+    this.formSearchSolicitante = false;
+
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._UserCiudadanoService.searchByFiltros(this.search, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.tramitesSolicitud = response.data;
+          this.formIndex = true;
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
+        } else {
+          this.tramitesSolicitud = null;
+
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  }
+
   iniciarTabla(){
     $('#dataTables-example').DataTable({
       responsive: true,
@@ -83,6 +137,7 @@ export class FroTrteSolicitudRncComponent implements OnInit {
         }
       }
    });
+
    this.table = $('#dataTables-example').DataTable();
   }
 
@@ -103,7 +158,10 @@ export class FroTrteSolicitudRncComponent implements OnInit {
     this.formSearch = true;
     this.formNew = false;
     this.formIndex = false;
-    this.table.destroy();
+
+    if (this.table) {
+      this.table.destroy();
+    }
   }
 
   ready(isCreado: any){
@@ -117,7 +175,7 @@ export class FroTrteSolicitudRncComponent implements OnInit {
   }
 
   onSearchSolicitante(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     this._UserCiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.identificacion},token).subscribe(
       response => {          
         if(response.status == 'success'){ 
@@ -155,7 +213,7 @@ export class FroTrteSolicitudRncComponent implements OnInit {
     );
   }
 
-  deleteFroTrteSolicitudRnc(id: any){
+  onDelete(id: any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -167,7 +225,7 @@ export class FroTrteSolicitudRncComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._SolicitudRncService.delete(token,id).subscribe(
             response => {
                 swal({
@@ -193,7 +251,7 @@ export class FroTrteSolicitudRncComponent implements OnInit {
     })
   }
 
-  editFroTrteSolicitudRnc(tramiteSolicitud: any){
+  onEdit(tramiteSolicitud: any){
     this.tramiteSolicitud = tramiteSolicitud;
     this.formEdit = true;
     this.formIndex = false;

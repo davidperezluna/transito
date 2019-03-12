@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FroTrteSolicitudRncService } from '../../services/tramiteSolicitudRnc.service';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
 import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../services/userCiudadano.service';
@@ -28,14 +27,12 @@ export class TramiteSolicitudRncComponent implements OnInit {
   public formIndex = true;
   public table: any;
   public tramiteSolicitud: TramiteSolicitudRnc;
-  public moduloId = 1;
 
   constructor(
-    private _FroTrteSolicitudRncService: FroTrteSolicitudRncService,
     private _TramiteSolicitudService: TramiteSolicitudService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _UserCiudadanoService: UserCiudadanoService,
-		private _loginService: LoginService,
+		private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
@@ -52,6 +49,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
       ) {
       }
     });
+    /*
     this._TramiteSolicitudService.getByModulo(this.moduloId).subscribe(
 				response => {
           this.tramitesSolicitud = response.data;
@@ -67,7 +65,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
 						alert("Error en la petición");
 					}
 				}
-      );
+      );*/
   }
 
   iniciarTabla(){
@@ -118,7 +116,7 @@ export class TramiteSolicitudRncComponent implements OnInit {
   }
 
   onSearchSolicitante(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     this._UserCiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.identificacion},token).subscribe(
       response => {          
         if(response.status == 'success'){ 
@@ -168,8 +166,8 @@ export class TramiteSolicitudRncComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
-        this._FroTrteSolicitudRncService.delete(token,id).subscribe(
+        let token = this._LoginService.getToken();
+        this._TramiteSolicitudService.deleteTramiteSolicitud(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
