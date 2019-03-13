@@ -264,7 +264,7 @@ export class NewSenialUbicacionComponent implements OnInit {
             });
             this.demarcacionNew.total = 0;
         } else {
-            this.demarcacionNew.total = (ancho / 100) * largo;
+            this.demarcacionNew.total = ancho * largo;
         }
     }
 
