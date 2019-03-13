@@ -9,8 +9,8 @@
                 <div class="form-group row">
                     <div class="col-lg-12 col-md-16">
                         <label>Sede*</label>
-                        <ng-select placeholder="Seleccione una Sede Operativa"  [disabled]="true" [multiple]="false" [options]="organismosTransito" [(ngModel)]="sedeOperativaSelected"
-                            (ngModelChange)="changedSedeOperativa($event)" required name="bancoId">
+                        <ng-select placeholder="Seleccione un organismo tránsito"  [disabled]="true" [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected"
+                            (ngModelChange)="changedOrganismoTransito($event)" required name="idOrganismoTransito">
                         </ng-select>
                     </div>
                     <!--
@@ -19,7 +19,7 @@
                     <input class="form-control" [(ngModel)]="comparendo.numeroOrden" name='numeroOrden' type="text" required>
                   </div>-->
 
-                    <div class="col-lg-12 col-md-16" *ngIf="sedeOperativaSuccess">
+                    <div class="col-lg-12 col-md-16" *ngIf="organismoTransitoSuccess">
                         <hr>
                         <div class="row">
                             <div class="col-xs-12 col-lg-4">

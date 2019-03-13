@@ -5,6 +5,6 @@ export class MsvTalonario{
 		public total:number,
 		public nResolucion:string,
 		public fechaAsignacion: string,
-		public sedeOperativaId:number
+		public idOrganismoTransito:number
 	){}
 }

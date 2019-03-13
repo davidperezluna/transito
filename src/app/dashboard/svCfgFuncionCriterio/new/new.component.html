@@ -9,10 +9,10 @@
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
                         <label>Nombre <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="funcionCriterio.nombre" name="nombre" required />
+                        <input style="text-transform:uppercase" type="text" class="form-control" [(ngModel)]="funcionCriterio.nombre" name="nombre" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Funcion Id <strong class="text-danger">*</strong></label>
+                        <label>Función <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" required name="funcion"></ng-select>
                     </div>
                 </div>

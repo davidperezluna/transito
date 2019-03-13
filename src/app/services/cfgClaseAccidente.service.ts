@@ -25,8 +25,8 @@ export class CfgClaseAccidenteService {
 			.map(res => res.json());
 	}
 
-	deleteCfgClaseAccidente(token, id) {
-		let json = JSON.stringify(id);
+	deleteCfgClaseAccidente(datos, token) {
+		let json = JSON.stringify(datos);
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/delete", params, { headers: headers })

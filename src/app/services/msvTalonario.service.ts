@@ -40,7 +40,7 @@ export class MsvTalonarioService {
 
 	}
 
-	showMsvTalonarioPorSedeOperativa(token, id) {
+	showMsvTalonarioPorOrganismoTransito(token, id) {
 
 		let params = "authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });

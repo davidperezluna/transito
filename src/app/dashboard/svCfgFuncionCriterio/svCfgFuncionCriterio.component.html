@@ -22,7 +22,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
-                                <th>Función Id</th>
+                                <th>Función</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -30,7 +30,7 @@
                             <tr class="odd" *ngFor="let funcionCriterio of funcionesCriterio; let i = index">
                                 <td>{{ funcionCriterio.id }}</td>
                                 <td>{{ funcionCriterio.nombre }}</td>
-                                <td>{{ funcionCriterio.funcionId }}</td>
+                                <td>{{ funcionCriterio.funcion.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(funcionCriterio)" class="btn btn-xs btn-info" type="button">
                                         <i class="fa fa-edit"></i>

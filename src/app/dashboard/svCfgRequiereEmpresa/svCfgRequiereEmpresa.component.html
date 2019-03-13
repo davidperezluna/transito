@@ -21,7 +21,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Clase Id</th>
+                                <th>Clase Vehiculo</th>
                                 <th>Carroceria</th>
                                 <th>Nombre</th>
                                 <th>Acciones</th>
@@ -30,7 +30,7 @@
                         <tbody>
                             <tr class="odd" *ngFor="let requiereEmpresa of requierenEmpresa; let i = index">
                                 <td>{{ requiereEmpresa.id }}</td>
-                                <td>{{ requiereEmpresa.carroceria.clase.id }}</td>
+                                <td>{{ requiereEmpresa.carroceria.clase.nombre }}</td>
                                 <td>{{ requiereEmpresa.carroceria.nombre }}</td>
                                 <td>{{ requiereEmpresa.nombre }}</td>
                                 <td>
