@@ -83,19 +83,19 @@
                         <input (blur)="onCalcularTotalArea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.cantidad" name="cantidad" />
                     </div>
                     <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 1">
-                        <label>Area <small>(m2)</small> <strong class="text-danger">*</strong></label>
+                        <label>Area <small>(mts2)</small> <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalArea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.area" name="area" />
                     </div>
                     <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 2">
-                        <label>Ancho <small>(cm)</small> <strong class="text-danger">*</strong></label>
+                        <label>Ancho <small>(mts)</small> <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalLinea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.ancho" name="ancho" />
                     </div>
                     <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 2">
-                        <label>Largo <small>(ml)</small> <strong class="text-danger">*</strong></label>
+                        <label>Largo <small>(mts)</small> <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalLinea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.largo" name="largo" />
                     </div>
                     <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 1 || senialUbicacion.idUnidadMedida == 2">
-                        <label>Total <small>(m2)</small> <strong class="text-danger">*</strong></label>
+                        <label>Total <small>(mts)</small> <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="demarcacionNew.total" name="total" disabled  />
                     </div>
                     <div class="col-xs-12 col-lg-12">
