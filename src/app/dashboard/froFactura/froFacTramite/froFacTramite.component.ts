@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { FroFacTramite } from './froFacTramite.modelo';
-import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
+import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgModuloService } from '../../../services/cfgModulo.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
-import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
 import { LoginService } from '../../../services/login.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';

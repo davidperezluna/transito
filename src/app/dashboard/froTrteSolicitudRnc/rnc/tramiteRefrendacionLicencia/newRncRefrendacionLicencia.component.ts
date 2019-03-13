@@ -25,11 +25,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
     
     public tramiteFacturaSelected: any;
 
-    public resumen = {}; 
-
     public datos = {
-        'tramiteFormulario': null,
-        'idFactura': null,
         'numeroLicenciaConduccion': null,
         'numeroRunt': null,
         'vigencia': null,
@@ -37,7 +33,9 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
         'idClase': null,
         'idServicio': null,
         'idCategoria': null,
-        'ciudadanoId': null,
+        'idTramite': null,
+        'idFactura': null,
+        'idSolicitante': null,
     };
 
     constructor(
@@ -107,14 +105,17 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
         );
     }
     
-    enviarTramite() {
+    onEnviar() {
         let token = this._LoginService.getToken();
-        this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rnc-refrendacionlicencia';
-        this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
-        this.datos.ciudadanoId = this.solicitante.id;
 
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
+        this.datos.idFactura = this.factura.id;
+        this.datos.idTramite = 59;
+        this.datos.idSolicitante = this.solicitante.id;
+
+        let resumen = "<b>No. factura</b>" + this.factura.numero;
+
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

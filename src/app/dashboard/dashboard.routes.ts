@@ -21,6 +21,7 @@ import { ConsumibleRoutes } from './consumible/consumible.routes';
 import { ModalidadRoutes } from './modalidad/modalidad.routes';
 
 import { FroTrteSolicitudRncRoutes } from './froTrteSolicitudRnc/froTrteSolicitudRnc.routes';
+import { FroFacTramiteRoutes } from './froFacTramite/froFacTramite.routes';
 import { FroTrteCfgCuentaRoutes } from './froTrteCfgCuenta/froTrteCfgCuenta.routes';
 
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
@@ -318,6 +319,7 @@ export const DashboardRoutes: Route[] = [
       ...MpersonalTalonarioRoutes,
       ...MpersonalAsignacionRoutes,
       ...FroTrteSolicitudRncRoutes,
+      ...FroFacTramiteRoutes,
       ...FroTrteCfgCuentaRoutes,
       ...TramiteRoutes,
       ...AlmacenRoutes,

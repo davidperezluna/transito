@@ -1,6 +1,6 @@
 export class FroFacTramite{
 	constructor(
-		public valor: number = 0,
+		public valor: number,
 		public interes: number,
 		public tramites: string,
 		public numero: string,

@@ -1,16 +1,12 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudRnc } from '../froTrteSolicitudRnc.modelo';
 import { FroTrteSolicitudService } from '../../../services/froTrteSolicitud.service';
-import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { FacturaService } from '../../../services/factura.service';
+import { FroFacturaService } from '../../../services/froFactura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { Factura } from '../../factura/factura.modelo';
-import { error } from 'selenium-webdriver';
 import { forEach } from '@angular/router/src/utils/collection';
-import { Response } from '@angular/http/src/static_response';
 
 @Component({
   selector: 'app-new',
@@ -18,42 +14,35 @@ import { Response } from '@angular/http/src/static_response';
 })
 export class NewRncComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Input() solicitante: any = null;
   public tramiteSolicitud: FroTrteSolicitudRnc;
   public errorMessage;
 
+  public numeroFactura: any;
+  public numeroIdentificacion: any;
+
+  public factura: any = null;
+  public solicitante: any = null;
+
   public tramitesFactura: any = null;
   public tramiteFacturaSelected: any;
-  public factura: any;
-  public numeroFactura: any;
-  public isPagada = false;
   public tramiteSelected: any;
-  public tipoError=200;
-  public error=false;
-  public msj='';
   public tramites='';
-  public tramitePreasignacion=false;
-  public tramiteMatriculaInicial=false;
-  public tramite=false;
-  public sustrato=false;
-  public isTramites:boolean=true;
-  public isMatricula:boolean=false;
-  public documentacion: any;
-  public descripcionDocumentacion: any;
+
+  public tramite = false;
+  public sustrato = false;
   
   public cantidadSustrato = 1;
 
 constructor(
-  private _FroTrteSolicitudService: FroTrteSolicitudService,
-  private _loginService: LoginService,
-  private _TramiteFacturaService: TramiteFacturaService,
-  private _FacturaService: FacturaService,
-  private _ciudadanoVehiculoService: CiudadanoVehiculoService,
+  private _SolicitudService: FroTrteSolicitudService,
+  private _TramiteFacturaService: FroFacTramiteService,
+  private _FacturaService: FroFacturaService,
   private _CiudadanoService: UserCiudadanoService,
+  private _LoginService: LoginService,
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, null, null, null, null,null,null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, true, null, null, null, null, null);
   }
 
   onCancelar(){
@@ -61,38 +50,55 @@ constructor(
   }
 
   onSearchFactura(){
-    let token = this._loginService.getToken();
-    this._FacturaService.searchByNumero(token, {'numeroFactura':this.numeroFactura}).subscribe(
+    swal({
+      title: 'Consultando factura!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura }, token).subscribe(
       response => {          
-        if(response.status == 'success'){
+        if(response.code == 200){
           this.factura = response.data;
           
           swal({
-            title: 'Perfecto',
-            text: "¡Factura pagada!",
-            type: 'info',
+            text: response.message,
+            type: 'info'
           });
 
-          this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
+          this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id }, token).subscribe(
             response => {
-              let active = true;
-              this.tramitesFactura = response;              
-              this.tramitesFactura.forEach(tramiteFactura => {
-                if (tramiteFactura.realizado == 0) {
-                  active = false;
-                }else{
-                  //consultar tramite solicitud con el id de tramite factura
-                  //hacer un push array para extraer todas las solicitudes en estado realizado
-                }
-                if (tramiteFactura.tramitePrecio.tramite.sustrato) {
-                  this.sustrato = true;
-                }
-              });
-        
-              if (active) {
-                this.isTramites = false;
+              if (response.code == 200) {
+                this.tramitesFactura = response.data;
+
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'info',
+                  confirmButtonText: 'Aceptar'
+                });
+
+                this.tramitesFactura.forEach(tramiteFactura => {
+                  /*if (tramiteFactura.realizado) {
+                  }else{
+                  }*/
+
+                  if (tramiteFactura.precio.tramite.sustrato) {
+                    this.sustrato = true;
+                  }
+                });
+              }else{
+                swal({
+                  title: 'Atención!',
+                  text: response.message,
+                  type: 'warning',
+                  confirmButtonText: 'Aceptar'
+                });
               }
-              
               error => {
                 this.errorMessage = <any>error;
                 if (this.errorMessage != null) {
@@ -103,9 +109,10 @@ constructor(
             });
         }else{
           swal({
-            title: 'Alerta',
-            text: "¡Factura pendiente de pago!",
-            type: 'warning',
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
           });
         }
       },
@@ -119,25 +126,75 @@ constructor(
     );
   }
 
-  onEnviar(){
-    let token = this._loginService.getToken();
-    
-    this.tramiteSolicitud.idTramiteFactura = this.tramiteFacturaSelected;
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando ciudadano!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
 
-		this._FroTrteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.numeroIdentificacion,
+      'idTipoIdentificacion': 1,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.solicitante = response.data.ciudadano;
+            this.tramiteSolicitud.idSolicitante = this.solicitante.id;
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        } else {
+          this.solicitante = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
+
+  onEnviar(){
+    let token = this._LoginService.getToken();
+    
+    this.tramiteSolicitud.idSolicitante = this.solicitante.id;
+
+		this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
 			response => {
-        if(response.status == 'success'){
-          this.ready.emit(true);
+        if(response.code == 200){
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: 'El tramiteSolicitud '+  +' ya se encuentra registrada',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -153,31 +210,32 @@ constructor(
   }
   
   readyTramite(datos:any){
-    this.tramitesFactura.forEach(tramiteFactura => {
+    /*this.tramitesFactura.forEach(tramiteFactura => {
       if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {
         this.tramiteSolicitud.idTramiteFactura = tramiteFactura.id;
       }
-    });
-    this.tramiteSolicitud.datos=datos;
+    });*/
+    this.tramiteSolicitud.foraneas = datos.foraneas;
+    this.tramiteSolicitud.resumen = datos.resumen;
 
-    let token = this._loginService.getToken();
-    this._FroTrteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
+    let token = this._LoginService.getToken();
+
+    this._SolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           swal({
             title: 'Perfecto!',
-            text: 'Registro exitoso!',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
-          this.error = false;
+          });
         } else {
           swal({
             title: 'Error!',
-            text: 'El tramiteSolicitud ' + +' ya se encuentra registrada',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
-          })
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -191,11 +249,10 @@ constructor(
 
   cancelarTramite(){
     this.tramiteSelected = false;
-    this.error = false;
   }
 
   finalizarSolicitud(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     this.tramites='';
     this.tramitesFactura.forEach(tramiteFactura => {
       this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>' 
@@ -222,7 +279,7 @@ constructor(
       if (result.value) {
         this.factura.estado = 'Finalizada';
         this.factura.sedeOperativaId = this.factura.sedeOperativa.id;
-        this._FacturaService.editFactura(this.factura,token).subscribe(
+        this._FacturaService.edit(this.factura,token).subscribe(
           response => {
             error => {
               this.errorMessage = <any>error;

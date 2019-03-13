@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
+import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
+import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
-import { MpersonalFuncionarioService } from '../../../../services/mpersonalFuncionario.service';
-import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
 import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
-import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -21,37 +21,35 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     @Input() factura: any = null;
     public errorMessage;
 
+    public paises: any;
     public clases: any;
     public servicios: any;
-    public paises: any;
     public categorias: any;
     public tramiteFacturaSelected: any;
-    public ciudadanoEncontrado=1;
-    public tipoCambioSelected: any;
-    public identificacion: any;
-    public resumen = {};     public datos = {
-        'tramiteFormulario': null,
+
+    public datos = {
         'numeroLicenciaConduccion': null,
         'numeroRunt': null,
         'fechaExpedicion': null,
-        'idFactura': null,
         'idPais': null,
-        'idCategoria': null,
         'idClase': null,
         'idServicio': null,
-        'idSedeOperativa': null,
-        'ciudadanoId': null,
+        'idCategoria': null,
+        'idOrganismoTransito': null,
+        'idTramite': null,
+        'idFactura': null,
+        'idSolicitante': null,
     };
 
     constructor(
         private _LoginService: LoginService,
         private _CiudadanoService: UserCiudadanoService,
+        private _CfgPaisService: CfgPaisService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
-        private _CfgPaisService: CfgPaisService,
-        private _MpersonalFuncionarioService: MpersonalFuncionarioService,
         private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
-        private _RncLicenciaConduccionService: RncLicenciaConduccionService,
+        private _LicenciaConduccionService: RncLicenciaConduccionService,
     ) { }
 
     ngOnInit() {
@@ -69,34 +67,6 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
             }
         );
 
-        this._ClaseService.getClaseSelect().subscribe(
-            response => {
-              this.clases = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-      
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-              }
-            }
-        );
-
-        this._ServicioService.getServicioSelect().subscribe(
-            response => {
-              this.servicios = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-      
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-              }
-            }
-        );
-
         this._CfgPaisService.select().subscribe(
             response => {
               this.paises = response;
@@ -110,26 +80,94 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
               }
             }
         );
+
+        this._ClaseService.getClaseSelect().subscribe(
+            response => {
+                this.clases = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+
+        this._ServicioService.getServicioSelect().subscribe(
+            response => {
+                this.servicios = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
     }
-    
-    onEnviarTramite() {
+
+    onCancelar(){
+        this.cancelarTramite.emit(true);
+    }
+
+    onSearchCiudadano(){
+        let token = this._LoginService.getToken();
+
+        let datos = {
+            'identificacion': this.solicitante.identificacion,
+            'idTipoIdentificacion': 1
+        }
+
+        this._CiudadanoService.searchByIdentificacion(datos,token).subscribe(
+            response => {
+                if(response.code == 200){
+                    this.solicitante = response.data.ciudadano;
+                }else{
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                        this.errorMessage = <any>error;
+                    
+                        if(this.errorMessage != null){
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+            }
+        ); 
+    }
+
+    onEnviar() {
         let token = this._LoginService.getToken();
 
         let identity = this._LoginService.getIdentity();
 
-        this._MpersonalFuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.datos.idSedeOperativa = response.data.sedeOperativa.id;
-                    this.datos.idFactura = this.factura.id;
-                    this.datos.tramiteFormulario = 'rnc-expedicionlicencia';
                     this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
-                    this.datos.ciudadanoId = this.solicitante.id;
+                    this.datos.idOrganismoTransito = response.data.organismoTransito.id;
+                    this.datos.idFactura = this.factura.id;
+                    this.datos.idTramite = 54;
+                    this.datos.idSolicitante = this.solicitante.id;
 
-                    this._RncLicenciaConduccionService.register(this.datos, token).subscribe(
+                    let resumen = "<b>No. factura</b>" + this.factura.numero;
+
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+
+                    /*this._LicenciaConduccionService.register(this.datos, token).subscribe(
                         response => {
                             if (response.status == 'success') {
-                                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                             } else {
                                 swal({
                                     type: 'warning',
@@ -145,8 +183,8 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                                 }
                             }
                         }
-                    );
-                }else{
+                    );*/
+                } else {
                     swal({
                         type: 'warning',
                         title: 'Alerta!',
@@ -163,30 +201,4 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
             }
         );
     }
-
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
-    onSearchCiudadano(){
-        let token = this._LoginService.getToken();
-        this._CiudadanoService.searchByIdentificacion({'numeroIdentificacion':this.solicitante.identificacion},token).subscribe(
-            response => {
-                if(response.status == 'success'){
-                    this.solicitante = response.data;
-                    this.ciudadanoEncontrado= 2;
-                }else{
-                    this.ciudadanoEncontrado=3;
-                }
-                error => {
-                        this.errorMessage = <any>error;
-                    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-            }); 
-    }
-
 }

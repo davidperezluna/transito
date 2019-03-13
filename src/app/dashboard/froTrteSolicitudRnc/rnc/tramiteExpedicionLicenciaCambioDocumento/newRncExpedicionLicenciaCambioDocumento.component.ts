@@ -28,8 +28,6 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     public tramiteFacturaSelected: any;
 
     public datos = {
-        'tramiteFormulario': null,
-        'idFactura': null,
         'numeroLicenciaConduccion': null,
         'identificacionAnterior': null,
         'identificacionActual': null,
@@ -39,15 +37,9 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         'idClase': null,
         'idServicio': null,
         'idCategoria': null,
-        'ciudadanoId': null,
-    };
-
-    public resumen = {
-        'Numero licencia conduccion actual': null,
-        'Numero licencia conduccion anterior': null,
-        'identificacion Anterior': null,
-        'identificacion Actual': null,
-        'Nombre Solicitante': null,
+        'idTramite': null,
+        'idFactura': null,
+        'idSolicitante': null,
     };
 
     constructor(
@@ -116,18 +108,15 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         );
     } 
     
-    enviarTramite() {
-        this.datos.idFactura = this.factura.id;
-        this.datos.tramiteFormulario = 'rnc-expedicioncambiodocumento';
+    onEnviar() {
         this.datos.numeroLicenciaConduccion = this.datos.identificacionActual;
-        this.datos.ciudadanoId = this.solicitante.id;
-        this.resumen["identificacion Actual"] = this.datos.identificacionActual;
-        this.resumen["identificacion Anterior"] = this.datos.identificacionAnterior;
-        this.resumen["Nombre Solicitante"]= this.solicitante.primerNombre+' '+this.solicitante.segundoNombre+' '+this.solicitante.primerApellido+' '+this.solicitante.segundoApellido;
-        this.resumen["Numero licencia conduccion actual"] = this.datos.identificacionActual;
-        this.resumen["Numero licencia conduccion anterior"] = this.datos.identificacionAnterior;
+        this.datos.idFactura = this.factura.id;
+        this.datos.idTramite = 56;
+        this.datos.idSolicitante = this.solicitante.id;
+
+        let resumen = "<b>No. factura</b>" + this.factura.numero;
         
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+        this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

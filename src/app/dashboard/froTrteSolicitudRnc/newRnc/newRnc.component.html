@@ -1,138 +1,230 @@
-<hr>
-    <div class="row"><!-- .row -->
-        <div class="col-xs-12 col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Módulo RNC <small>Consultar pago</small></h5>
-                </div>
-                <div class="card-body">
-                    <form #formPay="ngForm"> 
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Número de factura <strong class="text-danger">*</strong></label>
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Nueva Solicitud de trámite</b>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Consultar factura <strong class="text-danger">*</strong></label>
+                            <div class="input-group">
                                 <input class="form-control" [(ngModel)]="numeroFactura" name="numeroFactura" type="text" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchFactura()" class="btn btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <!--
+                                        <button (click)="onCancelar()" class="btn btn-default">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    -->
+                                </span>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary" (click)="onSearchFactura()" [disabled]="formPay.invalid">
-                        <i class="fa fa-search"></i>
-                        Consultar
-                    </button>
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
-                </div> 
+
+                <div class="form-group" *ngIf='factura'>
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Buscar solicitante <strong class="text-danger">*</strong></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Número de identificación" [(ngModel)]="numeroIdentificacion" name="numeroIdentificacion" required
+                                />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchCiudadano()" class="btn btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf='solicitante'>
+                        <div class="col-xs-12 col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Ciudadano</b>
+                                            <br>
+                                            {{ solicitante.primerNombre }} {{ solicitante.segundoNombre }} {{ solicitante.primerApellido }} {{ solicitante.segundoApellido }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Tipo de identificación</b>
+                                            <br>
+                                            {{ solicitante.tipoIdentificacion.nombre }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Numero de identificación</b>
+                                            <br>
+                                            {{ solicitante.identificacion }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-lg-6 col-md-6 form-group" *ngIf="factura">
-            <div class="container col-xs-12 col-lg-6">
+    <div class="col-xs-12 col-lg-8" *ngIf="factura && solicitante">
+
+        <div class="card">
+            <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Solicitante</h5>
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" [(ngModel)]="tramiteSolicitud.documentacion" class="custom-control-input" id="documentacion" name="documentacion">
+                                        <label class="custom-control-label" for="documentacion">¿Presenta documentación completa?</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="col-xs-12 col-lg-12" >
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <strong>Nombre: </strong>
-                                                    {{ solicitante.primerNombre }} {{ solicitante.primerApellido }}
-                                                </td>
-                                                <td>
-                                                     <strong>Identificación: </strong>
-                                                    {{ solicitante.identificacion }}
-                                                </td>
-                                            </tr>
-                                        </tbody> 
-                                    </table> 
+                            <div class="row" *ngIf="!tramiteSolicitud.documentacion">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Registre que documentación esta pendiente
+                                        <b class="text-danger">*</b>
+                                    </label>
+                                    <textarea class="form-control" [(ngModel)]="tramiteSolicitud.observacion" rows="4" name="observacion" required></textarea>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" [(ngModel)]="documentacion" class="custom-control-input" id="check-documentacion" name="check_documentacion">
-                                            <label class="custom-control-label" for="check-documentacion">Entrega documentación</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row" *ngIf="documentacion">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <label>Registre que documento se entrega por parte del solicitante
-                                            <b class="text-danger">*</b>
-                                        </label>
-                                        <textarea class="form-control" [(ngModel)]="descripcionDocumentacion" rows="4" name="documentacion"></textarea>
-                                    </div>
-                                </div>
-                            </div>      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer" *ngIf="!tramiteSolicitud.documentacion">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="tramiteSolicitud.documentacion">
+            <div class="col-xs-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <b class="text-uppercase">Tramites</b>
+                    </div>
+                    <div class="card-body">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index">
+                                <a class="nav-link" data-toggle="tab" href="#{{ tramiteFactura.precio.tramite.id }}" role="tab">
+                                    <small>{{ tramiteFactura.precio.nombre }}</small>
+                                    <i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i>
+                                </a>
+                            </li>
+            
+                            <li class="nav-item" *ngIf='sustrato'>
+                                <a class="nav-link " data-toggle="tab" href="#sustrato" role="tab">Sustrato </a>
+                            </li>
+                        </ul>
+            
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane" id="realizado" role="tabpanel">
+                                <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
+                            </div>
+            
+                            <div class="tab-pane" id="sustrato" role="tabpanel">
+                                <appRnc-sustrato [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato>
+                            </div>
+            
+                            <div class="tab-pane" id="54" role="tabpanel">
+                                <appRnc-expedicion-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
+                            </div>
+            
+                            <div class="tab-pane" id="55" role="tabpanel">
+                                <appRnc-duplicado-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
+                            </div>
+            
+                            <div class="tab-pane" id="56" role="tabpanel">
+                                <appRnc-expedicion-licencia-cambio-documento [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
+                                    (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
+                            </div>
+            
+                            <div class="tab-pane" id="57" role="tabpanel">
+                                <appRnc-recategorizacion-licencia-arriba [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
+                                    (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
+                            </div>
+            
+                            <div class="tab-pane" id="58" role="tabpanel">
+                                <appRnc-recategorizacion-licencia-abajo [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
+                                    (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-abajo>
+                            </div>
+            
+                            <div class="tab-pane" id="59" role="tabpanel">
+                                <appRnc-refrendacion-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-refrendacion-licencia>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container-fluid" *ngIf="factura">
-            <div class="card col-md-12 col-md-16">
-                <div class="card-header">
-                    <h6 class="card-title">Tramites</h6>
-                </div>
-                <div class="card-body"> 
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index"> 
-                            <a class="nav-link" data-toggle="tab" href="#{{ tramiteFactura.tramitePrecio.tramite.formulario }}" role="tab">
-                                <small>{{ tramiteFactura.tramitePrecio.nombre }}</small>
-                                <i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i>
-                            </a> 
-                        </li>  
-
-                        <li class="nav-item" *ngIf='sustrato'>  
-                            <a class="nav-link " data-toggle="tab" href="#sustrato"  role="tab">Sustrato </a> 
-                        </li>
-                    </ul>
-                    
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane" id="realizado" role="tabpanel"> 
-                            <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
+    <!--
+    <div class="col-lg-6 col-xs-12 form-group" *ngIf="factura && solicitante">
+        <div class="container col-xs-12 col-lg-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Solicitante</h5>
                         </div>
-                        
-                        <div class="tab-pane" id="sustrato" role="tabpanel"> 
-                            <appRnc-sustrato [factura] = "factura"  [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato>
-                        </div>
-                        
-                        <div class="tab-pane" id="rnc-expedicionlicencia" role="tabpanel"> 
-                            <appRnc-expedicion-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
-                        </div>
-                        
-                        <div class="tab-pane" id="rnc-duplicadolicencia" role="tabpanel"> 
-                            <appRnc-duplicado-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
-                        </div>
-
-                        <div class="tab-pane" id="rnc-recategorizacionabajo" role="tabpanel"> 
-                            <appRnc-recategorizacion-licencia-abajo [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-abajo>
-                        </div>
-
-                        <div class="tab-pane" id="rnc-recategorizacionarriba" role="tabpanel"> 
-                            <appRnc-recategorizacion-licencia-arriba [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
-                        </div>
-
-                        <div class="tab-pane" id="rnc-expedicioncambiodocumento" role="tabpanel">
-                            <appRnc-expedicion-licencia-cambio-documento [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
-                        </div>
-
-                        <div class="tab-pane" id="rnc-refrendacionlicencia" role="tabpanel"> 
-                            <appRnc-refrendacion-licencia [factura] = "factura" [solicitante] = "solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-refrendacion-licencia>
-                        </div>
+                        <div class="card-body">
+                            <div class="col-xs-12 col-lg-12" >
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>Nombre: </strong>
+                                                {{ solicitante.primerNombre }} {{ solicitante.primerApellido }}
+                                            </td>
+                                            <td>
+                                                    <strong>Identificación: </strong>
+                                                {{ solicitante.identificacion }}
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                                </table> 
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xs-12 col-lg-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" [(ngModel)]="documentacion" class="custom-control-input" id="check-documentacion" name="check_documentacion">
+                                        <label class="custom-control-label" for="check-documentacion">Entrega documentación</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" *ngIf="documentacion">
+                                <div class="col-xs-12 col-lg-12">
+                                    <label>Registre que documento se entrega por parte del solicitante
+                                        <b class="text-danger">*</b>
+                                    </label>
+                                    <textarea class="form-control" [(ngModel)]="descripcionDocumentacion" rows="4" name="documentacion"></textarea>
+                                </div>
+                            </div>
+                        </div>      
                     </div>
                 </div>
             </div>
         </div>
-
-  
+    </div>
+     -->
 </div><!-- /.row -->

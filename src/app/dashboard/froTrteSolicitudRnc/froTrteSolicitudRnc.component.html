@@ -19,9 +19,17 @@
                   <label>Tipo de filtro</label>
                   <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
                 </div>
-                <div class="col-xs-12 col-lg-12">
-                  <label>Filtro</label>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 2">
+                  <label>No. factura</label>
                   <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 3">
+                  <label>Fecha</label>
+                  <input class="form-control"  [(ngModel)]="search.filtro" name="filtro" type="date" required>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 4">
+                  <label>No. identificación</label>
+                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="numeric" required>
                 </div>
               </div>
             </div>
@@ -35,7 +43,7 @@
               <i class="fa fa-search"></i>
               Buscar
             </button>
-            <button (click)="onNew()" class="btn btn-default" *ngIf="!tramitesSolicitud">
+            <button (click)="onNew()" class="btn btn-default">
               <i class="fa fa-plus"></i>
               <span class="text">Nuevo</span>
             </button>
@@ -82,9 +90,6 @@
                     </td>
                     <td>
                       <div class="btn-group">
-                        <button (click)="onEdit(tramiteSolicitud)" class="btn btn-primary" type="button">
-                          <i class="fa fa-pencil"></i>
-                        </button>
                         <button (click)="onDelete(tramiteSolicitud.id)" class="btn btn-danger" type="button">
                           <i class="fa fa-trash"></i>
                         </button>
@@ -98,45 +103,7 @@
         </div>
       </div>
     </div>
-    
-    <div class="col-xs-12 col-lg-12" *ngIf="!solicitante">
-      <app-new-rnc-ciudadano [identificacion]="identificacion" (ready)="ready($event)"></app-new-rnc-ciudadano>
-    </div>
-    
-    <app-edit *ngIf='formEdit' [tramiteSolicitud]="tramiteSolicitud" (ready)="ready($event)"></app-edit>
-    <app-new *ngIf='formNew' [solicitante]="solicitante" (ready)="ready($event)"></app-new>
   </div>
-
-    <div class="row" *ngIf="formSearchSolicitante"><!-- .row -->
-      <div class="col-xs-12 col-lg-4">
-          <div class="card">
-              <div class="card-header">
-                  <h5 class="card-title">Buscar solicitante</h5>
-              </div>
-              <div class="card-body">
-                  <div class="col-xs-12 col-lg-12" >
-                      <form #formSearch="ngForm"> 
-                          <div class="form-group row">
-                              <div class="col-xs-12 col-lg-12">
-                                <label>Tipo documento <strong class="text-danger">*</strong></label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="tiposIdentificacion" required>
-                                </ng-select>
-                              </div>
-                              <div class="col-xs-12 col-lg-12">
-                                <label>Identificación <strong class="text-danger">*</strong></label>
-                                <input class="form-control" [(ngModel)]="identificacion" name="identificacion" type="text" required />
-                              </div>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-              <div class="card-footer">
-                  <button class="btn btn-primary" [disabled]="formSearch.invalid" (click)="onSearchSolicitante()" [disabled]="isTramites">
-                      <i class="fa fa-search"></i>
-                      Buscar
-                  </button>
-              </div> 
-          </div>
-      </div>
-    </div><!-- .row -->
+  
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
 </div>
