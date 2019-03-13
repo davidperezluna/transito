@@ -98,12 +98,13 @@ export class SvCapacitacionComponent implements OnInit {
         this._UserCiudadanoService.searchByIdentificacion({ 'nit': this.capacitacion.nit, 'identificacion': this.capacitacion.identificacion, 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    if (response.ciudadano) {
-                        this.ciudadano = response.ciudadano;
+                    if (response.data.ciudadano) {
+                        this.ciudadano = response.data.ciudadano;
+                        console.log(this.ciudadano);
                         this.empresa = false;
                     }
-                    if (response.empresa) {
-                        this.empresa = response.empresa;
+                    if (response.data.empresa) {
+                        this.empresa = response.data.empresa;
                         this.ciudadano = false;
                     }
                     

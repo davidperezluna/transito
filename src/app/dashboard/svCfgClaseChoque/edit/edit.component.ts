@@ -26,12 +26,12 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
-        console.log(this.claseChoque);
         this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
             response => {
                 this.clasesAccidente = response;
                 setTimeout(() => {
-                    this.claseAccidenteSelected = [this.claseChoque.claseAccidente.id];
+                    this.claseAccidenteSelected = [this.claseChoque.claseAccidente.nombre];
+                    console.log(this.claseChoque.claseAccidente.nombre);
                 });
             },
             error => {

@@ -22,8 +22,8 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
-                                <th>Codigo Sede Opertaiva</th>
-                                <th>Nombre Sede Operativa</th>
+                                <th>Codigo OT</th>
+                                <th>Nombre OT</th>
                                 <th>Municipio</th>
                                 <th>Acciones</th>
                             </tr>
@@ -32,9 +32,9 @@
                             <tr class="odd" *ngFor="let hospital of hospitales; let i = index">
                                 <td>{{ hospital.id }}</td>
                                 <td>{{ hospital.nombre }}</td>
-                                <td>{{ hospital.sedeOperativa.codigoDivipo }}</td>
-                                <td>{{ hospital.sedeOperativa.nombre }}</td>
-                                <td>{{ hospital.municipio.nombre }}</td>
+                                <td>{{ hospital.organismoTransito.divipo }}</td>
+                                <td>{{ hospital.organismoTransito.nombre }}</td>
+                                <td>{{ hospital.organismoTransito.municipio }}</td>
 
                                 <td>
                                     <button (click)="onEdit(hospital)" class="btn btn-xs btn-info" type="button">

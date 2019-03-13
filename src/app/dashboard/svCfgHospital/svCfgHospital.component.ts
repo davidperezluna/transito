@@ -42,6 +42,7 @@ export class SvCfgHospitalComponent implements OnInit {
         this._HospitalService.index().subscribe(
             response => {
                 this.hospitales = response.data;
+                console.log(this.hospitales);
                 let timeoutId = setTimeout(() => {
                     this.iniciarTabla();
                 }, 100);

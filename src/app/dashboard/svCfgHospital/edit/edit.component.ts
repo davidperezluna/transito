@@ -15,10 +15,7 @@ export class EditComponent implements OnInit {
     public errorMessage;
     public respuesta;
 
-    public municipios: any;
     public organismosTransito: any;
-
-    public municipioSelected: any;
     public organismoTransitoSelected: any;
 
     public formReady = false;
@@ -26,28 +23,11 @@ export class EditComponent implements OnInit {
     constructor(
         private _HospitalService: SvCfgHospitalService,
         private _loginService: LoginService,
-        private _MunicipioService: CfgMunicipioService,
         private _OrganismoTransitoService: CfgOrganismoTransitoService,
     ) { }
 
     ngOnInit() {
         console.log(this.hospital);
-        this._MunicipioService.select().subscribe(
-            response => {
-                this.municipios = response;
-                setTimeout(() => {
-                    this.municipioSelected = [this.hospital.municipio.id];
-                });
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
         this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
                 this.organismosTransito = response;
@@ -70,7 +50,6 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.hospital.municipio = this.municipioSelected;
         this.hospital.organismoTransito = this.organismoTransitoSelected;
         this._HospitalService.edit(this.hospital, token).subscribe(
             response => {
