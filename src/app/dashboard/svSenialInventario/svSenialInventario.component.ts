@@ -111,7 +111,7 @@ export class SvSenialInventarioComponent implements OnInit {
         if (e) {
             let token = this._LoginService.getToken();
 
-            this._MunicipioService.show(e, token).subscribe(
+            this._MunicipioService.show({ 'id': e }, token).subscribe(
                 response => {
                     this.datos.idMunicipio = response.data.id;                    
                     this.municipio = response.data;

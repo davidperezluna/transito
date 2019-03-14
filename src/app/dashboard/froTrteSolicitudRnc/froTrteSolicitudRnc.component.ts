@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
-import { UserCfgTipoIdentificacionService } from '../../services/userCfgTipoIdentificacion.service';
-import { UserCiudadanoService } from '../../services/userCiudadano.service';
 import { LoginService } from '../../services/login.service';
 import { FroTrteSolicitudRnc } from './froTrteSolicitudRnc.modelo';
 import swal from 'sweetalert2';
@@ -40,8 +38,6 @@ export class FroTrteSolicitudRncComponent implements OnInit {
 
   constructor(
     private _SolicitudService: FroTrteSolicitudService,
-    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-    private _UserCiudadanoService: UserCiudadanoService,
 		private _LoginService: LoginService,
     ){}
     

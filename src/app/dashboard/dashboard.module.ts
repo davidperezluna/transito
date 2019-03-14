@@ -159,6 +159,7 @@ import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.m
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 
 
+import { VhloVehiculoModule } from './vhloVehiculo/vhloVehiculo.module';
 import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module';
 import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
 
@@ -375,6 +376,7 @@ import {RightsidebarComponent} from '../shared';
     FroTrteSolicitudRncModule,
     FroFacTramiteModule,
     FroTrteCfgCuentaModule,
+    VhloVehiculoModule,
     VhloPropietarioModule,
     VhloCfgCarroceriaModule,
     ComparendoModule,

@@ -169,6 +169,7 @@ import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTi
 import { MpersonalTalonarioRoutes } from './mpersonalTalonario/mpersonalTalonario.routes';
 import { MpersonalAsignacionRoutes } from './mpersonalAsignacion/mpersonalAsignacion.routes';
 
+import { VhloVehiculoRoutes } from './vhloVehiculo/vhloVehiculo.routes';
 import { VhloPropietarioRoutes } from './vhloPropietario/vhloPropietario.routes';
 import { VhloCfgCarroceriaRoutes } from './vhloCfgCarroceria/vhloCfgCarroceria.routes';
 
@@ -406,6 +407,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgVisualDisminuidaRoutes,
       ...SvCfgZonaRoutes,
       ...InfraccionRoutes,
+      ...VhloVehiculoRoutes,
       ...VhloPropietarioRoutes,
       ...VhloCfgCarroceriaRoutes,
       ...FacturaRoutes,

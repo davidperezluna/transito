@@ -84,9 +84,15 @@
                   <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
                     <td>{{ i + 1 }}</td>
                     <td>{{ tramiteSolicitud.tramiteFactura.factura.numero }}</td>
-                    <td>{{ tramiteSolicitud.tramiteFactura.tramitePrecio.nombre }}</td>
+                    <td>{{ tramiteSolicitud.tramiteFactura.precio.nombre }}</td>
                     <td>
-                      {{ tramiteSolicitud.datos }}
+                      <tooltip-content #myTooltip [animation]="true" placement="top">
+                        <b style="color: #00b3ee">Resumen del trámite</b>
+                        {{ tramiteSolicitud.resumen }}
+                      </tooltip-content>
+                      <button class="btn btn-xs btn-success" [tooltip]="myTooltip">
+                        <i class="fa fa-info"></i>
+                      </button>
                     </td>
                     <td>
                       <div class="btn-group">

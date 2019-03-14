@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { LoginService } from '../../services/login.service';
 import { FroTrteSolicitudRna } from './froTrteSolicitudRna.modelo';
+import { FroTrteSolicitudService } from '../../services/froTrteSolicitud.service';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -29,16 +29,16 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
   }
 
   public tiposFiltro = [
-    { 'value': '1', 'label': 'No. de Placa' },
-    { 'value': '2', 'label': 'No. de factura' },
-    { 'value': '3', 'label': 'Fecha' },
+    { 'value': 2, 'label': 'No. factura' },
+    { 'value': 3, 'label': 'Fecha' },
+    { 'value': 4, 'label': 'No. identificación' },
   ];
 
   constructor(
-    private _TramiteSolicitudService: TramiteSolicitudService,
-    private _route: ActivatedRoute,
+    private _SolicitudService: FroTrteSolicitudService,
 		private _LoginService: LoginService,
-    ){}
+    private _route: ActivatedRoute,
+  ){}
     
   ngOnInit() {
     this._route.params.subscribe(params =>{
@@ -47,7 +47,9 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
   }
 
   onSearch() {
-    this.tramitesSolicitud = null;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
     
     swal({
       title: 'Buscando registros!',
@@ -59,11 +61,14 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._TramiteSolicitudService.searchByModuloAndFilter(this.search, token).subscribe(
+    this._SolicitudService.searchByModuloAndFilter(this.search, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.tramitesSolicitud = response.data;
-          this.formIndex = true;
+
+          let timeoutId = setTimeout(() => {
+            this.iniciarTabla();
+          }, 100);
 
           swal({
             title: 'Perfecto!',
@@ -71,17 +76,11 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
             type: 'success',
             confirmButtonText: 'Aceptar'
           });
-
-          let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
-          }, 100);
         } else {
-          this.formIndex = false;
-
           swal({
-            title: 'Atención!',
+            title: 'Error!',
             text: response.message,
-            type: 'warning',
+            type: 'error',
             confirmButtonText: 'Aceptar'
           });
         }
@@ -98,11 +97,10 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
 
   iniciarTabla() {
     if (this.table) {
-      this.table.empty();
       this.table.destroy();
     }
 
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -115,13 +113,16 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
         }
       }
     });
-
-    this.table = $('#dataTables-example').DataTable();
   }
 
-  onNew(){
-    this.formNew = true;
+  onNew() {
+    this.formSearch = false;
     this.formIndex = false;
+    this.formNew = true;
+
+    if (this.table) {
+      this.table.destroy();
+    }
   }
 
   ready(isCreado: any){
@@ -146,7 +147,8 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
-        this._TramiteSolicitudService.deleteTramiteSolicitud(token,id).subscribe(
+
+        this._SolicitudService.delete(id, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
