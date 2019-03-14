@@ -272,48 +272,48 @@
                                 
                                 <appRna-transformacion *ngIf="tramiteFacturaSelected == 9" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
                                 
-                                <appRna-duplicado-licencia *ngIf="tramiteFacturaSelected == 11" [idSolicitante]='tramiteSolicitud.solicitanteId' [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
+                                <appRna-duplicado-licencia *ngIf="tramiteFacturaSelected == 10" [idSolicitante]='tramiteSolicitud.solicitanteId' [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
                             
-                                <appRna-inscripcion-alerta-prenda *ngIf="tramiteFacturaSelected == 12" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
+                                <appRna-inscripcion-alerta-prenda *ngIf="tramiteFacturaSelected == 11" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
                                 
-                                <appRna-levantamiento-alerta-prenda *ngIf="tramiteFacturaSelected == 13" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-levantamiento-alerta-prenda>
+                                <appRna-levantamiento-alerta-prenda *ngIf="tramiteFacturaSelected == 12" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-levantamiento-alerta-prenda>
                                 
-                                <appRna-cancelacion-matricula *ngIf="tramiteFacturaSelected == 14" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cancelacion-matricula>
+                                <appRna-cancelacion-matricula *ngIf="tramiteFacturaSelected == 13" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cancelacion-matricula>
                                     
-                                <appRna-cambio-placa *ngIf="tramiteFacturaSelected == 15" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-placa>
+                                <appRna-cambio-placa *ngIf="tramiteFacturaSelected == 14" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-placa>
                                 
-                                <appRna-duplicado-placa *ngIf="tramiteFacturaSelected == 6" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
+                                <appRna-duplicado-placa *ngIf="tramiteFacturaSelected == 15" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-placa>
                                 
-                                <appRna-blindaje *ngIf="tramiteFacturaSelected == 6" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
+                                <appRna-blindaje *ngIf="tramiteFacturaSelected == 16" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
                                 
-                                <appRna-cambio-motor *ngIf="tramiteFacturaSelected == 6" [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" [tramiteFactura]="tramiteFacturaSelected" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
+                                <appRna-cambio-motor *ngIf="tramiteFacturaSelected == 17" [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" [tramiteFactura]="tramiteFacturaSelected" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
                                 
-                                <appRna-rematricula *ngIf="tramiteFacturaSelected == 6" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
+                                <appRna-rematricula *ngIf="tramiteFacturaSelected == 18" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
                                 
-                                <appRna-regrabar-serie *ngIf="tramiteFacturaSelected == 6" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-serie>
+                                <appRna-regrabar-serie *ngIf="tramiteFacturaSelected == 19" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-serie>
                                 
-                                <appRna-cambio-carroceria *ngIf="tramiteFacturaSelected == 6" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-carroceria>
+                                <appRna-cambio-carroceria *ngIf="tramiteFacturaSelected == 20" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-carroceria>
                                 
-                                <appRna-cambio-combustible *ngIf="tramiteFacturaSelected == 6" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-combustible>
+                                <appRna-cambio-combustible *ngIf="tramiteFacturaSelected == 21" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-combustible>
                             
                                  <!-- tramites sin id -->
-                                <appRna-importacion-temporal *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-importacion-temporal>
+                                <appRna-importacion-temporal *ngIf="tramiteFacturaSelected == 22"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-importacion-temporal>
                                 
-                                <appRna-prorroga-importacion-temporal *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
+                                <appRna-prorroga-importacion-temporal *ngIf="tramiteFacturaSelected == 23"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-prorroga-importacion-temporal>
                                 
-                                <appRna-cambio-acreedor-prendario-propietario *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario-propietario>
+                                <appRna-cambio-acreedor-prendario-propietario *ngIf="tramiteFacturaSelected == 24"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario-propietario>
                                 
-                                <appRna-cambio-acreedor-prendario *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario>
+                                <appRna-cambio-acreedor-prendario *ngIf="tramiteFacturaSelected == 25"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario>
                                 
-                                <appRna-cambio-gas *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
+                                <appRna-cambio-gas *ngIf="tramiteFacturaSelected == 26"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
                                
-                                <appRna-cambioConjunto *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambioConjunto>
+                                <appRna-cambio-conjunto *ngIf="tramiteFacturaSelected == 27"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-conjunto>
                                 
-                                <appRna-regrabar-vin *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
+                                <appRna-regrabar-vin *ngIf="tramiteFacturaSelected == 28"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
                                 
-                                <appRna-traspaso-indeterminada *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" [ciudadano]="ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
+                                <appRna-traspaso-indeterminada *ngIf="tramiteFacturaSelected == 29"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" [ciudadano]="ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
                                
-                                <appRna-certificadoTradicion *ngIf="tramiteFacturaSelected == 6"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-certificadoTradicion>
+                                <appRna-certificado-tradicion *ngIf="tramiteFacturaSelected == 30"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFacturaSelected" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-certificado-tradicion>
                             </div>
                         </div>
                     </div>

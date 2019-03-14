@@ -9,7 +9,7 @@ import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-certificadoTradicion',
+    selector: 'appRna-certificado-tradicion',
     templateUrl: './newRna.certificadoTradicion.html'
 })
 export class NewRnaCertificadoTradicionComponent implements OnInit {

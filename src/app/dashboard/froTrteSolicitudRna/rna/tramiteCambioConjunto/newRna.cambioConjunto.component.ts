@@ -8,7 +8,7 @@ import {VehiculoService} from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-cambioConjunto',
+    selector: 'appRna-cambio-conjunto',
     templateUrl: './newRna.cambioConjunto.html'
 })
 export class NewRnaCambioConjuntoComponent implements OnInit {
@@ -25,6 +25,7 @@ export class NewRnaCambioConjuntoComponent implements OnInit {
         'descripcion': null,
         'nuevoModelo': null,
     };
+
     public tiposPotenciacion = [
         {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
         {'value': 'Reparacion de motor y cambio de conjunto', 'label': 'Reparación de motor y cambio de conjunto'},
