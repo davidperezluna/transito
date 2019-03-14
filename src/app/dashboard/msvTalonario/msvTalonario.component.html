@@ -20,7 +20,7 @@
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Sede Operativa</th>
+                <th>Organismo Transito</th>
                 <th>Desde</th>
                 <th>Hasta</th>
                 <th>Total</th>
@@ -32,7 +32,7 @@
             <tbody>
               <tr class="odd" *ngFor="let msvTalonario of msvTalonarios; let i = index">
                 <td>{{msvTalonario.id}}</td>
-                <td>{{msvTalonario.sedeOperativa?.nombre}}</td>
+                <td>{{msvTalonario.organismoTransito?.nombre}}</td>
                 <td>{{msvTalonario.rangoini}}</td>
                 <td>{{msvTalonario.rangofin}}</td>
                 <td>{{msvTalonario.total}}</td>

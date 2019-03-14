@@ -17,12 +17,12 @@ export class EditComponent {
   public errorMessage;
   public respuesta;
   public organismosTransito: any;
-  public sedeOperativaSuccess = false;
+  public organismoTransitoSuccess = false;
   public talonarioReady = false;
-  public sedeOperativaSelected: any;
+  public organismoTransitoSelected: any;
   public validado = false;
-  public sedeOperativaReady = false;
-  public sedeOperativa: any;
+  public organismoTransitoReady = false;
+  public organismoTransito: any;
   // public tipoIdentificacion: Array<any>
 
   constructor(
@@ -40,13 +40,11 @@ export class EditComponent {
   }
 
   ngOnInit() {
-
-
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
         setTimeout(() => {
-          this.sedeOperativaSelected = [this.talonario.sedeOperativa.id];
+          this.organismoTransitoSelected = [this.talonario.organismoTransito.id];
         });
       },
       error => {
@@ -67,13 +65,10 @@ export class EditComponent {
 
   onEnviar() {
     let token = this._loginService.getToken();
-    this.talonario.sedeOperativaId = this.sedeOperativaSelected;
+    this.talonario.idOrganismoTransito = this.organismoTransitoSelected;
     this._msvTalonarioService.register(this.talonario, token).subscribe(
       response => {
-        //console.log(response);
-        this.respuesta = response;
-        console.log(this.respuesta);
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
@@ -105,21 +100,19 @@ export class EditComponent {
       total = 0;
     }
     this.talonario.total = total;
-
   }
 
-  changedSedeOperativa(e) {
+  changedOrganismoTransito(e) {
 
     this.validado = false;
     if (e) {
       let token = this._loginService.getToken();
       this._OrganismoTransitoService.show(token, e).subscribe(
         response => {
-          this.sedeOperativa = response;
-          this.sedeOperativaReady = true;
+          this.organismoTransito = response;
+          this.organismoTransitoReady = true;
           //          this.msvTalonario.rangoini = this.sedeOperativa.data.
           //this.comparendo.numeroOrden = this.sedeOperativa.data.codigoDivipo;
-          console.log(this.sedeOperativa);
         },
         error => {
           this.errorMessage = <any>error;
@@ -131,9 +124,9 @@ export class EditComponent {
         }
       );
 
-      this._msvTalonarioService.showMsvTalonarioPorSedeOperativa(token, e).subscribe(
+      this._msvTalonarioService.showMsvTalonarioPorOrganismoTransito(token, e).subscribe(
         response => {
-          this.sedeOperativaSuccess = true;
+          this.organismoTransitoSuccess = true;
           if (response.status == "success") {
 
             this.talonario = response.data;

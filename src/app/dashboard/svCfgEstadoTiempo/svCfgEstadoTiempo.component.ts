@@ -103,7 +103,7 @@ export class SvCfgEstadoTiempoComponent implements OnInit {
         }).then((result) => {
             if (result.value) {
                 let token = this._LoginService.getToken();
-
+                
                 this._EstadoTiempoService.delete({ 'id': id }, token).subscribe(
                     response => {
                         swal({

@@ -48,6 +48,7 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
+        this.tipoVia.tipoArea = this.tipoAreaSelected;
         this._TipoViaService.edit(this.tipoVia, token).subscribe(
             response => {
                 if (response.status == 'success') {

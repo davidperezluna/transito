@@ -23,12 +23,12 @@ export class NewComponent implements OnInit {
     public table: any = null;
     public msvTalonario: MsvTalonario;
     public organismosTransito: any;
-    public sedeOperativaSelected: any;
-    public sedeOperativaSuccess = false;
+    public organismoTransitoSelected: any;
+    public organismoTransitoSuccess = false;
     public validado = false;
-    public sedeOperativaReady = false;
+    public organismoTransitoReady = false;
     public msvTalonarioReady = false;
-    public sedeOperativa: any;
+    public organismoTransito: any;
 
     constructor(
         private _msvTalonarioService: MsvTalonarioService,
@@ -50,7 +50,7 @@ export class NewComponent implements OnInit {
         this._OrganismoTransitoService.selectSedes().subscribe(
             response => {
                 this.organismosTransito = response;
-                this.sedeOperativaSuccess = false;
+                this.organismoTransitoSuccess = false;
                 this.formN = true;
                 swal.close();
             },
@@ -89,7 +89,6 @@ export class NewComponent implements OnInit {
                 type: 'error',
                 confirmButtonText: 'Aceptar'
             });
-
             this.msvTalonario.total = null;
         }
     }
@@ -105,7 +104,7 @@ export class NewComponent implements OnInit {
 
         let token = this._loginService.getToken();
 
-        this.msvTalonario.sedeOperativaId = this.sedeOperativaSelected;
+        this.msvTalonario.idOrganismoTransito = this.organismoTransitoSelected;
         
         this._msvTalonarioService.register(this.msvTalonario, token).subscribe(
             response => {
@@ -131,19 +130,17 @@ export class NewComponent implements OnInit {
             });
     }
 
-
-    changedSedeOperativa(e) {
+    changedOrganismoTransito(e) {
 
         this.validado = false;
         if (e) {
             let token = this._loginService.getToken();
             this._OrganismoTransitoService.show(token, e).subscribe(
                 response => {
-                    this.sedeOperativa = response;
-                    this.sedeOperativaReady = true;
+                    this.organismoTransito = response;
+                    this.organismoTransitoReady = true;
                     //          this.msvTalonario.rangoini = this.sedeOperativa.data.
                     //this.comparendo.numeroOrden = this.sedeOperativa.data.codigoDivipo;
-                    console.log(this.sedeOperativa);
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -155,9 +152,9 @@ export class NewComponent implements OnInit {
                 }
             );
 
-            this._msvTalonarioService.showMsvTalonarioPorSedeOperativa(token, e).subscribe(
+            this._msvTalonarioService.showMsvTalonarioPorOrganismoTransito(token, e).subscribe(
                 response => {
-                    this.sedeOperativaSuccess = true;
+                    this.organismoTransitoSuccess = true;
                     if (response.status == "success") {
 
                         this.msvTalonario = response.data;

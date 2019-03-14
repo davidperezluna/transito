@@ -270,6 +270,7 @@ export class MsvEvaluacionComponent implements OnInit {
           this.msj = response.msj;
           this.isError = false;
           this.miEmpresa = response.data;
+          console.log(this.miEmpresa);
           this.habilitarBotonRev = true;
           this._RevisionService.showRevision(token, this.miEmpresa.id).subscribe(
             response => {

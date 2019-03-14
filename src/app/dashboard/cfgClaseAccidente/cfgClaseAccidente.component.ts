@@ -105,7 +105,7 @@ export class CfgClaseAccidenteComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgClaseAccidenteService.deleteCfgClaseAccidente(token, id).subscribe(
+        this._CfgClaseAccidenteService.deleteCfgClaseAccidente({ 'id': id }, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
@@ -126,8 +126,6 @@ export class CfgClaseAccidenteComponent implements OnInit {
             }
           }
         );
-
-
       }
     })
   }

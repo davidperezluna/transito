@@ -12,7 +12,6 @@ export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() requiereEmpresa: any = null;
     public errorMessage;
-    public respuesta;
 
     public carrocerias: any;
     public carroceriaSelected: any;
@@ -26,6 +25,7 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        console.log(this.requiereEmpresa);
         this._CarroceriaService.getCarroceriaSelect().subscribe(
             response => {
                 this.carrocerias = response;
@@ -48,8 +48,7 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.requiereEmpresa.carroceria = this.carroceriaSelected;
-        console.log("enviar: " + this.requiereEmpresa.nombre);
+        this.requiereEmpresa.idCarroceria = this.carroceriaSelected;
         this._RequiereUserEmpresaService.edit(this.requiereEmpresa, token).subscribe(
             response => {
                 if (response.status == 'success') {

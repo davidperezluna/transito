@@ -26,7 +26,6 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.geometria);
         this._TipoGeometriaService.getTipoGeometriaSelect().subscribe(
             response => {
                 this.tiposGeometria = response;
@@ -49,7 +48,7 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.geometria.TipoGeometria = this.tipoGeometriaSelected;
+        this.geometria.tipoGeometria = this.tipoGeometriaSelected;
         this._GeometriaService.edit(this.geometria, token).subscribe(
             response => {
                 if (response.status == 'success') {

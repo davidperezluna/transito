@@ -2,6 +2,6 @@ export class SvCfgRequiereEmpresa {
     constructor(
         public id: number,
         public nombre: string,
-        public carroceria: number
+        public idCarroceria: number,
     ) { }
 }

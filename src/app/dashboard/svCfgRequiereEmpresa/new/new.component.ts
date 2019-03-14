@@ -13,7 +13,6 @@ export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     public requiereEmpresa: SvCfgRequiereEmpresa;
     public errorMessage;
-    public respuesta;
 
     public carrocerias: any;
     public carroceriaSelected: any;
@@ -47,7 +46,7 @@ export class NewComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this.requiereEmpresa.carroceria = this.carroceriaSelected;
+        this.requiereEmpresa.idCarroceria = this.carroceriaSelected;
         this._RequiereUserEmpresaService.register(this.requiereEmpresa, token).subscribe(
             response => {
                 if (response.status == 'success') {
