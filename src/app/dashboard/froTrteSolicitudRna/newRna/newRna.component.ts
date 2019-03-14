@@ -26,23 +26,23 @@ export class NewRnaComponent implements OnInit {
   public factura: any = null;
   public vehiculo: any = null;
   public propietarios: any = null;
+  public ciudadano: any = false;
 
   public vehiculoFiltro: any;
 
   public tramitesFactura: any = null;
-  public tramiteFacturaSelected: any;
+  public tramiteFacturaSelected: any = null;
   public facturas: any;
-  public isPagada = false;
   public tramiteSelected: any = null;
 
   public isEmpresa = false;
-  public ciudadano: any = false;
   public confirmarSolicitante = false;
+  public sustrato = false;
+
   public tramites = '';
   public tramitePreasignacion = false;
   public tramiteMatriculaInicial = false;
   public tramite = false;
-  public sustrato = false;
   public isTramites: boolean = true;
   public isMatricula: boolean = false;
   public frmApoderado = false;
@@ -52,11 +52,6 @@ export class NewRnaComponent implements OnInit {
   public cantidadSustrato = 1;
   public moduloId = 1;
 
-  public datos = {
-    'moduloId': null,
-    'idFactura': null,
-    'vehiculoId': null,
-  };
 
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,
@@ -69,7 +64,7 @@ export class NewRnaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRna(null, null, null, null, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRna(null, true, null, null, null, null, null, null, null);
     //this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     /* swal({
       title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',
@@ -200,66 +195,107 @@ export class NewRnaComponent implements OnInit {
     if (this.numeroFactura) {
       let token = this._LoginService.getToken();
 
-      this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+      this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura }, token).subscribe(
         response => {
           if (response.code == 200) {
-            this.tramitesFactura = response.data.tramitesFactura;
-            
-            if (response.data.propietarios) {
-              this.propietarios = response.data.propietarios;
-            }else{
-              this.propietarios = null;
-            }
-          }else{
-            this.tramitesFactura = null;
-            
-            swal({
-              title: 'Error!',
-              text: response.message,
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-          }
+            this.factura = response.data;
 
-          /*this.isMatricula = false;
-          let active = true;
-          let token = this._LoginService.getToken();
+            this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.tramitesFactura = response.data.tramitesFactura;
+                  this.sustrato = response.data.sustrato;
 
-          this.tramitesFactura = response;
-          this.tramitesFactura.forEach(tramiteFactura => {
-            if (tramiteFactura.realizado == 0) {
-              active = false;
-            } else {
-              //consultar tramite solicitud con el id de tramite factura
-              //hacer un push array para extraer todas las solicitudes en estado realizado
-            }
+                  if (response.data.propietarios) {
+                    this.propietarios = response.data.propietarios;
+                  } else {
+                    this.propietarios = null;
+                  }
 
-            if (tramiteFactura.tramitePrecio.tramite.sustrato) {
-              this.sustrato = true;
-            }
+                  console.log(response);
+                  console.log(this.tramitesFactura);
+                  console.log(this.propietarios);
+                  
 
-            if (tramiteFactura.tramitePrecio.tramite.formulario == 'rna-matriculainicial') {
-              this.isMatricula = true;
-            } else {
-              this.isMatricula = false;
-            }
-            console.log(tramiteFactura.tramitePrecio.tramite.formulario);
-          });
+                  swal.close();
+                } else {
+                  this.tramitesFactura = null;
+                  this.propietarios = null
 
-          if (active) {
-            this.isTramites = false;
-          }
-
-          swal.close();
-          
-          if (this.tramiteSolicitud.idSolicitante) {
-
-            this._PropietarioService.searchByCiudadano({ 'idCiudadano': this.tramiteSolicitud.idSolicitante }, token).subscribe(
-              responseCiudadano => {
-                if (responseCiudadano.status == 'success') {
-                  this.ciudadano = responseCiudadano.data.ciudadano;
-                  this.factura = response[0].factura;
+                  swal({
+                    title: 'Error!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                  });
                 }
+
+                /*this.isMatricula = false;
+                let active = true;
+                let token = this._LoginService.getToken();
+      
+                this.tramitesFactura = response;
+                this.tramitesFactura.forEach(tramiteFactura => {
+                  if (tramiteFactura.realizado == 0) {
+                    active = false;
+                  } else {
+                    //consultar tramite solicitud con el id de tramite factura
+                    //hacer un push array para extraer todas las solicitudes en estado realizado
+                  }
+      
+                  if (tramiteFactura.tramitePrecio.tramite.sustrato) {
+                    this.sustrato = true;
+                  }
+      
+                  if (tramiteFactura.tramitePrecio.tramite.formulario == 'rna-matriculainicial') {
+                    this.isMatricula = true;
+                  } else {
+                    this.isMatricula = false;
+                  }
+                  console.log(tramiteFactura.tramitePrecio.tramite.formulario);
+                });
+      
+                if (active) {
+                  this.isTramites = false;
+                }
+      
+                swal.close();
+                
+                if (this.tramiteSolicitud.idSolicitante) {
+      
+                  this._PropietarioService.searchByCiudadano({ 'idCiudadano': this.tramiteSolicitud.idSolicitante }, token).subscribe(
+                    responseCiudadano => {
+                      if (responseCiudadano.status == 'success') {
+                        this.ciudadano = responseCiudadano.data.ciudadano;
+                        this.factura = response[0].factura;
+                      }
+                      error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                          console.log(this.errorMessage);
+                          alert("Error en la petición");
+                        }
+                      }
+                    }
+                  );
+                } else {
+                  if (this.isMatricula) {
+                    this.factura = response[0].factura;
+                  } /* else {
+                    if (this.importacion == "Si") {
+                      this.factura = response[0].factura;
+                    } 
+                  else {
+                    this.factura = false;
+                    
+                    swal({
+                      title: 'Error!',
+                      text: 'Seleccionar solicitante',
+                      type: 'error',
+                      confirmButtonText: 'Aceptar'
+                    });
+                  }
+                }*/
                 error => {
                   this.errorMessage = <any>error;
                   if (this.errorMessage != null) {
@@ -270,23 +306,18 @@ export class NewRnaComponent implements OnInit {
               }
             );
           } else {
-            if (this.isMatricula) {
-              this.factura = response[0].factura;
-            } /* else {
-              if (this.importacion == "Si") {
-                this.factura = response[0].factura;
-              } 
-            else {
-              this.factura = false;
-              
-              swal({
-                title: 'Error!',
-                text: 'Seleccionar solicitante',
-                type: 'error',
-                confirmButtonText: 'Aceptar'
-              });
-            }
-          }*/
+            this.factura = null;
+            this.tramitesFactura = null;
+            this.propietarios = null;
+            this.sustrato = false;
+
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
           error => {
             this.errorMessage = <any>error;
             if (this.errorMessage != null) {
@@ -303,6 +334,16 @@ export class NewRnaComponent implements OnInit {
         type: 'error',
         confirmButtonText: 'Aceptar'
       });
+    }
+  }
+
+  onChangedTramiteFactura(tramiteFactura) {
+    console.log(tramiteFactura);
+    
+    if (tramiteFactura) {
+      this.tramiteFacturaSelected = tramiteFactura;
+      console.log(this.tramiteFacturaSelected);
+      
     }
   }
 
