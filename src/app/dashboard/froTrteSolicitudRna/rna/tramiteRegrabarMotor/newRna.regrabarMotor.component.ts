@@ -14,7 +14,7 @@ export class NewRnaRegrabarMotorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
     public sustratos: any;
@@ -30,7 +30,7 @@ export class NewRnaRegrabarMotorComponent implements OnInit {
         'nuevoNumero': null,
         'numeroRunt': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
         'campos': null,
     };
@@ -49,7 +49,7 @@ export class NewRnaRegrabarMotorComponent implements OnInit {
         let token = this._loginService.getToken();
 
         this.datos.motivo = this.motivoSelected;
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-regrabarmotor';
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['regrabarmotor'];

@@ -13,7 +13,7 @@ export class NewRnaCambioColorComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage; 
     public colores: any;
     public tramitesFactura: any = null;
@@ -21,7 +21,7 @@ export class NewRnaCambioColorComponent implements OnInit {
     public colorSelected: any;
     public tramiteRealizado: any;
     public datos = {
-        'idFactura': null,
+        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idColor': null,
@@ -37,7 +37,7 @@ export class NewRnaCambioColorComponent implements OnInit {
     ) { }
   
     ngOnInit() {
-        this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
+        this._TramiteFacturaService.getTramitesByFacturaSelect(this.tramiteFactura.id).subscribe(
             response => {
                 this.tramitesFactura = response;
                 this.tramitesFactura.forEach(tramiteFactura => {
@@ -101,7 +101,7 @@ export class NewRnaCambioColorComponent implements OnInit {
 
         this._ColorService.show(token, this.colorSelected).subscribe(
             colorResponse => {
-                this.datos.idFactura = this.factura.id;
+                 this.datos.idTramiteFactura = this.tramiteFactura.id;
                 this.datos.tramiteFormulario = 'rna-cambiocolor';
                 this.datos.idColor = this.colorSelected;
                 this.datos.idVehiculo = this.vehiculo.id;

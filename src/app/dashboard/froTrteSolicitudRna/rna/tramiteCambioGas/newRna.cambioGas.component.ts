@@ -16,7 +16,7 @@ export class NewRnaCambioGasComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public colores: any;
     public tramiteFacturaSelected: any;
@@ -38,7 +38,7 @@ export class NewRnaCambioGasComponent implements OnInit {
         'presion': null,
         'numeroRunt': null,
         'campos': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
         'idCombustibleCambio': null,
     };
@@ -80,7 +80,7 @@ export class NewRnaCambioGasComponent implements OnInit {
             }
         );
 
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.tramiteFormulario = 'rna-cambiogas';
         this.datos.campos = ['gas'];

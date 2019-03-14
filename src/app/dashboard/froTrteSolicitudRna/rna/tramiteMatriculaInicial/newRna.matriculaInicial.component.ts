@@ -23,7 +23,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public respuesta;
     public colores: any;
@@ -60,7 +60,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         'vehiculo': null,
         'numeroLicencia': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
@@ -98,8 +98,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
 
         
         this.datos.vehiculo = this.vehiculo.placa;
-        this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
-        this.datos.idFactura = this.factura.id;
+        this.datos.numeroLicencia = this.tramiteFactura.numeroLicenciaTrancito;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-matriculainicial';
         let token = this._loginService.getToken(); 
         
@@ -161,7 +161,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 this.respuesta = response; 
                 if(this.respuesta.status == 'success'){
                     this.apoderadoSelected = this.respuesta.data;
-                    this.datos.idFactura = this.factura.id;
+                     this.datos.idTramiteFactura = this.tramiteFactura.id;
                     this.datos.tramiteFormulario = 'rna-matriculainicial';
                     // this.ciudadanoNew = false;
             }else{

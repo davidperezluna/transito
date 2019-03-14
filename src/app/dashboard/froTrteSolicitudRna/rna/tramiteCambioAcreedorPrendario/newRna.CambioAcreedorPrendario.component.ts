@@ -25,7 +25,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() banco: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
 
     public placa: VhloCfgPlaca = null;;
     public errorMessage;
@@ -83,7 +83,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         'tipoAlerta': [],
         'gradoAlerta': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'vehiculoPlaca': null,
         'vehiculoId': null,
         'ciudadanoOldId': null,
@@ -165,7 +165,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.idFactura = this.factura.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-modificacion-acreedor-prendario';
 
         if (this.ciudadanoAcreedorNew) {

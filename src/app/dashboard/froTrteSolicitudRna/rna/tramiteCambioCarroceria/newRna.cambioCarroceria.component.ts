@@ -15,14 +15,14 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public carrocerias: any;
     public tramiteFacturaSelected: any;
     public carroceriaSelected: any;
 
     public datos = {
-        'idFactura': null,
+        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idCarroceria': null,
@@ -62,7 +62,7 @@ export class NewRnaCambioCarroceriaComponent implements OnInit {
 
         this._CarroceriaService.showCarroceria(token, this.carroceriaSelected).subscribe(
             carroceriaResponse => {
-                this.datos.idFactura = this.factura.id;
+                 this.datos.idTramiteFactura = this.tramiteFactura.id;
                 this.datos.tramiteFormulario = 'rna-cambiocarroceria';
                 this.datos.idCarroceria = this.carroceriaSelected;
                 this.datos.idVehiculo = this.vehiculo.id;

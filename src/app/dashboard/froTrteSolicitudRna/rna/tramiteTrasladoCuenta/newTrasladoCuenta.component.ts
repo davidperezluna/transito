@@ -8,14 +8,14 @@ import {VehiculoService} from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-traslado',
-  templateUrl: './newTraslado.component.html'
+  selector: 'app-new-traslado-cuenta',
+  templateUrl: './newTrasladoCuenta.component.html'
 })
-export class NewTrasladoComponent implements OnInit {
+export class NewTrasladoCuentaComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Output() readyTramite = new EventEmitter<any>();
 @Input() vehiculo: any = null;
-@Input() factura: any = null;
+@Input() tramiteFactura: any = null;
 @Input() tramiteTraslado: any = null;
 public sedeOperativaSelected: any;
 public sedes: any;
@@ -30,7 +30,7 @@ public datos = {
     'numeroGuia': null,
     'nombreEmpresa': null,
     'tramiteFormulario': null,
-    'idFactura': null,
+    'idTramiteFactura': null,
     'idVehiculo': null,
     'campos': null,
     'idSedeOperativa': null,
@@ -63,7 +63,7 @@ constructor(
       }
     );
 
-    this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
+    this._TramiteFacturaService.getTramitesByFacturaSelect(this.tramiteFactura.id).subscribe(
       response => {
         
       this.tramitesFactura = response;
@@ -113,7 +113,7 @@ constructor(
     
     this.datos.idSedeOperativa = this.sedeOperativaSelected;
     this.datos.idVehiculo = this.vehiculo.id;
-    this.datos.idFactura = this.factura.id;
+     this.datos.idTramiteFactura = this.tramiteFactura.id;
     this.datos.tramiteFormulario = 'rna-traslado';
     this.datos.campos = ['sedeOperativa'];
     

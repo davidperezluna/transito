@@ -23,7 +23,7 @@ export class NewRnaTraspasoComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public respuesta;
     public colores: any;
@@ -62,7 +62,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         'sustrato': null,
         'numeroLicencia': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
@@ -79,7 +79,7 @@ export class NewRnaTraspasoComponent implements OnInit {
 
         let token = this._loginService.getToken();
         let datos = {
-            'idFactura':this.factura.id,
+            'idTramiteFactura':this.tramiteFactura.id,
             'tramiteFormulario':'rna-traspaso'
         }
 
@@ -124,8 +124,8 @@ export class NewRnaTraspasoComponent implements OnInit {
         let token = this._loginService.getToken(); 
 
         this.datos.vehiculo = this.vehiculo.placa;
-        this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
-        this.datos.idFactura = this.factura.id;
+        this.datos.numeroLicencia = this.tramiteFactura.numeroLicenciaTrancito;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-traspaso';
         
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(

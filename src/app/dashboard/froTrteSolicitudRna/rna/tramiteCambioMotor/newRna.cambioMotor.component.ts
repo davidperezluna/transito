@@ -13,7 +13,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramitesFactura: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
     public tiposIdentificacion: any;
@@ -34,7 +34,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
         'numeroRunt': null,
         'tramiteFormulario': null,
         'combustibleId': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idTipoIngreso': null,
@@ -91,7 +91,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
         this.datos.idCombustible = this.combustibleSelected;
         this.datos.campos = ['motor'];
         this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
         this._VehiculoService.update(this.datos, token).subscribe(
             response => {

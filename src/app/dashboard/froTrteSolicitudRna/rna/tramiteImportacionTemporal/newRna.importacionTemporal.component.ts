@@ -19,7 +19,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public tipoId: boolean = true;
     public tramitesFactura: any = null;
@@ -46,7 +46,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
 
     public tramiteRealizado: any;
     /* public datos = {
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
         'tramiteFormulario': null,
         'fechaSolicitud': null,
@@ -64,7 +64,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         'numeroAceptacion': null,
     }; */
     public datos = {
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
         'tramiteFormulario': null,
         'fechaSolicitud': null,
@@ -92,7 +92,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         this.date = new Date;
         var datePiper = new DatePipe(this.date);
         this.datos.fechaSolicitud = datePiper.transform(this.date, 'yyyy-MM-dd');
-        this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
+        this._TramiteFacturaService.getTramitesByFacturaSelect(this.tramiteFactura.id).subscribe(
             response => {
                 this.tramitesFactura = response;
 
@@ -163,7 +163,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     enviarTramite() {
         let token = this._loginService.getToken();
         this.datos.pais = this.paisSelected;
-        this.datos.idFactura = this.factura.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-importacion-temporal';
         this.datos.idVehiculo = this.vehiculo.id;
         let resumen = {

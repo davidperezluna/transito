@@ -24,7 +24,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() banco: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
 
     public placa: VhloCfgPlaca = null;;
     public errorMessage;
@@ -73,14 +73,15 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         { 'value': 8, 'label': "OCHO" },
         { 'value': 9, 'label': "NUEVE" }
     ];
-    public resumen = {};     public datos = {
+    
+    public datos = {
         'acreedoresVehiculo': [],
         'acreedoresEmpresas': [],
         'acreedoresCiudadanos': [],
         'tipoAlerta': [],
         'gradoAlerta': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'vehiculoPlaca': null,
     };
     public tipoIdentificaciones = [];
@@ -164,7 +165,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.idFactura = this.factura.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-levantamientoalertaprenda';
                
         this._VehiculoAcreedorService.deleteAcreedor(this.datos, token).subscribe(
@@ -182,7 +183,10 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
                                 // this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
                                 // this.datos.gradoAlerta = this.gradoSelected;
                                 // this.datos.tramiteFactura = 46;
-                                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+
+                                let resumen = "<br></b>";
+
+                                this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
                                 this.acreedorNew = false;
 
                                 this.acreedorEncontrado = 2;

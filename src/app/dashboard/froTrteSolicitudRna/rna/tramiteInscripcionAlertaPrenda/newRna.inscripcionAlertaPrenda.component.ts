@@ -26,7 +26,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() banco: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
  
     public placa: VhloCfgPlaca = null;
     public errorMessage;
@@ -83,7 +83,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'tipoAlerta': [],
         'gradoAlerta': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'vehiculoPlaca': null,
         'cfgEntidadJudicial':null,
         'fechaExpedicion':null
@@ -189,7 +189,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
         this.datos.cfgEntidadJudicial = this.cfgEntidadJudicialSelected;
-        this.datos.idFactura = this.factura.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-inscripcionalertaprenda';
                
         this._VehiculoAcreedorService.register(this.datos, token).subscribe(

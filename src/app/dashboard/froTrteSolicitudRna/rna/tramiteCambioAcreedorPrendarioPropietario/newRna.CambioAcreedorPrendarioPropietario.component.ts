@@ -22,7 +22,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public colores: any;
     public tramiteFacturaSelected: any;
@@ -58,7 +58,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         'sustrato': null,
         'numeroLicencia': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
@@ -93,11 +93,11 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     
     enviarTramite(){
         this.datos.vehiculo = this.vehiculo.placa;
-        this.datos.numeroLicencia = this.factura.numeroLicenciaTrancito;
+        this.datos.numeroLicencia = this.tramiteFactura.numeroLicenciaTrancito;
         let token = this._loginService.getToken(); 
         this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
             response => {
-                this.datos.idFactura = this.factura.id;
+                 this.datos.idTramiteFactura = this.tramiteFactura.id;
                 this.datos.tramiteFormulario = 'rna-modificacion-acreedor-prendario-propietario';
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
             }, 

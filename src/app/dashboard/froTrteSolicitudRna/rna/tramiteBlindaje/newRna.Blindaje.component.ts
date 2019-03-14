@@ -15,7 +15,7 @@ export class NewRnaBlindajeComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
     public tipoRegrabacionList: string[];
@@ -29,7 +29,7 @@ export class NewRnaBlindajeComponent implements OnInit {
     public tramiteRealizado: any=false;
 
     public datos = {
-        'idFactura': null,
+        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idTipoBlindaje': null,
@@ -66,7 +66,7 @@ export class NewRnaBlindajeComponent implements OnInit {
     ngOnInit() {
         let token = this._loginService.getToken();
         let datos = {
-            'idFactura':this.factura.id,
+            'idTramiteFactura':this.tramiteFactura.id,
             'tramiteFormulario':'rna-blindaje'
         }
 
@@ -93,7 +93,7 @@ export class NewRnaBlindajeComponent implements OnInit {
     enviarTramite() {
         let token = this._loginService.getToken();
 
-        this.datos.idFactura = this.factura.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-blindaje';
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['blindaje'];

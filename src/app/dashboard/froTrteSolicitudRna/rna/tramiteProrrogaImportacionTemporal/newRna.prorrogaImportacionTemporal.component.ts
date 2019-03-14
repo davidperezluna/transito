@@ -16,7 +16,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public tipoId: boolean = true;
     public tramitesFactura: any = null;
@@ -34,7 +34,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
 
     public tramiteRealizado: any;
     public datos = {
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
         'tramiteFormulario': null,
         'placa': null,
@@ -59,7 +59,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fechaSolicitudProrroga = datePiper.transform(this.date, 'yyyy-MM-dd');
 
-        this._TramiteFacturaService.getTramitesByFacturaSelect(this.factura.id).subscribe(
+        this._TramiteFacturaService.getTramitesByFacturaSelect(this.tramiteFactura.id).subscribe(
             response => {
                 this.tramitesFactura = response;
 
@@ -103,7 +103,7 @@ export class NewRnaProrrogaImportacionTemporalComponent implements OnInit {
     enviarTramite() {
         let token = this._loginService.getToken();
 
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-prorroga-importacion-temporal';
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.placa = this.vehiculo.placa.numero;

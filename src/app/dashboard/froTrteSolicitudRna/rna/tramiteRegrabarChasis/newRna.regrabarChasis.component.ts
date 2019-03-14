@@ -13,7 +13,7 @@ export class NewRnaRegrabarChasisComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
     public tipoRegrabacionList: string[];
@@ -25,7 +25,7 @@ export class NewRnaRegrabarChasisComponent implements OnInit {
         'nuevoNumero': null,
         'numeroRunt': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
         'campos': null,
     };
@@ -44,7 +44,7 @@ export class NewRnaRegrabarChasisComponent implements OnInit {
         let token = this._loginService.getToken();
 
         this.datos.motivo = this.motivoSelected;
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-regrabarchasis';
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['regrabarchasis'];

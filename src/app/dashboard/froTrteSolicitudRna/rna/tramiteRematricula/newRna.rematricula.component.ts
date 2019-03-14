@@ -14,7 +14,7 @@ import swal from 'sweetalert2';
 export class NewRnaRematriculaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;
     public errorMessage;
     public respuesta;
@@ -44,7 +44,7 @@ export class NewRnaRematriculaComponent implements OnInit {
         'estado': null,
         'tramiteFactura': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
     };
 
@@ -127,7 +127,7 @@ export class NewRnaRematriculaComponent implements OnInit {
                     this.datos.municipioEntrega = this.municipioEntregaSelected;
                     this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
                     this.datos.tramiteFactura = 25;
-                    this.datos.idFactura = this.factura.id;
+                     this.datos.idTramiteFactura = this.tramiteFactura.id;
                     this.datos.idVehiculo = this.vehiculo.id;
                     this.datos.tramiteFormulario = 'rna-rematricula';
 

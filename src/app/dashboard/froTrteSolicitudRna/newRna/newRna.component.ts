@@ -210,12 +210,7 @@ export class NewRnaComponent implements OnInit {
                     this.propietarios = response.data.propietarios;
                   } else {
                     this.propietarios = null;
-                  }
-
-                  console.log(response);
-                  console.log(this.tramitesFactura);
-                  console.log(this.propietarios);
-                  
+                  }                 
 
                   swal.close();
                 } else {
@@ -342,7 +337,6 @@ export class NewRnaComponent implements OnInit {
     
     if (tramiteFactura) {
       this.tramiteFacturaSelected = tramiteFactura;
-      console.log(this.tramiteFacturaSelected);
       
     }
   }
