@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SvCfgRequiereEmpresa } from '../svCfgRequiereEmpresa.modelo';
-import { SvCfgRequiereUserEmpresaService } from '../../../services/svCfgRequiereEmpresa.service';
+import { SvCfgRequiereEmpresaService } from '../../../services/svCfgRequiereEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
@@ -18,7 +18,7 @@ export class NewComponent implements OnInit {
     public carroceriaSelected: any;
 
     constructor(
-        private _RequiereUserEmpresaService: SvCfgRequiereUserEmpresaService,
+        private _RequiereEmpresaService: SvCfgRequiereEmpresaService,
         private _loginService: LoginService,
         private _CarroceriaService: VhloCfgCarroceriaService,
     ) { }
@@ -47,7 +47,7 @@ export class NewComponent implements OnInit {
     onEnviar() {
         let token = this._loginService.getToken();
         this.requiereEmpresa.idCarroceria = this.carroceriaSelected;
-        this._RequiereUserEmpresaService.register(this.requiereEmpresa, token).subscribe(
+        this._RequiereEmpresaService.register(this.requiereEmpresa, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

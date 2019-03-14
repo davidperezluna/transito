@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import "rxjs/add/operator/map";
 
 @Injectable()
-export class SvCfgRequiereUserEmpresaService {
+export class SvCfgRequiereEmpresaService {
     private url = environment.apiUrl + 'seguridadvial/svcfgrequiereempresa';
     public identity;
     public token;
