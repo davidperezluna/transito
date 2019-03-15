@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router'
 import { PnalFuncionario } from './PnalFuncionario.modelo';
-//import { PnalTipoContratoService } from '../../services/PnalTipoContrato.service';
+import { PnalCfgTipoNombramientoService } from '../../services/pnalCfgTipoNombramiento.service';
 import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { PnalCfgCargoService } from '../../services/pnalCfgCargo.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
@@ -28,8 +28,8 @@ export class PnalFuncionarioComponent implements OnInit {
   public table: any = null;
   public funcionario: PnalFuncionario;
   public numeroContrato: any;
-  public tiposContrato: any;
-  public tipoContratoSelected: any;
+  public tiposNombramiento: any;
+  public tipoNombramientoSelected: any;
   public cargos: any;
   public cargoSelected: any;
   public organismosTransito: any;
@@ -38,7 +38,7 @@ export class PnalFuncionarioComponent implements OnInit {
     'nombre': null,
     'identificacion': null,
     'cargo': null,
-    //'tipoContratoId': null,
+    'idTipoNombramiento': null,
     'idOrganismoTransito': null,
     'numeroContrato': null,
     'fechaInicio': null,
@@ -48,7 +48,7 @@ export class PnalFuncionarioComponent implements OnInit {
 
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
-    //private _TipoContratoService: MpersonalTipoContratoService,
+    private _TipoNombramientoService: PnalCfgTipoNombramientoService,
     private _CargoService: PnalCfgCargoService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _loginService: LoginService,
@@ -56,9 +56,9 @@ export class PnalFuncionarioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /* this._TipoContratoService.select().subscribe(
+    this._TipoNombramientoService.select().subscribe(
       response => {
-        this.tiposContrato = response;
+        this.tiposNombramiento = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -68,7 +68,7 @@ export class PnalFuncionarioComponent implements OnInit {
           alert('Error en la petición');
         }
       }
-    ); */
+    );
 
     this._CargoService.select().subscribe(
       response => {
@@ -185,7 +185,7 @@ export class PnalFuncionarioComponent implements OnInit {
   onSearch() {
     this.funcionarios = null;
     this.datos.cargo = this.cargoSelected;
-    //this.datos.tipoContratoId = this.tipoContratoSelected;
+    this.datos.idTipoNombramiento = this.tipoNombramientoSelected;
     this.datos.idOrganismoTransito = this.organismoTransitoSelected;
 
     swal({
@@ -207,7 +207,7 @@ export class PnalFuncionarioComponent implements OnInit {
         if (response.status == 'success') {
           this.datos.nombre = null;
           this.cargoSelected = null;
-          //this.tipoContratoSelected = null;
+          this.tipoNombramientoSelected = null;
           this.organismoTransitoSelected = null;
           this.datos.identificacion = null;
           this.datos.cargo = null;
@@ -216,7 +216,6 @@ export class PnalFuncionarioComponent implements OnInit {
           this.datos.nombramiento = null;
           this.datos.numeroContrato = null;
           this.funcionarios = response.data;
-          console.log(this.funcionarios);
           if (this.table) {
             this.table.destroy();
             this.formIndex = false;
@@ -314,7 +313,7 @@ export class PnalFuncionarioComponent implements OnInit {
     })
   }
 
-  /* onChangedTipoContrato(e) {
+  onChangedTipoNombramiento(e) {
     if (e) {
       if (e != 2) {
         this.datos.numeroContrato = null;
@@ -325,7 +324,7 @@ export class PnalFuncionarioComponent implements OnInit {
         this.datos.nombramiento = null;
       }
     }
-  } */
+  }
 
   onEdit(funcionario: any) {
     this.funcionario = funcionario;

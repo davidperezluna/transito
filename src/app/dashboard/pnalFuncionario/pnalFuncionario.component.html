@@ -30,28 +30,28 @@
               </div>
             </div>
             <div class="form-group row">
-              <!-- <div class="col-xs-12 col-lg-3">
-                <label>Tipo contrato</label>
-                <ng-select (ngModelChange)="onChangedTipoContrato($event)" [multiple]="false" [options]="tiposContrato"
-                  [(ngModel)]="tipoContratoSelected" name="tiposContrato">
+              <div class="col-xs-12 col-lg-3">
+                <label>Tipo Nombramiento</label>
+                <ng-select (ngModelChange)="onChangedTipoNombramiento($event)" [multiple]="false" [options]="tiposNombramiento"
+                  [(ngModel)]="tipoNombramientoSelected" name="tiposNombramiento">
                 </ng-select>
-              </div> -->
-              <!-- <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
+              </div>
+              <div *ngIf='tipoNombramientoSelected == 2' class="col-xs-12 col-lg-3">
                 <label>Numero de contrato </label>
                 <input class="form-control" [(ngModel)]="datos.numeroContrato" name="numeroContrato" type="text" />
               </div>
-              <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
+              <div *ngIf='tipoNombramientoSelected == 2' class="col-xs-12 col-lg-3">
                 <label>Fecha inicio </label>
                 <input class="form-control" [(ngModel)]="datos.fechaInicio" name="fechaInicio" type="date" />
               </div>
-              <div *ngIf='tipoContratoSelected == 2' class="col-xs-12 col-lg-3">
+              <div *ngIf='tipoNombramientoSelected == 2' class="col-xs-12 col-lg-3">
                 <label>Fecha fin </label>
                 <input class="form-control" [(ngModel)]="datos.fechaFin" name="fechaFin" type="date" />
               </div>
-              <div *ngIf='tipoContratoSelected == 1' class="col-xs-12 col-lg-3">
+              <div *ngIf='tipoNombramientoSelected == 1' class="col-xs-12 col-lg-3">
                 <label>Nombramiento</label>
                 <input class="form-control" [(ngModel)]="datos.nombramiento" name="nombramiento" type="text" />
-              </div> -->
+              </div>
             </div>
           </form>
         </div>
@@ -111,19 +111,17 @@
                   </small>
                 </td>
                 <td>
-                  <!-- <strong>Tipo contrato:</strong>
+                  <strong>Tipo Nombramiento:</strong>
                   <small>
-                    {{ funcionario.tipoContrato.nombre }}
-                  </small> -->
-                  <!-- <div *ngIf='funcionario.tipoContrato.id == 2'> -->
-                  <div>
+                    {{ funcionario.tipoNombramiento.nombre }}
+                  </small>
+                  <div *ngIf='funcionario.tipoNombramiento.id == 2'>
                     <strong>No. contrato:</strong>
                     <small>
                       {{ funcionario.numeroContrato }}
                     </small>
                   </div>
-                  <!-- <div *ngIf='funcionario.tipoContrato.id == 1'> -->
-                  <div>
+                  <div *ngIf='funcionario.tipoNombramiento.id == 1'>
                     <strong>Tipo nombramiento:</strong>
                     <small>
                       {{ funcionario.tipoNombramiento.nombre }}

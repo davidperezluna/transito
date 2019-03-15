@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class PnalCfgTipoNombramientoService {
-	private url = environment.apiUrl + 'personal/pnalCfgtiponombramiento';
+	private url = environment.apiUrl + 'personal/pnalcfgtiponombramiento';
 	public identity;
 	public token;
 
