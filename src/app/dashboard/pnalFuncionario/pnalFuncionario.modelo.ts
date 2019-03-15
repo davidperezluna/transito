@@ -13,7 +13,6 @@ export class PnalFuncionario{
 		public inhabilidad: string,
 		public identificacion: number,
 		public idOrganismoTransito: number,
-		public idTipoContrato: number,
 		public idCargo: number,
 		public id: number
 	){}
