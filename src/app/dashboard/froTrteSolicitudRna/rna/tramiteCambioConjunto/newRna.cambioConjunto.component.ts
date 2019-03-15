@@ -8,23 +8,24 @@ import {VehiculoService} from '../../../../services/vehiculo.service';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-cambioConjunto',
+    selector: 'appRna-cambio-conjunto',
     templateUrl: './newRna.cambioConjunto.html'
 })
 export class NewRnaCambioConjuntoComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public resumen = {};     public datos = {
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
         'campos': null,
         'descripcion': null,
         'nuevoModelo': null,
     };
+
     public tiposPotenciacion = [
         {'value': 'Cambio de motor', 'label': 'Cambio de motor'},
         {'value': 'Reparacion de motor y cambio de conjunto', 'label': 'Reparación de motor y cambio de conjunto'},
@@ -55,7 +56,7 @@ export class NewRnaCambioConjuntoComponent implements OnInit {
         this.vehiculo.claseId = this.vehiculo.clase.id   
         this.vehiculo.servicioId = this.vehiculo.servicio.id  */
         
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-cambioconjunto';
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['conjunto'];

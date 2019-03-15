@@ -13,7 +13,7 @@ export class NewRnaRegrabarVinComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any; 
     public motivoSelected: any;
@@ -34,7 +34,7 @@ export class NewRnaRegrabarVinComponent implements OnInit {
         'numeroRunt': null,
         'campos': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
     };
 
@@ -49,7 +49,7 @@ export class NewRnaRegrabarVinComponent implements OnInit {
     enviarTramite() {
         let token = this._LoginService.getToken();
 
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-regrabarvin';
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['regrabarvin'];

@@ -16,14 +16,14 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramitesFactura: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public organismosTransito: any;
     public tramiteFacturaSelected: any;
     public sedeOperativaSelected: any;
 
     public datos = {
-        'idFactura': null,
+        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idSedeOperativa': null,
@@ -64,7 +64,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
 
         this._OrganismoTransitoService.show(token, this.sedeOperativaSelected).subscribe(
             sedeOperativaResponse => {
-                this.datos.idFactura = this.factura.id;
+                 this.datos.idTramiteFactura = this.tramiteFactura.id;
                 this.datos.tramiteFormulario = 'rna-cambiosedeoperativa';
                 this.datos.idSedeOperativa = this.sedeOperativaSelected;
                 this.datos.idVehiculo = this.vehiculo.id;

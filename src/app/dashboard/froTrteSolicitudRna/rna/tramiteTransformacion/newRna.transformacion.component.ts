@@ -16,7 +16,7 @@ export class NewRnaTransformacionComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
 
     public carrocerias: any = null;
@@ -34,7 +34,7 @@ export class NewRnaTransformacionComponent implements OnInit {
         'oldData': null,
         'tipoTransformacion': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idVehiculo': null,
         'idCarroceria': null,
         'idCombustible': null,
@@ -96,7 +96,7 @@ export class NewRnaTransformacionComponent implements OnInit {
     onTramite(){
         let token = this._loginService.getToken();
 
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-transformacion';
         this.datos.idVehiculo = this.vehiculo.id;
         

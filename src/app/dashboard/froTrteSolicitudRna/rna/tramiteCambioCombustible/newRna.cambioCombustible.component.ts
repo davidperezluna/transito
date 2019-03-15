@@ -16,14 +16,14 @@ export class NewRnaCambioCombustibleComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramitesFactura: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public combustibles: any;
     public tramiteFacturaSelected: any;
     public combustibleSelected: any;
 
     public datos = {
-        'idFactura': null,
+        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idCombustible': null,
@@ -62,7 +62,7 @@ export class NewRnaCambioCombustibleComponent implements OnInit {
 
         this._CombustibleService.showCombustible(token, this.combustibleSelected).subscribe(
             combustibleResponse => {
-                this.datos.idFactura = this.factura.id;
+                 this.datos.idTramiteFactura = this.tramiteFactura.id;
                 this.datos.tramiteFormulario = 'rna-cambiocombustible';
                 this.datos.idCombustible = this.combustibleSelected;
                 this.datos.idVehiculo = this.vehiculo.id;

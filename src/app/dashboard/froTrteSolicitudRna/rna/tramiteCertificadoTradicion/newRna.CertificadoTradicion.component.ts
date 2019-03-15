@@ -9,14 +9,14 @@ import { environment } from 'environments/environment';
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-certificadoTradicion',
+    selector: 'appRna-certificado-tradicion',
     templateUrl: './newRna.certificadoTradicion.html'
 })
 export class NewRnaCertificadoTradicionComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public apiUrl = environment.apiUrl + 'default';
     public errorMessage;
     public tramiteFacturaSelected: any; 
@@ -34,7 +34,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         'observacion': null,                  
         'certificadoEntregada': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
     };
@@ -55,7 +55,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     enviarTramite() {
         let token = this._loginService.getToken();
       
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-certificadotradicion';
         this.datos.certificadoEntregada = this.certificadoEntregado;
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

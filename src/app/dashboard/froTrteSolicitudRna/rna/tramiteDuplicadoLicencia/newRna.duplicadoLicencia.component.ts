@@ -10,8 +10,8 @@ import { LoginService } from '../../../../services/login.service';
 export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
-    @Input() factura: any = null;
-    @Input() solicitanteId: any = null;
+    @Input() tramiteFactura: any = null;
+    @Input() idSolicitante: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
 
@@ -24,7 +24,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         'tramiteFormulario': null,
         'numeroLicenciaActual': null,
         'nuevaLicencia': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
     };
 
     public motivos = [
@@ -40,7 +40,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
 
     ngOnInit() {
         let datos = {
-            'idSolicitante': this.solicitanteId
+            'idSolicitante': this.idSolicitante
         }
         let token = this._LoginService.getToken();
         this._RncLicenciaConduccionService.searchLicenciaActual(datos,token).subscribe(
@@ -63,7 +63,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
      }
     
     enviarTramite() {
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-duplicadolicencia';
         this.resumen = "Motivo "+ this.datos.motivo +"<br/>";
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});

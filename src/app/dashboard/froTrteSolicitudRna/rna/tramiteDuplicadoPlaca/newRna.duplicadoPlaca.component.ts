@@ -12,18 +12,19 @@ import swal from 'sweetalert2';
 export class NewRnaDuplicadoPlacaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public tramiteFacturaSelected: any;
     public motivoList: string[];
     public motivoSelected: any;
     public resumen = {};     
+    
     public datos = {
         'motivo': null,
         'cantidad': null,
         'numeroRunt': null,
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
@@ -39,7 +40,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
    
     enviarTramite() {
         this.datos.motivo = this.motivoSelected;
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-duplicadoplaca';
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }

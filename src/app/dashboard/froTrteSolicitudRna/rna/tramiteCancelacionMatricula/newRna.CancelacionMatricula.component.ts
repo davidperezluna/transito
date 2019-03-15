@@ -8,14 +8,14 @@ import { CfgEntidadJudicialService } from "../../../../services/cfgEntidadJudici
 import swal from 'sweetalert2';
 
 @Component({
-    selector: 'appRna-cancelacionMatricula',
+    selector: 'appRna-cancelacion-matricula',
     templateUrl: './newRna.CancelacionMatricula.html'
 })
 export class NewRnaCancelacionMatriculaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
     public entidadesJudiciales: any;
     public tramiteFacturaSelected: any;
@@ -32,7 +32,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         'fechaHechos':null,
         'recuperarMotor':null,         
         'tramiteFormulario': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
     };
@@ -70,7 +70,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
 
     enviarTramite() {
         
-        this.datos.idFactura = this.factura.id;
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-cancelacionmatricula';
 
         this.datos.idVehiculo = this.vehiculo.id;
@@ -83,7 +83,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
                 if (response.status == 'success') {
                     let resumen = {
                         'id vehiculo': this.vehiculo.nombre,
-                        'id factura': this.datos.idFactura,
+                        'id factura': this.datos.idTramiteFactura,
                         'entidad judicial': this.datos.idEntidadJudicial,
                     };
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });

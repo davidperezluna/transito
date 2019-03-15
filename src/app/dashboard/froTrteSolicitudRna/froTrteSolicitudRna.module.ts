@@ -31,7 +31,7 @@ import { NewRnaAcreedorComponent } from './newRnaAcreedor/newRnaAcreedor.compone
 import { NewRnaInsumoComponent } from './newRnaSustrato/newRnaSustrato.component';
 import { NewRnaTraspasoComponent } from './rna/tramiteTraspaso/newRna.traspaso.component';
 import { NewRnaTraspasoIndeterminadaComponent } from './rna/tramiteTraspasoIndeterminada/newRna.traspasoIndeterminada.component';
-import { NewTrasladoComponent } from './rna/tramiteTraslado/newTraslado.component';
+import { NewTrasladoCuentaComponent } from './rna/tramiteTrasladoCuenta/newTrasladoCuenta.component';
 import { NewRnaTramiteInscripcionAlertaPrendaComponent } from './rna/tramiteInscripcionAlertaPrenda/newRna.inscripcionAlertaPrenda.component';
 import { NewRnaTramiteLevantamientoAlertaPrendaComponent } from './rna/tramiteLevantamientoAlertaPrenda/newRna.levantamientoAlertaPrenda.component';
 import { NewRnaMatricualaInicialComponent } from './rna/tramiteMatriculaInicial/newRna.matriculaInicial.component';
@@ -86,7 +86,7 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent,
-        NewTrasladoComponent,
+        NewTrasladoCuentaComponent,
         NewRnaCambioGasComponent,
         NewRnaTramiteCambioAcreedorPrendarioComponent,
         NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent,
@@ -129,7 +129,7 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
         NewRnaCambioConjuntoComponent,
-        NewTrasladoComponent,
+        NewTrasladoCuentaComponent,
         NewRnaCambioGasComponent,
         NewRnaTramiteCambioAcreedorPrendarioComponent,
         NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent,

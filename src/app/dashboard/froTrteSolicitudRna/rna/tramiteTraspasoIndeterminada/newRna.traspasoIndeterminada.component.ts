@@ -18,7 +18,7 @@ import swal from 'sweetalert2';
 export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   @Output() readyTramite = new EventEmitter<any>();
   @Input() vehiculo: any = null; 
-  @Input() factura: any = null;
+  @Input() tramiteFactura: any = null;
   @Input() ciudadano: any = null;
   public errorMessage;
   public codigoOrganismo;
@@ -89,7 +89,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       'numeroDocumento': null,
       'solicitanteId': null,
       'tramiteFormulario': null,
-      'idFactura': null,
+      'idTramiteFactura': null,
       'personaTraslado': null};
       
       this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
@@ -141,7 +141,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
 
-    this.datos.idFactura = this.factura.id;
+     this.datos.idTramiteFactura = this.tramiteFactura.id;
     this.datos.tramiteFormulario = 'rna-traspasoindeterminada';
     this.datos.personaTraslado = this.sinRegistro;
 
