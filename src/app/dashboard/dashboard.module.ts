@@ -209,7 +209,7 @@ import { PnalCfgTipoNombramientoModule } from './pnalCfgTipoNombramiento/pnalCfg
 import { PnalFuncionarioModule } from './pnalFuncionario/pnalFuncionario.module';
 
 import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
-import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
+//import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
 import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
@@ -250,7 +250,7 @@ import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
 
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
-import { CfgEmpresaServicioModule } from './cfgEmpresaServicio/cfgEmpresaServicio.module';
+import { UserCfgEmpresaServicioModule } from './userCfgEmpresaServicio/userCfgEmpresaServicio.module';
 
 import { DashboardComponent } from './dashboard.component'; 
 
@@ -369,7 +369,7 @@ import {RightsidebarComponent} from '../shared';
     PnalCfgTipoNombramientoModule,
     PnalFuncionarioModule,
     CfgCargoModule,
-    MpersonalFuncionarioModule,
+    //MpersonalFuncionarioModule,
     MpersonalTipoContratoModule,
     MpersonalTalonarioModule,
     MpersonalAsignacionModule,
@@ -463,7 +463,7 @@ import {RightsidebarComponent} from '../shared';
     RpcccInventarioDocumentalModule,
     InsumoBusquedaModule,
     FacturaInfraccionModule,
-    CfgEmpresaServicioModule,
+    UserCfgEmpresaServicioModule,
     RnaCertificadoTradicionOficialModule,
     RnaPreasignacionInsumoModule,
     CvCfgTipoMedidaCautelarModule,

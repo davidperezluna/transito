@@ -1,4 +1,4 @@
-export class MpersonalHorario{
+export class PnalHorario{
 	constructor(
 		public horaInicioManana: string,
 		public horaFinManana: string,
@@ -14,7 +14,7 @@ export class MpersonalHorario{
 		public noche: boolean,
 		public fecha: any,
 		public jornadas: any,
-		public funcionarioId: number,
+		public idFuncionario: number,
 		public id:number
 	){}
 }

@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let estadoVia of estadosVia; let i = index">
-                                <td>{{ estadoVia.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ estadoVia.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(estadoVia)" class="btn btn-xs btn-info" type="button">

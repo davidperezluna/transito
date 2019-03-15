@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let tipoControl of tiposControl; let i = index">
-                                <td>{{ tipoControl.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ tipoControl.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(tipoControl)" class="btn btn-xs btn-info" type="button">

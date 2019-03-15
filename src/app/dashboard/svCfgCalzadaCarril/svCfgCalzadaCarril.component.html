@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let calzada of calzadas; let i = index">
-                                <td>{{ calzada.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ calzada.nombre }}</td>
                                 <td>
                                     <button (click)="editCalzadaCarril(calzada)" class="btn btn-xs btn-info" type="button">

@@ -7,7 +7,7 @@ import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { CfgEmpresaServicioService } from '../../../services/cfgEmpresaServicio.service';
+import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
 
 import swal from 'sweetalert2';
  
@@ -58,7 +58,7 @@ constructor(
   private _tipoSociedadService: TipoSociedadService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _CiudadanoService: UserCiudadanoService,
-  private _CfgEmpresaServicio: CfgEmpresaServicioService,
+  private _CfgEmpresaServicioService: UserCfgEmpresaServicioService,
 ){} 
 
   ngOnInit() {
@@ -90,7 +90,7 @@ constructor(
       }
     );
 
-    this._CfgEmpresaServicio.select().subscribe(
+    this._CfgEmpresaServicioService.select().subscribe(
       response => {
         this.servicios = response;
       }, 

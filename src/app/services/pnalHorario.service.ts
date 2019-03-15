@@ -5,8 +5,8 @@ import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class MpersonalHorarioService {
-	private url = environment.apiUrl + 'mpersonalhorario';
+export class PnalHorarioService {
+	private url = environment.apiUrl + 'personal/pnalhorario';
 	public identity;
 	public token;
 

@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let controlVia of controlesVia; let i = index">
-                                <td>{{ controlVia.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ controlVia.nombre }}</td>
                                 <td>{{ controlVia.tipoControl.nombre }}</td>
                                 <td>

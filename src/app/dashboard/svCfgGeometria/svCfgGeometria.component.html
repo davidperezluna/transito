@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let geometria of geometrias; let i = index">
-                                <td>{{ geometria.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ geometria.nombre }}</td>
                                 <td>{{ geometria.tipoGeometria.nombre }}</td>
 

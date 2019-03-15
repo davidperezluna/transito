@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let visual of visuales; let i = index">
-                                <td>{{ visual.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ visual.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(visual)" class="btn btn-xs btn-info" type="button">

@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { MpersonalHorario } from '../mpersonalHorario.modelo';
-import { MpersonalHorarioService } from '../../../services/mpersonalHorario.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalHorario } from '../pnalHorario.modelo';
+import { PnalHorarioService } from '../../../services/pnalHorario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -13,7 +13,7 @@ declare var $: any;
 export class TimeComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() funcionario:any = null;
-public horario: MpersonalHorario;
+public horario: PnalHorario;
 public errorMessage;
 public horarios: any = null;
 public agregar: any;
@@ -22,13 +22,13 @@ public table: any;
 
 
 constructor(
-  private _HorarioService: MpersonalHorarioService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _HorarioService: PnalHorarioService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.horario = new MpersonalHorario(null,null,null,null,null, null, null, null, null, null, null, null, null, null, null, null);
+    this.horario = new PnalHorario(null,null,null,null,null, null, null, null, null, null, null, null, null, null, null, null);
     
     let token = this._loginService.getToken();
 
@@ -55,8 +55,7 @@ constructor(
   
   onEnviar(){
     let token = this._loginService.getToken();
-    this.horario.funcionarioId = this.funcionario.id;
-    console.log(this.horario);
+    this.horario.idFuncionario = this.funcionario.id;
     this._HorarioService.register(this.horario,token).subscribe(
       response => {        
         if(response.status == 'success'){

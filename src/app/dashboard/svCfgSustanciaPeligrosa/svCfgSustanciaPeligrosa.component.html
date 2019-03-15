@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let sustanciaPeligrosa of sustanciasPeligrosas; let i = index">
-                                <td>{{ sustanciaPeligrosa.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ sustanciaPeligrosa.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(sustanciaPeligrosa)" class="btn btn-xs btn-info" type="button">

@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgEmpresaServicioService } from '../../services/cfgEmpresaServicio.service';
+import { UserCfgEmpresaServicioService } from '../../services/userCfgEmpresaServicio.service';
 import { LoginService } from '../../services/login.service';
-import { CfgEmpresaServicio } from './cfgEmpresaServicio.modelo';
+import { UserCfgEmpresaServicio } from './userCfgEmpresaServicio.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgEmpresaServicio.component.html'
+  templateUrl: './userCfgEmpresaServicio.component.html'
 })
-export class CfgEmpresaServicioComponent implements OnInit {
+export class UserCfgEmpresaServicioComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -18,10 +18,10 @@ export class CfgEmpresaServicioComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public empresaServicio: CfgEmpresaServicio;
+  public empresaServicio: UserCfgEmpresaServicio;
 
   constructor(
-    private _CfgEmpresaServicioService: CfgEmpresaServicioService,
+    private _UserCfgEmpresaServicioService: UserCfgEmpresaServicioService,
 		private _loginService: LoginService,
     ){}
     
@@ -41,7 +41,7 @@ export class CfgEmpresaServicioComponent implements OnInit {
       }
     })
 
-    this._CfgEmpresaServicioService.index().subscribe(
+    this._UserCfgEmpresaServicioService.index().subscribe(
 				response => {
           this.empresaServicios = response.data;
           let timeoutId = setTimeout(() => {  
@@ -103,7 +103,7 @@ export class CfgEmpresaServicioComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgEmpresaServicioService.delete({ 'id': id }, token).subscribe(
+        this._UserCfgEmpresaServicioService.delete({ 'id': id }, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

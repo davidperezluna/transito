@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let cardinalidad of cardinalidades; let i = index">
-                                <td>{{ cardinalidad.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ cardinalidad.nombre }}</td>
                                 <td>
                                     <button (click)="editCardinalidad(cardinalidad)" class="btn btn-xs btn-info" type="button">

@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let estadoIluminacion of estadosIluminacion; let i = index">
-                                <td>{{ estadoIluminacion.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ estadoIluminacion.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(estadoIluminacion)" class="btn btn-xs btn-info" type="button">

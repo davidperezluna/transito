@@ -1,8 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import {VhloCfgColorService} from '../../../services/vhloCfgColor.service';
-import { MpersonalFuncionario } from '../mpersonalFuncionario.modelo';
-import { PnalSuspensionService } from '../../../services/pnalSuspension.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+//import { PnalFuncionario } from '../pnalFuncionario.modelo';
+import { PnalProrrogaService } from '../../../services/pnalProrroga.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { DatePipe  } from '@angular/common';
@@ -10,17 +10,17 @@ declare var $: any;
 
 
 @Component({
-  selector: 'app-suspension',
-  templateUrl: './suspension.component.html',
+  selector: 'app-prorroga',
+  templateUrl: './prorroga.component.html',
   providers: [DatePipe]
 })
-export class SuspensionComponent implements OnInit {
+export class ProrrogaComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() funcionario:any = null;
     public errorMessage;
     public id;
     public respuesta;
-    public suspensions:any = null;
+    public prorrogas:any = null;
     public date:any;
     public formNew = false;
     public formEdit = false;
@@ -28,23 +28,23 @@ export class SuspensionComponent implements OnInit {
     public txtFechaInicio:any;
     public table:any; 
     public color:any; 
-    public suspension = {
+    public prorroga = {
       'fechaInicio': null,
       'fechaFin': null,
       'numeroModificatorio': null,
-      'mPersonalFuncionarioId': null,
+      'idFuncionario': null,
   };
 
   constructor(
-		private _PnalSuspensionService: PnalSuspensionService,
-		private _MpersonalFuncionarioService: MpersonalFuncionarioService,
+		private _PnalProrrogaService: PnalProrrogaService,
+		private _PnalFuncionarioService: PnalFuncionarioService,
 		private _loginService: LoginService,
     ){
       this.date = new Date();
       var datePiper = new DatePipe(this.date);
       this.date = datePiper.transform(this.date,'yyyy-MM-dd');
     }
-    
+     
   ngOnInit() {
     console.log(this.funcionario);
     swal({
@@ -62,9 +62,9 @@ export class SuspensionComponent implements OnInit {
       }
     });
     let token = this._loginService.getToken();
-		this._MpersonalFuncionarioService.recordSuspensiones(this.funcionario, token).subscribe(
+		this._PnalFuncionarioService.recordProrrogas(this.funcionario, token).subscribe(
       response => {
-        this.suspensions = response.data;
+        this.prorrogas = response.data;
         let timeoutId = setTimeout(() => {
           this.iniciarTabla();
         }, 100);
@@ -107,11 +107,11 @@ export class SuspensionComponent implements OnInit {
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    this.suspension.mPersonalFuncionarioId = this.funcionario.id;
-    console.log(this.suspension);
-    this._PnalSuspensionService.register(this.suspension, token).subscribe(
+    this.prorroga.idFuncionario = this.funcionario.id;
+    console.log(this.prorroga);
+    this._PnalProrrogaService.register(this.prorroga, token).subscribe(
       response => {
-        this.suspensions = response.data;
+        this.prorrogas = response.data;
         this.table.destroy();
         this.ngOnInit();
       },
@@ -128,9 +128,9 @@ export class SuspensionComponent implements OnInit {
 
   isFecha(){
     console.log(this.date);
-    console.log(this.suspension.fechaInicio);
+    console.log(this.prorroga.fechaInicio);
 
-    if (this.suspension.fechaInicio >= this.date) {
+    if (this.prorroga.fechaInicio >= this.date) {
       console.log('fecha mayor');
       this.txtFechaInicio = 'has-success';
     }else{

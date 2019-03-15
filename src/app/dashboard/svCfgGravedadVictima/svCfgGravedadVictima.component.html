@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let gravedadVictima of gravedadesVictima; let i = index">
-                                <td>{{ gravedadVictima.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ gravedadVictima.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(gravedadVictima)" class="btn btn-xs btn-info" type="button">

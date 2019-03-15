@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class PnalCfgCargoService {
-	private url = environment.apiUrl + 'personal/pnalCfgCargo';
+	private url = environment.apiUrl + 'personal/pnalcfgcargo';
 	public identity;
 	public token;
 

@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let area of areas; let i = index">
-                                <td>{{ area.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ area.nombre }}</td>
                                 <td>{{ area.tipoArea.nombre }}</td>
                                 <td>

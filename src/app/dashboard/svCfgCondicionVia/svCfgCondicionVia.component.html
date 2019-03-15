@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let condicionVia of condicionesVia; let i = index">
-                                <td>{{ condicionVia.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ condicionVia.nombre }}</td>
                                 <td>
                                     <button (click)="editCondicionVia(condicionVia)" class="btn btn-xs btn-info" type="button">

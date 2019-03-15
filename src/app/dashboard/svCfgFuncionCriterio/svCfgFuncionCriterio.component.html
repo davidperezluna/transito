@@ -28,7 +28,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let funcionCriterio of funcionesCriterio; let i = index">
-                                <td>{{ funcionCriterio.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ funcionCriterio.nombre }}</td>
                                 <td>{{ funcionCriterio.funcion.nombre }}</td>
                                 <td>
