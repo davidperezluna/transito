@@ -1,14 +1,14 @@
 import { Component , OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { LoginService } from '../../../../services/login.service';
 import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
+import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { Router } from "@angular/router";
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { LoginService } from '../../../../services/login.service';
+import { Router } from "@angular/router";
 
 
 
@@ -25,10 +25,10 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
-    public respuesta;
-    public colores: any;
-    public tramiteFacturaSelected: any;
+    
+    public tramiteSolicitud:any = null;
     public tipoPropiedadSelected:any;
+    
     public ciudadano:any;
     public apoderadoSelected:any;
     public empresa:any;
@@ -47,76 +47,107 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     public propietarioPresente = false;
     public ciudadanoSelected:any;
     public apoderado = 'false';
+
     public tipoPropiedades= [
         {'value':1,'label':"Leasing"},
         {'value':2,'label':"Propio"}
     ];
-    public tipoIdentificaciones= [ ];
-    public resumen = {};     
+
+    public tipoIdentificaciones: any;
+    
     public datos = {
         'propietariosEmpresas': [],
         'propietariosCiudadanos': [],
         'solidario': false,
         'vehiculo': null,
         'numeroLicencia': null,
-        'tramiteFormulario': null,
+        'tipoPropiedad': null,
         'idTramiteFactura': null,
     };
 
     constructor(
         private _ColorService: VhloCfgColorService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
         private _VehiculoService: VehiculoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _UserCiudadanoService: UserCiudadanoService,
-        private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+        private _PropietarioService: VhloPropietarioService,
         private router: Router,
         private _EmpresaService: UserEmpresaService,
     ) { }
 
     ngOnInit() {
+        if (this.tramiteFactura.realizado) {
+            let token = this._loginService.getToken();
 
-        this._TipoIdentificacionService.select().subscribe(
-            response => {
-              this.tipoIdentificaciones = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idtramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            ); 
+        }else{
+            this._TipoIdentificacionService.select().subscribe(
+                response => {
+                    this.tipoIdentificaciones = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
     
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-              }
-            }
-          );
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
+        }
+
         
     }
     
-    enviarTramite(){
-
-        
+    onEnviar(){
+      
         this.datos.vehiculo = this.vehiculo.placa;
         this.datos.numeroLicencia = this.tramiteFactura.numeroLicenciaTrancito;
-         this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tramiteFormulario = 'rna-matriculainicial';
-        let token = this._loginService.getToken(); 
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.tipoPropiedad = this.tipoPropiedadSelected;
+
+        let token = this._loginService.getToken();
+
+        let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
         
-        this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
+        this._PropietarioService.register(this.datos, token).subscribe(
             response => {
-                //this.datos.tramiteFactura = 8;
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
             },
             error => {
-              this.errorMessage = <any>error;
-    
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-              }
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
             }
-          );
+        );
         
     }
 
@@ -131,9 +162,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         };
         this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.ciudadano = this.respuesta.data;
+                if(response.status == 'success'){
+                    this.ciudadano = response.data;
                     this.ciudadanoEncontrado= 2;
                     this.ciudadanoNew = false;
             }else{
@@ -158,11 +188,10 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         };
         this._UserCiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.apoderadoSelected = this.respuesta.data;
-                     this.datos.idTramiteFactura = this.tramiteFactura.id;
-                    this.datos.tramiteFormulario = 'rna-matriculainicial';
+                if(response.status == 'success'){
+                    this.apoderadoSelected = response.data;
+                    this.datos.idTramiteFactura = this.tramiteFactura.id;
+
                     // this.ciudadanoNew = false;
             }else{
                 this.apoderadoEncontrado=3;
@@ -186,9 +215,8 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         };
         this._EmpresaService.showByNit(token,nit).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.empresa = this.respuesta.data;
+                if(response.status == 'success'){
+                    this.empresa = response.data;
                     this.empresaEncontrada= 2;
             }else{
                 this.empresaEncontrada=3;

@@ -32,6 +32,7 @@ export class NewRnaComponent implements OnInit {
 
   public tramitesFactura: any = null;
   public tramiteFacturaSelected: any = null;
+  public tramiteFactura: any = null;
   public facturas: any;
   public tramiteSelected: any = null;
 
@@ -332,12 +333,33 @@ export class NewRnaComponent implements OnInit {
     }
   }
 
-  onChangedTramiteFactura(tramiteFactura) {
-    console.log(tramiteFactura);
-    
-    if (tramiteFactura) {
-      this.tramiteFacturaSelected = tramiteFactura;
-      
+  onChangedTramiteFactura(idTramiteFactura) {
+    if (idTramiteFactura) {
+      let token = this._LoginService.getToken();
+
+      this._TramiteFacturaService.show({ 'id': idTramiteFactura }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.tramiteFactura = response.data;
+          } else {
+            this.tramiteFactura = null;
+
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );     
     }
   }
 
