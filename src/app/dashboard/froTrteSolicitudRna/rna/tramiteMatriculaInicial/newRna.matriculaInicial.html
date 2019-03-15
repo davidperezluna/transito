@@ -71,42 +71,34 @@
                                         <!--tipo identificacion ciudadano -->
                                         <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
                                             <label>Identificación</label>
-                                            <div class="input-group" [class.has-success]="ciudadanoEncontrado === 2" [class.has-danger]="ciudadanoEncontrado === 3">
+                                            <div class="input-group">
                                                 <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion"
                                                     required />
                                                 <span class="input-group-btn">
-                                                    <button (click)="onKeyCiudadano()" [class.btn-default]="ciudadanoEncontrado === 1" [class.btn-success]="ciudadanoEncontrado === 2"
-                                                        [class.btn-danger]="ciudadanoEncontrado === 3" class="btn" ngxclipboard="" type="button">
+                                                    <button (click)="onSearchCiudadano()" class="btn btn-default" type="button">
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                 </span>
-                                            </div>
-                                            <div class="has-danger" *ngIf="ciudadanoEncontrado === 3">
-                                                <div class="form-control-feedback has-danger has-error">No se encontró la persona</div>
                                             </div>
                                         </div>
                                         
                                         <!--tipo identificacion nit -->
                                         <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
                                             <label>NIT</label>
-                                            <div class="input-group" [class.has-success]="empresaEncontrada === 2" [class.has-danger]="empresaEncontrada === 3">
+                                            <div class="input-group">
                                                 <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
                                                 <span class="input-group-btn">
-                                                    <button (click)="onKeyEmpresa()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2"
-                                                        [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button">
+                                                    <button (click)="onKeyEmpresa()" class="btn btn-default" type="button">
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                 </span>
-                                            </div>
-                                            <div class="has-danger" *ngIf="empresaEncontrada === 3">
-                                                <div class="form-control-feedback has-danger has-error">No se encontró la empresa</div>
                                             </div>
                                         </div>
 
                                         <!--propietarios ciudadanos -->
                                         <div class="col-xs-12 col-lg-12" *ngIf="listaPropietariosCiudadanos">
                                             <br>
-                                            <table class="table " id="dataTables-example">
+                                            <table class="table table-bordered table-striped" id="dataTables-example">
                                                 <br>
                                                 <thead>
                                                     <tr>
@@ -154,7 +146,7 @@
                                         <!-- propietarios empresas -->
                                         <div class="col-xs-12 col-lg-12" *ngIf="listaPropietariosEmpresas">
                                             <br>
-                                            <table class="table " id="dataTables-example">
+                                            <table class="table table-bordered table-striped" id="dataTables-example">
                                                 <br>
                                                 <thead>
                                                     <tr>
