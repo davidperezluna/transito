@@ -30,7 +30,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let hospital of hospitales; let i = index">
-                                <td>{{ hospital.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ hospital.nombre }}</td>
                                 <td>{{ hospital.organismoTransito.divipo }}</td>
                                 <td>{{ hospital.organismoTransito.nombre }}</td>

@@ -1,4 +1,4 @@
-export class CfgEmpresaServicio{
+export class UserCfgEmpresaServicio{
 	constructor(
 		public nombre: string,
 		public id:number,

@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let lugarImpacto of lugaresImpacto; let i = index">
-                                <td>{{ lugarImpacto.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ lugarImpacto.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(lugarImpacto)" class="btn btn-xs btn-info" type="button">

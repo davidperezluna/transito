@@ -164,7 +164,7 @@ import { PnalCfgTipoNombramientoRoutes } from './pnalCfgTipoNombramiento/pnalCfg
 import { PnalFuncionarioRoutes } from './pnalFuncionario/pnalFuncionario.routes';
 
 import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
-import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
+//import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
 import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
 import { MpersonalTalonarioRoutes } from './mpersonalTalonario/mpersonalTalonario.routes';
 import { MpersonalAsignacionRoutes } from './mpersonalAsignacion/mpersonalAsignacion.routes';
@@ -214,7 +214,7 @@ import { RnaTramiteInscripcionLimitacionRoutes } from './rnaTramiteInscripcionLi
 import { RnaTramiteLevantamientoLimitacionRoutes } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.routes';
 import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
 import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
-import { CfgEmpresaServicioRoutes } from './cfgEmpresaServicio/cfgEmpresaServicio.routes';
+import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEmpresaServicio.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { CfgGravedadRoutes } from './cfgGravedad/cfgGravedad.routes';
@@ -315,7 +315,7 @@ export const DashboardRoutes: Route[] = [
       ...PqoGruaCiudadanoRoutes,
       ...PqoInmovilizacionRoutes,
       ...MparqCostoTrayectoRoutes,
-      ...MpersonalFuncionarioRoutes,
+      //...MpersonalFuncionarioRoutes,
       ...MpersonalTipoContratoRoutes,
       ...MpersonalTalonarioRoutes,
       ...MpersonalAsignacionRoutes,
@@ -453,7 +453,7 @@ export const DashboardRoutes: Route[] = [
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...InsumoBusquedaRoutes,
-      ...CfgEmpresaServicioRoutes,
+      ...UserCfgEmpresaServicioRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CvCfgTipoMedidaCautelarRoutes,
       ...CvMedidaCautelarRoutes,

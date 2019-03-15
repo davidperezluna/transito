@@ -8,7 +8,7 @@ import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { TipoSociedadService } from '../../../services/tipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { RepresentanteUserEmpresaService } from '../../../services/representanteEmpresa.service';
-import { CfgEmpresaServicioService } from '../../../services/cfgEmpresaServicio.service';
+import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
 
 import swal from 'sweetalert2';
 
@@ -67,7 +67,7 @@ export class EditComponent implements OnInit {
     private _CiudadanoService: UserCiudadanoService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _RepresentanteUserEmpresaService: RepresentanteUserEmpresaService,
-    private _EmpresaServicio: CfgEmpresaServicioService,
+    private _EmpresaServicioService: UserCfgEmpresaServicioService,
     private _loginService: LoginService,
   ) { }
 
@@ -120,7 +120,7 @@ export class EditComponent implements OnInit {
       },
     );
 
-    this._EmpresaServicio.select().subscribe(
+    this._EmpresaServicioService.select().subscribe(
       response => {
         this.servicios = response;
         setTimeout(() => {

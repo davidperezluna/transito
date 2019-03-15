@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let sector of sectores; let i = index">
-                                <td>{{ sector.id }}</td>
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ sector.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(sector)" class="btn btn-xs btn-info" type="button">

@@ -1,95 +1,243 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router'
 import { PnalFuncionario } from '../pnalFuncionario.modelo';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
-import { UserCfgRoleService } from '../../../services/userCfgRole.service';
+//import { MpersonalTipoContratoService } from '../../../services/mpersonalTipoContrato.service';
+import { PnalCfgCargoService } from '../../../services/pnalCfgCargo.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
+import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new',
-  templateUrl: './new.component.html'
+  templateUrl: './new.component.html',
+  providers: [DatePipe]
 })
 export class NewComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public menu: PnalFuncionario;
-public errorMessage;
-public menus: any = null;
-public roles: any = null;
+  @Output() ready = new EventEmitter<any>();
+  public funcionario: PnalFuncionario;
+  public formConfirm = false;
+  public formPdf = false;
+  public pdf: any;
+  public primerNombre: any;
+  public segundoNombre: any;
+  public primerApellido: any;
+  public segundoApellido: any;
+  /* public tiposContrato: any;
+  public tipoContratoSelected: any; */
+  public cargos: any;
+  public cargoSelected: any;
+  public tiposIdentificacion: any;
+  public tipoIdentificacionSelected: any;
+  public tipoNombramientoSelected: any;
+  public organismosTransito: any;
+  public organismoTransitoSelected: any;
+  public errorMessage;
+  public respuesta: any = null;
 
-constructor(
-  private _PnalFuncionarioService: PnalFuncionarioService,
-  private _UserCfgRoleService: UserCfgRoleService,
-  private _loginService: LoginService,
-  ){}
+  constructor(
+    private _FuncionarioService: PnalFuncionarioService,
+    //private _TipoContratoService: MpersonalTipoContratoService,
+    private _CargoService: PnalCfgCargoService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+    private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _loginService: LoginService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.menu = new PnalFuncionario(null, null, null, null, null, null);
 
-    this._PnalFuncionarioService.select().subscribe(
+    this.funcionario = new PnalFuncionario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+    /* this._TipoContratoService.select().subscribe(
       response => {
-        this.menus = response;
+        this.tiposContrato = response;
       },
       error => {
         this.errorMessage = <any>error;
 
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
-          alert("Error en la petición");
+          alert('Error en la petición');
+        }
+      }
+    ); */
+
+    this._CargoService.select().subscribe(
+      response => {
+        this.cargos = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
       }
     );
 
-    this._UserCfgRoleService.select().subscribe(
+    this._TipoIdentificacionService.select().subscribe(
       response => {
-        this.roles = response;
+        this.tiposIdentificacion = response;
       },
       error => {
         this.errorMessage = <any>error;
 
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
-          alert("Error en la petición");
+          alert('Error en la petición');
+        }
+      }
+    );
+
+    this._OrganismoTransitoService.selectSedes().subscribe(
+      response => {
+        this.organismosTransito = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
       }
     );
   }
-  
-  onCancelar(){
+
+  onCancelar() {
     this.ready.emit(true);
   }
-  
-  onEnviar(){
-    let token = this._loginService.getToken();
-    
-		this._PnalFuncionarioService.register(this.menu,token).subscribe(
-			response => {
-        if(response.status == 'success'){
-          this.ready.emit(true);
-          this._PnalFuncionarioService.cartData.emit(this.menus);
-          
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
 
-		}); 
+  onCancelarConfirm() {
+    this.formConfirm = false;
   }
 
+  onEnviar() {
+    let token = this._loginService.getToken();
+
+    this.funcionario.idOrganismoTransito = this.organismoTransitoSelected;
+    //this.funcionario.tipoContratoId = this.tipoContratoSelected;
+    this.funcionario.idCargo = this.cargoSelected;
+
+    if (this.funcionario.activo == 'true') {
+      this._FuncionarioService.register(this.funcionario, token).subscribe(
+        response => {
+          this.formConfirm = false;
+          this.formPdf = true;
+
+          if (response.status == 'success') {
+            this.ready.emit(true);
+            swal({
+              title: 'Perfecto!',
+              text: 'Registro exitoso!',
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          } else {
+            swal({
+              title: 'Error!',
+              text: 'El funcionario ya se encuentra registrado',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        });
+    } else {
+      this.formConfirm = true;
+      this.formPdf = false;
+    }
+  }
+
+  onConfirm() {
+    let token = this._loginService.getToken();
+
+    if (this.funcionario.inhabilidad == 'true') {
+      this._FuncionarioService.register(this.funcionario, token).subscribe(
+        response => {
+          this.formConfirm = false;
+          this.formPdf = true;
+
+          if (response.status == 'success') {
+            this.ready.emit(true);
+            swal({
+              title: 'Perfecto!',
+              text: 'Registro exitoso!',
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          } else {
+            swal({
+              title: 'Error!',
+              text: 'El funcionario ya se encuentra registrado',
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        });
+    } else {
+      this.formConfirm = false;
+      this.formPdf = false;
+    }
+  }
+
+  onSearch() {
+    let token = this._loginService.getToken();
+    let datos = {
+      'identificacion': this.funcionario.identificacion
+    }
+
+    this._FuncionarioService.searchCiudadano(datos, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.primerNombre = response.data.usuario.primerNombre;
+          this.segundoNombre = response.data.usuario.segundoNombre;
+          this.primerApellido = response.data.usuario.primerApellido;
+          this.segundoApellido = response.data.usuario.segundoApellido;
+        } else {
+          swal({
+            title: 'Alerta',
+            text: response.message,
+            type: 'warning',
+            showCancelButton: true,
+            focusConfirm: true,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Registrar',
+            confirmButtonAriaLabel: 'Thumbs up, great!',
+            cancelButtonText:
+              '<i class="fa fa-thumbs-down"></i> Cancelar',
+            cancelButtonAriaLabel: 'Thumbs down',
+          }).then((result) => {
+            if (result.value) {
+              this.router.navigate(['/dashboard/ciudadano']);
+            }
+          });
+
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      });
+  }
 }
