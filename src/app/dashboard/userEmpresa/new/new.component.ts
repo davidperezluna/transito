@@ -1,89 +1,91 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserEmpresa } from '../userEmpresa.modelo';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
-import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
+import { UserCfgEmpresaTipoService } from '../../../services/userCfgEmpresaTipo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { TipoSociedadService } from '../../../services/tipoSociedad.service';
+import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
 
 import swal from 'sweetalert2';
- 
+
 @Component({
   selector: 'app-new-empresa',
   templateUrl: './new.component.html'
 })
 export class NewEmpresaComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public empresa: UserEmpresa;
-public errorMessage;
-public btnVisible=false;
-public respuesta;
-public municipios: any;
-public ciudadanos: any;
-public generos: any;
-public tiposEmpresa: any;
-public tiposSociedad: any;
-public tiposIdentificacion: any;
-public municipioSelected: any;
-public ciudadanoSelected: any;
-public servicioSelected: any;
-public servicios: any;
-public tipoSociedadSelected: any;
-public tipoIdentificacionSelected: any;
-public municipioResidenciaSelected: any;
-public tipoEmpresaSelected: any;
-public tipoEmpresas: any;
-public tipoEntidadSelected: any;
-public municipioNacimientoSelected: any;
-public formNewSucursal = false;
-public formIndexSucursal = true;
-public tablaSucursal = false;
-public sucursales:any[]= [];
-// los que vienen desde el base de datos
-public tiposEntidad = [
-  { value: 'EMPRESA DEL ESTADO', label: 'EMPRESA DEL ESTADO' },
-  { value: 'EMPRESA PRIVADA', label: 'EMPRESA PRIVADA' },
-  { value: 'EMPRESA PÚBLICA', label: 'EMPRESA PÚBLICA' },
-  { value: 'EMPRESA SIN ÁNIMO DE LUCRO', label: 'EMPRESA SIN ÁNIMO DE LUCRO' },
-];
+  @Output() ready = new EventEmitter<any>();
+  public empresa: UserEmpresa;
+  public errorMessage;
+  public btnVisible = false;
+  public municipios: any;
+  public ciudadanos: any;
+  public generos: any;
+  public tiposEmpresa: any;
+  public tiposSociedad: any;
+  public tiposIdentificacion: any;
+  public municipioSelected: any;
+  
+  public identificacion: any;
+  public ciudadano: any;
 
-constructor(
-  private _EmpresaService: UserEmpresaService,
-  private _loginService: LoginService,
-  private _MunicipioService: CfgMunicipioService,
-  private _tipoUserEmpresaService: TipoUserEmpresaService,
-  private _tipoSociedadService: TipoSociedadService,
-  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-  private _CiudadanoService: UserCiudadanoService,
-  private _CfgEmpresaServicioService: UserCfgEmpresaServicioService,
-){} 
+  public servicios: any;
+  public servicioSelected: any;
+  public tipoSociedadSelected: any;
+  public tipoIdentificacionSelected: any;
+  public municipioResidenciaSelected: any;
+  public tipoEmpresaSelected: any;
+  public tipoEmpresas: any;
+  public tipoEntidadSelected: any;
+  public municipioNacimientoSelected: any;
+  public formNewSucursal = false;
+  public formIndexSucursal = true;
+  public tablaSucursal = false;
+  public sucursales: any[] = [];
+  // los que vienen desde el base de datos
+  public tiposEntidad = [
+    { value: 'EMPRESA DEL ESTADO', label: 'EMPRESA DEL ESTADO' },
+    { value: 'EMPRESA PRIVADA', label: 'EMPRESA PRIVADA' },
+    { value: 'EMPRESA PÚBLICA', label: 'EMPRESA PÚBLICA' },
+    { value: 'EMPRESA SIN ÁNIMO DE LUCRO', label: 'EMPRESA SIN ÁNIMO DE LUCRO' },
+  ];
+
+  constructor(
+    private _EmpresaService: UserEmpresaService,
+    private _LoginService: LoginService,
+    private _MunicipioService: CfgMunicipioService,
+    private _UserCfgEmpresaTipoService: UserCfgEmpresaTipoService,
+    private _TipoSociedadService: UserCfgEmpresaTipoSociedadService,
+    private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+    private _CiudadanoService: UserCiudadanoService,
+    private _CfgEmpresaServicioService: UserCfgEmpresaServicioService,
+  ) { }
 
   ngOnInit() {
-    this.empresa = new UserEmpresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.empresa = new UserEmpresa(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
-    this._tipoUserEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._UserCfgEmpresaTipoService.select().subscribe(
       response => {
         this.tipoEmpresas = response;
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
       }
     );
 
-    this._tipoSociedadService.getTipoSociedadSelect().subscribe(
+    this._TipoSociedadService.select().subscribe(
       response => {
         this.tiposSociedad = response;
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -93,10 +95,10 @@ constructor(
     this._CfgEmpresaServicioService.select().subscribe(
       response => {
         this.servicios = response;
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -119,10 +121,10 @@ constructor(
     this._CiudadanoService.select().subscribe(
       response => {
         this.ciudadanos = response;
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
@@ -132,17 +134,17 @@ constructor(
     this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
-      }, 
+      },
       error => {
         this.errorMessage = <any>error;
-        if(this.errorMessage != null){
+        if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert('Error en la petición');
         }
       }
     );
 
-    this._tipoUserEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._UserCfgEmpresaTipoService.select().subscribe(
       response => {
         this.tiposEmpresa = response;
       },
@@ -155,39 +157,39 @@ constructor(
       }
     );
 
-   
+
   }
-  onCancelar(){
+  onCancelar() {
     this.ready.emit(true);
   }
   // enviar a guarda
-  onEnviar(){
-    let token = this._loginService.getToken();
+  onEnviar() {
+    let token = this._LoginService.getToken();
 
     this.empresa.idEmpresaServicio = this.servicioSelected;
     this.empresa.idTipoIdentificacion = this.tipoIdentificacionSelected;
     this.empresa.idTipoSociedad = this.tipoSociedadSelected;
     this.empresa.idMunicipio = this.municipioSelected;
     this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
-    this.empresa.idCiudadano = this.ciudadanoSelected;
+    this.empresa.idCiudadano = this.ciudadano.id;
     this.empresa.tipoEntidad = this.tipoEntidadSelected;
 
     let datos = {
       'empresa': this.empresa,
       'sucursales': this.sucursales
-  };
+    };
 
-    this._EmpresaService.register(datos,token).subscribe(
+    this._EmpresaService.register(datos, token).subscribe(
       response => {
-        if(response.status == 'success'){
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
             text: 'Registro exitoso!',
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
-        }else{
+          });
+        } else {
           swal({
             title: 'Error!',
             text: 'El empresa ya se encuentra registrado',
@@ -195,61 +197,76 @@ constructor(
             confirmButtonText: 'Aceptar'
           })
         }
-      error => {
+        error => {
           this.errorMessage = <any>error;
-          if(this.errorMessage != null){
+          if (this.errorMessage != null) {
             console.log(this.errorMessage);
             alert('Error en la petición');
           }
         }
-    }); 
+      });
   }
 
-  readySucursal(sucursal:any){
-
+  readySucursal(sucursal: any) {
     this.sucursales.push
-    (
-      {
-        'nombre': sucursal.nombre,
-        'sigla': sucursal.sigla,
-        'celular': sucursal.celular,
-        'direccion': sucursal.direccion,
-        'telefono': sucursal.telefono,
-        'correo': sucursal.correo,
-        'fax': sucursal.fax,
-        'municipioId': sucursal.municipioId,
-      
-      }
-    );
+      (
+        {
+          'nombre': sucursal.nombre,
+          'sigla': sucursal.sigla,
+          'celular': sucursal.celular,
+          'direccion': sucursal.direccion,
+          'telefono': sucursal.telefono,
+          'correo': sucursal.correo,
+          'fax': sucursal.fax,
+          'municipioId': sucursal.municipioId,
 
-    this.tablaSucursal=true;
+        }
+      );
+    this.tablaSucursal = true;
     this.formNewSucursal = false;
-
-    console.log(this.sucursales);
-    
   }
 
-  onNewSucursal(){
+  onNewSucursal() {
     this.formNewSucursal = true;
-    this.btnVisible=true;
+    this.btnVisible = true;
     // this.formIndexSucursal = false;
     // this.table.destroy();
   }
-  cancelarNewFormulario()
-{
-  this.btnVisible=false;
-  this.formNewSucursal=false
-}
+  cancelarNewFormulario() {
+    this.btnVisible = false;
+    this.formNewSucursal = false
+  }
 
-  deleteSucursal(sucursal:any)
-  {
-    this.sucursales =  this.sucursales.filter(h => h !== sucursal);
+  deleteSucursal(sucursal: any) {
+    this.sucursales = this.sucursales.filter(h => h !== sucursal);
 
     if (this.sucursales.length === 0) {
-      this.tablaSucursal=false;
+      this.tablaSucursal = false;
     }
   }
 
- 
-
+  onSearchCiudadano() {
+    let token = this._LoginService.getToken();
+    this._EmpresaService.getBuscarCiudadano({ 'identificacion': this.identificacion }, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.ciudadano = response.data;
+        } else {
+          swal({
+            title: 'Alerta!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
 }

@@ -21,10 +21,6 @@ export class NewComponent implements OnInit {
   public formConfirm = false;
   public formPdf = false;
   public pdf: any;
-  public primerNombre: any;
-  public segundoNombre: any;
-  public primerApellido: any;
-  public segundoApellido: any;
   public tiposNombramiento: any;
   public tipoNombramientoSelected: any;
   public cargos: any;
@@ -33,8 +29,11 @@ export class NewComponent implements OnInit {
   public tipoIdentificacionSelected: any;
   public organismosTransito: any;
   public organismoTransitoSelected: any;
+  
+  public ciudadano: any;
+  public identificacion: any;
+
   public errorMessage;
-  public respuesta: any = null;
 
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
@@ -118,6 +117,7 @@ export class NewComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
 
+    this.funcionario.identificacion = this.identificacion; 
     this.funcionario.idOrganismoTransito = this.organismoTransitoSelected;
     this.funcionario.idTipoNombramiento = this.tipoNombramientoSelected;
     this.funcionario.idCargo = this.cargoSelected;
@@ -197,19 +197,16 @@ export class NewComponent implements OnInit {
     }
   }
 
-  onSearch() {
+  onSearchCiudadano() {
     let token = this._loginService.getToken();
     let datos = {
-      'identificacion': this.funcionario.identificacion
+      'identificacion': this.identificacion
     }
 
     this._FuncionarioService.searchCiudadano(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.primerNombre = response.data.usuario.primerNombre;
-          this.segundoNombre = response.data.usuario.segundoNombre;
-          this.primerApellido = response.data.usuario.primerApellido;
-          this.segundoApellido = response.data.usuario.segundoApellido;
+          this.ciudadano = response.data;
         } else {
           swal({
             title: 'Alerta',
@@ -225,7 +222,7 @@ export class NewComponent implements OnInit {
             cancelButtonAriaLabel: 'Thumbs down',
           }).then((result) => {
             if (result.value) {
-              this.router.navigate(['/dashboard/ciudadano']);
+              this.router.navigate(['/dashboard/userCiudadano']);
             }
           });
 

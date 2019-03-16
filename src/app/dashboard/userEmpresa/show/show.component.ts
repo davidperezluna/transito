@@ -6,7 +6,7 @@ import { LoginService } from '../../../services/login.service';
 import { Sucursal } from '../sucursal/new/sucursal.modelo';
 import { SucursalService } from '../../../services/sucursal.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
-import { TipoSociedadService } from '../../../services/tipoSociedad.service';
+import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 
 
 import swal from 'sweetalert2';
@@ -38,16 +38,12 @@ constructor(
   private _EmpresaService: UserEmpresaService,
   private _MunicipioService: CfgMunicipioService,
   private _SucursalService: SucursalService,
-  private _TipoSociedadService: TipoSociedadService,
+  private _TipoSociedadService: UserCfgEmpresaTipoSociedadService,
   private _loginService: LoginService,
   
   ){}
 
   ngOnInit() {
-
-console.log(this.empresa)
-
-    console.log(this.empresa);
     this._SucursalService.getSucursalEmpresa(this.empresa.id).subscribe(
       response => {
         if(response.status == "success"){
@@ -70,17 +66,13 @@ console.log(this.empresa)
   
   onCancelar(){
     this.ready.emit(true);
-
-
   }
 
   readySucursal(respuesta:any){
-    
     this.ngOnInit();
     this.formListaSucursales=false;
     this.formNewSucursal=false;
   }
-
 
   onNewSucursal(){
       this.formListaSucursales=false;
@@ -105,7 +97,6 @@ console.log(this.empresa)
   }
 
   deleteSucursal(id:any){
-
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -118,7 +109,7 @@ console.log(this.empresa)
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._SucursalService.deleteSucursal(token,id).subscribe(
+        this._SucursalService.deleteSucursal({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -126,8 +117,6 @@ console.log(this.empresa)
                       type:'success',
                       confirmButtonColor: '#15d4be',
                     })
-                  // this.table.destroy();
-                  this.respuesta= response;
                   this.formListaSucursales=false;
                   this.ngOnInit();
               }, 
@@ -140,9 +129,7 @@ console.log(this.empresa)
               }
             }
           );
-
-        
       }
-    })
+    });
   }
 }

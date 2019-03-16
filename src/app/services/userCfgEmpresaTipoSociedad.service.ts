@@ -4,47 +4,44 @@ import  "rxjs/add/operator/map";
 import { environment } from 'environments/environment';
 
 @Injectable()
-export class TipoUserEmpresaService {
-	private url = environment.apiUrl + "tipoEmpresa";
+export class UserCfgEmpresaTipoSociedadService {
+	private url = environment.apiUrl + "usuario/usercfgempresatiposociedad";
 	public identity;
 	public token;
 
 	constructor(private _http: Http){}
  
-	getTipoEmpresa(){
-		
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(tipoDocumento,token){
-		
-		let json = JSON.stringify(tipoDocumento);
+	register(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	deleteTipoEmpresa(token,id){
+	delete(datos, token){
 
 		let params = "authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/delete", params, {headers: headers})
+		return this._http.post(this.url+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showTipoEmpresa(token,id){
-		
-		let params = "authorization="+token;
+	show(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/show/"+id, params, {headers: headers})
+		return this._http.post(this.url+"/show", params, {headers: headers})
 							  .map(res => res.json());
 
 	}
 
-	editTipoEmpresa(tipoDocumento,token){
-
-		let json = JSON.stringify(tipoDocumento);
+	edit(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
@@ -52,7 +49,7 @@ export class TipoUserEmpresaService {
 
 	}
 
-	getTipoEmpresaSelect(){
+	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	

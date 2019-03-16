@@ -3,9 +3,9 @@ import { UserEmpresa } from '../../userEmpresa/userEmpresa.modelo';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
-import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
+import { UserCfgEmpresaTipoService } from '../../../services/userCfgEmpresaTipo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { TipoSociedadService } from '../../../services/tipoSociedad.service';
+import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
 
@@ -20,7 +20,6 @@ export class NewEmpresaComponent implements OnInit {
   public empresa: UserEmpresa;
   public errorMessage;
   public btnVisible = false;
-  public respuesta;
   public municipios: any;
   public ciudadanos: any;
   public generos: any;
@@ -58,8 +57,8 @@ export class NewEmpresaComponent implements OnInit {
     private _EmpresaService: UserEmpresaService,
     private _loginService: LoginService,
     private _MunicipioService: CfgMunicipioService,
-    private _tipoUserEmpresaService: TipoUserEmpresaService,
-    private _tipoSociedadService: TipoSociedadService,
+    private _TipoEmpresaService: UserCfgEmpresaTipoService,
+    private _TipoSociedadService: UserCfgEmpresaTipoSociedadService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _CiudadanoService: UserCiudadanoService,
     private _CfgEmpresaServicio: UserCfgEmpresaServicioService,
@@ -68,7 +67,7 @@ export class NewEmpresaComponent implements OnInit {
   ngOnInit() {
     this.empresa = new UserEmpresa(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
-    this._tipoUserEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._TipoEmpresaService.select().subscribe(
       response => {
         this.tipoEmpresas = response;
       },
@@ -81,7 +80,7 @@ export class NewEmpresaComponent implements OnInit {
       }
     );
 
-    this._tipoSociedadService.getTipoSociedadSelect().subscribe(
+    this._TipoSociedadService.select().subscribe(
       response => {
         this.tiposSociedad = response;
       },
@@ -146,7 +145,7 @@ export class NewEmpresaComponent implements OnInit {
       }
     );
 
-    this._tipoUserEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._TipoEmpresaService.select().subscribe(
       response => {
         this.tiposEmpresa = response;
       },
