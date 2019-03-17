@@ -4,9 +4,9 @@ import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
-import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
+import { UserCfgEmpresaTipoService } from '../../../services/userCfgEmpresaTipo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { TipoSociedadService } from '../../../services/tipoSociedad.service';
+import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { SucursalService } from '../../../services/sucursal.service';
 
@@ -43,10 +43,10 @@ public sucursales:any[]= [];
 // los que vienen desde el base de datos
 constructor(
   private _EmpresaService: UserEmpresaService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   private _MunicipioService: CfgMunicipioService,
-  private _tipoUserEmpresaService: TipoUserEmpresaService,
-  private _tipoSociedadService: TipoSociedadService,
+  private _TipoEmpresaService: UserCfgEmpresaTipoService,
+  private _TipoSociedadService: UserCfgEmpresaTipoSociedadService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _CiudadanoService: UserCiudadanoService,
 ){}
@@ -55,7 +55,7 @@ constructor(
     this.empresa = new UserEmpresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.empresa.nit = this.nit;
     this.empresa.idTipoIdentificacion = this.tipoIdentificacion;
-    this._tipoSociedadService.getTipoSociedadSelect().subscribe(
+    this._TipoSociedadService.select().subscribe(
       response => {
         this.tiposSociedad = response;
       }, 
@@ -110,7 +110,7 @@ constructor(
       }
     );
 
-    this._tipoUserEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._TipoEmpresaService.select().subscribe(
       response => {
         this.tiposEmpresa = response;
       },
@@ -128,19 +128,18 @@ constructor(
   onCancelar(){
     this.readyEmpresa.emit(false);
   }
-  // enviar a guarda
+  
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     let datos = {
       'empresa': this.empresa,
       'sucursales': this.sucursales
   };
 
-    this._EmpresaService.register(datos,token).subscribe(
+    this._EmpresaService.register(datos, token).subscribe(
       response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.readyEmpresa.emit(true);
           swal({
             title: 'Perfecto!',

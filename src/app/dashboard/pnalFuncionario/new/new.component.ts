@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router'
 import { PnalFuncionario } from '../pnalFuncionario.modelo';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
-//import { MpersonalTipoContratoService } from '../../../services/mpersonalTipoContrato.service';
+import { PnalCfgTipoNombramientoService } from '../../../services/pnalCfgTipoNombramiento.service';
 import { PnalCfgCargoService } from '../../../services/pnalCfgCargo.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
@@ -21,25 +21,23 @@ export class NewComponent implements OnInit {
   public formConfirm = false;
   public formPdf = false;
   public pdf: any;
-  public primerNombre: any;
-  public segundoNombre: any;
-  public primerApellido: any;
-  public segundoApellido: any;
-  /* public tiposContrato: any;
-  public tipoContratoSelected: any; */
+  public tiposNombramiento: any;
+  public tipoNombramientoSelected: any;
   public cargos: any;
   public cargoSelected: any;
   public tiposIdentificacion: any;
   public tipoIdentificacionSelected: any;
-  public tipoNombramientoSelected: any;
   public organismosTransito: any;
   public organismoTransitoSelected: any;
+  
+  public ciudadano: any;
+  public identificacion: any;
+
   public errorMessage;
-  public respuesta: any = null;
 
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
-    //private _TipoContratoService: MpersonalTipoContratoService,
+    private _TipoNombramientoService: PnalCfgTipoNombramientoService,
     private _CargoService: PnalCfgCargoService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
@@ -49,11 +47,11 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.funcionario = new PnalFuncionario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.funcionario = new PnalFuncionario(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
-    /* this._TipoContratoService.select().subscribe(
+    this._TipoNombramientoService.select().subscribe(
       response => {
-        this.tiposContrato = response;
+        this.tiposNombramiento = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -63,7 +61,7 @@ export class NewComponent implements OnInit {
           alert('Error en la petición');
         }
       }
-    ); */
+    );
 
     this._CargoService.select().subscribe(
       response => {
@@ -119,8 +117,9 @@ export class NewComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
 
+    this.funcionario.identificacion = this.identificacion; 
     this.funcionario.idOrganismoTransito = this.organismoTransitoSelected;
-    //this.funcionario.tipoContratoId = this.tipoContratoSelected;
+    this.funcionario.idTipoNombramiento = this.tipoNombramientoSelected;
     this.funcionario.idCargo = this.cargoSelected;
 
     if (this.funcionario.activo == 'true') {
@@ -198,19 +197,16 @@ export class NewComponent implements OnInit {
     }
   }
 
-  onSearch() {
+  onSearchCiudadano() {
     let token = this._loginService.getToken();
     let datos = {
-      'identificacion': this.funcionario.identificacion
+      'identificacion': this.identificacion
     }
 
     this._FuncionarioService.searchCiudadano(datos, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.primerNombre = response.data.usuario.primerNombre;
-          this.segundoNombre = response.data.usuario.segundoNombre;
-          this.primerApellido = response.data.usuario.primerApellido;
-          this.segundoApellido = response.data.usuario.segundoApellido;
+          this.ciudadano = response.data;
         } else {
           swal({
             title: 'Alerta',
@@ -226,7 +222,7 @@ export class NewComponent implements OnInit {
             cancelButtonAriaLabel: 'Thumbs down',
           }).then((result) => {
             if (result.value) {
-              this.router.navigate(['/dashboard/ciudadano']);
+              this.router.navigate(['/dashboard/userCiudadano']);
             }
           });
 

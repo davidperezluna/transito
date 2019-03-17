@@ -2,10 +2,9 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { LoginService } from '../../../services/login.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
-import { TipoUserEmpresaService } from '../../../services/tipoEmpresa.service';
+import { UserCfgEmpresaTipoService } from '../../../services/userCfgEmpresaTipo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-// import { UsuarioService } from '../../../services/usuario.service';
-import { TipoSociedadService } from '../../../services/tipoSociedad.service';
+import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpresaTipoSociedad.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { RepresentanteUserEmpresaService } from '../../../services/representanteEmpresa.service';
 import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
@@ -62,8 +61,8 @@ export class EditComponent implements OnInit {
   constructor(
     private _EmpresaService: UserEmpresaService,
     private _MunicipioService: CfgMunicipioService,
-    private _TipoUserEmpresaService: TipoUserEmpresaService,
-    private _TipoSociedadService: TipoSociedadService,
+    private _EmpresaTipoService: UserCfgEmpresaTipoService,
+    private _TipoSociedadService: UserCfgEmpresaTipoSociedadService,
     private _CiudadanoService: UserCiudadanoService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _RepresentanteUserEmpresaService: RepresentanteUserEmpresaService,
@@ -72,7 +71,6 @@ export class EditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.empresa);
     let token = this._loginService.getToken();
 
     this.tipoEntidadSelected = [this.empresa.tipoEntidad];
@@ -90,7 +88,7 @@ export class EditComponent implements OnInit {
       ) {
       }
     })
-    this._TipoUserEmpresaService.getTipoEmpresaSelect().subscribe(
+    this._EmpresaTipoService.select().subscribe(
       response => {
         this.tipoEmpresas = response;
       },
@@ -154,7 +152,7 @@ export class EditComponent implements OnInit {
     );
 
 
-    this._TipoSociedadService.getTipoSociedadSelect().subscribe(
+    this._TipoSociedadService.select().subscribe(
       response => {
         this.tiposSociedad = response;
         setTimeout(() => {
@@ -164,7 +162,6 @@ export class EditComponent implements OnInit {
       },
       error => {
         this.errorMessage = <any>error;
-
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
@@ -182,7 +179,6 @@ export class EditComponent implements OnInit {
       },
       error => {
         this.errorMessage = <any>error;
-
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
@@ -200,14 +196,12 @@ export class EditComponent implements OnInit {
       },
       error => {
         this.errorMessage = <any>error;
-
         if (this.errorMessage != null) {
           console.log(this.errorMessage);
           alert("Error en la petición");
         }
       }
     );
-
   }
 
   onCancelar() {

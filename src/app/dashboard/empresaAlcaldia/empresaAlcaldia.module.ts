@@ -5,7 +5,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { SucursalService } from '../../services/sucursal.service';
 import { VhloTpConvenioService } from '../../services/vhloTpConvenio.service';
-import { TipoSociedadService } from '../../services/tipoSociedad.service';
+import { UserCfgEmpresaTipoSociedadService } from '../../services/userCfgEmpresaTipoSociedad.service';
 import { NewConvenioComponent } from './convenio/new/newConvenio.component';
 import { ShowConvenioComponent } from './show/show.component';
 import {SelectModule} from 'angular2-select';
@@ -16,7 +16,7 @@ import { RepresentanteUserEmpresaService } from '../../services/representanteEmp
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [EmpresaAlcaldiaComponent,NewConvenioComponent,ShowConvenioComponent],
     exports: [EmpresaAlcaldiaComponent,NewConvenioComponent,ShowConvenioComponent],
-    providers:[UserEmpresaService,VhloTpConvenioService,TipoSociedadService, SucursalService,RepresentanteUserEmpresaService]
+    providers:[UserEmpresaService,VhloTpConvenioService,UserCfgEmpresaTipoSociedadService, SucursalService,RepresentanteUserEmpresaService]
 })
 
 export class EmpresaAlcaldiaModule { }

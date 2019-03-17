@@ -4,8 +4,8 @@ import { UserEmpresaComponent } from './userEmpresa.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { SucursalService } from '../../services/sucursal.service';
-import { TipoUserEmpresaService } from '../../services/tipoEmpresa.service';
-import { TipoSociedadService } from '../../services/tipoSociedad.service';
+import { UserCfgEmpresaTipoService } from '../../services/userCfgEmpresaTipo.service';
+import { UserCfgEmpresaTipoSociedadService } from '../../services/userCfgEmpresaTipoSociedad.service';
 import { NewSucursalComponent } from './sucursal/new/newSucursal.component';
 import { NewEmpresaComponent } from './new/new.component';
 import { ShowComponent } from './show/show.component';
@@ -18,7 +18,7 @@ import { RepresentanteUserEmpresaService } from '../../services/representanteEmp
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
     declarations: [UserEmpresaComponent,NewEmpresaComponent,EditComponent,NewSucursalComponent,ShowComponent],
     exports: [UserEmpresaComponent, NewEmpresaComponent,EditComponent,NewSucursalComponent,ShowComponent],
-    providers:[UserEmpresaService,TipoUserEmpresaService,TipoSociedadService, SucursalService,RepresentanteUserEmpresaService]
+    providers:[UserEmpresaService,UserCfgEmpresaTipoService,UserCfgEmpresaTipoSociedadService, SucursalService,RepresentanteUserEmpresaService]
 })
 
 export class UserEmpresaModule { }

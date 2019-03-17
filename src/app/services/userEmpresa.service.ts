@@ -76,5 +76,10 @@ export class UserEmpresaService {
 		return this._http.post(this.url + "/show/nit/nombre", params, { headers: headers }).map(res => res.json())
 	}
 
-	
+	getBuscarCiudadano(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/buscar/ciudadano", params, { headers: headers }).map(res => res.json())
+	}
 }
