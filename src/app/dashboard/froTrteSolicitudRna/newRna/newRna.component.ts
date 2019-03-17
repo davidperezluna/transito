@@ -110,6 +110,13 @@ export class NewRnaComponent implements OnInit {
             response => {
               if (response.code == 200) {
                 this.propietarios = response.data;
+
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                });
               } else {
                 this.propietarios = null;
 
@@ -151,37 +158,6 @@ export class NewRnaComponent implements OnInit {
         }
       }
     );
-
-    /*this._VehiculoService.showVehiculoRna(this.tramiteSolicitud.idVehiculo, token).subscribe(
-      response => {
-        console.log(response);
-        if (response.status == 'success') {
-          this.vehiculo = response.vehiculo;
-          this.searchByIdentificacion = true
-          this.ciudadanosVehiculo = response.propietarios;
-          this.isMatricula = true;
-          
-          swal.close();
-        } else {
-          this.vehiculo = null;
-
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-          
-          swal.close();
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      });*/
   }
 
   onSearchFactura() {
@@ -225,73 +201,6 @@ export class NewRnaComponent implements OnInit {
                     confirmButtonText: 'Aceptar'
                   });
                 }
-
-                /*this.isMatricula = false;
-                let active = true;
-                let token = this._LoginService.getToken();
-      
-                this.tramitesFactura = response;
-                this.tramitesFactura.forEach(tramiteFactura => {
-                  if (tramiteFactura.realizado == 0) {
-                    active = false;
-                  } else {
-                    //consultar tramite solicitud con el id de tramite factura
-                    //hacer un push array para extraer todas las solicitudes en estado realizado
-                  }
-      
-                  if (tramiteFactura.tramitePrecio.tramite.sustrato) {
-                    this.sustrato = true;
-                  }
-      
-                  if (tramiteFactura.tramitePrecio.tramite.formulario == 'rna-matriculainicial') {
-                    this.isMatricula = true;
-                  } else {
-                    this.isMatricula = false;
-                  }
-                  console.log(tramiteFactura.tramitePrecio.tramite.formulario);
-                });
-      
-                if (active) {
-                  this.isTramites = false;
-                }
-      
-                swal.close();
-                
-                if (this.tramiteSolicitud.idSolicitante) {
-      
-                  this._PropietarioService.searchByCiudadano({ 'idCiudadano': this.tramiteSolicitud.idSolicitante }, token).subscribe(
-                    responseCiudadano => {
-                      if (responseCiudadano.status == 'success') {
-                        this.ciudadano = responseCiudadano.data.ciudadano;
-                        this.factura = response[0].factura;
-                      }
-                      error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                          console.log(this.errorMessage);
-                          alert("Error en la petición");
-                        }
-                      }
-                    }
-                  );
-                } else {
-                  if (this.isMatricula) {
-                    this.factura = response[0].factura;
-                  } /* else {
-                    if (this.importacion == "Si") {
-                      this.factura = response[0].factura;
-                    } 
-                  else {
-                    this.factura = false;
-                    
-                    swal({
-                      title: 'Error!',
-                      text: 'Seleccionar solicitante',
-                      type: 'error',
-                      confirmButtonText: 'Aceptar'
-                    });
-                  }
-                }*/
                 error => {
                   this.errorMessage = <any>error;
                   if (this.errorMessage != null) {
@@ -334,6 +243,14 @@ export class NewRnaComponent implements OnInit {
   }
 
   onChangedTramiteFactura(idTramiteFactura) {
+    swal({
+      title: 'Cargando trámite!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     if (idTramiteFactura) {
       let token = this._LoginService.getToken();
 
@@ -341,6 +258,8 @@ export class NewRnaComponent implements OnInit {
         response => {
           if (response.code == 200) {
             this.tramiteFactura = response.data;
+
+            swal.close();
           } else {
             this.tramiteFactura = null;
 
@@ -397,55 +316,6 @@ export class NewRnaComponent implements OnInit {
       }
     );
   }
-
-  // this._PropietarioService.showCiudadanoVehiculoId(token,this.tramiteSolicitud.vehiculoId).subscribe(
-  //   response => {
-  //     this.ciudadanosVehiculo = response.data;
-  //     if (response.status == 'error' ) { 
-  //       this.searchByIdentificacion = false;
-  //       if(response.code == 401){
-  //         this.vehiculoSuccess=false;
-  //         this.msj= response.msj;
-  //         this.isError = true;
-  //         this.error = true;
-  //         this.tipoError = response.code; 
-  //         swal.close();
-  //       }else{
-  //         this.vehiculo = response.data;
-  //         this.vehiculoSuccess=true;
-  //         this.isMatricula = true;
-  //         this.msj ='vehiculo encontrado';
-  //         this.error = false;
-  //         this.isError = false;
-  //         swal.close();
-  //       }
-  //     }else{
-  //       swal.close();
-  //       this.vehiculo = response.data[0].vehiculo;
-  //       // se busca las faturas si el vehiculo fue encontrado
-  //       this.vehiculoSuccess = true;
-  //             this.msj ='vehiculo encontrado';
-  //             this.error = false;
-  //             this.isError = false;
-  //             swal.close();
-  //             response.data.forEach(element => {
-  //               if (element.ciudadano) {
-  //                 this.searchByIdentificacion = true;
-  //               }
-  //               if(element.empresa){
-  //                 this.isEmpresa = true;
-  //               }
-  //             });
-  //           }
-  //         error => { 
-  //             this.errorMessage = <any>error;
-  //             if(this.errorMessage != null){
-  //               console.log(this.errorMessage);
-  //               alert("Error en la petición"); 
-  //             }
-  //           }
-  //       });
-  //     }
 
   readyTramite(datos: any) {
 
@@ -555,23 +425,42 @@ export class NewRnaComponent implements OnInit {
   }
 
   onSearchApoderado() {
+    swal({
+      title: 'Buscando apoderado!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
     let token = this._LoginService.getToken();
 
-    let identificacion = {
-      'numeroIdentificacion': this.identificacionApoderado,
-    };
+    let datos = {
+      'identificacion': this.identificacionApoderado,
+      'idTipoIdentificacion': 1,
+    }
 
-    this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
       response => {
-        if (response.status == 'success') {
-          this.apoderado = response.data;
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.apoderado = response.data.ciudadano;
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
         } else {
           this.apoderado = null;
+
           swal({
-              title: 'Error!',
-              text: 'No se ha registrado un apoderado.',
-              type: 'error',
-              confirmButtonText: 'Aceptar'
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
           });
         }
         error => {
@@ -591,7 +480,6 @@ export class NewRnaComponent implements OnInit {
   }
 
   onConfirmarSolicitante() {
-
     swal({
       title: '¿Estás seguro?',
       text: "¡Si confirma el solicitante ya no podrá editarlo!",

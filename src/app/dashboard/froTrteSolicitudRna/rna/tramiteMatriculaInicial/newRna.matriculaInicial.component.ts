@@ -1,6 +1,6 @@
 import { Component , OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
@@ -27,61 +27,83 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     public errorMessage;
     
     public tramiteSolicitud:any = null;
-    public tipoPropiedadSelected:any;
     public tipoIdentificacionSelected: any = null;
     
     public ciudadano:any = null;
     public apoderado:any = null;
-    public ciudadanoSelected:any;
+    public propietarioSelected: any;
     public apoderadoSelected:any;
     public empresa:any = null;
-    public empresaSelected:any;
-    public nit:any;
-
+    
+    public tipoIdentificaciones: any;
     public identificacion:any;
     public identificacionApoderado:any;
-
-    public listaPropietariosCiudadanos=false;
-    public listaPropietariosEmpresas=false;
+    public nit:any;
     
-    public propietario = true;
-    public propietarioPresente = false;
+    public formApoderado = false;
 
-    public tipoPropiedades= [
-        {'value':1,'label':"Leasing"},
-        {'value':2,'label':"Propio"}
+    public tiposPropiedad = [
+        { 'value': 1, 'label': 'Leasing' },
+        { 'value': 2, 'label': 'Propio' },
     ];
-
-    public tipoIdentificaciones: any;
+    public tipoPropiedadSelected:any;
     
     public datos = {
-        'propietariosEmpresas': [],
-        'propietariosCiudadanos': [],
+        'propietarios': [],
         'solidario': false,
-        'vehiculo': null,
-        'numeroLicencia': null,
+        'numeroLicenciaTransito': null,
         'tipoPropiedad': null,
+        'idVehiculo': null,
         'idTramiteFactura': null,
     };
 
     constructor(
         private _ColorService: VhloCfgColorService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _tramiteFacturaService: TramiteFacturaService,
+        private _TramiteFacturaService: FroFacTramiteService,
         private _VehiculoService: VehiculoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
         private _PropietarioService: VhloPropietarioService,
         private _EmpresaService: UserEmpresaService,
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
         private router: Router,
     ) { }
 
     ngOnInit() {
-        if (this.tramiteFactura.realizado) {
-            let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-            this._TramiteSolicitudService.showByTamiteFactura({ 'idtramiteFactura': this.tramiteFactura.id }, token).subscribe(
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        ); 
+
+
+        if (this.tramiteFactura.realizado) {
+            let token = this._LoginService.getToken();
+
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
                 response => {
                     if (response.code == 200) {
                         this.tramiteSolicitud = response.data;
@@ -118,36 +140,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                     }
                 }
             );
-        }
-
-        
-    }
-    
-    onEnviar(){
-      
-        this.datos.vehiculo = this.vehiculo.placa;
-        this.datos.numeroLicencia = this.tramiteFactura.numeroLicenciaTrancito;
-        this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tipoPropiedad = this.tipoPropiedadSelected;
-
-        let token = this._loginService.getToken();
-
-        let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
-        
-        this._PropietarioService.register(this.datos, token).subscribe(
-            response => {
-                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-        
+        }   
     }
 
     onCancelar(){
@@ -163,7 +156,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
             }
         });
 
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         let datos = {
             'identificacion': this.identificacion,
@@ -202,34 +195,22 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 }
             }
         );
-        
-        /*this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if(response.status == 'success'){
-                    this.ciudadano = response.data;
-                    this.ciudadanoEncontrado= 2;
-                    this.ciudadanoNew = false;
-            }else{
-                this.ciudadanoEncontrado=3;
-                this.ciudadanoNew = true;
-            }
-            error => {
-                    this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-        }); */
     }
 
     onSearchApoderado(){
-        let token = this._loginService.getToken();
+        swal({
+            title: 'Buscando apoderado!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        let token = this._LoginService.getToken();
 
         let datos = {
             'identificacion': this.identificacionApoderado,
-            'idTipoIdentificacion': this.tipoIdentificacionSelected,
+            'idTipoIdentificacion': 1,
         }
 
         this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
@@ -237,14 +218,16 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
                         this.apoderado = response.data.ciudadano;
-
-                        swal({
-                            title: 'Perfecto!',
-                            text: response.message,
-                            type: 'success',
-                            confirmButtonText: 'Aceptar'
-                        });
+                    }else{
+                        this.apoderado = response.data.empresa;
                     }
+
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
                 } else {
                     this.apoderado = null;
 
@@ -264,31 +247,10 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 }
             }
         );
-
-        /*
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if(response.status == 'success'){
-                    this.apoderadoSelected = response.data;
-
-                    // this.ciudadanoNew = false;
-            }else{
-                this.apoderadoEncontrado=3;
-                // this.ciudadanoNew = true;
-            }
-            error => {
-                    this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-        }); */
     }
 
     ononSearchEmpresa(){
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         let nit = {
 			'nit' : this.nit,
@@ -310,127 +272,46 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-        }); 
+            }
+        ); 
     }
-
 
     goEmpresa(){
         this.router.navigate(['/dashboard/empresa']);
     }
 
-    btnNewCiudadano(){
-        if (this.tipoPropiedadSelected == 2) {
-            this.datos.propietariosCiudadanos.push(
-                {'identificacion':this.ciudadano.identificacion,
-                'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
-                'permisoTramite':this.datos.solidario,
-                'propietarioPresente':this.propietarioPresente
-                }   
-            );
-        }else{
-            this.datos.propietariosCiudadanos.push(
-                    {'identificacion':this.ciudadano.identificacion,
-                    'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
-                    'permisoTramite':this.propietario
-                }   
-            );
-            if (this.propietario) {
-                this.propietario = false
-            }
-        }
-
-        //this.ciudadanoEncontrado=1;
-        this.listaPropietariosCiudadanos=true;
+    onAddCiudadano(){
+        this.datos.propietarios.push(
+            {
+                'idPropietario':this.ciudadano.id,
+                'identificacion':this.ciudadano.identificacion,
+                'nombre':this.ciudadano.primerNombre +" "+ this.ciudadano.segundoNombre,
+                'permiso': this.datos.solidario,
+                'tipo': 'Ciudadano',
+                'idApoderado':null,
+                'apoderadoIdentificacion':null,
+                'apoderado.Nombre':null,
+            }   
+        );
     }
 
-    btnNewEmpresa(){
-        if (this.tipoPropiedadSelected == 2) {
-            this.datos.propietariosEmpresas.push(
-                {'nit':this.empresa.nit,
+    onAddEmpresa(){
+        this.datos.propietarios.push(
+            {
+                'idPropietario':this.empresa.id,
+                'identificacion':this.empresa.nit,
                 'nombre':this.empresa.nombre,
-                'permisoTramite':this.datos.solidario,
-                'propietarioPresente':this.propietarioPresente
-                }   
-            );
-        }else{
-            this.datos.propietariosEmpresas.push(
-                    {'nit':this.empresa.nit,
-                    'nombre':this.empresa.nombre,
-                    'permisoTramite':this.propietario
-                }   
-            );
-            if (this.propietario) {
-                this.propietario = false
-            }
-        }   
-        //this.empresaEncontrada=1;
-        this.listaPropietariosEmpresas=true;
+                'permiso':this.datos.solidario,
+                'tipo': 'Empresa',
+                'idApoderado':null,
+                'apoderadoIdentificacion':null,
+                'apoderado.Nombre':null,
+            }   
+        );
     }
 
-    btnNewApoderado(){
-        if (this.apoderado == 'ciudadano') {
-            this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== this.ciudadanoSelected[0]);
-            this.datos.propietariosCiudadanos.push(
-                {'identificacion':this.ciudadanoSelected[0].identificacion,
-                'nombre':this.ciudadanoSelected[0].nombre,
-                'permisoTramite':this.ciudadanoSelected[0].permisoTramite,
-                'propietarioPresente':this.ciudadanoSelected[0].propietarioPresente,
-                'identificacionApoderado':this.apoderadoSelected.identificacion,
-                'nombreApoderado':this.apoderadoSelected.primerNombre+" "+this.apoderadoSelected.segundoNombre,
-                }   
-            )
-            this.apoderado = 'false'
-            this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-            this.listaPropietariosCiudadanos=true;
-        }
-        if (this.apoderado == 'empresa') {
-            this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== this.empresaSelected[0]);
-            this.datos.propietariosEmpresas.push(
-                {'nit':this.empresaSelected[0].nit,
-                'nombre':this.empresaSelected[0].nombre,
-                'permisoTramite':this.empresaSelected[0].permisoTramite,
-                'identificacionApoderado':this.apoderadoSelected.identificacion,
-                'nombreApoderado':this.apoderadoSelected.primerNombre+" "+this.apoderadoSelected.segundoNombre,
-                }   
-            );
-            this.apoderado = 'false'
-            this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-            this.listaPropietariosEmpresas=true;
-        }
-    }
-
-    
-
-    changedtipoIdentificacion(e){
-        //this.ciudadanoEncontrado = 1;
-        //this.empresaEncontrada = 1;
-    }
-
-    btnCancelarCiudadano(){
-        //this.ciudadanoEncontrado = 1
-    }
-    
-    btnCancelarEmpresa(){
-        //this.empresaEncontrada = 1
-    }
-
-    delete(ciudadano:any): void {
-        this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== ciudadano);
-        if (this.datos.propietariosCiudadanos.length === 0) {
-            this.listaPropietariosCiudadanos = false;
-        }
-        if(ciudadano.permisoTramite){
-            this.propietario = true;
-        }
-    }
-    deleteEmpresa(empresa:any): void {
-        this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== empresa);
-        if (this.datos.propietariosEmpresas.length === 0) {
-            this.listaPropietariosEmpresas = false;
-        }
-        if(empresa.permisoTramite){
-            this.propietario = true;
-        }
+    onDeletePropietario(propietario:any): void {
+        this.datos.propietarios =  this.datos.propietarios.filter(h => h !== propietario);
     }
 
     ready(isCreado:any){
@@ -440,22 +321,59 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         }
     }
     
-    agregarApoderadoCiudadano(ciudadano:any){
-        this.apoderado = 'ciudadano';
-        this.ciudadanoSelected = this.datos.propietariosCiudadanos.filter(h => h == ciudadano);
-        console.log(this.ciudadanoSelected[0]);
+    onNewApoderado(propietario:any){
+        let agregado = this.datos.propietarios.includes(propietario.identificacion, 1);
+
+        if (agregado) {
+            swal({
+                title: 'Error!',
+                text: 'El registro seleccionado ya se encuentra agregado como propietario.s',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }else{
+            this.formApoderado = true;
+            this.propietarioSelected = this.datos.propietarios.filter(h => h == propietario);
+            this.propietarioSelected = this.propietarioSelected[0];
+        }
     }
 
-    agregarApoderadoEmpresa(empresa:any){
-        this.apoderado = 'empresa';
-        this.empresaSelected = this.datos.propietariosEmpresas.filter(h => h == empresa);
-        console.log(this.empresaSelected[0]);
+    onAddApoderado(apoderado) {
+        let posicion = this.datos.propietarios.indexOf(this.propietarioSelected);
+
+        this.datos.propietarios[posicion].idApoderado = apoderado.id;
+        this.datos.propietarios[posicion].apoderadoIdentificacion = apoderado.identificacion;
+        this.datos.propietarios[posicion].apoderadoNombre = apoderado.primerNombre + " " + apoderado.primerApellido;        
     }
+
     onCancelarApoderado(){
-        this.apoderado = 'false'
-        this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-        console.log(this.tipoIdentificacionSelected);
+        this.apoderado = null;
+        this.formApoderado = false;
     }
 
+    onEnviar() {
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.tipoPropiedad = this.tipoPropiedadSelected;
 
+        let token = this._LoginService.getToken();
+
+        let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
+
+        this._PropietarioService.register(this.datos, token).subscribe(
+            response => {
+                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                this.ngOnInit();
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+
+    }
 }

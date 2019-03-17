@@ -69,101 +69,110 @@
     <div class="col-xs-12 col-lg-8"><!-- .col -->
         <div class="row"  *ngIf="propietarios"><!-- .row -->
             <div class="col-xs-12 col-lg-12">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th colspan="4" class="text-uppercase text-center">
-                                <b>Propietarios</b>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let propietario of propietarios; let i = index">
-                            <td>
-                                <strong>Nombre: </strong>
-                                {{propietario.ciudadano?.primerNombre}} {{propietario.ciudadano?.primerApellido}}
-                            </td>
-                            <td>
-                                <strong>Identificación: </strong>
-                                {{propietario.ciudadano?.identificacion}}
-                            </td>
-                            <td>
-                                <div class="custom-control custom-radio">
-                                    <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idSolicitante" value="{{ propietario.ciudadano.id }}"
-                                        type="radio" id="radio-{{ propietario.ciudadano.id }}" name="radio-{{ propietario.ciudadano.id }}"
-                                        class="custom-control-input">
-                                    <label class="custom-control-label" for="radio-{{ propietario.ciudadano.id }}">Solicitante</label>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3">
-                                <button *ngIf='!frmApoderado && !apoderado && !confirmarSolicitante' (click)="onAddApoderado()" class="btn btn-primary">
-                                    <i class="fa fa-save"></i>
-                                    Agregar apoderado
-                                </button>
-                                <button *ngIf='!confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success">
-                                    <i class="fa fa-save"></i>
-                                    Confirmar solicitante
-                                </button>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <div class="card"><!-- .card -->
+                    <div class="card-body"><!-- .card-body -->
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="4" class="text-uppercase text-center">
+                                        <b>Propietarios</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let propietario of propietarios; let i = index">
+                                    <td>
+                                        <strong>Nombre: </strong>
+                                        {{propietario.ciudadano?.primerNombre}} {{propietario.ciudadano?.primerApellido}}
+                                    </td>
+                                    <td>
+                                        <strong>Identificación: </strong>
+                                        {{propietario.ciudadano?.identificacion}}
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idSolicitante" value="{{ propietario.ciudadano.id }}"
+                                                type="radio" id="radio-{{ index }}" name="radio-{{ index }}"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="radio-{{ index }}">Solicitante</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <button *ngIf='!frmApoderado && !apoderado && !confirmarSolicitante' (click)="onAddApoderado()" class="btn btn-primary">
+                                            <i class="fa fa-save"></i>
+                                            Agregar apoderado
+                                        </button>
+                                        <button *ngIf='!confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success">
+                                            <i class="fa fa-save"></i>
+                                            Confirmar solicitante
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div *ngIf='frmApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group">
+                            <div class="input-group" [class.has-danger]="apoderado">
+                                <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado"
+                                    required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchApoderado()" class="btn" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
+                                        <i class="fa fa-close"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!--si existe el apoderado -->
+                        <div class="container form-group" *ngIf="apoderado">
+                            <h5 class="container">
+                                Datos de apoderado
+                            </h5>
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Tipo de identificación</b>
+                                            <br> {{apoderado.tipoIdentificacion.nombre}}
+                                            <br>
+                                            <b>Numero de identificación</b>
+                                            {{apoderado.identificacion}}
+                                        </td>
+                                        <td>
+                                            <b>Nombres</b>
+                                            <br> {{apoderado.primerNombre}} {{apoderado.segundoNombre}}
+                                            <br>
+                                            <b>Apellidos</b>
+                                            {{apoderado.primerApellido}} {{apoderado.segundoApellido}}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button (click)="btnNewApoderado()" class="btn btn-primary">
+                                                    <i class="fa fa-save"></i>
+                                                    Agregar
+                                                </button>
+                                                <button *ngIf='!confirmarSolicitante' class="btn btn-default" (click)="onCloseApoderado()">
+                                                    <i class="fa fa-times"></i>
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.card-body -->
+                </div><!-- /.card -->
             
-                <div *ngIf='frmApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group">
-                    <div class="input-group" [class.has-danger]="apoderado">
-                        <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado"
-                            required />
-                        <span class="input-group-btn">
-                            <button (click)="onSearchApoderado()" class="btn" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                        <!-- <span class="input-group-btn">
-                                                                <button (click)="onCloseApoderado()" class="btn btn-danger" type="button">
-                                                                    <i class="fa fa-close"></i>
-                                                                </button>
-                                                            </span> -->
-                    </div>
-                </div>
-            
-                <!--si existe el apoderado -->
-                <div class="container form-group" *ngIf="apoderado">
-                    <h5 class="container">
-                        Datos de apoderado
-                    </h5>
-                    <table class="table table-bordered table-striped" id="dataTables-example">
-                        <tbody>
-                            <tr class="odd">
-                                <td>
-                                    <b>Tipo de identificación</b>
-                                    <br> {{apoderado.tipoIdentificacion.nombre}}
-                                    <br>
-                                    <b>Numero de identificación</b>
-                                    {{apoderado.identificacion}}
-                                </td>
-                                <td>
-                                    <b>Nombres</b>
-                                    <br> {{apoderado.primerNombre}} {{apoderado.segundoNombre}}
-                                    <br>
-                                    <b>Apellidos</b>
-                                    {{apoderado.primerApellido}} {{apoderado.segundoApellido}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- <button (click)="btnNewApoderado()" class="btn btn-primary">
-                                                            <i class="fa fa-save"></i>
-                                                            Agregar
-                                                        </button> -->
-                    <button *ngIf='!confirmarSolicitante' class="btn btn-default" (click)="onCloseApoderado()">
-                        <i class="fa fa-times"></i>
-                        Cancelar
-                    </button>
-                </div>
+                
             
                 <table class="table table-bordered" *ngIf="isEmpresa">
                     <thead>
