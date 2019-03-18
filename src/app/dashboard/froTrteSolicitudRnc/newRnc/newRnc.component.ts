@@ -24,6 +24,7 @@ export class NewRncComponent implements OnInit {
   public solicitante: any = null;
 
   public tramitesFactura: any = null;
+  public tramiteFactura: any = null;
   public tramiteFacturaSelected: any;
   public tramiteSelected: any;
   public tramites='';
@@ -58,72 +59,69 @@ constructor(
       }
     });
 
-    let token = this._LoginService.getToken();
+    if (this.numeroFactura) {
+      let token = this._LoginService.getToken();
 
-    this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura }, token).subscribe(
-      response => {          
-        if(response.code == 200){
-          this.factura = response.data;
-          
-          swal({
-            text: response.message,
-            type: 'info'
-          });
+      this._FacturaService.searchByNumero({ 'numeroFactura': this.numeroFactura }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.factura = response.data;
 
-          this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id }, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                this.tramitesFactura = response.data;
+            this._TramiteFacturaService.searchTramitesByFactura({ 'idFactura': this.factura.id }, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.tramitesFactura = response.data.tramitesFactura;
+                  this.sustrato = response.data.sustrato;
 
-                swal({
-                  title: 'Perfecto!',
-                  text: response.message,
-                  type: 'info',
-                  confirmButtonText: 'Aceptar'
-                });
+                  swal.close();
+                } else {
+                  this.tramitesFactura = null;
 
-                this.tramitesFactura.forEach(tramiteFactura => {
-                  /*if (tramiteFactura.realizado) {
-                  }else{
-                  }*/
-
-                  if (tramiteFactura.precio.tramite.sustrato) {
-                    this.sustrato = true;
+                  swal({
+                    title: 'Error!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                  });
+                }
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
                   }
-                });
-              }else{
-                swal({
-                  title: 'Atención!',
-                  text: response.message,
-                  type: 'warning',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
                 }
               }
+            );
+          } else {
+            this.factura = null;
+            this.tramitesFactura = null;
+            this.sustrato = false;
+
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
             });
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
         }
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
+      );
+    } else {
+      swal({
+        title: 'Error!',
+        text: 'Debe digitar un número de factura.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    }
   }
 
   onSearchCiudadano() {
@@ -175,6 +173,46 @@ constructor(
         }
       }
     );
+  }
+
+  onChangedTramiteFactura(idTramiteFactura) {
+    swal({
+      title: 'Cargando trámite!',
+      text: 'Solo tardará unos segundos, por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    if (idTramiteFactura) {
+      let token = this._LoginService.getToken();
+
+      this._TramiteFacturaService.show({ 'id': idTramiteFactura }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.tramiteFactura = response.data;
+
+            swal.close();
+          } else {
+            this.tramiteFactura = null;
+
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+    }
   }
 
   onEnviar(){
@@ -253,7 +291,7 @@ constructor(
 
   finalizarSolicitud(){
     let token = this._LoginService.getToken();
-    this.tramites='';
+
     this.tramitesFactura.forEach(tramiteFactura => {
       this.tramites = this.tramites + tramiteFactura.tramitePrecio.nombre + '<br>' 
     });

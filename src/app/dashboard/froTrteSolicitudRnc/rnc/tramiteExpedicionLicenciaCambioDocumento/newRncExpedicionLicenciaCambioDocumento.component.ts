@@ -17,7 +17,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() solicitante: any = null;
-    @Input() factura: any = null;
+    @Input() tramiteFactura: any = null;
     public errorMessage;
 
     public clases: any;
@@ -37,8 +37,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         'idClase': null,
         'idServicio': null,
         'idCategoria': null,
-        'idTramite': null,
-        'idFactura': null,
+        'idTramiteFactura': null,
         'idSolicitante': null,
     };
 
@@ -110,11 +109,10 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
     
     onEnviar() {
         this.datos.numeroLicenciaConduccion = this.datos.identificacionActual;
-        this.datos.idFactura = this.factura.id;
-        this.datos.idTramite = 56;
+        this.datos.idTramiteFactura = this.tramiteFactura.factura.id;
         this.datos.idSolicitante = this.solicitante.id;
 
-        let resumen = "<b>No. factura</b>" + this.factura.numero;
+        let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero;
         
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
     }
