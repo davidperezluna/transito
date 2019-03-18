@@ -11,7 +11,6 @@ declare var $: any;
 export class SvCfgClaseAccidenteComponent implements OnInit {
   public errorMessage;
   public id;
-  public respuesta;
   public clasesAccidente;
   public formNew = false;
   public formEdit = false;
@@ -109,7 +108,6 @@ export class SvCfgClaseAccidenteComponent implements OnInit {
               confirmButtonColor: '#15d4be',
             })
             this.table.destroy();
-            this.respuesta = response;
             this.ngOnInit();
           },
           error => {

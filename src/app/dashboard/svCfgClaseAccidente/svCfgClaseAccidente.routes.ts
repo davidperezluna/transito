@@ -3,7 +3,7 @@ import { SvCfgClaseAccidenteComponent } from '.';
 
 export const SvCfgClaseAccidenteRoutes: Route[] = [
   {
-    path: 'svcfgClaseAccidente',
+    path: 'svCfgClaseAccidente',
     component: SvCfgClaseAccidenteComponent
   }
 ];
