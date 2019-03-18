@@ -10,7 +10,7 @@ import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
+import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
 import { SvCfgAreaService } from "../../../services/svCfgArea.service";
@@ -228,7 +228,7 @@ export class NewComponent implements OnInit {
     private _LoginService: LoginService,
     private _MunicipioService: CfgMunicipioService,
     private _GravedadService: CfgGravedadService,
-    private _ClaseAccidenteService: CfgClaseAccidenteService,
+    private _ClaseAccidenteService: SvCfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
     private _ObjetoFijoService: CfgObjetoFijoService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
@@ -367,7 +367,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
+                this._ClaseAccidenteService.select().subscribe(
                   response => {
                     this.clasesAccidente = response;
                   },
