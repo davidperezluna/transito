@@ -36,6 +36,7 @@ export class SvCfgClaseAccidenteComponent implements OnInit {
       response => {
         if (response) {
           this.clasesAccidente = response.data;
+          console.log(this.clasesAccidente);
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);

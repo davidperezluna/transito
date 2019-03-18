@@ -10,10 +10,8 @@ import swal from 'sweetalert2';
 })
 export class EditComponent {
   @Output() ready = new EventEmitter<any>();
-  @Input() cfgClaseAccidente: any = null;
+  @Input() claseAccidente: any = null;
   public errorMessage;
-  public respuesta;
-
 
   constructor(
     private _CfgClaseAccidenteService: SvCfgClaseAccidenteService,
@@ -22,11 +20,7 @@ export class EditComponent {
    
   }
 
-  ngOnInit() {
-
-
-    
-  }
+  ngOnInit() {}
 
 
   onCancelar() {
@@ -34,11 +28,9 @@ export class EditComponent {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this._CfgClaseAccidenteService.edit(this.cfgClaseAccidente, token).subscribe(
+    this._CfgClaseAccidenteService.edit(this.claseAccidente, token).subscribe(
       response => {
-        //console.log(response);
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
