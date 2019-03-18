@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
@@ -10,7 +10,7 @@ import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
+import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
 import { SvCfgAreaService } from "../../../services/svCfgArea.service";
@@ -223,12 +223,12 @@ export class NewComponent implements OnInit {
     private _MsvRegistroIpatService: MsvRegistroIpatService,
 
     private _UserCiudadanoService: UserCiudadanoService,
-    private _FuncionarioService: MpersonalFuncionarioService,
+    private _FuncionarioService: PnalFuncionarioService,
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
     private _MunicipioService: CfgMunicipioService,
     private _GravedadService: CfgGravedadService,
-    private _ClaseAccidenteService: CfgClaseAccidenteService,
+    private _ClaseAccidenteService: SvCfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
     private _ObjetoFijoService: CfgObjetoFijoService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
@@ -367,7 +367,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
+                this._ClaseAccidenteService.select().subscribe(
                   response => {
                     this.clasesAccidente = response;
                   },
