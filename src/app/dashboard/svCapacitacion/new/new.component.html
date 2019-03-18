@@ -73,7 +73,7 @@
                         <ng-select [multiple]="false" [options]="clasesActoresVia" [(ngModel)]="claseActorViaSelected" required name="claseActorVia"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Adjuntar Documentación</label>
+                        <label>Adjuntar Documentación <strong class="text-danger">*</strong></label>
                         <input type="file" (change)="onFileChange($event)" class="form-control" [(ngModel)]="capacitacion.documento" name="documento" />
                     </div>
                 </div>

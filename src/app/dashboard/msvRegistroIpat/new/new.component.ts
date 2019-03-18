@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
@@ -67,7 +67,7 @@ export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() lugaresImpacto: any = null;
   public msvRegistroIpat: MsvRegistroIpat;
-  public sedeOperativa: any;
+  public organismoTransito: any;
   public errorMessage;
 
   public nroIpat: any;
@@ -223,7 +223,7 @@ export class NewComponent implements OnInit {
     private _MsvRegistroIpatService: MsvRegistroIpatService,
 
     private _UserCiudadanoService: UserCiudadanoService,
-    private _FuncionarioService: MpersonalFuncionarioService,
+    private _FuncionarioService: PnalFuncionarioService,
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
     private _MunicipioService: CfgMunicipioService,
@@ -284,10 +284,10 @@ export class NewComponent implements OnInit {
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       responseFuncionario => {
         if (responseFuncionario.status == 'success') {
-          this.sedeOperativa = responseFuncionario.data.sedeOperativa;
+          this.organismoTransito = responseFuncionario.data.organismoTransito;
 
           swal({
-            title: 'Buscando IPAT en ' + this.sedeOperativa.nombre,
+            title: 'Buscando IPAT en ' + this.organismoTransito.nombre,
             text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
               swal.showLoading();
@@ -347,7 +347,7 @@ export class NewComponent implements OnInit {
             }
           );
 
-          this._MsvConsecutivoService.searchLastBySede({ 'sedeOperativa': this.sedeOperativa }, token).subscribe(
+          this._MsvConsecutivoService.searchLastBySede({ 'organismoTransito': this.organismoTransito }, token).subscribe(
             response => {
               if (response.status == 'success') {
                 swal.close();

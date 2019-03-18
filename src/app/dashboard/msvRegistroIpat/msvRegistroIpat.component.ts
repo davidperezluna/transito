@@ -52,6 +52,7 @@ export class MsvRegistroIpatComponent implements OnInit {
       response => {
         if (response) {
           this.consecutivos = response.data;
+          console.log(this.consecutivos);
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
