@@ -1,5 +1,20 @@
 
-<div class="row"><!-- .row -->
+<div class="row" *ngIf="tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado"><!-- .row -->
     <div class="col-xs-12 col-lg-4"><!-- .col -->
         <div class="card">
             <div class="card-body"><!-- .card-body -->
@@ -15,9 +30,9 @@
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="text-uppercase">
-                                    <strong>Cambio de carrocería</strong>
-                                </h5>
+                                <b class="text-primary">
+                                    Registrar cambio de carrocería
+                                </b>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
@@ -35,11 +50,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="btn-group">
-                                    <button (click)="onClose()" class="btn btn-default">
-                                        <i class="fa fa-times"></i>
-                                        Cancelar
-                                    </button>
-                                    <button (click)="onTramite()" class="btn btn-primary">
+                                    <button (click)="onEnviar()" class="btn btn-primary">
                                         <i class="fa fa-save"></i>
                                         Enviar
                                     </button>
@@ -53,9 +64,9 @@
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="text-uppercase">
-                                    <strong>Cambio de combustible</strong>
-                                </h5>
+                                <b class="text-primary">
+                                    Registrar cambio de combustible
+                                </b>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
@@ -68,11 +79,7 @@
                             </div>
                             <div class="card-footer">
                                 <div class="btn-group">
-                                    <button (click)="onClose()" class="btn btn-default">
-                                        <i class="fa fa-times"></i>
-                                        Cancelar
-                                    </button>
-                                    <button (click)="onTramite()" class="btn btn-primary">
+                                    <button (click)="onEnviar()" class="btn btn-primary">
                                         <i class="fa fa-save"></i>
                                         Enviar
                                     </button>
@@ -86,29 +93,25 @@
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="text-uppercase">
-                                    <strong>Cambio de conjunto</strong>
-                                </h5>
+                                <b class="text-primary">
+                                    Registrar cambio de conjunto
+                                </b>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
                                     <div class="col-xs-12 col-lg-12">
                                         <label>Nuevo Modelo <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloConjunto" minlength="4" maxlength="4" required />
+                                        <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modelo" minlength="4" maxlength="4" required />
                                     </div>
                                     <div class="col-xs-12 col-lg-12">
                                         <label>Descripción <span class="text-danger">*</span></label>
-                                        <textarea class="form-control" [(ngModel)]="datos.decripcionModelo" cols="30" rows="10" name="descripcionModelo" required></textarea>
+                                        <textarea class="form-control" [(ngModel)]="datos.decripcionModelo" rows="10" name="descripcionModelo" required></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="btn-group">
-                                    <button (click)="onClose()" class="btn btn-default">
-                                        <i class="fa fa-times"></i>
-                                        Cancelar
-                                    </button>
-                                    <button (click)="onTramite()" class="btn btn-primary">
+                                    <button (click)="onEnviar()" class="btn btn-primary">
                                         <i class="fa fa-save"></i>
                                         Enviar
                                     </button>
@@ -122,9 +125,9 @@
                     <div class="col-xs-12 col-lg-12"><!-- .col -->
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="text-uppercase">
-                                    <strong>Repotenciación</strong>
-                                </h5>
+                                <b class="text-primary">
+                                    Repotenciación
+                                </b>
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
@@ -133,26 +136,50 @@
                                         <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
                                     </div>
                                     <div class="col-xs-12 col-lg-12">
-                                        <label>Numero factura <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" [(ngModel)]="datos.numeroFactura" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
+                                        <label>Número factura <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" required />
                                     </div>
                                     <div class="col-xs-12 col-lg-12">
                                         <label>Nombre taller repotenciación <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" [(ngModel)]="datos.tallerRepotenciacion" name="modeloRepotenciacion" required />
+                                        <input type="text" class="form-control" [(ngModel)]="datos.tallerRepotenciacion" name="tallerRepotenciacion" required />
                                     </div>
                                     <div class="col-xs-12 col-lg-12">
                                         <label>Fecha repotenciación<span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" [(ngModel)]="datos.fechaRepotenciacion" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
+                                        <input type="date" class="form-control" [(ngModel)]="datos.fechaRepotenciacion" name="fechaRepotenciacion" minlength="4" maxlength="4" required />
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="btn-group">
-                                    <button (click)="onClose()" class="btn btn-default">
-                                        <i class="fa fa-times"></i>
-                                        Cancelar
+                                    <button (click)="onEnviar()" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Enviar
                                     </button>
-                                    <button (click)="onTramite()" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+                
+                <div class="row" *ngIf="datos.tipoTransformacion == 5"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12"><!-- .col -->
+                        <div class="card">
+                            <div class="card-body">
+                                <b class="text-primary">
+                                    Cambio de troques a modelo
+                                </b>
+                                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Año de repotenciación <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-group">
+                                    <button (click)="onEnviar()" class="btn btn-primary">
                                         <i class="fa fa-save"></i>
                                         Enviar
                                     </button>

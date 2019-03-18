@@ -287,6 +287,8 @@ export class FroFacTramiteComponent implements OnInit {
             response => {
               if (response.code == 200) {
                 this.propietarios = response.data;
+
+                swal.close();
               } else {
                 this.propietarios = null;
 
