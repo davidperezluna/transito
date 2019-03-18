@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-xs-6 col-lg-6">
                                 <label>Número Placa</label>
-                                <input class="form-control" [(ngModel)]="vehiculo.placa?.numero" name="numeroPlaca" type="text" readonly/>
+                                <input class="form-control" [(ngModel)]="datos.placa" name="numeroPlaca" type="text" readonly/>
                             </div>
                             <div class="col-xs-6 col-lg-6">
                                 <label>Número certificado</label>
@@ -44,35 +44,35 @@
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <label>Marca</label>
-                                <input class="form-control" name="marca" [(ngModel)]="vehiculo.linea.marca.nombre" type="text" required readonly>
+                                <input class="form-control" name="marca" [(ngModel)]="datos.marca" type="text" required readonly>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <label>Linea</label>
-                                <input class="form-control" name="linea" [(ngModel)]="vehiculo.linea.nombre" type="text" required readonly>
+                                <input class="form-control" name="linea" [(ngModel)]="datos.linea" type="text" required readonly>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <label>Modelo</label>
-                                <input class="form-control" name="modelo" [(ngModel)]="vehiculo.modelo" type="text" required readonly>
+                                <input class="form-control" name="modelo" [(ngModel)]="datos.modelo" type="text" required readonly>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <label>Tipo Servicio</label>
-                                <input class="form-control" name="modelo" [(ngModel)]="vehiculo.servicio.nombre" type="text" required readonly>
+                                <input class="form-control" name="modelo" [(ngModel)]="datos.servicio" type="text" required readonly>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <label>Número serie</label>
-                                <input class="form-control" name="numeroSerie" [(ngModel)]="vehiculo.serie" type="text" required readonly>
+                                <input class="form-control" name="numeroSerie" [(ngModel)]="datos.serie" type="text" required readonly>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <label>Número de motor</label>
-                                <input class="form-control" name="numeroMotor" [(ngModel)]="vehiculo.motor" type="text" required readonly>
+                                <input class="form-control" name="numeroMotor" [(ngModel)]="datos.motor" type="text" required readonly>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <label>Número de chasis</label>
-                                <input class="form-control" name="numeroChasis" [(ngModel)]="vehiculo.chasis" type="text" required readonly>
+                                <input class="form-control" name="numeroChasis" [(ngModel)]="datos.chasis" type="text" required readonly>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <label>Número VIN</label>
-                                <input class="form-control" name="numeroChasis" [(ngModel)]="vehiculo.vin" type="text" required readonly>
+                                <input class="form-control" name="numeroChasis" [(ngModel)]="datos.vin" type="text" required readonly>
                             </div>
                             <div class="col-xs-6 col-lg-6">
                                 <label>Número CHIP</label>

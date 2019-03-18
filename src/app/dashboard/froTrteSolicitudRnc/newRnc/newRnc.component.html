@@ -16,11 +16,6 @@
                                     <button (click)="onSearchFactura()" class="btn btn-primary" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
-                                    <!--
-                                        <button (click)="onCancelar()" class="btn btn-default">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    -->
                                 </span>
                             </div>
                         </div>
@@ -102,79 +97,73 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer" *ngIf="!tramiteSolicitud.documentacion">
-                <div class="btn-group">
-                    <button (click)="onEnviar()" class="btn btn-primary">
-                        <i class="fa fa-save"></i>
-                        Guardar
-                    </button>
-                </div>
-            </div>
-        </div>
 
-        <div class="row" *ngIf="tramiteSolicitud.documentacion">
-            <div class="col-xs-12 col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <b class="text-uppercase">Tramites</b>
-                    </div>
-                    <div class="card-body">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index">
-                                <a class="nav-link" data-toggle="tab" href="#{{ tramiteFactura.precio.tramite.id }}" role="tab">
-                                    <small>{{ tramiteFactura.precio.nombre }}</small>
-                                    <i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i>
-                                </a>
-                            </li>
-            
-                            <li class="nav-item" *ngIf='sustrato'>
-                                <a class="nav-link " data-toggle="tab" href="#sustrato" role="tab">Sustrato </a>
-                            </li>
-                        </ul>
-            
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div class="tab-pane" id="realizado" role="tabpanel">
-                                <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
+                <div class="row" *ngIf="tramiteSolicitud.documentacion">
+                    <div class="col-xs-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <b class="text-uppercase">Tramites</b>
                             </div>
-            
-                            <div class="tab-pane" id="sustrato" role="tabpanel">
-                                <appRnc-sustrato [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato>
-                            </div>
-            
-                            <div class="tab-pane" id="31" role="tabpanel">
-                                <appRnc-expedicion-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
-                            </div>
-            
-                            <div class="tab-pane" id="32" role="tabpanel">
-                                <appRnc-duplicado-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
-                            </div>
-            
-                            <div class="tab-pane" id="33" role="tabpanel">
-                                <appRnc-expedicion-licencia-cambio-documento [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
-                                    (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
-                            </div>
-            
-                            <div class="tab-pane" id="34" role="tabpanel">
-                                <appRnc-recategorizacion-licencia-arriba [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
-                                    (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
-                            </div>
-            
-                            <div class="tab-pane" id="35" role="tabpanel">
-                                <appRnc-recategorizacion-licencia-abajo [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
-                                    (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-abajo>
-                            </div>
-            
-                            <div class="tab-pane" id="36" role="tabpanel">
-                                <appRnc-refrendacion-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-refrendacion-licencia>
+                            <div class="card-body">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item" *ngFor="let tramiteFactura of tramitesFactura; let i = index">
+                                        <a class="nav-link" data-toggle="tab" href="#{{ tramiteFactura.precio.tramite.id }}" role="tab">
+                                            <small>{{ tramiteFactura.precio.nombre }}</small>
+                                            <i *ngIf="tramiteFactura.realizado" class="fa fa-dot-circle-o text-success"></i>
+                                        </a>
+                                    </li>
+                
+                                    <li class="nav-item" *ngIf='sustrato'>
+                                        <a class="nav-link " data-toggle="tab" href="#sustrato" role="tab">Sustrato </a>
+                                    </li>
+                                </ul>
+                
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="realizado" role="tabpanel">
+                                        <h4 class="card-title" style="text-align: center;">Tramite realizado</h4>
+                                    </div>
+                
+                                    <div class="tab-pane" id="sustrato" role="tabpanel">
+                                        <appRnc-sustrato [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato>
+                                    </div>
+                
+                                    <div class="tab-pane" id="31" role="tabpanel">
+                                        <appRnc-expedicion-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
+                                    </div>
+                
+                                    <div class="tab-pane" id="32" role="tabpanel">
+                                        <appRnc-duplicado-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
+                                    </div>
+                
+                                    <div class="tab-pane" id="33" role="tabpanel">
+                                        <appRnc-expedicion-licencia-cambio-documento [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
+                                            (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
+                                    </div>
+                
+                                    <div class="tab-pane" id="34" role="tabpanel">
+                                        <appRnc-recategorizacion-licencia-arriba [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
+                                            (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
+                                    </div>
+                
+                                    <div class="tab-pane" id="35" role="tabpanel">
+                                        <appRnc-recategorizacion-licencia-abajo [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)"
+                                            (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-abajo>
+                                    </div>
+                
+                                    <div class="tab-pane" id="36" role="tabpanel">
+                                        <appRnc-refrendacion-licencia [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-refrendacion-licencia>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        
     </div>
 
     <!--

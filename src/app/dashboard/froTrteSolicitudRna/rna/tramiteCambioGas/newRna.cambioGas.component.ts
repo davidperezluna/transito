@@ -24,6 +24,15 @@ export class NewRnaCambioGasComponent implements OnInit {
     public combustibles;
      
     public datos = {
+        'placa': null,
+        'linea': null,
+        'marca': null,
+        'modelo': null,
+        'servicio': null,
+        'serie': null,
+        'motor': null,
+        'chasis': null,
+        'vin': null,
         'numeroCertificado': null,
         'fechaExpedicion': null,
         'fechaVencimiento': null,
@@ -49,6 +58,16 @@ export class NewRnaCambioGasComponent implements OnInit {
     ) { }
   
     ngOnInit() {
+        this.datos.placa = this.vehiculo.placa.numero;
+        this.datos.linea = this.vehiculo.linea.nombre;
+        this.datos.marca = this.vehiculo.linea.marca.nombre;
+        this.datos.modelo = this.vehiculo.modelo;
+        this.datos.servicio = this.vehiculo.servicio.nombre;
+        this.datos.serie = this.vehiculo.serie;
+        this.datos.motor = this.vehiculo.motor;
+        this.datos.chasis = this.vehiculo.chasis;
+        this.datos.vin = this.vehiculo.vin;
+
         let token = this._LoginService.getToken();
 
         this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(

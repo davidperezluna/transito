@@ -299,10 +299,6 @@
                                 
                                 <appRna-regrabar-serie *ngIf="tramiteFactura.precio.tramite.id == 19" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-serie>
                                 
-                                <appRna-cambio-carroceria *ngIf="tramiteFactura.precio.tramite.id == 20" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-carroceria>
-                                
-                                <appRna-cambio-combustible *ngIf="tramiteFactura.precio.tramite.id == 21" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-combustible>
-                            
                                  <!-- tramites sin id -->
                                 <appRna-importacion-temporal *ngIf="tramiteFactura.precio.tramite.id == 22"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-importacion-temporal>
                                 
@@ -313,8 +309,6 @@
                                 <appRna-cambio-acreedor-prendario *ngIf="tramiteFactura.precio.tramite.id == 25"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-acreedor-prendario>
                                 
                                 <appRna-cambio-gas *ngIf="tramiteFactura.precio.tramite.id == 26"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-gas>
-                               
-                                <appRna-cambio-conjunto *ngIf="tramiteFactura.precio.tramite.id == 27"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-conjunto>
                                 
                                 <appRna-regrabar-vin *ngIf="tramiteFactura.precio.tramite.id == 28"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
                                 
