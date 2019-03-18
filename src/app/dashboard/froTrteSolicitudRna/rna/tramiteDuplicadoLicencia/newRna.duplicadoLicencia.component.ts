@@ -62,7 +62,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         }); 
      }
     
-    enviarTramite() {
+    onEnviar() {
          this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-duplicadolicencia';
         this.resumen = "Motivo "+ this.datos.motivo +"<br/>";

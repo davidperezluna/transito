@@ -157,7 +157,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     
     
    
-    enviarTramite() {
+    onEnviar() {
         let placaT = this.vehiculo.placa;
         this.datos.vehiculoPlaca = this.vehiculo.placa.numero;
         console.log(placaT);

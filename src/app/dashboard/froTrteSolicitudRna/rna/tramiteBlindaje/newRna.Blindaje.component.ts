@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { SustratoService } from '../../../../services/sustrato.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { LoginService } from '../../../../services/login.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
 
 import swal from 'sweetalert2';
 
@@ -17,7 +17,8 @@ export class NewRnaBlindajeComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
-    public tramiteFacturaSelected: any;
+
+    public tramiteSolicitud: any = null;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
     public motivoSelected: any;
@@ -26,16 +27,14 @@ export class NewRnaBlindajeComponent implements OnInit {
     public tipoBlindajeSelected: any;
     public nivelBlindajeSelected: any;
     public resumen: any ;
-    public tramiteRealizado: any=false;
 
     public datos = {
-        'idTramiteFactura': null,
+        'idTramiteFactura': this.tramiteFactura.id,
         'campos': null,
         'idVehiculo': null,
         'idTipoBlindaje': null,
         'idNivelBlindaje': null,
         'empresaBlindadora': null,
-        'tramiteFormulario': null,
         'numeroRunt': null,
     };
 
@@ -57,54 +56,81 @@ export class NewRnaBlindajeComponent implements OnInit {
     ];
 
     constructor(
-        private _TramiteFacturaService: TramiteFacturaService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _VehiculoService: VehiculoService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _VehiculoService: VhloVehiculoService,
+        private _LoginService: LoginService,
     ) { }
     // showTramiteSolicitudByTamiteFactura
     ngOnInit() {
-        let token = this._loginService.getToken();
-        let datos = {
-            'idTramiteFactura':this.tramiteFactura.id,
-            'tramiteFormulario':'rna-blindaje'
-        }
+        let token = this._LoginService.getToken();
 
-        this._TramiteSolicitudService.showTramiteSolicitudByTamiteFacturaFormulario(datos,token).subscribe(
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    //this.resumen = JSON.stringify(response.data.resumen);
-                    this.resumen = response.data.resumen;
-                    this.tramiteRealizado = true;
-                }else{
-                    this.tramiteRealizado = false;
-                } 
-            },
-            error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
                 }
             }
-        );
+        ); 
+
+        if (this.tramiteFactura.realizado) {
+            let token = this._LoginService.getToken();
+
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        }
      }
 
-    enviarTramite() {
-        let token = this._loginService.getToken();
+    onEnviar() {
+        let token = this._LoginService.getToken();
 
-        this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tramiteFormulario = 'rna-blindaje';
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['blindaje'];
 
         this._VehiculoService.update(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    let resumen = {
-                        'tipoBlindaje': this.datos.idTipoBlindaje, 
-                        'nivelBlindaje': this.datos.idNivelBlindaje,
-                    };
+                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                 }
                 error => {
@@ -115,7 +141,8 @@ export class NewRnaBlindajeComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-            });
+            }
+        );
     }
 
     onCancelar(){

@@ -58,7 +58,7 @@ export class NewRnaCambioSedeOperativaComponent implements OnInit {
     }
     
    
-    enviarTramite(){
+    onEnviar(){
         
         let token = this._loginService.getToken();
 

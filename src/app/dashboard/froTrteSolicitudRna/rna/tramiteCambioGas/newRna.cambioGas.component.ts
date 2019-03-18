@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
+import { VehiculoService } from '../../../../services/vehiculo.service';
 import { LoginService } from '../../../../services/login.service';
-import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
-import{ VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
 
 import swal from 'sweetalert2';
 
@@ -18,51 +17,100 @@ export class NewRnaCambioGasComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
+
+    public tramiteSolicitud: any = null;
     public colores: any;
-    public tramiteFacturaSelected: any;
     public colorSelected: any;
-    public tramiteRealizado: any;
-    public vehiculo1;
     public combustibles;
-    
-    public resumen = {};    
+     
     public datos = {
         'numeroCertificado': null,
         'fechaExpedicion': null,
         'fechaVencimiento': null,
         'numeroChip': null,
-        'tramiteFormulario': null,
         'numeroKIT': null,
         'numeroSerial': null,
         'fechaFabricacion': null,
         'presion': null,
         'numeroRunt': null,
         'campos': null,
-        'idTramiteFactura': null,
         'idVehiculo': null,
         'idCombustibleCambio': null,
+        'idTramiteFactura': null,
     };
     
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
         private _VehiculoService: VehiculoService,
         private _CombustibleService: VhloCfgCombustibleService,
+        private _LoginService: LoginService,
     ) { }
   
     ngOnInit() {
-        this.vehiculo1 = this.vehiculo;
-        
+        let token = this._LoginService.getToken();
+
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );
+
+        if (this.tramiteFactura.realizado) {
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        }
     }
     
    
-    enviarTramite(){
-        let token = this._loginService.getToken();
-        this._CombustibleService.getCombustible().subscribe(
+    onEnviar(){
+        let token = this._LoginService.getToken();
+        this._CombustibleService.index().subscribe(
             response => {
-                this.combustibles = response; 
+                this.combustibles = response;
+
                 this.combustibles.data.forEach(element => { 
                     if(element.id == 4 ){
                         this.datos.idCombustibleCambio = element.id;
@@ -80,17 +128,17 @@ export class NewRnaCambioGasComponent implements OnInit {
             }
         );
 
-         this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.tramiteFormulario = 'rna-cambiogas';
         this.datos.campos = ['gas'];
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
+
         this._VehiculoService.update(this.datos,token).subscribe(
             response => {
                 if(response.status == 'success'){
-                    let resumen = {
-                        'Anterior': this.vehiculo.combustible,
-                        'Nuevo': this.datos.idCombustibleCambio,
-                    };
+                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+                        '<br><b>Anterior: </b>' + this.vehiculo.combustible +
+                        '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
+
                     this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
                 }
                 error => {

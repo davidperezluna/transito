@@ -1,17 +1,30 @@
-<div class="row">
+<div class="row" *ngIf="tramiteFactura.realizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
-        <div class="card" *ngIf='!tramiteRealizado'>
-                <div class="card-body">
-                    <h5 class="m-0">
-                        Blindaje y desblindaje
-                    </h5>
-                    <small>Todos los campos con
-                        <b class="text-danger">*</b> son obligatorios</small>
-                    <hr>
-                    <div class="row justify-content-center container">
-                        <div class="form-group row">
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div> 
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <b class="text-primary">
+                    Registar Blindaje y desblindaje
+                </b>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Tipo blindaje
                                     <span class="text-danger">*</span>
@@ -34,38 +47,20 @@
                                 <label>Número solicitud RUNT</label>
                                 <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                             </div>
-                            
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                    <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
-                </div>
-        </div>
-        <div class="card" *ngIf='tramiteRealizado'>
-            <div class="card-body">
-                <h5 class="m-0">
-                    Blindaje y desblindaje
-                </h5>
-                
-                <hr>
-                <div class="row justify-content-center container">
-                    <div class="form-group row">
-                        <h4>
-                            <b>Nivel de blindaje: </b>
-                            {{resumen.tipoBlindaje}}
-                        </h4>
-                        <h4>
-                            <b>Tipo de blindaje: </b>
-                            {{resumen.tipoBlindaje}}
-                        </h4>
+                        </div>                        
                     </div>
                 </div>
             </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+                <button (click)="onCancelar()" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                    Cancelar
+                </button>
+            </div>
         </div>
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
+    </div><!-- /.col -->
+</div><!-- /.row -->

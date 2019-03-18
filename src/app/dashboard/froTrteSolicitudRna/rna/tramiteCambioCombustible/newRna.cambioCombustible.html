@@ -1,24 +1,44 @@
 
-<div class="row"><!-- .row -->
+<div class="row" *ngIf="tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0">
-                    Nuevo combustible
-                </h5>
+                <b class="text-primary">
+                    Registrar nuevo combustible
+                </b>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <div class="row justify-content-center container">
-                    <div class="form-group row col-xs-12 col-lg-12">
-                        <label>Combustibles disponibles <span class="text-danger">*</span></label>
-                        <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="combustibleSelected" required name="idCombustible">
-                        </ng-select>
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Combustibles disponibles <span class="text-danger">*</span></label>
+                                <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="combustibleSelected" name="idCombustible" required></ng-select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
+                <button (click)="onEnviar()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
             </div>
         </div>
     </div><!-- /.col -->

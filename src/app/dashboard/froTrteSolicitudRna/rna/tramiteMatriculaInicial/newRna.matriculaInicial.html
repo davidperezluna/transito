@@ -203,7 +203,6 @@
                                                             <br> 
                                                             {{ propietario.apoderadoNombre }}
                                                             <br>
-                                                            <button (click)="onDeleteApoderado(propietario)" class="btn btn-xs btn-danger">Eliminar</button>
                                                         </td>
                                                         <td *ngIf="!propietario.idApoderado">
                                                             <div class="btn-group btn-group-justified">
@@ -211,6 +210,9 @@
                                                                     <button (click)="onNewApoderado(propietario)" class="btn btn-xs btn-primary">Agregar apoderado</button>
                                                                 </div>
                                                             </div>
+                                                        </td>
+                                                        <td>
+                                                            <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">Eliminar</button>
                                                         </td>
                                                     </tr>
                                                 </tbody>

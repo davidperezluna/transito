@@ -88,12 +88,12 @@
             </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <!-- <button (click)="enviarTramite()" class="btn btn-success pull-right"  [disabled]="certificadoTradicionForm.invalid" >Enviar</button> -->
+                <!-- <button (click)="onEnviar()" class="btn btn-success pull-right"  [disabled]="certificadoTradicionForm.invalid" >Enviar</button> -->
                 <a href="{{ apiUrl }}/pdf/certificadoTradicion/{{vehiculo.placa.id}}/TRADICIONAL" class="btn btn-success" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Imprimir Planilla
                 </a>
-                <button (click)="enviarTramite()" class="btn btn-success pull-right"  [disabled]="certificadoTradicionForm.invalid" >Enviar</button>
+                <button (click)="onEnviar()" class="btn btn-success pull-right"  [disabled]="certificadoTradicionForm.invalid" >Enviar</button>
             </div>
         </div>
     </div>

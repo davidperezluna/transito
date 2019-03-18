@@ -179,7 +179,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
 
     }    
     
-    enviarTramite() {
+    onEnviar() {
         // this.datos.vehiculo = this.vehiculo.placa;
         //this.datos.banco = this.banco.nombre;
         let placaT = this.vehiculo.placa;

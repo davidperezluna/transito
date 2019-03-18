@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { LoginService } from '../../../../services/login.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { LoginService } from '../../../../services/login.service';
+
+import swal from 'sweetalert2';
 
 @Component({
     selector: 'appRna-cambio-color',
@@ -14,40 +16,47 @@ export class NewRnaCambioColorComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage; 
+    public errorMessage;
+
+    public tramiteSolicitud: any = null;
     public colores: any;
     public tramitesFactura: any = null;
-    public tramiteFacturaSelected: any;
     public colorSelected: any;
     public tramiteRealizado: any;
     public datos = {
-        'idTramiteFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idColor': null,
-        'tramiteFormulario': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
         private _ColorService: VhloCfgColorService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _TramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
+        private _VehiculoService: VhloVehiculoService,
+        private _LoginService: LoginService,
     ) { }
   
     ngOnInit() {
-        this._TramiteFacturaService.getTramitesByFacturaSelect(this.tramiteFactura.id).subscribe(
+        let token = this._LoginService.getToken();
+
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
             response => {
-                this.tramitesFactura = response;
-                this.tramitesFactura.forEach(tramiteFactura => {
-                    if (tramiteFactura.realizado == 1) {
-                        if (tramiteFactura.tramitePrecio.tramite.id == 3) {
-                            this.tramiteRealizado = tramiteFactura;
-                            console.log(this.tramiteRealizado);
-                        } 
-                    }
-                });
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
                 error => {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
@@ -56,14 +65,40 @@ export class NewRnaCambioColorComponent implements OnInit {
                     }
                 }
             }
-        );
+        ); 
 
-        //consultar tramite solicitud con tramiterealizado.id
-        let token = this._loginService.getToken();
-        if (this.tramiteRealizado) {
-            this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
+        if (this.tramiteFactura.realizado) {
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
                 response => {
-                    this.datos = response.data.datos
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        }else{
+            this._ColorService.select().subscribe(
+                response => {
+                    this.colores = response;
+
+                    /*setTimeout(() => {
+                        this.colorSelected = [this.vehiculo.color.id]
+                    });*/
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -75,45 +110,23 @@ export class NewRnaCambioColorComponent implements OnInit {
                 }
             );
         }
-
-        this._ColorService.select().subscribe(
-            response => {
-                this.colores = response;
-                setTimeout(() => {
-                    this.colorSelected = [this.vehiculo.color.id]
-                });
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-
     }
-    
    
-    enviarTramite() {
-        let token = this._loginService.getToken();
+    onEnviar() {
+        let token = this._LoginService.getToken();
 
-        this._ColorService.show(token, this.colorSelected).subscribe(
+        this._ColorService.show({ 'id': this.colorSelected }, token).subscribe(
             colorResponse => {
-                 this.datos.idTramiteFactura = this.tramiteFactura.id;
-                this.datos.tramiteFormulario = 'rna-cambiocolor';
+                this.datos.campos = ['color'];
                 this.datos.idColor = this.colorSelected;
                 this.datos.idVehiculo = this.vehiculo.id;
-                this.datos.campos = ['color'];
+                this.datos.idTramiteFactura = this.tramiteFactura.id;
 
                 this._VehiculoService.update(this.datos, token).subscribe(
                     response => {
                         if (response.status == 'success') {
-                            let resumen = {
-                                'Anterior': this.vehiculo.color.nombre,
-                                'Nuevo': colorResponse.data.nombre,
-                            };
+                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
                             this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                         }
                         error => {
@@ -133,10 +146,11 @@ export class NewRnaCambioColorComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-            });
+            }
+        );
     }
+
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
-
 }

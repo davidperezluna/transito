@@ -38,7 +38,7 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
     }
 
    
-    enviarTramite() {
+    onEnviar() {
         this.datos.motivo = this.motivoSelected;
          this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-duplicadoplaca';
