@@ -10,10 +10,8 @@ import { VehiculoAcreedorService } from '../../services/vehiculoAcreedor.service
 import { NewRnaComponent } from './newRna/newRna.component'; 
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
 import { NewRnaDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/newRna.duplicadoLicencia.component';
-import { NewRnaCambioColorComponent } from './rna/tramiteCambioColor/newRna.cambioColor.component'; 
-import { NewRnaCambioCombustibleComponent } from './rna/tramiteCambioCombustible/newRna.cambioCombustible.component';
+import { NewRnaCambioColorComponent } from './rna/tramiteCambioColor/newRna.cambioColor.component';
 import { NewRnaCambioServicioComponent } from './rna/tramiteCambioServicio/newRna.cambioServicio.component';
-import { NewRnaCambioCarroceriaComponent } from './rna/tramiteCambioCarroceria/newRna.cambioCarroceria.component';
 import { NewRnaCambioPlacaComponent } from './rna/tramiteCambioPlaca/newRna.cambioPlaca.component';
 import { NewRnaCambioMotorComponent } from './rna/tramiteCambioMotor/newRna.cambioMotor.component';
 import { NewRnaRegrabarMotorComponent } from './rna/tramiteRegrabarMotor/newRna.regrabarMotor.component';
@@ -21,7 +19,6 @@ import { NewRnaRegrabarSerieComponent } from './rna/tramiteRegrabarSerie/newRna.
 import { NewRnaRegrabarChasisComponent } from './rna/tramiteRegrabarChasis/newRna.regrabarChasis.component';
 import { NewRnaRegrabarVinComponent } from './rna/tramiteRegrabarVin/newRna.regrabarVin.component'; 
 import { NewRnaRematriculaComponent } from './rna/tramiteRematricula/newRna.rematricula.component';
-import { NewRnaCambioSedeOperativaComponent } from './rna/tramiteCambioSedeOperativa/newRna.cambioSedeOperativa.component';
 import { NewRnaCancelacionMatriculaComponent } from './rna/tramiteCancelacionMatricula/newRna.cancelacionMatricula.component';
 import { NewRnaCertificadoTradicionComponent } from './rna/tramiteCertificadoTradicion/newRna.certificadoTradicion.component';
 import { NewRnaBlindajeComponent } from './rna/tramiteBlindaje/newRna.blindaje.component';
@@ -40,7 +37,6 @@ import { NewRnaCambioGasComponent } from './rna/tramiteCambioGas/newRna.cambioGa
 import { NewRnaTramiteCambioAcreedorPrendarioComponent } from './rna/tramiteCambioAcreedorPrendario/newRna.CambioAcreedorPrendario.component'; 
 import { NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent } from './rna/tramiteCambioAcreedorPrendarioPropietario/newRna.CambioAcreedorPrendarioPropietario.component'; 
 import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRna.transformacion.component';
-import { NewRnaCambioConjuntoComponent } from './rna/tramiteCambioConjunto/newRna.cambioConjunto.component';
 import { EditComponent } from './edit/edit.component';
 import { SelectModule } from 'angular2-select';
 import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
@@ -65,14 +61,11 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaRegrabarMotorComponent,
         NewRnaRematriculaComponent,
         NewRnaPreregistroComponent,
-        NewRnaCambioCombustibleComponent,
-        NewRnaCambioCarroceriaComponent,
         NewRnaCambioServicioComponent,
         NewRnaRegrabarSerieComponent,
         NewRnaRegrabarChasisComponent,
         NewRnaRegrabarVinComponent,
         NewRnaBlindajeComponent,
-        NewRnaCambioSedeOperativaComponent,
         NewRnaCancelacionMatriculaComponent,
         NewRnaCertificadoTradicionComponent,
         NewRnaTraspasoComponent,
@@ -85,7 +78,6 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaMatricualaInicialComponent,
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
-        NewRnaCambioConjuntoComponent,
         NewTrasladoCuentaComponent,
         NewRnaCambioGasComponent,
         NewRnaTramiteCambioAcreedorPrendarioComponent,
@@ -107,15 +99,11 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaRegrabarMotorComponent,
         NewRnaRematriculaComponent,
         NewRnaPreregistroComponent,
-        NewRnaCambioCombustibleComponent,
-        NewRnaCambioCarroceriaComponent,
-        NewRnaCambioCarroceriaComponent,
         NewRnaCambioServicioComponent,
         NewRnaRegrabarSerieComponent,
         NewRnaRegrabarChasisComponent,
         NewRnaRegrabarVinComponent,
         NewRnaBlindajeComponent,
-        NewRnaCambioSedeOperativaComponent,
         NewRnaCancelacionMatriculaComponent,
         NewRnaCertificadoTradicionComponent,
         NewRnaTraspasoComponent,
@@ -128,7 +116,6 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaMatricualaInicialComponent,
         NewRnaRadicadoCuentaComponent,
         NewRnaTransformacionComponent,
-        NewRnaCambioConjuntoComponent,
         NewTrasladoCuentaComponent,
         NewRnaCambioGasComponent,
         NewRnaTramiteCambioAcreedorPrendarioComponent,
