@@ -218,7 +218,7 @@ import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEm
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { CfgGravedadRoutes } from './cfgGravedad/cfgGravedad.routes';
-import { CfgClaseAccidenteRoutes } from './cfgClaseAccidente/svCfgClaseAccidente.routes';
+import { SvCfgClaseAccidenteRoutes } from './svCfgClaseAccidente/svCfgClaseAccidente.routes';
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
@@ -343,6 +343,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgSenialLineaRoutes,
       ...SvCfgSenialProveedorRoutes,
       ...SvCfgSenialRoutes,
+      ...SvCfgClaseAccidenteRoutes,
       ...SvSenialInventarioRoutes,
       ...VhloCfgTipoVehiculoRoutes,
       ...VhloCfgTipoAlertaRoutes,
@@ -432,7 +433,6 @@ export const DashboardRoutes: Route[] = [
       ...CfgEntidadJudicialRoutes,
       ...CfgCausalLimitacionRoutes,
       ...CfgGravedadRoutes,
-      ...CfgClaseAccidenteRoutes,
       ...CfgChoqueConRoutes,
       ...CfgObjetoFijoRoutes,
       ...MsvTalonarioRoutes,
