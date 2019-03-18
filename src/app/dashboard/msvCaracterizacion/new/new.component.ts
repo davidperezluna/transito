@@ -123,7 +123,7 @@ export class NewComponent implements OnInit {
             });
     }
 
-    onBuscarEmpresa() {
+    onSearchEmpresa() {
         let token = this._LoginService.getToken();
         this._MsvCaracterizacionService.getBuscarEmpresa({ 'nit': this.msvCaracterizacion.nit }, token).subscribe(
             response => {
