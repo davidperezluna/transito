@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
-import { SustratoService } from '../../../../services/sustrato.service';
-import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { SustratoService } from '../../../../services/sustrato.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -29,13 +29,13 @@ export class NewRnaBlindajeComponent implements OnInit {
     public resumen: any ;
 
     public datos = {
-        'idTramiteFactura': this.tramiteFactura.id,
         'campos': null,
-        'idVehiculo': null,
-        'idTipoBlindaje': null,
-        'idNivelBlindaje': null,
         'empresaBlindadora': null,
         'numeroRunt': null,
+        'idNivelBlindaje': null,
+        'idTipoBlindaje': null,
+        'idVehiculo': null,
+        'idTramiteFactura': null,
     };
 
     public tiposBlindaje = [
@@ -123,6 +123,7 @@ export class NewRnaBlindajeComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['blindaje'];
 

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { LoginService } from '../../../../services/login.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { DefaultService } from '../../../../services/default.service';
+import { LoginService } from '../../../../services/login.service';
 import { environment } from 'environments/environment';
 
 import swal from 'sweetalert2';
@@ -17,81 +17,147 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public apiUrl = environment.apiUrl + 'default';
     public errorMessage;
-    public tramiteFacturaSelected: any; 
-    public sustratos: any;
-    public sustratoSelected: any;
-    public motivoSelected: any;
-    public certificadoEntregado: any;
-    public ciudadanoId: any;
-    public ciudadanoEncontrado=1;
-    public ciudadanoNew = false;
-    public ciudadano:any;
-    public resumen = {};     
+    
+    public apiUrl = environment.apiUrl + 'financiero';
+    public tramiteSolicitud: any = null;
+    public identificacion: any;
+ 
+    public ciudadano:any = null;
+   
     public datos = {
         'numeroRunt': null,
         'observacion': null,                  
-        'certificadoEntregada': null,
-        'tramiteFormulario': null,
-        'idTramiteFactura': null,
+        'certificadoEntregado': false,
         'campos': null,
         'idVehiculo': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _VehiculoService: VehiculoService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _VehiculoService: VhloVehiculoService,
         private _CiudadanoService: UserCiudadanoService,
-        private _DefaultService: DefaultService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-       
-        
-    }
+        let token = this._LoginService.getToken();
 
-    onEnviar() {
-        let token = this._loginService.getToken();
-      
-         this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tramiteFormulario = 'rna-certificadotradicion';
-        this.datos.certificadoEntregada = this.certificadoEntregado;
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-    }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
-    onKeyCiudadano(){
-        let token = this._loginService.getToken();
-        let identificacion = {
-			'identificacion' : this.ciudadanoId,
-        };
-        
-        this._CiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
             response => {
-                if(response.status == 'success'){
-                    this.ciudadano = response.data;
-                    this.ciudadanoEncontrado= 2;
-                    this.ciudadanoNew = false;
-            }else{
-                this.ciudadanoEncontrado=3;
-                this.ciudadanoNew = true; 
-            }
-            error => {
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
                     this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
+                    if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
                     }
                 }
-        }); 
-    }
-    ready(){ 
-        this.ciudadanoEncontrado = 3;
+            }
+        );
+
+        if (this.tramiteFactura.realizado) {
+            let token = this._LoginService.getToken();
+
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        }        
     }
 
+    onSearchCiudadano() {
+        swal({
+            title: 'Buscando ciudadano!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        let token = this._LoginService.getToken();
+
+        let datos = {
+            'identificacion': this.identificacion,
+            'idTipoIdentificacion': 1,
+        }
+
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    if (response.data.ciudadano) {
+                        this.ciudadano = response.data.ciudadano;
+
+                        swal({
+                            title: 'Perfecto!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                } else {
+                    this.ciudadano = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
+    }
+
+    onEnviar() {
+        let token = this._LoginService.getToken();
+      
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
+
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+        this.readyTramite.emit({'foraneas': this.datos, 'resumen': resumen});
+    }
 }
