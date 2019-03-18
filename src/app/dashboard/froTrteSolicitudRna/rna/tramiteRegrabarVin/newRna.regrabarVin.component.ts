@@ -46,7 +46,7 @@ export class NewRnaRegrabarVinComponent implements OnInit {
 
     ngOnInit() { }
 
-    enviarTramite() {
+    onEnviar() {
         let token = this._LoginService.getToken();
 
          this.datos.idTramiteFactura = this.tramiteFactura.id;

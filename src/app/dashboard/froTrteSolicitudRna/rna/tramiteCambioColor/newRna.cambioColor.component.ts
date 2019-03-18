@@ -31,9 +31,9 @@ export class NewRnaCambioColorComponent implements OnInit {
     };
 
     constructor(
-        private _ColorService: VhloCfgColorService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
+        private _ColorService: VhloCfgColorService,
         private _VehiculoService: VhloVehiculoService,
         private _LoginService: LoginService,
     ) { }
@@ -66,7 +66,6 @@ export class NewRnaCambioColorComponent implements OnInit {
                 }
             }
         ); 
-
 
         if (this.tramiteFactura.realizado) {
             this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(

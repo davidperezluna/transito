@@ -40,7 +40,7 @@ export class NewRnaCambioPlacaComponent implements OnInit {
         this.tipoCambioList = ['Antiguo', 'Clasico', 'Normal'];
     }
     
-    enviarTramite() {
+    onEnviar() {
         let token = this._loginService.getToken();
 
         this.datos.tipoCambio = this.tipoCambioSelected;

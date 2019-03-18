@@ -120,7 +120,7 @@ export class NewRnaBlindajeComponent implements OnInit {
         }
      }
 
-    enviarTramite() {
+    onEnviar() {
         let token = this._LoginService.getToken();
 
         this.datos.idVehiculo = this.vehiculo.id;

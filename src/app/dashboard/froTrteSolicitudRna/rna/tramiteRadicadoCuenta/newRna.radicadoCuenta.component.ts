@@ -88,7 +88,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
     }
     
    
-    enviarTramite(){     
+    onEnviar(){     
         let token = this._loginService.getToken();
 
         this.datos.municipioSelected = this.municipioSelected;

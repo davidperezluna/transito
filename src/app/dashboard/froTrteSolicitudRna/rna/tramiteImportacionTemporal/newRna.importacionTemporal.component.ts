@@ -160,7 +160,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         );
     }
 
-    enviarTramite() {
+    onEnviar() {
         let token = this._loginService.getToken();
         this.datos.pais = this.paisSelected;
         this.datos.idTramiteFactura = this.tramiteFactura.id;

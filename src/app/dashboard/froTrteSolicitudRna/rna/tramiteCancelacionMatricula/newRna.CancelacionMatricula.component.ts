@@ -68,7 +68,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         );
     }
 
-    enviarTramite() {
+    onEnviar() {
         
          this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.tramiteFormulario = 'rna-cancelacionmatricula';

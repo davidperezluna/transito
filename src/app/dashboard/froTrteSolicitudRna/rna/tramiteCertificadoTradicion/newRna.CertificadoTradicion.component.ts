@@ -52,7 +52,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         
     }
 
-    enviarTramite() {
+    onEnviar() {
         let token = this._loginService.getToken();
       
          this.datos.idTramiteFactura = this.tramiteFactura.id;

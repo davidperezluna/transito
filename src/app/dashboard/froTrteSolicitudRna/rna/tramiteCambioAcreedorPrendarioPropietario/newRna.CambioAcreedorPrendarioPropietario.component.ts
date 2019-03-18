@@ -91,7 +91,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         
     }
     
-    enviarTramite(){
+    onEnviar(){
         this.datos.vehiculo = this.vehiculo.placa;
         this.datos.numeroLicencia = this.tramiteFactura.numeroLicenciaTrancito;
         let token = this._loginService.getToken(); 

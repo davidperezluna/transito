@@ -120,7 +120,7 @@ export class NewRnaTraspasoComponent implements OnInit {
         
     }
     
-    enviarTramite(){
+    onEnviar(){
         let token = this._loginService.getToken(); 
 
         this.datos.vehiculo = this.vehiculo.placa;

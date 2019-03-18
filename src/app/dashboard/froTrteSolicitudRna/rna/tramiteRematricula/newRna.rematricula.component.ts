@@ -107,7 +107,7 @@ export class NewRnaRematriculaComponent implements OnInit {
     }
 
     
-    enviarTramite() {
+    onEnviar() {
         let token = this._loginService.getToken();
 
         this._TramiteSolicitudService.searchMatriculaCancelada({ 'idVehiculo': this.vehiculo.id }, token).subscribe(

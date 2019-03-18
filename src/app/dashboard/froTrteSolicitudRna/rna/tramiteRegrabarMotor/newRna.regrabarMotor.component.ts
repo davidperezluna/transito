@@ -45,7 +45,7 @@ export class NewRnaRegrabarMotorComponent implements OnInit {
         this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
     }
 
-    enviarTramite() {
+    onEnviar() {
         let token = this._loginService.getToken();
 
         this.datos.motivo = this.motivoSelected;
