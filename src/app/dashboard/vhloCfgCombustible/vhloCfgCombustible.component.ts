@@ -39,7 +39,7 @@ export class VhloCfgCombustibleComponent implements OnInit {
       ) {
       }
     })
-		this._CombustibleService.getCombustible().subscribe(
+		this._CombustibleService.index().subscribe(
 				response => {
           this.combustibles = response.data;
           let timeoutId = setTimeout(() => {  
@@ -86,7 +86,7 @@ export class VhloCfgCombustibleComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteCombustible(id:any){
+  delete(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -100,7 +100,8 @@ export class VhloCfgCombustibleComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CombustibleService.deleteCombustible(token,id).subscribe(
+        
+        this._CombustibleService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

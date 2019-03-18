@@ -744,7 +744,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._ServicioService.getServicioSelect().subscribe(
+                this._ServicioService.select().subscribe(
                   response => {
                     this.servicios = response;
                   },
@@ -916,7 +916,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._CarroceriaService.getCarroceriaSelect().subscribe(
+                this._CarroceriaService.select().subscribe(
                   response => {
                     this.carrocerias = response;
                   },
@@ -929,7 +929,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._CarroceriaService.getCarroceriaSelect().subscribe(
+                this._CarroceriaService.select().subscribe(
                   response => {
                     this.carrocerias = response;
                   },
@@ -955,7 +955,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                this._ServicioService.getServicioSelect().subscribe(
+                this._ServicioService.select().subscribe(
                   response => {
                     this.servicios = response;
                   },

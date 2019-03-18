@@ -40,7 +40,7 @@ export class VhloCfgCarroceriaComponent implements OnInit {
       ) {
       }
     })
-		this._CarroceriaService.getCarroceria().subscribe(
+		this._CarroceriaService.index().subscribe(
 				response => {
           this.carrocerias = response.data;
           let timeoutId = setTimeout(() => {  
@@ -101,7 +101,8 @@ export class VhloCfgCarroceriaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CarroceriaService.deleteCarroceria(token,id).subscribe(
+        
+        this._CarroceriaService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -128,7 +129,7 @@ export class VhloCfgCarroceriaComponent implements OnInit {
     })
   }
 
-  editCarroceria(carroceria:any){
+  edit(carroceria:any){
     this.carroceria = carroceria;
     this.formEdit = true;
     this.formIndex = false;

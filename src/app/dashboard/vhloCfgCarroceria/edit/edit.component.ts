@@ -50,7 +50,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.carroceria.idClase = this.claseSelected;
-		this._carroceriaService.editCarroceria(this.carroceria,token).subscribe(
+		this._carroceriaService.edit(this.carroceria,token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

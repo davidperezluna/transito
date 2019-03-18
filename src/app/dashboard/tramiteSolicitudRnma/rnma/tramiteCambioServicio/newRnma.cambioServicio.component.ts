@@ -39,7 +39,7 @@ export class NewRnmaCambioServicioComponent implements OnInit {
 
     ngOnInit() {
         this.vehiculo.servicioId = 4;
-        this._ServicioService.getServicioSelect().subscribe(
+        this._ServicioService.select().subscribe(
             response => {
                 this.servicios = response;
             },
@@ -60,7 +60,7 @@ export class NewRnmaCambioServicioComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        this._ServicioService.showServicio(token, this.servicioSelected).subscribe(
+        this._ServicioService.show(token, this.servicioSelected).subscribe(
             servicioResponse => {
                 this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rnma-cambioservicio';

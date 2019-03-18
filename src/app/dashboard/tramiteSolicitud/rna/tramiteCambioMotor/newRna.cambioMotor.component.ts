@@ -54,7 +54,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._CombustibleService.getCombustibleSelect().subscribe(
+        this._CombustibleService.select().subscribe(
             response => {
                 this.combustibles = response;
             },

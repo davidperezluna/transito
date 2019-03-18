@@ -39,7 +39,7 @@ constructor(
   ngOnInit() {
     this.almacen = new Almacen(null,null,null,null,null,null,null,null);
 
-    this._servicioService.getServicioSelect().subscribe(
+    this._servicioService.select().subscribe(
         response => {
           this.servicios = response;
         }, 

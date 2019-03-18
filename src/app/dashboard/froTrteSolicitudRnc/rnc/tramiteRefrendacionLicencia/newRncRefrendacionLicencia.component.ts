@@ -61,7 +61,7 @@ export class NewRncRefrendacionLicenciaComponent implements OnInit {
             }
         );
 
-        this._ServicioService.getServicioSelect().subscribe(
+        this._ServicioService.select().subscribe(
             response => {
               this.servicios = response;
             },

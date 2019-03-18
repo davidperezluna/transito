@@ -25,7 +25,7 @@ export class NewComponent implements OnInit {
 
     ngOnInit() {
         this.requiereEmpresa = new SvCfgRequiereEmpresa(null, null, null);
-        this._CarroceriaService.getCarroceriaSelect().subscribe(
+        this._CarroceriaService.select().subscribe(
             response => {
                 this.carrocerias = response;
             },

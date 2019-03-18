@@ -40,7 +40,7 @@ export class NewRnmaCambioCarroceriaComponent implements OnInit {
     ngOnInit() {
         this.vehiculo.carroceriaId = 4;
         
-        this._CarroceriaService.getCarroceriaSelect().subscribe(
+        this._CarroceriaService.select().subscribe(
             response => {
                 this.carrocerias = response;
             },
@@ -60,7 +60,7 @@ export class NewRnmaCambioCarroceriaComponent implements OnInit {
     enviarTramite(){
         let token = this._loginService.getToken();
 
-        this._CarroceriaService.showCarroceria(token,this.carroceriaSelected).subscribe(
+        this._CarroceriaService.show(token,this.carroceriaSelected).subscribe(
             carroceriaResponse => {
                 this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rnma-cambiocarroceria';

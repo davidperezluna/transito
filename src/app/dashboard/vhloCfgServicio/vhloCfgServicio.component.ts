@@ -39,7 +39,8 @@ export class VhloCfgServicioComponent implements OnInit {
       ) {
       }
     })
-		this._ServicioService.getServicio().subscribe(
+
+		this._ServicioService.index().subscribe(
 				response => {
           this.servicios = response.data;
           let timeoutId = setTimeout(() => {  
@@ -100,7 +101,8 @@ export class VhloCfgServicioComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ServicioService.deleteServicio(token,id).subscribe(
+        
+        this._ServicioService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

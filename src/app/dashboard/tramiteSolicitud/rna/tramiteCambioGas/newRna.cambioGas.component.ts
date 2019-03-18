@@ -61,7 +61,7 @@ export class NewRnaCambioGasComponent implements OnInit {
    
     enviarTramite(){
         let token = this._loginService.getToken();
-        this._CombustibleService.getCombustible().subscribe(
+        this._CombustibleService.index().subscribe(
             response => {
                 this.combustibles = response; 
                 this.combustibles.data.forEach(element => { 

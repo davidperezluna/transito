@@ -49,7 +49,7 @@ export class NewRnrsCambioMotorComponent implements OnInit {
     ngOnInit() {
         this.tipoIngresoList = ['Nuevo', 'Usado'];
 
-        this._CombustibleService.getCombustibleSelect().subscribe(
+        this._CombustibleService.select().subscribe(
             response => {
                 this.combustibles = response;
             },

@@ -95,7 +95,7 @@ ngOnInit() {
     }
   );
 
-  this._CarroceriaService.getCarroceriaSelect().subscribe(
+  this._CarroceriaService.select().subscribe(
     response => {
       this.carrocerias = response;
     }, 
@@ -109,7 +109,7 @@ ngOnInit() {
     }
   );
 
-  this._CombustibleService.getCombustibleSelect().subscribe(
+  this._CombustibleService.select().subscribe(
     response => {
       this.combustibles = response;
     },  

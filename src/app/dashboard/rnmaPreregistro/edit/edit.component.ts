@@ -183,7 +183,7 @@ constructor(
           }
         }
       );
-      this._carroceriaService.getCarroceriaSelect().subscribe(
+      this._carroceriaService.select().subscribe(
         response => {
           this.carrocerias = response;
           setTimeout(() => {
@@ -198,7 +198,7 @@ constructor(
           }
         }
       );
-      this._combustibleService.getCombustibleSelect().subscribe(
+      this._combustibleService.select().subscribe(
         response => {
           this.combustibles = response;
           setTimeout(() => {

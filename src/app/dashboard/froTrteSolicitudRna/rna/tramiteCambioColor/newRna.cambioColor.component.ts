@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
-import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -22,7 +22,7 @@ export class NewRnaCambioColorComponent implements OnInit {
     public colores: any;
     public tramitesFactura: any = null;
     public colorSelected: any;
-    public tramiteRealizado: any;
+
     public datos = {
         'campos': null,
         'idVehiculo': null,
@@ -33,8 +33,8 @@ export class NewRnaCambioColorComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
-        private _ColorService: VhloCfgColorService,
         private _VehiculoService: VhloVehiculoService,
+        private _ColorService: VhloCfgColorService,
         private _LoginService: LoginService,
     ) { }
   

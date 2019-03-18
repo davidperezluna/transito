@@ -232,7 +232,7 @@ constructor(
         }
       }
     );
-    this._CarroceriaService.getCarroceriaSelect().subscribe(
+    this._CarroceriaService.select().subscribe(
       response => {
         this.carrocerias = response;
       }, 
@@ -245,7 +245,7 @@ constructor(
         }
       }
     );
-    this._ServicioService.getServicioSelect().subscribe(
+    this._ServicioService.select().subscribe(
       response => {
         this.servicios = response;
       }, 
@@ -271,7 +271,7 @@ constructor(
         }
       }
     );
-    this._CombustibleService.getCombustibleSelect().subscribe(
+    this._CombustibleService.select().subscribe(
       response => {
         this.combustibles = response;
       },  

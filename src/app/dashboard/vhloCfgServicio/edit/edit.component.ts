@@ -28,7 +28,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
 
-		this._ServicioService.editServicio(this.servicio,token).subscribe(
+		this._ServicioService.edit(this.servicio,token).subscribe(
 			response => {
         this.respuesta = response;
         console.log(this.respuesta);

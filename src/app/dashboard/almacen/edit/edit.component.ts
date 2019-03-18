@@ -41,7 +41,7 @@ constructor(
 
   ngOnInit(){
     console.log(this.almacen);
-    this._servicioService.getServicioSelect().subscribe(
+    this._servicioService.select().subscribe(
         response => {
           this.servicios = response;
           setTimeout(() => {

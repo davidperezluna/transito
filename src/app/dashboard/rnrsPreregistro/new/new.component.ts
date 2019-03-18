@@ -104,7 +104,7 @@ ngOnInit() {
       }
     }
   );
-  this._CarroceriaService.getCarroceriaSelect().subscribe(
+  this._CarroceriaService.select().subscribe(
     response => {
       this.carrocerias = response;
     }, 

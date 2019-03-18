@@ -23,8 +23,8 @@ constructor(
   }
   onEnviar(){
     let token = this._loginService.getToken();
-    console.log(this.combustible);
-		this._CombustibleService.editCombustible(this.combustible,token).subscribe(
+
+		this._CombustibleService.edit(this.combustible,token).subscribe(
 			response => {
         if(response == 'success'){
           this.ready.emit(true);

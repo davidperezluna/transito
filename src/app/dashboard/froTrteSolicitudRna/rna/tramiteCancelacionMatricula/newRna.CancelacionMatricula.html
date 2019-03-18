@@ -1,104 +1,107 @@
-<div class="row">
+<div class="row" *ngIf="tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-4">
         <!-- .col -->
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0">
+                <b class="text-primary">
                     Cancelacion de matricula 
-                </h5>
-                <small>Todos los campos con
-                    <b class="text-danger">*</b> son obligatorios</small>
+                </b>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <form #cancelacionMatriculaForm="ngForm"> 
-                <div class="row">
-                    <div #forma1 class="form-group row"> 
-                        <!-- lista de motivos -->
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Motivo de cancelación 
-                                <span class="text-danger">*</span>
-                            </label>
-                            <ng-select [multiple]="false" [options]="motivosCancelacion" name="motivoCancelacionSelected" [(ngModel)]="datos.idMotivoCancelacion" required>
-                            </ng-select>
-                        </div>
-                        <!--fin lista-->
-                        <br>                        
-                        <!--primer grupo 123-->
-                        <div class="col-xs-6 col-lg-12" *ngIf="datos.idMotivoCancelacion !='EXPORTACIÓN O REEXPORTACIÓN' && datos.idMotivoCancelacion !='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
-                            <label> Entidad judicial
-                                <span class="text-danger">*</span>
-                            </label>
-                            <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="datos.idEntidadJudicial" required name="idEntidadJudicial">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-6 col-lg-12" *ngIf="datos.idMotivoCancelacion !='EXPORTACIÓN O REEXPORTACIÓN' && datos.idMotivoCancelacion !='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
-                            <label> Numero de oficio
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input class="form-control" [(ngModel)]="datos.numeroOficio" name="numeroOficio" type="number" min="0" required />
-                        </div>
-                        <!--fin 123-->
-                        <!-- segundo grupo 4-->
-                        <br><br>
-                        <div class="col-xs-12 col-lg-6 form-group" *ngIf="datos.idMotivoCancelacion =='EXPORTACIÓN O REEXPORTACIÓN'"><br>
-                            <label>Nro. declaración importación
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input class="form-control" [(ngModel)]="datos.declaracion" name="declaracion" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6" *ngIf="datos.idMotivoCancelacion =='EXPORTACIÓN O REEXPORTACIÓN'"><br>
-                            <label> Fecha declaración importación
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input class="form-control" [(ngModel)]="datos.fechaDeclaracion" name="fechaDeclaracion" type="date" min="0"
-                                required />
-                        </div>
-                        <!--fin  4-->                        
-                        <!--tercer grupo 5-->
-                        <div class="col-xs-12 col-lg-12" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL' "><br>
-                            <label> Nro. de IPAT
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input class="form-control" [(ngModel)]="datos.ipat" name="ipat" type="text" required />
-                        </div>
-                        <div class="col-xs-8 col-lg-6" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
-                            <label> Fecha de los hechos
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input class="form-control" [(ngModel)]="datos.fechaHechos" name="fechaHechos" type="date" min="0" required />
-                        </div>
-                        <!-- <div class=""><br>
-                                                    <br>
-                                                    <label class="custom-control custom-checkbox" for="2c-option1">
-                                                        <input type="checkbox" [(ngModel)]="datos.recuperarMotor" name="recuperarMotor" class="custom-control-input"
-                                                            checked>
-                                                        <span class="custom-control-indicator"></span>
-                                                        <span class="custom-control-description">Recuperar motor</span>
-                                                    </label>
-                                                </div> -->
-                        <div class="col-lg-6 col-md-6 " style="padding-top: 12%;" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" [(ngModel)]="datos.recuperarMotor" class="custom-control-input" id="recuperarMotor"
-                                    name="recuperarMotor" checked="">
-                                <label class="custom-control-label" for="recuperarMotor">Recuperar Motor</label>
+                <form #formTramite="ngForm"> 
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Motivo de cancelación 
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="motivosCancelacion" name="motivoCancelacionSelected" [(ngModel)]="datos.idMotivoCancelacion" required>
+                                </ng-select>
+                            </div>
+                   
+                            <div class="col-xs-6 col-lg-12" *ngIf="datos.idMotivoCancelacion !='EXPORTACIÓN O REEXPORTACIÓN' && datos.idMotivoCancelacion !='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
+                                <label> Entidad judicial
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="datos.idEntidadJudicial" required name="idEntidadJudicial">
+                                </ng-select>
+                            </div>
+
+                            <div class="col-xs-6 col-lg-12" *ngIf="datos.idMotivoCancelacion !='EXPORTACIÓN O REEXPORTACIÓN' && datos.idMotivoCancelacion !='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
+                                <label> Numero de oficio
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.numeroOficio" name="numeroOficio" type="number" min="0" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6" *ngIf="datos.idMotivoCancelacion =='EXPORTACIÓN O REEXPORTACIÓN'"><br>
+                                <label>Nro. declaración importación
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.declaracion" name="declaracion" type="text" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6" *ngIf="datos.idMotivoCancelacion =='EXPORTACIÓN O REEXPORTACIÓN'"><br>
+                                <label> Fecha declaración importación
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.fechaDeclaracion" name="fechaDeclaracion" type="date" min="0"
+                                    required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL' "><br>
+                                <label> Nro. de IPAT
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.ipat" name="ipat" type="text" required />
+                            </div>
+
+                            <div class="col-xs-8 col-lg-6" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
+                                <label> Fecha de los hechos
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" [(ngModel)]="datos.fechaHechos" name="fechaHechos" type="date" min="0" required />
+                            </div>
+                            <!-- <div class=""><br>
+                                                        <br>
+                                                        <label class="custom-control custom-checkbox" for="2c-option1">
+                                                            <input type="checkbox" [(ngModel)]="datos.recuperarMotor" name="recuperarMotor" class="custom-control-input"
+                                                                checked>
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">Recuperar motor</span>
+                                                        </label>
+                                                    </div> -->
+                            <div class="col-lg-6 col-md-6 " style="padding-top: 12%;" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" [(ngModel)]="datos.recuperarMotor" class="custom-control-input" id="recuperarMotor"
+                                        name="recuperarMotor" checked="">
+                                    <label class="custom-control-label" for="recuperarMotor">Recuperar Motor</label>
+                                </div>
                             </div>
                         </div>
-                        <!--fin 5-->
-                        <!--nunca borrar siempre ira en las todas las paginas -->                      
-                        
-                        <!--no borrar jamas jaja-->                 
                     </div>
-                </div>
-            </form>
+                </form>
             </div>
             <div class="card-footer">
-                <button (click)="onEnviar()" class="btn btn-primary"  [disabled]="cancelacionMatriculaForm.invalid" >
+                <button (click)="onEnviar()" class="btn btn-primary"  [disabled]="formTramite.invalid" >
                     <i class="fa fa-save"></i>
                     Enviar
-                </button>
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancelar
                 </button>
             </div>
         </div>

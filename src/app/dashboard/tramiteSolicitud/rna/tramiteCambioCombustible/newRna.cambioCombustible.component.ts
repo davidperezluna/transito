@@ -40,7 +40,7 @@ export class NewRnaCambioCombustibleComponent implements OnInit {
 
     ngOnInit() {
         this.vehiculo.combustibleId = 4;
-        this._CombustibleService.getCombustibleSelect().subscribe(
+        this._CombustibleService.select().subscribe(
             response => {
                 this.combustibles = response;
             },
@@ -61,7 +61,7 @@ export class NewRnaCambioCombustibleComponent implements OnInit {
         
         let token = this._loginService.getToken();
 
-        this._CombustibleService.showCombustible(token, this.combustibleSelected).subscribe(
+        this._CombustibleService.show(token, this.combustibleSelected).subscribe(
             combustibleResponse => {
                 this.datos.idFactura = this.factura.id;
                 this.datos.tramiteFormulario = 'rna-cambiocombustible';

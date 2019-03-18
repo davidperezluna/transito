@@ -78,7 +78,7 @@ export class NewRncRecategorizacionLicenciaArribaComponent implements OnInit {
             }
         );
 
-        this._ServicioService.getServicioSelect().subscribe(
+        this._ServicioService.select().subscribe(
             response => {
                 this.servicios = response;
             },
