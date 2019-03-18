@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SvCfgUnidadReceptoraService } from '../../../services/svCfgUnidadReceptora.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
+import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
 import { SvCfgEntidadAccidenteService } from '../../../services/svCfgEntidadAccidente.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 

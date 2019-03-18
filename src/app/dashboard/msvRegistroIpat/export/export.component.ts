@@ -7,7 +7,7 @@ import { CfgGravedadService } from '../../../services/cfgGravedad.service';
 import { SvCfgTipoVictimaService } from '../../../services/svCfgTipoVictima.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
-import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
+import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
 import { CfgChoqueConService } from '../../../services/cfgChoqueCon.service';
 import { CfgObjetoFijoService } from '../../../services/cfgObjetoFijo.service';
 import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
@@ -94,7 +94,7 @@ export class ExportComponent implements OnInit {
         private _TipoVictimaService: SvCfgTipoVictimaService,
         private _MunicipioService: CfgMunicipioService,
         private _ClaseService: VhloCfgClaseService,
-        private _ClaseAccidenteService: CfgClaseAccidenteService,
+        private _ClaseAccidenteService: SvCfgClaseAccidenteService,
         private _ChoqueCon: CfgChoqueConService,
         private _ObjetoFijo: CfgObjetoFijoService,
         private _GeneroService: UserCfgGeneroService,
@@ -156,7 +156,7 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-        this._ClaseAccidenteService.getClaseAccidenteSelect().subscribe(
+        this._ClaseAccidenteService.select().subscribe(
             response => {
                 this.clasesAccidente = response;
             },

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgClaseAccidente } from '../cfgClaseAccidente.modelo';
-import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
+import { SvCfgClaseAccidente } from '../svCfgClaseAccidente.modelo';
+import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,18 +10,18 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public cfgClaseAccidente: CfgClaseAccidente;
+  public claseAccidente: SvCfgClaseAccidente;
   public errorMessage;
   public respuesta;
   
 
   constructor(
-    private _CfgClaseAccidenteService: CfgClaseAccidenteService,
+    private _ClaseAccidenteService: SvCfgClaseAccidenteService,
     private _loginService: LoginService,
   ) { }
 
   ngOnInit() {
-    this.cfgClaseAccidente = new CfgClaseAccidente(null, null);
+    this.claseAccidente = new SvCfgClaseAccidente(null, null);
 
 
   }
@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
     
-    this._CfgClaseAccidenteService.register(this.cfgClaseAccidente, token).subscribe(
+    this._ClaseAccidenteService.register(this.claseAccidente, token).subscribe(
       response => {
         this.respuesta = response;
         

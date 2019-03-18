@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgClaseAccidenteService } from '../../../services/cfgClaseAccidente.service';
+import { SvCfgClaseAccidenteService } from '../../../services/svCfgClaseAccidente.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -16,7 +16,7 @@ export class EditComponent {
 
 
   constructor(
-    private _CfgClaseAccidenteService: CfgClaseAccidenteService,
+    private _CfgClaseAccidenteService: SvCfgClaseAccidenteService,
     private _loginService: LoginService,
   ) {
    
@@ -34,7 +34,7 @@ export class EditComponent {
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this._CfgClaseAccidenteService.editCfgClaseAccidente(this.cfgClaseAccidente, token).subscribe(
+    this._CfgClaseAccidenteService.edit(this.cfgClaseAccidente, token).subscribe(
       response => {
         //console.log(response);
         this.respuesta = response;

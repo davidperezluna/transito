@@ -1,49 +1,42 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgClaseAccidenteService } from '../../services/cfgClaseAccidente.service';
+import { SvCfgClaseAccidenteService } from '../../services/svCfgClaseAccidente.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgClaseAccidente.component.html'
+  templateUrl: './svCfgClaseAccidente.component.html'
 })
-export class CfgClaseAccidenteComponent implements OnInit {
+export class SvCfgClaseAccidenteComponent implements OnInit {
   public errorMessage;
   public id;
   public respuesta;
-  public cfgClasesAccidente;
+  public clasesAccidente;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table: any = null;
-  public cfgClaseAccidente: any;
+  public claseAccidente: any;
 
   constructor(
-    private _CfgClaseAccidenteService: CfgClaseAccidenteService,
+    private _ClaseAccidenteService: SvCfgClaseAccidenteService,
     private _loginService: LoginService,
   ) { }
 
   ngOnInit() {
     swal({
       title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
+      text: 'Solo tardará unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    this._CfgClaseAccidenteService.getCfgClaseAccidente().subscribe(
+    });
+
+    this._ClaseAccidenteService.index().subscribe(
       response => {
         if (response) {
-
-          this.cfgClasesAccidente = response.data;
+          this.clasesAccidente = response.data;
           let timeoutId = setTimeout(() => {
             this.iniciarTabla();
           }, 100);
@@ -75,6 +68,7 @@ export class CfgClaseAccidenteComponent implements OnInit {
     });
     this.table = $('#dataTables-example').DataTable();
   }
+
   onNew() {
     this.formNew = true;
     this.formIndex = false;
@@ -91,11 +85,12 @@ export class CfgClaseAccidenteComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteCfgClaseAccidente(id: any) {
+
+  onDelete(id: any) {
 
     swal({
       title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
+      text: "¡Se eliminará este registro!",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#15d4be',
@@ -105,7 +100,7 @@ export class CfgClaseAccidenteComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgClaseAccidenteService.deleteCfgClaseAccidente({ 'id': id }, token).subscribe(
+        this._ClaseAccidenteService.delete({ 'id': id }, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
@@ -130,8 +125,8 @@ export class CfgClaseAccidenteComponent implements OnInit {
     })
   }
 
-  editCfgClaseAccidente(cfgClaseAccidente: any) {
-    this.cfgClaseAccidente = cfgClaseAccidente;
+  onEdit(claseAccidente: any) {
+    this.claseAccidente = claseAccidente;
     this.formEdit = true;
     this.formIndex = false;
   }
