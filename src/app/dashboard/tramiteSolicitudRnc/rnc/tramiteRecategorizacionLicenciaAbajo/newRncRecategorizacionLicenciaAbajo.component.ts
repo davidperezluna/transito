@@ -55,7 +55,7 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     ngOnInit() {
         this.categorias = ['A2'];
 
-        this._ClaseService.getClaseSelect().subscribe(
+        this._ClaseService.select().subscribe(
             response => {
               this.clases = response;
             },

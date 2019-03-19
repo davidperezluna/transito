@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../../../services/login.service';
 
+import swal from 'sweetalert2';
 
 @Component({
     selector: 'appRna-duplicado-licencia',
@@ -13,7 +16,6 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     @Input() idSolicitante: any = null;
     public errorMessage;
-
 
     public tramiteSolicitud: any = null;
     public documentacion: any;
@@ -34,33 +36,88 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     ];
  
     constructor(
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
         private _RncLicenciaConduccionService: RncLicenciaConduccionService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        let datos = {
-            'idSolicitante': this.idSolicitante
-        }
         let token = this._LoginService.getToken();
-        
-        this._RncLicenciaConduccionService.searchLicenciaActual(datos,token).subscribe(
+
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
             response => {
-            if(response.status == 'success'){
-                this.datos.numeroLicenciaActual = response.data.numero;
-                console.log(response);
-            }else{
-                
-            }
-            error => {
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
                     this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
+                    if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
                     }
                 }
-        }); 
+            }
+        );
+
+        if (this.tramiteFactura.realizado) {
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        } else {
+            let datos = {
+                'idSolicitante': this.idSolicitante
+            }
+            
+            this._RncLicenciaConduccionService.searchLicenciaActual(datos,token).subscribe(
+                response => {
+                if(response.status == 'success'){
+                    this.datos.numeroLicenciaActual = response.data.numero;
+                }else{
+                    
+                }
+                error => {
+                        this.errorMessage = <any>error;
+                    
+                        if(this.errorMessage != null){
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            ); 
+        }
      }
     
     onEnviar() {

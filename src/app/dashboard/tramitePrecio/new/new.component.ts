@@ -140,7 +140,10 @@ constructor(
           }
         }
       );
-      this._claseService.getClasePorModuloSelect(this.moduloSelected).subscribe(
+
+      let token = this._loginService.getToken();
+
+      this._claseService.selectByModulo({ 'idModulo': this.moduloSelected }, token).subscribe(
           response => { 
             this.clases = response;
           }, 

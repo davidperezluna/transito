@@ -1,32 +1,49 @@
-<div class="row">
+<div class="row" *ngIf="tramiteFactura.realizado">
     <!-- .row -->
-    <div class="col-xs-12 col-lg-3">
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
         <!-- .col -->
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0">
+                <b class="text-primary">
                     Duplicado de licencia
-                </h5>
+                </b>
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <div class="row justify-content-center container">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Motivo</label>
-                            <ng-select [multiple]="false" [options]="motivos" [(ngModel)]="datos.motivo" name="motivo" required></ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Número solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Número de Licencia</label>
-                            <input class="form-control" [(ngModel)]="datos.numeroLicenciaActual" name="numeroLicenciaActual" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Nuevo Número Licencia</label>
-                            <input class="form-control" [(ngModel)]="datos.nuevaLicencia" name="nuevaLicencia" type="text" required />
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Motivo</label>
+                                <ng-select [multiple]="false" [options]="motivos" [(ngModel)]="datos.motivo" name="motivo" required></ng-select>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Número solicitud RUNT</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Número de Licencia</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroLicenciaActual" name="numeroLicenciaActual" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nuevo Número Licencia</label>
+                                <input class="form-control" [(ngModel)]="datos.nuevaLicencia" name="nuevaLicencia" type="text" required />
+                            </div>
                         </div>
                     </div>
                 </div>

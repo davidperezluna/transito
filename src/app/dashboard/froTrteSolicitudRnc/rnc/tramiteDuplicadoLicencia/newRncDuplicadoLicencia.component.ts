@@ -48,7 +48,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._ClaseService.getClaseSelect().subscribe(
+        this._ClaseService.select().subscribe(
             response => {
               this.clases = response;
             },

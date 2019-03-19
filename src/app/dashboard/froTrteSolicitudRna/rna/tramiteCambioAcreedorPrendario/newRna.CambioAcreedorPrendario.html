@@ -1,11 +1,23 @@
+<div class="row" *ngIf="tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="row"><!-- .row -->
+<div class="row" *ngIf="!tramiteFactura.realizado"><!-- .row -->
     <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">
-                    <b class="text-uppercase">Modificación de Acreedor Prendario</b>
-                </h5>
+                <b class="text-primary">Registrar modificación de Acreedor Prendario</b>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -14,22 +26,20 @@
                         <label>Tipo de identificación
                             <span class="text-danger">*</span>
                         </label>
-                        <ng-select [multiple]="false" (ngModelChange)="changedtipoIdentificacion($event)" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected"
-                            required name="tipoIdentificacionId">
+                        <ng-select [multiple]="false" (ngModelChange)="changedtipoIdentificacion($event)" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected"  name="idTipoIdentificacion" required>
                         </ng-select>
                     </div>
 
                     <!--tipo identificacion ciudadano -->
                     <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
                         <label>Identificación</label>
-                        <div  class="input-group" [class.has-success]="acreedorEncontrado === 2" [class.has-danger]="acreedorEncontrado === 3">
+                        <div  class="input-group">
                             <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
                             <span class="input-group-btn">
-                                <button (click)="onKeyCiudadano()" [class.btn-default]="acreedorEncontrado === 1" [class.btn-success]="acreedorEncontrado === 2" [class.btn-danger]="acreedorEncontrado === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                <button (click)="onSearchCiudadano()" class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </span>
-                        </div>
-                        <div class="has-danger" *ngIf="acreedorEncontrado === 3">
-                            <div class="form-control-feedback has-danger has-error">No se encontró el acreedor</div>
                         </div>
                     </div>
 
@@ -41,9 +51,6 @@
                             <span class="input-group-btn">
                                 <button (click)="onKeyEmpresa()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2" [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                             </span>
-                        </div>
-                        <div class="has-danger" *ngIf="empresaEncontrada === 3">
-                            <div class="form-control-feedback has-danger has-error">No se encontró la empresa</div>
                         </div>
                     </div>
 

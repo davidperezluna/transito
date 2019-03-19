@@ -129,7 +129,7 @@ export class SvCfgClaseChoqueComponent implements OnInit {
             }
         });
     }
-    editClaseChoque(claseChoque: any) {
+    editChoque(claseChoque: any) {
         this.claseChoque = claseChoque;
         this.formEdit = true;
         this.formIndex = false;

@@ -99,26 +99,44 @@
                 </div>
 
                 <div class="row" *ngIf="tramiteSolicitud.documentacion && tramitesFactura">
-                    <b class="text-uppercase">Tramites</b>
-                    <div class="col-xs-12 col-lg-12"><!-- .col -->
-                        <ng-select (ngModelChange)="onChangedTramiteFactura($event)" [(ngModel)]="tramiteFacturaSelected" [multiple]="false" [options]="tramitesFactura" name="idTramiteFactura" required></ng-select>
-                    </div><!-- /.col -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link " data-toggle="tab" href="#tab-tramites" role="tab">
+                                Realizar trámites
+                            </a>
+                        </li>
+                        <li class="nav-item" *ngIf='sustrato'>
+                            <a class="nav-link " data-toggle="tab" href="#tab-sustrato" role="tab">
+                                Registrar sustrato
+                            </a>
+                        </li>
+                    </ul>
 
-                    <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">
-                        <!--<appRnc-sustrato [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato> -->
+                    <div class="tab-content">
+                        <div class="tab-pane" id="tab-tramites" role="tabpanel">
+                            <b class="text-uppercase">Trámite a realizar</b>
+                            <div class="col-xs-12 col-lg-12"><!-- .col -->
+                                <ng-select (ngModelChange)="onChangedTramiteFactura($event)" [(ngModel)]="tramiteFacturaSelected" [multiple]="false" [options]="tramitesFactura" name="idTramiteFactura" required></ng-select>
+                            </div><!-- /.col -->
+
+                            <div class="col-xs-12 col-lg-12" *ngIf="tramiteFactura">                        
+                                <appRnc-expedicion-licencia *ngIf="tramiteFactura.precio.tramite.id == 31" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
+                                
+                                <appRnc-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 32" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
+                                
+                                <appRnc-expedicion-licencia-cambio-documento *ngIf="tramiteFactura.precio.tramite.id == 33" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
+                            
+                                <appRnc-recategorizacion-licencia-arriba *ngIf="tramiteFactura.precio.tramite.id == 34" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
                         
-                        <appRnc-expedicion-licencia *ngIf="tramiteFactura.precio.tramite.id == 31" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia>
-                        
-                        <appRnc-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 32" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-duplicado-licencia>
-                        
-                        <appRnc-expedicion-licencia-cambio-documento *ngIf="tramiteFactura.precio.tramite.id == 33" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-expedicion-licencia-cambio-documento>
-                       
-                        <appRnc-recategorizacion-licencia-arriba *ngIf="tramiteFactura.precio.tramite.id == 34" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-arriba>
-                
-                        <appRnc-recategorizacion-licencia-abajo *ngIf="tramiteFactura.precio.tramite.id == 35" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-abajo>
-                       
-                        <appRnc-refrendacion-licencia *ngIf="tramiteFactura.precio.tramite.id == 36" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-refrendacion-licencia>
-                    </div>
+                                <appRnc-recategorizacion-licencia-abajo *ngIf="tramiteFactura.precio.tramite.id == 35" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-recategorizacion-licencia-abajo>
+                            
+                                <appRnc-refrendacion-licencia *ngIf="tramiteFactura.precio.tramite.id == 36" [solicitante]="solicitante" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-refrendacion-licencia>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-sustrato" role="tabpanel">
+                            <appRnc-sustrato [factura]="factura" [solicitante]="solicitante" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRnc-sustrato>
+                        </div>
+                    </div>                   
                 </div>
             </div>
         </div>

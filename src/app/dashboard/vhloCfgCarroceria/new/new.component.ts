@@ -25,7 +25,7 @@ constructor(
   ngOnInit() {
     this.carroceria = new VhloCfgCarroceria(null,null,null,null);
 
-    this._claseService.getClaseSelect().subscribe(
+    this._claseService.select().subscribe(
         response => {
           this.clases = response;
           console.log(this.clases);

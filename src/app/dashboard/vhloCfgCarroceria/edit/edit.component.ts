@@ -24,7 +24,7 @@ constructor(
   ){}
 
   ngOnInit(){
-    this._claseService.getClaseSelect().subscribe(
+    this._claseService.select().subscribe(
         response => {
           this.clases = response;
           setTimeout(() => {

@@ -1,8 +1,8 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { RnaPreregistro } from '../rnaPreregistro.modelo';
 import { CfgDepartamentoService } from "../../../services/cfgDepartamento.service";
-import { LoginService } from '../../../services/login.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
+import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
@@ -11,14 +11,14 @@ import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
 import { VhloCfgCombustibleService } from '../../../services/vhloCfgCombustible.service';
 import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.service';
 import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
-import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
 import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
-import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../services/userEmpresa.service";
+import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
+import { LoginService } from '../../../services/login.service';
 
 import swal from 'sweetalert2';
 @Component({
@@ -81,6 +81,7 @@ public tipoMatriculaSelect:any;
 public btnRadicado:any = 'Preregistro para matricula inicial';
 public propietario = true;
 public campo = false;
+
 public tipoPropiedades= [
   {'value':1,'label':"Leasing"},
   {'value':2,'label':"Propio"}
@@ -92,7 +93,7 @@ public tipoMatricula= [
   {'value':'IMPORTACIÓN TEMPORAL','label':"Importación temporal"}
 ];
 
-public resumen = {};     
+    
 public datos = {
   'propietariosEmpresas': [],
   'propietariosCiudadanos': [],
@@ -159,6 +160,7 @@ constructor(
         }
       }
     );
+
     this._MunicipioService.select().subscribe(
       response => {
         this.municipios = response;
@@ -172,6 +174,7 @@ constructor(
         }
       }
     );
+    
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
         this.organismosTransito = response;
@@ -219,7 +222,7 @@ constructor(
         }
     });
     
-    this._ClaseService.getClasePorModuloSelect(2).subscribe(
+    this._ClaseService.selectByModulo({ 'idModulo': 2 }, token).subscribe(
       response => {
         this.clases = response;
       }, 
@@ -232,6 +235,7 @@ constructor(
         }
       }
     );
+
     this._CarroceriaService.select().subscribe(
       response => {
         this.carrocerias = response;
@@ -245,6 +249,7 @@ constructor(
         }
       }
     );
+
     this._ServicioService.select().subscribe(
       response => {
         this.servicios = response;
@@ -258,6 +263,7 @@ constructor(
         }
       }
     );
+
     this._ColorService.select().subscribe(
       response => {
         this.colores = response;
@@ -271,6 +277,7 @@ constructor(
         }
       }
     );
+
     this._CombustibleService.select().subscribe(
       response => {
         this.combustibles = response;
