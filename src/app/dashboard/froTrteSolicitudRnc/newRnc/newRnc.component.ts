@@ -43,7 +43,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, true, null, null, null, null, null);
+    this.tramiteSolicitud = new FroTrteSolicitudRnc(null, true, null, null, null, null);
   }
 
   onCancelar(){
@@ -248,13 +248,8 @@ constructor(
   }
   
   readyTramite(datos:any){
-    /*this.tramitesFactura.forEach(tramiteFactura => {
-      if (tramiteFactura.tramitePrecio.tramite.id == datos.tramiteFactura) {
-        this.tramiteSolicitud.idTramiteFactura = tramiteFactura.id;
-      }
-    });*/
-    this.tramiteSolicitud.foraneas = datos.foraneas;
-    this.tramiteSolicitud.resumen = datos.resumen;
+    this.tramiteSolicitud.datos = datos;
+
 
     let token = this._LoginService.getToken();
 

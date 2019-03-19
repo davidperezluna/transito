@@ -17,13 +17,10 @@
         <div class="card">
             <div class="card-body">
                 <b class="text-primary">
-                    Registrar Matricula Inicial
+                    Registrar matricula inicial
                 </b>
                 <br>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
-                <!--
-                    <small>Cuando desee agregar un comprador haga click en el botón Agregar </small>
-                -->
                 <hr>
                 <div class="container">
                     <div class="form-group">
@@ -33,29 +30,22 @@
                                 <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="tipoPropiedadSelected" name="tipoPropiedad" required>
                                 </ng-select>
                             </div>
-
-                            <div class="col-xs-12 col-lg-6">
-                                <label>No. licencia de transito <b class="text-danger">*</b></label>
-                                <input type="number" class="form-control" [(ngModel)]="datos.numeroLicenciaTransito" name="numeroLicenciaTransito" required />
-                            </div>
                         </div>
                     </div>
 
                     <div class="form-group"><!-- .form-group -->
                         <div class="row"><!-- .row -->
                             <div class="col-xs-12 col-lg-12">
-                                <!-- tipo prioridad propio -->
                                 <div *ngIf="tipoPropiedadSelected">
                                     <div class="row">                                       
                                         <div class="col-xs-8 col-lg-6">
                                             <label>Tipo de identificación
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <ng-select [multiple]="false" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required>
+                                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required>
                                             </ng-select>
                                         </div>
                                         
-                                        <!--tipo identificacion ciudadano -->
                                         <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected && tipoIdentificacionSelected != 4">
                                             <label>Identificación</label>
                                             <div class="input-group">
@@ -221,8 +211,7 @@
                                     </div>
                                 
                                     <!--si no existe un ciudadano -->
-                                    <app-new-rna-ciudadano *ngIf="ciudadanoNew" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion"
-                                        (ready)="ready($event)"></app-new-rna-ciudadano>
+                                    <app-new-rna-ciudadano *ngIf="ciudadanoNew" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
                                 </div>
                             </div>
                         </div><!-- /.row -->

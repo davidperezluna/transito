@@ -34,8 +34,8 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         'idClase': null,
         'idCategoria': null,
         'idServicio': null,
-        'idTramiteFactura': null,
         'idSolicitante': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
@@ -116,8 +116,8 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
 
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
     }
+
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
-
 }

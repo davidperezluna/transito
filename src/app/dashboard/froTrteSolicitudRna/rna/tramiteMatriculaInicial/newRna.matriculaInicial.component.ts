@@ -1,8 +1,7 @@
 import { Component , OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
-import { VhloCfgColorService } from '../../../../services/vhloCfgColor.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
@@ -35,7 +34,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     public apoderadoSelected:any;
     public empresa:any = null;
     
-    public tipoIdentificaciones: any;
+    public tiposIdentificacion: any;
     public identificacion:any;
     public identificacionApoderado:any;
     public nit:any;
@@ -46,25 +45,24 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         { 'value': 1, 'label': 'Leasing' },
         { 'value': 2, 'label': 'Propio' },
     ];
+
     public tipoPropiedadSelected:any;
     
     public datos = {
         'propietarios': [],
         'solidario': false,
-        'numeroLicenciaTransito': null,
         'tipoPropiedad': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
     };
 
     constructor(
-        private _ColorService: VhloCfgColorService,
+        private _PropietarioService: VhloPropietarioService,
+        private _VhloVehiculoService: VhloVehiculoService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
-        private _VehiculoService: VehiculoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
-        private _PropietarioService: VhloPropietarioService,
         private _EmpresaService: UserEmpresaService,
         private _LoginService: LoginService,
         private router: Router,
@@ -129,7 +127,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         }else{
             this._TipoIdentificacionService.select().subscribe(
                 response => {
-                    this.tipoIdentificaciones = response;
+                    this.tiposIdentificacion = response;
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -141,10 +139,6 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 }
             );
         }   
-    }
-
-    onCancelar(){
-        this.cancelarTramite.emit(true);
     }
     
     onSearchCiudadano(){
@@ -249,7 +243,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
         );
     }
 
-    ononSearchEmpresa(){
+    onSearchEmpresa(){
         let token = this._LoginService.getToken();
 
         let nit = {
@@ -260,10 +254,9 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
             response => {
                 if(response.status == 'success'){
                     this.empresa = response.data;
-                    //this.empresaEncontrada= 2;
-            }else{
-                //this.empresaEncontrada=3;
-            }
+                }else{
+                    this.empresa = null;
+                }
             error => {
                     this.errorMessage = <any>error;
                 
@@ -306,7 +299,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 'idApoderado':null,
                 'apoderadoIdentificacion':null,
                 'apoderado.Nombre':null,
-            }   
+            }
         );
     }
 
