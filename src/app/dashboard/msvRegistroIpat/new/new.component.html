@@ -714,12 +714,12 @@
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Nombres Conductor</label>
-                            <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.nombresConductor" name="nombresConductor"
+                            <input class="form-control" type="text" [disabled]="cdnPrimerNombreConductor && cdnSegundoNombreCondutor" [(ngModel)]="msvRegistroIpat.nombresConductor" name="nombresConductor"
                                 >
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Apellidos Conductor</label>
-                            <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.apellidosConductor" name="apellidosConductor"
+                            <input class="form-control" type="text" [disabled]="cdnPrimerApellidoConductor && cdnSegundoApellidoCondutor" [(ngModel)]="msvRegistroIpat.apellidosConductor" name="apellidosConductor"
                                 >
                         </div>
                         <!-- <div class="col-lg-6 col-md-6">
@@ -735,7 +735,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Fecha Nacimiento Conductor</label>
-                            <input class="form-control" type="date" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.fechaNacimientoConductor"
+                            <input class="form-control" type="date" [disabled]="cdnFechaNacimientoConductor" [(ngModel)]="msvRegistroIpat.fechaNacimientoConductor"
                                 name="fechaNacimientoConductor" >
                         </div>
                         <!-- <div class="col-lg-6 col-md-6">
@@ -745,7 +745,7 @@
                         </div> -->
                         <div class="col-lg-6 col-md-6">
                             <label>Sexo Conductor</label>
-                            <ng-select [multiple]="false" [options]="generos" [disabled]="usuario" [(ngModel)]="sexoConductorSelected"
+                            <ng-select [multiple]="false" [options]="generos" [disabled]="cdnSexoConductor" [(ngModel)]="sexoConductorSelected"
                                  name="sexoConductor">
                             </ng-select>
                         </div>
@@ -757,7 +757,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Direccion Residencia Conductor</label>
-                            <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.direccionResidenciaConductor"
+                            <input class="form-control" type="text" [disabled]="cdnDireccionConductor" [(ngModel)]="msvRegistroIpat.direccionResidenciaConductor"
                                 name="direccionResidenciaConductor" >
                         </div>
                         <!-- <div class="col-lg-6 col-md-6">
@@ -767,13 +767,13 @@
                         </div> -->
                         <div class="col-lg-6 col-md-6">
                             <label>Ciudad residencia Conductor</label>
-                            <ng-select [multiple]="false" [options]="municipios" [disabled]="usuario" [(ngModel)]="ciudadResidenciaConductorSelected" 
+                            <ng-select [multiple]="false" [options]="municipios" [disabled]="cdnMunicipioConductor" [(ngModel)]="ciudadResidenciaConductorSelected" 
                                 name="ciudadResidenciaConductor">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Telefono Conductor</label>
-                            <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.telefonoConductor" name="telefonoConductor"
+                            <input class="form-control" type="text" [disabled]="cdnTelefonoConductor" [(ngModel)]="msvRegistroIpat.telefonoConductor" name="telefonoConductor"
                                 >
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.gravedad == 'CON HERIDOS' || msvRegistroIpat.gravedad == 'CON MUERTOS'">

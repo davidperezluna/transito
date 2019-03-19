@@ -1235,10 +1235,9 @@ export class NewComponent implements OnInit {
 
           if (response.status == 'success') {
             this.usuario = true;
-            console.log(response.data);
             if (response.data.tipoIdentificacion != null) {
               this.cdnTipoIdentificacionConductor = true;
-              this.tipoIdentificacionConductorSelected = [response.data[0].tipoIdentificacion.id];
+              this.tipoIdentificacionConductorSelected = [response.data.tipoIdentificacion.id];
             } else {
               this.cdnTipoIdentificacionConductor = false;
               this.tipoIdentificacionConductorSelected = [0];
@@ -1269,23 +1268,23 @@ export class NewComponent implements OnInit {
               this.cdnFechaNacimientoConductor = false;
               this.msvRegistroIpat.fechaNacimientoConductor = '';
             }
-            if (response.data.ciudadano.genero.id != null){
+            if (response.data.genero != null){
               this.cdnSexoConductor = true;
-              this.sexoConductorSelected = [response.data.ciudadano.genero.id];
+              this.sexoConductorSelected = [response.data.genero.id];
             } else {
               this.cdnSexoConductor = false;
               this.sexoConductorSelected = [0];
             }
-            if (response.data.ciudadano.direccion != null) {
+            if (response.data.direccion != null) {
               this.cdnDireccionConductor = true;
-              this.msvRegistroIpat.direccionResidenciaConductor = response.data.ciudadano.direccion;
+              this.msvRegistroIpat.direccionResidenciaConductor = response.data.direccion;
             } else {
               this.cdnDireccionConductor = false;
               this.msvRegistroIpat.direccionResidenciaConductor = '';
             }
-            if (response.data.ciudadano.municipioResidencia.id != null) {
+            if (response.data.municipioResidencia != null) {
               this.cdnMunicipioConductor = true;
-              this.ciudadResidenciaConductorSelected = [response.data.ciudadano.municipioResidencia.id];
+              this.ciudadResidenciaConductorSelected = [response.data.municipioResidencia.id];
             } else {
               this.cdnMunicipioConductor = false;
               this.ciudadResidenciaConductorSelected = [0];
@@ -1297,7 +1296,6 @@ export class NewComponent implements OnInit {
               this.cdnTelefonoConductor = false;
               this.msvRegistroIpat.telefonoConductor = '';
             }
-            //swal.close();
           } else {
             swal({
               title: 'Alerta!',
@@ -1506,12 +1504,28 @@ export class NewComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.agente = true;
-            this.tipoIdentificacionAgenteSelected = [response.data.ciudadano.usuario.tipoIdentificacion.id];
-            this.msvRegistroIpat.gradoAgente = response.data.cargo.nombre;
-            this.msvRegistroIpat.nombresAgente = response.data.ciudadano.usuario.primerNombre + ' ' + response.data.ciudadano.usuario.segundoNombre;
-            this.msvRegistroIpat.apellidosAgente = response.data.ciudadano.usuario.primerApellido + ' ' + response.data.ciudadano.usuario.segundoApellido;
-            this.msvRegistroIpat.placaAgente = response.data.numeroPlaca;
-            this.msvRegistroIpat.entidadAgente = response.data.sedeOperativa.nombre;
+            if (response.data.ciudadano.tipoIdentificacion != null) {
+            this.tipoIdentificacionAgenteSelected = [response.data.ciudadano.tipoIdentificacion.id];
+            } else {
+              this.tipoIdentificacionAgenteSelected = [0];
+            }
+            if (response.data.cargo.nombre != null){
+              this.msvRegistroIpat.gradoAgente = response.data.cargo.nombre;
+            } else {
+              this.msvRegistroIpat.gradoAgente = '';
+            }
+            this.msvRegistroIpat.nombresAgente = response.data.ciudadano.primerNombre + ' ' + response.data.ciudadano.segundoNombre;
+            this.msvRegistroIpat.apellidosAgente = response.data.ciudadano.primerApellido + ' ' + response.data.ciudadano.segundoApellido;
+            if (response.data.numeroPlaca != null) {
+              this.msvRegistroIpat.placaAgente = response.data.numeroPlaca;
+            } else {
+              this.msvRegistroIpat.placaAgente = '';
+            }
+            if (response.data.organismoTransito.nombre != null) {
+             this.msvRegistroIpat.entidadAgente = response.data.organismoTransito.nombre;
+            } else {
+              this.msvRegistroIpat.entidadAgente = '';
+            }
             //swal.close();
           } else {
             swal({
@@ -1620,13 +1634,14 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
+            console.log(response.data);
             this.testigo = true;
-            this.tipoIdentificacionTestigoSelected = [response.data[0].tipoIdentificacion.id];
-            this.msvRegistroIpat.nombresTestigo = response.data[0].primerNombre + ' ' + response.data[0].segundoNombre;
-            this.msvRegistroIpat.apellidosTestigo = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
-            this.msvRegistroIpat.direccionTestigo = response.data[0].ciudadano.direccion;
-            this.ciudadResidenciaTestigoSelected = [response.data[0].ciudadano.municipioResidencia.id];
-            this.msvRegistroIpat.telefonoTestigo = response.data[0].telefono;
+            this.tipoIdentificacionTestigoSelected = [response.data.tipoIdentificacion.id];
+            this.msvRegistroIpat.nombresTestigo = response.data.primerNombre + ' ' + response.data.segundoNombre;
+            this.msvRegistroIpat.apellidosTestigo = response.data.primerApellido + ' ' + response.data.segundoApellido;
+            this.msvRegistroIpat.direccionTestigo = response.data.direccionPersonal;
+            this.ciudadResidenciaTestigoSelected = [response.data.municipioResidencia.id];
+            this.msvRegistroIpat.telefonoTestigo = response.data.telefono;
             //swal.close();
           } else {
             swal({
