@@ -1,26 +1,30 @@
 
 <div class="row"><!-- .row -->
-    <div class="col-xs-12 col-lg-6"><!-- .col -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0">
+                <b class="text-primary">
                     Asignar Sustrato
-                </h5>
+                </b>
                 <hr>
-                <div class="row">
-                    <form #sustratoForm="ngForm"> 
-                        <div class="form-group row">
-                            <div class="input-group col-xs-12 col-lg-12" [ngClass]="{'has-danger' : isError,'has-success': isExist}">
-                                <input type="text" class="form-control" placeholder="Numero" [(ngModel)]="datos.sustrato" name="consecutivo" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onKeyValidateSustrato()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                <form #formSustrato="ngForm"> 
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Numero" [(ngModel)]="datos.sustrato" name="consecutivo" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchSustrato()" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="form-group row" *ngIf="isExist">
+                    <div class="form-group" *ngIf="sustrato">
+                        <div class="row">
                             <!-- digitar la nueva licencia de transito  -->
                             <div class="col-xs-12 col-lg-12">
                                 <div class="custom-control " >
@@ -49,41 +53,42 @@
                                 </div>
                             </div> 
                         </div>
+                    </div>
 
-                        <!--si existe un ciudadano -->
-                        <div class="row" *ngIf="ciudadanoEncontrado === 2 && tarjetaEntregada && isExist ">
-                            <h5 class="container">
-                                Resultados de búsqueda
-                            </h5>
-                            <table class="table " id="dataTables-example">
-                                <tbody>
-                                    <tr class="odd">
-                                        <td><b>Tipo de identificación:</b></td>
-                                        <td class="center"><p>{{ usuario.tipoIdentificacion.nombre }}</p></td>
-                                        <td><b>Numero de identificación</b></td>
-                                        <td class="center"><p>{{ usuario.identificacion }}</p></td>
-                                    </tr>
-                                    <tr class="odd">
-                                        <td><b>Primer nombre:</b></td>
-                                        <td class="center"><p>{{ usuario.primerNombre }}</p></td>
-                                        <td><b>Segundo nombre:</b></td>
-                                        <td class="center"><p>{{ usuario.segundoNombre }}</p></td>
-                                    </tr>
-                                    <tr class="odd">
-                                        <td><b>Primer apellido:</b></td>
-                                        <td class="center"><p>{{ usuario.primerApellido }}</p></td>
-                                        <td><b>Segundo apellido:</b></td>
-                                        <td class="center"><p>{{ usuario.segundoApellido }}</p></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <app-new-rnc-ciudadano *ngIf="ciudadanoEncontrado === 3 && tarjetaEntregada" [identificacion]="usuario.identificacion" (ready)="ready($event)"></app-new-rnc-ciudadano>
-                    </form>
-                </div>
+                    <!--si existe un ciudadano -->
+                    <div class="row" *ngIf="ciudadanoEncontrado === 2 && tarjetaEntregada && sustrato ">
+                        <h5>
+                            Resultados de búsqueda
+                        </h5>
+                        <table class="table table-bordered table-striped" id="dataTables-example">
+                            <tbody>
+                                <tr class="odd">
+                                    <td><b>Tipo de identificación:</b></td>
+                                    <td class="center"><p>{{ usuario.tipoIdentificacion.nombre }}</p></td>
+                                    <td><b>Numero de identificación</b></td>
+                                    <td class="center"><p>{{ usuario.identificacion }}</p></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td><b>Primer nombre:</b></td>
+                                    <td class="center"><p>{{ usuario.primerNombre }}</p></td>
+                                    <td><b>Segundo nombre:</b></td>
+                                    <td class="center"><p>{{ usuario.segundoNombre }}</p></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td><b>Primer apellido:</b></td>
+                                    <td class="center"><p>{{ usuario.primerApellido }}</p></td>
+                                    <td><b>Segundo apellido:</b></td>
+                                    <td class="center"><p>{{ usuario.segundoApellido }}</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <app-new-rnc-ciudadano *ngIf="ciudadanoEncontrado === 3 && tarjetaEntregada" [identificacion]="usuario.identificacion" (ready)="ready($event)"></app-new-rnc-ciudadano>
+                </form>
             </div>
             <div class="container">
-                <button (click)="enviarTramite()"  [disabled]="sustratoForm.invalid" class="btn btn-success pull-right">Aceptar</button>
+                <button (click)="enviarTramite()"  [disabled]="formSustrato.invalid" class="btn btn-success pull-right">Aceptar</button>
             </div>
         </div>
     </div><!-- /.col -->

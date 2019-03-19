@@ -133,17 +133,16 @@ export class NewRnaCambioGasComponent implements OnInit {
                 this.combustibles.data.forEach(element => { 
                     if(element.id == 4 ){
                         this.datos.idCombustibleCambio = element.id;
-                        console.log(this.datos.idCombustibleCambio);
                     }
                 });
                 error => {
-                        this.errorMessage = <any>error;
-    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
+                    this.errorMessage = <any>error;
+
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
+                }
             }
         );
 
@@ -151,11 +150,11 @@ export class NewRnaCambioGasComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
-        this._VehiculoService.update(this.datos,token).subscribe(
+        this._VehiculoService.update(this.datos, token).subscribe(
             response => {
                 if(response.status == 'success'){
                     let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                        '<br><b>Anterior: </b>' + this.vehiculo.combustible +
+                        '<br><b>Anterior: </b>' + this.vehiculo.combustible.nombre +
                         '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
 
                     this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});

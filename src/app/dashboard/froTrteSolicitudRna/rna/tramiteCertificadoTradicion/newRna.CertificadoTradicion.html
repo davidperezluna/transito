@@ -37,42 +37,7 @@
                                     <label>Observación certificado de tradición</label>
                                     <textarea class="form-control" [(ngModel)]="datos.observacion" name="observacion" placeholder="Observación"></textarea>
                                 </div>      
-                                
-                                <div class="col-xs-12 col-lg-12" >
-                                    <div class="col-xs-12 col-lg-12" *ngIf="!datos.certificadoEntregado">
-                                        <label>Identificación</label>
-                                        <div  class="input-group">
-                                            <input type="number" class="form-control" placeholder="Digite identificación" [(ngModel)]="identificacion" name="identificacion" required />
-                                            <span class="input-group-btn">
-                                                <button (click)="onSearchCiudadano()" type="button"><i class="fa fa-search"></i></button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row" *ngIf="ciudadano">
-                                <table class="table table-bordered table-striped" id="dataTables-example">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <b>Tipo de identificación:</b>
-                                                <br>{{ ciudadano.tipoIdentificacion.nombre }}
-                                                <br>
-                                                <b>Numero de identificación</b>
-                                                <br>{{ ciudadano.identificacion }}
-                                            </td>
-                                            <td>
-                                                <b>Nombres y apellidos:</b>
-                                                <br>
-                                                {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <app-new-rna-ciudadano *ngIf="!ciudadano" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>               
+                            </div>        
                         </div>
                     </div>
                 </form>

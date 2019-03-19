@@ -201,11 +201,13 @@ export class NewRnaInsumoComponent implements OnInit {
 
     onKeyValidateInsumo(){
         let token = this._loginService.getToken();
+
         let datos = {
             'numero': this.numeroInsumo,
             'idModulo': 2,
             'idSedeOperativa': this.idSedeOperativa,
         }
+        
         this._RnaInsumoService.showNombre(token,datos).subscribe(
             response => {
                 if (response.status == 'success') {
