@@ -1,10 +1,10 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { LoginService } from '../../../../services/login.service';
 import { CfgOrganismoTransitoService } from '../../../../services/cfgOrganismoTransito.service';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
 import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -16,130 +16,131 @@ export class NewTrasladoCuentaComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Input() vehiculo: any = null;
 @Input() tramiteFactura: any = null;
-@Input() tramiteTraslado: any = null;
-public sedeOperativaSelected: any;
-public sedes: any;
-public tramitesFactura: any = null;
-public tramiteFacturaSelected: any;
-public tramiteRealizado: any = false;
-public errorMessage;
 
-public datos = {
+  public organismosTransito: any;
+  public tramitesFactura: any = null;
+  public tramiteSolicitud: any;
+  public errorMessage;
+
+  public datos = {
     'fechaSalida': null,
     'numeroRunt': null,
     'numeroGuia': null,
     'nombreEmpresa': null,
-    'tramiteFormulario': null,
-    'idTramiteFactura': null,
-    'idVehiculo': null,
     'campos': null,
-    'idSedeOperativa': null,
-
+    'idOrganismoTransito': null,
+    'idVehiculo': null,
+    'idTramiteFactura': null,
   };
 
 constructor(
-  private _loginService: LoginService,
-  private _TramiteSolicitudService: TramiteSolicitudService,
   private _TramiteTrasladoService: TramiteTrasladoService,
-  private _TramiteFacturaService: TramiteFacturaService,
-  private _VehiculoService: VehiculoService,
-  private _OrganismoTransitoService: CfgOrganismoTransitoService
+  private _TramiteSolicitudService: FroTrteSolicitudService,
+  private _TramiteFacturaService: FroFacTramiteService,
+  private _VehiculoService: VhloVehiculoService,
+  private _OrganismoTransitoService: CfgOrganismoTransitoService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this._OrganismoTransitoService.selectSedes().subscribe(
-      response => {
-        this.sedes = response;
-        console.log(this.sedes);
-        
-      },
-      error => {
-        this.errorMessage = <any>error;
+    let token = this._LoginService.getToken();
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
+    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.tramiteFactura = response.data;
+
+          swal.close();
+        } else {
+          this.tramiteFactura = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
         }
       }
     );
 
-    this._TramiteFacturaService.getTramitesByFacturaSelect(this.tramiteFactura.id).subscribe(
-      response => {
-        
-      this.tramitesFactura = response;
-      
-      this.tramitesFactura.forEach(tramiteFactura => {
-        if (tramiteFactura.realizado == 1) {
-          if (tramiteFactura.tramitePrecio.tramite.id == 3) {
-            this.tramiteRealizado = tramiteFactura;
-            console.log(this.tramiteRealizado);
+    if (this.tramiteFactura.realizado) {
+      this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.tramiteSolicitud = response.data;
+          } else {
+            this.tramiteSolicitud = null;
+
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
           }
         }
-      });
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    });
-
-    
-  //consultar tramite solicitud con tramiterealizado.id
-  let token = this._loginService.getToken();
-  if(this.tramiteRealizado != false ){
-    this._TramiteSolicitudService.showTramiteSolicitudByTamiteFactura(token,this.tramiteRealizado.id).subscribe(
-      response => {
-          this.datos = response.data.datos
-      },
-      error => {
+      );
+    } else {
+      this._OrganismoTransitoService.selectSedes().subscribe(
+        response => {
+          this.organismosTransito = response;
+        },
+        error => {
           this.errorMessage = <any>error;
 
           if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert('Error en la petición');
+            console.log(this.errorMessage);
+            alert('Error en la petición');
           }
-      }
-  );
-  }
-  }
-  onCancelar(){
-    this.ready.emit(true);
+        }
+      );
+    }
   }
   
   onEnviar(){
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
     
-    this.datos.idSedeOperativa = this.sedeOperativaSelected;
+    this.datos.campos = ['organismoTransito'];
     this.datos.idVehiculo = this.vehiculo.id;
-     this.datos.idTramiteFactura = this.tramiteFactura.id;
-    this.datos.tramiteFormulario = 'rna-traslado';
-    this.datos.campos = ['sedeOperativa'];
+    this.datos.idTramiteFactura = this.tramiteFactura.id;
     
     this._VehiculoService.update(this.datos,token).subscribe(
       response => {
           response = response; 
           if(response.status == 'success'){
-          let resumen = {
-            'nueva sede operativa': this.datos.idSedeOperativa,
-            'anterior sede operativa': this.vehiculo.sedeOperativa.id,
-          };
+            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+              '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismosTransito.id +
+              '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransito;
 
-          this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
-            if (response.status == 'success') {
-              this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-            }
-            error => {
-              this.errorMessage = <any>error;
+            this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
+              if (response.status == 'success') {
+                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+              }
+              error => {
+                this.errorMessage = <any>error;
 
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
               }
             }
-          });
-
+          );
         }
         error => {
           this.errorMessage = <any>error;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { SustratoService } from '../../../../services/sustrato.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { LoginService } from '../../../../services/login.service';
@@ -17,10 +17,8 @@ export class NewRnaRematriculaComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;
     public errorMessage;
-    public respuesta;
-    public tramiteFacturaSelected: any;
-    public sustratos: any;
-    public sustratoSelected: any;
+
+    public tramiteSolicitud: any = null;
     public entidadList: string[];
     public entidadSelected: any;
     public municipios: any;
@@ -29,23 +27,21 @@ export class NewRnaRematriculaComponent implements OnInit {
     public tiposIdentificacion: any;
     public tipoIdentificacionEntregaSelected: any;
     public matriculaCancelada: any = null;
-    public resumen: any;     
+
     public datos = {
-        'entidad': null,
         'numeroActa': null,
         'fechaActa': null,
-        'municipioActa': null,
         'numeroRunt': null,
         'fechaEntrega': null,
-        'municipioEntrega': null,
-        'tipoIdentificacionEntrega': null,
         'numeroIdentificacionEntrega': null,
         'nombreEntrega': null,
         'estado': null,
-        'tramiteFactura': null,
-        'tramiteFormulario': null,
-        'idTramiteFactura': null,
+        'idEntidad': null,
+        'idMunicipioActa': null,
+        'idMunicipioEntrega': null,
+        'idTipoIdentificacionEntrega': null,
         'idVehiculo': null,
+        'idTramiteFactura': null,
     };
 
     public entidades = [
@@ -55,60 +51,100 @@ export class NewRnaRematriculaComponent implements OnInit {
     ];
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _SustratoService: SustratoService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
         private _MunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _LoginService: LoginService,
     ) { }
 
-    ngOnInit() {      
-        this._SustratoService.getSustratoSelect().subscribe(
-            response => {
-                this.sustratos = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
+    ngOnInit() {
+        let token = this._LoginService.getToken();
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
                 }
             }
         );
 
-        this._MunicipioService.select().subscribe(
-            response => {
-                this.municipios = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
+        if (this.tramiteFactura.realizado) {
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
                 }
-            }
-        );
+            );
+        } else {
+            this._MunicipioService.select().subscribe(
+                response => {
+                    this.municipios = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
 
-        this._TipoIdentificacionService.select().subscribe(
-            response => {
-                this.tiposIdentificacion = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
                 }
-            }
-        );
+            );
+
+            this._TipoIdentificacionService.select().subscribe(
+                response => {
+                    this.tiposIdentificacion = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
+        }
     }
 
     
     onEnviar() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         this._TramiteSolicitudService.searchMatriculaCancelada({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
@@ -122,18 +158,12 @@ export class NewRnaRematriculaComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
 
-                    this.datos.entidad = this.entidadSelected;
-                    this.datos.municipioActa = this.municipioActaSelected;
-                    this.datos.municipioEntrega = this.municipioEntregaSelected;
-                    this.datos.tipoIdentificacionEntrega = this.tipoIdentificacionEntregaSelected;
-                    this.datos.tramiteFactura = 25;
-                     this.datos.idTramiteFactura = this.tramiteFactura.id;
+                    this.datos.idTramiteFactura = this.tramiteFactura.id;
                     this.datos.idVehiculo = this.vehiculo.id;
-                    this.datos.tramiteFormulario = 'rna-rematricula';
 
-                    //this.resumen = '';
+                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
                     
-                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': this.resumen });
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                 } else {
                     this.matriculaCancelada = null;
 

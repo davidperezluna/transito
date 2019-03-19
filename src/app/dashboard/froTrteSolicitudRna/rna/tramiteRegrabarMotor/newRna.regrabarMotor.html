@@ -1,34 +1,51 @@
-<div class="row">
+<div class="row" *ngIf="tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0">
+                <b class="text.primary">
                     Regrabar Motor
-                </h5>
+                </b>
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
-                <div class="row justify-content-center container">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Motivo
-                                <span class="text-danger">*</span>
-                            </label>
-                            <select class="form-control" name="motivoList" [(ngModel)]="datos.motivo" required>
-                                <option *ngFor="let motivo of motivoList" [value]="blindaje"> {{motivo}}
-                                </option>
-                            </select>
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Motivo
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-control" name="motivoList" [(ngModel)]="datos.motivo" required>
+                                    <option *ngFor="let motivo of motivoList" [value]="blindaje"> {{motivo}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nuevo número {{ tipoRegrabacionSelected }}</label>
+                                <input class="form-control" [(ngModel)]="datos.nuevoNumero" name="nuevoNumero" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Número solicitud RUNT</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                            </div>                        
                         </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Nuevo número {{ tipoRegrabacionSelected }}</label>
-                            <input class="form-control" [(ngModel)]="datos.nuevoNumero" name="nuevoNumero" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Número solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
-                        </div>                        
                     </div>
                 </div>
             </div>

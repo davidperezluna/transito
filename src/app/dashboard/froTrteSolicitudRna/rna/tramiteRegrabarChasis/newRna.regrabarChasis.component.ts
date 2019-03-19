@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -15,48 +16,104 @@ export class NewRnaRegrabarChasisComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
-    public tramiteFacturaSelected: any;
+
+    public tramiteSolicitud: any = null;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
     public motivoList: string[];
     public motivoSelected: any;
+
     public datos = {
         'motivo': null,
         'nuevoNumero': null,
         'numeroRunt': null,
-        'tramiteFormulario': null,
-        'idTramiteFactura': null,
-        'idVehiculo': null,
         'campos': null,
+        'idVehiculo': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _VehiculoService: VehiculoService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _VehiculoService: VhloVehiculoService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
+        let token = this._LoginService.getToken();
+
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );
+
+        if (this.tramiteFactura.realizado) {
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        } else {
+            this.motivoList = ['Pérdida total', 'Deterioro', 'Improntas ilegales', 'Improntas ilegibles', 'Robado'];
+        }
     }
 
     onEnviar() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        this.datos.motivo = this.motivoSelected;
-         this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tramiteFormulario = 'rna-regrabarchasis';
-        this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['regrabarchasis'];
+        this.datos.motivo = this.motivoSelected;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
 
         this._VehiculoService.update(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    let resumen = 'Regrabado (SI)' +"<br/>"+
-                        'chasis anterior'+ this.vehiculo.chasis +"<br/>"+
-                        'chasis nuevo'+ this.datos.nuevoNumero +"<br/>"+
-                        'motivo'+ this.datos.motivo +"<br/>"+
-                        'numero runt'+ this.datos.numeroRunt;
+                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+                        '<br/>Regrabado (SI)' +
+                        '<br/>Chasis anterior: '+ this.vehiculo.chasis +
+                        '<br/>Chasis nuevo: ' + this.datos.nuevoNumero +
+                        '<br/>Motivo: ' + this.datos.motivo +
+                        '<br/>Numero RUNT: ' + this.datos.numeroRunt;
 
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                 }

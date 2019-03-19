@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -13,15 +13,15 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     @Input() idSolicitante: any = null;
     public errorMessage;
-    public tramiteFacturaSelected: any;
 
+
+    public tramiteSolicitud: any = null;
     public documentacion: any;
     public resumen: any = null;
 
     public datos = {
         'motivo': null,
         'numeroRunt': null,
-        'tramiteFormulario': null,
         'numeroLicenciaActual': null,
         'nuevaLicencia': null,
         'idTramiteFactura': null,
@@ -43,6 +43,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
             'idSolicitante': this.idSolicitante
         }
         let token = this._LoginService.getToken();
+        
         this._RncLicenciaConduccionService.searchLicenciaActual(datos,token).subscribe(
             response => {
             if(response.status == 'success'){
@@ -63,9 +64,10 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
      }
     
     onEnviar() {
-         this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tramiteFormulario = 'rna-duplicadolicencia';
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+
         this.resumen = "Motivo "+ this.datos.motivo +"<br/>";
+
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
     }
     onCancelar(){
