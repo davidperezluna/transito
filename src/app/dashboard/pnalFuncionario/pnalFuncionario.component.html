@@ -32,8 +32,8 @@
             <div class="form-group row">
               <div class="col-xs-12 col-lg-3">
                 <label>Tipo Nombramiento</label>
-                <ng-select (ngModelChange)="onChangedTipoNombramiento($event)" [multiple]="false" [options]="tiposNombramiento"
-                  [(ngModel)]="tipoNombramientoSelected" name="tiposNombramiento">
+                <ng-select (ngModelChange)="onChangedTipoNombramiento($event)" [multiple]="false"
+                  [options]="tiposNombramiento" [(ngModel)]="tipoNombramientoSelected" name="tiposNombramiento">
                 </ng-select>
               </div>
               <div *ngIf='tipoNombramientoSelected == 2' class="col-xs-12 col-lg-3">
@@ -90,7 +90,7 @@
                 <th>Contrato/Nombramiento</th>
                 <th>Vigencias</th>
                 <th>Estado</th>
-                <!-- <th>Contrato</th> -->
+                <th>Contrato</th>
                 <th>Contrato</th>
                 <th>Acciones</th>
               </tr>
@@ -151,7 +151,7 @@
                 <td *ngIf='funcionario.activo'>Activo</td>
                 <td *ngIf='!funcionario.activo'>Suspendido</td>
                 <td>
-                  <!-- <div class="btn-group">
+                  <div class="btn-group">
                     <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-default"
                       type="button">
                       <i class="fa fa-eye"></i>
@@ -168,7 +168,7 @@
                       type="button" *ngIf="funcionario.activo">
                       <i class="fa fa-ban"></i>
                     </button>
-                  </div> -->
+                  </div>
                 </td>
               </tr>
             </tbody>
