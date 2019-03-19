@@ -93,7 +93,7 @@ export class ExportComponent implements OnInit {
         this.table = $('#dataTables-example').DataTable();
     }
 
-    onBuscarRegistros() {
+    onSearchRegistros() {
         let token = this._LoginService.getToken();
         this._MsvCaracterizacionService.getBuscarRegistros({ 'nit': this.exportCaracterizacion.nit }, token).subscribe(
             response => {

@@ -8,7 +8,7 @@ export const MsvCaracterizacionRoutes: Route[] = [
       component: MsvCaracterizacionComponent
     },
     {
-      path: 'svcaracterizacion/export',
+      path: 'svCaracterizacion/export',
       component: ExportComponent
   }
 ];
