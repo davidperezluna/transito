@@ -21,6 +21,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   @Input() tramiteFactura: any = null;
   @Input() ciudadano: any = null;
   public errorMessage;
+
   public codigoOrganismo;
   public tipoServicio;
   public nombreApoderado;
@@ -41,6 +42,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   public tipoSelected;
   public viewApoderado: boolean;
   public sinRegistro = "SIN REGISTRO";
+
   public acta = {
     'fecha':null,
     'numero':null,
@@ -48,11 +50,9 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     'entidadJudicial':null,
   }
   public tipos =[
-    {'value': "Declaración",
-    'label': "Declaración"},
-    {'value': "Manifestación",
-    'label': "Manifestación"}];
-  public resumen = {};  
+    {'value': "Declaración", 'label': "Declaración"},
+    {'value': "Manifestación", 'label': "Manifestación"}
+  ];
 
   constructor(
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
@@ -83,14 +83,14 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       'codigoOrganismo': null,
       'tipoDocumentoSelected': null,
       'tipoServicio': null,
-      'vehiculoId': null,
       'tipoDocApoderado': null,
       'nombreApoderado': null,
       'numeroDocumento': null,
-      'solicitanteId': null,
-      'tramiteFormulario': null,
+      'personaTraslado': null,
+      'idSolicitante': null,
+      'idVehiculo': null,
       'idTramiteFactura': null,
-      'personaTraslado': null};
+    };
       
       this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
       if (this.vehiculo.servicio) {
@@ -141,11 +141,12 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   onEnviar() {
     let token = this._loginService.getToken();
 
-     this.datos.idTramiteFactura = this.tramiteFactura.id;
-    this.datos.tramiteFormulario = 'rna-traspasoindeterminada';
+    this.datos.idTramiteFactura = this.tramiteFactura.id;
     this.datos.personaTraslado = this.sinRegistro;
 
-    this.tramiteSolicitud.datos = { 'foraneas': this.datos, 'resumen': this.resumen };
+    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+    this.tramiteSolicitud.datos = { 'foraneas': this.datos, 'resumen': resumen };
     this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
     this.tramiteSolicitud.idCiudadano = this.ciudadano.id;
 

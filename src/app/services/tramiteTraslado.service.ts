@@ -16,7 +16,6 @@ export class TramiteTrasladoService {
 	}
 
 	register(tramiteTraslado,token){ 
-		
 		let json = JSON.stringify(tramiteTraslado);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

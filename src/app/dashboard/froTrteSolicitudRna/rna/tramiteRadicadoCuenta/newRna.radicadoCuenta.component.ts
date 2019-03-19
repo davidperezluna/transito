@@ -1,13 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import {LoginService} from '../../../../services/login.service';
-import {VehiculoService} from '../../../../services/vehiculo.service';
-import {CfgMunicipioService} from '../../../../services/cfgMunicipio.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
-import { Factura } from '../../../factura/factura.modelo';
 
 @Component({
     selector: 'appRna-radicado-cuenta',
@@ -19,92 +18,123 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
-    public respuesta;
-    public tramiteFacturaSelected: any;
-    public tramiteRealizado: any;
-    public numeroDocumento: any;
-    public fechaIngreso: any;
-    public guiaLlegada: any;
-    public empresaEnvio: any;
-    public rut: any;
+
+    public tramiteSolicitud: any = null;
     public municipios:any;
-    public municipio:any;
-    public municipioSelected:any;
     public tiposIdentificacion: any;
-    public tipoIdentificacion: any;
-    public tipoIdentificacionSelected:any;
-    public resumen = {};     public datos = {
-        'municipioSelected': null,
-        'tipoIdentificacionSelected': null,
-        'numeroDocumento': null,
-        'fechaIngreso': null,
-        'guiaLlegada': null,
-        'empresaEnvio': null,
-        'rut': null,
-        'tramiteFormulario': null,
-        'idTramiteFactura': null,
+    
+    public datos = {
+      'numeroDocumento': null,
+      'fechaIngreso': null,
+      'guiaLlegada': null,
+      'empresaEnvio': null,
+      'runt': null,
+      'idMunicipio': null,
+      'idTipoIdentificacion': null,
+      'idTramiteFactura': null,
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _VehiculoService: VhloVehiculoService,
         private _MunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _LoginService: LoginService,
     ) { }
  
     ngOnInit() {
-        
-         let token = this._loginService.getToken();
-       
-        this._MunicipioService.select().subscribe(
-            response => {
-              this.municipios = response;
-            }, 
-            error => {
-              this.errorMessage = <any>error;
-      
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
+      let token = this._LoginService.getToken();
 
-          this._TipoIdentificacionService.select().subscribe(
-            response => {
-              this.tiposIdentificacion = response;
-            },
+      this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            this.tramiteFactura = response.data;
+
+            swal.close();
+          } else {
+            this.tramiteFactura = null;
+
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        }
+      );
+
+      if (this.tramiteFactura.realizado) {
+        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+          response => {
+            if (response.code == 200) {
+              this.tramiteSolicitud = response.data;
+            } else {
+              this.tramiteSolicitud = null;
+
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
             error => {
               this.errorMessage = <any>error;
               if (this.errorMessage != null) {
                 console.log(this.errorMessage);
-                alert('Error en la petición');
+                alert("Error en la petición");
               }
             }
-          );
+          }
+        );
+      } else {
+        this._MunicipioService.select().subscribe(
+          response => {
+            this.municipios = response;
+          },
+          error => {
+            this.errorMessage = <any>error;
 
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+
+        this._TipoIdentificacionService.select().subscribe(
+          response => {
+            this.tiposIdentificacion = response;
+          },
+          error => {
+            this.errorMessage = <any>error;
+            if (this.errorMessage != null) {
+              console.log(this.errorMessage);
+              alert('Error en la petición');
+            }
+          }
+        );
+      }
     }
     
    
     onEnviar(){     
-        let token = this._loginService.getToken();
+      let token = this._LoginService.getToken();
 
-        this.datos.municipioSelected = this.municipioSelected;
-        this.datos.tipoIdentificacionSelected = this.tipoIdentificacionSelected;
-        this.datos.numeroDocumento = this.numeroDocumento;
-        this.datos.fechaIngreso = this.fechaIngreso;
-        this.datos.guiaLlegada = this.guiaLlegada;
-        this.datos.empresaEnvio = this.empresaEnvio;
-        this.datos.rut = this.rut;
-         this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tramiteFormulario = 'rna-radicadocuenta';
-        console.log(this.datos);
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+      this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        
+      let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 
+      this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

@@ -1,12 +1,27 @@
-<div class="row">
+<div class="row" *ngIf="tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
         <div class="card">
             <div class="card-body">
-                <h5>
+                <b class="text-primary">
                     Regrabar Vin
-                </h5>
+                </b>
                 <small>Todos los campos con
                     <b class="text-danger">*</b> son obligatorios</small>
                 <hr>

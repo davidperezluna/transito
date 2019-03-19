@@ -1,4 +1,3 @@
-
 <div class="row" *ngIf="tramiteFactura.realizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
@@ -18,11 +17,13 @@
     <div class="col-xs-12 col-lg-4"><!-- .col -->
         <div class="card">
             <div class="card-body"><!-- .card-body -->
-                <div class="row">
-                    <div class="form-group row col-xs-12 col-lg-12">
-                        <label>Tipo transformación <span class="text-danger">*</span></label>
-                        <ng-select [multiple]="false" [options]="tiposTransformacion" [(ngModel)]="datos.tipoTransformacion" (ngModelChange)="onChangedTipoTransformacion($event)" required name="tipoTransformacion">
-                        </ng-select>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Tipo transformación <span class="text-danger">*</span></label>
+                            <ng-select [multiple]="false" [options]="tiposTransformacion" [(ngModel)]="datos.tipoTransformacion" (ngModelChange)="onChangedTipoTransformacion($event)" required name="tipoTransformacion">
+                            </ng-select>
+                        </div>
                     </div>
                 </div>
 

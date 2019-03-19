@@ -1,48 +1,60 @@
-<hr>
-<div class="row">
+<div class="row" *ngIf="tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado">
    <div class="col-xs-12 col-lg-4">
       <div class="card">
          <div class="card-header">
-            <h5 class="text-uppercase">Nuevo tramite traslado de cuenta</h5>
+            <b class="text-primary">Registrar traslado de cuenta</b>
             <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
          </div>
          <div class="card-body">
             <form #formNew="ngForm">
-               <div class="form-group row">
-                  <div class="col-xs-12 col-lg-12">
-                     <label>Sede Operativa Destino</label>  
-                     <ng-select [multiple]="false" [options]="sedes" [(ngModel)]="sedeOperativaSelected" name="sede" required>
-                     </ng-select>
-                  </div>
-                  <div class="col-xs-12 col-lg-12">
-                     <label>Fecha salida<strong class="text-danger">*</strong></label>
-                     <input class="form-control" [(ngModel)]="datos.fechaSalida" name="fechaSalida" type="date" required />
-                  </div>
-                  <div class="col-xs-12 col-lg-12">
-                     <label>Número Guía</label>
-                     <input class="form-control" [(ngModel)]="datos.numeroGuia" name="numeroGuia" type="text" required />
-                  </div>
-                  <div class="col-xs-12 col-lg-12">
-                     <label>Nombre empresa</label>
-                     <input class="form-control" [(ngModel)]="datos.nombreEmpresa" name="nombreEmpresa" type="text" required />
-                  </div>
-                  <div class="col-xs-12 col-lg-12">
-                     <label>Número solicitud RUNT</label>
-                     <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
-                  </div>
+               <div class="form-group">
+                   <div class="row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Organismo de transito de destino</label>  
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+                            </ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Fecha salida<strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="datos.fechaSalida" name="fechaSalida" type="date" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Número Guía</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroGuia" name="numeroGuia" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Nombre empresa</label>
+                            <input class="form-control" [(ngModel)]="datos.nombreEmpresa" name="nombreEmpresa" type="text" required />
+                        </div>
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Número solicitud RUNT</label>
+                            <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+                   </div>
                </div>
             </form>
          </div>
          <div class="card-footer">
             <div class="btn-group">
-               <button (click)="onCancelar()" class="btn btn-default">
-               <i class="fa fa-times"></i>
-               Cancel
-               </button>
-               <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-               <i class="fa fa-save"></i>
-               Enviar
-               </button>
+                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
             </div>
          </div>
       </div>

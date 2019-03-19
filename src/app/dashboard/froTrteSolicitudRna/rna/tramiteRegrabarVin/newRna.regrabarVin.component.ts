@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../../services/login.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
 
 import swal from 'sweetalert2';
 
@@ -15,9 +16,9 @@ export class NewRnaRegrabarVinComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
-    public tramiteFacturaSelected: any; 
+
+    public tramiteSolicitud: any; 
     public motivoSelected: any;
-    public resumen: any = null;
     
     public motivos = [
         { 'value': 'Pérdida total', 'label': 'Pérdida total' },
@@ -33,32 +34,91 @@ export class NewRnaRegrabarVinComponent implements OnInit {
         'nuevoNumero': null,
         'numeroRunt': null,
         'campos': null,
-        'tramiteFormulario': null,
-        'idTramiteFactura': null,
         'idVehiculo': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _VehiculoService: VhloVehiculoService,
         private _LoginService: LoginService,
-        private _VehiculoService: VehiculoService,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        let token = this._LoginService.getToken();
+
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );
+
+        if (this.tramiteFactura.realizado) {
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        }
+    }
 
     onEnviar() {
         let token = this._LoginService.getToken();
 
-         this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tramiteFormulario = 'rna-regrabarvin';
-        this.datos.idVehiculo = this.vehiculo.id;
         this.datos.campos = ['regrabarvin'];
+         this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
 
         this._VehiculoService.update(this.datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
+                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+                        '<br/>Regrabado (SI)' +
+                        '<br/>Vin anterior: ' + this.vehiculo.vin +
+                        '<br/>Vin nuevo: ' + this.datos.nuevoNumero +
+                        '<br/>Motivo: ' + this.datos.motivo +
+                        '<br/>Numero RUNT: ' + this.datos.numeroRunt;
 
-                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': this.resumen });
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                 }
                 error => {
                     this.errorMessage = <any>error;
