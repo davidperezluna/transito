@@ -34,7 +34,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {
     this.cfgValorVehiculo = new CfgValorVehiculo(null, null, null, null,null);
 
-    this._claseService.getClaseSelect().subscribe(
+    this._claseService.select().subscribe(
       response => {
         this.clases = response;
       },

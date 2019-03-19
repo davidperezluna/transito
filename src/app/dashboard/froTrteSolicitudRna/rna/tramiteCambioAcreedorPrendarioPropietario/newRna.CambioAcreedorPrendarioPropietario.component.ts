@@ -1,18 +1,15 @@
-import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { CiudadanoVehiculoService } from '../../../../services/ciudadanoVehiculo.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
-import { LoginService } from '../../../../services/login.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
+import { Component , OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { Router } from "@angular/router";
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
-
-
+import { LoginService } from '../../../../services/login.service';
+import { Router } from "@angular/router";
 
 import swal from 'sweetalert2';
-
 
 @Component({
     selector: 'appRna-cambio-acreedor-prendario-propietario',
@@ -24,8 +21,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
     public errorMessage;
+
     public colores: any;
-    public tramiteFacturaSelected: any;
+    public tramiteSolicitud: any = null;
     public tipoPropiedadSelected:any;
     public ciudadano:any;
     public apoderadoSelected:any;
@@ -45,61 +43,117 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     public propietarioPresente = false;
     public ciudadanoSelected:any;
     public apoderado = 'false';
+    
     public tipoPropiedades= [
         {'value':1,'label':"Leasing"},
         {'value':2,'label':"Propio"}
     ];
+
     public tipoIdentificaciones= [ ];
-    public resumen = {};     public datos = {
+    
+    public datos = {
         'propietariosEmpresas': [],
         'propietariosCiudadanos': [],
         'solidario': false,
         'vehiculo': null,
         'sustrato': null,
-        'numeroLicencia': null,
-        'tramiteFormulario': null,
         'idTramiteFactura': null,
     };
 
     constructor(
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
-        private _VehiculoService: VehiculoService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _VehiculoService: VhloVehiculoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _UserCiudadanoService: UserCiudadanoService,
-        private _CiudadanoVehiculoService: CiudadanoVehiculoService,
-        private router: Router,
+        private _PropietarioService: VhloPropietarioService,
         private _EmpresaService: UserEmpresaService,
+        private _LoginService: LoginService,
+        private router: Router,
     ) { }
 
     ngOnInit() {
+        let token = this._LoginService.getToken();
 
-        this._TipoIdentificacionService.select().subscribe(
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
             response => {
-              this.tipoIdentificaciones = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-    
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-              }
+                if (response.code == 200) {
+                    this.tramiteFactura = response.data;
+
+                    swal.close();
+                } else {
+                    this.tramiteFactura = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
             }
-          );
-        
+        );
+
+        if (this.tramiteFactura.realizado) {
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                response => {
+                    if (response.code == 200) {
+                        this.tramiteSolicitud = response.data;
+                    } else {
+                        this.tramiteSolicitud = null;
+
+                        swal({
+                            title: 'Error!',
+                            text: response.message,
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                }
+            );
+        } else {
+            this._TipoIdentificacionService.select().subscribe(
+                response => {
+                    this.tipoIdentificaciones = response;
+                },
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            );
+        }        
     }
     
     onEnviar(){
         this.datos.vehiculo = this.vehiculo.placa;
-        this.datos.numeroLicencia = this.tramiteFactura.numeroLicenciaTrancito;
-        let token = this._loginService.getToken(); 
-        this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
+
+        let token = this._LoginService.getToken(); 
+
+        this._PropietarioService.register(this.datos, token).subscribe(
             response => {
-                 this.datos.idTramiteFactura = this.tramiteFactura.id;
-                this.datos.tramiteFormulario = 'rna-modificacion-acreedor-prendario-propietario';
-                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                this.datos.idTramiteFactura = this.tramiteFactura.id;
+
+                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
             }, 
             error => {
               this.errorMessage = <any>error;
@@ -118,7 +172,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     }
     
     onKeyCiudadano(){
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         let identificacion = {
 			'numeroIdentificacion' : this.identificacion,
         };
@@ -145,7 +199,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     }
 
     onKeyApoderado(){
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         let identificacion = {
 			'numeroIdentificacion' : this.identificacionApoderado,
         };
@@ -172,7 +226,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     }
 
     onKeyEmpresa(){
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         let nit = {
 			'nit' : this.nit,
         };

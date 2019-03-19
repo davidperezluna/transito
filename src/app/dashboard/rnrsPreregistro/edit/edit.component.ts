@@ -170,7 +170,7 @@ constructor(
         }
       }
     );
-    this._ClaseService.getClaseSelect().subscribe(
+    this._ClaseService.select().subscribe(
       response => {
         this.clases = response;
         setTimeout(() => {

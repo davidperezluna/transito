@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class VhloCfgTipoAlertaService { 
-	private url = environment.apiUrl + 'cfgtipoalerta';
+	private url = environment.apiUrl + 'vehiculo/vhlocfgtipoalerta';
 	public identity;
 	public token;
  

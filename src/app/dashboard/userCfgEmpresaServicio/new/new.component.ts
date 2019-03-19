@@ -1,5 +1,5 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { UserCfgEmpresaServicio } from '../usercfgEmpresaServicio.modelo';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { UserCfgEmpresaServicio } from '../userCfgEmpresaServicio.modelo';
 import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';

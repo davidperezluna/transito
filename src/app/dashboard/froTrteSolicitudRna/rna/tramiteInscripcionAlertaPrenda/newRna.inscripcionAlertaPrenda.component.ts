@@ -1,17 +1,17 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { TramiteFacturaService } from '../../../../services/tramiteFactura.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { BancoService } from '../../../../services/banco.service';
 import { VhloCfgPlaca } from '../../../vhloCfgPlaca/vhloCfgPlaca.modelo';
-import { LoginService } from '../../../../services/login.service';
-import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
+import { VhloCfgTipoAlertaService } from '../../../../services/vhloCfgTipoAlerta.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
 import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { Router } from "@angular/router";
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
+import { LoginService } from '../../../../services/login.service';
+import { Router } from "@angular/router";
 import { DatePipe  } from '@angular/common';
 
 
@@ -27,12 +27,12 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() banco: any = null;
     @Input() tramiteFactura: any = null;
+    public errorMessage;
  
     public placa: VhloCfgPlaca = null;
-    public errorMessage;
-    public respuesta;
-    public cfgTiposAlerta: any;
-    public tramiteFacturaSelected: any;
+
+    public tramiteSolicitud: any = null;
+    public tiposAlerta: any;
     public ciudadano: any;
     public nombreAcreedor: any;
     public empresa: any;
@@ -65,6 +65,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     public vehiculoAcreedor: any; 
     public acreedores:any=[];
     public date:any;
+
     public gradosAlerta = [
         { 'value': 1, 'label': "UNO" },
         { 'value': 2, 'label': "DOS" },
@@ -76,37 +77,37 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         { 'value': 8, 'label': "OCHO" },
         { 'value': 9, 'label': "NUEVE" }
     ];
-    public resumen = {};     
+       
     public datos = {
         'acreedoresEmpresas': [],
         'acreedoresCiudadanos': [],
-        'tipoAlerta': [],
         'gradoAlerta': null,
-        'tramiteFormulario': null,
-        'idTramiteFactura': null,
         'vehiculoPlaca': null,
         'cfgEntidadJudicial':null,
-        'fechaExpedicion':null
+        'fechaExpedicion':null,
+        'idTipoAlerta': null,
+        'idTramiteFactura': null,
     };
+
     public datos2 = {
         'vehiculoId': null,
         'bancoId': null,
     }
-    public tipoIdentificaciones = [];
+    public tiposIdentificacion = [];
 
     constructor(
-        private _CfgEntidadJudicialService: CfgEntidadJudicialService,
-        private _CfgTipoAlertaService: CfgTipoAlertaService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _BancoService: BancoService,
-        private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
+        private _EntidadJudicialService: CfgEntidadJudicialService,
+        private _TipoAlertaService: VhloCfgTipoAlertaService,
         private _VehiculoService: VehiculoService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _BancoService: BancoService,
         private _VehiculoAcreedorService: VehiculoAcreedorService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _UserCiudadanoService: UserCiudadanoService,
-        private router: Router,
         private _EmpresaService: UserEmpresaService,
+        private _LoginService: LoginService,
+        private router: Router,
     ) { }
  
     ngOnInit() {
@@ -114,7 +115,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.datos.fechaExpedicion = datePiper.transform(this.date,'yyyy-MM-dd');
 
-        this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe(
+        this._EntidadJudicialService.getEntidadJudicialSelect().subscribe(
             response => {
                 this.cfgEntidadJudiciales = response;
             },
@@ -127,9 +128,10 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                 }
             }
         );
+
         this._TipoIdentificacionService.select().subscribe(
             response => {
-                this.tipoIdentificaciones = response;
+                this.tiposIdentificacion = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -140,10 +142,10 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                 }
             }
         );
-        this._CfgTipoAlertaService.getAlertaSelect().subscribe(
+
+        this._TipoAlertaService.select().subscribe(
             response => {
-                console.log(response);
-                this.cfgTiposAlerta = response;
+                this.tiposAlerta = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -154,11 +156,11 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                 }
             }
         );
+
         this._VehiculoAcreedorService.getAcreedor().subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.vehiculosAcreedor = this.respuesta.data;
+                if (response.status == 'success') {
+                    this.vehiculosAcreedor = response.data;
                     
                     // this.acreedorEncontrado = 2;
                     // this.acreedorNew = false;
@@ -184,19 +186,16 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         //this.datos.banco = this.banco.nombre;
         let placaT = this.vehiculo.placa;
         this.datos.vehiculoPlaca = this.vehiculo.placa.numero;
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
-        this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
         this.datos.gradoAlerta = this.gradoSelected;
         this.datos.cfgEntidadJudicial = this.cfgEntidadJudicialSelected;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
-        this.datos.tramiteFormulario = 'rna-inscripcionalertaprenda';
-               
+        
         this._VehiculoAcreedorService.register(this.datos, token).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    // this.vehiculoAcreedor = this.respuesta.data;
+                if (response.status == 'success') {
+                    // this.vehiculoAcreedor = response.data;
                     // this.ngOnInit();
                     // this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
                     // this.datos.gradoAlerta = this.gradoSelected;
@@ -207,14 +206,13 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
 
                     this._VehiculoService.editVehiculoPignorado(this.vehiculo, token).subscribe(
                         response => {
-                            this.respuesta = response;
-                            if (this.respuesta.status == 'success') {
-                                // this.vehiculoAcreedor = this.respuesta.data;
+                            if (response.status == 'success') {
+                                // this.vehiculoAcreedor = response.data;
                                 this.ngOnInit();
-                                // this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
-                                // this.datos.gradoAlerta = this.gradoSelected;
-                                // this.datos.tramiteFactura = 46;
-                                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                                
+                                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+                                this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
                                 this.acreedorNew = false;
 
                                 this.acreedorEncontrado = 2;
@@ -257,7 +255,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
 
   
     // btnNewAcreedor() {
-    //     let token = this._loginService.getToken();
+    //     let token = this._LoginService.getToken();
     //     //this.acreedorNew = true;
     //     this.acreedores.push(
     //         {
@@ -269,15 +267,14 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     // }
 
     onKeyAcreedor() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         let nombreAcreedor = {
             'nombreAcreedor': this.nombreAcreedor,
         };
         this._BancoService.showAcreedorNombre(token, nombreAcreedor).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.banco = this.respuesta.data;
+                if (response.status == 'success') {
+                    this.banco = response.data;
                     this.acreedorEncontrado = 2;
                     this.acreedorNew = false;
                     this.datos2.bancoId = this.banco.nombre;
@@ -298,15 +295,14 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     }
 
     onKeyCiudadano() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         let identificacion = {
             'numeroIdentificacion': this.identificacion,
         };
         this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.ciudadano = this.respuesta.data;
+                if (response.status == 'success') {
+                    this.ciudadano = response.data;
                     this.ciudadanoEncontrado = 2;
                     this.ciudadanoNew = false;
                 } else {
@@ -325,15 +321,14 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     }
 
     onKeyApoderado() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         let identificacion = {
             'numeroIdentificacion': this.identificacionAcreedor,
         };
         this._UserCiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.acreedorSelected = this.respuesta.data;
+                if (response.status == 'success') {
+                    this.acreedorSelected = response.data;
                     this.acreedorEncontrado = 2;
                     // this.ciudadanoNew = false;
                 } else {
@@ -352,16 +347,15 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     }
 
     onKeyEmpresa() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         let nit = {
             'nit': this.nit,
         };
 
         this._EmpresaService.showByNit(token, nit).subscribe(
             response => {
-                this.respuesta = response;
-                if (this.respuesta.status == 'success') {
-                    this.empresa = this.respuesta.data;
+                if (response.status == 'success') {
+                    this.empresa = response.data;
                     this.empresaEncontrada = 2;
                 } else {
                     this.empresaEncontrada = 3;

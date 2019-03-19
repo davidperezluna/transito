@@ -53,7 +53,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     this.clase.idTipoVehiculo = this.tipoVehiculoSelected;
-		this._ClaseService.editClase(this.clase,token).subscribe(
+		this._ClaseService.edit(this.clase,token).subscribe(
 			response => {
         if (response.status == 'success'){
           this.ready.emit(true);

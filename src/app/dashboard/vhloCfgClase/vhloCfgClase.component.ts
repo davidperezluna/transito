@@ -39,7 +39,7 @@ export class VhloCfgClaseComponent implements OnInit {
       ) {
       }
     })
-		this._ClaseService.getClase().subscribe(
+		this._ClaseService.index().subscribe(
 				response => {
           this.clases = response.data;
           let timeoutId = setTimeout(() => {  
@@ -86,7 +86,7 @@ export class VhloCfgClaseComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteClase(id:any){
+  delete(id:any){
 
     swal({
       title: '¿Estás seguro?',
@@ -100,7 +100,8 @@ export class VhloCfgClaseComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ClaseService.deleteClase(token,id).subscribe(
+        
+        this._ClaseService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -127,7 +128,7 @@ export class VhloCfgClaseComponent implements OnInit {
     })
   }
 
-  editClase(clase:any){
+  edit(clase:any){
     this.clase = clase;
     this.formEdit = true;
     this.formIndex = false;

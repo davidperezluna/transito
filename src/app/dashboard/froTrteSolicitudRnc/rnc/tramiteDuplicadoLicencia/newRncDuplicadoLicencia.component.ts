@@ -34,8 +34,8 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
         'idClase': null,
         'idCategoria': null,
         'idServicio': null,
-        'idTramiteFactura': null,
         'idSolicitante': null,
+        'idTramiteFactura': null,
     };
 
     constructor(
@@ -48,7 +48,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._ClaseService.getClaseSelect().subscribe(
+        this._ClaseService.select().subscribe(
             response => {
               this.clases = response;
             },
@@ -116,8 +116,8 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
 
         this.readyTramite.emit({'foraneas':this.datos, 'resumen':resumen});
     }
+
     onCancelar(){
         this.cancelarTramite.emit(true);
     }
-
 }

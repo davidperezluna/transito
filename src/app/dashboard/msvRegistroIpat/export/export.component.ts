@@ -143,7 +143,7 @@ export class ExportComponent implements OnInit {
                 }
             }
         );
-        this._ClaseService.getClaseSelect().subscribe(
+        this._ClaseService.select().subscribe(
             response => {
                 this.clases = response;
             },

@@ -102,6 +102,7 @@ export class NewComponent implements OnInit {
                 }
             }
         );
+        
         this._SvCfgClaseActorViaService.getClaseActorViaSelect().subscribe(
             response => {
                 this.clasesActoresVia = response;
