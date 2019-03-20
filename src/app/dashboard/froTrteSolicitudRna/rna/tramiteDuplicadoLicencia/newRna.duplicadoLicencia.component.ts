@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
-import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
+import { UserLicenciaTransitoService } from '../../../../services/userLicenciaTransito.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -14,7 +14,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
-    @Input() idSolicitante: any = null;
+    @Input() idPropietario: any = null;
     public errorMessage;
 
     public tramiteSolicitud: any = null;
@@ -38,7 +38,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
-        private _RncLicenciaConduccionService: RncLicenciaConduccionService,
+        private _LicenciaTransitoService: UserLicenciaTransitoService,
         private _LoginService: LoginService,
     ) { }
 
@@ -97,15 +97,15 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
             );
         } else {
             let datos = {
-                'idSolicitante': this.idSolicitante
+                'idPropietario': this.idPropietario
             }
             
-            this._RncLicenciaConduccionService.searchLicenciaActual(datos,token).subscribe(
+            this._LicenciaTransitoService.searchActual(datos, token).subscribe(
                 response => {
                 if(response.status == 'success'){
                     this.datos.numeroLicenciaActual = response.data.numero;
                 }else{
-                    
+                    this.datos.numeroLicenciaActual = null;
                 }
                 error => {
                         this.errorMessage = <any>error;

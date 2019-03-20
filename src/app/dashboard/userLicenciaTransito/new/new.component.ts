@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { FroTrteCfgConcepto } from '../froTrteCfgConcepto.modelo';
-import { FroTrteCfgConceptoService } from '../../../services/froTrteCfgConcepto.service';
-import { FroTrteCfgCuentaService } from '../../../services/froTrteCfgCuenta.service';
+import { FroTrteCfgConcepto } from '../userLicenciaTransito.modelo';
+import { UserLicenciaTransitoService } from '../../../services/userLicenciaTransito.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { environment } from 'environments/environment'
@@ -19,15 +18,14 @@ export class NewComponent implements OnInit {
     public apiUrl = environment.apiUrl + 'financiero';
 
     constructor(
-        private _ConceptoService: FroTrteCfgConceptoService,
-        private _CuentaService: FroTrteCfgCuentaService,
+        private _LicenciaTransitoService: UserLicenciaTransitoService,
         private _loginService: LoginService,
     ) { }
 
     ngOnInit() {
         this.tramiteConcepto = new FroTrteCfgConcepto(null, null, null, null);
 
-        this._CuentaService.select().subscribe(
+        this._LicenciaTransitoService.select().subscribe(
             response => {
                 this.cuentas = response;
             },
@@ -49,7 +47,7 @@ export class NewComponent implements OnInit {
     onEnviar() {
         let token = this._loginService.getToken();
 
-        this._ConceptoService.register(this.tramiteConcepto, token).subscribe(
+        this._LicenciaTransitoService.register(this.tramiteConcepto, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     swal({

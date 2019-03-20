@@ -1,36 +1,53 @@
-<div class="row">
+<div class="row" *ngIf="tramiteFactura.realizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="tramiteFactura.realizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
         <form #newForm="ngForm">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">
-                        <strong class="text-uppercase">Nueva Importación Temporal</strong>
-                        <br>
-                        <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
-                    </h5>
+                    <b class="text-primary">
+                        Registrar importación temporal
+                    </b>
+                    <br>
+                    <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 </div>
                 <div class="card-body">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Fecha Solicitud <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="datos.fechaSolicitud" name="fechaSolicitud" type="date"
-                                required disabled />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Nro. Cuotas (Meses) <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="numeroCuotas" name="numeroCuotas" type="number"
-                                required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Número solicitud RUNT <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="number" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Licencia de Tránsito <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="datos.licenciaConduccion" name="datos.licenciaConduccion"
-                                type="number" required />
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha Solicitud <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="datos.fechaSolicitud" name="fechaSolicitud" type="date"
+                                    required disabled />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nro. Cuotas (Meses) <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="numeroCuotas" name="numeroCuotas" type="number"
+                                    required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Número solicitud RUNT <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="numeroRunt" name="numeroRunt" type="number" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Licencia de Tránsito <strong class="text-danger">*</strong></label>
+                                <input class="form-control" [(ngModel)]="datos.licenciaConduccion" name="datos.licenciaConduccion"
+                                    type="number" required />
+                            </div>
                         </div>
                     </div>
                 </div>

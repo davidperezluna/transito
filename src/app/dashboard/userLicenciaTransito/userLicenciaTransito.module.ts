@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FroTrteCfgConceptoComponent } from './froTrteCfgConcepto.component';
+import { UserLicenciaTransitoComponent } from './userLicenciaTransito.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { FroTrteCfgConceptoService } from '../../services/froTrteCfgConcepto.service';
+import { UserLicenciaTransitoService } from '../../services/userLicenciaTransito.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -12,9 +12,9 @@ import { TooltipModule } from "ngx-tooltip";
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule, TooltipModule],
-    declarations: [FroTrteCfgConceptoComponent, NewComponent, EditComponent],
-    exports: [FroTrteCfgConceptoComponent, NewComponent, EditComponent],
-    providers: [FroTrteCfgConceptoService]
+    declarations: [UserLicenciaTransitoComponent, NewComponent, EditComponent],
+    exports: [UserLicenciaTransitoComponent, NewComponent, EditComponent],
+    providers: [UserLicenciaTransitoService]
 })
 
-export class FroTrteCfgConceptoModule { }
+export class UserLicenciaTransitoModule { }

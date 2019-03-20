@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FroTrteCfgConceptoService } from '../../../services/froTrteCfgConcepto.service';
+import { UserLicenciaTransitoService } from '../../../services/userLicenciaTransito.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -9,13 +9,13 @@ import swal from 'sweetalert2';
 })
 export class EditComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    @Input() tramiteConcepto: any = null;
+    @Input() licenciaTransito: any = null;
     public errorMessage;
 
     public formReady = false;
 
     constructor(
-        private _FroTrteCfgConceptoService: FroTrteCfgConceptoService,
+        private _LicenciaTransitoService: UserLicenciaTransitoService,
         private _loginService: LoginService,
     ) { }
 
@@ -25,10 +25,12 @@ export class EditComponent implements OnInit {
 
     onEnviar() {
         let token = this._loginService.getToken();
-        this._FroTrteCfgConceptoService.edit(this.tramiteConcepto, token).subscribe(
+
+        this._LicenciaTransitoService.edit(this.licenciaTransito, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);
+                    
                     swal({
                         title: 'Perfecto!',
                         text: response.message,

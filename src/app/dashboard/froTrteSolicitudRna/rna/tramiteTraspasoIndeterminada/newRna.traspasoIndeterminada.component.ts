@@ -65,7 +65,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     
   ngOnInit() {
     this.tramiteSolicitud = new FroTrteSolicitudRna(null,null, null, null, null, null, null, null, null);
-    this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe( 
+    this._CfgEntidadJudicialService.select().subscribe( 
       response => {
         this.entidadesJudiciales = response;
       },

@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 
 @Injectable()
 export class RnaPreregistroService {
-	private url = environment.apiUrl + "app/vehiculo";
+	private url = environment.apiUrl + "vehiculo/vhlovehiculo";
 	public identity;
 	public token;
 
@@ -15,12 +15,11 @@ export class RnaPreregistroService {
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(vehiculo,token){
-		let json = JSON.stringify(vehiculo);
-		let params = "json="+json+"&authorization="+token;
+	register(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/new", params, {headers: headers})
-							  .map(res => res.json());
+		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
 	delete(token,id){
@@ -43,7 +42,7 @@ export class RnaPreregistroService {
 	edit(vehiculo,token){
 
 		let json = JSON.stringify(vehiculo);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  			return this._http.post(this.url+"/edit", params, {headers: headers})
 							  .map(res => res.json());

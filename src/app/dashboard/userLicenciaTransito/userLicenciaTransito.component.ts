@@ -1,16 +1,16 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { LoginService } from '../../services/login.service';
-import { FroTrteCfgConceptoService } from "../../services/froTrteCfgConcepto.service";
+import { UserLicenciaTransitoService } from "../../services/userLicenciaTransito.service";
 import swal from 'sweetalert2';
-import { FroTrteCfgConcepto } from './froTrteCfgConcepto.modelo';
+import { FroTrteCfgConcepto } from './userLicenciaTransito.modelo';
 declare var $: any;
 
 @Component({
     selector: 'app-index',
-    templateUrl: './froTrteCfgConcepto.component.html'
+    templateUrl: './userLicenciaTransito.component.html'
 })
 
-export class FroTrteCfgConceptoComponent implements OnInit {
+export class UserLicenciaTransitoComponent implements OnInit {
     public errorMessage;
     public formIndex = true;
     public formNew = false;
@@ -21,7 +21,7 @@ export class FroTrteCfgConceptoComponent implements OnInit {
 
     constructor(
         private _LoginService: LoginService,
-        private _FroTrteCfgConceptoService: FroTrteCfgConceptoService,
+        private _LicenciaTransitoService: UserLicenciaTransitoService,
     ) { }
 
     ngOnInit() {
@@ -39,7 +39,7 @@ export class FroTrteCfgConceptoComponent implements OnInit {
             ) {
             }
         });
-        this._FroTrteCfgConceptoService.index().subscribe(
+        this._LicenciaTransitoService.index().subscribe(
             response => {
                 this.tramitesConceptos = response.data;
                 let timeoutId = setTimeout(() => {

@@ -18,20 +18,20 @@ export class NewRncSustratoComponent implements OnInit {
     @Input() factura: any = null;
     @Input() solicitante: any = null;
     public errorMessage;
+
     public respuesta;
-    public sustrato: any;
+    public sustrato: any = null;
     public sustratos: any;
     public sustratoSelected: any;
     public usuario:any;
     public estadoImpresion=true;
     public tarjetaEntregada=true;
     public ciudadanoNew = false;
-    public isError = false;
-    public isExist = false;
     public ciudadanoEncontrado=1;
-    public resumen = {};     public datos = {
+    
+    public datos = {
         'solicitante': null,
-        'cedula': null,
+        'identificacion': null,
         'licenciaConduccion': null,
         'entregada': null,
         'sustrato': null,
@@ -42,44 +42,72 @@ export class NewRncSustratoComponent implements OnInit {
     
     constructor(
         private _SustratoService: SustratoService,
-        private _loginService: LoginService,
-        private _UserCiudadanoService: UserCiudadanoService,
+        private _CiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
+        private _LoginService: LoginService,
     ) { } 
 
     ngOnInit() {
         
     }
 
-    onKeyCiudadano(){
-        let token = this._loginService.getToken();
-        
-        this._UserCiudadanoService.searchByIdentificacion(token,{ 'numeroIdentificacion' : this.datos.cedula }).subscribe(
-            response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.usuario = this.respuesta.data;
-                    this.datos.solicitante = this.usuario.primerNombre+' '+this.usuario.primerApellido
-                    this.datos.solicitanteId = this.usuario.ciudadano.id
-                    this.ciudadanoEncontrado= 2;
-                    this.ciudadanoNew = false;
-            }else{
-                this.ciudadanoEncontrado=3;
-                this.ciudadanoNew = true;
+    onSearchCiudadano() {
+        swal({
+            title: 'Buscando ciudadano!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
             }
-            error => {
-                this.errorMessage = <any>error;
-            
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
+        });
+
+        let token = this._LoginService.getToken();
+
+        let datos = {
+            'identificacion': this.datos.identificacion,
+            'idTipoIdentificacion': 1,
+        }
+
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    if (response.data.ciudadano) {
+                        this.usuario = this.respuesta.data;
+                        this.datos.solicitante = this.usuario.primerNombre + ' ' + this.usuario.primerApellido
+                        this.datos.solicitanteId = this.usuario.ciudadano.id
+                        this.ciudadanoEncontrado = 2;
+                        this.ciudadanoNew = false;
+
+                        swal({
+                            title: 'Perfecto!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                } else {
+                    this.ciudadanoEncontrado = 3;
+                    this.ciudadanoNew = true;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
                 }
             }
-        }); 
+        );
     }
    
     enviarTramite(){
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
         this.datos.entregada = this.tarjetaEntregada;
         this.datos.idFactura = this.factura.id;
@@ -117,13 +145,12 @@ export class NewRncSustratoComponent implements OnInit {
         this._SustratoService.editEstado(this.sustrato,token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    console.log(response);
                     swal({
                         title: 'Perfecto!',
                         text: 'Registro exitoso!',
                         type: 'success',
                         confirmButtonText: 'Aceptar'
-                      })
+                    });
                 }
             },
             error => {
@@ -141,17 +168,32 @@ export class NewRncSustratoComponent implements OnInit {
         this.cancelarTramite.emit(true);
     }
 
-    onKeyValidateSustrato(){
-        let token = this._loginService.getToken();
+    onSearchSustrato(){
+        swal({
+            title: 'Buscando sustrato!',
+            text: 'Solo tardará unos segundos, por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        let token = this._LoginService.getToken();
+
         this._SustratoService.showNombreSustrato(token,this.datos.sustrato).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.sustrato = response.data;
-                    this.isExist = true;
-                    this.isError = false
+
+                    swal.close();
                 }else{
-                    this.isError = true;
-                    this.isExist = false;
+                    this.sustrato = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: 'Sustrato no encontrado.',
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             },
             error => {

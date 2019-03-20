@@ -107,7 +107,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
                 }
             );
         } else {
-            this._EntidadJudicialService.getEntidadJudicialSelect().subscribe(
+            this._EntidadJudicialService.select().subscribe(
                 response => {
                     this.entidadesJudiciales = response;
                 },

@@ -65,7 +65,7 @@ export class NewRnmaTraspasoIndeterminadaComponent implements OnInit {
     
   ngOnInit() {
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null);
-    this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe( 
+    this._CfgEntidadJudicialService.select().subscribe( 
       response => {
         this.entidadesJudiciales = response;
       },
