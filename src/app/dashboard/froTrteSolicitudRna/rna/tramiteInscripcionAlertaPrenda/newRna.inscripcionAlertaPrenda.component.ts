@@ -27,7 +27,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Input() vehiculo: any = null;
     @Input() banco: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
  
     public placa: VhloCfgPlaca = null;
 

@@ -17,7 +17,7 @@ export class NewRnaTransformacionComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
 
     public tramiteSolicitud: any = null;
     public carrocerias: any = null;
@@ -28,8 +28,12 @@ export class NewRnaTransformacionComponent implements OnInit {
     public datos = {
         'tipoTransformacion': null,
         'modelo': null,
-        'fichaTecnica': null,
         'descripcionModelo': null,
+        'tallerRepotenciacion': null,
+        'fechaRepotenciacion': null,
+        'fichaTecnica': null,
+        'numeroFactura': null,
+        'fechaFactura': null,
         'campos': null,
         'idVehiculo': null,
         'idCarroceria': null,

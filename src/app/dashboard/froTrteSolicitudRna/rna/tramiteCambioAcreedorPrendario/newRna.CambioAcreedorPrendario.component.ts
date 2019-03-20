@@ -22,7 +22,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
 
     public placa: VhloCfgPlaca = null;;
     public cfgTiposAlerta: any;

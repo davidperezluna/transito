@@ -16,7 +16,7 @@ export class NewRnaRematriculaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
 
     public tramiteSolicitud: any = null;
     public entidadList: string[];

@@ -1,5 +1,6 @@
 export class RnaPreregistro{
 	constructor(
+		public numeroLicencia:number,
 		public numeroFactura:string,
 		public fechaFactura:string,
 		public valor:string,
@@ -23,7 +24,6 @@ export class RnaPreregistro{
 		public idColor:number,
 		public idCombustible:number,
 		public idOrganismoTransito:number,
-		public idMunicpio:number,
 		public idRadioAccion:number,
 		public idModalidadTransporte:number,
 		public id:number,
