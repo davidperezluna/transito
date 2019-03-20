@@ -51,7 +51,7 @@ export class EditComponent {
   onEnviar() {
     let token = this._loginService.getToken();
     this.cfgEntidadJudicial.municipioId = this.municipioSelected;
-    this._CfgEntidadJudicialService.editCfgEntidadJudicial(this.cfgEntidadJudicial, token).subscribe(
+    this._CfgEntidadJudicialService.edit(this.cfgEntidadJudicial, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ready.emit(true);

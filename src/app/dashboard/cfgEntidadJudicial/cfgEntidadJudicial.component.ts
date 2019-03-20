@@ -33,7 +33,7 @@ export class CfgEntidadJudicialComponent implements OnInit {
       }
     });
 
-    this._CfgEntidadJudicialService.getEntidadJudicial().subscribe(
+    this._CfgEntidadJudicialService.index().subscribe(
       response => {
         if (response) {
           this.cfgEntidadesJudiciales = response.data;
@@ -101,7 +101,7 @@ export class CfgEntidadJudicialComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._CfgEntidadJudicialService.deleteCfgEntidadJudicial(token, id).subscribe(
+        this._CfgEntidadJudicialService.delete(token, id).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
