@@ -1,7 +1,5 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { RnaPreregistro } from '../rnaPreregistro.modelo';
-import { CfgDepartamentoService } from "../../../services/cfgDepartamento.service";
-import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
@@ -16,7 +14,7 @@ import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoI
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../services/userEmpresa.service";
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
-import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
+import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
 import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
 import { LoginService } from '../../../services/login.service';
 
@@ -26,79 +24,64 @@ import swal from 'sweetalert2';
   templateUrl: './new.component.html'
 })
 export class NewRnaPreregistroComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-public vehiculo: RnaPreregistro;
-public municipios:any;
-public errorMessage:any;
-public habilitar:any;
-public lineas:any;
-public clases:any;
-public carrocerias:any;
-public servicios:any;
-public colores:any;
-public marcas:any;
-public combustibles:any;
-public radiosAccion:any;
-public empresaSelected:any;
-public modalidadesTransporte:any;
-public municipioSelected:any;
+  @Output() ready = new EventEmitter<any>();
+  public errorMessage:any;
 
-public apoderadoSelected:any;
-public ciudadanoSelected:any;
+  public vehiculo: RnaPreregistro;
 
-public tipoIdentificacionSelected:any;
+  public lineas:any;
+  public clases:any;
+  public carrocerias:any;
+  public servicios:any;
+  public colores:any;
+  public marcas:any;
+  public combustibles:any;
+  public radiosAccion:any;
+  public modalidadesTransporte:any;
+  public organismosTransito:any;
 
-public organismosTransito:any;
-public tipoIdentificaciones:any;
-public ciudadanoEncontrado=1;
-public empresaEncontrada=1;
-public ciudadano:any;
-public apoderado = 'false';
-public ciudadanoNew:any;
-public licenciaTransito:any;
-public empresa:any;
-public nit:any;
-public propietarioPresente:any;
-public listaPropietariosCiudadanos=false;
-public listaPropietariosEmpresas=false;
-public empresaNew=false;
-public radicado=false;
-public apoderadoEncontrado=1;
-public identificacion:any;
-public persona:any='empresa';
-public tipoPropiedadSelected:any;
-public organismoTransito:any;
-public identificacionApoderado:any;
-public tipoMatriculaSelect:any;
-public btnRadicado:any = 'Preregistro para matricula inicial';
-public propietario = true;
-public campo = false;
+  public empresaSelected:any;
 
-public tiposPropiedad = [
-  {'value':1,'label':"Leasing"},
-  {'value':2,'label':"Propio"}
-];
+  public tipoIdentificacionSelected:any;
 
-public tipoMatricula= [
-  {'value':'RADICADO','label':"Radicado"},
-  {'value':'MATRICULA INICIAL','label':"Matricula inicial"},
-  {'value':'IMPORTACIÓN TEMPORAL','label':"Importación temporal"}
-];
+  public ciudadano: any = null;
+  public apoderado: any = null;
+  public propietarioSelected: any;
+  public apoderadoSelected:any;
 
-    
-public datos = {
-  'propietariosEmpresas': [],
-  'propietariosCiudadanos': [],
-  'solidario': false,
-  'vehiculo': null,
-  'sustrato': null,
-  'licenciaTransito': null,
-  'tramiteFormulario': null,
-  'facturaId': null,
-};
+  public empresa: any = null;
+
+  public tiposIdentificacion: any;
+  public identificacion: any;
+  public identificacionApoderado: any;
+  public nit: any;
+
+  public formApoderado = false;
+  public funcionario: any = null;
+
+  public tiposPropiedad = [
+    {'value':1,'label':"Leasing"},
+    {'value':2,'label':"Propio"}
+  ];
+
+  public tipoPropiedadSelected:any;
+
+  public tipoMatricula = [
+    {'value':'RADICADO','label':"Radicado"},
+    {'value':'MATRICULA INICIAL','label':"Matricula inicial"},
+    {'value':'IMPORTACION TEMPORAL','label':"Importación temporal"}
+  ];
+
+  public datos = {
+    'propietarios': [],
+    'solidario': false,
+    'tipoPropiedad': null,
+    'licenciaTransito': null,
+    'idVehiculo': null,
+  };
 
 constructor(
-  private _MunicipioService: CfgMunicipioService,
+  private _PropietarioService: VhloPropietarioService,
   private _MarcaService: VhloCfgMarcaService,
   private _lineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
@@ -110,24 +93,22 @@ constructor(
   private _ModalidadTransporteService: VhloCfgModalidadTransporteService,
   private _RnaPreregistroService: RnaPreregistroService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
   private _FuncionarioService: PnalFuncionarioService,
-  private _UserCiudadanoService: UserCiudadanoService,
+  private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+  private _CiudadanoService: UserCiudadanoService,
   private _EmpresaService: UserEmpresaService,
-  private _CiudadanoVehiculoService: CiudadanoVehiculoService,
-  private _loginService: LoginService,
+  private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
     this.vehiculo = new RnaPreregistro(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
-    let token = this._loginService.getToken();
-    let identity = this._loginService.getIdentity();
-    let datos = {'identificacion':identity.identificacion};
-    
+    let token = this._LoginService.getToken();
+    let identity = this._LoginService.getIdentity();
+
     this._TipoIdentificacionService.select().subscribe(
       response => {
-        this.tipoIdentificaciones = response;
+        this.tiposIdentificacion = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -152,20 +133,6 @@ constructor(
         }
       }
     );
-
-    this._MunicipioService.select().subscribe(
-      response => {
-        this.municipios = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
     
     this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
@@ -181,19 +148,17 @@ constructor(
       }
     );
 
-    this._FuncionarioService.searchLogin(datos, token).subscribe(
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => { 
         if(response.status == 'success'){
-          this.persona='funcionario';
-          this.organismoTransito = response.data.organismoTransito;
-          this.vehiculo.idOrganismoTransito = Number[this.organismoTransito.id];
+          this.vehiculo.idOrganismoTransito = Number[response.data.organismoTransito.id];
+          this.funcionario = response.data;
         }else{
-          this._FuncionarioService.searchEmpresa(datos,token).subscribe(
+          this.funcionario = null;
+          this._FuncionarioService.searchEmpresa({ 'identificacion': identity.identificacion },token).subscribe(
             response => {
               if(response.status == 'success'){
-                this.persona='empresa';
               }
-        
             }, 
             error => {
               this.errorMessage = <any>error;
@@ -212,7 +177,8 @@ constructor(
             alert('Error en la petición');
           }
         }
-    });
+      }
+    );
     
     this._ClaseService.selectByModulo({ 'idModulo': 2 }, token).subscribe(
       response => {
@@ -290,7 +256,6 @@ constructor(
       },  
       error => {
         this.errorMessage = <any>error;
-
         if(this.errorMessage != null){
           console.log(this.errorMessage);
           alert("Error en la petición");
@@ -314,80 +279,12 @@ constructor(
   }
 
   onCancelar(){
-      this.ready.emit(true);
-  }
-
-  onEnviar(){
-    this.vehiculo.tipoMatricula = this.tipoMatriculaSelect;
-    
-    let datos = { 
-      'vehiculo':this.vehiculo,
-      'organismoTransitoId':this.organismoTransito.id,
-      'persona':this.persona,
-    }
-
-    this.datos.vehiculo = this.vehiculo;
-    this.datos.licenciaTransito = this.licenciaTransito;
-    this.datos.tramiteFormulario = 'rna-matriculainicial';
-
-    let token = this._loginService.getToken(); 
-    
-    this._RnaPreregistroService.register(datos, token).subscribe(
-			response => {
-        if(response.status == 'success'){
-          if (this.tipoMatriculaSelect == 'RADICADO') {
-            this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
-              response => {
-                this.ready.emit(true);
-                swal({
-                  title: 'Perfecto!',
-                  text: 'Registro exitoso!',
-                  type: 'success',
-                  confirmButtonText: 'Aceptar'
-                })
-              },
-              error => {
-                this.errorMessage = <any>error;
-        
-                if(this.errorMessage != null){
-                  console.log(this.errorMessage);
-                  alert('Error en la petición');
-                }
-              }
-            );
-          }else{
-            this.ready.emit(true);
-            swal({
-              title: 'Perfecto!',
-              text: 'Registro exitoso!',
-              type: 'success',
-              confirmButtonText: 'Aceptar'
-            })
-          }
-          
-        }else{
-          swal({
-            title: 'Error!',
-            text: response.msj,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-
-		}); 
+    this.ready.emit(true);
   }
 
   onChangedMarca(e){
     if (e) {
-      let token = this._loginService.getToken()
+      let token = this._LoginService.getToken()
         this._lineaService.searchByMarcaSelect({'idMarca':e}, token).subscribe(
           response => {
             this.lineas = response;
@@ -402,24 +299,9 @@ constructor(
           }
         );
     }
-    }
-
-  onRadicado(){
-    if(this.radicado) {
-      this.radicado = false; 
-      this.btnRadicado = 'Preregistro para matricula inicial';
-    }else{
-      this.btnRadicado = 'Preregistro para radicado de cuenta';
-      this.radicado = true; 
-    }
-    // alert(this.btnRadicado); 
   }
 
-  changedtipoIdentificacion(e){
-    this.ciudadanoEncontrado = 1;
-    this.empresaEncontrada = 1;
-  }
-
+/*
   btnNewCiudadano(){
       if (this.tipoPropiedadSelected == 2) {
           this.datos.propietariosCiudadanos.push(
@@ -500,81 +382,201 @@ constructor(
           this.listaPropietariosEmpresas=true;
       }
   }
+  */
 
-  onKeyCiudadano(){ 
-    let token = this._loginService.getToken();
-    let identificacion = {
-      'numeroIdentificacion' : this.identificacion,
-    };
-    this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
-        response => {
-            if(response.status == 'success'){
-                this.ciudadano = response.data;
-                this.ciudadanoEncontrado= 2;
-                this.ciudadanoNew = false;
-        }else{
-            this.ciudadanoEncontrado=3;
-            this.ciudadanoNew = true;
+  onSearchCiudadano() {
+    swal({
+      title: 'Buscando ciudadano!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacion,
+      'idTipoIdentificacion': this.tipoIdentificacionSelected,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.ciudadano = response.data.ciudadano;
+
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        } else {
+          this.ciudadano = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
         error => {
-                this.errorMessage = <any>error;
-            
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-    }); 
-}
-
-onKeyApoderado(){
-    let token = this._loginService.getToken();
-    let identificacion = {
-  'numeroIdentificacion' : this.identificacionApoderado,
-    };
-    this._UserCiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
-        response => {
-            if(response.status == 'success'){
-                this.apoderadoSelected = response.data;
-                // this.ciudadanoNew = false;
-        }else{
-            this.apoderadoEncontrado=3;
-            // this.ciudadanoNew = true;
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
         }
-        error => {
-                this.errorMessage = <any>error;
-            
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-    }); 
-}
-
-onKeyEmpresa(){
-    let token = this._loginService.getToken();
-    let nit = {
-      'nit' : this.nit,
-    };
-    this._EmpresaService.showByNit(token,nit).subscribe(
-        response => {
-            if(response.status == 'success'){
-                this.empresa = response.data;
-                this.empresaEncontrada= 2;
-        }else{
-            this.empresaEncontrada=3;
-        }
-        error => {
-                this.errorMessage = <any>error;
-            
-                if(this.errorMessage != null){
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-    }); 
+      }
+    );
   }
+
+  onSearchApoderado() {
+    swal({
+      title: 'Buscando apoderado!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    let datos = {
+      'identificacion': this.identificacionApoderado,
+      'idTipoIdentificacion': 1,
+    }
+
+    this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          if (response.data.ciudadano) {
+            this.apoderado = response.data.ciudadano;
+          } else {
+            this.apoderado = response.data.empresa;
+          }
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          this.apoderado = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert('Error en la petición');
+          }
+        }
+      }
+    );
+  }
+
+  onSearchEmpresa() {
+    let token = this._LoginService.getToken();
+
+    let nit = {
+      'nit': this.nit,
+    };
+
+    this._EmpresaService.showByNit(token, nit).subscribe(
+      response => {
+        if (response.status == 'success') {
+          this.empresa = response.data;
+        } else {
+          this.empresa = null;
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onAddCiudadano() {
+    this.datos.propietarios.push(
+      {
+        'idPropietario': this.ciudadano.id,
+        'identificacion': this.ciudadano.identificacion,
+        'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre,
+        'permiso': this.datos.solidario,
+        'tipo': 'Ciudadano',
+        'idApoderado': null,
+        'apoderadoIdentificacion': null,
+        'apoderado.Nombre': null,
+      }
+    );
+  }
+
+  onAddEmpresa() {
+    this.datos.propietarios.push(
+      {
+        'idPropietario': this.empresa.id,
+        'identificacion': this.empresa.nit,
+        'nombre': this.empresa.nombre,
+        'permiso': this.datos.solidario,
+        'tipo': 'Empresa',
+        'idApoderado': null,
+        'apoderadoIdentificacion': null,
+        'apoderado.Nombre': null,
+      }
+    );
+  }
+
+  onDeletePropietario(propietario: any): void {
+    this.datos.propietarios = this.datos.propietarios.filter(h => h !== propietario);
+  }
+
+  onNewApoderado(propietario: any) {
+    let agregado = this.datos.propietarios.includes(propietario.identificacion, 1);
+
+    if (agregado) {
+      swal({
+        title: 'Error!',
+        text: 'El registro seleccionado ya se encuentra agregado como propietario.s',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    } else {
+      this.formApoderado = true;
+      this.propietarioSelected = this.datos.propietarios.filter(h => h == propietario);
+      this.propietarioSelected = this.propietarioSelected[0];
+    }
+  }
+
+  onAddApoderado(apoderado) {
+    let posicion = this.datos.propietarios.indexOf(this.propietarioSelected);
+
+    this.datos.propietarios[posicion].idApoderado = apoderado.id;
+    this.datos.propietarios[posicion].apoderadoIdentificacion = apoderado.identificacion;
+    this.datos.propietarios[posicion].apoderadoNombre = apoderado.primerNombre + " " + apoderado.primerApellido;
+  }
+
+  onCancelarApoderado() {
+    this.apoderado = null;
+    this.formApoderado = false;
+  }
+
+  /*
   delete(ciudadano:any): void {
     this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== ciudadano);
     if (this.datos.propietariosCiudadanos.length === 0) {
@@ -592,5 +594,75 @@ onKeyEmpresa(){
       if(empresa.permisoTramite){
           this.propietario = true;
       }
+  }*/
+
+  onEnviar() {
+    let token = this._LoginService.getToken();
+
+    this._RnaPreregistroService.register(this.vehiculo, token).subscribe(
+      response => {
+        if (response.status == 'success') {
+          if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION TEMPORAL') {
+            this.datos.idVehiculo = response.data.id;
+            this.datos.licenciaTransito = this.vehiculo.numeroLicencia;
+            this._PropietarioService.register(this.datos, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.ready.emit(true);
+
+                  swal({
+                    title: 'Perfecto!',
+                    text: response.message,
+                    type: 'success',
+                    confirmButtonText: 'Aceptar'
+                  });
+                }else{
+                  swal({
+                    title: 'Error!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                  });
+                }
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+                }
+              }
+            );
+          } else {
+            this.ready.emit(true);
+
+            swal({
+              title: 'Perfecto!',
+              text: 'Registro exitoso!',
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            })
+          }
+
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+
+      }
+    );
   }
 } 

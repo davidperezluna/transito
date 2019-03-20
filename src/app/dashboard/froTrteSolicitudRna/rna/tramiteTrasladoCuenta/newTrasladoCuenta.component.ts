@@ -4,6 +4,7 @@ import { TramiteTrasladoService } from '../../../../services/tramiteTraslado.ser
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -30,6 +31,7 @@ export class NewTrasladoCuentaComponent implements OnInit {
     'campos': null,
     'idOrganismoTransito': null,
     'idVehiculo': null,
+    'idFuncionario': null,
     'idTramiteFactura': null,
   };
 
@@ -39,24 +41,89 @@ constructor(
   private _TramiteFacturaService: FroFacTramiteService,
   private _VehiculoService: VhloVehiculoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
     let token = this._LoginService.getToken();
 
-    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
-        if (response.code == 200) {
-          this.tramiteFactura = response.data;
+        if (response.status == 'success') {
+          this.vehiculo.idFuncionario = response.data.id;
 
-          swal.close();
+          this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+            response => {
+              if (response.code == 200) {
+                this.tramiteFactura = response.data;
+
+                swal.close();
+              } else {
+                this.tramiteFactura = null;
+
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            }
+          );
+
+          if (this.tramiteFactura.realizado) {
+            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.tramiteSolicitud = response.data;
+                } else {
+                  this.tramiteSolicitud = null;
+
+                  swal({
+                    title: 'Error!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                  });
+                }
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+              }
+            );
+          } else {
+            this._OrganismoTransitoService.selectSedes().subscribe(
+              response => {
+                this.organismosTransito = response;
+              },
+              error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+                }
+              }
+            );
+          }
         } else {
-          this.tramiteFactura = null;
-
           swal({
             title: 'Error!',
-            text: response.message,
+            text: 'Usted no tiene permisos para realizar tramites',
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
@@ -65,51 +132,11 @@ constructor(
           this.errorMessage = <any>error;
           if (this.errorMessage != null) {
             console.log(this.errorMessage);
-            alert("Error en la petición");
+            alert('Error en la petición');
           }
         }
       }
     );
-
-    if (this.tramiteFactura.realizado) {
-      this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-        response => {
-          if (response.code == 200) {
-            this.tramiteSolicitud = response.data;
-          } else {
-            this.tramiteSolicitud = null;
-
-            swal({
-              title: 'Error!',
-              text: response.message,
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-          }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        }
-      );
-    } else {
-      this._OrganismoTransitoService.selectSedes().subscribe(
-        response => {
-          this.organismosTransito = response;
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
-        }
-      );
-    }
   }
   
   onEnviar(){

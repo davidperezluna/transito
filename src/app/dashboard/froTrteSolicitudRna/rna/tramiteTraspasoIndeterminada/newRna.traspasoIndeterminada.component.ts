@@ -1,12 +1,13 @@
 import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { LoginService } from '../../../../services/login.service';
-import { TramiteSolicitudService } from '../../../../services/tramiteSolicitud.service';
-import { VehiculoService } from '../../../../services/vehiculo.service';
-import { CiudadanoVehiculoService} from '../../../../services/ciudadanoVehiculo.service';
-import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
-import { VhloActaTraspasoService } from '../../../../services/vhloActaTraspaso.service';
-import { DatePipe } from '@angular/common';
 import { FroTrteSolicitudRna } from '../../froTrteSolicitudRna.modelo';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { VhloPropietarioService} from '../../../../services/vhloPropietario.service';
+import { VhloActaTraspasoService } from '../../../../services/vhloActaTraspaso.service';
+import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
+import { LoginService } from '../../../../services/login.service';
+import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
  
 
@@ -57,13 +58,42 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   constructor(
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
     private _VhloActaTraspasoService: VhloActaTraspasoService,
-    private _loginService: LoginService,
-    private _VehiculoService: VehiculoService,
-    private _CiudadanoVehiculoService: CiudadanoVehiculoService,
-    private _TramiteSolicitudService: TramiteSolicitudService,
+    private _VehiculoService: VhloVehiculoService,
+    private _PropietarioService: VhloPropietarioService,
+    private _TramiteSolicitudService: FroTrteSolicitudService,
+    private _TramiteFacturaService: FroFacTramiteService,
+    private _LoginService: LoginService,
     ){}
     
   ngOnInit() {
+    let token = this._LoginService.getToken();
+
+    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.tramiteFactura = response.data;
+
+          swal.close();
+        } else {
+          this.tramiteFactura = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    ); 
+
     this.tramiteSolicitud = new FroTrteSolicitudRna(null,null, null, null, null, null, null, null, null);
     this._CfgEntidadJudicialService.select().subscribe( 
       response => {
@@ -78,6 +108,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
         }
       }
     );
+
     this.datos = {
       'fecha': null,
       'codigoOrganismo': null,
@@ -92,14 +123,14 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       'idTramiteFactura': null,
     };
       
-      this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
-      if (this.vehiculo.servicio) {
-        this.datos.tipoServicio = this.vehiculo.servicio.nombre;
-      }
-      this.date = new Date();
-      var datePiper = new DatePipe(this.date);
-      this.datos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
-      this.datos.vehiculoId = this.vehiculo.id;
+    this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
+    if (this.vehiculo.servicio) {
+      this.datos.tipoServicio = this.vehiculo.servicio.nombre;
+    }
+    this.date = new Date();
+    var datePiper = new DatePipe(this.date);
+    this.datos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
+    this.datos.vehiculoId = this.vehiculo.id;
 
     swal({
       title: 'Cargando Tabla!',
@@ -112,7 +143,8 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       this.codigoOrganismo = this.datos.codigoOrganismo;
       this.tipoServicio = this.datos.tipoServicio;
       this.date = this.datos.fecha;
-    });  
+    }); 
+
     this.datos.nombreApoderado = this.ciudadano.usuario.primerNombre+" "+this.ciudadano.usuario.segundoNombre+" "+this.ciudadano.usuario.primerApellido;
     this.datos.tipoDocApoderado = this.ciudadano.usuario.tipoIdentificacion.nombre;
     this.datos.numeroDocumento = this.ciudadano.usuario.identificacion;   
@@ -139,7 +171,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   }
 
   onEnviar() {
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
 
     this.datos.idTramiteFactura = this.tramiteFactura.id;
     this.datos.personaTraslado = this.sinRegistro;
@@ -151,17 +183,19 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     this.tramiteSolicitud.idCiudadano = this.ciudadano.id;
 
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
-      responseTramiteSolicitud => {
-        if (responseTramiteSolicitud.status == 'success') {
-          this.idTramiteSolicitud = responseTramiteSolicitud.idTramiteSolicitud;
-          this._CiudadanoVehiculoService.eliminarVehiculoPropietario(token, this.datos).subscribe(
-            responseCiudadano => {
-              if (responseCiudadano.status == 'success') {
+      response => {
+        if (response.status == 'success') {
+          this.idTramiteSolicitud = response.idTramiteSolicitud;
+
+          this._PropietarioService.updateByVehiculo(this.datos, token).subscribe(
+            response => {
+              if (response.status == 'success') {
                 this.acta.tramiteSolicitud = this.idTramiteSolicitud;
                 this.acta.entidadJudicial = this.entidadJudicialSelected;
+
                 this._VhloActaTraspasoService.register(this.acta, token).subscribe(
-                  responseActaTraspaso => {
-                    if (responseActaTraspaso.status == 'success') {
+                  response => {
+                    if (response.status == 'success') {
                       swal({
                         title: 'Perfecto!',
                         text: 'Registro exitoso!',

@@ -44,41 +44,17 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
     ) { }
  
     ngOnInit() {
-      let token = this._LoginService.getToken();
+      if(this.vehiculo.tipoMatricula == 'RADICADO'){
+        let token = this._LoginService.getToken();
 
-      this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
-        response => {
-          if (response.code == 200) {
-            this.tramiteFactura = response.data;
-
-            swal.close();
-          } else {
-            this.tramiteFactura = null;
-
-            swal({
-              title: 'Error!',
-              text: response.message,
-              type: 'error',
-              confirmButtonText: 'Aceptar'
-            });
-          }
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        }
-      );
-
-      if (this.tramiteFactura.realizado) {
-        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
           response => {
             if (response.code == 200) {
-              this.tramiteSolicitud = response.data;
+              this.tramiteFactura = response.data;
+
+              swal.close();
             } else {
-              this.tramiteSolicitud = null;
+              this.tramiteFactura = null;
 
               swal({
                 title: 'Error!',
@@ -96,33 +72,66 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
             }
           }
         );
-      } else {
-        this._MunicipioService.select().subscribe(
-          response => {
-            this.municipios = response;
-          },
-          error => {
-            this.errorMessage = <any>error;
 
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert("Error en la petición");
-            }
-          }
-        );
+        if (this.tramiteFactura.realizado) {
+          this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+            response => {
+              if (response.code == 200) {
+                this.tramiteSolicitud = response.data;
+              } else {
+                this.tramiteSolicitud = null;
 
-        this._TipoIdentificacionService.select().subscribe(
-          response => {
-            this.tiposIdentificacion = response;
-          },
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert('Error en la petición');
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
             }
-          }
-        );
+          );
+        } else {
+          this._MunicipioService.select().subscribe(
+            response => {
+              this.municipios = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+          );
+
+          this._TipoIdentificacionService.select().subscribe(
+            response => {
+              this.tiposIdentificacion = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
+            }
+          );
+        }
+      }else{
+        swal({
+          title: 'Error!',
+          text: 'El vehiculo no se registro para radicado de cuenta.',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        });
       }
     }
     

@@ -28,23 +28,20 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12 col-lg-6">
-                            <label>Motivo
-                                <span class="text-danger">*</span>
-                            </label>
+                            <label>Motivo <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="motivos" [(ngModel)]="datos.motivo" name="motivo" required></ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Nuevo registro {{ datos.motivo }}</label>
+                            <label>Nuevo número <b class="text-danger">*</b></label>
                             <input class="form-control" [(ngModel)]="datos.nuevoNumero" name="nuevoNumero" type="text" required />
                         </div>
                         <div class="col-xs-12 col-lg-6">
-                            <label>Número solicitud RUNT</label>
+                            <label>Número solicitud RUNT <b class="text-danger">*</b></label>
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
                     </div>
                 </div>
             </div>
-            <app-new-rna-ciudadano (ready)="ready($event)"></app-new-rna-ciudadano>
             <div class="card-footer">
                 <button (click)="onEnviar()" class="btn btn-primary">
                     <i class="fa fa-save"></i>

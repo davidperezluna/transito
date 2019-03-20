@@ -145,6 +145,10 @@
                                         <input type="text" class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" required />
                                     </div>
                                     <div class="col-xs-12 col-lg-12">
+                                        <label>Fecha factura<span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" [(ngModel)]="datos.fechaFactura" name="fechaFactura" minlength="4" maxlength="4" required />
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
                                         <label>Nombre taller repotenciación <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" [(ngModel)]="datos.tallerRepotenciacion" name="tallerRepotenciacion" required />
                                     </div>
