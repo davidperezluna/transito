@@ -21,7 +21,7 @@ export class NewPropietarioVehiculoComponent implements OnInit {
     public ciudadano: UserCiudadano;
     public propietario = false;
 
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
     public respuesta;
 
     public tiposIdentificacion: any;

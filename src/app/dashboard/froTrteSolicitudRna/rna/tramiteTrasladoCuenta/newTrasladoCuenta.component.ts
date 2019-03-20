@@ -17,11 +17,11 @@ export class NewTrasladoCuentaComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Input() vehiculo: any = null;
 @Input() tramiteFactura: any = null;
+public errorMessage; public autorizado: any = true;
 
   public organismosTransito: any;
   public tramitesFactura: any = null;
   public tramiteSolicitud: any;
-  public errorMessage;
 
   public datos = {
     'fechaSalida': null,
@@ -54,6 +54,7 @@ constructor(
       response => {
         if (response.status == 'success') {
           this.vehiculo.idFuncionario = response.data.id;
+          this.autorizado = true;
 
           this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
             response => {
@@ -121,6 +122,8 @@ constructor(
             );
           }
         } else {
+          this.autorizado = false;
+
           swal({
             title: 'Error!',
             text: 'Usted no tiene permisos para realizar tramites',

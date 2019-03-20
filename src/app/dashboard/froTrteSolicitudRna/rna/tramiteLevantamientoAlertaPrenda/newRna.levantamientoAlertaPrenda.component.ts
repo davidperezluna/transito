@@ -27,7 +27,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     @Input() tramiteFactura: any = null;
 
     public placa: VhloCfgPlaca = null;;
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
     public respuesta;
     public cfgTiposAlerta: any;
     public tramiteFacturaSelected: any;

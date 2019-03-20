@@ -20,7 +20,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
     public tipoId: boolean = true;
     public tramitesFactura: any = null;
     public tramiteFacturaSelected: any;

@@ -15,7 +15,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() idPropietario: any = null;
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
 
     public tramiteSolicitud: any = null;
     public documentacion: any;

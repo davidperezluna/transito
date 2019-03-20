@@ -15,7 +15,7 @@ export class NewRnaRegrabarVinComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage;
+    public errorMessage; public autorizado: any = true;
 
     public tramiteSolicitud: any; 
     public motivoSelected: any;

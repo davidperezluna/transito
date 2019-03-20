@@ -21,7 +21,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   @Input() vehiculo: any = null; 
   @Input() tramiteFactura: any = null;
   @Input() ciudadano: any = null;
-  public errorMessage;
+  public errorMessage; public autorizado: any = true;
 
   public codigoOrganismo;
   public tipoServicio;
