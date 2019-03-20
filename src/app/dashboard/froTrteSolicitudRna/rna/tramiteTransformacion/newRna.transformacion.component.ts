@@ -183,7 +183,8 @@ export class NewRnaTransformacionComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-            });
+            }
+        );
         error => {
             this.errorMessage = <any>error;
 

@@ -338,7 +338,7 @@ export class NewRnaComponent implements OnInit {
         } else {
           swal({
             title: 'Error!',
-            text: 'El tramiteSolicitud ' + +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
