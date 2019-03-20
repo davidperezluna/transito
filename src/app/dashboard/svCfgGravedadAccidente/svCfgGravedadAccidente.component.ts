@@ -1,17 +1,16 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgGravedadService } from '../../services/cfgGravedad.service';
+import { SvCfgGravedadAccidenteService } from '../../services/svCfgGravedadAccidente.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgGravedad.component.html'
+  templateUrl: './svCfgGravedadAccidente.component.html'
 })
-export class CfgGravedadComponent implements OnInit {
+export class SvCfgGravedadAccidenteComponent implements OnInit {
   public errorMessage;
   public id;
-  public respuesta;
   public cfgGravedades;
   public formNew = false;
   public formEdit = false;
@@ -20,8 +19,8 @@ export class CfgGravedadComponent implements OnInit {
   public cfgGravedad: any;
 
   constructor(
-    private _CfgGravedadService: CfgGravedadService,
-    private _loginService: LoginService,
+    private _SvCfgGravedadAccidenteService: SvCfgGravedadAccidenteService,
+    private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -39,7 +38,7 @@ export class CfgGravedadComponent implements OnInit {
       ) {
       }
     })
-    this._CfgGravedadService.getCfgGravedad().subscribe(
+    this._SvCfgGravedadAccidenteService.index().subscribe(
       response => {
         if (response) {
           this.cfgGravedades = response.data;
@@ -103,8 +102,8 @@ export class CfgGravedadComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
-        this._CfgGravedadService.deleteCfgGravedad(token, id).subscribe(
+        let token = this._LoginService.getToken();
+        this._SvCfgGravedadAccidenteService.delete({'id': id}, token).subscribe(
           response => {
             swal({
               title: 'Eliminado!',
@@ -113,7 +112,6 @@ export class CfgGravedadComponent implements OnInit {
               confirmButtonColor: '#15d4be',
             })
             this.table.destroy();
-            this.respuesta = response;
             this.ngOnInit();
           },
           error => {

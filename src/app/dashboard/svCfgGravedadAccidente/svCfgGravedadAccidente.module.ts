@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CfgGravedadComponent } from './cfgGravedad.component';
+import { SvCfgGravedadAccidenteComponent } from './svCfgGravedadAccidente.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { CfgGravedadService } from '../../services/cfgGravedad.service';
+import { SvCfgGravedadAccidenteService } from '../../services/svCfgGravedadAccidente.service';
 
 import { NewComponent } from './new/new.component';
 import { EditComponent } from './edit/edit.component';
@@ -12,9 +12,9 @@ import {SelectModule} from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [CfgGravedadComponent,NewComponent,EditComponent],
-    exports: [CfgGravedadComponent, NewComponent,EditComponent],
-    providers:[CfgGravedadService]
+    declarations: [SvCfgGravedadAccidenteComponent,NewComponent,EditComponent],
+    exports: [SvCfgGravedadAccidenteComponent, NewComponent,EditComponent],
+    providers:[SvCfgGravedadAccidenteService]
 })
 
-export class CfgGravedadModule { }
+export class SvCfgGravedadAccidenteModule { }

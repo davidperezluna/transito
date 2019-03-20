@@ -180,7 +180,7 @@ import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
 import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
-import { CfgGravedadModule } from './cfgGravedad/cfgGravedad.module';
+import { SvCfgGravedadAccidenteModule } from './svCfgGravedadAccidente/svCfgGravedadAccidente.module';
 import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccidente.module';
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
@@ -392,6 +392,7 @@ import {RightsidebarComponent} from '../shared';
     SvCfgSenialProveedorModule,
     SvCfgSenialModule,
     SvSenialInventarioModule,
+    SvCfgGravedadAccidenteModule,
     CvCdoTrazabilidadModule,
     CvCdoNotificacionModule,
     CvCdoCfgInteresModule,
@@ -438,7 +439,6 @@ import {RightsidebarComponent} from '../shared';
     CfgOrganismoTransitoModule,
     VhloCfgPlacaModule,
     ImoCfgTipoModule,
-    CfgGravedadModule,
     CfgChoqueConModule,
     CfgObjetoFijoModule,
     CfgEntidadJudicialModule,

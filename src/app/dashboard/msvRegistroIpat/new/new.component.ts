@@ -5,8 +5,7 @@ import { PnalFuncionarioService } from '../../../services/pnalFuncionario.servic
 import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
-import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
-import { CfgGravedadService } from '../../../services/cfgGravedad.service';
+import { SvCfgGravedadAccidenteService } from '../../../services/svCfgGravedadAccidente.service';
 import { MsvRegistroIpat } from '../msvRegistroIpat.modelo';
 
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
@@ -185,6 +184,7 @@ export class NewComponent implements OnInit {
   public vhl = false;
   
   //validacion campos individuales para vehiculo
+  public vhlNacionalidad = false;
   public vhlMarca = false;
   public vhlColor = false;
   public vhlModelo = false;
@@ -241,7 +241,7 @@ export class NewComponent implements OnInit {
     private _MsvConsecutivoService: MsvConsecutivoService,
     private _LoginService: LoginService,
     private _MunicipioService: CfgMunicipioService,
-    private _GravedadService: CfgGravedadService,
+    private _GravedadService: SvCfgGravedadAccidenteService,
     private _ClaseAccidenteService: SvCfgClaseAccidenteService,
     private _ChoqueConService: CfgChoqueConService,
     private _ObjetoFijoService: CfgObjetoFijoService,
@@ -368,7 +368,7 @@ export class NewComponent implements OnInit {
 
                 this.consecutivo = response.data;
 
-                this._GravedadService.getGravedadSelect().subscribe(
+                this._GravedadService.select().subscribe(
                   response => {
                     this.gravedades = response;
                   },
@@ -1338,6 +1338,13 @@ export class NewComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             //this.vhl = true;
+            if(response.data.nacionalidad.id != null) {
+              this.vhlNacionalidad = true;
+              this.nacionalidadVehiculoSelected = [response.data.nacionalidad.id];
+            } else {
+              this.vhlNacionalidad = false;
+              this.nacionalidadVehiculoSelected = [0];
+            }
             if(response.data.linea.marca.id != null) {
               this.vhlMarca = true;
               this.marcaSelected = [response.data.linea.marca.id];
@@ -1565,15 +1572,15 @@ export class NewComponent implements OnInit {
         response => {
           if (response.status == 'success') {
             this.victima = true;
-            this.tipoIdentificacionVictimaSelected = [response.data[0].tipoIdentificacion.id];
-            this.msvRegistroIpat.nombresVictima = response.data[0].primerNombre + ' ' + response.data[0].segundoNombre;
-            this.msvRegistroIpat.apellidosVictima = response.data[0].primerApellido + ' ' + response.data[0].segundoApellido;
-            //this.msvRegistroIpat.nacionalidadVictima = response.data[0].nacionalidad;
-            this.msvRegistroIpat.fechaNacimientoVictima = response.data[0].fechaNacimiento;
-            this.sexoVictimaSelected = [response.data[0].ciudadano.genero.id];
-            this.msvRegistroIpat.direccionResidenciaVictima = response.data[0].ciudadano.direccion;
-            this.ciudadResidenciaVictimaSelected = [response.data[0].ciudadano.municipioResidencia.id];
-            this.msvRegistroIpat.telefonoVictima = response.data[0].telefono;
+            this.tipoIdentificacionVictimaSelected = [response.data.tipoIdentificacion.id];
+            this.msvRegistroIpat.nombresVictima = response.data.primerNombre + ' ' + response.data.segundoNombre;
+            this.msvRegistroIpat.apellidosVictima = response.data.primerApellido + ' ' + response.data.segundoApellido;
+            //this.msvRegistroIpat.nacionalidadVictima = response.data.nacionalidad;
+            this.msvRegistroIpat.fechaNacimientoVictima = response.data.fechaNacimiento;
+            this.sexoVictimaSelected = [response.data.ciudadano.genero.id];
+            this.msvRegistroIpat.direccionResidenciaVictima = response.data.ciudadano.direccion;
+            this.ciudadResidenciaVictimaSelected = [response.data.ciudadano.municipioResidencia.id];
+            this.msvRegistroIpat.telefonoVictima = response.data.telefono;
             //swal.close();
             if (this.vehiculoIpat) {
               let i = 0;
@@ -1862,6 +1869,7 @@ export class NewComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
     } else {
+      this.msvRegistroIpat.nacionalidadVehiculo = this.nacionalidadVehiculoSelected;
       this.msvRegistroIpat.marca = this.marcaSelected;
       this.msvRegistroIpat.linea = this.lineaSelected;
       this.msvRegistroIpat.color = this.colorSelected;
