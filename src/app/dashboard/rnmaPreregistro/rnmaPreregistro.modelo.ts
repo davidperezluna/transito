@@ -21,6 +21,9 @@ export class RnmaPreregistro{
 		public tipoDispositivo: number,
 		public numeroImportacion: string,
 		public numeroActivacionGps: string,
+		public numeroFactura: number,
+		public fechaFactura:string,
+		public valor:string,
 		public idSubpartidaArancelaria: number,
 		public idTipoRodaje: number,
 		public idTipoCabina: number,
@@ -28,10 +31,7 @@ export class RnmaPreregistro{
 		public idCondicionIngreso: number,
 		public idOrigenRegistro: number,
 		public idEmpresaGps: number,
-		public idSedeOperativa: number,
-		public numeroFactura: number,
-		public fechaFactura:string,
-		public valor:string,
+		public idOrganismoTransito: number,
 		public id: number,
 	){}
 }

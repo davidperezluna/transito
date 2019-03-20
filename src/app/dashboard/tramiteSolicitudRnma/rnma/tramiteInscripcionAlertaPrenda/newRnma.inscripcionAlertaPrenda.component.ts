@@ -110,7 +110,7 @@ export class NewRnmaTramiteInscripcionAlertaPrendaComponent implements OnInit {
  
     ngOnInit() {
 
-        this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe(
+        this._CfgEntidadJudicialService.select().subscribe(
             response => {
                 this.cfgEntidadJudiciales = response;
             },

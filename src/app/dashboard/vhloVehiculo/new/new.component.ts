@@ -13,10 +13,12 @@ import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-new-vehiculo',
   templateUrl: './new.component.html'
 })
+
 export class NewVehiculoComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public vehiculo: VhloVehiculo;

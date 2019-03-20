@@ -28,24 +28,13 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-8">
                             <label>Organismo de transito de que proviene*</label>
-                            <ng-select
-                                [multiple]="false"
-                                [options]="municipios"
-                                [(ngModel)]="datos.idMunicipio"
-                                required
-                                name="idMunicipio">
+                            <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="datos.idMunicipio" name="idMunicipio" required>
                             </ng-select>
-                            <hr>
                         </div>
     
                         <div class="col-xs-12 col-lg-6"  >
                             <label>Tipo documento empresa afiliadora <span class="text-danger">*</span></label>
-                            <ng-select 
-                                [multiple]="false" 
-                                [options]="tiposIdentificacion" 
-                                [(ngModel)]="datos.idTipoIdentificacion" 
-                                required 
-                                name="idTipoIdentificacion">
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="datos.idTipoIdentificacion" name="idTipoIdentificacion" required>
                             </ng-select>
                         </div>
     

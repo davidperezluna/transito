@@ -4,12 +4,12 @@
         <div class="card">
             <div class="card-header">
                 <h5 class="text-uppercase">Nuevo vehiculo RNA</h5>
-                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <small>Los campos con <b class="text-danger"> <b class="text-center">*</b></b> son obligatorios</small>
             </div>
         <div class="card-body">
             <form #formNew="ngForm">
                 <div class="col-xs-12 col-lg-12">
-                    <label>Tipo de registro <span class="text-danger">*</span></label>
+                    <label>Tipo de registro <span class="text-danger"> <b class="text-center">*</b></span></label>
                     <ng-select [multiple]="false" [options]="tipoMatricula" [(ngModel)]="tipoMatriculaSelect" required name="tipoPropiedadId">
                     </ng-select>
                 </div> 
@@ -17,7 +17,7 @@
                 <br>
                 <div class="form-group row" *ngIf="tipoMatriculaSelect == 'RADICADO'">
                     <div class="col-lg-6">
-                        <label>Placa*</label>
+                        <label>Placa <b class="text-center">*</b></label>
                         <input class="form-control" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
                     </div> 
                     <div class="col-lg-6">
@@ -27,105 +27,63 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
-                        <label>No Factura de compra*</label>
-                        <input class="form-control" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                        <label>No Factura de compra</label>
+                        <input class="form-control" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text">
                     </div> 
                     <div class="col-lg-3">
-                        <label>Fecha Factura*</label>
-                        <input class="form-control" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
+                        <label>Fecha Factura</label>
+                        <input class="form-control" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-lg-3">
-                        <label>Marca*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="marcas"
-                            [(ngModel)]="vehiculo.idMarca"
-                            (ngModelChange)="onChangedMarca($event)"
-                            required
-                            name="idMarca">
+                        <label>Marca <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="vehiculo.idMarca" (ngModelChange)="onChangedMarca($event)" name="idMarca" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
-                        <label>Linea*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="lineas"
-                            [(ngModel)]="vehiculo.idLinea"
-                            required
-                            name="idLinea">
+                        <label>Linea <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="vehiculo.idLinea" name="idLinea" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
-                        <label>Clase*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="clases"
-                            [(ngModel)]="vehiculo.idClase"
-                            required
-                            name="idClase">
+                        <label>Clase <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="clases" [(ngModel)]="vehiculo.idClase" name="idClase" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
-                        <label>Carrocería*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="carrocerias"
-                            [(ngModel)]="vehiculo.idCarroceria"
-                            required
-                            name="idCarroceria">
+                        <label>Carrocería <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="vehiculo.idCarroceria" name="idCarroceria" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
-                        <label>Servicio*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="servicios"
-                            [(ngModel)]="vehiculo.idServicio"
-                            required
-                            name="idServicio">
-                        </ng-select> 
+                        <label>Servicio <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="vehiculo.idServicio" name="idServicio" required>
+                        </ng-select>
                     </div>
                     <div class="col-lg-3"> 
-                        <label>Color*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="colores"
-                            [(ngModel)]="vehiculo.idColor"
-                            required
-                            name="idColor">
+                        <label>Color <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="colores" [(ngModel)]="vehiculo.idColor"name="idColor" required>
                         </ng-select>
                     </div>
 
                     <div class="col-lg-3">
-                        <label>Combustible*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="combustibles"
-                            [(ngModel)]="vehiculo.idCombustible"
-                            required
-                            name="idCombustible">
+                        <label>Combustible <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="vehiculo.idCombustible" name="idCombustible" required>
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
-                        <label>Sede Operativa*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [disabled]="persona == 'funcionario'"
-                            [options]="organismosTransito"
-                            [(ngModel)]="vehiculo.idOrganismoTransito"
-                            required
-                            name="idOrganismoTransito">
+                        <label>Organismo de transito <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [disabled]="persona == 'funcionario'" [options]="organismosTransito" [(ngModel)]="vehiculo.idOrganismoTransito" name="idOrganismoTransito" required>
                         </ng-select>
                     </div> 
                     <div class="col-lg-3">
-                        <label>Numero Manifiesto*</label> 
+                        <label>Numero Manifiesto</label> 
                         <input class="form-control" rows="4" [(ngModel)]="vehiculo.numeroManifiesto" name="numeroManifiesto">
                     </div>
                     <!-- <div class="col-lg-3">
-                        <label>Municipio*</label>
+                        <label>Municipio <b class="text-center">*</b></label>
                         <ng-select
                             [multiple]="false"
                             [options]="municipios"
@@ -135,7 +93,7 @@
                         </ng-select>
                     </div> -->
                     <div class="col-lg-3">
-                        <label>Fecha Manifiesto*</label>
+                        <label>Fecha Manifiesto</label>
                         <input class="form-control" type="date"  [(ngModel)]="vehiculo.fechaManifiesto" name="fechaManifiesto">
                     </div>
                     <div class="col-lg-3">
@@ -164,49 +122,39 @@
                         <input class="form-control" type="text" [(ngModel)]="vehiculo.vin" name="vin">
                     </div>
                 
-                    <div class="col-lg-3" *ngIf='servicioSelected == 4'>
-                        <label>Radio Acción*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="radiosAccion"
-                            [(ngModel)]="vehiculo.idRadioAccion"
-                            required
-                            name="idRadioAccion">
+                    <div class="col-lg-3" *ngIf='vehiculo.idServicio == 2'>
+                        <label>Radio Acción <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="vehiculo.idRadioAccion" name="idRadioAccion" required>
                         </ng-select>
                     </div>
                 
                     <div class="col-lg-3">
-                        <label>Modalidad Transporte*</label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="modalidadesTransporte"
-                            [(ngModel)]="vehiculo.idModalidadTransporte"
-                            required
-                            name="idModalidadTransporte">
+                        <label>Modalidad Transporte <b class="text-center">*</b></label>
+                        <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="vehiculo.idModalidadTransporte" name="idModalidadTransporte" required>
                         </ng-select>
                     </div>
 
-                    <div class="col-lg-3" *ngIf='modalidadTransporteSelected == 1 || modalidadTransporteSelected == 2'>
+                    <div class="col-lg-3" *ngIf='vehiculo.idModalidadTransporte == 1 || vehiculo.idModalidadTransporte == 3'>
                         <label>Numero pasajeros</label>
                         <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="capacidadCarga">
                     </div>
 
-                    <div class="col-lg-3" *ngIf='modalidadTransporteSelected == 2 || modalidadTransporteSelected == 3'>
+                    <div class="col-lg-3" *ngIf='vehiculo.idModalidadTransporte == 2 || vehiculo.idModalidadTransporte == 3'>
                         <label>Capacidad carga</label>
                         <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
                     </div>
 
                     <div *ngIf="tipoMatriculaSelect == 'RADICADO'">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Tipo de propiedad <span class="text-danger">*</span></label>
-                            <ng-select [multiple]="false" [options]="tipoPropiedades" [(ngModel)]="tipoPropiedadSelected" required name="tipoPropiedadId">
+                            <label>Tipo de propiedad <span class="text-danger"> <b class="text-center">*</b></span></label>
+                            <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="tipoPropiedadSelected" name="tipoPropiedad" required>
                             </ng-select>
                         </div> 
                     </div> 
 
                     <div class="col-lg-3" *ngIf="tipoMatriculaSelect == 'RADICADO'">
                         <label>Numero licencia transito </label>
-                        <input class="form-control" type="text" type="text" [(ngModel)]="licenciaTransito" name="serie">
+                        <input class="form-control" type="text" type="text" [(ngModel)]="licenciaTransito" name="licenciaTransito">
                     </div>
 
                     <!-- tipo prioridad propio -->
@@ -230,7 +178,7 @@
                             </div>
     
                             <div class="col-xs-8 col-lg-6">
-                                <label>Tipo de identificación <span class="text-danger">*</span></label>
+                                <label>Tipo de identificación <span class="text-danger"> <b class="text-center">*</b></span></label>
                                 <ng-select [multiple]="false" (ngModelChange)="changedtipoIdentificacion($event)" [options]="tipoIdentificaciones" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
                                 </ng-select>
                             </div>

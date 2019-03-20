@@ -1,9 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {RnaPreregistroService} from '../../services/rnaPreregistro.service';
-import {VehiculoService} from '../../services/vehiculo.service';
-import {LoginService} from '../../services/login.service';
-import {RnaPreregistro} from './rnaPreregistro.modelo';
-import { NewRnaPreregistroComponent } from './new/new.component';
+import { RnaPreregistro } from './rnaPreregistro.modelo';
+import { RnaPreregistroService } from '../../services/rnaPreregistro.service';
+import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
+import { LoginService } from '../../services/login.service';
 declare var $: any;
 import swal from 'sweetalert2';
 
@@ -23,7 +22,7 @@ export class RnaPreregistroComponent implements OnInit {
   public vehiculo: RnaPreregistro;
 
   constructor(
-		private _VehiculoService: VehiculoService,
+    private _VehiculoService: VhloVehiculoService,
 		private _RnaPreregistroService: RnaPreregistroService,
 		private _loginService: LoginService,
 	
@@ -96,7 +95,6 @@ export class RnaPreregistroComponent implements OnInit {
     this.formIndex = false;
     this.formEdit = true;
   }
-
   
   deleteVehiculo(id:any){
     console.log(this.id);
@@ -113,7 +111,8 @@ export class RnaPreregistroComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._VehiculoService.deleteVehiculo(token,id).subscribe(
+
+        this._VehiculoService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',

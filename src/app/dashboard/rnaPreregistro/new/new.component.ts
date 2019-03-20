@@ -74,7 +74,7 @@ public btnRadicado:any = 'Preregistro para matricula inicial';
 public propietario = true;
 public campo = false;
 
-public tipoPropiedades= [
+public tiposPropiedad = [
   {'value':1,'label':"Leasing"},
   {'value':2,'label':"Propio"}
 ];
@@ -181,7 +181,7 @@ constructor(
       }
     );
 
-    this._FuncionarioService.searchLogin(datos,token).subscribe(
+    this._FuncionarioService.searchLogin(datos, token).subscribe(
       response => { 
         if(response.status == 'success'){
           this.persona='funcionario';
@@ -312,9 +312,11 @@ constructor(
       }
     );
   }
+
   onCancelar(){
       this.ready.emit(true);
   }
+
   onEnviar(){
     this.vehiculo.tipoMatricula = this.tipoMatriculaSelect;
     

@@ -2,7 +2,6 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { RnmaPreregistro} from '../rnmaPreregistro.modelo';
 import { RnmaPreregistroService } from '../../../services/rnmaPreregistro.service';
 import { VhloCfgColorService } from '../../../services/vhloCfgColor.service';
-import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { VhloCfgCarroceriaService } from '../../../services/vhloCfgCarroceria.service';
 import { VhloCfgLineaService } from '../../../services/vhloCfgLinea.service';
 import { VhloCfgCombustibleService } from '../../../services/vhloCfgCombustible.service';
@@ -15,13 +14,15 @@ import { VhloCfgOrigenRegistroService } from '../../../services/vhloCfgOrigenReg
 import { VhloCfgEmpresaGpsService } from '../../../services/vhloCfgEmpresaGps.service';
 import { VhloCfgCondicionIngresoService } from '../../../services/vhloCfgCondicionIngreso.service';
 import { VhloCfgSubpartidaArancelariaService } from '../../../services/vhloCfgSubpartidaArancelaria.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-new-rnmaRegistroMaquinaria',
   templateUrl: './new.component.html'
 })
+
 export class NewRegistroMaquinariaComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
   public registroMaquinaria: RnmaPreregistro;
@@ -46,6 +47,7 @@ export class NewRegistroMaquinariaComponent implements OnInit {
   public empresasGps:any;
   public subpartidasArancelarias:any;
   public btnRadicado:string = "Preregistro para matricula inicial";
+
 constructor(
   private _RegistroMaquinariaService: RnmaPreregistroService,
   private _LoginService: LoginService,
@@ -62,7 +64,7 @@ constructor(
   private _OrigenRegistroService: VhloCfgOrigenRegistroService,
   private _EmpresaGpsService: VhloCfgEmpresaGpsService,
   private _SubpartidaArancelariaService: VhloCfgSubpartidaArancelariaService,
-  private _FuncionarioService: MpersonalFuncionarioService
+  private _FuncionarioService: PnalFuncionarioService
 ){}
 
 ngOnInit() {
@@ -233,7 +235,7 @@ ngOnInit() {
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.registroMaquinaria.idSedeOperativa = response.data.sedeOperativa.id;
+          this.registroMaquinaria.idOrganismoTransito = response.data.organismoTransito.id;
         }else{
           swal({
             title: 'Alerta!',

@@ -56,7 +56,7 @@ export class NewRnmaCancelacionMatriculaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._EntidadJudicialService.getEntidadJudicialSelect().subscribe(
+        this._EntidadJudicialService.select().subscribe(
             response => {
                 this.entidadesJudiciales = response;
             },

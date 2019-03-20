@@ -115,7 +115,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.datos.fechaExpedicion = datePiper.transform(this.date,'yyyy-MM-dd');
 
-        this._CfgEntidadJudicialService.getEntidadJudicialSelect().subscribe(
+        this._CfgEntidadJudicialService.select().subscribe(
             response => {
                 this.cfgEntidadJudiciales = response;
             },
