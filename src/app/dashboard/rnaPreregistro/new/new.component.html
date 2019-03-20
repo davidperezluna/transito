@@ -18,21 +18,21 @@
                 <div class="form-group row" *ngIf="tipoMatriculaSelect == 'RADICADO'">
                     <div class="col-lg-6">
                         <label>Placa*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
+                        <input class="form-control" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
                     </div> 
                     <div class="col-lg-6">
                         <label>Valor</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.valor" type="text"  name="valor" required>
+                        <input class="form-control" [(ngModel)]="vehiculo.valor" type="text"  name="valor" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label>No Factura de compra*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
+                        <input class="form-control" [(ngModel)]="vehiculo.numeroFactura" name="numeroFactura" type="text" required>
                     </div> 
                     <div class="col-lg-3">
                         <label>Fecha Factura*</label>
-                        <input class="form-control" placeholder="" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
+                        <input class="form-control" [(ngModel)]="vehiculo.fechaFactura" name="fechaFactura" type="date" required>
                     </div>
                 </div>
 
@@ -42,10 +42,10 @@
                         <ng-select
                             [multiple]="false"
                             [options]="marcas"
-                            [(ngModel)]="marcaSelected"
+                            [(ngModel)]="vehiculo.idMarca"
                             (ngModelChange)="onChangedMarca($event)"
                             required
-                            name="marcaId">
+                            name="idMarca">
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
@@ -53,9 +53,9 @@
                         <ng-select
                             [multiple]="false"
                             [options]="lineas"
-                            [(ngModel)]="lineaSelected"
+                            [(ngModel)]="vehiculo.idLinea"
                             required
-                            name="lineaId">
+                            name="idLinea">
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
@@ -63,9 +63,9 @@
                         <ng-select
                             [multiple]="false"
                             [options]="clases"
-                            [(ngModel)]="claseSelected"
+                            [(ngModel)]="vehiculo.idClase"
                             required
-                            name="claseId">
+                            name="idClase">
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
@@ -73,9 +73,9 @@
                         <ng-select
                             [multiple]="false"
                             [options]="carrocerias"
-                            [(ngModel)]="carroceriaSelected"
+                            [(ngModel)]="vehiculo.idCarroceria"
                             required
-                            name="carroceriaId">
+                            name="idCarroceria">
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
@@ -83,9 +83,9 @@
                         <ng-select
                             [multiple]="false"
                             [options]="servicios"
-                            [(ngModel)]="servicioSelected"
+                            [(ngModel)]="vehiculo.idServicio"
                             required
-                            name="servicioId">
+                            name="idServicio">
                         </ng-select> 
                     </div>
                     <div class="col-lg-3"> 
@@ -93,9 +93,9 @@
                         <ng-select
                             [multiple]="false"
                             [options]="colores"
-                            [(ngModel)]="colorSelected"
+                            [(ngModel)]="vehiculo.idColor"
                             required
-                            name="colorId">
+                            name="idColor">
                         </ng-select>
                     </div>
 
@@ -104,9 +104,9 @@
                         <ng-select
                             [multiple]="false"
                             [options]="combustibles"
-                            [(ngModel)]="combustibleSelected"
+                            [(ngModel)]="vehiculo.idCombustible"
                             required
-                            name="combustibleId">
+                            name="idCombustible">
                         </ng-select>
                     </div>
                     <div class="col-lg-3">
@@ -115,14 +115,14 @@
                             [multiple]="false"
                             [disabled]="persona == 'funcionario'"
                             [options]="organismosTransito"
-                            [(ngModel)]="sedeOperativaSelected"
+                            [(ngModel)]="vehiculo.idOrganismoTransito"
                             required
-                            name="sedeOperativaId">
+                            name="idOrganismoTransito">
                         </ng-select>
                     </div> 
                     <div class="col-lg-3">
                         <label>Numero Manifiesto*</label> 
-                        <input class="form-control" placeholder="" rows="4" [(ngModel)]="vehiculo.numeroManifiesto" name="numeroManifiesto">
+                        <input class="form-control" rows="4" [(ngModel)]="vehiculo.numeroManifiesto" name="numeroManifiesto">
                     </div>
                     <!-- <div class="col-lg-3">
                         <label>Municipio*</label>
@@ -136,32 +136,32 @@
                     </div> -->
                     <div class="col-lg-3">
                         <label>Fecha Manifiesto*</label>
-                        <input class="form-control" placeholder="" type="date"  [(ngModel)]="vehiculo.fechaManifiesto" name="fechaManifiesto">
+                        <input class="form-control" type="date"  [(ngModel)]="vehiculo.fechaManifiesto" name="fechaManifiesto">
                     </div>
                     <div class="col-lg-3">
                         <label>Cilindraje</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.cilindraje" name="cilindraje">
+                        <input class="form-control" type="text" [(ngModel)]="vehiculo.cilindraje" name="cilindraje">
                     </div>
                     <div class="col-lg-3">
                         <label>Modelo</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.modelo" name="modelo">
+                        <input class="form-control" type="text" [(ngModel)]="vehiculo.modelo" name="modelo">
                     </div>
                     <div class="col-lg-3">
                         <label>Motor</label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.motor" name="motor">
+                        <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.motor" name="motor">
                     </div>
                     <div class="col-lg-3">
                         <label>Chasis</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.chasis" name="chasis">
+                        <input class="form-control" type="text" [(ngModel)]="vehiculo.chasis" name="chasis">
                     </div>
                     <div class="col-lg-3">
                         <label>Serie</label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.serie" name="serie">
+                        <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.serie" name="serie">
                     </div>
 
                     <div class="col-lg-3">
                         <label>Vin</label>
-                        <input class="form-control" placeholder="" type="text" [(ngModel)]="vehiculo.vin" name="vin">
+                        <input class="form-control" type="text" [(ngModel)]="vehiculo.vin" name="vin">
                     </div>
                 
                     <div class="col-lg-3" *ngIf='servicioSelected == 4'>
@@ -169,9 +169,9 @@
                         <ng-select
                             [multiple]="false"
                             [options]="radiosAccion"
-                            [(ngModel)]="radioAccionSelected"
+                            [(ngModel)]="vehiculo.idRadioAccion"
                             required
-                            name="radiosAccion">
+                            name="idRadioAccion">
                         </ng-select>
                     </div>
                 
@@ -180,20 +180,20 @@
                         <ng-select
                             [multiple]="false"
                             [options]="modalidadesTransporte"
-                            [(ngModel)]="modalidadTransporteSelected"
+                            [(ngModel)]="vehiculo.idModalidadTransporte"
                             required
-                            name="modalidadesTransporte">
+                            name="idModalidadTransporte">
                         </ng-select>
                     </div>
 
                     <div class="col-lg-3" *ngIf='modalidadTransporteSelected == 1 || modalidadTransporteSelected == 2'>
                         <label>Numero pasajeros</label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="capacidadCarga">
+                        <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.numeroPasajeros" name="capacidadCarga">
                     </div>
 
                     <div class="col-lg-3" *ngIf='modalidadTransporteSelected == 2 || modalidadTransporteSelected == 3'>
-                        <label>Capcaidad carga</label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
+                        <label>Capacidad carga</label>
+                        <input class="form-control" type="text" type="text" [(ngModel)]="vehiculo.capacidadCarga" name="capacidadCarga">
                     </div>
 
                     <div *ngIf="tipoMatriculaSelect == 'RADICADO'">
@@ -206,7 +206,7 @@
 
                     <div class="col-lg-3" *ngIf="tipoMatriculaSelect == 'RADICADO'">
                         <label>Numero licencia transito </label>
-                        <input class="form-control" placeholder="" type="text" type="text" [(ngModel)]="licenciaTransito" name="serie">
+                        <input class="form-control" type="text" type="text" [(ngModel)]="licenciaTransito" name="serie">
                     </div>
 
                     <!-- tipo prioridad propio -->

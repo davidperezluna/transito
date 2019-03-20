@@ -15,7 +15,7 @@ import { VhloCfgMarcaService } from '../../../services/vhloCfgMarca.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../services/userEmpresa.service";
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { RnaPreregistroService } from '../../../services/rnaPreregistro.service';
 import { LoginService } from '../../../services/login.service';
@@ -42,20 +42,12 @@ public radiosAccion:any;
 public empresaSelected:any;
 public modalidadesTransporte:any;
 public municipioSelected:any;
-public lineaSelected:any;
-public claseSelected:any;
-public carroceriaSelected:any;
+
 public apoderadoSelected:any;
 public ciudadanoSelected:any;
-public servicioSelected:any;
-public colorSelected:any;
-public marcaSelected:any;
-public sedeOperativaSelected:any;
-public combustibleSelected:any;
-public radioAccionSelected:any;
-public modalidadTransporteSelected:any;
+
 public tipoIdentificacionSelected:any;
-public respuesta:any;
+
 public organismosTransito:any;
 public tipoIdentificaciones:any;
 public ciudadanoEncontrado=1;
@@ -75,7 +67,7 @@ public apoderadoEncontrado=1;
 public identificacion:any;
 public persona:any='empresa';
 public tipoPropiedadSelected:any;
-public sedeOperativa:any;
+public organismoTransito:any;
 public identificacionApoderado:any;
 public tipoMatriculaSelect:any;
 public btnRadicado:any = 'Preregistro para matricula inicial';
@@ -119,7 +111,7 @@ constructor(
   private _RnaPreregistroService: RnaPreregistroService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _FuncionarioService: PnalFuncionarioService,
   private _UserCiudadanoService: UserCiudadanoService,
   private _EmpresaService: UserEmpresaService,
   private _CiudadanoVehiculoService: CiudadanoVehiculoService,
@@ -193,8 +185,8 @@ constructor(
       response => { 
         if(response.status == 'success'){
           this.persona='funcionario';
-          this.sedeOperativa = response.data.sedeOperativa;
-          this.sedeOperativaSelected = [this.sedeOperativa.id];
+          this.organismoTransito = response.data.organismoTransito;
+          this.vehiculo.idOrganismoTransito = Number[this.organismoTransito.id];
         }else{
           this._FuncionarioService.searchEmpresa(datos,token).subscribe(
             response => {
@@ -324,34 +316,23 @@ constructor(
       this.ready.emit(true);
   }
   onEnviar(){
-    this.vehiculo.municipioId = this.municipioSelected;
-    this.vehiculo.lineaId = this.lineaSelected;
-    this.vehiculo.clase = this.claseSelected;
-    this.vehiculo.carroceriaId = this.carroceriaSelected;
-    this.vehiculo.servicioId = this.servicioSelected;
-    this.vehiculo.colorId = this.colorSelected;
-    this.vehiculo.combustibleId = this.combustibleSelected;
-    this.vehiculo.radioAccionId = this.radioAccionSelected;
-    this.vehiculo.modalidadTransporteId = this.modalidadTransporteSelected;
-    this.vehiculo.sedeOperativaId = this.sedeOperativaSelected;
     this.vehiculo.tipoMatricula = this.tipoMatriculaSelect;
+    
     let datos = { 
       'vehiculo':this.vehiculo,
-      'sedeOperativaId':this.sedeOperativa.id,
+      'organismoTransitoId':this.organismoTransito.id,
       'persona':this.persona,
     }
 
     this.datos.vehiculo = this.vehiculo;
     this.datos.licenciaTransito = this.licenciaTransito;
     this.datos.tramiteFormulario = 'rna-matriculainicial';
-    let token = this._loginService.getToken(); 
 
-    console.log(this.datos);
+    let token = this._loginService.getToken(); 
     
     this._RnaPreregistroService.register(datos, token).subscribe(
 			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           if (this.tipoMatriculaSelect == 'RADICADO') {
             this._CiudadanoVehiculoService.register(token,this.datos,this.tipoPropiedadSelected).subscribe(
               response => {
@@ -385,7 +366,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: this.respuesta.msj,
+            text: response.msj,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -525,9 +506,8 @@ constructor(
     };
     this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
         response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.ciudadano = this.respuesta.data;
+            if(response.status == 'success'){
+                this.ciudadano = response.data;
                 this.ciudadanoEncontrado= 2;
                 this.ciudadanoNew = false;
         }else{
@@ -552,9 +532,8 @@ onKeyApoderado(){
     };
     this._UserCiudadanoService.searchByIdentificacion(token,identificacion).subscribe(
         response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.apoderadoSelected = this.respuesta.data;
+            if(response.status == 'success'){
+                this.apoderadoSelected = response.data;
                 // this.ciudadanoNew = false;
         }else{
             this.apoderadoEncontrado=3;
@@ -578,9 +557,8 @@ onKeyEmpresa(){
     };
     this._EmpresaService.showByNit(token,nit).subscribe(
         response => {
-            this.respuesta = response; 
-            if(this.respuesta.status == 'success'){
-                this.empresa = this.respuesta.data;
+            if(response.status == 'success'){
+                this.empresa = response.data;
                 this.empresaEncontrada= 2;
         }else{
             this.empresaEncontrada=3;
