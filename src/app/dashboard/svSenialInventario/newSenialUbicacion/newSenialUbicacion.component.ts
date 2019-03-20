@@ -109,9 +109,9 @@ export class NewSenialUbicacionComponent implements OnInit {
             }
         );
 
-        this._MunicipioService.show(token, this.datos.idMunicipio).subscribe(
+        this._MunicipioService.show({ 'id': this.datos.idMunicipio }, token).subscribe(
             response => {
-                this.municipio = response.data;
+                this.municipio = response.data; 
             },
             error => {
                 this.errorMessage = <any>error;
@@ -142,8 +142,6 @@ export class NewSenialUbicacionComponent implements OnInit {
                                 response => {
                                     if (response) {
                                         this.lineas = response;
-                                    } else {
-                                        this.lineas = null;
                                     }
                                 },
                                 error => {
@@ -160,8 +158,6 @@ export class NewSenialUbicacionComponent implements OnInit {
                                 response => {
                                     if (response) {
                                         this.unidadesMedida = response;
-                                    } else {
-                                        this.unidadesMedida = null;
                                     }
                                 },
                                 error => {
