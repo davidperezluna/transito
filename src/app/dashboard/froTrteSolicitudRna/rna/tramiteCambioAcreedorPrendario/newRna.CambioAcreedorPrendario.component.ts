@@ -29,38 +29,23 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     public cfgTiposAlerta: any;
     public tramiteSolicitud: any = null;
     public ciudadano: any = null;
-    public nombreAcreedor: any;
     public empresa: any = null;
-    public empresaSelected: any;
-    public identificacion: any;
-    public identificacionAcreedor: any;
+    public acreedor: any = null;
 
-    public acreedorEncontrado = 1;
-    public enviarEncontrado = 1;
-    public empresaEncontrada = 1;
-    public nit: any;
-    public nitnewAcredor: any;
-    public tipoIdentificacionSelected = null;
-    public tipoIdentificacionNuevoAcreedorSelected = null;
-    public listaAcreedoresVehiculo = false;
-    public listaAcreedoresCiudadanos = false;
-    public listaAcreedoresEmpresas = false;
-    public ciudadanoNew = false;
-    public pignorado = false;
+    public identificacionOld: any;
+    public nitOld: any;
+    public identificacionNew: any;
+    public nitNew: any;
+    public tipoIdentificacionSelectedOld = null;
+    public tipoIdentificacionSelectedNew = null;
 
     public cfgTipoAlertaSelected: any;
     public gradoSelected: any;
     public acreedorSelected: any;
-    public acreedorNew = false;
-    public propietario = true;
-    public propietarioPresente = false;
+
     public ciudadanoSelected: any;
-    public acreedor: any;
-    public vehiculosAcreedor;
+
     public table: any;
-    public formIndex = true;
-    public vehiculoAcreedor: any; 
-    public acreedores:any=[];
 
     public gradosAlerta = [
         { 'value': 1, 'label': "UNO" },
@@ -75,12 +60,11 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     ];
     
     public datos = {
-        'acreedores': [],
+        'acreedoresOld': [],
+        'acreedoresNew': [],
         'tipoAlerta': [],
         'gradoAlerta': null,
         'vehiculoPlaca': null,
-        'idCiudadanoOld': null,
-        'idCiudadanoNew': null,
         'idEmpresaNew': null,
         'idFuncionario': null,
         'idVehiculo': null,
@@ -195,7 +179,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                             }
                         );
 
-                        this._VehiculoAcreedorService.index().subscribe(
+                        /*this._VehiculoAcreedorService.index().subscribe(
                             response => {
                                 if (response.status == 'success') {
                                     this.vehiculosAcreedor = response.data;
@@ -212,7 +196,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                     }
                                 }
                             }
-                        );
+                        );*/
                     }
                 } else {
                     this.autorizado = false;
@@ -233,57 +217,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 }
             }
         );
-    }    
-    
-    onEnviar() {
-        let placaT = this.vehiculo.placa;
-        this.datos.vehiculoPlaca = this.vehiculo.placa.numero;
-        let token = this._LoginService.getToken();
-        
-        this.datos.tipoAlerta = this.cfgTipoAlertaSelected;
-        this.datos.gradoAlerta = this.gradoSelected;
-        this.datos.idVehiculo = this.vehiculo.id;
-        this.datos.idTramiteFactura = this.tramiteFactura.id;
-
-        if (this.ciudadanoAcreedorNew) {
-            this.datos.idCiudadanoNew = this.ciudadanoAcreedorNew.id;
-        }else{
-            this.datos.idEmpresaNew = this.empresaAcreedorNew.id;
-        }
-
-        this._VehiculoAcreedorService.delete(this.datos, token).subscribe(
-            response => {
-                response = response;
-                if (response.status == 'success') {
-                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-
-                    this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
-                    this.acreedorNew = false;
-                    this.acreedorEncontrado = 2;
-                } else {
-                    this.acreedorEncontrado = 3;
-                    this.acreedorNew = true;
-                }
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            }
-        );
     }
 
-    onKeyAcreedor() {
-        let token = this._LoginService.getToken();
-        let nombreAcreedor = {
-            'nombreAcreedor': this.nombreAcreedor,
-        };
-    }
-
-    onSearchCiudadano() {
+    onSearchAcreedorCiudadano() {
         swal({
             title: 'Buscando ciudadano!',
             text: 'Solo tardara unos segundos por favor espere.',
@@ -295,8 +231,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         let datos = {
-            'identificacion': this.identificacion,
-            'idTipoIdentificacion': this.tipoIdentificacionSelected,
+            'identificacion': this.identificacionOld,
+            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
         }
 
         this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
@@ -304,14 +240,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
-                        this.datos.idCiudadanoOld = this.ciudadano;
 
                         this._VehiculoAcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.ciudadano.id, 'tipo': 'CIUDADANO' },token).subscribe(
                             response => {
                                 if (response.status == 'success') {
                                     this.acreedor = response.data;
                                    
-                                    this.datos.acreedores.push(
+                                    this.datos.acreedoresOld.push(
                                         {
                                             'idAcreedor': this.acreedor.id,
                                             'identificacion': this.acreedor.ciudadano.identificacion,
@@ -321,8 +256,17 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                             'tipo': 'CIUDADANO'
                                         }
                                     );
+
+                                    swal.close();
                                 } else {
                                     this.acreedor = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
                                 }
                                 error => {
                                     this.errorMessage = <any>error;
@@ -356,249 +300,196 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         );
     }
 
-    onKeyCiudadanoNuevoAcreedor() {
+    onSearchAcreedorEmpresa() {
+        swal({
+            title: 'Buscando empresa!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         let token = this._LoginService.getToken();
-        let identificacionNuevoAcreedor = {
-            'numeroIdentificacion': this.identificacionNuevoAcreedor,
-        };
-        this._CiudadanoService.searchByIdentificacion(identificacionNuevoAcreedor,token).subscribe(
-            response => {
-                response = response;
-                if (response.status == 'success') {
-                    this.ciudadanoAcreedorNew = response.data;
-                   
-                } else {
-                    //this.ciudadanoEncontrado = 3;
-                }
-                error => {
-                    this.errorMessage = <any>error;
 
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            });
-
-    }
-
-
-    onKeyEmpresa() {
-        let token = this._LoginService.getToken();
-        let nit = {
-            'nit': this.nit,
-        };
+        let datos = {
+            'identificacion': this.nitOld,
+            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
+        }
         
-        this._EmpresaService.showByNit(token, nit).subscribe(
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                response = response;
-                if (response.status == 'success') {
-                    this.empresa = response.data;
-                   // this.empresaEncontrada = 2;
-                    this._VehiculoAcreedorService.showAcreedorEmpresa(token, this.empresa).subscribe(
-                        response => {
-                            response = response;
-                            if (response.status == 'success') {
-                                this.acreedor = response.data;
-                                this.acreedorEncontrado = 2;
-                                this.enviarEncontrado = 5;
-                                // if (this.acreedor.empresa) {
-                                    this.datos.acreedores.push(
+                if (response.code == 200) {
+                    if (response.data.empresa) {
+                        this.empresa = response.data.empresa;
+
+                        this._VehiculoAcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
+                            response => {
+                                if (response.status == 'success') {
+                                    this.acreedor = response.data;
+
+                                    this.datos.acreedoresOld.push(
                                         {
+                                            'idAcreedor': this.acreedor.id,
                                             'identificacion': this.acreedor.empresa.nit,
                                             'nombre': this.acreedor.empresa.nombre,
                                             'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
                                             'gradoAlerta': this.acreedor.gradoAlerta,
-                                            'empresaId': this.acreedor.empresa.id,
+                                            'tipo': 'CIUDADANO'
                                         }
                                     );
-                                    this.datos.acreedores.push(
-                                        {
-                                            'identificacion': this.acreedor.empresa.nit,
-                                            'nombre': this.acreedor.empresa.nombre,
-                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
-                                            'gradoAlerta': this.acreedor.gradoAlerta,
-                                            'empresaId': this.acreedor.empresa.id,
-                                        }
-                                    );
-                                // }
 
-                                if (this.propietario) {
-                                    this.propietario = false
+                                    swal.close();
+                                } else {
+                                    this.acreedor = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
                                 }
-                                this.acreedorEncontrado = 1;
-                                this.listaAcreedoresVehiculo = true;
-                                //this.ciudadanoNew = false;
-                            } else {
-                                this.empresaEncontrada = 3;
-                                //this.ciudadanoNew = true;
-                            }
-                            error => {
-                                this.errorMessage = <any>error;
+                                error => {
+                                    this.errorMessage = <any>error;
 
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
                                 }
                             }
-                        });
+                        );
+                    }
                 } else {
-                    this.empresaEncontrada = 3;
+                    this.empresa = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
-
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
-            });
+            }
+        );
     }
 
-    onKeyEmpresaNuevoAcreedor() {
+    onSearchCiudadano() {
+        swal({
+            title: 'Buscando ciudadano!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         let token = this._LoginService.getToken();
-        let nit = {
-            'nit': this.nitnewAcredor,
-        };
-        
-        this._EmpresaService.showByNit(token, nit).subscribe(
+
+        let datos = {
+            'identificacion': this.identificacionNew,
+            'idTipoIdentificacion': this.tipoIdentificacionSelectedNew,
+        }
+
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                response = response;
-                if (response.status == 'success') {
-                    this.empresaAcreedorNew = response.data;
-                    console.log(this.empresaAcreedorNew);
+                if (response.code == 200) {
+                    if (response.data.ciudadano) {
+                        this.ciudadano = response.data.ciudadano;
+
+                        this.datos.acreedoresNew.push(
+                            {
+                                'id': this.ciudadano.id,
+                                'identificacion': this.ciudadano.identificacion,
+                                'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre,
+                                'tipo': 'CIUDADANO'
+                            }
+                        );
+                    }
                 } else {
-                    this.empresaEncontrada = 3;
+                    this.ciudadano = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
-
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
-            });
-    }
-
-    goEmpresa() {
-        this.router.navigate(['/dashboard/empresa']);
-    }
-
-    btnCancelarAcreedor() {
-        this.acreedorEncontrado = 1
-    }
-
-    btnNewCiudadano() {
-        
-            this.datos.acreedores.push(
-                {
-                    'identificacion': this.ciudadano.identificacion,
-                    'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre
-                }
-            );
-        
-            if (this.propietario) {
-                this.propietario = false
             }
-        
-        console.log(this.datos.acreedores);
-        //this.ciudadanoEncontrado = 1;
-        this.listaAcreedoresCiudadanos = true;
+        );
     }
 
-    btnNewEmpresa() {
-            this.datos.acreedores.push(
-                {
-                    'nit': this.empresa.nit,
-                    'nombre': this.empresa.nombre,
-                }
-            );
-        
-            if (this.propietario) {
-                this.propietario = false
+    onSearchEmpresa() {
+        swal({
+            title: 'Buscando empresa!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
             }
-        
-        this.empresaEncontrada = 1;
-        this.listaAcreedoresEmpresas = true;
-    }
+        });
 
-    btnCancelarCiudadano() {
-        //this.ciudadanoEncontrado = 1
-    }
+        let token = this._LoginService.getToken();
 
-    btnCancelarEmpresa() {
-        this.empresaEncontrada = 1
-    }
+        let datos = {
+            'identificacion': this.nitOld,
+            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
+        }
 
-    btnNewAcreedor() {
-        if (this.acreedor == 'ciudadano') {
-            this.datos.acreedores = this.datos.acreedores.filter(h => h !== this.ciudadanoSelected[0]);
-            this.datos.acreedores.push(
-                {
-                    'identificacion': this.ciudadanoSelected[0].identificacion,
-                    'nombre': this.ciudadanoSelected[0].nombre,
-                    // 'permisoTramite': this.ciudadanoSelected[0].permisoTramite,
-                    'identificacionAcreedor': this.acreedorSelected.identificacion,
-                    // 'nombreAcreedor': this.acreedorSelected.primerNombre + " " + this.acreedorSelected.segundoNombre,
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    if (response.data.empresa) {
+                        this.empresa = response.data.empresa;
+
+                        this.datos.acreedoresNew.push(
+                            {
+                                'id': this.empresa.id,
+                                'identificacion': this.empresa.nit,
+                                'nombre': this.empresa.nombre,
+                                'tipo': 'EMPRESA'
+                            }
+                        );
+                    }
+                } else {
+                    this.empresa = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
-            )
-            this.acreedor = 'false'
-            this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-            this.listaAcreedoresCiudadanos = true;
-        }
-        if (this.acreedor == 'empresa') {
-            this.datos.acreedores = this.datos.acreedores.filter(h => h !== this.empresaSelected[0]);
-            this.datos.acreedores.push(
-                {
-                    'nit': this.empresaSelected[0].nit,
-                    'nombre': this.empresaSelected[0].nombre,
-                    'permisoTramite': this.empresaSelected[0].permisoTramite,
-                    'identificacionAcreedor': this.acreedorSelected.identificacion,
-                    'nombreAcreedor': this.acreedorSelected.primerNombre + " " + this.acreedorSelected.segundoNombre,
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
                 }
-            );
-            this.acreedor = 'false'
-            this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-            this.listaAcreedoresEmpresas = true;
-        }
+            }
+        );
     }
 
-    changedtipoIdentificacion(e) {
-       // this.ciudadanoEncontrado = 1;
-        this.empresaEncontrada = 1;
+    onDeleteAcreedorOld(acreedor:any): void{
+        this.datos.acreedoresOld = this.datos.acreedoresOld.filter(h => h !== acreedor);
     }
 
-    changedtipoIdentificacionNuevoAcreedor(e) {
-       // this.ciudadanoEncontrado = 1;
-        this.empresaEncontrada = 1;
+    onDeleteAcreedorNew(acreedor: any): void {
+        this.datos.acreedoresNew = this.datos.acreedoresNew.filter(h => h !== acreedor);
     }
-
-    delete(acreedor:any): void{
-        this.datos.acreedores = this.datos.acreedores.filter(h => h !== acreedor);
-        if (this.datos.acreedores.length === 0) {
-            this.listaAcreedoresCiudadanos = false;
-        }
-    }
-    
-    deleteEmpresa(empresa: any): void {
-        this.datos.acreedores = this.datos.acreedores.filter(h => h !== empresa);
-        if (this.datos.acreedores.length === 0) {
-            this.listaAcreedoresEmpresas = false;
-        }
-    }
-
-    ready(isCreado: any) {
-    if (isCreado) {
-      console.log(isCreado);
-      // this.onKeyCiudadano();
-        this.acreedorNew = false;
-        // this.acreedorEncontrado = 2;
-    } else {
-      this.acreedorNew = false;
-      this.ciudadanoNew = false;
-    }
-  }
-
 }
