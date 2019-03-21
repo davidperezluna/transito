@@ -192,6 +192,7 @@ import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpc
 
 import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasignacionPlaca.routes';
 import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
+import { SvCfgGravedadAccidenteRoutes } from './svCfgGravedadAccidente/svCfgGravedadAccidente.routes';
 import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
 
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
@@ -217,7 +218,6 @@ import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantami
 import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEmpresaServicio.routes';
 import { LimitacionRoutes } from './limitacion/limitacion.routes';
 import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
-import { CfgGravedadRoutes } from './cfgGravedad/cfgGravedad.routes';
 import { SvCfgClaseAccidenteRoutes } from './svCfgClaseAccidente/svCfgClaseAccidente.routes';
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
@@ -407,6 +407,7 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgVisualRoutes,
       ...SvCfgVisualDisminuidaRoutes,
       ...SvCfgZonaRoutes,
+      ...SvCfgGravedadAccidenteRoutes,
       ...InfraccionRoutes,
       ...VhloVehiculoRoutes,
       ...VhloPropietarioRoutes,
@@ -432,7 +433,6 @@ export const DashboardRoutes: Route[] = [
       ...ImoCfgTipoRoutes,
       ...CfgEntidadJudicialRoutes,
       ...CfgCausalLimitacionRoutes,
-      ...CfgGravedadRoutes,
       ...CfgChoqueConRoutes,
       ...CfgObjetoFijoRoutes,
       ...MsvTalonarioRoutes,

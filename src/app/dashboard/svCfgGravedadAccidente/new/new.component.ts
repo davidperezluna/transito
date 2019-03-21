@@ -1,49 +1,47 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CfgGravedadService } from '../../../services/cfgGravedad.service';
+import { SvCfgGravedadAccidente } from '../svCfgGravedadAccidente.modelo';
+import { SvCfgGravedadAccidenteService } from '../../../services/svCfgGravedadAccidente.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
- 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html'
+  selector: 'app-new',
+  templateUrl: './new.component.html'
 })
-export class EditComponent {
+export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Input() cfgGravedad: any = null;
+  public cfgGravedad: SvCfgGravedadAccidente;
   public errorMessage;
-  public respuesta;
-
 
   constructor(
-    private _CfgGravedadService: CfgGravedadService,
+    private _SvCfgGravedadAccidenteService: SvCfgGravedadAccidenteService,
     private _loginService: LoginService,
-  ) {
-   
-  }
+  ) { }
 
   ngOnInit() {
-
-
-    
+    this.cfgGravedad = new SvCfgGravedadAccidente(null, null);
   }
-
-
   onCancelar() {
     this.ready.emit(true);
   }
   onEnviar() {
     let token = this._loginService.getToken();
-    this._CfgGravedadService.editCfgGravedad(this.cfgGravedad, token).subscribe(
+    
+    this._SvCfgGravedadAccidenteService.register(this.cfgGravedad, token).subscribe(
       response => {
-        //console.log(response);
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
+        if (response.status == 'success') {
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            text: 'Registro exitoso!',
             type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        } else {
+          swal({
+            title: 'Error!',
+            text: 'La gravedad ya se encuentra registrado',
+            type: 'error',
             confirmButtonText: 'Aceptar'
           })
         }
@@ -55,8 +53,6 @@ export class EditComponent {
             alert("Error en la petición");
           }
         }
-
       });
   }
-
 }

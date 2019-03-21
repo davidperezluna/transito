@@ -1,4 +1,4 @@
-export class CfgGravedad{
+export class SvCfgGravedadAccidente{
 	constructor(
 		public nombre:string,
 		public estado:number,

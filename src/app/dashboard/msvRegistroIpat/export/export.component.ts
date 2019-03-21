@@ -3,7 +3,7 @@ import { LoginService } from '../../../services/login.service';
 import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
 import { MsvExportIpat } from '../msvExportIpat.modelo';
 
-import { CfgGravedadService } from '../../../services/cfgGravedad.service';
+import { SvCfgGravedadAccidenteService } from '../../../services/svCfgGravedadAccidente.service';
 import { SvCfgTipoVictimaService } from '../../../services/svCfgTipoVictima.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
@@ -90,7 +90,7 @@ export class ExportComponent implements OnInit {
     constructor(
         private _IpatService: MsvRegistroIpatService,
         private _LoginService: LoginService,
-        private _GravedadService: CfgGravedadService,
+        private _GravedadService: SvCfgGravedadAccidenteService,
         private _TipoVictimaService: SvCfgTipoVictimaService,
         private _MunicipioService: CfgMunicipioService,
         private _ClaseService: VhloCfgClaseService,
@@ -104,7 +104,7 @@ export class ExportComponent implements OnInit {
     ngOnInit() {
         this.exportIpat = new MsvExportIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         
-        this._GravedadService.getGravedadSelect().subscribe(
+        this._GravedadService.select().subscribe(
             response => {
                 this.gravedades = response;
             },

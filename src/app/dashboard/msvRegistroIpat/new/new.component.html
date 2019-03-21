@@ -43,12 +43,6 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-lg-6 col-md-6">
-                            <label>Organismo de Transito<strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="msvRegistroIpat.idSedeOperativa"
-                                required name="sedeOperativa">
-                            </ng-select>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
                             <label>Gravedad Accidente<strong class="text-danger">*</strong></label>
                             <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="msvRegistroIpat.idGravedad"
                                 required name="gravedad">
@@ -366,9 +360,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Nacionalidad <strong class="text-danger">*</strong></label>
-                            <!-- <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nacionalidadVehiculo" name="nacionalidadVehiculo"
-                                required> -->
-                            <ng-select [multiple]="false" [options]="nacionalidades" [(ngModel)]="nacionalidadVehiculoSelected" required name="nacionalidadVehiculo">
+                            <ng-select [multiple]="false" [disabled]="vhlNacionalidad" [options]="nacionalidades" [(ngModel)]="nacionalidadVehiculoSelected" required name="nacionalidadVehiculo">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
@@ -391,7 +383,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Modelo <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [disabled]="vhlModelo" type="text" [(ngModel)]="msvRegistroIpat.modelo" name="modelo" required>
+                            <input class="form-control" [disabled]="vhlModelo" type="number" [(ngModel)]="msvRegistroIpat.modelo" name="modelo" required>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Carroceria <strong class="text-danger">*</strong></label>
@@ -441,7 +433,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1' && msvRegistroIpat.placaRemolque != ''">
                             <label>NIT Empresa</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.nitEmpresa" name="nitEmpresa">
+                            <input class="form-control" type="number" min=0 [(ngModel)]="msvRegistroIpat.nitEmpresa" name="nitEmpresa">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Matriculado en <strong class="text-danger">*</strong></label>
@@ -529,7 +521,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1' && msvRegistroIpat.revisionTecnomecanica == '1'">
                             <label>No. TecnoMecanica</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroTecnoMecanica" name="numeroTecnoMecanica">
+                            <input class="form-control" type="number" min=0 [(ngModel)]="msvRegistroIpat.numeroTecnoMecanica" name="numeroTecnoMecanica">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                             <label>Cantidad acompañantes o pasajeros al momento del accidente <strong class="text-danger">*</strong></label>
@@ -565,7 +557,9 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSoat == '1'">
                             <label>Aseguradora</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.aseguradoraSoat" name="aseguradoraSoat">
+                            <!-- <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.aseguradoraSoat" name="aseguradoraSoat"> -->
+                            <ng-select [multiple]="false" [options]="aseguradoras" [(ngModel)]="msvRegistroIpat.aseguradoraSoat" name="aseguradoraSoat">
+                            </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSoat == '1'">
                             <label>Fecha Vencimiento SOAT</label>
@@ -594,7 +588,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroResponsabilidadCivil == '1'">
                             <label>Número Seguro de Responsabilidad Civil</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroSeguroResponsabilidadCivil"
+                            <input class="form-control" type="number" min=0 [(ngModel)]="msvRegistroIpat.numeroSeguroResponsabilidadCivil"
                                 name="numeroSeguroResponsabilidadCivil">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroResponsabilidadCivil == '1'">
@@ -631,7 +625,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroExtracontractual == '1'">
                             <label>Número Seguro extracontractual</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.numeroSeguroExtracontractual" name="numeroSeguroExtracontractual">
+                            <input class="form-control" type="number" min=0 [(ngModel)]="msvRegistroIpat.numeroSeguroExtracontractual" name="numeroSeguroExtracontractual">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaSeguroExtracontractual == '1'">
                             <label>Aseguradora Seguro extracontractual</label>
@@ -773,7 +767,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Telefono Conductor</label>
-                            <input class="form-control" type="text" [disabled]="cdnTelefonoConductor" [(ngModel)]="msvRegistroIpat.telefonoConductor" name="telefonoConductor"
+                            <input class="form-control" type="number" min= 0 [disabled]="cdnTelefonoConductor" [(ngModel)]="msvRegistroIpat.telefonoConductor" name="telefonoConductor"
                                 >
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.gravedad == 'CON HERIDOS' || msvRegistroIpat.gravedad == 'CON MUERTOS'">
@@ -900,7 +894,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf='msvRegistroIpat.portaLicencia == "1"'>
                             <label>Codigo Organismo de Transito</label>
-                            <input class="form-control" type="text" [disabled]="licencia" [(ngModel)]="msvRegistroIpat.organismoTransito" name="organismoTransito">
+                            <input class="form-control" type="number" min=0 [disabled]="licencia" [(ngModel)]="msvRegistroIpat.organismoTransito" name="organismoTransito">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.clase == 'MOTOCARRO' || msvRegistroIpat.clase == 'MOTOCICLETA' || msvRegistroIpat.clase == 'CUATRIMOTO' || msvRegistroIpat.clase == 'BICICLETA'">
                             <label>Chaleco</label>
@@ -1074,7 +1068,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <label>Telefono</label>
-                            <input class="form-control" type="text" [disabled]='testigo' [(ngModel)]="msvRegistroIpat.telefonoTestigo" name="telefonoTestigo">
+                            <input class="form-control" type="number" min= 0 [disabled]='testigo' [(ngModel)]="msvRegistroIpat.telefonoTestigo" name="telefonoTestigo">
                         </div>
                     </div>
                 </div>
@@ -1224,7 +1218,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == '1'">
                             <label>Telefono </label>
-                            <input class="form-control" type="text" [disabled]="victima" [(ngModel)]="msvRegistroIpat.telefonoVictima" name="telefonoVictima"
+                            <input class="form-control" type="number" min= 0 [disabled]="victima" [(ngModel)]="msvRegistroIpat.telefonoVictima" name="telefonoVictima"
                                 >
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == '1'">
