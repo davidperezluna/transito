@@ -664,7 +664,12 @@
                             </ng-select>
                         </div>
                     </div>
-                    <button (click)="registrarVehiculo()" *ngIf="consecutivo && msvRegistroIpat.portaPlaca == '1'" class="btn btn-primary">Enviar</button>
+                    <div class="col-lg-6 col-md-6" *ngIf="consecutivo && msvRegistroIpat.portaPlaca == '1'">
+                        <button (click)="registrarVehiculo()" *ngIf="" class="btn btn-primary">Guardar Vehiculo</button>
+                    </div>
+                    <div class="col-lg-6 col-md-6" *ngIf="vehiculoEncontrado && consecutivo && msvRegistroIpat.portaPlaca == '1'">
+                        <button (click)="registrarVehiculoEncontrado()" class="btn btn-success">Guardar Vehiculo</button>
+                    </div>
                 </div>
             </div>
             
@@ -1239,7 +1244,7 @@
                             </ng-select>
                         </div>
                         <!-- <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.victima == '1' && msvRegistroIpat.idTipoVictima == 'PASAJERO' || msvRegistroIpat.idTipoVictima == 'ACOMPAÑANTE'"> -->
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-6 col-md-6" *ngIf="vehiculosIpat.length > 0">
                             <label>Placa Vehiculo Victima </label>
                             <!-- <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.placaVehiculoVictima" name="placaVehiculoVictima"> -->
                             <ng-select [multiple]="false" [options]="vehiculosIpat" [(ngModel)]="msvRegistroIpat.placaVehiculoVictima" name="placaVehiculoVictima">
