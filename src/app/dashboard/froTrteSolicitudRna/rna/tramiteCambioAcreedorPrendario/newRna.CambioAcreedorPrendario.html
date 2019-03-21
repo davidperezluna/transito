@@ -36,7 +36,7 @@
                         <div  class="input-group">
                             <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
                             <span class="input-group-btn">
-                                <button (click)="onSearchCiudadano()" class="btn btn-primary" type="button">
+                                <button (click)="onSearchCiudadano()" class="btn btn-md btn-primary" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -46,16 +46,18 @@
                     <!--tipo identificacion nit -->
                     <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
                         <label>NIT</label>
-                        <div  class="input-group" [class.has-success]="empresaEncontrada === 2" [class.has-danger]="empresaEncontrada === 3">
+                        <div  class="input-group">
                             <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
                             <span class="input-group-btn">
-                                <button (click)="onKeyEmpresa()" [class.btn-default]="empresaEncontrada === 1" [class.btn-success]="empresaEncontrada === 2" [class.btn-danger]="empresaEncontrada === 3" class="btn" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                <button (click)="onSearchEmpresa()" class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </span>
                         </div>
                     </div>
 
                     <!--acreedores vehiculo -->
-                    <div class="container" *ngIf="listaAcreedoresVehiculo">
+                    <div class="container" *ngIf="datos.acreedores && datos.acreedores.length > 0">
                         <br>
                         <table class="table table-bordered table-striped">
                             <br>
@@ -66,13 +68,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="odd" *ngFor="let acreedor of datos.acreedoresVehiculo; let i = index">                    
+                                <tr class="odd" *ngFor="let acreedor of datos.acreedores; let i = index">                    
                                     <td class="center">
-                                        <p> Identificación: {{acreedor.identificacion}}
-                                            <br> Nombre: {{acreedor.nombre}}</p>
+                                        <b>Identificación:</b> {{  acreedor.identificacion }}
+                                        <br> 
+                                        <b>Nombre:</b> {{acreedor.nombre}}</p>
                                     </td>
                                     <td class="center" >
-                                        <p>{{acreedor.tipoAlerta}} - Grado: {{acreedor.gradoAlerta}}</p>
+                                        <b>Tipo alerta:</b> {{acreedor.tipoAlerta}}
+                                        <br>
+                                        <b>Grado:</b> {{acreedor.gradoAlerta}}
                                     </td>
                                 </tr>
                             </tbody>

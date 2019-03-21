@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
+import { FacturaInsumoService } from '../../services/facturaInsumo.service';
 import { FroTrteSolicitudRnaComponent } from './froTrteSolicitudRna.component';
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { FroTrteSolicitudRnaService } from '../../services/froTrteSolicitudRna.service';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { DefaultService } from '../../services/default.service';
 import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
-import { VehiculoAcreedorService } from '../../services/vehiculoAcreedor.service';
+import { VhloAcreedorService } from '../../services/vhloAcreedor.service';
 import { NewRnaComponent } from './newRna/newRna.component'; 
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
 import { NewRnaDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/newRna.duplicadoLicencia.component';
@@ -38,13 +39,12 @@ import { NewRnaTramiteCambioAcreedorPrendarioComponent } from './rna/tramiteCamb
 import { NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent } from './rna/tramiteCambioAcreedorPrendarioPropietario/newRna.CambioAcreedorPrendarioPropietario.component'; 
 import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRna.transformacion.component';
 import { EditComponent } from './edit/edit.component';
-import { SelectModule } from 'angular2-select';
-import { TramiteTrasladoService } from '../../services/tramiteTraslado.service';
-import { FacturaInsumoService } from '../../services/facturaInsumo.service';
 import { NewRnaImportacionTemporalComponent } from "./rna/tramiteImportacionTemporal/newRna.importacionTemporal.component";
 import { NewPropietarioVehiculoComponent } from "./rna/tramiteImportacionTemporal/newPropietarioVehiculo/newPropietarioVehiculo.component";
 import { NewVehiculoComponent } from "./rna/tramiteImportacionTemporal/newVehiculo/newVehiculo.component";
 import { NewRnaProrrogaImportacionTemporalComponent } from "./rna/tramiteProrrogaImportacionTemporal/newRna.prorrogaImportacionTemporal.component";
+import { SelectModule } from 'angular2-select';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { TooltipModule, Tooltip } from "ngx-tooltip";
 
 @NgModule({
@@ -125,7 +125,15 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewVehiculoComponent,
         NewRnaProrrogaImportacionTemporalComponent,
     ],
-    providers: [FacturaInsumoService, FroTrteSolicitudRnaService, CfgTipoAlertaService, TramiteTrasladoService, VehiculoAcreedorService, UserEmpresaService, DefaultService]
+    providers: [
+        FacturaInsumoService, 
+        FroTrteSolicitudRnaService, 
+        CfgTipoAlertaService, 
+        TramiteTrasladoService, 
+        VhloAcreedorService, 
+        UserEmpresaService,
+        DefaultService
+    ]
 })
 
 export class FroTrteSolicitudRnaModule { }

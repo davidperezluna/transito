@@ -4,10 +4,11 @@ import { FroFacTramiteService } from '../../../../services/froFacTramite.service
 import { VhloCfgPlaca } from '../../../vhloCfgPlaca/vhloCfgPlaca.modelo';
 import { LoginService } from '../../../../services/login.service';
 import { CfgTipoAlertaService } from '../../../../services/cfgTipoAlerta.service';
-import { VehiculoAcreedorService } from '../../../../services/vehiculoAcreedor.service';
+import { VhloAcreedorService } from '../../../../services/vhloAcreedor.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { Router } from "@angular/router";
 
 
@@ -72,17 +73,16 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         { 'value': 8, 'label': "OCHO" },
         { 'value': 9, 'label': "NUEVE" }
     ];
-    public resumen = {};     
+    
     public datos = {
-        'acreedoresVehiculo': [],
-        'acreedoresEmpresas': [],
-        'acreedoresCiudadanos': [],
+        'acreedores': [],
         'tipoAlerta': [],
         'gradoAlerta': null,
         'vehiculoPlaca': null,
-        'ciudadanoOldId': null,
-        'ciudadanoNewId': null,
+        'idCiudadanoOld': null,
+        'idCiudadanoNew': null,
         'idEmpresaNew': null,
+        'idFuncionario': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
 
@@ -96,10 +96,11 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
         private _CfgTipoAlertaService: CfgTipoAlertaService,
-        private _VehiculoAcreedorService: VehiculoAcreedorService,
+        private _VehiculoAcreedorService: VhloAcreedorService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
         private _EmpresaService: UserEmpresaService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
         private router: Router,
     ) { }
@@ -107,18 +108,118 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     ngOnInit() {
         let token = this._LoginService.getToken();
 
-        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    this.tramiteFactura = response.data;
+        let identity = this._LoginService.getIdentity();
 
-                    swal.close();
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.datos.idFuncionario = response.data.id;
+                    this.autorizado = true;
+
+                    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.tramiteFactura = response.data;
+
+                                swal.close();
+                            } else {
+                                this.tramiteFactura = null;
+
+                                swal({
+                                    title: 'Error!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+
+                    if (this.tramiteFactura.realizado) {
+                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.tramiteSolicitud = response.data;
+                                } else {
+                                    this.tramiteSolicitud = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    } else {
+                        this._TipoIdentificacionService.select().subscribe(
+                            response => {
+                                this.tiposIdentificacion = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+
+                        this._CfgTipoAlertaService.getAlertaSelect().subscribe(
+                            response => {
+                                this.cfgTiposAlerta = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        );
+
+                        this._VehiculoAcreedorService.index().subscribe(
+                            response => {
+                                if (response.status == 'success') {
+                                    this.vehiculosAcreedor = response.data;
+                                } else {
+                                    this.acreedorEncontrado = 3;
+                                    this.acreedorNew = true;
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    }
                 } else {
-                    this.tramiteFactura = null;
+                    this.autorizado = false;
 
                     swal({
                         title: 'Error!',
-                        text: response.message,
+                        text: 'Usted no tiene permisos para realizar tramites',
                         type: 'error',
                         confirmButtonText: 'Aceptar'
                     });
@@ -127,84 +228,11 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
             }
         );
-
-        if (this.tramiteFactura.realizado) {
-            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-                response => {
-                    if (response.code == 200) {
-                        this.tramiteSolicitud = response.data;
-                    } else {
-                        this.tramiteSolicitud = null;
-
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                }
-            );
-        } else {
-            this._TipoIdentificacionService.select().subscribe(
-                response => {
-                    this.tiposIdentificacion = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            );
-
-            this._CfgTipoAlertaService.getAlertaSelect().subscribe(
-                response => {
-                    this.cfgTiposAlerta = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            );
-
-            this._VehiculoAcreedorService.getAcreedor().subscribe(
-                response => {
-                    if (response.status == 'success') {
-                        this.vehiculosAcreedor = response.data;
-                    } else {
-                        this.acreedorEncontrado = 3;
-                        this.acreedorNew = true;
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                }
-            ); 
-        }
     }    
     
     onEnviar() {
@@ -218,17 +246,18 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
         if (this.ciudadanoAcreedorNew) {
-            this.datos.ciudadanoNewId = this.ciudadanoAcreedorNew.id;
+            this.datos.idCiudadanoNew = this.ciudadanoAcreedorNew.id;
         }else{
             this.datos.idEmpresaNew = this.empresaAcreedorNew.id;
         }
-        console.log(this.datos);
-        this._VehiculoAcreedorService.deleteAcreedor(this.datos, token).subscribe(
+
+        this._VehiculoAcreedorService.delete(this.datos, token).subscribe(
             response => {
                 response = response;
                 if (response.status == 'success') {
-                    this.ngOnInit();
-                    this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+                    this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
                     this.acreedorNew = false;
                     this.acreedorEncontrado = 2;
                 } else {
@@ -245,9 +274,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 }
             }
         );
-    }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
     }
 
     onKeyAcreedor() {
@@ -278,43 +304,25 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
-                        this.datos.ciudadanoOldId = this.ciudadano;
+                        this.datos.idCiudadanoOld = this.ciudadano;
 
-                        this._VehiculoAcreedorService.showAcreedorCiudadano(token, this.ciudadano).subscribe(
+                        this._VehiculoAcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.ciudadano.id, 'tipo': 'CIUDADANO' },token).subscribe(
                             response => {
                                 if (response.status == 'success') {
                                     this.acreedor = response.data;
-                                    this.acreedorEncontrado = 2;
-                                    this.enviarEncontrado = 5;
-
-                                    this.datos.acreedoresVehiculo.push(
+                                   
+                                    this.datos.acreedores.push(
                                         {
-                                            'identificacion': this.acreedor.ciudadano.usuario.identificacion,
-                                            'nombre': this.acreedor.ciudadano.usuario.primerNombre + " " + this.acreedor.ciudadano.usuario.segundoNombre,
-                                            'ciudadanoId': this.acreedor.ciudadano.id,
+                                            'idAcreedor': this.acreedor.id,
+                                            'identificacion': this.acreedor.ciudadano.identificacion,
+                                            'nombre': this.acreedor.ciudadano.primerNombre + " " + this.acreedor.ciudadano.segundoNombre,
                                             'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
-                                            'gradoAlerta': this.acreedor.gradoAlerta
+                                            'gradoAlerta': this.acreedor.gradoAlerta,
+                                            'tipo': 'CIUDADANO'
                                         }
                                     );
-                                    this.datos.acreedoresCiudadanos.push(
-                                        {
-                                            'identificacion': this.acreedor.ciudadano.usuario.identificacion,
-                                            'nombre': this.acreedor.ciudadano.usuario.primerNombre + " " + this.acreedor.ciudadano.usuario.segundoNombre,
-                                            'ciudadanoId': this.acreedor.ciudadano.id,
-                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
-                                            'gradoAlerta': this.acreedor.gradoAlerta
-                                        }
-                                    );
-
-                                    if (this.propietario) {
-                                        this.propietario = false
-                                    }
-                                    this.acreedorEncontrado = 1;
-                                    this.listaAcreedoresVehiculo = true;
-                                    //this.ciudadanoNew = false;
                                 } else {
-                                    this.acreedorEncontrado = 3;
-                                    //this.ciudadanoNew = true;
+                                    this.acreedor = null;
                                 }
                                 error => {
                                     this.errorMessage = <any>error;
@@ -395,7 +403,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                 this.acreedorEncontrado = 2;
                                 this.enviarEncontrado = 5;
                                 // if (this.acreedor.empresa) {
-                                    this.datos.acreedoresVehiculo.push(
+                                    this.datos.acreedores.push(
                                         {
                                             'identificacion': this.acreedor.empresa.nit,
                                             'nombre': this.acreedor.empresa.nombre,
@@ -404,7 +412,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                             'empresaId': this.acreedor.empresa.id,
                                         }
                                     );
-                                    this.datos.acreedoresEmpresas.push(
+                                    this.datos.acreedores.push(
                                         {
                                             'identificacion': this.acreedor.empresa.nit,
                                             'nombre': this.acreedor.empresa.nombre,
@@ -484,7 +492,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     btnNewCiudadano() {
         
-            this.datos.acreedoresCiudadanos.push(
+            this.datos.acreedores.push(
                 {
                     'identificacion': this.ciudadano.identificacion,
                     'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre
@@ -495,13 +503,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 this.propietario = false
             }
         
-        console.log(this.datos.acreedoresCiudadanos);
+        console.log(this.datos.acreedores);
         //this.ciudadanoEncontrado = 1;
         this.listaAcreedoresCiudadanos = true;
     }
 
     btnNewEmpresa() {
-            this.datos.acreedoresEmpresas.push(
+            this.datos.acreedores.push(
                 {
                     'nit': this.empresa.nit,
                     'nombre': this.empresa.nombre,
@@ -526,8 +534,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     btnNewAcreedor() {
         if (this.acreedor == 'ciudadano') {
-            this.datos.acreedoresCiudadanos = this.datos.acreedoresCiudadanos.filter(h => h !== this.ciudadanoSelected[0]);
-            this.datos.acreedoresCiudadanos.push(
+            this.datos.acreedores = this.datos.acreedores.filter(h => h !== this.ciudadanoSelected[0]);
+            this.datos.acreedores.push(
                 {
                     'identificacion': this.ciudadanoSelected[0].identificacion,
                     'nombre': this.ciudadanoSelected[0].nombre,
@@ -541,8 +549,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
             this.listaAcreedoresCiudadanos = true;
         }
         if (this.acreedor == 'empresa') {
-            this.datos.acreedoresEmpresas = this.datos.acreedoresEmpresas.filter(h => h !== this.empresaSelected[0]);
-            this.datos.acreedoresEmpresas.push(
+            this.datos.acreedores = this.datos.acreedores.filter(h => h !== this.empresaSelected[0]);
+            this.datos.acreedores.push(
                 {
                     'nit': this.empresaSelected[0].nit,
                     'nombre': this.empresaSelected[0].nombre,
@@ -568,15 +576,15 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     }
 
     delete(acreedor:any): void{
-        this.datos.acreedoresCiudadanos = this.datos.acreedoresCiudadanos.filter(h => h !== acreedor);
-        if (this.datos.acreedoresCiudadanos.length === 0) {
+        this.datos.acreedores = this.datos.acreedores.filter(h => h !== acreedor);
+        if (this.datos.acreedores.length === 0) {
             this.listaAcreedoresCiudadanos = false;
         }
     }
     
     deleteEmpresa(empresa: any): void {
-        this.datos.acreedoresEmpresas = this.datos.acreedoresEmpresas.filter(h => h !== empresa);
-        if (this.datos.acreedoresEmpresas.length === 0) {
+        this.datos.acreedores = this.datos.acreedores.filter(h => h !== empresa);
+        if (this.datos.acreedores.length === 0) {
             this.listaAcreedoresEmpresas = false;
         }
     }

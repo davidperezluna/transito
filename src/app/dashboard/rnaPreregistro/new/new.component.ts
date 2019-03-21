@@ -64,8 +64,6 @@ export class NewRnaPreregistroComponent implements OnInit {
     {'value':2,'label':"Propio"}
   ];
 
-  public tipoPropiedadSelected:any;
-
   public tipoMatricula = [
     {'value':'RADICADO','label':"Radicado"},
     {'value':'MATRICULA INICIAL','label':"Matricula inicial"},
@@ -151,8 +149,8 @@ constructor(
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => { 
         if(response.status == 'success'){
-          this.vehiculo.idOrganismoTransito = Number[response.data.organismoTransito.id];
           this.funcionario = response.data;
+          this.vehiculo.idOrganismoTransito = response.data.organismoTransito.id;
         }else{
           this.funcionario = null;
           this._FuncionarioService.searchEmpresa({ 'identificacion': identity.identificacion },token).subscribe(
@@ -301,89 +299,6 @@ constructor(
     }
   }
 
-/*
-  btnNewCiudadano(){
-      if (this.tipoPropiedadSelected == 2) {
-          this.datos.propietariosCiudadanos.push(
-              {'identificacion':this.ciudadano.identificacion,
-              'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
-              'permisoTramite':this.datos.solidario,
-              'propietarioPresente':this.propietarioPresente
-              }   
-          );
-      }else{
-          this.datos.propietariosCiudadanos.push(
-                  {'identificacion':this.ciudadano.identificacion,
-                  'nombre':this.ciudadano.primerNombre+" "+this.ciudadano.segundoNombre,
-                  'permisoTramite':this.propietario
-              }   
-          );
-          if (this.propietario) {
-              this.propietario = false
-          }
-      }
-
-      this.ciudadanoEncontrado=1;
-      this.listaPropietariosCiudadanos=true;
-  }
-
-  btnNewEmpresa(){
-      if (this.tipoPropiedadSelected == 2) {
-          this.datos.propietariosEmpresas.push(
-              {'nit':this.empresa.nit,
-              'nombre':this.empresa.nombre,
-              'permisoTramite':this.datos.solidario,
-              'propietarioPresente':this.propietarioPresente
-              }   
-          );
-      }else{
-          this.datos.propietariosEmpresas.push(
-                  {'nit':this.empresa.nit,
-                  'nombre':this.empresa.nombre,
-                  'permisoTramite':this.propietario
-              }   
-          );
-          if (this.propietario) {
-              this.propietario = false
-          }
-      }   
-      this.empresaEncontrada=1;
-      this.listaPropietariosEmpresas=true;
-  }
-
-  btnNewApoderado(){
-      if (this.apoderado == 'ciudadano') {
-          this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== this.ciudadanoSelected[0]);
-          this.datos.propietariosCiudadanos.push(
-              {'identificacion':this.ciudadanoSelected[0].identificacion,
-              'nombre':this.ciudadanoSelected[0].nombre,
-              'permisoTramite':this.ciudadanoSelected[0].permisoTramite,
-              'propietarioPresente':this.ciudadanoSelected[0].propietarioPresente,
-              'identificacionApoderado':this.apoderadoSelected.identificacion,
-              'nombreApoderado':this.apoderadoSelected.primerNombre+" "+this.apoderadoSelected.segundoNombre,
-              }   
-          )
-          this.apoderado = 'false'
-          this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-          this.listaPropietariosCiudadanos=true;
-      }
-      if (this.apoderado == 'empresa') {
-          this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== this.empresaSelected[0]);
-          this.datos.propietariosEmpresas.push(
-              {'nit':this.empresaSelected[0].nit,
-              'nombre':this.empresaSelected[0].nombre,
-              'permisoTramite':this.empresaSelected[0].permisoTramite,
-              'identificacionApoderado':this.apoderadoSelected.identificacion,
-              'nombreApoderado':this.apoderadoSelected.primerNombre+" "+this.apoderadoSelected.segundoNombre,
-              }   
-          );
-          this.apoderado = 'false'
-          this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-          this.listaPropietariosEmpresas=true;
-      }
-  }
-  */
-
   onSearchCiudadano() {
     swal({
       title: 'Buscando ciudadano!',
@@ -513,18 +428,29 @@ constructor(
   }
 
   onAddCiudadano() {
-    this.datos.propietarios.push(
-      {
-        'idPropietario': this.ciudadano.id,
-        'identificacion': this.ciudadano.identificacion,
-        'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre,
-        'permiso': this.datos.solidario,
-        'tipo': 'Ciudadano',
-        'idApoderado': null,
-        'apoderadoIdentificacion': null,
-        'apoderado.Nombre': null,
-      }
-    );
+    let agregado = this.datos.propietarios.includes(this.ciudadano.identificacion, 1);
+
+    if (agregado) {
+      swal({
+        title: 'Error!',
+        text: 'El registro seleccionado ya se encuentra agregado como propietario.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    } else {
+      this.datos.propietarios.push(
+        {
+          'idPropietario': this.ciudadano.id,
+          'identificacion': this.ciudadano.identificacion,
+          'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre,
+          'permiso': this.datos.solidario,
+          'tipo': 'Ciudadano',
+          'idApoderado': null,
+          'apoderadoIdentificacion': null,
+          'apoderado.Nombre': null,
+        }
+      );
+    }
   }
 
   onAddEmpresa() {
@@ -552,7 +478,7 @@ constructor(
     if (agregado) {
       swal({
         title: 'Error!',
-        text: 'El registro seleccionado ya se encuentra agregado como propietario.s',
+        text: 'El registro seleccionado ya se encuentra agregado como apoderado.',
         type: 'error',
         confirmButtonText: 'Aceptar'
       });
@@ -575,26 +501,6 @@ constructor(
     this.apoderado = null;
     this.formApoderado = false;
   }
-
-  /*
-  delete(ciudadano:any): void {
-    this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== ciudadano);
-    if (this.datos.propietariosCiudadanos.length === 0) {
-        this.listaPropietariosCiudadanos = false;
-    }
-    if(ciudadano.permisoTramite){
-        this.propietario = true;
-    }
-  }
-  deleteEmpresa(empresa:any): void {
-      this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== empresa);
-      if (this.datos.propietariosEmpresas.length === 0) {
-          this.listaPropietariosEmpresas = false;
-      }
-      if(empresa.permisoTramite){
-          this.propietario = true;
-      }
-  }*/
 
   onEnviar() {
     let token = this._LoginService.getToken();
@@ -639,7 +545,7 @@ constructor(
 
             swal({
               title: 'Perfecto!',
-              text: 'Registro exitoso!',
+              text: response.message,
               type: 'success',
               confirmButtonText: 'Aceptar'
             })

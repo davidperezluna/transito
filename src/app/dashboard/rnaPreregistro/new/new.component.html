@@ -3,15 +3,15 @@
     <div class="col-xs-12 col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Nuevo vehiculo RNA</h5>
-                <small>Los campos con <b class="text-danger"> <b class="text-center">*</b></b> son obligatorios</small>
+                <h5 class="text-uppercase">Nuevo vehiculo RNA <small *ngIf="funcionario">{{ funcionario.organismoTransito.nombre }}</small></h5>
+                <small>Los campos con <b class="text-danger"> <b class="text-danger">*</b></b> son obligatorios</small>
             </div>
         <div class="card-body">
             <form #formNew="ngForm">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
-                            <label>Tipo de registro <span class="text-danger"> <b class="text-center">*</b></span></label>
+                            <label>Tipo de registro <span class="text-danger"> <b class="text-danger">*</b></span></label>
                             <ng-select [multiple]="false" [options]="tipoMatricula" [(ngModel)]="vehiculo.tipoMatricula" required name="tipoPropiedadId">
                             </ng-select>
                         </div>
@@ -19,7 +19,7 @@
 
                     <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">
                         <div class="col-lg-6">
-                            <label>Placa <b class="text-center">*</b></label>
+                            <label>Placa <b class="text-danger">*</b></label>
                             <input class="form-control text-uppercase" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>
                         </div> 
                         <div class="col-lg-6">
@@ -41,43 +41,43 @@
 
                     <div class="row"><!-- .row -->
                         <div class="col-xs-12 col-lg-3">
-                            <label>Marca <b class="text-center">*</b></label>
+                            <label>Marca <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="marcas" [(ngModel)]="vehiculo.idMarca" (ngModelChange)="onChangedMarca($event)" name="idMarca" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Linea <b class="text-center">*</b></label>
+                            <label>Linea <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="vehiculo.idLinea" name="idLinea" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Clase <b class="text-center">*</b></label>
+                            <label>Clase <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="clases" [(ngModel)]="vehiculo.idClase" name="idClase" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Carrocería <b class="text-center">*</b></label>
+                            <label>Carrocería <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="vehiculo.idCarroceria" name="idCarroceria" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3">
-                            <label>Servicio <b class="text-center">*</b></label>
+                            <label>Servicio <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="vehiculo.idServicio" name="idServicio" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3"> 
-                            <label>Color <b class="text-center">*</b></label>
+                            <label>Color <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="colores" [(ngModel)]="vehiculo.idColor"name="idColor" required>
                             </ng-select>
                         </div>
 
                         <div class="col-xs-12 col-lg-3">
-                            <label>Combustible <b class="text-center">*</b></label>
+                            <label>Combustible <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="vehiculo.idCombustible" name="idCombustible" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3" *ngIf="!funcionario">
-                            <label>Organismo de transito <b class="text-center">*</b></label>
+                            <label>Organismo de transito <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="vehiculo.idOrganismoTransito" name="idOrganismoTransito" required>
                             </ng-select>
                         </div> 
@@ -118,7 +118,7 @@
                         
                         <div class="col-xs-12 col-lg-3" *ngIf='vehiculo.idServicio == 2'>
                             <label>Radio Acción
-                                <b class="text-center">*</b>
+                                <b class="text-danger">*</b>
                             </label>
                             <ng-select [multiple]="false" [options]="radiosAccion" [(ngModel)]="vehiculo.idRadioAccion" name="idRadioAccion" required>
                             </ng-select>
@@ -126,7 +126,7 @@
                         
                         <div class="col-xs-12 col-lg-3">
                             <label>Modalidad Transporte
-                                <b class="text-center">*</b>
+                                <b class="text-danger">*</b>
                             </label>
                             <ng-select [multiple]="false" [options]="modalidadesTransporte" [(ngModel)]="vehiculo.idModalidadTransporte" name="idModalidadTransporte"
                                 required>
@@ -153,7 +153,7 @@
                         <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION TEMPORAL'">
                             <label>Tipo de propiedad
                                 <span class="text-danger">
-                                    <b class="text-center">*</b>
+                                    <b class="text-danger">*</b>
                                 </span>
                             </label>
                             <ng-select [multiple]="false" [options]="tiposPropiedad" [(ngModel)]="datos.tipoPropiedad" name="tipoPropiedad" required>
@@ -162,44 +162,37 @@
                     </div>
 
                     <!-- tipo prioridad propio -->
-                    <div class="row" *ngIf="datos.tipoPropiedad && vehiculo.tipoMatricula == 'RADICADO'">
-                        <!--Buscardor Identificador/Nit -->
-                        <div class="col-xs-12 col-lg-12 row">
-                            <!--Cuando es de tipo propio -->
-                            <div class="col-xs-12 col-lg-12">
-                                <br>
-                                <div class="custom-control custom-checkbox">
-                                    <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
-                                    <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer tramites?</label>
-                                </div>
+                    <div class="row" *ngIf="datos.tipoPropiedad && (vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION TEMPORAL')">
+                        <!--Cuando es de tipo propio -->
+                        <div class="col-xs-12 col-lg-12">
+                            <br>
+                            <div class="custom-control custom-checkbox">
+                                <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
+                                <label class="custom-control-label" for="solidario">¿Tiene permisos para hacer tramites?</label>
                             </div>
+                        </div>
+                
+                        <div class="col-xs-8 col-lg-6">
+                            <label>Tipo de identificación <b class="text-danger">*</b></label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required >
+                            </ng-select>
+                        </div>
+                
+                        <!--tipo identificacion ciudadano -->
+                        <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
+                            <label>Identificación</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="Identificacion" [(ngModel)]="identificacion" name="identificacion" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchCiudadano()"class="btn btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
 
-                    
-                            <div class="col-xs-8 col-lg-6">
-                                <label>Tipo de identificación
-                                    <span class="text-danger">
-                                        <b class="text-center">*</b>
-                                    </span>
-                                </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" name="idTipoIdentificacion" required >
-                                </ng-select>
-                            </div>
-                    
-                            <!--tipo identificacion ciudadano -->
-                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
-                                <label>Identificación</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion"
-                                        required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchCiudadano()"clases="btn btn-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="container row" *ngIf="ciudadano">
+                        <div class="col-xs-12 col-lg-12">
+                            <div class="row" *ngIf="ciudadano">
                                 <div class="col-xs-12 col-lg-12">
                                     <div class="custom-control custom-checkbox">
                                         <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
@@ -235,22 +228,24 @@
                                     </tbody>
                                 </table>
                             </div>
-                    
-                            <!--tipo identificacion nit -->
-                            <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
-                                <label>NIT</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchEmpresa()" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
+                        </div>
+                
+                        <!--tipo identificacion nit -->
+                        <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
+                            <label>NIT</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchEmpresa()" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
                             </div>
+                        </div>
 
+                        <div class="col-xs-12 col-lg-12">
                             <!-- Empresa -->
-                            <div class="container" *ngIf="empresa">
+                            <div class="row" *ngIf="empresa">
                                 <div class="col-xs-12 col-lg-12">
                                     <div class="custom-control custom-checkbox">
                                         <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">
@@ -291,51 +286,51 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
 
-                            <div class="col-xs-12 col-lg-12" *ngIf="datos.propietarios && datos.propietarios.length > 0">
-                                <table class="table table-bordered table-striped" id="dataTables-example">
-                                    <br>
-                                    <thead>
-                                        <tr>
-                                            <th colspan="3" class="text-center">
-                                                <b class="text-uppercase">Propietarios a registrar</b>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let propietario of datos.propietarios; let i = index">
-                                            <td>
-                                                <b>Solicitante: </b>
-                                                <br> {{ propietario.identificacion }}
-                                                <br> {{ propietario.nombre }}
-                                                <br>
-                                                <span *ngIf="propietario.permiso" class="text-success">
-                                                    <b>Autorizado</b> para realizar trámites.
-                                                </span>
-                                                <span *ngIf="!propietario.permiso" class="text-danger">
-                                                    <b>No autorizado</b> para realizar trámites.
-                                                </span>
-                                            </td>
-                                            <td *ngIf="propietario.idApoderado">
-                                                <b>Apoderado: </b>
-                                                <br> {{ propietario.apoderadoIdentificacion }}
-                                                <br> {{ propietario.apoderadoNombre }}
-                                                <br>
-                                            </td>
-                                            <td *ngIf="!propietario.idApoderado">
-                                                <div class="btn-group btn-group-justified">
-                                                    <div class="btn-group">
-                                                        <button (click)="onNewApoderado(propietario)" class="btn btn-xs btn-primary">Agregar apoderado</button>
-                                                    </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="datos.propietarios && datos.propietarios.length > 0">
+                            <table class="table table-bordered table-striped" id="dataTables-example">
+                                <br>
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" class="text-center">
+                                            <b class="text-uppercase">Propietarios a registrar</b>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let propietario of datos.propietarios; let i = index">
+                                        <td>
+                                            <b>Solicitante: </b>
+                                            <br> {{ propietario.identificacion }}
+                                            <br> {{ propietario.nombre }}
+                                            <br>
+                                            <span *ngIf="propietario.permiso" class="text-success">
+                                                <b>Autorizado</b> para realizar trámites.
+                                            </span>
+                                            <span *ngIf="!propietario.permiso" class="text-danger">
+                                                <b>No autorizado</b> para realizar trámites.
+                                            </span>
+                                        </td>
+                                        <td *ngIf="propietario.idApoderado">
+                                            <b>Apoderado: </b>
+                                            <br> {{ propietario.apoderadoIdentificacion }}
+                                            <br> {{ propietario.apoderadoNombre }}
+                                            <br>
+                                        </td>
+                                        <td *ngIf="!propietario.idApoderado">
+                                            <div class="btn-group btn-group-justified">
+                                                <div class="btn-group">
+                                                    <button (click)="onNewApoderado(propietario)" class="btn btn-xs btn-primary">Agregar apoderado</button>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">Eliminar</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>                    
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                                         
                         <!--si no existe un ciudadano -->
@@ -347,58 +342,57 @@
                     <div class="row"><!-- .row -->
                         <!-- agregar apoderado -->
                         <div class="col-xs-12 col-lg-12">
-                            <div class="col-xs-12 col-lg-12 form-group" >
-                                <b class="text-uppercase">
-                                    Buscar Apoderado
-                                </b>
-                            </div>
-                            <div class="col-xs-12 col-lg-12 form-group" >
-                                <label>Identificación</label>
-                                <div  class="input-group">
-                                    <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchApoderado()" class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>                                    
-                            </div>
-    
-                            <!--si existe el apoderado -->
-                            <div class="container form-group" *ngIf="apoderado">
-                                <table class="table table-bordered table-striped" id="dataTables-example">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <b>Tipo de identificación</b>
-                                                <br>
-                                                {{ apoderado.tipoIdentificacion.nombre }}
-                                                <br>
-                                                <b>Numero de identificación</b>
-                                                <br>
-                                                {{ apoderado.identificacion }}
-                                            </td>
-                                            <td>
-                                                <b>Nombres y apellidos</b>
-                                                <br>{{ apoderado.primerNombre }}  {{ apoderado.segundoNombre }} {{ apoderado.primerApellido }} {{ apoderado.segundoApellido }}
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button (click)="onAddApoderado(apoderado)" class="btn btn-primary">
-                                                        <i class="fa fa-plus"></i>
-                                                        Agregar
-                                                    </button>
-                                                    <button class="btn btn-danger" (click)="onCancelarApoderado()">
-                                                        <i class="fa fa-times"></i>
-                                                        Cancelar
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <b class="text-uppercase">
+                                Buscar Apoderado
+                            </b>
                         </div>
+
+                        <div class="col-xs-12 col-lg-12" >
+                            <label>Identificación</label>
+                            <div  class="input-group">
+                                <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchApoderado()" class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>                                    
+                        </div>
+
+                        <!--si existe el apoderado -->
+                        <div class="col-xs-12 col-lg-12" *ngIf="apoderado">
+                            <table class="table table-bordered table-striped" id="dataTables-example">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <b>Tipo de identificación</b>
+                                            <br>
+                                            {{ apoderado.tipoIdentificacion.nombre }}
+                                            <br>
+                                            <b>Numero de identificación</b>
+                                            <br>
+                                            {{ apoderado.identificacion }}
+                                        </td>
+                                        <td>
+                                            <b>Nombres y apellidos</b>
+                                            <br>{{ apoderado.primerNombre }}  {{ apoderado.segundoNombre }} {{ apoderado.primerApellido }} {{ apoderado.segundoApellido }}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button (click)="onAddApoderado(apoderado)" class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i>
+                                                    Agregar
+                                                </button>
+                                                <button class="btn btn-danger" (click)="onCancelarApoderado()">
+                                                    <i class="fa fa-times"></i>
+                                                    Cancelar
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>  
                     </div><!-- /.row -->
                 </div><!-- /.form-group -->
             </form>

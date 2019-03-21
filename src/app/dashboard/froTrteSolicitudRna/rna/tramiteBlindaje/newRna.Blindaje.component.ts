@@ -16,8 +16,9 @@ export class NewRnaBlindajeComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
@@ -33,6 +34,7 @@ export class NewRnaBlindajeComponent implements OnInit {
         'numeroRunt': null,
         'nivelBlindaje': null,
         'tipoBlindaje': null,
+        'idFuncionario': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
     };
@@ -70,7 +72,7 @@ export class NewRnaBlindajeComponent implements OnInit {
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.vehiculo.idFuncionario = response.data.id;
+                    this.datos.idFuncionario = response.data.id;
                     this.autorizado = true;
 
                     this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(

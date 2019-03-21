@@ -13,12 +13,13 @@ import swal from 'sweetalert2';
   templateUrl: './newTrasladoCuenta.component.html'
 })
 export class NewTrasladoCuentaComponent implements OnInit {
-@Output() ready = new EventEmitter<any>();
-@Output() readyTramite = new EventEmitter<any>();
-@Input() vehiculo: any = null;
-@Input() tramiteFactura: any = null;
-public errorMessage; public autorizado: any = true;
-
+  @Output() ready = new EventEmitter<any>();
+  @Output() readyTramite = new EventEmitter<any>();
+  @Input() vehiculo: any = null;
+  @Input() tramiteFactura: any = null;
+  public errorMessage; 
+  
+  public autorizado: any = true;
   public organismosTransito: any;
   public tramitesFactura: any = null;
   public tramiteSolicitud: any;
