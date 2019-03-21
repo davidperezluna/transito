@@ -47,30 +47,16 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     public table: any;
 
-    public gradosAlerta = [
-        { 'value': 1, 'label': "UNO" },
-        { 'value': 2, 'label': "DOS" },
-        { 'value': 3, 'label': "TRES" },
-        { 'value': 4, 'label': "CUATRO" },
-        { 'value': 5, 'label': "CINCO" },
-        { 'value': 6, 'label': "SEIS" },
-        { 'value': 7, 'label': "SIETE" },
-        { 'value': 8, 'label': "OCHO" },
-        { 'value': 9, 'label': "NUEVE" }
-    ];
-    
     public datos = {
         'acreedoresOld': [],
         'acreedoresNew': [],
-        'tipoAlerta': [],
-        'gradoAlerta': null,
-        'vehiculoPlaca': null,
         'idEmpresaNew': null,
         'idFuncionario': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
 
     };
+
     public tiposIdentificacion: any;
     public ciudadanoAcreedorNew:any;
     public empresaAcreedorNew:any;
@@ -243,7 +229,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
                         this._VehiculoAcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.ciudadano.id, 'tipo': 'CIUDADANO' },token).subscribe(
                             response => {
-                                if (response.status == 'success') {
+                                if (response.code == 200) {
                                     this.acreedor = response.data;
                                    
                                     this.datos.acreedoresOld.push(
@@ -251,12 +237,12 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                             'idAcreedor': this.acreedor.id,
                                             'identificacion': this.acreedor.ciudadano.identificacion,
                                             'nombre': this.acreedor.ciudadano.primerNombre + " " + this.acreedor.ciudadano.segundoNombre,
-                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
+                                            'tipoAlerta': this.acreedor.tipoAlerta.nombre,
                                             'gradoAlerta': this.acreedor.gradoAlerta,
                                             'tipo': 'CIUDADANO'
                                         }
                                     );
-
+                                    
                                     swal.close();
                                 } else {
                                     this.acreedor = null;
@@ -332,9 +318,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                             'idAcreedor': this.acreedor.id,
                                             'identificacion': this.acreedor.empresa.nit,
                                             'nombre': this.acreedor.empresa.nombre,
-                                            'tipoAlerta': this.acreedor.cfgTipoAlerta.nombre,
+                                            'tipoAlerta': this.acreedor.tipoAlerta.nombre,
                                             'gradoAlerta': this.acreedor.gradoAlerta,
-                                            'tipo': 'CIUDADANO'
+                                            'tipo': 'EMPRESA'
                                         }
                                     );
 
@@ -491,5 +477,32 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
 
     onDeleteAcreedorNew(acreedor: any): void {
         this.datos.acreedoresNew = this.datos.acreedoresNew.filter(h => h !== acreedor);
+    }
+
+    enviarTramite() {
+        let token = this._LoginService.getToken();
+        
+        this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+
+
+        this._VehiculoAcreedorService.update(this.datos, token).subscribe(
+            response => {
+                response = response;
+                if (response.code == 200) {
+                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+
+                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );
     }
 }

@@ -60,12 +60,21 @@ export class VhloAcreedorService {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 
+	update(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/update", params, { headers: headers }).map(
+			res => res.json(),
+			this._loogerService.registerLog(token, 'UPDATE', json, this.url)
+		);
+	}
+
 	showAcreedorCiudadano(token, ciudadanoId) {
 		let json = JSON.stringify(ciudadanoId);
 		let params = "json=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/acreedor", params, { headers: headers })
-			.map(res => res.json());
+		return this._http.post(this.url + "/search/acreedor", params, { headers: headers }).map(res => res.json());
 
 	}
 
@@ -75,14 +84,4 @@ export class VhloAcreedorService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/ciudadano/empresa", params, { headers: headers }).map(res => res.json());
 	}
-
-	showAcreedorEmpresa(token, empresaId) {
-		let json = JSON.stringify(empresaId);
-		let params = "json=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/acreedor/empresa", params, { headers: headers })
-			.map(res => res.json());
-
-	}
-	
 }
