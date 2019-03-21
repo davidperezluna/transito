@@ -3,6 +3,7 @@ import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.s
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 import { environment } from 'environments/environment';
 
@@ -17,8 +18,9 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage; public autorizado: any = true;
+    public errorMessage; 
     
+    public autorizado: any = false;
     public apiUrl = environment.apiUrl + 'financiero';
     public tramiteSolicitud: any = null;
     public identificacion: any;
@@ -39,24 +41,80 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _VehiculoService: VhloVehiculoService,
         private _CiudadanoService: UserCiudadanoService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
         let token = this._LoginService.getToken();
 
-        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    this.tramiteFactura = response.data;
+        let identity = this._LoginService.getIdentity();
 
-                    swal.close();
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.vehiculo.idFuncionario = response.data.id;
+                    this.autorizado = true;
+
+                    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.tramiteFactura = response.data;
+
+                                swal.close();
+                            } else {
+                                this.tramiteFactura = null;
+
+                                swal({
+                                    title: 'Error!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+
+                    if (this.tramiteFactura.realizado) {
+                        let token = this._LoginService.getToken();
+
+                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.tramiteSolicitud = response.data;
+                                } else {
+                                    this.tramiteSolicitud = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    }
                 } else {
-                    this.tramiteFactura = null;
+                    this.autorizado = false;
 
                     swal({
                         title: 'Error!',
-                        text: response.message,
+                        text: 'Usted no tiene permisos para realizar tramites',
                         type: 'error',
                         confirmButtonText: 'Aceptar'
                     });
@@ -65,39 +123,11 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
             }
-        );
-
-        if (this.tramiteFactura.realizado) {
-            let token = this._LoginService.getToken();
-
-            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-                response => {
-                    if (response.code == 200) {
-                        this.tramiteSolicitud = response.data;
-                    } else {
-                        this.tramiteSolicitud = null;
-
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                }
-            );
-        }        
+        );        
     }
 
     onEnviar() {

@@ -3,7 +3,7 @@ import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.serv
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { LoginService } from '../../../services/login.service';
 import { RnaInsumoService } from '../../../services/rnaInsumos.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaInsumo } from './facturaInsumo.modelo';
 import { FacturaInsumoService } from '../../../services/facturaInsumo.service';
@@ -30,7 +30,7 @@ export class NewRnaInsumoComponent implements OnInit {
     public colorSelected: any;
     public identificacion: any;
     public licenciaTransito: any;
-    public idSedeOperativa: any;
+    public idOrganismoTransito: any;
     public ciudadano:any;
     public estadoImpresion=true;
     public tarjetaEntregada=true;
@@ -53,7 +53,7 @@ export class NewRnaInsumoComponent implements OnInit {
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
-        private _FuncionarioService: MpersonalFuncionarioService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private _FacturaInsumoService: FacturaInsumoService,
@@ -64,14 +64,16 @@ export class NewRnaInsumoComponent implements OnInit {
 
     ngOnInit() {
         let token = this._loginService.getToken();
+
         let identity = this._loginService.getIdentity();
+
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
               if (response.status == 'success') {
-                  console.log(response.data.sedeOperativa.id);
-                  this.idSedeOperativa = response.data.sedeOperativa.id;
+                  console.log(response.data.organismoTransito.id);
+                  this.idOrganismoTransito = response.data.organismoTransito.id;
                 //   let datos = {
-                //         'sedeOperativa':1 
+                //         'organismoTransito':1 
                 //     }
                 //     this._RnaInsumoService.showUltimoSustratoDisponible(datos).subscribe(
                 //         responseInsumo => {
@@ -205,7 +207,7 @@ export class NewRnaInsumoComponent implements OnInit {
         let datos = {
             'numero': this.numeroInsumo,
             'idModulo': 2,
-            'idSedeOperativa': this.idSedeOperativa,
+            'idOrganismoTransito': this.idOrganismoTransito,
         }
         
         this._RnaInsumoService.showNombre(token,datos).subscribe(

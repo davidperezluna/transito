@@ -414,7 +414,7 @@ constructor(
 
     let datos = {
       'identificacion': this.nit,
-      'idTipoIdentificacion': 1,
+      'idTipoIdentificacion': this.tipoIdentificacionSelected,
     }
 
     this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
