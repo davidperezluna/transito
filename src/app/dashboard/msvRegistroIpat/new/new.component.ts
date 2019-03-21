@@ -71,7 +71,12 @@ export class NewComponent implements OnInit {
 
   public nroIpat: any;
   public consecutivo: any = null;
+  
   public ipatEncontrado: any = null;
+  public vehiculoEncontrado = false;
+  public conductorEncontrado = false;
+  public victimaEncontrado = false;
+  
   public ipats = false;
 
   public gravedades: any;
@@ -181,7 +186,7 @@ export class NewComponent implements OnInit {
   public fechaActual: any;
 
   public usuario = false;
-  public vhl = false;
+  //public vhl = false;
   
   //validacion campos individuales para vehiculo
   public vhlNacionalidad = false;
@@ -1337,6 +1342,7 @@ export class NewComponent implements OnInit {
 
         response => {
           if (response.status == 'success') {
+            this.vehiculoEncontrado = true;
             //this.vhl = true;
             if(response.data.nacionalidad.id != null) {
               this.vhlNacionalidad = true;
@@ -1426,17 +1432,40 @@ export class NewComponent implements OnInit {
               confirmButtonText: 'Aceptar'
             }).then((result) => {
               if (result.value) {
-                this.vhl = false;
+                this.vehiculoEncontrado = false;
+
+                this.vhlNacionalidad = false;
+                this.nacionalidadVehiculoSelected = [0];
+                
+                this.vhlMarca = false; 
                 this.marcaSelected = [0];
                 this.lineaSelected = [0];
+
+                this.vhlColor = false;
                 this.colorSelected = [0];
+
+                this.vhlModelo = false;
                 this.msvRegistroIpat.modelo = '';
+
+                this.vhlCarroceria = false;
                 this.carroceriaSelected = [0];
+
+                this.vhlPasajeros = false;
                 this.msvRegistroIpat.pasajeros = '';
+
+                this.vhlMatriculadoEn = false;
                 this.matriculadoEnSelected = [0];
+
+                this.vhlClase = false;
                 this.claseSelected = [0];
+
+                this.vhlServicio = false;
                 this.servicioSelected = [0];
+
+                this.vhlModalidad = false;
                 this.modalidadTransporteSelected = [0];
+
+                this.vhlRadioAccion = false;
                 this.radioAccionSelected = [0];
               }
             });
@@ -1487,12 +1516,12 @@ export class NewComponent implements OnInit {
   }
 
   onMismoConductor(msvRegistroIpat) {
-    if (this.msvRegistroIpat.identificacionConductor != null && this.msvRegistroIpat.nombresConductor != '' && this.msvRegistroIpat.apellidosConductor != '') {
+    if (msvRegistroIpat.identificacionConductor != null && msvRegistroIpat.nombresConductor != '' && msvRegistroIpat.apellidosConductor != '') {
       this.msmConductor = true;
       this.tipoIdentificacionPropietarioSelected = [this.tipoIdentificacionConductorSelected];
-      this.msvRegistroIpat.identificacionPropietario = this.msvRegistroIpat.identificacionConductor;
-      this.msvRegistroIpat.nombresPropietario = this.msvRegistroIpat.nombresConductor;
-      this.msvRegistroIpat.apellidosPropietario = this.msvRegistroIpat.apellidosConductor;
+      msvRegistroIpat.identificacionPropietario = this.msvRegistroIpat.identificacionConductor;
+      msvRegistroIpat.nombresPropietario = this.msvRegistroIpat.nombresConductor;
+      msvRegistroIpat.apellidosPropietario = this.msvRegistroIpat.apellidosConductor;
     } else {
       swal({
         title: 'Alerta!',
@@ -1940,7 +1969,7 @@ export class NewComponent implements OnInit {
                 this.vehiculos.push(dataVehiculos);
 
                 this.vehiculoIpat = true;
-                this.vhl = false;
+                //this.vhl = false;
                 this.msvRegistroIpat.placa = '';
                 this.marcaSelected = [0];
                 this.lineaSelected = [0];
@@ -2008,6 +2037,34 @@ export class NewComponent implements OnInit {
         }
       }
     }
+  }
+
+  registrarVehiculoEncontrado(){
+    let dataVehiculos = {
+      'placa': this.msvRegistroIpat.placa,
+      'nacionalidad': this.nacionalidadVehiculoSelected,
+      'marca': this.marcaSelected,
+      'linea': this.lineaSelected,
+      'color': this.colorSelected,
+      'modelo': this.msvRegistroIpat.modelo,
+      'carroceria': this.carroceriaSelected,
+      'clase vehiculo': this.claseSelected,
+      'servicio': this.servicioSelected,
+      'modalidad transporte': this.modalidadTransporteSelected,
+      'capacidad carga(ton)': this.msvRegistroIpat.ton,
+      'pasajeros': this.msvRegistroIpat.pasajeros,
+      'matriculado en': this.matriculadoEnSelected,
+    };
+    this.vehiculos.push(dataVehiculos);
+    console.log(this.vehiculos);
+    this.vehiculoIpat = true;
+
+    swal({
+      title: 'Perfecto!',
+      text: 'Vehículo agregado con exito',
+      type: 'success',
+      confirmButtonText: 'Aceptar'
+    });
   }
 
   registrarVictima() {
