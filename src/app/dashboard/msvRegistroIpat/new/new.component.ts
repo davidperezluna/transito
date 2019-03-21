@@ -1577,12 +1577,25 @@ export class NewComponent implements OnInit {
             this.msvRegistroIpat.apellidosVictima = response.data.primerApellido + ' ' + response.data.segundoApellido;
             //this.msvRegistroIpat.nacionalidadVictima = response.data.nacionalidad;
             this.msvRegistroIpat.fechaNacimientoVictima = response.data.fechaNacimiento;
-            this.sexoVictimaSelected = [response.data.ciudadano.genero.id];
-            this.msvRegistroIpat.direccionResidenciaVictima = response.data.ciudadano.direccion;
-            this.ciudadResidenciaVictimaSelected = [response.data.ciudadano.municipioResidencia.id];
+            this.sexoVictimaSelected = [response.data.genero.id];
+            this.msvRegistroIpat.direccionResidenciaVictima = response.data.direccionPersonal;
+            this.ciudadResidenciaVictimaSelected = [response.data.municipioResidencia.id];
             this.msvRegistroIpat.telefonoVictima = response.data.telefono;
-            //swal.close();
             if (this.vehiculoIpat) {
+              swal({
+                title: 'Cargando Lista de vehículos asociados con el accidente!',
+                text: 'Solo tardará unos segundos, por favor espere.',
+                timer: 1500,
+                onOpen: () => {
+                  swal.showLoading();
+                }
+              }).then((result) => {
+                if (
+                  // Read more about handling dismissals
+                  result.dismiss === swal.DismissReason.timer
+                ) {
+                }
+              });
               let i = 0;
               this.vehiculos.forEach(element => {
                 i += 1;
@@ -1592,7 +1605,8 @@ export class NewComponent implements OnInit {
                 };
                 this.vehiculosIpat.push(obj);
               });
-            } else {
+              console.log(this.vehiculosIpat);
+            }/* } else {
               let obj = {
                 value: this.msvRegistroIpat.placa,
                 label: this.msvRegistroIpat.placa,
@@ -1600,7 +1614,7 @@ export class NewComponent implements OnInit {
               };
               this.vehiculosIpat.push(obj);
             }
-            console.log(this.vehiculosIpat);
+            console.log(this.vehiculosIpat); */
           } else {
             swal({
               title: 'Alerta!',
@@ -1974,6 +1988,7 @@ export class NewComponent implements OnInit {
                   'matriculado en': this.matriculadoEnSelected,
                 };
                 this.vehiculos.push(dataVehiculos);
+                this.vehiculoIpat = true;
               } else {
                 swal({
                   title: 'Alerta!',

@@ -89,7 +89,7 @@ export class SvCfgGravedadAccidenteComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteCfgGravedad(id: any) {
+  onDelete(id: any) {
 
     swal({
       title: '¿Estás seguro?',
@@ -107,7 +107,7 @@ export class SvCfgGravedadAccidenteComponent implements OnInit {
           response => {
             swal({
               title: 'Eliminado!',
-              text: 'Registro eliminado correctamente.',
+              text: response.message,
               type: 'success',
               confirmButtonColor: '#15d4be',
             })
@@ -129,7 +129,7 @@ export class SvCfgGravedadAccidenteComponent implements OnInit {
     })
   }
 
-  editCfgGravedad(cfgGravedad: any) {
+  onEdit(cfgGravedad: any) {
     this.cfgGravedad = cfgGravedad;
     this.formEdit = true;
     this.formIndex = false;

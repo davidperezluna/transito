@@ -5,9 +5,9 @@
       <div class="card">
         <div class="card-header">
           <h5 class="card-title">
-            <b class="text-uppercase">Configuración</b>
+            <b class="text-uppercase">Gravedad Accidente</b>
             <br>
-            <small>Gravedad</small>
+            <small>Lista de gravedades de accidente</small>
             <div class="btn-group pull-right">
               <button (click)="onNew()" class="btn btn-default">
                 <i class="fa fa-plus"></i>
@@ -30,10 +30,10 @@
                 <td>{{cfgGravedad.id}}</td>
                 <td>{{cfgGravedad.nombre}}</td>
                 <td>
-                  <button (click)="editCfgGravedad(cfgGravedad)" class="btn btn-xs btn-info" type="button">Editar
+                  <button (click)="onEdit(cfgGravedad)" class="btn btn-xs btn-info" type="button">Editar
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button (click)="deleteCfgGravedad(cfgGravedad)" class="btn btn-xs btn-danger" type="button">Eliminar
+                  <button (click)="onDelete(cfgGravedad.id)" class="btn btn-xs btn-danger" type="button">Eliminar
                     <i class="fa fa-trash"></i>
                   </button>
 
