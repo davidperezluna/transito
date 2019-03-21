@@ -36,21 +36,61 @@
                                 <div class="col-xs-12 col-lg-12 form-group" >
                                     <label>Observación certificado de tradición</label>
                                     <textarea class="form-control" [(ngModel)]="datos.observacion" name="observacion" placeholder="Observación"></textarea>
-                                </div>      
-                            </div>        
+                                </div>
+                            </div>
+                            <h6 class="text-center">
+                                <b class="text-uppercase">Buscar ciudadano que recibe</b>
+                            </h6>
+                            <!-- Ciudadano -->
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-6">
+                                    <label>Identificación</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
+                                        <span class="input-group-btn">
+                                            <button (click)="onSearchCiudadano()" class="btn btn-default" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xs-12 col-lg-12" *ngIf="ciudadano">
+                                    <table class="table table-bordered table-striped" id="dataTables-example">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <b>Tipo de identificación: </b>
+                                                    <br> {{ ciudadano.tipoIdentificacion.nombre }}
+                                                    <br>
+                                                    <b>Numero de identificación: </b>
+                                                    <br> {{ ciudadano.identificacion }}
+                                                </td>
+                                                <td>
+                                                    <b>Nombres y apellidos: </b>
+                                                    <br> {{ ciudadano.primerNombre }} {{ ciudadano.segundoNombre }} {{ ciudadano.primerApellido }} {{ ciudadano.segundoApellido
+                                                    }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-footer">
-                <button (click)="onEnviar()" class="btn btn-success"  [disabled]="formTramite.invalid">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
-                <a href="{{ apiUrl }}/{{ vehiculo.id }}/TRADICIONAL/pdf/certificadotradicion" class="btn btn-success" target="_blank">
-                    <i class="fa fa-file-pdf-o"></i>
-                    Imprimir
-                </a>
+                <div class="btn-group">
+                    <button *ngIf="!entregado && ciudadano" (click)="onEnviar()" class="btn btn-primary"  [disabled]="formTramite.invalid">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <a *ngIf="entregado" href="{{ apiUrl }}/{{ vehiculo.id }}/TRADICIONAL/pdf/certificadotradicion" class="btn btn-success" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i>
+                        Imprimir
+                    </a>
+                </div>
             </div>
         </div>
     </div>

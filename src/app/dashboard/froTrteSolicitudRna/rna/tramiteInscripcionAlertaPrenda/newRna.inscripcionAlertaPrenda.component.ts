@@ -10,6 +10,7 @@ import { UserCiudadanoService } from '../../../../services/userCiudadano.service
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 import { Router } from "@angular/router";
 import { DatePipe  } from '@angular/common';
@@ -83,6 +84,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'gradoAlerta': null,
         'vehiculoPlaca': null,
         'fechaExpedicion':null,
+        'idFuncionario': null,
         'idTipoAlerta': null,
         'idEntidadJudicial':null,
         'idTramiteFactura': null,
@@ -105,6 +107,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _UserCiudadanoService: UserCiudadanoService,
         private _EmpresaService: UserEmpresaService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
         private router: Router,
     ) { }
@@ -112,18 +115,139 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     ngOnInit() {
         let token = this._LoginService.getToken();
 
-        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    this.tramiteFactura = response.data;
+        let identity = this._LoginService.getIdentity();
 
-                    swal.close();
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.datos.idFuncionario = response.data.id;
+                    this.autorizado = true;
+
+                    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.tramiteFactura = response.data;
+
+                                swal.close();
+                            } else {
+                                this.tramiteFactura = null;
+
+                                swal({
+                                    title: 'Error!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+
+                    if (this.tramiteFactura.realizado) {
+                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.tramiteSolicitud = response.data;
+                                } else {
+                                    this.tramiteSolicitud = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    } else {
+                        this.date = new Date();
+                        var datePiper = new DatePipe(this.date);
+                        this.datos.fechaExpedicion = datePiper.transform(this.date, 'yyyy-MM-dd');
+
+                        this._EntidadJudicialService.select().subscribe(
+                            response => {
+                                this.entidadJudiciales = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+
+                        this._TipoIdentificacionService.select().subscribe(
+                            response => {
+                                this.tiposIdentificacion = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+
+                        this._TipoAlertaService.select().subscribe(
+                            response => {
+                                this.tiposAlerta = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        );
+
+                        this._VehiculoAcreedorService.getAcreedor().subscribe(
+                            response => {
+                                if (response.status == 'success') {
+                                    this.vehiculosAcreedor = response.data;
+
+                                    // this.acreedorEncontrado = 2;
+                                    // this.acreedorNew = false;
+                                } else {
+                                    this.acreedorEncontrado = 3;
+                                    this.acreedorNew = true;
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    }
                 } else {
-                    this.tramiteFactura = null;
+                    this.autorizado = false;
 
                     swal({
                         title: 'Error!',
-                        text: response.message,
+                        text: 'Usted no tiene permisos para realizar tramites',
                         type: 'error',
                         confirmButtonText: 'Aceptar'
                     });
@@ -132,105 +256,11 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
             }
         );
-
-        if (this.tramiteFactura.realizado) {
-            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-                response => {
-                    if (response.code == 200) {
-                        this.tramiteSolicitud = response.data;
-                    } else {
-                        this.tramiteSolicitud = null;
-
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                }
-            );
-        } else {
-            this.date = new Date();
-            var datePiper = new DatePipe(this.date);
-            this.datos.fechaExpedicion = datePiper.transform(this.date, 'yyyy-MM-dd');
-
-            this._EntidadJudicialService.select().subscribe(
-                response => {
-                    this.entidadJudiciales = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            );
-
-            this._TipoIdentificacionService.select().subscribe(
-                response => {
-                    this.tiposIdentificacion = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            );
-
-            this._TipoAlertaService.select().subscribe(
-                response => {
-                    this.tiposAlerta = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            );
-
-            this._VehiculoAcreedorService.getAcreedor().subscribe(
-                response => {
-                    if (response.status == 'success') {
-                        this.vehiculosAcreedor = response.data;
-
-                        // this.acreedorEncontrado = 2;
-                        // this.acreedorNew = false;
-                    } else {
-                        this.acreedorEncontrado = 3;
-                        this.acreedorNew = true;
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                }
-            ); 
-        }
     }    
     
     onEnviar() {

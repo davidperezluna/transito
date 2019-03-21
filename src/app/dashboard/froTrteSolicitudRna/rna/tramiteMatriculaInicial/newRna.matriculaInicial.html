@@ -38,7 +38,7 @@
                             <div class="col-xs-12 col-lg-12">
                                 <div *ngIf="tipoPropiedadSelected">
                                     <div class="row">                                       
-                                        <div class="col-xs-8 col-lg-6">
+                                        <div class="col-xs-12 col-lg-6">
                                             <label>Tipo de identificación
                                                 <span class="text-danger">*</span>
                                             </label>
@@ -46,7 +46,7 @@
                                             </ng-select>
                                         </div>
                                         
-                                        <div class="col-xs-8 col-lg-6" *ngIf="tipoIdentificacionSelected && tipoIdentificacionSelected != 4">
+                                        <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelected && tipoIdentificacionSelected != 4">
                                             <label>Identificación</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion" required />
@@ -59,7 +59,7 @@
                                         </div>
 
                                         <!-- Ciudadano -->
-                                        <div class="container row" *ngIf="ciudadano">
+                                        <div class="row" *ngIf="ciudadano">
                                             <div class="col-xs-12 col-lg-12">
                                                 <div class="custom-control custom-checkbox">
                                                     <input [(ngModel)]="datos.solidario" name="solidario" type="checkbox" class="custom-control-input" id="solidario" checked="">

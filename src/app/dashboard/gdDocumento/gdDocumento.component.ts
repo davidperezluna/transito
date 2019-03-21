@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GdDocumentoService } from '../../services/gdDocumento.service';
-import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { LoginService } from '../../services/login.service';
 import { GdDocumento } from './gdDocumento.modelo';
 import swal from 'sweetalert2';
@@ -47,7 +47,7 @@ export class GdDocumentoComponent implements OnInit {
 
   constructor(
     private _DocumentoService: GdDocumentoService,
-    private _FuncionarioService: MpersonalFuncionarioService,
+    private _FuncionarioService: PnalFuncionarioService,
 		private _loginService: LoginService,
     ){}
     

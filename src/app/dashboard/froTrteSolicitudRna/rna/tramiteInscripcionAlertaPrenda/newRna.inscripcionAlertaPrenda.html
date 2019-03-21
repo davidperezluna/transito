@@ -18,15 +18,14 @@
         <div class="card">
             <div class="card-body">
                 <b class="text-primary">Registrar nueva Alerta</b>
+                <br>
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 <div class="container">
                     <div class="form-group">
                         <div class="row"><!-- .row -->
                             <div class="col-xs-12 col-lg-12">
-                                <label>Alertas disponibles
-                                    <span class="text-danger">*</span>
-                                </label>
+                                <label>Tipos de alerta  <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="tiposAlerta" [(ngModel)]="datos.idTipoAlerta" name="idTipoAlerta" required></ng-select>
                             </div>
 
@@ -42,7 +41,7 @@
                             
                             <div class="col-xs-12 col-lg-12">
                                 <label>Entidad que emite
-                                    <span class="text-danger">*</span>
+                                    <b class="text-danger">*</b>
                                 </label>
                                 <ng-select [multiple]="false" [options]="entidadJudiciales" [(ngModel)]="datos.idEntidadJudicial" required name="idEntidadJudicial">
                                 </ng-select>
@@ -50,22 +49,17 @@
                         </div><!-- .row -->
 
                         <!-- select grados alerta -->
-                        <div class="row" *ngIf="cfgTipoAlertaSelected <= 6 || cfgTipoAlertaSelected >= 1 && acreedor == 'false'"><!-- .row -->
+                        <div class="row" *ngIf="datos.idTipoAlerta <= 6 || datos.idTipoAlerta >= 1 && acreedor == 'false'"><!-- .row -->
                             <div class="col-xs-12 col-lg-12">
-                                <label>Grados alerta
-                                    <span class="text-danger">*</span>
-                                </label>
+                                <label>Grados de alerta <b class="text-danger">*</b></label>
                                 <ng-select [multiple]="false" [options]="gradosAlerta" [(ngModel)]="datos.gradoAlerta" required name="gradoAlerta">
                                 </ng-select>
                             </div>
                         
                             <!--Buscardor Identificador/Nit -->
                             <div class="col-xs-8 col-lg-6">
-                                <label>Tipo de identificación
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <ng-select [multiple]="false" (ngModelChange)="changedtipoIdentificacion($event)" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected"
-                                    required name="idTipoIdentificacion">
+                                <label>Tipo de identificación<b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" (ngModelChange)="changedtipoIdentificacion($event)" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="idTipoIdentificacion">
                                 </ng-select>
                             </div>
                         

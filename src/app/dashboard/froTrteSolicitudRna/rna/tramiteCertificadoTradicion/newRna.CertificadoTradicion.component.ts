@@ -21,17 +21,19 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     public errorMessage; 
     
     public autorizado: any = false;
-    public apiUrl = environment.apiUrl + 'financiero';
+    public apiUrl = environment.apiUrl + 'financiero/frotrtesolicitud';
     public tramiteSolicitud: any = null;
     public identificacion: any;
  
     public ciudadano:any = null;
+    public entregado:any = false;
    
     public datos = {
         'numeroRunt': null,
         'observacion': null,                  
-        'certificadoEntregado': false,
         'campos': null,
+        'idFuncionario': null,
+        'idCiudadano': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
     };
@@ -53,7 +55,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.vehiculo.idFuncionario = response.data.id;
+                    this.datos.idFuncionario = response.data.id;
                     this.autorizado = true;
 
                     this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
@@ -130,13 +132,66 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         );        
     }
 
-    onEnviar() {
+    onSearchCiudadano() {
+        swal({
+            title: 'Buscando ciudadano!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         let token = this._LoginService.getToken();
-      
+
+        let datos = {
+            'identificacion': this.identificacion,
+            'idTipoIdentificacion': 1,
+        }
+
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    if (response.data.ciudadano) {
+                        this.ciudadano = response.data.ciudadano;
+
+                        swal({
+                            title: 'Perfecto!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                } else {
+                    this.ciudadano = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
+                }
+            }
+        );
+    }
+
+    onEnviar() {      
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.idCiudadano = this.ciudadano.id;
 
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero + 
+                    "<b>No. solicitud RUNT: </b>" + this.datos.numeroRunt +
+                    "<b>Ciudadano que recibe: </b>" + this.ciudadano.primerNombre + " " + this.ciudadano.primerApellido;
+
+        this.entregado = true;
 
         this.readyTramite.emit({'foraneas': this.datos, 'resumen': resumen});
     }

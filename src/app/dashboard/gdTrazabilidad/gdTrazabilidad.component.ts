@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MpersonalFuncionarioService } from '../../services/mpersonalFuncionario.service';
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { GdDocumentoService } from '../../services/gdDocumento.service';
 import { GdTrazabilidadService } from '../../services/gdTrazabilidad.service';
 import { LoginService } from '../../services/login.service';
@@ -30,7 +30,7 @@ export class GdTrazabilidadComponent implements OnInit {
   public docsUrl = environment.docsUrl;
 
   constructor(
-    private _FuncionarioService: MpersonalFuncionarioService,
+    private _FuncionarioService: PnalFuncionarioService,
     private _DocumentoService: GdDocumentoService,
     private _TrazabilidadService: GdTrazabilidadService,
 		private _loginService: LoginService,
