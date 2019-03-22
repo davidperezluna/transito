@@ -105,7 +105,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         private _BancoService: BancoService,
         private _VehiculoAcreedorService: VehiculoAcreedorService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
-        private _UserCiudadanoService: UserCiudadanoService,
+        private _CiudadanoService: UserCiudadanoService,
         private _EmpresaService: UserEmpresaService,
         private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
@@ -374,81 +374,131 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
             });
     }
 
-    onKeyCiudadano() {
+    onSearchCiudadano() {
+        swal({
+            title: 'Buscando ciudadano!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+        
         let token = this._LoginService.getToken();
-        let identificacion = {
-            'numeroIdentificacion': this.identificacion,
-        };
-        this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+
+        let datos = {
+            'identificacion': this.identificacion,
+            'idTipoIdentificacion': 1,
+        }
+        
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    this.ciudadano = response.data;
-                    this.ciudadanoEncontrado = 2;
-                    this.ciudadanoNew = false;
+                if (response.code == 200) {
+                    if (response.data.ciudadano) {
+                        this.ciudadano = response.data.ciudadano;
+                    }
                 } else {
-                    this.ciudadanoEncontrado = 3;
-                    this.ciudadanoNew = true;
+                    this.ciudadano = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
-
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
             });
     }
 
-    onKeyApoderado() {
+    onSearchApoderado() {
+        swal({
+            title: 'Buscando apoderado!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
         let token = this._LoginService.getToken();
-        let identificacion = {
-            'numeroIdentificacion': this.identificacionAcreedor,
-        };
-        this._UserCiudadanoService.searchByIdentificacion(token, identificacion).subscribe(
+
+        let datos = {
+            'identificacion': this.identificacionAcreedor,
+            'idTipoIdentificacion': 1,
+        }
+
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    this.acreedorSelected = response.data;
-                    this.acreedorEncontrado = 2;
-                    // this.ciudadanoNew = false;
+                if (response.code == 200) {
+                    if (response.data.ciudadano) {
+                        this.acreedorSelected = response.data.ciudadano;
+                    }
                 } else {
-                    this.acreedorEncontrado = 3;
-                    // this.ciudadanoNew = true;
+                    this.acreedorSelected = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
-
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
             });
     }
 
     onKeyEmpresa() {
-        let token = this._LoginService.getToken();
-        let nit = {
-            'nit': this.nit,
-        };
+        swal({
+            title: 'Buscando apoderado!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
 
-        this._EmpresaService.showByNit(token, nit).subscribe(
+        let token = this._LoginService.getToken();
+
+        let datos = {
+            'identificacion': this.nit,
+            'idTipoIdentificacion': 4,
+        }
+
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    this.empresa = response.data;
-                    this.empresaEncontrada = 2;
+                if (response.code == 200) {
+                    if (response.data.empresa) {
+                        this.empresa = response.data.empresa;
+                    }
                 } else {
-                    this.empresaEncontrada = 3;
+                    this.empresa = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
                 error => {
                     this.errorMessage = <any>error;
-
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
-            });
+            }
+        );
     }
 
     goEmpresa() {
