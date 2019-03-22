@@ -473,7 +473,7 @@
                             <input class="form-control" type="number" min=0 [(ngModel)]="msvRegistroIpat.nitEmpresa"
                                 name="nitEmpresa">
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
+                        <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaPlaca == '1' && nacionalidadVehiculoSelected == 1">
                             <label>Matriculado en <strong class="text-danger">*</strong></label>
                             <ng-select [multiple]="false" [disabled]="vhlMatriculadoEn" [options]="municipios"
                                 [(ngModel)]="matriculadoEnSelected" required name="matriculadoEn">
@@ -528,7 +528,7 @@
                                 <div class="col-xs-12 col-lg-6" *ngIf="msvRegistroIpat.portaPlaca == '1'">
                                     <div class="custom-control custom-radio">
                                         <input id="radioTarjetaRegistroNo" name="TarjetaRegistro"
-                                            [(ngModel)]="msvRegistroIpat.portaTarjetaRegistro" value="1" type="radio"
+                                            [(ngModel)]="msvRegistroIpat.portaTarjetaRegistro" value="0" type="radio"
                                             id="customRadioTarjetaRegistro2" name="customRadioTarjetaRegistro"
                                             class="custom-control-input">
                                         <label class="custom-control-label" for="customRadioTarjetaRegistro2">No</label>
@@ -538,7 +538,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaTarjetaRegistro == '1'">
                             <label>No. Tarjeta de Registro</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvRegistroIpat.tarjetaRegistro"
+                            <input class="form-control" type="number" [(ngModel)]="msvRegistroIpat.tarjetaRegistro"
                                 name="tarjetaRegistro">
                         </div>
                         <div class="col-lg-6 col-md-6" *ngIf="msvRegistroIpat.portaTarjetaRegistro == '1'">
@@ -815,8 +815,7 @@
                         </div> -->
                         <div class="col-lg-6 col-md-6">
                             <label>Nacionalidad Conductor</label>
-                            <ng-select [multiple]="false" [options]="nacionalidades"
-                                [(ngModel)]="nacionalidadConductorSelected" name="nacionalidades">
+                            <ng-select [multiple]="false" [options]="nacionalidades" [(ngModel)]="nacionalidadConductorSelected" name="nacionalidades">
                             </ng-select>
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -852,7 +851,7 @@
                             <input class="form-control" type="text" [disabled]="usuario" [(ngModel)]="msvRegistroIpat.ciudadResidenciaConductor"
                                 name="ciudadResidenciaConductor" >
                         </div> -->
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-6 col-md-6" *ngIf="nacionalidadConductorSelected == 1">
                             <label>Ciudad residencia Conductor</label>
                             <ng-select [multiple]="false" [options]="municipios" [disabled]="cdnMunicipioConductor"
                                 [(ngModel)]="ciudadResidenciaConductorSelected" name="ciudadResidenciaConductor">
@@ -864,7 +863,7 @@
                                 [(ngModel)]="msvRegistroIpat.telefonoConductor" name="telefonoConductor">
                         </div>
                         <div class="col-lg-6 col-md-6"
-                            *ngIf="msvRegistroIpat.gravedad == 'CON HERIDOS' || msvRegistroIpat.gravedad == 'CON MUERTOS'">
+                            *ngIf="msvRegistroIpat.idGravedad == 2 || msvRegistroIpat.idGravedad == 3">
                             <label>¿Se practicó el examen?</label>
                             <div class="form-group row">
                                 <div class="col-xs-12 col-lg-6">
@@ -1382,7 +1381,7 @@
                                 [(ngModel)]="msvRegistroIpat.direccionResidenciaVictima"
                                 name="direccionResidenciaVictima">
                         </div>
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-6 col-md-6" *ngIf="nacionalidadVictimaSelected == 1">
                             <label>Ciudad residencia victima</label>
                             <ng-select [multiple]="false" [options]="municipios" [disabled]="vtmMunicipioVictima"
                                 [(ngModel)]="ciudadResidenciaVictimaSelected" name="ciudadResidenciaVictima">
@@ -1574,14 +1573,12 @@
                                 [(ngModel)]="msvRegistroIpat.descripcionLesionVictima" name="descripcionLesionVictima">
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <button (click)="registrarVictima()" *ngIf="!victimaEncontrada && consecutivo" class="btn btn-primary">Guardar
-                        Victima</button>
-                </div>
-                <div class="col-lg-6 col-md-6" *ngIf="victimaEncontrada && consecutivo">
-                    <button (click)="registrarVictimaEncontrada()" class="btn btn-success">Guardar
-                        Victima</button>
+                    <div class="col-lg-6 col-md-6"  *ngIf="!victimaEncontrada && consecutivo">
+                        <button (click)="registrarVictima()" class="btn btn-primary">Guardar Victima</button>
+                    </div>
+                    <div class="col-lg-6 col-md-6" *ngIf="victimaEncontrada && consecutivo">
+                        <button (click)="registrarVictimaEncontrada()" class="btn btn-success">Guardar Victima</button>
+                    </div>
                 </div>
             </div>
             <div class="card" *ngIf="consecutivo && msvRegistroIpat.idGravedad == 2 || msvRegistroIpat.idGravedad == 3">
