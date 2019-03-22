@@ -4,8 +4,6 @@ import { FroFacTramiteService } from '../../../../services/froFacTramite.service
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { VhloAcreedorService } from '../../../../services/vhloAcreedor.service';
 import { VhloCfgTipoAlertaService } from '../../../../services/vhloCfgTipoAlerta.service';
-import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
@@ -26,9 +24,9 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
     public errorMessage; 
     
     public autorizado: any = true;
+    public tramiteSolicitud: any;
     public tiposAlerta: any;
     public tiposIdentificacion: any;
-    public tramiteSolicitud: any;
 
     public ciudadano: any;
     public empresa: any;
@@ -74,8 +72,6 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
         private _VehiculoService: VhloVehiculoService,
         private _VehiculoAcreedorService: VhloAcreedorService,
         private _TipoAlertaService: VhloCfgTipoAlertaService,
-        private _CiudadanoService: UserCiudadanoService,
-        private _EmpresaService: UserEmpresaService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,

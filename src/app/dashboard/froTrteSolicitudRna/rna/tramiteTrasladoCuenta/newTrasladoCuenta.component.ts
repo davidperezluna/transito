@@ -155,7 +155,7 @@ constructor(
           response = response; 
           if(response.status == 'success'){
             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-              '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismosTransito.id +
+              '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismoTransito.nombre +
               '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransito;
 
             this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {

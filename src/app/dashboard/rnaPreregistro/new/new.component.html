@@ -150,7 +150,7 @@
                     </div><!-- .row -->
 
                     <div class="row">
-                        <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION TEMPORAL'">
+                        <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION'">
                             <label>Tipo de propiedad
                                 <span class="text-danger">
                                     <b class="text-danger">*</b>
@@ -162,7 +162,7 @@
                     </div>
 
                     <!-- tipo prioridad propio -->
-                    <div class="row" *ngIf="datos.tipoPropiedad && (vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION TEMPORAL')">
+                    <div class="row" *ngIf="datos.tipoPropiedad && (vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION')">
                         <!--Cuando es de tipo propio -->
                         <div class="col-xs-12 col-lg-12">
                             <br>
