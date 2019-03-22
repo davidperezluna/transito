@@ -3,6 +3,7 @@ import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.s
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
 import { VehiculoService } from '../../../../services/vehiculo.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -43,6 +44,7 @@ export class NewRnaCambioGasComponent implements OnInit {
         'presion': null,
         'numeroRunt': null,
         'campos': null,
+        'idFuncionario': null,
         'idVehiculo': null,
         'idCombustibleCambio': null,
         'idTramiteFactura': null,
@@ -54,34 +56,89 @@ export class NewRnaCambioGasComponent implements OnInit {
         private _TramiteFacturaService: FroFacTramiteService,
         private _VehiculoService: VehiculoService,
         private _CombustibleService: VhloCfgCombustibleService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
     ) { }
   
     ngOnInit() {
-        this.datos.placa = this.vehiculo.placa.numero;
-        this.datos.linea = this.vehiculo.linea.nombre;
-        this.datos.marca = this.vehiculo.linea.marca.nombre;
-        this.datos.modelo = this.vehiculo.modelo;
-        this.datos.servicio = this.vehiculo.servicio.nombre;
-        this.datos.serie = this.vehiculo.serie;
-        this.datos.motor = this.vehiculo.motor;
-        this.datos.chasis = this.vehiculo.chasis;
-        this.datos.vin = this.vehiculo.vin;
-
         let token = this._LoginService.getToken();
+        
+        let identity = this._LoginService.getIdentity();
 
-        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
-                if (response.code == 200) {
-                    this.tramiteFactura = response.data;
+                if (response.status == 'success') {
+                    this.datos.idFuncionario = response.data.id;
+                    this.autorizado = true;
 
-                    swal.close();
+                    this.datos.placa = this.vehiculo.placa.numero;
+                    this.datos.linea = this.vehiculo.linea.nombre;
+                    this.datos.marca = this.vehiculo.linea.marca.nombre;
+                    this.datos.modelo = this.vehiculo.modelo;
+                    this.datos.servicio = this.vehiculo.servicio.nombre;
+                    this.datos.serie = this.vehiculo.serie;
+                    this.datos.motor = this.vehiculo.motor;
+                    this.datos.chasis = this.vehiculo.chasis;
+                    this.datos.vin = this.vehiculo.vin;
+
+
+                    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.tramiteFactura = response.data;
+
+                                swal.close();
+                            } else {
+                                this.tramiteFactura = null;
+
+                                swal({
+                                    title: 'Error!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+
+                    if (this.tramiteFactura.realizado) {
+                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.tramiteSolicitud = response.data;
+                                } else {
+                                    this.tramiteSolicitud = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    }
                 } else {
-                    this.tramiteFactura = null;
+                    this.autorizado = false;
 
                     swal({
                         title: 'Error!',
-                        text: response.message,
+                        text: 'Usted no tiene permisos para realizar tramites',
                         type: 'error',
                         confirmButtonText: 'Aceptar'
                     });
@@ -90,37 +147,11 @@ export class NewRnaCambioGasComponent implements OnInit {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
             }
         );
-
-        if (this.tramiteFactura.realizado) {
-            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-                response => {
-                    if (response.code == 200) {
-                        this.tramiteSolicitud = response.data;
-                    } else {
-                        this.tramiteSolicitud = null;
-
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                }
-            );
-        }
     }
     
    

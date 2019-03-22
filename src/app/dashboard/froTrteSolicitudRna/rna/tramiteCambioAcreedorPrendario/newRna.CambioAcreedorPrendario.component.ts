@@ -50,11 +50,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     public datos = {
         'acreedoresOld': [],
         'acreedoresNew': [],
-        'idEmpresaNew': null,
         'idFuncionario': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
-
     };
 
     public tiposIdentificacion: any;
@@ -66,7 +64,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
         private _CfgTipoAlertaService: CfgTipoAlertaService,
-        private _VehiculoAcreedorService: VhloAcreedorService,
+        private _AcreedorService: VhloAcreedorService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
         private _EmpresaService: UserEmpresaService,
@@ -165,7 +163,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                             }
                         );
 
-                        /*this._VehiculoAcreedorService.index().subscribe(
+                        /*this._AcreedorService.index().subscribe(
                             response => {
                                 if (response.status == 'success') {
                                     this.vehiculosAcreedor = response.data;
@@ -227,7 +225,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
 
-                        this._VehiculoAcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.ciudadano.id, 'tipo': 'CIUDADANO' },token).subscribe(
+                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.ciudadano.id, 'tipo': 'CIUDADANO' },token).subscribe(
                             response => {
                                 if (response.code == 200) {
                                     this.acreedor = response.data;
@@ -308,7 +306,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                     if (response.data.empresa) {
                         this.empresa = response.data.empresa;
 
-                        this._VehiculoAcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
+                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
                             response => {
                                 if (response.status == 'success') {
                                     this.acreedor = response.data;
@@ -486,7 +484,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
 
-        this._VehiculoAcreedorService.update(this.datos, token).subscribe(
+        this._AcreedorService.update(this.datos, token).subscribe(
             response => {
                 response = response;
                 if (response.code == 200) {

@@ -5,7 +5,6 @@ import { VhloCfgTipoAlertaService } from '../../../../services/vhloCfgTipoAlerta
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { VhloAcreedorService } from '../../../../services/vhloAcreedor.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
@@ -86,7 +85,6 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         private _VehiculoAcreedorService: VhloAcreedorService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
-        private _EmpresaService: UserEmpresaService,
         private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
         private router: Router,
@@ -247,6 +245,18 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                             response => {
                                 if (response.code == 200) {
                                     this.tipoAlertaSelected = response.data;
+
+                                    this.datos.acreedores.push(
+                                        {
+                                            'id': this.ciudadano.id,
+                                            'identificacion': this.ciudadano.identificacion,
+                                            'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre,
+                                            'gradoAlerta': this.datos.gradoAlerta,
+                                            'idTipoAlerta': this.datos.idTipoAlerta,
+                                            'tipoAlerta': this.tipoAlertaSelected.nombre,
+                                            'tipo': 'CIUDADANO'
+                                        }
+                                    );
                                 }else{
                                     this.tipoAlertaSelected = null;
                                     
@@ -265,18 +275,6 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                                     console.log(this.errorMessage);
                                     alert("Error en la petición");
                                 }
-                            }
-                        );
-
-                        this.datos.acreedores.push(
-                            {
-                                'id': this.ciudadano.id,
-                                'identificacion': this.ciudadano.identificacion,
-                                'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre,
-                                'gradoAlerta': this.datos.gradoAlerta,
-                                'idTipoAlerta': this.datos.idTipoAlerta,
-                                'tipoAlerta': this.tipoAlertaSelected.nombre,
-                                'tipo': 'CIUDADANO'
                             }
                         );
                     }
@@ -328,6 +326,18 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                             response => {
                                 if (response.code == 200) {
                                     this.tipoAlertaSelected = response.data;
+
+                                    this.datos.acreedores.push(
+                                        {
+                                            'id': this.empresa.id,
+                                            'identificacion': this.empresa.nit,
+                                            'nombre': this.empresa.nombre,
+                                            'gradoAlerta': this.datos.gradoAlerta,
+                                            'idTipoAlerta': this.datos.idTipoAlerta,
+                                            'tipoAlerta': this.tipoAlertaSelected.nombre,
+                                            'tipo': 'EMPRESA'
+                                        }
+                                    );
                                 } else {
                                     this.tipoAlertaSelected = null;
 
@@ -346,18 +356,6 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
                                     console.log(this.errorMessage);
                                     alert("Error en la petición");
                                 }
-                            }
-                        );
-
-                        this.datos.acreedores.push(
-                            {
-                                'id': this.empresa.id,
-                                'identificacion': this.empresa.nit,
-                                'nombre': this.empresa.nombre,
-                                'gradoAlerta': this.datos.gradoAlerta,
-                                'idTipoAlerta': this.datos.idTipoAlerta,
-                                'tipoAlerta': this.tipoAlertaSelected.nombre,
-                                'tipo': 'EMPRESA'
                             }
                         );
                     }
