@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
-import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
@@ -47,7 +47,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         private _FuncionarioService: PnalFuncionarioService,
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
-        private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
+        private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
         private _LicenciaConduccionService: RncLicenciaConduccionService,
     ) { }
 

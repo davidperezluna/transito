@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MsvCaracterizacion } from '../msvCaracterizacion.modelo';
 import { MsvCaracterizacionService } from '../../../services/msvCaracterizacion.service';
 import { CfgMunicipioService } from "../../../services/cfgMunicipio.service";
-import { CfgLicenciaConduccionCategoriaService } from "../../../services/cfgLicenciaConduccionCategoria.service";
+import { UserLcCfgCategoriaService } from "../../../services/userLcCfgCategoria.service";
 import { UserCfgGeneroService } from "../../../services/userCfgGenero.service";
 import { LoginService } from '../../../services/login.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
@@ -36,7 +36,7 @@ export class NewComponent implements OnInit {
         private _MsvCaracterizacionService: MsvCaracterizacionService,
         private _LoginService: LoginService,
         private _MunicipioService: CfgMunicipioService,
-        private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
+        private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
         private _GeneroService: UserCfgGeneroService,
 
     ) { }
