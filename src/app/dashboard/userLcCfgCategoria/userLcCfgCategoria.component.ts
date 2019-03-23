@@ -21,7 +21,7 @@ export class UserLcCfgCategoriaComponent implements OnInit {
   public categoria: UserLcCfgCategoria;
 
   constructor(
-    private _TipoContratoService: UserLcCfgCategoriaService,
+    private _CategoriaService: UserLcCfgCategoriaService,
 		private _loginService: LoginService,
     ){}
     
@@ -41,7 +41,7 @@ export class UserLcCfgCategoriaComponent implements OnInit {
       }
     });
     
-    this._TipoContratoService.index().subscribe(
+    this._CategoriaService.index().subscribe(
 				response => {
           this.categorias = response.data;
           let timeoutId = setTimeout(() => {  
@@ -89,7 +89,8 @@ export class UserLcCfgCategoriaComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  delete(id:any){
+  
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -102,7 +103,7 @@ export class UserLcCfgCategoriaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TipoContratoService.delete(token,id).subscribe(
+        this._CategoriaService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -129,7 +130,7 @@ export class UserLcCfgCategoriaComponent implements OnInit {
     })
   }
 
-  edit(categoria:any){
+  onEdit(categoria:any){
     this.categoria = categoria;
     this.formEdit = true;
     this.formIndex = false;

@@ -1365,14 +1365,14 @@ export class NewComponent implements OnInit {
           if (response.status == 'success') {
             this.vehiculoEncontrado = true;
             //this.vhl = true;
-            if (response.data.nacionalidad.id != null) {
+            if (response.data.nacionalidad != null) {
               this.vhlNacionalidad = true;
               this.nacionalidadVehiculoSelected = [response.data.nacionalidad.id];
             } else {
               this.vhlNacionalidad = false;
               this.nacionalidadVehiculoSelected = [0];
             }
-            if (response.data.linea.marca.id != null) {
+            if (response.data.linea.marca != null) {
               this.vhlMarca = true;
               this.marcaSelected = [response.data.linea.marca.id];
               this.lineaSelected = [response.data.linea.id];
@@ -1512,10 +1512,10 @@ export class NewComponent implements OnInit {
           if (response.status == 'success') {
             this.licencia = true;
             this.msvRegistroIpat.categoriaLicenciaConduccion = response.data.categoria.nombre;
+            this.msvRegistroIpat.restriccionConductor = response.data.restriccion;
             this.msvRegistroIpat.fechaExpedicionLicenciaConduccion = response.data.fechaExpedicion;
             this.msvRegistroIpat.fechaVencimientoLicenciaConduccion = response.data.fechaVencimiento;
-            this.msvRegistroIpat.organismoTransito = response.data.sedeOperativa.nombre;
-            //swal.close();
+            this.msvRegistroIpat.organismoTransito = response.data.organismoTransito.divipo;
           } else {
             swal({
               title: 'Alerta!',

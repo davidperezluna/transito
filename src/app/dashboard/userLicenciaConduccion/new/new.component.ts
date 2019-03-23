@@ -6,7 +6,6 @@ import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTrans
 import { UserLcCfgCategoriaService } from '../../../services/userLcCfgCategoria.service';
 import { VhloCfgClaseService } from '../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../services/vhloCfgServicio.service';
-import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { CfgPaisService } from '../../../services/cfgPais.service';
 import { LoginService } from '../../../services/login.service';
@@ -26,7 +25,6 @@ export class NewComponent implements OnInit {
     public categoriasLicenciaConduccion: any;
     public clases: any;
     public servicios: any;
-    public facturasTramites: any;
     public ciudadanos: any;
     public paises: any;
 
@@ -34,7 +32,6 @@ export class NewComponent implements OnInit {
     public categoriaLicenciaConduccionSelected: any;
     public claseSelected: any;
     public servicioSelected: any;
-    public facturaTramiteSelected: any;
     public ciudadanoSelected: any;
     public paisSelected: any;
 
@@ -45,7 +42,6 @@ export class NewComponent implements OnInit {
         private _CategoriaLicenciaCoduccionService: UserLcCfgCategoriaService,
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
-        private _FacturaTramiteService: FroFacTramiteService,
         private _CiudadanoService: UserCiudadanoService,
         private _PaisService: CfgPaisService,
     ) { }
@@ -105,19 +101,6 @@ export class NewComponent implements OnInit {
             }
         );
 
-/*         this._FacturaTramiteService.select().subscribe(
-            response => {
-                this.facturasTramites = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        ); */
-
         this._CiudadanoService.select().subscribe(
             response => {
                 this.ciudadanos = response;
@@ -155,7 +138,6 @@ export class NewComponent implements OnInit {
         this.licenciaConduccion.idCategoria = this.categoriaLicenciaConduccionSelected;
         this.licenciaConduccion.idClase = this.claseSelected;
         this.licenciaConduccion.idServicio = this.servicioSelected;
-        this.licenciaConduccion.idTramiteFactura = this.facturaTramiteSelected;
         this.licenciaConduccion.idCiudadano = this.ciudadanoSelected;
         this.licenciaConduccion.idPais = this.paisSelected;
 

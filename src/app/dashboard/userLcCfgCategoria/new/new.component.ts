@@ -12,10 +12,9 @@ export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 public categoria: UserLcCfgCategoria;
 public errorMessage;
-public respuesta;
 
 constructor(
-  private _TipoContratoService: UserLcCfgCategoriaService,
+  private _CategoriaService: UserLcCfgCategoriaService,
   private _loginService: LoginService,
   ){}
 
@@ -29,22 +28,20 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._TipoContratoService.register(this.categoria,token).subscribe(
+		this._CategoriaService.register(this.categoria,token).subscribe(
 			response => {
-        this.respuesta = response;
-
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: response.msj,
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: 'El categoria '+  +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -56,8 +53,6 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
 		}); 
   }
-
 }

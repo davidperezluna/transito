@@ -111,7 +111,7 @@ export class UserLicenciaConduccionComponent implements OnInit {
                     response => {
                         swal({
                             title: 'Eliminado!',
-                            text: 'Registro eliminado correctamente.',
+                            text: response.message,
                             type: 'success',
                             confirmButtonColor: '#15d4be',
                         })
