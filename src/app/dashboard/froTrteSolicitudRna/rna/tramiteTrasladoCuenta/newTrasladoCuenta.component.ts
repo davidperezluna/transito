@@ -30,9 +30,9 @@ export class NewTrasladoCuentaComponent implements OnInit {
     'numeroGuia': null,
     'nombreEmpresa': null,
     'campos': null,
+    'idFuncionario': null,
     'idOrganismoTransito': null,
     'idVehiculo': null,
-    'idFuncionario': null,
     'idTramiteFactura': null,
   };
 
@@ -54,7 +54,7 @@ constructor(
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       response => {
         if (response.status == 'success') {
-          this.vehiculo.idFuncionario = response.data.id;
+          this.datos.idFuncionario = response.data.id;
           this.autorizado = true;
 
           this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(

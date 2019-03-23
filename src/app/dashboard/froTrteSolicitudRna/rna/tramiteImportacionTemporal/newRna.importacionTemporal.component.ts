@@ -45,32 +45,15 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     public numeroCuotas: any;
 
     public tramiteRealizado: any;
-    /* public datos = {
-        'idTramiteFactura': null,
-        'idVehiculo': null,
-        'tramiteFormulario': null,
-        'fechaSolicitud': null,
-        'numeroIdentificacion': null,
-        'placa': null,
-        'marca': null,
-        'linea': null,
-        'color': null,
-        'modelo': null,
-        'pais': null,
-        'serie': null,
-        'motor': null,
-        'chasis': null,
-        'vin': null,
-        'numeroAceptacion': null,
-    }; */
+
     public datos = {
-        'idTramiteFactura': null,
-        'idVehiculo': null,
         'tramiteFormulario': null,
         'fechaSolicitud': null,
         'numeroAceptacion': null,
         'pais': null,
         'numeroIdentificacion': null,
+        'idVehiculo': null,
+        'idTramiteFactura': null,
     };
 
     public datos2 = {

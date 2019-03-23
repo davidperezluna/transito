@@ -58,6 +58,12 @@
                                         {{ vehiculo.clase?.nombre }}
                                     </td>
                                 </tr>
+                                <tr *ngIf="vehiculo.organismoTransito">
+                                    <td>
+                                        <b>Tipo</b>
+                                        {{ vehiculo.organismoTransito?.nombre }}
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
