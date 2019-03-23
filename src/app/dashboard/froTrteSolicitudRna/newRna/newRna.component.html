@@ -60,7 +60,8 @@
                                 </tr>
                                 <tr *ngIf="vehiculo.organismoTransito">
                                     <td>
-                                        <b>Tipo</b>
+                                        <b>Organismo transito</b>
+                                        <br>
                                         {{ vehiculo.organismoTransito?.nombre }}
                                     </td>
                                 </tr>
@@ -99,9 +100,9 @@
                                     <td>
                                         <div class="custom-control custom-radio">
                                             <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idSolicitante" value="{{ propietario.ciudadano.id }}"
-                                                type="radio" id="radio-{{ index }}" name="radio-{{ index }}"
+                                                type="radio" id="radio" name="radio"
                                                 class="custom-control-input">
-                                            <label class="custom-control-label" for="radio-{{ index }}">Solicitante</label>
+                                            <label class="custom-control-label" for="radio">Solicitante</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -303,7 +304,7 @@
                                                 
                                                 <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [idPropietario]='tramiteSolicitud.idSolicitante' [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
                                             
-                                                <appRna-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
+                                                <appRna-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idSolicitante' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
                                                 
                                                 <appRna-levantamiento-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 12" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-levantamiento-alerta-prenda>
                                                 

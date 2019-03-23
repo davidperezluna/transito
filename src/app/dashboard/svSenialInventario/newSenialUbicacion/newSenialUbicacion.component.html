@@ -48,7 +48,7 @@
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-4">
-                        <label>Cantidad <small>(Galones)</small> <strong class="text-danger">*</strong></label>
+                        <label>Cantidad <small *ngIf="datos.idTipoSenial == 1">(Galones)</small> <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
                     </div>
                     <div class="col-xs-12 col-lg-8" *ngIf="bodegas">

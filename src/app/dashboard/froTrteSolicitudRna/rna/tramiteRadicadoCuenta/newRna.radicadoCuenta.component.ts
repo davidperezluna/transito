@@ -137,6 +137,8 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
                 );
               }
             } else {
+              this.autorizado = false;
+              
               swal({
                 title: 'Error!',
                 text: 'El vehiculo no se registro para radicado de cuenta.',

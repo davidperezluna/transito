@@ -82,7 +82,7 @@
                                 </div>
                             </div>                        
                         
-                            <div class="col-xs-12 col-lg-12" *ngIf="acreedor">
+                            <div class="col-xs-12 col-lg-12" *ngIf="ciudadano || empresa">
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -96,22 +96,22 @@
                                             <td>
                                                 <b>Identificación:</b> 
                                                 <br>
-                                                {{ acreedor.ciudadano.identificacion }}
+                                                {{ ciudadano.identificacion }}
                                                 <br>
                                                 <b>Nombre:</b> 
                                                 <br>
-                                                {{ acreedor.ciudadano.primerNombre }} {{ acreedor.ciudadano.primerApellido }}
+                                                {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
                                             </td>
                                         </tr>
 
                                         <tr *ngIf="empresa">
                                             <td>
                                                 <b>Identificación:</b>
-                                                <br> {{ acreedor.empresa.nit }}
+                                                <br> {{ empresa.nit }}
                                                 <br>
                                                 <b>Nombre:</b>
                                                 <br> 
-                                                {{ acreedor.empresa.nombre }}
+                                                {{ empresa.nombre }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -122,60 +122,34 @@
                             <app-new-rna-ciudadano *ngIf="formCiudadano" [tipoIdentificacion]="tipoIdentificacionSelectedAcreedor" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
                         </div><!-- /.row -->
 
-                        <div class="row" *ngIf="ciudadano || empresa"><!-- .row -->
+                        <div class="row" *ngIf="propietario"><!-- .row -->
                             <div class="ol-xs-12 col-lg-12"><!-- .col -->
                                 <h6 class="text-center">
-                                    <b class="text-uppercase">Buscar propietario</b>
+                                    <b class="text-uppercase">Propietario seleccionado</b>
                                 </h6>
                             </div><!-- /.col -->
                         
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Tipo de identificación<b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacionPropietario" [(ngModel)]="tipoIdentificacionSelectedPropietario" name="idTipoIdentificacionPropietario" required>
-                                </ng-select>
-                            </div>
-                        
-                            <div class="col-xs-12 col-lg-6">
-                                <label *ngIf="tipoIdentificacionSelected != 4">Identificación</label>
-                                <label *ngIf="tipoIdentificacionSelected == 4">NIT</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" [(ngModel)]="identificacionPropietario" name="identificacionPropietario" required />
-                                    <span class="input-group-btn">
-                                        <button (click)="onSearchPropietario()" class="btn btn-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>                        
-                        
-                            <!--acreedores vehiculo -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="datos.propietarios.length > 0">
-                                <br>
+                            <div class="col-xs-12 col-lg-12">
                                 <table class="table table-bordered table-striped">
-                                    <br>
-                                    <thead>
-                                        <tr>
-                                            <th colspan="3" class="text-center">
-                                                <b class="text-uppercase">Prendarios a registrar</b>
-                                            </th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
-                                        <tr *ngFor="let propietario of datos.propietarios; let i = index">
-                                            <td>
-                                                <b>Identificación:</b> {{ propietario.identificacion }}
+                                        <tr>
+                                            <td  *ngIf="propietario.ciudadano">
+                                                <b>Identificación:</b> 
                                                 <br>
-                                                <b>Nombre:</b> {{ propietario.nombre }}
-                                            </td>
-                                            <td>
-                                                <b>Tipo alerta:</b> {{ propietario.tipoAlerta }}
+                                                {{ propietario.ciudadano.identificacion }}
                                                 <br>
-                                                <b>Grado:</b> {{ propietario.gradoAlerta }}
+                                                <b>Nombres y apellidos:</b> 
+                                                <br>
+                                                {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
                                             </td>
-                                            <td class="text-center">
-                                                <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
+                                            <td *ngIf="propietario.empresa">
+                                                <b>Identificación:</b>
+                                                <br> 
+                                                {{ propietario.empresa.nit }}
+                                                <br>
+                                                <b>Nombres y apellidos:</b>
+                                                <br> 
+                                                {{ propietario.empresa.nombre }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -185,7 +159,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer" *ngIf="datos.acreedores.length > 0">
+            <div class="card-footer" *ngIf="datos.propietarios.length > 0">
                 <button (click)="onEnviar()" class="btn btn-primary">
                     <i class="fa fa-save"></i>
                     Enviar

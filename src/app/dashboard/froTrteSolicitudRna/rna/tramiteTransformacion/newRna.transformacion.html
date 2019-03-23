@@ -14,7 +14,7 @@
 </div>
 
 <div class="row" *ngIf="!tramiteFactura.realizado && autorizado"><!-- .row -->
-    <div class="col-xs-12 col-lg-4"><!-- .col -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
         <div class="card">
             <div class="card-body"><!-- .card-body -->
                 <div class="form-group">
@@ -38,13 +38,13 @@
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-6">
                                         <label>Carrocerias disponibles <span class="text-danger">*</span></label>
                                         <ng-select [multiple]="false" [options]="carrocerias" [(ngModel)]="datos.idCarroceria" name="idCarroceria" required>
                                         </ng-select>
                                     </div>
                                    
-                                    <div class="col-xs-12 col-lg-12" *ngIf='datos.tipoTransformacion == 1'>
+                                    <div class="col-xs-12 col-lg-6" *ngIf='datos.tipoTransformacion == 1'>
                                         <label>Nro. ficha técnica de homologación <span class="text-danger">*</span></label>
                                         <input class="form-control" [(ngModel)]="datos.fichaTecnica" name="fichaTecnica" type="text" required />
                                     </div>
@@ -73,7 +73,7 @@
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-6">
                                         <label>Combustibles disponibles <span class="text-danger">*</span></label>
                                         <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="datos.idCombustible" name="idCombustible" required>
                                         </ng-select>
@@ -103,11 +103,11 @@
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-6">
                                         <label>Nuevo Modelo <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modelo" minlength="4" maxlength="4" required />
                                     </div>
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-6">
                                         <label>Descripción <span class="text-danger">*</span></label>
                                         <textarea class="form-control" [(ngModel)]="datos.decripcionModelo" rows="10" name="descripcionModelo" required></textarea>
                                     </div>
@@ -136,23 +136,23 @@
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-4">
                                         <label>Año de repotenciación <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
                                     </div>
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-4">
                                         <label>Número factura <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" [(ngModel)]="datos.numeroFactura" name="numeroFactura" required />
                                     </div>
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-4">
                                         <label>Fecha factura<span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" [(ngModel)]="datos.fechaFactura" name="fechaFactura" minlength="4" maxlength="4" required />
                                     </div>
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-6">
                                         <label>Nombre taller repotenciación <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" [(ngModel)]="datos.tallerRepotenciacion" name="tallerRepotenciacion" required />
                                     </div>
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-6">
                                         <label>Fecha repotenciación<span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" [(ngModel)]="datos.fechaRepotenciacion" name="fechaRepotenciacion" minlength="4" maxlength="4" required />
                                     </div>
@@ -181,7 +181,7 @@
                                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
+                                    <div class="col-xs-12 col-lg-6">
                                         <label>Año de repotenciación <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" [(ngModel)]="datos.modelo" name="modeloRepotenciacion" minlength="4" maxlength="4" required />
                                     </div>
