@@ -122,15 +122,15 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td *ngIf="acreedor.ciudadano">
-                                                <b>Identificación:</b> {{ acreedor.ciudadano.identificacion }}
+                                            <td *ngIf="propietario.ciudadano">
+                                                <b>Identificación:</b> {{ propietario.ciudadano.identificacion }}
                                                 <br>
-                                                <b>Nombre:</b> {{ acreedor.ciudadano.primerNombre }} {{ acreedor.ciudadano.primerApellido }}
+                                                <b>Nombre:</b> {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
                                             </td>
-                                            <td *ngIf="acreedor.empresa">
-                                                <b>NIT:</b> {{ acreedor.empresa.nit }}
+                                            <td *ngIf="propietario.empresa">
+                                                <b>NIT:</b> {{ propietario.empresa.nit }}
                                                 <br>
-                                                <b>Nombre:</b> {{ acreedor.empresa.nombre }}
+                                                <b>Nombre:</b> {{ propietario.empresa.nombre }}
                                             </td>
                                         </tr>
                                     </tbody>

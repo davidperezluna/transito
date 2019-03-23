@@ -3,7 +3,6 @@ import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.s
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloAcreedorService } from '../../../../services/vhloAcreedor.service';
 import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
-import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
@@ -43,6 +42,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     public formCiudadano = false;
     
     public datos = {
+        'tipo': 'PROPIETARIO',
         'idFuncionario': null,
         'idAcreedor': null,
         'idPropietario': null,
@@ -53,7 +53,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     constructor(
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
-        private _VehiculoService: VhloVehiculoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _CiudadanoService: UserCiudadanoService,
         private _AcreedorService: VhloAcreedorService,
@@ -384,49 +383,4 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
             }
         );
     }
-
-    /*
-    delete(ciudadano:any): void {
-        this.datos.propietariosCiudadanos =  this.datos.propietariosCiudadanos.filter(h => h !== ciudadano);
-        if (this.datos.propietariosCiudadanos.length === 0) {
-            this.listaPropietariosCiudadanos = false;
-        }
-        if(ciudadano.permisoTramite){
-            this.propietario = true;
-        }
-    }
-    deleteEmpresa(empresa:any): void {
-        this.datos.propietariosEmpresas =  this.datos.propietariosEmpresas.filter(h => h !== empresa);
-        if (this.datos.propietariosEmpresas.length === 0) {
-            this.listaPropietariosEmpresas = false;
-        }
-        if(empresa.permisoTramite){
-            this.propietario = true;
-        }
-    }
-
-    ready(isCreado:any){
-        if(isCreado) {
-            console.log(isCreado);
-          this.onKeyCiudadano();
-        }else{
-           this.ciudadanoNew = false; 
-        }
-    }
-    
-    agregarApoderadoCiudadano(ciudadano:any){
-        this.apoderado = 'ciudadano';
-        this.ciudadanoSelected = this.datos.propietariosCiudadanos.filter(h => h == ciudadano);
-    }
-
-    agregarApoderadoEmpresa(empresa:any){
-        this.apoderado = 'empresa';
-        this.empresaSelected = this.datos.propietariosEmpresas.filter(h => h == empresa);
-    }
-    onCancelarApoderado(){
-        this.apoderado = 'false'
-        this.tipoIdentificacionSelected = [this.tipoIdentificacionSelected];
-    }*/
-
-
 }

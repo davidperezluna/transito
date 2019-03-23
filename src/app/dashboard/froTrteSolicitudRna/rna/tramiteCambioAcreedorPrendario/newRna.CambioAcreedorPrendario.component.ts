@@ -33,24 +33,18 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     public acreedor: any = null;
 
     public identificacionOld: any;
-    public nitOld: any;
     public identificacionNew: any;
-    public nitNew: any;
     public tipoIdentificacionSelectedOld = null;
     public tipoIdentificacionSelectedNew = null;
-
-    public cfgTipoAlertaSelected: any;
-    public gradoSelected: any;
-    public acreedorSelected: any;
-
-    public ciudadanoSelected: any;
 
     public table: any;
 
     public datos = {
-        'acreedoresOld': [],
-        'acreedoresNew': [],
+        'tipo': 'ACREEDOR',
         'idFuncionario': null,
+        'idAcreedor': null,
+        'idCiudadano': null,
+        'idEmpresa': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
     };
@@ -162,25 +156,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                 }
                             }
                         );
-
-                        /*this._AcreedorService.index().subscribe(
-                            response => {
-                                if (response.status == 'success') {
-                                    this.vehiculosAcreedor = response.data;
-                                } else {
-                                    this.acreedorEncontrado = 3;
-                                    this.acreedorNew = true;
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                            }
-                        );*/
                     }
                 } else {
                     this.autorizado = false;
@@ -203,9 +178,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         );
     }
 
-    onSearchAcreedorCiudadano() {
+    onSearchAcreedorOld() {
         swal({
-            title: 'Buscando ciudadano!',
+            title: 'Buscando actual prendario!',
             text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
                 swal.showLoading()
@@ -229,17 +204,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                             response => {
                                 if (response.code == 200) {
                                     this.acreedor = response.data;
-                                   
-                                    this.datos.acreedoresOld.push(
-                                        {
-                                            'idAcreedor': this.acreedor.id,
-                                            'identificacion': this.acreedor.ciudadano.identificacion,
-                                            'nombre': this.acreedor.ciudadano.primerNombre + " " + this.acreedor.ciudadano.segundoNombre,
-                                            'tipoAlerta': this.acreedor.tipoAlerta.nombre,
-                                            'gradoAlerta': this.acreedor.gradoAlerta,
-                                            'tipo': 'CIUDADANO'
-                                        }
-                                    );
+                                    this.datos.idAcreedor = this.acreedor.id;
                                     
                                     swal.close();
                                 } else {
@@ -262,65 +227,14 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                 }
                             }
                         );
-                    }
-                } else {
-                    this.ciudadano = null;
-
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
-    }
-
-    onSearchAcreedorEmpresa() {
-        swal({
-            title: 'Buscando empresa!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            onOpen: () => {
-                swal.showLoading()
-            }
-        });
-
-        let token = this._LoginService.getToken();
-
-        let datos = {
-            'identificacion': this.nitOld,
-            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
-        }
-        
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    if (response.data.empresa) {
+                    } else if (response.data.empresa) {
                         this.empresa = response.data.empresa;
 
                         this._AcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
                             response => {
                                 if (response.status == 'success') {
                                     this.acreedor = response.data;
-
-                                    this.datos.acreedoresOld.push(
-                                        {
-                                            'idAcreedor': this.acreedor.id,
-                                            'identificacion': this.acreedor.empresa.nit,
-                                            'nombre': this.acreedor.empresa.nombre,
-                                            'tipoAlerta': this.acreedor.tipoAlerta.nombre,
-                                            'gradoAlerta': this.acreedor.gradoAlerta,
-                                            'tipo': 'EMPRESA'
-                                        }
-                                    );
+                                    this.datos.idAcreedor = this.acreedor.id;
 
                                     swal.close();
                                 } else {
@@ -343,10 +257,11 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                                 }
                             }
                         );
+                    }else{
+                        this.acreedor = null;
+                        this.datos.idAcreedor =null;
                     }
                 } else {
-                    this.empresa = null;
-
                     swal({
                         title: 'Error!',
                         text: response.message,
@@ -365,9 +280,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         );
     }
 
-    onSearchCiudadano() {
+    onSearchAcreedorNew() {
         swal({
-            title: 'Buscando ciudadano!',
+            title: 'Buscando nuevo prendario!',
             text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
                 swal.showLoading()
@@ -386,71 +301,14 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
-
-                        this.datos.acreedoresNew.push(
-                            {
-                                'id': this.ciudadano.id,
-                                'identificacion': this.ciudadano.identificacion,
-                                'nombre': this.ciudadano.primerNombre + " " + this.ciudadano.segundoNombre,
-                                'tipo': 'CIUDADANO'
-                            }
-                        );
-                    }
-                } else {
-                    this.ciudadano = null;
-
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
-    }
-
-    onSearchEmpresa() {
-        swal({
-            title: 'Buscando empresa!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            onOpen: () => {
-                swal.showLoading()
-            }
-        });
-
-        let token = this._LoginService.getToken();
-
-        let datos = {
-            'identificacion': this.nitOld,
-            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
-        }
-
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    if (response.data.empresa) {
+                        this.datos.idCiudadano = this.ciudadano.id;
+                        this.empresa = null;
+                    } else if (response.data.empresa) {
                         this.empresa = response.data.empresa;
-
-                        this.datos.acreedoresNew.push(
-                            {
-                                'id': this.empresa.id,
-                                'identificacion': this.empresa.nit,
-                                'nombre': this.empresa.nombre,
-                                'tipo': 'EMPRESA'
-                            }
-                        );
+                        this.datos.idEmpresa = this.empresa.id;
+                        this.ciudadano = null;
                     }
                 } else {
-                    this.empresa = null;
-
                     swal({
                         title: 'Error!',
                         text: response.message,
@@ -467,14 +325,6 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                 }
             }
         );
-    }
-
-    onDeleteAcreedorOld(acreedor:any): void{
-        this.datos.acreedoresOld = this.datos.acreedoresOld.filter(h => h !== acreedor);
-    }
-
-    onDeleteAcreedorNew(acreedor: any): void {
-        this.datos.acreedoresNew = this.datos.acreedoresNew.filter(h => h !== acreedor);
     }
 
     enviarTramite() {

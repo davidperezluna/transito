@@ -33,30 +33,17 @@
                         <label>Tipo de identificación
                             <span class="text-danger">*</span>
                         </label>
-                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedOld"  name="idTipoIdentificacion" required>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedOld"  name="idTipoIdentificacionOld" required>
                         </ng-select>
                     </div>
 
-                    <!--tipo identificacion ciudadano -->
-                    <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
-                        <label>Identificación</label>
+                    <div class="col-xs-12 col-lg-6">
+                        <label *ngIf="tipoIdentificacionSelectedOld != 4">Identificación</label>
+                        <label *ngIf="tipoIdentificacionSelectedOld != 4">NIT</label>
                         <div  class="input-group">
-                            <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacionOld" name="identificacionOld" required />
+                            <input type="number" class="form-control" [(ngModel)]="identificacionOld" name="identificacionOld" required />
                             <span class="input-group-btn">
-                                <button (click)="onSearchAcreedorCiudadano()" class="btn btn-md btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-
-                    <!--tipo identificacion nit -->
-                    <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelectedOld == 4">
-                        <label>NIT</label>
-                        <div  class="input-group">
-                            <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nitOld" name="nitOld" required />
-                            <span class="input-group-btn">
-                                <button (click)="onSearchAcreedorEmpresa()" class="btn btn-primary" type="button">
+                                <button (click)="onSearchAcreedorOld()" class="btn btn-md btn-primary" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -64,32 +51,39 @@
                     </div>
 
                     <!--acreedores vehiculo -->
-                    <div class="col-xs-12 col-lg-12" *ngIf="datos.acreedoresOld.length > 0">
+                    <div class="col-xs-12 col-lg-12" *ngIf="acreedor">
                         <table class="table table-bordered table-striped">
                             <br>
                             <thead>
                                 <tr>
-                                    <th colspan="3" class="text-center">
-                                        <b class="text-uppercase">Acreedores a cambiar</b>
+                                    <th colspan="2" class="text-center">
+                                        <b class="text-uppercase">Prendario a cambiar</b>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="odd" *ngFor="let acreedor of datos.acreedoresOld; let i = index">                    
-                                    <td>
-                                        <b>Identificación:</b> {{  acreedor.identificacion }}
+                                <tr>                    
+                                    <td *ngIf="acreedor.ciudadano">
+                                        <b>Identificación:</b>
+                                        <br>
+                                        {{  acreedor.ciudadano.identificacion }}
                                         <br> 
-                                        <b>Nombre:</b> {{ acreedor.nombre }}
+                                        <b>Nombre:</b>
+                                        <br>
+                                        {{ acreedor.ciudadano.primerNombre }} {{ acreedor.ciudadano.primerApellido }}
+                                    </td>
+                                    <td *ngIf="acreedor.empresa">
+                                        <b>Identificación:</b>
+                                        <br>{{ acreedor.empresa.nit }}
+                                        <br>
+                                        <b>Nombre:</b>
+                                        <br>
+                                        {{ acreedor.empresa.nombre }}
                                     </td>
                                     <td>
                                         <b>Tipo alerta:</b> {{ acreedor.tipoAlerta }}
                                         <br>
                                         <b>Grado:</b> {{ acreedor.gradoAlerta }}
-                                    </td>
-                                    <td class="text-center">
-                                        <button (click)="onDeleteAcreedorOld(acreedor)" class="btn btn-xs btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -113,54 +107,49 @@
                     </div>
 
                     <!--tipo identificacion ciudadano -->
-                    <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelectedNew != 4">
-                        <label>Identificación</label>
+                    <div class="col-xs-12 col-lg-6">
+                        <label *ngIf="tipoIdentificacionSelectedNew != 4">Identificación</label>
+                        <label *ngIf="tipoIdentificacionSelectedNew == 4">NIT</label>
                         <div  class="input-group">
-                            <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacionNew" name="identificacionNew" required />
+                            <input type="number" class="form-control" [(ngModel)]="identificacionNew" name="identificacionNew" required />
                             <span class="input-group-btn">
-                                <button (click)="onSearchCiudadano()" class="btn btn-md btn-primary" type="button">
+                                <button (click)="onSearchAcreedorNew()" class="btn btn-md btn-primary" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
                         </div>
                     </div>
 
-                    <!--tipo identificacion nit -->
-                    <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelectedNew == 4">
-                        <label>NIT</label>
-                        <div  class="input-group">
-                            <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nitNew" name="nitNew" required />
-                            <span class="input-group-btn">
-                                <button (click)="onSearchEmpresa()" class="btn btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-
-                    <!--acreedores vehiculo -->
-                    <div class="col-xs-12 col-lg-12" *ngIf="datos.acreedoresNew.length > 0">
+                    <div class="col-xs-12 col-lg-12" *ngIf="ciudadano || empresa">
                         <br>
                         <table class="table table-bordered table-striped">
                             <br>
                             <thead>
                                 <tr>
                                     <th colspan="2" class="text-center">
-                                        <b class="text-uppercase">Acreedores a cambiar</b>
+                                        <b class="text-uppercase">Prendario a registrar</b>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="odd" *ngFor="let acreedor of datos.acreedoresNew; let i = index">                    
-                                    <td>
-                                        <b>Identificación:</b> {{  acreedor.identificacion }}
+                                <tr>                    
+                                    <td *ngIf="ciudadano">
+                                        <b>Identificación:</b>
+                                        <br>
+                                        {{  ciudadano.identificacion }}
                                         <br> 
-                                        <b>Nombre:</b> {{ acreedor.nombre }}
+                                        <b>Nombre:</b>
+                                        <br>
+                                        {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
                                     </td>
-                                    <td class="text-center">
-                                        <button (click)="onDeleteAcreedorNew(acreedor)" class="btn btn-xs btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                    <td *ngIf="empresa">
+                                        <b>Identificación:</b>
+                                        <br>
+                                        {{ acreedor.identificacion }}
+                                        <br>
+                                        <b>Nombre:</b>
+                                        <br>
+                                        {{ acreedor.nombre }}
                                     </td>
                                 </tr>
                             </tbody>

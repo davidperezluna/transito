@@ -48,7 +48,6 @@
                             </div>
                         </div><!-- .row -->
 
-                        <!-- select grados alerta -->
                         <div class="row" *ngIf="datos.idTipoAlerta"><!-- .row -->
                             <div class="col-xs-12 col-lg-12">
                                 <label>Grados de alerta <b class="text-danger">*</b></label>
@@ -65,40 +64,93 @@
                             <!--Buscardor Identificador/Nit -->
                             <div class="col-xs-12 col-lg-6">
                                 <label>Tipo de identificación<b class="text-danger">*</b></label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="idTipoIdentificacion">
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedAcreedor" required name="idTipoIdentificacionAcreedor">
                                 </ng-select>
                             </div>
                         
                             <!--tipo identificacion ciudadano -->
-                            <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelected != 4">
-                                <label>Identificación</label>
+                            <div class="col-xs-12 col-lg-6">
+                                <label *ngIf="tipoIdentificacionSelected != 4">Identificación</label>
+                                <label *ngIf="tipoIdentificacionSelected == 4">NIT</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacion" name="identificacion"
-                                        required />
+                                    <input type="number" class="form-control" [(ngModel)]="identificacionAcreedor" name="identificacionAcreedor" required />
                                     <span class="input-group-btn">
-                                        <button (click)="onSearchCiudadano()" class="btn btn-primary" type="button">
+                                        <button (click)="onSearchAcreedor()" class="btn btn-primary" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
                                 </div>
+                            </div>                        
+                        
+                            <div class="col-xs-12 col-lg-12" *ngIf="acreedor">
+                                <br>
+                                <table class="table table-bordered table-striped">
+                                    <br>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                <b class="text-uppercase">Prendario</b>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="ciudadano">
+                                            <td>
+                                                <b>Identificación:</b> 
+                                                <br>
+                                                {{ acreedor.ciudadano.identificacion }}
+                                                <br>
+                                                <b>Nombre:</b> 
+                                                <br>
+                                                {{ acreedor.ciudadano.primerNombre }} {{ acreedor.ciudadano.primerApellido }}
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngFor="empresa">
+                                            <td>
+                                                <b>Identificación:</b>
+                                                <br> {{ acreedor.empresa.nit }}
+                                                <br>
+                                                <b>Nombre:</b>
+                                                <br> {{ acreedor.empresa.nombre }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         
-                            <!--tipo identificacion nit -->
-                            <div class="col-xs-12 col-lg-6" *ngIf="tipoIdentificacionSelected == 4">
-                                <label>NIT</label>
+                            <!--si no existe un ciudadano -->
+                            <app-new-rna-ciudadano *ngIf="formCiudadano" [tipoIdentificacion]="tipoIdentificacionSelectedAcreedor" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
+                        </div><!-- /.row -->
+
+                        <div class="row" *ngIf="ciudadano || empresa"><!-- .row -->
+                            <div class="ol-xs-12 col-lg-12"><!-- .col -->
+                                <h6 class="text-center">
+                                    <b class="text-uppercase">Buscar propietario</b>
+                                </h6>
+                            </div><!-- /.col -->
+                        
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo de identificación<b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacionPropietario" [(ngModel)]="tipoIdentificacionSelectedPropietario" name="idTipoIdentificacionPropietario" required>
+                                </ng-select>
+                            </div>
+                        
+                            <div class="col-xs-12 col-lg-6">
+                                <label *ngIf="tipoIdentificacionSelected != 4">Identificación</label>
+                                <label *ngIf="tipoIdentificacionSelected == 4">NIT</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="NIT" [(ngModel)]="nit" name="nit" required />
+                                    <input type="number" class="form-control" [(ngModel)]="identificacionPropietario" name="identificacionPropietario" required />
                                     <span class="input-group-btn">
-                                        <button (click)="onSearchEmpresa()" class="btn btn-primary" type="button">
+                                        <button (click)="onSearchPropietario()" class="btn btn-primary" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
                                 </div>
-                            </div>
-                        
+                            </div>                        
                         
                             <!--acreedores vehiculo -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="datos.acreedores.length > 0">
+                            <div class="col-xs-12 col-lg-12" *ngIf="datos.propietarios.length > 0">
                                 <br>
                                 <table class="table table-bordered table-striped">
                                     <br>
@@ -110,19 +162,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd" *ngFor="let acreedor of datos.acreedores; let i = index">
+                                        <tr class="odd" *ngFor="let propietario of datos.propietarios; let i = index">
                                             <td>
-                                                <b>Identificación:</b> {{ acreedor.identificacion }}
+                                                <b>Identificación:</b> {{ propietario.identificacion }}
                                                 <br>
-                                                <b>Nombre:</b> {{ acreedor.nombre }}
+                                                <b>Nombre:</b> {{ propietario.nombre }}
                                             </td>
                                             <td>
-                                                <b>Tipo alerta:</b> {{ acreedor.tipoAlerta }}
+                                                <b>Tipo alerta:</b> {{ propietario.tipoAlerta }}
                                                 <br>
-                                                <b>Grado:</b> {{ acreedor.gradoAlerta }}
+                                                <b>Grado:</b> {{ propietario.gradoAlerta }}
                                             </td>
                                             <td class="text-center">
-                                                <button (click)="onDeleteAcreedor(acreedor)" class="btn btn-xs btn-danger">
+                                                <button (click)="onDeletePropietario(propietario)" class="btn btn-xs btn-danger">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
@@ -130,9 +182,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                        
-                            <!--si no existe un ciudadano -->
-                            <app-new-rna-ciudadano *ngIf="formCiudadano" [tipoIdentificacion]="tipoIdentificacionSelected" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
                         </div><!-- /.row -->
                     </div>
                 </div>
