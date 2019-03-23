@@ -125,12 +125,18 @@
                                             <td *ngIf="propietario.ciudadano">
                                                 <b>Identificación:</b> {{ propietario.ciudadano.identificacion }}
                                                 <br>
-                                                <b>Nombre:</b> {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
+                                                <b>Nombre:</b> 
+                                                <br>
+                                                {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
                                             </td>
                                             <td *ngIf="propietario.empresa">
-                                                <b>NIT:</b> {{ propietario.empresa.nit }}
+                                                <b>NIT:</b> 
                                                 <br>
-                                                <b>Nombre:</b> {{ propietario.empresa.nombre }}
+                                                {{ propietario.empresa.nit }}
+                                                <br>
+                                                <b>Nombre:</b> 
+                                                <br>
+                                                {{ propietario.empresa.nombre }}
                                             </td>
                                         </tr>
                                     </tbody>

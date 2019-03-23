@@ -83,9 +83,7 @@
                             </div>                        
                         
                             <div class="col-xs-12 col-lg-12" *ngIf="acreedor">
-                                <br>
                                 <table class="table table-bordered table-striped">
-                                    <br>
                                     <thead>
                                         <tr>
                                             <th class="text-center">
@@ -94,7 +92,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="ciudadano">
+                                        <tr *ngIf="ciudadano">
                                             <td>
                                                 <b>Identificación:</b> 
                                                 <br>
@@ -106,13 +104,14 @@
                                             </td>
                                         </tr>
 
-                                        <tr *ngFor="empresa">
+                                        <tr *ngIf="empresa">
                                             <td>
                                                 <b>Identificación:</b>
                                                 <br> {{ acreedor.empresa.nit }}
                                                 <br>
                                                 <b>Nombre:</b>
-                                                <br> {{ acreedor.empresa.nombre }}
+                                                <br> 
+                                                {{ acreedor.empresa.nombre }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -162,7 +161,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd" *ngFor="let propietario of datos.propietarios; let i = index">
+                                        <tr *ngFor="let propietario of datos.propietarios; let i = index">
                                             <td>
                                                 <b>Identificación:</b> {{ propietario.identificacion }}
                                                 <br>
