@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgLicenciaConduccionCategoriaService } from '../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoriaService } from '../../services/userLcCfgCategoria.service';
 import { LoginService } from '../../services/login.service';
-import { CfgLicenciaConduccionCategoria } from './cfgLicenciaConduccionCategoria.modelo';
+import { UserLcCfgCategoria } from './userLcCfgCategoria.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgLicenciaConduccionCategoria.component.html'
+  templateUrl: './userLcCfgCategoria.component.html'
 })
-export class CfgLicenciaConduccionCategoriaComponent implements OnInit {
+export class UserLcCfgCategoriaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -18,10 +18,10 @@ export class CfgLicenciaConduccionCategoriaComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public categoria: CfgLicenciaConduccionCategoria;
+  public categoria: UserLcCfgCategoria;
 
   constructor(
-    private _TipoContratoService: CfgLicenciaConduccionCategoriaService,
+    private _TipoContratoService: UserLcCfgCategoriaService,
 		private _loginService: LoginService,
     ){}
     

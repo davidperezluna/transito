@@ -3,7 +3,7 @@ import { UserCiudadanoService } from '../../../../services/userCiudadano.service
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { MpersonalFuncionarioService } from '../../../../services/mpersonalFuncionario.service';
-import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { RncLicenciaConduccionService } from '../../../../services/rncLicenciaConduccion.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { LoginService } from '../../../../services/login.service';
@@ -50,7 +50,7 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
         private _ServicioService: VhloCfgServicioService,
         private _CfgPaisService: CfgPaisService,
         private _MpersonalFuncionarioService: MpersonalFuncionarioService,
-        private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
+        private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
         private _RncLicenciaConduccionService: RncLicenciaConduccionService,
     ) { }
 

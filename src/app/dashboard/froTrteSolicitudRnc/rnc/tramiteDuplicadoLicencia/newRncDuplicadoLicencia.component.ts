@@ -3,7 +3,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
-import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -40,7 +40,7 @@ export class NewRncDuplicadoLicenciaComponent implements OnInit {
 
     constructor(
         private _LoginService: LoginService,
-        private _CategoriaService: CfgLicenciaConduccionCategoriaService,
+        private _CategoriaService: UserLcCfgCategoriaService,
         private _UserCiudadanoService: UserCiudadanoService,
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,

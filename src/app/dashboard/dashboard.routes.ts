@@ -8,6 +8,7 @@ import { UserCfgGrupoSanguineoRoutes } from './userCfgGrupoSanguineo/userCfgGrup
 import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
 import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
 import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes';
+import { UserLicenciaConduccionRoutes } from './userLicenciaConduccion/userLicenciaConduccion.routes';
 
 import { HomeRoutes } from './home/home.routes';
 import { VehiculoRoutes } from './vehiculo/vehiculo.routes';
@@ -133,7 +134,7 @@ import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.rout
 import { buscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
 import { registroEntregaProductoRoutes } from './registroEntregaProducto/registroEntregaProducto.routes';
 
-import { CfgLicenciaConduccionCategoriaRoutes } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.routes';
+import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategoria.routes';
 import { RncLicenciaConduccionRoutes } from './rncLicenciaConduccion/rncLicenciaConduccion.routes';
 
 import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
@@ -267,6 +268,7 @@ export const DashboardRoutes: Route[] = [
       ...UserCfgMenuRoutes,
       ...UserCfgRoleRoutes,
       ...UserUsuarioMenuRoutes,
+      ...UserLicenciaConduccionRoutes,
       ...HomeRoutes,
       ...VehiculoRoutes,
       ...VhloCfgMarcaRoutes,
@@ -285,7 +287,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgAuditoriaRoutes,
       ...CfgSmlmvRoutes,
       ...cfgFestivoRoutes,
-      ...CfgLicenciaConduccionCategoriaRoutes,
+      ...UserLcCfgCategoriaRoutes,
       ...CfgTipoClaseRoutes,
       ...CfgModuloRoutes,
       ...PnalCfgCargoRoutes,

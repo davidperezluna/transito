@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { CfgLicenciaConduccionCategoria } from '../cfgLicenciaConduccionCategoria.modelo';
-import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoria } from '../userLcCfgCategoria.modelo';
+import { UserLcCfgCategoriaService } from '../../../services/userLcCfgCategoria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,17 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public categoria: CfgLicenciaConduccionCategoria;
+public categoria: UserLcCfgCategoria;
 public errorMessage;
 public respuesta;
 
 constructor(
-  private _TipoContratoService: CfgLicenciaConduccionCategoriaService,
+  private _TipoContratoService: UserLcCfgCategoriaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.categoria = new CfgLicenciaConduccionCategoria(null, null, null);
+    this.categoria = new UserLcCfgCategoria(null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);

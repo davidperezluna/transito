@@ -6,7 +6,7 @@ import { MpersonalComparendoService } from '../../../services/mpersonalComparend
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
-import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoriaService } from '../../../services/userLcCfgCategoria.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
@@ -141,7 +141,7 @@ constructor(
   private _ServicioService: VhloCfgServicioService,
   private _MflInfraccionService: MflInfraccionService,
   private _CfgTipoInfractorService: CfgTipoInfractorService,
-  private _CfgLicenciaConduccionCategoriaService: CfgLicenciaConduccionCategoriaService,
+  private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
   ){}
 
   ngOnInit() {
