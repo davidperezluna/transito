@@ -431,7 +431,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         );
     }
 
-    onDeleteAcreedor(propietario:any): void{
+    onDeletePropietario(propietario:any): void{
         this.datos.propietarios = this.datos.propietarios.filter(h => h !== propietario);
     }
 
