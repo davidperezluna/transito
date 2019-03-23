@@ -50,9 +50,9 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         'fechaSolicitud': null,
         'numeroRunt': null,
         'numeroCuotas': null,
-        'pais': null,
         'licenciaConduccion': null,
         'idFuncionario': null,
+        'idPais': null,
         'idPropietario': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
@@ -311,10 +311,8 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     }
 
     onEnviar() {
-        let token = this._LoginService.getToken();
-        this.datos.pais = this.paisSelected;
-        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
 
         let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero +
             'numero runt' + this.numeroRunt +
