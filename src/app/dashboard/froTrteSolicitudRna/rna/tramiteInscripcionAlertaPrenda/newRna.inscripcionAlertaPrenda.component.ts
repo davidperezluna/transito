@@ -337,6 +337,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
         let token = this._LoginService.getToken();
 
+        this.datos.idPropietario = this.propietario.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
         this._AcreedorService.register(this.datos, token).subscribe(

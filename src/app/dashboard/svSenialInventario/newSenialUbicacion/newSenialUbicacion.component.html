@@ -73,9 +73,13 @@
                         <ng-select [multiple]="false" [options]="proveedores" [(ngModel)]="senialUbicacion.idProveedor" name="idProveedor" required>
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-4">
+                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 1">
                         <label>Cantidad <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalArea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.cantidad" name="cantidad" />
+                    </div>
+                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 2">
+                        <label>Cantidad <strong class="text-danger">*</strong></label>
+                        <input (blur)="onCalcularTotalLinea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.cantidad" name="cantidad" />
                     </div>
                     <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 1">
                         <label>Area <small>(mts2)</small> <strong class="text-danger">*</strong></label>

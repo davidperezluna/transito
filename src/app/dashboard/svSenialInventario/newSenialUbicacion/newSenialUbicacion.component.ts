@@ -247,11 +247,12 @@ export class NewSenialUbicacionComponent implements OnInit {
     }
 
     onCalcularTotalLinea() {
-        let ancho, largo;
+        let cantidad, ancho, largo;
+        cantidad = this.demarcacionNew.cantidad;
         ancho = this.demarcacionNew.ancho;
         largo = this.demarcacionNew.largo;
 
-        if (ancho == 0 || largo == 0) {
+        if (ancho == 0 || largo == 0 || cantidad == 0) {
             swal({
                 title: 'Alerta!',
                 text: 'El ancho de línea y/o el largo no pueden estar en 0',
@@ -260,7 +261,7 @@ export class NewSenialUbicacionComponent implements OnInit {
             });
             this.demarcacionNew.total = 0;
         } else {
-            this.demarcacionNew.total = ancho * largo;
+            this.demarcacionNew.total = (ancho * largo) * cantidad;
         }
     }
 
