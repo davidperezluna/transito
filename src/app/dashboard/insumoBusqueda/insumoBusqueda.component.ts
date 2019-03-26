@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { RnaInsumoService } from '../../services/rnaInsumos.service';
+import { ImoInsumoService } from '../../services/imoInsumo.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { RnaLoteInsumoService } from '../../services/rnaloteInsumos.service';
 import { LoginService } from '../../services/login.service';
@@ -26,7 +26,7 @@ export class InsumoBusquedaComponent implements OnInit {
   public insumos:any;
 
   constructor(
-		private _RnaInsumoService: RnaInsumoService,
+		private _ImoInsumoService: ImoInsumoService,
 		private _loginService: LoginService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _rnaRegistroInsumosService: RnaLoteInsumoService,
@@ -116,7 +116,7 @@ export class InsumoBusquedaComponent implements OnInit {
   showLoteInsumoSustrato(e){
     this.loteInsumo = e;
     let token = this._loginService.getToken();
-    this._RnaInsumoService.showLote(this.loteInsumo.id,token).subscribe(
+    this._ImoInsumoService.showLote(this.loteInsumo.id,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

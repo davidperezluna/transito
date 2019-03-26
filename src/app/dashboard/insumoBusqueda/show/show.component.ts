@@ -4,7 +4,7 @@ import {LoginService} from '../../../services/login.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
-import {RnaInsumoService} from '../../../services/rnaInsumos.service';
+import {ImoInsumoService} from '../../../services/imoInsumo.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -29,7 +29,7 @@ constructor(
   private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: ImoCfgTipoService,
-  private _RnaInsumoService: RnaInsumoService,
+  private _ImoInsumoService: ImoInsumoService,
   ){}
 
   ngOnInit() {
@@ -88,7 +88,7 @@ constructor(
         this.table.destroy();
         this.insumos = null;
         let token = this._loginService.getToken();
-        this._RnaInsumoService.delete(token,id).subscribe(
+        this._ImoInsumoService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Modificado!',
@@ -97,7 +97,7 @@ constructor(
                       confirmButtonColor: '#15d4be',
                     })
 
-                    this._RnaInsumoService.showLote(this.loteInsumo.id,token).subscribe(
+                    this._ImoInsumoService.showLote(this.loteInsumo.id,token).subscribe(
                       response => {
                         this.respuesta = response;
                         if(this.respuesta.status == 'success'){

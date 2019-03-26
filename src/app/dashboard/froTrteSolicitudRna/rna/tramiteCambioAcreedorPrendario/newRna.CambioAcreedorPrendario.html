@@ -81,7 +81,7 @@
                                         {{ acreedor.empresa.nombre }}
                                     </td>
                                     <td>
-                                        <b>Tipo alerta:</b> {{ acreedor.tipoAlerta }}
+                                        <b>Tipo alerta:</b> {{ acreedor.tipoAlerta.nombre }}
                                         <br>
                                         <b>Grado:</b> {{ acreedor.gradoAlerta }}
                                     </td>
@@ -91,13 +91,13 @@
                     </div>
                 </div><!-- .row -->
 
-                <div class="row"><!-- .row -->
+                <div class="row" *ngIf="acreedor"><!-- .row -->
                     <h6 class="text-center">
                         <b class="text-uppercase">Buscar nuevo acreedor</b>
                     </h6>
                 </div><!-- /.row -->
 
-                <div class="row"><!-- .row -->
+                <div class="row" *ngIf="acreedor"><!-- .row -->
                     <div class="col-xs-12 col-lg-6">
                         <label>Tipo de identificación
                             <span class="text-danger">*</span>
@@ -143,13 +143,13 @@
                                         {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
                                     </td>
                                     <td *ngIf="empresa">
-                                        <b>Identificación:</b>
+                                        <b>Identificación (NIT):</b>
                                         <br>
-                                        {{ acreedor.identificacion }}
+                                        {{ empresa.nit }}
                                         <br>
                                         <b>Nombre:</b>
                                         <br>
-                                        {{ acreedor.nombre }}
+                                        {{ empresa.nombre }}
                                     </td>
                                 </tr>
                             </tbody>

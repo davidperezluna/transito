@@ -178,13 +178,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
             response => {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
-                        this.ciudadano = response.data.ciudadano;
-
-                        this._AcreedorService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': this.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                        this._AcreedorService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
                                     this.acreedor = response.data;
                                     this.datos.idAcreedor = this.acreedor.id;
+
+                                    swal.close();
                                 } else {
                                     this.acreedor = null;
                                     this.datos.idAcreedor = null;
@@ -206,13 +206,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                             }
                         );
                     } else if (response.data.empresa) {
-                        this.empresa = response.data.empresa;
-
-                        this._AcreedorService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': this.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                        this._AcreedorService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
                                     this.acreedor = response.data;
                                     this.datos.idAcreedor = this.acreedor.id;
+
+                                    swal.close();
                                 } else {
                                     this.acreedor = null;
                                     this.datos.idAcreedor = null;
@@ -237,8 +237,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
 
                     swal.close();
                 } else {
-                    this.ciudadano = null;
-                    this.empresa = null;
+                    this.acreedor = null;
+                    this.datos.idAcreedor = null;
 
                     swal({
                         title: 'Error!',
@@ -278,13 +278,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
             response => {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
-                        this.ciudadano = response.data.ciudadano;
-
-                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': this.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
                                     this.propietario = response.data;
                                     this.datos.idPropietario = this.propietario.id;
+
+                                    swal.close();
                                 } else {
                                     this.propietario = null;
                                     this.datos.idPropietario = null;
@@ -306,13 +306,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                             }
                         ); 
                     } else if (response.data.empresa){
-                        this.empresa = response.data.empresa;
-
-                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': this.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
                                     this.propietario = response.data;
                                     this.datos.idPropietario = this.propietario.id;
+
+                                    swal.close();
                                 } else {
                                     this.propietario = null;
                                     this.datos.idPropietario = null;
@@ -337,8 +337,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
 
                     swal.close();
                 } else {
-                    this.ciudadano = null;
-                    this.empresa = null;
+                    this.propietario = null;
+                    this.datos.idPropietario = null;
 
                     swal({
                         title: 'Error!',
@@ -362,10 +362,10 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         let token = this._LoginService.getToken();
 
         this.datos.idVehiculo = this.vehiculo.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
 
         this._AcreedorService.update(this.datos, token).subscribe(
             response => {
-                this.datos.idTramiteFactura = this.tramiteFactura.id;
 
                 let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 

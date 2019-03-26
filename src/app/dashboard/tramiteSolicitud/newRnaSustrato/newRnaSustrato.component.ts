@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { LoginService } from '../../../services/login.service';
-import { RnaInsumoService } from '../../../services/rnaInsumos.service';
+import { ImoInsumoService } from '../../../services/imoInsumo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaInsumo } from './facturaInsumo.modelo';
@@ -49,7 +49,7 @@ export class NewRnaInsumoComponent implements OnInit {
     
 
     constructor(
-        private _RnaInsumoService: RnaInsumoService,
+        private _ImoInsumoService: ImoInsumoService,
         private _TramiteSolicitudService: TramiteSolicitudService,
         private _loginService: LoginService,
         private _tramiteFacturaService: TramiteFacturaService,
@@ -73,7 +73,7 @@ export class NewRnaInsumoComponent implements OnInit {
                 //   let datos = {
                 //         'sedeOperativa':1 
                 //     }
-                //     this._RnaInsumoService.showUltimoSustratoDisponible(datos).subscribe(
+                //     this._ImoInsumoService.showUltimoSustratoDisponible(datos).subscribe(
                 //         responseInsumo => {
                 //         if(responseInsumo.status == 'success'){
                 //             this.numeroInsumo = responseInsumo.numero;
@@ -206,7 +206,7 @@ export class NewRnaInsumoComponent implements OnInit {
             'idModulo': 2,
             'idSedeOperativa': this.idSedeOperativa,
         }
-        this._RnaInsumoService.showNombre(token,datos).subscribe(
+        this._ImoInsumoService.showNombre(token,datos).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.FacturaInsumo.insumoId = response.data.id;

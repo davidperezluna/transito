@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {RnaInsumoService} from '../../services/rnaInsumos.service';
+import {ImoInsumoService} from '../../services/imoInsumo.service';
 import {LoginService} from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -23,7 +23,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
   public color:any; 
 
   constructor(
-		private _RnaInsumoService: RnaInsumoService,
+		private _ImoInsumoService: ImoInsumoService,
 		private _loginService: LoginService,
     ){}
     
@@ -42,7 +42,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
       ) {
       }
     })
-		this._RnaInsumoService.indexSustrato().subscribe(
+		this._ImoInsumoService.indexSustrato().subscribe(
 				response => {
           this.insumoSustratos = response.data; 
           let timeoutId = setTimeout(() => {  
@@ -59,7 +59,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
 				}
       );
 
-		this._RnaInsumoService.indexInsumo().subscribe(
+		this._ImoInsumoService.indexInsumo().subscribe(
 				response => {
           this.InsumoInsumos = response.data; 
           let timeoutId = setTimeout(() => {  
@@ -131,7 +131,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteRnaInsumoServicey(id:any){
+  deleteImoInsumoServicey(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -144,7 +144,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._RnaInsumoService.delete(token,id).subscribe(
+        this._ImoInsumoService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
