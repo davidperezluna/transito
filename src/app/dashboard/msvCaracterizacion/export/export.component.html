@@ -76,11 +76,20 @@
                                 <td>{{ registro.tipoContrato }}</td>
                                 <td>{{ registro.otroTipoContrato }}</td>
                                 <td>{{ registro.experienciaConduccion }}</td>
-                                <td>{{ registro.accidenteTransito }}</td>
+                                <td>
+                                    <span *ngIf="registro.accidenteTransito">Si</span>
+                                    <span *ngIf="!registro.accidenteTransito">No</span>
+                                </td>
                                 <td>{{ registro.cincunstancias }}</td>
-                                <td>{{ registro.incidente }}</td>
+                                <td>
+                                    <span *ngIf="registro.incidente">Si</span>
+                                    <span *ngIf="!registro.incidente">No</span>
+                                </td>
                                 <td>{{ registro.frecuenciaDesplazamiento }}</td>
-                                <td>{{ registro.vehiculoPropio }}</td>
+                                <td>
+                                    <span *ngIf="registro.vehiculoPropio">Si</span>
+                                    <span *ngIf="!registro.vehiculoPropio">No</span>
+                                </td>
                                 <td>{{ registro.planificacionDesplazamiento }}</td>
                                 <td>{{ registro.tiempoAntelacion }}</td>
                                 <td>{{ registro.medioDesplazamiento }}</td>
