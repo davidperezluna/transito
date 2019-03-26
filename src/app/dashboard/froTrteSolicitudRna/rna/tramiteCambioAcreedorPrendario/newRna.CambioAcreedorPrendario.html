@@ -39,7 +39,7 @@
 
                     <div class="col-xs-12 col-lg-6">
                         <label *ngIf="tipoIdentificacionSelectedOld != 4">Identificación</label>
-                        <label *ngIf="tipoIdentificacionSelectedOld != 4">NIT</label>
+                        <label *ngIf="tipoIdentificacionSelectedOld == 4">NIT</label>
                         <div  class="input-group">
                             <input type="number" class="form-control" [(ngModel)]="identificacionOld" name="identificacionOld" required />
                             <span class="input-group-btn">

@@ -230,7 +230,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                     } else if (response.data.empresa) {
                         this.empresa = response.data.empresa;
 
-                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
+                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'idEmpresa': this.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
                             response => {
                                 if (response.status == 'success') {
                                     this.acreedor = response.data;
