@@ -1,8 +1,7 @@
 <div class="col-xs-12 col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h5 class="text-uppercase">Lista Caracterización Empresa</h5>
-            <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            <h5 class="text-uppercase">Busqueda de caracterización de Empresa</h5>
         </div>
         <div class="card-body">
             <form #formNew="ngForm">
@@ -24,21 +23,86 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Empresa</th>
+                                <th>Fecha</th>
+                                <th>Ciudad</th>
                                 <th>Cédula</th>
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
-                                <!-- <th>Ciudad</th>
+                                <th>CLC</th>
+                                <th>Fecha Vigencia</th>
                                 <th>Edad</th>
-                                <th>Clc</th>
-                                <th>Experiencia Conducción</th> -->
+                                <th>Genero</th>
+                                <th>Grupo Trabajo</th>
+                                <th>Otro Grupo Trabajo</th>
+                                <th>Tipo Contrato</th>
+                                <th>Otro Tipo Contrato</th>
+                                <th>Experiencia Conducción</th>
+                                <th>Accidente de Transito</th>
+                                <th>Circunstancias</th>
+                                <th>Incidente</th>
+                                <th>Frecuencia de desplazamiento</th>
+                                <th>Vehiculo Propio</th>
+                                <th>Planificación desplazamiento</th>
+                                <th>Tiempo antelación</th>
+                                <th>Medio desplazamiento</th>
+                                <th>Trayecto (Km)</th>
+                                <th>Tiempo trayecto (Hrs)</th>
+                                <th>Km mensuales recorridos (Km)</th>
+                                <th>Riesgo</th>
+                                <th>Factores de Riesgo</th>
+                                <th>Otros factores riesgo (Km)</th>
+                                <th>Causas Riesgo</th>
+                                <th>Otras Causas Riesgo</th>
+                                <th>Riesgo Percibido</th>
+                                <th>Propuesta</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let registro of registros; let i = index">
-                                <td>{{ registro.id }}</td>
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ registro.empresa.nombre }}</td>
+                                <td>{{ registro.fecha }}</td>
+                                <td>{{ registro.ciudad }}</td>
                                 <td>{{ registro.cedula }}</td>
                                 <td>{{ registro.nombres }}</td>
                                 <td>{{ registro.apellidos }}</td>
+                                <td>{{ registro.clc }}</td>
+                                <td>{{ registro.fechaVigencia }}</td>
+                                <td>{{ registro.edad }}</td>
+                                <td>{{ registro.genero }}</td>
+                                <td>{{ registro.grupoTrabajo }}</td>
+                                <td>{{ registro.otroGrupoTrabajo }}</td>
+                                <td>{{ registro.tipoContrato }}</td>
+                                <td>{{ registro.otroTipoContrato }}</td>
+                                <td>{{ registro.experienciaConduccion }}</td>
+                                <td>
+                                    <span *ngIf="registro.accidenteTransito">Si</span>
+                                    <span *ngIf="!registro.accidenteTransito">No</span>
+                                </td>
+                                <td>{{ registro.cincunstancias }}</td>
+                                <td>
+                                    <span *ngIf="registro.incidente">Si</span>
+                                    <span *ngIf="!registro.incidente">No</span>
+                                </td>
+                                <td>{{ registro.frecuenciaDesplazamiento }}</td>
+                                <td>
+                                    <span *ngIf="registro.vehiculoPropio">Si</span>
+                                    <span *ngIf="!registro.vehiculoPropio">No</span>
+                                </td>
+                                <td>{{ registro.planificacionDesplazamiento }}</td>
+                                <td>{{ registro.tiempoAntelacion }}</td>
+                                <td>{{ registro.medioDesplazamiento }}</td>
+                                <td>{{ registro.trayecto }}</td>
+                                <td>{{ registro.tiempoTrayecto }}</td>
+                                <td>{{ registro.kmMensualesRecorridos }}</td>
+                                <td>{{ registro.riesgo }}</td>
+                                <td>{{ registro.principalFactorRiesgo }}</td>
+                                <td>{{ registro.otroFactorRiesgo }}</td>
+                                <td>{{ registro.causaRiesgo }}</td>
+                                <td>{{ registro.otraCausaRiesgo }}</td>
+                                <td>{{ registro.riesgoPercido }}</td>
+                                <td>{{ registro.propuestaReduccionRiesgo }}</td>
                             </tr>
                         </tbody>
                     </table>

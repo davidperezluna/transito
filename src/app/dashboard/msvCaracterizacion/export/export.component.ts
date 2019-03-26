@@ -39,7 +39,7 @@ export class ExportComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.exportCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.exportCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         /* swal({
             title: '¿La empresa solicita asistencia técnica?',
             type: 'info',

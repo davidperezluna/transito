@@ -28,9 +28,25 @@ export class NewComponent implements OnInit {
     public representante: any;
     public edad: any;
 
-    public listadoClima = false;
-    itemStringsLeftClima: any[] = [];
-    itemStringsRightClima: any[] = [];
+    public arrayFactoresRiesgo = [
+        { value: 'ESTADO INFRAESTRUCTURA', label: 'ESTADO INFRAESTRUCTURA'},
+        { value: 'ORGANIZACIÓN TRABAJO', label: 'ORGANIZACIÓN TRABAJO'},
+        { value: 'PROPIA CONDUCCIÓN', label: 'PROPIA CONDUCCIÓN'},
+        { value: 'OTRO', label: 'OTRO'},
+    ];
+
+    public arrayCausasRiesgo = [
+        { value: 'INTENSIDAD DE TRÁFICO', label: 'INTENSIDAD DE TRÁFICO' },
+        { value: 'CONDICIÓN CLIMATOLÓGICA', label: 'CONDICIÓN CLIMATOLÓGICA' },
+        { value: 'TIPO VEHÍCULO', label: 'TIPO VEHÍCULO' },
+        { value: 'ORGANIZACIÓN DE TRABAJO', label: 'ORGANIZACIÓN DE TRABAJO' },
+        { value: 'PROPIA CONDUCCIÓN', label: 'PROPIA CONDUCCIÓN' },
+        { value: 'ESTADO', label: 'ESTADO' },
+        { value: 'OTRO CONDUCTOR', label: 'OTRO CONDUCTOR' },
+        { value: 'ESTADO INFRAESTRUCTURA', label: 'ESTADO INFRAESTRUCTURA' },
+        { value: 'FALTA INFORMACIÓN', label: 'FALTA INFORMACIÓN' },
+        { value: 'OTRA', label: 'OTRA' },
+    ];
 
     constructor(
         private _MsvCaracterizacionService: MsvCaracterizacionService,
@@ -42,7 +58,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.msvCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.msvCaracterizacion = new MsvCaracterizacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         this.date = new Date;
         var datePiper = new DatePipe(this.date);
         this.msvCaracterizacion.fecha = datePiper.transform(this.date, 'yyyy-MM-dd');
