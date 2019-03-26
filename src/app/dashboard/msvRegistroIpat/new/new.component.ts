@@ -1796,31 +1796,38 @@ export class NewComponent implements OnInit {
   }
   obtenerCorrespondio(e) {
     let token = this._LoginService.getToken();
-
-    this._MsvRegistroIpatService.getCorrespondio(this.msvRegistroIpat, token).subscribe(
-      response => {
-        if (response.status == 'success') {
-          /* if(this.msvRegistroIpat.correspondio != null) {
-            this.numeroCorrespondio = true;
-          } */
-          this.msvRegistroIpat.correspondio = response.data;
-        } else {
-          swal({
-            title: 'Alerta!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-          error => {
-            this.errorMessage = <any>error;
-            if (this.errorMessage != null) {
-              console.log(this.errorMessage);
-              alert('Error en la petición');
+    if(e){
+      this._MsvRegistroIpatService.getCorrespondio(this.msvRegistroIpat, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            /* if(this.msvRegistroIpat.correspondio != null) {
+              this.numeroCorrespondio = true;
+            } */
+            this.msvRegistroIpat.correspondio = response.data;
+            swal({
+              title: 'Perfecto!',
+              text: response.message,
+              type: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+          } else {
+            swal({
+              title: 'Alerta!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+            error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+              }
             }
           }
         }
-      }
-    );
+      );
+    }
   }
 
   registrarCiudadano() {

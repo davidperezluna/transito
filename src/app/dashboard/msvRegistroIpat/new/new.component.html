@@ -1664,7 +1664,7 @@
                         <div class="col-lg-4 col-md-6">
                             <label>Consecutivo</label>
                             <input class="form-control" [disabled]="numeroCorrespondio"
-                                (change)="obtenerCorrespondio($event)" type="number"
+                                (ngModelChange)="obtenerCorrespondio($event)" type="number"
                                 [(ngModel)]="msvRegistroIpat.consecutivo" name="consecutivo">
                         </div>
                         <div class="col-lg-4 col-md-6">

@@ -42,13 +42,15 @@ export class MsvCaracterizacion{
 		public kmMensualTrayecto: string,
 
 		//checkbox factores riesgo
-		public estadoInfraestructura: string,
+		/* public estadoInfraestructura: string,
 		public organizacionTrabajo: string,
 		public propiaConduccion: string,
-		public otro2: string,
+		public otro2: string, */
+		public arrayFactoresRiesgo: string,
+		public otroFactorRiesgo: string,
 		
 		//checkbox causas riesgo
-		public intensidadTrafico: string,
+		/* public intensidadTrafico: string,
 		public condicionClimatologica: string,
 		public tipoVehiculo: string,
 		public organizacionTrabajo2: string,
@@ -57,9 +59,11 @@ export class MsvCaracterizacion{
 		public otroConductor: string,
 		public estadoInfraestructura2: string,
 		public faltaInformacion: string,
-		public otraCausa: string,
+		public otraCausa: string, */
+		public arrayCausasRiesgo: string,
+		public otraCausaRiesgo: string,
 
-		public otro3: string,
+		//public otro3: string,
 		public riesgoPercibido: string,
 		public propuestaReduccion: string,
 

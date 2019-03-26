@@ -6,7 +6,7 @@
         </div>
         <div class="card-body">
             <form #formNew="ngForm">
-                <div class="form-group row">
+                <!-- <div class="form-group row"> -->
                     <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
                         <div class="input-group">
                             <input type="number" class="form-control" placeholder="NIT Empresa" [(ngModel)]="msvCaracterizacion.nit" name="nit"
@@ -17,7 +17,7 @@
                             </span>
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
                 <div *ngIf="empresaEncontrada" class="col-xs-12 col-lg-6">
                     <table class="table " id="dataTables-example">
                         <br>
@@ -199,12 +199,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.accidente == 'Si'">
-                            <label>Describa brevemente las circunstancias</label>
-                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.circunstancias"
-                                name="circunstancias">
-                        </div>
                     </div>
+                            <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.accidente == 'Si'">
+                                <label>Describa brevemente las circunstancias</label>
+                                <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.circunstancias"
+                                    name="circunstancias">
+                            </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Incidentes ¿Ha tenido en los ultimos cinco años algun incidente de tránsito
                             produciéndose
@@ -385,76 +385,25 @@
                             name="kmMensualTrayecto">
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <h6>Principales factores de riesgo con los que se encuentra (tanto los trayectos ida-vuelta del
-                            domicilio al trabajo como en los desplazamientos en misión)</h6>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.estadoInfraestructura" name="estadoInfraestructura1" type="checkbox" class="custom-control-input"
-                                id="checkbox-estadoInfraestructura1">
-                            <label class="custom-control-label" for="checkbox-estadoInfraestructura1">Estado de la infraestructura / vía mi vehículo</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.organizacionTrabajo" name="organizacionTrabajo1" type="checkbox" class="custom-control-input"
-                                id="checkbox-organizacionTrabajo1">
-                            <label class="custom-control-label" for="checkbox-organizacionTrabajo1">La organización del trabajo</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.propiaConduccion" name="propiaConduccion1" type="checkbox" class="custom-control-input"
-                                id="checkbox-propiaConduccion1">
-                            <label class="custom-control-label" for="checkbox-propiaConduccion1">Mi propia conducción</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.otro2" name="otro2" type="checkbox" class="custom-control-input"
-                                id="checkbox-otro2">
-                            <label class="custom-control-label" for="checkbox-otro2">Otros</label>
-                        </div>
+                        <label>Principales factores de riesgo con los que se encuentra (tanto los trayectos ida-vuelta del
+                            domicilio al trabajo como en los desplazamientos en misión)</label>
+                        <ng-select [multiple]="true" [options]="arrayFactoresRiesgo" [(ngModel)]="msvCaracterizacion.arrayFactoresRiesgo" required
+                            name="principalFactorRiesgo">
+                        </ng-select>
                     </div>
+                        <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.arrayFactoresRiesgo == 'OTRO'">
+                            <label>Otro factor riesgo</label>
+                            <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otroFactorRiesgo" name="otroFactorRiesgo">
+                        </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Causas que motivan el riesgo (indique todos los que considere adecuados, en su caso)</label>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.intesidadTrafico" name="intensidadTrafico" type="checkbox" class="custom-control-input" id="checkbox-intensidadTrafico">
-                            <label class="custom-control-label" for="checkbox-intensidadTrafico">Intensidad de Tráfico</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.condicionClimatologica" name="condicionClimatologica" type="checkbox" class="custom-control-input" id="checkbox-condicionClimatologica">
-                            <label class="custom-control-label" for="checkbox-condicionClimatologica">Condiciones climatológicas</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.tipoVehiculo" name="tipoVehiculo" type="checkbox" class="custom-control-input" id="checkbox-tipoVehiculo">
-                            <label class="custom-control-label" for="checkbox-tipoVehiculo">Tipo de vehículo o sus características estado del vehículo</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.organizacionTrabajo2
-                            " name="organizacionTrabajo" type="checkbox" class="custom-control-input" id="checkbox-organizacionTrabajo">
-                            <label class="custom-control-label" for="checkbox-organizacionTrabajo">Organización del trabajo (agenda, reuniones, tiempos de entrega, etc.)</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.propiaConduccion2" name="propiaConduccion" type="checkbox" class="custom-control-input" id="checkbox-propiaConduccion">
-                            <label class="custom-control-label" for="checkbox-propiaConduccion">Su propia conducción</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.estado" name="estado" type="checkbox" class="custom-control-input" id="checkbox-estado">
-                            <label class="custom-control-label" for="checkbox-estado">Su estado psicofísico (cansancio, estrés, sueño, etc.)</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.otroConductor" name="otroConductor" type="checkbox" class="custom-control-input" id="checkbox-otroConductor">
-                            <label class="custom-control-label" for="checkbox-otroConductor">Otros conductores</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.estadoInfraestructura2" name="estadoInfraestructura" type="checkbox" class="custom-control-input" id="checkbox-estadoInfraestructura">
-                            <label class="custom-control-label" for="checkbox-estadoInfraestructura">Estado de la infraestructura / vía</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.faltaInformacion" name="faltaInformacion" type="checkbox" class="custom-control-input" id="checkbox-faltaInformacion">
-                            <label class="custom-control-label" for="checkbox-faltaInformacion">Falta de información o formación en seguridad vial</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input [(ngModel)]="msvCaracterizacion.otraCausa" name="otraCausa" type="checkbox" class="custom-control-input" id="checkbox-otraCausa">
-                            <label class="custom-control-label" for="checkbox-otraCausa">otras</label>
-                        </div>
+                        <ng-select [multiple]="true" [options]="arrayCausasRiesgo" [(ngModel)]="msvCaracterizacion.arrayCausasRiesgo"
+                            required name="causaRiesgo">
+                        </ng-select>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-6 col-md-6" *ngIf="msvCaracterizacion.arrayCausasRiesgo == 'OTRA'">
                         <label>Cuales</label>
-                        <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otro3" name="otro3">
+                        <input class="form-control" type="text" [(ngModel)]="msvCaracterizacion.otroCausaRiesgo" name="otroCausaRiesgo">
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Concrete el riesgo que percibe</label>
