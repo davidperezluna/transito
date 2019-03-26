@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
-import {RnaInsumoService} from '../../../services/rnaInsumos.service';
+import {ImoInsumoService} from '../../../services/imoInsumo.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 
@@ -32,7 +32,7 @@ public datosAsignacion = {
 constructor(
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: ImoCfgTipoService,
-  private _RnaInsumoService: RnaInsumoService,
+  private _ImoInsumoService: ImoInsumoService,
   ){}
 
   ngOnInit() {
@@ -73,7 +73,7 @@ constructor(
     this.datosAsignacion.sedeDestino = this.sedeDestinoSelected;
     this.datosAsignacion.sedeOrigen = this.sedeOrigenSelected;
     this.datosAsignacion.casoInsumo = this.insumoSelected;    
-		this._RnaInsumoService.reasignacionSustrato(this.datosAsignacion).subscribe(
+		this._ImoInsumoService.reasignacionSustrato(this.datosAsignacion).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
@@ -107,7 +107,7 @@ constructor(
     this.datosAsignacion.sedeDestino = this.sedeDestinoSelected;
     this.datosAsignacion.sedeOrigen = this.sedeOrigenSelected;
     this.datosAsignacion.casoInsumo = this.insumoSelected;
-    this._RnaInsumoService.isExistencia(this.datosAsignacion).subscribe(
+    this._ImoInsumoService.isExistencia(this.datosAsignacion).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

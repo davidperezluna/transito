@@ -1,0 +1,106 @@
+<div class="container" >
+   <div class="row" *ngIf='formIndex'>
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">
+              <b class="text-uppercase">RNA</b>
+              <small>Registro insumos</small>
+              <div class="col text-right ">
+                <div class="btn-group pull-right">
+                  <button (click)="onNew()" class="btn btn-default">
+                    <i class="fa fa-plus"></i>
+                    <span class="text">Nuevo</span>
+                  </button>
+                </div>
+              </div>
+            </h5>
+          </div>
+          <div class="card-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"> 
+                    <a class="nav-link active" data-toggle="tab" href="#sustrato" role="tab">Sustrato</a> 
+                    <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
+                </li>  
+                <li class="nav-item"> 
+                    <a class="nav-link" data-toggle="tab" href="#insumo" role="tab">Insumo</a> 
+                    <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
+                </li>  
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="sustrato" role="tabpanel">
+                  <table class="table " id="dataTables-example-Sustratos">
+                    <thead>
+                      <tr>
+                        <th>No.Acta</th>
+                        <th>Empresa</th>
+                        <th>Sede</th>
+                        <th>Insumo</th>
+                        <th>Rango Inicio</th>
+                        <th>Rango Fin</th>
+                        <th>Cantidad</th>
+                        <th>Referencia</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="odd" *ngFor="let loteInsumoSustrato of loteInsumoSustratos; let i = index">
+                        <td >{{loteInsumoSustrato.numeroActa}}</td>
+                        <td >{{loteInsumoSustrato.empresa.nombre}}</td>
+                        <td >{{loteInsumoSustrato.sedeOperativa.nombre}}</td>
+                        <td >{{loteInsumoSustrato.tipoInsumo.nombre}}</td>
+                        <td >{{loteInsumoSustrato.rangoInicio}}</td>
+                        <td >{{loteInsumoSustrato.rangoFin}}</td>
+                        <td >{{loteInsumoSustrato.cantidad}}</td>
+                        <td >{{loteInsumoSustrato.referencia}}</td>
+                        <td >{{loteInsumoSustrato.fecha}}</td>
+                        <td >{{loteInsumoSustrato.estado}}</td>
+                        <td>
+                          <button (click)="editRnaLoteInsumoSustrato(loteInsumoSustrato)" class="btn btn-outline-info" type="button">Editar</button> 
+                          <button (click)="deleteRnaLoteInsumo(loteInsumoSustrato.id)"  class="btn btn-outline-danger" type="button">Eliminar</button> 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane" id="insumo" role="tabpanel">
+                    <table class="table " id="dataTables-example-Insumos">
+                      <thead>
+                        <tr>
+                          <th>No.Acta</th>
+                          <th>Empresa</th>
+                          <th>Insumo</th>
+                          <th>Cantidad</th>
+                          <th>Referencia</th>
+                          <th>Fecha</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="odd" *ngFor="let loteInsumoInsumo of loteInsumoInsumos; let i = index">
+                          <td >{{loteInsumoInsumo.numeroActa}}</td>
+                          <td >{{loteInsumoInsumo.empresa.nombre}}</td>
+                          <td >{{loteInsumoInsumo.tipoInsumo.nombre}}</td>
+                          <td >{{loteInsumoInsumo.cantidad}}</td>
+                          <td >{{loteInsumoInsumo.referencia}}</td>
+                          <td >{{loteInsumoInsumo.fecha}}</td>
+                          <td>
+                            <button (click)="editRnaLoteInsumoInsumo(loteInsumoInsumo)" class="btn btn-outline-info" type="button">Editar</button> 
+                            <!-- <button (click)="deleteRnaLoteInsumo(loteInsumoInsumo.id)"  class="btn btn-outline-danger" type="button">Eliminar</button>  -->
+                          </td>
+                        </tr>
+                      </tbody> 
+                    </table>
+                </div>
+            </div>
+            <!-- /.table-responsive --> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-edit *ngIf='formEdit' [loteInsumoInsumo]="loteInsumoInsumo" [tipoInsumo]="tipoInsumo" (ready)="ready($event)"></app-edit>
+</div>

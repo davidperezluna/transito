@@ -4,7 +4,7 @@ import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import {LoginService} from '../../../services/login.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
-import {RnaInsumoService} from '../../../services/rnaInsumos.service';
+import {ImoInsumoService} from '../../../services/imoInsumo.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -42,7 +42,7 @@ constructor(
   private _loginService: LoginService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _CasoInsumoService: ImoCfgTipoService,
-  private _RnaInsumoService: RnaInsumoService,
+  private _ImoInsumoService: ImoInsumoService,
   ){}
 
   ngOnInit() {
@@ -111,7 +111,7 @@ constructor(
       this.rnaAsignacionInsumos.numero = this.numero;
     }
     
-		this._RnaInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
+		this._ImoInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
@@ -278,7 +278,7 @@ constructor(
         this.rnaAsignacionInsumos.rangoFin = lote.rangoFin;
         this.rnaAsignacionInsumos.numero = lote.cantidad;
 
-        this._RnaInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
+        this._ImoInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
           response => {
             this.respuesta = response;
             if(this.respuesta.status == 'success'){

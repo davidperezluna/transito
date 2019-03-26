@@ -1,29 +1,29 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {ImoInsumoService} from '../../services/imoInsumo.service';
-import {LoginService} from '../../services/login.service';
+import { ImoLoteService } from '../../services/imoLote.service';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnaAsignacionInsumos.component.html'
+  templateUrl: './imoLote.component.html'
 })
-export class rnaAsignacionInsumosComponent implements OnInit {
+export class ImoLoteComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
-	public insumoSustratos;
-	public InsumoInsumos;
+	public loteInsumoSustratos;
+	public loteInsumoInsumos;
 	public formNew = false;
 	public formEdit = false;
   public formIndex = true;
   public tipoInsumo :any;
   public table:any; 
-  public InsumoInsumo:any; 
+  public loteInsumoInsumo:any; 
   public color:any; 
 
   constructor(
-		private _ImoInsumoService: ImoInsumoService,
+		private _LoteInsumoService: ImoLoteService,
 		private _loginService: LoginService,
     ){}
     
@@ -31,22 +31,18 @@ export class rnaAsignacionInsumosComponent implements OnInit {
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-		this._ImoInsumoService.indexSustrato().subscribe(
+    });
+
+		this._LoteInsumoService.index().subscribe(
 				response => {
-          this.insumoSustratos = response.data; 
+          this.loteInsumoSustratos = response.data.loteSustratos;
+          this.loteInsumoInsumos = response.data.loteInsumos; 
           let timeoutId = setTimeout(() => {  
-            this.iniciarTablaSustrato();
+            this.iniciarTabla();
+            swal.close();
           }, 100); 
 				}, 
 				error => {
@@ -58,54 +54,13 @@ export class rnaAsignacionInsumosComponent implements OnInit {
 					}
 				}
       );
-
-		this._ImoInsumoService.indexInsumo().subscribe(
-				response => {
-          this.InsumoInsumos = response.data; 
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTablaInsumos();
-          }, 100); 
-				},  
-				error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
   }
-  iniciarTablaSustrato(){
-   $('#dataTables-example-Sustratos').DataTable({
+  
+  iniciarTabla(){
+    $('#dataTables-example-Sustratos').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
-      dom: 'Bfrtip',
-      buttons: [
-          'pdf',
-      ],
-      oLanguage: {
-          oPaginate: {
-              sFirst: '<<',
-              sPrevious: '<',
-              sNext: '>',
-              sLast: '>>'
-          } 
-      }
-  });
-  this.table = $('#dataTables-example-Sustratos').DataTable();
-  }
-
-  iniciarTablaInsumos(){
-    $('#dataTables-example-Insumos').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      dom: 'Bfrtip',
-      buttons: [
-          'pdf',
-      ],
       oLanguage: {
         oPaginate: {
           sFirst: '<i class="fa fa-step-backward"></i>',
@@ -117,6 +72,8 @@ export class rnaAsignacionInsumosComponent implements OnInit {
    });
    this.table = $('#dataTables-example').DataTable();
   }
+
+ 
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -131,7 +88,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
         this.ngOnInit();
       }
   }
-  deleteImoInsumoServicey(id:any){
+  deleteRnaLoteInsumoServicey(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -144,7 +101,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._ImoInsumoService.delete(token,id).subscribe(
+        this._LoteInsumoService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -169,15 +126,15 @@ export class rnaAsignacionInsumosComponent implements OnInit {
     })
   }
  
-  editRnaInsumoSustrato(InsumoInsumo:any){
-    this.InsumoInsumo = InsumoInsumo;
+  editRnaLoteInsumoSustrato(loteInsumoInsumo:any){
+    this.loteInsumoInsumo = loteInsumoInsumo;
     this.tipoInsumo = 'sustrato';
     this.formEdit = true;
     this.formIndex = false;
   }
 
-  editRnaInsumoInsumo(InsumoInsumo:any){
-    this.InsumoInsumo = InsumoInsumo;
+  editRnaLoteInsumoInsumo(loteInsumoInsumo:any){
+    this.loteInsumoInsumo = loteInsumoInsumo;
     this.tipoInsumo = 'insumo';
     this.formEdit = true;
     this.formIndex = false;

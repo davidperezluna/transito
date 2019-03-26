@@ -232,6 +232,7 @@ import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.rout
 
 import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
 import { ImoCfgTipoRoutes } from './imoCfgTipo/imoCfgTipo.routes';
+import { ImoLoteRoutes } from "./imoLote/imoLote.routes";
 
 import { BpCfgTipoInsumoRoutes } from './bpCfgTipoInsumo/bpCfgTipoInsumo.routes';
 import { BpProyectoRoutes } from './bpProyecto/bpProyecto.routes';
@@ -431,6 +432,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgOrganismoTransitoRoutes,
       ...VhloCfgPlacaRoutes,
       ...ImoCfgTipoRoutes,
+      ...ImoLoteRoutes,
       ...CfgEntidadJudicialRoutes,
       ...CfgCausalLimitacionRoutes,
       ...CfgChoqueConRoutes,

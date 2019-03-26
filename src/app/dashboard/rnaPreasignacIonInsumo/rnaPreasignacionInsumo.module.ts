@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RnaPreasignacionInsumoComponent } from './rnaPreasignacionInsumo.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SelectModule } from 'angular2-select';
-import { RnaInsumoService } from '../../services/rnaInsumos.service';
+import { ImoInsumoService } from '../../services/imoInsumo.service';
 import { ImoAsignacionService } from '../../services/imoAsignacion.service';
 import { ImoCfgTipoService } from '../../services/imoCfgTipo.service';
 import { ImoTrazabilidadService } from '../../services/imoTrazabilidad.service';
@@ -14,7 +14,7 @@ import { ShowComponent } from './show/show.component';
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
     declarations: [RnaPreasignacionInsumoComponent,NewComponent,ShowComponent],
     exports: [RnaPreasignacionInsumoComponent,NewComponent,ShowComponent],
-    providers:[RnaInsumoService,ImoCfgTipoService,ImoTrazabilidadService,ImoAsignacionService]
+    providers:[ImoInsumoService,ImoCfgTipoService,ImoTrazabilidadService,ImoAsignacionService]
 })
 
 export class RnaPreasignacionInsumoModule { }

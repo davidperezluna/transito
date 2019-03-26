@@ -234,6 +234,7 @@ import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionO
 
 import { ImoCfgTipoModule } from './imoCfgTipo/imoCfgTipo.module';
 import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
+import { ImoLoteModule } from "./imoLote/imoLote.module";
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
 import { BpProyectoModule } from './bpProyecto/bpProyecto.module';
@@ -462,6 +463,7 @@ import {RightsidebarComponent} from '../shared';
     registroEntregaProductoModule,
     RpcccInventarioDocumentalModule,
     InsumoBusquedaModule,
+    ImoLoteModule,
     FacturaInfraccionModule,
     UserCfgEmpresaServicioModule,
     RnaCertificadoTradicionOficialModule,
