@@ -34,10 +34,7 @@ export class NewRnaTramiteLevantamientoAlertaPrendaComponent implements OnInit {
 
     public identificacion: any;
     public identificacionAcreedor: any;
-
-    public nit: any;
     public tipoIdentificacionSelected = null;
-
 
     public table: any;
 

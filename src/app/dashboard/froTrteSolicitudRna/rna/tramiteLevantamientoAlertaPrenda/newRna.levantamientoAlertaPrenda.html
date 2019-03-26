@@ -22,7 +22,7 @@
                 <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
                 <hr>
                 
-                <div class="row" *ngIf="acreedores">
+                <div class="row" *ngIf="datos.acreedores.length > 0">
                     <div class="col-xs-12 col-lg-12 form-group">
                         <h6 class="text-center">
                            Prendarios registrados
@@ -59,8 +59,8 @@
                                     </td>
                                     <td>
                                         <div class="custom-control custom-radio">
-                                            <input [(ngModel)]="datos.idAcreedor" value="{{ acreedor.id }}" type="radio" id="radio" name="radio" class="custom-control-input">
-                                            <label class="custom-control-label" for="radio">Levantamiento de prenda</label>
+                                            <input [(ngModel)]="datos.idAcreedor" value="{{ acreedor.id }}" type="radio" id="radio-lap{{ acreedor.id }}" name="radio-lap" class="custom-control-input">
+                                            <label class="custom-control-label" for="radio-lap{{ acreedor.id }}">Levantamiento de prenda</label>
                                         </div>
                                     </td>
                                 </tr>                                

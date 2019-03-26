@@ -23,6 +23,45 @@
                 <hr>
                 <div class="container">
                     <div class="form-group">
+                        <div class="row" *ngIf="propietario"><!-- .row -->
+                            <div class="ol-xs-12 col-lg-12"><!-- .col -->
+                                <h6 class="text-center">
+                                    <b class="text-uppercase">Propietario seleccionado</b>
+                                </h6>
+                            </div><!-- /.col -->
+                        
+                            <div class="col-xs-12 col-lg-12">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr *ngIf="propietario.ciudadano">
+                                            <td>
+                                                <b>Nombres y apellidos:</b>
+                                                <br>
+                                                {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
+                                            </td>
+                                            <td>
+                                                <b>Identificación:</b> 
+                                                <br>
+                                                {{ propietario.ciudadano.identificacion }}
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="propietario.empresa">
+                                            <td>
+                                                <b>Nombres y apellidos:</b>
+                                                <br>
+                                                {{ propietario.empresa.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Identificación:</b>
+                                                <br> 
+                                                {{ propietario.empresa.nit }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!-- /.row -->
+                        
                         <div class="row"><!-- .row -->
                             <div class="col-xs-12 col-lg-12">
                                 <label>Tipos de alerta  <b class="text-danger">*</b></label>
@@ -94,24 +133,27 @@
                                     <tbody>
                                         <tr *ngIf="ciudadano">
                                             <td>
+                                                <b>Nombres y apellidos:</b>
+                                                <br>
+                                                {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                            </td>
+                                            <td>
                                                 <b>Identificación:</b> 
                                                 <br>
                                                 {{ ciudadano.identificacion }}
-                                                <br>
-                                                <b>Nombre:</b> 
-                                                <br>
-                                                {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
                                             </td>
                                         </tr>
 
                                         <tr *ngIf="empresa">
                                             <td>
-                                                <b>Identificación:</b>
-                                                <br> {{ empresa.nit }}
-                                                <br>
                                                 <b>Nombre:</b>
-                                                <br> 
+                                                <br>
                                                 {{ empresa.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Identificación:</b>
+                                                <br> 
+                                                {{ empresa.nit }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -120,41 +162,6 @@
                         
                             <!--si no existe un ciudadano -->
                             <app-new-rna-ciudadano *ngIf="formCiudadano" [tipoIdentificacion]="tipoIdentificacionSelectedAcreedor" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
-                        </div><!-- /.row -->
-
-                        <div class="row" *ngIf="propietario"><!-- .row -->
-                            <div class="ol-xs-12 col-lg-12"><!-- .col -->
-                                <h6 class="text-center">
-                                    <b class="text-uppercase">Propietario seleccionado</b>
-                                </h6>
-                            </div><!-- /.col -->
-                        
-                            <div class="col-xs-12 col-lg-12">
-                                <table class="table table-bordered table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td  *ngIf="propietario.ciudadano">
-                                                <b>Identificación:</b> 
-                                                <br>
-                                                {{ propietario.ciudadano.identificacion }}
-                                                <br>
-                                                <b>Nombres y apellidos:</b> 
-                                                <br>
-                                                {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
-                                            </td>
-                                            <td *ngIf="propietario.empresa">
-                                                <b>Identificación:</b>
-                                                <br> 
-                                                {{ propietario.empresa.nit }}
-                                                <br>
-                                                <b>Nombres y apellidos:</b>
-                                                <br> 
-                                                {{ propietario.empresa.nombre }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         </div><!-- /.row -->
                     </div>
                 </div>

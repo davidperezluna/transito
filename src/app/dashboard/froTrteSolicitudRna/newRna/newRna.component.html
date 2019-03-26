@@ -114,7 +114,7 @@
                                             <i class="fa fa-save"></i>
                                             Agregar apoderado
                                         </button>
-                                        <button *ngIf='!confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success">
+                                        <button *ngIf='tramiteSolicitud.idSolicitante && !confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success">
                                             <i class="fa fa-save"></i>
                                             Confirmar solicitante
                                         </button>

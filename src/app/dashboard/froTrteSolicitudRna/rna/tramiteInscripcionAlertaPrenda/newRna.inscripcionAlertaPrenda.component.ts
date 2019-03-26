@@ -76,7 +76,6 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         'idTramiteFactura': null,
     };
 
-
     constructor(
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
