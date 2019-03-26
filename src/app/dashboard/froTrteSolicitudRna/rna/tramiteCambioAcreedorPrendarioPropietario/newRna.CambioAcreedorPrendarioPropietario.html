@@ -50,7 +50,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-lg-12" *ngIf="prendario">
+                            <div class="col-xs-12 col-lg-12" *ngIf="acreedor">
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -83,7 +83,7 @@
                         </div>    
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="acreedor">
                         <div class="row">
                             <h6 class="text-center">
                                 <b class="text-uppercase">Buscar propietario</b>
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-lg-12" *ngIf="prendario">
+                            <div class="col-xs-12 col-lg-12" *ngIf="propietario">
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>

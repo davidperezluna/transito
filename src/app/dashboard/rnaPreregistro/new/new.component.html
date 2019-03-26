@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO'">
+                    <div class="row" *ngIf="vehiculo.tipoMatricula == 'RADICADO' || vehiculo.tipoMatricula == 'IMPORTACION'">
                         <div class="col-lg-6">
                             <label>Placa <b class="text-danger">*</b></label>
                             <input class="form-control text-uppercase" [(ngModel)]="vehiculo.placa" name="placa" type="text" required>

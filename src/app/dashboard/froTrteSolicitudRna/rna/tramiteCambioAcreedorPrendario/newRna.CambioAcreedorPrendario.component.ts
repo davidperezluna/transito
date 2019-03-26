@@ -198,9 +198,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
             response => {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
-                        this.ciudadano = response.data.ciudadano;
-
-                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'idCiudadano': this.ciudadano.id, 'tipo': 'CIUDADANO' },token).subscribe(
+                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO' },token).subscribe(
                             response => {
                                 if (response.code == 200) {
                                     this.acreedor = response.data;
@@ -228,11 +226,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                             }
                         );
                     } else if (response.data.empresa) {
-                        this.empresa = response.data.empresa;
-
-                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'idEmpresa': this.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
+                        this._AcreedorService.searchByCiudadanoOrEmpresa({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA' }, token).subscribe(
                             response => {
-                                if (response.status == 'success') {
+                                if (response.code == 200) {
                                     this.acreedor = response.data;
                                     this.datos.idAcreedor = this.acreedor.id;
 
@@ -259,7 +255,7 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                         );
                     }else{
                         this.acreedor = null;
-                        this.datos.idAcreedor =null;
+                        this.datos.idAcreedor = null;
                     }
                 } else {
                     swal({
@@ -303,11 +299,15 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
                         this.ciudadano = response.data.ciudadano;
                         this.datos.idCiudadano = this.ciudadano.id;
                         this.empresa = null;
+                        this.datos.idEmpresa = null;
                     } else if (response.data.empresa) {
                         this.empresa = response.data.empresa;
                         this.datos.idEmpresa = this.empresa.id;
                         this.ciudadano = null;
+                        this.datos.idCiudadano = null;
                     }
+
+                    swal.close();
                 } else {
                     swal({
                         title: 'Error!',
@@ -327,12 +327,11 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         );
     }
 
-    enviarTramite() {
+    onEnviar() {
         let token = this._LoginService.getToken();
         
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
-
 
         this._AcreedorService.update(this.datos, token).subscribe(
             response => {
