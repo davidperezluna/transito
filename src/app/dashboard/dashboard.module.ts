@@ -12,6 +12,7 @@ import { UserCfgGrupoSanguineoModule } from './userCfgGrupoSanguineo/userCfgGrup
 import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
 import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
 import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
+import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
 
 import { HomeModule } from './home/home.module';
 import { VehiculoModule } from './vehiculo/vehiculo.module';
@@ -133,7 +134,7 @@ import { InfraccionModule } from './infraccion/infraccion.module';
 import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
-import { CfgLicenciaConduccionCategoriaModule } from './cfgLicenciaConduccionCategoria/cfgLicenciaConduccionCategoria.module';
+import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategoria.module';
 import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicenciaConduccion.module';
 
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
@@ -278,6 +279,7 @@ import {RightsidebarComponent} from '../shared';
     UserCfgMenuModule,
     UserCfgRoleModule,
     UserUsuarioMenuModule,
+    UserLicenciaConduccionModule,
     HomeModule,
     VehiculoModule,
     VhloCfgMarcaModule,
@@ -301,7 +303,7 @@ import {RightsidebarComponent} from '../shared';
     CfgSmlmvModule,
     cfgFestivoModule,
     buscarAutomotorModule,
-    CfgLicenciaConduccionCategoriaModule,
+    UserLcCfgCategoriaModule,
     CfgTipoClaseModule,
     RncLicenciaConduccionModule,
     SvCapacitacionModule,

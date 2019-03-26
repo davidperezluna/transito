@@ -71,12 +71,12 @@ export class NewComponent implements OnInit {
 
   public nroIpat: any;
   public consecutivo: any = null;
-  
+
   public ipatEncontrado: any = null;
   public vehiculoEncontrado = false;
   public conductorEncontrado = false;
   public victimaEncontrada = false;
-  
+
   public ipats = false;
 
   public gravedades: any;
@@ -135,7 +135,7 @@ export class NewComponent implements OnInit {
   public unidades: any;
   public anios = [];
 
-  public conductores= [];
+  public conductores = [];
   public vehiculos = [];
   public victimas = [];
 
@@ -187,7 +187,7 @@ export class NewComponent implements OnInit {
 
   public usuario = false;
   //public vhl = false;
-  
+
   //validacion campos individuales para vehiculo
   public vhlNacionalidad = false;
   public vhlMarca = false;
@@ -213,14 +213,14 @@ export class NewComponent implements OnInit {
 
   //validacion campos individuales victima
   public vtmTipoIdentificacion = false;
-  public vtmNombreVictima= false; 
-  public vtmApellidoVictima= false; 
-  public vtmFechaNacimientoVictima= false; 
-  public vtmSexoVictima= false; 
-  public vtmDireccionVictima= false; 
-  public vtmMunicipioVictima= false; 
-  public vtmTelefonoVictima= false; 
-  
+  public vtmNombreVictima = false;
+  public vtmApellidoVictima = false;
+  public vtmFechaNacimientoVictima = false;
+  public vtmSexoVictima = false;
+  public vtmDireccionVictima = false;
+  public vtmMunicipioVictima = false;
+  public vtmTelefonoVictima = false;
+
   public agente = false;
   public victima = false;
   public testigo = false;
@@ -236,14 +236,14 @@ export class NewComponent implements OnInit {
   public contAcompaniantes = 0;
 
 
-/*   public resumen = {}; public datos = {
-  }
-
-  public datosVehiculo = {
-    'vehiculos': [],
-    'cDemandante': [],
-    'cDemandado': [],
-  } */
+  /*   public resumen = {}; public datos = {
+    }
+  
+    public datosVehiculo = {
+      'vehiculos': [],
+      'cDemandante': [],
+      'cDemandado': [],
+    } */
 
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
@@ -320,17 +320,17 @@ export class NewComponent implements OnInit {
             }
           });
           this._ControlViaService.getSenialVerticalSelect().subscribe(
-              response => {
-                this.senialesVerticales = response;
-              },
-                error => {
-                  this.errorMessage = <any>error;
+            response => {
+              this.senialesVerticales = response;
+            },
+            error => {
+              this.errorMessage = <any>error;
 
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
-                }
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
           );
           this._ControlViaService.getSenialHorizontalSelect().subscribe(
             response => {
@@ -349,7 +349,7 @@ export class NewComponent implements OnInit {
           this._ControlViaService.getReductorVelocidadSelect().subscribe(
             response => {
               this.reductoresVelocidad = response;
-            },  
+            },
             error => {
               this.errorMessage = <any>error;
 
@@ -836,7 +836,7 @@ export class NewComponent implements OnInit {
                     }
                   }
                 );
-                
+
                 this._NacionalidadService.getNacionalidadSelect().subscribe(
                   response => {
                     this.nacionalidades = response;
@@ -1107,8 +1107,8 @@ export class NewComponent implements OnInit {
     this.msvRegistroIpat.modalidadTransporte = this.modalidadTransporteSelected;
     this.msvRegistroIpat.matriculadoEn = this.matriculadoEnSelected;
 
-    if(this.conductores.length == 0) {
-        let dataConductores = {
+    if (this.conductores.length == 0) {
+      let dataConductores = {
         'identificacion': this.msvRegistroIpat.identificacionConductor,
         'tipo identificacion': this.msvRegistroIpat.tipoIdentificacionConductor,
         'nombres': this.msvRegistroIpat.nombresConductor,
@@ -1124,7 +1124,7 @@ export class NewComponent implements OnInit {
       this.conductores.push(dataConductores);
     }
 
-    if(this.vehiculos.length == 0) {
+    if (this.vehiculos.length == 0) {
       let dataVehiculos = {
         'placa': this.msvRegistroIpat.placa,
         'nacionalidad': this.nacionalidadVehiculoSelected,
@@ -1143,7 +1143,7 @@ export class NewComponent implements OnInit {
       this.vehiculos.push(dataVehiculos);
     }
 
-    if(this.victimas.length == 0) {
+    if (this.victimas.length == 0) {
       let dataVictimas = {
         'tipo victima': this.tipoVictimaSelected,
         'gravedad victima': this.gravedadVictimaSelected,
@@ -1270,14 +1270,14 @@ export class NewComponent implements OnInit {
               this.msvRegistroIpat.apellidosConductor = response.data.primerApellido + ' ' + response.data.segundoApellido;
             }
             //this.msvRegistroIpat.nacionalidadConductor = response.data.nacionalidad;
-            if (response.data.fechaNacimiento != null){
+            if (response.data.fechaNacimiento != null) {
               this.cdnFechaNacimientoConductor = true;
               this.msvRegistroIpat.fechaNacimientoConductor = response.data.fechaNacimiento;
             } else {
               this.cdnFechaNacimientoConductor = false;
               this.msvRegistroIpat.fechaNacimientoConductor = '';
             }
-            if (response.data.genero != null){
+            if (response.data.genero != null) {
               this.cdnSexoConductor = true;
               this.sexoConductorSelected = [response.data.genero.id];
             } else {
@@ -1365,14 +1365,14 @@ export class NewComponent implements OnInit {
           if (response.status == 'success') {
             this.vehiculoEncontrado = true;
             //this.vhl = true;
-            if(response.data.nacionalidad.id != null) {
+            if (response.data.nacionalidad != null) {
               this.vhlNacionalidad = true;
               this.nacionalidadVehiculoSelected = [response.data.nacionalidad.id];
             } else {
               this.vhlNacionalidad = false;
               this.nacionalidadVehiculoSelected = [0];
             }
-            if(response.data.linea.marca.id != null) {
+            if (response.data.linea.marca != null) {
               this.vhlMarca = true;
               this.marcaSelected = [response.data.linea.marca.id];
               this.lineaSelected = [response.data.linea.id];
@@ -1381,38 +1381,38 @@ export class NewComponent implements OnInit {
               this.marcaSelected = [0];
               this.lineaSelected = [0];
             }
-            if(response.data.color != null) {
-              this.vhlColor = true;  
+            if (response.data.color != null) {
+              this.vhlColor = true;
               this.colorSelected = [response.data.color.id];
             } else {
               this.vhlColor = false;
               this.colorSelected = [0];
             }
-            if(response.data.modelo != null) {
+            if (response.data.modelo != null) {
               this.vhlModelo = true;
               this.msvRegistroIpat.modelo = response.data.modelo;
             } else {
               this.vhlModelo = false;
               this.msvRegistroIpat.modelo = "";
             }
-            if(response.data.carroceria != null) {
+            if (response.data.carroceria != null) {
               this.vhlCarroceria = true;
               this.carroceriaSelected = [response.data.carroceria.id];
             } else {
               this.vhlCarroceria = false;
               this.carroceriaSelected = [0];
             }
-            if(response.data.numeroPasajeros != null) {
-              this.vhlPasajeros = true;  
+            if (response.data.numeroPasajeros != null) {
+              this.vhlPasajeros = true;
               this.msvRegistroIpat.pasajeros = response.data.numeroPasajeros;
             } else {
               this.vhlPasajeros = false;
               this.msvRegistroIpat.pasajeros = "";
             }
-            if (response.data.municipio != null){
+            if (response.data.municipio != null) {
               this.vhlMatriculadoEn = true;
               this.matriculadoEnSelected = [response.data.municipio.id];
-            } else{
+            } else {
               this.vhlMatriculadoEn = false;
               this.matriculadoEnSelected = [0];
             }
@@ -1423,7 +1423,7 @@ export class NewComponent implements OnInit {
               this.vhlClase = false;
               this.claseSelected = [0];
             }
-            if (response.data.servicio != null){
+            if (response.data.servicio != null) {
               this.vhlServicio = true;
               this.servicioSelected = [response.data.servicio.id];
             } else {
@@ -1457,8 +1457,8 @@ export class NewComponent implements OnInit {
 
                 this.vhlNacionalidad = false;
                 this.nacionalidadVehiculoSelected = [0];
-                
-                this.vhlMarca = false; 
+
+                this.vhlMarca = false;
                 this.marcaSelected = [0];
                 this.lineaSelected = [0];
 
@@ -1512,10 +1512,10 @@ export class NewComponent implements OnInit {
           if (response.status == 'success') {
             this.licencia = true;
             this.msvRegistroIpat.categoriaLicenciaConduccion = response.data.categoria.nombre;
+            this.msvRegistroIpat.restriccionConductor = response.data.restriccion;
             this.msvRegistroIpat.fechaExpedicionLicenciaConduccion = response.data.fechaExpedicion;
             this.msvRegistroIpat.fechaVencimientoLicenciaConduccion = response.data.fechaVencimiento;
-            this.msvRegistroIpat.organismoTransito = response.data.sedeOperativa.nombre;
-            //swal.close();
+            this.msvRegistroIpat.organismoTransito = response.data.organismoTransito.divipo;
           } else {
             swal({
               title: 'Alerta!',
@@ -1536,13 +1536,13 @@ export class NewComponent implements OnInit {
     }
   }
 
-  onMismoConductor(msvRegistroIpat) {
-    if (msvRegistroIpat.identificacionConductor != null && msvRegistroIpat.nombresConductor != '' && msvRegistroIpat.apellidosConductor != '') {
+  onMismoConductor() {
+    if (this.msvRegistroIpat.identificacionConductor != null && this.msvRegistroIpat.nombresConductor != '' && this.msvRegistroIpat.apellidosConductor != '') {
       this.msmConductor = true;
       this.tipoIdentificacionPropietarioSelected = [this.tipoIdentificacionConductorSelected];
-      msvRegistroIpat.identificacionPropietario = this.msvRegistroIpat.identificacionConductor;
-      msvRegistroIpat.nombresPropietario = this.msvRegistroIpat.nombresConductor;
-      msvRegistroIpat.apellidosPropietario = this.msvRegistroIpat.apellidosConductor;
+      this.msvRegistroIpat.identificacionPropietario = this.msvRegistroIpat.identificacionConductor;
+      this.msvRegistroIpat.nombresPropietario = this.msvRegistroIpat.nombresConductor;
+      this.msvRegistroIpat.apellidosPropietario = this.msvRegistroIpat.apellidosConductor;
     } else {
       swal({
         title: 'Alerta!',
@@ -1562,11 +1562,11 @@ export class NewComponent implements OnInit {
           if (response.status == 'success') {
             this.agente = true;
             if (response.data.ciudadano.tipoIdentificacion != null) {
-            this.tipoIdentificacionAgenteSelected = [response.data.ciudadano.tipoIdentificacion.id];
+              this.tipoIdentificacionAgenteSelected = [response.data.ciudadano.tipoIdentificacion.id];
             } else {
               this.tipoIdentificacionAgenteSelected = [0];
             }
-            if (response.data.cargo.nombre != null){
+            if (response.data.cargo.nombre != null) {
               this.msvRegistroIpat.gradoAgente = response.data.cargo.nombre;
             } else {
               this.msvRegistroIpat.gradoAgente = '';
@@ -1579,7 +1579,7 @@ export class NewComponent implements OnInit {
               this.msvRegistroIpat.placaAgente = '';
             }
             if (response.data.organismoTransito.nombre != null) {
-             this.msvRegistroIpat.entidadAgente = response.data.organismoTransito.nombre;
+              this.msvRegistroIpat.entidadAgente = response.data.organismoTransito.nombre;
             } else {
               this.msvRegistroIpat.entidadAgente = '';
             }
@@ -1623,10 +1623,10 @@ export class NewComponent implements OnInit {
           if (response.status == 'success') {
             //this.victima = true;
             this.victimaEncontrada = true;
-            if (response.data.tipoIdentificacion.id != null){
+            if (response.data.tipoIdentificacion.id != null) {
               this.vtmTipoIdentificacion = true;
               this.tipoIdentificacionVictimaSelected = [response.data.tipoIdentificacion.id];
-            } else{
+            } else {
               this.vtmTipoIdentificacion = false;
               this.tipoIdentificacionVictimaSelected = [0];
             }
@@ -1680,7 +1680,7 @@ export class NewComponent implements OnInit {
               this.vtmTelefonoVictima = false;
               this.msvRegistroIpat.telefonoVictima = '';
             }
-              
+
             if (this.vehiculoIpat) {
               swal({
                 title: 'Cargando Lista de vehículos asociados con el accidente!',
@@ -1825,7 +1825,7 @@ export class NewComponent implements OnInit {
 
   registrarCiudadano() {
     let token = this._LoginService.getToken();
-    if(this.msvRegistroIpat.identificacionConductor == null && this.msvRegistroIpat.nombresConductor == null && this.msvRegistroIpat.apellidosConductor) {
+    if (this.msvRegistroIpat.identificacionConductor == null && this.msvRegistroIpat.nombresConductor == null && this.msvRegistroIpat.apellidosConductor) {
       swal({
         title: 'Alerta!',
         text: "Registre los campos del conductor",
@@ -1839,7 +1839,7 @@ export class NewComponent implements OnInit {
       this.msvRegistroIpat.ciudadResidenciaConductor = this.ciudadResidenciaConductorSelected;
 
       var html = 'Se va a registrar el usuario:<br>' +
-        'Nombres: <b>' + this.msvRegistroIpat.nombresConductor + ' ' + this.msvRegistroIpat.apellidosConductor +'</b><br>' +
+        'Nombres: <b>' + this.msvRegistroIpat.nombresConductor + ' ' + this.msvRegistroIpat.apellidosConductor + '</b><br>' +
         'Tipo Identificación: <b>' + this.tipoIdentificacionConductorSelected + '</b><br>' +
         'Identificación: <b>' + this.msvRegistroIpat.identificacionConductor + '</b><br>' +
         'Género: <b>' + this.sexoConductorSelected + '</b><br>' +
@@ -1877,6 +1877,19 @@ export class NewComponent implements OnInit {
                   'direccion': this.msvRegistroIpat.direccionResidenciaConductor,
                   'ciudad residencia': this.ciudadResidenciaConductorSelected,
                   'telefono': this.msvRegistroIpat.telefonoConductor,
+                  'sust. psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasConductor,
+                  'porta licencia conduccion': this.msvRegistroIpat.portaLicencia,
+                  'No. Licencia conduccion': this.msvRegistroIpat.numeroLicenciaConduccion,
+                  'categoria lic. conduccion': this.msvRegistroIpat.categoriaLicenciaConduccion,
+                  'restriccion': this.msvRegistroIpat.restriccionConductor,
+                  'fecha expedicion': this.msvRegistroIpat.fechaExpedicionLicenciaConduccion,
+                  'fecha vencimiento': this.msvRegistroIpat.fechaVencimientoLicenciaConduccion,
+                  'org. transito': this.msvRegistroIpat.organismoTransito,
+                  'cinturon': this.msvRegistroIpat.cinturonConductor,
+                  'casco': this.msvRegistroIpat.cascoConductor,
+                  'chaleco': this.msvRegistroIpat.chalecoConductor,
+                  'hospital atencion': this.msvRegistroIpat.idHospitalConductor,
+                  'descripcio lesiones': this.msvRegistroIpat.descripcionLesionConductor,
                 };
                 this.conductores.push(dataConductores);
 
@@ -1892,8 +1905,21 @@ export class NewComponent implements OnInit {
                 this.msvRegistroIpat.fechaNacimientoConductor = '';
                 this.msvRegistroIpat.direccionResidenciaConductor = '';
                 this.msvRegistroIpat.telefonoConductor = '';
+                this.msvRegistroIpat.sustanciasPsicoactivasConductor = '',
+                this.msvRegistroIpat.portaLicencia = '',
+                this.msvRegistroIpat.numeroLicenciaConduccion = 0,
+                this.msvRegistroIpat.restriccionConductor = '',
+                this.msvRegistroIpat.categoriaLicenciaConduccion = '',
+                this.msvRegistroIpat.fechaExpedicionLicenciaConduccion = '',
+                this.msvRegistroIpat.fechaVencimientoLicenciaConduccion = '',
+                this.msvRegistroIpat.organismoTransito = '',
+                this.msvRegistroIpat.cinturonConductor = '',
+                this.msvRegistroIpat.cascoConductor = '',
+                this.msvRegistroIpat.chalecoConductor = '',
+                this.msvRegistroIpat.idHospitalConductor = 0,
+                this.msvRegistroIpat.descripcionLesionConductor = '',
 
-                this.contConductores +=   1;
+                  this.contConductores += 1;
                 this.msvRegistroIpat.totalConductores = this.contConductores;
                 if (this.gravedadConductorSelected = 'HERIDO') {
                   this.contHeridos += 1;
@@ -1936,9 +1962,22 @@ export class NewComponent implements OnInit {
                   'direccion': this.msvRegistroIpat.direccionResidenciaConductor,
                   'ciudad residencia': this.ciudadResidenciaConductorSelected,
                   'teléfono': this.msvRegistroIpat.telefonoConductor,
+                  'sust. psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasConductor,
+                  'porta licencia conduccion': this.msvRegistroIpat.portaLicencia,
+                  'No. Licencia conduccion': this.msvRegistroIpat.numeroLicenciaConduccion,
+                  'categoria lic. conduccion': this.msvRegistroIpat.categoriaLicenciaConduccion,
+                  'restriccion': this.msvRegistroIpat.restriccionConductor,
+                  'fecha expedicion': this.msvRegistroIpat.fechaExpedicionLicenciaConduccion,
+                  'fecha vencimiento': this.msvRegistroIpat.fechaVencimientoLicenciaConduccion,
+                  'org. transito': this.msvRegistroIpat.organismoTransito,
+                  'cinturon': this.msvRegistroIpat.cinturonConductor,
+                  'casco': this.msvRegistroIpat.cascoConductor,
+                  'chaleco': this.msvRegistroIpat.chalecoConductor,
+                  'hospital atencion': this.msvRegistroIpat.idHospitalConductor,
+                  'descripcio lesiones': this.msvRegistroIpat.descripcionLesionConductor,
                 };
                 this.conductores.push(dataConductores);
-                
+
                 this.contConductores += 1;
                 this.msvRegistroIpat.totalConductores = this.contConductores;
 
@@ -1962,16 +2001,16 @@ export class NewComponent implements OnInit {
                 });
               }
             });
-          }
-        });
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert('Error en la petición');
-          }
+        }
+      });
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
         }
       }
+    }
   }
 
   registrarCiudadanoEncontrado() {
@@ -1987,6 +2026,23 @@ export class NewComponent implements OnInit {
       'direccion': this.msvRegistroIpat.direccionResidenciaConductor,
       'ciudad residencia': this.ciudadResidenciaConductorSelected,
       'teléfono': this.msvRegistroIpat.telefonoConductor,
+      'se practico el examen': this.msvRegistroIpat.practicoExamenConductor,
+      'autorizó': this.msvRegistroIpat.autorizoConductor,
+      'resultado examen': this.msvRegistroIpat.idResultadoExamenConductor,
+      'grado examen': this.msvRegistroIpat.idGradoExamenConductor,
+      'sust. psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasConductor,
+      'porta licencia conduccion': this.msvRegistroIpat.portaLicencia,
+      'No. Licencia conduccion': this.msvRegistroIpat.numeroLicenciaConduccion,
+      'categoria lic. conduccion': this.msvRegistroIpat.categoriaLicenciaConduccion,
+      'restriccion': this.msvRegistroIpat.restriccionConductor,
+      'fecha expedicion': this.msvRegistroIpat.fechaExpedicionLicenciaConduccion,
+      'fecha vencimiento': this.msvRegistroIpat.fechaVencimientoLicenciaConduccion,
+      'org. transito': this.msvRegistroIpat.organismoTransito,
+      'cinturon': this.msvRegistroIpat.cinturonConductor,
+      'casco': this.msvRegistroIpat.cascoConductor,
+      'chaleco': this.msvRegistroIpat.chalecoConductor,
+      'hospital atencion': this.msvRegistroIpat.idHospitalConductor,
+      'descripcio lesiones': this.msvRegistroIpat.descripcionLesionConductor,
     };
     this.conductores.push(dataConductores);
 
@@ -2010,6 +2066,7 @@ export class NewComponent implements OnInit {
     });
     console.log(this.conductores);
   }
+
   registrarVehiculo() {
     let token = this._LoginService.getToken();
 
@@ -2030,6 +2087,7 @@ export class NewComponent implements OnInit {
       this.msvRegistroIpat.servicio = this.servicioSelected;
       this.msvRegistroIpat.modalidadTransporte = this.modalidadTransporteSelected;
       this.msvRegistroIpat.radioAccion = this.radioAccionSelected;
+      this.msvRegistroIpat.matriculadoEn = this.matriculadoEnSelected;
 
       var html = 'Se va a registrar el vehículo:<br>' +
         'Placa: <b>' + this.msvRegistroIpat.placa + '</b><br>' +
@@ -2037,8 +2095,8 @@ export class NewComponent implements OnInit {
         'Color: <b>' + this.colorSelected + '</b><br>' +
         'Modelo: <b>' + this.msvRegistroIpat.modelo + '</b><br>' +
         'Tipo vehículo: <b>' + this.claseSelected + '</b><br>';
-        'Servicio: <b>' + this.servicioSelected + '</b><br>';
-        'Modalidad transporte: <b>' + this.modalidadTransporteSelected + '</b><br>';
+      'Servicio: <b>' + this.servicioSelected + '</b><br>';
+      'Modalidad transporte: <b>' + this.modalidadTransporteSelected + '</b><br>';
 
       swal({
         title: 'Creación de vehículo',
@@ -2049,7 +2107,7 @@ export class NewComponent implements OnInit {
         confirmButtonText: 'Agregar más vehículos involucrados',
         cancelButtonText: 'Agregar un solo vehículo',
       }).then((result) => {
-        if (result.value) {  
+        if (result.value) {
           this._MsvRegistroIpatService.registerVehiculoIpat(this.msvRegistroIpat, token).subscribe(
             response => {
               if (response.status == 'success') {
@@ -2074,6 +2132,34 @@ export class NewComponent implements OnInit {
                   'capacidad carga(ton)': this.msvRegistroIpat.ton,
                   'pasajeros': this.msvRegistroIpat.pasajeros,
                   'matriculado en': this.matriculadoEnSelected,
+                  'nombre empresa vehiculo afiliado': this.msvRegistroIpat.empresa,
+                  'nit empresa': this.msvRegistroIpat.nitEmpresa,
+                  'inmovilizado': this.msvRegistroIpat.inmovilizado,
+                  'inmovilizado en': this.msvRegistroIpat.inmovilizadoEn,
+                  'a disposición de': this.msvRegistroIpat.aDisposicionDe,
+                  'tarjeta de registro': this.msvRegistroIpat.portaTarjetaRegistro,
+                  'Nro. tarjeta registro': this.msvRegistroIpat.tarjetaRegistro,
+                  'organismo transito': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
+                  'revision tecnomecanica': this.msvRegistroIpat.revisionTecnomecanica,
+                  'nro. tecnomecanica': this.msvRegistroIpat.numeroTecnoMecanica,
+                  'cantidad acompañantes': this.msvRegistroIpat.cantidadAcompaniantes,
+                  'porta soat': this.msvRegistroIpat.portaSoat,
+                  'soat': this.msvRegistroIpat.soat,
+                  'numero poliza': this.msvRegistroIpat.numeroPoliza,
+                  'aseguradora soat': this.msvRegistroIpat.aseguradoraSoat,
+                  'fecha vencimiento soat': this.msvRegistroIpat.fechaVencimientoSoat,
+                  'seguro responsabilidad civil': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
+                  'numero seguro resp. civil': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
+                  'aseguradora Seguro Responsabilidad Civil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+                  'idAseguradoraSeguroResponsabilidadCivil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+                  'portaSeguroExtracontractual': this.msvRegistroIpat.portaSeguroExtracontractual,
+                  'numeroSeguroExtracontractual': this.msvRegistroIpat.numeroSeguroExtracontractual,
+                  'idAseguradoraSeguroExtracontractual': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
+                  'fechaVencimientoSeguroExtracontractual': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
+                  'descripcionDanios': this.msvRegistroIpat.descripcionDanios,
+                  'arrayFallas': this.msvRegistroIpat.arrayFallas,
+                  'otraFalla': this.msvRegistroIpat.otraFalla,
+                  'arrayLugaresImpacto': this.msvRegistroIpat.arrayLugaresImpacto,
                 };
                 this.vehiculos.push(dataVehiculos);
 
@@ -2089,8 +2175,35 @@ export class NewComponent implements OnInit {
                 this.servicioSelected = [0];
                 this.radioAccionSelected = [0];
                 this.modalidadTransporteSelected = [0];
+                this.msvRegistroIpat.ton = '';
                 this.msvRegistroIpat.pasajeros = '';
                 this.msvRegistroIpat.matriculadoEn = '';
+                this.msvRegistroIpat.empresa = '';
+                this.msvRegistroIpat.nitEmpresa = 0;
+                this.msvRegistroIpat.inmovilizado = '';
+                this.msvRegistroIpat.inmovilizadoEn = '';
+                this.msvRegistroIpat.aDisposicionDe = '';
+                this.msvRegistroIpat.portaTarjetaRegistro = '';
+                this.msvRegistroIpat.revisionTecnomecanica = '';
+                this.msvRegistroIpat.numeroTecnoMecanica = 0;
+                this.msvRegistroIpat.cantidadAcompaniantes = 0;
+                this.msvRegistroIpat.portaSoat = '';
+                this.msvRegistroIpat.soat = 0;
+                this.msvRegistroIpat.numeroPoliza = 0;
+                this.msvRegistroIpat.aseguradoraSoat = '';
+                this.msvRegistroIpat.fechaVencimientoSoat = '';
+                this.msvRegistroIpat.portaSeguroResponsabilidadCivil = '';
+                this.msvRegistroIpat.numeroSeguroResponsabilidadCivil = 0;
+                this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil = '';
+                this.msvRegistroIpat.fechaVencimientoSeguroResponsabilidadCivil = '';
+                this.msvRegistroIpat.portaSeguroExtracontractual = '';
+                this.msvRegistroIpat.numeroSeguroExtracontractual = 0;
+                this.msvRegistroIpat.idAseguradoraSeguroExtracontractual = '';
+                this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual = '';
+                this.msvRegistroIpat.descripcionDanios = '';
+                this.msvRegistroIpat.arrayFallas = '';
+                this.msvRegistroIpat.arrayLugaresImpacto = '';
+                this.msvRegistroIpat.idHipotesis = '';
               } else {
                 swal({
                   title: 'Alerta!',
@@ -2124,6 +2237,34 @@ export class NewComponent implements OnInit {
                   'capacidad carga(ton)': this.msvRegistroIpat.ton,
                   'pasajeros': this.msvRegistroIpat.pasajeros,
                   'matriculado en': this.matriculadoEnSelected,
+                  'nombre empresa vehiculo afiliado': this.msvRegistroIpat.empresa,
+                  'nit empresa': this.msvRegistroIpat.nitEmpresa,
+                  'inmovilizado': this.msvRegistroIpat.inmovilizado,
+                  'inmovilizado en': this.msvRegistroIpat.inmovilizadoEn,
+                  'a disposición de': this.msvRegistroIpat.aDisposicionDe,
+                  'tarjeta de registro': this.msvRegistroIpat.portaTarjetaRegistro,
+                  'Nro. tarjeta registro': this.msvRegistroIpat.tarjetaRegistro,
+                  'organismo transito': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
+                  'revision tecnomecanica': this.msvRegistroIpat.revisionTecnomecanica,
+                  'nro. tecnomecanica': this.msvRegistroIpat.numeroTecnoMecanica,
+                  'cantidad acompañantes': this.msvRegistroIpat.cantidadAcompaniantes,
+                  'porta soat': this.msvRegistroIpat.portaSoat,
+                  'soat': this.msvRegistroIpat.soat,
+                  'numero poliza': this.msvRegistroIpat.numeroPoliza,
+                  'aseguradora soat': this.msvRegistroIpat.aseguradoraSoat,
+                  'fecha vencimiento soat': this.msvRegistroIpat.fechaVencimientoSoat,
+                  'seguro responsabilidad civil': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
+                  'numero seguro resp. civil': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
+                  'aseguradora Seguro Responsabilidad Civil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+                  'idAseguradoraSeguroResponsabilidadCivil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+                  'portaSeguroExtracontractual': this.msvRegistroIpat.portaSeguroExtracontractual,
+                  'numeroSeguroExtracontractual': this.msvRegistroIpat.numeroSeguroExtracontractual,
+                  'idAseguradoraSeguroExtracontractual': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
+                  'fechaVencimientoSeguroExtracontractual': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
+                  'descripcionDanios': this.msvRegistroIpat.descripcionDanios,
+                  'arrayFallas': this.msvRegistroIpat.arrayFallas,
+                  'otraFalla': this.msvRegistroIpat.otraFalla,
+                  'arrayLugaresImpacto': this.msvRegistroIpat.arrayLugaresImpacto,
                 };
                 this.vehiculos.push(dataVehiculos);
                 this.vehiculoIpat = true;
@@ -2148,7 +2289,7 @@ export class NewComponent implements OnInit {
     }
   }
 
-  registrarVehiculoEncontrado(){
+  registrarVehiculoEncontrado() {
     let dataVehiculos = {
       'placa': this.msvRegistroIpat.placa,
       'nacionalidad': this.nacionalidadVehiculoSelected,
@@ -2163,6 +2304,34 @@ export class NewComponent implements OnInit {
       'capacidad carga(ton)': this.msvRegistroIpat.ton,
       'pasajeros': this.msvRegistroIpat.pasajeros,
       'matriculado en': this.matriculadoEnSelected,
+      'nombre empresa vehiculo afiliado': this.msvRegistroIpat.empresa,
+      'nit empresa': this.msvRegistroIpat.nitEmpresa,
+      'inmovilizado': this.msvRegistroIpat.inmovilizado,
+      'inmovilizado en': this.msvRegistroIpat.inmovilizadoEn,
+      'a disposición de': this.msvRegistroIpat.aDisposicionDe,
+      'tarjeta de registro': this.msvRegistroIpat.portaTarjetaRegistro,
+      'Nro. tarjeta registro': this.msvRegistroIpat.tarjetaRegistro,
+      'organismo transito': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
+      'revision tecnomecanica': this.msvRegistroIpat.revisionTecnomecanica,
+      'nro. tecnomecanica': this.msvRegistroIpat.numeroTecnoMecanica,
+      'cantidad acompañantes': this.msvRegistroIpat.cantidadAcompaniantes,
+      'porta soat': this.msvRegistroIpat.portaSoat,
+      'soat': this.msvRegistroIpat.soat,
+      'numero poliza': this.msvRegistroIpat.numeroPoliza,
+      'aseguradora soat': this.msvRegistroIpat.aseguradoraSoat,
+      'fecha vencimiento soat': this.msvRegistroIpat.fechaVencimientoSoat,
+      'seguro responsabilidad civil': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
+      'numero seguro resp. civil': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
+      'aseguradora Seguro Responsabilidad Civil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+      'idAseguradoraSeguroResponsabilidadCivil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+      'portaSeguroExtracontractual': this.msvRegistroIpat.portaSeguroExtracontractual,
+      'numeroSeguroExtracontractual': this.msvRegistroIpat.numeroSeguroExtracontractual,
+      'idAseguradoraSeguroExtracontractual': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
+      'fechaVencimientoSeguroExtracontractual': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
+      'descripcionDanios': this.msvRegistroIpat.descripcionDanios,
+      'arrayFallas': this.msvRegistroIpat.arrayFallas,
+      'otraFalla': this.msvRegistroIpat.otraFalla,
+      'arrayLugaresImpacto': this.msvRegistroIpat.arrayLugaresImpacto,
     };
     this.vehiculos.push(dataVehiculos);
     console.log(this.vehiculos);
@@ -2179,7 +2348,7 @@ export class NewComponent implements OnInit {
   registrarVictima() {
     let token = this._LoginService.getToken();
 
-    if(this.msvRegistroIpat.identificacionVictima == null) {
+    if (this.msvRegistroIpat.identificacionVictima == null) {
       swal({
         title: 'Alerta!',
         text: "Registre todos los campos de la victima",
@@ -2233,6 +2402,16 @@ export class NewComponent implements OnInit {
                   'ciudad residencia': this.ciudadResidenciaVictimaSelected,
                   'telefono': this.msvRegistroIpat.telefonoVictima,
                   'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
+                  'hospital atencion': this.msvRegistroIpat.telefonoVictima,
+                  'se practico el examen': this.msvRegistroIpat.practicoExamenVictima,
+                  'autorizó': this.msvRegistroIpat.autorizoVictima,
+                  'resultado examen': this.msvRegistroIpat.idResultadoExamenVictima,
+                  'grado examen': this.msvRegistroIpat.idGradoExamenVictima,
+                  'sustancias psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
+                  'cinturon': this.msvRegistroIpat.cinturonVictima,
+                  'casco': this.msvRegistroIpat.cascoVictima,
+                  'chaleco': this.msvRegistroIpat.chalecoVictima,
+                  'descripcion lesiones': this.msvRegistroIpat.descripcionLesionVictima,
                 };
                 this.victimas.push(dataVictimas);
                 console.log(this.tipoVictimaSelected);
@@ -2240,21 +2419,21 @@ export class NewComponent implements OnInit {
                   this.contPasajeros += 1;
                   this.msvRegistroIpat.totalPasajeros = this.contPasajeros;
                   console.log(this.contPasajeros);
-                } if (this.tipoVictimaSelected = 'PEATON'){
+                } if (this.tipoVictimaSelected = 'PEATON') {
                   this.contPeatones += 1;
                   this.msvRegistroIpat.totalPeatones = this.contPeatones;
-                  console.log(this.contPeatones); 
-                } if (this.tipoVictimaSelected = 'ACOMPAÑANTE'){
+                  console.log(this.contPeatones);
+                } if (this.tipoVictimaSelected = 'ACOMPAÑANTE') {
                   this.contAcompaniantes += 1;
                   this.msvRegistroIpat.totalAcompaniantes = this.contAcompaniantes;
                   console.log(this.contAcompaniantes);
-                } 
-                if (this.gravedadVictimaSelected = 'HERIDO'){
-                  this.contHeridos +=1;
+                }
+                if (this.gravedadVictimaSelected = 'HERIDO') {
+                  this.contHeridos += 1;
                   this.msvRegistroIpat.totalHeridos = this.contHeridos;
                   console.log(this.contHeridos);
-                } if (this.gravedadVictimaSelected = 'MUERTO'){
-                  this.contMuertos+=1;
+                } if (this.gravedadVictimaSelected = 'MUERTO') {
+                  this.contMuertos += 1;
                   this.msvRegistroIpat.totalMuertos = this.contMuertos;
                   console.log(this.contMuertos);
                 }
@@ -2263,7 +2442,7 @@ export class NewComponent implements OnInit {
                 this.tipoVictimaSelected = [0];
                 this.gravedadVictimaSelected = [0];
                 this.msvRegistroIpat.identificacionVictima = '';
-                this.msvRegistroIpat.tipoIdentificacionVictima = 0;
+                this.msvRegistroIpat.tipoIdentificacionVictima = '';
                 this.msvRegistroIpat.nombresVictima = '';
                 this.msvRegistroIpat.apellidosVictima = '';
                 this.nacionalidadVictimaSelected = [0];
@@ -2272,6 +2451,16 @@ export class NewComponent implements OnInit {
                 this.msvRegistroIpat.direccionResidenciaVictima = '';
                 this.ciudadResidenciaVictimaSelected = [0];
                 this.msvRegistroIpat.telefonoVictima = '';
+                this.msvRegistroIpat.idHospitalVictima = '';
+                this.msvRegistroIpat.practicoExamenVictima = '';
+                this.msvRegistroIpat.autorizoVictima = '';
+                this.msvRegistroIpat.idResultadoExamenVictima = '';
+                this.msvRegistroIpat.idGradoExamenVictima = '';
+                this.msvRegistroIpat.sustanciasPsicoactivasVictima = '';
+                this.msvRegistroIpat.cinturonVictima = '';
+                this.msvRegistroIpat.cascoVictima = '';
+                this.msvRegistroIpat.chalecoVictima = '';
+                this.msvRegistroIpat.descripcionLesionVictima = '';
               } else {
                 swal({
                   title: 'Alerta!',
@@ -2281,7 +2470,7 @@ export class NewComponent implements OnInit {
                 });
               }
             });
-          }
+        }
         else if (result.dismiss === swal.DismissReason.cancel) {
           if (result.value) {
             this._MsvRegistroIpatService.registerCiudadanoIpat(this.msvRegistroIpat, token).subscribe(
@@ -2308,9 +2497,19 @@ export class NewComponent implements OnInit {
                     'ciudad residencia': this.ciudadResidenciaVictimaSelected,
                     'telefono': this.msvRegistroIpat.telefonoVictima,
                     'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
+                    'hospital atencion': this.msvRegistroIpat.telefonoVictima,
+                    'se practico el examen': this.msvRegistroIpat.practicoExamenVictima,
+                    'autorizó': this.msvRegistroIpat.autorizoVictima,
+                    'resultado examen': this.msvRegistroIpat.idResultadoExamenVictima,
+                    'grado examen': this.msvRegistroIpat.idGradoExamenVictima,
+                    'sustancias psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
+                    'cinturon': this.msvRegistroIpat.cinturonVictima,
+                    'casco': this.msvRegistroIpat.cascoVictima,
+                    'chaleco': this.msvRegistroIpat.chalecoVictima,
+                    'descripcion lesiones': this.msvRegistroIpat.descripcionLesionVictima,
                   };
                   this.victimas.push(dataVictimas);
-                  
+
                   if (this.tipoVictimaSelected = 'PASAJERO') {
                     this.contPasajeros += 1;
                     this.msvRegistroIpat.totalPasajeros = this.contPasajeros;
@@ -2339,9 +2538,9 @@ export class NewComponent implements OnInit {
                   });
                 }
               });
-            }
           }
-        });
+        }
+      });
 
       error => {
         this.errorMessage = <any>error;
@@ -2353,7 +2552,7 @@ export class NewComponent implements OnInit {
     }
   }
 
-  registrarVictimaEncontrada(){
+  registrarVictimaEncontrada() {
     let dataVictimas = {
       'tipo victima': this.tipoVictimaSelected,
       'gravedad victima': this.gravedadVictimaSelected,
@@ -2368,6 +2567,16 @@ export class NewComponent implements OnInit {
       'ciudad residencia': this.ciudadResidenciaVictimaSelected,
       'telefono': this.msvRegistroIpat.telefonoVictima,
       'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
+      'hospital atencion': this.msvRegistroIpat.telefonoVictima,
+      'se practico el examen': this.msvRegistroIpat.practicoExamenVictima,
+      'autorizó': this.msvRegistroIpat.autorizoVictima,
+      'resultado examen': this.msvRegistroIpat.idResultadoExamenVictima,
+      'grado examen': this.msvRegistroIpat.idGradoExamenVictima,
+      'sustancias psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
+      'cinturon': this.msvRegistroIpat.cinturonVictima,
+      'casco': this.msvRegistroIpat.cascoVictima,
+      'chaleco': this.msvRegistroIpat.chalecoVictima,
+      'descripcion lesiones': this.msvRegistroIpat.descripcionLesionVictima,
     };
     this.victimas.push(dataVictimas);
     console.log(this.tipoVictimaSelected);

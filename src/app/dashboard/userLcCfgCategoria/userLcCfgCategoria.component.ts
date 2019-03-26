@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CfgLicenciaConduccionCategoriaService } from '../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoriaService } from '../../services/userLcCfgCategoria.service';
 import { LoginService } from '../../services/login.service';
-import { CfgLicenciaConduccionCategoria } from './cfgLicenciaConduccionCategoria.modelo';
+import { UserLcCfgCategoria } from './userLcCfgCategoria.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './cfgLicenciaConduccionCategoria.component.html'
+  templateUrl: './userLcCfgCategoria.component.html'
 })
-export class CfgLicenciaConduccionCategoriaComponent implements OnInit {
+export class UserLcCfgCategoriaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -18,10 +18,10 @@ export class CfgLicenciaConduccionCategoriaComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public table:any; 
-  public categoria: CfgLicenciaConduccionCategoria;
+  public categoria: UserLcCfgCategoria;
 
   constructor(
-    private _TipoContratoService: CfgLicenciaConduccionCategoriaService,
+    private _CategoriaService: UserLcCfgCategoriaService,
 		private _loginService: LoginService,
     ){}
     
@@ -41,7 +41,7 @@ export class CfgLicenciaConduccionCategoriaComponent implements OnInit {
       }
     });
     
-    this._TipoContratoService.index().subscribe(
+    this._CategoriaService.index().subscribe(
 				response => {
           this.categorias = response.data;
           let timeoutId = setTimeout(() => {  
@@ -89,7 +89,8 @@ export class CfgLicenciaConduccionCategoriaComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  delete(id:any){
+  
+  onDelete(id:any){
     swal({
       title: '¿Estás seguro?',
       text: "¡Se eliminara este registro!",
@@ -102,7 +103,7 @@ export class CfgLicenciaConduccionCategoriaComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._TipoContratoService.delete(token,id).subscribe(
+        this._CategoriaService.delete({'id': id}, token).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
@@ -129,7 +130,7 @@ export class CfgLicenciaConduccionCategoriaComponent implements OnInit {
     })
   }
 
-  edit(categoria:any){
+  onEdit(categoria:any){
     this.categoria = categoria;
     this.formEdit = true;
     this.formIndex = false;

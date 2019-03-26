@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoriaService } from '../../../services/userLcCfgCategoria.service';
 import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -11,11 +11,10 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() categoria:any = null;
 public errorMessage;
-public respuesta;
 public formReady = false;
 
 constructor(
-  private _CategoriaService: CfgLicenciaConduccionCategoriaService,
+  private _CategoriaService: UserLcCfgCategoriaService,
   private _loginService: LoginService,
   ){}
 
@@ -27,13 +26,11 @@ constructor(
     let token = this._loginService.getToken();
 		this._CategoriaService.edit(this.categoria,token).subscribe(
 			response => {
-        this.respuesta = response;
-
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: 'El registro se ha modificado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

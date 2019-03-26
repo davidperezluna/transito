@@ -1,0 +1,64 @@
+<div class="container">
+    <hr>
+    <div class="row" *ngIf='formIndex'>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>
+                        <b>Licencia Conducción</b>
+                        <small>Lista Licencias de Conducción</small>
+                        <div class="btn-group pull-right">
+                            <button (click)="onNew()" class="btn btn-success btn-round" data-target="#themepicker"
+                                data-toggle="modal"><span class="text">Nuevo</span> <i
+                                    class="ti-save ml-2"></i></button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body responsive">
+                    <div class="table-responsive">
+                        <table class="table" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Numero</th>
+                                    <th>Categoria</th>
+                                    <th>Ciudadano</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd" *ngFor="let licenciaConduccion of licenciasConduccion; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>
+                                        {{ licenciaConduccion.numero }}
+                                    </td>
+                                    <td>
+                                        {{ licenciaConduccion.categoria.nombre }}
+                                    </td>
+                                    <td>
+                                        {{ licenciaConduccion.ciudadano.identificacion }}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button (click)="onEdit(licenciaConduccion)" class="btn btn-primary btn-xs"
+                                                type="button">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button (click)="onDelete(licenciaConduccion.id)" class="btn btn-danger btn-xs"
+                                                type="button">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive   -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-edit *ngIf='formEdit' [licenciaConduccion]="licenciaConduccion" (ready)="ready($event)"></app-edit>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

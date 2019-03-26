@@ -4,6 +4,7 @@ import { FroFacTramiteService } from '../../../../services/froFacTramite.service
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { VhloCfgCombustibleService } from '../../../../services/vhloCfgCombustible.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 
 import swal from 'sweetalert2';
@@ -39,6 +40,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
         'numeroIdentificacion': null,
         'numeroRunt': null,
         'campos': null,
+        'idFuncionario': null,
         'idVehiculo': null,
         'idTipoIngreso': null,
         'idCombustible': null,
@@ -56,24 +58,105 @@ export class NewRnaCambioMotorComponent implements OnInit {
         private _CombustibleService: VhloCfgCombustibleService,
         private _VehiculoService: VhloVehiculoService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
         let token = this._LoginService.getToken();
 
-        this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    this.tramiteFactura = response.data;
+        let identity = this._LoginService.getIdentity();
 
-                    swal.close();
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.datos.idFuncionario = response.data.id;
+                    this.autorizado = true;
+
+                    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.tramiteFactura = response.data;
+
+                                swal.close();
+                            } else {
+                                this.tramiteFactura = null;
+
+                                swal({
+                                    title: 'Error!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+
+                    if (this.tramiteFactura.realizado) {
+                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.tramiteSolicitud = response.data;
+                                } else {
+                                    this.tramiteSolicitud = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    } else {
+                        this._CombustibleService.select().subscribe(
+                            response => {
+                                this.combustibles = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+                        this._TipoIdentificacionService.select().subscribe(
+                            response => {
+                                this.tiposIdentificacion = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+                    }
                 } else {
-                    this.tramiteFactura = null;
+                    this.autorizado = false;
 
                     swal({
                         title: 'Error!',
-                        text: response.message,
+                        text: 'Usted no tiene permisos para realizar tramites',
                         type: 'error',
                         confirmButtonText: 'Aceptar'
                     });
@@ -82,64 +165,11 @@ export class NewRnaCambioMotorComponent implements OnInit {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
             }
         );
-
-        if (this.tramiteFactura.realizado) {
-            this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-                response => {
-                    if (response.code == 200) {
-                        this.tramiteSolicitud = response.data;
-                    } else {
-                        this.tramiteSolicitud = null;
-
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-                    error => {
-                        this.errorMessage = <any>error;
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
-                    }
-                }
-            );
-        } else {
-            this._CombustibleService.select().subscribe(
-                response => {
-                    this.combustibles = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            );
-            this._TipoIdentificacionService.select().subscribe(
-                response => {
-                    this.tiposIdentificacion = response;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            );
-        }
     }
 
     onEnviar() {

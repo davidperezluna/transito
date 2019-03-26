@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { CfgLicenciaConduccionCategoria } from '../cfgLicenciaConduccionCategoria.modelo';
-import { CfgLicenciaConduccionCategoriaService } from '../../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoria } from '../userLcCfgCategoria.modelo';
+import { UserLcCfgCategoriaService } from '../../../services/userLcCfgCategoria.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -10,17 +10,16 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public categoria: CfgLicenciaConduccionCategoria;
+public categoria: UserLcCfgCategoria;
 public errorMessage;
-public respuesta;
 
 constructor(
-  private _TipoContratoService: CfgLicenciaConduccionCategoriaService,
+  private _CategoriaService: UserLcCfgCategoriaService,
   private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.categoria = new CfgLicenciaConduccionCategoria(null, null, null);
+    this.categoria = new UserLcCfgCategoria(null, null, null);
   }
   onCancelar(){
     this.ready.emit(true);
@@ -29,22 +28,20 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-		this._TipoContratoService.register(this.categoria,token).subscribe(
+		this._CategoriaService.register(this.categoria,token).subscribe(
 			response => {
-        this.respuesta = response;
-
-        if(this.respuesta.status == 'success'){
+        if(response.status == 'success'){
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',
-            text: response.msj,
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })
         }else{
           swal({
             title: 'Error!',
-            text: 'El categoria '+  +' ya se encuentra registrado',
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           })
@@ -56,8 +53,6 @@ constructor(
 						alert("Error en la petición");
 					}
 				}
-
 		}); 
   }
-
 }

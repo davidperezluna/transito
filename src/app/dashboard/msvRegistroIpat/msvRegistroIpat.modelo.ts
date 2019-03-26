@@ -60,7 +60,7 @@ export class MsvRegistroIpat{
 		public ton: string,
 		public pasajeros: string,
 		
-		public empresa:number,
+		public empresa:string,
 		public nitEmpresa: number,
 		
 		public matriculadoEn: string,
@@ -109,7 +109,7 @@ export class MsvRegistroIpat{
 		public descripcionDanios: string,
 		public arrayFallas: string,
 		public otraFalla: string,
-		public arrayLugaresImpacto: number,
+		public arrayLugaresImpacto: string,
 		
 		//Datos Conductor
 		public nombresConductor: string,
@@ -146,7 +146,7 @@ export class MsvRegistroIpat{
 		public victima: string,
 		public nombresVictima: string,
 		public apellidosVictima: string,
-		public tipoIdentificacionVictima: number,
+		public tipoIdentificacionVictima: string,
 		public identificacionVictima: string,
 		public nacionalidadVictima: string,
 		public fechaNacimientoVictima: string,
@@ -154,7 +154,7 @@ export class MsvRegistroIpat{
 		public direccionResidenciaVictima: string,
 		public ciudadResidenciaVictima: string,
 		public telefonoVictima: string,
-		public idHospitalVictima: number,
+		public idHospitalVictima: string,
 		public placaVehiculoVictima: string,
 		public practicoExamenVictima: string,
 		public autorizoVictima: string,
@@ -197,7 +197,7 @@ export class MsvRegistroIpat{
 		public ciudadResidenciaTestigo: string,
 		public telefonoTestigo: string,
 		
-		public idHipotesis: number,
+		public idHipotesis: string,
 		
 		//datos agente de transito
 		public gradoAgente: string,

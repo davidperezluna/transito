@@ -70,7 +70,6 @@ export class NewRnaInsumoComponent implements OnInit {
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
               if (response.status == 'success') {
-                  console.log(response.data.organismoTransito.id);
                   this.idOrganismoTransito = response.data.organismoTransito.id;
                 //   let datos = {
                 //         'organismoTransito':1 

@@ -3,7 +3,7 @@ import { TramiteFacturaService } from '../../../../services/tramiteFactura.servi
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
-import { CfgLicenciaConduccionCategoriaService } from '../../../../services/cfgLicenciaConduccionCategoria.service';
+import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { LoginService } from '../../../../services/login.service';
 
@@ -45,7 +45,7 @@ export class NewRncExpedicionLicenciaCambioDocumentoComponent implements OnInit 
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
         private _CfgPaisService: CfgPaisService,
-        private _CategoriaService: CfgLicenciaConduccionCategoriaService,
+        private _CategoriaService: UserLcCfgCategoriaService,
     ) { }
 
     ngOnInit() {

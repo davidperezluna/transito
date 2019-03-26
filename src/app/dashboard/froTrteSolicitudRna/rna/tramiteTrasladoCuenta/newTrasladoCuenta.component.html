@@ -14,7 +14,7 @@
 </div>
 
 <div class="row" *ngIf="!tramiteFactura.realizado && autorizado">
-   <div class="col-xs-12 col-lg-4">
+   <div class="col-xs-12 col-lg-12">
       <div class="card">
          <div class="card-header">
             <b class="text-primary">Registrar traslado de cuenta</b>
@@ -24,24 +24,24 @@
             <form #formNew="ngForm">
                <div class="form-group">
                    <div class="row">
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-8">
                             <label>Organismo de transito de destino</label>  
                             <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
                             </ng-select>
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Fecha salida<strong class="text-danger">*</strong></label>
                             <input class="form-control" [(ngModel)]="datos.fechaSalida" name="fechaSalida" type="date" required />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Número Guía</label>
                             <input class="form-control" [(ngModel)]="datos.numeroGuia" name="numeroGuia" type="text" required />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Nombre empresa</label>
                             <input class="form-control" [(ngModel)]="datos.nombreEmpresa" name="nombreEmpresa" type="text" required />
                         </div>
-                        <div class="col-xs-12 col-lg-12">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Número solicitud RUNT</label>
                             <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
                         </div>
