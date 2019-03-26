@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {rnaRegistroInsumos} from '../rnaRegistroInsumos.modelo';
-import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
-import {LoginService} from '../../../services/login.service';
+import { rnaRegistroInsumos } from '../rnaRegistroInsumos.modelo';
+import { ImoLoteService } from '../../../services/imoLote.service';
+import { LoginService } from '../../../services/login.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
@@ -33,7 +33,7 @@ public date:any;
 
 constructor(
   private datePipe: DatePipe,
-  private _rnaRegistroInsumosService: RnaLoteInsumoService,
+  private _rnaRegistroInsumosService: ImoLoteService,
   private _loginService: LoginService,
   private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,

@@ -226,7 +226,7 @@ import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.modu
 
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
-import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
+import { ImoAsignacionModule } from './imoAsignacion/imoAsignacion.module';
 //import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
 import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
@@ -449,7 +449,7 @@ import {RightsidebarComponent} from '../shared';
     MsvTalonarioModule,
     rnaRegistroInsumosModule,
     RnmaPreregistroModule,
-    rnaAsignacionInsumosModule,
+    ImoAsignacionModule,
     LimitacionModule,
     CfgTipoProcesoModule,
     RnmaTramiteInscripcionLimitacionModule,

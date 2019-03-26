@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {rnaAsignacionInsumos} from '../rnaAsignacionInsumos.modelo';
+import {rnaAsignacionInsumos} from '../imoAsignacion.modelo';
 import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
 import { UserEmpresaService } from '../../../services/userEmpresa.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';

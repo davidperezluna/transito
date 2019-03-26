@@ -206,7 +206,7 @@ import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicia
 import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimitacion.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
-import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
+import { ImoAsignacionRoutes} from './imoAsignacion/imoAsignacion.routes';
 //import { RnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
 import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
@@ -449,7 +449,7 @@ export const DashboardRoutes: Route[] = [
       ...RnaTramiteLevantamientoLimitacionRoutes,
       ...RnrsTramiteInscripcionLimitacionRoutes,
       ...RnrsTramiteLevantamientoLimitacionRoutes,
-      ...rnaAsignacionInsumosRoutes,
+      ...ImoAsignacionRoutes,
       ...LimitacionRoutes,
       ...CfgTipoProcesoRoutes,
       ...CfgValorVehiculoRoutes,

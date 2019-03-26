@@ -6,9 +6,9 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnaAsignacionInsumos.component.html'
+  templateUrl: './imoAsignacion.component.html'
 })
-export class rnaAsignacionInsumosComponent implements OnInit {
+export class imoAsignacionComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -16,7 +16,7 @@ export class rnaAsignacionInsumosComponent implements OnInit {
 	public InsumoInsumos;
 	public formNew = false;
 	public formEdit = false;
-  public formIndex = true;
+  public formIndex = true; 
   public tipoInsumo :any;
   public table:any; 
   public InsumoInsumo:any; 
@@ -42,39 +42,38 @@ export class rnaAsignacionInsumosComponent implements OnInit {
       ) {
       }
     })
-		this._ImoInsumoService.indexSustrato().subscribe(
-				response => {
-          this.insumoSustratos = response.data; 
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTablaSustrato();
-          }, 100); 
-				}, 
-				error => {
-					this.errorMessage = <any>error;
+		// this._ImoInsumoService.indexSustrato().subscribe(
+		// 		response => {
+    //       this.insumoSustratos = response.data; 
+    //       let timeoutId = setTimeout(() => {  
+    //         this.iniciarTablaSustrato();
+    //       }, 100); 
+		// 		}, 
+		// 		error => {
+		// 			this.errorMessage = <any>error;
+		// 			if(this.errorMessage != null){
+		// 				console.log(this.errorMessage);
+		// 				alert("Error en la petición");
+		// 			}
+		// 		}
+    //   );
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+		// this._ImoInsumoService.indexInsumo().subscribe(
+		// 		response => {
+    //       this.InsumoInsumos = response.data; 
+    //       let timeoutId = setTimeout(() => {  
+    //         this.iniciarTablaInsumos();
+    //       }, 100); 
+		// 		},  
+		// 		error => {
+		// 			this.errorMessage = <any>error;
 
-		this._ImoInsumoService.indexInsumo().subscribe(
-				response => {
-          this.InsumoInsumos = response.data; 
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTablaInsumos();
-          }, 100); 
-				},  
-				error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
+		// 			if(this.errorMessage != null){
+		// 				console.log(this.errorMessage);
+		// 				alert("Error en la petición");
+		// 			}
+		// 		}
+    //   );
   }
   iniciarTablaSustrato(){
    $('#dataTables-example-Sustratos').DataTable({

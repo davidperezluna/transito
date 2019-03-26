@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImoInsumoService } from '../../services/imoInsumo.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
-import { RnaLoteInsumoService } from '../../services/rnaloteInsumos.service';
+import { ImoLoteService } from '../../services/imoLote.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -29,7 +29,7 @@ export class InsumoBusquedaComponent implements OnInit {
 		private _ImoInsumoService: ImoInsumoService,
 		private _loginService: LoginService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
-    private _rnaRegistroInsumosService: RnaLoteInsumoService,
+    private _ImoLoteService: ImoLoteService,
     ){}
     
   ngOnInit() {
@@ -39,7 +39,6 @@ export class InsumoBusquedaComponent implements OnInit {
       }, 
       error => {
         this.errorMessage = <any>error;
-
         if(this.errorMessage != null){
           console.log(this.errorMessage);
           alert("Error en la petición");
@@ -85,7 +84,7 @@ export class InsumoBusquedaComponent implements OnInit {
         'organismoTransito':this.organismoTransitoSelected,
       } 
       let token = this._loginService.getToken();
-      this._rnaRegistroInsumosService.showInsumo(datos,token).subscribe(
+      this._ImoLoteService.show(datos,token).subscribe(
         response => {
           if (response.status == 'success') {
             this.loteInsumos = response.data;
@@ -126,7 +125,6 @@ export class InsumoBusquedaComponent implements OnInit {
         }
         error => {
             this.errorMessage = <any>error;
-
             if(this.errorMessage != null){
               console.log(this.errorMessage);
               alert("Error en la petición");
