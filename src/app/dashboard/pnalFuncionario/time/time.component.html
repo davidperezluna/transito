@@ -7,7 +7,7 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <form #formNew="ngForm">
+                <form #formTime="ngForm">
 
                     <div class="form-group row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-2">
@@ -99,7 +99,7 @@
                                 <i class="fa fa-times"></i>
                                 Cancel
                             </button>
-                            <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formTime.invalid" class="btn btn-primary" type="button">
                                 <i class="fa fa-save"></i>
                                 Enviar
                             </button>
