@@ -19,15 +19,12 @@ export class ProrrogaComponent implements OnInit {
     @Input() funcionario:any = null;
     public errorMessage;
     public id;
-    public respuesta;
     public prorrogas:any = null;
     public date:any;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
-    public txtFechaInicio:any;
     public table:any; 
-    public color:any; 
     public prorroga = {
       'fechaInicio': null,
       'fechaFin': null,
@@ -108,13 +105,26 @@ export class ProrrogaComponent implements OnInit {
   onEnviar(){
     let token = this._loginService.getToken();
     this.prorroga.idFuncionario = this.funcionario.id;
-    console.log(this.prorroga);
     this._PnalProrrogaService.register(this.prorroga, token).subscribe(
       response => {
-        this.prorrogas = response.data;
-        this.table.destroy();
-        this.ngOnInit();
-      },
+        if (response.status == 'success') {
+          this.prorrogas = response.data;
+          this.table.destroy();
+          this.ngOnInit();
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        } else {
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
       error => {
         this.errorMessage = <any>error;
 
@@ -123,21 +133,7 @@ export class ProrrogaComponent implements OnInit {
           alert("Error en la petición");
         }
       }
+    }
     );
   }
-
-  isFecha(){
-    console.log(this.date);
-    console.log(this.prorroga.fechaInicio);
-
-    if (this.prorroga.fechaInicio >= this.date) {
-      console.log('fecha mayor');
-      this.txtFechaInicio = 'has-success';
-    }else{
-      this.txtFechaInicio = 'has-danger';
-      console.log('fecha menor');
-    }
-
-  }
-
 }

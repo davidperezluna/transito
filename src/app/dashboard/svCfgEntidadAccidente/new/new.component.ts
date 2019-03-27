@@ -20,7 +20,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.entidadAccidente = new SvCfgEntidadAccidente(null, null);
+        this.entidadAccidente = new SvCfgEntidadAccidente(null, null, null);
     }
 
     onCancelar() {
