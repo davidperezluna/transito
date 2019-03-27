@@ -8,9 +8,9 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './insumoBusqueda.component.html'
+  templateUrl: './imoBusqueda.component.html'
 })
-export class InsumoBusquedaComponent implements OnInit {
+export class ImoBusquedaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -20,7 +20,12 @@ export class InsumoBusquedaComponent implements OnInit {
   public table:any; 
   public color:any; 
   public organismoTransitoSelected:any;
+  public tipoInsumoSelected:any;
   public organismosTransito:any;
+  public tiposInsumos:any = [
+    {'value': 'Sustrato','label':'Sustrato'},
+    {'value': 'Insumo','label':'Insumo'},
+  ];
   public loteInsumos:any;
   public loteInsumo:any;
   public insumos:any;
@@ -82,8 +87,10 @@ export class InsumoBusquedaComponent implements OnInit {
     if (e) {
       let datos={
         'organismoTransito':this.organismoTransitoSelected,
+        'tipoInsumo':this.tipoInsumoSelected,
       } 
       let token = this._loginService.getToken();
+      console.log(datos);
       this._ImoLoteService.show(datos,token).subscribe(
         response => {
           if (response.status == 'success') {

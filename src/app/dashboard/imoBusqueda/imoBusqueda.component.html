@@ -7,11 +7,22 @@
           </div>
           <div class="card-body">
             <div class="col-lg-12">
-                <label>Sede Operativa*</label>
+                <label>Tipo insumo*</label>
+                <ng-select
+                    [multiple]="false"
+                    [options]="tiposInsumos"
+                    [(ngModel)]="tipoInsumoSelected"
+                    required
+                    name="idTipoInsumo">
+                </ng-select>
+            </div>
+            
+            <div class="col-lg-12">
+                <label>Organismo transito*</label>
                 <ng-select
                     [multiple]="false"
                     [options]="organismosTransito"
-                    [(ngModel)]="sedeOperativaSelected"
+                    [(ngModel)]="organismoTransitoSelected"
                     (ngModelChange)="onChangedSede($event)"
                     required
                     name="idOrganismoTransito">
