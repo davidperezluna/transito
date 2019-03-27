@@ -29,9 +29,9 @@ export class FroTrteSolicitudRnaComponent implements OnInit {
   }
 
   public tiposFiltro = [
+    { 'value': 1, 'label': 'No. placa' },
     { 'value': 2, 'label': 'No. factura' },
     { 'value': 3, 'label': 'Fecha' },
-    { 'value': 4, 'label': 'No. identificación' },
   ];
 
   constructor(

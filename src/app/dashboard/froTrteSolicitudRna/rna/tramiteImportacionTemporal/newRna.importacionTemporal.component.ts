@@ -23,7 +23,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     public errorMessage; 
     
-    public autorizado: any = true;
+    public autorizado: any = false;
     public tramiteSolicitud: any;
     public tramitesFactura: any = null;
 
@@ -47,13 +47,13 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     public numeroCuotas: any;
 
     public datos = {
+        'propietarios': null,
         'fechaSolicitud': null,
         'numeroRunt': null,
         'numeroCuotas': null,
         'licenciaConduccion': null,
         'idFuncionario': null,
         'idPais': null,
-        'idPropietario': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
     };
@@ -196,128 +196,14 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
         }
     }
 
-    onSearchPropietario() {
-        swal({
-            title: 'Buscando propietario!',
-            text: 'Solo tardara unos segundos por favor espere.',
-            onOpen: () => {
-                swal.showLoading()
-            }
-        });
-
-        let token = this._LoginService.getToken();
-
-        let datos = {
-            'identificacion': this.identificacion,
-            'idTipoIdentificacion': this.tipoIdentificacionSelected,
-        }
-
-        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                    if (response.data.ciudadano) {
-                        this.ciudadano = response.data.ciudadano;
-                        this.empresa = null;
-
-                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': this.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.propietario = response.data;
-                                    this.datos.idPropietario = this.propietario.id;
-                                } else {
-                                    this.propietario = null;
-                                    this.datos.idPropietario = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert('Error en la petición');
-                                    }
-                                }
-                            }
-                        );
-
-                        swal.close();
-                    } else if (response.data.empresa) {
-                        this.empresa = response.data.empresa;
-                        this.ciudadano = null;
-
-                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': this.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.propietario = response.data;
-                                    this.datos.idPropietario = this.propietario.id;
-                                } else {
-                                    this.propietario = null;
-                                    this.datos.idPropietario = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert('Error en la petición');
-                                    }
-                                }
-                            }
-                        );
-
-                        swal.close();
-                    }else{
-                        this.propietario = null;
-                        this.datos.idFuncionario = null;
-
-                        swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-                } else {
-                    this.ciudadano = null;
-                    this.empresa = null;
-
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert('Error en la petición');
-                    }
-                }
-            }
-        );
-    }
-
     onEnviar() {
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero +
-            'numero runt' + this.numeroRunt +
-            'numero cuotas' + this.numeroCuotas +
-            'fecha solicitud' + this.datos.fechaSolicitud;
+        let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+            'No. solicitud RUNT' + this.numeroRunt +
+            'No. cuotas' + this.numeroCuotas +
+            'Fecha solicitud' + this.datos.fechaSolicitud;
 
         this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
     }

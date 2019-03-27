@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+<div class="row" *ngIf="!tramiteFactura.realizado && autorizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
@@ -54,61 +54,6 @@
                                 <input class="form-control" [(ngModel)]="datos.licenciaConduccion" name="datos.licenciaConduccion"
                                     type="number" required />
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">
-                        <strong class="text-uppercase">Datos del Propietario</strong>
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="form-group row">
-                        <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Identificación" [(ngModel)]="datos.identificacion" name="identificacion" required />
-                                <span class="input-group-btn">
-                                    <button (click)="onBuscarPropietario()" class="btn btn-default btn-primary" type="button"><i
-                                            class="fa fa-search"></i></button>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div *ngIf="propietario" class="col-xs-12 col-lg-12">
-                            <hr>
-                            <h5 class="text-center">
-                                <b>Propietario encontrato</b>
-                            </h5>
-                            <table class="table table-bordered table-striped" id="dataTables-example">
-                                <tbody>
-                                    <tr *ngIf="propietario.ciudadano">
-                                        <td>
-                                            <b>Identificación</b>
-                                            <br>
-                                            {{ propietario.ciudadano.identificacion }}
-                                        </td>
-                                        <td>
-                                            <b>Nombres y apellidos</b>
-                                            <br> 
-                                            {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
-                                        </td>
-                                    </tr>
-                                    <tr *ngIf="propietario.empresa">
-                                        <td>
-                                            <b>Identificación</b>
-                                            <br>
-                                            {{ propietario.empresa.identificacion }}
-                                        </td>
-                                        <td>
-                                            <b>Nombres y apellidos</b>
-                                            <br> 
-                                            {{ propietario.empresa.nombre }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

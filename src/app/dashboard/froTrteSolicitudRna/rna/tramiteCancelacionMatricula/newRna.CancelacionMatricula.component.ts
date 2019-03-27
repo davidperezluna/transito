@@ -28,7 +28,8 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
     public datos = {
         'idMotivoCancelacion': null,
         'idEntidadJudicial': null,
-        'numeroOficio': null, 
+        'numeroOficio': null,
+        'fechaOficio': null,
         'declaracion':null,  
         'fechaDeclaracion':null,
         'ipat':null,
@@ -39,6 +40,7 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         'idVehiculo': null,
         'idTramiteFactura': null,
     };
+    
     public motivosCancelacion = [
         { value: 'DESAPARICIÓN DOCUMENTAL', label: 'DESAPARICIÓN DOCUMENTAL' },
         { value: 'HURTO', label: 'HURTO' },

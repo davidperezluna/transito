@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
-import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
@@ -53,7 +52,6 @@ export class NewRnaTraspasoComponent implements OnInit {
 
     constructor(
         private _PropietarioService: VhloPropietarioService,
-        private _VhloVehiculoService: VhloVehiculoService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
         private _CiudadanoService: UserCiudadanoService,

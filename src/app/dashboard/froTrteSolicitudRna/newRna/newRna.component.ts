@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudRna } from '../froTrteSolicitudRna.modelo';
-import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 import { FroTrteSolicitudService } from '../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
@@ -290,14 +289,15 @@ export class NewRnaComponent implements OnInit {
   }
 
   readyTramite(datos: any) {
-
     this.tramiteSolicitud.datos = datos;
     this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
+
     if (this.apoderado) {
-      this.tramiteSolicitud.idCiudadano = this.apoderado.id;
+      this.tramiteSolicitud.idSolicitante = this.apoderado.id;
     }
 
     let token = this._LoginService.getToken();
+
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {
         if (response.status == 'success') {
@@ -382,18 +382,18 @@ export class NewRnaComponent implements OnInit {
     })
   }
 
-  onAddApoderado() {
+  onFormApoderado() {
     this.fromApoderado = true;
     // if (this.apoderado) {
     //   this.tramiteSolicitud.solicitanteId = this.apoderado.id;
     // }
   }
 
-  btnNewApoderado() {
+  onAddApoderado() {
     this.fromApoderado = false;
-    // if (this.apoderado) {
-    //   this.tramiteSolicitud.solicitanteId = this.apoderado.id;
-    // }
+    if (this.apoderado) {
+      this.tramiteSolicitud.idSolicitante = this.apoderado.id;
+    }
   }
 
   onSearchApoderado() {
