@@ -189,7 +189,7 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
 
             swal({
                 title: 'Error!',
-                text: 'El vehiculo no se registro para radicado de cuenta.',
+                text: 'El vehiculo no se registro para importación temporal.',
                 type: 'error',
                 confirmButtonText: 'Aceptar'
             });

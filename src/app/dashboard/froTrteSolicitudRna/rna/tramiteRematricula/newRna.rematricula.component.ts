@@ -17,16 +17,12 @@ export class NewRnaRematriculaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
-    public entidadList: string[];
-    public entidadSelected: any;
     public municipios: any;
-    public municipioActaSelected: any;
-    public municipioEntregaSelected: any;
     public tiposIdentificacion: any;
-    public tipoIdentificacionEntregaSelected: any;
     public matriculaCancelada: any = null;
 
     public datos = {
@@ -172,7 +168,6 @@ export class NewRnaRematriculaComponent implements OnInit {
         );
     }
 
-    
     onEnviar() {
         let token = this._LoginService.getToken();
 

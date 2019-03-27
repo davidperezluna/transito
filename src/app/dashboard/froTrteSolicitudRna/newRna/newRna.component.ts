@@ -89,37 +89,46 @@ export class NewRnaComponent implements OnInit {
           this.vehiculo = response.data;
           this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
-          this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
-            response => {
-              if (response.code == 200) {
-                this.propietarios = response.data;
-
-                swal({
-                  title: 'Perfecto!',
-                  text: response.message,
-                  type: 'success',
-                  confirmButtonText: 'Aceptar'
-                });
-              } else {
-                this.propietarios = null;
-
-                swal({
-                  title: 'Atención!',
-                  text: response.message,
-                  type: 'warning',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
+          if (!this.vehiculo.cancelado) {
+            this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+              response => {
+                if (response.code == 200) {
+                  this.propietarios = response.data;
+  
+                  swal({
+                    title: 'Perfecto!',
+                    text: response.message,
+                    type: 'success',
+                    confirmButtonText: 'Aceptar'
+                  });
+                } else {
+                  this.propietarios = null;
+  
+                  swal({
+                    title: 'Atención!',
+                    text: response.message,
+                    type: 'warning',
+                    confirmButtonText: 'Aceptar'
+                  });
+                }
+  
+                error => {
+                  this.errorMessage = <any>error;
+                  if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
                 }
               }
-            }
-          );
+            );
+          }else{
+            swal({
+              title: 'Atención!',
+              text: 'Este vehiculo no puede realizar trámites porque tiene una cancelación de matricula.',
+              type: 'warning',
+              confirmButtonText: 'Aceptar'
+            });
+          }
         } else {
           this.vehiculo = null;
           this.tramiteSolicitud.idVehiculo = null;
