@@ -33,25 +33,16 @@ export class NewRnaComponent implements OnInit {
   public tramitesFactura: any = null;
   public tramiteFacturaSelected: any = null;
   public tramiteFactura: any = null;
-  public facturas: any;
   public tramiteSelected: any = null;
+  public facturas: any;
 
-  public isEmpresa = false;
   public confirmarSolicitante = false;
   public sustrato = false;
 
-  public tramites = '';
-  public tramitePreasignacion = false;
-  public tramiteMatriculaInicial = false;
-  public tramite = false;
-  public isTramites: boolean = true;
-  public isMatricula: boolean = false;
-  public frmApoderado = false;
+  public tramites:any;
+  public fromApoderado = false;
   public identificacionApoderado = false;
   public apoderado: any = null;
-  public importacion: any = 'No';
-  public cantidadSustrato = 1;
-  public moduloId = 1;
 
 
   constructor(
@@ -89,46 +80,37 @@ export class NewRnaComponent implements OnInit {
           this.vehiculo = response.data;
           this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
-          if (!this.vehiculo.cancelado) {
-            this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
-              response => {
-                if (response.code == 200) {
-                  this.propietarios = response.data;
-  
-                  swal({
-                    title: 'Perfecto!',
-                    text: response.message,
-                    type: 'success',
-                    confirmButtonText: 'Aceptar'
-                  });
-                } else {
-                  this.propietarios = null;
-  
-                  swal({
-                    title: 'Atención!',
-                    text: response.message,
-                    type: 'warning',
-                    confirmButtonText: 'Aceptar'
-                  });
-                }
-  
-                error => {
-                  this.errorMessage = <any>error;
-                  if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                  }
+          this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+            response => {
+              if (response.code == 200) {
+                this.propietarios = response.data;
+
+                swal({
+                  title: 'Perfecto!',
+                  text: response.message,
+                  type: 'success',
+                  confirmButtonText: 'Aceptar'
+                });
+              } else {
+                this.propietarios = null;
+
+                swal({
+                  title: 'Atención!',
+                  text: response.message,
+                  type: 'warning',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+
+              error => {
+                this.errorMessage = <any>error;
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
                 }
               }
-            );
-          }else{
-            swal({
-              title: 'Atención!',
-              text: 'Este vehiculo no puede realizar trámites porque tiene una cancelación de matricula.',
-              type: 'warning',
-              confirmButtonText: 'Aceptar'
-            });
-          }
+            }
+          );
         } else {
           this.vehiculo = null;
           this.tramiteSolicitud.idVehiculo = null;
@@ -403,14 +385,14 @@ export class NewRnaComponent implements OnInit {
   }
 
   onAddApoderado() {
-    this.frmApoderado = true;
+    this.fromApoderado = true;
     // if (this.apoderado) {
     //   this.tramiteSolicitud.solicitanteId = this.apoderado.id;
     // }
   }
 
   btnNewApoderado() {
-    this.frmApoderado = false;
+    this.fromApoderado = false;
     // if (this.apoderado) {
     //   this.tramiteSolicitud.solicitanteId = this.apoderado.id;
     // }
@@ -467,7 +449,7 @@ export class NewRnaComponent implements OnInit {
   }
 
   onCloseApoderado() {
-    this.frmApoderado = false;
+    this.fromApoderado = false;
     this.apoderado = null;
   }
 
