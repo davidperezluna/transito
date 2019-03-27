@@ -1,10 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
-import {LoginService} from '../../../services/login.service';
-import { UserEmpresaService } from '../../../services/userEmpresa.service';
-import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
-import {ImoInsumoService} from '../../../services/imoInsumo.service';
+import { LoginService } from '../../../services/login.service';
+import { ImoInsumoService } from '../../../services/imoInsumo.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -23,12 +19,7 @@ public respuesta;
 public table:any;
 
 constructor(
-  private datePipe: DatePipe,
-  private _rnaRegistroInsumosService: RnaLoteInsumoService,
   private _loginService: LoginService,
-  private _EmpresaService: UserEmpresaService,
-  private _OrganismoTransitoService: CfgOrganismoTransitoService,
-  private _CasoInsumoService: ImoCfgTipoService,
   private _ImoInsumoService: ImoInsumoService,
   ){}
 
@@ -115,8 +106,6 @@ constructor(
                           }
                 
                       }); 
-                  
-                  
               }, 
             error => {
               this.errorMessage = <any>error;
@@ -127,8 +116,6 @@ constructor(
               }
             }
           );
-
-        
       }
     })
   }

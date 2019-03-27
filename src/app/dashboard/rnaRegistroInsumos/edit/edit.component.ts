@@ -1,10 +1,10 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import {Component, OnInit,Input, AfterViewInit,Output,EventEmitter} from '@angular/core';
 import {rnaRegistroInsumos} from '../rnaRegistroInsumos.modelo';
-import {RnaLoteInsumoService} from '../../../services/rnaloteInsumos.service';
-import { UserEmpresaService } from '../../../services/userEmpresa.service';
-import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
-import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
-import { LoginService } from '../../../services/login.service';
+import {ImoLoteService} from '../../../services/imoLote.service';
+import {UserEmpresaService} from '../../../services/userEmpresa.service';
+import {CfgOrganismoTransitoService} from '../../../services/cfgOrganismoTransito.service';
+import {ImoCfgTipoService} from '../../../services/imoCfgTipo.service';
+import {LoginService} from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -28,8 +28,7 @@ public empresas:any;
 public sustratos:any;
 
 constructor(
-  private _rnaloteInsumosService: RnaLoteInsumoService,
-  private _rnaRegistroInsumosService: RnaLoteInsumoService,
+  private _rnaloteInsumosService: ImoLoteService,
   private _loginService: LoginService,
   private _EmpresaService: UserEmpresaService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,

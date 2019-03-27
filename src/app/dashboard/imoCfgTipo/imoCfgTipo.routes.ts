@@ -3,7 +3,7 @@ import { ImoCfgTipoComponent } from '.';
 
 export const ImoCfgTipoRoutes: Route[] = [
     {
-      path: 'casoinsumo',
+      path: 'imoCfgTipo',
       component: ImoCfgTipoComponent
     }
 ];

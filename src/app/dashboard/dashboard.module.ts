@@ -215,7 +215,7 @@ import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTi
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
 
-import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
+import { ImoPreasignacionModule } from './imoPreasignacIon/imoPreasignacion.module';
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
@@ -226,7 +226,7 @@ import { FroTrteCfgCuentaModule } from './froTrteCfgCuenta/froTrteCfgCuenta.modu
 
 import { GestionTransportePublicoModule } from './gestionTransportePublico/gestionTransportePublico.module';
 import { rnaRegistroInsumosModule } from './rnaRegistroInsumos/rnaRegistroInsumos.module';
-import { rnaAsignacionInsumosModule } from './rnaAsignacionInsumos/rnaAsignacionInsumos.module';
+import { ImoAsignacionModule } from './imoAsignacion/imoAsignacion.module';
 //import { RnaPreasignacionInsumoModule } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.module';
 import { RnmaPreregistroModule } from './rnmaPreregistro/rnmaPreregistro.module';
 import { RnrsPreregistroModule } from './rnrsPreregistro/rnrsPreregistro.module';
@@ -234,7 +234,7 @@ import { ReporteModule } from './reporte/reporte.module';
 import { RnaCertificadoTradicionOficialModule } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.module';
 
 import { ImoCfgTipoModule } from './imoCfgTipo/imoCfgTipo.module';
-import { InsumoBusquedaModule } from './insumoBusqueda/insumoBusqueda.module';
+import { ImoBusquedaModule } from './imoBusqueda/imoBusqueda.module';
 import { ImoLoteModule } from "./imoLote/imoLote.module";
 
 import { BpCfgTipoInsumoModule } from './bpCfgTipoInsumo/bpCfgTipoInsumo.module';
@@ -449,7 +449,7 @@ import {RightsidebarComponent} from '../shared';
     MsvTalonarioModule,
     rnaRegistroInsumosModule,
     RnmaPreregistroModule,
-    rnaAsignacionInsumosModule,
+    ImoAsignacionModule,
     LimitacionModule,
     CfgTipoProcesoModule,
     RnmaTramiteInscripcionLimitacionModule,
@@ -464,12 +464,12 @@ import {RightsidebarComponent} from '../shared';
     ReporteModule,
     registroEntregaProductoModule,
     RpcccInventarioDocumentalModule,
-    InsumoBusquedaModule,
+    ImoBusquedaModule,
     ImoLoteModule,
     FacturaInfraccionModule,
     UserCfgEmpresaServicioModule,
     RnaCertificadoTradicionOficialModule,
-    RnaPreasignacionInsumoModule,
+    ImoPreasignacionModule,
     CvCfgTipoMedidaCautelarModule,
     CvMedidaCautelarModule,
     BpCfgTipoInsumoModule,

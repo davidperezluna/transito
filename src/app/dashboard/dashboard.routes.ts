@@ -206,7 +206,7 @@ import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicia
 import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimitacion.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
-import { rnaAsignacionInsumosRoutes } from './rnaAsignacionInsumos/rnaAsignacionInsumos.routes';
+import { ImoAsignacionRoutes} from './imoAsignacion/imoAsignacion.routes';
 //import { RnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
 import { MsvRegistroIpatRoutes } from './msvRegistroIpat/msvRegistroIpat.routes';
@@ -224,14 +224,14 @@ import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
 import { RnrsPreregistroRoutes } from './rnrsPreregistro/rnrsPreregistro.routes';
 import { ReporteRoutes } from './reporte/reporte.routes';
-import { rnaPreasignacionInsumoRoutes } from './rnaPreasignacIonInsumo/rnaPreasignacionInsumo.routes';
+import { ImoPreasignacionRoutes } from './imoPreasignacIon/imoPreasignacion.routes';
 import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 import { CvCfgTipoRestriccionRoutes } from './cvCfgTipoRestriccion/cvCfgTipoRestriccion.routes';
 import { CvLcCfgTipoRestriccionRoutes } from './cvLcCfgTipoRestriccion/cvLcCfgTipoRestriccion.routes';
 import { CvCfgTipoMedidaCautelarRoutes } from './cvCfgTipoMedidaCautelar/cvCfgTipoMedidaCautelar.routes';
 import { CvMedidaCautelarRoutes } from './cvMedidaCautelar/cvMedidaCautelar.routes';
 
-import { InsumoBusquedaRoutes } from './insumoBusqueda/insumoBusqueda.routes';
+import { ImoBusquedaRoutes } from './imoBusqueda/imoBusqueda.routes';
 import { ImoCfgTipoRoutes } from './imoCfgTipo/imoCfgTipo.routes';
 import { ImoLoteRoutes } from "./imoLote/imoLote.routes";
 
@@ -428,7 +428,7 @@ export const DashboardRoutes: Route[] = [
       ...RnaPreasignacionPlacaRoutes,
       ...RnaPreregistroRoutes,
       ...rnaRegistroInsumosRoutes,
-      ...rnaPreasignacionInsumoRoutes,
+      ...ImoPreasignacionRoutes,
       ...TramitePrecioRoutes,
       ...CfgComparendoEstadoRoutes,
       ...CfgOrganismoTransitoRoutes,
@@ -449,14 +449,14 @@ export const DashboardRoutes: Route[] = [
       ...RnaTramiteLevantamientoLimitacionRoutes,
       ...RnrsTramiteInscripcionLimitacionRoutes,
       ...RnrsTramiteLevantamientoLimitacionRoutes,
-      ...rnaAsignacionInsumosRoutes,
+      ...ImoAsignacionRoutes,
       ...LimitacionRoutes,
       ...CfgTipoProcesoRoutes,
       ...CfgValorVehiculoRoutes,
       ...RnrsPreregistroRoutes,
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
-      ...InsumoBusquedaRoutes,
+      ...ImoBusquedaRoutes,
       ...UserCfgEmpresaServicioRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CvCfgTipoMedidaCautelarRoutes,

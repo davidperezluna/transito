@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ImoTrazabilidadService } from '../../services/imoTrazabilidad.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -6,10 +6,10 @@ declare var $: any;
 
 @Component({
   selector: 'app-rnaPreasignacionInsumo',
-  templateUrl: './rnaPreasignacionInsumo.component.html',
+  templateUrl: './imoPreasignacion.component.html',
   providers: [DatePipe] 
 })
-export class RnaPreasignacionInsumoComponent implements OnInit {
+export class ImoPreasignacionComponent implements OnInit {
 public formIndex = true;
 public formNew = false;
 public formShow = false;

@@ -190,7 +190,6 @@ export class NewRnaRematriculaComponent implements OnInit {
                     this.datos.idTramiteFactura = this.tramiteFactura.id;
                     this.datos.idVehiculo = this.vehiculo.id;
 
-
                     this._VehiculoService.update(this.datos, token).subscribe(
                         response => {
                             if (response.status == 'success') {
