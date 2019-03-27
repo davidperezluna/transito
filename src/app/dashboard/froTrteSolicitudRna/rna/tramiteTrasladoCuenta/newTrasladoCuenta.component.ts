@@ -31,7 +31,8 @@ export class NewTrasladoCuentaComponent implements OnInit {
     'nombreEmpresa': null,
     'campos': null,
     'idFuncionario': null,
-    'idOrganismoTransito': null,
+    'idOrganismoTransitoOld': null,
+    'idOrganismoTransitoNew': null,
     'idVehiculo': null,
     'idTramiteFactura': null,
   };
@@ -148,6 +149,7 @@ constructor(
     
     this.datos.campos = ['organismoTransito'];
     this.datos.idVehiculo = this.vehiculo.id;
+    this.datos.idOrganismoTransitoOld = this.vehiculo.organismoTransito.id;
     this.datos.idTramiteFactura = this.tramiteFactura.id;
     
     this._VehiculoService.update(this.datos,token).subscribe(
@@ -156,7 +158,7 @@ constructor(
           if(response.status == 'success'){
             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
               '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismoTransito.nombre +
-              '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransito;
+              '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransitoNew;
 
             this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
               if (response.status == 'success') {

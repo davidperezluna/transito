@@ -100,9 +100,9 @@
                                     <td>
                                         <div class="custom-control custom-radio">
                                             <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idSolicitante" value="{{ propietario.ciudadano.id }}"
-                                                type="radio" id="radio" name="radio"
+                                                type="radio" id="radio{{ i }}" name="radio"
                                                 class="custom-control-input">
-                                            <label class="custom-control-label" for="radio">Solicitante</label>
+                                            <label class="custom-control-label" for="radio{{ i }}">Solicitante</label>
                                         </div>
                                     </td>
                                 </tr>

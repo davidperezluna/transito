@@ -18,6 +18,7 @@
       <div class="card">
          <div class="card-header">
             <b class="text-primary">Registrar traslado de cuenta</b>
+            <br>
             <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
          </div>
          <div class="card-body">
@@ -26,7 +27,7 @@
                    <div class="row">
                         <div class="col-xs-12 col-lg-8">
                             <label>Organismo de transito de destino</label>  
-                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" name="idOrganismoTransito" required>
+                            <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransitoNew" name="idOrganismoTransitoNew" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-4">

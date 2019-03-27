@@ -81,11 +81,10 @@ export class VhloPropietarioService {
 		return this._http.post(this.url + "/search/ciudadano/empresa/vehiculo", params, { headers: headers }).map(res => res.json());
 	}
 
-	updateByVehiculo(datos, token) {
+	update(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/update/vehiculo", params, { headers: headers })
-			.map(res => res.json());
+		return this._http.post(this.url + "/update", params, { headers: headers }).map(res => res.json());
 	}
 }

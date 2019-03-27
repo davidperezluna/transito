@@ -533,7 +533,7 @@ constructor(
     this._RnaPreregistroService.register(this.vehiculo, token).subscribe(
       response => {
         if (response.status == 'success') {
-          if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION TEMPORAL') {
+          if (this.vehiculo.tipoMatricula == 'RADICADO' || this.vehiculo.tipoMatricula == 'IMPORTACION') {
             this.datos.idVehiculo = response.data.id;
             this.datos.licenciaTransito = this.vehiculo.numeroLicencia;
             this._PropietarioService.register(this.datos, token).subscribe(

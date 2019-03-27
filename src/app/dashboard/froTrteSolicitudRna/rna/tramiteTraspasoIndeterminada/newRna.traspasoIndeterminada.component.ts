@@ -187,7 +187,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
         if (response.status == 'success') {
           this.idTramiteSolicitud = response.idTramiteSolicitud;
 
-          this._PropietarioService.updateByVehiculo(this.datos, token).subscribe(
+          this._PropietarioService.update(this.datos, token).subscribe(
             response => {
               if (response.status == 'success') {
                 this.acta.tramiteSolicitud = this.idTramiteSolicitud;
