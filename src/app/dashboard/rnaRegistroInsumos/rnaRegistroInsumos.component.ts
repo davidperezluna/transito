@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {RnaLoteInsumoService} from '../../services/rnaloteInsumos.service';
-import {LoginService} from '../../services/login.service';
+import { ImoLoteService } from '../../services/imoLote.service';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -23,7 +23,7 @@ export class rnaRegistroInsumosComponent implements OnInit {
   public color:any; 
 
   constructor(
-		private _RnaLoteInsumoService: RnaLoteInsumoService,
+		private _ImoLoteService: ImoLoteService,
 		private _loginService: LoginService,
     ){}
     
@@ -42,30 +42,14 @@ export class rnaRegistroInsumosComponent implements OnInit {
       ) {
       }
     })
-		this._RnaLoteInsumoService.indexSustrato().subscribe(
+		this._ImoLoteService.index().subscribe(
 				response => {
-          this.loteInsumoSustratos = response.data; 
+          this.loteInsumoSustratos = response.loteSustratos; 
+          this.loteInsumoInsumos = response.loteInsumos; 
           let timeoutId = setTimeout(() => {  
             this.iniciarTablaSustrato();
           }, 100); 
 				}, 
-				error => {
-					this.errorMessage = <any>error;
-
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
-      );
-
-		this._RnaLoteInsumoService.indexInsumo().subscribe(
-				response => {
-          this.loteInsumoInsumos = response.data; 
-          let timeoutId = setTimeout(() => {  
-            this.iniciarTablaInsumos();
-          }, 100); 
-				},  
 				error => {
 					this.errorMessage = <any>error;
 
@@ -136,7 +120,7 @@ export class rnaRegistroInsumosComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._RnaLoteInsumoService.delete(token,id).subscribe(
+        this._ImoLoteService.delete(token,id).subscribe(
             response => {
                 swal({
                       title: 'Eliminado!',
