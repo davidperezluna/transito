@@ -43,7 +43,6 @@ export class NewRnaComponent implements OnInit {
   public identificacionApoderado = false;
   public apoderado: any = null;
 
-
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,
     private _TramiteFacturaService: FroFacTramiteService,
