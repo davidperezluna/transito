@@ -150,18 +150,18 @@
                 <td *ngIf='!funcionario.modificatorio'>Contrato principal</td>
                 <td *ngIf='funcionario.activo'>Activo</td>
                 <td *ngIf='!funcionario.activo'>Suspendido</td>
-                <!-- <td>
+                <td>
                   <div class="btn-group">
                     <button (click)="onShow(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-default"
                       type="button">
                       <i class="fa fa-eye"></i>
                     </button>
                     <button (click)="onTime(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary"
-                      type="button" *ngIf="funcionario.tipoContrato.horarios">
+                      type="button" *ngIf="funcionario.cargo.horarios">
                       <i class="fa fa-clock-o"></i>
                     </button>
                     <button (click)="onProrroga(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-success"
-                      type="button" *ngIf="funcionario.tipoContrato.prorroga">
+                      type="button" *ngIf="funcionario.cargo.prorroga">
                       <i class="fa fa-calendar"></i>
                     </button>
                     <button (click)="onSuspension(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-danger"
@@ -169,7 +169,7 @@
                       <i class="fa fa-ban"></i>
                     </button>
                   </div>
-                </td> -->
+                </td>
               </tr>
             </tbody>
           </table>
