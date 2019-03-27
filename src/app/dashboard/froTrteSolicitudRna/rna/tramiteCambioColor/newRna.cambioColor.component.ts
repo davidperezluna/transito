@@ -164,7 +164,8 @@ export class NewRnaCambioColorComponent implements OnInit {
                                 alert("Error en la petición");
                             }
                         }
-                    });
+                    }
+                );
                 error => {
                     this.errorMessage = <any>error;
 
