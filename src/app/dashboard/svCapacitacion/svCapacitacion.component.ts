@@ -19,8 +19,8 @@ export class SvCapacitacionComponent implements OnInit {
     public identificacion: any;
     public idTipoIdentificacion: any;
     
-    public ciudadano: any = null;
-    public empresa: any = null;
+    public ciudadano:any = false;
+    public empresa:any = false;
 
     public capacitaciones: any = null;
     public tiposIdentificacion: any;
@@ -79,7 +79,7 @@ export class SvCapacitacionComponent implements OnInit {
             this.table.destroy();
         }
         swal({
-            title: 'Buscando número de cédula',
+            title: 'Buscando registro',
             text: 'Solo tardará unos segundos, por favor espere.',
             onOpen: () => {
                 swal.showLoading()
@@ -100,7 +100,6 @@ export class SvCapacitacionComponent implements OnInit {
                 if (response.status == 'success') {
                     if (response.data.ciudadano) {
                         this.ciudadano = response.data.ciudadano;
-                        console.log(this.ciudadano);
                         this.empresa = false;
                     }
                     if (response.data.empresa) {
@@ -162,6 +161,8 @@ export class SvCapacitacionComponent implements OnInit {
                         swal.close();
                     }
                 } else {
+                    this.ciudadano = false;
+                    this.empresa = false;
                     swal({
                         title: 'Alerta!',
                         text: response.message,
