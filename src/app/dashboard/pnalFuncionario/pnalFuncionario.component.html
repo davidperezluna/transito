@@ -157,11 +157,11 @@
                       <i class="fa fa-eye"></i>
                     </button>
                     <button (click)="onTime(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-primary"
-                      type="button" *ngIf="funcionario.cargo.horarios">
+                      type="button" *ngIf="funcionario.tipoNombramiento.horarios">
                       <i class="fa fa-clock-o"></i>
                     </button>
                     <button (click)="onProrroga(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-success"
-                      type="button" *ngIf="funcionario.cargo.prorroga">
+                      type="button" *ngIf="funcionario.tipoNombramiento.prorroga">
                       <i class="fa fa-calendar"></i>
                     </button>
                     <button (click)="onSuspension(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-danger"
