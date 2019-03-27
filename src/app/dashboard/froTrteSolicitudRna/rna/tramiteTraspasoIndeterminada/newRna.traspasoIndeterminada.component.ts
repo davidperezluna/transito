@@ -1,5 +1,4 @@
-import { Component , OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { FroTrteSolicitudRna } from '../../froTrteSolicitudRna.modelo';
+import { Component , OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
@@ -31,30 +30,43 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
   public idTramiteSolicitud;
   public numeroDocumento;
   public date:any;
-  public tramiteSolicitud: FroTrteSolicitudRna;
   public formNew = false;
   public formEdit = false;
   public formIndex = true;
   public table:any;    
   public entidadesJudiciales:any;    
   public entidadJudicialSelected:any;    
-  public datos: any = null;
   public vehiculos: any = false;
   public propietarioVehiculo;
   public tipoSelected;
   public viewApoderado: boolean;
-  public sinRegistro = "SIN REGISTRO";
 
   public acta = {
-    'fecha':null,
-    'numero':null,
-    'tramiteSolicitud':null,
-    'entidadJudicial':null,
+    'fecha': null,
+    'numero': null,
+    'tramiteSolicitud': null,
+    'entidadJudicial': null,
   }
+
   public tipos =[
     {'value': "Declaración", 'label': "Declaración"},
     {'value': "Manifestación", 'label': "Manifestación"}
   ];
+
+  public datos = {
+    'fecha': null,
+    'tipoDocumentoSelected': null,
+    'tipoServicio': null,
+    'tipoDocApoderado': null,
+    'nombreApoderado': null,
+    'numeroDocumento': null,
+    'personaTraslado': 'SIN REGISTRO',
+    'idFuncionario': null,
+    'idSolicitante': null,
+    'idVehiculo': null,
+    'idOrganismoTransito': null,
+    'idTramiteFactura': null,
+  };
 
   constructor(
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
@@ -96,7 +108,6 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
       }
     ); 
 
-    this.tramiteSolicitud = new FroTrteSolicitudRna(null,null, null, null, null, null, null, null, null);
     this._CfgEntidadJudicialService.select().subscribe( 
       response => {
         this.entidadesJudiciales = response;
@@ -110,43 +121,22 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
         }
       }
     );
-
-    this.datos = {
-      'fecha': null,
-      'codigoOrganismo': null,
-      'tipoDocumentoSelected': null,
-      'tipoServicio': null,
-      'tipoDocApoderado': null,
-      'nombreApoderado': null,
-      'numeroDocumento': null,
-      'personaTraslado': null,
-      'idSolicitante': null,
-      'idVehiculo': null,
-      'idTramiteFactura': null,
-    };
-      
-    this.datos.codigoOrganismo = this.vehiculo.sedeOperativa.codigoDivipo;
-    if (this.vehiculo.servicio) {
-      this.datos.tipoServicio = this.vehiculo.servicio.nombre;
-    }
+    
     this.date = new Date();
     var datePiper = new DatePipe(this.date);
     this.datos.fecha = datePiper.transform(this.date,'yyyy-MM-dd');
-    this.datos.vehiculoId = this.vehiculo.id;
+    
 
     swal({
-      title: 'Cargando Tabla!',
+      title: 'Cargando támite!',
       text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      this.codigoOrganismo = this.datos.codigoOrganismo;
-      this.tipoServicio = this.datos.tipoServicio;
-      this.date = this.datos.fecha;
     }); 
-
+    
+    this.tipoServicio = this.datos.tipoServicio;
+    this.date = this.datos.fecha;
     this.datos.nombreApoderado = this.ciudadano.usuario.primerNombre+" "+this.ciudadano.usuario.segundoNombre+" "+this.ciudadano.usuario.primerApellido;
     this.datos.tipoDocApoderado = this.ciudadano.usuario.tipoIdentificacion.nombre;
     this.datos.numeroDocumento = this.ciudadano.usuario.identificacion;   
@@ -154,7 +144,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     this.nombreApoderado = this.datos.nombreApoderado;
     this.tipoDocApoderado = this.datos.tipoDocApoderado;
     this.numeroDocumento = this.datos.numeroDocumento;
-    this.datos.solicitanteId= this.ciudadano.id;
+    this.datos.idSolicitante= this.ciudadano.id;
   }
   
   onNew(){
@@ -176,11 +166,13 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     this.datos.idTramiteFactura = this.tramiteFactura.id;
-    this.datos.personaTraslado = this.sinRegistro;
+    this.datos.idOrganismoTransito = this.vehiculo.organismoTransito.id;
+    this.datos.idVehiculo = this.vehiculo.id;
+    
 
     let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 
-    this.tramiteSolicitud.datos = { 'foraneas': this.datos, 'resumen': resumen };
+    /*this.tramiteSolicitud.datos = { 'foraneas': this.datos, 'resumen': resumen };
     this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
     this.tramiteSolicitud.idCiudadano = this.ciudadano.id;
 
@@ -241,6 +233,8 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-      });
+      }
+    );
+    */
   }
 }
