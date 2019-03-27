@@ -25,26 +25,28 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     public tramiteSolicitud: any = null;
     public tipoPropiedadSelected:any;
 
-    public ciudadano:any;
-    public empresa:any;
-    public acreedor:any;
-    public propietario:any;
+    public ciudadano:any = null;
+    public empresa:any = null;
+    public acreedor:any = null;
+    public propietarioOld:any = null;
+    public propietarioNew:any = null;
    
     public tiposIdentificacion;
-    public identificacionPrendario:any;
-    public identificacionPropietario:any;
+    public identificacionOld:any;
+    public identificacionNew:any;
     public nit:any;
 
-    public tipoIdentificacionSelectedPrendario: any;
-    public tipoIdentificacionSelectedPropietario: any;
+    public tipoIdentificacionSelectedOld: any;
+    public tipoIdentificacionSelectedNew: any;
 
     public formCiudadano = false;
     
     public datos = {
         'tipo': 'PROPIETARIO',
         'idFuncionario': null,
+        'idPropietarioOld': null,
+        'idPropietarioNew': null,
         'idAcreedor': null,
-        'idPropietario': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
     };
@@ -158,9 +160,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         );        
     }
 
-    onSearchPrendario() {
+    onSearchPropietarioOld() {
         swal({
-            title: 'Buscando prendario!',
+            title: 'Buscando propietario con prenda actual!',
             text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
                 swal.showLoading()
@@ -170,24 +172,24 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         let token = this._LoginService.getToken();
 
         let datos = {
-            'identificacion': this.identificacionPrendario,
-            'idTipoIdentificacion': this.tipoIdentificacionSelectedPrendario,
+            'identificacion': this.identificacionOld,
+            'idTipoIdentificacion': this.tipoIdentificacionSelectedOld,
         }
 
         this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
                 if (response.code == 200) {
                     if (response.data.ciudadano) {
-                        this._AcreedorService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
-                                    this.acreedor = response.data;
-                                    this.datos.idAcreedor = this.acreedor.id;
+                                    this.propietarioOld = response.data;
+                                    this.datos.idPropietarioOld = this.propietarioOld.id;
 
                                     swal.close();
                                 } else {
-                                    this.acreedor = null;
-                                    this.datos.idAcreedor = null;
+                                    this.propietarioOld = null;
+                                    this.datos.idPropietarioOld = null;
 
                                     swal({
                                         title: 'Error!',
@@ -204,18 +206,18 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                     }
                                 }
                             }
-                        );
+                        ); 
                     } else if (response.data.empresa) {
-                        this._AcreedorService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                        this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
-                                    this.acreedor = response.data;
-                                    this.datos.idAcreedor = this.acreedor.id;
+                                    this.propietarioOld = response.data;
+                                    this.datos.idPropietarioOld = this.propietarioOld.id;
 
                                     swal.close();
                                 } else {
-                                    this.acreedor = null;
-                                    this.datos.idAcreedor = null;
+                                    this.propietarioOld = null;
+                                    this.datos.idPropietarioOld = null;
 
                                     swal({
                                         title: 'Error!',
@@ -235,10 +237,48 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                         );
                     }
 
+
+                    if (this.propietarioOld) {
+                        this._AcreedorService.searchByPropietarioAndVehiculo({ 'id': this.propietarioOld.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.acreedor = response.data;
+                                    this.datos.idAcreedor = this.acreedor.id;
+
+                                    swal.close();
+                                } else {
+                                    this.acreedor = null;
+                                    this.datos.idAcreedor = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert('Error en la petición');
+                                    }
+                                }
+                            }
+                        );
+                    }else{
+                        swal({
+                            title: 'Error!',
+                            text: 'Propietario no encontrado.',
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+
                     swal.close();
                 } else {
-                    this.acreedor = null;
-                    this.datos.idAcreedor = null;
+                    this.propietarioOld = null;
+                    this.datos.idPropietarioOld = null;
 
                     swal({
                         title: 'Error!',
@@ -258,9 +298,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         );
     }
     
-    onSearchPropietario(){
+    onSearchPropietarioNew(){
         swal({
-            title: 'Buscando propietario!',
+            title: 'Buscando propietario nuevo!',
             text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
                 swal.showLoading()
@@ -270,8 +310,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         let token = this._LoginService.getToken();
 
         let datos = {
-            'identificacion': this.identificacionPropietario,
-            'idTipoIdentificacion': this.tipoIdentificacionSelectedPropietario,
+            'identificacion': this.identificacionNew,
+            'idTipoIdentificacion': this.tipoIdentificacionSelectedNew,
         }
 
         this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
@@ -281,13 +321,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                         this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
-                                    this.propietario = response.data;
-                                    this.datos.idPropietario = this.propietario.id;
+                                    this.propietarioNew = response.data;
+                                    this.datos.idPropietarioNew = this.propietarioNew.id;
 
                                     swal.close();
                                 } else {
-                                    this.propietario = null;
-                                    this.datos.idPropietario = null;
+                                    this.propietarioNew = null;
+                                    this.datos.idPropietarioNew = null;
 
                                     swal({
                                         title: 'Error!',
@@ -309,13 +349,13 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                         this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
                             response => {
                                 if (response.code == 200) {
-                                    this.propietario = response.data;
-                                    this.datos.idPropietario = this.propietario.id;
+                                    this.propietarioNew = response.data;
+                                    this.datos.idPropietarioNew = this.propietarioNew.id;
 
                                     swal.close();
                                 } else {
-                                    this.propietario = null;
-                                    this.datos.idPropietario = null;
+                                    this.propietarioNew = null;
+                                    this.datos.idPropietarioNew = null;
 
                                     swal({
                                         title: 'Error!',
@@ -337,8 +377,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
 
                     swal.close();
                 } else {
-                    this.propietario = null;
-                    this.datos.idPropietario = null;
+                    this.propietarioNew = null;
+                    this.datos.idPropietarioNew = null;
 
                     swal({
                         title: 'Error!',

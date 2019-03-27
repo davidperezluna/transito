@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <div class="row">
                             <h6 class="text-center">
-                                <b class="text-uppercase">Buscar prendario</b>
+                                <b class="text-uppercase">Buscar prendario actual</b>
                             </h6>
                         </div>
 
@@ -33,17 +33,17 @@
                             <div class="col-xs-12 col-lg-12">
                                 <label>Tipo de identificación <span class="text-danger">*</span>
                                 </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedPrendario"  name="idTipoIdentificacionPrendario" required>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedOld"  name="idTipoIdentificacionOld" required>
                                 </ng-select>
                             </div>
 
                             <div class="col-xs-12 col-lg-6">
-                                <label  *ngIf="tipoIdentificacionSelected != 4">Identificación</label>
-                                <label  *ngIf="tipoIdentificacionSelected == 4">NIT</label>
+                                <label  *ngIf="tipoIdentificacionSelectedOld != 4">Identificación</label>
+                                <label  *ngIf="tipoIdentificacionSelectedOld == 4">NIT</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" [(ngModel)]="identificacionPrendario" name="identificacionPrendario" required />
+                                    <input type="number" class="form-control" [(ngModel)]="identificacionOld" name="identificacionOld" required />
                                     <span class="input-group-btn">
-                                        <button (click)="onSearchPrendario()" class="btn btn-md btn-primary" type="button">
+                                        <button (click)="onSearchPropietarioOld()" class="btn btn-md btn-primary" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
@@ -55,24 +55,24 @@
                                     <thead>
                                         <tr>
                                             <th colspan="2" class="text-center">
-                                                <b class="text-uppercase">Prendario encontrado</b>
+                                                <b class="text-uppercase">Propietario actual encontrado</b>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td *ngIf="acreedor.ciudadano">
-                                                <b>Identificación:</b> {{ acreedor.ciudadano.identificacion }}
+                                            <td *ngIf="acreedor.propietaro.ciudadano">
+                                                <b>Identificación:</b> {{ acreedor.propietaro.ciudadano.identificacion }}
                                                 <br>
-                                                <b>Nombre:</b> {{ acreedor.ciudadano.primerNombre }} {{ acreedor.ciudadano.primerApellido }}
+                                                <b>Nombre:</b> {{ acreedor.propietaro.ciudadano.primerNombre }} {{ acreedor.propietaro.ciudadano.primerApellido }}
                                             </td>
-                                            <td *ngIf="acreedor.empresa">
-                                                <b>NIT:</b> {{ acreedor.empresa.nit }}
+                                            <td *ngIf="acreedor.propietario.empresa">
+                                                <b>NIT:</b> {{ acreedor.propietaro.empresa.nit }}
                                                 <br>
-                                                <b>Nombre:</b> {{ acreedor.empresa.nombre }}
+                                                <b>Nombre:</b> {{ acreedor.propietaro.empresa.nombre }}
                                             </td>
                                             <td>
-                                                <b>Tipo alerta:</b> {{ acreedor.tipoAlerta }}
+                                                <b>Tipo alerta:</b> {{ acreedor.tipoAlerta.nombre }}
                                                 <br>
                                                 <b>Grado:</b> {{ acreedor.gradoAlerta }}
                                             </td>
@@ -86,7 +86,7 @@
                     <div class="form-group" *ngIf="acreedor">
                         <div class="row">
                             <h6 class="text-center">
-                                <b class="text-uppercase">Buscar propietario</b>
+                                <b class="text-uppercase">Buscar propietario nuevo</b>
                             </h6>
                         </div>
 
@@ -94,49 +94,49 @@
                             <div class="col-xs-12 col-lg-12">
                                 <label>Tipo de identificación <span class="text-danger">*</span>
                                 </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedPropietario"  name="idTipoIdentificacionPropietario" required>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedNew"  name="idTipoIdentificacionNew" required>
                                 </ng-select>
                             </div>
 
                             <div class="col-xs-12 col-lg-6">
-                                <label  *ngIf="tipoIdentificacionSelected != 4">Identificación</label>
-                                <label  *ngIf="tipoIdentificacionSelected == 4">NIT</label>
+                                <label  *ngIf="tipoIdentificacionSelectedNew != 4">Identificación</label>
+                                <label  *ngIf="tipoIdentificacionSelectedNew == 4">NIT</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" [(ngModel)]="identificacionPropietario" name="identificacionPropietario" required />
+                                    <input type="number" class="form-control" [(ngModel)]="identificacionNew" name="identificacionNew" required />
                                     <span class="input-group-btn">
-                                        <button (click)="onSearchPropietario()" class="btn btn-md btn-primary" type="button">
+                                        <button (click)="onSearchPropietarioNew()" class="btn btn-md btn-primary" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-lg-12" *ngIf="propietario">
+                            <div class="col-xs-12 col-lg-12" *ngIf="propietarioNew">
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th class="text-center">
-                                                <b class="text-uppercase">Propietario encontrado</b>
+                                                <b class="text-uppercase">Propietario nuevo encontrado</b>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td *ngIf="propietario.ciudadano">
-                                                <b>Identificación:</b> {{ propietario.ciudadano.identificacion }}
+                                            <td *ngIf="propietarioNew.ciudadano">
+                                                <b>Identificación:</b> {{ propietarioNew.ciudadano.identificacion }}
                                                 <br>
                                                 <b>Nombre:</b> 
                                                 <br>
-                                                {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
+                                                {{ propietarioNew.ciudadano.primerNombre }} {{ propietarioNew.ciudadano.primerApellido }}
                                             </td>
-                                            <td *ngIf="propietario.empresa">
+                                            <td *ngIf="propietarioNew.empresa">
                                                 <b>NIT:</b> 
                                                 <br>
-                                                {{ propietario.empresa.nit }}
+                                                {{ propietarioNew.empresa.nit }}
                                                 <br>
                                                 <b>Nombre:</b> 
                                                 <br>
-                                                {{ propietario.empresa.nombre }}
+                                                {{ propietarioNew.empresa.nombre }}
                                             </td>
                                         </tr>
                                     </tbody>

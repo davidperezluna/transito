@@ -6,6 +6,7 @@ import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { VhloPropietarioService} from '../../../../services/vhloPropietario.service';
 import { VhloActaTraspasoService } from '../../../../services/vhloActaTraspaso.service';
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
@@ -62,6 +63,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     private _PropietarioService: VhloPropietarioService,
     private _TramiteSolicitudService: FroTrteSolicitudService,
     private _TramiteFacturaService: FroFacTramiteService,
+    private _FuncionarioService: PnalFuncionarioService,
     private _LoginService: LoginService,
     ){}
     
