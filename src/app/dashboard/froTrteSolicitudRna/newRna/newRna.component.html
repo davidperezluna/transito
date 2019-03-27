@@ -82,20 +82,26 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th colspan="4" class="text-uppercase text-center">
+                                    <th colspan="2" class="text-uppercase text-center">
                                         <b>Propietarios</b>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let propietario of propietarios; let i = index">
-                                    <td>
+                                    <td *ngIf="propietario.ciudadano">
                                         <strong>Nombre: </strong>
                                         {{propietario.ciudadano?.primerNombre}} {{propietario.ciudadano?.primerApellido}}
-                                    </td>
-                                    <td>
+                                        <br>
                                         <strong>Identificación: </strong>
                                         {{propietario.ciudadano?.identificacion}}
+                                    </td>
+                                    <td *ngIf="propietario.empresa">
+                                        <strong>Nombre: </strong>
+                                        {{propietario.empresa?.nombre}}
+                                        <br>
+                                        <strong>Identificación (NIT): </strong>
+                                        {{propietario.empresa?.nit}}
                                     </td>
                                     <td>
                                         <div class="custom-control custom-radio">
@@ -110,7 +116,7 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="3">
-                                        <button *ngIf='!frmApoderado && !apoderado && !confirmarSolicitante' (click)="onAddApoderado()" class="btn btn-primary">
+                                        <button *ngIf='!fromApoderado && !apoderado && !confirmarSolicitante' (click)="onAddApoderado()" class="btn btn-primary">
                                             <i class="fa fa-save"></i>
                                             Agregar apoderado
                                         </button>
@@ -123,7 +129,7 @@
                             </tfoot>
                         </table>
 
-                        <div *ngIf='frmApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group">
+                        <div *ngIf='fromApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group">
                             <div class="input-group" [class.has-danger]="apoderado">
                                 <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado"
                                     required />

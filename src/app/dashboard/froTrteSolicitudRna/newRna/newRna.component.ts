@@ -18,7 +18,6 @@ import swal from 'sweetalert2';
 export class NewRnaComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public tramiteSolicitud: FroTrteSolicitudRna;
-  //public vehiculo: Vehiculo;
   public errorMessage;
 
   public numeroFactura: any;
@@ -43,7 +42,6 @@ export class NewRnaComponent implements OnInit {
   public fromApoderado = false;
   public identificacionApoderado = false;
   public apoderado: any = null;
-
 
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,

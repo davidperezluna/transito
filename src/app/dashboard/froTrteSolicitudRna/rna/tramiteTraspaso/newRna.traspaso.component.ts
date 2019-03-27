@@ -10,7 +10,6 @@ import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTi
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 import swal from 'sweetalert2';
-import { NewRnaTraspasoIndeterminadaComponent } from '../../../tramiteSolicitud/rna/tramiteTraspasoIndeterminada/newRna.traspasoIndeterminada.component';
 
 @Component({ 
     selector: 'appRna-traspaso',
