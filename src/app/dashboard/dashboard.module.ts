@@ -215,7 +215,7 @@ import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTi
 import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
 
-import { ImoPreasignacionModule } from './imoPreasignacion/imoPreasignacion.module';
+import { ImoPreasignacionModule } from './imoPreasignacIon/imoPreasignacion.module';
 import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';

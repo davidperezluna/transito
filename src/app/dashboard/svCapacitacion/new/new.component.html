@@ -5,91 +5,139 @@
             <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
         </div>
         <div class="card-body">
-            <form #formNew="ngForm">
+            <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="col-lg-12 col-md-12">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>Fecha y hora de registro: </strong>
+                                        <br>{{ fecha }}
+                                    </td>
+                                    <td>
+                                        <strong>Número Cédula: </strong>
+                                        <br>{{ ciudadano?.identificacion }}
+                                    </td>
+                                    <td>
+                                        <strong>Nombre Formador: </strong>
+                                        <br>{{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                    </td>
+
+                                    <td>
+                                        <strong>Email: </strong>
+                                        <br>{{ ciudadano.usuario.correo }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form #formNew="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Datos Generales de la Actividad</strong>
+                </h5>
+            </div>
+            <div class="card-body">
                 <div class="form-group row">
                     <div class="col-xs-12 col-lg-6">
-                        <label>Fecha y Hora Registro <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="fecha" name="fechaHoraRegistro" disabled required />
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Formador <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.formador" name="formador"
-                             required />
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Email Formador <strong class="text-danger">*</strong></label>
-                        <input type="email" class="form-control" [(ngModel)]="capacitacion.emailFormador" name="emailFormador"
-                             required />
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Cédula Formador<strong class="text-danger">*</strong></label>
-                        <input type="number" class="form-control" [(ngModel)]="capacitacion.cedula" name="cedula"
-                            required />
+                        <label>Adjuntar Documentación</label>
+                        <input type="file" (change)="onFileChange($event)" class="form-control" [(ngModel)]="capacitacion.documento"
+                            name="documento" />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Fecha Actividad<strong class="text-danger">*</strong></label>
-                        <input type="date" class="form-control" [(ngModel)]="capacitacion.fechaActividad" name="fechaActividad" required />
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Semana <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.semana" name="semana" required />
+                        <input type="date" class="form-control" [(ngModel)]="capacitacion.fechaActividad"
+                            name="fechaActividad" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Municipio <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required name="municipio"></ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Función Seguridad Vial <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected" (ngModelChange)="obtenerFuncionCriterioPorFuncion($event)"
-                            required name="idFuncion">
+                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="municipioSelected" required
+                            name="municipio">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Clase Actividad <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="funcionesCriterios" [(ngModel)]="funcionCriterioSelected" required name="idFuncionCriterio"></ng-select>
+                        <label>Función Seguridad Vial <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="funciones" [(ngModel)]="funcionSelected"
+                            (ngModelChange)="obtenerFuncionCriterioPorFuncion($event)" required name="idFuncion">
+                        </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Tema Capacitacion <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="temasCapacitaciones" [(ngModel)]="temaCapacitacionSelected" required name="temaCapacitacion"></ng-select>
+                        <label>Función Criterio Seguridad Vial <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="funcionesCriterios"
+                            [(ngModel)]="funcionCriterioSelected" required name="idFuncionCriterio"></ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Actividad <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="temasCapacitaciones"
+                            [(ngModel)]="temaCapacitacionSelected" required name="temaCapacitacion"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Descripción de la Actividad <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.descripcionActividad" name="descripcionActividad" required />
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.descripcionActividad"
+                            name="descripcionActividad" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DATOS CAPACITACIÓN-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Datos Capacitados</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Número Cédula actor de la vía <strong class="text-danger">*</strong></label>
+                        <input type="number" class="form-control" [(ngModel)]="capacitacion.numeroCedulaActorVial"
+                            name="numeroCedulaActorVial" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Nombre del actor de la vía <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.nombreActorVial" name="nombreActorVial" required />
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.nombreActorVial"
+                            name="nombreActorVial" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Apellido del actor de la vía <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="capacitacion.apellidoActorVial" name="apellidoActorVial" required />
+                        <input type="text" class="form-control" [(ngModel)]="capacitacion.apellidoActorVial"
+                            name="apellidoActorVial" required />
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Número Cédula actor de la vía <strong class="text-danger">*</strong></label>
-                        <input type="number" class="form-control" [(ngModel)]="capacitacion.numeroCedulaActorVial" name="numeroCedulaActorVial" required />
-                    </div>
+                        <label>Genero <strong class="text-danger">*</strong></label>
+                        <ng-select [multiple]="false" [options]="generos" [(ngModel)]="generoSelected" required name="idGenero">
+                        </ng-select>
+                    </div>                    
                     <div class="col-xs-12 col-lg-6">
                         <label>Clase de Actor de la vía <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="clasesActoresVia" [(ngModel)]="claseActorViaSelected" required name="claseActorVia"></ng-select>
+                        <ng-select [multiple]="false" [options]="clasesActoresVia" [(ngModel)]="claseActorViaSelected"
+                            required name="claseActorVia"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
-                        <label>Adjuntar Documentación <strong class="text-danger">*</strong></label>
-                        <input type="file" (change)="onFileChange($event)" class="form-control" [(ngModel)]="capacitacion.documento" name="documento" required/>
+                        <label>Cargar datos de personas capacitadas</label>
+                        <input type="file" (change)="onFileChange($event)" class="form-control"
+                            [(ngModel)]="capacitacion.documentoCapacitados" name="documentoCapacitados" />
                     </div>
                 </div>
-            </form>
-        </div>
-        <div class="card-footer">
-            <div class="btn-group">
-                <button (click)="onCancelar()" class="btn btn-default">
-                    <i class="fa fa-times"></i>
-                    Cancel
-                </button>
-                <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                    <i class="fa fa-save"></i>
-                    Enviar
-                </button>
             </div>
+        </div>
+    </form>
+    <div class="card-footer">
+        <div class="btn-group">
+            <button (click)="onCancelar()" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                Cancel
+            </button>
+            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                <i class="fa fa-save"></i>
+                Enviar
+            </button>
         </div>
     </div>
 </div>

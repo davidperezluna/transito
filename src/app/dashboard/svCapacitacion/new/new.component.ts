@@ -10,6 +10,7 @@ import { SvCfgFuncionService } from '../../../services/svCfgFuncion.service';
 import { SvCfgFuncionCriterioService } from '../../../services/svCfgFuncionCriterio.service';
 import { SvCfgTemaCapacitacionService } from '../../../services/svCfgTemaCapacitacion.service';
 import { SvCfgClaseActorViaService } from '../../../services/svCfgClaseActorVia.service';
+import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
 
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
@@ -38,12 +39,14 @@ export class NewComponent implements OnInit {
     public funcionesCriterios: any;
     public temasCapacitaciones: any;
     public clasesActoresVia: any;
+    public generos: any;
 
     public municipioSelected: any;
     public funcionSelected: any;
     public funcionCriterioSelected: any;
     public temaCapacitacionSelected: any;
     public claseActorViaSelected: any;
+    public generoSelected: any;
 
     constructor(
         private _CapacitacionService: SvCapacitacionService,
@@ -53,6 +56,7 @@ export class NewComponent implements OnInit {
         private _FuncionCriterioService: SvCfgFuncionCriterioService,
         private _TemaCapacitacionService: SvCfgTemaCapacitacionService,
         private _SvCfgClaseActorViaService: SvCfgClaseActorViaService,
+        private _GeneroService: UserCfgGeneroService,
 
     ) { }
 
@@ -61,7 +65,7 @@ export class NewComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd HH:mm:ss a');
 
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
         
         this._MunicipioService.select().subscribe(
             response => {
@@ -101,11 +105,23 @@ export class NewComponent implements OnInit {
                     alert("Error en la petición");
                 }
             }
-        );
-        
+        ); 
         this._SvCfgClaseActorViaService.getClaseActorViaSelect().subscribe(
             response => {
                 this.clasesActoresVia = response;
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+        this._GeneroService.select().subscribe(
+            response => {
+                this.generos = response;
             },
             error => {
                 this.errorMessage = <any>error;
@@ -130,6 +146,7 @@ export class NewComponent implements OnInit {
         this.capacitacion.funcionCriterio = this.funcionCriterioSelected;
         this.capacitacion.claseActorVial = this.claseActorViaSelected;
         this.capacitacion.temaCapacitacion = this.temaCapacitacionSelected;
+        this.capacitacion.genero = this.generoSelected;
 
         if (this.capacitacionInput.idTipoIdentificacion == 1) {
             this.capacitacion.identificacion = this.ciudadano.identificacion;
