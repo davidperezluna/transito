@@ -66,7 +66,6 @@ export class ExportComponent implements OnInit {
             pageLength: 8,
             sPaginationType: 'full_numbers',
             dom: 'Bfrtip',
-            /* 'excel', 'pdf', */
             buttons: [
                 {
                     extend: 'excel',
@@ -74,12 +73,12 @@ export class ExportComponent implements OnInit {
                     title: 'xls',
                     filename: 'Reporte_caracterizacionEmpresa_' + this.fecha,
                 },
-                {
+                /* {
                     extend: 'pdfHtml5',
                     orientation: 'landscape',
                     pageSize: 'LEGAL',
                     filename: 'Reporte_caracterizacionEmpresaPDF_' + this.fecha,
-                }
+                } */
             ],
             oLanguage: {
                 oPaginate: {

@@ -33,25 +33,16 @@ export class NewRnaComponent implements OnInit {
   public tramitesFactura: any = null;
   public tramiteFacturaSelected: any = null;
   public tramiteFactura: any = null;
-  public facturas: any;
   public tramiteSelected: any = null;
+  public facturas: any;
 
-  public isEmpresa = false;
   public confirmarSolicitante = false;
   public sustrato = false;
 
-  public tramites = '';
-  public tramitePreasignacion = false;
-  public tramiteMatriculaInicial = false;
-  public tramite = false;
-  public isTramites: boolean = true;
-  public isMatricula: boolean = false;
-  public frmApoderado = false;
+  public tramites:any;
+  public fromApoderado = false;
   public identificacionApoderado = false;
   public apoderado: any = null;
-  public importacion: any = 'No';
-  public cantidadSustrato = 1;
-  public moduloId = 1;
 
 
   constructor(
@@ -394,14 +385,14 @@ export class NewRnaComponent implements OnInit {
   }
 
   onAddApoderado() {
-    this.frmApoderado = true;
+    this.fromApoderado = true;
     // if (this.apoderado) {
     //   this.tramiteSolicitud.solicitanteId = this.apoderado.id;
     // }
   }
 
   btnNewApoderado() {
-    this.frmApoderado = false;
+    this.fromApoderado = false;
     // if (this.apoderado) {
     //   this.tramiteSolicitud.solicitanteId = this.apoderado.id;
     // }
@@ -458,7 +449,7 @@ export class NewRnaComponent implements OnInit {
   }
 
   onCloseApoderado() {
-    this.frmApoderado = false;
+    this.fromApoderado = false;
     this.apoderado = null;
   }
 

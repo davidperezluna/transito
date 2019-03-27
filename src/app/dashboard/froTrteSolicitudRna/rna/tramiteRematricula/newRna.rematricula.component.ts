@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
@@ -17,22 +18,19 @@ export class NewRnaRematriculaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() vehiculo: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
-    public entidadList: string[];
-    public entidadSelected: any;
     public municipios: any;
-    public municipioActaSelected: any;
-    public municipioEntregaSelected: any;
     public tiposIdentificacion: any;
-    public tipoIdentificacionEntregaSelected: any;
     public matriculaCancelada: any = null;
 
     public datos = {
         'numeroActa': null,
         'fechaActa': null,
         'numeroRunt': null,
+        'campos': null,
         'fechaEntrega': null,
         'numeroIdentificacionEntrega': null,
         'nombreEntrega': null,
@@ -55,6 +53,7 @@ export class NewRnaRematriculaComponent implements OnInit {
     constructor(
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
+        private _VehiculoService: VhloVehiculoService,
         private _MunicipioService: CfgMunicipioService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _FuncionarioService: PnalFuncionarioService,
@@ -172,7 +171,6 @@ export class NewRnaRematriculaComponent implements OnInit {
         );
     }
 
-    
     onEnviar() {
         let token = this._LoginService.getToken();
 
@@ -188,12 +186,36 @@ export class NewRnaRematriculaComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
 
+                    this.datos.campos = ['rematricula'];
                     this.datos.idTramiteFactura = this.tramiteFactura.id;
                     this.datos.idVehiculo = this.vehiculo.id;
 
-                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-                    
-                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                    this._VehiculoService.update(this.datos, token).subscribe(
+                        response => {
+                            if (response.status == 'success') {
+
+                                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+                                
+                                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+    
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+                    error => {
+                        this.errorMessage = <any>error;
+    
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
                 } else {
                     this.matriculaCancelada = null;
 

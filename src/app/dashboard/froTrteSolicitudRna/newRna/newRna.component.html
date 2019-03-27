@@ -100,9 +100,9 @@
                                     <td>
                                         <div class="custom-control custom-radio">
                                             <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idSolicitante" value="{{ propietario.ciudadano.id }}"
-                                                type="radio" id="radio" name="radio"
+                                                type="radio" id="radio{{ i }}" name="radio"
                                                 class="custom-control-input">
-                                            <label class="custom-control-label" for="radio">Solicitante</label>
+                                            <label class="custom-control-label" for="radio{{ i }}">Solicitante</label>
                                         </div>
                                     </td>
                                 </tr>
@@ -178,33 +178,6 @@
                         </div>
                     </div><!-- /.card-body -->
                 </div><!-- /.card -->
-            
-                <table class="table table-bordered" *ngIf="isEmpresa">
-                    <thead>
-                        <tr>
-                            <th>Solicitante Empresa</th>
-                            <th>Check</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let propietario of propietarios; let i = index">
-                            <td>
-                                <strong>Nit: </strong>
-                                {{ propietario.empresa?.nit }}
-                                <br>
-                                <strong>Nombre: </strong>
-                                {{ propietario.empresa?.nombre }}
-                            </td>
-                            <td>
-                                <label class="custom-control custom-radio" for="3option3">
-                                    <input [(ngModel)]="tramiteSolicitud.idSolicitante" value="{{ propietario.id }}" type="radio" required>
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Solicitante</span>
-                                </label>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div><!-- /.row -->
 

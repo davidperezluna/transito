@@ -16,94 +16,103 @@
 <div class="row" *ngIf="!tramiteFactura.realizado && autorizado">
     <div class="col-xs-12 col-lg-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-body">
                 <b class="text-primary">Registrar traspaso a persona indeterminada</b>
-            </div>
-            <div class="row">
-                <label>Datos básicos</label>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                <b>Fecha</b>
-                                <br>
-                                {{ date| date: 'yyyy-MM-dd' }}
-                            </th>
-                            <th>
-                                <b>Codigo Organismo Transito</b>
-                                <br>
-                                {{ codigoOrganismo }}
-                            </th>
-                            <th>
-                                <b>Tipo documento traspaso</b>
-                                <br>
-                                <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="tipoSelected" required name="tipoId2">
-                                </ng-select>
-                            </th>
-                            <th>
-                                <b>Tipo de servicio</b>
-                                <br>
-                                {{ tipoServicio }}
-                            </th>
-                            <th>
-                                <b>Solicitante Apoderado</b>
-                                <br>
-                                <div class="custom-control custom-checkbox">
-                                    <input [(ngModel)]="viewApoderado" type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-                                    <label class="custom-control-label" for="customCheck1"></label>
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="row" *ngIf="viewApoderado">
-                <label>Información del apoderado</label>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                <b>Tipo documento apoderado</b>
-                                <br>
-                                {{ tipoDocApoderado }}
-                            </th>
-                            <th>
-                                <b>Número documento</b>
-                                <br>
-                                {{ numeroDocumento }}
-                            </th>
-                            <th>
-                                <b>Nombre apoderado</b>
-                                <br>
-                                {{ nombreApoderado }}
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="row container">
-                <label>Información del destinatario del traspaso</label>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                <b>Tipo documento apoderado</b>
-                                <br>
-                                {{ sinRegistro }}
-                            </th>
-                            <th>
-                                <b>Número documento</b>
-                                <br>
-                                {{ sinRegistro }}
-                            </th>
-                            <th>
-                                <b>Nombre apoderado</b>
-                                <br>
-                                {{ sinRegistro }}
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
+                <br>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="container">
+                    <div class="form-group"><!-- .from-group -->
+                        <div class="row">
+                            <label>Datos básicos</label>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <b>Fecha</b>
+                                            <br>
+                                            {{ date| date: 'yyyy-MM-dd' }}
+                                        </th>
+                                        <th>
+                                            <b>Codigo Organismo Transito</b>
+                                            <br>
+                                            {{ codigoOrganismo }}
+                                        </th>
+                                        <th>
+                                            <b>Tipo documento traspaso</b>
+                                            <br>
+                                            <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="tipoSelected" required name="tipoId2">
+                                            </ng-select>
+                                        </th>
+                                        <th>
+                                            <b>Tipo de servicio</b>
+                                            <br>
+                                            {{ tipoServicio }}
+                                        </th>
+                                        <th>
+                                            <b>Solicitante Apoderado</b>
+                                            <br>
+                                            <div class="custom-control custom-checkbox">
+                                                <input [(ngModel)]="viewApoderado" type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                                <label class="custom-control-label" for="customCheck1"></label>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        
+                        <div class="row" *ngIf="viewApoderado">
+                            <label>Información del apoderado</label>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <b>Tipo documento apoderado</b>
+                                            <br>
+                                            {{ tipoDocApoderado }}
+                                        </th>
+                                        <th>
+                                            <b>Número documento</b>
+                                            <br>
+                                            {{ numeroDocumento }}
+                                        </th>
+                                        <th>
+                                            <b>Nombre apoderado</b>
+                                            <br>
+                                            {{ nombreApoderado }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <label>Información del destinatario del traspaso</label>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <b>Tipo documento apoderado</b>
+                                            <br>
+                                            {{ sinRegistro }}
+                                        </th>
+                                        <th>
+                                            <b>Número documento</b>
+                                            <br>
+                                            {{ sinRegistro }}
+                                        </th>
+                                        <th>
+                                            <b>Nombre apoderado</b>
+                                            <br>
+                                            {{ sinRegistro }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div><!-- /.from-group -->
+                </div>
             </div>
         </div>
    </div>

@@ -7,7 +7,7 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <form #formNew="ngForm">
+                <form #formSuspension="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <div [class]="txtFechaInicio">
@@ -31,7 +31,7 @@
                                 <i class="fa fa-times"></i>
                                 Cancelar
                             </button>
-                            <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                            <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formSuspension.invalid" class="btn btn-primary" type="button">
                                 <i class="fa fa-save"></i>
                                 Enviar
                             </button>
