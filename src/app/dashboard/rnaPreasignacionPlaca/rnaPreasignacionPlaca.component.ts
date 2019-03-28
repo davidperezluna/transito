@@ -169,7 +169,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
     let token = this._LoginService.getToken();
     
     if (e) {
-      this._PlacaService.getCfgPlacaPorSedeOperativa(token, this.organismoTransitoSelected).subscribe(
+      this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': this.organismoTransitoSelected },token).subscribe(
         response => {
           this.placas = response;
         }, 
@@ -239,7 +239,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
       }
     })
   }
-  
+
   onCancelar(){
     this.ngOnInit();
   }

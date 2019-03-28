@@ -224,7 +224,7 @@ export class RnrsPreasignacionPlacaComponent implements OnInit {
     }
     
     if (e) {
-      this._CfgPlacaService.getCfgPlacaRnrs(datos,token).subscribe(
+      this._CfgPlacaService.selectByOrganismoTransitoAndTipoVehiculo(datos,token).subscribe(
         response => {
           this.cfgPlacas = response;
           console.log(this._CfgPlacaService);

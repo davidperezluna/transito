@@ -80,7 +80,7 @@ export class EditComponent {
     let token = this._loginService.getToken();
     this.cfgPlaca.claseId = this.claseSelected;
     this.cfgPlaca.sedeOperativaId = this.sedeOperativaSelected;
-    this._CfgPlacaService.editCfgPlaca(this.cfgPlaca, token).subscribe(
+    this._CfgPlacaService.edit(this.cfgPlaca, token).subscribe(
       response => {
         //console.log(response);
         this.respuesta = response;
