@@ -19,7 +19,7 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     public errorMessage; 
     
-    public autorizado: any = true;
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public municipios:any;
     public tiposIdentificacion: any;
@@ -173,12 +173,31 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
 
       this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-      let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+      this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+        response => {
+          if (response.code == 200) {
+            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
 
-      this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
+            this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
+          }else{
+            swal({
+              title: 'Error!',
+              text: response.message,
+              type: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        },
+        error => {
+            this.errorMessage = <any>error;
+
+            if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert('Error en la petición');
+            }
+        }
+      );
     }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
+
 
 }

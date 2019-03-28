@@ -197,14 +197,37 @@ export class NewRnaImportacionTemporalComponent implements OnInit {
     }
 
     onEnviar() {
+        let token = this._LoginService.getToken();
+        
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
-            'No. solicitud RUNT' + this.numeroRunt +
-            'No. cuotas' + this.numeroCuotas +
-            'Fecha solicitud' + this.datos.fechaSolicitud;
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+            response => {
+              if (response.code == 200) {
+                let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+                    'No. solicitud RUNT' + this.numeroRunt +
+                    'No. cuotas' + this.numeroCuotas +
+                    'Fecha solicitud' + this.datos.fechaSolicitud;
 
-        this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
     }
 }

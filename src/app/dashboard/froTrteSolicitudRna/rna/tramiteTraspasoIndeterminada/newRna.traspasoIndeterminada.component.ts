@@ -194,29 +194,50 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
                 if (response.data.ciudadano) {
                   this.datos.idCiudadano = response.data.ciudadano.id;
 
-                  this._PropietarioService.update(this.datos, token).subscribe(
-                      response => {
-                        if (response.code == 200) {
-                          let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-
-                          this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                        }else{
-                          swal({
-                            title: 'Error!',
-                            text: response.message,
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                          });
-                        }
-                      },
-                      error => {
-                          this.errorMessage = <any>error;
-
-                          if (this.errorMessage != null) {
-                              console.log(this.errorMessage);
-                              alert('Error en la petición');
+                  this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+                    response => {
+                      if (response.code == 200) {
+                        this._PropietarioService.update(this.datos, token).subscribe(
+                          response => {
+                            if (response.code == 200) {
+                              let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+    
+                              this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            }else{
+                              swal({
+                                title: 'Error!',
+                                text: response.message,
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                              });
+                            }
+                          },
+                          error => {
+                              this.errorMessage = <any>error;
+    
+                              if (this.errorMessage != null) {
+                                  console.log(this.errorMessage);
+                                  alert('Error en la petición');
+                              }
                           }
+                        );
+                      }else{
+                        swal({
+                          title: 'Error!',
+                          text: response.message,
+                          type: 'error',
+                          confirmButtonText: 'Aceptar'
+                        });
                       }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
                   );
                 }
               } else {

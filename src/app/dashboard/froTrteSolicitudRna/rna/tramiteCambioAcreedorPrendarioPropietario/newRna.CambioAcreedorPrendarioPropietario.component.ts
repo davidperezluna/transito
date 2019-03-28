@@ -20,8 +20,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public tipoPropiedadSelected:any;
 

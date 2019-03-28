@@ -17,8 +17,9 @@ export class NewRnaRegrabarMotorComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public tipoRegrabacionList: string[];
     public tipoRegrabacionSelected: any;
@@ -137,30 +138,48 @@ export class NewRnaRegrabarMotorComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
-        this._VehiculoService.update(this.datos, token).subscribe(
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                        '<br/>Regrabado (SI)' +
-                        '<br/>Motor anterior: ' + this.vehiculo.motor +
-                        '<br/>Motor nuevo: ' + this.datos.nuevoNumero +
-                        '<br/>Motivo: ' + this.datos.motivo +
-                        '<br/>Numero RUNT: ' + this.datos.numeroRunt;
-
-                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen':  resumen });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
+              if (response.code == 200) {
+                this._VehiculoService.update(this.datos, token).subscribe(
+                    response => {
+                        if (response.status == 'success') {
+                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+                                '<br/>Regrabado (SI)' +
+                                '<br/>Motor anterior: ' + this.vehiculo.motor +
+                                '<br/>Motor nuevo: ' + this.datos.nuevoNumero +
+                                '<br/>Motivo: ' + this.datos.motivo +
+                                '<br/>Numero RUNT: ' + this.datos.numeroRunt;
+        
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen':  resumen });
+                        }
+                        error => {
+                            this.errorMessage = <any>error;
+        
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
                     }
-                }
-            });
-    }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
+                );
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
+            error => {
+                this.errorMessage = <any>error;
 
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+    }
 }

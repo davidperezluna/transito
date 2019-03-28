@@ -23,8 +23,9 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public placa: VhloCfgPlaca = null;;
     public cfgTiposAlerta: any;
     public tramiteSolicitud: any = null;
@@ -333,21 +334,42 @@ export class NewRnaTramiteCambioAcreedorPrendarioComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._AcreedorService.update(this.datos, token).subscribe(
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-                response = response;
                 if (response.code == 200) {
-                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-
-                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                    this._AcreedorService.update(this.datos, token).subscribe(
+                        response => {
+                            response = response;
+                            if (response.code == 200) {
+                                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+            
+                                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+            
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+                }else{
+                    swal({
+                    title: 'Error!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                    });
                 }
-                error => {
-                    this.errorMessage = <any>error;
+            },
+            error => {
+                this.errorMessage = <any>error;
 
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
                 }
             }
         );

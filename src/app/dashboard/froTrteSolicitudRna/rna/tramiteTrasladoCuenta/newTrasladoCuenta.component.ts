@@ -19,7 +19,7 @@ export class NewTrasladoCuentaComponent implements OnInit {
   @Input() tramiteFactura: any = null;
   public errorMessage; 
   
-  public autorizado: any = true;
+  public autorizado: any = false;
   public organismosTransito: any;
   public tramitesFactura: any = null;
   public tramiteSolicitud: any;
@@ -151,39 +151,53 @@ constructor(
     this.datos.idVehiculo = this.vehiculo.id;
     this.datos.idOrganismoTransitoOld = this.vehiculo.organismoTransito.id;
     this.datos.idTramiteFactura = this.tramiteFactura.id;
-    
-    this._VehiculoService.update(this.datos,token).subscribe(
+
+    this._TramiteSolicitudService.validations(this.datos, token).subscribe(
       response => {
-          response = response; 
-          if(response.status == 'success'){
-            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-              '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismoTransito.nombre +
-              '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransitoNew;
-
-            this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
-              if (response.status == 'success') {
-                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-              }
-              error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
+        if (response.code == 200) {
+          this._VehiculoService.update(this.datos,token).subscribe(
+            response => {
+                response = response; 
+                if(response.status == 'success'){
+                  let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+                    '<br/><b>Organismo transito anterior: </b>' + this.vehiculo.organismoTransito.nombre +
+                    '<br/><b>Organismo transito nuevo: </b>' + this.datos.idOrganismoTransitoNew;
+      
+                  this._TramiteTrasladoService.register(this.datos, token).subscribe(response => {
+                    if (response.status == 'success') {
+                      this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                    }
+                    error => {
+                      this.errorMessage = <any>error;
+      
+                      if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                      }
+                    }
+                  }
+                );
               }
             }
           );
+        }else{
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
-        error => {
+      },
+      error => {
           this.errorMessage = <any>error;
 
           if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
+              console.log(this.errorMessage);
+              alert('Error en la petición');
           }
-        }
-      }); 
-    }
+      }
+    ); 
+  }
 
 }

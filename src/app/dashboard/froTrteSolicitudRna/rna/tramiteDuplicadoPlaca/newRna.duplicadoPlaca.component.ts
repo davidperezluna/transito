@@ -14,8 +14,9 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public motivoList: string[];
     public motivoSelected: any;
@@ -122,16 +123,35 @@ export class NewRnaDuplicadoPlacaComponent implements OnInit {
 
    
     onEnviar() {
+        let token = this._LoginService.getToken();
+        
         this.datos.motivo = this.motivoSelected;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-            '<br><b>Motivo: </b>' + this.motivoSelected;
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+            response => {
+              if (response.code == 200) {
+                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+                '<br><b>Motivo: </b>' + this.motivoSelected;
 
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
-    }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
+            error => {
+                this.errorMessage = <any>error;
 
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+    }
 }

@@ -12,7 +12,6 @@ export class VhloCfgPlacaService {
 	constructor(private _http: Http) { }
 
 	getCfgPlaca() {
-
 		return this._http.get(this.url + "/").map(res => res.json());
 	}
 
