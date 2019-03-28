@@ -4,7 +4,6 @@ import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.s
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
@@ -55,7 +54,6 @@ export class NewRnaTraspasoComponent implements OnInit {
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
         private _CiudadanoService: UserCiudadanoService,
-        private _EmpresaService: UserEmpresaService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,

@@ -311,7 +311,7 @@
                                                 
                                                 <appRna-regrabar-vin *ngIf="tramiteFactura.precio.tramite.id == 28"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
                                                 
-                                                <appRna-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [ciudadano]="ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
+                                                <appRna-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
                                             
                                                 <appRna-certificado-tradicion *ngIf="tramiteFactura.precio.tramite.id == 30"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-certificado-tradicion>
                                             </div>
