@@ -21,6 +21,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Código</th>
                                 <th>Nombre</th>
                                 <th>Acciones</th>
                             </tr>
@@ -28,6 +29,7 @@
                         <tbody>
                             <tr class="odd" *ngFor="let entidadAccidente of entidadesAccidente; let i = index">
                                 <td>{{ i + 1 }}</td>
+                                <td>{{ entidadAccidente.codigo }}</td>
                                 <td>{{ entidadAccidente.nombre }}</td>
                                 <td>
                                     <button (click)="onEdit(entidadAccidente)" class="btn btn-xs btn-info" type="button">

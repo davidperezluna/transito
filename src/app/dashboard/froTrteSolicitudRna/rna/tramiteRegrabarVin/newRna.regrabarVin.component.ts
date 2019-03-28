@@ -16,8 +16,9 @@ export class NewRnaRegrabarVinComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any; 
     public motivoSelected: any;
     
@@ -135,30 +136,52 @@ export class NewRnaRegrabarVinComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this.datos.campos = ['regrabarvin'];
-         this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
-        this._VehiculoService.update(this.datos, token).subscribe(
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                        '<br/>Regrabado (SI)' +
-                        '<br/>Vin anterior: ' + this.vehiculo.vin +
-                        '<br/>Vin nuevo: ' + this.datos.nuevoNumero +
-                        '<br/>Motivo: ' + this.datos.motivo +
-                        '<br/>Numero RUNT: ' + this.datos.numeroRunt;
-
-                    this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
+              if (response.code == 200) {
+                this._VehiculoService.update(this.datos, token).subscribe(
+                    response => {
+                        if (response.status == 'success') {
+                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+                                '<br/>Regrabado (SI)' +
+                                '<br/>Vin anterior: ' + this.vehiculo.vin +
+                                '<br/>Vin nuevo: ' + this.datos.nuevoNumero +
+                                '<br/>Motivo: ' + this.datos.motivo +
+                                '<br/>Numero RUNT: ' + this.datos.numeroRunt;
+        
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        }
+                        error => {
+                            this.errorMessage = <any>error;
+        
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
                     }
+                );
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
                 }
-            });
+            }
+        );
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
-import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
@@ -41,7 +40,6 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     constructor(
         private _TramiteFacturaService: FroFacTramiteService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
-        private _VehiculoService: VhloVehiculoService,
         private _CiudadanoService: UserCiudadanoService,
         private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
@@ -183,16 +181,39 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     }
 
     onEnviar() {      
+        let token = this._LoginService.getToken();
+        
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idCiudadano = this.ciudadano.id;
 
-        let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero + 
-                    "<b>No. solicitud RUNT: </b>" + this.datos.numeroRunt +
-                    "<b>Ciudadano que recibe: </b>" + this.ciudadano.primerNombre + " " + this.ciudadano.primerApellido;
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+            response => {
+              if (response.code == 200) {
+                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero + 
+                "<b>No. solicitud RUNT: </b>" + this.datos.numeroRunt +
+                "<b>Ciudadano que recibe: </b>" + this.ciudadano.primerNombre + " " + this.ciudadano.primerApellido;
 
-        this.entregado = true;
+                this.entregado = true;
 
-        this.readyTramite.emit({'foraneas': this.datos, 'resumen': resumen});
+                this.readyTramite.emit({'foraneas': this.datos, 'resumen': resumen});
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
     }
 }

@@ -37,7 +37,7 @@ export class SvCapacitacionComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         this._TipoIdentificacionService.select().subscribe(
             response => {

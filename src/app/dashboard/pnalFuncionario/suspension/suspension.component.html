@@ -10,10 +10,8 @@
                 <form #formSuspension="ngForm">
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
-                            <div [class]="txtFechaInicio">
-                                <label>Fecha inicio <strong class="text-danger">*</strong></label>
-                                <input class="form-control" (blur)="isFecha()" [(ngModel)]="suspension.fechaInicio" name="fechaInicio" type="date" required />
-                            </div>
+                            <label>Fecha inicio <strong class="text-danger">*</strong></label>
+                            <input class="form-control" [(ngModel)]="suspension.fechaInicio" name="fechaInicio" type="date" required />
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Fecha fin <strong class="text-danger">*</strong></label>
@@ -24,16 +22,16 @@
                             <textarea class="form-control" [(ngModel)]="suspension.observacion" name="numeroModificatorio" required></textarea>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <div class="btn-group">
+                            <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formSuspension.invalid" class="btn btn-primary"
+                                type="button">
+                                <i class="fa fa-save"></i>
+                                Enviar
+                            </button>
                             <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
                                 <i class="fa fa-times"></i>
                                 Cancelar
-                            </button>
-                            <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formSuspension.invalid" class="btn btn-primary" type="button">
-                                <i class="fa fa-save"></i>
-                                Enviar
                             </button>
                         </div>
                     </div>
@@ -42,11 +40,11 @@
         </div><!-- /.card -->
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf="suspensions && suspensions.length > 0">
+    <div class="col-xs-12 col-lg-8" *ngIf="suspensiones && suspensiones.length > 0">
         <div class="card">
             <!-- .card -->
             <div class="card-header">
-                <h5 class="text-uppercase">Suspensión Actuales</h5>
+                <h5 class="text-uppercase">Suspensiones Actuales</h5>
             </div>
             <div class="card-body">
                 <table class="table " id="dataTables-example">
@@ -59,8 +57,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd" *ngFor="let suspension of suspensions; let i = index">
-                            <td>{{ suspension.id }}</td>
+                        <tr class="odd" *ngFor="let suspension of suspensiones; let i = index">
+                            <td>{{ i + 1 }}</td>
                             <td>{{ suspension.fechaInicio }}</td>
                             <td>{{ suspension.fechaFin }}</td>
                             <td>{{ suspension.observacion }}</td>

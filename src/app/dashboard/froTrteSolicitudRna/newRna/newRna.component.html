@@ -6,8 +6,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <div class="row">
-                        <!-- .row -->
+                    <div class="row"><!-- .row -->
                         <div class="col-xs-12 col-lg-12">
                             <label>Buscar por (Vin,Chasis,Placa,Motor,Serie)</label>
                             <div class="input-group">
@@ -19,11 +18,16 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
-                    <!-- .row -->
+                    </div><!-- /.row -->
                 </div>
 
                 <div class="row" *ngIf="vehiculo"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.cancelado">
+                        <div class="notes notes-success" role="alert"> 
+                            <strong>Atención!</strong> este vehiculo se encuentra con la matricula cancelada solo podrá realizar certificado de tradición y rematricula.
+                        </div>
+                    </div>
+                    
                     <div class="col-xs-12 col-lg-12">
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -78,7 +82,6 @@
             <div class="col-xs-12 col-lg-12">
                 <div class="card"><!-- .card -->
                     <div class="card-body"><!-- .card-body -->
-
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -91,36 +94,34 @@
                                 <tr *ngFor="let propietario of propietarios; let i = index">
                                     <td *ngIf="propietario.ciudadano">
                                         <strong>Nombre: </strong>
-                                        {{propietario.ciudadano?.primerNombre}} {{propietario.ciudadano?.primerApellido}}
+                                        {{ propietario.ciudadano?.primerNombre }} {{ propietario.ciudadano?.primerApellido }}
                                         <br>
                                         <strong>Identificación: </strong>
-                                        {{propietario.ciudadano?.identificacion}}
+                                        {{ propietario.ciudadano?.identificacion }}
                                     </td>
                                     <td *ngIf="propietario.empresa">
                                         <strong>Nombre: </strong>
-                                        {{propietario.empresa?.nombre}}
+                                        {{ propietario.empresa?.nombre }}
                                         <br>
                                         <strong>Identificación (NIT): </strong>
-                                        {{propietario.empresa?.nit}}
+                                        {{ propietario.empresa?.nit }}
                                     </td>
                                     <td>
                                         <div class="custom-control custom-radio">
-                                            <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idSolicitante" value="{{ propietario.ciudadano.id }}"
-                                                type="radio" id="radio{{ i }}" name="radio"
-                                                class="custom-control-input">
+                                            <input [disabled]='confirmarSolicitante' [(ngModel)]="tramiteSolicitud.idPropietario" value="{{ propietario.id }}" type="radio" id="radio{{ i }}" name="radio" class="custom-control-input">
                                             <label class="custom-control-label" for="radio{{ i }}">Solicitante</label>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
-                            <tfoot>
+                            <tfoot *ngIf="!confirmarSolicitante">
                                 <tr>
                                     <td colspan="3">
-                                        <button *ngIf='!fromApoderado && !apoderado && !confirmarSolicitante' (click)="onAddApoderado()" class="btn btn-primary">
+                                        <button *ngIf='!fromApoderado && !apoderado' (click)="onFormApoderado()" class="btn btn-primary">
                                             <i class="fa fa-save"></i>
                                             Agregar apoderado
                                         </button>
-                                        <button *ngIf='tramiteSolicitud.idSolicitante && !confirmarSolicitante' (click)="onConfirmarSolicitante()" class="btn btn-success">
+                                        <button *ngIf='tramiteSolicitud.idPropietario' (click)="onConfirmarSolicitante()" class="btn btn-success">
                                             <i class="fa fa-save"></i>
                                             Confirmar solicitante
                                         </button>
@@ -131,8 +132,7 @@
 
                         <div *ngIf='fromApoderado && !apoderado' class="col-xs-12 col-lg-12 form-group">
                             <div class="input-group" [class.has-danger]="apoderado">
-                                <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado"
-                                    required />
+                                <input type="number" class="form-control" placeholder="Identificacion apoderado" [(ngModel)]="identificacionApoderado" name="identificacionApoderado" required />
                                 <span class="input-group-btn">
                                     <button (click)="onSearchApoderado()" class="btn" type="button">
                                         <i class="fa fa-search"></i>
@@ -168,7 +168,7 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <button (click)="btnNewApoderado()" class="btn btn-primary">
+                                                <button (click)="onAddApoderado()" class="btn btn-primary">
                                                     <i class="fa fa-save"></i>
                                                     Agregar
                                                 </button>
@@ -281,9 +281,9 @@
                                                 
                                                 <appRna-transformacion *ngIf="tramiteFactura.precio.tramite.id == 9" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
                                                 
-                                                <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [idPropietario]='tramiteSolicitud.idSolicitante' [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
+                                                <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [idPropietario]='tramiteSolicitud.idPropietario' [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
                                             
-                                                <appRna-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idSolicitante' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
+                                                <appRna-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
                                                 
                                                 <appRna-levantamiento-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 12" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-levantamiento-alerta-prenda>
                                                 
@@ -314,7 +314,7 @@
                                                 
                                                 <appRna-regrabar-vin *ngIf="tramiteFactura.precio.tramite.id == 28"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-regrabar-vin>
                                                 
-                                                <appRna-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [ciudadano]="ciudadano" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
+                                                <appRna-traspaso-indeterminada *ngIf="tramiteFactura.precio.tramite.id == 29"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-traspaso-indeterminada>
                                             
                                                 <appRna-certificado-tradicion *ngIf="tramiteFactura.precio.tramite.id == 30"  [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-certificado-tradicion>
                                             </div>

@@ -43,11 +43,14 @@
                                 </ng-select>
                             </div>
 
-                            <div class="col-xs-6 col-lg-12" *ngIf="datos.idMotivoCancelacion !='EXPORTACIÓN O REEXPORTACIÓN' && datos.idMotivoCancelacion !='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
-                                <label> Numero de oficio
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input class="form-control" [(ngModel)]="datos.numeroOficio" name="numeroOficio" type="number" min="0" required />
+                            <div class="col-xs-6 col-lg-12">
+                                <label> Numero de oficio</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroOficio" name="numeroOficio" type="number" required />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <label> Fecha de oficio</label>
+                                <input class="form-control" [(ngModel)]="datos.fechaOficio" name="fechaOficio" type="date" required />
                             </div>
 
                             <div class="col-xs-12 col-lg-6" *ngIf="datos.idMotivoCancelacion =='EXPORTACIÓN O REEXPORTACIÓN'"><br>
@@ -78,15 +81,6 @@
                                 </label>
                                 <input class="form-control" [(ngModel)]="datos.fechaHechos" name="fechaHechos" type="date" min="0" required />
                             </div>
-                            <!-- <div class=""><br>
-                                                        <br>
-                                                        <label class="custom-control custom-checkbox" for="2c-option1">
-                                                            <input type="checkbox" [(ngModel)]="datos.recuperarMotor" name="recuperarMotor" class="custom-control-input"
-                                                                checked>
-                                                            <span class="custom-control-indicator"></span>
-                                                            <span class="custom-control-description">Recuperar motor</span>
-                                                        </label>
-                                                    </div> -->
                             <div class="col-lg-6 col-md-6 " style="padding-top: 12%;" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" [(ngModel)]="datos.recuperarMotor" class="custom-control-input" id="recuperarMotor"

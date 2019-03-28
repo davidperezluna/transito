@@ -19,15 +19,12 @@ export class SuspensionComponent implements OnInit {
     @Input() funcionario:any = null;
     public errorMessage;
     public id;
-    public respuesta;
-    public suspensions:any = null;
+    public suspensiones:any = null;
     public date:any;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
-    public txtFechaInicio:any;
     public table:any; 
-    public color:any; 
     public suspension = {
       'fechaInicio': null,
       'fechaFin': null,
@@ -39,14 +36,9 @@ export class SuspensionComponent implements OnInit {
 		private _PnalSuspensionService: PnalSuspensionService,
 		private _PnalFuncionarioService: PnalFuncionarioService,
 		private _loginService: LoginService,
-    ){
-      this.date = new Date();
-      var datePiper = new DatePipe(this.date);
-      this.date = datePiper.transform(this.date,'yyyy-MM-dd');
-    }
+    ){ }
     
   ngOnInit() {
-    console.log(this.funcionario);
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
@@ -64,7 +56,7 @@ export class SuspensionComponent implements OnInit {
     let token = this._loginService.getToken();
 		this._PnalFuncionarioService.recordSuspensiones(this.funcionario, token).subscribe(
       response => {
-        this.suspensions = response.data;
+        this.suspensiones = response.data;
         let timeoutId = setTimeout(() => {
           this.iniciarTabla();
         }, 100);
@@ -108,13 +100,27 @@ export class SuspensionComponent implements OnInit {
   onEnviar(){
     let token = this._loginService.getToken();
     this.suspension.idFuncionario = this.funcionario.id;
-    console.log(this.suspension);
     this._PnalSuspensionService.register(this.suspension, token).subscribe(
       response => {
-        this.suspensions = response.data;
-        this.table.destroy();
-        this.ngOnInit();
-      },
+        if (response.status == 'success') {
+        //this.ready.emit(true);
+          this.suspensiones = response.data;
+          this.table.destroy();
+          this.ngOnInit();
+        swal({
+          title: 'Perfecto!',
+          text: response.message,
+          type: 'success',
+          confirmButtonText: 'Aceptar'
+        })
+      } else {
+        swal({
+          title: 'Error!',
+          text: response.message,
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        })
+      }
       error => {
         this.errorMessage = <any>error;
 
@@ -123,21 +129,7 @@ export class SuspensionComponent implements OnInit {
           alert("Error en la petición");
         }
       }
+    }
     );
   }
-
-  isFecha(){
-    console.log(this.date);
-    console.log(this.suspension.fechaInicio);
-
-    if (this.suspension.fechaInicio >= this.date) {
-      console.log('fecha mayor');
-      this.txtFechaInicio = 'has-success';
-    }else{
-      this.txtFechaInicio = 'has-danger';
-      console.log('fecha menor');
-    }
-
-  }
-
 }

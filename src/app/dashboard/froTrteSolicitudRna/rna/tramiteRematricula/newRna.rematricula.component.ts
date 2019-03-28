@@ -174,58 +174,39 @@ export class NewRnaRematriculaComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
-        this._TramiteSolicitudService.searchMatriculaCancelada({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+        this.datos.campos = ['rematricula'];
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idVehiculo = this.vehiculo.id;
+
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    this.matriculaCancelada = response.data;
-
-                    swal({
-                        title: 'Perfecto!',
-                        text: response.message,
-                        type: 'success',
-                        confirmButtonText: 'Aceptar'
-                    });
-
-                    this.datos.campos = ['rematricula'];
-                    this.datos.idTramiteFactura = this.tramiteFactura.id;
-                    this.datos.idVehiculo = this.vehiculo.id;
-
-                    this._VehiculoService.update(this.datos, token).subscribe(
-                        response => {
-                            if (response.status == 'success') {
-
-                                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-                                
-                                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                            }
-                            error => {
-                                this.errorMessage = <any>error;
-    
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
-                            }
+              if (response.code == 200) {
+                this._VehiculoService.update(this.datos, token).subscribe(
+                    response => {
+                        if (response.status == 'success') {
+        
+                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+                            
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
                         }
-                    );
-                    error => {
-                        this.errorMessage = <any>error;
-    
-                        if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
+                        error => {
+                            this.errorMessage = <any>error;
+        
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
                         }
                     }
-                } else {
-                    this.matriculaCancelada = null;
-
-                    swal({
-                        title: 'Atención!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
+                );
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -235,11 +216,6 @@ export class NewRnaRematriculaComponent implements OnInit {
                     alert('Error en la petición');
                 }
             }
-        );
+        );                
     }
-
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
 }

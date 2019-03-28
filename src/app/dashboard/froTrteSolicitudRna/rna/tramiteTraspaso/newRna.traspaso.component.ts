@@ -3,9 +3,7 @@ import { Router } from "@angular/router";
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloPropietarioService } from '../../../../services/vhloPropietario.service';
-import { VhloVehiculoService } from '../../../../services/vhloVehiculo.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
-import { UserEmpresaService } from "../../../../services/userEmpresa.service";
 import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTipoIdentificacion.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
@@ -53,11 +51,9 @@ export class NewRnaTraspasoComponent implements OnInit {
 
     constructor(
         private _PropietarioService: VhloPropietarioService,
-        private _VhloVehiculoService: VhloVehiculoService,
         private _TramiteSolicitudService: FroTrteSolicitudService,
         private _TramiteFacturaService: FroFacTramiteService,
         private _CiudadanoService: UserCiudadanoService,
-        private _EmpresaService: UserEmpresaService,
         private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
         private _FuncionarioService: PnalFuncionarioService,
         private _LoginService: LoginService,
@@ -323,16 +319,37 @@ export class NewRnaTraspasoComponent implements OnInit {
     }
 
     onEnviar() {
+        let token = this._LoginService.getToken();
+
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let token = this._LoginService.getToken();
-
-        let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
-
-        this._PropietarioService.update(this.datos, token).subscribe(
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+              if (response.code == 200) {
+                let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
+
+                this._PropietarioService.update(this.datos, token).subscribe(
+                    response => {
+                        this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
+                );
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -343,6 +360,5 @@ export class NewRnaTraspasoComponent implements OnInit {
                 }
             }
         );
-
     }
 }
