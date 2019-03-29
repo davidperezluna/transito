@@ -27,12 +27,15 @@ export class NewComponent implements OnInit {
     public capacitacion: SvCapacitacion;
     public errorMessage;
     public capacitaciones: any;
-    
+
     public file: any = null;
     public fileSelected: File = null;
 
     public date: any;
     public fecha: any;
+
+    public txt: any[] = null;
+    public valido = true;
 
     public municipios: any;
     public funciones: any;
@@ -48,9 +51,11 @@ export class NewComponent implements OnInit {
     public claseActorViaSelected: any;
     public generoSelected: any;
 
+    public capacitados = [];
+
     constructor(
         private _CapacitacionService: SvCapacitacionService,
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
         private _MunicipioService: CfgMunicipioService,
         private _FuncionService: SvCfgFuncionService,
         private _FuncionCriterioService: SvCfgFuncionCriterioService,
@@ -65,8 +70,8 @@ export class NewComponent implements OnInit {
         var datePiper = new DatePipe(this.date);
         this.fecha = datePiper.transform(this.date, 'yyyy-MM-dd HH:mm:ss a');
 
-        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null);
-        
+        this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
         this._MunicipioService.select().subscribe(
             response => {
                 this.municipios = response;
@@ -105,7 +110,7 @@ export class NewComponent implements OnInit {
                     alert("Error en la petición");
                 }
             }
-        ); 
+        );
         this._SvCfgClaseActorViaService.getClaseActorViaSelect().subscribe(
             response => {
                 this.clasesActoresVia = response;
@@ -139,7 +144,7 @@ export class NewComponent implements OnInit {
     }
 
     onEnviar() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this.capacitacion.municipio = this.municipioSelected;
         this.capacitacion.fechaHoraRegistro = this.fecha;
         this.capacitacion.funcion = this.funcionSelected;
@@ -153,62 +158,51 @@ export class NewComponent implements OnInit {
         } else if (this.capacitacionInput.idTipoIdentificacion == 4) {
             this.capacitacion.nit = this.empresa.nit;
         }
-        swal({
-            title: '¿Está seguro?',
-            text: "¿Desea guardar la información?",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#15d4be',
-            cancelButtonColor: '#ff6262',
-            confirmButtonText: 'Confirmar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
-                this._CapacitacionService.register(this.file, this.capacitacion, token).subscribe(
-                    response => {
-                        if (response.status == 'success') {
-                            this.ready.emit(true);
-                            swal({
-                                title: 'Perfecto!',
-                                text: response.message,
-                                type: 'success',
-                                confirmButtonText: 'Aceptar'
-                            });
-                        } else {
-                            swal({
-                                title: 'Error!',
-                                text: response.message,
-                                type: 'error',
-                                confirmButtonText: 'Aceptar'
-                            });
-                        }
-                        error => {
-                            this.errorMessage = <any>error;
-                            if (this.errorMessage != null) {
-                                console.log(this.errorMessage);
-                                alert("Error en la petición");
-                            }
-                        }
+        this._CapacitacionService.register(this.file, this.capacitacion, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.ready.emit(true);
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
-                );
+                }
             }
-        });
+        );
     }
 
     onFileChange(event) {
-        if (event.target.files.length > 0) {
-            this.fileSelected = event.target.files[0];
+        if(event){
+            if (event.target.files.length > 0) {
+                this.fileSelected = event.target.files[0];
 
-            if (this.capacitacion.documento != null) {
-                this.file = new FormData();
-                this.file.append('file', this.fileSelected);
+                if (this.capacitacion.documento != null) {
+                    this.file = new FormData();
+                    this.file.append('file', this.fileSelected);
+                }
             }
         }
     }
 
     obtenerFuncionCriterioPorFuncion(e) {
         if (e) {
-            let token = this._loginService.getToken();
+            let token = this._LoginService.getToken();
 
             swal({
                 title: 'Cargando Clases de Actividades!',
@@ -238,6 +232,96 @@ export class NewComponent implements OnInit {
                 }
             );
         }
+    }
+
+    registrarCapacitado() {
+        let dataCapacitados = {
+            'número cédula': this.capacitacion.numeroCedulaActorVial,
+            'nombre': this.capacitacion.nombreActorVial,
+            'apellido': this.capacitacion.apellidoActorVial,
+            'clase actor vial': this.claseActorViaSelected,
+            'genero': this.generoSelected,
+        };
+        this.capacitados.push(dataCapacitados);
+        console.log(this.capacitados);
+
+        swal({
+            title: 'Perfecto!',
+            text: 'Persona capacitada agregada con éxito',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+    }
+
+    onFinalizar() {
+        swal({
+            title: 'Perfecto!',
+            text: 'Capacitación terminada con éxito',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+        this.ready.emit(true);
+    }
+
+    async onUploadFile() {
+        let token = this._LoginService.getToken();
+        
+        const { value: files } = await swal({
+            title: 'Seleccione el archivo .csv',
+            input: 'file',
+            inputAttributes: {
+                'accept': 'txt/*',
+                'aria-label': 'Upload your profile picture'
+            }
+        })
+        if (files) {
+            this.txt = [];
+            let reader: FileReader = new FileReader();
+            reader.readAsBinaryString(files);
+            reader.onload = (e) => {
+                let txt: string = reader.result;
+                let allTextLines = txt.split(/\r\n|\n/);
+                for (let i = 0; i < allTextLines.length; i++) {
+                    let data = allTextLines[i].split(';');
+                    if (data.length < 2) {
+                        this.valido = false;
+                    } else {
+                        if (data[0] != '') {
+                            this.txt.push(data);
+                        }
+                    }
+                }
+            }
+        }
+        
+        console.log(this.txt);
+        this._CapacitacionService.cargarCapacitados({"file":this.txt, "capacitacion":this.capacitacion}, token).subscribe(
+            response => {
+                
+                if (response.status == 'success') {
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    error => {
+                        this.errorMessage = <any>error;
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
+                }
+            }
+        );
     }
 }
 
