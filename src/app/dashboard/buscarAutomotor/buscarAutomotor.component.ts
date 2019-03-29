@@ -1,29 +1,25 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Vehiculo } from '../vehiculo/vehiculo.modelo';
-import { LoginService } from '../../services/login.service';
-import { VehiculoService } from '../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.service';
+import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-buscar-automotor',
   templateUrl: './buscarAutomotor.component.html'
 })
-export class buscarAutomotorComponent implements OnInit {
+
+export class BuscarAutomotorComponent implements OnInit {
+  public errorMessage;
+  
   public parametro:any;
   public vehiculo: any;
-  public errorMessage;
-  public respuesta;
-  public mensaje = '';
-  public tipoError=200;
-  public error=false;
-  public msj='';
-  public vehiculoSuccess = false;
+  public vehiculos: any = null;
   public formShow:any;
-  public vehiculos: any;
-  public resumen = {};     public datos = {
+  
+  public datos = {
     'numeroPlaca': null,
-    'numeroVIN': null,
+    'numeroVin': null,
     'numeroSerie': null,
     'numeroMotor': null,
     'numeroChasis': null,
@@ -32,62 +28,35 @@ export class buscarAutomotorComponent implements OnInit {
 
 
 constructor(
-  private _loginService: LoginService,
-  private _VehiculoService: VehiculoService,
+  private _VehiculoService: VhloVehiculoService,
   private _ciudadanoVehiculoService: CiudadanoVehiculoService,
+  private _LoginService: LoginService,
 ){}
 
-  ngOnInit() {
-    this.vehiculo = new Vehiculo(null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);    
-  }
-  onCancelar(){
-  }
-  onEnviar(){
-  }
+  ngOnInit() { }
   
-  onKeyValidateVehiculo(){
+  onSearchVehiculo(){
     this.formShow = false;
-    this.msj = '';
-    this.mensaje = '';
+  
     swal({
       title: 'Buscando Vehiculo!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    let token = this._loginService.getToken();
+    });
 
-     this._VehiculoService.showVehiculoParametro(token, this.datos).subscribe(
+    let token = this._LoginService.getToken();
+
+     this._VehiculoService.searchByParameters(this.datos, token).subscribe(
             response => {
-                if (response.status == 'error') {
-                    if (response.code == 401) {
-                        this.msj = response.msj;
-                        swal({
-                            type: 'error',
-                            title: 'Oops...',
-                            text: response.msj
-                        })
-                    } else if (response.code == 400) {
-                        this.msj = response.msj;
-                        swal({
-                            type: 'error',
-                            title: 'Oops...',
-                            text: response.msj
-                        })
-                    }
-                    this.error = true;
-                    this.vehiculoSuccess = false;
+                if (response.code == 200) {
+                  this.vehiculos = response.data;
+                    
+                  swal.close();                  
                 } else {
-                    this.vehiculos = response.data;
-                    this.vehiculoSuccess = true;  
-                    swal.close();                  
+                  this.vehiculos = null;
+                  swal.close();                  
                 }
                 error => {
                     this.errorMessage = <any>error;
@@ -99,12 +68,12 @@ constructor(
             });
   }
 
-  onShowVehiculo(vehiculo:any){
+  onShow(vehiculo:any){
     this.vehiculo = vehiculo;
     this.formShow = true;
   }
 
-  cerrarForm(isForm:any){
+  onClose(isForm:any){
     this.formShow = isForm;
   }
 }

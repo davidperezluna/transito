@@ -9,9 +9,6 @@ import { UserCfgTipoIdentificacionService } from '../../../../services/userCfgTi
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
 import { Router } from "@angular/router";
-
-
-
 import swal from 'sweetalert2';
 
 
@@ -42,6 +39,7 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     public nit:any;
     
     public formApoderado = false;
+    public formCiudadano = false;
 
     public tiposPropiedad = [
         { 'value': 1, 'label': 'Leasing' },
@@ -277,27 +275,45 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
     onSearchEmpresa(){
         let token = this._LoginService.getToken();
 
-        let nit = {
-			'nit' : this.nit,
-        };
+        let datos = {
+            'identificacion': this.nit,
+            'idTipoIdentificacion': 4,
+        }
 
-        this._EmpresaService.showByNit(token,nit).subscribe(
+        this._CiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                if(response.status == 'success'){
-                    this.empresa = response.data;
-                }else{
+                if (response.code == 200) {
+                    if (response.data.empresa) {
+                        this.empresa = response.data.empresa;
+                    }else{
+                        this.empresa = null;
+                    }
+
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+                } else {
                     this.empresa = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
-            error => {
+                error => {
                     this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
+                    if (this.errorMessage != null) {
                         console.log(this.errorMessage);
-                        alert("Error en la petición");
+                        alert('Error en la petición');
                     }
                 }
             }
-        ); 
+        );
     }
 
     goEmpresa(){

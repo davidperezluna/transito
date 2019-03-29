@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { buscarAutomotorComponent } from './buscarAutomotor.component';
+import { BuscarAutomotorComponent } from './buscarAutomotor.component';
 
-export const buscarAutomotorRoutes: Route[] = [
+export const BuscarAutomotorRoutes: Route[] = [
     {
       path: 'buscarAutomotor',
-      component: buscarAutomotorComponent
+      component: BuscarAutomotorComponent
     }
 ];
  

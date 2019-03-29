@@ -131,7 +131,7 @@ import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 
-import { buscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
+import { BuscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
 import { registroEntregaProductoRoutes } from './registroEntregaProducto/registroEntregaProducto.routes';
 
 import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategoria.routes';
@@ -298,7 +298,7 @@ export const DashboardRoutes: Route[] = [
       ...CfgTipoInfractorRoutes,
       ...CfgAdmFormatoRoutes,
       ...CfgAdmFormatoTipoRoutes,
-      ...buscarAutomotorRoutes,
+      ...BuscarAutomotorRoutes,
       ...registroEntregaProductoRoutes,
       ...RncLicenciaConduccionRoutes,
       ...MsvCaracterizacionRoutes,
