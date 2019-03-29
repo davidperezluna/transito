@@ -319,16 +319,37 @@ export class NewRnaTraspasoComponent implements OnInit {
     }
 
     onEnviar() {
+        let token = this._LoginService.getToken();
+
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        let token = this._LoginService.getToken();
-
-        let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
-
-        this._PropietarioService.update(this.datos, token).subscribe(
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+              if (response.code == 200) {
+                let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
+
+                this._PropietarioService.update(this.datos, token).subscribe(
+                    response => {
+                        this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert('Error en la petición');
+                        }
+                    }
+                );
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -339,6 +360,5 @@ export class NewRnaTraspasoComponent implements OnInit {
                 }
             }
         );
-
     }
 }

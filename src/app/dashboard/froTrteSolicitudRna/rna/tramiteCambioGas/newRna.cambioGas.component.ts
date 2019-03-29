@@ -17,8 +17,9 @@ export class NewRnaCambioGasComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() tramiteFactura: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public colores: any;
     public colorSelected: any;
@@ -181,32 +182,46 @@ export class NewRnaCambioGasComponent implements OnInit {
         this.datos.idTramiteFactura = this.tramiteFactura.id;
         this.datos.idVehiculo = this.vehiculo.id;
 
-        this._VehiculoService.update(this.datos, token).subscribe(
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-                if(response.status == 'success'){
-                    let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
-                        '<br><b>Anterior: </b>' + this.vehiculo.combustible.nombre +
-                        '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
-
-                    this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
-                }
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
+              if (response.code == 200) {
+                this._VehiculoService.update(this.datos, token).subscribe(
+                    response => {
+                        if(response.status == 'success'){
+                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero +
+                                '<br><b>Anterior: </b>' + this.vehiculo.combustible.nombre +
+                                '<br><b>Nuevo: </b>' + this.datos.idCombustibleCambio;
+        
+                            this.readyTramite.emit({'foraneas':this.datos, 'resumen': resumen});
+                        }
+                        error => {
+                            this.errorMessage = <any>error;
+                            
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
+                            }
+                        }
                     }
-                }
-            });
+                );
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
             error => {
                 this.errorMessage = <any>error;
 
                 if (this.errorMessage != null) {
                     console.log(this.errorMessage);
-                    alert("Error en la petición");
+                    alert('Error en la petición');
                 }
             }
+        );
     }
     onCancelar(){
         this.cancelarTramite.emit(true);

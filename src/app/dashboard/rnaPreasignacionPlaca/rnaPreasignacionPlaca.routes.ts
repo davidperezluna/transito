@@ -3,7 +3,7 @@ import { RnaPreasignacionPlacaComponent } from '.';
 
 export const RnaPreasignacionPlacaRoutes: Route[] = [
     {
-      path: 'pre-asignacion-placa',
+      path: 'rnaPreAsignacionPlaca',
       component: RnaPreasignacionPlacaComponent
     }
 ];

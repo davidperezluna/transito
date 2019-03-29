@@ -16,8 +16,9 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() idPropietario: any = null;
-    public errorMessage; public autorizado: any = true;
-
+    public errorMessage; 
+    
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
     public documentacion: any;
     public resumen: any = null;
@@ -151,14 +152,33 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
      }
     
     onEnviar() {
+        let token = this._LoginService.getToken();
+        
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this.resumen = "Motivo "+ this.datos.motivo +"<br/>";
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
+            response => {
+              if (response.code == 200) {
+                this.resumen = "Motivo "+ this.datos.motivo +"<br/>";
 
-        this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
-    }
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
+                this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
+            error => {
+                this.errorMessage = <any>error;
 
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
+                }
+            }
+        );
+    }
 }

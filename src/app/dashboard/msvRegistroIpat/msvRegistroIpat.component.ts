@@ -141,7 +141,7 @@ export class MsvRegistroIpatComponent implements OnInit {
     })
   }
 
-  editCfgPlaca(tramiteInscripcion: any) {
+  edit(tramiteInscripcion: any) {
     this.tramiteInscripcion = tramiteInscripcion;
     this.formEdit = true;
     this.formIndex = false;

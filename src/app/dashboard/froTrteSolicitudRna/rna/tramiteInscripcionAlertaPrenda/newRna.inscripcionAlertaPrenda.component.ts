@@ -26,7 +26,7 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     public errorMessage; 
       
-    public autorizado: any = true;
+    public autorizado: any = false;
     public tramiteSolicitud: any = null;
     
     public entidadesJudiciales: any;
@@ -336,53 +336,52 @@ export class NewRnaTramiteInscripcionAlertaPrendaComponent implements OnInit {
         this.datos.idVehiculo = this.vehiculo.id;
         let token = this._LoginService.getToken();
 
+        this.datos.campos = ['pignorado'];
         this.datos.idPropietario = this.propietario.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._AcreedorService.register(this.datos, token).subscribe(
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    this.datos.campos = ['pignorado'];
-
-                    this._AcreedorService.register(this.datos, token).subscribe(
-                        response => {
-                            if (response.status == 'success') {
-                                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-
-                                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                            } else {
-                                swal({
-                                    title: 'Error!',
-                                    text: response.message,
-                                    type: 'error',
-                                    confirmButtonText: 'Aceptar'
-                                });
-                            }
-                            error => {
-                                this.errorMessage = <any>error;
-
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert("Error en la petición");
-                                }
+              if (response.code == 200) {
+                this._AcreedorService.register(this.datos, token).subscribe(
+                    response => {
+                        if (response.status == 'success') {
+                            let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+        
+                            this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        } else {
+                            swal({
+                                title: 'Error!',
+                                text: response.message,
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
+                        }
+                        error => {
+                            this.errorMessage = <any>error;
+        
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert("Error en la petición");
                             }
                         }
-                    );
-                } else {
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
-                }
-                error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
                     }
+                );
+              }else{
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert('Error en la petición');
                 }
             }
         );

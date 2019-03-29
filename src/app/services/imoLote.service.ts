@@ -13,7 +13,7 @@ export class ImoLoteService {
 	constructor(
 		private _http: Http,
 		private _loogerService: LoggerService
-	){}
+	){} 
 
 	index(){            
 		return this._http.get(this.url+"/").map(res => res.json());

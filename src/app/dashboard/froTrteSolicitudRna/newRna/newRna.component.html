@@ -6,8 +6,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <div class="row">
-                        <!-- .row -->
+                    <div class="row"><!-- .row -->
                         <div class="col-xs-12 col-lg-12">
                             <label>Buscar por (Vin,Chasis,Placa,Motor,Serie)</label>
                             <div class="input-group">
@@ -19,11 +18,16 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
-                    <!-- .row -->
+                    </div><!-- /.row -->
                 </div>
 
                 <div class="row" *ngIf="vehiculo"><!-- .row -->
+                    <div class="col-xs-12 col-lg-12" *ngIf="vehiculo.cancelado">
+                        <div class="notes notes-success" role="alert"> 
+                            <strong>Atención!</strong> este vehiculo se encuentra con la matricula cancelada solo podrá realizar certificado de tradición y rematricula.
+                        </div>
+                    </div>
+                    
                     <div class="col-xs-12 col-lg-12">
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -78,7 +82,6 @@
             <div class="col-xs-12 col-lg-12">
                 <div class="card"><!-- .card -->
                     <div class="card-body"><!-- .card-body -->
-
                         <table class="table table-bordered">
                             <thead>
                                 <tr>

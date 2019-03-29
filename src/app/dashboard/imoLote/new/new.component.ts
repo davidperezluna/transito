@@ -114,7 +114,6 @@ constructor(
       this.ImoLote.imoCfgTipo = this.insumoSelected;
      
     }else{
-
       this.ImoLote.idEmpresa = this.empresaInsumoSelected;
       this.ImoLote.imoCfgTipo = this.insumoInsumoSelected;
     }

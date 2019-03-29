@@ -39,7 +39,8 @@ export class VhloCfgPlacaComponent implements OnInit {
       ) {
       }
     })
-    this._CfgPlacaService.getCfgPlaca().subscribe(
+
+    this._CfgPlacaService.index().subscribe(
       response => {
         if (response) {
 
@@ -133,7 +134,7 @@ export class VhloCfgPlacaComponent implements OnInit {
     })
   }
 
-  editCfgPlaca(cfgPLaca: any) {
+  edit(cfgPLaca: any) {
     this.cfgPlaca = cfgPLaca;
     this.formEdit = true;
     this.formIndex = false;
