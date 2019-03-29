@@ -129,6 +129,37 @@
                 </div>
             </div>
         </div>
+        <div class="card" *ngIf="capacitadosEncontrados">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <strong class="text-uppercase">Datos Capacitados</strong>
+                </h5>
+            </div>
+            <div class="card-body" style="overflow-x: auto">
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>CEDULA</th>
+                            <th>NOMBRE</th>
+                            <th>APELLIDO</th>
+                            <th>GENERO</th>
+                            <th>CLASE ACTOR VIAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let capacitacion of capacitaciones; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ capacitacion.numeroCedulaActorVial }}</td>
+                            <td>{{ capacitacion.nombreActorVial }}</td>
+                            <td>{{ capacitacion.apellidoActorVial }}</td>
+                            <td>{{ capacitacion.genero.sigla }}</td>
+                            <td>{{ capacitacion.claseActorVial.nombre }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </form>
     <div class="card-footer">
         <div class="btn-group">
