@@ -256,7 +256,7 @@ export class ExportComponent implements OnInit {
 
     async onUploadFile() {        
         const { value: files } = await swal({
-            title: 'Seleccione el archivo .txt',
+            title: 'Seleccione el archivo .csv',
             input: 'file',
             inputAttributes: {
                 'accept': 'txt/*',

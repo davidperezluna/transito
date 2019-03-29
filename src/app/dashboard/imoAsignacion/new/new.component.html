@@ -1,14 +1,12 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-xs-12 col-lg-8">
         <div class="card">
         <div class="card-body">
             <h5 class="m-0">formulario para el ingreso de insumos</h5>
             <hr>
             <form #newForm="ngForm">
-                <div class="row justify-content-center">
-
-
-                    <div class="card-body col-md-12"> 
+                <div class="row">
+                    <div class="col-xs-12 col-lg-12"> 
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item"> 
@@ -23,8 +21,8 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="sustrato" role="tabpanel"> 
                                 <div class="form-group row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <label>Sede*</label>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <label>Organismo de transito <b class="text-danger">*</b></label>
                                         <ng-select
                                             [multiple]="false"
                                             [options]="sedes"
@@ -33,7 +31,7 @@
                                             name="sedeSustratoId">
                                         </ng-select>
                                     </div>
-                                    <div class="col-lg-4 col-md-4">
+                                    <div class="col-lg-6 col-xs-12">
                                         <label>Insumo*</label>
                                         <ng-select
                                             [multiple]="false"
@@ -45,43 +43,53 @@
                                         </ng-select>
                                     </div>
 
-                                    <div class="col-lg-4 col-md-4">
+                                    <div class="col-lg-6 col-xs-12">
                                         <label>Fecha*</label>
                                         <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
                                     </div>
                                 
                                     <div class="col-lg-12 col-md-12">
                                         <br>
-                                        <button (click)="onSearchLote()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">BUscar</button>
+                                        <button (click)="onSearchLote()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Buscar</button>
                                     </div>
 
                                     <div class="tab-pane active col-lg-12 col-md-12" id="lotes" role="tabpanel" *ngIf='lotes'>
-                                        <table class="table " id="dataTables-example">
+                                        <br>
+                                        <br>
+                                        <table class="table" id="dataTables-example">
                                           <thead>
                                             <tr>
-                                              <th>No.Acta</th>
-                                              <th>Empresa</th>
-                                              <th>Sede</th>
-                                              <th>Insumo</th>
-                                              <th>Rango Inicio</th>
-                                              <th>Rango Fin</th>
-                                              <th>Cantidad</th>
-                                              <th>Referencia</th>
-                                              <th>Fecha</th>
-                                              <th>Acciones</th>
+                                              <th>Detalles</th>
+                                              <th>Acciones</th> 
                                             </tr>
                                           </thead>
                                           <tbody>
                                             <tr class="odd" *ngFor="let lote of lotes; let i = index">
-                                              <td >{{lote.numeroActa}}</td>
-                                              <td >{{lote.empresa.nombre}}</td>
-                                              <td >{{lote.sedeOperativa.nombre}}</td>
-                                              <td >{{lote.casoInsumo.nombre}}</td>
-                                              <td >{{lote.rangoInicio}}</td>
-                                              <td >{{lote.rangoFin}}</td>
-                                              <td >{{lote.cantidad}}</td>
-                                              <td >{{lote.referencia}}</td>
-                                              <td >{{lote.fecha}}</td>
+                                              <td >
+                                                  <b>Proveedor</b>
+                                                  {{lote.empresa.nombre}}
+                                                  <br>
+                                                  <b>Organismo de transito</b>
+                                                  {{lote.sedeOperativa.nombre}}
+                                                  <br>
+                                                  <b>Tipo</b>
+                                                  {{lote.tipoInsumo.nombre}}
+                                                   <br> 
+                                                  <b>Inicio</b>
+                                                  {{lote.rangoInicio}}
+                                                <br>
+                                                  <b>Fin</b>
+                                                  {{lote.rangoFin}}
+                                                  <br>
+                                                    <b>Cantidad</b>
+                                                  {{lote.cantidad}}
+                                                <br>
+                                                <b>Referencia</b>
+                                                {{lote.referencia}}
+                                                    <br>
+                                                    <b>Fecha</b>
+                                                {{lote.fecha}}
+                                            </td>
                                               <td>
                                                 <button (click)="onAsignarLote(lote)" class="btn btn-outline-success" type="button">Asignar</button> 
                                               </td>
@@ -89,29 +97,12 @@
                                           </tbody>
                                         </table>
                                       </div>
-
-
-                                    <!-- <div class="col-lg-4 col-md-4">
-                                        <label>Rango Inicio*</label>
-                                        <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.rangoInicio" name="rangoInicio" placeholder="" type="text">
-                                    </div>
-        
-                                    <div class="col-lg-4 col-md-4">
-                                        <label>Rango Fin*</label>
-                                        <input class="form-control" (blur)="isFin()" [(ngModel)]="rnaAsignacionInsumos.rangoFin" name="rangoFin" placeholder="" type="text">
-                                    </div>
-        
-                                    <div class="col-lg-4 col-md-4">
-                                        <label>Cantidad*</label>
-                                        <input class="form-control" [disabled]="true" [(ngModel)]="rnaAsignacionInsumos.numero" name="numero" placeholder="" type="text" required>
-                                    </div> -->
-                                    
                                 </div>
                             </div>
 
                             <div class="tab-pane" id="insumo" role="tabpanel">
                                 <div class="form-group row">
-                                    <div class="col-lg-4 col-md-4">
+                                    <div class="col-xs-12 col-lg-12">
                                         <label>Sede*</label>
                                         <ng-select
                                             [multiple]="false"
@@ -121,7 +112,7 @@
                                             name="sedeInsumoId">
                                         </ng-select>
                                     </div>
-                                    <div class="col-lg-4 col-md-4">
+                                    <div class="col-xs-12 col-lg-4">
                                         <label>Insumo*</label>
                                         <ng-select
                                             [multiple]="false"
@@ -134,25 +125,56 @@
                                         </ng-select>
                                     </div>
         
-                                    <div class="col-lg-4 col-md-4">
+                                    <div class="col-xs-12 col-lg-4">
                                         <label>Cantidad*</label> 
                                         <input class="form-control" [disabled]="true"  [(ngModel)]="numero" name="numeroInsumo" placeholder="" type="text" required>
                                     </div>
         
-                                    <div class="col-lg-4 col-md-4">
+                                    <div class="col-xs-12 col-lg-4">
                                         <label>Fecha*</label>
                                         <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
+                                        <br>
+                                    </div>
+                                    <div class="col-xs-12 col-lg-12">
+                                        <button (click)="onAsignarLoteInsumo()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Asignar</button>
                                     </div>
                                 </div>
                             </div>    
+
                         </div> 
                     </div>    
                 </div>
             </form>
-            <div class="card-footer" *ngIf='frmInsumo'>
-                <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-outline-primary pull-right" type="button">Enviar</button>
-            </div>    
         </div>
     </div>
+</div>
+<div class="col-xs-12 col-lg-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="m-0">Selección</h5>
+            <br>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                    <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd" *ngFor="let loteSelecionado of lotesSelecionados; let i = index">
+                    <td >{{loteSelecionado.tipo}}</td>
+                    <td >{{loteSelecionado.cantidad}}</td>
+                    <td>
+                        <button (click)="onEliminarLoteSelecionado(loteSelecionado)" class="btn btn-outline-danger" type="button">Eliminar</button> 
+                    </td>
+                    </tr>
+                </tbody> 
+            </table>
+        </div>  
+        <div class="card-footer">
+            <button (click)="onEnviar()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
+        </div>  
+    </div>        
+</div>
 </div>

@@ -235,16 +235,6 @@ export class NewComponent implements OnInit {
   public contMuertos = 0;
   public contAcompaniantes = 0;
 
-
-  /*   public resumen = {}; public datos = {
-    }
-  
-    public datosVehiculo = {
-      'vehiculos': [],
-      'cDemandante': [],
-      'cDemandado': [],
-    } */
-
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
 

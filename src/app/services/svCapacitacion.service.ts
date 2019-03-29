@@ -6,7 +6,7 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class SvCapacitacionService {
-    private url = environment.apiUrl + 'seguridadvial/svCapacitacion';
+    private url = environment.apiUrl + 'seguridadvial/svcapacitacion';
     public identity;
     public token;
 
@@ -64,5 +64,14 @@ export class SvCapacitacionService {
         return this._http.post(this.url + "/buscar/capacitacionbyciudadano", params, { headers: headers }).map(
             res => res.json()
         );
+    }
+
+    cargarCapacitados(datos, token) {
+        let json = JSON.stringify(datos);
+        let params = "data=" + json + "&authorization=" + token;
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        return this._http.post(this.url + "/cargar/capacitados", params, { headers: headers }).map(
+            res => res.json()
+        ); 
     }
 }
