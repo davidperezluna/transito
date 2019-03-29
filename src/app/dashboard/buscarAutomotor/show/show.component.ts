@@ -8,12 +8,14 @@ import { forEach } from '@angular/router/src/utils/collection';
 declare var $: any;
 
 @Component({
-  selector: 'app-vehiculo-show',
-  templateUrl: './showAutomotor.component.html'
+  selector: 'app-show',
+  templateUrl: './show.component.html'
 })
-export class ShowAutomotorComponent implements OnInit {
+
+export class ShowComponent implements OnInit {
 @Input() vehiculo:any;
-@Output() cerrarForm = new EventEmitter<any>();
+@Output() onClose = new EventEmitter<any>();
+
 public pesado;
 public maquinaria;
 public sedeOperativa;
@@ -153,6 +155,6 @@ constructor(
   }  
   
   onCancelar(){
-      this.cerrarForm.emit(false);
+      this.onClose.emit(false);
   }
 }

@@ -19,6 +19,7 @@ export class ImoLoteComponent implements OnInit {
   public formIndex = true;
   public tipoInsumo :any;
   public table:any; 
+  public totalesTipo:any; 
   public loteInsumoInsumo:any; 
   public color:any; 
 
@@ -40,6 +41,8 @@ export class ImoLoteComponent implements OnInit {
 				response => {
           this.loteInsumoSustratos = response.data.loteSustratos;
           this.loteInsumoInsumos = response.data.loteInsumos; 
+          this.totalesTipo = response.data.totalesTipo; 
+          console.log(this.totalesTipo);
           let timeoutId = setTimeout(() => {  
             this.iniciarTabla();
             swal.close();

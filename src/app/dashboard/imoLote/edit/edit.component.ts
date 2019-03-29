@@ -18,11 +18,11 @@ export class EditComponent implements OnInit{
 public errorMessage;
 public respuesta;
 public formReady = false;
-public sedeSelected:any;
+public organismoTransitoSelect:any;
 public insumoSelected:any;
 public empresaSelected:any;
 public insumos:any;
-public sedes:any;
+public organismosTransito:any;
 public empresas:any;
 public sustratos:any;
 
@@ -89,9 +89,9 @@ constructor(
     if (this.tipoInsumo == 'sustrato') {
       this._OrganismoTransitoService.selectSedes().subscribe(
         response => {
-          this.sedes = response;
+          this.organismosTransito = response;
           setTimeout(() => {
-            this.sedeSelected = [this.loteInsumoInsumo.sedeOperativa.id];
+            this.organismoTransitoSelect = [this.loteInsumoInsumo.sedeOperativa.id];
           });
         }, 
         error => {
@@ -110,7 +110,7 @@ constructor(
 
   onEnviar(){
     this.loteInsumoInsumo.empresaId = this.empresaSelected;
-    this.loteInsumoInsumo.sedeOperativaId = this.sedeSelected;
+    this.loteInsumoInsumo.sedeOperativaId = this.organismoTransitoSelect;
     this.loteInsumoInsumo.casoInsumoId = this.insumoSelected;
     let token = this._loginService.getToken();
 		this._rnaloteInsumosService.edit(this.loteInsumoInsumo,token).subscribe(

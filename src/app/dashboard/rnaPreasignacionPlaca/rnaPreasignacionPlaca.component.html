@@ -81,36 +81,32 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-lg-8">
+      <div class="col-xs-12 col-lg-8" *ngIf="vehiculo">
         <div class="form-group">
           <div class="row"><!-- .row -->
-            <div class="col-xs-12 col-lg-4">
-                    <h5 class="card-title">Tramite de preasignación de placa</h5>   
-                    <div class="col-xs-12 col-lg-6">
-                      <label>Organismo transito <b class="text-danger">*</b></label>
-                      <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected" (ngModelChange)="onChangedOrganismoTransito($event)" name="idOrganismoTransito" required>
-                      </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-6">
-                        <label>Seleccione placa <b class="text-danger">*</b></label><br>
-                        <ng-select [multiple]="false" [options]="placas" [(ngModel)]="placaSelected" name="idPlaca" required>
-                        </ng-select>
-                    </div><br>
+            <div class="col-xs-12 col-lg-12">
+                <b class="text-uppercase">Tramite de preasignación de placa</b>   
+            </div>
 
-                    <div class="btn-group">
-                        <button (click)="onCancelar()" class="btn btn-default" type="button">
-                          <i class="fa fa-times"></i>
-                          Cancelar
-                        </button>
-                        <button (click)="onEnviar()"  class="btn btn-primary" type="button">
-                          <i class="fa fa-floppy-o"></i>
-                          Enviar
-                        </button>
-                    </div>
+            <div class="col-xs-12 col-lg-6">
+                <label>Organismo transito <b class="text-danger">*</b></label>
+                <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="datos.idOrganismoTransito" (ngModelChange)="onChangedOrganismoTransito($event)" name="idOrganismoTransito" required>
+                </ng-select>
+            </div>
+            <div class="col-xs-12 col-lg-6">
+                <label>Seleccione placa <b class="text-danger">*</b></label><br>
+                <ng-select [multiple]="false" [options]="placas" [(ngModel)]="datos.idPlaca" name="idPlaca" required>
+                </ng-select>
+            </div><br>
 
-              </div>
+            <div class="btn-group">
+                <button (click)="onEnviar()"  class="btn btn-primary" type="button">
+                    <i class="fa fa-floppy-o"></i>
+                    Enviar
+                </button>
+            </div>
           </div><!-- /.row -->
         </div>
       </div>
     </div>
-  </div>
+</div>
