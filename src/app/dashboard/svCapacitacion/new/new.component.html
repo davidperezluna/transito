@@ -119,24 +119,26 @@
                         <ng-select [multiple]="false" [options]="clasesActoresVia" [(ngModel)]="claseActorViaSelected"
                             required name="claseActorVia"></ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-6" style="margin-top: 2%">
                         <label>Cargar datos de personas capacitadas</label>
-                        <input type="file" (change)="onFileChange($event)" class="form-control"
-                            [(ngModel)]="capacitacion.documentoCapacitados" name="documentoCapacitados" />
+                        <button (click)="onUploadFile()" class="btn btn-default">archivo</button>
                     </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-success">Guardar Capacitado</button>
                 </div>
             </div>
         </div>
     </form>
     <div class="card-footer">
         <div class="btn-group">
+            <button (click)="onFinalizar()" class="btn btn-primary" type="button">
+                <i class="fa fa-save"></i>
+                Finalizar
+            </button>
             <button (click)="onCancelar()" class="btn btn-default">
                 <i class="fa fa-times"></i>
-                Cancel
-            </button>
-            <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
-                <i class="fa fa-save"></i>
-                Enviar
+                Cancelar
             </button>
         </div>
     </div>

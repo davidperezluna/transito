@@ -131,7 +131,7 @@ import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCa
 
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
-import { buscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
+import { BuscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
 import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategoria.module';
@@ -302,7 +302,7 @@ import {RightsidebarComponent} from '../shared';
     CfgAuditoriaModule,
     CfgSmlmvModule,
     cfgFestivoModule,
-    buscarAutomotorModule,
+    BuscarAutomotorModule,
     UserLcCfgCategoriaModule,
     CfgTipoClaseModule,
     RncLicenciaConduccionModule,

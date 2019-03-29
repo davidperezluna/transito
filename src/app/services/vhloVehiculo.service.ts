@@ -67,11 +67,24 @@ export class VhloVehiculoService {
 		return this._http.post(this.url + "/search/filter", params, { headers: headers }).map(res => res.json());
 	}
 
+	searchByParameters(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/parameters", params, { headers: headers }).map(res => res.json());
+	}
+
 	update(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/update", params, { headers: headers })
-			.map(res => res.json());
+		return this._http.post(this.url + "/update", params, { headers: headers }).map(res => res.json());
+	}
+
+	assign(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/assign", params, { headers: headers }).map(res => res.json());
 	}
 }

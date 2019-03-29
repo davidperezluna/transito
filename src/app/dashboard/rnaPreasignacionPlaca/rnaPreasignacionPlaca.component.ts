@@ -1,7 +1,5 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
-import { VhloCfgColorService } from '../../services/vhloCfgColor.service';
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
-import { VhloPropietarioService } from '../../services/vhloPropietario.service';
 import { VhloCfgPlacaService } from '../../services/vhloCfgPlaca.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../services/login.service';
@@ -16,36 +14,29 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
   @Input() ciudadanoVehiculo:any = null;
   public errorMessage;
 
-	public formNew = false;
-	public formEdit = false;
-  public formIndex = true;
-  public table:any; 
-
-
   public vehiculoFiltro:any; 
   public vehiculo:any = null; 
 
   public organismosTransito:any;
-  public organismoTransitoSelected:any;
   public placas:any;
-  public placaSelected:any;
+
+  public datos = {
+    'idVehiculo': null,
+    'idOrganismoTransito': null,
+    'idPlaca': null,
+  };
 
   constructor(
     private _VehiculoService: VhloVehiculoService,
-		private _ColorService: VhloCfgColorService,
-    private _PropietarioService: VhloPropietarioService,
     private _PlacaService: VhloCfgPlacaService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _LoginService: LoginService,
     ){}
     
-  ngOnInit() {
- 		this._ColorService.index().subscribe(
+  ngOnInit() { 
+    this._OrganismoTransitoService.selectSedes().subscribe(
       response => {
-        // this.colors = response.data;
-        let timeoutId = setTimeout(() => {  
-          this.iniciarTabla();
-        }, 100); 
+        this.organismosTransito = response;
       }, 
       error => {
         this.errorMessage = <any>error;
@@ -56,76 +47,6 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
         }
       }
     );
-  }
-
-  iniciarTabla(){
-    this.table = $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-        oPaginate: {
-          sFirst: '<i class="fa fa-step-backward"></i>',
-          sPrevious: '<i class="fa fa-chevron-left"></i>',
-          sNext: '<i class="fa fa-chevron-right"></i>',
-          sLast: '<i class="fa fa-step-forward"></i>'
-        }
-      }
-    });
-  }
-
-  onNew(){
-    this.formNew = true;
-    this.formIndex = false;
-    this.table.destroy();
-  }
-
-  ready(isCreado:any){
-      if(isCreado) {
-        this.formNew = false;
-        this.formEdit = false;
-        this.formIndex = true;
-        this.ngOnInit();
-      }
-  }
-  
-  onDelete(id:any){
-
-    swal({
-      title: '¿Estás seguro?',
-      text: "¡Se eliminara este registro!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#15d4be',
-      cancelButtonColor: '#ff6262',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        let token = this._LoginService.getToken();
-
-        this._ColorService.delete(token,id).subscribe(
-            response => {
-                swal({
-                      title: 'Eliminado!',
-                      text:'Registro eliminado correctamente.',
-                      type:'success',
-                      confirmButtonColor: '#15d4be',
-                    })
-                  this.table.destroy();
-                  this.ready(true);
-              }, 
-            error => {
-              this.errorMessage = <any>error;
-
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-      }
-    })
   }
 
   onSearchVehiculo() {
@@ -153,7 +74,6 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
         }
-
         error => {
           this.errorMessage = <any>error;
           if (this.errorMessage != null) {
@@ -169,7 +89,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
     let token = this._LoginService.getToken();
     
     if (e) {
-      this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': this.organismoTransitoSelected },token).subscribe(
+      this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': this.datos.idOrganismoTransito },token).subscribe(
         response => {
           this.placas = response;
         }, 
@@ -182,15 +102,10 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
           }
         }
       );
-      
     }
-
   }
 
   onEnviar(){
-    this.vehiculo.sedeOperativaId = this.organismoTransitoSelected;
-    this.vehiculo.placa = this.placaSelected;
-
     let token = this._LoginService.getToken();
 
     var html = 'El vehiculo con:<br> numero de chasis:  <b>'+this.vehiculo.chasis+
@@ -210,11 +125,9 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        /*
-        this._VehiculoService.asignacionPlaca(this.vehiculo,token).subscribe(
+        this._VehiculoService.assign(this.datos, token).subscribe(
           response => {
-            this.respuesta = response;
-            if(this.respuesta.status == 'success'){
+            if(response.status == 'success'){
               swal({
                 title: 'Perfecto!',
                 html: html,
@@ -235,7 +148,6 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
             }
     
         });
-        */ 
       }
     })
   }

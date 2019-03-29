@@ -8,7 +8,7 @@ export const MsvRegistroIpatRoutes: Route[] = [
     component: MsvRegistroIpatComponent
     },
     {
-        path: 'seguridadvial/svregistroipat/export',
+        path: 'svregistroipat/export',
         component: ExportComponent
     }
 ];
