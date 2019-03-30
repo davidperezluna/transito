@@ -17,6 +17,7 @@ export class EditComponent implements OnInit{
   public errorMessage;
 
   public tipos: any;
+  public tipo: any = null;
   public colores: any;
 
   public file: any = null;
@@ -59,7 +60,33 @@ export class EditComponent implements OnInit{
     );
   }
 
-  onCancelar(){ this.ready.emit(true); }
+  onCancelar(){ 
+    this.ready.emit(true); 
+  }
+
+  onChangedTipo(e) {
+    if (e) {
+      let token = this._loginService.getToken();
+
+      this._SenialTipoService.show({ 'id': e }, token).subscribe(
+        response => {
+          if (response.status == 'success') {
+            this.tipo = response.data;
+          }else{
+            this.tipo = null;
+          }
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+    }
+  }
 
   onEnviar(){
     let token = this._loginService.getToken();

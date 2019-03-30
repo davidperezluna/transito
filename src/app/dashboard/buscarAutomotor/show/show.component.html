@@ -10,148 +10,92 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-4 col-md-4">
-                            <label>Sede Operativa</label>
-                            <input class="form-control" name="sede" [(ngModel)]="sedeOperativa" type="text" required readonly>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Organismo transito</label>
+                            {{ vehiculo.organismoTransito.nombre }}
                         </div>
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Placa</label>
-                            <input class="form-control" name="placa" [(ngModel)]="placa" type="text" required readonly>
+                            {{ vehiculo.placa.numero }}
                         </div>
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-xs-12 col-lg-4">
                             <label>Estado Vehículo</label>
-                            <input class="form-control" name="estado" [(ngModel)]="estado" type="text" required readonly>
+                            <span *ngIf="vehiculo.activo">ACTIVO</span>
+                            <span *ngIf="!vehiculo.activo">INACTIVO</span>
                         </div>
-                        <div class="col-lg-4 col-md-4">
-                            <label>Nro. tarjeta de registro vigente</label>
-                            <input class="form-control" name="numeroTarjeta" [(ngModel)]="numeroTarjeta" type="text" required readonly>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <label>Estado tarjeta registro</label>
-                            <input class="form-control" placeholder="PENDIENTE" name="estadoTarjeta" type="text" required readonly>
-                        </div>
-                        <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                            <label>Acta de importación o de remate o adjudicación</label>
-                            <input class="form-control" placeholder="PENDIENTE" name="acta" type="text" required readonly>
-                        </div>
-                        <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                            <label>Número de acta</label>
-                            <input class="form-control" placeholder="PENDIENTE" name="numeroActa" type="text" required readonly>
-                        </div>
-                        <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                            <label>Fecha declaración</label>
-                            <input class="form-control" placeholder="PENDIENTE" name="fechaDeclaracion" type="text" required readonly>
-                        </div>
-                        <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                            <label>Declaración de importación simplificada</label>
-                            <input class="form-control" placeholder="PENDIENTE" name="declaracion" type="text" required readonly>
-                        </div>
-                        <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                            <label>Reposición</label>
-                            <input class="form-control" placeholder="PENDIENTE" name="reposicion" type="text" required readonly>
-                        </div>
-                        <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                            <label>Origen registro</label>
-                            <input class="form-control" placeholder="PENDIENTE" name="origenRegistro" type="text" required readonly>
-                        </div>
-
                     </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-body">
-                    <h5>Información Vehículo</h5>
+                    <h5>Información adicional</h5>
                     <div class="row justify-content-center">
                         <div class="container">
                             <div class="form-group row">
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Clase</label>
-                                    <input class="form-control" name="clase" [(ngModel)]="clase" type="text" required readonly>
+                                    {{ vehiculo.clase.nombre }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Marca</label>
-                                    <input class="form-control" name="marca" [(ngModel)]="marca" type="text" required readonly>
+                                    {{ vehiculo.linea.marca.nombre }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Linea</label>
-                                    <input class="form-control" name="linea" [(ngModel)]="linea" type="text" required readonly>
+                                    {{ vehiculo.linea.nombre }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Modelo</label>
-                                    <input class="form-control" name="modelo" [(ngModel)]="modelo" type="text" required readonly>
+                                    {{ vehiculo.modelo }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Color</label>
-                                    <input class="form-control" name="color" [(ngModel)]="color" type="text" required readonly>
+                                    {{ vehiculo.color.nombre }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Tipo servicio</label>
-                                    <input class="form-control" name="tipoServicio" [(ngModel)]="tipoServicio" type="text" required readonly>
+                                    {{ vehiculo.clase.tipoVehiculo.nombre }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Cilindraje</label>
-                                    <input class="form-control" name="cilindraje" [(ngModel)]="cilindraje" type="text" required readonly>
+                                    {{ vehiculo.cilindraje }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Número serie</label>
-                                    <input class="form-control" name="numeroSerie" [(ngModel)]="numeroSerie" type="text" required readonly>
+                                    {{ vehiculo.serie }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Número de motor</label>
-                                    <input class="form-control" name="numeroMotor" [(ngModel)]="numeroMotor" type="text" required readonly>
+                                    {{ vehiculo.motor }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Número de chasis</label>
-                                    <input class="form-control" name="numeroChasis" [(ngModel)]="numeroChasis" type="text" required readonly>
+                                    {{ vehiculo.chasis }}
                                 </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <label>Regrabación serie</label>
-                                    <input class="form-control" name="regrabacionSerie" [(ngModel)]="regrabacionSerie" type="text" required readonly>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <label>Regrabación motor</label>
-                                    <input class="form-control" name="regrabacionMotor" [(ngModel)]="regrabacionMotor" type="text" required readonly>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <label>Regrabación chasis</label>
-                                    <input class="form-control" name="regrabacionChasis" [(ngModel)]="regrabacionChasis" type="text" required readonly>
-                                </div>
-                                <div class="col-lg-4 col-md-4">
+                                <div class="col-xs-12 col-lg-4">
                                     <label>Combustible</label>
-                                    <input class="form-control" name="combustible" [(ngModel)]="combustible" type="text" required readonly>
+                                    {{ vehiculo.combustible.nombre }}
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="maquinaria">
-                                    <label>Peso bruto vehículo</label>
-                                    <input class="form-control" name="pesoBruto" [(ngModel)]="pesoBruto" type="text" required readonly>
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
+                                    <label>Peso</label>
+                                    <span *ngIf="maquinaria">{{ maquinaria.peso }}</span>
+                                    <span *ngIf="remolque">{{ remolque.peso }}</span>
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="pesado || maquinaria">
-                                    <label>Número ejes</label>
-                                    <input class="form-control" name="numeroEjes" [(ngModel)]="numeroEjes" type="text" required readonly>
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
+                                    <label>No. de ejes</label>
+                                    <span *ngIf="maquinaria">{{ maquinaria.numeroEjes }}</span>
+                                    <span *ngIf="remolque">{{ remolque.numeroEjes }}</span>
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="pesado">
-                                    <label>Nro. fichas tecnicas homologación</label>
-                                    <input class="form-control" name="numeroFichas" [(ngModel)]="numeroFichas" type="text" required readonly>
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
+                                    <label>Origen de registro</label>
+                                    <span *ngIf="maquinaria">{{ maquinaria.origenRegistro.nombre }}</span>
+                                    <span *ngIf="remolque">{{ remolque.origenRegistro.nombre }}</span>
                                 </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                                    <label>Repotenciado</label>
-                                    <input class="form-control" placeholder="PENDIENTE" name="repotenciado" type="text" required readonly>
-                                </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                                    <label>Potencia</label>
-                                    <input class="form-control" placeholder="PENDIENTE" name="potencia" type="text" required readonly>
-                                </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                                    <label>Tipo de motor</label>
-                                    <input class="form-control" placeholder="PENDIENTE" name="tipoMotor" type="text" required readonly readonly>
-                                </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                                    <label>Año fabricación</label>
-                                    <input class="form-control" placeholder="PENDIENTE" name="anioFabricacion" type="text" required readonly readonly>
-                                </div>
-                                <div class="col-lg-4 col-md-4" *ngIf="oculto">
-                                    <label>Migrado</label>
-                                    <input class="form-control" placeholder="PENDIENTE" name="migrado" type="text" required readonly readonly>
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
+                                    <label>Condición de ingreso</label>
+                                    <span *ngIf="maquinaria">{{ maquinaria.condicionIngreso.nombre }}</span>
+                                    <span *ngIf="remolque">{{ remolque.condicionIngreso.nombre }}</span>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +103,7 @@
                 </div>
             </div>
 
-            <div class="card" *ngIf="propietariosVehiculo?.length > 0 && searchByIdentificacion">
+            <div class="card" *ngIf="propietarios?.length > 0">
                 <div class="card-headers">
                     <div class="card-title">
                         <h6 class="text-uppercase text-center">
@@ -168,52 +112,44 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Identificación</th>
-                                    <th>Tipo documento</th>
-                                    <th>Nombres y Apellidos</th>
-                                </tr>
-                            </thead>
                             <tbody>
-                                <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
-                                    <td>{{ propietarioVehiculo.ciudadano?.usuario.identificacion }}</td>
-                                    <td>{{ propietarioVehiculo.ciudadano?.usuario.tipoIdentificacion.nombre }}</td>
-                                    <td>{{ propietarioVehiculo.ciudadano?.usuario.primerApellido }} {{ propietarioVehiculo.ciudadano?.usuario.primerNombre
-                                        }}</td>
+                                <tr *ngFor="let propietario of propietarios; let i = index">
+                                    <td>
+                                        <b>Identificación</b>
+                                        <br>
+                                        <span *ngIf="propietario.ciudadano">
+                                            {{ propietario.ciudadano?.identificacion }}
+                                        </span>
+                                        <span *ngIf="propietario.empresa">
+                                            {{ propietario.empresa?.nit }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <b>Tipo documento</b>
+                                        <br>
+                                        <span *ngIf="propietario.ciudadano">
+                                            {{ propietario.ciudadano?.tipoIdentificacion.nombre }}
+                                        </span>
+                                        <span *ngIf="propietario.empresa">
+                                            {{ propietario.empresa?.tipoIdentificacion.nombre }}
+                                        </span>
+                                    </td>
+                                    <td *ngIf="propietario.ciudadano">
+                                        <b>Nombres y Apellidos</b>
+                                        <br>
+                                        {{ propietario.ciudadano?.usuario.primerNombre }} {{ propietario.ciudadano?.usuario.primerApellido }}
+                                    </td>
+                                    <td *ngIf="propietario.empresa">
+                                        <b>Nombre</b>
+                                        <br>
+                                        {{ propietario.empresa.nombre }}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            
-            <div class="card" *ngIf="propietariosVehiculo?.length > 0 && isEmpresa">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h6 class="text-uppercase text-center">
-                            <b>Datos de la empresa</b>
-                        </h6>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Nit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let empresaVehiculo of propietariosVehiculo; let i = index">
-                                <td>{{ empresaVehiculo.empresa?.nombre }}</td>
-                                <td>{{ empresaVehiculo.empresa?.nit }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col-xs-12 col-lg-12">
                     <div class="btn-group">

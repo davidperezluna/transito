@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
-import { CiudadanoVehiculoService } from '../../services/ciudadanoVehiculo.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -15,7 +14,8 @@ export class BuscarAutomotorComponent implements OnInit {
   public parametro:any;
   public vehiculo: any;
   public vehiculos: any = null;
-  public formShow:any;
+  public formShow:any = false;
+  public formIndex:any = false;
   
   public datos = {
     'numeroPlaca': null,
@@ -29,7 +29,6 @@ export class BuscarAutomotorComponent implements OnInit {
 
 constructor(
   private _VehiculoService: VhloVehiculoService,
-  private _ciudadanoVehiculoService: CiudadanoVehiculoService,
   private _LoginService: LoginService,
 ){}
 
@@ -48,32 +47,37 @@ constructor(
 
     let token = this._LoginService.getToken();
 
-     this._VehiculoService.searchByParameters(this.datos, token).subscribe(
-            response => {
-                if (response.code == 200) {
-                  this.vehiculos = response.data;
-                    
-                  swal.close();                  
-                } else {
-                  this.vehiculos = null;
-                  swal.close();                  
-                }
-                error => {
-                    this.errorMessage = <any>error;
-                    if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                    }
-                }
-            });
+    this._VehiculoService.searchByParameters(this.datos, token).subscribe(
+      response => {
+          if (response.code == 200) {
+            this.vehiculos = response.data;
+            this.formIndex = true;
+            this.formShow = false;
+              
+            swal.close();                  
+          } else {
+            this.vehiculos = null;
+            swal.close();                  
+          }
+          error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+              }
+          }
+      }
+    );
   }
 
   onShow(vehiculo:any){
     this.vehiculo = vehiculo;
+    this.formIndex = false;
     this.formShow = true;
   }
 
-  onClose(isForm:any){
-    this.formShow = isForm;
+  onClose(){
+    this.formShow = false;
+    this.formIndex = true;
   }
 }

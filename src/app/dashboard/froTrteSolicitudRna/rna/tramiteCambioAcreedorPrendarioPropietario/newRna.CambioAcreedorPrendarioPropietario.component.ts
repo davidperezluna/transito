@@ -187,6 +187,31 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                     this.propietarioOld = response.data;
                                     this.datos.idPropietarioOld = this.propietarioOld.id;
 
+                                    this._AcreedorService.searchByPropietario({ 'id': this.propietarioOld.id }, token).subscribe(
+                                        response => {
+                                            if (response.code == 200) {
+                                                this.acreedor = response.data;
+                                                this.datos.idAcreedor = this.acreedor.id;
+            
+                                                swal.close();
+                                            } else {            
+                                                swal({
+                                                    title: 'Error!',
+                                                    text: response.message,
+                                                    type: 'error',
+                                                    confirmButtonText: 'Aceptar'
+                                                });
+                                            }
+                                            error => {
+                                                this.errorMessage = <any>error;
+                                                if (this.errorMessage != null) {
+                                                    console.log(this.errorMessage);
+                                                    alert('Error en la petición');
+                                                }
+                                            }
+                                        }
+                                    );
+
                                     swal.close();
                                 } else {
                                     this.propietarioOld = null;
@@ -215,6 +240,32 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                     this.propietarioOld = response.data;
                                     this.datos.idPropietarioOld = this.propietarioOld.id;
 
+                                    this._AcreedorService.searchByPropietario({ 'id': this.propietarioOld.id }, token).subscribe(
+                                        response => {
+                                            if (response.code == 200) {
+                                                this.acreedor = response.data;
+                                                this.datos.idAcreedor = this.acreedor.id;
+            
+                                                swal.close();
+                                            } else {
+                                                this.acreedor = null;
+                                                swal({
+                                                    title: 'Error!',
+                                                    text: response.message,
+                                                    type: 'error',
+                                                    confirmButtonText: 'Aceptar'
+                                                });
+                                            }
+                                            error => {
+                                                this.errorMessage = <any>error;
+                                                if (this.errorMessage != null) {
+                                                    console.log(this.errorMessage);
+                                                    alert('Error en la petición');
+                                                }
+                                            }
+                                        }
+                                    );
+
                                     swal.close();
                                 } else {
                                     this.propietarioOld = null;
@@ -236,47 +287,10 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                 }
                             }
                         );
+                    }else {
+                        this.acreedor = null;
+                        this.datos.idAcreedor = null;
                     }
-
-
-                    if (this.propietarioOld) {
-                        this._AcreedorService.searchByPropietarioAndVehiculo({ 'id': this.propietarioOld.id, 'idVehiculo': this.vehiculo.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.acreedor = response.data;
-                                    this.datos.idAcreedor = this.acreedor.id;
-
-                                    swal.close();
-                                } else {
-                                    this.acreedor = null;
-                                    this.datos.idAcreedor = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert('Error en la petición');
-                                    }
-                                }
-                            }
-                        );
-                    }else{
-                        swal({
-                            title: 'Error!',
-                            text: 'Propietario no encontrado.',
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                        });
-                    }
-
-                    swal.close();
                 } else {
                     this.propietarioOld = null;
                     this.datos.idPropietarioOld = null;

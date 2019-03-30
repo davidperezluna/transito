@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { MouseEvent } from '@agm/core';
+import { SvSenialUbicacion } from './newSenialUbicacion.modelo';
 import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
 import { SvCfgSenialService } from '../../../services/svCfgSenial.service';
 import { SvCfgSenialEstadoService } from '../../../services/svCfgSenialEstado.service';
 import { SvCfgSenialLineaService } from '../../../services/svCfgSenialLinea.service';
 import { SvCfgSenialUnidadMedidaService } from '../../../services/svCfgSenialUnidadMedida.service';
-import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { SvSenialBodegaService } from '../../../services/svSenialBodega.service';
 import { SvCfgSenialProveedorService } from '../../../services/svCfgSenialProveedor.service';
+import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { LoginService } from '../../../services/login.service';
-import { SvSenialUbicacion } from './newSenialUbicacion.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -41,6 +41,7 @@ export class NewSenialUbicacionComponent implements OnInit {
     public senial: any = null;
     public municipio: any = null;
     public address: any = null;
+    public fileSelected: any = null;
 
     public formEdit = false;
     public formIndex = true;

@@ -92,7 +92,7 @@ constructor(
   onEnviar(){
     let token = this._loginService.getToken();
     
-    this._SvCfgSenialService.register(this.file, this.senial,token).subscribe(
+    this._SvCfgSenialService.register(this.file, this.senial, token).subscribe(
 			response => {
         if(response.status == 'success'){
           this.ready.emit(true);

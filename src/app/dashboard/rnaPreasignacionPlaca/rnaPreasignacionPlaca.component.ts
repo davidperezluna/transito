@@ -16,6 +16,7 @@ export class RnaPreasignacionPlacaComponent implements OnInit {
 
   public vehiculoFiltro:any; 
   public vehiculo:any = null; 
+  public formSearch: true; 
 
   public organismosTransito:any;
   public placas:any;

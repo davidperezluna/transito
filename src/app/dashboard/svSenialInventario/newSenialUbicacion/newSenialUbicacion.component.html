@@ -30,11 +30,6 @@
                         <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial == 1">
-                        <label>Color de pintura <strong class="text-danger">*</strong></label>
-                        <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
-                        </ng-select>
-                    </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Estado <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="estados" [(ngModel)]="senialUbicacion.idEstado" name="estado" required>

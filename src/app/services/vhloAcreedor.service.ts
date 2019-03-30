@@ -98,10 +98,10 @@ export class VhloAcreedorService {
 		return this._http.post(this.url + "/search/ciudadano/empresa/vehiculo", params, { headers: headers }).map(res => res.json());
 	}
 
-	searchByPropietarioAndVehiculo(datos, token) {
+	searchByPropietario(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/propietario/vehiculo", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/search/propietario", params, { headers: headers }).map(res => res.json());
 	}
 }
