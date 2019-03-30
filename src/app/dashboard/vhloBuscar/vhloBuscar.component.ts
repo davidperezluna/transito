@@ -5,10 +5,10 @@ import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-buscar-automotor',
-  templateUrl: './buscarAutomotor.component.html'
+  templateUrl: './vhloBuscar.component.html'
 })
 
-export class BuscarAutomotorComponent implements OnInit {
+export class VhloBuscarComponent implements OnInit {
   public errorMessage;
   
   public parametro:any;

@@ -1,8 +1,8 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { LoginService } from '../../../services/login.service';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service'
+import { LoginService } from '../../../services/login.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import swal from 'sweetalert2';
 declare var $: any;
