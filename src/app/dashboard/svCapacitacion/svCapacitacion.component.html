@@ -101,7 +101,6 @@
                                 <th>Formador</th>
                                 <th>Cédula</th>
                                 <th>Fecha Actividad</th>
-                                <th>Semana</th>
                                 <th>Municipio</th>
                                 <th>Función de Seg. Víal</th>
                                 <th>Clase de Actividad</th>
@@ -117,10 +116,9 @@
                             <tr class="odd" *ngFor="let capacitacion of capacitaciones; let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td>{{ capacitacion.fechaHoraRegistro }}</td>
-                                <td>{{ capacitacion.formador }}</td>
-                                <td>{{ capacitacion.cedula }}</td>
+                                <td>{{ capacitacion.ciudadano.primerNombre }} {{ capacitacion.ciudadano.primerApellido }}</td>
+                                <td>{{ capacitacion.ciudadano.identificacion }}</td>
                                 <td>{{ capacitacion.fechaActividad }}</td>
-                                <td>{{ capacitacion.semana }}</td>
                                 <td>{{ capacitacion.municipio.nombre }}</td>
                                 <td>{{ capacitacion.funcion.nombre }}</td>
                                 <td>{{ capacitacion.funcionCriterio.nombre }}</td>

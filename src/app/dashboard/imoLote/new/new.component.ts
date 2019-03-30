@@ -107,6 +107,13 @@ constructor(
     this.ready.emit(true);
   }
   onEnviar(){
+    swal({
+      title: 'Enviando datos!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    })
     let token = this._loginService.getToken();
     this.ImoLote.idOrganismoTransito = this.sedeSelected;
     if (!this.frmInsumo) {
@@ -121,6 +128,7 @@ constructor(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
+          swal.close();
           this.ready.emit(true);
           swal({
             title: 'Perfecto!',

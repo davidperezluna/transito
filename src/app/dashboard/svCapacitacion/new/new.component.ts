@@ -5,7 +5,6 @@ import { LoginService } from '../../../services/login.service';
 
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 
-import swal from 'sweetalert2';
 import { SvCfgFuncionService } from '../../../services/svCfgFuncion.service';
 import { SvCfgFuncionCriterioService } from '../../../services/svCfgFuncionCriterio.service';
 import { SvCfgTemaCapacitacionService } from '../../../services/svCfgTemaCapacitacion.service';
@@ -13,6 +12,8 @@ import { SvCfgClaseActorViaService } from '../../../services/svCfgClaseActorVia.
 import { UserCfgGeneroService } from '../../../services/userCfgGenero.service';
 
 import { DatePipe, CurrencyPipe } from '@angular/common';
+import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
     selector: 'app-new',
@@ -52,6 +53,8 @@ export class NewComponent implements OnInit {
     public generoSelected: any;
 
     public capacitados = [];
+    public table: any = null;
+    public capacitadosEncontrados = false;
 
     constructor(
         private _CapacitacionService: SvCapacitacionService,
@@ -139,6 +142,23 @@ export class NewComponent implements OnInit {
         );
     }
 
+    iniciarTabla() {
+        $('#dataTables-example').DataTable({
+            pageLength: 8,
+            sPaginationType: 'full_numbers',
+            dom: 'Bfrtip',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<<',
+                    sPrevious: '<',
+                    sNext: '>',
+                    sLast: '>>'
+                }
+            }
+        });
+        this.table = $('#dataTables-example').DataTable();
+    }
+
     onCancelar() {
         this.ready.emit(true);
     }
@@ -161,13 +181,18 @@ export class NewComponent implements OnInit {
         this._CapacitacionService.register(this.file, this.capacitacion, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.ready.emit(true);
+                    /* this.ready.emit(true); */
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+                    this.capacitacion.numeroCedulaActorVial = '';
+                    this.capacitacion.nombreActorVial = '';
+                    this.capacitacion.apellidoActorVial = '';
+                    this.generoSelected = [0];
+                    this.claseActorViaSelected = [0];
                 } else {
                     swal({
                         title: 'Error!',
@@ -274,6 +299,7 @@ export class NewComponent implements OnInit {
                 'aria-label': 'Upload your profile picture'
             }
         })
+
         if (files) {
             this.txt = [];
             let reader: FileReader = new FileReader();
@@ -294,17 +320,35 @@ export class NewComponent implements OnInit {
             }
         }
         
-        console.log(this.txt);
-        this._CapacitacionService.cargarCapacitados({"file":this.txt, "capacitacion":this.capacitacion}, token).subscribe(
+        this.capacitacion.fechaHoraRegistro = this.fecha;
+        this.capacitacion.municipio = this.municipioSelected;
+        this.capacitacion.funcion = this.funcionSelected;
+        this.capacitacion.funcionCriterio = this.funcionCriterioSelected;
+        this.capacitacion.claseActorVial = this.claseActorViaSelected;
+        this.capacitacion.temaCapacitacion = this.temaCapacitacionSelected;
+        this.capacitacion.genero = this.generoSelected;
+
+        if (this.capacitacionInput.idTipoIdentificacion == 1) {
+            this.capacitacion.identificacion = this.ciudadano.identificacion;
+        } else if (this.capacitacionInput.idTipoIdentificacion == 4) {
+            this.capacitacion.nit = this.empresa.nit;
+        }
+
+        this._CapacitacionService.cargarCapacitados({"file": this.txt, "capacitacion":this.capacitacion}, token).subscribe(
             response => {
-                
                 if (response.status == 'success') {
+                    this.capacitaciones = response.data;
+                    console.log(this.capacitaciones);
+                    this.capacitadosEncontrados = true;
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+                    let timeoutId = setTimeout(() => {
+                        this.iniciarTabla();
+                    }, 100);
                 } else {
                     swal({
                         title: 'Alerta!',
