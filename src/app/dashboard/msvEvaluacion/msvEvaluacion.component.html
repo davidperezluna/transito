@@ -173,7 +173,7 @@
                               <div class="row" *ngIf="categoriaSelected == i+1 && showT">
                                  <div class="col-xs-12 col-lg-12">
                                     <div class="card">
-                                       <div class="card-body">
+                                       <div class="card-body" style="width:1200 px; overflow-x: auto;">
                                           <h5 class="m-0">Evaluación</h5>
                                           <hr>
                                           <div class="row text-center text-uppercase"
@@ -236,8 +236,8 @@
                                                                      (ngModelChange)="calcularTotal($event, msvParametro, categoriaSelected)"
                                                                      [(ngModel)]="msvCriterio.responde"
                                                                      name="responde{{ msvCriterio.id }}"></div>
-                                                               <div class="col-lg-1" style="border:1px solid #cccccc;">{{msvParametro.valor
-                                                                              /msvParametro.numeroVariables}}</div>
+                                                               <div class="col-lg-1" style="border:1px solid #cccccc;">{{ msvParametro.valor
+                                                                              /msvParametro.numeroVariables }}</div>
                                                                <div class="col-lg-2" style="border:1px solid #cccccc;">
                                                                   <label
                                                                      *ngIf="msvCriterio.responde == true">{{msvParametro.valor
