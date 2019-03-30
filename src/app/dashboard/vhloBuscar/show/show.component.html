@@ -1,0 +1,166 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <strong class="text-uppercase">Vehículo</strong>
+                        <small>Datos generales</small>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Organismo transito</label>
+                            {{ vehiculo.organismoTransito.nombre }}
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Placa</label>
+                            {{ vehiculo.placa.numero }}
+                        </div>
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Estado Vehículo</label>
+                            <span *ngIf="vehiculo.activo">ACTIVO</span>
+                            <span *ngIf="!vehiculo.activo">INACTIVO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5>Información adicional</h5>
+                    <div class="row justify-content-center">
+                        <div class="container">
+                            <div class="form-group row">
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Clase</label>
+                                    {{ vehiculo.clase.nombre }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Marca</label>
+                                    {{ vehiculo.linea.marca.nombre }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Linea</label>
+                                    {{ vehiculo.linea.nombre }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Modelo</label>
+                                    {{ vehiculo.modelo }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Color</label>
+                                    {{ vehiculo.color.nombre }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Tipo servicio</label>
+                                    {{ vehiculo.clase.tipoVehiculo.nombre }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Cilindraje</label>
+                                    {{ vehiculo.cilindraje }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Número serie</label>
+                                    {{ vehiculo.serie }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Número de motor</label>
+                                    {{ vehiculo.motor }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Número de chasis</label>
+                                    {{ vehiculo.chasis }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <label>Combustible</label>
+                                    {{ vehiculo.combustible.nombre }}
+                                </div>
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
+                                    <label>Peso</label>
+                                    <span *ngIf="maquinaria">{{ maquinaria.peso }}</span>
+                                    <span *ngIf="remolque">{{ remolque.peso }}</span>
+                                </div>
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
+                                    <label>No. de ejes</label>
+                                    <span *ngIf="maquinaria">{{ maquinaria.numeroEjes }}</span>
+                                    <span *ngIf="remolque">{{ remolque.numeroEjes }}</span>
+                                </div>
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
+                                    <label>Origen de registro</label>
+                                    <span *ngIf="maquinaria">{{ maquinaria.origenRegistro.nombre }}</span>
+                                    <span *ngIf="remolque">{{ remolque.origenRegistro.nombre }}</span>
+                                </div>
+                                <div class="col-xs-12 col-lg-4" *ngIf="maquinaria || remolque">
+                                    <label>Condición de ingreso</label>
+                                    <span *ngIf="maquinaria">{{ maquinaria.condicionIngreso.nombre }}</span>
+                                    <span *ngIf="remolque">{{ remolque.condicionIngreso.nombre }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" *ngIf="propietarios?.length > 0">
+                <div class="card-headers">
+                    <div class="card-title">
+                        <h6 class="text-uppercase text-center">
+                            <b>Datos del propietario</b>
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr *ngFor="let propietario of propietarios; let i = index">
+                                    <td>
+                                        <b>Identificación</b>
+                                        <br>
+                                        <span *ngIf="propietario.ciudadano">
+                                            {{ propietario.ciudadano?.identificacion }}
+                                        </span>
+                                        <span *ngIf="propietario.empresa">
+                                            {{ propietario.empresa?.nit }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <b>Tipo documento</b>
+                                        <br>
+                                        <span *ngIf="propietario.ciudadano">
+                                            {{ propietario.ciudadano?.tipoIdentificacion.nombre }}
+                                        </span>
+                                        <span *ngIf="propietario.empresa">
+                                            {{ propietario.empresa?.tipoIdentificacion.nombre }}
+                                        </span>
+                                    </td>
+                                    <td *ngIf="propietario.ciudadano">
+                                        <b>Nombres y Apellidos</b>
+                                        <br>
+                                        {{ propietario.ciudadano?.usuario.primerNombre }} {{ propietario.ciudadano?.usuario.primerApellido }}
+                                    </td>
+                                    <td *ngIf="propietario.empresa">
+                                        <b>Nombre</b>
+                                        <br>
+                                        {{ propietario.empresa.nombre }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="btn-group">
+                        <button (click)="onCancelar()" class="btn btn-defaut">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>

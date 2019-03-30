@@ -131,7 +131,6 @@ import { CfgSmlmvRoutes } from './cfgSmlmv/cfgSmlmv.routes';
 import { cfgFestivoRoutes } from './cfgFestivo/cfgFestivo.routes';
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 
-import { BuscarAutomotorRoutes } from './buscarAutomotor/buscarAutomotor.routes';
 import { registroEntregaProductoRoutes } from './registroEntregaProducto/registroEntregaProducto.routes';
 
 import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategoria.routes';
@@ -170,9 +169,12 @@ import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTi
 import { MpersonalTalonarioRoutes } from './mpersonalTalonario/mpersonalTalonario.routes';
 import { MpersonalAsignacionRoutes } from './mpersonalAsignacion/mpersonalAsignacion.routes';
 
+import { VhloBuscarRoutes } from './vhloBuscar/vhloBuscar.routes';
 import { VhloVehiculoRoutes } from './vhloVehiculo/vhloVehiculo.routes';
 import { VhloPropietarioRoutes } from './vhloPropietario/vhloPropietario.routes';
 import { VhloCfgCarroceriaRoutes } from './vhloCfgCarroceria/vhloCfgCarroceria.routes';
+import { VhloCfgPlacaRoutes } from './vhloCfgPlaca/vhloCfgPlaca.routes';
+import { VhloRnaPreasignacionPlacaRoutes } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.routes';
 
 import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
@@ -190,8 +192,6 @@ import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.r
 
 import { EmpresaAlcaldiaRoutes } from './empresaAlcaldia/empresaAlcaldia.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
-
-import { RnaPreasignacionPlacaRoutes } from './rnaPreasignacionPlaca/rnaPreasignacionPlaca.routes';
 import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
 import { SvCfgGravedadAccidenteRoutes } from './svCfgGravedadAccidente/svCfgGravedadAccidente.routes';
 import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
@@ -201,7 +201,6 @@ import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 
 import { CfgModuloRoutes } from './cfgModulo/cfgModulo.routes';
 import { CfgOrganismoTransitoRoutes } from './cfgOrganismoTransito/cfgOrganismoTransito.routes';
-import { VhloCfgPlacaRoutes } from './vhloCfgPlaca/vhloCfgPlaca.routes';
 import { CfgEntidadJudicialRoutes } from './cfgEntidadJudicial/cfgEntidadJudicial.routes';
 import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimitacion.routes';
 import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
@@ -254,6 +253,7 @@ import { FroCfgTipoRecaudoRoutes } from './froCfgTipoRecaudo/froCfgTipoRecaudo.r
 //import { MsvSenialRoutes } from './msvSenial/msvSenial.routes';
 //import { RnaCertificadoTradicionRoutes } from './rnaCertificadoTradicionOficial/rnaCertificadoTradicionOficial.routes';
 import { DashboardComponent } from '.';
+import { CfgOrganismoTransito } from './cfgOrganismoTransito/cfgOrganismoTransito.modelo';
 
 export const DashboardRoutes: Route[] = [
   {
@@ -272,16 +272,38 @@ export const DashboardRoutes: Route[] = [
       ...UserLicenciaConduccionRoutes,
       ...HomeRoutes,
       ...VehiculoRoutes,
+      ...BancoRoutes,
+      ...VhloBuscarRoutes,
+      ...VhloVehiculoRoutes,
+      ...VhloPropietarioRoutes,
+      ...VhloCfgCarroceriaRoutes,
+      ...VhloCfgPlacaRoutes,
+      ...VhloCfgTipoVehiculoRoutes,
+      ...VhloCfgTipoAlertaRoutes,
+      ...VhloCfgCdaRoutes,
+      ...VhloCfgOrigenRegistroRoutes,
+      ...VhloCfgModalidadTransporteRoutes,
+      ...VhloCfgRadioAccionRoutes,
+      ...VhloCfgTransportePasajeroRoutes,
+      ...VhloCfgTransporteEspecialRoutes,
+      ...VhloCfgEmpresaGpsRoutes,
+      ...VhloCfgTipoRodajeRoutes,
+      ...VhloCfgTipoCabinaRoutes,
+      ...VhloCfgTipoMaquinariaRoutes,
+      ...VhloCfgClaseMaquinariaRoutes,
+      ...VhloCfgSubpartidaArancelariaRoutes,
+      ...VhloCfgCondicionIngresoRoutes,
+      ...VhloPlacaSedeRoutes,
+      ...VhloRnaPreasignacionPlacaRoutes,
       ...VhloCfgMarcaRoutes,
       ...VhloCfgLineaRoutes,
-      ...BancoRoutes,
       ...VhloCfgClaseRoutes,
       ...VhloCfgColorRoutes,
       ...VhloCfgCombustibleRoutes,
+      ...VhloCfgServicioRoutes,
       ...ConsumibleRoutes,
       ...ModalidadRoutes,
       ...OrganismoTransitoRoutes,
-      ...VhloCfgServicioRoutes,
       ...CfgPaisRoutes,
       ...CfgDepartamentoRoutes,
       ...CfgMunicipioRoutes,
@@ -298,7 +320,6 @@ export const DashboardRoutes: Route[] = [
       ...CfgTipoInfractorRoutes,
       ...CfgAdmFormatoRoutes,
       ...CfgAdmFormatoTipoRoutes,
-      ...BuscarAutomotorRoutes,
       ...registroEntregaProductoRoutes,
       ...RncLicenciaConduccionRoutes,
       ...MsvCaracterizacionRoutes,
@@ -348,22 +369,6 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgSenialRoutes,
       ...SvCfgClaseAccidenteRoutes,
       ...SvSenialInventarioRoutes,
-      ...VhloCfgTipoVehiculoRoutes,
-      ...VhloCfgTipoAlertaRoutes,
-      ...VhloCfgCdaRoutes,
-      ...VhloCfgOrigenRegistroRoutes,
-      ...VhloCfgModalidadTransporteRoutes,
-      ...VhloCfgRadioAccionRoutes,
-      ...VhloCfgTransportePasajeroRoutes,
-      ...VhloCfgTransporteEspecialRoutes,
-      ...VhloCfgEmpresaGpsRoutes,
-      ...VhloCfgTipoRodajeRoutes,
-      ...VhloCfgTipoCabinaRoutes,
-      ...VhloCfgTipoMaquinariaRoutes,
-      ...VhloCfgClaseMaquinariaRoutes,
-      ...VhloCfgSubpartidaArancelariaRoutes,
-      ...VhloCfgCondicionIngresoRoutes,
-      ...VhloPlacaSedeRoutes,
       ...VehiculoTecnoMecanicaRoutes,
       ...CvCfgTipoRestriccionRoutes,
       ...SoatRoutes,
@@ -412,9 +417,6 @@ export const DashboardRoutes: Route[] = [
       ...SvCfgZonaRoutes,
       ...SvCfgGravedadAccidenteRoutes,
       ...InfraccionRoutes,
-      ...VhloVehiculoRoutes,
-      ...VhloPropietarioRoutes,
-      ...VhloCfgCarroceriaRoutes,
       ...FacturaRoutes,
       ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,
@@ -425,16 +427,14 @@ export const DashboardRoutes: Route[] = [
       ...TramiteSolicitudRnrsRoutes,
       ...SustratoRoutes,
       ...GestionTransportePublicoRoutes,
-      ...RnaPreasignacionPlacaRoutes,
       ...RnaPreregistroRoutes,
       ...rnaRegistroInsumosRoutes,
       ...ImoPreasignacionRoutes,
       ...TramitePrecioRoutes,
-      ...CfgComparendoEstadoRoutes,
-      ...CfgOrganismoTransitoRoutes,
-      ...VhloCfgPlacaRoutes,
       ...ImoCfgTipoRoutes,
       ...ImoLoteRoutes,
+      ...CfgComparendoEstadoRoutes,
+      ...CfgOrganismoTransitoRoutes,
       ...CfgEntidadJudicialRoutes,
       ...CfgCausalLimitacionRoutes,
       ...CfgChoqueConRoutes,

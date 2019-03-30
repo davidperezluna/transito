@@ -8,14 +8,15 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnaPreasignacionPlaca.component.html'
+  templateUrl: './vhloRnaPreasignacionPlaca.component.html'
 })
-export class RnaPreasignacionPlacaComponent implements OnInit {
+export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   @Input() ciudadanoVehiculo:any = null;
   public errorMessage;
 
   public vehiculoFiltro:any; 
   public vehiculo:any = null; 
+  public formSearch: true; 
 
   public organismosTransito:any;
   public placas:any;

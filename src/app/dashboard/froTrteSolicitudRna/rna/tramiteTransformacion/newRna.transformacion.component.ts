@@ -25,13 +25,11 @@ export class NewRnaTransformacionComponent implements OnInit {
     public tramiteSolicitud: any = null;
     public carrocerias: any = null;
     public combustibles: any = null;
-    public modelo: any = null;
-    public descripcionModelo: any = null;
 
     public datos = {
         'tipoTransformacion': null,
         'modelo': null,
-        'descripcionModelo': null,
+        'decripcionModelo': null,
         'tallerRepotenciacion': null,
         'fechaRepotenciacion': null,
         'fichaTecnica': null,

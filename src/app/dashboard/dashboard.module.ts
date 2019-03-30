@@ -131,7 +131,6 @@ import { SvCfgTemaCapacitacionModule } from './svCfgTemaCapacitacion/svCfgTemaCa
 
 import { ComparendoModule } from './comparendo/comparendo.module';
 import { InfraccionModule } from './infraccion/infraccion.module';
-import { BuscarAutomotorModule } from './buscarAutomotor/buscarAutomotor.module';
 import { registroEntregaProductoModule } from './registroEntregaProducto/registroEntregaProducto.module';
 
 import { UserLcCfgCategoriaModule } from './userLcCfgCategoria/userLcCfgCategoria.module';
@@ -159,10 +158,12 @@ import { PqoGruaCiudadanoModule } from './pqoGruaCiudadano/pqoGruaCiudadano.modu
 import { PqoInmovilizacionModule } from './pqoInmovilizacion/pqoInmovilizacion.module';
 import { MparqCostoTrayectoModule } from './mparqCostoTrayecto/mparqCostoTrayecto.module';
 
-
+import { VhloBuscarModule } from './vhloBuscar/vhloBuscar.module';
 import { VhloVehiculoModule } from './vhloVehiculo/vhloVehiculo.module';
 import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module';
 import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
+import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
+import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
 
 import { FacturaModule } from './factura/factura.module';
 import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
@@ -177,7 +178,6 @@ import { RnaTramiteLevantamientoLimitacionModule } from './rnaTramiteLevantamien
 import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
 
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
-import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
 import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
@@ -216,7 +216,6 @@ import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonari
 import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
 
 import { ImoPreasignacionModule } from './imoPreasignacIon/imoPreasignacion.module';
-import { RnaPreasignacionPlacaModule } from './rnaPreasignacionPlaca/RnaPreasignacionPlaca.module';
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
 import { RnaPreregistroModule } from './rnaPreregistro/RnaPreregistro.module';
 
@@ -302,7 +301,6 @@ import {RightsidebarComponent} from '../shared';
     CfgAuditoriaModule,
     CfgSmlmvModule,
     cfgFestivoModule,
-    BuscarAutomotorModule,
     UserLcCfgCategoriaModule,
     CfgTipoClaseModule,
     RncLicenciaConduccionModule,
@@ -380,6 +378,7 @@ import {RightsidebarComponent} from '../shared';
     FroTrteSolicitudRncModule,
     FroFacTramiteModule,
     FroTrteCfgCuentaModule,
+    VhloBuscarModule,
     VhloVehiculoModule,
     VhloPropietarioModule,
     VhloCfgCarroceriaModule,
@@ -422,6 +421,8 @@ import {RightsidebarComponent} from '../shared';
     VhloCfgSubpartidaArancelariaModule,
     VhloCfgCondicionIngresoModule,
     VhloPlacaSedeModule,
+    VhloCfgPlacaModule,
+    VhloRnaPreasignacionPlacaModule,
     VehiculoTecnoMecanicaModule,
     SoatModule,
     CfgComparendoEstadoModule,
@@ -437,10 +438,8 @@ import {RightsidebarComponent} from '../shared';
     GestionTransportePublicoModule,
     CvCfgTipoRestriccionModule,
     TramitePrecioModule,
-    RnaPreasignacionPlacaModule,
     RnaPreregistroModule,
     CfgOrganismoTransitoModule,
-    VhloCfgPlacaModule,
     ImoCfgTipoModule,
     CfgChoqueConModule,
     CfgObjetoFijoModule,

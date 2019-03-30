@@ -14,12 +14,12 @@
                             <input class="form-control" [(ngModel)]="senial.codigo" name="codigo" type="text" required autofocus />
                         </div>
                         <div class="col-xs-12 col-lg-12">
-                            <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control text-uppercase" [(ngModel)]="senial.nombre" name="nombre" type="text" required autofocus />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
                             <label>Tipo <strong class="text-danger">*</strong></label>
                             <ng-select (ngModelChange)="onChangedTipo($event)" [multiple]="false" [options]="tipos" [(ngModel)]="senial.idSenialTipo" name="tipo" required></ng-select>
+                        </div>
+                        <div class="col-xs-12 col-lg-12" *ngIf="senial.idSenialTipo && tipo && !tipo.color">
+                            <label>Nombre <strong class="text-danger">*</strong></label>
+                            <input class="form-control text-uppercase" [(ngModel)]="senial.nombre" name="nombre" type="text" required autofocus />
                         </div>
                         <div class="col-xs-12 col-lg-12" *ngIf="senial.idSenialTipo && tipo && tipo.color">
                             <label>Color <strong class="text-danger">*</strong></label>
