@@ -189,7 +189,7 @@ export class NewComponent implements OnInit {
   //public vhl = false;
 
   //validacion campos individuales para vehiculo
-  public vhlNacionalidad = false;
+  /* public vhlNacionalidad = false;
   public vhlMarca = false;
   public vhlColor = false;
   public vhlModelo = false;
@@ -219,7 +219,7 @@ export class NewComponent implements OnInit {
   public vtmSexoVictima = false;
   public vtmDireccionVictima = false;
   public vtmMunicipioVictima = false;
-  public vtmTelefonoVictima = false;
+  public vtmTelefonoVictima = false; */
 
   public agente = false;
   public victima = false;
@@ -1239,60 +1239,60 @@ export class NewComponent implements OnInit {
             //this.usuario = true;
             this.conductorEncontrado = true;
             if (response.data.tipoIdentificacion != null) {
-              this.cdnTipoIdentificacionConductor = true;
+              //this.cdnTipoIdentificacionConductor = true;
               this.tipoIdentificacionConductorSelected = [response.data.tipoIdentificacion.id];
             } else {
-              this.cdnTipoIdentificacionConductor = false;
+              //this.cdnTipoIdentificacionConductor = false;
               this.tipoIdentificacionConductorSelected = [0];
             }
             if (response.data.segundoNombre == null) {
-              this.cdnPrimerNombreConductor = true;
+              //this.cdnPrimerNombreConductor = true;
               this.msvRegistroIpat.nombresConductor = response.data.primerNombre;
             } else {
-              this.cdnPrimerNombreConductor = true;
+              //this.cdnPrimerNombreConductor = true;
               this.msvRegistroIpat.nombresConductor = response.data.primerNombre + ' ' + response.data.segundoNombre;
             }
             if (response.data.segundoApellido == null) {
-              this.cdnPrimerApellidoConductor = true;
+              //this.cdnPrimerApellidoConductor = true;
               this.msvRegistroIpat.apellidosConductor = response.data.primerApellido;
             } else {
-              this.cdnPrimerApellidoConductor = true;
+              //this.cdnPrimerApellidoConductor = true;
               this.msvRegistroIpat.apellidosConductor = response.data.primerApellido + ' ' + response.data.segundoApellido;
             }
             //this.msvRegistroIpat.nacionalidadConductor = response.data.nacionalidad;
             if (response.data.fechaNacimiento != null) {
-              this.cdnFechaNacimientoConductor = true;
+              //this.cdnFechaNacimientoConductor = true;
               this.msvRegistroIpat.fechaNacimientoConductor = response.data.fechaNacimiento;
             } else {
-              this.cdnFechaNacimientoConductor = false;
+              //this.cdnFechaNacimientoConductor = false;
               this.msvRegistroIpat.fechaNacimientoConductor = '';
             }
             if (response.data.genero != null) {
-              this.cdnSexoConductor = true;
+              //this.cdnSexoConductor = true;
               this.sexoConductorSelected = [response.data.genero.id];
             } else {
-              this.cdnSexoConductor = false;
+              //this.cdnSexoConductor = false;
               this.sexoConductorSelected = [0];
             }
             if (response.data.direccion != null) {
-              this.cdnDireccionConductor = true;
+              //this.cdnDireccionConductor = true;
               this.msvRegistroIpat.direccionResidenciaConductor = response.data.direccion;
             } else {
-              this.cdnDireccionConductor = false;
+              //this.cdnDireccionConductor = false;
               this.msvRegistroIpat.direccionResidenciaConductor = '';
             }
             if (response.data.municipioResidencia != null) {
-              this.cdnMunicipioConductor = true;
+              //this.cdnMunicipioConductor = true;
               this.ciudadResidenciaConductorSelected = [response.data.municipioResidencia.id];
             } else {
-              this.cdnMunicipioConductor = false;
+              //this.cdnMunicipioConductor = false;
               this.ciudadResidenciaConductorSelected = [0];
             }
             if (response.data.telefono != null) {
-              this.cdnTelefonoConductor = true;
+              //this.cdnTelefonoConductor = true;
               this.msvRegistroIpat.telefonoConductor = response.data.telefono;
             } else {
-              this.cdnTelefonoConductor = false;
+              //this.cdnTelefonoConductor = false;
               this.msvRegistroIpat.telefonoConductor = '';
             }
           } else {
@@ -1305,30 +1305,30 @@ export class NewComponent implements OnInit {
               if (result.value) {
                 this.conductorEncontrado = false;
                 //this.usuario = false;
-                this.cdnTipoIdentificacionConductor = false;
+                //this.cdnTipoIdentificacionConductor = false;
                 this.tipoIdentificacionConductorSelected = [0];
 
-                this.cdnPrimerNombreConductor = false;
+                //this.cdnPrimerNombreConductor = false;
                 this.msvRegistroIpat.nombresConductor = '';
 
-                this.cdnPrimerApellidoConductor = false;
+                //this.cdnPrimerApellidoConductor = false;
                 this.msvRegistroIpat.apellidosConductor = '';
 
                 this.nacionalidadConductorSelected = [0];
 
-                this.cdnFechaNacimientoConductor = false;
+                //this.cdnFechaNacimientoConductor = false;
                 this.msvRegistroIpat.fechaNacimientoConductor = '';
 
-                this.cdnSexoConductor = false;
+                //this.cdnSexoConductor = false;
                 this.sexoConductorSelected = [0];
 
-                this.cdnDireccionConductor = false;
+                //this.cdnDireccionConductor = false;
                 this.msvRegistroIpat.direccionResidenciaConductor = '';
 
-                this.cdnMunicipioConductor = false;
+                //this.cdnMunicipioConductor = false;
                 this.ciudadResidenciaConductorSelected = [0];
 
-                this.cdnTelefonoConductor = false;
+                //this.cdnTelefonoConductor = false;
                 this.msvRegistroIpat.telefonoConductor = '';
               }
             });
@@ -1356,82 +1356,82 @@ export class NewComponent implements OnInit {
             this.vehiculoEncontrado = true;
             //this.vhl = true;
             if (response.data.nacionalidad != null) {
-              this.vhlNacionalidad = true;
+              //this.vhlNacionalidad = true;
               this.nacionalidadVehiculoSelected = [response.data.nacionalidad.id];
             } else {
-              this.vhlNacionalidad = false;
+              //this.vhlNacionalidad = false;
               this.nacionalidadVehiculoSelected = [0];
             }
             if (response.data.linea.marca != null) {
-              this.vhlMarca = true;
+              //this.vhlMarca = true;
               this.marcaSelected = [response.data.linea.marca.id];
               this.lineaSelected = [response.data.linea.id];
             } else {
-              this.vhlMarca = false;
+              //this.vhlMarca = false;
               this.marcaSelected = [0];
               this.lineaSelected = [0];
             }
             if (response.data.color != null) {
-              this.vhlColor = true;
+              //this.vhlColor = true;
               this.colorSelected = [response.data.color.id];
             } else {
-              this.vhlColor = false;
+              //this.vhlColor = false;
               this.colorSelected = [0];
             }
             if (response.data.modelo != null) {
-              this.vhlModelo = true;
+              //this.vhlModelo = true;
               this.msvRegistroIpat.modelo = response.data.modelo;
             } else {
-              this.vhlModelo = false;
+              //this.vhlModelo = false;
               this.msvRegistroIpat.modelo = "";
             }
             if (response.data.carroceria != null) {
-              this.vhlCarroceria = true;
+              //this.vhlCarroceria = true;
               this.carroceriaSelected = [response.data.carroceria.id];
             } else {
-              this.vhlCarroceria = false;
+              //this.vhlCarroceria = false;
               this.carroceriaSelected = [0];
             }
             if (response.data.numeroPasajeros != null) {
-              this.vhlPasajeros = true;
+              //this.vhlPasajeros = true;
               this.msvRegistroIpat.pasajeros = response.data.numeroPasajeros;
             } else {
-              this.vhlPasajeros = false;
+              //this.vhlPasajeros = false;
               this.msvRegistroIpat.pasajeros = "";
             }
             if (response.data.municipio != null) {
-              this.vhlMatriculadoEn = true;
+              //this.vhlMatriculadoEn = true;
               this.matriculadoEnSelected = [response.data.municipio.id];
             } else {
-              this.vhlMatriculadoEn = false;
+              //this.vhlMatriculadoEn = false;
               this.matriculadoEnSelected = [0];
             }
             if (response.data.clase != null) {
-              this.vhlClase = true;
+              //this.vhlClase = true;
               this.claseSelected = [response.data.clase.id];
             } else {
-              this.vhlClase = false;
+              //this.vhlClase = false;
               this.claseSelected = [0];
             }
             if (response.data.servicio != null) {
-              this.vhlServicio = true;
+              //this.vhlServicio = true;
               this.servicioSelected = [response.data.servicio.id];
             } else {
-              this.vhlServicio = false;
+              //this.vhlServicio = false;
               this.servicioSelected = [0];
             }
             if (response.data.modalidadTransporte != null) {
-              this.vhlModalidad = true;
+              //this.vhlModalidad = true;
               this.modalidadTransporteSelected = [response.data.modalidadTransporte.id];
             } else {
-              this.vhlModalidad = false;
+              //this.vhlModalidad = false;
               this.modalidadTransporteSelected = [0];
             }
             if (response.data.radioAccion != null) {
-              this.vhlRadioAccion = true;
+              //this.vhlRadioAccion = true;
               this.radioAccionSelected = [response.data.radioAccion.id];
             } else {
-              this.vhlRadioAccion = false;
+              //this.vhlRadioAccion = false;
               this.radioAccionSelected = [0];
             }
             //swal.close();
@@ -1445,38 +1445,38 @@ export class NewComponent implements OnInit {
               if (result.value) {
                 this.vehiculoEncontrado = false;
 
-                this.vhlNacionalidad = false;
+                //this.vhlNacionalidad = false;
                 this.nacionalidadVehiculoSelected = [0];
 
-                this.vhlMarca = false;
+                //this.vhlMarca = false;
                 this.marcaSelected = [0];
                 this.lineaSelected = [0];
 
-                this.vhlColor = false;
+                //this.vhlColor = false;
                 this.colorSelected = [0];
 
-                this.vhlModelo = false;
+                //this.vhlModelo = false;
                 this.msvRegistroIpat.modelo = '';
 
-                this.vhlCarroceria = false;
+                //this.vhlCarroceria = false;
                 this.carroceriaSelected = [0];
 
-                this.vhlPasajeros = false;
+                //this.vhlPasajeros = false;
                 this.msvRegistroIpat.pasajeros = '';
 
-                this.vhlMatriculadoEn = false;
+                //this.vhlMatriculadoEn = false;
                 this.matriculadoEnSelected = [0];
 
-                this.vhlClase = false;
+                //this.vhlClase = false;
                 this.claseSelected = [0];
 
-                this.vhlServicio = false;
+                //this.vhlServicio = false;
                 this.servicioSelected = [0];
 
-                this.vhlModalidad = false;
+                //this.vhlModalidad = false;
                 this.modalidadTransporteSelected = [0];
 
-                this.vhlRadioAccion = false;
+                //this.vhlRadioAccion = false;
                 this.radioAccionSelected = [0];
               }
             });
@@ -1614,60 +1614,60 @@ export class NewComponent implements OnInit {
             //this.victima = true;
             this.victimaEncontrada = true;
             if (response.data.tipoIdentificacion.id != null) {
-              this.vtmTipoIdentificacion = true;
+              //this.vtmTipoIdentificacion = true;
               this.tipoIdentificacionVictimaSelected = [response.data.tipoIdentificacion.id];
             } else {
-              this.vtmTipoIdentificacion = false;
+              //this.vtmTipoIdentificacion = false;
               this.tipoIdentificacionVictimaSelected = [0];
             }
             if (response.data.primerNombre != null) {
-              this.vtmNombreVictima = true;
+              //this.vtmNombreVictima = true;
               this.msvRegistroIpat.nombresVictima = response.data.primerNombre + ' ' + response.data.segundoNombre;
             } else {
-              this.vtmNombreVictima = false;
+              //this.vtmNombreVictima = false;
               this.msvRegistroIpat.nombresVictima = '';
             }
             if (response.data.primerApellido != null) {
-              this.vtmApellidoVictima = true;
+              //this.vtmApellidoVictima = true;
               this.msvRegistroIpat.apellidosVictima = response.data.primerApellido + ' ' + response.data.segundoApellido;
             } else {
-              this.vtmApellidoVictima = false;
+              //this.vtmApellidoVictima = false;
               this.msvRegistroIpat.apellidosVictima = '';
             }
             //this.msvRegistroIpat.nacionalidadVictima = response.data.nacionalidad;
             if (response.data.fechaNacimiento != null) {
-              this.vtmFechaNacimientoVictima = true;
+              //this.vtmFechaNacimientoVictima = true;
               this.msvRegistroIpat.fechaNacimientoVictima = response.data.fechaNacimiento;
             } else {
-              this.vtmFechaNacimientoVictima = false;
+              //this.vtmFechaNacimientoVictima = false;
               this.msvRegistroIpat.fechaNacimientoVictima = '';
             }
             if (response.data.genero.id != null) {
-              this.vtmSexoVictima = true;
+              //this.vtmSexoVictima = true;
               this.sexoVictimaSelected = [response.data.genero.id];
             } else {
-              this.vtmSexoVictima = false;
+              //this.vtmSexoVictima = false;
               this.sexoVictimaSelected = [0];
             }
             if (response.data.direccionPersonal != null) {
-              this.vtmDireccionVictima = true;
+              //this.vtmDireccionVictima = true;
               this.msvRegistroIpat.direccionResidenciaVictima = response.data.direccionPersonal;
             } else {
-              this.vtmDireccionVictima = false;
+              //this.vtmDireccionVictima = false;
               this.msvRegistroIpat.direccionResidenciaVictima = '';
             }
             if (response.data.municipioResidencia.id != null) {
-              this.vtmMunicipioVictima = true;
+              //this.vtmMunicipioVictima = true;
               this.ciudadResidenciaVictimaSelected = [response.data.municipioResidencia.id];
             } else {
-              this.vtmMunicipioVictima = false;
+              //this.vtmMunicipioVictima = false;
               this.ciudadResidenciaVictimaSelected = [0];
             }
             if (response.data.telefono != null) {
-              this.vtmTelefonoVictima = true;
+              //this.vtmTelefonoVictima = true;
               this.msvRegistroIpat.telefonoVictima = response.data.telefono;
             } else {
-              this.vtmTelefonoVictima = false;
+              //this.vtmTelefonoVictima = false;
               this.msvRegistroIpat.telefonoVictima = '';
             }
 
