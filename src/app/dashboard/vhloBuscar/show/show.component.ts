@@ -1,6 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
-import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service'
 import { LoginService } from '../../../services/login.service';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -23,7 +22,6 @@ public propietarios: any;
 constructor(
   private _loginService: LoginService,
   private _VehiculoService: VhloVehiculoService,
-  private _TramiteSolicitudService: TramiteSolicitudService,
   private _PropietarioService: VhloPropietarioService,
   
   ){}

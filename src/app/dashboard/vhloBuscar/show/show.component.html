@@ -118,26 +118,26 @@
                                         <b>Identificación</b>
                                         <br>
                                         <span *ngIf="propietario.ciudadano">
-                                            {{ propietario.ciudadano?.identificacion }}
+                                            {{ propietario.ciudadano.identificacion }}
                                         </span>
                                         <span *ngIf="propietario.empresa">
-                                            {{ propietario.empresa?.nit }}
+                                            {{ propietario.empresa.nit }}
                                         </span>
                                     </td>
                                     <td>
                                         <b>Tipo documento</b>
                                         <br>
                                         <span *ngIf="propietario.ciudadano">
-                                            {{ propietario.ciudadano?.tipoIdentificacion.nombre }}
+                                            {{ propietario.ciudadano.tipoIdentificacion.nombre }}
                                         </span>
                                         <span *ngIf="propietario.empresa">
-                                            {{ propietario.empresa?.tipoIdentificacion.nombre }}
+                                            {{ propietario.empresa.tipoIdentificacion.nombre }}
                                         </span>
                                     </td>
                                     <td *ngIf="propietario.ciudadano">
                                         <b>Nombres y Apellidos</b>
                                         <br>
-                                        {{ propietario.ciudadano?.usuario.primerNombre }} {{ propietario.ciudadano?.usuario.primerApellido }}
+                                        {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
                                     </td>
                                     <td *ngIf="propietario.empresa">
                                         <b>Nombre</b>

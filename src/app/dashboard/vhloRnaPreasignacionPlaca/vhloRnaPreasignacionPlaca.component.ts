@@ -11,12 +11,11 @@ declare var $: any;
   templateUrl: './vhloRnaPreasignacionPlaca.component.html'
 })
 export class VhloRnaPreasignacionPlacaComponent implements OnInit {
-  @Input() ciudadanoVehiculo:any = null;
   public errorMessage;
 
   public vehiculoFiltro:any; 
   public vehiculo:any = null; 
-  public formSearch: true; 
+  public formSearch = true; 
 
   public organismosTransito:any;
   public placas:any;

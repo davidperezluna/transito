@@ -27,7 +27,6 @@ import { FroTrteCfgCuentaRoutes } from './froTrteCfgCuenta/froTrteCfgCuenta.rout
 
 import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { VhloCfgServicioRoutes } from './vhloCfgServicio/vhloCfgServicio.routes';
-import { AlmacenRoutes } from './almacen/almacen.routes';
 
 import { CfgPaisRoutes } from './cfgPais/cfgPais.routes';
 import { CfgDepartamentoRoutes } from './cfgDepartamento/cfgDepartamento.routes';
@@ -347,7 +346,6 @@ export const DashboardRoutes: Route[] = [
       ...FroFacTramiteRoutes,
       ...FroTrteCfgCuentaRoutes,
       ...TramiteRoutes,
-      ...AlmacenRoutes,
       ...ComparendoRoutes,
       ...CvCdoTrazabilidadRoutes,
       ...CvCdoNotificacionRoutes,

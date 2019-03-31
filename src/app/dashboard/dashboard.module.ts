@@ -28,7 +28,6 @@ import { ModalidadModule } from './modalidad/modalidad.module';
 import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
 import { VhloCfgServicioModule } from './vhloCfgServicio/vhloCfgServicio.module';
 import { TramiteModule } from './tramite/tramite.module'; 
-import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
@@ -292,7 +291,6 @@ import {RightsidebarComponent} from '../shared';
     OrganismoTransitoModule,
     VhloCfgServicioModule,
     TramiteModule,
-    AlmacenModule,
     CfgPaisModule,
     CfgDepartamentoModule,
     CfgMunicipioModule,

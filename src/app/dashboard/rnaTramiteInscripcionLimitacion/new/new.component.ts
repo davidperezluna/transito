@@ -1,18 +1,18 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { LoginService } from '../../../services/login.service';
+import { UserCiudadano } from '../../userCiudadano/userCiudadano.modelo';
 import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
-import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
-import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { RnaTramiteInscripcionLimitacion } from '../rnaTramiteInscripcionLimitacion.modelo';
-import { UserCiudadano } from '../../userCiudadano/userCiudadano.modelo';
+import { LimitacionService } from '../../../services/cfgLimitacion.service';
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
 @Component({
@@ -22,8 +22,9 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public rnaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
-  public vehiculoLimitacion: any;
   public errorMessage;
+
+  public vehiculoLimitacion: any;
   public ciudadanoDemandado: any;
   public ciudadanoDemandadoEncontrado = 1;
   public ciudadanoDemandante: any;
@@ -65,7 +66,7 @@ export class NewComponent implements OnInit {
   constructor(
     private _TramiteInscripcionLimitacionService: TramiteLimitacionService,
     private _VehiculoLimitacionService: VehiculoLimitacionService,
-    private _VehiculoService: VehiculoService,
+    private _VehiculoService: VhloVehiculoService,
     private _UserCiudadanoService: UserCiudadanoService,
     private _CfgDepartamentoService: CfgDepartamentoService,
     private _MunicipioService: CfgMunicipioService,
@@ -252,12 +253,7 @@ export class NewComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    let datos = {
-      'placa': this.placa,
-      'moduloId': 2,
-    };
-
-    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
+    this._VehiculoService.searchByFilter({ 'filtro': this.placa }, token).subscribe(
       response => {
         swal.close();
         if (response.status == 'success') {

@@ -194,7 +194,10 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                                 this.datos.idAcreedor = this.acreedor.id;
             
                                                 swal.close();
-                                            } else {            
+                                            } else {
+                                                this.acreedor = null;
+                                                this.datos.idAcreedor = null;
+
                                                 swal({
                                                     title: 'Error!',
                                                     text: response.message,
@@ -249,6 +252,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                                 swal.close();
                                             } else {
                                                 this.acreedor = null;
+                                                this.datos.idAcreedor = null;
+
                                                 swal({
                                                     title: 'Error!',
                                                     text: response.message,
