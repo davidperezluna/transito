@@ -1,4 +1,4 @@
-export class RnaTramiteInscripcionLimitacion{
+export class VhloRnaTramiteInscripcionLimitacion{
 	constructor(
 
 		public fechaRadicacion:string,

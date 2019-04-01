@@ -1,4 +1,4 @@
-export class RnaTramiteLevantamientoLimitacion{
+export class VhloRnaTramiteLevantamientoLimitacion{
 	constructor(
 
 		public fechaRadicacion:string,

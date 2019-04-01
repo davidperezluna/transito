@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { UserCiudadano } from '../../userCiudadano/userCiudadano.modelo';
+import { VhloRnaTramiteInscripcionLimitacion } from '../vhloRnaTramiteInscripcionLimitacion.modelo';
 import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
@@ -10,7 +11,6 @@ import { CfgDepartamentoService } from '../../../services/cfgDepartamento.servic
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
 import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
 import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
-import { RnaTramiteInscripcionLimitacion } from '../rnaTramiteInscripcionLimitacion.modelo';
 import { LimitacionService } from '../../../services/cfgLimitacion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -21,7 +21,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  public rnaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
+  public vhloRnaTramiteInscripcionLimitacion: VhloRnaTramiteInscripcionLimitacion;
   public errorMessage;
 
   public vehiculoLimitacion: any;
@@ -79,7 +79,7 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.rnaTramiteInscripcionLimitacion = new RnaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.vhloRnaTramiteInscripcionLimitacion = new VhloRnaTramiteInscripcionLimitacion(null, null, null, null, null, null, null, null, null, null, null, null, null);
 
     this._TipoIdentificacionService.select().subscribe(
       response => {
@@ -189,16 +189,16 @@ export class NewComponent implements OnInit {
   enviarTramite() {
     let token = this._loginService.getToken();
 
-    this.rnaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
-    this.rnaTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
-    this.rnaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
-    this.rnaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
-    this.rnaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
-    this.rnaTramiteInscripcionLimitacion.causalLimitacionId = this.causalLimitacionSelected;
-    this.rnaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
-    this.rnaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
+    this.vhloRnaTramiteInscripcionLimitacion.departamentoId = this.departamentoSelected;
+    this.vhloRnaTramiteInscripcionLimitacion.entidadJudicialId = this.entidadJudicialSelected;
+    this.vhloRnaTramiteInscripcionLimitacion.limitacionId = this.limitacionSelected;
+    this.vhloRnaTramiteInscripcionLimitacion.municipioId = this.municipioSelected;
+    this.vhloRnaTramiteInscripcionLimitacion.tipoProcesoId = this.tipoProcesoSelected;
+    this.vhloRnaTramiteInscripcionLimitacion.causalLimitacionId = this.causalLimitacionSelected;
+    this.vhloRnaTramiteInscripcionLimitacion.ciudadanoDemandadoId = this.ciudadanoDemandado.id;
+    this.vhloRnaTramiteInscripcionLimitacion.ciudadanoDemandanteId = this.ciudadanoDemandante.id;
     let data =[
-      {'datosLimitacion': this.rnaTramiteInscripcionLimitacion},
+      {'datosLimitacion': this.vhloRnaTramiteInscripcionLimitacion},
 
       {'vehiculosLimitacionArray': this.datos2}
     ]
@@ -218,7 +218,7 @@ export class NewComponent implements OnInit {
           
           swal({
             title: 'Error!',
-            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.rnaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
+            text: 'La limitacion a la propiedad ' + this.vehiculo.placa.numero + ', con la fecha: ' + this.vhloRnaTramiteInscripcionLimitacion.fechaExpedicion + ', expedido por la entidad judicial: ' + eJudicial+' ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

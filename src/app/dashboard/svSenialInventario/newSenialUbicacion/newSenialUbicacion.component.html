@@ -39,7 +39,7 @@
                 <div class="row" *ngIf="!demarcacion"><!-- .row -->
                     <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial == 1">
                         <label>Linea</label>
-                        <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea">
+                        <ng-select (ngModelChange)="onChangedLinea()" [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea">
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-4">
@@ -160,18 +160,18 @@
                 <div class="row" *ngIf="!demarcacion && datos.idTipoSenial != 1"><!-- .row -->
                     <div class="col-md-12 col-sm-12">
                         <label>Georeferenciación</label>
-                        <!--
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="address" placeholder="Dirección a buscar: Pasto, Nariño.." />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchGeo()" class="btn btn-default btn-primary" type="button">
-                                        <i class="fa fa-map-marker"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        -->
+                        
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="address" placeholder="Dirección a buscar: Pasto, Nariño.." name="address" />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchGeo()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    
                         <div align="center" *ngIf="!demarcacion">
-                            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [usePanning] = "true" (mapClick)="mapClicked($event)" (mapReady)="mapReady($event)">
+                            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [usePanning] = "true" (mapClick)="mapClicked($event)" (mapReady)="mapLoad($event)">
                             
                                 <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.lat" [longitude]="marker.lng" (markerRightClick)="onRightClick(i)" (markerClick)="clickedMarker(marker.label, i)"
                                      [label]="marker.label" [markerDraggable]="marker.draggable" (dragEnd)="markerDragEnd(marker, $event)">                            

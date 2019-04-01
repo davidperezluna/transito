@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
 import { VehiculoService } from '../../services/vehiculo.service';
-import { RnaTramiteLevantamientoLimitacion } from './rnaTramiteLevantamientoLimitacion.modelo';
+import { VhloRnaTramiteLevantamientoLimitacion } from './vhloRnaTramiteLevantamientoLimitacion.modelo';
 import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
 
 import { LoginService } from '../../services/login.service';
@@ -11,10 +11,10 @@ declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnaTramiteLevantamientoLimitacion.component.html'
+  templateUrl: './vhloRnaTramiteLevantamientoLimitacion.component.html'
 })
-export class RnaTramiteLevantamientoLimitacionComponent implements OnInit {
-  public rnaTramiteLevantamientoLimitacion: RnaTramiteLevantamientoLimitacion;
+export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
+  public rnaTramiteLevantamientoLimitacion: VhloRnaTramiteLevantamientoLimitacion;
   public TramiteLimitacionService:any;
   public errorMessage;
   public respuesta;

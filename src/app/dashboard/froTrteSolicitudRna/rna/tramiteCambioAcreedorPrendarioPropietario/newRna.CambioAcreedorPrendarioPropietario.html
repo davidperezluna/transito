@@ -61,15 +61,15 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td *ngIf="acreedor.propietaro.ciudadano">
-                                                <b>Identificación:</b> {{ acreedor.propietaro.ciudadano.identificacion }}
+                                            <td *ngIf="propietarioOld.ciudadano">
+                                                <b>Identificación:</b> {{ propietarioOld.ciudadano.identificacion }}
                                                 <br>
-                                                <b>Nombre:</b> {{ acreedor.propietaro.ciudadano.primerNombre }} {{ acreedor.propietaro.ciudadano.primerApellido }}
+                                                <b>Nombre:</b> {{ propietarioOld.ciudadano.primerNombre }} {{ propietarioOld.ciudadano.primerApellido }}
                                             </td>
-                                            <td *ngIf="acreedor.propietario.empresa">
-                                                <b>NIT:</b> {{ acreedor.propietaro.empresa.nit }}
+                                            <td *ngIf="propietarioOld.empresa">
+                                                <b>NIT:</b> {{ propietarioOld.empresa.nit }}
                                                 <br>
-                                                <b>Nombre:</b> {{ acreedor.propietaro.empresa.nombre }}
+                                                <b>Nombre:</b> {{ propietarioOld.empresa.nombre }}
                                             </td>
                                             <td>
                                                 <b>Tipo alerta:</b> {{ acreedor.tipoAlerta.nombre }}

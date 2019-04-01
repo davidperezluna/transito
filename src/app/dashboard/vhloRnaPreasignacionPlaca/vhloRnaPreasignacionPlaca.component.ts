@@ -89,7 +89,7 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
     let token = this._LoginService.getToken();
     
     if (e) {
-      this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': this.datos.idOrganismoTransito },token).subscribe(
+      this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': e },token).subscribe(
         response => {
           this.placas = response;
         }, 

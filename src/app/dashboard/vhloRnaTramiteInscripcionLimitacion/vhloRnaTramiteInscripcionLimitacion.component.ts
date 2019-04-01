@@ -1,19 +1,18 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
 import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
-import { RnaTramiteInscripcionLimitacion } from './rnaTramiteInscripcionLimitacion.modelo';
-import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
-
+import { VhloRnaTramiteInscripcionLimitacion } from './vhloRnaTramiteInscripcionLimitacion.modelo';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './rnaTramiteInscripcionLimitacion.component.html'
+  templateUrl: './vhloRnaTramiteInscripcionLimitacion.component.html'
 })
-export class RnaTramiteInscripcionLimitacionComponent implements OnInit {
-  public rnaTramiteInscripcionLimitacion: RnaTramiteInscripcionLimitacion;
+export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
+  public rnaTramiteInscripcionLimitacion: VhloRnaTramiteInscripcionLimitacion;
   public TramiteLimitacionService:any;
   public errorMessage;
   public respuesta;
@@ -26,7 +25,7 @@ export class RnaTramiteInscripcionLimitacionComponent implements OnInit {
 
   constructor(
     private _VehiculoLimitacionService: VehiculoLimitacionService,
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -111,7 +110,7 @@ export class RnaTramiteInscripcionLimitacionComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         this._VehiculoLimitacionService.deleteVehiculoLimitacion(token, id).subscribe(
           response => {
             swal({

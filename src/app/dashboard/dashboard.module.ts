@@ -163,6 +163,8 @@ import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module'
 import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
+import { VhloRnaTramiteInscripcionLimitacionModule } from './vhloRnaTramiteInscripcionLimitacion/vhloRnaTramiteInscripcionLimitacion.module';
+import { VhloRnaTramiteLevantamientoLimitacionModule } from './vhloRnaTramiteLevantamientoLimitacion/vhloRnaTramiteLevantamientoLimitacion.module';
 
 import { FacturaModule } from './factura/factura.module';
 import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
@@ -172,8 +174,6 @@ import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcion
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
 import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
 import { RnrsTramiteLevantamientoLimitacionModule } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.module';
-import { RnaTramiteInscripcionLimitacionModule } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.module';
-import { RnaTramiteLevantamientoLimitacionModule } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.module';
 import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
 
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
@@ -421,6 +421,8 @@ import {RightsidebarComponent} from '../shared';
     VhloPlacaSedeModule,
     VhloCfgPlacaModule,
     VhloRnaPreasignacionPlacaModule,
+    VhloRnaTramiteInscripcionLimitacionModule,
+    VhloRnaTramiteLevantamientoLimitacionModule,
     VehiculoTecnoMecanicaModule,
     SoatModule,
     CfgComparendoEstadoModule,
@@ -453,8 +455,6 @@ import {RightsidebarComponent} from '../shared';
     RnmaTramiteLevantamientoLimitacionModule,
     RnrsTramiteInscripcionLimitacionModule,
     RnrsTramiteLevantamientoLimitacionModule,
-    RnaTramiteInscripcionLimitacionModule,
-    RnaTramiteLevantamientoLimitacionModule,
     MsvRegistroIpatModule,
     CfgValorVehiculoModule,
     RnrsPreregistroModule,

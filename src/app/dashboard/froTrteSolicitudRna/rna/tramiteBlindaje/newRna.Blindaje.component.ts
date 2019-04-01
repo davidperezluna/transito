@@ -161,10 +161,17 @@ export class NewRnaBlindajeComponent implements OnInit {
               if (response.code == 200) {
                 this._VehiculoService.update(this.datos, token).subscribe(
                     response => {
-                        if (response.status == 'success') {
+                        if (response.code == 200) {
                             let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
         
                             this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                        }else{
+                            swal({
+                                title: 'Error!',
+                                text: response.message,
+                                type: 'error',
+                                confirmButtonText: 'Aceptar'
+                            });
                         }
                         error => {
                             this.errorMessage = <any>error;
