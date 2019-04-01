@@ -15,7 +15,6 @@ import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module'
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
 
 import { HomeModule } from './home/home.module';
-import { VehiculoModule } from './vehiculo/vehiculo.module';
 import { VhloCfgMarcaModule } from './vhloCfgMarca/vhloCfgMarca.module';
 import { VhloCfgLineaModule } from './vhloCfgLinea/vhloCfgLinea.module';
 import { BancoModule } from './banco/banco.module';
@@ -24,8 +23,6 @@ import { VhloCfgColorModule } from './vhloCfgColor/vhloCfgColor.module';
 import { ConpetoParametroModule } from './conceptoParametro/conceptoParametro.module';
 import { VhloCfgCombustibleModule } from './vhloCfgCombustible/vhloCfgCombustible.module';
 import { ConsumibleModule } from './consumible/consumible.module';
-import { ModalidadModule } from './modalidad/modalidad.module';
-import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
 import { VhloCfgServicioModule } from './vhloCfgServicio/vhloCfgServicio.module';
 import { TramiteModule } from './tramite/tramite.module'; 
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
@@ -186,7 +183,6 @@ import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
-import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
 import { TramiteSolicitudRpcccModule } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
@@ -279,16 +275,13 @@ import {RightsidebarComponent} from '../shared';
     UserUsuarioMenuModule,
     UserLicenciaConduccionModule,
     HomeModule,
-    VehiculoModule,
     VhloCfgMarcaModule,
     VhloCfgLineaModule,
     BancoModule,
     VhloCfgClaseModule,
     VhloCfgColorModule,
-    ModalidadModule,
     VhloCfgCombustibleModule,
     ConsumibleModule,
-    OrganismoTransitoModule,
     VhloCfgServicioModule,
     TramiteModule,
     CfgPaisModule,
@@ -299,8 +292,8 @@ import {RightsidebarComponent} from '../shared';
     CfgAuditoriaModule,
     CfgSmlmvModule,
     cfgFestivoModule,
-    UserLcCfgCategoriaModule,
     CfgTipoClaseModule,
+    UserLcCfgCategoriaModule,
     RncLicenciaConduccionModule,
     SvCapacitacionModule,
     SvCfgFuncionModule,
@@ -430,7 +423,6 @@ import {RightsidebarComponent} from '../shared';
     FacturaModule,
     TramiteFacturaModule,
     TramiteSolicitudModule,
-    TramiteSolicitudRncModule,
     TramiteSolicitudRpcccModule,
     TramiteSolicitudRnmaModule,
     TramiteSolicitudRnrsModule,

@@ -11,7 +11,7 @@ import {VhloCfgLineaService} from '../../../../services/vhloCfgLinea.service';
 import {VhloCfgCarroceriaService} from '../../../../services/vhloCfgCarroceria.service';
 import {VhloCfgCombustibleService} from '../../../../services/vhloCfgCombustible.service';
 
-import {Vehiculo} from '../../../vehiculo/vehiculo.modelo';
+import {VhloVehiculo} from '../../../vhlovehiculo/vhloVehiculo.modelo';
 
 import swal from 'sweetalert2';
 import { Factura } from '../../../factura/factura.modelo';

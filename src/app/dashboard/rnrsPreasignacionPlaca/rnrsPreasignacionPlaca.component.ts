@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import {VhloCfgColorService} from '../../services/vhloCfgColor.service';
 import {LoginService} from '../../services/login.service';
-import {Vehiculo} from '../vehiculo/vehiculo.modelo';
+import { VhloVehiculo } from '../vhlovehiculo/vhloVehiculo.modelo';
 import {VehiculoService} from '../../services/vehiculo.service';
 import {CiudadanoVehiculoService} from '../../services/ciudadanoVehiculo.service';
 import {VhloCfgPlacaService} from '../../services/vhloCfgPlaca.service';
@@ -15,7 +15,7 @@ declare var $: any;
 })
 export class RnrsPreasignacionPlacaComponent implements OnInit {
   public errorMessage;
-  public vehiculo: Vehiculo;
+  public vehiculo: VhloVehiculo;
   public vehicul: any;
 	public id;
 	public respuesta;

@@ -61,7 +61,7 @@
                                 <b>Estado:</b> {{ inventario.estado.nombre }}
                             </td>
                             <td>
-                                <button *ngIf="inventario.geolocalizacion" (click)='onLocation(inventario)' (ready)="ready($event)" class="btn btn-primary" type="button">
+                                <button *ngIf="inventario.geolocalizacion" (click)='onLocation(inventario)' class="btn btn-primary" type="button">
                                     <i class="fa fa-map-marker"></i>
                                 </button>
                             </td>

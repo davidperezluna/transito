@@ -41,13 +41,13 @@ export class NewSenialUbicacionComponent implements OnInit {
 
     public senial: any = null;
     public municipio: any = null;
-    public address: any = null;
     public fileSelected: any = null;
-
+    
     public formEdit = false;
     public formIndex = true;
     public senialUbicacion: SvSenialUbicacion;
     
+    public address: any = null;
     public zoom: number = 15;
     public lat: number = 1.2246233;
     public lng: number = -77.2808208;
@@ -83,7 +83,15 @@ export class NewSenialUbicacionComponent implements OnInit {
         this.senialUbicacion = new SvSenialUbicacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    ngOnInit() {       
+    ngOnInit() {
+        swal({
+            title: 'Cargando formulario!',
+            text: 'Solo tardará unos segundos, por favor espere.',
+            onOpen: () => {
+                swal.showLoading();
+            }
+        });
+
         this._EstadoService.select().subscribe(
             response => {
                 this.estados = response;
@@ -103,20 +111,6 @@ export class NewSenialUbicacionComponent implements OnInit {
         this._SenialService.selectByTipo({ 'idTipoSenial': this.datos.idTipoSenial }, token).subscribe(
             response => {
                 this.seniales = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
-
-        this._MunicipioService.show({ 'id': this.datos.idMunicipio }, token).subscribe(
-            response => {
-                this.municipio = response.data; 
             },
             error => {
                 this.errorMessage = <any>error;
@@ -148,6 +142,42 @@ export class NewSenialUbicacionComponent implements OnInit {
             response => {
                 if (response) {
                     this.unidadesMedida = response;
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+                if (this.errorMessage != null) {
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
+        );
+
+        this._MunicipioService.show({ 'id': this.datos.idMunicipio }, token).subscribe(
+            response => {
+                if(response.code == 200){
+                    this.municipio = response.data;
+
+                    if (this.datos.idTipoSenial != 1) {
+                        this.address = this.municipio.nombre + ", Nariño";
+
+                        let timeoutId = setTimeout(() => {
+                            this.onSearchGeo();
+                        }, 1000);
+                    }
+
+                    swal.close();
+
+                }else{
+                    this.municipio = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: 'No tiene proveedores registrados',
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             },
             error => {
@@ -388,10 +418,8 @@ export class NewSenialUbicacionComponent implements OnInit {
     mapClicked($event: MouseEvent) {
         if (this.senialUbicacion.cantidad > 0) {
             var address;
-
-            address = this.getAddressLocation($event, (error, result) => (error) ? console.error(error) : console.log(result));
-            
             if (this.markers.length < this.senialUbicacion.cantidad) {
+                address = this.getAddressLocation($event, (error, result) => (error) ? console.error(error) : console.log(result));
                 this.markers.push({
                     lat: $event.coords.lat,
                     lng: $event.coords.lng,
@@ -413,42 +441,26 @@ export class NewSenialUbicacionComponent implements OnInit {
         console.log('dragEnd', m, $event);
     }
 
-    onSetPosition(position) {
-        console.log(position);
-        this.lat = Number(1.5546233);
-        this.lng = Number(-75.2808208);
-        this.map.setCenter(position);
-
-        this.geocoder = null;
-    }
-
     onSearchGeo() {
-        this._SvSenialUbicacionService.getLatLng(this.address).subscribe(
-            result => {
-                this.__zone.run(() => {
-                    this.lat = result.lat();
-                    this.lng = result.lng();
-                })
-            },
-            error => console.log(error),
-            () => console.log('Geocoding completed!')
-        );
-
-        /*if (!this.geocoder) {
-            this.initGeocoder();
+        if (this.address) {
+            this._SvSenialUbicacionService.getLatLng(this.address).subscribe(
+                result => {
+                    this.__zone.run(() => {    
+                        this.lat = result.lat();
+                        this.lng = result.lng();
+                    });
+                },
+                error => console.log(error),
+                () => console.log('Geocoding completed!')
+            );
         }else{
-            this.LatLng = this.geocoder.geocode({ 'address': this.address }, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {                                      
-                    return results[0].geometry.location;
-                }else{
-                    return null;
-                }
+            swal({
+                title: 'Error!',
+                text: 'La ubicación no ha sido diligenciada.',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
             });
-
-            if (this.LatLng) {
-                this.onSetPosition(this.LatLng);
-            }
-        }*/
+        }
     }
 
     onEnviar() {

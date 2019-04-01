@@ -17,8 +17,8 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   public vehiculo:any = null; 
   public formSearch = true; 
 
-  public organismosTransito:any;
-  public placas:any;
+  public organismosTransito:any = null;
+  public placas:any = null;
 
   public datos = {
     'idVehiculo': null,
@@ -64,6 +64,8 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;  
+
+          swal.close();
         } else {
           this.vehiculo = null;
 

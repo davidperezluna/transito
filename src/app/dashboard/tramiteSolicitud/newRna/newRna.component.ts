@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitud } from '../tramiteSolicitud.modelo';
-import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
+import { VhloVehiculo } from '../../vhlovehiculo/vhloVehiculo.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
-import { VehiculoService } from '../../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import swal from 'sweetalert2';
 
 
@@ -18,7 +18,7 @@ import swal from 'sweetalert2';
 export class NewRnaComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public tramiteSolicitud: TramiteSolicitud;
-  public vehiculo: Vehiculo;
+  public vehiculo: VhloVehiculo;
   public errorMessage;
   public tramitesFactura: any = null;
   public tramiteFacturaSelected: any;
@@ -57,11 +57,11 @@ export class NewRnaComponent implements OnInit {
     private _facturaService: FacturaService,
     private _ciudadanoVehiculoService: CiudadanoVehiculoService,
     private _CiudadanoService: UserCiudadanoService,
-    private _VehiculoService: VehiculoService,
+    private _VehiculoService: VhloVehiculoService,
   ) { }
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.vehiculo = new VhloVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null, null);
     /* swal({
       title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',
@@ -222,7 +222,7 @@ export class NewRnaComponent implements OnInit {
 
     let token = this._loginService.getToken();
 
-    this._VehiculoService.showVehiculoRna(this.tramiteSolicitud.vehiculoId, token).subscribe(
+    this._VehiculoService.show(this.tramiteSolicitud.vehiculoId, token).subscribe(
       response => {
         console.log(response);
         if (response.status == 'success') {

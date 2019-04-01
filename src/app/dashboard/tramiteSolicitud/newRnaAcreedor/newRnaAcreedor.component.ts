@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { Banco } from '../../banco/banco.modelo';
-import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
+import { VhloVehiculo } from '../../vhlovehiculo/vhloVehiculo.modelo';
 import { BancoService } from '../../../services/banco.service';
 import { LoginService } from '../../../services/login.service';
 import { VehiculoAcreedorService } from '../../../services/vehiculoAcreedor.service';
@@ -15,7 +15,7 @@ export class NewRnaAcreedorComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
 @Input() identificacion:any = null;
 @Input() tipoIdentificacion:any = null;
-@Input() vehiculo: Vehiculo = null;
+@Input() vehiculo: VhloVehiculo = null;
 @Input() nombreAcreedor: any = null;
 
 public banco: Banco;

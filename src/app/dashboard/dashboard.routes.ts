@@ -109,9 +109,6 @@ import { PnalFuncionarioRoutes } from './pnalFuncionario/pnalFuncionario.routes'
 
 import { BancoRoutes } from './banco/banco.routes';
 import { ConsumibleRoutes } from './consumible/consumible.routes';
-import { VehiculoRoutes } from './vehiculo/vehiculo.routes';
-import { ModalidadRoutes } from './modalidad/modalidad.routes';
-import { OrganismoTransitoRoutes } from './organismoTransito/organismoTransito.routes';
 import { VehiculoTecnoMecanicaRoutes } from './vehiculoTecnoMecanica/vehiculoTecnoMecanica.routes';
 import { SoatRoutes } from './soat/soat.routes';
 import { ComparendoRoutes } from './comparendo/comparendo.routes';
@@ -131,7 +128,6 @@ import { FacturaRoutes } from './factura/factura.routes';
 import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
 import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
-import { TramiteSolicitudRncRoutes } from './tramiteSolicitudRnc/tramiteSolicitudRnc.routes';
 import { TramiteSolicitudRpcccRoutes } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.routes';
 import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
 import { TramiteSolicitudRnrsRoutes } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.routes';
@@ -264,7 +260,6 @@ export const DashboardRoutes: Route[] = [
       ...UserUsuarioMenuRoutes,
       ...UserLicenciaConduccionRoutes,
       ...HomeRoutes,
-      ...VehiculoRoutes,
       ...BancoRoutes,
       ...VhloBuscarRoutes,
       ...VhloVehiculoRoutes,
@@ -297,8 +292,6 @@ export const DashboardRoutes: Route[] = [
       ...VhloRnaTramiteInscripcionLimitacionRoutes,
       ...VhloRnaTramiteLevantamientoLimitacionRoutes,
       ...ConsumibleRoutes,
-      ...ModalidadRoutes,
-      ...OrganismoTransitoRoutes,
       ...CfgPaisRoutes,
       ...CfgDepartamentoRoutes,
       ...CfgMunicipioRoutes,
@@ -415,7 +408,6 @@ export const DashboardRoutes: Route[] = [
       ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,
       ...TramiteSolicitudRoutes,
-      ...TramiteSolicitudRncRoutes,
       ...TramiteSolicitudRpcccRoutes,
       ...TramiteSolicitudRnmaRoutes,
       ...TramiteSolicitudRnrsRoutes,

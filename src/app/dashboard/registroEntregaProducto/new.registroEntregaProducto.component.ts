@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Router } from "@angular/router";
-import { VehiculoService } from '../../services/vehiculo.service';
+import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { LoginService } from '../../services/login.service';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { Vehiculo } from '../vehiculo/vehiculo.modelo';
+import { VhloVehiculo } from '../vhlovehiculo/vhloVehiculo.modelo';
 import swal from 'sweetalert2';
 import { log } from 'util';
 
@@ -37,19 +37,19 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
     constructor(
         private router: Router,
         private _loginService: LoginService,
-        private _VehiculoService: VehiculoService,
+        private _VehiculoService: VhloVehiculoService,
         private _TramiteSolicitudService: TramiteSolicitudService,
     ) { }
 
     ngOnInit() {
-        this.vehiculo = new Vehiculo(null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);    
+        this.vehiculo = new VhloVehiculo(null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);    
 
     }
 
-    buscarVehiculo() {
+    onSearchVehiculo() {
         let token = this._loginService.getToken();
         this.showV = false;
-        this._VehiculoService.showVehiculoParametro(token, this.datos).subscribe(
+        this._VehiculoService.searchByFilter(token, this.datos).subscribe(
             response => {
                 if (response.status == 'error') {
                     if (response.code == 401) {
@@ -80,10 +80,11 @@ export class NewRegistroEntregaProductoComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-            });
+            }
+        );
     }
 
-    onCancelar() {
+    onCancelar(e) {
     }
 
     showVehiculo(vehiculo:any){
