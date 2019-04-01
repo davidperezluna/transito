@@ -42,14 +42,14 @@
                         <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea">
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Cantidad <small *ngIf="datos.idTipoSenial == 1">(Galones)</small> <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
-                    </div>
                     <div class="col-xs-12 col-lg-8" *ngIf="bodegas">
                         <label>Proveedor <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
                         </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Cantidad <small *ngIf="datos.idTipoSenial == 1">(Galones)</small> <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
                     </div>
                 </div>
                 <div class="row" *ngIf="demarcacion"><!-- .row -->

@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { VhloCfgPlacaService } from '../../services/vhloCfgPlaca.service';
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { CfgOrganismoTransitoService } from '../../services/cfgOrganismoTransito.service';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
@@ -14,10 +15,16 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   public errorMessage;
 
   public vehiculoFiltro:any; 
-  public vehiculo:any = null; 
+  public vehiculos:any = null;
+  public vehiculo:any = null;
   public formSearch = true; 
+  public formIndex = true; 
+  public formShow = true; 
+  public table: any; 
 
   public organismosTransito:any = null;
+  public organismoTransito:any = null;
+  public funcionario:any = null;
   public placas:any = null;
 
   public datos = {
@@ -30,21 +37,54 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
     private _VehiculoService: VhloVehiculoService,
     private _PlacaService: VhloCfgPlacaService,
     private _OrganismoTransitoService: CfgOrganismoTransitoService,
+    private _FuncionarioService: PnalFuncionarioService,
     private _LoginService: LoginService,
     ){}
     
-  ngOnInit() { 
-    this._OrganismoTransitoService.selectSedes().subscribe(
-      response => {
-        this.organismosTransito = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
+  ngOnInit() {
+    let token = this._LoginService.getToken();
 
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
+    let identity = this._LoginService.getIdentity();
+
+    this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+        response => {
+          if (response.code == 200) {
+              this.funcionario = response.data;
+              this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
+              
+              console.log(this.datos);
+              
+              this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': this.funcionario.organismoTransito.id }, token).subscribe(
+                response => {
+                  this.placas = response;
+                }, 
+                error => {
+                  this.errorMessage = <any>error;
+          
+                  if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                  }
+                }
+              );
+            } else {
+              this.funcionario = null;
+              this.datos.idOrganismoTransito = null;
+
+              swal({
+                  title: 'Error!',
+                  text: 'Usted no tiene permisos para realizar la preasigcón de placa',
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+              });
+          }
+          error => {
+              this.errorMessage = <any>error;
+              if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert('Error en la petición');
+              }
+          }
       }
     );
   }
@@ -63,11 +103,17 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
     this._VehiculoService.searchByFilter({ 'filtro': this.vehiculoFiltro }, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.vehiculo = response.data;  
+          this.vehiculos = response.data; 
+          this.formIndex = true; 
+          this.formShow = false; 
+
+          let timeoutId = setTimeout(() => {  
+            this.iniciarTabla();
+          }, 100);
 
           swal.close();
         } else {
-          this.vehiculo = null;
+          this.vehiculos = null;
 
           swal({
             title: 'Atención!',
@@ -87,24 +133,26 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
     );
   }
 
-  onChangedOrganismoTransito(e){
-    let token = this._LoginService.getToken();
-    
-    if (e) {
-      this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': e },token).subscribe(
-        response => {
-          this.placas = response;
-        }, 
-        error => {
-          this.errorMessage = <any>error;
-  
-          if(this.errorMessage != null){
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
+  iniciarTabla(){
+    this.table = $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<i class="fa fa-step-backward"></i>',
+          sPrevious: '<i class="fa fa-chevron-left"></i>',
+          sNext: '<i class="fa fa-chevron-right"></i>',
+          sLast: '<i class="fa fa-step-forward"></i>'
         }
-      );
-    }
+      }
+    });
+  }
+
+  onShow(vehiculo:any){
+    this.vehiculo = vehiculo;
+    this.formIndex = false;
+    this.formShow = true;
   }
 
   onEnviar(){
