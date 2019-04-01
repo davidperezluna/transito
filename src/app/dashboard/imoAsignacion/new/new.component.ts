@@ -98,49 +98,9 @@ constructor(
   onCancelar(){
     this.ready.emit(true);
   }
-  onEnviar(){
-    let token = this._loginService.getToken();
-    this.rnaAsignacionInsumos.loteInsumoId = this.loteInsumo.id;
-    
-    if (!this.frmInsumo) {
-      this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelected;
-      this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
-    }else{
-      this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelectedInsumo;
-      this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelectedInsumo;
-      this.rnaAsignacionInsumos.numero = this.numero;
-    }
-    
-		this._ImoInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
-			response => {
-        this.respuesta = response;
-        if(this.respuesta.status == 'success'){
-          this.ready.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        }else{
-          swal({
-            title: 'Error!',
-            text: 'El codigo ya se encuentra registrado',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-			error => {
-					this.errorMessage = <any>error;
 
-					if(this.errorMessage != null){
-						console.log(this.errorMessage);
-						alert("Error en la petición");
-					}
-				}
+ 
 
-		}); 
-  }
   isFin() {
    this.rnaAsignacionInsumos.numero = parseInt(this.rnaAsignacionInsumos.rangoFin) - parseInt(this.rnaAsignacionInsumos.rangoInicio)+1;
   }
@@ -260,6 +220,7 @@ constructor(
         {
           'idLote':lote.id,
           'tipo':lote.tipoInsumo.nombre,
+          'idTipo':lote.tipoInsumo.id,
           'cantidad':lote.cantidad,
         }   
     );
@@ -271,6 +232,7 @@ constructor(
           {
             'idLote':this.loteInsumo.id,
             'tipo':this.loteInsumo.tipoInsumo.nombre,
+            'idTipo':this.loteInsumo.tipoInsumo.id,
             'cantidad':this.loteInsumo.cantidad,
           }   
       );
@@ -283,54 +245,54 @@ constructor(
   }
 
 
-  // onAsignarLote(lote){
-  //   swal({
-  //     title: '¿Confirmar?',
-  //     text: "¿Desea asignar los sustratos?",
-  //     type: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#15d4be',
-  //     cancelButtonColor: '#ff6262',
-  //     confirmButtonText: 'Confirmar',
-  //     cancelButtonText: 'Cancelar'
-  //   }).then((result) => {
-  //     if (result.value) {
-  //       let token = this._loginService.getToken();
-  //       this.rnaAsignacionInsumos.loteInsumoId = lote.id;
-  //       this.rnaAsignacionInsumos.casoInsumoId = this.insumoSelected;
-  //       this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
-  //       this.rnaAsignacionInsumos.rangoInicio = lote.rangoInicio;
-  //       this.rnaAsignacionInsumos.rangoFin = lote.rangoFin;
-  //       this.rnaAsignacionInsumos.numero = lote.cantidad;
-  //       this._ImoInsumoService.register(this.rnaAsignacionInsumos,token).subscribe(
-  //         response => {
-  //           this.respuesta = response;
-  //           if(this.respuesta.status == 'success'){
-  //             this.ready.emit(true);
-  //             swal({
-  //               title: 'Perfecto!',
-  //               text: 'Registro exitoso!',
-  //               type: 'success',
-  //               confirmButtonText: 'Aceptar'
-  //             })
-  //           }else{
-  //             swal({
-  //               title: 'Error!',
-  //               text: 'El codigo ya se encuentra registrado',
-  //               type: 'error',
-  //               confirmButtonText: 'Aceptar'
-  //             })
-  //           }
-  //         error => {
-  //             this.errorMessage = <any>error;
-  //             if(this.errorMessage != null){
-  //               console.log(this.errorMessage);
-  //               alert("Error en la petición");
-  //             }
-  //           }
-  //       }); 
-  //     }
-  //   })   
-  // }
+  onEnviarArray(lote){
+    swal({
+      title: '¿Confirmar?',
+      text: "¿Desea asignar los sustratos?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      swal.close();
+      if (result.value) {
+        let token = this._loginService.getToken();
+        this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
+        let datos={
+          'asignacionInsumos' : this.rnaAsignacionInsumos,
+          'array': this.lotesSelecionados
+        };
+        this._ImoInsumoService.register(datos,token).subscribe(
+          response => {
+            this.respuesta = response;
+            if(this.respuesta.status == 'success'){
+              this.ready.emit(true);
+              swal({
+                title: 'Perfecto!',
+                text: 'Registro exitoso!',
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              })
+            }else{
+              swal({
+                title: 'Error!',
+                text: 'El codigo ya se encuentra registrado',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              })
+            }
+          error => {
+              this.errorMessage = <any>error;
+              if(this.errorMessage != null){
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
+        }); 
+      }
+    })   
+  }
 
 }
