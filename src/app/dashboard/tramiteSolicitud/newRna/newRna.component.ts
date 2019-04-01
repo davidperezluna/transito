@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TramiteSolicitud } from '../tramiteSolicitud.modelo';
-import { VhloVehiculo } from '../../vhlovehiculo/vhloVehiculo.modelo';
+import { VhloVehiculo } from '../../vhloVehiculo/vhloVehiculo.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
