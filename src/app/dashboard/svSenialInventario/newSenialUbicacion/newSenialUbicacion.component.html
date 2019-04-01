@@ -38,6 +38,11 @@
                 </div>
                 <div class="row" *ngIf="!demarcacion"><!-- .row -->
                     <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial == 1">
+                        <label>Señal <strong class="text-danger">*</strong></label>
+                        <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial == 1">
                         <label>Linea</label>
                         <ng-select (ngModelChange)="onChangedLinea()" [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea">
                         </ng-select>
