@@ -1,7 +1,7 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import {VhloCfgColorService} from '../../services/vhloCfgColor.service';
 import {LoginService} from '../../services/login.service';
-import { VhloVehiculo } from '../vhlovehiculo/vhloVehiculo.modelo';
+import { VhloVehiculo } from '../vhloVehiculo/vhloVehiculo.modelo';
 import {VehiculoService} from '../../services/vehiculo.service';
 import {CiudadanoVehiculoService} from '../../services/ciudadanoVehiculo.service';
 import {VhloCfgPlacaService} from '../../services/vhloCfgPlaca.service';

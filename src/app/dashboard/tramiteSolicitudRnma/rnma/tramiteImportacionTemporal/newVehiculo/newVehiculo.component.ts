@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { VhloVehiculo } from '../../../../vhlovehiculo/vhloVehiculo.modelo';
+import { VhloVehiculo } from '../../../../vhloVehiculo/vhloVehiculo.modelo';
 import { LoginService } from '../../../../../services/login.service';
 import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';

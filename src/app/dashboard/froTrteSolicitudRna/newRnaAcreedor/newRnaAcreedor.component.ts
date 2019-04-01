@@ -1,6 +1,6 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { Banco } from '../../banco/banco.modelo';
-import { VhloVehiculo } from '../../vhlovehiculo/vhloVehiculo.modelo';
+import { VhloVehiculo } from '../../vhloVehiculo/vhloVehiculo.modelo';
 import { BancoService } from '../../../services/banco.service';
 import { LoginService } from '../../../services/login.service';
 import { VehiculoAcreedorService } from '../../../services/vehiculoAcreedor.service';
