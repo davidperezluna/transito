@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 import { LoginService } from '../../services/login.service';
 import { TramiteSolicitudService } from '../../services/tramiteSolicitud.service';
-import { VhloVehiculo } from '../vhlovehiculo/vhloVehiculo.modelo';
+import { VhloVehiculo } from '../vhloVehiculo/vhloVehiculo.modelo';
 import swal from 'sweetalert2';
 import { log } from 'util';
 
