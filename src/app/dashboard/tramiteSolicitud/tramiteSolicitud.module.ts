@@ -26,7 +26,6 @@ import { NewRnaCambioSedeOperativaComponent } from './rna/tramiteCambioSedeOpera
 import { NewRnaCancelacionMatriculaComponent } from './rna/tramiteCancelacionMatricula/newRna.cancelacionMatricula.component';
 import { NewRnaCertificadoTradicionComponent } from './rna/tramiteCertificadoTradicion/newRna.certificadoTradicion.component';
 import { NewRnaBlindajeComponent } from './rna/tramiteBlindaje/newRna.blindaje.component';
-import { NewRnaPreregistroComponent } from './rna/tramitePreregistro/newRna.preregistro.component';
 import { NewRnaCiudadanoComponent } from './newRnaCiudadano/newRnaCiudadano.component';
 import { NewRnaAcreedorComponent } from './newRnaAcreedor/newRnaAcreedor.component';
 import { NewRnaInsumoComponent } from './newRnaSustrato/newRnaSustrato.component';
