@@ -268,6 +268,8 @@ constructor(
           response => {
             this.respuesta = response;
             if(this.respuesta.status == 'success'){
+              this.lotesSelecionados = null;
+              this.lotes = null;
               this.ready.emit(true);
               swal({
                 title: 'Perfecto!',
