@@ -62,7 +62,7 @@ export class MsvEvaluacionComponent implements OnInit {
   }
 
 
-  public showT = false;
+  /* public showT = false; */
   public msvParametros;
   public msvVariables;
   public msvVariablesLength;
@@ -421,7 +421,7 @@ export class MsvEvaluacionComponent implements OnInit {
                   if (this.datosValorAgregado.parametros != null && this.categoriaSelected == 6) {
                     this.msvParametros = this.datosValorAgregado.parametros;
                   }
-                  if (this.msvParametros) {
+                  /* if (this.msvParametros) {
                     //entra aquí si encuentra Parametro                    
                     this.showT = true;
                   } else {
@@ -430,7 +430,7 @@ export class MsvEvaluacionComponent implements OnInit {
                       title: 'Oops...',
                       text: '¡La categoria no tiene parametros!'
                     })
-                  }
+                  }*/
                 }
               );
             }
@@ -447,39 +447,6 @@ export class MsvEvaluacionComponent implements OnInit {
       );
     }
   }
-
-
-  //********************************************************************************* */
-  /* onEnviar() {
-    let token = this._loginService.getToken();
-    this._MsvCalificacionService.newCalificacion(token, this.msvParametros, this.miEmpresa.id).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.ready2.emit(true);
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-        } else {
-          swal({
-            title: 'Error!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );
-  } */
 
   onEnviar() {
     let token = this._loginService.getToken();
@@ -503,15 +470,14 @@ export class MsvEvaluacionComponent implements OnInit {
                 this.ready2.emit(true);
 
                 //para recargar lista
-                this._MsvCategoriaService.editEstadoCategoria(this.categoriaSelected, token). subscribe(
+                this._MsvCategoriaService.editEstadoCategoria({'id':this.categoriaSelected}, token). subscribe(
                   response => {
                     if (response.status == 'success') {
                       this._MsvCategoriaService.select().subscribe(
                         response => {
+                          this.msvCategorias = null;
                           this.msvCategorias = response;
-                          let timeoutId = setTimeout(() => {
-                            this.iniciarTabla();
-                          }, 100);
+                          console.log(this.msvCategorias);
                         },
                         error => {
                           this.errorMessage = <any>error;
@@ -557,6 +523,29 @@ export class MsvEvaluacionComponent implements OnInit {
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
+
+                //para recargar lista
+                this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
+                  response => {
+                    if (response.status == 'success') {
+                      this._MsvCategoriaService.select().subscribe(
+                        response => {
+                          this.msvCategorias = null;
+                          this.msvCategorias = response;
+                          console.log(this.msvCategorias);
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -588,6 +577,30 @@ export class MsvEvaluacionComponent implements OnInit {
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
+
+                //para recargar lista
+                this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
+                  response => {
+                    if (response.status == 'success') {
+                      this._MsvCategoriaService.select().subscribe(
+                        response => {
+                          this.msvCategorias = null;
+                          this.msvCategorias = response;
+                          console.log(this.msvCategorias);
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -619,6 +632,30 @@ export class MsvEvaluacionComponent implements OnInit {
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
+
+                //para recargar lista
+                this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
+                  response => {
+                    if (response.status == 'success') {
+                      this._MsvCategoriaService.select().subscribe(
+                        response => {
+                          this.msvCategorias =null;
+                          this.msvCategorias = response;
+                          console.log(this.msvCategorias);
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -650,6 +687,30 @@ export class MsvEvaluacionComponent implements OnInit {
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
+
+                //para recargar lista
+                this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
+                  response => {
+                    if (response.status == 'success') {
+                      this._MsvCategoriaService.select().subscribe(
+                        response => {
+                          this.msvCategorias = null;
+                          this.msvCategorias = response;
+                          console.log(this.msvCategorias);
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -681,6 +742,30 @@ export class MsvEvaluacionComponent implements OnInit {
             response => {
               if (response.status == 'success') {
                 this.ready2.emit(true);
+
+                //para recargar lista
+                this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
+                  response => {
+                    if (response.status == 'success') {
+                      this._MsvCategoriaService.select().subscribe(
+                        response => {
+                          this.msvCategorias = null;
+                          this.msvCategorias = response;
+                          console.log(this.msvCategorias);
+                        },
+                        error => {
+                          this.errorMessage = <any>error;
+
+                          if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+
                 swal({
                   title: 'Perfecto!',
                   text: response.message,
@@ -767,6 +852,7 @@ export class MsvEvaluacionComponent implements OnInit {
             if (response.status == 'success') {
               this.ready2.emit(true);
               this.evaluacion = response.data;
+              this.ngOnInit();
 
               swal({
                 title: 'Perfecto!',

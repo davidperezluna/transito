@@ -13,12 +13,13 @@ import { TimeComponent } from './time/time.component';
 import { ShowComponent } from './show/show.component';
 import { ProrrogaComponent } from './prorroga/prorroga.component';
 import { SuspensionComponent } from './suspension/suspension.component';
+import { DisabledComponent } from './disabled/disabled.component';
 import { SelectModule } from 'angular2-select';
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(), SelectModule],
-    declarations: [PnalFuncionarioComponent, NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent],
-    exports: [PnalFuncionarioComponent, NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent],
+    declarations: [PnalFuncionarioComponent, NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
+    exports: [PnalFuncionarioComponent, NewComponent, EditComponent, TimeComponent, ShowComponent, ProrrogaComponent, SuspensionComponent, DisabledComponent],
     providers: [PnalFuncionarioService, PnalHorarioService, PnalProrrogaService, PnalSuspensionService]     
 })
 
