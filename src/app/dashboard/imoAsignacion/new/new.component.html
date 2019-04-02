@@ -91,7 +91,7 @@
                                                 {{lote.fecha}}
                                             </td>
                                               <td>
-                                                <button (click)="onAsignarLote(lote)" class="btn btn-outline-success" type="button">Asignar</button> 
+                                                <button (click)="onAsignarLote(lote)" class="btn btn-success" type="button">Asignar</button> 
                                               </td>
                                             </tr>
                                           </tbody>
@@ -165,15 +165,22 @@
                     <td >{{loteSelecionado.tipo}}</td>
                     <td >{{loteSelecionado.cantidad}}</td>
                     <td>
-                        <button (click)="onEliminarLoteSelecionado(loteSelecionado)" class="btn btn-outline-danger" type="button">Eliminar</button> 
+                        <button (click)="onEliminarLoteSelecionado(loteSelecionado)" class="btn btn-danger" type="button">Eliminar</button> 
                     </td>
                     </tr>
                 </tbody> 
             </table>
         </div>  
         <div class="card-footer">
-            <button (click)="onEnviarArray()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
+            <div class="btn-group"> 
+                <button (click)="onEnviarArray()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
+    
+                <a href="{{ apiUrl }}/pdf/acta/asignacion/{{numeroActa}}" *ngIf='numeroActa' class="btn btn-success" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i>
+                    Imprimir Acta
+                </a>
+            </div>
         </div>  
     </div>        
-</div>
+</div> 
 </div>

@@ -7,6 +7,7 @@ import { ImoCfgTipoService } from '../../../services/imoCfgTipo.service';
 import {ImoInsumoService} from '../../../services/imoInsumo.service';
 import { DatePipe } from '@angular/common';
 import swal from 'sweetalert2';
+import { environment } from 'environments/environment';
 declare var $: any;
 
 @Component({
@@ -16,6 +17,7 @@ declare var $: any;
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
+public apiUrl = environment.apiUrl + 'insumo/imolote';
 public rnaAsignacionInsumos: rnaAsignacionInsumos;
 public errorMessage;
 public respuesta;
@@ -35,6 +37,7 @@ public lotesSelecionados:any=[];
 public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
+public numeroActa:any=false;
 public frmInsumo:any=false;
 public frmInsumoSelect:any=true; 
 public table:any; 
@@ -256,7 +259,13 @@ constructor(
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      swal.close();
+      swal({
+        title: 'Enviando datos!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      })
       if (result.value) {
         let token = this._loginService.getToken();
         this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
@@ -268,15 +277,13 @@ constructor(
           response => {
             this.respuesta = response;
             if(this.respuesta.status == 'success'){
-              this.lotesSelecionados = null;
-              this.lotes = null;
-              this.ready.emit(true);
-              swal({
-                title: 'Perfecto!',
-                text: 'Registro exitoso!',
-                type: 'success',
-                confirmButtonText: 'Aceptar'
-              })
+
+              swal.close();
+              // this.lotesSelecionados = null;
+              // this.lotes = null;
+              this.numeroActa = this.respuesta.data;
+              // this.ready.emit(true);
+
             }else{
               swal({
                 title: 'Error!',

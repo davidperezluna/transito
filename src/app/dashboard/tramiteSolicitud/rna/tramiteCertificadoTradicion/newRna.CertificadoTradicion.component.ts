@@ -17,7 +17,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() vehiculo: any = null;
     @Input() factura: any = null;
-    public apiUrl = environment.apiUrl + 'default';
+    public apiUrl = environment.apiUrl + 'default'; 
     public errorMessage;
     public tramiteFacturaSelected: any; 
     public sustratos: any;
