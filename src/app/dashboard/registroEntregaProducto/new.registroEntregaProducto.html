@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-xs-6 col-lg-6">
                                 <label></label>
-                                <button (click)="buscarVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
+                                <button (click)="onSearchVehiculo()" [ngClass]="{'btn-danger' : isError}" class="btn btn-default btn-success" ngxclipboard="" type="button"><i class="fa fa-search"></i></button>
                             </div>
                          </div>   
                          <div *ngIf="vehiculoSuccess" class="row justify-content-center container">
@@ -90,11 +90,13 @@
             </div>
             <div class="card-footer">
                 <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
+                <!--
+                    <button (click)="enviarTramite()" class="btn btn-primary">Enviar</button>
+                -->
             </div>
         </div>
     </div>
-    <app-vehiculo-showEntrega *ngIf='showV' [vehiculo]="vehiculo" (cerrarForm)="cerrarForm($event)"></app-vehiculo-showEntrega>
+    <app-vehiculo-showEntrega *ngIf='showV' [vehiculo]="vehiculo" (cerrarForm)="onCancelar($event)"></app-vehiculo-showEntrega>
 </div>
 <!-- /.row -->
 <div class="row">

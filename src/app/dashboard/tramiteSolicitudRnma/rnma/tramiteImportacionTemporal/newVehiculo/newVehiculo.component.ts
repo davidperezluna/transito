@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { Vehiculo } from '../../../../vehiculo/vehiculo.modelo';
+import { VhloVehiculo } from '../../../../vhloVehiculo/vhloVehiculo.modelo';
 import { LoginService } from '../../../../../services/login.service';
 import { CfgMunicipioService } from '../../../../../services/cfgMunicipio.service';
 import { VhloCfgLineaService } from '../../../../../services/vhloCfgLinea.service';
@@ -20,7 +20,7 @@ import swal from 'sweetalert2';
 })
 export class NewVehiculoComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    public vehiculo: Vehiculo;
+    public vehiculo: VhloVehiculo;
     public vhl = false;
     public municipios: any;
     public errorMessage: any;
@@ -63,7 +63,7 @@ export class NewVehiculoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.vehiculo = new VhloVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 
         this._MarcaService.getMarcaSelect().subscribe(

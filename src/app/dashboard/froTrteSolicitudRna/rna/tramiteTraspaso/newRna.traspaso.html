@@ -53,8 +53,8 @@
                                 </div>
 
                                 <div class="col-xs-12 col-lg-6">
-                                    <label *ngIf="tipoIdentificacionSelected != 4">Identificación</label>
-                                    <label *ngIf="tipoIdentificacionSelected == 4">NIT</label>
+                                    <label *ngIf="tipoIdentificacionSelectedOld != 4">Identificación</label>
+                                    <label *ngIf="tipoIdentificacionSelectedOld == 4">NIT</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" placeholder="identificacion" [(ngModel)]="identificacionOld" name="identificacionOld"
                                             required />
@@ -93,7 +93,7 @@
                                                         <br>
                                                         <b>Identificación: </b>
                                                         <br> 
-                                                        {{ propietario.empresa.identificacion }}
+                                                        {{ propietario.empresa.nit }}
                                                     </td>
                                                     <td>
                                                         <b>Nombre: </b>

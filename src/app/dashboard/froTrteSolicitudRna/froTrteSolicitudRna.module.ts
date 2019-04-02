@@ -39,8 +39,6 @@ import { NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent } from './rna/
 import { NewRnaTransformacionComponent } from './rna/tramiteTransformacion/newRna.transformacion.component';
 import { EditComponent } from './edit/edit.component';
 import { NewRnaImportacionTemporalComponent } from "./rna/tramiteImportacionTemporal/newRna.importacionTemporal.component";
-import { NewPropietarioVehiculoComponent } from "./rna/tramiteImportacionTemporal/newPropietarioVehiculo/newPropietarioVehiculo.component";
-import { NewVehiculoComponent } from "./rna/tramiteImportacionTemporal/newVehiculo/newVehiculo.component";
 import { NewRnaProrrogaImportacionTemporalComponent } from "./rna/tramiteProrrogaImportacionTemporal/newRna.prorrogaImportacionTemporal.component";
 import { SelectModule } from 'angular2-select';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
@@ -81,8 +79,6 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaTramiteCambioAcreedorPrendarioComponent,
         NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent,
         NewRnaImportacionTemporalComponent,
-        NewPropietarioVehiculoComponent,
-        NewVehiculoComponent,
         NewRnaProrrogaImportacionTemporalComponent,
     ],
     exports: [
@@ -118,8 +114,6 @@ import { TooltipModule, Tooltip } from "ngx-tooltip";
         NewRnaTramiteCambioAcreedorPrendarioComponent,
         NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent,
         NewRnaImportacionTemporalComponent,
-        NewPropietarioVehiculoComponent,
-        NewVehiculoComponent,
         NewRnaProrrogaImportacionTemporalComponent,
     ],
     providers: [

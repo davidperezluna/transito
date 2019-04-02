@@ -15,7 +15,6 @@ import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module'
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
 
 import { HomeModule } from './home/home.module';
-import { VehiculoModule } from './vehiculo/vehiculo.module';
 import { VhloCfgMarcaModule } from './vhloCfgMarca/vhloCfgMarca.module';
 import { VhloCfgLineaModule } from './vhloCfgLinea/vhloCfgLinea.module';
 import { BancoModule } from './banco/banco.module';
@@ -24,11 +23,8 @@ import { VhloCfgColorModule } from './vhloCfgColor/vhloCfgColor.module';
 import { ConpetoParametroModule } from './conceptoParametro/conceptoParametro.module';
 import { VhloCfgCombustibleModule } from './vhloCfgCombustible/vhloCfgCombustible.module';
 import { ConsumibleModule } from './consumible/consumible.module';
-import { ModalidadModule } from './modalidad/modalidad.module';
-import { OrganismoTransitoModule } from './organismoTransito/organismoTransito.module';
 import { VhloCfgServicioModule } from './vhloCfgServicio/vhloCfgServicio.module';
 import { TramiteModule } from './tramite/tramite.module'; 
-import { AlmacenModule } from './almacen/almacen.module';
 import { CfgTipoInfractorModule } from './cfgTipoInfractor/cfgTipoInfractor.module';
 import { RpcccInventarioDocumentalModule } from './rpcccInventarioDocumental/rpcccInventarioDocumental.module';
 
@@ -164,30 +160,29 @@ import { VhloPropietarioModule } from './vhloPropietario/vhloPropietario.module'
 import { VhloCfgCarroceriaModule } from './vhloCfgCarroceria/vhloCfgCarroceria.module';
 import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
+import { VhloRnaTramiteInscripcionLimitacionModule } from './vhloRnaTramiteInscripcionLimitacion/vhloRnaTramiteInscripcionLimitacion.module';
+import { VhloRnaTramiteLevantamientoLimitacionModule } from './vhloRnaTramiteLevantamientoLimitacion/vhloRnaTramiteLevantamientoLimitacion.module';
+import { VhloCfgLimitacionCausalModule } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.module';
+import { VhloCfgLimitacionTipoModule } from './vhloCfgLimitacionTipo/vhloCfgLimitacionTipo.module';
 
 import { FacturaModule } from './factura/factura.module';
 import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
-import { LimitacionModule } from './limitacion/limitacion.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
 import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
 import { RnrsTramiteLevantamientoLimitacionModule } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.module';
-import { RnaTramiteInscripcionLimitacionModule } from './rnaTramiteInscripcionLimitacion/rnaTramiteInscripcionLimitacion.module';
-import { RnaTramiteLevantamientoLimitacionModule } from './rnaTramiteLevantamientoLimitacion/rnaTramiteLevantamientoLimitacion.module';
 import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
 
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
-import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
+import { CfgTipoProcesoModule } from './vhloCfgLimitacionTipoProceso/vhloCfgLimitacionTipoProceso.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
-import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
 import { SvCfgGravedadAccidenteModule } from './svCfgGravedadAccidente/svCfgGravedadAccidente.module';
 import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccidente.module';
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
 
 import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
-import { TramiteSolicitudRncModule } from './tramiteSolicitudRnc/tramiteSolicitudRnc.module';
 import { TramiteSolicitudRpcccModule } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
@@ -280,19 +275,15 @@ import {RightsidebarComponent} from '../shared';
     UserUsuarioMenuModule,
     UserLicenciaConduccionModule,
     HomeModule,
-    VehiculoModule,
     VhloCfgMarcaModule,
     VhloCfgLineaModule,
     BancoModule,
     VhloCfgClaseModule,
     VhloCfgColorModule,
-    ModalidadModule,
     VhloCfgCombustibleModule,
     ConsumibleModule,
-    OrganismoTransitoModule,
     VhloCfgServicioModule,
     TramiteModule,
-    AlmacenModule,
     CfgPaisModule,
     CfgDepartamentoModule,
     CfgMunicipioModule,
@@ -301,8 +292,8 @@ import {RightsidebarComponent} from '../shared';
     CfgAuditoriaModule,
     CfgSmlmvModule,
     cfgFestivoModule,
-    UserLcCfgCategoriaModule,
     CfgTipoClaseModule,
+    UserLcCfgCategoriaModule,
     RncLicenciaConduccionModule,
     SvCapacitacionModule,
     SvCfgFuncionModule,
@@ -423,6 +414,8 @@ import {RightsidebarComponent} from '../shared';
     VhloPlacaSedeModule,
     VhloCfgPlacaModule,
     VhloRnaPreasignacionPlacaModule,
+    VhloRnaTramiteInscripcionLimitacionModule,
+    VhloRnaTramiteLevantamientoLimitacionModule,
     VehiculoTecnoMecanicaModule,
     SoatModule,
     CfgComparendoEstadoModule,
@@ -430,7 +423,6 @@ import {RightsidebarComponent} from '../shared';
     FacturaModule,
     TramiteFacturaModule,
     TramiteSolicitudModule,
-    TramiteSolicitudRncModule,
     TramiteSolicitudRpcccModule,
     TramiteSolicitudRnmaModule,
     TramiteSolicitudRnrsModule,
@@ -444,19 +436,17 @@ import {RightsidebarComponent} from '../shared';
     CfgChoqueConModule,
     CfgObjetoFijoModule,
     CfgEntidadJudicialModule,
-    CfgCausalLimitacionModule,
+    VhloCfgLimitacionCausalModule,
+    VhloCfgLimitacionTipoModule,
     MsvTalonarioModule,
     rnaRegistroInsumosModule,
     RnmaPreregistroModule,
     ImoAsignacionModule,
-    LimitacionModule,
     CfgTipoProcesoModule,
     RnmaTramiteInscripcionLimitacionModule,
     RnmaTramiteLevantamientoLimitacionModule,
     RnrsTramiteInscripcionLimitacionModule,
     RnrsTramiteLevantamientoLimitacionModule,
-    RnaTramiteInscripcionLimitacionModule,
-    RnaTramiteLevantamientoLimitacionModule,
     MsvRegistroIpatModule,
     CfgValorVehiculoModule,
     RnrsPreregistroModule,

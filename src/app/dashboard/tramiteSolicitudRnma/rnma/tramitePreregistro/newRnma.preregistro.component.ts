@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { Vehiculo } from '../../../vehiculo/vehiculo.modelo';
+import { VhloVehiculo } from '../../../vhloVehiculo/vhloVehiculo.modelo';
 import { CfgMunicipioService } from '../../../../services/cfgMunicipio.service';
 import { VhloCfgLineaService } from '../../../../services/vhloCfgLinea.service';
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
@@ -20,7 +20,7 @@ export class NewRnmaPreregistroComponent implements OnInit {
 @Output() readyTramite = new EventEmitter<any>();
 @Output() cancelarTramite = new EventEmitter<any>();
 @Input() factura: any = null;
-public vehiculo: Vehiculo;
+public vehiculo: VhloVehiculo;
 public municipios:any;
 public errorMessage:any;
 public habilitar:any;
@@ -63,7 +63,7 @@ constructor(
   ){}
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.vehiculo = new VhloVehiculo(null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     
     this._LineaService.index().subscribe(
       response => {

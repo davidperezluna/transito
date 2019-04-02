@@ -40,10 +40,12 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <button (click)='onRecord(inventario)' (ready)="ready($event)" class="btn btn-info"
-                                        type="button">
-                                        <i class="fa fa-list"></i>
-                                    </button>
+                                    <!--
+                                        <button (click)='onRecord(inventario)' (ready)="ready($event)" class="btn btn-info"
+                                            type="button">
+                                            <i class="fa fa-list"></i>
+                                        </button>
+                                    -->
                                 </div>
                             </td>
                         </tr>
@@ -101,9 +103,11 @@
                                 <b>Estado:</b> {{ inventario.estado.nombre }}
                             </td>
                             <td *ngIf="inventario.geolocalizacion">
-                                <button (click)='onGeo(inventario)' (ready)="ready($event)" class="btn btn-primary" type="button">
-                                    <i class="fa fa-eye"></i>
-                                </button>
+                                <!--
+                                    <button (click)='onGeo(inventario)' (ready)="ready($event)" class="btn btn-primary" type="button">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                -->
                             </td>
                         </tr>
                     </tbody>
@@ -116,15 +120,16 @@
             <!-- .row -->
             <div class="col-md-12 col-sm-12">
                 <label>Georeferenciación</label>
-        
-                <div align="center">
-                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [usePanning]="true">
-        
-                        <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false">
-                        </agm-marker>
-        
-                    </agm-map>
-                </div>
+                <!---
+                    <div align="center">
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [usePanning]="true">
+            
+                            <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="false">
+                            </agm-marker>
+            
+                        </agm-map>
+                    </div>
+                -->
             </div>
         </div>
         <!-- /.row -->

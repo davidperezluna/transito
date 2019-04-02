@@ -187,14 +187,17 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                     this.propietarioOld = response.data;
                                     this.datos.idPropietarioOld = this.propietarioOld.id;
 
-                                    this._AcreedorService.searchByPropietario({ 'id': this.propietarioOld.id }, token).subscribe(
+                                    this._AcreedorService.searchByPropietario({ 'id':  response.data.ciudadano.id }, token).subscribe(
                                         response => {
                                             if (response.code == 200) {
                                                 this.acreedor = response.data;
                                                 this.datos.idAcreedor = this.acreedor.id;
             
                                                 swal.close();
-                                            } else {            
+                                            } else {
+                                                this.acreedor = null;
+                                                this.datos.idAcreedor = null;
+
                                                 swal({
                                                     title: 'Error!',
                                                     text: response.message,
@@ -249,6 +252,8 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
                                                 swal.close();
                                             } else {
                                                 this.acreedor = null;
+                                                this.datos.idAcreedor = null;
+
                                                 swal({
                                                     title: 'Error!',
                                                     text: response.message,
@@ -419,12 +424,41 @@ export class NewRnaTramiteCambioAcreedorPrendarioPropietarioComponent implements
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 
-        this._AcreedorService.update(this.datos, token).subscribe(
+        this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
-
-                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
-
-                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                if (response.code == 200) {
+                    this._AcreedorService.update(this.datos, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero;
+            
+                                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
+                            }else{
+                                swal({
+                                    title: 'Error!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                        },
+                        error => {
+                            this.errorMessage = <any>error;
+            
+                            if (this.errorMessage != null) {
+                                console.log(this.errorMessage);
+                                alert('Error en la petición');
+                            }
+                        }
+                    );
+                }else{
+                    swal({
+                    title: 'Error!',
+                    text: response.message,
+                    type: 'error',
+                    confirmButtonText: 'Aceptar'
+                    });
+                }
             },
             error => {
                 this.errorMessage = <any>error;

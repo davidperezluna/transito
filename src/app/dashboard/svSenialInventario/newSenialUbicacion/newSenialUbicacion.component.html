@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="municipio">
     <div class="card-header">
         <h5>
             <strong class="text-uppercase">Nueva señal {{ municipio?.nombre }}</strong>
@@ -42,20 +42,25 @@
                         <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea">
                         </ng-select>
                     </div>
-                    <div class="col-xs-12 col-lg-4">
-                        <label>Cantidad <small *ngIf="datos.idTipoSenial == 1">(Galones)</small> <strong class="text-danger">*</strong></label>
-                        <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
-                    </div>
                     <div class="col-xs-12 col-lg-8" *ngIf="bodegas">
                         <label>Proveedor <strong class="text-danger">*</strong></label>
                         <ng-select [multiple]="false" [options]="bodegas" [(ngModel)]="senialUbicacion.idBodega" name="idBodega" required>
                         </ng-select>
                     </div>
+                    <div class="col-xs-12 col-lg-4">
+                        <label>Cantidad <small *ngIf="datos.idTipoSenial == 1">(Galones)</small> <strong class="text-danger">*</strong></label>
+                        <input type="text" class="form-control" [(ngModel)]="senialUbicacion.cantidad" name="cantidad" required />
+                    </div>
                 </div>
                 <div class="row" *ngIf="demarcacion"><!-- .row -->
+                    <div class="col-xs-12 col-lg-6" *ngIf="datos.idTipoSenial == 1">
+                        <label>Señal <strong class="text-danger">*</strong></label>
+                        <ng-select (ngModelChange)="onChangedSenial($event)" [multiple]="false" [options]="seniales" [(ngModel)]="senialUbicacion.idSenial" name="senial" required>
+                        </ng-select>
+                    </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Linea <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea" required>
+                        <ng-select (ngModelChange)="onChangedLinea()" [multiple]="false" [options]="lineas" [(ngModel)]="senialUbicacion.idLinea" name="idLinea" required>
                         </ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
@@ -72,7 +77,7 @@
                         <label>Cantidad <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalArea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.cantidad" name="cantidad" />
                     </div>
-                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 2">
+                    <div class="col-xs-12 col-lg-3" *ngIf="senialUbicacion.idUnidadMedida == 2">
                         <label>Cantidad <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalLinea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.cantidad" name="cantidad" />
                     </div>
@@ -80,15 +85,15 @@
                         <label>Area <small>(mts2)</small> <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalArea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.area" name="area" />
                     </div>
-                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 2">
+                    <div class="col-xs-12 col-lg-3" *ngIf="senialUbicacion.idUnidadMedida == 2">
                         <label>Ancho <small>(mts)</small> <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalLinea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.ancho" name="ancho" />
                     </div>
-                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 2">
+                    <div class="col-xs-12 col-lg-3" *ngIf="senialUbicacion.idUnidadMedida == 2">
                         <label>Largo <small>(mts)</small> <strong class="text-danger">*</strong></label>
                         <input (blur)="onCalcularTotalLinea()" type="text" class="form-control" [(ngModel)]="demarcacionNew.largo" name="largo" />
                     </div>
-                    <div class="col-xs-12 col-lg-4" *ngIf="senialUbicacion.idUnidadMedida == 1 || senialUbicacion.idUnidadMedida == 2">
+                    <div class="col-xs-12 col-lg-3" *ngIf="senialUbicacion.idUnidadMedida == 1 || senialUbicacion.idUnidadMedida == 2">
                         <label>Total <small>(mts)</small> <strong class="text-danger">*</strong></label>
                         <input type="text" class="form-control" [(ngModel)]="demarcacionNew.total" name="total" disabled  />
                     </div>
@@ -160,18 +165,18 @@
                 <div class="row" *ngIf="!demarcacion && datos.idTipoSenial != 1"><!-- .row -->
                     <div class="col-md-12 col-sm-12">
                         <label>Georeferenciación</label>
-                        <!--
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="address" placeholder="Dirección a buscar: Pasto, Nariño.." />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchGeo()" class="btn btn-default btn-primary" type="button">
-                                        <i class="fa fa-map-marker"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        -->
+                        
+                        <div class="input-group">
+                            <input type="text" class="form-control" [(ngModel)]="address" placeholder="Dirección a buscar: Pasto, Nariño.." name="address" />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchGeo()" class="btn btn-default btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    
                         <div align="center" *ngIf="!demarcacion">
-                            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [usePanning] = "true" (mapClick)="mapClicked($event)" (mapReady)="mapReady($event)">
+                            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false" [usePanning] = "true" (mapClick)="mapClicked($event)" (mapReady)="mapLoad($event)">
                             
                                 <agm-marker *ngFor="let marker of markers; let i = index" [latitude]="marker.lat" [longitude]="marker.lng" (markerRightClick)="onRightClick(i)" (markerClick)="clickedMarker(marker.label, i)"
                                      [label]="marker.label" [markerDraggable]="marker.draggable" (dragEnd)="markerDragEnd(marker, $event)">                            

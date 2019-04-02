@@ -11,25 +11,7 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Titulo <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="menu.titulo" name="titulo" type="text" required autofocus />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Path</label>
-                            <input class="form-control" [(ngModel)]="menu.path" name="path" type="text" />
-                        </div>
-                        <div class="col-xs-12 col-lg-6">
-                            <label>Abreviatura <strong class="text-danger">*</strong></label>
-                            <input class="form-control" [(ngModel)]="menu.abreviatura" name="abreviatura" type="text" required />
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Padre</label>
-                            <ng-select [multiple]="false" [options]="menus" [(ngModel)]="menu.idParent" name="idMenu">
-                            </ng-select>
-                        </div>
-                        <div class="col-xs-12 col-lg-12">
-                            <label>Rol</label>
-                            <ng-select [multiple]="false" [options]="roles" [(ngModel)]="menu.idRole" name="idRole">
-                            </ng-select>
+                            
                         </div>
                     </div>
                 </form>

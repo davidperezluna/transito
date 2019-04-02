@@ -81,6 +81,13 @@ export class VhloVehiculoService {
 		return this._http.post(this.url + "/search/parameters", params, { headers: headers }).map(res => res.json());
 	}
 
+	searchByPlaca(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/placa", params, { headers: headers }).map(res => res.json());
+	}
+
 	update(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;

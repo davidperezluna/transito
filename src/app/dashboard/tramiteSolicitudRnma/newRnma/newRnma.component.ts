@@ -9,7 +9,7 @@ import { FacturaService } from '../../../services/factura.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 import { VehiculoService } from '../../../services/vehiculo.service';
-import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
+import { VhloVehiculo } from '../../vhloVehiculo/vhloVehiculo.modelo';
 
 @Component({
   selector: 'app-new',
@@ -18,7 +18,7 @@ import { Vehiculo } from '../../vehiculo/vehiculo.modelo';
 export class NewRnmaComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   public tramiteSolicitud: TramiteSolicitud;
-  public vehiculo: Vehiculo;
+  public vehiculo: VhloVehiculo;
 
   public errorMessage;
   public respuesta;
@@ -78,7 +78,7 @@ export class NewRnmaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vehiculo = new Vehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.vehiculo = new VhloVehiculo(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     this.tramiteSolicitud = new TramiteSolicitud(null, null, null, null, null, null, null, null);
     /* swal({
       title: '¿El vehiculo va a hacer un tramite de Importación Temporal?',

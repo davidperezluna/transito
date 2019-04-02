@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.service';
-import { VehiculoLimitacionService } from '../../../services/vehiculoLimitacion.service';
+import { VhloLimitacionService } from '../../../services/vhloLimitacion.service';
 import { VehiculoService } from '../../../services/vehiculo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
-import { LimitacionService } from '../../../services/cfgLimitacion.service';
-import { CfgTipoProcesoService } from '../../../services/cfgTipoProceso.service';
-import { CfgCausalLimitacionService } from '../../../services/cfgCausalLimitacion.service';
+import { VhloCfgLimitacionTipoService } from '../../../services/vhloCfgLimitacionTipo.service';
+import { VhloCfgLimitacionTipoProcesoService } from '../../../services/vhloCfgLimitacionTipoProceso.service';
+import { VhloCfgLimitacionCausalService } from '../../../services/vhloCfgLimitacionCausal.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { RnrsTramiteInscripcionLimitacion } from '../rnrsTramiteInscripcionLimitacion.modelo';
 import swal from 'sweetalert2';
@@ -64,15 +64,15 @@ export class NewComponent implements OnInit {
 
   constructor(
     private _TramiteInscripcionLimitacionService: TramiteLimitacionService,
-    private _VehiculoLimitacionService: VehiculoLimitacionService,
+    private _VehiculoLimitacionService: VhloLimitacionService,
     private _VehiculoService: VehiculoService,
     private _UserCiudadanoService: UserCiudadanoService,
     private _MunicipioService: CfgMunicipioService,
     private _CfgDepartamentoService: CfgDepartamentoService,
     private _CfgEntidadJuducialService: CfgEntidadJudicialService,
-    private _LimitacionService: LimitacionService,
-    private _CfgTipoProcesoService: CfgTipoProcesoService,
-    private _CfgCausalLimitacionService: CfgCausalLimitacionService,
+    private _LimitacionService: VhloCfgLimitacionTipoService,
+    private _CfgTipoProcesoService: VhloCfgLimitacionTipoProcesoService,
+    private _CfgCausalLimitacionService: VhloCfgLimitacionCausalService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _loginService: LoginService,
   ) { }
@@ -93,7 +93,7 @@ export class NewComponent implements OnInit {
         }
       }
     );
-    this._CfgCausalLimitacionService.getCausalLimitacionSelect().subscribe(
+    this._CfgCausalLimitacionService.select().subscribe(
       response => {
         this.causalesLimitacion = response;
       },
@@ -161,7 +161,7 @@ export class NewComponent implements OnInit {
         }
       }
     );
-    this._LimitacionService.getLimitacionSelect().subscribe(
+    this._LimitacionService.select().subscribe(
       response => {
         this.limitaciones = response;
       },
@@ -174,7 +174,7 @@ export class NewComponent implements OnInit {
         }
       }
     );
-    this._CfgTipoProcesoService.getTipoProcesoSelect().subscribe(
+    this._CfgTipoProcesoService.select().subscribe(
       response => {
         this.tiposProceso = response;
       },

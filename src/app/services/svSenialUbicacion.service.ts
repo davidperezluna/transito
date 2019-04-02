@@ -1,17 +1,26 @@
-import { Injectable } from "@angular/core";
-import { Http, Response, Headers } from "@angular/http";
+import { Injectable, NgZone } from "@angular/core";
+import { Http, Headers } from "@angular/http";
 import { environment } from 'environments/environment';
+import { GoogleMapsAPIWrapper } from '@agm/core';
+import { MapsAPILoader } from '@agm/core';
+import { Observable, Observer } from 'rxjs';
 import "rxjs/add/operator/map";
 
 import { LoggerService } from "../logger/services/logger.service";
 
 @Injectable()
-export class SvSenialUbicacionService {
+export class SvSenialUbicacionService extends GoogleMapsAPIWrapper {
 	private url = environment.apiUrl + "seguridadvial/svsenialubicacion";
 	public identity;
 	public token;
 
-	constructor(private _http: Http, private _loogerService: LoggerService) { }
+	constructor(
+		private _http: Http,
+		private _loogerService: LoggerService,
+		private __loader: MapsAPILoader, private __zone: NgZone
+	) { 
+		super(__loader, __zone);
+	}
 
 	index() {
 	    return this._http.get(this.url + "/").map(res => res.json());
@@ -56,4 +65,21 @@ export class SvSenialUbicacionService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		return this._http.post(this.url + "/search/parametros", params, { headers: headers }).map(res => res.json());
 	}
+
+	getLatLng(address: string) {
+        console.log('Getting Address - ', address);
+        let geocoder = new google.maps.Geocoder();
+        return Observable.create(observer => {
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    observer.next(results[0].geometry.location);
+                    observer.complete();                    
+                } else {
+                    console.log('Error - ', results, ' & Status - ', status);
+                    observer.next({});
+                    observer.complete();
+                }
+            });
+        })
+    }
 }

@@ -1,5 +1,5 @@
-/// <reference types="@types/googlemaps" />
-import { Component, OnInit, Output, Input, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, NgZone, ElementRef, ViewChild } from '@angular/core';
+import { MouseEvent, MapsAPILoader } from '@agm/core';
 import { SvSenialInventarioService } from '../../../services/svSenialInventario.service';
 import { SvSenialUbicacionService } from '../../../services/svSenialUbicacion.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
@@ -21,6 +21,7 @@ export class RecordComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() senial: any = null;
     @Input() datos: any = null;
+    public errorMessage;
 
     public uploadUrl = environment.uploadUrl;
     public inventarios: any = null;
@@ -29,19 +30,24 @@ export class RecordComponent implements OnInit {
     public formRecord: any = true;
     public formGeo: any = false;
 
-    public errorMessage;
     public table: any = null;
-    public markers: any = [];
 
+    public address: any = null;
     public zoom: number = 15;
     public lat: number = 1.2246233;
     public lng: number = -77.2808208;
+    public map: any;
+    public markers: marker[] = [];
+    public arrayDemarcaciones: any = [];
+    public geocoder: any;
+    public LatLng: any;
 
     constructor(
         private _SenialInventarioService: SvSenialInventarioService,
         private _SenialUbicacionService: SvSenialUbicacionService,
         private _MunicipioService: CfgMunicipioService,
-        private _loginService: LoginService
+        private _loginService: LoginService,
+        private __zone: NgZone
     ) {  }
 
     ngOnInit() {
@@ -93,9 +99,31 @@ export class RecordComponent implements OnInit {
         );
 
         if (this.datos.idMunicipio) {
-            this._MunicipioService.show(token, this.datos.idMunicipio).subscribe(
+            this._MunicipioService.show({ 'id': this.datos.idMunicipio },token).subscribe(
                 response => {
-                    this.municipio = response.data;
+                    if(response.code == 200){
+                        this.municipio = response.data;
+    
+                        if (this.datos.idTipoSenial != 1) {
+                            this.address = this.municipio.nombre + ", Nariño";
+    
+                            let timeoutId = setTimeout(() => {
+                                this.onSearchGeo();
+                            }, 1000);
+                        }
+    
+                        swal.close();
+    
+                    }else{
+                        this.municipio = null;
+    
+                        swal({
+                            title: 'Error!',
+                            text: 'No tiene proveedores registrados',
+                            type: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
                 error => {
                     this.errorMessage = <any>error;
@@ -140,13 +168,43 @@ export class RecordComponent implements OnInit {
 
         inventario.geolocalizacion.forEach((element: any, key: any) => {
             console.log(element);
-            
-            this.markers.push(
-                {
-                    lat: element.lat,
-                    lng: element.lng,
-                },
-            )
+
+            this.markers.push({
+                lat: element.lat,
+                lng: element.lng,
+                draggable: false,
+                label: null
+            });
         });
     }
+
+    onSearchGeo() {
+        if (this.address) {
+            this._SenialUbicacionService.getLatLng(this.address).subscribe(
+                result => {
+                    this.__zone.run(() => {    
+                        this.lat = result.lat();
+                        this.lng = result.lng();
+                    });
+                },
+                error => console.log(error),
+                () => console.log('Geocoding completed!')
+            );
+        }else{
+            swal({
+                title: 'Error!',
+                text: 'La ubicación no ha sido diligenciada.',
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    }
+}
+
+// just an interface for type safety.
+interface marker {
+    lat: number;
+    lng: number;
+    label?: string;
+    draggable: boolean;
 }
