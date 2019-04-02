@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
+import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { VhloCfgClaseService } from '../../../../services/vhloCfgClase.service';
 import { VhloCfgServicioService } from '../../../../services/vhloCfgServicio.service';
@@ -18,6 +21,9 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     public errorMessage;
 
+    public autorizado: any = false;
+    public tramiteSolicitud: any = null;
+    public funcionario: any = null;
     public paises: any;
     public clases: any;
     public servicios: any;
@@ -26,9 +32,11 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     public tramiteFacturaSelected: any;
 
     public datos = {
-        'numeroLicenciaConduccion': null,
+        'numero': null,
         'numeroRunt': null,
         'vigencia': null,
+        'idFuncionario': null,
+        'idOrganismoTransito': null,
         'idCategoriaActual': null,
         'idCategoriaNueva': null,
         'idPais': null,
@@ -40,66 +48,153 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     
 
     constructor(
-        private _LoginService: LoginService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _CfgPaisService: CfgPaisService,
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
         private _CategoriaService: UserLcCfgCategoriaService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this._CfgPaisService.select().subscribe(
-            response => {
-              this.paises = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-      
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-              }
-            }
-        );
+        let token = this._LoginService.getToken();
 
-        this._ClaseService.select().subscribe(
-            response => {
-                this.clases = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
+        let identity = this._LoginService.getIdentity();
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.funcionario = response.data;
+                    this.datos.idFuncionario = response.data.id;
+                    this.autorizado = true;
+
+                    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.tramiteFactura = response.data;
+
+                                swal.close();
+                            } else {
+                                this.tramiteFactura = null;
+
+                                swal({
+                                    title: 'Error!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+
+                    if (this.tramiteFactura.realizado) {
+                        let token = this._LoginService.getToken();
+
+                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.tramiteSolicitud = response.data;
+                                } else {
+                                    this.tramiteSolicitud = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    }else{
+                        this._CfgPaisService.select().subscribe(
+                            response => {
+                              this.paises = response;
+                            },
+                            error => {
+                              this.errorMessage = <any>error;
+                      
+                              if(this.errorMessage != null){
+                                console.log(this.errorMessage);
+                                alert('Error en la petición');
+                              }
+                            }
+                        );
+                
+                        this._ClaseService.select().subscribe(
+                            response => {
+                                this.clases = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+                
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+                
+                        this._ServicioService.select().subscribe(
+                            response => {
+                                this.servicios = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+                
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+                
+                        this._CategoriaService.select().subscribe(
+                            response => {
+                                this.categorias = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+                
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+                    }
+                } else {
+                    this.autorizado = false;
+
+                    swal({
+                        title: 'Error!',
+                        text: 'Usted no tiene permisos para realizar tramites',
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
-            }
-        );
-
-        this._ServicioService.select().subscribe(
-            response => {
-                this.servicios = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-
-        this._CategoriaService.select().subscribe(
-            response => {
-                this.categorias = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
                 }
             }
         );
@@ -108,7 +203,8 @@ export class NewRncRecategorizacionLicenciaAbajoComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
         
-        this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
+        this.datos.numero = this.solicitante.identificacion;
+        this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
         this.datos.idTramiteFactura = this.tramiteFactura.factura
         this.datos.idSolicitante = this.solicitante.id;
         

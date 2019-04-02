@@ -182,7 +182,6 @@ import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccid
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
 
-import { TramiteSolicitudModule } from './tramiteSolicitud/tramiteSolicitud.module';
 import { TramiteSolicitudRpcccModule } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.module';
 import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
 import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
@@ -422,7 +421,6 @@ import {RightsidebarComponent} from '../shared';
     InfraccionModule,
     FacturaModule,
     TramiteFacturaModule,
-    TramiteSolicitudModule,
     TramiteSolicitudRpcccModule,
     TramiteSolicitudRnmaModule,
     TramiteSolicitudRnrsModule,

@@ -5,6 +5,7 @@ export class UserLicenciaConduccion {
         public fechaExpedicion: string,
         public fechaVencimiento: string,
         public estado: string,
+        public restriccion: string,
         public idOrganismoTransito: string,
         public idCategoria: string,
         public idClase: string,

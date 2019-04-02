@@ -65,16 +65,16 @@
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Valor</th>
+                    <th>Valor Unitario</th>
                     <th>Fecha</th>
                     <th>estado</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="odd" *ngFor="let valor of valores; let i = index">
-                    <td>{{valor.id}}</td>
-                    <td>{{valor.valor}}</td>
-                    <td>{{valor.fecha}}</td>
+                    <td>{{ valor.id }}</td>
+                    <td>{{ valor.valor }}</td>
+                    <td>{{ valor.fecha }}</td>
                     <td *ngIf='valor.activo'>Activo</td>
                     <td *ngIf='!valor.activo'>Inactivo</td>
                 </tr>

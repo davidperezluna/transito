@@ -127,7 +127,6 @@ import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
-import { TramiteSolicitudRoutes } from './tramiteSolicitud/tramiteSolicitud.routes';
 import { TramiteSolicitudRpcccRoutes } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.routes';
 import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
 import { TramiteSolicitudRnrsRoutes } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.routes';
@@ -407,7 +406,6 @@ export const DashboardRoutes: Route[] = [
       ...FacturaRoutes,
       ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,
-      ...TramiteSolicitudRoutes,
       ...TramiteSolicitudRpcccRoutes,
       ...TramiteSolicitudRnmaRoutes,
       ...TramiteSolicitudRnrsRoutes,

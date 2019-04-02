@@ -8,9 +8,9 @@
                 <div class="form-group">
                     <div class="row"><!-- .row -->
                         <div class="col-xs-12 col-lg-12">
-                            <label>Buscar por (Vin,Chasis,Placa,Motor,Serie)</label>
+                            <label>Buscar por placa</label>
                             <div class="input-group">
-                                <input type="text" class="form-control text-uppercase" [(ngModel)]="vehiculoFiltro" name="vehiculoFiltro" required />
+                                <input type="text" class="form-control text-uppercase" [(ngModel)]="placa" name="placa" required />
                                 <span class="input-group-btn">
                                     <button (click)="onSearchVehiculo()" class="btn btn-primary" type="button">
                                         <i class="fa fa-search"></i>

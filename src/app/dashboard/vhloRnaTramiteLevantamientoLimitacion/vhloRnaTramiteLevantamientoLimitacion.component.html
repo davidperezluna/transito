@@ -64,35 +64,45 @@
                 Detalles de limitación
               </b>
               <table class="table " id="dataTables-example">
-                <br>
                 <thead>
                   <tr>
-                    <th>Causal</th>
-                    <td>{{ limitacion.datos.causal.nombre }}</td>
-
-                    <th>Proceso</th>
-                    <td>{{ limitacion.datos.tipoProceso.nombre }}</td>
+                    <td>
+                      <b>Causal</b>
+                      <br>
+                      {{ limitacion.datos.causal.nombre }}
+                    </td>
+                    <td>
+                      <b>Proceso</b>
+                      <br>
+                      {{ limitacion.datos.tipoProceso.nombre }}
+                    </td>
                   </tr>
                   <tr>
-                    <th>Placa</th>
-                    <td>{{ limitacion.vehiculo.placa.numero }}</td>
-                    <th>Entidad Emisora</th>
-                    <td>{{ limitacion.datos.entidadJudicial.nombre }}</td>
+                    <td>
+                      <b>Placa</b>
+                      <br>
+                      {{ limitacion.vehiculo.placa.numero }}
+                    </td>
+                    <td>
+                      <b>Entidad Emisora</b>
+                      <br>
+                      {{ limitacion.datos.entidadJudicial.nombre }}
+                    </td>
                   </tr>
                   <tr>
-                    <th>Municipio</th>
+                    <b>Municipio</b>
                     <td>{{ limitacion.datos.municipio.nombre }}</td>
-                    <th>Fecha Registro</th>
+                    <b>Fecha Registro</b>
                     <td>{{ limitacion.datos.fechaRadicacion }}</td>
                   </tr>
                   <tr>
-                    <th>Fecha Expedición</th>
+                    <b>Fecha Expedición</b>
                     <td >{{ limitacion.datos.fechaExpedicion }}</td>
-                    <th>Fecha Levantamiento</th>
+                    <b>Fecha Levantamiento</b>
                     <td>--</td>
                   </tr>
                   <tr>
-                    <th>Demandante</th>
+                    <b>Demandante</b>
                     <td >
                       {{ limitacion.datos.demandante.primerNombre }} {{ limitacion.datos.demandante.primerApellido }}
                       <br>
@@ -100,7 +110,7 @@
                       <br>
                       {{ limitacion.datos.demandante.identificacion }}
                     </td>
-                    <th>Demandado</th>
+                    <b>Demandado</b>
                     <td>
                       {{ limitacion.datos.demandado.primerNombre }} {{ limitacion.datos.demandado.primerApellido }}
                       <br>
@@ -110,17 +120,17 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Estado</th>
+                    <b>Estado</b>
                     <td>
                       <span *ngIf="limitacion.datos.activo">Inscrita</span>
                     </td>
-                    <th>Descripción</th>
+                    <b>Descripción</b>
                     <td>{{ limitacion.datos.observaciones }}</td>
                   </tr>
                   <tr>
-                    <th>Tipo</th>
+                    <b>Tipo</b>
                     <td class="odd center">{{ limitacion.datos.tipo.nombre }}</td>
-                    <th>Acciones</th>
+                    <b>Acciones</b>
                     <td class="center">
                       <button (click)="onDelete(limitacion)" class="btn btn-primary">Levantar Limitacion</button>
                     </td>

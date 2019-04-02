@@ -32,12 +32,12 @@
                                         <td>
                                             <b>Placa</b>
                                             <br>
-                                            {{ vehiculo.placa.numero }}
+                                            {{ vehiculo.placa }}
                                         </td>
                                         <td>
                                             <b>Organismo Tránsito</b>
                                             <br>
-                                            {{ vehiculo.organismoTransito.nombre }}
+                                            {{ vehiculo.organismoTransito }}
                                         </td>
                                         <td>
                                             <button (click)="onRemoveVehiculo(vehiculo)" class="btn btn-danger">
@@ -50,29 +50,7 @@
                         </div>
                     </div><!-- /.row -->
 
-                    <div class="row"><!-- .row -->
-                        <div class="col-xs-12 col-lg-6" >
-                            <b class="text-uppercase">
-                                Registrar demandado
-                            </b>
-                            <label>Tipo de identificación
-                                <span class="text-danger">*</span>
-                            </label>
-                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="idTipoIdentificacionDemandado" name="idTipoIdentificacionDemandado" required>
-                            </ng-select>
-
-                            <label>Identificación</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" [(ngModel)]="identificacionDemandado" name="identificacionDemandado"
-                                    required />
-                                <span class="input-group-btn">
-                                    <button (click)="onSearchDemandado()" class="btn btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-
+                    <div class="row" *ngIf="datos.vehiculos.length > 0"><!-- .row -->
                         <div class="col-xs-12 col-lg-6" >
                             <b class="text-uppercase">
                                 Registrar demandante
@@ -94,29 +72,31 @@
                                 </span>
                             </div>
                         </div>
+
+                        <div class="col-xs-12 col-lg-6" >
+                            <b class="text-uppercase">
+                                Registrar demandado
+                            </b>
+                            <label>Tipo de identificación
+                                <span class="text-danger">*</span>
+                            </label>
+                            <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="idTipoIdentificacionDemandado" name="idTipoIdentificacionDemandado" required>
+                            </ng-select>
+
+                            <label>Identificación</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" [(ngModel)]="identificacionDemandado" name="identificacionDemandado"
+                                    required />
+                                <span class="input-group-btn">
+                                    <button (click)="onSearchDemandado()" class="btn btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
                     </div><!-- /.row -->
 
                     <div class="row"><!-- .row -->
-                        <div class="col-xs-12 col-lg-6" *ngIf="datos.demandados.length > 0">
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr *ngFor="let demandado of datos.demandados; let i = index">
-                                        <td>
-                                            <b>Nombre</b>
-                                            <br>
-                                            {{ demandado.nombre }}
-                                            <br>
-                                            <b>Identificación</b>
-                                            {{ demandado.identificacion }}
-                                        </td>
-                                        <td>
-                                            <button (click)="onRemoveDemandado(demandado)" class="btn btn-danger">Eliminar</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
                         <div class="col-xs-12 col-lg-6" *ngIf="datos.demandantes.length > 0">
                             <table class="table table-bordered table-striped">
                                 <tbody>
@@ -136,9 +116,29 @@
                                 </tbody>
                             </table>
                         </div>
+                        
+                        <div class="col-xs-12 col-lg-6" *ngIf="datos.demandados.length > 0">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                    <tr *ngFor="let demandado of datos.demandados; let i = index">
+                                        <td>
+                                            <b>Nombre</b>
+                                            <br>
+                                            {{ demandado.nombre }}
+                                            <br>
+                                            <b>Identificación</b>
+                                            {{ demandado.identificacion }}
+                                        </td>
+                                        <td>
+                                            <button (click)="onRemoveDemandado(demandado)" class="btn btn-danger">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div><!-- /.row -->
 
-                    <form #formNew="ngForm">
+                    <form #formNew="ngForm" *ngIf="datos.vehiculos.length > 0">
                         <div class="row"><!-- .row -->
                             <div class="col-xs-12 col-lg-6">
                                 <label>Fecha Radicación <b class="text-danger">*</b></label>

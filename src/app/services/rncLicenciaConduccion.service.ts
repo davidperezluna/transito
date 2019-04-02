@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers } from "@angular/http";
-import "rxjs/add/operator/map";
-import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
+import { LoggerService } from "../logger/services/logger.service";
+import "rxjs/add/operator/map";
 
 @Injectable()
 export class RncLicenciaConduccionService {

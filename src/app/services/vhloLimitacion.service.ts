@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class VhloLimitacionService {
-	private url = environment.apiUrl + "vehiculo/vhloLimitacion";
+	private url = environment.apiUrl + "vehiculo/vhlolimitacion";
 	public identity;
 	public token;
 
