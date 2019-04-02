@@ -23,6 +23,7 @@ export class PnalFuncionarioComponent implements OnInit {
   public formTime = false;
   public formShow = false;
   public formSuspension = false;
+  public formDisabled = false;
   public formProrroga = false;
   public formSearch = true;
   public table: any = null;
@@ -106,6 +107,7 @@ export class PnalFuncionarioComponent implements OnInit {
     this.formShow = false;
     this.formProrroga = false;
     this.formIndex = false;
+    this.formDisabled = false;
     if (this.table) {
       this.table.destroy();
     }
@@ -120,6 +122,7 @@ export class PnalFuncionarioComponent implements OnInit {
     this.formShow = false;
     this.formSuspension = false;
     this.formIndex = false;
+    this.formDisabled = false;
     if (this.table) {
       this.table.destroy();
     }
@@ -134,6 +137,7 @@ export class PnalFuncionarioComponent implements OnInit {
     this.formTime = false;
     this.formShow = false;
     this.formIndex = false;
+    this.formDisabled = false;
     if (this.table) {
       this.table.destroy();
     }
@@ -150,6 +154,7 @@ export class PnalFuncionarioComponent implements OnInit {
     this.formProrroga = false;
     this.formShow = false;
     this.formIndex = false;
+    this.formDisabled = false;
     if (this.table) {
       this.table.destroy();
     }
@@ -163,9 +168,38 @@ export class PnalFuncionarioComponent implements OnInit {
     this.formProrroga = false;
     this.formSearch = false;
     this.formIndex = false;
+    this.formDisabled = false;
     if (this.table) {
       this.table.destroy();
     }
+  }
+
+  onDisabled(funcionario: any) {
+    this.funcionario = funcionario;
+
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se inhabilitará este registro!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.formShow = false;
+        this.formTime = false;
+        this.formNew = false;
+        this.formProrroga = false;
+        this.formSearch = false;
+        this.formIndex = false;
+        this.formDisabled = true;
+        if (this.table) {
+          this.table.destroy();
+        }
+      }
+    });
   }
 
   ready(isCreado: any) {
@@ -178,6 +212,7 @@ export class PnalFuncionarioComponent implements OnInit {
       this.formShow = false;
       this.formSuspension = false;
       this.formSearch = true;
+      this.formDisabled = false;
       this.ngOnInit();
     }
   }

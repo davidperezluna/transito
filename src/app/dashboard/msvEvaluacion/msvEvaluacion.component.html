@@ -74,7 +74,7 @@
                </div>
             </div>
          </div>
-         <div class="card"  *ngIf="empresaEncontrada">
+         <div class="card" *ngIf="empresaEncontrada">
             <div class="card-header">
                <h5 class="text-uppercase">Lista de revisiones
                   <div class="btn-group pull-right">
@@ -163,6 +163,69 @@
                </div>
             </div>
          </div>
+
+         <div class="card" *ngIf="miEmpresa">
+            <div class="card-header">
+               <h5 class="text-uppercase">Valores Agregados
+               </h5>
+            </div>
+            <div class="card-body">
+               <div class="form-group row">
+                  <div class="col-lg-6 col-md-6">
+                     <label>¿Dese agregar valores agregados para la empresa?</label>
+                     <div class="form-group row">
+                        <div class="col-xs-12 col-lg-6">
+                           <div class="custom-control custom-radio">
+                              <input id="radioValorAgregadoSi" name="valorAgregado" [(ngModel)]="valorAgregado"
+                                 value="1" type="radio" id="customRadioValorAgregado1" name="customRadiValorAgregado"
+                                 class="custom-control-input">
+                              <label class="custom-control-label" for="customRadioValorAgregado1">Si</label>
+                           </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                           <div class="custom-control custom-radio">
+                              <input id="radioPlacaNo" name="portaPlaca" [(ngModel)]="ValorAgregado" value="0"
+                                 type="radio" id="customRadioValorAgregado2" name="customRadioValorAgregado"
+                                 class="custom-control-input">
+                              <label class="custom-control-label" for="customRadioValorAgregado2">No</label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <table class="table table-bordered">
+                     <thead>
+                        <tr>
+                           <th><b>PARÁMETRO-DEFINICIÓN</b></th>
+                           <!--<th><b>VARIABLES</b></th>
+                           <th><b>CRITERIO DEL AVAL</b></th>
+                           <th><b>APLICA</b></th>
+                           <th><b>EVIDENCIAS DE SU EXISTENCIA</b></th>
+                           <th><b>RESPONDE A LOS REQUERIMIENTOS</b></th>
+                           <th><b>VALOR DE LA VARIABLE</b></th>
+                           <th><b>VALOR OBTENIDO</b></th>
+                           <th><b>OBSERVACIONES</b></th>-->
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>
+                              <input class="form-control" type="text" name="parametro" required>
+                           </td>
+                           <!--<td>
+                              <input>
+                           </td>
+                           <td>
+                              <input>
+                           </td>
+                           <td>
+                              <input>
+                           </td>-->
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
          <div class="card" *ngIf="miEmpresa && mostrarTablaEvaluacion">
             <div class="card-header">
                <h5 class="text-uppercase">Nueva Evaluación
@@ -174,7 +237,9 @@
                   [(ngModel)]="categoriaSelected" required name="idCategoria">
                </ng-select>
                <div *ngFor="let msvCategoria of msvCategorias; let i=index">
-                  <div class="row" *ngIf="categoriaSelected == i+1 && showT">
+                  <!--<div class="row" *ngIf="categoriaSelected  == msvCategoria.id">-->
+                  <div class="row" *ngIf="categoriaSelected == i+1">
+                     <!-- <div class="row" *ngIf="categoriaSelected == i+1 && showT">-->
                      <div class="col-xs-12 col-lg-12">
                         <div class="card">
                            <div class="card-body" style="width:1200 px; overflow-x: auto;">
@@ -236,7 +301,8 @@
                                                          (ngModelChange)="calcularTotal($event, msvParametro, categoriaSelected)"
                                                          [(ngModel)]="msvCriterio.responde"
                                                          name="responde{{ msvCriterio.id }}"></div>
-                                                   <div class="col-lg-1" style="border:1px solid #cccccc;">{{ msvParametro.valor
+                                                   <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                      {{ msvParametro.valor
                                                                                  /msvParametro.numeroVariables | number:'1.1-2' }}</div>
                                                    <div class="col-lg-2" style="border:1px solid #cccccc;">
                                                       <label
@@ -318,31 +384,30 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="card-footer">
-                              <div class="btn-group">
-                                 <button (click)="onFinalizar()"
-                                    *ngIf="!evaluacion && datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null"
-                                    class="btn btn-default">
-                                    <i class="fa fa-check"></i>
-                                    Finalizar y Enviar
-                                 </button>
-                              </div>
-                           </div>
                         </div>
                      </div>
                   </div>
                </div>
             </div>
+            <div class="card-footer">
+               <div class="btn-group">
+                  <!--<<button (click)="onFinalizar()" *ngIf="!evaluacion && datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null" class="btn btn-default">-->
+                  <button (click)="onFinalizar()"
+                     *ngIf="!evaluacion && datos2.valorObtenidoFortalecimiento != null && datos2.valorObtenidoVehiculoSeguro != null&& datos2.valorObtenidoInfraestructuraSegura != null&& datos2.valorObtenidoAtencionVictimas != null&& datos2.valorObtenidoValorAgregado != null"
+                     class="btn btn-default">
+                     <i class="fa fa-check"></i>
+                     Finalizar y Enviar
+                  </button>
+               </div>
+            </div>
+            <a href="{{ apiUrl }}/{{ idUsuario }}/{{ evaluacion.id }}/aval/pdf" class="btn btn-success" target="_blank"
+               *ngIf="evaluacion"><i class="fa fa-file-pdf-o"></i>Imprimir</a>
          </div>
-         <a href="{{ apiUrl }}/{{ idUsuario }}/{{ evaluacion.id }}/aval/pdf" class="btn btn-success" target="_blank"
-            *ngIf="evaluacion">
-            <i class="fa fa-file-pdf-o"></i>
-            Imprimir
-         </a>
          <!-- fin detalles de la empresa -->
       </div>
    </div>
    <app-new-empresa *ngIf='formNewEmpresa' (ready)="ready($event)"></app-new-empresa>
-   <app-edit-revision *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)"></app-edit-revision>
+   <app-edit-revision *ngIf='formEditRevision' [miEmpresa]="miEmpresa" [msvRevision]="revision" (ready)="ready($event)">
+   </app-edit-revision>
    <app-newRevision *ngIf="formNewRevision" [miEmpresa]="miEmpresa" (ready)="ready($event)"> </app-newRevision>
 </div>

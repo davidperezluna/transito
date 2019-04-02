@@ -168,6 +168,10 @@
                       type="button" *ngIf="funcionario.activo">
                       <i class="fa fa-ban"></i>
                     </button>
+                    <button (click)="onDisabled(funcionario)" (ready)="ready($event)" class="btn btn-xs btn-warning"
+                      type="button" *ngIf="funcionario.activo">
+                      <i class="fa fa-ban"></i>
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -185,4 +189,5 @@
   <app-show *ngIf='formShow' [funcionario]="funcionario" (ready)="ready($event)"></app-show>
   <app-prorroga *ngIf='formProrroga' [funcionario]="funcionario" (ready)="ready($event)"></app-prorroga>
   <app-suspension *ngIf='formSuspension' [funcionario]="funcionario" (ready)="ready($event)"></app-suspension>
+  <app-disabled *ngIf='formDisabled' [funcionario]="funcionario" (ready)="ready($event)"></app-disabled>
 </div>
