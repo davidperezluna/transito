@@ -162,11 +162,12 @@ import { VhloCfgPlacaModule } from './vhloCfgPlaca/vhloCfgPlaca.module';
 import { VhloRnaPreasignacionPlacaModule } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.module';
 import { VhloRnaTramiteInscripcionLimitacionModule } from './vhloRnaTramiteInscripcionLimitacion/vhloRnaTramiteInscripcionLimitacion.module';
 import { VhloRnaTramiteLevantamientoLimitacionModule } from './vhloRnaTramiteLevantamientoLimitacion/vhloRnaTramiteLevantamientoLimitacion.module';
+import { VhloCfgLimitacionCausalModule } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.module';
+import { VhloCfgLimitacionTipoModule } from './vhloCfgLimitacionTipo/vhloCfgLimitacionTipo.module';
 
 import { FacturaModule } from './factura/factura.module';
 import { FacturaInfraccionModule } from './facturaInfraccion/facturaInfraccion.module';
 import { TramiteFacturaModule } from './tramiteFactura/tramiteFactura.module';
-import { LimitacionModule } from './limitacion/limitacion.module';
 import { RnmaTramiteInscripcionLimitacionModule } from './rnmaTramiteInscripcionLimitacion/rnmaTramiteInscripcionLimitacion.module';
 import { RnmaTramiteLevantamientoLimitacionModule } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.module';
 import { RnrsTramiteInscripcionLimitacionModule } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.module';
@@ -174,9 +175,8 @@ import { RnrsTramiteLevantamientoLimitacionModule } from './rnrsTramiteLevantami
 import { MsvRegistroIpatModule } from './msvRegistroIpat/msvRegistroIpat.module';
 
 import { CfgOrganismoTransitoModule } from './cfgOrganismoTransito/cfgOrganismoTransito.module';
-import { CfgTipoProcesoModule } from './cfgTipoProceso/cfgTipoProceso.module';
+import { CfgTipoProcesoModule } from './vhloCfgLimitacionTipoProceso/vhloCfgLimitacionTipoProceso.module';
 import { CfgEntidadJudicialModule } from './cfgEntidadJudicial/cfgEntidadJudicial.module';
-import { CfgCausalLimitacionModule } from './cfgCausalLimitacion/cfgCausalLimitacion.module';
 import { SvCfgGravedadAccidenteModule } from './svCfgGravedadAccidente/svCfgGravedadAccidente.module';
 import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccidente.module';
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
@@ -436,12 +436,12 @@ import {RightsidebarComponent} from '../shared';
     CfgChoqueConModule,
     CfgObjetoFijoModule,
     CfgEntidadJudicialModule,
-    CfgCausalLimitacionModule,
+    VhloCfgLimitacionCausalModule,
+    VhloCfgLimitacionTipoModule,
     MsvTalonarioModule,
     rnaRegistroInsumosModule,
     RnmaPreregistroModule,
     ImoAsignacionModule,
-    LimitacionModule,
     CfgTipoProcesoModule,
     RnmaTramiteInscripcionLimitacionModule,
     RnmaTramiteLevantamientoLimitacionModule,

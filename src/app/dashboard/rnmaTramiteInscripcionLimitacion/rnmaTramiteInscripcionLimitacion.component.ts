@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
-import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
+import { VhloLimitacionService } from '../../services/vhloLimitacion.service';
 import { RnmaTramiteInscripcionLimitacion } from './rnmaTramiteInscripcionLimitacion.modelo';
 import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
 
@@ -25,7 +25,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
   public tramiteInscripcion: any;
 
   constructor(
-    private _VehiculoLimitacionService: VehiculoLimitacionService,
+    private _VehiculoLimitacionService: VhloLimitacionService,
     private _loginService: LoginService,
   ) { }
 
@@ -47,7 +47,7 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
     let datos = {
       'moduloId': 3,
     };
-    this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
+    this._VehiculoLimitacionService.index(datos).subscribe(
       response => {
         if (response) {
 
@@ -114,7 +114,8 @@ export class RnmaTramiteInscripcionLimitacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
-        this._VehiculoLimitacionService.deleteVehiculoLimitacion(token, id).subscribe(
+
+        this._VehiculoLimitacionService.delete(token, id).subscribe(
           response => {
             swal({
               title: 'Eliminado!',

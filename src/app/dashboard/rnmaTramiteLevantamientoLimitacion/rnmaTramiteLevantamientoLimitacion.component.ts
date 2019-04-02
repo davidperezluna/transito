@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
-import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
+import { VhloLimitacionService } from '../../services/vhloLimitacion.service';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { RnmaTramiteLevantamientoLimitacion } from './rnmaTramiteLevantamientoLimitacion.modelo';
 import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
@@ -29,7 +29,7 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
   public limitacionVehiculoEncontrada = 1;
 
   constructor(
-    private _VehiculoLimitacionService: VehiculoLimitacionService,
+    private _VehiculoLimitacionService: VhloLimitacionService,
     private _VehiculoService: VehiculoService,
     private _loginService: LoginService,
   ) { }
@@ -52,7 +52,7 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
     let datos = {
       'moduloId': 3,
     };
-    this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
+    this._VehiculoLimitacionService.index(datos).subscribe(
       response => {
         if (response) {
 
@@ -109,7 +109,7 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
       response => {
         if (response.status == 'success') {
           this.limitacionVehiculoEncontrada = 4;
-          this._VehiculoLimitacionService.getTramiteLimitacionPlaca(datos, token).subscribe(
+          this._VehiculoLimitacionService.searchByPlaca(datos, token).subscribe(
             response => {
               response = response;
               if (response.status == 'success') {
@@ -147,7 +147,7 @@ export class RnmaTramiteLevantamientoLimitacionComponent implements OnInit {
 
   enviarTramite(limitacionVehiculo:any) {
     let token = this._loginService.getToken();
-    this._VehiculoLimitacionService.levantarLimitacion(limitacionVehiculo, token).subscribe(
+    this._VehiculoLimitacionService.delete(limitacionVehiculo, token).subscribe(
       response => {
         if (response.status == 'success') {
           swal({

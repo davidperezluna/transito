@@ -111,15 +111,8 @@
                             </tr>
                             <tr *ngIf="vehiculo.clase">
                                 <td>
-                                    <b>Tipo</b>
+                                    <b>Clase</b>
                                     {{ vehiculo.clase?.nombre }}
-                                </td>
-                            </tr>
-                            <tr *ngIf="vehiculo.organismoTransito">
-                                <td>
-                                    <b>Organismo transito</b>
-                                    <br>
-                                    {{ vehiculo.organismoTransito?.nombre }}
                                 </td>
                             </tr>
                         </tbody>
@@ -137,13 +130,8 @@
                 <div class="col-xs-12 col-lg-12">
                     <b class="text-uppercase">Tramite de preasignación de placa</b>   
                 </div>
-    
-                <div class="col-xs-12 col-lg-12">
-                    <label>Organismo transito <b class="text-danger">*</b></label>
-                    {{ funcionario.organismoTransito.nombre }}
-                </div>
                 <div class="col-xs-12 col-lg-4" *ngIf="placas">
-                    <label>Placas disponibles <b class="text-danger">*</b></label><br>
+                    <label>Placas disponibles en {{ funcionario.organismoTransito.nombre }} <b class="text-danger">*</b></label>
                     <ng-select [multiple]="false" [options]="placas" [(ngModel)]="datos.idPlaca" name="idPlaca" required>
                     </ng-select>
                 </div>
