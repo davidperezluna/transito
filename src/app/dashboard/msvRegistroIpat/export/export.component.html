@@ -18,13 +18,13 @@
                     <div class="col-lg-6 col-md-6"></div>
                     <div class="col-lg-6 col-md-6">
                         <label>Tipo Gravedad</label>
-                        <ng-select [multiple]="false" [options]="gravedades" [(ngModel)]="exportIpat.idGravedad"
+                        <ng-select [multiple]="true" [options]="gravedades" [(ngModel)]="exportIpat.idGravedad"
                             required name="gravedad">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Tipo Victima</label>
-                        <ng-select [multiple]="false" [options]="tiposVictima" [(ngModel)]="exportIpat.idTipoVictima"
+                        <ng-select [multiple]="true" [options]="tiposVictima" [(ngModel)]="exportIpat.idTipoVictima"
                             required name="tipoVictima">
                         </ng-select>
                     </div>
@@ -46,50 +46,50 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Grupo de Edad</label>
-                        <ng-select [multiple]="false" [options]="gruposEdad" [(ngModel)]="exportIpat.idGrupoEdad"
+                        <ng-select [multiple]="true" [options]="gruposEdad" [(ngModel)]="exportIpat.idGrupoEdad"
                             required name="grupoEdad">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Municipio</label>
-                        <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="exportIpat.idMunicipio"
+                        <ng-select [multiple]="true" [options]="municipios" [(ngModel)]="exportIpat.idMunicipio"
                             required name="municipio">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Dias Semana</label>
-                        <ng-select [multiple]="false" [options]="diasSemana" [(ngModel)]="exportIpat.idDiaSemana"
+                        <ng-select [multiple]="true" [options]="diasSemana" [(ngModel)]="exportIpat.idDiaSemana"
                             required name="diaSemana">
                             
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Genero</label>
-                        <ng-select [multiple]="false" [options]="generos" [(ngModel)]="exportIpat.idGenero" required
+                        <ng-select [multiple]="true" [options]="generos" [(ngModel)]="exportIpat.idGenero" required
                             name="genero">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Medio Transporte (Clase Vehiculo)</label>
-                        <ng-select [multiple]="false" [options]="clases" [(ngModel)]="exportIpat.idClase" required
+                        <ng-select [multiple]="true" [options]="clases" [(ngModel)]="exportIpat.idClase" required
                             name="clase">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Clase Accidente</label>
-                        <ng-select [multiple]="false" [options]="clasesAccidente" [(ngModel)]="exportIpat.idClaseAccidente"
+                        <ng-select [multiple]="true" [options]="clasesAccidente" [(ngModel)]="exportIpat.idClaseAccidente"
                             required name="claseAccidente">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Choque Con</label>
-                        <ng-select [multiple]="false" [options]="choquesCon" [(ngModel)]="exportIpat.idChoqueCon"
+                        <ng-select [multiple]="true" [options]="choquesCon" [(ngModel)]="exportIpat.idChoqueCon"
                             required name="choqueCon">
                         </ng-select>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <label>Objeto Fijo</label>
-                        <ng-select [multiple]="false" [options]="objetosFijos" [(ngModel)]="exportIpat.idObjetoFijo"
+                        <ng-select [multiple]="true" [options]="objetosFijos" [(ngModel)]="exportIpat.idObjetoFijo"
                             required name="objetoFijo">
                         </ng-select>
                     </div>

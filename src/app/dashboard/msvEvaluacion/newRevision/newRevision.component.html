@@ -7,7 +7,7 @@
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
-                <form #formNew="ngForm"> 
+                <form #formNewRevision="ngForm"> 
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>No. de Radicado <strong class="text-danger">*</strong></label>
@@ -67,7 +67,7 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onEnviar()" [disabled]="formNewRevision.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Guardar
                     </button>

@@ -12,43 +12,41 @@ export class MsvRevisionService {
 
 	constructor(private _http: Http){}
 
-	getRevision(){
+	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
 	}
 
-	register(revision,token){ 
-		
-		let json = JSON.stringify(revision);
-		let params = "json="+json+"&authorization="+token;
+	register(datos,token){ 
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/new", params, {headers: headers}).map(res => res.json());
 	}
 
-	deleteRevision(token,id){
-
-		let json = JSON.stringify(id);
-		let params = "json="+json+"&authorization="+token;
+	delete(datos, token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
 		return this._http.post(this.url+"/delete", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
-	showRevision(token,id){
-		let params = "authorization="+token;
+	show(id, token){
+		let params ="authorization=" + token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/"+id+"/show", params, {headers: headers})
+		return this._http.post(this.url+"/"+ id + "/show", params, {headers: headers})
 							  .map(res => res.json());
 	}
 
 	// tslint:disable-next-line:one-line
-	editRevision(revision,token){
-		let json = JSON.stringify(revision);
-		let params = "json="+json+"&authorization="+token;
+	edit(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getRevisionSelect(){
+	select(){
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 
