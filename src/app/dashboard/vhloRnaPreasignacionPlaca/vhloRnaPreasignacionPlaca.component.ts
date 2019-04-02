@@ -17,6 +17,7 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   public vehiculoFiltro:any; 
   public vehiculos:any = null;
   public vehiculo:any = null;
+  public placa:any = null;
   public formSearch = true; 
   public formIndex = true; 
   public formShow = true; 
@@ -51,8 +52,6 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
           if (response.code == 200) {
               this.funcionario = response.data;
               this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
-              
-              console.log(this.datos);
               
               this._PlacaService.selectByOrganismoTransito({ 'idOrganismoTransito': this.funcionario.organismoTransito.id }, token).subscribe(
                 response => {
@@ -151,6 +150,7 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
 
   onShow(vehiculo:any){
     this.vehiculo = vehiculo;
+    this.datos.idVehiculo = this.vehiculo.id;
     this.formIndex = false;
     this.formShow = true;
   }
@@ -158,48 +158,73 @@ export class VhloRnaPreasignacionPlacaComponent implements OnInit {
   onEnviar(){
     let token = this._LoginService.getToken();
 
-    var html = 'El vehiculo con:<br> numero de chasis:  <b>'+this.vehiculo.chasis+
-                '</b><br>numero de motor:  <b>'+this.vehiculo.motor+
-                '</b><br>numero de serie:  <b>'+this.vehiculo.serie+
-                '</b><br>fue asignada La placa:<br><b><h2>'+this.vehiculo.placa+
+    this._PlacaService.show({ 'id': this.datos.idPlaca }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.placa = response.data;
+
+          var html = 'El vehiculo con:<br> numero de chasis:  <b>'+ this.vehiculo.chasis +
+                '</b><br>numero de motor:  <b>'+ this.vehiculo.motor +
+                '</b><br>numero de serie:  <b>'+ this.vehiculo.serie +
+                '</b><br>fue asignada La placa:<br><b><h2>'+ this.placa.numero +
                 '</h2></b>con exitosamente durante 60 días';
 
-    swal({
-      title: '¿Estás seguro?',
-      type: 'info',
-      html:html,
-      showCancelButton: true,
-      confirmButtonColor: '#15d4be',
-      cancelButtonColor: '#ff6262',
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        this._VehiculoService.assign(this.datos, token).subscribe(
-          response => {
-            if(response.status == 'success'){
-              swal({
-                title: 'Perfecto!',
-                html: html,
-                type: 'success',
-                confirmButtonText: 'Aceptar',
-              }).then((result) => {
-                if (result.value) {
-                  this.onCancelar();
-                }
-              });          
+          swal({
+            title: '¿Estás seguro?',
+            type: 'info',
+            html:html,
+            showCancelButton: true,
+            confirmButtonColor: '#15d4be',
+            cancelButtonColor: '#ff6262',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.value) {
+              this._VehiculoService.assign(this.datos, token).subscribe(
+                response => {
+                  if(response.status == 'success'){
+                    swal({
+                      title: 'Perfecto!',
+                      html: html,
+                      type: 'success',
+                      confirmButtonText: 'Aceptar',
+                    }).then((result) => {
+                      if (result.value) {
+                        this.onCancelar();
+                      }
+                    });          
+                  }
+                error => {
+                    this.errorMessage = <any>error;
+                    if(this.errorMessage != null){
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
+                    }
+                  }
+          
+              });
             }
-          error => {
-              this.errorMessage = <any>error;
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-    
-        });
+          });
+        }else{
+          this.placa = null;
+
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      }, 
+      error => {
+        this.errorMessage = <any>error;
+
+        if(this.errorMessage != null){
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
       }
-    })
+    );
   }
 
   onCancelar(){

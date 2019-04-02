@@ -6,7 +6,7 @@ export class VhloRnaTramiteInscripcionLimitacion{
 		public departamentoId:number,
 		public ciudadanoDemandadoId:number,
 		public ciudadanoDemandanteId:number,
-		public nOrdenJudicial:string,
+		public numeroOrdenJudicial:string,
 		public limitacionId:number,
 		public fechaExpedicion:string,
 		public tipoProcesoId:number,
