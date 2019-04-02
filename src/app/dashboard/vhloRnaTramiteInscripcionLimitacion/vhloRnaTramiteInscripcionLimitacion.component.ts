@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
 import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
-import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
+import { VhloLimitacionService } from '../../services/vhloLimitacion.service';
 import { VhloRnaTramiteInscripcionLimitacion } from './vhloRnaTramiteInscripcionLimitacion.modelo';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
@@ -24,7 +24,7 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
   public tramiteInscripcion: any;
 
   constructor(
-    private _VehiculoLimitacionService: VehiculoLimitacionService,
+    private _VehiculoLimitacionService: VhloLimitacionService,
     private _LoginService: LoginService,
   ) { }
 
@@ -46,7 +46,8 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
       ) {
       }
     })
-    this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
+    
+    this._VehiculoLimitacionService.index(datos).subscribe(
       response => {
         if (response) {
           this.tramitesInscripcion = response.data;
@@ -65,8 +66,9 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
       }
     );
   }
+
   iniciarTabla() {
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -79,8 +81,8 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew() {
     this.formNew = true;
     this.formIndex = false;
@@ -97,6 +99,7 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
       this.ngOnInit();
     }
   }
+
   deleteCfgPlaca(id: any) {
 
     swal({
@@ -111,7 +114,8 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._LoginService.getToken();
-        this._VehiculoLimitacionService.deleteVehiculoLimitacion(token, id).subscribe(
+        
+        this._VehiculoLimitacionService.delete(token, id).subscribe(
           response => {
             swal({
               title: 'Eliminado!',

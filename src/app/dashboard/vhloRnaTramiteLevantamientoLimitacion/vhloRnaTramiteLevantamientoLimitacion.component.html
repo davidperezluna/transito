@@ -5,180 +5,138 @@
     <div class="card">
       <div class="card-body">
         <form #formNew="ngForm">
-          <h5 class="m-0">
+          <b class="text-primary">
             Levantar limitaciones a la propiedad
-          </h5>
-          <small>Todos los campos con
-            <b class="text-danger">*</b> son obligatorios</small>
+          </b>
+          <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
           <hr>
           <div class="row">
 
             <!--placas vehiculos -->
             <div class="col-xs-12 col-lg-4">
               <label>Placa</label>
-              <div class="input-group" *ngIf="limitacionVehiculoEncontrada != 2" [class.has-success]="limitacionVehiculoEncontrada === 2"
-                [class.has-danger]="limitacionVehiculoEncontrada === 3">
+              <div class="input-group">
                 <input type="text" class="form-control text-uppercase" placeholder="placa" [(ngModel)]="placa" name="placa" required />
                 <span class="input-group-btn">
-                  <button (click)="onSearchByPlaca()" [class.btn-default]="limitacionVehiculoEncontrada === 1" [class.btn-success]="limitacionVehiculoEncontrada === 2"
-                    [class.btn-danger]="placaEncontrada === 3" class="btn" ngxclipboard="" type="button">
+                  <button (click)="onSearchByPlaca()" class="btn btn-primary" type="button">
                     <i class="fa fa-search"></i>
                   </button>
                 </span>
               </div>
-              <div class="has-danger" *ngIf="limitacionVehiculoEncontrada === 3">
-                <div class="form-control-feedback has-danger has-error">No se encontró limitaciones inscritas para el vehiculo</div>
-              </div>
-              <div class="has-danger" *ngIf="limitacionVehiculoEncontrada === 5">
-                <div class="form-control-feedback has-danger has-error">El vehiculo no se encuentra registrado</div>
-              </div>
-              <div class="col-lg-12 col-md-12" *ngIf="listaLimitacionVehiculo">
-                <br>
 
-                <!-- lista limitaciones -->
+              <div class="col-lg-12 col-md-12" *ngIf="limitaciones && formIndex">
                 <table class="table " id="dataTables-example">
-                  <br>
                   <thead>
                     <tr>
                       <th>Tipo Medida</th>
                       <th>Proceso</th>
-                      <th>Nro. Documento</th>
+                      <th>Placa</th>
                       <th>Fecha Registro</th>
-                      <th>Estado</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd" *ngFor="let limitacionVehiculo of limitacionesVehiculo; let i = index">
-
-                      <td class="center">
-                        <p>{{limitacionVehiculo.limitacionDatos.causalLimitacion.nombre}}
+                    <tr *ngFor="let limitacion of limitaciones; let i = index">
+                      <td>
+                        {{ limitacion.datos.causal.nombre }}
                       </td>
-                      <td class="center">
-                        <p>{{limitacionVehiculo.limitacionDatos.tipoProceso.nombre}}
+                      <td>
+                        {{ limitacion.datos.tipoProceso.nombre }}
                       </td>
-                      <td class="center">
-                        <p>{{limitacionVehiculo.vehiculo.placa.numero}}
-                          <br>{{limitacionVehiculo.id}}</p>
+                      <td>
+                        {{ limitacion.vehiculo.placa.numero }}
                       </td>
-                      <td class="center">
-                        <p>{{limitacionVehiculo.limitacionDatos.fechaRadicacion}}
+                      <td>
+                        {{ limitacion.datos.fechaRadicacion }}
                       </td>
-                      <td class="center" *ngIf="limitacionVehiculo.limitacionDatos.estado==true">
-                        <p>Inscrita
-                      </td>
-                      <td class="center">
-                        <button (click)="ver(limitacionVehiculo)" class="btn btn-info">Ver Limitación</button>
+                      <td>
+                        <button (click)="onShow(limitacion)" class="btn btn-info">Ver Limitación</button>
                       </td>
                     </tr>
                   </tbody>
-                      <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-
                 </table>
               </div>
 
             </div>
 
-            <div class="col-lg-12 col-md-12" *ngIf="limitacionVehiculoM">
-              <br>
-
-              <!-- detalle limitacion -->
-              <h5 class="m-0">
-                Datos Básicos
-              </h5>
+            <div class="col-lg-12 col-md-12" *ngIf="formShow">
+              <b class="text-uppercase">
+                Detalles de limitación
+              </b>
               <table class="table " id="dataTables-example">
                 <br>
                 <thead>
                   <tr>
-                    <th>Tipo Medida</th>
-                    <td class="center">{{limitacionVehiculoMostrar.limitacionDatos.causalLimitacion.id}}</td>
+                    <th>Causal</th>
+                    <td>{{ limitacion.datos.causal.nombre }}</td>
 
                     <th>Proceso</th>
-                    <td class="text-left">{{limitacionVehiculoMostrar.limitacionDatos.tipoProceso.nombre}}</td>
+                    <td>{{ limitacion.datos.tipoProceso.nombre }}</td>
                   </tr>
                   <tr>
-                    <th>Nro. Documento</th>
-                    <td class="text-left">
-                      <p>{{limitacionVehiculoMostrar.vehiculo.placa.numero}}
-                        <br>{{limitacionVehiculoMostrar.id}}</p>
-                    </td>
-
+                    <th>Placa</th>
+                    <td>{{ limitacion.vehiculo.placa.numero }}</td>
                     <th>Entidad Emisora</th>
-                    <td class="text-left">{{limitacionVehiculoMostrar.limitacionDatos.entidadJudicial.nombre}}</td>
+                    <td>{{ limitacion.datos.entidadJudicial.nombre }}</td>
                   </tr>
                   <tr>
-
                     <th>Municipio</th>
-                    <td class="odd center">{{limitacionVehiculoMostrar.limitacionDatos.municipio.nombre}}</td>
-
+                    <td>{{ limitacion.datos.municipio.nombre }}</td>
                     <th>Fecha Registro</th>
-                    <td class="odd center">{{limitacionVehiculoMostrar.limitacionDatos.fechaRadicacion}}</td>
+                    <td>{{ limitacion.datos.fechaRadicacion }}</td>
                   </tr>
                   <tr>
-
                     <th>Fecha Expedición</th>
-                    <td class="odd center">{{limitacionVehiculoMostrar.limitacionDatos.fechaExpedicion}}</td>
-
+                    <td >{{ limitacion.datos.fechaExpedicion }}</td>
                     <th>Fecha Levantamiento</th>
-                    <td class="odd center">--</td>
+                    <td>--</td>
                   </tr>
                   <tr>
-
                     <th>Demandante</th>
-                    <td class="odd center">
-                      <p>{{limitacionVehiculoMostrar.limitacionDatos.ciudadanoDemandante.usuario.tipoIdentificacion.nombre}}
-                        <br>{{limitacionVehiculoMostrar.limitacionDatos.ciudadanoDemandante.usuario.identificacion}}</p>
+                    <td >
+                      {{ limitacion.datos.demandante.primerNombre }} {{ limitacion.datos.demandante.primerApellido }}
+                      <br>
+                      {{ limitacion.datos.demandante.tipoIdentificacion.nombre }}
+                      <br>
+                      {{ limitacion.datos.demandante.identificacion }}
                     </td>
                     <th>Demandado</th>
-                    <td class="odd center">
-                      <p>{{limitacionVehiculoMostrar.limitacionDatos.ciudadanoDemandado.usuario.tipoIdentificacion.nombre}}
-                        <br>{{limitacionVehiculoMostrar.limitacionDatos.ciudadanoDemandado.usuario.identificacion}}</p>
+                    <td>
+                      {{ limitacion.datos.demandado.primerNombre }} {{ limitacion.datos.demandado.primerApellido }}
+                      <br>
+                      {{ limitacion.datos.demandado.tipoIdentificacion.nombre }}
+                      <br>
+                      {{ limitacion.datos.demandado.identificacion }}
                     </td>
-
                   </tr>
                   <tr>
                     <th>Estado</th>
-                    <td class="odd center" *ngIf="limitacionVehiculoMostrar.limitacionDatos.estado==true">
-                      <p>Inscrita</td>
-
+                    <td>
+                      <span *ngIf="limitacion.datos.activo">Inscrita</span>
+                    </td>
                     <th>Descripción</th>
-                    <td class="odd center">{{limitacionVehiculoMostrar.limitacionDatos.ciudadanoDemandado.observaciones}}</td>
+                    <td>{{ limitacion.datos.observaciones }}</td>
                   </tr>
                   <tr>
-                    <th>Causal Limitación</th>
-                    <td class="odd center">{{limitacionVehiculoMostrar.limitacionDatos.causalLimitacion.nombre}}</td>
-
+                    <th>Tipo</th>
+                    <td class="odd center">{{ limitacion.datos.tipo.nombre }}</td>
                     <th>Acciones</th>
                     <td class="center">
-                      <button (click)="enviarTramite(limitacionVehiculoMostrar.id)" class="btn btn-primary">Levantar Limitacion</button>
+                      <button (click)="onDelete(limitacion)" class="btn btn-primary">Levantar Limitacion</button>
                     </td>
-
-
                   </tr>
-
                 </thead>
-                <td class="center">
-                  <button (click)="onCancelar()" class="btn">Aceptar</button>
-                </td>
               </table>
+
+              <button (click)="onCancelar()" class="btn btn-default">
+                <i class="fa fa-times"></i>
+              </button>
             </div>
-
           </div>
-
-
-
-
-
         </form>
       </div>
-
-
     </div>
-
-
-
   </div>
-
   <!-- /.col -->
 </div>
 <!-- /.row -->

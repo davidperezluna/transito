@@ -17,7 +17,7 @@ import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategori
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
 import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
-import { CfgCausalLimitacionRoutes } from './cfgCausalLimitacion/cfgCausalLimitacion.routes';
+import { VhloCfgLimitacionCausalRoutes } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.routes';
 
 import { CvAudienciaRoutes } from './cvAudiencia/cvAudiencia.routes';
 import { CvAuCfgAtencionRoutes } from './cvAuCfgAtencion/cvAuCfgAtencion.routes';
@@ -155,8 +155,6 @@ import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamiento
 import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
 import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
 import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEmpresaServicio.routes';
-import { LimitacionRoutes } from './limitacion/limitacion.routes';
-import { CfgTipoProcesoRoutes } from './cfgTipoProceso/cfgTipoProceso.routes';
 import { SvCfgClaseAccidenteRoutes } from './svCfgClaseAccidente/svCfgClaseAccidente.routes';
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
@@ -219,6 +217,8 @@ import { VhloPropietarioRoutes } from './vhloPropietario/vhloPropietario.routes'
 import { VhloCfgCarroceriaRoutes } from './vhloCfgCarroceria/vhloCfgCarroceria.routes';
 import { VhloCfgPlacaRoutes } from './vhloCfgPlaca/vhloCfgPlaca.routes';
 import { VhloRnaPreasignacionPlacaRoutes } from './vhloRnaPreasignacionPlaca/vhloRnaPreasignacionPlaca.routes';
+import { VhloCfgLimitacionTipoRoutes } from './vhloCfgLimitacionTipo/vhloCfgLimitacionTipo.routes';
+import { VhloCfgLimitacionTipoProcesoRoutes } from './vhloCfgLimitacionTipoProceso/vhloCfgLimitacionTipoProceso.routes';
 import { VhloRnaTramiteInscripcionLimitacionRoutes } from './vhloRnaTramiteInscripcionLimitacion/vhloRnaTramiteInscripcionLimitacion.routes';
 import { VhloRnaTramiteLevantamientoLimitacionRoutes } from './vhloRnaTramiteLevantamientoLimitacion/vhloRnaTramiteLevantamientoLimitacion.routes';
 
@@ -422,7 +422,9 @@ export const DashboardRoutes: Route[] = [
       ...CfgComparendoEstadoRoutes,
       ...CfgOrganismoTransitoRoutes,
       ...CfgEntidadJudicialRoutes,
-      ...CfgCausalLimitacionRoutes,
+      ...VhloCfgLimitacionCausalRoutes,
+      ...VhloCfgLimitacionTipoRoutes,
+      ...VhloCfgLimitacionTipoProcesoRoutes,
       ...CfgChoqueConRoutes,
       ...CfgObjetoFijoRoutes,
       ...MsvTalonarioRoutes,
@@ -434,8 +436,6 @@ export const DashboardRoutes: Route[] = [
       ...RnrsTramiteInscripcionLimitacionRoutes,
       ...RnrsTramiteLevantamientoLimitacionRoutes,
       ...ImoAsignacionRoutes,
-      ...LimitacionRoutes,
-      ...CfgTipoProcesoRoutes,
       ...CfgValorVehiculoRoutes,
       ...RnrsPreregistroRoutes,
       ...ReporteRoutes,

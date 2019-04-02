@@ -1,18 +1,17 @@
 export class VhloRnaTramiteInscripcionLimitacion{
 	constructor(
-
 		public fechaRadicacion:string,
-		public municipioId:number,
-		public departamentoId:number,
-		public ciudadanoDemandadoId:number,
-		public ciudadanoDemandanteId:number,
 		public numeroOrdenJudicial:string,
-		public limitacionId:number,
+		public datos:string,
 		public fechaExpedicion:string,
-		public tipoProcesoId:number,
-		public entidadJudicialId:number,
-		public causalLimitacionId:number,
 		public observaciones:string,
-		public datos:string
+		public idDemandado:number,
+		public idDemandante:number,
+		public idTipoProcesoLimitacion:number,
+		public idEntidadJudicial:number,
+		public idCausalLimitacion:number,
+		public idTipoLimitacion:number,
+		public idDepartamento:number,
+		public idMunicipio:number,
 	){}
 }

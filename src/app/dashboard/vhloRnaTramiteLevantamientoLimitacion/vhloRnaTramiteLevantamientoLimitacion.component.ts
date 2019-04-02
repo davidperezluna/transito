@@ -1,9 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TramiteLimitacionService } from '../../services/tramiteLimitacion.service';
-import { VehiculoLimitacionService } from '../../services/vehiculoLimitacion.service';
-import { VehiculoService } from '../../services/vehiculo.service';
-import { VhloRnaTramiteLevantamientoLimitacion } from './vhloRnaTramiteLevantamientoLimitacion.modelo';
-import { UserCiudadano } from '../userCiudadano/userCiudadano.modelo';
+import { VhloLimitacionService } from '../../services/vhloLimitacion.service';
+import { VhloVehiculoService } from '../../services/vhloVehiculo.service';
 
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert2';
@@ -13,85 +10,28 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './vhloRnaTramiteLevantamientoLimitacion.component.html'
 })
+
 export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
-  public rnaTramiteLevantamientoLimitacion: VhloRnaTramiteLevantamientoLimitacion;
-  public TramiteLimitacionService:any;
   public errorMessage;
-  public respuesta;
-  public tramitesLevantamiento;
+
   public table: any = null;
-  public tramiteLevantamiento: any;
-  public listaLimitacionVehiculo = false;
-  public limitacionesVehiculo: any;
-  public limitacionVehiculoMostrar: any;
-  public limitacionVehiculoM=false;
+  
+  public limitaciones: any;
+  public limitacion: any;
+
   public formIndex = true;
+  public formShow = true;
+
   public placa: any;
-  public limitacionVehiculoEncontrada = 1;
+  public vehiculo: any;
 
   constructor(
-    private _VehiculoLimitacionService: VehiculoLimitacionService,
-    private _VehiculoService: VehiculoService,
-    private _loginService: LoginService,
+    private _VehiculoLimitacionService: VhloLimitacionService,
+    private _VehiculoService: VhloVehiculoService,
+    private _LoginService: LoginService,
   ) { }
 
-  ngOnInit() {
-    swal({
-      title: 'Cargando Tabla!',
-      text: 'Solo tardara unos segundos por favor espere.',
-      timer: 1500,
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    });
-
-    let datos = {
-      'moduloId': 2,
-    };
-    this._VehiculoLimitacionService.getVehiculoLimitacion(datos).subscribe(
-      response => {
-        if (response) {
-
-          console.log(response);
-          this.tramitesLevantamiento = response.data;
-          let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
-          }, 100);
-        }
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-  }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-        oPaginate: {
-          sFirst: '<<',
-          sPrevious: '<',
-          sNext: '>',
-          sLast: '>>'
-        }
-      }
-    });
-    this.table = $('#dataTables-example').DataTable();
-  }
-
+  ngOnInit() { }
 
   ready(isCreado: any) {
     if (isCreado) {
@@ -109,27 +49,34 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
       }
     });
 
-    let token = this._loginService.getToken();
+    let token = this._LoginService.getToken();
+
     let datos = {
-      'placa': this.placa,
-      'moduloId': 2
+      'numero': this.placa,
     };
 
-    this._VehiculoService.showVehiculoModuloPlaca(token, datos).subscribe(
+    this._VehiculoService.searchByPlaca(datos, token).subscribe(
       response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          this.limitacionVehiculoEncontrada = 4;
-          this._VehiculoLimitacionService.getTramiteLimitacionPlaca(datos, token).subscribe(
+        if (response.status == 'success') {
+          this.vehiculo = response.data;
+
+          this._VehiculoLimitacionService.searchByPlaca({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
             response => {
-              this.respuesta = response;
-              swal.close();
-              if (this.respuesta.status == 'success') {
-                this.limitacionesVehiculo = this.respuesta.data;
-                this.limitacionVehiculoEncontrada = 2;
-                this.listaLimitacionVehiculo = true;
+              if (response.status == 'success') {
+                this.limitaciones = response.data;
+                this.formIndex = true;
+                this.formShow = false;
+
+                swal.close();
               } else {
-                this.limitacionVehiculoEncontrada = 3;
+                this.limitaciones = null;
+
+                swal({
+                  title: 'Error!',
+                  text: response.message,
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
               }
               error => {
                 this.errorMessage = <any>error;
@@ -141,7 +88,14 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
               }
             });
         } else {
-          this.limitacionVehiculoEncontrada = 5;
+          this.vehiculo = null;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
         }
         error => {
           this.errorMessage = <any>error;
@@ -151,52 +105,82 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-      });
-
-
-
+      }
+    );
   }
 
-  enviarTramite(limitacionVehiculo:any) {
-    let token = this._loginService.getToken();
-    this._VehiculoLimitacionService.levantarLimitacion(limitacionVehiculo, token).subscribe(
-      response => {
-        this.respuesta = response;
-        if (this.respuesta.status == 'success') {
-          swal({
-            title: 'Perfecto!',
-            text: 'Registro exitoso!',
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-          this.listaLimitacionVehiculo = false;
-          this.limitacionVehiculoM = false;
-          this.limitacionVehiculoMostrar = null;
-          this.limitacionVehiculoEncontrada = 1;
-        } else {
-          this.limitacionVehiculoEncontrada = 3;
+  iniciarTabla() {
+    $('#dataTables-example').DataTable({
+      responsive: true,
+      pageLength: 8,
+      sPaginationType: 'full_numbers',
+      oLanguage: {
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
         }
-        error => {
-          this.errorMessage = <any>error;
+      }
+    });
+    this.table = $('#dataTables-example').DataTable();
+  }
 
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
+  onDelete(limitacion:any) {
+    swal({
+      title: '¿Estás seguro?',
+      text: "¡Se levantara la limitación!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#15d4be',
+      cancelButtonColor: '#ff6262',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        let token = this._LoginService.getToken();
+        
+        this._VehiculoLimitacionService.delete({ 'id': limitacion.id }, token).subscribe(
+          response => {
+            if (response.status == 'success') {
+              swal({
+                title: 'Perfecto!',
+                text: response.message,
+                type: 'success',
+                confirmButtonText: 'Aceptar'
+              });
+    
+              this.ready(true);
+            } else {
+              swal({
+                title: 'Error!',
+                text: response.message,
+                type: 'error',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+            error => {
+              this.errorMessage = <any>error;
+    
+              if (this.errorMessage != null) {
+                console.log(this.errorMessage);
+                alert("Error en la petición");
+              }
+            }
           }
-        }
-      });
+        );
+      }
+    });
   }
 
   onCancelar() {
-    this.listaLimitacionVehiculo = false;
-    this.limitacionVehiculoM = false;
-    this.limitacionVehiculoEncontrada = 1;
+    this.formShow = false;
   }
 
-  ver(limitacionVehiculoP: any): void {
-    this.limitacionVehiculoM = true;
-    this.limitacionVehiculoMostrar = limitacionVehiculoP;
-    this.listaLimitacionVehiculo = false;
+  onShow(limitacion: any): void {
+    this.formIndex = false;
+    this.formIndex = true;
+    this.limitacion = limitacion;
   }
 
 }
