@@ -53,13 +53,13 @@ constructor(
     this.msvRevision.funcionarioId = this.contratistaSelected;
     this.msvRevision.empresaId = this.miEmpresa.id;
 
-		this._MsvRevisionService.register(this.msvRevision,token).subscribe(
+		this._MsvRevisionService.register(this.msvRevision, token).subscribe(
 			response => {
         if(response.status == 'success'){
           
           swal({
             title: 'Perfecto!',
-            text: 'Se ha registrado con exito',
+            text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
           })

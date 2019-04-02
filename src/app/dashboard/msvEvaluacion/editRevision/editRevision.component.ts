@@ -66,7 +66,7 @@ export class EditRevisionComponent implements OnInit {
         let token = this._LoginService.getToken();
         this.msvRevision.funcionarioId = this.contratistaSelected;
         this.msvRevision.empresaId = this.miEmpresa.id;
-        this._RevisionService.editRevision(this.msvRevision, token).subscribe(
+        this._RevisionService.edit(this.msvRevision, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this._CategoriaService.getCategoriaSelect().subscribe(
+        this._CategoriaService.select().subscribe(
             response => {
                 this.categorias = response;
                 setTimeout(() => {

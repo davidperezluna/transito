@@ -46,14 +46,22 @@ export class MsvCategoriaService {
 	}
 
 	// tslint:disable-next-line:one-line
-	editCategoria(revision,token){
-		let json = JSON.stringify(revision);
+	editCategoria(datos,token){
+		let json = JSON.stringify(datos);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
  		return this._http.post(this.url+"/edit", params, {headers: headers}).map(res => res.json());
 	}
 
-	getCategoriaSelect(){
-		return this._http.get(this.url+"/select/categoria").map(res => res.json());
+	//
+	editEstadoCategoria(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "data="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 		return this._http.post(this.url+"/edit/estado/categoria", params, {headers: headers}).map(res => res.json());
+	}
+
+	select(){
+		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 }

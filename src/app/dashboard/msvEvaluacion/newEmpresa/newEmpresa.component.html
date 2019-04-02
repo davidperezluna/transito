@@ -4,7 +4,7 @@
             <div class="card-body ">
                 <h5 class="m-0">Nueva persona jurídica</h5>
                 <hr>
-                <form #formNew="ngForm">
+                <form #formNewEmpresa="ngForm">
                     <div class="row justify-content-center container">
                         <div class="form-group row">
                             <!-- informacion  especifica de la nueva empresa-->
@@ -166,7 +166,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <button (click)="onEnviar()" [disabled]="formNewEmpresa.invalid" class="btn btn-primary" type="button">
                             <i class="fa fa-floppy-o"></i>
                             Enviar
                         </button>
