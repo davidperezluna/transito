@@ -19,8 +19,8 @@ export class VhloRnaTramiteLevantamientoLimitacionComponent implements OnInit {
   public limitaciones: any;
   public limitacion: any;
 
-  public formIndex = true;
-  public formShow = true;
+  public formIndex = false;
+  public formShow = false;
 
   public placa: any;
   public vehiculo: any;

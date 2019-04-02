@@ -47,7 +47,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.licenciaConduccion = new UserLicenciaConduccion(null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.licenciaConduccion = new UserLicenciaConduccion(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         this._OrganismoTransitoService.selectSedes().subscribe(
             response => {

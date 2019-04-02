@@ -1,17 +1,16 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { UserCiudadano } from '../../userCiudadano/userCiudadano.modelo';
 import { VhloRnaTramiteInscripcionLimitacion } from '../vhloRnaTramiteInscripcionLimitacion.modelo';
-import { TramiteLimitacionService } from '../../../services/tramiteLimitacion.service';
+import { VhloCfgLimitacionTipoProcesoService } from '../../../services/vhloCfgLimitacionTipoProceso.service';
+import { VhloCfgLimitacionCausalService } from '../../../services/vhloCfgLimitacionCausal.service';
+import { VhloCfgLimitacionTipoService } from '../../../services/vhloCfgLimitacionTipo.service';
 import { VhloLimitacionService } from '../../../services/vhloLimitacion.service';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
+import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgDepartamentoService } from '../../../services/cfgDepartamento.service';
 import { CfgEntidadJudicialService } from '../../../services/cfgEntidadJudicial.service';
-import { VhloCfgLimitacionTipoProcesoService } from '../../../services/vhloCfgLimitacionTipoProceso.service';
-import { VhloCfgLimitacionCausalService } from '../../../services/vhloCfgLimitacionCausal.service';
-import { VhloCfgLimitacionTipoService } from '../../../services/vhloCfgLimitacionTipo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -50,9 +49,9 @@ export class NewComponent implements OnInit {
   }
 
   constructor(
-    private _InscripcionLimitacionService: TramiteLimitacionService,
     private _VehiculoLimitacionService: VhloLimitacionService,
     private _VehiculoService: VhloVehiculoService,
+    private _PropietarioService: VhloPropietarioService,
     private _UserCiudadanoService: UserCiudadanoService,
     private _DepartamentoService: CfgDepartamentoService,
     private _MunicipioService: CfgMunicipioService,
@@ -123,7 +122,7 @@ export class NewComponent implements OnInit {
       }
     );
 
-    this._TipoLimitacionService.index().subscribe(
+    this._TipoLimitacionService.select().subscribe(
       response => {
         this.limitaciones = response;
       },
@@ -170,24 +169,25 @@ export class NewComponent implements OnInit {
 
     this._VehiculoService.searchByPlaca({ 'numero': this.placa }, token).subscribe(
       response => {
-        if (response.status == 'success') {
+        if (response.code == 200) {
           this.vehiculo = response.data;
+          
+          swal.close();
 
           this.datos.vehiculos.push(
             {
               'id': this.vehiculo.id,
               'placa': this.vehiculo.placa.numero,
-              'organismoTransito': this.vehiculo.idOrganismoTransito.nombre,
+              'organismoTransito': this.vehiculo.organismoTransito.nombre,
             }
           );
 
-          swal.close();
         } else {
           this.vehiculo = null;
 
           swal({
             title: 'Error!',
-            text: response.messsage,
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
@@ -224,26 +224,73 @@ export class NewComponent implements OnInit {
       response => {
         if (response.code == 200) {
           if (response.data.ciudadano) {
-            this.demandado = response.data.ciudadano;
+            this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.ciudadano.id, 'tipo': 'CIUDADANO', 'idVehiculo': this.vehiculo.id }, token).subscribe(
+              response => {
+                  if (response.code == 200) {
+                      this.demandado = response.data.ciudadano;
 
-            this.datos.demandados[0](
-              {
-                'id': this.demandado.id,
-                'nombre': this.demandado.primerNombre,
-                'identificacion': this.demandado.identificacion,
-                'tipo': 'CIUDADANO'
+                      this.datos.demandados.push(
+                        {
+                          'id': this.demandado.id,
+                          'nombre': this.demandado.primerNombre,
+                          'identificacion': this.demandado.identificacion,
+                          'tipo': 'CIUDADANO'
+                        }
+                      );
+
+                      swal.close();
+                  } else {
+                      this.demandado = null;
+
+                      swal({
+                          title: 'Error!',
+                          text: response.message,
+                          type: 'error',
+                          confirmButtonText: 'Aceptar'
+                      });
+                  }
+                  error => {
+                      this.errorMessage = <any>error;
+                      if (this.errorMessage != null) {
+                          console.log(this.errorMessage);
+                          alert('Error en la petición');
+                      }
+                  }
               }
-            );
-
+            ); 
           }else if(response.data.empresa) {
-            this.demandado = response.data.empresa;
+            this._PropietarioService.searchByCiudadanoOrEmpresaAndVehiculo({ 'id': response.data.empresa.id, 'tipo': 'EMPRESA', 'idVehiculo': this.vehiculo.id }, token).subscribe(
+              response => {
+                  if (response.code == 200) {
+                      this.demandado = response.data.empresa;
 
-            this.datos.demandados[0](
-              {
-                'id': this.demandado.id,
-                'nombre': this.demandado.nombre,
-                'identificacion': this.demandado.nit,
-                'tipo': 'EMPRESA'
+                      this.datos.demandados.push(
+                        {
+                          'id': this.demandado.id,
+                          'nombre': this.demandado.nombre,
+                          'identificacion': this.demandado.nit,
+                          'tipo': 'EMPRESA'
+                        }
+                      );
+
+                      swal.close();
+                  } else {
+                      this.demandado = null;
+
+                      swal({
+                          title: 'Error!',
+                          text: response.message,
+                          type: 'error',
+                          confirmButtonText: 'Aceptar'
+                      });
+                  }
+                  error => {
+                      this.errorMessage = <any>error;
+                      if (this.errorMessage != null) {
+                          console.log(this.errorMessage);
+                          alert('Error en la petición');
+                      }
+                  }
               }
             );
           }
@@ -273,7 +320,7 @@ export class NewComponent implements OnInit {
 
   onSearchDemandante() {
     swal({
-      title: 'Buscando demandado!',
+      title: 'Buscando demandante!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
@@ -283,8 +330,8 @@ export class NewComponent implements OnInit {
     let token = this._LoginService.getToken();
 
     let identificacion = {
-      'idTipoIdentificacion': this.idTipoIdentificacionDemandante,
       'identificacion': this.identificacionDemandante,
+      'idTipoIdentificacion': this.idTipoIdentificacionDemandante,
     };
 
     this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
@@ -293,7 +340,7 @@ export class NewComponent implements OnInit {
           if (response.data.ciudadano) {
             this.demandante = response.data.ciudadano;
 
-            this.datos.demandantes[0](
+            this.datos.demandantes.push(
               {
                 'id': this.demandante.id,
                 'nombre': this.demandante.primerNombre,
@@ -301,11 +348,10 @@ export class NewComponent implements OnInit {
                 'tipo': 'CIUDADANO'
               }
             );
-
           }else if(response.data.empresa) {
             this.demandante = response.data.empresa;
 
-            this.datos.demandantes[0](
+            this.datos.demandantes.push(
               {
                 'id': this.demandante.id,
                 'nombre': this.demandante.nombre,
@@ -373,7 +419,7 @@ export class NewComponent implements OnInit {
 
     this.datos.limitacion = this.inscripcionLimitacion;
 
-    this._InscripcionLimitacionService.register(this.datos, token).subscribe(
+    this._VehiculoLimitacionService.register(this.datos, token).subscribe(
       response => {
         if (response.status == 'success') {
           this.ready.emit(true);

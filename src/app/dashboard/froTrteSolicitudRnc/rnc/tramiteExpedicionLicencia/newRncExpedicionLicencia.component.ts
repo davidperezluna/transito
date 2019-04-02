@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
+import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
+import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { UserLcCfgCategoriaService } from '../../../../services/userLcCfgCategoria.service';
 import { CfgPaisService } from '../../../../services/cfgPais.service';
@@ -21,89 +23,180 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     @Input() tramiteFactura: any = null;
     public errorMessage;
 
+    public autorizado: any = false;
+    public tramiteSolicitud: any = null;
+    public funcionario: any = null;
     public paises: any;
     public clases: any;
     public servicios: any;
     public categorias: any;
-    public tramiteFacturaSelected: any;
+    public radio: any;
 
     public datos = {
-        'numeroLicenciaConduccion': null,
+        'numero': null,
         'numeroRunt': null,
+        'restriccion': null,
         'fechaExpedicion': null,
+        'idFuncionario': null,
         'idPais': null,
+        'idCategoria': null,
         'idClase': null,
         'idServicio': null,
-        'idCategoria': null,
         'idOrganismoTransito': null,
         'idTramiteFactura': null,
         'idSolicitante': null,
     };
 
     constructor(
-        private _LoginService: LoginService,
+        private _TramiteFacturaService: FroFacTramiteService,
+        private _TramiteSolicitudService: FroTrteSolicitudService,
+        private _FuncionarioService: PnalFuncionarioService,
         private _CiudadanoService: UserCiudadanoService,
         private _CfgPaisService: CfgPaisService,
-        private _FuncionarioService: PnalFuncionarioService,
         private _ClaseService: VhloCfgClaseService,
         private _ServicioService: VhloCfgServicioService,
         private _CfgLicenciaConduccionCategoriaService: UserLcCfgCategoriaService,
         private _LicenciaConduccionService: RncLicenciaConduccionService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this._CfgLicenciaConduccionCategoriaService.select().subscribe(
-            response => {
-                this.categorias = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
+        let token = this._LoginService.getToken();
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+        let identity = this._LoginService.getIdentity();
+
+        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    this.funcionario = response.data;
+                    this.datos.idFuncionario = response.data.id;
+                    this.autorizado = true;
+
+                    this._TramiteFacturaService.show({ 'id': this.tramiteFactura.id }, token).subscribe(
+                        response => {
+                            if (response.code == 200) {
+                                this.tramiteFactura = response.data;
+
+                                swal.close();
+                            } else {
+                                this.tramiteFactura = null;
+
+                                swal({
+                                    title: 'Error!',
+                                    text: response.message,
+                                    type: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+                        }
+                    );
+
+                    if (this.tramiteFactura.realizado) {
+                        let token = this._LoginService.getToken();
+
+                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                            response => {
+                                if (response.code == 200) {
+                                    this.tramiteSolicitud = response.data;
+                                } else {
+                                    this.tramiteSolicitud = null;
+
+                                    swal({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        type: 'error',
+                                        confirmButtonText: 'Aceptar'
+                                    });
+                                }
+                                error => {
+                                    this.errorMessage = <any>error;
+                                    if (this.errorMessage != null) {
+                                        console.log(this.errorMessage);
+                                        alert("Error en la petición");
+                                    }
+                                }
+                            }
+                        );
+                    }else{
+                        this._CfgLicenciaConduccionCategoriaService.select().subscribe(
+                            response => {
+                                this.categorias = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+                
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+                
+                        this._CfgPaisService.select().subscribe(
+                            response => {
+                              this.paises = response;
+                            },
+                            error => {
+                              this.errorMessage = <any>error;
+                      
+                              if(this.errorMessage != null){
+                                console.log(this.errorMessage);
+                                alert('Error en la petición');
+                              }
+                            }
+                        );
+                
+                        this._ClaseService.select().subscribe(
+                            response => {
+                                this.clases = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+                
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+                
+                        this._ServicioService.select().subscribe(
+                            response => {
+                                this.servicios = response;
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+                
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert('Error en la petición');
+                                }
+                            }
+                        );
+                    }
+                } else {
+                    this.autorizado = false;
+
+                    swal({
+                        title: 'Error!',
+                        text: 'Usted no tiene permisos para realizar tramites',
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
-            }
-        );
-
-        this._CfgPaisService.select().subscribe(
-            response => {
-              this.paises = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-      
-              if(this.errorMessage != null){
-                console.log(this.errorMessage);
-                alert('Error en la petición');
-              }
-            }
-        );
-
-        this._ClaseService.select().subscribe(
-            response => {
-                this.clases = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
-                }
-            }
-        );
-
-        this._ServicioService.select().subscribe(
-            response => {
-                this.servicios = response;
-            },
-            error => {
-                this.errorMessage = <any>error;
-
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert('Error en la petición');
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert('Error en la petición');
+                    }
                 }
             }
         );
@@ -134,13 +227,13 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
                     });
                 }
                 error => {
-                        this.errorMessage = <any>error;
-                    
-                        if(this.errorMessage != null){
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                        }
+                    this.errorMessage = <any>error;
+                
+                    if(this.errorMessage != null){
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
                     }
+                }
             }
         ); 
     }
@@ -148,45 +241,22 @@ export class NewRncExpedicionLicenciaComponent implements OnInit {
     onEnviar() {
         let token = this._LoginService.getToken();
 
-        let identity = this._LoginService.getIdentity();
+        this.datos.numero = this.solicitante.identificacion;
+        this.datos.idOrganismoTransito = this.funcionario.organismoTransito.id;
+        this.datos.idTramiteFactura = this.tramiteFactura.id;
+        this.datos.idSolicitante = this.solicitante.id;
 
-        this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
+        this._LicenciaConduccionService.register(this.datos, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    this.datos.numeroLicenciaConduccion = this.solicitante.identificacion;
-                    this.datos.idOrganismoTransito = response.data.organismoTransito.id;
-                    this.datos.idTramiteFactura = this.tramiteFactura.id;
-                    this.datos.idSolicitante = this.solicitante.id;
-
+                if (response.code == 200) {
                     let resumen = "<b>No. factura</b>" + this.tramiteFactura.factura.numero;
 
                     this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-
-                    /*this._LicenciaConduccionService.register(this.datos, token).subscribe(
-                        response => {
-                            if (response.status == 'success') {
-                                this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                            } else {
-                                swal({
-                                    type: 'warning',
-                                    title: 'Alerta!',
-                                    text: "No se registro el trámite."
-                                });
-                            }
-                            error => {
-                                this.errorMessage = <any>error;
-                                if (this.errorMessage != null) {
-                                    console.log(this.errorMessage);
-                                    alert('Error en la petición');
-                                }
-                            }
-                        }
-                    );*/
                 } else {
                     swal({
                         type: 'warning',
                         title: 'Alerta!',
-                        text: "Usted no tiene permisos para este trámite."
+                        text: "No se registro el trámite."
                     });
                 }
                 error => {

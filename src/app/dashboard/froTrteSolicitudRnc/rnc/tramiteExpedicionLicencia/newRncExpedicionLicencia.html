@@ -1,4 +1,19 @@
-<div class="row">
+<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div> 
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado && autorizado">
     <!-- .row -->
     <div class="col-xs-12 col-lg-12">
         <!-- .col -->
@@ -84,11 +99,17 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Número de Licencia <b class="text-danger">*</b></label>
-                                <input class="form-control" [(ngModel)]="solicitante.identificacion" name="numeroLicenciaConduccion" type="text" required readonly />
+                                <input class="form-control" [(ngModel)]="solicitante.identificacion" name="numero" type="text" required readonly />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Número RUNT <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Restricciones <b class="text-danger">*</b></label>
+                                <textarea class="form-control" [(ngModel)]="datos.restriccion" name="restriccion" rows="4" required></textarea>
                             </div>
                         </div>
                     </div>

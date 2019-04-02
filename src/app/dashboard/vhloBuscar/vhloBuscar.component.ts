@@ -24,7 +24,7 @@ export class VhloBuscarComponent implements OnInit {
     'numeroMotor': null,
     'numeroChasis': null,
     'propietario': null,
-};
+  };
 
 
 constructor(

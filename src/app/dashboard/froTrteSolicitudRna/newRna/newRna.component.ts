@@ -41,6 +41,8 @@ export class NewRnaComponent implements OnInit {
   public fromApoderado = false;
   public identificacionApoderado = false;
   public apoderado: any = null;
+  public placa: any = null;
+
 
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,
@@ -71,7 +73,7 @@ export class NewRnaComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._VehiculoService.searchByFilter({ 'filtro': this.vehiculoFiltro }, token).subscribe(
+    this._VehiculoService.searchByPlaca({'numero': this.placa }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;
