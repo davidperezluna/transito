@@ -127,9 +127,6 @@ import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
-import { TramiteSolicitudRpcccRoutes } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.routes';
-import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
-import { TramiteSolicitudRnrsRoutes } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.routes';
 
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
@@ -406,9 +403,6 @@ export const DashboardRoutes: Route[] = [
       ...FacturaRoutes,
       ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,
-      ...TramiteSolicitudRpcccRoutes,
-      ...TramiteSolicitudRnmaRoutes,
-      ...TramiteSolicitudRnrsRoutes,
       ...SustratoRoutes,
       ...GestionTransportePublicoRoutes,
       ...RnaPreregistroRoutes,

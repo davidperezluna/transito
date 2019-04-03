@@ -182,10 +182,6 @@ import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccid
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
 
-import { TramiteSolicitudRpcccModule } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.module';
-import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
-import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
-
 import { EmpresaAlcaldiaModule } from './empresaAlcaldia/empresaAlcaldia.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
@@ -421,9 +417,6 @@ import {RightsidebarComponent} from '../shared';
     InfraccionModule,
     FacturaModule,
     TramiteFacturaModule,
-    TramiteSolicitudRpcccModule,
-    TramiteSolicitudRnmaModule,
-    TramiteSolicitudRnrsModule,
     SustratoModule,
     GestionTransportePublicoModule,
     CvCfgTipoRestriccionModule,
