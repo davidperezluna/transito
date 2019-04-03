@@ -10,6 +10,7 @@ declare var $: any;
 })
 export class imoAsignacionComponent implements OnInit {
   public errorMessage;
+
 	public id;
 	public respuesta;
 	public insumoSustratos;
@@ -28,13 +29,14 @@ export class imoAsignacionComponent implements OnInit {
     ){}
     
   ngOnInit() {
-    swal({
+    /*swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',
       onOpen: () => {
         swal.showLoading()
       }
-    })
+    });*/
+
 		// this._ImoInsumoService.indexSustrato().subscribe(
 		// 		response => {
     //       this.insumoSustratos = response.data; 
@@ -68,8 +70,9 @@ export class imoAsignacionComponent implements OnInit {
 		// 		}
     //   );
   }
+
   iniciarTablaSustrato(){
-   $('#dataTables-example-Sustratos').DataTable({
+    this.table = $('#dataTables-example-Sustratos').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -79,18 +82,17 @@ export class imoAsignacionComponent implements OnInit {
       ],
       oLanguage: {
           oPaginate: {
-              sFirst: '<<',
-              sPrevious: '<',
-              sNext: '>',
-              sLast: '>>'
+            sFirst: '<i class="fa fa-step-backward"></i>',
+            sPrevious: '<i class="fa fa-chevron-left"></i>',
+            sNext: '<i class="fa fa-chevron-right"></i>',
+            sLast: '<i class="fa fa-step-forward"></i>'
           } 
       }
-  });
-  this.table = $('#dataTables-example-Sustratos').DataTable();
+    });
   }
 
   iniciarTablaInsumos(){
-    $('#dataTables-example-Insumos').DataTable({
+    this.table = $('#dataTables-example-Insumos').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -106,9 +108,9 @@ export class imoAsignacionComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
+
   onNew(){
     this.formNew = true;
     this.formIndex = false;
@@ -123,6 +125,7 @@ export class imoAsignacionComponent implements OnInit {
         this.ngOnInit();
       }
   }
+
   deleteImoInsumoServicey(id:any){
     swal({
       title: '¿Estás seguro?',
@@ -136,6 +139,7 @@ export class imoAsignacionComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         let token = this._loginService.getToken();
+
         this._ImoInsumoService.delete(token,id).subscribe(
             response => {
                 swal({
@@ -174,5 +178,4 @@ export class imoAsignacionComponent implements OnInit {
     this.formEdit = true;
     this.formIndex = false;
   }
-
 }

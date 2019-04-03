@@ -33,14 +33,15 @@ public insumoSelect:any;
 public loteInsumo:any;
 public insumoSelected:any;
 public lotes:any;
-public lotesSelecionados:any=[];
+public lotesSelecionados:any = [];
 public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
-public numeroActa:any=false;
+public numeroActa: any = null;
 public frmInsumo:any=false;
 public frmInsumoSelect:any=true; 
-public table:any; 
+public table:any;
+
 constructor(
   private _ImoLoteService: ImoLoteService,
   private _loginService: LoginService,
@@ -125,14 +126,17 @@ constructor(
       let datos={
         'tipoInsumo':this.insumoSelectedInsumo,
       }
+
       let token = this._loginService.getToken();
+
       this._ImoLoteService.show(datos,token).subscribe(
         response => {
           this.loteInsumo = response.data;
           if (response.status == 'success') {
-            console.log(this.loteInsumo);
             this.numero = this.loteInsumo.cantidad;
           }else{
+            this.numero = 0;
+
             swal({
               title: 'Error!',
               text: 'No existen insumos para esta sede',
@@ -279,11 +283,8 @@ constructor(
             if(this.respuesta.status == 'success'){
 
               swal.close();
-              // this.lotesSelecionados = null;
-              // this.lotes = null;
-              this.numeroActa = this.respuesta.data;
-              // this.ready.emit(true);
 
+              this.numeroActa = this.respuesta.data;
             }else{
               swal({
                 title: 'Error!',

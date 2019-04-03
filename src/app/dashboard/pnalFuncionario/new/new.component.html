@@ -128,12 +128,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-xs-12 col-lg-4" *ngIf='tipoNombramiento == 3 && cargoSelected == 2'>
-                                <label>Numero de nombramiento </label>
-                                <input class="form-control" [(ngModel)]="funcionario.numeroNombramiento" name="numeroNombramiento" type="number" required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <div class="col-xs-12 col-lg-3 offset-lg-3">
                                 <div class="custom-control custom-radio">
                                     <input name="inhabilidad" [(ngModel)]="funcionario.activo" value="true" type="radio"
@@ -141,25 +135,18 @@
                                     <label class="custom-control-label" for="customRadio1">Dar de alta</label>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-lg-3">
-                                <div class="custom-control custom-radio">
-                                    <input name="inhabilidad" [(ngModel)]="funcionario.activo" value="false"
-                                        type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadio2">Inhabilitar</label>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="btn-group">
-                                <button (click)="onCancelar()" (ready)="ready($event)" class="btn btn-default">
-                                    <i class="fa fa-times"></i>
-                                    Cancel
-                                </button>
-                                <button (click)="onEnviar()" (ready)="ready($event)" [disabled]="formNew.invalid"
+                                <button (click)="onEnviar()" [disabled]="formNew.invalid"
                                     class="btn btn-primary" type="button">
                                     <i class="fa fa-save"></i>
                                     Enviar
+                                </button>
+                                <button (click)="onCancelar()" class="btn btn-default">
+                                    <i class="fa fa-times"></i>
+                                    Cancelar
                                 </button>
                             </div>
                         </div>
@@ -186,11 +173,11 @@
                         </div>
 
                         <div class="btn-group">
-                            <button (click)="onConfirm()" (ready)="ready($event)" class="btn btn-primary" type="button">
+                            <button (click)="onConfirm()" class="btn btn-primary" type="button">
                                 <i class="fa fa-save"></i>
                                 Enviar
                             </button>
-                            <button (click)="onCancelarConfirm()" (ready)="ready($event)" class="btn btn-default">
+                            <button (click)="onCancelarConfirm()" class="btn btn-default">
                                 <i class="fa fa-times"></i>
                                 Cancelar
                             </button>

@@ -53,6 +53,80 @@
         </div>
     </div>
 
+    <div class="col-xs-12 col-lg-8" *ngIf="formNewCuenta">
+            <form #formCuenta="ngForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="text-uppercase">Crear Cuenta</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nombre</label>
+                                <input class="form-control text-uppercase" [(ngModel)]="datos.nombre" name="nombre" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-xs-12 col-lg-12">
+                        <button (click)="onRegisterCuenta()" [disabled]="formCuenta.invalid" class="btn btn-primary" type="button">
+                            <i class="fa fa-save"></i>
+                            Enviar
+                        </button>
+                        <button (click)="onCancelarCuenta()" class="btn btn-default">
+                            <i class="fa fa-times"></i>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    
+        <div class="col-xs-12 col-lg-8" *ngIf="formIndexCuenta">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-uppercase">Cuentas registradas
+                        <div class="btn-group pull-right">
+                            <button (click)="onNewCuenta()" class="btn btn-xs btn-primary">
+                                <i class="fa fa-plus"></i>
+                                <span class="text">Nueva</span>
+                            </button>
+                        </div>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Costo total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd" *ngFor="let cuenta of cuentas; let i = index">
+                                <td>{{ i +1 }}</td>
+                                <td>{{ cuenta.nombre }}</td>
+                                <td>{{ cuenta.costoTotal | currency: 'COP' }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button (click)="onIndexInsumo(cuenta)" class="btn btn-xs btn-default" type="button">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                        <button (click)="onDeleteActividad(cuenta.id)" class="btn btn-xs btn-danger" type="button">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     <div class="col-xs-12 col-lg-8" *ngIf="formNewActividad">
         <form #formActividad="ngForm">
             <div class="card">
@@ -70,11 +144,11 @@
             </div>
             <div class="form-group row">
                 <div class="col-xs-12 col-lg-12">
-                    <button (click)="onRegisterActividad()" (ready)="ready($event)" [disabled]="formActividad.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onRegisterActividad()" [disabled]="formActividad.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>
-                    <button (click)="onCancelarActividad()" (ready)="ready($event)" class="btn btn-default">
+                    <button (click)="onCancelarActividad()" class="btn btn-default">
                         <i class="fa fa-times"></i>
                         Cancelar
                     </button>
@@ -215,11 +289,11 @@
             </div>
             <div class="form-group row">
                 <div class="col-xs-12 col-lg-12">
-                    <button (click)="onRegisterInsumo()" (ready)="ready($event)" [disabled]="formInsumo.invalid" class="btn btn-primary" type="button">
+                    <button (click)="onRegisterInsumo()" [disabled]="formInsumo.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
                     </button>
-                    <button (click)="onCancelarInsumo()" (ready)="ready($event)" class="btn btn-default">
+                    <button (click)="onCancelarInsumo()" class="btn btn-default">
                         <i class="fa fa-times"></i>
                         Cancelar
                     </button>
