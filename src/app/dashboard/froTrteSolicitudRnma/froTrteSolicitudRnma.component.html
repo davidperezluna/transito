@@ -1,0 +1,120 @@
+<div class="container-fluid">
+  <hr>
+  <div class="row" *ngIf='formSearch'>
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-3">
+      <!-- .col -->
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Solicitudes de Trámites RNA</b>
+          <small>Buscar</small>
+        </div>
+        <div class="card-body">
+          <!-- .card-body -->
+          <form #formSearch="ngForm">
+            <div class="form-group">
+              <div class="row">
+                <!-- .row -->
+                <div class="col-xs-12 col-lg-12">
+                  <label>Tipo de filtro</label>
+                  <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 2">
+                  <label>No. factura</label>
+                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 3">
+                  <label>Fecha</label>
+                  <input class="form-control" [(ngModel)]="search.filtro" name="filtro" type="date" required>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 4">
+                  <label>No. identificación</label>
+                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="numeric" required>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+          </form>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onNew()" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.col -->
+
+    <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
+      <div class="row"><!-- .row -->
+        <div class="col-xs-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">
+                <b>Módulo RNA</b>
+                <small>Solicitudes de tramite</small>
+                <div class="btn-group pull-right">
+                  <button (click)="onNew()" class="btn btn-xs btn-default">
+                    <i class="fa fa-plus"></i>
+                    <span class="text">Nuevo</span>
+                  </button>
+                </div>
+              </h5>
+            </div>
+            <div class="card-body">
+              <table class="table " id="dataTables-example">
+                <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Factura</th>
+                      <th>Tramite</th>
+                      <th>Placa</th>
+                      <th>Fecha</th>
+                      <th>Detalles</th>
+                      <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="odd" *ngFor="let tramiteSolicitud of tramitesSolicitud; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ tramiteSolicitud.tramiteFactura.factura.numero }}</td>
+                    <td>{{ tramiteSolicitud.tramiteFactura.precio.nombre }}</td>
+                    <td>{{ tramiteSolicitud.vehiculo.placa.numero }}</td>
+                    <td>{{ tramiteSolicitud.fecha }}</td>
+                    <td>
+                      <tooltip-content #myTooltip [animation]="true" placement="top">
+                        <b style="color: #00b3ee">Resumen del trámite</b>
+                        {{ tramiteSolicitud.resumen }}
+                      </tooltip-content>
+                      <button class="btn btn-xs btn-success" [tooltip]="myTooltip">
+                        <i class="fa fa-info"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button (click)="onDelete(tramiteSolicitud.id)"  class="btn btn-danger" type="button" tooltip="Eliminar" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+                          <i class="fa fa-trash"></i>
+                        </button> 
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /.table-responsive --> 
+            </div>
+          </div>
+        </div>
+      </div><!-- .row -->
+    </div>
+  </div>
+  
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>
