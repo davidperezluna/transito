@@ -127,9 +127,6 @@ import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
 import { FacturaInfraccionRoutes } from './facturaInfraccion/facturaInfraccion.routes';
 import { TramiteFacturaRoutes } from './tramiteFactura/tramiteFactura.routes';
-import { TramiteSolicitudRpcccRoutes } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.routes';
-import { TramiteSolicitudRnmaRoutes } from './tramiteSolicitudRnma/tramiteSolicitudRnma.routes';
-import { TramiteSolicitudRnrsRoutes } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.routes';
 
 import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
@@ -182,6 +179,8 @@ import { FroTramiteRoutes } from './froTramite/froTramite.routes';
 import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
 import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
 import { FroTrteSolicitudRnaRoutes } from './froTrteSolicitudRna/froTrteSolicitudRna.routes';
+import { FroTrteSolicitudRnmaRoutes } from './froTrteSolicitudRnma/froTrteSolicitudRnma.routes';
+import { FroTrteSolicitudRnrsRoutes } from './froTrteSolicitudRnrs/froTrteSolicitudRnrs.routes';
 import { FroReporteIngresosRoutes } from './froReporteIngresos/froReporteIngresos.routes';
 import { FroCfgTipoRecaudoRoutes } from './froCfgTipoRecaudo/froCfgTipoRecaudo.routes';
 import { FroTrteSolicitudRncRoutes } from './froTrteSolicitudRnc/froTrteSolicitudRnc.routes';
@@ -406,9 +405,6 @@ export const DashboardRoutes: Route[] = [
       ...FacturaRoutes,
       ...FacturaInfraccionRoutes,
       ...TramiteFacturaRoutes,
-      ...TramiteSolicitudRpcccRoutes,
-      ...TramiteSolicitudRnmaRoutes,
-      ...TramiteSolicitudRnrsRoutes,
       ...SustratoRoutes,
       ...GestionTransportePublicoRoutes,
       ...RnaPreregistroRoutes,
@@ -455,6 +451,8 @@ export const DashboardRoutes: Route[] = [
       ...FroTrteCfgConceptoRoutes,
       ...FroTrtePrecioRoutes,
       ...FroTrteSolicitudRnaRoutes,
+      ...FroTrteSolicitudRnmaRoutes,
+      ...FroTrteSolicitudRnrsRoutes,
       ...FroReporteIngresosRoutes,
       ...FroCfgTipoRecaudoRoutes,
       

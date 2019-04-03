@@ -182,10 +182,6 @@ import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccid
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
 
-import { TramiteSolicitudRpcccModule } from './tramiteSolicitudRpccc/tramiteSolicitudRpccc.module';
-import { TramiteSolicitudRnmaModule } from './tramiteSolicitudRnma/tramiteSolicitudRnma.module';
-import { TramiteSolicitudRnrsModule } from './tramiteSolicitudRnrs/tramiteSolicitudRnrs.module';
-
 import { EmpresaAlcaldiaModule } from './empresaAlcaldia/empresaAlcaldia.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
@@ -239,6 +235,8 @@ import { FroTramiteModule } from './froTramite/froTramite.module';
 import { FroTrteCfgConceptoModule } from './froTrteCfgConcepto/froTrteCfgConcepto.module';
 import { FroTrtePrecioModule } from './froTrtePrecio/froTrtePrecio.module';
 import { FroTrteSolicitudRnaModule } from './froTrteSolicitudRna/froTrteSolicitudRna.module';
+import { FroTrteSolicitudRnmaModule } from './froTrteSolicitudRnma/froTrteSolicitudRnma.module';
+import { FroTrteSolicitudRnrsModule } from './froTrteSolicitudRnrs/froTrteSolicitudRnrs.module';
 import { FroReporteIngresosModule } from './froReporteIngresos/froReporteIngresos.module';
 import { FroCfgTipoRecaudoModule } from './froCfgTipoRecaudo/froCfgTipoRecaudo.module';
 import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
@@ -421,9 +419,6 @@ import {RightsidebarComponent} from '../shared';
     InfraccionModule,
     FacturaModule,
     TramiteFacturaModule,
-    TramiteSolicitudRpcccModule,
-    TramiteSolicitudRnmaModule,
-    TramiteSolicitudRnrsModule,
     SustratoModule,
     GestionTransportePublicoModule,
     CvCfgTipoRestriccionModule,
@@ -471,6 +466,8 @@ import {RightsidebarComponent} from '../shared';
     FroTrteCfgConceptoModule,
     FroTrtePrecioModule,
     FroTrteSolicitudRnaModule,
+    FroTrteSolicitudRnmaModule,
+    FroTrteSolicitudRnrsModule,
     FroReporteIngresosModule,
     FroCfgTipoRecaudoModule,
   ],

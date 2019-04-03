@@ -1,0 +1,45 @@
+<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado && autorizado"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <b class="text-primary">
+                    Registrar nuevo servicio
+                </b>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Servicios disponibles <span class="text-danger">*</span></label>
+                                <ng-select [multiple]="false" [options]="servicios" [(ngModel)]="servicioSelected" required name="servicioId">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
