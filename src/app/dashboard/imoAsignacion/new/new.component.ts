@@ -38,8 +38,6 @@ public insumoSelectedInsumo:any;
 public date:any;
 public numero:any;
 public numeroActa: any = null;
-public frmInsumo:any=false;
-public frmInsumoSelect:any=true; 
 public table:any;
 
 constructor(
@@ -109,20 +107,15 @@ constructor(
    this.rnaAsignacionInsumos.numero = parseInt(this.rnaAsignacionInsumos.rangoFin) - parseInt(this.rnaAsignacionInsumos.rangoInicio)+1;
   }
 
-  changedSedeOperativa(e){
-    if (e) {  
-      this.frmInsumoSelect = false;
-    }
-  }
-
-  changedSedeOperativaInsumo(e){
-    if (e) {
-      this.frmInsumoSelectInsumo = false;
-    }
-  }
-
   changedInsumoInsumo(e){
     if (e) {
+      swal({
+        title: 'Enviando datos!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      })
       let datos={
         'tipoInsumo':this.insumoSelectedInsumo,
       }
@@ -134,6 +127,7 @@ constructor(
           this.loteInsumo = response.data;
           if (response.status == 'success') {
             this.numero = this.loteInsumo.cantidad;
+            swal.close()
           }else{
             this.numero = 0;
 
@@ -159,6 +153,13 @@ constructor(
   }
 
   onSearchLote(){
+      swal({
+        title: 'Enviando datos!',
+        text: 'Solo tardara unos segundos por favor espere.',
+        onOpen: () => {
+          swal.showLoading()
+        }
+      })
       if (this.table) {
         this.table.destroy()
       }
@@ -172,6 +173,7 @@ constructor(
           
           if (response.status == 'success') {
             this.lotes = response.data;
+            swal.close()
             console.log(this.lotes);
             setTimeout(() => {
               this.iniciarTabla();
@@ -197,12 +199,6 @@ constructor(
       });
   }
 
-  onInsumo() {
-    this.frmInsumo = true;
-  }
-  onSustrato() {
-    this.frmInsumo = false;
-  }
 
   iniciarTabla(){
     $('#dataTables-example').DataTable({
@@ -303,6 +299,11 @@ constructor(
         }); 
       }
     })   
+  }
+
+  changedSedeOperativa(){
+    this.lotesSelecionados = [];
+    this.lotes = null;
   }
 
 }
