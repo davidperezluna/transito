@@ -139,7 +139,7 @@
                                     {{revision.correo}}
                                  </td>
                                  <td>
-                                    <span *ngIf="revision.evaluacion">{{ revision.evaluacion?.resultadofinal }}%</span>
+                                    <span *ngIf="revision.evaluacion">{{ revision.evaluacion?.resultadofinal | number:'1.1-2' }}%</span>
                                     <span *ngIf="!revision.evaluacion"></span>
                                  </td>
                                  <td>
@@ -151,8 +151,10 @@
                                        <button *ngIf="!revision.evaluacion" (click)="iniciarEvaluacion(revision)"
                                           class="btn btn-success">
                                           <i class="fa fa-plus"></i>
-                                          Nueva Evaluacion
+                                          
                                        </button>
+                                       <a href="{{ apiUrl }}/{{ idUsuario }}/{{ revision.evaluacion.id }}/aval/pdf" class="btn btn-info" target="_blank"
+                                          *ngIf="revision.evaluacion"><i class="fa fa-file-pdf-o"></i></a>
                                     </div>
                                  </td>
                               </tr>
@@ -164,7 +166,7 @@
             </div>
          </div>
 
-         <div class="card" *ngIf="miEmpresa">
+         <div class="card" *ngIf="miEmpresa && mostrarTablaEvaluacion && mostrarTablaValoresAgregados">
             <div class="card-header">
                <h5 class="text-uppercase">Valores Agregados
                </h5>
@@ -172,11 +174,11 @@
             <div class="card-body">
                <div class="form-group row">
                   <div class="col-lg-6 col-md-6">
-                     <label>¿Dese agregar valores agregados para la empresa?</label>
+                     <label>¿ Desea agregar valores agregados para la empresa ?</label>
                      <div class="form-group row">
                         <div class="col-xs-12 col-lg-6">
                            <div class="custom-control custom-radio">
-                              <input id="radioValorAgregadoSi" name="valorAgregado" [(ngModel)]="valorAgregado"
+                              <input id="radioValorAgregadoSi" name="valorAgregado" [(ngModel)]="datosTablaValorAgregado.valorAgregado"
                                  value="1" type="radio" id="customRadioValorAgregado1" name="customRadiValorAgregado"
                                  class="custom-control-input">
                               <label class="custom-control-label" for="customRadioValorAgregado1">Si</label>
@@ -184,7 +186,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-6">
                            <div class="custom-control custom-radio">
-                              <input id="radioPlacaNo" name="portaPlaca" [(ngModel)]="ValorAgregado" value="0"
+                              <input id="radioValorAgregadoNo" name="valorAgregado" [(ngModel)]="datosTablaValorAgregado.valorAgregado" value="0"
                                  type="radio" id="customRadioValorAgregado2" name="customRadioValorAgregado"
                                  class="custom-control-input">
                               <label class="custom-control-label" for="customRadioValorAgregado2">No</label>
@@ -192,37 +194,90 @@
                         </div>
                      </div>
                   </div>
-                  <table class="table table-bordered">
-                     <thead>
-                        <tr>
-                           <th><b>PARÁMETRO-DEFINICIÓN</b></th>
-                           <!--<th><b>VARIABLES</b></th>
-                           <th><b>CRITERIO DEL AVAL</b></th>
-                           <th><b>APLICA</b></th>
-                           <th><b>EVIDENCIAS DE SU EXISTENCIA</b></th>
-                           <th><b>RESPONDE A LOS REQUERIMIENTOS</b></th>
-                           <th><b>VALOR DE LA VARIABLE</b></th>
-                           <th><b>VALOR OBTENIDO</b></th>
-                           <th><b>OBSERVACIONES</b></th>-->
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <tr>
-                           <td>
-                              <input class="form-control" type="text" name="parametro" required>
-                           </td>
-                           <!--<td>
-                              <input>
-                           </td>
-                           <td>
-                              <input>
-                           </td>
-                           <td>
-                              <input>
-                           </td>-->
-                        </tr>
-                     </tbody>
-                  </table>
+                  <div class="col-lg-12 col-md-12"  *ngIf="datosTablaValorAgregado.valorAgregado == 1">
+                     <table class="table table-bordered">
+                        <thead>
+                           <tr>
+                              <th><b>PARÁMETRO-DEFINICIÓN</b></th>
+                              <th><b>VARIABLES</b></th>
+                              <th><b>CRITERIO DEL AVAL</b></th>
+                              <th><b>APLICA</b></th>
+                              <th><b>EVIDENCIAS DE SU EXISTENCIA</b></th>
+                              <th><b>RESPONDE A LOS REQUERIMIENTOS</b></th>
+                              <th><b>VALOR DE LA VARIABLE</b></th>
+                              <th><b>VALOR OBTENIDO</b></th>
+                              <th><b>OBSERVACIONES</b></th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td rowspan="4">
+                                 <label>NUEVAS PROPUESTAS O INNOVACIONES QUE SE PRESENTAN EN EL PESV Y SE OBSERVAN COMO UN VALOR AGREGADO.</label>
+                              </td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.variable1" name="variable1"></td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.criterio1" name="criterio1"></td>
+                              <td><input type="checkbox" [(ngModel)]="datosTablaValorAgregado.aplica1" name="aplica1"></td>
+                              <td><input type="checkbox" [(ngModel)]="datosTablaValorAgregado.evidencia1" name="evidencia1"></td>
+                              <td><input type="checkbox" (ngModelChange)="calcularTotal($event, msvParametro, 6)" [(ngModel)]="datosTablaValorAgregado.responde1" name="responde1"></td>
+                              <td>25</td>
+                              <td>
+                                 <label *ngIf="datosTablaValorAgregado.responde1 == 1">25</label>
+                                 <label *ngIf="datosTablaValorAgregado.responde1 == 0">0</label>
+                              </td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.observacion1" name="observacion1"></td>
+                           </tr>
+                           <tr>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.variable2" name="variable2"></td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.criterio2" name="criterio2"></td>
+                              <td><input type="checkbox" [(ngModel)]="datosTablaValorAgregado.aplica2" name="aplica2"></td>
+                              <td><input type="checkbox" [(ngModel)]="datosTablaValorAgregado.evidencia2" name="evidencia2"></td>
+                              <td><input type="checkbox" (ngModelChange)="calcularTotal($event, msvParametro, 6)" [(ngModel)]="datosTablaValorAgregado.responde2" name="responde2"></td>
+                              <td>25</td>
+                              <td>
+                                 <label *ngIf="datosTablaValorAgregado.responde2 == 1">25</label>
+                                 <label *ngIf="datosTablaValorAgregado.responde2 == 0">0</label>
+                              </td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.observacion2" name="observacion2"></td>
+                           </tr>
+                           <tr>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.variable3" name="variable3"></td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.criterio3" name="criterio3"></td>
+                              <td><input type="checkbox" [(ngModel)]="datosTablaValorAgregado.aplica3" name="aplica3"></td>
+                              <td><input type="checkbox" [(ngModel)]="datosTablaValorAgregado.evidencia3" name="evidencia3"></td>
+                              <td><input type="checkbox" (ngModelChange)="calcularTotal($event, msvParametro, 6)" [(ngModel)]="datosTablaValorAgregado.responde3" name="responde3"></td>
+                              <td>25</td>
+                              <td>
+                                 <label *ngIf="datosTablaValorAgregado.responde3 == 1">25</label>
+                                 <label *ngIf="datosTablaValorAgregado.responde3 == 0">0</label>
+                              </td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.observacion3" name="observacion3"></td>
+                           </tr>
+                           <tr>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.variable4" name="variable4"></td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.criterio4" name="criterio4"></td>
+                              <td><input type="checkbox" [(ngModel)]="datosTablaValorAgregado.aplica4" name="aplica4"></td>
+                              <td><input type="checkbox" [(ngModel)]="datosTablaValorAgregado.evidencia4" name="evidencia4"></td>
+                              <td><input type="checkbox" (ngModelChange)="calcularTotal($event, msvParametro, 6)" [(ngModel)]="datosTablaValorAgregado.responde4" name="responde4"></td>
+                              <td>25</td>
+                              <td>
+                                 <label *ngIf="datosTablaValorAgregado.responde4 == 1">25</label>
+                                 <label *ngIf="datosTablaValorAgregado.responde4 == 0">0</label>
+                              </td>
+                              <td><input style="height: 5em;" [(ngModel)]="datosTablaValorAgregado.observacion4" name="observacion4"></td>
+                           </tr>
+                           <tr>
+                              <td colspan="7">TOTAL</td>
+                              <td colspan="2">
+                                 <input class="form-control" [(ngModel)]="datos2.valorObtenidoValorAgregado" name="valorObtenidoValorAgregado" type="number" disabled>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <button (click)="onEnviar(6)" class="btn btn-primary m-2" [disabled]="botonEnviarValorAgregado">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                     </button>
+                  </div>
                </div>
             </div>
          </div>
@@ -237,9 +292,7 @@
                   [(ngModel)]="categoriaSelected" required name="idCategoria">
                </ng-select>
                <div *ngFor="let msvCategoria of msvCategorias; let i=index">
-                  <!--<div class="row" *ngIf="categoriaSelected  == msvCategoria.id">-->
-                  <div class="row" *ngIf="categoriaSelected == i+1">
-                     <!-- <div class="row" *ngIf="categoriaSelected == i+1 && showT">-->
+                  <div class="row" *ngIf="categoriaSelected == msvCategoria.value">
                      <div class="col-xs-12 col-lg-12">
                         <div class="card">
                            <div class="card-body" style="width:1200 px; overflow-x: auto;">
@@ -344,43 +397,43 @@
                                     <input class="form-control" [(ngModel)]="datos2.valorObtenidoAtencionVictima"
                                        name="valorObtenidoAtencionVictima" type="number" disabled>
                                  </div>
-                                 <div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 6">
+                                 <!--<div class="col-lg-4" style="border:1px solid #cccccc;" *ngIf="categoriaSelected == 6">
                                     <input class="form-control" [(ngModel)]="datos2.valorObtenidoValorAgregado"
                                        name="valorObtenidoValorAgregado" type="number" disabled>
-                                 </div>
+                                 </div>-->
                               </div>
                               <div class="row">
                                  <div class="col-lg-12">
-                                    <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                    <button (click)="onEnviar(categoriaSelected)" class="btn btn-primary m-2"
                                        *ngIf="categoriaSelected == 1" [disabled]="botonEnviarFortalecimiento">
                                        <i class="fa fa-save"></i>
                                        Guardar
                                     </button>
-                                    <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                    <button (click)="onEnviar(categoriaSelected)" class="btn btn-primary m-2"
                                        *ngIf="categoriaSelected == 2" [disabled]="botonEnviarComportamiento">
                                        <i class="fa fa-save"></i>
                                        Guardar
                                     </button>
-                                    <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                    <button (click)="onEnviar(categoriaSelected)" class="btn btn-primary m-2"
                                        *ngIf="categoriaSelected == 3" [disabled]="botonEnviarVehiculoSeguro">
                                        <i class="fa fa-save"></i>
                                        Guardar
                                     </button>
-                                    <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                    <button (click)="onEnviar(categoriaSelected)" class="btn btn-primary m-2"
                                        *ngIf="categoriaSelected == 4" [disabled]="botonEnviarInfraestructuraSegura">
                                        <i class="fa fa-save"></i>
                                        Guardar
                                     </button>
-                                    <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                    <button (click)="onEnviar(categoriaSelected)" class="btn btn-primary m-2"
                                        *ngIf="categoriaSelected == 5" [disabled]="botonEnviarAtencionVictimas">
                                        <i class="fa fa-save"></i>
                                        Guardar
                                     </button>
-                                    <button (click)="onEnviar()" class="btn btn-primary m-2"
+                                    <!--<button (click)="onEnviar()" class="btn btn-primary m-2"
                                        *ngIf="categoriaSelected == 6" [disabled]="botonEnviarValorAgregado">
                                        <i class="fa fa-save"></i>
                                        Guardar
-                                    </button>
+                                    </button>-->
                                  </div>
                               </div>
                            </div>
@@ -391,17 +444,12 @@
             </div>
             <div class="card-footer">
                <div class="btn-group">
-                  <!--<<button (click)="onFinalizar()" *ngIf="!evaluacion && datosFortalecimiento != null && datosComportamiento != null && datosVehiculoSeguro != null && datosInfraestructuraSegura != null && datosAtencionVictimas != null && datosValorAgregado != null" class="btn btn-default">-->
-                  <button (click)="onFinalizar()"
-                     *ngIf="!evaluacion && datos2.valorObtenidoFortalecimiento != null && datos2.valorObtenidoVehiculoSeguro != null&& datos2.valorObtenidoInfraestructuraSegura != null&& datos2.valorObtenidoAtencionVictimas != null&& datos2.valorObtenidoValorAgregado != null"
-                     class="btn btn-default">
+                  <button (click)="onFinalizar()" *ngIf="!evaluacion && msvCategorias == null" class="btn btn-default">
                      <i class="fa fa-check"></i>
                      Finalizar y Enviar
                   </button>
                </div>
             </div>
-            <a href="{{ apiUrl }}/{{ idUsuario }}/{{ evaluacion.id }}/aval/pdf" class="btn btn-success" target="_blank"
-               *ngIf="evaluacion"><i class="fa fa-file-pdf-o"></i>Imprimir</a>
          </div>
          <!-- fin detalles de la empresa -->
       </div>
