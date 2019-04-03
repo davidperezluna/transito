@@ -45,7 +45,9 @@ export class NewComponent implements OnInit {
     'vehiculos': [],
     'demandados': [],
     'demandantes': [],
-    'limitacion': null
+    'limitacion': null,
+    'idDemandado': null,
+    'idDemandante': null
   }
 
   constructor(
@@ -228,6 +230,7 @@ export class NewComponent implements OnInit {
               response => {
                   if (response.code == 200) {
                       this.demandado = response.data.ciudadano;
+                      this.datos.idDemandado = this.demandado.id;
 
                       this.datos.demandados.push(
                         {
@@ -241,6 +244,7 @@ export class NewComponent implements OnInit {
                       swal.close();
                   } else {
                       this.demandado = null;
+                      this.datos.idDemandado = null;
 
                       swal({
                           title: 'Error!',
@@ -263,6 +267,7 @@ export class NewComponent implements OnInit {
               response => {
                   if (response.code == 200) {
                       this.demandado = response.data.empresa;
+                      this.datos.idDemandado = this.demandado.id;
 
                       this.datos.demandados.push(
                         {
@@ -276,6 +281,7 @@ export class NewComponent implements OnInit {
                       swal.close();
                   } else {
                       this.demandado = null;
+                      this.datos.idDemandado = null;
 
                       swal({
                           title: 'Error!',
@@ -301,7 +307,7 @@ export class NewComponent implements OnInit {
 
           swal({
             title: 'Error!',
-            text: response.messsage,
+            text: response.message,
             type: 'error',
             confirmButtonText: 'Aceptar'
           });
@@ -339,6 +345,7 @@ export class NewComponent implements OnInit {
         if (response.code == 200) {
           if (response.data.ciudadano) {
             this.demandante = response.data.ciudadano;
+            this.datos.idDemandante = this.demandante.id;
 
             this.datos.demandantes.push(
               {
@@ -350,6 +357,7 @@ export class NewComponent implements OnInit {
             );
           }else if(response.data.empresa) {
             this.demandante = response.data.empresa;
+            this.datos.idDemandante = this.demandante.id;
 
             this.datos.demandantes.push(
               {
@@ -387,12 +395,12 @@ export class NewComponent implements OnInit {
     this.datos.vehiculos = this.datos.vehiculos.filter(h => h !== vehiculo);
   }
 
-  onRemoveDemandado(demandados: any): void {
-    this.datos.demandados = this.datos.demandados.filter(h => h !== demandados);
+  onRemoveDemandado(demandado: any): void {
+    this.datos.demandados = this.datos.demandados.filter(h => h !== demandado);
   }
 
-  onRemoveDemandante(demandantes: any): void {
-    this.datos.demandantes = this.datos.demandantes.filter(h => h !== demandantes);
+  onRemoveDemandante(demandante: any): void {
+    this.datos.demandantes = this.datos.demandantes.filter(h => h !== demandante);
   }
 
   changedDepartamento(e) {

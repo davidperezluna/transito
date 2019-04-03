@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { BpProyectoService } from '../../../services/bpProyecto.service';
+import { BpCuentaService } from '../../../services/bpCuenta.service';
 import { BpActividadService } from '../../../services/bpActividad.service';
 import { BpCfgTipoInsumoService } from '../../../services/bpCfgTipoInsumo.service';
 import { BpInsumoService } from '../../../services/bpInsumo.service';
@@ -16,14 +17,18 @@ export class ShowComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
     @Input() proyecto: any = null;
     public errorMessage;
+
+    public cuentas: any = null;
     public actividades: any = null;
     public actividad: any = null;
     public insumos: any = null;
     public tiposInsumo: any = null;
     public table: any = null; 
 
+    public formIndexCuenta: any;
     public formIndexActividad: any;
     public formIndexInsumo: any;
+    public formNewCuenta:any;
     public formNewActividad:any;
     public formNewInsumo:any;
 
@@ -45,6 +50,7 @@ export class ShowComponent implements OnInit {
 
     constructor(
         private _ProyectoService: BpProyectoService,
+        private _CuentaService: BpCuentaService,
         private _ActividadService: BpActividadService,
         private _TipoInsumoService: BpCfgTipoInsumoService,
         private _InsumoService: BpInsumoService,
@@ -52,12 +58,15 @@ export class ShowComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.formIndexActividad = true;
+        this.formIndexCuenta = true;
+        this.formIndexActividad = false;
+        this.formIndexInsumo = false;
+        this.formNewCuenta = false;
         this.formNewActividad = false;
         this.formNewInsumo = false;
 
         swal({
-            title: 'Buscando actividades!',
+            title: 'Buscando cuentas registradas!',
             text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
                 swal.showLoading()
@@ -66,10 +75,10 @@ export class ShowComponent implements OnInit {
 
         let token = this._loginService.getToken();
 
-        this._ProyectoService.searchActividades({ 'idProyecto': this.proyecto.id }, token).subscribe(
+        this._ProyectoService.searchCuentas({ 'idProyecto': this.proyecto.id }, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.actividades = response.data;
+                    this.cuentas = response.data;
 
                     let timeoutId = setTimeout(() => {
                         this.iniciarTabla();
@@ -115,6 +124,100 @@ export class ShowComponent implements OnInit {
 
     onCancelar() {
         this.ready.emit(true);
+    }
+
+    /* ================== CUENTA ========================== */
+    onNewCuenta() {
+        this.formNewCuenta = true;
+        this.formNewInsumo = false;
+        this.formIndexCuenta = false;
+    }
+
+    onCancelarCuenta() {
+        this.formNewCuenta = false;
+        this.formNewInsumo = false;
+        this.formIndexCuenta = true;
+    }
+
+    onCalcularTotalCuenta() {
+        
+    }
+
+    onRegisterCuenta() {
+        let token = this._loginService.getToken();
+        
+        this.datos.idProyecto = this.proyecto.id;
+
+        this._CuentaService.register(this.datos, token).subscribe(
+            response => {
+                if (response.status == 'success') {
+                    swal({
+                        title: 'Perfecto!',
+                        text: response.message,
+                        type: 'success',
+                        confirmButtonText: 'Aceptar'
+                    });
+
+                    this.ngOnInit();
+                } else {
+                    swal({
+                        title: 'Alerta!',
+                        text: response.message,
+                        type: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+
+                this.ready.emit(true);
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+
+            }
+        ); 
+    }
+
+    onDeleteCuenta(id: any) {
+        swal({
+            title: '¿Estás seguro?',
+            text: "¡Se eliminara este registro!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#15d4be',
+            cancelButtonColor: '#ff6262',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                let token = this._loginService.getToken();
+
+                this._CuentaService.delete({ 'id': id }, token).subscribe(
+                    response => {
+                        swal({
+                            title: 'Eliminado!',
+                            text: response.message,
+                            type: 'success',
+                            confirmButtonColor: '#15d4be',
+                        })
+                        this.table.destroy();
+
+                        this.ngOnInit();
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+
+                        if (this.errorMessage != null) {
+                            console.log(this.errorMessage);
+                            alert("Error en la petición");
+                        }
+                    }
+                );
+            }
+        });
     }
 
     /* ================== ACTIVIDAD ========================== */

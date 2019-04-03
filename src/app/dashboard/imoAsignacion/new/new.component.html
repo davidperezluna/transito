@@ -6,33 +6,43 @@
             <hr>
             <form #newForm="ngForm">
                 <div class="row">
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Sede operativa <b class="text-danger">*</b></label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="sedes"
+                            [(ngModel)]="sedeSelected"
+                            (ngModelChange)="changedSedeOperativa($event)"
+                            name="idSedeOperativa">
+                        </ng-select>
+                    </div>
+                    <div class="col-xs-12 col-lg-12">
+                        <label>Sede operativa <b class="text-danger">*</b></label>
+                        <ng-select
+                            [multiple]="false"
+                            [options]="sedes"
+                            [(ngModel)]="sedeSelectedInsumo"
+                            (ngModelChange)="changedSedeOperativaInsumo($event)"
+                            name="sedeInsumoId">
+                        </ng-select>
+                    </div>
                     <div class="col-xs-12 col-lg-12"> 
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item"> 
-                                    <a (click)="onSustrato()" class="nav-link active" data-toggle="tab" href="#sustrato" role="tab">Sustrato</a> 
-                                    <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
-                                </li>  
-                                <li class="nav-item"> 
-                                    <a (click)="onInsumo()" class="nav-link" data-toggle="tab" href="#insumo" role="tab">Insumo</a> 
-                                    <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
-                                </li>  
-                            </ul>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item"> 
+                                <a (click)="onSustrato()" class="nav-link active" data-toggle="tab" href="#sustrato" role="tab">Sustrato</a> 
+                                <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
+                            </li>  
+                            <li class="nav-item"> 
+                                <a (click)="onInsumo()" class="nav-link" data-toggle="tab" href="#insumo" role="tab">Insumo</a> 
+                                <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
+                            </li>  
+                        </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="sustrato" role="tabpanel"> 
                                 <div class="form-group row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <label>Organismo de transito <b class="text-danger">*</b></label>
-                                        <ng-select
-                                            [multiple]="false"
-                                            [options]="sedes"
-                                            [(ngModel)]="sedeSelected"
-                                            (ngModelChange)="changedSedeOperativa($event)"
-                                            name="sedeSustratoId">
-                                        </ng-select>
-                                    </div>
                                     <div class="col-lg-6 col-xs-12">
-                                        <label>Insumo*</label>
+                                        <label>Insumo <b class="text-danger">*</b></label>
                                         <ng-select
                                             [multiple]="false"
                                             [options]="sustratos"
@@ -44,7 +54,7 @@
                                     </div>
 
                                     <div class="col-lg-6 col-xs-12">
-                                        <label>Fecha*</label>
+                                        <label>Fecha <b class="text-danger">*</b></label>
                                         <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
                                     </div>
                                 
@@ -76,8 +86,7 @@
                                                   {{lote.tipoInsumo.nombre}}
                                                    <br> 
                                                   <b>Inicio</b>
-                                                  {{lote.rangoInicio}}
-                                                <br>
+                                                  {{lote.rangoInicio}} 
                                                   <b>Fin</b>
                                                   {{lote.rangoFin}}
                                                   <br>
@@ -102,18 +111,8 @@
 
                             <div class="tab-pane" id="insumo" role="tabpanel">
                                 <div class="form-group row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <label>Sede*</label>
-                                        <ng-select
-                                            [multiple]="false"
-                                            [options]="sedes"
-                                            [(ngModel)]="sedeSelectedInsumo"
-                                            (ngModelChange)="changedSedeOperativaInsumo($event)"
-                                            name="sedeInsumoId">
-                                        </ng-select>
-                                    </div>
                                     <div class="col-xs-12 col-lg-4">
-                                        <label>Insumo*</label>
+                                        <label>Insumo <b class="text-danger">*</b></label>
                                         <ng-select
                                             [multiple]="false"
                                             [options]="insumos"
@@ -126,12 +125,12 @@
                                     </div>
         
                                     <div class="col-xs-12 col-lg-4">
-                                        <label>Cantidad*</label> 
+                                        <label>Cantidad <b class="text-danger">*</b></label> 
                                         <input class="form-control" [disabled]="true"  [(ngModel)]="numero" name="numeroInsumo" placeholder="" type="text" required>
                                     </div>
         
                                     <div class="col-xs-12 col-lg-4">
-                                        <label>Fecha*</label>
+                                        <label>Fecha <b class="text-danger">*</b></label>
                                         <input class="form-control" [(ngModel)]="rnaAsignacionInsumos.fecha" name="fecha" placeholder="" type="date" required>
                                         <br>
                                     </div>
@@ -147,7 +146,7 @@
         </div>
     </div>
 </div>
-<div class="col-xs-12 col-lg-4">
+<div class="col-xs-12 col-lg-4" *ngIf="lotesSelecionados.length > 0s">
     <div class="card">
         <div class="card-body">
             <h5 class="m-0">Generar acta</h5>
@@ -173,7 +172,7 @@
         </div>  
         <div class="card-footer">
             <div class="btn-group"> 
-                <button (click)="onEnviarArray()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
+                <button *ngIf="!numeroActa" (click)="onEnviarArray()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
     
                 <a href="{{ apiUrl }}/pdf/acta/asignacion/{{numeroActa}}" *ngIf='numeroActa' class="btn btn-success" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
