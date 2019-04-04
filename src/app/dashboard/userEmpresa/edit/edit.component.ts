@@ -8,6 +8,7 @@ import { UserCfgEmpresaTipoSociedadService } from '../../../services/userCfgEmpr
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { RepresentanteUserEmpresaService } from '../../../services/representanteEmpresa.service';
 import { UserCfgEmpresaServicioService } from '../../../services/userCfgEmpresaServicio.service';
+import { VhloCfgModalidadTransporteService } from '../../../services/vhloCfgModalidadTransporte.service';
 
 import swal from 'sweetalert2';
 
@@ -24,8 +25,12 @@ export class EditComponent implements OnInit {
   public formListaRepresentanteVigente = false;
   public formListaRepresentantes = false;
   public formNewRepresentante = true;
+  
   public representantes;
   public representanteVigente;
+
+  public modalidadTransporteSelect;
+  public modalidadTransportes;
 
   public tipoEmpresa;
   public tipoEmpresaSelected;
@@ -68,10 +73,38 @@ export class EditComponent implements OnInit {
     private _RepresentanteUserEmpresaService: RepresentanteUserEmpresaService,
     private _EmpresaServicioService: UserCfgEmpresaServicioService,
     private _loginService: LoginService,
+    private _UserCfgEmpresaTipoService: UserCfgEmpresaTipoService,
+    private _modalidadTransporteService: VhloCfgModalidadTransporteService
   ) { }
 
   ngOnInit() {
     let token = this._loginService.getToken();
+
+    this._UserCfgEmpresaTipoService.select().subscribe(
+      response => {
+        this.tipoEmpresas = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        } 
+      }
+    );
+
+    this._modalidadTransporteService.select().subscribe(
+      response => {
+        this.modalidadTransportes = response;
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert('Error en la petición');
+        }
+      }
+    );
 
     this.tipoEntidadSelected = [this.empresa.tipoEntidad];
     swal({
@@ -215,6 +248,8 @@ export class EditComponent implements OnInit {
     this.empresa.tipoIdentificacionId = this.tipoIdentificacionSelected;
     this.empresa.ciudadanoId = this.ciudadanoSelected;
     this.empresa.cfgEmpresaServicioId = this.servicioSelected;
+    this.empresa.idTipoEmpresa = this.tipoEmpresaSelected;
+    this.empresa.idModalidadTransporte = this.modalidadTransporteSelect;
 
     this._EmpresaService.edit(this.empresa, token).subscribe(
       response => {

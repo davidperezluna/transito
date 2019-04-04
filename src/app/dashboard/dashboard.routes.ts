@@ -132,7 +132,7 @@ import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
 
-import { EmpresaAlcaldiaRoutes } from './empresaAlcaldia/empresaAlcaldia.routes';
+import { TpAlcaldiaRoutes } from './tpAlcaldia/tpAlcaldia.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
 import { SvCfgGravedadAccidenteRoutes } from './svCfgGravedadAccidente/svCfgGravedadAccidente.routes';
@@ -443,7 +443,7 @@ export const DashboardRoutes: Route[] = [
       ...BpProyectoRoutes,
       ...BpCdpRoutes,
       ...RnrsPreasignacionPlacaRoutes,
-      ...EmpresaAlcaldiaRoutes,
+      ...TpAlcaldiaRoutes,
       ...FroFacturaRoutes,
       ...FroRecaudoRoutes,
       ...FroAcuerdoPagoRoutes,

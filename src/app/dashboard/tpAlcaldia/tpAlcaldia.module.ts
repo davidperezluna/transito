@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EmpresaAlcaldiaComponent } from './empresaAlcaldia.component';
+import { TpAlcaldiaComponent } from './tpAlcaldia.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { SucursalService } from '../../services/sucursal.service';
@@ -14,9 +14,9 @@ import { RepresentanteUserEmpresaService } from '../../services/representanteEmp
 
 @NgModule({
     imports: [CommonModule, Ng2BootstrapModule.forRoot(),SelectModule],
-    declarations: [EmpresaAlcaldiaComponent,NewConvenioComponent,ShowConvenioComponent],
-    exports: [EmpresaAlcaldiaComponent,NewConvenioComponent,ShowConvenioComponent],
+    declarations: [TpAlcaldiaComponent,NewConvenioComponent,ShowConvenioComponent],
+    exports: [TpAlcaldiaComponent,NewConvenioComponent,ShowConvenioComponent],
     providers:[UserEmpresaService,VhloTpConvenioService,UserCfgEmpresaTipoSociedadService, SucursalService,RepresentanteUserEmpresaService]
 })
 
-export class EmpresaAlcaldiaModule { }
+export class TpAlcaldiaModule { }

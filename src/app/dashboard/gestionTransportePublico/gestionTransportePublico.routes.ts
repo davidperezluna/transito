@@ -7,4 +7,4 @@ export const GestionTransportePublicoRoutes: Route[] = [
       component: GestionTransportePublicoComponent
     }
 ];
- 
+  

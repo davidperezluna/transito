@@ -1,4 +1,4 @@
-export class EmpresaAlcaldia{
+export class TpAlcaldia{
 	constructor(
 		public id: number,
 		public municipioId: number,

@@ -4,7 +4,6 @@ import { Convenio } from '../convenio/new/convenio.modelo';
 import { VhloTpConvenioService } from '../../../services/vhloTpConvenio.service';
 
 
-
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -22,7 +21,6 @@ public municipio: any;
 public convenios: any;
 public municipioSelected: any;
 public tipoSociedadSelected :any;
-
 public formListaConvenioes = false;
 public table:any; 
 public formNewConvenio = false;
@@ -41,7 +39,7 @@ constructor(
     console.log(this.empresa);
     this._VhloTpConvenioService.getVhloTpConvenioEmpresa(this.empresa.id).subscribe(
       response => {
-        if(response.status == "success"){
+       if(response.status == "success"){
        this.convenios=response.data;
        this.formListaConvenioes = true;
         }else{
@@ -61,16 +59,12 @@ constructor(
   
   onCancelar(){
     this.ready.emit(true);
-
-
   }
 
   readyConvenio(respuesta:any){
-    
     this.formListaConvenioes=true;
     this.formNewConvenio=false;
   }
-
 
   onNewConvenio(){
       this.formListaConvenioes=false;
@@ -130,8 +124,6 @@ constructor(
               }
             }
           );
-
-        
       }
     })
   }

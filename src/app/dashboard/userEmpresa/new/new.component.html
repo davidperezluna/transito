@@ -131,6 +131,14 @@
                                 </ng-select>
                             </div>
 
+                            <div class="col-xs-12 col-lg-4" *ngIf='tipoEmpresaSelected == 2'>
+                                <label>Modalidad transporte
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <ng-select [multiple]="false" [options]="modalidadTransportes" [(ngModel)]="modalidadTransporteSelect" required name="idModalidadEmpresa">
+                                </ng-select>
+                            </div>
+
                             <br><br><hr>
                             <!-- fin datos direccion -->
                             <!-- DATOS REPRESENTANTE  -->

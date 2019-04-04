@@ -182,7 +182,7 @@ import { SvCfgClaseAccidenteModule } from './svCfgClaseAccidente/svCfgClaseAccid
 import { CfgChoqueConModule } from './cfgChoqueCon/cfgChoqueCon.module';
 import { CfgObjetoFijoModule } from './cfgObjetoFijo/cfgObjetoFijo.module';
 
-import { EmpresaAlcaldiaModule } from './empresaAlcaldia/empresaAlcaldia.module';
+import { TpAlcaldiaModule } from './tpAlcaldia/tpAlcaldia.module';
 // import { SucursalModule } from './empresa/sucursal/new/sucursal.module';
 import { SustratoModule } from './sustrato/sustrato.module';
 import { TramitePrecioModule } from './tramitePrecio/tramitePrecio.module';
@@ -458,14 +458,14 @@ import {RightsidebarComponent} from '../shared';
     BpProyectoModule,
     BpCdpModule,
     RnrsPreasignacionPlacaModule,
-    EmpresaAlcaldiaModule,
+    TpAlcaldiaModule,
     FroFacturaModule,
     FroRecaudoModule,
     FroAcuerdoPagoModule,
     FroTramiteModule,
     FroTrteCfgConceptoModule,
     FroTrtePrecioModule,
-    FroTrteSolicitudRnaModule,
+    FroTrteSolicitudRnaModule, 
     FroTrteSolicitudRnmaModule,
     FroTrteSolicitudRnrsModule,
     FroReporteIngresosModule,

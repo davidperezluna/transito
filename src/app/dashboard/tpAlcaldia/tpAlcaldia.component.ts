@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { LoginService } from '../../services/login.service';
-import { EmpresaAlcaldia } from './empresaAlcaldia.modelo';
+import { TpAlcaldia } from './tpAlcaldia.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
 @Component({
   selector: 'app-index',
-  templateUrl: './empresaAlcaldia.component.html',
+  templateUrl: './tpAlcaldia.component.html',
 })
-export class EmpresaAlcaldiaComponent implements OnInit {
+export class TpAlcaldiaComponent implements OnInit {
   public errorMessage;
 	public id;
 	public respuesta;
@@ -18,8 +18,8 @@ export class EmpresaAlcaldiaComponent implements OnInit {
 	public formEdit = false;
   public formIndex = true;
   public formShow = false;
-  public table:any; 
-  public empresa: EmpresaAlcaldia;
+  public table:any;  
+  public empresa: TpAlcaldia;
 
   constructor(
 		private _EmpresaService: UserEmpresaService,
