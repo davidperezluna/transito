@@ -5,7 +5,7 @@ import { LoginService } from '../../services/login.service';
 // import { NewEmpresaComponent } from './new/new.component';
 import swal from 'sweetalert2';
 declare var $: any;
-
+ 
 @Component({
   selector: 'app-index',
   templateUrl: './userEmpresa.component.html',
@@ -42,7 +42,7 @@ export class UserEmpresaComponent implements OnInit {
         result.dismiss === swal.DismissReason.timer
       ) {
       }
-    })
+    }) 
 		this._EmpresaService.index().subscribe(
 				response => {
           this.empresas = response.data;

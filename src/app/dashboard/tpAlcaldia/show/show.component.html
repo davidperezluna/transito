@@ -42,11 +42,11 @@
                       </tr> 
                       <tr>
                         <td>Tipo sociedad</td>
-                        <td class="text-right">{{ empresa.tipoSociedad.nombre }}</td>                        
+                        <td class="text-right">{{empresa.tipoSociedad.nombre}}</td>                        
                       </tr> 
                       <tr>
                         <td>Empresa prestadora</td>
-                        <td class="text-right">{{ empresa.empresaPrestadora }}</td>                        
+                        <td class="text-right">{{empresa.empresaPrestadora}}</td>                        
                       </tr> 
                       <tr>
                         <td>Municipio</td>
@@ -60,11 +60,11 @@
                  </table> 
                  <!-- fin de la tablar de empresa -->
                 <div class="card-footer">
-                    <button (click)="onCancelar()" class="btn btn-outline-secondary" type="button">Cancelar</button>
+                    <button (click)="onCancelar()" class="btn btn-secondary" type="button">Cancelar</button>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
     <div class="col-md-11 col-lg-8">
         <div class="table-responsive">
             <div class="card" *ngIf='formListaConvenioes'>
