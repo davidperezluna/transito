@@ -19,23 +19,34 @@ export class ShowComponent implements OnInit {
     public errorMessage;
 
     public cuentas: any = null;
-    public actividades: any = null;
-    public actividad: any = null;
     public insumos: any = null;
+    public actividades: any = null;
     public tiposInsumo: any = null;
     public table: any = null; 
-
+    
     public formIndexCuenta: any;
     public formIndexActividad: any;
     public formIndexInsumo: any;
+
     public formNewCuenta:any;
     public formNewActividad:any;
     public formNewInsumo:any;
+    
+    public cuenta: any = null;
+    public actividad: any = null;
+    public insumo: any = null;
 
-    public datos = {
+    public datosCuenta = {
+        'numero': null,
         'nombre': null,
         'costoTotal': 0,
         'idProyecto': null,
+    };
+    
+    public datosActividad = {
+        'nombre': null,
+        'costoTotal': 0,
+        'idCuenta': null,
     };
 
     public datosInsumo = {
@@ -54,16 +65,28 @@ export class ShowComponent implements OnInit {
         private _ActividadService: BpActividadService,
         private _TipoInsumoService: BpCfgTipoInsumoService,
         private _InsumoService: BpInsumoService,
-        private _loginService: LoginService,
+        private _LoginService: LoginService,
     ) { }
 
-    ngOnInit() {
+    ngOnInit() { 
+        this.onSearchCuentas();
+     }
+
+    onCancelar() {
+        this.ready.emit(true);
+    }
+
+    /* ================== CUENTA ========================== */
+    onSearchCuentas(){
         this.formIndexCuenta = true;
         this.formIndexActividad = false;
         this.formIndexInsumo = false;
         this.formNewCuenta = false;
         this.formNewActividad = false;
         this.formNewInsumo = false;
+
+        this.datosCuenta.numero = null;
+        this.datosCuenta.nombre = null;
 
         swal({
             title: 'Buscando cuentas registradas!',
@@ -73,18 +96,41 @@ export class ShowComponent implements OnInit {
             }
         });
 
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        this._ProyectoService.searchCuentas({ 'idProyecto': this.proyecto.id }, token).subscribe(
+        this._ProyectoService.show({ 'id': this.proyecto.id }, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    this.cuentas = response.data;
+                if (response.code == 200) {
+                    this.proyecto = response.data;
 
-                    let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
-                    }, 100);
-
-                    swal.close();
+                    this._ProyectoService.searchCuentas({ 'idProyecto': this.proyecto.id }, token).subscribe(
+                        response => {
+                            if (response.code = 200) {
+                                this.cuentas = response.data;
+            
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTableCuentas();
+                                }, 100);
+            
+                                swal.close();
+                            } else {
+                                swal({
+                                    title: 'Atención!',
+                                    text: response.message,
+                                    type: 'warning',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+            
+                        }
+                    );
                 } else {
                     swal({
                         title: 'Error!',
@@ -102,55 +148,35 @@ export class ShowComponent implements OnInit {
                 }
 
             }
-        ); 
+        );  
     }
 
-    iniciarTabla() {       
-        this.table = $('#dataTables-example').DataTable({
-            destroy: true,
-            responsive: true,
-            pageLength: 8,
-            sPaginationType: 'full_numbers',
-            oLanguage: {
-                oPaginate: {
-                    sFirst: '<<',
-                    sPrevious: '<',
-                    sNext: '>',
-                    sLast: '>>'
-                }
-            }
-        });
-    }
-
-    onCancelar() {
-        this.ready.emit(true);
-    }
-
-    /* ================== CUENTA ========================== */
     onNewCuenta() {
-        this.formNewCuenta = true;
-        this.formNewInsumo = false;
         this.formIndexCuenta = false;
+        this.formIndexActividad = false;
+        this.formIndexInsumo = false;
+        this.formNewCuenta = true;
+        this.formNewActividad = false;
+        this.formNewInsumo = false;
     }
 
     onCancelarCuenta() {
-        this.formNewCuenta = false;
-        this.formNewInsumo = false;
         this.formIndexCuenta = true;
-    }
-
-    onCalcularTotalCuenta() {
-        
+        this.formIndexActividad = false;
+        this.formIndexInsumo = false;
+        this.formNewCuenta = false;
+        this.formNewActividad = false;
+        this.formNewInsumo = false;
     }
 
     onRegisterCuenta() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
-        this.datos.idProyecto = this.proyecto.id;
+        this.datosCuenta.idProyecto = this.proyecto.id;
 
-        this._CuentaService.register(this.datos, token).subscribe(
+        this._CuentaService.register(this.datosCuenta, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code = 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -158,17 +184,15 @@ export class ShowComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
 
-                    this.ngOnInit();
+                    this.onSearchCuentas();
                 } else {
                     swal({
-                        title: 'Alerta!',
+                        title: 'Atención!',
                         text: response.message,
                         type: 'warning',
                         confirmButtonText: 'Aceptar'
                     });
                 }
-
-                this.ready.emit(true);
                 error => {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
@@ -193,7 +217,7 @@ export class ShowComponent implements OnInit {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                let token = this._loginService.getToken();
+                let token = this._LoginService.getToken();
 
                 this._CuentaService.delete({ 'id': id }, token).subscribe(
                     response => {
@@ -220,31 +244,120 @@ export class ShowComponent implements OnInit {
         });
     }
 
+    onInitTableCuentas() {       
+        this.table = $('#dataTables-cuentas').DataTable({
+            destroy: true,
+            responsive: true,
+            pageLength: 8,
+            sPaginationType: 'full_numbers',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            }
+        });
+    }
+
     /* ================== ACTIVIDAD ========================== */
+    onSearchActividades(cuenta: any){
+        this.formIndexCuenta = false;
+        this.formIndexActividad = true;
+        this.formIndexInsumo = false;
+        this.formNewCuenta = false;
+        this.formNewActividad = false;
+        this.formNewInsumo = false;
+
+        swal({
+            title: 'Buscando actividades registradas!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+
+        let token = this._LoginService.getToken();
+
+        this._CuentaService.show({ 'id': cuenta.id }, token).subscribe(
+            response => {
+                if (response.code == 200) {
+                    this.cuenta = response.data;
+
+                    this._CuentaService.searchActividades({ 'idCuenta': cuenta.id }, token).subscribe(
+                        response => {
+                            if (response.code = 200) {
+                                this.actividades = response.data;
+            
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTableActividades();
+                                }, 100);
+            
+                                swal.close();
+                            } else {
+                                swal({
+                                    title: 'Atención!',
+                                    text: response.message,
+                                    type: 'warning',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+            
+                        }
+                    );
+                } else {
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+                error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            }
+        );  
+    }
+
     onNewActividad() {
+        this.formIndexCuenta = false;
+        this.formIndexActividad = false;
+        this.formIndexInsumo = false;
+        this.formNewCuenta = false;
         this.formNewActividad = true;
         this.formNewInsumo = false;
-        this.formIndexActividad = false;
     }
 
     onCancelarActividad() {
+        this.formIndexCuenta = true;
+        this.formIndexActividad = false;
+        this.formIndexInsumo = false;
+        this.formNewCuenta = false;
         this.formNewActividad = false;
         this.formNewInsumo = false;
-        this.formIndexActividad = true;
-    }
-
-    onCalcularTotalActividad() {
-        
     }
 
     onRegisterActividad() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
         
-        this.datos.idProyecto = this.proyecto.id;
+        this.datosActividad.idCuenta = this.cuenta.id;
 
-        this._ActividadService.register(this.datos, token).subscribe(
+        this._ActividadService.register(this.datosActividad, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code = 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -252,7 +365,7 @@ export class ShowComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
 
-                    this.ngOnInit();
+                    this.onSearchActividades(response.data.cuenta);
                 } else {
                     swal({
                         title: 'Alerta!',
@@ -261,8 +374,6 @@ export class ShowComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
                 }
-
-                this.ready.emit(true);
                 error => {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
@@ -287,7 +398,7 @@ export class ShowComponent implements OnInit {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                let token = this._loginService.getToken();
+                let token = this._LoginService.getToken();
 
                 this._ActividadService.delete({ 'id': id }, token).subscribe(
                     response => {
@@ -314,35 +425,74 @@ export class ShowComponent implements OnInit {
         });
     }
 
-
+    onInitTableActividades() {       
+        this.table = $('#dataTables-actividades').DataTable({
+            destroy: true,
+            responsive: true,
+            pageLength: 8,
+            sPaginationType: 'full_numbers',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            }
+        });
+    }
     /* ================== INSUMO ========================== */
-    onIndexInsumo(actividad: any) {
-        this.actividad = actividad;
-        this.formNewInsumo = false;
+    onSearchInsumo(actividad: any) {
+        this.formNewCuenta = false;
         this.formNewActividad = false;
+        this.formNewInsumo = false;
+        this.formIndexCuenta = false;
         this.formIndexActividad = false;
         this.formIndexInsumo = true;
 
         swal({
-            title: 'Buscando insumos!',
+            title: 'Buscando insumos registrados!',
             text: 'Solo tardara unos segundos por favor espere.',
             onOpen: () => {
                 swal.showLoading()
             }
         });
 
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        this._ActividadService.searchInsumos({ 'idActividad': this.actividad.id }, token).subscribe(
+        this._ActividadService.show({ 'id': actividad.id }, token).subscribe(
             response => {
-                if (response.status == 'success') {
-                    this.insumos = response.data;
+                if (response.code == 200) {
+                    this.actividad = response.data;                   
 
-                    let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
-                    }, 100);
-
-                    swal.close();
+                    this._ActividadService.searchInsumos({ 'idActividad': actividad.id }, token).subscribe(
+                        response => {
+                            if (response.code = 200) {
+                                this.insumos = response.data;
+            
+                                let timeoutId = setTimeout(() => {
+                                    this.onInitTableInsumos();
+                                }, 100);
+            
+                                swal.close();
+                            } else {
+                                swal({
+                                    title: 'Atencion!',
+                                    text: response.message,
+                                    type: 'warning',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                            }
+                            error => {
+                                this.errorMessage = <any>error;
+                                if (this.errorMessage != null) {
+                                    console.log(this.errorMessage);
+                                    alert("Error en la petición");
+                                }
+                            }
+            
+                        }
+                    ); 
                 } else {
                     swal({
                         title: 'Error!',
@@ -358,9 +508,25 @@ export class ShowComponent implements OnInit {
                         alert("Error en la petición");
                     }
                 }
-
             }
-        ); 
+        );
+    }
+
+    onInitTableInsumos() {       
+        this.table = $('#dataTables-insumos').DataTable({
+            destroy: true,
+            responsive: true,
+            pageLength: 8,
+            sPaginationType: 'full_numbers',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            }
+        });
     }
 
     onNewInsumo(actividad: any) {
@@ -410,13 +576,13 @@ export class ShowComponent implements OnInit {
     }
 
     onRegisterInsumo() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
         this.datosInsumo.idActividad = this.actividad.id;
 
         this._InsumoService.register(this.datosInsumo, token).subscribe(
             response => {
-                if (response.status == 'success') {
+                if (response.code = 200) {
                     swal({
                         title: 'Perfecto!',
                         text: response.message,
@@ -424,7 +590,7 @@ export class ShowComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
 
-                    this.ngOnInit();
+                    this.onSearchInsumo(response.data.actividad);
                 } else {
                     swal({
                         title: 'Alerta!',
@@ -433,8 +599,6 @@ export class ShowComponent implements OnInit {
                         confirmButtonText: 'Aceptar'
                     });
                 }
-
-                this.ready.emit(true);
                 error => {
                     this.errorMessage = <any>error;
                     if (this.errorMessage != null) {
@@ -459,7 +623,7 @@ export class ShowComponent implements OnInit {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                let token = this._loginService.getToken();
+                let token = this._LoginService.getToken();
 
                 this._InsumoService.delete({ 'id': id }, token).subscribe(
                     response => {

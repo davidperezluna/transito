@@ -217,78 +217,11 @@
                         <!-- .form-group -->
                         <div class="row">
                             <!-- .row -->
-                            <div class="col-xs-12 col-lg-12" *ngIf="searchByIdentificacionForm || isEmpresaForm">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="card-title">
-                                            <h5 class="text-uppercase">
-                                                <b>Propietarios</b>
-                                            </h5>
-                                            <p>Valor retefuente: ${{ valorRetefuente }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <table class="table table-bordered table-striped" *ngIf="searchByIdentificacionForm">
-                                            <tbody>
-                                                <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
-                                                    <td>
-                                                        <strong>Nombre: </strong>
-                                                        {{ propietarioVehiculo.ciudadano?.usuario.primerNombre }} {{ propietarioVehiculo.ciudadano?.usuario.primerApellido }}
-                                                    </td>
-                                                    <td>
-                                                        <strong>Identificación: </strong>
-                                                        {{ propietarioVehiculo.ciudadano?.usuario.identificacion }}
-                                                    </td>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input (change)="onVendedorSelect($event,propietarioVehiculo.id)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}"
-                                                                type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
-                                                            <label class="custom-control-label" for="{{propietarioVehiculo.id}}">
-                                                                <p *ngIf="propietarioVehiculo.state">{{valorRetefuenteUnitario}}$</p>
-                                                                <p *ngIf="!propietarioVehiculo.state">0$</p>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <table class="table table-bordered table-striped" *ngIf="isEmpresaForm">
-                                            <tbody>
-                                                <tr *ngFor="let propietarioVehiculo of propietariosVehiculo; let i = index">
-                                                    <td>
-                                                        <strong>NIT: </strong>
-                                                        {{propietarioVehiculo.empresa?.nit}}
-                                                        <br>
-                                                        <strong>Nombre: </strong>
-                                                        {{propietarioVehiculo.empresa?.nombre}}
-                                                    </td>
-                                                    <td>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input (change)="onVendedorSelect($event,propietarioVehiculo.id)" [(ngModel)]="propietarioVehiculo.state" name="{{propietarioVehiculo.id}}"
-                                                                type="checkbox" class="custom-control-input" id="{{propietarioVehiculo.id}}">
-                                                            <label class="custom-control-label" for="{{propietarioVehiculo.id}}">
-                                                                <p *ngIf="propietarioVehiculo.state">${{valorRetefuenteUnitario}}</p>
-                                                                <p *ngIf="!propietarioVehiculo.state">$0</p>
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button (click)="onCancelarTraspaso()" class="btn btn-default">
-                                            <i class="fa fa-times"></i>
-                                            Cancelar
-                                        </button>
-                                        <!-- <button (click)="btnRetefunete()" [disabled]='vendedores == 0' class="btn btn-primary pull-right">Aceptar</button> -->
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <!-- /.row -->
                     </div>
+                
                     <!-- /.form-group -->
 
                     <div class="form-group" *ngIf="tramitesPrecioArray?.length > 0">

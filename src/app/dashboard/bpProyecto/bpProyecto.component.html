@@ -1,41 +1,80 @@
 <div class="container" >
-  <hr>
-  <div class="row" *ngIf='formIndex'>
-    <div class="col-md-12">
+  <div class="row">
+    <div class="col-xs-12 col-lg-3" *ngIf='formSearch'>
+      <!-- .col -->
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Proyectos</b>
+          <small>Buscar</small>
+        </div>
+        <div class="card-body">
+          <!-- .card-body -->
+          <form #formSearch="ngForm">
+            <div class="form-group">
+              <div class="row">
+                <!-- .row -->
+                <div class="col-xs-12 col-lg-12">
+                  <label>Tipo de filtro</label>
+                  <ng-select [multiple]="false" [options]="tiposFiltro" [(ngModel)]="search.tipoFiltro" name="tipoFiltro" required></ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 1">
+                  <label>Número <b class="text-danger">*</b></label>
+                  <input class="form-control text-uppercase" [(ngModel)]="search.filtro" name="filtro" type="text" required>
+                </div>
+                <div class="col-xs-12 col-lg-12" *ngIf="search.tipoFiltro == 2">
+                  <label>Fecha <b class="text-danger">*</b></label>
+                  <input class="form-control" [(ngModel)]="search.filtro" name="filtro" type="date" required>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+          </form>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onNew()" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf='formIndex'><!-- .col -->
         <div class="card">
           <div class="card-header">
-            <h5 class="card-title">
-              <strong class="text-uppercase">Banco de Proyectos</strong>
-              <div class="btn-group pull-right">
-                <button (click)="onNew()" class="btn btn-default">
-                  <i class="fa fa-plus"></i>
-                  <span class="text">Nuevo</span>
-                </button>
-              </div>
-            </h5>
+            <b class="text-uppercase">Proyectos registrados</b>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>
+                <span class="text">Nuevo</span>
+              </button>
+            </div>
           </div>
           <div class="card-body">
-            <table class="table " id="dataTables-example">
+            <table class="table" id="dataTables-example" *ngIf='proyectos.length > 0'>
               <thead>
                 <tr>
                     <th>#</th>
                     <th>Numero</th>
                     <th>Nombre</th>
                     <th>Fecha</th>
-                    <th>Numero cuota</th>
-                    <th>Nombre cuota</th>
                     <th>Costo valor</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="odd" *ngFor="let proyecto of proyectos; let i = index">
+                <tr *ngFor="let proyecto of proyectos; let i = index">
                   <td >{{ i + 1 }}</td>
                   <td >{{ proyecto.numero }}</td>
                   <td >{{ proyecto.nombre }}</td>
                   <td >{{ proyecto.fecha }}</td>
-                  <td >{{ proyecto.cuentaNumero }}</td>
-                  <td >{{ proyecto.cuentaNombre }}</td>
                   <td >{{ proyecto.costoTotal | currency: 'COP' }}</td>
                   <td>
                     <div class="btn-group">
@@ -56,9 +95,12 @@
             <!-- /.table-responsive --> 
           </div>
         </div>
-      </div>
+      </div><!-- /.col -->
     </div>
-    <app-edit *ngIf='formEdit' [proyecto]="proyecto" (ready)="ready($event)"></app-edit>
+
     <app-new *ngIf='formNew' (ready)="ready($event)" (onShow)="onShow($event)"></app-new>
+
+    <app-edit *ngIf='formEdit' [proyecto]="proyecto" (ready)="ready($event)"></app-edit>
+    
     <app-show *ngIf='formShow' [proyecto]="proyecto" (ready)="ready($event)"></app-show>
 </div>
