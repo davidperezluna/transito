@@ -52,7 +52,7 @@ constructor(
 ){}
 
   ngOnInit() {
-    this.empresa = new UserEmpresa(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+    this.empresa = new UserEmpresa(null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
     this.empresa.nit = this.nit;
     this.empresa.idTipoIdentificacion = this.tipoIdentificacion;
     this._TipoSociedadService.select().subscribe(

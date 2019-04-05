@@ -463,7 +463,7 @@ export class ShowComponent implements OnInit {
         this._ActividadService.show({ 'id': actividad.id }, token).subscribe(
             response => {
                 if (response.code == 200) {
-                    this.actividad = response.data;                   
+                    this.actividad = response.data;                  
 
                     this._ActividadService.searchInsumos({ 'idActividad': actividad.id }, token).subscribe(
                         response => {
