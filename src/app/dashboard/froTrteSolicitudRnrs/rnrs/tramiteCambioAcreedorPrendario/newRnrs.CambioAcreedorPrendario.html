@@ -1,0 +1,168 @@
+<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado && autorizado"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <b class="text-primary">Registrar modificación de Acreedor Prendario</b>
+                <br>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <h6 class="text-center">
+                        <b class="text-uppercase">Buscar prendario a modificar</b>
+                    </h6>
+                </div>
+
+                <div class="row"><!-- .row -->
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Tipo de identificación
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedOld"  name="idTipoIdentificacionOld" required>
+                        </ng-select>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-6">
+                        <label *ngIf="tipoIdentificacionSelectedOld != 4">Identificación</label>
+                        <label *ngIf="tipoIdentificacionSelectedOld == 4">NIT</label>
+                        <div  class="input-group">
+                            <input type="number" class="form-control" [(ngModel)]="identificacionOld" name="identificacionOld" required />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchAcreedorOld()" class="btn btn-md btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!--acreedores vehiculo -->
+                    <div class="col-xs-12 col-lg-12" *ngIf="acreedor">
+                        <table class="table table-bordered table-striped">
+                            <br>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="text-center">
+                                        <b class="text-uppercase">Prendario a cambiar</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>                    
+                                    <td *ngIf="acreedor.ciudadano">
+                                        <b>Identificación:</b>
+                                        <br>
+                                        {{  acreedor.ciudadano.identificacion }}
+                                        <br> 
+                                        <b>Nombre:</b>
+                                        <br>
+                                        {{ acreedor.ciudadano.primerNombre }} {{ acreedor.ciudadano.primerApellido }}
+                                    </td>
+                                    <td *ngIf="acreedor.empresa">
+                                        <b>Identificación:</b>
+                                        <br>{{ acreedor.empresa.nit }}
+                                        <br>
+                                        <b>Nombre:</b>
+                                        <br>
+                                        {{ acreedor.empresa.nombre }}
+                                    </td>
+                                    <td>
+                                        <b>Tipo alerta:</b> {{ acreedor.tipoAlerta.nombre }}
+                                        <br>
+                                        <b>Grado:</b> {{ acreedor.gradoAlerta }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- .row -->
+
+                <div class="row" *ngIf="acreedor"><!-- .row -->
+                    <h6 class="text-center">
+                        <b class="text-uppercase">Buscar nuevo acreedor</b>
+                    </h6>
+                </div><!-- /.row -->
+
+                <div class="row" *ngIf="acreedor"><!-- .row -->
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Tipo de identificación
+                            <span class="text-danger">*</span>
+                        </label>
+                        <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedNew"  name="idTipoIdentificacionNew" required>
+                        </ng-select>
+                    </div>
+
+                    <!--tipo identificacion ciudadano -->
+                    <div class="col-xs-12 col-lg-6">
+                        <label *ngIf="tipoIdentificacionSelectedNew != 4">Identificación</label>
+                        <label *ngIf="tipoIdentificacionSelectedNew == 4">NIT</label>
+                        <div  class="input-group">
+                            <input type="number" class="form-control" [(ngModel)]="identificacionNew" name="identificacionNew" required />
+                            <span class="input-group-btn">
+                                <button (click)="onSearchAcreedorNew()" class="btn btn-md btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-12" *ngIf="ciudadano || empresa">
+                        <br>
+                        <table class="table table-bordered table-striped">
+                            <br>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="text-center">
+                                        <b class="text-uppercase">Prendario a registrar</b>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>                    
+                                    <td *ngIf="ciudadano">
+                                        <b>Identificación:</b>
+                                        <br>
+                                        {{  ciudadano.identificacion }}
+                                        <br> 
+                                        <b>Nombre:</b>
+                                        <br>
+                                        {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                    </td>
+                                    <td *ngIf="empresa">
+                                        <b>Identificación (NIT):</b>
+                                        <br>
+                                        {{ empresa.nit }}
+                                        <br>
+                                        <b>Nombre:</b>
+                                        <br>
+                                        {{ empresa.nombre }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><!-- .row -->
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->

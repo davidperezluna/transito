@@ -132,7 +132,7 @@ import { SustratoRoutes } from './sustrato/sustrato.routes';
 import { GestionTransportePublicoRoutes } from './gestionTransportePublico/gestionTransportePublico.routes';
 import { ConceptoParametroRoutes } from './conceptoParametro/conceptoParametro.routes';
 
-import { EmpresaAlcaldiaRoutes } from './empresaAlcaldia/empresaAlcaldia.routes';
+import { TpAlcaldiaRoutes } from './tpAlcaldia/tpAlcaldia.routes';
 import { RpcccInventarioDocumentalRoutes } from './rpcccInventarioDocumental/rpcccInventarioDocumental.routes';
 import { RnrsPreasignacionPlacaRoutes } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.routes';
 import { SvCfgGravedadAccidenteRoutes } from './svCfgGravedadAccidente/svCfgGravedadAccidente.routes';
@@ -179,6 +179,8 @@ import { FroTramiteRoutes } from './froTramite/froTramite.routes';
 import { FroTrteCfgConceptoRoutes } from './froTrteCfgConcepto/froTrteCfgConcepto.routes';
 import { FroTrtePrecioRoutes } from './froTrtePrecio/froTrtePrecio.routes';
 import { FroTrteSolicitudRnaRoutes } from './froTrteSolicitudRna/froTrteSolicitudRna.routes';
+import { FroTrteSolicitudRnmaRoutes } from './froTrteSolicitudRnma/froTrteSolicitudRnma.routes';
+import { FroTrteSolicitudRnrsRoutes } from './froTrteSolicitudRnrs/froTrteSolicitudRnrs.routes';
 import { FroReporteIngresosRoutes } from './froReporteIngresos/froReporteIngresos.routes';
 import { FroCfgTipoRecaudoRoutes } from './froCfgTipoRecaudo/froCfgTipoRecaudo.routes';
 import { FroTrteSolicitudRncRoutes } from './froTrteSolicitudRnc/froTrteSolicitudRnc.routes';
@@ -441,7 +443,7 @@ export const DashboardRoutes: Route[] = [
       ...BpProyectoRoutes,
       ...BpCdpRoutes,
       ...RnrsPreasignacionPlacaRoutes,
-      ...EmpresaAlcaldiaRoutes,
+      ...TpAlcaldiaRoutes,
       ...FroFacturaRoutes,
       ...FroRecaudoRoutes,
       ...FroAcuerdoPagoRoutes,
@@ -449,6 +451,8 @@ export const DashboardRoutes: Route[] = [
       ...FroTrteCfgConceptoRoutes,
       ...FroTrtePrecioRoutes,
       ...FroTrteSolicitudRnaRoutes,
+      ...FroTrteSolicitudRnmaRoutes,
+      ...FroTrteSolicitudRnrsRoutes,
       ...FroReporteIngresosRoutes,
       ...FroCfgTipoRecaudoRoutes,
       

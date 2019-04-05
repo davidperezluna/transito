@@ -1,0 +1,113 @@
+
+<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <b class="text-primary">
+                    Registrar conversión a gas natural
+                </b>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número Placa</label>
+                                <input class="form-control" [(ngModel)]="datos.placa" name="numeroPlaca" type="text" readonly/>
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número certificado</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroCertificado" name="numeroCertificado" type="text" required />
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Fecha expedición</label>
+                                <input class="form-control" [(ngModel)]="datos.fechaExpedicion" name="fechaExpedicion" type="date" required />
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Fecha vencimiento</label>
+                                <input class="form-control" [(ngModel)]="datos.fechaVencimiento" name="fechaVencimiento" type="date" required />
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Marca</label>
+                                <input class="form-control" name="marca" [(ngModel)]="datos.marca" type="text" required readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Linea</label>
+                                <input class="form-control" name="linea" [(ngModel)]="datos.linea" type="text" required readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Modelo</label>
+                                <input class="form-control" name="modelo" [(ngModel)]="datos.modelo" type="text" required readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Tipo Servicio</label>
+                                <input class="form-control" name="modelo" [(ngModel)]="datos.servicio" type="text" required readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Número serie</label>
+                                <input class="form-control" name="numeroSerie" [(ngModel)]="datos.serie" type="text" required readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Número de motor</label>
+                                <input class="form-control" name="numeroMotor" [(ngModel)]="datos.motor" type="text" required readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Número de chasis</label>
+                                <input class="form-control" name="numeroChasis" [(ngModel)]="datos.chasis" type="text" required readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label>Número VIN</label>
+                                <input class="form-control" name="numeroChasis" [(ngModel)]="datos.vin" type="text" required readonly>
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número CHIP</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroChip" name="numeroChip" type="text" required/>
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número KIT</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroKIT" name="numeroKIT" type="text" required/>
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número serial cilindro</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroSerial" name="numeroSerial" type="text" required/>
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Fecha fabricación</label>
+                                <input class="form-control" [(ngModel)]="datos.fechaFabricacion" name="fechaFabricacion" type="date" required />
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Presión trabajo</label>
+                                <input class="form-control" [(ngModel)]="datos.presion" name="presion" type="text" required/>
+                            </div>
+                            <div class="col-xs-6 col-lg-6">
+                                <label>Número solicitud RUNT</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" class="btn btn-success">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->

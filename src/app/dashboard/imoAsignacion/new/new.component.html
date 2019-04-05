@@ -15,26 +15,19 @@
                             (ngModelChange)="changedSedeOperativa($event)"
                             name="idSedeOperativa">
                         </ng-select>
-                    </div>
-                    <div class="col-xs-12 col-lg-12">
-                        <label>Sede operativa <b class="text-danger">*</b></label>
-                        <ng-select
-                            [multiple]="false"
-                            [options]="sedes"
-                            [(ngModel)]="sedeSelectedInsumo"
-                            (ngModelChange)="changedSedeOperativaInsumo($event)"
-                            name="sedeInsumoId">
-                        </ng-select>
+                        <br>
                     </div>
                     <div class="col-xs-12 col-lg-12"> 
+                            <br>
+                            <br>
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item"> 
-                                <a (click)="onSustrato()" class="nav-link active" data-toggle="tab" href="#sustrato" role="tab">Sustrato</a> 
+                                <a class="nav-link active" data-toggle="tab" href="#sustrato" role="tab">Sustrato</a> 
                                 <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
                             </li>  
                             <li class="nav-item"> 
-                                <a (click)="onInsumo()" class="nav-link" data-toggle="tab" href="#insumo" role="tab">Insumo</a> 
+                                <a class="nav-link" data-toggle="tab" href="#insumo" role="tab">Insumo</a> 
                                 <!-- <a class="nav-link " data-toggle="tab" href="#realizado"  role="tab">{{tramiteFactura.tramitePrecio.nombre}} <i class="fa fa-dot-circle-o text-success"></i></a>  -->
                             </li>  
                         </ul>
@@ -48,7 +41,6 @@
                                             [options]="sustratos"
                                             [(ngModel)]="insumoSelected"
                                             required
-                                            [disabled]='frmInsumoSelect'
                                             name="insumoSustratoId">
                                         </ng-select>
                                     </div>
@@ -60,52 +52,52 @@
                                 
                                     <div class="col-lg-12 col-md-12">
                                         <br>
-                                        <button (click)="onSearchLote()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Buscar</button>
+                                        <button (click)="onSearchLote()" class="btn btn-primary" type="button">Buscar</button>
                                     </div>
 
                                     <div class="tab-pane active col-lg-12 col-md-12" id="lotes" role="tabpanel" *ngIf='lotes'>
                                         <br>
                                         <br>
                                         <table class="table" id="dataTables-example">
-                                          <thead>
+                                            <thead>
                                             <tr>
-                                              <th>Detalles</th>
-                                              <th>Acciones</th> 
+                                                <th>Detalles</th>
+                                                <th>Acciones</th> 
                                             </tr>
-                                          </thead>
-                                          <tbody>
+                                            </thead>
+                                            <tbody>
                                             <tr class="odd" *ngFor="let lote of lotes; let i = index">
-                                              <td >
-                                                  <b>Proveedor</b>
-                                                  {{lote.empresa.nombre}}
-                                                  <br>
-                                                  <b>Organismo de transito</b>
-                                                  {{lote.sedeOperativa.nombre}}
-                                                  <br>
-                                                  <b>Tipo</b>
-                                                  {{lote.tipoInsumo.nombre}}
-                                                   <br> 
-                                                  <b>Inicio</b>
-                                                  {{lote.rangoInicio}} 
-                                                  <b>Fin</b>
-                                                  {{lote.rangoFin}}
-                                                  <br>
+                                                <td >
+                                                    <b>Proveedor</b>
+                                                    {{lote.empresa.nombre}}
+                                                    <br>
+                                                    <b>Organismo de transito</b>
+                                                    {{lote.sedeOperativa.nombre}}
+                                                    <br>
+                                                    <b>Tipo</b>
+                                                    {{lote.tipoInsumo.nombre}}
+                                                    <br> 
+                                                    <b>Inicio</b>
+                                                    {{lote.rangoInicio}} 
+                                                    <b>Fin</b>
+                                                    {{lote.rangoFin}}
+                                                    <br>
                                                     <b>Cantidad</b>
-                                                  {{lote.cantidad}}
-                                                <br>
-                                                <b>Referencia</b>
-                                                {{lote.referencia}}
+                                                    {{lote.cantidad}}
+                                                    <br>
+                                                    <b>Referencia</b>
+                                                    {{lote.referencia}}
                                                     <br>
                                                     <b>Fecha</b>
-                                                {{lote.fecha}}
-                                            </td>
-                                              <td>
-                                                <button (click)="onAsignarLote(lote)" class="btn btn-success" type="button">Asignar</button> 
-                                              </td>
+                                                    {{lote.fecha}}
+                                                </td>
+                                                <td>
+                                                    <button (click)="onAsignarLote(lote)" class="btn btn-success" type="button">Asignar</button> 
+                                                </td>
                                             </tr>
-                                          </tbody>
+                                            </tbody>
                                         </table>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -118,7 +110,6 @@
                                             [options]="insumos"
                                             [(ngModel)]="insumoSelectedInsumo"
                                             (ngModelChange)="changedInsumoInsumo($event)"
-                                            [disabled]='frmInsumoSelectInsumo'
                                             required
                                             name="insumoInsumoId">
                                         </ng-select>
@@ -135,7 +126,7 @@
                                         <br>
                                     </div>
                                     <div class="col-xs-12 col-lg-12">
-                                        <button (click)="onAsignarLoteInsumo()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Asignar</button>
+                                        <button (click)="onAsignarLoteInsumo()" class="btn btn-primary" type="button">Asignar</button>
                                     </div>
                                 </div>
                             </div>    
@@ -146,7 +137,7 @@
         </div>
     </div>
 </div>
-<div class="col-xs-12 col-lg-4" *ngIf="lotesSelecionados.length > 0s">
+<div class="col-xs-12 col-lg-4" *ngIf="lotesSelecionados.length > 0">
     <div class="card">
         <div class="card-body">
             <h5 class="m-0">Generar acta</h5>
@@ -154,18 +145,18 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                    <th>Tipo</th>
-                    <th>Cantidad</th>
-                    <th>Acciones</th>
+                        <th>Tipo</th> 
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="odd" *ngFor="let loteSelecionado of lotesSelecionados; let i = index">
-                    <td >{{loteSelecionado.tipo}}</td>
-                    <td >{{loteSelecionado.cantidad}}</td>
-                    <td>
-                        <button (click)="onEliminarLoteSelecionado(loteSelecionado)" class="btn btn-danger" type="button">Eliminar</button> 
-                    </td>
+                        <td >{{loteSelecionado.tipo}}</td>
+                        <td >{{loteSelecionado.cantidad}}</td>
+                        <td>
+                            <button (click)="onEliminarLoteSelecionado(loteSelecionado)" class="btn btn-danger" type="button">Eliminar</button> 
+                        </td>
                     </tr>
                 </tbody> 
             </table>

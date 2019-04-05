@@ -1,0 +1,61 @@
+<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado && autorizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <b class="text-primary">
+                    Cambio de placa
+                </b>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Tipo de Cambio
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-control" name="tipoCambioSelected" [(ngModel)]="tipoCambioSelected" required>
+                                    <option *ngFor="let tipoCambio of tipoCambioList" [value]="tipoCambio"> {{tipoCambio}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Número solicitud RUNT</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Nueva Placa</label>
+                                <input class="form-control" [(ngModel)]="datos.nuevaPlaca" name="nuevaPlaca" type="text" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="onEnviar()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->

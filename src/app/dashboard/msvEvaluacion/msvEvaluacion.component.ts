@@ -35,8 +35,6 @@ export class MsvEvaluacionComponent implements OnInit {
   public formEditRevision = false;
   public formIndex = true;
   public newEmpresa = false;
-  //public revisionNew: boolean = false;
-  //public habilitarBotonRev: boolean = false;
   public empresaEncontrada = false;
   public empresaNoEncontrada = false;
 
@@ -56,13 +54,12 @@ export class MsvEvaluacionComponent implements OnInit {
 
   public evaluacion: any = null;
 
-  public resumen = {}; public datos = {
+  public resumen = {}; 
+  public datos = {
     'parametro': null,
     'parametro2': null
-  }
+  };
 
-
-  /* public showT = false; */
   public msvParametros;
   public msvVariables;
   public msvVariablesLength;
@@ -79,6 +76,7 @@ export class MsvEvaluacionComponent implements OnInit {
     'valorObtenidoAtencionVictima': null,
     'valorObtenidoValorAgregado': null,
     'idRevision': null,
+    'datosValorAgregado': null,
   };
 
   public datosFortalecimiento = {
@@ -99,6 +97,46 @@ export class MsvEvaluacionComponent implements OnInit {
   public datosValorAgregado = {
     'parametros': null,
   };
+  
+  public datosTablaValorAgregado = {
+    'valorAgregado': false,
+    
+    'variable1': null,
+    'criterio1': null,
+    'aplica1': null,
+    'evidencia1': null,
+    'responde1': null,
+    'valor1': 25,
+    'valorObtenido1': null,
+    'observacion1': null,
+
+    'variable2': null,
+    'criterio2': null,
+    'aplica2': null,
+    'evidencia2': null,
+    'responde2': null,
+    'valor2': 25,
+    'valorObtenido2': null,
+    'observacion2': null,
+
+    'variable3': null,
+    'criterio3': null,
+    'aplica3': null,
+    'evidencia3': null,
+    'responde3': null,
+    'valor3': 25,
+    'valorObtenido3': null,
+    'observacion3': null,
+
+    'variable4': null,
+    'criterio4': null,
+    'aplica4': null,
+    'evidencia4': null,
+    'responde4': null,
+    'valor4': 25,
+    'valorObtenido4': null,
+    'observacion4': null,
+  };
 
   public botonEnviarFortalecimiento = false;
   public botonEnviarComportamiento = false;
@@ -108,6 +146,7 @@ export class MsvEvaluacionComponent implements OnInit {
   public botonEnviarValorAgregado = false;
 
   public mostrarTablaEvaluacion = false;
+  public mostrarTablaValoresAgregados = true;
   public puntajeEvaluacion = 0;
 
   constructor(
@@ -119,7 +158,6 @@ export class MsvEvaluacionComponent implements OnInit {
 
     private _MsvParametroService: MsvParametroService,
     private _MsvCalificacionService: MsvCalificacionService,
-    //private _MsvResultadoService: MsvResultadoService,
   ) { }
 
   ngOnInit() {
@@ -145,9 +183,6 @@ export class MsvEvaluacionComponent implements OnInit {
     this._EvaluacionService.getEvaluacion().subscribe(
       response => {
         this.msvEvaluaciones = response.data;
-        let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
-        }, 100);
       },
       error => {
         this.errorMessage = <any>error;
@@ -162,9 +197,6 @@ export class MsvEvaluacionComponent implements OnInit {
     this._MsvCategoriaService.select().subscribe(
       response => {
         this.msvCategorias = response;
-        let timeoutId = setTimeout(() => {
-          this.iniciarTabla();
-        }, 100);
       },
       error => {
         this.errorMessage = <any>error;
@@ -176,32 +208,13 @@ export class MsvEvaluacionComponent implements OnInit {
       }
     );
   }
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
-      responsive: true,
-      pageLength: 8,
-      sPaginationType: 'full_numbers',
-      oLanguage: {
-        oPaginate: {
-          sFirst: '<i class="fa fa-step-backward"></i>',
-          sPrevious: '<i class="fa fa-chevron-left"></i>',
-          sNext: '<i class="fa fa-chevron-right"></i>',
-          sLast: '<i class="fa fa-step-forward"></i>'
-        }
-      }
-    });
-    this.table = $('#dataTables-example').DataTable();
-  }
 
   onNewEmpresa() {
-    //this.newEmpresa = true;
     this.formNewEmpresa = true;
     this.formNew = false;
     this.formEdit = false;
     this.formIndex = false;
     this.formNewRevision = false;
-    
-    this.table.destroy();
   }
 
   onNewRevision() {
@@ -210,8 +223,6 @@ export class MsvEvaluacionComponent implements OnInit {
     this.formEdit = false;
     this.formIndex = false;
     this.formNewRevision = true;
-
-    this.table.destroy();
   }
 
   ready(isCreado: any) {
@@ -245,8 +256,7 @@ export class MsvEvaluacionComponent implements OnInit {
               text: response.message,
               type: 'success',
               confirmButtonColor: '#15d4be',
-            })
-            this.table.destroy();
+            });
             this.ngOnInit();
           },
           error => {
@@ -258,8 +268,6 @@ export class MsvEvaluacionComponent implements OnInit {
             }
           }
         );
-
-
       }
     })
   }
@@ -278,7 +286,6 @@ export class MsvEvaluacionComponent implements OnInit {
       ) {}
     })
 
-    //this.revisionNew = false;
     let token = this._loginService.getToken();
 
     this._EmpresaService.showByNitOrNombre(this.datos, token).subscribe(
@@ -292,7 +299,6 @@ export class MsvEvaluacionComponent implements OnInit {
               if (response.status == 'success') {
                 this.miRevision = true;
                 this.revisiones = response.data;
-                console.log(this.revisiones);
               } else {
                 swal({
                   title: 'Alerta!',
@@ -329,44 +335,6 @@ export class MsvEvaluacionComponent implements OnInit {
       });
   }
 
-  /* onKeyValidateRevision() {
-    swal({
-      title: 'Buscando Fechas de Revisión!',
-      text: 'Solo tardará unos segundos por favor espere.',
-      onOpen: () => {
-        swal.showLoading()
-      }
-    }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
-    let token = this._loginService.getToken();
-
-    this._RevisionService.showRevision(token, this.miEmpresa.id).subscribe(
-      response => {
-        if (response.status == 'success') {
-          this.revisiones = response.data;
-        } else {
-          swal({
-            title: 'Alerta!',
-            text: response.message,
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      });
-  } */
-
   editmsvEvaluacion(msvEvaluacion: any) {
     this.msvEvaluacion = msvEvaluacion;
     this.formEdit = true;
@@ -382,12 +350,9 @@ export class MsvEvaluacionComponent implements OnInit {
         swal.showLoading()
       }
     }).then((result) => {
-      if (
-        // Read more about handling dismissals
-        result.dismiss === swal.DismissReason.timer
-      ) {
-      }
-    })
+      if ( result.dismiss === swal.DismissReason.timer) {}
+    });
+
     if (e) {
       let timeoutId = setTimeout(() => {
         this.categoria = false;
@@ -421,16 +386,15 @@ export class MsvEvaluacionComponent implements OnInit {
                   if (this.datosValorAgregado.parametros != null && this.categoriaSelected == 6) {
                     this.msvParametros = this.datosValorAgregado.parametros;
                   }
-                  /* if (this.msvParametros) {
+                  if (this.msvParametros) {
                     //entra aquí si encuentra Parametro                    
-                    this.showT = true;
                   } else {
                     swal({
                       type: 'error',
                       title: 'Oops...',
                       text: '¡La categoria no tiene parametros!'
                     })
-                  }*/
+                  }
                 }
               );
             }
@@ -448,7 +412,7 @@ export class MsvEvaluacionComponent implements OnInit {
     }
   }
 
-  onEnviar() {
+  onEnviar(categoriaSelected) {
     let token = this._loginService.getToken();
     swal({
       title: '¡Atención!',
@@ -735,61 +699,17 @@ export class MsvEvaluacionComponent implements OnInit {
             }
           );
         }
-        if (this.categoriaSelected == 6) {
-          this.datosValorAgregado.parametros = this.msvParametros;
+        if (categoriaSelected == 6) { 
           this.botonEnviarValorAgregado = true;
-          this._MsvCalificacionService.newCalificacion(token, this.datosValorAgregado.parametros, this.miEmpresa.id).subscribe(
-            response => {
-              if (response.status == 'success') {
-                this.ready2.emit(true);
-
-                //para recargar lista
-                this._MsvCategoriaService.editEstadoCategoria({ 'id': this.categoriaSelected }, token).subscribe(
-                  response => {
-                    if (response.status == 'success') {
-                      this._MsvCategoriaService.select().subscribe(
-                        response => {
-                          this.msvCategorias = null;
-                          this.msvCategorias = response;
-                          console.log(this.msvCategorias);
-                        },
-                        error => {
-                          this.errorMessage = <any>error;
-
-                          if (this.errorMessage != null) {
-                            console.log(this.errorMessage);
-                            alert("Error en la petición");
-                          }
-                        }
-                      );
-                    }
-                  }
-                );
-
+          this.mostrarTablaValoresAgregados = false;
                 swal({
                   title: 'Perfecto!',
-                  text: response.message,
+                  text: 'Registros creados con éxito',
                   type: 'success',
                   confirmButtonText: 'Aceptar'
-                })
-              } else {
-                swal({
-                  title: 'Error!',
-                  text: response.message,
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                })
-              }
-              error => {
-                this.errorMessage = <any>error;
-                if (this.errorMessage != null) {
-                  console.log(this.errorMessage);
-                  alert("Error en la petición");
-                }
-              }
+                });
             }
-          );
-        }
+         
       }
     })
   }
@@ -827,9 +747,9 @@ export class MsvEvaluacionComponent implements OnInit {
       }
     } if (idCategoria == 6) {
       if (e) {
-        this.datos2.valorObtenidoValorAgregado += parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoValorAgregado += 100 / 4;
       } else {
-        this.datos2.valorObtenidoValorAgregado -= parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoValorAgregado -= 100 / 4;
       }
     }
   }
@@ -838,7 +758,7 @@ export class MsvEvaluacionComponent implements OnInit {
     let token = this._loginService.getToken();
 
     this.datos2.idEmpresa = this.miEmpresa.id;
-
+    this.datos2.datosValorAgregado = this.datosTablaValorAgregado;
     swal({
       title: '¡Atención!',
       text: '¿Desea guardar la información para la empresa?',
@@ -847,13 +767,13 @@ export class MsvEvaluacionComponent implements OnInit {
 
     }).then((result) => {
       if (result.value) {
+
         this._EvaluacionService.register(this.datos2, token).subscribe(
           response => {
             if (response.status == 'success') {
               this.ready2.emit(true);
               this.evaluacion = response.data;
-              this.ngOnInit();
-
+              console.log(this.evaluacion);
               swal({
                 title: 'Perfecto!',
                 html: response.message,
@@ -902,5 +822,9 @@ export class MsvEvaluacionComponent implements OnInit {
     });
     this.mostrarTablaEvaluacion = true;
     this.datos2.idRevision = revision.id;
+  }
+
+  onEnviarTablaValorAgregado() {
+    console.log(this.datosTablaValorAgregado);
   }
 }
