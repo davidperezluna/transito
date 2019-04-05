@@ -345,7 +345,7 @@
                                           <div class="row" *ngFor="let msvVariable of msvParametro.variables; let i=index">
                                              <div class="col-lg-2" style="border:1px solid #cccccc; text-align:justify;">
                                                 {{ msvVariable.name }}</div>
-                                             <div class="col-lg-9">
+                                             <div class="col-lg-10">
                                                 <div class="row" *ngFor="let msvCriterio of msvVariable.criterios; let i=index">
                                                    <div class="col-lg-3" style="border:1px solid #cccccc; text-align:justify;">
                                                       {{ msvCriterio.name }}
@@ -358,17 +358,13 @@
                                                          name="evidencia{{ msvCriterio.id }}">
                                                    </div>
                                                    <div class="col-lg-1" style="border:1px solid #cccccc;">
-                                                      <input type="checkbox"
-                                                         (ngModelChange)="calcularTotal($event, msvParametro, categoriaSelected)"
-                                                         [(ngModel)]="msvCriterio.responde" name="responde{{ msvCriterio.id }}"></div>
-                                                   <div class="col-lg-1" style="border:1px solid #cccccc;">
-                                                      {{ msvParametro.valor
-                                                                                                                                                   /msvParametro.numeroVariables | number:'1.1-2' }}
+                                                      <input type="checkbox" (ngModelChange)="calcularTotal($event, msvParametro, categoriaSelected)" [(ngModel)]="msvCriterio.responde" name="responde{{ msvCriterio.id }}">
                                                    </div>
                                                    <div class="col-lg-1" style="border:1px solid #cccccc;">
-                                                      <label
-                                                         *ngIf="msvCriterio.responde == true">{{ msvParametro.valor
-                                                                                                                                                      /msvParametro.numeroVariables | number:'1.1-2' }}</label>
+                                                      {{ msvParametro.valor / msvVariable.numeroCriterios  | number:'1.1-2' }}
+                                                   </div>
+                                                   <div class="col-lg-1" style="border:1px solid #cccccc;">
+                                                      <label *ngIf="msvCriterio.responde == true">{{ msvParametro.valor / msvVariable.numeroCriterios | number:'1.1-2' }}</label>
                                                       <label *ngIf="msvCriterio.responde == false">0</label>
                                                    </div>
                                                    <div class="col-lg-4" style="border:1px solid #cccccc; padding:0;">
