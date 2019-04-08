@@ -1,20 +1,20 @@
 export class MsvExportIpat {
     constructor(
         public documento: string,
-        public idGravedad: number,
-        public idTipoVictima: number,
+        public arrayGravedadAccidente: number,
+        public arrayTipoVictima: number,
         public horaInicio: string,
         public horaFin: string,
         public fechaInicio: string,
         public fechaFin: string,
-        public idGrupoEdad: number,
-        public idMunicipio: number,
-        public idDiaSemana: number,
-        public idGenero: number,
-        public idClase: number,
-        public idClaseAccidente: number,
-        public idChoqueCon: number,
-        public idObjetoFijo: number,
+        public arrayGrupoEdad: number,
+        public arrayMunicipio: number,
+        public arrayDiaSemana: number,
+        public arrayGenero: number,
+        public arrayClase: number,
+        public arrayClaseAccidente: number,
+        public arrayChoqueCon: number,
+        public arrayObjetoFijo: number,
 
     ) {}
 }
