@@ -310,7 +310,7 @@ export class NewRnaComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
 
-          this.readyTramite(response.data.tramiteFactura.id);
+          this.onChangedTramiteFactura(response.data.tramiteFactura.id);
         } else {
           swal({
             title: 'Error!',

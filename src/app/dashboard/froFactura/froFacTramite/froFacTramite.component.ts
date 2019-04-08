@@ -277,13 +277,13 @@ export class FroFacTramiteComponent implements OnInit {
 
     let token = this._LoginService.getToken();
 
-    this._VehiculoService.searchByFilter({ 'filtro': this.vehiculoFiltro }, token).subscribe(
+    this._VehiculoService.searchByPlaca({ 'numero': this.vehiculoFiltro }, token).subscribe(
       response => {
         if (response.code == 200) {
           this.vehiculo = response.data;
-          this.factura.idVehiculo = this.vehiculo.id;
+          this.factura.idVehiculo = this.vehiculo.id;         
 
-          this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+          this._PropietarioService.searchByVehiculo({ 'idVehiculo':this.vehiculo.id }, token).subscribe(
             response => {
               if (response.code == 200) {
                 this.propietarios = response.data;
@@ -330,52 +330,6 @@ export class FroFacTramiteComponent implements OnInit {
         }
       }
     );
-
-    /*
-    this._PropietarioService.searchByFilter({ 'filtro': this.vehiculoFiltro }, token).subscribe(
-      response => {
-        if (response.code == 200) {
-          this.vehiculo = response.data.vehiculo;
-          if (response.data.propietarios) {
-            this.propietarios = response.data.propietarios;
-          }else{
-            this.propietarios = null;
-          }
-
-          this.factura.idVehiculo = this.vehiculo.id;
-
-          swal({
-            title: 'Perfecto!',
-            text: response.message,
-            type: 'success',
-            confirmButtonText: 'Aceptar'
-          });
-        }else {
-          if (response.data.vehiculo) {
-            this.vehiculo = response.data.vehiculo;
-            this.factura.idVehiculo = this.vehiculo.id;
-          }else{
-            this.vehiculo = null;
-            this.factura.idVehiculo = null;
-          }
-          
-          swal({
-            title: 'Atención!',
-            text: response.message,
-            type: 'warning',
-            confirmButtonText: 'Aceptar'
-          });
-        }
-
-        error => {
-          this.errorMessage = <any>error;
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      }
-    );*/
   }
 
   onAddTramite() {

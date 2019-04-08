@@ -11,6 +11,7 @@ import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
 import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
 import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes';
 import { UserLicenciaConduccionRoutes } from './userLicenciaConduccion/userLicenciaConduccion.routes';
+import { UserLicenciaTransitoRoutes } from './userLicenciaTransito/userLicenciaTransito.routes';
 import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategoria.routes';
 
 
@@ -258,6 +259,7 @@ export const DashboardRoutes: Route[] = [
       ...UserCfgRoleRoutes,
       ...UserUsuarioMenuRoutes,
       ...UserLicenciaConduccionRoutes,
+      ...UserLicenciaTransitoRoutes,
       ...HomeRoutes,
       ...BancoRoutes,
       ...VhloBuscarRoutes,

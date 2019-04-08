@@ -367,6 +367,7 @@ export class MsvEvaluacionComponent implements OnInit {
               this._MsvParametroService.getParametroByCategoriaId(token, e).subscribe(
                 response => {
                   this.msvParametros = response.data;
+                  console.log(this.msvParametros);
 
                   if (this.datosFortalecimiento.parametros != null && this.categoriaSelected == 1) {
                     this.msvParametros = this.datosFortalecimiento.parametros;

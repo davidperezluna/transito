@@ -310,7 +310,7 @@ export class NewRnmaComponent implements OnInit {
             confirmButtonText: 'Aceptar'
           });
 
-          this.readyTramite(response.data.tramiteFactura.id);
+          this.onChangedTramiteFactura(response.data.tramiteFactura.id);
         } else {
           swal({
             title: 'Error!',
@@ -447,7 +447,8 @@ export class NewRnmaComponent implements OnInit {
             alert("Error en la petición");
           }
         }
-      });
+      }
+    );
   }
 
   onCloseApoderado() {
