@@ -16,7 +16,6 @@ export class FacturaInsumoService {
 	}
 
 	register(factura,token){
-		
 		let json = JSON.stringify(factura);
 		let params = "json="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

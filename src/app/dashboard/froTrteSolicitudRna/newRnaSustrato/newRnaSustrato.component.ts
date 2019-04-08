@@ -1,71 +1,60 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { FacturaInsumo } from './facturaInsumo.modelo';
 import { TramiteSolicitudService } from '../../../services/tramiteSolicitud.service';
 import { TramiteFacturaService } from '../../../services/tramiteFactura.service';
-import { LoginService } from '../../../services/login.service';
 import { ImoInsumoService } from '../../../services/imoInsumo.service';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
-import { FacturaInsumo } from './facturaInsumo.modelo';
 import { FacturaInsumoService } from '../../../services/facturaInsumo.service';
 import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.service';
-
-
+import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
-import { log } from 'util';
 
 @Component({
     selector: 'appRna-sustrato',
     templateUrl: './newRnaSustrato.html'
 })
+
 export class NewRnaInsumoComponent implements OnInit {
-    @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
     @Input() vehiculo: any = null;
-    @Input() ciudadanoPropietario: any = null;
+    @Input() idPropietario: any = null;
     public errorMessage;
-    public respuesta;
-    public sustratos: any;
-    public sustratoSelected: any;
-    public colorSelected: any;
+
     public identificacion: any;
+    public ciudadano: any = null;
+
     public licenciaTransito: any;
     public idOrganismoTransito: any;
-    public ciudadano:any;
     public estadoImpresion=true;
-    public tarjetaEntregada=true;
-    public ciudadanoNew = false;
-    public isError = false;
-    public isExist = false;
-    public numeroInsumo:any;
-    public insumo:any;
-    public ciudadanoEncontrado=1;
-    public FacturaInsumo: FacturaInsumo;
-    public resumen = {};     public datos = {
-        'cedula': 0,
-        'licenciaTransito': "",
-        'vehiculoId': ""
-      }
-    
+    public tarjetaEntregada = true;
 
+    public numeroInsumo:any;
+    public insumo: any = null;
+
+    public facturaInsumo: FacturaInsumo;
+    
+    public datos = {
+        'licenciaTransito': null,
+        'idVehiculo': null,
+        'idPropietario': null,
+    }
+    
     constructor(
         private  _ImoInsumoService: ImoInsumoService,
-        private _TramiteSolicitudService: TramiteSolicitudService,
-        private _loginService: LoginService,
-        private _tramiteFacturaService: TramiteFacturaService,
         private _FuncionarioService: PnalFuncionarioService,
         private _UserCiudadanoService: UserCiudadanoService,
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private _FacturaInsumoService: FacturaInsumoService,
+        private _LoginService: LoginService,
     ) {
-        this.FacturaInsumo = new FacturaInsumo(null, null, null, null, null);
-        
-     } 
+        this.facturaInsumo = new FacturaInsumo(null, null, null, null, null);
+    } 
 
     ngOnInit() {
-        let token = this._loginService.getToken();
+        let token = this._LoginService.getToken();
 
-        let identity = this._loginService.getIdentity();
+        let identity = this._LoginService.getIdentity();
 
         this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
             response => {
@@ -121,49 +110,57 @@ export class NewRnaInsumoComponent implements OnInit {
             });
     }
 
-    onKeyCiudadano(){
-        let token = this._loginService.getToken();
-        let identificacion = {
-			'numeroIdentificacion' : this.FacturaInsumo.ciudadanoId,
+    onSearchCiudadano(){
+        let token = this._LoginService.getToken();
+
+        let datos = {
+			'identificacion' : this.facturaInsumo.idCiudadano,
+			'idTipoIdentificacion' : 1,
         };
-        this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
+
+        this._UserCiudadanoService.searchByIdentificacion(datos, token).subscribe(
             response => {
-                this.respuesta = response; 
-                if(this.respuesta.status == 'success'){
-                    this.ciudadano = this.respuesta.data;
-                    this.ciudadanoEncontrado= 2;
-                    this.ciudadanoEncontrado= 2;
-                    this.ciudadanoNew = false;
-            }else{
-                this.ciudadanoEncontrado=3;
-                this.ciudadanoNew = true;
-            }
-            error => {
-                    this.errorMessage = <any>error;
-                
-                    if(this.errorMessage != null){
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
+                if(response.status == 'success'){
+                    if (response.data.ciudadano) {
+                        this.ciudadano = response.data.ciudadano;
+                    }else{
+                        this.ciudadano = null;
                     }
+                }else{
+                    this.ciudadano = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: 'Su usuario no tiene autorización para realizar facturación!',
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
+            error => {
+                this.errorMessage = <any>error;
+            
+                if(this.errorMessage != null){
+                    console.log(this.errorMessage);
+                    alert("Error en la petición");
+                }
+            }
         }); 
     }
    
-    enviarTramite(){
-        let token = this._loginService.getToken();
+    onEnviarTramite(){
+        let token = this._LoginService.getToken();
 
         this.datos.licenciaTransito = this.licenciaTransito;
-        this.datos.cedula  = this.ciudadanoPropietario.usuario.identificacion;
-        this.datos.vehiculoId  = this.vehiculo.id;
+        this.datos.idPropietario  = this.idPropietario;
+        this.datos.idVehiculo  = this.vehiculo.id;
         
-        this.FacturaInsumo.entregado = this.tarjetaEntregada;
-        this.FacturaInsumo.idFactura = this.factura.id;
+        this.facturaInsumo.entregado = this.tarjetaEntregada;
+        this.facturaInsumo.idFactura = this.factura.id;
         
         this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(
             response => { 
-                this.respuesta = response;
-                if(this.respuesta.status == 'success'){  
-                    this._FacturaInsumoService.register(this.FacturaInsumo,token).subscribe(
+                if(response.status == 'success'){  
+                    this._FacturaInsumoService.register(this.facturaInsumo, token).subscribe(
                         response => {
                             if (response.status == 'success') { 
                                 swal({
@@ -171,7 +168,7 @@ export class NewRnaInsumoComponent implements OnInit {
                                     text: 'Registro exitoso!',
                                     type: 'success',
                                     confirmButtonText: 'Aceptar'
-                                    })
+                                });
                             }
                         },
                         error => {
@@ -196,12 +193,8 @@ export class NewRnaInsumoComponent implements OnInit {
         );
     }
 
-    onCancelar(){
-        this.cancelarTramite.emit(true);
-    }
-
-    onKeyValidateInsumo(){
-        let token = this._loginService.getToken();
+    onSearchInsumo(){
+        let token = this._LoginService.getToken();
 
         let datos = {
             'numero': this.numeroInsumo,
@@ -209,15 +202,20 @@ export class NewRnaInsumoComponent implements OnInit {
             'idOrganismoTransito': this.idOrganismoTransito,
         }
         
-        this._ImoInsumoService.showNombre(token,datos).subscribe(
+        this._ImoInsumoService.searchByNumeroAndModulo(datos, token).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.FacturaInsumo.insumoId = response.data.id;
-                    this.isExist = true;
-                    this.isError = false
+                    this.insumo = response.data;
+                    this.facturaInsumo.idInsumo = response.data.id;
                 }else{
-                    this.isError = true;
-                    this.isExist = false;
+                    this.insumo = null;
+
+                    swal({
+                        title: 'Error!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             },
             error => {
@@ -229,8 +227,9 @@ export class NewRnaInsumoComponent implements OnInit {
             }
         );
     }
+
     ready(){
-        this.ciudadanoEncontrado = 3;
+        
     }
 
 }

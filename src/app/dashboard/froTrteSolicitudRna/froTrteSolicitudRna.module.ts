@@ -8,6 +8,7 @@ import { UserEmpresaService } from '../../services/userEmpresa.service';
 import { DefaultService } from '../../services/default.service';
 import { CfgTipoAlertaService } from '../../services/cfgTipoAlerta.service';
 import { VhloAcreedorService } from '../../services/vhloAcreedor.service';
+import { PnalFuncionarioService } from '../../services/pnalFuncionario.service';
 import { NewRnaComponent } from './newRna/newRna.component'; 
 import { NewRnaDuplicadoPlacaComponent } from './rna/tramiteDuplicadoPlaca/newRna.duplicadoPlaca.component';
 import { NewRnaDuplicadoLicenciaComponent } from './rna/tramiteDuplicadoLicencia/newRna.duplicadoLicencia.component';

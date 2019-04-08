@@ -72,19 +72,6 @@
                                 <label>Fecha expedición</label>
                                 <input class="form-control" [(ngModel)]="datos.fechaExpedicion" name="fechaExpedicion" type="date" required />
                             </div>
-                        
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Número Acta</label>
-                                <input class="form-control" [(ngModel)]="datos.numeroActa" name="numeroActa" type="text" required />
-                            </div>
-                            
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Entidad que emite
-                                    <b class="text-danger">*</b>
-                                </label>
-                                <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="datos.idEntidadJudicial" required name="idEntidadJudicial">
-                                </ng-select>
-                            </div>
                         </div><!-- .row -->
 
                         <div class="row" *ngIf="datos.idTipoAlerta"><!-- .row -->
@@ -109,8 +96,8 @@
                         
                             <!--tipo identificacion ciudadano -->
                             <div class="col-xs-12 col-lg-6">
-                                <label *ngIf="tipoIdentificacionSelected != 4">Identificación</label>
-                                <label *ngIf="tipoIdentificacionSelected == 4">NIT</label>
+                                <label *ngIf="tipoIdentificacionSelectedAcreedor != 4">Identificación</label>
+                                <label *ngIf="tipoIdentificacionSelectedAcreedor == 4">NIT</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" [(ngModel)]="identificacionAcreedor" name="identificacionAcreedor" required />
                                     <span class="input-group-btn">
@@ -160,8 +147,9 @@
                                 </table>
                             </div>
                         
-                            <!--si no existe un ciudadano -->
-                            <app-new-rna-ciudadano *ngIf="formCiudadano" [tipoIdentificacion]="tipoIdentificacionSelectedAcreedor" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
+                            <!--si no existe un ciudadano 
+                                <app-new-rna-ciudadano *ngIf="formCiudadano" [tipoIdentificacion]="tipoIdentificacionSelectedAcreedor" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
+                            -->
                         </div><!-- /.row -->
                     </div>
                 </div>

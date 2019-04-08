@@ -4,7 +4,6 @@ import { FroFacTramiteService } from '../../../../services/froFacTramite.service
 import { UserLicenciaTransitoService } from '../../../../services/userLicenciaTransito.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
 import { LoginService } from '../../../../services/login.service';
-
 import swal from 'sweetalert2';
 
 @Component({
@@ -13,14 +12,12 @@ import swal from 'sweetalert2';
 })
 export class NewRnaDuplicadoLicenciaComponent implements OnInit {
     @Output() readyTramite = new EventEmitter<any>();
-    @Output() cancelarTramite = new EventEmitter<any>();
     @Input() tramiteFactura: any = null;
     @Input() idPropietario: any = null;
     public errorMessage; 
     
     public autorizado: any = false;
     public tramiteSolicitud: any = null;
-    public documentacion: any;
     public resumen: any = null;
 
     public datos = {
@@ -112,7 +109,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
                             'idPropietario': this.idPropietario
                         }
 
-                        this._LicenciaTransitoService.searchActual(datos, token).subscribe(
+                        /*this._LicenciaTransitoService.searchActual(datos, token).subscribe(
                             response => {
                                 if (response.status == 'success') {
                                     this.datos.numeroLicenciaActual = response.data.numero;
@@ -128,7 +125,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
                                     }
                                 }
                             }
-                        );
+                        );*/
                     }
                 } else {
                     this.autorizado = false;
@@ -159,7 +156,7 @@ export class NewRnaDuplicadoLicenciaComponent implements OnInit {
         this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
               if (response.code == 200) {
-                this.resumen = "Motivo "+ this.datos.motivo +"<br/>";
+                this.resumen = "Motivo "+ this.datos.motivo;
 
                 this.readyTramite.emit({'foraneas':this.datos, 'resumen':this.resumen});
               }else{

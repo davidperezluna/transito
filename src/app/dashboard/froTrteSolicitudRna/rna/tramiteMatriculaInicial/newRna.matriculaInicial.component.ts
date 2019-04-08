@@ -406,7 +406,6 @@ export class NewRnaMatricualaInicialComponent implements OnInit {
                 this._PropietarioService.register(this.datos, token).subscribe(
                     response => {
                         this.readyTramite.emit({ 'foraneas': this.datos, 'resumen': resumen });
-                        this.ngOnInit();
                     },
                     error => {
                         this.errorMessage = <any>error;

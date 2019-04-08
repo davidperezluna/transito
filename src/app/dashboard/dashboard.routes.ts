@@ -11,10 +11,12 @@ import { UserCfgMenuRoutes } from './userCfgMenu/userCfgMenu.routes';
 import { UserCfgRoleRoutes } from './userCfgRole/userCfgRole.routes';
 import { UserUsuarioMenuRoutes } from './userUsuarioMenu/userUsuarioMenu.routes';
 import { UserLicenciaConduccionRoutes } from './userLicenciaConduccion/userLicenciaConduccion.routes';
+import { UserLicenciaTransitoRoutes } from './userLicenciaTransito/userLicenciaTransito.routes';
 import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategoria.routes';
 
 
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
+import { VhloCfgValorRoutes } from './vhloCfgValor/vhloCfgValor.routes';
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
 import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
 import { VhloCfgLimitacionCausalRoutes } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.routes';
@@ -257,6 +259,7 @@ export const DashboardRoutes: Route[] = [
       ...UserCfgRoleRoutes,
       ...UserUsuarioMenuRoutes,
       ...UserLicenciaConduccionRoutes,
+      ...UserLicenciaTransitoRoutes,
       ...HomeRoutes,
       ...BancoRoutes,
       ...VhloBuscarRoutes,
@@ -455,6 +458,7 @@ export const DashboardRoutes: Route[] = [
       ...FroTrteSolicitudRnrsRoutes,
       ...FroReporteIngresosRoutes,
       ...FroCfgTipoRecaudoRoutes,
+      ...VhloCfgValorRoutes
       
     ]
   }

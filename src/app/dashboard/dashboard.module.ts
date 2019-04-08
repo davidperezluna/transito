@@ -13,6 +13,7 @@ import { UserCfgMenuModule } from './userCfgMenu/userCfgMenu.module';
 import { UserCfgRoleModule } from './userCfgRole/userCfgRole.module';
 import { UserUsuarioMenuModule } from './userUsuarioMenu/userUsuarioMenu.module';
 import { UserLicenciaConduccionModule } from './userLicenciaConduccion/userLicenciaConduccion.module';
+import { UserLicenciaTransitoModule } from './userLicenciaTransito/userLicenciaTransito.module';
 
 import { HomeModule } from './home/home.module';
 import { VhloCfgMarcaModule } from './vhloCfgMarca/vhloCfgMarca.module';
@@ -135,6 +136,7 @@ import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicencia
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
+import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module'; 
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { CfgTipoClaseModule } from './cfgTipoClase/cfgTipoClase.module';
@@ -271,9 +273,11 @@ import {RightsidebarComponent} from '../shared';
     UserCfgRoleModule,
     UserUsuarioMenuModule,
     UserLicenciaConduccionModule,
+    UserLicenciaTransitoModule,
     HomeModule,
     VhloCfgMarcaModule,
     VhloCfgLineaModule,
+    VhloCfgValorModule,
     BancoModule,
     VhloCfgClaseModule,
     VhloCfgColorModule,

@@ -2,8 +2,8 @@ export class FacturaInsumo{
 	constructor(
 		public descripcion: string,
 		public entregado: boolean,
-		public insumoId: number,
-		public ciudadanoId: number,
+		public idInsumo: number,
+		public idCiudadano: number,
 		public idFactura: number,
 	){}
 }
