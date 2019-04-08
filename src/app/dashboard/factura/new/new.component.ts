@@ -407,6 +407,7 @@ constructor(
             if (this.tramitePrecio.tramite.id == 6) {
               
               this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
+
               this.tramitesValor.push(
                 {
                   'idTramitePrecio': this.tramitePrecio.id,
@@ -428,6 +429,7 @@ constructor(
                 ) {
                 }
               })
+              
               this._ciudadanoVehiculoService.showCiudadanoVehiculoId(token, this.vehiculoCriterio).subscribe(
                 response => {
                   let datos = {
@@ -446,7 +448,7 @@ constructor(
                           if (element.ciudadano) {
                             this.searchByIdentificacionForm = true;
                           }
-                          if (element.empresa) {
+                          if (element.empresa) { 
                             this.isEmpresaForm = true;
                           }
                         });

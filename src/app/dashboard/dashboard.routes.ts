@@ -15,6 +15,7 @@ import { UserLcCfgCategoriaRoutes } from './userLcCfgCategoria/userLcCfgCategori
 
 
 import { CfgValorVehiculoRoutes } from './cfgValorVehiculo/cfgValorVehiculo.routes';
+import { VhloCfgValorRoutes } from './vhloCfgValor/vhloCfgValor.routes';
 import { CfgBodegaRoutes } from './cfgBodega/cfgBodega.routes';
 import { CfgTipoClaseRoutes } from './cfgTipoClase/cfgTipoClase.routes';
 import { VhloCfgLimitacionCausalRoutes } from './vhloCfgLimitacionCausal/vhloCfgLimitacionCausal.routes';
@@ -455,6 +456,7 @@ export const DashboardRoutes: Route[] = [
       ...FroTrteSolicitudRnrsRoutes,
       ...FroReporteIngresosRoutes,
       ...FroCfgTipoRecaudoRoutes,
+      ...VhloCfgValorRoutes
       
     ]
   }
