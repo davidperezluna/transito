@@ -1,0 +1,122 @@
+<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado && autorizado">
+    <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <b class="text-primary">Registrar traspaso a persona indeterminada</b>
+                <br>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="container">
+                    <div class="form-group"><!-- .from-group -->
+                        <div class="row">
+                            <label>Datos básicos</label>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <b>Fecha</b>
+                                            <br>
+                                            {{ date| date: 'yyyy-MM-dd' }}
+                                        </th>
+                                        <th>
+                                            <b>Organismo transito</b>
+                                            <br>
+                                            {{ vehiculo.organismoTransito?.nombre }}
+                                        </th>
+                                        <th *ngIf="vehiculo.tipoServicio">
+                                            <b>Tipo de servicio</b>
+                                            <br>
+                                            {{ vehiculo.tipoServicio?.nombre }}
+                                        </th>
+                                        <th>
+                                            <b>Tipo documento traspaso</b>
+                                            <br>
+                                            <ng-select [multiple]="false" [options]="tipos" [(ngModel)]="datos.tipoTraspaso" name="tipoTraspaso" required>
+                                            </ng-select>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                        <div class="row">
+                            <label>Información del destinatario del traspaso</label>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <b>Tipo documento</b>
+                                            <br>
+                                            Sin registro
+                                        </th>
+                                        <th>
+                                            <b>Número documento</b>
+                                            <br>
+                                            Sin registro
+                                        </th>
+                                        <th>
+                                            <b>Nombre apoderado</b>
+                                            <br>
+                                            Sin registro
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div><!-- /.from-group -->
+                </div>
+            </div>
+        </div>
+   </div>
+   <div class="col-xs-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Registro de Acta o certificado</b>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formActa="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha <strong class="text-danger">*</strong></label>
+                                <input type="date" class="form-control" [(ngModel)]="datos.fechaActa" name="nombre" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Nro. Acta o certificado <strong class="text-danger">*</strong></label>
+                                <input type="text" class="form-control" [(ngModel)]="datos.numeroActa" name="nombre" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Entidad Judicial que emite <span class="text-danger">*</span></label>
+                                <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="datos.idEntidadJudicial" required name="idEntidadJudicial"></ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formActa.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

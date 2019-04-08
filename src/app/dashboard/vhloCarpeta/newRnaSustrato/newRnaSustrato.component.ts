@@ -12,7 +12,6 @@ import { CiudadanoVehiculoService } from '../../../services/ciudadanoVehiculo.se
 
 import swal from 'sweetalert2';
 import { log } from 'util';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
     selector: 'appRna-sustrato',
@@ -23,9 +22,9 @@ export class NewRnaInsumoComponent implements OnInit {
     @Output() cancelarTramite = new EventEmitter<any>();
     @Input() factura: any = null;
     @Input() vehiculo: any = null;
-    @Input() idPropietario: any = null;
+    @Input() ciudadanoPropietario: any = null;
     public errorMessage;
-
+    public respuesta;
     public sustratos: any;
     public sustratoSelected: any;
     public colorSelected: any;
@@ -36,16 +35,17 @@ export class NewRnaInsumoComponent implements OnInit {
     public estadoImpresion=true;
     public tarjetaEntregada=true;
     public ciudadanoNew = false;
+    public isError = false;
+    public isExist = false;
     public numeroInsumo:any;
     public insumo:any;
-
-    public facturaInsumo: FacturaInsumo;
-    
-    public datos = {
-        'licenciaTransito': null,
-        'idVehiculo': null,
-        'idPropietario': null,
-    }
+    public ciudadanoEncontrado=1;
+    public FacturaInsumo: FacturaInsumo;
+    public resumen = {};     public datos = {
+        'cedula': 0,
+        'licenciaTransito': "",
+        'vehiculoId': ""
+      }
     
 
     constructor(
@@ -58,8 +58,9 @@ export class NewRnaInsumoComponent implements OnInit {
         private _CiudadanoVehiculoService: CiudadanoVehiculoService,
         private _FacturaInsumoService: FacturaInsumoService,
     ) {
-        this.facturaInsumo = new FacturaInsumo(null, null, null, null, null);
-    } 
+        this.FacturaInsumo = new FacturaInsumo(null, null, null, null, null);
+        
+     } 
 
     ngOnInit() {
         let token = this._loginService.getToken();
@@ -120,19 +121,21 @@ export class NewRnaInsumoComponent implements OnInit {
             });
     }
 
-    onSearchCiudadano(){
+    onKeyCiudadano(){
         let token = this._loginService.getToken();
-
         let identificacion = {
-			'numeroIdentificacion' : this.facturaInsumo.idCiudadano,
+			'numeroIdentificacion' : this.FacturaInsumo.ciudadanoId,
         };
-
-        this._UserCiudadanoService.searchByIdentificacion(identificacion, token).subscribe(
+        this._UserCiudadanoService.searchByIdentificacion(identificacion,token).subscribe(
             response => {
-                if(response.status == 'success'){
-                    this.ciudadano = response.data;
+                this.respuesta = response; 
+                if(this.respuesta.status == 'success'){
+                    this.ciudadano = this.respuesta.data;
+                    this.ciudadanoEncontrado= 2;
+                    this.ciudadanoEncontrado= 2;
                     this.ciudadanoNew = false;
             }else{
+                this.ciudadanoEncontrado=3;
                 this.ciudadanoNew = true;
             }
             error => {
@@ -150,16 +153,17 @@ export class NewRnaInsumoComponent implements OnInit {
         let token = this._loginService.getToken();
 
         this.datos.licenciaTransito = this.licenciaTransito;
-        this.datos.idPropietario  = this.idPropietario;
-        this.datos.idVehiculo  = this.vehiculo.id;
+        this.datos.cedula  = this.ciudadanoPropietario.usuario.identificacion;
+        this.datos.vehiculoId  = this.vehiculo.id;
         
-        this.facturaInsumo.entregado = this.tarjetaEntregada;
-        this.facturaInsumo.idFactura = this.factura.id;
+        this.FacturaInsumo.entregado = this.tarjetaEntregada;
+        this.FacturaInsumo.idFactura = this.factura.id;
         
         this._CiudadanoVehiculoService.editLicenciaTransito(this.datos,token).subscribe(
             response => { 
-                if(response.status == 'success'){  
-                    this._FacturaInsumoService.register(this.facturaInsumo, token).subscribe(
+                this.respuesta = response;
+                if(this.respuesta.status == 'success'){  
+                    this._FacturaInsumoService.register(this.FacturaInsumo,token).subscribe(
                         response => {
                             if (response.status == 'success') { 
                                 swal({
@@ -167,7 +171,7 @@ export class NewRnaInsumoComponent implements OnInit {
                                     text: 'Registro exitoso!',
                                     type: 'success',
                                     confirmButtonText: 'Aceptar'
-                                });
+                                    })
                             }
                         },
                         error => {
@@ -196,7 +200,7 @@ export class NewRnaInsumoComponent implements OnInit {
         this.cancelarTramite.emit(true);
     }
 
-    onSearchInsumo(){
+    onKeyValidateInsumo(){
         let token = this._loginService.getToken();
 
         let datos = {
@@ -205,20 +209,15 @@ export class NewRnaInsumoComponent implements OnInit {
             'idOrganismoTransito': this.idOrganismoTransito,
         }
         
-        this._ImoInsumoService.showNombre(token, datos).subscribe(
+        this._ImoInsumoService.showNombre(token,datos).subscribe(
             response => {
                 if (response.status == 'success') {
-                    this.insumo = response.data;
-                    this.facturaInsumo.idInsumo = response.data.id;
+                    this.FacturaInsumo.insumoId = response.data.id;
+                    this.isExist = true;
+                    this.isError = false
                 }else{
-                    this.insumo = null;
-
-                    swal({
-                        title: 'Error!',
-                        text: response.message,
-                        type: 'error',
-                        confirmButtonText: 'Aceptar'
-                    });
+                    this.isError = true;
+                    this.isExist = false;
                 }
             },
             error => {
@@ -230,9 +229,8 @@ export class NewRnaInsumoComponent implements OnInit {
             }
         );
     }
-
     ready(){
-        
+        this.ciudadanoEncontrado = 3;
     }
 
 }

@@ -1,0 +1,177 @@
+<div class="row" *ngIf="tramiteFactura.realizado && autorizado">
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-12">
+        <!-- .col -->
+        <div class="card">
+            <div class="card-header">
+                <span class="badge badge-success">Tramite realizado</span>
+            </div>
+            <div class="card-body text-center">
+                <!-- {{ tramiteSolicitud.resumen }} -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!tramiteFactura.realizado && autorizado"><!-- .row -->
+    <div class="col-xs-12 col-lg-12"><!-- .col -->
+        <div class="card">
+            <div class="card-body">
+                <b class="text-primary">Registrar incripción de alerta o prenda</b>
+                <br>
+                <small>Todos los campos con <b class="text-danger">*</b> son obligatorios</small>
+                <hr>
+                <div class="container">
+                    <div class="form-group">
+                        <div class="row" *ngIf="propietario"><!-- .row -->
+                            <div class="ol-xs-12 col-lg-12"><!-- .col -->
+                                <h6 class="text-center">
+                                    <b class="text-uppercase">Propietario seleccionado</b>
+                                </h6>
+                            </div><!-- /.col -->
+                        
+                            <div class="col-xs-12 col-lg-12">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr *ngIf="propietario.ciudadano">
+                                            <td>
+                                                <b>Nombres y apellidos:</b>
+                                                <br>
+                                                {{ propietario.ciudadano.primerNombre }} {{ propietario.ciudadano.primerApellido }}
+                                            </td>
+                                            <td>
+                                                <b>Identificación:</b> 
+                                                <br>
+                                                {{ propietario.ciudadano.identificacion }}
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="propietario.empresa">
+                                            <td>
+                                                <b>Nombres y apellidos:</b>
+                                                <br>
+                                                {{ propietario.empresa.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Identificación:</b>
+                                                <br> 
+                                                {{ propietario.empresa.nit }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!-- /.row -->
+                        
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Tipos de alerta  <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposAlerta" [(ngModel)]="datos.idTipoAlerta" name="idTipoAlerta" required></ng-select>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha expedición</label>
+                                <input class="form-control" [(ngModel)]="datos.fechaExpedicion" name="fechaExpedicion" type="date" required />
+                            </div>
+                        
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Número Acta</label>
+                                <input class="form-control" [(ngModel)]="datos.numeroActa" name="numeroActa" type="text" required />
+                            </div>
+                            
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Entidad que emite
+                                    <b class="text-danger">*</b>
+                                </label>
+                                <ng-select [multiple]="false" [options]="entidadesJudiciales" [(ngModel)]="datos.idEntidadJudicial" required name="idEntidadJudicial">
+                                </ng-select>
+                            </div>
+                        </div><!-- .row -->
+
+                        <div class="row" *ngIf="datos.idTipoAlerta"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Grados de alerta <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="gradosAlerta" [(ngModel)]="datos.gradoAlerta" required name="gradoAlerta">
+                                </ng-select>
+                            </div>
+
+                            <div class="ol-xs-12 col-lg-12"><!-- .col -->
+                                <h6 class="text-center">
+                                    <b class="text-uppercase">Buscar prendario</b>
+                                </h6>
+                            </div><!-- /.col -->
+                        
+                            <!--Buscardor Identificador/Nit -->
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Tipo de identificación<b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelectedAcreedor" required name="idTipoIdentificacionAcreedor">
+                                </ng-select>
+                            </div>
+                        
+                            <!--tipo identificacion ciudadano -->
+                            <div class="col-xs-12 col-lg-6">
+                                <label *ngIf="tipoIdentificacionSelected != 4">Identificación</label>
+                                <label *ngIf="tipoIdentificacionSelected == 4">NIT</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" [(ngModel)]="identificacionAcreedor" name="identificacionAcreedor" required />
+                                    <span class="input-group-btn">
+                                        <button (click)="onSearchAcreedor()" class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>                        
+                        
+                            <div class="col-xs-12 col-lg-12" *ngIf="ciudadano || empresa">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                <b class="text-uppercase">Prendario</b>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="ciudadano">
+                                            <td>
+                                                <b>Nombres y apellidos:</b>
+                                                <br>
+                                                {{ ciudadano.primerNombre }} {{ ciudadano.primerApellido }}
+                                            </td>
+                                            <td>
+                                                <b>Identificación:</b> 
+                                                <br>
+                                                {{ ciudadano.identificacion }}
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="empresa">
+                                            <td>
+                                                <b>Nombre:</b>
+                                                <br>
+                                                {{ empresa.nombre }}
+                                            </td>
+                                            <td>
+                                                <b>Identificación:</b>
+                                                <br> 
+                                                {{ empresa.nit }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <!--si no existe un ciudadano -->
+                            <app-new-rna-ciudadano *ngIf="formCiudadano" [tipoIdentificacion]="tipoIdentificacionSelectedAcreedor" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
+                        </div><!-- /.row -->
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer" *ngIf="tipoAlertaSelected && propietario">
+                <button (click)="onEnviar()" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->

@@ -99,7 +99,7 @@ export class ImoInsumoService {
 		);
 	}
 
-	showNombre(token,datos){
+	showNombre(token, datos){
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
