@@ -4,5 +4,6 @@ export class MsvParametro {
         public nombre: string,
         public idCategoria: number,
         public valor: number,
+        public numeroCriterios: number,
     ) { }
 }
