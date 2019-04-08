@@ -209,7 +209,7 @@ export class NewRnaInsumoComponent implements OnInit {
             'idOrganismoTransito': this.idOrganismoTransito,
         }
         
-        this._ImoInsumoService.showNombre(token,datos).subscribe(
+        this._ImoInsumoService.searchByNumeroAndModulo(token,datos).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.FacturaInsumo.insumoId = response.data.id;

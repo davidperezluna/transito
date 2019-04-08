@@ -99,11 +99,11 @@ export class ImoInsumoService {
 		);
 	}
 
-	showNombre(token, datos){
+	searchByNumeroAndModulo(datos, token){
 		let json = JSON.stringify(datos);
 		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
-		return this._http.post(this.url+"/showInsumo/numero/modulo", params, {headers: headers}).map(
+		return this._http.post(this.url+"/search/numero/modulo", params, {headers: headers}).map(
 			res => res.json(),
 		);
 	}

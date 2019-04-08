@@ -24,7 +24,7 @@
                                 <br>
                                 <div class="custom-control " >
                                     <label>Licencia de transito</label>
-                                    <input class="form-control"  type="text" [(ngModel)]="licenciaTransito" name="licenciaTransito" id="" placeholder=" Digite licencia de transito " required>
+                                    <input class="form-control"  type="text" [(ngModel)]="licenciaTransito" name="licenciaTransito" placeholder="Digite licencia de transito" required>
                                 </div>
                             </div>
                             <!-- Aquien se entrega documento -->
@@ -48,8 +48,6 @@
                                 </div>
                             </div> 
                         </div>
-
-
 
                         <!--si existe un ciudadano -->
                         <div class="container row" *ngIf="ciudadano && tarjetaEntregada && insumo">
@@ -84,12 +82,12 @@
                             </table>
                         </div>
 
-                        <app-new-rna-ciudadano *ngIf="!ciudadano && tarjetaEntregada" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
+                        <app-new-rna-ciudadano *ngIf="!ciudadano && tarjetaEntregada && insumo" [identificacion]="identificacion" (ready)="ready($event)"></app-new-rna-ciudadano>
                     </form>
                 </div>
             </div>
             <div class="container">
-                <button (click)="enviarTramite()"  [disabled]="formSustrato.invalid" class="btn btn-success">Enviar</button>
+                <button (click)="onEnviarTramite()"  [disabled]="formSustrato.invalid" class="btn btn-success">Enviar</button>
             </div>
         </div>
     </div><!-- /.col -->

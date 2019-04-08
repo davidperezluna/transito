@@ -281,7 +281,7 @@
                                                 
                                                 <appRna-transformacion *ngIf="tramiteFactura.precio.tramite.id == 9" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-transformacion>
                                                 
-                                                <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [idPropietario]='tramiteSolicitud.idPropietario' [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-duplicado-licencia>
+                                                <appRna-duplicado-licencia *ngIf="tramiteFactura.precio.tramite.id == 10" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)"></appRna-duplicado-licencia>
                                             
                                                 <appRna-inscripcion-alerta-prenda *ngIf="tramiteFactura.precio.tramite.id == 11" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-inscripcion-alerta-prenda>
                                                 
@@ -295,7 +295,7 @@
                                                 
                                                 <appRna-blindaje *ngIf="tramiteFactura.precio.tramite.id == 16" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-blindaje>
                                                 
-                                                <appRna-cambio-motor *ngIf="tramiteFactura.precio.tramite.id == 17" [vehiculo]="vehiculo" (readyTramite)="readyTramite($event)" [tramiteFactura]="tramiteFactura" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
+                                                <appRna-cambio-motor *ngIf="tramiteFactura.precio.tramite.id == 17" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-cambio-motor>
                                                 
                                                 <appRna-rematricula *ngIf="tramiteFactura.precio.tramite.id == 18" [vehiculo]="vehiculo" [tramiteFactura]="tramiteFactura" (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-rematricula>
                                                 
@@ -320,8 +320,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="tab-sustrato" role="tabpanel">
-                                        <appRna-sustrato *ngIf="sustrato" [factura]="factura" [vehiculo]="vehiculo" [idPropietario]='tramiteSolicitud.idPropietario' (readyTramite)="readyTramite($event)" (cancelarTramite)="cancelarTramite($event)"></appRna-sustrato>
+                                    <div class="tab-pane" id="tab-sustrato" role="tabpanel" *ngIf="sustrato">
+                                        <appRna-sustrato [factura]="factura" [vehiculo]="vehiculo" [idPropietario]='tramiteSolicitud.idPropietario'></appRna-sustrato>
                                     </div>
                                 </div>   
                             </div>
