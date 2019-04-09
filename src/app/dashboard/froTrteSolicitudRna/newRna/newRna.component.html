@@ -168,7 +168,7 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <button (click)="onAddApoderado()" class="btn btn-primary">
+                                                <button *ngIf="!tramiteSolicitud.idSolicitante" (click)="onAddApoderado()" class="btn btn-primary">
                                                     <i class="fa fa-save"></i>
                                                     Agregar
                                                 </button>
@@ -217,6 +217,12 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-12">
                                 <div class="form-group">
+                                    <div class="row" *ngIf="requiereRunt">
+                                        <div class="col-xs-12 col-lg-6"> 
+                                            <label>No. solicitud RUNT <b class="text-danger">*</b></label>
+                                            <input type="text" class="form-control" placeholder="No. solicitud RUNT" [(ngModel)]="numeroRunt" name="numeroRunt" required />
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-xs-12 col-lg-12">
                                             <div class="custom-control custom-checkbox">
@@ -245,7 +251,7 @@
                                             Realizar trámites
                                         </a>
                                     </li>
-                                    <li class="nav-item" *ngIf='sustrato'>
+                                    <li class="nav-item" *ngIf='requiereSustrato'>
                                         <a class="nav-link " data-toggle="tab" href="#tab-sustrato" role="tab">
                                             Registrar sustrato
                                         </a>
@@ -320,7 +326,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="tab-sustrato" role="tabpanel" *ngIf="sustrato">
+                                    <div class="tab-pane" id="tab-sustrato" role="tabpanel" *ngIf="requiereSustrato">
                                         <appRna-sustrato [factura]="factura" [vehiculo]="vehiculo" [idPropietario]='tramiteSolicitud.idPropietario'></appRna-sustrato>
                                     </div>
                                 </div>   

@@ -2,7 +2,7 @@ import { Component , OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FroTrteSolicitudService } from '../../../../services/froTrteSolicitud.service';
 import { FroFacTramiteService } from '../../../../services/froFacTramite.service';
 import { VhloPropietarioService} from '../../../../services/vhloPropietario.service';
-import { VhloActaTraspasoService } from '../../../../services/vhloActaTraspaso.service';
+//import { VhloActaTraspasoService } from '../../../../services/vhloActaTraspaso.service';
 import { CfgEntidadJudicialService } from '../../../../services/cfgEntidadJudicial.service';
 import { UserCiudadanoService } from '../../../../services/userCiudadano.service';
 import { PnalFuncionarioService } from '../../../../services/pnalFuncionario.service';
@@ -57,7 +57,7 @@ export class NewRnaTraspasoIndeterminadaComponent implements OnInit {
     private _TramiteSolicitudService: FroTrteSolicitudService,
     private _TramiteFacturaService: FroFacTramiteService,
     private _CfgEntidadJudicialService: CfgEntidadJudicialService,
-    private _ActaTraspasoService: VhloActaTraspasoService,
+    //private _ActaTraspasoService: VhloActaTraspasoService,
     private _PropietarioService: VhloPropietarioService,
     private _CiudadanoService: UserCiudadanoService,
     private _FuncionarioService: PnalFuncionarioService,

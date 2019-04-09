@@ -119,11 +119,9 @@ import { RncLicenciaConduccionRoutes } from './rncLicenciaConduccion/rncLicencia
 import { registroEntregaProductoRoutes } from './registroEntregaProducto/registroEntregaProducto.routes';
 
 import { CfgCargoRoutes } from './cfgCargo/cfgCargo.routes';
-//import { MpersonalFuncionarioRoutes } from './mpersonalFuncionario/mpersonalFuncionario.routes';
-import { MpersonalTipoContratoRoutes } from './mpersonalTipoContrato/mpersonalTipoContrato.routes';
-import { MpersonalTalonarioRoutes } from './mpersonalTalonario/mpersonalTalonario.routes';
-import { MpersonalAsignacionRoutes } from './mpersonalAsignacion/mpersonalAsignacion.routes';
 
+import { PnalTalonarioRoutes } from './pnalTalonario/pnalTalonario.routes';
+import { PnalAsignacionRoutes } from './pnalAsignacion/pnalAsignacion.routes';
 
 import { TramiteRoutes } from './tramite/tramite.routes';
 import { FacturaRoutes } from './factura/factura.routes';
@@ -331,10 +329,8 @@ export const DashboardRoutes: Route[] = [
       ...PqoGruaCiudadanoRoutes,
       ...PqoInmovilizacionRoutes,
       ...MparqCostoTrayectoRoutes,
-      //...MpersonalFuncionarioRoutes,
-      ...MpersonalTipoContratoRoutes,
-      ...MpersonalTalonarioRoutes,
-      ...MpersonalAsignacionRoutes,
+      ...PnalTalonarioRoutes,
+      ...PnalAsignacionRoutes,
       ...FroTrteSolicitudRncRoutes,
       ...FroFacTramiteRoutes,
       ...FroTrteCfgCuentaRoutes,

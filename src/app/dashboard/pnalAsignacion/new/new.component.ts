@@ -1,7 +1,6 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { SvIpatConsecutivo } from '../svIpatConsecutivo.modelo';
-import { PnalComparendoService } from '../../../services/pnalComparendo.service';
-import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { PnalAsignacion } from '../pnalAsignacion.modelo';
+import { PnalAsignacionService } from '../../../services/pnalAsignacion.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 
@@ -11,34 +10,20 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public consecutivo: SvIpatConsecutivo;
-public funcionarios: any;
-public funcionarioSelected: any;
+@Input() funcionario:any = null;
+public asignacion: PnalAsignacion;
+public organismosTransito: any;
+public sedeOperativaSelected: any;
 public errorMessage;
 public respuesta: any = null;
 
 constructor(
-  private _ComparendoService: PnalComparendoService,
-  private _FuncionarioService: MpersonalFuncionarioService,
+  private _AsignacionService: PnalAsignacionService,
   private _LoginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.consecutivo = new SvIpatConsecutivo(null, null, null);
-
-    this._FuncionarioService.select().subscribe(
-      response => {
-        this.funcionarios = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert('Error en la petición');
-        }
-      }
-    );
+    this.asignacion = new PnalAsignacion(null, null, null, null, null, null, null, null);
   }
   
   onCancelar(){
@@ -48,9 +33,9 @@ constructor(
   onEnviar(){
     let token = this._LoginService.getToken();
     
-    this.consecutivo.idFuncionario = this.funcionarioSelected;
+    this.asignacion.idFuncionario = this.funcionario.id;
 
-    this._ComparendoService.register(this.consecutivo,token).subscribe(
+    this._AsignacionService.register(this.asignacion,token).subscribe(
       response => {
         this.respuesta = response;
         
@@ -65,7 +50,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El consecutivo ya se encuentra registrado',
+            text: 'El asignacion ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

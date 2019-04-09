@@ -1,4 +1,4 @@
-import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
 import { PnalTalonarioService } from '../../../services/pnalTalonario.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
@@ -11,7 +11,7 @@ export class EditComponent implements OnInit{
 @Output() ready = new EventEmitter<any>();
 @Input() talonario:any = null;
 public errorMessage;
-public respuesta; 
+public respuesta;
 public formReady = false;
 
 constructor(

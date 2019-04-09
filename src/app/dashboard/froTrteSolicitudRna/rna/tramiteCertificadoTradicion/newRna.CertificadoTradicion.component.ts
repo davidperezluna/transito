@@ -28,7 +28,6 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
     public entregado:any = false;
    
     public datos = {
-        'numeroRunt': null,
         'observacion': null,                  
         'campos': null,
         'idFuncionario': null,
@@ -61,6 +60,32 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
                             if (response.code == 200) {
                                 this.tramiteFactura = response.data;
 
+                                if (this.tramiteFactura.realizado) {            
+                                    this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
+                                        response => {
+                                            if (response.code == 200) {
+                                                this.tramiteSolicitud = response.data;
+                                            } else {
+                                                this.tramiteSolicitud = null;
+            
+                                                swal({
+                                                    title: 'Error!',
+                                                    text: response.message,
+                                                    type: 'error',
+                                                    confirmButtonText: 'Aceptar'
+                                                });
+                                            }
+                                            error => {
+                                                this.errorMessage = <any>error;
+                                                if (this.errorMessage != null) {
+                                                    console.log(this.errorMessage);
+                                                    alert("Error en la petición");
+                                                }
+                                            }
+                                        }
+                                    );
+                                }
+
                                 swal.close();
                             } else {
                                 this.tramiteFactura = null;
@@ -81,34 +106,6 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
                             }
                         }
                     );
-
-                    if (this.tramiteFactura.realizado) {
-                        let token = this._LoginService.getToken();
-
-                        this._TramiteSolicitudService.showByTamiteFactura({ 'idTramiteFactura': this.tramiteFactura.id }, token).subscribe(
-                            response => {
-                                if (response.code == 200) {
-                                    this.tramiteSolicitud = response.data;
-                                } else {
-                                    this.tramiteSolicitud = null;
-
-                                    swal({
-                                        title: 'Error!',
-                                        text: response.message,
-                                        type: 'error',
-                                        confirmButtonText: 'Aceptar'
-                                    });
-                                }
-                                error => {
-                                    this.errorMessage = <any>error;
-                                    if (this.errorMessage != null) {
-                                        console.log(this.errorMessage);
-                                        alert("Error en la petición");
-                                    }
-                                }
-                            }
-                        );
-                    }
                 } else {
                     this.autorizado = false;
 
@@ -190,9 +187,8 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
         this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
               if (response.code == 200) {
-                let resumen = "<b>No. factura: </b>" + this.tramiteFactura.factura.numero + 
-                "<b>No. solicitud RUNT: </b>" + this.datos.numeroRunt +
-                "<b>Ciudadano que recibe: </b>" + this.ciudadano.primerNombre + " " + this.ciudadano.primerApellido;
+                let resumen = "No. factura: " + this.tramiteFactura.factura.numero + 
+                "Ciudadano que recibe: " + this.ciudadano.primerNombre + " " + this.ciudadano.primerApellido;
 
                 this.entregado = true;
 

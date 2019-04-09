@@ -2,7 +2,7 @@ import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@ang
 import { Comparendo } from '../comparendo.modelo';
 import { ComparendoService } from '../../../services/comparendo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
-import { MpersonalComparendoService } from '../../../services/mpersonalComparendo.service';
+import { PnalComparendoService } from '../../../services/pnalComparendo.service';
 import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { CfgTipoInfractorService } from '../../../services/cfgTipoInfractor.service';
@@ -122,7 +122,7 @@ constructor(
   private _ComparendoService: ComparendoService,
   private _loginService: LoginService,
   private _MpersonalFuncionarioService: MpersonalFuncionarioService,
-  private _MpersonalComparendoService: MpersonalComparendoService,
+  private _PnalComparendoService: PnalComparendoService,
   private _OrganismoTransitoService: CfgOrganismoTransitoService,
   private _MunicipioService: CfgMunicipioService,
   private _VechiculoService: VehiculoService,
@@ -438,7 +438,7 @@ constructor(
             this.funcionario = response.data;
             this.comparendo.idFuncionario = this.funcionario.id;
   
-            this._MpersonalComparendoService.searchLastByFuncionario({ 'funcionario': this.funcionario }, token).subscribe(
+            this._PnalComparendoService.searchLastByFuncionario({ 'funcionario': this.funcionario }, token).subscribe(
               response => {
                 if (response.status == 'success') {
                   swal.close();

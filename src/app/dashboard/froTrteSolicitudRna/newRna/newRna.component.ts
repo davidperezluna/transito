@@ -35,14 +35,15 @@ export class NewRnaComponent implements OnInit {
   public facturas: any;
 
   public confirmarSolicitante = false;
-  public sustrato = false;
+  public requiereSustrato = false;
+  public requiereRunt = false;
+  public numeroRunt: any = null;
 
   public tramites:any;
   public fromApoderado = false;
   public identificacionApoderado = false;
   public apoderado: any = null;
   public placa: any = null;
-
 
   constructor(
     private _TramiteSolicitudService: FroTrteSolicitudService,
@@ -154,7 +155,8 @@ export class NewRnaComponent implements OnInit {
               response => {
                 if (response.code == 200) {
                   this.tramitesFactura = response.data.tramitesFactura;
-                  this.sustrato = response.data.sustrato;
+                  this.requiereSustrato = response.data.sustrato;
+                  this.requiereRunt = response.data.numeroRunt;
 
                   if (response.data.propietarios) {
                     this.propietarios = response.data.propietarios;
@@ -187,7 +189,8 @@ export class NewRnaComponent implements OnInit {
             this.factura = null;
             this.tramitesFactura = null;
             this.propietarios = null;
-            this.sustrato = false;
+            this.requiereSustrato = false;
+            this.requiereRunt = false;
 
             swal({
               title: 'Error!',
@@ -396,6 +399,13 @@ export class NewRnaComponent implements OnInit {
   onAddApoderado() {
     this.fromApoderado = false;
     if (this.apoderado) {
+      swal({
+        title: 'Perfecto!',
+        text: 'Apoderado agregado',
+        type: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+
       this.tramiteSolicitud.idSolicitante = this.apoderado.id;
     }
   }

@@ -204,10 +204,9 @@ import { PnalCfgTipoNombramientoModule } from './pnalCfgTipoNombramiento/pnalCfg
 import { PnalFuncionarioModule } from './pnalFuncionario/pnalFuncionario.module';
 
 import { CfgCargoModule } from './cfgCargo/cfgCargo.module';
-//import { MpersonalFuncionarioModule } from './mpersonalFuncionario/mpersonalFuncionario.module';
-import { MpersonalTipoContratoModule } from './mpersonalTipoContrato/mpersonalTipoContrato.module';
-import { MpersonalTalonarioModule } from './mpersonalTalonario/mpersonalTalonario.module';
-import { MpersonalAsignacionModule } from './mpersonalAsignacion/mpersonalAsignacion.module';
+
+import { PnalTalonarioModule } from './pnalTalonario/pnalTalonario.module';
+import { PnalAsignacionModule } from './pnalAsignacion/pnalAsignacion.module';
 
 import { ImoPreasignacionModule } from './imoPreasignacIon/imoPreasignacion.module';
 import { RnrsPreasignacionPlacaModule } from './rnrsPreasignacionPlaca/rnrsPreasignacionPlaca.module';
@@ -368,10 +367,8 @@ import {RightsidebarComponent} from '../shared';
     PnalCfgTipoNombramientoModule,
     PnalFuncionarioModule,
     CfgCargoModule,
-    //MpersonalFuncionarioModule,
-    MpersonalTipoContratoModule,
-    MpersonalTalonarioModule,
-    MpersonalAsignacionModule,
+    PnalTalonarioModule,
+    PnalAsignacionModule,
     FroTrteSolicitudRncModule,
     FroFacTramiteModule,
     FroTrteCfgCuentaModule,

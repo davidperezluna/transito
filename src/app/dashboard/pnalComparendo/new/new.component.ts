@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
-import { SvIpatConsecutivo } from '../svIpatConsecutivo.modelo';
+import { PnalComparendo } from '../pnalComparendo.modelo';
 import { PnalComparendoService } from '../../../services/pnalComparendo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
 import { LoginService } from '../../../services/login.service';
@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
 @Output() ready = new EventEmitter<any>();
-public consecutivo: SvIpatConsecutivo;
+public comparendo: PnalComparendo;
 public funcionarios: any;
 public funcionarioSelected: any;
 public errorMessage;
@@ -20,11 +20,11 @@ public respuesta: any = null;
 constructor(
   private _ComparendoService: PnalComparendoService,
   private _FuncionarioService: MpersonalFuncionarioService,
-  private _LoginService: LoginService,
+  private _loginService: LoginService,
   ){}
 
   ngOnInit() {
-    this.consecutivo = new SvIpatConsecutivo(null, null, null);
+    this.comparendo = new PnalComparendo(null, null, null);
 
     this._FuncionarioService.select().subscribe(
       response => {
@@ -46,11 +46,11 @@ constructor(
   }
   
   onEnviar(){
-    let token = this._LoginService.getToken();
+    let token = this._loginService.getToken();
     
-    this.consecutivo.idFuncionario = this.funcionarioSelected;
+    this.comparendo.funcionarioId = this.funcionarioSelected;
 
-    this._ComparendoService.register(this.consecutivo,token).subscribe(
+    this._ComparendoService.register(this.comparendo,token).subscribe(
       response => {
         this.respuesta = response;
         
@@ -65,7 +65,7 @@ constructor(
         }else{
           swal({
             title: 'Error!',
-            text: 'El consecutivo ya se encuentra registrado',
+            text: 'El comparendo ya se encuentra registrado',
             type: 'error',
             confirmButtonText: 'Aceptar'
           })

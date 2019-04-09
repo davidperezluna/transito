@@ -8,7 +8,7 @@
             </div>
             <div class="card-body text-center">
                 <!-- {{ tramiteSolicitud.resumen }} -->
-                <a *ngIf="tramiteSolicitud" href="{{ apiUrl }}/{{ tramiteSolicitud.vehiculo.id }}/TRADICIONAL/pdf/certificadotradicion" class="btn btn-success" target="_blank">
+                <a *ngIf="tramiteSolicitud" href="{{ apiUrl }}/{{ tramiteSolicitud.vehiculo.id }}/TRADICIONAL/pdf/certificadotradicion" class="btn btn-primary" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Imprimir
                 </a>
@@ -29,14 +29,7 @@
                 <form #formTramite="ngForm" class="container">
                     <div class="container">
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-xs-12 col-md-12" >
-                                    <label> Nro. de solicitud RUNT
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input class="form-control" [(ngModel)]="datos.numeroRunt" name="nroRunt" type="text" required />
-                                </div>
-                                
+                            <div class="row">                                
                                 <div class="col-xs-12 col-lg-12 form-group" >
                                     <label>Observación certificado de tradición</label>
                                     <textarea class="form-control" [(ngModel)]="datos.observacion" name="observacion" placeholder="Observación"></textarea>
