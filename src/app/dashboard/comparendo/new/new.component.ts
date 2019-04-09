@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, AfterViewInit,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { Comparendo } from '../comparendo.modelo';
 import { ComparendoService } from '../../../services/comparendo.service';
 import { MpersonalFuncionarioService } from '../../../services/mpersonalFuncionario.service';
