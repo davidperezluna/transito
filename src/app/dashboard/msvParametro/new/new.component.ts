@@ -24,7 +24,7 @@ export class NewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.parametro = new MsvParametro(null, null, null, null);
+        this.parametro = new MsvParametro(null, null, null, null, null);
 
         this._CategoriaService.select().subscribe(
             response => {

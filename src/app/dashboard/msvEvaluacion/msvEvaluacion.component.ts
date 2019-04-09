@@ -718,33 +718,33 @@ export class MsvEvaluacionComponent implements OnInit {
   calcularTotal(e, parametro, idCategoria) {
     if (idCategoria == 1) {
       if (e) {
-        this.datos2.valorObtenidoFortalecimiento += parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoFortalecimiento += parametro.valor / parametro.numeroCriterios;
       } else {
-        this.datos2.valorObtenidoFortalecimiento -= parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoFortalecimiento -= parametro.valor / parametro.numeroCriterios;
       }
     } if (idCategoria == 2) {
       if (e) {
-        this.datos2.valorObtenidoComportamiento += parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoComportamiento += parametro.valor / parametro.numeroCriterios;
       } else {
-        this.datos2.valorObtenidoComportamiento -= parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoComportamiento -= parametro.valor / parametro.numeroCriterios;
       }
     } if (idCategoria == 3) {
       if (e) {
-        this.datos2.valorObtenidoVehiculoSeguro += parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoVehiculoSeguro += parametro.valor / parametro.numeroCriterios;
       } else {
-        this.datos2.valorObtenidoVehiculoSeguro -= parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoVehiculoSeguro -= parametro.valor / parametro.numeroCriterios;
       }
     } if (idCategoria == 4) {
       if (e) {
-        this.datos2.valorObtenidoInfraestructuraSegura += parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoInfraestructuraSegura += parametro.valor / parametro.numeroCriterios;
       } else {
-        this.datos2.valorObtenidoInfraestructuraSegura -= parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoInfraestructuraSegura -= parametro.valor / parametro.numeroCriterios;
       }
     } if (idCategoria == 5) {
       if (e) {
-        this.datos2.valorObtenidoAtencionVictima += parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoAtencionVictima += parametro.valor / parametro.numeroCriterios;
       } else {
-        this.datos2.valorObtenidoAtencionVictima -= parametro.valor / parametro.numeroVariables;
+        this.datos2.valorObtenidoAtencionVictima -= parametro.valor / parametro.numeroCriterios;
       }
     } if (idCategoria == 6) {
       if (e) {

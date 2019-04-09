@@ -136,6 +136,7 @@ import { RncLicenciaConduccionModule } from './rncLicenciaConduccion/rncLicencia
 import { CfgComparendoEstadoModule } from './cfgComparendoEstado/cfgComparendoEstado.module';
 import { CfgAuditoriaModule } from './cfgAuditoria/cfgAuditoria.module';
 import { CfgValorVehiculoModule } from './cfgValorVehiculo/cfgValorVehiculo.module'; 
+import { VhloCfgValorModule } from './vhloCfgValor/vhloCfgValor.module'; 
 import { CfgSmlmvModule } from './cfgSmlmv/cfgSmlmv.module';
 import { cfgFestivoModule } from './cfgFestivo/cfgFestivo.module';
 import { CfgTipoClaseModule } from './cfgTipoClase/cfgTipoClase.module';
@@ -278,6 +279,7 @@ import {RightsidebarComponent} from '../shared';
     HomeModule,
     VhloCfgMarcaModule,
     VhloCfgLineaModule,
+    VhloCfgValorModule,
     BancoModule,
     VhloCfgClaseModule,
     VhloCfgColorModule,

@@ -277,7 +277,7 @@ export class NewComponent implements OnInit {
             confirmButtonText: 'Aceptar'
         });
     }
-
+ 
     onFinalizar() {
         swal({
             title: 'Perfecto!',
@@ -286,7 +286,7 @@ export class NewComponent implements OnInit {
             confirmButtonText: 'Aceptar'
         });
         this.ready.emit(true);
-    }
+    } 
 
     async onUploadFile() {
         let token = this._LoginService.getToken();

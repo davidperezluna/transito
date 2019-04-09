@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-lg-12">
+<div class="col-xs-12 col-lg-6">
     <div class="card">
         <div class="card-header">
             <h5 class="text-uppercase">Registrar Parametro</h5>
@@ -7,19 +7,22 @@
         <div class="card-body">
             <form #formNew="ngForm">
                 <div class="form-group row">
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-12">
                         <label>Nombre <strong class="text-danger">*</strong></label>
                         <input style="text-transform:uppercase" type="text" class="form-control"
                             [(ngModel)]="parametro.nombre" name="nombre" required />
                     </div>
-                    <div class="col-xs-12 col-lg-6">
+                    <div class="col-xs-12 col-lg-12">
                         <label>Categoría <strong class="text-danger">*</strong></label>
-                        <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="categoriaSelected" required
-                            name="categoria"></ng-select>
+                        <ng-select [multiple]="false" [options]="categorias" [(ngModel)]="categoriaSelected" required name="categoria"></ng-select>
                     </div>
                     <div class="col-xs-12 col-lg-6">
                         <label>Valor<strong class="text-danger">*</strong></label>
                         <input type="number" class="form-control" [(ngModel)]="parametro.valor" name="valor" required />
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <label>Número de criterios<strong class="text-danger">*</strong></label>
+                        <input type="number" class="form-control" [(ngModel)]="parametro.numeroCriterios" name="numeroCriterios" required />
                     </div>
                 </div>
             </form>
