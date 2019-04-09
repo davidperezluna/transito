@@ -1,0 +1,140 @@
+<hr>
+<div class="row">
+    <div class="col-xs-12 col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Resumen de talonario</b>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <b>Rango inicial</b>
+                                {{ talonario.rangoInicial }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Rango final</b>
+                                {{ talonario.rangoFinal }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Total</b>
+                                {{ talonario.total }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Disponible</b>
+                                {{ talonario.disponible }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive --> 
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf="formIndex">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Historico de impresos asignados</b>
+                <div class="btn-group pull-right">
+                    <button (click)="onNewAsignacion()" class="btn btn-primary" type="button">
+                        <i class="fa fa-plus"></i>
+                        Nuevo
+                    </button>
+                </div>
+            </div>
+            <div class="card-body" *ngIf='asignaciones?.length > 0'>
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Rango inicial</th>
+                            <th>Rango final</th>
+                            <th>Total</th>
+                            <th>Fecha asignación</th>
+                            <th>Acta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="odd" *ngFor="let asignacion of asignaciones; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ asignacion.rangoInicial }}</td>
+                        <td>{{ asignacion.rangoFinal }}</td>
+                        <td>{{ asignacion.total }}</td>
+                        <td>{{ asignacion.fecha }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ apiUrl }}/acta/{{ asignacion.id }}/pdf" class="btn btn-success" target="_blank">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    {{ asignacion.numeroActa }}
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive --> 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-4" *ngIf="formNew">
+        <div class="card">
+            <div class="card-header">
+                <b class="text-uppercase">Nueva asignacion</b>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Desde <b class="text-danger">*</b></label>
+                                <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="datos.rangoInicial" name="rangoInicial"  type="number" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Hasta <b class="text-danger">*</b></label>
+                                <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="datos.rangoFinal" name="rangoFinal" type="number" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Unidades entregadas <b class="text-danger">*</b></label>
+                                <input class="form-control" [readonly]="true" [(ngModel)]="datos.total" name="total" type="number" required>
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Fecha asignación <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.fecha" name="fecha" type="date" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelarAsignacion()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

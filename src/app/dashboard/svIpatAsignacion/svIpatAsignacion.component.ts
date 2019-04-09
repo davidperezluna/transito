@@ -140,7 +140,7 @@ export class SvIpatAsignacionComponent implements OnInit {
     
     this.datos.parametro = this.parametro;
 
-		this._AsignacionService.searchFuncionarioAgente(this.datos,token).subscribe(
+		this._AsignacionService.recordByTalonario(this.datos,token).subscribe(
 			response => {
         this.respuesta = response;
         if(this.respuesta.status == 'success'){

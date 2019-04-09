@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <hr>
-  <div class="row" *ngIf='formSearch'>
+  <div class="row">
     <!-- .row -->
-    <div class="col-xs-12 col-lg-3">
+    <div class="col-xs-12 col-lg-3" *ngIf='formSearch'>
       <!-- .col -->
       <div class="card">
         <div class="card-header">
@@ -44,58 +44,55 @@
       </div>
     </div>
     <!-- /.col -->
-  </div>
 
-  <div class="row" *ngIf='formIndex && talonarios'>
-    <div class="col-xs-12">
-      <div class="card">
-        <div class="card-header">
-            <b class="text-uppercase">Talonarios</b>
-            <div class="btn-group pull-right">
-              <button (click)="onNew()" class="btn btn-default">
-                <i class="fa fa-plus"></i>
-                Nuevo
-              </button>
-            </div>
-        </div>
-        <div class="card-body">
-          <table class="table " id="dataTables-example">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Organismo Transito</th>
-                <th>Desde</th>
-                <th>Hasta</th>
-                <th>Total</th>
-                <th>Fecha Asignación</th>
-                <th>N° Resolución</th>
-                <!-- <th>Acciones</th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let talonario of talonarios; let i = index">
-                <td>{{ i +  1 }}</td>
-                <td>{{ talonario.organismoTransito?.nombre }}</td>
-                <td>{{ talonario.rangoInicial }}</td>
-                <td>{{ talonario.rangoFinal }}</td>
-                <td>{{ talonario.total }}</td>
-                <td>{{ talonario.fecha }}</td>
-                <td>{{ talonario.numeroResolucion }}</td>
-                <!-- 
+    <div class="col-xs-12 col-lg-9" *ngIf='formIndex'>
+        <div class="card">
+          <div class="card-header">
+              <b class="text-uppercase">Talonarios</b>
+              <div class="btn-group pull-right">
+                <button (click)="onNew()" class="btn btn-default">
+                  <i class="fa fa-plus"></i>
+                  Nuevo
+                </button>
+              </div>
+          </div>
+          <div class="card-body" *ngIf="talonarios && talonarios.length > 0">
+            <table class="table " id="dataTables-example">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Organismo Transito</th>
+                  <th>Desde</th>
+                  <th>Hasta</th>
+                  <th>Total</th>
+                  <th>Fecha Asignación</th>
+                  <th>N° Resolución</th>
+                  <th>Asignaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let talonario of talonarios; let i = index">
+                  <td>{{ i +  1 }}</td>
+                  <td>{{ talonario.organismoTransito?.nombre }}</td>
+                  <td>{{ talonario.rangoInicial }}</td>
+                  <td>{{ talonario.rangoFinal }}</td>
+                  <td>{{ talonario.total }}</td>
+                  <td>{{ talonario.fecha }}</td>
+                  <td>{{ talonario.numeroResolucion }}</td>
                   <td>
-                    <button (click)="deleteMsvTalonario(talonario.id)" class="btn btn-xs btn-danger" type="button">Eliminar
-                      <i class="fa fa-trash"></i>
+                    <button (click)="onShow(talonario)" class="btn btn-xs btn-primary" type="button">
+                      <i class="fa fa-check"></i>
                     </button>
                   </td>
-                -->
-              </tr>
-            </tbody>
-          </table>
-          <!-- /.table-responsive -->
+                </tr>
+              </tbody>
+            </table>
+            <!-- /.table-responsive -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+    <app-show *ngIf='formShow' [talonario]="talonario" (ready)="ready($event)"></app-show>
 </div>

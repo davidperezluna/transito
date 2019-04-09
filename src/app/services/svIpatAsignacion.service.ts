@@ -6,7 +6,7 @@ import  "rxjs/add/operator/map";
 
 @Injectable()
 export class SvIpatAsignacionService {
-	private url = environment.apiUrl + 'msvTCasignacion';
+	private url = environment.apiUrl + 'seguridadvial/svipatasignacion';
 	public identity;
 	public token;
 
@@ -60,17 +60,10 @@ export class SvIpatAsignacionService {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 
-	searchFuncionarioAgente(datos,token){
+	recordByTalonario(datos, token){
 		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
+		let params = "data="+json+"&authorization="+token;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/search/funcionario/agente", params, {headers: headers}).map(res => res.json());
-	}
-
-	recordByFuncionario(datos,token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
+ 		return this._http.post(this.url+"/record/talonario", params, {headers: headers}).map(res => res.json());
 	}
 }

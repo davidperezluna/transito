@@ -20,6 +20,7 @@ export class SvIpatTalonarioComponent implements OnInit {
   public formNew = false;
   public formEdit = false;
   public formIndex = false;
+  public formShow = false;
 
   public talonarios: any;
   public organismosTransito: any;
@@ -87,7 +88,6 @@ export class SvIpatTalonarioComponent implements OnInit {
         if (response.code == 200) {
           this.talonarios = response.data;
           this.formIndex = true;
-          this.formSearch = false;
           this.formNew = false;
 
           let timeoutId = setTimeout(() => {
@@ -139,11 +139,21 @@ export class SvIpatTalonarioComponent implements OnInit {
       }
     });
   }
+
+  onShow(talonario: any){
+    this.talonario = talonario;
+    this.formIndex = false;
+    this.formNew = false;
+    this.formSearch = false;
+    this.formShow = true;
+    this.table.destroy();
+  }
   
   onNew() {
     this.formNew = true;
     this.formIndex = false;
     this.formSearch = false;
+    this.formShow = false;
   }
 
   ready(isCreado: any) {
@@ -151,6 +161,7 @@ export class SvIpatTalonarioComponent implements OnInit {
       this.formNew = false;
       this.formEdit = false;
       this.formIndex = false;
+      this.formShow = false;
       this.formSearch = true;
 
       this.ngOnInit();
