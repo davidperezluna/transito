@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Http, Response, Headers } from "@angular/http";
+import { Http, Headers } from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
 import "rxjs/add/operator/map";
 
 @Injectable()
-export class ImoCfgTipoService {
-	private url = environment.apiUrl + "insumo/imocfgtipo";
+export class SvIpatTalonarioService {
+	private url = environment.apiUrl + "seguridadvial/svipattalonario";
 	public identity;
 	public token;
 
@@ -60,11 +60,22 @@ export class ImoCfgTipoService {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 
-	getCasoInsumoInsumoSelect() {
-		return this._http.get(this.url + "/select/insumo").map(res => res.json());
+	searchByOrganismoTransitoAndFecha(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/organismotransito/fecha", params, { headers: headers }).map(res => res.json());
 	}
 
-	getCasoInsumoSustratoSelect() {
-		return this._http.get(this.url + "/select/sustrato").map(res => res.json());
+	searchOneByOrganismoTransito(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/organismotransito", params, { headers: headers }).map(res => res.json());
 	}
-} 
+
+	getMsvTalonarioPorIdSelect(id) {
+		return this._http.get(this.url + "/" + id + "/select/msvtalonario/por/id").map(res => res.json());
+	}
+
+}

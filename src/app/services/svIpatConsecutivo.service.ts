@@ -1,19 +1,19 @@
-import { Injectable } from "@angular/core";
-import { Http, Response, Headers } from "@angular/http";
+import  {Injectable} from "@angular/core";
+import  {Http, Headers} from "@angular/http";
 import { LoggerService } from "../logger/services/logger.service";
 import { environment } from 'environments/environment';
-import "rxjs/add/operator/map";
+import  "rxjs/add/operator/map";
 
 @Injectable()
-export class ImoCfgTipoService {
-	private url = environment.apiUrl + "insumo/imocfgtipo";
+export class SvIpatConsecutivoService {
+	private url = environment.apiUrl + 'seguridadvial/svipatconsecutivo';
 	public identity;
 	public token;
 
 	constructor(
 		private _http: Http,
 		private _loogerService: LoggerService
-	) { }
+	){}
 
 	index(){
 		return this._http.get(this.url+"/").map(res => res.json());
@@ -60,11 +60,35 @@ export class ImoCfgTipoService {
 		return this._http.get(this.url + "/select").map(res => res.json());
 	}
 
-	getCasoInsumoInsumoSelect() {
-		return this._http.get(this.url + "/select/insumo").map(res => res.json());
+	search(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
 	}
 
-	getCasoInsumoSustratoSelect() {
-		return this._http.get(this.url + "/select/sustrato").map(res => res.json());
+	record(datos,token){
+		let json = JSON.stringify(datos);
+		let params = "json="+json+"&authorization="+token;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+ 		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}
-} 
+
+	searchLastBySede(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/last/sede", params, { headers: headers }).map(
+			res => res.json()
+		);
+	}
+
+	showBySede(token, datos) {
+		let json = JSON.stringify(datos);
+		let params = "json=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/operativasede", params, { headers: headers })
+			.map(res => res.json());
+
+	}
+}

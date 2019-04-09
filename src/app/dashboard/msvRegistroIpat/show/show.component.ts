@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
+import { SvIpatConsecutivoService } from '../../../services/svIpatConsecutivo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
 declare var $: any;
@@ -19,7 +19,7 @@ export class ShowComponent implements OnInit {
 
     constructor(
         private _loginService: LoginService,
-        private _ConsecutivoService: MsvConsecutivoService,
+        private _ConsecutivoService: SvIpatConsecutivoService,
     ) { }
 
     ngOnInit() {

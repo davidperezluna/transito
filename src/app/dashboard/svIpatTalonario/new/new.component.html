@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Nuevo talonario</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formNew="ngForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12">
+                            <label>Organismo Transito <b class="text-danger">*</b></label>
+                            <ng-select placeholder="Seleccione un organismo de transito" [multiple]="false" [options]="organismosTransito" [(ngModel)]="talonario.idOrganismoTransito" (ngModelChange)="onChangedOrganismoTransito($event)" name="idOrganismoTransito" required></ng-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-12 alert alert-info" *ngIf='organismoTransito?.asignacionRango'>
+                            <strong>El codigo DIVIPO: {{ organismoTransito.codigo }} se concatena al rango</strong>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Desde <b class="text-danger">*</b></label>
+                            <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.rangoInicial" name="rangoInicial"  type="number" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <label>Hasta <b class="text-danger">*</b></label>
+                            <input class="form-control" (blur)="onCalcularTotal()" [(ngModel)]="talonario.rangoFinal" name="rangoFinal" type="number" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                            <label>Unidades entregadas <b class="text-danger">*</b></label>
+                            <input class="form-control" [readonly]="true" [(ngModel)]="talonario.total" name="total" type="number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-lg-4">
+                            <label>Fecha asignación MT <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="talonario.fecha" name="fecha" type="date" required>
+                        </div>
+                        <div class="col-xs-12 col-lg-8">
+                            <label>Asignación de MT <b class="text-danger">*</b></label>
+                            <input class="form-control" [(ngModel)]="talonario.numeroResolucion" name="numeroResolucion" type="text" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

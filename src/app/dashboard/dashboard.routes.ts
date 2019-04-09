@@ -142,7 +142,10 @@ import { RnaPreregistroRoutes } from './rnaPreregistro/rnaPreregistro.routes';
 // import { SucursalRoutes } from './empresa/sucursal/sucursal.routes';
 import { TramitePrecioRoutes } from './tramitePrecio/tramitePrecio.routes';
 
-import { MsvTalonarioRoutes } from './msvTalonario/msvTalonario.routes';
+import { SvIpatTalonarioRoutes } from './svIpatTalonario/svIpatTalonario.routes';
+import { SvIpatConsecutivoRoutes } from './svIpatConsecutivo/svIpatConsecutivo.routes';
+import { SvIpatAsignacionRoutes } from './svIpatAsignacion/svIpatAsignacion.routes';
+
 import { rnaRegistroInsumosRoutes } from './rnaRegistroInsumos/rnaRegistroInsumos.routes';
 //import { RnaPreasignacionInsumoRoutes } from './rnaPreasignacionInsumo/rnaPreasignacionInsumo.routes';
 import { RnmaPreregistroRoutes } from './rnmaPreregistro/rnmaPreregistro.routes'; 
@@ -423,7 +426,9 @@ export const DashboardRoutes: Route[] = [
       ...VhloCfgLimitacionTipoProcesoRoutes,
       ...CfgChoqueConRoutes,
       ...CfgObjetoFijoRoutes,
-      ...MsvTalonarioRoutes,
+      ...SvIpatTalonarioRoutes,
+      ...SvIpatConsecutivoRoutes,
+      ...SvIpatAsignacionRoutes,
       ...ConceptoParametroRoutes,
       ...RnmaPreregistroRoutes,
       ...MsvRegistroIpatRoutes,

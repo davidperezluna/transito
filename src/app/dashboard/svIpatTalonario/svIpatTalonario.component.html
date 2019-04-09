@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <hr>
+  <div class="row" *ngIf='formSearch'>
+    <!-- .row -->
+    <div class="col-xs-12 col-lg-3">
+      <!-- .col -->
+      <div class="card">
+        <div class="card-header">
+          <b class="text-uppercase">Talonarios por sede</b>
+          <small>Buscar</small>
+        </div>
+        <div class="card-body">
+          <!-- .card-body -->
+          <form #formSearch="ngForm">
+            <div class="form-group">
+              <div class="row">
+                <!-- .row -->
+                <div class="col-xs-12 col-lg-12">
+                  <label>Organismo de transito</label>
+                  <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="filtros.idOrganismoTransito" name="idOrganismoTransito" required></ng-select>
+                </div>
+                <div class="col-xs-12 col-lg-12">
+                  <label>Fecha</label>
+                  <input type="date" class="form-control" [(ngModel)]="filtros.fecha" name="fecha" required />
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+          </form>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <div class="btn-group">
+            <button (click)="onSearch()" (ready)="ready($event)" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+              <i class="fa fa-search"></i>
+              Buscar
+            </button>
+            <button (click)="onNew()" class="btn btn-default">
+              <i class="fa fa-plus"></i>
+              <span class="text">Nuevo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.col -->
+  </div>
+
+  <div class="row" *ngIf='formIndex && talonarios'>
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-header">
+            <b class="text-uppercase">Talonarios</b>
+            <div class="btn-group pull-right">
+              <button (click)="onNew()" class="btn btn-default">
+                <i class="fa fa-plus"></i>
+                Nuevo
+              </button>
+            </div>
+        </div>
+        <div class="card-body">
+          <table class="table " id="dataTables-example">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Organismo Transito</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th>Total</th>
+                <th>Fecha Asignación</th>
+                <th>N° Resolución</th>
+                <!-- <th>Acciones</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let talonario of talonarios; let i = index">
+                <td>{{ i +  1 }}</td>
+                <td>{{ talonario.organismoTransito?.nombre }}</td>
+                <td>{{ talonario.rangoInicial }}</td>
+                <td>{{ talonario.rangoFinal }}</td>
+                <td>{{ talonario.total }}</td>
+                <td>{{ talonario.fecha }}</td>
+                <td>{{ talonario.numeroResolucion }}</td>
+                <!-- 
+                  <td>
+                    <button (click)="deleteMsvTalonario(talonario.id)" class="btn btn-xs btn-danger" type="button">Eliminar
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                -->
+              </tr>
+            </tbody>
+          </table>
+          <!-- /.table-responsive -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-new *ngIf='formNew' (ready)="ready($event)"></app-new>
+</div>

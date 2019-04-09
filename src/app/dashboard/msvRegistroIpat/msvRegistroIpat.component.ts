@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MsvRegistroIpatService } from '../../services/msvRegistroIpat.service';
-import { MsvConsecutivoService } from '../../services/msvConsecutivo.service';
+import { SvIpatConsecutivoService } from '../../services/svIpatConsecutivo.service';
 import { MsvRegistroIpat } from './msvRegistroIpat.modelo';
 import { LoginService } from '../../services/login.service';
-import { MsvConsecutivo } from '../msvConsecutivo/msvConsecutivo.modelo';
+import { SvIpatConsecutivo } from '../svIpatConsecutivo/svIpatConsecutivo.modelo';
 import swal from 'sweetalert2';
 declare var $: any;
 
@@ -24,11 +24,11 @@ export class MsvRegistroIpatComponent implements OnInit {
   public formShow = false;
   public table: any = null;
   public tramiteInscripcion: any;
-  public consecutivo: MsvConsecutivo;
+  public consecutivo: SvIpatConsecutivo;
 
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
-    private _MsvConsecutivoService: MsvConsecutivoService,
+    private _ConsecutivoService: SvIpatConsecutivoService,
     private _loginService: LoginService,
   ) { }
 
@@ -48,7 +48,7 @@ export class MsvRegistroIpatComponent implements OnInit {
       'identificacionUsuario': identity.identificacion,
     };
 
-    this._MsvConsecutivoService.showBySede(token, datos).subscribe(
+    this._ConsecutivoService.showBySede(token, datos).subscribe(
       response => {
         if (response) {
           this.consecutivos = response.data;

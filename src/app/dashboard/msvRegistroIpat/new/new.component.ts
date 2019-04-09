@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@
 import { LoginService } from '../../../services/login.service';
 import { MsvRegistroIpatService } from '../../../services/msvRegistroIpat.service';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
-import { MsvConsecutivoService } from '../../../services/msvConsecutivo.service';
+import { SvIpatConsecutivoService } from '../../../services/svIpatConsecutivo.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { CfgMunicipioService } from '../../../services/cfgMunicipio.service';
 import { SvCfgGravedadAccidenteService } from '../../../services/svCfgGravedadAccidente.service';
@@ -240,7 +240,7 @@ export class NewComponent implements OnInit {
 
     private _UserCiudadanoService: UserCiudadanoService,
     private _FuncionarioService: PnalFuncionarioService,
-    private _MsvConsecutivoService: MsvConsecutivoService,
+    private _SvIpatConsecutivoService: SvIpatConsecutivoService,
     private _LoginService: LoginService,
     private _MunicipioService: CfgMunicipioService,
     private _GravedadService: SvCfgGravedadAccidenteService,
@@ -363,7 +363,7 @@ export class NewComponent implements OnInit {
             }
           );
 
-          this._MsvConsecutivoService.searchLastBySede({ 'organismoTransito': this.organismoTransito }, token).subscribe(
+          this._SvIpatConsecutivoService.searchLastBySede({ 'organismoTransito': this.organismoTransito }, token).subscribe(
             response => {
               if (response.status == 'success') {
                 swal.close();

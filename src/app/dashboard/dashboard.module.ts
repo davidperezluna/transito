@@ -146,8 +146,10 @@ import { MsvCategoriaModule } from './msvCategoria/msvCategoria.module';
 import { MsvVariableModule } from './msvVariable/msvVariable.module';
 import { MsvParametroModule } from './msvParametro/msvParametro.module';
 import { MsvCriterioModule } from './msvCriterio/msvCriterio.module';
-import { MsvTalonarioModule } from './msvTalonario/msvTalonario.module';
-import { MsvAsignacionModule } from './msvAsignacion/msvAsignacion.module';
+
+import { SvIpatTalonarioModule } from './svIpatTalonario/svIpatTalonario.module';
+import { SvIpatConsecutivoModule } from './svIpatConsecutivo/svIpatConsecutivo.module';
+import { SvIpatAsignacionModule } from './svIpatAsignacion/svIpatAsignacion.module';
 
 import { PqoCfgPatioModule } from './pqoCfgPatio/pqoCfgPatio.module';
 import { PqoCfgGruaModule } from './pqoCfgGrua/pqoCfgGrua.module';
@@ -295,6 +297,9 @@ import {RightsidebarComponent} from '../shared';
     UserLcCfgCategoriaModule,
     RncLicenciaConduccionModule,
     SvCapacitacionModule,
+    SvIpatTalonarioModule,
+    SvIpatConsecutivoModule,
+    SvIpatAsignacionModule,
     SvCfgFuncionModule,
     SvCfgFuncionCriterioModule,
     SvCfgClaseActorViaModule,
@@ -433,7 +438,6 @@ import {RightsidebarComponent} from '../shared';
     CfgEntidadJudicialModule,
     VhloCfgLimitacionCausalModule,
     VhloCfgLimitacionTipoModule,
-    MsvTalonarioModule,
     rnaRegistroInsumosModule,
     RnmaPreregistroModule,
     ImoAsignacionModule,
