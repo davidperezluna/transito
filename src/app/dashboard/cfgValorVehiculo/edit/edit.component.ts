@@ -126,7 +126,7 @@ export class EditComponent {
   changedDepartamento(e){
     if (this.marcaSelected) {
       let token = this._loginService.getToken()
-        this._lineaService.searchByMarcaSelect(this.marcaSelected, token).subscribe(
+        this._lineaService.selectByMarca(this.marcaSelected, token).subscribe(
           response => {
             console.log(response.data[0]);
             if (response.data[0] != null) {

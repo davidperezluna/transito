@@ -315,7 +315,7 @@ ngOnInit() {
   onChangedMarca(e){
     if (e) {
       let token = this._LoginService.getToken()
-      this._LineaService.searchByMarcaSelect({'idMarca': e}, token).subscribe(
+      this._LineaService.selectByMarca({'idMarca': e}, token).subscribe(
           response => { 
             this.lineas = response;
           }, 
