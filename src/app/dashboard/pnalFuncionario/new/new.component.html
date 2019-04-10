@@ -56,7 +56,7 @@
                         
                         <div class="form-group row">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Organismo Transito <strong class="text-danger">*</strong></label>
+                                <label>Organismo Tránsito <strong class="text-danger">*</strong></label>
                                 <ng-select [multiple]="false" [options]="organismosTransito" [(ngModel)]="organismoTransitoSelected"
                                     name="organismosTransito" required>
                                 </ng-select>
@@ -70,14 +70,18 @@
 
                         <div class="form-group row" *ngIf='tipoNombramientoSelected == 1'>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Acta de posesion </label>
+                                <label>Acta de posesión </label>
                                 <input class="form-control" [(ngModel)]="funcionario.actaPosesion" name="actaPosesion"
                                     type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Numero de nombramiento </label>
+                                <label>Número de nombramiento </label>
                                 <input class="form-control" [(ngModel)]="funcionario.resolucion" name="resolucion"
                                     type="number" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf='tipoNombramientoSelected == 1 && cargoSelected == 1'>
+                                <label>Número de placa </label>
+                                <input class="form-control" [(ngModel)]="funcionario.numeroPlaca" name="numeroPlaca" type="number" required />
                             </div>
                         </div>
 
@@ -93,18 +97,22 @@
                                     type="date" required />
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Numero de contrato </label>
-                                <input class="form-control" [(ngModel)]="funcionario.numeroContrato"
-                                    name="numeroContrato" type="number" required />
+                                <label>Número de nombramiento </label>
+                                <input class="form-control" [(ngModel)]="funcionario.resolucion"
+                                    name="resolucion" type="number" required />
                             </div>
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Objeto de contrato </label>
-                                <textarea class="form-control" [(ngModel)]="funcionario.objetoContrato"
-                                    name="objetoContrato" rows="4"></textarea>
+                            <div class="col-xs-12 col-lg-4">
+                                <label>Acta de posesión </label>
+                                <input class="form-control" [(ngModel)]="funcionario.actaPosesion" name="actaPosesion"
+                                    type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-4" *ngIf='tipoNombramientoSelected == 2 && cargoSelected == 1 || cargoSelected == 3'>
+                                <label>Número de placa </label>
+                                <input class="form-control" [(ngModel)]="funcionario.numeroPlaca" name="numeroPlaca" type="number" required />
                             </div>
                         </div>
 
-                        <div class="form-group row" *ngIf='tipoNombramientoSelected == 3  && cargoSelected == 1 || cargoSelected == 2'>
+                        <div class="form-group row" *ngIf='tipoNombramientoSelected == 3'>
                             <div class="col-xs-12 col-lg-4">
                                 <label>Fecha inicio </label>
                                 <input class="form-control" [(ngModel)]="funcionario.fechaInicio" name="fechaInicio"
@@ -116,15 +124,18 @@
                                     type="date" required />
                             </div>
                             <div class="col-xs-12 col-lg-4">
-                                <label>Numero de contrato </label>
+                                <label>Número de contrato </label>
                                 <input class="form-control" [(ngModel)]="funcionario.numeroContrato"
                                 name="numeroContrato" type="number" required />
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-xs-12 col-lg-4" *ngIf='cargoSelected == 1'>
-                                <label>Numero de placa </label>
+                            <div class="col-xs-12 col-lg-4" *ngIf='cargoSelected == 1 || cargoSelected == 2'>
+                                <label>Número de placa </label>
                                 <input class="form-control" [(ngModel)]="funcionario.numeroPlaca" name="numeroPlaca" type="number" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Objeto de contrato </label>
+                                <textarea class="form-control" [(ngModel)]="funcionario.objetoContrato"
+                                    name="objetoContrato" rows="4"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -184,12 +195,11 @@
                         </div>
                     </div>
                 </form>
-
-                <div class="form-group row" *ngIf='formPdf'>
+                <!-- <div class="form-group row" *ngIf='formPdf'>
                     <a href="">
                         Generar PDF
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
