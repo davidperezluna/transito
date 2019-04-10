@@ -69,10 +69,8 @@
                             </div>
 
                             <div class="col-xs-12 col-lg-12" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL' "><br>
-                                <label> Nro. de IPAT
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input class="form-control" [(ngModel)]="datos.ipat" name="ipat" type="text" required />
+                                <label> Nro. de IPAT</label>
+                                <input class="form-control" [(ngModel)]="datos.ipat" name="ipat" type="text" />
                             </div>
 
                             <div class="col-xs-8 col-lg-6" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'"><br>
@@ -81,12 +79,18 @@
                                 </label>
                                 <input class="form-control" [(ngModel)]="datos.fechaHechos" name="fechaHechos" type="date" min="0" required />
                             </div>
+
                             <div class="col-lg-6 col-md-6 " style="padding-top: 12%;" *ngIf="datos.idMotivoCancelacion =='DESTRUCCIÓN O PERDIDA TOTAL'">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" [(ngModel)]="datos.recuperarMotor" class="custom-control-input" id="recuperarMotor"
                                         name="recuperarMotor" checked="">
                                     <label class="custom-control-label" for="recuperarMotor">Recuperar Motor</label>
                                 </div>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Observaciones</label>
+                                <textarea class="form-control" [(ngModel)]="datos.observaciones" rows="4" name="observaciones"></textarea>
                             </div>
                         </div>
                     </div>

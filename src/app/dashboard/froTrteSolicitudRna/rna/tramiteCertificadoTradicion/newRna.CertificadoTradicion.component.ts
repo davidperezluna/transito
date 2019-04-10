@@ -188,7 +188,7 @@ export class NewRnaCertificadoTradicionComponent implements OnInit {
             response => {
               if (response.code == 200) {
                 let resumen = "No. factura: " + this.tramiteFactura.factura.numero + 
-                "Ciudadano que recibe: " + this.ciudadano.primerNombre + " " + this.ciudadano.primerApellido;
+                ", Ciudadano que recibe: " + this.ciudadano.primerNombre + " " + this.ciudadano.primerApellido;
 
                 this.entregado = true;
 

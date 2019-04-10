@@ -82,7 +82,7 @@ export class NewRnaPreregistroComponent implements OnInit {
 constructor(
   private _PropietarioService: VhloPropietarioService,
   private _MarcaService: VhloCfgMarcaService,
-  private _lineaService: VhloCfgLineaService,
+  private _LineaService: VhloCfgLineaService,
   private _ClaseService: VhloCfgClaseService,
   private _CarroceriaService: VhloCfgCarroceriaService,
   private _ServicioService: VhloCfgServicioService,
@@ -193,20 +193,6 @@ constructor(
       }
     );
 
-    this._CarroceriaService.select().subscribe(
-      response => {
-        this.carrocerias = response;
-      }, 
-      error => {
-        this.errorMessage = <any>error;
-
-        if(this.errorMessage != null){
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
     this._ServicioService.select().subscribe(
       response => {
         this.servicios = response;
@@ -284,9 +270,28 @@ constructor(
   onChangedMarca(e){
     if (e) {
       let token = this._LoginService.getToken()
-        this._lineaService.searchByMarcaSelect({'idMarca':e}, token).subscribe(
+        this._LineaService.selectByMarca({'idMarca':e}, token).subscribe(
           response => {
             this.lineas = response;
+          }, 
+          error => { 
+            this.errorMessage = <any>error;
+    
+            if(this.errorMessage != null){
+              console.log(this.errorMessage);
+              alert("Error en la petición");
+            }
+          }
+        );
+    }
+  }
+
+  onChangedClase(e){
+    if (e) {
+      let token = this._LoginService.getToken()
+        this._CarroceriaService.selectByClase({'idClase':e}, token).subscribe(
+          response => {
+            this.carrocerias = response;
           }, 
           error => { 
             this.errorMessage = <any>error;

@@ -69,5 +69,5 @@ export class VhloCfgClaseService {
 
 	getClaseParaMaquinariaSelect(){
 		return this._http.get(this.url+"/maquinaria/select").map(res => res.json());
-	}	
+	}
 }

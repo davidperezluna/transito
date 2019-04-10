@@ -4,6 +4,7 @@ import { FroTrteSolicitudService } from '../../../services/froTrteSolicitud.serv
 import { FroFacTramiteService } from '../../../services/froFacTramite.service';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
+import { VhloAcreedorService } from '../../../services/vhloAcreedor.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../services/login.service';
@@ -24,12 +25,12 @@ export class NewRnaComponent implements OnInit {
   public factura: any = null;
   public vehiculo: any = null;
   public propietarios: any = null;
+  public acreedores: any = null;
   public ciudadano: any = false;
 
   public vehiculoFiltro: any;
 
   public tramitesFactura: any = null;
-  public tramiteFacturaSelected: any = null;
   public tramiteFactura: any = null;
   public tramiteSelected: any = null;
   public facturas: any;
@@ -50,6 +51,7 @@ export class NewRnaComponent implements OnInit {
     private _TramiteFacturaService: FroFacTramiteService,
     private _FacturaService: FroFacturaService,
     private _CiudadanoService: UserCiudadanoService,
+    private _AcreedorService: VhloAcreedorService,
     private _PropietarioService: VhloPropietarioService,
     private _VehiculoService: VhloVehiculoService,
     private _LoginService: LoginService,
@@ -77,31 +79,37 @@ export class NewRnaComponent implements OnInit {
     this._VehiculoService.searchByPlaca({'numero': this.placa }, token).subscribe(
       response => {
         if (response.code == 200) {
-          this.vehiculo = response.data;
-          this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
+          let vehiculo = response.data;
 
-          this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+          this._AcreedorService.searchByVehiculo({ 'idVehiculo': vehiculo.id }, token).subscribe(
             response => {
               if (response.code == 200) {
-                this.propietarios = response.data;
-
                 swal({
-                  title: 'Perfecto!',
-                  text: response.message,
-                  type: 'success',
-                  confirmButtonText: 'Aceptar'
+                  title: 'Vehiculo con prenda',
+                  text: "¿Esta seguro que desea continuar?",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#15d4be',
+                  cancelButtonColor: '#ff6262',
+                  confirmButtonText: 'Confirmar',
+                  cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                  if (result.value) {
+                    this.vehiculo = vehiculo;
+                    this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
+
+                    this.onSearchPropietarios();
+                  }else{
+                    this.vehiculo = null;
+                    this.tramiteSolicitud.idVehiculo = null;
+                  }
                 });
               } else {
-                this.propietarios = null;
+                this.vehiculo = vehiculo;
+                this.tramiteSolicitud.idVehiculo = this.vehiculo.id;
 
-                swal({
-                  title: 'Atención!',
-                  text: response.message,
-                  type: 'warning',
-                  confirmButtonText: 'Aceptar'
-                });
+                this.onSearchPropietarios();
               }
-
               error => {
                 this.errorMessage = <any>error;
                 if (this.errorMessage != null) {
@@ -114,6 +122,50 @@ export class NewRnaComponent implements OnInit {
         } else {
           this.vehiculo = null;
           this.tramiteSolicitud.idVehiculo = null;
+
+          swal({
+            title: 'Atención!',
+            text: response.message,
+            type: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+
+        error => {
+          this.errorMessage = <any>error;
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      }
+    );
+  }
+
+  onSearchPropietarios(){
+    swal({
+      title: 'Buscando propietarios!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._PropietarioService.searchByVehiculo({ 'idVehiculo': this.vehiculo.id }, token).subscribe(
+      response => {
+        if (response.code == 200) {
+          this.propietarios = response.data;
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          this.propietarios = null;
 
           swal({
             title: 'Atención!',
@@ -260,8 +312,6 @@ export class NewRnaComponent implements OnInit {
 
   onEnviar() {
     let token = this._LoginService.getToken();
-
-    this.tramiteSolicitud.idTramiteFactura = this.tramiteFacturaSelected;
 
     this._TramiteSolicitudService.register(this.tramiteSolicitud, token).subscribe(
       response => {

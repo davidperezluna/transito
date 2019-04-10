@@ -27,40 +27,35 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-xs-12 col-lg-8">
-                            <label>Organismo de transito de que proviene*</label>
+                            <label>Organismo de transito de que proviene <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="municipios" [(ngModel)]="datos.idMunicipio" name="idMunicipio" required>
                             </ng-select>
                         </div>
     
                         <div class="col-xs-12 col-lg-6"  >
-                            <label>Tipo documento empresa afiliadora <span class="text-danger">*</span></label>
+                            <label>Tipo documento empresa afiliadora <b class="text-danger">*</b></label>
                             <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="datos.idTipoIdentificacion" name="idTipoIdentificacion" required>
                             </ng-select>
                         </div>
     
                         <div class="col-xs-12 col-lg-6">
-                            <label>Nro. Documento<span class="text-danger">*</span></label>
+                            <label>Nro. Documento <b class="text-danger">*</b></label>
                             <input class="form-control" [(ngModel)]="datos.numeroDocumento"  name="numeroDocumento" type="text" required />
                         </div>                      
                         
                         <div class="col-xs-12 col-lg-3">
-                            <label>Fecha de ingreso</label>
+                            <label>Fecha de ingreso <b class="text-danger">*</b></label>
                             <input class="form-control" [(ngModel)]="datos.fechaIngreso" name="fechaIngreso" type="date" required />
                         </div>
     
                         <div class="col-xs-12 col-lg-3">
-                            <label>Nro. guiá de llegada</label>
+                            <label>Nro. guiá de llegada <b class="text-danger">*</b></label>
                             <input class="form-control" [(ngModel)]="datos.guiaLlegada" name="guiaLlegada" type="text" required />
                         </div>
     
                         <div class="col-xs-12 col-lg-3">
-                            <label>Empresa de envió</label>
+                            <label>Empresa de envió <b class="text-danger">*</b></label>
                             <input class="form-control" [(ngModel)]="datos.empresaEnvio" name="empresaEnvio" type="text" required />
-                        </div>
-    
-                        <div class="col-xs-12 col-lg-3">
-                            <label>Nro. de solicitud RUNT</label>
-                            <input class="form-control" [(ngModel)]="datos.runt" name="runt" type="text" required />
                         </div>
                     </div>
                 </div>

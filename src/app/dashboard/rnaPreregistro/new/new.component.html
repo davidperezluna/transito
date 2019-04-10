@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Tipo de registro <span class="text-danger"> <b class="text-danger">*</b></span></label>
-                            <ng-select [multiple]="false" [options]="tipoMatricula" [(ngModel)]="vehiculo.tipoMatricula" required name="tipoPropiedadId">
+                            <ng-select [multiple]="false" [options]="tipoMatricula" [(ngModel)]="vehiculo.tipoMatricula" required name="tipoMatricula">
                             </ng-select>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-xs-12 col-lg-3">
                             <label>Clase <b class="text-danger">*</b></label>
-                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="vehiculo.idClase" name="idClase" required>
+                            <ng-select [multiple]="false" [options]="clases" [(ngModel)]="vehiculo.idClase" (ngModelChange)="onChangedClase($event)" name="idClase" required>
                             </ng-select>
                         </div>
                         <div class="col-xs-12 col-lg-3">

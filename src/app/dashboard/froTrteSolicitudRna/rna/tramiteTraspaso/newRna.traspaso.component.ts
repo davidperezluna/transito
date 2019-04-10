@@ -327,7 +327,22 @@ export class NewRnaTraspasoComponent implements OnInit {
         this._TramiteSolicitudService.validations(this.datos, token).subscribe(
             response => {
               if (response.code == 200) {
-                let resumen = "<b>No. factura: " + this.tramiteFactura.factura.numero;
+                let propietarioActual = null;
+                if (this.propietario.ciudadano) {
+                    propietarioActual = this.propietario.ciudadano.primerNombre + ' '+ this.propietario.ciudadano.primerApellido;
+                }else if (this.propietario.empresa) {
+                    propietarioActual = this.propietario.empresa.nombre;
+                }
+
+                let propietarioNuevo = null;
+                if (this.ciudadano) {
+                    propietarioNuevo = this.ciudadano.primerNombre + ' '+ this.ciudadano.primerApellido;
+                }else if (this.empresa) {
+                    propietarioNuevo = this.empresa.nombre;
+                }
+                let resumen = "No. factura: " + this.tramiteFactura.factura.numero +
+                            ", Traspaso de " + propietarioActual +
+                            "a " + propietarioNuevo;
 
                 this._PropietarioService.update(this.datos, token).subscribe(
                     response => {

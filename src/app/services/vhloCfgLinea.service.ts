@@ -45,10 +45,10 @@ export class VhloCfgLineaService {
 		return this._http.get(this.url+"/select").map(res => res.json());
 	}
 	
-	searchByMarcaSelect(datos,token){
+	selectByMarca(datos,token){
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/marca/select", params, { headers: headers }).map(res => res.json());
+		return this._http.post(this.url + "/select/marca", params, { headers: headers }).map(res => res.json());
 	}
 }
