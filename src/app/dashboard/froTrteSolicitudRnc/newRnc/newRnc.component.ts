@@ -228,7 +228,9 @@ constructor(
             text: response.message,
             type: 'success',
             confirmButtonText: 'Aceptar'
-          })
+          });
+
+          this.onChangedTramiteFactura(response.data.tramiteFactura.id);
         }else{
           swal({
             title: 'Error!',

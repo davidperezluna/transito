@@ -26,6 +26,7 @@ export class RnaPreregistro{
 		public idOrganismoTransito:number,
 		public idRadioAccion:number,
 		public idModalidadTransporte:number,
+		public idEmpresa:number,
 		public id:number,
 	){}
 }
