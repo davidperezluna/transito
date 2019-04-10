@@ -153,7 +153,10 @@ import { TramiteInscripcionLimitacionRoutes } from './rnmaTramiteInscripcionLimi
 import { TramiteLevantamientoLimitacionRoutes } from './rnmaTramiteLevantamientoLimitacion/rnmaTramiteLevantamientoLimitacion.routes';
 import { RnrsTramiteInscripcionLimitacionRoutes } from './rnrsTramiteInscripcionLimitacion/rnrsTramiteInscripcionLimitacion.routes';
 import { RnrsTramiteLevantamientoLimitacionRoutes } from './rnrsTramiteLevantamientoLimitacion/rnrsTramiteLevantamientoLimitacion.routes';
+
+import { UserCfgEmpresaTipoRoutes } from './userCfgEmpresaTipo/userCfgEmpresaTipo.routes';
 import { UserCfgEmpresaServicioRoutes } from './userCfgEmpresaServicio/userCfgEmpresaServicio.routes';
+
 import { SvCfgClaseAccidenteRoutes } from './svCfgClaseAccidente/svCfgClaseAccidente.routes';
 import { CfgChoqueConRoutes } from './cfgChoqueCon/cfgChoqueCon.routes';
 import { CfgObjetoFijoRoutes } from './cfgObjetoFijo/cfgObjetoFijo.routes';
@@ -439,6 +442,7 @@ export const DashboardRoutes: Route[] = [
       ...ReporteRoutes,
       ...RpcccInventarioDocumentalRoutes,
       ...ImoBusquedaRoutes,
+      ...UserCfgEmpresaTipoRoutes,
       ...UserCfgEmpresaServicioRoutes,
       ...RnaCertificadoTradicionRoutes,
       ...CvCfgTipoMedidaCautelarRoutes,
