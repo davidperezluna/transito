@@ -29,8 +29,8 @@
             <tbody>
               <tr class="odd" *ngFor="let consecutivo of consecutivos; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ consecutivo.consecutivo }}</td>
-                <td>{{ consecutivo.organismoTransito?.nombre }}</td>
+                <td>{{ consecutivo.numero }}</td>
+                <td>{{ consecutivo.talonario.organismoTransito?.nombre }}</td>
                 <td>{{ consecutivo.estado }}</td>
                 <!--<td><div class="btn-group">
                   <button (click)="onShow(consecutivo)" (ready)="ready($event)" class="btn btn-xs btn-default" type="button">
@@ -40,8 +40,7 @@
               </tr>
             </tbody>
           </table>
-          <!-- /.table-responsive -->
-          
+          <!-- /.table-responsive -->   
         </div>
       </div>
     </div>

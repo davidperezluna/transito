@@ -74,20 +74,29 @@ export class SvIpatConsecutivoService {
  		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
 	}
 
-	searchLastBySede(datos, token) {
+	searchConsecutivo(datos, token) {
 		let json = JSON.stringify(datos);
 		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/last/sede", params, { headers: headers }).map(
+		return this._http.post(this.url + "/search/consecutivo", params, { headers: headers }).map(
 			res => res.json()
 		);
 	}
 
-	showBySede(token, datos) {
+	showBySede(datos, token) {
 		let json = JSON.stringify(datos);
-		let params = "json=" + json + "&authorization=" + token;
+		let params = "data=" + json + "&authorization=" + token;
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/operativasede", params, { headers: headers })
+		return this._http.post(this.url + "/show/consecutivo/sede", params, { headers: headers })
+			.map(res => res.json());
+
+	}
+
+	searchByOrganismoTransitoAndFecha(datos, token) {
+		let json = JSON.stringify(datos);
+		let params = "data=" + json + "&authorization=" + token;
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+		return this._http.post(this.url + "/search/organismotransito/fecha", params, { headers: headers })
 			.map(res => res.json());
 
 	}
