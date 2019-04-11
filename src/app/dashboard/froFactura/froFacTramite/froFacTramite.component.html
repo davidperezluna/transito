@@ -213,12 +213,56 @@
                         </div><!-- /.row -->
                     </div><!-- /.form-group -->
 
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="tramitePrecio">
                         <!-- .form-group -->
-                        <div class="row">
-                            <!-- .row -->
-                            
-                        </div>
+                        <div class="row"><!-- .row -->
+                            <div class="col-xs-12 col-lg-12" *ngIf="tramitePrecio.tramite.id == 2">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h5 class="text-uppercase"><b>Propietarios</b></h5>
+                                            <p>Valor retefuente: ${{ valorRetefuente }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr *ngFor="let propietario of propietarios; let i = index">
+                                                    <td *ngIf='propietario.ciudadano'>
+                                                        <strong>Nombre: </strong>
+                                                        {{ propietario.ciudadano?.primerNombre }} {{ propietario.ciudadano?.primerApellido }}
+                                                        <br>
+                                                        <strong>Identificación: </strong>
+                                                        {{ propietario.ciudadano?.identificacion }}
+                                                    </td>
+                                                    <td *ngIf='propietario.empresa'>
+                                                        <strong>NIT: </strong>
+                                                        {{propietario.empresa?.nit}}
+                                                        <br>
+                                                        <strong>Nombre: </strong>
+                                                        {{propietario.empresa?.nombre}}
+                                                    </td>
+                                                    <td> 
+                                                        <div class="custom-control custom-checkbox"  >
+                                                            <input (change)="onVendedorSelect($event,propietario.id)" [(ngModel)]="propietario.state" name="{{propietario.id}}" type="checkbox" class="custom-control-input" id="{{propietario.id}}">
+                                                            <label class="custom-control-label" for="{{propietario.id}}"><p *ngIf="propietario.state">${{valorRetefuenteUnitario}}</p><p *ngIf="!propietario.state">$0</p></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody> 
+                                        </table> 
+            
+                                    </div>
+                                    <div class="card-footer">
+                                        <button (click)="onCancelarTraspaso()" class="btn btn-default">
+                                            <i class="fa fa-times"></i>
+                                            Cancelar
+                                        </button>
+                                        <!-- <button (click)="btnRetefunete()" [disabled]='vendedores == 0' class="btn btn-primary pull-right">Aceptar</button> -->
+                                    </div>
+                                </div>
+                            </div> 
+                        </div><!-- /.row -->
                         <!-- /.row -->
                     </div>
                 

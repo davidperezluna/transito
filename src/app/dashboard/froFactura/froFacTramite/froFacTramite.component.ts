@@ -4,13 +4,13 @@ import { FroFacTramite } from './froFacTramite.modelo';
 import { FroFacturaService } from '../../../services/froFactura.service';
 import { FroTrtePrecioService } from '../../../services/froTrtePrecio.service';
 import { PnalFuncionarioService } from '../../../services/pnalFuncionario.service';
-import { CfgOrganismoTransitoService } from '../../../services/cfgOrganismoTransito.service';
 import { CfgModuloService } from '../../../services/cfgModulo.service';
 import { UserCfgTipoIdentificacionService } from '../../../services/userCfgTipoIdentificacion.service';
 import { UserCiudadanoService } from '../../../services/userCiudadano.service';
 import { VhloPropietarioService } from '../../../services/vhloPropietario.service';
 import { VhloVehiculoService } from '../../../services/vhloVehiculo.service';
 import { LoginService } from '../../../services/login.service';
+import { VhloValorService } from '../../../services/vholCfgValor.service';
 import { environment } from 'environments/environment'
 import swal from 'sweetalert2';
 declare var $: any;
@@ -35,6 +35,8 @@ export class FroFacTramiteComponent implements OnInit {
   public empresa: any = null;
   public vehiculo: any = null;
   public propietarios: any = null;
+  public valorRetefuente: any = 0;
+
 
   public tipoIdentificacionSelected: any = null;
   public identificacion: any;
@@ -53,13 +55,17 @@ export class FroFacTramiteComponent implements OnInit {
   public formCiudadano = false;
   public formSearch = true;
   public table: any = null;
+  public valorVehiculoId: any = null;
+
+  public propietariosVehiculoRetefuente:any=[]; 
+  public valorRetefuenteUnitario:any=0;
+  public vendedores:any=0; 
 
   public apiUrl = environment.apiUrl + 'financiero';
 
   constructor(
     private _FuncionarioService: PnalFuncionarioService,
     private _FacturaService: FroFacturaService,
-    private _OrganismoTransitoService: CfgOrganismoTransitoService,
     private _ModuloService: CfgModuloService,
     private _TipoIdentificacionService: UserCfgTipoIdentificacionService,
     private _CiudadanoService: UserCiudadanoService,
@@ -67,6 +73,7 @@ export class FroFacTramiteComponent implements OnInit {
     private _VehiculoService: VhloVehiculoService,
     private _TramitePrecioService: FroTrtePrecioService,
     private _LoginService: LoginService,
+    private _VhloValorService: VhloValorService,
   ){}
     
   ngOnInit() {
@@ -361,90 +368,63 @@ export class FroFacTramiteComponent implements OnInit {
               });
             }
           } else if (this.modulo.abreviatura == 'RNA' || this.modulo.abreviatura == 'RNMA' || this.modulo.abreviatura == 'RNRS') {
-            if (!this.propietarios) {
-              //Valida si el tramite seleccionado es matricula inicial
-              if (this.tramitePrecio.tramite.id == 1) {
-                //Agrega el trámite seleccionado al arreglo
-                this.onCreateArray();
-              } else {
-                swal({
-                  title: 'Sin propietarios!',
-                  text: 'Necesita facturar matricula inicial para este vehiculo',
-                  type: 'error',
-                  confirmButtonText: 'Aceptar'
-                });
-              }
-            } else {
-              //Valida si el tramite seleccionado requiera calcular retefuente
-              if (this.tramitePrecio.tramite.id == 100) {
-                swal({
-                  title: 'Buscando Propietarios!',
-                  text: 'Solo tardara unos segundos por favor espere.',
-                  onOpen: () => {
-                    swal.showLoading()
-                  }
-                });
+            //Valida si el tramite seleccionado requiera calcular retefuente
 
-                this._PropietarioService.searchByFilter(this.vehiculoFiltro, token).subscribe(
+            if (this.tramitePrecio.tramite.id == 2 && this.propietarios) {
+              if (this.tramitesPrecioArray.length < 1) {
+                let datos = {
+                  'linea': this.vehiculo.linea.id,
+                  'marca': this.vehiculo.linea.marca.id,
+                  'clase': this.vehiculo.clase.id,
+                  'modelo': this.vehiculo.modelo,
+                  'cilindraje': this.vehiculo.cilindraje
+                }
+
+                this._VhloValorService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
                   response => {
-                    let datos = {
-                      'linea': this.vehiculo.linea.id,
-                      'clase': this.vehiculo.clase.id,
-                      'modelo': this.vehiculo.modelo
+                    if (response.code == 200) {
+                      this.valorRetefuente = parseInt(response.data.valor) * 0.01;
+                      //Agrega el trámite seleccionado al arreglo
+                      this.onCreateArray();
+                      this.valorVehiculoId = response.data.id;
+                    } else {
+                      swal({
+                        title: 'Sin valor!',
+                        text: response.message,
+                        type: 'error',
+                        confirmButtonText: 'Aceptar'
+                      });
                     }
-
-                    /*this._CfgValorVehiculoService.getCfgValorVehiculoVehiculo(datos, token).subscribe(
-                      valorVehiculo => {
-                        if (valorVehiculo.datos != null) {
-                          this.valorRetefuente = parseInt(valorVehiculo.datos.valor) * 0.01;
-                          this.valorVehiculoId = valorVehiculo.datos.id;
-                          this.propietariosVehiculo = response.data;
-                          response.data.forEach(element => {
-                            if (element.ciudadano) {
-                              this.searchByIdentificacionForm = true;
-                            }
-                            if (element.empresa) {
-                              this.isEmpresaForm = true;
-                            }
-                          });
-                          swal.close();
-                        } else {
-                          swal.close();
-                          swal({
-                            title: 'Sin valor!',
-                            text: 'Necesita ingresar el valor del vehiculo',
-                            type: 'error',
-                            confirmButtonText: 'Aceptar'
-                          })
-                          return (0);
-                        }
-                      },
-                      error => {
-                        this.errorMessage = <any>error;
-      
-                        if (this.errorMessage != null) {
-                          console.log(this.errorMessage);
-                          alert("Error en la petición");
-                        }
-                      }
-                    );*/
-                    error => {
-                      this.errorMessage = <any>error;
-                      if (this.errorMessage != null) {
-                        console.log(this.errorMessage);
-                        alert("Error en la petición");
-                      }
+                  },
+                  error => {
+                    this.errorMessage = <any>error;
+                    if (this.errorMessage != null) {
+                      console.log(this.errorMessage);
+                      alert("Error en la petición");
                     }
                   }
                 );
-
-                //Agrega el trámite seleccionado al arreglo
-                this.onCreateArray();
+                
               } else {
-                //Agrega el trámite seleccionado al arreglo
-                this.onCreateArray();
-              }
+                swal({
+                  title: 'Error!',
+                  text: 'Solo puede facturar el tramite traspaso.',
+                  type: 'error',
+                  confirmButtonText: 'Aceptar'
+                });
+              }          
+            }else{
+              swal({
+                title: 'Error!',
+                text: 'Este tramite no se puede facturar por que el vehículo no tiene propietarios registrados.',
+                type: 'warning',
+                confirmButtonText: 'Aceptar'
+              });
             }
+            
+            //Agrega el trámite seleccionado al arreglo
+            this.onCreateArray();
+            
           }
         } else {
           this.tramitePrecio = null;
@@ -467,8 +447,7 @@ export class FroFacTramiteComponent implements OnInit {
       }
     );
 
-    
- 
+     
     /*
     if (this.modulo.abreviatura == 'RNA') {
       if (!this.propietarios) {
@@ -632,6 +611,17 @@ export class FroFacTramiteComponent implements OnInit {
       );
     }
     */
+  }
+
+  onVendedorSelect(eve: any,propietarioVehiculo:any){
+    if (eve.target.checked) {
+      this.propietariosVehiculoRetefuente.push(propietarioVehiculo);
+      this.vendedores = this.vendedores + 1;
+    }else{
+      this.vendedores = this.vendedores - 1;
+      this.propietariosVehiculoRetefuente =  this.propietariosVehiculoRetefuente.filter(h => h !== propietarioVehiculo);
+    }
+    this.valorRetefuenteUnitario = this.valorRetefuente / this.vendedores;
   }
 
   onCreateArray(){

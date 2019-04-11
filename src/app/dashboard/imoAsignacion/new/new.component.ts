@@ -126,6 +126,7 @@ constructor(
         response => {
           this.loteInsumo = response.data;
           if (response.status == 'success') {
+            console.log(this.loteInsumo);
             this.numero = this.loteInsumo.cantidad;
             swal.close()
           }else{
@@ -230,17 +231,30 @@ constructor(
   }
 
   onAsignarLoteInsumo(){
+    console.log(this.numero);
+    console.log(this.loteInsumo.cantidad);
     if (this.loteInsumo) {
-      this.lotesSelecionados.push(
-          {
-            'idLote':this.loteInsumo.id,
-            'tipo':this.loteInsumo.tipoInsumo.nombre,
-            'idTipo':this.loteInsumo.tipoInsumo.id,
-            'cantidad':this.loteInsumo.cantidad,
-          }   
-      );
+      if(this.numero > this.loteInsumo.cantidad){
+        swal({
+          title: 'Error!',
+          text: 'Excede el numero de insumo',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        })
+      }else{
+        this.lotesSelecionados.push(
+            {
+              'idLote':this.loteInsumo.id,
+              'tipo':this.loteInsumo.tipoInsumo.nombre,
+              'idTipo':this.loteInsumo.tipoInsumo.id,
+              'cantidad':this.numero,
+            }   
+        );
+        this.insumoSelectedInsumo = [];
+        this.numero = false;
+        this.loteInsumo = false;
+      }
     }
-    this.loteInsumo = false;
   }
 
   onEliminarLoteSelecionado(lote){
@@ -259,14 +273,14 @@ constructor(
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      swal({
-        title: 'Enviando datos!',
-        text: 'Solo tardara unos segundos por favor espere.',
-        onOpen: () => {
-          swal.showLoading()
-        }
-      })
       if (result.value) {
+        swal({
+          title: 'Enviando datos!',
+          text: 'Solo tardara unos segundos por favor espere.',
+          onOpen: () => {
+            swal.showLoading()
+          }
+        })
         let token = this._loginService.getToken();
         this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
         let datos={
