@@ -96,8 +96,9 @@
                 </div>
                 </form>
                 <div class="card-footer">
+                    <button (click)="onEnviar()" class="btn btn-primary">Enviar</button>
                     <button (click)="onCancelar()" class="btn btn-default">Cancelar</button>
-                    <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">Enviar</button>
+                    <!-- <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary">Enviar</button> -->
                 </div>
                 <div class="btn-group pull-right"><button (click)="onExportarTotal()" class="btn btn-success">Exportar Total</button></div>
                 </div>
@@ -109,37 +110,19 @@
                                 <th>GRAVEDAD ACCIDENTE</th>
                                 <th>HORA ACCIDENTE</th>
                                 <th>FECHA ACCIDENTE</th>
-                                <th>NOMBRE CONDUCTOR</th>
-                                <th>APELLIDO CONDUCTOR</th>
-                                <th>EDAD CONDUCTOR</th>
-                                <th>MUNICIPIO RESIDENCIA CONDUCTOR</th>
                                 <th>DIA DE SEMANA</th>
-                                <th>SEXO CONDUCTOR</th>
-                                <th>NOMBRE VICTIMA</th>
-                                <th>APELLIDO VICTIMA</th>
-                                <th>TIPO VICTIMA</th>
-                                <th>EDAD VICTIMA</th>
-                                <th>MUNICIPIO RESIDENCIA VICTIMA</th>
-                                <th>SEXO VICTIMA</th>
+                                <th>CONDUCTORES</th>
+                                <th>VICTIMAS</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="odd" *ngFor="let ipat of ipats; let i = index">
-                                <td>{{ ipat.gravedad.nombre }}</td>
+                                <td>{{ ipat.gravedadAccidente.nombre }}</td>
                                 <td>{{ ipat.horaAccidente }}</td>
                                 <td>{{ ipat.fechaAccidente }}</td>
-                                <td>{{ ipat?.nombresConductor }}</td>
-                                <td>{{ ipat?.apellidosConductor }}</td>
-                                <td>{{ ipat.edadConductor }}</td>
-                                <td>{{ ipat.ciudadResidenciaConductor }}</td>
                                 <td>{{ ipat.diaAccidente }}</td>
-                                <td>{{ ipat.sexoConductor }}</td>
-                                <td>{{ ipat?.nombresVictima }}</td>
-                                <td>{{ ipat?.apellidosVictima }}</td>
-                                <td>{{ ipat.tipoVictima.nombre }}</td>
-                                <td>{{ ipat.edadVictima }}</td>
-                                <td>{{ ipat.ciudadResidenciaVictima }}</td>
-                                <td>{{ ipat.sexoVictima }}</td>
+                                <td>{{ ipat?.conductores }}</td>
+                                <td>{{ ipat?.victimas }}</td>
                             </tr>
                         </tbody>
                     </table>

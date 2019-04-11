@@ -29,20 +29,20 @@
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Tipo de Ingreso
-                                    <span class="text-danger">*</span>
+                                    <b class="text-danger">*</b>
                                 </label>
-                                <ng-select [multiple]="false" [options]="tiposIngreso" [(ngModel)]="tipoIngresoSelected" required name="tipoIngreso">
+                                <ng-select [multiple]="false" [options]="tiposIngreso" [(ngModel)]="datos.idTipoIngreso" name="idTipoIngreso" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Número de motor <span class="text-danger">*</span></label>
+                                <label>Número de motor <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroMotor" name="numeroMotor" type="text" required />
                             </div>
                         </div>
 
-                        <div class="row" id="tipo-ingreso-nuevo" *ngIf="tipoIngresoSelected == 'NUEVO'">
+                        <div class="row" id="tipo-ingreso-nuevo" *ngIf="datos.idTipoIngreso == 'NUEVO'">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Número de aceptación <span class="text-danger">*</span></label>
+                                <label>Número de aceptación <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.numeroAceptacion" name="numeroAceptacion" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
@@ -51,35 +51,42 @@
                             </div>
                         </div>
 
-                        <div class="row" id="tipo-ingreso-usado" *ngIf="tipoIngresoSelected == 'USADO'">
+                        <div class="row" id="tipo-ingreso-usado" *ngIf="datos.idTipoIngreso == 'USADO'">
                             <div class="col-xs-12 col-lg-6">
                                 <label>Tipo identificación </label>
-                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="tipoIdentificacionSelected" required name="tipoIdentificacionId">
+                                <ng-select [multiple]="false" [options]="tiposIdentificacion" [(ngModel)]="datos.tipoIdentificacion" name="tipoIdentificacion" required>
                                 </ng-select>
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Número identificación</label>
-                                <input class="form-control" [(ngModel)]="numeroIdentificacion" name="datos.numeroIdentificacion" type="text" required />
+                                <input class="form-control" [(ngModel)]="datos.numeroIdentificacion" name="numeroIdentificacion" type="text" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
                                 <label>Número de cto. compra venta *</label>
-                                <input class="form-control" [(ngModel)]="numeroFactura" name="datos.numeroFactura" type="text" required />
+                                <input class="form-control" [(ngModel)]="datos.numeroFactura" name="datos.numeroFactura" type="text" required />
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Fecha *</label>
+                                <label>Fecha <b class="text-danger">*</b></label>
                                 <input class="form-control" [(ngModel)]="datos.fecha" name="fecha" type="date" required />
                             </div>
                             <div class="col-xs-12 col-lg-6">
-                                <label>Combustibles disponibles <span class="text-danger">*</span></label>
-                                <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="combustibleSelected" required name="combustibleId">
+                                <label>Combustibles disponibles <b class="text-danger">*</b></label>
+                                <ng-select [multiple]="false" [options]="combustibles" [(ngModel)]="datos.idCombustible" name="idCombustible" required>
                                 </ng-select>
                             </div>
-                            <div class="col-xs-12 col-lg-12">
-                                <label>Número solicitud RUNT <span class="text-danger">*</span></label>
-                                <input class="form-control" [(ngModel)]="datos.numeroRunt" name="numeroRunt" type="text" required />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Número chequeo SIJIN <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.sijinChequeoNumero" name="sijinChequeoNumero" type="text" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-6">
+                                <label>Fecha chequeo SIJIN <b class="text-danger">*</b></label>
+                                <input class="form-control" [(ngModel)]="datos.sijinChequeoFecha" name="sijinChequeoFecha" type="date" required />
                             </div>
                         </div>
                     </div>

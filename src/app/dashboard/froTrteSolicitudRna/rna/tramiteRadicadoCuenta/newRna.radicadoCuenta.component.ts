@@ -29,7 +29,6 @@ export class NewRnaRadicadoCuentaComponent implements OnInit {
       'fechaIngreso': null,
       'guiaLlegada': null,
       'empresaEnvio': null,
-      'runt': null,
       'idFuncionario': null,
       'idMunicipio': null,
       'idTipoIdentificacion': null,

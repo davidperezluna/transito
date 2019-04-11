@@ -29,7 +29,7 @@ export class MsvRegistroIpatComponent implements OnInit {
   constructor(
     private _MsvRegistroIpatService: MsvRegistroIpatService,
     private _ConsecutivoService: SvIpatConsecutivoService,
-    private _loginService: LoginService,
+    private _LoginService: LoginService,
   ) { }
 
   ngOnInit() {
@@ -41,19 +41,20 @@ export class MsvRegistroIpatComponent implements OnInit {
       }
     });
 
-    let token = this._loginService.getToken();
-    let identity = this._loginService.getIdentity();
+    let token = this._LoginService.getToken();
+    let identity = this._LoginService.getIdentity();
 
     let datos = {
       'identificacionUsuario': identity.identificacion,
     };
 
-    this._ConsecutivoService.showBySede(token, datos).subscribe(
+    this._ConsecutivoService.showBySede(datos, token).subscribe(
       response => {
         if (response) {
           this.consecutivos = response.data;
+          console.log(this.consecutivos);
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
           swal.close();
         }
@@ -69,8 +70,64 @@ export class MsvRegistroIpatComponent implements OnInit {
     );
   }
 
-  iniciarTabla() {
-    $('#dataTables-example').DataTable({
+  /* onSearch(){
+    this.formIndex = false;
+    this.formNew = false;
+    this.formEdit = false;
+    
+    swal({
+      title: 'Buscando registros!',
+      text: 'Solo tardara unos segundos por favor espere.',
+      onOpen: () => {
+        swal.showLoading()
+      }
+    });
+
+    let token = this._LoginService.getToken();
+
+    this._ConsecutivoService.searchByOrganismoTransitoAndFecha(this.msvRegistroIpat, token).subscribe(
+      response => {
+        if (response.code == 200) {
+
+          this.consecutivos = response.data;
+          this.formIndex = true;
+          this.formNew = false;
+
+          let timeoutId = setTimeout(() => {
+            this.onInitTable();
+          }, 100);
+
+          swal({
+            title: 'Perfecto!',
+            text: response.message,
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          this.consecutivos = null;
+          this.formIndex = false;
+          this.formNew = false;
+
+          swal({
+            title: 'Error!',
+            text: response.message,
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+        if (this.errorMessage != null) {
+          console.log(this.errorMessage);
+          alert("Error en la petición");
+        }
+      }
+    );
+  } */
+
+  onInitTable() {
+    this.table =  $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -83,8 +140,8 @@ export class MsvRegistroIpatComponent implements OnInit {
         }
       }
     });
-    this.table = $('#dataTables-example').DataTable();
   }
+
   onNew() {
     this.formNew = true;
     this.formIndex = false;
@@ -101,7 +158,7 @@ export class MsvRegistroIpatComponent implements OnInit {
       this.ngOnInit();
     }
   }
-  deleteCfgPlaca(id: any) {
+  /* deleteCfgPlaca(id: any) {
 
     swal({
       title: '¿Estás seguro?',
@@ -155,6 +212,6 @@ export class MsvRegistroIpatComponent implements OnInit {
     if (this.table) {
       this.table.destroy();
     }
-  }
+  } */
 
 }

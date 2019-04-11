@@ -27,6 +27,7 @@ export class VhloRnaTramiteInscripcionLimitacionComponent implements OnInit {
     let datos = {
       'idModulo': 1,
     };
+    
     swal({
       title: 'Cargando Tabla!',
       text: 'Solo tardara unos segundos por favor espere.',

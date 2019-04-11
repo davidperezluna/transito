@@ -5,7 +5,9 @@ export class MsvRegistroIpat{
 		public municipioId:number,
 		public ciudadanoDemandadoId:number,
 		public ciudadanoDemandanteId:number,*/
-		public idSedeOperativa:number,
+		public idOrganismoTransito:number,
+		public numeroResolucion:string,
+
 		public idGravedad:number,
 		public lugar: string,
 		public fechaAccidente:string,

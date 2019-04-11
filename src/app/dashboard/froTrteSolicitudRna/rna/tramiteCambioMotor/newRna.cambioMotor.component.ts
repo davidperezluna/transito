@@ -23,23 +23,20 @@ export class NewRnaCambioMotorComponent implements OnInit {
     
     public autorizado: any = false;
     public tramiteSolicitud: any = null;
+
     public tiposIdentificacion: any;
-    public tipoIdentificacionSelected: any;
     public tipoIngresoList: string[];
-    public tipoIngresoSelected: any;
-    public tipoIdentificacion: any;
-    public numeroIdentificacion: any;
     public combustibles: any;
-    public combustibleSelected: any;
 
     public datos = {
         'numeroMotor': null,
         'numeroAceptacion': null,
         'numeroFactura': null,
+        'sijinChequeoNumero': null,
+        'sijinChequeoFecha': null,
         'fecha': null,
         'tipoIdentificacion': null,
         'numeroIdentificacion': null,
-        'numeroRunt': null,
         'campos': null,
         'idFuncionario': null,
         'idVehiculo': null,
@@ -138,6 +135,7 @@ export class NewRnaCambioMotorComponent implements OnInit {
                                 }
                             }
                         );
+
                         this._TipoIdentificacionService.select().subscribe(
                             response => {
                                 this.tiposIdentificacion = response;
@@ -177,9 +175,6 @@ export class NewRnaCambioMotorComponent implements OnInit {
         let token = this._LoginService.getToken();
 
         this.datos.campos = ['motor'];
-        this.tipoIdentificacion = this.tipoIdentificacionSelected;
-        this.datos.idTipoIngreso = this.tipoIngresoSelected;
-        this.datos.idCombustible = this.combustibleSelected;
         this.datos.idVehiculo = this.vehiculo.id;
         this.datos.idTramiteFactura = this.tramiteFactura.id;
 

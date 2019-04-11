@@ -27,8 +27,6 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
     public motivoSelected: any;
 
     public datos = {
-        'idMotivoCancelacion': null,
-        'idEntidadJudicial': null,
         'numeroOficio': null,
         'fechaOficio': null,
         'declaracion':null,  
@@ -36,8 +34,11 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
         'ipat':null,
         'fechaHechos':null,
         'recuperarMotor':null,         
+        'observaciones':null,         
         'campos': null,
         'idFuncionario': null,
+        'idMotivoCancelacion': null,
+        'idEntidadJudicial': null,
         'idVehiculo': null,
         'idTramiteFactura': null,
     };

@@ -246,6 +246,7 @@ import { FroAcuerdoPagoModule } from './froAcuerdoPago/froAcuerdoPago.module';
 
 import { BpCdpModule } from './bpCdp/bpCdp.module';
 
+import { UserCfgEmpresaTipoModule } from './userCfgEmpresaTipo/userCfgEmpresaTipo.module';
 import { UserCfgEmpresaServicioModule } from './userCfgEmpresaServicio/userCfgEmpresaServicio.module';
 
 import { DashboardComponent } from './dashboard.component'; 
@@ -454,6 +455,7 @@ import {RightsidebarComponent} from '../shared';
     ImoBusquedaModule,
     ImoLoteModule,
     FacturaInfraccionModule,
+    UserCfgEmpresaTipoModule,
     UserCfgEmpresaServicioModule,
     RnaCertificadoTradicionOficialModule,
     ImoPreasignacionModule,

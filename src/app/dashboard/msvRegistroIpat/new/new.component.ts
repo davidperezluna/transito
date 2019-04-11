@@ -64,12 +64,14 @@ import { VhloCfgRadioAccionService } from '../../../services/vhloCfgRadioAccion.
 })
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
-  @Input() lugaresImpacto: any = null;
+  /* @Input() lugaresImpacto: any = null; */
   public msvRegistroIpat: MsvRegistroIpat;
   public organismoTransito: any;
   public errorMessage;
 
   public nroIpat: any;
+
+  public numeroConsecutivo: any;
   public consecutivo: any = null;
 
   public ipatEncontrado: any = null;
@@ -108,6 +110,7 @@ export class NewComponent implements OnInit {
   public reductoresVelocidad: any;
   public delineadoresPiso: any;
 
+  public lugaresImpacto: any;
   public resultadosExamen: any;
   public gradosExamen: any;
   public licenciasConduccion: any;
@@ -294,14 +297,727 @@ export class NewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this.msvRegistroIpat = new MsvRegistroIpat(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+    /* === inicio consecutivo === */
+    if(this.consecutivo) {
+      this._ControlViaService.getSenialVerticalSelect().subscribe(
+        response => {
+          this.senialesVerticales = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
+      this._ControlViaService.getSenialHorizontalSelect().subscribe(
+        response => {
+          this.senialesHorizontales = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
+      this._ControlViaService.getReductorVelocidadSelect().subscribe(
+        response => {
+          this.reductoresVelocidad = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ControlViaService.getControlViaSemaforoSelect().subscribe(
+        response => {
+          this.estadosSemaforo = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._GravedadService.select().subscribe(
+        response => {
+          this.gravedades = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ClaseAccidenteService.select().subscribe(
+        response => {
+          this.clasesAccidente = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ChoqueConService.getChoqueConSelect().subscribe(
+        response => {
+          this.choquesCon = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ObjetoFijoService.getObjetoFijoSelect().subscribe(
+        response => {
+          this.objetosFijos = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._OrganismoTransitoService.selectSedes().subscribe(
+        response => {
+          this.organismosTransito = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._AreaService.getAreaSelect().subscribe(
+        response => {
+          this.areas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._AseguradoraService.getAseguradoraSelect().subscribe(
+        response => {
+          this.aseguradoras = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._SectorService.getSectorSelect().subscribe(
+        response => {
+          this.sectores = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ZonaService.getZonaSelect().subscribe(
+        response => {
+          this.zonas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._FallaService.getFallaSelect().subscribe(
+        response => {
+          this.fallas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._DisenioService.getDisenioSelect().subscribe(
+        response => {
+          this.disenios = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._EstadoTiempoService.select().subscribe(
+        response => {
+          this.estadosTiempo = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._GeometriaService.getGeometriaSelect().subscribe(
+        response => {
+          this.geometrias = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._UtilizacionService.getUtilizacionSelect().subscribe(
+        response => {
+          this.utilizaciones = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._CalzadaCarrilService.getCalzadaCarrilSelect().subscribe(
+        response => {
+          this.calzadasCarriles = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._MaterialService.getMaterialSelect().subscribe(
+        response => {
+          this.materiales = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._EstadoViaService.getEstadoViaSelect().subscribe(
+        response => {
+          this.estadosVia = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._CondicionViaService.getCondicionViaSelect().subscribe(
+        response => {
+          this.condicionesVia = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._IluminacionService.getIluminacionSelect().subscribe(
+        response => {
+          this.iluminaciones = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._EstadoIluminacionService.getEstadoIluminacionSelect().subscribe(
+        response => {
+          this.estadosIluminacion = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._VisualService.getVisualSelect().subscribe(
+        response => {
+          this.visuales = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._VisualDisminuidaService.getVisualDisminuidaSelect().subscribe(
+        response => {
+          this.visualesDisminuidas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ControlViaService.getControlViaSemaforoSelect().subscribe(
+        response => {
+          this.estadosSemaforo = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ControlViaService.getControlViaDelineadorPisoSelect().subscribe(
+        response => {
+          this.delineadoresPiso = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ResultadoExamenService.getResultadoExamenSelect().subscribe(
+        response => {
+          this.resultadosExamen = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._GradoExamenService.getGradoExamenSelect().subscribe(
+        response => {
+          this.gradosExamen = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._LugarImpactoService.getLugarImpactoSelect().subscribe(
+        response => {
+          this.lugaresImpacto = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._HospitalService.getHospitalSelect().subscribe(
+        response => {
+          this.hospitales = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._EmpresaService.select().subscribe(
+        response => {
+          this.empresas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ClaseService.select().subscribe(
+        response => {
+          this.clases = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ServicioService.select().subscribe(
+        response => {
+          this.servicios = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._HipotesisService.getHipotesisSelect().subscribe(
+        response => {
+          this.hipotesis = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._TipoVictimaService.getTipoVictimaSelect().subscribe(
+        response => {
+          this.tiposVictima = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
+      this._GravedadVictimaService.getGravedadVictimaSelect().subscribe(
+        response => {
+          this.gravedadesVictima = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._TipoIdentificacionService.select().subscribe(
+        response => {
+          this.tiposIdentificacion = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
+      this._NacionalidadService.getNacionalidadSelect().subscribe(
+        response => {
+          this.nacionalidades = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
+      this._GeneroService.select().subscribe(
+        response => {
+          this.generos = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._MunicipioService.select().subscribe(
+        response => {
+          this.municipios = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._EntidadService.getEntidadAccidenteSelect().subscribe(
+        response => {
+          this.entidades = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._UnidadReceptoraService.getUnidadReceptoraSelect().subscribe(
+        response => {
+          this.unidades = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._MarcaService.getMarcaSelect().subscribe(
+        response => {
+          this.marcas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._LineaService.select().subscribe(
+        response => {
+          this.lineas = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ColorService.select().subscribe(
+        response => {
+          this.colores = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._CarroceriaService.select().subscribe(
+        response => {
+          this.carrocerias = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._CarroceriaService.select().subscribe(
+        response => {
+          this.carrocerias = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ClaseService.select().subscribe(
+        response => {
+          this.clases = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ServicioService.select().subscribe(
+        response => {
+          this.servicios = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._ModalidadTransporteService.select().subscribe(
+        response => {
+          this.modalidadesTransporte = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+      this._RadioAccionService.select().subscribe(
+        response => {
+          this.radiosAccion = response;
+        },
+        error => {
+          this.errorMessage = <any>error;
+
+          if (this.errorMessage != null) {
+            console.log(this.errorMessage);
+            alert("Error en la petición");
+          }
+        }
+      );
+
+      this.fechaActual = new Date().getFullYear();
+      for (let i = 1990; i <= (this.fechaActual); i++) {
+        let obj = {
+          value: i,
+          label: i
+        };
+        this.anios.push(obj);
+      }
+    }
+     /* ====fin consecutivo=== */
+  }
+
+  onSearchConsecutivo() {
+
     let token = this._LoginService.getToken();
+
     let identity = this._LoginService.getIdentity();
+
     this._FuncionarioService.searchLogin({ 'identificacion': identity.identificacion }, token).subscribe(
       responseFuncionario => {
         if (responseFuncionario.status == 'success') {
           this.organismoTransito = responseFuncionario.data.organismoTransito;
-
           swal({
             title: 'Buscando IPAT en ' + this.organismoTransito.nombre,
             text: 'Solo tardara unos segundos por favor espere.',
@@ -309,716 +1025,12 @@ export class NewComponent implements OnInit {
               swal.showLoading();
             }
           });
-          this._ControlViaService.getSenialVerticalSelect().subscribe(
-            response => {
-              this.senialesVerticales = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ControlViaService.getSenialHorizontalSelect().subscribe(
-            response => {
-              this.senialesHorizontales = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          this._ControlViaService.getReductorVelocidadSelect().subscribe(
-            response => {
-              this.reductoresVelocidad = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-          this._ControlViaService.getControlViaSemaforoSelect().subscribe(
-            response => {
-              this.estadosSemaforo = response;
-            },
-            error => {
-              this.errorMessage = <any>error;
-
-              if (this.errorMessage != null) {
-                console.log(this.errorMessage);
-                alert("Error en la petición");
-              }
-            }
-          );
-
-          this._SvIpatConsecutivoService.searchLastBySede({ 'organismoTransito': this.organismoTransito }, token).subscribe(
+          this._SvIpatConsecutivoService.searchConsecutivo({ 'organismoTransito': this.organismoTransito , 'numeroConsecutivo': this.numeroConsecutivo }, token).subscribe(
             response => {
               if (response.status == 'success') {
-                swal.close();
-
                 this.consecutivo = response.data;
-
-                this._GravedadService.select().subscribe(
-                  response => {
-                    this.gravedades = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ClaseAccidenteService.select().subscribe(
-                  response => {
-                    this.clasesAccidente = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ChoqueConService.getChoqueConSelect().subscribe(
-                  response => {
-                    this.choquesCon = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ObjetoFijoService.getObjetoFijoSelect().subscribe(
-                  response => {
-                    this.objetosFijos = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._OrganismoTransitoService.selectSedes().subscribe(
-                  response => {
-                    this.organismosTransito = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._AreaService.getAreaSelect().subscribe(
-                  response => {
-                    this.areas = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._AseguradoraService.getAseguradoraSelect().subscribe(
-                  response => {
-                    this.aseguradoras = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._SectorService.getSectorSelect().subscribe(
-                  response => {
-                    this.sectores = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ZonaService.getZonaSelect().subscribe(
-                  response => {
-                    this.zonas = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._FallaService.getFallaSelect().subscribe(
-                  response => {
-                    this.fallas = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._DisenioService.getDisenioSelect().subscribe(
-                  response => {
-                    this.disenios = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._EstadoTiempoService.select().subscribe(
-                  response => {
-                    this.estadosTiempo = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._GeometriaService.getGeometriaSelect().subscribe(
-                  response => {
-                    this.geometrias = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._UtilizacionService.getUtilizacionSelect().subscribe(
-                  response => {
-                    this.utilizaciones = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._CalzadaCarrilService.getCalzadaCarrilSelect().subscribe(
-                  response => {
-                    this.calzadasCarriles = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._MaterialService.getMaterialSelect().subscribe(
-                  response => {
-                    this.materiales = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._EstadoViaService.getEstadoViaSelect().subscribe(
-                  response => {
-                    this.estadosVia = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._CondicionViaService.getCondicionViaSelect().subscribe(
-                  response => {
-                    this.condicionesVia = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._IluminacionService.getIluminacionSelect().subscribe(
-                  response => {
-                    this.iluminaciones = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._EstadoIluminacionService.getEstadoIluminacionSelect().subscribe(
-                  response => {
-                    this.estadosIluminacion = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._VisualService.getVisualSelect().subscribe(
-                  response => {
-                    this.visuales = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._VisualDisminuidaService.getVisualDisminuidaSelect().subscribe(
-                  response => {
-                    this.visualesDisminuidas = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ControlViaService.getControlViaSemaforoSelect().subscribe(
-                  response => {
-                    this.estadosSemaforo = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ControlViaService.getControlViaDelineadorPisoSelect().subscribe(
-                  response => {
-                    this.delineadoresPiso = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ResultadoExamenService.getResultadoExamenSelect().subscribe(
-                  response => {
-                    this.resultadosExamen = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._GradoExamenService.getGradoExamenSelect().subscribe(
-                  response => {
-                    this.gradosExamen = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._LugarImpactoService.getLugarImpactoSelect().subscribe(
-                  response => {
-                    this.lugaresImpacto = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._HospitalService.getHospitalSelect().subscribe(
-                  response => {
-                    this.hospitales = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._EmpresaService.select().subscribe(
-                  response => {
-                    this.empresas = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ClaseService.select().subscribe(
-                  response => {
-                    this.clases = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ServicioService.select().subscribe(
-                  response => {
-                    this.servicios = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._HipotesisService.getHipotesisSelect().subscribe(
-                  response => {
-                    this.hipotesis = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._TipoVictimaService.getTipoVictimaSelect().subscribe(
-                  response => {
-                    this.tiposVictima = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this._GravedadVictimaService.getGravedadVictimaSelect().subscribe(
-                  response => {
-                    this.gravedadesVictima = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._TipoIdentificacionService.select().subscribe(
-                  response => {
-                    this.tiposIdentificacion = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this._NacionalidadService.getNacionalidadSelect().subscribe(
-                  response => {
-                    this.nacionalidades = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this._GeneroService.select().subscribe(
-                  response => {
-                    this.generos = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._MunicipioService.select().subscribe(
-                  response => {
-                    this.municipios = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._EntidadService.getEntidadAccidenteSelect().subscribe(
-                  response => {
-                    this.entidades = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._UnidadReceptoraService.getUnidadReceptoraSelect().subscribe(
-                  response => {
-                    this.unidades = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._MarcaService.getMarcaSelect().subscribe(
-                  response => {
-                    this.marcas = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._LineaService.select().subscribe(
-                  response => {
-                    this.lineas = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ColorService.select().subscribe(
-                  response => {
-                    this.colores = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._CarroceriaService.select().subscribe(
-                  response => {
-                    this.carrocerias = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._CarroceriaService.select().subscribe(
-                  response => {
-                    this.carrocerias = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ClaseService.select().subscribe(
-                  response => {
-                    this.clases = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ServicioService.select().subscribe(
-                  response => {
-                    this.servicios = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._ModalidadTransporteService.select().subscribe(
-                  response => {
-                    this.modalidadesTransporte = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-                this._RadioAccionService.select().subscribe(
-                  response => {
-                    this.radiosAccion = response;
-                  },
-                  error => {
-                    this.errorMessage = <any>error;
-
-                    if (this.errorMessage != null) {
-                      console.log(this.errorMessage);
-                      alert("Error en la petición");
-                    }
-                  }
-                );
-
-                this.fechaActual = new Date().getFullYear();
-                for (let i = 1990; i <= (this.fechaActual); i++) {
-                  let obj = {
-                    value: i,
-                    label: i
-                  };
-                  this.anios.push(obj);
-                }
+                this.ngOnInit();
+                swal.close();
               } else {
                 swal({
                   title: 'Alerta!',
@@ -1037,9 +1049,8 @@ export class NewComponent implements OnInit {
               }
             }
           );
-          /* ==================== */
-
-        } else {
+        }
+        else {
           swal({
             title: 'Alerta!',
             text: responseFuncionario.message,
@@ -1099,55 +1110,55 @@ export class NewComponent implements OnInit {
 
     if (this.conductores.length == 0) {
       let dataConductores = {
-        'identificacion': this.msvRegistroIpat.identificacionConductor,
-        'tipo identificacion': this.msvRegistroIpat.tipoIdentificacionConductor,
-        'nombres': this.msvRegistroIpat.nombresConductor,
-        'apellidos': this.msvRegistroIpat.apellidosConductor,
-        'nacionalidad': this.nacionalidadConductorSelected,
-        'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoConductor,
-        'sexo': this.sexoConductorSelected,
-        'gravedad': this.gravedadConductorSelected,
-        'direccion': this.msvRegistroIpat.direccionResidenciaConductor,
-        'ciudad residencia': this.ciudadResidenciaConductorSelected,
-        'teléfono': this.msvRegistroIpat.telefonoConductor,
+        'identificacion: ': this.msvRegistroIpat.identificacionConductor,
+        'tipo identificacion: ': this.msvRegistroIpat.tipoIdentificacionConductor,
+        'nombres: ': this.msvRegistroIpat.nombresConductor,
+        'apellidos: ': this.msvRegistroIpat.apellidosConductor,
+        'nacionalidad: ': this.nacionalidadConductorSelected,
+        'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoConductor,
+        'sexo: ': this.sexoConductorSelected,
+        'gravedad: ': this.gravedadConductorSelected,
+        'direccion: ': this.msvRegistroIpat.direccionResidenciaConductor,
+        'ciudad residencia: ': this.ciudadResidenciaConductorSelected,
+        'teléfono: ': this.msvRegistroIpat.telefonoConductor,
       };
       this.conductores.push(dataConductores);
     }
 
     if (this.vehiculos.length == 0) {
       let dataVehiculos = {
-        'placa': this.msvRegistroIpat.placa,
-        'nacionalidad': this.nacionalidadVehiculoSelected,
-        'marca': this.marcaSelected,
-        'linea': this.lineaSelected,
-        'color': this.colorSelected,
-        'modelo': this.msvRegistroIpat.modelo,
-        'carroceria': this.carroceriaSelected,
-        'clase vehiculo': this.claseSelected,
-        'servicio': this.servicioSelected,
-        'modalidad transporte': this.modalidadTransporteSelected,
-        'capacidad carga(ton)': this.msvRegistroIpat.ton,
-        'pasajeros': this.msvRegistroIpat.pasajeros,
-        'matriculado en': this.matriculadoEnSelected,
+        'placa: ': this.msvRegistroIpat.placa,
+        'nacionalidad: ': this.nacionalidadVehiculoSelected,
+        'marca: ': this.marcaSelected,
+        'linea: ': this.lineaSelected,
+        'color: ': this.colorSelected,
+        'modelo: ': this.msvRegistroIpat.modelo,
+        'carroceria: ': this.carroceriaSelected,
+        'clase vehiculo: ': this.claseSelected,
+        'servicio: ': this.servicioSelected,
+        'modalidad transporte: ': this.modalidadTransporteSelected,
+        'capacidad carga(ton): ': this.msvRegistroIpat.ton,
+        'pasajeros: ': this.msvRegistroIpat.pasajeros,
+        'matriculado en: ': this.matriculadoEnSelected,
       };
       this.vehiculos.push(dataVehiculos);
     }
 
     if (this.victimas.length == 0) {
       let dataVictimas = {
-        'tipo victima': this.tipoVictimaSelected,
-        'gravedad victima': this.gravedadVictimaSelected,
-        'tipo documento': this.tipoIdentificacionVictimaSelected,
-        'identificacion': this.msvRegistroIpat.identificacionVictima,
-        'nombres': this.msvRegistroIpat.nombresVictima,
-        'apellidos': this.msvRegistroIpat.apellidosVictima,
-        'nacionalidad': this.nacionalidadVictimaSelected,
-        'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoVictima,
-        'sexo': this.sexoVictimaSelected,
-        'dirección residencia': this.msvRegistroIpat.direccionResidenciaVictima,
-        'ciudad residencia': this.ciudadResidenciaVictimaSelected,
-        'telefono': this.msvRegistroIpat.telefonoVictima,
-        'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
+        'tipo victima: ': this.tipoVictimaSelected,
+        'gravedad victima: ': this.gravedadVictimaSelected,
+        'tipo documento: ': this.tipoIdentificacionVictimaSelected,
+        'identificacion: ': this.msvRegistroIpat.identificacionVictima,
+        'nombres: ': this.msvRegistroIpat.nombresVictima,
+        'apellidos: ': this.msvRegistroIpat.apellidosVictima,
+        'nacionalidad: ': this.nacionalidadVictimaSelected,
+        'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoVictima,
+        'sexo: ': this.sexoVictimaSelected,
+        'dirección residencia: ': this.msvRegistroIpat.direccionResidenciaVictima,
+        'ciudad residencia: ': this.ciudadResidenciaVictimaSelected,
+        'telefono: ': this.msvRegistroIpat.telefonoVictima,
+        'placa de vehiculo al que pertenece: ': this.msvRegistroIpat.placaVehiculoVictima,
       };
       this.victimas.push(dataVictimas);
     }
@@ -1219,11 +1230,11 @@ export class NewComponent implements OnInit {
         'sedeOperativa': this.consecutivo
       }
     );
-
+ 
     this.ipatEncontrado = 1;
     this.ipats = true;
   }
-
+ 
   btnCancelarVehiculo() {
     this.ipatEncontrado = 1;
   } */
@@ -1786,7 +1797,7 @@ export class NewComponent implements OnInit {
   }
   obtenerCorrespondio(e) {
     let token = this._LoginService.getToken();
-    if(e){
+    if (e) {
       this._MsvRegistroIpatService.getCorrespondio(this.msvRegistroIpat, token).subscribe(
         response => {
           if (response.status == 'success') {
@@ -1903,18 +1914,18 @@ export class NewComponent implements OnInit {
                 this.msvRegistroIpat.direccionResidenciaConductor = '';
                 this.msvRegistroIpat.telefonoConductor = '';
                 this.msvRegistroIpat.sustanciasPsicoactivasConductor = '',
-                this.msvRegistroIpat.portaLicencia = '',
-                this.msvRegistroIpat.numeroLicenciaConduccion = 0,
-                this.msvRegistroIpat.restriccionConductor = '',
-                this.msvRegistroIpat.categoriaLicenciaConduccion = '',
-                this.msvRegistroIpat.fechaExpedicionLicenciaConduccion = '',
-                this.msvRegistroIpat.fechaVencimientoLicenciaConduccion = '',
-                this.msvRegistroIpat.organismoTransito = '',
-                this.msvRegistroIpat.cinturonConductor = '',
-                this.msvRegistroIpat.cascoConductor = '',
-                this.msvRegistroIpat.chalecoConductor = '',
-                this.msvRegistroIpat.idHospitalConductor = 0,
-                this.msvRegistroIpat.descripcionLesionConductor = '',
+                  this.msvRegistroIpat.portaLicencia = '',
+                  this.msvRegistroIpat.numeroLicenciaConduccion = 0,
+                  this.msvRegistroIpat.restriccionConductor = '',
+                  this.msvRegistroIpat.categoriaLicenciaConduccion = '',
+                  this.msvRegistroIpat.fechaExpedicionLicenciaConduccion = '',
+                  this.msvRegistroIpat.fechaVencimientoLicenciaConduccion = '',
+                  this.msvRegistroIpat.organismoTransito = '',
+                  this.msvRegistroIpat.cinturonConductor = '',
+                  this.msvRegistroIpat.cascoConductor = '',
+                  this.msvRegistroIpat.chalecoConductor = '',
+                  this.msvRegistroIpat.idHospitalConductor = 0,
+                  this.msvRegistroIpat.descripcionLesionConductor = '',
 
                   this.contConductores += 1;
                 this.msvRegistroIpat.totalConductores = this.contConductores;
@@ -2012,34 +2023,34 @@ export class NewComponent implements OnInit {
 
   registrarCiudadanoEncontrado() {
     let dataConductores = {
-      'identificacion': this.msvRegistroIpat.identificacionConductor,
-      'tipo identificacion': this.tipoIdentificacionConductorSelected,
-      'nombres': this.msvRegistroIpat.nombresConductor,
-      'apellidos': this.msvRegistroIpat.apellidosConductor,
-      'nacionalidad': this.nacionalidadConductorSelected,
-      'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoConductor,
-      'sexo': this.sexoConductorSelected,
-      'gravedad': this.gravedadConductorSelected,
-      'direccion': this.msvRegistroIpat.direccionResidenciaConductor,
-      'ciudad residencia': this.ciudadResidenciaConductorSelected,
-      'teléfono': this.msvRegistroIpat.telefonoConductor,
-      'se practico el examen': this.msvRegistroIpat.practicoExamenConductor,
-      'autorizó': this.msvRegistroIpat.autorizoConductor,
-      'resultado examen': this.msvRegistroIpat.idResultadoExamenConductor,
-      'grado examen': this.msvRegistroIpat.idGradoExamenConductor,
-      'sust. psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasConductor,
-      'porta licencia conduccion': this.msvRegistroIpat.portaLicencia,
-      'No. Licencia conduccion': this.msvRegistroIpat.numeroLicenciaConduccion,
-      'categoria lic. conduccion': this.msvRegistroIpat.categoriaLicenciaConduccion,
-      'restriccion': this.msvRegistroIpat.restriccionConductor,
-      'fecha expedicion': this.msvRegistroIpat.fechaExpedicionLicenciaConduccion,
-      'fecha vencimiento': this.msvRegistroIpat.fechaVencimientoLicenciaConduccion,
-      'org. transito': this.msvRegistroIpat.organismoTransito,
-      'cinturon': this.msvRegistroIpat.cinturonConductor,
-      'casco': this.msvRegistroIpat.cascoConductor,
-      'chaleco': this.msvRegistroIpat.chalecoConductor,
-      'hospital atencion': this.msvRegistroIpat.idHospitalConductor,
-      'descripcio lesiones': this.msvRegistroIpat.descripcionLesionConductor,
+      'identificacion: ': this.msvRegistroIpat.identificacionConductor,
+      'tipo identificacion: ': this.tipoIdentificacionConductorSelected,
+      'nombres: ': this.msvRegistroIpat.nombresConductor,
+      'apellidos: ': this.msvRegistroIpat.apellidosConductor,
+      'nacionalidad: ': this.nacionalidadConductorSelected,
+      'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoConductor,
+      'sexo: ': this.sexoConductorSelected,
+      'gravedad: ': this.gravedadConductorSelected,
+      'direccion: ': this.msvRegistroIpat.direccionResidenciaConductor,
+      'ciudad residencia: ': this.ciudadResidenciaConductorSelected,
+      'teléfono: ': this.msvRegistroIpat.telefonoConductor,
+      'se practico el examen: ': this.msvRegistroIpat.practicoExamenConductor,
+      'autorizó: ': this.msvRegistroIpat.autorizoConductor,
+      'resultado examen: ': this.msvRegistroIpat.idResultadoExamenConductor,
+      'grado examen: ': this.msvRegistroIpat.idGradoExamenConductor,
+      'sust. psicoactivas: ': this.msvRegistroIpat.sustanciasPsicoactivasConductor,
+      'porta licencia conduccion: ': this.msvRegistroIpat.portaLicencia,
+      'No. Licencia conduccion: ': this.msvRegistroIpat.numeroLicenciaConduccion,
+      'categoria lic. conduccion: ': this.msvRegistroIpat.categoriaLicenciaConduccion,
+      'restriccion: ': this.msvRegistroIpat.restriccionConductor,
+      'fecha expedicion: ': this.msvRegistroIpat.fechaExpedicionLicenciaConduccion,
+      'fecha vencimiento: ': this.msvRegistroIpat.fechaVencimientoLicenciaConduccion,
+      'org. transito: ': this.msvRegistroIpat.organismoTransito,
+      'cinturon: ': this.msvRegistroIpat.cinturonConductor,
+      'casco: ': this.msvRegistroIpat.cascoConductor,
+      'chaleco: ': this.msvRegistroIpat.chalecoConductor,
+      'hospital atencion: ': this.msvRegistroIpat.idHospitalConductor,
+      'descripcio lesiones: ': this.msvRegistroIpat.descripcionLesionConductor,
     };
     this.conductores.push(dataConductores);
 
@@ -2116,47 +2127,47 @@ export class NewComponent implements OnInit {
                 });
 
                 let dataVehiculos = {
-                  'placa': this.msvRegistroIpat.placa,
-                  'nacionalidad': this.nacionalidadVehiculoSelected,
-                  'marca': this.marcaSelected,
-                  'linea': this.lineaSelected,
-                  'color': this.colorSelected,
-                  'modelo': this.msvRegistroIpat.modelo,
-                  'carroceria': this.carroceriaSelected,
-                  'clase vehiculo': this.claseSelected,
-                  'servicio': this.servicioSelected,
-                  'modalidad transporte': this.modalidadTransporteSelected,
-                  'capacidad carga(ton)': this.msvRegistroIpat.ton,
-                  'pasajeros': this.msvRegistroIpat.pasajeros,
-                  'matriculado en': this.matriculadoEnSelected,
-                  'nombre empresa vehiculo afiliado': this.msvRegistroIpat.empresa,
-                  'nit empresa': this.msvRegistroIpat.nitEmpresa,
-                  'inmovilizado': this.msvRegistroIpat.inmovilizado,
-                  'inmovilizado en': this.msvRegistroIpat.inmovilizadoEn,
-                  'a disposición de': this.msvRegistroIpat.aDisposicionDe,
-                  'tarjeta de registro': this.msvRegistroIpat.portaTarjetaRegistro,
-                  'Nro. tarjeta registro': this.msvRegistroIpat.tarjetaRegistro,
-                  'organismo transito': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
-                  'revision tecnomecanica': this.msvRegistroIpat.revisionTecnomecanica,
-                  'nro. tecnomecanica': this.msvRegistroIpat.numeroTecnoMecanica,
-                  'cantidad acompañantes': this.msvRegistroIpat.cantidadAcompaniantes,
-                  'porta soat': this.msvRegistroIpat.portaSoat,
-                  'soat': this.msvRegistroIpat.soat,
-                  'numero poliza': this.msvRegistroIpat.numeroPoliza,
-                  'aseguradora soat': this.msvRegistroIpat.aseguradoraSoat,
-                  'fecha vencimiento soat': this.msvRegistroIpat.fechaVencimientoSoat,
-                  'seguro responsabilidad civil': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
-                  'numero seguro resp. civil': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
-                  'aseguradora Seguro Responsabilidad Civil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
-                  'idAseguradoraSeguroResponsabilidadCivil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
-                  'portaSeguroExtracontractual': this.msvRegistroIpat.portaSeguroExtracontractual,
-                  'numeroSeguroExtracontractual': this.msvRegistroIpat.numeroSeguroExtracontractual,
-                  'idAseguradoraSeguroExtracontractual': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
-                  'fechaVencimientoSeguroExtracontractual': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
-                  'descripcionDanios': this.msvRegistroIpat.descripcionDanios,
-                  'arrayFallas': this.msvRegistroIpat.arrayFallas,
-                  'otraFalla': this.msvRegistroIpat.otraFalla,
-                  'arrayLugaresImpacto': this.msvRegistroIpat.arrayLugaresImpacto,
+                  'placa: ': this.msvRegistroIpat.placa,
+                  'nacionalidad: ': this.nacionalidadVehiculoSelected,
+                  'marca: ': this.marcaSelected,
+                  'linea: ': this.lineaSelected,
+                  'color: ': this.colorSelected,
+                  'modelo: ': this.msvRegistroIpat.modelo,
+                  'carroceria: ': this.carroceriaSelected,
+                  'clase vehiculo: ': this.claseSelected,
+                  'servicio: ': this.servicioSelected,
+                  'modalidad transporte: ': this.modalidadTransporteSelected,
+                  'capacidad carga(ton): ': this.msvRegistroIpat.ton,
+                  'pasajeros: ': this.msvRegistroIpat.pasajeros,
+                  'matriculado en: ': this.matriculadoEnSelected,
+                  'nombre empresa vehiculo afiliado: ': this.msvRegistroIpat.empresa,
+                  'nit empresa: ': this.msvRegistroIpat.nitEmpresa,
+                  'inmovilizado: ': this.msvRegistroIpat.inmovilizado,
+                  'inmovilizado en: ': this.msvRegistroIpat.inmovilizadoEn,
+                  'a disposición de: ': this.msvRegistroIpat.aDisposicionDe,
+                  'tarjeta de registro: ': this.msvRegistroIpat.portaTarjetaRegistro,
+                  'Nro. tarjeta registro: ': this.msvRegistroIpat.tarjetaRegistro,
+                  'organismo transito: ': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
+                  'revision tecnomecanica: ': this.msvRegistroIpat.revisionTecnomecanica,
+                  'nro. tecnomecanica: ': this.msvRegistroIpat.numeroTecnoMecanica,
+                  'cantidad acompañantes: ': this.msvRegistroIpat.cantidadAcompaniantes,
+                  'porta soat: ': this.msvRegistroIpat.portaSoat,
+                  'soat: ': this.msvRegistroIpat.soat,
+                  'numero poliza: ': this.msvRegistroIpat.numeroPoliza,
+                  'aseguradora soat: ': this.msvRegistroIpat.aseguradoraSoat,
+                  'fecha vencimiento soat: ': this.msvRegistroIpat.fechaVencimientoSoat,
+                  'seguro responsabilidad civil: ': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
+                  'numero seguro resp. civil: ': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
+                  'aseguradora Seguro Responsabilidad Civil: ': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+                  'idAseguradoraSeguroResponsabilidadCivil: ': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+                  'portaSeguroExtracontractual: ': this.msvRegistroIpat.portaSeguroExtracontractual,
+                  'numeroSeguroExtracontractual: ': this.msvRegistroIpat.numeroSeguroExtracontractual,
+                  'idAseguradoraSeguroExtracontractual: ': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
+                  'fechaVencimientoSeguroExtracontractual: ': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
+                  'descripcionDanios: ': this.msvRegistroIpat.descripcionDanios,
+                  'arrayFallas: ': this.msvRegistroIpat.arrayFallas,
+                  'otraFalla: ': this.msvRegistroIpat.otraFalla,
+                  'arrayLugaresImpacto: ': this.msvRegistroIpat.arrayLugaresImpacto,
                 };
                 this.vehiculos.push(dataVehiculos);
 
@@ -2221,47 +2232,47 @@ export class NewComponent implements OnInit {
                   confirmButtonText: 'Aceptar'
                 });
                 let dataVehiculos = {
-                  'placa': this.msvRegistroIpat.placa,
-                  'nacionalidad': this.nacionalidadVehiculoSelected,
-                  'marca': this.marcaSelected,
-                  'linea': this.lineaSelected,
-                  'color': this.colorSelected,
-                  'modelo': this.msvRegistroIpat.modelo,
-                  'carroceria': this.carroceriaSelected,
-                  'clase vehiculo': this.claseSelected,
-                  'servicio': this.servicioSelected,
-                  'modalidad transporte': this.modalidadTransporteSelected,
-                  'capacidad carga(ton)': this.msvRegistroIpat.ton,
-                  'pasajeros': this.msvRegistroIpat.pasajeros,
-                  'matriculado en': this.matriculadoEnSelected,
-                  'nombre empresa vehiculo afiliado': this.msvRegistroIpat.empresa,
-                  'nit empresa': this.msvRegistroIpat.nitEmpresa,
-                  'inmovilizado': this.msvRegistroIpat.inmovilizado,
-                  'inmovilizado en': this.msvRegistroIpat.inmovilizadoEn,
-                  'a disposición de': this.msvRegistroIpat.aDisposicionDe,
-                  'tarjeta de registro': this.msvRegistroIpat.portaTarjetaRegistro,
-                  'Nro. tarjeta registro': this.msvRegistroIpat.tarjetaRegistro,
-                  'organismo transito': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
-                  'revision tecnomecanica': this.msvRegistroIpat.revisionTecnomecanica,
-                  'nro. tecnomecanica': this.msvRegistroIpat.numeroTecnoMecanica,
-                  'cantidad acompañantes': this.msvRegistroIpat.cantidadAcompaniantes,
-                  'porta soat': this.msvRegistroIpat.portaSoat,
-                  'soat': this.msvRegistroIpat.soat,
-                  'numero poliza': this.msvRegistroIpat.numeroPoliza,
-                  'aseguradora soat': this.msvRegistroIpat.aseguradoraSoat,
-                  'fecha vencimiento soat': this.msvRegistroIpat.fechaVencimientoSoat,
-                  'seguro responsabilidad civil': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
-                  'numero seguro resp. civil': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
-                  'aseguradora Seguro Responsabilidad Civil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
-                  'idAseguradoraSeguroResponsabilidadCivil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
-                  'portaSeguroExtracontractual': this.msvRegistroIpat.portaSeguroExtracontractual,
-                  'numeroSeguroExtracontractual': this.msvRegistroIpat.numeroSeguroExtracontractual,
-                  'idAseguradoraSeguroExtracontractual': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
-                  'fechaVencimientoSeguroExtracontractual': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
-                  'descripcionDanios': this.msvRegistroIpat.descripcionDanios,
-                  'arrayFallas': this.msvRegistroIpat.arrayFallas,
-                  'otraFalla': this.msvRegistroIpat.otraFalla,
-                  'arrayLugaresImpacto': this.msvRegistroIpat.arrayLugaresImpacto,
+                  'placa: ': this.msvRegistroIpat.placa,
+                  'nacionalidad: ': this.nacionalidadVehiculoSelected,
+                  'marca: ': this.marcaSelected,
+                  'linea: ': this.lineaSelected,
+                  'color: ': this.colorSelected,
+                  'modelo: ': this.msvRegistroIpat.modelo,
+                  'carroceria: ': this.carroceriaSelected,
+                  'clase vehiculo: ': this.claseSelected,
+                  'servicio: ': this.servicioSelected,
+                  'modalidad transporte: ': this.modalidadTransporteSelected,
+                  'capacidad carga(ton): ': this.msvRegistroIpat.ton,
+                  'pasajeros: ': this.msvRegistroIpat.pasajeros,
+                  'matriculado en: ': this.matriculadoEnSelected,
+                  'nombre empresa vehiculo afiliado: ': this.msvRegistroIpat.empresa,
+                  'nit empresa: ': this.msvRegistroIpat.nitEmpresa,
+                  'inmovilizado: ': this.msvRegistroIpat.inmovilizado,
+                  'inmovilizado en: ': this.msvRegistroIpat.inmovilizadoEn,
+                  'a disposición de: ': this.msvRegistroIpat.aDisposicionDe,
+                  'tarjeta de registro: ': this.msvRegistroIpat.portaTarjetaRegistro,
+                  'Nro. tarjeta registro: ': this.msvRegistroIpat.tarjetaRegistro,
+                  'organismo transito: ': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
+                  'revision tecnomecanica: ': this.msvRegistroIpat.revisionTecnomecanica,
+                  'nro. tecnomecanica: ': this.msvRegistroIpat.numeroTecnoMecanica,
+                  'cantidad acompañantes: ': this.msvRegistroIpat.cantidadAcompaniantes,
+                  'porta soat: ': this.msvRegistroIpat.portaSoat,
+                  'soat: ': this.msvRegistroIpat.soat,
+                  'numero poliza: ': this.msvRegistroIpat.numeroPoliza,
+                  'aseguradora soat: ': this.msvRegistroIpat.aseguradoraSoat,
+                  'fecha vencimiento soat: ': this.msvRegistroIpat.fechaVencimientoSoat,
+                  'seguro responsabilidad civil: ': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
+                  'numero seguro resp. civil: ': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
+                  'aseguradora Seguro Responsabilidad Civil: ': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+                  'idAseguradoraSeguroResponsabilidadCivil: ': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+                  'portaSeguroExtracontractual: ': this.msvRegistroIpat.portaSeguroExtracontractual,
+                  'numeroSeguroExtracontractual: ': this.msvRegistroIpat.numeroSeguroExtracontractual,
+                  'idAseguradoraSeguroExtracontractual: ': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
+                  'fechaVencimientoSeguroExtracontractual: ': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
+                  'descripcionDanios: ': this.msvRegistroIpat.descripcionDanios,
+                  'arrayFallas: ': this.msvRegistroIpat.arrayFallas,
+                  'otraFalla: ': this.msvRegistroIpat.otraFalla,
+                  'arrayLugaresImpacto: ': this.msvRegistroIpat.arrayLugaresImpacto,
                 };
                 this.vehiculos.push(dataVehiculos);
                 this.vehiculoIpat = true;
@@ -2288,47 +2299,47 @@ export class NewComponent implements OnInit {
 
   registrarVehiculoEncontrado() {
     let dataVehiculos = {
-      'placa': this.msvRegistroIpat.placa,
-      'nacionalidad': this.nacionalidadVehiculoSelected,
-      'marca': this.marcaSelected,
-      'linea': this.lineaSelected,
-      'color': this.colorSelected,
-      'modelo': this.msvRegistroIpat.modelo,
-      'carroceria': this.carroceriaSelected,
-      'clase vehiculo': this.claseSelected,
-      'servicio': this.servicioSelected,
-      'modalidad transporte': this.modalidadTransporteSelected,
-      'capacidad carga(ton)': this.msvRegistroIpat.ton,
-      'pasajeros': this.msvRegistroIpat.pasajeros,
-      'matriculado en': this.matriculadoEnSelected,
-      'nombre empresa vehiculo afiliado': this.msvRegistroIpat.empresa,
-      'nit empresa': this.msvRegistroIpat.nitEmpresa,
-      'inmovilizado': this.msvRegistroIpat.inmovilizado,
-      'inmovilizado en': this.msvRegistroIpat.inmovilizadoEn,
-      'a disposición de': this.msvRegistroIpat.aDisposicionDe,
-      'tarjeta de registro': this.msvRegistroIpat.portaTarjetaRegistro,
-      'Nro. tarjeta registro': this.msvRegistroIpat.tarjetaRegistro,
-      'organismo transito': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
-      'revision tecnomecanica': this.msvRegistroIpat.revisionTecnomecanica,
-      'nro. tecnomecanica': this.msvRegistroIpat.numeroTecnoMecanica,
-      'cantidad acompañantes': this.msvRegistroIpat.cantidadAcompaniantes,
-      'porta soat': this.msvRegistroIpat.portaSoat,
-      'soat': this.msvRegistroIpat.soat,
-      'numero poliza': this.msvRegistroIpat.numeroPoliza,
-      'aseguradora soat': this.msvRegistroIpat.aseguradoraSoat,
-      'fecha vencimiento soat': this.msvRegistroIpat.fechaVencimientoSoat,
-      'seguro responsabilidad civil': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
-      'numero seguro resp. civil': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
-      'aseguradora Seguro Responsabilidad Civil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
-      'idAseguradoraSeguroResponsabilidadCivil': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
-      'portaSeguroExtracontractual': this.msvRegistroIpat.portaSeguroExtracontractual,
-      'numeroSeguroExtracontractual': this.msvRegistroIpat.numeroSeguroExtracontractual,
-      'idAseguradoraSeguroExtracontractual': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
-      'fechaVencimientoSeguroExtracontractual': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
-      'descripcionDanios': this.msvRegistroIpat.descripcionDanios,
-      'arrayFallas': this.msvRegistroIpat.arrayFallas,
-      'otraFalla': this.msvRegistroIpat.otraFalla,
-      'arrayLugaresImpacto': this.msvRegistroIpat.arrayLugaresImpacto,
+      'placa: ': this.msvRegistroIpat.placa,
+      'nacionalidad: ': this.nacionalidadVehiculoSelected,
+      'marca: ': this.marcaSelected,
+      'linea: ': this.lineaSelected,
+      'color: ': this.colorSelected,
+      'modelo: ': this.msvRegistroIpat.modelo,
+      'carroceria: ': this.carroceriaSelected,
+      'clase vehiculo: ': this.claseSelected,
+      'servicio: ': this.servicioSelected,
+      'modalidad transporte: ': this.modalidadTransporteSelected,
+      'capacidad carga(ton): ': this.msvRegistroIpat.ton,
+      'pasajeros: ': this.msvRegistroIpat.pasajeros,
+      'matriculado en: ': this.matriculadoEnSelected,
+      'nombre empresa vehiculo afiliado: ': this.msvRegistroIpat.empresa,
+      'nit empresa: ': this.msvRegistroIpat.nitEmpresa,
+      'inmovilizado: ': this.msvRegistroIpat.inmovilizado,
+      'inmovilizado en: ': this.msvRegistroIpat.inmovilizadoEn,
+      'a disposición de: ': this.msvRegistroIpat.aDisposicionDe,
+      'tarjeta de registro: ': this.msvRegistroIpat.portaTarjetaRegistro,
+      'Nro. tarjeta registro: ': this.msvRegistroIpat.tarjetaRegistro,
+      'organismo transito: ': this.msvRegistroIpat.organismoTransitoTarjetaRegistro,
+      'revision tecnomecanica: ': this.msvRegistroIpat.revisionTecnomecanica,
+      'nro. tecnomecanica: ': this.msvRegistroIpat.numeroTecnoMecanica,
+      'cantidad acompañantes: ': this.msvRegistroIpat.cantidadAcompaniantes,
+      'porta soat: ': this.msvRegistroIpat.portaSoat,
+      'soat: ': this.msvRegistroIpat.soat,
+      'numero poliza: ': this.msvRegistroIpat.numeroPoliza,
+      'aseguradora soat: ': this.msvRegistroIpat.aseguradoraSoat,
+      'fecha vencimiento soat: ': this.msvRegistroIpat.fechaVencimientoSoat,
+      'seguro responsabilidad civil: ': this.msvRegistroIpat.portaSeguroResponsabilidadCivil,
+      'numero seguro resp. civil: ': this.msvRegistroIpat.numeroSeguroResponsabilidadCivil,
+      'aseguradora Seguro Responsabilidad Civil: ': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+      'idAseguradoraSeguroResponsabilidadCivil: ': this.msvRegistroIpat.idAseguradoraSeguroResponsabilidadCivil,
+      'portaSeguroExtracontractual: ': this.msvRegistroIpat.portaSeguroExtracontractual,
+      'numeroSeguroExtracontractual: ': this.msvRegistroIpat.numeroSeguroExtracontractual,
+      'idAseguradoraSeguroExtracontractual: ': this.msvRegistroIpat.idAseguradoraSeguroExtracontractual,
+      'fechaVencimientoSeguroExtracontractual: ': this.msvRegistroIpat.fechaVencimientoSeguroExtracontractual,
+      'descripcionDanios: ': this.msvRegistroIpat.descripcionDanios,
+      'arrayFallas: ': this.msvRegistroIpat.arrayFallas,
+      'otraFalla: ': this.msvRegistroIpat.otraFalla,
+      'arrayLugaresImpacto: ': this.msvRegistroIpat.arrayLugaresImpacto,
     };
     this.vehiculos.push(dataVehiculos);
     console.log(this.vehiculos);
@@ -2386,29 +2397,29 @@ export class NewComponent implements OnInit {
                 });
 
                 let dataVictimas = {
-                  'tipo victima': this.tipoVictimaSelected,
-                  'gravedad victima': this.gravedadVictimaSelected,
-                  'tipo documento': this.tipoIdentificacionVictimaSelected,
-                  'identificacion': this.msvRegistroIpat.identificacionVictima,
-                  'nombres': this.msvRegistroIpat.nombresVictima,
-                  'apellidos': this.msvRegistroIpat.apellidosVictima,
-                  'nacionalidad': this.nacionalidadVictimaSelected,
-                  'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoVictima,
-                  'sexo': this.sexoVictimaSelected,
-                  'dirección residencia': this.msvRegistroIpat.direccionResidenciaVictima,
-                  'ciudad residencia': this.ciudadResidenciaVictimaSelected,
-                  'telefono': this.msvRegistroIpat.telefonoVictima,
-                  'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
-                  'hospital atencion': this.msvRegistroIpat.telefonoVictima,
-                  'se practico el examen': this.msvRegistroIpat.practicoExamenVictima,
-                  'autorizó': this.msvRegistroIpat.autorizoVictima,
-                  'resultado examen': this.msvRegistroIpat.idResultadoExamenVictima,
-                  'grado examen': this.msvRegistroIpat.idGradoExamenVictima,
-                  'sustancias psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
-                  'cinturon': this.msvRegistroIpat.cinturonVictima,
-                  'casco': this.msvRegistroIpat.cascoVictima,
-                  'chaleco': this.msvRegistroIpat.chalecoVictima,
-                  'descripcion lesiones': this.msvRegistroIpat.descripcionLesionVictima,
+                  'tipo victima: ': this.tipoVictimaSelected,
+                  'gravedad victima: ': this.gravedadVictimaSelected,
+                  'tipo documento: ': this.tipoIdentificacionVictimaSelected,
+                  'identificacion: ': this.msvRegistroIpat.identificacionVictima,
+                  'nombres: ': this.msvRegistroIpat.nombresVictima,
+                  'apellidos: ': this.msvRegistroIpat.apellidosVictima,
+                  'nacionalidad: ': this.nacionalidadVictimaSelected,
+                  'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoVictima,
+                  'sexo: ': this.sexoVictimaSelected,
+                  'dirección residencia: ': this.msvRegistroIpat.direccionResidenciaVictima,
+                  'ciudad residencia: ': this.ciudadResidenciaVictimaSelected,
+                  'telefono: ': this.msvRegistroIpat.telefonoVictima,
+                  'placa de vehiculo al que pertenece: ': this.msvRegistroIpat.placaVehiculoVictima,
+                  'hospital atencion: ': this.msvRegistroIpat.telefonoVictima,
+                  'se practico el examen: ': this.msvRegistroIpat.practicoExamenVictima,
+                  'autorizó: ': this.msvRegistroIpat.autorizoVictima,
+                  'resultado examen: ': this.msvRegistroIpat.idResultadoExamenVictima,
+                  'grado examen: ': this.msvRegistroIpat.idGradoExamenVictima,
+                  'sustancias psicoactivas: ': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
+                  'cinturon: ': this.msvRegistroIpat.cinturonVictima,
+                  'casco: ': this.msvRegistroIpat.cascoVictima,
+                  'chaleco: ': this.msvRegistroIpat.chalecoVictima,
+                  'descripcion lesiones: ': this.msvRegistroIpat.descripcionLesionVictima,
                 };
                 this.victimas.push(dataVictimas);
                 console.log(this.tipoVictimaSelected);
@@ -2481,29 +2492,29 @@ export class NewComponent implements OnInit {
                   });
 
                   let dataVictimas = {
-                    'tipo victima': this.tipoVictimaSelected,
-                    'gravedad victima': this.gravedadVictimaSelected,
-                    'tipo documento': this.tipoIdentificacionVictimaSelected,
-                    'identificacion': this.msvRegistroIpat.identificacionVictima,
-                    'nombres': this.msvRegistroIpat.nombresVictima,
-                    'apellidos': this.msvRegistroIpat.apellidosVictima,
-                    'nacionalidad': this.nacionalidadVictimaSelected,
-                    'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoVictima,
-                    'sexo': this.sexoVictimaSelected,
-                    'dirección residencia': this.msvRegistroIpat.direccionResidenciaVictima,
-                    'ciudad residencia': this.ciudadResidenciaVictimaSelected,
-                    'telefono': this.msvRegistroIpat.telefonoVictima,
-                    'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
-                    'hospital atencion': this.msvRegistroIpat.telefonoVictima,
-                    'se practico el examen': this.msvRegistroIpat.practicoExamenVictima,
-                    'autorizó': this.msvRegistroIpat.autorizoVictima,
-                    'resultado examen': this.msvRegistroIpat.idResultadoExamenVictima,
-                    'grado examen': this.msvRegistroIpat.idGradoExamenVictima,
-                    'sustancias psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
-                    'cinturon': this.msvRegistroIpat.cinturonVictima,
-                    'casco': this.msvRegistroIpat.cascoVictima,
-                    'chaleco': this.msvRegistroIpat.chalecoVictima,
-                    'descripcion lesiones': this.msvRegistroIpat.descripcionLesionVictima,
+                    'tipo victima: ': this.tipoVictimaSelected,
+                    'gravedad victima: ': this.gravedadVictimaSelected,
+                    'tipo documento: ': this.tipoIdentificacionVictimaSelected,
+                    'identificacion: ': this.msvRegistroIpat.identificacionVictima,
+                    'nombres: ': this.msvRegistroIpat.nombresVictima,
+                    'apellidos: ': this.msvRegistroIpat.apellidosVictima,
+                    'nacionalidad: ': this.nacionalidadVictimaSelected,
+                    'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoVictima,
+                    'sexo: ': this.sexoVictimaSelected,
+                    'dirección residencia: ': this.msvRegistroIpat.direccionResidenciaVictima,
+                    'ciudad residencia: ': this.ciudadResidenciaVictimaSelected,
+                    'telefono: ': this.msvRegistroIpat.telefonoVictima,
+                    'placa de vehiculo al que pertenece: ': this.msvRegistroIpat.placaVehiculoVictima,
+                    'hospital atencion: ': this.msvRegistroIpat.telefonoVictima,
+                    'se practico el examen: ': this.msvRegistroIpat.practicoExamenVictima,
+                    'autorizó: ': this.msvRegistroIpat.autorizoVictima,
+                    'resultado examen: ': this.msvRegistroIpat.idResultadoExamenVictima,
+                    'grado examen: ': this.msvRegistroIpat.idGradoExamenVictima,
+                    'sustancias psicoactivas: ': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
+                    'cinturon: ': this.msvRegistroIpat.cinturonVictima,
+                    'casco: ': this.msvRegistroIpat.cascoVictima,
+                    'chaleco: ': this.msvRegistroIpat.chalecoVictima,
+                    'descripcion lesiones: ': this.msvRegistroIpat.descripcionLesionVictima,
                   };
                   this.victimas.push(dataVictimas);
 
@@ -2551,29 +2562,29 @@ export class NewComponent implements OnInit {
 
   registrarVictimaEncontrada() {
     let dataVictimas = {
-      'tipo victima': this.tipoVictimaSelected,
-      'gravedad victima': this.gravedadVictimaSelected,
-      'tipo documento': this.tipoIdentificacionVictimaSelected,
-      'identificacion': this.msvRegistroIpat.identificacionVictima,
-      'nombres': this.msvRegistroIpat.nombresVictima,
-      'apellidos': this.msvRegistroIpat.apellidosVictima,
-      'nacionalidad': this.nacionalidadVictimaSelected,
-      'fecha nacimiento': this.msvRegistroIpat.fechaNacimientoVictima,
-      'sexo': this.sexoVictimaSelected,
-      'dirección residencia': this.msvRegistroIpat.direccionResidenciaVictima,
-      'ciudad residencia': this.ciudadResidenciaVictimaSelected,
-      'telefono': this.msvRegistroIpat.telefonoVictima,
-      'placa de vehiculo al que pertenece': this.msvRegistroIpat.placaVehiculoVictima,
-      'hospital atencion': this.msvRegistroIpat.telefonoVictima,
-      'se practico el examen': this.msvRegistroIpat.practicoExamenVictima,
-      'autorizó': this.msvRegistroIpat.autorizoVictima,
-      'resultado examen': this.msvRegistroIpat.idResultadoExamenVictima,
-      'grado examen': this.msvRegistroIpat.idGradoExamenVictima,
-      'sustancias psicoactivas': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
-      'cinturon': this.msvRegistroIpat.cinturonVictima,
-      'casco': this.msvRegistroIpat.cascoVictima,
-      'chaleco': this.msvRegistroIpat.chalecoVictima,
-      'descripcion lesiones': this.msvRegistroIpat.descripcionLesionVictima,
+      'tipo victima: ': this.tipoVictimaSelected,
+      'gravedad victima: ': this.gravedadVictimaSelected,
+      'tipo documento: ': this.tipoIdentificacionVictimaSelected,
+      'identificacion: ': this.msvRegistroIpat.identificacionVictima,
+      'nombres: ': this.msvRegistroIpat.nombresVictima,
+      'apellidos: ': this.msvRegistroIpat.apellidosVictima,
+      'nacionalidad: ': this.nacionalidadVictimaSelected,
+      'fecha nacimiento: ': this.msvRegistroIpat.fechaNacimientoVictima,
+      'sexo: ': this.sexoVictimaSelected,
+      'dirección residencia: ': this.msvRegistroIpat.direccionResidenciaVictima,
+      'ciudad residencia: ': this.ciudadResidenciaVictimaSelected,
+      'telefono: ': this.msvRegistroIpat.telefonoVictima,
+      'placa de vehiculo al que pertenece: ': this.msvRegistroIpat.placaVehiculoVictima,
+      'hospital atencion: ': this.msvRegistroIpat.telefonoVictima,
+      'se practico el examen: ': this.msvRegistroIpat.practicoExamenVictima,
+      'autorizó: ': this.msvRegistroIpat.autorizoVictima,
+      'resultado examen: ': this.msvRegistroIpat.idResultadoExamenVictima,
+      'grado examen: ': this.msvRegistroIpat.idGradoExamenVictima,
+      'sustancias psicoactivas: ': this.msvRegistroIpat.sustanciasPsicoactivasVictima,
+      'cinturon: ': this.msvRegistroIpat.cinturonVictima,
+      'casco: ': this.msvRegistroIpat.cascoVictima,
+      'chaleco: ': this.msvRegistroIpat.chalecoVictima,
+      'descripcion lesiones: ': this.msvRegistroIpat.descripcionLesionVictima,
     };
     this.victimas.push(dataVictimas);
     console.log(this.tipoVictimaSelected);
