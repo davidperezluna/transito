@@ -1,10 +1,5 @@
 export class MsvRegistroIpat{
 	constructor(
-
-		/*public fechaRadicacion:string,
-		public municipioId:number,
-		public ciudadanoDemandadoId:number,
-		public ciudadanoDemandanteId:number,*/
 		public idOrganismoTransito:number,
 		public numeroResolucion:string,
 
@@ -49,7 +44,7 @@ export class MsvRegistroIpat{
 		public otroDelineadorPiso: string,
 
 
-		//campos vehiculo
+		/* //campos vehiculo
 		public portaPlaca: string,
 		public placa: string,
 		public placaRemolque: string,
@@ -95,7 +90,7 @@ export class MsvRegistroIpat{
 		public portaSeguroExtracontractual: string,
 		public numeroSeguroExtracontractual: number,
 		public idAseguradoraSeguroExtracontractual: string,
-		public fechaVencimientoSeguroExtracontractual: string,
+		public fechaVencimientoSeguroExtracontractual: string, */
 		
 		//propietario
 		public mismoConductor: string,
@@ -104,17 +99,17 @@ export class MsvRegistroIpat{
 		public tipoIdentificacionPropietario: string,
 		public identificacionPropietario: string,
 
-		public clase:number,
+		/* public clase:number,
 		public servicio:number,
 		public modalidadTransporte:number,
 		public radioAccion:number,
 		public descripcionDanios: string,
 		public arrayFallas: string,
 		public otraFalla: string,
-		public arrayLugaresImpacto: string,
+		public arrayLugaresImpacto: string, */
 		
 		//Datos Conductor
-		public nombresConductor: string,
+		/* public nombresConductor: string,
 		public apellidosConductor: string,
 		public tipoIdentificacionConductor: string,
 		public identificacionConductor: string,
@@ -141,10 +136,10 @@ export class MsvRegistroIpat{
 		public cascoConductor: string,
 		public cinturonConductor: string,
 		public idHospitalConductor:number,
-		public descripcionLesionConductor: string,
+		public descripcionLesionConductor: string, */
 
 
-		//datos victima
+		/* //datos victima
 		public victima: string,
 		public nombresVictima: string,
 		public apellidosVictima: string,
@@ -168,7 +163,7 @@ export class MsvRegistroIpat{
 		public cinturonVictima: string,
 		public idTipoVictima:number,
 		public idGravedadVictima:number,
-		public descripcionLesionVictima: string,
+		public descripcionLesionVictima: string, */
 
 		public observaciones:string,
 
