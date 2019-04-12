@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="col-xs-12 col-lg-4">
+    <div class="col-xs-12 col-lg-3">
         <div class="card">
             <div class="card-header">
-                <h5 class="text-uppercase">Buscar historial</h5>
+                <b class="text-uppercase">Buscar historial</b>
                 <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
             </div>
             <div class="card-body">
@@ -12,11 +12,11 @@
                             <!-- .row -->
                             <div class="col-xs-12 col-lg-12">
                                 <label>Fecha inicial</label>
-                                <input type="date"  [(ngModel)]="filtro.fechaInicial" name="fechaInicial" required />
+                                <input type="date" class="form-control" [(ngModel)]="filtro.fechaInicial" name="fechaInicial" required />
                             </div>
                             <div class="col-xs-12 col-lg-12">
                                 <label>Fecha final</label>
-                                <input type="date"  [(ngModel)]="filtro.fechaFinal" name="fechaFinal" required />
+                                <input type="date" class="form-control" [(ngModel)]="filtro.fechaFinal" name="fechaFinal" required />
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-8" *ngIf='tramitesPrecio && tramitesPrecio.length > 0'>
+    <div class="col-xs-12 col-lg-9" *ngIf='tramitesPrecio && tramitesPrecio.length > 0'>
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
@@ -51,20 +51,34 @@
                         <tr>
                             <th>#</th>
                             <th>Tramite</th>
-                            <th>Fec. inicio</th>
-                            <th>Vr. trámite</th>
-                            <th>Vr. conceptos</th>
-                            <th>Vr. total</th>
+                            <th>Fechas</th>
+                            <th>Valores</th>
+                            <th>Activo</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecio; let i = index">
                             <td>{{ i + 1 }}</td>
                             <td>{{ tramitePrecio.tramite.nombre }}</td>
-                            <td>{{ tramitePrecio.fechaInicio }}</td>
-                            <td>{{ tramitePrecio.valor }}</td>
                             <td>
-                                <div *ngIf="tramitePrecio.conceptos">
+                                <b>Inicial</b>
+                                <br>
+                                {{ tramitePrecio.fechaInicial }}
+                                <span *ngIf="tramitePrecio.fechaFinal">
+                                    <br>
+                                    <b>Final</b>
+                                    <br>
+                                    {{ tramitePrecio.fechaFinal }}
+                                </span>
+                            </td>
+                            <td>
+                                <b>Vr. trámite</b>
+                                <br>
+                                {{ tramitePrecio.valor }}
+                                <br>
+                                <b>Vr. conceptos</b>
+                                <br>
+                                <div *ngIf="tramitePrecio.conceptos && tramitePrecio.valorConcepto > 0">
                                     <tooltip-content #tooltipConceptos [animation]="true" placement="top">
                                         <b style="color: #00b3ee" class="text-uppercase">Resumen de conceptos</b>
                                         <br>
@@ -72,12 +86,22 @@
                                             <small><b style="color: #cccccc">{{ tramiteConcepto.concepto.nombre }} - ${{ tramiteConcepto.concepto.valor }}</b></small><br>
                                         </span>
                                     </tooltip-content>
-                                    <a class="text-primary" [tooltip]="tooltipConceptos">
+                                    <a class="text-primary" style="cursor: pointer;" [tooltip]="tooltipConceptos">
                                         <b>${{ tramitePrecio.valorConcepto }}</b>
                                     </a>
                                 </div>
+                                <b>Vr. total</b>
+                                <br>
+                                ${{ tramitePrecio.valorTotal }}
                             </td>
-                            <td>${{ tramitePrecio.valorTotal }}</td>
+                            <td>
+                                <span class="badge badge-success ml-2" *ngIf="tramitePrecio.activo">
+                                    Activo
+                                </span>
+                                <span class="badge badge-danger ml-2" *ngIf="!tramitePrecio.activo">
+                                    Inactivo
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

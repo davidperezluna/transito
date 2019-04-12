@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <hr>
     <div class="row" *ngIf='formSearch'>
         <!-- .row -->
@@ -96,7 +96,7 @@
                                                 <small><b style="color: #cccccc">{{ tramiteConcepto.concepto.nombre }} - ${{ tramiteConcepto.concepto.valor }}</b></small><br>
                                             </span>
                                         </tooltip-content>
-                                        <a class="text-primary" [tooltip]="tooltipConceptos">
+                                        <a class="text-primary" style="cursor: pointer;" [tooltip]="tooltipConceptos">
                                             <b>${{ tramitePrecio.valorConcepto }}</b>
                                         </a>
                                     </div>
@@ -131,7 +131,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-lg-9" *ngIf='formRecord'>
+    <div class="col-xs-12 col-lg-12" *ngIf='formRecord'>
         <app-record (ready)="ready($event)" [modulo]="modulo"></app-record>
     </div>
 </div>

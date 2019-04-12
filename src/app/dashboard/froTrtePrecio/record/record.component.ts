@@ -6,6 +6,7 @@ import { VhloCfgTipoVehiculoService } from "../../../services/vhloCfgTipoVehicul
 import { CfgModuloService } from '../../../services/cfgModulo.service';
 import { LoginService } from '../../../services/login.service';
 import swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
     selector: 'app-record',
@@ -18,6 +19,8 @@ export class RecordComponent implements OnInit {
     public errorMessage;
 
     public tramitesPrecio;
+
+    public table: any = null;
 
     public filtro: any = {
         'fechaInicial': null,
@@ -41,6 +44,14 @@ export class RecordComponent implements OnInit {
     }
 
     onSearch() {
+        swal({
+            title: 'Buscando registros!',
+            text: 'Solo tardara unos segundos por favor espere.',
+            onOpen: () => {
+                swal.showLoading()
+            }
+        });
+        
         let token = this._LoginService.getToken();
 
         this.filtro.idModulo = this.modulo.id;
@@ -56,6 +67,10 @@ export class RecordComponent implements OnInit {
                         type: 'success',
                         confirmButtonText: 'Aceptar'
                     });
+
+                    let timeoutId = setTimeout(() => {
+                        this.onInitTable();
+                    }, 100);
                 } else {
                     this.tramitesPrecio = null;
 
@@ -75,5 +90,28 @@ export class RecordComponent implements OnInit {
                 }
             }
         );
+    }
+
+    onInitTable() {
+        if (this.table) {
+            this.table.destroy();
+        }
+        
+        this.table = $('#dataTables-example').DataTable({
+            buttons: [
+                'copy', 'excel', 'pdf'
+            ],
+            responsive: true,
+            pageLength: 10,
+            sPaginationType: 'full_numbers',
+            oLanguage: {
+                oPaginate: {
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sPrevious: '<i class="fa fa-chevron-left"></i>',
+                    sNext: '<i class="fa fa-chevron-right"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            }
+        });
     }
 }
