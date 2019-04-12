@@ -49,7 +49,7 @@ export class UserUsuarioMenuComponent implements OnInit {
           this.formIndex = true;
 
           let timeoutId = setTimeout(() => {
-            this.iniciarTabla();
+            this.onInitTable();
           }, 100);
           
           swal({
@@ -82,12 +82,12 @@ export class UserUsuarioMenuComponent implements OnInit {
     );
   }
 
-  iniciarTabla(){
+  onInitTable(){
     if (this.table) {
       this.table.destroy();
     }
 
-    $('#dataTables-example').DataTable({
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -99,8 +99,7 @@ export class UserUsuarioMenuComponent implements OnInit {
           sLast: '<i class="fa fa-step-forward"></i>'
         }
       }
-   });
-   this.table = $('#dataTables-example').DataTable();
+    });
   }
   
   onNew(){

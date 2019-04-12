@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserUsuarioMenu } from '../userUsuarioMenu.modelo';
-import { UserCfgRoleService } from '../../../services/userCfgRole.service';
 import { UserCfgMenuService } from '../../../services/userCfgMenu.service';
 import { UserUsuarioMenuService } from '../../../services/userUsuarioMenu.service';
 import { LoginService } from '../../../services/login.service';
@@ -13,16 +12,15 @@ import swal from 'sweetalert2';
 export class NewComponent implements OnInit {
   @Output() ready = new EventEmitter<any>();
   @Input() usuario: any = null;
+
   public usuarioMenu: UserUsuarioMenu;
   public errorMessage;
-  public parents: any = null;
-  public roles: any = null;
+
   public menus: any = null;
 
 
 constructor(
-  private _UserCfgRoleService: UserCfgRoleService,
-  private _UserCfgMenuService: UserCfgMenuService,
+  private _MenuService: UserCfgMenuService,
   private _UserUsuarioMenuService: UserUsuarioMenuService,
   private _LoginService: LoginService,
   ){}
@@ -30,23 +28,11 @@ constructor(
   ngOnInit() {
     this.usuarioMenu = new UserUsuarioMenu(null, null, null);
 
-    this._UserCfgMenuService.select().subscribe(
-      response => {
-        this.parents = response;
-      },
-      error => {
-        this.errorMessage = <any>error;
+    let token = this._LoginService.getToken();
 
-        if (this.errorMessage != null) {
-          console.log(this.errorMessage);
-          alert("Error en la petición");
-        }
-      }
-    );
-
-    this._UserCfgRoleService.select().subscribe(
+    this._MenuService.selectAvailables({ 'idUsuario': this.usuario.id }, token).subscribe(
       response => {
-        this.roles = response;
+        this.menus = response;
       },
       error => {
         this.errorMessage = <any>error;
@@ -61,70 +47,6 @@ constructor(
   
   onCancelar(){
     this.ready.emit(true);
-  }
-
-  onChangedRole(e) {
-    if (e) {
-      swal({
-        title: 'Cargando menus!',
-        text: 'Solo tardara unos segundos por favor espere.',
-        onOpen: () => {
-          swal.showLoading();
-        }
-      });
-
-      let token = this._LoginService.getToken();
-
-      this._UserCfgMenuService.selectByRole({ 'idRole': e }, token).subscribe(
-        response => {
-          if (response) {
-            this.parents = response;
-          }
-
-          swal.close();
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    }
-  }
-
-  onChangedParent(e) {
-    if (e) {
-      swal({
-        title: 'Cargando submenus!',
-        text: 'Solo tardara unos segundos por favor espere.',
-        onOpen: () => {
-          swal.showLoading();
-        }
-      });
-
-      let token = this._LoginService.getToken();
-
-      this._UserCfgMenuService.selectByParent({ 'idParent': e, 'idUsuario': this.usuario.id }, token).subscribe(
-        response => {
-          if (response) {
-            this.menus = response;
-          }
-
-          swal.close();
-        },
-        error => {
-          this.errorMessage = <any>error;
-
-          if (this.errorMessage != null) {
-            console.log(this.errorMessage);
-            alert("Error en la petición");
-          }
-        }
-      );
-    }
   }
   
   onEnviar(){

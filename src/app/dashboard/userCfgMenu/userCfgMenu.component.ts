@@ -24,7 +24,7 @@ export class UserCfgMenuComponent implements OnInit {
 
   constructor(
     private _UserCfgMenuService: UserCfgMenuService,
-		private _loginService: LoginService,
+		private _LsoginService: LoginService,
     ){}
     
   ngOnInit() {    
@@ -39,8 +39,9 @@ export class UserCfgMenuComponent implements OnInit {
     this._UserCfgMenuService.index().subscribe(
       response => {         
         this.menus = response.data;
+
         let timeoutId = setTimeout(() => {  
-          this.iniciarTabla();
+          this.onInitTable();
         }, 100);
         swal.close();
       }, 
@@ -55,8 +56,8 @@ export class UserCfgMenuComponent implements OnInit {
     );
   }
 
-  iniciarTabla(){
-    $('#dataTables-example').DataTable({
+  onInitTable(){
+    this.table = $('#dataTables-example').DataTable({
       responsive: true,
       pageLength: 8,
       sPaginationType: 'full_numbers',
@@ -69,7 +70,6 @@ export class UserCfgMenuComponent implements OnInit {
         }
       }
    });
-   this.table = $('#dataTables-example').DataTable();
   }
   
   onNew(){
@@ -99,7 +99,7 @@ export class UserCfgMenuComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-        let token = this._loginService.getToken();
+        let token = this._LsoginService.getToken();
         this._UserCfgMenuService.delete({ 'id': id }, token).subscribe(
           response => {
               swal({

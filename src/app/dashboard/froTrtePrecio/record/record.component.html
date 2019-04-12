@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-xs-12 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-uppercase">Buscar historial</h5>
+                <small>Los campos con <b class="text-danger">*</b> son obligatorios</small>
+            </div>
+            <div class="card-body">
+                <form #formSearch="ngForm">
+                    <div class="form-group">
+                        <div class="row">
+                            <!-- .row -->
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Fecha inicial</label>
+                                <input type="date"  [(ngModel)]="filtro.fechaInicial" name="fechaInicial" required />
+                            </div>
+                            <div class="col-xs-12 col-lg-12">
+                                <label>Fecha final</label>
+                                <input type="date"  [(ngModel)]="filtro.fechaFinal" name="fechaFinal" required />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button (click)="onSearch()" [disabled]="formSearch.invalid" class="btn btn-primary" type="button">
+                        <i class="fa fa-save"></i>
+                        Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-8" *ngIf='tramitesPrecio && tramitesPrecio.length > 0'>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <b class="text-uppercase">Historial {{ modulo.nombre }}</b>
+                </h5>
+            </div>
+            <div class="card-body">
+                <table class="table" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tramite</th>
+                            <th>Fec. inicio</th>
+                            <th>Vr. trámite</th>
+                            <th>Vr. conceptos</th>
+                            <th>Vr. total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd" *ngFor="let tramitePrecio of tramitesPrecio; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ tramitePrecio.tramite.nombre }}</td>
+                            <td>{{ tramitePrecio.fechaInicio }}</td>
+                            <td>{{ tramitePrecio.valor }}</td>
+                            <td>
+                                <div *ngIf="tramitePrecio.conceptos">
+                                    <tooltip-content #tooltipConceptos [animation]="true" placement="top">
+                                        <b style="color: #00b3ee" class="text-uppercase">Resumen de conceptos</b>
+                                        <br>
+                                        <span *ngFor="let tramiteConcepto of tramitePrecio.conceptos; let i = index">
+                                            <small><b style="color: #cccccc">{{ tramiteConcepto.concepto.nombre }} - ${{ tramiteConcepto.concepto.valor }}</b></small><br>
+                                        </span>
+                                    </tooltip-content>
+                                    <a class="text-primary" [tooltip]="tooltipConceptos">
+                                        <b>${{ tramitePrecio.valorConcepto }}</b>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>${{ tramitePrecio.valorTotal }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
+            </div>
+        </div>
+    </div>
+</div>

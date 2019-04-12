@@ -31,21 +31,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-lg-6">
-                                <label>Rol <strong class="text-danger">*</strong></label>
-                                <ng-select (ngModelChange)="onChangedRole($event)" [multiple]="false" [options]="roles" [(ngModel)]="idRole" name="idRole">
-                                </ng-select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Menus <strong class="text-danger">*</strong></label>
-                                <ng-select (ngModelChange)="onChangedParent($event)" [multiple]="false" [options]="parents" [(ngModel)]="idParent" name="idParent">
-                                </ng-select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-lg-6">
-                                <label>Submenu <strong class="text-danger">*</strong></label>
+                                <label>Menu <strong class="text-danger">*</strong></label>
                                 <ng-select [multiple]="true" [options]="menus" [(ngModel)]="usuarioMenu.menus" name="menus" required>
                                 </ng-select>
                             </div>

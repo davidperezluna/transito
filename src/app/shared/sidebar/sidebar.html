@@ -41,6 +41,15 @@
             {{ menuSecond.title }}
             <i class="fa fa-angle-right"></i>
           </a>
+          <ul class="nav flex-column nav-third-level" *ngIf="menuSecond.childrens">
+            <li class="nav-item" *ngFor="let menuThird of menuSecond.childrens" [ngClass]="{'active' : showSubMenu === menuThird.abbreviation }">
+              <a class="nav-link" *ngIf="!menuThird.childrens" routerLink="{{ menuThird.path }}" [ngClass]="{'active' : ( addActive === menuThird.abbreviation)}" (click)="addActiveMenu(menuThird.abbreviation)">
+                <i class="fa fa-angle-right"></i>
+                {{ menuThird.title }}
+              </a>
+            </li>
+          </ul>
+
         </li>
       </ul>
     </li>

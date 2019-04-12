@@ -15,6 +15,7 @@ export class FroTrtePrecioComponent implements OnInit {
     public formNew = false;
     public formEdit = false;
     public formIndex = false;
+    public formRecord = false;
     public formSearch = true;
     public table: any = null;
     public tramitesPrecios;
@@ -55,6 +56,7 @@ export class FroTrtePrecioComponent implements OnInit {
         this.formIndex = false;
         this.formNew = false;
         this.formEdit = false;
+        this.formRecord = false;
 
         swal({
             title: 'Buscando registros!',
@@ -81,7 +83,7 @@ export class FroTrtePrecioComponent implements OnInit {
                     });
 
                     let timeoutId = setTimeout(() => {
-                        this.iniciarTabla();
+                        this.onInitTable();
                     }, 100);
                 } else {
                     this.tramitesPrecios = null;
@@ -106,7 +108,7 @@ export class FroTrtePrecioComponent implements OnInit {
         );
     }
 
-    iniciarTabla() {
+    onInitTable() {
         if (this.table) {
             this.table.destroy();
         }
@@ -171,6 +173,15 @@ export class FroTrtePrecioComponent implements OnInit {
         this.formNew = true;
         this.formEdit = false;
         this.formIndex = false;
+        this.formRecord = false;
+    }
+
+    onRecord() {
+        this.formNew = false;
+        this.formEdit = false;
+        this.formIndex = false;
+        this.formSearch = false;
+        this.formRecord = true;
     }
 
     onUpdate() {
@@ -228,5 +239,12 @@ export class FroTrtePrecioComponent implements OnInit {
         this.formIndex = false;
         this.formNew = false;
         this.tramitePrecio = tramitePrecio;
+    }
+
+    onDelete(idTramitePrecio: any) {
+        this.formEdit = true;
+        this.formIndex = false;
+        this.formNew = false;
+        this.tramitePrecio = idTramitePrecio;
     }
 }
