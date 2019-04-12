@@ -12,19 +12,19 @@ declare var $: any;
     templateUrl: './svCapacitacion.component.html'
 })
 export class SvCapacitacionComponent implements OnInit {
-    
+
     public capacitacion: SvCapacitacion;
 
     public errorMessage;
     public identificacion: any;
     public idTipoIdentificacion: any;
-    
-    public ciudadano:any = false;
-    public empresa:any = false;
+
+    public ciudadano: any = false;
+    public empresa: any = false;
 
     public capacitaciones: any = null;
     public tiposIdentificacion: any;
-    public table: any; 
+    public table: any;
     public formNew = false;
     public formEdit = false;
     public formIndex = true;
@@ -36,7 +36,7 @@ export class SvCapacitacionComponent implements OnInit {
         private _loginService: LoginService,
     ) { }
 
-    ngOnInit() { 
+    ngOnInit() {
         this.capacitacion = new SvCapacitacion(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
         this._TipoIdentificacionService.select().subscribe(
@@ -57,7 +57,7 @@ export class SvCapacitacionComponent implements OnInit {
         );
     }
 
-    onNew() { 
+    onNew() {
         this.formNew = true;
         this.formIndex = false;
         if (this.table) {
@@ -71,7 +71,6 @@ export class SvCapacitacionComponent implements OnInit {
             this.formEdit = false;
             this.formIndex = true;
             this.ngOnInit();
-            this.onSearch();
         }
     }
 
@@ -107,7 +106,7 @@ export class SvCapacitacionComponent implements OnInit {
                         this.empresa = response.data.empresa;
                         this.ciudadano = false;
                     }
-                    
+
                     if (this.ciudadano) {
                         this._CapacitacionService.buscarCapacitacionByCiudadano({ 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion, 'identificacion': this.ciudadano.identificacion }, token).subscribe(
                             response => {
@@ -134,7 +133,7 @@ export class SvCapacitacionComponent implements OnInit {
                             }
                         );
                         swal.close();
-                        } else if (this.empresa) {
+                    } else if (this.empresa) {
                         this._CapacitacionService.buscarCapacitacionByCiudadano({ 'idTipoIdentificacion': this.capacitacion.idTipoIdentificacion, 'nit': this.empresa.nit }, token).subscribe(
                             response => {
                                 if (response.status == 'success') {
@@ -180,6 +179,7 @@ export class SvCapacitacionComponent implements OnInit {
                 }
             }
         );
+
     }
 
     iniciarTabla() {

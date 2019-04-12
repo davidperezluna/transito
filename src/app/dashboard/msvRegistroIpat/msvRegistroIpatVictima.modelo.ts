@@ -1,6 +1,7 @@
 export class MsvIpatVictima {
     constructor(
-        public victima: string,
+        public consecutivo: string,
+        
         public nombresVictima: string,
         public apellidosVictima: string,
         public tipoIdentificacionVictima: string,

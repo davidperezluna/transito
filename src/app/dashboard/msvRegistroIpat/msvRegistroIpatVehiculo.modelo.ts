@@ -1,6 +1,7 @@
 
 export class MsvIpatVehiculo {
     constructor(
+        public consecutivo: string,
         //campos vehiculo
         public portaPlaca: string,
         public placa: string,
