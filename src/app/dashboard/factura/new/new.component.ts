@@ -243,7 +243,7 @@ constructor(
         }
 
         swal.close();
-      error => {
+        error => {
           this.errorMessage = <any>error;
           if(this.errorMessage != null){
             console.log(this.errorMessage);
@@ -319,16 +319,13 @@ constructor(
 
     if (e) {
       let token = this._LoginService.getToken();
-
       this._ModuloService.showModulo(token, this.factura.idModulo).subscribe(
         response => {
           this.modulo = response.data;
-          
           swal.close();
         },
         error => {
           this.errorMessage = <any>error;
-
           if (this.errorMessage != null) {
             console.log(this.errorMessage);
             alert("Error en la petición");
@@ -350,7 +347,6 @@ constructor(
         }
       );
     }
-
   }
 
   addNewTramite(){
@@ -407,7 +403,6 @@ constructor(
             if (this.tramitePrecio.tramite.id == 6) {
               
               this.factura.valorBruto = this.factura.valorBruto + parseInt(this.tramitePrecio.valorTotal);
-
               this.tramitesValor.push(
                 {
                   'idTramitePrecio': this.tramitePrecio.id,
@@ -466,7 +461,6 @@ constructor(
                     },
                     error => {
                       this.errorMessage = <any>error;
-
                       if (this.errorMessage != null) {
                         console.log(this.errorMessage);
                         alert("Error en la petición");
@@ -491,7 +485,6 @@ constructor(
                 }
               )
             }
-
           },
           error => {
             this.errorMessage = <any>error;

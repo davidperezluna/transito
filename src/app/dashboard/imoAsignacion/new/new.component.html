@@ -117,7 +117,7 @@
         
                                     <div class="col-xs-12 col-lg-4">
                                         <label>Cantidad <b class="text-danger">*</b></label> 
-                                        <input class="form-control" [disabled]="true"  [(ngModel)]="numero" name="numeroInsumo" placeholder="" type="text" required>
+                                        <input class="form-control" [(ngModel)]="numero" name="numeroInsumo" placeholder="" type="text" required>
                                     </div>
         
                                     <div class="col-xs-12 col-lg-4">
@@ -163,9 +163,10 @@
         </div>  
         <div class="card-footer">
             <div class="btn-group"> 
-                <button *ngIf="!numeroActa" (click)="onEnviarArray()" [disabled]="newForm.invalid" class="btn btn-primary" type="button">Enviar</button>
+                <button  (click)="onEnviarArray()" class="btn btn-primary" type="button">Enviar</button>
+                <!-- <button *ngIf="!numeroActa" (click)="onEnviarArray()" class="btn btn-primary" type="button">Enviar</button> -->
     
-                <a href="{{ apiUrl }}/pdf/acta/asignacion/{{numeroActa}}" *ngIf='numeroActa' class="btn btn-success" target="_blank">
+                <a href="{{ apiUrl }}/pdf/acta/asignacion/{{numeroActa}}/{{sedeSelected}}" *ngIf='numeroActa' class="btn btn-success" target="_blank">
                     <i class="fa fa-file-pdf-o"></i>
                     Imprimir Acta
                 </a>

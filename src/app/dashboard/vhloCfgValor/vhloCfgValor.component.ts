@@ -160,7 +160,7 @@ export class VhloCfgValorComponent implements OnInit {
             let allTextLines = txt.split(/\r\n|\n/);
             for (let i = 0; i < allTextLines.length; i++) {
                 let data = allTextLines[i].split(';');
-                if (data.length == 6) {
+                if (data.length == 7) {
                     this.valido = false;
                 } else {
                     if (data[0] != '') {
@@ -168,9 +168,32 @@ export class VhloCfgValorComponent implements OnInit {
                     }
                 }
             }
-            alert(this.valido); 
             console.log(this.txt);
-        }
+            swal({
+              title: 'Subiendo datos!',
+              text: 'Solo tardara unos segundos por favor espere.',
+              onOpen: () => {
+                swal.showLoading()
+              }
+            });
+            this._VhloValorService.upload(token, this.txt).subscribe(
+              response => {
+                swal.close();
+                this.table.destroy();
+                this.respuesta = response;
+                this.ngOnInit();
+              },
+              error => {
+                this.errorMessage = <any>error;
+    
+                if (this.errorMessage != null) {
+                  console.log(this.errorMessage);
+                  alert("Error en la petición");
+                }
+              }
+            );
+          }
+
     }
   }
 }

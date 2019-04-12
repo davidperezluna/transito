@@ -125,6 +125,7 @@ constructor(
       this._ImoLoteService.show(datos,token).subscribe(
         response => {
           this.loteInsumo = response.data;
+
           if (response.status == 'success') {
             this.numero = this.loteInsumo.cantidad;
             swal.close()
@@ -230,17 +231,29 @@ constructor(
   }
 
   onAsignarLoteInsumo(){
+    console.log(this.loteInsumo);
     if (this.loteInsumo) {
-      this.lotesSelecionados.push(
-          {
-            'idLote':this.loteInsumo.id,
-            'tipo':this.loteInsumo.tipoInsumo.nombre,
-            'idTipo':this.loteInsumo.tipoInsumo.id,
-            'cantidad':this.loteInsumo.cantidad,
-          }   
-      );
+      if(this.numero > this.loteInsumo.cantidad){
+        swal({
+          title: 'Error!',
+          text: 'Excede el numero de insumo',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        })
+      }else{
+        this.lotesSelecionados.push(
+            {
+              'idLote':this.loteInsumo.id,
+              'tipo':this.loteInsumo.tipoInsumo.nombre,
+              'idTipo':this.loteInsumo.tipoInsumo.id,
+              'cantidad':this.numero,
+            }   
+        );
+        this.insumoSelectedInsumo = [];
+        this.numero = 0;
+        this.loteInsumo = false;
+      }
     }
-    this.loteInsumo = false;
   }
 
   onEliminarLoteSelecionado(lote){
@@ -259,20 +272,24 @@ constructor(
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      swal({
-        title: 'Enviando datos!',
-        text: 'Solo tardara unos segundos por favor espere.',
-        onOpen: () => {
-          swal.showLoading()
-        }
-      })
       if (result.value) {
+        swal({
+          title: 'Enviando datos!',
+          text: 'Solo tardara unos segundos por favor espere.',
+          onOpen: () => {
+            swal.showLoading()
+          }
+        })
+
         let token = this._loginService.getToken();
+
         this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
+
         let datos={
           'asignacionInsumos' : this.rnaAsignacionInsumos,
           'array': this.lotesSelecionados
         };
+        
         this._ImoInsumoService.register(datos,token).subscribe(
           response => {
             this.respuesta = response;
