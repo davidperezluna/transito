@@ -11,11 +11,11 @@
                     <div class="form-group row">
                         <div class="col-xs-12 col-lg-12">
                             <label>Nombre <strong class="text-danger">*</strong></label>
-                            <input class="form-control" placeholder="" type="text" [(ngModel)]="estados.nombre" required name="nombre">
+                            <input class="form-control" placeholder="" type="text" [(ngModel)]="tipoVehiculo.nombre" required name="nombre">
                         </div>
                         <div class="col-xs-12 col-lg-12">
                             <label>Módulo <strong class="text-danger">*</strong></label>
-                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="moduloSelected" required name="modulo">
+                            <ng-select [multiple]="false" [options]="modulos" [(ngModel)]="tipoVehiculo.idModulo" required name="idModulo">
                             </ng-select>
                         </div>
                     </div>
@@ -23,13 +23,13 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group">
-                    <button (click)="onCancelar()" class="btn btn-default">
-                        <i class="fa fa-times"></i>
-                        Cancel
-                    </button>
                     <button (click)="onEnviar()" [disabled]="formNew.invalid" class="btn btn-primary" type="button">
                         <i class="fa fa-save"></i>
                         Enviar
+                    </button>
+                    <button (click)="onCancelar()" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancelar
                     </button>
                 </div>
             </div>

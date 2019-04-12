@@ -45,10 +45,16 @@ export class NewRnaCancelacionMatriculaComponent implements OnInit {
     
     public motivosCancelacion = [
         { value: 'DESAPARICIÓN DOCUMENTAL', label: 'DESAPARICIÓN DOCUMENTAL' },
-        { value: 'HURTO', label: 'HURTO' },
-        { value: 'PERDIDA DEFINITIVA', label: 'PERDIDA DEFINITIVA' },
         { value: 'EXPORTACIÓN O REEXPORTACIÓN', label: 'EXPORTACIÓN O REEXPORTACIÓN' },
         { value: 'DESTRUCCIÓN O PERDIDA TOTAL', label: 'DESTRUCCIÓN O PERDIDA TOTAL' },
+        { value: 'DESINTEGRACIÓN FISICA TOTAL', label: 'DESINTEGRACIÓN FISICA TOTAL' },
+        { value: 'DESTRUCCIÓN O PERDIDA TOTAL POR ACCIDENTE DE TRÁNSITO', label: 'DESTRUCCIÓN O PERDIDA TOTAL POR ACCIDENTE DE TRÁNSITO' },
+        { value: 'DESTRUCCIÓN O PERDIDA TOTAL POR CASO FORTUITO O FUERZA MAYOR', label: 'DESTRUCCIÓN O PERDIDA TOTAL POR CASO FORTUITO O FUERZA MAYOR' },
+        { value: 'EXPORTACIÓN O REEXPORTACIÓN', label: 'EXPORTACIÓN O REEXPORTACIÓN' },
+        { value: 'HURTO', label: 'HURTO' },
+        { value: 'PERDIDA DEFINITIVA', label: 'PERDIDA DEFINITIVA' },
+        { value: 'REPOSICIÓN', label: 'REPOSICIÓN' },
+        { value: 'RECONOCIMIENTO ECONOMICO', label: 'RECONOCIMIENTO ECONOMICO' },
     ];
 
     constructor(
