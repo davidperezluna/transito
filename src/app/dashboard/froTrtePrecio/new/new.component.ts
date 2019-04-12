@@ -52,23 +52,44 @@ export class NewComponent implements OnInit {
 
         let token = this._LoginService.getToken();
 
-        this._TipoVehiculoService.selectByModulo({ 'idModulo': this.modulo.id }, token).subscribe(
-            response => {
-                if (response) {
-                    this.tiposVehiculo = response;
-                } else {
-                    this.tiposVehiculo = null;
+        if (this.modulo.abreviatura == 'RNC') {
+            this._TipoVehiculoService.select().subscribe(
+                response => {
+                    if (response) {
+                        this.tiposVehiculo = response;
+                    } else {
+                        this.tiposVehiculo = null;
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+    
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
                 }
-            },
-            error => {
-                this.errorMessage = <any>error;
+            );
+        }else{
+            this._TipoVehiculoService.selectByModulo({ 'idModulo': this.modulo.id }, token).subscribe(
+                response => {
+                    if (response) {
+                        this.tiposVehiculo = response;
+                    } else {
+                        this.tiposVehiculo = null;
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+    
+                    if (this.errorMessage != null) {
+                        console.log(this.errorMessage);
+                        alert("Error en la petición");
+                    }
+                }
+            );
+        }
 
-                if (this.errorMessage != null) {
-                    console.log(this.errorMessage);
-                    alert("Error en la petición");
-                }
-            }
-        );
 
         this._ConceptoService.select().subscribe(
             response => {

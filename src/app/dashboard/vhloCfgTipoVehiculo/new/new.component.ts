@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { VhloCfgTipoVehiculo } from '../vhloCfgTipoVehiculo.modelo';
-import { LoginService } from '../../../services/login.service';
-
+import { CfgModuloService } from '../../../services/cfgModulo.service';
 import { VhloCfgTipoVehiculoService } from '../../../services/vhloCfgTipoVehiculo.service';
-import { ModuloService } from '../../../services/modulo.service';
+import { LoginService } from '../../../services/login.service';
 
 import swal from 'sweetalert2';
 
@@ -13,23 +12,23 @@ import swal from 'sweetalert2';
 })
 export class NewComponent implements OnInit {
     @Output() ready = new EventEmitter<any>();
-    public estados: VhloCfgTipoVehiculo;
+    public tipoVehiculo: VhloCfgTipoVehiculo;
+
     public errorMessage;
     public respuesta;
 
     public modulos: any;
-    public moduloSelected: any;
 
     constructor(
         private _TipoVehiculoService: VhloCfgTipoVehiculoService,
-        private _loginService: LoginService,
-        private _ModuloService: ModuloService
+        private _ModuloService: CfgModuloService,
+        private _LoginService: LoginService,
     ) { }
 
     ngOnInit() {
-        this.estados = new VhloCfgTipoVehiculo(null, null, null);
+        this.tipoVehiculo = new VhloCfgTipoVehiculo(null, null, null);
 
-        this._ModuloService.getModuloSelect().subscribe(
+        this._ModuloService.select().subscribe(
             response => {
                 this.modulos = response;
             },
@@ -48,10 +47,9 @@ export class NewComponent implements OnInit {
     }
 
     onEnviar() {
-        let token = this._loginService.getToken();
-        this.estados.moduloId = this.moduloSelected;
+        let token = this._LoginService.getToken();
 
-        this._TipoVehiculoService.register(this.estados, token).subscribe(
+        this._TipoVehiculoService.register(this.tipoVehiculo, token).subscribe(
             response => {
                 if (response.status == 'success') {
                     this.ready.emit(true);

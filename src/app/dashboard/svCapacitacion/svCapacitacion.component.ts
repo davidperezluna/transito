@@ -71,6 +71,7 @@ export class SvCapacitacionComponent implements OnInit {
             this.formEdit = false;
             this.formIndex = true;
             this.ngOnInit();
+            this.onSearch();
         }
     }
 
