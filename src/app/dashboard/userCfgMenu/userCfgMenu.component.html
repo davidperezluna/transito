@@ -20,16 +20,14 @@
                     <th>Id</th>
                     <th>Titulo</th>
                     <th>Tipo</th>
-                    <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="odd" *ngFor="let menu of menus; let i = index">
-                  <td >{{ menu.id }}</td>
+                  <td >{{ i + 1 }}</td>
                   <td >{{ menu.titulo }}</td>
                   <td >{{ menu.tipo }}</td>
-                  <td >{{ menu.role?.nombre }}</td>
                   <td>
                     <div class="btn-group">
                       <button (click)="onEdit(menu)" class="btn btn-xs btn-primary" type="button" tooltip="Editar" [tooltipDisabled]="false"

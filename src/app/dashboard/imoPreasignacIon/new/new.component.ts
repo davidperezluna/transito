@@ -112,6 +112,12 @@ constructor(
         this.respuesta = response;
         if(this.respuesta.status == 'success'){
           this.isCantidad = false;
+          swal({
+            title: 'Registro encontrado!',
+            type: 'success',
+            text: this.respuesta.msj,
+            confirmButtonText: 'Aceptar'
+          })
         }else{
           this.isCantidad = true;
           swal({

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <hr>
     <div class="row" *ngIf='formSearch'>
         <!-- .row -->
@@ -6,9 +6,7 @@
             <!-- .col -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="text-uppercase">
-                        <b>Trámites y valores por Modulo</b>
-                    </h5>
+                    <b class="text-uppercase">Trámites y valores por Modulo</b>
                 </div>
                 <div class="card-body">
                     <!-- .card-body -->
@@ -35,6 +33,10 @@
                         <button (click)="onNew()" class="btn btn-default" *ngIf="modulo">
                             <i class="fa fa-plus"></i>
                             Nuevo
+                        </button>
+                        <button (click)="onRecord()" class="btn btn-info" *ngIf="modulo">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            Historial
                         </button>
                     </div>
                 </div>
@@ -94,7 +96,7 @@
                                                 <small><b style="color: #cccccc">{{ tramiteConcepto.concepto.nombre }} - ${{ tramiteConcepto.concepto.valor }}</b></small><br>
                                             </span>
                                         </tooltip-content>
-                                        <a class="text-primary" [tooltip]="tooltipConceptos">
+                                        <a class="text-primary" style="cursor: pointer;" [tooltip]="tooltipConceptos">
                                             <b>${{ tramitePrecio.valorConcepto }}</b>
                                         </a>
                                     </div>
@@ -127,5 +129,9 @@
         <div class="col-xs-12 col-lg-9" *ngIf='formEdit'>
             <app-edit (ready)="ready($event)" [tramitePrecio]="tramitePrecio"></app-edit>
         </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-12" *ngIf='formRecord'>
+        <app-record (ready)="ready($event)" [modulo]="modulo"></app-record>
     </div>
 </div>
