@@ -5,8 +5,8 @@ import { environment } from 'environments/environment';
 import  "rxjs/add/operator/map";
 
 @Injectable()
-export class SvIpatConsecutivoService {
-	private url = environment.apiUrl + 'seguridadvial/svipatconsecutivo';
+export class SvIpatVictimaService {
+	private url = environment.apiUrl + 'seguridadvial/svipatvictima';
 	public identity;
 	public token;
 
@@ -58,46 +58,5 @@ export class SvIpatConsecutivoService {
 
 	select() {
 		return this._http.get(this.url + "/select").map(res => res.json());
-	}
-
-	search(datos,token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/search", params, {headers: headers}).map(res => res.json());
-	}
-
-	record(datos,token){
-		let json = JSON.stringify(datos);
-		let params = "json="+json+"&authorization="+token;
-		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
- 		return this._http.post(this.url+"/record/funcionario", params, {headers: headers}).map(res => res.json());
-	}
-
-	searchConsecutivo(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/consecutivo", params, { headers: headers }).map(
-			res => res.json()
-		);
-	}
-
-	showBySede(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/show/consecutivo/sede", params, { headers: headers })
-			.map(res => res.json());
-
-	}
-
-	searchByOrganismoTransitoAndFecha(datos, token) {
-		let json = JSON.stringify(datos);
-		let params = "data=" + json + "&authorization=" + token;
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-		return this._http.post(this.url + "/search/organismotransito/fecha", params, { headers: headers })
-			.map(res => res.json());
-
 	}
 }
