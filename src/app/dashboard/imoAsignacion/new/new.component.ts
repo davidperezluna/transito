@@ -125,8 +125,8 @@ constructor(
       this._ImoLoteService.show(datos,token).subscribe(
         response => {
           this.loteInsumo = response.data;
+
           if (response.status == 'success') {
-            console.log(this.loteInsumo);
             this.numero = this.loteInsumo.cantidad;
             swal.close()
           }else{
@@ -231,8 +231,7 @@ constructor(
   }
 
   onAsignarLoteInsumo(){
-    console.log(this.numero);
-    console.log(this.loteInsumo.cantidad);
+    console.log(this.loteInsumo);
     if (this.loteInsumo) {
       if(this.numero > this.loteInsumo.cantidad){
         swal({
@@ -251,7 +250,7 @@ constructor(
             }   
         );
         this.insumoSelectedInsumo = [];
-        this.numero = false;
+        this.numero = 0;
         this.loteInsumo = false;
       }
     }
@@ -281,12 +280,16 @@ constructor(
             swal.showLoading()
           }
         })
+
         let token = this._loginService.getToken();
+
         this.rnaAsignacionInsumos.sedeOperativaId = this.sedeSelected;
+
         let datos={
           'asignacionInsumos' : this.rnaAsignacionInsumos,
           'array': this.lotesSelecionados
         };
+        
         this._ImoInsumoService.register(datos,token).subscribe(
           response => {
             this.respuesta = response;
