@@ -116,5 +116,9 @@
     <div class="col-xs-12 col-lg-9" *ngIf='formEdit'>
       <app-edit [ciudadano]="ciudadano" (ready)="ready($event)"></app-edit>
     </div>
+
+    <div class="col-xs-12 col-lg-9" *ngIf='formShow'>
+      <app-show [ciudadano]="ciudadano" (ready)="ready($event)"></app-show>
+    </div>
   </div>
 </div>
