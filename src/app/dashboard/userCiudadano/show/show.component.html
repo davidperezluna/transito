@@ -71,13 +71,13 @@
                             <label>Municipio Residencia</label>
                             {{ ciudadano.municipioResidencia.nombre }}
                         </div>
-                        <div class="col-xs-12 col-lg-6">
+                        <div class="col-xs-12 col-lg-6" *ngIf="ciudadano.telefonoCelular">
                             <label>Telefono celular</label>
-                            {{ ciudadano.Telefono.celular }}
+                            {{ ciudadano.telefonoCelular }}
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Direccion Residencia</label>
-                            {{ ciudadano.direccionResidencia }}
+                            {{ ciudadano.direccionPersonal }}
                         </div>
                         <div class="col-xs-12 col-lg-6">
                             <label>Direccion Trabajo</label>
